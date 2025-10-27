@@ -1,0 +1,255 @@
+
+
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <link rel="icon" type="image/png" href="/Gitab/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>شل چیست؟</title>
+  <meta name="description" content="ترجمه‌های فارسی کتاب‌های فنی — سریع، مینیمال و قابل اتکا.">
+
+  <!-- استایل‌ها -->
+  <link rel="stylesheet" href="/Gitab/styles/main.css">
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+
+  <style>
+  @font-face {
+    font-family: 'Vazir';
+    src: url('/Gitab/fonts/Vazir-FD-WOL.ttf') format('truetype');
+    font-display: swap;
+  }
+  body {
+    font-family: 'Vazir', sans-serif;
+  }
+  </style>
+</head>
+
+<body>
+  <!-- هدر مشترک -->
+  <header class="header">
+    <div class="container nav-wrap">
+      <a href="/Gitab/" class="brand">
+        <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="26" height="26">
+        <span>Gitab</span>
+      </a>
+
+      <nav class="nav">
+        <a href="/Gitab/" aria-current="page">خانه</a>
+        <a href="/Gitab/books/list-books">کتاب‌ها</a>
+       <a href="/Gitab/translator.html">مترجمین</a>
+        <a href="/Gitab/giter.html">گیتر</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button id="themeToggle" class="icon-btn theme-btn" data-icon="moon" aria-label="تغییر تم">
+          <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن">
+          <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک">
+        </button>
+
+        <a class="icon-btn" href="https://github.com/hheydarian/Gitab" target="_blank" title="GitHub">
+          <img src="/Gitab/icone/github.svg" alt="GitHub">
+        </a>
+
+        <!-- دکمه منو برای موبایل -->
+        <button class="menu-toggle" aria-label="منو">
+          <img src="/Gitab/icone/menu.svg" alt="menu">
+        </button>
+      </div>
+    </div>
+  </header>
+
+  
+  <main class="site-main book-page">
+    <h1>فصل ۱ – شل چیست؟</h1>
+<p>وقتی درباره‌ی خط فرمان صحبت می‌کنیم، در واقع به شل اشاره داریم. شل برنامه‌ای است که فرمان‌های صفحه‌کلید را دریافت کرده و برای اجرا به سیستم‌عامل تحویل می‌دهد. تقریباً همه‌ی توزیع‌های لینوکس یک برنامه‌ی شل از پروژه‌ی GNU به نام <strong>bash</strong> ارائه می‌کنند. نام «bash» مخفف عبارت <strong>Bourne Again SHell</strong> است؛ اشاره‌ای به این‌که bash جایگزینی ارتقاءیافته برای <code>sh</code>، برنامه‌ی شل اصلی یونیکس نوشته‌شده توسط <strong>Steve Bourne</strong> است.</p>
+<hr>
+<h2>شبیه‌سازهای ترمینال</h2>
+<p>هنگام استفاده از یک رابط کاربری گرافیکی (GUI)، برای تعامل با شل به برنامه‌ای به نام <strong>شبیه‌ساز ترمینال</strong> نیاز داریم. اگر منوهای دسکتاپ را جستجو کنیم، احتمالاً آن را خواهیم یافت. KDE از <code>konsole</code> و GNOME از <code>gnome-terminal</code> استفاده می‌کند، هرچند معمولاً در منو با نام ساده‌ی «terminal» دیده می‌شود. شبیه‌سازهای دیگری نیز برای لینوکس وجود دارند، اما همه اساساً یک کار انجام می‌دهند: دسترسی به شل. ممکن است بر اساس امکانات اضافه، یکی از آن‌ها را به دیگری ترجیح دهید.</p>
+<hr>
+<h2>نخستین ضربه‌های صفحه‌کلید</h2>
+<p>بیایید شروع کنیم. شبیه‌ساز ترمینال را اجرا کنید! پس از باز شدن، چیزی شبیه به این خواهید دید:</p>
+<p>[me@linuxbox ~]$</p>
+<p>این را <strong>prompt شل</strong> می‌نامند و هر وقت شل آماده‌ی دریافت ورودی باشد ظاهر می‌شود. بسته به توزیع ممکن است ظاهرش کمی متفاوت باشد، اما معمولاً شامل <code>username@machinename</code>، سپس مسیر کاری فعلی، و در پایان یک علامت <code>$</code> است.</p>
+<blockquote>
+<p><strong>نکته:</strong> اگر آخرین کاراکتر prompt علامت <code>#</code> باشد به جای <code>$</code>، یعنی نشست ترمینال دارای دسترسی <strong>ابرکاربر (superuser)</strong> است. یعنی یا به عنوان root وارد شده‌ایم یا شبیه‌ساز ترمینالی با امتیاز مدیریتی انتخاب کرده‌ایم.</p>
+</blockquote>
+<p>فرض کنیم همه‌چیز درست است. حالا چیزی تایپ کنیم. مثلاً یک رشته‌ی بی‌معنی:</p>
+<p>[me@linuxbox ~]$ kaekfjaeifj<br>
+bash: kaekfjaeifj: command not found<br>
+[me@linuxbox ~]$</p>
+<p>از آنجا که این دستور معنایی ندارد، شل پیام خطا می‌دهد و یک prompt تازه ظاهر می‌کند.</p>
+<hr>
+<h2>تاریخچه‌ی دستورات</h2>
+<p>اگر کلید <strong>فلش بالا</strong> را بزنیم، دستور قبلی <code>kaekfjaeifj</code> دوباره بعد از prompt ظاهر می‌شود. این ویژگی <strong>تاریخچه‌ی دستورات</strong> نام دارد. بیشتر توزیع‌های لینوکس به‌طور پیش‌فرض ۱۰۰۰ دستور آخر را به خاطر می‌سپارند. با زدن فلش پایین، دستور قبلی ناپدید می‌شود.</p>
+<hr>
+<h2>حرکت مکان‌نما</h2>
+<p>با زدن دوباره فلش بالا، دستور قبلی بازخوانی می‌شود. حالا اگر کلیدهای فلش چپ و راست را فشار دهیم، مکان‌نما روی خط حرکت می‌کند. این کار ویرایش دستورات را آسان می‌سازد.</p>
+<hr>
+<h2>چند کلمه درباره‌ی ماوس و Focus</h2>
+<p>اگرچه شل همه‌چیز را با صفحه‌کلید انجام می‌دهد، ولی در شبیه‌ساز ترمینال می‌توان از ماوس هم استفاده کرد. سیستم پنجره‌ای X (که موتور زیرین GUI است) یک روش سریع برای کپی و چسباندن دارد. اگر متنی را با ماوس انتخاب کنیم (کشیدن با دکمه‌ی چپ یا دوبار کلیک روی یک کلمه)، متن در یک بافر ذخیره می‌شود. سپس با فشردن دکمه‌ی میانی ماوس، متن در محل مکان‌نما چسبانده می‌شود.</p>
+<blockquote>
+<p><strong>نکته:</strong> از <strong>Ctrl-c</strong> و <strong>Ctrl-v</strong> برای کپی/چسباندن در پنجره‌ی ترمینال استفاده نکنید. این کلیدها در شل معنی دیگری دارند و سال‌ها قبل از ویندوز تعریف شده‌اند.</p>
+</blockquote>
+<p>محیط دسکتاپ شما (احتمالاً KDE یا GNOME) برای شبیه‌سازی رفتار ویندوز، سیاست تمرکز خود را روی <strong>click to focus</strong> گذاشته است. این یعنی برای فعال شدن یک پنجره باید روی آن کلیک کنید. اما در رفتار سنتی X، سیاست <strong>focus follows mouse</strong> وجود دارد که یعنی کافی است ماوس را روی پنجره ببرید تا فعال شود، حتی اگر به پیش‌زمینه نیاید. این کار، روش کپی/پیست را بسیار کارآمدتر می‌کند.</p>
+<hr>
+<h2>چند فرمان ساده امتحان کنید</h2>
+<p>حالا که توانستیم متن وارد ترمینال کنیم، بیایید چند دستور ساده اجرا کنیم.</p>
+<ul>
+<li>دستور <code>date</code> تاریخ و ساعت فعلی را نشان می‌دهد:</li>
+</ul>
+<p>[me@linuxbox ~]$ date<br>
+Thu Mar 8 15:09:41 EST 2025</p>
+<ul>
+<li>دستور <code>uptime</code> مدت زمان روشن بودن سیستم و بار پردازشی را نمایش می‌دهد:</li>
+</ul>
+<p>[me@linuxbox ~]$ uptime<br>
+15:12:22 up 3 days, 23:40, 7 users, load average: 0.37, 0.37, 0.64</p>
+<ul>
+<li>دستور <code>df</code> فضای دیسک‌ها را نشان می‌دهد:</li>
+</ul>
+<p>[me@linuxbox ~]$ df<br>
+Filesystem 1K-blocks Used Available Use% Mounted on<br>
+/dev/sda2 15115452 5012392 9949716 34% /<br>
+/dev/sda5 59631908 26545424 30008432 47% /home<br>
+/dev/sda1 147764 17370 122765 13% /boot<br>
+tmpfs 256856 0 256856 0% /dev/shm</p>
+<ul>
+<li>دستور <code>free</code> میزان حافظه را نمایش می‌دهد:</li>
+</ul>
+<p>[me@linuxbox ~]$ free<br>
+total used free shared buffers cached<br>
+Mem: 513712 503976 9736 0 5312 122916<br>
+-/+ buffers/cache: 375748 137964<br>
+Swap: 1052248 104712 947536</p>
+<hr>
+<h2>پایان دادن به نشست ترمینال</h2>
+<p>برای بستن نشست ترمینال سه راه داریم:</p>
+<ol>
+<li>بستن پنجره‌ی شبیه‌ساز ترمینال.</li>
+<li>تایپ دستور <code>exit</code>.</li>
+<li>زدن کلید <strong>Ctrl-d</strong>.</li>
+</ol>
+<p>[me@linuxbox ~]$ exit</p>
+<hr>
+<h2>کنسول پشت پرده</h2>
+<p>حتی اگر هیچ شبیه‌ساز ترمینالی باز نباشد، چندین نشست ترمینال در پس‌زمینه فعال هستند. به این نشست‌ها <strong>کنسول‌های مجازی (virtual consoles)</strong> می‌گویند. روی اکثر توزیع‌های لینوکس می‌توان با <strong>Ctrl-Alt-F1</strong> تا <strong>Ctrl-Alt-F6</strong> به آن‌ها دسترسی یافت. هر نشست یک login prompt نشان می‌دهد تا نام کاربری و گذرواژه را وارد کنید. برای جابه‌جایی بین کنسول‌ها از <strong>Alt-F1</strong> تا <strong>Alt-F6</strong> استفاده کنید. در بیشتر سیستم‌ها می‌توان با <strong>Alt-F7</strong> به دسکتاپ گرافیکی برگشت.</p>
+<hr>
+<h2>جمع‌بندی</h2>
+<p>این فصل آغاز سفر ما به خط فرمان لینوکس بود؛ با معرفی شل، نگاه کوتاهی به خط فرمان و یادگیری چگونگی آغاز و پایان یک نشست ترمینال. همچنین چند دستور ساده اجرا کردیم و اندکی ویرایش خط فرمان انجام دادیم. دیدید؟ اصلاً ترسناک نبود!</p>
+<p>در فصل بعدی، دستورات بیشتری یاد می‌گیریم و در سیستم فایل لینوکس گردش خواهیم کرد.</p>
+
+  </main>
+
+  <!-- فوتر مشترک -->
+  <footer class="footer">
+    <div class="container">
+      <p>
+        <img src="/Gitab/icone/copyright.svg" alt="کپی‌رایت" width="14" height="14"
+             style="vertical-align:middle;margin-inline:4px">
+        <span id="y"></span> Gitab — برای توسعه‌دهندگان
+      </p>
+    </div>
+  </footer>
+
+  <!-- سال و اسکریپت تغییر تم -->
+  <script>
+  (() => {
+    const root = document.documentElement;
+    const btn = document.getElementById('themeToggle');
+    const KEY = 'gitab-theme';
+
+    function updateTheme(s) {
+      root.setAttribute('data-theme', s);
+      const mode = s;  // فقط `dark` یا `light` خواهد بود
+      root.dataset.colorMode = mode;
+      btn.dataset.icon = mode === 'dark' ? 'moon' : 'sun';
+    }
+
+    // وضعیت تم ذخیره شده از localStorage
+    let saved = localStorage.getItem(KEY) || 'light'; // پیش‌فرض روشن
+    updateTheme(saved);
+
+    // تنظیم مجدد تم هنگام تغییر وضعیت دکمه
+    btn.addEventListener('click', () => {
+      const current = localStorage.getItem(KEY) || 'light';
+      const next = current === 'dark' ? 'light' : 'dark';  // فقط دو حالت: تاریک و روشن
+      localStorage.setItem(KEY, next);
+      updateTheme(next);
+    });
+
+    // هنگام بارگذاری صفحه
+    document.addEventListener('DOMContentLoaded', () => {
+      updateTheme(localStorage.getItem(KEY) || 'light');
+    });
+  })();
+</script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+
+  <script>
+  document.querySelectorAll('pre code').forEach(block => {
+    const btn = document.createElement('button');
+    btn.className = 'copy-btn';
+
+    const icon = document.createElement('img');
+    icon.src = "/Gitab/icone/copy.svg";
+    icon.alt = 'Copy';
+    btn.appendChild(icon);
+
+    block.parentNode.insertBefore(btn, block);
+
+    btn.addEventListener('click', async () => {
+      await navigator.clipboard.writeText(block.textContent);
+      btn.classList.add('copied');
+      setTimeout(() => btn.classList.remove('copied'), 1500);
+    });
+  });
+  </script>
+
+  <script>
+  document.body.dataset.page = window.location.pathname;
+
+  const menuBtn = document.querySelector(".menu-toggle");
+  const nav = document.querySelector(".nav");
+
+  if (menuBtn && nav) {
+    menuBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      nav.classList.toggle("show");
+    });
+
+    document.addEventListener("click", (e) => {
+      const clickedInsideNav = nav.contains(e.target);
+      const clickedMenuButton = menuBtn.contains(e.target);
+      if (!clickedInsideNav && !clickedMenuButton) {
+        nav.classList.remove("show");
+      }
+    });
+  }
+  </script>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+  <script>
+document.getElementById("openDonate").addEventListener("click", () => {
+  document.getElementById("donateModal").style.display = "block";
+});
+document.getElementById("closeDonate").addEventListener("click", () => {
+  document.getElementById("donateModal").style.display = "none";
+});
+document.querySelectorAll(".copy-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    navigator.clipboard.writeText(btn.dataset.copy);
+  
+    setTimeout(() => (btn.textContent = "کپی"), 2000);
+  });
+});
+</script>
+
+</body>
+</html>

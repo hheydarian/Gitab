@@ -1,0 +1,310 @@
+
+
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <link rel="icon" type="image/png" href="/Gitab/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>مسیریابی</title>
+  <meta name="description" content="ترجمه‌های فارسی کتاب‌های فنی — سریع، مینیمال و قابل اتکا.">
+
+  <!-- استایل‌ها -->
+  <link rel="stylesheet" href="/Gitab/styles/main.css">
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+
+  <style>
+  @font-face {
+    font-family: 'Vazir';
+    src: url('/Gitab/fonts/Vazir-FD-WOL.ttf') format('truetype');
+    font-display: swap;
+  }
+  body {
+    font-family: 'Vazir', sans-serif;
+  }
+  </style>
+</head>
+
+<body>
+  <!-- هدر مشترک -->
+  <header class="header">
+    <div class="container nav-wrap">
+      <a href="/Gitab/" class="brand">
+        <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="26" height="26">
+        <span>Gitab</span>
+      </a>
+
+      <nav class="nav">
+        <a href="/Gitab/" aria-current="page">خانه</a>
+        <a href="/Gitab/books/list-books">کتاب‌ها</a>
+       <a href="/Gitab/translator.html">مترجمین</a>
+        <a href="/Gitab/giter.html">گیتر</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button id="themeToggle" class="icon-btn theme-btn" data-icon="moon" aria-label="تغییر تم">
+          <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن">
+          <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک">
+        </button>
+
+        <a class="icon-btn" href="https://github.com/hheydarian/Gitab" target="_blank" title="GitHub">
+          <img src="/Gitab/icone/github.svg" alt="GitHub">
+        </a>
+
+        <!-- دکمه منو برای موبایل -->
+        <button class="menu-toggle" aria-label="منو">
+          <img src="/Gitab/icone/menu.svg" alt="menu">
+        </button>
+      </div>
+    </div>
+  </header>
+
+  
+  <main class="site-main book-page">
+    <h1>فصل ۲ – مسیریابی (Navigation)</h1>
+<p>اولین چیزی که باید بیاموزیم (علاوه بر تایپ کردن) این است که چگونه در سیستم فایل لینوکس حرکت کنیم.<br>
+در این فصل با دستورات زیر آشنا خواهیم شد:</p>
+<ul>
+<li><strong>pwd</strong> – نمایش نام پوشه‌ی کاری فعلی (Print Working Directory)</li>
+<li><strong>cd</strong> – تغییر پوشه (Change Directory)</li>
+<li><strong>ls</strong> – نمایش محتویات پوشه (List Directory Contents)</li>
+</ul>
+<hr>
+<h2>درک درخت سیستم فایل</h2>
+<p>مانند ویندوز، یک سیستم‌عامل شبه‌یونیکس مانند لینوکس فایل‌هایش را در ساختاری سلسله‌مراتبی (درختی) سازمان‌دهی می‌کند. این بدین معناست که فایل‌ها در الگوی درختی از پوشه‌ها (directories، یا در برخی سیستم‌ها folders) قرار دارند. هر پوشه می‌تواند شامل فایل‌ها و پوشه‌های دیگر باشد.</p>
+<p>اولین پوشه در سیستم فایل، <strong>ریشه (root)</strong> نام دارد. پوشه‌ی ریشه شامل فایل‌ها و زیردایرکتوری‌هاست که آن‌ها نیز می‌توانند شامل فایل‌ها و زیردایرکتوری‌های بیشتری باشند، و این سلسله ادامه می‌یابد.</p>
+<p>توجه کنید که بر خلاف ویندوز که برای هر دستگاه ذخیره‌سازی یک درخت فایل جداگانه دارد، سیستم‌های شبه‌یونیکس مانند لینوکس همیشه یک درخت فایل واحد دارند، صرف‌نظر از تعداد دیسک‌ها یا دستگاه‌های ذخیره‌سازی متصل به سیستم. این دستگاه‌ها در نقاطی از درخت <strong>وصل (mount)</strong> می‌شوند؛ و این کار به اختیار مدیر سیستم انجام می‌شود.</p>
+<hr>
+<h2>پوشه‌ی کاری فعلی (Current Working Directory)</h2>
+<p>بیشتر ما احتمالاً با مدیر فایل گرافیکی آشنا هستیم که سیستم فایل را شبیه یک درخت نشان می‌دهد (شکل ۱). دقت کنید که معمولاً درخت وارونه نمایش داده می‌شود: ریشه در بالا و شاخه‌ها در پایین.</p>
+<p>اما خط فرمان تصویری ندارد. بنابراین برای حرکت در سیستم فایل باید ذهنی به آن نگاه کنیم.</p>
+<p>تصور کنید سیستم فایل یک هزارتوی درختی وارونه است و ما درون یکی از شاخه‌های آن ایستاده‌ایم. در هر زمان در یک پوشه هستیم و می‌توانیم فایل‌های داخل آن، مسیر به پوشه‌ی والد (parent directory) و زیردایرکتوری‌هایش را ببینیم. پوشه‌ای که در آن ایستاده‌ایم <strong>پوشه‌ی کاری فعلی (Current Working Directory)</strong> نام دارد.</p>
+<p>برای نمایش پوشه‌ی کاری فعلی از دستور <code>pwd</code> استفاده می‌کنیم:</p>
+<p>[me@linuxbox ~]$ pwd<br>
+/home/me</p>
+<p>وقتی برای اولین بار وارد سیستم می‌شویم (یا نشست ترمینال را باز می‌کنیم)، پوشه‌ی کاری فعلی روی <strong>home directory</strong> ما تنظیم می‌شود. هر حساب کاربری پوشه‌ی خانگی مخصوص به خود را دارد و تنها جایی است که کاربر عادی اجازه‌ی نوشتن فایل دارد.</p>
+<hr>
+<h2>فهرست‌کردن محتویات پوشه</h2>
+<p>برای نمایش فایل‌ها و پوشه‌های داخل پوشه‌ی کاری فعلی از دستور <code>ls</code> استفاده می‌کنیم:</p>
+<p>[me@linuxbox ~]$ ls<br>
+Desktop Documents Music Pictures Public Templates Videos</p>
+<p>در واقع، می‌توانیم از دستور <code>ls</code> برای نمایش محتویات هر پوشه‌ای استفاده کنیم، نه فقط پوشه‌ی کاری فعلی. امکانات دیگری هم دارد که در فصل بعدی بررسی خواهیم کرد.</p>
+<hr>
+<h2>تغییر پوشه‌ی کاری</h2>
+<p>برای تغییر پوشه‌ی کاری (جایی که در هزارتوی درختی ایستاده‌ایم) از دستور <code>cd</code> استفاده می‌کنیم. کافی است <code>cd</code> و سپس مسیر پوشه‌ی مورد نظر را تایپ کنیم.</p>
+<p><strong>مسیر (pathname)</strong> مسیر حرکت از شاخه‌های درخت تا پوشه‌ی مورد نظر است. مسیرها دو نوع هستند: <strong>مطلق (absolute)</strong> و <strong>نسبی (relative)</strong>.</p>
+<hr>
+<h3>مسیرهای مطلق (Absolute Pathnames)</h3>
+<p>مسیر مطلق از پوشه‌ی ریشه <code>/</code> آغاز می‌شود و شاخه‌به‌شاخه ادامه پیدا می‌کند تا به پوشه یا فایل مورد نظر برسیم.</p>
+<p>مثلاً بیشتر برنامه‌های سیستم در <code>/usr/bin</code> قرار دارند:</p>
+<p>[me@linuxbox ~]$ cd /usr/bin<br>
+[me@linuxbox bin]$ pwd<br>
+/usr/bin<br>
+[me@linuxbox bin]$ ls<br>
+... فهرست طولانی از فایل‌ها ...</p>
+<p>حالا می‌بینیم که پوشه‌ی کاری به <code>/usr/bin</code> تغییر یافته و پر از فایل است. دقت کنید prompt نیز تغییر کرده و نام پوشه‌ی فعلی را نشان می‌دهد.</p>
+<hr>
+<h3>مسیرهای نسبی (Relative Pathnames)</h3>
+<p>مسیر نسبی از پوشه‌ی کاری فعلی آغاز می‌شود. برای این کار از نشانه‌های خاصی استفاده می‌کند:</p>
+<ul>
+<li><code>&quot;.&quot;</code> → پوشه‌ی کاری فعلی</li>
+<li><code>&quot;..&quot;</code> → پوشه‌ی والد</li>
+</ul>
+<p>بیایید دوباره به <code>/usr/bin</code> برویم:</p>
+<p>[me@linuxbox ~]$ cd /usr/bin<br>
+[me@linuxbox bin]$ pwd<br>
+/usr/bin</p>
+<p>حالا می‌خواهیم یک پوشه به بالا برویم (به <code>/usr</code>). دو راه داریم:</p>
+<ul>
+<li>
+<p>با مسیر مطلق:<br>
+[me@linuxbox bin]$ cd /usr<br>
+[me@linuxbox usr]$ pwd<br>
+/usr</p>
+</li>
+<li>
+<p>یا با مسیر نسبی:<br>
+[me@linuxbox bin]$ cd ..<br>
+[me@linuxbox usr]$ pwd<br>
+/usr</p>
+</li>
+</ul>
+<p>هر دو نتیجه‌ی یکسان دارند. واضح است که روشی که کمتر تایپ بخواهد بهتر است.</p>
+<p>به‌همین شکل می‌توانیم از <code>/usr</code> دوباره به <code>/usr/bin</code> برویم:</p>
+<ul>
+<li>
+<p>با مسیر مطلق:<br>
+[me@linuxbox usr]$ cd /usr/bin<br>
+[me@linuxbox bin]$ pwd<br>
+/usr/bin</p>
+</li>
+<li>
+<p>با مسیر نسبی:<br>
+[me@linuxbox usr]$ cd ./bin<br>
+[me@linuxbox bin]$ pwd<br>
+/usr/bin</p>
+</li>
+</ul>
+<p>در بیشتر موارد، نوشتن <code>&quot;./&quot;</code> لازم نیست چون به‌طور ضمنی در نظر گرفته می‌شود. تایپ کردن:</p>
+<p>[me@linuxbox usr]$ cd bin</p>
+<p>همان کار را انجام می‌دهد. به‌طور کلی اگر مسیر داده نشود، پوشه‌ی کاری فعلی فرض می‌شود.</p>
+<hr>
+<h2>میانبرهای مفید (cd Shortcuts)</h2>
+<p>در جدول زیر برخی میانبرهای مفید برای دستور <code>cd</code> آمده است:</p>
+<table>
+<thead>
+<tr>
+<th>میانبر</th>
+<th>نتیجه</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>cd</code></td>
+<td>تغییر به پوشه‌ی خانگی کاربر</td>
+</tr>
+<tr>
+<td><code>cd -</code></td>
+<td>تغییر به پوشه‌ی کاری قبلی</td>
+</tr>
+<tr>
+<td><code>cd ~user</code></td>
+<td>تغییر به پوشه‌ی خانگی کاربر دیگر. مثلاً <code>cd ~bob</code> → پوشه‌ی خانگی bob</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2>نکات مهم درباره‌ی نام فایل‌ها</h2>
+<ol>
+<li>
+<p>فایل‌هایی که با نقطه (<code>.</code>) آغاز می‌شوند <strong>مخفی</strong> هستند. یعنی <code>ls</code> آن‌ها را نمایش نمی‌دهد مگر اینکه از <code>ls -a</code> استفاده کنید. هنگام ایجاد حساب کاربری، چندین فایل مخفی در پوشه‌ی خانگی شما قرار می‌گیرند تا تنظیمات محیطی را انجام دهند. همچنین بسیاری از برنامه‌ها فایل‌های پیکربندی خود را به‌صورت مخفی در پوشه‌ی خانگی قرار می‌دهند.</p>
+</li>
+<li>
+<p>نام فایل‌ها و دستورات در لینوکس (مانند یونیکس) <strong>حساس به بزرگی و کوچکی حروف</strong> هستند. فایل‌های <code>File1</code> و <code>file1</code> دو فایل متفاوتند.</p>
+</li>
+<li>
+<p>لینوکس مفهومی به نام <strong>پسوند فایل (file extension)</strong> مانند برخی سیستم‌عامل‌ها ندارد. می‌توانید هر نامی برای فایل‌ها بگذارید. محتوای فایل از راه‌های دیگر تعیین می‌شود. البته بسیاری برنامه‌ها همچنان برای راحتی از پسوندها استفاده می‌کنند.</p>
+</li>
+<li>
+<p>هرچند لینوکس از نام‌های طولانی با فاصله و نویسه‌های خاص پشتیبانی می‌کند، بهتر است در نام فایل‌ها تنها از <code>. (نقطه)</code>، <code>- (خط تیره)</code> و <code>_ (زیرخط)</code> استفاده کنید. به‌ویژه از فاصله در نام‌ها پرهیز کنید. اگر می‌خواهید بین کلمات فاصله بگذارید، از زیرخط <code>_</code> استفاده کنید. بعداً از خودتان متشکر خواهید بود!</p>
+</li>
+</ol>
+<hr>
+<h2>جمع‌بندی</h2>
+<p>در این فصل یاد گرفتیم که شل چگونه ساختار پوشه‌های سیستم را مدیریت می‌کند. با مسیرهای مطلق و نسبی آشنا شدیم و دستورات پایه‌ای برای حرکت در ساختار فایل‌ها (<code>pwd</code>, <code>ls</code>, <code>cd</code>) را یاد گرفتیم.</p>
+<p>در فصل بعدی با این دانش، گشتی در یک سیستم مدرن لینوکس خواهیم زد.</p>
+
+  </main>
+
+  <!-- فوتر مشترک -->
+  <footer class="footer">
+    <div class="container">
+      <p>
+        <img src="/Gitab/icone/copyright.svg" alt="کپی‌رایت" width="14" height="14"
+             style="vertical-align:middle;margin-inline:4px">
+        <span id="y"></span> Gitab — برای توسعه‌دهندگان
+      </p>
+    </div>
+  </footer>
+
+  <!-- سال و اسکریپت تغییر تم -->
+  <script>
+  (() => {
+    const root = document.documentElement;
+    const btn = document.getElementById('themeToggle');
+    const KEY = 'gitab-theme';
+
+    function updateTheme(s) {
+      root.setAttribute('data-theme', s);
+      const mode = s;  // فقط `dark` یا `light` خواهد بود
+      root.dataset.colorMode = mode;
+      btn.dataset.icon = mode === 'dark' ? 'moon' : 'sun';
+    }
+
+    // وضعیت تم ذخیره شده از localStorage
+    let saved = localStorage.getItem(KEY) || 'light'; // پیش‌فرض روشن
+    updateTheme(saved);
+
+    // تنظیم مجدد تم هنگام تغییر وضعیت دکمه
+    btn.addEventListener('click', () => {
+      const current = localStorage.getItem(KEY) || 'light';
+      const next = current === 'dark' ? 'light' : 'dark';  // فقط دو حالت: تاریک و روشن
+      localStorage.setItem(KEY, next);
+      updateTheme(next);
+    });
+
+    // هنگام بارگذاری صفحه
+    document.addEventListener('DOMContentLoaded', () => {
+      updateTheme(localStorage.getItem(KEY) || 'light');
+    });
+  })();
+</script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+
+  <script>
+  document.querySelectorAll('pre code').forEach(block => {
+    const btn = document.createElement('button');
+    btn.className = 'copy-btn';
+
+    const icon = document.createElement('img');
+    icon.src = "/Gitab/icone/copy.svg";
+    icon.alt = 'Copy';
+    btn.appendChild(icon);
+
+    block.parentNode.insertBefore(btn, block);
+
+    btn.addEventListener('click', async () => {
+      await navigator.clipboard.writeText(block.textContent);
+      btn.classList.add('copied');
+      setTimeout(() => btn.classList.remove('copied'), 1500);
+    });
+  });
+  </script>
+
+  <script>
+  document.body.dataset.page = window.location.pathname;
+
+  const menuBtn = document.querySelector(".menu-toggle");
+  const nav = document.querySelector(".nav");
+
+  if (menuBtn && nav) {
+    menuBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      nav.classList.toggle("show");
+    });
+
+    document.addEventListener("click", (e) => {
+      const clickedInsideNav = nav.contains(e.target);
+      const clickedMenuButton = menuBtn.contains(e.target);
+      if (!clickedInsideNav && !clickedMenuButton) {
+        nav.classList.remove("show");
+      }
+    });
+  }
+  </script>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+  <script>
+document.getElementById("openDonate").addEventListener("click", () => {
+  document.getElementById("donateModal").style.display = "block";
+});
+document.getElementById("closeDonate").addEventListener("click", () => {
+  document.getElementById("donateModal").style.display = "none";
+});
+document.querySelectorAll(".copy-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    navigator.clipboard.writeText(btn.dataset.copy);
+  
+    setTimeout(() => (btn.textContent = "کپی"), 2000);
+  });
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,509 @@
+
+
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <link rel="icon" type="image/png" href="/Gitab/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>کاوش در سیستم</title>
+  <meta name="description" content="ترجمه‌های فارسی کتاب‌های فنی — سریع، مینیمال و قابل اتکا.">
+
+  <!-- استایل‌ها -->
+  <link rel="stylesheet" href="/Gitab/styles/main.css">
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+
+  <style>
+  @font-face {
+    font-family: 'Vazir';
+    src: url('/Gitab/fonts/Vazir-FD-WOL.ttf') format('truetype');
+    font-display: swap;
+  }
+  body {
+    font-family: 'Vazir', sans-serif;
+  }
+  </style>
+</head>
+
+<body>
+  <!-- هدر مشترک -->
+  <header class="header">
+    <div class="container nav-wrap">
+      <a href="/Gitab/" class="brand">
+        <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="26" height="26">
+        <span>Gitab</span>
+      </a>
+
+      <nav class="nav">
+        <a href="/Gitab/" aria-current="page">خانه</a>
+        <a href="/Gitab/books/list-books">کتاب‌ها</a>
+       <a href="/Gitab/translator.html">مترجمین</a>
+        <a href="/Gitab/giter.html">گیتر</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button id="themeToggle" class="icon-btn theme-btn" data-icon="moon" aria-label="تغییر تم">
+          <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن">
+          <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک">
+        </button>
+
+        <a class="icon-btn" href="https://github.com/hheydarian/Gitab" target="_blank" title="GitHub">
+          <img src="/Gitab/icone/github.svg" alt="GitHub">
+        </a>
+
+        <!-- دکمه منو برای موبایل -->
+        <button class="menu-toggle" aria-label="منو">
+          <img src="/Gitab/icone/menu.svg" alt="menu">
+        </button>
+      </div>
+    </div>
+  </header>
+
+  
+  <main class="site-main book-page">
+    <h1>فصل ۳ – کاوش در سیستم (Exploring the System)</h1>
+<p>اکنون که می‌دانیم چگونه در سیستم فایل حرکت کنیم، زمان آن رسیده است که یک تور هدایت‌شده در سیستم لینوکس خود داشته باشیم.<br>
+اما پیش از شروع، لازم است چند دستور جدید یاد بگیریم که در طول مسیر به ما کمک خواهند کرد:</p>
+<ul>
+<li><strong>ls</strong> – فهرست محتویات پوشه</li>
+<li><strong>file</strong> – تعیین نوع فایل</li>
+<li><strong>less</strong> – مشاهده محتوای فایل‌ها</li>
+</ul>
+<hr>
+<h2>لذت بیشتر با دستور <code>ls</code></h2>
+<p>دستور <code>ls</code> احتمالاً پرکاربردترین دستور لینوکس است و دلیل خوبی هم دارد.<br>
+این دستور به ما اجازه می‌دهد محتوای پوشه‌ها را ببینیم و ویژگی‌های مختلفی از فایل‌ها و دایرکتوری‌ها را بررسی کنیم.</p>
+<h3>مثال‌ها</h3>
+<pre class="hljs"><code>[me@linuxbox ~]$ <span class="hljs-built_in">ls</span>
+Desktop Documents Music Pictures Public Templates Videos
+</code></pre>
+<pre class="hljs"><code>[me@linuxbox ~]$ <span class="hljs-built_in">ls</span> /usr
+bin games include lib <span class="hljs-built_in">local</span> sbin share src
+</code></pre>
+<pre class="hljs"><code>[me@linuxbox ~]$ <span class="hljs-built_in">ls</span> ~ /usr
+
+/home/me:
+Desktop Documents Music Pictures Public Templates Videos
+
+/usr:
+bin games include lib <span class="hljs-built_in">local</span> sbin share src
+</code></pre>
+<pre class="hljs"><code>[me@linuxbox ~]$ <span class="hljs-built_in">ls</span> -l
+total 56
+drwxrwxr-x 2 me me 4096 2017-10-26 17:20 Desktop
+drwxrwxr-x 2 me me 4096 2017-10-26 17:20 Documents
+...
+</code></pre>
+<hr>
+<h2>گزینه‌ها و آرگومان‌ها</h2>
+<p>دستورات لینوکس معمولاً چنین ساختاری دارند:</p>
+<pre class="hljs"><code><span class="hljs-built_in">command</span> -options arguments
+</code></pre>
+<ul>
+<li><strong>گزینه‌ها (options):</strong> رفتار دستور را تغییر می‌دهند (مانند <code>-l</code>)</li>
+<li><strong>آرگومان‌ها (arguments):</strong> موضوع دستور را مشخص می‌کنند (مانند نام فایل یا دایرکتوری)</li>
+</ul>
+<p>مثال:</p>
+<pre class="hljs"><code>[me@linuxbox ~]$ <span class="hljs-built_in">ls</span> -lt
+</code></pre>
+<ul>
+<li><code>-l</code> → نمایش قالب طولانی</li>
+<li><code>-t</code> → مرتب‌سازی بر اساس زمان تغییر</li>
+</ul>
+<p>معکوس کردن ترتیب:</p>
+<pre class="hljs"><code>[me@linuxbox ~]$ <span class="hljs-built_in">ls</span> -lt --reverse
+</code></pre>
+<p>📌 توجه: گزینه‌ها مانند نام فایل‌ها در لینوکس حساس به بزرگی و کوچکی حروف‌اند.</p>
+<hr>
+<h2>گزینه‌های متداول <code>ls</code></h2>
+<table>
+<thead>
+<tr>
+<th>گزینه</th>
+<th>گزینه بلند</th>
+<th>توضیح</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-a</code></td>
+<td><code>--all</code></td>
+<td>نمایش همه فایل‌ها (حتی فایل‌های مخفی)</td>
+</tr>
+<tr>
+<td><code>-A</code></td>
+<td><code>--almost-all</code></td>
+<td>مشابه <code>-a</code> اما بدون <code>.</code> و <code>..</code></td>
+</tr>
+<tr>
+<td><code>-d</code></td>
+<td><code>--directory</code></td>
+<td>نمایش خود پوشه به جای محتوای آن</td>
+</tr>
+<tr>
+<td><code>-F</code></td>
+<td><code>--classify</code></td>
+<td>افزودن نماد به انتهای نام‌ها (مانند <code>/</code> برای پوشه)</td>
+</tr>
+<tr>
+<td><code>-h</code></td>
+<td><code>--human-readable</code></td>
+<td>نمایش اندازه فایل‌ها به صورت خوانا (KB, MB)</td>
+</tr>
+<tr>
+<td><code>-l</code></td>
+<td>–</td>
+<td>نمایش قالب طولانی</td>
+</tr>
+<tr>
+<td><code>-r</code></td>
+<td><code>--reverse</code></td>
+<td>معکوس کردن ترتیب نتایج</td>
+</tr>
+<tr>
+<td><code>-S</code></td>
+<td>–</td>
+<td>مرتب‌سازی بر اساس اندازه فایل</td>
+</tr>
+<tr>
+<td><code>-t</code></td>
+<td>–</td>
+<td>مرتب‌سازی بر اساس زمان تغییر</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2>بررسی قالب طولانی (<code>ls -l</code>)</h2>
+<p>مثال:</p>
+<pre class="hljs"><code>-rw-r--r-- 1 root root 32059 2017-04-03 11:05 oo-cd-cover.odf
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>بخش</th>
+<th>توضیح</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-rw-r--r--</code></td>
+<td>نوع فایل و سطح دسترسی‌ها</td>
+</tr>
+<tr>
+<td><code>1</code></td>
+<td>تعداد لینک‌های سخت</td>
+</tr>
+<tr>
+<td><code>root</code></td>
+<td>نام مالک</td>
+</tr>
+<tr>
+<td><code>root</code></td>
+<td>گروه مالک</td>
+</tr>
+<tr>
+<td><code>32059</code></td>
+<td>اندازه فایل (بایت)</td>
+</tr>
+<tr>
+<td><code>2017-04-03 11:05</code></td>
+<td>زمان آخرین تغییر</td>
+</tr>
+<tr>
+<td><code>oo-cd-cover.odf</code></td>
+<td>نام فایل</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2>تعیین نوع فایل با <code>file</code></h2>
+<p>در لینوکس نام فایل الزامی برای بیان محتوای آن نیست.</p>
+<pre class="hljs"><code>[me@linuxbox ~]$ file picture.jpg
+picture.jpg: JPEG image data, JFIF standard 1.01
+</code></pre>
+<p>📌 در لینوکس شعار این است: «همه‌چیز یک فایل است.»</p>
+<hr>
+<h2>مشاهده محتوای فایل‌ها با <code>less</code></h2>
+<pre class="hljs"><code>[me@linuxbox ~]$ less /etc/passwd
+</code></pre>
+<p>اگر فایل طولانی بود می‌توانیم به بالا یا پایین حرکت کنیم. برای خروج کلید <code>q</code> را فشار دهید.</p>
+<h3>کلیدهای متداول در <code>less</code></h3>
+<table>
+<thead>
+<tr>
+<th>کلید</th>
+<th>عملکرد</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Page Up</code> یا <code>b</code></td>
+<td>یک صفحه به عقب</td>
+</tr>
+<tr>
+<td><code>Page Down</code> یا Space</td>
+<td>یک صفحه به جلو</td>
+</tr>
+<tr>
+<td>↑ / ↓</td>
+<td>حرکت خطی</td>
+</tr>
+<tr>
+<td><code>G</code></td>
+<td>رفتن به انتهای فایل</td>
+</tr>
+<tr>
+<td><code>g</code> یا <code>1G</code></td>
+<td>رفتن به ابتدای فایل</td>
+</tr>
+<tr>
+<td><code>/text</code></td>
+<td>جستجوی متن</td>
+</tr>
+<tr>
+<td><code>n</code></td>
+<td>نتیجه بعدی جستجو</td>
+</tr>
+<tr>
+<td><code>h</code></td>
+<td>نمایش راهنما</td>
+</tr>
+<tr>
+<td><code>q</code></td>
+<td>خروج</td>
+</tr>
+</tbody>
+</table>
+<p>📌 نام <code>less</code> یک بازی زبانی از عبارت «Less is more» است.</p>
+<hr>
+<h2>تور سیستم فایل</h2>
+<p>استاندارد <strong>Linux Filesystem Hierarchy Standard</strong> ساختار فایل‌سیستم لینوکس را تعریف می‌کند.<br>
+هرچند توزیع‌ها ممکن است کمی تفاوت داشته باشند، بیشتر آن‌ها نزدیک به این استاندارد هستند.</p>
+<h3>مراحل گشت</h3>
+<ol>
+<li>ورود به یک پوشه (<code>cd</code>)</li>
+<li>فهرست کردن محتوا (<code>ls -l</code>)</li>
+<li>بررسی نوع فایل با <code>file</code></li>
+<li>مشاهده با <code>less</code> اگر متنی بود</li>
+<li>اگر فایل غیرمتنی بود و ترمینال را به‌هم ریخت، دستور <code>reset</code> را اجرا کنید</li>
+</ol>
+<p>📌 کاربران عادی نمی‌توانند سیستم را خراب کنند؛ این مسئولیت مدیر سیستم است!</p>
+<hr>
+<h2>دایرکتوری‌های مهم لینوکس</h2>
+<table>
+<thead>
+<tr>
+<th>دایرکتوری</th>
+<th>توضیح</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/</code></td>
+<td>ریشه سیستم فایل</td>
+</tr>
+<tr>
+<td><code>/bin</code></td>
+<td>برنامه‌های حیاتی برای بوت سیستم</td>
+</tr>
+<tr>
+<td><code>/boot</code></td>
+<td>هسته لینوکس و بوت‌لودر</td>
+</tr>
+<tr>
+<td><code>/dev</code></td>
+<td>دستگاه‌ها به صورت فایل</td>
+</tr>
+<tr>
+<td><code>/etc</code></td>
+<td>فایل‌های پیکربندی سیستم</td>
+</tr>
+<tr>
+<td><code>/home</code></td>
+<td>پوشه‌های خانگی کاربران</td>
+</tr>
+<tr>
+<td><code>/lib</code></td>
+<td>کتابخانه‌های اشتراکی</td>
+</tr>
+<tr>
+<td><code>/media</code></td>
+<td>رسانه‌های قابل حمل (USB، CD و …)</td>
+</tr>
+<tr>
+<td><code>/mnt</code></td>
+<td>محل اتصال دستی دستگاه‌ها</td>
+</tr>
+<tr>
+<td><code>/opt</code></td>
+<td>نرم‌افزارهای اختیاری</td>
+</tr>
+<tr>
+<td><code>/proc</code></td>
+<td>فایل‌های مجازی برای دسترسی به هسته</td>
+</tr>
+<tr>
+<td><code>/root</code></td>
+<td>پوشه خانگی کاربر root</td>
+</tr>
+<tr>
+<td><code>/sbin</code></td>
+<td>برنامه‌های سیستمی برای مدیر سیستم</td>
+</tr>
+<tr>
+<td><code>/sys</code></td>
+<td>اطلاعات سخت‌افزاری سیستم</td>
+</tr>
+<tr>
+<td><code>/tmp</code></td>
+<td>فایل‌های موقت</td>
+</tr>
+<tr>
+<td><code>/usr</code></td>
+<td>برنامه‌ها و فایل‌های کاربری</td>
+</tr>
+<tr>
+<td><code>/var</code></td>
+<td>داده‌های متغیر مانند لاگ‌ها</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2>لینک‌ها در لینوکس</h2>
+<h3>لینک نمادین (Symbolic Link)</h3>
+<pre class="hljs"><code>lrwxrwxrwx 1 root root 11 2007-08-11 07:34 libc.so.6 -&gt; libc-2.6.so
+</code></pre>
+<p>این نوع لینک به یک فایل دیگر اشاره دارد و برای مدیریت نسخه‌ها کاربردی است.</p>
+<h3>لینک سخت (Hard Link)</h3>
+<p>نوع دیگری از لینک است که اجازه می‌دهد یک فایل چند نام داشته باشد اما شیوه‌ی متفاوتی دارد (جزئیات در فصل بعد).</p>
+<hr>
+<h2>جمع‌بندی</h2>
+<p>در این فصل آموختیم:</p>
+<ul>
+<li>کار با دستورات <code>ls</code>, <code>file</code>, <code>less</code></li>
+<li>بررسی قالب طولانی و نوع فایل‌ها</li>
+<li>ساختار پوشه‌های مهم لینوکس</li>
+<li>تفاوت لینک‌های نمادین و سخت</li>
+<li>اهمیت فایل‌های متنی در لینوکس</li>
+</ul>
+<p>📚 منابع بیشتر:</p>
+<ul>
+<li><a href="https://refspecs.linuxfoundation.org/fhs.shtml">Linux Filesystem Hierarchy Standard</a></li>
+<li><a href="http://en.wikipedia.org/wiki/Unix_directory_structure">Unix Directory Structure</a></li>
+<li><a href="http://en.wikipedia.org/wiki/ASCII">ASCII Text Format</a></li>
+</ul>
+
+  </main>
+
+  <!-- فوتر مشترک -->
+  <footer class="footer">
+    <div class="container">
+      <p>
+        <img src="/Gitab/icone/copyright.svg" alt="کپی‌رایت" width="14" height="14"
+             style="vertical-align:middle;margin-inline:4px">
+        <span id="y"></span> Gitab — برای توسعه‌دهندگان
+      </p>
+    </div>
+  </footer>
+
+  <!-- سال و اسکریپت تغییر تم -->
+  <script>
+  (() => {
+    const root = document.documentElement;
+    const btn = document.getElementById('themeToggle');
+    const KEY = 'gitab-theme';
+
+    function updateTheme(s) {
+      root.setAttribute('data-theme', s);
+      const mode = s;  // فقط `dark` یا `light` خواهد بود
+      root.dataset.colorMode = mode;
+      btn.dataset.icon = mode === 'dark' ? 'moon' : 'sun';
+    }
+
+    // وضعیت تم ذخیره شده از localStorage
+    let saved = localStorage.getItem(KEY) || 'light'; // پیش‌فرض روشن
+    updateTheme(saved);
+
+    // تنظیم مجدد تم هنگام تغییر وضعیت دکمه
+    btn.addEventListener('click', () => {
+      const current = localStorage.getItem(KEY) || 'light';
+      const next = current === 'dark' ? 'light' : 'dark';  // فقط دو حالت: تاریک و روشن
+      localStorage.setItem(KEY, next);
+      updateTheme(next);
+    });
+
+    // هنگام بارگذاری صفحه
+    document.addEventListener('DOMContentLoaded', () => {
+      updateTheme(localStorage.getItem(KEY) || 'light');
+    });
+  })();
+</script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+
+  <script>
+  document.querySelectorAll('pre code').forEach(block => {
+    const btn = document.createElement('button');
+    btn.className = 'copy-btn';
+
+    const icon = document.createElement('img');
+    icon.src = "/Gitab/icone/copy.svg";
+    icon.alt = 'Copy';
+    btn.appendChild(icon);
+
+    block.parentNode.insertBefore(btn, block);
+
+    btn.addEventListener('click', async () => {
+      await navigator.clipboard.writeText(block.textContent);
+      btn.classList.add('copied');
+      setTimeout(() => btn.classList.remove('copied'), 1500);
+    });
+  });
+  </script>
+
+  <script>
+  document.body.dataset.page = window.location.pathname;
+
+  const menuBtn = document.querySelector(".menu-toggle");
+  const nav = document.querySelector(".nav");
+
+  if (menuBtn && nav) {
+    menuBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      nav.classList.toggle("show");
+    });
+
+    document.addEventListener("click", (e) => {
+      const clickedInsideNav = nav.contains(e.target);
+      const clickedMenuButton = menuBtn.contains(e.target);
+      if (!clickedInsideNav && !clickedMenuButton) {
+        nav.classList.remove("show");
+      }
+    });
+  }
+  </script>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+  <script>
+document.getElementById("openDonate").addEventListener("click", () => {
+  document.getElementById("donateModal").style.display = "block";
+});
+document.getElementById("closeDonate").addEventListener("click", () => {
+  document.getElementById("donateModal").style.display = "none";
+});
+document.querySelectorAll(".copy-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    navigator.clipboard.writeText(btn.dataset.copy);
+  
+    setTimeout(() => (btn.textContent = "کپی"), 2000);
+  });
+});
+</script>
+
+</body>
+</html>

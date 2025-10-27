@@ -1,0 +1,400 @@
+
+
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <link rel="icon" type="image/png" href="/Gitab/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Linux Command Line</title>
+  <meta name="description" content="ترجمه‌های فارسی کتاب‌های فنی — سریع، مینیمال و قابل اتکا.">
+
+  <!-- استایل‌ها -->
+  <link rel="stylesheet" href="/Gitab/styles/main.css">
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+
+  <style>
+  @font-face {
+    font-family: 'Vazir';
+    src: url('/Gitab/fonts/Vazir-FD-WOL.ttf') format('truetype');
+    font-display: swap;
+  }
+  body {
+    font-family: 'Vazir', sans-serif;
+  }
+  </style>
+</head>
+
+<body>
+  <!-- هدر مشترک -->
+  <header class="header">
+    <div class="container nav-wrap">
+      <a href="/Gitab/" class="brand">
+        <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="26" height="26">
+        <span>Gitab</span>
+      </a>
+
+      <nav class="nav">
+        <a href="/Gitab/" aria-current="page">خانه</a>
+        <a href="/Gitab/books/list-books">کتاب‌ها</a>
+       <a href="/Gitab/translator.html">مترجمین</a>
+        <a href="/Gitab/giter.html">گیتر</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button id="themeToggle" class="icon-btn theme-btn" data-icon="moon" aria-label="تغییر تم">
+          <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن">
+          <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک">
+        </button>
+
+        <a class="icon-btn" href="https://github.com/hheydarian/Gitab" target="_blank" title="GitHub">
+          <img src="/Gitab/icone/github.svg" alt="GitHub">
+        </a>
+
+        <!-- دکمه منو برای موبایل -->
+        <button class="menu-toggle" aria-label="منو">
+          <img src="/Gitab/icone/menu.svg" alt="menu">
+        </button>
+      </div>
+    </div>
+  </header>
+
+  
+  <main class="site-main book-page">
+    
+
+<section class="book-header">
+    <div class="book-cover">
+        <img src="/Gitab/images/the-linux-command-line/Cover.jpg" alt="The Linux Command Line" />
+    </div>
+
+    <div class="book-meta">
+        <h1> The Linux Command Line </h1>
+        <p class="subtitle">
+            راهنمای کامل خط فرمان لینوکس برای کاربران تازه‌کار و حرفه‌ای
+        </p>
+
+
+        <div class="book-tags">
+            <span>Linux#</span>
+            <span>CommandLine#</span>
+            <span>Bash#</span>
+            <span>Shell#</span>
+            <span>OpenSource#</span>
+        </div>
+
+
+        <div class="donate-buttons">
+            <button class="donate-btn" id="openDonate">💜 حمایت مالی از مترجم</button>
+
+            <div class="download-wrapper">
+                <button class="donate-btn download" id="mainDownload"
+                    data-link="https://drive.google.com/uc?export=download&id=13frNd6GtMOdIbKr7lJshAvNcggWnr7V0">
+                    فایل اصلی
+                </button>
+                <span class="tooltip-download" id="tooltipDownload">در حال آماده سازی...</span>
+            </div>
+            <div class="download-wrapper">
+                <button class="donate-btn downloadfa" id="faDownload" data-link="https://Gitab.ir.page">
+                    فایل فارسی
+                </button>
+            </div>
+        </div>
+        <div id="donateModal" class="donate-modal">
+            <div class="donate-overlay"></div>
+            <div class="donate-content">
+                <!-- کارت بانکی -->
+                <div class="donate-section">
+                    <div class="donate-row">
+                        <img src="/Gitab/icone/card.svg" alt="card" class="icon">
+                        <span class="label">کارت بانکی:</span>
+                        <span class="value">6219 8619 4472 0969</span>
+                        <button class="copy-btn donate-copy" data-copy="6219861944720969">کپی</button>
+                    </div>
+                </div>
+
+                <!-- کیف پول -->
+                <div class="donate-section">
+                    <div class="donate-row">
+                        <img src="/Gitab/icone/money.svg" alt="crypto" class="icon">
+                        <span class="label">آدرس کیف پول:</span>
+                        <span class="value wallet">UQDOulaN5nql7J...uXY6Jdri7Y6</span>
+                        <img src="/Gitab/icone/ton.svg" alt="TON" class="ton-icon">
+                        <button class="copy-btn donate-copy"
+                            data-copy="UQDOulaN5nql7JSfL0Q56j2d-yWlWAb2JFozmuXY6Jdri7Y6">کپی</button>
+                    </div>
+                </div>
+
+                <button class="close-btn" id="closeDonate">بستن</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="book-intro">
+    <p>
+        کتاب <strong>The Linux Command Line</strong> نوشتهٔ <em>William Shotts</em>
+        یکی از بهترین منابع برای یادگیری دستورات لینوکس و کار حرفه‌ای با خط فرمان است.
+        این پروژه با هدف ارائه ترجمه‌ای فارسی، روان و دقیق برای جامعه لینوکسی و برنامه‌نویسان فارسی‌زبان ایجاد شده
+        است.
+    </p>
+
+    <div class="key-points">
+        <div><strong>✅ نسخه:</strong> 2013</div>
+        <div><strong>📚 سطح:</strong> مقدماتی تا متوسط</div>
+        <div><strong>🧩 تمرکز:</strong> آموزش عملی خط فرمان و Bash </div>
+        <div><strong>✍️ وضعیت ترجمه:</strong> در حال ترجمه</div>
+        <div><strong>📝 نویسنده:</strong> William Shotts </div>
+        <div><strong>💬 مترجم:</strong>
+            <a href="/Gitab/translator.html" target=" _blank">هیمن صادقی</a>
+        </div>
+    </div>
+</section>
+
+<section id="chapters" class="book-chapters">
+    <h2> فهرست سرفصل‌ها</h2>
+
+    <details open>
+        <summary>بخش ۱ — مفاهیم پایه و آشنایی </summary>
+        <ul>
+            <li>
+                <a href="/Gitab/books/book5/Book/00/Introduction/"><span class="chapter-box">0</span>
+                    مقدمه</a>
+            </li>
+            <li>
+                <a href="/Gitab/books/book5/Book/01/chapter01/">
+                    <span class="chapter-box">1</span> شل چیست؟
+                </a>
+            </li>
+            <li>
+                <a href="/Gitab/books/book5/Book/02/chapter02/">
+                    <span class="chapter-box">2</span> مسیریابی
+                </a>
+            </li>
+            <li>
+                <a href="/Gitab/books/book5/Book/03/chapter03/">
+                    <span class="chapter-box">3</span> کاوش در سیستم
+                </a>
+            </li>
+        </ul>
+    </details>
+
+    <details>
+        <summary>بخش ۲ — دستورات</summary>
+        <ul>
+            <li>
+                <a href="/Gitab/books/book5/Book/04/chapter04/">
+                    <span class="chapter-box">4</span> کار با فایل‌ها
+                </a>
+            </li>
+            <li>
+                <a href="/Gitab/books/book5/Book/05/chapter05/">
+                    <span class="chapter-box">5</span> کار با دستورات
+                </a>
+            </li>
+        </ul>
+    </details>
+    <details>
+        <summary>در حال آماده سازی</summary>
+    </details>
+    <!-- <details>
+            <summary>بخش ۳ — نکات تکمیلی و پیوست‌ها</summary>
+            <ul>
+                <li>
+                    <a href="/Gitab/books/book4/Book/06/Bonus/">
+                        <span class="chapter-box">6</span> مباحث تکمیلی و نکات پیشرفته
+                    </a>
+                </li>
+                <li>
+                    <a href="/Gitab/books/book4/Book/APPENDIX_A/">
+                        <span class="chapter-box">7</span> ضمیمه A — مفاهیم پایه Thread و ThreadPool
+                    </a>
+                </li>
+                <li>
+                    <a href="/Gitab/books/book4/Book/APPENDIX_B/">
+                        <span class="chapter-box">8</span> ضمیمه B — تفاوت‌ها بین async و await
+                    </a>
+                </li>
+            </ul>
+        </details> -->
+</section>
+
+
+<script>
+    // باز/بستن مودال
+    const modal = document.getElementById('donateModal');
+    document.getElementById('openDonate').addEventListener('click', () => modal.style.display = 'block');
+    document.getElementById('closeDonate').addEventListener('click', () => modal.style.display = 'none');
+    modal.querySelector('.donate-overlay').addEventListener('click', () => modal.style.display = 'none');
+
+    // کپی با بازخورد
+    document.querySelectorAll('.copy-btn').forEach(btn =>
+    {
+        btn.addEventListener('click', async () =>
+        {
+            try
+            {
+                await navigator.clipboard.writeText(btn.dataset.copy || '');
+                const old = btn.textContent;
+                btn.textContent = 'کپی شد ✓';
+                btn.disabled = true;
+                setTimeout(() =>
+                {
+                    btn.textContent = old;
+                    btn.disabled = false;
+                }, 1600);
+            } catch (e)
+            {
+                alert('کپی نشد. دستی کپی کنید 🙏');
+            }
+        });
+    });
+</script>
+<script>
+    // 🎯 تول‌تیپ برای فایل اصلی
+    const downloadBtn = document.getElementById("mainDownload");
+    const tooltip = document.getElementById("tooltipDownload");
+
+    downloadBtn.addEventListener("click", (e) =>
+    {
+        e.preventDefault();
+        const link = downloadBtn.dataset.link;
+
+        tooltip.classList.add("show");
+
+        setTimeout(() =>
+        {
+            tooltip.classList.remove("show");
+
+            // شروع دانلود
+            const a = document.createElement("a");
+            a.href = link;
+            a.download = "";
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }, 2000);
+    });
+
+    // 🎯 هدایت به صفحه پرداخت (فایل فارسی)
+    const faDownload = document.getElementById("faDownload");
+    faDownload.addEventListener("click", () =>
+    {
+        const link = faDownload.dataset.link;
+        window.open(link, "_blank"); // باز شدن در تب جدید
+    });
+</script>
+  </main>
+
+  <!-- فوتر مشترک -->
+  <footer class="footer">
+    <div class="container">
+      <p>
+        <img src="/Gitab/icone/copyright.svg" alt="کپی‌رایت" width="14" height="14"
+             style="vertical-align:middle;margin-inline:4px">
+        <span id="y"></span> Gitab — برای توسعه‌دهندگان
+      </p>
+    </div>
+  </footer>
+
+  <!-- سال و اسکریپت تغییر تم -->
+  <script>
+  (() => {
+    const root = document.documentElement;
+    const btn = document.getElementById('themeToggle');
+    const KEY = 'gitab-theme';
+
+    function updateTheme(s) {
+      root.setAttribute('data-theme', s);
+      const mode = s;  // فقط `dark` یا `light` خواهد بود
+      root.dataset.colorMode = mode;
+      btn.dataset.icon = mode === 'dark' ? 'moon' : 'sun';
+    }
+
+    // وضعیت تم ذخیره شده از localStorage
+    let saved = localStorage.getItem(KEY) || 'light'; // پیش‌فرض روشن
+    updateTheme(saved);
+
+    // تنظیم مجدد تم هنگام تغییر وضعیت دکمه
+    btn.addEventListener('click', () => {
+      const current = localStorage.getItem(KEY) || 'light';
+      const next = current === 'dark' ? 'light' : 'dark';  // فقط دو حالت: تاریک و روشن
+      localStorage.setItem(KEY, next);
+      updateTheme(next);
+    });
+
+    // هنگام بارگذاری صفحه
+    document.addEventListener('DOMContentLoaded', () => {
+      updateTheme(localStorage.getItem(KEY) || 'light');
+    });
+  })();
+</script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+
+  <script>
+  document.querySelectorAll('pre code').forEach(block => {
+    const btn = document.createElement('button');
+    btn.className = 'copy-btn';
+
+    const icon = document.createElement('img');
+    icon.src = "/Gitab/icone/copy.svg";
+    icon.alt = 'Copy';
+    btn.appendChild(icon);
+
+    block.parentNode.insertBefore(btn, block);
+
+    btn.addEventListener('click', async () => {
+      await navigator.clipboard.writeText(block.textContent);
+      btn.classList.add('copied');
+      setTimeout(() => btn.classList.remove('copied'), 1500);
+    });
+  });
+  </script>
+
+  <script>
+  document.body.dataset.page = window.location.pathname;
+
+  const menuBtn = document.querySelector(".menu-toggle");
+  const nav = document.querySelector(".nav");
+
+  if (menuBtn && nav) {
+    menuBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      nav.classList.toggle("show");
+    });
+
+    document.addEventListener("click", (e) => {
+      const clickedInsideNav = nav.contains(e.target);
+      const clickedMenuButton = menuBtn.contains(e.target);
+      if (!clickedInsideNav && !clickedMenuButton) {
+        nav.classList.remove("show");
+      }
+    });
+  }
+  </script>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+  <script>
+document.getElementById("openDonate").addEventListener("click", () => {
+  document.getElementById("donateModal").style.display = "block";
+});
+document.getElementById("closeDonate").addEventListener("click", () => {
+  document.getElementById("donateModal").style.display = "none";
+});
+document.querySelectorAll(".copy-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    navigator.clipboard.writeText(btn.dataset.copy);
+  
+    setTimeout(() => (btn.textContent = "کپی"), 2000);
+  });
+});
+</script>
+
+</body>
+</html>
