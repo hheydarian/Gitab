@@ -6,7 +6,9 @@
 }
 
 /* ---------- پالت تیره + روشن ---------- */
-:root {
+/* :root {
+
+
     --font: "VazirFD", system-ui, -apple-system, Segoe UI, Roboto,
         "Noto Sans Arabic", "Vazirmatn", sans-serif;
 
@@ -25,6 +27,52 @@
         0 12px 28px rgba(0, 0, 0, 0.22);
 
     color-scheme: dark;
+} */
+
+/* ---------- پالت هالووین ---------- */
+:root {
+    --font: "VazirFD", system-ui, -apple-system, Segoe UI, Roboto,
+        "Noto Sans Arabic", "Vazirmatn", sans-serif;
+
+    /* Background Colors for Halloween */
+    --bg-0: #1a1a1a; /* Dark background */
+    --bg-1: #232323; /* Slightly lighter background */
+    --bg-2: #333; /* Even lighter background */
+    --text: #f5f5f5; /* Light text */
+    --muted: #d3d3d3; /* Muted text for secondary items */
+    --brand: #ff8000; /* Halloween orange */
+    --brand2: #9b30ff; /* Purple for Halloween */
+    --border: #666; /* Light border for subtle effects */
+    --radius-lg: 18px;
+    --radius-sm: 12px;
+    --shadow-1: 0 1px 0 rgba(255, 255, 255, 0.15) inset,
+        0 12px 28px rgba(0, 0, 0, 0.3); /* Dark shadows for Halloween vibe */
+}
+
+:root {
+    --font: "VazirFD", system-ui, -apple-system, Segoe UI, Roboto,
+        "Noto Sans Arabic", "Vazirmatn", sans-serif;
+
+    /* Background Colors for Halloween */
+    --bg-0: #1a1a1a; /* Dark background */
+    --bg-1: #232323; /* Slightly lighter background */
+    --bg-2: #333; /* Even lighter background */
+    --text: #f5f5f5; /* Light text */
+    --muted: #d3d3d3; /* Muted text for secondary items */
+    --brand: #ff8000; /* Halloween orange */
+    --brand2: #9b30ff; /* Purple for Halloween */
+    --border: #666; /* Light border for subtle effects */
+    --radius-lg: 18px;
+    --radius-sm: 12px;
+    --shadow-1: 0 1px 0 rgba(255, 255, 255, 0.15) inset,
+        0 12px 28px rgba(0, 0, 0, 0.3); /* Dark shadows for Halloween vibe */
+}
+/* Adjusted Hover Effects */
+a:hover,
+.btn:hover {
+    color: var(--text);
+    background-color: var(--brand);
+    box-shadow: 0 0 15px rgba(255, 140, 0, 0.5); /* Glowing orange effect */
 }
 html[data-theme="light"],
 html[data-theme="auto"][data-color-mode="light"] {
@@ -92,12 +140,19 @@ button:focus {
 
 /* ---------- هدر ---------- */
 .header {
+    background: rgba(0, 0, 0, 0.7); /* Semi-transparent dark overlay */
+    backdrop-filter: blur(15px);
+    border-bottom: 2px solid var(--border);
     position: sticky;
     top: 0;
     z-index: 20;
-    border-bottom: 1px solid var(--border);
+    /* border-bottom: 1px solid var(--border);
     background: color-mix(in oklab, var(--bg-0) 45%, transparent);
-    backdrop-filter: blur(14px) saturate(140%);
+    backdrop-filter: blur(14px) saturate(140%); */
+
+    background: rgba(0, 0, 0, 0.7); /* Semi-transparent dark overlay */
+    backdrop-filter: blur(15px);
+    border-bottom: 2px solid var(--border);
 }
 .nav-wrap {
     display: grid;
@@ -171,7 +226,11 @@ button:focus {
 .icon-btn:hover {
     transform: translateY(-2px);
 }
-
+/* Icon Button Hover Glow Effect */
+.icon-btn:hover {
+    background-color: var(--brand);
+    box-shadow: 0 0 20px rgba(255, 140, 0, 0.7); /* Glowing orange border effect */
+}
 /* فقط برای آیکن‌های داخل دکمه‌های تِم (ماه/خورشید) */
 .icon-btn.theme-btn img {
     position: absolute;
@@ -230,6 +289,9 @@ html[data-theme="auto"][data-color-mode="light"] .footer img {
     margin: 0 0 10px;
     font-size: clamp(26px, 4.5vw, 40px);
     letter-spacing: 0.2px;
+    color: var(--brand);
+    text-shadow: 0 0 10px rgba(255, 140, 0, 0.7),
+        0 0 20px rgba(255, 140, 0, 0.5);
 }
 .lead {
     color: var(--muted);
@@ -328,11 +390,14 @@ html[data-theme="auto"][data-color-mode="light"] .footer img {
 
 /* ---------- فوتر (ارتفاع کمتر طبق خواسته) ---------- */
 .footer {
+    background-color: var(--bg-0);
+    box-shadow: 0 4px 20px rgba(255, 140, 0, 0.6); /* Halloween glow */
     border-top: 1px solid var(--border);
     color: var(--muted);
     text-align: center;
     padding: 10px 16px; /* قبلاً 16px بود؛ کمتر شد */
     background: color-mix(in oklab, var(--bg-0) 70%, transparent);
+    background-color: var(--bg-0);
 }
 .footer p {
     margin: 0;
@@ -392,15 +457,18 @@ html[data-theme="auto"][data-color-mode="light"] .footer img {
 /* کارت کتاب‌: هم‌استایل با کارت‌های صفحه اصلی */
 .book-card {
     grid-column: span 12;
-    background: linear-gradient(
+    /* background: linear-gradient(
         180deg,
         color-mix(in oklab, var(--bg-2) 92%, transparent),
         color-mix(in oklab, var(--bg-1) 72%, transparent)
-    );
+    ); */
+    background: linear-gradient(180deg, var(--bg-2) 80%, var(--bg-1) 100%);
     border: 1px solid var(--border);
     border-radius: 18px;
-    box-shadow: 0 1px 0 color-mix(in oklab, #fff 4%, transparent) inset,
-        0 12px 28px rgba(0, 0, 0, 0.22);
+    /* box-shadow: 0 1px 0 color-mix(in oklab, #fff 4%, transparent) inset,
+        0 12px 28px rgba(0, 0, 0, 0.22); */
+
+    box-shadow: 0 0 15px rgba(255, 140, 0, 0.3); /* Spooky card glow */
     overflow: hidden;
     display: flex;
     flex-direction: column;
@@ -571,6 +639,8 @@ html[data-theme="auto"][data-color-mode="light"] .footer img {
 .book-description h3 {
     text-align: center;
     margin-bottom: 16px;
+    color: var(--brand);
+    text-shadow: 0 0 10px rgba(255, 140, 0, 0.7);
 }
 .book-description blockquote {
     border-right: 4px solid var(--brand);
@@ -617,7 +687,8 @@ html[data-theme="auto"][data-color-mode="light"] .footer img {
 }
 .chapter-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    /* box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); */
+    box-shadow: 0 8px 20px rgba(255, 140, 0, 0.6); /* Spooky shadow for chapters */
 }
 .chapter-card.disabled {
     opacity: 0.5;
@@ -762,6 +833,11 @@ html[data-theme="auto"][data-color-mode="light"] .footer img {
 .book-chapters h2 {
     text-align: center;
     margin-bottom: 24px;
+}
+/* Chapter Highlight */
+.book-chapters details[open] summary {
+    background-color: #222;
+    border-color: #444;
 }
 .book-chapters details {
     background: color-mix(in oklab, var(--bg-2) 95%, transparent);
@@ -1111,6 +1187,8 @@ body[data-page*="/Book/"] .site-main img {
 
     /* فوتر */
     .footer {
+        background-color: var(--bg-0);
+        box-shadow: 0 4px 20px rgba(255, 140, 0, 0.6); /* Halloween glow */
         padding: 14px 10px;
         font-size: 0.9rem;
         line-height: 1.6;
@@ -1126,6 +1204,8 @@ body[data-page*="/Book/"] .site-main img {
         display: none;
     }
     .footer {
+        background-color: var(--bg-0);
+        box-shadow: 0 4px 20px rgba(255, 140, 0, 0.6); /* Halloween glow */
         font-size: 0.8rem;
     }
 }
@@ -1446,14 +1526,17 @@ html[data-color-mode="light"] .social-links img {
     justify-content: center;
     gap: 8px;
     padding: 12px 15px;
-    background: linear-gradient(135deg, #8152ed, #54abd4);
-    color: #0f172a;
+    /* background: linear-gradient(135deg, #8152ed, #54abd4); */
+    background: linear-gradient(135deg, #ff4500, #9b30ff);
+    /* color: #0f172a; */
+    color: white;
     border: none;
     border-radius: 12px;
     font-weight: 600;
     cursor: pointer;
-    transition: 0.25s;
+    /* transition: 0.25s; */
     font-family: "VazirFD";
+    transition: transform 0.18s ease, box-shadow 0.3s ease;
     font-size: 13px;
     max-width: 180px;
     min-width: 160px; /* ← ثابت برای هر سه دکمه */
@@ -1464,7 +1547,8 @@ html[data-color-mode="light"] .social-links img {
 
 .donate-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(139, 92, 246, 0.35);
+    /* box-shadow: 0 8px 20px rgba(139, 92, 246, 0.35); */
+    box-shadow: 0 0 20px rgba(255, 140, 0, 0.6); /* Glowing Halloween Button */
 }
 
 /* مودال */
@@ -1665,6 +1749,8 @@ html[data-color-mode="light"] .social-links img {
     }
     /* فوتر */
     .footer {
+        background-color: var(--bg-0);
+        box-shadow: 0 4px 20px rgba(255, 140, 0, 0.6); /* Halloween glow */
         padding: 14px 10px;
         font-size: 1rem;
     }
@@ -1680,6 +1766,8 @@ html[data-color-mode="light"] .social-links img {
         gap: 22px;
     }
     .footer {
+        background-color: var(--bg-0);
+        box-shadow: 0 4px 20px rgba(255, 140, 0, 0.6); /* Halloween glow */
         padding: 16px 20px;
         font-size: 1rem;
     }
