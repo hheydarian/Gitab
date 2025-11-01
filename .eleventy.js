@@ -12,6 +12,7 @@ module.exports = function (eleventyConfig) {
     eleventyConfig.addPassthroughCopy("src/books/book3/assets");
     eleventyConfig.addPassthroughCopy("src/books/book4/assets");
     eleventyConfig.addPassthroughCopy("src/books/book5/assets");
+    eleventyConfig.addPassthroughCopy("src/books/book6/assets");
     eleventyConfig.addPassthroughCopy({ "src/favicon.png": "favicon.png" });
     eleventyConfig.addPassthroughCopy("src/icone");
     eleventyConfig.addPassthroughCopy(".nojekyll");
