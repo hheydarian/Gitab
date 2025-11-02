@@ -1,0 +1,367 @@
+
+
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <link rel="icon" type="image/png" href="/Gitab/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>کار با دستورات</title>
+  <meta name="description" content="ترجمه‌های فارسی کتاب‌های فنی — سریع، مینیمال و قابل اتکا.">
+
+  <!-- استایل‌ها -->
+  <link rel="stylesheet" href="/Gitab/styles/main.css">
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+
+  <style>
+  @font-face {
+    font-family: 'Vazir';
+    src: url('/Gitab/fonts/Vazir-FD-WOL.ttf') format('truetype');
+    font-display: swap;
+  }
+  body {
+    font-family: 'Vazir', sans-serif;
+  }
+  </style>
+</head>
+
+<body>
+  <!-- هدر مشترک -->
+  <header class="header">
+    <div class="container nav-wrap">
+      <a href="/Gitab/" class="brand">
+        <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="26" height="26">
+        <span>Gitab</span>
+      </a>
+
+       <nav class="nav">
+         <a href="/Gitab/" >خانه</a>
+         <a href="/Gitab/books/list-books" >کتاب‌ها</a>
+        <a href="/Gitab/translator.html" >مترجمین</a>
+         <a href="/Gitab/giter.html" >گیتر</a>
+       </nav>
+
+      <div class="nav-actions">
+        <button id="themeToggle" class="icon-btn theme-btn" data-icon="moon" aria-label="تغییر تم">
+          <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن">
+          <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک">
+        </button>
+
+        <a class="icon-btn" href="https://github.com/hheydarian/Gitab" target="_blank" title="GitHub">
+          <img src="/Gitab/icone/github.svg" alt="GitHub">
+        </a>
+
+        <!-- دکمه منو برای موبایل -->
+        <button class="menu-toggle" aria-label="منو">
+          <img src="/Gitab/icone/menu.svg" alt="menu">
+        </button>
+      </div>
+    </div>
+  </header>
+
+  
+  <main class="site-main book-page">
+    <h1>فصل ۵ – کار با دستورات (Working With Commands)</h1>
+<hr>
+<h2>مقدمه</h2>
+<p>تا اینجا یاد گرفته‌ایم که چطور در سیستم فایل حرکت کنیم و فایل‌ها و پوشه‌ها را بسازیم،<br>
+جابه‌جا کنیم و حذف کنیم.<br>
+اکنون وقت آن رسیده که سراغ خود «دستورات» برویم تا بفهمیم وقتی نامی را در خط فرمان وارد می‌کنیم<br>
+دقیقاً چه چیزی اجرا می‌شود و چگونه می‌توانیم اطلاعات بیشتری از آن به دست بیاوریم.</p>
+<p>در این فصل موضوعات زیر را بررسی می‌کنیم:</p>
+<ul>
+<li>انواع مختلف دستورات در لینوکس</li>
+<li>تشخیص نوع دستور با <code>type</code></li>
+<li>پیدا کردن محل قرارگیری فایل اجرایی با <code>type -p</code> و <code>which</code></li>
+<li>استفاده از راهنمای درون‌برنامه‌ای (<code>--help</code> و <code>help</code>)</li>
+<li>کار با صفحات راهنما (<code>man</code>) و ساختار آن‌ها</li>
+<li>جست‌وجوی صفحات راهنما با <code>whatis</code> و <code>apropos</code></li>
+<li>استفاده از مستندات <code>info</code></li>
+<li>ساختن نام‌های مستعار (<code>alias</code>)</li>
+<li>بهره‌گیری از تاریخچه‌ی دستورات (<code>history</code>)</li>
+</ul>
+<hr>
+<h2>دستور چیست؟</h2>
+<p>وقتی در خط فرمان یک «نام» وارد می‌کنیم، شل باید تشخیص دهد که منظور ما چیست و چه چیزی باید اجرا شود.<br>
+در لینوکس چهار نوع اصلی از دستورات وجود دارد:</p>
+<ol>
+<li><strong>برنامه‌های اجرایی (Executable Programs):</strong><br>
+می‌تواند یک برنامه‌ی کامپایل‌شده (مانند برنامه‌هایی که با C یا C++ ساخته شده‌اند)<br>
+یا یک اسکریپت باشد (اسکریپت‌های شل، پایتون، پرل و غیره).</li>
+<li><strong>دستورات داخلی شل (Shell Builtins):</strong><br>
+قابلیت‌هایی که جزئی از خود شل هستند، مانند <code>cd</code>، <code>alias</code>، <code>history</code> و … .</li>
+<li><strong>توابع شل (Shell Functions):</strong><br>
+مجموعه‌ای از دستورات که با یک نام تعریف شده‌اند و دقیقاً مانند یک دستور فراخوانی می‌شوند.</li>
+<li><strong>نام‌های مستعار (Aliases):</strong><br>
+نام‌های جایگزینی که برای یک دستور یا دنباله‌ای از دستورات تعریف می‌کنیم تا کوتاه‌تر و راحت‌تر قابل استفاده باشند.</li>
+</ol>
+<p>برای فهمیدن اینکه یک نام مشخص به کدام دسته تعلق دارد، از دستور <code>type</code> استفاده می‌کنیم.</p>
+<hr>
+<h2>تشخیص نوع دستور با <code>type</code></h2>
+<p>دستور <code>type</code> مشخص می‌کند که یک نام چگونه تفسیر می‌شود:</p>
+<pre class="hljs"><code><span class="hljs-built_in">type</span> <span class="hljs-built_in">type</span>
+<span class="hljs-built_in">type</span> <span class="hljs-built_in">ls</span>
+<span class="hljs-built_in">type</span> <span class="hljs-built_in">cp</span>
+<span class="hljs-built_in">type</span> <span class="hljs-built_in">mkdir</span>
+</code></pre>
+<p>خروجی <code>type</code> چیزی شبیه این خواهد بود:</p>
+<pre class="hljs"><code>type is a shell builtin
+ls is aliased to `ls --color=auto`
+cp is /bin/cp
+mkdir is /bin/mkdir
+</code></pre>
+<p>بنابراین می‌بینیم که <code>type</code> تشخیص می‌دهد آیا نام مورد نظر <strong>داخلی شل</strong> است،<br>
+یک <strong>alias</strong> است یا به فایل اجرایی مشخصی در سیستم اشاره می‌کند.</p>
+<p>گزینه‌های مفید <code>type</code> عبارتند از:</p>
+<ul>
+<li><code>type -t نام</code> — فقط نوع را برمی‌گرداند (مثلاً <code>builtin</code>، <code>file</code>، <code>alias</code>).</li>
+<li><code>type -p نام</code> — مسیر دقیق فایل اجرایی را نشان می‌دهد (در صورت وجود).</li>
+<li><code>type -a نام</code> — همه‌ی تطابق‌های ممکن را فهرست می‌کند (در صورتی که alias، builtin و فایل اجرایی هم‌نام داشته باشیم).</li>
+</ul>
+<hr>
+<h2>پیدا کردن برنامه با <code>which</code></h2>
+<p>دستور <code>which</code> مسیر کامل فایلی را که هنگام اجرای یک نام به کار می‌رود چاپ می‌کند.<br>
+این دستور فهرست مسیرهای موجود در متغیر محیطی <code>PATH</code> را جست‌وجو می‌کند:</p>
+<pre class="hljs"><code><span class="hljs-built_in">which</span> python
+<span class="hljs-built_in">which</span> gcc
+</code></pre>
+<p>اگر دستور مورد نظر در مسیر جست‌وجو وجود نداشته باشد، <code>which</code> پیامی مبنی بر یافت نشدن آن چاپ می‌کند.<br>
+هرچند <code>which</code> پرکاربرد است، به خاطر داشته باشید که <code>type -p</code> در اکثر موارد همان کار را انجام می‌دهد<br>
+و علاوه بر آن می‌تواند alias یا builtin بودن یک نام را هم تشخیص دهد.</p>
+<hr>
+<h2>استفاده از راهنمای درون‌برنامه‌ای (<code>help</code> و <code>--help</code>)</h2>
+<p>بسیاری از دستورات – به‌ویژه دستورات داخلی شل – مستندات کوتاهی دارند که با <code>help</code> نمایش داده می‌شود:</p>
+<pre class="hljs"><code><span class="hljs-built_in">help</span> <span class="hljs-built_in">cd</span>
+<span class="hljs-built_in">help</span> <span class="hljs-built_in">history</span>
+</code></pre>
+<p>علاوه بر این، اکثر برنامه‌ها با گزینه‌ی <code>--help</code> خلاصه‌ای از نحوه‌ی استفاده و مهم‌ترین گزینه‌های خود را نشان می‌دهند:</p>
+<pre class="hljs"><code><span class="hljs-built_in">ls</span> --<span class="hljs-built_in">help</span>
+grep --<span class="hljs-built_in">help</span>
+</code></pre>
+<p>این متن‌های کمکی معمولاً توضیح مختصری درباره‌ی هدف دستور، نگارش کلی آن و پرکاربردترین گزینه‌ها ارائه می‌دهند.<br>
+برای مطالعه‌ی دقیق‌تر باید به سراغ صفحات راهنما یا مستندات کامل‌تر برویم.</p>
+<hr>
+<h2>صفحات راهنما (<code>man</code>)</h2>
+<p>قدیمی‌ترین و همچنان پرارجاع‌ترین منبع برای یادگیری درباره‌ی دستورات، <strong>صفحات راهنما</strong> هستند که با دستور <code>man</code> نمایش داده می‌شوند:</p>
+<pre class="hljs"><code>man <span class="hljs-built_in">ls</span>
+man passwd
+</code></pre>
+<p>در محیط <code>man</code> از کلید <code>Space</code> برای رفتن به صفحه‌ی بعد، از <code>b</code> برای برگشت به صفحه‌ی قبل و از <code>q</code> برای خروج استفاده کنید.<br>
+کلید <code>/</code> امکان جست‌وجو در متن را فراهم می‌کند و کلید <code>n</code> برای رفتن به نتیجه‌ی بعدی جست‌وجو کاربرد دارد.</p>
+<p>هر صفحه‌ی <code>man</code> معمولاً دارای بخش‌های استاندارد زیر است:</p>
+<ul>
+<li><strong>NAME</strong> – نام دستور و توضیح یک خطی آن.</li>
+<li><strong>SYNOPSIS</strong> – نحوه‌ی فراخوانی دستور (گزینه‌ها و آرگومان‌ها).</li>
+<li><strong>DESCRIPTION</strong> – توضیح مفصل درباره‌ی عملکرد دستور و گزینه‌ها.</li>
+<li><strong>OPTIONS</strong> – شرح تک‌تک گزینه‌ها (در برخی صفحات).</li>
+<li><strong>EXAMPLES</strong> – نمونه‌هایی از نحوه‌ی استفاده (در صورت وجود).</li>
+<li><strong>SEE ALSO</strong> – ارجاع به صفحات مرتبط دیگر.</li>
+</ul>
+<p>صفحات راهنما بر اساس شماره‌ی بخش دسته‌بندی شده‌اند. رایج‌ترین بخش‌ها عبارت‌اند از:</p>
+<ol>
+<li>دستورات اجرایی و برنامه‌های کاربری</li>
+<li>فراخوانی‌های سیستمی هسته‌ی لینوکس</li>
+<li>فراخوانی‌های کتابخانه‌ای C</li>
+<li>فایل‌های ویژه، دستگاه‌ها و درایورها</li>
+<li>فرمت‌های فایل و قراردادها</li>
+<li>بازی‌ها و تفریحات</li>
+<li>موارد متفرقه</li>
+<li>ابزارهای مدیریتی سیستم</li>
+</ol>
+<p>اگر یک نام در چند بخش مختلف وجود داشته باشد، می‌توانیم با نوشتن شماره‌ی بخش، صفحه‌ی دقیق را مشخص کنیم:</p>
+<pre class="hljs"><code>man 5 passwd
+</code></pre>
+<p>در صورت نیاز به مشاهده‌ی نام تمام صفحات موجود برای یک دستور، از <code>man -k</code> (یا همان <code>apropos</code>) استفاده کنید.</p>
+<blockquote>
+<p><strong>نکته:</strong> فایل‌های صفحات راهنما در مسیرهایی مانند <code>/usr/share/man</code> ذخیره می‌شوند و با استفاده از برنامه‌ی <code>less</code> نمایش داده می‌شوند.<br>
+اگر صفحه‌ای باز نشد یا متن آن ناخوانا بود، بررسی کنید که بسته‌های مربوط به <code>man</code> در سیستم نصب شده باشند.</p>
+</blockquote>
+<hr>
+<h2>جست‌وجو در مستندات با <code>whatis</code> و <code>apropos</code></h2>
+<p>گاهی فقط ایده‌ای کلی از کاری که می‌خواهیم انجام دهیم در ذهن داریم ولی نام دستور را نمی‌دانیم.<br>
+دستورات <code>whatis</code> و <code>apropos</code> برای همین موقعیت‌ها طراحی شده‌اند:</p>
+<ul>
+<li><code>whatis نام</code> — توضیح یک خطی صفحه‌ی راهنمای نام‌برده را نمایش می‌دهد.</li>
+<li><code>apropos عبارت</code> — تمام صفحات راهنما را بر اساس عبارت جست‌وجو می‌کند (معادل <code>man -k عبارت</code>).</li>
+</ul>
+<pre class="hljs"><code>whatis passwd
+apropos network
+</code></pre>
+<p>برای آنکه نتایج کامل و به‌روز باشند، پایگاه داده‌ی <code>whatis</code> باید ساخته شده باشد.<br>
+اگر نتیجه‌ای نگرفتید، ممکن است لازم باشد (با دسترسی ریشه) دستور زیر را اجرا کنید:</p>
+<pre class="hljs"><code><span class="hljs-built_in">sudo</span> mandb
+</code></pre>
+<hr>
+<h2>سیستم مستندات <code>info</code></h2>
+<p>پروژه‌ی GNU علاوه بر صفحات <code>man</code>، مجموعه مستندات مفصل‌تری را با قالب <code>info</code> منتشر می‌کند.<br>
+برای خواندن آن‌ها از دستور <code>info</code> استفاده کنید:</p>
+<pre class="hljs"><code>info coreutils <span class="hljs-string">&#x27;ls invocation&#x27;</span>
+</code></pre>
+<p>محیط <code>info</code> ساختاری شبیه به یک مرورگر متنی دارد.<br>
+هر صفحه‌ی <code>info</code> از گره‌های (Node) متعددی تشکیل شده است که به وسیله‌ی پیوندها به هم وصل می‌شوند.<br>
+از کلیدهای <code>Tab</code> یا <code>n</code> و <code>p</code> برای حرکت بین پیوندها و گره‌های بعدی و قبلی استفاده کنید،<br>
+کلید <code>Enter</code> پیوند انتخاب‌شده را باز می‌کند و <code>q</code> از برنامه خارج می‌شود.<br>
+در بسیاری از ابزارهای GNU، مستندات <code>info</code> جزئیات بیشتری نسبت به صفحات <code>man</code> ارائه می‌کنند.</p>
+<hr>
+<h2>ساختن نام مستعار با <code>alias</code></h2>
+<p>اگر لازم است دستوری طولانی را بارها و بارها تکرار کنیم، می‌توانیم برای آن یک نام مستعار تعریف کنیم:</p>
+<pre class="hljs"><code><span class="hljs-built_in">alias</span> ll=<span class="hljs-string">&#x27;ls -alF&#x27;</span>
+<span class="hljs-built_in">alias</span> gs=<span class="hljs-string">&#x27;git status&#x27;</span>
+</code></pre>
+<p>بعد از تعریف، کافی است نام مستعار را تایپ کنیم تا دستور مربوطه اجرا شود.<br>
+برای مشاهده‌ی فهرست تمام نام‌های مستعار فعلی، دستور <code>alias</code> را بدون هیچ آرگومانی اجرا کنید.<br>
+برای حذف یک نام مستعار از <code>unalias</code> استفاده می‌شود:</p>
+<pre class="hljs"><code><span class="hljs-built_in">unalias</span> ll
+</code></pre>
+<blockquote>
+<p><strong>نکته:</strong> aliasهایی که در خط فرمان تعریف می‌کنیم فقط تا پایان نشست جاری (Session) باقی می‌مانند.<br>
+برای دائمی کردن آن‌ها، دستورهای <code>alias</code> را در فایل‌های راه‌اندازی شل مانند <code>~/.bashrc</code> قرار دهید.</p>
+</blockquote>
+<p>همچنین به خاطر داشته باشید که شل aliasها را تنها در ابتدای خط تشخیص می‌دهد؛<br>
+برای دور زدن یک alias موقتاً می‌توانید قبل از نام دستور یک بک‌اسلش (<code>\</code>) قرار دهید، مانند <code>\ls</code>.</p>
+<hr>
+<h2>تاریخچه‌ی دستورات (<code>history</code>)</h2>
+<p>شل دستورات اجراشده را در یک فایل تاریخچه ذخیره می‌کند (برای Bash معمولاً <code>~/.bash_history</code>).<br>
+با دستور <code>history</code> می‌توانیم این فهرست را ببینیم:</p>
+<pre class="hljs"><code><span class="hljs-built_in">history</span>
+<span class="hljs-built_in">history</span> 20
+</code></pre>
+<p>خروجی شامل شماره‌ی هر دستور است. برای اجرای مجدد دستوری مشخص می‌توانیم از <code>!</code> استفاده کنیم:</p>
+<ul>
+<li><code>!!</code> — آخرین دستور را دوباره اجرا می‌کند.</li>
+<li><code>!عدد</code> — دستور با شماره‌ی مشخص را اجرا می‌کند (مثلاً <code>!42</code>).</li>
+<li><code>!رشته</code> — آخرین دستوری را که با «رشته» شروع شده اجرا می‌کند (مثلاً <code>!ls</code>).</li>
+</ul>
+<p>برای ویرایش سریع دستور قبلی می‌توان از شکل جایگزین‌سازی استفاده کرد:</p>
+<pre class="hljs"><code>^old^new^
+</code></pre>
+<p>این ساختار آخرین دستور را یافته و نخستین وقوع <code>old</code> را با <code>new</code> جایگزین می‌کند.</p>
+<p>برای جست‌وجوی تعاملی در تاریخچه، <code>Ctrl</code> + <code>r</code> را فشار دهید و بخشی از دستور مورد نظر را بنویسید.<br>
+با فشردن دوباره‌ی <code>Ctrl</code> + <code>r</code> به نتیجه‌ی قبلی برمی‌گردید و با <code>Enter</code> یا کلید فلش راست می‌توانید دستور را اجرا یا ویرایش کنید.</p>
+<blockquote>
+<p><strong>نکته امنیتی:</strong> اگر به صورت تصادفی اطلاعات حساسی مانند رمزها را در خط فرمان وارد کرده‌اید، بهتر است آن‌ها را از تاریخچه پاک کنید.<br>
+با دستور <code>history -d شماره</code> می‌توانید یک خط مشخص را حذف کنید و با <code>history -c</code> کل تاریخچه‌ی نشست جاری را پاک کنید.<br>
+همچنین می‌توانید پس از پاک‌سازی تاریخچه‌ی نشست، فایل <code>~/.bash_history</code> را به صورت دستی ویرایش یا حذف کنید.</p>
+</blockquote>
+<p>در نهایت، ترکیب تاریخچه با aliasها و مستندات درون سیستم باعث می‌شود کار با خط فرمان روزبه‌روز سریع‌تر و مؤثرتر شود.</p>
+<hr>
+<h2>جمع‌بندی</h2>
+<p>در این فصل یاد گرفتیم که شل چگونه نام دستورات را تفسیر می‌کند و با استفاده از <code>type</code>، <code>which</code> و ابزارهای مستندسازی مختلف<br>
+می‌توانیم اطلاعات دقیقی از هر دستور به دست آوریم.<br>
+همچنین دیدیم چگونه با aliasها کارهای تکراری را ساده کنیم و با بهره‌گیری از تاریخچه‌ی شل، دستورات قبلی را به سرعت بازیابی کنیم.<br>
+در فصل بعد با <strong>تغییر مسیر ورودی و خروجی (I/O Redirection)</strong> آشنا خواهیم شد که یکی از قدرتمندترین قابلیت‌های خط فرمان است.</p>
+
+  </main>
+
+  <!-- فوتر مشترک -->
+  <footer class="footer">
+    <div class="container">
+      <p>
+        <img src="/Gitab/icone/copyright.svg" alt="کپی‌رایت" width="14" height="14"
+             style="vertical-align:middle;margin-inline:4px">
+        <span id="y"></span> Gitab — برای توسعه‌دهندگان
+      </p>
+    </div>
+  </footer>
+
+  <!-- سال و اسکریپت تغییر تم -->
+  <script>
+  (() => {
+    const root = document.documentElement;
+    const btn = document.getElementById('themeToggle');
+    const KEY = 'gitab-theme';
+
+    function updateTheme(s) {
+      root.setAttribute('data-theme', s);
+      const mode = s;  // فقط `dark` یا `light` خواهد بود
+      root.dataset.colorMode = mode;
+      btn.dataset.icon = mode === 'dark' ? 'moon' : 'sun';
+    }
+
+    // وضعیت تم ذخیره شده از localStorage
+    let saved = localStorage.getItem(KEY) || 'light'; // پیش‌فرض روشن
+    updateTheme(saved);
+
+    // تنظیم مجدد تم هنگام تغییر وضعیت دکمه
+    btn.addEventListener('click', () => {
+      const current = localStorage.getItem(KEY) || 'light';
+      const next = current === 'dark' ? 'light' : 'dark';  // فقط دو حالت: تاریک و روشن
+      localStorage.setItem(KEY, next);
+      updateTheme(next);
+    });
+
+    // هنگام بارگذاری صفحه
+    document.addEventListener('DOMContentLoaded', () => {
+      updateTheme(localStorage.getItem(KEY) || 'light');
+    });
+  })();
+</script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+
+  <script>
+  document.querySelectorAll('pre code').forEach(block => {
+    const btn = document.createElement('button');
+    btn.className = 'copy-btn';
+
+    const icon = document.createElement('img');
+    icon.src = "/Gitab/icone/copy.svg";
+    icon.alt = 'Copy';
+    btn.appendChild(icon);
+
+    block.parentNode.insertBefore(btn, block);
+
+    btn.addEventListener('click', async () => {
+      await navigator.clipboard.writeText(block.textContent);
+      btn.classList.add('copied');
+      setTimeout(() => btn.classList.remove('copied'), 1500);
+    });
+  });
+  </script>
+
+  <script>
+  document.body.dataset.page = window.location.pathname;
+
+  const menuBtn = document.querySelector(".menu-toggle");
+  const nav = document.querySelector(".nav");
+
+  if (menuBtn && nav) {
+    menuBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      nav.classList.toggle("show");
+    });
+
+    document.addEventListener("click", (e) => {
+      const clickedInsideNav = nav.contains(e.target);
+      const clickedMenuButton = menuBtn.contains(e.target);
+      if (!clickedInsideNav && !clickedMenuButton) {
+        nav.classList.remove("show");
+      }
+    });
+  }
+  </script>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+  <script>
+document.getElementById("openDonate").addEventListener("click", () => {
+  document.getElementById("donateModal").style.display = "block";
+});
+document.getElementById("closeDonate").addEventListener("click", () => {
+  document.getElementById("donateModal").style.display = "none";
+});
+document.querySelectorAll(".copy-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    navigator.clipboard.writeText(btn.dataset.copy);
+  
+    setTimeout(() => (btn.textContent = "کپی"), 2000);
+  });
+});
+</script>
+
+</body>
+</html>

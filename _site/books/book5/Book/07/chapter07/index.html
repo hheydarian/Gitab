@@ -1,0 +1,353 @@
+
+
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <link rel="icon" type="image/png" href="/Gitab/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>دیدن دنیا از نگاه شل</title>
+  <meta name="description" content="ترجمه‌های فارسی کتاب‌های فنی — سریع، مینیمال و قابل اتکا.">
+
+  <!-- استایل‌ها -->
+  <link rel="stylesheet" href="/Gitab/styles/main.css">
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+
+  <style>
+  @font-face {
+    font-family: 'Vazir';
+    src: url('/Gitab/fonts/Vazir-FD-WOL.ttf') format('truetype');
+    font-display: swap;
+  }
+  body {
+    font-family: 'Vazir', sans-serif;
+  }
+  </style>
+</head>
+
+<body>
+  <!-- هدر مشترک -->
+  <header class="header">
+    <div class="container nav-wrap">
+      <a href="/Gitab/" class="brand">
+        <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="26" height="26">
+        <span>Gitab</span>
+      </a>
+
+       <nav class="nav">
+         <a href="/Gitab/" >خانه</a>
+         <a href="/Gitab/books/list-books" >کتاب‌ها</a>
+        <a href="/Gitab/translator.html" >مترجمین</a>
+         <a href="/Gitab/giter.html" >گیتر</a>
+       </nav>
+
+      <div class="nav-actions">
+        <button id="themeToggle" class="icon-btn theme-btn" data-icon="moon" aria-label="تغییر تم">
+          <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن">
+          <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک">
+        </button>
+
+        <a class="icon-btn" href="https://github.com/hheydarian/Gitab" target="_blank" title="GitHub">
+          <img src="/Gitab/icone/github.svg" alt="GitHub">
+        </a>
+
+        <!-- دکمه منو برای موبایل -->
+        <button class="menu-toggle" aria-label="منو">
+          <img src="/Gitab/icone/menu.svg" alt="menu">
+        </button>
+      </div>
+    </div>
+  </header>
+
+  
+  <main class="site-main book-page">
+    <h1>فصل ۷ – دیدن دنیا از نگاه شل</h1>
+<hr>
+<h2>مقدمه</h2>
+<p>شل هنگام اجرای دستورات ما فقط آن‌ها را «همان‌طور که تایپ کرده‌ایم» اجرا نمی‌کند.<br>
+پیش از آن‌که برنامه‌ی مورد نظر فراخوانی شود، شل رشته‌ی ورودی را بررسی می‌کند، بخش‌هایی از آن را گسترش می‌دهد، الگوها را با نام فایل‌ها تطبیق می‌دهد و متن نهایی را آماده می‌کند.<br>
+درک این فرایند باعث می‌شود بتوانیم قدرت واقعی خط فرمان را آزاد کنیم و از غافل‌گیر شدن توسط رفتارهای ظاهراً عجیب جلوگیری کنیم.</p>
+<p>در این فصل می‌خوانیم:</p>
+<ul>
+<li>گسترش نام مسیرها (wildcards) چگونه کار می‌کند و از چه نمادهایی پشتیبانی می‌شود.</li>
+<li>چگونه می‌توانیم با گسترش موجک (<code>~</code>) به پوشه‌های خانگی خود و دیگران دسترسی سریع داشته باشیم.</li>
+<li>روش‌های گسترش محاسباتی، پارامترها و آکولادی برای ساخت رشته‌های پیچیده.</li>
+<li>جایگزینی خروجی دستورات درون خطوط دیگر با «جانشینی فرمان» (<code>command substitution</code>).</li>
+<li>قواعد نقل‌قول و کاراکتر فرار برای کنترل دقیق گسترش‌ها.</li>
+</ul>
+<hr>
+<h2>آشنایی با گسترش‌ها</h2>
+<p>در مستندات bash واژه‌ی «expansion» برای مراحلی استفاده می‌شود که طی آن شل ورودی کاربر را گسترش می‌دهد و سپس نتیجه‌ی نهایی را به برنامه تحویل می‌دهد.<br>
+این فرایند معمولاً در پشت صحنه رخ می‌دهد و تا زمانی که بدانیم شل چگونه دنیا را می‌بیند، دستورات ما دقیقاً همان کاری را انجام خواهند داد که انتظار داریم.</p>
+<p>برای مثال، وقتی می‌نویسیم:</p>
+<pre class="hljs"><code><span class="hljs-built_in">echo</span> *
+</code></pre>
+<p>ما واقعاً از برنامه‌ی <code>echo</code> نمی‌خواهیم ستاره را چاپ کند؛ در عوض bash پیش از اجرای <code>echo</code>، الگوی <code>*</code> را با همه‌ی فایل‌های موجود در پوشه‌ی جاری جایگزین می‌کند و سپس نام‌ها را به <code>echo</code> تحویل می‌دهد.</p>
+<hr>
+<h2>گسترش نام مسیر (Pathname Expansion)</h2>
+<p>گسترش نام مسیر که معمولاً «وايلدکارد» یا «الگو» هم نامیده می‌شود، برای یافتن مجموعه‌ای از فایل‌ها یا پوشه‌ها با نام‌های مشابه استفاده می‌شود.<br>
+رایج‌ترین نمادها عبارت‌اند از:</p>
+<table>
+<thead>
+<tr>
+<th>نماد</th>
+<th>معنی</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>*</code></td>
+<td>با هر رشته‌ای (حتی رشته‌ی خالی) مطابقت می‌کند.</td>
+</tr>
+<tr>
+<td><code>?</code></td>
+<td>دقیقاً با یک کاراکتر دلخواه تطابق دارد.</td>
+</tr>
+<tr>
+<td><code>[abc]</code></td>
+<td>با یکی از کاراکترهای موجود در براکت مطابقت می‌کند.</td>
+</tr>
+<tr>
+<td><code>[a-z]</code></td>
+<td>با هر کاراکتر در محدوده‌ی مشخص (مثلاً <code>a</code> تا <code>z</code>) تطابق دارد.</td>
+</tr>
+<tr>
+<td><code>[!abc]</code> یا <code>[^abc]</code></td>
+<td>با هر کاراکتری به جز آن‌هایی که ذکر شده‌اند مطابقت دارد.</td>
+</tr>
+</tbody>
+</table>
+<p>مثال‌ها:</p>
+<pre class="hljs"><code><span class="hljs-built_in">ls</span> D*          <span class="hljs-comment"># همه‌ی فایل‌هایی که با D آغاز می‌شوند.</span>
+<span class="hljs-built_in">ls</span> /etc/pas?   <span class="hljs-comment"># نام‌هایی مانند /etc/pass و /etc/past را امتحان می‌کند.</span>
+<span class="hljs-built_in">ls</span> /usr/bin/[a-z]*
+<span class="hljs-built_in">ls</span> *.[ch]      <span class="hljs-comment"># فایل‌های با پسوند c یا h</span>
+<span class="hljs-built_in">ls</span> /etc/[!a-z]*
+</code></pre>
+<p>به یاد داشته باشید که گسترش نام مسیر فقط در صورتی رخ می‌دهد که الگویی حداقل با یک نام موجود تطابق داشته باشد.<br>
+اگر هیچ چیزی پیدا نشود، بسته به تنظیمات شل یا خطا دریافت می‌کنیم یا الگو دست‌نخورده باقی می‌ماند.</p>
+<h3>فایل‌های مخفی</h3>
+<p>فایل‌هایی که با نقطه (<code>.</code>) آغاز می‌شوند، در لیست‌های معمول <code>ls</code> نمایش داده نمی‌شوند و <code>*</code> هم آن‌ها را شامل نمی‌شود.<br>
+برای افزودن آن‌ها باید نقطه را به طور صریح در الگو بیاوریم:</p>
+<pre class="hljs"><code><span class="hljs-built_in">ls</span> -a .*       <span class="hljs-comment"># همه‌ی فایل‌های مخفی</span>
+<span class="hljs-built_in">ls</span> .??*        <span class="hljs-comment"># فایل‌های مخفی با دست‌کم دو کاراکتر پس از نقطه</span>
+</code></pre>
+<h3>الگوهای چندگانه و مرتب‌سازی</h3>
+<p>گسترش‌های متعدد می‌توانند در یک دستور ترکیب شوند:</p>
+<pre class="hljs"><code><span class="hljs-built_in">ls</span> /etc/{host,passwd,issue}*
+</code></pre>
+<p>پس از گسترش، bash آرگومان‌ها را بر اساس ترتیب الفبایی مرتب می‌کند و سپس نتیجه را به برنامه‌ی هدف تحویل می‌دهد.</p>
+<hr>
+<h2>گسترش موجک (Tilde Expansion)</h2>
+<p>کاراکتر <code>~</code> پیش از اجرای دستور جایگزین مسیر خانه‌ی کاربر می‌شود:</p>
+<pre class="hljs"><code><span class="hljs-built_in">echo</span> ~        <span class="hljs-comment"># معمولاً /home/username یا /Users/username</span>
+</code></pre>
+<p>اگر پس از <code>~</code> نام کاربری دیگری بیاید، مسیر خانه‌ی همان کاربر جایگزین می‌شود (مشروط به این‌که سیستم آن کاربر را بشناسد):</p>
+<pre class="hljs"><code><span class="hljs-built_in">echo</span> ~root    <span class="hljs-comment"># /root</span>
+</code></pre>
+<p>همچنین می‌توان از نگارش‌هایی مانند <code>~+</code> (پوشه‌ی جاری) و <code>~-</code> (پوشه‌ی قبلی) استفاده کرد.</p>
+<hr>
+<h2>گسترش حسابی (Arithmetic Expansion)</h2>
+<p>bash می‌تواند عبارات عددی را ارزیابی کند. عبارت را درون <code>$(( ... ))</code> قرار دهید:</p>
+<pre class="hljs"><code><span class="hljs-built_in">echo</span> $((<span class="hljs-number">2</span> + <span class="hljs-number">2</span>))
+result=$(( (<span class="hljs-number">5</span> * <span class="hljs-number">3</span>) + <span class="hljs-number">7</span> ))
+</code></pre>
+<p>عملگرهای استاندارد ریاضی (جمع، تفریق، ضرب، تقسیم و باقیمانده) و بسیاری از عملگرهای C-مانند (افزایش، کاهش، بیتی و منطقی) پشتیبانی می‌شوند.<br>
+به طور پیش‌فرض محاسبات در مبنای ده انجام می‌شود، ولی می‌توان با نگارش <code>base#number</code> از مبناهای دیگر استفاده کرد:</p>
+<pre class="hljs"><code><span class="hljs-built_in">echo</span> $((<span class="hljs-number">16</span>#FF))   <span class="hljs-comment"># تبدیل 0xFF به دسیمال</span>
+</code></pre>
+<hr>
+<h2>گسترش پارامتر (Parameter Expansion)</h2>
+<p>هرگاه نام متغیری را با <code>$</code> فراخوانی کنیم، bash مقدارش را جایگزین می‌کند:</p>
+<pre class="hljs"><code>name=<span class="hljs-string">&quot;Sara&quot;</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;سلام <span class="hljs-variable">$name</span>!&quot;</span>
+</code></pre>
+<p>برای جلوگیری از ابهام یا استفاده از قابلیت‌های پیشرفته باید از آکولاد <code>{}</code> کمک بگیریم:</p>
+<pre class="hljs"><code><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">${name}</span>‌جان&quot;</span>
+</code></pre>
+<p>در کنار استفاده‌ی معمول می‌توانیم رفتارهای پیش‌فرضی تعیین کنیم:</p>
+<pre class="hljs"><code><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">${username:-guest}</span>&quot;</span>   <span class="hljs-comment"># اگر username تهی یا تعریف نشده باشد، guest چاپ می‌شود.</span>
+length=<span class="hljs-variable">${#name}</span>              <span class="hljs-comment"># طول رشته</span>
+
+</code></pre>
+<p>bash ده‌ها نگارش دیگر برای برش، جایگزینی و حذف زیررشته‌ها در اختیارمان می‌گذارد.</p>
+<hr>
+<h2>گسترش آکولادی (Brace Expansion)</h2>
+<p>Brace Expansion یا «گسترش آکولادی» روشی سریع برای تولید رشته‌های تکراری است.<br>
+الگو به شکل <code>prefix{item1,item2,...}suffix</code> نوشته می‌شود و bash آن را به همه‌ی ترکیب‌های ممکن تبدیل می‌کند:</p>
+<pre class="hljs"><code><span class="hljs-built_in">echo</span> Front-{A,B,C}-Back
+<span class="hljs-comment"># خروجی: Front-A-Back Front-B-Back Front-C-Back</span>
+</code></pre>
+<p>می‌توان بازه‌های عددی یا حرفی تعریف کرد:</p>
+<pre class="hljs"><code><span class="hljs-built_in">echo</span> file{1..3}.txt
+<span class="hljs-comment"># file1.txt file2.txt file3.txt</span>
+
+<span class="hljs-built_in">echo</span> {a..f}
+</code></pre>
+<p>حتی گام (step) هم قابل تنظیم است:</p>
+<pre class="hljs"><code><span class="hljs-built_in">echo</span> {0..10..2}
+</code></pre>
+<p>این ویژگی برای ایجاد پوشه‌ها یا فایل‌های چندگانه بسیار مفید است:</p>
+<pre class="hljs"><code><span class="hljs-built_in">mkdir</span> -p project/{src,docs,tests}
+</code></pre>
+<p>توجه کنید که برخلاف گسترش نام مسیر، brace expansion حتی اگر موردی در سیستم وجود نداشته باشد باز هم رشته‌ها را تولید می‌کند.</p>
+<hr>
+<h2>جانشینی فرمان (Command Substitution)</h2>
+<p>گاهی لازم است خروجی یک دستور را به عنوان ورودی دستور دیگر استفاده کنیم.<br>
+با قرار دادن فرمان درون <code>$( ... )</code>، bash ابتدا آن را اجرا می‌کند و سپس خروجی‌اش را جایگزین می‌کند:</p>
+<pre class="hljs"><code>files=$(<span class="hljs-built_in">ls</span> *.txt)
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;فایل‌های متنی: <span class="hljs-variable">$files</span>&quot;</span>
+</code></pre>
+<p>نسخه‌ی قدیمی‌تر این قابلیت استفاده از بک‌تیک <code>`command`</code> است، اما شکل <code>$(command)</code> خواناتر است و می‌تواند تو در تو شود:</p>
+<pre class="hljs"><code><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;امروز <span class="hljs-subst">$(date +%A)</span> است.&quot;</span>
+</code></pre>
+<hr>
+<h2>نقل‌قول‌ها و کاراکتر فرار</h2>
+<p>چون گسترش‌ها بسیار قدرتمند هستند، گاهی لازم داریم آن‌ها را کنترل کنیم.<br>
+Bash سه سازوکار اصلی برای این کار دارد: بک‌اسلش (<code>\</code>)، نقل‌قول دوتایی (<code>&quot;&quot;</code>) و نقل‌قول تک‌تایی (<code>''</code>).</p>
+<h3>بک‌اسلش</h3>
+<p>قرار دادن <code>\</code> پیش از یک کاراکتر باعث می‌شود همان کاراکتر بدون تفسیر خاصی در نظر گرفته شود.<br>
+مثلاً برای چاپ یک ستاره‌ی واقعی:</p>
+<pre class="hljs"><code><span class="hljs-built_in">echo</span> \*
+</code></pre>
+<h3>نقل‌قول دوتایی</h3>
+<p>هر چیزی که درون <code>&quot;...&quot;</code> قرار گیرد، از گسترش نام مسیر محافظت می‌شود؛<br>
+با این حال گسترش پارامتر، جانشینی فرمان و گسترش حسابی همچنان اجرا می‌شوند:</p>
+<pre class="hljs"><code>name=<span class="hljs-string">&quot;Sara&quot;</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;سلام، <span class="hljs-variable">$name</span>! امروز <span class="hljs-subst">$(date +%F)</span> است.&quot;</span>
+</code></pre>
+<h3>نقل‌قول تک‌تایی</h3>
+<p>قرار دادن متن داخل <code>'...'</code> تمام گسترش‌ها (به جز جدا شدن خود نقل‌قول‌ها) را غیرفعال می‌کند.<br>
+از این روش برای نمایش دقیق رشته‌ها استفاده کنید:</p>
+<pre class="hljs"><code><span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;$name literally stays $name&#x27;</span>
+</code></pre>
+<h3>نقل‌قول‌های درون هم</h3>
+<p>اگر لازم است درون نقل‌قول دوتایی از نقل‌قول دوتایی دیگر استفاده کنید، باید آن را با بک‌اسلش فرار دهید یا از ترکیب روش‌ها کمک بگیرید:</p>
+<pre class="hljs"><code><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;او گفت \&quot;سلام\&quot; و رفت.&quot;</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;It&#x27;</span>\&#x27;<span class="hljs-string">&#x27;s done.&#x27;</span>
+</code></pre>
+<hr>
+<h2>خلاصه</h2>
+<ul>
+<li>شل پیش از اجرای هر دستور، رشته‌ی ورودی را گسترش می‌دهد؛ این گسترش‌ها شامل الگوهای فایل، متغیرها، محاسبات و جانشینی فرمان می‌شوند.</li>
+<li>گسترش نام مسیر با نمادهایی مانند <code>*</code>، <code>?</code> و <code>[]</code> امکان کار با گروه بزرگی از فایل‌ها را فراهم می‌کند.</li>
+<li>گسترش موجک میان‌بُری برای مسیرهای خانگی است و با ترکیب آن با نام کاربر می‌توانیم به پوشه‌های دیگران دسترسی سریع داشته باشیم.</li>
+<li>گسترش‌های حسابی، پارامتری و آکولادی راهی برای تولید رشته‌های پیچیده و محاسبه‌ی مقادیر عددی درون خط فرمان هستند.</li>
+<li>جانشینی فرمان خروجی یک برنامه را جایگزین رشته‌ی درجایی دیگر می‌کند و در کنار نقل‌قول‌ها باید با دقت مدیریت شود.</li>
+<li>با استفاده‌ی صحیح از نقل‌قول‌ها و کاراکتر فرار می‌توانیم کنترل کامل روی گسترش‌ها داشته باشیم و از رفتارهای ناخواسته جلوگیری کنیم.</li>
+</ul>
+
+  </main>
+
+  <!-- فوتر مشترک -->
+  <footer class="footer">
+    <div class="container">
+      <p>
+        <img src="/Gitab/icone/copyright.svg" alt="کپی‌رایت" width="14" height="14"
+             style="vertical-align:middle;margin-inline:4px">
+        <span id="y"></span> Gitab — برای توسعه‌دهندگان
+      </p>
+    </div>
+  </footer>
+
+  <!-- سال و اسکریپت تغییر تم -->
+  <script>
+  (() => {
+    const root = document.documentElement;
+    const btn = document.getElementById('themeToggle');
+    const KEY = 'gitab-theme';
+
+    function updateTheme(s) {
+      root.setAttribute('data-theme', s);
+      const mode = s;  // فقط `dark` یا `light` خواهد بود
+      root.dataset.colorMode = mode;
+      btn.dataset.icon = mode === 'dark' ? 'moon' : 'sun';
+    }
+
+    // وضعیت تم ذخیره شده از localStorage
+    let saved = localStorage.getItem(KEY) || 'light'; // پیش‌فرض روشن
+    updateTheme(saved);
+
+    // تنظیم مجدد تم هنگام تغییر وضعیت دکمه
+    btn.addEventListener('click', () => {
+      const current = localStorage.getItem(KEY) || 'light';
+      const next = current === 'dark' ? 'light' : 'dark';  // فقط دو حالت: تاریک و روشن
+      localStorage.setItem(KEY, next);
+      updateTheme(next);
+    });
+
+    // هنگام بارگذاری صفحه
+    document.addEventListener('DOMContentLoaded', () => {
+      updateTheme(localStorage.getItem(KEY) || 'light');
+    });
+  })();
+</script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+
+  <script>
+  document.querySelectorAll('pre code').forEach(block => {
+    const btn = document.createElement('button');
+    btn.className = 'copy-btn';
+
+    const icon = document.createElement('img');
+    icon.src = "/Gitab/icone/copy.svg";
+    icon.alt = 'Copy';
+    btn.appendChild(icon);
+
+    block.parentNode.insertBefore(btn, block);
+
+    btn.addEventListener('click', async () => {
+      await navigator.clipboard.writeText(block.textContent);
+      btn.classList.add('copied');
+      setTimeout(() => btn.classList.remove('copied'), 1500);
+    });
+  });
+  </script>
+
+  <script>
+  document.body.dataset.page = window.location.pathname;
+
+  const menuBtn = document.querySelector(".menu-toggle");
+  const nav = document.querySelector(".nav");
+
+  if (menuBtn && nav) {
+    menuBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      nav.classList.toggle("show");
+    });
+
+    document.addEventListener("click", (e) => {
+      const clickedInsideNav = nav.contains(e.target);
+      const clickedMenuButton = menuBtn.contains(e.target);
+      if (!clickedInsideNav && !clickedMenuButton) {
+        nav.classList.remove("show");
+      }
+    });
+  }
+  </script>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+  <script>
+document.getElementById("openDonate").addEventListener("click", () => {
+  document.getElementById("donateModal").style.display = "block";
+});
+document.getElementById("closeDonate").addEventListener("click", () => {
+  document.getElementById("donateModal").style.display = "none";
+});
+document.querySelectorAll(".copy-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    navigator.clipboard.writeText(btn.dataset.copy);
+  
+    setTimeout(() => (btn.textContent = "کپی"), 2000);
+  });
+});
+</script>
+
+</body>
+</html>

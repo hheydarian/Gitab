@@ -1,0 +1,310 @@
+
+
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <link rel="icon" type="image/png" href="/Gitab/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>تغییر مسیر ورودی و خروجی</title>
+  <meta name="description" content="ترجمه‌های فارسی کتاب‌های فنی — سریع، مینیمال و قابل اتکا.">
+
+  <!-- استایل‌ها -->
+  <link rel="stylesheet" href="/Gitab/styles/main.css">
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+
+  <style>
+  @font-face {
+    font-family: 'Vazir';
+    src: url('/Gitab/fonts/Vazir-FD-WOL.ttf') format('truetype');
+    font-display: swap;
+  }
+  body {
+    font-family: 'Vazir', sans-serif;
+  }
+  </style>
+</head>
+
+<body>
+  <!-- هدر مشترک -->
+  <header class="header">
+    <div class="container nav-wrap">
+      <a href="/Gitab/" class="brand">
+        <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="26" height="26">
+        <span>Gitab</span>
+      </a>
+
+       <nav class="nav">
+         <a href="/Gitab/" >خانه</a>
+         <a href="/Gitab/books/list-books" >کتاب‌ها</a>
+        <a href="/Gitab/translator.html" >مترجمین</a>
+         <a href="/Gitab/giter.html" >گیتر</a>
+       </nav>
+
+      <div class="nav-actions">
+        <button id="themeToggle" class="icon-btn theme-btn" data-icon="moon" aria-label="تغییر تم">
+          <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن">
+          <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک">
+        </button>
+
+        <a class="icon-btn" href="https://github.com/hheydarian/Gitab" target="_blank" title="GitHub">
+          <img src="/Gitab/icone/github.svg" alt="GitHub">
+        </a>
+
+        <!-- دکمه منو برای موبایل -->
+        <button class="menu-toggle" aria-label="منو">
+          <img src="/Gitab/icone/menu.svg" alt="menu">
+        </button>
+      </div>
+    </div>
+  </header>
+
+  
+  <main class="site-main book-page">
+    <h1>فصل ۶ – تغییر مسیر ورودی و خروجی (Redirection)</h1>
+<hr>
+<h2>مقدمه</h2>
+<p>تقریباً تمام دستورات خط فرمان داده‌هایی تولید می‌کنند یا داده‌هایی مصرف می‌کنند.<br>
+به طور پیش‌فرض خروجی آن‌ها روی صفحه ظاهر می‌شود و هر ورودی مورد نیاز از صفحه‌کلید خوانده می‌شود.<br>
+اما شل این امکان را فراهم می‌کند که جریان ورود و خروج داده‌ها را دقیقاً همان‌طور که می‌خواهیم هدایت کنیم؛<br>
+می‌توانیم نتیجه‌ی دستورات را در فایل‌ها ذخیره کنیم، خروجی چند دستور را به هم متصل کنیم، یا حتی<br>
+یک فرمان را به عنوان منبع داده‌ی فرمان دیگر قرار دهیم.</p>
+<p>در این فصل به مباحث زیر می‌پردازیم:</p>
+<ul>
+<li>جریان‌های استاندارد داده در یونیکس/لینوکس</li>
+<li>تغییر مسیر خروجی استاندارد با <code>&gt;</code> و <code>&gt;&gt;</code></li>
+<li>مدیریت خطاها با <code>2&gt;</code> و ترکیب جریان‌ها</li>
+<li>جلوگیری از رونویسی ناخواسته با <code>noclobber</code></li>
+<li>خواندن ورودی از فایل‌ها با <code>&lt;</code></li>
+<li>استفاده از <code>cat</code> برای ترکیب و ایجاد فایل‌ها</li>
+<li>ساخت لوله‌های پردازش (<code>pipeline</code>) با <code>|</code></li>
+<li>آشنایی با فیلترهای متداول مانند <code>sort</code>، <code>uniq</code>، <code>wc</code>، <code>grep</code>، <code>fmt</code>، <code>pr</code>، <code>head</code> و <code>tail</code></li>
+<li>ذخیره و مشاهده‌ی هم‌زمان خروجی با <code>tee</code></li>
+</ul>
+<hr>
+<h2>ورودی و خروجی استاندارد</h2>
+<p>هر دستور حداقل با سه «جریان» (stream) سروکار دارد:</p>
+<ol>
+<li><strong>ورودی استاندارد (Standard Input یا <code>stdin</code>):</strong> جریان داده‌ای که دستور از آن می‌خواند. به طور پیش‌فرض صفحه‌کلید است.</li>
+<li><strong>خروجی استاندارد (Standard Output یا <code>stdout</code>):</strong> جریان داده‌ای که دستور نتایج معمول خود را در آن می‌نویسد. پیش‌فرض نمایشگر (ترمینال) است.</li>
+<li><strong>خروجی خطای استاندارد (Standard Error یا <code>stderr</code>):</strong> جریان جداگانه‌ای برای پیام‌های خطا و هشدارها. آن هم پیش‌فرض روی نمایشگر است.</li>
+</ol>
+<p>در پشت صحنه، سیستم‌عامل برای این جریان‌ها شماره‌هایی در نظر می‌گیرد که «توصیف‌گر فایل» (file descriptor) نام دارند:</p>
+<ul>
+<li><code>0</code> برای <code>stdin</code></li>
+<li><code>1</code> برای <code>stdout</code></li>
+<li><code>2</code> برای <code>stderr</code></li>
+</ul>
+<p>شناخت این مفاهیم ضروری است، زیرا هنگام تغییر مسیر مشخص می‌کنیم کدام یک از این جریان‌ها باید به مقصد دیگری هدایت شود.</p>
+<hr>
+<h2>تغییر مسیر خروجی استاندارد</h2>
+<p>برای هدایت خروجی معمول یک دستور به داخل فایل از عملگر <code>&gt;</code> استفاده می‌کنیم:</p>
+<pre class="hljs"><code><span class="hljs-built_in">ls</span> &gt; ls-output.txt
+</code></pre>
+<p>این دستور خروجی <code>ls</code> را در فایل <code>ls-output.txt</code> ذخیره می‌کند. اگر فایل از قبل وجود داشته باشد <strong>جایگزین</strong> می‌شود.<br>
+در صورت نیاز به افزودن خروجی جدید به انتهای فایل بدون حذف محتوا از <code>&gt;&gt;</code> کمک می‌گیریم:</p>
+<pre class="hljs"><code><span class="hljs-built_in">ls</span> &gt;&gt; ls-output.txt
+</code></pre>
+<p>گاهی می‌خواهیم خروجی را دور بریزیم. دستگاه ویژه‌ای به نام <code>/dev/null</code> وجود دارد که هر داده‌ای به آن ارسال شود ناپدید می‌گردد:</p>
+<pre class="hljs"><code><span class="hljs-built_in">ls</span> -l /usr/bin &gt; /dev/null
+</code></pre>
+<p>این روش برای ساکت‌کردن برنامه‌ها هنگام اجرای اسکریپت‌ها مفید است.</p>
+<h3>تغییر مسیر پیام‌های خطا</h3>
+<p>اگر دستوری هم خروجی معمول و هم پیام خطا تولید کند، می‌توانیم آن‌ها را جداگانه مدیریت کنیم. برای ارسال <code>stderr</code> به فایل از <code>2&gt;</code> استفاده می‌کنیم:</p>
+<pre class="hljs"><code><span class="hljs-built_in">ls</span> -l /not-here 2&gt; ls-errors.txt
+</code></pre>
+<p>برای افزودن پیام‌های خطا به انتهای فایل موجود:</p>
+<pre class="hljs"><code><span class="hljs-built_in">ls</span> -l /not-here 2&gt;&gt; ls-errors.txt
+</code></pre>
+<p>ارسال هم‌زمان <code>stdout</code> و <code>stderr</code> به یک فایل نیز ممکن است. یکی از روش‌های رایج استفاده از <code>&amp;&gt;</code> است:</p>
+<pre class="hljs"><code><span class="hljs-built_in">ls</span> -l /usr/bin &amp;&gt; ls-full.log
+</code></pre>
+<p>یا می‌توانیم <code>stderr</code> را به <code>stdout</code> هدایت کنیم و سپس آن‌ها را با هم تغییر مسیر دهیم:</p>
+<pre class="hljs"><code><span class="hljs-built_in">ls</span> -l /usr/bin &gt; ls-full.log 2&gt;&amp;1
+</code></pre>
+<p>در این مثال ابتدا <code>stdout</code> به فایل می‌رود و سپس <code>stderr</code> به همان مقصد هدایت می‌شود.</p>
+<h3>محافظت در برابر رونویسی ناخواسته</h3>
+<p>گاهی فراموش می‌کنیم فایلی وجود دارد و با <code>&gt;</code> آن را از بین می‌بریم. برای جلوگیری از این اتفاق، شل bash گزینه‌ای به نام <code>noclobber</code> دارد:</p>
+<pre class="hljs"><code><span class="hljs-built_in">set</span> -o noclobber
+<span class="hljs-built_in">ls</span> &gt; ls-output.txt <span class="hljs-comment"># اگر فایل وجود داشته باشد خطا می‌دهد.</span>
+</code></pre>
+<p>برای اجازه‌ی رونویسی موقتی بدون غیرفعال کردن <code>noclobber</code> می‌توان از <code>&gt;|</code> استفاده کرد:</p>
+<pre class="hljs"><code><span class="hljs-built_in">ls</span> &gt;| ls-output.txt
+</code></pre>
+<p>برای بازگشت به رفتار پیش‌فرض و اجازه‌ی رونویسی کافی است <code>noclobber</code> را خاموش کنیم:</p>
+<pre class="hljs"><code><span class="hljs-built_in">set</span> +o noclobber
+</code></pre>
+<hr>
+<h2>تغییر مسیر ورودی استاندارد</h2>
+<p>همان‌طور که خروجی را هدایت می‌کنیم، می‌توانیم ورودی یک دستور را هم از فایل بگیریم. عملگر <code>&lt;</code> این کار را انجام می‌دهد:</p>
+<pre class="hljs"><code><span class="hljs-built_in">sort</span> &lt; unsorted-list.txt
+</code></pre>
+<p>در این مثال، <code>sort</code> داده‌ها را به جای صفحه‌کلید از فایل می‌خواند و نتیجه را روی نمایشگر می‌نویسد.</p>
+<h3>استفاده‌های کاربردی از <code>cat</code></h3>
+<p>دستور <code>cat</code> (مخفف <em>concatenate</em>) برای نمایش محتویات فایل‌ها و اتصال آن‌ها استفاده می‌شود:</p>
+<pre class="hljs"><code><span class="hljs-built_in">cat</span> ls-output.txt
+</code></pre>
+<p>با ترکیب <code>cat</code> و تغییر مسیر خروجی می‌توانیم چند فایل را در یکی ادغام کنیم:</p>
+<pre class="hljs"><code><span class="hljs-built_in">cat</span> part1.txt part2.txt &gt; whole.txt
+</code></pre>
+<p>علاوه بر این می‌توانیم با اجرای <code>cat &gt; note.txt</code> فایلی تازه بسازیم و متن دلخواه را تایپ کنیم؛ فشردن کلیدهای Ctrl+D (در لینوکس) پایان ورودی را اعلام می‌کند. برای افزودن متن جدید به همان فایل نیز می‌توانیم از <code>cat &gt;&gt; note.txt</code> استفاده کنیم.</p>
+<p>یا خروجی یک دستور را به عنوان ورودی <code>cat</code> بدهیم و نتیجه را ثبت کنیم:</p>
+<pre class="hljs"><code><span class="hljs-built_in">cat</span> &lt;&lt;<span class="hljs-string">MARKER &gt; memo.txt
+لطفاً گزارش را تا سه‌شنبه ارسال کنید.
+با تشکر
+MARKER</span>
+</code></pre>
+<p>در مثال بالا، از «تغییر مسیر درون‌خطی» (here document) استفاده کردیم؛ هر چیزی بین <code>MARKER</code> اول و دوم نوشته شود، به عنوان ورودی <code>cat</code> در نظر گرفته می‌شود.</p>
+<hr>
+<h2>لوله‌کشی داده‌ها با <code>|</code></h2>
+<p>علاوه بر فایل‌ها، می‌توان خروجی یک دستور را مستقیماً به ورودی دستور بعدی وصل کرد. عملگر <code>|</code> یا «pipe» این کار را انجام می‌دهد:</p>
+<pre class="hljs"><code><span class="hljs-built_in">ls</span> -l /usr/bin | less
+</code></pre>
+<p>در اینجا، <code>ls</code> خروجی مفصل خود را تولید می‌کند و <code>less</code> همان خروجی را صفحه‌به‌صفحه نمایش می‌دهد. زنجیره‌های طولانی‌تری هم می‌توانیم بسازیم:</p>
+<pre class="hljs"><code><span class="hljs-built_in">cat</span> /etc/passwd | <span class="hljs-built_in">sort</span> | less
+</code></pre>
+<p>هر فرمانی که داده را از ورودی استاندارد می‌خواند و روی خروجی استاندارد می‌نویسد، در لوله‌ها قابل استفاده است.</p>
+<hr>
+<h2>فیلترهای پرکاربرد</h2>
+<p><strong>فیلتر</strong> به دستوری گفته می‌شود که داده را از ورودی استاندارد می‌گیرد، پردازش می‌کند و نتیجه را روی خروجی استاندارد می‌گذارد. چند نمونه‌ی مهم عبارتند از:</p>
+<ul>
+<li><code>sort</code> – داده‌ها را بر اساس ترتیب الفبایی یا با گزینه‌های دیگر مرتب می‌کند.</li>
+<li><code>uniq</code> – خطوط تکراری را حذف یا تعداد تکرارها را گزارش می‌دهد (معمولاً بعد از <code>sort</code> استفاده می‌شود).</li>
+<li><code>wc</code> – تعداد خطوط، کلمات و بایت‌های ورودی را می‌شمارد. گزینه‌ی <code>-l</code> فقط خطوط را گزارش می‌دهد.</li>
+<li><code>grep</code> – خطوطی را که با الگوی داده‌شده (عبارت منظم) مطابقت دارند انتخاب می‌کند.</li>
+<li><code>fmt</code> – متن را با عرض ثابت مرتب می‌کند؛ برای بازآرایی پاراگراف‌ها مفید است.</li>
+<li><code>pr</code> – متن را برای چاپ روی صفحه آماده می‌کند و سرفصل‌ها و شماره‌ی صفحه اضافه می‌کند.</li>
+<li><code>head</code> – نخستین خطوط ورودی را نشان می‌دهد (پیش‌فرض ۱۰ خط).</li>
+<li><code>tail</code> – آخرین خطوط ورودی را نمایش می‌دهد؛ گزینه‌ی <code>-f</code> تغییرات زنده‌ی فایل را دنبال می‌کند.</li>
+</ul>
+<p>با ترکیب این فیلترها می‌توانیم فرآیندهای پردازشی پیچیده‌ای بسازیم بدون آن‌که لازم باشد اسکریپت‌های طولانی بنویسیم.</p>
+<p>مثال:</p>
+<pre class="hljs"><code><span class="hljs-built_in">ls</span> /usr/bin | <span class="hljs-built_in">sort</span> | <span class="hljs-built_in">uniq</span> | <span class="hljs-built_in">head</span>
+</code></pre>
+<hr>
+<h2>نگه داشتن و مشاهده‌ی هم‌زمان خروجی با <code>tee</code></h2>
+<p>گاهی لازم است خروجی یک لوله، هم برای ادامه‌ی پردازش استفاده شود و هم در فایل ذخیره گردد.<br>
+دستور <code>tee</code> درست مثل اتصال سه‌راهی عمل می‌کند: داده‌ی ورودی را روی خروجی استاندارد می‌ریزد و هم‌زمان نسخه‌ای از آن را در فایل مورد نظر ذخیره می‌کند.</p>
+<pre class="hljs"><code><span class="hljs-built_in">ls</span> -l /usr/bin | <span class="hljs-built_in">tee</span> ls.log | less
+</code></pre>
+<p>در این مثال، خروجی مفصل <code>ls</code> برای مشاهده به <code>less</code> می‌رود و <code>tee</code> همان خروجی را در <code>ls.log</code> ذخیره می‌کند. با گزینه‌ی <code>-a</code> می‌توانیم داده‌ها را به انتهای فایل بیفزاییم:</p>
+<pre class="hljs"><code><span class="hljs-built_in">command</span> | <span class="hljs-built_in">tee</span> -a combined.log
+</code></pre>
+<hr>
+<h2>جمع‌بندی</h2>
+<p>تغییر مسیر ورودی و خروجی یکی از مهم‌ترین مهارت‌های کار با خط فرمان است. با دانستن نحوه‌ی هدایت جریان‌های استاندارد می‌توانیم دستورات ساده را به زنجیره‌های قدرتمند تبدیل کنیم، خروجی‌ها را ذخیره یا پالایش کنیم، و فرآیندهای خودکار بسازیم. ترکیب <code>&gt;</code>، <code>&gt;&gt;</code>، <code>&lt;</code>، <code>|</code>، فیلترها و <code>tee</code> آزادی عمل چشمگیری به ما می‌دهد تا هر نوع پردازش متنی را انجام دهیم.</p>
+
+  </main>
+
+  <!-- فوتر مشترک -->
+  <footer class="footer">
+    <div class="container">
+      <p>
+        <img src="/Gitab/icone/copyright.svg" alt="کپی‌رایت" width="14" height="14"
+             style="vertical-align:middle;margin-inline:4px">
+        <span id="y"></span> Gitab — برای توسعه‌دهندگان
+      </p>
+    </div>
+  </footer>
+
+  <!-- سال و اسکریپت تغییر تم -->
+  <script>
+  (() => {
+    const root = document.documentElement;
+    const btn = document.getElementById('themeToggle');
+    const KEY = 'gitab-theme';
+
+    function updateTheme(s) {
+      root.setAttribute('data-theme', s);
+      const mode = s;  // فقط `dark` یا `light` خواهد بود
+      root.dataset.colorMode = mode;
+      btn.dataset.icon = mode === 'dark' ? 'moon' : 'sun';
+    }
+
+    // وضعیت تم ذخیره شده از localStorage
+    let saved = localStorage.getItem(KEY) || 'light'; // پیش‌فرض روشن
+    updateTheme(saved);
+
+    // تنظیم مجدد تم هنگام تغییر وضعیت دکمه
+    btn.addEventListener('click', () => {
+      const current = localStorage.getItem(KEY) || 'light';
+      const next = current === 'dark' ? 'light' : 'dark';  // فقط دو حالت: تاریک و روشن
+      localStorage.setItem(KEY, next);
+      updateTheme(next);
+    });
+
+    // هنگام بارگذاری صفحه
+    document.addEventListener('DOMContentLoaded', () => {
+      updateTheme(localStorage.getItem(KEY) || 'light');
+    });
+  })();
+</script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+
+  <script>
+  document.querySelectorAll('pre code').forEach(block => {
+    const btn = document.createElement('button');
+    btn.className = 'copy-btn';
+
+    const icon = document.createElement('img');
+    icon.src = "/Gitab/icone/copy.svg";
+    icon.alt = 'Copy';
+    btn.appendChild(icon);
+
+    block.parentNode.insertBefore(btn, block);
+
+    btn.addEventListener('click', async () => {
+      await navigator.clipboard.writeText(block.textContent);
+      btn.classList.add('copied');
+      setTimeout(() => btn.classList.remove('copied'), 1500);
+    });
+  });
+  </script>
+
+  <script>
+  document.body.dataset.page = window.location.pathname;
+
+  const menuBtn = document.querySelector(".menu-toggle");
+  const nav = document.querySelector(".nav");
+
+  if (menuBtn && nav) {
+    menuBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      nav.classList.toggle("show");
+    });
+
+    document.addEventListener("click", (e) => {
+      const clickedInsideNav = nav.contains(e.target);
+      const clickedMenuButton = menuBtn.contains(e.target);
+      if (!clickedInsideNav && !clickedMenuButton) {
+        nav.classList.remove("show");
+      }
+    });
+  }
+  </script>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+  <script>
+document.getElementById("openDonate").addEventListener("click", () => {
+  document.getElementById("donateModal").style.display = "block";
+});
+document.getElementById("closeDonate").addEventListener("click", () => {
+  document.getElementById("donateModal").style.display = "none";
+});
+document.querySelectorAll(".copy-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    navigator.clipboard.writeText(btn.dataset.copy);
+  
+    setTimeout(() => (btn.textContent = "کپی"), 2000);
+  });
+});
+</script>
+
+</body>
+</html>
