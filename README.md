@@ -36,7 +36,9 @@
 | C# 12 in a Nutshell | [csharp-12-in-a-nutshell-persian](https://github.com/hheydarian/csharp-12-in-a-nutshell-persian) |
 | Clean Code in C# | [clean-code-in-csharp-persian](https://github.com/hheydarian/clean-code-in-csharp-persian) |
 | Task Programming in C# | [task-programming-in-csharp-dotnet-persian](https://github.com/hheydarian/task-programming-in-csharp-dotnet-persian) |
-| Clean Code (عمومی) | [clean-code-persian](https://github.com/hheydarian/clean-code-persian) |
+| Clean Code (عمومی) | [clean-code-persian](https://github.com/mojtaba-afraz/clean-code-persian) |
+| Apprenticeship Patterns | [apprenticeship-patterns-persian](https://github.com/hheydarian/apprenticeship-patterns-persian) |
+| The Linux Command Line | [TLCL-Persian](https://github.com/hemansadeghi/TLCL-Persian) |
 | ادامه دارد | ...|
 
 </div>
