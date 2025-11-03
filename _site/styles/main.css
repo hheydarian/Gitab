@@ -5,17 +5,10 @@
     font-display: swap;
 }
 
-@font-face {
-    font-family: "Lalezar";
-    src: url("/src/fonts/Lalezar.ttf") format("truetype");
-    font-display: swap;
-}
-
 /* ---------- پالت تیره + روشن ---------- */
 :root {
-    --font: "VazirFD","Lalezar", system-ui, -apple-system, Segoe UI, Roboto,
+    --font: "VazirFD", system-ui, -apple-system, Segoe UI, Roboto,
         "Noto Sans Arabic", "Vazirmatn", sans-serif;
-
     --bg-0: #0a0b0e;
     --bg-1: #101218;
     --bg-2: #141823;
@@ -24,12 +17,10 @@
     --brand: #9b87f5;
     --brand2: #5aa7ff;
     --border: color-mix(in oklab, white 8%, transparent);
-
     --radius-lg: 18px;
     --radius-sm: 12px;
     --shadow-1: 0 1px 0 color-mix(in oklab, white 4%, transparent) inset,
         0 12px 28px rgba(0, 0, 0, 0.22);
-
     color-scheme: dark;
 }
 html[data-theme="light"],
@@ -48,7 +39,6 @@ html[data-theme="dark"],
 html[data-theme="auto"][data-color-mode="dark"] {
     color-scheme: dark;
 }
-
 /* ---------- پایه ---------- */
 * {
     box-sizing: border-box;
@@ -70,6 +60,7 @@ body {
             transparent 50%
         ),
         var(--bg-0);
+    font-family: var(--font);
     line-height: 1.75;
 }
 a {
@@ -177,7 +168,6 @@ button:focus {
 .icon-btn:hover {
     transform: translateY(-2px);
 }
-
 /* فقط برای آیکن‌های داخل دکمه‌های تِم (ماه/خورشید) */
 .icon-btn.theme-btn img {
     position: absolute;
@@ -186,7 +176,6 @@ button:focus {
     opacity: 0;
     transition: opacity 0.25s ease;
 }
-
 /* آیکن فعال در تم */
 .icon-btn.theme-btn[data-icon="sun"] .icon-sun {
     opacity: 1;
@@ -194,7 +183,6 @@ button:focus {
 .icon-btn.theme-btn[data-icon="moon"] .icon-moon {
     opacity: 1;
 }
-
 /* فقط روی آیکن‌ها فیلتر اعمال شود، نه تصاویر محتوا */
 .nav-actions img,
 .footer img,
@@ -216,7 +204,6 @@ html[data-theme="auto"][data-color-mode="light"] .footer img {
 .book-chapters img {
     filter: none !important;
 }
-
 /* آیکن‌های ثابت (مثل GitHub) باید همیشه دیده بشن */
 .icon-btn:not(.theme-btn) img {
     position: static;
@@ -224,7 +211,6 @@ html[data-theme="auto"][data-color-mode="light"] .footer img {
     width: 20px;
     height: 20px;
 }
-
 /* ---------- هیرو ---------- */
 .hero {
     padding: 45px 16px 34px;
@@ -285,7 +271,6 @@ html[data-theme="auto"][data-color-mode="light"] .footer img {
     padding: 7px 14px;
     font-size: 0.9rem;
 }
-
 /* ---------- گرید کتاب‌ها ---------- */
 .books {
     padding: 36px 16px 56px;
@@ -338,7 +323,6 @@ html[data-theme="auto"][data-color-mode="light"] .footer img {
         grid-column: span 4;
     }
 }
-
 /* ---------- فوتر (ارتفاع کمتر طبق خواسته) ---------- */
 .footer {
     border-top: 1px solid var(--border);
@@ -358,7 +342,6 @@ html[data-theme="light"] .footer img,
 html[data-theme="auto"][data-color-mode="light"] .footer img {
     filter: invert(10%) sepia(20%) saturate(300%) hue-rotate(180deg);
 }
-
 /* ---------- دسترسی کمکی ---------- */
 .visually-hidden {
     position: absolute !important;
@@ -388,7 +371,6 @@ html[data-theme="auto"][data-color-mode="light"] .footer img {
     color: var(--muted);
     max-width: 60ch;
 }
-
 /* ظرف لیست کتاب‌ها */
 .books-list {
     padding: 20px 16px 70px;
@@ -401,7 +383,6 @@ html[data-theme="auto"][data-color-mode="light"] .footer img {
     gap: 18px;
     align-items: stretch;
 }
-
 /* کارت کتاب‌: هم‌استایل با کارت‌های صفحه اصلی */
 .book-card {
     grid-column: span 12;
@@ -418,7 +399,6 @@ html[data-theme="auto"][data-color-mode="light"] .footer img {
     display: flex;
     flex-direction: column;
 }
-
 /* کاور کتاب */
 /* کاور پیش‌فرض: پرکننده و مدرن */
 .book-card .cover {
@@ -438,7 +418,6 @@ html[data-theme="auto"][data-color-mode="light"] .footer img {
     object-fit: cover; /* پیش‌فرض: کراپ زیبا */
     filter: none !important;
 }
-
 /* حالت نمایش کامل (contain) برای کتاب‌هایی که بنرشان افقی/عمودی عجیبه */
 .book-card[data-fit="contain"] .cover {
     display: grid;
@@ -458,7 +437,6 @@ html[data-theme="auto"][data-color-mode="light"] .footer img {
     max-height: 100%;
     object-fit: contain; /* بدون کراپ */
 }
-
 /* قاب زیباتر برای تصویر کامل: هاله و سایه لطیف */
 .book-card[data-fit="contain"] .cover::after {
     content: "";
@@ -471,7 +449,6 @@ html[data-theme="auto"][data-color-mode="light"] .footer img {
     );
     pointer-events: none;
 }
-
 /* بدنه و دکمه‌ها */
 .book-card .body {
     padding: 16px;
@@ -501,14 +478,12 @@ html[data-theme="auto"][data-color-mode="light"] .footer img {
     border: 1px dashed var(--border);
     cursor: default;
 }
-
 /* سه ستونه روی دسکتاپ */
 @media (min-width: 760px) {
     .book-card {
         grid-column: span 4;
     }
 }
-
 /* فقط برای بعضی کارت‌ها (جلدهای عمودی که زیاد بالا رفته‌اند) */
 .book-card.shift-down .cover img {
     object-position: center 20%; /* عدد کمتر = پایین‌تر */
@@ -557,7 +532,6 @@ html[data-theme="auto"][data-color-mode="light"] .footer img {
 .book-cover:hover img {
     transform: scale(1.05);
 }
-
 .book-info h1 {
     font-size: 1.8rem;
     margin: 8px 0;
@@ -572,7 +546,6 @@ html[data-theme="auto"][data-color-mode="light"] .footer img {
     justify-content: center;
     flex-wrap: wrap;
 }
-
 /* --- Description --- */
 .book-description {
     max-width: 800px;
@@ -593,7 +566,6 @@ html[data-theme="auto"][data-color-mode="light"] .footer img {
     margin: 20px 0;
     font-style: italic;
 }
-
 /* --- Chapters Section --- */
 .book-chapters {
     padding: 40px 20px 80px;
@@ -648,7 +620,6 @@ html[data-theme="auto"][data-color-mode="light"] .footer img {
 .chapter-card a:hover {
     background: color-mix(in oklab, var(--brand) 20%, transparent);
 }
-
 /* --- Thanks --- */
 .book-thanks {
     text-align: center;
@@ -676,7 +647,6 @@ html[data-theme="auto"][data-color-mode="light"] .footer img {
 .book-cover:hover img {
     transform: scale(1.05);
 }
-
 .book-meta {
     max-width: 540px;
 }
@@ -689,7 +659,6 @@ html[data-theme="auto"][data-color-mode="light"] .footer img {
     font-size: 1rem;
     margin-bottom: 20px;
 }
-
 /* --- برچسب‌ها --- */
 .book-tags {
     display: flex;
@@ -706,7 +675,6 @@ html[data-theme="auto"][data-color-mode="light"] .footer img {
     color: var(--text);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
-
 /* --- دکمه‌ها --- */
 .book-actions {
     display: flex;
@@ -738,7 +706,6 @@ html[data-theme="auto"][data-color-mode="light"] .footer img {
 .book-actions .btn.ghost:hover {
     background: color-mix(in oklab, var(--bg-2) 80%, var(--brand) 15%);
 }
-
 /* --- معرفی کتاب --- */
 .book-intro {
     max-width: 900px;
@@ -765,7 +732,6 @@ html[data-theme="auto"][data-color-mode="light"] .footer img {
     border: 1px solid var(--border);
     box-shadow: var(--shadow-1);
 }
-
 /* --- فهرست فصل‌ها (Accordion) --- */
 .book-chapters {
     max-width: 900px;
@@ -806,7 +772,6 @@ html[data-theme="auto"][data-color-mode="light"] .footer img {
 .book-chapters details[open] summary::after {
     transform: rotate(180deg);
 }
-
 .book-chapters ul {
     list-style: none;
     margin: 0;
@@ -823,7 +788,6 @@ html[data-theme="auto"][data-color-mode="light"] .footer img {
 .book-chapters li a:hover {
     color: color-mix(in oklab, var(--brand) 70%, white);
 }
-
 .chapter-box {
     display: inline-block;
     min-width: 26px;
@@ -842,7 +806,6 @@ a:hover .chapter-box {
     background: color-mix(in oklab, var(--brand) 40%, var(--bg-2) 60%);
     transform: translateY(-2px);
 }
-
 /* ---------- محتوا ---------- */
 .markdown-body {
     max-width: 950px;
@@ -852,7 +815,6 @@ a:hover .chapter-box {
     font-size: 1rem;
     color: var(--text);
 }
-
 .markdown-body h1,
 .markdown-body h2,
 .markdown-body h3 {
@@ -861,12 +823,10 @@ a:hover .chapter-box {
     margin-bottom: 1rem;
     color: var(--text-strong);
 }
-
 .markdown-body p {
     margin: 0.8rem 0;
     text-align: justify;
 }
-
 .markdown-body a {
     color: var(--brand);
     text-decoration: none;
@@ -876,7 +836,6 @@ a:hover .chapter-box {
 .markdown-body a:hover {
     color: color-mix(in oklab, var(--brand) 90%, white);
 }
-
 /* ---------- بلوک‌های کد ---------- */
 .hljs {
     background: #101215;
@@ -890,7 +849,6 @@ a:hover .chapter-box {
     color: #d4d4d4;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
-
 /* رنگ‌های کدها (تیره) */
 .hljs-keyword,
 .hljs-selector-tag,
@@ -918,7 +876,6 @@ a:hover .chapter-box {
 .hljs-function {
     color: #dcdcaa;
 }
-
 /* ---------- نقل‌قول ---------- */
 .markdown-body blockquote {
     border-right: 4px solid var(--brand);
@@ -927,7 +884,6 @@ a:hover .chapter-box {
     font-style: italic;
     color: color-mix(in oklab, var(--text) 80%, gray);
 }
-
 /* ---------- جدول‌ها ---------- */
 .markdown-body table {
     width: 100%;
@@ -943,7 +899,6 @@ a:hover .chapter-box {
 .markdown-body th {
     background: color-mix(in oklab, var(--bg-2) 85%, var(--brand) 8%);
 }
-
 /* === بلوک‌های کد با دکمه کپی === */
 pre {
     position: relative;
@@ -955,7 +910,6 @@ pre {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     margin-block: 1.5rem;
 }
-
 pre code {
     font-family: "Cascadia Code", monospace;
     font-size: 0.95rem;
@@ -965,7 +919,6 @@ pre code {
     text-align: left;
     unicode-bidi: embed;
 }
-
 /* === دکمه کپی برای بلوک‌های کد === */
 .copy-btn {
     position: absolute;
@@ -985,12 +938,10 @@ pre code {
     transition: opacity 0.3s ease, transform 0.2s ease, background 0.3s ease;
     z-index: 3;
 }
-
 pre:hover .copy-btn {
     opacity: 1;
     transform: translateY(-2px);
 }
-
 /* آیکون درون دکمه */
 .copy-btn img {
     width: 18px;
@@ -999,7 +950,6 @@ pre:hover .copy-btn {
     opacity: 0.9;
     filter: invert(100%) brightness(1.1);
 }
-
 /* حالت hover */
 .copy-btn:hover {
     background: color-mix(in oklab, var(--brand) 35%, var(--bg-2));
@@ -1007,12 +957,10 @@ pre:hover .copy-btn {
 .copy-btn:hover img {
     opacity: 1;
 }
-
 /* آیکون در حالت “کپی شد” */
 .copy-btn.copied img {
     content: url("/icone/check.svg");
 }
-
 /* تم روشن */
 html[data-theme="light"] .copy-btn {
     background: #f2f3f4;
@@ -1025,13 +973,11 @@ html[data-theme="light"] .copy-btn img {
 html[data-theme="light"] .copy-btn:hover {
     background: color-mix(in oklab, var(--brand) 20%, #fff);
 }
-
 .book-page {
     padding-inline: 5vw;
     max-width: 1100px;
     margin-inline: auto;
 }
-
 /* فقط روی صفحاتی که داخل مسیر /Book/ هستن */
 body[data-page*="/Book/"] .site-main img {
     border-radius: 12px;
@@ -1040,19 +986,16 @@ body[data-page*="/Book/"] .site-main img {
     margin: 1rem auto;
     box-shadow: 0 4px 18px rgba(0, 0, 0, 0.3);
 }
-
 /* مطمئن شو بقیه تصاویر مثل کاور کتاب‌ها دست‌نخورده بمونن */
 .book-card img,
 .cover img {
     border-radius: 0 !important;
     box-shadow: none !important;
 }
-
 /* منوی موبایل مخفی در دسکتاپ */
 .menu-toggle {
     display: none;
 }
-
 /* --- تبلت (max-width: 900px) --- */
 @media (max-width: 900px) {
     .nav-wrap {
@@ -1069,7 +1012,6 @@ body[data-page*="/Book/"] .site-main img {
         gap: 6px;
     }
 }
-
 /* --- موبایل (max-width: 680px) --- */
 @media (max-width: 680px) {
     .nav-wrap {
@@ -1142,7 +1084,6 @@ body[data-page*="/Book/"] .site-main img {
         font-size: 0.8rem;
     }
 }
-
 /* حالت عادی (دسکتاپ و تبلت) */
 .hero-title {
     font-size: 2.2rem;
@@ -1173,7 +1114,6 @@ h1.hero-title {
         margin-top: 0.3em;
     }
 }
-
 /* --- مترجمین --- */
 .translators-grid {
     display: flex;
@@ -1182,7 +1122,6 @@ h1.hero-title {
     gap: 30px;
     padding: 50px 16px 100px;
 }
-
 /* کارت مترجم */
 .translator-card {
     position: relative;
@@ -1204,7 +1143,6 @@ h1.hero-title {
 .translator-card:hover {
     box-shadow: 0 14px 30px rgba(0, 0, 0, 0.45);
 }
-
 /* تصویر مترجم */
 .translator-photo {
     width: 170px;
@@ -1214,27 +1152,23 @@ h1.hero-title {
     margin-bottom: 16px;
     box-shadow: 0 0 0 3px color-mix(in oklab, var(--brand) 30%, transparent);
 }
-
 /* متن */
 .translator-card h3 {
     margin: 8px 0 4px;
     font-size: 1.2rem;
     font-weight: 600;
 }
-
 .translator-card .role {
     color: var(--muted);
     font-size: 0.9rem;
     margin-bottom: 20px;
 }
-
 /* شبکه‌های اجتماعی */
 .social-links {
     display: flex;
     justify-content: center;
     gap: 16px;
 }
-
 .social-links img {
     width: 24px;
     height: 24px;
@@ -1242,17 +1176,14 @@ h1.hero-title {
     transition: opacity 0.2s ease, transform 0.2s ease, filter 0.3s ease;
     filter: invert(85%) sepia(10%) saturate(80%) hue-rotate(200deg);
 }
-
 html[data-color-mode="light"] .social-links img {
     filter: invert(10%) brightness(0.5);
 }
-
 .social-links img:hover {
     opacity: 1;
     transform: scale(1.18);
     filter: brightness(1.4) saturate(150%);
 }
-
 /* --- صفحه گیتر --- */
 .coming-soon {
     display: flex;
@@ -1260,18 +1191,17 @@ html[data-color-mode="light"] .social-links img {
     align-items: center;
     height: 70vh;
     text-align: center;
-    font-family: "Vazir", sans-serif;
+    font-family: "VazirFD", sans-serif;
 }
-
 .coming-soon h1 {
     font-size: 3rem;
+    font-family: "VazirFD";
     color: var(--brand, #00ffaa);
     letter-spacing: 2px;
     text-shadow: 0 0 10px color-mix(in oklab, var(--brand) 60%, #000),
         0 0 20px color-mix(in oklab, var(--brand) 40%, #000);
     animation: glowPulse 2.5s ease-in-out infinite;
 }
-
 /* تنظیمات برای موبایل */
 @media (max-width: 600px) {
     .coming-soon h1 {
@@ -1300,7 +1230,6 @@ html[data-color-mode="light"] .social-links img {
 .owner-badge {
     position: relative;
 }
-
 /* ظاهر tooltip */
 .owner-badge::after {
     content: attr(data-tooltip);
@@ -1318,7 +1247,6 @@ html[data-color-mode="light"] .social-links img {
     pointer-events: none;
     transition: opacity 0.25s ease, transform 0.25s ease;
 }
-
 /* افکت ظاهر شدن */
 .owner-badge:hover::after {
     opacity: 1;
@@ -1331,7 +1259,6 @@ html[data-color-mode="light"] .social-links img {
     opacity: 0.95;
     transition: transform 0.25s ease, opacity 0.25s ease;
 }
-
 .owner-badge img {
     cursor: pointer;
     filter: drop-shadow(0 0 2px #fbce2b);
@@ -1378,7 +1305,6 @@ html[data-color-mode="light"] .social-links img {
     pointer-events: none;
     transition: opacity 0.25s ease, transform 0.25s ease;
 }
-
 /* افکت ظاهر شدن */
 .owner-badge.work:hover::after {
     opacity: 1;
@@ -1392,7 +1318,6 @@ html[data-color-mode="light"] .social-links img {
     filter: drop-shadow(0 0 2px #7a01de);
     cursor: pointer;
 }
-
 /* رنگ و استایل تول‌تیپ مخصوص همکار */
 .owner-badge.manager::after {
     content: attr(data-tooltip);
@@ -1410,7 +1335,6 @@ html[data-color-mode="light"] .social-links img {
     pointer-events: none;
     transition: opacity 0.25s ease, transform 0.25s ease;
 }
-
 /* افکت ظاهر شدن */
 .owner-badge.manager:hover::after {
     opacity: 1;
@@ -1427,7 +1351,6 @@ html[data-color-mode="light"] .social-links img {
 .donate-btn.support {
     background: linear-gradient(135deg, #8b5cf6, #7dd3fc);
 }
-
 /* افکت hover */
 .donate-btn:hover {
     transform: translateY(-2px);
@@ -1481,12 +1404,10 @@ html[data-color-mode="light"] .social-links img {
     width: auto; /* ← عرض ثابت برای همه */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
-
 .donate-btn:hover {
     transform: translateY(-2px);
     box-shadow: 0 8px 20px rgba(139, 92, 246, 0.35);
 }
-
 /* مودال */
 .donate-modal {
     display: none;
@@ -1522,11 +1443,9 @@ html[data-color-mode="light"] .social-links img {
         opacity: 1;
     }
 }
-
 .donate-section {
     margin: 22px 0;
 }
-
 /* ردیف پرداخت: Grid پنج‌ستونه (آیکون | برچسب | مقدار | TON(اختیاری) | دکمه) */
 /* ساختار ردیف پرداخت */
 .donate-row {
@@ -1541,7 +1460,6 @@ html[data-color-mode="light"] .social-links img {
     font-size: 0.95rem;
     direction: rtl;
 }
-
 /* آیکون‌ها (کارت و کیف پول) */
 .donate-row .icon {
     width: 24px;
@@ -1558,7 +1476,7 @@ html[data-color-mode="light"] .social-links img {
     direction: ltr;
     text-align: left;
     color: var(--fg);
-    font-family: monospace;
+    font-family: "VazirFD";
     font-size: 0.9rem;
     white-space: nowrap;
     overflow: hidden;
@@ -1579,12 +1497,10 @@ html[data-color-mode="light"] .social-links img {
     transform: scale(1.08);
     opacity: 1;
 }
-
 /* اگر TON نداشتیم، فاصله را پر کند */
 .donate-row .spacer {
     display: block;
 }
-
 /* دکمه کپی */
 .copy-btn {
     background: linear-gradient(135deg, #8b5cf6, #7dd3fc);
@@ -1600,7 +1516,6 @@ html[data-color-mode="light"] .social-links img {
     transform: scale(1.05);
     box-shadow: 0 0 10px rgba(139, 92, 246, 0.4);
 }
-
 /* دکمه بستن */
 .close-btn {
     display: block;
@@ -1616,7 +1531,6 @@ html[data-color-mode="light"] .social-links img {
 .close-btn:hover {
     color: #8b5cf6;
 }
-
 /* دکمه کپی مخصوص مودال حمایت مالی */
 .donate-copy {
     position: static !important;
@@ -1643,7 +1557,6 @@ html[data-color-mode="light"] .social-links img {
     position: relative;
     display: inline-block;
 }
-
 .tooltip-download {
     position: absolute;
     bottom: -40px;
@@ -1662,12 +1575,10 @@ html[data-color-mode="light"] .social-links img {
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
     z-index: 10;
 }
-
 .tooltip-download.show {
     opacity: 1;
     transform: translateX(-50%) scale(1);
 }
-
 /* --- تبلت (max-width: 900px) --- */
 @media (max-width: 900px) {
     .nav-wrap {
@@ -1689,7 +1600,6 @@ html[data-color-mode="light"] .social-links img {
         font-size: 1rem;
     }
 }
-
 /* --- دسکتاپ (برای عرض‌های بزرگتر) --- */
 @media (min-width: 900px) {
     .nav-wrap {
