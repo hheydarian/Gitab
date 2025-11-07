@@ -2599,3 +2599,281 @@ html[data-color-mode="light"] .course-actions .btn {
 :root[data-theme="light"] .shine-icon {
     filter: drop-shadow(0 0 4px rgba(139, 92, 246, 0.4));
 }
+/* ---------------- Aura / Spotlight برای هدر دوره ---------------- */
+.course-hero {
+    position: relative;
+    isolation: isolate;
+}
+.course-hero::before {
+    content: "";
+    position: absolute;
+    inset: -40px -10vw auto -10vw;
+    height: 380px;
+    z-index: -1;
+    filter: blur(42px);
+    opacity: 0.45;
+    background: radial-gradient(60% 60% at 70% 30%, #7dd3fc33, transparent 60%),
+        radial-gradient(60% 60% at 30% 70%, #8b5cf633, transparent 60%);
+}
+:root[data-theme="light"] .course-hero::before {
+    opacity: 0.35;
+    filter: blur(36px) saturate(120%);
+}
+
+/* ---------------- کارت‌های خفن: نئون + گلس + گرادیان بوردر ---------------- */
+.fancy-cards {
+    perspective: 900px;
+}
+.fancy-cards .card {
+    height: 100%;
+    background: color-mix(in oklab, var(--bg-2) 85%, transparent);
+    backdrop-filter: blur(10px) saturate(110%);
+    border-radius: 18px;
+    border: 1px solid color-mix(in oklab, var(--fg) 8%, transparent);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.02);
+    transform-style: preserve-3d;
+    transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1),
+        box-shadow 0.35s ease, background 0.35s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+/* گرادیان-بوردر نرم (ماسک‌شده) */
+.fancy-cards .card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(135deg, #7dd3fc80, #a78bfa66);
+    -webkit-mask: linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+}
+.fancy-cards .card:hover::after {
+    opacity: 0.7;
+}
+
+/* هاله‌ی پس‌زمینهٔ داخل کارت */
+.fancy-cards .card.glow::before {
+    content: "";
+    position: absolute;
+    inset: -20%;
+    background: radial-gradient(50% 40% at 80% 0%, #7dd3fc22, transparent 65%),
+        radial-gradient(55% 45% at 10% 100%, #8b5cf622, transparent 60%);
+    transform: translateZ(-1px);
+    z-index: 0;
+    pointer-events: none;
+    transition: opacity 0.35s ease;
+}
+.fancy-cards .card:hover {
+    transform: translateY(-6px) rotateX(0.8deg) rotateY(-0.6deg) scale(1.015);
+    box-shadow: 0 14px 42px rgba(0, 0, 0, 0.36);
+}
+.fancy-cards .card:hover::before {
+    opacity: 0.9;
+}
+
+/* تیتر و محتوا بالای هاله بمانند */
+.fancy-cards .card > * {
+    position: relative;
+    z-index: 2;
+}
+
+/* آیکون درخشان */
+.card-header .shine-icon {
+    font-size: 22px;
+    line-height: 1;
+    filter: drop-shadow(0 0 6px rgba(125, 211, 252, 0.65));
+    animation: iconFloat 3.2s ease-in-out infinite;
+}
+@keyframes iconFloat {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-3px);
+    }
+}
+
+/* بولت‌های چک‌لیست کمی خواناتر */
+.fancy-cards .check-list li {
+    padding-inline-start: 20px;
+    font-size: 14px;
+}
+.fancy-cards .check-list li::before {
+    content: "✔";
+    position: absolute;
+    inset-inline-start: 0;
+    top: 2px;
+    color: #7dd3fc;
+    font-size: 12px;
+    opacity: 0.95;
+}
+
+/* لایت‌تِم: کنتراست و سایه‌ها را تیوِن کن */
+:root[data-theme="light"] .fancy-cards .card {
+    background: #fff;
+    border-color: rgba(0, 0, 0, 0.08);
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.1);
+}
+:root[data-theme="light"] .fancy-cards .card::after {
+    background: linear-gradient(135deg, #7dd3fc88, #a78bfa66);
+}
+
+/* گرید یکدست و قدِ برابر کارت‌ها */
+.course-grid {
+    grid-template-columns: repeat(12, 1fr);
+    grid-auto-rows: 1fr;
+}
+.course-grid .card {
+    grid-column: span 4;
+}
+@media (max-width: 900px) {
+    .course-grid {
+        grid-template-columns: 1fr;
+        grid-auto-rows: auto;
+    }
+    .course-grid .card {
+        grid-column: auto;
+    }
+}
+
+/* اکاردئون: تاکید خطی روی سرفصل باز */
+.accordion details[open] summary {
+    background: linear-gradient(90deg, #7dd3fc22, transparent 45%);
+    border-radius: 12px 12px 0 0;
+}
+
+/* دکمه‌های کوچک هماهنگ‌تر */
+.btn.xs {
+    padding: 6px 12px;
+    font-size: 12.5px;
+    border-radius: 10px;
+}
+
+/* موشن ایمن */
+@media (prefers-reduced-motion: reduce) {
+    .fancy-cards .card,
+    .fancy-cards .card:hover {
+        transform: none;
+    }
+    .card-header .shine-icon {
+        animation: none;
+    }
+}
+/* === Card Text Rhythm & Typography === */
+.card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.card-desc {
+    font-size: 0.8rem;
+    line-height: 1.6;
+    color: var(--muted);
+    margin: 0;
+    text-align: justify;
+    margin-bottom: 6px;
+    text-justify: inter-word;
+}
+
+.card-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.card-list li {
+    position: relative;
+    font-size: 0.8rem;
+    line-height: 1.7;
+    transition: color 0.3s ease, transform 0.3s ease;
+    padding-inline-start: 18px;
+    color: var(--fg);
+}
+.card-list li:hover {
+    color: #7dd3fc;
+    transform: translateX(3px);
+}
+.card-list li::before {
+    content: "▹";
+    position: absolute;
+    left: 0;
+    color: #7dd3fc;
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+/* pill variant */
+.card-list.pill {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 6px;
+    justify-content: start;
+}
+.card-list.pill li {
+    background: color-mix(in oklab, var(--bg-1) 92%, transparent);
+    border-radius: 999px;
+    padding: 6px 12px;
+    font-size: 0.85rem;
+    line-height: 1;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    position: relative;
+    padding-inline-start: 12px;
+}
+.card-list.pill li::before {
+    display: none;
+}
+
+.card-footer {
+    margin-top: 4px;
+    font-size: 0.85rem;
+    color: var(--muted);
+    display: flex;
+    gap: 4px;
+}
+.card-footer strong {
+    color: var(--fg);
+    font-weight: 600;
+}
+
+/* Headings consistency */
+.card-header h2 {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--fg);
+    background: linear-gradient(90deg, #7dd3fc, #a78bfa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin: 0;
+    letter-spacing: -0.3px;
+}
+.card-header {
+    align-items: center;
+    margin-bottom: 6px;
+}
+
+/* spacing harmony */
+.fancy-cards .card {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 6px;
+    min-height: 100%;
+    padding: 28px 22px 20px;
+}
+
+/* unify line rhythm on light theme */
+:root[data-theme="light"] .card-list li {
+    color: #1e293b;
+}
