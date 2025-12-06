@@ -1,0 +1,396 @@
+
+
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <link rel="icon" type="image/png" href="/Gitab/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>کنترل جریان</title>
+  <meta name="description" content="ترجمه‌های فارسی کتاب‌های فنی — سریع، مینیمال و قابل اتکا.">
+
+  <!-- استایل‌ها -->
+  <link rel="stylesheet" href="/Gitab/styles/main.css">
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+
+  <style>
+  @font-face {
+    font-family: 'Vazir';
+    src: url('/Gitab/fonts/Vazir-FD-WOL.ttf') format('truetype');
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "Lalezar";
+    src: url('fonts/Lalezar.ttf') format('truetype');
+    font-display: swap;
+}
+  body {
+    font-family: 'Vazir', sans-serif;
+  }
+  </style>
+</head>
+
+<body>
+  <!-- هدر مشترک -->
+  <header class="header">
+    <div class="container nav-wrap">
+      <a href="/Gitab/" class="brand">
+        <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="26" height="26">
+        <span>Gitab</span>
+      </a>
+
+       <nav class="nav">
+         <a href="/Gitab/" >خانه</a>
+         <a href="/Gitab/books/list-books" >کتاب‌ها</a>
+         <a href="/Gitab/giter.html" >دوره ها</a>
+          <!-- 
+         <a href="/Gitab/translator.html" >مترجمین</a>
+           -->
+       </nav>
+
+      <div class="nav-actions">
+        <button id="themeToggle" class="icon-btn theme-btn" data-icon="moon" aria-label="تغییر تم">
+          <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن">
+          <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک">
+        </button>
+
+        <a class="icon-btn" href="https://github.com/hheydarian/Gitab" target="_blank" title="GitHub">
+          <img src="/Gitab/icone/github.svg" alt="GitHub">
+        </a>
+
+        <!-- دکمه منو برای موبایل -->
+        <button class="menu-toggle" aria-label="منو">
+          <img src="/Gitab/icone/menu.svg" alt="menu">
+        </button>
+      </div>
+    </div>
+  </header>
+
+  
+  <main class="site-main book-page">
+    <h1>ترجمه فصل ۲۹ – کنترل جریان: حلقه‌زدن با while / until</h1>
+<p>در فصل قبل، یک برنامه منویی ساختیم که انواع مختلفی از اطلاعات سیستم را تولید می‌کرد. برنامه کار می‌کرد، اما یک مشکل جدی در استفاده‌پذیری داشت. فقط یک بار یک گزینه را اجرا می‌کرد و بعد تمام می‌شد. بدتر اینکه اگر یک انتخاب نامعتبر انجام می‌شد، برنامه با خطا تمام می‌شد، بدون اینکه به کاربر فرصت دوباره‌ امتحان بدهد. بهتر بود می‌توانستیم برنامه را طوری بسازیم که منو را پشت‌سر‌هم تکرار کند تا زمانی که کاربر گزینه خروج را انتخاب کند.</p>
+<p>در این فصل، به مفهوم برنامه‌نویسی‌ای به نام <strong>حلقه‌زدن (looping)</strong> نگاه می‌کنیم که برای تکرار بخش‌هایی از برنامه استفاده می‌شود. شل سه دستور ترکیبی برای حلقه‌زدن ارائه می‌دهد. در این فصل دو تای آن‌ها را بررسی می‌کنیم و سومی را در فصل بعد.</p>
+<hr>
+<h3><strong>حلقه‌زدن</strong></h3>
+<p>زندگی روزمره پر از فعالیت‌های تکراری است. هر روز رفتن سر کار، راه بردن سگ، یا خرد کردن هویج همگی شامل تکرار مجموعه‌ای از مراحل هستند. مثلا بیایید خرد کردن هویج را بررسی کنیم. اگر این کار را به صورت شبه‌کد بنویسیم، چیزی شبیه این می‌شود:</p>
+<ol>
+<li>تخته آشپزی را بردار</li>
+<li>چاقو را بردار</li>
+<li>هویج را روی تخته بگذار</li>
+<li>چاقو را بالا ببر</li>
+<li>هویج را جلو بده</li>
+<li>هویج را ببر</li>
+<li>اگر تمام هویج برش داده شده، تمام کن؛ وگرنه برو به مرحله ۴</li>
+</ol>
+<p>مراحل ۴ تا ۷ یک حلقه تشکیل می‌دهند. این کارها تا زمانی تکرار می‌شوند که شرط «تمام هویج برش خورده» برقرار شود.</p>
+<hr>
+<h3><strong>while</strong></h3>
+<p>bash می‌تواند همین ایده را پیاده کند. فرض کنید می‌خواهیم پنج عدد را پشت سر هم از یک تا پنج نمایش بدهیم. یک اسکریپت bash می‌تواند این‌طور باشد:</p>
+<pre class="hljs"><code><span class="hljs-meta">#!/bin/bash</span>
+<span class="hljs-comment"># while-count: display a series of numbers</span>
+count=1
+<span class="hljs-keyword">while</span> [[ <span class="hljs-variable">$count</span> -le 5 ]]; <span class="hljs-keyword">do</span>
+    <span class="hljs-built_in">echo</span> <span class="hljs-variable">$count</span>
+    count=$((count + <span class="hljs-number">1</span>))
+<span class="hljs-keyword">done</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Finished.&quot;</span>
+</code></pre>
+<p>وقتی اجرا شود، این خروجی را می‌دهد:</p>
+<pre class="hljs"><code>1
+2
+3
+4
+5
+Finished.
+</code></pre>
+<p>ساختار دستور while این است:</p>
+<pre class="hljs"><code>while commands; do commands; done
+</code></pre>
+<p>مثل دستور if، while وضعیت خروج مجموعه‌ای از دستورات را بررسی می‌کند. تا زمانی که وضعیت خروج <strong>صفر</strong> باشد، دستورات داخل حلقه را اجرا می‌کند.</p>
+<p>در اسکریپت بالا، متغیر <code>count</code> ایجاد شده و مقدار اولیه ۱ می‌گیرد. دستور while وضعیت خروج دستور <code>test</code> را بررسی می‌کند. تا وقتی این دستور وضعیت صفر برگرداند، دستورات داخل حلقه اجرا می‌شود. در پایان هر چرخه، دستور test دوباره اجرا می‌شود. بعد از شش بار اجرای حلقه، مقدار count به ۶ می‌رسد، test دیگر صفر نمی‌دهد و حلقه متوقف می‌شود. برنامه ادامه می‌دهد و به دستور بعد از حلقه می‌رسد.</p>
+<hr>
+<h3><strong>بهبود برنامه read-menu با یک حلقه while</strong></h3>
+<pre class="hljs"><code><span class="hljs-meta">#!/bin/bash</span>
+<span class="hljs-comment"># while-menu: a menu driven system information program</span>
+
+DELAY=3   <span class="hljs-comment"># تعداد ثانیه نمایش نتایج</span>
+
+<span class="hljs-keyword">while</span> [[ <span class="hljs-variable">$REPLY</span> != 0 ]]; <span class="hljs-keyword">do</span>
+    clear
+    <span class="hljs-built_in">cat</span> &lt;&lt;- <span class="hljs-string">_EOF_
+Please Select:
+ 1. Display System Information
+ 2. Display Disk Space
+ 3. Display Home Space Utilization
+ 0. Quit
+_EOF_</span>
+
+    <span class="hljs-built_in">read</span> -p <span class="hljs-string">&quot;Enter selection [0-3] &gt; &quot;</span>
+
+    <span class="hljs-keyword">if</span> [[ <span class="hljs-variable">$REPLY</span> =~ ^[0-3]$ ]]; <span class="hljs-keyword">then</span>
+        <span class="hljs-keyword">if</span> [[ <span class="hljs-variable">$REPLY</span> == 1 ]]; <span class="hljs-keyword">then</span>
+            <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Hostname: <span class="hljs-variable">$HOSTNAME</span>&quot;</span>
+            <span class="hljs-built_in">uptime</span>
+            <span class="hljs-built_in">sleep</span> <span class="hljs-variable">$DELAY</span>
+        <span class="hljs-keyword">fi</span>
+
+        <span class="hljs-keyword">if</span> [[ <span class="hljs-variable">$REPLY</span> == 2 ]]; <span class="hljs-keyword">then</span>
+            <span class="hljs-built_in">df</span> -h
+            <span class="hljs-built_in">sleep</span> <span class="hljs-variable">$DELAY</span>
+        <span class="hljs-keyword">fi</span>
+
+        <span class="hljs-keyword">if</span> [[ <span class="hljs-variable">$REPLY</span> == 3 ]]; <span class="hljs-keyword">then</span>
+            <span class="hljs-keyword">if</span> [[ $(<span class="hljs-built_in">id</span> -u) -eq 0 ]]; <span class="hljs-keyword">then</span>
+                <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Home Space Utilization (All Users)&quot;</span>
+                <span class="hljs-built_in">du</span> -sh /home/*
+            <span class="hljs-keyword">else</span>
+                <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Home Space Utilization (<span class="hljs-variable">$USER</span>)&quot;</span>
+                <span class="hljs-built_in">du</span> -sh <span class="hljs-variable">$HOME</span>
+            <span class="hljs-keyword">fi</span>
+            <span class="hljs-built_in">sleep</span> <span class="hljs-variable">$DELAY</span>
+        <span class="hljs-keyword">fi</span>
+    <span class="hljs-keyword">else</span>
+        <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Invalid entry.&quot;</span>
+        <span class="hljs-built_in">sleep</span> <span class="hljs-variable">$DELAY</span>
+    <span class="hljs-keyword">fi</span>
+<span class="hljs-keyword">done</span>
+
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Program terminated.&quot;</span>
+</code></pre>
+<p>با قرار دادن منو داخل یک حلقهٔ while، برنامه می‌تواند بعد از هر انتخاب، دوباره منو را نمایش دهد. حلقه تا زمانی ادامه پیدا می‌کند که مقدار REPLY برابر “0” نباشد؛ بنابراین منو دوباره نشان داده می‌شود و کاربر فرصت دارد انتخاب دیگری انجام دهد. در پایان هر عمل، دستور sleep اجرا می‌شود تا برنامه چند ثانیه مکث کند و نتایج قابل دیدن باشد، قبل از اینکه صفحه پاک شود و منو دوباره نمایش داده شود. وقتی مقدار REPLY برابر “0” شد، که یعنی گزینهٔ “خروج” انتخاب شده است، حلقه پایان می‌یابد و اجرای برنامه با خطی که بعد از done قرار دارد ادامه پیدا می‌کند.</p>
+<hr>
+<h3><strong>خروج از یک حلقه</strong></h3>
+<p>bash دو دستور داخلی فراهم می‌کند که می‌توانند جریان اجرای برنامه را داخل حلقه کنترل کنند.<br>
+دستور <strong>break</strong> بلافاصله یک حلقه را متوقف می‌کند و کنترل برنامه به اولین دستور بعد از حلقه منتقل می‌شود.<br>
+دستور <strong>continue</strong> باعث می‌شود بخش باقی‌ماندهٔ حلقه نادیده گرفته شود و اجرای برنامه با تکرار بعدی حلقه ادامه پیدا کند.</p>
+<p>در اینجا نسخه‌ای از برنامه while-menu را می‌بینیم که هر دو دستور break و continue در آن به‌کار رفته‌اند:</p>
+<pre class="hljs"><code><span class="hljs-meta">#!/bin/bash</span>
+<span class="hljs-comment"># while-menu2: a menu driven system information program</span>
+
+DELAY=3   <span class="hljs-comment"># Number of seconds to display results</span>
+
+<span class="hljs-keyword">while</span> <span class="hljs-literal">true</span>; <span class="hljs-keyword">do</span>
+    clear
+    <span class="hljs-built_in">cat</span> &lt;&lt;- <span class="hljs-string">_EOF_
+Please Select:
+1. Display System Information
+2. Display Disk Space
+3. Display Home Space Utilization
+0. Quit
+_EOF_</span>
+
+    <span class="hljs-built_in">read</span> -p <span class="hljs-string">&quot;Enter selection [0-3] &gt; &quot;</span>
+
+    <span class="hljs-keyword">if</span> [[ <span class="hljs-variable">$REPLY</span> =~ ^[0-3]$ ]]; <span class="hljs-keyword">then</span>
+        <span class="hljs-keyword">if</span> [[ <span class="hljs-variable">$REPLY</span> == 1 ]]; <span class="hljs-keyword">then</span>
+            <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Hostname: <span class="hljs-variable">$HOSTNAME</span>&quot;</span>
+            <span class="hljs-built_in">uptime</span>
+            <span class="hljs-built_in">sleep</span> <span class="hljs-variable">$DELAY</span>
+            <span class="hljs-built_in">continue</span>
+        <span class="hljs-keyword">fi</span>
+
+        <span class="hljs-keyword">if</span> [[ <span class="hljs-variable">$REPLY</span> == 2 ]]; <span class="hljs-keyword">then</span>
+            <span class="hljs-built_in">df</span> -h
+            <span class="hljs-built_in">sleep</span> <span class="hljs-variable">$DELAY</span>
+            <span class="hljs-built_in">continue</span>
+        <span class="hljs-keyword">fi</span>
+
+        <span class="hljs-keyword">if</span> [[ <span class="hljs-variable">$REPLY</span> == 3 ]]; <span class="hljs-keyword">then</span>
+            <span class="hljs-keyword">if</span> [[ $(<span class="hljs-built_in">id</span> -u) -eq 0 ]]; <span class="hljs-keyword">then</span>
+                <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Home Space Utilization (All Users)&quot;</span>
+                <span class="hljs-built_in">du</span> -sh /home/*
+            <span class="hljs-keyword">else</span>
+                <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Home Space Utilization (<span class="hljs-variable">$USER</span>)&quot;</span>
+                <span class="hljs-built_in">du</span> -sh <span class="hljs-variable">$HOME</span>
+            <span class="hljs-keyword">fi</span>
+            <span class="hljs-built_in">sleep</span> <span class="hljs-variable">$DELAY</span>
+            <span class="hljs-built_in">continue</span>
+        <span class="hljs-keyword">fi</span>
+
+        <span class="hljs-keyword">if</span> [[ <span class="hljs-variable">$REPLY</span> == 0 ]]; <span class="hljs-keyword">then</span>
+            <span class="hljs-built_in">break</span>
+        <span class="hljs-keyword">fi</span>
+    <span class="hljs-keyword">else</span>
+        <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Invalid entry.&quot;</span>
+        <span class="hljs-built_in">sleep</span> <span class="hljs-variable">$DELAY</span>
+    <span class="hljs-keyword">fi</span>
+<span class="hljs-keyword">done</span>
+
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Program terminated.&quot;</span>
+</code></pre>
+<p>در این نسخه از اسکریپت، یک حلقهٔ بی‌پایان ایجاد کرده‌ایم (حلقه‌ای که خودش هرگز تمام نمی‌شود) با استفاده از دستور <strong>true</strong> که برای while یک وضعیت خروج ارائه می‌دهد. چون true همیشه وضعیت خروج صفر برمی‌گرداند، حلقه هیچ‌وقت به‌صورت خودکار تمام نخواهد شد. این یک تکنیک بسیار رایج در اسکریپت‌نویسی است.</p>
+<p>از آنجا که حلقه خودش هیچ‌وقت تمام نمی‌شود، برنامه‌نویس باید راهی فراهم کند تا در زمان مناسب از حلقه خارج شود. در این اسکریپت، دستور <strong>break</strong> برای خروج از حلقه استفاده می‌شود وقتی گزینهٔ “0” انتخاب شود.</p>
+<p>دستور <strong>continue</strong> در پایان سایر گزینه‌ها برای اجرای کارآمدتر قرار داده شده است. با استفاده از continue، اسکریپت از اجرای کدهایی که لازم نیستند عبور می‌کند. مثلاً اگر گزینهٔ “1” انتخاب و شناخته شد، دیگر دلیلی برای بررسی گزینه‌های دیگر وجود ندارد.</p>
+<hr>
+<h3><strong>until</strong></h3>
+<p>دستور <strong>until</strong> خیلی شبیه while است، با این تفاوت که به‌جای پایان دادن به حلقه هنگام دریافت یک وضعیت خروج غیرصفر، برعکس عمل می‌کند. یک حلقهٔ until تا زمانی ادامه پیدا می‌کند که وضعیت خروج <strong>صفر</strong> دریافت کند.</p>
+<p>در اسکریپت while-count، حلقه را تا زمانی ادامه دادیم که مقدار متغیر count کمتر یا مساوی ۵ بود. می‌توانیم همان نتیجه را با استفاده از until بگیریم:</p>
+<pre class="hljs"><code><span class="hljs-meta">#!/bin/bash</span>
+<span class="hljs-comment"># until-count: display a series of numbers</span>
+
+count=1
+<span class="hljs-keyword">until</span> [[ <span class="hljs-variable">$count</span> -gt 5 ]]; <span class="hljs-keyword">do</span>
+    <span class="hljs-built_in">echo</span> <span class="hljs-variable">$count</span>
+    count=$((count + <span class="hljs-number">1</span>))
+<span class="hljs-keyword">done</span>
+
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Finished.&quot;</span>
+</code></pre>
+<p>با تغییر عبارت شرطی به <code>$count -gt 5</code>، دستور until حلقه را در زمان درست متوقف می‌کند. انتخاب بین while و until معمولاً به این بستگی دارد که کدام‌یک امکان نوشتن شرطی شفاف‌تر را فراهم می‌کند.</p>
+<hr>
+<h3><strong>خواندن فایل‌ها با حلقه‌ها</strong></h3>
+<p>دستورات while و until می‌توانند ورودی استاندارد را پردازش کنند. این ویژگی باعث می‌شود بتوان فایل‌ها را نیز با این حلقه‌ها پردازش کرد. در مثال زیر، محتوای فایل distros.txt که در فصل‌های قبلی استفاده شد چاپ می‌کنیم:</p>
+<pre class="hljs"><code><span class="hljs-meta">#!/bin/bash</span>
+<span class="hljs-comment"># while-read: read lines from a file</span>
+
+<span class="hljs-keyword">while</span> <span class="hljs-built_in">read</span> distro version release; <span class="hljs-keyword">do</span>
+    <span class="hljs-built_in">printf</span> <span class="hljs-string">&quot;Distro: %s\tVersion: %s\tReleased: %s\n&quot;</span> \
+        <span class="hljs-variable">$distro</span> \
+        <span class="hljs-variable">$version</span> \
+        <span class="hljs-variable">$release</span>
+<span class="hljs-keyword">done</span> &lt; distros.txt
+</code></pre>
+<p>برای اینکه یک فایل را به حلقه منتقل کنیم، عملگر بازپرستی (redirection) را <strong>بعد از دستور done</strong> قرار می‌دهیم. حلقه از دستور read برای خواندن فیلدهای ورودی استفاده می‌کند. دستور read بعد از هر خط با وضعیت خروج صفر پایان می‌یابد، تا زمانی که به انتهای فایل برسد؛ آن‌وقت با وضعیت غیرصفر خارج می‌شود و حلقه خاتمه پیدا می‌کند.</p>
+<p>امکان انتقال ورودی استاندارد از طریق pipe نیز وجود دارد:</p>
+<pre class="hljs"><code><span class="hljs-meta">#!/bin/bash</span>
+<span class="hljs-comment"># while-read2: read lines from a file</span>
+
+<span class="hljs-built_in">sort</span> -k 1,1 -k 2n distros.txt | <span class="hljs-keyword">while</span> <span class="hljs-built_in">read</span> distro version release; <span class="hljs-keyword">do</span>
+    <span class="hljs-built_in">printf</span> <span class="hljs-string">&quot;Distro: %s\tVersion: %s\tReleased: %s\n&quot;</span> \
+        <span class="hljs-variable">$distro</span> \
+        <span class="hljs-variable">$version</span> \
+        <span class="hljs-variable">$release</span>
+<span class="hljs-keyword">done</span>
+</code></pre>
+<p>در اینجا خروجی دستور sort را گرفته و به حلقه ارسال کرده‌ایم. توجه به یک نکته مهم ضروری است: چون استفاده از pipe باعث می‌شود حلقه در یک <strong>زیرشل (subshell)</strong> اجرا شود، هر متغیری که داخل حلقه ساخته یا مقداردهی شود، بعد از پایان حلقه <strong>از دست می‌رود</strong>.</p>
+<hr>
+<h3><strong>جمع‌بندی</strong></h3>
+<p>با معرفی حلقه‌ها و مباحث قبلی مثل انشعاب‌ها، زیربرنامه‌ها و توالی‌ها، حالا مهم‌ترین انواع کنترل جریان برنامه را پوشش داده‌ایم. bash چند قابلیت دیگر هم دارد، اما آن‌ها بیشتر حالت‌های تکمیلی همین مفاهیم پایه هستند.</p>
+<hr>
+<h3><strong>برای مطالعه بیشتر</strong></h3>
+<ul>
+<li>
+<p><strong>Bash Guide for Beginners</strong> از Linux Documentation Project، مثال‌های بیشتری از حلقه‌های while دارد:<br>
+<a href="http://tldp.org/LDP/Bash-Beginners-Guide/html/sect_09_02.html">http://tldp.org/LDP/Bash-Beginners-Guide/html/sect_09_02.html</a></p>
+</li>
+<li>
+<p>مقالهٔ ویکی‌پدیا دربارهٔ حلقه‌ها که بخشی از مقالهٔ کنترل جریان است:<br>
+<a href="http://en.wikipedia.org/wiki/Control_flow#Loops">http://en.wikipedia.org/wiki/Control_flow#Loops</a></p>
+</li>
+</ul>
+
+  </main>
+
+  <!-- فوتر مشترک -->
+  <footer class="footer">
+    <div class="container">
+      <p>
+        <img src="/Gitab/icone/copyright.svg" alt="کپی‌رایت" width="14" height="14"
+             style="vertical-align:middle;margin-inline:4px">
+        <span id="y"></span> Gitab — تمامی حقوق محفوظ است.
+      </p>
+    </div>
+  </footer>
+
+  <!-- سال و اسکریپت تغییر تم -->
+  <script>
+  (() => {
+    const root = document.documentElement;
+    const btn = document.getElementById('themeToggle');
+    const KEY = 'gitab-theme';
+
+    function updateTheme(s) {
+      root.setAttribute('data-theme', s);
+      const mode = s;  // فقط `dark` یا `light` خواهد بود
+      root.dataset.colorMode = mode;
+      btn.dataset.icon = mode === 'dark' ? 'moon' : 'sun';
+    }
+
+    // وضعیت تم ذخیره شده از localStorage
+    let saved = localStorage.getItem(KEY) || 'light'; // پیش‌فرض روشن
+    updateTheme(saved);
+
+    // تنظیم مجدد تم هنگام تغییر وضعیت دکمه
+    btn.addEventListener('click', () => {
+      const current = localStorage.getItem(KEY) || 'light';
+      const next = current === 'dark' ? 'light' : 'dark';  // فقط دو حالت: تاریک و روشن
+      localStorage.setItem(KEY, next);
+      updateTheme(next);
+    });
+
+    // هنگام بارگذاری صفحه
+    document.addEventListener('DOMContentLoaded', () => {
+      updateTheme(localStorage.getItem(KEY) || 'light');
+    });
+  })();
+</script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+
+  <script>
+  document.querySelectorAll('pre code').forEach(block => {
+    const btn = document.createElement('button');
+    btn.className = 'copy-btn';
+
+    const icon = document.createElement('img');
+    icon.src = "/Gitab/icone/copy.svg";
+    icon.alt = 'Copy';
+    btn.appendChild(icon);
+
+    block.parentNode.insertBefore(btn, block);
+
+    btn.addEventListener('click', async () => {
+      await navigator.clipboard.writeText(block.textContent);
+      btn.classList.add('copied');
+      setTimeout(() => btn.classList.remove('copied'), 1500);
+    });
+  });
+  </script>
+
+  <script>
+  document.body.dataset.page = window.location.pathname;
+
+  const menuBtn = document.querySelector(".menu-toggle");
+  const nav = document.querySelector(".nav");
+
+  if (menuBtn && nav) {
+    menuBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      nav.classList.toggle("show");
+    });
+
+    document.addEventListener("click", (e) => {
+      const clickedInsideNav = nav.contains(e.target);
+      const clickedMenuButton = menuBtn.contains(e.target);
+      if (!clickedInsideNav && !clickedMenuButton) {
+        nav.classList.remove("show");
+      }
+    });
+  }
+  </script>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+  <script>
+document.getElementById("openDonate").addEventListener("click", () => {
+  document.getElementById("donateModal").style.display = "block";
+});
+document.getElementById("closeDonate").addEventListener("click", () => {
+  document.getElementById("donateModal").style.display = "none";
+});
+document.querySelectorAll(".copy-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    navigator.clipboard.writeText(btn.dataset.copy);
+  
+    setTimeout(() => (btn.textContent = "کپی"), 2000);
+  });
+});
+</script>
+
+</body>
+</html>

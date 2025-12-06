@@ -1,0 +1,371 @@
+
+
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <link rel="icon" type="image/png" href="/Gitab/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>کامپایل برنامه‌ها</title>
+  <meta name="description" content="ترجمه‌های فارسی کتاب‌های فنی — سریع، مینیمال و قابل اتکا.">
+
+  <!-- استایل‌ها -->
+  <link rel="stylesheet" href="/Gitab/styles/main.css">
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+
+  <style>
+  @font-face {
+    font-family: 'Vazir';
+    src: url('/Gitab/fonts/Vazir-FD-WOL.ttf') format('truetype');
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "Lalezar";
+    src: url('fonts/Lalezar.ttf') format('truetype');
+    font-display: swap;
+}
+  body {
+    font-family: 'Vazir', sans-serif;
+  }
+  </style>
+</head>
+
+<body>
+  <!-- هدر مشترک -->
+  <header class="header">
+    <div class="container nav-wrap">
+      <a href="/Gitab/" class="brand">
+        <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="26" height="26">
+        <span>Gitab</span>
+      </a>
+
+       <nav class="nav">
+         <a href="/Gitab/" >خانه</a>
+         <a href="/Gitab/books/list-books" >کتاب‌ها</a>
+         <a href="/Gitab/giter.html" >دوره ها</a>
+          <!-- 
+         <a href="/Gitab/translator.html" >مترجمین</a>
+           -->
+       </nav>
+
+      <div class="nav-actions">
+        <button id="themeToggle" class="icon-btn theme-btn" data-icon="moon" aria-label="تغییر تم">
+          <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن">
+          <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک">
+        </button>
+
+        <a class="icon-btn" href="https://github.com/hheydarian/Gitab" target="_blank" title="GitHub">
+          <img src="/Gitab/icone/github.svg" alt="GitHub">
+        </a>
+
+        <!-- دکمه منو برای موبایل -->
+        <button class="menu-toggle" aria-label="منو">
+          <img src="/Gitab/icone/menu.svg" alt="menu">
+        </button>
+      </div>
+    </div>
+  </header>
+
+  
+  <main class="site-main book-page">
+    <h1>فصل ۲۳ – کامپایل برنامه‌ها</h1>
+<p>تا اینجا در سراسر کتاب از برنامه‌هایی استفاده کرده‌ایم که به صورت «بستهٔ دودویی» (binary package) در توزیع‌های لینوکس موجودند.<br>
+بیشتر کاربران هم هرگز با ساخت یک برنامه از منبع روبه‌رو نمی‌شوند. بااین‌حال، آشنایی با روند ساخت از منبع مهارتی ارزشمند است؛<br>
+گاهی نسخهٔ جدید هنوز در مخازن قرار نگرفته، یا اصلاً بستهٔ آماده‌ای برای نرم‌افزار مورد نظر وجود ندارد،<br>
+یا می‌خواهیم قابلیت‌های سفارشی را فعال یا غیرفعال کنیم. در این فصل قدم‌به‌قدم فرآیند کلاسیک «configure → make → make install» را بررسی می‌کنیم،<br>
+می‌آموزیم هر مرحله دقیقاً چه می‌کند و چگونه می‌توان با مشکلات رایج کنار آمد.</p>
+<hr>
+<h2>چرا باید برنامه‌ها را از منبع بسازیم؟</h2>
+<p>دلایل رایجی که ما را وادار به کامپایل می‌کند عبارت‌اند از:</p>
+<ul>
+<li><strong>دسترسی به جدیدترین نسخه</strong> – توسعه‌دهندگان منتشر کرده‌اند، اما بستهٔ توزیع هنوز به‌روزرسانی نشده است.</li>
+<li><strong>نبود بستهٔ دودویی</strong> – پروژه‌ای کوچک یا قدیمی ممکن است هرگز در مخازن رسمی قرار نگرفته باشد.</li>
+<li><strong>سفارشی‌سازی</strong> – برخی برنامه‌ها ده‌ها گزینهٔ قابل کامپایل دارند که تنها از طریق ساخت از منبع قابل فعال‌سازی هستند.</li>
+<li><strong>یادگیری</strong> – کنار زدن پرده‌ها و دیدن نحوهٔ تبدیل کد منبع به برنامهٔ اجرایی درک عمیق‌تری از سیستم به ما می‌دهد.</li>
+</ul>
+<p>نکتهٔ خوب این است که بیشتر پروژه‌ها روندی بسیار مشابه دارند،<br>
+پس اگر یک بار آن را تمرین کنید، باقی پروژه‌ها نیز برایتان آشنا خواهند بود.</p>
+<h2>پیش‌نیازها و ابزارهای لازم</h2>
+<p>ساخت از منبع نیازمند «زنجیرهٔ ابزار توسعه» (toolchain) است:<br>
+کامپایلر C یا C++، کتابخانه‌های توسعه، ابزار پیوند (linker)، و برنامهٔ <code>make</code>.<br>
+در توزیع‌های مبتنی بر Debian می‌توانید همهٔ ابزارهای پایه را با بستهٔ <code>build-essential</code> نصب کنید:</p>
+<pre class="hljs"><code>[me@linuxbox ~]$ <span class="hljs-built_in">sudo</span> apt update
+[me@linuxbox ~]$ <span class="hljs-built_in">sudo</span> apt install build-essential
+</code></pre>
+<p>در خانوادهٔ Fedora/Red Hat گروه بستهٔ «Development Tools» یا دستور مشابهی در اختیار دارید:</p>
+<pre class="hljs"><code>[me@linuxbox ~]$ <span class="hljs-built_in">sudo</span> dnf groupinstall <span class="hljs-string">&quot;Development Tools&quot;</span>
+</code></pre>
+<p>علاوه بر ابزارهای عمومی، هر پروژه ممکن است به هدرها و کتابخانه‌های مخصوصی نیاز داشته باشد.<br>
+این وابستگی‌ها معمولاً با پسوند <code>-dev</code> یا <code>-devel</code> شناخته می‌شوند.<br>
+وقتی اجرای <code>configure</code> به خطای «header not found» یا «library not found» برخورد می‌کند،<br>
+نام بستهٔ مورد نیاز را ذکر می‌کند و می‌توانید آن را نصب کنید.</p>
+<h2>به‌دست آوردن بستهٔ منبع</h2>
+<p>نرم‌افزارهای آزاد غالباً به صورت آرشیوهای فشرده در قالب‌هایی مثل <code>tar.gz</code>، <code>tar.bz2</code> یا <code>tar.xz</code> منتشر می‌شوند.<br>
+پس از دانلود، آرشیو را در یک دایرکتوری کاری استخراج می‌کنیم:</p>
+<pre class="hljs"><code>[me@linuxbox ~]$ tar xvf tree-1.6.0.tgz
+[me@linuxbox ~]$ <span class="hljs-built_in">cd</span> tree-1.6.0
+</code></pre>
+<p>درون دایرکتوری استخراج‌شده معمولاً فایل‌هایی با نام‌های <code>README</code>، <code>INSTALL</code> یا <code>NEWS</code> می‌بینید که باید قبل از ادامه مطالعه شوند.<br>
+این فایل‌ها وابستگی‌های اضافی، گزینه‌های پشتیبانی‌شده و نکته‌های ویژهٔ پروژه را توضیح می‌دهند.</p>
+<p>ساختار یک بستهٔ مبتنی بر Autotools معمولاً شبیه این است:</p>
+<pre class="hljs"><code>configure        فایل اجرایی برای پیکربندی سیستم هدف
+configure.ac     ورودی autoconf
+Makefile.am      ورودی automake
+Makefile.in      قالبی برای ساخت فایل Makefile نهایی
+src/             کد منبع برنامه
+man/             صفحات راهنما
+</code></pre>
+<p>ما مستقیماً با <code>configure</code> و خروجی آن یعنی <code>Makefile</code> سروکار داریم.<br>
+فایل‌های <code>*.in</code> و <code>*.am</code> توسط توسعه‌دهندگان استفاده می‌شوند تا این فرآیند را خودکار کنند.</p>
+<h2>انجام مراحل استاندارد configure/make/make install</h2>
+<p>تقریباً همهٔ پروژه‌های مبتنی بر Autotools مراحل زیر را دارند:</p>
+<ol>
+<li>اجرای اسکریپت <code>configure</code> برای بررسی سیستم و تولید فایل‌های ساخت.</li>
+<li>اجرای <code>make</code> برای کامپایل برنامه.</li>
+<li>اجرای <code>make install</code> (معمولاً به صورت ریشه یا با <code>sudo</code>) برای کپی فایل‌های ساخته‌شده در مقصد.</li>
+</ol>
+<p>بیایید این مراحل را روی بستهٔ <code>tree</code> انجام دهیم تا روند واقعی را ببینیم.</p>
+<h3>اجرای configure</h3>
+<p>در ریشهٔ دایرکتوری منبع دستور زیر را اجرا می‌کنیم:</p>
+<pre class="hljs"><code>[me@linuxbox tree-1.6.0]$ ./configure
+</code></pre>
+<p>در طول اجرا، اسکریپت به دنبال ویژگی‌های سیستم می‌گردد، وجود کتابخانه‌ها، کامپایلر و امکانات اختیاری را بررسی می‌کند و در نهایت فایل <code>Makefile</code> و تعدادی فایل کمکی تولید می‌کند. بخشی از خروجی ممکن است چیزی شبیه زیر باشد:</p>
+<pre class="hljs"><code>checking for gcc... gcc
+checking whether the C compiler works... yes
+checking for ncursesw/ncurses.h... yes
+checking for ranlib... ranlib
+config.status: creating Makefile
+</code></pre>
+<p>اگر وابستگی‌ای یافت نشود، اسکریپت معمولاً متوقف می‌شود و پیام روشنی چاپ می‌کند؛<br>
+در آن صورت باید بستهٔ توسعهٔ مربوطه را نصب کرده و دوباره <code>./configure</code> را اجرا کنید.</p>
+<p>اسکریپت <code>configure</code> مجموعهٔ بزرگی از گزینه‌ها دارد. با <code>./configure --help</code> می‌توانید فهرست کامل را ببینید. متداول‌ترین گزینه‌ها عبارت‌اند از:</p>
+<ul>
+<li><code>--prefix=/usr/local</code> – تعیین شاخهٔ نصب (پیش‌فرض معمولاً <code>/usr/local</code> است).</li>
+<li><code>--sysconfdir=/etc</code> – محل فایل‌های پیکربندی.</li>
+<li><code>--enable-</code><em>/<code>--disable-</code></em> – فعال یا غیرفعال کردن قابلیت‌های اختیاری.</li>
+<li><code>--with-</code><em>/<code>--without-</code></em> – استفاده یا عدم استفاده از کتابخانه‌ها/ویژگی‌های خارجی.</li>
+</ul>
+<p>مثلاً اگر بخواهیم <code>tree</code> را در شاخهٔ خانگی نصب کنیم، می‌توانیم از <code>./configure --prefix=$HOME/.local</code> استفاده کنیم.</p>
+<h3>ساخت با make</h3>
+<p>پس از موفقیت <code>configure</code>، دستور <code>make</code> را اجرا می‌کنیم:</p>
+<pre class="hljs"><code>[me@linuxbox tree-1.6.0]$ make
+</code></pre>
+<p>خروجی <code>make</code> نشان می‌دهد که فایل‌های منبع در حال کامپایل شدن هستند:</p>
+<pre class="hljs"><code>gcc -c -O2 -Wall -o tree.o tree.c
+gcc -c -O2 -Wall -o unix.o unix.c
+gcc -o tree tree.o unix.o -lncurses
+</code></pre>
+<p>در سیستم‌های چند هسته‌ای می‌توانید از گزینهٔ <code>-j</code> برای موازی‌سازی استفاده کنید:</p>
+<pre class="hljs"><code>[me@linuxbox tree-1.6.0]$ make -j$(<span class="hljs-built_in">nproc</span>)
+</code></pre>
+<p>بسیاری از پروژه‌ها هدف‌های دیگری مانند <code>make check</code> یا <code>make test</code> را نیز ارائه می‌کنند تا مجموعهٔ آزمون‌ها را پیش از نصب اجرا کنید.<br>
+اجرای این آزمون‌ها کمک می‌کند مطمئن شوید برنامه روی سیستم شما به‌درستی کامپایل شده است.</p>
+<p>اگر همه چیز به درستی پیش برود، برنامهٔ قابل اجرا در همان دایرکتوری ظاهر می‌شود. می‌توانید بدون نصب هم آن را اجرا کنید:</p>
+<pre class="hljs"><code>[me@linuxbox tree-1.6.0]$ ./tree --version
+tree v1.6.0 (c) 1996-2023 by Steve Baker, Thomas Moore, Francesc Rocher, and Florian Sesser
+</code></pre>
+<h3>نصب برنامه</h3>
+<p>برای کپی فایل‌ها در سیستم از <code>make install</code> استفاده می‌کنیم. این مرحله معمولاً نیازمند دسترسی ریشه است:</p>
+<pre class="hljs"><code>[me@linuxbox tree-1.6.0]$ <span class="hljs-built_in">sudo</span> make install
+[<span class="hljs-built_in">sudo</span>] password <span class="hljs-keyword">for</span> me:
+</code></pre>
+<p>فایل‌های نصب‌شده در مقصدی که با <code>--prefix</code> تعیین کرده‌ایم قرار می‌گیرند. اگر پیش‌فرض <code>/usr/local</code> باشد، برنامه در <code>/usr/local/bin/tree</code> و صفحات راهنما در <code>/usr/local/share/man/man1/tree.1</code> نصب می‌شوند.</p>
+<p>بسیاری از پروژه‌ها هدف <code>make uninstall</code> را هم تعریف می‌کنند تا در صورت نیاز فایل‌های نصب‌شده حذف شوند؛ این هدف تنها زمانی کار می‌کند که همان نسخه و همان مسیر نصب را نگه داشته باشید.</p>
+<p>بهتر است تمام مراحل تا قبل از <code>make install</code> را به عنوان کاربر عادی انجام دهید. اجرای <code>configure</code> یا <code>make</code> با دسترسی ریشه می‌تواند فایل‌های موقت را با مالکیت <code>root</code> ایجاد کند و در مراحل بعدی دردسرساز شود.</p>
+<p>برای حذف فایل‌های واسط (object files) و تمیز کردن دایرکتوری منبع، هدف <code>make clean</code> را اجرا می‌کنیم:</p>
+<pre class="hljs"><code>[me@linuxbox tree-1.6.0]$ make clean
+</code></pre>
+<p>بعضی پروژه‌ها هدف <code>make distclean</code> را هم فراهم می‌کنند که فایل‌های تولید شده توسط <code>configure</code> را حذف می‌کند تا دایرکتوری به حالت اولیه برگردد.</p>
+<h2>اسکریپت configure چه می‌کند؟</h2>
+<p><code>configure</code> بخشی از سیستم ساخت GNU Autotools است. این اسکریپت مجموعه‌ای از آزمون‌ها را اجرا می‌کند تا ببیند سیستم شما چه امکاناتی دارد:</p>
+<ul>
+<li>وجود یا عدم وجود کتابخانه‌ها (<code>libncurses</code>, <code>libssl</code>, ...)</li>
+<li>بررسی نسخه‌های برنامه‌ها (<code>gcc</code>, <code>make</code>)</li>
+<li>تعیین مسیرهای استاندارد</li>
+<li>شناسایی تفاوت‌های سیستم‌عامل (GNU/Linux، macOS، *BSD)</li>
+</ul>
+<p>بر خلاف بسته‌های دودویی که برای یک توزیع خاص ساخته می‌شوند،<br>
+این روش اجازه می‌دهد توسعه‌دهندگان با یک کد منبع واحد، بسته‌ای بسازند که روی سیستم‌های مختلف کامپایل شود.</p>
+<p>اگر گزینه‌های سفارشی نیاز دارید (مثلاً فعال کردن پشتیبانی از قابلیت خاص)،<br>
+دستور <code>./configure --help</code> اطلاعات لازم را ارائه می‌دهد. بسیاری از پروژه‌ها فایل <code>INSTALL</code> را هم شامل می‌کنند که گزینه‌های مهم را توضیح می‌دهد.</p>
+<h2>برنامهٔ make چگونه کار می‌کند؟</h2>
+<p><code>make</code> ابزاری است برای مدیریت فرآیند ساخت. این برنامه فایل <code>Makefile</code> را می‌خواند،<br>
+در آن فایل هدف‌ها (targets) و وابستگی‌ها تعریف شده‌اند. ساختار کلی یک قاعده در <code>Makefile</code> چنین است:</p>
+<pre class="hljs"><code>هدف: فهرستِ-وابستگی‌ها
+&lt;TAB&gt; دستوراتی که باید اجرا شوند
+</code></pre>
+<p>به عنوان مثال، فایل <code>Makefile</code> ساده‌ای برای برنامه‌ای به نام <code>hello</code> ممکن است این‌گونه باشد:</p>
+<pre class="hljs"><code>hello: hello.o util.o
+gcc -o hello hello.o util.o
+
+hello.o: hello.c hello.h
+gcc -c -Wall hello.c
+
+util.o: util.c util.h
+gcc -c -Wall util.c
+
+clean:
+rm -f hello hello.o util.o
+</code></pre>
+<p>وقتی <code>make</code> را بدون آرگومان اجرا کنید، اولین هدف در فایل ساخته می‌شود (در این مثال <code>hello</code>).<br>
+اگر تغییری در یکی از فایل‌های منبع ایجاد شود، <code>make</code> با مقایسهٔ زمان تغییر فایل‌ها فقط همان بخش‌های لازم را دوباره کامپایل می‌کند.</p>
+<p>هدف‌هایی مانند <code>install</code> یا <code>clean</code> معمولاً دستورات ساده‌ای هستند که ترتیب اجرای عملیات را استاندارد می‌کنند.</p>
+<h2>سیستم‌های ساخت دیگر</h2>
+<p>همهٔ پروژه‌ها از Autotools استفاده نمی‌کنند. گاهی در فایل <code>README</code> اشاره می‌شود که باید دستورهای دیگری اجرا کنید:</p>
+<ul>
+<li><strong>CMake</strong> – ابتدا دستور <code>cmake .</code> یا <code>cmake -S . -B build</code> اجرا می‌شود، سپس <code>cmake --build build</code>.</li>
+<li><strong>Meson + Ninja</strong> – معمولاً با <code>meson setup build</code> و سپس <code>ninja -C build</code> (و در نهایت <code>ninja -C build install</code>).</li>
+<li><strong>SCons</strong>, <strong>Waf</strong>, <strong><a href="http://setup.py">setup.py</a></strong> (برای پروژه‌های Python) و ابزارهای دیگر.</li>
+</ul>
+<p>اصل ماجرا تغییر نمی‌کند: اسکریپت پیکربندی اجرا می‌شود، فایل‌های ساخت ایجاد می‌شوند و در پایان مرحلهٔ نصب انجام می‌گیرد.</p>
+<h2>مدیریت وابستگی‌ها و مشکلات رایج</h2>
+<p>هنگام کامپایل احتمالاً با یکی از سناریوهای زیر روبه‌رو می‌شوید:</p>
+<ul>
+<li><strong>کمبود کتابخانه</strong> – پیام خطا معمولاً نام فایل مورد نیاز را ذکر می‌کند. در توزیع‌های Debian/Ubuntu بستهٔ <code>apt-file</code> می‌تواند محل قرار گرفتن فایل را بیابد.</li>
+<li><strong>ابزارهای قدیمی</strong> – گاهی نسخهٔ قدیمی <code>automake</code> یا <code>autoconf</code> باعث می‌شود لازم باشد دستورات <code>autoreconf</code> را اجرا کنید.</li>
+<li><strong>نصب در محل دلخواه</strong> – اگر حق دسترسی ریشه ندارید، با <code>--prefix=$HOME/.local</code> یا استفاده از متغیر <code>DESTDIR</code> فایل‌ها را در شاخهٔ خانگی نگه دارید.</li>
+</ul>
+<p>مستندسازی خطاها و راه‌حل‌ها عادت خوبی است. فایل خروجی <code>configure.log</code> همواره اطلاعات دقیقی از خطاها ارائه می‌دهد.</p>
+<h2>ردیابی فایل‌های نصب‌شده</h2>
+<p>از آنجا که <code>make install</code> فایل‌ها را خارج از کنترل مدیر بستهٔ توزیع کپی می‌کند،<br>
+بهتر است فهرستی از فایل‌های نصب‌شده داشته باشید. چند روش رایج:</p>
+<ul>
+<li><strong>استفاده از DESTDIR</strong> – با اجرای <code>make install DESTDIR=$HOME/pkg/tree-1.6.0</code> همهٔ فایل‌ها ابتدا در دایرکتوری موقتی قرار می‌گیرند و می‌توانید آنجا آنها را بررسی یا بسته‌بندی کنید.</li>
+<li><strong>ابزار checkinstall</strong> – این ابزار اجرا شدن <code>make install</code> را زیر نظر می‌گیرد و بسته‌ای متناسب با مدیر بستهٔ سیستم‌تان تولید می‌کند تا بتوانید بعداً آن را حذف کنید.</li>
+<li><strong>GNU Stow</strong> – با نصب برنامه‌ها در زیرشاخه‌هایی مانند <code>/usr/local/stow/tree-1.6.0</code> و استفاده از <code>stow</code>, لینک‌های نمادین در مکان‌های مناسب ایجاد می‌شود و حذف نسخهٔ نصب‌شده ساده‌تر خواهد بود.</li>
+</ul>
+<p>پیگیری نسخه‌ها و مکان نصب‌شان از بروز تداخل جلوگیری می‌کند؛ به‌خصوص اگر برنامه را بعداً به‌روزرسانی یا حذف کنید.</p>
+<h2>جمع‌بندی</h2>
+<ul>
+<li>بیشتر نرم‌افزارهای آزاد را می‌توان با توالی <code>configure</code>، <code>make</code> و <code>make install</code> ساخت.</li>
+<li><code>configure</code> سیستم شما را آزمایش می‌کند و <code>Makefile</code> تولید می‌کند؛ <code>make</code> کد را کامپایل می‌کند؛ <code>make install</code> فایل‌ها را در مقصد قرار می‌دهد.</li>
+<li>دقت در خواندن فایل‌های <code>README</code>/<code>INSTALL</code>، نصب پیش‌نیازهای توسعه و تمیز کردن پس از نصب باعث می‌شود روند کامپایل بدون دردسر انجام شود.</li>
+</ul>
+<hr>
+<h3>تمرین‌ها</h3>
+<ol>
+<li>آخرین نسخهٔ برنامهٔ <code>tree</code> یا <code>ncdu</code> را از سایت رسمی دانلود کنید، سپس آن را با گزینهٔ <code>--prefix=$HOME/.local</code> بسازید و نصب کنید.</li>
+<li>بسته‌ای را انتخاب کنید که از CMake استفاده می‌کند (برای مثال <code>CMake</code> خود یا <code>neovim</code>). مراحل <code>cmake -S . -B build</code>, <code>cmake --build build</code> و <code>cmake --install build</code> را تمرین کنید.</li>
+<li>با استفاده از <code>DESTDIR</code> نصب آزمایشی انجام دهید و فهرستی از فایل‌های نصب‌شده تهیه کنید. این فهرست را برای آگاهی‌های بعدی ذخیره کنید.</li>
+</ol>
+<h3>مطالعهٔ بیشتر</h3>
+<ul>
+<li>صفحهٔ راهنمای <code>info make</code> و راهنمای آنلاین GNU Make.</li>
+<li>«The Autoconf Manual» برای آشنایی عمیق با اسکریپت‌های <code>configure</code>.</li>
+<li>ویکی Arch Linux و Debian دربارهٔ ساخت بسته از منبع و ابزارهایی مانند <code>checkinstall</code> یا <code>stow</code>.</li>
+</ul>
+
+  </main>
+
+  <!-- فوتر مشترک -->
+  <footer class="footer">
+    <div class="container">
+      <p>
+        <img src="/Gitab/icone/copyright.svg" alt="کپی‌رایت" width="14" height="14"
+             style="vertical-align:middle;margin-inline:4px">
+        <span id="y"></span> Gitab — تمامی حقوق محفوظ است.
+      </p>
+    </div>
+  </footer>
+
+  <!-- سال و اسکریپت تغییر تم -->
+  <script>
+  (() => {
+    const root = document.documentElement;
+    const btn = document.getElementById('themeToggle');
+    const KEY = 'gitab-theme';
+
+    function updateTheme(s) {
+      root.setAttribute('data-theme', s);
+      const mode = s;  // فقط `dark` یا `light` خواهد بود
+      root.dataset.colorMode = mode;
+      btn.dataset.icon = mode === 'dark' ? 'moon' : 'sun';
+    }
+
+    // وضعیت تم ذخیره شده از localStorage
+    let saved = localStorage.getItem(KEY) || 'light'; // پیش‌فرض روشن
+    updateTheme(saved);
+
+    // تنظیم مجدد تم هنگام تغییر وضعیت دکمه
+    btn.addEventListener('click', () => {
+      const current = localStorage.getItem(KEY) || 'light';
+      const next = current === 'dark' ? 'light' : 'dark';  // فقط دو حالت: تاریک و روشن
+      localStorage.setItem(KEY, next);
+      updateTheme(next);
+    });
+
+    // هنگام بارگذاری صفحه
+    document.addEventListener('DOMContentLoaded', () => {
+      updateTheme(localStorage.getItem(KEY) || 'light');
+    });
+  })();
+</script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+
+  <script>
+  document.querySelectorAll('pre code').forEach(block => {
+    const btn = document.createElement('button');
+    btn.className = 'copy-btn';
+
+    const icon = document.createElement('img');
+    icon.src = "/Gitab/icone/copy.svg";
+    icon.alt = 'Copy';
+    btn.appendChild(icon);
+
+    block.parentNode.insertBefore(btn, block);
+
+    btn.addEventListener('click', async () => {
+      await navigator.clipboard.writeText(block.textContent);
+      btn.classList.add('copied');
+      setTimeout(() => btn.classList.remove('copied'), 1500);
+    });
+  });
+  </script>
+
+  <script>
+  document.body.dataset.page = window.location.pathname;
+
+  const menuBtn = document.querySelector(".menu-toggle");
+  const nav = document.querySelector(".nav");
+
+  if (menuBtn && nav) {
+    menuBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      nav.classList.toggle("show");
+    });
+
+    document.addEventListener("click", (e) => {
+      const clickedInsideNav = nav.contains(e.target);
+      const clickedMenuButton = menuBtn.contains(e.target);
+      if (!clickedInsideNav && !clickedMenuButton) {
+        nav.classList.remove("show");
+      }
+    });
+  }
+  </script>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+  <script>
+document.getElementById("openDonate").addEventListener("click", () => {
+  document.getElementById("donateModal").style.display = "block";
+});
+document.getElementById("closeDonate").addEventListener("click", () => {
+  document.getElementById("donateModal").style.display = "none";
+});
+document.querySelectorAll(".copy-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    navigator.clipboard.writeText(btn.dataset.copy);
+  
+    setTimeout(() => (btn.textContent = "کپی"), 2000);
+  });
+});
+</script>
+
+</body>
+</html>

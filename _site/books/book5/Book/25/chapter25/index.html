@@ -1,0 +1,342 @@
+
+
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <link rel="icon" type="image/png" href="/Gitab/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>شروع یک پروژه</title>
+  <meta name="description" content="ترجمه‌های فارسی کتاب‌های فنی — سریع، مینیمال و قابل اتکا.">
+
+  <!-- استایل‌ها -->
+  <link rel="stylesheet" href="/Gitab/styles/main.css">
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+
+  <style>
+  @font-face {
+    font-family: 'Vazir';
+    src: url('/Gitab/fonts/Vazir-FD-WOL.ttf') format('truetype');
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "Lalezar";
+    src: url('fonts/Lalezar.ttf') format('truetype');
+    font-display: swap;
+}
+  body {
+    font-family: 'Vazir', sans-serif;
+  }
+  </style>
+</head>
+
+<body>
+  <!-- هدر مشترک -->
+  <header class="header">
+    <div class="container nav-wrap">
+      <a href="/Gitab/" class="brand">
+        <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="26" height="26">
+        <span>Gitab</span>
+      </a>
+
+       <nav class="nav">
+         <a href="/Gitab/" >خانه</a>
+         <a href="/Gitab/books/list-books" >کتاب‌ها</a>
+         <a href="/Gitab/giter.html" >دوره ها</a>
+          <!-- 
+         <a href="/Gitab/translator.html" >مترجمین</a>
+           -->
+       </nav>
+
+      <div class="nav-actions">
+        <button id="themeToggle" class="icon-btn theme-btn" data-icon="moon" aria-label="تغییر تم">
+          <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن">
+          <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک">
+        </button>
+
+        <a class="icon-btn" href="https://github.com/hheydarian/Gitab" target="_blank" title="GitHub">
+          <img src="/Gitab/icone/github.svg" alt="GitHub">
+        </a>
+
+        <!-- دکمه منو برای موبایل -->
+        <button class="menu-toggle" aria-label="منو">
+          <img src="/Gitab/icone/menu.svg" alt="menu">
+        </button>
+      </div>
+    </div>
+  </header>
+
+  
+  <main class="site-main book-page">
+    <h1>فصل ۲۵ – شروع یک پروژه</h1>
+<p>در فصل گذشته نخستین شل‌اسکریپت خود را ساختیم و با اصولی مانند شبانگ، مجوز اجرا و استفاده از here document آشنا شدیم.<br>
+از اینجا به بعد می‌خواهیم یک پروژهٔ واقعی را گام‌به‌گام توسعه دهیم تا مهارت‌های تازه‌ای که یاد می‌گیریم فوراً در عمل به کار گرفته شوند.<br>
+پروژهٔ ما اسکریپتی به نام <code>sys_info_page</code> است که گزارشی HTML از وضعیت سیستم تولید می‌کند.<br>
+این فصل روی آماده‌سازی، جمع‌آوری نیازمندی‌ها و ایجاد چهارچوب پروژه تمرکز دارد تا در فصل‌های بعدی به تدریج قابلیت‌های پیچیده‌تر را اضافه کنیم.</p>
+<hr>
+<h2>تصویر کلی</h2>
+<p>در نسخهٔ اولیهٔ اسکریپت صفحه‌ای ساده با اطلاعات عمومی (مانند زمان، نام سیستم و خروجی چند فرمان) تولید می‌کردیم.<br>
+اکنون می‌خواهیم نیازمندی‌ها را دقیق‌تر مشخص کنیم:</p>
+<ul>
+<li>عنوان صفحه باید شامل نام میزبان و زمان تولید گزارش باشد.</li>
+<li>گزارشی خلاصه از وضعیت سیستم (معماری، نسخهٔ کرنل، تعداد پردازنده‌ها) نمایش داده شود.</li>
+<li>زمان کارکرد (uptime) و میانگین بار سیستم در دسترس باشد.</li>
+<li>فهرستی از کاربران فعلی چاپ شود.</li>
+<li>فضای دیسک موجود در سیستم و وضعیت شاخهٔ خانگی کاربران بررسی شود.</li>
+<li>در پایان پیام مناسبی دربارهٔ محل ذخیره‌شدن فایل نمایش داده شود.</li>
+</ul>
+<p>پیش از نوشتن کد بهتر است بدانیم هر بخش گزارش از کدام فرمان یا داده به دست می‌آید.<br>
+جدول زیر چند فرمان کلیدی را یادآوری می‌کند:</p>
+<table>
+<thead>
+<tr>
+<th>موضوع</th>
+<th>فرمان پیشنهادی</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>معماری و نسخهٔ سیستم</td>
+<td><code>uname -mp</code> و <code>uname -sr</code></td>
+</tr>
+<tr>
+<td>زمان کارکرد</td>
+<td><code>uptime</code></td>
+</tr>
+<tr>
+<td>کاربران متصل</td>
+<td><code>who</code></td>
+</tr>
+<tr>
+<td>فضای دیسک</td>
+<td><code>df -h</code></td>
+</tr>
+<tr>
+<td>فضای شاخهٔ خانگی</td>
+<td><code>du -sh /home/*</code> (نیازمند دسترسی)</td>
+</tr>
+</tbody>
+</table>
+<p>ممکن است بخواهید فرمان‌های دیگری مانند <code>lscpu</code> یا <code>lsblk</code> را نیز بیازمایید، اما برای سادگی فعلاً به همین‌ها بسنده می‌کنیم.</p>
+<h2>سازمان‌دهی فایل‌ها</h2>
+<p>بهتر است پروژهٔ خود را در یک دایرکتوری اختصاصی نگه‌داریم.<br>
+اگر از قبل شاخهٔ <code>~/bin</code> را ساخته‌اید، همان‌جا اسکریپت را قرار دهید؛ در غیر این صورت آن را ایجاد کنید:</p>
+<pre class="hljs"><code>[me@linuxbox ~]$ <span class="hljs-built_in">mkdir</span> -p ~/bin
+[me@linuxbox ~]$ <span class="hljs-built_in">cp</span> sys_info_page ~/bin/
+[me@linuxbox ~]$ <span class="hljs-built_in">chmod</span> 755 ~/bin/sys_info_page
+</code></pre>
+<p>برای فایل خروجی نیز دایرکتوری معینی مانند <code>/tmp</code> یا <code>~/tmp</code> انتخاب کنید تا نیاز به مجوز ریشه نباشد و فایل‌های موقتی به هم ریخته نشوند.<br>
+در ادامه فرض می‌کنیم مسیر پیش‌فرض <code>/tmp/system_info.html</code> است.</p>
+<h2>نگارش نسخهٔ پایه</h2>
+<p>ابتدا نسخه‌ای می‌نویسیم که تمام بخش‌های اصلی را تولید می‌کند، گرچه ممکن است قالب‌بندی نهایی هنوز کامل نباشد.<br>
+در ویرایشگر دلخواه (برای مثال <code>nano</code>) فایل <code>sys_info_page</code> را باز کنید و ساختار کلی زیر را جایگزین نسخهٔ قبلی کنید:</p>
+<pre class="hljs"><code><span class="hljs-meta">#!/bin/bash</span>
+
+<span class="hljs-comment"># sys_info_page - تولید گزارش HTML از وضعیت سیستم</span>
+
+TITLE=<span class="hljs-string">&quot;گزارش وضعیت سیستم برای <span class="hljs-variable">$HOSTNAME</span>&quot;</span>
+RIGHT_NOW=$(<span class="hljs-built_in">date</span> +<span class="hljs-string">&quot;%x %r %Z&quot;</span>)
+TIME_STAMP=<span class="hljs-string">&quot;گزارش تولید شده در <span class="hljs-variable">$RIGHT_NOW</span> توسط <span class="hljs-variable">$USER</span>&quot;</span>
+REPORT_FILE=/tmp/system_info.html
+
+<span class="hljs-built_in">cat</span> &lt;&lt; <span class="hljs-string">_EOF_ &gt; &quot;$REPORT_FILE&quot;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;$TITLE&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;$TITLE&lt;/h1&gt;
+    &lt;p&gt;$TIME_STAMP&lt;/p&gt;
+
+    &lt;h2&gt;اطلاعات کلی سیستم&lt;/h2&gt;
+    &lt;pre&gt;$(uname -mp)&lt;/pre&gt;
+    &lt;pre&gt;$(uname -sr)&lt;/pre&gt;
+
+    &lt;h2&gt;زمان کارکرد سیستم&lt;/h2&gt;
+    &lt;pre&gt;$(uptime)&lt;/pre&gt;
+
+    &lt;h2&gt;کاربران حاضر&lt;/h2&gt;
+    &lt;pre&gt;$(who)&lt;/pre&gt;
+
+    &lt;h2&gt;فضای دیسک موجود&lt;/h2&gt;
+    &lt;pre&gt;$(df -h)&lt;/pre&gt;
+
+    &lt;h2&gt;وضعیت شاخهٔ خانگی&lt;/h2&gt;
+    &lt;pre&gt;$(du -sh /home/* 2&gt;/dev/null)&lt;/pre&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+_EOF_</span>
+
+<span class="hljs-keyword">if</span> [[ $? -eq 0 ]]; <span class="hljs-keyword">then</span>
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;گزارش در <span class="hljs-variable">$REPORT_FILE</span> ذخیره شد.&quot;</span>
+<span class="hljs-keyword">else</span>
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;خطا در ایجاد فایل گزارش.&quot;</span> &gt;&amp;2
+<span class="hljs-keyword">fi</span>
+</code></pre>
+<p>این نسخه همان کاری را انجام می‌دهد که به دنبالش هستیم، اما چند نکتهٔ مهم را باید در نظر داشته باشیم:</p>
+<ol>
+<li>اجرای <code>du -sh /home/*</code> ممکن است برای کاربران غیر ریشه پیام‌های خطای مجوز ایجاد کند؛ برای جلوگیری از نمایش خطاها از <code>2&gt;/dev/null</code> استفاده کردیم.</li>
+<li>خروجی فرمان‌هایی مثل <code>df</code> و <code>who</code> طولانی است؛ در فصل‌های بعدی بخش‌هایی را اضافه می‌کنیم که خروجی را مرتب‌تر نشان دهند یا تنها خطوط مهم را انتخاب کنند.</li>
+<li>برای بررسی وضعیت اجرای <code>cat</code> از مقدار بازگشتی (<code>$?</code>) استفاده کردیم. در فصل آینده راه بهتری معرفی می‌کنیم.</li>
+</ol>
+<h2>آزمودن اسکریپت</h2>
+<p>پس از ذخیرهٔ فایل، آن را اجرا کنید:</p>
+<pre class="hljs"><code>[me@linuxbox ~]$ ~/bin/sys_info_page
+گزارش در /tmp/system_info.html ذخیره شد.
+[me@linuxbox ~]$ xdg-open /tmp/system_info.html
+</code></pre>
+<p>اگر دستور <code>xdg-open</code> در سیستم شما موجود نیست، فایل را به صورت دستی با مرورگر دلخواه باز کنید.<br>
+حالا باید صفحه‌ای ببینید که حاوی عنوان، مهر زمان و بخش‌های مختلف گزارش است.</p>
+<h3>بررسی صحت خروجی</h3>
+<ul>
+<li>آیا عنوان صفحه شامل نام میزبان است؟ اگر نه، مقدار <code>TITLE</code> را بررسی کنید.</li>
+<li>آیا زمان و منطقهٔ زمانی صحیح نمایش داده می‌شود؟ قالب‌بندی <code>date</code> را تغییر دهید.</li>
+<li>اگر بخش «وضعیت شاخهٔ خانگی» طولانی است، می‌توانید به جای <code>*</code> شاخه‌های خاص یا گزینهٔ <code>--max-depth</code> را به <code>du</code> بدهید.</li>
+</ul>
+<h2>مستندسازی اسکریپت</h2>
+<p>اکنون که نسخهٔ پایه آماده است، چند مورد مستندسازی را فراموش نکنید:</p>
+<ul>
+<li>در ابتدای فایل توضیح کوتاهی دربارهٔ هدف اسکریپت بنویسید.</li>
+<li>نسخه یا تاریخ آخرین تغییر را در نظر بگیرید:</li>
+</ul>
+<pre class="hljs"><code>VERSION=<span class="hljs-string">&quot;1.0&quot;</span>
+</code></pre>
+<ul>
+<li>اگر اسکریپت از فرمان‌های خارجی استفاده می‌کند، آنها را در بالای فایل فهرست کنید تا در صورت نبودن، به راحتی متوجه شوید چه وابستگی‌هایی دارید.</li>
+</ul>
+<h2>مسیر آینده</h2>
+<p>اسکریپت فعلی کار می‌کند اما می‌دانیم که می‌توان بهترش کرد. برای مثال:</p>
+<ul>
+<li>بخش‌های تکراری (مانند تولید عنوان و قالب HTML) را در توابع جداگانه قرار دهیم.</li>
+<li>امکان اجرای گزینشی بخش‌ها را اضافه کنیم.</li>
+<li>با بررسی موفقیت هر فرمان خطاها را شفاف‌تر گزارش دهیم.</li>
+</ul>
+<p>در فصل بعدی سراغ روش «طراحی از بالا به پایین» می‌رویم تا اسکریپت را به قطعات منطقی تقسیم کنیم، از توابع استفاده کنیم و ساختار پروژه را انعطاف‌پذیرتر سازیم.</p>
+<hr>
+<h3>تمرین‌ها</h3>
+<ol>
+<li>خروجی فرمان <code>hostnamectl</code> را در بخشی جداگانه به گزارش اضافه کنید. برای جلوگیری از طولانی‌شدن صفحه فقط خطوط مهم را نمایش دهید.</li>
+<li>متغیری به نام <code>REPORT_DIR</code> تعریف کنید و مسیر فایل گزارش را بر اساس آن بسازید. سپس با تغییر مقدار متغیر مطمئن شوید که فایل در مکان جدید ایجاد می‌شود.</li>
+<li>گزینه‌ای خط فرمان (<code>-f FILE</code>) اضافه کنید که کاربر بتواند نام فایل خروجی را تعیین کند. هنوز لازم نیست اعتبارسنجی پیچیده‌ای انجام دهید؛ تنها بررسی کنید که آرگومان داده شده باشد.</li>
+</ol>
+<h3>مطالعهٔ بیشتر</h3>
+<ul>
+<li>صفحهٔ راهنمای <code>man date</code> برای آشنایی با الگوهای قالب‌بندی زمان.</li>
+<li>مستندات <code>who</code>, <code>w</code>, <code>last</code> برای مشاهدهٔ انواع متفاوت گزارش کاربران.</li>
+<li>مقالهٔ «Filesystem Hierarchy Standard» برای شناخت بهتر مسیرهای مناسب فایل‌های موقتی.</li>
+</ul>
+
+  </main>
+
+  <!-- فوتر مشترک -->
+  <footer class="footer">
+    <div class="container">
+      <p>
+        <img src="/Gitab/icone/copyright.svg" alt="کپی‌رایت" width="14" height="14"
+             style="vertical-align:middle;margin-inline:4px">
+        <span id="y"></span> Gitab — تمامی حقوق محفوظ است.
+      </p>
+    </div>
+  </footer>
+
+  <!-- سال و اسکریپت تغییر تم -->
+  <script>
+  (() => {
+    const root = document.documentElement;
+    const btn = document.getElementById('themeToggle');
+    const KEY = 'gitab-theme';
+
+    function updateTheme(s) {
+      root.setAttribute('data-theme', s);
+      const mode = s;  // فقط `dark` یا `light` خواهد بود
+      root.dataset.colorMode = mode;
+      btn.dataset.icon = mode === 'dark' ? 'moon' : 'sun';
+    }
+
+    // وضعیت تم ذخیره شده از localStorage
+    let saved = localStorage.getItem(KEY) || 'light'; // پیش‌فرض روشن
+    updateTheme(saved);
+
+    // تنظیم مجدد تم هنگام تغییر وضعیت دکمه
+    btn.addEventListener('click', () => {
+      const current = localStorage.getItem(KEY) || 'light';
+      const next = current === 'dark' ? 'light' : 'dark';  // فقط دو حالت: تاریک و روشن
+      localStorage.setItem(KEY, next);
+      updateTheme(next);
+    });
+
+    // هنگام بارگذاری صفحه
+    document.addEventListener('DOMContentLoaded', () => {
+      updateTheme(localStorage.getItem(KEY) || 'light');
+    });
+  })();
+</script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+
+  <script>
+  document.querySelectorAll('pre code').forEach(block => {
+    const btn = document.createElement('button');
+    btn.className = 'copy-btn';
+
+    const icon = document.createElement('img');
+    icon.src = "/Gitab/icone/copy.svg";
+    icon.alt = 'Copy';
+    btn.appendChild(icon);
+
+    block.parentNode.insertBefore(btn, block);
+
+    btn.addEventListener('click', async () => {
+      await navigator.clipboard.writeText(block.textContent);
+      btn.classList.add('copied');
+      setTimeout(() => btn.classList.remove('copied'), 1500);
+    });
+  });
+  </script>
+
+  <script>
+  document.body.dataset.page = window.location.pathname;
+
+  const menuBtn = document.querySelector(".menu-toggle");
+  const nav = document.querySelector(".nav");
+
+  if (menuBtn && nav) {
+    menuBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      nav.classList.toggle("show");
+    });
+
+    document.addEventListener("click", (e) => {
+      const clickedInsideNav = nav.contains(e.target);
+      const clickedMenuButton = menuBtn.contains(e.target);
+      if (!clickedInsideNav && !clickedMenuButton) {
+        nav.classList.remove("show");
+      }
+    });
+  }
+  </script>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+  <script>
+document.getElementById("openDonate").addEventListener("click", () => {
+  document.getElementById("donateModal").style.display = "block";
+});
+document.getElementById("closeDonate").addEventListener("click", () => {
+  document.getElementById("donateModal").style.display = "none";
+});
+document.querySelectorAll(".copy-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    navigator.clipboard.writeText(btn.dataset.copy);
+  
+    setTimeout(() => (btn.textContent = "کپی"), 2000);
+  });
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,431 @@
+
+
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <link rel="icon" type="image/png" href="/Gitab/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>کنترل جریان</title>
+  <meta name="description" content="ترجمه‌های فارسی کتاب‌های فنی — سریع، مینیمال و قابل اتکا.">
+
+  <!-- استایل‌ها -->
+  <link rel="stylesheet" href="/Gitab/styles/main.css">
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+
+  <style>
+  @font-face {
+    font-family: 'Vazir';
+    src: url('/Gitab/fonts/Vazir-FD-WOL.ttf') format('truetype');
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "Lalezar";
+    src: url('fonts/Lalezar.ttf') format('truetype');
+    font-display: swap;
+}
+  body {
+    font-family: 'Vazir', sans-serif;
+  }
+  </style>
+</head>
+
+<body>
+  <!-- هدر مشترک -->
+  <header class="header">
+    <div class="container nav-wrap">
+      <a href="/Gitab/" class="brand">
+        <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="26" height="26">
+        <span>Gitab</span>
+      </a>
+
+       <nav class="nav">
+         <a href="/Gitab/" >خانه</a>
+         <a href="/Gitab/books/list-books" >کتاب‌ها</a>
+         <a href="/Gitab/giter.html" >دوره ها</a>
+          <!-- 
+         <a href="/Gitab/translator.html" >مترجمین</a>
+           -->
+       </nav>
+
+      <div class="nav-actions">
+        <button id="themeToggle" class="icon-btn theme-btn" data-icon="moon" aria-label="تغییر تم">
+          <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن">
+          <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک">
+        </button>
+
+        <a class="icon-btn" href="https://github.com/hheydarian/Gitab" target="_blank" title="GitHub">
+          <img src="/Gitab/icone/github.svg" alt="GitHub">
+        </a>
+
+        <!-- دکمه منو برای موبایل -->
+        <button class="menu-toggle" aria-label="منو">
+          <img src="/Gitab/icone/menu.svg" alt="menu">
+        </button>
+      </div>
+    </div>
+  </header>
+
+  
+  <main class="site-main book-page">
+    <h1>فصل ۲۷ – کنترل جریان: انشعاب با if</h1>
+<p>در دو فصل گذشته یک پروژهٔ واقعی را آغاز کردیم و اسکریپت <code>sys_info_page</code> را با دیدگاه «طراحی از بالا به پایین» ساختاردهی کردیم.<br>
+گام بعدی این است که بتوانیم <strong>وابسته به شرایط</strong> رفتار متفاوتی نشان دهیم؛<br>
+برای مثال اگر کاربر مجوز کافی نداشته باشد هشدار دهیم یا اگر فایل خروجی موجود است، نسخهٔ تازه‌ای نسازیم.<br>
+ابزار اصلی برای این کار عبارت شرطی <code>if</code> است که به کمک آن می‌توانیم جریان اجرا را کنترل کنیم.</p>
+<hr>
+<h2>شکل کلی دستور if</h2>
+<p>دستور <code>if</code> در bash شکل عمومی زیر را دارد:</p>
+<pre class="hljs"><code><span class="hljs-keyword">if</span> فرمان یا عبارت شرطی
+<span class="hljs-keyword">then</span>
+    دستورات در صورت صدق شرط
+<span class="hljs-keyword">fi</span>
+</code></pre>
+<p>شل ابتدا فرمان شرطی را اجرا می‌کند.<br>
+اگر مقدار بازگشتی فرمان (Exit Status) برابر صفر باشد، بخش <code>then</code> اجرا می‌شود؛ در غیر این صورت کنترل به انتهای ساختار یعنی <code>fi</code> منتقل می‌شود.</p>
+<p>برای خوانایی، معمولاً کلمهٔ <code>then</code> در خط جداگانه قرار می‌گیرد، اما شکل فشردهٔ زیر نیز صحیح است:</p>
+<pre class="hljs"><code><span class="hljs-keyword">if</span> فرمان; <span class="hljs-keyword">then</span>
+    دستورات
+<span class="hljs-keyword">fi</span>
+</code></pre>
+<h3>افزودن بخش else</h3>
+<p>گاهی لازم است در صورت برقرار نبودن شرط هم عملی انجام دهیم.<br>
+با افزودن کلمهٔ <code>else</code>، دو شاخهٔ مجزا خواهیم داشت:</p>
+<pre class="hljs"><code><span class="hljs-keyword">if</span> فرمان; <span class="hljs-keyword">then</span>
+    دستورات در صورت موفقیت
+<span class="hljs-keyword">else</span>
+    دستورات در صورت شکست
+<span class="hljs-keyword">fi</span>
+</code></pre>
+<h3>انشعاب‌های چندگانه با elif</h3>
+<p>برای بررسی چند شرط پشت سر هم از <code>elif</code> استفاده می‌کنیم؛ هر <code>elif</code> شرط جدیدی را آزمایش می‌کند و به محض موفقیت، سایر شاخه‌ها نادیده گرفته می‌شوند:</p>
+<pre class="hljs"><code><span class="hljs-keyword">if</span> شرط_۱; <span class="hljs-keyword">then</span>
+    کار ۱
+<span class="hljs-keyword">elif</span> شرط_۲; <span class="hljs-keyword">then</span>
+    کار ۲
+<span class="hljs-keyword">elif</span> شرط_۳; <span class="hljs-keyword">then</span>
+    کار ۳
+<span class="hljs-keyword">else</span>
+    حالت پیش‌فرض
+<span class="hljs-keyword">fi</span>
+</code></pre>
+<hr>
+<h2>فرمان test و براکت‌های <code>[]</code></h2>
+<p>به صورت سنتی برای ساخت شرط‌ها از برنامهٔ <code>test</code> استفاده می‌شود.<br>
+این فرمان عبارت منطقی را دریافت و با توجه به درستی یا نادرستی آن مقدار بازگشتی صفر/غیرصفر تولید می‌کند.<br>
+دو شکل نوشتاری معادل در bash وجود دارد:</p>
+<pre class="hljs"><code><span class="hljs-built_in">test</span> EXPRESSION
+</code></pre>
+<p>یا</p>
+<pre class="hljs"><code>[ EXPRESSION ]
+</code></pre>
+<p>نکته: فاصله‌ها الزامی هستند؛ یعنی باید میان براکت و عبارت فاصله بگذارید.</p>
+<h3>مقایسهٔ رشته‌ای</h3>
+<table>
+<thead>
+<tr>
+<th>عملگر</th>
+<th>توضیح</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>string1 = string2</code></td>
+<td>برابر بودن دو رشته</td>
+</tr>
+<tr>
+<td><code>string1 != string2</code></td>
+<td>نابرابر بودن</td>
+</tr>
+<tr>
+<td><code>-n string</code></td>
+<td>طول رشته بزرگ‌تر از صفر است</td>
+</tr>
+<tr>
+<td><code>-z string</code></td>
+<td>طول رشته صفر است</td>
+</tr>
+<tr>
+<td><code>string1 &lt; string2</code></td>
+<td>مقایسهٔ لغت‌نامه‌ای (درون <code>[[ ]]</code>)</td>
+</tr>
+<tr>
+<td><code>string1 &gt; string2</code></td>
+<td>مقایسهٔ لغت‌نامه‌ای (درون <code>[[ ]]</code>)</td>
+</tr>
+</tbody>
+</table>
+<p>در محیط <code>[</code> و <code>test</code>، عملگرهای <code>&lt;</code> و <code>&gt;</code> باید با escape (<code>\&lt;</code>) استفاده شوند، اما در <code>[[ ]]</code> نیازی نیست.</p>
+<h3>مقایسهٔ عددی</h3>
+<table>
+<thead>
+<tr>
+<th>عملگر</th>
+<th>توضیح</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>int1 -eq int2</code></td>
+<td>برابر بودن</td>
+</tr>
+<tr>
+<td><code>int1 -ne int2</code></td>
+<td>نابرابر</td>
+</tr>
+<tr>
+<td><code>int1 -lt int2</code></td>
+<td>کوچک‌تر</td>
+</tr>
+<tr>
+<td><code>int1 -le int2</code></td>
+<td>کوچک‌تر یا مساوی</td>
+</tr>
+<tr>
+<td><code>int1 -gt int2</code></td>
+<td>بزرگ‌تر</td>
+</tr>
+<tr>
+<td><code>int1 -ge int2</code></td>
+<td>بزرگ‌تر یا مساوی</td>
+</tr>
+</tbody>
+</table>
+<p>برای محاسبات پیچیده‌تر می‌توان از ساختار <code>(( ))</code> بهره گرفت که نحو C مانند دارد و خودکار نتیجهٔ منطقی تولید می‌کند.</p>
+<h3>آزمون فایل‌ها</h3>
+<p>بسیاری از اسکریپت‌ها باید دربارهٔ فایل‌ها تصمیم‌گیری کنند؛ مثلاً آیا فایل موجود است؟ آیا قابل نوشتن است؟<br>
+مهم‌ترین عملگرهای <code>test</code> برای فایل‌ها عبارت‌اند از:</p>
+<table>
+<thead>
+<tr>
+<th>عملگر</th>
+<th>توضیح</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-e file</code></td>
+<td>وجود فایل یا دایرکتوری</td>
+</tr>
+<tr>
+<td><code>-f file</code></td>
+<td>فایل معمولی</td>
+</tr>
+<tr>
+<td><code>-d file</code></td>
+<td>دایرکتوری</td>
+</tr>
+<tr>
+<td><code>-s file</code></td>
+<td>اندازهٔ غیرصفر</td>
+</tr>
+<tr>
+<td><code>-r file</code></td>
+<td>دارای مجوز خواندن</td>
+</tr>
+<tr>
+<td><code>-w file</code></td>
+<td>دارای مجوز نوشتن</td>
+</tr>
+<tr>
+<td><code>-x file</code></td>
+<td>قابل اجرا</td>
+</tr>
+<tr>
+<td><code>-O file</code></td>
+<td>مالکیت فایل متعلق به کاربر جاری</td>
+</tr>
+<tr>
+<td><code>-G file</code></td>
+<td>فایل به گروه کاربر جاری تعلق دارد</td>
+</tr>
+<tr>
+<td><code>file1 -nt file2</code></td>
+<td>فایل اول جدیدتر از فایل دوم</td>
+</tr>
+<tr>
+<td><code>file1 -ot file2</code></td>
+<td>فایل اول قدیمی‌تر</td>
+</tr>
+</tbody>
+</table>
+<p>این آزمون‌ها در پروژهٔ ما کاربرد فراوانی دارند؛ مثلاً برای بررسی وجود دایرکتوری خروجی.</p>
+<hr>
+<h2>ساختار [[ ]] و عملگرهای منطقی</h2>
+<p>bash علاوه بر <code>test</code> سنتی، ساختار مدرن‌تری با نام <code>[[ ]]</code> فراهم می‌کند که مزایایی همچون:</p>
+<ul>
+<li>عدم نیاز به escape برای اکثر کاراکترهای متا</li>
+<li>امکان استفاده از عملگرهای منطقی <code>&amp;&amp;</code>، <code>||</code> و <code>!</code></li>
+<li>پشتیبانی از تطبیق الگو (Pattern Matching) با <code>=~</code></li>
+</ul>
+<p>نمونه:</p>
+<pre class="hljs"><code><span class="hljs-keyword">if</span> [[ -d <span class="hljs-string">&quot;<span class="hljs-variable">$WORKDIR</span>&quot;</span> &amp;&amp; -w <span class="hljs-string">&quot;<span class="hljs-variable">$WORKDIR</span>&quot;</span> ]]; <span class="hljs-keyword">then</span>
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;دایرکتوری آماده است.&quot;</span>
+<span class="hljs-keyword">else</span>
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;نمی‌توان در <span class="hljs-variable">$WORKDIR</span> نوشت.&quot;</span>
+<span class="hljs-keyword">fi</span>
+</code></pre>
+<p>برای تطبیق الگو می‌توان نوشت:</p>
+<pre class="hljs"><code><span class="hljs-keyword">if</span> [[ <span class="hljs-variable">$HOSTNAME</span> == web-* ]]; <span class="hljs-keyword">then</span>
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;این میزبان جزو سرورهای وب است.&quot;</span>
+<span class="hljs-keyword">fi</span>
+</code></pre>
+<hr>
+<h2>بازبینی پروژه: بررسی ورودی‌ها</h2>
+<p>به نسخهٔ فعلی <code>sys_info_page</code> برمی‌گردیم.<br>
+می‌خواهیم پیش از تولید گزارش، چند شرط را کنترل کنیم:</p>
+<ol>
+<li>فقط کاربری که در گروه <code>adm</code> یا ریشه است مجاز به اجرای اسکریپت باشد.</li>
+<li>اگر مسیر خروجی در خط فرمان مشخص شده، وجود و قابلیت نوشتن آن بررسی شود.</li>
+<li>در صورت وجود فایل خروجی، نسخهٔ پشتیبان با پسوند زمان ایجاد گردد.</li>
+</ol>
+<p>کد نمونه:</p>
+<pre class="hljs"><code>REPORT_FILE=<span class="hljs-variable">${1:-/var/www/html/sys_info.html}</span>
+BACKUP_FILE=<span class="hljs-string">&quot;<span class="hljs-variable">$REPORT_FILE</span>.<span class="hljs-subst">$(date +%s)</span>&quot;</span>
+
+<span class="hljs-keyword">if</span> ! <span class="hljs-built_in">id</span> -nG <span class="hljs-string">&quot;<span class="hljs-variable">$USER</span>&quot;</span> | grep -qwE <span class="hljs-string">&#x27;(^|\s)(root|adm)(\s|$)&#x27;</span>; <span class="hljs-keyword">then</span>
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;خطا: برای اجرای اسکریپت باید عضو گروه adm یا کاربر ریشه باشید.&quot;</span> &gt;&amp;2
+    <span class="hljs-built_in">exit</span> 1
+<span class="hljs-keyword">fi</span>
+
+<span class="hljs-keyword">if</span> [[ -e <span class="hljs-string">&quot;<span class="hljs-variable">$REPORT_FILE</span>&quot;</span> ]]; <span class="hljs-keyword">then</span>
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;هشدار: فایل مقصد وجود دارد؛ نسخهٔ پشتیبان می‌سازم.&quot;</span>
+    <span class="hljs-built_in">cp</span> <span class="hljs-string">&quot;<span class="hljs-variable">$REPORT_FILE</span>&quot;</span> <span class="hljs-string">&quot;<span class="hljs-variable">$BACKUP_FILE</span>&quot;</span> || {
+        <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;عدم موفقیت در ایجاد نسخهٔ پشتیبان.&quot;</span> &gt;&amp;2
+        <span class="hljs-built_in">exit</span> 1
+    }
+<span class="hljs-keyword">fi</span>
+</code></pre>
+<p>در این مثال از ترکیب <code>[[ ]]</code>، اپراتور <code>!</code> و فرمان‌های کمکی استفاده کرده‌ایم تا جریان تصمیم‌گیری به‌وضوح مشخص شود.</p>
+<h3>دستور <code>case</code> در آینده</h3>
+<p>در برخی شرایط استفاده از زنجیره‌های طولانی <code>if/elif</code> ناخوانا می‌شود.<br>
+در فصل ۳۱ با ساختار <code>case</code> آشنا می‌شویم که برای انتخاب از میان گزینه‌های متعدد مناسب است.</p>
+<hr>
+<h2>تمرین‌ها</h2>
+<ol>
+<li>اسکریپتی بنویسید که نام یک فایل را از کاربر بگیرد و اگر فایل معمولی موجود بود، اندازهٔ آن را نمایش دهد؛ در غیر این صورت پیام خطا چاپ کند.</li>
+<li>نسخه‌ای از <code>sys_info_page</code> بسازید که در صورت کمبود فضای دیسک (کمتر از ۱ گیگابایت در <code>/tmp</code>) از تولید گزارش صرف‌نظر کند.</li>
+<li>فرمانی بنویسید که بررسی کند آیا سرویس <code>sshd</code> در حال اجراست یا خیر؛ در صورت اجرا پیام «فعال» و در غیر این صورت «غیرفعال» چاپ شود.</li>
+</ol>
+<hr>
+<h2>مطالعهٔ بیشتر</h2>
+<ul>
+<li>صفحهٔ راهنمای bash دربارهٔ ساختارهای <code>if</code>, <code>[[ ]]</code> و <code>(( ))</code></li>
+<li>مقالهٔ «Bash Reference Manual» بخش Conditional Constructs</li>
+<li>بخش «test» در صفحات man برای مشاهدهٔ کامل‌ترین فهرست عملگرها</li>
+</ul>
+
+  </main>
+
+  <!-- فوتر مشترک -->
+  <footer class="footer">
+    <div class="container">
+      <p>
+        <img src="/Gitab/icone/copyright.svg" alt="کپی‌رایت" width="14" height="14"
+             style="vertical-align:middle;margin-inline:4px">
+        <span id="y"></span> Gitab — تمامی حقوق محفوظ است.
+      </p>
+    </div>
+  </footer>
+
+  <!-- سال و اسکریپت تغییر تم -->
+  <script>
+  (() => {
+    const root = document.documentElement;
+    const btn = document.getElementById('themeToggle');
+    const KEY = 'gitab-theme';
+
+    function updateTheme(s) {
+      root.setAttribute('data-theme', s);
+      const mode = s;  // فقط `dark` یا `light` خواهد بود
+      root.dataset.colorMode = mode;
+      btn.dataset.icon = mode === 'dark' ? 'moon' : 'sun';
+    }
+
+    // وضعیت تم ذخیره شده از localStorage
+    let saved = localStorage.getItem(KEY) || 'light'; // پیش‌فرض روشن
+    updateTheme(saved);
+
+    // تنظیم مجدد تم هنگام تغییر وضعیت دکمه
+    btn.addEventListener('click', () => {
+      const current = localStorage.getItem(KEY) || 'light';
+      const next = current === 'dark' ? 'light' : 'dark';  // فقط دو حالت: تاریک و روشن
+      localStorage.setItem(KEY, next);
+      updateTheme(next);
+    });
+
+    // هنگام بارگذاری صفحه
+    document.addEventListener('DOMContentLoaded', () => {
+      updateTheme(localStorage.getItem(KEY) || 'light');
+    });
+  })();
+</script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+
+  <script>
+  document.querySelectorAll('pre code').forEach(block => {
+    const btn = document.createElement('button');
+    btn.className = 'copy-btn';
+
+    const icon = document.createElement('img');
+    icon.src = "/Gitab/icone/copy.svg";
+    icon.alt = 'Copy';
+    btn.appendChild(icon);
+
+    block.parentNode.insertBefore(btn, block);
+
+    btn.addEventListener('click', async () => {
+      await navigator.clipboard.writeText(block.textContent);
+      btn.classList.add('copied');
+      setTimeout(() => btn.classList.remove('copied'), 1500);
+    });
+  });
+  </script>
+
+  <script>
+  document.body.dataset.page = window.location.pathname;
+
+  const menuBtn = document.querySelector(".menu-toggle");
+  const nav = document.querySelector(".nav");
+
+  if (menuBtn && nav) {
+    menuBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      nav.classList.toggle("show");
+    });
+
+    document.addEventListener("click", (e) => {
+      const clickedInsideNav = nav.contains(e.target);
+      const clickedMenuButton = menuBtn.contains(e.target);
+      if (!clickedInsideNav && !clickedMenuButton) {
+        nav.classList.remove("show");
+      }
+    });
+  }
+  </script>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+  <script>
+document.getElementById("openDonate").addEventListener("click", () => {
+  document.getElementById("donateModal").style.display = "block";
+});
+document.getElementById("closeDonate").addEventListener("click", () => {
+  document.getElementById("donateModal").style.display = "none";
+});
+document.querySelectorAll(".copy-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    navigator.clipboard.writeText(btn.dataset.copy);
+  
+    setTimeout(() => (btn.textContent = "کپی"), 2000);
+  });
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,316 @@
+
+
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <link rel="icon" type="image/png" href="/Gitab/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>پردازش متن</title>
+  <meta name="description" content="ترجمه‌های فارسی کتاب‌های فنی — سریع، مینیمال و قابل اتکا.">
+
+  <!-- استایل‌ها -->
+  <link rel="stylesheet" href="/Gitab/styles/main.css">
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+
+  <style>
+  @font-face {
+    font-family: 'Vazir';
+    src: url('/Gitab/fonts/Vazir-FD-WOL.ttf') format('truetype');
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "Lalezar";
+    src: url('fonts/Lalezar.ttf') format('truetype');
+    font-display: swap;
+}
+  body {
+    font-family: 'Vazir', sans-serif;
+  }
+  </style>
+</head>
+
+<body>
+  <!-- هدر مشترک -->
+  <header class="header">
+    <div class="container nav-wrap">
+      <a href="/Gitab/" class="brand">
+        <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="26" height="26">
+        <span>Gitab</span>
+      </a>
+
+       <nav class="nav">
+         <a href="/Gitab/" >خانه</a>
+         <a href="/Gitab/books/list-books" >کتاب‌ها</a>
+         <a href="/Gitab/giter.html" >دوره ها</a>
+          <!-- 
+         <a href="/Gitab/translator.html" >مترجمین</a>
+           -->
+       </nav>
+
+      <div class="nav-actions">
+        <button id="themeToggle" class="icon-btn theme-btn" data-icon="moon" aria-label="تغییر تم">
+          <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن">
+          <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک">
+        </button>
+
+        <a class="icon-btn" href="https://github.com/hheydarian/Gitab" target="_blank" title="GitHub">
+          <img src="/Gitab/icone/github.svg" alt="GitHub">
+        </a>
+
+        <!-- دکمه منو برای موبایل -->
+        <button class="menu-toggle" aria-label="منو">
+          <img src="/Gitab/icone/menu.svg" alt="menu">
+        </button>
+      </div>
+    </div>
+  </header>
+
+  
+  <main class="site-main book-page">
+    <h1>فصل ۲۰ – پردازش متن</h1>
+<p>بخش عمده‌ای از کار در محیط خط فرمان با متن سروکار دارد.<br>
+فایل‌های پیکربندی، گزارش‌ها، خروجی برنامه‌ها و بسیاری از داده‌های دیگر همگی متنی هستند.<br>
+ابزارهای یونیکس برای فیلتر کردن، تبدیل و تحلیل متن شهرت دارند؛ آن‌ها را می‌توان زنجیروار ترکیب کرد و وظایف پیچیده را به روشی ساده انجام داد.</p>
+<p>در این فصل خواهیم دید چگونه می‌توان جریان‌های داده را با فیلترهای گوناگون تغییر داد و اطلاعات مورد نیاز را به دست آورد.</p>
+<p>مباحث اصلی عبارت‌اند از:</p>
+<ul>
+<li>استفاده از <code>cut</code>، <code>paste</code> و <code>join</code> برای انتخاب و ترکیب ستون‌ها.</li>
+<li>بهره‌گیری از <code>sort</code>، <code>uniq</code> و <code>comm</code> برای مرتب‌سازی و حذف خطوط تکراری.</li>
+<li>ابزارهای شمارش مانند <code>wc</code> و <code>nl</code>.</li>
+<li>آشنایی با <code>tr</code>، <code>expand</code> و <code>fmt</code> برای قالب‌بندی سریع متن.</li>
+</ul>
+<hr>
+<h3>انتخاب ستون‌ها با cut</h3>
+<p>دستور <code>cut</code> برای استخراج بخش‌هایی از هر خط به کار می‌رود.<br>
+به کمک گزینهٔ <code>-f</code> می‌توان ستون‌ها را براساس جداکنندهٔ مشخص استخراج کرد.<br>
+برای نمونه اگر فایل <code>sales.csv</code> شامل مقادیر جداشده با کاما باشد، می‌توان ستون دوم و چهارم را این‌گونه برداشت:</p>
+<pre class="hljs"><code>cut -d',' -f2,4 sales.csv
+</code></pre>
+<p>با <code>-c</code> می‌توان محدودهٔ کاراکتری تعیین کرد و با <code>--complement</code> ستون‌های به جز موارد خواسته‌شده را گرفت.</p>
+<h3>چسباندن ستون‌ها با paste</h3>
+<p>اگر بخواهیم فایل‌هایی را به صورت ستون‌به‌ستون کنار هم قرار دهیم، <code>paste</code> مفید است.<br>
+مثلاً دو فایل <code>names</code> و <code>phones</code> را ترکیب کنیم:</p>
+<pre class="hljs"><code>paste names phones
+</code></pre>
+<p>به طور پیش‌فرض از تب به عنوان جداکننده استفاده می‌کند؛ با گزینهٔ <code>-d</code> می‌توان جداکنندهٔ دیگری تعیین کرد.</p>
+<h3>join برای داده‌های جدولی</h3>
+<p><code>join</code> شبیه عملیات «پیوستن» در پایگاه‌های داده است و سطرهایی را که کلید مشترک دارند ادغام می‌کند.<br>
+پیش از استفاده باید فایل‌ها براساس ستون کلید مرتب شده باشند.<br>
+نمونه:</p>
+<pre class="hljs"><code>join -t',' -1 1 -2 1 customers.csv orders.csv
+</code></pre>
+<p>گزینهٔ <code>-1</code> و <code>-2</code> شمارهٔ ستون کلید را مشخص می‌کند و <code>-t</code> جداکننده را تعیین می‌کند.</p>
+<hr>
+<h3>مرتب‌سازی و حذف تکرار</h3>
+<p>دستور <code>sort</code> خطوط را مرتب می‌کند.<br>
+می‌توانیم نوع مرتب‌سازی را با گزینه‌های مختلف تعیین کنیم:</p>
+<ul>
+<li><code>-n</code> مرتب‌سازی عددی.</li>
+<li><code>-r</code> ترتیب معکوس.</li>
+<li><code>-k</code> مشخص کردن کلید مرتب‌سازی.</li>
+<li><code>-u</code> حذف خطوط تکراری.</li>
+</ul>
+<p>مثال:</p>
+<pre class="hljs"><code>sort -t',' -k3,3n -k1,1 sales.csv
+</code></pre>
+<p>این فرمان ابتدا براساس ستون سوم به صورت عددی و سپس ستون اول به شکل الفبایی مرتب می‌کند.</p>
+<p>برای حذف خطوط تکراری پس از مرتب‌سازی از <code>uniq</code> استفاده می‌شود:</p>
+<pre class="hljs"><code>sort names.txt | uniq
+</code></pre>
+<p>گزینهٔ <code>-c</code> در <code>uniq</code> تعداد تکرار هر خط را نشان می‌دهد و <code>-d</code> فقط خطوطی را چاپ می‌کند که بیشتر از یک بار دیده شده‌اند.</p>
+<p>همچنین <code>comm</code> سه فایل خروجی تولید می‌کند که اشتراک و اختلاف دو فایل مرتب‌شده را نمایش می‌دهد.</p>
+<hr>
+<h3>شمارش و شماره‌گذاری خطوط</h3>
+<ul>
+<li><code>wc</code> تعداد خطوط (<code>-l</code>)، واژه‌ها (<code>-w</code>) و کاراکترها (<code>-c</code>) را گزارش می‌کند.</li>
+<li><code>nl</code> خطوط را شماره‌گذاری می‌کند و نسبت به خطوط خالی یا بلوک‌ها گزینه‌های بیشتری دارد.</li>
+</ul>
+<p>برای شمارش همهٔ فایل‌های متنی در دایرکتوری:</p>
+<pre class="hljs"><code>wc -l *.txt
+</code></pre>
+<p>اگر بخواهیم تنها تعداد کل خطوط را بدانیم، گزینهٔ <code>--total=only</code> در <code>wc</code> مفید است.</p>
+<hr>
+<h3>تبدیل کاراکترها با tr</h3>
+<p><code>tr</code> کاراکترها را جایگزین یا حذف می‌کند.<br>
+برای مثال تبدیل حروف کوچک به بزرگ:</p>
+<pre class="hljs"><code>tr '[:lower:]' '[:upper:]' &lt; report.txt
+</code></pre>
+<p>یا حذف کاراکترهای غیرقابل چاپ:</p>
+<pre class="hljs"><code>tr -cd '\11\12\15\40-\176' &lt; data.txt
+</code></pre>
+<p>گزینهٔ <code>-s</code> توالی‌های تکراری را فشرده می‌کند، مثلاً چند فاصلهٔ پشت سر هم را به یکی تبدیل می‌کند.</p>
+<hr>
+<h3>تب و فاصله</h3>
+<p><code>expand</code> تب‌ها را به فاصله تبدیل و <code>unexpand</code> برعکس عمل می‌کند.<br>
+این ابزارها هنگام هماهنگ‌سازی قالب فایل‌های کد منبع مفید هستند.</p>
+<pre class="hljs"><code>expand -t4 source.c &gt; source.spaces.c
+</code></pre>
+<hr>
+<h3>تقسیم فایل‌ها با split و csplit</h3>
+<p>هنگام کار با فایل‌های بزرگ ممکن است بخواهیم آن‌ها را به بخش‌های کوچک‌تر تقسیم کنیم.<br>
+دستور <code>split</code> فایل را براساس اندازه یا تعداد خطوط تکه‌تکه می‌کند:</p>
+<pre class="hljs"><code>split -b 10M huge.log huge-
+</code></pre>
+<p>این فرمان فایل <code>huge.log</code> را به بلوک‌های ۱۰ مگابایتی با نام‌های <code>huge-aa</code>, <code>huge-ab</code> و ... تقسیم می‌کند.<br>
+با گزینهٔ <code>-l</code> می‌توان تعداد خطوط را مشخص کرد و با <code>-d</code> از شماره‌گذاری عددی استفاده نمود.</p>
+<p>برای تقسیم براساس الگوها، <code>csplit</code> مناسب‌تر است. این ابزار بر اساس regex مرزهای فایل را پیدا می‌کند:</p>
+<pre class="hljs"><code>csplit report.txt '/^Chapter [0-9]+/' '{*}'
+</code></pre>
+<p>در مثال بالا هر فصل در فایل جداگانه‌ای ذخیره می‌شود. گزینهٔ <code>'{*}'</code> به <code>csplit</code> می‌گوید تا پایان فایل هر بار که الگو یافت شد این کار را تکرار کند. پس از تقسیم، می‌توانیم فایل‌های حاصل را پردازش یا آرشیو کنیم.</p>
+<hr>
+<h3>شکستن و ترکیب خطوط</h3>
+<ul>
+<li><code>fmt</code> پاراگراف‌ها را تا طول مشخصی می‌شکند.</li>
+<li><code>fold</code> خطوط طولانی را بدون توجه به کلمات می‌شکند.</li>
+<li><code>pr</code> فایل‌ها را برای چاپ آماده می‌کند و سرصفحه و شمارهٔ صفحه می‌افزاید.</li>
+</ul>
+<p>نمونه:</p>
+<pre class="hljs"><code>fmt -w 72 letter.txt &gt; letter_wrapped.txt
+</code></pre>
+<hr>
+<h3>ترکیب ابزارها در خط لوله</h3>
+<p>قدرت واقعی ابزارهای پردازش متن زمانی آشکار می‌شود که آن‌ها را زنجیر کنیم.<br>
+مثلاً برای یافتن پرفروش‌ترین کالا بر اساس دادهٔ CSV:</p>
+<pre class="hljs"><code>cut -d',' -f2,5 sales.csv \
+  | sort -t',' -k2,2nr \
+  | head -n 10
+</code></pre>
+<p>یا برای استخراج دامنهٔ ایمیل‌ها از فایل متنی:</p>
+<pre class="hljs"><code>grep -E -o '[[:alnum:]_.+-]+@[[:alnum:].-]+' contacts.txt \
+  | cut -d'@' -f2 \
+  | sort \
+  | uniq -c \
+  | sort -nr
+</code></pre>
+<hr>
+<h3>تمرین</h3>
+<p>برای تسلط بیشتر روی ابزارهای پردازش متن، سناریوهای روزمره را تمرین کنید:</p>
+<ol>
+<li>فایلی از لاگ وب بگیرید، فقط کدهای وضعیت (status code) را استخراج کنید و تعداد هر کد را بشمارید.</li>
+<li>فهرستی از کارمندان با حقوق دریافتی تهیه کنید و متوسط حقوق را حساب کنید.</li>
+<li>از <code>join</code> استفاده کنید تا دو فایل شامل کد محصول و موجودی انبار را ترکیب کنید و فقط محصولاتی را نمایش دهید که موجودی‌شان کمتر از حداقل تعریف‌شده است.</li>
+</ol>
+<p>هرچه بیشتر این ابزارها را کنار هم قرار دهید، خلاقیت بیشتری در حل مسائل متنی پیدا می‌کنید.</p>
+<hr>
+<h3>مطالعهٔ بیشتر</h3>
+<ul>
+<li>بستهٔ <strong>GNU Coreutils</strong> شامل بسیاری از این ابزارهاست؛ صفحه‌های راهنما (<code>man cut</code>, <code>man paste</code>, <code>man split</code> و غیره) مثال‌های فراوانی دارند.</li>
+<li>پروژهٔ <a href="https://pubs.opengroup.org/onlinepubs/9699919799/">The Open Group POSIX</a> تعریف رسمی نحوهٔ عملکرد این دستورات را ارائه می‌دهد.</li>
+<li>برای سناریوهای پیچیده‌تر پردازش متن، مطالعهٔ ابزارهای <code>perl</code>, <code>python</code> و کتابخانهٔ <code>pandas</code> می‌تواند دید گسترده‌تری بدهد.</li>
+</ul>
+
+  </main>
+
+  <!-- فوتر مشترک -->
+  <footer class="footer">
+    <div class="container">
+      <p>
+        <img src="/Gitab/icone/copyright.svg" alt="کپی‌رایت" width="14" height="14"
+             style="vertical-align:middle;margin-inline:4px">
+        <span id="y"></span> Gitab — تمامی حقوق محفوظ است.
+      </p>
+    </div>
+  </footer>
+
+  <!-- سال و اسکریپت تغییر تم -->
+  <script>
+  (() => {
+    const root = document.documentElement;
+    const btn = document.getElementById('themeToggle');
+    const KEY = 'gitab-theme';
+
+    function updateTheme(s) {
+      root.setAttribute('data-theme', s);
+      const mode = s;  // فقط `dark` یا `light` خواهد بود
+      root.dataset.colorMode = mode;
+      btn.dataset.icon = mode === 'dark' ? 'moon' : 'sun';
+    }
+
+    // وضعیت تم ذخیره شده از localStorage
+    let saved = localStorage.getItem(KEY) || 'light'; // پیش‌فرض روشن
+    updateTheme(saved);
+
+    // تنظیم مجدد تم هنگام تغییر وضعیت دکمه
+    btn.addEventListener('click', () => {
+      const current = localStorage.getItem(KEY) || 'light';
+      const next = current === 'dark' ? 'light' : 'dark';  // فقط دو حالت: تاریک و روشن
+      localStorage.setItem(KEY, next);
+      updateTheme(next);
+    });
+
+    // هنگام بارگذاری صفحه
+    document.addEventListener('DOMContentLoaded', () => {
+      updateTheme(localStorage.getItem(KEY) || 'light');
+    });
+  })();
+</script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+
+  <script>
+  document.querySelectorAll('pre code').forEach(block => {
+    const btn = document.createElement('button');
+    btn.className = 'copy-btn';
+
+    const icon = document.createElement('img');
+    icon.src = "/Gitab/icone/copy.svg";
+    icon.alt = 'Copy';
+    btn.appendChild(icon);
+
+    block.parentNode.insertBefore(btn, block);
+
+    btn.addEventListener('click', async () => {
+      await navigator.clipboard.writeText(block.textContent);
+      btn.classList.add('copied');
+      setTimeout(() => btn.classList.remove('copied'), 1500);
+    });
+  });
+  </script>
+
+  <script>
+  document.body.dataset.page = window.location.pathname;
+
+  const menuBtn = document.querySelector(".menu-toggle");
+  const nav = document.querySelector(".nav");
+
+  if (menuBtn && nav) {
+    menuBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      nav.classList.toggle("show");
+    });
+
+    document.addEventListener("click", (e) => {
+      const clickedInsideNav = nav.contains(e.target);
+      const clickedMenuButton = menuBtn.contains(e.target);
+      if (!clickedInsideNav && !clickedMenuButton) {
+        nav.classList.remove("show");
+      }
+    });
+  }
+  </script>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+  <script>
+document.getElementById("openDonate").addEventListener("click", () => {
+  document.getElementById("donateModal").style.display = "block";
+});
+document.getElementById("closeDonate").addEventListener("click", () => {
+  document.getElementById("donateModal").style.display = "none";
+});
+document.querySelectorAll(".copy-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    navigator.clipboard.writeText(btn.dataset.copy);
+  
+    setTimeout(() => (btn.textContent = "کپی"), 2000);
+  });
+});
+</script>
+
+</body>
+</html>

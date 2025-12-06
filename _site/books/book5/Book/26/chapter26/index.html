@@ -1,0 +1,459 @@
+
+
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <link rel="icon" type="image/png" href="/Gitab/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>طراحی از بالا به پایین</title>
+  <meta name="description" content="ترجمه‌های فارسی کتاب‌های فنی — سریع، مینیمال و قابل اتکا.">
+
+  <!-- استایل‌ها -->
+  <link rel="stylesheet" href="/Gitab/styles/main.css">
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+
+  <style>
+  @font-face {
+    font-family: 'Vazir';
+    src: url('/Gitab/fonts/Vazir-FD-WOL.ttf') format('truetype');
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "Lalezar";
+    src: url('fonts/Lalezar.ttf') format('truetype');
+    font-display: swap;
+}
+  body {
+    font-family: 'Vazir', sans-serif;
+  }
+  </style>
+</head>
+
+<body>
+  <!-- هدر مشترک -->
+  <header class="header">
+    <div class="container nav-wrap">
+      <a href="/Gitab/" class="brand">
+        <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="26" height="26">
+        <span>Gitab</span>
+      </a>
+
+       <nav class="nav">
+         <a href="/Gitab/" >خانه</a>
+         <a href="/Gitab/books/list-books" >کتاب‌ها</a>
+         <a href="/Gitab/giter.html" >دوره ها</a>
+          <!-- 
+         <a href="/Gitab/translator.html" >مترجمین</a>
+           -->
+       </nav>
+
+      <div class="nav-actions">
+        <button id="themeToggle" class="icon-btn theme-btn" data-icon="moon" aria-label="تغییر تم">
+          <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن">
+          <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک">
+        </button>
+
+        <a class="icon-btn" href="https://github.com/hheydarian/Gitab" target="_blank" title="GitHub">
+          <img src="/Gitab/icone/github.svg" alt="GitHub">
+        </a>
+
+        <!-- دکمه منو برای موبایل -->
+        <button class="menu-toggle" aria-label="منو">
+          <img src="/Gitab/icone/menu.svg" alt="menu">
+        </button>
+      </div>
+    </div>
+  </header>
+
+  
+  <main class="site-main book-page">
+    <h1>فصل ۲۶ – طراحی از بالا به پایین</h1>
+<p>اکنون که اسکلت اسکریپت <code>sys_info_page</code> را ایجاد کرده‌ایم، وقت آن است ساختار آن را حرفه‌ای‌تر کنیم.<br>
+یکی از روش‌های کلاسیک در مهندسی نرم‌افزار «طراحی از بالا به پایین» (Top-Down Design) است؛<br>
+در این روش ابتدا تصویر کلی و وظایف اصلی را مشخص می‌کنیم، سپس هر وظیفه را به زیرکارهای کوچک‌تر تقسیم می‌کنیم تا در نهایت به جزئیات قابل‌پیاده‌سازی برسیم.<br>
+این فصل نشان می‌دهد چگونه با استفاده از توابع، متغیرها و بررسی خطاها، اسکریپتی منظم، قابل نگه‌داری و قابل توسعه بسازیم.</p>
+<hr>
+<h2>طرح کلی اسکریپت</h2>
+<p>برای شروع، لازم است تشخیص دهیم چه بخش‌هایی وجود دارد و هر بخش چه داده‌ای تولید می‌کند.<br>
+چک‌لیست زیر را در نظر بگیرید:</p>
+<ol>
+<li>تولید عنوان و سربرگ HTML.</li>
+<li>جمع‌آوری اطلاعات سیستم.</li>
+<li>جمع‌آوری زمان کارکرد.</li>
+<li>نمایش کاربران فعال.</li>
+<li>گزارش فضای دیسک و شاخه‌های خانگی.</li>
+<li>خاتمهٔ فایل HTML و اعلام نتیجه.</li>
+</ol>
+<p>هر یک از این موارد می‌تواند به صورت یک «تابع» پیاده‌سازی شود تا کد اصلی خواناتر گردد.</p>
+<h2>تعریف توابع</h2>
+<p>در bash دو شیوهٔ رایج برای تعریف تابع وجود دارد:</p>
+<pre class="hljs"><code><span class="hljs-keyword">function</span> function_name {
+    <span class="hljs-comment"># دستورات</span>
+}
+</code></pre>
+<p>یا:</p>
+<pre class="hljs"><code><span class="hljs-function"><span class="hljs-title">function_name</span></span>() {
+    <span class="hljs-comment"># دستورات</span>
+}
+</code></pre>
+<p>هر دو شکل معادل‌اند؛ در این کتاب از فرم دوم استفاده می‌کنیم.<br>
+توابع مقدار بازگشتی یک فرمان را با دستور <code>return</code> تعیین می‌کنند (مقدار عددی بین ۰ تا ۲۵۵).<br>
+اگر <code>return</code> ننویسیم، مقدار بازگشتی آخرین فرمان داخل تابع استفاده می‌شود.</p>
+<h3>ساخت قالب اولیه</h3>
+<p>در اسکریپت <code>sys_info_page</code> ابتدا توابعی می‌سازیم که فعلاً فقط پیام‌های نمونه چاپ می‌کنند.<br>
+سپس در ادامه آنها را تکمیل می‌کنیم.</p>
+<pre class="hljs"><code><span class="hljs-function"><span class="hljs-title">write_html_header</span></span>() {
+    <span class="hljs-built_in">cat</span> &lt;&lt; <span class="hljs-string">_EOF_
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;$TITLE&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;$TITLE&lt;/h1&gt;
+    &lt;p&gt;$TIME_STAMP&lt;/p&gt;
+_EOF_</span>
+}
+
+<span class="hljs-function"><span class="hljs-title">write_html_footer</span></span>() {
+    <span class="hljs-built_in">cat</span> &lt;&lt; <span class="hljs-string">_EOF_
+&lt;/body&gt;
+&lt;/html&gt;
+_EOF_</span>
+}
+</code></pre>
+<p>اکنون توابعی برای هر بخش گزارش ایجاد می‌کنیم:</p>
+<pre class="hljs"><code><span class="hljs-function"><span class="hljs-title">report_system_info</span></span>() {
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;    &lt;h2&gt;اطلاعات کلی سیستم&lt;/h2&gt;&quot;</span>
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;    &lt;pre&gt;<span class="hljs-subst">$(uname -mp)</span>&lt;/pre&gt;&quot;</span>
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;    &lt;pre&gt;<span class="hljs-subst">$(uname -sr)</span>&lt;/pre&gt;&quot;</span>
+    <span class="hljs-built_in">return</span> 0
+}
+
+<span class="hljs-function"><span class="hljs-title">report_uptime</span></span>() {
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;    &lt;h2&gt;زمان کارکرد سیستم&lt;/h2&gt;&quot;</span>
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;    &lt;pre&gt;<span class="hljs-subst">$(uptime)</span>&lt;/pre&gt;&quot;</span>
+    <span class="hljs-built_in">return</span> 0
+}
+
+<span class="hljs-function"><span class="hljs-title">report_users</span></span>() {
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;    &lt;h2&gt;کاربران حاضر&lt;/h2&gt;&quot;</span>
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;    &lt;pre&gt;<span class="hljs-subst">$(who)</span>&lt;/pre&gt;&quot;</span>
+    <span class="hljs-built_in">return</span> 0
+}
+
+<span class="hljs-function"><span class="hljs-title">report_disk_space</span></span>() {
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;    &lt;h2&gt;فضای دیسک موجود&lt;/h2&gt;&quot;</span>
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;    &lt;pre&gt;<span class="hljs-subst">$(df -h)</span>&lt;/pre&gt;&quot;</span>
+    <span class="hljs-built_in">return</span> 0
+}
+
+<span class="hljs-function"><span class="hljs-title">report_home_space</span></span>() {
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;    &lt;h2&gt;وضعیت شاخهٔ خانگی&lt;/h2&gt;&quot;</span>
+    <span class="hljs-keyword">if</span> [[ <span class="hljs-variable">$UID</span> -eq 0 ]]; <span class="hljs-keyword">then</span>
+        <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;    &lt;pre&gt;<span class="hljs-subst">$(du -sh /home/* 2&gt;/dev/null)</span>&lt;/pre&gt;&quot;</span>
+    <span class="hljs-keyword">else</span>
+        <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;    &lt;pre&gt;<span class="hljs-subst">$(du -sh <span class="hljs-string">&quot;<span class="hljs-variable">$HOME</span>&quot;</span> 2&gt;/dev/null)</span>&lt;/pre&gt;&quot;</span>
+    <span class="hljs-keyword">fi</span>
+    <span class="hljs-built_in">return</span> 0
+}
+</code></pre>
+<p>در تابع آخر بررسی کردیم که اگر اسکریپت با دسترسی ریشه اجرا شود، می‌تواند اطلاعات تمام شاخه‌های خانگی را تهیه کند؛ در غیر این صورت تنها شاخهٔ کاربر جاری گزارش می‌شود.</p>
+<h2>بدنهٔ اصلی برنامه</h2>
+<p>اکنون که توابع آماده‌اند، بدنهٔ اسکریپت بسیار ساده می‌شود.</p>
+<pre class="hljs"><code><span class="hljs-function"><span class="hljs-title">main</span></span>() {
+    <span class="hljs-keyword">if</span> ! write_html_header &gt; <span class="hljs-string">&quot;<span class="hljs-variable">$REPORT_FILE</span>&quot;</span>; <span class="hljs-keyword">then</span>
+        <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;خطا در نوشتن سربرگ HTML.&quot;</span> &gt;&amp;2
+        <span class="hljs-built_in">exit</span> 1
+    <span class="hljs-keyword">fi</span>
+
+    report_system_info &gt;&gt; <span class="hljs-string">&quot;<span class="hljs-variable">$REPORT_FILE</span>&quot;</span>
+    report_uptime &gt;&gt; <span class="hljs-string">&quot;<span class="hljs-variable">$REPORT_FILE</span>&quot;</span>
+    report_users &gt;&gt; <span class="hljs-string">&quot;<span class="hljs-variable">$REPORT_FILE</span>&quot;</span>
+    report_disk_space &gt;&gt; <span class="hljs-string">&quot;<span class="hljs-variable">$REPORT_FILE</span>&quot;</span>
+    report_home_space &gt;&gt; <span class="hljs-string">&quot;<span class="hljs-variable">$REPORT_FILE</span>&quot;</span>
+
+    <span class="hljs-keyword">if</span> write_html_footer &gt;&gt; <span class="hljs-string">&quot;<span class="hljs-variable">$REPORT_FILE</span>&quot;</span>; <span class="hljs-keyword">then</span>
+        <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;گزارش در <span class="hljs-variable">$REPORT_FILE</span> ذخیره شد.&quot;</span>
+    <span class="hljs-keyword">else</span>
+        <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;خطا در تکمیل گزارش.&quot;</span> &gt;&amp;2
+        <span class="hljs-built_in">exit</span> 1
+    <span class="hljs-keyword">fi</span>
+}
+</code></pre>
+<p>در این الگو از عملگر <code>!</code> استفاده کرده‌ایم تا در صورت شکست تابع، پیام خطا چاپ شود و اجرای برنامه با <code>exit 1</code> خاتمه یابد.<br>
+توجه کنید که خروجی هر تابع به کمک <code>&gt;&gt;</code> به فایل افزوده می‌شود؛ سربرگ برای اولین بار با <code>&gt;</code> فایل را ایجاد می‌کند.</p>
+<p>در انتهای فایل کافی است <code>main</code> را فراخوانی کنیم:</p>
+<pre class="hljs"><code>main
+</code></pre>
+<h2>استفاده از متغیرهای محلی</h2>
+<p>تابع‌ها می‌توانند متغیرهای «محلی» داشته باشند تا از تداخل با سایر بخش‌های برنامه جلوگیری شود.<br>
+برای تعریف متغیر محلی از کلیدواژهٔ <code>local</code> استفاده می‌کنیم:</p>
+<pre class="hljs"><code><span class="hljs-function"><span class="hljs-title">report_disk_space</span></span>() {
+    <span class="hljs-built_in">local</span> temp_file=$(<span class="hljs-built_in">mktemp</span> /tmp/diskspace.XXXXXX)
+    <span class="hljs-built_in">df</span> -h &gt; <span class="hljs-string">&quot;<span class="hljs-variable">$temp_file</span>&quot;</span>
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;    &lt;h2&gt;فضای دیسک موجود&lt;/h2&gt;&quot;</span>
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;    &lt;pre&gt;<span class="hljs-subst">$(cat <span class="hljs-string">&quot;<span class="hljs-variable">$temp_file</span>&quot;</span>)</span>&lt;/pre&gt;&quot;</span>
+    <span class="hljs-built_in">rm</span> -f <span class="hljs-string">&quot;<span class="hljs-variable">$temp_file</span>&quot;</span>
+    <span class="hljs-built_in">return</span> 0
+}
+</code></pre>
+<p>اینجا متغیر <code>temp_file</code> فقط درون تابع اعتبار دارد و پس از پایان تابع از بین می‌رود.<br>
+البته در مثال فوق می‌توانستیم خروجی <code>df</code> را مستقیم در <code>echo</code> قرار دهیم؛ هدف نشان دادن الگوی کار با متغیرهای محلی است.</p>
+<h2>دستکاری جریان خطا</h2>
+<p>هنگام استفاده از فرمان‌های خارجی، بهتر است خطاها را مدیریت کنیم تا صفحهٔ HTML به هم نریزد.<br>
+برای مثال می‌توانیم خروجی خطای <code>who</code> را به فایل موقتی یا <code>/dev/null</code> هدایت کنیم:</p>
+<pre class="hljs"><code><span class="hljs-function"><span class="hljs-title">report_users</span></span>() {
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;    &lt;h2&gt;کاربران حاضر&lt;/h2&gt;&quot;</span>
+    <span class="hljs-keyword">if</span> users_list=$(<span class="hljs-built_in">who</span> 2&gt;/dev/null); <span class="hljs-keyword">then</span>
+        <span class="hljs-keyword">if</span> [[ -n <span class="hljs-variable">$users_list</span> ]]; <span class="hljs-keyword">then</span>
+            <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;    &lt;pre&gt;<span class="hljs-variable">$users_list</span>&lt;/pre&gt;&quot;</span>
+        <span class="hljs-keyword">else</span>
+            <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;    &lt;pre&gt;هیچ کاربری متصل نیست.&lt;/pre&gt;&quot;</span>
+        <span class="hljs-keyword">fi</span>
+    <span class="hljs-keyword">else</span>
+        <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;    &lt;pre&gt;خطا در اجرای who.&lt;/pre&gt;&quot;</span>
+        <span class="hljs-built_in">return</span> 1
+    <span class="hljs-keyword">fi</span>
+}
+</code></pre>
+<p>اگر فرمان <code>who</code> شکست بخورد، تابع مقدار <code>1</code> برمی‌گرداند؛ بدنهٔ اصلی می‌تواند آن را تشخیص دهد و اقدام مناسب انجام دهد (مثلاً چاپ پیام هشدار).</p>
+<h2>نسخهٔ کامل اسکریپت</h2>
+<p>کد زیر همهٔ نکات گفته‌شده را در یک اسکریپت واحد جمع می‌کند:</p>
+<pre class="hljs"><code><span class="hljs-meta">#!/bin/bash</span>
+
+TITLE=<span class="hljs-string">&quot;گزارش وضعیت سیستم برای <span class="hljs-variable">$HOSTNAME</span>&quot;</span>
+RIGHT_NOW=$(<span class="hljs-built_in">date</span> +<span class="hljs-string">&quot;%x %r %Z&quot;</span>)
+TIME_STAMP=<span class="hljs-string">&quot;گزارش تولید شده در <span class="hljs-variable">$RIGHT_NOW</span> توسط <span class="hljs-variable">$USER</span>&quot;</span>
+REPORT_FILE=<span class="hljs-variable">${1:-/tmp/system_info.html}</span>
+
+<span class="hljs-function"><span class="hljs-title">write_html_header</span></span>() {
+    <span class="hljs-built_in">cat</span> &lt;&lt; <span class="hljs-string">_EOF_
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;$TITLE&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;$TITLE&lt;/h1&gt;
+    &lt;p&gt;$TIME_STAMP&lt;/p&gt;
+_EOF_</span>
+}
+
+<span class="hljs-function"><span class="hljs-title">write_html_footer</span></span>() {
+    <span class="hljs-built_in">cat</span> &lt;&lt; <span class="hljs-string">_EOF_
+&lt;/body&gt;
+&lt;/html&gt;
+_EOF_</span>
+}
+
+<span class="hljs-function"><span class="hljs-title">report_system_info</span></span>() {
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;    &lt;h2&gt;اطلاعات کلی سیستم&lt;/h2&gt;&quot;</span>
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;    &lt;pre&gt;<span class="hljs-subst">$(uname -mp)</span>&lt;/pre&gt;&quot;</span>
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;    &lt;pre&gt;<span class="hljs-subst">$(uname -sr)</span>&lt;/pre&gt;&quot;</span>
+}
+
+<span class="hljs-function"><span class="hljs-title">report_uptime</span></span>() {
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;    &lt;h2&gt;زمان کارکرد سیستم&lt;/h2&gt;&quot;</span>
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;    &lt;pre&gt;<span class="hljs-subst">$(uptime)</span>&lt;/pre&gt;&quot;</span>
+}
+
+<span class="hljs-function"><span class="hljs-title">report_users</span></span>() {
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;    &lt;h2&gt;کاربران حاضر&lt;/h2&gt;&quot;</span>
+    <span class="hljs-keyword">if</span> users_list=$(<span class="hljs-built_in">who</span> 2&gt;/dev/null); <span class="hljs-keyword">then</span>
+        [[ -n <span class="hljs-variable">$users_list</span> ]] || users_list=<span class="hljs-string">&quot;هیچ کاربری متصل نیست.&quot;</span>
+        <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;    &lt;pre&gt;<span class="hljs-variable">$users_list</span>&lt;/pre&gt;&quot;</span>
+    <span class="hljs-keyword">else</span>
+        <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;    &lt;pre&gt;خطا در اجرای who.&lt;/pre&gt;&quot;</span>
+        <span class="hljs-built_in">return</span> 1
+    <span class="hljs-keyword">fi</span>
+}
+
+<span class="hljs-function"><span class="hljs-title">report_disk_space</span></span>() {
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;    &lt;h2&gt;فضای دیسک موجود&lt;/h2&gt;&quot;</span>
+    <span class="hljs-keyword">if</span> disk_info=$(<span class="hljs-built_in">df</span> -h 2&gt;/dev/null); <span class="hljs-keyword">then</span>
+        <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;    &lt;pre&gt;<span class="hljs-variable">$disk_info</span>&lt;/pre&gt;&quot;</span>
+    <span class="hljs-keyword">else</span>
+        <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;    &lt;pre&gt;اطلاعات دیسک در دسترس نیست.&lt;/pre&gt;&quot;</span>
+        <span class="hljs-built_in">return</span> 1
+    <span class="hljs-keyword">fi</span>
+}
+
+<span class="hljs-function"><span class="hljs-title">report_home_space</span></span>() {
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;    &lt;h2&gt;وضعیت شاخهٔ خانگی&lt;/h2&gt;&quot;</span>
+    <span class="hljs-keyword">if</span> [[ <span class="hljs-variable">$UID</span> -eq 0 ]]; <span class="hljs-keyword">then</span>
+        target=/home/*
+    <span class="hljs-keyword">else</span>
+        target=<span class="hljs-string">&quot;<span class="hljs-variable">$HOME</span>&quot;</span>
+    <span class="hljs-keyword">fi</span>
+
+    <span class="hljs-keyword">if</span> home_info=$(<span class="hljs-built_in">du</span> -sh <span class="hljs-variable">$target</span> 2&gt;/dev/null); <span class="hljs-keyword">then</span>
+        <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;    &lt;pre&gt;<span class="hljs-variable">$home_info</span>&lt;/pre&gt;&quot;</span>
+    <span class="hljs-keyword">else</span>
+        <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;    &lt;pre&gt;عدم دسترسی به شاخهٔ خانگی.&lt;/pre&gt;&quot;</span>
+        <span class="hljs-built_in">return</span> 1
+    <span class="hljs-keyword">fi</span>
+}
+
+<span class="hljs-function"><span class="hljs-title">main</span></span>() {
+    <span class="hljs-keyword">if</span> ! write_html_header &gt; <span class="hljs-string">&quot;<span class="hljs-variable">$REPORT_FILE</span>&quot;</span>; <span class="hljs-keyword">then</span>
+        <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;خطا در ایجاد فایل گزارش.&quot;</span> &gt;&amp;2
+        <span class="hljs-built_in">exit</span> 1
+    <span class="hljs-keyword">fi</span>
+
+    report_system_info &gt;&gt; <span class="hljs-string">&quot;<span class="hljs-variable">$REPORT_FILE</span>&quot;</span> || <span class="hljs-literal">true</span>
+    report_uptime &gt;&gt; <span class="hljs-string">&quot;<span class="hljs-variable">$REPORT_FILE</span>&quot;</span> || <span class="hljs-literal">true</span>
+    report_users &gt;&gt; <span class="hljs-string">&quot;<span class="hljs-variable">$REPORT_FILE</span>&quot;</span> || <span class="hljs-literal">true</span>
+    report_disk_space &gt;&gt; <span class="hljs-string">&quot;<span class="hljs-variable">$REPORT_FILE</span>&quot;</span> || <span class="hljs-literal">true</span>
+    report_home_space &gt;&gt; <span class="hljs-string">&quot;<span class="hljs-variable">$REPORT_FILE</span>&quot;</span> || <span class="hljs-literal">true</span>
+
+    <span class="hljs-keyword">if</span> write_html_footer &gt;&gt; <span class="hljs-string">&quot;<span class="hljs-variable">$REPORT_FILE</span>&quot;</span>; <span class="hljs-keyword">then</span>
+        <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;گزارش در <span class="hljs-variable">$REPORT_FILE</span> ذخیره شد.&quot;</span>
+    <span class="hljs-keyword">else</span>
+        <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;خطا در تکمیل فایل گزارش.&quot;</span> &gt;&amp;2
+        <span class="hljs-built_in">exit</span> 1
+    <span class="hljs-keyword">fi</span>
+}
+
+main <span class="hljs-string">&quot;<span class="hljs-variable">$@</span>&quot;</span>
+</code></pre>
+<p>چند نکتهٔ مهم:</p>
+<ul>
+<li>متغیر <code>REPORT_FILE</code> با استفاده از ساختار <code>${1:-default}</code> مقدار آرگومان اول خط فرمان را می‌پذیرد؛ اگر هیچ آرگومانی داده نشود مسیر پیش‌فرض <code>/tmp/system_info.html</code> استفاده می‌شود.</li>
+<li>در فراخوانی توابع داخل <code>main</code> پس از عملگر <code>&gt;&gt;</code> از <code>|| true</code> استفاده کردیم تا در صورت بازگشت مقدار غیر صفر، اجرای کل برنامه متوقف نشود. می‌توانید به جای آن سازوکاری برای ثبت خطاها پیاده کنید.</li>
+<li><code>main &quot;$@&quot;</code> تضمین می‌کند اگر بعداً گزینه‌های بیشتری اضافه کردیم، به راحتی در تابع اصلی در دسترس باشند.</li>
+</ul>
+<h2>گسترش‌های احتمالی</h2>
+<ul>
+<li>افزودن گزینه‌ای برای تعیین گزارش مختصر یا کامل.</li>
+<li>ذخیرهٔ خروجی در قالب‌های دیگر مانند متن ساده (<code>text/plain</code>).</li>
+<li>ارسال گزارش از طریق ایمیل یا کپی خودکار به یک سرور دوردست با <code>scp</code>.</li>
+</ul>
+<p>این ایده‌ها در فصل‌های بعدی هنگام مطالعهٔ کنترل جریان و پردازش ورودی به کار خواهند آمد.</p>
+<hr>
+<h3>تمرین‌ها</h3>
+<ol>
+<li>تابعی به نام <code>report_memory</code> بنویسید که خروجی <code>free -h</code> را نمایش دهد و آن را بین بخش‌های سیستم و uptime قرار دهید.</li>
+<li>اسکریپت را تغییر دهید تا در صورت شکست هر تابع، نام تابع شکست‌خورده در فایل گزارش نیز نوشته شود.</li>
+<li>تابعی با عنوان <code>check_command</code> بسازید که در ابتدای اسکریپت فراخوانی شود و مطمئن شود فرمان‌های مورد نیاز (<code>uname</code>, <code>uptime</code>, <code>who</code>, <code>df</code>, <code>du</code>) در <code>PATH</code> موجودند؛ در غیر این صورت پیام خطا چاپ کند و از برنامه خارج شود.</li>
+</ol>
+<h3>مطالعهٔ بیشتر</h3>
+<ul>
+<li>صفحهٔ راهنمای <code>man bash</code>، بخش «FUNCTIONS» برای توضیح کامل توابع.</li>
+<li>مستندات پروژهٔ <code>Shell Style Guide</code> (از Google یا سایر منابع) برای یادگیری بهترین شیوه‌های قالب‌بندی کد.</li>
+<li>مقالهٔ «Command Substitution» در راهنمای Bash Hackers جهت درک عمیق‌تر نحوهٔ قرار دادن خروجی فرمان‌ها در متغیرها.</li>
+</ul>
+
+  </main>
+
+  <!-- فوتر مشترک -->
+  <footer class="footer">
+    <div class="container">
+      <p>
+        <img src="/Gitab/icone/copyright.svg" alt="کپی‌رایت" width="14" height="14"
+             style="vertical-align:middle;margin-inline:4px">
+        <span id="y"></span> Gitab — تمامی حقوق محفوظ است.
+      </p>
+    </div>
+  </footer>
+
+  <!-- سال و اسکریپت تغییر تم -->
+  <script>
+  (() => {
+    const root = document.documentElement;
+    const btn = document.getElementById('themeToggle');
+    const KEY = 'gitab-theme';
+
+    function updateTheme(s) {
+      root.setAttribute('data-theme', s);
+      const mode = s;  // فقط `dark` یا `light` خواهد بود
+      root.dataset.colorMode = mode;
+      btn.dataset.icon = mode === 'dark' ? 'moon' : 'sun';
+    }
+
+    // وضعیت تم ذخیره شده از localStorage
+    let saved = localStorage.getItem(KEY) || 'light'; // پیش‌فرض روشن
+    updateTheme(saved);
+
+    // تنظیم مجدد تم هنگام تغییر وضعیت دکمه
+    btn.addEventListener('click', () => {
+      const current = localStorage.getItem(KEY) || 'light';
+      const next = current === 'dark' ? 'light' : 'dark';  // فقط دو حالت: تاریک و روشن
+      localStorage.setItem(KEY, next);
+      updateTheme(next);
+    });
+
+    // هنگام بارگذاری صفحه
+    document.addEventListener('DOMContentLoaded', () => {
+      updateTheme(localStorage.getItem(KEY) || 'light');
+    });
+  })();
+</script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+
+  <script>
+  document.querySelectorAll('pre code').forEach(block => {
+    const btn = document.createElement('button');
+    btn.className = 'copy-btn';
+
+    const icon = document.createElement('img');
+    icon.src = "/Gitab/icone/copy.svg";
+    icon.alt = 'Copy';
+    btn.appendChild(icon);
+
+    block.parentNode.insertBefore(btn, block);
+
+    btn.addEventListener('click', async () => {
+      await navigator.clipboard.writeText(block.textContent);
+      btn.classList.add('copied');
+      setTimeout(() => btn.classList.remove('copied'), 1500);
+    });
+  });
+  </script>
+
+  <script>
+  document.body.dataset.page = window.location.pathname;
+
+  const menuBtn = document.querySelector(".menu-toggle");
+  const nav = document.querySelector(".nav");
+
+  if (menuBtn && nav) {
+    menuBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      nav.classList.toggle("show");
+    });
+
+    document.addEventListener("click", (e) => {
+      const clickedInsideNav = nav.contains(e.target);
+      const clickedMenuButton = menuBtn.contains(e.target);
+      if (!clickedInsideNav && !clickedMenuButton) {
+        nav.classList.remove("show");
+      }
+    });
+  }
+  </script>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+  <script>
+document.getElementById("openDonate").addEventListener("click", () => {
+  document.getElementById("donateModal").style.display = "block";
+});
+document.getElementById("closeDonate").addEventListener("click", () => {
+  document.getElementById("donateModal").style.display = "none";
+});
+document.querySelectorAll(".copy-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    navigator.clipboard.writeText(btn.dataset.copy);
+  
+    setTimeout(() => (btn.textContent = "کپی"), 2000);
+  });
+});
+</script>
+
+</body>
+</html>

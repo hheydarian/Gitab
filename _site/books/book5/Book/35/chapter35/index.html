@@ -1,0 +1,555 @@
+
+
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <link rel="icon" type="image/png" href="/Gitab/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>آرایه‌ها</title>
+  <meta name="description" content="ترجمه‌های فارسی کتاب‌های فنی — سریع، مینیمال و قابل اتکا.">
+
+  <!-- استایل‌ها -->
+  <link rel="stylesheet" href="/Gitab/styles/main.css">
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+
+  <style>
+  @font-face {
+    font-family: 'Vazir';
+    src: url('/Gitab/fonts/Vazir-FD-WOL.ttf') format('truetype');
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "Lalezar";
+    src: url('fonts/Lalezar.ttf') format('truetype');
+    font-display: swap;
+}
+  body {
+    font-family: 'Vazir', sans-serif;
+  }
+  </style>
+</head>
+
+<body>
+  <!-- هدر مشترک -->
+  <header class="header">
+    <div class="container nav-wrap">
+      <a href="/Gitab/" class="brand">
+        <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="26" height="26">
+        <span>Gitab</span>
+      </a>
+
+       <nav class="nav">
+         <a href="/Gitab/" >خانه</a>
+         <a href="/Gitab/books/list-books" >کتاب‌ها</a>
+         <a href="/Gitab/giter.html" >دوره ها</a>
+          <!-- 
+         <a href="/Gitab/translator.html" >مترجمین</a>
+           -->
+       </nav>
+
+      <div class="nav-actions">
+        <button id="themeToggle" class="icon-btn theme-btn" data-icon="moon" aria-label="تغییر تم">
+          <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن">
+          <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک">
+        </button>
+
+        <a class="icon-btn" href="https://github.com/hheydarian/Gitab" target="_blank" title="GitHub">
+          <img src="/Gitab/icone/github.svg" alt="GitHub">
+        </a>
+
+        <!-- دکمه منو برای موبایل -->
+        <button class="menu-toggle" aria-label="منو">
+          <img src="/Gitab/icone/menu.svg" alt="menu">
+        </button>
+      </div>
+    </div>
+  </header>
+
+  
+  <main class="site-main book-page">
+    <h1>۳۵ – آرایه‌ها (Arrays)</h1>
+<p>در فصل قبل دیدیم که شِل چگونه می‌تواند رشته‌ها و اعداد را پردازش کند.<br>
+نوع داده‌هایی که تاکنون بررسی کردیم در علوم کامپیوتر <strong>متغیرهای اسکالر (scalar variables)</strong> نامیده می‌شوند؛ یعنی متغیرهایی که تنها یک مقدار را در خود نگه می‌دارند.</p>
+<p>در این فصل، با نوع دیگری از ساختار داده‌ها آشنا می‌شویم به نام <strong>آرایه</strong> (array) که می‌تواند چندین مقدار را هم‌زمان ذخیره کند.<br>
+تقریباً تمام زبان‌های برنامه‌نویسی از آرایه‌ها پشتیبانی می‌کنند.<br>
+<strong>Bash نیز از آرایه‌ها پشتیبانی می‌کند، هرچند با امکانات محدود.</strong><br>
+اما همین مقدار محدود نیز برای حل بسیاری از مسائل برنامه‌نویسی کافی است.</p>
+<hr>
+<h1><strong>آرایه‌ها چیستند؟</strong></h1>
+<p>آرایه‌ها متغیرهایی هستند که بیش از یک مقدار را ذخیره می‌کنند.<br>
+آرایه‌ها مانند یک <strong>جدول</strong> (table) عمل می‌کنند.</p>
+<h3>مثال: صفحه‌گسترده (Spreadsheet)</h3>
+<p>یک فایل Excel مثل یک آرایهٔ دوبعدی است — هم سطر دارد هم ستون.<br>
+هر سلول توسط آدرس سطر و ستون آن مشخص می‌شود.</p>
+<p>آرایه هم مشابه است:</p>
+<ul>
+<li>هر &quot;سلول&quot; در آرایه یک <strong>عنصر (element)</strong> نام دارد.</li>
+<li>هر عنصر دارای یک <strong>آدرس</strong> است که به آن <strong>اندیس (index)</strong> یا <strong>زیرنویس (subscript)</strong> می‌گویند.</li>
+</ul>
+<p>بیشتر زبان‌ها آرایه‌های چندبعدی دارند (مثل آرایه‌های ۲بعدی و ۳بعدی).<br>
+اما:</p>
+<h3><strong>در bash آرایه‌ها فقط یک‌بعدی هستند.</strong></h3>
+<p>می‌توان آن‌ها را مانند یک جدول تک‌ستونه تصور کرد.<br>
+با اینکه محدود هستند، همچنان کاربردهای زیادی دارند.</p>
+<p>آرایه‌ها از <strong>bash نسخهٔ ۲</strong> معرفی شدند.<br>
+شل سنتی Unix یعنی <strong>sh</strong> اصلاً آرایه نداشت.</p>
+<hr>
+<h1><strong>ساختن آرایه</strong></h1>
+<p>نام‌گذاری متغیرهای آرایه مانند سایر متغیرهاست.<br>
+آرایه به‌محض استفاده، خودبه‌خود ساخته می‌شود:</p>
+<pre class="hljs"><code>[me@linuxbox ~]$ a[1]=foo
+[me@linuxbox ~]$ <span class="hljs-built_in">echo</span> <span class="hljs-variable">${a[1]}</span>
+foo
+</code></pre>
+<p>در دستور اول، عنصر ۱ از آرایهٔ <code>a</code> مقدار <code>&quot;foo&quot;</code> را دریافت می‌کند.<br>
+در دستور دوم، مقدار ذخیره‌شده در عنصر ۱ نمایش داده می‌شود.</p>
+<blockquote>
+<p><strong>نکته:</strong><br>
+هنگام دسترسی به عناصر آرایه، باید از <code>{}</code> استفاده کنیم تا شل نام آرایه را با wildcard اشتباه نگیرد.</p>
+</blockquote>
+<h3>ساخت آرایه با declare</h3>
+<pre class="hljs"><code>[me@linuxbox ~]$ <span class="hljs-built_in">declare</span> -a a
+</code></pre>
+<p>گزینهٔ <code>-a</code> آرایهٔ <code>a</code> را ایجاد می‌کند.</p>
+<hr>
+<h1><strong>انتساب مقدار به آرایه</strong></h1>
+<p>دو روش برای مقداردهی وجود دارد:</p>
+<hr>
+<h2><strong>۱. مقداردهی تک‌عنصر</strong></h2>
+<pre class="hljs"><code>name[subscript]=value
+</code></pre>
+<ul>
+<li><code>name</code> → نام آرایه</li>
+<li><code>subscript</code> → اندیسی ≥ صفر</li>
+<li><code>value</code> → مقدار موردنظر</li>
+</ul>
+<blockquote>
+<p>توجه: اولین عنصر آرایه <strong>اندیس صفر</strong> دارد، نه یک.</p>
+</blockquote>
+<hr>
+<h2><strong>۲. مقداردهی چندعنصره</strong></h2>
+<pre class="hljs"><code>name=(value1 value2 value3 ...)
+</code></pre>
+<p>این کار باعث می‌شود:</p>
+<ul>
+<li><code>value1</code> در خانهٔ ۰</li>
+<li><code>value2</code> در خانهٔ ۱</li>
+<li>…</li>
+</ul>
+<p>ذخیره شوند.</p>
+<p>مثلاً آرایهٔ روزهای هفته:</p>
+<pre class="hljs"><code>[me@linuxbox ~]$ days=(Sun Mon Tue Wed Thu Fri Sat)
+</code></pre>
+<p>یا مقداردهی با اندیس مشخص:</p>
+<pre class="hljs"><code>[me@linuxbox ~]$ days=([0]=Sun [1]=Mon [2]=Tue [3]=Wed [4]=Thu [5]=Fri [6]=Sat)
+</code></pre>
+<hr>
+<h1><strong>دسترسی به عناصر آرایه</strong></h1>
+<p>آرایه‌ها برای انجام بسیاری از کارهای مرتبط با مدیریت داده کاربرد دارند.</p>
+<p>یک مثال:<br>
+می‌خواهیم <strong>زمان آخرین تغییر فایل‌ها</strong> در یک دایرکتوری را بررسی کنیم و ببینیم در هر ساعت از روز چند فایل تغییر یافته است.</p>
+<p>اسکریپت <code>hours</code> خروجی شبیه زیر تولید می‌کند:</p>
+<pre class="hljs"><code>[me@linuxbox ~]$ hours .
+Hour Files   Hour Files
+----------------------
+00   0       12   11
+01   1       13   7
+02   0       14   1
+03   0       15   7
+04   1       16   6
+05   1       17   5
+06   6       18   4
+07   3       19   4
+08   1       20   1
+09   14      21   0
+10   2       22   0
+11   5       23   0
+
+Total files = 80
+</code></pre>
+<p>این خروجی نشان می‌دهد در <strong>هر یک از ساعات ۰ تا ۲۳</strong> چند فایل آخرین بار اصلاح شده‌اند.</p>
+<hr>
+<h1><strong>کد اسکریپت hours</strong></h1>
+<pre class="hljs"><code><span class="hljs-meta">#!/bin/bash</span>
+<span class="hljs-comment"># hours : script to count files by modification time</span>
+
+<span class="hljs-function"><span class="hljs-title">usage</span></span> () {
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;usage: <span class="hljs-subst">$(basename $0)</span> directory&quot;</span> &gt;&amp;2
+}
+
+<span class="hljs-comment"># Check that argument is a directory</span>
+<span class="hljs-keyword">if</span> [[ ! -d <span class="hljs-variable">$1</span> ]]; <span class="hljs-keyword">then</span>
+    usage
+    <span class="hljs-built_in">exit</span> 1
+<span class="hljs-keyword">fi</span>
+
+<span class="hljs-comment"># Initialize array</span>
+<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> {0..23}; <span class="hljs-keyword">do</span> hours[i]=0; <span class="hljs-keyword">done</span>
+
+<span class="hljs-comment"># Collect data</span>
+<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> $(<span class="hljs-built_in">stat</span> -c %y <span class="hljs-string">&quot;<span class="hljs-variable">$1</span>&quot;</span>/* | <span class="hljs-built_in">cut</span> -c 12-13); <span class="hljs-keyword">do</span>
+    j=<span class="hljs-variable">${i/#0}</span>
+    ((++hours[j]))
+    ((++count))
+<span class="hljs-keyword">done</span>
+
+<span class="hljs-comment"># Display data</span>
+<span class="hljs-built_in">echo</span> -e <span class="hljs-string">&quot;Hour\tFiles\tHour\tFiles&quot;</span>
+<span class="hljs-built_in">echo</span> -e <span class="hljs-string">&quot;----\t-----\t----\t-----&quot;</span>
+
+<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> {0..11}; <span class="hljs-keyword">do</span>
+    j=$((i + <span class="hljs-number">12</span>))
+    <span class="hljs-built_in">printf</span> <span class="hljs-string">&quot;%02d\t%d\t%02d\t%d\n&quot;</span> <span class="hljs-variable">$i</span> <span class="hljs-variable">${hours[i]}</span> <span class="hljs-variable">$j</span> <span class="hljs-variable">${hours[j]}</span>
+<span class="hljs-keyword">done</span>
+
+<span class="hljs-built_in">printf</span> <span class="hljs-string">&quot;\nTotal files = %d\n&quot;</span> <span class="hljs-variable">$count</span>
+</code></pre>
+<hr>
+<h1><strong>توضیح کد</strong></h1>
+<h3>بخش اول: بررسی ورودی</h3>
+<p>اسکریپت چک می‌کند که آرگومان وجود داشته باشد و یک <strong>دایرکتوری</strong> باشد؛ در غیر این صورت پیام راهنما چاپ شده و برنامه متوقف می‌شود.</p>
+<hr>
+<h3>بخش دوم: مقداردهی اولیهٔ آرایه</h3>
+<p>آرایهٔ <code>hours</code> با ۲۴ عنصر ایجاد می‌شود و همهٔ عناصر مقدار <strong>۰</strong> می‌گیرند.</p>
+<blockquote>
+<p>این کار ضروری نیست، چون bash آرایه را خودکار می‌سازد؛<br>
+اما در اینجا لازم است مطمئن شویم هیچ عنصر خالی وجود ندارد.</p>
+</blockquote>
+<hr>
+<h3>بخش سوم: جمع‌آوری داده‌ها</h3>
+<p>برای هر فایل:</p>
+<ol>
+<li>دستور <code>stat</code> زمان اصلاح فایل را چاپ می‌کند.</li>
+<li><code>cut</code> دو رقم ساعت را جدا می‌کند.</li>
+<li>پیش‌صفرهای ساعت حذف می‌شود تا مقادیر <code>&quot;00&quot;</code> مثل اعداد اکتال تفسیر نشوند.</li>
+<li>مقدار عنصر مربوط به همان ساعت یکی افزایش می‌یابد.</li>
+<li>شمارندهٔ کل فایل‌ها (<code>count</code>) نیز افزایش می‌یابد.</li>
+</ol>
+<hr>
+<h3>بخش چهارم: نمایش نتیجه</h3>
+<p>نتایج در دو ستون چاپ می‌شوند (۰ تا ۱۱ و ۱۲ تا ۲۳).<br>
+در پایان، تعداد کل فایل‌ها چاپ می‌شود.</p>
+<hr>
+<p>در ادامه، <strong>ترجمهٔ کامل، دقیق و روان</strong> بخش <strong>Array Operations – عملیات روی آرایه‌ها</strong> آورده شده است:</p>
+<hr>
+<h1><strong>عملیات روی آرایه‌ها (Array Operations)</strong></h1>
+<p>آرایه‌ها در اسکریپت‌نویسی کاربردهای زیادی دارند.<br>
+کارهایی مانند حذف آرایه، پیدا کردن اندازهٔ آرایه، مرتب‌سازی آن و غیره بسیار رایج‌اند.</p>
+<hr>
+<h1><strong>نمایش تمام عناصر یک آرایه</strong></h1>
+<p>برای دسترسی به تمام عناصر یک آرایه، می‌توان از زیرنویس‌های <code>*</code> و <code>@</code> استفاده کرد.<br>
+مانند پارامترهای موقعیتی، شکل <code>@</code> معمولاً مفیدتر است.</p>
+<p>مثال:</p>
+<pre class="hljs"><code>[me@linuxbox ~]$ animals=(<span class="hljs-string">&quot;a dog&quot;</span> <span class="hljs-string">&quot;a cat&quot;</span> <span class="hljs-string">&quot;a fish&quot;</span>)
+</code></pre>
+<p>اکنون چهار حلقهٔ مختلف را اجرا می‌کنیم:</p>
+<pre class="hljs"><code>[me@linuxbox ~]$ for i in ${animals[*]}; do echo $i; done
+a
+dog
+a
+cat
+a
+fish
+</code></pre>
+<pre class="hljs"><code>[me@linuxbox ~]$ for i in ${animals[@]}; do echo $i; done
+a
+dog
+a
+cat
+a
+fish
+</code></pre>
+<pre class="hljs"><code>[me@linuxbox ~]$ for i in &quot;${animals[*]}&quot;; do echo $i; done
+a dog a cat a fish
+</code></pre>
+<pre class="hljs"><code>[me@linuxbox ~]$ for i in &quot;${animals[@]}&quot;; do echo $i; done
+a dog
+a cat
+a fish
+</code></pre>
+<h3>تحلیل نتیجه</h3>
+<ul>
+<li>تفاوت <code>*</code> و <code>@</code> فقط <strong>در حالت نقل‌قول‌شده (quoted)</strong> مشخص می‌شود.</li>
+<li><code>&quot;${animals[*]}&quot;</code> → یک <strong>کلمهٔ واحد</strong> که شامل کل آرایه است.</li>
+<li><code>&quot;${animals[@]}&quot;</code> → <strong>هر عنصر آرایه یک کلمهٔ جداگانه</strong> می‌ماند.</li>
+</ul>
+<p>این رفتار، مشابه همان چیزی است که دربارهٔ آرگومان‌های خط فرمان دیدیم.</p>
+<hr>
+<h1><strong>تشخیص تعداد عناصر یک آرایه</strong></h1>
+<p>برای پیدا کردن تعداد عناصر یک آرایه، از گسترش پارامتر استفاده می‌کنیم:</p>
+<pre class="hljs"><code>[me@linuxbox ~]$ a[100]=foo
+[me@linuxbox ~]$ <span class="hljs-built_in">echo</span> <span class="hljs-variable">${#a[@]}</span>     <span class="hljs-comment"># تعداد عناصر آرایه</span>
+1
+[me@linuxbox ~]$ <span class="hljs-built_in">echo</span> <span class="hljs-variable">${#a[100]}</span>   <span class="hljs-comment"># طول عنصر شماره ۱۰۰</span>
+3
+</code></pre>
+<p>توضیح:</p>
+<ul>
+<li>با وجود اینکه مقدار را در اندیس ۱۰۰ قرار داده‌ایم، bash فقط <strong>۱ عنصر</strong> گزارش می‌کند.</li>
+<li>زیرا عناصر ۰ تا ۹۹ تعریف نشده‌اند و bash آن‌ها را به‌صورت پیش‌فرض به‌وجود نمی‌آورد.</li>
+</ul>
+<p>این برخلاف برخی زبان‌هاست که همهٔ خانه‌های خالی را هم می‌شمارند.</p>
+<hr>
+<h1><strong>پیدا کردن اندیس‌های موجود در آرایه</strong></h1>
+<p>چون آرایه‌های bash می‌توانند «خانه‌های خالی» داشته باشند،<br>
+گاهی لازم است بدانیم کدام اندیس‌ها واقعاً وجود دارند.</p>
+<p>برای این کار:</p>
+<pre class="hljs"><code>${!array[*]}
+${!array[@]}
+</code></pre>
+<p>مثال:</p>
+<pre class="hljs"><code>[me@linuxbox ~]$ foo=([2]=a [4]=b [6]=c)
+</code></pre>
+<p>نمایش مقادیر:</p>
+<pre class="hljs"><code>[me@linuxbox ~]$ for i in &quot;${foo[@]}&quot;; do echo $i; done
+a
+b
+c
+</code></pre>
+<p>نمایش اندیس‌ها:</p>
+<pre class="hljs"><code>[me@linuxbox ~]$ for i in &quot;${!foo[@]}&quot;; do echo $i; done
+2
+4
+6
+</code></pre>
+<p>در حالت quoted، هر اندیس به‌عنوان یک کلمه جداگانه گسترش می‌یابد.</p>
+<hr>
+<h1><strong>افزودن عناصر به انتهای آرایه</strong></h1>
+<p>گاهی لازم است مقدار جدیدی به <strong>انتهای آرایه</strong> اضافه شود.<br>
+چون تعداد عناصر الزاماً برابر با <em>بیشترین اندیس</em> نیست،<br>
+نمی‌توان با شمارش آرایه تصمیم گرفت کجا اضافه کنیم.</p>
+<p>راه‌حل: استفاده از عملگر <code>+=</code></p>
+<p>مثال:</p>
+<pre class="hljs"><code>[me@linuxbox ~]$ foo=(a b c)
+[me@linuxbox ~]$ <span class="hljs-built_in">echo</span> <span class="hljs-variable">${foo[@]}</span>
+a b c
+</code></pre>
+<p>افزودن ۳ مقدار دیگر:</p>
+<pre class="hljs"><code>[me@linuxbox ~]$ foo+=(d e f)
+[me@linuxbox ~]$ <span class="hljs-built_in">echo</span> <span class="hljs-variable">${foo[@]}</span>
+a b c d e f
+</code></pre>
+<p>bash به‌طور خودکار عناصر جدید را در <strong>اولین اندیس خالی بعدی</strong> قرار می‌دهد.</p>
+<hr>
+<h1><strong>مرتب‌سازی آرایه</strong></h1>
+<p>bash تابع داخلی برای مرتب‌سازی ندارد،<br>
+اما خیلی راحت می‌توان با یک حقهٔ کوچک این کار را انجام داد:</p>
+<pre class="hljs"><code><span class="hljs-meta">#!/bin/bash</span>
+<span class="hljs-comment"># array-sort : Sort an array</span>
+
+a=(f e d c b a)
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Original array: <span class="hljs-variable">${a[@]}</span>&quot;</span>
+
+a_sorted=($(<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-string">&quot;<span class="hljs-variable">${a[@]}</span>&quot;</span>; <span class="hljs-keyword">do</span> <span class="hljs-built_in">echo</span> <span class="hljs-variable">$i</span>; <span class="hljs-keyword">done</span> | <span class="hljs-built_in">sort</span>))
+
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Sorted array:   <span class="hljs-variable">${a_sorted[@]}</span>&quot;</span>
+</code></pre>
+<p>خروجی:</p>
+<pre class="hljs"><code>Original array: f e d c b a
+Sorted array:   a b c d e f
+</code></pre>
+<p>در اینجا:</p>
+<ol>
+<li>تمام عناصر چاپ می‌شوند</li>
+<li>ورودی به <code>sort</code> ارسال می‌شود</li>
+<li>خروجی مرتب‌شده دوباره وارد یک آرایهٔ جدید می‌شود</li>
+</ol>
+<p>این تکنیک را می‌توان برای انواع پردازش‌ها به‌کار برد.</p>
+<hr>
+<h1><strong>حذف آرایه</strong></h1>
+<p>برای حذف کامل یک آرایه:</p>
+<pre class="hljs"><code>[me@linuxbox ~]$ foo=(a b c d e f)
+[me@linuxbox ~]$ <span class="hljs-built_in">unset</span> foo
+[me@linuxbox ~]$ <span class="hljs-built_in">echo</span> <span class="hljs-variable">${foo[@]}</span>
+</code></pre>
+<p>مقداری چاپ نمی‌شود، زیرا آرایه حذف شده است.</p>
+<h3>حذف یک عنصر خاص</h3>
+<pre class="hljs"><code>[me@linuxbox ~]$ foo=(a b c d e f)
+[me@linuxbox ~]$ <span class="hljs-built_in">unset</span> <span class="hljs-string">&#x27;foo[2]&#x27;</span>
+[me@linuxbox ~]$ <span class="hljs-built_in">echo</span> <span class="hljs-variable">${foo[@]}</span>
+a b d e f
+</code></pre>
+<ul>
+<li>عنصر اندیس ۲ (سومین عنصر) حذف شد.</li>
+<li>دقت کنید که <code>'foo[2]'</code> باید <strong>quoted</strong> باشد تا pathname expansion رخ ندهد.</li>
+</ul>
+<hr>
+<h1><strong>رفتار عجیب: مقداردهی خالی آرایه را پاک نمی‌کند</strong></h1>
+<pre class="hljs"><code>[me@linuxbox ~]$ foo=(a b c d e f)
+[me@linuxbox ~]$ foo=
+[me@linuxbox ~]$ <span class="hljs-built_in">echo</span> <span class="hljs-variable">${foo[@]}</span>
+b c d e f
+</code></pre>
+<p>در bash:</p>
+<ul>
+<li>عبارت <code>foo=</code> فقط <strong>عنصر ۰</strong> را تغییر می‌دهد</li>
+<li>و عناصر دیگر سر جای خود باقی می‌مانند!</li>
+</ul>
+<p>زیرا اگر آرایه را بدون زیرنویس صدا بزنید، اشاره به <strong>عنصر صفر</strong> دارد.</p>
+<p>مثال:</p>
+<pre class="hljs"><code>[me@linuxbox ~]$ foo=(a b c d e f)
+[me@linuxbox ~]$ foo=A
+[me@linuxbox ~]$ echo ${foo[@]}
+A b c d e f
+</code></pre>
+<hr>
+<h1><strong>آرایه‌های انجمنی (Associative Arrays)</strong></h1>
+<p>نسخه‌های جدید bash از <strong>آرایه‌های انجمنی</strong> پشتیبانی می‌کنند.</p>
+<ul>
+<li>اندیس‌های این نوع آرایه رشته هستند، نه عدد.</li>
+<li>این کار امکان ساختارهای داده‌ای جدید و انعطاف‌پذیر را فراهم می‌کند.</li>
+</ul>
+<p>مثال:</p>
+<pre class="hljs"><code><span class="hljs-built_in">declare</span> -A colors
+colors[<span class="hljs-string">&quot;red&quot;</span>]=<span class="hljs-string">&quot;#ff0000&quot;</span>
+colors[<span class="hljs-string">&quot;green&quot;</span>]=<span class="hljs-string">&quot;#00ff00&quot;</span>
+colors[<span class="hljs-string">&quot;blue&quot;</span>]=<span class="hljs-string">&quot;#0000ff&quot;</span>
+</code></pre>
+<p>برای دسترسی:</p>
+<pre class="hljs"><code><span class="hljs-built_in">echo</span> <span class="hljs-variable">${colors[&quot;blue&quot;]}</span>
+</code></pre>
+<blockquote>
+<p>نکته: بر خلاف آرایه‌های عددی، آرایه‌های انجمنی <strong>حتماً باید با دستور declare ساخته شوند.</strong></p>
+</blockquote>
+<p>در فصل بعد، اسکریپتی خواهیم دید که از آرایه‌های انجمنی استفادهٔ جالبی می‌کند.</p>
+<hr>
+<h1><strong>جمع‌بندی</strong></h1>
+<p>اگر در صفحهٔ manual به دنبال «array» بگردیم، می‌بینیم bash در بسیاری از جاها از آرایه‌ها استفاده می‌کند —<br>
+هرچند بسیاری از آن‌ها کاربردهای تخصصی دارند.</p>
+<p>به‌طور کلی، موضوع آرایه‌ها در bash کمتر استفاده شده است،<br>
+چون شل‌های سنتی مثل <code>sh</code> اصلاً آرایه نداشتند.</p>
+<p>این در حالی است که در بسیاری از زبان‌ها آرایه‌ها یک ابزار بسیار قدرتمند و حیاتی هستند.</p>
+<h3>نکتهٔ مهم</h3>
+<p>آرایه‌ها و حلقه‌ها رابطهٔ نزدیکی دارند.<br>
+به‌ویژه حلقهٔ:</p>
+<pre class="hljs"><code>for ((expr; expr; expr))
+</code></pre>
+<p>برای پیمایش اندیس‌های آرایه بسیار مناسب است.</p>
+<hr>
+<p>در ادامه، <strong>ترجمهٔ بخش &quot;Further Reading&quot;</strong> آورده شده است:</p>
+<hr>
+<h1><strong>مطالعهٔ بیشتر (Further Reading)</strong></h1>
+<p>● دو مقاله از ویکی‌پدیا دربارهٔ ساختارهای داده‌ای مطرح‌شده در این فصل:</p>
+<p><strong>Scalar (computing)</strong><br>
+<a href="http://en.wikipedia.org/wiki/Scalar_%28computing%29">http://en.wikipedia.org/wiki/Scalar_(computing)</a></p>
+<p>این مقاله مفهوم «اسکالر» را توضیح می‌دهد؛ یعنی متغیری که تنها یک مقدار را نگه می‌دارد — بر خلاف آرایه‌ها که چند مقدار را ذخیره می‌کنند.</p>
+<hr>
+<p><strong>Associative array</strong><br>
+<a href="http://en.wikipedia.org/wiki/Associative_array">http://en.wikipedia.org/wiki/Associative_array</a></p>
+<p>این مقاله ساختار «آرایهٔ انجمنی» را شرح می‌دهد؛ آرایه‌ای که در آن اندیس‌ها رشته هستند نه اعداد — مشابه دیکشنری‌ها در پایتون یا map در بسیاری از زبان‌ها.</p>
+
+  </main>
+
+  <!-- فوتر مشترک -->
+  <footer class="footer">
+    <div class="container">
+      <p>
+        <img src="/Gitab/icone/copyright.svg" alt="کپی‌رایت" width="14" height="14"
+             style="vertical-align:middle;margin-inline:4px">
+        <span id="y"></span> Gitab — تمامی حقوق محفوظ است.
+      </p>
+    </div>
+  </footer>
+
+  <!-- سال و اسکریپت تغییر تم -->
+  <script>
+  (() => {
+    const root = document.documentElement;
+    const btn = document.getElementById('themeToggle');
+    const KEY = 'gitab-theme';
+
+    function updateTheme(s) {
+      root.setAttribute('data-theme', s);
+      const mode = s;  // فقط `dark` یا `light` خواهد بود
+      root.dataset.colorMode = mode;
+      btn.dataset.icon = mode === 'dark' ? 'moon' : 'sun';
+    }
+
+    // وضعیت تم ذخیره شده از localStorage
+    let saved = localStorage.getItem(KEY) || 'light'; // پیش‌فرض روشن
+    updateTheme(saved);
+
+    // تنظیم مجدد تم هنگام تغییر وضعیت دکمه
+    btn.addEventListener('click', () => {
+      const current = localStorage.getItem(KEY) || 'light';
+      const next = current === 'dark' ? 'light' : 'dark';  // فقط دو حالت: تاریک و روشن
+      localStorage.setItem(KEY, next);
+      updateTheme(next);
+    });
+
+    // هنگام بارگذاری صفحه
+    document.addEventListener('DOMContentLoaded', () => {
+      updateTheme(localStorage.getItem(KEY) || 'light');
+    });
+  })();
+</script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+
+  <script>
+  document.querySelectorAll('pre code').forEach(block => {
+    const btn = document.createElement('button');
+    btn.className = 'copy-btn';
+
+    const icon = document.createElement('img');
+    icon.src = "/Gitab/icone/copy.svg";
+    icon.alt = 'Copy';
+    btn.appendChild(icon);
+
+    block.parentNode.insertBefore(btn, block);
+
+    btn.addEventListener('click', async () => {
+      await navigator.clipboard.writeText(block.textContent);
+      btn.classList.add('copied');
+      setTimeout(() => btn.classList.remove('copied'), 1500);
+    });
+  });
+  </script>
+
+  <script>
+  document.body.dataset.page = window.location.pathname;
+
+  const menuBtn = document.querySelector(".menu-toggle");
+  const nav = document.querySelector(".nav");
+
+  if (menuBtn && nav) {
+    menuBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      nav.classList.toggle("show");
+    });
+
+    document.addEventListener("click", (e) => {
+      const clickedInsideNav = nav.contains(e.target);
+      const clickedMenuButton = menuBtn.contains(e.target);
+      if (!clickedInsideNav && !clickedMenuButton) {
+        nav.classList.remove("show");
+      }
+    });
+  }
+  </script>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+  <script>
+document.getElementById("openDonate").addEventListener("click", () => {
+  document.getElementById("donateModal").style.display = "block";
+});
+document.getElementById("closeDonate").addEventListener("click", () => {
+  document.getElementById("donateModal").style.display = "none";
+});
+document.querySelectorAll(".copy-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    navigator.clipboard.writeText(btn.dataset.copy);
+  
+    setTimeout(() => (btn.textContent = "کپی"), 2000);
+  });
+});
+</script>
+
+</body>
+</html>

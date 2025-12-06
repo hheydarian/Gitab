@@ -1,0 +1,366 @@
+
+
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <link rel="icon" type="image/png" href="/Gitab/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>نوشتن شل‌اسکریپت</title>
+  <meta name="description" content="ترجمه‌های فارسی کتاب‌های فنی — سریع، مینیمال و قابل اتکا.">
+
+  <!-- استایل‌ها -->
+  <link rel="stylesheet" href="/Gitab/styles/main.css">
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+
+  <style>
+  @font-face {
+    font-family: 'Vazir';
+    src: url('/Gitab/fonts/Vazir-FD-WOL.ttf') format('truetype');
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "Lalezar";
+    src: url('fonts/Lalezar.ttf') format('truetype');
+    font-display: swap;
+}
+  body {
+    font-family: 'Vazir', sans-serif;
+  }
+  </style>
+</head>
+
+<body>
+  <!-- هدر مشترک -->
+  <header class="header">
+    <div class="container nav-wrap">
+      <a href="/Gitab/" class="brand">
+        <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="26" height="26">
+        <span>Gitab</span>
+      </a>
+
+       <nav class="nav">
+         <a href="/Gitab/" >خانه</a>
+         <a href="/Gitab/books/list-books" >کتاب‌ها</a>
+         <a href="/Gitab/giter.html" >دوره ها</a>
+          <!-- 
+         <a href="/Gitab/translator.html" >مترجمین</a>
+           -->
+       </nav>
+
+      <div class="nav-actions">
+        <button id="themeToggle" class="icon-btn theme-btn" data-icon="moon" aria-label="تغییر تم">
+          <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن">
+          <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک">
+        </button>
+
+        <a class="icon-btn" href="https://github.com/hheydarian/Gitab" target="_blank" title="GitHub">
+          <img src="/Gitab/icone/github.svg" alt="GitHub">
+        </a>
+
+        <!-- دکمه منو برای موبایل -->
+        <button class="menu-toggle" aria-label="منو">
+          <img src="/Gitab/icone/menu.svg" alt="menu">
+        </button>
+      </div>
+    </div>
+  </header>
+
+  
+  <main class="site-main book-page">
+    <h1>فصل ۲۴ – نوشتن شل‌اسکریپت</h1>
+<p>تا اینجا دستورهای شل را به صورت تعاملی اجرا کرده‌ایم؛ هر بار فرمانی را تایپ کرده‌ایم و نتیجه را دیده‌ایم.<br>
+شل‌اسکریپت‌ها به ما اجازه می‌دهند مجموعه‌ای از این فرمان‌ها را در یک فایل متنی ذخیره کنیم تا بعداً با یک دستور ساده اجرا شوند.<br>
+در این فصل نخستین اسکریپت‌های خود را می‌نویسیم، نحوهٔ اجرا و اشکال‌زدایی‌شان را یاد می‌گیریم و با مفاهیمی آشنا می‌شویم که در فصل‌های بعدی گسترش خواهند یافت.</p>
+<hr>
+<h2>اسکریپت چیست؟</h2>
+<p>یک اسکریپت در ساده‌ترین حالت فایلی است شامل مجموعه‌ای از دستورات شل که به ترتیب اجرا می‌شوند.<br>
+همان دستوراتی که قبلاً در خط فرمان وارد می‌کردید، می‌توانند داخل اسکریپت قرار گیرند تا بارها و بارها قابل استفاده باشند.<br>
+مزیت اصلی اسکریپت‌ها <strong>خودکارسازی</strong> و <strong>تکرارپذیری</strong> است: کارهایی را که به صورت دستی انجام می‌دهید به اسکریپت می‌سپارید تا هر وقت نیاز بود دوباره اجرا شود.</p>
+<h2>اولین اسکریپت ما</h2>
+<p>یک اسکریپت باید فایلی متنی باشد، بنابراین از ویرایشگر دلخواه استفاده می‌کنیم. مثال‌های کتاب از <code>nano</code> بهره می‌برند.<br>
+فایلی به نام <code>hello_world.sh</code> بسازید و خطوط زیر را در آن قرار دهید:</p>
+<pre class="hljs"><code><span class="hljs-meta">#!/bin/bash</span>
+<span class="hljs-comment"># hello_world.sh - نمونه‌ای ساده از یک اسکریپت bash</span>
+
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;سلام دنیا!&quot;</span>
+</code></pre>
+<p>خط اول <strong>شبانگ</strong> (<code>#!</code>) است که به سیستم می‌گوید این فایل باید با <code>/bin/bash</code> اجرا شود.<br>
+خط دوم یک نظر است و نادیده گرفته می‌شود. خط سوم دستور آشنای <code>echo</code> است.</p>
+<p>فایل را ذخیره کنید و سپس اجازهٔ اجرا بدهید:</p>
+<pre class="hljs"><code>[me@linuxbox ~]$ <span class="hljs-built_in">chmod</span> 755 hello_world.sh
+</code></pre>
+<p>مجوز <code>755</code> یعنی صاحب فایل حق خواندن، نوشتن و اجرا دارد و سایر کاربران فقط می‌توانند فایل را بخوانند و اجرا کنند.</p>
+<p>اکنون می‌توانیم آن را اجرا کنیم:</p>
+<pre class="hljs"><code>[me@linuxbox ~]$ ./hello_world.sh
+سلام دنیا!
+</code></pre>
+<p>اگر فایل در دایرکتوری فعلی نباشد یا مجوز اجرا نداشته باشد، می‌توانیم آن را مستقیماً به bash بدهیم:</p>
+<pre class="hljs"><code>[me@linuxbox ~]$ bash hello_world.sh
+</code></pre>
+<h2>آشنایی بیشتر با شبانگ</h2>
+<p>شبانگ در ابتدای فایل تعیین می‌کند که چه برنامه‌ای اسکریپت را تفسیر کند. چند نمونهٔ رایج:</p>
+<pre class="hljs"><code>#!/bin/sh              # شل استاندارد سیستم (ممکن است dash یا bash باشد)
+#!/usr/bin/env python3 # اجرای اسکریپت Python با جست‌وجو در PATH
+#!/usr/bin/perl        # اجرای اسکریپت Perl
+</code></pre>
+<p>اگر شبانگ حذف شود و اسکریپت را با نامش اجرا کنیم، هسته تلاش می‌کند آن را به عنوان یک برنامهٔ دودویی بارگذاری کند و شکست می‌خورد.<br>
+اما اگر اسکریپت را به صراحت به <code>bash</code> بدهیم (<code>bash script.sh</code>)، شل آن را بدون شبانگ هم اجرا خواهد کرد.</p>
+<h2>محل نگه‌داری اسکریپت‌ها</h2>
+<p>برای اینکه اسکریپت‌ها از هر جایی قابل فراخوانی باشند، باید در مسیری قرار گیرند که در متغیر محیطی <code>PATH</code> فهرست شده است.<br>
+بسیاری از کاربران دایرکتوری <code>~/bin</code> را برای این منظور ایجاد می‌کنند:</p>
+<pre class="hljs"><code>[me@linuxbox ~]$ <span class="hljs-built_in">mkdir</span> -p ~/bin
+[me@linuxbox ~]$ <span class="hljs-built_in">mv</span> hello_world.sh ~/bin/hello
+</code></pre>
+<p>سپس اطمینان حاصل کنید که مسیر تازه به <code>PATH</code> اضافه شده است. اگر در خروجی دستور زیر مسیر <code>~/bin</code> را نمی‌بینید، آن را به <code>~/.bashrc</code> اضافه کنید:</p>
+<pre class="hljs"><code><span class="hljs-built_in">export</span> PATH=<span class="hljs-string">&quot;<span class="hljs-variable">$HOME</span>/bin:<span class="hljs-variable">$PATH</span>&quot;</span>
+</code></pre>
+<p>پس از باز کردن شل جدید (یا اجرای <code>source ~/.bashrc</code>) می‌توانید تنها با تایپ <code>hello</code> اسکریپت را اجرا کنید.<br>
+گفتنی است که وجود پسوند <code>.sh</code> الزامی نیست؛ بسیاری از کاربران نام کوتاه‌تری بدون پسوند برای اسکریپت‌های اجرایی خود انتخاب می‌کنند.</p>
+<h2>ایجاد فایل با cat</h2>
+<p>گاهی لازم است اسکریپتی را به سرعت ایجاد کنیم. می‌توانیم از دستور <code>cat</code> و یک here document بهره ببریم:</p>
+<pre class="hljs"><code>[me@linuxbox ~]$ <span class="hljs-built_in">cat</span> &lt;&lt;<span class="hljs-string">&#x27;EOF&#x27;</span> &gt; ~/bin/cleanup
+<span class="hljs-comment">#!/bin/bash</span>
+<span class="hljs-built_in">rm</span> -i *.bak *.tmp
+EOF
+[me@linuxbox ~]$ <span class="hljs-built_in">chmod</span> 755 ~/bin/cleanup
+</code></pre>
+<p>علامت <code>'EOF'</code> تعیین می‌کند که محتوای بین دو نشانه بدون جایگزینی متغیرها نوشته شود.<br>
+این ترفند در طول فصل‌های بعدی نیز به کار می‌آید.</p>
+<h2>پروژهٔ نمونه: ساخت صفحهٔ گزارش سیستم</h2>
+<p>برای تمرین، اسکریپتی می‌نویسیم که گزارشی HTML از وضعیت سیستم تولید کند. نام فایل را <code>sys_info_page</code> می‌گذاریم و آن را در <code>~/bin</code> ذخیره می‌کنیم.<br>
+هدف اسکریپت تولید فایل <code>/tmp/system_info.html</code> با محتوای پویا است.</p>
+<p>ابتدا چارچوب کلی را می‌نویسیم:</p>
+<pre class="hljs"><code><span class="hljs-meta">#!/bin/bash</span>
+
+<span class="hljs-comment"># sys_info_page - تولید یک صفحهٔ HTML ساده شامل اطلاعات سیستم</span>
+
+TITLE=<span class="hljs-string">&quot;گزارش وضعیت سیستم برای \$HOSTNAME&quot;</span>
+CURRENT_TIME=$(<span class="hljs-built_in">date</span> +<span class="hljs-string">&quot;%x %r %Z&quot;</span>)
+TIME_STAMP=<span class="hljs-string">&quot;گزارش تولید شده در <span class="hljs-variable">$CURRENT_TIME</span> توسط <span class="hljs-variable">$USER</span>&quot;</span>
+
+<span class="hljs-built_in">cat</span> &lt;&lt; <span class="hljs-string">_EOF_
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;$TITLE&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;$TITLE&lt;/h1&gt;
+    &lt;p&gt;$TIME_STAMP&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+_EOF_</span>
+</code></pre>
+<p>نکته‌های مهم:</p>
+<ul>
+<li>از <strong>جایگزینی فرمان</strong> (<code>$(...)</code>) برای ذخیرهٔ خروجی <code>date</code> در متغیر <code>CURRENT_TIME</code> استفاده کرده‌ایم.</li>
+<li>متغیرها (<code>$HOSTNAME</code>, <code>$USER</code>) هنگام اجرای here document جایگزین می‌شوند.</li>
+<li>نام <code>_EOF_</code> صرفاً یک نشانه است؛ می‌تواند هر واژهٔ دیگری باشد، فقط باید با همان نام پایان یابد.</li>
+</ul>
+<p>اسکریپت بالا صفحه‌ای ساده می‌سازد. اکنون بخش بدنه را گسترش می‌دهیم تا اطلاعات بیشتری نمایش دهد:</p>
+<pre class="hljs"><code><span class="hljs-built_in">cat</span> &lt;&lt; <span class="hljs-string">_EOF_
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;$TITLE&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;$TITLE&lt;/h1&gt;
+    &lt;p&gt;$TIME_STAMP&lt;/p&gt;
+    &lt;h2&gt;اطلاعات سیستم&lt;/h2&gt;
+    &lt;pre&gt;$(uname -mp)&lt;/pre&gt;
+    &lt;h2&gt;زمان راه‌اندازی&lt;/h2&gt;
+    &lt;pre&gt;$(uptime)&lt;/pre&gt;
+    &lt;h2&gt;کاربران فعال&lt;/h2&gt;
+    &lt;pre&gt;$(who)&lt;/pre&gt;
+    &lt;h2&gt;فضای دیسک&lt;/h2&gt;
+    &lt;pre&gt;$(df -h)&lt;/pre&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+_EOF_</span>
+</code></pre>
+<p>با اجرای اسکریپت صفحه‌ای با فرمت HTML در <code>/tmp/system_info.html</code> ساخته می‌شود. می‌توانید آن را با مرورگر باز کنید.</p>
+<h3>بهبود خروجی</h3>
+<p>می‌توانیم خروجی اسکریپت را مستقیماً در فایل ذخیره کنیم و در صورت موفقیت پیام مناسبی نمایش دهیم:</p>
+<pre class="hljs"><code>FILE=/tmp/system_info.html
+
+<span class="hljs-keyword">if</span> <span class="hljs-built_in">cat</span> &lt;&lt; <span class="hljs-string">_EOF_ &gt; $FILE
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;$TITLE&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;$TITLE&lt;/h1&gt;
+    &lt;p&gt;$TIME_STAMP&lt;/p&gt;
+    &lt;h2&gt;اطلاعات سیستم&lt;/h2&gt;
+    &lt;pre&gt;$(uname -mp)&lt;/pre&gt;
+    &lt;h2&gt;زمان راه‌اندازی&lt;/h2&gt;
+    &lt;pre&gt;$(uptime)&lt;/pre&gt;
+    &lt;h2&gt;کاربران فعال&lt;/h2&gt;
+    &lt;pre&gt;$(who)&lt;/pre&gt;
+    &lt;h2&gt;فضای دیسک&lt;/h2&gt;
+    &lt;pre&gt;$(df -h)&lt;/pre&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+_EOF_</span>
+<span class="hljs-keyword">then</span>
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;گزارش در <span class="hljs-variable">$FILE</span> ذخیره شد&quot;</span>
+<span class="hljs-keyword">else</span>
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;ایجاد فایل با خطا روبه‌رو شد&quot;</span> &gt;&amp;2
+    <span class="hljs-built_in">exit</span> 1
+<span class="hljs-keyword">fi</span>
+</code></pre>
+<p>دستور <code>cat &lt;&lt; _EOF_ &gt; $FILE</code> در صورت موفقیت مقدار بازگشتی صفر دارد؛ بنابراین می‌توانیم از آن در دستور <code>if</code> استفاده کنیم.</p>
+<h3>قالب‌بندی و خوانایی</h3>
+<ul>
+<li>برای بخش‌های منطقی توضیح کوتاهی با <code>#</code> بنویسید.</li>
+<li>دستورات را با فاصلهٔ مناسب بچینید تا خواندن آسان شود.</li>
+<li>از نام متغیرهای معنادار (<code>TITLE</code>, <code>FILE</code>) استفاده کنید.</li>
+</ul>
+<h2>اشکال‌زدایی و آزمون</h2>
+<p>دو ابزار ساده در bash برای بررسی اسکریپت وجود دارد:</p>
+<ul>
+<li><code>bash -n script.sh</code> – تنها نحو (syntax) را بررسی می‌کند و اسکریپت را اجرا نمی‌کند.</li>
+<li><code>bash -x script.sh</code> – هر فرمان را قبل از اجرا چاپ می‌کند؛ برای دنبال کردن جریان اجرای برنامه مفید است.</li>
+</ul>
+<p>همچنین می‌توانید درون اسکریپت از <code>set -x</code> برای فعال کردن حالت ردگیری و <code>set +x</code> برای غیرفعال کردن آن در بخش‌های مشخص استفاده کنید.</p>
+<h2>دسترسی و ایمن‌سازی</h2>
+<p>به طور معمول برای اسکریپت‌های شخصی از مجوز <code>755</code> استفاده می‌شود تا صاحب فایل حق نوشتن داشته باشد و سایرین فقط بخوانند و اجرا کنند.<br>
+اگر اسکریپتی اطلاعات حساسی در بر دارد، مجوز را محدودتر کنید یا آن را خارج از مسیر <code>PATH</code> عمومی نگه دارید.</p>
+<h2>انتقال و به اشتراک‌گذاری اسکریپت</h2>
+<p>اسکریپت‌ها فایل‌های متنی هستند. می‌توانید آنها را به راحتی با دوستانتان به اشتراک بگذارید، در مخازن Git قرار دهید یا در وب منتشر کنید.<br>
+در صورت استفاده در توزیع‌های مختلف، از ساختار قابل‌حمل (POSIX sh) بهره ببرید یا در مستندات بنویسید که اسکریپت مخصوص bash است.</p>
+<h2>جمع‌بندی</h2>
+<ul>
+<li>یک شل‌اسکریپت مجموعه‌ای از دستورات bash است که در فایل متنی ذخیره می‌شود.</li>
+<li>با افزودن خط شبانگ و مجوز اجرا می‌توانیم آن را مانند هر برنامهٔ دیگری اجرا کنیم.</li>
+<li>استفاده از here document، جایگزینی فرمان و متغیرها به ما امکان می‌دهد خروجی‌های پیچیده‌تری تولید کنیم.</li>
+<li>ابزارهایی مانند <code>bash -n</code> و <code>bash -x</code> در اشکال‌زدایی کمک می‌کنند.</li>
+</ul>
+<hr>
+<h3>تمرین‌ها</h3>
+<ol>
+<li>اسکریپت <code>sys_info_page</code> را گسترش دهید تا خروجی <code>ip addr show</code> را در بخشی جداگانه نمایش دهد.</li>
+<li>اسکریپتی بنویسید که از دایرکتوری مشخصی نسخهٔ پشتیبان می‌گیرد: ابتدا فهرست فایل‌ها را با <code>tar</code> آرشیو و سپس با <code>gzip</code> فشرده کند. نام فایل شامل تاریخ روز باشد.</li>
+<li>با استفاده از <code>bash -x</code> اسکریپت‌های خود را اجرا کنید و یادداشت کنید هر فرمان قبل از اجرا چگونه در خروجی نشان داده می‌شود.</li>
+</ol>
+<h3>مطالعهٔ بیشتر</h3>
+<ul>
+<li>صفحهٔ راهنمای <code>man bash</code>، به ویژه بخش «INVOCATION» دربارهٔ خط شبانگ و گزینه‌های پوسته.</li>
+<li>کتاب «Advanced Bash-Scripting Guide» برای مثال‌های پیچیده‌تر.</li>
+<li>مستندات ابزار <code>shellcheck</code> که می‌تواند خطاهای رایج در اسکریپت‌ها را تشخیص دهد.</li>
+</ul>
+
+  </main>
+
+  <!-- فوتر مشترک -->
+  <footer class="footer">
+    <div class="container">
+      <p>
+        <img src="/Gitab/icone/copyright.svg" alt="کپی‌رایت" width="14" height="14"
+             style="vertical-align:middle;margin-inline:4px">
+        <span id="y"></span> Gitab — تمامی حقوق محفوظ است.
+      </p>
+    </div>
+  </footer>
+
+  <!-- سال و اسکریپت تغییر تم -->
+  <script>
+  (() => {
+    const root = document.documentElement;
+    const btn = document.getElementById('themeToggle');
+    const KEY = 'gitab-theme';
+
+    function updateTheme(s) {
+      root.setAttribute('data-theme', s);
+      const mode = s;  // فقط `dark` یا `light` خواهد بود
+      root.dataset.colorMode = mode;
+      btn.dataset.icon = mode === 'dark' ? 'moon' : 'sun';
+    }
+
+    // وضعیت تم ذخیره شده از localStorage
+    let saved = localStorage.getItem(KEY) || 'light'; // پیش‌فرض روشن
+    updateTheme(saved);
+
+    // تنظیم مجدد تم هنگام تغییر وضعیت دکمه
+    btn.addEventListener('click', () => {
+      const current = localStorage.getItem(KEY) || 'light';
+      const next = current === 'dark' ? 'light' : 'dark';  // فقط دو حالت: تاریک و روشن
+      localStorage.setItem(KEY, next);
+      updateTheme(next);
+    });
+
+    // هنگام بارگذاری صفحه
+    document.addEventListener('DOMContentLoaded', () => {
+      updateTheme(localStorage.getItem(KEY) || 'light');
+    });
+  })();
+</script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+
+  <script>
+  document.querySelectorAll('pre code').forEach(block => {
+    const btn = document.createElement('button');
+    btn.className = 'copy-btn';
+
+    const icon = document.createElement('img');
+    icon.src = "/Gitab/icone/copy.svg";
+    icon.alt = 'Copy';
+    btn.appendChild(icon);
+
+    block.parentNode.insertBefore(btn, block);
+
+    btn.addEventListener('click', async () => {
+      await navigator.clipboard.writeText(block.textContent);
+      btn.classList.add('copied');
+      setTimeout(() => btn.classList.remove('copied'), 1500);
+    });
+  });
+  </script>
+
+  <script>
+  document.body.dataset.page = window.location.pathname;
+
+  const menuBtn = document.querySelector(".menu-toggle");
+  const nav = document.querySelector(".nav");
+
+  if (menuBtn && nav) {
+    menuBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      nav.classList.toggle("show");
+    });
+
+    document.addEventListener("click", (e) => {
+      const clickedInsideNav = nav.contains(e.target);
+      const clickedMenuButton = menuBtn.contains(e.target);
+      if (!clickedInsideNav && !clickedMenuButton) {
+        nav.classList.remove("show");
+      }
+    });
+  }
+  </script>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+  <script>
+document.getElementById("openDonate").addEventListener("click", () => {
+  document.getElementById("donateModal").style.display = "block";
+});
+document.getElementById("closeDonate").addEventListener("click", () => {
+  document.getElementById("donateModal").style.display = "none";
+});
+document.querySelectorAll(".copy-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    navigator.clipboard.writeText(btn.dataset.copy);
+  
+    setTimeout(() => (btn.textContent = "کپی"), 2000);
+  });
+});
+</script>
+
+</body>
+</html>

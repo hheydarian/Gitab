@@ -1,0 +1,425 @@
+
+
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <link rel="icon" type="image/png" href="/Gitab/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>کنترل جریان</title>
+  <meta name="description" content="ترجمه‌های فارسی کتاب‌های فنی — سریع، مینیمال و قابل اتکا.">
+
+  <!-- استایل‌ها -->
+  <link rel="stylesheet" href="/Gitab/styles/main.css">
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+
+  <style>
+  @font-face {
+    font-family: 'Vazir';
+    src: url('/Gitab/fonts/Vazir-FD-WOL.ttf') format('truetype');
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "Lalezar";
+    src: url('fonts/Lalezar.ttf') format('truetype');
+    font-display: swap;
+}
+  body {
+    font-family: 'Vazir', sans-serif;
+  }
+  </style>
+</head>
+
+<body>
+  <!-- هدر مشترک -->
+  <header class="header">
+    <div class="container nav-wrap">
+      <a href="/Gitab/" class="brand">
+        <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="26" height="26">
+        <span>Gitab</span>
+      </a>
+
+       <nav class="nav">
+         <a href="/Gitab/" >خانه</a>
+         <a href="/Gitab/books/list-books" >کتاب‌ها</a>
+         <a href="/Gitab/giter.html" >دوره ها</a>
+          <!-- 
+         <a href="/Gitab/translator.html" >مترجمین</a>
+           -->
+       </nav>
+
+      <div class="nav-actions">
+        <button id="themeToggle" class="icon-btn theme-btn" data-icon="moon" aria-label="تغییر تم">
+          <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن">
+          <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک">
+        </button>
+
+        <a class="icon-btn" href="https://github.com/hheydarian/Gitab" target="_blank" title="GitHub">
+          <img src="/Gitab/icone/github.svg" alt="GitHub">
+        </a>
+
+        <!-- دکمه منو برای موبایل -->
+        <button class="menu-toggle" aria-label="منو">
+          <img src="/Gitab/icone/menu.svg" alt="menu">
+        </button>
+      </div>
+    </div>
+  </header>
+
+  
+  <main class="site-main book-page">
+    <h1>۳۳ – کنترل جریان: حلقه‌زنی با for</h1>
+<p>در این فصل پایانی مربوط به کنترل جریان، به یکی دیگر از ساختارهای حلقه‌ای شِل نگاه می‌کنیم. حلقهٔ <strong>for</strong> با حلقه‌های <strong>while</strong> و <strong>until</strong> تفاوت دارد، زیرا روشی برای پردازش <em>توالی‌ها</em> داخل یک حلقه فراهم می‌کند. این ویژگی هنگام برنامه‌نویسی بسیار مفید است.<br>
+به همین دلیل، حلقهٔ for در اسکریپت‌نویسی bash بسیار محبوب است.</p>
+<p>دستور for در شِل، به‌طور طبیعی، با فرمان <strong>for</strong> پیاده‌سازی می‌شود. در نسخه‌های جدید bash، حلقهٔ for در دو شکل در دسترس است.</p>
+<hr>
+<h1><strong>حلقهٔ for: شکل سنتی در شِل</strong></h1>
+<p>دستور سنتی for این ساختار را دارد:</p>
+<pre class="hljs"><code>for variable [in words]; do
+    commands
+done
+</code></pre>
+<ul>
+<li><strong>variable</strong> نام متغیری است که در هر تکرار مقدار جدیدی می‌گیرد.</li>
+<li><strong>words</strong> یک فهرست اختیاری از مواردی است که هر بار به variable اختصاص داده می‌شود.</li>
+<li><strong>commands</strong> مجموعه دستورات اجرایی در هر تکرار حلقه هستند.</li>
+</ul>
+<p>حلقهٔ for روی خط فرمان نیز بسیار کاربرد دارد:</p>
+<pre class="hljs"><code>[me@linuxbox ~]$ for i in A B C D; do echo $i; done
+A
+B
+C
+D
+</code></pre>
+<p>در این مثال، چهار کلمهٔ «A»، «B»، «C» و «D» به دستور for داده می‌شود، و بنابراین حلقه چهار بار اجرا می‌شود. در هر تکرار، یکی از این کلمات به متغیر <strong>i</strong> اختصاص داده می‌شود و با دستور echo نمایش داده می‌شود.<br>
+همانند حلقه‌های while و until، واژهٔ <code>done</code> پایان حلقه را مشخص می‌کند.</p>
+<hr>
+<h1><strong>قدرت اصلی حلقهٔ for</strong></h1>
+<p>قدرت حلقهٔ for در این است که می‌توان <em>فهرست words</em> را به روش‌های مختلف ساخت.</p>
+<h3><strong>۱. گسترش آکولادی (brace expansion)</strong></h3>
+<pre class="hljs"><code>[me@linuxbox ~]$ for i in {A..D}; do echo $i; done
+A
+B
+C
+D
+</code></pre>
+<h3><strong>۲. گسترش مسیر فایل (pathname expansion)</strong></h3>
+<pre class="hljs"><code>[me@linuxbox ~]$ for i in distros*.txt; do echo $i; done
+distros-by-date.txt
+distros-dates.txt
+distros-key-names.txt
+distros-key-vernums.txt
+distros-names.txt
+distros.txt
+distros-vernums.txt
+distros-versions.txt
+</code></pre>
+<h3><strong>۳. جایگزینی فرمان (command substitution)</strong></h3>
+<p>نمونهٔ کامل:</p>
+<pre class="hljs"><code><span class="hljs-meta">#!/bin/bash</span>
+<span class="hljs-comment"># longest-word : find longest string in a file</span>
+
+<span class="hljs-keyword">while</span> [[ -n <span class="hljs-variable">$1</span> ]]; <span class="hljs-keyword">do</span>
+    <span class="hljs-keyword">if</span> [[ -r <span class="hljs-variable">$1</span> ]]; <span class="hljs-keyword">then</span>
+        max_word=
+        max_len=0
+        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> $(strings <span class="hljs-variable">$1</span>); <span class="hljs-keyword">do</span>
+            len=$(<span class="hljs-built_in">echo</span> <span class="hljs-variable">$i</span> | <span class="hljs-built_in">wc</span> -c)
+            <span class="hljs-keyword">if</span> (( len &gt; max_len )); <span class="hljs-keyword">then</span>
+                max_len=<span class="hljs-variable">$len</span>
+                max_word=<span class="hljs-variable">$i</span>
+            <span class="hljs-keyword">fi</span>
+        <span class="hljs-keyword">done</span>
+        <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">$1</span>: &#x27;<span class="hljs-variable">$max_word</span>&#x27; (<span class="hljs-variable">$max_len</span> characters)&quot;</span>
+    <span class="hljs-keyword">fi</span>
+    <span class="hljs-built_in">shift</span>
+<span class="hljs-keyword">done</span>
+</code></pre>
+<p>در این مثال:</p>
+<ul>
+<li>برنامه متن قابل‌خواندن داخل فایل را با دستور <strong>strings</strong> دریافت می‌کند.</li>
+<li>حلقهٔ for تک‌تک کلمات را پردازش می‌کند.</li>
+<li>طول هر کلمه سنجیده می‌شود.</li>
+<li>طولانی‌ترین کلمهٔ یافت‌شده در پایان چاپ می‌شود.</li>
+</ul>
+<hr>
+<h1><strong>استفاده از پارامترهای موضعی در for</strong></h1>
+<p>اگر بخش <code>in words</code> حذف شود، حلقهٔ for به‌طور پیش‌فرض <strong>پارامترهای موضعی</strong> را پردازش خواهد کرد.</p>
+<p>نسخهٔ ساده‌تر برنامهٔ قبل:</p>
+<pre class="hljs"><code><span class="hljs-meta">#!/bin/bash</span>
+<span class="hljs-comment"># longest-word2 : find longest string in a file</span>
+
+<span class="hljs-keyword">for</span> i; <span class="hljs-keyword">do</span>
+    <span class="hljs-keyword">if</span> [[ -r <span class="hljs-variable">$i</span> ]]; <span class="hljs-keyword">then</span>
+        max_word=
+        max_len=0
+        <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> $(strings <span class="hljs-variable">$i</span>); <span class="hljs-keyword">do</span>
+            len=$(<span class="hljs-built_in">echo</span> <span class="hljs-variable">$j</span> | <span class="hljs-built_in">wc</span> -c)
+            <span class="hljs-keyword">if</span> (( len &gt; max_len )); <span class="hljs-keyword">then</span>
+                max_len=<span class="hljs-variable">$len</span>
+                max_word=<span class="hljs-variable">$j</span>
+            <span class="hljs-keyword">fi</span>
+        <span class="hljs-keyword">done</span>
+        <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">$i</span>: &#x27;<span class="hljs-variable">$max_word</span>&#x27; (<span class="hljs-variable">$max_len</span> characters)&quot;</span>
+    <span class="hljs-keyword">fi</span>
+<span class="hljs-keyword">done</span>
+</code></pre>
+<p>در این نسخه:</p>
+<ul>
+<li>بخش <code>in ...</code> حذف شده است.</li>
+<li>بنابراین for به‌طور خودکار <code>$1</code>, <code>$2</code>, ... را پردازش می‌کند.</li>
+<li>متغیر خارجی از <strong>i</strong> به <strong>j</strong> تغییر یافته تا با حلقه بیرونی تداخل نکند.</li>
+<li>دیگر نیازی به <code>shift</code> نیست.</li>
+</ul>
+<hr>
+<h1><strong>چرا همیشه از i استفاده می‌شود؟</strong></h1>
+<p>حتماً متوجه شده‌اید که در مثال‌های for معمولاً از متغیر <strong>i</strong> استفاده می‌شود.</p>
+<p>دلیل خاصی ندارد… فقط <strong>سنت</strong> است!</p>
+<ul>
+<li>معمولاً پس از i، از <strong>j</strong> و <strong>k</strong> نیز استفاده می‌شود.</li>
+<li>این عادت از زبان برنامه‌نویسی <strong>Fortran</strong> آمده است.</li>
+</ul>
+<h3><strong>در Fortran:</strong></h3>
+<ul>
+<li>متغیرهایی که با حروف <strong>I, J, K, L, M</strong> شروع می‌شدند به‌طور خودکار <strong>عدد صحیح (integer)</strong> شناخته می‌شدند.</li>
+<li>سایر متغیرها <strong>real (عدد اعشاری)</strong> بودند.</li>
+</ul>
+<p>بنابراین برنامه‌نویسان از i، j و k برای متغیرهای موقتی مانند متغیرهای حلقه استفاده می‌کردند.</p>
+<hr>
+<h2><strong>و لطیفهٔ معروف فرترن:</strong></h2>
+<blockquote>
+<p><strong>“GOD is real, unless declared integer.”</strong></p>
+</blockquote>
+<p>(خدا واقعی است… مگر اینکه به‌عنوان integer تعریف شود!)</p>
+<hr>
+<h1><strong>حلقهٔ for: شکل زبان C (for: C Language Form)</strong></h1>
+<p>نسخه‌های جدیدتر bash شکل دومِ دستور for را اضافه کرده‌اند؛ شکلی که شبیه حلقهٔ for در زبان برنامه‌نویسی <strong>C</strong> است. بسیاری از زبان‌های برنامه‌نویسی دیگر نیز از این شکل حلقه پشتیبانی می‌کنند.</p>
+<p>ساختار آن به صورت زیر است:</p>
+<pre class="hljs"><code>for (( expression1; expression2; expression3 )); do
+    commands
+done
+</code></pre>
+<p>که در آن:</p>
+<ul>
+<li><strong>expression1</strong> → عبارت آغازین برای مقداردهی اولیه</li>
+<li><strong>expression2</strong> → شرط ادامه یافتن حلقه</li>
+<li><strong>expression3</strong> → اجرا در پایان هر تکرار حلقه</li>
+<li><strong>commands</strong> → دستورات اجراشونده در هر دور حلقه</li>
+</ul>
+<p>از نظر رفتاری، این ساختار دقیقاً معادل این کد است:</p>
+<pre class="hljs"><code>(( expression1 ))
+while (( expression2 )); do
+    commands
+    (( expression3 ))
+done
+</code></pre>
+<hr>
+<h2><strong>مثالی از کاربرد حلقهٔ C-style</strong></h2>
+<pre class="hljs"><code><span class="hljs-meta">#!/bin/bash</span>
+<span class="hljs-comment"># simple_counter : demo of C style for command</span>
+
+<span class="hljs-keyword">for</span> (( i=<span class="hljs-number">0</span>; i&lt;<span class="hljs-number">5</span>; i=i+<span class="hljs-number">1</span> )); <span class="hljs-keyword">do</span>
+    <span class="hljs-built_in">echo</span> <span class="hljs-variable">$i</span>
+<span class="hljs-keyword">done</span>
+</code></pre>
+<p>اجرای این اسکریپت نتیجهٔ زیر را تولید می‌کند:</p>
+<pre class="hljs"><code>[me@linuxbox ~]$ simple_counter
+0
+1
+2
+3
+4
+</code></pre>
+<p>در این مثال:</p>
+<ul>
+<li><strong>expression1</strong> → مقدار اولیه: <code>i=0</code></li>
+<li><strong>expression2</strong> → شرط ادامه: <code>i&lt;5</code></li>
+<li><strong>expression3</strong> → افزایش مقدار: <code>i=i+1</code> در هر تکرار</li>
+</ul>
+<p>حلقهٔ C‌-style هر زمان که یک دنبالهٔ عددی نیاز باشد، بسیار مفید است.<br>
+در دو فصل بعدی چند کاربرد بیشتر از این نوع حلقه را خواهیم دید.</p>
+<hr>
+<h1><strong>جمع‌بندی</strong></h1>
+<p>اکنون با دستور for آشنا شدیم؛ بنابراین می‌توانیم آخرین بهبودها را به اسکریپت <strong>sys_info_page</strong> اضافه کنیم.</p>
+<p>در حال حاضر تابع <code>report_home_space</code> این‌گونه است:</p>
+<pre class="hljs"><code><span class="hljs-function"><span class="hljs-title">report_home_space</span></span> () {
+<span class="hljs-keyword">if</span> [[ $(<span class="hljs-built_in">id</span> -u) -eq 0 ]]; <span class="hljs-keyword">then</span>
+<span class="hljs-built_in">cat</span> &lt;&lt;- <span class="hljs-string">_EOF_
+&lt;H2&gt;Home Space Utilization (All Users)&lt;/H2&gt;
+&lt;PRE&gt;$(du -sh /home/*)&lt;/PRE&gt;
+_EOF_</span>
+<span class="hljs-keyword">else</span>
+<span class="hljs-built_in">cat</span> &lt;&lt;- <span class="hljs-string">_EOF_
+&lt;H2&gt;Home Space Utilization ($USER)&lt;/H2&gt;
+&lt;PRE&gt;$(du -sh $HOME)&lt;/PRE&gt;
+_EOF_</span>
+<span class="hljs-keyword">fi</span>
+<span class="hljs-built_in">return</span>
+}
+</code></pre>
+<p>اکنون می‌خواهیم آن را بازنویسی کنیم تا برای هر دایرکتوری خانگی (home directory) اطلاعات بیشتری ارائه دهد؛<br>
+از جمله <strong>تعداد فایل‌ها</strong>، <strong>تعداد پوشه‌ها</strong> و <strong>حجم کل</strong>.</p>
+<hr>
+<h1><strong>نسخهٔ جدید و بهبود یافتهٔ تابع</strong></h1>
+<pre class="hljs"><code><span class="hljs-function"><span class="hljs-title">report_home_space</span></span> () {
+    <span class="hljs-built_in">local</span> format=<span class="hljs-string">&quot;%8s%10s%10s\n&quot;</span>
+    <span class="hljs-built_in">local</span> i dir_list total_files total_dirs total_size user_name
+
+    <span class="hljs-keyword">if</span> [[ $(<span class="hljs-built_in">id</span> -u) -eq 0 ]]; <span class="hljs-keyword">then</span>
+        dir_list=/home/*
+        user_name=<span class="hljs-string">&quot;All Users&quot;</span>
+    <span class="hljs-keyword">else</span>
+        dir_list=<span class="hljs-variable">$HOME</span>
+        user_name=<span class="hljs-variable">$USER</span>
+    <span class="hljs-keyword">fi</span>
+
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;&lt;H2&gt;Home Space Utilization (<span class="hljs-variable">$user_name</span>)&lt;/H2&gt;&quot;</span>
+
+    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-variable">$dir_list</span>; <span class="hljs-keyword">do</span>
+        total_files=$(find <span class="hljs-variable">$i</span> -<span class="hljs-built_in">type</span> f | <span class="hljs-built_in">wc</span> -l)
+        total_dirs=$(find <span class="hljs-variable">$i</span> -<span class="hljs-built_in">type</span> d | <span class="hljs-built_in">wc</span> -l)
+        total_size=$(<span class="hljs-built_in">du</span> -sh <span class="hljs-variable">$i</span> | <span class="hljs-built_in">cut</span> -f 1)
+
+        <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;&lt;H3&gt;<span class="hljs-variable">$i</span>&lt;/H3&gt;&quot;</span>
+        <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;&lt;PRE&gt;&quot;</span>
+        <span class="hljs-built_in">printf</span> <span class="hljs-string">&quot;<span class="hljs-variable">$format</span>&quot;</span> <span class="hljs-string">&quot;Dirs&quot;</span> <span class="hljs-string">&quot;Files&quot;</span> <span class="hljs-string">&quot;Size&quot;</span>
+        <span class="hljs-built_in">printf</span> <span class="hljs-string">&quot;<span class="hljs-variable">$format</span>&quot;</span> <span class="hljs-string">&quot;----&quot;</span> <span class="hljs-string">&quot;-----&quot;</span> <span class="hljs-string">&quot;----&quot;</span>
+        <span class="hljs-built_in">printf</span> <span class="hljs-string">&quot;<span class="hljs-variable">$format</span>&quot;</span> <span class="hljs-variable">$total_dirs</span> <span class="hljs-variable">$total_files</span> <span class="hljs-variable">$total_size</span>
+        <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;&lt;/PRE&gt;&quot;</span>
+    <span class="hljs-keyword">done</span>
+
+    <span class="hljs-built_in">return</span>
+}
+</code></pre>
+<h2><strong>تحلیل بازنویسی</strong></h2>
+<p>در نسخهٔ جدید:</p>
+<ul>
+<li>هنوز بررسی می‌کنیم که آیا کاربر <strong>root</strong> است یا خیر.</li>
+<li>اما به‌جای اجرای کامل عملیات داخل if، فقط متغیرهای مورد نیاز حلقهٔ for را مقداردهی می‌کنیم.</li>
+<li>چند متغیر محلی (local) اضافه شده است.</li>
+<li>از <strong>printf</strong> برای قالب‌بندی بهتر خروجی استفاده شده است.</li>
+<li>با استفاده از find تعداد فایل‌ها و پوشه‌ها محاسبه شده است.</li>
+<li>حجم دایرکتوری با <code>du -sh</code> استخراج می‌شود.</li>
+</ul>
+<p>این نسخه باعث تولید گزارش بسیار دقیق‌تر و حرفه‌ای‌تری نسبت به نسخهٔ قبلی می‌شود.</p>
+<hr>
+<h1><strong>مطالعهٔ بیشتر (Further Reading)</strong></h1>
+<p>● <strong>Advanced Bash-Scripting Guide</strong> — فصل مربوط به حلقه‌ها (شامل مثال‌های متعدد از for):<br>
+<a href="http://tldp.org/LDP/abs/html/loops1.html">http://tldp.org/LDP/abs/html/loops1.html</a></p>
+<p>● <strong>Bash Reference Manual</strong> — توضیح ساختارهای حلقه‌ای (از جمله for):<br>
+<a href="http://www.gnu.org/software/bash/manual/bashref.html#Looping-Constructs">http://www.gnu.org/software/bash/manual/bashref.html#Looping-Constructs</a></p>
+
+  </main>
+
+  <!-- فوتر مشترک -->
+  <footer class="footer">
+    <div class="container">
+      <p>
+        <img src="/Gitab/icone/copyright.svg" alt="کپی‌رایت" width="14" height="14"
+             style="vertical-align:middle;margin-inline:4px">
+        <span id="y"></span> Gitab — تمامی حقوق محفوظ است.
+      </p>
+    </div>
+  </footer>
+
+  <!-- سال و اسکریپت تغییر تم -->
+  <script>
+  (() => {
+    const root = document.documentElement;
+    const btn = document.getElementById('themeToggle');
+    const KEY = 'gitab-theme';
+
+    function updateTheme(s) {
+      root.setAttribute('data-theme', s);
+      const mode = s;  // فقط `dark` یا `light` خواهد بود
+      root.dataset.colorMode = mode;
+      btn.dataset.icon = mode === 'dark' ? 'moon' : 'sun';
+    }
+
+    // وضعیت تم ذخیره شده از localStorage
+    let saved = localStorage.getItem(KEY) || 'light'; // پیش‌فرض روشن
+    updateTheme(saved);
+
+    // تنظیم مجدد تم هنگام تغییر وضعیت دکمه
+    btn.addEventListener('click', () => {
+      const current = localStorage.getItem(KEY) || 'light';
+      const next = current === 'dark' ? 'light' : 'dark';  // فقط دو حالت: تاریک و روشن
+      localStorage.setItem(KEY, next);
+      updateTheme(next);
+    });
+
+    // هنگام بارگذاری صفحه
+    document.addEventListener('DOMContentLoaded', () => {
+      updateTheme(localStorage.getItem(KEY) || 'light');
+    });
+  })();
+</script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+
+  <script>
+  document.querySelectorAll('pre code').forEach(block => {
+    const btn = document.createElement('button');
+    btn.className = 'copy-btn';
+
+    const icon = document.createElement('img');
+    icon.src = "/Gitab/icone/copy.svg";
+    icon.alt = 'Copy';
+    btn.appendChild(icon);
+
+    block.parentNode.insertBefore(btn, block);
+
+    btn.addEventListener('click', async () => {
+      await navigator.clipboard.writeText(block.textContent);
+      btn.classList.add('copied');
+      setTimeout(() => btn.classList.remove('copied'), 1500);
+    });
+  });
+  </script>
+
+  <script>
+  document.body.dataset.page = window.location.pathname;
+
+  const menuBtn = document.querySelector(".menu-toggle");
+  const nav = document.querySelector(".nav");
+
+  if (menuBtn && nav) {
+    menuBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      nav.classList.toggle("show");
+    });
+
+    document.addEventListener("click", (e) => {
+      const clickedInsideNav = nav.contains(e.target);
+      const clickedMenuButton = menuBtn.contains(e.target);
+      if (!clickedInsideNav && !clickedMenuButton) {
+        nav.classList.remove("show");
+      }
+    });
+  }
+  </script>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+  <script>
+document.getElementById("openDonate").addEventListener("click", () => {
+  document.getElementById("donateModal").style.display = "block";
+});
+document.getElementById("closeDonate").addEventListener("click", () => {
+  document.getElementById("donateModal").style.display = "none";
+});
+document.querySelectorAll(".copy-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    navigator.clipboard.writeText(btn.dataset.copy);
+  
+    setTimeout(() => (btn.textContent = "کپی"), 2000);
+  });
+});
+</script>
+
+</body>
+</html>

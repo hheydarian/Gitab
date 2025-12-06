@@ -43,8 +43,10 @@
        <nav class="nav">
          <a href="/Gitab/" >خانه</a>
          <a href="/Gitab/books/list-books" >کتاب‌ها</a>
-         <a href="/Gitab/giter.html" >گیتر</a>
-        <a href="/Gitab/translator.html" >مترجمین</a>
+         <a href="/Gitab/giter.html" >دوره ها</a>
+          <!-- 
+         <a href="/Gitab/translator.html" >مترجمین</a>
+           -->
        </nav>
 
       <div class="nav-actions">
@@ -73,13 +75,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 </head>
 
 <body>
   <section class="book-header">
     <div class="book-cover">
-      <img src="/Gitab/images/clean-code-csharp/Cover.webp" alt="Clean Code in C#" />
+      <img src="/Gitab/images/clean-code-csharp/Cover.jpg" alt="Clean Code in C#" />
     </div>
 
     <div class="book-meta">
@@ -108,9 +109,157 @@
         </div>
 
         <div class="download-wrapper">
-          <button class="donate-btn downloadfa" id="faDownload" data-link="https://Gitab.ir.page">
-            فایل فارسی
-          </button>
+          <!-- دکمه فایل فارسی: همین را جایگزین دکمه قبلیِ فایل فارسی کن -->
+          <button class="donate-btn downloadfa" id="faBuy">فایل فارسی</button>
+          <!-- مودال اصلی انتخاب روش پرداخت -->
+          <div id="payModal" class="sheet" aria-hidden="true">
+            <div class="sheet__overlay" data-close="payModal"></div>
+            <div class="sheet__panel">
+              <div class="sheet__header">
+                <h3>خرید نسخهٔ ترجمه‌شده</h3>
+                <button class="sheet__close" data-close="payModal" aria-label="بستن">✕</button>
+              </div>
+
+              <p class="sheet__lead">برای خرید نسخه ترجمه‌شده این کتاب می‌توانید از روش‌های زیر استفاده کنید:</p>
+
+              <div class="price-row">
+                <img src="/Gitab/icone/money.svg" alt="" class="i">
+                <span>قیمت:</span>
+                <strong id="faPrice">190,000</strong><span>تومان</span>
+              </div>
+
+              <div class="pay-grid">
+                <!-- روش ۱: کارت به کارت -->
+                <button class="pay-card" id="openCardPay">
+                  <img src="/Gitab/icone/card.svg" alt="" class="i">
+                  <div>
+                    <div class="t">پرداخت کارت‌به‌کارت</div>
+                  </div>
+                </button>
+
+                <!-- روش ۲: پرداخت به ارز -->
+                <button class="pay-card" id="openCryptoPay">
+                  <img src="/Gitab/icone/ton.svg" alt="" class="i">
+                  <div>
+                    <div class="t">پرداخت با ارز تون کوین</div>
+                  </div>
+                </button>
+              </div>
+
+              <div class="sheet__actions">
+                <button class="btn ghost" id="openPreview">
+                  <img src="/Gitab/icone/printer.svg" class="i" alt="">
+                  پیش‌نمایش
+                </button>
+                <button class="btn" data-close="payModal">بستن</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- مودال تو در تو: جزئیات «کارت‌به‌کارت» -->
+          <div id="cardModal" class="sheet sheet--nested" aria-hidden="true">
+            <div class="sheet__overlay" data-close="cardModal"></div>
+            <div class="sheet__panel">
+              <div class="sheet__header">
+                <h3>پرداخت کارت‌ به‌ کارت</h3>
+                <button class="sheet__close" data-close="cardModal">✕</button>
+              </div>
+
+              <div class="notice">
+                بعد از ارسال هزینه، اسکرین‌شات و اطلاعات پرداخت را به یکی از راه‌های زیر ارسال کنید تا فایل برای شما
+                ارسال شود.
+              </div>
+
+              <div class="contact-list">
+                <a class="contact" href="https://t.me/Hamedheydarian" target="_blank" rel="noopener">
+                  <img src="/Gitab/icone/telegram.svg" class="i" alt="">
+                  <span>تلگرام: <b>@Hamedheydarian</b></span>
+                </a>
+                <a class="contact" href="mailto:hamdhydryan12@gmail.com">
+                  <img src="/Gitab/icone/mail.svg" class="i" alt="">
+                  <span>ایمیل: <b>hamdhydryan12@gmail.com</b></span>
+                </a>
+              </div>
+              <div class="bank-box">
+                <div class="row">
+                  <span>شماره کارت:</span>
+                  <code id="cardNumber">6219 8619 3657 5579</code>
+                  <button class="copy-btn" data-copy="6219861944720969">کپی</button>
+                </div>
+                <div class="row">
+                  <span>نام گیرنده:</span>
+                  <code>حامد حیدریان</code>
+                </div>
+              </div>
+
+              <div class="sheet__actions">
+                <button class="btn" data-close="cardModal">تمام</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- مودال تو در تو: جزئیات «پرداخت به ارز (TON)» -->
+          <div id="cryptoModal" class="sheet sheet--nested" aria-hidden="true">
+            <div class="sheet__overlay" data-close="cryptoModal"></div>
+            <div class="sheet__panel">
+              <div class="sheet__header">
+                <h3>پرداخت با ارز تون کوین</h3>
+                <button class="sheet__close" data-close="cryptoModal">✕</button>
+              </div>
+
+              <div class="wallet-box">
+                <div class="row">
+                  <img src="/Gitab/icone/ton.svg" class="i" alt="">
+                  <span>TON Wallet:</span>
+                  <code class="ellipsis" id="tonAddr">UQCWRF4kFYSmkx4dSX1ozNHAlx77j7xKZj7Nzbky8grq5Ri7</code>
+                  <button class="copy-btn" data-copy="UQCWRF4kFYSmkx4dSX1ozNHAlx77j7xKZj7Nzbky8grq5Ri7">کپی</button>
+                </div>
+                <small class="muted">پس از پرداخت، رسید/TxID را در تلگرام یا ایمیل زیر بفرستید.</small>
+                <div class="contact-list" style="margin-top:10px;">
+                  <a class="contact" href="https://t.me/Hamedheydarian" target="_blank" rel="noopener">
+                    <img src="/Gitab/icone/telegram.svg" class="i" alt="">
+                    <span>تلگرام: <b>@Hamedheydarian</b></span>
+                  </a>
+                  <a class="contact" href="mailto:hamdhydryan12@gmail.com">
+                    <img src="/Gitab/icone/mail.svg" class="i" alt="">
+                    <span>ایمیل: <b>hamdhydryan12@gmail.com</b></span>
+                  </a>
+                </div>
+
+              </div>
+
+              <div class="sheet__actions">
+                <button class="btn" data-close="cryptoModal">تمام</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- مودال بزرگ «پیش‌نمایش» -->
+          <div id="previewModal" class="sheet sheet--xl" aria-hidden="true">
+            <div class="sheet__overlay" data-close="previewModal"></div>
+            <div class="sheet__panel">
+              <div class="sheet__header">
+                <h3>پیش‌نمایش فایل</h3>
+                <div class="sheet__header-actions">
+                  <button class="btn ghost" id="printPreview">
+                    <img src="/Gitab/icone/printer.svg" class="i" alt=""> پرینت پیش‌نمایش
+                  </button>
+                  <button class="sheet__close" data-close="previewModal">✕</button>
+                </div>
+              </div>
+
+              <!-- نکته: FILE_ID را با شناسهٔ گوگل‌درایو نسخهٔ فارسی عوض کن -->
+              <iframe id="previewFrame" src="https://drive.google.com/file/d/1ZP8PLQpZKyxTOrD4IxB0BtEGXNxQq0LC/preview"
+                loading="lazy" allow="autoplay; fullscreen; clipboard-write" referrerpolicy="no-referrer"
+                sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-modals"
+                class="preview-frame"></iframe>
+
+              <div class="sheet__actions">
+                <button class="btn" data-close="previewModal">بستن</button>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
       <div id="donateModal" class="donate-modal">
@@ -165,7 +314,6 @@
 
   <section id="chapters" class="book-chapters">
     <h2> فهرست سرفصل‌ها</h2>
-
     <details open>
       <summary>بخش ۱ — مقدمات و اصول</summary>
       <ul>
@@ -256,6 +404,7 @@
     });
   </script>
   <script>
+    // 🎯 تول‌تیپ برای فایل اصلی
     const downloadBtn = document.getElementById("mainDownload");
     const tooltip = document.getElementById("tooltipDownload");
 
@@ -287,6 +436,93 @@
       const link = faDownload.dataset.link;
       window.open(link, "_blank"); // باز شدن در تب جدید
     });
+  </script>
+  <script>
+    (() =>
+    {
+      // قیمت — اگر خواستی عوض کنی فقط این را تغییر بده
+      const PRICE = 190000;
+
+      const byId = id => document.getElementById(id);
+      const setSheet = (id, open) => byId(id).setAttribute('aria-hidden', open ? 'false' : 'true');
+
+      // دکمه فایل فارسی -> مودال اصلی
+      const faBuy = byId('faBuy');
+      const payModal = byId('payModal');
+      if (faBuy) faBuy.addEventListener('click', () => setSheet('payModal', true));
+
+      // قیمت را به حروف فارسی با جداکننده تنظیم کن
+      const faPrice = byId('faPrice');
+      if (faPrice) faPrice.textContent = PRICE.toLocaleString('fa-IR');
+
+      // بازکردن مودال‌های تو در تو بدون بستن والد
+      byId('openCardPay')?.addEventListener('click', () => setSheet('cardModal', true));
+      byId('openCryptoPay')?.addEventListener('click', () => setSheet('cryptoModal', true));
+
+      // بستن با کلیک روی اوورلی یا دکمه ×
+      document.addEventListener('click', (e) =>
+      {
+        const btn = e.target.closest('[data-close]');
+        if (!btn) return;
+        const id = btn.getAttribute('data-close');
+        setSheet(id, false);
+      });
+
+      // کپی کلیپ‌بورد با بازخورد
+      document.querySelectorAll('.copy-btn').forEach(btn =>
+      {
+        btn.addEventListener('click', async () =>
+        {
+          try
+          {
+            await navigator.clipboard.writeText(btn.dataset.copy || '');
+            const old = btn.textContent;
+            btn.textContent = 'کپی شد ✓';
+            btn.disabled = true;
+            setTimeout(() => { btn.textContent = old; btn.disabled = false; }, 1400);
+          } catch { alert('کپی نشد؛ لطفاً دستی کپی کنید.'); }
+        });
+      });
+
+      // پیش‌نمایش (گوگل‌درایو)
+      const previewModal = byId('previewModal');
+      const previewFrame = byId('previewFrame');
+      byId('openPreview')?.addEventListener('click', () =>
+      {
+        // اگر لازم شد، اینجا می‌توانی FILE_ID را پویا ست کنی
+        setSheet('previewModal', true);
+      });
+
+      // پرینت محتوای iframe
+      byId('printPreview')?.addEventListener('click', () =>
+      {
+        const fileUrl = 'https://drive.google.com/file/d/1ZP8PLQpZKyxTOrD4IxB0BtEGXNxQq0LC/view';
+        window.open(fileUrl, '_blank');
+      });
+
+      document.addEventListener('click', e =>
+      {
+        if (e.target.dataset.close === 'previewModal')
+        {
+          previewFrame.src = ''; // پاک‌کردن iframe هنگام بستن
+          setTimeout(() =>
+          {
+            previewFrame.src = 'https://drive.google.com/file/d/1ZP8PLQpZKyxTOrD4IxB0BtEGXNxQq0LC/preview';
+          }, 300);
+        }
+      });
+
+      // ESC برای بستن نزدیک‌ترین شیت باز
+      document.addEventListener('keydown', e =>
+      {
+        if (e.key !== 'Escape') return;
+        // اولویت: پیش‌نمایش، بعد nested ها، بعد اصلی
+        if (previewModal.getAttribute('aria-hidden') === 'false') return setSheet('previewModal', false);
+        if (byId('cryptoModal').getAttribute('aria-hidden') === 'false') return setSheet('cryptoModal', false);
+        if (byId('cardModal').getAttribute('aria-hidden') === 'false') return setSheet('cardModal', false);
+        if (payModal.getAttribute('aria-hidden') === 'false') return setSheet('payModal', false);
+      });
+    })();
   </script>
 </body>
 

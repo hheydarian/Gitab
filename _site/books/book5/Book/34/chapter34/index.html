@@ -1,0 +1,1064 @@
+
+
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <link rel="icon" type="image/png" href="/Gitab/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>رشته‌ها و اعداد</title>
+  <meta name="description" content="ترجمه‌های فارسی کتاب‌های فنی — سریع، مینیمال و قابل اتکا.">
+
+  <!-- استایل‌ها -->
+  <link rel="stylesheet" href="/Gitab/styles/main.css">
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+
+  <style>
+  @font-face {
+    font-family: 'Vazir';
+    src: url('/Gitab/fonts/Vazir-FD-WOL.ttf') format('truetype');
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "Lalezar";
+    src: url('fonts/Lalezar.ttf') format('truetype');
+    font-display: swap;
+}
+  body {
+    font-family: 'Vazir', sans-serif;
+  }
+  </style>
+</head>
+
+<body>
+  <!-- هدر مشترک -->
+  <header class="header">
+    <div class="container nav-wrap">
+      <a href="/Gitab/" class="brand">
+        <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="26" height="26">
+        <span>Gitab</span>
+      </a>
+
+       <nav class="nav">
+         <a href="/Gitab/" >خانه</a>
+         <a href="/Gitab/books/list-books" >کتاب‌ها</a>
+         <a href="/Gitab/giter.html" >دوره ها</a>
+          <!-- 
+         <a href="/Gitab/translator.html" >مترجمین</a>
+           -->
+       </nav>
+
+      <div class="nav-actions">
+        <button id="themeToggle" class="icon-btn theme-btn" data-icon="moon" aria-label="تغییر تم">
+          <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن">
+          <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک">
+        </button>
+
+        <a class="icon-btn" href="https://github.com/hheydarian/Gitab" target="_blank" title="GitHub">
+          <img src="/Gitab/icone/github.svg" alt="GitHub">
+        </a>
+
+        <!-- دکمه منو برای موبایل -->
+        <button class="menu-toggle" aria-label="منو">
+          <img src="/Gitab/icone/menu.svg" alt="menu">
+        </button>
+      </div>
+    </div>
+  </header>
+
+  
+  <main class="site-main book-page">
+    <h1>۳۴ – رشته‌ها و اعداد (Strings And Numbers)</h1>
+<p>برنامه‌های کامپیوتری اساساً دربارهٔ کار با داده هستند. در فصل‌های گذشته، تمرکز ما روی پردازش داده‌ها در سطح فایل بود؛ اما بسیاری از مسائل برنامه‌نویسی نیازمند پردازش واحدهای کوچک‌تری مانند <strong>رشته‌ها (strings)</strong> و <strong>اعداد (numbers)</strong> هستند.</p>
+<p>در این فصل، چندین قابلیت شِل را بررسی می‌کنیم که برای دستکاری رشته‌ها و اعداد مورد استفاده قرار می‌گیرند. شِل مجموعهٔ متنوعی از <strong>گسترش پارامترها (parameter expansions)</strong> دارد که عملیات رشته‌ای انجام می‌دهند.<br>
+علاوه بر گسترش عددی (Arithmetic Expansion) که در فصل ۷ به آن اشاره کردیم، برنامهٔ رایجی به نام <strong>bc</strong> نیز وجود دارد که محاسبات سطح بالا انجام می‌دهد.</p>
+<hr>
+<h1><strong>گسترش پارامتر (Parameter Expansion)</strong></h1>
+<p>در فصل ۷ به گسترش پارامتر اشاره کردیم، اما وارد جزئیات نشدیم زیرا بیشتر آن‌ها در <strong>اسکریپت‌ها</strong> استفاده می‌شوند، نه روی خط فرمان.</p>
+<p>ما قبلاً با برخی از این گسترش‌ها کار کرده‌ایم؛ برای مثال، متغیرهای شِل.<br>
+ولی شِل امکانات بسیار بیشتری ارائه می‌کند.</p>
+<hr>
+<h1><strong>پارامترهای ساده (Basic Parameters)</strong></h1>
+<p>ساده‌ترین نوع گسترش پارامتر استفادهٔ معمولی از متغیرهاست. مثلاً:</p>
+<pre class="hljs"><code>$a
+</code></pre>
+<p>که هنگام گسترش، مقدار متغیر <strong>a</strong> را تولید می‌کند.</p>
+<p>یا می‌توان متغیر را داخل <strong>آکولاد</strong> قرار داد:</p>
+<pre class="hljs"><code>${a}
+</code></pre>
+<p>این کار در برخی موارد لازم است؛ مثلاً زمانی که متغیر در کنار متن دیگری قرار می‌گیرد و ممکن است باعث سردرگمی شِل شود:</p>
+<h3>مشکل نمونه</h3>
+<pre class="hljs"><code>[me@linuxbox ~]$ a=&quot;foo&quot;
+[me@linuxbox ~]$ echo &quot;$a_file&quot;
+</code></pre>
+<p>شِل تلاش می‌کند متغیر <strong>a_file</strong> را گسترش دهد، نه متغیر <strong>a</strong>.</p>
+<h3>راه حل</h3>
+<pre class="hljs"><code>[me@linuxbox ~]$ echo &quot;${a}_file&quot;
+foo_file
+</code></pre>
+<p>همچنین برای دسترسی به پارامترهای موضعی بالاتر از ۹، باید از آکولاد استفاده کرد:</p>
+<pre class="hljs"><code>${11}
+</code></pre>
+<hr>
+<h1><strong>گسترش‌ها برای مدیریت متغیرهای خالی (Expansions To Manage Empty Variables)</strong></h1>
+<p>این گسترش‌ها برای حالت‌هایی مفید هستند که یک متغیر <em>تعریف نشده</em> یا <em>خالی</em> است.<br>
+اغلب برای مدیریت آرگومان‌های کم یا تنظیم مقدار پیش‌فرض به‌کار می‌روند.</p>
+<hr>
+<h2><strong>۱. <code>${parameter:-word}</code></strong></h2>
+<p>اگر <strong>parameter</strong> خالی یا تعریف نشده باشد → مقدار <strong>word</strong> برگردانده می‌شود.<br>
+اگر مقدار داشته باشد → مقدار خودش برگردانده می‌شود.</p>
+<p>مثال:</p>
+<pre class="hljs"><code>foo=
+echo ${foo:-&quot;substitute value if unset&quot;}
+# خروجی: substitute value if unset
+</code></pre>
+<p>اگر foo مقدار داشته باشد:</p>
+<pre class="hljs"><code>foo=bar
+echo ${foo:-&quot;substitute value if unset&quot;}
+# خروجی: bar
+</code></pre>
+<hr>
+<h2><strong>۲. <code>${parameter:=word}</code></strong></h2>
+<p>مانند مورد قبل است، اما <strong>word علاوه بر گسترش، به خود parameter نیز اختصاص داده می‌شود.</strong></p>
+<p>مثال:</p>
+<pre class="hljs"><code>foo=
+echo ${foo:=&quot;default value if unset&quot;}
+# خروجی: default value if unset
+echo $foo
+# اکنون foo همین مقدار را دارد
+</code></pre>
+<blockquote>
+<p>توجه: پارامترهای موضعی (مثل $1 و …) را نمی‌توان با این روش مقداردهی کرد.</p>
+</blockquote>
+<hr>
+<h2><strong>۳. <code>${parameter:?word}</code></strong></h2>
+<p>اگر parameter خالی باشد:</p>
+<ul>
+<li>پیام خطا چاپ می‌شود،</li>
+<li>اسکریپت با خطا خاتمه می‌یابد.</li>
+</ul>
+<p>مثال:</p>
+<pre class="hljs"><code>foo=
+echo ${foo:?&quot;parameter is empty&quot;}
+# خروجی: bash: foo: parameter is empty
+</code></pre>
+<p>اگر مقدار داشته باشد:</p>
+<pre class="hljs"><code>foo=bar
+echo ${foo:?&quot;parameter is empty&quot;}
+# خروجی: bar
+</code></pre>
+<hr>
+<h2><strong>۴. <code>${parameter:+word}</code></strong></h2>
+<p>اگر parameter خالی باشد → هیچ چیزی خروجی نمی‌دهد.<br>
+اگر مقدار داشته باشد → مقدار <strong>word</strong> خروجی می‌شود (اما مقدار parameter تغییر نمی‌کند).</p>
+<p>مثال:</p>
+<pre class="hljs"><code>foo=
+echo ${foo:+&quot;substitute value if set&quot;}
+# (خروجی ندارد)
+
+foo=bar
+echo ${foo:+&quot;substitute value if set&quot;}
+# خروجی: substitute value if set
+</code></pre>
+<hr>
+<h1><strong>گسترش‌هایی که نام متغیرها را برمی‌گردانند</strong></h1>
+<pre class="hljs"><code>${!prefix*}
+${!prefix@}
+</code></pre>
+<p>هر دو فرم، فهرست نام متغیرهایی را که با prefix شروع می‌شوند برمی‌گردانند.</p>
+<p>مثال:</p>
+<pre class="hljs"><code>echo ${!BASH*}
+</code></pre>
+<p>خروجی شامل همهٔ متغیرهای محیطی شروع‌شونده با BASH خواهد بود.</p>
+<hr>
+<h1><strong>عملیات روی رشته‌ها (String Operations)</strong></h1>
+<p>بخش مهمی از parameter expansion به دستکاری رشته‌ها اختصاص دارد.</p>
+<hr>
+<h2><strong>۱. <code>${#parameter}</code> – طول رشته</strong></h2>
+<pre class="hljs"><code>foo=&quot;This string is long.&quot;
+echo &quot;'$foo' is ${#foo} characters long.&quot;
+</code></pre>
+<p>خروجی:</p>
+<pre class="hljs"><code>'This string is long.' is 20 characters long.
+</code></pre>
+<p>اگر parameter برابر <strong>@</strong> یا ***** باشد، تعداد پارامترهای موضعی برگردانده می‌شود.</p>
+<hr>
+<h2><strong>۲. برش (Substring)</strong></h2>
+<h3>فرم‌ها</h3>
+<pre class="hljs"><code>${parameter:offset}
+${parameter:offset:length}
+</code></pre>
+<p>مثال‌ها:</p>
+<pre class="hljs"><code>foo=&quot;This string is long.&quot;
+echo ${foo:5}
+# خروجی: string is long.
+
+echo ${foo:5:6}
+# خروجی: string
+</code></pre>
+<h3>offset منفی</h3>
+<pre class="hljs"><code>echo ${foo: -5}
+# خروجی: long.
+
+echo ${foo: -5:2}
+# خروجی: lo
+</code></pre>
+<hr>
+<h2><strong>۳. حذف قسمت‌هایی از ابتدای رشته</strong></h2>
+<pre class="hljs"><code>${parameter#pattern}   # کوتاه‌ترین برداشت
+${parameter##pattern}  # بلندترین برداشت
+</code></pre>
+<p>مثال:</p>
+<pre class="hljs"><code>foo=file.txt.zip
+echo ${foo#*.}
+# txt.zip
+
+echo ${foo##*.}
+# zip
+</code></pre>
+<hr>
+<h2><strong>۴. حذف از انتهای رشته</strong></h2>
+<pre class="hljs"><code>${parameter%pattern}
+${parameter%%pattern}
+</code></pre>
+<p>مثال:</p>
+<pre class="hljs"><code>echo ${foo%.*}
+# file.txt
+
+echo ${foo%%.*}
+# file
+</code></pre>
+<hr>
+<h2><strong>۵. جستجو و جایگزینی (Search &amp; Replace)</strong></h2>
+<pre class="hljs"><code>${parameter/pattern/string}   # فقط اولین
+${parameter//pattern/string}  # همهٔ موارد
+${parameter/#pattern/string}  # فقط اگر ابتدای رشته باشد
+${parameter/%pattern/string}  # فقط اگر انتهای رشته باشد
+</code></pre>
+<p>مثال:</p>
+<pre class="hljs"><code>foo=JPG.JPG
+echo ${foo/JPG/jpg}
+# jpg.JPG
+
+echo ${foo//JPG/jpg}
+# jpg.jpg
+
+echo ${foo/#JPG/jpg}
+# jpg.JPG
+
+echo ${foo/%JPG/jpg}
+# JPG.jpg
+</code></pre>
+<hr>
+<h1><strong>افزایش کارایی با جایگزینی دستورهای خارجی</strong></h1>
+<p>مثال از فصل قبل: برنامه longest-word</p>
+<p>به‌جای:</p>
+<pre class="hljs"><code>len=$(echo $j | wc -c)
+</code></pre>
+<p>می‌توان از:</p>
+<pre class="hljs"><code>len=${#j}
+</code></pre>
+<p>استفاده کرد که سریع‌تر و کارآمدتر است.</p>
+<p>نسخهٔ بهینه‌شده:</p>
+<pre class="hljs"><code>len=<span class="hljs-variable">${#j}</span>
+</code></pre>
+<h3>مقایسهٔ سرعت</h3>
+<ul>
+<li>نسخهٔ قدیمی: <strong>۳.۶ ثانیه</strong></li>
+<li>نسخهٔ جدید: <strong>۰.۰۶ ثانیه</strong></li>
+</ul>
+<p>بهبود <strong>بسیار قابل توجه</strong>.</p>
+<hr>
+<h1><strong>تبدیل حروف بزرگ/کوچک (Case Conversion)</strong></h1>
+<p>نسخه‌های جدیدتر <strong>bash</strong> از تبدیل رشته‌ها به حروف بزرگ یا کوچک پشتیبانی می‌کنند.<br>
+برای این کار، bash چهار <strong>گسترش پارامتر</strong> (parameter expansion) و دو <strong>گزینه برای دستور declare</strong> ارائه می‌دهد.</p>
+<p>اما تبدیل حروف به چه درد می‌خورد؟</p>
+<p>غیر از جنبهٔ ظاهری، این کار نقش مهمی در برنامه‌نویسی دارد.<br>
+مثلاً تصور کنید می‌خواهیم یک مقدار ورودی کاربر را در یک پایگاه داده جستجو کنیم. ممکن است کاربر آن مقدار را به‌صورت:</p>
+<ul>
+<li>کامل با حروف بزرگ،</li>
+<li>کامل با حروف کوچک،</li>
+<li>یا ترکیبی از هر دو</li>
+</ul>
+<p>وارد کند.<br>
+ما نمی‌خواهیم پایگاه دادهٔ خود را با هزاران حالت متفاوت از حروف بزرگ/کوچک پر کنیم.</p>
+<h3><strong>راه‌حل: نرمال‌سازی (normalize) ورودی کاربر</strong></h3>
+<p>یعنی قبل از انجام جستجو، تمام حروف ورودی را به <strong>یک شکل استاندارد</strong> تبدیل کنیم.<br>
+مثلاً همیشه به <strong>lowercase</strong> یا همیشه به <strong>UPPERCASE</strong>.</p>
+<p>bash امکان انجام این کار را فراهم می‌کند.</p>
+<hr>
+<h1><strong>تبدیل حروف با declare</strong></h1>
+<p>با دستور declare می‌توانیم تعیین کنیم که یک متغیر <em>همیشه</em> به صورت uppercase یا lowercase ذخیره شود:</p>
+<pre class="hljs"><code><span class="hljs-meta">#!/bin/bash</span>
+<span class="hljs-comment"># ul-declare: demonstrate case conversion via declare</span>
+
+<span class="hljs-built_in">declare</span> -u upper
+<span class="hljs-built_in">declare</span> -l lower
+
+<span class="hljs-keyword">if</span> [[ <span class="hljs-variable">$1</span> ]]; <span class="hljs-keyword">then</span>
+    upper=<span class="hljs-string">&quot;<span class="hljs-variable">$1</span>&quot;</span>
+    lower=<span class="hljs-string">&quot;<span class="hljs-variable">$1</span>&quot;</span>
+    <span class="hljs-built_in">echo</span> <span class="hljs-variable">$upper</span>
+    <span class="hljs-built_in">echo</span> <span class="hljs-variable">$lower</span>
+<span class="hljs-keyword">fi</span>
+</code></pre>
+<p>در این اسکریپت:</p>
+<ul>
+<li><code>declare -u</code> ⇒ متغیر همیشه <strong>UPPERCASE</strong> می‌شود</li>
+<li><code>declare -l</code> ⇒ متغیر همیشه <strong>lowercase</strong> می‌شود</li>
+</ul>
+<p>مثال اجرا:</p>
+<pre class="hljs"><code>[me@linuxbox ~]$ ul-declare aBc
+ABC
+abc
+</code></pre>
+<p>ورودی کاربر (“aBc”) نرمال‌سازی شده است.</p>
+<hr>
+<h1><strong>۴ نوع گسترش پارامتری برای تبدیل حروف</strong></h1>
+<h3><strong>Table 34-1: Case Conversion Expansions</strong></h3>
+<table>
+<thead>
+<tr>
+<th>فرمت</th>
+<th>نتیجه</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>${parameter,,}</code></td>
+<td>تبدیل کل رشته به حروف کوچک</td>
+</tr>
+<tr>
+<td><code>${parameter,}</code></td>
+<td>تبدیل فقط اولین حرف به کوچک</td>
+</tr>
+<tr>
+<td><code>${parameter^^}</code></td>
+<td>تبدیل کل رشته به حروف بزرگ</td>
+</tr>
+<tr>
+<td><code>${parameter^}</code></td>
+<td>تبدیل فقط اولین حرف به بزرگ (capitalization)</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2><strong>نمونه اسکریپت</strong></h2>
+<pre class="hljs"><code><span class="hljs-meta">#!/bin/bash</span>
+<span class="hljs-comment"># ul-param - demonstrate case conversion via parameter expansion</span>
+
+<span class="hljs-keyword">if</span> [[ <span class="hljs-variable">$1</span> ]]; <span class="hljs-keyword">then</span>
+    <span class="hljs-built_in">echo</span> <span class="hljs-variable">${1,,}</span>
+    <span class="hljs-built_in">echo</span> <span class="hljs-variable">${1,}</span>
+    <span class="hljs-built_in">echo</span> <span class="hljs-variable">${1^^}</span>
+    <span class="hljs-built_in">echo</span> <span class="hljs-variable">${1^}</span>
+<span class="hljs-keyword">fi</span>
+</code></pre>
+<p>اجرا:</p>
+<pre class="hljs"><code>[me@linuxbox ~]$ ul-param aBc
+abc
+aBc
+ABC
+ABc
+</code></pre>
+<p>در اینجا، از موقعیت پارامتری <code>$1</code> استفاده شده، اما این گسترش‌ها می‌توانند روی هر رشته یا متغیری اعمال شوند.</p>
+<hr>
+<h1><strong>ارزیابی و گسترش حسابی (Arithmetic Evaluation and Expansion)</strong></h1>
+<p>در فصل ۷ با <strong>گسترش حسابی</strong> آشنا شدیم. این گسترش برای انجام عملیات ریاضی روی اعداد صحیح استفاده می‌شود:</p>
+<pre class="hljs"><code>$((expression))
+</code></pre>
+<p>این همان چیزی است که در دستورات شرطی arithmetic evaluation مثل:</p>
+<pre class="hljs"><code>(( expression ))
+</code></pre>
+<p>نیز استفاده می‌شود.</p>
+<p>در ادامه، به فهرست کامل‌تری از قابلیت‌های ریاضی bash می‌پردازیم.</p>
+<hr>
+<h1><strong>مبنای اعداد (Number Bases)</strong></h1>
+<p>در فصل ۹ دربارهٔ اعداد <strong>هشت‌هشتی (octal)</strong> و <strong>شانزده‌شانزدهی (hexadecimal)</strong> توضیح داده شد.<br>
+در گسترش‌های حسابی bash می‌توان از اعداد صحیح در هر مبنایی استفاده کرد.</p>
+<h3><strong>Table 34-2: مشخص‌کردن مبنای عدد</strong></h3>
+<table>
+<thead>
+<tr>
+<th>نشانه‌گذاری</th>
+<th>توضیح</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>number</code></td>
+<td>مبنای ۱۰ (ده‌دهی) – حالت پیش‌فرض</td>
+</tr>
+<tr>
+<td><code>0number</code></td>
+<td>مبنای ۸ (octal)</td>
+</tr>
+<tr>
+<td><code>0xnumber</code></td>
+<td>مبنای ۱۶ (hexadecimal)</td>
+</tr>
+<tr>
+<td><code>base#number</code></td>
+<td>عدد در مبنای دلخواه</td>
+</tr>
+</tbody>
+</table>
+<p>مثال‌ها:</p>
+<pre class="hljs"><code>echo $((0xff))
+# 255
+
+echo $((2#11111111))
+# 255
+</code></pre>
+<hr>
+<h1><strong>عملگرهای یگانی (Unary Operators)</strong></h1>
+<p>عملگرهای یگانی <code>+</code> و <code>-</code> نشانهٔ مثبت یا منفی بودن عدد هستند:</p>
+<p>مثلاً:</p>
+<pre class="hljs"><code>-5
+</code></pre>
+<hr>
+<h1><strong>عملیات حسابی ساده</strong></h1>
+<h3><strong>Table 34-3: Arithmetic Operators</strong></h3>
+<table>
+<thead>
+<tr>
+<th>عملگر</th>
+<th>عملیات</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>+</code></td>
+<td>جمع</td>
+</tr>
+<tr>
+<td><code>-</code></td>
+<td>تفریق</td>
+</tr>
+<tr>
+<td><code>*</code></td>
+<td>ضرب</td>
+</tr>
+<tr>
+<td><code>/</code></td>
+<td>تقسیم صحیح</td>
+</tr>
+<tr>
+<td><code>**</code></td>
+<td>توان</td>
+</tr>
+<tr>
+<td><code>%</code></td>
+<td>باقیمانده (modulo)</td>
+</tr>
+</tbody>
+</table>
+<h3><strong>تقسیم صحیح در bash</strong></h3>
+<p>bash فقط با اعداد صحیح کار می‌کند، بنابراین:</p>
+<pre class="hljs"><code>echo $((5 / 2))
+# 2
+</code></pre>
+<p>برای همین تعیین باقیمانده اهمیت دارد:</p>
+<pre class="hljs"><code>echo $((5 % 2))
+# 1
+</code></pre>
+<hr>
+<h1><strong>استفاده از modulo در حلقه‌ها</strong></h1>
+<p>باقیماندهٔ تقسیم برای ایجاد رفتارهای دوره‌ای مفید است.<br>
+مثلاً برجسته‌کردن مقادیر مضرب ۵:</p>
+<pre class="hljs"><code><span class="hljs-meta">#!/bin/bash</span>
+<span class="hljs-comment"># modulo : demonstrate the modulo operator</span>
+
+<span class="hljs-keyword">for</span> ((i = <span class="hljs-number">0</span>; i &lt;= <span class="hljs-number">20</span>; i = i + <span class="hljs-number">1</span>)); <span class="hljs-keyword">do</span>
+    remainder=$((i % <span class="hljs-number">5</span>))
+    <span class="hljs-keyword">if</span> (( remainder == <span class="hljs-number">0</span> )); <span class="hljs-keyword">then</span>
+        <span class="hljs-built_in">printf</span> <span class="hljs-string">&quot;&lt;%d&gt; &quot;</span> <span class="hljs-variable">$i</span>
+    <span class="hljs-keyword">else</span>
+        <span class="hljs-built_in">printf</span> <span class="hljs-string">&quot;%d &quot;</span> <span class="hljs-variable">$i</span>
+    <span class="hljs-keyword">fi</span>
+<span class="hljs-keyword">done</span>
+<span class="hljs-built_in">printf</span> <span class="hljs-string">&quot;\n&quot;</span>
+</code></pre>
+<p>نتیجه:</p>
+<pre class="hljs"><code>&lt;0&gt; 1 2 3 4 &lt;5&gt; 6 7 8 9 &lt;10&gt; 11 12 13 14 &lt;15&gt; 16 17 18 19 &lt;20&gt;
+</code></pre>
+<hr>
+<h2><strong>انتساب (Assignment)</strong></h2>
+<p>هرچند استفاده‌هایش شاید در نگاه اول خیلی واضح نباشد، <em>عبارات حسابی</em> می‌توانند عمل <strong>انتساب</strong> هم انجام دهند.</p>
+<p>ما تا الان بارها عمل انتساب انجام داده‌ایم؛ هر بار که به یک متغیر مقدار می‌دهیم، داریم انتساب انجام می‌دهیم.<br>
+اما این کار را می‌توانیم <strong>داخل عبارات حسابی</strong> هم انجام دهیم:</p>
+<pre class="hljs"><code>[me@linuxbox ~]$ foo=
+[me@linuxbox ~]$ <span class="hljs-built_in">echo</span> <span class="hljs-variable">$foo</span>
+
+[me@linuxbox ~]$ <span class="hljs-keyword">if</span> (( foo = <span class="hljs-number">5</span> )); <span class="hljs-keyword">then</span> <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;It is true.&quot;</span>; <span class="hljs-keyword">fi</span>
+It is <span class="hljs-literal">true</span>.
+[me@linuxbox ~]$ <span class="hljs-built_in">echo</span> <span class="hljs-variable">$foo</span>
+5
+</code></pre>
+<p>در مثال بالا:</p>
+<ol>
+<li>اول یک مقدار خالی به متغیر <code>foo</code> می‌دهیم و خالی بودنش را چک می‌کنیم.</li>
+<li>بعد در دستور <code>if</code> از عبارت حسابی <code>(( foo = 5 ))</code> استفاده می‌کنیم.</li>
+</ol>
+<p>این کار <strong>دو اتفاق</strong> هم‌زمان را رقم می‌زند:</p>
+<ul>
+<li>مقدار <code>5</code> به متغیر <code>foo</code> <strong>اختصاص داده می‌شود</strong>.</li>
+<li>نتیجهٔ عبارت چون عددی <em>غیرصفر</em> است، به‌عنوان <strong>true</strong> ارزیابی می‌شود، پس شرط if برقرار است.</li>
+</ul>
+<blockquote>
+<p><strong>نکته مهم:</strong><br>
+در عبارت بالا، <code>=</code> یعنی <strong>انتساب</strong> (assignment)، نه مقایسه.</p>
+<ul>
+<li><code>foo = 5</code> یعنی «<code>foo</code> را برابر ۵ کن.»</li>
+<li>اما <code>foo == 5</code> یعنی «آیا <code>foo</code> برابر ۵ است؟»</li>
+</ul>
+<p>این موضوع گیج‌کننده است، چون دستور <code>test</code> (یا <code>[ ]</code>) برای مقایسهٔ رشته‌ای از یک <code>=</code> هم استفاده می‌کند.<br>
+یکی از دلایل ترجیح دادن <code>[[ ]]</code> و <code>(( ))</code> به جای <code>test</code> همین تفاوت‌هاست.</p>
+</blockquote>
+<hr>
+<h2><strong>عملگرهای انتساب (Assignment Operators)</strong></h2>
+<p>علاوه بر <code>=</code>, شِل چندین شکل کوتاه‌شدهٔ انتساب دارد:</p>
+<h3><strong>Table 34-4: Assignment Operators</strong></h3>
+<ul>
+<li>
+<p><code>parameter = value</code><br>
+انتساب ساده؛ مقدار <strong>value</strong> به <strong>parameter</strong> داده می‌شود.</p>
+</li>
+<li>
+<p><code>parameter += value</code><br>
+جمع: معادل با<br>
+<code>parameter = parameter + value</code></p>
+</li>
+<li>
+<p><code>parameter -= value</code><br>
+تفریق:<br>
+<code>parameter = parameter - value</code></p>
+</li>
+<li>
+<p><code>parameter *= value</code><br>
+ضرب:<br>
+<code>parameter = parameter * value</code></p>
+</li>
+<li>
+<p><code>parameter /= value</code><br>
+تقسیم صحیح:<br>
+<code>parameter = parameter / value</code></p>
+</li>
+<li>
+<p><code>parameter %= value</code><br>
+باقیمانده:<br>
+<code>parameter = parameter % value</code></p>
+</li>
+<li>
+<p><code>parameter++</code><br>
+<strong>افزایش پس‌وندی</strong> (post-increment):<br>
+<code>parameter = parameter + 1</code> (اما با رفتار خاص، توضیح پایین)</p>
+</li>
+<li>
+<p><code>parameter--</code><br>
+<strong>کاهش پس‌وندی</strong> (post-decrement):<br>
+<code>parameter = parameter - 1</code></p>
+</li>
+<li>
+<p><code>++parameter</code><br>
+<strong>افزایش پیش‌وندی</strong> (pre-increment):<br>
+<code>parameter = parameter + 1</code></p>
+</li>
+<li>
+<p><code>--parameter</code><br>
+<strong>کاهش پیش‌وندی</strong> (pre-decrement):<br>
+<code>parameter = parameter - 1</code></p>
+</li>
+</ul>
+<p>این‌ها شورت‌کات‌های بسیار مفیدی برای عملیات حسابی متداول هستند.<br>
+به‌خصوص <strong>++</strong> و <strong>--</strong> که از زبان C گرفته شده‌اند و در بسیاری از زبان‌ها (از جمله bash) استفاده می‌شوند.</p>
+<hr>
+<h2><strong>تفاوت ++ قبل و بعد از متغیر</strong></h2>
+<p>این عملگرها می‌توانند <em>قبل</em> یا <em>بعد</em> از نام متغیر قرار بگیرند، و هر دو مقدار متغیر را یک واحد کم/زیاد می‌کنند،<br>
+اما <strong>رفتارشان متفاوت است</strong>:</p>
+<ul>
+<li>اگر <strong>قبل</strong> از متغیر باشند → ابتدا متغیر تغییر می‌کند، بعد مقدار برگردانده می‌شود.</li>
+<li>اگر <strong>بعد</strong> از متغیر باشند → ابتدا مقدار فعلی برگردانده می‌شود، بعد متغیر تغییر می‌کند.</li>
+</ul>
+<p>مثال:</p>
+<pre class="hljs"><code>[me@linuxbox ~]$ foo=1
+[me@linuxbox ~]$ <span class="hljs-built_in">echo</span> $((foo++))
+1
+[me@linuxbox ~]$ <span class="hljs-built_in">echo</span> <span class="hljs-variable">$foo</span>
+2
+</code></pre>
+<p>اینجا:</p>
+<ul>
+<li>در <code>foo++</code> ابتدا مقدار <em>فعلی</em> <code>foo</code> یعنی <code>1</code> برگردانده می‌شود،</li>
+<li>سپس مقدار <code>foo</code> به <code>2</code> افزایش می‌یابد.</li>
+</ul>
+<p>اما اگر عملگر را <strong>قبل</strong> بگذاریم:</p>
+<pre class="hljs"><code>[me@linuxbox ~]$ foo=1
+[me@linuxbox ~]$ <span class="hljs-built_in">echo</span> $((++foo))
+2
+[me@linuxbox ~]$ <span class="hljs-built_in">echo</span> <span class="hljs-variable">$foo</span>
+2
+</code></pre>
+<p>این‌بار:</p>
+<ul>
+<li><code>++foo</code> اول <code>foo</code> را به ۲ افزایش می‌دهد،</li>
+<li>بعد مقدار ۲ را برمی‌گرداند.</li>
+</ul>
+<p>برای بیشتر استفاده‌های شِل، <strong>پیش‌وندی (<code>++foo</code>) طبیعی‌تر و مفیدتر است.</strong></p>
+<hr>
+<h2><strong>استفاده در حلقه‌ها – بهبود اسکریپت modulo</strong></h2>
+<p>عملگرهای ++ و -- معمولاً همراه حلقه‌ها به‌کار می‌روند.</p>
+<p>نسخهٔ بهبودیافتهٔ اسکریپت قبلی:</p>
+<pre class="hljs"><code><span class="hljs-meta">#!/bin/bash</span>
+<span class="hljs-comment"># modulo2 : demonstrate the modulo operator</span>
+
+<span class="hljs-keyword">for</span> ((i = <span class="hljs-number">0</span>; i &lt;= <span class="hljs-number">20</span>; ++i )); <span class="hljs-keyword">do</span>
+    <span class="hljs-keyword">if</span> (((i % <span class="hljs-number">5</span>) == <span class="hljs-number">0</span> )); <span class="hljs-keyword">then</span>
+        <span class="hljs-built_in">printf</span> <span class="hljs-string">&quot;&lt;%d&gt; &quot;</span> <span class="hljs-variable">$i</span>
+    <span class="hljs-keyword">else</span>
+        <span class="hljs-built_in">printf</span> <span class="hljs-string">&quot;%d &quot;</span> <span class="hljs-variable">$i</span>
+    <span class="hljs-keyword">fi</span>
+<span class="hljs-keyword">done</span>
+<span class="hljs-built_in">printf</span> <span class="hljs-string">&quot;\n&quot;</span>
+</code></pre>
+<p>همان خروجی قبلی را تولید می‌کند، اما کد تمیزتر و خواناتر شده است.</p>
+<hr>
+<h2><strong>عملیات بیتی (Bit Operations)</strong></h2>
+<p>یک دسته از عملگرها روی اعداد در سطح <strong>بیت</strong> کار می‌کنند.<br>
+این‌ها برای کارهای سطح پایین مثل تنظیم یا خواندن <em>فلگ‌های بیتی</em> استفاده می‌شوند.</p>
+<h3><strong>Table 34-5: Bit Operators</strong></h3>
+<ul>
+<li>
+<p><code>~</code><br>
+نقیض بیتی (Bitwise NOT): همهٔ بیت‌ها را معکوس می‌کند.</p>
+</li>
+<li>
+<p><code>&lt;&lt;</code><br>
+شیفت بیتی به چپ (Left Shift): همهٔ بیت‌ها را به سمت چپ جابه‌جا می‌کند.</p>
+</li>
+<li>
+<p><code>&gt;&gt;</code><br>
+شیفت بیتی به راست (Right Shift).</p>
+</li>
+<li>
+<p><code>&amp;</code><br>
+AND بیتی: عمل AND روی تمام بیت‌های دو عدد.</p>
+</li>
+<li>
+<p><code>|</code><br>
+OR بیتی: عمل OR روی تمام بیت‌های دو عدد.</p>
+</li>
+<li>
+<p><code>^</code><br>
+XOR بیتی: OR انحصاری روی بیت‌ها.</p>
+</li>
+</ul>
+<p>برای بیشتر این‌ها، <strong>نسخه‌های انتسابی</strong> هم وجود دارد، مثل <code>&lt;&lt;=</code> و غیره (به جز <code>~</code>).</p>
+<h3>مثال: تولید توان‌های ۲ با شیفت بیتی</h3>
+<pre class="hljs"><code>[me@linuxbox ~]$ <span class="hljs-keyword">for</span> ((i=<span class="hljs-number">0</span>;i&lt;<span class="hljs-number">8</span>;++i)); <span class="hljs-keyword">do</span> <span class="hljs-built_in">echo</span> $((<span class="hljs-number">1</span>&lt;&lt;i)); <span class="hljs-keyword">done</span>
+1
+2
+4
+8
+16
+32
+64
+128
+</code></pre>
+<p>هر بار با <code>1 &lt;&lt; i</code> عدد ۱ را i بیت به چپ شیفت می‌دهیم، که معادل <code>2**i</code> است.</p>
+<hr>
+<h2><strong>منطق و عملگرهای مقایسه (Logic and Comparison)</strong></h2>
+<p>در فصل ۲۷ دیدیم که دستور مرکب <code>(( ))</code> از عملگرهای مقایسه‌ای مختلف پشتیبانی می‌کند.<br>
+اینجا لیست کامل‌تری از آن‌ها را می‌بینیم:</p>
+<h3><strong>Table 34-6: Comparison Operators</strong></h3>
+<ul>
+<li>
+<p><code>&lt;=</code> → کوچک‌تر یا مساوی</p>
+</li>
+<li>
+<p><code>&gt;=</code> → بزرگ‌تر یا مساوی</p>
+</li>
+<li>
+<p><code>&lt;</code> → کوچک‌تر</p>
+</li>
+<li>
+<p><code>&gt;</code> → بزرگ‌تر</p>
+</li>
+<li>
+<p><code>==</code> → برابر</p>
+</li>
+<li>
+<p><code>!=</code> → نابرابر</p>
+</li>
+<li>
+<p><code>&amp;&amp;</code> → AND منطقی</p>
+</li>
+<li>
+<p><code>||</code> → OR منطقی</p>
+</li>
+<li>
+<p><code>expr1 ? expr2 : expr3</code><br>
+<strong>عملگر سه‌تایی (ternary)</strong><br>
+اگر <code>expr1</code> ناصفر (true) باشد → <code>expr2</code> اجرا می‌شود،<br>
+در غیر این صورت → <code>expr3</code>.</p>
+</li>
+</ul>
+<p>در منطق حسابی:</p>
+<ul>
+<li>مقدار <strong>۰</strong> → <em>false</em></li>
+<li>هر عدد <strong>غیرصفر</strong> → <em>true</em></li>
+</ul>
+<p><code>(( ))</code> نتیجه را به کدهای خروج (exit code) شِل تبدیل می‌کند:</p>
+<pre class="hljs"><code>[me@linuxbox ~]$ <span class="hljs-keyword">if</span> ((<span class="hljs-number">1</span>)); <span class="hljs-keyword">then</span> <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;true&quot;</span>; <span class="hljs-keyword">else</span> <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;false&quot;</span>; <span class="hljs-keyword">fi</span>
+<span class="hljs-literal">true</span>
+
+[me@linuxbox ~]$ <span class="hljs-keyword">if</span> ((<span class="hljs-number">0</span>)); <span class="hljs-keyword">then</span> <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;true&quot;</span>; <span class="hljs-keyword">else</span> <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;false&quot;</span>; <span class="hljs-keyword">fi</span>
+<span class="hljs-literal">false</span>
+</code></pre>
+<hr>
+<h2><strong>عملگر سه‌تایی (Ternary Operator)</strong></h2>
+<p>این عملگر شبیه <code>if/then/else</code> است اما در قالب یک عبارت:</p>
+<pre class="hljs"><code>expr1 ? expr2 : expr3
+</code></pre>
+<p>مثال روی خط فرمان:</p>
+<pre class="hljs"><code>[me@linuxbox ~]$ a=0
+[me@linuxbox ~]$ ((a&lt;<span class="hljs-number">1</span>?++a:--a))
+[me@linuxbox ~]$ <span class="hljs-built_in">echo</span> <span class="hljs-variable">$a</span>
+1
+[me@linuxbox ~]$ ((a&lt;<span class="hljs-number">1</span>?++a:--a))
+[me@linuxbox ~]$ <span class="hljs-built_in">echo</span> <span class="hljs-variable">$a</span>
+0
+</code></pre>
+<p>در این مثال، یک <strong>Toggle</strong> ساخته‌ایم:</p>
+<ul>
+<li>اگر <code>a &lt; 1</code> باشد → <code>++a</code> اجرا می‌شود</li>
+<li>اگر نباشد → <code>--a</code> اجرا می‌شود</li>
+</ul>
+<p>و هر بار مقدار <code>a</code> بین ۰ و ۱ تغییر می‌کند.</p>
+<blockquote>
+<p><strong>نکته:</strong><br>
+قرار دادن انتساب‌ (assignment) داخل این عبارت‌ها کمی tricky است و اگر مستقیم بنویسید، bash خطا می‌دهد:</p>
+</blockquote>
+<pre class="hljs"><code>[me@linuxbox ~]$ a=0
+[me@linuxbox ~]$ ((a&lt;<span class="hljs-number">1</span>?a+=<span class="hljs-number">1</span>:a-=<span class="hljs-number">1</span>))
+bash: ((: a&lt;<span class="hljs-number">1</span>?a+=<span class="hljs-number">1</span>:a-=<span class="hljs-number">1</span>: attempted assignment to non-variable (error token is &quot;-=<span class="hljs-number">1</span>&quot;)
+</code></pre>
+<p>راه‌حل: انتساب را داخل پرانتز قرار دهید:</p>
+<pre class="hljs"><code>[me@linuxbox ~]$ ((a&lt;<span class="hljs-number">1</span>?(a+=<span class="hljs-number">1</span>):(a-=<span class="hljs-number">1</span>)))
+</code></pre>
+<hr>
+<h2><strong>نمونهٔ کامل: جدول اعداد</strong></h2>
+<p>در این اسکریپت از عملگرهای حسابی استفاده شده تا یک جدول از اعداد و مربع و مکعب آن‌ها چاپ کند:</p>
+<pre class="hljs"><code><span class="hljs-meta">#!/bin/bash</span>
+<span class="hljs-comment"># arith-loop: script to demonstrate arithmetic operators</span>
+
+finished=0
+a=0
+
+<span class="hljs-built_in">printf</span> <span class="hljs-string">&quot;a\ta**2\ta**3\n&quot;</span>
+<span class="hljs-built_in">printf</span> <span class="hljs-string">&quot;=\t====\t====\n&quot;</span>
+
+<span class="hljs-keyword">until</span> ((finished)); <span class="hljs-keyword">do</span>
+    b=$((a**<span class="hljs-number">2</span>))
+    c=$((a**<span class="hljs-number">3</span>))
+    <span class="hljs-built_in">printf</span> <span class="hljs-string">&quot;%d\t%d\t%d\n&quot;</span> <span class="hljs-variable">$a</span> <span class="hljs-variable">$b</span> <span class="hljs-variable">$c</span>
+    ((a&lt;<span class="hljs-number">10</span>?++a:(finished=<span class="hljs-number">1</span>)))
+<span class="hljs-keyword">done</span>
+</code></pre>
+<p><strong>روند کار:</strong></p>
+<ul>
+<li>
+<p>متغیر <code>finished</code> ابتدا ۰ است → یعنی <em>false</em></p>
+</li>
+<li>
+<p>حلقهٔ <code>until</code> تا وقتی <code>finished</code> صفر است ادامه می‌یابد.</p>
+</li>
+<li>
+<p>در هر دور:</p>
+<ul>
+<li>مربع <code>a</code> در <code>b</code> ذخیره می‌شود.</li>
+<li>مکعب <code>a</code> در <code>c</code> ذخیره می‌شود.</li>
+<li>هر سه مقدار چاپ می‌شوند.</li>
+</ul>
+</li>
+<li>
+<p>در انتها:</p>
+<ul>
+<li>اگر <code>a &lt; 10</code> باشد → <code>++a</code></li>
+<li>وگرنه → <code>finished = 1</code> و حلقه متوقف می‌شود.</li>
+</ul>
+</li>
+</ul>
+<p>خروجی:</p>
+<pre class="hljs"><code>a       a**2    a**3
+=       ====    ====
+0       0       0
+1       1       1
+2       4       8
+3       9       27
+4       16      64
+5       25      125
+6       36      216
+7       49      343
+8       64      512
+9       81      729
+10      100     1000
+</code></pre>
+<hr>
+<h1><strong>bc – یک زبان ماشین‌حساب با دقت دلخواه (Arbitrary Precision Calculator Language)</strong></h1>
+<p>دیدیم که شل می‌تواند همهٔ انواع محاسبات صحیح (integer) را انجام دهد؛<br>
+اما اگر بخواهیم محاسبات پیچیده‌تر انجام دهیم، یا حتی فقط با <strong>اعداد اعشاری (floating point)</strong> کار کنیم چه؟</p>
+<p>پاسخ این است که:<br>
+<strong>نمی‌توانیم.</strong><br>
+حداقل نه <em>مستقیم</em> با خود شل.</p>
+<p>برای انجام چنین کارهایی باید از برنامه‌های خارجی استفاده کنیم.<br>
+می‌توانیم از اسکریپت‌های Perl یا AWK استفاده کنیم، اما این‌ها خارج از محدودهٔ این کتاب هستند.</p>
+<p>راه دیگر استفاده از یک برنامهٔ مخصوص ماشین‌حساب است.<br>
+یکی از این برنامه‌ها که تقریباً در همهٔ سیستم‌های لینوکسی وجود دارد، <strong>bc</strong> است.</p>
+<hr>
+<h1><strong>bc چیست؟</strong></h1>
+<p>برنامهٔ <strong>bc</strong> فایلی را که به زبان مخصوص خودش (مشابه C) نوشته شده، می‌خواند و اجرا می‌کند.<br>
+یک اسکریپت bc می‌تواند:</p>
+<ul>
+<li>در یک فایل جداگانه باشد،</li>
+<li>یا از <strong>standard input</strong> خوانده شود.</li>
+</ul>
+<p>bc امکانات زیادی دارد:</p>
+<ul>
+<li>متغیرها</li>
+<li>حلقه‌ها</li>
+<li>توابع</li>
+<li>دقت دلخواه در محاسبات</li>
+</ul>
+<p>در اینجا یک آشنایی کوتاه ارائه می‌شود؛ راهنمای کامل آن در <strong>man page</strong> موجود است.</p>
+<hr>
+<h1><strong>یک مثال ساده</strong></h1>
+<p>یک اسکریپت bc که ۲+۲ را حساب می‌کند:</p>
+<pre class="hljs"><code>/* A very simple bc script */
+2 + 2
+</code></pre>
+<p>در زبان bc، کامنت‌ها مثل C هستند:<br>
+هر چیزی بین <code>/*</code> و <code>*/</code> یک کامنت است.</p>
+<hr>
+<h1><strong>اجرای bc</strong></h1>
+<p>اگر این اسکریپت را به‌صورت <code>foo.bc</code> ذخیره کنیم:</p>
+<pre class="hljs"><code>[me@linuxbox ~]$ bc foo.bc
+...
+4
+</code></pre>
+<p>نتیجه (۴) در پایین خروجی نمایش داده می‌شود.<br>
+برای حذف پیام خوش‌آمدگویی از گزینهٔ <strong>-q</strong> استفاده می‌کنیم.</p>
+<hr>
+<h1><strong>اجرای تعاملی bc</strong></h1>
+<pre class="hljs"><code>[me@linuxbox ~]$ bc -q
+2 + 2
+4
+quit
+</code></pre>
+<p>در حالت تعاملی، هر عبارت را تایپ می‌کنیم،<br>
+و پاسخ بلافاصله نمایش داده می‌شود.<br>
+با دستور <strong>quit</strong> از برنامه خارج می‌شویم.</p>
+<hr>
+<h1><strong>ارسال اسکریپت از طریق استاندارد ورودی</strong></h1>
+<pre class="hljs"><code>[me@linuxbox ~]$ bc &lt; foo.bc
+4
+</code></pre>
+<p>این یعنی می‌توانیم:</p>
+<ul>
+<li><strong>here document</strong></li>
+<li><strong>here string</strong></li>
+<li><strong>pipe</strong></li>
+</ul>
+<p>برای ارسال کد به bc استفاده کنیم.</p>
+<p>مثال here string:</p>
+<pre class="hljs"><code>[me@linuxbox ~]$ bc &lt;&lt;&lt; &quot;2+2&quot;
+4
+</code></pre>
+<hr>
+<h1><strong>یک اسکریپت نمونهٔ واقعی: محاسبهٔ قسط ماهانهٔ وام</strong></h1>
+<p>در مثال زیر، یک اسکریپت bash می‌نویسیم که از bc استفاده می‌کند تا قسط یک وام را محاسبه کند:</p>
+<pre class="hljs"><code><span class="hljs-meta">#!/bin/bash</span>
+<span class="hljs-comment"># loan-calc : script to calculate monthly loan payments</span>
+
+PROGNAME=$(<span class="hljs-built_in">basename</span> <span class="hljs-variable">$0</span>)
+
+<span class="hljs-function"><span class="hljs-title">usage</span></span> () {
+<span class="hljs-built_in">cat</span> &lt;&lt;- <span class="hljs-string">EOF
+Usage: $PROGNAME PRINCIPAL INTEREST MONTHS
+Where:
+PRINCIPAL is the amount of the loan.
+INTEREST is the APR as a number (7% = 0.07).
+MONTHS is the length of the loan&#x27;s term.
+EOF</span>
+}
+
+<span class="hljs-keyword">if</span> ((<span class="hljs-variable">$#</span> != <span class="hljs-number">3</span>)); <span class="hljs-keyword">then</span>
+    usage
+    <span class="hljs-built_in">exit</span> 1
+<span class="hljs-keyword">fi</span>
+
+principal=<span class="hljs-variable">$1</span>
+interest=<span class="hljs-variable">$2</span>
+months=<span class="hljs-variable">$3</span>
+
+bc &lt;&lt;- <span class="hljs-string">EOF
+scale = 10
+i = $interest / 12
+p = $principal
+n = $months
+a = p * ((i * ((1 + i) ^ n)) / (((1 + i) ^ n) - 1))
+print a, &quot;\n&quot;
+EOF</span>
+</code></pre>
+<p>اجرا:</p>
+<pre class="hljs"><code>[me@linuxbox ~]$ loan-calc 135000 0.0775 180
+1270.7222490000
+</code></pre>
+<p>اسکریپت بالا میزان <strong>قسط ماهانهٔ یک وام ۱۳۵٬۰۰۰ دلاری</strong> با نرخ بهرهٔ <strong>۷.۷۵٪</strong> و مدت <strong>۱۸۰ ماه (۱۵ سال)</strong> را محاسبه می‌کند.</p>
+<h3><strong>نکته مهم: scale</strong></h3>
+<p>در bc، مقدار متغیر داخلی <code>scale</code> تعداد رقم‌های اعشار محاسبات را تعیین می‌کند.<br>
+مثلاً:</p>
+<pre class="hljs"><code>scale = 10
+</code></pre>
+<p>یعنی ۱۰ رقم اعشار.</p>
+<hr>
+<h1><strong>جمع‌بندی</strong></h1>
+<p>در این فصل، با بسیاری از ابزارهای کوچک اما مهمی آشنا شدیم که برای انجام «کار واقعی» در اسکریپت‌ها استفاده می‌شوند.<br>
+هرچه تجربهٔ ما در اسکریپت‌نویسی بیشتر شود، توانایی دستکاری مؤثر رشته‌ها و اعداد اهمیت بیشتری پیدا می‌کند.</p>
+<p>اسکریپت <code>loan-calc</code> نمونه‌ای نشان می‌دهد که چگونه حتی یک اسکریپت کوتاه می‌تواند کارهای بسیار مفیدی انجام دهد.</p>
+<hr>
+<h1><strong>تمرین اضافی (Extra Credit)</strong></h1>
+<p>اسکریپت loan-calc هنوز کامل نیست.<br>
+برای بهبود آن، می‌توانید:</p>
+<ul>
+<li>بررسی کامل ورودی‌های خط فرمان را اضافه کنید</li>
+<li>گزینه‌ای برای <strong>حالت تعاملی</strong> ایجاد کنید که از کاربر مقدار وام، نرخ بهره و مدت را بپرسد</li>
+<li>خروجی را به شکل خواناتر و زیباتر نمایش دهید</li>
+</ul>
+<hr>
+<h1><strong>مطالعهٔ بیشتر (Further Reading)</strong></h1>
+<p>● مقالهٔ Bash Hackers Wiki دربارهٔ parameter expansion:<br>
+<a href="http://wiki.bash-hackers.org/syntax/pe">http://wiki.bash-hackers.org/syntax/pe</a></p>
+<p>● Bash Reference Manual:<br>
+<a href="http://www.gnu.org/software/bash/manual/bashref.html#Shell-Parameter-Expansion">http://www.gnu.org/software/bash/manual/bashref.html#Shell-Parameter-Expansion</a></p>
+<p>● مقالهٔ ویکی‌پدیا دربارهٔ bit operations:<br>
+<a href="http://en.wikipedia.org/wiki/Bit_operation">http://en.wikipedia.org/wiki/Bit_operation</a></p>
+<p>● مقالهٔ ویکی‌پدیا دربارهٔ ternary operations:<br>
+<a href="http://en.wikipedia.org/wiki/Ternary_operation">http://en.wikipedia.org/wiki/Ternary_operation</a></p>
+<p>● فرمول محاسبهٔ وام که در اسکریپت loan-calc استفاده شده:<br>
+<a href="http://en.wikipedia.org/wiki/Amortization_calculator">http://en.wikipedia.org/wiki/Amortization_calculator</a></p>
+
+  </main>
+
+  <!-- فوتر مشترک -->
+  <footer class="footer">
+    <div class="container">
+      <p>
+        <img src="/Gitab/icone/copyright.svg" alt="کپی‌رایت" width="14" height="14"
+             style="vertical-align:middle;margin-inline:4px">
+        <span id="y"></span> Gitab — تمامی حقوق محفوظ است.
+      </p>
+    </div>
+  </footer>
+
+  <!-- سال و اسکریپت تغییر تم -->
+  <script>
+  (() => {
+    const root = document.documentElement;
+    const btn = document.getElementById('themeToggle');
+    const KEY = 'gitab-theme';
+
+    function updateTheme(s) {
+      root.setAttribute('data-theme', s);
+      const mode = s;  // فقط `dark` یا `light` خواهد بود
+      root.dataset.colorMode = mode;
+      btn.dataset.icon = mode === 'dark' ? 'moon' : 'sun';
+    }
+
+    // وضعیت تم ذخیره شده از localStorage
+    let saved = localStorage.getItem(KEY) || 'light'; // پیش‌فرض روشن
+    updateTheme(saved);
+
+    // تنظیم مجدد تم هنگام تغییر وضعیت دکمه
+    btn.addEventListener('click', () => {
+      const current = localStorage.getItem(KEY) || 'light';
+      const next = current === 'dark' ? 'light' : 'dark';  // فقط دو حالت: تاریک و روشن
+      localStorage.setItem(KEY, next);
+      updateTheme(next);
+    });
+
+    // هنگام بارگذاری صفحه
+    document.addEventListener('DOMContentLoaded', () => {
+      updateTheme(localStorage.getItem(KEY) || 'light');
+    });
+  })();
+</script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+
+  <script>
+  document.querySelectorAll('pre code').forEach(block => {
+    const btn = document.createElement('button');
+    btn.className = 'copy-btn';
+
+    const icon = document.createElement('img');
+    icon.src = "/Gitab/icone/copy.svg";
+    icon.alt = 'Copy';
+    btn.appendChild(icon);
+
+    block.parentNode.insertBefore(btn, block);
+
+    btn.addEventListener('click', async () => {
+      await navigator.clipboard.writeText(block.textContent);
+      btn.classList.add('copied');
+      setTimeout(() => btn.classList.remove('copied'), 1500);
+    });
+  });
+  </script>
+
+  <script>
+  document.body.dataset.page = window.location.pathname;
+
+  const menuBtn = document.querySelector(".menu-toggle");
+  const nav = document.querySelector(".nav");
+
+  if (menuBtn && nav) {
+    menuBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      nav.classList.toggle("show");
+    });
+
+    document.addEventListener("click", (e) => {
+      const clickedInsideNav = nav.contains(e.target);
+      const clickedMenuButton = menuBtn.contains(e.target);
+      if (!clickedInsideNav && !clickedMenuButton) {
+        nav.classList.remove("show");
+      }
+    });
+  }
+  </script>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+  <script>
+document.getElementById("openDonate").addEventListener("click", () => {
+  document.getElementById("donateModal").style.display = "block";
+});
+document.getElementById("closeDonate").addEventListener("click", () => {
+  document.getElementById("donateModal").style.display = "none";
+});
+document.querySelectorAll(".copy-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    navigator.clipboard.writeText(btn.dataset.copy);
+  
+    setTimeout(() => (btn.textContent = "کپی"), 2000);
+  });
+});
+</script>
+
+</body>
+</html>

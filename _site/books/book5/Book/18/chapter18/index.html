@@ -1,0 +1,418 @@
+
+
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <link rel="icon" type="image/png" href="/Gitab/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>بایگانی و پشتیبان‌گیری</title>
+  <meta name="description" content="ترجمه‌های فارسی کتاب‌های فنی — سریع، مینیمال و قابل اتکا.">
+
+  <!-- استایل‌ها -->
+  <link rel="stylesheet" href="/Gitab/styles/main.css">
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+
+  <style>
+  @font-face {
+    font-family: 'Vazir';
+    src: url('/Gitab/fonts/Vazir-FD-WOL.ttf') format('truetype');
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "Lalezar";
+    src: url('fonts/Lalezar.ttf') format('truetype');
+    font-display: swap;
+}
+  body {
+    font-family: 'Vazir', sans-serif;
+  }
+  </style>
+</head>
+
+<body>
+  <!-- هدر مشترک -->
+  <header class="header">
+    <div class="container nav-wrap">
+      <a href="/Gitab/" class="brand">
+        <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="26" height="26">
+        <span>Gitab</span>
+      </a>
+
+       <nav class="nav">
+         <a href="/Gitab/" >خانه</a>
+         <a href="/Gitab/books/list-books" >کتاب‌ها</a>
+         <a href="/Gitab/giter.html" >دوره ها</a>
+          <!-- 
+         <a href="/Gitab/translator.html" >مترجمین</a>
+           -->
+       </nav>
+
+      <div class="nav-actions">
+        <button id="themeToggle" class="icon-btn theme-btn" data-icon="moon" aria-label="تغییر تم">
+          <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن">
+          <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک">
+        </button>
+
+        <a class="icon-btn" href="https://github.com/hheydarian/Gitab" target="_blank" title="GitHub">
+          <img src="/Gitab/icone/github.svg" alt="GitHub">
+        </a>
+
+        <!-- دکمه منو برای موبایل -->
+        <button class="menu-toggle" aria-label="منو">
+          <img src="/Gitab/icone/menu.svg" alt="menu">
+        </button>
+      </div>
+    </div>
+  </header>
+
+  
+  <main class="site-main book-page">
+    <h1>فصل ۱۸ – بایگانی و پشتیبان‌گیری</h1>
+<p>هرچه بیشتر با سیستم خود کار کنیم، فایل‌های بیشتری جمع می‌کنیم.<br>
+این فایل‌ها ممکن است شامل سندهای مهم، پروژه‌های نرم‌افزاری، عکس‌های خانوادگی یا فایل‌های تنظیمات گوناگون باشند.<br>
+همهٔ این‌ها نتیجهٔ ساعت‌ها (و شاید سال‌ها) تلاش ما هستند؛ بنابراین طبیعی است که بخواهیم در برابر خطاهای سخت‌افزاری، بدافزارها یا اشتباه‌های خودمان از آن‌ها محافظت کنیم.<br>
+از طرف دیگر، گاهی لازم داریم مجموعه‌ای از فایل‌ها را به سیستم دیگری منتقل کنیم و دوست داریم این کار را به شکل مرتب و مطمئن انجام دهیم.</p>
+<p>در این فصل به سراغ ابزارهایی می‌رویم که برای «جمع کردن» فایل‌ها و «فشرده‌سازی» آن‌ها استفاده می‌شوند تا بتوانیم به سادگی از داده‌ها نسخهٔ پشتیبان بگیریم یا آن‌ها را منتقل کنیم.<br>
+شناخت این ابزارها برای هر کاربر لینوکس ضروری است، چون در دنیای یونیکس از همان روزهای نخست چنین ابزارهایی وجود داشته و هنوز هم بخش جدایی‌ناپذیر کار روزمرهٔ ما هستند.</p>
+<p>پس از مطالعهٔ این فصل می‌توانیم:</p>
+<ul>
+<li>فایل‌ها و دایرکتوری‌ها را با برنامه‌های فشرده‌سازی استاندارد کوچک کنیم.</li>
+<li>آرشیوهای tar بسازیم، محتواشان را بررسی کنیم و آن‌ها را استخراج کنیم.</li>
+<li>با فرمت‌های zip آشنا شویم و از آن‌ها برای سازگاری با سیستم‌های دیگر استفاده کنیم.</li>
+<li>ایدهٔ کلی طراحی یک برنامهٔ پشتیبان‌گیری را در ذهن داشته باشیم.</li>
+</ul>
+<hr>
+<h3>آرشیو چیست؟</h3>
+<p>در فرهنگ لینوکس و یونیکس، «آرشیو» به فایلی گفته می‌شود که چند فایل و دایرکتوری را در خود جمع می‌کند.<br>
+مهم‌ترین مزیت آرشیو این است که مجموعه‌ای از فایل‌ها را می‌توان به صورت یک فایل منفرد ذخیره کرد یا انتقال داد.<br>
+اغلب برای آسان‌تر کردن انتقال، آرشیو را فشرده می‌کنند تا حجم کمتری اشغال کند.</p>
+<p>دو روند معمول داریم:</p>
+<ol>
+<li><strong>فشرده‌سازی تک‌فایلی</strong>: یک فایل منفرد را کوچک می‌کنیم؛ مانند فشرده کردن یک لاگ حجیم.</li>
+<li><strong>ایجاد آرشیو</strong>: چند فایل را در قالب یک بسته جمع می‌کنیم (ممکن است هم‌زمان فشرده‌سازی هم انجام شود).</li>
+</ol>
+<p>در ادامه ابتدا با ابزارهای فشرده‌سازی کار می‌کنیم و سپس سراغ آرشیوکنندهٔ کلاسیک یونیکس یعنی <code>tar</code> می‌رویم.</p>
+<hr>
+<h3>gzip، gunzip و دوستانشان</h3>
+<p>قدیمی‌ترین (و شاید رایج‌ترین) برنامهٔ فشرده‌سازی در دنیای لینوکس <strong>gzip</strong> است.<br>
+این برنامه فایل‌های ورودی را با الگوریتم <strong>DEFLATE</strong> فشرده و نتیجه را به‌صورت فایلی با پسوند <code>.gz</code> ذخیره می‌کند.<br>
+برنامهٔ مکمل آن <strong>gunzip</strong> نام دارد که فایل‌های <code>.gz</code> را از حالت فشرده خارج می‌کند.</p>
+<p>استفادهٔ پایه‌ای از آن‌ها بسیار ساده است:</p>
+<pre class="hljs"><code>[me@linuxbox ~]$ gzip foo.txt
+</code></pre>
+<p>با اجرای این دستور، فایل اصلی حذف شده و نسخهٔ فشردهٔ آن (<code>foo.txt.gz</code>) جایگزین می‌شود.<br>
+برای بازگرداندن فایل می‌نویسیم:</p>
+<pre class="hljs"><code>[me@linuxbox ~]$ gunzip foo.txt.gz
+</code></pre>
+<blockquote>
+<p><strong>نکته:</strong> برنامهٔ <code>gzip</code> هم گزینه‌ای برای برگرداندن فایل دارد. اجرای <code>gzip -d foo.txt.gz</code> دقیقاً معادل <code>gunzip foo.txt.gz</code> است.</p>
+</blockquote>
+<p>برنامه‌های دیگری هم هستند که می‌توانند محتوای فشرده را بدون استخراج کامل بخوانند.<br>
+به‌عنوان مثال دستور <code>zcat</code> فایل فشردهٔ متنی را روی خروجی استاندارد می‌نویسد تا بتوانیم آن را مشاهده یا با ابزارهایی مثل <code>less</code> بررسی کنیم:</p>
+<pre class="hljs"><code>[me@linuxbox ~]$ zcat foo.txt.gz | less
+</code></pre>
+<p>از آن‌جا که <code>gzip</code> فایل اصلی را حذف می‌کند، اگر می‌خواهید نسخهٔ فشرده و نسخهٔ اصلی را هم‌زمان نگه دارید، از گزینهٔ <code>-k</code> (یا <code>--keep</code>) استفاده کنید:</p>
+<pre class="hljs"><code>[me@linuxbox ~]$ gzip -k foo.txt
+</code></pre>
+<p>گزینهٔ <code>-r</code> باعث می‌شود <code>gzip</code> به‌صورت بازگشتی تمام فایل‌های موجود در یک دایرکتوری را فشرده کند.<br>
+همچنین با <code>-l</code> می‌توانیم دربارهٔ درصد فشرده‌سازی و اندازهٔ فایل‌ها گزارش بگیریم:</p>
+<pre class="hljs"><code>[me@linuxbox ~]$ gzip -l foo.txt.gz
+         compressed        uncompressed  ratio uncompressed_name
+              12345                67890  81.8% foo.txt
+</code></pre>
+<p>در مثال بالا ستون «ratio» نشان می‌دهد که حجم فایل حدود ۸۲٪ کاهش یافته است.</p>
+<hr>
+<h3>bzip2 و xz – فشرده‌سازی با راندمان بالاتر</h3>
+<p>در بسیاری از توزیع‌ها، علاوه بر <code>gzip</code> ابزارهای دیگری نیز وجود دارد که فایل‌ها را با الگوریتم‌هایی کارآمدتر فشرده می‌کنند.<br>
+دو مورد مهم عبارت‌اند از <strong>bzip2</strong> و <strong>xz</strong>.</p>
+<p><strong>bzip2</strong> فایل‌ها را با الگوریتم بوروز–ویلر فشرده می‌کند و معمولاً فایل خروجی کوچک‌تری نسبت به <code>gzip</code> تولید می‌کند، هرچند ممکن است کمی کندتر باشد.<br>
+نحوهٔ استفادهٔ آن تقریباً با <code>gzip</code> یکسان است:</p>
+<pre class="hljs"><code>[me@linuxbox ~]$ bzip2 foo.txt
+[me@linuxbox ~]$ bunzip2 foo.txt.bz2
+</code></pre>
+<p>در کنار <code>bunzip2</code>، ابزارهایی مثل <code>bzcat</code>، <code>bzless</code> و <code>bzgrep</code> نیز وجود دارند که به ترتیب برای نمایش محتوا، مرور در محیط <code>less</code> و جست‌وجو داخل فایل فشرده به کار می‌روند.</p>
+<p>ابزار جدیدتر <strong>xz</strong> فشرده‌سازی را با الگوریتم LZMA انجام می‌دهد و در بسیاری از سناریوها بهترین نسبت فشرده‌سازی را ارائه می‌کند.<br>
+فرمان‌های پایه‌ای آن مشابه است:</p>
+<pre class="hljs"><code>[me@linuxbox ~]$ xz foo.txt
+[me@linuxbox ~]$ unxz foo.txt.xz
+</code></pre>
+<p>همانند خانوادهٔ <code>gzip</code>، در این‌جا هم برنامه‌هایی مانند <code>xzcat</code>، <code>xzless</code> و <code>xzgrep</code> ارائه شده‌اند.</p>
+<blockquote>
+<p><strong>نکته:</strong> هر سه خانواده (<code>gzip</code>، <code>bzip2</code> و <code>xz</code>) فایل اصلی را پس از فشرده‌سازی حذف می‌کنند، مگر این‌که گزینهٔ <code>-k</code> را اضافه کنید.<br>
+بنابراین اگر می‌خواهید نسخهٔ اصلی باقی بماند، همیشه <code>-k</code> را فراموش نکنید.</p>
+</blockquote>
+<hr>
+<h3>zip و unzip – برای سازگاری با دنیای دیگر</h3>
+<p>در سیستم‌های یونیکس‌مانند معمولاً از <code>tar</code> برای بایگانی استفاده می‌شود؛ اما در دنیای ویندوز و macOS فرمت رایج‌تر <strong>zip</strong> است.<br>
+برای همین لینوکس هم از سال‌ها پیش ابزارهایی برای کار با این فرمت دارد.</p>
+<p>برای ساخت یک فایل zip کافی است بنویسیم:</p>
+<pre class="hljs"><code>[me@linuxbox ~]$ zip archive.zip file1 file2 dir1
+</code></pre>
+<p>با این دستور، همهٔ فایل‌ها و دایرکتوری‌های مورد نظر در یک بستهٔ فشرده به نام <code>archive.zip</code> قرار می‌گیرند.<br>
+به‌طور پیش‌فرض zip ساختار دایرکتوری‌ها را حفظ می‌کند و اگر دایرکتوری را وارد کنید، محتویات آن به صورت بازگشتی اضافه می‌شود.</p>
+<p>برای استخراج فایل zip می‌نویسیم:</p>
+<pre class="hljs"><code>[me@linuxbox ~]$ unzip archive.zip
+</code></pre>
+<p>با گزینهٔ <code>-l</code> می‌توانیم فهرست محتوا را بدون استخراج مشاهده کنیم:</p>
+<pre class="hljs"><code>[me@linuxbox ~]$ unzip -l archive.zip
+</code></pre>
+<p>برنامهٔ <code>zip</code> گزینه‌های زیادی برای رمزنگاری، حذف فایل‌ها از آرشیو، یا به‌روزرسانی آرشیو موجود دارد.<br>
+برای جزئیات بیشتر صفحهٔ راهنمای آن (<code>man zip</code>) را بخوانید.</p>
+<hr>
+<h3>tar – آرشیوساز کلاسیک</h3>
+<p>مهم‌ترین ابزار این فصل <code>tar</code> است که نام آن مخفف <strong>Tape ARchive</strong> می‌باشد.<br>
+در روزگاری که داده‌ها روی نوارهای مغناطیسی ذخیره می‌شدند، <code>tar</code> وظیفهٔ بسته‌بندی و کپی‌کردن فایل‌ها روی نوار را داشت.<br>
+امروزه هم تقریباً در هر توزیع لینوکس حضور دارد و همچنان گزینهٔ اصلی برای ساخت آرشیو محسوب می‌شود.</p>
+<p>بر خلاف برنامه‌های فشرده‌سازی که فقط روی یک فایل کار می‌کنند، <code>tar</code> می‌تواند مجموعه‌ای از فایل‌ها و دایرکتوری‌ها را در قالب یک فایل منفرد ذخیره کند.<br>
+این فایل معمولاً «آرشیو tar» یا به اختصار «تاربال» نامیده می‌شود و معمولاً پسوند <code>.tar</code> دارد.<br>
+اغلب تاربال‌ها به کمک <code>gzip</code> یا <code>bzip2</code> یا <code>xz</code> فشرده می‌شوند که در این صورت پسوندهایی مانند <code>.tar.gz</code>، <code>.tar.bz2</code> یا <code>.tar.xz</code> به خود می‌گیرند.</p>
+<h4>گزینه‌های اصلی tar</h4>
+<p><code>tar</code> گزینه‌های زیادی دارد، اما چند گزینهٔ کلیدی را باید همیشه به یاد داشته باشیم:</p>
+<ul>
+<li><code>-c</code> – ساخت آرشیو جدید (create)</li>
+<li><code>-x</code> – استخراج آرشیو (extract)</li>
+<li><code>-t</code> – نمایش فهرست محتوا (table of contents)</li>
+<li><code>-r</code> – افزودن فایل‌های جدید به آرشیو موجود</li>
+<li><code>-f</code> – مشخص کردن نام فایل آرشیو (همیشه باید آخرین گزینهٔ قبل از نام فایل باشد)</li>
+<li><code>-v</code> – نمایش جزئیات در هنگام اجرا (verbose)</li>
+<li><code>-z</code> – فشرده‌سازی یا باز کردن با <code>gzip</code></li>
+<li><code>-j</code> – فشرده‌سازی یا باز کردن با <code>bzip2</code></li>
+<li><code>-J</code> – فشرده‌سازی یا باز کردن با <code>xz</code></li>
+</ul>
+<p>ترکیب گزینه‌ها معمولاً بدون خط تیرهٔ اضافی انجام می‌شود.<br>
+به‌عنوان مثال <code>tar -czf</code> معادل <code>tar -c -z -f</code> است.</p>
+<h4>ساخت یک تاربال ساده</h4>
+<p>فرض کنید دایرکتوری‌ای به نام <code>playground</code> داریم و می‌خواهیم از آن آرشیو بگیریم.<br>
+دستور زیر تاربال <code>playground.tar</code> را می‌سازد:</p>
+<pre class="hljs"><code>[me@linuxbox ~]$ tar -cf playground.tar playground
+</code></pre>
+<p>اگر بخواهیم در حین ساخت آرشیو نام فایل‌ها را ببینیم، گزینهٔ <code>-v</code> را اضافه می‌کنیم:</p>
+<pre class="hljs"><code>[me@linuxbox ~]$ tar -cvf playground.tar playground
+</code></pre>
+<blockquote>
+<p><strong>هشدار:</strong> فراموش کردن گزینهٔ <code>-f</code> خطای رایجی است؛ چون در این حالت <code>tar</code> سعی می‌کند خروجی را روی نوار مغناطیسی بنویسد! همیشه مطمئن شوید آخرین گزینه قبل از نام فایل <code>-f</code> باشد.</p>
+</blockquote>
+<h4>فشرده‌سازی و آرشیو در یک مرحله</h4>
+<p>در عمل معمولاً می‌خواهیم آرشیوی بسازیم که هم‌زمان فشرده هم باشد.<br>
+برای این کار از گزینه‌های <code>-z</code>، <code>-j</code> یا <code>-J</code> استفاده می‌کنیم:</p>
+<pre class="hljs"><code>[me@linuxbox ~]$ tar -czf playground.tar.gz playground
+[me@linuxbox ~]$ tar -cjf playground.tar.bz2 playground
+[me@linuxbox ~]$ tar -cJf playground.tar.xz playground
+</code></pre>
+<p>با اجرای این دستورات، آرشیو tar ایجاد و بلافاصله با الگوریتم مربوط فشرده می‌شود.<br>
+به همین ترتیب هنگام استخراج باید همان گزینه‌ها را به کار ببریم تا آرشیو به‌درستی باز شود:</p>
+<pre class="hljs"><code>[me@linuxbox ~]$ tar -xzf playground.tar.gz
+[me@linuxbox ~]$ tar -xjf playground.tar.bz2
+[me@linuxbox ~]$ tar -xJf playground.tar.xz
+</code></pre>
+<p>اگر می‌خواهیم قبل از استخراج، محتویات آرشیو را ببینیم، از گزینهٔ <code>-t</code> استفاده می‌کنیم:</p>
+<pre class="hljs"><code>[me@linuxbox ~]$ tar -tzf playground.tar.gz
+</code></pre>
+<p>این دستور فهرست فایل‌های داخل آرشیو را نمایش می‌دهد بدون آن‌که چیزی استخراج شود.</p>
+<h4>تغییر دایرکتوری مقصد</h4>
+<p>به‌طور پیش‌فرض <code>tar</code> آرشیو را در محل جاری ایجاد یا استخراج می‌کند.<br>
+برای تغییر این رفتار می‌توانیم از گزینهٔ <code>-C</code> استفاده کنیم تا در حین استخراج، ابتدا به دایرکتوری مشخص‌شده برویم و بعد عملیات انجام شود:</p>
+<pre class="hljs"><code>[me@linuxbox ~]$ tar -xzf playground.tar.gz -C /tmp
+</code></pre>
+<p>به همین ترتیب، هنگام ساخت آرشیو می‌توانیم ابتدا با <code>-C</code> به یک دایرکتوری برویم و سپس فایل‌ها را از آن‌جا جمع‌آوری کنیم.<br>
+این کار کمک می‌کند مسیرهای داخل آرشیو تمیز و قابل پیش‌بینی باشند.</p>
+<h4>نگهداری مجوزها و مالکیت</h4>
+<p><code>tar</code> به‌طور پیش‌فرض مجوزهای فایل‌ها، زمان و مالکیت را حفظ می‌کند.<br>
+اگر آرشیو را با دسترسی کاربر عادی بسازید و بعد آن را روی سیستمی دیگر به عنوان کاربر ریشه استخراج کنید، مالکیت فایل‌ها به کاربر ریشه تغییر خواهد کرد.<br>
+برای حفظ مالکیت اصلی باید آرشیو را با کاربری که مالک فایل‌هاست استخراج کنید یا از گزینهٔ <code>--same-owner</code> استفاده کنید (در صورتی که مجوز لازم را داشته باشید).</p>
+<h4>انتقال از طریق شبکه</h4>
+<p>یکی از ویژگی‌های قدرتمند <code>tar</code> این است که می‌تواند روی ورودی و خروجی استاندارد کار کند.<br>
+این یعنی می‌توانیم آرشیو را از طریق لوله‌ها (pipes) به فرمان‌های دیگر بدهیم.<br>
+یک نمونهٔ مشهور استفادهٔ ترکیبی از <code>ssh</code> برای ارسال آرشیو به سیستم دیگر است:</p>
+<pre class="hljs"><code>[me@linuxbox ~]$ tar -czf - project | ssh remote.example.com <span class="hljs-string">&quot;tar -xzf - -C backups&quot;</span>
+</code></pre>
+<p>در این مثال آرشیو ساخته می‌شود اما روی دیسک محلی ذخیره نمی‌گردد؛ بلکه از طریق شبکه به سیستم مقصد فرستاده شده و همان‌جا استخراج می‌شود.</p>
+<h4>آرشیوهای افزایشی (Incremental)</h4>
+<p>در نسخه‌های جدید <code>tar</code> می‌توان آرشیوهای افزایشی ساخت؛ یعنی فقط فایل‌هایی را که از آخرین نسخهٔ پشتیبان تغییر کرده‌اند ذخیره کنیم.<br>
+برای این کار از گزینهٔ <code>--listed-incremental</code> همراه با یک فایل وضعیت استفاده می‌شود.<br>
+این فایل وضعیت مشخص می‌کند آخرین بار چه فایل‌هایی ذخیره شده‌اند.</p>
+<pre class="hljs"><code>[me@linuxbox ~]$ tar -czf backup-full.tar.gz --listed-incremental=tar.snar home/me
+</code></pre>
+<p>دستور بالا یک پشتیبان کامل می‌سازد و اطلاعات وضعیت را در فایل <code>tar.snar</code> ذخیره می‌کند.<br>
+وقتی بعداً دستور مشابهی اجرا کنیم، فقط فایل‌هایی که تغییر کرده‌اند در آرشیو جدید قرار می‌گیرند:</p>
+<pre class="hljs"><code>[me@linuxbox ~]$ tar -czf backup-inc-01.tar.gz --listed-incremental=tar.snar home/me
+</code></pre>
+<p>برای بازگرداندن چنین پشتیبانی باید ابتدا نسخهٔ کامل و سپس به ترتیب نسخه‌های افزایشی را استخراج کنیم.</p>
+<hr>
+<h3>همگام‌سازی دایرکتوری‌ها با rsync</h3>
+<p>آرشیو گرفتن همیشه تنها گزینهٔ پشتیبان‌گیری نیست؛ گاهی می‌خواهیم یک دایرکتوری را دقیقاً همان‌گونه که هست در جایی دیگر «آینه» کنیم.<br>
+ابزار <strong><code>rsync</code></strong> برای چنین کاری طراحی شده و با حداقل انتقال داده، دو شاخهٔ فایل را یکسان نگه می‌دارد.</p>
+<pre class="hljs"><code>[me@linuxbox ~]$ rsync -av Documents/ /media/backup/Documents/
+</code></pre>
+<p>در این مثال:</p>
+<ul>
+<li>گزینهٔ <code>-a</code> یا <code>--archive</code> ترکیبی از گزینه‌های متداول (<code>-rlptgoD</code>) است که مجوزها، مالکیت، مهرهای زمانی و لینک‌ها را حفظ می‌کند.</li>
+<li>گزینهٔ <code>-v</code> باعث می‌شود فایل‌های کپی‌شده نمایش داده شوند.</li>
+<li>وجود اسلش انتهایی روی <code>Documents/</code> به rsync می‌گوید <strong>محتوای</strong> دایرکتوری را کپی کند، نه خود دایرکتوری را.</li>
+</ul>
+<p>اگر مقصد روی سیستم دیگری باشد، <code>rsync</code> به صورت پیش‌فرض از <code>ssh</code> برای انتقال امن استفاده می‌کند:</p>
+<pre class="hljs"><code>[me@linuxbox ~]$ rsync -avz project/ alice@server.example.com:~/project/
+</code></pre>
+<p>گزینهٔ <code>-z</code> داده‌ها را در حین انتقال فشرده می‌کند. برای آزمایش دستور بدون اعمال تغییر، گزینهٔ <code>--dry-run</code> مفید است و تنها پیش‌نمایش انتقال را نشان می‌دهد.</p>
+<p>وقتی می‌خواهیم مقصد دقیقاً تصویر منبع باشد (یعنی فایل‌هایی که در مقصد وجود دارند اما در منبع حذف شده‌اند پاک شوند)، از گزینهٔ <code>--delete</code> استفاده می‌کنیم:</p>
+<pre class="hljs"><code>[me@linuxbox ~]$ rsync -av --delete photos/ backup/photos/
+</code></pre>
+<p>می‌توان با <code>--exclude</code> یا <code>--exclude-from</code> فهرستی از فایل‌ها و دایرکتوری‌هایی را که نباید منتقل شوند مشخص کرد. افزون بر این، گزینهٔ <code>--progress</code> هنگام انتقال‌های طولانی نمایشگر میزان پیشرفت است.</p>
+<p><code>rsync</code> به دلیل انتقال افزایشی‌اش محبوب است؛ تنها بخش‌هایی از فایل که تغییر کرده‌اند جابه‌جا می‌شوند، بنابراین برای پشتیبان‌گیری‌های دوره‌ای یا همگام‌سازی از طریق شبکهٔ کند بسیار کارآمد است.</p>
+<hr>
+<h3>طرح کلی یک استراتژی پشتیبان‌گیری</h3>
+<p>همان‌طور که می‌بینیم ابزارهای زیادی وجود دارد، اما سؤال مهم این است که «چه برنامه‌ای برای پشتیبان‌گیری داشته باشیم؟»<br>
+پاسخ این سؤال به نیازها، حجم داده‌ها، زمان در دسترس و منابع سخت‌افزاری بستگی دارد.<br>
+با این حال چند اصل کلی همیشه درست است:</p>
+<ol>
+<li><strong>از داده‌های مهم دست‌کم در دو محل جداگانه نسخهٔ پشتیبان داشته باشید.</strong><br>
+یکی از این نسخه‌ها بهتر است خارج از سیستم اصلی (مثلاً روی هارد اکسترنال یا سرویس ابری) باشد.</li>
+<li><strong>پشتیبان‌گیری را به کار روزمره تبدیل کنید.</strong><br>
+اگر اجرای آن سخت یا وقت‌گیر باشد، احتمالاً فراموش می‌شود.<br>
+استفاده از اسکریپت‌ها و ابزارهایی مثل <code>cron</code> برای زمان‌بندی خودکار بسیار مفید است.</li>
+<li><strong>بازگردانی را تمرین کنید.</strong><br>
+داشتن پشتیبان بدون اطمینان از امکان بازیابی ارزش چندانی ندارد.<br>
+هر چند وقت یک‌بار سعی کنید داده‌ای را از نسخهٔ پشتیبان برگردانید تا مطمئن شوید همه چیز درست کار می‌کند.</li>
+</ol>
+<p>ابزارهایی مانند <code>rsync</code> برای همگام‌سازی دایرکتوری‌ها، یا برنامه‌های اختصاصی پشتیبان‌گیری که در توزیع‌ها ارائه می‌شوند، همگی بر پایهٔ همین مفاهیم کار می‌کنند.<br>
+<code>rsync</code> مخصوصاً برای انتقال مؤثر فایل‌ها به سیستم‌های دیگر محبوب است؛ زیرا فقط قسمت‌های تغییر کرده را می‌فرستد.</p>
+<p>در نهایت باید توجه داشت که هیچ ابزاری جایگزین یک برنامهٔ منظم و آزموده‌شده نمی‌شود.<br>
+ابزارهایی که در این فصل یاد گرفتیم قطعات سازندهٔ چنین برنامه‌ای هستند؛ بقیهٔ کار بستگی به ما دارد که چگونه آن‌ها را کنار هم قرار دهیم.</p>
+<hr>
+<h3>جمع‌بندی</h3>
+<ul>
+<li>برنامه‌های فشرده‌سازی مانند <code>gzip</code>، <code>bzip2</code> و <code>xz</code> فایل‌های منفرد را کوچک می‌کنند و گزینه‌هایی برای حفظ نسخهٔ اصلی یا فشرده‌سازی بازگشتی دارند.</li>
+<li>فرمت <code>zip</code> برای تعامل با کاربران دیگر سیستم‌عامل‌ها مفید است و ابزارهای <code>zip</code> و <code>unzip</code> کار با آن را ساده می‌کنند.</li>
+<li><code>tar</code> پرکاربردترین آرشیوساز لینوکس است و با ترکیب گزینه‌های مختلف می‌تواند آرشیوهای ساده یا فشرده بسازد، فهرست محتوا را نمایش دهد و آن‌ها را استخراج کند.</li>
+<li>با تکیه بر همین ابزارها می‌توانیم برنامه‌ای برای پشتیبان‌گیری منظم طراحی کنیم و با استفاده از زمان‌بندی خودکار، خیال خود را از بابت حفظ داده‌ها راحت کنیم.</li>
+</ul>
+<hr>
+<h3>تمرین</h3>
+<ol>
+<li>یک دایرکتوری آزمایشی بسازید و با استفاده از <code>tar</code> هم نسخهٔ کامل و هم نسخهٔ افزایشی از آن تهیه کنید. سپس بازگردانی را تمرین کنید.</li>
+<li>یک اسکریپت ساده بنویسید که هر شب از پوشهٔ «Documents» شما یک تاربال فشرده بسازد و آن را در دایرکتوری دیگری ذخیره کند.</li>
+<li>با <code>rsync</code> یک همگام‌سازی یک‌طرفه بین دو دایرکتوری انجام دهید و اثر گزینه‌های <code>--dry-run</code>، <code>--delete</code> و <code>--exclude</code> را بررسی کنید.</li>
+</ol>
+<hr>
+<h3>مطالعهٔ بیشتر</h3>
+<ul>
+<li>صفحهٔ راهنمای <code>tar</code> و <code>rsync</code> اطلاعات جامع و مثال‌های زیادی ارائه می‌دهند: <code>man tar</code> و <code>man rsync</code>.</li>
+<li>پروژهٔ <code>duplicity</code> و ابزار <code>restic</code> نمونه‌هایی از برنامه‌های پشتیبان‌گیری متن‌باز هستند که روی همین مفاهیم ساخته شده‌اند.</li>
+<li>برای نکته‌های پیشرفته دربارهٔ <code>rsync</code> می‌توانید به مستند رسمی آن در آدرس <a href="https://download.samba.org/pub/rsync/rsync.html">https://download.samba.org/pub/rsync/rsync.html</a> مراجعه کنید.</li>
+</ul>
+
+  </main>
+
+  <!-- فوتر مشترک -->
+  <footer class="footer">
+    <div class="container">
+      <p>
+        <img src="/Gitab/icone/copyright.svg" alt="کپی‌رایت" width="14" height="14"
+             style="vertical-align:middle;margin-inline:4px">
+        <span id="y"></span> Gitab — تمامی حقوق محفوظ است.
+      </p>
+    </div>
+  </footer>
+
+  <!-- سال و اسکریپت تغییر تم -->
+  <script>
+  (() => {
+    const root = document.documentElement;
+    const btn = document.getElementById('themeToggle');
+    const KEY = 'gitab-theme';
+
+    function updateTheme(s) {
+      root.setAttribute('data-theme', s);
+      const mode = s;  // فقط `dark` یا `light` خواهد بود
+      root.dataset.colorMode = mode;
+      btn.dataset.icon = mode === 'dark' ? 'moon' : 'sun';
+    }
+
+    // وضعیت تم ذخیره شده از localStorage
+    let saved = localStorage.getItem(KEY) || 'light'; // پیش‌فرض روشن
+    updateTheme(saved);
+
+    // تنظیم مجدد تم هنگام تغییر وضعیت دکمه
+    btn.addEventListener('click', () => {
+      const current = localStorage.getItem(KEY) || 'light';
+      const next = current === 'dark' ? 'light' : 'dark';  // فقط دو حالت: تاریک و روشن
+      localStorage.setItem(KEY, next);
+      updateTheme(next);
+    });
+
+    // هنگام بارگذاری صفحه
+    document.addEventListener('DOMContentLoaded', () => {
+      updateTheme(localStorage.getItem(KEY) || 'light');
+    });
+  })();
+</script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+
+  <script>
+  document.querySelectorAll('pre code').forEach(block => {
+    const btn = document.createElement('button');
+    btn.className = 'copy-btn';
+
+    const icon = document.createElement('img');
+    icon.src = "/Gitab/icone/copy.svg";
+    icon.alt = 'Copy';
+    btn.appendChild(icon);
+
+    block.parentNode.insertBefore(btn, block);
+
+    btn.addEventListener('click', async () => {
+      await navigator.clipboard.writeText(block.textContent);
+      btn.classList.add('copied');
+      setTimeout(() => btn.classList.remove('copied'), 1500);
+    });
+  });
+  </script>
+
+  <script>
+  document.body.dataset.page = window.location.pathname;
+
+  const menuBtn = document.querySelector(".menu-toggle");
+  const nav = document.querySelector(".nav");
+
+  if (menuBtn && nav) {
+    menuBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      nav.classList.toggle("show");
+    });
+
+    document.addEventListener("click", (e) => {
+      const clickedInsideNav = nav.contains(e.target);
+      const clickedMenuButton = menuBtn.contains(e.target);
+      if (!clickedInsideNav && !clickedMenuButton) {
+        nav.classList.remove("show");
+      }
+    });
+  }
+  </script>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+  <script>
+document.getElementById("openDonate").addEventListener("click", () => {
+  document.getElementById("donateModal").style.display = "block";
+});
+document.getElementById("closeDonate").addEventListener("click", () => {
+  document.getElementById("donateModal").style.display = "none";
+});
+document.querySelectorAll(".copy-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    navigator.clipboard.writeText(btn.dataset.copy);
+  
+    setTimeout(() => (btn.textContent = "کپی"), 2000);
+  });
+});
+</script>
+
+</body>
+</html>

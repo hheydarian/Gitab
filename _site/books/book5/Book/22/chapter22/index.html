@@ -1,0 +1,310 @@
+
+
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <link rel="icon" type="image/png" href="/Gitab/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>چاپ و تولید خروجی کاغذی</title>
+  <meta name="description" content="ترجمه‌های فارسی کتاب‌های فنی — سریع، مینیمال و قابل اتکا.">
+
+  <!-- استایل‌ها -->
+  <link rel="stylesheet" href="/Gitab/styles/main.css">
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+
+  <style>
+  @font-face {
+    font-family: 'Vazir';
+    src: url('/Gitab/fonts/Vazir-FD-WOL.ttf') format('truetype');
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "Lalezar";
+    src: url('fonts/Lalezar.ttf') format('truetype');
+    font-display: swap;
+}
+  body {
+    font-family: 'Vazir', sans-serif;
+  }
+  </style>
+</head>
+
+<body>
+  <!-- هدر مشترک -->
+  <header class="header">
+    <div class="container nav-wrap">
+      <a href="/Gitab/" class="brand">
+        <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="26" height="26">
+        <span>Gitab</span>
+      </a>
+
+       <nav class="nav">
+         <a href="/Gitab/" >خانه</a>
+         <a href="/Gitab/books/list-books" >کتاب‌ها</a>
+         <a href="/Gitab/giter.html" >دوره ها</a>
+          <!-- 
+         <a href="/Gitab/translator.html" >مترجمین</a>
+           -->
+       </nav>
+
+      <div class="nav-actions">
+        <button id="themeToggle" class="icon-btn theme-btn" data-icon="moon" aria-label="تغییر تم">
+          <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن">
+          <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک">
+        </button>
+
+        <a class="icon-btn" href="https://github.com/hheydarian/Gitab" target="_blank" title="GitHub">
+          <img src="/Gitab/icone/github.svg" alt="GitHub">
+        </a>
+
+        <!-- دکمه منو برای موبایل -->
+        <button class="menu-toggle" aria-label="منو">
+          <img src="/Gitab/icone/menu.svg" alt="menu">
+        </button>
+      </div>
+    </div>
+  </header>
+
+  
+  <main class="site-main book-page">
+    <h1>فصل ۲۲ – چاپ و تولید خروجی کاغذی</h1>
+<p>گرچه بسیاری از کارهای ما دیجیتال است، هنوز هم گاهی لازم داریم سندی را چاپ کنیم.<br>
+در لینوکس سیستم چاپ بر پایهٔ استانداردهای آزاد بنا شده است و با درک آن می‌توانیم فایل‌های متنی، تصاویر و اسناد را به چاپگرهای محلی یا شبکه‌ای بفرستیم.</p>
+<p>در این فصل یاد می‌گیریم:</p>
+<ul>
+<li>ساختار سیستم چاپ CUPS چگونه است.</li>
+<li>از فرمان‌های <code>lp</code> و <code>lpr</code> برای ارسال شغل چاپ استفاده کنیم.</li>
+<li>شغل‌های چاپ را با <code>lpq</code> و <code>lprm</code> مدیریت کنیم.</li>
+<li>فایل‌های متنی را برای چاپ آماده کنیم.</li>
+<li>با قالب‌های PostScript و PDF آشنا شویم.</li>
+</ul>
+<hr>
+<h3>معرفی CUPS</h3>
+<p>سیستم Common UNIX Printing System یا به اختصار <strong>CUPS</strong> چارچوب استاندارد چاپ در بیشتر توزیع‌های لینوکس است.<br>
+CUPS از پروتکل IPP استفاده می‌کند و رابطی وب برای پیکربندی چاپگرها دارد (<code>http://localhost:631</code>).<br>
+هر چاپگر مجموعه‌ای از گزینه‌ها مانند اندازهٔ کاغذ، کیفیت چاپ و منبع کاغذ دارد.</p>
+<p>برای مشاهدهٔ چاپگرهای نصب‌شده:</p>
+<pre class="hljs"><code>lpstat -p
+lpstat -d
+</code></pre>
+<p>دستور اول وضعیت چاپگرها را نشان می‌دهد و دومی چاپگر پیش‌فرض را.</p>
+<hr>
+<h3>ارسال کار چاپ</h3>
+<p>دو فرمان اصلی <code>lp</code> و <code>lpr</code> هستند که کار مشابهی انجام می‌دهند.<br>
+برای چاپ یک فایل متنی ساده:</p>
+<pre class="hljs"><code>lp memo.txt
+</code></pre>
+<p>یا با <code>lpr</code>:</p>
+<pre class="hljs"><code>lpr memo.txt
+</code></pre>
+<p>گزینه‌های متداول:</p>
+<ul>
+<li><code>-d printer</code> در <code>lp</code> یا <code>-P printer</code> در <code>lpr</code> برای انتخاب چاپگر.</li>
+<li><code>-n copies</code> برای تعداد نسخه‌ها.</li>
+<li><code>-o media=Letter</code> یا <code>-o orientation-requested=4</code> برای تنظیمات کاغذ و جهت.</li>
+</ul>
+<p>مثال پیچیده‌تر:</p>
+<pre class="hljs"><code>lp -d office -n 2 -o sides=two-sided-long-edge report.pdf
+</code></pre>
+<p>این دستور فایل <code>report.pdf</code> را به چاپگر شبکه‌ای <code>office</code> می‌فرستد، دو نسخه چاپ می‌کند و چاپ دوطرفه را فعال می‌سازد.</p>
+<hr>
+<h3>تنظیم گزینه‌های پیش‌فرض چاپگر</h3>
+<p>هر چاپگر مجموعه‌ای از گزینه‌ها مانند اندازهٔ کاغذ، کیفیت چاپ و سینی کاغذ دارد.<br>
+با دستور <code>lpoptions</code> می‌توان مقادیر پیش‌فرض را دید یا تغییر داد:</p>
+<pre class="hljs"><code>lpoptions -p office
+lpoptions -p office -o media=A4 -o sides=two-sided-short-edge
+</code></pre>
+<p>اگر گزینه‌ای را برای همهٔ چاپگرها تنظیم کنید، از <code>lpoptions -o key=value</code> بدون مشخص کردن نام چاپگر استفاده کنید.<br>
+برای بررسی قابلیت‌های هر چاپگر، <code>lpoptions -p office -l</code> فهرستی از پارامترهای پشتیبانی‌شده را نشان می‌دهد. در صورت نیاز به تغییرات سیستمی، مدیر سیستم می‌تواند از <code>lpadmin</code> برای افزودن یا حذف چاپگرها و از <code>lpinfo -m</code> برای مشاهدهٔ درایورهای موجود استفاده کند.</p>
+<hr>
+<h3>مشاهدهٔ صف چاپ</h3>
+<p>برای بررسی وضعیت شغل‌ها از <code>lpq</code> یا <code>lpstat -o</code> استفاده می‌کنیم:</p>
+<pre class="hljs"><code>lpq
+lpstat -o
+</code></pre>
+<p>این فرمان‌ها شمارهٔ شغل، کاربر ارسال‌کننده، اندازهٔ فایل و وضعیت آن را نشان می‌دهند.</p>
+<p>اگر بخواهیم شغل چاپ را لغو کنیم، <code>lprm job-id</code> یا <code>cancel job-id</code> را اجرا می‌کنیم.<br>
+تنها کاربری که شغل را ارسال کرده یا مدیر سیستم می‌تواند آن را حذف کند.</p>
+<hr>
+<h3>چاپ فایل‌های متنی</h3>
+<p>چاپ مستقیم فایل‌های متنی ممکن است نتیجهٔ نامناسبی بدهد؛ بهتر است پیش از چاپ فرمت‌بندی انجام دهیم.<br>
+ابزارهایی مانند <code>pr</code>، <code>enscript</code> و <code>a2ps</code> می‌توانند متن ساده را به PostScript تبدیل کنند.</p>
+<pre class="hljs"><code>pr -h &quot;Notes&quot; memo.txt | lp
+</code></pre>
+<p><code>enscript</code> امکانات بیشتری دارد:</p>
+<pre class="hljs"><code>enscript -2r -p output.ps script.sh
+</code></pre>
+<p>گزینهٔ <code>-2r</code> دو صفحه در هر برگ چاپ می‌کند و آن را می‌چرخاند؛ <code>-p</code> نام فایل خروجی PostScript را تعیین می‌کند.<br>
+فایل PostScript ایجادشده را می‌توان با <code>lp</code> چاپ یا با <code>ps2pdf</code> به PDF تبدیل کرد.</p>
+<hr>
+<h3>آشنایی با PostScript و PDF</h3>
+<p>PostScript زبان توصیف صفحه است که توسط پرینترهای پیشرفته پشتیبانی می‌شود.<br>
+فایل‌های PostScript متن و گرافیک را با دستورات برداری تعریف می‌کنند.<br>
+برنامه‌های بسیاری می‌توانند خروجی PostScript تولید کنند.</p>
+<p>فرمت PDF (Portable Document Format) که توسط Adobe توسعه داده شده، از PostScript الهام گرفته و امروزه استانداردی جهانی برای تبادل سند است.<br>
+در لینوکس می‌توان با ابزارهایی مانند <code>cups-pdf</code> خروجی چاپ را به فایل PDF تبدیل کرد.</p>
+<pre class="hljs"><code>ps2pdf input.ps output.pdf
+</code></pre>
+<p>برای ترکیب چند فایل PDF از <code>pdfunite</code> (از بستهٔ poppler-utils) استفاده می‌شود و برای استخراج صفحات <code>pdfseparate</code>.</p>
+<hr>
+<h3>چاپ تصاویر و فایل‌های ویژه</h3>
+<p>برای تصاویر می‌توان از <code>imagemagick</code> یا <code>cupsfilter</code> کمک گرفت:</p>
+<pre class="hljs"><code>display photo.jpg &amp;
+</code></pre>
+<p>در برنامهٔ <code>display</code> گزینهٔ «Print» تصویر را به چاپگر می‌فرستد.<br>
+همچنین دستور <code>lp -o fit-to-page photo.jpg</code> تصویر را متناسب با صفحه چاپ می‌کند.</p>
+<p>برای فایل‌های LibreOffice یا اسناد پیچیده، مناسب است از خود برنامه یا از <code>libreoffice --headless --print-to-file</code> بهره بگیریم.</p>
+<hr>
+<h3>نکات عیب‌یابی</h3>
+<p>اگر چاپگر پاسخ نمی‌دهد:</p>
+<ol>
+<li>اتصال سخت‌افزاری و روشن بودن چاپگر را بررسی کنید.</li>
+<li>با <code>lpstat -t</code> گزارش کامل بگیرید.</li>
+<li>در فایل <code>/var/log/cups/error_log</code> پیام‌های خطا را بررسی کنید.</li>
+<li>سرویس CUPS را بازراه‌اندازی کنید: <code>sudo systemctl restart cups</code>.</li>
+</ol>
+<p>گاهی لازم است صف چاپگر را پاکسازی کنیم:</p>
+<pre class="hljs"><code>cancel -a
+</code></pre>
+<p>این فرمان تمام شغل‌های در صف را لغو می‌کند.</p>
+<hr>
+<h3>مدیریت دسترسی‌ها</h3>
+<p>CUPS اجازه می‌دهد تعیین کنیم چه کسانی می‌توانند چاپ کنند.<br>
+در فایل پیکربندی <code>/etc/cups/printers.conf</code> می‌توان محدودیت‌ها را اعمال کرد یا از رابط وب برای افزودن کاربران مجاز استفاده نمود.<br>
+همچنین گروه <code>lpadmin</code> برای مدیریت چاپگرها به کار می‌رود.</p>
+<p>برای فعال یا غیرفعال کردن چاپگرها از <code>cupsenable printer</code> و <code>cupsdisable printer</code> استفاده می‌شود. دستور <code>cupsctl</code> نیز تغییرات سطح سیستم مانند فعال کردن رابط وب یا اجبار به استفاده از رمز عبور را مدیریت می‌کند.</p>
+<hr>
+<h3>جمع‌بندی</h3>
+<p>با فهمیدن نحوهٔ کار سیستم چاپ در لینوکس می‌توانیم خروجی‌های متنوع را روی کاغذ بیاوریم.<br>
+از متون ساده گرفته تا گزارش‌های پیچیده و تصاویر، همه را می‌توان با ابزارهای خط فرمان یا برنامه‌های گرافیکی چاپ کرد.<br>
+کلید موفقیت درک صف چاپ، مدیریت شغل‌ها و انتخاب گزینه‌های مناسب برای چاپگر است.</p>
+<hr>
+<h3>تمرین</h3>
+<ol>
+<li>یک فایل متنی را با استفاده از <code>pr</code> قالب‌بندی کنید و آن را با <code>lp -n 3 -o sides=two-sided-long-edge</code> به چاپگر پیش‌فرض بفرستید.</li>
+<li>با <code>lpoptions</code> اندازهٔ کاغذ چاپگر خود را به A4 تغییر دهید و سپس دستور دیگری اجرا کنید تا مطمئن شوید گزینهٔ جدید اعمال شده است.</li>
+<li>یک تصویر را با <code>lp -o fit-to-page</code> چاپ کنید و تفاوت آن را با حالت معمولی بسنجید.</li>
+</ol>
+<hr>
+<h3>مطالعهٔ بیشتر</h3>
+<ul>
+<li>مستند رسمی CUPS در آدرس <a href="https://www.cups.org/doc/overview.html">https://www.cups.org/doc/overview.html</a> جزئیات کامل فرمان‌ها و فایل‌های پیکربندی را توضیح می‌دهد.</li>
+<li>صفحه‌های راهنمای <code>man lp</code>, <code>man lpstat</code>, <code>man cancel</code>, <code>man lpoptions</code> برای کار روزمره ضروری هستند.</li>
+<li>پروژهٔ <code>cups-filters</code> برای پشتیبانی از قالب‌های مختلف در چاپگرهای مدرن ارزش مطالعه دارد.</li>
+</ul>
+
+  </main>
+
+  <!-- فوتر مشترک -->
+  <footer class="footer">
+    <div class="container">
+      <p>
+        <img src="/Gitab/icone/copyright.svg" alt="کپی‌رایت" width="14" height="14"
+             style="vertical-align:middle;margin-inline:4px">
+        <span id="y"></span> Gitab — تمامی حقوق محفوظ است.
+      </p>
+    </div>
+  </footer>
+
+  <!-- سال و اسکریپت تغییر تم -->
+  <script>
+  (() => {
+    const root = document.documentElement;
+    const btn = document.getElementById('themeToggle');
+    const KEY = 'gitab-theme';
+
+    function updateTheme(s) {
+      root.setAttribute('data-theme', s);
+      const mode = s;  // فقط `dark` یا `light` خواهد بود
+      root.dataset.colorMode = mode;
+      btn.dataset.icon = mode === 'dark' ? 'moon' : 'sun';
+    }
+
+    // وضعیت تم ذخیره شده از localStorage
+    let saved = localStorage.getItem(KEY) || 'light'; // پیش‌فرض روشن
+    updateTheme(saved);
+
+    // تنظیم مجدد تم هنگام تغییر وضعیت دکمه
+    btn.addEventListener('click', () => {
+      const current = localStorage.getItem(KEY) || 'light';
+      const next = current === 'dark' ? 'light' : 'dark';  // فقط دو حالت: تاریک و روشن
+      localStorage.setItem(KEY, next);
+      updateTheme(next);
+    });
+
+    // هنگام بارگذاری صفحه
+    document.addEventListener('DOMContentLoaded', () => {
+      updateTheme(localStorage.getItem(KEY) || 'light');
+    });
+  })();
+</script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+
+  <script>
+  document.querySelectorAll('pre code').forEach(block => {
+    const btn = document.createElement('button');
+    btn.className = 'copy-btn';
+
+    const icon = document.createElement('img');
+    icon.src = "/Gitab/icone/copy.svg";
+    icon.alt = 'Copy';
+    btn.appendChild(icon);
+
+    block.parentNode.insertBefore(btn, block);
+
+    btn.addEventListener('click', async () => {
+      await navigator.clipboard.writeText(block.textContent);
+      btn.classList.add('copied');
+      setTimeout(() => btn.classList.remove('copied'), 1500);
+    });
+  });
+  </script>
+
+  <script>
+  document.body.dataset.page = window.location.pathname;
+
+  const menuBtn = document.querySelector(".menu-toggle");
+  const nav = document.querySelector(".nav");
+
+  if (menuBtn && nav) {
+    menuBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      nav.classList.toggle("show");
+    });
+
+    document.addEventListener("click", (e) => {
+      const clickedInsideNav = nav.contains(e.target);
+      const clickedMenuButton = menuBtn.contains(e.target);
+      if (!clickedInsideNav && !clickedMenuButton) {
+        nav.classList.remove("show");
+      }
+    });
+  }
+  </script>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+  <script>
+document.getElementById("openDonate").addEventListener("click", () => {
+  document.getElementById("donateModal").style.display = "block";
+});
+document.getElementById("closeDonate").addEventListener("click", () => {
+  document.getElementById("donateModal").style.display = "none";
+});
+document.querySelectorAll(".copy-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    navigator.clipboard.writeText(btn.dataset.copy);
+  
+    setTimeout(() => (btn.textContent = "کپی"), 2000);
+  });
+});
+</script>
+
+</body>
+</html>

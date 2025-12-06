@@ -52,6 +52,8 @@ html {
     font-family: var(--font);
 }
 body {
+    overflow-x: clip;
+    position: relative;
     margin: 0;
     color: var(--text);
     background: radial-gradient(
@@ -67,6 +69,9 @@ body {
         var(--bg-0);
     font-family: var(--font);
     line-height: 1.75;
+    width: 100%;
+    max-width: 100vw;
+    box-sizing: border-box;
 }
 a {
     color: inherit;
@@ -2200,6 +2205,13 @@ html[data-color-mode="light"] .course-actions .btn {
     border: none;
     padding: 0;
 }
+/* Copilot instruction:
+⚠️ Do NOT modify or rewrite any of the existing CSS below.
+✅ Only improve color contrast, spacing, and light/dark theme compatibility.
+Keep all class names, structure, and layout EXACTLY the same.
+Just ensure all items look balanced in both dark and light themes.
+*/
+
 /* ===== Giter C# Course Page ===== */
 .container {
     max-width: 1100px;
@@ -2214,9 +2226,9 @@ html[data-color-mode="light"] .course-actions .btn {
     padding: 6px 10px;
     border-radius: 999px;
     font-size: 12.5px;
-    border: 1px solid color-mix(in oklab, var(--fg) 15%, transparent);
-    color: var(--fg);
-    background: color-mix(in oklab, var(--bg-1) 92%, transparent);
+    border: 1px solid color-mix(in oklab, var(--fg) 12%, transparent);
+    color: color-mix(in oklab, var(--fg) 95%, transparent);
+    background: color-mix(in oklab, var(--bg-1) 95%, transparent);
 }
 .badge.b-solid {
     background: linear-gradient(135deg, #8b5cf6, #7dd3fc);
@@ -2243,11 +2255,13 @@ html[data-color-mode="light"] .course-actions .btn {
     margin: 0 0 8px;
     font-family: "Lalezar", "VazirFD", system-ui;
 }
-
+h1.course-hero__title {
+    font-family: "Lalezar", "VazirFD", system-ui;
+}
 .course-hero__lead {
     max-width: 70ch;
     margin: 0 auto 14px;
-    color: var(--muted);
+    color: color-mix(in oklab, var(--fg) 85%, transparent);
 }
 .course-hero__cta {
     display: flex;
@@ -2265,13 +2279,58 @@ html[data-color-mode="light"] .course-actions .btn {
     justify-content: center;
 }
 .course-hero__points li {
-    padding: 8px 12px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: color-mix(in oklab, var(--bg-1) 95%, transparent);
+    border: 1px solid color-mix(in oklab, var(--fg) 12%, transparent);
     border-radius: 10px;
-    font-size: 13px;
-    background: color-mix(in oklab, var(--bg-1) 92%, transparent);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 8px 14px;
+    font-size: 13.5px;
+    color: color-mix(in oklab, var(--fg) 95%, transparent);
+    line-height: 1.6;
+    transition: background 0.3s ease, transform 0.25s ease;
+}
+.course-hero__points li:hover {
+    transform: translateY(-2px);
+    background: color-mix(in oklab, var(--bg-2) 96%, transparent);
 }
 
+/* آیکون چک */
+.course-hero__points li img {
+    width: 18px;
+    height: 18px;
+    fill: #22c55e; /* سبز زنده */
+    flex-shrink: 0;
+    transition: fill 0.3s ease, transform 0.25s ease;
+}
+
+/* رنگ سبز در هر دو تم */
+:root[data-theme="dark"] .course-hero__points li img {
+    filter: brightness(1.2) drop-shadow(0 0 2px rgba(0, 255, 94, 0.5));
+}
+
+:root[data-theme="light"] .course-hero__points li img {
+    filter: brightness(0.9) drop-shadow(0 0 2px rgba(0, 255, 94, 0.5));
+}
+
+/* Hover animation روی آیکون */
+.course-hero__points li:hover img {
+    transform: scale(1.1);
+}
+
+/* موبایل */
+@media (max-width: 640px) {
+    .course-hero__points {
+        flex-direction: column;
+        align-items: center;
+    }
+    .course-hero__points li {
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+    }
+}
 .course-grid {
     display: grid;
     gap: 18px;
@@ -2282,12 +2341,12 @@ html[data-color-mode="light"] .course-actions .btn {
     grid-column: span 4;
 }
 .card {
-    background: var(--bg-2);
-    color: var(--fg);
+    background: color-mix(in oklab, var(--bg-2) 98%, transparent);
+    color: color-mix(in oklab, var(--fg) 95%, transparent);
     border-radius: 16px;
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border: 1px solid color-mix(in oklab, var(--fg) 12%, transparent);
     padding: 18px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 10px 30px color-mix(in oklab, var(--bg-2) 85%, transparent);
 }
 .card h2 {
     margin: 0 0 8px;
@@ -2310,9 +2369,10 @@ html[data-color-mode="light"] .course-actions .btn {
     padding: 6px 10px;
     margin: 6px 6px 0 0;
     border-radius: 999px;
-    background: color-mix(in oklab, var(--bg-1) 92%, transparent);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: color-mix(in oklab, var(--bg-1) 95%, transparent);
+    border: 1px solid color-mix(in oklab, var(--fg) 12%, transparent);
     font-size: 13px;
+    color: color-mix(in oklab, var(--fg) 90%, transparent);
 }
 .check-list li {
     padding: 6px 0 6px 18px;
@@ -2323,7 +2383,8 @@ html[data-color-mode="light"] .course-actions .btn {
     content: "✓";
     position: absolute;
     inset-inline-start: 0;
-    color: #84cc16;
+    color: color-mix(in oklab, #84cc16 90%, var(--bg-1));
+    text-shadow: 0 0 1px color-mix(in oklab, var(--bg-2) 50%, transparent);
 }
 
 .lift {
@@ -2345,6 +2406,36 @@ html[data-color-mode="light"] .course-actions .btn {
     gap: 10px;
     margin-bottom: 10px;
 }
+
+:root[data-theme="light"] .accordion details {
+    background: color-mix(in oklab, var(--bg-1) 98%, transparent);
+    border: 1px solid color-mix(in oklab, var(--fg) 8%, transparent);
+    box-shadow: 0 1px 3px color-mix(in oklab, var(--bg-2) 95%, transparent);
+}
+
+:root[data-theme="light"] .accordion summary {
+    color: var(--fg);
+    background: color-mix(in oklab, var(--bg-1) 99%, transparent);
+    transition: background-color 0.2s ease;
+}
+
+:root[data-theme="light"] .accordion summary:hover {
+    background: color-mix(in oklab, var(--bg-2) 97%, transparent);
+}
+
+:root[data-theme="light"] .accordion details[open] {
+    background: color-mix(in oklab, var(--bg-1) 99%, transparent);
+    border-color: color-mix(in oklab, var(--fg) 18%, transparent);
+    box-shadow: 0 2px 6px color-mix(in oklab, var(--bg-2) 98%, transparent);
+}
+
+:root[data-theme="light"] .accordion .mini-list {
+    color: color-mix(in oklab, var(--fg) 95%, transparent);
+}
+
+:root[data-theme="light"] .accordion .mini-list li {
+    color: var(--fg);
+}
 .sy-controls {
     display: flex;
     gap: 8px;
@@ -2356,11 +2447,12 @@ html[data-color-mode="light"] .course-actions .btn {
 }
 
 .accordion details {
-    background: var(--bg-2);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: color-mix(in oklab, var(--bg-2) 95%, transparent);
+    border: 1px solid color-mix(in oklab, var(--fg) 12%, transparent);
     border-radius: 12px;
     margin-bottom: 10px;
     overflow: hidden;
+    box-shadow: 0 2px 8px color-mix(in oklab, var(--bg-2) 90%, transparent);
 }
 .accordion summary {
     cursor: pointer;
@@ -2379,7 +2471,7 @@ html[data-color-mode="light"] .course-actions .btn {
     color: var(--muted);
 }
 .accordion .mini-list {
-    padding: 0 16px 12px 26px;
+    padding: 0 30px 12px 26px;
     margin: 0;
 }
 .accordion .mini-list li {
@@ -2387,7 +2479,6 @@ html[data-color-mode="light"] .course-actions .btn {
     padding: 6px 0;
     list-style: disc;
 }
-
 /* Contributors */
 .contributors {
     margin-top: 26px;
@@ -2426,7 +2517,7 @@ html[data-color-mode="light"] .course-actions .btn {
 }
 .faq .qa details {
     background: var(--bg-2);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border: 1px solid color-mix(in oklab, var(--fg) 8%, transparent);
     border-radius: 12px;
     padding: 0 14px;
     margin-bottom: 10px;
@@ -2447,10 +2538,11 @@ html[data-color-mode="light"] .course-actions .btn {
 }
 .cta-card {
     text-align: center;
-    background: var(--bg-2);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: color-mix(in oklab, var(--bg-2) 95%, transparent);
+    border: 1px solid color-mix(in oklab, var(--fg) 12%, transparent);
     border-radius: 16px;
     padding: 18px;
+    box-shadow: 0 4px 20px color-mix(in oklab, var(--bg-2) 90%, transparent);
 }
 .cta-card .row {
     display: flex;
@@ -2616,8 +2708,18 @@ html[data-color-mode="light"] .course-actions .btn {
         radial-gradient(60% 60% at 30% 70%, #8b5cf633, transparent 60%);
 }
 :root[data-theme="light"] .course-hero::before {
-    opacity: 0.35;
-    filter: blur(36px) saturate(120%);
+    opacity: 0.25;
+    filter: blur(36px) saturate(110%);
+    background: radial-gradient(
+            60% 60% at 70% 30%,
+            color-mix(in oklab, var(--bg-2) 85%, #7dd3fc),
+            transparent 65%
+        ),
+        radial-gradient(
+            60% 60% at 30% 70%,
+            color-mix(in oklab, var(--bg-2) 85%, #8b5cf6),
+            transparent 65%
+        );
 }
 
 /* ---------------- کارت‌های خفن: نئون + گلس + گرادیان بوردر ---------------- */
@@ -2626,12 +2728,12 @@ html[data-color-mode="light"] .course-actions .btn {
 }
 .fancy-cards .card {
     height: 100%;
-    background: color-mix(in oklab, var(--bg-2) 85%, transparent);
+    background: color-mix(in oklab, var(--bg-2) 92%, transparent);
     backdrop-filter: blur(10px) saturate(110%);
     border-radius: 18px;
-    border: 1px solid color-mix(in oklab, var(--fg) 8%, transparent);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28),
-        inset 0 0 0 1px rgba(255, 255, 255, 0.02);
+    border: 1px solid color-mix(in oklab, var(--fg) 10%, transparent);
+    box-shadow: 0 8px 24px color-mix(in oklab, var(--bg-2) 85%, transparent),
+        inset 0 0 0 1px color-mix(in oklab, var(--fg) 4%, transparent);
     transform-style: preserve-3d;
     transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1),
         box-shadow 0.35s ease, background 0.35s ease;
@@ -2646,9 +2748,14 @@ html[data-color-mode="light"] .course-actions .btn {
     inset: 0;
     border-radius: inherit;
     padding: 1px;
-    background: linear-gradient(135deg, #7dd3fc80, #a78bfa66);
+    background: linear-gradient(
+        135deg,
+        color-mix(in oklab, var(--bg-2) 90%, #7dd3fc),
+        color-mix(in oklab, var(--bg-2) 90%, #a78bfa)
+    );
     -webkit-mask: linear-gradient(#000 0 0) content-box,
         linear-gradient(#000 0 0);
+    mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
     opacity: 0;
@@ -2718,12 +2825,18 @@ html[data-color-mode="light"] .course-actions .btn {
 
 /* لایت‌تِم: کنتراست و سایه‌ها را تیوِن کن */
 :root[data-theme="light"] .fancy-cards .card {
-    background: #fff;
-    border-color: rgba(0, 0, 0, 0.08);
-    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.1);
+    background: color-mix(in oklab, var(--bg-1) 98%, transparent);
+    border-color: color-mix(in oklab, var(--fg) 8%, transparent);
+    box-shadow: 0 8px 22px color-mix(in oklab, var(--bg-2) 92%, transparent),
+        0 1px 3px color-mix(in oklab, var(--fg) 4%, transparent);
 }
 :root[data-theme="light"] .fancy-cards .card::after {
-    background: linear-gradient(135deg, #7dd3fc88, #a78bfa66);
+    background: linear-gradient(
+        135deg,
+        color-mix(in oklab, var(--bg-2) 85%, #7dd3fc),
+        color-mix(in oklab, var(--bg-2) 85%, #a78bfa)
+    );
+    opacity: 0.15;
 }
 
 /* گرید یکدست و قدِ برابر کارت‌ها */
@@ -2746,7 +2859,11 @@ html[data-color-mode="light"] .course-actions .btn {
 
 /* اکاردئون: تاکید خطی روی سرفصل باز */
 .accordion details[open] summary {
-    background: linear-gradient(90deg, #7dd3fc22, transparent 45%);
+    background: linear-gradient(
+        90deg,
+        color-mix(in oklab, var(--bg-2) 95%, #7dd3fc),
+        color-mix(in oklab, var(--bg-1) 98%, transparent) 45%
+    );
     border-radius: 12px 12px 0 0;
 }
 
@@ -2776,7 +2893,7 @@ html[data-color-mode="light"] .course-actions .btn {
 
 .card-desc {
     font-size: 0.8rem;
-    color: var(--muted);
+    color: color-mix(in oklab, var(--fg) 85%, transparent);
     margin: 0;
     text-align: justify;
     margin-bottom: 6px;
@@ -2799,7 +2916,7 @@ html[data-color-mode="light"] .course-actions .btn {
     line-height: 1.7;
     transition: color 0.3s ease, transform 0.3s ease;
     padding-inline-start: 18px;
-    color: var(--fg);
+    color: color-mix(in oklab, var(--fg) 95%, var(--bg-1));
 }
 .card-list li:hover {
     color: #7dd3fc;
@@ -2822,14 +2939,15 @@ html[data-color-mode="light"] .course-actions .btn {
     justify-content: start;
 }
 .card-list.pill li {
-    background: color-mix(in oklab, var(--bg-1) 92%, transparent);
+    background: color-mix(in oklab, var(--bg-1) 96%, transparent);
     border-radius: 999px;
     padding: 6px 12px;
     font-size: 0.85rem;
     line-height: 1;
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border: 1px solid color-mix(in oklab, var(--fg) 12%, transparent);
     position: relative;
     padding-inline-start: 12px;
+    box-shadow: 0 2px 6px color-mix(in oklab, var(--bg-2) 50%, transparent);
 }
 .card-list.pill li::before {
     display: none;
@@ -2854,6 +2972,7 @@ html[data-color-mode="light"] .course-actions .btn {
     color: var(--fg);
     background: linear-gradient(90deg, #7dd3fc, #a78bfa);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
     margin: 0;
     letter-spacing: -0.3px;
@@ -2876,4 +2995,357 @@ html[data-color-mode="light"] .course-actions .btn {
 /* unify line rhythm on light theme */
 :root[data-theme="light"] .card-list li {
     color: #1e293b;
+}
+/* ====== Syllabus Hero ====== */
+.syllabus-hero {
+    text-align: center;
+    padding: 60px 20px 30px;
+}
+.syllabus-title {
+    font-family: "Lalezar", "VazirFD";
+    font-size: clamp(28px, 6vw, 52px);
+}
+.syllabus-lead {
+    color: var(--muted);
+    font-size: 16px;
+}
+
+/* ====== Tree Layout ====== */
+.syllabus-tree {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin: 30px 0 80px;
+    position: relative;
+}
+.tree-section {
+    border-radius: 16px;
+    padding: 20px;
+    position: relative;
+    backdrop-filter: blur(6px);
+    transition: 0.25s ease;
+}
+.tree-section:hover {
+    transform: translateY(-3px);
+}
+.tree-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+}
+.tree-title {
+    font-size: 20px;
+    font-weight: 700;
+}
+.tree-topics {
+    margin-top: 10px;
+    display: none;
+    animation: fadeIn 0.3s ease forwards;
+}
+.tree-topics.active {
+    display: grid;
+    gap: 10px;
+}
+.topic {
+    background: color-mix(in oklab, var(--bg-2) 95%, transparent);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    padding: 10px 14px;
+    cursor: pointer;
+    transition: 0.25s;
+}
+.topic:hover {
+    background: color-mix(in oklab, var(--bg-1) 90%, transparent);
+    transform: translateX(4px);
+}
+.topic h3 {
+    margin: 0;
+    font-size: 15px;
+}
+.topic p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 13px;
+}
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ====== Panel ====== */
+.topic-panel {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+}
+.panel-content {
+    background: var(--bg-2);
+    color: var(--fg);
+    padding: 24px;
+    border-radius: 16px;
+    width: 90%;
+    max-width: 480px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+.close-btn {
+    position: absolute;
+    top: 14px;
+    right: 18px;
+    background: none;
+    border: none;
+    color: var(--muted);
+    cursor: pointer;
+    font-size: 18px;
+}
+.close-btn:hover {
+    color: var(--fg);
+}
+
+/* ====== Stage Blocks (Syllabus Sections) ====== */
+.stage-block {
+    background: color-mix(in oklab, var(--bg-2) 96%, transparent);
+    border-radius: 18px;
+    padding: 20px;
+    transition: transform 0.25s ease, border-color 0.18s ease,
+        box-shadow 0.18s ease;
+    /* show an accent-tinted border by default (works in both themes) */
+    border: 1px solid
+        color-mix(in oklab, var(--accent, var(--brand)) 14%, transparent);
+    cursor: pointer;
+    margin-bottom: 15px;
+}
+
+.stage-block.open {
+    transform: translateY(-2px);
+    border-color: color-mix(
+        in oklab,
+        var(--accent, var(--brand)) 30%,
+        transparent
+    );
+    box-shadow: 0 6px 18px color-mix(in oklab, var(--bg-2) 85%, transparent);
+    transition: 0.2ms ease;
+}
+
+.stage-block:hover {
+    border-color: color-mix(
+        in oklab,
+        var(--accent, var(--brand)) 20%,
+        transparent
+    );
+    transform: translateY(-2px);
+}
+
+.stage-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.stage-header h2 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin: 0;
+    color: var(--fg);
+}
+
+.stage-body {
+    margin-top: 15px;
+    display: none; /* controlled by .stage-block.open */
+    flex-direction: column;
+    gap: 8px;
+    padding-right: 10px;
+}
+
+.stage-body li {
+    opacity: 0.9;
+    line-height: 1.9;
+    border-right: 3px solid var(--accent);
+    padding-right: 10px;
+    color: var(--fg);
+}
+
+/* Show body when .open is present on the parent block */
+.stage-block.open .stage-body {
+    display: flex;
+}
+
+/* Toggle icon rotation */
+.toggle-icon {
+    width: 22px;
+    height: 22px;
+    transition: transform 0.22s ease;
+    flex-shrink: 0;
+}
+
+.toggle-icon.rotated {
+    transform: rotate(45deg);
+}
+
+/* Dynamic Color Scheme */
+.stage-block[data-color="yellow"] {
+    --accent: #ffd43b;
+}
+
+.stage-block[data-color="blue"] {
+    --accent: #4e9fff;
+}
+
+.stage-block[data-color="green"] {
+    --accent: #5be38e;
+}
+
+.stage-block[data-color="purple"] {
+    --accent: #c77dff;
+}
+
+.stage-block[data-color="orange"] {
+    --accent: #ff8f39;
+}
+
+.stage-block[data-color="red"] {
+    --accent: #ff6b6b;
+}
+
+.stage-block[data-color="cyan"] {
+    --accent: #00d9ff;
+}
+
+.stage-block[data-color="pink"] {
+    --accent: #ff006e;
+}
+
+.stage-block[data-color="violet"] {
+    --accent: #8338ec;
+}
+
+/* Light Theme Overrides */
+:root[data-theme="light"] .stage-block {
+    background: color-mix(in oklab, var(--bg-1) 98%, transparent);
+    border-color: color-mix(
+        in oklab,
+        var(--accent, var(--brand)) 12%,
+        transparent
+    );
+}
+
+:root[data-theme="light"] .stage-block.open {
+    background: color-mix(in oklab, var(--bg-2) 96%, transparent);
+    border-color: color-mix(
+        in oklab,
+        var(--accent, var(--brand)) 25%,
+        transparent
+    );
+    box-shadow: 0 4px 14px color-mix(in oklab, var(--bg-2) 90%, transparent);
+}
+
+:root[data-theme="light"] .stage-block:hover {
+    border-color: color-mix(
+        in oklab,
+        var(--accent, var(--brand)) 16%,
+        transparent
+    );
+}
+
+:root[data-theme="light"] .stage-header h2 {
+    color: var(--fg);
+}
+
+:root[data-theme="light"] .stage-body li {
+    color: color-mix(in oklab, var(--fg) 92%, transparent);
+}
+
+/* Mobile & Tablet Responsive Design */
+@media (max-width: 768px) {
+    .syllabus-hero {
+        padding: 40px 16px 24px;
+    }
+
+    .syllabus-title {
+        font-size: clamp(24px, 5vw, 40px);
+    }
+
+    .syllabus-lead {
+        font-size: 14px;
+    }
+
+    .stage-block {
+        padding: 16px;
+        border-radius: 14px;
+    }
+
+    .stage-header h2 {
+        font-size: 1.1rem;
+    }
+
+    .stage-body {
+        margin-top: 12px;
+        gap: 6px;
+        padding-right: 8px;
+    }
+
+    .stage-body li {
+        font-size: 15px;
+        line-height: 1.6;
+    }
+}
+
+@media (max-width: 480px) {
+    .syllabus-hero {
+        padding: 32px 12px 18px;
+    }
+
+    .syllabus-title {
+        font-size: clamp(20px, 4.5vw, 28px);
+    }
+
+    .syllabus-lead {
+        font-size: 13px;
+    }
+
+    .stage-block {
+        padding: 12px;
+        gap: 6px;
+    }
+
+    .stage-header h2 {
+        font-size: 1rem;
+    }
+
+    .stage-header {
+        gap: 8px;
+    }
+
+    .toggle-icon {
+        width: 20px;
+        height: 20px;
+    }
+
+    .stage-body {
+        margin-top: 10px;
+        padding-right: 6px;
+    }
+
+    .stage-body li {
+        font-size: 14px;
+        line-height: 1.5;
+    }
+    .stage-body li {
+        padding-right: 22px !important;
+        border-right-width: 3px !important;
+        border-right-style: solid;
+        border-right-color: var(--accent);
+        margin-right: 8px !important; 
+    }
 }

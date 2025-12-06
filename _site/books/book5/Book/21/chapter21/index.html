@@ -1,0 +1,357 @@
+
+
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <link rel="icon" type="image/png" href="/Gitab/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>قالب‌بندی خروجی</title>
+  <meta name="description" content="ترجمه‌های فارسی کتاب‌های فنی — سریع، مینیمال و قابل اتکا.">
+
+  <!-- استایل‌ها -->
+  <link rel="stylesheet" href="/Gitab/styles/main.css">
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+
+  <style>
+  @font-face {
+    font-family: 'Vazir';
+    src: url('/Gitab/fonts/Vazir-FD-WOL.ttf') format('truetype');
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "Lalezar";
+    src: url('fonts/Lalezar.ttf') format('truetype');
+    font-display: swap;
+}
+  body {
+    font-family: 'Vazir', sans-serif;
+  }
+  </style>
+</head>
+
+<body>
+  <!-- هدر مشترک -->
+  <header class="header">
+    <div class="container nav-wrap">
+      <a href="/Gitab/" class="brand">
+        <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="26" height="26">
+        <span>Gitab</span>
+      </a>
+
+       <nav class="nav">
+         <a href="/Gitab/" >خانه</a>
+         <a href="/Gitab/books/list-books" >کتاب‌ها</a>
+         <a href="/Gitab/giter.html" >دوره ها</a>
+          <!-- 
+         <a href="/Gitab/translator.html" >مترجمین</a>
+           -->
+       </nav>
+
+      <div class="nav-actions">
+        <button id="themeToggle" class="icon-btn theme-btn" data-icon="moon" aria-label="تغییر تم">
+          <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن">
+          <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک">
+        </button>
+
+        <a class="icon-btn" href="https://github.com/hheydarian/Gitab" target="_blank" title="GitHub">
+          <img src="/Gitab/icone/github.svg" alt="GitHub">
+        </a>
+
+        <!-- دکمه منو برای موبایل -->
+        <button class="menu-toggle" aria-label="منو">
+          <img src="/Gitab/icone/menu.svg" alt="menu">
+        </button>
+      </div>
+    </div>
+  </header>
+
+  
+  <main class="site-main book-page">
+    <h1>فصل ۲۱ – قالب‌بندی خروجی</h1>
+<p>زمانی که اسکریپت‌ها و فرمان‌های خط فرمان داده تولید می‌کنند، لازم است خروجی را به شکلی قابل خواندن ارائه دهیم.<br>
+در این فصل با ابزارهایی آشنا می‌شویم که به ما کمک می‌کنند داده‌های خام را به جدول‌ها، گزارش‌ها و قالب‌های دیدنی تبدیل کنیم.</p>
+<p>موضوعات اصلی شامل موارد زیر است:</p>
+<ul>
+<li>ایجاد جدول‌های ساده با <code>column</code> و <code>printf</code>.</li>
+<li>استفاده از <code>printf</code> در شل و در برنامه‌های دیگر.</li>
+<li>ابزارهای قالب‌بندی مانند <code>expand</code>، <code>fmt</code> و <code>pr</code>.</li>
+<li>تبدیل داده‌ها با <code>awk</code> و <code>sed</code> برای تولید خروجی ساخت‌یافته.</li>
+</ul>
+<hr>
+<h3>ستون‌بندی با column</h3>
+<p>دستور <code>column</code> ورودی را به ستون‌هایی با عرض برابر تبدیل می‌کند.<br>
+برای مثال خروجی <code>/etc/passwd</code> را می‌توانیم به شکل دو ستونی نمایش دهیم:</p>
+<pre class="hljs"><code>cut -d: -f1,7 /etc/passwd | column -t -s:
+</code></pre>
+<p>گزینهٔ <code>-t</code> ستون‌ها را مرتب می‌کند و <code>-s</code> جداکنندهٔ دلخواه را مشخص می‌سازد.<br>
+اگر ورودی تعداد ستون‌های زیادی داشته باشد، <code>column</code> به‌طور خودکار عرض ترمینال را در نظر می‌گیرد.</p>
+<hr>
+<h3>printf در خط فرمان</h3>
+<p>فرمان <code>printf</code> مشابه تابع هم‌نامش در زبان C عمل می‌کند.<br>
+ساختار کلی:</p>
+<pre class="hljs"><code>printf &quot;قالب&quot; مقادیر...
+</code></pre>
+<p>در bash می‌توانیم به شکل زیر استفاده کنیم:</p>
+<pre class="hljs"><code>printf &quot;%-20s %10d\n&quot; &quot;Product&quot; 42
+</code></pre>
+<p>نمادهای قالب متداول:</p>
+<ul>
+<li><code>%s</code> رشته.</li>
+<li><code>%d</code> یا <code>%i</code> عدد صحیح.</li>
+<li><code>%f</code> عدد اعشاری.</li>
+<li><code>%x</code> عدد در مبنای شانزده.</li>
+<li><code>%%</code> یک علامت درصد واقعی.</li>
+</ul>
+<p>پرچم‌هایی مانند <code>-</code> (چپ‌چین)، <code>0</code> (پر کردن با صفر) و تعیین عرض میدان به کنترل بیشتر کمک می‌کنند.</p>
+<h4>📘 جدول ۲۱-۱: توالی‌های escape متداول در printf</h4>
+<table>
+<thead>
+<tr>
+<th>توالی</th>
+<th>توضیح</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>\n</code></td>
+<td>شروع خط جدید</td>
+</tr>
+<tr>
+<td><code>\t</code></td>
+<td>تب افقی</td>
+</tr>
+<tr>
+<td><code>\r</code></td>
+<td>بازگشت به ابتدای خط</td>
+</tr>
+<tr>
+<td><code>\a</code></td>
+<td>آژیر (bell)</td>
+</tr>
+<tr>
+<td><code>\\</code></td>
+<td>چاپ یک backslash</td>
+</tr>
+</tbody>
+</table>
+<p>استفادهٔ درست از این توالی‌ها برای ساخت خروجی چندخطی یا جدول‌های پیچیده ضروری است.</p>
+<hr>
+<h3>قالب‌های پیشرفته</h3>
+<p><code>printf</code> می‌تواند چندین مقدار را پشت سر هم چاپ کند:</p>
+<pre class="hljs"><code>while read name price; do
+  printf &quot;%-25s %8.2f\n&quot; &quot;$name&quot; &quot;$price&quot;
+done &lt; products.txt
+</code></pre>
+<p>در مثال بالا، نام و قیمت کالاها در قالب یک جدول با دو ستون نمایش داده می‌شوند.<br>
+می‌توانیم خروجی را به فایل هدایت کنیم یا همراه با ابزارهای دیگر زنجیر کنیم.</p>
+<p>از <code>printf</code> در برنامه‌هایی مانند <code>awk</code> نیز استفاده می‌شود:</p>
+<pre class="hljs"><code>awk -F',' '{ printf &quot;%-20s %6d\n&quot;, $1, $3 }' sales.csv
+</code></pre>
+<p>این دستور نام محصول (ستون اول) و تعداد فروش (ستون سوم) را با قالب‌بندی مناسب چاپ می‌کند.</p>
+<hr>
+<h3>استفاده از sed برای قالب‌بندی ساده</h3>
+<p><code>sed</code> فقط برای ویرایش خطی نیست؛ می‌تواند قالب‌بندی اولیه نیز انجام دهد.<br>
+برای مثال تبدیل فهرست کلید=مقدار به جدول دونقطه‌ای:</p>
+<pre class="hljs"><code>sed 's/=/: /' config.list | column -t -s:
+</code></pre>
+<p>یا افزودن کامنت به خطوط انتخابی:</p>
+<pre class="hljs"><code>sed '/^#/!s/^/# /' notes.txt
+</code></pre>
+<hr>
+<h3>استفاده از awk برای گزارش‌گیری</h3>
+<p><code>awk</code> زبان کوچکی برای پردازش متن است.<br>
+می‌توانیم ستون‌ها را انتخاب کنیم، محاسبه انجام دهیم و گزارش بسازیم.</p>
+<pre class="hljs"><code>awk -F',' '
+BEGIN {
+  printf &quot;%-20s %10s %10s\n&quot;, &quot;Product&quot;, &quot;Units&quot;, &quot;Revenue&quot;;
+  printf &quot;%s\n&quot;, &quot;-------------------------------------------&quot;;
+}
+{
+  revenue = $3 * $4;
+  total_units += $3;
+  total_revenue += revenue;
+  printf &quot;%-20s %10d %10.2f\n&quot;, $1, $3, revenue;
+}
+END {
+  printf &quot;%s\n&quot;, &quot;-------------------------------------------&quot;;
+  printf &quot;%-20s %10d %10.2f\n&quot;, &quot;TOTAL&quot;, total_units, total_revenue;
+}
+' sales.csv
+</code></pre>
+<p>در بخش <code>BEGIN</code> سرستون‌ها چاپ می‌شوند، در بدنهٔ اصلی برای هر رکورد خروجی تولید می‌گردد و در <code>END</code> جمع کل گزارش داده می‌شود.</p>
+<hr>
+<h3>تنظیم عرض متن و صفحه‌بندی</h3>
+<p>ابزار <code>fmt</code> پاراگراف‌ها را به طول مشخص می‌شکند و <code>fold</code> خطوط را بدون توجه به کلمه قطع می‌کند.<br>
+برای چاپ گزارش روی کاغذ، <code>pr</code> سربرگ و شمارهٔ صفحه اضافه می‌کند:</p>
+<pre class="hljs"><code>pr -h &quot;Sales Report&quot; -l 60 report.txt
+</code></pre>
+<p>گزینهٔ <code>-h</code> عنوان صفحه، <code>-l</code> تعداد خطوط هر صفحه و <code>-d</code> برای حالت «double-space» به کار می‌رود.</p>
+<hr>
+<h3>هم‌تراز کردن داده‌ها با Bash</h3>
+<p>در اسکریپت‌ها گاهی لازم است جدول‌هایی با عرض‌های ثابت ایجاد کنیم.<br>
+می‌توانیم از محاسبات طول رشته استفاده کنیم:</p>
+<pre class="hljs"><code>pad() {
+  local text=&quot;$1&quot;
+  local width=&quot;$2&quot;
+  printf &quot;%-${width}s&quot; &quot;$text&quot;
+}
+
+printf &quot;| %s | %s |\n&quot; &quot;$(pad &quot;Name&quot; 15)&quot; &quot;$(pad &quot;Phone&quot; 12)&quot;
+printf &quot;|-%s-|-%s-|\n&quot; &quot;$(printf '%.0s-' {1..15})&quot; &quot;$(printf '%.0s-' {1..12})&quot;
+</code></pre>
+<p>این الگو زمینهٔ مناسبی برای ساخت جدول‌های سفارشی در اسکریپت‌ها فراهم می‌کند.</p>
+<hr>
+<h3>تولید خروجی برای فرمت‌های دیگر</h3>
+<p>گاهی لازم است خروجی را به فرمت‌هایی نظیر CSV یا HTML تبدیل کنیم.<br>
+با ابزارهایی مانند <code>printf</code>, <code>sed</code> و <code>awk</code> می‌توانیم این کار را انجام دهیم.</p>
+<p><strong>نمونهٔ CSV:</strong></p>
+<pre class="hljs"><code>awk 'BEGIN { OFS=&quot;,&quot; } { print $1, $2, $3 }' data.txt
+</code></pre>
+<p><strong>نمونهٔ HTML:</strong></p>
+<pre class="hljs"><code>awk '
+BEGIN {
+  print &quot;&lt;table&gt;&quot;;
+}
+{
+  printf &quot;  &lt;tr&gt;&lt;td&gt;%s&lt;/td&gt;&lt;td&gt;%s&lt;/td&gt;&lt;/tr&gt;\n&quot;, $1, $2;
+}
+END {
+  print &quot;&lt;/table&gt;&quot;;
+}
+' table.txt
+</code></pre>
+<hr>
+<h3>جمع‌بندی</h3>
+<p>قالب‌بندی مناسب خروجی، خوانایی گزارش‌ها و اسکریپت‌ها را افزایش می‌دهد.<br>
+با ترکیب ابزارهای سنتی یونیکس می‌توان خروجی را به هر شکل دلخواهی درآورد؛ مهم این است که قالب مورد نظر را دقیق مشخص کنیم و سپس با فیلترهای متن مناسب به آن برسیم.</p>
+<p>در فصل بعدی خواهیم دید چگونه خروجی‌های فرمت‌شده را روی کاغذ یا چاپگر ارسال کنیم.</p>
+<hr>
+<h3>تمرین</h3>
+<ol>
+<li>فایلی شامل نام، قیمت و تعداد کالا تهیه کنید و با استفاده از <code>awk</code> گزارشی شبیه مثال این فصل بسازید که ستون جمع کل را هم اضافه کند.</li>
+<li>خروجی فرمان <code>df -h</code> را طوری با <code>column</code> و <code>printf</code> قالب‌بندی کنید که تنها نام mount point و فضای خالی باقی بماند.</li>
+<li>با بهره‌گیری از <code>printf</code> در Bash، یک جدول سه‌ستونی بسازید که سرفصل‌ها را وسط‌چین و داده‌ها را راست‌چین نمایش دهد.</li>
+</ol>
+<hr>
+<h3>مطالعهٔ بیشتر</h3>
+<ul>
+<li>مستند <code>info printf</code> در پروژهٔ GNU جزئیات همهٔ توصیفگرهای قالب را فهرست می‌کند.</li>
+<li>برای ایده‌های بیشتر دربارهٔ گزارش‌سازی با <code>awk</code>، به کتاب «The AWK Programming Language» مراجعه کنید.</li>
+<li>صفحهٔ راهنمای <code>man column</code> و <code>man pr</code> مثال‌های بیشتری دربارهٔ قالب‌بندی خروجی ارائه می‌دهند.</li>
+</ul>
+
+  </main>
+
+  <!-- فوتر مشترک -->
+  <footer class="footer">
+    <div class="container">
+      <p>
+        <img src="/Gitab/icone/copyright.svg" alt="کپی‌رایت" width="14" height="14"
+             style="vertical-align:middle;margin-inline:4px">
+        <span id="y"></span> Gitab — تمامی حقوق محفوظ است.
+      </p>
+    </div>
+  </footer>
+
+  <!-- سال و اسکریپت تغییر تم -->
+  <script>
+  (() => {
+    const root = document.documentElement;
+    const btn = document.getElementById('themeToggle');
+    const KEY = 'gitab-theme';
+
+    function updateTheme(s) {
+      root.setAttribute('data-theme', s);
+      const mode = s;  // فقط `dark` یا `light` خواهد بود
+      root.dataset.colorMode = mode;
+      btn.dataset.icon = mode === 'dark' ? 'moon' : 'sun';
+    }
+
+    // وضعیت تم ذخیره شده از localStorage
+    let saved = localStorage.getItem(KEY) || 'light'; // پیش‌فرض روشن
+    updateTheme(saved);
+
+    // تنظیم مجدد تم هنگام تغییر وضعیت دکمه
+    btn.addEventListener('click', () => {
+      const current = localStorage.getItem(KEY) || 'light';
+      const next = current === 'dark' ? 'light' : 'dark';  // فقط دو حالت: تاریک و روشن
+      localStorage.setItem(KEY, next);
+      updateTheme(next);
+    });
+
+    // هنگام بارگذاری صفحه
+    document.addEventListener('DOMContentLoaded', () => {
+      updateTheme(localStorage.getItem(KEY) || 'light');
+    });
+  })();
+</script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+
+  <script>
+  document.querySelectorAll('pre code').forEach(block => {
+    const btn = document.createElement('button');
+    btn.className = 'copy-btn';
+
+    const icon = document.createElement('img');
+    icon.src = "/Gitab/icone/copy.svg";
+    icon.alt = 'Copy';
+    btn.appendChild(icon);
+
+    block.parentNode.insertBefore(btn, block);
+
+    btn.addEventListener('click', async () => {
+      await navigator.clipboard.writeText(block.textContent);
+      btn.classList.add('copied');
+      setTimeout(() => btn.classList.remove('copied'), 1500);
+    });
+  });
+  </script>
+
+  <script>
+  document.body.dataset.page = window.location.pathname;
+
+  const menuBtn = document.querySelector(".menu-toggle");
+  const nav = document.querySelector(".nav");
+
+  if (menuBtn && nav) {
+    menuBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      nav.classList.toggle("show");
+    });
+
+    document.addEventListener("click", (e) => {
+      const clickedInsideNav = nav.contains(e.target);
+      const clickedMenuButton = menuBtn.contains(e.target);
+      if (!clickedInsideNav && !clickedMenuButton) {
+        nav.classList.remove("show");
+      }
+    });
+  }
+  </script>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+  <script>
+document.getElementById("openDonate").addEventListener("click", () => {
+  document.getElementById("donateModal").style.display = "block";
+});
+document.getElementById("closeDonate").addEventListener("click", () => {
+  document.getElementById("donateModal").style.display = "none";
+});
+document.querySelectorAll(".copy-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    navigator.clipboard.writeText(btn.dataset.copy);
+  
+    setTimeout(() => (btn.textContent = "کپی"), 2000);
+  });
+});
+</script>
+
+</body>
+</html>

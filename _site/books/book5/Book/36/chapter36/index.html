@@ -1,0 +1,471 @@
+
+
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <link rel="icon" type="image/png" href="/Gitab/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>موارد شگفت‌انگیز</title>
+  <meta name="description" content="ترجمه‌های فارسی کتاب‌های فنی — سریع، مینیمال و قابل اتکا.">
+
+  <!-- استایل‌ها -->
+  <link rel="stylesheet" href="/Gitab/styles/main.css">
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+
+  <style>
+  @font-face {
+    font-family: 'Vazir';
+    src: url('/Gitab/fonts/Vazir-FD-WOL.ttf') format('truetype');
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "Lalezar";
+    src: url('fonts/Lalezar.ttf') format('truetype');
+    font-display: swap;
+}
+  body {
+    font-family: 'Vazir', sans-serif;
+  }
+  </style>
+</head>
+
+<body>
+  <!-- هدر مشترک -->
+  <header class="header">
+    <div class="container nav-wrap">
+      <a href="/Gitab/" class="brand">
+        <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="26" height="26">
+        <span>Gitab</span>
+      </a>
+
+       <nav class="nav">
+         <a href="/Gitab/" >خانه</a>
+         <a href="/Gitab/books/list-books" >کتاب‌ها</a>
+         <a href="/Gitab/giter.html" >دوره ها</a>
+          <!-- 
+         <a href="/Gitab/translator.html" >مترجمین</a>
+           -->
+       </nav>
+
+      <div class="nav-actions">
+        <button id="themeToggle" class="icon-btn theme-btn" data-icon="moon" aria-label="تغییر تم">
+          <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن">
+          <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک">
+        </button>
+
+        <a class="icon-btn" href="https://github.com/hheydarian/Gitab" target="_blank" title="GitHub">
+          <img src="/Gitab/icone/github.svg" alt="GitHub">
+        </a>
+
+        <!-- دکمه منو برای موبایل -->
+        <button class="menu-toggle" aria-label="منو">
+          <img src="/Gitab/icone/menu.svg" alt="menu">
+        </button>
+      </div>
+    </div>
+  </header>
+
+  
+  <main class="site-main book-page">
+    <h1>۳۶ – موارد شگفت‌انگیز (Exotica)</h1>
+<p>در این، آخرین فصل سفرمان، به چند مورد پراکنده و متفرقه می‌پردازیم. اگرچه در فصل‌های قبلی مطالب زیادی را پوشش داده‌ایم، هنوز قابلیت‌های بسیاری از <strong>bash</strong> باقی مانده که درباره‌شان صحبت نکرده‌ایم. بیشتر این امکانات نسبتاً ناشناخته‌اند و عمدتاً برای کسانی مفیدند که در حال یکپارچه‌سازی bash در یک توزیع لینوکس هستند. بااین‌حال، چند مورد نیز وجود دارد که اگرچه پرکاربرد نیستند، اما برای برخی مسائل برنامه‌نویسی کمک‌کننده‌اند. در اینجا آن‌ها را بررسی خواهیم کرد.</p>
+<hr>
+<h2>گروه‌بندی دستورات و زیرپوسته‌ها (Group Commands and Subshells)</h2>
+<p>bash اجازه می‌دهد که چندین دستور را کنار هم گروه‌بندی کنیم. این کار به دو روش انجام می‌شود:<br>
+۱) با <strong>group command</strong> یا دستور گروهی<br>
+۲) با <strong>subshell</strong> یا زیرپوسته</p>
+<p>نمونهٔ نحوهٔ نگارش هر دو روش:</p>
+<h3>دستور گروهی</h3>
+<pre class="hljs"><code>{ command1; command2; [command3; ...] }
+</code></pre>
+<h3>زیرپوسته</h3>
+<pre class="hljs"><code>(command1; command2; [command3; ...])
+</code></pre>
+<p>تفاوت این دو در این است که دستور گروهی از آکولاد استفاده می‌کند و زیرپوسته از پرانتز.</p>
+<p>نکتهٔ مهم: به دلیل شیوهٔ پیاده‌سازی گروه‌ها در bash:</p>
+<ul>
+<li>بین آکولاد و اولین دستور باید فاصله باشد.</li>
+<li>آخرین دستور باید پیش از آکولاد پایانی با سمی‌کالن (<code>;</code>) یا یک خط جدید پایان یابد.</li>
+</ul>
+<hr>
+<h2>کاربرد گروه‌ها و زیرپوسته‌ها چیست؟</h2>
+<p>با اینکه تفاوت مهمی میان این دو روش وجود دارد (که بعداً بیان می‌شود)، هردو برای <strong>مدیریت تغییر مسیر ورودی/خروجی (redirection)</strong> استفاده می‌شوند.</p>
+<p>به این بخش از اسکریپت توجه کنید که خروجی چند دستور را به یک فایل هدایت می‌کند:</p>
+<pre class="hljs"><code>ls -l &gt; output.txt
+echo &quot;Listing of foo.txt&quot; &gt;&gt; output.txt
+cat foo.txt &gt;&gt; output.txt
+</code></pre>
+<p>این روش کاملاً ساده است؛ سه دستور که خروجی همگی به فایلی به نام <em>output.txt</em> می‌روند.</p>
+<p>همان کار با دستور گروهی:</p>
+<pre class="hljs"><code>{ ls -l; echo &quot;Listing of foo.txt&quot;; cat foo.txt; } &gt; output.txt
+</code></pre>
+<p>و با زیرپوسته:</p>
+<pre class="hljs"><code>(ls -l; echo &quot;Listing of foo.txt&quot;; cat foo.txt) &gt; output.txt
+</code></pre>
+<p>در این روش‌ها مقداری در نوشتن صرفه‌جویی می‌شود، اما قدرت واقعی آن‌ها در <strong>pipeline</strong>ها مشخص می‌شود:</p>
+<pre class="hljs"><code>{ ls -l; echo &quot;Listing of foo.txt&quot;; cat foo.txt; } | lpr
+</code></pre>
+<p>اینجا خروجی سه دستور را ترکیب کرده‌ایم و به ورودی <code>lpr</code> ارسال کرده‌ایم تا یک گزارش چاپ شود.</p>
+<hr>
+<h2>مثال: استفاده از گروه‌ها همراه با آرایه‌های انجمنی</h2>
+<p>در اسکریپت زیر، که <em>array-2</em> نام دارد، از گروه‌ها و چند تکنیک برنامه‌نویسی همراه با آرایه‌های انجمنی استفاده شده است.</p>
+<p>این اسکریپت هنگام دریافت نام یک پوشه، فهرست فایل‌های داخل آن را همراه با نام مالک فایل و گروه مالک نمایش می‌دهد.<br>
+در پایان نیز تعداد فایل‌های متعلق به هر مالک و هر گروه را چاپ می‌کند.</p>
+<p>خروجی نمونه (خلاصه‌شده) برای پوشهٔ <code>/usr/bin</code>:</p>
+<p><em>(خروجی طولانی است و در متن انگلیسی آمده است، اینجا ترجمه نمی‌شود.)</em></p>
+<hr>
+<h2>کد اسکریپت با شمارهٔ خط</h2>
+<p><em>(کد اسکریپت همان نسخهٔ اصلی است و ترجمه نمی‌شود تا ساختار آن حفظ شود.)</em></p>
+<hr>
+<h2>توضیح مکانیزم اسکریپت</h2>
+<p><strong>خط ۵:</strong><br>
+آرایه‌های انجمنی باید با دستور <code>declare</code> و گزینهٔ <code>-A</code> ایجاد شوند.<br>
+در این اسکریپت ۵ آرایه ساخته می‌شود:</p>
+<ul>
+<li><code>files</code> : نام فایل‌ها، با ایندکس نام فایل</li>
+<li><code>file_group</code> : گروه مالک هر فایل</li>
+<li><code>file_owner</code> : مالک هر فایل</li>
+<li><code>groups</code> : تعداد فایل‌های متعلق به هر گروه</li>
+<li><code>owners</code> : تعداد فایل‌های متعلق به هر مالک</li>
+</ul>
+<hr>
+<p><strong>خطوط ۷ تا ۱۰:</strong><br>
+بررسی می‌شود که آیا پارامتر ورودی یک پوشهٔ معتبر است. اگر نبود، پیام راهنما چاپ شده و اسکریپت با وضعیت ۱ خارج می‌شود.</p>
+<hr>
+<p><strong>خطوط ۱۲ تا ۲۰:</strong><br>
+روی فایل‌های پوشه حلقه اجرا می‌شود. با دستور <code>stat</code> در خطوط ۱۳ و ۱۴ مالک و گروه فایل استخراج می‌شوند و در آرایه‌های مربوط ذخیره می‌گردند. همچنین نام فایل در آرایهٔ <code>files</code> ذخیره می‌شود.</p>
+<hr>
+<p><strong>خطوط ۱۸ و ۱۹:</strong><br>
+تعداد فایل‌های متعلق به هر مالک و گروه یک واحد افزایش می‌یابد.</p>
+<hr>
+<p><strong>خطوط ۲۲ تا ۲۷:</strong><br>
+فهرست فایل‌ها چاپ می‌شود.<br>
+از <code>&quot;${array[@]}&quot;</code> استفاده شده که عناصر آرایه را به‌صورت جداگانه گسترش می‌دهد، حتی اگر نام فایل شامل فاصله باشد.<br>
+کل حلقه در <code>{ ... }</code> قرار گرفته تا خروجی آن بتواند مستقیماً به <code>sort</code> ارسال شود.</p>
+<hr>
+<p><strong>خطوط ۲۹ تا ۴۰:</strong><br>
+دو حلقهٔ دیگر مشابه بالا، اما از <code>&quot;${!array[@]}&quot;</code> استفاده می‌کنند که به‌جای عناصر آرایه، <em>ایندکس‌ها</em> را گسترش می‌دهد.</p>
+<hr>
+<p><strong>جایگزینی فرآیند</strong></p>
+<p>در حالی که این دو (دستورات گروهی و زیربرنامه‌ها) شباهت دارند و هر دو می‌توانند برای ترکیب جریان‌ها جهت هدایت ورودی و خروجی استفاده شوند، تفاوت مهمی بین دستورات گروهی و زیربرنامه‌ها وجود دارد. در حالی که دستورات گروهی تمامی دستورات خود را در شل جاری اجرا می‌کنند، یک زیربرنامه (همانطور که از نامش پیداست) دستورات خود را در یک کپی فرزند از شل جاری اجرا می‌کند. این بدان معنی است که محیط شل کپی می‌شود و به یک نمونه جدید از شل داده می‌شود. وقتی زیربرنامه خاتمه می‌یابد، کپی محیط از دست می‌رود، بنابراین هر تغییراتی که در محیط زیربرنامه (شامل تخصیص متغیرها) انجام شود، نیز از بین می‌رود. بنابراین، در بیشتر موارد، مگر اینکه یک اسکریپت نیاز به زیربرنامه داشته باشد، دستورات گروهی نسبت به زیربرنامه‌ها ارجح هستند. دستورات گروهی هم سریع‌تر هستند و هم به حافظه کمتری نیاز دارند.</p>
+<p>ما یک مثال از مشکل محیط زیربرنامه را در فصل ۲۸ دیدیم، زمانی که متوجه شدیم که دستور <code>read</code> در یک پایپ لاین به طور انتزاعی که انتظار می‌رود، عمل نمی‌کند. برای خلاصه کردن، اگر یک پایپ لاین به این شکل بسازیم:</p>
+<pre class="hljs"><code><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;foo&quot;</span> | <span class="hljs-built_in">read</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-variable">$REPLY</span>
+</code></pre>
+<p>محتوای متغیر <code>REPLY</code> همیشه خالی خواهد بود زیرا دستور <code>read</code> در یک زیربرنامه اجرا می‌شود و کپی متغیر <code>REPLY</code> وقتی زیربرنامه خاتمه می‌یابد، از بین می‌رود.</p>
+<p>زیرا دستورات در پایپ لاین‌ها همیشه در زیربرنامه‌ها اجرا می‌شوند، هر دستوری که متغیرها را تخصیص دهد با این مشکل روبرو خواهد شد. خوشبختانه، شل یک فرم خاص از گسترش به نام جایگزینی فرآیند فراهم می‌کند که می‌توان از آن برای دور زدن این مشکل استفاده کرد.</p>
+<p>جایگزینی فرآیند به دو صورت بیان می‌شود:<br>
+برای فرایندهایی که خروجی استاندارد تولید می‌کنند:</p>
+<pre class="hljs"><code>&lt;(list)
+</code></pre>
+<p>یا برای فرایندهایی که ورودی استاندارد دریافت می‌کنند:</p>
+<pre class="hljs"><code>&gt;(list)
+</code></pre>
+<p>که در آن <code>list</code> یک لیست از دستورات است.</p>
+<p>برای حل مشکل خود با دستور <code>read</code>، می‌توانیم از جایگزینی فرآیند به این شکل استفاده کنیم:</p>
+<pre class="hljs"><code><span class="hljs-built_in">read</span> &lt; &lt;(<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;foo&quot;</span>)
+<span class="hljs-built_in">echo</span> <span class="hljs-variable">$REPLY</span>
+</code></pre>
+<p>جایگزینی فرآیند به ما این امکان را می‌دهد که خروجی یک زیربرنامه را به عنوان یک فایل معمولی برای اهداف هدایت ورودی/خروجی در نظر بگیریم. در واقع، از آنجا که این یک فرم گسترش است، می‌توانیم ارزش واقعی آن را بررسی کنیم:</p>
+<pre class="hljs"><code>[me@linuxbox ~]$ <span class="hljs-built_in">echo</span> &lt;(<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;foo&quot;</span>)
+/dev/fd/63
+</code></pre>
+<p>با استفاده از دستور <code>echo</code> برای مشاهده نتیجه گسترش، می‌بینیم که خروجی زیربرنامه توسط فایلی به نام <code>/dev/fd/63</code> تأمین می‌شود.</p>
+<p>جایگزینی فرآیند اغلب با حلقه‌هایی که شامل دستور <code>read</code> هستند استفاده می‌شود. در اینجا یک مثال از یک حلقه <code>read</code> است که محتوای یک لیست دایرکتوری تولید شده توسط زیربرنامه را پردازش می‌کند:</p>
+<pre class="hljs"><code><span class="hljs-meta">#!/bin/bash</span>
+<span class="hljs-comment"># pro-sub : demo of process substitution</span>
+<span class="hljs-keyword">while</span> <span class="hljs-built_in">read</span> attr links owner group size <span class="hljs-built_in">date</span> <span class="hljs-keyword">time</span> filename; <span class="hljs-keyword">do</span>
+<span class="hljs-built_in">cat</span> &lt;&lt;- <span class="hljs-string">EOF
+Filename:   $filename
+Size:       $size
+Owner:      $owner
+Group:      $group
+Modified:   $date $time
+Links:      $links
+Attributes: $attr
+EOF</span>
+<span class="hljs-keyword">done</span> &lt; &lt;(<span class="hljs-built_in">ls</span> -l | <span class="hljs-built_in">tail</span> -n +2)
+</code></pre>
+<p>این حلقه برای هر خط از لیست دایرکتوری دستور <code>read</code> را اجرا می‌کند. خود لیست دایرکتوری در خط نهایی اسکریپت تولید می‌شود. این خط خروجی جایگزینی فرآیند را به ورودی استاندارد حلقه هدایت می‌کند. دستور <code>tail</code> در پایپ لاین جایگزینی فرآیند برای حذف اولین خط لیست گنجانده شده است که به آن نیازی نیست.</p>
+<p>هنگامی که اسکریپت اجرا می‌شود، خروجی به این شکل خواهد بود:</p>
+<pre class="hljs"><code>[me@linuxbox ~]$ pro_sub | <span class="hljs-built_in">head</span> -n 20
+Filename:   addresses.ldif
+Size:       14540
+Owner:      me
+Group:      me
+Modified:   2009-04-02 11:12
+Links:      1
+Attributes: -rw-r--r--
+Filename:   bin
+Size:       4096
+Owner:      me
+Group:      me
+Modified:   2009-07-10 07:31
+Links:      2
+Attributes: drwxr-xr-x
+Filename:   bookmarks.html
+Size:       394213
+Owner:      me
+Group:      me
+</code></pre>
+<p><strong>گرفتارها</strong></p>
+<p>در فصل ۱۰ دیدیم که چگونه برنامه‌ها می‌توانند به سیگنال‌ها پاسخ دهند. ما می‌توانیم این قابلیت را به اسکریپت‌های خود نیز اضافه کنیم. در حالی که اسکریپت‌هایی که تاکنون نوشته‌ایم به این قابلیت نیاز نداشته‌اند (چرا که زمان اجرای آن‌ها بسیار کوتاه است و فایل‌های موقت ایجاد نمی‌کنند)، اسکریپت‌های بزرگتر و پیچیده‌تر ممکن است از داشتن یک روال برای مدیریت سیگنال‌ها بهره‌مند شوند.</p>
+<p>هنگام طراحی یک اسکریپت بزرگ و پیچیده، مهم است که در نظر بگیریم چه اتفاقی می‌افتد اگر کاربر در حین اجرای اسکریپت، از سیستم خارج شود یا کامپیوتر را خاموش کند. وقتی چنین اتفاقی رخ دهد، سیگنالی به تمامی فرایندهای مربوطه ارسال خواهد شد. در نتیجه، برنامه‌ها می‌توانند اقداماتی برای تضمین خاتمه مناسب و مرتب برنامه انجام دهند. برای مثال، فرض کنید اسکریپتی نوشته‌ایم که در حین اجرای خود یک فایل موقت ایجاد می‌کند. در طراحی خوب، اسکریپت باید فایل را زمانی که کار خود را تمام کرد حذف کند. همچنین، بهتر است که اسکریپت فایل را اگر سیگنالی دریافت کند که نشان دهد برنامه به طور پیش‌هنگام قرار است خاتمه یابد، حذف کند.</p>
+<p>بش ارائه می‌دهد یک مکانیزم به نام &quot;گرفتار&quot; برای این منظور. دستور <code>trap</code> برای پیاده‌سازی این مکانیزم استفاده می‌شود:</p>
+<pre class="hljs"><code><span class="hljs-built_in">trap</span> argument signal [signal...]
+</code></pre>
+<p>که در آن <code>argument</code> یک رشته است که به عنوان دستور خوانده و تفسیر می‌شود و <code>signal</code> مشخص‌کننده سیگنالی است که اجرای دستور تفسیر شده را تحریک می‌کند.</p>
+<p>این یک مثال ساده است:</p>
+<pre class="hljs"><code><span class="hljs-meta">#!/bin/bash</span>
+<span class="hljs-comment"># trap-demo : simple signal handling demo</span>
+<span class="hljs-built_in">trap</span> <span class="hljs-string">&quot;echo &#x27;I am ignoring you.&#x27;&quot;</span> SIGINT SIGTERM
+<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> {1..5}; <span class="hljs-keyword">do</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Iteration <span class="hljs-variable">$i</span> of 5&quot;</span>
+<span class="hljs-built_in">sleep</span> 5
+<span class="hljs-keyword">done</span>
+</code></pre>
+<p>این اسکریپت یک گیرنده تعریف می‌کند که هر بار که سیگنال‌های <code>SIGINT</code> یا <code>SIGTERM</code> دریافت شوند، دستور <code>echo</code> را اجرا می‌کند. زمانی که کاربر تلاش می‌کند اسکریپت را با فشار دادن Ctrl-c متوقف کند، برنامه به این شکل اجرا می‌شود:</p>
+<pre class="hljs"><code>[me@linuxbox ~]$ trap-demo
+Iteration 1 of 5
+Iteration 2 of 5
+I am ignoring you.
+Iteration 3 of 5
+I am ignoring you.
+Iteration 4 of 5
+Iteration 5 of 5
+</code></pre>
+<p>همانطور که می‌بینیم، هر بار که کاربر سعی می‌کند برنامه را قطع کند، پیام &quot;I am ignoring you.&quot; چاپ می‌شود.</p>
+<p>ساختن یک رشته برای ایجاد یک توالی مفید از دستورات ممکن است ناخوشایند باشد، بنابراین معمولاً از یک تابع شل برای دستور استفاده می‌شود. در این مثال، یک تابع شل جداگانه برای هر سیگنال مشخص می‌شود:</p>
+<pre class="hljs"><code><span class="hljs-meta">#!/bin/bash</span>
+<span class="hljs-comment"># trap-demo2 : simple signal handling demo</span>
+<span class="hljs-function"><span class="hljs-title">exit_on_signal_SIGINT</span></span> () {
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Script interrupted.&quot;</span> 2&gt;&amp;1
+<span class="hljs-built_in">exit</span> 0
+}
+<span class="hljs-function"><span class="hljs-title">exit_on_signal_SIGTERM</span></span> () {
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Script terminated.&quot;</span> 2&gt;&amp;1
+<span class="hljs-built_in">exit</span> 0
+}
+<span class="hljs-built_in">trap</span> exit_on_signal_SIGINT SIGINT
+<span class="hljs-built_in">trap</span> exit_on_signal_SIGTERM SIGTERM
+<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> {1..5}; <span class="hljs-keyword">do</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Iteration <span class="hljs-variable">$i</span> of 5&quot;</span>
+<span class="hljs-built_in">sleep</span> 5
+<span class="hljs-keyword">done</span>
+</code></pre>
+<p>این اسکریپت دو دستور <code>trap</code> دارد، یکی برای هر سیگنال. هر دستور <code>trap</code> به نوبه خود یک تابع شل را مشخص می‌کند که هنگام دریافت سیگنال خاص اجرا می‌شود. توجه داشته باشید که دستور <code>exit</code> در هر یک از توابع مدیریت سیگنال گنجانده شده است. بدون دستور <code>exit</code>، اسکریپت بعد از اتمام تابع ادامه خواهد یافت.</p>
+<p>هنگامی که کاربر در حین اجرای این اسکریپت Ctrl-c را فشار می‌دهد، نتیجه به این شکل خواهد بود:</p>
+<pre class="hljs"><code>[me@linuxbox ~]$ trap-demo2
+Iteration 1 of 5
+Iteration 2 of 5
+Script interrupted.
+</code></pre>
+<p><strong>فایل‌های موقت</strong></p>
+<p>یکی از دلایلی که چرا گیرنده‌های سیگنال در اسکریپت‌ها گنجانده می‌شوند، حذف فایل‌های موقتی است که اسکریپت ممکن است برای نگهداری نتایج موقت در حین اجرا ایجاد کند. یک هنر در نامگذاری فایل‌های موقت وجود دارد. به طور سنتی، برنامه‌ها در سیستم‌های مشابه یونیکس فایل‌های موقت خود را در دایرکتوری <code>/tmp</code> ایجاد می‌کنند که دایرکتوری مشترک برای چنین فایل‌هایی است. با این حال، از آنجا که این دایرکتوری مشترک است، این موضوع نگرانی‌های امنیتی ایجاد می‌کند، به ویژه برای برنامه‌هایی که با دسترسی‌های فوق‌العاده اجرا می‌شوند.</p>
+<p>به جز مرحله آشکار تنظیم مجوزهای صحیح برای فایل‌هایی که برای همه کاربران سیستم در دسترس هستند، مهم است که فایل‌های موقت نام‌هایی غیرقابل پیش‌بینی داشته باشند. این از یک حمله به نام &quot;حمله مسابقه فایل‌های موقت&quot; جلوگیری می‌کند. یکی از راه‌ها برای ایجاد یک نام غیرقابل پیش‌بینی (اما همچنان توصیفی) این است که چیزی مانند این انجام دهیم:</p>
+<pre class="hljs"><code>tempfile=/tmp/$(<span class="hljs-built_in">basename</span> <span class="hljs-variable">$0</span>).$$.<span class="hljs-variable">$RANDOM</span>
+</code></pre>
+<p>این نامی متشکل از نام برنامه، به دنبال آن شناسه فرآیند (PID)، و سپس یک عدد تصادفی ایجاد می‌کند. با این حال، توجه داشته باشید که متغیر شل <code>$RANDOM</code> تنها مقداری در محدوده ۱ تا ۳۲۷۶۷ برمی‌گرداند که در شرایط رایانه‌ای دامنه زیادی نیست، بنابراین استفاده از یک نمونه از این متغیر برای غلبه بر یک مهاجم مصمم کافی نیست.</p>
+<p>راه بهتر این است که از برنامه <code>mktemp</code> استفاده کنید (نه با تابع کتابخانه‌ای <code>mktemp</code> اشتباه بگیرید) تا هم نامگذاری و هم ایجاد فایل موقت را انجام دهید. برنامه <code>mktemp</code> یک الگو را به عنوان آرگومان می‌پذیرد که برای ساخت نام فایل استفاده می‌شود. الگو باید شامل یک سری از کاراکترهای &quot;X&quot; باشد که با حروف و اعداد تصادفی معادل جایگزین می‌شود. هرچه تعداد کاراکترهای &quot;X&quot; بیشتر باشد، رشته تصادفی نیز طولانی‌تر خواهد بود. در اینجا یک مثال است:</p>
+<pre class="hljs"><code>tempfile=$(<span class="hljs-built_in">mktemp</span> /tmp/foobar.$$.XXXXXXXXXX)
+</code></pre>
+<p>این یک فایل موقت ایجاد می‌کند و نام آن را به متغیر <code>tempfile</code> اختصاص می‌دهد. کاراکترهای &quot;X&quot; در الگو با حروف و اعداد تصادفی جایگزین می‌شوند به طوری که نام نهایی فایل (که در این مثال همچنین شامل مقدار گسترش یافته پارامتر ویژه <code>$$</code> برای دریافت PID است) ممکن است چیزی مانند این باشد:</p>
+<pre class="hljs"><code>/tmp/foobar.6593.UOZuvM6654
+</code></pre>
+<p>برای اسکریپت‌هایی که توسط کاربران عادی اجرا می‌شوند، ممکن است بهتر باشد از دایرکتوری <code>/tmp</code> استفاده نکنید و یک دایرکتوری برای فایل‌های موقت در دایرکتوری خانه کاربر ایجاد کنید، با خط کدی مانند این:</p>
+<pre class="hljs"><code>[[ -d <span class="hljs-variable">$HOME</span>/tmp ]] || <span class="hljs-built_in">mkdir</span> <span class="hljs-variable">$HOME</span>/tmp
+</code></pre>
+<p><strong>اجرای همزمان</strong></p>
+<p>گاهی اوقات ممکن است بخواهیم چندین کار را به طور همزمان انجام دهیم. ما قبلاً دیدیم که تمام سیستم‌عامل‌های مدرن حداقل چندوظیفه‌ای هستند و در بسیاری از موارد چندکاربره نیز می‌باشند. اسکریپت‌ها می‌توانند به گونه‌ای نوشته شوند که به صورت چندوظیفه‌ای عمل کنند.</p>
+<p>معمولاً این به این صورت است که یک اسکریپت پدر اجرا می‌شود که به نوبه خود یک یا چند اسکریپت فرزند را راه‌اندازی می‌کند که وظیفه اضافی را انجام می‌دهند در حالی که اسکریپت پدر به اجرای خود ادامه می‌دهد. با این حال، زمانی که یک سری اسکریپت‌ها به این صورت اجرا می‌شوند، ممکن است مشکلاتی در هماهنگی پدر و فرزند به وجود آید. به این معنی که اگر اسکریپت پدر یا فرزند به دیگری وابسته باشد، ممکن است یکی از اسکریپت‌ها مجبور باشد منتظر بماند تا دیگری کار خود را تمام کند.</p>
+<p>بش یک دستور داخلی به نام <code>wait</code> دارد که به مدیریت اجرای همزمان کمک می‌کند. دستور <code>wait</code> باعث می‌شود اسکریپت پدر تا زمانی که یک فرآیند مشخص (یعنی اسکریپت فرزند) تمام شود، متوقف شود.</p>
+<p>در اینجا ابتدا نحوه عملکرد دستور <code>wait</code> را نشان می‌دهیم. برای این کار به دو اسکریپت نیاز داریم: یک اسکریپت پدر:</p>
+<pre class="hljs"><code><span class="hljs-meta">#!/bin/bash</span>
+<span class="hljs-comment"># async-parent : Asynchronous execution demo (parent)</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Parent: starting...&quot;</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Parent: launching child script...&quot;</span>
+async-child &amp;
+pid=$!
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Parent: child (PID= <span class="hljs-variable">$pid</span>) launched.&quot;</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Parent: continuing...&quot;</span>
+<span class="hljs-built_in">sleep</span> 2
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Parent: pausing to wait for child to finish...&quot;</span>
+<span class="hljs-built_in">wait</span> <span class="hljs-variable">$pid</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Parent: child is finished. Continuing...&quot;</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Parent: parent is done. Exiting.&quot;</span>
+</code></pre>
+<p>و یک اسکریپت فرزند:</p>
+<pre class="hljs"><code><span class="hljs-meta">#!/bin/bash</span>
+<span class="hljs-comment"># async-child : Asynchronous execution demo (child)</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Child: child is running...&quot;</span>
+<span class="hljs-built_in">sleep</span> 5
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Child: child is done. Exiting.&quot;</span>
+</code></pre>
+<p>در این مثال، اسکریپت فرزند بسیار ساده است. عمل اصلی در اسکریپت پدر انجام می‌شود. در اسکریپت پدر، اسکریپت فرزند راه‌اندازی می‌شود و در پس‌زمینه قرار می‌گیرد. شناسه فرآیند (PID) اسکریپت فرزند با مقدار پارامتر شل <code>$!</code> که همیشه شناسه آخرین فرآیند پس‌زمینه را نشان می‌دهد، ذخیره می‌شود.</p>
+<p>اسکریپت پدر به اجرا ادامه می‌دهد و سپس دستور <code>wait</code> را با PID فرآیند فرزند اجرا می‌کند. این باعث می‌شود که اسکریپت پدر تا زمانی که اسکریپت فرزند تمام شود، متوقف شود و پس از آن اسکریپت پدر به اتمام می‌رسد.</p>
+<p>هنگام اجرای اسکریپت‌های پدر و فرزند، خروجی به صورت زیر خواهد بود:</p>
+<pre class="hljs"><code>[me@linuxbox ~]$ async-parent
+Parent: starting...
+Parent: launching child script...
+Parent: child (PID= 6741) launched.
+Parent: continuing...
+Child: child is running...
+Parent: pausing to <span class="hljs-built_in">wait</span> <span class="hljs-keyword">for</span> child to finish...
+Child: child is <span class="hljs-keyword">done</span>. Exiting.
+Parent: child is finished. Continuing...
+Parent: parent is <span class="hljs-keyword">done</span>. Exiting.
+</code></pre>
+<p><strong>لوله‌های نام‌دار</strong></p>
+<p>در اکثر سیستم‌های شبیه یونیکس، امکان ایجاد نوع خاصی از فایل به نام لوله‌های نام‌دار (named pipes) وجود دارد. لوله‌های نام‌دار برای ایجاد ارتباط بین دو فرآیند استفاده می‌شوند و مانند سایر انواع فایل‌ها عمل می‌کنند. آن‌ها خیلی رایج نیستند اما دانستن آن‌ها مفید است.</p>
+<p>یک معماری برنامه‌نویسی معمول به نام &quot;کلاینت-سرور&quot; وجود دارد که می‌تواند از روش‌های ارتباطی مانند لوله‌های نام‌دار، و همچنین سایر روش‌های ارتباط بین فرآیندها مانند ارتباطات شبکه‌ای استفاده کند.</p>
+<p>رایج‌ترین نوع سیستم کلاینت-سرور، البته، یک مرورگر وب است که با یک سرور وب ارتباط برقرار می‌کند. مرورگر وب به عنوان کلاینت عمل می‌کند و درخواست‌هایی به سرور ارسال می‌کند و سرور در پاسخ به مرورگر، صفحات وب را ارسال می‌کند.</p>
+<p>لوله‌های نام‌دار مانند فایل‌ها عمل می‌کنند، اما در واقع بافرهای FIFO (اولین ورودی، اولین خروجی) را تشکیل می‌دهند. همانطور که در لوله‌های معمولی (بدون نام) داده از یک طرف وارد می‌شود و از طرف دیگر خارج می‌شود، در لوله‌های نام‌دار نیز این عمل مشابه است. با لوله‌های نام‌دار، می‌توان این‌طور تنظیم کرد:</p>
+<pre class="hljs"><code>process1 &gt; named_pipe
+</code></pre>
+<p>و</p>
+<pre class="hljs"><code>process2 &lt; named_pipe
+</code></pre>
+<p>و این عمل به گونه‌ای رفتار می‌کند که گویی:</p>
+<pre class="hljs"><code>process1 | process2
+</code></pre>
+<p><strong>راه‌اندازی لوله نام‌دار</strong></p>
+<p>ابتدا باید یک لوله نام‌دار ایجاد کنیم. این کار با استفاده از دستور <code>mkfifo</code> انجام می‌شود:</p>
+<pre class="hljs"><code>[me@linuxbox ~]$ <span class="hljs-built_in">mkfifo</span> pipe1
+[me@linuxbox ~]$ <span class="hljs-built_in">ls</span> -l pipe1
+prw-r--r-- 1 me me 0 2009-07-17 06:41 pipe1
+</code></pre>
+<p>در اینجا با استفاده از دستور <code>mkfifo</code> یک لوله نام‌دار به نام <code>pipe1</code> ایجاد کرده‌ایم. با استفاده از دستور <code>ls</code> فایل را بررسی کرده و می‌بینیم که اولین حرف در بخش ویژگی‌ها &quot;p&quot; است که نشان می‌دهد این یک لوله نام‌دار است.</p>
+<p><strong>استفاده از لوله‌های نام‌دار</strong></p>
+<p>برای نشان دادن نحوه کارکرد لوله نام‌دار، به دو پنجره ترمینال (یا به طور متناوب، دو کنسول مجازی) نیاز داریم. در ترمینال اول، یک دستور ساده وارد کرده و خروجی آن را به لوله نام‌دار هدایت می‌کنیم:</p>
+<pre class="hljs"><code>[me@linuxbox ~]$ <span class="hljs-built_in">ls</span> -l &gt; pipe1
+</code></pre>
+<p>پس از فشردن کلید Enter، دستور به نظر می‌رسد که متوقف شده است. این به این دلیل است که هنوز هیچ چیزی از طرف دیگر لوله داده‌ها را دریافت نکرده است. هنگامی که این اتفاق می‌افتد، گفته می‌شود که لوله مسدود شده است. این وضعیت زمانی برطرف می‌شود که یک فرآیند به طرف دیگر متصل شود و شروع به خواندن داده‌ها از لوله کند. در پنجره ترمینال دوم، این دستور را وارد می‌کنیم:</p>
+<pre class="hljs"><code>[me@linuxbox ~]$ <span class="hljs-built_in">cat</span> &lt; pipe1
+</code></pre>
+<p>و فهرست دایرکتوری تولید شده از ترمینال اول به عنوان خروجی دستور <code>cat</code> در ترمینال دوم ظاهر می‌شود. دستور <code>ls</code> در ترمینال اول زمانی که دیگر مسدود نباشد، به پایان می‌رسد.</p>
+<p><strong>جمع‌بندی</strong></p>
+<p>خب، سفر ما تمام شد. تنها چیزی که باقی‌مانده این است که تمرین کنیم، تمرین کنیم، تمرین کنیم. اگرچه ما در این سفر به مطالب زیادی پرداخته‌ایم، اما فقط سطح دستورات خط فرمان را خراشیده‌ایم. هنوز هزاران برنامه خط فرمان وجود دارند که می‌توانید آن‌ها را کشف کنید و از آن‌ها لذت ببرید. کافی است در دایرکتوری <code>/usr/bin</code> کاوش کنید و خواهید دید!</p>
+<p><strong>مطالعه بیشتر</strong></p>
+<ul>
+<li>بخش &quot;دستورات مرکب&quot; در صفحه راهنمای بش (bash man page) شامل توضیح کامل در مورد نوتیشن‌های دستورات گروهی و زیربرنامه است.</li>
+<li>بخش EXPANSION در صفحه راهنمای بش (bash man page) یک زیرمجموعه از جایگزینی فرآیند دارد.</li>
+<li>راهنمای پیشرفته اسکریپت‌نویسی بش نیز بحثی در مورد جایگزینی فرآیند دارد: <a href="http://tldp.org/LDP/abs/html/process-sub.html">لینک</a></li>
+<li>مجله لینوکس دو مقاله خوب در مورد لوله‌های نام‌دار دارد. اولین مقاله از سپتامبر ۱۹۹۷: <a href="http://www.linuxjournal.com/article/2156">لینک</a></li>
+<li>و دومی از مارس ۲۰۰۹: <a href="http://www.linuxjournal.com/content/using-named-pipes-fifos-bash">لینک</a></li>
+</ul>
+
+  </main>
+
+  <!-- فوتر مشترک -->
+  <footer class="footer">
+    <div class="container">
+      <p>
+        <img src="/Gitab/icone/copyright.svg" alt="کپی‌رایت" width="14" height="14"
+             style="vertical-align:middle;margin-inline:4px">
+        <span id="y"></span> Gitab — تمامی حقوق محفوظ است.
+      </p>
+    </div>
+  </footer>
+
+  <!-- سال و اسکریپت تغییر تم -->
+  <script>
+  (() => {
+    const root = document.documentElement;
+    const btn = document.getElementById('themeToggle');
+    const KEY = 'gitab-theme';
+
+    function updateTheme(s) {
+      root.setAttribute('data-theme', s);
+      const mode = s;  // فقط `dark` یا `light` خواهد بود
+      root.dataset.colorMode = mode;
+      btn.dataset.icon = mode === 'dark' ? 'moon' : 'sun';
+    }
+
+    // وضعیت تم ذخیره شده از localStorage
+    let saved = localStorage.getItem(KEY) || 'light'; // پیش‌فرض روشن
+    updateTheme(saved);
+
+    // تنظیم مجدد تم هنگام تغییر وضعیت دکمه
+    btn.addEventListener('click', () => {
+      const current = localStorage.getItem(KEY) || 'light';
+      const next = current === 'dark' ? 'light' : 'dark';  // فقط دو حالت: تاریک و روشن
+      localStorage.setItem(KEY, next);
+      updateTheme(next);
+    });
+
+    // هنگام بارگذاری صفحه
+    document.addEventListener('DOMContentLoaded', () => {
+      updateTheme(localStorage.getItem(KEY) || 'light');
+    });
+  })();
+</script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+
+  <script>
+  document.querySelectorAll('pre code').forEach(block => {
+    const btn = document.createElement('button');
+    btn.className = 'copy-btn';
+
+    const icon = document.createElement('img');
+    icon.src = "/Gitab/icone/copy.svg";
+    icon.alt = 'Copy';
+    btn.appendChild(icon);
+
+    block.parentNode.insertBefore(btn, block);
+
+    btn.addEventListener('click', async () => {
+      await navigator.clipboard.writeText(block.textContent);
+      btn.classList.add('copied');
+      setTimeout(() => btn.classList.remove('copied'), 1500);
+    });
+  });
+  </script>
+
+  <script>
+  document.body.dataset.page = window.location.pathname;
+
+  const menuBtn = document.querySelector(".menu-toggle");
+  const nav = document.querySelector(".nav");
+
+  if (menuBtn && nav) {
+    menuBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      nav.classList.toggle("show");
+    });
+
+    document.addEventListener("click", (e) => {
+      const clickedInsideNav = nav.contains(e.target);
+      const clickedMenuButton = menuBtn.contains(e.target);
+      if (!clickedInsideNav && !clickedMenuButton) {
+        nav.classList.remove("show");
+      }
+    });
+  }
+  </script>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+  <script>
+document.getElementById("openDonate").addEventListener("click", () => {
+  document.getElementById("donateModal").style.display = "block";
+});
+document.getElementById("closeDonate").addEventListener("click", () => {
+  document.getElementById("donateModal").style.display = "none";
+});
+document.querySelectorAll(".copy-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    navigator.clipboard.writeText(btn.dataset.copy);
+  
+    setTimeout(() => (btn.textContent = "کپی"), 2000);
+  });
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,730 @@
+
+
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <link rel="icon" type="image/png" href="/Gitab/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>پارامترهای موضعی</title>
+  <meta name="description" content="ترجمه‌های فارسی کتاب‌های فنی — سریع، مینیمال و قابل اتکا.">
+
+  <!-- استایل‌ها -->
+  <link rel="stylesheet" href="/Gitab/styles/main.css">
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+
+  <style>
+  @font-face {
+    font-family: 'Vazir';
+    src: url('/Gitab/fonts/Vazir-FD-WOL.ttf') format('truetype');
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "Lalezar";
+    src: url('fonts/Lalezar.ttf') format('truetype');
+    font-display: swap;
+}
+  body {
+    font-family: 'Vazir', sans-serif;
+  }
+  </style>
+</head>
+
+<body>
+  <!-- هدر مشترک -->
+  <header class="header">
+    <div class="container nav-wrap">
+      <a href="/Gitab/" class="brand">
+        <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="26" height="26">
+        <span>Gitab</span>
+      </a>
+
+       <nav class="nav">
+         <a href="/Gitab/" >خانه</a>
+         <a href="/Gitab/books/list-books" >کتاب‌ها</a>
+         <a href="/Gitab/giter.html" >دوره ها</a>
+          <!-- 
+         <a href="/Gitab/translator.html" >مترجمین</a>
+           -->
+       </nav>
+
+      <div class="nav-actions">
+        <button id="themeToggle" class="icon-btn theme-btn" data-icon="moon" aria-label="تغییر تم">
+          <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن">
+          <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک">
+        </button>
+
+        <a class="icon-btn" href="https://github.com/hheydarian/Gitab" target="_blank" title="GitHub">
+          <img src="/Gitab/icone/github.svg" alt="GitHub">
+        </a>
+
+        <!-- دکمه منو برای موبایل -->
+        <button class="menu-toggle" aria-label="منو">
+          <img src="/Gitab/icone/menu.svg" alt="menu">
+        </button>
+      </div>
+    </div>
+  </header>
+
+  
+  <main class="site-main book-page">
+    <h1>۳۲ – پارامترهای موضعی (Positional Parameters)</h1>
+<p>یکی از قابلیت‌هایی که تاکنون در برنامه‌هایمان وجود نداشت، توانایی دریافت و پردازش گزینه‌ها و آرگومان‌های خط فرمان بود. در این فصل، ویژگی‌های شِل را بررسی می‌کنیم که به برنامه‌های ما اجازه می‌دهد به محتوای خط فرمان دسترسی پیدا کنند.</p>
+<hr>
+<h2><strong>دسترسی به خط فرمان</strong></h2>
+<p>شِل مجموعه‌ای از متغیرها به نام <strong>پارامترهای موضعی</strong> در اختیار قرار می‌دهد که شامل تک‌تک کلمات موجود در خط فرمان هستند. نام این متغیرها از <strong>۰ تا ۹</strong> است. می‌توان آن‌ها را به این شکل نشان داد:</p>
+<pre class="hljs"><code><span class="hljs-meta">#!/bin/bash</span>
+<span class="hljs-comment"># posit-param: script to view command line parameters</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;
+\$0 = <span class="hljs-variable">$0</span> 
+\$1 = <span class="hljs-variable">$1</span> 
+\$2 = <span class="hljs-variable">$2</span> 
+\$3 = <span class="hljs-variable">$3</span> 
+\$4 = <span class="hljs-variable">$4</span> 
+\$5 = <span class="hljs-variable">$5</span> 
+\$6 = <span class="hljs-variable">$6</span> 
+\$7 = <span class="hljs-variable">$7</span> 
+\$8 = <span class="hljs-variable">$8</span> 
+\$9 = <span class="hljs-variable">$9</span> 
+&quot;</span>
+</code></pre>
+<p>این یک اسکریپت بسیار ساده است که مقدار متغیرهای <code>$0</code> تا <code>$9</code> را نمایش می‌دهد.</p>
+<p>وقتی بدون هیچ آرگومان خط فرمانی اجرا شود:</p>
+<pre class="hljs"><code>[me@linuxbox ~]$ posit-param
+$0 = /home/me/bin/posit-param
+$1 =
+$2 =
+$3 =
+$4 =
+$5 =
+$6 =
+$7 =
+$8 =
+$9 =
+</code></pre>
+<p>حتی زمانی که هیچ آرگومانی ارائه نشود، <code>$0</code> همیشه شامل اولین آیتم ظاهرشده در خط فرمان است، یعنی مسیر برنامه‌ای که در حال اجرا است.</p>
+<p>وقتی آرگومان‌ها ارائه شوند، نتیجه را می‌بینیم:</p>
+<pre class="hljs"><code>[me@linuxbox ~]$ posit-param a b c d
+$0 = /home/me/bin/posit-param
+$1 = a
+$2 = b
+$3 = c
+$4 = d
+$5 =
+$6 =
+$7 =
+$8 =
+$9 =
+</code></pre>
+<p><strong>نکته:</strong><br>
+در واقع می‌توانید به بیش از ۹ پارامتر نیز با استفاده از <strong>گسترش پارامترها (parameter expansion)</strong> دسترسی داشته باشید. برای مشخص کردن عددی بزرگ‌تر از ۹، باید آن را داخل آکولاد قرار دهید.<br>
+مثلاً: <code>${10}</code>, <code>${55}</code>, <code>${211}</code> و غیره.</p>
+<hr>
+<h2><strong>تعیین تعداد آرگومان‌ها</strong></h2>
+<p>شِل همچنین متغیری به نام <code>$#</code> فراهم می‌کند که تعداد آرگومان‌های موجود در خط فرمان را برمی‌گرداند:</p>
+<pre class="hljs"><code><span class="hljs-meta">#!/bin/bash</span>
+<span class="hljs-comment"># posit-param: script to view command line parameters</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;
+Number of arguments: <span class="hljs-variable">$#</span>
+\$0 = <span class="hljs-variable">$0</span>
+\$1 = <span class="hljs-variable">$1</span>
+\$2 = <span class="hljs-variable">$2</span>
+\$3 = <span class="hljs-variable">$3</span>
+\$4 = <span class="hljs-variable">$4</span>
+\$5 = <span class="hljs-variable">$5</span>
+\$6 = <span class="hljs-variable">$6</span>
+\$7 = <span class="hljs-variable">$7</span>
+\$8 = <span class="hljs-variable">$8</span>
+\$9 = <span class="hljs-variable">$9</span>
+&quot;</span>
+</code></pre>
+<p>نتیجه:</p>
+<pre class="hljs"><code>[me@linuxbox ~]$ posit-param a b c d
+Number of arguments: 4
+$0 = /home/me/bin/posit-param
+$1 = a
+$2 = b
+$3 = c
+$4 = d
+$5 =
+$6 =
+$7 =
+$8 =
+$9 =
+</code></pre>
+<hr>
+<h2><strong>shift – دسترسی به تعداد زیادی آرگومان</strong></h2>
+<p>اما چه اتفاقی می‌افتد وقتی تعداد زیادی آرگومان به برنامه بدهیم؟ مثلاً:</p>
+<pre class="hljs"><code>[me@linuxbox ~]$ posit-param *
+Number of arguments: 82
+$0 = /home/me/bin/posit-param
+$1 = addresses.ldif
+$2 = bin
+$3 = bookmarks.html
+$4 = debian-500-i386-netinst.iso
+$5 = debian-500-i386-netinst.jigdo
+$6 = debian-500-i386-netinst.template
+$7 = debian-cd_info.tar.gz
+$8 = Desktop
+$9 = dirlist-bin.txt
+</code></pre>
+<p>در این سیستم نمونه، wildcard یعنی <code>*</code> به ۸۲ آرگومان توسعه می‌یابد. چطور می‌توانیم این تعداد را پردازش کنیم؟</p>
+<p>شِل روشی (البته کمی دست‌وپاگیر) برای انجام این کار ارائه می‌دهد. دستور <strong>shift</strong> باعث می‌شود پارامترها هر بار که این دستور اجرا می‌شود، “یک خانه به پایین منتقل شوند”.</p>
+<p>در واقع، با استفاده از <strong>shift</strong> حتی می‌توان تنها با یک پارامتر (به‌جز <code>$0</code> که هرگز تغییر نمی‌کند) همه آرگومان‌ها را پردازش کرد:</p>
+<pre class="hljs"><code><span class="hljs-meta">#!/bin/bash</span>
+<span class="hljs-comment"># posit-param2: script to display all arguments</span>
+count=1
+<span class="hljs-keyword">while</span> [[ <span class="hljs-variable">$#</span> -gt 0 ]]; <span class="hljs-keyword">do</span>
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Argument <span class="hljs-variable">$count</span> = <span class="hljs-variable">$1</span>&quot;</span>
+    count=$((count + <span class="hljs-number">1</span>))
+    <span class="hljs-built_in">shift</span>
+<span class="hljs-keyword">done</span>
+</code></pre>
+<p>هر بار که <code>shift</code> اجرا می‌شود:</p>
+<ul>
+<li>مقدار <code>$2</code> به <code>$1</code> منتقل می‌شود</li>
+<li>مقدار <code>$3</code> به <code>$2</code> منتقل می‌شود</li>
+<li>همین‌طور تا انتها</li>
+<li>و مقدار <code>$#</code> نیز یک واحد کاهش می‌یابد</li>
+</ul>
+<p>در برنامهٔ <strong>posit-param2</strong> یک حلقه ایجاد کرده‌ایم که تعداد آرگومان‌های باقی‌مانده را بررسی می‌کند و تا وقتی حداقل یک آرگومان وجود دارد ادامه می‌دهد.<br>
+در هر تکرار:</p>
+<ol>
+<li>آرگومان فعلی نمایش داده می‌شود</li>
+<li>شمارنده یک واحد افزایش می‌یابد</li>
+<li>با <code>shift</code> مقدار بعدی جایگزین <code>$1</code> می‌شود</li>
+</ol>
+<p>نمونهٔ اجرا:</p>
+<pre class="hljs"><code>[me@linuxbox ~]$ posit-param2 a b c d
+Argument 1 = a
+Argument 2 = b
+Argument 3 = c
+Argument 4 = d
+</code></pre>
+<hr>
+<h2><strong>کاربردهای ساده</strong></h2>
+<p>حتی بدون shift نیز می‌توان برنامه‌های کاربردی با استفاده از پارامترهای موضعی نوشت. برای مثال، یک برنامهٔ سادهٔ نمایش اطلاعات فایل:</p>
+<pre class="hljs"><code><span class="hljs-meta">#!/bin/bash</span>
+<span class="hljs-comment"># file_info: simple file information program</span>
+PROGNAME=$(<span class="hljs-built_in">basename</span> <span class="hljs-variable">$0</span>)
+
+<span class="hljs-keyword">if</span> [[ -e <span class="hljs-variable">$1</span> ]]; <span class="hljs-keyword">then</span>
+    <span class="hljs-built_in">echo</span> -e <span class="hljs-string">&quot;\nFile Type:&quot;</span>
+    file <span class="hljs-variable">$1</span>
+    <span class="hljs-built_in">echo</span> -e <span class="hljs-string">&quot;\nFile Status:&quot;</span>
+    <span class="hljs-built_in">stat</span> <span class="hljs-variable">$1</span>
+<span class="hljs-keyword">else</span>
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">$PROGNAME</span>: usage: <span class="hljs-variable">$PROGNAME</span> file&quot;</span> &gt;&amp;2
+    <span class="hljs-built_in">exit</span> 1
+<span class="hljs-keyword">fi</span>
+</code></pre>
+<p>این برنامه نوع فایل (با دستور <code>file</code>) و وضعیت فایل (با دستور <code>stat</code>) را برای فایلی که مشخص شده، نمایش می‌دهد.</p>
+<p>یک ویژگی جالب در این برنامه استفاده از متغیر <strong>PROGNAME</strong> است. این متغیر نتیجهٔ دستور:</p>
+<pre class="hljs"><code>basename $0
+</code></pre>
+<p>را دریافت می‌کند. دستور <code>basename</code> بخش ابتدایی مسیر را حذف می‌کند و فقط نام اصلی فایل را باقی می‌گذارد.<br>
+در این مثال، نام برنامهٔ در حال اجرا بدون مسیر جلوتر به دست می‌آید. این برای ساخت پیام‌هایی مانند پیام usage بسیار مفید است، زیرا اگر اسکریپت تغییر نام داده شود، پیام به‌طور خودکار با نام جدید تطبیق پیدا می‌کند.</p>
+<hr>
+<h2><strong>استفاده از پارامترهای موضعی در توابع شِل</strong></h2>
+<p>پارامترهای موضعی فقط برای اسکریپت‌ها نیستند؛ می‌توان از آن‌ها برای ارسال آرگومان به توابع شِل نیز استفاده کرد.</p>
+<p>برای نشان دادن این موضوع، نسخهٔ تابعیِ اسکریپت file_info را می‌نویسیم:</p>
+<pre class="hljs"><code><span class="hljs-function"><span class="hljs-title">file_info</span></span> () {
+    <span class="hljs-comment"># file_info: function to display file information</span>
+    <span class="hljs-keyword">if</span> [[ -e <span class="hljs-variable">$1</span> ]]; <span class="hljs-keyword">then</span>
+        <span class="hljs-built_in">echo</span> -e <span class="hljs-string">&quot;\nFile Type:&quot;</span>
+        file <span class="hljs-variable">$1</span>
+        <span class="hljs-built_in">echo</span> -e <span class="hljs-string">&quot;\nFile Status:&quot;</span>
+        <span class="hljs-built_in">stat</span> <span class="hljs-variable">$1</span>
+    <span class="hljs-keyword">else</span>
+        <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">$FUNCNAME</span>: usage: <span class="hljs-variable">$FUNCNAME</span> file&quot;</span> &gt;&amp;2
+        <span class="hljs-built_in">return</span> 1
+    <span class="hljs-keyword">fi</span>
+}
+</code></pre>
+<p>حال اگر اسکریپتی که این تابع را دارد، تابع <code>file_info</code> را با یک نام فایل فراخوانی کند، آرگومان به تابع ارسال می‌شود.</p>
+<p>با این قابلیت، می‌توان توابع شِل بسیار مفیدی نوشت که نه‌تنها در اسکریپت‌ها بلکه داخل فایل <code>.bashrc</code> نیز قابل‌استفاده‌اند.</p>
+<p>دقت کنید که در نسخهٔ تابع، متغیر <strong>PROGNAME</strong> با متغیر شِل به نام <strong>FUNCNAME</strong> جایگزین شده است. شِل به‌طور خودکار این متغیر را به نام تابع در حال اجرا مقداردهی می‌کند.</p>
+<p>به یاد داشته باشید:</p>
+<ul>
+<li><code>$0</code> همیشه شامل نام برنامهٔ اصلی (آیتم اول خط فرمان) است</li>
+<li>و <strong>نام تابع را در خود نگه نمی‌دارد</strong>؛ برخلاف چیزی که شاید انتظار داشته باشیم</li>
+</ul>
+<hr>
+<h1><strong>مدیریت گروهی پارامترهای موضعی (Handling Positional Parameters En Masse)</strong></h1>
+<p>گاهی لازم است همهٔ پارامترهای موضعی را به‌صورت یک مجموعه مدیریت کنیم.<br>
+برای مثال ممکن است بخواهیم یک <strong>wrapper</strong> برای یک برنامهٔ دیگر بنویسیم؛ یعنی یک اسکریپت یا تابع شِل که اجرای برنامهٔ دیگری را ساده‌تر کند. این wrapper مجموعه‌ای از گزینه‌های پیچیدهٔ خط فرمان را فراهم می‌کند و سپس آرگومان‌ها را به برنامهٔ سطح پایین‌تر ارسال می‌کند.</p>
+<p>شِل برای این کار دو پارامتر ویژه ارائه می‌دهد. هر دو به <strong>فهرست کامل پارامترهای موضعی</strong> توسعه پیدا می‌کنند، اما تفاوت‌های ظریفی دارند:</p>
+<hr>
+<h2><strong>جدول 32-1: پارامترهای ویژهٔ <code>*</code> و <code>@</code></strong></h2>
+<table>
+<thead>
+<tr>
+<th>پارامتر</th>
+<th>توضیح</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>$*</code></td>
+<td>به فهرست پارامترهای موضعی (از شماره ۱ به بعد) گسترش می‌یابد. وقتی داخل دابل‌کوتیشن قرار گیرد، به یک <em>رشتهٔ واحد</em> تبدیل می‌شود که در آن تمام پارامترها با کاراکتر اول متغیر IFS جدا می‌شوند (پیش‌فرض: فاصله).</td>
+</tr>
+<tr>
+<td><code>$@</code></td>
+<td>به فهرست پارامترهای موضعی گسترش می‌یابد. وقتی داخل دابل‌کوتیشن قرار گیرد، <strong>هر پارامتر جداگانه</strong> در یک رشتهٔ دابل‌کوتیشن‌شده قرار می‌گیرد.</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2><em><em>نمونهٔ اسکریپت برای نمایش تفاوت $</em> و $@</em>*</h2>
+<pre class="hljs"><code><span class="hljs-meta">#!/bin/bash</span>
+<span class="hljs-comment"># posit-params3 : script to demonstrate $* and $@</span>
+
+<span class="hljs-function"><span class="hljs-title">print_params</span></span> () {
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;\$1 = <span class="hljs-variable">$1</span>&quot;</span>
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;\$2 = <span class="hljs-variable">$2</span>&quot;</span>
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;\$3 = <span class="hljs-variable">$3</span>&quot;</span>
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;\$4 = <span class="hljs-variable">$4</span>&quot;</span>
+}
+
+<span class="hljs-function"><span class="hljs-title">pass_params</span></span> () {
+    <span class="hljs-built_in">echo</span> -e <span class="hljs-string">&quot;\n&quot;</span> <span class="hljs-string">&#x27;$* :&#x27;</span>;    print_params $*
+    <span class="hljs-built_in">echo</span> -e <span class="hljs-string">&quot;\n&quot;</span> <span class="hljs-string">&#x27;&quot;$*&quot; :&#x27;</span>;  print_params <span class="hljs-string">&quot;$*&quot;</span>
+    <span class="hljs-built_in">echo</span> -e <span class="hljs-string">&quot;\n&quot;</span> <span class="hljs-string">&#x27;$@ :&#x27;</span>;    print_params <span class="hljs-variable">$@</span>
+    <span class="hljs-built_in">echo</span> -e <span class="hljs-string">&quot;\n&quot;</span> <span class="hljs-string">&#x27;&quot;$@&quot; :&#x27;</span>;  print_params <span class="hljs-string">&quot;<span class="hljs-variable">$@</span>&quot;</span>
+}
+
+pass_params <span class="hljs-string">&quot;word&quot;</span> <span class="hljs-string">&quot;words with spaces&quot;</span>
+</code></pre>
+<p>در این برنامهٔ پیچیده، دو آرگومان ساخته می‌شود:</p>
+<ul>
+<li><code>&quot;word&quot;</code></li>
+<li><code>&quot;words with spaces&quot;</code></li>
+</ul>
+<p>و به تابع <code>pass_params</code> ارسال می‌شوند، که خود آن‌ها را با چهار روش مختلف به تابع <code>print_params</code> می‌دهد.</p>
+<p>نتیجهٔ اجرای اسکریپت:</p>
+<pre class="hljs"><code>$* :
+$1 = word
+$2 = words
+$3 = with
+$4 = spaces
+
+&quot;$*&quot; :
+$1 = word words with spaces
+$2 =
+$3 =
+$4 =
+
+$@ :
+$1 = word
+$2 = words
+$3 = with
+$4 = spaces
+
+&quot;$@&quot; :
+$1 = word
+$2 = words with spaces
+$3 =
+$4 =
+</code></pre>
+<h3><strong>تحلیل تفاوت‌ها</strong></h3>
+<ul>
+<li>
+<p><code>$*</code> و <code>$@</code> هر دو نتیجه‌ای چهار کلمه‌ای می‌دهند:</p>
+<pre class="hljs"><code>word words with spaces
+</code></pre>
+</li>
+<li>
+<p><code>&quot;${*}&quot;</code> نتیجه‌ای تک‌کلمه‌ای می‌دهد:</p>
+<pre class="hljs"><code>&quot;word words with spaces&quot;
+</code></pre>
+</li>
+<li>
+<p><code>&quot;${@}&quot;</code> نتیجه‌ای دو کلمه‌ای می‌دهد:</p>
+<pre class="hljs"><code>&quot;word&quot; &quot;words with spaces&quot;
+</code></pre>
+</li>
+</ul>
+<p>که همان چیزی است که انتظار داریم.</p>
+<h3><strong>نتیجهٔ مهم</strong></h3>
+<p>گرچه چهار روش برای دریافت پارامترهای موضعی داریم، اما:</p>
+<h3><strong><code>&quot;$@&quot;</code> تقریباً همیشه بهترین انتخاب است</strong></h3>
+<p>زیرا هر پارامتر را به‌طور مستقل و درست منتقل می‌کند.</p>
+<hr>
+<h1><strong>یک کاربرد کامل‌تر (A More Complete Application)</strong></h1>
+<p>پس از یک وقفهٔ طولانی، کار روی برنامهٔ <strong>sys_info_page</strong> را ادامه می‌دهیم.<br>
+در این مرحله چند گزینهٔ خط فرمان اضافه می‌کنیم:</p>
+<h3><strong>۱. فایل خروجی</strong></h3>
+<p>گزینهٔ:</p>
+<ul>
+<li><code>-f file</code></li>
+<li>یا <code>--file file</code></li>
+</ul>
+<p>برای مشخص کردن نام فایل خروجی برنامه.</p>
+<h3><strong>۲. حالت تعاملی (Interactive Mode)</strong></h3>
+<p>گزینهٔ:</p>
+<ul>
+<li><code>-i</code></li>
+<li>یا <code>--interactive</code></li>
+</ul>
+<p>در این حالت، برنامه از کاربر نام فایل می‌پرسد و اگر فایل وجود داشته باشد، برای overwrite اجازه می‌گیرد.</p>
+<h3><strong>۳. کمک (Help)</strong></h3>
+<p>گزینهٔ:</p>
+<ul>
+<li><code>-h</code></li>
+<li>یا <code>--help</code></li>
+</ul>
+<p>جهت نمایش پیام راهنما.</p>
+<hr>
+<h2><strong>کد پردازش خط فرمان</strong></h2>
+<pre class="hljs"><code><span class="hljs-function"><span class="hljs-title">usage</span></span> () {
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">$PROGNAME</span>: usage: <span class="hljs-variable">$PROGNAME</span> [-f file | -i]&quot;</span>
+    <span class="hljs-built_in">return</span>
+}
+
+<span class="hljs-comment"># process command line options</span>
+interactive=
+filename=
+
+<span class="hljs-keyword">while</span> [[ -n <span class="hljs-variable">$1</span> ]]; <span class="hljs-keyword">do</span>
+    <span class="hljs-keyword">case</span> <span class="hljs-variable">$1</span> <span class="hljs-keyword">in</span>
+        -f | --file) <span class="hljs-built_in">shift</span>
+                     filename=<span class="hljs-variable">$1</span>
+                     ;;
+        -i | --interactive) interactive=1
+                            ;;
+        -h | --<span class="hljs-built_in">help</span>) usage
+                     <span class="hljs-built_in">exit</span>
+                     ;;
+        *) usage &gt;&amp;2
+           <span class="hljs-built_in">exit</span> 1
+           ;;
+    <span class="hljs-keyword">esac</span>
+    <span class="hljs-built_in">shift</span>
+<span class="hljs-keyword">done</span>
+</code></pre>
+<h3><strong>توضیح پردازش</strong></h3>
+<ul>
+<li>تابع <code>usage</code> پیام راهنما را نمایش می‌دهد.</li>
+<li>حلقه به‌شرطی ادامه پیدا می‌کند که <code>$1</code> خالی نباشد.</li>
+<li>در انتهای حلقه، <code>shift</code> آرگومان فعلی را حذف می‌کند.</li>
+<li>گزینهٔ <code>-f</code> یک <code>shift</code> اضافی دارد تا <code>$1</code> برابر نام فایل شود.</li>
+</ul>
+<hr>
+<h2><strong>کد حالت تعاملی</strong></h2>
+<pre class="hljs"><code><span class="hljs-comment"># interactive mode</span>
+<span class="hljs-keyword">if</span> [[ -n <span class="hljs-variable">$interactive</span> ]]; <span class="hljs-keyword">then</span>
+    <span class="hljs-keyword">while</span> <span class="hljs-literal">true</span>; <span class="hljs-keyword">do</span>
+        <span class="hljs-built_in">read</span> -p <span class="hljs-string">&quot;Enter name of output file: &quot;</span> filename
+        <span class="hljs-keyword">if</span> [[ -e <span class="hljs-variable">$filename</span> ]]; <span class="hljs-keyword">then</span>
+            <span class="hljs-built_in">read</span> -p <span class="hljs-string">&quot;&#x27;<span class="hljs-variable">$filename</span>&#x27; exists. Overwrite? [y/n/q] &gt; &quot;</span>
+            <span class="hljs-keyword">case</span> <span class="hljs-variable">$REPLY</span> <span class="hljs-keyword">in</span>
+                Y|y) <span class="hljs-built_in">break</span> ;;
+                Q|q) <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Program terminated.&quot;</span>
+                     <span class="hljs-built_in">exit</span> ;;
+                *) <span class="hljs-built_in">continue</span> ;;
+            <span class="hljs-keyword">esac</span>
+        <span class="hljs-keyword">elif</span> [[ -z <span class="hljs-variable">$filename</span> ]]; <span class="hljs-keyword">then</span>
+            <span class="hljs-built_in">continue</span>
+        <span class="hljs-keyword">else</span>
+            <span class="hljs-built_in">break</span>
+        <span class="hljs-keyword">fi</span>
+    <span class="hljs-keyword">done</span>
+<span class="hljs-keyword">fi</span>
+</code></pre>
+<ul>
+<li>اگر فایل موجود باشد: پرسش overwrite، انتخاب نام دیگر، یا خروج</li>
+<li>انتخاب overwrite ⇒ خروج از حلقه</li>
+<li>انتخاب دیگر ⇒ ادامهٔ پرسش</li>
+</ul>
+<hr>
+<h2><strong>تبدیل بخش تولید صفحه به تابع</strong></h2>
+<pre class="hljs"><code><span class="hljs-function"><span class="hljs-title">write_html_page</span></span> () {
+<span class="hljs-built_in">cat</span> &lt;&lt;- <span class="hljs-string">_EOF_
+&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;$TITLE&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+&lt;BODY&gt;
+&lt;H1&gt;$TITLE&lt;/H1&gt;
+&lt;P&gt;$TIMESTAMP&lt;/P&gt;
+$(report_uptime)
+$(report_disk_space)
+$(report_home_space)
+&lt;/BODY&gt;
+&lt;/HTML&gt;
+_EOF_</span>
+<span class="hljs-built_in">return</span>
+}
+</code></pre>
+<hr>
+<h2><strong>ایجاد فایل خروجی</strong></h2>
+<pre class="hljs"><code><span class="hljs-comment"># output html page</span>
+<span class="hljs-keyword">if</span> [[ -n <span class="hljs-variable">$filename</span> ]]; <span class="hljs-keyword">then</span>
+    <span class="hljs-keyword">if</span> <span class="hljs-built_in">touch</span> <span class="hljs-variable">$filename</span> &amp;&amp; [[ -f <span class="hljs-variable">$filename</span> ]]; <span class="hljs-keyword">then</span>
+        write_html_page &gt; <span class="hljs-variable">$filename</span>
+    <span class="hljs-keyword">else</span>
+        <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">$PROGNAME</span>: Cannot write file &#x27;<span class="hljs-variable">$filename</span>&#x27;&quot;</span> &gt;&amp;2
+        <span class="hljs-built_in">exit</span> 1
+    <span class="hljs-keyword">fi</span>
+<span class="hljs-keyword">else</span>
+    write_html_page
+<span class="hljs-keyword">fi</span>
+</code></pre>
+<h3><strong>توضیح عملکرد</strong></h3>
+<ul>
+<li>
+<p>اگر نام فایل مشخص شده باشد:</p>
+<ul>
+<li>با <code>touch</code> بررسی می‌کنیم که مسیر معتبر است</li>
+<li>سپس بررسی می‌کنیم فایل معمولی است</li>
+<li>خروجی تابع به فایل هدایت می‌شود</li>
+</ul>
+</li>
+<li>
+<p>اگر نام فایل مشخص نشده باشد: خروجی به <strong>stdout</strong> می‌رود.</p>
+</li>
+</ul>
+<hr>
+<h1><strong>جمع‌بندی (Summing Up)</strong></h1>
+<p>با اضافه‌شدن پارامترهای موضعی (positional parameters)، اکنون می‌توانیم اسکریپت‌های نسبتاً کاربردی و کامل بنویسیم.<br>
+برای کارهای ساده و تکرارشونده، پارامترهای موضعی امکان نوشتن توابع شِل بسیار مفیدی را می‌دهند که می‌توان آن‌ها را در فایل <code>.bashrc</code> کاربر قرار داد.</p>
+<p>برنامهٔ <strong>sys_info_page</strong> ما پیچیده‌تر و پیشرفته‌تر شده است. در ادامه، فهرست کامل برنامه را مشاهده می‌کنید که تغییرات اخیر در آن اعمال شده‌اند:</p>
+<hr>
+<h2><strong>کد کامل برنامه sys_info_page</strong></h2>
+<pre class="hljs"><code><span class="hljs-meta">#!/bin/bash</span>
+<span class="hljs-comment"># sys_info_page: program to output a system information page</span>
+
+PROGNAME=$(<span class="hljs-built_in">basename</span> <span class="hljs-variable">$0</span>)
+TITLE=<span class="hljs-string">&quot;System Information Report For <span class="hljs-variable">$HOSTNAME</span>&quot;</span>
+CURRENT_TIME=$(<span class="hljs-built_in">date</span> +<span class="hljs-string">&quot;%x %r %Z&quot;</span>)
+TIMESTAMP=<span class="hljs-string">&quot;Generated <span class="hljs-variable">$CURRENT_TIME</span>, by <span class="hljs-variable">$USER</span>&quot;</span>
+
+<span class="hljs-function"><span class="hljs-title">report_uptime</span></span> () {
+<span class="hljs-built_in">cat</span> &lt;&lt;- <span class="hljs-string">_EOF_
+&lt;H2&gt;System Uptime&lt;/H2&gt;
+&lt;PRE&gt;$(uptime)&lt;/PRE&gt;
+_EOF_</span>
+<span class="hljs-built_in">return</span>
+}
+
+<span class="hljs-function"><span class="hljs-title">report_disk_space</span></span> () {
+<span class="hljs-built_in">cat</span> &lt;&lt;- <span class="hljs-string">_EOF_
+&lt;H2&gt;Disk Space Utilization&lt;/H2&gt;
+&lt;PRE&gt;$(df -h)&lt;/PRE&gt;
+_EOF_</span>
+<span class="hljs-built_in">return</span>
+}
+
+<span class="hljs-function"><span class="hljs-title">report_home_space</span></span> () {
+<span class="hljs-keyword">if</span> [[ $(<span class="hljs-built_in">id</span> -u) -eq 0 ]]; <span class="hljs-keyword">then</span>
+<span class="hljs-built_in">cat</span> &lt;&lt;- <span class="hljs-string">_EOF_
+&lt;H2&gt;Home Space Utilization (All Users)&lt;/H2&gt;
+&lt;PRE&gt;$(du -sh /home/*)&lt;/PRE&gt;
+_EOF_</span>
+<span class="hljs-keyword">else</span>
+<span class="hljs-built_in">cat</span> &lt;&lt;- <span class="hljs-string">_EOF_
+&lt;H2&gt;Home Space Utilization ($USER)&lt;/H2&gt;
+&lt;PRE&gt;$(du -sh $HOME)&lt;/PRE&gt;
+_EOF_</span>
+<span class="hljs-keyword">fi</span>
+<span class="hljs-built_in">return</span>
+}
+
+<span class="hljs-function"><span class="hljs-title">usage</span></span> () {
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">$PROGNAME</span>: usage: <span class="hljs-variable">$PROGNAME</span> [-f file | -i]&quot;</span>
+<span class="hljs-built_in">return</span>
+}
+
+<span class="hljs-function"><span class="hljs-title">write_html_page</span></span> () {
+<span class="hljs-built_in">cat</span> &lt;&lt;- <span class="hljs-string">_EOF_
+&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;$TITLE&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+&lt;BODY&gt;
+&lt;H1&gt;$TITLE&lt;/H1&gt;
+&lt;P&gt;$TIMESTAMP&lt;/P&gt;
+$(report_uptime)
+$(report_disk_space)
+$(report_home_space)
+&lt;/BODY&gt;
+&lt;/HTML&gt;
+_EOF_</span>
+<span class="hljs-built_in">return</span>
+}
+
+<span class="hljs-comment"># process command line options</span>
+interactive=
+filename=
+
+<span class="hljs-keyword">while</span> [[ -n <span class="hljs-variable">$1</span> ]]; <span class="hljs-keyword">do</span>
+<span class="hljs-keyword">case</span> <span class="hljs-variable">$1</span> <span class="hljs-keyword">in</span>
+    -f | --file) <span class="hljs-built_in">shift</span>
+                 filename=<span class="hljs-variable">$1</span>
+                 ;;
+    -i | --interactive) interactive=1
+                        ;;
+    -h | --<span class="hljs-built_in">help</span>) usage
+                 <span class="hljs-built_in">exit</span>
+                 ;;
+    *) usage &gt;&amp;2
+       <span class="hljs-built_in">exit</span> 1
+       ;;
+<span class="hljs-keyword">esac</span>
+<span class="hljs-built_in">shift</span>
+<span class="hljs-keyword">done</span>
+
+<span class="hljs-comment"># interactive mode</span>
+<span class="hljs-keyword">if</span> [[ -n <span class="hljs-variable">$interactive</span> ]]; <span class="hljs-keyword">then</span>
+<span class="hljs-keyword">while</span> <span class="hljs-literal">true</span>; <span class="hljs-keyword">do</span>
+<span class="hljs-built_in">read</span> -p <span class="hljs-string">&quot;Enter name of output file: &quot;</span> filename
+<span class="hljs-keyword">if</span> [[ -e <span class="hljs-variable">$filename</span> ]]; <span class="hljs-keyword">then</span>
+<span class="hljs-built_in">read</span> -p <span class="hljs-string">&quot;&#x27;<span class="hljs-variable">$filename</span>&#x27; exists. Overwrite? [y/n/q] &gt; &quot;</span>
+<span class="hljs-keyword">case</span> <span class="hljs-variable">$REPLY</span> <span class="hljs-keyword">in</span>
+    Y|y) <span class="hljs-built_in">break</span> ;;
+    Q|q) <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Program terminated.&quot;</span>
+         <span class="hljs-built_in">exit</span> ;;
+    *) <span class="hljs-built_in">continue</span> ;;
+<span class="hljs-keyword">esac</span>
+<span class="hljs-keyword">fi</span>
+<span class="hljs-keyword">done</span>
+<span class="hljs-keyword">fi</span>
+
+<span class="hljs-comment"># output html page</span>
+<span class="hljs-keyword">if</span> [[ -n <span class="hljs-variable">$filename</span> ]]; <span class="hljs-keyword">then</span>
+<span class="hljs-keyword">if</span> <span class="hljs-built_in">touch</span> <span class="hljs-variable">$filename</span> &amp;&amp; [[ -f <span class="hljs-variable">$filename</span> ]]; <span class="hljs-keyword">then</span>
+write_html_page &gt; <span class="hljs-variable">$filename</span>
+<span class="hljs-keyword">else</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">$PROGNAME</span>: Cannot write file &#x27;<span class="hljs-variable">$filename</span>&#x27;&quot;</span> &gt;&amp;2
+<span class="hljs-built_in">exit</span> 1
+<span class="hljs-keyword">fi</span>
+<span class="hljs-keyword">else</span>
+write_html_page
+<span class="hljs-keyword">fi</span>
+</code></pre>
+<hr>
+<h1><strong>ما هنوز تمام نکرده‌ایم</strong></h1>
+<p>هنوز قابلیت‌های بیشتری می‌توان به برنامه اضافه کرد و بهبودهای زیادی امکان‌پذیر است.</p>
+<hr>
+<h1><strong>مطالعهٔ بیشتر (Further Reading)</strong></h1>
+<p>● <strong>Bash Hackers Wiki</strong> دارای مقالهٔ خوبی دربارهٔ پارامترهای موضعی است:<br>
+<a href="http://wiki.bash-hackers.org/scripting/posparams">http://wiki.bash-hackers.org/scripting/posparams</a></p>
+<p>● <strong>Bash Reference Manual</strong> مقاله‌ای دربارهٔ پارامترهای ویژه، شامل <code>$*</code> و <code>$@</code> دارد:<br>
+<a href="http://www.gnu.org/software/bash/manual/bashref.html#Special-Parameters">http://www.gnu.org/software/bash/manual/bashref.html#Special-Parameters</a></p>
+<p>● علاوه بر روش‌هایی که در این فصل بررسی کردیم، bash یک دستور داخلی به نام <strong>getopts</strong> دارد که می‌توان برای پردازش آرگومان‌های خط فرمان از آن استفاده کرد. توضیحات آن در بخش <strong>SHELL BUILTIN COMMANDS</strong> در صفحهٔ manual مربوط به bash و همچنین در Bash Hackers Wiki آمده است:<br>
+<a href="http://wiki.bash-hackers.org/howto/getopts_tutorial">http://wiki.bash-hackers.org/howto/getopts_tutorial</a></p>
+
+  </main>
+
+  <!-- فوتر مشترک -->
+  <footer class="footer">
+    <div class="container">
+      <p>
+        <img src="/Gitab/icone/copyright.svg" alt="کپی‌رایت" width="14" height="14"
+             style="vertical-align:middle;margin-inline:4px">
+        <span id="y"></span> Gitab — تمامی حقوق محفوظ است.
+      </p>
+    </div>
+  </footer>
+
+  <!-- سال و اسکریپت تغییر تم -->
+  <script>
+  (() => {
+    const root = document.documentElement;
+    const btn = document.getElementById('themeToggle');
+    const KEY = 'gitab-theme';
+
+    function updateTheme(s) {
+      root.setAttribute('data-theme', s);
+      const mode = s;  // فقط `dark` یا `light` خواهد بود
+      root.dataset.colorMode = mode;
+      btn.dataset.icon = mode === 'dark' ? 'moon' : 'sun';
+    }
+
+    // وضعیت تم ذخیره شده از localStorage
+    let saved = localStorage.getItem(KEY) || 'light'; // پیش‌فرض روشن
+    updateTheme(saved);
+
+    // تنظیم مجدد تم هنگام تغییر وضعیت دکمه
+    btn.addEventListener('click', () => {
+      const current = localStorage.getItem(KEY) || 'light';
+      const next = current === 'dark' ? 'light' : 'dark';  // فقط دو حالت: تاریک و روشن
+      localStorage.setItem(KEY, next);
+      updateTheme(next);
+    });
+
+    // هنگام بارگذاری صفحه
+    document.addEventListener('DOMContentLoaded', () => {
+      updateTheme(localStorage.getItem(KEY) || 'light');
+    });
+  })();
+</script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+
+  <script>
+  document.querySelectorAll('pre code').forEach(block => {
+    const btn = document.createElement('button');
+    btn.className = 'copy-btn';
+
+    const icon = document.createElement('img');
+    icon.src = "/Gitab/icone/copy.svg";
+    icon.alt = 'Copy';
+    btn.appendChild(icon);
+
+    block.parentNode.insertBefore(btn, block);
+
+    btn.addEventListener('click', async () => {
+      await navigator.clipboard.writeText(block.textContent);
+      btn.classList.add('copied');
+      setTimeout(() => btn.classList.remove('copied'), 1500);
+    });
+  });
+  </script>
+
+  <script>
+  document.body.dataset.page = window.location.pathname;
+
+  const menuBtn = document.querySelector(".menu-toggle");
+  const nav = document.querySelector(".nav");
+
+  if (menuBtn && nav) {
+    menuBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      nav.classList.toggle("show");
+    });
+
+    document.addEventListener("click", (e) => {
+      const clickedInsideNav = nav.contains(e.target);
+      const clickedMenuButton = menuBtn.contains(e.target);
+      if (!clickedInsideNav && !clickedMenuButton) {
+        nav.classList.remove("show");
+      }
+    });
+  }
+  </script>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+  <script>
+document.getElementById("openDonate").addEventListener("click", () => {
+  document.getElementById("donateModal").style.display = "block";
+});
+document.getElementById("closeDonate").addEventListener("click", () => {
+  document.getElementById("donateModal").style.display = "none";
+});
+document.querySelectorAll(".copy-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    navigator.clipboard.writeText(btn.dataset.copy);
+  
+    setTimeout(() => (btn.textContent = "کپی"), 2000);
+  });
+});
+</script>
+
+</body>
+</html>

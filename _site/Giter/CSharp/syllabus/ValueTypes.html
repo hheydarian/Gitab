@@ -1,0 +1,58 @@
+---
+layout: layout.njk
+title: Value Types
+permalink: /Giter/CSharp/syllabus/ValueTypes/
+---
+
+<section class="topic-page container">
+    <h1 class="topic-title">Value Types</h1>
+    <p class="topic-desc">تمام مباحث انواع مقداری در سی‌شارپ — با توضیحات کامل و مثال‌های عملی</p>
+    <div id="topicContent" class="topic-content">
+        <!-- اینجا با JS پر می‌شود -->
+    </div>
+</section>
+
+<script>
+    // گرفتن پارامتر URL مثل ?topic=bool
+    const params = new URLSearchParams(window.location.search);
+    const topic = params.get("topic");
+    // دیتاهای آموزش
+    const topics = {
+        "numeric-types": {
+            title: "Numeric Types",
+            content: `
+                <p>اعداد صحیح شامل انواع byte, int, long و ... هستند.</p>
+                <pre><code class="language-csharp">
+int age = 25;
+long population = 84000000;
+                </code></pre>
+            `
+        },
+        "floating-point": {
+            title: "Floating Point Types",
+            content: `
+                <p>اعداد اعشاری شامل float, double, decimal هستند.</p>
+            `
+        },
+        "bool": {
+            title: "Bool",
+            content: `<p>نوع منطقی true/false استفاده می‌شود.</p>`
+        },
+
+        // ... بقیه هم همینجا میاد
+    };
+
+    // رندر کردن
+    const box = document.getElementById("topicContent");
+
+    if (topics[topic])
+    {
+        box.innerHTML = `
+            <h2>${topics[topic].title}</h2>
+            ${topics[topic].content}
+        `;
+    } else
+    {
+        box.innerHTML = `<p>موضوع یافت نشد.</p>`;
+    }
+</script>

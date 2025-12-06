@@ -1,0 +1,323 @@
+
+
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <link rel="icon" type="image/png" href="/Gitab/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>خواندن ورودی از صفحه‌کلید</title>
+  <meta name="description" content="ترجمه‌های فارسی کتاب‌های فنی — سریع، مینیمال و قابل اتکا.">
+
+  <!-- استایل‌ها -->
+  <link rel="stylesheet" href="/Gitab/styles/main.css">
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+
+  <style>
+  @font-face {
+    font-family: 'Vazir';
+    src: url('/Gitab/fonts/Vazir-FD-WOL.ttf') format('truetype');
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "Lalezar";
+    src: url('fonts/Lalezar.ttf') format('truetype');
+    font-display: swap;
+}
+  body {
+    font-family: 'Vazir', sans-serif;
+  }
+  </style>
+</head>
+
+<body>
+  <!-- هدر مشترک -->
+  <header class="header">
+    <div class="container nav-wrap">
+      <a href="/Gitab/" class="brand">
+        <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="26" height="26">
+        <span>Gitab</span>
+      </a>
+
+       <nav class="nav">
+         <a href="/Gitab/" >خانه</a>
+         <a href="/Gitab/books/list-books" >کتاب‌ها</a>
+         <a href="/Gitab/giter.html" >دوره ها</a>
+          <!-- 
+         <a href="/Gitab/translator.html" >مترجمین</a>
+           -->
+       </nav>
+
+      <div class="nav-actions">
+        <button id="themeToggle" class="icon-btn theme-btn" data-icon="moon" aria-label="تغییر تم">
+          <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن">
+          <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک">
+        </button>
+
+        <a class="icon-btn" href="https://github.com/hheydarian/Gitab" target="_blank" title="GitHub">
+          <img src="/Gitab/icone/github.svg" alt="GitHub">
+        </a>
+
+        <!-- دکمه منو برای موبایل -->
+        <button class="menu-toggle" aria-label="منو">
+          <img src="/Gitab/icone/menu.svg" alt="menu">
+        </button>
+      </div>
+    </div>
+  </header>
+
+  
+  <main class="site-main book-page">
+    <h1>فصل ۲۸ – خواندن ورودی از صفحه‌کلید</h1>
+<p>در بسیاری از اسکریپت‌های عملی باید با کاربر تعامل داشته باشیم؛<br>
+مثلاً بپرسیم گزارش در کجا ذخیره شود یا آیا ادامهٔ عملیات مجاز است.<br>
+فرمان <code>read</code> ابزار اصلی bash برای دریافت ورودی از صفحه‌کلید (یا هر منبع استاندارد ورودی) است.<br>
+در این فصل با گزینه‌های متنوع <code>read</code> آشنا می‌شویم و می‌آموزیم چگونه از ورودی کاربر در پروژهٔ <code>sys_info_page</code> استفاده کنیم.</p>
+<hr>
+<h2>آشنایی با فرمان read</h2>
+<p>ساده‌ترین شکل استفاده از <code>read</code> چنین است:</p>
+<pre class="hljs"><code><span class="hljs-built_in">read</span> VARIABLE
+</code></pre>
+<p>با اجرای فرمان، شل منتظر ورودی می‌ماند و پس از فشردن Enter، کل خط را در متغیر ذخیره می‌کند.<br>
+برای مثال:</p>
+<pre class="hljs"><code><span class="hljs-built_in">printf</span> <span class="hljs-string">&quot;نام خود را وارد کنید: &quot;</span>
+<span class="hljs-built_in">read</span> NAME
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;سلام <span class="hljs-variable">$NAME</span>!&quot;</span>
+</code></pre>
+<p>اگر نام متغیر مشخص نشود، bash از متغیر ویژهٔ <code>REPLY</code> استفاده می‌کند:</p>
+<pre class="hljs"><code><span class="hljs-built_in">read</span>
+<span class="hljs-built_in">printf</span> <span class="hljs-string">&#x27;ورودی دریافت شد: %s\n&#x27;</span> <span class="hljs-string">&quot;<span class="hljs-variable">$REPLY</span>&quot;</span>
+</code></pre>
+<h3>نمایش پیام راهنما</h3>
+<p>گزینهٔ <code>-p</code> امکان تعیین پیام راهنما را فراهم می‌کند، بدون اینکه نیاز به <code>echo</code> جداگانه باشد:</p>
+<pre class="hljs"><code><span class="hljs-built_in">read</span> -p <span class="hljs-string">&quot;نام میزبان جدید را وارد کنید: &quot;</span> HOSTNAME
+</code></pre>
+<h3>دریافت چند مقدار در یک خط</h3>
+<p>می‌توان چند نام متغیر پس از فرمان قرار داد؛ در این حالت ورودی بر اساس مقدار <code>IFS</code> (به طور پیش‌فرض فاصله و تب) تقسیم و به ترتیب در متغیرها ذخیره می‌شود:</p>
+<pre class="hljs"><code><span class="hljs-built_in">read</span> -p <span class="hljs-string">&quot;نام و نام خانوادگی را وارد کنید: &quot;</span> FIRST LAST
+</code></pre>
+<p>اگر کاربر مقادیر کمتری وارد کند، متغیرهای باقی‌مانده خالی می‌مانند و اگر تعداد واژه‌ها بیشتر باشد، آخرین متغیر باقی‌ماندهٔ متن را به طور کامل دریافت می‌کند.</p>
+<hr>
+<h2>گزینه‌های کاربردی read</h2>
+<table>
+<thead>
+<tr>
+<th>گزینه</th>
+<th>توضیح</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-a array</code></td>
+<td>ذخیرهٔ ورودی به صورت عناصر آرایه</td>
+</tr>
+<tr>
+<td><code>-d delim</code></td>
+<td>پایان ورودی با رسیدن به کاراکتر مشخص</td>
+</tr>
+<tr>
+<td><code>-n num</code></td>
+<td>خواندن حداکثر <code>num</code> کاراکتر بدون انتظار برای Enter</td>
+</tr>
+<tr>
+<td><code>-s</code></td>
+<td>عدم نمایش کاراکترهای تایپ‌شده (برای رمز عبور)</td>
+</tr>
+<tr>
+<td><code>-t seconds</code></td>
+<td>تعیین مهلت زمانی برای دریافت ورودی</td>
+</tr>
+<tr>
+<td><code>-u fd</code></td>
+<td>خواندن از توصیف‌گر فایل دلخواه</td>
+</tr>
+<tr>
+<td><code>-r</code></td>
+<td>جلوگیری از تفسیر بک‌اسلش‌ها (به‌ویژه برای مسیرها)</td>
+</tr>
+</tbody>
+</table>
+<p>نمونه‌ای برای درخواست رمز عبور با زمان‌سنج:</p>
+<pre class="hljs"><code><span class="hljs-keyword">if</span> <span class="hljs-built_in">read</span> -t 10 -s -p <span class="hljs-string">&quot;رمز عبور را وارد کنید: &quot;</span> PASSWORD; <span class="hljs-keyword">then</span>
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;\nرمز عبور دریافت شد.&quot;</span>
+<span class="hljs-keyword">else</span>
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;\nزمان تمام شد!&quot;</span>
+<span class="hljs-keyword">fi</span>
+</code></pre>
+<p>علامت <code>\n</code> را خودمان چاپ می‌کنیم چون در حالت <code>-s</code> هیچ کاراکتری—including newline—نمایش داده نمی‌شود.</p>
+<h3>تغییر IFS موقت</h3>
+<p>برای تقسیم ورودی بر اساس جداکنندهٔ سفارشی می‌توان مقدار <code>IFS</code> را تنها برای همان فرمان تغییر داد:</p>
+<pre class="hljs"><code>IFS=,: <span class="hljs-built_in">read</span> -p <span class="hljs-string">&quot;فهرست مسیرها را وارد کنید (با , یا : جدا کنید): &quot;</span> P1 P2 P3
+</code></pre>
+<p>توجه داشته باشید که تغییر <code>IFS</code> باید در همان خط اعمال شود تا اثر جانبی دائمی نداشته باشد.</p>
+<hr>
+<h2>استفادهٔ عملی در sys_info_page</h2>
+<p>در حال حاضر اسکریپت ما مسیر خروجی را از آرگومان خط فرمان می‌گیرد.<br>
+برای بهبود تجربهٔ کاربری، امکانی اضافه می‌کنیم که در صورت ندادن آرگومان، مسیر از طریق گفت‌وگو دریافت شود.<br>
+همچنین بررسی می‌کنیم کاربر تأیید کند که فایل موجود بازنویسی شود.</p>
+<pre class="hljs"><code>DEFAULT_REPORT=/var/www/html/sys_info.html
+REPORT_FILE=<span class="hljs-string">&quot;<span class="hljs-variable">$1</span>&quot;</span>
+
+<span class="hljs-keyword">if</span> [[ -z <span class="hljs-variable">$REPORT_FILE</span> ]]; <span class="hljs-keyword">then</span>
+    <span class="hljs-built_in">read</span> -e -p <span class="hljs-string">&quot;مسیر فایل گزارش را وارد کنید [<span class="hljs-variable">$DEFAULT_REPORT</span>]: &quot;</span> REPORT_FILE
+    REPORT_FILE=<span class="hljs-variable">${REPORT_FILE:-<span class="hljs-variable">$DEFAULT_REPORT</span>}</span>
+<span class="hljs-keyword">fi</span>
+
+<span class="hljs-keyword">if</span> [[ -e <span class="hljs-variable">$REPORT_FILE</span> ]]; <span class="hljs-keyword">then</span>
+    <span class="hljs-built_in">read</span> -n1 -p <span class="hljs-string">&quot;فایل موجود است. بازنویسی شود؟ (y/n) &quot;</span> ANSWER
+    <span class="hljs-built_in">echo</span>
+    <span class="hljs-keyword">if</span> [[ <span class="hljs-variable">$ANSWER</span> != [Yy] ]]; <span class="hljs-keyword">then</span>
+        <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;عملیات لغو شد.&quot;</span> &gt;&amp;2
+        <span class="hljs-built_in">exit</span> 1
+    <span class="hljs-keyword">fi</span>
+<span class="hljs-keyword">fi</span>
+</code></pre>
+<p>نکات:</p>
+<ul>
+<li>گزینهٔ <code>-e</code> در <code>read</code> امکان استفاده از تاریخچهٔ readline و کلیدهای ویرایشی را فراهم می‌کند.</li>
+<li>با ساختار <code>${VAR:-default}</code> مقدار پیش‌فرض اعمال می‌شود.</li>
+<li>برای پرسش yes/no تنها یک کاراکتر می‌خوانیم و پس از آن دستی newline چاپ می‌کنیم تا خط بعدی تمیز باشد.</li>
+</ul>
+<h3>خواندن از فایل</h3>
+<p><code>read</code> الزاماً محدود به صفحه‌کلید نیست؛ می‌توان از عملگر <code>&lt;</code> برای خواندن از فایل استفاده کرد:</p>
+<pre class="hljs"><code><span class="hljs-keyword">while</span> <span class="hljs-built_in">read</span> LINE; <span class="hljs-keyword">do</span>
+    <span class="hljs-built_in">printf</span> <span class="hljs-string">&#x27;خط: %s\n&#x27;</span> <span class="hljs-string">&quot;<span class="hljs-variable">$LINE</span>&quot;</span>
+<span class="hljs-keyword">done</span> &lt; /etc/passwd
+</code></pre>
+<p>گرچه بحث حلقه‌ها در فصل ۲۹ تشریح می‌شود، این مثال نشان می‌دهد <code>read</code> پایهٔ پردازش خط‌به‌خط فایل‌ها نیز هست.</p>
+<hr>
+<h2>خطاهای متداول</h2>
+<ul>
+<li>فراموش کردن قرار دادن <code>-r</code> باعث می‌شود بک‌اسلش‌ها به‌عنوان کاراکتر ویژه تفسیر شوند.</li>
+<li>ننوشتن newline بعد از استفاده از <code>-n</code> یا <code>-s</code> خروجی ترمینال را در همان خط نگه می‌دارد.</li>
+<li>قرار دادن فاصلهٔ اضافی در انتهای خط <code>IFS=:</code> می‌تواند موجب تغییر دائمی IFS شود؛ همیشه آن را به صورت <code>IFS=:</code> (بدون فاصله) بنویسید.</li>
+</ul>
+<hr>
+<h2>تمرین‌ها</h2>
+<ol>
+<li>اسکریپتی بسازید که نام فایل خروجی، عنوان صفحه و فهرستی از فرمان‌ها را از کاربر بگیرد و سپس این اطلاعات را در قالب JSON ذخیره کند.</li>
+<li>فرمی خط فرمانی طراحی کنید که با استفاده از <code>read -s</code> رمز عبور را دوبار دریافت و اگر دو ورودی متفاوت بود، پیغام خطا چاپ کند.</li>
+<li>نسخه‌ای از <code>sys_info_page</code> ایجاد کنید که در صورت خالی‌ماندن پاسخ کاربر، مقدار پیش‌فرض متفاوتی برای محیط‌های توسعه و تولید در نظر بگیرد.</li>
+</ol>
+<hr>
+<h2>مطالعهٔ بیشتر</h2>
+<ul>
+<li>صفحهٔ man مربوط به <code>read</code> در <code>help read</code></li>
+<li>مستندات GNU Readline برای آشنایی با میانبرهای ویرایشی هنگام استفاده از <code>read -e</code></li>
+<li>فصل ۳۴ (رشته‌ها و اعداد) برای پردازش پیشرفتهٔ مقادیری که از کاربر دریافت می‌کنید</li>
+</ul>
+
+  </main>
+
+  <!-- فوتر مشترک -->
+  <footer class="footer">
+    <div class="container">
+      <p>
+        <img src="/Gitab/icone/copyright.svg" alt="کپی‌رایت" width="14" height="14"
+             style="vertical-align:middle;margin-inline:4px">
+        <span id="y"></span> Gitab — تمامی حقوق محفوظ است.
+      </p>
+    </div>
+  </footer>
+
+  <!-- سال و اسکریپت تغییر تم -->
+  <script>
+  (() => {
+    const root = document.documentElement;
+    const btn = document.getElementById('themeToggle');
+    const KEY = 'gitab-theme';
+
+    function updateTheme(s) {
+      root.setAttribute('data-theme', s);
+      const mode = s;  // فقط `dark` یا `light` خواهد بود
+      root.dataset.colorMode = mode;
+      btn.dataset.icon = mode === 'dark' ? 'moon' : 'sun';
+    }
+
+    // وضعیت تم ذخیره شده از localStorage
+    let saved = localStorage.getItem(KEY) || 'light'; // پیش‌فرض روشن
+    updateTheme(saved);
+
+    // تنظیم مجدد تم هنگام تغییر وضعیت دکمه
+    btn.addEventListener('click', () => {
+      const current = localStorage.getItem(KEY) || 'light';
+      const next = current === 'dark' ? 'light' : 'dark';  // فقط دو حالت: تاریک و روشن
+      localStorage.setItem(KEY, next);
+      updateTheme(next);
+    });
+
+    // هنگام بارگذاری صفحه
+    document.addEventListener('DOMContentLoaded', () => {
+      updateTheme(localStorage.getItem(KEY) || 'light');
+    });
+  })();
+</script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+
+  <script>
+  document.querySelectorAll('pre code').forEach(block => {
+    const btn = document.createElement('button');
+    btn.className = 'copy-btn';
+
+    const icon = document.createElement('img');
+    icon.src = "/Gitab/icone/copy.svg";
+    icon.alt = 'Copy';
+    btn.appendChild(icon);
+
+    block.parentNode.insertBefore(btn, block);
+
+    btn.addEventListener('click', async () => {
+      await navigator.clipboard.writeText(block.textContent);
+      btn.classList.add('copied');
+      setTimeout(() => btn.classList.remove('copied'), 1500);
+    });
+  });
+  </script>
+
+  <script>
+  document.body.dataset.page = window.location.pathname;
+
+  const menuBtn = document.querySelector(".menu-toggle");
+  const nav = document.querySelector(".nav");
+
+  if (menuBtn && nav) {
+    menuBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      nav.classList.toggle("show");
+    });
+
+    document.addEventListener("click", (e) => {
+      const clickedInsideNav = nav.contains(e.target);
+      const clickedMenuButton = menuBtn.contains(e.target);
+      if (!clickedInsideNav && !clickedMenuButton) {
+        nav.classList.remove("show");
+      }
+    });
+  }
+  </script>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+  <script>
+document.getElementById("openDonate").addEventListener("click", () => {
+  document.getElementById("donateModal").style.display = "block";
+});
+document.getElementById("closeDonate").addEventListener("click", () => {
+  document.getElementById("donateModal").style.display = "none";
+});
+document.querySelectorAll(".copy-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    navigator.clipboard.writeText(btn.dataset.copy);
+  
+    setTimeout(() => (btn.textContent = "کپی"), 2000);
+  });
+});
+</script>
+
+</body>
+</html>
