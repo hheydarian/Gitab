@@ -16,43 +16,65 @@ permalink: /Giter/CSharp/syllabus/ValueTypes/
     // گرفتن پارامتر URL مثل ?topic=bool
     const params = new URLSearchParams(window.location.search);
     const topic = params.get("topic");
+
     // دیتاهای آموزش
     const topics = {
         "numeric-types": {
             title: "Numeric Types",
             content: `
-                <p>اعداد صحیح شامل انواع byte, int, long و ... هستند.</p>
+                <p>اعداد صحیح شامل انواع byte, int, long و ... هستند. این انواع داده برای ذخیره اعداد صحیح استفاده می‌شوند.</p>
                 <pre><code class="language-csharp">
 int age = 25;
 long population = 84000000;
                 </code></pre>
+                <p>این نوع‌ها می‌توانند از مقادیر بسیار کوچک تا بسیار بزرگ را ذخیره کنند.</p>
             `
         },
         "floating-point": {
             title: "Floating Point Types",
             content: `
-                <p>اعداد اعشاری شامل float, double, decimal هستند.</p>
+                <p>اعداد اعشاری شامل انواع <code>float</code>, <code>double</code>, <code>decimal</code> هستند که برای ذخیره‌سازی مقادیر اعشاری استفاده می‌شوند.</p>
+                <pre><code class="language-csharp">
+float pi = 3.14f;
+double speedOfLight = 299792458;
+decimal price = 19.99m;
+                </code></pre>
+                <p>مقدار <code>float</code> برای دقت کمتر و <code>decimal</code> برای محاسبات مالی که نیاز به دقت بالا دارند مناسب است.</p>
             `
         },
         "bool": {
             title: "Bool",
-            content: `<p>نوع منطقی true/false استفاده می‌شود.</p>`
+            content: `
+                <p>نوع منطقی <code>bool</code> تنها دو مقدار ممکن دارد: <code>true</code> یا <code>false</code>.</p>
+                <pre><code class="language-csharp">
+bool isRaining = true;
+                </code></pre>
+                <p>این نوع داده برای شرایط منطقی و تصمیم‌گیری‌ها در برنامه‌نویسی بسیار مفید است.</p>
+            `
         },
-
-        // ... بقیه هم همینجا میاد
+        "char": {
+            title: "Char",
+            content: `
+                <p>نوع <code>char</code> برای ذخیره یک کاراکتر واحد استفاده می‌شود. این نوع داده می‌تواند یک علامت از یک زبان خاص را نشان دهد.</p>
+                <pre><code class="language-csharp">
+char letter = 'A';
+                </code></pre>
+                <p>این نوع برای ذخیره‌سازی حروف و نمادهای مختلف در برنامه‌نویسی استفاده می‌شود.</p>
+            `
+        },
+        // دیگر موضوعات هم به همین صورت اضافه می‌شوند...
     };
 
     // رندر کردن
     const box = document.getElementById("topicContent");
 
-    if (topics[topic])
-    {
+    if (topics[topic]) {
         box.innerHTML = `
             <h2>${topics[topic].title}</h2>
             ${topics[topic].content}
         `;
-    } else
-    {
+    } else {
         box.innerHTML = `<p>موضوع یافت نشد.</p>`;
     }
 </script>
+
