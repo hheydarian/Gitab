@@ -70,81 +70,306 @@
   
   <main class="site-main">
     
-<section class="topic-page container">
-    <h1 class="topic-title">Value Types</h1>
-    <p class="topic-desc">تمام مباحث انواع مقداری در سی‌شارپ — با توضیحات کامل و مثال‌های عملی</p>
-    <div id="topicContent" class="topic-content">
-        <!-- اینجا با JS پر می‌شود -->
-    </div>
-</section>
 
-<script>
-    // گرفتن پارامتر URL مثل ?topic=bool
-    const params = new URLSearchParams(window.location.search);
-    const topic = params.get("topic");
+<!-- ============================  
+      NUMERIC TYPES  
+============================= -->
+<section id="numeric-types" class="topic-section">
 
-    // دیتاهای آموزش
-    const topics = {
-        "numeric-types": {
-            title: "Numeric Types",
-            content: `
-                <p>اعداد صحیح شامل انواع byte, int, long و ... هستند. این انواع داده برای ذخیره اعداد صحیح استفاده می‌شوند.</p>
-                <pre><code class="language-csharp">
+    <h2>Numeric Types</h2>
+
+    <p>
+        انواع عددی در سی‌شارپ برای ذخیره‌سازی <strong>اعداد صحیح بدون اعشار</strong> استفاده می‌شوند.
+        این نوع داده‌ها بسیار سریع و سبک هستند زیرا روی <strong>Stack</strong> ذخیره می‌شوند و
+        نسبت به Reference Type ها کارایی بالاتری دارند. زمانی که نیاز به محاسبات عددی، شمارنده‌ها،
+        حلقه‌ها یا ذخیره‌سازی داده‌های ساده عددی دارید، این نوع‌ها بهترین انتخاب هستند.
+    </p>
+
+    <p><strong>انواع مهم عددی:</strong></p>
+
+    <ul>
+        <li><code>byte</code> — محدوده 0 تا 255 — مناسب داده‌های خام و باینری</li>
+        <li><code>short</code> — مناسب اعداد کوچک</li>
+        <li><code>int</code> — رایج‌ترین نوع عدد صحیح؛ مناسب اکثر محاسبات</li>
+        <li><code>long</code> — مناسب اعداد بسیار بزرگ مثلاً جمعیت کشورها</li>
+    </ul>
+
+    <pre><code class="language-csharp">
 int age = 25;
 long population = 84000000;
-                </code></pre>
-                <p>این نوع‌ها می‌توانند از مقادیر بسیار کوچک تا بسیار بزرگ را ذخیره کنند.</p>
-            `
-        },
-        "floating-point": {
-            title: "Floating Point Types",
-            content: `
-                <p>اعداد اعشاری شامل انواع <code>float</code>, <code>double</code>, <code>decimal</code> هستند که برای ذخیره‌سازی مقادیر اعشاری استفاده می‌شوند.</p>
-                <pre><code class="language-csharp">
+byte level = 200;
+    </code></pre>
+
+    <p>
+        مطالعهٔ کامل در مستندات مایکروسافت:
+        <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/integral-numeric-types"
+            target="_blank">
+            Integral Numeric Types — Microsoft Docs
+        </a>
+    </p>
+
+</section>
+
+
+
+<!-- ============================  
+      FLOATING POINT TYPES  
+============================= -->
+<section id="floating-point" class="topic-section">
+
+    <h2>Floating Point Types</h2>
+
+    <p>
+        این نوع داده برای ذخیرهٔ <strong>اعداد دارای اعشار</strong> استفاده می‌شود.
+        دقت انواع اعشاری با یکدیگر متفاوت است و انتخاب نوع صحیح نقش مهمی در دقت محاسبات دارد.
+        <code>float</code> دقت پایین اما سرعت بالا، <code>double</code> دقت متوسط و پیش‌فرض،
+        و <code>decimal</code> دقیق‌ترین نوع برای محاسبات مالی است.
+    </p>
+
+    <pre><code class="language-csharp">
 float pi = 3.14f;
 double speedOfLight = 299792458;
 decimal price = 19.99m;
-                </code></pre>
-                <p>مقدار <code>float</code> برای دقت کمتر و <code>decimal</code> برای محاسبات مالی که نیاز به دقت بالا دارند مناسب است.</p>
-            `
-        },
-        "bool": {
-            title: "Bool",
-            content: `
-                <p>نوع منطقی <code>bool</code> تنها دو مقدار ممکن دارد: <code>true</code> یا <code>false</code>.</p>
-                <pre><code class="language-csharp">
+    </code></pre>
+
+    <p>
+        برای کاربردهای مالی همیشه <strong>decimal</strong> انتخاب حرفه‌ای است.
+    </p>
+
+    <p>
+        مطالعهٔ کامل در مستندات مایکروسافت:
+        <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/floating-point-numeric-types"
+            target="_blank">
+            Floating Point Types — Microsoft Docs
+        </a>
+    </p>
+
+</section>
+
+
+
+<!-- ============================  
+      BOOL  
+============================= -->
+<section id="bool" class="topic-section">
+
+    <h2>Bool</h2>
+
+    <p>
+        نوع <code>bool</code> پایه‌ای‌ترین نوع منطقی در سی‌شارپ است که فقط دو مقدار دارد:
+        <strong>true</strong> و <strong>false</strong>.
+        تقریباً تمام ساختارهای تصمیم‌گیری (شرط‌ها، حلقه‌ها، فیلترها، اعتبارسنجی‌ها) وابسته به Boolean هستند.
+    </p>
+
+    <pre><code class="language-csharp">
 bool isRaining = true;
-                </code></pre>
-                <p>این نوع داده برای شرایط منطقی و تصمیم‌گیری‌ها در برنامه‌نویسی بسیار مفید است.</p>
-            `
-        },
-        "char": {
-            title: "Char",
-            content: `
-                <p>نوع <code>char</code> برای ذخیره یک کاراکتر واحد استفاده می‌شود. این نوع داده می‌تواند یک علامت از یک زبان خاص را نشان دهد.</p>
-                <pre><code class="language-csharp">
+bool isAdult = age >= 18;
+    </code></pre>
+
+    <p>
+        مستندات رسمی:
+        <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/bool" target="_blank">
+            bool Type — Microsoft Docs
+        </a>
+    </p>
+
+</section>
+
+
+
+<!-- ============================  
+      CHAR  
+============================= -->
+<section id="char" class="topic-section">
+
+    <h2>Char</h2>
+
+    <p>
+        نوع <code>char</code> برای ذخیره‌سازی <strong>یک کاراکتر واحد</strong> استفاده می‌شود.
+        این کاراکتر می‌تواند یک حرف انگلیسی، فارسی، یک عدد، یا یک نماد باشد.
+        سیستم داخلی آن بر پایه Unicode است، بنابراین تقریباً تمام زبان‌های دنیا را پشتیبانی می‌کند.
+    </p>
+
+    <pre><code class="language-csharp">
 char letter = 'A';
-                </code></pre>
-                <p>این نوع برای ذخیره‌سازی حروف و نمادهای مختلف در برنامه‌نویسی استفاده می‌شود.</p>
-            `
-        },
-        // دیگر موضوعات هم به همین صورت اضافه می‌شوند...
-    };
+char symbol = '#';
+    </code></pre>
 
-    // رندر کردن
-    const box = document.getElementById("topicContent");
+    <p>
+        مستندات رسمی:
+        <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/char" target="_blank">
+            char Type — Microsoft Docs
+        </a>
+    </p>
 
-    if (topics[topic]) {
-        box.innerHTML = `
-            <h2>${topics[topic].title}</h2>
-            ${topics[topic].content}
-        `;
-    } else {
-        box.innerHTML = `<p>موضوع یافت نشد.</p>`;
-    }
-</script>
+</section>
 
 
+
+<!-- ============================  
+      ENUM  
+============================= -->
+<section id="enum" class="topic-section">
+
+    <h2>Enum</h2>
+
+    <p>
+        Enum مجموعه‌ای از مقادیر ثابت و نام‌گذاری‌شده است.
+        زمانی که برنامه نیاز به مجموعه‌ای از وضعیت‌ها یا حالت‌های مشخص دارد،
+        Enum بهترین انتخاب است چون خوانایی و مفهوم‌پذیری برنامه را چند برابر بهتر می‌کند.
+    </p>
+
+    <pre><code class="language-csharp">
+enum Day { Saturday, Sunday, Monday }
+
+Day today = Day.Sunday;
+    </code></pre>
+
+    <p>
+        مستندات رسمی:
+        <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/enum" target="_blank">
+            Enum — Microsoft Docs
+        </a>
+    </p>
+
+</section>
+
+
+
+<!-- ============================  
+      STRUCT  
+============================= -->
+<section id="struct" class="topic-section">
+
+    <h2>Struct / Ref Struct</h2>
+
+    <p>
+        <strong>Struct</strong> یک نوع مقداری است که داده را مستقیماً در Stack ذخیره می‌کند.
+        این ساختار برای داده‌های کوچک و سبک مناسب است (مثل Point، Rectangle و ...).
+        استفاده از Struct باعث کاهش فشار روی Garbage Collector می‌شود.
+    </p>
+
+    <pre><code class="language-csharp">
+struct Point
+{
+    public int X;
+    public int Y;
+}
+    </code></pre>
+
+    <p>
+        <strong>Ref Struct</strong> ساختاری ویژه است که فقط روی Stack کار می‌کند و اجازهٔ ذخیره‌سازی در Heap را ندارد.
+        این نوع برای Span<T> و پردازش‌های سریع حافظه طراحی شده است.
+    </p>
+
+    <pre><code class="language-csharp">
+ref struct SpanReader
+{
+    // ...
+}
+    </code></pre>
+
+    <p>
+        مستندات رسمی:
+        <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/struct"
+            target="_blank">
+            Struct — Microsoft Docs
+        </a>
+    </p>
+
+</section>
+
+
+
+<!-- ============================  
+      TUPLES  
+============================= -->
+<section id="tuples" class="topic-section">
+
+    <h2>Tuples</h2>
+
+    <p>
+        Tuple یک ساختار سبک برای ذخیرهٔ چند مقدار مختلف در کنار یکدیگر است،
+        بدون اینکه نیاز باشد کلاس یا Struct جداگانه بسازید.
+        این قابلیت به‌خصوص برای بازگرداندن چند مقدار از یک تابع بسیار کاربردی است.
+    </p>
+
+    <pre><code class="language-csharp">
+var person = (Name: "Ali", Age: 30);
+Console.WriteLine(person.Name);
+    </code></pre>
+
+    <p>
+        مستندات رسمی:
+        <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/value-tuples"
+            target="_blank">
+            Tuples — Microsoft Docs
+        </a>
+    </p>
+
+</section>
+
+
+
+<!-- ============================  
+      NULLABLE TYPES  
+============================= -->
+<section id="nullable" class="topic-section">
+
+    <h2>Nullable Value Types</h2>
+
+    <p>
+        انواع مقداری مثل <code>int</code> و <code>bool</code> نمی‌توانند مقدار <strong>null</strong> داشته باشند،
+        اما در بسیاری از کاربردها (پایگاه‌داده، فرم‌ها، ورودی‌های کاربر) نیاز است مقدار خالی ذخیره کنیم.
+        برای این کار از علامت <strong>?</strong> استفاده می‌کنیم.
+    </p>
+
+    <pre><code class="language-csharp">
+int? score = null;
+
+if (score.HasValue)
+    Console.WriteLine(score.Value);
+    </code></pre>
+
+    <p>
+        مستندات رسمی:
+        <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/nullable-value-types"
+            target="_blank">
+            Nullable Types — Microsoft Docs
+        </a>
+    </p>
+
+</section>
+
+
+
+<!-- ============================  
+      DATETIME  
+============================= -->
+<section id="datetime" class="topic-section">
+
+    <h2>DateTime / DateTimeOffset</h2>
+
+    <p>
+        <strong>DateTime</strong> برای مدیریت تاریخ و زمان محلی استفاده می‌شود،
+        درحالی‌که <strong>DateTimeOffset</strong> تاریخ و زمان را همراه با
+        اختلاف زمانی (UTC Offset) ذخیره می‌کند و برای برنامه‌های جهانی بسیار دقیق‌تر است.
+        توسعه‌دهندگان حرفه‌ای معمولاً <strong>DateTimeOffset</strong> را انتخاب می‌کنند.
+    </p>
+
+    <pre><code class="language-csharp">
+DateTime now = DateTime.Now;
+DateTimeOffset utcNow = DateTimeOffset.UtcNow;
+    </code></pre>
+
+    <p>
+        مستندات رسمی:
+        <a href="https://learn.microsoft.com/en-us/dotnet/standard/datetime/" target="_blank">
+            DateTime — Microsoft Docs
+        </a>
+    </p>
+
+</section>
   </main>
 
   <!-- فوتر مشترک -->
