@@ -5,302 +5,1512 @@ permalink: /Giter/CSharp/syllabus/ValueTypes/
 ---
 
 
-<!-- ============================  
-      NUMERIC TYPES  
-============================= -->
-<section id="numeric-types" class="topic-section">
+<div class="valuetypes-wrapper">
 
-    <h2>Numeric Types</h2>
-
-    <p>
-        انواع عددی در سی‌شارپ برای ذخیره‌سازی <strong>اعداد صحیح بدون اعشار</strong> استفاده می‌شوند.
-        این نوع داده‌ها بسیار سریع و سبک هستند زیرا روی <strong>Stack</strong> ذخیره می‌شوند و
-        نسبت به Reference Type ها کارایی بالاتری دارند. زمانی که نیاز به محاسبات عددی، شمارنده‌ها،
-        حلقه‌ها یا ذخیره‌سازی داده‌های ساده عددی دارید، این نوع‌ها بهترین انتخاب هستند.
+    <h1 class="page-title">Value Types</h1>
+    <p class="page-desc">
+        آموزش کامل انواع دادهٔ مقداری در سی شارپ
     </p>
 
-    <p><strong>انواع مهم عددی:</strong></p>
+    <!-- ============================ NUMERIC TYPES ============================ -->
+    <section id="numeric-types" class="topic-section">
 
-    <ul>
-        <li><code>byte</code> — محدوده 0 تا 255 — مناسب داده‌های خام و باینری</li>
-        <li><code>short</code> — مناسب اعداد کوچک</li>
-        <li><code>int</code> — رایج‌ترین نوع عدد صحیح؛ مناسب اکثر محاسبات</li>
-        <li><code>long</code> — مناسب اعداد بسیار بزرگ مثلاً جمعیت کشورها</li>
-    </ul>
+        <h2>Numeric Types</h2>
 
-    <pre><code class="language-csharp">
+        <p>
+            در سی‌شارپ، انواع عددی (Numeric Types) برای ذخیره‌سازی اعداد صحیح استفاده می‌شوند.
+            این نوع داده‌ها <strong>Value Type</strong> هستند و روی <strong>Stack</strong> ذخیره می‌شوند؛
+            یعنی سرعت بسیار بالایی دارند و برای محاسبات روزمره بهترین انتخاب‌اند.
+            وقتی یک تازه‌کار وارد دنیای دات‌نت می‌شود، اولین نوع داده‌ای که باید به آن مسلط باشد همین‌ها هستند،
+            چون تقریباً در تمام پروژه‌ها از محاسبهٔ قیمت محصول تا شمارنده‌های صفحه‌سازی (Pagination)
+            یا حتی مدیریت زمان و تاریخ، با داده‌های عددی سروکار دارید.
+        </p>
+
+        <h3>چرا انواع عددی مهم هستند؟</h3>
+        <p>
+            انواع عددی پایهٔ تمام محاسبات در برنامه‌نویسی هستند.
+            اگر انتخاب درستی نداشته باشید ممکن است:
+        <ul>
+            <li>برنامه بیش از حد حافظه مصرف کند</li>
+            <li>RunTime Overflow رخ دهد</li>
+            <li>سرعت اجرای برنامه کاهش پیدا کند</li>
+        </ul>
+        به همین دلیل انتخاب نوع درست کاملاً ضروری است.
+        </p>
+
+        <h3>معرفی انواع عددی پرکاربرد</h3>
+        <p>مهم‌ترین انواع عددی در سی‌شارپ:</p>
+
+        <ul>
+            <li><strong><code>byte</code></strong> — یک بایت، مقدار بین 0 تا 255 — مناسب داده‌های باینری و شبکه</li>
+            <li><strong><code>short</code></strong> — اعداد کوچک‌تر، مناسب سناریوهای Embedded</li>
+            <li><strong><code>int</code></strong> — استاندارد و پیش‌فرض برای اکثر محاسبات — ۹۹٪ مواقع همین را انتخاب
+                می‌کنیم</li>
+            <li><strong><code>long</code></strong> — مناسب اعداد بسیار بزرگ مانند Unix Timestamp یا جمعیت کشورها</li>
+        </ul>
+
+        <h3>unsigned و signed چیست؟</h3>
+        <p>
+            برخی انواع نسخهٔ unsigned نیز دارند، یعنی فقط اعداد مثبت را ذخیره می‌کنند
+            اما بازهٔ بزرگ‌تری ارائه می‌دهند:
+        </p>
+
+        <ul>
+            <li><code>byte</code> → <code>sbyte</code></li>
+            <li><code>int</code> → <code>uint</code></li>
+            <li><code>long</code> → <code>ulong</code></li>
+        </ul>
+
+        <p>
+            در پروژه‌های معمولی کمتر به unsigned نیاز داریم،
+            ولی برای کار با داده‌های حافظه، شبکه، I/O بسیار مفید هستند.
+        </p>
+
+        <h3>نمونه‌کد پایه:</h3>
+
+        <pre><code class="language-csharp">
 int age = 25;
 long population = 84000000;
-byte level = 200;
-    </code></pre>
+byte code = 0xAF;   // هگزادسیمال
+</code></pre>
 
-    <p>
-        مطالعهٔ کامل در مستندات مایکروسافت:
-        <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/integral-numeric-types"
-            target="_blank">
-            Integral Numeric Types — Microsoft Docs
-        </a>
-    </p>
+        <h3>تبدیل ضمنی و تبدیل صریح (Implicit / Explicit)</h3>
 
-</section>
+        <p><strong>تبدیل ضمنی (Implicit)</strong> زمانی است که تبدیل امن باشد:</p>
+
+        <pre><code class="language-csharp">
+int x = 100;
+long y = x; // تبدیل امن است — implicit
+</code></pre>
+
+        <p><strong>تبدیل صریح (Explicit)</strong> زمانی لازم است که داده ممکن است از دست برود:</p>
+
+        <pre><code class="language-csharp">
+long bigValue = 9_000_000_000;
+int num = (int)bigValue;  // ممکن است Overflow رخ دهد
+</code></pre>
+
+        <h3>Overflow چیست؟</h3>
+        <p>
+            اگر مقدار بزرگ‌تر از ظرفیت نوع داده باشد، به مقدار اشتباه تبدیل می‌شود
+            (Wrap-Around). برای جلوگیری:
+        </p>
+
+        <pre><code class="language-csharp">
+checked
+{
+    int n = (int)9_000_000_000; // Exception
+}
+</code></pre>
+
+        <h3>مثال واقعی پروژه‌ای</h3>
+        <p>
+            فرض کنید یک فروشگاه اینترنتی دارید و باید تعداد محصولات، تعداد بازدید،
+            و موجودی انبار را ذخیره کنید. بهترین انتخاب:
+        </p>
+
+        <ul>
+            <li>تعداد بازدید → <code>long</code></li>
+            <li>موجودی انبار → <code>int</code></li>
+            <li>کد محصول → <code>int</code> یا <code>long</code></li>
+        </ul>
+
+        <pre><code class="language-csharp">
+long totalViews = 145_200_000;
+int stock = 120;
+int productId = 90452;
+</code></pre>
+
+        <h3>تمرین‌های عملی</h3>
+        <ol>
+            <li>برنامه‌ای بنویس که قد، وزن، سن و سال تولد را گرفته و BMI را محاسبه کند.</li>
+            <li>برنامه‌ای بنویس که میزان حافظهٔ مصرفی سه عدد (byte, int, long) را چاپ کند.</li>
+            <li>فهرستی از جمعیت شهرهای ایران تعریف کن و مجموع آن‌ها را محاسبه کن.</li>
+        </ol>
+
+        <p class="ref">
+            مستندات رسمی:
+            <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/integral-numeric-types"
+                target="_blank">
+                Integral Numeric Types — Microsoft Docs
+            </a>
+        </p>
+
+    </section>
 
 
 
-<!-- ============================  
-      FLOATING POINT TYPES  
-============================= -->
-<section id="floating-point" class="topic-section">
 
-    <h2>Floating Point Types</h2>
+    <!-- ============================ FLOATING POINT TYPES ============================ -->
+    <section id="floating-point" class="topic-section">
 
-    <p>
-        این نوع داده برای ذخیرهٔ <strong>اعداد دارای اعشار</strong> استفاده می‌شود.
-        دقت انواع اعشاری با یکدیگر متفاوت است و انتخاب نوع صحیح نقش مهمی در دقت محاسبات دارد.
-        <code>float</code> دقت پایین اما سرعت بالا، <code>double</code> دقت متوسط و پیش‌فرض،
-        و <code>decimal</code> دقیق‌ترین نوع برای محاسبات مالی است.
-    </p>
+        <h2>Floating Point Types</h2>
 
-    <pre><code class="language-csharp">
-float pi = 3.14f;
-double speedOfLight = 299792458;
-decimal price = 19.99m;
-    </code></pre>
+        <p>
+            انواع اعشاری (Floating Point Types) برای ذخیره‌سازی <strong>اعداد همراه اعشار</strong> استفاده می‌شوند.
+            این نوع داده‌ها زمانی ضروری هستند که با اندازه‌گیری، محاسبات علمی، درصدها، دما، مختصات، سرعت،
+            و هر چیزی که نیاز به دقت اعشاری دارد سروکار داریم.
+        </p>
 
-    <p>
-        برای کاربردهای مالی همیشه <strong>decimal</strong> انتخاب حرفه‌ای است.
-    </p>
+        <p>
+            در سی‌شارپ سه نوع اعشاری اصلی داریم:
+        </p>
 
-    <p>
-        مطالعهٔ کامل در مستندات مایکروسافت:
-        <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/floating-point-numeric-types"
-            target="_blank">
-            Floating Point Types — Microsoft Docs
-        </a>
-    </p>
+        <ul>
+            <li><strong><code>float</code></strong> — سریع، سبک، دقت پایین‌تر — مناسب گرافیک و بازی‌سازی</li>
+            <li><strong><code>double</code></strong> — پیش‌فرض برای محاسبات علمی و مهندسی</li>
+            <li><strong><code>decimal</code></strong> — بسیار دقیق — مناسب محاسبات مالی و پولی</li>
+        </ul>
 
-</section>
+        <h3>چرا انواع اعشاری متفاوت هستند؟</h3>
+        <p>
+            تفاوت اصلی این سه نوع در <strong>دقت (Precision)</strong> و <strong>نحوهٔ ذخیره‌سازی</strong> است.
+            انواع float و double طبق استاندارد IEEE754 ذخیره می‌شوند و در دقت‌های بالا خطای ریز (Floating Point Error)
+            ایجاد می‌کنند.
+            اما decimal بر اساس مبنای ده‌دهی ذخیره می‌شود و <strong>برای قیمت‌ها، پول، درصد سود، مالیات</strong> بهترین
+            انتخاب است.
+        </p>
+
+        <h3>مثال عددی مهم — چرا double خطا دارد؟</h3>
+
+        <pre><code class="language-csharp">
+Console.WriteLine(0.1 + 0.2);  
+// خروجی: 0.30000000000000004
+</code></pre>
+
+        <p>
+            دلیل این رفتار نحوهٔ ذخیره‌سازی دودویی double است.
+            اما decimal این خطا را ندارد:
+        </p>
+
+        <pre><code class="language-csharp">
+decimal x = 0.1m;
+decimal y = 0.2m;
+Console.WriteLine(x + y);  
+// خروجی: 0.3
+</code></pre>
+
+        <h3>اندازه و ظرفیت</h3>
+        <ul>
+            <li><strong>float</strong> — 4 بایت — حدود 7 رقم دقت</li>
+            <li><strong>double</strong> — 8 بایت — حدود 15 رقم دقت</li>
+            <li><strong>decimal</strong> — 16 بایت — حدود 28–34 رقم دقت</li>
+        </ul>
+
+        <h3>نمونه کدهای کاربردی</h3>
+
+        <pre><code class="language-csharp">
+float temperature = 36.6f;
+double distance = 384_400.0;          // فاصله زمین تا ماه
+decimal productPrice = 249_900.75m;   // قیمت کالا با دقت مالی
+</code></pre>
+
+        <h3>مثال پروژه‌ای — محاسبه سود و مالیات</h3>
+
+        <pre><code class="language-csharp">
+decimal price = 150000m;
+decimal tax = price * 0.09m;      // مالیات 9 درصدی
+decimal total = price + tax;
+
+Console.WriteLine($"Total Price: {total}");
+</code></pre>
+
+        <p>
+            استفاده از double در این مثال می‌تواند اختلاف مالی ایجاد کند، بنابراین فقط decimal مناسب است.
+        </p>
+
+        <h3>تبدیل انواع اعشاری</h3>
+
+        <pre><code class="language-csharp">
+float f = 12.5f;
+double d = f;          // تبدیل ضمنی (بدون خطر)
+decimal dec = (decimal)d;  // تبدیل صریح (ممکن است Precision کم شود)
+</code></pre>
+
+        <h3>تمرین‌های پیشنهادی</h3>
+        <ol>
+            <li>دمای 10 شهر را با float ذخیره کن و میانگین آن‌ها را حساب کن.</li>
+            <li>برنامه‌ای بنویس که یک double بزرگ را به decimal تبدیل کرده و تفاوت دقت را نمایش دهد.</li>
+            <li>قیمت 5 محصول را با decimal گرفته، مالیات 9٪ هرکدام را محاسبه کن و مجموع را چاپ کن.</li>
+        </ol>
+
+        <p class="ref">
+            مستندات رسمی:
+            <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/floating-point-numeric-types"
+                target="_blank">
+                Floating Point Types — Microsoft Docs
+            </a>
+        </p>
+
+    </section>
 
 
 
-<!-- ============================  
-      BOOL  
-============================= -->
-<section id="bool" class="topic-section">
+    <!-- ============================ BOOL ============================ -->
+    <section id="bool" class="topic-section">
 
-    <h2>Bool</h2>
+        <h2>Bool</h2>
 
-    <p>
-        نوع <code>bool</code> پایه‌ای‌ترین نوع منطقی در سی‌شارپ است که فقط دو مقدار دارد:
-        <strong>true</strong> و <strong>false</strong>.
-        تقریباً تمام ساختارهای تصمیم‌گیری (شرط‌ها، حلقه‌ها، فیلترها، اعتبارسنجی‌ها) وابسته به Boolean هستند.
-    </p>
+        <p>
+            نوع <strong>bool</strong> یکی از مهم‌ترین انواع داده در سی‌شارپ و تمام زبان‌های برنامه‌نویسی است.
+            مقدارهای منطقی فقط می‌توانند دو حالت داشته باشند:
+            <strong>true</strong> (درست) و <strong>false</strong> (نادرست).
+            تمام تصمیم‌گیری‌های برنامه—از چک کردن وضعیت کاربر گرفته تا مدیریت خطا، دسترسی، محاسبات شرطی، حلقه‌ها،
+            و حتی هوش مصنوعی—بر پایهٔ همین نوع داده انجام می‌شود.
+        </p>
 
-    <pre><code class="language-csharp">
-bool isRaining = true;
+        <h3>چرا Bool اینقدر مهم است؟</h3>
+        <p>
+            بدون Bool هیچ «منطق»ی در برنامه وجود ندارد.
+            مثلاً:
+        <ul>
+            <li>آیا کاربر وارد شده است؟</li>
+            <li>آیا رمز اشتباه است؟</li>
+            <li>آیا مبلغ کافی است؟</li>
+            <li>آیا سفارش ثبت شود؟</li>
+            <li>آیا حلقه ادامه یابد؟</li>
+        </ul>
+        همهٔ این‌ها با bool کنترل می‌شوند.
+        </p>
+
+        <h3>نمونهٔ پایه</h3>
+
+        <pre><code class="language-csharp">
+bool isLoggedIn = true;
 bool isAdult = age >= 18;
-    </code></pre>
+bool hasAccess = isLoggedIn && isAdult;
+</code></pre>
 
-    <p>
-        مستندات رسمی:
-        <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/bool" target="_blank">
-            bool Type — Microsoft Docs
-        </a>
-    </p>
+        <h3>عملگرهای منطقی (Logical Operators)</h3>
 
-</section>
+        <ul>
+            <li><code>&&</code> — AND — هر دو شرط باید true باشند</li>
+            <li><code>||</code> — OR — حداقل یکی باید true باشد</li>
+            <li><code>!</code> — NOT — نتیجه را برعکس می‌کند</li>
+        </ul>
+
+        <pre><code class="language-csharp">
+bool isVip = true;
+bool hasCredit = false;
+
+bool canBuy = isVip || hasCredit;  // True
+bool mustDeny = !isVip;            // False
+</code></pre>
+
+        <h3>یک موضوع خیلی مهم: Short-Circuit Evaluation</h3>
+        <p>
+            در شرط‌های AND و OR، اگر نتیجهٔ نهایی بدون بررسی ادامهٔ شرط مشخص باشد،
+            قسمت دوم اصلاً بررسی نمی‌شود (Performance + جلوگیری از خطا).
+        </p>
+
+        <pre><code class="language-csharp">
+User user = null;
+
+// بدون Short-Circuit برنامه کرش می‌کند
+bool ok = user != null && user.IsActive;
+</code></pre>
+
+        <p>
+            این تکنیک یکی از پایه‌های نوشتن کد ایمن در دات‌نت است.
+        </p>
+
+        <h3>اشتباه رایج تازه‌کارها</h3>
+
+        <p><strong>اشتباه:</strong> مقایسهٔ مستقیم با true یا false</p>
+
+        <pre><code class="language-csharp">
+// اشتباه
+if (isLoggedIn == true) { }
+
+// صحیح
+if (isLoggedIn) { }
+</code></pre>
+
+        <p><strong>اشتباه دوم:</strong> استفاده از Bool برای ذخیرهٔ چند وضعیت مختلف
+            (باید از Enum یا Flag استفاده کرد، نه bool).
+        </p>
+
+        <h3>مثال واقعی پروژه‌ای — سیستم ورود</h3>
+
+        <pre><code class="language-csharp">
+bool isLoggedIn = true;
+bool isAdmin = false;
+
+if (isLoggedIn && isAdmin)
+{
+    Console.WriteLine("Welcome admin!");
+}
+else if (isLoggedIn)
+{
+    Console.WriteLine("Welcome user!");
+}
+else
+{
+    Console.WriteLine("Please login.");
+}
+</code></pre>
+
+        <h3>تمرین‌های پیشنهادی</h3>
+        <ol>
+            <li>
+                برنامه‌ای بنویس که:
+                <ul>
+                    <li>سن کاربر</li>
+                    <li>وضعیت ثبت‌نام</li>
+                    <li>وضعیت پرداخت</li>
+                </ul>
+                را دریافت کرده و مشخص کند آیا اجازهٔ ورود به دوره را دارد یا خیر.
+            </li>
+
+            <li>
+                یک سیستم سادهٔ «سبد خرید» بساز که اگر:
+                <ul>
+                    <li>موجودی کافی بود</li>
+                    <li>پرداخت موفق بود</li>
+                    <li>کاربر وارد شده بود</li>
+                </ul>
+                اجازهٔ خرید صادر کند.
+            </li>
+
+            <li>
+                سه شرط مختلف تعریف کن و با AND/OR/NOT خروجی منطقی آن‌ها را بررسی کن.
+            </li>
+        </ol>
+
+        <p class="ref">
+            مستندات رسمی:
+            <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/bool"
+                target="_blank">
+                bool — Microsoft Docs
+            </a>
+        </p>
+
+    </section>
 
 
 
-<!-- ============================  
-      CHAR  
-============================= -->
-<section id="char" class="topic-section">
 
-    <h2>Char</h2>
+    <!-- ============================ CHAR ============================ -->
+    <section id="char" class="topic-section">
 
-    <p>
-        نوع <code>char</code> برای ذخیره‌سازی <strong>یک کاراکتر واحد</strong> استفاده می‌شود.
-        این کاراکتر می‌تواند یک حرف انگلیسی، فارسی، یک عدد، یا یک نماد باشد.
-        سیستم داخلی آن بر پایه Unicode است، بنابراین تقریباً تمام زبان‌های دنیا را پشتیبانی می‌کند.
-    </p>
+        <h2>Char</h2>
 
-    <pre><code class="language-csharp">
+        <p>
+            نوع <strong>char</strong> برای ذخیره‌سازی یک <strong>کاراکتر واحد</strong> استفاده می‌شود.
+            این کاراکتر می‌تواند حرف انگلیسی، حرف فارسی، عدد، نماد، یا حتی ایموجی باشد.
+            دلیل این قابلیت گسترده این است که char در دات‌نت بر اساس استاندارد
+            <strong>Unicode UTF-16</strong> ذخیره می‌شود؛ بنابراین تقریباً تمام زبان‌های دنیا را پشتیبانی می‌کند.
+        </p>
+
+        <h3>Char دقیقاً چه چیزی را ذخیره می‌کند؟</h3>
+        <p>
+            هر char در سی‌شارپ یک عدد 16 بیتی (unsigned) است که نشان‌دهندهٔ یک کد یونیکد می‌باشد.
+            یعنی در پشت صحنه، <code>'A'</code> فقط یک عدد است؛
+            اما Console آن عدد را به شکل کاراکتر نمایش می‌دهد.
+        </p>
+
+        <pre><code class="language-csharp">
+char c = 'A';
+Console.WriteLine( (int)c );  
+// خروجی: 65
+</code></pre>
+
+        <p>
+            این یعنی char و int از نظر فنی قابل تبدیل به هم هستند.
+        </p>
+
+        <h3>نحوهٔ تعریف کاراکتر</h3>
+
+        <pre><code class="language-csharp">
 char letter = 'A';
+char number = '5';
 char symbol = '#';
-    </code></pre>
+char persian = 'ش';
+char emoji = '❤';
+</code></pre>
 
-    <p>
-        مستندات رسمی:
-        <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/char" target="_blank">
-            char Type — Microsoft Docs
-        </a>
-    </p>
+        <h3>مقایسهٔ Char با String</h3>
 
-</section>
+        <p>
+            تفاوت بسیار مهمی که تازه‌کارها اشتباه می‌کنند:
+        </p>
+
+        <ul>
+            <li><strong>char</strong> فقط یک کاراکتر ذخیره می‌کند → <code>'A'</code></li>
+            <li><strong>string</strong> مجموعه‌ای از کاراکترها است → <code>"Ali"</code></li>
+        </ul>
+
+        <pre><code class="language-csharp">
+char c = 'A';     // فقط 1 کاراکتر
+string name = "Ali"; // تعداد کاراکتر دلخواه
+</code></pre>
+
+        <h3>متدهای کمکی برای تشخیص نوع کاراکتر</h3>
+
+        <p>
+            کلاس <code>char</code> در دات‌نت متدهای مفیدی دارد برای تشخیص نوع ورودی:
+        </p>
+
+        <pre><code class="language-csharp">
+char ch = '9';
+
+bool isDigit = char.IsDigit(ch);         // آیا رقم است؟
+bool isLetter = char.IsLetter(ch);       // آیا حرف است؟
+bool isLower = char.IsLower(ch);         // آیا حرف کوچک است؟
+bool isUpper = char.IsUpper(ch);         // آیا حرف بزرگ است؟
+bool isWhite = char.IsWhiteSpace(ch);    // آیا فاصله است؟
+</code></pre>
+
+        <p>
+            این متدها در اعتبارسنجی فرم‌ها، پردازش متن، و کار با فایل‌ها بسیار مفید هستند.
+        </p>
+
+        <h3>مثال کاربردی — بررسی رمز عبور</h3>
+
+        <pre><code class="language-csharp">
+string password = "Test123!";
+bool hasDigit = false;
+bool hasUpper = false;
+bool hasSymbol = false;
+
+foreach (char ch in password)
+{
+    if (char.IsDigit(ch)) hasDigit = true;
+    if (char.IsUpper(ch)) hasUpper = true;
+    if (!char.IsLetterOrDigit(ch)) hasSymbol = true;
+}
+
+if (hasDigit && hasUpper && hasSymbol)
+    Console.WriteLine("Password is strong.");
+else
+    Console.WriteLine("Weak password.");
+</code></pre>
+
+        <p>
+            این یک مثال واقعی در پروژه‌هاست؛ تشخیص محتوای هر کاراکتر.
+        </p>
+
+        <h3>نکته مهم: Escape Characters</h3>
+        <p>
+            برخی کاراکترها قابل چاپ نیستند و با \ نمایش داده می‌شوند:
+        </p>
+
+        <pre><code class="language-csharp">
+char newline = '\n';
+char tab = '\t';
+char quote = '\'';
+</code></pre>
+
+        <p>این‌ها در فرمت‌بندی خروجی و فایل‌ها استفاده می‌شوند.</p>
+
+        <h3>تمرین‌های پیشنهادی</h3>
+        <ol>
+            <li>
+                برنامه‌ای بنویس که از کاربر یک کاراکتر بگیرد و:
+                <ul>
+                    <li>نوع آن (حرف، عدد، نماد) را تشخیص دهد</li>
+                    <li>اگر حرف بود، بررسی کند بزرگ است یا کوچک</li>
+                    <li>کد یونیکد آن را چاپ کند</li>
+                </ul>
+            </li>
+
+            <li>
+                برنامه‌ای بنویس که رشته‌ای را گرفته و تعداد ارقام، حروف و نمادهای آن را بشمارد.
+            </li>
+
+            <li>
+                با استفاده از char یک سیستم رمزنگاری ساده بساز
+                (مثلاً هر کاراکتر را 1 واحد در یونیکد افزایش بده).
+            </li>
+        </ol>
+
+        <p class="ref">
+            مستندات رسمی:
+            <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/char"
+                target="_blank">
+                char — Microsoft Docs
+            </a>
+        </p>
+
+    </section>
 
 
 
-<!-- ============================  
-      ENUM  
-============================= -->
-<section id="enum" class="topic-section">
+    <!-- ============================ ENUM ============================ -->
+    <section id="enum" class="topic-section">
 
-    <h2>Enum</h2>
+        <h2>Enum</h2>
 
-    <p>
-        Enum مجموعه‌ای از مقادیر ثابت و نام‌گذاری‌شده است.
-        زمانی که برنامه نیاز به مجموعه‌ای از وضعیت‌ها یا حالت‌های مشخص دارد،
-        Enum بهترین انتخاب است چون خوانایی و مفهوم‌پذیری برنامه را چند برابر بهتر می‌کند.
-    </p>
+        <p>
+            <strong>Enum</strong> یا «نوع شمارشی» راهی برای تعریف مجموعه‌ای از مقادیر ثابت و معنادار است.
+            به زبان ساده: Enum کمک می‌کند به‌جای استفاده از عدد یا رشته‌های پراکنده،
+            <strong>یک دسته مقدار استاندارد و قابل فهم</strong> تعریف کنیم.
+        </p>
 
-    <pre><code class="language-csharp">
-enum Day { Saturday, Sunday, Monday }
+        <p>
+            وقتی می‌گوییم:
+        </p>
+        <pre><code class="language-csharp">
+Role.Admin
+</code></pre>
+        <p>
+            بسیار قابل فهم‌تر از این است که بنویسیم:
+        </p>
+        <pre><code class="language-csharp">
+1   // یعنی چی؟ Admin؟ User؟
+</code></pre>
 
-Day today = Day.Sunday;
-    </code></pre>
+        <h3>چرا Enum مهم است؟</h3>
+        <p>
+            در پروژه‌های واقعی همیشه با «وضعیت‌ها» سروکار داریم.
+            مثلاً:
+        </p>
 
-    <p>
-        مستندات رسمی:
-        <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/enum" target="_blank">
-            Enum — Microsoft Docs
-        </a>
-    </p>
+        <ul>
+            <li>وضعیت سفارش: <code>Pending</code> / <code>Paid</code> / <code>Shipped</code></li>
+            <li>نقش کاربر: <code>Admin</code> / <code>User</code> / <code>Guest</code></li>
+            <li>سطح دسترسی: <code>Normal</code> / <code>Vip</code></li>
+            <li>روزهای هفته</li>
+            <li>نوع اعلان (NotificationType)</li>
+        </ul>
 
-</section>
+        <p>
+            اگر Enum نداشتیم، مجبور بودیم از رشته یا عدد استفاده کنیم که باعث اشتباه، تایپو، خطا و خوانایی پایین می‌شد.
+        </p>
+
+        <h3>ساده‌ترین شکل Enum</h3>
+
+        <pre><code class="language-csharp">
+enum Role 
+{ 
+    Admin, 
+    User, 
+    Guest 
+}
+
+Role userRole = Role.Admin;
+
+if (userRole == Role.Admin)
+    Console.WriteLine("Welcome Admin");
+</code></pre>
+
+        <p>
+            مقدارهای Enum از 0 شروع می‌شوند مگر اینکه خودت مقدار بدهی.
+        </p>
+
+        <h3>مقداردهی دستی به Enum</h3>
+
+        <pre><code class="language-csharp">
+enum OrderStatus
+{
+    Pending = 1,
+    Paid = 2,
+    Shipped = 3,
+    Delivered = 4
+}
+</code></pre>
+
+        <p>
+            این کار زمانی مفید است که:
+        </p>
+
+        <ul>
+            <li>دیتابیس از قبل عدد خاصی دارد</li>
+            <li>باید مقدار Enum را در API برای کلاینت ثابت نگه داریم</li>
+            <li>نیاز به ترتیب و ساختار مشخص داریم</li>
+        </ul>
+
+        <h3>تبدیل Enum به عدد و برعکس</h3>
+
+        <pre><code class="language-csharp">
+int code = (int)OrderStatus.Shipped;  
+// خروجی: 3
+
+OrderStatus s = (OrderStatus)2;
+// تبدیل عدد به Enum
+</code></pre>
+
+        <h3>نمایش مقدار Enum به صورت رشته</h3>
+
+        <pre><code class="language-csharp">
+Console.WriteLine(OrderStatus.Pending.ToString());
+// خروجی: "Pending"
+</code></pre>
+
+        <h3>کاربرد واقعی Enum در پروژه‌ها</h3>
+
+        <pre><code class="language-csharp">
+OrderStatus status = OrderStatus.Pending;
+
+switch (status)
+{
+    case OrderStatus.Pending:
+        Console.WriteLine("Order waiting for payment");
+        break;
+
+    case OrderStatus.Paid:
+        Console.WriteLine("Order confirmed");
+        break;
+
+    case OrderStatus.Shipped:
+        Console.WriteLine("Order is on the way");
+        break;
+}
+</code></pre>
+
+        <h3>نکتهٔ حرفه‌ای: Flags Enum (مناسب سطح کمی‌پیشرفته)</h3>
+
+        <p>
+            وقتی بخواهیم چند مقدار هم‌زمان فعال باشند (مثلاً دسترسی کاربر)، از Flags استفاده می‌کنیم.
+        </p>
+
+        <pre><code class="language-csharp">
+[Flags]
+enum Permissions
+{
+    None = 0,
+    Read = 1,
+    Write = 2,
+    Delete = 4
+}
+
+Permissions p = Permissions.Read | Permissions.Write;
+
+Console.WriteLine(p);  
+// خروجی: Read, Write
+</code></pre>
+
+        <p>
+            این قابلیت مخصوص مواردی است که می‌خواهیم چند وضعیت روی هم اعمال شوند.
+        </p>
+
+        <h3>اشتباهات رایج تازه‌کارها</h3>
+        <ul>
+            <li>استفاده از string به‌جای Enum برای وضعیت‌ها → پر از خطا</li>
+            <li>تکیه بر عدد Enum به‌جای خود اسم آن → کد خوانا نیست</li>
+            <li>فراموش کردن مقداردهی مخصوص دیتابیس → در مهاجرت‌ها مشکل می‌سازد</li>
+        </ul>
+
+        <h3>تمرین‌های پیشنهادی</h3>
+        <ol>
+            <li>یک Enum کامل برای وضعیت پرداخت بساز: <code>Pending</code>، <code>Paid</code>، <code>Failed</code>،
+                <code>Refunded</code>.
+            </li>
+            <li>برنامه‌ای بنویس که عدد ورودی کاربر را به Enum وضعیت پرداخت تبدیل کند.</li>
+            <li>برای نقش‌های کاربر (Admin, Moderator, User, Guest) یک Enum بساز و با switch پیام مناسب نمایش بده.</li>
+        </ol>
+
+        <p class="ref">
+            مستندات رسمی:
+            <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/enum"
+                target="_blank">
+                Enum — Microsoft Docs
+            </a>
+        </p>
+
+    </section>
 
 
 
-<!-- ============================  
-      STRUCT  
-============================= -->
-<section id="struct" class="topic-section">
 
-    <h2>Struct / Ref Struct</h2>
+    <!-- ============================ STRUCT ============================ -->
+    <section id="struct" class="topic-section">
 
-    <p>
-        <strong>Struct</strong> یک نوع مقداری است که داده را مستقیماً در Stack ذخیره می‌کند.
-        این ساختار برای داده‌های کوچک و سبک مناسب است (مثل Point، Rectangle و ...).
-        استفاده از Struct باعث کاهش فشار روی Garbage Collector می‌شود.
-    </p>
+        <h2>Struct / Ref Struct</h2>
 
-    <pre><code class="language-csharp">
+        <p>
+            <strong>struct</strong> در سی‌شارپ یک <strong>Value Type</strong> است؛
+            یعنی داده‌ی آن روی <strong>Stack</strong> ذخیره می‌شود و هنگام کپی شدن،
+            <strong>مستقیماً مقدار آن کپی می‌شود، نه آدرس آن</strong>.
+            به همین دلیل Struct بسیار سریع و سبک است و برای داده‌های کوچک و کوتاه‌عمر بهترین انتخاب است.
+        </p>
+
+        <h3>Struct دقیقاً چه زمانی استفاده می‌شود؟</h3>
+        <p>
+            از Struct زمانی استفاده می‌کنیم که:
+        </p>
+        <ul>
+            <li>یک «دادهٔ کوچک» داریم (مثلاً Point، Color، Money، Size)</li>
+            <li>رفتار «Immutable» یا بدون تغییر داریم (پس از ساخت تغییر نمی‌کند)</li>
+            <li>هدف ما بهبود Performance و کاهش فشار روی Garbage Collector است</li>
+            <li>نیازی به ارث‌بری از کلاس دیگر نداریم (struct ارث‌بری پشتیبانی نمی‌کند)</li>
+        </ul>
+
+        <h3>مثال ساده:</h3>
+
+        <pre><code class="language-csharp">
 struct Point
 {
     public int X;
     public int Y;
+
+    public Point(int x, int y)
+    {
+        X = x;
+        Y = y;
+    }
 }
-    </code></pre>
 
-    <p>
-        <strong>Ref Struct</strong> ساختاری ویژه است که فقط روی Stack کار می‌کند و اجازهٔ ذخیره‌سازی در Heap را ندارد.
-        این نوع برای Span<T> و پردازش‌های سریع حافظه طراحی شده است.
-    </p>
+Point p1 = new Point(5, 3);
+Point p2 = p1;   // کپی کامل داده
+p2.X = 10;
 
-    <pre><code class="language-csharp">
-ref struct SpanReader
+Console.WriteLine(p1.X);  // خروجی: 5  (تغییر نکرد)
+</code></pre>
+
+        <p>
+            این تفاوت مهمی با کلاس‌ها دارد، چون class یک Reference Type است و مقدار آن اشتراکی خواهد بود.
+        </p>
+
+        <h3>تفاوت Struct و Class — توضیح ساده و کاربردی</h3>
+
+        <table>
+            <tr>
+                <th>Struct</th>
+                <th>Class</th>
+            </tr>
+            <tr>
+                <td>Value Type (روی Stack)</td>
+                <td>Reference Type (روی Heap)</td>
+            </tr>
+            <tr>
+                <td>کپی = کپی واقعی داده</td>
+                <td>کپی = اشتراک آدرس</td>
+            </tr>
+            <tr>
+                <td>برای داده‌های کوچک و سبک</td>
+                <td>برای آبجکت‌های سنگین و پیچیده</td>
+            </tr>
+            <tr>
+                <td>ارث‌بری ندارد</td>
+                <td>ارث‌بری دارد</td>
+            </tr>
+            <tr>
+                <td>GC دخالتی ندارد</td>
+                <td>نیازمند Garbage Collector</td>
+            </tr>
+        </table>
+
+        <h3>چرا Struct باید کوچک باشد؟</h3>
+        <p>
+            هر بار که Struct کپی می‌شود، کل دادهٔ آن کپی می‌شود.
+            اگر Struct خیلی سنگین باشد (مثلاً 50 فیلد داشته باشد)،
+            برنامه کند و مدیریت حافظه سخت می‌شود.
+            بنابراین Struct باید سبک، کوچک و Purpose-Specific باشد.
+        </p>
+
+        <h3>Struct های Immutable (بهترین روش)</h3>
+        <p>
+            معمولاً Struct را <strong>Immutable</strong> می‌سازیم تا رفتار آن مشابه عددها باشد:
+        </p>
+
+        <pre><code class="language-csharp">
+struct Money
 {
-    // ...
+    public decimal Amount { get; }
+    public string Currency { get; }
+
+    public Money(decimal amount, string currency)
+    {
+        Amount = amount;
+        Currency = currency;
+    }
 }
-    </code></pre>
+</code></pre>
 
-    <p>
-        مستندات رسمی:
-        <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/struct"
-            target="_blank">
-            Struct — Microsoft Docs
-        </a>
-    </p>
+        <p>
+            Immutable بودن باعث جلوگیری از اشتباه و افزایش پایداری کد می‌شود.
+        </p>
 
-</section>
+        <h3>Ref Struct چیست؟ و کی استفاده می‌شود؟</h3>
+        <p>
+            <strong>ref struct</strong> نسخهٔ خاص Struct است که فقط روی Stack وجود دارد
+            و نمی‌تواند در Heap ذخیره شود.
+            این نوع برای کار با حافظهٔ خام و <strong>Span&lt;T&gt;</strong> معرفی شد.
+        </p>
+
+        <pre><code class="language-csharp">
+ref struct BufferReader
+{
+    public Span<byte> Data;
+
+    public BufferReader(Span<byte> data)
+    {
+        Data = data;
+    }
+}
+</code></pre>
+
+        <p>
+            این ساختارها در:
+        <ul>
+            <li>پردازش فایل</li>
+            <li>شبکه</li>
+            <li>Game Engine ها</li>
+            <li>High-Performance Code</li>
+        </ul>
+        اهمیت بسیار زیادی دارند.
+        </p>
+
+        <h3>مثال پروژه‌ای (حالت واقعی)</h3>
+        <p>
+            فرض کنید در یک بازی مختصات شخصیت‌ها را ذخیره می‌کنید:
+        </p>
+
+        <pre><code class="language-csharp">
+struct Position
+{
+    public float X { get; }
+    public float Y { get; }
+
+    public Position(float x, float y)
+    {
+        X = x;
+        Y = y;
+    }
+}
+
+Position pos1 = new Position(10f, 15f);
+Position pos2 = pos1;   // کپی داده، بدون اشتراک
+</code></pre>
+
+        <p>
+            یا در یک فروشگاه اینترنتی، قیمت و واحد پول:
+        </p>
+
+        <pre><code class="language-csharp">
+struct Price
+{
+    public decimal Amount { get; }
+    public string Currency { get; }
+
+    public Price(decimal amount, string currency)
+    {
+        Amount = amount;
+        Currency = currency;
+    }
+}
+
+Price p = new Price(199000, "IRR");
+</code></pre>
+
+        <h3>تمرین‌های پیشنهادی</h3>
+        <ol>
+            <li>
+                یک Struct برای «کتاب» بساز با خصوصیات:
+                <ul>
+                    <li>Title</li>
+                    <li>Pages</li>
+                    <li>Price</li>
+                </ul>
+                و سپس یک لیست از کتاب‌ها ساخته و میانگین قیمت را محاسبه کن.
+            </li>
+
+            <li>
+                یک Struct Immutable برای ذخیرهٔ مختصات سه‌بعدی (X, Y, Z) طراحی کن.
+            </li>
+
+            <li>
+                یک Struct برای زمان پخش موسیقی بساز (Minutes, Seconds)
+                و متدی بنویس که دو زمان را با هم جمع کند.
+            </li>
+        </ol>
+
+        <p class="ref">
+            مستندات رسمی:
+            <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/struct"
+                target="_blank">
+                Struct — Microsoft Docs
+            </a>
+        </p>
+
+    </section>
 
 
 
-<!-- ============================  
-      TUPLES  
-============================= -->
-<section id="tuples" class="topic-section">
 
-    <h2>Tuples</h2>
+    <!-- ============================ TUPLES ============================ -->
+    <section id="tuples" class="topic-section">
 
-    <p>
-        Tuple یک ساختار سبک برای ذخیرهٔ چند مقدار مختلف در کنار یکدیگر است،
-        بدون اینکه نیاز باشد کلاس یا Struct جداگانه بسازید.
-        این قابلیت به‌خصوص برای بازگرداندن چند مقدار از یک تابع بسیار کاربردی است.
-    </p>
+        <h2>Tuples</h2>
 
-    <pre><code class="language-csharp">
+        <p>
+            <strong>Tuple</strong> در سی‌شارپ راهی سریع، سبک و بسیار کاربردی است برای اینکه
+            <strong>چند مقدار را بدون ساخت کلاس جدید</strong> کنار یکدیگر ذخیره کنیم.
+            این نوع داده زمانی معرفی شد که نیاز بود توابع بیش از یک مقدار را برگردانند
+            بدون اینکه مجبور شویم کلاس‌های اضافی تعریف کنیم.
+        </p>
+
+        <h3>چرا Tuple مهم است؟</h3>
+        <p>
+            در برنامه‌نویسی روزمره بارها اتفاق می‌افتد که یک تابع باید چند مقدار را برگرداند.
+            مثلاً:
+        </p>
+
+        <ul>
+            <li>جستجو در دیتابیس → نتیجه + تعداد رکوردها</li>
+            <li>ورود کاربر → وضعیت ورود + پیام خطا</li>
+            <li>محاسبه قیمت → قیمت اصلی + قیمت پس از تخفیف</li>
+        </ul>
+
+        <p>
+            بدون Tuple مجبور بودیم:
+        <ul>
+            <li>کلاس بسازیم</li>
+            <li>out parameter استفاده کنیم</li>
+            <li>یا چند بار تابع بنویسیم</li>
+        </ul>
+        در حالی که Tuple همه این‌ها را ساده می‌کند.
+        </p>
+
+        <h3>نوع‌های Tuple در سی‌شارپ</h3>
+        <p>دو نوع Tuple داریم:</p>
+
+        <ul>
+            <li><strong>ValueTuple</strong> (نسخه جدید، سریع و بهینه، توصیه شده)</li>
+            <li><strong>Tuple&lt;...&gt;</strong> قدیمی (Reference Type، کندتر و کمتر استفاده می‌شود)</li>
+        </ul>
+
+        <p>نسخهٔ جدید همان چیزی است که با دستور زیر می‌سازیم:</p>
+
+        <pre><code class="language-csharp">
 var person = (Name: "Ali", Age: 30);
-Console.WriteLine(person.Name);
-    </code></pre>
+</code></pre>
 
-    <p>
-        مستندات رسمی:
-        <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/value-tuples"
-            target="_blank">
-            Tuples — Microsoft Docs
-        </a>
-    </p>
+        <h3>Named Tuple و Unnamed Tuple</h3>
 
-</section>
+        <p><strong>Unnamed Tuple:</strong></p>
+        <pre><code class="language-csharp">
+var data = ("Ali", 30);
+Console.WriteLine(data.Item1); // Ali
+</code></pre>
+
+        <p><strong>Named Tuple (بهتر و خواناتر):</strong></p>
+        <pre><code class="language-csharp">
+var person = (Name: "Ali", Age: 30);
+Console.WriteLine(person.Name); // Ali
+</code></pre>
+
+        <p>در پروژه‌های واقعی همیشه از Named Tuple استفاده می‌کنیم.</p>
+
+        <h3>Deconstruction (بازکردن مقادیر)</h3>
+
+        <pre><code class="language-csharp">
+var (name, age) = ("Ali", 30);
+Console.WriteLine(name);
+Console.WriteLine(age);
+</code></pre>
+
+        <p>این قابلیت کد را بسیار کوتاه و تمیز می‌کند.</p>
+
+        <h3>بازگرداندن چند مقدار از یک تابع</h3>
+
+        <pre><code class="language-csharp">
+(int sum, double avg) Calculate(int a, int b, int c)
+{
+    int total = a + b + c;
+    double average = total / 3.0;
+    return (total, average);
+}
+
+var result = Calculate(10, 20, 30);
+Console.WriteLine(result.sum);
+Console.WriteLine(result.avg);
+</code></pre>
+
+        <h3>استفادهٔ Tuple در LINQ</h3>
+
+        <pre><code class="language-csharp">
+var products = new[] { 10, 20, 30 };
+
+var stats = (
+    Count: products.Count(),
+    Max: products.Max(),
+    Min: products.Min()
+);
+
+Console.WriteLine(stats.Max);
+</code></pre>
+
+        <h3>اشتباهات رایج</h3>
+        <ul>
+            <li>استفاده از Unnamed Tuple → خوانایی پایین</li>
+            <li>استفاده از Tuple برای مدل‌های سنگین → باید کلاس ساخت</li>
+            <li>تکیه بر نام Tuple هنگام تغییر API → نوع شکننده می‌شود</li>
+        </ul>
+
+        <h3>تمرین‌های پیشنهادی</h3>
+        <ol>
+            <li>
+                تابعی بنویس که:
+                <ul>
+                    <li>قد</li>
+                    <li>وزن</li>
+                </ul>
+                را گرفته و BMI و وضعیت فرد (Normal, Fat, Thin) را به‌صورت Tuple برگرداند.
+            </li>
+
+            <li>
+                یک تابع بساز که سه عدد گرفته و خروجی آن باشد:
+                <strong>(Max, Min, Average)</strong>.
+            </li>
+
+            <li>
+                برنامه‌ای بنویس که در یک فروشگاه:
+                <ul>
+                    <li>جمع قیمت‌ها</li>
+                    <li>تعداد آیتم‌ها</li>
+                </ul>
+                را با Tuple برگرداند.
+            </li>
+        </ol>
+
+        <p class="ref">
+            مستندات رسمی:
+            <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/value-tuples"
+                target="_blank">
+                Value Tuples — Microsoft Docs
+            </a>
+        </p>
+
+    </section>
 
 
 
-<!-- ============================  
-      NULLABLE TYPES  
-============================= -->
-<section id="nullable" class="topic-section">
 
-    <h2>Nullable Value Types</h2>
+    <!-- ============================ NULLABLE TYPES ============================ -->
+    <section id="nullable" class="topic-section">
 
-    <p>
-        انواع مقداری مثل <code>int</code> و <code>bool</code> نمی‌توانند مقدار <strong>null</strong> داشته باشند،
-        اما در بسیاری از کاربردها (پایگاه‌داده، فرم‌ها، ورودی‌های کاربر) نیاز است مقدار خالی ذخیره کنیم.
-        برای این کار از علامت <strong>?</strong> استفاده می‌کنیم.
-    </p>
+        <h2>Nullable Value Types</h2>
 
-    <pre><code class="language-csharp">
+        <p>
+            در سی‌شارپ، <strong>انواع مقداری</strong> مثل <code>int</code>، <code>bool</code> و <code>double</code>
+            به‌صورت پیش‌فرض نمی‌توانند مقدار <code>null</code> داشته باشند.
+            اما در بسیاری از سناریوها—مثل فرم‌ها، دیتابیس، API—ممکن است یک مقدار هنوز مشخص نشده باشد.
+            برای حل این مشکل، سی‌شارپ قابلیت <strong>Nullable Value Types</strong> را معرفی کرد.
+        </p>
+
+        <p>
+            برای Nullable کردن یک نوع مقداری کافی است از علامت <strong>?</strong> استفاده کنیم:
+        </p>
+
+        <pre><code class="language-csharp">
+int? age = null;
+bool? isActive = null;
+decimal? price = null;
+</code></pre>
+
+        <h3>Nullable دقیقاً چیست؟</h3>
+        <p>
+            پشت صحنه، نوع nullable در سی‌شارپ در قالب
+            <code>Nullable&lt;T&gt;</code> ذخیره می‌شود، که شامل دو بخش است:
+        </p>
+
+        <ul>
+            <li><strong>HasValue</strong> — آیا مقدار دارد یا خیر؟</li>
+            <li><strong>Value</strong> — مقدار واقعی</li>
+        </ul>
+
+        <p>مثال:</p>
+
+        <pre><code class="language-csharp">
 int? score = null;
 
-if (score.HasValue)
-    Console.WriteLine(score.Value);
-    </code></pre>
+if (!score.HasValue)
+    Console.WriteLine("Score is not set.");
 
-    <p>
-        مستندات رسمی:
-        <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/nullable-value-types"
-            target="_blank">
-            Nullable Types — Microsoft Docs
-        </a>
-    </p>
+score = 90;
 
-</section>
+Console.WriteLine(score.Value);  // 90
+</code></pre>
+
+        <h3>دسترسی ایمن به مقدار</h3>
+        <p>
+            اگر به <code>Value</code> دسترسی پیدا کنید و مقدار null باشد، برنامه خطا می‌دهد.
+            به همین دلیل همیشه باید <code>HasValue</code> را بررسی کنید.
+        </p>
+
+        <h3>Null Coalescing Operator — ??</h3>
+        <p>
+            اگر مقدار null بود، مقدار جایگزین تنظیم می‌کند:
+        </p>
+
+        <pre><code class="language-csharp">
+int? stock = null;
+int finalStock = stock ?? 0;
+
+Console.WriteLine(finalStock);   // خروجی: 0
+</code></pre>
+
+        <h3>Null Coalescing Assignment — ??=</h3>
+        <p>اگر مقدار null بود، همان‌جا مقداردهی می‌کند:</p>
+
+        <pre><code class="language-csharp">
+int? count = null;
+count ??= 10;
+
+Console.WriteLine(count);  // خروجی: 10
+</code></pre>
+
+        <h3>عملگر شرطی ?. برای Nullable ها</h3>
+        <p>این عملگر دسترسی امن به اعضا را فراهم می‌کند:</p>
+
+        <pre><code class="language-csharp">
+int? length = person?.Name?.Length;
+</code></pre>
+
+        <h3>Nullable در دیتابیس و EF Core</h3>
+        <p>
+            در دیتابیس، ستون‌هایی مانند:
+        </p>
+
+        <ul>
+            <li>تاریخ فوت (ممکن است خالی باشد)</li>
+            <li>تاریخ تایید سفارش</li>
+            <li>نمره دانشجو</li>
+            <li>وضعیت فعال بودن کاربر</li>
+        </ul>
+
+        <p>
+            همیشه Nullable هستند.
+            در EF Core نیز اگر نوع C# را Nullable تعریف کنید، ستون دیتابیس به صورت NULLABLE ساخته می‌شود:
+        </p>
+
+        <pre><code class="language-csharp">
+public int? DiscountPercent { get; set; }
+</code></pre>
+
+        <h3>اشتباهات رایج تازه‌کارها</h3>
+        <ul>
+            <li>استفاده از <code>.Value</code> بدون بررسی null → خطا</li>
+            <li>استفاده بیش از حد از Nullable بدون دلیل → خوانایی پایین</li>
+            <li>فراموش کردن مقدار جایگزین در API → NullReferenceException</li>
+        </ul>
+
+        <h3>مثال پروژه‌ای — اعتبارسنجی فرم</h3>
+
+        <pre><code class="language-csharp">
+int? salary = null;
+
+if (salary is null)
+    Console.WriteLine("Salary is required.");
+else
+    Console.WriteLine($"Salary: {salary}");
+</code></pre>
+
+        <h3>تمرین‌های پیشنهادی</h3>
+        <ol>
+            <li>برنامه‌ای بنویس که سن Nullable ورودی کاربر را گرفته و اگر null بود، مقدار ۰ تنظیم کند.</li>
+            <li>سیستمی طراحی کن که Nullable بودن قیمت تخفیف را بررسی کرده، اگر null بود مقدار 0 بگذارد.</li>
+            <li>دوتا عدد Nullable گرفته و جمع آن‌ها را محاسبه کن—اگر هرکدام null بود، آن را 0 در نظر بگیر.</li>
+        </ol>
+
+        <p class="ref">
+            مستندات رسمی:
+            <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/nullable-value-types"
+                target="_blank">
+                Nullable Types — Microsoft Docs
+            </a>
+        </p>
+
+    </section>
 
 
 
-<!-- ============================  
-      DATETIME  
-============================= -->
-<section id="datetime" class="topic-section">
 
-    <h2>DateTime / DateTimeOffset</h2>
+    <!-- ============================ DATETIME ============================ -->
+    <section id="datetime" class="topic-section">
 
-    <p>
-        <strong>DateTime</strong> برای مدیریت تاریخ و زمان محلی استفاده می‌شود،
-        درحالی‌که <strong>DateTimeOffset</strong> تاریخ و زمان را همراه با
-        اختلاف زمانی (UTC Offset) ذخیره می‌کند و برای برنامه‌های جهانی بسیار دقیق‌تر است.
-        توسعه‌دهندگان حرفه‌ای معمولاً <strong>DateTimeOffset</strong> را انتخاب می‌کنند.
-    </p>
+        <h2>DateTime / DateTimeOffset</h2>
 
-    <pre><code class="language-csharp">
-DateTime now = DateTime.Now;
-DateTimeOffset utcNow = DateTimeOffset.UtcNow;
-    </code></pre>
+        <p>
+            کار با تاریخ و زمان در سی‌شارپ یکی از بخش‌های بسیار مهم و گاهی پیچیده است.
+            برای مدیریت زمان در اپلیکیشن‌های ساده می‌توان از <strong>DateTime</strong> استفاده کرد،
+            اما برای سیستم‌های شبکه‌ای، API، دیتابیس و اپلیکیشن‌های جهانی
+            <strong>DateTimeOffset</strong> انتخاب ایمن‌تر، دقیق‌تر و پیشنهاد شده است.
+        </p>
 
-    <p>
-        مستندات رسمی:
-        <a href="https://learn.microsoft.com/en-us/dotnet/standard/datetime/" target="_blank">
-            DateTime — Microsoft Docs
-        </a>
-    </p>
+        <h3>DateTime چیست؟</h3>
+        <p>
+            DateTime فقط یک مقدار تاریخ و زمان ذخیره می‌کند و نوع زمان آن می‌تواند سه حالت داشته باشد:
+        </p>
 
-</section>
+        <ul>
+            <li><strong>Local</strong> → طبق ساعت کامپیوتر</li>
+            <li><strong>Utc</strong> → استاندارد جهانی</li>
+            <li><strong>Unspecified</strong> → نامشخص (خطرناک برای برنامه‌نویسان تازه‌کار)</li>
+        </ul>
+
+        <pre><code class="language-csharp">
+DateTime local = DateTime.Now;           // Local Time
+DateTime utc = DateTime.UtcNow;          // UTC Time
+DateTime unspecified = new DateTime(2025, 5, 1);
+</code></pre>
+
+        <h3>مشکل بزرگ DateTime</h3>
+        <p>
+            DateTime اطلاعات منطقه زمانی (Time Zone) را نگه نمی‌دارد.
+            یعنی اگر یک کاربر از ایران و کاربر دیگری از آلمان زمان را ذخیره کنند،
+            بعداً مشخص نیست که مقدار مربوط به کدام منطقه بوده است.
+            این باعث بروز خطاهای بزرگ در:
+        </p>
+
+        <ul>
+            <li>دیتابیس</li>
+            <li>تراکنش‌های مالی</li>
+            <li>سامانه‌های جهانی</li>
+            <li>سیستم‌های رزرو و حمل‌ونقل</li>
+        </ul>
+
+        <p>
+            به همین دلیل مایکروسافت توصیه می‌کند برای ۹۰٪ سناریوها از
+            <strong>DateTimeOffset</strong> استفاده کنیم.
+        </p>
+
+        <h3>DateTimeOffset چیست؟</h3>
+        <p>
+            این نوع داده مانند DateTime زمان را ذخیره می‌کند اما یک <strong>offset</strong> نیز اضافه دارد
+            که نشان می‌دهد این زمان، چند ساعت با UTC اختلاف دارد.
+            همین یک ویژگی باعث می‌شود زمان‌ها قابل اعتماد، قابل حمل و استاندارد شوند.
+        </p>
+
+        <pre><code class="language-csharp">
+DateTimeOffset iranTime = DateTimeOffset.Now;     // +03:30
+DateTimeOffset utcTime = DateTimeOffset.UtcNow;   // +00:00
+</code></pre>
+
+        <h3>مثال تفاوت: ایران و آلمان</h3>
+
+        <pre><code class="language-csharp">
+DateTimeOffset tehran = new DateTimeOffset(2025, 1, 1, 10, 0, 0, TimeSpan.FromHours(3.5));
+DateTimeOffset berlin = new DateTimeOffset(2025, 1, 1, 6, 30, 0, TimeSpan.FromHours(1));
+
+Console.WriteLine(tehran.ToUniversalTime());
+Console.WriteLine(berlin.ToUniversalTime());
+</code></pre>
+
+        <p>
+            هر دو به همان لحظه در زمان اشاره می‌کنند، فقط در منطقه‌های مختلف.
+        </p>
+
+        <h3>مقایسه و اختلاف بین زمان‌ها</h3>
+
+        <pre><code class="language-csharp">
+DateTimeOffset t1 = DateTimeOffset.Now;
+DateTimeOffset t2 = t1.AddHours(5);
+
+TimeSpan diff = t2 - t1;
+Console.WriteLine(diff.TotalHours);   // 5
+</code></pre>
+
+        <h3>تبدیل بین DateTime و DateTimeOffset</h3>
+
+        <pre><code class="language-csharp">
+// DateTime → DateTimeOffset
+DateTime dt = DateTime.Now;
+DateTimeOffset dto = new DateTimeOffset(dt);
+
+// DateTimeOffset → DateTime
+DateTime dt2 = dto.DateTime;
+</code></pre>
+
+        <p>
+            اما همیشه بهتر است DateTimeOffset نگه داریم و فقط هنگام نمایش تبدیل کنیم.
+        </p>
+
+        <h3>استفاده در دیتابیس (Entity Framework)</h3>
+        <p>
+            اگر می‌خواهید زمان دقیق ثبت لاگ، ایجاد سفارش، پرداخت، Token و…
+            در دیتابیس بدون اختلاف ذخیره شود:
+        </p>
+
+        <pre><code class="language-csharp">
+public DateTimeOffset CreatedAt { get; set; } = DateTimeOffset.UtcNow;
+</code></pre>
+
+        <p>
+            EF این مقدار را دقیقاً با Offset ذخیره می‌کند و در هر سرور قابل اعتماد خواهد بود.
+        </p>
+
+        <h3>مثال پروژه‌ای — ثبت زمان سفارش</h3>
+
+        <pre><code class="language-csharp">
+public class Order
+{
+    public int Id { get; set; }
+    public DateTimeOffset CreatedAt { get; set; } = DateTimeOffset.UtcNow;
+}
+</code></pre>
+
+        <p>
+            این کار باعث می‌شود زمان سفارش در تمام سیستم‌ها استاندارد باقی بماند.
+        </p>
+
+        <h3>تمرین‌های پیشنهادی</h3>
+        <ol>
+            <li>برنامه‌ای بنویس که ساعت فعلی ایران و UTC را چاپ کند.</li>
+            <li>تاریخ تولد کاربر را گرفته و محاسبه کند چند روز از عمر او گذشته است.</li>
+            <li>زمان یک رویداد در ایران را به زمان آلمان تبدیل کن.</li>
+            <li>دو DateTimeOffset مختلف گرفته و مدت‌زمان اختلاف را محاسبه کن.</li>
+        </ol>
+
+        <p class="ref">
+            مستندات رسمی:
+            <a href="https://learn.microsoft.com/en-us/dotnet/standard/datetime/" target="_blank">
+                DateTime — Microsoft Docs
+            </a>
+        </p>
+
+    </section>
+
+
+</div>
+
+
+
+<style>
+    .valuetypes-wrapper {
+        max-width: 960px;
+        margin: 0 auto;
+        padding: 10px 20px;
+        transition: max-width .3s ease;
+    }
+
+    @media (max-width: 768px) {
+        .valuetypes-wrapper {
+            max-width: 100%;
+            padding: 10px 18px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .valuetypes-wrapper {
+            padding: 10px 12px;
+        }
+    }
+
+    /* عنوان صفحه */
+    .page-title {
+        text-align: center;
+        font-size: 40px;
+        font-weight: bold;
+        color: #ff7b00;
+        margin-bottom: 5px;
+    }
+
+    @media (max-width: 768px) {
+        .page-title {
+            font-size: 34px;
+        }
+    }
+
+    .page-desc {
+        text-align: center;
+        opacity: .8;
+        font-size: 30px;
+        margin-bottom: 40px;
+        font-family: "Lalezar", "VazirFD";
+    }
+
+    @media (max-width: 768px) {
+        .page-desc {
+            font-size: 18px;
+        }
+    }
+
+    /* سکشن‌ها */
+    .topic-section {
+        margin-bottom: 70px;
+        padding: 25px;
+        border-radius: 14px;
+        background: rgba(215, 215, 215, 0.03);
+        border-right: 4px solid #ff7b00;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    html.light .topic-section {
+        background: #ffffff;
+        border-bottom-color: #e5e5e5;
+    }
+
+    .topic-section h2 {
+        text-align: left;
+        color: #ff7b00;
+        font-size: 28px;
+        margin-bottom: 15px;
+        position: relative;
+    }
+
+    .topic-section h2::after {
+        content: "";
+        width: 60px;
+        height: 3px;
+        background: #ff7b00;
+        position: absolute;
+        bottom: -6px;
+        left: 0;
+        border-radius: 3px;
+    }
+
+    .topic-section p {
+        line-height: 1.85;
+        margin-bottom: 14px;
+    }
+
+    .topic-section h3 {
+        margin-top: 25px;
+        font-size: 20px;
+        color: #ff9f45;
+    }
+
+    ul li,
+    ol li {
+        margin-bottom: 6px;
+    }
+
+    /* لینک‌ها */
+    .ref a {
+        color: #4ea3ff;
+        font-weight: 600;
+        transition: color .2s, text-shadow .2s;
+    }
+
+    .ref a:hover {
+        color: #82c5ff;
+        text-shadow: 0 0 8px rgba(78, 163, 255, 0.6);
+    }
+
+    /* کد بلاک */
+    pre {
+        background: #161616;
+        border: 1px solid #333;
+        padding: 16px;
+        border-radius: 10px;
+        overflow-x: auto;
+        margin-top: 15px;
+        font-family: "JetBrains Mono", Menlo, Consolas, monospace;
+        font-size: 15px;
+        line-height: 1.6;
+    }
+
+    html.light pre {
+        background: #f9f9f9;
+        border-color: #dfdfdf;
+        color: #222;
+    }
+
+    /* نکته ویژه - نقل‌قول */
+    .valuetypes-wrapper blockquote {
+        padding: 15px 20px;
+        border-right: 4px solid #ff7b00;
+        background: rgba(228, 228, 228, 0.04);
+        border-radius: 10px;
+        margin: 25px 0;
+        font-style: italic;
+        opacity: .95;
+    }
+
+    html.light .valuetypes-wrapper blockquote {
+        background: #fff8f0;
+    }
+</style>
