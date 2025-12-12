@@ -1,0 +1,1952 @@
+
+
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <link rel="icon" type="image/png" href="/Gitab/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Reference Types</title>
+  <meta name="description" content="ترجمه‌های فارسی کتاب‌های فنی — سریع، مینیمال و قابل اتکا.">
+
+  <!-- استایل‌ها -->
+  <link rel="stylesheet" href="/Gitab/styles/main.css">
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+
+  <style>
+  @font-face {
+    font-family: 'Vazir';
+    src: url('/Gitab/fonts/Vazir-FD-WOL.ttf') format('truetype');
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "Lalezar";
+    src: url('fonts/Lalezar.ttf') format('truetype');
+    font-display: swap;
+}
+  body {
+    font-family: 'Vazir', sans-serif;
+  }
+  </style>
+</head>
+
+<body>
+  <!-- هدر مشترک -->
+  <header class="header">
+    <div class="container nav-wrap">
+      <a href="/Gitab/" class="brand">
+        <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="26" height="26">
+        <span>Gitab</span>
+      </a>
+
+       <nav class="nav">
+         <a href="/Gitab/" >خانه</a>
+         <a href="/Gitab/books/list-books" >کتاب‌ها</a>
+         <a href="/Gitab/giter.html" >دوره ها</a>
+          <!-- 
+         <a href="/Gitab/translator.html" >مترجمین</a>
+           -->
+       </nav>
+
+      <div class="nav-actions">
+        <button id="themeToggle" class="icon-btn theme-btn" data-icon="moon" aria-label="تغییر تم">
+          <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن">
+          <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک">
+        </button>
+
+        <a class="icon-btn" href="https://github.com/hheydarian/Gitab" target="_blank" title="GitHub">
+          <img src="/Gitab/icone/github.svg" alt="GitHub">
+        </a>
+
+        <!-- دکمه منو برای موبایل -->
+        <button class="menu-toggle" aria-label="منو">
+          <img src="/Gitab/icone/menu.svg" alt="menu">
+        </button>
+      </div>
+    </div>
+  </header>
+
+  
+  <main class="site-main">
+    
+<div class="referencetypes-wrapper">
+
+    <h1 class="page-title">Reference Types</h1>
+    <p class="page-desc">
+        آموزش کامل انواع دادهٔ ارجاعی
+    </p>
+    <!-- ============================ CLASS ============================ -->
+    <section id="class" class="topic-section">
+
+        <h2>Class</h2>
+
+        <p>
+            <strong>Class</strong> مهم‌ترین و پرکاربردترین نوع داده در سی‌شارپ است.
+            تقریباً تمام برنامه‌های واقعی دات‌نت—از وب‌سایت و API گرفته تا اپلیکیشن دسکتاپ،
+            موبایل و بازی—بر پایهٔ Class ساخته می‌شوند.
+        </p>
+
+        <p>
+            Class یک <strong>Reference Type</strong> است؛
+            یعنی دادهٔ آن روی <strong>Heap</strong> ذخیره می‌شود
+            و متغیرها فقط <strong>آدرس</strong> آن داده را نگه می‌دارند، نه خود مقدار را.
+            همین تفاوت، اساس درک OOP و مدیریت حافظه در دات‌نت است.
+        </p>
+
+        <h3>Class دقیقاً چه چیزی را مدل می‌کند؟</h3>
+        <p>
+            Class معمولاً نمایندهٔ یک «موجودیت واقعی» یا «مفهوم منطقی» است:
+        </p>
+
+        <ul>
+            <li>کاربر (User)</li>
+            <li>محصول (Product)</li>
+            <li>سفارش (Order)</li>
+            <li>پرداخت (Payment)</li>
+            <li>فایل، پیام، گزارش، لاگ و…</li>
+        </ul>
+
+        <p>
+            یعنی هر چیزی که:
+            <strong>وضعیت (State)</strong> و
+            <strong>رفتار (Behavior)</strong>
+            دارد، کاندید Class شدن است.
+        </p>
+
+        <h3>ساده‌ترین Class ممکن</h3>
+
+        <pre><code class="language-csharp">
+class Person
+{
+    public string Name;
+    public int Age;
+}
+</code></pre>
+
+        <p>
+            این Class دو <strong>Field</strong> دارد که وضعیت شخص را نگه می‌دارند.
+        </p>
+
+        <h3>ساخت Object از Class</h3>
+
+        <pre><code class="language-csharp">
+Person p1 = new Person();
+p1.Name = "Ali";
+p1.Age = 30;
+</code></pre>
+
+        <p>
+            اینجا:
+        </p>
+        <ul>
+            <li>یک Object روی Heap ساخته می‌شود</li>
+            <li>متغیر <code>p1</code> فقط آدرس آن Object را نگه می‌دارد</li>
+        </ul>
+
+        <h3>تفاوت حیاتی Class با Struct (خیلی مهم)</h3>
+
+        <pre><code class="language-csharp">
+Person p1 = new Person();
+p1.Name = "Ali";
+
+Person p2 = p1;
+p2.Name = "Reza";
+
+Console.WriteLine(p1.Name); // خروجی: Reza
+</code></pre>
+
+        <p>
+            چون Class یک Reference Type است، هر دو متغیر
+            به <strong>یک Object مشترک</strong> اشاره می‌کنند.
+            این رفتار کاملاً برعکس Struct است.
+        </p>
+
+        <h3>Constructor چیست و چرا مهم است؟</h3>
+        <p>
+            Constructor متدی است که هنگام ساخت Object اجرا می‌شود
+            و برای مقداردهی اولیهٔ امن استفاده می‌شود.
+        </p>
+
+        <pre><code class="language-csharp">
+class Person
+{
+    public string Name;
+    public int Age;
+
+    public Person(string name, int age)
+    {
+        Name = name;
+        Age = age;
+    }
+}
+</code></pre>
+
+        <pre><code class="language-csharp">
+Person p = new Person("Ali", 30);
+</code></pre>
+
+        <p>
+            استفاده از Constructor جلوی Object ناقص و باگ‌های منطقی را می‌گیرد.
+        </p>
+
+        <h3>Field vs Property (اشتباه رایج تازه‌کارها)</h3>
+
+        <p>
+            در پروژه‌های واقعی، معمولاً از <strong>Property</strong> به‌جای Field استفاده می‌کنیم،
+            چون کنترل، اعتبارسنجی و کپسوله‌سازی بهتری فراهم می‌کند.
+        </p>
+
+        <pre><code class="language-csharp">
+class Product
+{
+    public string Name { get; set; }
+    public decimal Price { get; set; }
+}
+</code></pre>
+
+        <p>
+            Property پایهٔ Binding، Serialization، EF Core و MVC است.
+        </p>
+
+        <h3>Method (رفتار Class)</h3>
+
+        <pre><code class="language-csharp">
+class Calculator
+{
+    public int Add(int a, int b)
+    {
+        return a + b;
+    }
+}
+</code></pre>
+
+        <p>
+            Method نشان‌دهندهٔ «کاری است که Object می‌تواند انجام دهد».
+        </p>
+
+        <h3>مثال پروژه‌ای واقعی — سیستم کاربر</h3>
+
+        <pre><code class="language-csharp">
+class User
+{
+    public int Id { get; set; }
+    public string Username { get; set; }
+    public bool IsActive { get; set; }
+
+    public bool CanLogin()
+    {
+        return IsActive;
+    }
+}
+</code></pre>
+
+        <pre><code class="language-csharp">
+User user = new User
+{
+    Id = 1,
+    Username = "admin",
+    IsActive = true
+};
+
+if (user.CanLogin())
+    Console.WriteLine("Login allowed");
+</code></pre>
+
+        <h3>چرا Class پایهٔ OOP است؟</h3>
+        <p>
+            تمام مفاهیم شی‌گرایی بر پایهٔ Class ساخته می‌شوند:
+        </p>
+
+        <ul>
+            <li>Encapsulation (کپسوله‌سازی)</li>
+            <li>Inheritance (ارث‌بری)</li>
+            <li>Polymorphism (چندریختی)</li>
+            <li>Abstraction (انتزاع)</li>
+        </ul>
+
+        <h3>اشتباهات رایج تازه‌کارها</h3>
+        <ul>
+            <li>استفاده از Field عمومی به‌جای Property</li>
+            <li>ساخت Class‌های خیلی بزرگ (God Object)</li>
+            <li>نادیده گرفتن Reference بودن Class</li>
+            <li>ساخت Object بدون Constructor امن</li>
+        </ul>
+
+        <h3>تمرین‌های پیشنهادی</h3>
+        <ol>
+            <li>
+                یک Class به نام <code>Book</code> بساز با:
+                <ul>
+                    <li>Title</li>
+                    <li>Author</li>
+                    <li>Pages</li>
+                    <li>Price</li>
+                </ul>
+            </li>
+
+            <li>
+                متدی بنویس که تخفیف 10٪ روی قیمت کتاب اعمال کند.
+            </li>
+
+            <li>
+                دو متغیر از یک Class بساز و Reference بودن آن را تست کن.
+            </li>
+        </ol>
+
+        <p class="ref">
+            مستندات رسمی:
+            <a href="https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/types/classes" target="_blank">
+                Classes — Microsoft Docs
+            </a>
+        </p>
+
+
+    </section>
+
+    <!-- ============================ RECORD ============================ -->
+    <section id="record" class="topic-section">
+
+        <h2>Record</h2>
+
+        <p>
+            <strong>Record</strong> یک نوع دادهٔ نسبتاً جدید در C# است (از C# 9 به بعد)
+            که برای مدل‌سازی داده‌هایی طراحی شده که
+            <strong>هویت‌شان بر اساس مقدارشان تعریف می‌شود، نه آدرس حافظه</strong>.
+        </p>
+
+        <p>
+            Record از نظر فنی یک <strong>Reference Type</strong> است،
+            اما رفتار آن در مقایسه و برابری،
+            شبیه <strong>Value Type</strong> هاست.
+            همین ویژگی Record را برای DTOها و Modelهای داده‌ای فوق‌العاده می‌کند.
+        </p>
+
+        <h3>مشکل Class برای داده‌ها</h3>
+        <p>
+            فرض کن دو شیء داریم که اطلاعات یکسانی دارند:
+        </p>
+
+        <pre><code class="language-csharp">
+class Person
+{
+    public string Name { get; set; }
+    public int Age { get; set; }
+}
+
+var p1 = new Person { Name = "Ali", Age = 30 };
+var p2 = new Person { Name = "Ali", Age = 30 };
+
+Console.WriteLine(p1 == p2); // false
+</code></pre>
+
+        <p>
+            با اینکه داده‌ها یکی هستند، نتیجه <code>false</code> است،
+            چون Class بر اساس <strong>Reference</strong> مقایسه می‌شود.
+        </p>
+
+        <h3>راه‌حل: Record</h3>
+
+        <pre><code class="language-csharp">
+record Person(string Name, int Age);
+
+var p1 = new Person("Ali", 30);
+var p2 = new Person("Ali", 30);
+
+Console.WriteLine(p1 == p2); // true
+</code></pre>
+
+        <p>
+            Record به‌صورت پیش‌فرض
+            <strong>Value-based Equality</strong> دارد.
+        </p>
+
+        <h3>Record دقیقاً چه زمانی استفاده می‌شود؟</h3>
+        <ul>
+            <li>DTOها (Data Transfer Object)</li>
+            <li>Responseهای API</li>
+            <li>Modelهای Read-Only</li>
+            <li>Query Resultها</li>
+            <li>Configuration Data</li>
+        </ul>
+
+        <h3>Immutability (ویژگی بسیار مهم Record)</h3>
+        <p>
+            Recordها معمولاً <strong>Immutable</strong> هستند،
+            یعنی بعد از ساخته‌شدن، مقدارشان تغییر نمی‌کند.
+            این موضوع باعث کاهش باگ و افزایش پایداری برنامه می‌شود.
+        </p>
+
+        <pre><code class="language-csharp">
+record User(string Username, bool IsActive);
+
+var user = new User("admin", true);
+
+// user.Username = "root";  // ❌ مجاز نیست
+</code></pre>
+
+        <h3>with Expression (کپی امن با تغییر جزئی)</h3>
+        <p>
+            برای ساخت نسخهٔ جدید از یک Record با تغییر بخشی از داده‌ها،
+            از <code>with</code> استفاده می‌کنیم:
+        </p>
+
+        <pre><code class="language-csharp">
+var user2 = user with { IsActive = false };
+</code></pre>
+
+        <p>
+            در این حالت:
+        </p>
+        <ul>
+            <li>Object جدید ساخته می‌شود</li>
+            <li>Object قبلی دست‌نخورده باقی می‌ماند</li>
+        </ul>
+
+        <h3>Record با بدنه کامل (نه فقط Primary Constructor)</h3>
+
+        <pre><code class="language-csharp">
+record Product
+{
+    public string Name { get; init; }
+    public decimal Price { get; init; }
+
+    public decimal PriceWithTax()
+        => Price * 1.09m;
+}
+</code></pre>
+
+        <h3>تفاوت Record و Class (خلاصه ولی حیاتی)</h3>
+
+        <table>
+            <tr>
+                <th>Record</th>
+                <th>Class</th>
+            </tr>
+            <tr>
+                <td>Value-based Equality</td>
+                <td>Reference-based Equality</td>
+            </tr>
+            <tr>
+                <td>Immutable (پیش‌فرض)</td>
+                <td>Mutable (معمولاً)</td>
+            </tr>
+            <tr>
+                <td>مناسب DTO و Data</td>
+                <td>مناسب Behavior و Logic</td>
+            </tr>
+            <tr>
+                <td>with Expression دارد</td>
+                <td>ندارد</td>
+            </tr>
+        </table>
+
+        <h3>مثال پروژه‌ای واقعی — API Response</h3>
+
+        <pre><code class="language-csharp">
+record UserDto(int Id, string Username, bool IsActive);
+</code></pre>
+
+        <p>
+            این Record برای انتقال داده از API به Client ایده‌آل است.
+        </p>
+
+        <h3>اشتباهات رایج</h3>
+        <ul>
+            <li>استفاده از Record برای منطق پیچیده</li>
+            <li>استفاده از Class برای DTO ساده</li>
+            <li>تغییر دادن Record به‌جای ساخت نسخه جدید</li>
+        </ul>
+
+        <h3>تمرین‌های پیشنهادی</h3>
+        <ol>
+            <li>
+                یک Record برای <code>Order</code> بساز
+                (Id, TotalPrice, CreatedAt).
+            </li>
+            <li>
+                با <code>with</code> یک نسخهٔ جدید با قیمت متفاوت بساز.
+            </li>
+            <li>
+                دو Record با مقادیر برابر بساز و نتیجهٔ مقایسه را تست کن.
+            </li>
+        </ol>
+
+        <p class="ref">
+            مستندات رسمی:
+            <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/record"
+                target="_blank">
+                Record Types — Microsoft Docs
+            </a>
+        </p>
+
+    </section>
+
+    <!-- ============================ INTERFACE ============================ -->
+    <section id="interface" class="topic-section">
+
+        <h2>Interface</h2>
+
+        <p>
+            <strong>Interface</strong> در سی‌شارپ یک «قرارداد» است.
+            یعنی فقط مشخص می‌کند یک کلاس
+            <strong>چه کارهایی باید انجام دهد</strong>،
+            بدون اینکه نحوهٔ انجام آن‌ها را پیاده‌سازی کند.
+        </p>
+
+        <p>
+            Interface یکی از مهم‌ترین ابزارها برای
+            <strong>طراحی تمیز، قابل توسعه و تست‌پذیر</strong>
+            در دات‌نت است.
+        </p>
+
+        <h3>Interface چه چیزی دارد؟</h3>
+        <ul>
+            <li>تعریف متدها</li>
+            <li>تعریف Propertyها</li>
+            <li>تعریف Eventها</li>
+        </ul>
+
+        <p>
+            Interface:
+        </p>
+        <ul>
+            <li>بدنهٔ متد ندارد (به‌طور سنتی)</li>
+            <li>State (Field) ندارد</li>
+            <li>Object ساخته نمی‌شود</li>
+        </ul>
+
+        <h3>ساده‌ترین Interface ممکن</h3>
+
+        <pre><code class="language-csharp">
+interface ILogger
+{
+    void Log(string message);
+}
+</code></pre>
+
+        <h3>پیاده‌سازی Interface توسط Class</h3>
+
+        <pre><code class="language-csharp">
+class ConsoleLogger : ILogger
+{
+    public void Log(string message)
+    {
+        Console.WriteLine(message);
+    }
+}
+</code></pre>
+
+        <p>
+            این Class «متعهد» شده که قرارداد ILogger را رعایت کند.
+        </p>
+
+        <h3>چرا Interface مهم است؟ (Why it matters)</h3>
+        <p>
+            چون باعث می‌شود کد:
+        </p>
+
+        <ul>
+            <li>وابسته به پیاده‌سازی نباشد</li>
+            <li>قابل تغییر بدون شکستن باشد</li>
+            <li>قابل تست (Mock کردن) شود</li>
+        </ul>
+
+        <h3>Dependency Injection با Interface</h3>
+
+        <pre><code class="language-csharp">
+class OrderService
+{
+    private readonly ILogger _logger;
+
+    public OrderService(ILogger logger)
+    {
+        _logger = logger;
+    }
+
+    public void CreateOrder()
+    {
+        _logger.Log("Order created");
+    }
+}
+</code></pre>
+
+        <p>
+            حالا OrderService به <strong>Interface</strong> وابسته است،
+            نه به یک Class خاص.
+        </p>
+
+        <h3>چند پیاده‌سازی برای یک Interface</h3>
+
+        <pre><code class="language-csharp">
+class FileLogger : ILogger
+{
+    public void Log(string message)
+    {
+        File.AppendAllText("log.txt", message);
+    }
+}
+</code></pre>
+
+        <p>
+            می‌توانی هر زمان بدون تغییر OrderService،
+            Logger را عوض کنی.
+        </p>
+
+        <h3>Interface و Polymorphism</h3>
+
+        <pre><code class="language-csharp">
+ILogger logger = new ConsoleLogger();
+logger.Log("Hello");
+</code></pre>
+
+        <p>
+            در اینجا:
+            <strong>نوع متغیر Interface است</strong>
+            اما رفتار واقعی از Class می‌آید.
+        </p>
+
+        <h3>Interface در تست (Mock)</h3>
+
+        <pre><code class="language-csharp">
+class FakeLogger : ILogger
+{
+    public void Log(string message)
+    {
+        // Test only
+    }
+}
+</code></pre>
+
+        <p>
+            بدون Interface، تست واحد (Unit Test) عملاً غیرممکن یا سخت می‌شود.
+        </p>
+
+        <h3>Interface vs Class (خلاصه حیاتی)</h3>
+
+        <table>
+            <tr>
+                <th>Interface</th>
+                <th>Class</th>
+            </tr>
+            <tr>
+                <td>فقط قرارداد</td>
+                <td>قرارداد + پیاده‌سازی</td>
+            </tr>
+            <tr>
+                <td>State ندارد</td>
+                <td>State دارد</td>
+            </tr>
+            <tr>
+                <td>قابل پیاده‌سازی توسط چند Class</td>
+                <td>ارث‌بری محدود</td>
+            </tr>
+            <tr>
+                <td>پایه Dependency Injection</td>
+                <td>پیاده‌سازی نهایی</td>
+            </tr>
+        </table>
+
+        <h3>Interface های مدرن (C# جدید)</h3>
+        <p>
+            از C# 8 به بعد، Interface می‌تواند
+            <strong>Default Implementation</strong>
+            داشته باشد:
+        </p>
+
+        <pre><code class="language-csharp">
+interface IGreeter
+{
+    void Greet();
+
+    void SayHello()
+    {
+        Console.WriteLine("Hello");
+    }
+}
+</code></pre>
+
+        <p>
+            اما در معماری تمیز، معمولاً از این قابلیت کمتر استفاده می‌شود.
+        </p>
+
+        <h3>اشتباهات رایج</h3>
+        <ul>
+            <li>ساخت Interface بدون نیاز واقعی</li>
+            <li>Interfaceهای خیلی بزرگ (God Interface)</li>
+            <li>وابستگی مستقیم به Class به‌جای Interface</li>
+        </ul>
+
+        <h3>تمرین‌های پیشنهادی</h3>
+        <ol>
+            <li>
+                Interface ای برای <code>IPaymentService</code> بساز.
+            </li>
+            <li>
+                دو پیاده‌سازی مختلف (Online / Cash) بنویس.
+            </li>
+            <li>
+                یک Service بساز که فقط به Interface وابسته باشد.
+            </li>
+        </ol>
+
+        <p class="ref">
+            مستندات رسمی:
+            <a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/interfaces/" target="_blank">
+                Interfaces — Microsoft Docs
+            </a>
+        </p>
+
+    </section>
+
+    <!-- ============================ OBJECT ============================ -->
+    <section id="object" class="topic-section">
+
+        <h2>Object</h2>
+
+        <p>
+            <strong>Object</strong> پایه‌ای‌ترین کلاس در سی‌شارپ است.
+            تمام نوع‌ها—چه Value Type و چه Reference Type—
+            به‌صورت مستقیم یا غیرمستقیم از <code>object</code> ارث‌بری می‌کنند.
+        </p>
+
+        <p>
+            یعنی هر چیزی که در سی‌شارپ می‌سازی،
+            در نهایت یک <strong>Object</strong> است.
+        </p>
+
+        <h3>چرا Object مهم است؟</h3>
+        <ul>
+            <li>پایهٔ Polymorphism</li>
+            <li>پایهٔ Collectionها</li>
+            <li>پایهٔ Logging و Debug</li>
+            <li>پایهٔ Boxing / Unboxing</li>
+        </ul>
+
+        <h3>همه چیز object است</h3>
+
+        <pre><code class="language-csharp">
+int number = 10;
+string name = "Ali";
+DateTime now = DateTime.Now;
+
+object a = number;
+object b = name;
+object c = now;
+</code></pre>
+
+        <p>
+            اینجا حتی <code>int</code> هم به object تبدیل شده
+            (این همان <strong>Boxing</strong> است که بعداً کامل بررسی می‌کنیم).
+        </p>
+
+        <h3>متدهای مهم Object</h3>
+        <p>
+            کلاس Object چند متد حیاتی دارد که تقریباً همیشه با آن‌ها سر و کار داری:
+        </p>
+
+        <ul>
+            <li><code>ToString()</code></li>
+            <li><code>Equals()</code></li>
+            <li><code>GetHashCode()</code></li>
+            <li><code>GetType()</code></li>
+        </ul>
+
+        <h3>ToString() — نمایش انسانی داده</h3>
+
+        <pre><code class="language-csharp">
+var p = new Person();
+Console.WriteLine(p.ToString());
+</code></pre>
+
+        <p>
+            خروجی پیش‌فرض معمولاً نام کلاس است،
+            به همین دلیل تقریباً همیشه آن را override می‌کنیم.
+        </p>
+
+        <pre><code class="language-csharp">
+class Person
+{
+    public string Name { get; set; }
+    public int Age { get; set; }
+
+    public override string ToString()
+    {
+        return $"{Name} ({Age})";
+    }
+}
+</code></pre>
+
+        <h3>Equals() — برابری منطقی</h3>
+
+        <pre><code class="language-csharp">
+var p1 = new Person { Name = "Ali", Age = 30 };
+var p2 = new Person { Name = "Ali", Age = 30 };
+
+Console.WriteLine(p1.Equals(p2)); // false (پیش‌فرض)
+</code></pre>
+
+        <p>
+            برای مقایسهٔ منطقی باید <code>Equals</code> را override کنیم
+            (که در فصل Equality دیدی).
+        </p>
+
+        <h3>GetHashCode() — کلید عملکرد Collectionها</h3>
+        <p>
+            این متد برای Dictionary و HashSet حیاتی است.
+            اگر Equals را override می‌کنی،
+            باید <code>GetHashCode</code> را هم override کنی.
+        </p>
+
+        <pre><code class="language-csharp">
+public override int GetHashCode()
+{
+    return HashCode.Combine(Name, Age);
+}
+</code></pre>
+
+        <h3>GetType() — شناخت نوع واقعی</h3>
+
+        <pre><code class="language-csharp">
+object obj = "Hello";
+
+Console.WriteLine(obj.GetType().Name); // String
+</code></pre>
+
+        <p>
+            این متد برای Reflection، Debug و Frameworkها بسیار مهم است.
+        </p>
+
+        <h3>Polymorphism با Object</h3>
+
+        <pre><code class="language-csharp">
+object[] items =
+{
+    10,
+    "Ali",
+    DateTime.Now
+};
+
+foreach (var item in items)
+{
+    Console.WriteLine(item.ToString());
+}
+</code></pre>
+
+        <p>
+            اینجا هر آیتم نوع متفاوتی دارد،
+            اما همه از object استفاده می‌کنند.
+        </p>
+
+        <h3>اشتباهات رایج</h3>
+        <ul>
+            <li>استفاده بیش‌ازحد از object به‌جای نوع مشخص</li>
+            <li>فراموش کردن override ToString()</li>
+            <li>Override کردن Equals بدون GetHashCode</li>
+        </ul>
+
+        <h3>تمرین‌های پیشنهادی</h3>
+        <ol>
+            <li>
+                یک Class بساز و <code>ToString()</code> را override کن.
+            </li>
+            <li>
+                چند نوع مختلف را در یک آرایه object ذخیره کن.
+            </li>
+            <li>
+                از <code>GetType()</code> برای تشخیص نوع در runtime استفاده کن.
+            </li>
+        </ol>
+
+        <p class="ref">
+            مستندات رسمی:
+            <a href="https://learn.microsoft.com/en-us/dotnet/api/system.object" target="_blank">
+                System.Object — Microsoft Docs
+            </a>
+        </p>
+
+    </section>
+
+    <!-- ============================ STRING ============================ -->
+    <section id="string" class="topic-section">
+
+        <h2>String</h2>
+
+        <p>
+            <strong>string</strong> یکی از پرکاربردترین نوع‌ها در C# است،
+            اما رفتار آن با بیشتر Reference Typeها متفاوت است.
+            String یک <strong>Reference Type Immutable</strong> است؛
+            یعنی بعد از ساخته‌شدن، مقدار آن هرگز تغییر نمی‌کند.
+        </p>
+
+        <p>
+            همین ویژگی، هم مزیت امنیتی دارد و هم اگر ندانیم،
+            می‌تواند باعث افت شدید Performance شود.
+        </p>
+
+        <h3>ساخت String</h3>
+
+        <pre><code class="language-csharp">
+string name = "Ali";
+string city = new string(new[] { 'T', 'e', 'h', 'r', 'a', 'n' });
+</code></pre>
+
+        <h3>Immutable یعنی چه؟ (نکتهٔ بسیار مهم)</h3>
+        <p>
+            Immutable یعنی هر تغییری روی string،
+            در واقع یک string جدید در حافظه می‌سازد.
+        </p>
+
+        <pre><code class="language-csharp">
+string text = "Hello";
+text = text + " World";
+</code></pre>
+
+        <p>
+            این کد:
+        </p>
+        <ul>
+            <li>یک string جدید می‌سازد</li>
+            <li>string قبلی بدون استفاده می‌ماند</li>
+            <li>به Garbage Collector فشار وارد می‌کند</li>
+        </ul>
+
+        <h3>String Pool (بهینه‌سازی داخلی CLR)</h3>
+        <p>
+            CLR برای stringهای Literal یک Pool دارد
+            تا از ساخت چندبارهٔ مقادیر یکسان جلوگیری کند:
+        </p>
+
+        <pre><code class="language-csharp">
+string a = "Hello";
+string b = "Hello";
+
+bool sameRef = ReferenceEquals(a, b); // true
+</code></pre>
+
+        <p>
+            اما این بهینه‌سازی فقط برای Literalهاست، نه رشته‌های ساخته‌شده در Runtime.
+        </p>
+
+        <h3>مقایسهٔ String (درست و حرفه‌ای)</h3>
+
+        <pre><code class="language-csharp">
+string a = "ali";
+string b = "Ali";
+
+bool r1 = a == b; // false
+bool r2 = a.Equals(b, StringComparison.OrdinalIgnoreCase); // true
+</code></pre>
+
+        <p>
+            در پروژه‌های واقعی همیشه از
+            <code>StringComparison.OrdinalIgnoreCase</code>
+            استفاده کن مگر دلیل خاصی داشته باشی.
+        </p>
+
+        <h3>String Interpolation (روش پیشنهادی)</h3>
+
+        <pre><code class="language-csharp">
+string name = "Ali";
+int age = 30;
+
+string result = $"Name: {name}, Age: {age}";
+</code></pre>
+
+        <p>
+            این روش:
+        </p>
+        <ul>
+            <li>خواناتر است</li>
+            <li>کم‌خطاتر است</li>
+            <li>استاندارد مدرن C# است</li>
+        </ul>
+
+        <h3>StringBuilder (وقتی Performance مهم است)</h3>
+        <p>
+            اگر قرار است داخل حلقه یا حجم زیاد string بسازی،
+            باید از <strong>StringBuilder</strong> استفاده کنی.
+        </p>
+
+        <pre><code class="language-csharp">
+var sb = new StringBuilder();
+
+for (int i = 0; i < 1000; i++)
+{
+    sb.Append(i);
+}
+
+string result = sb.ToString();
+</code></pre>
+
+        <p>
+            StringBuilder Mutable است و string جدید نمی‌سازد.
+        </p>
+
+        <h3>متدهای پرکاربرد String</h3>
+        <ul>
+            <li><code>Contains</code></li>
+            <li><code>StartsWith</code></li>
+            <li><code>EndsWith</code></li>
+            <li><code>Replace</code></li>
+            <li><code>Split</code></li>
+            <li><code>Trim</code></li>
+        </ul>
+
+        <pre><code class="language-csharp">
+string text = "  hello world  ";
+
+string clean = text.Trim().ToUpper();
+</code></pre>
+
+        <h3>مثال پروژه‌ای — اعتبارسنجی نام کاربری</h3>
+
+        <pre><code class="language-csharp">
+string username = input.Trim();
+
+if (string.IsNullOrWhiteSpace(username))
+{
+    Console.WriteLine("Username is required");
+}
+</code></pre>
+
+        <h3>اشتباهات رایج</h3>
+        <ul>
+            <li>چسباندن string در حلقه با +</li>
+            <li>نادیده گرفتن Culture در مقایسه</li>
+            <li>استفاده نکردن از StringBuilder در حجم بالا</li>
+        </ul>
+
+        <h3>تمرین‌های پیشنهادی</h3>
+        <ol>
+            <li>یک متن را گرفته و تعداد کلمات آن را بشمار.</li>
+            <li>نام کاربر را Normalize کن (Trim + ToLower).</li>
+            <li>یک متن بزرگ با StringBuilder بساز.</li>
+        </ol>
+
+        <p class="ref">
+            مستندات رسمی:
+            <a href="https://learn.microsoft.com/en-us/dotnet/api/system.string" target="_blank">
+                System.String — Microsoft Docs
+            </a>
+        </p>
+
+    </section>
+
+    <!-- ============================ DELEGATE ============================ -->
+    <section id="delegate" class="topic-section">
+
+        <h2>Delegate</h2>
+
+        <p>
+            <strong>Delegate</strong> در سی‌شارپ نوعی Reference Type است
+            که می‌تواند به یک یا چند متد اشاره کند.
+            به زبان ساده‌تر:
+            <strong>Delegate یعنی ذخیرهٔ متد در یک متغیر</strong>.
+        </p>
+
+        <p>
+            Delegate پایهٔ مفاهیمی مثل
+            <strong>Event</strong>،
+            <strong>Callback</strong>،
+            <strong>LINQ</strong> و
+            <strong>Async Programming</strong>
+            در دات‌نت است.
+        </p>
+
+        <h3>چرا به Delegate نیاز داریم؟</h3>
+        <p>
+            گاهی می‌خواهیم رفتار را به یک متد بدهیم،
+            بدون اینکه بدانیم دقیقاً چه متدی اجرا خواهد شد.
+            اینجاست که Delegate وارد می‌شود.
+        </p>
+
+        <h3>ساده‌ترین Delegate</h3>
+
+        <pre><code class="language-csharp">
+delegate void Logger(string message);
+</code></pre>
+
+        <p>
+            این Delegate می‌تواند به هر متدی که
+            ورودی string و خروجی void دارد متصل شود.
+        </p>
+
+        <h3>اتصال متد به Delegate</h3>
+
+        <pre><code class="language-csharp">
+void ConsoleLog(string msg)
+{
+    Console.WriteLine(msg);
+}
+
+Logger log = ConsoleLog;
+log("Hello Delegate");
+</code></pre>
+
+        <h3>Delegate با چند متد (Multicast)</h3>
+        <p>
+            یک Delegate می‌تواند به چند متد متصل شود
+            و همه را به ترتیب اجرا کند.
+        </p>
+
+        <pre><code class="language-csharp">
+Logger log = ConsoleLog;
+log += FileLog;
+
+log("Saved!");
+</code></pre>
+
+        <h3>Anonymous Method و Lambda</h3>
+
+        <pre><code class="language-csharp">
+Logger log = (msg) =>
+{
+    Console.WriteLine(msg.ToUpper());
+};
+</code></pre>
+
+        <p>
+            این همان پایه‌ای است که Lambda Expressionها روی آن ساخته شده‌اند.
+        </p>
+
+        <h3>Delegate به‌عنوان پارامتر (Callback)</h3>
+
+        <pre><code class="language-csharp">
+void Process(int value, Action<int> callback)
+{
+    callback(value * 2);
+}
+
+Process(10, x => Console.WriteLine(x));
+</code></pre>
+
+        <p>
+            این الگو در برنامه‌نویسی ناهمزمان و Event محور بسیار رایج است.
+        </p>
+
+        <h3>Action و Func (Delegateهای آماده)</h3>
+        <p>
+            سی‌شارپ Delegateهای عمومی آماده دارد:
+        </p>
+
+        <ul>
+            <li><code>Action</code> — بدون خروجی</li>
+            <li><code>Func</code> — با خروجی</li>
+        </ul>
+
+        <pre><code class="language-csharp">
+Action<string> log = Console.WriteLine;
+
+Func<int, int, int> sum = (a, b) => a + b;
+</code></pre>
+
+        <h3>Delegate در LINQ (واقعی‌ترین مثال)</h3>
+
+        <pre><code class="language-csharp">
+var numbers = new[] { 1, 2, 3, 4 };
+
+var evens = numbers.Where(n => n % 2 == 0);
+</code></pre>
+
+        <p>
+            <code>n => n % 2 == 0</code> یک Delegate است که به متد Where داده شده.
+        </p>
+
+        <h3>مثال پروژه‌ای — سیستم گزارش‌گیری</h3>
+
+        <pre><code class="language-csharp">
+void Save(string msg) => Console.WriteLine(msg);
+
+void Notify(string msg) => Console.WriteLine("Notify: " + msg);
+
+Action<string> reporter = Save;
+reporter += Notify;
+
+reporter("Order created");
+</code></pre>
+
+        <h3>اشتباهات رایج</h3>
+        <ul>
+            <li>پیچیده کردن بیش از حد Delegate</li>
+            <li>نادیده گرفتن Action / Func</li>
+            <li>استفاده از Delegate به‌جای Interface در معماری</li>
+        </ul>
+
+        <h3>تمرین‌های پیشنهادی</h3>
+        <ol>
+            <li>Delegate ای بساز که دو عدد را بگیرد و جمع کند.</li>
+            <li>یک متد بنویس که Delegate به‌عنوان پارامتر بگیرد.</li>
+            <li>با Action یک Callback ساده پیاده‌سازی کن.</li>
+        </ol>
+
+        <p class="ref">
+            مستندات رسمی:
+            <a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/delegates/" target="_blank">
+                Delegates — Microsoft Docs
+            </a>
+        </p>
+
+    </section>
+
+    <!-- ============================ EVENT ============================ -->
+    <section id="event" class="topic-section">
+
+        <h2>Event</h2>
+
+        <p>
+            <strong>Event</strong> در سی‌شارپ مکانیزمی است
+            برای اطلاع‌رسانی وقوع یک اتفاق (رویداد)
+            بدون اینکه فرستنده بداند چه کسی به آن واکنش نشان می‌دهد.
+        </p>
+
+        <p>
+            Event بر پایهٔ <strong>Delegate</strong> ساخته شده،
+            اما استفاده از آن <strong>امن‌تر و کنترل‌شده‌تر</strong> است.
+            به همین دلیل در UI، سیستم‌های Domain و Frameworkها بسیار رایج است.
+        </p>
+
+        <h3>چرا Event داریم؟</h3>
+        <p>
+            چون نمی‌خواهیم هر کسی بتواند یک Delegate را اجرا کند.
+            فقط خود کلاس باید مجاز باشد رویداد را «فایر» کند.
+        </p>
+
+        <h3>ساخت ساده‌ترین Event</h3>
+
+        <pre><code class="language-csharp">
+class Button
+{
+    public event Action Clicked;
+
+    public void Click()
+    {
+        Clicked?.Invoke();
+    }
+}
+</code></pre>
+
+        <p>
+            اینجا:
+        </p>
+        <ul>
+            <li>بیرون کلاس فقط می‌تواند Subscribe / Unsubscribe کند</li>
+            <li>فقط داخل کلاس می‌تواند Event را اجرا کند</li>
+        </ul>
+
+        <h3>Subscribe و Unsubscribe</h3>
+
+        <pre><code class="language-csharp">
+var button = new Button();
+
+button.Clicked += () => Console.WriteLine("Button clicked!");
+button.Clicked -= () => Console.WriteLine("Button clicked!");
+</code></pre>
+
+        <h3>الگوی استاندارد EventHandler</h3>
+        <p>
+            در دات‌نت، الگوی پیشنهادی برای Eventها
+            استفاده از <code>EventHandler</code> است:
+        </p>
+
+        <pre><code class="language-csharp">
+class Order
+{
+    public event EventHandler OrderCreated;
+
+    public void Create()
+    {
+        OrderCreated?.Invoke(this, EventArgs.Empty);
+    }
+}
+</code></pre>
+
+        <h3>Event با داده (EventArgs)</h3>
+
+        <pre><code class="language-csharp">
+class OrderCreatedEventArgs : EventArgs
+{
+    public int OrderId { get; }
+    public decimal Total { get; }
+
+    public OrderCreatedEventArgs(int orderId, decimal total)
+    {
+        OrderId = orderId;
+        Total = total;
+    }
+}
+</code></pre>
+
+        <pre><code class="language-csharp">
+class Order
+{
+    public event EventHandler<OrderCreatedEventArgs> OrderCreated;
+
+    public void Create(int id, decimal total)
+    {
+        OrderCreated?.Invoke(this,
+            new OrderCreatedEventArgs(id, total));
+    }
+}
+</code></pre>
+
+        <h3>مثال پروژه‌ای — Notification سیستم</h3>
+
+        <pre><code class="language-csharp">
+var order = new Order();
+
+order.OrderCreated += (sender, e) =>
+{
+    Console.WriteLine($"Order {e.OrderId} created. Total: {e.Total}");
+};
+
+order.Create(1, 250000);
+</code></pre>
+
+        <h3>تفاوت Event و Delegate</h3>
+
+        <table>
+            <tr>
+                <th>Event</th>
+                <th>Delegate</th>
+            </tr>
+            <tr>
+                <td>فقط کلاس مالک می‌تواند اجرا کند</td>
+                <td>هر کسی می‌تواند اجرا کند</td>
+            </tr>
+            <tr>
+                <td>امن‌تر</td>
+                <td>کم‌امن‌تر</td>
+            </tr>
+            <tr>
+                <td>مناسب Architecture</td>
+                <td>مناسب Callback ساده</td>
+            </tr>
+        </table>
+
+        <h3>اشتباهات رایج</h3>
+        <ul>
+            <li>فراموش کردن Unsubscribe (Memory Leak)</li>
+            <li>استفاده از Event برای منطق تجاری سنگین</li>
+            <li>استفاده از Delegate به‌جای Event در API عمومی</li>
+        </ul>
+
+        <h3>تمرین‌های پیشنهادی</h3>
+        <ol>
+            <li>کلاسی بساز که Event تغییر وضعیت داشته باشد.</li>
+            <li>Event با EventArgs سفارشی پیاده‌سازی کن.</li>
+            <li>دو Listener مختلف برای یک Event بنویس.</li>
+        </ol>
+
+        <p class="ref">
+            مستندات رسمی:
+            <a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/events/" target="_blank">
+                Events — Microsoft Docs
+            </a>
+        </p>
+
+    </section>
+
+    <!-- ============================ EVENT ============================ -->
+    <section id="event" class="topic-section">
+
+        <h2>Event</h2>
+
+        <p>
+            <strong>Event</strong> در سی‌شارپ مکانیزمی است
+            برای اطلاع‌رسانی وقوع یک اتفاق (رویداد)
+            بدون اینکه فرستنده بداند چه کسی به آن واکنش نشان می‌دهد.
+        </p>
+
+        <p>
+            Event بر پایهٔ <strong>Delegate</strong> ساخته شده،
+            اما استفاده از آن <strong>امن‌تر و کنترل‌شده‌تر</strong> است.
+            به همین دلیل در UI، سیستم‌های Domain و Frameworkها بسیار رایج است.
+        </p>
+
+        <h3>چرا Event داریم؟</h3>
+        <p>
+            چون نمی‌خواهیم هر کسی بتواند یک Delegate را اجرا کند.
+            فقط خود کلاس باید مجاز باشد رویداد را «فایر» کند.
+        </p>
+
+        <h3>ساخت ساده‌ترین Event</h3>
+
+        <pre><code class="language-csharp">
+class Button
+{
+    public event Action Clicked;
+
+    public void Click()
+    {
+        Clicked?.Invoke();
+    }
+}
+</code></pre>
+
+        <p>
+            اینجا:
+        </p>
+        <ul>
+            <li>بیرون کلاس فقط می‌تواند Subscribe / Unsubscribe کند</li>
+            <li>فقط داخل کلاس می‌تواند Event را اجرا کند</li>
+        </ul>
+
+        <h3>Subscribe و Unsubscribe</h3>
+
+        <pre><code class="language-csharp">
+var button = new Button();
+
+button.Clicked += () => Console.WriteLine("Button clicked!");
+button.Clicked -= () => Console.WriteLine("Button clicked!");
+</code></pre>
+
+        <h3>الگوی استاندارد EventHandler</h3>
+        <p>
+            در دات‌نت، الگوی پیشنهادی برای Eventها
+            استفاده از <code>EventHandler</code> است:
+        </p>
+
+        <pre><code class="language-csharp">
+class Order
+{
+    public event EventHandler OrderCreated;
+
+    public void Create()
+    {
+        OrderCreated?.Invoke(this, EventArgs.Empty);
+    }
+}
+</code></pre>
+
+        <h3>Event با داده (EventArgs)</h3>
+
+        <pre><code class="language-csharp">
+class OrderCreatedEventArgs : EventArgs
+{
+    public int OrderId { get; }
+    public decimal Total { get; }
+
+    public OrderCreatedEventArgs(int orderId, decimal total)
+    {
+        OrderId = orderId;
+        Total = total;
+    }
+}
+</code></pre>
+
+        <pre><code class="language-csharp">
+class Order
+{
+    public event EventHandler<OrderCreatedEventArgs> OrderCreated;
+
+    public void Create(int id, decimal total)
+    {
+        OrderCreated?.Invoke(this,
+            new OrderCreatedEventArgs(id, total));
+    }
+}
+</code></pre>
+
+        <h3>مثال پروژه‌ای — Notification سیستم</h3>
+
+        <pre><code class="language-csharp">
+var order = new Order();
+
+order.OrderCreated += (sender, e) =>
+{
+    Console.WriteLine($"Order {e.OrderId} created. Total: {e.Total}");
+};
+
+order.Create(1, 250000);
+</code></pre>
+
+        <h3>تفاوت Event و Delegate</h3>
+
+        <table>
+            <tr>
+                <th>Event</th>
+                <th>Delegate</th>
+            </tr>
+            <tr>
+                <td>فقط کلاس مالک می‌تواند اجرا کند</td>
+                <td>هر کسی می‌تواند اجرا کند</td>
+            </tr>
+            <tr>
+                <td>امن‌تر</td>
+                <td>کم‌امن‌تر</td>
+            </tr>
+            <tr>
+                <td>مناسب Architecture</td>
+                <td>مناسب Callback ساده</td>
+            </tr>
+        </table>
+
+        <h3>اشتباهات رایج</h3>
+        <ul>
+            <li>فراموش کردن Unsubscribe (Memory Leak)</li>
+            <li>استفاده از Event برای منطق تجاری سنگین</li>
+            <li>استفاده از Delegate به‌جای Event در API عمومی</li>
+        </ul>
+
+        <h3>تمرین‌های پیشنهادی</h3>
+        <ol>
+            <li>کلاسی بساز که Event تغییر وضعیت داشته باشد.</li>
+            <li>Event با EventArgs سفارشی پیاده‌سازی کن.</li>
+            <li>دو Listener مختلف برای یک Event بنویس.</li>
+        </ol>
+
+        <p class="ref">
+            مستندات رسمی:
+            <a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/events/" target="_blank">
+                Events — Microsoft Docs
+            </a>
+        </p>
+
+    </section>
+
+    <!-- ============================ NULLABLE REFERENCE TYPES ============================ -->
+    <section id="nullable-reference-types" class="topic-section">
+
+        <h2>Nullable Reference Types</h2>
+
+        <p>
+            <strong>Nullable Reference Types</strong> قابلیتی است که از C# 8 معرفی شد
+            تا مشکل قدیمی و دردناک <strong>NullReferenceException</strong> را
+            در زمان کامپایل شناسایی کند، نه در زمان اجرا.
+        </p>
+
+        <p>
+            ایدهٔ اصلی بسیار ساده است:
+            <br>
+            <strong>کامپایلر بداند کدام Reference ممکن است null باشد و کدام نه.</strong>
+        </p>
+
+        <h3>مشکل قبل از Nullable Reference Types</h3>
+
+        <pre><code class="language-csharp">
+string name = null;
+Console.WriteLine(name.Length); // Runtime Exception ❌
+</code></pre>
+
+        <p>
+            این کد بدون هیچ اخطار کامپایل می‌شد،
+            اما در Runtime برنامه کرش می‌کرد.
+        </p>
+
+        <h3>فعال‌سازی Nullable Reference Types</h3>
+        <p>
+            معمولاً در فایل پروژه (<code>.csproj</code>) فعال می‌شود:
+        </p>
+
+        <pre><code class="language-xml">
+&lt;Nullable&gt;enable&lt;/Nullable&gt;
+</code></pre>
+
+        <p>
+            یا به‌صورت محلی داخل فایل:
+        </p>
+
+        <pre><code class="language-csharp">
+#nullable enable
+</code></pre>
+
+        <h3>Reference Type غیرقابل null (پیش‌فرض جدید)</h3>
+
+        <pre><code class="language-csharp">
+string name = "Ali";
+name = null; // ⚠️ Warning
+</code></pre>
+
+        <p>
+            کامپایلر هشدار می‌دهد که این متغیر
+            نباید مقدار null بگیرد.
+        </p>
+
+        <h3>Reference Type قابل null</h3>
+
+        <pre><code class="language-csharp">
+string? nickname = null;
+</code></pre>
+
+        <p>
+            علامت <code>?</code> یعنی:
+            «این Reference ممکن است null باشد و باید چک شود».
+        </p>
+
+        <h3>استفادهٔ امن از Reference Nullable</h3>
+
+        <pre><code class="language-csharp">
+if (nickname != null)
+{
+    Console.WriteLine(nickname.Length);
+}
+</code></pre>
+
+        <p>
+            بعد از این بررسی، کامپایلر می‌داند که
+            <code>nickname</code> دیگر null نیست.
+        </p>
+
+        <h3>Null-Forgiving Operator (!)</h3>
+        <p>
+            گاهی خودت می‌دانی مقدار null نیست،
+            اما کامپایلر مطمئن نیست.
+        </p>
+
+        <pre><code class="language-csharp">
+string? name = GetName();
+Console.WriteLine(name!.Length);
+</code></pre>
+
+        <p>
+            <strong>!</strong> یعنی:
+            «به من اعتماد کن، اینجا null نیست».
+            <br>
+            (استفادهٔ زیاد از آن بوی طراحی بد می‌دهد!)
+        </p>
+
+        <h3>Nullable Reference در Class</h3>
+
+        <pre><code class="language-csharp">
+class User
+{
+    public string Username { get; set; } = "";
+    public string? PhoneNumber { get; set; }
+}
+</code></pre>
+
+        <p>
+            اینجا:
+        </p>
+        <ul>
+            <li>Username همیشه باید مقدار داشته باشد</li>
+            <li>PhoneNumber ممکن است null باشد</li>
+        </ul>
+
+        <h3>Nullable Reference در Methodها</h3>
+
+        <pre><code class="language-csharp">
+string? FindUser(int id)
+{
+    if (id == 1)
+        return "Ali";
+
+    return null;
+}
+</code></pre>
+
+        <p>
+            امضای متد به‌وضوح می‌گوید که خروجی ممکن است null باشد.
+        </p>
+
+        <h3>مثال پروژه‌ای — API امن</h3>
+
+        <pre><code class="language-csharp">
+User? user = repository.GetUser(id);
+
+if (user is null)
+{
+    return NotFound();
+}
+
+return Ok(user.Username);
+</code></pre>
+
+        <p>
+            این الگو پایهٔ کدنویسی امن در ASP.NET Core است.
+        </p>
+
+        <h3>اشتباهات رایج</h3>
+        <ul>
+            <li>غیرفعال کردن Nullable برای خلاص شدن از Warningها</li>
+            <li>استفادهٔ زیاد از !</li>
+            <li>Nullable نکردن Propertyهایی که واقعاً optional هستند</li>
+        </ul>
+
+        <h3>تمرین‌های پیشنهادی</h3>
+        <ol>
+            <li>
+                کلاسی بساز که برخی Propertyها nullable باشند.
+            </li>
+            <li>
+                متدی بنویس که مقدار nullable برگرداند و آن را امن مصرف کنی.
+            </li>
+            <li>
+                یک Warning کامپایل ایجاد کن و آن را درست برطرف کن.
+            </li>
+        </ol>
+
+        <p class="ref">
+            مستندات رسمی:
+            <a href="https://learn.microsoft.com/en-us/dotnet/csharp/nullable-references" target="_blank">
+                Nullable Reference Types — Microsoft Docs
+            </a>
+        </p>
+
+    </section>
+</div>
+
+<style>
+    /* ============================ WRAPPER ============================ */
+    .referencetypes-wrapper {
+        max-width: 1020px;
+        margin: 0 auto;
+        padding: 10px 22px;
+        transition: max-width .3s ease;
+    }
+
+    @media (max-width: 768px) {
+        .referencetypes-wrapper {
+            max-width: 100%;
+            padding: 10px 18px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .referencetypes-wrapper {
+            padding: 10px 12px;
+        }
+    }
+
+    /* ============================ PAGE TITLE ============================ */
+    .page-title {
+        text-align: center;
+        font-size: 40px;
+        font-weight: bold;
+        color: #4fc3a1;
+        /* سبز مدرن */
+        margin-bottom: 5px;
+    }
+
+    @media (max-width: 768px) {
+        .page-title {
+            font-size: 34px;
+        }
+    }
+
+    .page-desc {
+        text-align: center;
+        opacity: .8;
+        font-size: 26px;
+        margin-bottom: 45px;
+        font-family: "Lalezar", "VazirFD";
+    }
+
+    @media (max-width: 768px) {
+        .page-desc {
+            font-size: 18px;
+        }
+    }
+
+    /* ============================ TOPIC SECTIONS ============================ */
+    .topic-section {
+        margin-bottom: 75px;
+        padding: 28px;
+        border-radius: 14px;
+        background: rgba(255, 255, 255, 0.035);
+        border-right: 4px solid #4fc3a1;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    html.light .topic-section {
+        background: #ffffff;
+        border-bottom-color: #e5e5e5;
+    }
+
+    /* ============================ HEADINGS ============================ */
+    .topic-section h2 {
+        text-align: left;
+        color: #4fc3a1;
+        font-size: 28px;
+        margin-bottom: 16px;
+        position: relative;
+    }
+
+    .topic-section h2::after {
+        content: "";
+        width: 64px;
+        height: 3px;
+        background: #4fc3a1;
+        position: absolute;
+        bottom: -7px;
+        left: 0;
+        border-radius: 3px;
+    }
+
+    .topic-section h3 {
+        margin-top: 26px;
+        font-size: 20px;
+        color: #6adbc3;
+    }
+
+    /* ============================ TEXT ============================ */
+    .topic-section p {
+        line-height: 1.9;
+        margin-bottom: 14px;
+    }
+
+    ul li,
+    ol li {
+        margin-bottom: 6px;
+    }
+
+    /* ============================ LINKS ============================ */
+    .ref a {
+        color: #4ea3ff;
+        font-weight: 600;
+        transition: color .2s ease, text-shadow .2s ease;
+    }
+
+    .ref a:hover {
+        color: #82c5ff;
+        text-shadow: 0 0 8px rgba(78, 163, 255, 0.6);
+    }
+
+    /* ============================ CODE BLOCK ============================ */
+    pre {
+        background: #161616;
+        border: 1px solid #333;
+        padding: 16px;
+        border-radius: 10px;
+        overflow-x: auto;
+        margin-top: 15px;
+        font-family: "JetBrains Mono", Menlo, Consolas, monospace;
+        font-size: 15px;
+        line-height: 1.6;
+    }
+
+    html.light pre {
+        background: #f9f9f9;
+        border-color: #dfdfdf;
+        color: #222;
+    }
+
+    /* ============================ BLOCKQUOTE ============================ */
+    .referencetypes-wrapper blockquote {
+        padding: 16px 22px;
+        border-right: 4px solid #4fc3a1;
+        background: rgba(200, 255, 240, 0.06);
+        border-radius: 10px;
+        margin: 28px 0;
+        font-style: italic;
+        opacity: .95;
+    }
+
+    html.light .referencetypes-wrapper blockquote {
+        background: #f2fffb;
+    }
+</style>
+  </main>
+
+  <!-- فوتر مشترک -->
+  <footer class="footer">
+    <div class="container">
+      <p>
+        <img src="/Gitab/icone/copyright.svg" alt="کپی‌رایت" width="14" height="14"
+             style="vertical-align:middle;margin-inline:4px">
+        <span id="y"></span> Gitab — تمامی حقوق محفوظ است.
+      </p>
+    </div>
+  </footer>
+
+  <!-- سال و اسکریپت تغییر تم -->
+  <script>
+  (() => {
+    const root = document.documentElement;
+    const btn = document.getElementById('themeToggle');
+    const KEY = 'gitab-theme';
+
+    function updateTheme(s) {
+      root.setAttribute('data-theme', s);
+      const mode = s;  // فقط `dark` یا `light` خواهد بود
+      root.dataset.colorMode = mode;
+      btn.dataset.icon = mode === 'dark' ? 'moon' : 'sun';
+    }
+
+    // وضعیت تم ذخیره شده از localStorage
+    let saved = localStorage.getItem(KEY) || 'light'; // پیش‌فرض روشن
+    updateTheme(saved);
+
+    // تنظیم مجدد تم هنگام تغییر وضعیت دکمه
+    btn.addEventListener('click', () => {
+      const current = localStorage.getItem(KEY) || 'light';
+      const next = current === 'dark' ? 'light' : 'dark';  // فقط دو حالت: تاریک و روشن
+      localStorage.setItem(KEY, next);
+      updateTheme(next);
+    });
+
+    // هنگام بارگذاری صفحه
+    document.addEventListener('DOMContentLoaded', () => {
+      updateTheme(localStorage.getItem(KEY) || 'light');
+    });
+  })();
+</script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+
+  <script>
+  document.querySelectorAll('pre code').forEach(block => {
+    const btn = document.createElement('button');
+    btn.className = 'copy-btn';
+
+    const icon = document.createElement('img');
+    icon.src = "/Gitab/icone/copy.svg";
+    icon.alt = 'Copy';
+    btn.appendChild(icon);
+
+    block.parentNode.insertBefore(btn, block);
+
+    btn.addEventListener('click', async () => {
+      await navigator.clipboard.writeText(block.textContent);
+      btn.classList.add('copied');
+      setTimeout(() => btn.classList.remove('copied'), 1500);
+    });
+  });
+  </script>
+
+  <script>
+  document.body.dataset.page = window.location.pathname;
+
+  const menuBtn = document.querySelector(".menu-toggle");
+  const nav = document.querySelector(".nav");
+
+  if (menuBtn && nav) {
+    menuBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      nav.classList.toggle("show");
+    });
+
+    document.addEventListener("click", (e) => {
+      const clickedInsideNav = nav.contains(e.target);
+      const clickedMenuButton = menuBtn.contains(e.target);
+      if (!clickedInsideNav && !clickedMenuButton) {
+        nav.classList.remove("show");
+      }
+    });
+  }
+  </script>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+  <script>
+document.getElementById("openDonate").addEventListener("click", () => {
+  document.getElementById("donateModal").style.display = "block";
+});
+document.getElementById("closeDonate").addEventListener("click", () => {
+  document.getElementById("donateModal").style.display = "none";
+});
+document.querySelectorAll(".copy-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    navigator.clipboard.writeText(btn.dataset.copy);
+  
+    setTimeout(() => (btn.textContent = "کپی"), 2000);
+  });
+});
+</script>
+
+</body>
+</html>
