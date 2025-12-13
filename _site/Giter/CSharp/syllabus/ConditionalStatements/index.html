@@ -1,0 +1,1072 @@
+
+
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <link rel="icon" type="image/png" href="/Gitab/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Conditional Statements</title>
+  <meta name="description" content="ترجمه‌های فارسی کتاب‌های فنی — سریع، مینیمال و قابل اتکا.">
+
+  <!-- استایل‌ها -->
+  <link rel="stylesheet" href="/Gitab/styles/main.css">
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+
+  <style>
+  @font-face {
+    font-family: 'Vazir';
+    src: url('/Gitab/fonts/Vazir-FD-WOL.ttf') format('truetype');
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "Lalezar";
+    src: url('fonts/Lalezar.ttf') format('truetype');
+    font-display: swap;
+}
+  body {
+    font-family: 'Vazir', sans-serif;
+  }
+  </style>
+</head>
+
+<body>
+  <!-- هدر مشترک -->
+  <header class="header">
+    <div class="container nav-wrap">
+      <a href="/Gitab/" class="brand">
+        <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="26" height="26">
+        <span>Gitab</span>
+      </a>
+
+       <nav class="nav">
+         <a href="/Gitab/" >خانه</a>
+         <a href="/Gitab/books/list-books" >کتاب‌ها</a>
+         <a href="/Gitab/giter.html" >دوره ها</a>
+          <!-- 
+         <a href="/Gitab/translator.html" >مترجمین</a>
+           -->
+       </nav>
+
+      <div class="nav-actions">
+        <button id="themeToggle" class="icon-btn theme-btn" data-icon="moon" aria-label="تغییر تم">
+          <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن">
+          <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک">
+        </button>
+
+        <a class="icon-btn" href="https://github.com/hheydarian/Gitab" target="_blank" title="GitHub">
+          <img src="/Gitab/icone/github.svg" alt="GitHub">
+        </a>
+
+        <!-- دکمه منو برای موبایل -->
+        <button class="menu-toggle" aria-label="منو">
+          <img src="/Gitab/icone/menu.svg" alt="menu">
+        </button>
+      </div>
+    </div>
+  </header>
+
+  
+  <main class="site-main">
+    
+<section class="conditional-wrapper">
+    <h1 class="page-title">Conditional Statements</h1>
+    <p class="page-desc">
+        ساختارهای شرطی در سی‌شارپ به شما اجازه می‌دهند
+        <strong>بر اساس شرایط مختلف تصمیم‌گیری کنید</strong>.
+        تقریباً هیچ برنامهٔ واقعی بدون شرط‌ها معنا ندارد.
+    </p>
+    <!-- ============================ IF / ELSE ============================ -->
+    <section id="if-else" class="topic-section">
+
+        <h2>if / else</h2>
+
+        <p>
+            <strong>if / else</strong> پایه‌ای‌ترین ابزار تصمیم‌گیری در سی‌شارپ است.
+            هر جا که برنامه باید بر اساس یک <strong>شرط منطقی</strong>
+            مسیر متفاوتی را اجرا کند، if / else وارد می‌شود.
+        </p>
+
+        <p>
+            تقریباً تمام ساختارهای شرطی پیشرفته‌تر
+            (switch، pattern matching، guard clause)
+            بر پایهٔ درک درست if ساخته شده‌اند.
+        </p>
+
+        <h3>ساختار پایه if</h3>
+
+        <pre><code class="language-csharp">
+if (condition)
+{
+    // اجرا می‌شود اگر شرط true باشد
+}
+</code></pre>
+
+        <p>
+            شرط داخل پرانتز باید حتماً از نوع <code>bool</code> باشد.
+            برخلاف برخی زبان‌ها، در C# هیچ چیز دیگری
+            (مثل عدد یا null) به‌طور ضمنی شرط محسوب نمی‌شود.
+        </p>
+
+        <h3>if / else</h3>
+
+        <pre><code class="language-csharp">
+if (age >= 18)
+{
+    Console.WriteLine("Adult");
+}
+else
+{
+    Console.WriteLine("Minor");
+}
+</code></pre>
+
+        <p>
+            فقط یکی از این دو بلوک اجرا می‌شود.
+        </p>
+
+        <h3>else if (تصمیم‌گیری چندمرحله‌ای)</h3>
+
+        <pre><code class="language-csharp">
+if (score >= 90)
+{
+    grade = "A";
+}
+else if (score >= 75)
+{
+    grade = "B";
+}
+else if (score >= 60)
+{
+    grade = "C";
+}
+else
+{
+    grade = "F";
+}
+</code></pre>
+
+        <p>
+            ترتیب شرط‌ها بسیار مهم است؛
+            اولین شرطی که true شود اجرا می‌شود
+            و بقیه نادیده گرفته می‌شوند.
+        </p>
+
+        <h3>شرط‌های مرکب (Logical Operators)</h3>
+
+        <pre><code class="language-csharp">
+if (age >= 18 && isCitizen)
+{
+    Console.WriteLine("Access granted");
+}
+</code></pre>
+
+        <ul>
+            <li><code>&&</code> — AND منطقی</li>
+            <li><code>||</code> — OR منطقی</li>
+            <li><code>!</code> — NOT منطقی</li>
+        </ul>
+
+        <h3>Nested if (تو در تو) — با احتیاط</h3>
+
+        <pre><code class="language-csharp">
+if (user != null)
+{
+    if (user.IsActive)
+    {
+        Console.WriteLine("User is active");
+    }
+}
+</code></pre>
+
+        <p>
+            if تو در تو خوانایی را کم می‌کند.
+            در کد حرفه‌ای معمولاً به‌جای آن
+            از <strong>Guard Clause</strong> استفاده می‌شود.
+        </p>
+
+        <h3>Guard Clause (الگوی حرفه‌ای)</h3>
+
+        <pre><code class="language-csharp">
+if (user == null)
+    return;
+
+if (!user.IsActive)
+    return;
+
+Console.WriteLine("User is active");
+</code></pre>
+
+        <p>
+            این الگو:
+        </p>
+        <ul>
+            <li>کد را تخت‌تر (Flat) می‌کند</li>
+            <li>خوانایی را افزایش می‌دهد</li>
+            <li>باگ را کم می‌کند</li>
+        </ul>
+
+        <h3>if کوتاه (Single-line)</h3>
+
+        <pre><code class="language-csharp">
+if (isAdmin)
+    GrantAccess();
+</code></pre>
+
+        <p>
+            فقط زمانی مجاز است که
+            <strong>خوانایی کاملاً حفظ شود</strong>.
+        </p>
+
+        <h3>مثال پروژه‌ای واقعی — کنترل دسترسی</h3>
+
+        <pre><code class="language-csharp">
+if (user == null)
+{
+    return Unauthorized();
+}
+
+if (!user.IsActive)
+{
+    return Forbid();
+}
+
+if (!user.HasPermission("Edit"))
+{
+    return Forbid();
+}
+
+return Ok();
+</code></pre>
+
+        <h3>اشتباهات رایج</h3>
+        <ul>
+            <li>شرط‌های خیلی پیچیده در یک if</li>
+            <li>استفاده بیش از حد از if تو در تو</li>
+            <li>مقایسه مستقیم با true / false</li>
+        </ul>
+
+        <h3>تمرین‌های پیشنهادی</h3>
+        <ol>
+            <li>
+                برنامه‌ای بنویس که بر اساس سن،
+                اجازهٔ ثبت‌نام بدهد یا ندهد.
+            </li>
+            <li>
+                یک if تو در تو را با Guard Clause بازنویسی کن.
+            </li>
+            <li>
+                یک شرط مرکب با && و || طراحی کن.
+            </li>
+        </ol>
+
+        <p class="ref">
+            مستندات رسمی:
+            <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/selection-statements#the-if-statement"
+                target="_blank">
+                if statement — Microsoft Docs
+            </a>
+        </p>
+
+    </section>
+
+    <!-- ============================ SWITCH ============================ -->
+    <section id="switch" class="topic-section">
+
+        <h2>switch</h2>
+
+        <p>
+            <strong>switch</strong> زمانی استفاده می‌شود که بخواهیم
+            <strong>یک مقدار مشخص</strong> را با چند حالت از پیش‌تعریف‌شده مقایسه کنیم.
+            در چنین شرایطی، switch نسبت به if / else
+            خواناتر، ساخت‌یافته‌تر و کم‌خطاتر است.
+        </p>
+
+        <p>
+            هر جا دیدی if / elseهای زنجیره‌ای داری که
+            همگی یک متغیر واحد را بررسی می‌کنند،
+            احتمالاً زمان استفاده از switch رسیده است.
+        </p>
+
+        <h3>ساختار پایه switch</h3>
+
+        <pre><code class="language-csharp">
+switch (value)
+{
+    case 1:
+        Console.WriteLine("One");
+        break;
+
+    case 2:
+        Console.WriteLine("Two");
+        break;
+
+    default:
+        Console.WriteLine("Unknown");
+        break;
+}
+</code></pre>
+
+        <p>
+            در switch کلاسیک:
+        </p>
+        <ul>
+            <li>هر <code>case</code> یک مقدار مشخص را بررسی می‌کند</li>
+            <li><code>break</code> جلوی اجرای caseهای بعدی را می‌گیرد</li>
+            <li><code>default</code> زمانی اجرا می‌شود که هیچ caseای match نشود</li>
+        </ul>
+
+        <h3>switch با enum (بهترین سناریو)</h3>
+
+        <pre><code class="language-csharp">
+enum OrderStatus
+{
+    Pending,
+    Paid,
+    Shipped,
+    Cancelled
+}
+
+switch (status)
+{
+    case OrderStatus.Pending:
+        ProcessPayment();
+        break;
+
+    case OrderStatus.Paid:
+        ShipOrder();
+        break;
+
+    case OrderStatus.Cancelled:
+        NotifyUser();
+        break;
+}
+</code></pre>
+
+        <p>
+            استفاده از switch با enum:
+        </p>
+        <ul>
+            <li>خوانایی بسیار بالا</li>
+            <li>خطای کمتر</li>
+            <li>کد قابل توسعه‌تر</li>
+        </ul>
+
+        <h3>case چندگانه (Multiple Labels)</h3>
+
+        <pre><code class="language-csharp">
+switch (day)
+{
+    case "Saturday":
+    case "Sunday":
+        Console.WriteLine("Weekend");
+        break;
+
+    default:
+        Console.WriteLine("Weekday");
+        break;
+}
+</code></pre>
+
+        <h3>Fall-through (بدون break)</h3>
+        <p>
+            در C# برخلاف C/C++،
+            اجرای case بعدی بدون break
+            <strong>مجاز نیست</strong>
+            مگر اینکه case خالی باشد.
+        </p>
+
+        <h3>switch با شرط (when)</h3>
+
+        <pre><code class="language-csharp">
+switch (score)
+{
+    case int s when s >= 90:
+        grade = "A";
+        break;
+
+    case int s when s >= 75:
+        grade = "B";
+        break;
+
+    default:
+        grade = "F";
+        break;
+}
+</code></pre>
+
+        <p>
+            اینجا switch وارد قلمرو
+            <strong>Pattern Matching</strong> می‌شود،
+            اما هنوز در قالب دستور (statement) است.
+        </p>
+
+        <h3>مثال پروژه‌ای واقعی — سطح دسترسی</h3>
+
+        <pre><code class="language-csharp">
+switch (user.Role)
+{
+    case "Admin":
+        GrantAllPermissions();
+        break;
+
+    case "Editor":
+        GrantEditPermissions();
+        break;
+
+    case "Viewer":
+        GrantReadOnly();
+        break;
+
+    default:
+        DenyAccess();
+        break;
+}
+</code></pre>
+
+        <h3>چه زمانی از switch استفاده نکنیم؟</h3>
+        <ul>
+            <li>وقتی شرط‌ها پیچیده و غیرگسسته‌اند</li>
+            <li>وقتی چند متغیر مختلف بررسی می‌شوند</li>
+            <li>وقتی خروجی یک expression ساده است (switch expression بهتر است)</li>
+        </ul>
+
+        <h3>اشتباهات رایج</h3>
+        <ul>
+            <li>فراموش کردن break</li>
+            <li>استفاده از switch به‌جای if برای شرط‌های منطقی</li>
+            <li>استفاده از string به‌جای enum بدون نیاز</li>
+        </ul>
+
+        <h3>تمرین‌های پیشنهادی</h3>
+        <ol>
+            <li>
+                یک enum برای نقش کاربر بساز و با switch سطح دسترسی بده.
+            </li>
+            <li>
+                یک if/else زنجیره‌ای را به switch تبدیل کن.
+            </li>
+            <li>
+                از case چندگانه برای روزهای تعطیل استفاده کن.
+            </li>
+        </ol>
+
+        <p class="ref">
+            مستندات رسمی:
+            <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/selection-statements#the-switch-statement"
+                target="_blank">
+                switch statement — Microsoft Docs
+            </a>
+        </p>
+
+    </section>
+
+    <!-- ============================ SWITCH ============================ -->
+    <section id="switch" class="topic-section">
+
+        <h2>switch</h2>
+
+        <p>
+            <strong>switch</strong> زمانی استفاده می‌شود که بخواهیم
+            <strong>یک مقدار مشخص</strong> را با چند حالت از پیش‌تعریف‌شده مقایسه کنیم.
+            در چنین شرایطی، switch نسبت به if / else
+            خواناتر، ساخت‌یافته‌تر و کم‌خطاتر است.
+        </p>
+
+        <p>
+            هر جا دیدی if / elseهای زنجیره‌ای داری که
+            همگی یک متغیر واحد را بررسی می‌کنند،
+            احتمالاً زمان استفاده از switch رسیده است.
+        </p>
+
+        <h3>ساختار پایه switch</h3>
+
+        <pre><code class="language-csharp">
+switch (value)
+{
+    case 1:
+        Console.WriteLine("One");
+        break;
+
+    case 2:
+        Console.WriteLine("Two");
+        break;
+
+    default:
+        Console.WriteLine("Unknown");
+        break;
+}
+</code></pre>
+
+        <p>
+            در switch کلاسیک:
+        </p>
+        <ul>
+            <li>هر <code>case</code> یک مقدار مشخص را بررسی می‌کند</li>
+            <li><code>break</code> جلوی اجرای caseهای بعدی را می‌گیرد</li>
+            <li><code>default</code> زمانی اجرا می‌شود که هیچ caseای match نشود</li>
+        </ul>
+
+        <h3>switch با enum (بهترین سناریو)</h3>
+
+        <pre><code class="language-csharp">
+enum OrderStatus
+{
+    Pending,
+    Paid,
+    Shipped,
+    Cancelled
+}
+
+switch (status)
+{
+    case OrderStatus.Pending:
+        ProcessPayment();
+        break;
+
+    case OrderStatus.Paid:
+        ShipOrder();
+        break;
+
+    case OrderStatus.Cancelled:
+        NotifyUser();
+        break;
+}
+</code></pre>
+
+        <p>
+            استفاده از switch با enum:
+        </p>
+        <ul>
+            <li>خوانایی بسیار بالا</li>
+            <li>خطای کمتر</li>
+            <li>کد قابل توسعه‌تر</li>
+        </ul>
+
+        <h3>case چندگانه (Multiple Labels)</h3>
+
+        <pre><code class="language-csharp">
+switch (day)
+{
+    case "Saturday":
+    case "Sunday":
+        Console.WriteLine("Weekend");
+        break;
+
+    default:
+        Console.WriteLine("Weekday");
+        break;
+}
+</code></pre>
+
+        <h3>Fall-through (بدون break)</h3>
+        <p>
+            در C# برخلاف C/C++،
+            اجرای case بعدی بدون break
+            <strong>مجاز نیست</strong>
+            مگر اینکه case خالی باشد.
+        </p>
+
+        <h3>switch با شرط (when)</h3>
+
+        <pre><code class="language-csharp">
+switch (score)
+{
+    case int s when s >= 90:
+        grade = "A";
+        break;
+
+    case int s when s >= 75:
+        grade = "B";
+        break;
+
+    default:
+        grade = "F";
+        break;
+}
+</code></pre>
+
+        <p>
+            اینجا switch وارد قلمرو
+            <strong>Pattern Matching</strong> می‌شود،
+            اما هنوز در قالب دستور (statement) است.
+        </p>
+
+        <h3>مثال پروژه‌ای واقعی — سطح دسترسی</h3>
+
+        <pre><code class="language-csharp">
+switch (user.Role)
+{
+    case "Admin":
+        GrantAllPermissions();
+        break;
+
+    case "Editor":
+        GrantEditPermissions();
+        break;
+
+    case "Viewer":
+        GrantReadOnly();
+        break;
+
+    default:
+        DenyAccess();
+        break;
+}
+</code></pre>
+
+        <h3>چه زمانی از switch استفاده نکنیم؟</h3>
+        <ul>
+            <li>وقتی شرط‌ها پیچیده و غیرگسسته‌اند</li>
+            <li>وقتی چند متغیر مختلف بررسی می‌شوند</li>
+            <li>وقتی خروجی یک expression ساده است (switch expression بهتر است)</li>
+        </ul>
+
+        <h3>اشتباهات رایج</h3>
+        <ul>
+            <li>فراموش کردن break</li>
+            <li>استفاده از switch به‌جای if برای شرط‌های منطقی</li>
+            <li>استفاده از string به‌جای enum بدون نیاز</li>
+        </ul>
+
+        <h3>تمرین‌های پیشنهادی</h3>
+        <ol>
+            <li>
+                یک enum برای نقش کاربر بساز و با switch سطح دسترسی بده.
+            </li>
+            <li>
+                یک if/else زنجیره‌ای را به switch تبدیل کن.
+            </li>
+            <li>
+                از case چندگانه برای روزهای تعطیل استفاده کن.
+            </li>
+        </ol>
+
+        <p class="ref">
+            مستندات رسمی:
+            <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/selection-statements#the-switch-statement"
+                target="_blank">
+                switch statement — Microsoft Docs
+            </a>
+        </p>
+
+    </section>
+
+    <!-- ============================ CHECKED / UNCHECKED ============================ -->
+    <section id="checked-unchecked" class="topic-section">
+
+        <h2>Checked / Unchecked</h2>
+
+        <p>
+            <strong>checked</strong> و <strong>unchecked</strong>
+            برای کنترل رفتار برنامه در هنگام
+            <strong>سرریز عددی (Overflow)</strong>
+            در عملیات ریاضی استفاده می‌شوند.
+        </p>
+
+        <p>
+            سرریز عددی زمانی رخ می‌دهد که نتیجهٔ یک محاسبه
+            از محدودهٔ قابل‌نمایش نوع عددی خارج شود.
+        </p>
+
+        <h3>مشکل سرریز عددی (Overflow)</h3>
+
+        <pre><code class="language-csharp">
+int x = int.MaxValue;
+int y = x + 1;
+
+Console.WriteLine(y); // خروجی: -2147483648
+</code></pre>
+
+        <p>
+            این اتفاق بدون هیچ خطایی رخ می‌دهد
+            و می‌تواند باعث <strong>باگ‌های بسیار خطرناک</strong> شود.
+        </p>
+
+        <h3>checked — اجرای امن</h3>
+        <p>
+            با استفاده از <code>checked</code>
+            اگر سرریز رخ دهد، برنامه
+            <strong>Exception</strong> پرتاب می‌کند.
+        </p>
+
+        <pre><code class="language-csharp">
+checked
+{
+    int x = int.MaxValue;
+    int y = x + 1; // OverflowException
+}
+</code></pre>
+
+        <p>
+            این رفتار برای سیستم‌های حساس
+            (مالی، حسابداری، بانکی) بسیار مهم است.
+        </p>
+
+        <h3>checked به‌صورت expression</h3>
+
+        <pre><code class="language-csharp">
+int result = checked(a * b);
+</code></pre>
+
+        <h3>unchecked — اجازهٔ سرریز</h3>
+        <p>
+            <code>unchecked</code> به برنامه می‌گوید
+            سرریز عددی را نادیده بگیرد.
+        </p>
+
+        <pre><code class="language-csharp">
+unchecked
+{
+    int x = int.MaxValue;
+    int y = x + 1; // بدون Exception
+}
+</code></pre>
+
+        <h3>چرا اصلاً unchecked وجود دارد؟</h3>
+        <p>
+            چون در برخی سناریوها:
+        </p>
+        <ul>
+            <li>Performance بسیار مهم است</li>
+            <li>سرریز بخشی از منطق برنامه است</li>
+            <li>کدهای Low-level یا الگوریتمی داریم</li>
+        </ul>
+
+        <h3>checked پیش‌فرض یا unchecked؟</h3>
+        <p>
+            در C#:
+        </p>
+        <ul>
+            <li>در حالت Release معمولاً unchecked است</li>
+            <li>در حالت Debug اغلب checked فعال‌تر است</li>
+        </ul>
+
+        <h3>فعال‌سازی checked در کل پروژه</h3>
+
+        <pre><code class="language-xml">
+&lt;CheckForOverflowUnderflow&gt;true&lt;/CheckForOverflowUnderflow&gt;
+</code></pre>
+
+        <p>
+            این تنظیم در فایل <code>.csproj</code>
+            باعث می‌شود تمام عملیات عددی checked شوند.
+        </p>
+
+        <h3>مثال پروژه‌ای واقعی — محاسبه مالی</h3>
+
+        <pre><code class="language-csharp">
+checked
+{
+    decimal total = price * quantity;
+    total += tax;
+}
+</code></pre>
+
+        <p>
+            در سیستم‌های مالی،
+            سرریز باید فوراً شناسایی شود، نه مخفی بماند.
+        </p>
+
+        <h3>اشتباهات رایج</h3>
+        <ul>
+            <li>نادیده گرفتن Overflow در محاسبات حساس</li>
+            <li>استفادهٔ کورکورانه از unchecked</li>
+            <li>فرض اینکه سرریز «اتفاق نمی‌افتد»</li>
+        </ul>
+
+        <h3>تمرین‌های پیشنهادی</h3>
+        <ol>
+            <li>
+                یک مثال Overflow بدون checked بنویس و نتیجه را ببین.
+            </li>
+            <li>
+                همان مثال را با checked اجرا کن و Exception را بررسی کن.
+            </li>
+            <li>
+                یک محاسبهٔ مالی را داخل checked قرار بده.
+            </li>
+        </ol>
+
+        <p class="ref">
+            مستندات رسمی:
+            <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/checked-and-unchecked"
+                target="_blank">
+                checked and unchecked — Microsoft Docs
+            </a>
+        </p>
+
+    </section>
+</section>
+
+<style>
+    /* ============================ WRAPPER ============================ */
+    .conditional-wrapper {
+        max-width: 1020px;
+        margin: 0 auto;
+        padding: 14px 22px;
+        transition: max-width .3s ease;
+    }
+
+
+    .conditional-wrapper .topic-page,
+    .conditional-wrapper .container {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+
+    @media (max-width: 768px) {
+        .conditional-wrapper {
+            max-width: 100%;
+            padding: 12px 18px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .conditional-wrapper {
+            padding: 10px 12px;
+        }
+    }
+
+    /* ============================ PAGE TITLE ============================ */
+    .conditional-wrapper .page-title {
+        text-align: center;
+        font-size: 40px;
+        font-weight: 800;
+        color: #22c55e;
+        /* جذاب‌تر از سبز ساده */
+        margin: 6px 0 8px;
+    }
+
+    @media (max-width: 768px) {
+        .conditional-wrapper .page-title {
+            font-size: 34px;
+        }
+    }
+
+    .conditional-wrapper .page-desc {
+        text-align: center;
+        opacity: .85;
+        font-size: 26px;
+        margin-bottom: 45px;
+        font-family: "Lalezar", "VazirFD";
+    }
+
+    @media (max-width: 768px) {
+        .conditional-wrapper .page-desc {
+            font-size: 18px;
+        }
+    }
+
+    /* ============================ TOPIC SECTIONS ============================ */
+    .conditional-wrapper .topic-section {
+        margin-bottom: 75px;
+        padding: 28px;
+        border-radius: 14px;
+        background: rgba(255, 255, 255, 0.035);
+        border-right: 4px solid #22c55e;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    html.light .conditional-wrapper .topic-section {
+        background: #ffffff;
+        border-bottom-color: #e5e5e5;
+    }
+
+    /* ============================ HEADINGS ============================ */
+    .conditional-wrapper .topic-section h2 {
+        text-align: left;
+        color: #22c55e;
+        font-size: 28px;
+        margin-bottom: 16px;
+        position: relative;
+    }
+
+    .conditional-wrapper .topic-section h2::after {
+        content: "";
+        width: 64px;
+        height: 3px;
+        background: linear-gradient(90deg, #22c55e, #86efac);
+        position: absolute;
+        bottom: -7px;
+        left: 0;
+        border-radius: 3px;
+    }
+
+    .conditional-wrapper .topic-section h3 {
+        margin-top: 26px;
+        font-size: 20px;
+        color: #86efac;
+    }
+
+    /* ============================ TEXT ============================ */
+    .conditional-wrapper .topic-section p {
+        line-height: 1.9;
+        margin-bottom: 14px;
+    }
+
+    .conditional-wrapper ul li,
+    .conditional-wrapper ol li {
+        margin-bottom: 6px;
+    }
+
+    /* ============================ LINKS ============================ */
+    .conditional-wrapper .ref a {
+        color: #4ea3ff;
+        font-weight: 600;
+        transition: color .2s ease, text-shadow .2s ease;
+    }
+
+    .conditional-wrapper .ref a:hover {
+        color: #82c5ff;
+        text-shadow: 0 0 8px rgba(78, 163, 255, 0.6);
+    }
+
+    /* ============================ CODE BLOCK ============================ */
+    .conditional-wrapper pre {
+        background: #161616;
+        border: 1px solid #333;
+        padding: 16px;
+        border-radius: 10px;
+        overflow-x: auto;
+        margin-top: 15px;
+        font-family: "JetBrains Mono", Menlo, Consolas, monospace;
+        font-size: 15px;
+        line-height: 1.6;
+    }
+
+    html.light .conditional-wrapper pre {
+        background: #f9f9f9;
+        border-color: #dfdfdf;
+        color: #222;
+    }
+
+    /* ============================ BLOCKQUOTE ============================ */
+    .conditional-wrapper blockquote {
+        padding: 16px 22px;
+        border-right: 4px solid #22c55e;
+        background: rgba(34, 197, 94, 0.10);
+        border-radius: 10px;
+        margin: 28px 0;
+        font-style: italic;
+        opacity: .95;
+    }
+
+    html.light .conditional-wrapper blockquote {
+        background: #f1fff7;
+    }
+</style>
+  </main>
+
+  <!-- فوتر مشترک -->
+  <footer class="footer">
+    <div class="container">
+      <p>
+        <img src="/Gitab/icone/copyright.svg" alt="کپی‌رایت" width="14" height="14"
+             style="vertical-align:middle;margin-inline:4px">
+        <span id="y"></span> Gitab — تمامی حقوق محفوظ است.
+      </p>
+    </div>
+  </footer>
+
+  <!-- سال و اسکریپت تغییر تم -->
+  <script>
+  (() => {
+    const root = document.documentElement;
+    const btn = document.getElementById('themeToggle');
+    const KEY = 'gitab-theme';
+
+    function updateTheme(s) {
+      root.setAttribute('data-theme', s);
+      const mode = s;  // فقط `dark` یا `light` خواهد بود
+      root.dataset.colorMode = mode;
+      btn.dataset.icon = mode === 'dark' ? 'moon' : 'sun';
+    }
+
+    // وضعیت تم ذخیره شده از localStorage
+    let saved = localStorage.getItem(KEY) || 'light'; // پیش‌فرض روشن
+    updateTheme(saved);
+
+    // تنظیم مجدد تم هنگام تغییر وضعیت دکمه
+    btn.addEventListener('click', () => {
+      const current = localStorage.getItem(KEY) || 'light';
+      const next = current === 'dark' ? 'light' : 'dark';  // فقط دو حالت: تاریک و روشن
+      localStorage.setItem(KEY, next);
+      updateTheme(next);
+    });
+
+    // هنگام بارگذاری صفحه
+    document.addEventListener('DOMContentLoaded', () => {
+      updateTheme(localStorage.getItem(KEY) || 'light');
+    });
+  })();
+</script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+
+  <script>
+  document.querySelectorAll('pre code').forEach(block => {
+    const btn = document.createElement('button');
+    btn.className = 'copy-btn';
+
+    const icon = document.createElement('img');
+    icon.src = "/Gitab/icone/copy.svg";
+    icon.alt = 'Copy';
+    btn.appendChild(icon);
+
+    block.parentNode.insertBefore(btn, block);
+
+    btn.addEventListener('click', async () => {
+      await navigator.clipboard.writeText(block.textContent);
+      btn.classList.add('copied');
+      setTimeout(() => btn.classList.remove('copied'), 1500);
+    });
+  });
+  </script>
+
+  <script>
+  document.body.dataset.page = window.location.pathname;
+
+  const menuBtn = document.querySelector(".menu-toggle");
+  const nav = document.querySelector(".nav");
+
+  if (menuBtn && nav) {
+    menuBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      nav.classList.toggle("show");
+    });
+
+    document.addEventListener("click", (e) => {
+      const clickedInsideNav = nav.contains(e.target);
+      const clickedMenuButton = menuBtn.contains(e.target);
+      if (!clickedInsideNav && !clickedMenuButton) {
+        nav.classList.remove("show");
+      }
+    });
+  }
+  </script>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+  <script>
+document.getElementById("openDonate").addEventListener("click", () => {
+  document.getElementById("donateModal").style.display = "block";
+});
+document.getElementById("closeDonate").addEventListener("click", () => {
+  document.getElementById("donateModal").style.display = "none";
+});
+document.querySelectorAll(".copy-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    navigator.clipboard.writeText(btn.dataset.copy);
+  
+    setTimeout(() => (btn.textContent = "کپی"), 2000);
+  });
+});
+</script>
+
+</body>
+</html>
