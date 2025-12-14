@@ -1,0 +1,1029 @@
+---
+layout: layout.njk
+title: Loop Statements
+permalink: /Giter/CSharp/syllabus/LoopStatements/
+---
+
+<section class="loops-wrapper">
+
+    <h1 class="page-title">Loop Statements</h1>
+
+    <p class="page-desc">
+        حلقه‌ها (Loops) به شما اجازه می‌دهند
+        <strong>یک قطعه کد را چندین بار اجرا کنید</strong>.
+        تقریباً تمام پردازش‌های واقعی، روی داده‌ها و مجموعه‌ها،
+        به حلقه‌ها متکی هستند.
+    </p>
+
+    <!-- ============================ FOR ============================ -->
+    <section id="for" class="topic-section">
+
+        <h2>for</h2>
+
+        <p>
+            حلقهٔ <strong>for</strong> زمانی استفاده می‌شود که
+            <strong>تعداد تکرارها از قبل مشخص باشد</strong>.
+            این حلقه یکی از بنیادی‌ترین مفاهیم در برنامه‌نویسی است
+            و در تمام زبان‌ها وجود دارد.
+        </p>
+
+        <p>
+            اگر بتوانی for را درست و تمیز استفاده کنی،
+            ۷۰٪ از نیازهای تکرار در برنامه‌هایت پوشش داده می‌شود.
+        </p>
+
+        <h3>ساختار کلی حلقه for</h3>
+
+        <pre><code class="language-csharp">
+for (initialization; condition; iteration)
+{
+    // بدنه حلقه
+}
+</code></pre>
+
+        <ul>
+            <li><strong>initialization</strong> → مقداردهی اولیه (فقط یک‌بار)</li>
+            <li><strong>condition</strong> → شرط ادامهٔ حلقه</li>
+            <li><strong>iteration</strong> → تغییر متغیر پس از هر تکرار</li>
+        </ul>
+
+        <h3>مثال ساده — شمارش</h3>
+
+        <pre><code class="language-csharp">
+for (int i = 0; i < 5; i++)
+{
+    Console.WriteLine(i);
+}
+</code></pre>
+
+        <p>
+            این کد اعداد ۰ تا ۴ را چاپ می‌کند.
+            متغیر <code>i</code> فقط داخل حلقه قابل دسترسی است.
+        </p>
+
+        <h3>for معکوس (خیلی رایج)</h3>
+
+        <pre><code class="language-csharp">
+for (int i = 10; i >= 0; i--)
+{
+    Console.WriteLine(i);
+}
+</code></pre>
+
+        <p>
+            این الگو زمانی مفید است که
+            بخواهیم از انتهای یک مجموعه به ابتدا حرکت کنیم.
+        </p>
+
+        <h3>حلقه for با گام دلخواه</h3>
+
+        <pre><code class="language-csharp">
+for (int i = 0; i <= 100; i += 10)
+{
+    Console.WriteLine(i);
+}
+</code></pre>
+
+        <h3>استفاده از for روی آرایه</h3>
+
+        <pre><code class="language-csharp">
+int[] numbers = { 10, 20, 30, 40 };
+
+for (int i = 0; i < numbers.Length; i++)
+{
+    Console.WriteLine(numbers[i]);
+}
+</code></pre>
+
+        <p>
+            در این حالت کنترل کامل روی اندیس داریم،
+            چیزی که در <code>foreach</code> وجود ندارد.
+        </p>
+
+        <h3>break و continue در for</h3>
+
+        <pre><code class="language-csharp">
+for (int i = 0; i < 10; i++)
+{
+    if (i == 5)
+        break;
+
+    if (i % 2 == 0)
+        continue;
+
+    Console.WriteLine(i);
+}
+</code></pre>
+
+        <ul>
+            <li><code>break</code> → خروج کامل از حلقه</li>
+            <li><code>continue</code> → رفتن به تکرار بعدی</li>
+        </ul>
+
+        <h3>for تو در تو (Nested for)</h3>
+
+        <pre><code class="language-csharp">
+for (int i = 1; i <= 3; i++)
+{
+    for (int j = 1; j <= 3; j++)
+    {
+        Console.WriteLine($"{i}, {j}");
+    }
+}
+</code></pre>
+
+        <p>
+            این الگو برای ماتریس‌ها، جدول‌ها و Gridها استفاده می‌شود،
+            اما باید با احتیاط از آن استفاده کرد
+            چون هزینهٔ محاسباتی را به‌سرعت بالا می‌برد.
+        </p>
+
+        <h3>مثال پروژه‌ای واقعی — محاسبه مجموع</h3>
+
+        <pre><code class="language-csharp">
+int sum = 0;
+
+for (int i = 1; i <= 100; i++)
+{
+    sum += i;
+}
+</code></pre>
+
+        <h3>نکات Performance</h3>
+        <ul>
+            <li>
+                شرط حلقه باید ساده باشد
+            </li>
+            <li>
+                <code>Length</code> را در حلقه‌های سنگین Cache کن
+            </li>
+            <li>
+                از for به‌جای foreach وقتی به index نیاز داری استفاده کن
+            </li>
+        </ul>
+
+        <h3>اشتباهات رایج</h3>
+        <ul>
+            <li>حلقه بی‌نهایت به‌دلیل شرط اشتباه</li>
+            <li>خطای off-by-one (کم یا زیاد یک تکرار)</li>
+            <li>دستکاری متغیر حلقه داخل بدنه</li>
+        </ul>
+
+        <h3>تمرین‌های پیشنهادی</h3>
+        <ol>
+            <li>
+                با for جدول ضرب ۱ تا ۱۰ را چاپ کن.
+            </li>
+            <li>
+                یک آرایه از اعداد بساز و مجموع آن‌ها را محاسبه کن.
+            </li>
+            <li>
+                یک حلقه for معکوس بنویس که فقط اعداد زوج را چاپ کند.
+            </li>
+        </ol>
+
+        <p class="ref">
+            مستندات رسمی:
+            <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/iteration-statements#the-for-statement"
+                target="_blank">
+                for statement — Microsoft Docs
+            </a>
+        </p>
+
+    </section>
+
+    <!-- ============================ FOREACH ============================ -->
+    <section id="foreach" class="topic-section">
+
+        <h2>foreach</h2>
+
+        <p>
+            حلقهٔ <strong>foreach</strong> برای پیمایش
+            <strong>مجموعه‌ها (Collections)</strong> طراحی شده است.
+            هر جا با Array، List، Dictionary یا هر نوع
+            <code>IEnumerable</code> کار می‌کنی،
+            foreach طبیعی‌ترین و امن‌ترین انتخاب است.
+        </p>
+
+        <p>
+            اگر هدفت فقط «خواندن داده‌ها»ست
+            و نیازی به index نداری،
+            foreach همیشه از for بهتر است.
+        </p>
+
+        <h3>ساختار کلی foreach</h3>
+
+        <pre><code class="language-csharp">
+foreach (var item in collection)
+{
+    // استفاده از item
+}
+</code></pre>
+
+        <ul>
+            <li><strong>collection</strong> → مجموعه‌ای که پیمایش می‌شود</li>
+            <li><strong>item</strong> → عنصر فعلی در هر تکرار</li>
+        </ul>
+
+        <h3>مثال ساده — پیمایش آرایه</h3>
+
+        <pre><code class="language-csharp">
+int[] numbers = { 10, 20, 30, 40 };
+
+foreach (int n in numbers)
+{
+    Console.WriteLine(n);
+}
+</code></pre>
+
+        <p>
+            در این حالت:
+        </p>
+        <ul>
+            <li>نیازی به index نداریم</li>
+            <li>خطر out of range وجود ندارد</li>
+            <li>کد بسیار خواناست</li>
+        </ul>
+
+        <h3>foreach با List</h3>
+
+        <pre><code class="language-csharp">
+List<string> names = new List<string>
+{
+    "Ali", "Sara", "Reza"
+};
+
+foreach (var name in names)
+{
+    Console.WriteLine(name);
+}
+</code></pre>
+
+        <h3>foreach با Dictionary</h3>
+
+        <pre><code class="language-csharp">
+Dictionary<int, string> users = new Dictionary<int, string>
+{
+    { 1, "Admin" },
+    { 2, "User" }
+};
+
+foreach (var entry in users)
+{
+    Console.WriteLine($"{entry.Key} : {entry.Value}");
+}
+</code></pre>
+
+        <p>
+            در Dictionary، هر آیتم از نوع
+            <code>KeyValuePair&lt;TKey, TValue&gt;</code> است.
+        </p>
+
+        <h3>foreach فقط خواندنی است</h3>
+
+        <pre><code class="language-csharp">
+foreach (var n in numbers)
+{
+    n++; // ❌ خطا
+}
+</code></pre>
+
+        <p>
+            متغیر foreach فقط برای خواندن است.
+            اگر نیاز به تغییر عناصر داری،
+            باید از <code>for</code> استفاده کنی.
+        </p>
+
+        <h3>break و continue در foreach</h3>
+
+        <pre><code class="language-csharp">
+foreach (var n in numbers)
+{
+    if (n == 20)
+        break;
+
+    if (n % 2 == 0)
+        continue;
+
+    Console.WriteLine(n);
+}
+</code></pre>
+
+        <h3>foreach تو در تو</h3>
+
+        <pre><code class="language-csharp">
+foreach (var row in matrix)
+{
+    foreach (var cell in row)
+    {
+        Console.WriteLine(cell);
+    }
+}
+</code></pre>
+
+        <p>
+            این الگو برای ساختارهای چندبعدی
+            و داده‌های درختی استفاده می‌شود.
+        </p>
+
+        <h3>foreach و Performance</h3>
+        <ul>
+            <li>برای Array و List بسیار بهینه است</li>
+            <li>روی IEnumerable ممکن است lazy باشد</li>
+            <li>برای collectionهای بزرگ معمولاً امن‌ترین گزینه است</li>
+        </ul>
+
+        <h3>مثال پروژه‌ای واقعی — پردازش سفارش‌ها</h3>
+
+        <pre><code class="language-csharp">
+foreach (var order in orders)
+{
+    if (!order.IsPaid)
+        continue;
+
+    ProcessOrder(order);
+}
+</code></pre>
+
+        <h3>اشتباهات رایج</h3>
+        <ul>
+            <li>تلاش برای تغییر آیتم داخل foreach</li>
+            <li>استفاده از foreach وقتی index لازم است</li>
+            <li>نادیده گرفتن هزینه lazy enumeration</li>
+        </ul>
+
+        <h3>تمرین‌های پیشنهادی</h3>
+        <ol>
+            <li>
+                یک List از اعداد بساز و فقط اعداد فرد را چاپ کن.
+            </li>
+            <li>
+                یک Dictionary بساز و key/valueها را نمایش بده.
+            </li>
+            <li>
+                یک foreach تو در تو برای آرایهٔ دوبعدی بنویس.
+            </li>
+        </ol>
+
+        <p class="ref">
+            مستندات رسمی:
+            <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/iteration-statements#the-foreach-statement"
+                target="_blank">
+                foreach statement — Microsoft Docs
+            </a>
+        </p>
+
+    </section>
+
+    <!-- ============================ WHILE ============================ -->
+    <section id="while" class="topic-section">
+
+        <h2>while</h2>
+
+        <p>
+            حلقهٔ <strong>while</strong> زمانی استفاده می‌شود که
+            <strong>تعداد تکرارها از قبل مشخص نیست</strong>
+            و اجرای حلقه به برقرار بودن یک شرط وابسته است.
+        </p>
+
+        <p>
+            while یکی از خطرناک‌ترین و در عین حال قدرتمندترین حلقه‌هاست؛
+            اگر شرط درست کنترل نشود، به‌راحتی
+            وارد <strong>حلقهٔ بی‌نهایت</strong> می‌شود.
+        </p>
+
+        <h3>ساختار کلی while</h3>
+
+        <pre><code class="language-csharp">
+while (condition)
+{
+    // بدنه حلقه
+}
+</code></pre>
+
+        <p>
+            تا زمانی که <code>condition</code> برابر <code>true</code> باشد،
+            حلقه اجرا می‌شود.
+            اگر شرط از ابتدا false باشد،
+            بدنهٔ حلقه حتی یک بار هم اجرا نمی‌شود.
+        </p>
+
+        <h3>مثال ساده — شمارش با while</h3>
+
+        <pre><code class="language-csharp">
+int i = 0;
+
+while (i < 5)
+{
+    Console.WriteLine(i);
+    i++;
+}
+</code></pre>
+
+        <p>
+            برخلاف <code>for</code>،
+            اینجا خودمان باید مقداردهی اولیه
+            و افزایش متغیر را مدیریت کنیم.
+        </p>
+
+        <h3>while برای ورودی کاربر</h3>
+
+        <pre><code class="language-csharp">
+string input = "";
+
+while (input != "exit")
+{
+    Console.Write("Enter command: ");
+    input = Console.ReadLine();
+}
+</code></pre>
+
+        <p>
+            این الگو زمانی استفاده می‌شود که
+            پایان حلقه به تصمیم کاربر بستگی دارد.
+        </p>
+
+        <h3>حلقه بی‌نهایت (Infinite Loop)</h3>
+
+        <pre><code class="language-csharp">
+while (true)
+{
+    DoWork();
+}
+</code></pre>
+
+        <p>
+            این نوع حلقه فقط زمانی قابل قبول است که
+            <strong>شرط خروج مشخص و امن</strong>
+            داخل بدنه وجود داشته باشد.
+        </p>
+
+        <h3>خروج امن از حلقه بی‌نهایت</h3>
+
+        <pre><code class="language-csharp">
+while (true)
+{
+    if (ShouldStop())
+        break;
+
+    Process();
+}
+</code></pre>
+
+        <h3>break و continue در while</h3>
+
+        <pre><code class="language-csharp">
+while (i < 10)
+{
+    i++;
+
+    if (i == 5)
+        continue;
+
+    if (i == 8)
+        break;
+
+    Console.WriteLine(i);
+}
+</code></pre>
+
+        <h3>مثال پروژه‌ای واقعی — Polling ساده</h3>
+
+        <pre><code class="language-csharp">
+while (!service.IsReady)
+{
+    Thread.Sleep(500);
+}
+</code></pre>
+
+        <p>
+            این الگو برای بررسی وضعیت سرویس‌ها
+            یا منابع خارجی استفاده می‌شود
+            (هرچند در کد مدرن async جایگزین بهتری دارد).
+        </p>
+
+        <h3>while در برابر for</h3>
+        <ul>
+            <li>
+                <strong>for</strong> → وقتی تعداد تکرار مشخص است
+            </li>
+            <li>
+                <strong>while</strong> → وقتی شرط تعیین‌کننده است
+            </li>
+        </ul>
+
+        <h3>نکات Performance و ایمنی</h3>
+        <ul>
+            <li>همیشه شرط خروج واضح داشته باش</li>
+            <li>از while(true) بدون break اجتناب کن</li>
+            <li>در حلقه‌های سنگین از delay یا sleep استفاده کن</li>
+        </ul>
+
+        <h3>اشتباهات رایج</h3>
+        <ul>
+            <li>فراموش کردن تغییر شرط داخل حلقه</li>
+            <li>ساخت حلقه بی‌نهایت ناخواسته</li>
+            <li>استفاده از while به‌جای for بدون دلیل</li>
+        </ul>
+
+        <h3>تمرین‌های پیشنهادی</h3>
+        <ol>
+            <li>
+                با while اعداد ۱ تا ۱۰ را چاپ کن.
+            </li>
+            <li>
+                برنامه‌ای بنویس که تا وارد کردن "exit" ادامه پیدا کند.
+            </li>
+            <li>
+                یک حلقهٔ بی‌نهایت با break امن طراحی کن.
+            </li>
+        </ol>
+
+        <p class="ref">
+            مستندات رسمی:
+            <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/iteration-statements#the-while-statement"
+                target="_blank">
+                while statement — Microsoft Docs
+            </a>
+        </p>
+
+    </section>
+
+    <!-- ============================ DO / WHILE ============================ -->
+    <section id="do-while" class="topic-section">
+
+        <h2>do / while</h2>
+
+        <p>
+            حلقهٔ <strong>do / while</strong> بسیار شبیه به while است،
+            با یک تفاوت کلیدی:
+            <strong>بدنهٔ حلقه حداقل یک بار اجرا می‌شود</strong>.
+        </p>
+
+        <p>
+            این حلقه زمانی استفاده می‌شود که
+            می‌دانیم عملیات باید حداقل یک‌بار انجام شود،
+            حتی اگر شرط در ابتدا برقرار نباشد.
+        </p>
+
+        <h3>ساختار کلی do / while</h3>
+
+        <pre><code class="language-csharp">
+do
+{
+    // بدنه حلقه
+}
+while (condition);
+</code></pre>
+
+        <p>
+            توجه کن که شرط <code>while</code>
+            <strong>بعد از اجرای بدنه</strong> بررسی می‌شود،
+            و وجود <strong>semicolon</strong> در انتها الزامی است.
+        </p>
+
+        <h3>مثال ساده — اجرای حداقل یک‌بار</h3>
+
+        <pre><code class="language-csharp">
+int i = 10;
+
+do
+{
+    Console.WriteLine(i);
+    i++;
+}
+while (i < 5);
+</code></pre>
+
+        <p>
+            با اینکه شرط از ابتدا false است،
+            بدنهٔ حلقه یک‌بار اجرا می‌شود.
+        </p>
+
+        <h3>مثال رایج — منوی کاربری</h3>
+
+        <pre><code class="language-csharp">
+string input;
+
+do
+{
+    Console.WriteLine("1. Start");
+    Console.WriteLine("2. Settings");
+    Console.WriteLine("0. Exit");
+
+    input = Console.ReadLine();
+
+}
+while (input != "0");
+</code></pre>
+
+        <p>
+            در این سناریو:
+        </p>
+        <ul>
+            <li>منو حداقل یک‌بار نمایش داده می‌شود</li>
+            <li>ادامه یا خروج به انتخاب کاربر بستگی دارد</li>
+        </ul>
+
+        <h3>do / while در برابر while</h3>
+
+        <ul>
+            <li>
+                <strong>while</strong> → ممکن است حتی یک‌بار هم اجرا نشود
+            </li>
+            <li>
+                <strong>do / while</strong> → همیشه حداقل یک‌بار اجرا می‌شود
+            </li>
+        </ul>
+
+        <h3>break و continue در do / while</h3>
+
+        <pre><code class="language-csharp">
+do
+{
+    if (ShouldSkip())
+        continue;
+
+    if (ShouldExit())
+        break;
+
+    Process();
+}
+while (true);
+</code></pre>
+
+        <h3>مثال پروژه‌ای واقعی — اعتبارسنجی ورودی</h3>
+
+        <pre><code class="language-csharp">
+int number;
+
+do
+{
+    Console.Write("Enter a number between 1 and 10: ");
+}
+while (!int.TryParse(Console.ReadLine(), out number)
+       || number < 1
+       || number > 10);
+</code></pre>
+
+        <p>
+            این الگو بسیار رایج و حرفه‌ای است
+            برای اطمینان از معتبر بودن ورودی.
+        </p>
+
+        <h3>نکات مهم و ظریف</h3>
+        <ul>
+            <li>فراموش کردن <code>;</code> بعد از while خطای کامپایل می‌دهد</li>
+            <li>برای حلقه‌های سنگین مناسب نیست</li>
+            <li>بیشتر در UI، منو و ورودی کاربر استفاده می‌شود</li>
+        </ul>
+
+        <h3>اشتباهات رایج</h3>
+        <ul>
+            <li>استفاده از do / while وقتی اجرای صفر بار منطقی‌تر است</li>
+            <li>پیچیده کردن شرط while</li>
+            <li>استفادهٔ بی‌دلیل به‌جای while</li>
+        </ul>
+
+        <h3>تمرین‌های پیشنهادی</h3>
+        <ol>
+            <li>
+                یک منوی ساده با do / while بنویس.
+            </li>
+            <li>
+                ورودی عددی معتبر با do / while بگیر.
+            </li>
+            <li>
+                تفاوت اجرای while و do / while را با مثال نشان بده.
+            </li>
+        </ol>
+
+        <p class="ref">
+            مستندات رسمی:
+            <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/iteration-statements#the-do-while-statement"
+                target="_blank">
+                do / while statement — Microsoft Docs
+            </a>
+        </p>
+
+    </section>
+
+    <!-- ============================ AWAIT FOREACH ============================ -->
+    <section id="await-foreach" class="topic-section">
+
+        <h2>await foreach</h2>
+
+        <p>
+            <strong>await foreach</strong> برای پیمایش
+            <strong>داده‌های Asynchronous</strong> استفاده می‌شود؛
+            یعنی داده‌هایی که به‌صورت
+            <em>جریانی (Stream)</em>
+            و غیرهمزمان تولید می‌شوند.
+        </p>
+
+        <p>
+            این ساختار از C# 8 معرفی شد
+            و زمانی کاربرد دارد که با
+            APIها، I/O، دیتابیس، فایل‌های بزرگ
+            یا Streamهای شبکه‌ای کار می‌کنیم.
+        </p>
+
+        <h3>پیش‌نیاز await foreach</h3>
+        <p>
+            برای استفاده از await foreach،
+            منبع داده باید از نوع
+            <code>IAsyncEnumerable&lt;T&gt;</code> باشد.
+        </p>
+
+        <h3>ساختار کلی await foreach</h3>
+
+        <pre><code class="language-csharp">
+await foreach (var item in asyncCollection)
+{
+    // پردازش item
+}
+</code></pre>
+
+        <p>
+            تفاوت اصلی با foreach معمولی این است که:
+        </p>
+        <ul>
+            <li>هر آیتم ممکن است با تأخیر برسد</li>
+            <li>حلقه به‌صورت async اجرا می‌شود</li>
+            <li>Thread بلاک نمی‌شود</li>
+        </ul>
+
+        <h3>مثال ساده — تولید داده Async</h3>
+
+        <pre><code class="language-csharp">
+async IAsyncEnumerable<int> GenerateNumbersAsync()
+{
+    for (int i = 1; i <= 5; i++)
+    {
+        await Task.Delay(500);
+        yield return i;
+    }
+}
+</code></pre>
+
+        <h3>پیمایش با await foreach</h3>
+
+        <pre><code class="language-csharp">
+await foreach (var number in GenerateNumbersAsync())
+{
+    Console.WriteLine(number);
+}
+</code></pre>
+
+        <p>
+            این کد:
+        </p>
+        <ul>
+            <li>هر نیم ثانیه یک عدد دریافت می‌کند</li>
+            <li>UI یا Thread اصلی را بلاک نمی‌کند</li>
+            <li>کاملاً Async است</li>
+        </ul>
+
+        <h3>await foreach در APIهای واقعی</h3>
+
+        <pre><code class="language-csharp">
+await foreach (var item in service.GetItemsAsync())
+{
+    Process(item);
+}
+</code></pre>
+
+        <p>
+            این الگو در:
+        </p>
+        <ul>
+            <li>Web API Streaming</li>
+            <li>خواندن فایل‌های بزرگ</li>
+            <li>پردازش Eventها</li>
+            <li>SignalR و gRPC</li>
+        </ul>
+        <p>
+            بسیار رایج است.
+        </p>
+
+        <h3>Cancellation در await foreach</h3>
+
+        <pre><code class="language-csharp">
+await foreach (var item in stream.WithCancellation(token))
+{
+    Console.WriteLine(item);
+}
+</code></pre>
+
+        <p>
+            این کار اجازه می‌دهد
+            حلقه در صورت نیاز
+            به‌صورت امن متوقف شود.
+        </p>
+
+        <h3>await foreach در برابر foreach</h3>
+
+        <ul>
+            <li>
+                <strong>foreach</strong> → داده‌های آماده و همزمان
+            </li>
+            <li>
+                <strong>await foreach</strong> → داده‌های جریانی و async
+            </li>
+        </ul>
+
+        <h3>نکات Performance</h3>
+        <ul>
+            <li>برای Streamهای بزرگ بسیار بهینه است</li>
+            <li>Memory مصرف نمی‌شود چون داده‌ها chunked هستند</li>
+            <li>بهتر از List کردن کامل داده‌هاست</li>
+        </ul>
+
+        <h3>اشتباهات رایج</h3>
+        <ul>
+            <li>استفاده از await foreach روی IEnumerable</li>
+            <li>فراموش کردن async بودن متد والد</li>
+            <li>عدم مدیریت Cancellation</li>
+        </ul>
+
+        <h3>تمرین‌های پیشنهادی</h3>
+        <ol>
+            <li>
+                یک IAsyncEnumerable ساده بنویس که عدد تولید کند.
+            </li>
+            <li>
+                با await foreach داده‌ها را چاپ کن.
+            </li>
+            <li>
+                CancellationToken به حلقه اضافه کن.
+            </li>
+        </ol>
+
+        <p class="ref">
+            مستندات رسمی:
+            <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/iteration-statements#await-foreach"
+                target="_blank">
+                await foreach — Microsoft Docs
+            </a>
+        </p>
+
+    </section>
+</section>
+
+<style>
+    /* ============================ WRAPPER ============================ */
+    .loops-wrapper {
+        max-width: 1020px;
+        margin: 0 auto;
+        padding: 14px 22px;
+        transition: max-width .3s ease;
+    }
+
+    /* Fallback اگر container قدیمی داخل HTML مانده باشد */
+    .loops-wrapper .topic-page,
+    .loops-wrapper .container {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+
+    @media (max-width: 768px) {
+        .loops-wrapper {
+            max-width: 100%;
+            padding: 12px 18px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .loops-wrapper {
+            padding: 10px 12px;
+        }
+    }
+
+    /* ============================ PAGE TITLE ============================ */
+    .loops-wrapper .page-title {
+        text-align: center;
+        font-size: 40px;
+        font-weight: 800;
+        color: #ef4444;
+        /* Red 500 */
+        margin: 6px 0 8px;
+    }
+
+    @media (max-width: 768px) {
+        .loops-wrapper .page-title {
+            font-size: 34px;
+        }
+    }
+
+    .loops-wrapper .page-desc {
+        text-align: center;
+        opacity: .85;
+        font-size: 26px;
+        margin-bottom: 45px;
+        font-family: "Lalezar", "VazirFD";
+    }
+
+    @media (max-width: 768px) {
+        .loops-wrapper .page-desc {
+            font-size: 18px;
+        }
+    }
+
+    /* ============================ TOPIC SECTIONS ============================ */
+    .loops-wrapper .topic-section {
+        margin-bottom: 75px;
+        padding: 28px;
+        border-radius: 14px;
+        background: rgba(255, 255, 255, 0.035);
+        border-right: 4px solid #ef4444;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    html.light .loops-wrapper .topic-section {
+        background: #ffffff;
+        border-bottom-color: #e5e5e5;
+    }
+
+    /* ============================ HEADINGS ============================ */
+    .loops-wrapper .topic-section h2 {
+        text-align: left;
+        color: #ef4444;
+        font-size: 28px;
+        margin-bottom: 16px;
+        position: relative;
+    }
+
+    .loops-wrapper .topic-section h2::after {
+        content: "";
+        width: 64px;
+        height: 3px;
+        background: linear-gradient(90deg, #ef4444, #fb7185);
+        position: absolute;
+        bottom: -7px;
+        left: 0;
+        border-radius: 3px;
+    }
+
+    .loops-wrapper .topic-section h3 {
+        margin-top: 26px;
+        font-size: 20px;
+        color: #fb7185;
+    }
+
+    /* ============================ TEXT ============================ */
+    .loops-wrapper .topic-section p {
+        line-height: 1.9;
+        margin-bottom: 14px;
+    }
+
+    .loops-wrapper ul li,
+    .loops-wrapper ol li {
+        margin-bottom: 6px;
+    }
+
+    /* ============================ LINKS ============================ */
+    .loops-wrapper .ref a {
+        color: #4ea3ff;
+        font-weight: 600;
+        transition: color .2s ease, text-shadow .2s ease;
+    }
+
+    .loops-wrapper .ref a:hover {
+        color: #82c5ff;
+        text-shadow: 0 0 8px rgba(78, 163, 255, 0.6);
+    }
+
+    /* ============================ CODE BLOCK ============================ */
+    .loops-wrapper pre {
+        background: #161616;
+        border: 1px solid #333;
+        padding: 16px;
+        border-radius: 10px;
+        overflow-x: auto;
+        margin-top: 15px;
+        font-family: "JetBrains Mono", Menlo, Consolas, monospace;
+        font-size: 15px;
+        line-height: 1.6;
+    }
+
+    html.light .loops-wrapper pre {
+        background: #f9f9f9;
+        border-color: #dfdfdf;
+        color: #222;
+    }
+
+    /* ============================ BLOCKQUOTE ============================ */
+    .loops-wrapper blockquote {
+        padding: 16px 22px;
+        border-right: 4px solid #ef4444;
+        background: rgba(239, 68, 68, 0.10);
+        border-radius: 10px;
+        margin: 28px 0;
+        font-style: italic;
+        opacity: .95;
+    }
+
+    html.light .loops-wrapper blockquote {
+        background: #fff1f2;
+    }
+</style>
