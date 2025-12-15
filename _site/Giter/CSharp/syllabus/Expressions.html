@@ -1,0 +1,1075 @@
+---
+layout: layout.njk
+title: Expressions
+permalink: /Giter/CSharp/syllabus/Expressions/
+---
+
+<section class="expressions-wrapper">
+
+    <h1 class="page-title">Expressions</h1>
+
+    <p class="page-desc">
+        Expressionها قلب محاسبات در سی شارپ هستند.
+        تقریباً هر چیزی که <strong>یک مقدار تولید می‌کند</strong>
+        یک Expression محسوب می‌شود.
+        درک Expressionها، کلید نوشتن کد تمیز،
+        مدرن و قابل ترکیب است.
+    </p>
+
+    <!-- ============================ MEMBER ACCESS ============================ -->
+    <section id="member-access" class="topic-section">
+
+        <h2>Member Access</h2>
+
+        <p>
+            <strong>Member Access</strong> به معنی
+            دسترسی به اعضای یک نوع (Type) است؛
+            مثل فیلدها، پراپرتی‌ها، متدها و حتی اعضای تو در تو.
+            تقریباً هر خط کد واقعی در C#
+            حداقل یک Member Access دارد.
+        </p>
+
+        <p>
+            هر Expression که با نقطه <code>.</code> نوشته می‌شود،
+            در حال انجام یک Member Access است.
+        </p>
+
+        <h3>Member Access ساده</h3>
+
+        <pre><code class="language-csharp">
+user.Name
+user.Age
+user.Login()
+</code></pre>
+
+        <p>
+            در مثال بالا:
+        </p>
+        <ul>
+            <li><code>user</code> → شیء یا instance</li>
+            <li><code>Name</code> و <code>Age</code> → پراپرتی‌ها</li>
+            <li><code>Login()</code> → متد</li>
+        </ul>
+
+        <h3>Member Access روی Type (Static Members)</h3>
+
+        <pre><code class="language-csharp">
+Math.PI
+DateTime.Now
+Console.WriteLine("Hello");
+</code></pre>
+
+        <p>
+            این نوع دسترسی به instance نیاز ندارد
+            و مستقیماً روی خود Type انجام می‌شود.
+        </p>
+
+        <h3>Member Access زنجیره‌ای (Chaining)</h3>
+
+        <pre><code class="language-csharp">
+user.Address.City.ToUpper()
+</code></pre>
+
+        <p>
+            این خط کد در واقع چند Member Access پشت‌سرهم است:
+        </p>
+        <ol>
+            <li>دسترسی به Address</li>
+            <li>دسترسی به City</li>
+            <li>فراخوانی متد ToUpper()</li>
+        </ol>
+
+        <p>
+            این سبک کدنویسی بسیار رایج است،
+            اما اگر کنترل نشود می‌تواند منبع NullReferenceException باشد.
+        </p>
+
+        <h3>Null Conditional Operator (?.)</h3>
+
+        <pre><code class="language-csharp">
+string city = user?.Address?.City;
+</code></pre>
+
+        <p>
+            این اپراتور:
+        </p>
+        <ul>
+            <li>اگر user یا Address برابر null باشد</li>
+            <li>برنامه کرش نمی‌کند</li>
+            <li>خروجی null خواهد بود</li>
+        </ul>
+
+        <h3>Member Access با Indexer</h3>
+
+        <pre><code class="language-csharp">
+orders[0].Price
+dictionary["key"].Length
+</code></pre>
+
+        <p>
+            اینجا ترکیبی از:
+        </p>
+        <ul>
+            <li>Indexer Access (<code>[]</code>)</li>
+            <li>Member Access (<code>.</code>)</li>
+        </ul>
+        <p>
+            استفاده شده است.
+        </p>
+
+        <h3>Member Access و Expression بودن</h3>
+
+        <pre><code class="language-csharp">
+var length = user.Name.Length;
+</code></pre>
+
+        <p>
+            <code>user.Name.Length</code>
+            یک Expression کامل است که
+            مقدار تولید می‌کند و می‌تواند:
+        </p>
+        <ul>
+            <li>در متغیر ذخیره شود</li>
+            <li>به متد پاس داده شود</li>
+            <li>در شرط‌ها استفاده شود</li>
+        </ul>
+
+        <h3>مثال پروژه‌ای واقعی — بررسی دسترسی</h3>
+
+        <pre><code class="language-csharp">
+if (user?.Permissions?.CanEdit == true)
+{
+    EnableEditMode();
+}
+</code></pre>
+
+        <p>
+            این مثال نشان می‌دهد
+            چگونه Member Access و
+            Null Safety با هم ترکیب می‌شوند
+            تا کد امن و تمیز باشد.
+        </p>
+
+        <h3>اشتباهات رایج</h3>
+        <ul>
+            <li>عدم بررسی null قبل از Member Access</li>
+            <li>زنجیره‌های بسیار طولانی و ناخوانا</li>
+            <li>استفاده زیاد از <code>!</code> (null-forgiving)</li>
+        </ul>
+
+        <h3>نکات حرفه‌ای</h3>
+        <ul>
+            <li>زنجیره‌های طولانی را به متغیرهای میانی بشکن</li>
+            <li>از <code>?.</code> به‌جای if تو در تو استفاده کن</li>
+            <li>Member Access تمیز = کد قابل نگهداری</li>
+        </ul>
+
+        <h3>تمرین‌های پیشنهادی</h3>
+        <ol>
+            <li>
+                یک کلاس User با Address بساز و Member Access زنجیره‌ای بنویس.
+            </li>
+            <li>
+                همان کد را با Null Conditional Operator امن کن.
+            </li>
+            <li>
+                یک مثال Static Member Access بنویس.
+            </li>
+        </ol>
+
+        <p class="ref">
+            مستندات رسمی:
+            <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/member-access-operators"
+                target="_blank">
+                Member Access Operators — Microsoft Docs
+            </a>
+        </p>
+
+    </section>
+
+    <!-- ============================ TYPE TESTING ============================ -->
+    <section id="type-testing" class="topic-section">
+
+        <h2>Type Testing</h2>
+
+        <p>
+            <strong>Type Testing</strong> یعنی بررسی نوع واقعی یک شیء
+            در زمان اجرا (Runtime).
+            این موضوع مخصوصاً زمانی مهم می‌شود که
+            با <code>object</code>، interface یا inheritance کار می‌کنیم.
+        </p>
+
+        <p>
+            C# مدرن ابزارهای بسیار امن و خوانایی
+            برای Type Testing در اختیار ما قرار داده است
+            که جایگزین کست‌های قدیمی و خطرناک شده‌اند.
+        </p>
+
+        <h3>مشکل کست سنتی (Cast)</h3>
+
+        <pre><code class="language-csharp">
+object value = "hello";
+
+string text = (string)value; // اگر نوع اشتباه باشد → Exception
+</code></pre>
+
+        <p>
+            اگر <code>value</code> از نوع <code>string</code> نباشد،
+            برنامه در Runtime با <code>InvalidCastException</code> کرش می‌کند.
+        </p>
+
+        <h3>Type Testing با is (روش مدرن)</h3>
+
+        <pre><code class="language-csharp">
+if (value is string text)
+{
+    Console.WriteLine(text.Length);
+}
+</code></pre>
+
+        <p>
+            این ساختار:
+        </p>
+        <ul>
+            <li>نوع را بررسی می‌کند</li>
+            <li>در صورت موفقیت، متغیر typed می‌سازد</li>
+            <li>کاملاً امن است</li>
+        </ul>
+
+        <h3>is بدون Pattern (قدیمی‌تر)</h3>
+
+        <pre><code class="language-csharp">
+if (value is string)
+{
+    string text = (string)value;
+}
+</code></pre>
+
+        <p>
+            این روش هنوز معتبر است،
+            اما نسبت به نسخهٔ جدید خوانایی کمتری دارد.
+        </p>
+
+        <h3>Type Testing با as</h3>
+
+        <pre><code class="language-csharp">
+string? text = value as string;
+
+if (text != null)
+{
+    Console.WriteLine(text.Length);
+}
+</code></pre>
+
+        <p>
+            <code>as</code> در صورت عدم تطابق:
+        </p>
+        <ul>
+            <li>Exception پرتاب نمی‌کند</li>
+            <li>مقدار null برمی‌گرداند</li>
+        </ul>
+
+        <h3>مقایسه is و as</h3>
+
+        <ul>
+            <li>
+                <strong>is</strong> → بررسی نوع + متغیر typed
+            </li>
+            <li>
+                <strong>as</strong> → تبدیل امن + نیاز به null check
+            </li>
+        </ul>
+
+        <h3>Type Testing با Interface</h3>
+
+        <pre><code class="language-csharp">
+if (service is IDisposable disposable)
+{
+    disposable.Dispose();
+}
+</code></pre>
+
+        <p>
+            این الگو بسیار رایج است
+            و پایهٔ بسیاری از فریم‌ورک‌هاست.
+        </p>
+
+        <h3>Type Testing در برابر Inheritance</h3>
+
+        <pre><code class="language-csharp">
+if (animal is Dog dog)
+{
+    dog.Bark();
+}
+</code></pre>
+
+        <p>
+            اینجا Type Testing به ما اجازه می‌دهد
+            رفتار خاص یک زیرکلاس را اجرا کنیم
+            بدون شکستن polymorphism.
+        </p>
+
+        <h3>Type Testing به‌عنوان Expression</h3>
+
+        <pre><code class="language-csharp">
+bool isString = value is string;
+</code></pre>
+
+        <p>
+            این یعنی Type Testing خودش یک Expression است
+            و می‌تواند در شرط‌ها، متغیرها و switch استفاده شود.
+        </p>
+
+        <h3>مثال پروژه‌ای واقعی — پردازش ورودی عمومی</h3>
+
+        <pre><code class="language-csharp">
+void Handle(object input)
+{
+    if (input is int number)
+    {
+        ProcessNumber(number);
+    }
+    else if (input is string text)
+    {
+        ProcessText(text);
+    }
+}
+</code></pre>
+
+        <h3>اشتباهات رایج</h3>
+        <ul>
+            <li>استفادهٔ زیاد از cast مستقیم</li>
+            <li>نادیده گرفتن null در as</li>
+            <li>نوشتن if/elseهای طولانی به‌جای Pattern Matching</li>
+        </ul>
+
+        <h3>نکات حرفه‌ای</h3>
+        <ul>
+            <li>در C# جدید، is + pattern بهترین انتخاب است</li>
+            <li>Type Testing تمیز = کد قابل توسعه</li>
+            <li>مقدمهٔ مستقیم Pattern Matching</li>
+        </ul>
+
+        <h3>تمرین‌های پیشنهادی</h3>
+        <ol>
+            <li>
+                یک object بساز و نوع آن را با is بررسی کن.
+            </li>
+            <li>
+                همان کد را با as پیاده‌سازی کن.
+            </li>
+            <li>
+                تفاوت رفتار این دو روش را تست کن.
+            </li>
+        </ol>
+
+        <p class="ref">
+            مستندات رسمی:
+            <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/type-testing-and-cast"
+                target="_blank">
+                Type Testing and Cast — Microsoft Docs
+            </a>
+        </p>
+
+    </section>
+
+    <!-- ============================ PATTERN MATCHING ============================ -->
+    <section id="pattern-matching" class="topic-section">
+
+        <h2>Pattern Matching</h2>
+
+        <p>
+            <strong>Pattern Matching</strong> قابلیتی است که به شما اجازه می‌دهد
+            هم‌زمان <strong>نوع</strong>، <strong>مقدار</strong>
+            و <strong>شرایط</strong> یک داده را بررسی کنید.
+            این قابلیت یکی از بزرگ‌ترین جهش‌های C# در سال‌های اخیر است.
+        </p>
+
+        <p>
+            Pattern Matching جایگزین if / elseهای طولانی،
+            castهای خطرناک و کدهای ناخوانا شده است.
+        </p>
+
+        <h3>Pattern Matching ساده با is</h3>
+
+        <pre><code class="language-csharp">
+if (value is int number)
+{
+    Console.WriteLine(number * 2);
+}
+</code></pre>
+
+        <p>
+            این کد:
+        </p>
+        <ul>
+            <li>نوع را بررسی می‌کند</li>
+            <li>مقدار typed می‌سازد</li>
+            <li>امن و خواناست</li>
+        </ul>
+
+        <h3>Pattern Matching با شرط (when)</h3>
+
+        <pre><code class="language-csharp">
+if (value is int n && n > 0)
+{
+    Console.WriteLine("Positive number");
+}
+</code></pre>
+
+        <p>
+            اینجا Pattern Matching با شرط منطقی ترکیب شده است.
+        </p>
+
+        <h3>Relational Patterns</h3>
+
+        <pre><code class="language-csharp">
+if (score is >= 90)
+{
+    grade = "A";
+}
+</code></pre>
+
+        <p>
+            این الگوها در C# 9 معرفی شدند
+            و خوانایی تصمیم‌گیری را بسیار بالا بردند.
+        </p>
+
+        <h3>Logical Patterns (and / or / not)</h3>
+
+        <pre><code class="language-csharp">
+if (age is >= 18 and < 65)
+{
+    Console.WriteLine("Working age");
+}
+</code></pre>
+
+        <p>
+            این ساختار معادل شرط‌های منطقی پیچیده است،
+            اما بسیار تمیزتر و قابل فهم‌تر.
+        </p>
+
+        <h3>Pattern Matching با switch</h3>
+
+        <pre><code class="language-csharp">
+string result = value switch
+{
+    int n when n > 0 => "Positive int",
+    int n when n < 0 => "Negative int",
+    string s         => $"Text: {s}",
+    null             => "Null value",
+    _                => "Unknown"
+};
+</code></pre>
+
+        <h3>Property Pattern</h3>
+
+        <pre><code class="language-csharp">
+if (user is { IsActive: true, Role: "Admin" })
+{
+    GrantFullAccess();
+}
+</code></pre>
+
+        <p>
+            این الگو اجازه می‌دهد
+            پراپرتی‌های یک شیء را بدون دسترسی مستقیم بررسی کنیم.
+        </p>
+
+        <h3>Tuple Pattern</h3>
+
+        <pre><code class="language-csharp">
+var message = (role, isActive) switch
+{
+    ("Admin", true) => "Full Access",
+    ("User", true)  => "Limited Access",
+    (_, false)      => "Blocked",
+    _               => "No Access"
+};
+</code></pre>
+
+        <h3>Discard Pattern (_)</h3>
+
+        <pre><code class="language-csharp">
+if (value is not null)
+{
+    Console.WriteLine("Has value");
+}
+</code></pre>
+
+        <p>
+            <code>_</code> برای نادیده گرفتن مقدار
+            یا تعریف default استفاده می‌شود.
+        </p>
+
+        <h3>مثال پروژه‌ای واقعی — کنترل دسترسی</h3>
+
+        <pre><code class="language-csharp">
+if (user is { IsActive: true, Role: "Manager" or "Admin" })
+{
+    AllowAccess();
+}
+</code></pre>
+
+        <h3>مزایای Pattern Matching</h3>
+        <ul>
+            <li>کد کوتاه‌تر و خواناتر</li>
+            <li>امن‌تر نسبت به cast</li>
+            <li>Declarative به‌جای Imperative</li>
+        </ul>
+
+        <h3>اشتباهات رایج</h3>
+        <ul>
+            <li>استفاده بیش از حد برای منطق ساده</li>
+            <li>نوشتن patternهای خیلی پیچیده در یک خط</li>
+            <li>نادیده گرفتن خوانایی</li>
+        </ul>
+
+        <h3>تمرین‌های پیشنهادی</h3>
+        <ol>
+            <li>
+                با Pattern Matching سن کاربر را دسته‌بندی کن.
+            </li>
+            <li>
+                یک switch expression با چند pattern بنویس.
+            </li>
+            <li>
+                از property pattern برای بررسی وضعیت یک شیء استفاده کن.
+            </li>
+        </ol>
+
+        <p class="ref">
+            مستندات رسمی:
+            <a href="https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/functional/pattern-matching"
+                target="_blank">
+                Pattern Matching — Microsoft Docs
+            </a>
+        </p>
+
+    </section>
+
+    <!-- ============================ COLLECTION EXPRESSIONS ============================ -->
+    <section id="collection-expressions" class="topic-section">
+
+        <h2>Collection Expressions</h2>
+
+        <p>
+            <strong>Collection Expressions</strong> روشی مدرن برای
+            ساخت، ترکیب و مقداردهی مجموعه‌ها هستند.
+            این قابلیت در C# 12 معرفی شد تا
+            نویز سینتکسی کاهش پیدا کند
+            و کدها خواناتر شوند.
+        </p>
+
+        <p>
+            Collection Expressionها جایگزین مستقیم
+            همهٔ Collectionها نیستند،
+            اما در بسیاری از سناریوها
+            بهترین انتخاب محسوب می‌شوند.
+        </p>
+
+        <h3>ساخت Collection به روش کلاسیک</h3>
+
+        <pre><code class="language-csharp">
+var numbers = new List<int> { 1, 2, 3, 4 };
+</code></pre>
+
+        <p>
+            این روش سال‌ها استاندارد بوده،
+            اما سینتکس نسبتاً شلوغی دارد.
+        </p>
+
+        <h3>ساخت Collection با Collection Expressions</h3>
+
+        <pre><code class="language-csharp">
+int[] numbers = [1, 2, 3, 4];
+</code></pre>
+
+        <p>
+            این سینتکس:
+        </p>
+        <ul>
+            <li>کوتاه‌تر است</li>
+            <li>خواناتر است</li>
+            <li>بدون new نوشته می‌شود</li>
+        </ul>
+
+        <h3>پشتیبانی از انواع مختلف Collection</h3>
+
+        <pre><code class="language-csharp">
+List<string> names = ["Ali", "Sara", "Reza"];
+Span<int> span = [1, 2, 3];
+ReadOnlySpan<int> readOnly = [10, 20, 30];
+</code></pre>
+
+        <p>
+            نوع Collection از سمت چپ مشخص می‌شود،
+            نه از داخل Expression.
+        </p>
+
+        <h3>ترکیب Collectionها (Spread / Range)</h3>
+
+        <pre><code class="language-csharp">
+int[] a = [1, 2];
+int[] b = [3, 4];
+
+int[] all = [..a, ..b, 5];
+</code></pre>
+
+        <p>
+            <code>..</code> یعنی:
+            <strong>تمام عناصر این Collection را باز کن</strong>.
+        </p>
+
+        <h3>ترکیب با شرط</h3>
+
+        <pre><code class="language-csharp">
+bool includeAdmin = true;
+
+string[] roles =
+[
+    "User",
+    ..(includeAdmin ? ["Admin"] : [])
+];
+</code></pre>
+
+        <p>
+            این الگو بسیار تمیزتر از ifهای بیرونی است
+            و کاملاً Expression-based است.
+        </p>
+
+        <h3>Collection Expressions و Immutability</h3>
+
+        <pre><code class="language-csharp">
+ReadOnlySpan<int> values = [1, 2, 3];
+</code></pre>
+
+        <p>
+            Collection Expressions به‌خوبی
+            با ساختارهای Immutable و ReadOnly
+            سازگار هستند.
+        </p>
+
+        <h3>مثال پروژه‌ای واقعی — ساخت لیست منو</h3>
+
+        <pre><code class="language-csharp">
+string[] menuItems =
+[
+    "Home",
+    "Products",
+    "Contact",
+    ..(isAdmin ? ["Admin Panel"] : [])
+];
+</code></pre>
+
+        <h3>محدودیت‌ها</h3>
+        <ul>
+            <li>نیاز به C# 12 یا بالاتر</li>
+            <li>در همهٔ APIها پشتیبانی نمی‌شود</li>
+            <li>ممکن است در تیم‌های قدیمی گیج‌کننده باشد</li>
+        </ul>
+
+        <h3>اشتباهات رایج</h3>
+        <ul>
+            <li>استفاده در جایی که خوانایی کاهش می‌یابد</li>
+            <li>فرض اینکه جایگزین همهٔ Collectionهاست</li>
+            <li>عدم توجه به نسخهٔ زبان</li>
+        </ul>
+
+        <h3>نکات حرفه‌ای</h3>
+        <ul>
+            <li>برای ساخت Collectionهای کوتاه عالی است</li>
+            <li>برای ترکیب Collectionها بی‌نظیر است</li>
+            <li>در APIهای جدید، انتخاب اول است</li>
+        </ul>
+
+        <h3>تمرین‌های پیشنهادی</h3>
+        <ol>
+            <li>
+                یک Collection با Spread بساز.
+            </li>
+            <li>
+                با شرط یک آیتم را اضافه یا حذف کن.
+            </li>
+            <li>
+                تفاوت این روش و initializer قدیمی را مقایسه کن.
+            </li>
+        </ol>
+
+        <p class="ref">
+            مستندات رسمی:
+            <a href="https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-12#collection-expressions"
+                target="_blank">
+                Collection Expressions — Microsoft Docs
+            </a>
+        </p>
+
+    </section>
+
+    <!-- ============================ LAMBDA EXPRESSIONS ============================ -->
+    <section id="lambda-expressions" class="topic-section">
+
+        <h2>Lambda Expressions</h2>
+
+        <p>
+            <strong>Lambda Expression</strong> یک تابع کوتاه، ناشناس
+            و Expression-based است که
+            معمولاً برای <strong>تعریف رفتار</strong>
+            به‌جای <strong>نوشتن متد کامل</strong> استفاده می‌شود.
+        </p>
+
+        <p>
+            Lambdaها ستون فقرات LINQ،
+            event handling،
+            programming functional
+            و کدنویسی مدرن در C# هستند.
+        </p>
+
+        <h3>سینتکس پایه Lambda</h3>
+
+        <pre><code class="language-csharp">
+x => x * 2
+</code></pre>
+
+        <p>
+            این Lambda:
+        </p>
+        <ul>
+            <li><code>x</code> → ورودی</li>
+            <li><code>=&gt;</code> → عملگر Lambda</li>
+            <li><code>x * 2</code> → Expression خروجی</li>
+        </ul>
+
+        <h3>Lambda با چند پارامتر</h3>
+
+        <pre><code class="language-csharp">
+(a, b) => a + b
+</code></pre>
+
+        <h3>Lambda با بلاک کد</h3>
+
+        <pre><code class="language-csharp">
+x =>
+{
+    int result = x * 2;
+    return result;
+}
+</code></pre>
+
+        <p>
+            وقتی بیش از یک خط کد داریم،
+            از بلاک استفاده می‌کنیم.
+        </p>
+
+        <h3>Lambda و Delegate</h3>
+
+        <pre><code class="language-csharp">
+Func<int, int> square = x => x * x;
+</code></pre>
+
+        <p>
+            Lambdaها معمولاً به
+            <code>Func</code> یا <code>Action</code>
+            assign می‌شوند.
+        </p>
+
+        <h3>Action vs Func</h3>
+
+        <pre><code class="language-csharp">
+Action<string> log = msg => Console.WriteLine(msg);
+
+Func<int, int, int> sum = (a, b) => a + b;
+</code></pre>
+
+        <ul>
+            <li><code>Action</code> → بدون خروجی</li>
+            <li><code>Func</code> → دارای خروجی</li>
+        </ul>
+
+        <h3>Lambda در LINQ (مهم‌ترین کاربرد)</h3>
+
+        <pre><code class="language-csharp">
+var adults = users
+    .Where(u => u.Age >= 18)
+    .Select(u => u.Name);
+</code></pre>
+
+        <p>
+            اینجا Lambdaها:
+        </p>
+        <ul>
+            <li>شرط فیلتر را تعریف می‌کنند</li>
+            <li>نقشه‌برداری داده را مشخص می‌کنند</li>
+            <li>بدون حلقه و if صریح</li>
+        </ul>
+
+        <h3>Expression Lambda vs Statement Lambda</h3>
+
+        <pre><code class="language-csharp">
+// Expression Lambda
+x => x + 1
+
+// Statement Lambda
+x =>
+{
+    return x + 1;
+}
+</code></pre>
+
+        <p>
+            Expression Lambda:
+        </p>
+        <ul>
+            <li>کوتاه‌تر</li>
+            <li>قابل تبدیل به Expression Tree</li>
+        </ul>
+
+        <h3>Lambda و Closure (نکتهٔ بسیار مهم)</h3>
+
+        <pre><code class="language-csharp">
+int factor = 10;
+
+Func<int, int> multiply = x => x * factor;
+</code></pre>
+
+        <p>
+            Lambda به متغیرهای بیرونی
+            <strong>دسترسی دارد</strong>.
+            به این رفتار Closure گفته می‌شود.
+        </p>
+
+        <h3>اشتباه رایج در Closure</h3>
+
+        <pre><code class="language-csharp">
+var actions = new List<Action>();
+
+for (int i = 0; i < 3; i++)
+{
+    actions.Add(() => Console.WriteLine(i));
+}
+</code></pre>
+
+        <p>
+            خروجی همه 3 خواهد بود،
+            چون <code>i</code> shared است.
+        </p>
+
+        <h3>Lambda در event handling</h3>
+
+        <pre><code class="language-csharp">
+button.Click += (s, e) =>
+{
+    Console.WriteLine("Clicked!");
+};
+</code></pre>
+
+        <h3>مثال پروژه‌ای واقعی — فیلتر سفارش‌ها</h3>
+
+        <pre><code class="language-csharp">
+var expensiveOrders = orders
+    .Where(o => o.Total > 1_000_000)
+    .OrderByDescending(o => o.Date);
+</code></pre>
+
+        <h3>مزایای Lambda Expressions</h3>
+        <ul>
+            <li>کد کوتاه‌تر و خواناتر</li>
+            <li>بیان مستقیم منطق</li>
+            <li>قابل ترکیب با LINQ و async</li>
+        </ul>
+
+        <h3>اشتباهات رایج</h3>
+        <ul>
+            <li>نوشتن Lambdaهای بسیار طولانی</li>
+            <li>نادیده گرفتن Closure</li>
+            <li>استفاده بیش از حد به‌جای متد خوانا</li>
+        </ul>
+
+        <h3>نکات حرفه‌ای</h3>
+        <ul>
+            <li>Lambda کوتاه = کد تمیز</li>
+            <li>منطق پیچیده → متد جداگانه</li>
+            <li>Lambda قلب LINQ است</li>
+        </ul>
+
+        <h3>تمرین‌های پیشنهادی</h3>
+        <ol>
+            <li>
+                یک Lambda برای فیلتر عددهای زوج بنویس.
+            </li>
+            <li>
+                یک Lambda با Closure بساز و تست کن.
+            </li>
+            <li>
+                یک query LINQ کامل فقط با Lambda بنویس.
+            </li>
+        </ol>
+
+        <p class="ref">
+            مستندات رسمی:
+            <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/lambda-expressions"
+                target="_blank">
+                Lambda Expressions — Microsoft Docs
+            </a>
+        </p>
+
+    </section>
+</section>
+
+<style>
+    /* ============================ WRAPPER ============================ */
+    .expressions-wrapper {
+        max-width: 1020px;
+        margin: 0 auto;
+        padding: 14px 22px;
+        transition: max-width .3s ease;
+    }
+
+    /* Fallback اگر container قدیمی داخل HTML مانده باشد */
+    .expressions-wrapper .topic-page,
+    .expressions-wrapper .container {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+
+    @media (max-width: 768px) {
+        .expressions-wrapper {
+            max-width: 100%;
+            padding: 12px 18px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .expressions-wrapper {
+            padding: 10px 12px;
+        }
+    }
+
+    /* ============================ PAGE TITLE ============================ */
+    .expressions-wrapper .page-title {
+        text-align: center;
+        font-size: 40px;
+        font-weight: 800;
+        color: #a855f7;
+        /* Purple 500 */
+        margin: 6px 0 8px;
+    }
+
+    @media (max-width: 768px) {
+        .expressions-wrapper .page-title {
+            font-size: 34px;
+        }
+    }
+
+    .expressions-wrapper .page-desc {
+        text-align: center;
+        opacity: .85;
+        font-size: 26px;
+        margin-bottom: 45px;
+        font-family: "Lalezar", "VazirFD";
+    }
+
+    @media (max-width: 768px) {
+        .expressions-wrapper .page-desc {
+            font-size: 18px;
+        }
+    }
+
+    /* ============================ TOPIC SECTIONS ============================ */
+    .expressions-wrapper .topic-section {
+        margin-bottom: 75px;
+        padding: 28px;
+        border-radius: 14px;
+        background: rgba(255, 255, 255, 0.035);
+        border-right: 4px solid #a855f7;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    html.light .expressions-wrapper .topic-section {
+        background: #ffffff;
+        border-bottom-color: #e5e5e5;
+    }
+
+    /* ============================ HEADINGS ============================ */
+    .expressions-wrapper .topic-section h2 {
+        text-align: left;
+        color: #a855f7;
+        font-size: 28px;
+        margin-bottom: 16px;
+        position: relative;
+    }
+
+    .expressions-wrapper .topic-section h2::after {
+        content: "";
+        width: 64px;
+        height: 3px;
+        background: linear-gradient(90deg, #a855f7, #d8b4fe);
+        position: absolute;
+        bottom: -7px;
+        left: 0;
+        border-radius: 3px;
+    }
+
+    .expressions-wrapper .topic-section h3 {
+        margin-top: 26px;
+        font-size: 20px;
+        color: #d8b4fe;
+    }
+
+    /* ============================ TEXT ============================ */
+    .expressions-wrapper .topic-section p {
+        line-height: 1.9;
+        margin-bottom: 14px;
+    }
+
+    .expressions-wrapper ul li,
+    .expressions-wrapper ol li {
+        margin-bottom: 6px;
+    }
+
+    /* ============================ LINKS ============================ */
+    .expressions-wrapper .ref a {
+        color: #4ea3ff;
+        font-weight: 600;
+        transition: color .2s ease, text-shadow .2s ease;
+    }
+
+    .expressions-wrapper .ref a:hover {
+        color: #82c5ff;
+        text-shadow: 0 0 8px rgba(78, 163, 255, 0.6);
+    }
+
+    /* ============================ CODE BLOCK ============================ */
+    .expressions-wrapper pre {
+        background: #161616;
+        border: 1px solid #333;
+        padding: 16px;
+        border-radius: 10px;
+        overflow-x: auto;
+        margin-top: 15px;
+        font-family: "JetBrains Mono", Menlo, Consolas, monospace;
+        font-size: 15px;
+        line-height: 1.6;
+    }
+
+    html.light .expressions-wrapper pre {
+        background: #f9f9f9;
+        border-color: #dfdfdf;
+        color: #222;
+    }
+
+    /* ============================ BLOCKQUOTE ============================ */
+    .expressions-wrapper blockquote {
+        padding: 16px 22px;
+        border-right: 4px solid #a855f7;
+        background: rgba(168, 85, 247, 0.12);
+        border-radius: 10px;
+        margin: 28px 0;
+        font-style: italic;
+        opacity: .95;
+    }
+
+    html.light .expressions-wrapper blockquote {
+        background: #faf5ff;
+    }
+</style>
