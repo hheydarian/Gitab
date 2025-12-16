@@ -1,0 +1,921 @@
+---
+layout: layout.njk
+title: Jump Statements
+permalink: /Giter/CSharp/syllabus/JumpStatements/
+---
+
+<section class="jump-wrapper">
+
+    <h1 class="page-title">Jump Statements</h1>
+
+    <p class="page-desc">
+        Jump Statementها جریان اجرای برنامه را
+        <strong>به‌صورت ناگهانی تغییر می‌دهند</strong>.
+        این دستورات معمولاً برای خروج، پرش یا بازگشت از
+        بلوک‌های کنترلی استفاده می‌شوند
+        و باید با دقت به کار بروند.
+    </p>
+
+    <!-- ============================ BREAK ============================ -->
+    <section id="break" class="topic-section">
+
+        <h2>break</h2>
+
+        <p>
+            دستور <strong>break</strong> برای
+            <strong>خروج فوری از یک ساختار کنترلی</strong>
+            استفاده می‌شود.
+            به‌محض اجرای break،
+            جریان اجرای برنامه از آن بلوک خارج می‌شود.
+        </p>
+
+        <p>
+            break معمولاً در
+            <strong>حلقه‌ها</strong> و
+            <strong>switch</strong>
+            استفاده می‌شود.
+        </p>
+
+        <h3>استفاده از break در حلقه‌ها</h3>
+
+        <pre><code class="language-csharp">
+for (int i = 0; i < 10; i++)
+{
+    if (i == 5)
+        break;
+
+    Console.WriteLine(i);
+}
+</code></pre>
+
+        <p>
+            در این مثال:
+        </p>
+        <ul>
+            <li>حلقه از 0 شروع می‌شود</li>
+            <li>وقتی <code>i == 5</code> شود</li>
+            <li>حلقه فوراً متوقف می‌شود</li>
+        </ul>
+
+        <h3>break در while</h3>
+
+        <pre><code class="language-csharp">
+while (true)
+{
+    string input = Console.ReadLine();
+
+    if (input == "exit")
+        break;
+}
+</code></pre>
+
+        <p>
+            این الگو بسیار رایج است
+            و برای حلقه‌هایی استفاده می‌شود
+            که شرط خروج آن‌ها درون بدنه تعریف می‌شود.
+        </p>
+
+        <h3>break در switch</h3>
+
+        <pre><code class="language-csharp">
+switch (day)
+{
+    case 1:
+        Console.WriteLine("Monday");
+        break;
+
+    case 2:
+        Console.WriteLine("Tuesday");
+        break;
+
+    default:
+        Console.WriteLine("Unknown");
+        break;
+}
+</code></pre>
+
+        <p>
+            در <code>switch</code>:
+        </p>
+        <ul>
+            <li>break مانع fall-through می‌شود</li>
+            <li>بدون break اجرای case بعدی ادامه پیدا می‌کند</li>
+        </ul>
+
+        <h3>break در switch expression</h3>
+
+        <p>
+            در <strong>switch expression</strong>
+            نیازی به break نیست،
+            چون هر case خودش یک Expression مستقل است.
+        </p>
+
+        <pre><code class="language-csharp">
+string result = day switch
+{
+    1 => "Monday",
+    2 => "Tuesday",
+    _ => "Unknown"
+};
+</code></pre>
+
+        <h3>break در حلقه‌های تو در تو</h3>
+
+        <pre><code class="language-csharp">
+for (int i = 0; i < 3; i++)
+{
+    for (int j = 0; j < 3; j++)
+    {
+        if (j == 1)
+            break;
+
+        Console.WriteLine($"{i},{j}");
+    }
+}
+</code></pre>
+
+        <p>
+            <strong>نکتهٔ مهم:</strong>
+            break فقط از <strong>نزدیک‌ترین حلقه</strong>
+            خارج می‌شود،
+            نه همهٔ حلقه‌ها.
+        </p>
+
+        <h3>اشتباه رایج — انتظار خروج از همهٔ حلقه‌ها</h3>
+
+        <p>
+            اگر بخواهی از چند حلقه خارج شوی،
+            باید از تکنیک‌های دیگر استفاده کنی:
+        </p>
+
+        <ul>
+            <li>flag متغیر</li>
+            <li>return (در متد)</li>
+            <li>ساختارهای منطقی متفاوت</li>
+        </ul>
+
+        <h3>مثال واقعی — جستجوی مقدار</h3>
+
+        <pre><code class="language-csharp">
+foreach (var item in items)
+{
+    if (item.Id == targetId)
+    {
+        foundItem = item;
+        break;
+    }
+}
+</code></pre>
+
+        <p>
+            break باعث می‌شود
+            بعد از پیدا شدن نتیجه،
+            حلقه بیهوده ادامه پیدا نکند.
+        </p>
+
+        <h3>چه زمانی از break استفاده نکنیم؟</h3>
+        <ul>
+            <li>وقتی منطق حلقه پیچیده می‌شود</li>
+            <li>وقتی breakهای متعدد خوانایی را کاهش می‌دهد</li>
+            <li>وقتی می‌توان با شرط حلقه مسئله را حل کرد</li>
+        </ul>
+
+        <h3>نکات حرفه‌ای</h3>
+        <ul>
+            <li>break ابزار کنترل جریان است، نه منطق اصلی</li>
+            <li>استفادهٔ کم اما دقیق</li>
+            <li>در LINQ معمولاً جای break نیست</li>
+        </ul>
+
+        <h3>تمرین‌های پیشنهادی</h3>
+        <ol>
+            <li>
+                یک حلقه بنویس که با break زودتر متوقف شود.
+            </li>
+            <li>
+                break در switch را حذف کن و نتیجه را بررسی کن.
+            </li>
+            <li>
+                یک مثال با حلقهٔ تو در تو بنویس و رفتار break را تست کن.
+            </li>
+        </ol>
+
+        <p class="ref">
+            مستندات رسمی:
+            <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/jump-statements#the-break-statement"
+                target="_blank">
+                break statement — Microsoft Docs
+            </a>
+        </p>
+
+    </section>
+
+    <!-- ============================ CONTINUE ============================ -->
+    <section id="continue" class="topic-section">
+
+        <h2>continue</h2>
+
+        <p>
+            دستور <strong>continue</strong> باعث می‌شود
+            <strong>iteration فعلی حلقه ناتمام رها شود</strong>
+            و اجرای برنامه مستقیماً به iteration بعدی برود.
+        </p>
+
+        <p>
+            برخلاف <code>break</code> که کل حلقه را متوقف می‌کند،
+            <code>continue</code> فقط یک دور از حلقه را رد می‌کند.
+        </p>
+
+        <h3>continue در حلقه for</h3>
+
+        <pre><code class="language-csharp">
+for (int i = 0; i < 5; i++)
+{
+    if (i == 2)
+        continue;
+
+    Console.WriteLine(i);
+}
+</code></pre>
+
+        <p>
+            خروجی این کد:
+        </p>
+        <ul>
+            <li>عدد 2 چاپ نمی‌شود</li>
+            <li>اما حلقه تا انتها ادامه دارد</li>
+        </ul>
+
+        <h3>continue در while</h3>
+
+        <pre><code class="language-csharp">
+int i = 0;
+
+while (i < 5)
+{
+    i++;
+
+    if (i == 3)
+        continue;
+
+    Console.WriteLine(i);
+}
+</code></pre>
+
+        <p>
+            <strong>نکتهٔ بسیار مهم:</strong>
+            در while اگر قبل از continue
+            مقدار شرط تغییر نکند،
+            حلقه ممکن است بی‌نهایت شود.
+        </p>
+
+        <h3>continue در foreach</h3>
+
+        <pre><code class="language-csharp">
+foreach (var item in items)
+{
+    if (item.IsDisabled)
+        continue;
+
+    Process(item);
+}
+</code></pre>
+
+        <p>
+            این الگو یکی از
+            <strong>تمیزترین کاربردهای continue</strong>
+            است.
+        </p>
+
+        <h3>مقایسه continue و if تو در تو</h3>
+
+        <pre><code class="language-csharp">
+// بدون continue
+foreach (var item in items)
+{
+    if (!item.IsDisabled)
+    {
+        Process(item);
+    }
+}
+
+// با continue (خواناتر)
+foreach (var item in items)
+{
+    if (item.IsDisabled)
+        continue;
+
+    Process(item);
+}
+</code></pre>
+
+        <p>
+            continue کمک می‌کند
+            <strong>happy path</strong>
+            واضح‌تر دیده شود.
+        </p>
+
+        <h3>continue در حلقه‌های تو در تو</h3>
+
+        <pre><code class="language-csharp">
+for (int i = 0; i < 3; i++)
+{
+    for (int j = 0; j < 3; j++)
+    {
+        if (j == 1)
+            continue;
+
+        Console.WriteLine($"{i},{j}");
+    }
+}
+</code></pre>
+
+        <p>
+            continue فقط iteration
+            <strong>نزدیک‌ترین حلقه</strong>
+            را رد می‌کند.
+        </p>
+
+        <h3>اشتباه رایج — استفادهٔ بیش از حد</h3>
+
+        <p>
+            استفادهٔ زیاد از continue
+            می‌تواند منطق حلقه را
+            سخت‌خوان و پراکنده کند.
+        </p>
+
+        <h3>چه زمانی continue انتخاب خوبی است؟</h3>
+        <ul>
+            <li>فیلتر کردن آیتم‌ها</li>
+            <li>حذف حالت‌های نامعتبر</li>
+            <li>جلوگیری از ifهای تو در تو</li>
+        </ul>
+
+        <h3>چه زمانی بهتر است استفاده نکنیم؟</h3>
+        <ul>
+            <li>وقتی منطق پیچیده می‌شود</li>
+            <li>وقتی چند continue پشت سر هم داریم</li>
+            <li>وقتی شرط حلقه قابل ساده‌سازی است</li>
+        </ul>
+
+        <h3>مثال واقعی — پردازش داده‌ها</h3>
+
+        <pre><code class="language-csharp">
+foreach (var order in orders)
+{
+    if (!order.IsValid)
+        continue;
+
+    CalculateTotal(order);
+}
+</code></pre>
+
+        <h3>نکات حرفه‌ای</h3>
+        <ul>
+            <li>continue ابزار خوانایی است، نه میانبر تنبلی</li>
+            <li>برای guard condition عالی است</li>
+            <li>در foreach امن‌تر از while است</li>
+        </ul>
+
+        <h3>تمرین‌های پیشنهادی</h3>
+        <ol>
+            <li>
+                یک حلقه بنویس که بعضی اعداد را skip کند.
+            </li>
+            <li>
+                همان منطق را بدون continue بنویس و مقایسه کن.
+            </li>
+            <li>
+                یک حلقهٔ while بنویس که با continue به مشکل بخورد.
+            </li>
+        </ol>
+
+        <p class="ref">
+            مستندات رسمی:
+            <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/jump-statements#the-continue-statement"
+                target="_blank">
+                continue statement — Microsoft Docs
+            </a>
+        </p>
+
+    </section>
+
+    <!-- ============================ RETURN ============================ -->
+    <section id="return" class="topic-section">
+
+        <h2>return</h2>
+
+        <p>
+            دستور <strong>return</strong> برای
+            <strong>پایان اجرای یک متد</strong>
+            استفاده می‌شود.
+            این دستور می‌تواند
+            یک مقدار برگرداند
+            یا فقط متد را متوقف کند.
+        </p>
+
+        <p>
+            هر زمان return اجرا شود،
+            کنترل برنامه فوراً به
+            فراخوانندهٔ متد بازمی‌گردد.
+        </p>
+
+        <h3>return در متدهای دارای خروجی</h3>
+
+        <pre><code class="language-csharp">
+int Add(int a, int b)
+{
+    return a + b;
+}
+</code></pre>
+
+        <p>
+            مقدار مشخص‌شده در return
+            به‌عنوان خروجی متد استفاده می‌شود.
+        </p>
+
+        <h3>return در متدهای void</h3>
+
+        <pre><code class="language-csharp">
+void PrintIfValid(bool isValid)
+{
+    if (!isValid)
+        return;
+
+    Console.WriteLine("Valid");
+}
+</code></pre>
+
+        <p>
+            در متدهای <code>void</code>،
+            return بدون مقدار
+            فقط اجرای متد را متوقف می‌کند.
+        </p>
+
+        <h3>return زودهنگام (Early Return)</h3>
+
+        <pre><code class="language-csharp">
+void Process(Order order)
+{
+    if (order == null)
+        return;
+
+    if (!order.IsValid)
+        return;
+
+    Save(order);
+}
+</code></pre>
+
+        <p>
+            این الگو:
+        </p>
+        <ul>
+            <li>کد را خواناتر می‌کند</li>
+            <li>از ifهای تو در تو جلوگیری می‌کند</li>
+            <li>مسیر اصلی (happy path) را واضح می‌سازد</li>
+        </ul>
+
+        <h3>مقایسه با if تو در تو</h3>
+
+        <pre><code class="language-csharp">
+// بد
+if (order != null)
+{
+    if (order.IsValid)
+    {
+        Save(order);
+    }
+}
+
+// خوب
+if (order == null)
+    return;
+
+if (!order.IsValid)
+    return;
+
+Save(order);
+</code></pre>
+
+        <h3>return در حلقه‌ها</h3>
+
+        <pre><code class="language-csharp">
+foreach (var item in items)
+{
+    if (item.Id == targetId)
+        return;
+}
+</code></pre>
+
+        <p>
+            برخلاف <code>break</code>،
+            return کل متد را متوقف می‌کند،
+            نه فقط حلقه را.
+        </p>
+
+        <h3>return در switch</h3>
+
+        <pre><code class="language-csharp">
+string GetDay(int day)
+{
+    switch (day)
+    {
+        case 1:
+            return "Monday";
+        case 2:
+            return "Tuesday";
+        default:
+            return "Unknown";
+    }
+}
+</code></pre>
+
+        <p>
+            استفاده از return در switch
+            معمولاً از break + متغیر موقت
+            تمیزتر است.
+        </p>
+
+        <h3>return و Expression بودن</h3>
+
+        <pre><code class="language-csharp">
+int Square(int x) => x * x;
+</code></pre>
+
+        <p>
+            در متدهای Expression-bodied،
+            return به‌صورت ضمنی وجود دارد.
+        </p>
+
+        <h3>اشتباهات رایج</h3>
+        <ul>
+            <li>چندین return بی‌دلیل در یک متد کوتاه</li>
+            <li>استفاده نکردن از early return</li>
+            <li>مخلوط کردن return و break بدون درک تفاوت</li>
+        </ul>
+
+        <h3>نکات حرفه‌ای</h3>
+        <ul>
+            <li>return زودهنگام دوست خوانایی است</li>
+            <li>متد کوتاه + return واضح = کد تمیز</li>
+            <li>اگر return زیاد شد، متد بزرگ شده</li>
+        </ul>
+
+        <h3>تمرین‌های پیشنهادی</h3>
+        <ol>
+            <li>
+                یک متد با if تو در تو بنویس و با early return بازنویسی کن.
+            </li>
+            <li>
+                تفاوت break و return را در یک حلقه تست کن.
+            </li>
+            <li>
+                یک متد Expression-bodied بنویس.
+            </li>
+        </ol>
+
+        <p class="ref">
+            مستندات رسمی:
+            <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/jump-statements#the-return-statement"
+                target="_blank">
+                return statement — Microsoft Docs
+            </a>
+        </p>
+
+    </section>
+
+    <!-- ============================ REF RETURN ============================ -->
+    <section id="ref-return" class="topic-section">
+
+        <h2>ref return</h2>
+
+        <p>
+            <strong>ref return</strong> اجازه می‌دهد
+            به‌جای کپی مقدار،
+            یک reference به داده بازگردانده شود.
+            این قابلیت برای سناریوهای Performance-critical استفاده می‌شود.
+        </p>
+
+        <p class="ref">
+            مستندات:
+            <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/ref" target="_blank">
+                ref return — Microsoft Docs
+            </a>
+        </p>
+
+    </section>
+
+    <!-- ============================ GOTO ============================ -->
+    <section id="goto" class="topic-section">
+
+        <h2>goto</h2>
+
+        <p>
+            دستور <strong>goto</strong> جریان اجرای برنامه را
+            <strong>به‌صورت مستقیم</strong>
+            به یک label مشخص منتقل می‌کند.
+            این دستور قدیمی‌ترین ابزار پرش در C# است.
+        </p>
+
+        <p>
+            استفادهٔ نادرست از goto
+            باعث ایجاد کدی می‌شود که
+            خواندن، دیباگ و نگهداری آن
+            بسیار دشوار است.
+        </p>
+
+        <h3>ساختار پایه goto</h3>
+
+        <pre><code class="language-csharp">
+goto Start;
+
+Console.WriteLine("This will be skipped");
+
+Start:
+Console.WriteLine("Jumped here");
+</code></pre>
+
+        <p>
+            در این مثال:
+        </p>
+        <ul>
+            <li>اجرای کد مستقیماً به label منتقل می‌شود</li>
+            <li>کد بین goto و label اجرا نمی‌شود</li>
+        </ul>
+
+        <h3>goto در switch (کاربرد مجاز)</h3>
+
+        <pre><code class="language-csharp">
+switch (value)
+{
+    case 1:
+        Console.WriteLine("One");
+        goto case 2;
+
+    case 2:
+        Console.WriteLine("Two");
+        break;
+}
+</code></pre>
+
+        <p>
+            این یکی از
+            <strong>موارد مجاز و توصیه‌شده</strong>
+            استفاده از goto است.
+        </p>
+
+        <h3>goto برای خروج از چند حلقه (بحث‌برانگیز)</h3>
+
+        <pre><code class="language-csharp">
+bool found = false;
+
+for (int i = 0; i < 3; i++)
+{
+    for (int j = 0; j < 3; j++)
+    {
+        if (i == 1 && j == 1)
+        {
+            found = true;
+            goto End;
+        }
+    }
+}
+
+End:
+if (found)
+    Console.WriteLine("Found");
+</code></pre>
+
+        <p>
+            این الگو:
+        </p>
+        <ul>
+            <li>از نظر فنی کار می‌کند</li>
+            <li>اما خوانایی پایینی دارد</li>
+            <li>معمولاً return یا refactor بهتر است</li>
+        </ul>
+
+        <h3>چرا goto بدنام شد؟</h3>
+        <ul>
+            <li>ایجاد Spaghetti Code</li>
+            <li>شکستن ساختار منطقی برنامه</li>
+            <li>دیباگ بسیار سخت</li>
+        </ul>
+
+        <h3>جایگزین‌های بهتر goto</h3>
+        <ul>
+            <li><code>break</code> و <code>continue</code></li>
+            <li><code>return</code></li>
+            <li>Refactor به متد کوچک‌تر</li>
+            <li>استفاده از LINQ یا Pattern Matching</li>
+        </ul>
+
+        <h3>چه زمانی goto قابل قبول است؟</h3>
+        <ul>
+            <li>در switch برای case chaining</li>
+            <li>کدهای سطح پایین خاص</li>
+            <li>وقتی جایگزین خواناتری وجود ندارد</li>
+        </ul>
+
+        <h3>چه زمانی goto را نباید استفاده کنیم؟</h3>
+        <ul>
+            <li>Business Logic</li>
+            <li>کدهای تیمی و قابل نگهداری</li>
+            <li>وقتی return یا break کافی است</li>
+        </ul>
+
+        <h3>نکتهٔ فلسفی (خیلی مهم)</h3>
+
+        <blockquote>
+            goto مشکل نیست؛
+            استفادهٔ بی‌دلیل از goto مشکل است.
+        </blockquote>
+
+        <p>
+            دانستن goto نشانهٔ بلوغ است،
+            نه استفادهٔ مداوم از آن.
+        </p>
+
+        <h3>تمرین‌های پیشنهادی</h3>
+        <ol>
+            <li>
+                یک مثال goto در switch بنویس.
+            </li>
+            <li>
+                همان منطق را بدون goto بازنویسی کن.
+            </li>
+            <li>
+                تفاوت خوانایی را مقایسه کن.
+            </li>
+        </ol>
+
+        <p class="ref">
+            مستندات رسمی:
+            <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/jump-statements#the-goto-statement"
+                target="_blank">
+                goto statement — Microsoft Docs
+            </a>
+        </p>
+
+    </section>
+
+</section>
+
+<style>
+    /* ============================ WRAPPER ============================ */
+    .jump-wrapper {
+        max-width: 1020px;
+        margin: 0 auto;
+        padding: 14px 22px;
+        transition: max-width .3s ease;
+    }
+
+    /* Fallback اگر container قدیمی داخل HTML مانده باشد */
+    .jump-wrapper .topic-page,
+    .jump-wrapper .container {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+
+    @media (max-width: 768px) {
+        .jump-wrapper {
+            max-width: 100%;
+            padding: 12px 18px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .jump-wrapper {
+            padding: 10px 12px;
+        }
+    }
+
+    /* ============================ PAGE TITLE ============================ */
+    .jump-wrapper .page-title {
+        text-align: center;
+        font-size: 40px;
+        font-weight: 800;
+        color: #f97316;
+        /* Orange 500 */
+        margin: 6px 0 8px;
+    }
+
+    @media (max-width: 768px) {
+        .jump-wrapper .page-title {
+            font-size: 34px;
+        }
+    }
+
+    .jump-wrapper .page-desc {
+        text-align: center;
+        opacity: .85;
+        font-size: 26px;
+        margin-bottom: 45px;
+        font-family: "Lalezar", "VazirFD";
+    }
+
+    @media (max-width: 768px) {
+        .jump-wrapper .page-desc {
+            font-size: 18px;
+        }
+    }
+
+    /* ============================ TOPIC SECTIONS ============================ */
+    .jump-wrapper .topic-section {
+        margin-bottom: 75px;
+        padding: 28px;
+        border-radius: 14px;
+        background: rgba(255, 255, 255, 0.035);
+        border-right: 4px solid #f97316;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    html.light .jump-wrapper .topic-section {
+        background: #ffffff;
+        border-bottom-color: #e5e5e5;
+    }
+
+    /* ============================ HEADINGS ============================ */
+    .jump-wrapper .topic-section h2 {
+        text-align: left;
+        color: #f97316;
+        font-size: 28px;
+        margin-bottom: 16px;
+        position: relative;
+    }
+
+    .jump-wrapper .topic-section h2::after {
+        content: "";
+        width: 64px;
+        height: 3px;
+        background: linear-gradient(90deg, #f97316, #fdba74);
+        position: absolute;
+        bottom: -7px;
+        left: 0;
+        border-radius: 3px;
+    }
+
+    .jump-wrapper .topic-section h3 {
+        margin-top: 26px;
+        font-size: 20px;
+        color: #fdba74;
+    }
+
+    /* ============================ TEXT ============================ */
+    .jump-wrapper .topic-section p {
+        line-height: 1.9;
+        margin-bottom: 14px;
+    }
+
+    .jump-wrapper ul li,
+    .jump-wrapper ol li {
+        margin-bottom: 6px;
+    }
+
+    /* ============================ LINKS ============================ */
+    .jump-wrapper .ref a {
+        color: #4ea3ff;
+        font-weight: 600;
+        transition: color .2s ease, text-shadow .2s ease;
+    }
+
+    .jump-wrapper .ref a:hover {
+        color: #82c5ff;
+        text-shadow: 0 0 8px rgba(78, 163, 255, 0.6);
+    }
+
+    /* ============================ CODE BLOCK ============================ */
+    .jump-wrapper pre {
+        background: #161616;
+        border: 1px solid #333;
+        padding: 16px;
+        border-radius: 10px;
+        overflow-x: auto;
+        margin-top: 15px;
+        font-family: "JetBrains Mono", Menlo, Consolas, monospace;
+        font-size: 15px;
+        line-height: 1.6;
+    }
+
+    html.light .jump-wrapper pre {
+        background: #f9f9f9;
+        border-color: #dfdfdf;
+        color: #222;
+    }
+
+    /* ============================ BLOCKQUOTE ============================ */
+    .jump-wrapper blockquote {
+        padding: 16px 22px;
+        border-right: 4px solid #f97316;
+        background: rgba(249, 115, 22, 0.12);
+        border-radius: 10px;
+        margin: 28px 0;
+        font-style: italic;
+        opacity: .95;
+    }
+
+    html.light .jump-wrapper blockquote {
+        background: #fff7ed;
+    }
+</style>
