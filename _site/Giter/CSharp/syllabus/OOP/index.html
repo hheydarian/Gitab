@@ -81,14 +81,365 @@
 
     <!-- ============================ CLASSES ============================ -->
     <section id="classes" class="topic-section">
+
         <h2>Classes</h2>
-        <p>تعریف کلاس‌ها، پایهٔ اصلی OOP.</p>
+
+        <p>
+            <strong>Class</strong> ستون فقرات برنامه‌نویسی شی‌گرا (OOP) است.
+            کلاس در واقع یک <strong>قالب (Blueprint)</strong> برای ساخت اشیاء (Objects) است.
+        </p>
+
+        <p>
+            اگر بخواهیم ساده بگوییم:
+            <br>
+            <strong>Class = تعریف ساختار + رفتار</strong>
+        </p>
+
+        <h3>کلاس دقیقاً چیست؟</h3>
+
+        <p>
+            کلاس مشخص می‌کند:
+        </p>
+        <ul>
+            <li>یک شیء چه <strong>داده‌هایی</strong> دارد (Fields / Properties)</li>
+            <li>چه <strong>کارهایی</strong> می‌تواند انجام دهد (Methods)</li>
+        </ul>
+
+        <p>
+            خودِ کلاس شیء نیست؛
+            بلکه <strong>دستور ساخت شیء</strong> است.
+        </p>
+
+        <h3>مثال ساده از تعریف Class</h3>
+
+        <pre><code class="language-csharp">
+class Person
+{
+    public string Name;
+    public int Age;
+
+    public void SayHello()
+    {
+        Console.WriteLine("Hello, my name is " + Name);
+    }
+}
+</code></pre>
+
+        <p>
+            اینجا:
+        </p>
+        <ul>
+            <li><code>Person</code> یک Class است</li>
+            <li><code>Name</code> و <code>Age</code> وضعیت شیء را نگه می‌دارند</li>
+            <li><code>SayHello</code> رفتار شیء را مشخص می‌کند</li>
+        </ul>
+
+        <h3>ساخت Object از روی Class</h3>
+
+        <p>
+            برای استفاده از کلاس، باید از آن
+            <strong>نمونه (Object / Instance)</strong>
+            بسازیم:
+        </p>
+
+        <pre><code class="language-csharp">
+Person p = new Person();
+p.Name = "Ali";
+p.Age = 30;
+
+p.SayHello();
+</code></pre>
+
+        <p>
+            حالا:
+        </p>
+        <ul>
+            <li><code>p</code> یک Object واقعی در حافظه است</li>
+            <li>هر Object داده‌های مستقل خودش را دارد</li>
+        </ul>
+
+        <h3>چرا Class مهم است؟</h3>
+
+        <ul>
+            <li>کد را قابل فهم می‌کند</li>
+            <li>مدل دنیای واقعی را شبیه‌سازی می‌کند</li>
+            <li>نگهداری و توسعه را آسان می‌کند</li>
+            <li>پایهٔ Inheritance، Polymorphism و Encapsulation است</li>
+        </ul>
+
+        <h3>تفکر درست هنگام طراحی Class</h3>
+
+        <p>
+            یک Class خوب:
+        </p>
+        <ul>
+            <li>یک <strong>مسئولیت مشخص</strong> دارد</li>
+            <li>خیلی بزرگ و شلوغ نیست</li>
+            <li>نمایندهٔ یک مفهوم واقعی یا منطقی است</li>
+        </ul>
+
+        <blockquote>
+            اگر نتوانی Class را در یک جمله توضیح بدهی،
+            احتمالاً طراحی‌اش اشتباه است.
+        </blockquote>
+
+        <h3>اشتباهات رایج تازه‌کارها</h3>
+
+        <ul>
+            <li>گذاشتن همه‌چیز داخل یک Class</li>
+            <li>استفادهٔ بیش‌ازحد از public</li>
+            <li>ساخت Class بدون هدف مشخص</li>
+            <li>قاتی‌کردن منطق‌های نامرتبط</li>
+        </ul>
+
+        <h3>تمرین‌های پیشنهادی</h3>
+
+        <ol>
+            <li>یک Class به نام <code>Car</code> بساز با ویژگی‌های Model و Year</li>
+            <li>یک متد بنویس که مشخصات ماشین را چاپ کند</li>
+            <li>دو Object مختلف از Car بساز و مقادیر متفاوت بده</li>
+        </ol>
+
+        <h3>نکتهٔ حرفه‌ای</h3>
+
+        <p>
+            در پروژه‌های واقعی:
+        </p>
+        <ul>
+            <li>Fields معمولاً private هستند</li>
+            <li>دسترسی از طریق Properties انجام می‌شود</li>
+            <li>کلاس‌ها کوچک و هدفمند طراحی می‌شوند</li>
+        </ul>
+
+        <p class="ref">
+            مستندات رسمی:
+            <a href="https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/types/classes" target="_blank">
+                Classes — Microsoft Docs
+            </a>
+        </p>
+
     </section>
 
     <!-- ============================ CONSTRUCTORS ============================ -->
     <section id="constructors" class="topic-section">
+
         <h2>Constructors</h2>
-        <p>سازنده‌ها برای مقداردهی اولیهٔ اشیاء.</p>
+
+        <p>
+            <strong>Constructor</strong> متدی ویژه است
+            که دقیقاً در لحظهٔ ساخت یک Object اجرا می‌شود.
+            وظیفهٔ آن:
+            <strong>آماده‌سازی اولیهٔ شیء</strong> است.
+        </p>
+
+        <p>
+            هر وقت با <code>new</code> یک شیء می‌سازیم،
+            یک Constructor اجرا می‌شود —
+            چه آن را بنویسیم، چه ننویسیم.
+        </p>
+
+        <h3>Constructor چیست؟</h3>
+
+        <p>
+            Constructor:
+        </p>
+        <ul>
+            <li>نامش دقیقاً برابر نام Class است</li>
+            <li>نوع بازگشتی ندارد (حتی void)</li>
+            <li>برای مقداردهی اولیه استفاده می‌شود</li>
+        </ul>
+
+        <h3>مثال ساده</h3>
+
+        <pre><code class="language-csharp">
+class Person
+{
+    public string Name;
+    public int Age;
+
+    public Person(string name, int age)
+    {
+        Name = name;
+        Age = age;
+    }
+}
+</code></pre>
+
+        <p>
+            حالا برای ساخت Person:
+        </p>
+
+        <pre><code class="language-csharp">
+Person p = new Person("Ali", 30);
+</code></pre>
+
+        <p>
+            بدون Constructor،
+            این Object ناقص ساخته می‌شد.
+        </p>
+
+        <h3>Default Constructor</h3>
+
+        <p>
+            اگر هیچ Constructor ننویسیم،
+            C# به‌صورت خودکار یک
+            <strong>Default Constructor</strong>
+            بدون پارامتر می‌سازد:
+        </p>
+
+        <pre><code class="language-csharp">
+class Car
+{
+    public string Model;
+}
+</code></pre>
+
+        <pre><code class="language-csharp">
+Car c = new Car(); // مجاز
+</code></pre>
+
+        <p>
+            اما به محض نوشتن یک Constructor،
+            Default Constructor دیگر ساخته نمی‌شود.
+        </p>
+
+        <h3>چند Constructor (Overloading)</h3>
+
+        <p>
+            یک Class می‌تواند چند Constructor داشته باشد:
+        </p>
+
+        <pre><code class="language-csharp">
+class User
+{
+    public string Username;
+    public int Level;
+
+    public User()
+    {
+        Username = "Guest";
+        Level = 1;
+    }
+
+    public User(string username)
+    {
+        Username = username;
+        Level = 1;
+    }
+
+    public User(string username, int level)
+    {
+        Username = username;
+        Level = level;
+    }
+}
+</code></pre>
+
+        <p>
+            این کار باعث می‌شود
+            Objectها انعطاف‌پذیر ساخته شوند.
+        </p>
+
+        <h3>Constructor Chaining</h3>
+
+        <p>
+            برای جلوگیری از تکرار کد،
+            Constructorها می‌توانند همدیگر را صدا بزنند:
+        </p>
+
+        <pre><code class="language-csharp">
+class Product
+{
+    public string Name;
+    public decimal Price;
+
+    public Product(string name) : this(name, 0)
+    {
+    }
+
+    public Product(string name, decimal price)
+    {
+        Name = name;
+        Price = price;
+    }
+}
+</code></pre>
+
+        <p>
+            این الگو بسیار حرفه‌ای و تمیز است.
+        </p>
+
+        <h3>Constructor و اعتبارسنجی</h3>
+
+        <p>
+            یکی از مهم‌ترین کاربردهای Constructor:
+            <strong>جلوگیری از ساخت Object نامعتبر</strong>
+            است.
+        </p>
+
+        <pre><code class="language-csharp">
+class Account
+{
+    public decimal Balance;
+
+    public Account(decimal balance)
+    {
+        if (balance < 0)
+            throw new ArgumentException("Balance cannot be negative");
+
+        Balance = balance;
+    }
+}
+</code></pre>
+
+        <h3>اشتباهات رایج</h3>
+
+        <ul>
+            <li>گذاشتن منطق سنگین داخل Constructor</li>
+            <li>ساخت Object ناقص</li>
+            <li>عدم اعتبارسنجی ورودی‌ها</li>
+            <li>تکرار کد بین Constructorها</li>
+        </ul>
+
+        <blockquote>
+            Constructor باید Object را «سالم» تحویل بدهد،
+            نه اینکه نصف کار را به آینده بسپارد.
+        </blockquote>
+
+        <h3>تمرین‌های پیشنهادی</h3>
+
+        <ol>
+            <li>
+                یک Class به نام <code>Book</code> بساز
+                با Title و Price
+            </li>
+            <li>
+                یک Constructor بنویس که قیمت منفی را نپذیرد
+            </li>
+            <li>
+                دو Constructor مختلف برای حالت ساده و کامل بنویس
+            </li>
+        </ol>
+
+        <h3>نکتهٔ حرفه‌ای</h3>
+
+        <p>
+            در معماری‌های مدرن:
+        </p>
+        <ul>
+            <li>Constructor نقطهٔ اصلی Dependency Injection است</li>
+            <li>Object بعد از ساخت باید معتبر باشد</li>
+            <li>Immutable Objectها شدیداً به Constructor وابسته‌اند</li>
+        </ul>
+
+        <p class="ref">
+            مستندات رسمی:
+            <a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/constructors"
+                target="_blank">
+                Constructors — Microsoft Docs
+            </a>
+        </p>
+
     </section>
 
     <!-- ============================ PRIMARY CONSTRUCTORS ============================ -->
