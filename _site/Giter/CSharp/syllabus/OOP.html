@@ -378,26 +378,1085 @@ class Account
 
     <!-- ============================ PRIMARY CONSTRUCTORS ============================ -->
     <section id="primary-constructors" class="topic-section">
+
         <h2>Primary Constructors</h2>
-        <p>سازنده‌های جدید و مختصر در C# مدرن.</p>
+
+        <p>
+            <strong>Primary Constructor</strong> قابلیتی جدید در
+            <strong>C# مدرن</strong> است
+            که اجازه می‌دهد سازنده را
+            <strong>مستقیماً کنار تعریف کلاس</strong>
+            بنویسیم.
+        </p>
+
+        <p>
+            هدف اصلی:
+            <strong>کاهش Boilerplate Code</strong>
+            و افزایش خوانایی.
+        </p>
+
+        <h3>مشکل Constructorهای سنتی</h3>
+
+        <p>
+            در C# کلاسیک، برای یک کلاس ساده،
+            مجبور بودیم کد زیادی بنویسیم:
+        </p>
+
+        <pre><code class="language-csharp">
+class Person
+{
+    private string name;
+    private int age;
+
+    public Person(string name, int age)
+    {
+        this.name = name;
+        this.age = age;
+    }
+}
+</code></pre>
+
+        <p>
+            این کد:
+        </p>
+        <ul>
+            <li>تکراری است</li>
+            <li>خوانایی کمتری دارد</li>
+            <li>برای کلاس‌های ساده آزاردهنده است</li>
+        </ul>
+
+        <h3>Primary Constructor چیست؟</h3>
+
+        <p>
+            با Primary Constructor،
+            پارامترهای سازنده
+            مستقیماً کنار نام کلاس نوشته می‌شوند:
+        </p>
+
+        <pre><code class="language-csharp">
+class Person(string name, int age)
+{
+}
+</code></pre>
+
+        <p>
+            همین!
+            بدون نوشتن Constructor جداگانه.
+        </p>
+
+        <h3>دسترسی به پارامترها</h3>
+
+        <p>
+            پارامترهای Primary Constructor
+            در کل بدنهٔ کلاس
+            قابل استفاده هستند:
+        </p>
+
+        <pre><code class="language-csharp">
+class Person(string name, int age)
+{
+    public void Print()
+    {
+        Console.WriteLine($"{name} - {age}");
+    }
+}
+</code></pre>
+
+        <h3>ساخت Property از Primary Constructor</h3>
+
+        <p>
+            معمولاً Primary Constructor
+            با Properties ترکیب می‌شود:
+        </p>
+
+        <pre><code class="language-csharp">
+class Person(string name, int age)
+{
+    public string Name { get; } = name;
+    public int Age { get; } = age;
+}
+</code></pre>
+
+        <p>
+            این الگو بسیار تمیز و حرفه‌ای است،
+            مخصوصاً برای Objectهای Immutable.
+        </p>
+
+        <h3>مقایسه با Constructor معمولی</h3>
+
+        <p>
+            دو کد زیر از نظر عملکرد یکسان‌اند،
+            اما دومی خواناتر است:
+        </p>
+
+        <pre><code class="language-csharp">
+// Traditional
+class User
+{
+    public string Username { get; }
+
+    public User(string username)
+    {
+        Username = username;
+    }
+}
+
+// Primary Constructor
+class User(string username)
+{
+    public string Username { get; } = username;
+}
+</code></pre>
+
+        <h3>اعتبارسنجی در Primary Constructor</h3>
+
+        <p>
+            می‌توان در بدنهٔ کلاس
+            اعتبارسنجی انجام داد:
+        </p>
+
+        <pre><code class="language-csharp">
+class Account(decimal balance)
+{
+    public decimal Balance { get; }
+
+    public Account
+    {
+        if (balance < 0)
+            throw new ArgumentException("Balance cannot be negative");
+
+        Balance = balance;
+    }
+}
+</code></pre>
+
+        <p>
+            (این بلاک در زمان ساخت Object اجرا می‌شود)
+        </p>
+
+        <h3>Primary Constructor و Inheritance</h3>
+
+        <p>
+            در کلاس‌های مشتق،
+            پارامترها به کلاس پایه پاس داده می‌شوند:
+        </p>
+
+        <pre><code class="language-csharp">
+class Animal(string name)
+{
+    public string Name { get; } = name;
+}
+
+class Dog(string name, int age) : Animal(name)
+{
+    public int Age { get; } = age;
+}
+</code></pre>
+
+        <h3>چه زمانی استفاده کنیم؟</h3>
+
+        <ul>
+            <li>کلاس‌های ساده و Data-Oriented</li>
+            <li>Immutable Objectها</li>
+            <li>Record-like Design</li>
+            <li>DTOها و Modelها</li>
+        </ul>
+
+        <h3>چه زمانی استفاده نکنیم؟</h3>
+
+        <ul>
+            <li>کلاس‌های بسیار پیچیده</li>
+            <li>Constructor با منطق سنگین</li>
+            <li>وقتی خوانایی کاهش می‌یابد</li>
+        </ul>
+
+        <blockquote>
+            Primary Constructor یعنی:
+            تمرکز روی «چی هست» نه «چطور ساخته می‌شود».
+        </blockquote>
+
+        <h3>تمرین‌های پیشنهادی</h3>
+
+        <ol>
+            <li>
+                یک Class به نام <code>Order</code>
+                با Primary Constructor بساز
+            </li>
+            <li>
+                Properties فقط خواندنی تعریف کن
+            </li>
+            <li>
+                اعتبارسنجی مقدار منفی را اضافه کن
+            </li>
+        </ol>
+
+        <p class="ref">
+            مستندات رسمی:
+            <a href="https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-12#primary-constructors"
+                target="_blank">
+                Primary Constructors — Microsoft Docs
+            </a>
+        </p>
+
     </section>
 
     <!-- ============================ FIELDS ============================ -->
     <section id="fields" class="topic-section">
+
         <h2>Fields</h2>
-        <p>فیلدها برای نگهداری وضعیت داخلی اشیاء.</p>
+
+        <p>
+            <strong>Field</strong> متغیری است
+            که داخل یک Class تعریف می‌شود
+            و برای نگهداری
+            <strong>وضعیت داخلی (State)</strong>
+            شیء استفاده می‌شود.
+        </p>
+
+        <p>
+            Fieldها نشان می‌دهند
+            یک Object در چه وضعیتی قرار دارد،
+            نه اینکه چه کاری انجام می‌دهد.
+        </p>
+
+        <h3>Field دقیقاً چیست؟</h3>
+
+        <p>
+            Field:
+        </p>
+        <ul>
+            <li>در سطح Class تعریف می‌شود</li>
+            <li>به ازای هر Object مقدار جداگانه دارد</li>
+            <li>در طول عمر Object زنده است</li>
+        </ul>
+
+        <h3>مثال ساده</h3>
+
+        <pre><code class="language-csharp">
+class Person
+{
+    public string Name;
+    public int Age;
+}
+</code></pre>
+
+        <p>
+            در این مثال:
+        </p>
+        <ul>
+            <li><code>Name</code> و <code>Age</code> Field هستند</li>
+            <li>هر Person مقدار مستقل خودش را دارد</li>
+        </ul>
+
+        <h3>Field و حافظه</h3>
+
+        <p>
+            Fieldها:
+        </p>
+        <ul>
+            <li>اگر Class باشد → روی Heap ذخیره می‌شوند</li>
+            <li>اگر Struct باشد → داخل خود Struct قرار می‌گیرند</li>
+        </ul>
+
+        <p>
+            این یعنی Field بخشی از
+            <strong>ساختار واقعی Object در حافظه</strong>
+            است.
+        </p>
+
+        <h3>چرا Fieldها مهم‌اند؟</h3>
+
+        <ul>
+            <li>نگهداری وضعیت داخلی</li>
+            <li>پایهٔ Properties</li>
+            <li>پایهٔ رفتارهای کلاس</li>
+            <li>کنترل منطق داخلی Object</li>
+        </ul>
+
+        <h3>مشکل Fieldهای Public</h3>
+
+        <p>
+            اگر Fieldها را public کنیم،
+            کنترل Object از دست ما خارج می‌شود:
+        </p>
+
+        <pre><code class="language-csharp">
+class Account
+{
+    public decimal Balance;
+}
+</code></pre>
+
+        <pre><code class="language-csharp">
+Account acc = new Account();
+acc.Balance = -1000; // ❌ وضعیت نامعتبر
+</code></pre>
+
+        <p>
+            این یعنی:
+            Object می‌تواند همیشه در وضعیت غلط باشد.
+        </p>
+
+        <h3>الگوی درست: Private Field</h3>
+
+        <p>
+            Fieldها معمولاً
+            <strong>private</strong>
+            هستند:
+        </p>
+
+        <pre><code class="language-csharp">
+class Account
+{
+    private decimal balance;
+}
+</code></pre>
+
+        <p>
+            و دسترسی از طریق
+            Properties یا Methods انجام می‌شود.
+        </p>
+
+        <h3>نام‌گذاری Fieldها</h3>
+
+        <p>
+            در C# معمولاً:
+        </p>
+        <ul>
+            <li>Fieldهای private با <code>_</code> شروع می‌شوند</li>
+            <li>camelCase یا _camelCase استفاده می‌شود</li>
+        </ul>
+
+        <pre><code class="language-csharp">
+class User
+{
+    private string _username;
+    private int _level;
+}
+</code></pre>
+
+        <h3>Readonly Fields</h3>
+
+        <p>
+            اگر Field فقط یک‌بار مقداردهی شود،
+            از <code>readonly</code> استفاده می‌کنیم:
+        </p>
+
+        <pre><code class="language-csharp">
+class Order
+{
+    private readonly int _id;
+
+    public Order(int id)
+    {
+        _id = id;
+    }
+}
+</code></pre>
+
+        <p>
+            این کار به
+            <strong>Immutable Design</strong>
+            کمک می‌کند.
+        </p>
+
+        <h3>Static Fields</h3>
+
+        <p>
+            Fieldهای <code>static</code>
+            متعلق به Class هستند،
+            نه Object:
+        </p>
+
+        <pre><code class="language-csharp">
+class Counter
+{
+    public static int Total;
+}
+</code></pre>
+
+        <p>
+            همهٔ Objectها
+            این مقدار را به اشتراک می‌گذارند.
+        </p>
+
+        <h3>اشتباهات رایج</h3>
+
+        <ul>
+            <li>public کردن همهٔ Fieldها</li>
+            <li>استفاده از Field به‌جای Property</li>
+            <li>قرار دادن منطق داخل Field</li>
+            <li>نادیده گرفتن readonly</li>
+        </ul>
+
+        <blockquote>
+            Field خوب یعنی:
+            وضعیت داخلی امن و قابل کنترل.
+        </blockquote>
+
+        <h3>تمرین‌های پیشنهادی</h3>
+
+        <ol>
+            <li>
+                یک Class به نام <code>BankAccount</code> بساز
+            </li>
+            <li>
+                یک Field خصوصی برای موجودی تعریف کن
+            </li>
+            <li>
+                از Constructor برای مقداردهی استفاده کن
+            </li>
+        </ol>
+
+        <h3>نکتهٔ حرفه‌ای</h3>
+
+        <p>
+            در کد حرفه‌ای:
+        </p>
+        <ul>
+            <li>Field تقریباً همیشه private است</li>
+            <li>ارتباط مستقیم با بیرون ندارد</li>
+            <li>پایهٔ Encapsulation است</li>
+        </ul>
+
+        <p class="ref">
+            مستندات رسمی:
+            <a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/fields"
+                target="_blank">
+                Fields — Microsoft Docs
+            </a>
+        </p>
+
     </section>
 
     <!-- ============================ METHODS ============================ -->
     <section id="methods" class="topic-section">
+
         <h2>Methods</h2>
-        <p>رفتارها و منطق اجرایی کلاس‌ها.</p>
+
+        <p>
+            <strong>Method</strong> عملی است
+            که یک Object می‌تواند انجام دهد.
+            متدها منطق اجرایی و رفتار یک Class را تعریف می‌کنند.
+        </p>
+
+        <p>
+            اگر Fieldها وضعیت داخلی را نگه دارند،
+            Methodها تعیین می‌کنند
+            با آن وضعیت چه کاری انجام شود.
+        </p>
+
+        <h3>Method چیست؟</h3>
+
+        <p>
+            Method:
+        </p>
+        <ul>
+            <li>داخل Class تعریف می‌شود</li>
+            <li>می‌تواند ورودی (Parameter) بگیرد</li>
+            <li>می‌تواند خروجی (Return Value) داشته باشد</li>
+            <li>به وضعیت داخلی Object دسترسی دارد</li>
+        </ul>
+
+        <h3>مثال ساده</h3>
+
+        <pre><code class="language-csharp">
+class Calculator
+{
+    public int Add(int a, int b)
+    {
+        return a + b;
+    }
+}
+</code></pre>
+
+        <p>
+            این متد:
+        </p>
+        <ul>
+            <li>دو عدد می‌گیرد</li>
+            <li>حاصل جمع را برمی‌گرداند</li>
+            <li>منطق مشخص و واضح دارد</li>
+        </ul>
+
+        <h3>متدهایی بدون خروجی</h3>
+
+        <p>
+            اگر متدی مقداری برنگرداند،
+            از <code>void</code> استفاده می‌کنیم:
+        </p>
+
+        <pre><code class="language-csharp">
+class Logger
+{
+    public void Log(string message)
+    {
+        Console.WriteLine(message);
+    }
+}
+</code></pre>
+
+        <h3>دسترسی Method به Fieldها</h3>
+
+        <p>
+            Methodها می‌توانند
+            Fieldهای private را مدیریت کنند:
+        </p>
+
+        <pre><code class="language-csharp">
+class BankAccount
+{
+    private decimal _balance;
+
+    public void Deposit(decimal amount)
+    {
+        if (amount <= 0)
+            return;
+
+        _balance += amount;
+    }
+}
+</code></pre>
+
+        <p>
+            اینجا:
+        </p>
+        <ul>
+            <li>منطق اعتبارسنجی داخل Method است</li>
+            <li>Field مستقیم از بیرون دستکاری نمی‌شود</li>
+        </ul>
+
+        <h3>Method Overloading</h3>
+
+        <p>
+            یک Class می‌تواند
+            چند Method با یک نام
+            اما پارامترهای متفاوت داشته باشد:
+        </p>
+
+        <pre><code class="language-csharp">
+class Printer
+{
+    public void Print(string text)
+    {
+        Console.WriteLine(text);
+    }
+
+    public void Print(int number)
+    {
+        Console.WriteLine(number);
+    }
+}
+</code></pre>
+
+        <h3>Method و Responsibility</h3>
+
+        <p>
+            یک Method خوب:
+        </p>
+        <ul>
+            <li>یک کار مشخص انجام می‌دهد</li>
+            <li>کوتاه و قابل فهم است</li>
+            <li>نامش دقیقاً هدفش را نشان می‌دهد</li>
+        </ul>
+
+        <blockquote>
+            اگر Method را نمی‌توانی در یک جمله توضیح بدهی،
+            احتمالاً بیش‌ازحد بزرگ شده است.
+        </blockquote>
+
+        <h3>Static Methods</h3>
+
+        <p>
+            متدهای <code>static</code>
+            به Object وابسته نیستند:
+        </p>
+
+        <pre><code class="language-csharp">
+class MathTools
+{
+    public static int Square(int x)
+    {
+        return x * x;
+    }
+}
+</code></pre>
+
+        <p>
+            این متد:
+        </p>
+        <ul>
+            <li>بدون ساخت Object قابل استفاده است</li>
+            <li>به وضعیت داخلی وابسته نیست</li>
+        </ul>
+
+        <h3>اشتباهات رایج</h3>
+
+        <ul>
+            <li>نوشتن Methodهای خیلی بزرگ</li>
+            <li>قرار دادن منطق‌های نامرتبط در یک Method</li>
+            <li>استفادهٔ بیش‌ازحد از static</li>
+            <li>دسترسی مستقیم به Fieldها</li>
+        </ul>
+
+        <h3>تمرین‌های پیشنهادی</h3>
+
+        <ol>
+            <li>
+                یک Class به نام <code>Counter</code> بساز
+            </li>
+            <li>
+                Methodهای <code>Increment</code> و <code>Reset</code> اضافه کن
+            </li>
+            <li>
+                از Field خصوصی برای نگهداری مقدار استفاده کن
+            </li>
+        </ol>
+
+        <h3>نکتهٔ حرفه‌ای</h3>
+
+        <p>
+            در طراحی حرفه‌ای:
+        </p>
+        <ul>
+            <li>Methodها منطق را پنهان می‌کنند</li>
+            <li>Object باید خودش مسئول رفتار خودش باشد</li>
+            <li>Method نقطهٔ اصلی Encapsulation است</li>
+        </ul>
+
+        <p class="ref">
+            مستندات رسمی:
+            <a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/methods"
+                target="_blank">
+                Methods — Microsoft Docs
+            </a>
+        </p>
+
     </section>
 
     <!-- ============================ ACCESS MODIFIERS ============================ -->
     <section id="access-modifiers" class="topic-section">
+
         <h2>Access Modifiers</h2>
-        <p>کنترل سطح دسترسی اعضای کلاس.</p>
+
+        <p>
+            <strong>Access Modifier</strong> مشخص می‌کند
+            چه کسی اجازه دارد
+            به اعضای یک Class (Field، Method، Property و …)
+            دسترسی داشته باشد.
+        </p>
+
+        <p>
+            این مفهوم پایهٔ اصلی
+            <strong>Encapsulation</strong>
+            و طراحی امن در OOP است.
+        </p>
+
+        <h3>چرا Access Modifiers مهم‌اند؟</h3>
+
+        <p>
+            بدون کنترل دسترسی:
+        </p>
+        <ul>
+            <li>هرکسی می‌تواند وضعیت داخلی Object را خراب کند</li>
+            <li>کلاس‌ها شکننده می‌شوند</li>
+            <li>تغییرات کوچک، کل سیستم را می‌شکنند</li>
+        </ul>
+
+        <h3>انواع Access Modifier در C#</h3>
+
+        <ul>
+            <li><strong>public</strong> — در دسترس همه</li>
+            <li><strong>private</strong> — فقط داخل همان Class</li>
+            <li><strong>protected</strong> — Class و فرزندانش</li>
+            <li><strong>internal</strong> — داخل همان Assembly</li>
+            <li><strong>protected internal</strong></li>
+            <li><strong>private protected</strong></li>
+        </ul>
+
+        <h3>public</h3>
+
+        <p>
+            عضو <code>public</code>
+            از هرجایی قابل دسترسی است:
+        </p>
+
+        <pre><code class="language-csharp">
+class User
+{
+    public string Username;
+}
+</code></pre>
+
+        <p>
+            استفادهٔ بیش‌ازحد از <code>public</code>
+            معمولاً نشانهٔ طراحی ضعیف است.
+        </p>
+
+        <h3>private (مهم‌ترین)</h3>
+
+        <p>
+            <code>private</code>
+            یعنی فقط خود Class اجازهٔ دسترسی دارد:
+        </p>
+
+        <pre><code class="language-csharp">
+class Account
+{
+    private decimal _balance;
+}
+</code></pre>
+
+        <p>
+            این کار
+            <strong>وضعیت داخلی Object</strong>
+            را محافظت می‌کند.
+        </p>
+
+        <h3>protected</h3>
+
+        <p>
+            <code>protected</code>
+            برای کلاس‌های قابل ارث‌بری استفاده می‌شود:
+        </p>
+
+        <pre><code class="language-csharp">
+class Animal
+{
+    protected int Age;
+}
+</code></pre>
+
+        <pre><code class="language-csharp">
+class Dog : Animal
+{
+    public void Grow()
+    {
+        Age++;
+    }
+}
+</code></pre>
+
+        <h3>internal</h3>
+
+        <p>
+            <code>internal</code>
+            یعنی فقط داخل یک Assembly:
+        </p>
+
+        <pre><code class="language-csharp">
+internal class InternalService
+{
+}
+</code></pre>
+
+        <p>
+            معمولاً برای لایه‌های داخلی پروژه استفاده می‌شود.
+        </p>
+
+        <h3>ترکیب‌ها (Advanced)</h3>
+
+        <p>
+            <strong>protected internal</strong>:
+        </p>
+        <ul>
+            <li>یا در همان Assembly</li>
+            <li>یا در کلاس مشتق‌شده</li>
+        </ul>
+
+        <p>
+            <strong>private protected</strong>:
+        </p>
+        <ul>
+            <li>فقط در کلاس مشتق‌شده</li>
+            <li>و فقط داخل همان Assembly</li>
+        </ul>
+
+        <h3>Access Modifier پیش‌فرض</h3>
+
+        <p>
+            اگر چیزی ننویسیم:
+        </p>
+        <ul>
+            <li>Members → <code>private</code></li>
+            <li>Class → <code>internal</code></li>
+        </ul>
+
+        <h3>الگوی حرفه‌ای رایج</h3>
+
+        <pre><code class="language-csharp">
+class Product
+{
+    private decimal _price;
+
+    public decimal Price
+    {
+        get { return _price; }
+    }
+}
+</code></pre>
+
+        <p>
+            بیرون فقط می‌خواند،
+            داخل کنترل می‌کند.
+        </p>
+
+        <h3>اشتباهات رایج</h3>
+
+        <ul>
+            <li>public کردن همه‌چیز</li>
+            <li>استفادهٔ نادرست از protected</li>
+            <li>نادیده گرفتن internal</li>
+            <li>طراحی بدون فکر به آینده</li>
+        </ul>
+
+        <blockquote>
+            هر چیزی که public است،
+            قولی است که به آینده داده‌ای.
+        </blockquote>
+
+        <h3>تمرین‌های پیشنهادی</h3>
+
+        <ol>
+            <li>
+                یک Class بساز که فقط از طریق Method قابل تغییر باشد
+            </li>
+            <li>
+                یک Field private تعریف کن و از بیرون دسترسی نده
+            </li>
+            <li>
+                تفاوت protected و private را تست کن
+            </li>
+        </ol>
+
+        <h3>نکتهٔ حرفه‌ای</h3>
+
+        <p>
+            در پروژه‌های بزرگ:
+        </p>
+        <ul>
+            <li>همه‌چیز private شروع می‌شود</li>
+            <li>فقط در صورت نیاز public می‌شود</li>
+            <li>API عمومی با وسواس طراحی می‌شود</li>
+        </ul>
+
+        <p class="ref">
+            مستندات رسمی:
+            <a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/access-modifiers"
+                target="_blank">
+                Access Modifiers — Microsoft Docs
+            </a>
+        </p>
+
+    </section>
+
+    <!-- ============================ PROPERTIES ============================ -->
+    <section id="properties" class="topic-section">
+
+        <h2>Properties</h2>
+
+        <p>
+            <strong>Property</strong> راه استاندارد و حرفه‌ای
+            برای دسترسی به داده‌های داخلی یک Class است.
+            Propertyها ترکیبی از
+            <strong>Field + Method + Access Control</strong>
+            هستند.
+        </p>
+
+        <p>
+            اگر Field «دادهٔ خام» باشد،
+            Property «دادهٔ کنترل‌شده» است.
+        </p>
+
+        <h3>چرا Property لازم است؟</h3>
+
+        <p>
+            Fieldهای public خطرناک‌اند:
+        </p>
+
+        <pre><code class="language-csharp">
+class Account
+{
+    public decimal Balance;
+}
+</code></pre>
+
+        <pre><code class="language-csharp">
+Account acc = new Account();
+acc.Balance = -500; // ❌ وضعیت نامعتبر
+</code></pre>
+
+        <p>
+            Property این مشکل را حل می‌کند.
+        </p>
+
+        <h3>ساختار Property</h3>
+
+        <p>
+            Property شامل دو بخش است:
+        </p>
+        <ul>
+            <li><strong>get</strong> — برای خواندن مقدار</li>
+            <li><strong>set</strong> — برای تغییر مقدار</li>
+        </ul>
+
+        <pre><code class="language-csharp">
+class Account
+{
+    private decimal _balance;
+
+    public decimal Balance
+    {
+        get { return _balance; }
+        set
+        {
+            if (value < 0)
+                throw new ArgumentException("Invalid balance");
+
+            _balance = value;
+        }
+    }
+}
+</code></pre>
+
+        <h3>Auto-Implemented Properties</h3>
+
+        <p>
+            در بیشتر مواقع،
+            نیازی به Field دستی نداریم:
+        </p>
+
+        <pre><code class="language-csharp">
+class User
+{
+    public string Username { get; set; }
+}
+</code></pre>
+
+        <p>
+            C# خودش Field مخفی می‌سازد.
+        </p>
+
+        <h3>Read-Only Properties</h3>
+
+        <p>
+            اگر مقدار نباید بعد از ساخت تغییر کند:
+        </p>
+
+        <pre><code class="language-csharp">
+class Order
+{
+    public int Id { get; }
+
+    public Order(int id)
+    {
+        Id = id;
+    }
+}
+</code></pre>
+
+        <p>
+            این الگو برای
+            <strong>Immutable Objects</strong>
+            بسیار مهم است.
+        </p>
+
+        <h3>Private Setter</h3>
+
+        <p>
+            گاهی می‌خواهیم:
+            <br>
+            بیرون فقط بخواند،
+            داخل تغییر دهد:
+        </p>
+
+        <pre><code class="language-csharp">
+class Product
+{
+    public decimal Price { get; private set; }
+
+    public void ChangePrice(decimal newPrice)
+    {
+        if (newPrice > 0)
+            Price = newPrice;
+    }
+}
+</code></pre>
+
+        <h3>Expression-Bodied Properties</h3>
+
+        <p>
+            Propertyهای محاسباتی:
+        </p>
+
+        <pre><code class="language-csharp">
+class Rectangle
+{
+    public int Width { get; set; }
+    public int Height { get; set; }
+
+    public int Area => Width * Height;
+}
+</code></pre>
+
+        <h3>Property و Encapsulation</h3>
+
+        <p>
+            Propertyها:
+        </p>
+        <ul>
+            <li>وضعیت داخلی را محافظت می‌کنند</li>
+            <li>منطق اعتبارسنجی را پنهان می‌کنند</li>
+            <li>API تمیز ارائه می‌دهند</li>
+        </ul>
+
+        <blockquote>
+            Field را قایم کن،
+            Property را نمایش بده.
+        </blockquote>
+
+        <h3>اشتباهات رایج</h3>
+
+        <ul>
+            <li>Property بدون منطق (وقتی Field کافی است)</li>
+            <li>قرار دادن منطق سنگین در get</li>
+            <li>public setter بدون دلیل</li>
+            <li>عدم استفاده از private set</li>
+        </ul>
+
+        <h3>تمرین‌های پیشنهادی</h3>
+
+        <ol>
+            <li>
+                یک Class به نام <code>Student</code> بساز
+            </li>
+            <li>
+                Property برای Name و Grade تعریف کن
+            </li>
+            <li>
+                اجازه نده Grade منفی باشد
+            </li>
+        </ol>
+
+        <h3>نکتهٔ حرفه‌ای</h3>
+
+        <p>
+            در معماری تمیز:
+        </p>
+        <ul>
+            <li>Field همیشه private است</li>
+            <li>Property API عمومی Class است</li>
+            <li>Setterها با وسواس باز می‌شوند</li>
+        </ul>
+
+        <p class="ref">
+            مستندات رسمی:
+            <a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/properties"
+                target="_blank">
+                Properties — Microsoft Docs
+            </a>
+        </p>
+
     </section>
 
     <!-- ============================ INHERITANCE ============================ -->
