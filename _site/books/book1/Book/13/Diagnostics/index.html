@@ -1,98 +1,18 @@
-
-
-<!doctype html>
-<html lang="fa" dir="rtl">
-<head>
-  <meta charset="utf-8">
-  <link rel="icon" type="image/png" href="/Gitab/favicon.png">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>تشخیص (Diagnostics)</title>
-  <meta name="description" content="ترجمه‌های فارسی کتاب‌های فنی — سریع، مینیمال و قابل اتکا.">
-
-  <!-- استایل‌ها -->
-  <link rel="stylesheet" href="/Gitab/styles/main.css">
-  <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
-
-  <style>
-  @font-face {
-    font-family: 'Vazir';
-    src: url('/Gitab/fonts/Vazir-FD-WOL.ttf') format('truetype');
-    font-display: swap;
-  }
-  @font-face {
-    font-family: "Lalezar";
-    src: url('fonts/Lalezar.ttf') format('truetype');
-    font-display: swap;
-}
-  body {
-    font-family: 'Vazir', sans-serif;
-  }
-  </style>
-</head>
-
-<body>
-  <!-- هدر مشترک -->
-  <header class="header">
-    <div class="container nav-wrap">
-      <a href="/Gitab/" class="brand">
-        <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="26" height="26">
-        <span>Gitab</span>
-      </a>
-
-       <nav class="nav">
-         <a href="/Gitab/" >خانه</a>
-         <a href="/Gitab/books/list-books" >کتاب‌ها</a>
-         <a href="/Gitab/giter.html" >دوره ها</a>
-          <!-- 
-         <a href="/Gitab/translator.html" >مترجمین</a>
-           -->
-       </nav>
-
-      <div class="nav-actions">
-        <button id="themeToggle" class="icon-btn theme-btn" data-icon="moon" aria-label="تغییر تم">
-          <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن">
-          <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک">
-        </button>
-
-        <a class="icon-btn" href="https://github.com/hheydarian/Gitab" target="_blank" title="GitHub">
-          <img src="/Gitab/icone/github.svg" alt="GitHub">
-        </a>
-
-        <!-- دکمه منو برای موبایل -->
-        <button class="menu-toggle" aria-label="منو">
-          <img src="/Gitab/icone/menu.svg" alt="menu">
-        </button>
-      </div>
-    </div>
-  </header>
-
-  
-  <main class="site-main book-page">
-    <h1>فصل سیزدهم: تشخیص (Diagnostics)</h1>
-<p>وقتی چیزی اشتباه پیش می‌رود، خیلی مهم است که اطلاعات لازم برای کمک به <strong>تشخیص (diagnosing) مشکل</strong> در دسترس باشد. یک <strong>محیط توسعه یکپارچه (Integrated Development Environment – IDE)</strong> یا یک <strong>دیباگر (debugger)</strong> می‌تواند در این زمینه بسیار کمک‌کننده باشد—اما معمولاً فقط در طول توسعه موجود است.<br>
-پس از انتشار (ship) یک برنامه، خودِ برنامه باید اطلاعات تشخیصی را جمع‌آوری و ثبت کند. برای برآورده کردن این نیاز، <strong>.NET</strong> مجموعه‌ای از امکانات را فراهم می‌کند تا بتوان اطلاعات تشخیصی را لاگ‌گیری کرد، رفتار برنامه را مانیتور کرد، خطاهای زمان اجرا را شناسایی کرد و در صورت موجود بودن، با ابزارهای دیباگ یکپارچه شد.</p>
-<p>برخی ابزارها و APIهای تشخیصی، مخصوص <strong>Windows</strong> هستند زیرا به قابلیت‌های سیستم‌عامل ویندوز وابسته‌اند. برای جلوگیری از شلوغ شدن <strong>BCL (.NET Base Class Library)</strong> با APIهای مختص پلتفرم، مایکروسافت آن‌ها را در پکیج‌های جداگانه‌ی <strong>NuGet</strong> عرضه کرده است که می‌توانید به صورت اختیاری به آن‌ها ارجاع دهید. بیش از دوازده پکیج مخصوص ویندوز وجود دارد که می‌توانید همه‌ی آن‌ها را یکجا با پکیج اصلی <strong>Microsoft.Windows.Compatibility</strong> استفاده کنید.</p>
-<p>انواع (types) معرفی‌شده در این فصل، عمدتاً در <strong>namespace به نام System.Diagnostics</strong> تعریف شده‌اند.</p>
-<hr>
-<h3>✂️ کامپایل شرطی (Conditional Compilation)</h3>
-<p>شما می‌توانید هر بخش از کد در C# را با استفاده از <strong>دستورات پیش‌پردازنده (preprocessor directives)</strong> به صورت شرطی کامپایل کنید.<br>
-این دستورات، دستورالعمل‌های خاصی برای کامپایلر هستند که با نماد <code>#</code> شروع می‌شوند (و برخلاف سایر ساختارهای C#، باید در یک خط جداگانه قرار گیرند). از نظر منطقی، این دستورات قبل از انجام کامپایل اصلی اجرا می‌شوند (هرچند در عمل، کامپایلر آن‌ها را در مرحله‌ی <strong>lexical parsing</strong> پردازش می‌کند).</p>
-<p>دستورات پیش‌پردازنده برای کامپایل شرطی عبارت‌اند از:</p>
-<ul>
-<li><code>#if</code></li>
-<li><code>#else</code></li>
-<li><code>#endif</code></li>
-<li><code>#elif</code></li>
-</ul>
-<p>✅ دستور <code>#if</code> به کامپایلر می‌گوید بخشی از کد را نادیده بگیرد مگر این‌که یک <strong>symbol</strong> مشخص تعریف شده باشد.<br>
-می‌توانید یک symbol را به دو روش تعریف کنید:</p>
-<ol>
-<li>در سورس‌کد با استفاده از دستور <code>#define</code> (که فقط به همان فایل اعمال می‌شود).</li>
-<li>در فایل <strong>.csproj</strong> با استفاده از عنصر <code>&lt;DefineConstants&gt;</code> (که در این صورت، به کل assembly اعمال می‌شود).</li>
-</ol>
-<p>مثال:</p>
-<pre class="hljs"><code><span class="hljs-meta">#<span class="hljs-keyword">define</span> TESTMODE</span>
+<!doctype html><html lang="fa" dir="rtl"> <head><script>
+    if (window.location.pathname.startsWith('/gitab/')) {
+      window.location.replace(window.location.pathname.replace(/^\/gitab\//i, '/Gitab/') + window.location.search + window.location.hash);
+    }
+    (() => {
+      try {
+        const t = localStorage.getItem('gitab-theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', t);
+        document.documentElement.dataset.colorMode = t;
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        document.documentElement.dataset.colorMode = 'dark';
+      }
+    })();
+  </script> <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5"> <title>تشخیص (Diagnostics)</title><meta name="description" content="تشخیص (Diagnostics) — مطالعه آنلاین و رایگان از کتاب «سی‌شارپ ۱۲ در یک نگاه» (C# 12 in a Nutshell) اثر Joseph Albahari با ترجمه حامد حیدریان در گیتاب."> <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"><meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"> <meta name="theme-color" content="#090d16"><meta name="referrer" content="strict-origin-when-cross-origin"> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https:; frame-src https://www.youtube.com https://www.youtube-nocookie.com https://maps.google.com https://www.google.com; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self';"><link rel="icon" type="image/png" href="/Gitab/favicon.png"> <link rel="canonical" href="https://hheydarian.github.io/Gitab/books/book1/Book/13/Diagnostics/"><link rel="alternate" hreflang="fa" href="https://hheydarian.github.io/Gitab/books/book1/Book/13/Diagnostics/"> <link rel="alternate" hreflang="x-default" href="https://hheydarian.github.io/Gitab/books/book1/Book/13/Diagnostics/"><link rel="alternate" type="text/plain" title="LLMs.txt" href="/Gitab/llms.txt"> <link rel="sitemap" type="application/xml" title="Sitemap" href="/Gitab/sitemap.xml"><meta property="og:locale" content="fa_IR"> <meta property="og:type" content="article"><meta property="og:site_name" content="گیتاب | Gitab"> <meta property="og:title" content="تشخیص (Diagnostics)"><meta property="og:description" content="تشخیص (Diagnostics) — مطالعه آنلاین و رایگان از کتاب «سی‌شارپ ۱۲ در یک نگاه» (C# 12 in a Nutshell) اثر Joseph Albahari با ترجمه حامد حیدریان در گیتاب."> <meta property="og:url" content="https://hheydarian.github.io/Gitab/books/book1/Book/13/Diagnostics/"><meta property="og:image" content="https://hheydarian.github.io/Gitab/images/csharp-12/Cover.jpg"> <meta property="og:image:alt" content="تشخیص (Diagnostics)"><meta name="twitter:card" content="summary_large_image"> <meta name="twitter:title" content="تشخیص (Diagnostics)"><meta name="twitter:description" content="تشخیص (Diagnostics) — مطالعه آنلاین و رایگان از کتاب «سی‌شارپ ۱۲ در یک نگاه» (C# 12 in a Nutshell) اثر Joseph Albahari با ترجمه حامد حیدریان در گیتاب."> <meta name="twitter:image" content="https://hheydarian.github.io/Gitab/images/csharp-12/Cover.jpg"><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://hheydarian.github.io/Gitab/#organization","name":"گیتاب | Gitab","alternateName":"Gitab","url":"https://hheydarian.github.io/Gitab/","logo":{"@type":"ImageObject","url":"https://hheydarian.github.io/Gitab/favicon.png"},"sameAs":["https://github.com/hheydarian/Gitab"]},{"@type":"WebSite","@id":"https://hheydarian.github.io/Gitab/#website","url":"https://hheydarian.github.io/Gitab/","name":"گیتاب | Gitab","inLanguage":"fa-IR","publisher":{"@id":"https://hheydarian.github.io/Gitab/#organization"},"potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://hheydarian.github.io/Gitab/books/list-books/?q={search_term_string}"},"query-input":"required name=search_term_string"}},{"@type":"WebPage","@id":"https://hheydarian.github.io/Gitab/books/book1/Book/13/Diagnostics/#webpage","url":"https://hheydarian.github.io/Gitab/books/book1/Book/13/Diagnostics/","name":"تشخیص (Diagnostics)","description":"تشخیص (Diagnostics) — مطالعه آنلاین و رایگان از کتاب «سی‌شارپ ۱۲ در یک نگاه» (C# 12 in a Nutshell) اثر Joseph Albahari با ترجمه حامد حیدریان در گیتاب.","inLanguage":"fa-IR","isPartOf":{"@id":"https://hheydarian.github.io/Gitab/#website"}},{"@type":"TechArticle","headline":"تشخیص (Diagnostics)","description":"تشخیص (Diagnostics) — مطالعه آنلاین و رایگان از کتاب «سی‌شارپ ۱۲ در یک نگاه» (C# 12 in a Nutshell) اثر Joseph Albahari با ترجمه حامد حیدریان در گیتاب.","url":"https://hheydarian.github.io/Gitab/books/book1/Book/13/Diagnostics/","inLanguage":"fa-IR","isAccessibleForFree":true,"author":{"@type":"Person","name":"Joseph Albahari"},"translator":{"@type":"Person","name":"حامد حیدریان"},"isPartOf":{"@type":"Book","name":"سی‌شارپ ۱۲ در یک نگاه","alternateName":"C# 12 in a Nutshell","url":"https://hheydarian.github.io/Gitab/books/book1/"}}]}</script> <link rel="preload" href="/Gitab/fonts/Vazirmatn.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/Gitab/styles/main.css?v=2.4" as="style"> <link rel="preload" href="/Gitab/styles/gitab-modern.css?v=2.5" as="style"><style>@font-face{font-family:'Lalezar';src:url('/Gitab/fonts/Lalezar.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}@font-face{font-family:'Vazirmatn';src:url('/Gitab/fonts/Vazirmatn.woff2') format('woff2');font-weight:100 900;font-style:normal;font-display:swap}html,body,button,input,optgroup,select,textarea,.filter-pill{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}input::placeholder,textarea::placeholder{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}</style> <link rel="stylesheet" href="/Gitab/styles/main.css?v=2.4"><link rel="stylesheet" href="/Gitab/styles/gitab-modern.css?v=2.5"> <link rel="stylesheet" href="/Gitab/styles/vendor/github-dark.min.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="/Gitab/styles/vendor/github-dark.min.css"></noscript></head> <body><header class="header"> <div class="container nav-wrap"><a href="/Gitab/" class="brand" aria-label="صفحه اصلی گیتاب"> <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="30" height="30" decoding="async"> <span class="brand-text">Gitab</span> </a> <nav class="nav" id="mainNav"><a href="/Gitab/" >خانه</a> <a href="/Gitab/books/list-books" aria-current="page">کتاب‌ها</a> <a href="/Gitab/courses/" >دوره‌ها</a> <a href="/Gitab/translator.html" >مترجمین</a></nav> <div class="nav-actions"><button id="themeToggle" class="theme-toggle-btn" aria-label="تغییر تم" title="تغییر تم"> <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن" width="18" height="18" decoding="async" style="display:none"> <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک" width="18" height="18" decoding="async"> </button> <a class="btn-github-pill" href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" title="مشاهده سورس گیتاب در گیت‌هاب"> <img src="/Gitab/icone/github.svg" alt="GitHub" width="16" height="16" decoding="async"> <span>گیت‌هاب</span> </a> <button class="mobile-menu-btn" id="mobileMenuBtn" type="button" aria-label="باز کردن منو" aria-expanded="false"> <svg class="mob-icon-open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="4" y1="7" x2="20" y2="7"></line> <line x1="4" y1="12" x2="20" y2="12"></line> <line x1="4" y1="17" x2="14" y2="17"></line> </svg> <svg class="mob-icon-close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="18" y1="6" x2="6" y2="18"></line> <line x1="6" y1="6" x2="18" y2="18"></line> </svg> </button></div> </div><div class="mobile-drawer" id="mobileDrawer" aria-hidden="true"> <div class="mobile-drawer-inner"><div class="mobile-drawer-section-label">ناوبری سریع</div><nav class="mobile-drawer-links" aria-label="منوی موبایل"> <a href="/Gitab/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M3 10.5 12 3l9 7.5"></path> <path d="M5 9.5V20a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V9.5"></path> </svg> </span> <span class="mob-nav-text">صفحه نخست</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/books/list-books" class="mobile-drawer-link active" aria-current="page"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path> </svg> </span> <span class="mob-nav-text">کتابخانه و فهرست کتاب‌ها</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/courses/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path> <path d="M6 12v5c3 3 9 3 12 0v-5"></path> </svg> </span> <span class="mob-nav-text">دوره‌های آموزشی</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/translator.html" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path> <circle cx="9" cy="7" r="4"></circle> <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path> <path d="M16 3.13a4 4 0 0 1 0 7.75"></path> </svg> </span> <span class="mob-nav-text">مترجمین و همکاران</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> </nav><div class="mobile-drawer-divider"></div><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" class="mobile-drawer-link mobile-drawer-gh"> <span class="mob-nav-icon" aria-hidden="true"> <img src="/Gitab/icone/github.svg" alt="" width="17" height="17" loading="lazy" decoding="async"> </span> <span class="mob-nav-text">مخزن گیت‌هاب پروژه</span> <span class="mob-nav-ext" aria-hidden="true">↗</span> </a> </div></div> </header><div class="reading-progress-track"> <div class="reading-progress-fill" id="readingProgressBar"></div></div> <main class="site-main chapter-reading-page"><div class="chapter-page-wrapper"> <nav class="chapter-clean-breadcrumb" aria-label="مسیر راهنما" dir="rtl"><a href="/Gitab/">خانه</a> <span class="bc-sep" aria-hidden="true">/</span> <a href="/Gitab/books/list-books/">کتاب‌ها</a> <span class="bc-sep" aria-hidden="true">/</span> <a href="/Gitab/books/book1/"><bdi>سی‌شارپ ۱۲ در یک نگاه</bdi></a> <span class="bc-sep" aria-hidden="true">/</span> <span class="bc-current-leaf"><bdi>تشخیص (Diagnostics)</bdi></span></nav> <article class="chapter-prose-container markdown-body" id="chapterArticle" dir="rtl"><h1>فصل سیزدهم: تشخیص (Diagnostics)</h1><p>وقتی چیزی اشتباه پیش می‌رود، خیلی مهم است که اطلاعات لازم برای کمک به <strong>تشخیص (diagnosing) مشکل</strong> در دسترس باشد. یک <strong>محیط توسعه یکپارچه (Integrated Development Environment – IDE)</strong> یا یک <strong>دیباگر (debugger)</strong> می‌تواند در این زمینه بسیار کمک‌کننده باشد—اما معمولاً فقط در طول توسعه موجود است.<br> پس از انتشار (ship) یک برنامه، خودِ برنامه باید اطلاعات تشخیصی را جمع‌آوری و ثبت کند. برای برآورده کردن این نیاز، <strong>.NET</strong> مجموعه‌ای از امکانات را فراهم می‌کند تا بتوان اطلاعات تشخیصی را لاگ‌گیری کرد، رفتار برنامه را مانیتور کرد، خطاهای زمان اجرا را شناسایی کرد و در صورت موجود بودن، با ابزارهای دیباگ یکپارچه شد.</p><p>برخی ابزارها و APIهای تشخیصی، مخصوص <strong>Windows</strong> هستند زیرا به قابلیت‌های سیستم‌عامل ویندوز وابسته‌اند. برای جلوگیری از شلوغ شدن <strong>BCL (.NET Base Class Library)</strong> با APIهای مختص پلتفرم، مایکروسافت آن‌ها را در پکیج‌های جداگانه‌ی <strong>NuGet</strong> عرضه کرده است که می‌توانید به صورت اختیاری به آن‌ها ارجاع دهید. بیش از دوازده پکیج مخصوص ویندوز وجود دارد که می‌توانید همه‌ی آن‌ها را یکجا با پکیج اصلی <strong>Microsoft.Windows.Compatibility</strong> استفاده کنید.</p><p>انواع (types) معرفی‌شده در این فصل، عمدتاً در <strong>namespace به نام System.Diagnostics</strong> تعریف شده‌اند.</p><hr> <h3>کامپایل شرطی (Conditional Compilation)</h3><p>شما می‌توانید هر بخش از کد در C# را با استفاده از <strong>دستورات پیش‌پردازنده (preprocessor directives)</strong> به صورت شرطی کامپایل کنید.<br> این دستورات، دستورالعمل‌های خاصی برای کامپایلر هستند که با نماد <code>#</code> شروع می‌شوند (و برخلاف سایر ساختارهای C#، باید در یک خط جداگانه قرار گیرند). از نظر منطقی، این دستورات قبل از انجام کامپایل اصلی اجرا می‌شوند (هرچند در عمل، کامپایلر آن‌ها را در مرحله‌ی <strong>lexical parsing</strong> پردازش می‌کند).</p><p>دستورات پیش‌پردازنده برای کامپایل شرطی عبارت‌اند از:</p><ul> <li><code>#if</code></li><li><code>#else</code></li><li><code>#endif</code></li><li><code>#elif</code></li></ul> <p>دستور <code>#if</code> به کامپایلر می‌گوید بخشی از کد را نادیده بگیرد مگر این‌که یک <strong>symbol</strong> مشخص تعریف شده باشد.<br> می‌توانید یک symbol را به دو روش تعریف کنید:</p><ol> <li>در سورس‌کد با استفاده از دستور <code>#define</code> (که فقط به همان فایل اعمال می‌شود).</li><li>در فایل <strong>.csproj</strong> با استفاده از عنصر <code>&lt;DefineConstants&gt;</code> (که در این صورت، به کل assembly اعمال می‌شود).</li></ol> <p>مثال:</p><pre class="hljs"><code><span class="hljs-meta">#<span class="hljs-keyword">define</span> TESTMODE</span>
 <span class="hljs-comment">// #define باید در بالای فایل نوشته شود</span>
 <span class="hljs-comment">// طبق قرارداد، نام symbol ها با حروف بزرگ نوشته می‌شوند.</span>
 <span class="hljs-keyword">using</span> System;
@@ -105,95 +25,38 @@
         <span class="hljs-meta">#<span class="hljs-keyword">endif</span></span>
     }
 }
-</code></pre>
-<p>اگر خط اول (یعنی <code>#define TESTMODE</code>) را حذف کنیم، برنامه بدون خط <code>Console.WriteLine</code> کامپایل خواهد شد—انگار که کلاً کامنت شده باشد.</p>
-<p>👉 دستور <code>#else</code> مشابه دستور <code>else</code> در C# است و <code>#elif</code> هم معادل <code>#else</code> به همراه یک <code>#if</code> است.<br>
-عملگرهای <code>||</code>, <code>&amp;&amp;</code>, و <code>!</code> نیز به ترتیب <strong>or</strong>، <strong>and</strong> و <strong>not</strong> عمل می‌کنند:</p>
-<pre class="hljs"><code><span class="hljs-meta">#<span class="hljs-keyword">if</span> TESTMODE &amp;&amp; !PLAYMODE      // اگر TESTMODE فعال باشد و PLAYMODE فعال نباشد</span>
+</code></pre> <p>اگر خط اول (یعنی <code>#define TESTMODE</code>) را حذف کنیم، برنامه بدون خط <code>Console.WriteLine</code> کامپایل خواهد شد—انگار که کلاً کامنت شده باشد.</p><p>دستور <code>#else</code> مشابه دستور <code>else</code> در C# است و <code>#elif</code> هم معادل <code>#else</code> به همراه یک <code>#if</code> است.<br> عملگرهای <code>||</code>, <code>&amp;&amp;</code>, و <code>!</code> نیز به ترتیب <strong>or</strong>، <strong>and</strong> و <strong>not</strong> عمل می‌کنند:</p><pre class="hljs"><code><span class="hljs-meta">#<span class="hljs-keyword">if</span> TESTMODE &amp;&amp; !PLAYMODE      // اگر TESTMODE فعال باشد و PLAYMODE فعال نباشد</span>
    ...
 <span class="hljs-meta">#<span class="hljs-keyword">endif</span></span>
-</code></pre>
-<p>اما یادتان باشد: این یک عبارت معمولی C# نیست و symbolهایی که روی آن‌ها عمل می‌کنید هیچ ارتباطی به متغیرها—چه استاتیک و چه غیر از آن—ندارند.</p>
-<hr>
-<h3>🗂️ تعریف symbolها در سطح assembly</h3>
-<p>می‌توانید symbolهایی را که در تمام فایل‌های یک assembly اعمال می‌شوند، در فایل <code>.csproj</code> تعریف کنید (یا در Visual Studio، از طریق تب <strong>Build</strong> در پنجره‌ی <strong>Project Properties</strong>).</p>
-<p>مثال:</p>
-<pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">PropertyGroup</span>&gt;</span>
+</code></pre> <p>اما یادتان باشد: این یک عبارت معمولی C# نیست و symbolهایی که روی آن‌ها عمل می‌کنید هیچ ارتباطی به متغیرها—چه استاتیک و چه غیر از آن—ندارند.</p><hr> <h3>تعریف symbolها در سطح assembly</h3><p>می‌توانید symbolهایی را که در تمام فایل‌های یک assembly اعمال می‌شوند، در فایل <code>.csproj</code> تعریف کنید (یا در Visual Studio، از طریق تب <strong>Build</strong> در پنجره‌ی <strong>Project Properties</strong>).</p><p>مثال:</p><pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">PropertyGroup</span>&gt;</span>
    <span class="hljs-tag">&lt;<span class="hljs-name">DefineConstants</span>&gt;</span>TESTMODE;PLAYMODE<span class="hljs-tag">&lt;/<span class="hljs-name">DefineConstants</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">PropertyGroup</span>&gt;</span>
-</code></pre>
-<p>اگر یک symbol را در سطح assembly تعریف کرده باشید و بخواهید آن را برای یک فایل خاص <strong>لغو (undefine)</strong> کنید، می‌توانید از دستور <code>#undef</code> استفاده کنید.</p>
-<hr>
-<h3>⚖️ کامپایل شرطی در برابر پرچم‌های متغیر استاتیک</h3>
-<p>شما می‌توانید همان مثال قبلی را با یک فیلد استاتیک ساده هم پیاده‌سازی کنید:</p>
-<pre class="hljs"><code><span class="hljs-keyword">static</span> <span class="hljs-keyword">internal</span> <span class="hljs-built_in">bool</span> TestMode = <span class="hljs-literal">true</span>;
+</code></pre> <p>اگر یک symbol را در سطح assembly تعریف کرده باشید و بخواهید آن را برای یک فایل خاص <strong>لغو (undefine)</strong> کنید، می‌توانید از دستور <code>#undef</code> استفاده کنید.</p><hr> <h3>کامپایل شرطی در برابر پرچم‌های متغیر استاتیک</h3><p>شما می‌توانید همان مثال قبلی را با یک فیلد استاتیک ساده هم پیاده‌سازی کنید:</p><pre class="hljs"><code><span class="hljs-keyword">static</span> <span class="hljs-keyword">internal</span> <span class="hljs-built_in">bool</span> TestMode = <span class="hljs-literal">true</span>;
 <span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Main</span>()</span>
 {
     <span class="hljs-keyword">if</span> (TestMode) Console.WriteLine(<span class="hljs-string">&quot;in test mode!&quot;</span>);
 }
-</code></pre>
-<p>این روش مزیت <strong>پیکربندی در زمان اجرا (runtime configuration)</strong> را دارد.<br>
-پس چرا باید کامپایل شرطی را انتخاب کنیم؟</p>
-<p>دلیل این است که <strong>کامپایل شرطی می‌تواند کارهایی انجام دهد که پرچم‌های متغیر نمی‌توانند</strong>، مثل:</p>
-<ul>
-<li>درج شرطی یک <strong>attribute</strong></li>
-<li>تغییر نوع اعلان‌شده‌ی یک متغیر</li>
-<li>تغییر بین namespaceها یا type aliasها در یک دستور <code>using</code></li>
-</ul>
-<p>مثال:</p>
-<pre class="hljs"><code><span class="hljs-keyword">using</span> TestType =
+</code></pre> <p>این روش مزیت <strong>پیکربندی در زمان اجرا (runtime configuration)</strong> را دارد.<br> پس چرا باید کامپایل شرطی را انتخاب کنیم؟</p><p>دلیل این است که <strong>کامپایل شرطی می‌تواند کارهایی انجام دهد که پرچم‌های متغیر نمی‌توانند</strong>، مثل:</p><ul> <li>درج شرطی یک <strong>attribute</strong></li><li>تغییر نوع اعلان‌شده‌ی یک متغیر</li><li>تغییر بین namespaceها یا type aliasها در یک دستور <code>using</code></li></ul> <p>مثال:</p><pre class="hljs"><code><span class="hljs-keyword">using</span> TestType =
 <span class="hljs-meta">#<span class="hljs-keyword">if</span> V2</span>
     MyCompany.Widgets.GadgetV2;
 <span class="hljs-meta">#<span class="hljs-keyword">else</span></span>
     MyCompany.Widgets.Gadget;
 <span class="hljs-meta">#<span class="hljs-keyword">endif</span></span>
-</code></pre>
-<p>شما حتی می‌توانید <strong>رفکتورینگ‌های بزرگ</strong> را زیر یک دستور کامپایل شرطی قرار دهید، طوری که بتوانید بلافاصله بین نسخه‌ی قدیمی و جدید جابه‌جا شوید. همچنین می‌توانید کتابخانه‌هایی بنویسید که در برابر چند نسخه‌ی مختلف runtime کامپایل شوند و هر جا که امکان دارد، از قابلیت‌های جدید بهره ببرند.</p>
-<p>یکی دیگر از مزایای کامپایل شرطی این است که <strong>کدهای دیباگ می‌توانند به انواع (types) در assemblyهایی اشاره کنند که در نسخه‌ی نهایی (deployment) گنجانده نمی‌شوند.</strong> 🔍</p>
-<h3>📌 ویژگی <strong>Conditional Attribute</strong></h3>
-<p>ویژگی <strong>Conditional</strong> به کامپایلر دستور می‌دهد که اگر یک <strong>symbol</strong> مشخص تعریف نشده باشد، هر فراخوانی (call) به یک کلاس یا متد خاص را نادیده بگیرد.</p>
-<p>برای دیدن کاربرد این ویژگی، فرض کنید متدی برای ثبت وضعیت (logging status) نوشته‌اید:</p>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">LogStatus</span> (<span class="hljs-params"><span class="hljs-built_in">string</span> msg</span>)</span>
+</code></pre> <p>شما حتی می‌توانید <strong>رفکتورینگ‌های بزرگ</strong> را زیر یک دستور کامپایل شرطی قرار دهید، طوری که بتوانید بلافاصله بین نسخه‌ی قدیمی و جدید جابه‌جا شوید. همچنین می‌توانید کتابخانه‌هایی بنویسید که در برابر چند نسخه‌ی مختلف runtime کامپایل شوند و هر جا که امکان دارد، از قابلیت‌های جدید بهره ببرند.</p><p>یکی دیگر از مزایای کامپایل شرطی این است که <strong>کدهای دیباگ می‌توانند به انواع (types) در assemblyهایی اشاره کنند که در نسخه‌ی نهایی (deployment) گنجانده نمی‌شوند.</strong></p><h3>ویژگی <strong>Conditional Attribute</strong></h3><p>ویژگی <strong>Conditional</strong> به کامپایلر دستور می‌دهد که اگر یک <strong>symbol</strong> مشخص تعریف نشده باشد، هر فراخوانی (call) به یک کلاس یا متد خاص را نادیده بگیرد.</p><p>برای دیدن کاربرد این ویژگی، فرض کنید متدی برای ثبت وضعیت (logging status) نوشته‌اید:</p><pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">LogStatus</span> (<span class="hljs-params"><span class="hljs-built_in">string</span> msg</span>)</span>
 {
     <span class="hljs-built_in">string</span> logFilePath = ...
     System.IO.File.AppendAllText (logFilePath, msg + <span class="hljs-string">&quot;\r\n&quot;</span>);
 }
-</code></pre>
-<p>حالا تصور کنید می‌خواهید این متد فقط زمانی اجرا شود که symbol به نام <strong>LOGGINGMODE</strong> تعریف شده باشد.</p>
-<p>راه‌حل اول این است که همه‌ی فراخوانی‌های <code>LogStatus</code> را داخل یک دستور <code>#if</code> قرار دهید:</p>
-<pre class="hljs"><code><span class="hljs-meta">#<span class="hljs-keyword">if</span> LOGGINGMODE</span>
+</code></pre> <p>حالا تصور کنید می‌خواهید این متد فقط زمانی اجرا شود که symbol به نام <strong>LOGGINGMODE</strong> تعریف شده باشد.</p><p>راه‌حل اول این است که همه‌ی فراخوانی‌های <code>LogStatus</code> را داخل یک دستور <code>#if</code> قرار دهید:</p><pre class="hljs"><code><span class="hljs-meta">#<span class="hljs-keyword">if</span> LOGGINGMODE</span>
 LogStatus(<span class="hljs-string">&quot;Message Headers: &quot;</span> + GetMsgHeaders());
 <span class="hljs-meta">#<span class="hljs-keyword">endif</span></span>
-</code></pre>
-<p>این کار نتیجه‌ی ایده‌آل می‌دهد، اما خسته‌کننده و وقت‌گیر است.<br>
-راه‌حل دوم این است که دستور <code>#if</code> را داخل خود متد <code>LogStatus</code> قرار دهیم. اما این مشکل دارد؛ چرا که اگر این‌طور فراخوانی شود:</p>
-<pre class="hljs"><code>LogStatus(<span class="hljs-string">&quot;Message Headers: &quot;</span> + GetComplexMessageHeaders());
-</code></pre>
-<p>در این حالت، متد <code>GetComplexMessageHeaders</code> همیشه فراخوانی خواهد شد—که ممکن است باعث افت کارایی (performance hit) شود.</p>
-<hr>
-<h3>🔗 ترکیب دو راه‌حل با <strong>Conditional Attribute</strong></h3>
-<p>می‌توانیم عملکرد راه‌حل اول (نتیجه‌ی مطلوب) و راحتی راه‌حل دوم را با افزودن ویژگی <strong>Conditional</strong> (که در <code>System.Diagnostics</code> تعریف شده) به متد <code>LogStatus</code> به دست بیاوریم:</p>
-<pre class="hljs"><code>[<span class="hljs-meta">Conditional(<span class="hljs-string">&quot;LOGGINGMODE&quot;</span>)</span>]
+</code></pre> <p>این کار نتیجه‌ی ایده‌آل می‌دهد، اما خسته‌کننده و وقت‌گیر است.<br> راه‌حل دوم این است که دستور <code>#if</code> را داخل خود متد <code>LogStatus</code> قرار دهیم. اما این مشکل دارد؛ چرا که اگر این‌طور فراخوانی شود:</p><pre class="hljs"><code>LogStatus(<span class="hljs-string">&quot;Message Headers: &quot;</span> + GetComplexMessageHeaders());
+</code></pre> <p>در این حالت، متد <code>GetComplexMessageHeaders</code> همیشه فراخوانی خواهد شد—که ممکن است باعث افت کارایی (performance hit) شود.</p><hr> <h3>ترکیب دو راه‌حل با <strong>Conditional Attribute</strong></h3><p>می‌توانیم عملکرد راه‌حل اول (نتیجه‌ی مطلوب) و راحتی راه‌حل دوم را با افزودن ویژگی <strong>Conditional</strong> (که در <code>System.Diagnostics</code> تعریف شده) به متد <code>LogStatus</code> به دست بیاوریم:</p><pre class="hljs"><code>[<span class="hljs-meta">Conditional(<span class="hljs-string">&quot;LOGGINGMODE&quot;</span>)</span>]
 <span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">LogStatus</span> (<span class="hljs-params"><span class="hljs-built_in">string</span> msg</span>)</span>
 {
     ...
 }
-</code></pre>
-<p>این کار به کامپایلر دستور می‌دهد که تمام فراخوانی‌های <code>LogStatus</code> را طوری در نظر بگیرد که گویی داخل یک دستور <code>#if LOGGINGMODE</code> قرار دارند.<br>
-اگر symbol تعریف نشده باشد، <strong>هرگونه فراخوانی به <code>LogStatus</code> کلاً از خروجی نهایی کامپایل حذف خواهد شد</strong>—از جمله <strong>evaluation</strong> آرگومان‌ها.<br>
-بنابراین هر عبارتی که اثر جانبی (side effect) داشته باشد نیز کلاً اجرا نمی‌شود. ✨</p>
-<p>این ویژگی حتی زمانی که <code>LogStatus</code> و متد فراخواننده در دو assembly متفاوت باشند نیز به درستی کار می‌کند.</p>
-<hr>
-<h3>📦 یک مزیت دیگر</h3>
-<p>مزیت دیگر <code>[Conditional]</code> این است که بررسی شرط در زمان <strong>کامپایل کد فراخواننده</strong> انجام می‌شود، نه در زمان کامپایل متد مقصد. این یعنی شما می‌توانید کتابخانه‌ای حاوی متدهایی مثل <code>LogStatus</code> بنویسید و فقط <strong>یک نسخه از آن کتابخانه</strong> را بسازید.</p>
-<p>👉 ویژگی <code>Conditional</code> در زمان اجرا هیچ تأثیری ندارد—این فقط یک دستورالعمل برای کامپایلر است.</p>
-<hr>
-<h3>🔄 جایگزین‌های <strong>Conditional Attribute</strong></h3>
-<p>ویژگی <code>Conditional</code> زمانی بی‌فایده است که بخواهید عملکردی را به‌طور <strong>پویا (runtime)</strong> فعال یا غیرفعال کنید.<br>
-در این حالت باید از یک راه‌حل مبتنی بر <strong>متغیر (variable-based)</strong> استفاده کنید.</p>
-<p>سؤال بعدی این است که چطور می‌توانیم از اجرای آرگومان‌ها در هنگام فراخوانی متدهای لاگ‌گیری شرطی جلوگیری کنیم؟<br>
-راه‌حل تابعی (functional approach) این مشکل را برطرف می‌کند:</p>
-<pre class="hljs"><code><span class="hljs-keyword">using</span> System;
+</code></pre> <p>این کار به کامپایلر دستور می‌دهد که تمام فراخوانی‌های <code>LogStatus</code> را طوری در نظر بگیرد که گویی داخل یک دستور <code>#if LOGGINGMODE</code> قرار دارند.<br> اگر symbol تعریف نشده باشد، <strong>هرگونه فراخوانی به <code>LogStatus</code> کلاً از خروجی نهایی کامپایل حذف خواهد شد</strong>—از جمله <strong>evaluation</strong> آرگومان‌ها.<br> بنابراین هر عبارتی که اثر جانبی (side effect) داشته باشد نیز کلاً اجرا نمی‌شود.</p><p>این ویژگی حتی زمانی که <code>LogStatus</code> و متد فراخواننده در دو assembly متفاوت باشند نیز به درستی کار می‌کند.</p><hr> <h3>یک مزیت دیگر</h3><p>مزیت دیگر <code>[Conditional]</code> این است که بررسی شرط در زمان <strong>کامپایل کد فراخواننده</strong> انجام می‌شود، نه در زمان کامپایل متد مقصد. این یعنی شما می‌توانید کتابخانه‌ای حاوی متدهایی مثل <code>LogStatus</code> بنویسید و فقط <strong>یک نسخه از آن کتابخانه</strong> را بسازید.</p><p>ویژگی <code>Conditional</code> در زمان اجرا هیچ تأثیری ندارد—این فقط یک دستورالعمل برای کامپایلر است.</p><hr> <h3>جایگزین‌های <strong>Conditional Attribute</strong></h3><p>ویژگی <code>Conditional</code> زمانی بی‌فایده است که بخواهید عملکردی را به‌طور <strong>پویا (runtime)</strong> فعال یا غیرفعال کنید.<br> در این حالت باید از یک راه‌حل مبتنی بر <strong>متغیر (variable-based)</strong> استفاده کنید.</p><p>سؤال بعدی این است که چطور می‌توانیم از اجرای آرگومان‌ها در هنگام فراخوانی متدهای لاگ‌گیری شرطی جلوگیری کنیم؟<br> راه‌حل تابعی (functional approach) این مشکل را برطرف می‌کند:</p><pre class="hljs"><code><span class="hljs-keyword">using</span> System;
 <span class="hljs-keyword">using</span> System.Linq;
 <span class="hljs-keyword">class</span> <span class="hljs-title">Program</span>
 {
@@ -205,121 +68,21 @@ LogStatus(<span class="hljs-string">&quot;Message Headers: &quot;</span> + GetMs
             System.IO.File.AppendAllText (logFilePath, message() + <span class="hljs-string">&quot;\r\n&quot;</span>);
     }
 }
-</code></pre>
-<p>با استفاده از <strong>lambda expression</strong>، می‌توانیم این متد را بدون شلوغی اضافی سینتکس فراخوانی کنیم:</p>
-<pre class="hljs"><code>LogStatus(() =&gt; <span class="hljs-string">&quot;Message Headers: &quot;</span> + GetComplexMessageHeaders());
-</code></pre>
-<p>اگر مقدار <code>EnableLogging</code> برابر <code>false</code> باشد، متد <code>GetComplexMessageHeaders</code> هیچ‌وقت اجرا نخواهد شد. 🚀</p>
-<hr>
-<h3>🐞 کلاس‌های <strong>Debug</strong> و <strong>Trace</strong></h3>
-<p>کلاس‌های استاتیک <strong>Debug</strong> و <strong>Trace</strong> قابلیت‌های پایه‌ای برای <strong>logging</strong> و <strong>assertion</strong> فراهم می‌کنند.<br>
-این دو کلاس بسیار شبیه یکدیگر هستند؛ تفاوت اصلی در <strong>هدف استفاده</strong> است:</p>
-<ul>
-<li>کلاس <strong>Debug</strong> برای <strong>buildهای دیباگ</strong> در نظر گرفته شده است.</li>
-<li>کلاس <strong>Trace</strong> برای هر دو حالت <strong>دیباگ</strong> و <strong>release</strong> طراحی شده است.</li>
-</ul>
-<p>برای همین:</p>
-<ul>
-<li>تمام متدهای کلاس <code>Debug</code> با <code>[Conditional(&quot;DEBUG&quot;)]</code> تعریف شده‌اند.</li>
-<li>تمام متدهای کلاس <code>Trace</code> با <code>[Conditional(&quot;TRACE&quot;)]</code> تعریف شده‌اند.</li>
-</ul>
-<p>یعنی: تمام فراخوانی‌هایی که به <code>Debug</code> یا <code>Trace</code> انجام می‌دهید، توسط کامپایلر حذف می‌شوند مگر این‌که symbolهای <code>DEBUG</code> یا <code>TRACE</code> تعریف شده باشند.<br>
-(در <strong>Visual Studio</strong> می‌توانید این symbolها را از طریق تب <strong>Build</strong> در پنجره‌ی <strong>Project Properties</strong> فعال کنید. در پروژه‌های جدید، symbol <code>TRACE</code> به‌طور پیش‌فرض فعال است.)</p>
-<hr>
-<h3>📝 متدهای مهم Debug و Trace</h3>
-<p>هر دو کلاس <strong>Debug</strong> و <strong>Trace</strong> متدهای زیر را ارائه می‌دهند:</p>
-<ul>
-<li><code>Write</code></li>
-<li><code>WriteLine</code></li>
-<li><code>WriteIf</code></li>
-</ul>
-<p>این متدها به طور پیش‌فرض پیام‌ها را به پنجره‌ی <strong>خروجی دیباگر (debugger’s output window)</strong> ارسال می‌کنند:</p>
-<pre class="hljs"><code>Debug.Write(<span class="hljs-string">&quot;Data&quot;</span>);
+</code></pre> <p>با استفاده از <strong>lambda expression</strong>، می‌توانیم این متد را بدون شلوغی اضافی سینتکس فراخوانی کنیم:</p><pre class="hljs"><code>LogStatus(() =&gt; <span class="hljs-string">&quot;Message Headers: &quot;</span> + GetComplexMessageHeaders());
+</code></pre> <p>اگر مقدار <code>EnableLogging</code> برابر <code>false</code> باشد، متد <code>GetComplexMessageHeaders</code> هیچ‌وقت اجرا نخواهد شد.</p><hr> <h3>کلاس‌های <strong>Debug</strong> و <strong>Trace</strong></h3><p>کلاس‌های استاتیک <strong>Debug</strong> و <strong>Trace</strong> قابلیت‌های پایه‌ای برای <strong>logging</strong> و <strong>assertion</strong> فراهم می‌کنند.<br> این دو کلاس بسیار شبیه یکدیگر هستند؛ تفاوت اصلی در <strong>هدف استفاده</strong> است:</p><ul> <li>کلاس <strong>Debug</strong> برای <strong>buildهای دیباگ</strong> در نظر گرفته شده است.</li><li>کلاس <strong>Trace</strong> برای هر دو حالت <strong>دیباگ</strong> و <strong>release</strong> طراحی شده است.</li></ul> <p>برای همین:</p><ul> <li>تمام متدهای کلاس <code>Debug</code> با <code>[Conditional(&quot;DEBUG&quot;)]</code> تعریف شده‌اند.</li><li>تمام متدهای کلاس <code>Trace</code> با <code>[Conditional(&quot;TRACE&quot;)]</code> تعریف شده‌اند.</li></ul> <p>یعنی: تمام فراخوانی‌هایی که به <code>Debug</code> یا <code>Trace</code> انجام می‌دهید، توسط کامپایلر حذف می‌شوند مگر این‌که symbolهای <code>DEBUG</code> یا <code>TRACE</code> تعریف شده باشند.<br> (در <strong>Visual Studio</strong> می‌توانید این symbolها را از طریق تب <strong>Build</strong> در پنجره‌ی <strong>Project Properties</strong> فعال کنید. در پروژه‌های جدید، symbol <code>TRACE</code> به‌طور پیش‌فرض فعال است.)</p><hr> <h3>متدهای مهم Debug و Trace</h3><p>هر دو کلاس <strong>Debug</strong> و <strong>Trace</strong> متدهای زیر را ارائه می‌دهند:</p><ul> <li><code>Write</code></li><li><code>WriteLine</code></li><li><code>WriteIf</code></li></ul> <p>این متدها به طور پیش‌فرض پیام‌ها را به پنجره‌ی <strong>خروجی دیباگر (debugger’s output window)</strong> ارسال می‌کنند:</p><pre class="hljs"><code>Debug.Write(<span class="hljs-string">&quot;Data&quot;</span>);
 Debug.WriteLine(<span class="hljs-number">23</span> * <span class="hljs-number">34</span>);
 <span class="hljs-built_in">int</span> x = <span class="hljs-number">5</span>, y = <span class="hljs-number">3</span>;
 Debug.WriteIf(x &gt; y, <span class="hljs-string">&quot;x is greater than y&quot;</span>);
-</code></pre>
-<p>کلاس <strong>Trace</strong> علاوه بر این‌ها، متدهای زیر را هم دارد:</p>
-<ul>
-<li><code>TraceInformation</code></li>
-<li><code>TraceWarning</code></li>
-<li><code>TraceError</code></li>
-</ul>
-<p>تفاوت رفتار این متدها با متدهای <code>Write</code> بستگی به <strong>TraceListeners فعال</strong> دارد (که در بخش «TraceListener» در صفحه‌ی ۶۱۲ توضیح داده شده است).</p>
-<h3>🐞 Fail و Assert</h3>
-<p>کلاس‌های <strong>Debug</strong> و <strong>Trace</strong> هر دو متدهای <strong>Fail</strong> و <strong>Assert</strong> را فراهم می‌کنند.</p>
-<ul>
-<li>متد <strong>Fail</strong> پیام را به هر <strong>TraceListener</strong> موجود در مجموعه‌ی <strong>Listeners</strong> کلاس Debug یا Trace ارسال می‌کند (بخش بعدی را ببینید). این متد به‌طور پیش‌فرض پیام را در خروجی دیباگر می‌نویسد:</li>
-</ul>
-<pre class="hljs"><code>Debug.Fail(<span class="hljs-string">&quot;File data.txt does not exist!&quot;</span>);
-</code></pre>
-<ul>
-<li>متد <strong>Assert</strong> در صورتی که آرگومان بولی آن <code>false</code> باشد، متد Fail را فراخوانی می‌کند. این عمل را <strong>assertion</strong> می‌نامند و اگر نقض شود، نشان‌دهنده‌ی وجود <strong>باگ</strong> در کد است. مشخص کردن پیام خطا اختیاری است:</li>
-</ul>
-<pre class="hljs"><code>Debug.Assert(File.Exists(<span class="hljs-string">&quot;data.txt&quot;</span>), <span class="hljs-string">&quot;File data.txt does not exist!&quot;</span>);
+</code></pre> <p>کلاس <strong>Trace</strong> علاوه بر این‌ها، متدهای زیر را هم دارد:</p><ul> <li><code>TraceInformation</code></li><li><code>TraceWarning</code></li><li><code>TraceError</code></li></ul> <p>تفاوت رفتار این متدها با متدهای <code>Write</code> بستگی به <strong>TraceListeners فعال</strong> دارد (که در بخش «TraceListener» در بخش‌های مرتبط توضیح داده شده است).</p><h3>Fail و Assert</h3><p>کلاس‌های <strong>Debug</strong> و <strong>Trace</strong> هر دو متدهای <strong>Fail</strong> و <strong>Assert</strong> را فراهم می‌کنند.</p><ul> <li>متد <strong>Fail</strong> پیام را به هر <strong>TraceListener</strong> موجود در مجموعه‌ی <strong>Listeners</strong> کلاس Debug یا Trace ارسال می‌کند (بخش بعدی را ببینید). این متد به‌طور پیش‌فرض پیام را در خروجی دیباگر می‌نویسد:</li></ul> <pre class="hljs"><code>Debug.Fail(<span class="hljs-string">&quot;File data.txt does not exist!&quot;</span>);
+</code></pre> <ul><li>متد <strong>Assert</strong> در صورتی که آرگومان بولی آن <code>false</code> باشد، متد Fail را فراخوانی می‌کند. این عمل را <strong>assertion</strong> می‌نامند و اگر نقض شود، نشان‌دهنده‌ی وجود <strong>باگ</strong> در کد است. مشخص کردن پیام خطا اختیاری است:</li></ul> <pre class="hljs"><code>Debug.Assert(File.Exists(<span class="hljs-string">&quot;data.txt&quot;</span>), <span class="hljs-string">&quot;File data.txt does not exist!&quot;</span>);
 <span class="hljs-keyword">var</span> result = ...
 Debug.Assert(result != <span class="hljs-literal">null</span>);
-</code></pre>
-<p>متدهای <strong>Write</strong>، <strong>Fail</strong> و <strong>Assert</strong> همگی overloadهایی دارند که علاوه بر پیام، یک <strong>category string</strong> هم می‌پذیرند—چیزی که می‌تواند در پردازش خروجی مفید باشد.</p>
-<hr>
-<h3>⚖️ جایگزین assertion با Exception</h3>
-<p>یک جایگزین برای assertion این است که وقتی شرط برعکس برقرار بود، یک <strong>exception</strong> پرتاب کنید.<br>
-این روش در هنگام اعتبارسنجی آرگومان‌های متد بسیار رایج است:</p>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ShowMessage</span>(<span class="hljs-params"><span class="hljs-built_in">string</span> message</span>)</span>
+</code></pre> <p>متدهای <strong>Write</strong>، <strong>Fail</strong> و <strong>Assert</strong> همگی overloadهایی دارند که علاوه بر پیام، یک <strong>category string</strong> هم می‌پذیرند—چیزی که می‌تواند در پردازش خروجی مفید باشد.</p><hr> <h3>جایگزین assertion با Exception</h3><p>یک جایگزین برای assertion این است که وقتی شرط برعکس برقرار بود، یک <strong>exception</strong> پرتاب کنید.<br> این روش در هنگام اعتبارسنجی آرگومان‌های متد بسیار رایج است:</p><pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ShowMessage</span>(<span class="hljs-params"><span class="hljs-built_in">string</span> message</span>)</span>
 {
     <span class="hljs-keyword">if</span> (message == <span class="hljs-literal">null</span>) <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> ArgumentNullException(<span class="hljs-string">&quot;message&quot;</span>);
     ...
 }
-</code></pre>
-<p>اما تفاوت‌ها:</p>
-<ul>
-<li>این نوع «assertion» بدون قید و شرط کامپایل می‌شود و انعطاف‌پذیری کمتری دارد (چون نتیجه‌ی شکست assertion را نمی‌توانید با <strong>TraceListeners</strong> کنترل کنید).</li>
-<li>از نظر فنی، این اصلاً assertion نیست.</li>
-<li><strong>Assertion</strong> نشان‌دهنده‌ی باگ در <strong>کد متد جاری</strong> است اگر نقض شود.</li>
-<li><strong>Exception</strong> در هنگام اعتبارسنجی آرگومان، نشان‌دهنده‌ی باگ در <strong>کد فراخواننده</strong> است.</li>
-</ul>
-<hr>
-<h3>📡 TraceListener</h3>
-<p>کلاس <strong>Trace</strong> یک ویژگی استاتیک به نام <strong>Listeners</strong> دارد که مجموعه‌ای از نمونه‌های <strong>TraceListener</strong> را برمی‌گرداند. این listenerها مسئول پردازش محتوای خروجی متدهای <strong>Write</strong>، <strong>Fail</strong> و <strong>Trace</strong> هستند.</p>
-<p>به طور پیش‌فرض، مجموعه‌ی <strong>Listeners</strong> شامل یک listener واحد است: <strong>DefaultTraceListener</strong>.</p>
-<p>این listener پیش‌فرض دو ویژگی مهم دارد:</p>
-<ol>
-<li>وقتی به دیباگری مثل Visual Studio متصل باشد، پیام‌ها به <strong>خروجی دیباگر</strong> نوشته می‌شوند؛ در غیر این صورت، پیام‌ها نادیده گرفته می‌شوند.</li>
-<li>وقتی متد <strong>Fail</strong> فراخوانی شود (یا یک assertion شکست بخورد)، برنامه متوقف می‌شود.</li>
-</ol>
-<hr>
-<h3>📝 تغییر رفتار TraceListener</h3>
-<p>می‌توانید این رفتار را تغییر دهید؛ به این صورت که listener پیش‌فرض را حذف کنید و listenerهای دلخواهتان را اضافه کنید.</p>
-<p>✅ شما می‌توانید:</p>
-<ul>
-<li>
-<p>از ابتدا یک listener بسازید (با <strong>زیرکلاس‌گیری از TraceListener</strong>).</p>
-</li>
-<li>
-<p>یا از یکی از انواع از پیش تعریف‌شده استفاده کنید:</p>
-<ul>
-<li><strong>TextWriterTraceListener</strong> → نوشتن در یک <strong>Stream</strong> یا <strong>TextWriter</strong> یا اضافه کردن به یک فایل.</li>
-<li><strong>EventLogTraceListener</strong> → نوشتن در <strong>Windows Event Log</strong> (فقط ویندوز).</li>
-<li><strong>EventProviderTraceListener</strong> → نوشتن در زیرسیستم <strong>ETW (Event Tracing for Windows)</strong> (پشتیبانی چند سکویی).</li>
-</ul>
-</li>
-</ul>
-<p>علاوه بر این، <strong>TextWriterTraceListener</strong> خود به چند نوع دیگر زیرکلاس شده است:</p>
-<ul>
-<li><strong>ConsoleTraceListener</strong></li>
-<li><strong>DelimitedListTraceListener</strong></li>
-<li><strong>XmlWriterTraceListener</strong></li>
-<li><strong>EventSchemaTraceListener</strong></li>
-</ul>
-<hr>
-<h3>✍️ مثال: افزودن چند Listener</h3>
-<p>مثال زیر listener پیش‌فرض Trace را پاک می‌کند و سپس سه listener اضافه می‌کند:</p>
-<ol>
-<li>یک listener که به فایل اضافه می‌کند.</li>
-<li>یک listener که روی کنسول می‌نویسد.</li>
-<li>یک listener که در Windows Event Log می‌نویسد.</li>
-</ol>
-<pre class="hljs"><code><span class="hljs-comment">// پاک کردن listener پیش‌فرض:</span>
+</code></pre> <p>اما تفاوت‌ها:</p><ul> <li>این نوع «assertion» بدون قید و شرط کامپایل می‌شود و انعطاف‌پذیری کمتری دارد (چون نتیجه‌ی شکست assertion را نمی‌توانید با <strong>TraceListeners</strong> کنترل کنید).</li><li>از نظر فنی، این اصلاً assertion نیست.</li><li><strong>Assertion</strong> نشان‌دهنده‌ی باگ در <strong>کد متد جاری</strong> است اگر نقض شود.</li><li><strong>Exception</strong> در هنگام اعتبارسنجی آرگومان، نشان‌دهنده‌ی باگ در <strong>کد فراخواننده</strong> است.</li></ul> <hr><h3>TraceListener</h3><p>کلاس <strong>Trace</strong> یک ویژگی استاتیک به نام <strong>Listeners</strong> دارد که مجموعه‌ای از نمونه‌های <strong>TraceListener</strong> را برمی‌گرداند. این listenerها مسئول پردازش محتوای خروجی متدهای <strong>Write</strong>، <strong>Fail</strong> و <strong>Trace</strong> هستند.</p><p>به طور پیش‌فرض، مجموعه‌ی <strong>Listeners</strong> شامل یک listener واحد است: <strong>DefaultTraceListener</strong>.</p><p>این listener پیش‌فرض دو ویژگی مهم دارد:</p><ol> <li>وقتی به دیباگری مثل Visual Studio متصل باشد، پیام‌ها به <strong>خروجی دیباگر</strong> نوشته می‌شوند؛ در غیر این صورت، پیام‌ها نادیده گرفته می‌شوند.</li><li>وقتی متد <strong>Fail</strong> فراخوانی شود (یا یک assertion شکست بخورد)، برنامه متوقف می‌شود.</li></ol> <hr><h3>تغییر رفتار TraceListener</h3><p>می‌توانید این رفتار را تغییر دهید؛ به این صورت که listener پیش‌فرض را حذف کنید و listenerهای دلخواهتان را اضافه کنید.</p><p>شما می‌توانید:</p><ul> <li><p>از ابتدا یک listener بسازید (با <strong>زیرکلاس‌گیری از TraceListener</strong>).</p></li> <li><p>یا از یکی از انواع از پیش تعریف‌شده استفاده کنید:</p><ul> <li><strong>TextWriterTraceListener</strong> → نوشتن در یک <strong>Stream</strong> یا <strong>TextWriter</strong> یا اضافه کردن به یک فایل.</li><li><strong>EventLogTraceListener</strong> → نوشتن در <strong>Windows Event Log</strong> (فقط ویندوز).</li><li><strong>EventProviderTraceListener</strong> → نوشتن در زیرسیستم <strong>ETW (Event Tracing for Windows)</strong> (پشتیبانی چند سکویی).</li></ul> </li></ul> <p>علاوه بر این، <strong>TextWriterTraceListener</strong> خود به چند نوع دیگر زیرکلاس شده است:</p><ul> <li><strong>ConsoleTraceListener</strong></li><li><strong>DelimitedListTraceListener</strong></li><li><strong>XmlWriterTraceListener</strong></li><li><strong>EventSchemaTraceListener</strong></li></ul> <hr><h3>مثال: افزودن چند Listener</h3><p>مثال زیر listener پیش‌فرض Trace را پاک می‌کند و سپس سه listener اضافه می‌کند:</p><ol> <li>یک listener که به فایل اضافه می‌کند.</li><li>یک listener که روی کنسول می‌نویسد.</li><li>یک listener که در Windows Event Log می‌نویسد.</li></ol> <pre class="hljs"><code><span class="hljs-comment">// پاک کردن listener پیش‌فرض:</span>
 Trace.Listeners.Clear();
 
 <span class="hljs-comment">// افزودن writer که در فایل trace.txt لاگ می‌نویسد:</span>
@@ -335,108 +98,16 @@ Trace.Listeners.Add(<span class="hljs-keyword">new</span> TextWriterTraceListene
     EventLog.CreateEventSource(<span class="hljs-string">&quot;DemoApp&quot;</span>, <span class="hljs-string">&quot;Application&quot;</span>);
 
 Trace.Listeners.Add(<span class="hljs-keyword">new</span> EventLogTraceListener(<span class="hljs-string">&quot;DemoApp&quot;</span>));
-</code></pre>
-<p>🔹 در مورد <strong>Windows Event Log</strong>:</p>
-<ul>
-<li>پیام‌هایی که با <strong>Write</strong>، <strong>Fail</strong> یا <strong>Assert</strong> می‌نویسید، همیشه به عنوان پیام <strong>Information</strong> در Event Viewer نمایش داده می‌شوند.</li>
-<li>پیام‌هایی که با <strong>TraceWarning</strong> یا <strong>TraceError</strong> می‌نویسید، به ترتیب به صورت <strong>warning</strong> یا <strong>error</strong> نمایش داده می‌شوند.</li>
-</ul>
-<hr>
-<h3>🎛️ فیلتر و تنظیمات TraceListener</h3>
-<p>کلاس <strong>TraceListener</strong> یک ویژگی به نام <strong>Filter</strong> (از نوع <code>TraceFilter</code>) دارد که می‌توانید برای کنترل نوشتن پیام‌ها روی آن listener استفاده کنید.</p>
-<p>برای این کار می‌توانید:</p>
-<ul>
-<li>یکی از زیرکلاس‌های آماده‌ی <code>TraceFilter</code> مثل <strong>EventTypeFilter</strong> یا <strong>SourceFilter</strong> را استفاده کنید.</li>
-<li>یا یک کلاس سفارشی از <code>TraceFilter</code> بسازید و متد <strong>ShouldTrace</strong> را override کنید.</li>
-</ul>
-<p>(مثلاً می‌توانید پیام‌ها را بر اساس category فیلتر کنید.)</p>
-<hr>
-<h3>🧩 ویژگی‌های دیگر TraceListener</h3>
-<ul>
-<li>ویژگی‌های <strong>IndentLevel</strong> و <strong>IndentSize</strong> → برای کنترل تورفتگی (indentation).</li>
-<li>ویژگی <strong>TraceOutputOptions</strong> → برای نوشتن داده‌های اضافه.</li>
-</ul>
-<p>مثال:</p>
-<pre class="hljs"><code>TextWriterTraceListener tl = <span class="hljs-keyword">new</span> TextWriterTraceListener(Console.Out);
+</code></pre> <p>در مورد <strong>Windows Event Log</strong>:</p><ul> <li>پیام‌هایی که با <strong>Write</strong>، <strong>Fail</strong> یا <strong>Assert</strong> می‌نویسید، همیشه به عنوان پیام <strong>Information</strong> در Event Viewer نمایش داده می‌شوند.</li><li>پیام‌هایی که با <strong>TraceWarning</strong> یا <strong>TraceError</strong> می‌نویسید، به ترتیب به صورت <strong>warning</strong> یا <strong>error</strong> نمایش داده می‌شوند.</li></ul> <hr><h3>فیلتر و تنظیمات TraceListener</h3><p>کلاس <strong>TraceListener</strong> یک ویژگی به نام <strong>Filter</strong> (از نوع <code>TraceFilter</code>) دارد که می‌توانید برای کنترل نوشتن پیام‌ها روی آن listener استفاده کنید.</p><p>برای این کار می‌توانید:</p><ul> <li>یکی از زیرکلاس‌های آماده‌ی <code>TraceFilter</code> مثل <strong>EventTypeFilter</strong> یا <strong>SourceFilter</strong> را استفاده کنید.</li><li>یا یک کلاس سفارشی از <code>TraceFilter</code> بسازید و متد <strong>ShouldTrace</strong> را override کنید.</li></ul> <p>(مثلاً می‌توانید پیام‌ها را بر اساس category فیلتر کنید.)</p><hr> <h3>ویژگی‌های دیگر TraceListener</h3><ul> <li>ویژگی‌های <strong>IndentLevel</strong> و <strong>IndentSize</strong> → برای کنترل تورفتگی (indentation).</li><li>ویژگی <strong>TraceOutputOptions</strong> → برای نوشتن داده‌های اضافه.</li></ul> <p>مثال:</p><pre class="hljs"><code>TextWriterTraceListener tl = <span class="hljs-keyword">new</span> TextWriterTraceListener(Console.Out);
 tl.TraceOutputOptions = TraceOptions.DateTime | TraceOptions.Callstack;
 
 Trace.TraceWarning(<span class="hljs-string">&quot;Orange alert&quot;</span>);
-</code></pre>
-<p>خروجی:</p>
-<pre class="hljs"><code>DiagTest.vshost.exe Warning: 0 : Orange alert
+</code></pre> <p>خروجی:</p><pre class="hljs"><code>DiagTest.vshost.exe Warning: 0 : Orange alert
     DateTime=2007-03-08T05:57:13.6250000Z
     Callstack=   at System.Environment.GetStackTrace(Exception e, Boolean needFileInfo)
                  at System.Environment.get_StackTrace()
                  at ...
-</code></pre>
-<h3>🚦 پاک‌سازی و بستن Listeners</h3>
-<p>برخی از <strong>listeners</strong>‌ها مثل <code>TextWriterTraceListener</code> در نهایت خروجی را درون یک <strong>stream</strong> می‌نویسند که تحت <strong>cache</strong> قرار دارد. این موضوع دو پیامد دارد:</p>
-<ul>
-<li>✍️ یک پیام ممکن است بلافاصله در <strong>خروجی stream یا فایل</strong> ظاهر نشود.</li>
-<li>🗑️ شما باید قبل از پایان برنامه، <strong>listener</strong> را ببندید یا حداقل <strong>flush</strong> کنید؛ در غیر این صورت، آنچه در cache است از دست می‌رود (به‌طور پیش‌فرض تا <strong>۴ KB</strong> اگر در حال نوشتن در فایل باشید).</li>
-</ul>
-<p>کلاس‌های <strong>Trace</strong> و <strong>Debug</strong> متدهای استاتیک <code>Close</code> و <code>Flush</code> را فراهم می‌کنند که به‌ترتیب روی همه‌ی listeners اعمال می‌شوند (که به نوبه‌ی خود <code>Close</code> یا <code>Flush</code> را روی writers و streams زیرین صدا می‌زنند).</p>
-<ul>
-<li><code>Close</code> به‌طور ضمنی <code>Flush</code> را فراخوانی می‌کند، <strong>file handle</strong>ها را می‌بندد و از نوشتن داده‌ی بیشتر جلوگیری می‌کند.</li>
-</ul>
-<p>🔑 به‌طور کلی:</p>
-<ul>
-<li>قبل از پایان برنامه، از <code>Close</code> استفاده کنید.</li>
-<li>هر زمان که خواستید مطمئن شوید داده‌های فعلی نوشته شده‌اند، از <code>Flush</code> استفاده کنید.</li>
-</ul>
-<p>این موضوع زمانی اهمیت دارد که از listeners مبتنی بر <strong>stream</strong> یا <strong>file</strong> استفاده کنید.</p>
-<p>همچنین، کلاس‌های <strong>Trace</strong> و <strong>Debug</strong> یک ویژگی به نام <code>AutoFlush</code> دارند. اگر مقدار آن <code>true</code> باشد، بعد از هر پیام، یک <code>Flush</code> انجام می‌شود.</p>
-<p>📝 توصیه مهم:<br>
-اگر از <strong>listeners</strong> مبتنی بر فایل یا stream استفاده می‌کنید، بهتر است <code>AutoFlush</code> را روی <code>true</code> بگذارید. در غیر این صورت، اگر یک <strong>Unhandled Exception</strong> یا خطای بحرانی رخ دهد، آخرین <strong>۴ KB اطلاعات تشخیصی</strong> ممکن است از دست برود.</p>
-<hr>
-<h3>🐞 یکپارچگی با Debugger</h3>
-<p>گاهی اوقات مفید است که یک برنامه در صورت موجود بودن، با <strong>Debugger</strong> تعامل داشته باشد.</p>
-<ul>
-<li>در زمان توسعه، Debugger معمولاً همان IDE شماست (مثلاً <strong>Visual Studio</strong>).</li>
-<li>در زمان استقرار، Debugger احتمالاً ابزارهای سطح پایین‌تری مثل <strong>WinDbg</strong>، <strong>Cordbg</strong> یا <strong>MDbg</strong> خواهد بود.</li>
-</ul>
-<hr>
-<h4>🛑 Attach و Break</h4>
-<p>کلاس استاتیک <code>Debugger</code> در <strong>System.Diagnostics</strong> توابع اصلی زیر را برای تعامل با Debugger فراهم می‌کند:</p>
-<ul>
-<li><code>Break</code></li>
-<li><code>Launch</code></li>
-<li><code>Log</code></li>
-<li><code>IsAttached</code></li>
-</ul>
-<p>🔹 برای دیباگ کردن یک برنامه، ابتدا باید <strong>Debugger به آن attach شود</strong>. اگر برنامه را از داخل IDE اجرا کنید، این کار به‌طور خودکار انجام می‌شود (مگر اینکه عمداً گزینه‌ی “Start without debugging” را انتخاب کنید).</p>
-<p>اما گاهی شروع برنامه در حالت دیباگ از داخل IDE امکان‌پذیر یا راحت نیست (مثلاً در <strong>Windows Service</strong> یا حتی در یک <strong>Visual Studio Designer</strong>).</p>
-<p>🔑 راه‌حل:</p>
-<ul>
-<li>برنامه را به‌صورت عادی اجرا کنید.</li>
-<li>سپس از داخل IDE گزینه‌ی <strong>Debug Process</strong> را انتخاب کنید.</li>
-</ul>
-<p>البته این روش اجازه نمی‌دهد در مراحل اولیه‌ی اجرای برنامه، Breakpoint بگذارید.</p>
-<p>✔️ روش جایگزین: فراخوانی <code>Debugger.Break</code> از داخل برنامه. این متد باعث می‌شود یک Debugger راه‌اندازی شود، به برنامه attach شود و اجرای آن را متوقف کند.</p>
-<ul>
-<li><code>Launch</code> مشابه است اما اجرای برنامه را متوقف نمی‌کند.</li>
-<li>بعد از attach شدن، می‌توانید با متد <code>Log</code> پیام‌ها را مستقیماً به <strong>پنجره‌ی خروجی Debugger</strong> بفرستید.</li>
-<li>وضعیت attach بودن Debugger را هم می‌توانید با ویژگی <code>IsAttached</code> بررسی کنید.</li>
-</ul>
-<hr>
-<h4>🎛️ ویژگی‌های Debugger</h4>
-<p>دو Attribute مهم وجود دارند:</p>
-<ul>
-<li><code>DebuggerStepThrough</code></li>
-<li><code>DebuggerHidden</code></li>
-</ul>
-<p>این‌ها به Debugger پیشنهاد می‌دهند هنگام <strong>Single-Stepping</strong> (اجرای خط‌به‌خط) با یک متد، سازنده یا کلاس خاص چگونه رفتار کند.</p>
-<ul>
-<li>
-<p><code>DebuggerStepThrough</code> به Debugger می‌گوید <strong>بدون تعامل کاربر، از روی یک متد عبور کند</strong>.<br>
-➡️ این موضوع در متدهای <strong>خودکار تولیدشده</strong> و متدهای <strong>Proxy</strong> که کار اصلی را به جای دیگری پاس می‌دهند مفید است.</p>
-</li>
-<li>
-<p>اگر در متد واقعی (real method) Breakpoint تنظیم شود، Debugger همچنان متد Proxy را در Call Stack نشان می‌دهد—مگر اینکه Attribute <code>DebuggerHidden</code> هم اضافه شود.</p>
-</li>
-</ul>
-<p>🔀 ترکیب این دو Attribute در Proxyها کمک می‌کند کاربر تمرکز بیشتری روی <strong>منطق برنامه</strong> داشته باشد و کمتر درگیر جزئیات شود:</p>
-<pre class="hljs"><code>[<span class="hljs-meta">DebuggerStepThrough, DebuggerHidden</span>]
+</code></pre> <h3>پاک‌سازی و بستن Listeners</h3><p>برخی از <strong>listeners</strong>‌ها مثل <code>TextWriterTraceListener</code> در نهایت خروجی را درون یک <strong>stream</strong> می‌نویسند که تحت <strong>cache</strong> قرار دارد. این موضوع دو پیامد دارد:</p><ul> <li>یک پیام ممکن است بلافاصله در <strong>خروجی stream یا فایل</strong> ظاهر نشود.</li><li>شما باید قبل از پایان برنامه، <strong>listener</strong> را ببندید یا حداقل <strong>flush</strong> کنید؛ در غیر این صورت، آنچه در cache است از دست می‌رود (به‌طور پیش‌فرض تا <strong>۴ KB</strong> اگر در حال نوشتن در فایل باشید).</li></ul> <p>کلاس‌های <strong>Trace</strong> و <strong>Debug</strong> متدهای استاتیک <code>Close</code> و <code>Flush</code> را فراهم می‌کنند که به‌ترتیب روی همه‌ی listeners اعمال می‌شوند (که به نوبه‌ی خود <code>Close</code> یا <code>Flush</code> را روی writers و streams زیرین صدا می‌زنند).</p><ul> <li><code>Close</code> به‌طور ضمنی <code>Flush</code> را فراخوانی می‌کند، <strong>file handle</strong>ها را می‌بندد و از نوشتن داده‌ی بیشتر جلوگیری می‌کند.</li></ul> <p>به‌طور کلی:</p><ul> <li>قبل از پایان برنامه، از <code>Close</code> استفاده کنید.</li><li>هر زمان که خواستید مطمئن شوید داده‌های فعلی نوشته شده‌اند، از <code>Flush</code> استفاده کنید.</li></ul> <p>این موضوع زمانی اهمیت دارد که از listeners مبتنی بر <strong>stream</strong> یا <strong>file</strong> استفاده کنید.</p><p>همچنین، کلاس‌های <strong>Trace</strong> و <strong>Debug</strong> یک ویژگی به نام <code>AutoFlush</code> دارند. اگر مقدار آن <code>true</code> باشد، بعد از هر پیام، یک <code>Flush</code> انجام می‌شود.</p><p>توصیه مهم:<br> اگر از <strong>listeners</strong> مبتنی بر فایل یا stream استفاده می‌کنید، بهتر است <code>AutoFlush</code> را روی <code>true</code> بگذارید. در غیر این صورت، اگر یک <strong>Unhandled Exception</strong> یا خطای بحرانی رخ دهد، آخرین <strong>۴ KB اطلاعات تشخیصی</strong> ممکن است از دست برود.</p><hr> <h3>یکپارچگی با Debugger</h3><p>گاهی اوقات مفید است که یک برنامه در صورت موجود بودن، با <strong>Debugger</strong> تعامل داشته باشد.</p><ul> <li>در زمان توسعه، Debugger معمولاً همان IDE شماست (مثلاً <strong>Visual Studio</strong>).</li><li>در زمان استقرار، Debugger احتمالاً ابزارهای سطح پایین‌تری مثل <strong>WinDbg</strong>، <strong>Cordbg</strong> یا <strong>MDbg</strong> خواهد بود.</li></ul> <hr><h4>Attach و Break</h4><p>کلاس استاتیک <code>Debugger</code> در <strong>System.Diagnostics</strong> توابع اصلی زیر را برای تعامل با Debugger فراهم می‌کند:</p><ul> <li><code>Break</code></li><li><code>Launch</code></li><li><code>Log</code></li><li><code>IsAttached</code></li></ul> <p>برای دیباگ کردن یک برنامه، ابتدا باید <strong>Debugger به آن attach شود</strong>. اگر برنامه را از داخل IDE اجرا کنید، این کار به‌طور خودکار انجام می‌شود (مگر اینکه عمداً گزینه‌ی “Start without debugging” را انتخاب کنید).</p><p>اما گاهی شروع برنامه در حالت دیباگ از داخل IDE امکان‌پذیر یا راحت نیست (مثلاً در <strong>Windows Service</strong> یا حتی در یک <strong>Visual Studio Designer</strong>).</p><p>راه‌حل:</p><ul> <li>برنامه را به‌صورت عادی اجرا کنید.</li><li>سپس از داخل IDE گزینه‌ی <strong>Debug Process</strong> را انتخاب کنید.</li></ul> <p>البته این روش اجازه نمی‌دهد در مراحل اولیه‌ی اجرای برنامه، Breakpoint بگذارید.</p><p>روش جایگزین: فراخوانی <code>Debugger.Break</code> از داخل برنامه. این متد باعث می‌شود یک Debugger راه‌اندازی شود، به برنامه attach شود و اجرای آن را متوقف کند.</p><ul> <li><code>Launch</code> مشابه است اما اجرای برنامه را متوقف نمی‌کند.</li><li>بعد از attach شدن، می‌توانید با متد <code>Log</code> پیام‌ها را مستقیماً به <strong>پنجره‌ی خروجی Debugger</strong> بفرستید.</li><li>وضعیت attach بودن Debugger را هم می‌توانید با ویژگی <code>IsAttached</code> بررسی کنید.</li></ul> <hr><h4>ویژگی‌های Debugger</h4><p>دو Attribute مهم وجود دارند:</p><ul> <li><code>DebuggerStepThrough</code></li><li><code>DebuggerHidden</code></li></ul> <p>این‌ها به Debugger پیشنهاد می‌دهند هنگام <strong>Single-Stepping</strong> (اجرای خط‌به‌خط) با یک متد، سازنده یا کلاس خاص چگونه رفتار کند.</p><ul> <li><p><code>DebuggerStepThrough</code> به Debugger می‌گوید <strong>بدون تعامل کاربر، از روی یک متد عبور کند</strong>.<br> این موضوع در متدهای <strong>خودکار تولیدشده</strong> و متدهای <strong>Proxy</strong> که کار اصلی را به جای دیگری پاس می‌دهند مفید است.</p></li> <li><p>اگر در متد واقعی (real method) Breakpoint تنظیم شود، Debugger همچنان متد Proxy را در Call Stack نشان می‌دهد—مگر اینکه Attribute <code>DebuggerHidden</code> هم اضافه شود.</p></li> </ul><p>ترکیب این دو Attribute در Proxyها کمک می‌کند کاربر تمرکز بیشتری روی <strong>منطق برنامه</strong> داشته باشد و کمتر درگیر جزئیات شود:</p><pre class="hljs"><code>[<span class="hljs-meta">DebuggerStepThrough, DebuggerHidden</span>]
 <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">DoWorkProxy</span>()</span>
 {
   <span class="hljs-comment">// setup...</span>
@@ -445,29 +116,7 @@ Trace.TraceWarning(<span class="hljs-string">&quot;Orange alert&quot;</span>);
 }
 
 <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">DoWork</span>()</span> {...}   <span class="hljs-comment">// متد اصلی</span>
-</code></pre>
-<hr>
-<h3>⚙️ پردازش‌ها (Processes) و Threadهای پردازش</h3>
-<p>در بخش آخر فصل ۶، توضیح دادیم که چطور با <code>Process.Start</code> یک پردازش جدید راه‌اندازی کنید.<br>
-کلاس <code>Process</code> همچنین اجازه می‌دهد پردازش‌های دیگر را روی همان کامپیوتر یا یک کامپیوتر دیگر <strong>پرس‌وجو و مدیریت کنید</strong>.</p>
-<ul>
-<li>کلاس <code>Process</code> بخشی از <strong>.NET Standard 2.0</strong> است، هرچند قابلیت‌های آن روی <strong>UWP</strong> محدود می‌شود.</li>
-</ul>
-<hr>
-<h4>🔍 بررسی پردازش‌های در حال اجرا</h4>
-<p>متدهای <code>Process.GetProcessXXX</code> پردازش‌ها را بر اساس <strong>نام</strong> یا <strong>شناسه‌ی پردازش (PID)</strong> یا همه‌ی پردازش‌های در حال اجرا روی یک کامپیوتر خاص برمی‌گردانند.</p>
-<p>این شامل پردازش‌های <strong>Managed</strong> و <strong>Unmanaged</strong> می‌شود.</p>
-<p>هر نمونه‌ی <code>Process</code> مجموعه‌ای از ویژگی‌ها دارد که شامل موارد زیر هستند:</p>
-<ul>
-<li>نام</li>
-<li>ID</li>
-<li>اولویت</li>
-<li>مصرف حافظه و پردازنده</li>
-<li>Window Handleها</li>
-<li>و …</li>
-</ul>
-<p>نمونه کد زیر همه‌ی پردازش‌های در حال اجرای روی کامپیوتر فعلی را لیست می‌کند:</p>
-<pre class="hljs"><code><span class="hljs-keyword">foreach</span> (Process p <span class="hljs-keyword">in</span> Process.GetProcesses())
+</code></pre> <hr><h3>پردازش‌ها (Processes) و Threadهای پردازش</h3><p>در بخش آخر فصل ۶، توضیح دادیم که چطور با <code>Process.Start</code> یک پردازش جدید راه‌اندازی کنید.<br> کلاس <code>Process</code> همچنین اجازه می‌دهد پردازش‌های دیگر را روی همان کامپیوتر یا یک کامپیوتر دیگر <strong>پرس‌وجو و مدیریت کنید</strong>.</p><ul> <li>کلاس <code>Process</code> بخشی از <strong>.NET Standard 2.0</strong> است، هرچند قابلیت‌های آن روی <strong>UWP</strong> محدود می‌شود.</li></ul> <hr><h4>بررسی پردازش‌های در حال اجرا</h4><p>متدهای <code>Process.GetProcessXXX</code> پردازش‌ها را بر اساس <strong>نام</strong> یا <strong>شناسه‌ی پردازش (PID)</strong> یا همه‌ی پردازش‌های در حال اجرا روی یک کامپیوتر خاص برمی‌گردانند.</p><p>این شامل پردازش‌های <strong>Managed</strong> و <strong>Unmanaged</strong> می‌شود.</p><p>هر نمونه‌ی <code>Process</code> مجموعه‌ای از ویژگی‌ها دارد که شامل موارد زیر هستند:</p><ul> <li>نام</li><li>ID</li><li>اولویت</li><li>مصرف حافظه و پردازنده</li><li>Window Handleها</li><li>و …</li></ul> <p>نمونه کد زیر همه‌ی پردازش‌های در حال اجرای روی کامپیوتر فعلی را لیست می‌کند:</p><pre class="hljs"><code><span class="hljs-keyword">foreach</span> (Process p <span class="hljs-keyword">in</span> Process.GetProcesses())
 <span class="hljs-keyword">using</span> (p)
 {
     Console.WriteLine(p.ProcessName);
@@ -475,17 +124,7 @@ Trace.TraceWarning(<span class="hljs-string">&quot;Orange alert&quot;</span>);
     Console.WriteLine(<span class="hljs-string">&quot;   Memory:   &quot;</span> + p.WorkingSet64);
     Console.WriteLine(<span class="hljs-string">&quot;   Threads:  &quot;</span> + p.Threads.Count);
 }
-</code></pre>
-<ul>
-<li><code>Process.GetCurrentProcess</code> پردازش فعلی را برمی‌گرداند.</li>
-<li>برای پایان دادن به یک پردازش می‌توانید از متد <code>Kill</code> استفاده کنید.</li>
-</ul>
-<h3>🧵 بررسی Threadها در یک Process</h3>
-<p>شما می‌توانید با ویژگی <strong><code>Process.Threads</code></strong>، روی Threadهای پردازش‌های دیگر هم <strong>enumerate</strong> کنید.<br>
-اما شیءهایی که دریافت می‌کنید، <strong><code>System.Threading.Thread</code></strong> نیستند؛ بلکه از نوع <strong><code>ProcessThread</code></strong> هستند. این نوع برای <strong>وظایف مدیریتی</strong> (Administrative) طراحی شده است، نه برای همگام‌سازی (Synchronization).</p>
-<p>🔹 یک <strong>ProcessThread</strong> اطلاعات تشخیصی (Diagnostic) درباره‌ی Thread زیربنایی ارائه می‌دهد و به شما اجازه می‌دهد برخی جنبه‌های آن را کنترل کنید (مثل اولویت و وابستگی به پردازنده).</p>
-<p>نمونه کد:</p>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">EnumerateThreads</span> (<span class="hljs-params">Process p</span>)</span>
+</code></pre> <ul><li><code>Process.GetCurrentProcess</code> پردازش فعلی را برمی‌گرداند.</li><li>برای پایان دادن به یک پردازش می‌توانید از متد <code>Kill</code> استفاده کنید.</li></ul> <h3>بررسی Threadها در یک Process</h3><p>شما می‌توانید با ویژگی <strong><code>Process.Threads</code></strong>، روی Threadهای پردازش‌های دیگر هم <strong>enumerate</strong> کنید.<br> اما شیءهایی که دریافت می‌کنید، <strong><code>System.Threading.Thread</code></strong> نیستند؛ بلکه از نوع <strong><code>ProcessThread</code></strong> هستند. این نوع برای <strong>وظایف مدیریتی</strong> (Administrative) طراحی شده است، نه برای همگام‌سازی (Synchronization).</p><p>یک <strong>ProcessThread</strong> اطلاعات تشخیصی (Diagnostic) درباره‌ی Thread زیربنایی ارائه می‌دهد و به شما اجازه می‌دهد برخی جنبه‌های آن را کنترل کنید (مثل اولویت و وابستگی به پردازنده).</p><p>نمونه کد:</p><pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">EnumerateThreads</span> (<span class="hljs-params">Process p</span>)</span>
 {
   <span class="hljs-keyword">foreach</span> (ProcessThread pt <span class="hljs-keyword">in</span> p.Threads)
   {
@@ -496,39 +135,7 @@ Trace.TraceWarning(<span class="hljs-string">&quot;Orange alert&quot;</span>);
     Console.WriteLine (<span class="hljs-string">&quot;   CPU time: &quot;</span> + pt.TotalProcessorTime);
   }
 }
-</code></pre>
-<hr>
-<h3>📚 StackTrace و StackFrame</h3>
-<p>کلاس‌های <strong>StackTrace</strong> و <strong>StackFrame</strong> یک نمای فقط‌خواندنی از <strong>Call Stack</strong> اجرای برنامه ارائه می‌دهند.</p>
-<p>🔎 شما می‌توانید Stack Trace را برای:</p>
-<ul>
-<li>Thread فعلی</li>
-<li>یا یک <strong>Exception</strong></li>
-</ul>
-<p>به‌دست آورید.</p>
-<p>این اطلاعات بیشتر برای <strong>تشخیص خطاها (Diagnostics)</strong> مفید هستند، هرچند گاهی هم در برنامه‌نویسی (حیله‌ها یا Hacks) به‌کار می‌روند.</p>
-<ul>
-<li><strong>StackTrace</strong> → یک Call Stack کامل را نمایش می‌دهد.</li>
-<li><strong>StackFrame</strong> → یک فراخوانی متد منفرد درون آن Stack را نمایش می‌دهد.</li>
-</ul>
-<p>💡 نکته:<br>
-اگر فقط می‌خواهید <strong>نام و شماره خط متد فراخواننده</strong> را بدانید، استفاده از <strong>Caller Info Attributes</strong> گزینه‌ای سریع‌تر و ساده‌تر است (در صفحه ۲۴۶ توضیح داده شده).</p>
-<hr>
-<h4>🖼️ ساختن یک StackTrace</h4>
-<p>اگر یک شیء <strong>StackTrace</strong> بدون آرگومان (یا همراه با یک آرگومان bool) بسازید:</p>
-<ul>
-<li>شما یک Snapshot از Call Stack فعلی می‌گیرید.</li>
-<li>اگر آرگومان <code>true</code> باشد، <strong>StackTrace</strong> فایل‌های <code>.pdb</code> (project debug) را هم می‌خواند (اگر موجود باشند) و به شما <strong>نام فایل، شماره خط و شماره ستون</strong> را هم می‌دهد.</li>
-</ul>
-<p>🔧 فایل‌های <code>.pdb</code> زمانی تولید می‌شوند که برنامه را با گزینه‌ی <code>/debug</code> کامپایل کنید. (Visual Studio به‌طور پیش‌فرض این کار را انجام می‌دهد، مگر اینکه در <strong>Advanced Build Settings</strong> خلافش را بخواهید).</p>
-<p>پس از گرفتن یک StackTrace، می‌توانید:</p>
-<ul>
-<li>یک Frame خاص را با <code>GetFrame</code> بررسی کنید.</li>
-<li>یا همه‌ی Frameها را با <code>GetFrames</code> دریافت کنید.</li>
-</ul>
-<hr>
-<h4>🔨 نمونه کد</h4>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Main</span>()</span> { A (); }
+</code></pre> <hr><h3>StackTrace و StackFrame</h3><p>کلاس‌های <strong>StackTrace</strong> و <strong>StackFrame</strong> یک نمای فقط‌خواندنی از <strong>Call Stack</strong> اجرای برنامه ارائه می‌دهند.</p><p>شما می‌توانید Stack Trace را برای:</p><ul> <li>Thread فعلی</li><li>یا یک <strong>Exception</strong></li></ul> <p>به‌دست آورید.</p><p>این اطلاعات بیشتر برای <strong>تشخیص خطاها (Diagnostics)</strong> مفید هستند، هرچند گاهی هم در برنامه‌نویسی (حیله‌ها یا Hacks) به‌کار می‌روند.</p><ul> <li><strong>StackTrace</strong> → یک Call Stack کامل را نمایش می‌دهد.</li><li><strong>StackFrame</strong> → یک فراخوانی متد منفرد درون آن Stack را نمایش می‌دهد.</li></ul> <blockquote><p><strong>نکته:</strong><br> اگر فقط می‌خواهید <strong>نام و شماره خط متد فراخواننده</strong> را بدانید، استفاده از <strong>Caller Info Attributes</strong> گزینه‌ای سریع‌تر و ساده‌تر است (در صفحه ۲۴۶ توضیح داده شده).</p></blockquote> <hr><h4>ساختن یک StackTrace</h4><p>اگر یک شیء <strong>StackTrace</strong> بدون آرگومان (یا همراه با یک آرگومان bool) بسازید:</p><ul> <li>شما یک Snapshot از Call Stack فعلی می‌گیرید.</li><li>اگر آرگومان <code>true</code> باشد، <strong>StackTrace</strong> فایل‌های <code>.pdb</code> (project debug) را هم می‌خواند (اگر موجود باشند) و به شما <strong>نام فایل، شماره خط و شماره ستون</strong> را هم می‌دهد.</li></ul> <p>فایل‌های <code>.pdb</code> زمانی تولید می‌شوند که برنامه را با گزینه‌ی <code>/debug</code> کامپایل کنید. (Visual Studio به‌طور پیش‌فرض این کار را انجام می‌دهد، مگر اینکه در <strong>Advanced Build Settings</strong> خلافش را بخواهید).</p><p>پس از گرفتن یک StackTrace، می‌توانید:</p><ul> <li>یک Frame خاص را با <code>GetFrame</code> بررسی کنید.</li><li>یا همه‌ی Frameها را با <code>GetFrames</code> دریافت کنید.</li></ul> <hr><h4>نمونه کد</h4><pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Main</span>()</span> { A (); }
 <span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">A</span>()</span>    { B (); }
 <span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">B</span>()</span>    { C (); }
 <span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">C</span>()</span>
@@ -549,10 +156,7 @@ Trace.TraceWarning(<span class="hljs-string">&quot;Orange alert&quot;</span>);
       <span class="hljs-string">&quot;  Offset: &quot;</span> + f.GetILOffset() +
       <span class="hljs-string">&quot;  Method: &quot;</span> + f.GetMethod().Name);
 }
-</code></pre>
-<hr>
-<h4>🖥️ خروجی</h4>
-<pre class="hljs"><code>Total frames:   4
+</code></pre> <hr><h4>خروجی</h4><pre class="hljs"><code>Total frames:   4
 Current method: C
 Calling method: B
 Entry method: Main
@@ -561,67 +165,11 @@ Call stack:
   File: C:\Test\Program.cs  Line: 12  Col: 22 Offset: 6  Method: B
   File: C:\Test\Program.cs  Line: 11  Col: 22 Offset: 6  Method: A
   File: C:\Test\Program.cs  Line: 10  Col: 25 Offset: 6  Method: Main
-</code></pre>
-<p>🔑 نکته‌ها:</p>
-<ul>
-<li><strong>IL Offset</strong> محل دستور بعدی را نشان می‌دهد، نه دستور در حال اجرا.</li>
-<li>اما شماره خط و ستون (اگر فایل <code>.pdb</code> موجود باشد) معمولاً نقطه‌ی اجرای واقعی را نشان می‌دهند.</li>
-<li>CLR تلاش می‌کند این را با استفاده از IL استنباط کند. برای همین کامپایلر دستورهای <strong>nop</strong> (no-operation) را درج می‌کند.</li>
-</ul>
-<p>⚠️ اما اگر با <strong>Optimization</strong> کامپایل کنید:</p>
-<ul>
-<li>دستورهای nop درج نمی‌شوند.</li>
-<li>بنابراین StackTrace ممکن است شماره خط/ستون دستور بعدی را نشان دهد.</li>
-<li>Optimization می‌تواند حتی متدها را ادغام کند و StackTrace را کمتر قابل‌اعتماد سازد.</li>
-</ul>
-<hr>
-<h4>📋 راه میانبر</h4>
-<p>فراخوانی <code>ToString()</code> روی یک StackTrace همان اطلاعات ضروری را به‌صورت ساده‌تر می‌دهد:</p>
-<pre class="hljs"><code>at DebugTest.Program.C() in C:\Test\Program.cs:line 16
+</code></pre> <p>نکته‌ها:</p><ul> <li><strong>IL Offset</strong> محل دستور بعدی را نشان می‌دهد، نه دستور در حال اجرا.</li><li>اما شماره خط و ستون (اگر فایل <code>.pdb</code> موجود باشد) معمولاً نقطه‌ی اجرای واقعی را نشان می‌دهند.</li><li>CLR تلاش می‌کند این را با استفاده از IL استنباط کند. برای همین کامپایلر دستورهای <strong>nop</strong> (no-operation) را درج می‌کند.</li></ul> <p>اما اگر با <strong>Optimization</strong> کامپایل کنید:</p><ul> <li>دستورهای nop درج نمی‌شوند.</li><li>بنابراین StackTrace ممکن است شماره خط/ستون دستور بعدی را نشان دهد.</li><li>Optimization می‌تواند حتی متدها را ادغام کند و StackTrace را کمتر قابل‌اعتماد سازد.</li></ul> <hr><h4>راه میانبر</h4><p>فراخوانی <code>ToString()</code> روی یک StackTrace همان اطلاعات ضروری را به‌صورت ساده‌تر می‌دهد:</p><pre class="hljs"><code>at DebugTest.Program.C() in C:\Test\Program.cs:line 16
 at DebugTest.Program.B() in C:\Test\Program.cs:line 12
 at DebugTest.Program.A() in C:\Test\Program.cs:line 11
 at DebugTest.Program.Main() in C:\Test\Program.cs:line 10
-</code></pre>
-<hr>
-<h4>⚠️ StackTrace روی Exception</h4>
-<p>می‌توانید StackTrace مربوط به یک Exception را هم بگیرید (برای دیدن اینکه چه چیزی منجر به پرتاب شدن Exception شد) با پاس‌دادن آن به سازنده‌ی <code>StackTrace</code>.</p>
-<ul>
-<li>خود <strong>Exception</strong> یک ویژگی به نام <code>StackTrace</code> دارد، اما این فقط یک <strong>string ساده</strong> برمی‌گرداند، نه یک شیء StackTrace.</li>
-<li>داشتن یک شیء StackTrace خیلی مفیدتر است، مخصوصاً برای <strong>Log کردن Exceptionها بعد از استقرار (Deployment)</strong> که معمولاً فایل‌های <code>.pdb</code> موجود نیستند.</li>
-</ul>
-<p>✅ در این حالت می‌توانید به‌جای شماره خط/ستون، <strong>IL Offset</strong> را Log کنید.<br>
-و با استفاده از <strong>ildasm</strong>، محل دقیق خطا درون متد را بیابید.</p>
-<hr>
-<h3>🪟 Windows Event Logs</h3>
-<p>پلتفرم <strong>Win32</strong> یک مکانیزم <strong>Log مرکزی</strong> به‌نام <strong>Windows Event Logs</strong> فراهم می‌کند.</p>
-<ul>
-<li>
-<p>کلاس‌های <strong>Debug</strong> و <strong>Trace</strong> که قبلاً استفاده کردیم، در صورت ثبت یک <strong>EventLogTraceListener</strong> می‌توانند در Windows Event Log بنویسند.</p>
-</li>
-<li>
-<p>با کلاس <strong>EventLog</strong>، شما می‌توانید:</p>
-<ul>
-<li>مستقیماً در Windows Event Log بنویسید (بدون نیاز به Trace یا Debug).</li>
-<li>یا داده‌های رویداد را بخوانید و پایش کنید.</li>
-</ul>
-</li>
-</ul>
-<p>🛠️ نوشتن در Event Log در <strong>برنامه‌های Windows Service</strong> بسیار منطقی است. چون اگر خطایی رخ دهد، نمی‌توانید یک UI باز کنید و به کاربر بگویید به فایل خاصی برای اطلاعات تشخیصی مراجعه کند. همچنین، چون نوشتن Serviceها در Event Log یک <strong>رویه استاندارد</strong> است، این اولین جایی خواهد بود که یک مدیر سیستم (Administrator) برای بررسی مشکل سرویس شما نگاه می‌کند.</p>
-<hr>
-<p>📑 سه Event Log استاندارد در ویندوز وجود دارد:</p>
-<ul>
-<li><strong>Application</strong></li>
-<li><strong>System</strong></li>
-<li><strong>Security</strong></li>
-</ul>
-<p>📌 معمولاً برنامه‌ها در <strong>Application Log</strong> می‌نویسند.</p>
-<h3>✍️ نوشتن در <strong>Event Log</strong></h3>
-<p>برای نوشتن در <strong>Windows Event Log</strong> مراحل زیر را انجام دهید:</p>
-<p>1️⃣ یکی از سه <strong>event log</strong> موجود را انتخاب کنید (معمولاً <strong>Application</strong>).<br>
-2️⃣ یک <strong>source name</strong> (نام منبع) مشخص کنید و در صورت نیاز آن را بسازید (ساختن نیازمند دسترسی مدیریتی است).<br>
-3️⃣ متد <strong>EventLog.WriteEntry</strong> را با نام لاگ، نام منبع و داده‌ی پیام فراخوانی کنید.</p>
-<p>🔹 <strong>Source name</strong> یک نام مشخص و قابل شناسایی برای برنامه‌ی شماست. قبل از استفاده باید آن را ثبت کنید. این کار با متد <strong>CreateEventSource</strong> انجام می‌شود. سپس می‌توانید از متد <strong>WriteEntry</strong> استفاده کنید:</p>
-<pre class="hljs"><code><span class="hljs-keyword">const</span> <span class="hljs-built_in">string</span> SourceName = <span class="hljs-string">&quot;MyCompany.WidgetServer&quot;</span>;
+</code></pre> <hr><h4>StackTrace روی Exception</h4><p>می‌توانید StackTrace مربوط به یک Exception را هم بگیرید (برای دیدن اینکه چه چیزی منجر به پرتاب شدن Exception شد) با پاس‌دادن آن به سازنده‌ی <code>StackTrace</code>.</p><ul> <li>خود <strong>Exception</strong> یک ویژگی به نام <code>StackTrace</code> دارد، اما این فقط یک <strong>string ساده</strong> برمی‌گرداند، نه یک شیء StackTrace.</li><li>داشتن یک شیء StackTrace خیلی مفیدتر است، مخصوصاً برای <strong>Log کردن Exceptionها بعد از استقرار (Deployment)</strong> که معمولاً فایل‌های <code>.pdb</code> موجود نیستند.</li></ul> <p>در این حالت می‌توانید به‌جای شماره خط/ستون، <strong>IL Offset</strong> را Log کنید.<br> و با استفاده از <strong>ildasm</strong>، محل دقیق خطا درون متد را بیابید.</p><hr> <h3>Windows Event Logs</h3><p>پلتفرم <strong>Win32</strong> یک مکانیزم <strong>Log مرکزی</strong> به‌نام <strong>Windows Event Logs</strong> فراهم می‌کند.</p><ul> <li><p>کلاس‌های <strong>Debug</strong> و <strong>Trace</strong> که قبلاً استفاده کردیم، در صورت ثبت یک <strong>EventLogTraceListener</strong> می‌توانند در Windows Event Log بنویسند.</p></li> <li><p>با کلاس <strong>EventLog</strong>، شما می‌توانید:</p><ul> <li>مستقیماً در Windows Event Log بنویسید (بدون نیاز به Trace یا Debug).</li><li>یا داده‌های رویداد را بخوانید و پایش کنید.</li></ul> </li></ul> <p>نوشتن در Event Log در <strong>برنامه‌های Windows Service</strong> بسیار منطقی است. چون اگر خطایی رخ دهد، نمی‌توانید یک UI باز کنید و به کاربر بگویید به فایل خاصی برای اطلاعات تشخیصی مراجعه کند. همچنین، چون نوشتن Serviceها در Event Log یک <strong>رویه استاندارد</strong> است، این اولین جایی خواهد بود که یک مدیر سیستم (Administrator) برای بررسی مشکل سرویس شما نگاه می‌کند.</p><hr> <p>سه Event Log استاندارد در ویندوز وجود دارد:</p><ul> <li><strong>Application</strong></li><li><strong>System</strong></li><li><strong>Security</strong></li></ul> <p>معمولاً برنامه‌ها در <strong>Application Log</strong> می‌نویسند.</p><h3>نوشتن در <strong>Event Log</strong></h3><p>برای نوشتن در <strong>Windows Event Log</strong> مراحل زیر را انجام دهید:</p><p>1⃣ یکی از سه <strong>event log</strong> موجود را انتخاب کنید (معمولاً <strong>Application</strong>).<br> 2⃣ یک <strong>source name</strong> (نام منبع) مشخص کنید و در صورت نیاز آن را بسازید (ساختن نیازمند دسترسی مدیریتی است).<br> 3⃣ متد <strong>EventLog.WriteEntry</strong> را با نام لاگ، نام منبع و داده‌ی پیام فراخوانی کنید.</p><p><strong>Source name</strong> یک نام مشخص و قابل شناسایی برای برنامه‌ی شماست. قبل از استفاده باید آن را ثبت کنید. این کار با متد <strong>CreateEventSource</strong> انجام می‌شود. سپس می‌توانید از متد <strong>WriteEntry</strong> استفاده کنید:</p><pre class="hljs"><code><span class="hljs-keyword">const</span> <span class="hljs-built_in">string</span> SourceName = <span class="hljs-string">&quot;MyCompany.WidgetServer&quot;</span>;
 <span class="hljs-comment">// CreateEventSource نیازمند دسترسی مدیریتی است، بنابراین معمولاً در بخش نصب برنامه انجام می‌شود.</span>
 <span class="hljs-keyword">if</span> (!EventLog.SourceExists(SourceName))
     EventLog.CreateEventSource(SourceName, <span class="hljs-string">&quot;Application&quot;</span>);
@@ -629,23 +177,7 @@ at DebugTest.Program.Main() in C:\Test\Program.cs:line 10
 EventLog.WriteEntry(SourceName,
   <span class="hljs-string">&quot;Service started; using configuration file=...&quot;</span>,
   EventLogEntryType.Information);
-</code></pre>
-<p>🔸 مقدار <strong>EventLogEntryType</strong> می‌تواند یکی از موارد زیر باشد:</p>
-<ul>
-<li><strong>Information</strong> ℹ️</li>
-<li><strong>Warning</strong> ⚠️</li>
-<li><strong>Error</strong> ❌</li>
-<li><strong>SuccessAudit</strong> ✅</li>
-<li><strong>FailureAudit</strong> 🚫</li>
-</ul>
-<p>هرکدام در <strong>Windows Event Viewer</strong> با یک آیکون متفاوت نمایش داده می‌شوند. همچنین می‌توانید به‌طور اختیاری یک <strong>Category</strong> و <strong>Event ID</strong> (هر دو عددی دلخواه) و داده‌ی باینری اضافه کنید.</p>
-<p>📌 متد <strong>CreateEventSource</strong> همچنین اجازه می‌دهد نام یک کامپیوتر دیگر را مشخص کنید؛ در صورتی که دسترسی کافی داشته باشید، می‌توانید در <strong>event log</strong> آن سیستم هم بنویسید.</p>
-<hr>
-<h3>📖 خواندن از <strong>Event Log</strong></h3>
-<p>برای خواندن از یک <strong>event log</strong>:<br>
-1️⃣ کلاس <strong>EventLog</strong> را با نام لاگ موردنظر (و در صورت نیاز، نام یک کامپیوتر دیگر) نمونه‌سازی کنید.<br>
-2️⃣ هر ورودی را از طریق ویژگی <strong>Entries</strong> بخوانید:</p>
-<pre class="hljs"><code>EventLog log = <span class="hljs-keyword">new</span> EventLog(<span class="hljs-string">&quot;Application&quot;</span>);
+</code></pre> <p>مقدار <strong>EventLogEntryType</strong> می‌تواند یکی از موارد زیر باشد:</p><ul> <li><strong>Information</strong> ℹ</li><li><strong>Warning</strong></li><li><strong>Error</strong></li><li><strong>SuccessAudit</strong></li><li><strong>FailureAudit</strong></li></ul> <p>هرکدام در <strong>Windows Event Viewer</strong> با یک آیکون متفاوت نمایش داده می‌شوند. همچنین می‌توانید به‌طور اختیاری یک <strong>Category</strong> و <strong>Event ID</strong> (هر دو عددی دلخواه) و داده‌ی باینری اضافه کنید.</p><p>متد <strong>CreateEventSource</strong> همچنین اجازه می‌دهد نام یک کامپیوتر دیگر را مشخص کنید؛ در صورتی که دسترسی کافی داشته باشید، می‌توانید در <strong>event log</strong> آن سیستم هم بنویسید.</p><hr> <h3>خواندن از <strong>Event Log</strong></h3><p>برای خواندن از یک <strong>event log</strong>:<br> 1⃣ کلاس <strong>EventLog</strong> را با نام لاگ موردنظر (و در صورت نیاز، نام یک کامپیوتر دیگر) نمونه‌سازی کنید.<br> 2⃣ هر ورودی را از طریق ویژگی <strong>Entries</strong> بخوانید:</p><pre class="hljs"><code>EventLog log = <span class="hljs-keyword">new</span> EventLog(<span class="hljs-string">&quot;Application&quot;</span>);
 Console.WriteLine(<span class="hljs-string">&quot;Total entries: &quot;</span> + log.Entries.Count);
 
 EventLogEntry last = log.Entries[log.Entries.Count - <span class="hljs-number">1</span>];
@@ -654,21 +186,9 @@ Console.WriteLine(<span class="hljs-string">&quot;Source:  &quot;</span> + last.
 Console.WriteLine(<span class="hljs-string">&quot;Type:    &quot;</span> + last.EntryType);
 Console.WriteLine(<span class="hljs-string">&quot;Time:    &quot;</span> + last.TimeWritten);
 Console.WriteLine(<span class="hljs-string">&quot;Message: &quot;</span> + last.Message);
-</code></pre>
-<p>🔹 همچنین می‌توانید همه‌ی لاگ‌ها را برای کامپیوتر فعلی (یا یک سیستم دیگر) با متد <strong>EventLog.GetEventLogs</strong> پیمایش کنید (برای دسترسی کامل نیاز به دسترسی مدیریتی دارید):</p>
-<pre class="hljs"><code><span class="hljs-keyword">foreach</span> (EventLog log <span class="hljs-keyword">in</span> EventLog.GetEventLogs())
+</code></pre> <p>همچنین می‌توانید همه‌ی لاگ‌ها را برای کامپیوتر فعلی (یا یک سیستم دیگر) با متد <strong>EventLog.GetEventLogs</strong> پیمایش کنید (برای دسترسی کامل نیاز به دسترسی مدیریتی دارید):</p><pre class="hljs"><code><span class="hljs-keyword">foreach</span> (EventLog log <span class="hljs-keyword">in</span> EventLog.GetEventLogs())
     Console.WriteLine(log.LogDisplayName);
-</code></pre>
-<p>این معمولاً حداقل شامل <strong>Application</strong>، <strong>Security</strong> و <strong>System</strong> خواهد بود.</p>
-<hr>
-<h3>🔔 مانیتورینگ <strong>Event Log</strong></h3>
-<p>می‌توانید به‌محض نوشته‌شدن یک ورودی جدید در <strong>Windows Event Log</strong> مطلع شوید. این کار با <strong>EntryWritten event</strong> انجام می‌شود. این رویداد برای لاگ‌های سیستم محلی فعال می‌شود و فارغ از اینکه کدام برنامه ورودی را نوشته است، رخ خواهد داد.</p>
-<p>برای فعال‌سازی مانیتورینگ لاگ:<br>
-1️⃣ یک نمونه از <strong>EventLog</strong> ایجاد کنید.<br>
-2️⃣ ویژگی <strong>EnableRaisingEvents</strong> را روی true قرار دهید.<br>
-3️⃣ رویداد <strong>EntryWritten</strong> را هندل کنید.</p>
-<p>نمونه کد:</p>
-<pre class="hljs"><code><span class="hljs-keyword">using</span> (<span class="hljs-keyword">var</span> log = <span class="hljs-keyword">new</span> EventLog(<span class="hljs-string">&quot;Application&quot;</span>))
+</code></pre> <p>این معمولاً حداقل شامل <strong>Application</strong>، <strong>Security</strong> و <strong>System</strong> خواهد بود.</p><hr> <h3>مانیتورینگ <strong>Event Log</strong></h3><p>می‌توانید به‌محض نوشته‌شدن یک ورودی جدید در <strong>Windows Event Log</strong> مطلع شوید. این کار با <strong>EntryWritten event</strong> انجام می‌شود. این رویداد برای لاگ‌های سیستم محلی فعال می‌شود و فارغ از اینکه کدام برنامه ورودی را نوشته است، رخ خواهد داد.</p><p>برای فعال‌سازی مانیتورینگ لاگ:<br> 1⃣ یک نمونه از <strong>EventLog</strong> ایجاد کنید.<br> 2⃣ ویژگی <strong>EnableRaisingEvents</strong> را روی true قرار دهید.<br> 3⃣ رویداد <strong>EntryWritten</strong> را هندل کنید.</p><p>نمونه کد:</p><pre class="hljs"><code><span class="hljs-keyword">using</span> (<span class="hljs-keyword">var</span> log = <span class="hljs-keyword">new</span> EventLog(<span class="hljs-string">&quot;Application&quot;</span>))
 {
     log.EnableRaisingEvents = <span class="hljs-literal">true</span>;
     log.EntryWritten += DisplayEntry;
@@ -680,49 +200,7 @@ Console.WriteLine(<span class="hljs-string">&quot;Message: &quot;</span> + last.
     EventLogEntry entry = e.Entry;
     Console.WriteLine(entry.Message);
 }
-</code></pre>
-<h3>⚡ <strong>Performance Counters</strong></h3>
-<p><strong>Performance Counters</strong> یک قابلیت اختصاصی <strong>Windows</strong> است و برای استفاده از آن باید پکیج <strong>NuGet</strong> با نام<br>
-<code>System.Diagnostics.PerformanceCounter</code> نصب شود.<br>
-اگر هدف شما <strong>Linux</strong> یا <strong>macOS</strong> باشد، باید به بخش <strong>“Cross-Platform Diagnostic Tools”</strong> در صفحه‌ی 625 مراجعه کنید تا ابزارهای جایگزین را ببینید.</p>
-<hr>
-<h4>📊 هدف از Performance Counters</h4>
-<p>مکانیزم‌های لاگ‌گیری که تاکنون بررسی کردیم بیشتر برای <strong>تحلیل‌های بعدی</strong> مفید هستند.<br>
-اما اگر بخواهیم از وضعیت <strong>فعلی</strong> یک برنامه یا کل سیستم مطلع شویم، نیاز به رویکرد <strong>بلادرنگ (real-time)</strong> داریم.</p>
-<p>🔹 راهکار <strong>Win32</strong> برای این نیاز، استفاده از زیرساخت <strong>performance-monitoring</strong> است. این زیرساخت شامل:</p>
-<ul>
-<li>مجموعه‌ای از <strong>performance counters</strong> است که توسط سیستم و برنامه‌ها منتشر می‌شوند.</li>
-<li>ابزارهایی در قالب <strong>Microsoft Management Console (MMC) snap-ins</strong> برای مانیتورینگ بلادرنگ این کانترها.</li>
-</ul>
-<hr>
-<h4>🗂️ دسته‌بندی Performance Counters</h4>
-<p>کانترهای عملکرد در گروه‌هایی به نام <strong>category</strong> (یا <strong>performance object</strong> در رابط‌های گرافیکی) قرار دارند.<br>
-هر <strong>category</strong> مجموعه‌ای از کانترهای مرتبط را برای مانیتورینگ یک جنبه از سیستم یا برنامه گرد هم می‌آورد.</p>
-<p>مثال‌ها:</p>
-<ul>
-<li><strong>System</strong> ⚙️</li>
-<li><strong>Processor</strong> 🖥️</li>
-<li><strong>.NET CLR Memory</strong> 💾</li>
-</ul>
-<p>در دسته‌ی <strong>.NET CLR Memory</strong> کانترهایی مانند:</p>
-<ul>
-<li><strong>% Time in GC</strong></li>
-<li><strong># Bytes in All Heaps</strong></li>
-<li><strong>Allocated bytes/sec</strong></li>
-</ul>
-<p>هر <strong>category</strong> می‌تواند یک یا چند <strong>instance</strong> داشته باشد که به‌صورت مستقل قابل مانیتورینگ هستند.<br>
-برای نمونه:</p>
-<ul>
-<li>کانتر <strong>% Processor Time</strong> در دسته‌ی <strong>Processor</strong> این امکان را می‌دهد که <strong>استفاده از CPU</strong> را مانیتور کنید.</li>
-<li>در یک سیستم چندپردازنده‌ای، این کانتر یک instance برای هر CPU دارد و شما می‌توانید مصرف هر CPU را جداگانه بررسی کنید.</li>
-</ul>
-<hr>
-<h4>⚠️ نکته‌ی مهم درباره‌ی دسترسی</h4>
-<p>خواندن <strong>performance counters</strong> یا <strong>categories</strong> ممکن است نیازمند دسترسی <strong>administrator</strong> روی سیستم محلی یا مقصد باشد، بسته به چیزی که می‌خواهید بررسی کنید.</p>
-<hr>
-<h3>🔍 Enumerating the Available Counters</h3>
-<p>کد زیر همه‌ی <strong>performance counters</strong> موجود در سیستم را پیمایش می‌کند. اگر دسته‌ای <strong>instance</strong> داشته باشد، کانترهای مربوط به هر instance نیز بررسی می‌شوند:</p>
-<pre class="hljs"><code>PerformanceCounterCategory[] cats =
+</code></pre> <h3><strong>Performance Counters</strong></h3><p><strong>Performance Counters</strong> یک قابلیت اختصاصی <strong>Windows</strong> است و برای استفاده از آن باید پکیج <strong>NuGet</strong> با نام<br><code>System.Diagnostics.PerformanceCounter</code> نصب شود.<br> اگر هدف شما <strong>Linux</strong> یا <strong>macOS</strong> باشد، باید به بخش <strong>“Cross-Platform Diagnostic Tools”</strong> در صفحه‌ی 625 مراجعه کنید تا ابزارهای جایگزین را ببینید.</p><hr> <h4>هدف از Performance Counters</h4><p>مکانیزم‌های لاگ‌گیری که تاکنون بررسی کردیم بیشتر برای <strong>تحلیل‌های بعدی</strong> مفید هستند.<br> اما اگر بخواهیم از وضعیت <strong>فعلی</strong> یک برنامه یا کل سیستم مطلع شویم، نیاز به رویکرد <strong>بلادرنگ (real-time)</strong> داریم.</p><p>راهکار <strong>Win32</strong> برای این نیاز، استفاده از زیرساخت <strong>performance-monitoring</strong> است. این زیرساخت شامل:</p><ul> <li>مجموعه‌ای از <strong>performance counters</strong> است که توسط سیستم و برنامه‌ها منتشر می‌شوند.</li><li>ابزارهایی در قالب <strong>Microsoft Management Console (MMC) snap-ins</strong> برای مانیتورینگ بلادرنگ این کانترها.</li></ul> <hr><h4>دسته‌بندی Performance Counters</h4><p>کانترهای عملکرد در گروه‌هایی به نام <strong>category</strong> (یا <strong>performance object</strong> در رابط‌های گرافیکی) قرار دارند.<br> هر <strong>category</strong> مجموعه‌ای از کانترهای مرتبط را برای مانیتورینگ یک جنبه از سیستم یا برنامه گرد هم می‌آورد.</p><p>مثال‌ها:</p><ul> <li><strong>System</strong></li><li><strong>Processor</strong></li><li><strong>.NET CLR Memory</strong></li></ul> <p>در دسته‌ی <strong>.NET CLR Memory</strong> کانترهایی مانند:</p><ul> <li><strong>% Time in GC</strong></li><li><strong># Bytes in All Heaps</strong></li><li><strong>Allocated bytes/sec</strong></li></ul> <p>هر <strong>category</strong> می‌تواند یک یا چند <strong>instance</strong> داشته باشد که به‌صورت مستقل قابل مانیتورینگ هستند.<br> برای نمونه:</p><ul> <li>کانتر <strong>% Processor Time</strong> در دسته‌ی <strong>Processor</strong> این امکان را می‌دهد که <strong>استفاده از CPU</strong> را مانیتور کنید.</li><li>در یک سیستم چندپردازنده‌ای، این کانتر یک instance برای هر CPU دارد و شما می‌توانید مصرف هر CPU را جداگانه بررسی کنید.</li></ul> <hr><h4>نکته‌ی مهم درباره‌ی دسترسی</h4><p>خواندن <strong>performance counters</strong> یا <strong>categories</strong> ممکن است نیازمند دسترسی <strong>administrator</strong> روی سیستم محلی یا مقصد باشد، بسته به چیزی که می‌خواهید بررسی کنید.</p><hr> <h3>Enumerating the Available Counters</h3><p>کد زیر همه‌ی <strong>performance counters</strong> موجود در سیستم را پیمایش می‌کند. اگر دسته‌ای <strong>instance</strong> داشته باشد، کانترهای مربوط به هر instance نیز بررسی می‌شوند:</p><pre class="hljs"><code>PerformanceCounterCategory[] cats =
     PerformanceCounterCategory.GetCategories();
 
 <span class="hljs-keyword">foreach</span> (PerformanceCounterCategory cat <span class="hljs-keyword">in</span> cats)
@@ -746,14 +224,7 @@ Console.WriteLine(<span class="hljs-string">&quot;Message: &quot;</span> + last.
         }
     }
 }
-</code></pre>
-<p>📌 خروجی این کد بیش از <strong>۱۰٬۰۰۰ خط</strong> خواهد بود!<br>
-همچنین اجرای آن کمی طول می‌کشد، چون متد <strong>PerformanceCounterCategory.InstanceExists</strong> پیاده‌سازی کارآمدی ندارد.<br>
-در یک سیستم واقعی، بهتر است اطلاعات جزئی‌تر را فقط در صورت نیاز دریافت کنید.</p>
-<hr>
-<h3>📝 استخراج فقط Performance Counters مربوط به .NET</h3>
-<p>نمونه کد زیر با استفاده از <strong>LINQ</strong> فقط کانترهای مربوط به <strong>.NET</strong> را واکشی کرده و نتیجه را در یک فایل XML ذخیره می‌کند:</p>
-<pre class="hljs"><code><span class="hljs-keyword">var</span> x =
+</code></pre> <p>خروجی این کد بیش از <strong>۱۰٬۰۰۰ خط</strong> خواهد بود!<br> همچنین اجرای آن کمی طول می‌کشد، چون متد <strong>PerformanceCounterCategory.InstanceExists</strong> پیاده‌سازی کارآمدی ندارد.<br> در یک سیستم واقعی، بهتر است اطلاعات جزئی‌تر را فقط در صورت نیاز دریافت کنید.</p><hr> <h3>استخراج فقط Performance Counters مربوط به .NET</h3><p>نمونه کد زیر با استفاده از <strong>LINQ</strong> فقط کانترهای مربوط به <strong>.NET</strong> را واکشی کرده و نتیجه را در یک فایل XML ذخیره می‌کند:</p><pre class="hljs"><code><span class="hljs-keyword">var</span> x =
   <span class="hljs-keyword">new</span> XElement(<span class="hljs-string">&quot;counters&quot;</span>,
     <span class="hljs-keyword">from</span> PerformanceCounterCategory cat <span class="hljs-keyword">in</span>
          PerformanceCounterCategory.GetCategories()
@@ -777,32 +248,13 @@ Console.WriteLine(<span class="hljs-string">&quot;Message: &quot;</span> + last.
   )</span>;
 
 x.Save(<span class="hljs-string">&quot;counters.xml&quot;</span>);
-</code></pre>
-<h3>📊 <strong>خواندن داده‌های Performance Counter</strong></h3>
-<p>برای گرفتن مقدار یک <strong>performance counter</strong> باید یک شیء از کلاس <strong>PerformanceCounter</strong> بسازید و سپس یکی از متدهای زیر را فراخوانی کنید:</p>
-<ul>
-<li><strong>NextValue</strong> → یک مقدار ساده از نوع <code>float</code> برمی‌گرداند.</li>
-<li><strong>NextSample</strong> → یک شیء از نوع <code>CounterSample</code> برمی‌گرداند که شامل ویژگی‌های پیشرفته‌تر مثل <code>CounterFrequency</code>، <code>TimeStamp</code>، <code>BaseValue</code> و <code>RawValue</code> است.</li>
-</ul>
-<hr>
-<h4>🖥️ نمونه: نمایش مصرف CPU</h4>
-<p>کانستراکتور کلاس <strong>PerformanceCounter</strong> سه پارامتر می‌گیرد:</p>
-<ul>
-<li>نام <strong>category</strong></li>
-<li>نام <strong>counter</strong></li>
-<li>یک <strong>instance</strong> اختیاری</li>
-</ul>
-<p>برای نمایش درصد استفاده‌ی پردازنده (CPU) روی همه‌ی هسته‌ها:</p>
-<pre class="hljs"><code><span class="hljs-keyword">using</span> PerformanceCounter pc = <span class="hljs-keyword">new</span> PerformanceCounter(
+</code></pre> <h3><strong>خواندن داده‌های Performance Counter</strong></h3><p>برای گرفتن مقدار یک <strong>performance counter</strong> باید یک شیء از کلاس <strong>PerformanceCounter</strong> بسازید و سپس یکی از متدهای زیر را فراخوانی کنید:</p><ul> <li><strong>NextValue</strong> → یک مقدار ساده از نوع <code>float</code> برمی‌گرداند.</li><li><strong>NextSample</strong> → یک شیء از نوع <code>CounterSample</code> برمی‌گرداند که شامل ویژگی‌های پیشرفته‌تر مثل <code>CounterFrequency</code>، <code>TimeStamp</code>، <code>BaseValue</code> و <code>RawValue</code> است.</li></ul> <hr><h4>نمونه: نمایش مصرف CPU</h4><p>کانستراکتور کلاس <strong>PerformanceCounter</strong> سه پارامتر می‌گیرد:</p><ul> <li>نام <strong>category</strong></li><li>نام <strong>counter</strong></li><li>یک <strong>instance</strong> اختیاری</li></ul> <p>برای نمایش درصد استفاده‌ی پردازنده (CPU) روی همه‌ی هسته‌ها:</p><pre class="hljs"><code><span class="hljs-keyword">using</span> PerformanceCounter pc = <span class="hljs-keyword">new</span> PerformanceCounter(
     <span class="hljs-string">&quot;Processor&quot;</span>,
     <span class="hljs-string">&quot;% Processor Time&quot;</span>,
     <span class="hljs-string">&quot;_Total&quot;</span>);
 
 Console.WriteLine(pc.NextValue());
-</code></pre>
-<hr>
-<h4>💾 نمونه: نمایش مصرف واقعی حافظه‌ی خصوصی پردازش جاری</h4>
-<pre class="hljs"><code><span class="hljs-built_in">string</span> procName = Process.GetCurrentProcess().ProcessName;
+</code></pre> <hr><h4>نمونه: نمایش مصرف واقعی حافظه‌ی خصوصی پردازش جاری</h4><pre class="hljs"><code><span class="hljs-built_in">string</span> procName = Process.GetCurrentProcess().ProcessName;
 
 <span class="hljs-keyword">using</span> PerformanceCounter pc = <span class="hljs-keyword">new</span> PerformanceCounter(
     <span class="hljs-string">&quot;Process&quot;</span>,
@@ -810,12 +262,7 @@ Console.WriteLine(pc.NextValue());
     procName);
 
 Console.WriteLine(pc.NextValue());
-</code></pre>
-<hr>
-<h3>🔄 مانیتورینگ تغییرات (Polling)</h3>
-<p>کلاس <strong>PerformanceCounter</strong> رویداد <strong>ValueChanged</strong> ندارد. بنابراین برای مانیتورینگ تغییرات باید <strong>polling</strong> انجام دهید.<br>
-در مثال زیر، هر <strong>۲۰۰ میلی‌ثانیه</strong> مقدار بررسی می‌شود تا زمانی که با <strong>EventWaitHandle</strong> سیگنال توقف ارسال شود:</p>
-<pre class="hljs"><code><span class="hljs-comment">// نیازمند import کردن System.Threading و System.Diagnostics</span>
+</code></pre> <hr><h3>مانیتورینگ تغییرات (Polling)</h3><p>کلاس <strong>PerformanceCounter</strong> رویداد <strong>ValueChanged</strong> ندارد. بنابراین برای مانیتورینگ تغییرات باید <strong>polling</strong> انجام دهید.<br> در مثال زیر، هر <strong>۲۰۰ میلی‌ثانیه</strong> مقدار بررسی می‌شود تا زمانی که با <strong>EventWaitHandle</strong> سیگنال توقف ارسال شود:</p><pre class="hljs"><code><span class="hljs-comment">// نیازمند import کردن System.Threading و System.Diagnostics</span>
 <span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Monitor</span>(<span class="hljs-params"><span class="hljs-built_in">string</span> category, <span class="hljs-built_in">string</span> counter, <span class="hljs-built_in">string</span> instance,
                    EventWaitHandle stopper</span>)</span>
 {
@@ -844,10 +291,7 @@ Console.WriteLine(pc.NextValue());
             }
         }
 }
-</code></pre>
-<hr>
-<h4>⚙️ اجرای همزمان برای CPU و دیسک</h4>
-<pre class="hljs"><code>EventWaitHandle stopper = <span class="hljs-keyword">new</span> ManualResetEvent(<span class="hljs-literal">false</span>);
+</code></pre> <hr><h4>اجرای همزمان برای CPU و دیسک</h4><pre class="hljs"><code>EventWaitHandle stopper = <span class="hljs-keyword">new</span> ManualResetEvent(<span class="hljs-literal">false</span>);
 
 <span class="hljs-keyword">new</span> Thread(() =&gt;
     Monitor(<span class="hljs-string">&quot;Processor&quot;</span>, <span class="hljs-string">&quot;% Processor Time&quot;</span>, <span class="hljs-string">&quot;_Total&quot;</span>, stopper)
@@ -861,16 +305,7 @@ Console.WriteLine(<span class="hljs-string">&quot;Monitoring - press any key to 
 Console.ReadKey();
 
 stopper.Set();
-</code></pre>
-<hr>
-<h3>🛠️ ایجاد کانتر و نوشتن داده در Performance Counter</h3>
-<p>قبل از نوشتن داده باید:</p>
-<ol>
-<li>یک <strong>category</strong> بسازید.</li>
-<li>همه‌ی <strong>counters</strong> مربوط به آن دسته را <strong>در یک مرحله</strong> تعریف کنید.</li>
-</ol>
-<p>مثال:</p>
-<pre class="hljs"><code><span class="hljs-built_in">string</span> category = <span class="hljs-string">&quot;Nutshell Monitoring&quot;</span>;
+</code></pre> <hr><h3>ایجاد کانتر و نوشتن داده در Performance Counter</h3><p>قبل از نوشتن داده باید:</p><ol> <li>یک <strong>category</strong> بسازید.</li><li>همه‌ی <strong>counters</strong> مربوط به آن دسته را <strong>در یک مرحله</strong> تعریف کنید.</li></ol> <p>مثال:</p><pre class="hljs"><code><span class="hljs-built_in">string</span> category = <span class="hljs-string">&quot;Nutshell Monitoring&quot;</span>;
 <span class="hljs-comment">// دو کانتر در این دسته تعریف می‌کنیم</span>
 <span class="hljs-built_in">string</span> eatenPerMin = <span class="hljs-string">&quot;Macadamias eaten so far&quot;</span>;
 <span class="hljs-built_in">string</span> tooHard = <span class="hljs-string">&quot;Macadamias deemed too hard&quot;</span>;
@@ -895,14 +330,7 @@ stopper.Set();
         PerformanceCounterCategoryType.SingleInstance,
         cd);
 }
-</code></pre>
-<p>📌 این کانترها بعد از ایجاد، در ابزار مانیتورینگ Windows Performance ظاهر می‌شوند (گزینه‌ی <strong>Add Counters</strong>).<br>
-اگر بخواهید بعدها کانترهای بیشتری اضافه کنید، باید اول <strong>کل category را حذف</strong> کنید (<code>PerformanceCounterCategory.Delete</code>).</p>
-<p>⚠️ ایجاد و حذف performance counters نیازمند <strong>دسترسی administrator</strong> است، و معمولاً این کار در زمان نصب برنامه انجام می‌شود.</p>
-<hr>
-<h3>✍️ نوشتن مقدار در Counter</h3>
-<p>بعد از ایجاد یک کانتر، می‌توانید مقدار آن را تغییر دهید. کافی است یک شیء <strong>PerformanceCounter</strong> بسازید، ویژگی <strong>ReadOnly</strong> را <code>false</code> کنید و سپس مقدار <strong>RawValue</strong> یا متدهای <strong>Increment / IncrementBy</strong> را فراخوانی کنید:</p>
-<pre class="hljs"><code><span class="hljs-built_in">string</span> category = <span class="hljs-string">&quot;Nutshell Monitoring&quot;</span>;
+</code></pre> <p>این کانترها بعد از ایجاد، در ابزار مانیتورینگ Windows Performance ظاهر می‌شوند (گزینه‌ی <strong>Add Counters</strong>).<br> اگر بخواهید بعدها کانترهای بیشتری اضافه کنید، باید اول <strong>کل category را حذف</strong> کنید (<code>PerformanceCounterCategory.Delete</code>).</p><p>ایجاد و حذف performance counters نیازمند <strong>دسترسی administrator</strong> است، و معمولاً این کار در زمان نصب برنامه انجام می‌شود.</p><hr> <h3>نوشتن مقدار در Counter</h3><p>بعد از ایجاد یک کانتر، می‌توانید مقدار آن را تغییر دهید. کافی است یک شیء <strong>PerformanceCounter</strong> بسازید، ویژگی <strong>ReadOnly</strong> را <code>false</code> کنید و سپس مقدار <strong>RawValue</strong> یا متدهای <strong>Increment / IncrementBy</strong> را فراخوانی کنید:</p><pre class="hljs"><code><span class="hljs-built_in">string</span> category = <span class="hljs-string">&quot;Nutshell Monitoring&quot;</span>;
 <span class="hljs-built_in">string</span> eatenPerMin = <span class="hljs-string">&quot;Macadamias eaten so far&quot;</span>;
 
 <span class="hljs-keyword">using</span> (PerformanceCounter pc = <span class="hljs-keyword">new</span> PerformanceCounter(category, eatenPerMin, <span class="hljs-string">&quot;&quot;</span>))
@@ -915,57 +343,12 @@ stopper.Set();
 
     Console.WriteLine(pc.NextValue());    <span class="hljs-comment">// خروجی: 1011</span>
 }
-</code></pre>
-<hr>
-<p>✨ به این ترتیب می‌توانیم هم مقادیر <strong>performance counters</strong> را بخوانیم و هم کانترهای اختصاصی خودمان را ایجاد و مقداردهی کنیم.</p>
-<h3>کلاس Stopwatch ⏱️</h3>
-<p>کلاس <strong>Stopwatch</strong> یک مکانیزم راحت برای اندازه‌گیری زمان اجرای کد فراهم می‌کند. این کلاس از <strong>بالاترین دقتی</strong> که سیستم‌عامل و سخت‌افزار ارائه می‌دهند استفاده می‌کند (معمولاً کمتر از یک میکروثانیه).<br>
-🔹 در مقابل، <code>DateTime.Now</code> و <code>Environment.TickCount</code> دقتی حدود <strong>۱۵ میلی‌ثانیه</strong> دارند.</p>
-<p>برای استفاده:</p>
-<ul>
-<li>می‌توانید با <code>StartNew</code> یک Stopwatch ایجاد کرده و بلافاصله شروع به کار کنید.</li>
-<li>یا دستی نمونه بسازید و سپس <code>Start</code> را صدا بزنید.</li>
-</ul>
-<p>ویژگی <code>Elapsed</code> یک <strong>TimeSpan</strong> برمی‌گرداند:</p>
-<pre class="hljs"><code>Stopwatch s = Stopwatch.StartNew();
+</code></pre> <hr><p>به این ترتیب می‌توانیم هم مقادیر <strong>performance counters</strong> را بخوانیم و هم کانترهای اختصاصی خودمان را ایجاد و مقداردهی کنیم.</p><h3>کلاس Stopwatch ⏱</h3><p>کلاس <strong>Stopwatch</strong> یک مکانیزم راحت برای اندازه‌گیری زمان اجرای کد فراهم می‌کند. این کلاس از <strong>بالاترین دقتی</strong> که سیستم‌عامل و سخت‌افزار ارائه می‌دهند استفاده می‌کند (معمولاً کمتر از یک میکروثانیه).<br> در مقابل، <code>DateTime.Now</code> و <code>Environment.TickCount</code> دقتی حدود <strong>۱۵ میلی‌ثانیه</strong> دارند.</p><p>برای استفاده:</p><ul> <li>می‌توانید با <code>StartNew</code> یک Stopwatch ایجاد کرده و بلافاصله شروع به کار کنید.</li><li>یا دستی نمونه بسازید و سپس <code>Start</code> را صدا بزنید.</li></ul> <p>ویژگی <code>Elapsed</code> یک <strong>TimeSpan</strong> برمی‌گرداند:</p><pre class="hljs"><code>Stopwatch s = Stopwatch.StartNew();
 System.IO.File.WriteAllText(<span class="hljs-string">&quot;test.txt&quot;</span>, <span class="hljs-keyword">new</span> <span class="hljs-built_in">string</span>(<span class="hljs-string">&#x27;*&#x27;</span>, <span class="hljs-number">30000000</span>));
 Console.WriteLine(s.Elapsed);    <span class="hljs-comment">// 00:00:01.4322661</span>
-</code></pre>
-<p>🔹 ویژگی‌های دیگر:</p>
-<ul>
-<li><code>ElapsedTicks</code> → تعداد تیک‌های گذشته (long).</li>
-<li><code>ElapsedMilliseconds</code> → زمان گذشته به میلی‌ثانیه (معمولاً راحت‌ترین).</li>
-<li>برای تبدیل تیک‌ها به ثانیه: <code>ticks / Stopwatch.Frequency</code>.</li>
-</ul>
-<p>فراخوانی <code>Stop</code> باعث فریز شدن <code>Elapsed</code> و <code>ElapsedTicks</code> می‌شود.<br>
-✅ توجه: حتی وقتی Stopwatch در حال اجراست، هیچ فعالیت پس‌زمینه‌ای اضافه ایجاد نمی‌کند، پس <code>Stop</code> اختیاری است.</p>
-<hr>
-<h3>ابزارهای تشخیصی کراس‌پلتفرم 🔧🌍</h3>
-<p>در این بخش، ابزارهای تشخیصی قابل استفاده در همه پلتفرم‌ها (.NET) معرفی می‌شوند:</p>
-<ul>
-<li><strong>dotnet-counters</strong> → ارائه نمای کلی از وضعیت یک اپلیکیشن در حال اجرا (حافظه و CPU).</li>
-<li><strong>dotnet-trace</strong> → مانیتورینگ دقیق‌تر عملکرد و رویدادها.</li>
-<li><strong>dotnet-dump</strong> → گرفتن <em>memory dump</em> هنگام نیاز یا بعد از کرش.</li>
-</ul>
-<p>📌 این ابزارها نیاز به دسترسی ادمین ندارند و هم برای توسعه و هم محیط عملیاتی مناسب هستند.</p>
-<hr>
-<h3>ابزار dotnet-counters 📊</h3>
-<p>ابزار <strong>dotnet-counters</strong> مصرف حافظه و CPU یک پروسه .NET را مانیتور کرده و داده‌ها را در کنسول (یا فایل) نمایش می‌دهد.</p>
-<h4>نصب</h4>
-<pre class="hljs"><code>dotnet tool install --global dotnet-counters
-</code></pre>
-<h4>مانیتور کردن یک پروسه</h4>
-<pre class="hljs"><code>dotnet-counters monitor System.Runtime --process-id &lt;&lt;<span class="hljs-string">ProcessID&gt;&gt;
-</span></code></pre>
-<ul>
-<li><code>System.Runtime</code> یعنی همه‌ی کانترهای دسته <strong>System.Runtime</strong> را مانیتور کنیم.</li>
-<li>می‌توانید دسته یا نام کانتر خاصی بدهید.</li>
-<li>دستور <code>dotnet-counters list</code> همه دسته‌ها و کانترهای موجود را لیست می‌کند.</li>
-</ul>
-<hr>
-<h3>خروجی نمونه 📟</h3>
-<p>(به‌صورت مداوم آپدیت می‌شود)</p>
-<pre class="hljs"><code>Press p to pause, r to resume, q to quit.
+</code></pre> <p>ویژگی‌های دیگر:</p><ul> <li><code>ElapsedTicks</code> → تعداد تیک‌های گذشته (long).</li><li><code>ElapsedMilliseconds</code> → زمان گذشته به میلی‌ثانیه (معمولاً راحت‌ترین).</li><li>برای تبدیل تیک‌ها به ثانیه: <code>ticks / Stopwatch.Frequency</code>.</li></ul> <p>فراخوانی <code>Stop</code> باعث فریز شدن <code>Elapsed</code> و <code>ElapsedTicks</code> می‌شود.<br> توجه: حتی وقتی Stopwatch در حال اجراست، هیچ فعالیت پس‌زمینه‌ای اضافه ایجاد نمی‌کند، پس <code>Stop</code> اختیاری است.</p><hr> <h3>ابزارهای تشخیصی کراس‌پلتفرم</h3><p>در این بخش، ابزارهای تشخیصی قابل استفاده در همه پلتفرم‌ها (.NET) معرفی می‌شوند:</p><ul> <li><strong>dotnet-counters</strong> → ارائه نمای کلی از وضعیت یک اپلیکیشن در حال اجرا (حافظه و CPU).</li><li><strong>dotnet-trace</strong> → مانیتورینگ دقیق‌تر عملکرد و رویدادها.</li><li><strong>dotnet-dump</strong> → گرفتن <em>memory dump</em> هنگام نیاز یا بعد از کرش.</li></ul> <p>این ابزارها نیاز به دسترسی ادمین ندارند و هم برای توسعه و هم محیط عملیاتی مناسب هستند.</p><hr> <h3>ابزار dotnet-counters</h3><p>ابزار <strong>dotnet-counters</strong> مصرف حافظه و CPU یک پروسه .NET را مانیتور کرده و داده‌ها را در کنسول (یا فایل) نمایش می‌دهد.</p><h4>نصب</h4><pre class="hljs"><code>dotnet tool install --global dotnet-counters
+</code></pre> <h4>مانیتور کردن یک پروسه</h4><pre class="hljs"><code>dotnet-counters monitor System.Runtime --process-id &lt;&lt;<span class="hljs-string">ProcessID&gt;&gt;
+</span></code></pre> <ul><li><code>System.Runtime</code> یعنی همه‌ی کانترهای دسته <strong>System.Runtime</strong> را مانیتور کنیم.</li><li>می‌توانید دسته یا نام کانتر خاصی بدهید.</li><li>دستور <code>dotnet-counters list</code> همه دسته‌ها و کانترهای موجود را لیست می‌کند.</li></ul> <hr><h3>خروجی نمونه</h3><p>(به‌صورت مداوم آپدیت می‌شود)</p><pre class="hljs"><code>Press p to pause, r to resume, q to quit.
    Status: Running
 [System.Runtime]
    # of Assemblies Loaded                            63
@@ -987,38 +370,9 @@ Console.WriteLine(s.Elapsed);    <span class="hljs-comment">// 00:00:01.4322661<
    ThreadPool Queue Length                            0
    ThreadPool Threads Count                           9
    Working Set (MB)                                  52
-</code></pre>
-<p><strong>همه‌ی دستورات موجود:</strong></p>
-<div align="center">
-<p><img src="../../../assets/image/13/Table-13-1.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<p>پارامترهای زیر پشتیبانی می‌شوند:</p>
-<div align="center">
-<p><img src="../../../assets/image/13/Table-13-2.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<p>dotnet-trace<br>
-ردیابی‌ها (Traces) سوابق زمان‌بندی‌شده‌ای از رویدادها در برنامه شما هستند، مانند فراخوانی یک متد یا اجرای یک پرس‌وجوی پایگاه داده. ردیابی‌ها می‌توانند شامل معیارهای عملکرد و رویدادهای سفارشی نیز باشند و می‌توانند اطلاعات محلی مانند مقادیر متغیرهای محلی را نیز در بر بگیرند. به طور سنتی، .NET Framework و فریم‌ورک‌هایی مانند <a href="http://ASP.NET">ASP.NET</a> از ETW استفاده می‌کردند. در .NET 5، ردیابی‌های برنامه هنگام اجرای روی ویندوز در ETW و روی لینوکس در LTTng نوشته می‌شوند.</p>
-<p>برای نصب این ابزار، دستور زیر را اجرا کنید:</p>
-<pre class="hljs"><code>dotnet tool install --global dotnet-trace
-</code></pre>
-<p>برای شروع ضبط رویدادهای یک برنامه، دستور زیر را اجرا کنید:</p>
-<pre class="hljs"><code>dotnet-trace collect --process-id &lt;&lt;ProcessId&gt;&gt;
-</code></pre>
-<p>این دستور dotnet-trace را با پروفایل پیش‌فرض اجرا می‌کند که رویدادهای CPU و زمان اجرای .NET را جمع‌آوری کرده و در فایلی به نام <code>trace.nettrace</code> ذخیره می‌کند. می‌توانید با گزینه <code>--profile</code> پروفایل‌های دیگر را مشخص کنید:</p>
-<ul>
-<li><code>gc-verbose</code> ردیابی جمع‌آوری زباله و تخصیص نمونه‌ای اشیا را انجام می‌دهد.</li>
-<li><code>gc-collect</code> جمع‌آوری زباله را با سربار کم ردیابی می‌کند.</li>
-</ul>
-<p>گزینه <code>-o</code> به شما اجازه می‌دهد نام فایل خروجی متفاوتی مشخص کنید.</p>
-<p>خروجی پیش‌فرض یک فایل <code>.netperf</code> است که می‌توان آن را مستقیماً در ویندوز با ابزار <strong>PerfView</strong> تحلیل کرد. همچنین می‌توانید dotnet-trace را وادار کنید فایلی سازگار با <strong>Speedscope</strong> ایجاد کند، که یک سرویس تحلیل آنلاین رایگان در <a href="https://speedscope.app">https://speedscope.app</a> است. برای ایجاد فایل Speedscope (<code>.speedscope.json</code>) از گزینه <code>--format speedscope</code> استفاده کنید.</p>
-<p>آخرین نسخه PerfView را می‌توانید از <a href="https://github.com/microsoft/perfview">https://github.com/microsoft/perfview</a> دانلود کنید. نسخه‌ای که با ویندوز 10 عرضه می‌شود ممکن است از فایل‌های <code>.netperf</code> پشتیبانی نکند.</p>
-<p>دستورات زیر پشتیبانی می‌شوند:</p>
-<div align="center">
-<p><img src="../../../assets/image/13/Table-13-3.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<h3>رویدادهای سفارشی Trace 🎯</h3>
-<p>برنامه شما می‌تواند با تعریف یک <strong>EventSource</strong> سفارشی، رویدادهای اختصاصی تولید کند:</p>
-<pre class="hljs"><code>[<span class="hljs-meta">EventSource(Name = <span class="hljs-string">&quot;MyTestSource&quot;</span>)</span>]
+</code></pre> <p><strong>همه‌ی دستورات موجود:</strong></p><div align="center"> <p><img src="../../../assets/image/13/Table-13-1.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <p>پارامترهای زیر پشتیبانی می‌شوند:</p><div align="center"> <p><img src="../../../assets/image/13/Table-13-2.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <p>dotnet-trace<br> ردیابی‌ها (Traces) سوابق زمان‌بندی‌شده‌ای از رویدادها در برنامه شما هستند، مانند فراخوانی یک متد یا اجرای یک پرس‌وجوی پایگاه داده. ردیابی‌ها می‌توانند شامل معیارهای عملکرد و رویدادهای سفارشی نیز باشند و می‌توانند اطلاعات محلی مانند مقادیر متغیرهای محلی را نیز در بر بگیرند. به طور سنتی، .NET Framework و فریم‌ورک‌هایی مانند <a href="http://ASP.NET">ASP.NET</a> از ETW استفاده می‌کردند. در .NET 5، ردیابی‌های برنامه هنگام اجرای روی ویندوز در ETW و روی لینوکس در LTTng نوشته می‌شوند.</p><p>برای نصب این ابزار، دستور زیر را اجرا کنید:</p><pre class="hljs"><code>dotnet tool install --global dotnet-trace
+</code></pre> <p>برای شروع ضبط رویدادهای یک برنامه، دستور زیر را اجرا کنید:</p><pre class="hljs"><code>dotnet-trace collect --process-id &lt;&lt;ProcessId&gt;&gt;
+</code></pre> <p>این دستور dotnet-trace را با پروفایل پیش‌فرض اجرا می‌کند که رویدادهای CPU و زمان اجرای .NET را جمع‌آوری کرده و در فایلی به نام <code>trace.nettrace</code> ذخیره می‌کند. می‌توانید با گزینه <code>--profile</code> پروفایل‌های دیگر را مشخص کنید:</p><ul> <li><code>gc-verbose</code> ردیابی جمع‌آوری زباله و تخصیص نمونه‌ای اشیا را انجام می‌دهد.</li><li><code>gc-collect</code> جمع‌آوری زباله را با سربار کم ردیابی می‌کند.</li></ul> <p>گزینه <code>-o</code> به شما اجازه می‌دهد نام فایل خروجی متفاوتی مشخص کنید.</p><p>خروجی پیش‌فرض یک فایل <code>.netperf</code> است که می‌توان آن را مستقیماً در ویندوز با ابزار <strong>PerfView</strong> تحلیل کرد. همچنین می‌توانید dotnet-trace را وادار کنید فایلی سازگار با <strong>Speedscope</strong> ایجاد کند، که یک سرویس تحلیل آنلاین رایگان در <a href="https://speedscope.app">https://speedscope.app</a> است. برای ایجاد فایل Speedscope (<code>.speedscope.json</code>) از گزینه <code>--format speedscope</code> استفاده کنید.</p><p>آخرین نسخه PerfView را می‌توانید از <a href="https://github.com/microsoft/perfview">https://github.com/microsoft/perfview</a> دانلود کنید. نسخه‌ای که با ویندوز 10 عرضه می‌شود ممکن است از فایل‌های <code>.netperf</code> پشتیبانی نکند.</p><p>دستورات زیر پشتیبانی می‌شوند:</p><div align="center"> <p><img src="../../../assets/image/13/Table-13-3.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <h3>رویدادهای سفارشی Trace</h3><p>برنامه شما می‌تواند با تعریف یک <strong>EventSource</strong> سفارشی، رویدادهای اختصاصی تولید کند:</p><pre class="hljs"><code>[<span class="hljs-meta">EventSource(Name = <span class="hljs-string">&quot;MyTestSource&quot;</span>)</span>]
 <span class="hljs-keyword">public</span> <span class="hljs-keyword">sealed</span> <span class="hljs-keyword">class</span> <span class="hljs-title">MyEventSource</span> : <span class="hljs-title">EventSource</span>
 {
     <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> MyEventSource Instance = <span class="hljs-keyword">new</span> MyEventSource();
@@ -1032,153 +386,223 @@ Console.WriteLine(s.Elapsed);    <span class="hljs-comment">// 00:00:01.4322661<
         WriteEvent(<span class="hljs-number">1</span>, message, someNumber);
     }
 }
-</code></pre>
-<p>متد <strong>WriteEvent</strong> دارای چند نسخه (Overload) است و می‌تواند ترکیب‌های مختلفی از انواع ساده (به‌ویژه رشته‌ها و اعداد صحیح) را بپذیرد. سپس می‌توانید به این صورت از آن استفاده کنید:</p>
-<pre class="hljs"><code>MyEventSource.Instance.Log(<span class="hljs-string">&quot;Something&quot;</span>, <span class="hljs-number">123</span>);
-</code></pre>
-<p>هنگام استفاده از <strong>dotnet-trace</strong>، باید نام هر منبع رویداد سفارشی که می‌خواهید ثبت شود را مشخص کنید:</p>
-<pre class="hljs"><code>dotnet-trace collect --process-id &lt;&lt;<span class="hljs-string">ProcessId&gt;&gt; --providers MyTestSource
-</span></code></pre>
-<hr>
-<h3>dotnet-dump 💾</h3>
-<p>یک <strong>Dump</strong>، که گاهی به آن <strong>Core Dump</strong> هم گفته می‌شود، تصویری از وضعیت حافظه مجازی یک پردازش است. شما می‌توانید یک پردازش در حال اجرا را به‌صورت دستی Dump کنید یا سیستم‌عامل را تنظیم کنید تا هنگام کرش برنامه، این Dump تولید شود.</p>
-<h4>در اوبونتو لینوکس</h4>
-<p>برای فعال کردن Core Dump هنگام کرش برنامه:</p>
-<pre class="hljs"><code><span class="hljs-built_in">ulimit</span> -c unlimited
-</code></pre>
-<p>(مراحل ممکن است بسته به توزیع لینوکس متفاوت باشد)</p>
-<h4>در ویندوز</h4>
-<p>از <strong>regedit.exe</strong> برای ایجاد یا ویرایش کلید زیر در Hive مربوط به Local Machine استفاده کنید:</p>
-<pre class="hljs"><code>SOFTWARE\Microsoft\Windows\Windows Error Reporting\LocalDumps
-</code></pre>
-<p>زیر این مسیر، یک کلید با نام همان فایل اجرایی خود اضافه کنید (مثلاً <code>foo.exe</code>) و سپس کلیدهای زیر را اضافه نمایید:</p>
-<ul>
-<li><strong>DumpFolder (REG_EXPAND_SZ):</strong> مسیر ذخیره فایل‌های Dump</li>
-<li><strong>DumpType (REG_DWORD):</strong> مقدار ۲ برای درخواست Full Dump</li>
-<li><strong>(اختیاری) DumpCount (REG_DWORD):</strong> حداکثر تعداد فایل‌های Dump قبل از حذف قدیمی‌ترین آن‌ها</li>
-</ul>
-<p>برای نصب ابزار، دستور زیر را اجرا کنید:</p>
-<pre class="hljs"><code>dotnet tool install --global dotnet-dump
-</code></pre>
-<p>پس از نصب، می‌توانید یک Dump به‌صورت دستی ایجاد کنید (بدون توقف پردازش):</p>
-<pre class="hljs"><code>dotnet-dump collect --process-id &lt;&lt;<span class="hljs-string">YourProcessId&gt;&gt;
-</span></code></pre>
-<p>برای شروع یک <strong>Interactive Shell</strong> جهت تحلیل فایل Dump:</p>
-<pre class="hljs"><code>dotnet-dump analyze &lt;&lt;<span class="hljs-string">dumpfile&gt;&gt;
-</span></code></pre>
-<p>اگر یک Exception باعث کرش برنامه شده باشد، می‌توانید از دستور <strong>printexceptions</strong> (یا کوتاه شده آن <strong>pe</strong>) برای نمایش جزئیات Exception استفاده کنید.<br>
-Shell ابزار <strong>dotnet-dump</strong> دستورات متعددی دارد که می‌توانید با دستور <strong>help</strong> لیست کامل آن‌ها را مشاهده کنید.</p>
-
-  </main>
-
-  <!-- فوتر مشترک -->
-  <footer class="footer">
-    <div class="container">
-      <p>
-        <img src="/Gitab/icone/copyright.svg" alt="کپی‌رایت" width="14" height="14"
-             style="vertical-align:middle;margin-inline:4px">
-        <span id="y"></span> Gitab — تمامی حقوق محفوظ است.
-      </p>
-    </div>
-  </footer>
-
-  <!-- سال و اسکریپت تغییر تم -->
-  <script>
+</code></pre> <p>متد <strong>WriteEvent</strong> دارای چند نسخه (Overload) است و می‌تواند ترکیب‌های مختلفی از انواع ساده (به‌ویژه رشته‌ها و اعداد صحیح) را بپذیرد. سپس می‌توانید به این صورت از آن استفاده کنید:</p><pre class="hljs"><code>MyEventSource.Instance.Log(<span class="hljs-string">&quot;Something&quot;</span>, <span class="hljs-number">123</span>);
+</code></pre> <p>هنگام استفاده از <strong>dotnet-trace</strong>، باید نام هر منبع رویداد سفارشی که می‌خواهید ثبت شود را مشخص کنید:</p><pre class="hljs"><code>dotnet-trace collect --process-id &lt;&lt;<span class="hljs-string">ProcessId&gt;&gt; --providers MyTestSource
+</span></code></pre> <hr><h3>dotnet-dump</h3><p>یک <strong>Dump</strong>، که گاهی به آن <strong>Core Dump</strong> هم گفته می‌شود، تصویری از وضعیت حافظه مجازی یک پردازش است. شما می‌توانید یک پردازش در حال اجرا را به‌صورت دستی Dump کنید یا سیستم‌عامل را تنظیم کنید تا هنگام کرش برنامه، این Dump تولید شود.</p><h4>در اوبونتو لینوکس</h4><p>برای فعال کردن Core Dump هنگام کرش برنامه:</p><pre class="hljs"><code><span class="hljs-built_in">ulimit</span> -c unlimited
+</code></pre> <p>(مراحل ممکن است بسته به توزیع لینوکس متفاوت باشد)</p><h4>در ویندوز</h4><p>از <strong>regedit.exe</strong> برای ایجاد یا ویرایش کلید زیر در Hive مربوط به Local Machine استفاده کنید:</p><pre class="hljs"><code>SOFTWARE\Microsoft\Windows\Windows Error Reporting\LocalDumps
+</code></pre> <p>زیر این مسیر، یک کلید با نام همان فایل اجرایی خود اضافه کنید (مثلاً <code>foo.exe</code>) و سپس کلیدهای زیر را اضافه نمایید:</p><ul> <li><strong>DumpFolder (REG_EXPAND_SZ):</strong> مسیر ذخیره فایل‌های Dump</li><li><strong>DumpType (REG_DWORD):</strong> مقدار ۲ برای درخواست Full Dump</li><li><strong>(اختیاری) DumpCount (REG_DWORD):</strong> حداکثر تعداد فایل‌های Dump قبل از حذف قدیمی‌ترین آن‌ها</li></ul> <p>برای نصب ابزار، دستور زیر را اجرا کنید:</p><pre class="hljs"><code>dotnet tool install --global dotnet-dump
+</code></pre> <p>پس از نصب، می‌توانید یک Dump به‌صورت دستی ایجاد کنید (بدون توقف پردازش):</p><pre class="hljs"><code>dotnet-dump collect --process-id &lt;&lt;<span class="hljs-string">YourProcessId&gt;&gt;
+</span></code></pre> <p>برای شروع یک <strong>Interactive Shell</strong> جهت تحلیل فایل Dump:</p><pre class="hljs"><code>dotnet-dump analyze &lt;&lt;<span class="hljs-string">dumpfile&gt;&gt;
+</span></code></pre> <p>اگر یک Exception باعث کرش برنامه شده باشد، می‌توانید از دستور <strong>printexceptions</strong> (یا کوتاه شده آن <strong>pe</strong>) برای نمایش جزئیات Exception استفاده کنید.<br> Shell ابزار <strong>dotnet-dump</strong> دستورات متعددی دارد که می‌توانید با دستور <strong>help</strong> لیست کامل آن‌ها را مشاهده کنید.</p></article> <nav class="chapter-single-next-nav"><a href="/Gitab/books/book1/Book/14/Concurrency-and-Asynchrony/" class="btn-next-chapter-action" id="nextChapterBtn" data-hub="/Gitab/books/book1/"> <span class="next-btn-text">فصل بعدی: همزمانی و برنامه‌نویسی ناهمگام</span> <span class="next-btn-arrow">←</span> </a> </nav></div> <button class="fab-back-to-top" id="backToTopBtn" type="button" aria-label="رفتن به بالای صفحه" title="رفتن به بالا"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"> <polyline points="18 15 12 9 6 15"></polyline> </svg> </button></main> <footer class="footer-minimal"><div class="footer-container"> <div class="footer-top-row"><div class="footer-brand-side"> <a href="/Gitab/" class="footer-brand-anchor"> <img src="/Gitab/icone/logo.svg" alt="Gitab" width="28" height="28" loading="lazy" decoding="async"> <span class="footer-brand-title">گیتاب (Gitab)</span> </a> <p class="footer-tagline"> پلتفرم آزاد و مستقل برای ترجمهٔ دقیق و روان کتاب‌های مرجع مهندسی نرم‌افزار. </p></div> <div class="footer-nav-cols"><div class="footer-nav-col"> <span class="footer-nav-heading">موضوعات</span><ul class="footer-nav-list"> <li><a href="/Gitab/books/list-books/?cat=csharp">سی‌شارپ و دات‌نت</a></li><li><a href="/Gitab/books/list-books/?cat=clean-code">کد تمیز و بازآفرینی</a></li><li><a href="/Gitab/books/list-books/?cat=architecture">معماری و طراحی دامنه</a></li><li><a href="/Gitab/books/list-books/?cat=system">لینوکس و خط فرمان</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">بخش‌های سایت</span><ul class="footer-nav-list"> <li><a href="/Gitab/">صفحه اصلی</a></li><li><a href="/Gitab/books/list-books/">کتابخانه کامل</a></li><li><a href="/Gitab/courses/">دوره‌های آموزشی</a></li><li><a href="/Gitab/translator.html">تالار مترجمین</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">مشارکت و جامعه</span><ul class="footer-nav-list"> <li><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer">راهنمای همکاری در ترجمه</a></li><li><a href="https://github.com/hheydarian/Gitab/issues" target="_blank" rel="noopener noreferrer">پیشنهاد کتاب یا گزارش خطا</a></li></ul> </div></div> </div><div class="footer-bottom-line"> <span>© <span id="y">2026</span> Gitab — توسعه‌یافته برای جامعهٔ مهندسان نرم‌افزار ایرانی</span></div> </div></footer> <script>
   (() => {
     const root = document.documentElement;
     const btn = document.getElementById('themeToggle');
+    const sunIcon = btn ? btn.querySelector('.icon-sun') : null;
+    const moonIcon = btn ? btn.querySelector('.icon-moon') : null;
     const KEY = 'gitab-theme';
 
-    function updateTheme(s) {
-      root.setAttribute('data-theme', s);
-      const mode = s;  // فقط `dark` یا `light` خواهد بود
+    function updateTheme(mode) {
+      root.setAttribute('data-theme', mode);
       root.dataset.colorMode = mode;
-      btn.dataset.icon = mode === 'dark' ? 'moon' : 'sun';
+      if (sunIcon && moonIcon) {
+        if (mode === 'dark') {
+          sunIcon.style.display = 'inline-block';
+          moonIcon.style.display = 'none';
+        } else {
+          sunIcon.style.display = 'none';
+          moonIcon.style.display = 'inline-block';
+        }
+      }
     }
 
-    // وضعیت تم ذخیره شده از localStorage
-    let saved = localStorage.getItem(KEY) || 'light'; // پیش‌فرض روشن
+    let saved = 'dark';
+    try { saved = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
     updateTheme(saved);
 
-    // تنظیم مجدد تم هنگام تغییر وضعیت دکمه
-    btn.addEventListener('click', () => {
-      const current = localStorage.getItem(KEY) || 'light';
-      const next = current === 'dark' ? 'light' : 'dark';  // فقط دو حالت: تاریک و روشن
-      localStorage.setItem(KEY, next);
-      updateTheme(next);
-    });
+    if (btn) {
+      btn.addEventListener('click', () => {
+        let current = 'dark';
+        try { current = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+        const next = current === 'dark' ? 'light' : 'dark';
+        try { localStorage.setItem(KEY, next); } catch (e) {}
+        updateTheme(next);
+      });
+    }
 
-    // هنگام بارگذاری صفحه
     document.addEventListener('DOMContentLoaded', () => {
-      updateTheme(localStorage.getItem(KEY) || 'light');
+      let mode = 'dark';
+      try { mode = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+      updateTheme(mode);
+      const yearSpan = document.getElementById('y');
+      if (yearSpan) yearSpan.textContent = new Date().getFullYear();
     });
+
+    const mobBtn = document.getElementById('mobileMenuBtn');
+    const mobDrawer = document.getElementById('mobileDrawer');
+    if (mobBtn && mobDrawer) {
+      const setDrawerOpen = (open) => {
+        mobDrawer.classList.toggle('open', open);
+        mobBtn.classList.toggle('is-open', open);
+        mobBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        mobBtn.setAttribute('aria-label', open ? 'بستن منو' : 'باز کردن منو');
+        mobDrawer.setAttribute('aria-hidden', open ? 'false' : 'true');
+      };
+
+      mobBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        setDrawerOpen(!mobDrawer.classList.contains('open'));
+      });
+
+      mobDrawer.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => setDrawerOpen(false));
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && mobDrawer.classList.contains('open')) {
+          setDrawerOpen(false);
+        }
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!mobDrawer.contains(e.target) && !mobBtn.contains(e.target)) {
+          setDrawerOpen(false);
+        }
+      });
+    }
+
+    if ('serviceWorker' in navigator) {
+      const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+      if (isLocalhost) {
+        navigator.serviceWorker.getRegistrations().then(regs => {
+          for (const reg of regs) reg.unregister();
+        });
+        if ('caches' in window) {
+          caches.keys().then(names => {
+            for (const name of names) caches.delete(name);
+          });
+        }
+      } else {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/Gitab/sw.js').catch(() => {});
+        });
+      }
+    }
   })();
-</script>
-
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-  <script>hljs.highlightAll();</script>
-
-  <script>
+  </script> <script>
   document.querySelectorAll('pre code').forEach(block => {
+    const pre = block.parentNode;
+    if (!pre || pre.querySelector('.copy-btn')) return;
+
+    const copySvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
+    const okSvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+
     const btn = document.createElement('button');
     btn.className = 'copy-btn';
-
-    const icon = document.createElement('img');
-    icon.src = "/Gitab/icone/copy.svg";
-    icon.alt = 'Copy';
-    btn.appendChild(icon);
-
-    block.parentNode.insertBefore(btn, block);
+    btn.setAttribute('aria-label', 'کپی کد');
+    btn.setAttribute('title', 'کپی کد');
+    btn.setAttribute('type', 'button');
+    btn.innerHTML = copySvg;
+    pre.appendChild(btn);
 
     btn.addEventListener('click', async () => {
-      await navigator.clipboard.writeText(block.textContent);
-      btn.classList.add('copied');
-      setTimeout(() => btn.classList.remove('copied'), 1500);
-    });
-  });
-  </script>
-
-  <script>
-  document.body.dataset.page = window.location.pathname;
-
-  const menuBtn = document.querySelector(".menu-toggle");
-  const nav = document.querySelector(".nav");
-
-  if (menuBtn && nav) {
-    menuBtn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      nav.classList.toggle("show");
-    });
-
-    document.addEventListener("click", (e) => {
-      const clickedInsideNav = nav.contains(e.target);
-      const clickedMenuButton = menuBtn.contains(e.target);
-      if (!clickedInsideNav && !clickedMenuButton) {
-        nav.classList.remove("show");
+      try {
+        await navigator.clipboard.writeText(block.textContent);
+        btn.classList.add('copied');
+        btn.innerHTML = okSvg;
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          btn.innerHTML = copySvg;
+        }, 1800);
+      } catch (err) {
+        console.error('Copy failed:', err);
       }
     });
-  }
-  </script>
-
-  <script>
-    document.getElementById('y').textContent = new Date().getFullYear();
-  </script>
-  <script>
-document.getElementById("openDonate").addEventListener("click", () => {
-  document.getElementById("donateModal").style.display = "block";
-});
-document.getElementById("closeDonate").addEventListener("click", () => {
-  document.getElementById("donateModal").style.display = "none";
-});
-document.querySelectorAll(".copy-btn").forEach(btn => {
-  btn.addEventListener("click", () => {
-    navigator.clipboard.writeText(btn.dataset.copy);
-  
-    setTimeout(() => (btn.textContent = "کپی"), 2000);
   });
-});
-</script>
+  </script> <script>
+  (() => {
+    const article = document.getElementById('chapterArticle');
+    if (!article) return;
 
-</body>
-</html>
+    const progressBar = document.getElementById('readingProgressBar');
+    if (progressBar) {
+      window.addEventListener('scroll', () => {
+        const docElem = document.documentElement;
+        const totalHeight = docElem.scrollHeight - docElem.clientHeight;
+        if (totalHeight > 0) {
+          const progress = (window.pageYOffset / totalHeight) * 100;
+          progressBar.style.width = Math.min(100, Math.max(0, progress)) + '%';
+        }
+      }, { passive: true });
+    }
+
+    const btt = document.getElementById('backToTopBtn');
+    if (btt) {
+      window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 250) {
+          btt.classList.add('visible');
+        } else {
+          btt.classList.remove('visible');
+        }
+      }, { passive: true });
+
+      btt.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+
+    article.querySelectorAll('img').forEach(img => {
+      if (!img.hasAttribute('loading')) img.loading = 'lazy';
+      if (!img.hasAttribute('decoding')) img.decoding = 'async';
+      const parent = img.parentElement;
+      if (parent && parent.tagName === 'P') {
+        parent.style.textAlign = 'center';
+      }
+
+      img.addEventListener('error', function() {
+        const src = this.getAttribute('src');
+        if (src && src.includes('assets/image/')) {
+          const parts = src.split('assets/image/');
+          const corrected = '/Gitab/books/book1/assets/image/' + parts[1];
+          if (this.src !== corrected) {
+            this.src = corrected;
+          }
+        }
+      });
+    });
+
+    article.querySelectorAll('p').forEach(p => {
+      const trimmed = p.innerText.trim();
+      if (trimmed.startsWith('💡') || trimmed.startsWith('نکته:')) {
+        p.classList.add('react-callout', 'callout-tip');
+      } else if (trimmed.startsWith('⚠️') || trimmed.startsWith('هشدار:')) {
+        p.classList.add('react-callout', 'callout-warning');
+      } else if (trimmed.startsWith('📌') || trimmed.startsWith('مهم:')) {
+        p.classList.add('react-callout', 'callout-important');
+      } else if (trimmed.startsWith('🔹') || trimmed.startsWith('🔸')) {
+        p.classList.add('react-callout', 'callout-note');
+      }
+    });
+  })();
+  </script> <script type="speculationrules">{"prefetch":[{"where":{"and":[{"href_matches":"/Gitab/*"},{"not":{"href_matches":"/Gitab/downloads/*"}},{"not":{"selector_matches":"[download], [target='_blank']"}}]},"eagerness":"moderate"}]}</script> <script>
+  (() => {
+    if (window.HTMLScriptElement && HTMLScriptElement.supports && HTMLScriptElement.supports('speculationrules')) return;
+    const seen = new Set([window.location.href]);
+    let count = 0;
+    const prefetchLink = (e) => {
+      if (count >= 12) return;
+      const a = e.target && e.target.closest ? e.target.closest('header a, .chapter-single-next-nav a, .syllabus-chapter-item a, .btn-hero-read, .btn-card-read') : null;
+      if (!a || !a.href || a.hasAttribute('download') || a.target === '_blank') return;
+      if (a.origin !== window.location.origin || a.pathname.includes('/downloads/')) return;
+      const clean = a.href.split('#')[0];
+      if (!clean || seen.has(clean)) return;
+      seen.add(clean);
+      count++;
+      const l = document.createElement('link');
+      l.rel = 'prefetch';
+      l.href = clean;
+      document.head.appendChild(l);
+    };
+    document.addEventListener('pointerenter', prefetchLink, { capture: true, passive: true });
+    document.addEventListener('touchstart', prefetchLink, { capture: true, passive: true });
+  })();
+  </script></body></html>

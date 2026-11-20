@@ -1,0 +1,415 @@
+<!doctype html><html lang="fa" dir="rtl"> <head><script>
+    if (window.location.pathname.startsWith('/gitab/')) {
+      window.location.replace(window.location.pathname.replace(/^\/gitab\//i, '/Gitab/') + window.location.search + window.location.hash);
+    }
+    (() => {
+      try {
+        const t = localStorage.getItem('gitab-theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', t);
+        document.documentElement.dataset.colorMode = t;
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        document.documentElement.dataset.colorMode = 'dark';
+      }
+    })();
+  </script> <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5"> <title>۱۰۹.۴ پیکربندی DNS در سمت کلاینت</title><meta name="description" content="۱۰۹.۴ پیکربندی DNS در سمت کلاینت — مطالعه آنلاین و رایگان از کتاب «راهنمای آزمون LPIC-1 (ورژن ۵۰۰)» (LPIC-1 Study Guide (Version 500)) اثر جادی میرمیرانی با ترجمه جادی میرمیرانی در گیتاب."> <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"><meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"> <meta name="theme-color" content="#090d16"><meta name="referrer" content="strict-origin-when-cross-origin"> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https:; frame-src https://www.youtube.com https://www.youtube-nocookie.com https://maps.google.com https://www.google.com; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self';"><link rel="icon" type="image/png" href="/Gitab/favicon.png"> <link rel="canonical" href="https://hheydarian.github.io/Gitab/books/book13/Book/43/1094-configure-client-side-dns/"><link rel="alternate" hreflang="fa" href="https://hheydarian.github.io/Gitab/books/book13/Book/43/1094-configure-client-side-dns/"> <link rel="alternate" hreflang="x-default" href="https://hheydarian.github.io/Gitab/books/book13/Book/43/1094-configure-client-side-dns/"><link rel="alternate" type="text/plain" title="LLMs.txt" href="/Gitab/llms.txt"> <link rel="sitemap" type="application/xml" title="Sitemap" href="/Gitab/sitemap.xml"><meta property="og:locale" content="fa_IR"> <meta property="og:type" content="article"><meta property="og:site_name" content="گیتاب | Gitab"> <meta property="og:title" content="۱۰۹.۴ پیکربندی DNS در سمت کلاینت"><meta property="og:description" content="۱۰۹.۴ پیکربندی DNS در سمت کلاینت — مطالعه آنلاین و رایگان از کتاب «راهنمای آزمون LPIC-1 (ورژن ۵۰۰)» (LPIC-1 Study Guide (Version 500)) اثر جادی میرمیرانی با ترجمه جادی میرمیرانی در گیتاب."> <meta property="og:url" content="https://hheydarian.github.io/Gitab/books/book13/Book/43/1094-configure-client-side-dns/"><meta property="og:image" content="https://hheydarian.github.io/Gitab/images/lpic1book/Cover.jpg"> <meta property="og:image:alt" content="۱۰۹.۴ پیکربندی DNS در سمت کلاینت"><meta name="twitter:card" content="summary_large_image"> <meta name="twitter:title" content="۱۰۹.۴ پیکربندی DNS در سمت کلاینت"><meta name="twitter:description" content="۱۰۹.۴ پیکربندی DNS در سمت کلاینت — مطالعه آنلاین و رایگان از کتاب «راهنمای آزمون LPIC-1 (ورژن ۵۰۰)» (LPIC-1 Study Guide (Version 500)) اثر جادی میرمیرانی با ترجمه جادی میرمیرانی در گیتاب."> <meta name="twitter:image" content="https://hheydarian.github.io/Gitab/images/lpic1book/Cover.jpg"><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://hheydarian.github.io/Gitab/#organization","name":"گیتاب | Gitab","alternateName":"Gitab","url":"https://hheydarian.github.io/Gitab/","logo":{"@type":"ImageObject","url":"https://hheydarian.github.io/Gitab/favicon.png"},"sameAs":["https://github.com/hheydarian/Gitab"]},{"@type":"WebSite","@id":"https://hheydarian.github.io/Gitab/#website","url":"https://hheydarian.github.io/Gitab/","name":"گیتاب | Gitab","inLanguage":"fa-IR","publisher":{"@id":"https://hheydarian.github.io/Gitab/#organization"},"potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://hheydarian.github.io/Gitab/books/list-books/?q={search_term_string}"},"query-input":"required name=search_term_string"}},{"@type":"WebPage","@id":"https://hheydarian.github.io/Gitab/books/book13/Book/43/1094-configure-client-side-dns/#webpage","url":"https://hheydarian.github.io/Gitab/books/book13/Book/43/1094-configure-client-side-dns/","name":"۱۰۹.۴ پیکربندی DNS در سمت کلاینت","description":"۱۰۹.۴ پیکربندی DNS در سمت کلاینت — مطالعه آنلاین و رایگان از کتاب «راهنمای آزمون LPIC-1 (ورژن ۵۰۰)» (LPIC-1 Study Guide (Version 500)) اثر جادی میرمیرانی با ترجمه جادی میرمیرانی در گیتاب.","inLanguage":"fa-IR","isPartOf":{"@id":"https://hheydarian.github.io/Gitab/#website"}},{"@type":"TechArticle","headline":"۱۰۹.۴ پیکربندی DNS در سمت کلاینت","description":"۱۰۹.۴ پیکربندی DNS در سمت کلاینت — مطالعه آنلاین و رایگان از کتاب «راهنمای آزمون LPIC-1 (ورژن ۵۰۰)» (LPIC-1 Study Guide (Version 500)) اثر جادی میرمیرانی با ترجمه جادی میرمیرانی در گیتاب.","url":"https://hheydarian.github.io/Gitab/books/book13/Book/43/1094-configure-client-side-dns/","inLanguage":"fa-IR","isAccessibleForFree":true,"author":{"@type":"Person","name":"جادی میرمیرانی"},"translator":{"@type":"Person","name":"جادی میرمیرانی"},"isPartOf":{"@type":"Book","name":"راهنمای آزمون LPIC-1 (ورژن ۵۰۰)","alternateName":"LPIC-1 Study Guide (Version 500)","url":"https://hheydarian.github.io/Gitab/books/book13/"}}]}</script> <link rel="preload" href="/Gitab/fonts/Vazirmatn.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/Gitab/styles/main.css?v=2.4" as="style"> <link rel="preload" href="/Gitab/styles/gitab-modern.css?v=2.5" as="style"><style>@font-face{font-family:'Lalezar';src:url('/Gitab/fonts/Lalezar.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}@font-face{font-family:'Vazirmatn';src:url('/Gitab/fonts/Vazirmatn.woff2') format('woff2');font-weight:100 900;font-style:normal;font-display:swap}html,body,button,input,optgroup,select,textarea,.filter-pill{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}input::placeholder,textarea::placeholder{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}</style> <link rel="stylesheet" href="/Gitab/styles/main.css?v=2.4"><link rel="stylesheet" href="/Gitab/styles/gitab-modern.css?v=2.5"> <link rel="stylesheet" href="/Gitab/styles/vendor/github-dark.min.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="/Gitab/styles/vendor/github-dark.min.css"></noscript></head> <body><header class="header"> <div class="container nav-wrap"><a href="/Gitab/" class="brand" aria-label="صفحه اصلی گیتاب"> <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="30" height="30" decoding="async"> <span class="brand-text">Gitab</span> </a> <nav class="nav" id="mainNav"><a href="/Gitab/" >خانه</a> <a href="/Gitab/books/list-books" aria-current="page">کتاب‌ها</a> <a href="/Gitab/courses/" >دوره‌ها</a> <a href="/Gitab/translator.html" >مترجمین</a></nav> <div class="nav-actions"><button id="themeToggle" class="theme-toggle-btn" aria-label="تغییر تم" title="تغییر تم"> <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن" width="18" height="18" decoding="async" style="display:none"> <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک" width="18" height="18" decoding="async"> </button> <a class="btn-github-pill" href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" title="مشاهده سورس گیتاب در گیت‌هاب"> <img src="/Gitab/icone/github.svg" alt="GitHub" width="16" height="16" decoding="async"> <span>گیت‌هاب</span> </a> <button class="mobile-menu-btn" id="mobileMenuBtn" type="button" aria-label="باز کردن منو" aria-expanded="false"> <svg class="mob-icon-open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="4" y1="7" x2="20" y2="7"></line> <line x1="4" y1="12" x2="20" y2="12"></line> <line x1="4" y1="17" x2="14" y2="17"></line> </svg> <svg class="mob-icon-close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="18" y1="6" x2="6" y2="18"></line> <line x1="6" y1="6" x2="18" y2="18"></line> </svg> </button></div> </div><div class="mobile-drawer" id="mobileDrawer" aria-hidden="true"> <div class="mobile-drawer-inner"><div class="mobile-drawer-section-label">ناوبری سریع</div><nav class="mobile-drawer-links" aria-label="منوی موبایل"> <a href="/Gitab/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M3 10.5 12 3l9 7.5"></path> <path d="M5 9.5V20a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V9.5"></path> </svg> </span> <span class="mob-nav-text">صفحه نخست</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/books/list-books" class="mobile-drawer-link active" aria-current="page"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path> </svg> </span> <span class="mob-nav-text">کتابخانه و فهرست کتاب‌ها</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/courses/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path> <path d="M6 12v5c3 3 9 3 12 0v-5"></path> </svg> </span> <span class="mob-nav-text">دوره‌های آموزشی</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/translator.html" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path> <circle cx="9" cy="7" r="4"></circle> <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path> <path d="M16 3.13a4 4 0 0 1 0 7.75"></path> </svg> </span> <span class="mob-nav-text">مترجمین و همکاران</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> </nav><div class="mobile-drawer-divider"></div><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" class="mobile-drawer-link mobile-drawer-gh"> <span class="mob-nav-icon" aria-hidden="true"> <img src="/Gitab/icone/github.svg" alt="" width="17" height="17" loading="lazy" decoding="async"> </span> <span class="mob-nav-text">مخزن گیت‌هاب پروژه</span> <span class="mob-nav-ext" aria-hidden="true">↗</span> </a> </div></div> </header><div class="reading-progress-track"> <div class="reading-progress-fill" id="readingProgressBar"></div></div> <main class="site-main chapter-reading-page"><div class="chapter-page-wrapper"> <nav class="chapter-clean-breadcrumb" aria-label="مسیر راهنما" dir="rtl"><a href="/Gitab/">خانه</a> <span class="bc-sep" aria-hidden="true">/</span> <a href="/Gitab/books/list-books/">کتاب‌ها</a> <span class="bc-sep" aria-hidden="true">/</span> <a href="/Gitab/books/book13/"><bdi>راهنمای آزمون LPIC-1</bdi></a> <span class="bc-sep" aria-hidden="true">/</span> <span class="bc-current-leaf"><bdi>۱۰۹.۴ پیکربندی DNS در سمت کلاینت</bdi></span></nav> <article class="chapter-prose-container markdown-body" id="chapterArticle" dir="rtl"><h1>۱۰۹.۴ پیکربندی DNS در سمت کلاینت</h1><div class="callout callout-info" style="background: rgba(59, 130, 246, 0.08); border-right: 4px solid #3b82f6; padding: 16px 20px; border-radius: 8px; margin-bottom: 24px;"> <strong>خلاصه هدف آزمون:</strong> فایل /etc/resolv.conf، اولویت‌بندی در /etc/nsswitch.conf، فایل /etc/hosts و پرس‌وجو با host و dig. </div><div class="video-container" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; border-radius: 12px; margin: 24px 0; border: 1px solid var(--g-border-dim);"> <iframe src="https://www.youtube.com/embed/wUDhmSpr3lg?si=O1LCyXq_L4LmLn39" title="ویدئوی آموزشی جادی برای این سرفصل" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen></iframe></div> <h2>🎯 اهداف و سرفصل‌های این بخش</h2><p>در این درسنامه موارد زیر را بررسی و مرور می‌کنیم:</p><ul> <li>مفاهیم کلیدی مورد پرسش در آزمون بین‌المللی LPIC-1</li><li>دستورات، فایل‌های پیکربندی و ابزارهای مرتبط در خط فرمان</li><li>نکات پرتکرار آزمون‌های ۱۰۱ و ۱۰۲ همراه با نمونه‌های کاربردی</li></ul> <hr><h2>📝 متن درسنامه و توضیحات تکمیلی</h2><p><em>ضریب اهمیت در آزمون (Weight): ۲</em></p><p>داوطلبان باید بتوانند سرویس DNS را روی یک سیستم کلاینت پیکربندی کنند.</p><h3>حوزه‌های دانش کلیدی</h3><ul> <li>پرس‌وجو (Query) از سرورهای DNS راه‌دور.</li><li>پیکربندی ترجمه نام محلی (Local Name Resolution) و استفاده از سرورهای DNS راه‌دور.</li><li>تغییر ترتیب و اولویتی که ترجمه نام‌ها در آن انجام می‌شود.</li><li>خطایابی مشکلات مربوط به ترجمه نام‌ها (Name Resolution).</li><li>آشنایی با سرویس <code>systemd-resolved</code>.</li></ul> <h3>اصطلاحات و ابزارها</h3><div dir="ltr"> <ul><li><code>/etc/hosts</code></li><li><code>/etc/resolv.conf</code></li><li><code>/etc/nsswitch.conf</code></li><li><code>host</code></li><li><code>dig</code></li><li><code>getent</code></li></ul> </div><h3>سرویس DNS</h3><p>همان‌طور که می‌دانیم، سامانه نام دامنه (Domain Name System یا DNS) سرویسی است که نام‌های دامنه (مثلاً <code>yahoo.com</code>) را به آدرس‌های IP (مثلاً <code>206.190.36.45</code>) ترجمه می‌کند. وقتی شما سروری را با نام دامنه‌اش پینگ می‌کنید، از یک سرور DNS استفاده می‌شود. فایل‌های پیکربندی DNS را دیده‌اید و باید بدانید که سرور DNS واقعیِ در حال استفاده توسط کامپیوتر را می‌توان از طریق فایل <code>/etc/resolv.conf</code> بررسی یا (به‌صورت موقت) تغییر داد:</p><pre class="hljs"><code>$ cat /etc/resolv.conf
+# Generated by NetworkManager
+nameserver 192.168.1.1
+nameserver 4.2.2.4
+
+$ ping x.org
+PING x.org (131.252.210.176) 56(84) bytes of data.
+64 bytes from annarchy.freedesktop.org (131.252.210.176): icmp_seq=1 ttl=45 time=338 ms
+64 bytes from  annarchy.freedesktop.org (131.252.210.176): icmp_seq=2 ttl=45 time=333 ms
+^C
+--- x.org ping statistics ---
+2 packets transmitted, 2 received, 0% packet loss, time 1000ms
+rtt min/avg/max/mdev = 333.088/335.612/338.136/2.524 ms
+</code></pre> <h3>دستور <code>host</code></h3><p>این یک برنامه ساده برای پرس‌وجو و پیدا کردن رکوردهای DNS است. این یک نمونه خروجی بدون هیچ آرگومان اضافه‌ای است:</p><pre class="hljs"><code>$ host kernel.org
+kernel.org has address 139.178.84.217
+kernel.org has IPv6 address 2604:1380:4641:c500::1
+kernel.org mail is handled by 10 smtp1.kernel.org.
+kernel.org mail is handled by 10 smtp2.kernel.org.
+kernel.org mail is handled by 10 smtp3.kernel.org.
+</code></pre> <p>همان‌طور که می‌بینید، دستور <code>host</code> تمام رکوردهایی را که برای یک دامنه خاص پیدا می‌کند برمی‌گرداند. در این مثال، رکورد IPv4 (نوع A)، رکورد IPv6 (نوع AAAA) و رکوردهای ایمیل (MX) را برگردانده است.</p><blockquote> <p><strong>نکته:</strong> اگر می‌خواهید فقط یک رکورد خاص را بررسی کنید، می‌توانید نوع آن را با سوئیچ <code>-t</code> مشخص کنید. بنابراین <code>-t A</code> فقط رکوردهای IPv4 را برمی‌گرداند.</p></blockquote> <h3>دستور <code>dig</code></h3><p>ابزار <code>dig</code> به‌طور ویژه برای پرس‌وجو از سرورهای DNS ساخته شده است. اگر می‌خواهید بفهمید <code>x.org</code> به چه آدرسی اشاره می‌کند، می‌توانید این کار را انجام دهید:</p><pre class="hljs"><code>$ dig x.org
+
+; &lt;&lt;&gt;&gt; DiG 9.10.3-P4-RedHat-9.10.3-12.P4.fc23 &lt;&lt;&gt;&gt; x.org
+;; global options: +cmd
+;; Got answer:
+;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NOERROR, id: 7483
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 512
+;; QUESTION SECTION:
+;x.org.                IN    A
+
+;; ANSWER SECTION:
+x.org.            1625    IN    A    131.252.210.176
+
+;; Query time: 35 msec
+;; SERVER: 192.168.1.1#53(192.168.1.1)
+;; WHEN: Sun Apr 17 12:45:02 IRDT 2016
+;; MSG SIZE  rcvd: 50
+</code></pre> <p>همان‌طور که می‌بینید، <code>dig</code> یک <strong>جست‌وجوی IP</strong> برای <code>x.org</code> انجام داد و به من گفت آدرس آن <code>131.252.210.176</code> است. عدد <code>1625</code> همان <strong>TTL</strong> یا <em>Time To Live</em> نامیده می‌شود و نشان می‌دهد این پاسخ تا چند ثانیه در حافظه نهان (Cache) معتبر در نظر گرفته می‌شود. این دستور همچنین در ۴ خط آخر به ما می‌گوید از چه سروری برای پرس‌وجو استفاده شده و چه زمانی و چقدر طول کشیده است.</p><p>همچنین راهی وجود دارد که با الگوی <code>@&lt;DNS-SERVER&gt;</code> به <code>dig</code> بگوییم از چه سروری به‌عنوان DNS استفاده کند:</p><pre class="hljs"><code>$ dig @8.8.8.8 google.com
+
+; &lt;&lt;&gt;&gt; DiG 9.10.3-P4-RedHat-9.10.3-12.P4.fc23 &lt;&lt;&gt;&gt; @8.8.8.8 google.com
+; (1 server found)
+;; global options: +cmd
+;; Got answer:
+;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NOERROR, id: 24313
+;; flags: qr rd ra; QUERY: 1, ANSWER: 11, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 512
+;; QUESTION SECTION:
+;google.com.            IN    A
+
+;; ANSWER SECTION:
+google.com.        112    IN    A    173.194.32.133
+google.com.        112    IN    A    173.194.32.136
+google.com.        112    IN    A    173.194.32.132
+google.com.        112    IN    A    173.194.32.129
+google.com.        112    IN    A    173.194.32.137
+google.com.        112    IN    A    173.194.32.130
+google.com.        112    IN    A    173.194.32.134
+google.com.        112    IN    A    173.194.32.135
+google.com.        112    IN    A    173.194.32.128
+google.com.        112    IN    A    173.194.32.131
+google.com.        112    IN    A    173.194.32.142
+
+;; Query time: 238 msec
+;; SERVER: 8.8.8.8#53(8.8.8.8)
+;; WHEN: Sun Apr 17 13:03:38 IRDT 2016
+;; MSG SIZE  rcvd: 215
+</code></pre> <p>اینجا از <code>dig</code> خواسته‌ام از <code>8.8.8.8</code> به‌عنوان DNS استفاده کند و <code>google.com</code> را بپرسد. می‌بینید که بیش از یک پاسخ دریافت کرده‌ام (در واقع خیلی بیشتر از یک پاسخ). کامپیوتر من می‌تواند به‌صورت تصادفی به هر یک از این IPها وصل شود تا به <code>google.com</code> برسد. به عبارت دیگر، <code>google.com</code> از چندین سرور/IP استفاده می‌کند و <code>8.8.8.8</code> هنگام پرس‌وجوی آن دامنه، همه آن‌ها را ارائه می‌دهد.</p><h3>فایل <code>/etc/hosts</code></h3><p>این فایل شامل آدرس‌های IP و نام‌های متناظر آن‌هاست. در واقع نوعی ترجمه نام ایستا (Static Name Resolution) روی کامپیوتر شما محسوب می‌شود. بیایید نگاهی به آن بیندازیم:</p><pre class="hljs"><code>$ head /etc/hosts
+127.0.0.1    funlife localhost.localdomain    localhost clickadu.com
+::1    funlife localhost6.localdomain6    localhost6
+
+10.159.32.155 nsproxy
+172.16.12.134 linuxclass wonderland
+193.40.12.135 salma
+
+87.106.233.90 gratis.vps
+
+192.168.59.231 mass1
+</code></pre> <p>این فایل توسط کاربر <code>root</code> قابل تغییر است و برخی نام‌های دامنه (<code>localhost</code>، <code>mass1</code>، <code>gratis.vps</code> و غیره) را به آدرس‌های IP نگاشت می‌کند. اگر روی این کامپیوتر <code>mass1</code> را پینگ کنم، ببینید چه اتفاقی می‌افتد:</p><pre class="hljs"><code>$ dig mass1
+
+; &lt;&lt;&gt;&gt; DiG 9.10.3-P4-RedHat-9.10.3-12.P4.fc23 &lt;&lt;&gt;&gt; mass1
+;; global options: +cmd
+;; Got answer:
+;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NXDOMAIN, id: 39464
+;; flags: qr rd ra; QUERY: 1, ANSWER: 0, AUTHORITY: 1, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 512
+;; QUESTION SECTION:
+;mass1.                IN    A
+
+;; AUTHORITY SECTION:
+.            600    IN    SOA    a.root-servers.net. nstld.verisign-grs.com. 2016041700 1800 900 604800 86400
+
+;; Query time: 516 msec
+;; SERVER: 192.168.1.1#53(192.168.1.1)
+;; WHEN: Sun Apr 17 13:15:07 IRDT 2016
+;; MSG SIZE  rcvd: 109
+
+$ ping mass1
+PING mass1 (192.168.59.231) 56(84) bytes of data.
+From 85-15-16-103.shatel.ir (85.15.16.103) icmp_seq=1 Packet filtered
+From 85-15-16-103.shatel.ir (85.15.16.103) icmp_seq=2 Packet filtered
+</code></pre> <p>با اینکه DNS نمی‌تواند نام <code>mass1</code> را پیدا کند، وقتی سراغ <code>mass1</code> می‌روم کامپیوتر من آدرس <code>192.168.59.231</code> را پینگ می‌کند، چون این نام در <code>/etc/hosts</code> تعریف شده است.</p><h3>فایل <code>nsswitch</code></h3><p>فایل <code>/etc/nsswitch.conf</code> به سیستم می‌گوید اولویت جست‌وجوها، بررسی رمزها و موارد مشابه چگونه باشد. بیایید به آن نگاه کنیم تا موضوع کاملاً روشن شود:</p><pre class="hljs"><code>$ cat /etc/nsswitch.conf
+#
+# /etc/nsswitch.conf
+#
+# An example Name Service Switch config file. This file should be
+# sorted with the most-used services at the beginning.
+#
+# The entry &#x27;[NOTFOUND=return]&#x27; means that the search for an
+# entry should stop if the search in the previous entry turned
+# up nothing. Note that if the search failed due to some other reason
+# (like no NIS server responding) then the search continues with the
+# next entry.
+#
+# Valid entries include:
+#
+#    nisplus            Use NIS+ (NIS version 3)
+#    nis            Use NIS (NIS version 2), also called YP
+#    dns            Use DNS (Domain Name Service)
+#    files            Use the local files
+#    db            Use the local database (.db) files
+#    compat            Use NIS on compat mode
+#    hesiod            Use Hesiod for user lookups
+#    [NOTFOUND=return]    Stop searching if not found so far
+#
+
+# To use db, put the &quot;db&quot; in front of &quot;files&quot; for entries you want to be
+# looked up first in the databases
+#
+# Example:
+#passwd:    db files nisplus nis
+#shadow:    db files nisplus nis
+#group:     db files nisplus nis
+
+passwd:     files sss
+shadow:     files sss
+group:      files sss
+
+#hosts:     db files nisplus nis dns
+hosts:      files mdns4_minimal [NOTFOUND=return] dns myhostname mymachines
+
+# Example - obey only what nisplus tells us...
+#services:   nisplus [NOTFOUND=return] files
+#networks:   nisplus [NOTFOUND=return] files
+#protocols:  nisplus [NOTFOUND=return] files
+#rpc:        nisplus [NOTFOUND=return] files
+#ethers:     nisplus [NOTFOUND=return] files
+#netmasks:   nisplus [NOTFOUND=return] files
+
+bootparams: nisplus [NOTFOUND=return] files
+
+ethers:     files
+netmasks:   files
+networks:   files
+protocols:  files
+rpc:        files
+services:   files sss
+
+netgroup:   files sss
+
+publickey:  nisplus
+
+automount:  files sss
+aliases:    files nisplus
+</code></pre> <p>در خط مربوط به DNS عبارت <code>hosts: files mdns4_minimal [NOTFOUND=return] dns myhostname mymachines</code> را داریم. این یعنی وقتی سیستم می‌خواهد آدرس IP یک نام را پیدا کند، ابتدا سراغ <code>files</code> (یعنی <code>/etc/hosts</code>) می‌رود، سپس سراغ <code>mdns4_minimal</code>، بعد <strong>dns</strong> و الی آخر. در این حالت اگر <code>facebook.com</code> را به این شکل به <code>/etc/hosts</code> خودم اضافه کنم:</p><pre class="hljs"><code>127.0.0.1 facebook.com
+</code></pre> <p>و بعد مرورگرم را به سمت <code>facebook.com</code> هدایت کنم، کامپیوترم به‌جای IP واقعی فیسبوک، سعی می‌کند به وب‌سرور روی <code>127.0.0.1</code> متصل شود.</p><h3>دستور <code>getent</code></h3><p>دستور <code>getent</code> ابزاری برای دریافت ورودی‌ها از کتابخانه‌های Name Service Switch (یعنی همان <code>/etc/nsswitch.conf</code>) است. اگر می‌خواهید بررسی کنید تنظیمات میزبان‌های (hosts) شما چیست، می‌توانید این کار را انجام دهید:</p><pre class="hljs"><code>$ getent hosts
+127.0.0.1       funlife localhost.localdomain localhost clickadu.com
+127.0.0.1       funlife localhost6.localdomain6 localhost6
+10.159.32.155   nsnproxy
+172.16.12.134   linuxclass wonderland
+193.40.12.135   salma
+87.106.233.90   gratisvps
+192.168.59.231  mass1
+192.168.59.232  mass2
+192.168.59.233  mass3
+192.168.59.234  mass4
+192.168.59.235  mass5
+192.168.59.236  mass6
+192.168.59.237  mass7
+192.168.59.238  mass8
+192.168.59.239  mass9
+127.0.0.1       frctlstartupfailure localtodoer localdeliv
+127.0.0.1       frctlmeth
+</code></pre> <h3>سرویس <code>systemd-resolved</code></h3><p>باید توجه داشت که <code>systemd</code> یک سرویس DNS به نام <code>systemd-resolved</code> ارائه می‌دهد. این سرویس روی آدرس <code>127.0.0.53</code> به درخواست‌های DNS گوش می‌دهد و پس از بررسی فایل‌های <code>/etc/systemd/resolved.conf</code> یا <code>/etc/resolv.conf</code> پاسخ را برمی‌گرداند.</p><p>برای مطالعه بیشتر درباره <code>systemd-resolved</code> می‌توانید به <a href="https://wiki.archlinux.org/title/Systemd-resolved">این صفحه در ویکی آرچ</a> سر بزنید.</p><hr> <div class="callout callout-tip" style="background: rgba(147, 51, 234, 0.08); border-right: 4px solid #9333ea; padding: 16px 20px; border-radius: 8px; margin-top: 32px;"><strong>🔗 نسخه اصلی به زبان انگلیسی:</strong> این درسنامه بر اساس منبع انگلیسی جادی در مخزن <a href="https://github.com/jadijadi/lpic1book/blob/master/content/1094_configure_client_side_dns.md" target="_blank" rel="noopener noreferrer">jadijadi/lpic1book</a> تدوین و سازماندهی شده است. </div></article> <nav class="chapter-single-next-nav"><a href="/Gitab/books/book13/Book/44/1101-perform-security-administration-tasks/" class="btn-next-chapter-action" id="nextChapterBtn" data-hub="/Gitab/books/book13/"> <span class="next-btn-text">فصل بعدی: ۱۱۰.۱ مدیریت امنیت و دسترسی‌های ریشه‌ای</span> <span class="next-btn-arrow">←</span> </a> </nav></div> <button class="fab-back-to-top" id="backToTopBtn" type="button" aria-label="رفتن به بالای صفحه" title="رفتن به بالا"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"> <polyline points="18 15 12 9 6 15"></polyline> </svg> </button></main> <footer class="footer-minimal"><div class="footer-container"> <div class="footer-top-row"><div class="footer-brand-side"> <a href="/Gitab/" class="footer-brand-anchor"> <img src="/Gitab/icone/logo.svg" alt="Gitab" width="28" height="28" loading="lazy" decoding="async"> <span class="footer-brand-title">گیتاب (Gitab)</span> </a> <p class="footer-tagline"> پلتفرم آزاد و مستقل برای ترجمهٔ دقیق و روان کتاب‌های مرجع مهندسی نرم‌افزار. </p></div> <div class="footer-nav-cols"><div class="footer-nav-col"> <span class="footer-nav-heading">موضوعات</span><ul class="footer-nav-list"> <li><a href="/Gitab/books/list-books/?cat=csharp">سی‌شارپ و دات‌نت</a></li><li><a href="/Gitab/books/list-books/?cat=clean-code">کد تمیز و بازآفرینی</a></li><li><a href="/Gitab/books/list-books/?cat=architecture">معماری و طراحی دامنه</a></li><li><a href="/Gitab/books/list-books/?cat=system">لینوکس و خط فرمان</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">بخش‌های سایت</span><ul class="footer-nav-list"> <li><a href="/Gitab/">صفحه اصلی</a></li><li><a href="/Gitab/books/list-books/">کتابخانه کامل</a></li><li><a href="/Gitab/courses/">دوره‌های آموزشی</a></li><li><a href="/Gitab/translator.html">تالار مترجمین</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">مشارکت و جامعه</span><ul class="footer-nav-list"> <li><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer">راهنمای همکاری در ترجمه</a></li><li><a href="https://github.com/hheydarian/Gitab/issues" target="_blank" rel="noopener noreferrer">پیشنهاد کتاب یا گزارش خطا</a></li></ul> </div></div> </div><div class="footer-bottom-line"> <span>© <span id="y">2026</span> Gitab — توسعه‌یافته برای جامعهٔ مهندسان نرم‌افزار ایرانی</span></div> </div></footer> <script>
+  (() => {
+    const root = document.documentElement;
+    const btn = document.getElementById('themeToggle');
+    const sunIcon = btn ? btn.querySelector('.icon-sun') : null;
+    const moonIcon = btn ? btn.querySelector('.icon-moon') : null;
+    const KEY = 'gitab-theme';
+
+    function updateTheme(mode) {
+      root.setAttribute('data-theme', mode);
+      root.dataset.colorMode = mode;
+      if (sunIcon && moonIcon) {
+        if (mode === 'dark') {
+          sunIcon.style.display = 'inline-block';
+          moonIcon.style.display = 'none';
+        } else {
+          sunIcon.style.display = 'none';
+          moonIcon.style.display = 'inline-block';
+        }
+      }
+    }
+
+    let saved = 'dark';
+    try { saved = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+    updateTheme(saved);
+
+    if (btn) {
+      btn.addEventListener('click', () => {
+        let current = 'dark';
+        try { current = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+        const next = current === 'dark' ? 'light' : 'dark';
+        try { localStorage.setItem(KEY, next); } catch (e) {}
+        updateTheme(next);
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      let mode = 'dark';
+      try { mode = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+      updateTheme(mode);
+      const yearSpan = document.getElementById('y');
+      if (yearSpan) yearSpan.textContent = new Date().getFullYear();
+    });
+
+    const mobBtn = document.getElementById('mobileMenuBtn');
+    const mobDrawer = document.getElementById('mobileDrawer');
+    if (mobBtn && mobDrawer) {
+      const setDrawerOpen = (open) => {
+        mobDrawer.classList.toggle('open', open);
+        mobBtn.classList.toggle('is-open', open);
+        mobBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        mobBtn.setAttribute('aria-label', open ? 'بستن منو' : 'باز کردن منو');
+        mobDrawer.setAttribute('aria-hidden', open ? 'false' : 'true');
+      };
+
+      mobBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        setDrawerOpen(!mobDrawer.classList.contains('open'));
+      });
+
+      mobDrawer.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => setDrawerOpen(false));
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && mobDrawer.classList.contains('open')) {
+          setDrawerOpen(false);
+        }
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!mobDrawer.contains(e.target) && !mobBtn.contains(e.target)) {
+          setDrawerOpen(false);
+        }
+      });
+    }
+
+    if ('serviceWorker' in navigator) {
+      const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+      if (isLocalhost) {
+        navigator.serviceWorker.getRegistrations().then(regs => {
+          for (const reg of regs) reg.unregister();
+        });
+        if ('caches' in window) {
+          caches.keys().then(names => {
+            for (const name of names) caches.delete(name);
+          });
+        }
+      } else {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/Gitab/sw.js').catch(() => {});
+        });
+      }
+    }
+  })();
+  </script> <script>
+  document.querySelectorAll('pre code').forEach(block => {
+    const pre = block.parentNode;
+    if (!pre || pre.querySelector('.copy-btn')) return;
+
+    const copySvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
+    const okSvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+
+    const btn = document.createElement('button');
+    btn.className = 'copy-btn';
+    btn.setAttribute('aria-label', 'کپی کد');
+    btn.setAttribute('title', 'کپی کد');
+    btn.setAttribute('type', 'button');
+    btn.innerHTML = copySvg;
+    pre.appendChild(btn);
+
+    btn.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(block.textContent);
+        btn.classList.add('copied');
+        btn.innerHTML = okSvg;
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          btn.innerHTML = copySvg;
+        }, 1800);
+      } catch (err) {
+        console.error('Copy failed:', err);
+      }
+    });
+  });
+  </script> <script>
+  (() => {
+    const article = document.getElementById('chapterArticle');
+    if (!article) return;
+
+    const progressBar = document.getElementById('readingProgressBar');
+    if (progressBar) {
+      window.addEventListener('scroll', () => {
+        const docElem = document.documentElement;
+        const totalHeight = docElem.scrollHeight - docElem.clientHeight;
+        if (totalHeight > 0) {
+          const progress = (window.pageYOffset / totalHeight) * 100;
+          progressBar.style.width = Math.min(100, Math.max(0, progress)) + '%';
+        }
+      }, { passive: true });
+    }
+
+    const btt = document.getElementById('backToTopBtn');
+    if (btt) {
+      window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 250) {
+          btt.classList.add('visible');
+        } else {
+          btt.classList.remove('visible');
+        }
+      }, { passive: true });
+
+      btt.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+
+    article.querySelectorAll('img').forEach(img => {
+      if (!img.hasAttribute('loading')) img.loading = 'lazy';
+      if (!img.hasAttribute('decoding')) img.decoding = 'async';
+      const parent = img.parentElement;
+      if (parent && parent.tagName === 'P') {
+        parent.style.textAlign = 'center';
+      }
+
+      img.addEventListener('error', function() {
+        const src = this.getAttribute('src');
+        if (src && src.includes('assets/image/')) {
+          const parts = src.split('assets/image/');
+          const corrected = '/Gitab/books/book13/assets/image/' + parts[1];
+          if (this.src !== corrected) {
+            this.src = corrected;
+          }
+        }
+      });
+    });
+
+    article.querySelectorAll('p').forEach(p => {
+      const trimmed = p.innerText.trim();
+      if (trimmed.startsWith('💡') || trimmed.startsWith('نکته:')) {
+        p.classList.add('react-callout', 'callout-tip');
+      } else if (trimmed.startsWith('⚠️') || trimmed.startsWith('هشدار:')) {
+        p.classList.add('react-callout', 'callout-warning');
+      } else if (trimmed.startsWith('📌') || trimmed.startsWith('مهم:')) {
+        p.classList.add('react-callout', 'callout-important');
+      } else if (trimmed.startsWith('🔹') || trimmed.startsWith('🔸')) {
+        p.classList.add('react-callout', 'callout-note');
+      }
+    });
+  })();
+  </script> <script type="speculationrules">{"prefetch":[{"where":{"and":[{"href_matches":"/Gitab/*"},{"not":{"href_matches":"/Gitab/downloads/*"}},{"not":{"selector_matches":"[download], [target='_blank']"}}]},"eagerness":"moderate"}]}</script> <script>
+  (() => {
+    if (window.HTMLScriptElement && HTMLScriptElement.supports && HTMLScriptElement.supports('speculationrules')) return;
+    const seen = new Set([window.location.href]);
+    let count = 0;
+    const prefetchLink = (e) => {
+      if (count >= 12) return;
+      const a = e.target && e.target.closest ? e.target.closest('header a, .chapter-single-next-nav a, .syllabus-chapter-item a, .btn-hero-read, .btn-card-read') : null;
+      if (!a || !a.href || a.hasAttribute('download') || a.target === '_blank') return;
+      if (a.origin !== window.location.origin || a.pathname.includes('/downloads/')) return;
+      const clean = a.href.split('#')[0];
+      if (!clean || seen.has(clean)) return;
+      seen.add(clean);
+      count++;
+      const l = document.createElement('link');
+      l.rel = 'prefetch';
+      l.href = clean;
+      document.head.appendChild(l);
+    };
+    document.addEventListener('pointerenter', prefetchLink, { capture: true, passive: true });
+    document.addEventListener('touchstart', prefetchLink, { capture: true, passive: true });
+  })();
+  </script></body></html>

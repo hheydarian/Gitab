@@ -30,9 +30,13 @@
         const insideProject = path.startsWith(base);
         if (insideProject)
         {
-            const rel = path.slice(base.length);
-            const target = rel.endsWith("/") ? rel + "index.html" : rel + "/index.html";
-            window.location.replace(base + target);
+            const rel = path.slice(base.length).replace(/\\/g, "/");
+            if (rel && !rel.startsWith("//") && !rel.includes("..") && !rel.endsWith("index.html")) {
+                const target = rel.endsWith("/") ? rel + "index.html" : rel + "/index.html";
+                window.location.replace(base + target);
+            } else {
+                window.location.replace(base + "/");
+            }
         } else
         {
             // اگر به هر دلیلی خارج از base بود، بفرست به صفحهٔ اصلی پروژه

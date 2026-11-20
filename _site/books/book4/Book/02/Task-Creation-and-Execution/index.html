@@ -1,141 +1,33 @@
-
-
-<!doctype html>
-<html lang="fa" dir="rtl">
-<head>
-  <meta charset="utf-8">
-  <link rel="icon" type="image/png" href="/Gitab/favicon.png">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>ایجاد و اجرای Task</title>
-  <meta name="description" content="ترجمه‌های فارسی کتاب‌های فنی — سریع، مینیمال و قابل اتکا.">
-
-  <!-- استایل‌ها -->
-  <link rel="stylesheet" href="/Gitab/styles/main.css">
-  <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
-
-  <style>
-  @font-face {
-    font-family: 'Vazir';
-    src: url('/Gitab/fonts/Vazir-FD-WOL.ttf') format('truetype');
-    font-display: swap;
-  }
-  @font-face {
-    font-family: "Lalezar";
-    src: url('fonts/Lalezar.ttf') format('truetype');
-    font-display: swap;
-}
-  body {
-    font-family: 'Vazir', sans-serif;
-  }
-  </style>
-</head>
-
-<body>
-  <!-- هدر مشترک -->
-  <header class="header">
-    <div class="container nav-wrap">
-      <a href="/Gitab/" class="brand">
-        <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="26" height="26">
-        <span>Gitab</span>
-      </a>
-
-       <nav class="nav">
-         <a href="/Gitab/" >خانه</a>
-         <a href="/Gitab/books/list-books" >کتاب‌ها</a>
-         <a href="/Gitab/giter.html" >دوره ها</a>
-          <!-- 
-         <a href="/Gitab/translator.html" >مترجمین</a>
-           -->
-       </nav>
-
-      <div class="nav-actions">
-        <button id="themeToggle" class="icon-btn theme-btn" data-icon="moon" aria-label="تغییر تم">
-          <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن">
-          <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک">
-        </button>
-
-        <a class="icon-btn" href="https://github.com/hheydarian/Gitab" target="_blank" title="GitHub">
-          <img src="/Gitab/icone/github.svg" alt="GitHub">
-        </a>
-
-        <!-- دکمه منو برای موبایل -->
-        <button class="menu-toggle" aria-label="منو">
-          <img src="/Gitab/icone/menu.svg" alt="menu">
-        </button>
-      </div>
-    </div>
-  </header>
-
-  
-  <main class="site-main book-page">
-    <h1>فصل دوم: ایجاد و اجرای Task ⚡</h1>
-<p>این فصل به شما کمک می‌کند تا در برنامه‌نویسی Task عمیق‌تر شوید.</p>
-<p>در این فصل، شما با روش‌های مختلف ایجاد و اجرای Task آشنا خواهید شد.</p>
-<p>پس از اجرای یک Task، ممکن است بخواهید نتیجه آن را مشاهده کنید. این یعنی لازم است منتظر تکمیل Task شوید ⏳.</p>
-<p>به همین دلیل، این فصل همچنین انواع مختلف مکانیزم‌های انتظار (Waiting Mechanisms) را بررسی می‌کند.</p>
-<h3>ایجاد و اجرای یک Task 🛠️</h3>
-<p>شما می‌توانید <strong>Task</strong>‌ها را به روش‌های مختلفی ایجاد و اجرا کنید. فرض کنید کد زیر را داریم:</p>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">DoSomeTask</span>()</span>
+<!doctype html><html lang="fa" dir="rtl"> <head><script>
+    if (window.location.pathname.startsWith('/gitab/')) {
+      window.location.replace(window.location.pathname.replace(/^\/gitab\//i, '/Gitab/') + window.location.search + window.location.hash);
+    }
+    (() => {
+      try {
+        const t = localStorage.getItem('gitab-theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', t);
+        document.documentElement.dataset.colorMode = t;
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        document.documentElement.dataset.colorMode = 'dark';
+      }
+    })();
+  </script> <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5"> <title>ایجاد و اجرای Task</title><meta name="description" content="ایجاد و اجرای Task — مطالعه آنلاین و رایگان از کتاب «برنامه‌نویسی تسک و ناهمگام در سی‌شارپ» (Task Programming in C#) اثر Vaskaran Sarcar با ترجمه حامد حیدریان در گیتاب."> <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"><meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"> <meta name="theme-color" content="#090d16"><meta name="referrer" content="strict-origin-when-cross-origin"> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https:; frame-src https://www.youtube.com https://www.youtube-nocookie.com https://maps.google.com https://www.google.com; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self';"><link rel="icon" type="image/png" href="/Gitab/favicon.png"> <link rel="canonical" href="https://hheydarian.github.io/Gitab/books/book4/Book/02/Task-Creation-and-Execution/"><link rel="alternate" hreflang="fa" href="https://hheydarian.github.io/Gitab/books/book4/Book/02/Task-Creation-and-Execution/"> <link rel="alternate" hreflang="x-default" href="https://hheydarian.github.io/Gitab/books/book4/Book/02/Task-Creation-and-Execution/"><link rel="alternate" type="text/plain" title="LLMs.txt" href="/Gitab/llms.txt"> <link rel="sitemap" type="application/xml" title="Sitemap" href="/Gitab/sitemap.xml"><meta property="og:locale" content="fa_IR"> <meta property="og:type" content="article"><meta property="og:site_name" content="گیتاب | Gitab"> <meta property="og:title" content="ایجاد و اجرای Task"><meta property="og:description" content="ایجاد و اجرای Task — مطالعه آنلاین و رایگان از کتاب «برنامه‌نویسی تسک و ناهمگام در سی‌شارپ» (Task Programming in C#) اثر Vaskaran Sarcar با ترجمه حامد حیدریان در گیتاب."> <meta property="og:url" content="https://hheydarian.github.io/Gitab/books/book4/Book/02/Task-Creation-and-Execution/"><meta property="og:image" content="https://hheydarian.github.io/Gitab/images/task-programming/Cover.jpg"> <meta property="og:image:alt" content="ایجاد و اجرای Task"><meta name="twitter:card" content="summary_large_image"> <meta name="twitter:title" content="ایجاد و اجرای Task"><meta name="twitter:description" content="ایجاد و اجرای Task — مطالعه آنلاین و رایگان از کتاب «برنامه‌نویسی تسک و ناهمگام در سی‌شارپ» (Task Programming in C#) اثر Vaskaran Sarcar با ترجمه حامد حیدریان در گیتاب."> <meta name="twitter:image" content="https://hheydarian.github.io/Gitab/images/task-programming/Cover.jpg"><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://hheydarian.github.io/Gitab/#organization","name":"گیتاب | Gitab","alternateName":"Gitab","url":"https://hheydarian.github.io/Gitab/","logo":{"@type":"ImageObject","url":"https://hheydarian.github.io/Gitab/favicon.png"},"sameAs":["https://github.com/hheydarian/Gitab"]},{"@type":"WebSite","@id":"https://hheydarian.github.io/Gitab/#website","url":"https://hheydarian.github.io/Gitab/","name":"گیتاب | Gitab","inLanguage":"fa-IR","publisher":{"@id":"https://hheydarian.github.io/Gitab/#organization"},"potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://hheydarian.github.io/Gitab/books/list-books/?q={search_term_string}"},"query-input":"required name=search_term_string"}},{"@type":"WebPage","@id":"https://hheydarian.github.io/Gitab/books/book4/Book/02/Task-Creation-and-Execution/#webpage","url":"https://hheydarian.github.io/Gitab/books/book4/Book/02/Task-Creation-and-Execution/","name":"ایجاد و اجرای Task","description":"ایجاد و اجرای Task — مطالعه آنلاین و رایگان از کتاب «برنامه‌نویسی تسک و ناهمگام در سی‌شارپ» (Task Programming in C#) اثر Vaskaran Sarcar با ترجمه حامد حیدریان در گیتاب.","inLanguage":"fa-IR","isPartOf":{"@id":"https://hheydarian.github.io/Gitab/#website"}},{"@type":"TechArticle","headline":"ایجاد و اجرای Task","description":"ایجاد و اجرای Task — مطالعه آنلاین و رایگان از کتاب «برنامه‌نویسی تسک و ناهمگام در سی‌شارپ» (Task Programming in C#) اثر Vaskaran Sarcar با ترجمه حامد حیدریان در گیتاب.","url":"https://hheydarian.github.io/Gitab/books/book4/Book/02/Task-Creation-and-Execution/","inLanguage":"fa-IR","isAccessibleForFree":true,"author":{"@type":"Person","name":"Vaskaran Sarcar"},"translator":{"@type":"Person","name":"حامد حیدریان"},"isPartOf":{"@type":"Book","name":"برنامه‌نویسی تسک و ناهمگام در سی‌شارپ","alternateName":"Task Programming in C#","url":"https://hheydarian.github.io/Gitab/books/book4/"}}]}</script> <link rel="preload" href="/Gitab/fonts/Vazirmatn.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/Gitab/styles/main.css?v=2.4" as="style"> <link rel="preload" href="/Gitab/styles/gitab-modern.css?v=2.5" as="style"><style>@font-face{font-family:'Lalezar';src:url('/Gitab/fonts/Lalezar.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}@font-face{font-family:'Vazirmatn';src:url('/Gitab/fonts/Vazirmatn.woff2') format('woff2');font-weight:100 900;font-style:normal;font-display:swap}html,body,button,input,optgroup,select,textarea,.filter-pill{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}input::placeholder,textarea::placeholder{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}</style> <link rel="stylesheet" href="/Gitab/styles/main.css?v=2.4"><link rel="stylesheet" href="/Gitab/styles/gitab-modern.css?v=2.5"> <link rel="stylesheet" href="/Gitab/styles/vendor/github-dark.min.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="/Gitab/styles/vendor/github-dark.min.css"></noscript></head> <body><header class="header"> <div class="container nav-wrap"><a href="/Gitab/" class="brand" aria-label="صفحه اصلی گیتاب"> <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="30" height="30" decoding="async"> <span class="brand-text">Gitab</span> </a> <nav class="nav" id="mainNav"><a href="/Gitab/" >خانه</a> <a href="/Gitab/books/list-books" aria-current="page">کتاب‌ها</a> <a href="/Gitab/courses/" >دوره‌ها</a> <a href="/Gitab/translator.html" >مترجمین</a></nav> <div class="nav-actions"><button id="themeToggle" class="theme-toggle-btn" aria-label="تغییر تم" title="تغییر تم"> <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن" width="18" height="18" decoding="async" style="display:none"> <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک" width="18" height="18" decoding="async"> </button> <a class="btn-github-pill" href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" title="مشاهده سورس گیتاب در گیت‌هاب"> <img src="/Gitab/icone/github.svg" alt="GitHub" width="16" height="16" decoding="async"> <span>گیت‌هاب</span> </a> <button class="mobile-menu-btn" id="mobileMenuBtn" type="button" aria-label="باز کردن منو" aria-expanded="false"> <svg class="mob-icon-open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="4" y1="7" x2="20" y2="7"></line> <line x1="4" y1="12" x2="20" y2="12"></line> <line x1="4" y1="17" x2="14" y2="17"></line> </svg> <svg class="mob-icon-close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="18" y1="6" x2="6" y2="18"></line> <line x1="6" y1="6" x2="18" y2="18"></line> </svg> </button></div> </div><div class="mobile-drawer" id="mobileDrawer" aria-hidden="true"> <div class="mobile-drawer-inner"><div class="mobile-drawer-section-label">ناوبری سریع</div><nav class="mobile-drawer-links" aria-label="منوی موبایل"> <a href="/Gitab/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M3 10.5 12 3l9 7.5"></path> <path d="M5 9.5V20a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V9.5"></path> </svg> </span> <span class="mob-nav-text">صفحه نخست</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/books/list-books" class="mobile-drawer-link active" aria-current="page"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path> </svg> </span> <span class="mob-nav-text">کتابخانه و فهرست کتاب‌ها</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/courses/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path> <path d="M6 12v5c3 3 9 3 12 0v-5"></path> </svg> </span> <span class="mob-nav-text">دوره‌های آموزشی</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/translator.html" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path> <circle cx="9" cy="7" r="4"></circle> <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path> <path d="M16 3.13a4 4 0 0 1 0 7.75"></path> </svg> </span> <span class="mob-nav-text">مترجمین و همکاران</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> </nav><div class="mobile-drawer-divider"></div><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" class="mobile-drawer-link mobile-drawer-gh"> <span class="mob-nav-icon" aria-hidden="true"> <img src="/Gitab/icone/github.svg" alt="" width="17" height="17" loading="lazy" decoding="async"> </span> <span class="mob-nav-text">مخزن گیت‌هاب پروژه</span> <span class="mob-nav-ext" aria-hidden="true">↗</span> </a> </div></div> </header><div class="reading-progress-track"> <div class="reading-progress-fill" id="readingProgressBar"></div></div> <main class="site-main chapter-reading-page"><div class="chapter-page-wrapper"> <nav class="chapter-clean-breadcrumb" aria-label="مسیر راهنما" dir="rtl"><a href="/Gitab/">خانه</a> <span class="bc-sep" aria-hidden="true">/</span> <a href="/Gitab/books/list-books/">کتاب‌ها</a> <span class="bc-sep" aria-hidden="true">/</span> <a href="/Gitab/books/book4/"><bdi>برنامه‌نویسی تسک در سی‌شارپ</bdi></a> <span class="bc-sep" aria-hidden="true">/</span> <span class="bc-current-leaf"><bdi>ایجاد و اجرای Task</bdi></span></nav> <article class="chapter-prose-container markdown-body" id="chapterArticle" dir="rtl"><h1>فصل دوم: ایجاد و اجرای Task</h1><p>این فصل به شما کمک می‌کند تا در برنامه‌نویسی Task عمیق‌تر شوید.</p><p>در این فصل، شما با روش‌های مختلف ایجاد و اجرای Task آشنا خواهید شد.</p><p>پس از اجرای یک Task، ممکن است بخواهید نتیجه آن را مشاهده کنید. این یعنی لازم است منتظر تکمیل Task شوید ⏳.</p><p>به همین دلیل، این فصل همچنین انواع مختلف مکانیزم‌های انتظار (Waiting Mechanisms) را بررسی می‌کند.</p><h3>ایجاد و اجرای یک Task</h3><p>شما می‌توانید <strong>Task</strong>‌ها را به روش‌های مختلفی ایجاد و اجرا کنید. فرض کنید کد زیر را داریم:</p><pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">DoSomeTask</span>()</span>
 {
     <span class="hljs-comment">// Some code</span>
 }
-</code></pre>
-<p>با توجه به کد بالا، بیایید رایج‌ترین روش‌های ایجاد و اجرای <strong>Task</strong> را بررسی کنیم:</p>
-<p>© <strong>Vaskaran Sarcar 2025</strong><br>
-<strong>V. Sarcar, Task Programming in C# and .NET, Apress Pocket Guides,</strong><br>
-<a href="https://doi.org/10.1007/979-8-8688-1279-8_2">https://doi.org/10.1007/979-8-8688-1279-8_2</a></p>
-<hr>
-<h3><strong>فصل ۲ – ایجاد و اجرای Task</strong></h3>
-<h4><strong>روش ۱:</strong></h4>
-<p>متد <strong>Task.Run</strong> روشی پیشنهادی و رایج برای ایجاد و شروع یک <strong>Task</strong> است. این روش به شما کمک می‌کند تا بلافاصله پس از ایجاد، <strong>Task</strong> به‌صورت خودکار اجرا شود. نمونه کد:</p>
-<pre class="hljs"><code>Task task = Task.Run(DoSomeTask);
-</code></pre>
-<hr>
-<h4><strong>روش ۲:</strong></h4>
-<p>برای ایجاد و اجرای خودکار یک <strong>Task</strong> می‌توانید از متد <strong>Task.Factory.StartNew</strong> هم استفاده کنید. این روش به شما امکان می‌دهد گزینه‌های پیشرفته‌تری برای پیکربندی <strong>Task</strong>ها اعمال کنید. نمونه کد:</p>
-<pre class="hljs"><code>Task task = Task.Factory.StartNew(DoSomeTask);
-</code></pre>
-<hr>
-<h4><strong>روش ۳:</strong></h4>
-<p>همچنین می‌توانید از <strong>سازنده Task</strong> استفاده کنید تا یک <strong>Task</strong> بسازید. اما در این حالت باید به‌طور <strong>صریح</strong> آن را با فراخوانی متد <strong>Start</strong> شروع کنید. نمونه کد:</p>
-<pre class="hljs"><code>Task task = <span class="hljs-keyword">new</span> Task(DoSomeTask);
+</code></pre> <p>با توجه به کد بالا، بیایید رایج‌ترین روش‌های ایجاد و اجرای <strong>Task</strong> را بررسی کنیم:</p><p>© <strong>Vaskaran Sarcar 2025</strong><br><strong>V. Sarcar, Task Programming in C# and .NET, Apress Pocket Guides,</strong><br><a href="https://doi.org/10.1007/979-8-8688-1279-8_2">https://doi.org/10.1007/979-8-8688-1279-8_2</a></p><hr> <h3><strong>فصل ۲ – ایجاد و اجرای Task</strong></h3><h4><strong>روش ۱:</strong></h4><p>متد <strong>Task.Run</strong> روشی پیشنهادی و رایج برای ایجاد و شروع یک <strong>Task</strong> است. این روش به شما کمک می‌کند تا بلافاصله پس از ایجاد، <strong>Task</strong> به‌صورت خودکار اجرا شود. نمونه کد:</p><pre class="hljs"><code>Task task = Task.Run(DoSomeTask);
+</code></pre> <hr><h4><strong>روش ۲:</strong></h4><p>برای ایجاد و اجرای خودکار یک <strong>Task</strong> می‌توانید از متد <strong>Task.Factory.StartNew</strong> هم استفاده کنید. این روش به شما امکان می‌دهد گزینه‌های پیشرفته‌تری برای پیکربندی <strong>Task</strong>ها اعمال کنید. نمونه کد:</p><pre class="hljs"><code>Task task = Task.Factory.StartNew(DoSomeTask);
+</code></pre> <hr><h4><strong>روش ۳:</strong></h4><p>همچنین می‌توانید از <strong>سازنده Task</strong> استفاده کنید تا یک <strong>Task</strong> بسازید. اما در این حالت باید به‌طور <strong>صریح</strong> آن را با فراخوانی متد <strong>Start</strong> شروع کنید. نمونه کد:</p><pre class="hljs"><code>Task task = <span class="hljs-keyword">new</span> Task(DoSomeTask);
 task.Start();
-</code></pre>
-<p>از <strong>C# 9</strong> به بعد، می‌توانید از <strong>target-typed new expressions</strong> استفاده کنید تا کد ساده‌تر شود:</p>
-<pre class="hljs"><code>Task task = <span class="hljs-keyword">new</span>(DoSomeTask);
+</code></pre> <p>از <strong>C# 9</strong> به بعد، می‌توانید از <strong>target-typed new expressions</strong> استفاده کنید تا کد ساده‌تر شود:</p><pre class="hljs"><code>Task task = <span class="hljs-keyword">new</span>(DoSomeTask);
 task.Start();
-</code></pre>
-<hr>
-<p><strong>نکته:</strong><br>
-شما با روش‌هایی آشنا شدید که به‌صورت صریح <strong>Task</strong> ایجاد و اجرا می‌کنند. اما روش‌های دیگری هم وجود دارد. برای مثال:</p>
-<ul>
-<li>می‌توانید <strong>Task</strong>ها را به‌صورت <strong>ضمنی</strong> با استفاده از متد <strong>Parallel.Invoke</strong> ایجاد و اجرا کنید.</li>
-<li>همچنین کلاس <strong>TaskCompletionSource<TResult></strong> به شما کمک می‌کند <strong>Task</strong>های ویژه و مناسب برای سناریوهای خاص ایجاد کنید.</li>
-</ul>
-<p>با این حال، بهتر است این مفاهیم را گام‌به‌گام یاد بگیریم.</p>
-<hr>
-<h3><strong>کپسوله کردن کد با استفاده از Lambda Expression</strong> ⚡</h3>
-<p>شما می‌توانید با ارائه یک <strong>delegate</strong> که کد موردنظر را کپسوله می‌کند، یک <strong>Task</strong> بسازید. این <strong>delegate</strong> می‌تواند به صورت یک <strong>delegate نام‌گذاری‌شده</strong>، یک <strong>متد ناشناس</strong> یا یک <strong>lambda expression</strong> بیان شود.</p>
-<p>در اینجا نمونه‌ای از یک <strong>Task</strong> دیگر ارائه شده است که در آن کد لازم را درون یک <strong>lambda expression</strong> قرار داده‌ایم:</p>
-<pre class="hljs"><code>Task task = Task.Run(
+</code></pre> <hr><p><strong>نکته:</strong><br> شما با روش‌هایی آشنا شدید که به‌صورت صریح <strong>Task</strong> ایجاد و اجرا می‌کنند. اما روش‌های دیگری هم وجود دارد. برای مثال:</p><ul> <li>می‌توانید <strong>Task</strong>ها را به‌صورت <strong>ضمنی</strong> با استفاده از متد <strong>Parallel.Invoke</strong> ایجاد و اجرا کنید.</li><li>همچنین کلاس <strong>TaskCompletionSource<TResult></strong> به شما کمک می‌کند <strong>Task</strong>های ویژه و مناسب برای سناریوهای خاص ایجاد کنید.</li></ul> <p>با این حال، بهتر است این مفاهیم را گام‌به‌گام یاد بگیریم.</p><hr> <h3><strong>کپسوله کردن کد با استفاده از Lambda Expression</strong></h3><p>شما می‌توانید با ارائه یک <strong>delegate</strong> که کد موردنظر را کپسوله می‌کند، یک <strong>Task</strong> بسازید. این <strong>delegate</strong> می‌تواند به صورت یک <strong>delegate نام‌گذاری‌شده</strong>، یک <strong>متد ناشناس</strong> یا یک <strong>lambda expression</strong> بیان شود.</p><p>در اینجا نمونه‌ای از یک <strong>Task</strong> دیگر ارائه شده است که در آن کد لازم را درون یک <strong>lambda expression</strong> قرار داده‌ایم:</p><pre class="hljs"><code>Task task = Task.Run(
     () =&gt;
     {
     }
 );
-</code></pre>
-<hr>
-<h3><strong>نمایش ۱</strong> 🔍</h3>
-<p>بیایید بررسی کنیم که آیا <strong>Task</strong>‌ها به ما کمک می‌کنند <strong>برنامه‌نویسی غیرهمزمان (Asynchronous Programming)</strong> انجام دهیم یا خیر. برای این منظور از نمایش زیر استفاده می‌کنیم:</p>
-<div align="center">
-<p><img src="../../../assets/image/02/Table%202-1.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<h3><strong>نکته‌ای برای یادآوری</strong> 📝</h3>
-<p>از <strong>.NET 6</strong> به بعد، ممکن است متوجه وجود <strong>implicit global directives</strong> برای پروژه‌های جدید <strong>C#</strong> شوید. این قابلیت کمک می‌کند بدون نیاز به نوشتن نام کامل یا اضافه کردن دستی دستور <strong>using</strong>، از انواع موجود در این <strong>namespace</strong>ها استفاده کنید.<br>
-می‌توانید اطلاعات بیشتر را از لینک زیر مطالعه کنید:<br>
-<a href="https://learn.microsoft.com/en-us/dotnet/core/project-sdk/overview#implicit-usingdirectives">https://learn.microsoft.com/en-us/dotnet/core/project-sdk/overview#implicit-usingdirectives</a></p>
-<p>در پروژه‌های <strong>C#</strong> این کتاب، من تنظیمات پیش‌فرض را تغییر نداده‌ام. بنابراین، نام‌های زیر را به‌صورت دستی ذکر نکرده‌ام، چون به‌طور پیش‌فرض موجود هستند:</p>
-<pre class="hljs"><code>System
+</code></pre> <hr><h3><strong>نمایش ۱</strong></h3><p>بیایید بررسی کنیم که آیا <strong>Task</strong>‌ها به ما کمک می‌کنند <strong>برنامه‌نویسی غیرهمزمان (Asynchronous Programming)</strong> انجام دهیم یا خیر. برای این منظور از نمایش زیر استفاده می‌کنیم:</p><div align="center"> <p><img src="../../../assets/image/02/Table%202-1.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <h3><strong>نکته‌ای برای یادآوری</strong></h3><p>از <strong>.NET 6</strong> به بعد، ممکن است متوجه وجود <strong>implicit global directives</strong> برای پروژه‌های جدید <strong>C#</strong> شوید. این قابلیت کمک می‌کند بدون نیاز به نوشتن نام کامل یا اضافه کردن دستی دستور <strong>using</strong>، از انواع موجود در این <strong>namespace</strong>ها استفاده کنید.<br> می‌توانید اطلاعات بیشتر را از لینک زیر مطالعه کنید:<br><a href="https://learn.microsoft.com/en-us/dotnet/core/project-sdk/overview#implicit-usingdirectives">https://learn.microsoft.com/en-us/dotnet/core/project-sdk/overview#implicit-usingdirectives</a></p><p>در پروژه‌های <strong>C#</strong> این کتاب، من تنظیمات پیش‌فرض را تغییر نداده‌ام. بنابراین، نام‌های زیر را به‌صورت دستی ذکر نکرده‌ام، چون به‌طور پیش‌فرض موجود هستند:</p><pre class="hljs"><code>System
 System.Collections.Generic
 System.IO
 System.Linq
@@ -143,10 +35,7 @@ System.Net.Http
 System.Threading
 System.Threading.Tasks
 using static System.Console;
-</code></pre>
-<hr>
-<h3><strong>نمونه کد</strong> 💻</h3>
-<pre class="hljs"><code>WriteLine(<span class="hljs-string">&quot;The main thread starts executing.&quot;</span>);
+</code></pre> <hr><h3><strong>نمونه کد</strong></h3><pre class="hljs"><code>WriteLine(<span class="hljs-string">&quot;The main thread starts executing.&quot;</span>);
 Task.Run(PrintNumbers);
 WriteLine(<span class="hljs-string">$&quot;The main thread is doing some other work...&quot;</span>);
 <span class="hljs-comment">// Simulating a delay</span>
@@ -163,11 +52,7 @@ ReadKey();
         Thread.Sleep(<span class="hljs-number">2</span>);
     }
 }
-</code></pre>
-<hr>
-<h3><strong>خروجی</strong> 🖥️</h3>
-<p>در ادامه، یک خروجی نمونه از این برنامه را که در سیستم من اجرا شده، مشاهده می‌کنید. بدیهی است که ممکن است خروجی در سیستم شما متفاوت باشد. همان‌طور که می‌بینید، <strong>main thread</strong> در حین اجرای <strong>task</strong> چاپ اعداد، <strong>مسدود نشده است</strong>. نتیجه، ترکیبی جالب از خروجی چند <strong>thread/task</strong> است:</p>
-<pre class="hljs"><code>The main thread starts executing.
+</code></pre> <hr><h3><strong>خروجی</strong></h3><p>در ادامه، یک خروجی نمونه از این برنامه را که در سیستم من اجرا شده، مشاهده می‌کنید. بدیهی است که ممکن است خروجی در سیستم شما متفاوت باشد. همان‌طور که می‌بینید، <strong>main thread</strong> در حین اجرای <strong>task</strong> چاپ اعداد، <strong>مسدود نشده است</strong>. نتیجه، ترکیبی جالب از خروجی چند <strong>thread/task</strong> است:</p><pre class="hljs"><code>The main thread starts executing.
 The main thread is doing some other work...
 1
 2
@@ -175,41 +60,7 @@ The main thread is doing some other work...
 5
 3
 The main thread is completed.
-</code></pre>
-<hr>
-<h3><strong>جلسه پرسش و پاسخ (Q&amp;A Session)</strong> ❓💬</h3>
-<p><strong>سوال 2.1</strong><br>
-برای ایجاد و اجرای <strong>Task</strong> شما از متدهای <strong>Run</strong>، <strong>Start</strong> و <strong>StartNew</strong> استفاده کردید. چطور تصمیم بگیریم کدام‌یک برای ما مناسب‌تر است؟</p>
-<p><strong>پاسخ:</strong><br>
-اگر تعاریف این متدها را در <strong>Visual Studio</strong> بررسی کنید، جمله زیر را خواهید دید:</p>
-<blockquote>
-<p>“The Start method starts the System.Threading.Tasks.Task, scheduling it for execution to the specified System.Threading.Tasks.TaskScheduler.”</p>
-</blockquote>
-<p>این متد زمانی مفید است که بخواهید <strong>Task</strong> را بسته به یک شرط خاص، <strong>به‌صورت دستی</strong> اجرا کنید.</p>
-<p>متد <strong>Run</strong>، کار مشخص‌شده را در <strong>thread pool</strong> قرار می‌دهد و یک شیء <strong>System.Threading.Tasks.Task</strong> را که نشان‌دهنده همان کار است، برمی‌گرداند. این روش یک جایگزین سبک‌تر نسبت به <strong>StartNew</strong> است و به شما کمک می‌کند تا با مقادیر پیش‌فرض یک <strong>Task</strong> را شروع کنید.</p>
-<p>نکته مهم این است که متد <strong>Run</strong> از <strong>task scheduler پیش‌فرض</strong> استفاده می‌کند، صرف‌نظر از اینکه <strong>task scheduler</strong> فعلی چه چیزی باشد. به همین دلیل، <strong>Microsoft</strong> (در لینک <a href="https://learn.microsoft.com/en-us/dotnet/standard/parallel-programming/task-based-asynchronous-programming">Task-based asynchronous programming</a>) پیشنهادات زیر را ارائه کرده است:</p>
-<ul>
-<li>زمانی که نیازی به کنترل زیاد بر فرآیند ایجاد و زمان‌بندی <strong>Task</strong> ندارید، <strong>Run</strong> بهترین گزینه برای ایجاد و شروع <strong>Task</strong> است.</li>
-</ul>
-<hr>
-<p><strong>مایکروسافت همچنین بیان می‌کند</strong> (در همان لینک) که متد <strong>StartNew</strong> در شرایط زیر کاربرد دارد:</p>
-<ul>
-<li>زمانی که <strong>ایجاد و زمان‌بندی Task</strong> نباید از هم جدا باشند و شما به گزینه‌های اضافی برای ایجاد <strong>Task</strong> یا استفاده از یک <strong>scheduler خاص</strong> نیاز دارید.</li>
-<li>زمانی که باید یک <strong>وضعیت اضافی (state)</strong> را به <strong>Task</strong> ارسال کنید که بعداً از طریق ویژگی <strong>Task.AsyncState</strong> قابل بازیابی باشد.</li>
-</ul>
-<div align="center">
-<p><img src="../../../assets/image/02/Table%202-2.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<h3><strong>نکته‌ای که باید به خاطر بسپارید</strong> 📝</h3>
-<p>برای اینکه یک مثال مشخص داشته باشیم، باید بدانید که به‌زودی درباره <strong>child tasks (یا nested tasks)</strong> یاد خواهید گرفت. در آنجا خواهید دید که با استفاده از گزینه <strong>TaskCreationOptions.AttachedToParent</strong> می‌توانید یک <strong>task فرزند</strong> را به <strong>task والد</strong> متصل کنید (البته اگر <strong>task والد</strong> این کار را مجاز بداند). این گزینه در برخی از <strong>overload</strong>های متد <strong>StartNew</strong> در دسترس است.<br>
-اما متد <strong>Run</strong> چنین گزینه‌ای را ارائه نمی‌دهد.</p>
-<hr>
-<h3><strong>ارسال و دریافت مقادیر</strong> 🔄</h3>
-<p>در این بخش بررسی می‌کنیم که چگونه می‌توانید <strong>مقدار(ها)</strong> را به یک <strong>task</strong> ارسال کنید یا یک مقدار محاسبه‌شده را از آن دریافت کنید.</p>
-<hr>
-<h3><strong>ارسال مقادیر به داخل Tasks</strong> 🎯</h3>
-<p>در <strong>نمایش ۱</strong>، متد <strong>PrintNumbers</strong> اعداد را از <strong>۱ تا ۵</strong> چاپ می‌کرد. بیایید این تابع را تغییر دهیم تا بتواند <strong>آرگومان</strong> دریافت کند. در ادامه، نسخه اصلاح‌شده این تابع با تغییرات کلیدی (پررنگ‌شده):</p>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">PrintNumbers</span>(<span class="hljs-params"><span class="hljs-built_in">int</span> limit</span>)</span>
+</code></pre> <hr><h3><strong>جلسه پرسش و پاسخ (Q&amp;A Session)</strong></h3><p><strong>سوال 2.1</strong><br> برای ایجاد و اجرای <strong>Task</strong> شما از متدهای <strong>Run</strong>، <strong>Start</strong> و <strong>StartNew</strong> استفاده کردید. چطور تصمیم بگیریم کدام‌یک برای ما مناسب‌تر است؟</p><p><strong>پاسخ:</strong><br> اگر تعاریف این متدها را در <strong>Visual Studio</strong> بررسی کنید، جمله زیر را خواهید دید:</p><blockquote> <p>“The Start method starts the System.Threading.Tasks.Task, scheduling it for execution to the specified System.Threading.Tasks.TaskScheduler.”</p></blockquote> <p>این متد زمانی مفید است که بخواهید <strong>Task</strong> را بسته به یک شرط خاص، <strong>به‌صورت دستی</strong> اجرا کنید.</p><p>متد <strong>Run</strong>، کار مشخص‌شده را در <strong>thread pool</strong> قرار می‌دهد و یک شیء <strong>System.Threading.Tasks.Task</strong> را که نشان‌دهنده همان کار است، برمی‌گرداند. این روش یک جایگزین سبک‌تر نسبت به <strong>StartNew</strong> است و به شما کمک می‌کند تا با مقادیر پیش‌فرض یک <strong>Task</strong> را شروع کنید.</p><p>نکته مهم این است که متد <strong>Run</strong> از <strong>task scheduler پیش‌فرض</strong> استفاده می‌کند، صرف‌نظر از اینکه <strong>task scheduler</strong> فعلی چه چیزی باشد. به همین دلیل، <strong>Microsoft</strong> (در لینک <a href="https://learn.microsoft.com/en-us/dotnet/standard/parallel-programming/task-based-asynchronous-programming">Task-based asynchronous programming</a>) پیشنهادات زیر را ارائه کرده است:</p><ul> <li>زمانی که نیازی به کنترل زیاد بر فرآیند ایجاد و زمان‌بندی <strong>Task</strong> ندارید، <strong>Run</strong> بهترین گزینه برای ایجاد و شروع <strong>Task</strong> است.</li></ul> <hr><p><strong>مایکروسافت همچنین بیان می‌کند</strong> (در همان لینک) که متد <strong>StartNew</strong> در شرایط زیر کاربرد دارد:</p><ul> <li>زمانی که <strong>ایجاد و زمان‌بندی Task</strong> نباید از هم جدا باشند و شما به گزینه‌های اضافی برای ایجاد <strong>Task</strong> یا استفاده از یک <strong>scheduler خاص</strong> نیاز دارید.</li><li>زمانی که باید یک <strong>وضعیت اضافی (state)</strong> را به <strong>Task</strong> ارسال کنید که بعداً از طریق ویژگی <strong>Task.AsyncState</strong> قابل بازیابی باشد.</li></ul> <div align="center"><p><img src="../../../assets/image/02/Table%202-2.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <h3><strong>نکته‌ای که باید به خاطر بسپارید</strong></h3><p>برای اینکه یک مثال مشخص داشته باشیم، باید بدانید که به‌زودی درباره <strong>child tasks (یا nested tasks)</strong> یاد خواهید گرفت. در آنجا خواهید دید که با استفاده از گزینه <strong>TaskCreationOptions.AttachedToParent</strong> می‌توانید یک <strong>task فرزند</strong> را به <strong>task والد</strong> متصل کنید (البته اگر <strong>task والد</strong> این کار را مجاز بداند). این گزینه در برخی از <strong>overload</strong>های متد <strong>StartNew</strong> در دسترس است.<br> اما متد <strong>Run</strong> چنین گزینه‌ای را ارائه نمی‌دهد.</p><hr> <h3><strong>ارسال و دریافت مقادیر</strong></h3><p>در این بخش بررسی می‌کنیم که چگونه می‌توانید <strong>مقدار(ها)</strong> را به یک <strong>task</strong> ارسال کنید یا یک مقدار محاسبه‌شده را از آن دریافت کنید.</p><hr> <h3><strong>ارسال مقادیر به داخل Tasks</strong></h3><p>در <strong>نمایش ۱</strong>، متد <strong>PrintNumbers</strong> اعداد را از <strong>۱ تا ۵</strong> چاپ می‌کرد. بیایید این تابع را تغییر دهیم تا بتواند <strong>آرگومان</strong> دریافت کند. در ادامه، نسخه اصلاح‌شده این تابع با تغییرات کلیدی (پررنگ‌شده):</p><pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">PrintNumbers</span>(<span class="hljs-params"><span class="hljs-built_in">int</span> limit</span>)</span>
 {
     <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i = <span class="hljs-number">1</span>; i &lt;= limit; i++)
     {
@@ -218,36 +69,13 @@ The main thread is completed.
         Thread.Sleep(<span class="hljs-number">2</span>);
     }
 }
-</code></pre>
-<hr>
-<p>اگر بخواهید این تابع را در یک <strong>thread</strong> جداگانه اجرا کنید، باید یک آرگومان معتبر (برای پارامتر <strong>limit</strong>) از <strong>thread فراخواننده</strong> ارسال کنید.<br>
-بنابراین، خط زیر از <strong>نمایش ۱</strong> را:</p>
-<pre class="hljs"><code>Task task = Task.Run(PrintNumbers);
-</code></pre>
-<p>با خط زیر جایگزین کنید:</p>
-<pre class="hljs"><code>Task task = Task.Run(() =&gt; PrintNumbers(<span class="hljs-number">5</span>));
-</code></pre>
-<hr>
-<p>اکنون اگر برنامه را دوباره اجرا کنید، خروجی مشابهی خواهید دید که در اجرای <strong>نمایش ۱</strong> دیده بودید.</p>
-<p>لازم نیست یادآوری کنم که می‌توانید خط قبلی را با خط زیر هم جایگزین کنید:</p>
-<pre class="hljs"><code>Task task = Task.Factory.StartNew(() =&gt; PrintNumbers(<span class="hljs-number">5</span>));
-</code></pre>
-<p>یا این خطوط:</p>
-<pre class="hljs"><code>Task task = <span class="hljs-keyword">new</span>(() =&gt; PrintNumbers(<span class="hljs-number">5</span>));
+</code></pre> <hr><p>اگر بخواهید این تابع را در یک <strong>thread</strong> جداگانه اجرا کنید، باید یک آرگومان معتبر (برای پارامتر <strong>limit</strong>) از <strong>thread فراخواننده</strong> ارسال کنید.<br> بنابراین، خط زیر از <strong>نمایش ۱</strong> را:</p><pre class="hljs"><code>Task task = Task.Run(PrintNumbers);
+</code></pre> <p>با خط زیر جایگزین کنید:</p><pre class="hljs"><code>Task task = Task.Run(() =&gt; PrintNumbers(<span class="hljs-number">5</span>));
+</code></pre> <hr><p>اکنون اگر برنامه را دوباره اجرا کنید، خروجی مشابهی خواهید دید که در اجرای <strong>نمایش ۱</strong> دیده بودید.</p><p>لازم نیست یادآوری کنم که می‌توانید خط قبلی را با خط زیر هم جایگزین کنید:</p><pre class="hljs"><code>Task task = Task.Factory.StartNew(() =&gt; PrintNumbers(<span class="hljs-number">5</span>));
+</code></pre> <p>یا این خطوط:</p><pre class="hljs"><code>Task task = <span class="hljs-keyword">new</span>(() =&gt; PrintNumbers(<span class="hljs-number">5</span>));
 task.Start();
-</code></pre>
-<hr>
-<p>بیایید یک رویکرد جایگزین را بررسی کنیم. در زمان نگارش این کتاب، کلاس <strong>Task</strong> دارای سازنده‌های زیر است (شکل ۲-۱ را ببینید).</p>
-<div align="center">
-<p><img src="../../../assets/image/02/Table%202-3.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<h3><strong>شکل ۲-۱. نمای جزئی از نسخه‌های Overload شده سازنده‌های Task</strong> 🖼️</h3>
-<p>به سازنده زیر که در <strong>شکل ۲-۱</strong> برجسته شده، توجه کنید:</p>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Task</span>(<span class="hljs-params">Action&lt;<span class="hljs-built_in">object</span>?&gt; action, <span class="hljs-built_in">object</span>? state</span>)</span>;
-</code></pre>
-<p>این سازنده به شما این ایده را می‌دهد که می‌توانید یک <strong>آرگومان شیء (object)</strong> به آن ارسال کنید.<br>
-بیایید یک تابع جدید به نام <strong>PrintNumbersVersion2</strong> معرفی کنیم که یک <strong>پارامتر از نوع object</strong> می‌گیرد و کار مشابهی انجام می‌دهد:</p>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">PrintNumbersVersion2</span>(<span class="hljs-params"><span class="hljs-built_in">object</span>? state</span>)</span>
+</code></pre> <hr><p>بیایید یک رویکرد جایگزین را بررسی کنیم. در زمان نگارش این کتاب، کلاس <strong>Task</strong> دارای سازنده‌های زیر است (شکل ۲-۱ را ببینید).</p><div align="center"> <p><img src="../../../assets/image/02/Table%202-3.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <h3><strong>شکل ۲-۱. نمای جزئی از نسخه‌های Overload شده سازنده‌های Task</strong></h3><p>به سازنده زیر که در <strong>شکل ۲-۱</strong> برجسته شده، توجه کنید:</p><pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Task</span>(<span class="hljs-params">Action&lt;<span class="hljs-built_in">object</span>?&gt; action, <span class="hljs-built_in">object</span>? state</span>)</span>;
+</code></pre> <p>این سازنده به شما این ایده را می‌دهد که می‌توانید یک <strong>آرگومان شیء (object)</strong> به آن ارسال کنید.<br> بیایید یک تابع جدید به نام <strong>PrintNumbersVersion2</strong> معرفی کنیم که یک <strong>پارامتر از نوع object</strong> می‌گیرد و کار مشابهی انجام می‌دهد:</p><pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">PrintNumbersVersion2</span>(<span class="hljs-params"><span class="hljs-built_in">object</span>? state</span>)</span>
 {
     <span class="hljs-built_in">int</span> limit = Convert.ToInt32(state);
     <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i = <span class="hljs-number">0</span>; i &lt;= limit; i++)
@@ -257,21 +85,11 @@ task.Start();
         Thread.Sleep(<span class="hljs-number">2</span>);
     }
 }
-</code></pre>
-<hr>
-<p>این بار می‌توانید چیزی شبیه به این بنویسید:</p>
-<pre class="hljs"><code>Task task = <span class="hljs-keyword">new</span>(PrintNumbersVersion2, <span class="hljs-number">5</span>);
+</code></pre> <hr><p>این بار می‌توانید چیزی شبیه به این بنویسید:</p><pre class="hljs"><code>Task task = <span class="hljs-keyword">new</span>(PrintNumbersVersion2, <span class="hljs-number">5</span>);
 task.Start();
-</code></pre>
-<p>یا:</p>
-<pre class="hljs"><code>Task task = Task.Factory.StartNew(PrintNumbersVersion2, <span class="hljs-number">5</span>);
-</code></pre>
-<p>اما <strong>متد Run</strong> چنین سازنده‌ای ندارد. بنابراین نمی‌توانید چیزی مانند زیر بنویسید:</p>
-<pre class="hljs"><code>Task task4 = Task.Run(PrintNumbersVersion2, <span class="hljs-number">5</span>); <span class="hljs-comment">// Error</span>
-</code></pre>
-<hr>
-<p>خب، تا اینجا روش‌های مختلف ارسال <strong>state</strong> را دیدید. بیایید آن‌ها را خلاصه کنیم:</p>
-<pre class="hljs"><code><span class="hljs-comment">// Approach-1:</span>
+</code></pre> <p>یا:</p><pre class="hljs"><code>Task task = Task.Factory.StartNew(PrintNumbersVersion2, <span class="hljs-number">5</span>);
+</code></pre> <p>اما <strong>متد Run</strong> چنین سازنده‌ای ندارد. بنابراین نمی‌توانید چیزی مانند زیر بنویسید:</p><pre class="hljs"><code>Task task4 = Task.Run(PrintNumbersVersion2, <span class="hljs-number">5</span>); <span class="hljs-comment">// Error</span>
+</code></pre> <hr><p>خب، تا اینجا روش‌های مختلف ارسال <strong>state</strong> را دیدید. بیایید آن‌ها را خلاصه کنیم:</p><pre class="hljs"><code><span class="hljs-comment">// Approach-1:</span>
 <span class="hljs-keyword">var</span> task1 = Task.Run(() =&gt; PrintNumbers(<span class="hljs-number">10</span>));
 
 <span class="hljs-comment">// Approach-2:</span>
@@ -287,43 +105,16 @@ task4.Start();
 
 <span class="hljs-comment">// Approach-5:</span>
 <span class="hljs-keyword">var</span> task5 = Task.Factory.StartNew(PrintNumbersVersion2, <span class="hljs-number">10</span>);
-</code></pre>
-<hr>
-<p>می‌بینید که در هر روش، من یک مقدار <strong>int</strong> ارسال کرده‌ام. با این حال، در دو مورد آخر، متد هدف (<strong>PrintNumbersVersion2</strong>) انتظار یک <strong>object</strong> داشت.<br>
-در نتیجه، این دو روش با مسأله <strong>boxing</strong> و <strong>unboxing</strong> مواجه می‌شوند. در مقابل، این دو روش نسبت به روش‌های ۱، ۲ یا ۳ <strong>خواناتر و مرتب‌تر</strong> هستند.</p>
-<p>در نهایت، انتخاب با شماست که کدام روش را ترجیح دهید و چگونه آن را سازمان‌دهی کنید.</p>
-<hr>
-<p><strong>نکته:</strong><br>
-برای تجربه این روش‌ها، پروژه <strong>Chapter2_Demo2A_PassingValues</strong> را دانلود کنید و آن‌ها را اجرا کنید.</p>
-<hr>
-<h3><strong>برگرداندن مقادیر از Taskها</strong> 🔄</h3>
-<p>وقتی یک <strong>Task</strong> را اجرا می‌کنید، ممکن است نیاز داشته باشید به <strong>مقدار نهایی</strong> آن دسترسی داشته باشید.<br>
-در چنین شرایطی باید از <strong>نسخه جنریک کلاس Task</strong> و ویژگی <strong>Result</strong> استفاده کنید.</p>
-<p>در اینجا یک نمونه کد:</p>
-<pre class="hljs"><code><span class="hljs-keyword">var</span> task = Task&lt;<span class="hljs-built_in">string</span>&gt;.Run(() =&gt; <span class="hljs-string">&quot;Hello&quot;</span>);
+</code></pre> <hr><p>می‌بینید که در هر روش، من یک مقدار <strong>int</strong> ارسال کرده‌ام. با این حال، در دو مورد آخر، متد هدف (<strong>PrintNumbersVersion2</strong>) انتظار یک <strong>object</strong> داشت.<br> در نتیجه، این دو روش با مسأله <strong>boxing</strong> و <strong>unboxing</strong> مواجه می‌شوند. در مقابل، این دو روش نسبت به روش‌های ۱، ۲ یا ۳ <strong>خواناتر و مرتب‌تر</strong> هستند.</p><p>در نهایت، انتخاب با شماست که کدام روش را ترجیح دهید و چگونه آن را سازمان‌دهی کنید.</p><hr> <p><strong>نکته:</strong><br> برای تجربه این روش‌ها، پروژه <strong>Chapter2_Demo2A_PassingValues</strong> را دانلود کنید و آن‌ها را اجرا کنید.</p><hr> <h3><strong>برگرداندن مقادیر از Taskها</strong></h3><p>وقتی یک <strong>Task</strong> را اجرا می‌کنید، ممکن است نیاز داشته باشید به <strong>مقدار نهایی</strong> آن دسترسی داشته باشید.<br> در چنین شرایطی باید از <strong>نسخه جنریک کلاس Task</strong> و ویژگی <strong>Result</strong> استفاده کنید.</p><p>در اینجا یک نمونه کد:</p><pre class="hljs"><code><span class="hljs-keyword">var</span> task = Task&lt;<span class="hljs-built_in">string</span>&gt;.Run(() =&gt; <span class="hljs-string">&quot;Hello&quot;</span>);
 <span class="hljs-keyword">var</span> result = task.Result;
 WriteLine(result);
-</code></pre>
-<hr>
-<p>با این حال، <strong>نوع جنریک</strong> می‌تواند به‌طور خودکار <strong>استنتاج (inferred)</strong> شود. در نتیجه، می‌توانید این کد را ساده‌تر هم بنویسید:</p>
-<pre class="hljs"><code><span class="hljs-keyword">var</span> task = Task.Run(() =&gt; <span class="hljs-string">&quot;Hello&quot;</span>);
+</code></pre> <hr><p>با این حال، <strong>نوع جنریک</strong> می‌تواند به‌طور خودکار <strong>استنتاج (inferred)</strong> شود. در نتیجه، می‌توانید این کد را ساده‌تر هم بنویسید:</p><pre class="hljs"><code><span class="hljs-keyword">var</span> task = Task.Run(() =&gt; <span class="hljs-string">&quot;Hello&quot;</span>);
 <span class="hljs-keyword">var</span> result = task.Result;
 WriteLine(result);
-</code></pre>
-<div align="center">
-<p><img src="../../../assets/image/02/Table%202-4.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<h3><strong>نکته‌ای که باید به خاطر بسپارید</strong> 📝</h3>
-<p>در بخش‌های قبلی، من برای <strong>کاهش تایپ</strong> از <strong>var</strong> استفاده کردم. در ادامه یک نمونه کد معادل که <strong>انواع به‌صورت صریح مشخص شده‌اند</strong> را می‌بینید:</p>
-<pre class="hljs"><code>Task&lt;<span class="hljs-built_in">string</span>&gt; task = Task.Run(() =&gt; <span class="hljs-string">&quot;Hello&quot;</span>);
+</code></pre> <div align="center"><p><img src="../../../assets/image/02/Table%202-4.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <h3><strong>نکته‌ای که باید به خاطر بسپارید</strong></h3><p>در بخش‌های قبلی، من برای <strong>کاهش تایپ</strong> از <strong>var</strong> استفاده کردم. در ادامه یک نمونه کد معادل که <strong>انواع به‌صورت صریح مشخص شده‌اند</strong> را می‌بینید:</p><pre class="hljs"><code>Task&lt;<span class="hljs-built_in">string</span>&gt; task = Task.Run(() =&gt; <span class="hljs-string">&quot;Hello&quot;</span>);
 <span class="hljs-built_in">string</span> result = task.Result;
 WriteLine(result);
-</code></pre>
-<hr>
-<h3><strong>نمایش ۲</strong> 🔍</h3>
-<p>بیایید یک برنامه کامل ببینیم که در آن <strong>Taskها ساخته می‌شوند، مقادیری به آن‌ها ارسال می‌شود و در نهایت مقدار محاسبه‌شده بازیابی می‌گردد.</strong></p>
-<p>در نمایش زیر، من یک <strong>Task</strong> ایجاد می‌کنم که دو عدد صحیح (<strong>۱۰</strong> و <strong>۲۰</strong>) را با هم جمع می‌کند. وقتی این <strong>Task</strong> تمام شد، نتیجه محاسبه را بازیابی کرده و در پنجره <strong>کنسول</strong> نمایش می‌دهم. حالا برنامه کامل را ببینیم:</p>
-<pre class="hljs"><code><span class="hljs-keyword">using</span> <span class="hljs-keyword">static</span> System.Console;
+</code></pre> <hr><h3><strong>نمایش ۲</strong></h3><p>بیایید یک برنامه کامل ببینیم که در آن <strong>Taskها ساخته می‌شوند، مقادیری به آن‌ها ارسال می‌شود و در نهایت مقدار محاسبه‌شده بازیابی می‌گردد.</strong></p><p>در نمایش زیر، من یک <strong>Task</strong> ایجاد می‌کنم که دو عدد صحیح (<strong>۱۰</strong> و <strong>۲۰</strong>) را با هم جمع می‌کند. وقتی این <strong>Task</strong> تمام شد، نتیجه محاسبه را بازیابی کرده و در پنجره <strong>کنسول</strong> نمایش می‌دهم. حالا برنامه کامل را ببینیم:</p><pre class="hljs"><code><span class="hljs-keyword">using</span> <span class="hljs-keyword">static</span> System.Console;
 <span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-built_in">int</span> <span class="hljs-title">Add</span>(<span class="hljs-params"><span class="hljs-built_in">int</span> number1, <span class="hljs-built_in">int</span> number2</span>)</span> =&gt; number1 + number2;
 
 WriteLine(<span class="hljs-string">&quot;Passing and returning values by executing tasks.&quot;</span>);
@@ -335,57 +126,12 @@ WriteLine(<span class="hljs-string">&quot;Passing and returning values by execut
 
 WriteLine(<span class="hljs-string">$&quot;<span class="hljs-subst">{firstNumber}</span>+<span class="hljs-subst">{SecondNumber}</span>=<span class="hljs-subst">{result}</span>&quot;</span>);
 WriteLine(<span class="hljs-string">$&quot;The main thread is completed.&quot;</span>);
-</code></pre>
-<hr>
-<h3><strong>خروجی</strong> 🖥️</h3>
-<pre class="hljs"><code>Passing and returning values by executing tasks.
+</code></pre> <hr><h3><strong>خروجی</strong></h3><pre class="hljs"><code>Passing and returning values by executing tasks.
 10+20=30
 The main thread is completed.
-</code></pre>
-<hr>
-<h3><strong>جلسه پرسش و پاسخ (Q&amp;A Session)</strong> ❓💬</h3>
-<p><strong>سوال 2.2</strong><br>
-می‌بینم که در نمایش قبلی، از متد <strong>ReadKey</strong> برای جلوگیری از بسته‌شدن برنامه <strong>Console</strong> استفاده نکردید. این عمدی بود؟</p>
-<p><strong>پاسخ:</strong><br>
-وقتی می‌خواهید از یک <strong>Task</strong> نتیجه بگیرید، باید <strong>صبر کنید</strong> تا آن <strong>Task</strong> اجرای خود را کامل کند. یعنی باید یک عملیات <strong>مسدودکننده (blocking)</strong> انجام دهید.<br>
-با استفاده از ویژگی <strong>Result</strong>، من دقیقاً همین کار را کردم: <strong>thread فراخواننده</strong> را مسدود کردم تا <strong>Task فراخوانی‌شده</strong> اجرا و تمام شود.<br>
-بنابراین دیگر نیازی به هیچ ساختار <strong>مسدودکننده</strong> اضافی نبود.</p>
-<p><strong>یادداشت نویسنده:</strong><br>
-نمونه‌های <strong>Task</strong> همچنین می‌توانند از متد <strong>Wait</strong> برای اتمام اجرای <strong>Task</strong> استفاده کنند. به‌زودی بحثی درباره <strong>مکانیزم‌های مختلف انتظار (waiting mechanisms)</strong> خواهیم داشت.</p>
-<hr>
-<h3><strong>درک مشکل در نمایش ۲</strong> ⚠️</h3>
-<p>توجه کنید که در خروجی قبلی، خط <strong>&quot;The main thread is completed.&quot;</strong> در انتهای خروجی ظاهر شد.<br>
-اگر برنامه را چندین بار اجرا کنید، همیشه همین نتیجه را مشاهده می‌کنید. دلیلش این است که با فراخوانی ویژگی <strong>Result</strong>، من <strong>main thread</strong> را مجبور کردم تا منتظر اتمام <strong>addTask</strong> بماند.<br>
-در نتیجه، نتوانستیم از <strong>مزایای کامل برنامه‌نویسی غیرهمزمان (asynchronous programming)</strong> استفاده کنیم. همین مشکل زمانی که از متد <strong>Wait</strong> هم استفاده کنید رخ می‌دهد.</p>
-<hr>
-<h3><strong>جلسه پرسش و پاسخ (Q&amp;A Session)</strong> ❓💬</h3>
-<p><strong>سوال 2.3</strong><br>
-متوجه شدم که با استفاده از فراخوانی‌های مسدودکننده مانند:</p>
-<pre class="hljs"><code><span class="hljs-keyword">var</span> result = addTask.Result;
-</code></pre>
-<p>یا</p>
-<pre class="hljs"><code>addTask.Wait();
-</code></pre>
-<p>شما در واقع کد را <strong>همزمان (synchronous)</strong> می‌کنید. پس چرا برنامه‌ای نشان دادید که از این فراخوانی‌های مسدودکننده استفاده می‌کند؟</p>
-<p><strong>پاسخ:</strong><br>
-می‌خواستم شما از وجود چنین قابلیتی آگاه باشید. علاوه بر این، مواقعی پیش می‌آید که <strong>تا زمانی که نتیجه یک Task به دست نیاید، نمی‌توانید ادامه دهید</strong>. در چنین شرایطی نمی‌توانید از فراخوانی‌های مسدودکننده اجتناب کنید (در <strong>نمایش ۳</strong> به این موضوع اشاره خواهیم کرد).</p>
-<p>پس اگر تصمیم به استفاده از این روش‌ها گرفتید، سعی کنید ابتدا سایر کدهایی که می‌توانند <strong>به‌صورت غیرهمزمان اجرا شوند</strong> را اجرا کنید، سپس از این فراخوانی‌ها استفاده نمایید.<br>
-اما نگران نباشید! به‌زودی بحثی درباره <strong>فراخوانی‌های غیرمسدودکننده (nonblocking calls)</strong> نیز خواهیم داشت.</p>
-<hr>
-<h3><strong>بحث درباره انتظار (Waiting)</strong> ⏳</h3>
-<p>روش‌های مختلفی برای <strong>منتظر ماندن (waiting)</strong> در سیستم وجود دارد. در این بخش، می‌خواهیم ضرورت <strong>انتظار</strong> را بررسی کنیم و چند روش کاربردی برای پیاده‌سازی این ایده معرفی کنیم.</p>
-<blockquote>
-<p><strong>نکته:</strong> برای به دست آوردن نتیجه اجرای یک Task، اگر <strong>thread فراخواننده را مسدود کنید</strong>، از مزایای <strong>برنامه‌نویسی غیرهمزمان</strong> استفاده نکرده‌اید. بنابراین مهم است که برنامه خود را <strong>به‌درستی طراحی کنید</strong>.</p>
-</blockquote>
-<hr>
-<h3><strong>چرا منتظر می‌مانیم؟</strong> 🤔</h3>
-<p>وقتی یک Task را اجرا می‌کنید، ممکن است بخواهید نتیجه آن را دریافت کنید.<br>
-این یعنی باید منتظر بمانید تا Task اجرای خود را کامل کند. نمایش زیر این موضوع را روشن‌تر می‌کند:</p>
-<hr>
-<h3><strong>نمایش ۳</strong> 🔍</h3>
-<p>در برنامه زیر، <strong>thread فراخواننده (main thread)</strong> دو <strong>Task متفاوت</strong> را فراخوانی می‌کند.<br>
-بیایید برنامه را اجرا کنیم و برخی از خروجی‌های ممکن را تحلیل کنیم:</p>
-<pre class="hljs"><code><span class="hljs-keyword">using</span> <span class="hljs-keyword">static</span> System.Console;
+</code></pre> <hr><h3><strong>جلسه پرسش و پاسخ (Q&amp;A Session)</strong></h3><p><strong>سوال 2.2</strong><br> می‌بینم که در نمایش قبلی، از متد <strong>ReadKey</strong> برای جلوگیری از بسته‌شدن برنامه <strong>Console</strong> استفاده نکردید. این عمدی بود؟</p><p><strong>پاسخ:</strong><br> وقتی می‌خواهید از یک <strong>Task</strong> نتیجه بگیرید، باید <strong>صبر کنید</strong> تا آن <strong>Task</strong> اجرای خود را کامل کند. یعنی باید یک عملیات <strong>مسدودکننده (blocking)</strong> انجام دهید.<br> با استفاده از ویژگی <strong>Result</strong>، من دقیقاً همین کار را کردم: <strong>thread فراخواننده</strong> را مسدود کردم تا <strong>Task فراخوانی‌شده</strong> اجرا و تمام شود.<br> بنابراین دیگر نیازی به هیچ ساختار <strong>مسدودکننده</strong> اضافی نبود.</p><p><strong>یادداشت نویسنده:</strong><br> نمونه‌های <strong>Task</strong> همچنین می‌توانند از متد <strong>Wait</strong> برای اتمام اجرای <strong>Task</strong> استفاده کنند. به‌زودی بحثی درباره <strong>مکانیزم‌های مختلف انتظار (waiting mechanisms)</strong> خواهیم داشت.</p><hr> <h3><strong>درک مشکل در نمایش ۲</strong></h3><p>توجه کنید که در خروجی قبلی، خط <strong>&quot;The main thread is completed.&quot;</strong> در انتهای خروجی ظاهر شد.<br> اگر برنامه را چندین بار اجرا کنید، همیشه همین نتیجه را مشاهده می‌کنید. دلیلش این است که با فراخوانی ویژگی <strong>Result</strong>، من <strong>main thread</strong> را مجبور کردم تا منتظر اتمام <strong>addTask</strong> بماند.<br> در نتیجه، نتوانستیم از <strong>مزایای کامل برنامه‌نویسی غیرهمزمان (asynchronous programming)</strong> استفاده کنیم. همین مشکل زمانی که از متد <strong>Wait</strong> هم استفاده کنید رخ می‌دهد.</p><hr> <h3><strong>جلسه پرسش و پاسخ (Q&amp;A Session)</strong></h3><p><strong>سوال 2.3</strong><br> متوجه شدم که با استفاده از فراخوانی‌های مسدودکننده مانند:</p><pre class="hljs"><code><span class="hljs-keyword">var</span> result = addTask.Result;
+</code></pre> <p>یا</p><pre class="hljs"><code>addTask.Wait();
+</code></pre> <p>شما در واقع کد را <strong>همزمان (synchronous)</strong> می‌کنید. پس چرا برنامه‌ای نشان دادید که از این فراخوانی‌های مسدودکننده استفاده می‌کند؟</p><p><strong>پاسخ:</strong><br> می‌خواستم شما از وجود چنین قابلیتی آگاه باشید. علاوه بر این، مواقعی پیش می‌آید که <strong>تا زمانی که نتیجه یک Task به دست نیاید، نمی‌توانید ادامه دهید</strong>. در چنین شرایطی نمی‌توانید از فراخوانی‌های مسدودکننده اجتناب کنید (در <strong>نمایش ۳</strong> به این موضوع اشاره خواهیم کرد).</p><p>پس اگر تصمیم به استفاده از این روش‌ها گرفتید، سعی کنید ابتدا سایر کدهایی که می‌توانند <strong>به‌صورت غیرهمزمان اجرا شوند</strong> را اجرا کنید، سپس از این فراخوانی‌ها استفاده نمایید.<br> اما نگران نباشید! به‌زودی بحثی درباره <strong>فراخوانی‌های غیرمسدودکننده (nonblocking calls)</strong> نیز خواهیم داشت.</p><hr> <h3><strong>بحث درباره انتظار (Waiting)</strong> ⏳</h3><p>روش‌های مختلفی برای <strong>منتظر ماندن (waiting)</strong> در سیستم وجود دارد. در این بخش، می‌خواهیم ضرورت <strong>انتظار</strong> را بررسی کنیم و چند روش کاربردی برای پیاده‌سازی این ایده معرفی کنیم.</p><blockquote> <p><strong>نکته:</strong> برای به دست آوردن نتیجه اجرای یک Task، اگر <strong>thread فراخواننده را مسدود کنید</strong>، از مزایای <strong>برنامه‌نویسی غیرهمزمان</strong> استفاده نکرده‌اید. بنابراین مهم است که برنامه خود را <strong>به‌درستی طراحی کنید</strong>.</p></blockquote> <hr><h3><strong>چرا منتظر می‌مانیم؟</strong></h3><p>وقتی یک Task را اجرا می‌کنید، ممکن است بخواهید نتیجه آن را دریافت کنید.<br> این یعنی باید منتظر بمانید تا Task اجرای خود را کامل کند. نمایش زیر این موضوع را روشن‌تر می‌کند:</p><hr> <h3><strong>نمایش ۳</strong></h3><p>در برنامه زیر، <strong>thread فراخواننده (main thread)</strong> دو <strong>Task متفاوت</strong> را فراخوانی می‌کند.<br> بیایید برنامه را اجرا کنیم و برخی از خروجی‌های ممکن را تحلیل کنیم:</p><pre class="hljs"><code><span class="hljs-keyword">using</span> <span class="hljs-keyword">static</span> System.Console;
 
 WriteLine(<span class="hljs-string">&quot;The main thread starts.&quot;</span>);
 
@@ -412,275 +158,69 @@ Thread.Sleep(<span class="hljs-number">200</span>);
 WriteLine(<span class="hljs-string">$&quot;---Your order is processed.&quot;</span>);
 
 WriteLine(<span class="hljs-string">&quot;The end of main.&quot;</span>);
-</code></pre>
-<hr>
-<h3><strong>خروجی‌ها</strong> 🖥️</h3>
-<p>در ادامه، چند نمونه خروجی از اجرای این برنامه روی سیستم من آورده شده است:</p>
-<p><strong>خروجی ۱:</strong></p>
-<pre class="hljs"><code>The main thread starts.
+</code></pre> <hr><h3><strong>خروجی‌ها</strong></h3><p>در ادامه، چند نمونه خروجی از اجرای این برنامه روی سیستم من آورده شده است:</p><p><strong>خروجی ۱:</strong></p><pre class="hljs"><code>The main thread starts.
 The end of main.
-</code></pre>
-<p><strong>خروجی ۲:</strong></p>
-<pre class="hljs"><code>The main thread starts.
+</code></pre> <p><strong>خروجی ۲:</strong></p><pre class="hljs"><code>The main thread starts.
 The end of main.
 Processing an order...
 Wait for your lucky number...
-</code></pre>
-<hr>
-<h3><strong>تحلیل</strong> 📊</h3>
-<p>این خروجی‌ها نشان‌دهنده ویژگی‌های زیر هستند:</p>
-<ul>
-<li><strong>thread اصلی (main thread)</strong> قبل از اینکه <strong>printLuckyNumberTask</strong> و <strong>processOrderTask</strong> اجرای خود را به پایان برسانند، تمام شده است.</li>
-<li>هیچ‌یک از خروجی‌ها نشان نمی‌دهند که Taskهای فراخوانی‌شده کارشان را کامل کرده‌اند یا نه.</li>
-</ul>
-<hr>
-<h3><strong>چگونه منتظر بمانیم؟</strong> ⏱️</h3>
-<p>می‌دانید که برای مشاهده وضعیت نهایی این Taskها، باید کمی بیشتر صبر کنید.<br>
-اما <strong>چگونه باید منتظر بمانیم؟</strong> روش‌های مختلفی وجود دارد که در ادامه با برخی از آن‌ها آشنا می‌شویم.</p>
-<hr>
-<h3><strong>استفاده از Sleep</strong> 😴</h3>
-<p>شاید ساده‌ترین راه این باشد که <strong>thread اصلی را مسدود کنید</strong> تا Taskهای دیگر تمام شوند.<br>
-در ادامه یک نمونه آورده شده است که در آن <strong>thread اصلی را به مدت 1000 میلی‌ثانیه مسدود کرده‌ایم</strong>:</p>
-<pre class="hljs"><code><span class="hljs-comment">// The previous code is the same</span>
+</code></pre> <hr><h3><strong>تحلیل</strong></h3><p>این خروجی‌ها نشان‌دهنده ویژگی‌های زیر هستند:</p><ul> <li><strong>thread اصلی (main thread)</strong> قبل از اینکه <strong>printLuckyNumberTask</strong> و <strong>processOrderTask</strong> اجرای خود را به پایان برسانند، تمام شده است.</li><li>هیچ‌یک از خروجی‌ها نشان نمی‌دهند که Taskهای فراخوانی‌شده کارشان را کامل کرده‌اند یا نه.</li></ul> <hr><h3><strong>چگونه منتظر بمانیم؟</strong> ⏱</h3><p>می‌دانید که برای مشاهده وضعیت نهایی این Taskها، باید کمی بیشتر صبر کنید.<br> اما <strong>چگونه باید منتظر بمانیم؟</strong> روش‌های مختلفی وجود دارد که در ادامه با برخی از آن‌ها آشنا می‌شویم.</p><hr> <h3><strong>استفاده از Sleep</strong></h3><p>شاید ساده‌ترین راه این باشد که <strong>thread اصلی را مسدود کنید</strong> تا Taskهای دیگر تمام شوند.<br> در ادامه یک نمونه آورده شده است که در آن <strong>thread اصلی را به مدت 1000 میلی‌ثانیه مسدود کرده‌ایم</strong>:</p><pre class="hljs"><code><span class="hljs-comment">// The previous code is the same</span>
 Thread.Sleep(<span class="hljs-number">1000</span>);
 WriteLine(<span class="hljs-string">&quot;The end of main.&quot;</span>);
-</code></pre>
-<hr>
-<blockquote>
-<p><strong>نکته:</strong> می‌توانید پروژه <strong>Chapter2_discussiononWaiting</strong> را از وب‌سایت <strong>apress</strong> دانلود کنید تا همه بخش‌های برنامه‌های مطرح‌شده در این قسمت را اجرا و بررسی کنید.</p>
-</blockquote>
-<hr>
-<p>این یک خط کد اضافی احتمال مشاهده خروجی‌ای را افزایش می‌دهد که نشان دهد <strong>این دو Task</strong> اجرای خود را قبل از اینکه کنترل از <strong>main thread</strong> خارج شود، به پایان رسانده‌اند. یک خروجی ممکن به صورت زیر است:</p>
-<pre class="hljs"><code>The main thread starts.
+</code></pre> <hr><blockquote> <p><strong>نکته:</strong> می‌توانید پروژه <strong>Chapter2_discussiononWaiting</strong> را از وب‌سایت <strong>apress</strong> دانلود کنید تا همه بخش‌های برنامه‌های مطرح‌شده در این قسمت را اجرا و بررسی کنید.</p></blockquote> <hr><p>این یک خط کد اضافی احتمال مشاهده خروجی‌ای را افزایش می‌دهد که نشان دهد <strong>این دو Task</strong> اجرای خود را قبل از اینکه کنترل از <strong>main thread</strong> خارج شود، به پایان رسانده‌اند. یک خروجی ممکن به صورت زیر است:</p><pre class="hljs"><code>The main thread starts.
 Processing an order...
 Wait for your lucky number...---Your lucky number is: 3---Your order is processed.
 The end of main.
-</code></pre>
-<p>مزیت استفاده از این روش واضح است. می‌بینیم که وقتی <strong>main thread</strong> در حالت <strong>sleep</strong> است، سایر <strong>Task</strong>ها می‌توانند کار خود را انجام دهند. این نشان می‌دهد که در طول <strong>sleep</strong>، <strong>scheduler</strong> می‌تواند سایر Taskها را زمان‌بندی کند.</p>
-<p>اما در مقابل، این روش یک مشکل آشکار دارد: ممکن است <strong>thread</strong> را برای مدت زمان اضافی و غیرضروری مسدود کنید. به عنوان مثال، در سیستم من اگر <strong>main thread</strong> را برای ۵۰۰ میلی‌ثانیه یا کمتر مسدود کنم، خروجی مشابهی مشاهده می‌کنم (می‌گویم “مشابه” نه “همان” زیرا عدد تصادفی تولیدشده همیشه متفاوت است که رفتار طبیعی این برنامه است). مشکل این است که چون نمی‌توانیم <strong>زمان دقیق تکمیل Taskها</strong> را پیش‌بینی کنیم، باید آن را برای <strong>زمان مناسبی مسدود کنیم</strong>. بنابراین اگر هر یک از این Taskها به دلیل عوامل دیگر زمان بیشتری برای اتمام نیاز داشته باشند، ممکن است پیام تکمیل Task در خروجی نمایش داده نشود. این یک مشکل واقعی است!</p>
-<p>نه می‌خواهیم <strong>انتظار غیرضروری</strong> داشته باشیم و نه می‌خواهیم <strong>هیچ اطلاعات کلیدی</strong> را از دست بدهیم. از این منظر، این روش <strong>غیرکارآمد</strong> است. در واقع، وضعیت می‌تواند بدتر شود اگر روی برنامه‌ای کار کنید که سعی در مسدود کردن <strong>UI</strong> دارد. به همین دلیل، تکیه بر متد <strong>Sleep</strong> همیشه ایده خوبی نیست.</p>
-<hr>
-<h3><strong>استفاده از Delay</strong> ⏱️</h3>
-<p>در کد قبلی، بیایید دستور زیر را:</p>
-<pre class="hljs"><code>Thread.Sleep(<span class="hljs-number">1000</span>);
-</code></pre>
-<p>در <strong>main thread</strong> با <strong>Task.Delay(1000);</strong> جایگزین کنیم:</p>
-<pre class="hljs"><code><span class="hljs-comment">// The previous code is the same</span>
+</code></pre> <p>مزیت استفاده از این روش واضح است. می‌بینیم که وقتی <strong>main thread</strong> در حالت <strong>sleep</strong> است، سایر <strong>Task</strong>ها می‌توانند کار خود را انجام دهند. این نشان می‌دهد که در طول <strong>sleep</strong>، <strong>scheduler</strong> می‌تواند سایر Taskها را زمان‌بندی کند.</p><p>اما در مقابل، این روش یک مشکل آشکار دارد: ممکن است <strong>thread</strong> را برای مدت زمان اضافی و غیرضروری مسدود کنید. به عنوان مثال، در سیستم من اگر <strong>main thread</strong> را برای ۵۰۰ میلی‌ثانیه یا کمتر مسدود کنم، خروجی مشابهی مشاهده می‌کنم (می‌گویم “مشابه” نه “همان” زیرا عدد تصادفی تولیدشده همیشه متفاوت است که رفتار طبیعی این برنامه است). مشکل این است که چون نمی‌توانیم <strong>زمان دقیق تکمیل Taskها</strong> را پیش‌بینی کنیم، باید آن را برای <strong>زمان مناسبی مسدود کنیم</strong>. بنابراین اگر هر یک از این Taskها به دلیل عوامل دیگر زمان بیشتری برای اتمام نیاز داشته باشند، ممکن است پیام تکمیل Task در خروجی نمایش داده نشود. این یک مشکل واقعی است!</p><p>نه می‌خواهیم <strong>انتظار غیرضروری</strong> داشته باشیم و نه می‌خواهیم <strong>هیچ اطلاعات کلیدی</strong> را از دست بدهیم. از این منظر، این روش <strong>غیرکارآمد</strong> است. در واقع، وضعیت می‌تواند بدتر شود اگر روی برنامه‌ای کار کنید که سعی در مسدود کردن <strong>UI</strong> دارد. به همین دلیل، تکیه بر متد <strong>Sleep</strong> همیشه ایده خوبی نیست.</p><hr> <h3><strong>استفاده از Delay</strong> ⏱</h3><p>در کد قبلی، بیایید دستور زیر را:</p><pre class="hljs"><code>Thread.Sleep(<span class="hljs-number">1000</span>);
+</code></pre> <p>در <strong>main thread</strong> با <strong>Task.Delay(1000);</strong> جایگزین کنیم:</p><pre class="hljs"><code><span class="hljs-comment">// The previous code is the same</span>
 Task.Delay(<span class="hljs-number">1000</span>);
 WriteLine(<span class="hljs-string">&quot;The end of main.&quot;</span>);
-</code></pre>
-<p>و برنامه را دوباره اجرا کنیم. باز هم، سیستم من خروجی‌های مختلفی نشان می‌دهد، یکی از آن‌ها به صورت زیر است:</p>
-<pre class="hljs"><code>The main thread starts.
+</code></pre> <p>و برنامه را دوباره اجرا کنیم. باز هم، سیستم من خروجی‌های مختلفی نشان می‌دهد، یکی از آن‌ها به صورت زیر است:</p><pre class="hljs"><code>The main thread starts.
 Processing an order...
 The end of main.
 Wait for your lucky number...
-</code></pre>
-<p>این خروجی نشان می‌دهد که <strong>thread فراخواننده</strong> برای اجرای <strong>printLuckyNumberTask</strong> و <strong>processOrderTask</strong> مسدود نشده است. بنابراین، می‌بینید که خط <strong>“The end of main.”</strong> قبل از پردازش سفارش یا نمایش عدد شانس ظاهر شده است.</p>
-<p>این به شما نکته‌ای می‌دهد:</p>
-<ul>
-<li>برای <strong>pauseهای همزمان (synchronous pauses)</strong> از <strong>Sleep</strong> استفاده کنید.</li>
-<li>برای <strong>تأخیرهای غیرمسدودکننده (nonblocking delays)</strong> روش <strong>Delay</strong> را ترجیح دهید.<br>
-استفاده از <strong>Delay</strong> به شما کمک می‌کند <strong>UI پاسخگوتر</strong> باشد.</li>
-</ul>
-<p>در واقع، <strong>Visual Studio IDE</strong> نیز به شما این نکته را گوشزد می‌کند. توضیح می‌دهم:<br>
-وقتی بیشتر درباره <strong>برنامه‌نویسی غیرهمزمان (asynchronous programming)</strong> یاد بگیرید، خواهید فهمید که استفاده از کلیدواژه‌های <strong>async</strong> و <strong>await</strong> کار را ساده می‌کند.<br>
-سپس می‌توانید چیزی شبیه زیر بنویسید:</p>
-<pre class="hljs"><code><span class="hljs-keyword">await</span> Task.Delay(<span class="hljs-number">1000</span>);
-</code></pre>
-<p>اما اگر از <strong>await</strong> استفاده نکنید و فقط بنویسید:</p>
-<pre class="hljs"><code>Task.Delay(<span class="hljs-number">1000</span>);
-</code></pre>
-<p>پیام هشدار زیر را مشاهده خواهید کرد:</p>
-<pre class="hljs"><code>CS4014 Because this call is not awaited, execution of the current 
+</code></pre> <p>این خروجی نشان می‌دهد که <strong>thread فراخواننده</strong> برای اجرای <strong>printLuckyNumberTask</strong> و <strong>processOrderTask</strong> مسدود نشده است. بنابراین، می‌بینید که خط <strong>“The end of main.”</strong> قبل از پردازش سفارش یا نمایش عدد شانس ظاهر شده است.</p><p>این به شما نکته‌ای می‌دهد:</p><ul> <li>برای <strong>pauseهای همزمان (synchronous pauses)</strong> از <strong>Sleep</strong> استفاده کنید.</li><li>برای <strong>تأخیرهای غیرمسدودکننده (nonblocking delays)</strong> روش <strong>Delay</strong> را ترجیح دهید.<br> استفاده از <strong>Delay</strong> به شما کمک می‌کند <strong>UI پاسخگوتر</strong> باشد.</li></ul> <p>در واقع، <strong>Visual Studio IDE</strong> نیز به شما این نکته را گوشزد می‌کند. توضیح می‌دهم:<br> وقتی بیشتر درباره <strong>برنامه‌نویسی غیرهمزمان (asynchronous programming)</strong> یاد بگیرید، خواهید فهمید که استفاده از کلیدواژه‌های <strong>async</strong> و <strong>await</strong> کار را ساده می‌کند.<br> سپس می‌توانید چیزی شبیه زیر بنویسید:</p><pre class="hljs"><code><span class="hljs-keyword">await</span> Task.Delay(<span class="hljs-number">1000</span>);
+</code></pre> <p>اما اگر از <strong>await</strong> استفاده نکنید و فقط بنویسید:</p><pre class="hljs"><code>Task.Delay(<span class="hljs-number">1000</span>);
+</code></pre> <p>پیام هشدار زیر را مشاهده خواهید کرد:</p><pre class="hljs"><code>CS4014 Because this call is not awaited, execution of the current 
 method continues before the call is completed. Consider applying the ‘await’ operator to the result of the call.
-</code></pre>
-<div align="center">
-<p><img src="../../../assets/image/02/Table%202-5.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<h3><strong>بیشتر درباره Sleep و Delay</strong> ⏱️</h3>
-<p>وقتی از متد <strong>Delay</strong> استفاده می‌کنید، می‌توانید آن را به یک <strong>Task</strong> اختصاص دهید و در زمان بعدی با <strong>await</strong> منتظر بمانید:</p>
-<pre class="hljs"><code>Task task = Task.Delay(<span class="hljs-number">1000</span>);
+</code></pre> <div align="center"><p><img src="../../../assets/image/02/Table%202-5.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <h3><strong>بیشتر درباره Sleep و Delay</strong> ⏱</h3><p>وقتی از متد <strong>Delay</strong> استفاده می‌کنید، می‌توانید آن را به یک <strong>Task</strong> اختصاص دهید و در زمان بعدی با <strong>await</strong> منتظر بمانید:</p><pre class="hljs"><code>Task task = Task.Delay(<span class="hljs-number">1000</span>);
 <span class="hljs-comment">// انجام کارهای دیگر در اینجا</span>
 <span class="hljs-keyword">await</span> task;
-</code></pre>
-<p>علاوه بر این، متد <strong>Delay</strong> دارای <strong>Overloadهای مختلفی</strong> است و بسیاری از آن‌ها پارامتری به نام <strong>CancellationToken</strong> می‌پذیرند (در فصل بعدی به این موضوع پرداخته می‌شود). با استفاده از این پارامتر، می‌توانید <strong>از قطع ناگهانی thread جلوگیری کرده و آن را به‌صورت مرتب خاتمه دهید</strong>.</p>
-<hr>
-<h3><strong>استفاده از ReadKey() یا ReadLine()</strong> ⌨️</h3>
-<p>گاهی اوقات می‌بینید که در برنامه از <strong>ReadKey()، Read() یا ReadLine()</strong> استفاده شده است.<br>
-ایده اصلی این روش‌ها <strong>مسدود کردن کنترل اجرای برنامه</strong> تا زمانی است که کاربر ورودی موردنظر را ارائه دهد.<br>
-به عنوان مثال، می‌توانید صبر کنید تا <strong>printLuckyNumberTask</strong> و <strong>processOrderTask</strong> اجرای خود را کامل کنند، سپس با فشار دادن یک کلید از کیبورد، خروجی نهایی را دریافت کنید.</p>
-<p>نمونه کد:</p>
-<pre class="hljs"><code><span class="hljs-comment">// The previous code is the same</span>
+</code></pre> <p>علاوه بر این، متد <strong>Delay</strong> دارای <strong>Overloadهای مختلفی</strong> است و بسیاری از آن‌ها پارامتری به نام <strong>CancellationToken</strong> می‌پذیرند (در فصل بعدی به این موضوع پرداخته می‌شود). با استفاده از این پارامتر، می‌توانید <strong>از قطع ناگهانی thread جلوگیری کرده و آن را به‌صورت مرتب خاتمه دهید</strong>.</p><hr> <h3><strong>استفاده از ReadKey() یا ReadLine()</strong> ⌨</h3><p>گاهی اوقات می‌بینید که در برنامه از <strong>ReadKey()، Read() یا ReadLine()</strong> استفاده شده است.<br> ایده اصلی این روش‌ها <strong>مسدود کردن کنترل اجرای برنامه</strong> تا زمانی است که کاربر ورودی موردنظر را ارائه دهد.<br> به عنوان مثال، می‌توانید صبر کنید تا <strong>printLuckyNumberTask</strong> و <strong>processOrderTask</strong> اجرای خود را کامل کنند، سپس با فشار دادن یک کلید از کیبورد، خروجی نهایی را دریافت کنید.</p><p>نمونه کد:</p><pre class="hljs"><code><span class="hljs-comment">// The previous code is the same</span>
 ReadKey();
 WriteLine(<span class="hljs-string">&quot;The end of main&quot;</span>);
-</code></pre>
-<hr>
-<h3><strong>استفاده از Wait</strong> ⏳</h3>
-<p><strong>نمایش ۲</strong> نشان داد که با استفاده از ویژگی <strong>Result</strong> می‌توانید <strong>thread فراخواننده</strong> را تا تکمیل Task مسدود کنید.<br>
-با این حال، در همه سناریوها نیازی نیست که <strong>نتیجه اجرای Task</strong> را تحلیل کنید.<br>
-در واقع، ممکن است یک Task <strong>مقداری بازنگرداند</strong>.</p>
-<p>بیایید یک تکنیک دیگر برای انتظار را بررسی کنیم:</p>
-<p>با فراخوانی متد <strong>Wait</strong> روی یک نمونه Task، می‌توانید تا <strong>تکمیل آن Task</strong> صبر کنید.<br>
-نمونه‌ای که در آن <strong>Wait</strong> را به صورت جداگانه روی <strong>printLuckyNumberTask</strong> و <strong>processOrderTask</strong> فراخوانی می‌کنیم:</p>
-<pre class="hljs"><code><span class="hljs-comment">// The previous code is the same</span>
+</code></pre> <hr><h3><strong>استفاده از Wait</strong> ⏳</h3><p><strong>نمایش ۲</strong> نشان داد که با استفاده از ویژگی <strong>Result</strong> می‌توانید <strong>thread فراخواننده</strong> را تا تکمیل Task مسدود کنید.<br> با این حال، در همه سناریوها نیازی نیست که <strong>نتیجه اجرای Task</strong> را تحلیل کنید.<br> در واقع، ممکن است یک Task <strong>مقداری بازنگرداند</strong>.</p><p>بیایید یک تکنیک دیگر برای انتظار را بررسی کنیم:</p><p>با فراخوانی متد <strong>Wait</strong> روی یک نمونه Task، می‌توانید تا <strong>تکمیل آن Task</strong> صبر کنید.<br> نمونه‌ای که در آن <strong>Wait</strong> را به صورت جداگانه روی <strong>printLuckyNumberTask</strong> و <strong>processOrderTask</strong> فراخوانی می‌کنیم:</p><pre class="hljs"><code><span class="hljs-comment">// The previous code is the same</span>
 printLuckyNumberTask.Wait();
 processOrderTask.Wait();
 WriteLine(<span class="hljs-string">&quot;The end of main.&quot;</span>);
-</code></pre>
-<p>این تغییر باعث می‌شود که <strong>هر دو Task</strong> اجرای خود را کامل کنند.</p>
-<hr>
-<h3><strong>استفاده از WaitAll</strong> ✅</h3>
-<p>به جای اینکه منتظر تکمیل <strong>Taskهای جداگانه</strong> بمانید، می‌توانید منتظر <strong>گروهی از Taskها</strong> شوید.<br>
-در این حالت، از متد <strong>WaitAll</strong> استفاده می‌کنید و <strong>Taskها</strong>یی که می‌خواهید برای آن‌ها منتظر بمانید را به عنوان پارامتر می‌دهید:</p>
-<pre class="hljs"><code><span class="hljs-comment">// The previous code is the same</span>
+</code></pre> <p>این تغییر باعث می‌شود که <strong>هر دو Task</strong> اجرای خود را کامل کنند.</p><hr> <h3><strong>استفاده از WaitAll</strong></h3><p>به جای اینکه منتظر تکمیل <strong>Taskهای جداگانه</strong> بمانید، می‌توانید منتظر <strong>گروهی از Taskها</strong> شوید.<br> در این حالت، از متد <strong>WaitAll</strong> استفاده می‌کنید و <strong>Taskها</strong>یی که می‌خواهید برای آن‌ها منتظر بمانید را به عنوان پارامتر می‌دهید:</p><pre class="hljs"><code><span class="hljs-comment">// The previous code is the same</span>
 Task.WaitAll(printLuckyNumberTask, processOrderTask);
 WriteLine(<span class="hljs-string">&quot;The end of main.&quot;</span>);
-</code></pre>
-<p>این تغییر نیز می‌تواند خروجی‌ای تولید کند که نشان دهد <strong>هر دو Task اجرای خود را کامل کرده‌اند</strong>.</p>
-<hr>
-<h3><strong>استفاده از WaitAny</strong> 🔹</h3>
-<p>فرض کنید چندین Task دارید، اما می‌خواهید منتظر شوید تا <strong>هرکدام از آن‌ها</strong> که زودتر تمام شد، ادامه دهید.<br>
-در این حالت از متد <strong>WaitAny</strong> استفاده می‌کنید:</p>
-<pre class="hljs"><code><span class="hljs-comment">// The previous code is the same</span>
+</code></pre> <p>این تغییر نیز می‌تواند خروجی‌ای تولید کند که نشان دهد <strong>هر دو Task اجرای خود را کامل کرده‌اند</strong>.</p><hr> <h3><strong>استفاده از WaitAny</strong></h3><p>فرض کنید چندین Task دارید، اما می‌خواهید منتظر شوید تا <strong>هرکدام از آن‌ها</strong> که زودتر تمام شد، ادامه دهید.<br> در این حالت از متد <strong>WaitAny</strong> استفاده می‌کنید:</p><pre class="hljs"><code><span class="hljs-comment">// The previous code is the same</span>
 Task.WaitAny(printLuckyNumberTask, processOrderTask);
 WriteLine(<span class="hljs-string">&quot;The end of main.&quot;</span>);
-</code></pre>
-<p>نمونه خروجی:</p>
-<pre class="hljs"><code>The main thread starts.
+</code></pre> <p>نمونه خروجی:</p><pre class="hljs"><code>The main thread starts.
 Wait for your lucky number...
 Processing an order...---Your lucky number is: 2
 The end of main.
-</code></pre>
-<p>این خروجی نشان می‌دهد که این بار <strong>main thread</strong> منتظر تکمیل <strong>processOrderTask</strong> نمانده است.</p>
-<div align="center">
-<p><img src="../../../assets/image/02/Table%202-6.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<h3><strong>نکات مهم</strong> 📝</h3>
-<p>این متدها دارای <strong>Overloadهای مختلفی</strong> هستند.<br>
-به عنوان مثال، در زمان نگارش این متن، متد <strong>Wait</strong> دارای شش <strong>Overload</strong> متفاوت است.<br>
-با استفاده از این نسخه‌های <strong>Overloaded</strong> می‌توانید <strong>حداکثر زمان انتظار</strong>، یک نمونه <strong>CancellationToken</strong> یا هر دو را مشخص کنید تا در حین انتظار آن‌ها را پایش کنید.</p>
-<hr>
-<h3><strong>استفاده از WhenAny</strong> 🔹</h3>
-<p>به خروجی قبلی دوباره نگاه کنید. می‌بینید که خط <strong>“The end of main.”</strong> بعد از تکمیل حداقل یکی از Taskها ظاهر شده است.<br>
-اگر برنامه را چندین بار اجرا کنید، هیچگاه این خط <strong>قبل از اتمام حداقل یکی از Taskها</strong> ظاهر نمی‌شود.<br>
-علت این است که در حالت <strong>WaitAny</strong>، <strong>thread فراخواننده</strong> تا تکمیل هرکدام از Taskها <strong>مسدود می‌شود</strong>.</p>
-<p>جالب است بدانید که متدی دیگر به نام <strong>WhenAny</strong> وجود دارد که <strong>thread فراخواننده را مسدود نمی‌کند</strong>.</p>
-<p>نمونه کد جایگزین <strong>WaitAny با WhenAny</strong>:</p>
-<pre class="hljs"><code><span class="hljs-comment">// The previous code is the same</span>
+</code></pre> <p>این خروجی نشان می‌دهد که این بار <strong>main thread</strong> منتظر تکمیل <strong>processOrderTask</strong> نمانده است.</p><div align="center"> <p><img src="../../../assets/image/02/Table%202-6.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <h3><strong>نکات مهم</strong></h3><p>این متدها دارای <strong>Overloadهای مختلفی</strong> هستند.<br> به عنوان مثال، در زمان نگارش این متن، متد <strong>Wait</strong> دارای شش <strong>Overload</strong> متفاوت است.<br> با استفاده از این نسخه‌های <strong>Overloaded</strong> می‌توانید <strong>حداکثر زمان انتظار</strong>، یک نمونه <strong>CancellationToken</strong> یا هر دو را مشخص کنید تا در حین انتظار آن‌ها را پایش کنید.</p><hr> <h3><strong>استفاده از WhenAny</strong></h3><p>به خروجی قبلی دوباره نگاه کنید. می‌بینید که خط <strong>“The end of main.”</strong> بعد از تکمیل حداقل یکی از Taskها ظاهر شده است.<br> اگر برنامه را چندین بار اجرا کنید، هیچگاه این خط <strong>قبل از اتمام حداقل یکی از Taskها</strong> ظاهر نمی‌شود.<br> علت این است که در حالت <strong>WaitAny</strong>، <strong>thread فراخواننده</strong> تا تکمیل هرکدام از Taskها <strong>مسدود می‌شود</strong>.</p><p>جالب است بدانید که متدی دیگر به نام <strong>WhenAny</strong> وجود دارد که <strong>thread فراخواننده را مسدود نمی‌کند</strong>.</p><p>نمونه کد جایگزین <strong>WaitAny با WhenAny</strong>:</p><pre class="hljs"><code><span class="hljs-comment">// The previous code is the same</span>
 Task.WhenAny(printLuckyNumberTask, processOrderTask);
 WriteLine(<span class="hljs-string">&quot;The end of main.&quot;</span>);
-</code></pre>
-<p>نمونه خروجی پس از این تغییر:</p>
-<pre class="hljs"><code>The main thread starts.
+</code></pre> <p>نمونه خروجی پس از این تغییر:</p><pre class="hljs"><code>The main thread starts.
 The end of main.
 Processing an order...
 Wait for your lucky number...
-</code></pre>
-<p>همان‌طور که مشاهده می‌کنید، در این حالت <strong>main thread مسدود نشده است</strong>.</p>
-<hr>
-<h3><strong>انتظار برای لغو (Waiting For Cancellation)</strong> ⚠️</h3>
-<p>گاهی اوقات لازم است برای <strong>لغو احتمالی Taskها</strong> آماده باشید.<br>
-در چنین شرایطی نیاز به <strong>CancellationToken</strong> دارید.<br>
-با توجه به اهمیت و گستردگی این موضوع، در فصل جداگانه‌ای (فصل ۵) به آن پرداخته شده است.</p>
-<hr>
-<h3><strong>جلسه پرسش و پاسخ (Q&amp;A Session)</strong> ❓💬</h3>
-<p><strong>سوال 2.4</strong><br>
-در بعضی بلاگ‌ها یا مقالات، می‌بینم به جای <strong>Thread.Sleep</strong> از <strong>Thread.SpinWait</strong> استفاده می‌کنند. تفاوت این دو چیست؟</p>
-<p><strong>پاسخ:</strong><br>
-متد <strong>SpinWait</strong> برای پیاده‌سازی <strong>Locks</strong> مفید است اما برای برنامه‌های معمولی کاربرد ندارد.<br>
-وقتی از <strong>SpinWait</strong> استفاده می‌کنید، <strong>scheduler</strong> کنترل را به Taskهای دیگر منتقل نمی‌کند، یعنی <strong>از تغییر context جلوگیری می‌شود</strong>.</p>
-<p>لینک رسمی: <a href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.thread.spinwait?view=net-9.0">SpinWait</a></p>
-<blockquote>
-<p>در موارد نادری که جلوگیری از <strong>context switch</strong> مفید است، مثلاً وقتی تغییر وضعیت قریب‌الوقوع است، در حلقه خود از <strong>SpinWait</strong> استفاده کنید.<br>
-کد <strong>SpinWait</strong> برای جلوگیری از مشکلاتی که در کامپیوترهای چندپردازنده رخ می‌دهد طراحی شده است.<br>
-به عنوان مثال، در کامپیوترهای با چند پردازنده <strong>Intel</strong> که از تکنولوژی <strong>Hyper-Threading</strong> استفاده می‌کنند، <strong>SpinWait</strong> از <strong>starvation پردازنده</strong> در شرایط خاص جلوگیری می‌کند.</p>
-</blockquote>
-<hr>
-<blockquote>
-<p><strong>نکته:</strong> کلاس‌های .NET Framework مانند <strong>Monitor</strong> یا <strong>ReaderWriterLock</strong> به صورت داخلی از <strong>SpinWait</strong> استفاده می‌کنند.<br>
-با این حال، به جای استفاده مستقیم از این متد، <strong>Microsoft توصیه می‌کند از کلاس‌های همگام‌سازی داخلی</strong> استفاده کنید.<br>
-همچنین توصیه می‌کنم از این روش استفاده نکنید، زیرا <strong>SpinWait</strong> یک عدد صحیح به عنوان پارامتر می‌پذیرد که تعداد تکرار حلقه CPU را مشخص می‌کند. در نتیجه، <strong>زمان انتظار به سرعت پردازنده وابسته است</strong>.</p>
-</blockquote>
-<hr>
-<p>می‌توانید از متد <strong>SpinUntil</strong> نیز استفاده کنید. در زمان نگارش این متن، این متد سه <strong>Overload</strong> دارد:</p>
-<ul>
-<li><code>SpinUntil(Func&lt;Boolean&gt;)</code></li>
-<li><code>SpinUntil(Func&lt;Boolean&gt;, Int32)</code></li>
-<li><code>SpinUntil(Func&lt;Boolean&gt;, TimeSpan)</code></li>
-</ul>
-<p>نمونه‌ای از ساده‌ترین نسخه که تا برآورده شدن یک شرط خاص <strong>چرخش می‌کند</strong>:</p>
-<pre class="hljs"><code><span class="hljs-comment">// Previous code is the same. You can see it by downloading</span>
+</code></pre> <p>همان‌طور که مشاهده می‌کنید، در این حالت <strong>main thread مسدود نشده است</strong>.</p><hr> <h3><strong>انتظار برای لغو (Waiting For Cancellation)</strong></h3><p>گاهی اوقات لازم است برای <strong>لغو احتمالی Taskها</strong> آماده باشید.<br> در چنین شرایطی نیاز به <strong>CancellationToken</strong> دارید.<br> با توجه به اهمیت و گستردگی این موضوع، در فصل جداگانه‌ای (فصل ۵) به آن پرداخته شده است.</p><hr> <h3><strong>جلسه پرسش و پاسخ (Q&amp;A Session)</strong></h3><p><strong>سوال 2.4</strong><br> در بعضی بلاگ‌ها یا مقالات، می‌بینم به جای <strong>Thread.Sleep</strong> از <strong>Thread.SpinWait</strong> استفاده می‌کنند. تفاوت این دو چیست؟</p><p><strong>پاسخ:</strong><br> متد <strong>SpinWait</strong> برای پیاده‌سازی <strong>Locks</strong> مفید است اما برای برنامه‌های معمولی کاربرد ندارد.<br> وقتی از <strong>SpinWait</strong> استفاده می‌کنید، <strong>scheduler</strong> کنترل را به Taskهای دیگر منتقل نمی‌کند، یعنی <strong>از تغییر context جلوگیری می‌شود</strong>.</p><p>لینک رسمی: <a href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.thread.spinwait?view=net-9.0">SpinWait</a></p><blockquote> <p>در موارد نادری که جلوگیری از <strong>context switch</strong> مفید است، مثلاً وقتی تغییر وضعیت قریب‌الوقوع است، در حلقه خود از <strong>SpinWait</strong> استفاده کنید.<br> کد <strong>SpinWait</strong> برای جلوگیری از مشکلاتی که در کامپیوترهای چندپردازنده رخ می‌دهد طراحی شده است.<br> به عنوان مثال، در کامپیوترهای با چند پردازنده <strong>Intel</strong> که از تکنولوژی <strong>Hyper-Threading</strong> استفاده می‌کنند، <strong>SpinWait</strong> از <strong>starvation پردازنده</strong> در شرایط خاص جلوگیری می‌کند.</p></blockquote> <hr><blockquote> <p><strong>نکته:</strong> کلاس‌های .NET Framework مانند <strong>Monitor</strong> یا <strong>ReaderWriterLock</strong> به صورت داخلی از <strong>SpinWait</strong> استفاده می‌کنند.<br> با این حال، به جای استفاده مستقیم از این متد، <strong>Microsoft توصیه می‌کند از کلاس‌های همگام‌سازی داخلی</strong> استفاده کنید.<br> همچنین توصیه می‌کنم از این روش استفاده نکنید، زیرا <strong>SpinWait</strong> یک عدد صحیح به عنوان پارامتر می‌پذیرد که تعداد تکرار حلقه CPU را مشخص می‌کند. در نتیجه، <strong>زمان انتظار به سرعت پردازنده وابسته است</strong>.</p></blockquote> <hr><p>می‌توانید از متد <strong>SpinUntil</strong> نیز استفاده کنید. در زمان نگارش این متن، این متد سه <strong>Overload</strong> دارد:</p><ul> <li><code>SpinUntil(Func&lt;Boolean&gt;)</code></li><li><code>SpinUntil(Func&lt;Boolean&gt;, Int32)</code></li><li><code>SpinUntil(Func&lt;Boolean&gt;, TimeSpan)</code></li></ul> <p>نمونه‌ای از ساده‌ترین نسخه که تا برآورده شدن یک شرط خاص <strong>چرخش می‌کند</strong>:</p><pre class="hljs"><code><span class="hljs-comment">// Previous code is the same. You can see it by downloading</span>
 <span class="hljs-comment">// the Chapter2_DiscussionOnWaiting project</span>
 SpinWait.SpinUntil(() =&gt;
     printLuckyNumberTask.Status == TaskStatus.RanToCompletion
 );
 WriteLine(<span class="hljs-string">&quot;The end of main.&quot;</span>);
-</code></pre>
-<p>نمونه خروجی پس از این تغییر:</p>
-<pre class="hljs"><code>The main thread starts.
+</code></pre> <p>نمونه خروجی پس از این تغییر:</p><pre class="hljs"><code>The main thread starts.
 Processing an order...
 Wait for your lucky number...---Your lucky number is: 8
 The end of main.
-</code></pre>
-<p>توجه داشته باشید که این بار خروجی نشان می‌دهد <strong>printLuckyNumberTask اجرای خود را کامل کرده است</strong>، اما مشخص نمی‌کند که <strong>processOrderTask</strong> اجرا شده یا خیر، زیرا ما فقط وضعیت <strong>printLuckyNumberTask</strong> را بررسی کردیم.</p>
-<div align="center">
-<p><img src="../../../assets/image/02/Table%202-7.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<h3><strong>نکته مهم</strong> 📝</h3>
-<p>نتیجه کلیدی این است که <strong>روش‌های مختلفی برای انتظار وجود دارد</strong>.<br>
-می‌توانید از روشی استفاده کنید که برای شما <strong>مناسب‌تر و راحت‌تر</strong> است.<br>
-من تنها آن دسته از متدها را ذکر کرده‌ام که <strong>کافی باشد برای درک بقیه مطالب این کتاب</strong>.<br>
-به یاد داشته باشید که این متدها نیز دارای <strong>نسخه‌های Overloaded مختلفی</strong> هستند.</p>
-<hr>
-<p><strong>سوال 2.5</strong><br>
-مثالی بزنید که بخواهید از <strong>WhenAny</strong> یا <strong>WaitAny</strong> استفاده کنید. بین این دو کدام را ترجیح می‌دهید؟</p>
-<p>فرض کنید با دو <strong>Task متفاوت</strong> کار می‌کنید و هر Task با یک <strong>URL متفاوت</strong> کار می‌کند.<br>
-فرض کنید هر URL می‌تواند به شما کمک کند <strong>سلامت فعلی یک وب‌سایت</strong> را بررسی کنید.<br>
-می‌دانید که هر یک از این لینک‌ها برای <strong>بررسی وضعیت وب‌سایت کافی است</strong>.<br>
-بنابراین برنامه شما می‌تواند <strong>Taskها را اجرا کند و به محض دریافت داده‌ها ادامه دهد</strong>.<br>
-در چنین حالتی می‌توانید از <strong>WhenAny</strong> یا <strong>WaitAny</strong> استفاده کنید.</p>
-<p>مگر اینکه دلایل کافی وجود داشته باشد، من در چنین شرایطی <strong>WhenAny</strong> را ترجیح می‌دهم، به دلایل زیر:</p>
-<ul>
-<li>این روش <strong>غیرمسدودکننده (nonblocking)</strong> است.</li>
-<li>مورد قبلی برای جلوگیری از <strong>Deadlock</strong> نیز مهم است.<br>
-برای مثال، فرض کنید با چندین Task سر و کار دارید.<br>
-اگر <strong>main thread</strong> منتظر دریافت اعلان از یک Task دیگر باشد، مثلاً <strong>taskA</strong> یا <strong>taskB</strong>، و هر دو Task به دلایل غیرقابل پیش‌بینی از اجرا باز ایستند، <strong>main thread</strong> نیز مسدود می‌شود.<br>
-در واقع، استفاده از <strong>WaitAny</strong> می‌تواند منجر به <strong>Deadlock</strong> شود.</li>
-</ul>
-<hr>
-<h3><strong>خلاصه فصل</strong> 📚</h3>
-<p>این فصل یک مرور سریع از <strong>ایجاد و اجرای Taskها</strong> ارائه داد.<br>
-همچنین <strong>مکانیزم‌های مختلف انتظار برای تکمیل Taskها</strong> را شرح داد.</p>
-<p>به طور خلاصه، این فصل به سوالات زیر پاسخ داد:</p>
-<ul>
-<li>Task چیست و چگونه می‌توان یک Task ایجاد کرد؟</li>
-<li>چگونه می‌توان <strong>مقدار/مقادیر</strong> را به Task منتقل کرد؟</li>
-<li>چگونه می‌توان <strong>مقداری را از Task بازگرداند</strong>؟</li>
-<li>چگونه می‌توان <strong>مکانیزم انتظار</strong> را در برنامه‌نویسی Task به کار برد؟ ✅</li>
-</ul>
-<h3><strong>تمرین‌ها</strong> 🏋️‍♂️</h3>
-<p>برای بررسی درک خود، سعی کنید تمرین‌های زیر را انجام دهید:</p>
-<div align="center">
-<p><img src="../../../assets/image/02/Table%202-8.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<h3><strong>نکته مهم</strong> 📝</h3>
-<p>همان‌طور که قبلاً گفته شد، برای همه مثال‌های کد، <strong>“Implicit Global usings”</strong> در Visual Studio فعال بود.<br>
-به همین دلیل، شما نام <strong>namespace</strong>های زیر را که به صورت پیش‌فرض در دسترس هستند، نمی‌بینید:</p>
-<ul>
-<li>System</li>
-<li>System.Collections.Generic</li>
-<li><a href="http://System.IO">System.IO</a></li>
-<li>System.Linq</li>
-<li>System.Net.Http</li>
-<li>System.Threading</li>
-<li>System.Threading.Tasks</li>
-</ul>
-<p>این توضیح برای <strong>تمام تمرین‌های کتاب</strong> نیز صادق است.</p>
-<hr>
-<h3><strong>تمرین‌ها</strong> 🏋️‍♂️</h3>
-<p><strong>E2.1</strong><br>
-اگر کد زیر را اجرا کنید، می‌توانید <strong>خروجی آن را پیش‌بینی کنید؟</strong></p>
-<pre class="hljs"><code><span class="hljs-keyword">using</span> <span class="hljs-keyword">static</span> System.Console;
+</code></pre> <p>توجه داشته باشید که این بار خروجی نشان می‌دهد <strong>printLuckyNumberTask اجرای خود را کامل کرده است</strong>، اما مشخص نمی‌کند که <strong>processOrderTask</strong> اجرا شده یا خیر، زیرا ما فقط وضعیت <strong>printLuckyNumberTask</strong> را بررسی کردیم.</p><div align="center"> <p><img src="../../../assets/image/02/Table%202-7.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <h3><strong>نکته مهم</strong></h3><p>نتیجه کلیدی این است که <strong>روش‌های مختلفی برای انتظار وجود دارد</strong>.<br> می‌توانید از روشی استفاده کنید که برای شما <strong>مناسب‌تر و راحت‌تر</strong> است.<br> من تنها آن دسته از متدها را ذکر کرده‌ام که <strong>کافی باشد برای درک بقیه مطالب این کتاب</strong>.<br> به یاد داشته باشید که این متدها نیز دارای <strong>نسخه‌های Overloaded مختلفی</strong> هستند.</p><hr> <p><strong>سوال 2.5</strong><br> مثالی بزنید که بخواهید از <strong>WhenAny</strong> یا <strong>WaitAny</strong> استفاده کنید. بین این دو کدام را ترجیح می‌دهید؟</p><p>فرض کنید با دو <strong>Task متفاوت</strong> کار می‌کنید و هر Task با یک <strong>URL متفاوت</strong> کار می‌کند.<br> فرض کنید هر URL می‌تواند به شما کمک کند <strong>سلامت فعلی یک وب‌سایت</strong> را بررسی کنید.<br> می‌دانید که هر یک از این لینک‌ها برای <strong>بررسی وضعیت وب‌سایت کافی است</strong>.<br> بنابراین برنامه شما می‌تواند <strong>Taskها را اجرا کند و به محض دریافت داده‌ها ادامه دهد</strong>.<br> در چنین حالتی می‌توانید از <strong>WhenAny</strong> یا <strong>WaitAny</strong> استفاده کنید.</p><p>مگر اینکه دلایل کافی وجود داشته باشد، من در چنین شرایطی <strong>WhenAny</strong> را ترجیح می‌دهم، به دلایل زیر:</p><ul> <li>این روش <strong>غیرمسدودکننده (nonblocking)</strong> است.</li><li>مورد قبلی برای جلوگیری از <strong>Deadlock</strong> نیز مهم است.<br> برای مثال، فرض کنید با چندین Task سر و کار دارید.<br> اگر <strong>main thread</strong> منتظر دریافت اعلان از یک Task دیگر باشد، مثلاً <strong>taskA</strong> یا <strong>taskB</strong>، و هر دو Task به دلایل غیرقابل پیش‌بینی از اجرا باز ایستند، <strong>main thread</strong> نیز مسدود می‌شود.<br> در واقع، استفاده از <strong>WaitAny</strong> می‌تواند منجر به <strong>Deadlock</strong> شود.</li></ul> <hr><h3><strong>خلاصه فصل</strong></h3><p>این فصل یک مرور سریع از <strong>ایجاد و اجرای Taskها</strong> ارائه داد.<br> همچنین <strong>مکانیزم‌های مختلف انتظار برای تکمیل Taskها</strong> را شرح داد.</p><p>به طور خلاصه، این فصل به سوالات زیر پاسخ داد:</p><ul> <li>Task چیست و چگونه می‌توان یک Task ایجاد کرد؟</li><li>چگونه می‌توان <strong>مقدار/مقادیر</strong> را به Task منتقل کرد؟</li><li>چگونه می‌توان <strong>مقداری را از Task بازگرداند</strong>؟</li><li>چگونه می‌توان <strong>مکانیزم انتظار</strong> را در برنامه‌نویسی Task به کار برد؟</li></ul> <h3><strong>تمرین‌ها</strong> ‍</h3><p>برای بررسی درک خود، سعی کنید تمرین‌های زیر را انجام دهید:</p><div align="center"> <p><img src="../../../assets/image/02/Table%202-8.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <h3><strong>نکته مهم</strong></h3><p>همان‌طور که قبلاً گفته شد، برای همه مثال‌های کد، <strong>“Implicit Global usings”</strong> در Visual Studio فعال بود.<br> به همین دلیل، شما نام <strong>namespace</strong>های زیر را که به صورت پیش‌فرض در دسترس هستند، نمی‌بینید:</p><ul> <li>System</li><li>System.Collections.Generic</li><li><a href="http://System.IO">System.IO</a></li><li>System.Linq</li><li>System.Net.Http</li><li>System.Threading</li><li>System.Threading.Tasks</li></ul> <p>این توضیح برای <strong>تمام تمرین‌های کتاب</strong> نیز صادق است.</p><hr> <h3><strong>تمرین‌ها</strong> ‍</h3><p><strong>E2.1</strong><br> اگر کد زیر را اجرا کنید، می‌توانید <strong>خروجی آن را پیش‌بینی کنید؟</strong></p><pre class="hljs"><code><span class="hljs-keyword">using</span> <span class="hljs-keyword">static</span> System.Console;
 
 Task printHelloTask = <span class="hljs-keyword">new</span>(
     () =&gt; WriteLine(<span class="hljs-string">&quot;Hello!&quot;</span>)
@@ -688,10 +228,7 @@ Task printHelloTask = <span class="hljs-keyword">new</span>(
 
 printHelloTask.Wait(<span class="hljs-number">1</span>);
 WriteLine(<span class="hljs-string">&quot;End.&quot;</span>);
-</code></pre>
-<p><strong>E2.2</strong><br>
-خروجی برنامه زیر را می‌توانید پیش‌بینی کنید؟</p>
-<pre class="hljs"><code><span class="hljs-keyword">using</span> <span class="hljs-keyword">static</span> System.Console;
+</code></pre> <p><strong>E2.2</strong><br> خروجی برنامه زیر را می‌توانید پیش‌بینی کنید؟</p><pre class="hljs"><code><span class="hljs-keyword">using</span> <span class="hljs-keyword">static</span> System.Console;
 
 Task welcomeTask = Task.Run(
     () =&gt;
@@ -703,40 +240,16 @@ Thread.Sleep(<span class="hljs-number">5</span>);
 WriteLine(<span class="hljs-string">&quot;Welcome!&quot;</span>);
 Thread.Sleep(<span class="hljs-number">2</span>);
 WriteLine(<span class="hljs-string">&quot;How are you doing?&quot;</span>);
-</code></pre>
-<p><strong>E2.3</strong><br>
-خروجی برنامه زیر را می‌توانید پیش‌بینی کنید؟</p>
-<pre class="hljs"><code><span class="hljs-keyword">using</span> <span class="hljs-keyword">static</span> System.Console;
+</code></pre> <p><strong>E2.3</strong><br> خروجی برنامه زیر را می‌توانید پیش‌بینی کنید؟</p><pre class="hljs"><code><span class="hljs-keyword">using</span> <span class="hljs-keyword">static</span> System.Console;
 
 <span class="hljs-keyword">var</span> sayHello = (<span class="hljs-built_in">string</span> msg = <span class="hljs-string">&quot;Hello, reader!&quot;</span>) =&gt; msg;
 <span class="hljs-keyword">var</span> displayMsgTask = Task.Run(()=&gt;WriteLine(sayHello()));
 displayMsgTask.Wait();
 WriteLine(<span class="hljs-string">&quot;Goodbye.&quot;</span>);
-</code></pre>
-<p><strong>E2.4</strong><br>
-یک تابع بنویسید که یک عدد را گرفته و <strong>فاکتوریل آن را محاسبه کند</strong>.<br>
-این تابع را در یک <strong>thread پس‌زمینه</strong> اجرا کرده و نتیجه را در <strong>کنسول</strong> نمایش دهید.<br>
-(نیازی به در نظر گرفتن اعتبارسنجی ورودی یا شرایط استثنایی برای این برنامه نیست.)</p>
-<p><strong>E2.5</strong><br>
-صحیح یا غلط بودن جملات زیر را مشخص کنید:<br>
-i) متد <strong>WaitAny</strong> <strong>thread فراخواننده را مسدود می‌کند</strong>، اما متد <strong>WhenAny</strong> این کار را نمی‌کند. [True]<br>
-ii) برای ایجاد <strong>UI پاسخگوتر</strong>، باید <strong>Sleep</strong> را بر <strong>Delay</strong> ترجیح دهید. [False]</p>
-<hr>
-<h3><strong>راه‌حل تمرین‌ها</strong> ✅</h3>
-<p><strong>E2.1</strong><br>
-شما Task را ایجاد کرده‌اید اما آن را <strong>شروع نکرده‌اید</strong>، بنابراین خروجی برنامه:</p>
-<pre class="hljs"><code>End.
-</code></pre>
-<hr>
-<p><strong>E2.2</strong><br>
-برنامه می‌تواند <strong>چندین خروجی مختلف</strong> داشته باشد.<br>
-با توجه به اینکه Task منتظر تکمیل اجرای خود نیست، ترتیب نمایش خروجی‌ها ممکن است بسته به سرعت کامپیوتر متفاوت باشد.<br>
-نمونه خروجی:</p>
-<pre class="hljs"><code>How are you doing?
+</code></pre> <p><strong>E2.4</strong><br> یک تابع بنویسید که یک عدد را گرفته و <strong>فاکتوریل آن را محاسبه کند</strong>.<br> این تابع را در یک <strong>thread پس‌زمینه</strong> اجرا کرده و نتیجه را در <strong>کنسول</strong> نمایش دهید.<br> (نیازی به در نظر گرفتن اعتبارسنجی ورودی یا شرایط استثنایی برای این برنامه نیست.)</p><p><strong>E2.5</strong><br> صحیح یا غلط بودن جملات زیر را مشخص کنید:<br> i) متد <strong>WaitAny</strong> <strong>thread فراخواننده را مسدود می‌کند</strong>، اما متد <strong>WhenAny</strong> این کار را نمی‌کند. [True]<br> ii) برای ایجاد <strong>UI پاسخگوتر</strong>، باید <strong>Sleep</strong> را بر <strong>Delay</strong> ترجیح دهید. [False]</p><hr> <h3><strong>راه‌حل تمرین‌ها</strong></h3><p><strong>E2.1</strong><br> شما Task را ایجاد کرده‌اید اما آن را <strong>شروع نکرده‌اید</strong>، بنابراین خروجی برنامه:</p><pre class="hljs"><code>End.
+</code></pre> <hr><p><strong>E2.2</strong><br> برنامه می‌تواند <strong>چندین خروجی مختلف</strong> داشته باشد.<br> با توجه به اینکه Task منتظر تکمیل اجرای خود نیست، ترتیب نمایش خروجی‌ها ممکن است بسته به سرعت کامپیوتر متفاوت باشد.<br> نمونه خروجی:</p><pre class="hljs"><code>How are you doing?
 Welcome!
-</code></pre>
-<p>می‌توان با اضافه کردن تأخیر بیشتر در <strong>welcomeTask</strong> احتمال پایان زودتر main thread را افزایش داد:</p>
-<pre class="hljs"><code><span class="hljs-keyword">using</span> <span class="hljs-keyword">static</span> System.Console;
+</code></pre> <p>می‌توان با اضافه کردن تأخیر بیشتر در <strong>welcomeTask</strong> احتمال پایان زودتر main thread را افزایش داد:</p><pre class="hljs"><code><span class="hljs-keyword">using</span> <span class="hljs-keyword">static</span> System.Console;
 
 Task welcomeTask = Task.Run(
     () =&gt;
@@ -750,18 +263,9 @@ Thread.Sleep(<span class="hljs-number">200</span>);
 WriteLine(<span class="hljs-string">&quot;Welcome!&quot;</span>);
 Thread.Sleep(<span class="hljs-number">2</span>);
 WriteLine(<span class="hljs-string">&quot;How are you doing?&quot;</span>);
-</code></pre>
-<hr>
-<p><strong>E2.3</strong><br>
-C# 12 اجازه می‌دهد مقادیر پیش‌فرض برای <strong>پارامترهای lambda</strong> تعریف شود.<br>
-خروجی این بار پیش‌بینی‌پذیر است، زیرا <strong>main thread</strong> منتظر تکمیل Task است:</p>
-<pre class="hljs"><code>Hello, reader!
+</code></pre> <hr><p><strong>E2.3</strong><br> C# 12 اجازه می‌دهد مقادیر پیش‌فرض برای <strong>پارامترهای lambda</strong> تعریف شود.<br> خروجی این بار پیش‌بینی‌پذیر است، زیرا <strong>main thread</strong> منتظر تکمیل Task است:</p><pre class="hljs"><code>Hello, reader!
 Goodbye.
-</code></pre>
-<hr>
-<p><strong>E2.4</strong><br>
-نمونه‌ای برای محاسبه فاکتوریل ۱۰ با استفاده از Task پس‌زمینه:</p>
-<pre class="hljs"><code><span class="hljs-keyword">using</span> <span class="hljs-keyword">static</span> System.Console;
+</code></pre> <hr><p><strong>E2.4</strong><br> نمونه‌ای برای محاسبه فاکتوریل ۱۰ با استفاده از Task پس‌زمینه:</p><pre class="hljs"><code><span class="hljs-keyword">using</span> <span class="hljs-keyword">static</span> System.Console;
 
 WriteLine(<span class="hljs-string">&quot;The main thread initiates the task.&quot;</span>);
 <span class="hljs-keyword">var</span> calculateFactorialTask = Task.Run(() =&gt; CalculateFactorial(<span class="hljs-number">10</span>));
@@ -778,128 +282,219 @@ WriteLine(<span class="hljs-string">$&quot;The factorial of 10 is: <span class="
     }
     <span class="hljs-keyword">return</span> temp;
 }
-</code></pre>
-<p>نمونه خروجی:</p>
-<pre class="hljs"><code>The main thread initiates the task.
+</code></pre> <p>نمونه خروجی:</p><pre class="hljs"><code>The main thread initiates the task.
 The main thread resumes to do other things.
 The factorial of 10 is: 3628800
-</code></pre>
-<hr>
-<p><strong>E2.5</strong><br>
-پاسخ‌ها:</p>
-<p>i) <strong>True</strong><br>
-ii) <strong>False</strong></p>
-
-  </main>
-
-  <!-- فوتر مشترک -->
-  <footer class="footer">
-    <div class="container">
-      <p>
-        <img src="/Gitab/icone/copyright.svg" alt="کپی‌رایت" width="14" height="14"
-             style="vertical-align:middle;margin-inline:4px">
-        <span id="y"></span> Gitab — تمامی حقوق محفوظ است.
-      </p>
-    </div>
-  </footer>
-
-  <!-- سال و اسکریپت تغییر تم -->
-  <script>
+</code></pre> <hr><p><strong>E2.5</strong><br> پاسخ‌ها:</p><p>i) <strong>True</strong><br> ii) <strong>False</strong></p></article> <nav class="chapter-single-next-nav"><a href="/Gitab/books/book4/Book/03/Continuation-and-Nested-Tasks/" class="btn-next-chapter-action" id="nextChapterBtn" data-hub="/Gitab/books/book4/"> <span class="next-btn-text">فصل بعدی: زنجیره‌سازی (Continuation) و Taskهای تو در تو</span> <span class="next-btn-arrow">←</span> </a> </nav></div> <button class="fab-back-to-top" id="backToTopBtn" type="button" aria-label="رفتن به بالای صفحه" title="رفتن به بالا"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"> <polyline points="18 15 12 9 6 15"></polyline> </svg> </button></main> <footer class="footer-minimal"><div class="footer-container"> <div class="footer-top-row"><div class="footer-brand-side"> <a href="/Gitab/" class="footer-brand-anchor"> <img src="/Gitab/icone/logo.svg" alt="Gitab" width="28" height="28" loading="lazy" decoding="async"> <span class="footer-brand-title">گیتاب (Gitab)</span> </a> <p class="footer-tagline"> پلتفرم آزاد و مستقل برای ترجمهٔ دقیق و روان کتاب‌های مرجع مهندسی نرم‌افزار. </p></div> <div class="footer-nav-cols"><div class="footer-nav-col"> <span class="footer-nav-heading">موضوعات</span><ul class="footer-nav-list"> <li><a href="/Gitab/books/list-books/?cat=csharp">سی‌شارپ و دات‌نت</a></li><li><a href="/Gitab/books/list-books/?cat=clean-code">کد تمیز و بازآفرینی</a></li><li><a href="/Gitab/books/list-books/?cat=architecture">معماری و طراحی دامنه</a></li><li><a href="/Gitab/books/list-books/?cat=system">لینوکس و خط فرمان</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">بخش‌های سایت</span><ul class="footer-nav-list"> <li><a href="/Gitab/">صفحه اصلی</a></li><li><a href="/Gitab/books/list-books/">کتابخانه کامل</a></li><li><a href="/Gitab/courses/">دوره‌های آموزشی</a></li><li><a href="/Gitab/translator.html">تالار مترجمین</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">مشارکت و جامعه</span><ul class="footer-nav-list"> <li><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer">راهنمای همکاری در ترجمه</a></li><li><a href="https://github.com/hheydarian/Gitab/issues" target="_blank" rel="noopener noreferrer">پیشنهاد کتاب یا گزارش خطا</a></li></ul> </div></div> </div><div class="footer-bottom-line"> <span>© <span id="y">2026</span> Gitab — توسعه‌یافته برای جامعهٔ مهندسان نرم‌افزار ایرانی</span></div> </div></footer> <script>
   (() => {
     const root = document.documentElement;
     const btn = document.getElementById('themeToggle');
+    const sunIcon = btn ? btn.querySelector('.icon-sun') : null;
+    const moonIcon = btn ? btn.querySelector('.icon-moon') : null;
     const KEY = 'gitab-theme';
 
-    function updateTheme(s) {
-      root.setAttribute('data-theme', s);
-      const mode = s;  // فقط `dark` یا `light` خواهد بود
+    function updateTheme(mode) {
+      root.setAttribute('data-theme', mode);
       root.dataset.colorMode = mode;
-      btn.dataset.icon = mode === 'dark' ? 'moon' : 'sun';
+      if (sunIcon && moonIcon) {
+        if (mode === 'dark') {
+          sunIcon.style.display = 'inline-block';
+          moonIcon.style.display = 'none';
+        } else {
+          sunIcon.style.display = 'none';
+          moonIcon.style.display = 'inline-block';
+        }
+      }
     }
 
-    // وضعیت تم ذخیره شده از localStorage
-    let saved = localStorage.getItem(KEY) || 'light'; // پیش‌فرض روشن
+    let saved = 'dark';
+    try { saved = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
     updateTheme(saved);
 
-    // تنظیم مجدد تم هنگام تغییر وضعیت دکمه
-    btn.addEventListener('click', () => {
-      const current = localStorage.getItem(KEY) || 'light';
-      const next = current === 'dark' ? 'light' : 'dark';  // فقط دو حالت: تاریک و روشن
-      localStorage.setItem(KEY, next);
-      updateTheme(next);
-    });
+    if (btn) {
+      btn.addEventListener('click', () => {
+        let current = 'dark';
+        try { current = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+        const next = current === 'dark' ? 'light' : 'dark';
+        try { localStorage.setItem(KEY, next); } catch (e) {}
+        updateTheme(next);
+      });
+    }
 
-    // هنگام بارگذاری صفحه
     document.addEventListener('DOMContentLoaded', () => {
-      updateTheme(localStorage.getItem(KEY) || 'light');
+      let mode = 'dark';
+      try { mode = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+      updateTheme(mode);
+      const yearSpan = document.getElementById('y');
+      if (yearSpan) yearSpan.textContent = new Date().getFullYear();
     });
+
+    const mobBtn = document.getElementById('mobileMenuBtn');
+    const mobDrawer = document.getElementById('mobileDrawer');
+    if (mobBtn && mobDrawer) {
+      const setDrawerOpen = (open) => {
+        mobDrawer.classList.toggle('open', open);
+        mobBtn.classList.toggle('is-open', open);
+        mobBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        mobBtn.setAttribute('aria-label', open ? 'بستن منو' : 'باز کردن منو');
+        mobDrawer.setAttribute('aria-hidden', open ? 'false' : 'true');
+      };
+
+      mobBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        setDrawerOpen(!mobDrawer.classList.contains('open'));
+      });
+
+      mobDrawer.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => setDrawerOpen(false));
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && mobDrawer.classList.contains('open')) {
+          setDrawerOpen(false);
+        }
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!mobDrawer.contains(e.target) && !mobBtn.contains(e.target)) {
+          setDrawerOpen(false);
+        }
+      });
+    }
+
+    if ('serviceWorker' in navigator) {
+      const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+      if (isLocalhost) {
+        navigator.serviceWorker.getRegistrations().then(regs => {
+          for (const reg of regs) reg.unregister();
+        });
+        if ('caches' in window) {
+          caches.keys().then(names => {
+            for (const name of names) caches.delete(name);
+          });
+        }
+      } else {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/Gitab/sw.js').catch(() => {});
+        });
+      }
+    }
   })();
-</script>
-
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-  <script>hljs.highlightAll();</script>
-
-  <script>
+  </script> <script>
   document.querySelectorAll('pre code').forEach(block => {
+    const pre = block.parentNode;
+    if (!pre || pre.querySelector('.copy-btn')) return;
+
+    const copySvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
+    const okSvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+
     const btn = document.createElement('button');
     btn.className = 'copy-btn';
-
-    const icon = document.createElement('img');
-    icon.src = "/Gitab/icone/copy.svg";
-    icon.alt = 'Copy';
-    btn.appendChild(icon);
-
-    block.parentNode.insertBefore(btn, block);
+    btn.setAttribute('aria-label', 'کپی کد');
+    btn.setAttribute('title', 'کپی کد');
+    btn.setAttribute('type', 'button');
+    btn.innerHTML = copySvg;
+    pre.appendChild(btn);
 
     btn.addEventListener('click', async () => {
-      await navigator.clipboard.writeText(block.textContent);
-      btn.classList.add('copied');
-      setTimeout(() => btn.classList.remove('copied'), 1500);
-    });
-  });
-  </script>
-
-  <script>
-  document.body.dataset.page = window.location.pathname;
-
-  const menuBtn = document.querySelector(".menu-toggle");
-  const nav = document.querySelector(".nav");
-
-  if (menuBtn && nav) {
-    menuBtn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      nav.classList.toggle("show");
-    });
-
-    document.addEventListener("click", (e) => {
-      const clickedInsideNav = nav.contains(e.target);
-      const clickedMenuButton = menuBtn.contains(e.target);
-      if (!clickedInsideNav && !clickedMenuButton) {
-        nav.classList.remove("show");
+      try {
+        await navigator.clipboard.writeText(block.textContent);
+        btn.classList.add('copied');
+        btn.innerHTML = okSvg;
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          btn.innerHTML = copySvg;
+        }, 1800);
+      } catch (err) {
+        console.error('Copy failed:', err);
       }
     });
-  }
-  </script>
-
-  <script>
-    document.getElementById('y').textContent = new Date().getFullYear();
-  </script>
-  <script>
-document.getElementById("openDonate").addEventListener("click", () => {
-  document.getElementById("donateModal").style.display = "block";
-});
-document.getElementById("closeDonate").addEventListener("click", () => {
-  document.getElementById("donateModal").style.display = "none";
-});
-document.querySelectorAll(".copy-btn").forEach(btn => {
-  btn.addEventListener("click", () => {
-    navigator.clipboard.writeText(btn.dataset.copy);
-  
-    setTimeout(() => (btn.textContent = "کپی"), 2000);
   });
-});
-</script>
+  </script> <script>
+  (() => {
+    const article = document.getElementById('chapterArticle');
+    if (!article) return;
 
-</body>
-</html>
+    const progressBar = document.getElementById('readingProgressBar');
+    if (progressBar) {
+      window.addEventListener('scroll', () => {
+        const docElem = document.documentElement;
+        const totalHeight = docElem.scrollHeight - docElem.clientHeight;
+        if (totalHeight > 0) {
+          const progress = (window.pageYOffset / totalHeight) * 100;
+          progressBar.style.width = Math.min(100, Math.max(0, progress)) + '%';
+        }
+      }, { passive: true });
+    }
+
+    const btt = document.getElementById('backToTopBtn');
+    if (btt) {
+      window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 250) {
+          btt.classList.add('visible');
+        } else {
+          btt.classList.remove('visible');
+        }
+      }, { passive: true });
+
+      btt.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+
+    article.querySelectorAll('img').forEach(img => {
+      if (!img.hasAttribute('loading')) img.loading = 'lazy';
+      if (!img.hasAttribute('decoding')) img.decoding = 'async';
+      const parent = img.parentElement;
+      if (parent && parent.tagName === 'P') {
+        parent.style.textAlign = 'center';
+      }
+
+      img.addEventListener('error', function() {
+        const src = this.getAttribute('src');
+        if (src && src.includes('assets/image/')) {
+          const parts = src.split('assets/image/');
+          const corrected = '/Gitab/books/book4/assets/image/' + parts[1];
+          if (this.src !== corrected) {
+            this.src = corrected;
+          }
+        }
+      });
+    });
+
+    article.querySelectorAll('p').forEach(p => {
+      const trimmed = p.innerText.trim();
+      if (trimmed.startsWith('💡') || trimmed.startsWith('نکته:')) {
+        p.classList.add('react-callout', 'callout-tip');
+      } else if (trimmed.startsWith('⚠️') || trimmed.startsWith('هشدار:')) {
+        p.classList.add('react-callout', 'callout-warning');
+      } else if (trimmed.startsWith('📌') || trimmed.startsWith('مهم:')) {
+        p.classList.add('react-callout', 'callout-important');
+      } else if (trimmed.startsWith('🔹') || trimmed.startsWith('🔸')) {
+        p.classList.add('react-callout', 'callout-note');
+      }
+    });
+  })();
+  </script> <script type="speculationrules">{"prefetch":[{"where":{"and":[{"href_matches":"/Gitab/*"},{"not":{"href_matches":"/Gitab/downloads/*"}},{"not":{"selector_matches":"[download], [target='_blank']"}}]},"eagerness":"moderate"}]}</script> <script>
+  (() => {
+    if (window.HTMLScriptElement && HTMLScriptElement.supports && HTMLScriptElement.supports('speculationrules')) return;
+    const seen = new Set([window.location.href]);
+    let count = 0;
+    const prefetchLink = (e) => {
+      if (count >= 12) return;
+      const a = e.target && e.target.closest ? e.target.closest('header a, .chapter-single-next-nav a, .syllabus-chapter-item a, .btn-hero-read, .btn-card-read') : null;
+      if (!a || !a.href || a.hasAttribute('download') || a.target === '_blank') return;
+      if (a.origin !== window.location.origin || a.pathname.includes('/downloads/')) return;
+      const clean = a.href.split('#')[0];
+      if (!clean || seen.has(clean)) return;
+      seen.add(clean);
+      count++;
+      const l = document.createElement('link');
+      l.rel = 'prefetch';
+      l.href = clean;
+      document.head.appendChild(l);
+    };
+    document.addEventListener('pointerenter', prefetchLink, { capture: true, passive: true });
+    document.addEventListener('touchstart', prefetchLink, { capture: true, passive: true });
+  })();
+  </script></body></html>

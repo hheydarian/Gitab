@@ -1,149 +1,163 @@
 ---
 layout: layout.njk
-title: مترجمین گیتاب
+title: مترجمین و همکاران | Gitab — کتابخانه مراجع تخصصی
+description: آشنایی با مترجمان، نویسندگان و مهندسان نرم‌افزار همکار در پروژه آزاد گیتاب که کتاب‌ها و دوره‌های مرجع جهانی را به فارسی بومی‌سازی کرده‌اند.
 permalink: /translator.html
 ---
 
-<section class="page-header">
-    <h1>مترجمین گیتاب</h1>
-    <p>تلاش جمعی از توسعه‌دهندگان برای گسترش دانش فنی به زبان فارسی </p>
-</section>
+<div class="translators-page-wrapper">
+  <!-- هدر شیک و مدرن صفحه مترجمین -->
+  <header class="translators-hero">
+    <h1 class="translators-hero-title">مترجمین و همکاران گیتاب</h1>
+    <p class="translators-hero-sub">
+      تلاش جمعی از مهندسان و توسعه‌دهندگان نرم‌افزار برای بومی‌سازی مراجع معتبر جهانی و دسترسی آزاد به دانش ناب مهندسی.
+    </p>
 
-<section class="translators-grid container">
-    <!-- مترجم 1 -->
-    <article class="translator-card">
-        <img src="{{ '/images/translator/user1.jpg' | url }}" alt="حامد حیدریان" class="translator-photo">
-        <h3>حامد حیدریان</h3>
-        <p class="role">C# Developer</p>
-        <div class="social-links">
-            <a  class="owner-badge manager" data-tooltip="برچسب مدیر">
-                <img src="{{ '/icone/manager.svg' | url }}" alt="Owner Badge">
-            </a>
-            <a  class="owner-badge" data-tooltip="برچسب صاحب اثر">
-                <img src="{{ '/icone/castle.svg' | url }}" alt="Owner Badge">
-            </a>
+    <!-- نوار شاخص‌های افتخار با شمارنده متحرک -->
+    {% set totalChapters = 0 %}
+    {% for b in books %}
+      {% set totalChapters = totalChapters + (b.chaptersCount or 0) %}
+    {% endfor %}
+    <div class="translators-metrics-bar">
+      <div class="t-metric-cell">
+        <span class="t-metric-val counter-animated" data-target="{{ translators.length }}" data-suffix="+">۰+</span>
+        <span class="t-metric-txt">مترجم و مهندس همکار</span>
+      </div>
+      <span class="t-metric-dot">•</span>
+      <div class="t-metric-cell">
+        <span class="t-metric-val counter-animated" data-target="{{ books.length }}" data-suffix="">۰</span>
+        <span class="t-metric-txt">کتاب تخصصی منتشرشده</span>
+      </div>
+      <span class="t-metric-dot">•</span>
+      <div class="t-metric-cell">
+        <span class="t-metric-val counter-animated" data-target="{{ totalChapters }}" data-suffix="+">۰+</span>
+        <span class="t-metric-txt">فصل ترجمه‌شده و آزاد</span>
+      </div>
+    </div>
+  </header>
 
-            <a  href="https://github.com/hheydarian" target="_blank">
-                <img src="{{ '/icone/github-p.svg' | url }}" alt="GitHub">
-            </a>
-            <a href="https://www.linkedin.com/in/hamedheydarian/" target="_blank">
-                <img src="{{ '/icone/linkedin.svg' | url }}" alt="LinkedIn">
-            </a>
+  <!-- شبکه کارت‌های کلاسیک و اصیل مترجمین با هاور و تول‌تیپ اختصاصی -->
+  <section class="translators-section">
+    <div class="translators-grid-classic">
+      {% for t in translators %}
+      <article class="translator-card-classic">
+        <!-- آواتار گرد با هاله نوری زیبا -->
+        <div class="t-avatar-frame">
+          <img src="{{ t.avatar | url }}" alt="{{ t.name }}" class="t-avatar-circle" {% if loop.index > 3 %}loading="lazy" {% endif %}decoding="async">
         </div>
-       
-    </article>
 
-    <!-- مترجم 2 -->
-    <article class="translator-card">
-        <img src="{{ '/images/translator/user4.jpg' | url }}" alt="مجتبی افراز" class="translator-photo">
-        <h3>مجتبی افراز</h3>
-        <p class="role">Software Engineer</p>
-        <div class="social-links">
-             <a  class="owner-badge" data-tooltip="برچسب صاحب اثر">
-                <img src="{{ '/icone/castle.svg' | url }}" alt="Owner Badge">
-            </a>
-            <a href="https://github.com/mojtaba-afraz" target="_blank">
-                <img src="{{ '/icone/github-p.svg' | url }}" alt="GitHub">
-            </a>
-            <a href="https://www.linkedin.com/in/mojtaba-afraz/" target="_blank">
-                <img src="{{ '/icone/linkedin.svg' | url }}" alt="LinkedIn">
-            </a>
-        </div>
-       
-    </article>
+        <!-- نام و عنوان شغلی -->
+        <h3 class="t-card-name">{{ t.name }}</h3>
+        <p class="t-card-role">{{ t.role }}</p>
 
-    <!-- مترجم 3 -->
-    <article class="translator-card">
-        <img src="{{ '/images/translator/user5.jpg' | url }}" alt="هیمن صادقی" class="translator-photo ">
-        <h3>هیمن صادقی </h3>
-        <p class="role">DevOps Engineer</p>
-        <div class="social-links">
-            <a  class="owner-badge" data-tooltip="برچسب صاحب اثر">
-                <img src="{{ '/icone/castle.svg' | url }}" alt="Owner Badge">
-            </a>
-            <a href="https://github.com/hemansadeghi" target="_blank">
-                <img src="{{ '/icone/github-p.svg' | url }}" alt="GitHub">
-            </a>
-            <a href="https://www.linkedin.com/in/heman-sadeghi-0b0537341/" target="_blank">
-                <img src="{{ '/icone/linkedin.svg' | url }}" alt="LinkedIn">
-            </a>
-        </div>
-     
-    </article>
+        <!-- ردیف آیکون‌های بج و شبکه‌های اجتماعی با تول‌تیپ تعاملی -->
+        <div class="social-links-interactive">
+          {% if 'manager' in t.badges %}
+          <a class="owner-badge manager" data-tooltip="برچسب مدیر" tabindex="0">
+            <img src="{{ '/icone/manager.svg' | url }}" alt="مدیر" loading="lazy" decoding="async">
+          </a>
+          {% endif %}
 
-    <!-- مترجم 4 -->
-    <article class="translator-card">
-        <img src="{{ '/images/translator/user6.jpg' | url }}" alt="امیر محمد روزمه" class="translator-photo">
-        <h3>امیر محمد روزمه</h3>
-        <p class="role">Web developer</p>
-        <div class="social-links">
-            <a  class="owner-badge star" data-tooltip="برچسب طلایی">
-                <img src="{{ '/icone/star.svg' | url }}" alt="Owner Badge">
-            </a>
-            <a  class="owner-badge work" data-tooltip="برچسب همکار">
-                <img src="{{ '/icone/love.svg' | url }}" alt="Owner Badge">
-            </a>
-            <a href="https://github.com/amirroox" target="_blank">
-                <img src="{{ '/icone/github-p.svg' | url }}" alt="GitHub">
-            </a>
-            <a href="https://www.linkedin.com/in/amirroox/" target="_blank">
-                <img src="{{ '/icone/linkedin.svg' | url }}" alt="LinkedIn">
-            </a>
-        </div>
-    </article>
-      <!-- مترجم 5 -->
-    <article class="translator-card">
-        <img src="{{ '/images/translator/user2.jpg' | url }}" alt="حمید نامجو" class="translator-photo">
-        <h3>حمید نامجو</h3>
-        <p class="role">Data Analyst</p>
-        <div class="social-links">
-            <a  class="owner-badge work" data-tooltip="برچسب همکار">
-                <img src="{{ '/icone/love.svg' | url }}" alt="Owner Badge">
-            </a>
-            <a href="https://github.com/hrnrxb" target="_blank">
-                <img src="{{ '/icone/github-p.svg' | url }}" alt="GitHub">
-            </a>
-            <a href="https://www.linkedin.com/in/hamid-namjoo/" target="_blank">
-                <img src="{{ '/icone/linkedin.svg' | url }}" alt="LinkedIn">
-            </a>
-        </div>
-     
-    </article>
+          {% if 'castle' in t.badges %}
+          <a class="owner-badge castle" data-tooltip="برچسب صاحب اثر" tabindex="0">
+            <img src="{{ '/icone/castle.svg' | url }}" alt="صاحب اثر" loading="lazy" decoding="async">
+          </a>
+          {% endif %}
 
-       <!-- مترجم 6 -->
-    <article class="translator-card">
-        <img src="{{ '/images/translator/user7.jpg' | url }}" alt="دانیال کریمی" class="translator-photo">
-        <h3>دانیال کریمی</h3>
-        <p class="role">Senior .NET Developer</p>
-        <div class="social-links">
-            <a  class="owner-badge work" data-tooltip="برچسب همکار">
-                <img src="{{ '/icone/love.svg' | url }}" alt="Owner Badge">
-            </a>
-            <a href="https://github.com/Danialk13" target="_blank">
-                <img src="{{ '/icone/github-p.svg' | url }}" alt="GitHub">
-            </a>
-            <a href="https://www.linkedin.com/in/danialk13/" target="_blank">
-                <img src="{{ '/icone/linkedin.svg' | url }}" alt="LinkedIn">
-            </a>
+          {% if 'star' in t.badges %}
+          <a class="owner-badge star" data-tooltip="برچسب طلایی" tabindex="0">
+            <img src="{{ '/icone/star.svg' | url }}" alt="طلایی" loading="lazy" decoding="async">
+          </a>
+          {% endif %}
+
+          {% if 'work' in t.badges %}
+          <a class="owner-badge work" data-tooltip="برچسب همکار" tabindex="0">
+            <img src="{{ '/icone/love.svg' | url }}" alt="همکار" loading="lazy" decoding="async">
+          </a>
+          {% endif %}
+
+          {% if t.github %}
+          <a class="social-icon" href="{{ t.github }}" target="_blank" rel="noopener noreferrer" data-tooltip="گیت‌هاب">
+            <img src="{{ '/icone/github-p.svg' | url }}" alt="GitHub" loading="lazy" decoding="async">
+          </a>
+          {% endif %}
+
+          {% if t.linkedin %}
+          <a class="social-icon" href="{{ t.linkedin }}" target="_blank" rel="noopener noreferrer" data-tooltip="لینکدین">
+            <img src="{{ '/icone/linkedin.svg' | url }}" alt="LinkedIn" loading="lazy" decoding="async">
+          </a>
+          {% endif %}
         </div>
-     
-    </article>
-     <!-- مترجم 7 -->
-    <article class="translator-card">
-        <img src="{{ '/images/translator/user3.jpg' | url }}" alt="ابوالفضل مبشری" class="translator-photo">
-        <h3>ابوالفضل مبشری</h3>
-        <p class="role">Game Developer</p>
-        <div class="social-links">
-            <a  class="owner-badge work" data-tooltip="برچسب همکار">
-                <img src="{{ '/icone/love.svg' | url }}" alt="Owner Badge">
-            </a>
-            <a href="https://github.com/AripaStudio" target="_blank">
-                <img src="{{ '/icone/github-p.svg' | url }}" alt="GitHub">
-            </a>
-            <a href="https://github.com/AripaStudio" target="_blank">
-                <img src="{{ '/icone/linkedin.svg' | url }}" alt="LinkedIn">
-            </a>
+
+        {% if t.bio %}
+        <p class="t-card-bio">{{ t.bio }}</p>
+        {% endif %}
+
+        <!-- آثار ترجمه‌شده (در صورت وجود) -->
+        
+      </article>
+      {% endfor %}
+    </div>
+
+    <!-- بنر دعوت به مشارکت به سبک مدرن گیتاب -->
+    <div class="translators-join-banner">
+      <div class="join-banner-glow"></div>
+      <div class="join-banner-inner">
+        <h3 class="join-title">شما هم می‌توانید مترجم یا بازبین کتاب بعدی باشید!</h3>
+        <p class="join-desc">
+          گیتاب متعلق به همه ماست. فرقی نمی‌کند یک سرفصل را ترجمه کنید، غلط‌های املایی را پول ریکوئست دهید، یا یک کتاب کامل جدید را شروع کنید؛ جای شما در این تالار محفوظ است.
+        </p>
+        <div class="join-actions">
+          <a class="btn-modern-primary" href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer">
+            <span>مشارکت در مخزن گیت‌هاب</span>
+            <span>←</span>
+          </a>
+          <a class="btn-modern-secondary" href="https://github.com/hheydarian/Gitab/issues" target="_blank" rel="noopener noreferrer">
+            <span>پیشنهاد کتاب یا موضوع جدید</span>
+          </a>
         </div>
-     
-    </article>
-</section>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- اسکریپت شمارش انیمیشنی اعداد -->
+<script>
+(() => {
+  const toPersianDigits = (n) => String(n).replace(/[0-9]/g, d => '۰۱۲۳۴۵۶۷۸۹'[d]);
+
+  const animateCounters = () => {
+    const counters = document.querySelectorAll('.counter-animated');
+    counters.forEach(el => {
+      const target = parseInt(el.getAttribute('data-target'), 10) || 0;
+      const suffix = el.getAttribute('data-suffix') || '';
+      const duration = 1600;
+      const start = 0;
+      const startTime = performance.now();
+
+      function update(currentTime) {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const easeProgress = 1 - (1 - progress) * (1 - progress);
+        const currentVal = Math.floor(start + (target - start) * easeProgress);
+
+        el.textContent = toPersianDigits(currentVal) + suffix;
+
+        if (progress < 1) {
+          requestAnimationFrame(update);
+        } else {
+          el.textContent = toPersianDigits(target) + suffix;
+        }
+      }
+
+      requestAnimationFrame(update);
+    });
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', animateCounters);
+  } else {
+    animateCounters();
+  }
+})();
+</script>

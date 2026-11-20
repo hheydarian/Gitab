@@ -319,7 +319,7 @@ export PS1
 ### منابع بیشتر
 
 * **Bash Prompt HOWTO** از *Linux Documentation Project* — راهنمای کامل و رسمی درباره‌ی طراحی اعلان در Bash:
-  🔗 [http://tldp.org/HOWTO/Bash-Prompt-HOWTO/](http://tldp.org/HOWTO/Bash-Prompt-HOWTO/)
+   [http://tldp.org/HOWTO/Bash-Prompt-HOWTO/](http://tldp.org/HOWTO/Bash-Prompt-HOWTO/)
 
 * مقاله‌ی ویکی‌پدیا درباره‌ی **کدهای Escape ANSI** (برای درک عمیق‌تر ساختار رنگ‌ها و کنترل نمایش):
-  🔗 [http://en.wikipedia.org/wiki/ANSI_escape_code](http://en.wikipedia.org/wiki/ANSI_escape_code)
+   [http://en.wikipedia.org/wiki/ANSI_escape_code](http://en.wikipedia.org/wiki/ANSI_escape_code)

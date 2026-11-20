@@ -2,14 +2,14 @@
 layout: layout.njk
 title: Cross-Cutting Concernsه
 ---
-# فصل یازدهم:🎯 **پرداختن به مسائل فراگیر (Cross-Cutting Concerns)**
+# فصل یازدهم: **پرداختن به مسائل فراگیر (Cross-Cutting Concerns)**
 
 وقتی که می‌خواهید **کد تمیز (Clean Code)** بنویسید، دو نوع **مسئله (Concern)** وجود دارد که باید به آن‌ها توجه کنید:
 
 1. **مسائل اصلی (Core Concerns):** دلایل ایجاد نرم‌افزار و علت توسعه آن هستند.
 2. **مسائل فراگیر (Cross-Cutting Concerns):** مسائلی که بخشی از نیازمندی‌های کسب‌وکار نیستند اما در تمام بخش‌های کد باید به آن‌ها توجه شود و با مسائل اصلی در ارتباط هستند.
 
-این موضوع را می‌توان به شکل زیر در نمودار نشان داد: 📊
+این موضوع را می‌توان به شکل زیر در نمودار نشان داد: 
 
 <div align="center">
 
@@ -20,17 +20,17 @@ title: Cross-Cutting Concernsه
 
 **مسائل فراگیر** شامل موارد زیر هستند:
 
-* مدیریت پیکربندی (Configuration Management) ⚙️
-* ثبت وقایع (Logging) 📝
-* حسابرسی (Auditing) 📊
-* امنیت (Security) 🔒
-* اعتبارسنجی (Validation) ✔️
-* مدیریت استثناها (Exception Handling) ⚠️
-* ابزارسنجی (Instrumentation) 🛠️
-* تراکنش‌ها (Transactions) 💳
-* استفاده بهینه از منابع (Resource Pooling) 🏗️
-* کشینگ (Caching) 🗄️
-* چندنخی و همزمانی (Threading and Concurrency) 🧵
+* مدیریت پیکربندی (Configuration Management) 
+* ثبت وقایع (Logging) 
+* حسابرسی (Auditing) 
+* امنیت (Security) 
+* اعتبارسنجی (Validation) 
+* مدیریت استثناها (Exception Handling) 
+* ابزارسنجی (Instrumentation) 
+* تراکنش‌ها (Transactions) 
+* استفاده بهینه از منابع (Resource Pooling) 
+* کشینگ (Caching) 
+* چندنخی و همزمانی (Threading and Concurrency) 
 
 برای ساخت **کتابخانه قابل استفاده مجدد**، از **الگوی دکوراتور (Decorator Pattern)** و **چارچوب PostSharp Aspect** استفاده خواهیم کرد که در زمان کامپایل به پروژه تزریق می‌شود.
 
@@ -45,9 +45,9 @@ title: Cross-Cutting Concernsه
 
 در این فصل، موضوعات زیر را پوشش می‌دهیم:
 
-1. الگوی دکوراتور (Decorator Pattern) 🏷️
-2. الگوی پراکسی (Proxy Pattern) 🛡️
-3. برنامه‌نویسی مبتنی بر جنبه (Aspect-Oriented Programming – AOP) با PostSharp ⚙️
+1. الگوی دکوراتور (Decorator Pattern) 
+2. الگوی پراکسی (Proxy Pattern) 
+3. برنامه‌نویسی مبتنی بر جنبه (Aspect-Oriented Programming – AOP) با PostSharp 
 4. پروژه – کتابخانه قابل استفاده مجدد برای مسائل فراگیر
 
 **در پایان این فصل، شما توانایی‌های زیر را کسب خواهید کرد:**
@@ -66,7 +66,7 @@ title: Cross-Cutting Concernsه
 
 ---
 
-### الگوی دکوراتور (Decorator Pattern) 🏷️
+### الگوی دکوراتور (Decorator Pattern) 
 
 الگوی طراحی دکوراتور یک **الگوی ساختاری (Structural Pattern)** است که برای **افزودن قابلیت‌های جدید به یک شیء موجود بدون تغییر ساختار آن** استفاده می‌شود.
 در این الگو، **کلاس اصلی در کلاس دکوراتور قرار می‌گیرد** و رفتارها و عملیات جدید در زمان اجرا به شیء اضافه می‌شوند.
@@ -87,9 +87,9 @@ title: Cross-Cutting Concernsه
 حال یک مثال می‌نویسیم که یک **عملیات را در یک بلاک try/catch** قرار می‌دهد.
 در هر دو بخش **try** و **catch**، یک رشته به کنسول چاپ خواهد شد.
 
-1️⃣ یک **Console Application** در .NET 4.8 به نام **CH10\_AddressingCrossCuttingConcerns** بسازید.
-2️⃣ یک فولدر به نام **DecoratorPattern** اضافه کنید.
-3️⃣ یک **interface** جدید به نام **IComponent** اضافه کنید:
+1⃣ یک **Console Application** در .NET 4.8 به نام **CH10\_AddressingCrossCuttingConcerns** بسازید.
+2⃣ یک فولدر به نام **DecoratorPattern** اضافه کنید.
+3⃣ یک **interface** جدید به نام **IComponent** اضافه کنید:
 
 ```csharp
 public interface IComponent {
@@ -187,19 +187,19 @@ Console.ReadKey();
 ```
 
 * این دو خط، مثال ما را اجرا می‌کنند و سپس منتظر می‌مانند تا کاربر یک کلید فشار دهد.
-* با اجرای برنامه، خروجی مشابه تصویر نمونه نمایش داده می‌شود. 📺
+* با اجرای برنامه، خروجی مشابه تصویر نمونه نمایش داده می‌شود. 
 
 <div align="center">
 
 ![Conventions-UsedThis-Book](../../../assets/image/11/Table%2011-3.jpeg)
 </div>
 
-با این، مرور ما بر **الگوی دکوراتور (Decorator Pattern)** به پایان رسید ✅.
+با این، مرور ما بر **الگوی دکوراتور (Decorator Pattern)** به پایان رسید .
 حالا زمان آن است که به **الگوی پراکسی (Proxy Pattern)** بپردازیم.
 
 ---
 
-### الگوی پراکسی (Proxy Pattern) 🛡️
+### الگوی پراکسی (Proxy Pattern) 
 
 الگوی پراکسی یک **الگوی طراحی ساختاری (Structural Design Pattern)** است که **اشیایی را فراهم می‌کند که به‌عنوان جایگزین برای اشیاء واقعی سرویس (Service Objects) مورد استفاده توسط کلاینت‌ها عمل می‌کنند**.
 
@@ -222,8 +222,8 @@ Console.ReadKey();
 
 ما یک پیاده‌سازی ساده از **الگوی پراکسی** را بررسی می‌کنیم:
 
-1️⃣ یک فولدر به نام **ProxyPattern** در ریشه پروژه فصل ۱۱ اضافه کنید.
-2️⃣ یک **interface** به نام **IService** با یک متد برای مدیریت درخواست بسازید:
+1⃣ یک فولدر به نام **ProxyPattern** در ریشه پروژه فصل ۱۱ اضافه کنید.
+2⃣ یک **interface** به نام **IService** با یک متد برای مدیریت درخواست بسازید:
 
 ```csharp
 public interface IService {
@@ -236,7 +236,7 @@ public interface IService {
 
 ---
 
-3️⃣ کلاس **Service** را اضافه کرده و رابط **IService** را پیاده‌سازی کنید:
+3⃣ کلاس **Service** را اضافه کرده و رابط **IService** را پیاده‌سازی کنید:
 
 ```csharp
 public class Service : IService {
@@ -251,7 +251,7 @@ public class Service : IService {
 
 ---
 
-4️⃣ حال، کلاس **Proxy** را می‌نویسیم:
+4⃣ حال، کلاس **Proxy** را می‌نویسیم:
 
 ```csharp
 public class Proxy : IService {
@@ -274,7 +274,7 @@ public class Proxy : IService {
 
 ---
 
-5️⃣ برای دیدن عملکرد، کلاس **Program** را به‌روزرسانی می‌کنیم:
+5⃣ برای دیدن عملکرد، کلاس **Program** را به‌روزرسانی می‌کنیم:
 
 ```csharp
 private static void ProxyPatternExample() {
@@ -290,17 +290,17 @@ private static void ProxyPatternExample() {
 * این متد ابتدا **Request()** سرویس را به صورت مستقیم اجرا می‌کند.
 * سپس همان متد را از طریق **Proxy** اجرا می‌کند.
 
-با اجرای پروژه، خروجی مشابه نمونه زیر مشاهده خواهد شد: 📺
+با اجرای پروژه، خروجی مشابه نمونه زیر مشاهده خواهد شد: 
 <div align="center">
 
 ![Conventions-UsedThis-Book](../../../assets/image/11/Table%2011-5.jpeg)
 </div>
 
-حال که با **الگوی دکوراتور** و **الگوی پراکسی** آشنا شدید، بیایید نگاهی به **برنامه‌نویسی مبتنی بر جنبه (AOP) با PostSharp** بیندازیم. ⚙️
+حال که با **الگوی دکوراتور** و **الگوی پراکسی** آشنا شدید، بیایید نگاهی به **برنامه‌نویسی مبتنی بر جنبه (AOP) با PostSharp** بیندازیم. 
 
 ---
 
-### برنامه‌نویسی مبتنی بر جنبه (AOP) با PostSharp 🧩
+### برنامه‌نویسی مبتنی بر جنبه (AOP) با PostSharp 
 
 * **AOP** می‌تواند با **OOP** استفاده شود.
 * یک **Aspect** یک **Attribute** است که به کلاس‌ها، متدها، پارامترها و Properties اعمال می‌شود و در **زمان کامپایل** کد را به کلاس، متد، پارامتر یا Property مورد نظر تزریق می‌کند.
@@ -313,9 +313,9 @@ private static void ProxyPatternExample() {
 [https://www.postsharp.net/download](https://www.postsharp.net/download)
 
 **نحوه کار AOP با PostSharp:**
-1️⃣ بسته PostSharp را به پروژه اضافه کنید.
-2️⃣ کد خود را با Attributes نشانه‌گذاری کنید.
-3️⃣ کامپایلر C# کد را به باینری تبدیل می‌کند و PostSharp باینری را تحلیل کرده و پیاده‌سازی Aspectها را تزریق می‌کند.
+1⃣ بسته PostSharp را به پروژه اضافه کنید.
+2⃣ کد خود را با Attributes نشانه‌گذاری کنید.
+3⃣ کامپایلر C# کد را به باینری تبدیل می‌کند و PostSharp باینری را تحلیل کرده و پیاده‌سازی Aspectها را تزریق می‌کند.
 
 * اگرچه باینری‌ها در زمان کامپایل تغییر می‌کنند، **کد منبع پروژه بدون تغییر باقی می‌ماند**.
 * این باعث می‌شود که کد شما **تمیز، ساده و قابل نگهداری** باشد و استفاده مجدد و گسترش آن در آینده آسان‌تر شود.
@@ -374,8 +374,8 @@ PostSharp الگوهای آماده خوبی برای شما ارائه می‌�
 
 ### نمونه جنبه Logging
 
-1️⃣ ابتدا PostSharp را به پروژه اضافه کنید.
-2️⃣ یک فولدر به نام **Aspects** بسازید و یک کلاس جدید به نام **LoggingAspect** اضافه کنید:
+1⃣ ابتدا PostSharp را به پروژه اضافه کنید.
+2⃣ یک فولدر به نام **Aspects** بسازید و یک کلاس جدید به نام **LoggingAspect** اضافه کنید:
 
 ```csharp
 [PSerializable]
@@ -415,7 +415,7 @@ public override void OnException(MethodExecutionArgs args) {
 
 ### استفاده از LoggingAspect
 
-1️⃣ متد موفق:
+1⃣ متد موفق:
 
 ```csharp
 [LoggingAspect]
@@ -424,7 +424,7 @@ private static void SuccessfulMethod() {
 }
 ```
 
-2️⃣ متد ناموفق:
+2⃣ متد ناموفق:
 
 ```csharp
 [LoggingAspect]
@@ -439,20 +439,20 @@ private static void FailedMethod() {
 * **SuccessfulMethod()** پیام موفقیت را چاپ می‌کند.
 * **FailedMethod()** پیام خطا چاپ کرده و عملیات **تقسیم بر صفر** انجام می‌دهد که باعث **DivideByZeroException** می‌شود.
 
-هر دو متد را از **Main()** فراخوانی کنید و پروژه را اجرا کنید. خروجی مشابه نمونه زیر خواهد بود: 📺
+هر دو متد را از **Main()** فراخوانی کنید و پروژه را اجرا کنید. خروجی مشابه نمونه زیر خواهد بود: 
 <div align="center">
 
 ![Conventions-UsedThis-Book](../../../assets/image/11/Table%2011-6.jpeg)
 </div>
 
-در این مرحله، **Debugger** باعث خروج برنامه خواهد شد. ✅
+در این مرحله، **Debugger** باعث خروج برنامه خواهد شد. 
 همان‌طور که می‌بینید، **ایجاد جنبه‌های PostSharp خودتان** برای برآورده کردن نیازهایتان، فرآیندی ساده است.
 
 حالا به سراغ **افزودن محدودیت‌های معماری (Architectural Constraints)** می‌رویم.
 
 ---
 
-### توسعه چارچوب معماری 🏗️
+### توسعه چارچوب معماری 
 
 * **محدودیت معماری** یعنی پذیرش الگوهای طراحی سفارشی که باید در تمام ماژول‌ها رعایت شوند.
 * ما یک **Scalar Constraint** ایجاد می‌کنیم که **یک عنصر کد را اعتبارسنجی کند**.
@@ -517,14 +517,14 @@ public class BusinessRule  { }
 
 ### شروع پروژه
 
-1️⃣ یک **.NET Standard Class Library** به نام **CrossCuttingConcerns** بسازید.
-2️⃣ یک **.NET Framework Console Application** به نام **TestHarness** به پروژه اضافه کنید.
+1⃣ یک **.NET Standard Class Library** به نام **CrossCuttingConcerns** بسازید.
+2⃣ یک **.NET Framework Console Application** به نام **TestHarness** به پروژه اضافه کنید.
 
 * در این کتابخانه، قابلیت‌های قابل استفاده مجدد برای مدیریت مسائل مختلف اضافه می‌کنیم، از جمله **Caching**.
 
 ---
 
-### افزودن مسأله کشینگ (Caching) 🗄️
+### افزودن مسأله کشینگ (Caching) 
 
 * **Caching** تکنیکی برای ذخیره‌سازی و افزایش عملکرد هنگام دسترسی به منابع مختلف است.
 * کش می‌تواند **حافظه، فایل‌سیستم یا دیتابیس** باشد.
@@ -532,9 +532,9 @@ public class BusinessRule  { }
 
 ---
 
-1️⃣ فولدری به نام **Caching** در پروژه **CrossCuttingConcerns** بسازید.
-2️⃣ یک کلاس به نام **MemoryCache** اضافه کنید.
-3️⃣ پکیج‌های NuGet زیر را اضافه کنید:
+1⃣ فولدری به نام **Caching** در پروژه **CrossCuttingConcerns** بسازید.
+2⃣ یک کلاس به نام **MemoryCache** اضافه کنید.
+3⃣ پکیج‌های NuGet زیر را اضافه کنید:
 
 * PostSharp
 * PostSharp.Patterns.Common
@@ -566,8 +566,8 @@ public static class MemoryCache {
 
 ### افزودن کلاس تست
 
-1️⃣ در پروژه **TestHarness** یک کلاس جدید به نام **TestClass** اضافه کنید.
-2️⃣ متدهای **GetCachedItem()** و **GetMessage()** را اضافه کنید:
+1⃣ در پروژه **TestHarness** یک کلاس جدید به نام **TestClass** اضافه کنید.
+2⃣ متدهای **GetCachedItem()** و **GetMessage()** را اضافه کنید:
 
 ```csharp
 public string GetCachedItem() {
@@ -599,19 +599,19 @@ Console.WriteLine(harness.GetCachedItem());
 * **Thread.Sleep** باعث منقضی شدن کش نمی‌شود چون زمان هنوز کمتر از ۳۰ ثانیه است، اما برای شبیه‌سازی عملیات بعدی مفید است.
 * آخرین فراخوانی، آیتم را دوباره از کش دریافت و بازمی‌گرداند.
 
-### افزودن قابلیت لاگ‌گیری در فایل 📄
+### افزودن قابلیت لاگ‌گیری در فایل 
 
 در پروژه ما، فرآیندهای **Logging، Auditing و Instrumentation** خروجی خود را به **یک فایل متنی** می‌فرستند.
 برای این کار نیاز به یک کلاس داریم که:
 
-1️⃣ بررسی کند فایل مورد نظر وجود دارد یا خیر و در صورت عدم وجود، آن را ایجاد کند.
-2️⃣ خروجی را به فایل اضافه کرده و ذخیره کند.
+1⃣ بررسی کند فایل مورد نظر وجود دارد یا خیر و در صورت عدم وجود، آن را ایجاد کند.
+2⃣ خروجی را به فایل اضافه کرده و ذخیره کند.
 
 ---
 
-1️⃣ یک فولدر به نام **FileSystem** در کتابخانه کلاس ایجاد کنید.
-2️⃣ یک کلاس به نام **LogFile** بسازید و آن را **public static** تعریف کنید.
-3️⃣ متغیرهای عضو زیر را اضافه کنید:
+1⃣ یک فولدر به نام **FileSystem** در کتابخانه کلاس ایجاد کنید.
+2⃣ یک کلاس به نام **LogFile** بسازید و آن را **public static** تعریف کنید.
+3⃣ متغیرهای عضو زیر را اضافه کنید:
 
 ```csharp
 private static string _location = string.Empty;
@@ -671,13 +671,13 @@ public static void AppendTextToFile(string filename, string text) {
 
 ---
 
-### افزودن مسأله Logging 🖥️
+### افزودن مسأله Logging 
 
 * اکثر برنامه‌ها به **نوعی لاگ‌گیری** نیاز دارند: کنسول، فایل، Event Log و دیتابیس.
 * در پروژه ما، تنها به **کنسول و فایل متنی** می‌پردازیم.
 
-1️⃣ فولدری به نام **Logging** در کتابخانه کلاس ایجاد کنید.
-2️⃣ یک کلاس به نام **ConsoleLoggingAspect** اضافه کنید و کد زیر را وارد کنید:
+1⃣ فولدری به نام **Logging** در کتابخانه کلاس ایجاد کنید.
+2⃣ یک کلاس به نام **ConsoleLoggingAspect** اضافه کنید و کد زیر را وارد کنید:
 
 ```csharp
 [PSerializable]
@@ -716,7 +716,7 @@ public override void OnException(MethodExecutionArgs args) {
 
 ---
 
-### لاگ‌گیری در فایل متنی 📝
+### لاگ‌گیری در فایل متنی 
 
 * یک کلاس به نام **TextFileLoggingAspect** اضافه کنید.
 * این کلاس مشابه **ConsoleLoggingAspect** است، با این تفاوت که:
@@ -735,9 +735,9 @@ public override void OnEntry(MethodExecutionArgs args) {
 ---
 
 با این کار قابلیت‌های **لاگ‌گیری در فایل و کنسول** آماده است.
-در مرحله بعد، به **مسأله Exceptions** می‌پردازیم. ⚡
+در مرحله بعد، به **مسأله Exceptions** می‌پردازیم. 
 
-### افزودن مسأله **Exception-Handling** ⚠️
+### افزودن مسأله **Exception-Handling** 
 
 در نرم‌افزار، تجربه **Exceptions** توسط کاربران اجتناب‌ناپذیر است.
 پس باید روشی برای **لاگ‌گیری آن‌ها** داشته باشیم.
@@ -747,8 +747,8 @@ public override void OnEntry(MethodExecutionArgs args) {
 
 ---
 
-1️⃣ یک فولدر به نام **Exceptions** در کتابخانه کلاس ایجاد کنید.
-2️⃣ یک فایل به نام **ExceptionAspect** بسازید و کد زیر را وارد کنید:
+1⃣ یک فولدر به نام **Exceptions** در کتابخانه کلاس ایجاد کنید.
+2⃣ یک فایل به نام **ExceptionAspect** بسازید و کد زیر را وارد کنید:
 
 ```csharp
 [PSerializable]
@@ -772,9 +772,9 @@ public class ExceptionAspect : OnExceptionAspect {
 ```
 
 * کلاس **ExceptionAspect** ارث‌بری می‌کند از **OnExceptionAspect** و دارای سه ویژگی است:
-  1️⃣ `Message`: پیام خطا
-  2️⃣ `ExceptionType`: نوع Exception رخ داده
-  3️⃣ `FlowBehavior`: تعیین می‌کند بعد از مدیریت Exception، اجرای برنامه ادامه یابد یا متوقف شود.
+  1⃣ `Message`: پیام خطا
+  2⃣ `ExceptionType`: نوع Exception رخ داده
+  3⃣ `FlowBehavior`: تعیین می‌کند بعد از مدیریت Exception، اجرای برنامه ادامه یابد یا متوقف شود.
 
 * **OnException()** ابتدا پیام خطا را می‌سازد، سپس با **LogFile.AppendTextToFile()** آن را در فایل ذخیره می‌کند.
 
@@ -784,7 +784,7 @@ public class ExceptionAspect : OnExceptionAspect {
 
 ---
 
-### افزودن مسأله **Security** 🔒
+### افزودن مسأله **Security** 
 
 * نیازهای امنیتی بستگی به پروژه دارند.
 * رایج‌ترین موارد: **Authentication و Authorization** برای دسترسی کاربران به بخش‌های مختلف سیستم.
@@ -802,8 +802,8 @@ public class ExceptionAspect : OnExceptionAspect {
 
 ### ایجاد Component امن
 
-1️⃣ فولدری به نام **Security** بسازید.
-2️⃣ یک Interface به نام **ISecureComponent** اضافه کنید:
+1⃣ فولدری به نام **Security** بسازید.
+2⃣ یک Interface به نام **ISecureComponent** اضافه کنید:
 
 ```csharp
 public interface ISecureComponent {
@@ -968,7 +968,7 @@ private static void DoSecureWork() {
 
 ---
 
-### تعریف متد AddData() با ExceptionAspect ⚠️
+### تعریف متد AddData() با ExceptionAspect 
 
 ```csharp
 [ExceptionAspect(consoleOutput: true)]
@@ -992,26 +992,26 @@ private static void AddData() {
 
 پس از اجرای برنامه، باید خروجی مشابه تصویر زیر را مشاهده کنید:
 
-✅ متدها اجرا می‌شوند
-✅ پیام‌ها در کنسول چاپ می‌شوند
-✅ هر خطایی در **Exceptions.log** ثبت می‌شود
+ متدها اجرا می‌شوند
+ پیام‌ها در کنسول چاپ می‌شوند
+ هر خطایی در **Exceptions.log** ثبت می‌شود
 
 <div align="center">
 
 ![Conventions-UsedThis-Book](../../../assets/image/11/Table%2011-7.jpeg)
 </div>
 
-اکنون ما یک **شیء مبتنی بر نقش** داریم که همراه با **مدیریت استثناها** کار می‌کند. گام بعدی ما، پیاده‌سازی **Validation Concern** یا بررسی اعتبار داده‌ها است. ✅
+اکنون ما یک **شیء مبتنی بر نقش** داریم که همراه با **مدیریت استثناها** کار می‌کند. گام بعدی ما، پیاده‌سازی **Validation Concern** یا بررسی اعتبار داده‌ها است. 
 
 ---
 
-## افزودن **Validation Concern** 🔍
+## افزودن **Validation Concern** 
 
 تمام داده‌های وارد شده توسط کاربر باید **اعتبارسنجی** شوند، چرا که ممکن است **خطرناک، ناقص یا با فرمت اشتباه** باشند. هدف این است که اطمینان حاصل کنیم داده‌ها **پاک و ایمن** هستند.
 
 برای نمونه‌ی ما، **اعتبارسنجی null** را پیاده‌سازی می‌کنیم.
 
-### 1️⃣ افزودن کلاس AllowNullAttribute
+### 1⃣ افزودن کلاس AllowNullAttribute
 
 * یک پوشه به نام **Validation** به پروژه اضافه کنید.
 * سپس کلاس زیر را اضافه کنید:
@@ -1026,7 +1026,7 @@ public class AllowNullAttribute : Attribute { }
 
 ---
 
-### 2️⃣ افزودن enum ValidationFlags
+### 2⃣ افزودن enum ValidationFlags
 
 * در فایلی با همان نام، enum زیر را اضافه کنید:
 
@@ -1049,7 +1049,7 @@ public enum ValidationFlags {
 
 ---
 
-### 3️⃣ افزودن کلاس ReflectionExtensions
+### 3⃣ افزودن کلاس ReflectionExtensions
 
 ```csharp
 public static class ReflectionExtensions {
@@ -1073,7 +1073,7 @@ public static class ReflectionExtensions {
 
 ---
 
-### 4️⃣ افزودن کلاس DisallowNonNullAspect
+### 4⃣ افزودن کلاس DisallowNonNullAspect
 
 ```csharp
 [PSerializable]
@@ -1101,7 +1101,7 @@ public class DisallowNonNullAspect : OnMethodBoundaryAspect {
 
 ---
 
-### 5️⃣ Override متد CompileTimeValidate
+### 5⃣ Override متد CompileTimeValidate
 
 ```csharp
 public override bool CompileTimeValidate(MethodBase method) {
@@ -1139,7 +1139,7 @@ public override bool CompileTimeValidate(MethodBase method) {
 
 ---
 
-### 6️⃣ Override متد OnEntry
+### 6⃣ Override متد OnEntry
 
 ```csharp
 public override void OnEntry(MethodExecutionArgs args) {
@@ -1159,7 +1159,7 @@ public override void OnEntry(MethodExecutionArgs args) {
 
 ---
 
-### 7️⃣ Override متد OnSuccess
+### 7⃣ Override متد OnSuccess
 
 ```csharp
 public override void OnSuccess(MethodExecutionArgs args) {
@@ -1182,7 +1182,7 @@ public override void OnSuccess(MethodExecutionArgs args) {
 
 ---
 
-### 8️⃣ افزودن کلاس MethodInformation
+### 8⃣ افزودن کلاس MethodInformation
 
 * برای استخراج اطلاعات متدها و سازنده‌ها:
 
@@ -1228,18 +1228,18 @@ private class MethodInformation {
 
 ---
 
-📌 اکنون **Validation Aspect** آماده است و می‌توانید:
+ اکنون **Validation Aspect** آماده است و می‌توانید:
 
 * `[AllowNull]` برای مجاز کردن **null**
 * `[DisallowNonNullAspect]` برای جلوگیری از **null**
 
 گام بعدی ما اضافه کردن **Transaction Concern** خواهد بود.
 
-اکنون کتابخانه ما شامل چند **Cross-Cutting Concern** آماده و قابل استفاده است. بیایید بخش‌هایی که اضافه کرده‌ایم را به طور خلاصه مرور کنیم: ✅
+اکنون کتابخانه ما شامل چند **Cross-Cutting Concern** آماده و قابل استفاده است. بیایید بخش‌هایی که اضافه کرده‌ایم را به طور خلاصه مرور کنیم: 
 
 ---
 
-## 1️⃣ **Transaction Concern** 💳
+## 1⃣ **Transaction Concern** 
 
 * **هدف:** تضمین اجرای کامل یا rollback تراکنش‌ها.
 * **پیاده‌سازی:**
@@ -1268,7 +1268,7 @@ public sealed class RequiresTransactionAspect : OnMethodBoundaryAspect {
 
 ---
 
-## 2️⃣ **Resource Pool Concern** 🏊‍♂️
+## 2⃣ **Resource Pool Concern** ‍
 
 * **هدف:** بهبود عملکرد با ایجاد و استفاده مجدد از اشیاء گران‌قیمت.
 * **کلاس ResourcePool<T>**:
@@ -1298,7 +1298,7 @@ pool.Return(course);
 
 ---
 
-## 3️⃣ **Configuration Settings Concern** ⚙️
+## 3⃣ **Configuration Settings Concern** 
 
 * **هدف:** مرکزی کردن تنظیمات برنامه (App.config یا Web.config).
 * **کلاس Settings:**
@@ -1324,7 +1324,7 @@ Console.WriteLine(GetAppSetting("Greeting"));
 
 ---
 
-## 4️⃣ **Instrumentation Concern** ⏱️
+## 4⃣ **Instrumentation Concern** ⏱
 
 * **هدف:** پروفایل و اندازه‌گیری زمان اجرای متدها.
 * **کلاس InstrumentationAspect:**
@@ -1353,7 +1353,7 @@ public class InstrumentationAspect : OnMethodBoundaryAspect {
 
 ---
 
-### ✅ نتیجه
+###  نتیجه
 
 حالا شما یک **کتابخانه کامل از Cross-Cutting Concerns** دارید که شامل موارد زیر است:
 

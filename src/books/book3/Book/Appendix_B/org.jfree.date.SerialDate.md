@@ -2,9 +2,9 @@
 layout: layout.njk
 title: پیوست B
 ---
-# 📎 پیوست B — کلاس org.jfree.date.SerialDate
+#  پیوست B — کلاس org.jfree.date.SerialDate
 
-### 📝 فهرست B-1 — فایل SerialDate.java
+###  فهرست B-1 — فایل SerialDate.java
 
 ```java
 
@@ -1112,7 +1112,7 @@ Appendix B: org.jfree.date.SerialDate
 
 ```
 
-### 📝 فهرست B-2 — فایل SerialDateTest.java
+###  فهرست B-2 — فایل SerialDateTest.java
 
 ```java
 
@@ -1463,7 +1463,7 @@ Appendix B: org.jfree.date.SerialDate
 
 ```
 
-### 📝 فهرست B-3 — فایل MonthConstants.java
+###  فهرست B-3 — فایل MonthConstants.java
 
 ```java
 1 /* ========================================================================
@@ -1565,7 +1565,7 @@ Appendix B: org.jfree.date.SerialDate
 
 ```
 
-### 📝 فهرست B-4 — فایل BobsSerialDateTest.java
+###  فهرست B-4 — فایل BobsSerialDateTest.java
 
 ```java
  1 package org.jfree.date.junit;
@@ -2061,7 +2061,7 @@ Appendix B: org.jfree.date.SerialDate
 
 ```
 
-### 📝 فهرست B-5 — فایل SpreadsheetDate.java
+###  فهرست B-5 — فایل SpreadsheetDate.java
 
 ```java
  1 /* ========================================================================
@@ -2591,7 +2591,7 @@ Appendix B: org.jfree.date.SerialDate
 
 ```
 
-### 📝 فهرست B-6 — فایل RelativeDayOfWeekRule.java
+###  فهرست B-6 — فایل RelativeDayOfWeekRule.java
 
 ```java
  1 /* ========================================================================
@@ -2819,7 +2819,7 @@ Appendix B: org.jfree.date.SerialDate
 
 ```
 
-### 📝 فهرست B-7 — فایل DayDate.java
+###  فهرست B-7 — فایل DayDate.java
 
 ```java
 
@@ -2985,7 +2985,7 @@ Appendix B: org.jfree.date.SerialDate
 
 ```
 
-### 📝 فهرست B-8 — فایل Month.java
+###  فهرست B-8 — فایل Month.java
 
 ```java
 
@@ -3058,7 +3058,7 @@ Appendix B: org.jfree.date.SerialDate
 
 ```
 
-### 📝 فهرست B-9 — فایل Day.java
+###  فهرست B-9 — فایل Day.java
 
 ```java
  1 package org.jfree.date;
@@ -3120,7 +3120,7 @@ Appendix B: org.jfree.date.SerialDate
 
 ```
 
-### 📝 فهرست B-10 — فایل DateInterval.java
+###  فهرست B-10 — فایل DateInterval.java
 
 ```java
  1 package org.jfree.date;
@@ -3153,7 +3153,7 @@ Appendix B: org.jfree.date.SerialDate
 
 ```
 
-### 📝 فهرست B-11 — فایل WeekInMonth.java
+###  فهرست B-11 — فایل WeekInMonth.java
 
 ```java
 1 package org.jfree.date;
@@ -3174,7 +3174,7 @@ Appendix B: org.jfree.date.SerialDate
 
 ```
 
-### 📝 فهرست B-12 — فایل WeekdayRange.java
+###  فهرست B-12 — فایل WeekdayRange.java
 
 ```java
  1 package org.jfree.date;
@@ -3186,7 +3186,7 @@ Appendix B: org.jfree.date.SerialDate
 
 ```
 
-### 📝 فهرست B-13 — فایل DateUtil.java
+###  فهرست B-13 — فایل DateUtil.java
 
 ```java
 
@@ -3226,7 +3226,7 @@ Appendix B: org.jfree.date.SerialDate
 
 ```
 
-### 📝 فهرست B-14 — فایل DayDateFactory.java
+###  فهرست B-14 — فایل DayDateFactory.java
 
 ```java
  1 package org.jfree.date;
@@ -3272,7 +3272,7 @@ Appendix B: org.jfree.date.SerialDate
 
 ```
 
-### 📝 فهرست B-15 — فایل SpreadsheetDateFactory.java
+###  فهرست B-15 — فایل SpreadsheetDateFactory.java
 
 ```java
 
@@ -3314,7 +3314,7 @@ Appendix B: org.jfree.date.SerialDate
 
 ```
 
-### 📝 فهرست B-16 — فایل SpreadsheetDate.java
+###  فهرست B-16 — فایل SpreadsheetDate.java
 
 ```java
  1 /* ========================================================================

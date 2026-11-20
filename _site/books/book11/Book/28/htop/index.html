@@ -1,0 +1,197 @@
+<!doctype html><html lang="fa" dir="rtl"> <head><script>
+    if (window.location.pathname.startsWith('/gitab/')) {
+      window.location.replace(window.location.pathname.replace(/^\/gitab\//i, '/Gitab/') + window.location.search + window.location.hash);
+    }
+    (() => {
+      try {
+        const t = localStorage.getItem('gitab-theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', t);
+        document.documentElement.dataset.colorMode = t;
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        document.documentElement.dataset.colorMode = 'dark';
+      }
+    })();
+  </script> <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5"> <title>فصل 28: ابزار htop (Linux htop Command)</title><meta name="description" content="فصل 28: ابزار htop (Linux htop Command) — مطالعه آنلاین و رایگان از کتاب «راز بیت (The Secret Bit — دانشنامه آزاد لینوکس و ابزارها)» (The Secret Bit) اثر محمد شبانه و جامعه متن‌باز با ترجمه محمد شبانه در گیتاب."> <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"><meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"> <meta name="theme-color" content="#090d16"><meta name="referrer" content="strict-origin-when-cross-origin"> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https:; frame-src https://www.youtube.com https://www.youtube-nocookie.com https://maps.google.com https://www.google.com; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self';"><link rel="icon" type="image/png" href="/Gitab/favicon.png"> <link rel="canonical" href="https://hheydarian.github.io/Gitab/books/book11/Book/28/htop/"><link rel="alternate" hreflang="fa" href="https://hheydarian.github.io/Gitab/books/book11/Book/28/htop/"> <link rel="alternate" hreflang="x-default" href="https://hheydarian.github.io/Gitab/books/book11/Book/28/htop/"><link rel="alternate" type="text/plain" title="LLMs.txt" href="/Gitab/llms.txt"> <link rel="sitemap" type="application/xml" title="Sitemap" href="/Gitab/sitemap.xml"><meta property="og:locale" content="fa_IR"> <meta property="og:type" content="article"><meta property="og:site_name" content="گیتاب | Gitab"> <meta property="og:title" content="فصل 28: ابزار htop (Linux htop Command)"><meta property="og:description" content="فصل 28: ابزار htop (Linux htop Command) — مطالعه آنلاین و رایگان از کتاب «راز بیت (The Secret Bit — دانشنامه آزاد لینوکس و ابزارها)» (The Secret Bit) اثر محمد شبانه و جامعه متن‌باز با ترجمه محمد شبانه در گیتاب."> <meta property="og:url" content="https://hheydarian.github.io/Gitab/books/book11/Book/28/htop/"><meta property="og:image" content="https://hheydarian.github.io/Gitab/images/the-secret-bit/Cover.jpg"> <meta property="og:image:alt" content="فصل 28: ابزار htop (Linux htop Command)"><meta name="twitter:card" content="summary_large_image"> <meta name="twitter:title" content="فصل 28: ابزار htop (Linux htop Command)"><meta name="twitter:description" content="فصل 28: ابزار htop (Linux htop Command) — مطالعه آنلاین و رایگان از کتاب «راز بیت (The Secret Bit — دانشنامه آزاد لینوکس و ابزارها)» (The Secret Bit) اثر محمد شبانه و جامعه متن‌باز با ترجمه محمد شبانه در گیتاب."> <meta name="twitter:image" content="https://hheydarian.github.io/Gitab/images/the-secret-bit/Cover.jpg"><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://hheydarian.github.io/Gitab/#organization","name":"گیتاب | Gitab","alternateName":"Gitab","url":"https://hheydarian.github.io/Gitab/","logo":{"@type":"ImageObject","url":"https://hheydarian.github.io/Gitab/favicon.png"},"sameAs":["https://github.com/hheydarian/Gitab"]},{"@type":"WebSite","@id":"https://hheydarian.github.io/Gitab/#website","url":"https://hheydarian.github.io/Gitab/","name":"گیتاب | Gitab","inLanguage":"fa-IR","publisher":{"@id":"https://hheydarian.github.io/Gitab/#organization"},"potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://hheydarian.github.io/Gitab/books/list-books/?q={search_term_string}"},"query-input":"required name=search_term_string"}},{"@type":"WebPage","@id":"https://hheydarian.github.io/Gitab/books/book11/Book/28/htop/#webpage","url":"https://hheydarian.github.io/Gitab/books/book11/Book/28/htop/","name":"فصل 28: ابزار htop (Linux htop Command)","description":"فصل 28: ابزار htop (Linux htop Command) — مطالعه آنلاین و رایگان از کتاب «راز بیت (The Secret Bit — دانشنامه آزاد لینوکس و ابزارها)» (The Secret Bit) اثر محمد شبانه و جامعه متن‌باز با ترجمه محمد شبانه در گیتاب.","inLanguage":"fa-IR","isPartOf":{"@id":"https://hheydarian.github.io/Gitab/#website"}},{"@type":"TechArticle","headline":"فصل 28: ابزار htop (Linux htop Command)","description":"فصل 28: ابزار htop (Linux htop Command) — مطالعه آنلاین و رایگان از کتاب «راز بیت (The Secret Bit — دانشنامه آزاد لینوکس و ابزارها)» (The Secret Bit) اثر محمد شبانه و جامعه متن‌باز با ترجمه محمد شبانه در گیتاب.","url":"https://hheydarian.github.io/Gitab/books/book11/Book/28/htop/","inLanguage":"fa-IR","isAccessibleForFree":true,"author":{"@type":"Person","name":"محمد شبانه و جامعه متن‌باز"},"translator":{"@type":"Person","name":"محمد شبانه"},"isPartOf":{"@type":"Book","name":"راز بیت (The Secret Bit — دانشنامه آزاد لینوکس و ابزارها)","alternateName":"The Secret Bit","url":"https://hheydarian.github.io/Gitab/books/book11/"}}]}</script> <link rel="preload" href="/Gitab/fonts/Vazirmatn.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/Gitab/styles/main.css?v=2.4" as="style"> <link rel="preload" href="/Gitab/styles/gitab-modern.css?v=2.5" as="style"><style>@font-face{font-family:'Lalezar';src:url('/Gitab/fonts/Lalezar.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}@font-face{font-family:'Vazirmatn';src:url('/Gitab/fonts/Vazirmatn.woff2') format('woff2');font-weight:100 900;font-style:normal;font-display:swap}html,body,button,input,optgroup,select,textarea,.filter-pill{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}input::placeholder,textarea::placeholder{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}</style> <link rel="stylesheet" href="/Gitab/styles/main.css?v=2.4"><link rel="stylesheet" href="/Gitab/styles/gitab-modern.css?v=2.5"> </head><body> <header class="header"><div class="container nav-wrap"> <a href="/Gitab/" class="brand" aria-label="صفحه اصلی گیتاب"> <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="30" height="30" decoding="async"> <span class="brand-text">Gitab</span> </a> <nav class="nav" id="mainNav"><a href="/Gitab/" >خانه</a> <a href="/Gitab/books/list-books" aria-current="page">کتاب‌ها</a> <a href="/Gitab/courses/" >دوره‌ها</a> <a href="/Gitab/translator.html" >مترجمین</a></nav> <div class="nav-actions"><button id="themeToggle" class="theme-toggle-btn" aria-label="تغییر تم" title="تغییر تم"> <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن" width="18" height="18" decoding="async" style="display:none"> <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک" width="18" height="18" decoding="async"> </button> <a class="btn-github-pill" href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" title="مشاهده سورس گیتاب در گیت‌هاب"> <img src="/Gitab/icone/github.svg" alt="GitHub" width="16" height="16" decoding="async"> <span>گیت‌هاب</span> </a> <button class="mobile-menu-btn" id="mobileMenuBtn" type="button" aria-label="باز کردن منو" aria-expanded="false"> <svg class="mob-icon-open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="4" y1="7" x2="20" y2="7"></line> <line x1="4" y1="12" x2="20" y2="12"></line> <line x1="4" y1="17" x2="14" y2="17"></line> </svg> <svg class="mob-icon-close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="18" y1="6" x2="6" y2="18"></line> <line x1="6" y1="6" x2="18" y2="18"></line> </svg> </button></div> </div><div class="mobile-drawer" id="mobileDrawer" aria-hidden="true"> <div class="mobile-drawer-inner"><div class="mobile-drawer-section-label">ناوبری سریع</div><nav class="mobile-drawer-links" aria-label="منوی موبایل"> <a href="/Gitab/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M3 10.5 12 3l9 7.5"></path> <path d="M5 9.5V20a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V9.5"></path> </svg> </span> <span class="mob-nav-text">صفحه نخست</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/books/list-books" class="mobile-drawer-link active" aria-current="page"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path> </svg> </span> <span class="mob-nav-text">کتابخانه و فهرست کتاب‌ها</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/courses/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path> <path d="M6 12v5c3 3 9 3 12 0v-5"></path> </svg> </span> <span class="mob-nav-text">دوره‌های آموزشی</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/translator.html" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path> <circle cx="9" cy="7" r="4"></circle> <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path> <path d="M16 3.13a4 4 0 0 1 0 7.75"></path> </svg> </span> <span class="mob-nav-text">مترجمین و همکاران</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> </nav><div class="mobile-drawer-divider"></div><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" class="mobile-drawer-link mobile-drawer-gh"> <span class="mob-nav-icon" aria-hidden="true"> <img src="/Gitab/icone/github.svg" alt="" width="17" height="17" loading="lazy" decoding="async"> </span> <span class="mob-nav-text">مخزن گیت‌هاب پروژه</span> <span class="mob-nav-ext" aria-hidden="true">↗</span> </a> </div></div> </header><div class="reading-progress-track"> <div class="reading-progress-fill" id="readingProgressBar"></div></div> <main class="site-main chapter-reading-page"><div class="chapter-page-wrapper"> <nav class="chapter-clean-breadcrumb" aria-label="مسیر راهنما" dir="rtl"><a href="/Gitab/">خانه</a> <span class="bc-sep" aria-hidden="true">/</span> <a href="/Gitab/books/list-books/">کتاب‌ها</a> <span class="bc-sep" aria-hidden="true">/</span> <a href="/Gitab/books/book11/"><bdi>راز بیت</bdi></a> <span class="bc-sep" aria-hidden="true">/</span> <span class="bc-current-leaf"><bdi>فصل 28: ابزار htop (Linux htop Command)</bdi></span></nav> <article class="chapter-prose-container markdown-body" id="chapterArticle" dir="rtl"><h1>فصل 28: ابزار htop (Linux htop Command)</h1><h3>مقدمه</h3><p>ابزار htop برای مدیریت پردازش های در حال اجرا به کار میرود، اگر میخواهید که پردازش های خود را ببینید آن ها را حذف کنید یا آن ها را مانیتور کنید از ابزار htop استفاده کنید. لازم به ذکر است بدانید که این ابزار در برخی از توزیع های لینوکسی به شکل پیشفرض نصب نیست و باید آن را با استفاده از پکیج منیجر نصب کنید.</p><hr> <h3>اطلاعات مربوط به پردازش ها</h3><p>ابزار htop تمام پردازش های حال حاضر سیستم را به همراه اطلاعاتی در ستون های مختلف فیلتر و به شما نمایش میدهد. اطلاعات چاپ شده در خروجی به شرح زیر است</p><p>PID: شماره شناسه پردازش</p><p>USER: نام صاحب پردازش</p><p>PR: اولویت پردازش، هرقدر که تعداد کمتر باشد اولویت بالاتر است.</p><p>NI: ارزش پردازش، که بر اولویت پردازش تاثیر گذار است.</p><p>VIRT: روند استفاده از حافظه مجازی</p><p>RES: میزان رم فیزیکی پردازش که با استفاده از کیلوبایت اندازه گیری شده است.</p><p>SHR: روند استفاده از حافظه مشترک</p><p>S: وضعیت فعلی پردازش</p><p>CPU%: درصد زمان استفاده شدن از پردازنده توسط پردازش</p><p>MEM%: درصد رم استفاده شده توسط پردازش</p><p>+TIME: مدت زمانی که از پردازنده توسط پردازش استفاده شده است.</p><p>COMMAND: نام دستوری که پردازش را اجرا کرده است.</p><hr> <h3>مانیتور کردن پردازش ها</h3><p>برای مانیتور کردن پردازش ها کافیست از دستور htop در خط فرمان استفاده کنید.</p><p align = "center"> <img src="/Gitab/books/book11/assets/htop/htop.png"></p> <p># monitoring process with htop<br> $ htop</p><p># OUTPUT<br> #<br> # 1 [ 0.0%] Tasks: 141, 653 thr; 1 running<br> # 2 [|||||||||||||||||||||||||||||||||||||||||||||||100.0%] Load average: 1.01 0.81 0.94<br> # Mem[||||||||||||||||||||||||||||||||||||||||||2.17G/2.92G] Uptime: 01:36:53<br> # Swp[|||| 117M/1.86G]<br> # PID USER PRI NI VIRT RES SHR S CPU% MEM% TIME+ Command<br> # 9523 amirhosei 20 0 14124 4484 3156 R 109. 0.1 0:00.22 htop<br> # 1 root 20 0 164M 9584 6064 S 0.0 0.3 0:05.48 /sbin/init splash<br> # 302 root 19 -1 72952 13184 11812 S 0.0 0.4 0:01.65 /lib/systemd/systemd-journald<br> # 333 root 20 0 23664 4864 2724 S 0.0 0.2 0:02.70 /lib/systemd/systemd-udevd<br> # 475 systemd-r 20 0 23888 8584 5216 S 0.0 0.3 0:00.40 /lib/systemd/systemd-resolved<br> # 715 root 20 0 239M 9064 8148 S 0.0 0.3 0:00.20 /usr/lib/accountsservice/accounts-daemon<br> # 792 root 20 0 239M 9064 8148 S 0.0 0.3 0:00.04 /usr/lib/accountsservice/accounts-daemon<br> # 703 root 20 0 239M 9064 8148 S 0.0 0.3 0:00.35 /usr/lib/accountsservice/accounts-daemon<br> # 704 root 20 0 2540 764 700 S 0.0 0.0 0:01.45 /usr/sbin/acpid<br> # 707 avahi 20 0 8520 3108 2816 S 0.0 0.1 0:00.20 avahi-daemon: running [P5PL2-E.local]<br> # 708 root 20 0 12284 2848 2640 S 0.0 0.1 0:00.01 /usr/sbin/cron -f<br> # 709 root 20 0 31416 7724 6212 S 0.0 0.3 0:00.04 /usr/sbin/cupsd -l<br> # 710 messagebu 20 0 8840 5224 3552 S 0.0 0.2 0:02.54 /usr/bin/dbus-daemon --system --address=systemd: --nofork --n<br> # 782 root 20 0 333M 15032 12144 S 0.0 0.5 0:00.09 /usr/sbin/NetworkManager --no-daemon<br> # 794 root 20 0 333M 15032 12144 S 0.0 0.5 0:00.27 /usr/sbin/NetworkManager --no-daemon<br> # 711 root 20 0 333M 15032 12144 S 0.0 0.5 0:06.41 /usr/sbin/NetworkManager --no-daemon<br> # 755 root 20 0 81924 3496 3148 S 0.0 0.1 0:00.00 /usr/sbin/irqbalance --foreground<br> # 721 root 20 0 81924 3496 3148 S 0.0 0.1 0:00.57 /usr/sbin/irqbalance --foreground<br> # 726 root 20 0 42192 11780 8688 S 0.0 0.4 0:00.32 /usr/bin/python3 /usr/bin/networkd-dispatcher --run-startup-t<br> # 753 root 20 0 233M 11044 8176 S 0.0 0.4 0:00.00 /usr/lib/policykit-1/polkitd --no-debug<br> # 793 root 20 0 233M 11044 8176 S 0.0 0.4 0:00.51 /usr/lib/policykit-1/polkitd --no-debug<br> # 728 root 20 0 233M 11044 8176 S 0.0 0.4 0:01.93 /usr/lib/policykit-1/polkitd --no-debug<br> # 779 syslog 20 0 219M 3776 2896 S 0.0 0.1 0:00.08 /usr/sbin/rsyslogd -n -iNONE<br> # 780 syslog 20 0 219M 3776 2896 S 0.0 0.1 0:00.00 /usr/sbin/rsyslogd -n -iNONE<br> # 781 syslog 20 0 219M 3776 2896 S 0.0 0.1 0:00.08 /usr/sbin/rsyslogd -n -iNONE<br> # 730 syslog 20 0 219M 3776 2896 S 0.0 0.1 0:00.20 /usr/sbin/rsyslogd -n -iNONE<br> # 737 root 20 0 16744 5644 4692 S 0.0 0.2 0:00.83 /lib/systemd/systemd-logind<br> # 773 root 20 0 386M 12052 9268 S 0.0 0.4 0:00.00 /usr/lib/udisks2/udisksd<br> # 795 root 20 0 386M 12052 9268 S 0.0 0.4 0:00.01 /usr/lib/udisks2/udisksd<br> # 860 root 20 0 386M 12052 9268 S 0.0 0.4 0:00.00 /usr/lib/udisks2/udisksd<br> # 893 root 20 0 386M 12052 9268 S 0.0 0.4 0:00.00 /usr/lib/udisks2/udisksd<br> # 740 root 20 0 386M 12052 9268 S 0.0 0.4 0:03.45 /usr/lib/udisks2/udisksd<br> # 741 root 20 0 13676 2488 1908 S 0.0 0.1 0:00.04 /sbin/wpa_supplicant -u -s -O /run/wpa_supplicant<br> # 1Help F2Setup F3SearchF4FilterF5Tree F6SortByF7Nice -F8Nice +F9Kill F10Quit</p><hr> <h3>گرفتن خروجی از ابزار</h3><p>برای ذخیره کرده خروجی کافیست از ابزار echo و aha استفاده کنید.ابزار echo که به صورت پیشفرض در تمامی توزیع ها موجود هست، اما ابزار aha را باید جداگانه نصب کنید. که روش نصب هم در توزیع های مختلف به شما توزیح داده خواهد شد. اما لازم است بدانید که خروجی در نهایت html خواهد بود و باید ان را در یک فایل html ذخیره کنید. سپس برای نمایش خروجی مرورگر کروم یا فایر فاکس را باز کنید و با استفاده از کلید های ترکیبی ctrl + o وارد محل ذخیره فایل شوید . بعد از پیداکردن فایل دوبار روی فایل کلیک کنید تا خروجی را مشاهده کنید.</p><p align = "center"> <img src="/Gitab/books/book11/assets/htop/saveoutput.png"></p> <p># step 1<br> # install the aha tool</p><p># install in debian<br> $ apt install aha</p><p># install in fedora<br> $ yum install aha</p><p># install in arch<br> $ pacman -S aha</p><p># step 2<br> # Get output</p><p>$ echo q | htop | aha --black --line-fix &gt; htop.html</p><hr> <h3>کشتن پروسه ها با htop</h3><p>برای کشتن پروسه ها ابتدا پروسه مورد نظر را انتخاب کرده و کلید F9 کیبورد را فشار دهید. حالا برای شما لیستی از سیگنال ها نمایش داده میشود، سیگنال شماره ۹ را انتخاب کنید. بدین ترتیب پروسه اجرا شده کشته میشود و از بین میرود.</p><p align = "center"> <img src="/Gitab/books/book11/assets/htop/kill.png"></p> <p># step 1<br> # select the process</p><p># step 2<br> # select the F9 key</p><p># step 3<br> # select the 9 SIGKILL</p><hr> <h3>جستجو به دنبال پروسه خاص</h3><p>با استفاده از کلید F3 کیبورد میتوانید به دنبال پروسه های خاص بگردید، بعد از انتخاب کلید F3 نام پروسه مد نظر خود را تایپ کنید، در صورتی که پروسه ی مد نظر شما وجود داشته باشد به شما نمایش داده میشود و در غیر اینصورت چیزی به شما نمایش داده نخواهد شد.</p><p># step 1<br> # select the F3 Key</p><p># step 2<br> # Type the process name</p><hr> <h3>نمایش پروسه ها به شکل درختی</h3><p>برای نمایش پروسه ها به شکل درختی از کلید F5 کیبورد استفاده کنید. در این حالت پروسه اجرا شده به همراه پروسه هایی که توسط آن پروسه اجرا شده است به شما نمایش داده خواهد شد.</p><p align = "center"> <img src="/Gitab/books/book11/assets/htop/treeView.png"></p> <p># View Process tree<br> $ select the F5 key</p><hr> <h3>Author or Authors</h3><ul> <li><em><a href="https://github.com/amirhoseinsb">Amirhosein</a></em> | <strong><a href="mailto:amirhoseinsohrabi.official@gmail.com">amirhoseinsohrabi.official@gmail.com</a></strong></li></ul> </article><nav class="chapter-single-next-nav"> <a href="/Gitab/books/book11/Book/29/ip/" class="btn-next-chapter-action" id="nextChapterBtn" data-hub="/Gitab/books/book11/"> <span class="next-btn-text">فصل بعدی: فصل 29: ابزار ip (Linux ip Command)</span> <span class="next-btn-arrow">←</span> </a> </nav></div> <button class="fab-back-to-top" id="backToTopBtn" type="button" aria-label="رفتن به بالای صفحه" title="رفتن به بالا"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"> <polyline points="18 15 12 9 6 15"></polyline> </svg> </button></main> <footer class="footer-minimal"><div class="footer-container"> <div class="footer-top-row"><div class="footer-brand-side"> <a href="/Gitab/" class="footer-brand-anchor"> <img src="/Gitab/icone/logo.svg" alt="Gitab" width="28" height="28" loading="lazy" decoding="async"> <span class="footer-brand-title">گیتاب (Gitab)</span> </a> <p class="footer-tagline"> پلتفرم آزاد و مستقل برای ترجمهٔ دقیق و روان کتاب‌های مرجع مهندسی نرم‌افزار. </p></div> <div class="footer-nav-cols"><div class="footer-nav-col"> <span class="footer-nav-heading">موضوعات</span><ul class="footer-nav-list"> <li><a href="/Gitab/books/list-books/?cat=csharp">سی‌شارپ و دات‌نت</a></li><li><a href="/Gitab/books/list-books/?cat=clean-code">کد تمیز و بازآفرینی</a></li><li><a href="/Gitab/books/list-books/?cat=architecture">معماری و طراحی دامنه</a></li><li><a href="/Gitab/books/list-books/?cat=system">لینوکس و خط فرمان</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">بخش‌های سایت</span><ul class="footer-nav-list"> <li><a href="/Gitab/">صفحه اصلی</a></li><li><a href="/Gitab/books/list-books/">کتابخانه کامل</a></li><li><a href="/Gitab/courses/">دوره‌های آموزشی</a></li><li><a href="/Gitab/translator.html">تالار مترجمین</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">مشارکت و جامعه</span><ul class="footer-nav-list"> <li><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer">راهنمای همکاری در ترجمه</a></li><li><a href="https://github.com/hheydarian/Gitab/issues" target="_blank" rel="noopener noreferrer">پیشنهاد کتاب یا گزارش خطا</a></li></ul> </div></div> </div><div class="footer-bottom-line"> <span>© <span id="y">2026</span> Gitab — توسعه‌یافته برای جامعهٔ مهندسان نرم‌افزار ایرانی</span></div> </div></footer> <script>
+  (() => {
+    const root = document.documentElement;
+    const btn = document.getElementById('themeToggle');
+    const sunIcon = btn ? btn.querySelector('.icon-sun') : null;
+    const moonIcon = btn ? btn.querySelector('.icon-moon') : null;
+    const KEY = 'gitab-theme';
+
+    function updateTheme(mode) {
+      root.setAttribute('data-theme', mode);
+      root.dataset.colorMode = mode;
+      if (sunIcon && moonIcon) {
+        if (mode === 'dark') {
+          sunIcon.style.display = 'inline-block';
+          moonIcon.style.display = 'none';
+        } else {
+          sunIcon.style.display = 'none';
+          moonIcon.style.display = 'inline-block';
+        }
+      }
+    }
+
+    let saved = 'dark';
+    try { saved = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+    updateTheme(saved);
+
+    if (btn) {
+      btn.addEventListener('click', () => {
+        let current = 'dark';
+        try { current = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+        const next = current === 'dark' ? 'light' : 'dark';
+        try { localStorage.setItem(KEY, next); } catch (e) {}
+        updateTheme(next);
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      let mode = 'dark';
+      try { mode = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+      updateTheme(mode);
+      const yearSpan = document.getElementById('y');
+      if (yearSpan) yearSpan.textContent = new Date().getFullYear();
+    });
+
+    const mobBtn = document.getElementById('mobileMenuBtn');
+    const mobDrawer = document.getElementById('mobileDrawer');
+    if (mobBtn && mobDrawer) {
+      const setDrawerOpen = (open) => {
+        mobDrawer.classList.toggle('open', open);
+        mobBtn.classList.toggle('is-open', open);
+        mobBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        mobBtn.setAttribute('aria-label', open ? 'بستن منو' : 'باز کردن منو');
+        mobDrawer.setAttribute('aria-hidden', open ? 'false' : 'true');
+      };
+
+      mobBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        setDrawerOpen(!mobDrawer.classList.contains('open'));
+      });
+
+      mobDrawer.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => setDrawerOpen(false));
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && mobDrawer.classList.contains('open')) {
+          setDrawerOpen(false);
+        }
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!mobDrawer.contains(e.target) && !mobBtn.contains(e.target)) {
+          setDrawerOpen(false);
+        }
+      });
+    }
+
+    if ('serviceWorker' in navigator) {
+      const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+      if (isLocalhost) {
+        navigator.serviceWorker.getRegistrations().then(regs => {
+          for (const reg of regs) reg.unregister();
+        });
+        if ('caches' in window) {
+          caches.keys().then(names => {
+            for (const name of names) caches.delete(name);
+          });
+        }
+      } else {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/Gitab/sw.js').catch(() => {});
+        });
+      }
+    }
+  })();
+  </script> <script>
+  (() => {
+    const article = document.getElementById('chapterArticle');
+    if (!article) return;
+
+    const progressBar = document.getElementById('readingProgressBar');
+    if (progressBar) {
+      window.addEventListener('scroll', () => {
+        const docElem = document.documentElement;
+        const totalHeight = docElem.scrollHeight - docElem.clientHeight;
+        if (totalHeight > 0) {
+          const progress = (window.pageYOffset / totalHeight) * 100;
+          progressBar.style.width = Math.min(100, Math.max(0, progress)) + '%';
+        }
+      }, { passive: true });
+    }
+
+    const btt = document.getElementById('backToTopBtn');
+    if (btt) {
+      window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 250) {
+          btt.classList.add('visible');
+        } else {
+          btt.classList.remove('visible');
+        }
+      }, { passive: true });
+
+      btt.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+
+    article.querySelectorAll('img').forEach(img => {
+      if (!img.hasAttribute('loading')) img.loading = 'lazy';
+      if (!img.hasAttribute('decoding')) img.decoding = 'async';
+      const parent = img.parentElement;
+      if (parent && parent.tagName === 'P') {
+        parent.style.textAlign = 'center';
+      }
+
+      img.addEventListener('error', function() {
+        const src = this.getAttribute('src');
+        if (src && src.includes('assets/image/')) {
+          const parts = src.split('assets/image/');
+          const corrected = '/Gitab/books/book11/assets/image/' + parts[1];
+          if (this.src !== corrected) {
+            this.src = corrected;
+          }
+        }
+      });
+    });
+
+    article.querySelectorAll('p').forEach(p => {
+      const trimmed = p.innerText.trim();
+      if (trimmed.startsWith('💡') || trimmed.startsWith('نکته:')) {
+        p.classList.add('react-callout', 'callout-tip');
+      } else if (trimmed.startsWith('⚠️') || trimmed.startsWith('هشدار:')) {
+        p.classList.add('react-callout', 'callout-warning');
+      } else if (trimmed.startsWith('📌') || trimmed.startsWith('مهم:')) {
+        p.classList.add('react-callout', 'callout-important');
+      } else if (trimmed.startsWith('🔹') || trimmed.startsWith('🔸')) {
+        p.classList.add('react-callout', 'callout-note');
+      }
+    });
+  })();
+  </script> <script type="speculationrules">{"prefetch":[{"where":{"and":[{"href_matches":"/Gitab/*"},{"not":{"href_matches":"/Gitab/downloads/*"}},{"not":{"selector_matches":"[download], [target='_blank']"}}]},"eagerness":"moderate"}]}</script> <script>
+  (() => {
+    if (window.HTMLScriptElement && HTMLScriptElement.supports && HTMLScriptElement.supports('speculationrules')) return;
+    const seen = new Set([window.location.href]);
+    let count = 0;
+    const prefetchLink = (e) => {
+      if (count >= 12) return;
+      const a = e.target && e.target.closest ? e.target.closest('header a, .chapter-single-next-nav a, .syllabus-chapter-item a, .btn-hero-read, .btn-card-read') : null;
+      if (!a || !a.href || a.hasAttribute('download') || a.target === '_blank') return;
+      if (a.origin !== window.location.origin || a.pathname.includes('/downloads/')) return;
+      const clean = a.href.split('#')[0];
+      if (!clean || seen.has(clean)) return;
+      seen.add(clean);
+      count++;
+      const l = document.createElement('link');
+      l.rel = 'prefetch';
+      l.href = clean;
+      document.head.appendChild(l);
+    };
+    document.addEventListener('pointerenter', prefetchLink, { capture: true, passive: true });
+    document.addEventListener('touchstart', prefetchLink, { capture: true, passive: true });
+  })();
+  </script></body></html>

@@ -1,117 +1,26 @@
-
-
-<!doctype html>
-<html lang="fa" dir="rtl">
-<head>
-  <meta charset="utf-8">
-  <link rel="icon" type="image/png" href="/Gitab/favicon.png">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>جست‌وجوی فایل‌ها</title>
-  <meta name="description" content="ترجمه‌های فارسی کتاب‌های فنی — سریع، مینیمال و قابل اتکا.">
-
-  <!-- استایل‌ها -->
-  <link rel="stylesheet" href="/Gitab/styles/main.css">
-  <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
-
-  <style>
-  @font-face {
-    font-family: 'Vazir';
-    src: url('/Gitab/fonts/Vazir-FD-WOL.ttf') format('truetype');
-    font-display: swap;
-  }
-  @font-face {
-    font-family: "Lalezar";
-    src: url('fonts/Lalezar.ttf') format('truetype');
-    font-display: swap;
-}
-  body {
-    font-family: 'Vazir', sans-serif;
-  }
-  </style>
-</head>
-
-<body>
-  <!-- هدر مشترک -->
-  <header class="header">
-    <div class="container nav-wrap">
-      <a href="/Gitab/" class="brand">
-        <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="26" height="26">
-        <span>Gitab</span>
-      </a>
-
-       <nav class="nav">
-         <a href="/Gitab/" >خانه</a>
-         <a href="/Gitab/books/list-books" >کتاب‌ها</a>
-         <a href="/Gitab/giter.html" >دوره ها</a>
-          <!-- 
-         <a href="/Gitab/translator.html" >مترجمین</a>
-           -->
-       </nav>
-
-      <div class="nav-actions">
-        <button id="themeToggle" class="icon-btn theme-btn" data-icon="moon" aria-label="تغییر تم">
-          <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن">
-          <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک">
-        </button>
-
-        <a class="icon-btn" href="https://github.com/hheydarian/Gitab" target="_blank" title="GitHub">
-          <img src="/Gitab/icone/github.svg" alt="GitHub">
-        </a>
-
-        <!-- دکمه منو برای موبایل -->
-        <button class="menu-toggle" aria-label="منو">
-          <img src="/Gitab/icone/menu.svg" alt="menu">
-        </button>
-      </div>
-    </div>
-  </header>
-
-  
-  <main class="site-main book-page">
-    <h1>فصل ۱۷ – جست‌وجوی فایل‌ها</h1>
-<p>وقتی در سیستم لینوکس خود گردش کرده‌ایم، یک نکته کاملاً روشن شده است:<br>
-یک سیستم لینوکس معمولی <strong>تعداد بسیار زیادی فایل</strong> دارد!<br>
-و این پرسش پیش می‌آید: «چطور بین این همه فایل چیزی را که می‌خواهیم پیدا کنیم؟»</p>
-<p>ما می‌دانیم که ساختار فایل‌سیستم لینوکس طبق اصولی منظم و ریشه‌دار از سیستم‌های یونیکس شکل گرفته،<br>
-اما تعداد زیاد فایل‌ها ممکن است پیدا کردن یک فایل خاص را بسیار دشوار کند.</p>
-<p>در این فصل، با دو ابزار اصلی برای جست‌وجوی فایل‌ها در سیستم آشنا می‌شویم:</p>
-<ul>
-<li><strong>locate</strong> – جست‌وجو بر اساس نام فایل</li>
-<li><strong>find</strong> – جست‌وجو در سلسله‌مراتب دایرکتوری‌ها</li>
-</ul>
-<p>همچنین با دستوری آشنا می‌شویم که معمولاً برای <strong>پردازش خروجی</strong> دستورات جست‌وجو به کار می‌رود:</p>
-<ul>
-<li><strong>xargs</strong> – ساخت و اجرای خط فرمان‌ها از ورودی استاندارد</li>
-</ul>
-<p>در کنار آن، دو دستور کمکی دیگر نیز معرفی می‌کنیم که برای بررسی و کار با فایل‌ها مفیدند:</p>
-<ul>
-<li><strong>touch</strong> – تغییر زمان‌های فایل</li>
-<li><strong>stat</strong> – نمایش وضعیت فایل یا فایل‌سیستم</li>
-</ul>
-<hr>
-<h3>locate – ساده‌ترین روش برای پیدا کردن فایل</h3>
-<p>برنامه‌ی <strong>locate</strong> یک جست‌وجوی بسیار سریع درون <strong>پایگاه داده‌ای از مسیر فایل‌ها (pathnames)</strong> انجام می‌دهد<br>
-و هر نامی را که شامل رشته‌ی مورد نظر باشد، نمایش می‌دهد.</p>
-<p>فرض کنید می‌خواهیم تمام برنامه‌هایی را پیدا کنیم که نامشان با «zip» شروع می‌شود.<br>
-از آن‌جا که به دنبال برنامه‌ها هستیم، می‌توانیم حدس بزنیم که مسیر آن‌ها در دایرکتوری‌هایی است که به <code>bin/</code> ختم می‌شوند.<br>
-پس می‌توانیم این‌طور از locate استفاده کنیم:</p>
-<pre class="hljs"><code>[me@linuxbox ~]$ locate bin/zip
-</code></pre>
-<p>خروجی چیزی شبیه این خواهد بود:</p>
-<pre class="hljs"><code>/usr/bin/zip 
+<!doctype html><html lang="fa" dir="rtl"> <head><script>
+    if (window.location.pathname.startsWith('/gitab/')) {
+      window.location.replace(window.location.pathname.replace(/^\/gitab\//i, '/Gitab/') + window.location.search + window.location.hash);
+    }
+    (() => {
+      try {
+        const t = localStorage.getItem('gitab-theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', t);
+        document.documentElement.dataset.colorMode = t;
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        document.documentElement.dataset.colorMode = 'dark';
+      }
+    })();
+  </script> <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5"> <title>جست‌وجوی فایل‌ها</title><meta name="description" content="جست‌وجوی فایل‌ها — مطالعه آنلاین و رایگان از کتاب «خط فرمان لینوکس (TLCL)» (The Linux Command Line) اثر William Shotts با ترجمه هیمن صادقی در گیتاب."> <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"><meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"> <meta name="theme-color" content="#090d16"><meta name="referrer" content="strict-origin-when-cross-origin"> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https:; frame-src https://www.youtube.com https://www.youtube-nocookie.com https://maps.google.com https://www.google.com; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self';"><link rel="icon" type="image/png" href="/Gitab/favicon.png"> <link rel="canonical" href="https://hheydarian.github.io/Gitab/books/book5/Book/17/chapter17/"><link rel="alternate" hreflang="fa" href="https://hheydarian.github.io/Gitab/books/book5/Book/17/chapter17/"> <link rel="alternate" hreflang="x-default" href="https://hheydarian.github.io/Gitab/books/book5/Book/17/chapter17/"><link rel="alternate" type="text/plain" title="LLMs.txt" href="/Gitab/llms.txt"> <link rel="sitemap" type="application/xml" title="Sitemap" href="/Gitab/sitemap.xml"><meta property="og:locale" content="fa_IR"> <meta property="og:type" content="article"><meta property="og:site_name" content="گیتاب | Gitab"> <meta property="og:title" content="جست‌وجوی فایل‌ها"><meta property="og:description" content="جست‌وجوی فایل‌ها — مطالعه آنلاین و رایگان از کتاب «خط فرمان لینوکس (TLCL)» (The Linux Command Line) اثر William Shotts با ترجمه هیمن صادقی در گیتاب."> <meta property="og:url" content="https://hheydarian.github.io/Gitab/books/book5/Book/17/chapter17/"><meta property="og:image" content="https://hheydarian.github.io/Gitab/images/the-linux-command-line/Cover.jpg"> <meta property="og:image:alt" content="جست‌وجوی فایل‌ها"><meta name="twitter:card" content="summary_large_image"> <meta name="twitter:title" content="جست‌وجوی فایل‌ها"><meta name="twitter:description" content="جست‌وجوی فایل‌ها — مطالعه آنلاین و رایگان از کتاب «خط فرمان لینوکس (TLCL)» (The Linux Command Line) اثر William Shotts با ترجمه هیمن صادقی در گیتاب."> <meta name="twitter:image" content="https://hheydarian.github.io/Gitab/images/the-linux-command-line/Cover.jpg"><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://hheydarian.github.io/Gitab/#organization","name":"گیتاب | Gitab","alternateName":"Gitab","url":"https://hheydarian.github.io/Gitab/","logo":{"@type":"ImageObject","url":"https://hheydarian.github.io/Gitab/favicon.png"},"sameAs":["https://github.com/hheydarian/Gitab"]},{"@type":"WebSite","@id":"https://hheydarian.github.io/Gitab/#website","url":"https://hheydarian.github.io/Gitab/","name":"گیتاب | Gitab","inLanguage":"fa-IR","publisher":{"@id":"https://hheydarian.github.io/Gitab/#organization"},"potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://hheydarian.github.io/Gitab/books/list-books/?q={search_term_string}"},"query-input":"required name=search_term_string"}},{"@type":"WebPage","@id":"https://hheydarian.github.io/Gitab/books/book5/Book/17/chapter17/#webpage","url":"https://hheydarian.github.io/Gitab/books/book5/Book/17/chapter17/","name":"جست‌وجوی فایل‌ها","description":"جست‌وجوی فایل‌ها — مطالعه آنلاین و رایگان از کتاب «خط فرمان لینوکس (TLCL)» (The Linux Command Line) اثر William Shotts با ترجمه هیمن صادقی در گیتاب.","inLanguage":"fa-IR","isPartOf":{"@id":"https://hheydarian.github.io/Gitab/#website"}},{"@type":"TechArticle","headline":"جست‌وجوی فایل‌ها","description":"جست‌وجوی فایل‌ها — مطالعه آنلاین و رایگان از کتاب «خط فرمان لینوکس (TLCL)» (The Linux Command Line) اثر William Shotts با ترجمه هیمن صادقی در گیتاب.","url":"https://hheydarian.github.io/Gitab/books/book5/Book/17/chapter17/","inLanguage":"fa-IR","isAccessibleForFree":true,"author":{"@type":"Person","name":"William Shotts"},"translator":{"@type":"Person","name":"هیمن صادقی"},"isPartOf":{"@type":"Book","name":"خط فرمان لینوکس (TLCL)","alternateName":"The Linux Command Line","url":"https://hheydarian.github.io/Gitab/books/book5/"}}]}</script> <link rel="preload" href="/Gitab/fonts/Vazirmatn.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/Gitab/styles/main.css?v=2.4" as="style"> <link rel="preload" href="/Gitab/styles/gitab-modern.css?v=2.5" as="style"><style>@font-face{font-family:'Lalezar';src:url('/Gitab/fonts/Lalezar.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}@font-face{font-family:'Vazirmatn';src:url('/Gitab/fonts/Vazirmatn.woff2') format('woff2');font-weight:100 900;font-style:normal;font-display:swap}html,body,button,input,optgroup,select,textarea,.filter-pill{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}input::placeholder,textarea::placeholder{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}</style> <link rel="stylesheet" href="/Gitab/styles/main.css?v=2.4"><link rel="stylesheet" href="/Gitab/styles/gitab-modern.css?v=2.5"> <link rel="stylesheet" href="/Gitab/styles/vendor/github-dark.min.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="/Gitab/styles/vendor/github-dark.min.css"></noscript></head> <body><header class="header"> <div class="container nav-wrap"><a href="/Gitab/" class="brand" aria-label="صفحه اصلی گیتاب"> <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="30" height="30" decoding="async"> <span class="brand-text">Gitab</span> </a> <nav class="nav" id="mainNav"><a href="/Gitab/" >خانه</a> <a href="/Gitab/books/list-books" aria-current="page">کتاب‌ها</a> <a href="/Gitab/courses/" >دوره‌ها</a> <a href="/Gitab/translator.html" >مترجمین</a></nav> <div class="nav-actions"><button id="themeToggle" class="theme-toggle-btn" aria-label="تغییر تم" title="تغییر تم"> <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن" width="18" height="18" decoding="async" style="display:none"> <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک" width="18" height="18" decoding="async"> </button> <a class="btn-github-pill" href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" title="مشاهده سورس گیتاب در گیت‌هاب"> <img src="/Gitab/icone/github.svg" alt="GitHub" width="16" height="16" decoding="async"> <span>گیت‌هاب</span> </a> <button class="mobile-menu-btn" id="mobileMenuBtn" type="button" aria-label="باز کردن منو" aria-expanded="false"> <svg class="mob-icon-open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="4" y1="7" x2="20" y2="7"></line> <line x1="4" y1="12" x2="20" y2="12"></line> <line x1="4" y1="17" x2="14" y2="17"></line> </svg> <svg class="mob-icon-close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="18" y1="6" x2="6" y2="18"></line> <line x1="6" y1="6" x2="18" y2="18"></line> </svg> </button></div> </div><div class="mobile-drawer" id="mobileDrawer" aria-hidden="true"> <div class="mobile-drawer-inner"><div class="mobile-drawer-section-label">ناوبری سریع</div><nav class="mobile-drawer-links" aria-label="منوی موبایل"> <a href="/Gitab/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M3 10.5 12 3l9 7.5"></path> <path d="M5 9.5V20a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V9.5"></path> </svg> </span> <span class="mob-nav-text">صفحه نخست</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/books/list-books" class="mobile-drawer-link active" aria-current="page"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path> </svg> </span> <span class="mob-nav-text">کتابخانه و فهرست کتاب‌ها</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/courses/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path> <path d="M6 12v5c3 3 9 3 12 0v-5"></path> </svg> </span> <span class="mob-nav-text">دوره‌های آموزشی</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/translator.html" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path> <circle cx="9" cy="7" r="4"></circle> <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path> <path d="M16 3.13a4 4 0 0 1 0 7.75"></path> </svg> </span> <span class="mob-nav-text">مترجمین و همکاران</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> </nav><div class="mobile-drawer-divider"></div><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" class="mobile-drawer-link mobile-drawer-gh"> <span class="mob-nav-icon" aria-hidden="true"> <img src="/Gitab/icone/github.svg" alt="" width="17" height="17" loading="lazy" decoding="async"> </span> <span class="mob-nav-text">مخزن گیت‌هاب پروژه</span> <span class="mob-nav-ext" aria-hidden="true">↗</span> </a> </div></div> </header><div class="reading-progress-track"> <div class="reading-progress-fill" id="readingProgressBar"></div></div> <main class="site-main chapter-reading-page"><div class="chapter-page-wrapper"> <nav class="chapter-clean-breadcrumb" aria-label="مسیر راهنما" dir="rtl"><a href="/Gitab/">خانه</a> <span class="bc-sep" aria-hidden="true">/</span> <a href="/Gitab/books/list-books/">کتاب‌ها</a> <span class="bc-sep" aria-hidden="true">/</span> <a href="/Gitab/books/book5/"><bdi>خط فرمان لینوکس</bdi></a> <span class="bc-sep" aria-hidden="true">/</span> <span class="bc-current-leaf"><bdi>جست‌وجوی فایل‌ها</bdi></span></nav> <article class="chapter-prose-container markdown-body" id="chapterArticle" dir="rtl"><h1>فصل ۱۷ – جست‌وجوی فایل‌ها</h1><p>وقتی در سیستم لینوکس خود گردش کرده‌ایم، یک نکته کاملاً روشن شده است:<br> یک سیستم لینوکس معمولی <strong>تعداد بسیار زیادی فایل</strong> دارد!<br> و این پرسش پیش می‌آید: «چطور بین این همه فایل چیزی را که می‌خواهیم پیدا کنیم؟»</p><p>ما می‌دانیم که ساختار فایل‌سیستم لینوکس طبق اصولی منظم و ریشه‌دار از سیستم‌های یونیکس شکل گرفته،<br> اما تعداد زیاد فایل‌ها ممکن است پیدا کردن یک فایل خاص را بسیار دشوار کند.</p><p>در این فصل، با دو ابزار اصلی برای جست‌وجوی فایل‌ها در سیستم آشنا می‌شویم:</p><ul> <li><strong>locate</strong> – جست‌وجو بر اساس نام فایل</li><li><strong>find</strong> – جست‌وجو در سلسله‌مراتب دایرکتوری‌ها</li></ul> <p>همچنین با دستوری آشنا می‌شویم که معمولاً برای <strong>پردازش خروجی</strong> دستورات جست‌وجو به کار می‌رود:</p><ul> <li><strong>xargs</strong> – ساخت و اجرای خط فرمان‌ها از ورودی استاندارد</li></ul> <p>در کنار آن، دو دستور کمکی دیگر نیز معرفی می‌کنیم که برای بررسی و کار با فایل‌ها مفیدند:</p><ul> <li><strong>touch</strong> – تغییر زمان‌های فایل</li><li><strong>stat</strong> – نمایش وضعیت فایل یا فایل‌سیستم</li></ul> <hr><h3>locate – ساده‌ترین روش برای پیدا کردن فایل</h3><p>برنامه‌ی <strong>locate</strong> یک جست‌وجوی بسیار سریع درون <strong>پایگاه داده‌ای از مسیر فایل‌ها (pathnames)</strong> انجام می‌دهد<br> و هر نامی را که شامل رشته‌ی مورد نظر باشد، نمایش می‌دهد.</p><p>فرض کنید می‌خواهیم تمام برنامه‌هایی را پیدا کنیم که نامشان با «zip» شروع می‌شود.<br> از آن‌جا که به دنبال برنامه‌ها هستیم، می‌توانیم حدس بزنیم که مسیر آن‌ها در دایرکتوری‌هایی است که به <code>bin/</code> ختم می‌شوند.<br> پس می‌توانیم این‌طور از locate استفاده کنیم:</p><pre class="hljs"><code>[me@linuxbox ~]$ locate bin/zip
+</code></pre> <p>خروجی چیزی شبیه این خواهد بود:</p><pre class="hljs"><code>/usr/bin/zip 
 /usr/bin/zipcloak 
 /usr/bin/zipgrep 
 /usr/bin/zipinfo 
 /usr/bin/zipnote 
 /usr/bin/zipsplit
-</code></pre>
-<p>اگر جست‌وجوی ما ساده نباشد، می‌توانیم locate را با ابزارهای دیگر مثل <strong>grep</strong> ترکیب کنیم<br>
-تا جست‌وجوهای دقیق‌تر و پیشرفته‌تری بسازیم:</p>
-<pre class="hljs"><code>[me@linuxbox ~]$ locate zip | grep bin
-</code></pre>
-<p>خروجی:</p>
-<pre class="hljs"><code>/bin/bunzip2 
+</code></pre> <p>اگر جست‌وجوی ما ساده نباشد، می‌توانیم locate را با ابزارهای دیگر مثل <strong>grep</strong> ترکیب کنیم<br> تا جست‌وجوهای دقیق‌تر و پیشرفته‌تری بسازیم:</p><pre class="hljs"><code>[me@linuxbox ~]$ locate zip | grep bin
+</code></pre> <p>خروجی:</p><pre class="hljs"><code>/bin/bunzip2 
 /bin/bzip2 
 /bin/bzip2recover 
 /bin/gunzip 
@@ -129,857 +38,284 @@
 /usr/bin/zipinfo 
 /usr/bin/zipnote 
 /usr/bin/zipsplit
-</code></pre>
-<hr>
-<p>برنامه‌ی <strong>locate</strong> از سال‌ها پیش در لینوکس وجود داشته و نسخه‌های مختلفی از آن ساخته شده است.<br>
-در توزیع‌های امروزی دو نسخه‌ی رایج‌تر وجود دارد:</p>
-<ul>
-<li><strong>slocate</strong></li>
-<li><strong>mlocate</strong></li>
-</ul>
-<p>اما معمولاً هر دوی آن‌ها از طریق یک لینک نمادین به نام <code>locate</code> فراخوانی می‌شوند.</p>
-<p>هر نسخه مجموعه‌ای از گزینه‌ها و قابلیت‌های مشترک دارد،<br>
-و برخی نسخه‌ها از <strong>عبارات منظم (Regular Expressions)</strong> و <strong>الگوهای wildcard</strong> پشتیبانی می‌کنند<br>
-(که در فصل‌های بعدی درباره‌ی آن‌ها صحبت خواهیم کرد).</p>
-<p>برای اطلاع از نسخه‌ی نصب‌شده‌ی locate و گزینه‌های آن، می‌توانید دستور زیر را اجرا کنید:</p>
-<pre class="hljs"><code>man locate
-</code></pre>
-<hr>
-<h3>پایگاه دادهٔ locate از کجا می‌آید؟</h3>
-<p>شاید متوجه شده باشید که در بعضی توزیع‌ها، بلافاصله بعد از نصب سیستم، دستور <strong>locate</strong> کار نمی‌کند؛<br>
-اما اگر روز بعد دوباره امتحان کنید، ناگهان درست کار می‌کند.<br>
-علت چیست؟</p>
-<p>پایگاه داده‌ای که locate از آن استفاده می‌کند، توسط برنامه‌ای به نام <strong>updatedb</strong> ساخته می‌شود.<br>
-این برنامه معمولاً به‌صورت <strong>خودکار و زمان‌بندی‌شده (cron job)</strong> اجرا می‌شود — یعنی وظیفه‌ای که در فواصل زمانی منظم توسط سرویس <strong>cron</strong> انجام می‌گیرد.</p>
-<p>در اکثر سیستم‌هایی که locate نصب شده، برنامه‌ی <strong>updatedb</strong> روزی یک‌بار اجرا می‌شود.<br>
-از آن‌جا که این پایگاه داده به‌صورت لحظه‌ای به‌روزرسانی نمی‌شود، فایل‌هایی که <strong>به‌تازگی ایجاد شده‌اند</strong> ممکن است در نتایج locate دیده نشوند.</p>
-<p>برای رفع این محدودیت، می‌توانید <strong>خودتان به‌صورت دستی پایگاه داده را به‌روزرسانی کنید</strong>.<br>
-کافی است وارد حالت کاربر ریشه (superuser) شوید و دستور زیر را اجرا کنید:</p>
-<pre class="hljs"><code><span class="hljs-comment"># updatedb</span>
-</code></pre>
-<hr>
-<h3>find – روش دقیق‌تر (و سخت‌تر) برای پیدا کردن فایل‌ها</h3>
-<p>در حالی که locate فقط بر اساس نام فایل جست‌وجو می‌کند،<br>
-دستور <strong>find</strong> دایرکتوری مشخصی (و زیرشاخه‌های آن) را بر اساس مجموعه‌ای از <strong>ویژگی‌ها و شروط مختلف</strong> جست‌وجو می‌کند.</p>
-<p>find ابزاری بسیار قدرتمند است و در فصل‌های آینده، هنگام یادگیری مفاهیم برنامه‌نویسی شل،<br>
-بارها با آن سر و کار خواهیم داشت.</p>
-<p>در ساده‌ترین حالت، برای استفاده از find فقط کافی است مسیر دایرکتوری مورد نظر را مشخص کنیم.<br>
-مثلاً برای نمایش فهرست همه‌ی فایل‌ها در پوشه‌ی خانگی خودمان:</p>
-<pre class="hljs"><code>[me@linuxbox ~]$ find ~
-</code></pre>
-<p>در بیشتر سیستم‌های فعال، این دستور فهرست بسیار بلندی تولید می‌کند.<br>
-از آنجا که خروجی روی <strong>خروجی استاندارد (stdout)</strong> چاپ می‌شود، می‌توانیم آن را با <strong>pipe (|)</strong> به دستورات دیگر بدهیم.<br>
-مثلاً برای شمارش تعداد کل فایل‌ها:</p>
-<pre class="hljs"><code>[me@linuxbox ~]$ find ~ | <span class="hljs-built_in">wc</span> -l
+</code></pre> <hr><p>برنامه‌ی <strong>locate</strong> از سال‌ها پیش در لینوکس وجود داشته و نسخه‌های مختلفی از آن ساخته شده است.<br> در توزیع‌های امروزی دو نسخه‌ی رایج‌تر وجود دارد:</p><ul> <li><strong>slocate</strong></li><li><strong>mlocate</strong></li></ul> <p>اما معمولاً هر دوی آن‌ها از طریق یک لینک نمادین به نام <code>locate</code> فراخوانی می‌شوند.</p><p>هر نسخه مجموعه‌ای از گزینه‌ها و قابلیت‌های مشترک دارد،<br> و برخی نسخه‌ها از <strong>عبارات منظم (Regular Expressions)</strong> و <strong>الگوهای wildcard</strong> پشتیبانی می‌کنند<br> (که در فصل‌های بعدی درباره‌ی آن‌ها صحبت خواهیم کرد).</p><p>برای اطلاع از نسخه‌ی نصب‌شده‌ی locate و گزینه‌های آن، می‌توانید دستور زیر را اجرا کنید:</p><pre class="hljs"><code>man locate
+</code></pre> <hr><h3>پایگاه دادهٔ locate از کجا می‌آید؟</h3><p>شاید متوجه شده باشید که در بعضی توزیع‌ها، بلافاصله بعد از نصب سیستم، دستور <strong>locate</strong> کار نمی‌کند؛<br> اما اگر روز بعد دوباره امتحان کنید، ناگهان درست کار می‌کند.<br> علت چیست؟</p><p>پایگاه داده‌ای که locate از آن استفاده می‌کند، توسط برنامه‌ای به نام <strong>updatedb</strong> ساخته می‌شود.<br> این برنامه معمولاً به‌صورت <strong>خودکار و زمان‌بندی‌شده (cron job)</strong> اجرا می‌شود — یعنی وظیفه‌ای که در فواصل زمانی منظم توسط سرویس <strong>cron</strong> انجام می‌گیرد.</p><p>در اکثر سیستم‌هایی که locate نصب شده، برنامه‌ی <strong>updatedb</strong> روزی یک‌بار اجرا می‌شود.<br> از آن‌جا که این پایگاه داده به‌صورت لحظه‌ای به‌روزرسانی نمی‌شود، فایل‌هایی که <strong>به‌تازگی ایجاد شده‌اند</strong> ممکن است در نتایج locate دیده نشوند.</p><p>برای رفع این محدودیت، می‌توانید <strong>خودتان به‌صورت دستی پایگاه داده را به‌روزرسانی کنید</strong>.<br> کافی است وارد حالت کاربر ریشه (superuser) شوید و دستور زیر را اجرا کنید:</p><pre class="hljs"><code><span class="hljs-comment"># updatedb</span>
+</code></pre> <hr><h3>find – روش دقیق‌تر (و سخت‌تر) برای پیدا کردن فایل‌ها</h3><p>در حالی که locate فقط بر اساس نام فایل جست‌وجو می‌کند،<br> دستور <strong>find</strong> دایرکتوری مشخصی (و زیرشاخه‌های آن) را بر اساس مجموعه‌ای از <strong>ویژگی‌ها و شروط مختلف</strong> جست‌وجو می‌کند.</p><p>find ابزاری بسیار قدرتمند است و در فصل‌های آینده، هنگام یادگیری مفاهیم برنامه‌نویسی شل،<br> بارها با آن سر و کار خواهیم داشت.</p><p>در ساده‌ترین حالت، برای استفاده از find فقط کافی است مسیر دایرکتوری مورد نظر را مشخص کنیم.<br> مثلاً برای نمایش فهرست همه‌ی فایل‌ها در پوشه‌ی خانگی خودمان:</p><pre class="hljs"><code>[me@linuxbox ~]$ find ~
+</code></pre> <p>در بیشتر سیستم‌های فعال، این دستور فهرست بسیار بلندی تولید می‌کند.<br> از آنجا که خروجی روی <strong>خروجی استاندارد (stdout)</strong> چاپ می‌شود، می‌توانیم آن را با <strong>pipe (|)</strong> به دستورات دیگر بدهیم.<br> مثلاً برای شمارش تعداد کل فایل‌ها:</p><pre class="hljs"><code>[me@linuxbox ~]$ find ~ | <span class="hljs-built_in">wc</span> -l
 47068
-</code></pre>
-<p>یعنی حدود <strong>۴۷ هزار فایل</strong> در پوشه‌ی خانگی ما وجود دارد!<br>
-زیبایی find در این است که می‌توانیم آن را طوری تنظیم کنیم تا فقط فایل‌هایی با ویژگی‌های خاص را پیدا کند.</p>
-<hr>
-<h3>آزمون‌ها (Tests)</h3>
-<p>فرض کنید می‌خواهیم فقط فهرستی از <strong>دایرکتوری‌ها</strong> به‌دست آوریم، نه فایل‌ها.<br>
-در این حالت، می‌توانیم از تست <code>-type d</code> استفاده کنیم:</p>
-<pre class="hljs"><code>[me@linuxbox ~]$ find ~ -<span class="hljs-built_in">type</span> d | <span class="hljs-built_in">wc</span> -l
+</code></pre> <p>یعنی حدود <strong>۴۷ هزار فایل</strong> در پوشه‌ی خانگی ما وجود دارد!<br> زیبایی find در این است که می‌توانیم آن را طوری تنظیم کنیم تا فقط فایل‌هایی با ویژگی‌های خاص را پیدا کند.</p><hr> <h3>آزمون‌ها (Tests)</h3><p>فرض کنید می‌خواهیم فقط فهرستی از <strong>دایرکتوری‌ها</strong> به‌دست آوریم، نه فایل‌ها.<br> در این حالت، می‌توانیم از تست <code>-type d</code> استفاده کنیم:</p><pre class="hljs"><code>[me@linuxbox ~]$ find ~ -<span class="hljs-built_in">type</span> d | <span class="hljs-built_in">wc</span> -l
 1695
-</code></pre>
-<p>به‌طور مشابه، اگر بخواهیم فقط <strong>فایل‌های معمولی (regular files)</strong> را جست‌وجو کنیم:</p>
-<pre class="hljs"><code>[me@linuxbox ~]$ find ~ -<span class="hljs-built_in">type</span> f | <span class="hljs-built_in">wc</span> -l
+</code></pre> <p>به‌طور مشابه، اگر بخواهیم فقط <strong>فایل‌های معمولی (regular files)</strong> را جست‌وجو کنیم:</p><pre class="hljs"><code>[me@linuxbox ~]$ find ~ -<span class="hljs-built_in">type</span> f | <span class="hljs-built_in">wc</span> -l
 38737
-</code></pre>
-<h4>انواع تست‌های نوع فایل در find</h4>
-<table>
-<thead>
-<tr>
-<th>حرف</th>
-<th>نوع فایل</th>
-<th>توضیح</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>b</td>
-<td>block special</td>
-<td>فایل‌های دستگاه بلوکی (مثل دیسک‌ها)</td>
-</tr>
-<tr>
-<td>c</td>
-<td>character special</td>
-<td>فایل‌های دستگاه کاراکتری (مثل ترمینال‌ها)</td>
-</tr>
-<tr>
-<td>d</td>
-<td>directory</td>
-<td>پوشه</td>
-</tr>
-<tr>
-<td>f</td>
-<td>regular file</td>
-<td>فایل معمولی</td>
-</tr>
-<tr>
-<td>l</td>
-<td>symbolic link</td>
-<td>لینک نمادین</td>
-</tr>
-</tbody>
-</table>
-<hr>
-<h3>جست‌وجو بر اساس نام و اندازه</h3>
-<p>می‌توانیم با افزودن چند تست دیگر، جست‌وجوی دقیق‌تری انجام دهیم.<br>
-برای مثال، فرض کنید می‌خواهیم تمام <strong>فایل‌های معمولی با پسوند <code>.JPG</code></strong> را که <strong>بزرگ‌تر از ۱ مگابایت</strong> هستند، پیدا کنیم:</p>
-<pre class="hljs"><code>[me@linuxbox ~]$ find ~ -<span class="hljs-built_in">type</span> f -name <span class="hljs-string">&quot;*.JPG&quot;</span> -size +1M | <span class="hljs-built_in">wc</span> -l
+</code></pre> <h4>انواع تست‌های نوع فایل در find</h4><table> <thead><tr> <th>حرف</th><th>نوع فایل</th><th>توضیح</th></tr> </thead><tbody> <tr><td>b</td><td>block special</td><td>فایل‌های دستگاه بلوکی (مثل دیسک‌ها)</td></tr> <tr><td>c</td><td>character special</td><td>فایل‌های دستگاه کاراکتری (مثل ترمینال‌ها)</td></tr> <tr><td>d</td><td>directory</td><td>پوشه</td></tr> <tr><td>f</td><td>regular file</td><td>فایل معمولی</td></tr> <tr><td>l</td><td>symbolic link</td><td>لینک نمادین</td></tr> </tbody></table> <hr><h3>جست‌وجو بر اساس نام و اندازه</h3><p>می‌توانیم با افزودن چند تست دیگر، جست‌وجوی دقیق‌تری انجام دهیم.<br> برای مثال، فرض کنید می‌خواهیم تمام <strong>فایل‌های معمولی با پسوند <code>.JPG</code></strong> را که <strong>بزرگ‌تر از ۱ مگابایت</strong> هستند، پیدا کنیم:</p><pre class="hljs"><code>[me@linuxbox ~]$ find ~ -<span class="hljs-built_in">type</span> f -name <span class="hljs-string">&quot;*.JPG&quot;</span> -size +1M | <span class="hljs-built_in">wc</span> -l
 840
-</code></pre>
-<p>در این مثال:</p>
-<ul>
-<li><code>-name &quot;*.JPG&quot;</code> یعنی فقط فایل‌هایی که نامشان با الگوی داده‌شده مطابقت دارد.<br>
-الگو را درون گیومه گذاشته‌ایم تا پوسته (shell) خودش آن را گسترش ندهد.</li>
-<li><code>-size +1M</code> یعنی فایل‌هایی بزرگ‌تر از یک مگابایت.</li>
-</ul>
-<p>علامت‌ها در مقابل اندازه معنی خاصی دارند:</p>
-<ul>
-<li><code>+</code> یعنی <strong>بزرگ‌تر از مقدار مشخص‌شده</strong></li>
-<li><code>-</code> یعنی <strong>کوچک‌تر از مقدار مشخص‌شده</strong></li>
-<li>بدون علامت یعنی <strong>دقیقاً برابر با آن مقدار</strong></li>
-</ul>
-<p>حرف پس از عدد واحد اندازه را تعیین می‌کند:</p>
-<h4>واحدهای اندازه در find</h4>
-<table>
-<thead>
-<tr>
-<th>کاراکتر</th>
-<th>واحد اندازه</th>
-<th>توضیح</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>b</td>
-<td>بلوک‌های ۵۱۲ بایتی</td>
-<td>مقدار پیش‌فرض در صورت عدم ذکر واحد</td>
-</tr>
-<tr>
-<td>c</td>
-<td>بایت</td>
-<td></td>
-</tr>
-<tr>
-<td>w</td>
-<td>واژه‌های ۲ بایتی</td>
-<td></td>
-</tr>
-<tr>
-<td>k</td>
-<td>کیلوبایت (۱۰۲۴ بایت)</td>
-<td></td>
-</tr>
-<tr>
-<td>M</td>
-<td>مگابایت (۱٬۰۴۸٬۵۷۶ بایت)</td>
-<td></td>
-</tr>
-<tr>
-<td>G</td>
-<td>گیگابایت (۱٬۰۷۳٬۷۴۱٬۸۲۴ بایت)</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<hr>
-<p>به این ترتیب، دستور <code>find</code> ابزار قدرتمندی است که می‌تواند بر اساس نوع، اندازه، نام، زمان تغییر، مجوزها و بسیاری ویژگی‌های دیگر فایل‌ها را پیدا کند —<br>
-و این توانایی‌ها آن را به یکی از پرکاربردترین ابزارهای لینوکس تبدیل کرده است.</p>
-<p>دستور <strong>find</strong> از مجموعه‌ی بسیار گسترده‌ای از <strong>تست‌ها (Tests)</strong> پشتیبانی می‌کند.<br>
-در جدول زیر، پرکاربردترین آن‌ها را مرور می‌کنیم.<br>
-در مواردی که ورودی عددی لازم است، همان نشانه‌گذاری‌های <code>+</code> و <code>-</code> که قبلاً توضیح داده شد (بیشتر از / کمتر از / دقیقاً برابر) نیز قابل استفاده‌اند.</p>
-<hr>
-<h3>📋 جدول ۱۷-۳: تست‌های متداول در find</h3>
-<table>
-<thead>
-<tr>
-<th>تست</th>
-<th>توضیح</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>-cmin n</strong></td>
-<td>فایل‌ها یا دایرکتوری‌هایی را پیدا می‌کند که محتوایشان یا ویژگی‌هایشان <strong>دقیقاً n دقیقه پیش</strong> تغییر کرده‌اند. <br> برای کمتر از n دقیقه: <code>-n</code>، برای بیشتر از n دقیقه: <code>+n</code>.</td>
-</tr>
-<tr>
-<td><strong>-cnewer file</strong></td>
-<td>فایل‌ها یا دایرکتوری‌هایی را پیدا می‌کند که <strong>جدیدتر از</strong> فایل مشخص‌شده هستند (از نظر زمان تغییر).</td>
-</tr>
-<tr>
-<td><strong>-ctime n</strong></td>
-<td>فایل‌ها یا دایرکتوری‌هایی را پیدا می‌کند که محتوایشان یا ویژگی‌هایشان <strong>n×۲۴ ساعت پیش</strong> تغییر کرده است.</td>
-</tr>
-<tr>
-<td><strong>-empty</strong></td>
-<td>فایل‌ها یا پوشه‌های <strong>خالی</strong> را پیدا می‌کند.</td>
-</tr>
-<tr>
-<td><strong>-group name</strong></td>
-<td>فایل‌ها یا پوشه‌هایی را که متعلق به <strong>گروه خاصی</strong> هستند پیدا می‌کند. گروه را می‌توان با نام یا <strong>شناسه عددی گروه (GID)</strong> مشخص کرد.</td>
-</tr>
-<tr>
-<td><strong>-iname pattern</strong></td>
-<td>مثل <code>-name</code> است ولی <strong>به حروف بزرگ و کوچک حساس نیست</strong>.</td>
-</tr>
-<tr>
-<td><strong>-inum n</strong></td>
-<td>فایل‌هایی را با <strong>شمارهٔ inode</strong> مشخص‌شده پیدا می‌کند — برای یافتن تمام <strong>hard linkها</strong> به یک inode مفید است.</td>
-</tr>
-<tr>
-<td><strong>-mmin n</strong></td>
-<td>فایل‌ها یا دایرکتوری‌هایی را پیدا می‌کند که محتوایشان <strong>n دقیقه پیش</strong> ویرایش شده است.</td>
-</tr>
-<tr>
-<td><strong>-mtime n</strong></td>
-<td>فایل‌ها یا دایرکتوری‌هایی را پیدا می‌کند که محتوایشان <strong>n×۲۴ ساعت پیش</strong> تغییر کرده است.</td>
-</tr>
-<tr>
-<td><strong>-name pattern</strong></td>
-<td>فایل‌ها یا پوشه‌هایی را می‌یابد که با <strong>الگوی wildcard</strong> داده‌شده تطابق دارند.</td>
-</tr>
-<tr>
-<td><strong>-newer file</strong></td>
-<td>فایل‌ها یا پوشه‌هایی را می‌یابد که <strong>جدیدتر از فایل مشخص‌شده</strong> هستند. <br> این گزینه در اسکریپت‌های پشتیبان‌گیری (backup) بسیار مفید است: می‌توانید در هر بار بکاپ، تاریخ آخرین بکاپ را در فایلی ذخیره کنید و سپس با <code>find -newer</code> بفهمید کدام فایل‌ها از آن زمان تغییر کرده‌اند.</td>
-</tr>
-<tr>
-<td><strong>-nouser</strong></td>
-<td>فایل‌ها یا پوشه‌هایی را پیدا می‌کند که <strong>هیچ مالک معتبری</strong> در سیستم ندارند — معمولاً متعلق به حساب‌های حذف‌شده یا فعالیت‌های مشکوک.</td>
-</tr>
-<tr>
-<td><strong>-nogroup</strong></td>
-<td>مشابه <code>-nouser</code>، ولی برای گروه‌هایی که دیگر وجود ندارند.</td>
-</tr>
-<tr>
-<td><strong>-perm mode</strong></td>
-<td>فایل‌ها یا پوشه‌هایی با <strong>مجوز (permission)</strong> خاص را پیدا می‌کند. حالت دسترسی می‌تواند به‌صورت <strong>عددی (مثلاً 755)</strong> یا <strong>نمادین (مثلاً u+rwx)</strong> نوشته شود.</td>
-</tr>
-<tr>
-<td><strong>-samefile name</strong></td>
-<td>مانند <code>-inum</code> است، ولی به‌جای شماره inode، نام فایل مرجع داده می‌شود. فایل‌هایی را پیدا می‌کند که <strong>همان inode</strong> را با آن فایل به‌اشتراک می‌گذارند.</td>
-</tr>
-<tr>
-<td><strong>-size n</strong></td>
-<td>فایل‌هایی را می‌یابد که اندازه‌شان <strong>برابر، بزرگ‌تر یا کوچک‌تر از n</strong> است (بسته به وجود <code>+</code> یا <code>-</code>).</td>
-</tr>
-<tr>
-<td><strong>-type c</strong></td>
-<td>فایل‌هایی را می‌یابد که از <strong>نوع c</strong> هستند (مثلاً <code>f</code> برای فایل معمولی، <code>d</code> برای دایرکتوری، <code>l</code> برای لینک و غیره).</td>
-</tr>
-<tr>
-<td><strong>-user name</strong></td>
-<td>فایل‌ها یا پوشه‌هایی را پیدا می‌کند که متعلق به <strong>کاربر مشخص‌شده</strong> هستند. نام کاربر می‌تواند <strong>username</strong> یا <strong>شناسه عددی (UID)</strong> باشد.</td>
-</tr>
-</tbody>
-</table>
-<hr>
-<p>🔎 این فهرست کامل نیست — دستور <code>man find</code> جزئیات و تست‌های پیشرفته‌تری را ارائه می‌دهد،<br>
-از جمله جست‌وجو بر اساس زمان دسترسی (access time)، مجوزها، عمق دایرکتوری و ترکیب شرط‌ها با عملگرهای منطقی مثل <code>-and</code>, <code>-or</code>, <code>!</code> (not).</p>
-<hr>
-<h3>عملگرها (Operators)</h3>
-<p>با وجود تمام تست‌هایی که دستور <strong>find</strong> ارائه می‌دهد، گاهی لازم است بتوانیم <strong>روابط منطقی بین تست‌ها</strong> را دقیق‌تر توصیف کنیم.<br>
-برای مثال، فرض کنید می‌خواهیم بررسی کنیم که آیا تمام فایل‌ها و زیرپوشه‌های یک دایرکتوری <strong>دسترسی ایمن (permissions) مناسبی</strong> دارند یا نه.</p>
-<p>در این حالت باید:</p>
-<ul>
-<li>تمام فایل‌هایی را پیدا کنیم که <strong>مجوزشان متفاوت از 0600</strong> است، و</li>
-<li>تمام دایرکتوری‌هایی را که <strong>مجوزشان متفاوت از 0700</strong> است.</li>
-</ul>
-<p>خوشبختانه دستور find امکان ترکیب تست‌ها با استفاده از <strong>عملگرهای منطقی</strong> را فراهم می‌کند تا روابط پیچیده‌تر ایجاد کنیم.</p>
-<p>مثلاً برای مثال بالا، می‌توانیم بنویسیم:</p>
-<pre class="hljs"><code>[me@linuxbox ~]$ find ~ \( -<span class="hljs-built_in">type</span> f -not -perm 0600 \) -or \( -<span class="hljs-built_in">type</span> d -not -perm 0700 \)
-</code></pre>
-<p>در نگاه اول شاید عجیب به نظر برسد، اما وقتی مفهوم عملگرها را بدانیم، ساده است.</p>
-<hr>
-<h3>📘 جدول ۱۷-۴: عملگرهای منطقی find</h3>
-<table>
-<thead>
-<tr>
-<th>عملگر</th>
-<th>توضیح</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>-and</strong></td>
-<td>تست‌ها در دو طرف عملگر باید <strong>هر دو درست (true)</strong> باشند تا نتیجهٔ نهایی درست شود. <br> می‌توان به صورت کوتاه‌شده <strong><code>-a</code></strong> نیز نوشت. <br> نکته: اگر هیچ عملگری بین تست‌ها ننویسیم، <strong>-and به‌صورت پیش‌فرض فرض می‌شود.</strong></td>
-</tr>
-<tr>
-<td><strong>-or</strong></td>
-<td>اگر <strong>هر یک از تست‌ها</strong> در دو طرف درست باشد، نتیجه درست می‌شود. <br> می‌توان به صورت کوتاه‌شده <strong><code>-o</code></strong> نیز نوشت.</td>
-</tr>
-<tr>
-<td><strong>-not</strong></td>
-<td>نتیجهٔ تست بعدی را <strong>معکوس</strong> می‌کند (یعنی اگر تست نادرست بود، درست می‌شود و برعکس). <br> می‌توان به‌جای آن از <strong><code>!</code></strong> استفاده کرد.</td>
-</tr>
-<tr>
-<td><strong>( )</strong></td>
-<td>تست‌ها و عملگرها را برای <strong>تعیین ترتیب اجرا (precedence)</strong> گروه‌بندی می‌کند. <br> به‌صورت پیش‌فرض، find از <strong>چپ به راست</strong> ارزیابی می‌کند، اما می‌توان با پرانتزها ترتیب را تغییر داد. <br> حتی اگر لازم نباشد، گاهی برای <strong>خوانایی بهتر دستور</strong> مفید است. <br> از آن‌جا که پرانتزها در پوسته معنای خاصی دارند، باید با <strong>بک‌اسلش <code>\</code></strong> از آن‌ها محافظت کرد تا به find منتقل شوند.</td>
-</tr>
-</tbody>
-</table>
-<hr>
-<h3>تحلیل دستور مثال بالا</h3>
-<p>اگر ساختار کلی دستور را نگاه کنیم، دو بخش داریم که با عملگر <strong><code>-or</code></strong> از هم جدا شده‌اند:</p>
-<pre class="hljs"><code>( expression 1 ) -or ( expression 2 )
-</code></pre>
-<p>این منطقی است، چون داریم دو نوع بررسی انجام می‌دهیم:<br>
-۱. فایل‌هایی که دسترسی مناسبی ندارند.<br>
-۲. پوشه‌هایی که دسترسی مناسبی ندارند.</p>
-<p>چرا از <strong><code>-or</code></strong> استفاده کرده‌ایم و نه <strong><code>-and</code></strong>؟<br>
-چون هر فایل فقط می‌تواند یکی از این دو حالت را داشته باشد — یا <strong>فایل</strong> است یا <strong>دایرکتوری</strong>، نه هر دو.<br>
-پس باید بگوییم:</p>
-<pre class="hljs"><code>( فایل با مجوز اشتباه ) -or ( پوشه با مجوز اشتباه )
-</code></pre>
-<hr>
-<h3>تعریف «مجوز اشتباه»</h3>
-<p>ما به‌طور مستقیم نمی‌توانیم «مجوز بد» را تست کنیم،<br>
-اما می‌توانیم بگوییم <strong>«مجوز غیر از خوب»</strong>، چون می‌دانیم مجوز خوب چیست.</p>
-<p>برای فایل‌ها، مجوز خوب <code>0600</code> است، و برای دایرکتوری‌ها <code>0700</code>.</p>
-<p>پس تست‌هایمان می‌شوند:</p>
-<pre class="hljs"><code>-type f -and -not -perm 0600
+</code></pre> <p>در این مثال:</p><ul> <li><code>-name &quot;*.JPG&quot;</code> یعنی فقط فایل‌هایی که نامشان با الگوی داده‌شده مطابقت دارد.<br> الگو را درون گیومه گذاشته‌ایم تا پوسته (shell) خودش آن را گسترش ندهد.</li><li><code>-size +1M</code> یعنی فایل‌هایی بزرگ‌تر از یک مگابایت.</li></ul> <p>علامت‌ها در مقابل اندازه معنی خاصی دارند:</p><ul> <li><code>+</code> یعنی <strong>بزرگ‌تر از مقدار مشخص‌شده</strong></li><li><code>-</code> یعنی <strong>کوچک‌تر از مقدار مشخص‌شده</strong></li><li>بدون علامت یعنی <strong>دقیقاً برابر با آن مقدار</strong></li></ul> <p>حرف پس از عدد واحد اندازه را تعیین می‌کند:</p><h4>واحدهای اندازه در find</h4><table> <thead><tr> <th>کاراکتر</th><th>واحد اندازه</th><th>توضیح</th></tr> </thead><tbody> <tr><td>b</td><td>بلوک‌های ۵۱۲ بایتی</td><td>مقدار پیش‌فرض در صورت عدم ذکر واحد</td></tr> <tr><td>c</td><td>بایت</td><td></td></tr> <tr><td>w</td><td>واژه‌های ۲ بایتی</td><td></td></tr> <tr><td>k</td><td>کیلوبایت (۱۰۲۴ بایت)</td><td></td></tr> <tr><td>M</td><td>مگابایت (۱٬۰۴۸٬۵۷۶ بایت)</td><td></td></tr> <tr><td>G</td><td>گیگابایت (۱٬۰۷۳٬۷۴۱٬۸۲۴ بایت)</td><td></td></tr> </tbody></table> <hr><p>به این ترتیب، دستور <code>find</code> ابزار قدرتمندی است که می‌تواند بر اساس نوع، اندازه، نام، زمان تغییر، مجوزها و بسیاری ویژگی‌های دیگر فایل‌ها را پیدا کند —<br> و این توانایی‌ها آن را به یکی از پرکاربردترین ابزارهای لینوکس تبدیل کرده است.</p><p>دستور <strong>find</strong> از مجموعه‌ی بسیار گسترده‌ای از <strong>تست‌ها (Tests)</strong> پشتیبانی می‌کند.<br> در جدول زیر، پرکاربردترین آن‌ها را مرور می‌کنیم.<br> در مواردی که ورودی عددی لازم است، همان نشانه‌گذاری‌های <code>+</code> و <code>-</code> که قبلاً توضیح داده شد (بیشتر از / کمتر از / دقیقاً برابر) نیز قابل استفاده‌اند.</p><hr> <h3>جدول ۱۷-۳: تست‌های متداول در find</h3><table> <thead><tr> <th>تست</th><th>توضیح</th></tr> </thead><tbody> <tr><td><strong>-cmin n</strong></td><td>فایل‌ها یا دایرکتوری‌هایی را پیدا می‌کند که محتوایشان یا ویژگی‌هایشان <strong>دقیقاً n دقیقه پیش</strong> تغییر کرده‌اند. <br> برای کمتر از n دقیقه: <code>-n</code>، برای بیشتر از n دقیقه: <code>+n</code>.</td></tr> <tr><td><strong>-cnewer file</strong></td><td>فایل‌ها یا دایرکتوری‌هایی را پیدا می‌کند که <strong>جدیدتر از</strong> فایل مشخص‌شده هستند (از نظر زمان تغییر).</td></tr> <tr><td><strong>-ctime n</strong></td><td>فایل‌ها یا دایرکتوری‌هایی را پیدا می‌کند که محتوایشان یا ویژگی‌هایشان <strong>n×۲۴ ساعت پیش</strong> تغییر کرده است.</td></tr> <tr><td><strong>-empty</strong></td><td>فایل‌ها یا پوشه‌های <strong>خالی</strong> را پیدا می‌کند.</td></tr> <tr><td><strong>-group name</strong></td><td>فایل‌ها یا پوشه‌هایی را که متعلق به <strong>گروه خاصی</strong> هستند پیدا می‌کند. گروه را می‌توان با نام یا <strong>شناسه عددی گروه (GID)</strong> مشخص کرد.</td></tr> <tr><td><strong>-iname pattern</strong></td><td>مثل <code>-name</code> است ولی <strong>به حروف بزرگ و کوچک حساس نیست</strong>.</td></tr> <tr><td><strong>-inum n</strong></td><td>فایل‌هایی را با <strong>شمارهٔ inode</strong> مشخص‌شده پیدا می‌کند — برای یافتن تمام <strong>hard linkها</strong> به یک inode مفید است.</td></tr> <tr><td><strong>-mmin n</strong></td><td>فایل‌ها یا دایرکتوری‌هایی را پیدا می‌کند که محتوایشان <strong>n دقیقه پیش</strong> ویرایش شده است.</td></tr> <tr><td><strong>-mtime n</strong></td><td>فایل‌ها یا دایرکتوری‌هایی را پیدا می‌کند که محتوایشان <strong>n×۲۴ ساعت پیش</strong> تغییر کرده است.</td></tr> <tr><td><strong>-name pattern</strong></td><td>فایل‌ها یا پوشه‌هایی را می‌یابد که با <strong>الگوی wildcard</strong> داده‌شده تطابق دارند.</td></tr> <tr><td><strong>-newer file</strong></td><td>فایل‌ها یا پوشه‌هایی را می‌یابد که <strong>جدیدتر از فایل مشخص‌شده</strong> هستند. <br> این گزینه در اسکریپت‌های پشتیبان‌گیری (backup) بسیار مفید است: می‌توانید در هر بار بکاپ، تاریخ آخرین بکاپ را در فایلی ذخیره کنید و سپس با <code>find -newer</code> بفهمید کدام فایل‌ها از آن زمان تغییر کرده‌اند.</td></tr> <tr><td><strong>-nouser</strong></td><td>فایل‌ها یا پوشه‌هایی را پیدا می‌کند که <strong>هیچ مالک معتبری</strong> در سیستم ندارند — معمولاً متعلق به حساب‌های حذف‌شده یا فعالیت‌های مشکوک.</td></tr> <tr><td><strong>-nogroup</strong></td><td>مشابه <code>-nouser</code>، ولی برای گروه‌هایی که دیگر وجود ندارند.</td></tr> <tr><td><strong>-perm mode</strong></td><td>فایل‌ها یا پوشه‌هایی با <strong>مجوز (permission)</strong> خاص را پیدا می‌کند. حالت دسترسی می‌تواند به‌صورت <strong>عددی (مثلاً 755)</strong> یا <strong>نمادین (مثلاً u+rwx)</strong> نوشته شود.</td></tr> <tr><td><strong>-samefile name</strong></td><td>مانند <code>-inum</code> است، ولی به‌جای شماره inode، نام فایل مرجع داده می‌شود. فایل‌هایی را پیدا می‌کند که <strong>همان inode</strong> را با آن فایل به‌اشتراک می‌گذارند.</td></tr> <tr><td><strong>-size n</strong></td><td>فایل‌هایی را می‌یابد که اندازه‌شان <strong>برابر، بزرگ‌تر یا کوچک‌تر از n</strong> است (بسته به وجود <code>+</code> یا <code>-</code>).</td></tr> <tr><td><strong>-type c</strong></td><td>فایل‌هایی را می‌یابد که از <strong>نوع c</strong> هستند (مثلاً <code>f</code> برای فایل معمولی، <code>d</code> برای دایرکتوری، <code>l</code> برای لینک و غیره).</td></tr> <tr><td><strong>-user name</strong></td><td>فایل‌ها یا پوشه‌هایی را پیدا می‌کند که متعلق به <strong>کاربر مشخص‌شده</strong> هستند. نام کاربر می‌تواند <strong>username</strong> یا <strong>شناسه عددی (UID)</strong> باشد.</td></tr> </tbody></table> <hr><p>این فهرست کامل نیست — دستور <code>man find</code> جزئیات و تست‌های پیشرفته‌تری را ارائه می‌دهد،<br> از جمله جست‌وجو بر اساس زمان دسترسی (access time)، مجوزها، عمق دایرکتوری و ترکیب شرط‌ها با عملگرهای منطقی مثل <code>-and</code>, <code>-or</code>, <code>!</code> (not).</p><hr> <h3>عملگرها (Operators)</h3><p>با وجود تمام تست‌هایی که دستور <strong>find</strong> ارائه می‌دهد، گاهی لازم است بتوانیم <strong>روابط منطقی بین تست‌ها</strong> را دقیق‌تر توصیف کنیم.<br> برای مثال، فرض کنید می‌خواهیم بررسی کنیم که آیا تمام فایل‌ها و زیرپوشه‌های یک دایرکتوری <strong>دسترسی ایمن (permissions) مناسبی</strong> دارند یا نه.</p><p>در این حالت باید:</p><ul> <li>تمام فایل‌هایی را پیدا کنیم که <strong>مجوزشان متفاوت از 0600</strong> است، و</li><li>تمام دایرکتوری‌هایی را که <strong>مجوزشان متفاوت از 0700</strong> است.</li></ul> <p>خوشبختانه دستور find امکان ترکیب تست‌ها با استفاده از <strong>عملگرهای منطقی</strong> را فراهم می‌کند تا روابط پیچیده‌تر ایجاد کنیم.</p><p>مثلاً برای مثال بالا، می‌توانیم بنویسیم:</p><pre class="hljs"><code>[me@linuxbox ~]$ find ~ \( -<span class="hljs-built_in">type</span> f -not -perm 0600 \) -or \( -<span class="hljs-built_in">type</span> d -not -perm 0700 \)
+</code></pre> <p>در نگاه اول شاید عجیب به نظر برسد، اما وقتی مفهوم عملگرها را بدانیم، ساده است.</p><hr> <h3>جدول ۱۷-۴: عملگرهای منطقی find</h3><table> <thead><tr> <th>عملگر</th><th>توضیح</th></tr> </thead><tbody> <tr><td><strong>-and</strong></td><td>تست‌ها در دو طرف عملگر باید <strong>هر دو درست (true)</strong> باشند تا نتیجهٔ نهایی درست شود. <br> می‌توان به صورت کوتاه‌شده <strong><code>-a</code></strong> نیز نوشت. <br> نکته: اگر هیچ عملگری بین تست‌ها ننویسیم، <strong>-and به‌صورت پیش‌فرض فرض می‌شود.</strong></td></tr> <tr><td><strong>-or</strong></td><td>اگر <strong>هر یک از تست‌ها</strong> در دو طرف درست باشد، نتیجه درست می‌شود. <br> می‌توان به صورت کوتاه‌شده <strong><code>-o</code></strong> نیز نوشت.</td></tr> <tr><td><strong>-not</strong></td><td>نتیجهٔ تست بعدی را <strong>معکوس</strong> می‌کند (یعنی اگر تست نادرست بود، درست می‌شود و برعکس). <br> می‌توان به‌جای آن از <strong><code>!</code></strong> استفاده کرد.</td></tr> <tr><td><strong>( )</strong></td><td>تست‌ها و عملگرها را برای <strong>تعیین ترتیب اجرا (precedence)</strong> گروه‌بندی می‌کند. <br> به‌صورت پیش‌فرض، find از <strong>چپ به راست</strong> ارزیابی می‌کند، اما می‌توان با پرانتزها ترتیب را تغییر داد. <br> حتی اگر لازم نباشد، گاهی برای <strong>خوانایی بهتر دستور</strong> مفید است. <br> از آن‌جا که پرانتزها در پوسته معنای خاصی دارند، باید با <strong>بک‌اسلش <code>\</code></strong> از آن‌ها محافظت کرد تا به find منتقل شوند.</td></tr> </tbody></table> <hr><h3>تحلیل دستور مثال بالا</h3><p>اگر ساختار کلی دستور را نگاه کنیم، دو بخش داریم که با عملگر <strong><code>-or</code></strong> از هم جدا شده‌اند:</p><pre class="hljs"><code>( expression 1 ) -or ( expression 2 )
+</code></pre> <p>این منطقی است، چون داریم دو نوع بررسی انجام می‌دهیم:<br> ۱. فایل‌هایی که دسترسی مناسبی ندارند.<br> ۲. پوشه‌هایی که دسترسی مناسبی ندارند.</p><p>چرا از <strong><code>-or</code></strong> استفاده کرده‌ایم و نه <strong><code>-and</code></strong>؟<br> چون هر فایل فقط می‌تواند یکی از این دو حالت را داشته باشد — یا <strong>فایل</strong> است یا <strong>دایرکتوری</strong>، نه هر دو.<br> پس باید بگوییم:</p><pre class="hljs"><code>( فایل با مجوز اشتباه ) -or ( پوشه با مجوز اشتباه )
+</code></pre> <hr><h3>تعریف «مجوز اشتباه»</h3><p>ما به‌طور مستقیم نمی‌توانیم «مجوز بد» را تست کنیم،<br> اما می‌توانیم بگوییم <strong>«مجوز غیر از خوب»</strong>، چون می‌دانیم مجوز خوب چیست.</p><p>برای فایل‌ها، مجوز خوب <code>0600</code> است، و برای دایرکتوری‌ها <code>0700</code>.</p><p>پس تست‌هایمان می‌شوند:</p><pre class="hljs"><code>-type f -and -not -perm 0600
 -type d -and -not -perm 0700
-</code></pre>
-<p>و چون <code>-and</code> به‌صورت پیش‌فرض وجود دارد، می‌توانیم آن را حذف کنیم.</p>
-<p>اگر همه را با هم ترکیب کنیم، دستور نهایی چنین است:</p>
-<pre class="hljs"><code>find ~ \( -<span class="hljs-built_in">type</span> f -not -perm 0600 \) -or \( -<span class="hljs-built_in">type</span> d -not -perm 0700 \)
-</code></pre>
-<p>و همان‌طور که گفته شد، پرانتزها باید با <strong>بک‌اسلش (<code>\</code>)</strong> محافظت شوند تا پوسته آن‌ها را تفسیر نکند.</p>
-<hr>
-<h3>منطق اجرای عملگرها</h3>
-<p>فرض کنید دو عبارت داریم که با یک عملگر منطقی از هم جدا شده‌اند:</p>
-<pre class="hljs"><code>expr1 -operator expr2
-</code></pre>
-<p>در همهٔ حالت‌ها، عبارت <strong>expr1</strong> همیشه اجرا می‌شود،<br>
-اما اجرای <strong>expr2</strong> بستگی به نتیجهٔ expr1 و نوع عملگر دارد.</p>
-<h4>جدول ۱۷-۵: منطق AND/OR در find</h4>
-<table>
-<thead>
-<tr>
-<th>نتیجهٔ expr1</th>
-<th>عملگر</th>
-<th>وضعیت اجرای expr2</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>True</td>
-<td><strong>-and</strong></td>
-<td>همیشه اجرا می‌شود</td>
-</tr>
-<tr>
-<td>False</td>
-<td><strong>-and</strong></td>
-<td>اجرا <strong>نمی‌شود</strong></td>
-</tr>
-<tr>
-<td>True</td>
-<td><strong>-or</strong></td>
-<td>اجرا <strong>نمی‌شود</strong></td>
-</tr>
-<tr>
-<td>False</td>
-<td><strong>-or</strong></td>
-<td>همیشه اجرا می‌شود</td>
-</tr>
-</tbody>
-</table>
-<hr>
-<h3>چرا این رفتار مهم است؟</h3>
-<p>هدف از این منطق، <strong>بهینه‌سازی عملکرد</strong> است.<br>
-مثلاً در عبارت:</p>
-<pre class="hljs"><code>expr1 -and expr2
-</code></pre>
-<p>اگر <code>expr1</code> نتیجه‌ای <strong>نادرست (false)</strong> بدهد، دیگر نیازی نیست <code>expr2</code> بررسی شود، چون نتیجهٔ کلی در هر صورت نادرست خواهد بود.</p>
-<p>به‌طور مشابه، در عبارت:</p>
-<pre class="hljs"><code>expr1 -or expr2
-</code></pre>
-<p>اگر <code>expr1</code> درست باشد، دیگر نیازی به اجرای <code>expr2</code> نیست، چون نتیجهٔ کلی حتماً درست است.</p>
-<p>این رفتار علاوه بر افزایش سرعت، در <strong>کنترل ترتیب اجرای اعمال (actions)</strong> نیز نقش دارد —<br>
-که در ادامهٔ فصل هنگام بررسی عملگرهای عملیاتی (<code>-exec</code>, <code>-delete</code>, و غیره) اهمیت آن را خواهیم دید.</p>
-<hr>
-<h3>اعمال از پیش تعریف‌شده (Predefined Actions)</h3>
-<p>تا اینجا یاد گرفتیم که دستور <strong>find</strong> می‌تواند فهرستی از فایل‌ها را بر اساس معیارهای مختلف نمایش دهد.<br>
-اما واقعاً هدف نهایی فقط دیدن فهرست نیست — بلکه <strong>انجام کاری روی آن فایل‌هاست</strong>.</p>
-<p>خوشبختانه find اجازه می‌دهد <strong>اعمال (Actions)</strong> خاصی را روی نتایج جست‌وجو انجام دهیم.<br>
-تعدادی از این اعمال از پیش تعریف‌شده‌اند و در کنار آن‌ها می‌توان <strong>اعمال دلخواه (User-defined)</strong> هم نوشت.<br>
-ابتدا نگاهی به چند عمل پرکاربرد بیندازیم:</p>
-<hr>
-<h3>📘 جدول ۱۷-۶: اعمال از پیش تعریف‌شده در find</h3>
-<table>
-<thead>
-<tr>
-<th>عمل (Action)</th>
-<th>توضیح</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>-delete</strong></td>
-<td>فایل یا دایرکتوری‌ای که با معیارها مطابقت دارد را <strong>حذف می‌کند</strong>.</td>
-</tr>
-<tr>
-<td><strong>-ls</strong></td>
-<td>معادل اجرای دستور <code>ls -dils</code> برای هر فایل مطابقت‌یافته است؛ خروجی در ترمینال چاپ می‌شود.</td>
-</tr>
-<tr>
-<td><strong>-print</strong></td>
-<td>مسیر کامل فایل مطابقت‌یافته را روی خروجی استاندارد (stdout) چاپ می‌کند. <br> این عمل <strong>به‌صورت پیش‌فرض</strong> اجرا می‌شود اگر هیچ عمل دیگری مشخص نشده باشد.</td>
-</tr>
-<tr>
-<td><strong>-quit</strong></td>
-<td>بلافاصله پس از یافتن اولین نتیجه، جست‌وجو را <strong>متوقف می‌کند</strong>.</td>
-</tr>
-</tbody>
-</table>
-<p>همانند تست‌ها، اعمال دیگری نیز وجود دارند؛ برای فهرست کامل باید صفحه‌ی راهنما را بخوانید:</p>
-<pre class="hljs"><code>man find
-</code></pre>
-<hr>
-<p>در اولین مثال این فصل، فقط نوشتیم:</p>
-<pre class="hljs"><code>find ~
-</code></pre>
-<p>این دستور فهرستی از تمام فایل‌ها و زیرپوشه‌های داخل پوشه‌ی خانگی ما تولید کرد.<br>
-علت آن این است که اگر هیچ عملی مشخص نشود، <strong>عمل <code>-print</code> به‌طور ضمنی اجرا می‌شود.</strong><br>
-بنابراین دستور بالا معادل است با:</p>
-<pre class="hljs"><code>find ~ -<span class="hljs-built_in">print</span>
-</code></pre>
-<hr>
-<h3>حذف فایل‌ها با find</h3>
-<p>می‌توانیم find را طوری تنظیم کنیم که فایل‌هایی را <strong>حذف</strong> کند که معیار خاصی دارند.<br>
-برای مثال، حذف تمام فایل‌هایی که پسوند <code>.BAK</code> دارند (که معمولاً برای نسخه‌های پشتیبان استفاده می‌شود):</p>
-<pre class="hljs"><code>find ~ -<span class="hljs-built_in">type</span> f -name <span class="hljs-string">&#x27;*.BAK&#x27;</span> -delete
-</code></pre>
-<p>این دستور تمام فایل‌های با پسوند <code>.BAK</code> را در پوشه‌ی خانگی و زیرپوشه‌هایش جست‌وجو کرده و در صورت یافتن، حذف می‌کند.</p>
-<blockquote>
-<p>⚠️ <strong>هشدار بسیار مهم:</strong><br>
-همیشه پیش از اجرای دستور <code>-delete</code>، ابتدا همان دستور را با <code>-print</code> امتحان کنید تا مطمئن شوید فقط فایل‌های موردنظر انتخاب می‌شوند:</p>
-<pre class="hljs"><code>find ~ -<span class="hljs-built_in">type</span> f -name <span class="hljs-string">&#x27;*.BAK&#x27;</span> -<span class="hljs-built_in">print</span>
-</code></pre>
-<p>وقتی خروجی را بررسی و تأیید کردید، سپس <code>-print</code> را با <code>-delete</code> جایگزین کنید.</p>
-</blockquote>
-<hr>
-<h3>تأثیر عملگرهای منطقی بر اجرای اعمال</h3>
-<p>به دستور زیر نگاه کنید:</p>
-<pre class="hljs"><code>find ~ -<span class="hljs-built_in">type</span> f -name <span class="hljs-string">&#x27;*.BAK&#x27;</span> -<span class="hljs-built_in">print</span>
-</code></pre>
-<p>این دستور تمام فایل‌های معمولی (<code>-type f</code>) با نامی که به <code>.BAK</code> ختم می‌شود (<code>-name '*.BAK'</code>) را یافته و مسیرشان را چاپ می‌کند (<code>-print</code>).</p>
-<p>اما دلیل اینکه این دستور دقیقاً به این شکل کار می‌کند، به <strong>روابط منطقی بین تست‌ها و اعمال</strong> برمی‌گردد.<br>
-به‌صورت پیش‌فرض، بین هر تست و عمل در find یک رابطه‌ی <strong><code>-and</code> ضمنی</strong> وجود دارد.</p>
-<p>می‌توانیم دستور بالا را به شکل واضح‌تر بنویسیم:</p>
-<pre class="hljs"><code>find ~ -<span class="hljs-built_in">type</span> f -and -name <span class="hljs-string">&#x27;*.BAK&#x27;</span> -and -<span class="hljs-built_in">print</span>
-</code></pre>
-<hr>
-<h3>نحوهٔ اجرای گام‌به‌گام دستور بالا</h3>
-<table>
-<thead>
-<tr>
-<th>تست / عمل</th>
-<th>چه زمانی اجرا می‌شود</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>-type f</strong></td>
-<td>همیشه اجرا می‌شود (اولین تست در زنجیره‌ی <code>-and</code>)</td>
-</tr>
-<tr>
-<td><strong>-name '*.BAK'</strong></td>
-<td>فقط اگر نتیجه‌ی <code>-type f</code> درست باشد</td>
-</tr>
-<tr>
-<td><strong>-print</strong></td>
-<td>فقط اگر هر دو تست قبلی (<code>-type f</code> و <code>-name '*.BAK'</code>) درست باشند</td>
-</tr>
-</tbody>
-</table>
-<p>به همین دلیل <strong>ترتیب تست‌ها و اعمال اهمیت دارد</strong>،<br>
-چون هر مرحله فقط در صورتی اجرا می‌شود که شرط‌های قبل از آن نتیجه‌ی صحیح داشته باشند.</p>
-<hr>
-<p>اگر ترتیب را تغییر دهیم و عمل <code>-print</code> را اول بنویسیم، رفتار دستور کاملاً متفاوت می‌شود:</p>
-<pre class="hljs"><code>find ~ -<span class="hljs-built_in">print</span> -and -<span class="hljs-built_in">type</span> f -and -name <span class="hljs-string">&#x27;*.BAK&#x27;</span>
-</code></pre>
-<p>در این حالت:</p>
-<ul>
-<li>ابتدا <strong>همهٔ فایل‌ها چاپ می‌شوند</strong> (چون <code>-print</code> همیشه مقدار true برمی‌گرداند)،</li>
-<li>سپس برای هر فایل چاپ‌شده، تست نوع و نام انجام می‌شود — اما دیگر محدودیتی در خروجی نداریم.</li>
-</ul>
-<p>نتیجه: این نسخه <strong>همهٔ فایل‌ها را چاپ می‌کند، نه فقط فایل‌های با پسوند .BAK</strong>.</p>
-<hr>
-<p>🔹 <strong>جمع‌بندی:</strong><br>
-رفتار نهایی دستور find وابسته به ترتیب تست‌ها و اعمال و روابط منطقی بین آن‌هاست.<br>
-با درک این منطق می‌توانیم دستورات پیچیده و دقیق بنویسیم — مثلاً حذف مشروط، جست‌وجوی چندمعیاره، یا پردازش گروهی فایل‌ها.</p>
-<hr>
-<h3>اعمال کاربر‌ساز (User-Defined Actions)</h3>
-<p>علاوه بر اعمال از پیش تعریف‌شده، می‌توانیم <strong>هر دستور دلخواهی</strong> را هم روی فایل‌های پیدا‌شده اجرا کنیم.<br>
-روش سنتی این کار استفاده از عمل <strong><code>-exec</code></strong> است.</p>
-<hr>
-<h3>📘 ساختار دستور <code>-exec</code></h3>
-<pre class="hljs"><code>-exec command {} ;
-</code></pre>
-<ul>
-<li><strong>command</strong> → دستور مورد نظر شما</li>
-<li><strong>{}</strong> → نمادی است که در هر بار اجرا با <strong>مسیر فایل فعلی</strong> جایگزین می‌شود</li>
-<li><strong>;</strong> → پایان دستور است و <strong>وجود آن اجباری است</strong></li>
-</ul>
-<p>مثلاً برای اجرای عملی مشابه <code>-delete</code> با استفاده از <code>rm</code> می‌نویسیم:</p>
-<pre class="hljs"><code>-<span class="hljs-built_in">exec</span> <span class="hljs-built_in">rm</span> <span class="hljs-string">&#x27;{}&#x27;</span> <span class="hljs-string">&#x27;;&#x27;</span>
-</code></pre>
-<blockquote>
-<p>چون آکولاد <code>{}</code> و نقطه‌ویرگول <code>;</code> در پوسته معناهای خاصی دارند،<br>
-باید آن‌ها را <strong>در کوتیشن</strong> قرار دهید یا با <strong>بک‌اسلش (<code>\</code>)</strong> از تفسیرشان جلوگیری کنید.</p>
-</blockquote>
-<hr>
-<h3>اجرای تعاملی (با تأیید کاربر)</h3>
-<p>می‌توانیم با استفاده از <strong><code>-ok</code></strong> به جای <code>-exec</code>، اجرای دستور را به‌صورت تعاملی انجام دهیم.<br>
-در این حالت، برای هر فایل قبل از اجرا از کاربر <strong>تأیید</strong> گرفته می‌شود:</p>
-<pre class="hljs"><code>find ~ -<span class="hljs-built_in">type</span> f -name <span class="hljs-string">&#x27;foo*&#x27;</span> -ok <span class="hljs-built_in">ls</span> -l <span class="hljs-string">&#x27;{}&#x27;</span> <span class="hljs-string">&#x27;;&#x27;</span>
-</code></pre>
-<p>نمونهٔ خروجی:</p>
-<pre class="hljs"><code>&lt; ls ... /home/me/bin/foo &gt; ? y
+</code></pre> <p>و چون <code>-and</code> به‌صورت پیش‌فرض وجود دارد، می‌توانیم آن را حذف کنیم.</p><p>اگر همه را با هم ترکیب کنیم، دستور نهایی چنین است:</p><pre class="hljs"><code>find ~ \( -<span class="hljs-built_in">type</span> f -not -perm 0600 \) -or \( -<span class="hljs-built_in">type</span> d -not -perm 0700 \)
+</code></pre> <p>و همان‌طور که گفته شد، پرانتزها باید با <strong>بک‌اسلش (<code>\</code>)</strong> محافظت شوند تا پوسته آن‌ها را تفسیر نکند.</p><hr> <h3>منطق اجرای عملگرها</h3><p>فرض کنید دو عبارت داریم که با یک عملگر منطقی از هم جدا شده‌اند:</p><pre class="hljs"><code>expr1 -operator expr2
+</code></pre> <p>در همهٔ حالت‌ها، عبارت <strong>expr1</strong> همیشه اجرا می‌شود،<br> اما اجرای <strong>expr2</strong> بستگی به نتیجهٔ expr1 و نوع عملگر دارد.</p><h4>جدول ۱۷-۵: منطق AND/OR در find</h4><table> <thead><tr> <th>نتیجهٔ expr1</th><th>عملگر</th><th>وضعیت اجرای expr2</th></tr> </thead><tbody> <tr><td>True</td><td><strong>-and</strong></td><td>همیشه اجرا می‌شود</td></tr> <tr><td>False</td><td><strong>-and</strong></td><td>اجرا <strong>نمی‌شود</strong></td></tr> <tr><td>True</td><td><strong>-or</strong></td><td>اجرا <strong>نمی‌شود</strong></td></tr> <tr><td>False</td><td><strong>-or</strong></td><td>همیشه اجرا می‌شود</td></tr> </tbody></table> <hr><h3>چرا این رفتار مهم است؟</h3><p>هدف از این منطق، <strong>بهینه‌سازی عملکرد</strong> است.<br> مثلاً در عبارت:</p><pre class="hljs"><code>expr1 -and expr2
+</code></pre> <p>اگر <code>expr1</code> نتیجه‌ای <strong>نادرست (false)</strong> بدهد، دیگر نیازی نیست <code>expr2</code> بررسی شود، چون نتیجهٔ کلی در هر صورت نادرست خواهد بود.</p><p>به‌طور مشابه، در عبارت:</p><pre class="hljs"><code>expr1 -or expr2
+</code></pre> <p>اگر <code>expr1</code> درست باشد، دیگر نیازی به اجرای <code>expr2</code> نیست، چون نتیجهٔ کلی حتماً درست است.</p><p>این رفتار علاوه بر افزایش سرعت، در <strong>کنترل ترتیب اجرای اعمال (actions)</strong> نیز نقش دارد —<br> که در ادامهٔ فصل هنگام بررسی عملگرهای عملیاتی (<code>-exec</code>, <code>-delete</code>, و غیره) اهمیت آن را خواهیم دید.</p><hr> <h3>اعمال از پیش تعریف‌شده (Predefined Actions)</h3><p>تا اینجا یاد گرفتیم که دستور <strong>find</strong> می‌تواند فهرستی از فایل‌ها را بر اساس معیارهای مختلف نمایش دهد.<br> اما واقعاً هدف نهایی فقط دیدن فهرست نیست — بلکه <strong>انجام کاری روی آن فایل‌هاست</strong>.</p><p>خوشبختانه find اجازه می‌دهد <strong>اعمال (Actions)</strong> خاصی را روی نتایج جست‌وجو انجام دهیم.<br> تعدادی از این اعمال از پیش تعریف‌شده‌اند و در کنار آن‌ها می‌توان <strong>اعمال دلخواه (User-defined)</strong> هم نوشت.<br> ابتدا نگاهی به چند عمل پرکاربرد بیندازیم:</p><hr> <h3>جدول ۱۷-۶: اعمال از پیش تعریف‌شده در find</h3><table> <thead><tr> <th>عمل (Action)</th><th>توضیح</th></tr> </thead><tbody> <tr><td><strong>-delete</strong></td><td>فایل یا دایرکتوری‌ای که با معیارها مطابقت دارد را <strong>حذف می‌کند</strong>.</td></tr> <tr><td><strong>-ls</strong></td><td>معادل اجرای دستور <code>ls -dils</code> برای هر فایل مطابقت‌یافته است؛ خروجی در ترمینال چاپ می‌شود.</td></tr> <tr><td><strong>-print</strong></td><td>مسیر کامل فایل مطابقت‌یافته را روی خروجی استاندارد (stdout) چاپ می‌کند. <br> این عمل <strong>به‌صورت پیش‌فرض</strong> اجرا می‌شود اگر هیچ عمل دیگری مشخص نشده باشد.</td></tr> <tr><td><strong>-quit</strong></td><td>بلافاصله پس از یافتن اولین نتیجه، جست‌وجو را <strong>متوقف می‌کند</strong>.</td></tr> </tbody></table> <p>همانند تست‌ها، اعمال دیگری نیز وجود دارند؛ برای فهرست کامل باید صفحه‌ی راهنما را بخوانید:</p><pre class="hljs"><code>man find
+</code></pre> <hr><p>در اولین مثال این فصل، فقط نوشتیم:</p><pre class="hljs"><code>find ~
+</code></pre> <p>این دستور فهرستی از تمام فایل‌ها و زیرپوشه‌های داخل پوشه‌ی خانگی ما تولید کرد.<br> علت آن این است که اگر هیچ عملی مشخص نشود، <strong>عمل <code>-print</code> به‌طور ضمنی اجرا می‌شود.</strong><br> بنابراین دستور بالا معادل است با:</p><pre class="hljs"><code>find ~ -<span class="hljs-built_in">print</span>
+</code></pre> <hr><h3>حذف فایل‌ها با find</h3><p>می‌توانیم find را طوری تنظیم کنیم که فایل‌هایی را <strong>حذف</strong> کند که معیار خاصی دارند.<br> برای مثال، حذف تمام فایل‌هایی که پسوند <code>.BAK</code> دارند (که معمولاً برای نسخه‌های پشتیبان استفاده می‌شود):</p><pre class="hljs"><code>find ~ -<span class="hljs-built_in">type</span> f -name <span class="hljs-string">&#x27;*.BAK&#x27;</span> -delete
+</code></pre> <p>این دستور تمام فایل‌های با پسوند <code>.BAK</code> را در پوشه‌ی خانگی و زیرپوشه‌هایش جست‌وجو کرده و در صورت یافتن، حذف می‌کند.</p><blockquote> <p><strong>هشدار بسیار مهم:</strong><br> همیشه پیش از اجرای دستور <code>-delete</code>، ابتدا همان دستور را با <code>-print</code> امتحان کنید تا مطمئن شوید فقط فایل‌های موردنظر انتخاب می‌شوند:</p><pre class="hljs"><code>find ~ -<span class="hljs-built_in">type</span> f -name <span class="hljs-string">&#x27;*.BAK&#x27;</span> -<span class="hljs-built_in">print</span>
+</code></pre> <p>وقتی خروجی را بررسی و تأیید کردید، سپس <code>-print</code> را با <code>-delete</code> جایگزین کنید.</p></blockquote> <hr><h3>تأثیر عملگرهای منطقی بر اجرای اعمال</h3><p>به دستور زیر نگاه کنید:</p><pre class="hljs"><code>find ~ -<span class="hljs-built_in">type</span> f -name <span class="hljs-string">&#x27;*.BAK&#x27;</span> -<span class="hljs-built_in">print</span>
+</code></pre> <p>این دستور تمام فایل‌های معمولی (<code>-type f</code>) با نامی که به <code>.BAK</code> ختم می‌شود (<code>-name '*.BAK'</code>) را یافته و مسیرشان را چاپ می‌کند (<code>-print</code>).</p><p>اما دلیل اینکه این دستور دقیقاً به این شکل کار می‌کند، به <strong>روابط منطقی بین تست‌ها و اعمال</strong> برمی‌گردد.<br> به‌صورت پیش‌فرض، بین هر تست و عمل در find یک رابطه‌ی <strong><code>-and</code> ضمنی</strong> وجود دارد.</p><p>می‌توانیم دستور بالا را به شکل واضح‌تر بنویسیم:</p><pre class="hljs"><code>find ~ -<span class="hljs-built_in">type</span> f -and -name <span class="hljs-string">&#x27;*.BAK&#x27;</span> -and -<span class="hljs-built_in">print</span>
+</code></pre> <hr><h3>نحوهٔ اجرای گام‌به‌گام دستور بالا</h3><table> <thead><tr> <th>تست / عمل</th><th>چه زمانی اجرا می‌شود</th></tr> </thead><tbody> <tr><td><strong>-type f</strong></td><td>همیشه اجرا می‌شود (اولین تست در زنجیره‌ی <code>-and</code>)</td></tr> <tr><td><strong>-name '*.BAK'</strong></td><td>فقط اگر نتیجه‌ی <code>-type f</code> درست باشد</td></tr> <tr><td><strong>-print</strong></td><td>فقط اگر هر دو تست قبلی (<code>-type f</code> و <code>-name '*.BAK'</code>) درست باشند</td></tr> </tbody></table> <p>به همین دلیل <strong>ترتیب تست‌ها و اعمال اهمیت دارد</strong>،<br> چون هر مرحله فقط در صورتی اجرا می‌شود که شرط‌های قبل از آن نتیجه‌ی صحیح داشته باشند.</p><hr> <p>اگر ترتیب را تغییر دهیم و عمل <code>-print</code> را اول بنویسیم، رفتار دستور کاملاً متفاوت می‌شود:</p><pre class="hljs"><code>find ~ -<span class="hljs-built_in">print</span> -and -<span class="hljs-built_in">type</span> f -and -name <span class="hljs-string">&#x27;*.BAK&#x27;</span>
+</code></pre> <p>در این حالت:</p><ul> <li>ابتدا <strong>همهٔ فایل‌ها چاپ می‌شوند</strong> (چون <code>-print</code> همیشه مقدار true برمی‌گرداند)،</li><li>سپس برای هر فایل چاپ‌شده، تست نوع و نام انجام می‌شود — اما دیگر محدودیتی در خروجی نداریم.</li></ul> <p>نتیجه: این نسخه <strong>همهٔ فایل‌ها را چاپ می‌کند، نه فقط فایل‌های با پسوند .BAK</strong>.</p><hr> <p><strong>جمع‌بندی:</strong><br> رفتار نهایی دستور find وابسته به ترتیب تست‌ها و اعمال و روابط منطقی بین آن‌هاست.<br> با درک این منطق می‌توانیم دستورات پیچیده و دقیق بنویسیم — مثلاً حذف مشروط، جست‌وجوی چندمعیاره، یا پردازش گروهی فایل‌ها.</p><hr> <h3>اعمال کاربر‌ساز (User-Defined Actions)</h3><p>علاوه بر اعمال از پیش تعریف‌شده، می‌توانیم <strong>هر دستور دلخواهی</strong> را هم روی فایل‌های پیدا‌شده اجرا کنیم.<br> روش سنتی این کار استفاده از عمل <strong><code>-exec</code></strong> است.</p><hr> <h3>ساختار دستور <code>-exec</code></h3><pre class="hljs"><code>-exec command {} ;
+</code></pre> <ul><li><strong>command</strong> → دستور مورد نظر شما</li><li><strong>{}</strong> → نمادی است که در هر بار اجرا با <strong>مسیر فایل فعلی</strong> جایگزین می‌شود</li><li><strong>;</strong> → پایان دستور است و <strong>وجود آن اجباری است</strong></li></ul> <p>مثلاً برای اجرای عملی مشابه <code>-delete</code> با استفاده از <code>rm</code> می‌نویسیم:</p><pre class="hljs"><code>-<span class="hljs-built_in">exec</span> <span class="hljs-built_in">rm</span> <span class="hljs-string">&#x27;{}&#x27;</span> <span class="hljs-string">&#x27;;&#x27;</span>
+</code></pre> <blockquote><p>چون آکولاد <code>{}</code> و نقطه‌ویرگول <code>;</code> در پوسته معناهای خاصی دارند،<br> باید آن‌ها را <strong>در کوتیشن</strong> قرار دهید یا با <strong>بک‌اسلش (<code>\</code>)</strong> از تفسیرشان جلوگیری کنید.</p></blockquote> <hr><h3>اجرای تعاملی (با تأیید کاربر)</h3><p>می‌توانیم با استفاده از <strong><code>-ok</code></strong> به جای <code>-exec</code>، اجرای دستور را به‌صورت تعاملی انجام دهیم.<br> در این حالت، برای هر فایل قبل از اجرا از کاربر <strong>تأیید</strong> گرفته می‌شود:</p><pre class="hljs"><code>find ~ -<span class="hljs-built_in">type</span> f -name <span class="hljs-string">&#x27;foo*&#x27;</span> -ok <span class="hljs-built_in">ls</span> -l <span class="hljs-string">&#x27;{}&#x27;</span> <span class="hljs-string">&#x27;;&#x27;</span>
+</code></pre> <p>نمونهٔ خروجی:</p><pre class="hljs"><code>&lt; ls ... /home/me/bin/foo &gt; ? y
 -rwxr-xr-x 1 me me 224 2007-10-29 18:44 /home/me/bin/foo
 &lt; ls ... /home/me/foo.txt &gt; ? y
 -rw-r--r-- 1 me me 0 2008-09-19 12:53 /home/me/foo.txt
-</code></pre>
-<p>در این مثال، find فایل‌هایی را که با «foo» شروع می‌شوند پیدا کرده<br>
-و قبل از اجرای دستور <code>ls -l</code> برای هر فایل، از ما تأیید می‌خواهد.</p>
-<hr>
-<h3>بهبود کارایی اجرای دستورات</h3>
-<p>به‌صورت پیش‌فرض، وقتی از <code>-exec</code> استفاده می‌کنیم،<br>
-find برای <strong>هر فایل تطبیق‌یافته یک‌بار دستور را اجرا می‌کند</strong>.<br>
-مثلاً اگر دو فایل پیدا شود، دو بار دستور <code>ls</code> اجرا می‌شود:</p>
-<pre class="hljs"><code>ls -l file1
+</code></pre> <p>در این مثال، find فایل‌هایی را که با «foo» شروع می‌شوند پیدا کرده<br> و قبل از اجرای دستور <code>ls -l</code> برای هر فایل، از ما تأیید می‌خواهد.</p><hr> <h3>بهبود کارایی اجرای دستورات</h3><p>به‌صورت پیش‌فرض، وقتی از <code>-exec</code> استفاده می‌کنیم،<br> find برای <strong>هر فایل تطبیق‌یافته یک‌بار دستور را اجرا می‌کند</strong>.<br> مثلاً اگر دو فایل پیدا شود، دو بار دستور <code>ls</code> اجرا می‌شود:</p><pre class="hljs"><code>ls -l file1
 ls -l file2
-</code></pre>
-<p>اما گاهی بهتر است تمام نتایج در یک دستور تجمیع شوند:</p>
-<pre class="hljs"><code>ls -l file1 file2
-</code></pre>
-<p>به این ترتیب فقط <strong>یک بار</strong> دستور اجرا می‌شود و کارایی بالاتر می‌رود.</p>
-<hr>
-<h3>🔸 روش اول: استفاده از قابلیت جدید find</h3>
-<p>برای این کار کافی است <strong>علامت پایانی <code>;</code> را با <code>+</code> جایگزین کنید</strong>.<br>
-در این صورت find همه‌ی مسیرها را در یک لیست واحد جمع کرده و<br>
-در یک اجرای واحد به دستور منتقل می‌کند.</p>
-<p>مثلاً:</p>
-<pre class="hljs"><code>find ~ -<span class="hljs-built_in">type</span> f -name <span class="hljs-string">&#x27;foo*&#x27;</span> -<span class="hljs-built_in">exec</span> <span class="hljs-built_in">ls</span> -l <span class="hljs-string">&#x27;{}&#x27;</span> <span class="hljs-string">&#x27;;&#x27;</span>
-</code></pre>
-<p>این نسخه <code>ls</code> را برای هر فایل جداگانه اجرا می‌کند.</p>
-<p>اما اگر بنویسیم:</p>
-<pre class="hljs"><code>find ~ -<span class="hljs-built_in">type</span> f -name <span class="hljs-string">&#x27;foo*&#x27;</span> -<span class="hljs-built_in">exec</span> <span class="hljs-built_in">ls</span> -l <span class="hljs-string">&#x27;{}&#x27;</span> +
-</code></pre>
-<p>خروجی همان است،<br>
-اما <strong>دستور <code>ls</code> فقط یک‌بار</strong> اجرا می‌شود و تمام فایل‌ها را با هم می‌گیرد.</p>
-<hr>
-<h3>🔸 روش دوم: استفاده از xargs</h3>
-<p>ابزار <strong>xargs</strong> ورودی را از <strong>stdin</strong> (مثل خروجی دستور قبل از خودش) می‌گیرد<br>
-و آن را به‌صورت <strong>فهرست آرگومان‌ها</strong> به دستور بعدی منتقل می‌کند.</p>
-<p>برای مثال:</p>
-<pre class="hljs"><code>find ~ -<span class="hljs-built_in">type</span> f -name <span class="hljs-string">&#x27;foo*&#x27;</span> -<span class="hljs-built_in">print</span> | xargs <span class="hljs-built_in">ls</span> -l
-</code></pre>
-<p>در اینجا خروجی find (لیست فایل‌ها) به xargs داده می‌شود،<br>
-و xargs آن‌ها را در قالب یک خط فرمان به دستور <code>ls</code> اضافه و اجرا می‌کند.</p>
-<p>خروجی مشابه است:</p>
-<pre class="hljs"><code>-rwxr-xr-x 1 me me 224 2007-10-29 18:44 /home/me/bin/foo
+</code></pre> <p>اما گاهی بهتر است تمام نتایج در یک دستور تجمیع شوند:</p><pre class="hljs"><code>ls -l file1 file2
+</code></pre> <p>به این ترتیب فقط <strong>یک بار</strong> دستور اجرا می‌شود و کارایی بالاتر می‌رود.</p><hr> <h3>روش اول: استفاده از قابلیت جدید find</h3><p>برای این کار کافی است <strong>علامت پایانی <code>;</code> را با <code>+</code> جایگزین کنید</strong>.<br> در این صورت find همه‌ی مسیرها را در یک لیست واحد جمع کرده و<br> در یک اجرای واحد به دستور منتقل می‌کند.</p><p>مثلاً:</p><pre class="hljs"><code>find ~ -<span class="hljs-built_in">type</span> f -name <span class="hljs-string">&#x27;foo*&#x27;</span> -<span class="hljs-built_in">exec</span> <span class="hljs-built_in">ls</span> -l <span class="hljs-string">&#x27;{}&#x27;</span> <span class="hljs-string">&#x27;;&#x27;</span>
+</code></pre> <p>این نسخه <code>ls</code> را برای هر فایل جداگانه اجرا می‌کند.</p><p>اما اگر بنویسیم:</p><pre class="hljs"><code>find ~ -<span class="hljs-built_in">type</span> f -name <span class="hljs-string">&#x27;foo*&#x27;</span> -<span class="hljs-built_in">exec</span> <span class="hljs-built_in">ls</span> -l <span class="hljs-string">&#x27;{}&#x27;</span> +
+</code></pre> <p>خروجی همان است،<br> اما <strong>دستور <code>ls</code> فقط یک‌بار</strong> اجرا می‌شود و تمام فایل‌ها را با هم می‌گیرد.</p><hr> <h3>روش دوم: استفاده از xargs</h3><p>ابزار <strong>xargs</strong> ورودی را از <strong>stdin</strong> (مثل خروجی دستور قبل از خودش) می‌گیرد<br> و آن را به‌صورت <strong>فهرست آرگومان‌ها</strong> به دستور بعدی منتقل می‌کند.</p><p>برای مثال:</p><pre class="hljs"><code>find ~ -<span class="hljs-built_in">type</span> f -name <span class="hljs-string">&#x27;foo*&#x27;</span> -<span class="hljs-built_in">print</span> | xargs <span class="hljs-built_in">ls</span> -l
+</code></pre> <p>در اینجا خروجی find (لیست فایل‌ها) به xargs داده می‌شود،<br> و xargs آن‌ها را در قالب یک خط فرمان به دستور <code>ls</code> اضافه و اجرا می‌کند.</p><p>خروجی مشابه است:</p><pre class="hljs"><code>-rwxr-xr-x 1 me me 224 2007-10-29 18:44 /home/me/bin/foo
 -rw-r--r-- 1 me me 0 2008-09-19 12:53 /home/me/foo.txt
-</code></pre>
-<hr>
-<h3>نکتهٔ فنی: محدودیت طول خط فرمان</h3>
-<p>هرچند سیستم‌عامل اجازه می‌دهد تعداد زیادی آرگومان در یک خط فرمان قرار گیرد،<br>
-ولی این مقدار <strong>بی‌نهایت نیست</strong>.<br>
-اگر تعداد آرگومان‌ها بیش از حد زیاد شود، xargs:</p>
-<ol>
-<li>دستور را با <strong>حداکثر تعداد مجاز آرگومان‌ها</strong> اجرا می‌کند،</li>
-<li>سپس این فرایند را تکرار می‌کند تا تمام ورودی‌ها پردازش شوند.</li>
-</ol>
-<p>برای دیدن حداکثر اندازهٔ مجاز خط فرمان در سیستم خودتان، می‌توانید بنویسید:</p>
-<pre class="hljs"><code>xargs --show-limits
-</code></pre>
-<hr>
-<p>✅ <strong>خلاصهٔ کاربردها:</strong></p>
-<ul>
-<li><code>-exec command '{}' ';'</code> → اجرای دستور برای هر فایل جداگانه</li>
-<li><code>-exec command '{}' +</code> → اجرای یک‌باره دستور برای تمام فایل‌ها</li>
-<li><code>-ok command '{}' ';'</code> → اجرای تعاملی با تأیید کاربر</li>
-<li><code>| xargs command</code> → ساخت آرگومان‌ها از ورودی و اجرای دستور تنها در صورت نیاز</li>
-</ul>
-<hr>
-<h3>کار با نام فایل‌های عجیب (Dealing With Funny Filenames)</h3>
-<p>در سیستم‌های شبه‌یونیکس، نام فایل‌ها می‌توانند شامل <strong>فاصله (space)</strong> یا حتی <strong>کاراکتر newline (خط جدید)</strong> باشند.<br>
-این موضوع می‌تواند برای ابزارهایی مثل <code>xargs</code> مشکل‌ساز شود؛<br>
-چون وقتی نام فایلی شامل فاصله باشد، <code>xargs</code> آن فاصله را <strong>به‌عنوان جداکننده‌ی آرگومان‌ها</strong> در نظر می‌گیرد،<br>
-و دستور نهایی هر بخش از نام را به‌صورت آرگومان جداگانه تفسیر می‌کند.</p>
-<p>برای رفع این مشکل، دستورهای <strong>find</strong> و <strong>xargs</strong> راهی ارائه داده‌اند:<br>
-می‌توان از <strong>کاراکتر null (NUL)</strong> به‌جای فاصله به‌عنوان جداکننده استفاده کرد.</p>
-<p>در جدول ASCII، کاراکتر null با <strong>عدد صفر (0)</strong> نمایش داده می‌شود،<br>
-در حالی که کاراکتر فاصله با عدد <strong>۳۲</strong> مشخص است.</p>
-<p>در دستور find، عمل <strong><code>-print0</code></strong> باعث می‌شود خروجی فایل‌ها با <strong>کاراکتر null جدا شود</strong>،<br>
-و در xargs، گزینه‌ی <strong><code>--null</code></strong> (یا <code>-0</code>) به آن می‌گوید که ورودی را با همین فرمت بخواند.</p>
-<p>نمونه:</p>
-<pre class="hljs"><code>find ~ -iname <span class="hljs-string">&#x27;*.jpg&#x27;</span> -print0 | xargs --null <span class="hljs-built_in">ls</span> -l
-</code></pre>
-<p>با استفاده از این روش، مطمئن می‌شویم که حتی فایل‌هایی با نام‌هایی شامل فاصله یا کاراکترهای غیرعادی نیز به‌درستی پردازش می‌شوند.</p>
-<hr>
-<h3>بازگشت به محیط تمرین (A Return To The Playground)</h3>
-<p>حالا وقت آن است که همه‌ی چیزهایی را که یاد گرفته‌ایم در عمل امتحان کنیم.<br>
-یک محیط آزمایشی می‌سازیم تا بتوانیم دستورات <code>find</code> را روی آن تست کنیم.</p>
-<p>ابتدا با دو دستور ساده، مجموعه‌ای از پوشه‌ها و فایل‌ها می‌سازیم:</p>
-<pre class="hljs"><code>[me@linuxbox ~]$ <span class="hljs-built_in">mkdir</span> -p playground/dir-{001..100}
+</code></pre> <hr><h3>نکتهٔ فنی: محدودیت طول خط فرمان</h3><p>هرچند سیستم‌عامل اجازه می‌دهد تعداد زیادی آرگومان در یک خط فرمان قرار گیرد،<br> ولی این مقدار <strong>بی‌نهایت نیست</strong>.<br> اگر تعداد آرگومان‌ها بیش از حد زیاد شود، xargs:</p><ol> <li>دستور را با <strong>حداکثر تعداد مجاز آرگومان‌ها</strong> اجرا می‌کند،</li><li>سپس این فرایند را تکرار می‌کند تا تمام ورودی‌ها پردازش شوند.</li></ol> <p>برای دیدن حداکثر اندازهٔ مجاز خط فرمان در سیستم خودتان، می‌توانید بنویسید:</p><pre class="hljs"><code>xargs --show-limits
+</code></pre> <hr><p><strong>خلاصهٔ کاربردها:</strong></p><ul> <li><code>-exec command '{}' ';'</code> → اجرای دستور برای هر فایل جداگانه</li><li><code>-exec command '{}' +</code> → اجرای یک‌باره دستور برای تمام فایل‌ها</li><li><code>-ok command '{}' ';'</code> → اجرای تعاملی با تأیید کاربر</li><li><code>| xargs command</code> → ساخت آرگومان‌ها از ورودی و اجرای دستور تنها در صورت نیاز</li></ul> <hr><h3>کار با نام فایل‌های عجیب (Dealing With Funny Filenames)</h3><p>در سیستم‌های شبه‌یونیکس، نام فایل‌ها می‌توانند شامل <strong>فاصله (space)</strong> یا حتی <strong>کاراکتر newline (خط جدید)</strong> باشند.<br> این موضوع می‌تواند برای ابزارهایی مثل <code>xargs</code> مشکل‌ساز شود؛<br> چون وقتی نام فایلی شامل فاصله باشد، <code>xargs</code> آن فاصله را <strong>به‌عنوان جداکننده‌ی آرگومان‌ها</strong> در نظر می‌گیرد،<br> و دستور نهایی هر بخش از نام را به‌صورت آرگومان جداگانه تفسیر می‌کند.</p><p>برای رفع این مشکل، دستورهای <strong>find</strong> و <strong>xargs</strong> راهی ارائه داده‌اند:<br> می‌توان از <strong>کاراکتر null (NUL)</strong> به‌جای فاصله به‌عنوان جداکننده استفاده کرد.</p><p>در جدول ASCII، کاراکتر null با <strong>عدد صفر (0)</strong> نمایش داده می‌شود،<br> در حالی که کاراکتر فاصله با عدد <strong>۳۲</strong> مشخص است.</p><p>در دستور find، عمل <strong><code>-print0</code></strong> باعث می‌شود خروجی فایل‌ها با <strong>کاراکتر null جدا شود</strong>،<br> و در xargs، گزینه‌ی <strong><code>--null</code></strong> (یا <code>-0</code>) به آن می‌گوید که ورودی را با همین فرمت بخواند.</p><p>نمونه:</p><pre class="hljs"><code>find ~ -iname <span class="hljs-string">&#x27;*.jpg&#x27;</span> -print0 | xargs --null <span class="hljs-built_in">ls</span> -l
+</code></pre> <p>با استفاده از این روش، مطمئن می‌شویم که حتی فایل‌هایی با نام‌هایی شامل فاصله یا کاراکترهای غیرعادی نیز به‌درستی پردازش می‌شوند.</p><hr> <h3>بازگشت به محیط تمرین (A Return To The Playground)</h3><p>حالا وقت آن است که همه‌ی چیزهایی را که یاد گرفته‌ایم در عمل امتحان کنیم.<br> یک محیط آزمایشی می‌سازیم تا بتوانیم دستورات <code>find</code> را روی آن تست کنیم.</p><p>ابتدا با دو دستور ساده، مجموعه‌ای از پوشه‌ها و فایل‌ها می‌سازیم:</p><pre class="hljs"><code>[me@linuxbox ~]$ <span class="hljs-built_in">mkdir</span> -p playground/dir-{001..100}
 [me@linuxbox ~]$ <span class="hljs-built_in">touch</span> playground/dir-{001..100}/file-{A..Z}
-</code></pre>
-<p>در عرض چند ثانیه، ۱۰۰ پوشه ساخته می‌شود که هرکدام شامل ۲۶ فایل خالی هستند!<br>
-این همان قدرت خط فرمان لینوکس است — سعی کنید همین کار را با رابط گرافیکی انجام دهید! 😄</p>
-<hr>
-<h3>توضیح ساختار</h3>
-<p>در اینجا از چند قابلیت پوسته استفاده کردیم:</p>
-<ul>
-<li><strong><code>mkdir -p</code></strong> → مسیرهای تودرتو را در صورت لزوم می‌سازد.</li>
-<li><strong>گسترش آکلادی (Brace Expansion)</strong> → <code>{001..100}</code> و <code>{A..Z}</code> باعث تولید بازه‌ای از مقادیر می‌شود.</li>
-<li><strong><code>touch</code></strong> → زمان آخرین دسترسی و تغییر فایل را تنظیم می‌کند. اگر فایلی وجود نداشته باشد، <strong>یک فایل خالی</strong> ایجاد می‌کند.</li>
-</ul>
-<hr>
-<h3>جست‌وجو در Playground</h3>
-<p>در محیط تمرین خود ۱۰۰ فایل به نام <code>file-A</code> ساخته‌ایم.<br>
-بیایید همه‌ی آن‌ها را پیدا کنیم:</p>
-<pre class="hljs"><code>[me@linuxbox ~]$ find playground -<span class="hljs-built_in">type</span> f -name <span class="hljs-string">&#x27;file-A&#x27;</span>
-</code></pre>
-<p>برخلاف <code>ls</code>، دستور find فایل‌ها را <strong>به ترتیب مرتب‌شده نمایش نمی‌دهد</strong>،<br>
-بلکه بر اساس <strong>چیدمان فیزیکی فایل‌ها در دیسک</strong> لیست را برمی‌گرداند.</p>
-<p>می‌توانیم مطمئن شویم که واقعاً ۱۰۰ فایل پیدا شده‌اند:</p>
-<pre class="hljs"><code>[me@linuxbox ~]$ find playground -<span class="hljs-built_in">type</span> f -name <span class="hljs-string">&#x27;file-A&#x27;</span> | <span class="hljs-built_in">wc</span> -l
+</code></pre> <p>در عرض چند ثانیه، ۱۰۰ پوشه ساخته می‌شود که هرکدام شامل ۲۶ فایل خالی هستند!<br> این همان قدرت خط فرمان لینوکس است — سعی کنید همین کار را با رابط گرافیکی انجام دهید!</p><hr> <h3>توضیح ساختار</h3><p>در اینجا از چند قابلیت پوسته استفاده کردیم:</p><ul> <li><strong><code>mkdir -p</code></strong> → مسیرهای تودرتو را در صورت لزوم می‌سازد.</li><li><strong>گسترش آکلادی (Brace Expansion)</strong> → <code>{001..100}</code> و <code>{A..Z}</code> باعث تولید بازه‌ای از مقادیر می‌شود.</li><li><strong><code>touch</code></strong> → زمان آخرین دسترسی و تغییر فایل را تنظیم می‌کند. اگر فایلی وجود نداشته باشد، <strong>یک فایل خالی</strong> ایجاد می‌کند.</li></ul> <hr><h3>جست‌وجو در Playground</h3><p>در محیط تمرین خود ۱۰۰ فایل به نام <code>file-A</code> ساخته‌ایم.<br> بیایید همه‌ی آن‌ها را پیدا کنیم:</p><pre class="hljs"><code>[me@linuxbox ~]$ find playground -<span class="hljs-built_in">type</span> f -name <span class="hljs-string">&#x27;file-A&#x27;</span>
+</code></pre> <p>برخلاف <code>ls</code>، دستور find فایل‌ها را <strong>به ترتیب مرتب‌شده نمایش نمی‌دهد</strong>،<br> بلکه بر اساس <strong>چیدمان فیزیکی فایل‌ها در دیسک</strong> لیست را برمی‌گرداند.</p><p>می‌توانیم مطمئن شویم که واقعاً ۱۰۰ فایل پیدا شده‌اند:</p><pre class="hljs"><code>[me@linuxbox ~]$ find playground -<span class="hljs-built_in">type</span> f -name <span class="hljs-string">&#x27;file-A&#x27;</span> | <span class="hljs-built_in">wc</span> -l
 100
-</code></pre>
-<hr>
-<h3>جست‌وجوی فایل‌ها بر اساس زمان تغییر (Modification Time)</h3>
-<p>این ویژگی هنگام <strong>پشتیبان‌گیری (backup)</strong> یا <strong>مرتب‌سازی زمانی فایل‌ها</strong> بسیار مفید است.<br>
-ابتدا یک فایل مرجع می‌سازیم که زمان فعلی را ذخیره کند:</p>
-<pre class="hljs"><code>[me@linuxbox ~]$ <span class="hljs-built_in">touch</span> playground/timestamp
-</code></pre>
-<p>این دستور یک فایل خالی با نام <code>timestamp</code> می‌سازد و زمان آخرین تغییر آن را <strong>به زمان فعلی سیستم</strong> تنظیم می‌کند.</p>
-<p>برای مشاهده‌ی جزئیات کامل این فایل از دستور <strong><code>stat</code></strong> استفاده می‌کنیم —<br>
-دستوری قدرتمندتر از <code>ls</code> که همه‌ی ویژگی‌های فایل را نمایش می‌دهد:</p>
-<pre class="hljs"><code>[me@linuxbox ~]$ <span class="hljs-built_in">stat</span> playground/timestamp
-</code></pre>
-<p>نمونه‌ی خروجی:</p>
-<pre class="hljs"><code>File: `playground/timestamp'
+</code></pre> <hr><h3>جست‌وجوی فایل‌ها بر اساس زمان تغییر (Modification Time)</h3><p>این ویژگی هنگام <strong>پشتیبان‌گیری (backup)</strong> یا <strong>مرتب‌سازی زمانی فایل‌ها</strong> بسیار مفید است.<br> ابتدا یک فایل مرجع می‌سازیم که زمان فعلی را ذخیره کند:</p><pre class="hljs"><code>[me@linuxbox ~]$ <span class="hljs-built_in">touch</span> playground/timestamp
+</code></pre> <p>این دستور یک فایل خالی با نام <code>timestamp</code> می‌سازد و زمان آخرین تغییر آن را <strong>به زمان فعلی سیستم</strong> تنظیم می‌کند.</p><p>برای مشاهده‌ی جزئیات کامل این فایل از دستور <strong><code>stat</code></strong> استفاده می‌کنیم —<br> دستوری قدرتمندتر از <code>ls</code> که همه‌ی ویژگی‌های فایل را نمایش می‌دهد:</p><pre class="hljs"><code>[me@linuxbox ~]$ <span class="hljs-built_in">stat</span> playground/timestamp
+</code></pre> <p>نمونه‌ی خروجی:</p><pre class="hljs"><code>File: `playground/timestamp'
 Size: 0          Blocks: 0       IO Block: 4096 regular empty file
 Device: 803h/2051d Inode: 14265061 Links: 1
 Access: (0644/-rw-r--r--)  Uid: (1001/me)  Gid: (1001/me)
 Access: 2008-10-08 15:15:39.000000000 -0400
 Modify: 2008-10-08 15:15:39.000000000 -0400
 Change: 2008-10-08 15:15:39.000000000 -0400
-</code></pre>
-<p>اگر دستور <code>touch</code> را دوباره اجرا کنیم، می‌بینیم که زمان‌ها به‌روزرسانی می‌شوند:</p>
-<pre class="hljs"><code>[me@linuxbox ~]$ <span class="hljs-built_in">touch</span> playground/timestamp
+</code></pre> <p>اگر دستور <code>touch</code> را دوباره اجرا کنیم، می‌بینیم که زمان‌ها به‌روزرسانی می‌شوند:</p><pre class="hljs"><code>[me@linuxbox ~]$ <span class="hljs-built_in">touch</span> playground/timestamp
 [me@linuxbox ~]$ <span class="hljs-built_in">stat</span> playground/timestamp
-</code></pre>
-<hr>
-<h3>به‌روزرسانی فایل‌ها با find</h3>
-<p>حالا می‌خواهیم همه‌ی فایل‌های <code>file-B</code> را در Playground به‌روزرسانی کنیم (یعنی زمان تغییرشان را به زمان فعلی ببریم):</p>
-<pre class="hljs"><code>[me@linuxbox ~]$ find playground -<span class="hljs-built_in">type</span> f -name <span class="hljs-string">&#x27;file-B&#x27;</span> -<span class="hljs-built_in">exec</span> <span class="hljs-built_in">touch</span> <span class="hljs-string">&#x27;{}&#x27;</span> <span class="hljs-string">&#x27;;&#x27;</span>
-</code></pre>
-<p>این دستور همه‌ی فایل‌های <code>file-B</code> را پیدا کرده و با دستور <code>touch</code> به‌روزرسانی می‌کند.</p>
-<p>حالا برای پیدا کردن فایل‌هایی که <strong>جدیدتر از فایل مرجع timestamp</strong> هستند:</p>
-<pre class="hljs"><code>[me@linuxbox ~]$ find playground -<span class="hljs-built_in">type</span> f -newer playground/timestamp
-</code></pre>
-<p>نتیجه شامل تمام ۱۰۰ فایل <code>file-B</code> خواهد بود،<br>
-چون همه‌ی آن‌ها <strong>بعد از ساخت timestamp</strong> به‌روزرسانی شدند،<br>
-و بنابراین طبق تست <code>-newer</code>، جدیدتر از آن فایل محسوب می‌شوند.</p>
-<hr>
-<h3>آزمایش دوباره‌ی مجوزهای اشتباه</h3>
-<p>در پایان، همان تستی که قبلاً برای مجوزهای نادرست (bad permissions) داشتیم را روی محیط Playground اجرا می‌کنیم:</p>
-<pre class="hljs"><code>[me@linuxbox ~]$ find playground \( -<span class="hljs-built_in">type</span> f -not -perm 0600 \) -or \( -<span class="hljs-built_in">type</span> d -not -perm 0700 \)
-</code></pre>
-<p>این دستور همه‌ی فایل‌ها و پوشه‌هایی را پیدا می‌کند که مجوزشان با حالت ایمن مورد نظر (۰۶۰۰ برای فایل‌ها، ۰۷۰۰ برای دایرکتوری‌ها) مطابقت ندارد.</p>
-<p>🔹 به این ترتیب، با همین چند دستور یاد گرفتیم چطور <code>find</code> را به‌صورت حرفه‌ای برای مدیریت، بررسی، و پردازش فایل‌ها در سیستم لینوکس به‌کار بگیریم.</p>
-<h3>ادامهٔ آزمایش در Playground</h3>
-<p>وقتی دستور زیر را اجرا می‌کنیم:</p>
-<pre class="hljs"><code>find playground \( -<span class="hljs-built_in">type</span> f -not -perm 0600 \) -or \( -<span class="hljs-built_in">type</span> d -not -perm 0700 \)
-</code></pre>
-<p>خروجی شامل تمام <strong>۱۰۰ دایرکتوری و ۲۶۰۰ فایل</strong> در مسیر <code>playground</code> می‌شود<br>
-(به‌علاوهٔ خود پوشهٔ <code>playground</code> و فایل <code>timestamp</code>، یعنی جمعاً <strong>۲۷۰۲ مورد</strong>)<br>
-چون هیچ‌کدام از آن‌ها مطابق تعریف ما از «مجوز ایمن» نیستند.</p>
-<hr>
-<h3>اعمال مجوزهای جدید با استفاده از find</h3>
-<p>با استفاده از <strong>عملگرها (operators)</strong> و <strong>اعمال (actions)</strong> حالا می‌توانیم دستور را طوری تغییر دهیم که مجوز فایل‌ها و پوشه‌ها را اصلاح کند:</p>
-<pre class="hljs"><code>[me@linuxbox ~]$ find playground \( -<span class="hljs-built_in">type</span> f -not -perm 0600 -<span class="hljs-built_in">exec</span> <span class="hljs-built_in">chmod</span> 0600 <span class="hljs-string">&#x27;{}&#x27;</span> <span class="hljs-string">&#x27;;&#x27;</span> \) -or \( -<span class="hljs-built_in">type</span> d -not -perm 0700 -<span class="hljs-built_in">exec</span> <span class="hljs-built_in">chmod</span> 0700 <span class="hljs-string">&#x27;{}&#x27;</span> <span class="hljs-string">&#x27;;&#x27;</span> \)
-</code></pre>
-<p>در این دستور:</p>
-<ul>
-<li>فایل‌هایی که مجوزشان متفاوت از <code>0600</code> است، با <code>chmod 0600</code> اصلاح می‌شوند.</li>
-<li>دایرکتوری‌هایی که مجوزشان متفاوت از <code>0700</code> است، با <code>chmod 0700</code> تنظیم می‌شوند.</li>
-</ul>
-<p>در کارهای روزمره، معمولاً اجرای دو دستور جداگانه (یکی برای فایل‌ها و یکی برای پوشه‌ها) ساده‌تر است، مثل این:</p>
-<pre class="hljs"><code>find playground -<span class="hljs-built_in">type</span> f -not -perm 0600 -<span class="hljs-built_in">exec</span> <span class="hljs-built_in">chmod</span> 0600 <span class="hljs-string">&#x27;{}&#x27;</span> <span class="hljs-string">&#x27;;&#x27;</span>
+</code></pre> <hr><h3>به‌روزرسانی فایل‌ها با find</h3><p>حالا می‌خواهیم همه‌ی فایل‌های <code>file-B</code> را در Playground به‌روزرسانی کنیم (یعنی زمان تغییرشان را به زمان فعلی ببریم):</p><pre class="hljs"><code>[me@linuxbox ~]$ find playground -<span class="hljs-built_in">type</span> f -name <span class="hljs-string">&#x27;file-B&#x27;</span> -<span class="hljs-built_in">exec</span> <span class="hljs-built_in">touch</span> <span class="hljs-string">&#x27;{}&#x27;</span> <span class="hljs-string">&#x27;;&#x27;</span>
+</code></pre> <p>این دستور همه‌ی فایل‌های <code>file-B</code> را پیدا کرده و با دستور <code>touch</code> به‌روزرسانی می‌کند.</p><p>حالا برای پیدا کردن فایل‌هایی که <strong>جدیدتر از فایل مرجع timestamp</strong> هستند:</p><pre class="hljs"><code>[me@linuxbox ~]$ find playground -<span class="hljs-built_in">type</span> f -newer playground/timestamp
+</code></pre> <p>نتیجه شامل تمام ۱۰۰ فایل <code>file-B</code> خواهد بود،<br> چون همه‌ی آن‌ها <strong>بعد از ساخت timestamp</strong> به‌روزرسانی شدند،<br> و بنابراین طبق تست <code>-newer</code>، جدیدتر از آن فایل محسوب می‌شوند.</p><hr> <h3>آزمایش دوباره‌ی مجوزهای اشتباه</h3><p>در پایان، همان تستی که قبلاً برای مجوزهای نادرست (bad permissions) داشتیم را روی محیط Playground اجرا می‌کنیم:</p><pre class="hljs"><code>[me@linuxbox ~]$ find playground \( -<span class="hljs-built_in">type</span> f -not -perm 0600 \) -or \( -<span class="hljs-built_in">type</span> d -not -perm 0700 \)
+</code></pre> <p>این دستور همه‌ی فایل‌ها و پوشه‌هایی را پیدا می‌کند که مجوزشان با حالت ایمن مورد نظر (۰۶۰۰ برای فایل‌ها، ۰۷۰۰ برای دایرکتوری‌ها) مطابقت ندارد.</p><p>به این ترتیب، با همین چند دستور یاد گرفتیم چطور <code>find</code> را به‌صورت حرفه‌ای برای مدیریت، بررسی، و پردازش فایل‌ها در سیستم لینوکس به‌کار بگیریم.</p><h3>ادامهٔ آزمایش در Playground</h3><p>وقتی دستور زیر را اجرا می‌کنیم:</p><pre class="hljs"><code>find playground \( -<span class="hljs-built_in">type</span> f -not -perm 0600 \) -or \( -<span class="hljs-built_in">type</span> d -not -perm 0700 \)
+</code></pre> <p>خروجی شامل تمام <strong>۱۰۰ دایرکتوری و ۲۶۰۰ فایل</strong> در مسیر <code>playground</code> می‌شود<br> (به‌علاوهٔ خود پوشهٔ <code>playground</code> و فایل <code>timestamp</code>، یعنی جمعاً <strong>۲۷۰۲ مورد</strong>)<br> چون هیچ‌کدام از آن‌ها مطابق تعریف ما از «مجوز ایمن» نیستند.</p><hr> <h3>اعمال مجوزهای جدید با استفاده از find</h3><p>با استفاده از <strong>عملگرها (operators)</strong> و <strong>اعمال (actions)</strong> حالا می‌توانیم دستور را طوری تغییر دهیم که مجوز فایل‌ها و پوشه‌ها را اصلاح کند:</p><pre class="hljs"><code>[me@linuxbox ~]$ find playground \( -<span class="hljs-built_in">type</span> f -not -perm 0600 -<span class="hljs-built_in">exec</span> <span class="hljs-built_in">chmod</span> 0600 <span class="hljs-string">&#x27;{}&#x27;</span> <span class="hljs-string">&#x27;;&#x27;</span> \) -or \( -<span class="hljs-built_in">type</span> d -not -perm 0700 -<span class="hljs-built_in">exec</span> <span class="hljs-built_in">chmod</span> 0700 <span class="hljs-string">&#x27;{}&#x27;</span> <span class="hljs-string">&#x27;;&#x27;</span> \)
+</code></pre> <p>در این دستور:</p><ul> <li>فایل‌هایی که مجوزشان متفاوت از <code>0600</code> است، با <code>chmod 0600</code> اصلاح می‌شوند.</li><li>دایرکتوری‌هایی که مجوزشان متفاوت از <code>0700</code> است، با <code>chmod 0700</code> تنظیم می‌شوند.</li></ul> <p>در کارهای روزمره، معمولاً اجرای دو دستور جداگانه (یکی برای فایل‌ها و یکی برای پوشه‌ها) ساده‌تر است، مثل این:</p><pre class="hljs"><code>find playground -<span class="hljs-built_in">type</span> f -not -perm 0600 -<span class="hljs-built_in">exec</span> <span class="hljs-built_in">chmod</span> 0600 <span class="hljs-string">&#x27;{}&#x27;</span> <span class="hljs-string">&#x27;;&#x27;</span>
 find playground -<span class="hljs-built_in">type</span> d -not -perm 0700 -<span class="hljs-built_in">exec</span> <span class="hljs-built_in">chmod</span> 0700 <span class="hljs-string">&#x27;{}&#x27;</span> <span class="hljs-string">&#x27;;&#x27;</span>
-</code></pre>
-<p>اما این مثال ترکیبی به‌خوبی نشان می‌دهد که چگونه می‌توانیم <strong>تست‌ها، عملگرها و اعمال را با هم ترکیب کنیم</strong> تا عملیات پیچیده و هدفمند انجام دهیم.</p>
-<hr>
-<h3>گزینه‌ها (Options)</h3>
-<p>گزینه‌ها در دستور find برای کنترل <strong>دامنهٔ جست‌وجو (scope)</strong> استفاده می‌شوند.<br>
-می‌توان آن‌ها را همراه با تست‌ها و اعمال در یک دستور ترکیب کرد تا رفتار find دقیق‌تر شود.</p>
-<p>در جدول زیر، متداول‌ترین گزینه‌ها آورده شده است:</p>
-<hr>
-<h4>📘 جدول ۱۷-۷: گزینه‌های پرکاربرد در find</h4>
-<table>
-<thead>
-<tr>
-<th>گزینه</th>
-<th>توضیح</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>-depth</strong></td>
-<td>باعث می‌شود find ابتدا محتوای هر دایرکتوری را بررسی کند و <strong>در انتها خود دایرکتوری</strong> را پردازش کند. <br> این گزینه <strong>به‌طور خودکار</strong> زمانی فعال می‌شود که از عمل <code>-delete</code> استفاده کنید.</td>
-</tr>
-<tr>
-<td><strong>-maxdepth <em>levels</em></strong></td>
-<td>بیشترین تعداد سطح‌هایی را که find در درخت دایرکتوری پایین می‌رود مشخص می‌کند. <br> مثلاً <code>-maxdepth 1</code> فقط دایرکتوری جاری را بررسی می‌کند و وارد زیرپوشه‌ها نمی‌شود.</td>
-</tr>
-<tr>
-<td><strong>-mindepth <em>levels</em></strong></td>
-<td>حداقل سطحی را مشخص می‌کند که از آن به بعد تست‌ها و اعمال اجرا شوند. <br> مثلاً <code>-mindepth 1</code> باعث می‌شود خود دایرکتوری اصلی بررسی نشود و فقط زیرپوشه‌ها پردازش شوند.</td>
-</tr>
-<tr>
-<td><strong>-mount</strong></td>
-<td>به find دستور می‌دهد که وارد دایرکتوری‌هایی که روی <strong>سیستم فایل‌های دیگر (mount points)</strong> قرار دارند، نشود.</td>
-</tr>
-<tr>
-<td><strong>-noleaf</strong></td>
-<td>به find می‌گوید که <strong>فرض بهینه‌سازی بر اساس ساختار فایل‌سیستم یونیکسی</strong> را نادیده بگیرد. <br> در زمان جست‌وجو در سیستم‌فایل‌های <strong>DOS/Windows</strong> یا <strong>CD-ROM</strong> باید از این گزینه استفاده شود.</td>
-</tr>
-</tbody>
-</table>
-<hr>
-<h3>جمع‌بندی</h3>
-<p>می‌توان گفت که دستور <strong>locate</strong> به همان اندازه ساده است که <strong>find</strong> پیچیده است!<br>
-هر دو ابزار مفیدند، اما کاربردشان متفاوت است.</p>
-<ul>
-<li><strong>locate</strong> برای <strong>جست‌وجوی سریع بر اساس نام فایل‌ها</strong> عالی است.</li>
-<li><strong>find</strong> برای <strong>جست‌وجوی دقیق بر اساس ویژگی‌ها، زمان‌ها، دسترسی‌ها و انجام اعمال خودکار</strong> بی‌رقیب است.</li>
-</ul>
-<p>اگر مرتب با فایل‌ها و ساختار سیستم لینوکس کار می‌کنید،<br>
-یادگیری و تمرین دستور find به‌مرور باعث می‌شود درک عمیق‌تری از رفتار فایل‌سیستم لینوکس پیدا کنید.</p>
-<hr>
-<h3>مطالعهٔ بیشتر</h3>
-<ul>
-<li>برنامه‌های <code>locate</code>, <code>updatedb</code>, <code>find</code>, و <code>xargs</code> همگی بخشی از بسته‌ی <strong>GNU findutils</strong> هستند.<br>
-برای مطالعهٔ مستندات رسمی و جامع این ابزارها (به‌ویژه در محیط‌های امنیتی حساس)، به سایت رسمی GNU مراجعه کنید:<br>
-🔗 <a href="https://www.gnu.org/software/findutils/">https://www.gnu.org/software/findutils/</a></li>
-</ul>
-
-  </main>
-
-  <!-- فوتر مشترک -->
-  <footer class="footer">
-    <div class="container">
-      <p>
-        <img src="/Gitab/icone/copyright.svg" alt="کپی‌رایت" width="14" height="14"
-             style="vertical-align:middle;margin-inline:4px">
-        <span id="y"></span> Gitab — تمامی حقوق محفوظ است.
-      </p>
-    </div>
-  </footer>
-
-  <!-- سال و اسکریپت تغییر تم -->
-  <script>
+</code></pre> <p>اما این مثال ترکیبی به‌خوبی نشان می‌دهد که چگونه می‌توانیم <strong>تست‌ها، عملگرها و اعمال را با هم ترکیب کنیم</strong> تا عملیات پیچیده و هدفمند انجام دهیم.</p><hr> <h3>گزینه‌ها (Options)</h3><p>گزینه‌ها در دستور find برای کنترل <strong>دامنهٔ جست‌وجو (scope)</strong> استفاده می‌شوند.<br> می‌توان آن‌ها را همراه با تست‌ها و اعمال در یک دستور ترکیب کرد تا رفتار find دقیق‌تر شود.</p><p>در جدول زیر، متداول‌ترین گزینه‌ها آورده شده است:</p><hr> <h4>جدول ۱۷-۷: گزینه‌های پرکاربرد در find</h4><table> <thead><tr> <th>گزینه</th><th>توضیح</th></tr> </thead><tbody> <tr><td><strong>-depth</strong></td><td>باعث می‌شود find ابتدا محتوای هر دایرکتوری را بررسی کند و <strong>در انتها خود دایرکتوری</strong> را پردازش کند. <br> این گزینه <strong>به‌طور خودکار</strong> زمانی فعال می‌شود که از عمل <code>-delete</code> استفاده کنید.</td></tr> <tr><td><strong>-maxdepth <em>levels</em></strong></td><td>بیشترین تعداد سطح‌هایی را که find در درخت دایرکتوری پایین می‌رود مشخص می‌کند. <br> مثلاً <code>-maxdepth 1</code> فقط دایرکتوری جاری را بررسی می‌کند و وارد زیرپوشه‌ها نمی‌شود.</td></tr> <tr><td><strong>-mindepth <em>levels</em></strong></td><td>حداقل سطحی را مشخص می‌کند که از آن به بعد تست‌ها و اعمال اجرا شوند. <br> مثلاً <code>-mindepth 1</code> باعث می‌شود خود دایرکتوری اصلی بررسی نشود و فقط زیرپوشه‌ها پردازش شوند.</td></tr> <tr><td><strong>-mount</strong></td><td>به find دستور می‌دهد که وارد دایرکتوری‌هایی که روی <strong>سیستم فایل‌های دیگر (mount points)</strong> قرار دارند، نشود.</td></tr> <tr><td><strong>-noleaf</strong></td><td>به find می‌گوید که <strong>فرض بهینه‌سازی بر اساس ساختار فایل‌سیستم یونیکسی</strong> را نادیده بگیرد. <br> در زمان جست‌وجو در سیستم‌فایل‌های <strong>DOS/Windows</strong> یا <strong>CD-ROM</strong> باید از این گزینه استفاده شود.</td></tr> </tbody></table> <hr><h3>جمع‌بندی</h3><p>می‌توان گفت که دستور <strong>locate</strong> به همان اندازه ساده است که <strong>find</strong> پیچیده است!<br> هر دو ابزار مفیدند، اما کاربردشان متفاوت است.</p><ul> <li><strong>locate</strong> برای <strong>جست‌وجوی سریع بر اساس نام فایل‌ها</strong> عالی است.</li><li><strong>find</strong> برای <strong>جست‌وجوی دقیق بر اساس ویژگی‌ها، زمان‌ها، دسترسی‌ها و انجام اعمال خودکار</strong> بی‌رقیب است.</li></ul> <p>اگر مرتب با فایل‌ها و ساختار سیستم لینوکس کار می‌کنید،<br> یادگیری و تمرین دستور find به‌مرور باعث می‌شود درک عمیق‌تری از رفتار فایل‌سیستم لینوکس پیدا کنید.</p><hr> <h3>مطالعهٔ بیشتر</h3><ul> <li>برنامه‌های <code>locate</code>, <code>updatedb</code>, <code>find</code>, و <code>xargs</code> همگی بخشی از بسته‌ی <strong>GNU findutils</strong> هستند.<br> برای مطالعهٔ مستندات رسمی و جامع این ابزارها (به‌ویژه در محیط‌های امنیتی حساس)، به سایت رسمی GNU مراجعه کنید:<br><a href="https://www.gnu.org/software/findutils/">https://www.gnu.org/software/findutils/</a></li></ul> </article><nav class="chapter-single-next-nav"> <a href="/Gitab/books/book5/Book/18/chapter18/" class="btn-next-chapter-action" id="nextChapterBtn" data-hub="/Gitab/books/book5/"> <span class="next-btn-text">فصل بعدی: بایگانی و پشتیبان‌گیری (Archiving)</span> <span class="next-btn-arrow">←</span> </a> </nav></div> <button class="fab-back-to-top" id="backToTopBtn" type="button" aria-label="رفتن به بالای صفحه" title="رفتن به بالا"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"> <polyline points="18 15 12 9 6 15"></polyline> </svg> </button></main> <footer class="footer-minimal"><div class="footer-container"> <div class="footer-top-row"><div class="footer-brand-side"> <a href="/Gitab/" class="footer-brand-anchor"> <img src="/Gitab/icone/logo.svg" alt="Gitab" width="28" height="28" loading="lazy" decoding="async"> <span class="footer-brand-title">گیتاب (Gitab)</span> </a> <p class="footer-tagline"> پلتفرم آزاد و مستقل برای ترجمهٔ دقیق و روان کتاب‌های مرجع مهندسی نرم‌افزار. </p></div> <div class="footer-nav-cols"><div class="footer-nav-col"> <span class="footer-nav-heading">موضوعات</span><ul class="footer-nav-list"> <li><a href="/Gitab/books/list-books/?cat=csharp">سی‌شارپ و دات‌نت</a></li><li><a href="/Gitab/books/list-books/?cat=clean-code">کد تمیز و بازآفرینی</a></li><li><a href="/Gitab/books/list-books/?cat=architecture">معماری و طراحی دامنه</a></li><li><a href="/Gitab/books/list-books/?cat=system">لینوکس و خط فرمان</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">بخش‌های سایت</span><ul class="footer-nav-list"> <li><a href="/Gitab/">صفحه اصلی</a></li><li><a href="/Gitab/books/list-books/">کتابخانه کامل</a></li><li><a href="/Gitab/courses/">دوره‌های آموزشی</a></li><li><a href="/Gitab/translator.html">تالار مترجمین</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">مشارکت و جامعه</span><ul class="footer-nav-list"> <li><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer">راهنمای همکاری در ترجمه</a></li><li><a href="https://github.com/hheydarian/Gitab/issues" target="_blank" rel="noopener noreferrer">پیشنهاد کتاب یا گزارش خطا</a></li></ul> </div></div> </div><div class="footer-bottom-line"> <span>© <span id="y">2026</span> Gitab — توسعه‌یافته برای جامعهٔ مهندسان نرم‌افزار ایرانی</span></div> </div></footer> <script>
   (() => {
     const root = document.documentElement;
     const btn = document.getElementById('themeToggle');
+    const sunIcon = btn ? btn.querySelector('.icon-sun') : null;
+    const moonIcon = btn ? btn.querySelector('.icon-moon') : null;
     const KEY = 'gitab-theme';
 
-    function updateTheme(s) {
-      root.setAttribute('data-theme', s);
-      const mode = s;  // فقط `dark` یا `light` خواهد بود
+    function updateTheme(mode) {
+      root.setAttribute('data-theme', mode);
       root.dataset.colorMode = mode;
-      btn.dataset.icon = mode === 'dark' ? 'moon' : 'sun';
+      if (sunIcon && moonIcon) {
+        if (mode === 'dark') {
+          sunIcon.style.display = 'inline-block';
+          moonIcon.style.display = 'none';
+        } else {
+          sunIcon.style.display = 'none';
+          moonIcon.style.display = 'inline-block';
+        }
+      }
     }
 
-    // وضعیت تم ذخیره شده از localStorage
-    let saved = localStorage.getItem(KEY) || 'light'; // پیش‌فرض روشن
+    let saved = 'dark';
+    try { saved = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
     updateTheme(saved);
 
-    // تنظیم مجدد تم هنگام تغییر وضعیت دکمه
-    btn.addEventListener('click', () => {
-      const current = localStorage.getItem(KEY) || 'light';
-      const next = current === 'dark' ? 'light' : 'dark';  // فقط دو حالت: تاریک و روشن
-      localStorage.setItem(KEY, next);
-      updateTheme(next);
-    });
+    if (btn) {
+      btn.addEventListener('click', () => {
+        let current = 'dark';
+        try { current = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+        const next = current === 'dark' ? 'light' : 'dark';
+        try { localStorage.setItem(KEY, next); } catch (e) {}
+        updateTheme(next);
+      });
+    }
 
-    // هنگام بارگذاری صفحه
     document.addEventListener('DOMContentLoaded', () => {
-      updateTheme(localStorage.getItem(KEY) || 'light');
+      let mode = 'dark';
+      try { mode = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+      updateTheme(mode);
+      const yearSpan = document.getElementById('y');
+      if (yearSpan) yearSpan.textContent = new Date().getFullYear();
     });
+
+    const mobBtn = document.getElementById('mobileMenuBtn');
+    const mobDrawer = document.getElementById('mobileDrawer');
+    if (mobBtn && mobDrawer) {
+      const setDrawerOpen = (open) => {
+        mobDrawer.classList.toggle('open', open);
+        mobBtn.classList.toggle('is-open', open);
+        mobBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        mobBtn.setAttribute('aria-label', open ? 'بستن منو' : 'باز کردن منو');
+        mobDrawer.setAttribute('aria-hidden', open ? 'false' : 'true');
+      };
+
+      mobBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        setDrawerOpen(!mobDrawer.classList.contains('open'));
+      });
+
+      mobDrawer.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => setDrawerOpen(false));
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && mobDrawer.classList.contains('open')) {
+          setDrawerOpen(false);
+        }
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!mobDrawer.contains(e.target) && !mobBtn.contains(e.target)) {
+          setDrawerOpen(false);
+        }
+      });
+    }
+
+    if ('serviceWorker' in navigator) {
+      const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+      if (isLocalhost) {
+        navigator.serviceWorker.getRegistrations().then(regs => {
+          for (const reg of regs) reg.unregister();
+        });
+        if ('caches' in window) {
+          caches.keys().then(names => {
+            for (const name of names) caches.delete(name);
+          });
+        }
+      } else {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/Gitab/sw.js').catch(() => {});
+        });
+      }
+    }
   })();
-</script>
-
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-  <script>hljs.highlightAll();</script>
-
-  <script>
+  </script> <script>
   document.querySelectorAll('pre code').forEach(block => {
+    const pre = block.parentNode;
+    if (!pre || pre.querySelector('.copy-btn')) return;
+
+    const copySvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
+    const okSvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+
     const btn = document.createElement('button');
     btn.className = 'copy-btn';
-
-    const icon = document.createElement('img');
-    icon.src = "/Gitab/icone/copy.svg";
-    icon.alt = 'Copy';
-    btn.appendChild(icon);
-
-    block.parentNode.insertBefore(btn, block);
+    btn.setAttribute('aria-label', 'کپی کد');
+    btn.setAttribute('title', 'کپی کد');
+    btn.setAttribute('type', 'button');
+    btn.innerHTML = copySvg;
+    pre.appendChild(btn);
 
     btn.addEventListener('click', async () => {
-      await navigator.clipboard.writeText(block.textContent);
-      btn.classList.add('copied');
-      setTimeout(() => btn.classList.remove('copied'), 1500);
-    });
-  });
-  </script>
-
-  <script>
-  document.body.dataset.page = window.location.pathname;
-
-  const menuBtn = document.querySelector(".menu-toggle");
-  const nav = document.querySelector(".nav");
-
-  if (menuBtn && nav) {
-    menuBtn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      nav.classList.toggle("show");
-    });
-
-    document.addEventListener("click", (e) => {
-      const clickedInsideNav = nav.contains(e.target);
-      const clickedMenuButton = menuBtn.contains(e.target);
-      if (!clickedInsideNav && !clickedMenuButton) {
-        nav.classList.remove("show");
+      try {
+        await navigator.clipboard.writeText(block.textContent);
+        btn.classList.add('copied');
+        btn.innerHTML = okSvg;
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          btn.innerHTML = copySvg;
+        }, 1800);
+      } catch (err) {
+        console.error('Copy failed:', err);
       }
     });
-  }
-  </script>
-
-  <script>
-    document.getElementById('y').textContent = new Date().getFullYear();
-  </script>
-  <script>
-document.getElementById("openDonate").addEventListener("click", () => {
-  document.getElementById("donateModal").style.display = "block";
-});
-document.getElementById("closeDonate").addEventListener("click", () => {
-  document.getElementById("donateModal").style.display = "none";
-});
-document.querySelectorAll(".copy-btn").forEach(btn => {
-  btn.addEventListener("click", () => {
-    navigator.clipboard.writeText(btn.dataset.copy);
-  
-    setTimeout(() => (btn.textContent = "کپی"), 2000);
   });
-});
-</script>
+  </script> <script>
+  (() => {
+    const article = document.getElementById('chapterArticle');
+    if (!article) return;
 
-</body>
-</html>
+    const progressBar = document.getElementById('readingProgressBar');
+    if (progressBar) {
+      window.addEventListener('scroll', () => {
+        const docElem = document.documentElement;
+        const totalHeight = docElem.scrollHeight - docElem.clientHeight;
+        if (totalHeight > 0) {
+          const progress = (window.pageYOffset / totalHeight) * 100;
+          progressBar.style.width = Math.min(100, Math.max(0, progress)) + '%';
+        }
+      }, { passive: true });
+    }
+
+    const btt = document.getElementById('backToTopBtn');
+    if (btt) {
+      window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 250) {
+          btt.classList.add('visible');
+        } else {
+          btt.classList.remove('visible');
+        }
+      }, { passive: true });
+
+      btt.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+
+    article.querySelectorAll('img').forEach(img => {
+      if (!img.hasAttribute('loading')) img.loading = 'lazy';
+      if (!img.hasAttribute('decoding')) img.decoding = 'async';
+      const parent = img.parentElement;
+      if (parent && parent.tagName === 'P') {
+        parent.style.textAlign = 'center';
+      }
+
+      img.addEventListener('error', function() {
+        const src = this.getAttribute('src');
+        if (src && src.includes('assets/image/')) {
+          const parts = src.split('assets/image/');
+          const corrected = '/Gitab/books/book5/assets/image/' + parts[1];
+          if (this.src !== corrected) {
+            this.src = corrected;
+          }
+        }
+      });
+    });
+
+    article.querySelectorAll('p').forEach(p => {
+      const trimmed = p.innerText.trim();
+      if (trimmed.startsWith('💡') || trimmed.startsWith('نکته:')) {
+        p.classList.add('react-callout', 'callout-tip');
+      } else if (trimmed.startsWith('⚠️') || trimmed.startsWith('هشدار:')) {
+        p.classList.add('react-callout', 'callout-warning');
+      } else if (trimmed.startsWith('📌') || trimmed.startsWith('مهم:')) {
+        p.classList.add('react-callout', 'callout-important');
+      } else if (trimmed.startsWith('🔹') || trimmed.startsWith('🔸')) {
+        p.classList.add('react-callout', 'callout-note');
+      }
+    });
+  })();
+  </script> <script type="speculationrules">{"prefetch":[{"where":{"and":[{"href_matches":"/Gitab/*"},{"not":{"href_matches":"/Gitab/downloads/*"}},{"not":{"selector_matches":"[download], [target='_blank']"}}]},"eagerness":"moderate"}]}</script> <script>
+  (() => {
+    if (window.HTMLScriptElement && HTMLScriptElement.supports && HTMLScriptElement.supports('speculationrules')) return;
+    const seen = new Set([window.location.href]);
+    let count = 0;
+    const prefetchLink = (e) => {
+      if (count >= 12) return;
+      const a = e.target && e.target.closest ? e.target.closest('header a, .chapter-single-next-nav a, .syllabus-chapter-item a, .btn-hero-read, .btn-card-read') : null;
+      if (!a || !a.href || a.hasAttribute('download') || a.target === '_blank') return;
+      if (a.origin !== window.location.origin || a.pathname.includes('/downloads/')) return;
+      const clean = a.href.split('#')[0];
+      if (!clean || seen.has(clean)) return;
+      seen.add(clean);
+      count++;
+      const l = document.createElement('link');
+      l.rel = 'prefetch';
+      l.href = clean;
+      document.head.appendChild(l);
+    };
+    document.addEventListener('pointerenter', prefetchLink, { capture: true, passive: true });
+    document.addEventListener('touchstart', prefetchLink, { capture: true, passive: true });
+  })();
+  </script></body></html>

@@ -1,85 +1,18 @@
-
-
-<!doctype html>
-<html lang="fa" dir="rtl">
-<head>
-  <meta charset="utf-8">
-  <link rel="icon" type="image/png" href="/Gitab/favicon.png">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>مدیریت خطا</title>
-  <meta name="description" content="ترجمه‌های فارسی کتاب‌های فنی — سریع، مینیمال و قابل اتکا.">
-
-  <!-- استایل‌ها -->
-  <link rel="stylesheet" href="/Gitab/styles/main.css">
-  <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
-
-  <style>
-  @font-face {
-    font-family: 'Vazir';
-    src: url('/Gitab/fonts/Vazir-FD-WOL.ttf') format('truetype');
-    font-display: swap;
-  }
-  @font-face {
-    font-family: "Lalezar";
-    src: url('fonts/Lalezar.ttf') format('truetype');
-    font-display: swap;
-}
-  body {
-    font-family: 'Vazir', sans-serif;
-  }
-  </style>
-</head>
-
-<body>
-  <!-- هدر مشترک -->
-  <header class="header">
-    <div class="container nav-wrap">
-      <a href="/Gitab/" class="brand">
-        <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="26" height="26">
-        <span>Gitab</span>
-      </a>
-
-       <nav class="nav">
-         <a href="/Gitab/" >خانه</a>
-         <a href="/Gitab/books/list-books" >کتاب‌ها</a>
-         <a href="/Gitab/giter.html" >دوره ها</a>
-          <!-- 
-         <a href="/Gitab/translator.html" >مترجمین</a>
-           -->
-       </nav>
-
-      <div class="nav-actions">
-        <button id="themeToggle" class="icon-btn theme-btn" data-icon="moon" aria-label="تغییر تم">
-          <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن">
-          <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک">
-        </button>
-
-        <a class="icon-btn" href="https://github.com/hheydarian/Gitab" target="_blank" title="GitHub">
-          <img src="/Gitab/icone/github.svg" alt="GitHub">
-        </a>
-
-        <!-- دکمه منو برای موبایل -->
-        <button class="menu-toggle" aria-label="منو">
-          <img src="/Gitab/icone/menu.svg" alt="menu">
-        </button>
-      </div>
-    </div>
-  </header>
-
-  
-  <main class="site-main book-page">
-    <div dir="rtl">
-<h1>مدیریت خطا</h1>
-<p><img src="../../../assets/image/07/img-7.1.png" alt=""></p>
-<p>ممکن است وجود بخشی درباره مدیریت خطا در کتابی درباره کد تمیز عجیب به نظر برسد. اما مدیریت خطا یکی از جنبه‌هایی است که همه ما هنگام برنامه‌نویسی با آن مواجه می‌شویم. ورودی‌ها ممکن است غیرعادی باشند و دستگاه‌ها ممکن است خراب شوند. به طور خلاصه، ممکن است مشکلاتی پیش بیاید و در این شرایط، ما به عنوان برنامه‌نویس مسئولیت داریم که اطمینان حاصل کنیم کد ما به درستی عمل می‌کند.</p>
-<p>اما ارتباط این موضوع با کد تمیز باید واضح باشد. بسیاری از پایگاه‌های کد به شدت تحت تأثیر مدیریت خطا قرار دارند. وقتی می‌گویم تحت تأثیر، منظورم این نیست که مدیریت خطا تنها کاری است که آنها انجام می‌دهند، بلکه به این معنی است که به دلیل پراکندگی مدیریت خطا، تقریباً غیرممکن است که بفهمیم کد چه کاری انجام می‌دهد. مدیریت خطا مهم است، اما اگر باعث اختلال در منطق کد شود، اشتباه است.</p>
-<p>در این فصل، تعدادی تکنیک و نکته را معرفی می‌کنم که می‌توانید برای نوشتن کدی که هم تمیز و هم مقاوم باشد، استفاده کنید—کدی که به شیوه‌ای شایسته و با سبک به مدیریت خطا می‌پردازد.</p>
-<h2>از Exception ها به جای return کردن کد خطا استفاده کنید</h2>
-<p>در گذشته‌های دور، زبان‌های زیادی وجود داشتند که استثنا نداشتند. در این زبان‌ها، تکنیک‌های مدیریت و گزارش خطا محدود بود. شما یا باید یک پرچم خطا تعیین می‌کردید یا یک کد خطا بازمی‌گرداندید که فراخواننده می‌توانست آن را بررسی کند. کد موجود در فهرست ۷-۱ این روش‌ها را نشان می‌دهد.</p>
-</div>
-Listing 7-1 -- DeviceController.java
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">DeviceController</span> {
+<!doctype html><html lang="fa" dir="rtl"> <head><script>
+    if (window.location.pathname.startsWith('/gitab/')) {
+      window.location.replace(window.location.pathname.replace(/^\/gitab\//i, '/Gitab/') + window.location.search + window.location.hash);
+    }
+    (() => {
+      try {
+        const t = localStorage.getItem('gitab-theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', t);
+        document.documentElement.dataset.colorMode = t;
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        document.documentElement.dataset.colorMode = 'dark';
+      }
+    })();
+  </script> <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5"> <title>مدیریت خطا</title><meta name="description" content="مدیریت خطا — مطالعه آنلاین و رایگان از کتاب «کد تمیز (عمو باب)» (Clean Code) اثر Robert C. Martin با ترجمه مجتبی افراز در گیتاب."> <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"><meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"> <meta name="theme-color" content="#090d16"><meta name="referrer" content="strict-origin-when-cross-origin"> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https:; frame-src https://www.youtube.com https://www.youtube-nocookie.com https://maps.google.com https://www.google.com; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self';"><link rel="icon" type="image/png" href="/Gitab/favicon.png"> <link rel="canonical" href="https://hheydarian.github.io/Gitab/books/book3/Book/07_Error_Handling/Error_Handling/"><link rel="alternate" hreflang="fa" href="https://hheydarian.github.io/Gitab/books/book3/Book/07_Error_Handling/Error_Handling/"> <link rel="alternate" hreflang="x-default" href="https://hheydarian.github.io/Gitab/books/book3/Book/07_Error_Handling/Error_Handling/"><link rel="alternate" type="text/plain" title="LLMs.txt" href="/Gitab/llms.txt"> <link rel="sitemap" type="application/xml" title="Sitemap" href="/Gitab/sitemap.xml"><meta property="og:locale" content="fa_IR"> <meta property="og:type" content="article"><meta property="og:site_name" content="گیتاب | Gitab"> <meta property="og:title" content="مدیریت خطا"><meta property="og:description" content="مدیریت خطا — مطالعه آنلاین و رایگان از کتاب «کد تمیز (عمو باب)» (Clean Code) اثر Robert C. Martin با ترجمه مجتبی افراز در گیتاب."> <meta property="og:url" content="https://hheydarian.github.io/Gitab/books/book3/Book/07_Error_Handling/Error_Handling/"><meta property="og:image" content="https://hheydarian.github.io/Gitab/images/clean-code/Cover.webp"> <meta property="og:image:alt" content="مدیریت خطا"><meta name="twitter:card" content="summary_large_image"> <meta name="twitter:title" content="مدیریت خطا"><meta name="twitter:description" content="مدیریت خطا — مطالعه آنلاین و رایگان از کتاب «کد تمیز (عمو باب)» (Clean Code) اثر Robert C. Martin با ترجمه مجتبی افراز در گیتاب."> <meta name="twitter:image" content="https://hheydarian.github.io/Gitab/images/clean-code/Cover.webp"><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://hheydarian.github.io/Gitab/#organization","name":"گیتاب | Gitab","alternateName":"Gitab","url":"https://hheydarian.github.io/Gitab/","logo":{"@type":"ImageObject","url":"https://hheydarian.github.io/Gitab/favicon.png"},"sameAs":["https://github.com/hheydarian/Gitab"]},{"@type":"WebSite","@id":"https://hheydarian.github.io/Gitab/#website","url":"https://hheydarian.github.io/Gitab/","name":"گیتاب | Gitab","inLanguage":"fa-IR","publisher":{"@id":"https://hheydarian.github.io/Gitab/#organization"},"potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://hheydarian.github.io/Gitab/books/list-books/?q={search_term_string}"},"query-input":"required name=search_term_string"}},{"@type":"WebPage","@id":"https://hheydarian.github.io/Gitab/books/book3/Book/07_Error_Handling/Error_Handling/#webpage","url":"https://hheydarian.github.io/Gitab/books/book3/Book/07_Error_Handling/Error_Handling/","name":"مدیریت خطا","description":"مدیریت خطا — مطالعه آنلاین و رایگان از کتاب «کد تمیز (عمو باب)» (Clean Code) اثر Robert C. Martin با ترجمه مجتبی افراز در گیتاب.","inLanguage":"fa-IR","isPartOf":{"@id":"https://hheydarian.github.io/Gitab/#website"}},{"@type":"TechArticle","headline":"مدیریت خطا","description":"مدیریت خطا — مطالعه آنلاین و رایگان از کتاب «کد تمیز (عمو باب)» (Clean Code) اثر Robert C. Martin با ترجمه مجتبی افراز در گیتاب.","url":"https://hheydarian.github.io/Gitab/books/book3/Book/07_Error_Handling/Error_Handling/","inLanguage":"fa-IR","isAccessibleForFree":true,"author":{"@type":"Person","name":"Robert C. Martin"},"translator":{"@type":"Person","name":"مجتبی افراز"},"isPartOf":{"@type":"Book","name":"کد تمیز (عمو باب)","alternateName":"Clean Code","url":"https://hheydarian.github.io/Gitab/books/book3/"}}]}</script> <link rel="preload" href="/Gitab/fonts/Vazirmatn.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/Gitab/styles/main.css?v=2.4" as="style"> <link rel="preload" href="/Gitab/styles/gitab-modern.css?v=2.5" as="style"><style>@font-face{font-family:'Lalezar';src:url('/Gitab/fonts/Lalezar.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}@font-face{font-family:'Vazirmatn';src:url('/Gitab/fonts/Vazirmatn.woff2') format('woff2');font-weight:100 900;font-style:normal;font-display:swap}html,body,button,input,optgroup,select,textarea,.filter-pill{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}input::placeholder,textarea::placeholder{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}</style> <link rel="stylesheet" href="/Gitab/styles/main.css?v=2.4"><link rel="stylesheet" href="/Gitab/styles/gitab-modern.css?v=2.5"> <link rel="stylesheet" href="/Gitab/styles/vendor/github-dark.min.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="/Gitab/styles/vendor/github-dark.min.css"></noscript></head> <body><header class="header"> <div class="container nav-wrap"><a href="/Gitab/" class="brand" aria-label="صفحه اصلی گیتاب"> <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="30" height="30" decoding="async"> <span class="brand-text">Gitab</span> </a> <nav class="nav" id="mainNav"><a href="/Gitab/" >خانه</a> <a href="/Gitab/books/list-books" aria-current="page">کتاب‌ها</a> <a href="/Gitab/courses/" >دوره‌ها</a> <a href="/Gitab/translator.html" >مترجمین</a></nav> <div class="nav-actions"><button id="themeToggle" class="theme-toggle-btn" aria-label="تغییر تم" title="تغییر تم"> <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن" width="18" height="18" decoding="async" style="display:none"> <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک" width="18" height="18" decoding="async"> </button> <a class="btn-github-pill" href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" title="مشاهده سورس گیتاب در گیت‌هاب"> <img src="/Gitab/icone/github.svg" alt="GitHub" width="16" height="16" decoding="async"> <span>گیت‌هاب</span> </a> <button class="mobile-menu-btn" id="mobileMenuBtn" type="button" aria-label="باز کردن منو" aria-expanded="false"> <svg class="mob-icon-open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="4" y1="7" x2="20" y2="7"></line> <line x1="4" y1="12" x2="20" y2="12"></line> <line x1="4" y1="17" x2="14" y2="17"></line> </svg> <svg class="mob-icon-close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="18" y1="6" x2="6" y2="18"></line> <line x1="6" y1="6" x2="18" y2="18"></line> </svg> </button></div> </div><div class="mobile-drawer" id="mobileDrawer" aria-hidden="true"> <div class="mobile-drawer-inner"><div class="mobile-drawer-section-label">ناوبری سریع</div><nav class="mobile-drawer-links" aria-label="منوی موبایل"> <a href="/Gitab/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M3 10.5 12 3l9 7.5"></path> <path d="M5 9.5V20a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V9.5"></path> </svg> </span> <span class="mob-nav-text">صفحه نخست</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/books/list-books" class="mobile-drawer-link active" aria-current="page"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path> </svg> </span> <span class="mob-nav-text">کتابخانه و فهرست کتاب‌ها</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/courses/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path> <path d="M6 12v5c3 3 9 3 12 0v-5"></path> </svg> </span> <span class="mob-nav-text">دوره‌های آموزشی</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/translator.html" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path> <circle cx="9" cy="7" r="4"></circle> <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path> <path d="M16 3.13a4 4 0 0 1 0 7.75"></path> </svg> </span> <span class="mob-nav-text">مترجمین و همکاران</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> </nav><div class="mobile-drawer-divider"></div><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" class="mobile-drawer-link mobile-drawer-gh"> <span class="mob-nav-icon" aria-hidden="true"> <img src="/Gitab/icone/github.svg" alt="" width="17" height="17" loading="lazy" decoding="async"> </span> <span class="mob-nav-text">مخزن گیت‌هاب پروژه</span> <span class="mob-nav-ext" aria-hidden="true">↗</span> </a> </div></div> </header><div class="reading-progress-track"> <div class="reading-progress-fill" id="readingProgressBar"></div></div> <main class="site-main chapter-reading-page"><div class="chapter-page-wrapper"> <nav class="chapter-clean-breadcrumb" aria-label="مسیر راهنما" dir="rtl"><a href="/Gitab/">خانه</a> <span class="bc-sep" aria-hidden="true">/</span> <a href="/Gitab/books/list-books/">کتاب‌ها</a> <span class="bc-sep" aria-hidden="true">/</span> <a href="/Gitab/books/book3/"><bdi>کد تمیز</bdi></a> <span class="bc-sep" aria-hidden="true">/</span> <span class="bc-current-leaf"><bdi>مدیریت خطا</bdi></span></nav> <article class="chapter-prose-container markdown-body" id="chapterArticle" dir="rtl"><div dir="rtl"> <h1>مدیریت خطا</h1><p><img src="../../../assets/image/07/img-7.1.png" alt="" loading="lazy" decoding="async"></p><p>ممکن است وجود بخشی درباره مدیریت خطا در کتابی درباره کد تمیز عجیب به نظر برسد. اما مدیریت خطا یکی از جنبه‌هایی است که همه ما هنگام برنامه‌نویسی با آن مواجه می‌شویم. ورودی‌ها ممکن است غیرعادی باشند و دستگاه‌ها ممکن است خراب شوند. به طور خلاصه، ممکن است مشکلاتی پیش بیاید و در این شرایط، ما به عنوان برنامه‌نویس مسئولیت داریم که اطمینان حاصل کنیم کد ما به درستی عمل می‌کند.</p><p>اما ارتباط این موضوع با کد تمیز باید واضح باشد. بسیاری از پایگاه‌های کد به شدت تحت تأثیر مدیریت خطا قرار دارند. وقتی می‌گویم تحت تأثیر، منظورم این نیست که مدیریت خطا تنها کاری است که آنها انجام می‌دهند، بلکه به این معنی است که به دلیل پراکندگی مدیریت خطا، تقریباً غیرممکن است که بفهمیم کد چه کاری انجام می‌دهد. مدیریت خطا مهم است، اما اگر باعث اختلال در منطق کد شود، اشتباه است.</p><p>در این فصل، تعدادی تکنیک و نکته را معرفی می‌کنم که می‌توانید برای نوشتن کدی که هم تمیز و هم مقاوم باشد، استفاده کنید—کدی که به شیوه‌ای شایسته و با سبک به مدیریت خطا می‌پردازد.</p><h2>از Exception ها به جای return کردن کد خطا استفاده کنید</h2><p>در گذشته‌های دور، زبان‌های زیادی وجود داشتند که استثنا نداشتند. در این زبان‌ها، تکنیک‌های مدیریت و گزارش خطا محدود بود. شما یا باید یک پرچم خطا تعیین می‌کردید یا یک کد خطا بازمی‌گرداندید که فراخواننده می‌توانست آن را بررسی کند. کد موجود در فهرست ۷-۱ این روش‌ها را نشان می‌دهد.</p></div> Listing 7-1 -- DeviceController.java <pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">DeviceController</span> {
   ...
   <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">sendShutDown</span><span class="hljs-params">()</span> {
       <span class="hljs-type">DeviceHandle</span> <span class="hljs-variable">handle</span> <span class="hljs-operator">=</span> getHandle(DEV1);
@@ -101,12 +34,7 @@ Listing 7-1 -- DeviceController.java
     }
     ...
 }
-</code></pre>
-<div dir="rtl">
-مشکل این رویکردها این است که کد فراخواننده را شلوغ می‌کند. فراخواننده باید بلافاصله پس از فراخوانی، خطاها را بررسی کند. متأسفانه، به راحتی ممکن است این مورد فراموش شود. به همین دلیل بهتر است هنگامی که با یک خطا مواجه می‌شوید، یک استثنا پرتاب کنید. این کار باعث می‌شود کد فراخواننده تمیزتر باشد و منطق آن تحت تأثیر مدیریت خطا قرار نگیرد. فهرست ۷-۲ کد را نشان می‌دهد پس از اینکه تصمیم به پرتاب استثنا در متدهایی که می‌توانند خطا را شناسایی کنند، گرفته‌ایم.
-</div>
-<p>Listing 7-2 -- DeviceController.java (with exceptions)</p>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">DeviceController</span> {
+</code></pre> <div dir="rtl"> مشکل این رویکردها این است که کد فراخواننده را شلوغ می‌کند. فراخواننده باید بلافاصله پس از فراخوانی، خطاها را بررسی کند. متأسفانه، به راحتی ممکن است این مورد فراموش شود. به همین دلیل بهتر است هنگامی که با یک خطا مواجه می‌شوید، یک استثنا پرتاب کنید. این کار باعث می‌شود کد فراخواننده تمیزتر باشد و منطق آن تحت تأثیر مدیریت خطا قرار نگیرد. فهرست ۷-۲ کد را نشان می‌دهد پس از اینکه تصمیم به پرتاب استثنا در متدهایی که می‌توانند خطا را شناسایی کنند، گرفته‌ایم. </div><p>Listing 7-2 -- DeviceController.java (with exceptions)</p><pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">DeviceController</span> {
   ...
   <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">sendShutDown</span><span class="hljs-params">()</span> {
     <span class="hljs-keyword">try</span> {
@@ -129,32 +57,15 @@ Listing 7-1 -- DeviceController.java
     }
     ...
 }
-</code></pre>
-<div dir="rtl">
-توجه کنید به چه میزان تمیزتر شده است. این فقط یک مسئله زیبایی‌شناسی نیست. کد بهتر شده زیرا دو نگرانی که با هم در هم پیچیده بودند، یعنی الگوریتم خاموش کردن دستگاه و مدیریت خطا، اکنون از هم جدا شده‌اند. شما می‌توانید هر یک از این نگرانی‌ها را به‌طور مستقل بررسی و درک کنید.
-<h2>اولین وضعیت try-catch-finally خود را بنویسید</h2>
-<p>یکی از جالب‌ترین نکات درباره استثناها این است که آن‌ها یک محدوده درون برنامه شما تعریف می‌کنند. زمانی که کد را در بخش try یک جمله try-catch-finally اجرا می‌کنید، در واقع بیان می‌کنید که اجرا در هر نقطه‌ای ممکن است متوقف شود و سپس در بخش catch از سر گرفته شود.</p>
-<p>به نوعی، بلوک‌های try مانند تراکنش‌ها هستند. catch شما باید برنامه شما را در یک حالت سازگار ترک کند، فرقی نمی‌کند چه اتفاقی در بخش try بیفتد. به همین دلیل، شروع با یک جمله try-catch-finally هنگامی که کدی می‌نویسید که ممکن است استثنا پرتاب کند، یک رویه خوب است. این به شما کمک می‌کند تا مشخص کنید کاربر آن کد باید چه انتظاری داشته باشد، صرف‌نظر از اینکه چه چیزی در کدی که در بخش try اجرا می‌شود، اشتباه پیش برود.</p>
-<p>بیایید یک مثال را بررسی کنیم. ما باید کدی بنویسیم که به یک فایل دسترسی پیدا کند و برخی اشیاء سریال‌شده را بخواند.</p>
-<p>ما با یک unit test شروع می‌کنیم که نشان می‌دهد وقتی فایل وجود ندارد، یک استثنا خواهیم گرفت:</p>
-</div>
-<pre class="hljs"><code> <span class="hljs-meta">@Test(expected = StorageException.class)</span>
+</code></pre> <div dir="rtl"> توجه کنید به چه میزان تمیزتر شده است. این فقط یک مسئله زیبایی‌شناسی نیست. کد بهتر شده زیرا دو نگرانی که با هم در هم پیچیده بودند، یعنی الگوریتم خاموش کردن دستگاه و مدیریت خطا، اکنون از هم جدا شده‌اند. شما می‌توانید هر یک از این نگرانی‌ها را به‌طور مستقل بررسی و درک کنید. <h2>اولین وضعیت try-catch-finally خود را بنویسید</h2><p>یکی از جالب‌ترین نکات درباره استثناها این است که آن‌ها یک محدوده درون برنامه شما تعریف می‌کنند. زمانی که کد را در بخش try یک جمله try-catch-finally اجرا می‌کنید، در واقع بیان می‌کنید که اجرا در هر نقطه‌ای ممکن است متوقف شود و سپس در بخش catch از سر گرفته شود.</p><p>به نوعی، بلوک‌های try مانند تراکنش‌ها هستند. catch شما باید برنامه شما را در یک حالت سازگار ترک کند، فرقی نمی‌کند چه اتفاقی در بخش try بیفتد. به همین دلیل، شروع با یک جمله try-catch-finally هنگامی که کدی می‌نویسید که ممکن است استثنا پرتاب کند، یک رویه خوب است. این به شما کمک می‌کند تا مشخص کنید کاربر آن کد باید چه انتظاری داشته باشد، صرف‌نظر از اینکه چه چیزی در کدی که در بخش try اجرا می‌شود، اشتباه پیش برود.</p><p>بیایید یک مثال را بررسی کنیم. ما باید کدی بنویسیم که به یک فایل دسترسی پیدا کند و برخی اشیاء سریال‌شده را بخواند.</p><p>ما با یک unit test شروع می‌کنیم که نشان می‌دهد وقتی فایل وجود ندارد، یک استثنا خواهیم گرفت:</p></div> <pre class="hljs"><code> <span class="hljs-meta">@Test(expected = StorageException.class)</span>
  <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">retrieveSectionShouldThrowOnInvalidFileName</span><span class="hljs-params">()</span> {
    sectionStore.retrieveSection(<span class="hljs-string">&quot;invalid - file&quot;</span>);
  }
-</code></pre>
-<div dir="rtl">
-test ما را مجبور می‌کند که این کد موقتی را بنویسیم.
-</div>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> List&lt;RecordedGrip&gt; <span class="hljs-title function_">retrieveSection</span><span class="hljs-params">(String sectionName)</span> {
+</code></pre> <div dir="rtl"> test ما را مجبور می‌کند که این کد موقتی را بنویسیم. </div><pre class="hljs"><code><span class="hljs-keyword">public</span> List&lt;RecordedGrip&gt; <span class="hljs-title function_">retrieveSection</span><span class="hljs-params">(String sectionName)</span> {
   <span class="hljs-comment">// dummy return until we have a real implementation</span>
   <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;RecordedGrip&gt;();
 }
-</code></pre>
-<div dir="rtl">
-test ما شکست می‌خورد زیرا استثنایی پرتاب نمی‌کند. سپس، پیاده‌سازی‌مان را تغییر می‌دهیم تا سعی کند به یک فایل نامعتبر دسترسی پیدا کند. این عمل یک استثنا پرتاب می‌کند:
-</div>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> List&lt;RecordedGrip&gt; <span class="hljs-title function_">retrieveSection</span><span class="hljs-params">(String sectionName)</span> {
+</code></pre> <div dir="rtl"> test ما شکست می‌خورد زیرا استثنایی پرتاب نمی‌کند. سپس، پیاده‌سازی‌مان را تغییر می‌دهیم تا سعی کند به یک فایل نامعتبر دسترسی پیدا کند. این عمل یک استثنا پرتاب می‌کند: </div><pre class="hljs"><code><span class="hljs-keyword">public</span> List&lt;RecordedGrip&gt; <span class="hljs-title function_">retrieveSection</span><span class="hljs-params">(String sectionName)</span> {
   <span class="hljs-keyword">try</span> {
     <span class="hljs-type">FileInputStream</span> <span class="hljs-variable">stream</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">FileInputStream</span>(sectionName)
   } <span class="hljs-keyword">catch</span> (Exception e) {
@@ -162,11 +73,7 @@ test ما شکست می‌خورد زیرا استثنایی پرتاب نمی�
   }
   <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;RecordedGrip&gt;();
 }
-</code></pre>
-<div dir="rtl">
-اکنون test ما موفقیت‌آمیز است زیرا استثنا را گرفته‌ایم. در این مرحله، می‌توانیم کد را بهبود دهیم. می‌توانیم نوع استثنایی که می‌گیریم را دقیق‌تر کنیم تا با نوعی که واقعاً از سازنده FileInputStream پرتاب می‌شود، یعنی FileNotFoundException، مطابقت داشته باشد:
-</div>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> List&lt;RecordedGrip&gt; <span class="hljs-title function_">retrieveSection</span><span class="hljs-params">(String sectionName)</span> {
+</code></pre> <div dir="rtl"> اکنون test ما موفقیت‌آمیز است زیرا استثنا را گرفته‌ایم. در این مرحله، می‌توانیم کد را بهبود دهیم. می‌توانیم نوع استثنایی که می‌گیریم را دقیق‌تر کنیم تا با نوعی که واقعاً از سازنده FileInputStream پرتاب می‌شود، یعنی FileNotFoundException، مطابقت داشته باشد: </div><pre class="hljs"><code><span class="hljs-keyword">public</span> List&lt;RecordedGrip&gt; <span class="hljs-title function_">retrieveSection</span><span class="hljs-params">(String sectionName)</span> {
     <span class="hljs-keyword">try</span> {
       <span class="hljs-type">FileInputStream</span> <span class="hljs-variable">stream</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">FileInputStream</span>(sectionName);
       stream.close();
@@ -175,24 +82,7 @@ test ما شکست می‌خورد زیرا استثنایی پرتاب نمی�
       }
       <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;RecordedGrip&gt;();
     }
-</code></pre>
-<div dir="rtl">
-حالا که محدوده را با ساختار try-catch تعریف کرده‌ایم، می‌توانیم از TDD برای ساخت بقیه منطق مورد نیاز استفاده کنیم. این منطق بین ایجاد FileInputStream و بستن آن اضافه خواهد شد و می‌تواند طوری رفتار کند که انگار هیچ چیزی اشتباه نمی‌شود.
-<p>سعی کنید تست‌هایی بنویسید که باعث ایجاد استثناها شوند، سپس رفتار handler خود را به‌گونه‌ای اضافه کنید که تست‌ها را تأمین کند. این کار باعث می‌شود ابتدا محدوده تراکنش بلوک try را بسازید و به شما کمک می‌کند تا ماهیت تراکنش این محدوده را حفظ کنید.</p>
-<h2>از استثناهای بدون چک استفاده کنید</h2>
-<p>وقتی که استثناهای چک‌شده در نسخه اول جاوا معرفی شدند، به نظر ایده‌ای عالی می‌آمدند. امضای هر متد شامل تمام استثناهایی بود که می‌توانست به فراخواننده‌اش منتقل کند. علاوه بر این، این استثناها بخشی از نوع متد بودند. اگر امضا با کاری که کد شما انجام می‌دهد مطابقت نداشت، کد شما عملاً کامپایل نمی‌شد.</p>
-<p>در آن زمان، فکر می‌کردیم استثناهای چک‌شده ایده خوبی هستند و بله، می‌توانند فوایدی داشته باشند. با این حال، اکنون روشن است که برای تولید نرم‌افزارهای پایدار، وجود آن‌ها ضروری نیست. زبان C# استثناهای چک‌شده ندارد و با وجود تلاش‌های شجاعانه، C++ نیز چنین نیست. نه پایتون و نه روبی هم استثناهای چک‌شده ندارند. اما امکان نوشتن نرم‌افزارهای پایدار در تمام این زبان‌ها وجود دارد. از آنجایی که این‌طور است، باید واقعاً تصمیم بگیریم که آیا استثناهای چک‌شده به نسبت هزینه ای که دارند مفیدند یا خیر.</p>
-<p>چه قیمتی؟ قیمت استثناهای چک‌شده نقض اصول Open/Closed است. اگر از یک متد در کد خود یک استثنای چک‌شده را throws کنید و catch در سه سطح بالاتر باشد، باید آن استثنا را در امضای هر متد بین خود و catch اعلام کنید. این به این معنی است که یک تغییر در سطح پایین نرم‌افزار می‌تواند تغییرات امضا را در بسیاری از سطوح بالاتر اجباری کند. ماژول‌های تغییر یافته باید دوباره ساخته و مستقر شوند، حتی اگر چیزی که برایشان مهم است تغییر نکرده باشد.</p>
-<p>سلسله مراتب فراخوانی در یک سیستم بزرگ را تصور کنید. توابع در بالای سلسله مراتب توابع زیر خود را فراخوانی می‌کنند، که توابع بیشتری را در زیر خود فراخوانی می‌کنند، و به همین ترتیب. حال بیایید بگوییم یکی از توابع در پایین‌ترین سطح به گونه‌ای اصلاح شده است که باید یک استثنا را throws کند. اگر آن استثنا چک‌شده باشد، باید یک clause throws به امضای تابع اضافه شود. اما این به این معنی است که هر تابعی که تابع اصلاح شده ما را فراخوانی می‌کند نیز باید یا برای catch استثنای جدید تغییر کند یا clause throws مناسب را به امضای خود اضافه کند. به همین ترتیب. نتیجه نهایی یک سلسله تغییرات است که از پایین‌ترین سطوح نرم‌افزار به بالاترین سطوح می‌رسد! کپسوله‌سازی شکسته می‌شود زیرا تمام توابع در مسیر یک throws باید از جزئیات آن استثنای سطح پایین مطلع باشند. با توجه به اینکه هدف از استثناها این است که به شما اجازه دهند خطاها را از فاصله‌ای دور مدیریت کنید، متأسفانه استثناهای چک‌شده به این شکل کپسوله‌سازی را می‌شکنند.</p>
-<p>استثناهای چک‌شده گاهی می‌توانند مفید باشند اگر شما در حال نوشتن یک کتابخانه حیاتی هستید: شما باید آن‌ها را catch کنید. اما در توسعه برنامه‌های عمومی، هزینه‌های وابستگی معمولاً بر فواید غلبه می‌کند.</p>
-<h2>فراهم کردن context با استفاده از استثناها</h2>
-<p>هر استثنایی که شما thrown می‌کنید باید زمینه کافی برای تعیین منبع و محل خطا را فراهم کند. در جاوا، می‌توانید یک stack trace از هر استثنا دریافت کنید؛ اما یک stack trace نمی‌تواند نیت عملیاتی که شکست خورده است را به شما بگوید.</p>
-<p>پیام‌های خطای مفهومی ایجاد کنید و آن‌ها را به همراه استثناهای خود ارسال کنید. عملیات ناموفق و نوع شکست را ذکر کنید. اگر در برنامه‌تان لاگ‌گیری می‌کنید، اطلاعات کافی را برای لاگ کردن خطا در catch خود ارسال کنید.</p>
-<h2>تعریف کلاس‌های استثنا بر اساس نیازهای فراخواننده</h2>
-<p>راه‌های زیادی برای طبقه‌بندی خطاها وجود دارد. می‌توانیم آن‌ها را بر اساس منبع‌شان طبقه‌بندی کنیم: آیا از یک مؤلفه خاص آمده‌اند یا نه؟ یا بر اساس نوع‌شان: آیا این خطاها ناشی از خرابی‌های دستگاه، خرابی‌های شبکه یا خطاهای برنامه‌نویسی هستند؟ با این حال، وقتی که کلاس‌های استثنا را در یک برنامه تعریف می‌کنیم، مهم‌ترین نگرانی ما باید این باشد که چگونه این استثناها catch می‌شوند.</p>
-<p>بیایید به یک مثال از طبقه‌بندی ضعیف استثناها نگاه کنیم. در اینجا یک دستور try-catch-finally برای یک فراخوانی از یک کتابخانه شخص ثالث وجود دارد. این دستور تمام استثناهایی را که این فراخوانی‌ها می‌توانند thrown کنند، پوشش می‌دهد.</p>
-</div>
-<pre class="hljs"><code><span class="hljs-type">ACMEPort</span> <span class="hljs-variable">port</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ACMEPort</span>(<span class="hljs-number">12</span>);
+</code></pre> <div dir="rtl"> حالا که محدوده را با ساختار try-catch تعریف کرده‌ایم، می‌توانیم از TDD برای ساخت بقیه منطق مورد نیاز استفاده کنیم. این منطق بین ایجاد FileInputStream و بستن آن اضافه خواهد شد و می‌تواند طوری رفتار کند که انگار هیچ چیزی اشتباه نمی‌شود. <p>سعی کنید تست‌هایی بنویسید که باعث ایجاد استثناها شوند، سپس رفتار handler خود را به‌گونه‌ای اضافه کنید که تست‌ها را تأمین کند. این کار باعث می‌شود ابتدا محدوده تراکنش بلوک try را بسازید و به شما کمک می‌کند تا ماهیت تراکنش این محدوده را حفظ کنید.</p><h2>از استثناهای بدون چک استفاده کنید</h2><p>وقتی که استثناهای چک‌شده در نسخه اول جاوا معرفی شدند، به نظر ایده‌ای عالی می‌آمدند. امضای هر متد شامل تمام استثناهایی بود که می‌توانست به فراخواننده‌اش منتقل کند. علاوه بر این، این استثناها بخشی از نوع متد بودند. اگر امضا با کاری که کد شما انجام می‌دهد مطابقت نداشت، کد شما عملاً کامپایل نمی‌شد.</p><p>در آن زمان، فکر می‌کردیم استثناهای چک‌شده ایده خوبی هستند و بله، می‌توانند فوایدی داشته باشند. با این حال، اکنون روشن است که برای تولید نرم‌افزارهای پایدار، وجود آن‌ها ضروری نیست. زبان C# استثناهای چک‌شده ندارد و با وجود تلاش‌های شجاعانه، C++ نیز چنین نیست. نه پایتون و نه روبی هم استثناهای چک‌شده ندارند. اما امکان نوشتن نرم‌افزارهای پایدار در تمام این زبان‌ها وجود دارد. از آنجایی که این‌طور است، باید واقعاً تصمیم بگیریم که آیا استثناهای چک‌شده به نسبت هزینه ای که دارند مفیدند یا خیر.</p><p>چه قیمتی؟ قیمت استثناهای چک‌شده نقض اصول Open/Closed است. اگر از یک متد در کد خود یک استثنای چک‌شده را throws کنید و catch در سه سطح بالاتر باشد، باید آن استثنا را در امضای هر متد بین خود و catch اعلام کنید. این به این معنی است که یک تغییر در سطح پایین نرم‌افزار می‌تواند تغییرات امضا را در بسیاری از سطوح بالاتر اجباری کند. ماژول‌های تغییر یافته باید دوباره ساخته و مستقر شوند، حتی اگر چیزی که برایشان مهم است تغییر نکرده باشد.</p><p>سلسله مراتب فراخوانی در یک سیستم بزرگ را تصور کنید. توابع در بالای سلسله مراتب توابع زیر خود را فراخوانی می‌کنند، که توابع بیشتری را در زیر خود فراخوانی می‌کنند، و به همین ترتیب. حال بیایید بگوییم یکی از توابع در پایین‌ترین سطح به گونه‌ای اصلاح شده است که باید یک استثنا را throws کند. اگر آن استثنا چک‌شده باشد، باید یک clause throws به امضای تابع اضافه شود. اما این به این معنی است که هر تابعی که تابع اصلاح شده ما را فراخوانی می‌کند نیز باید یا برای catch استثنای جدید تغییر کند یا clause throws مناسب را به امضای خود اضافه کند. به همین ترتیب. نتیجه نهایی یک سلسله تغییرات است که از پایین‌ترین سطوح نرم‌افزار به بالاترین سطوح می‌رسد! کپسوله‌سازی شکسته می‌شود زیرا تمام توابع در مسیر یک throws باید از جزئیات آن استثنای سطح پایین مطلع باشند. با توجه به اینکه هدف از استثناها این است که به شما اجازه دهند خطاها را از فاصله‌ای دور مدیریت کنید، متأسفانه استثناهای چک‌شده به این شکل کپسوله‌سازی را می‌شکنند.</p><p>استثناهای چک‌شده گاهی می‌توانند مفید باشند اگر شما در حال نوشتن یک کتابخانه حیاتی هستید: شما باید آن‌ها را catch کنید. اما در توسعه برنامه‌های عمومی، هزینه‌های وابستگی معمولاً بر فواید غلبه می‌کند.</p><h2>فراهم کردن context با استفاده از استثناها</h2><p>هر استثنایی که شما thrown می‌کنید باید زمینه کافی برای تعیین منبع و محل خطا را فراهم کند. در جاوا، می‌توانید یک stack trace از هر استثنا دریافت کنید؛ اما یک stack trace نمی‌تواند نیت عملیاتی که شکست خورده است را به شما بگوید.</p><p>پیام‌های خطای مفهومی ایجاد کنید و آن‌ها را به همراه استثناهای خود ارسال کنید. عملیات ناموفق و نوع شکست را ذکر کنید. اگر در برنامه‌تان لاگ‌گیری می‌کنید، اطلاعات کافی را برای لاگ کردن خطا در catch خود ارسال کنید.</p><h2>تعریف کلاس‌های استثنا بر اساس نیازهای فراخواننده</h2><p>راه‌های زیادی برای طبقه‌بندی خطاها وجود دارد. می‌توانیم آن‌ها را بر اساس منبع‌شان طبقه‌بندی کنیم: آیا از یک مؤلفه خاص آمده‌اند یا نه؟ یا بر اساس نوع‌شان: آیا این خطاها ناشی از خرابی‌های دستگاه، خرابی‌های شبکه یا خطاهای برنامه‌نویسی هستند؟ با این حال، وقتی که کلاس‌های استثنا را در یک برنامه تعریف می‌کنیم، مهم‌ترین نگرانی ما باید این باشد که چگونه این استثناها catch می‌شوند.</p><p>بیایید به یک مثال از طبقه‌بندی ضعیف استثناها نگاه کنیم. در اینجا یک دستور try-catch-finally برای یک فراخوانی از یک کتابخانه شخص ثالث وجود دارد. این دستور تمام استثناهایی را که این فراخوانی‌ها می‌توانند thrown کنند، پوشش می‌دهد.</p></div> <pre class="hljs"><code><span class="hljs-type">ACMEPort</span> <span class="hljs-variable">port</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ACMEPort</span>(<span class="hljs-number">12</span>);
  <span class="hljs-keyword">try</span> {
  port.open();
  } <span class="hljs-keyword">catch</span> (DeviceResponseException e) {
@@ -207,12 +97,7 @@ test ما شکست می‌خورد زیرا استثنایی پرتاب نمی�
  } <span class="hljs-keyword">finally</span> {
  …
  }
-</code></pre>
-<div dir="rtl">
-آن دستور شامل مقدار زیادی تکرار است و نباید تعجب کنیم. در بیشتر مواقع مدیریت استثنا، کاری که انجام می‌دهیم نسبتاً استاندارد است و ارتباطی به علت واقعی ندارد. ما باید یک خطا را ثبت کنیم و اطمینان حاصل کنیم که می‌توانیم به کار ادامه دهیم.
-<p>در این مورد، از آنجایی که می‌دانیم کارهایی که انجام می‌دهیم تقریباً مشابه است، بدون توجه به استثنا، می‌توانیم کد خود را به طور قابل توجهی ساده کنیم با wrapping کردن API که فراخوانی می‌کنیم و اطمینان از اینکه نوع استثنای مشترکی را برمی‌گرداند:</p>
-</div>
-<pre class="hljs"><code><span class="hljs-type">LocalPort</span> <span class="hljs-variable">port</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">LocalPort</span>(<span class="hljs-number">12</span>);
+</code></pre> <div dir="rtl"> آن دستور شامل مقدار زیادی تکرار است و نباید تعجب کنیم. در بیشتر مواقع مدیریت استثنا، کاری که انجام می‌دهیم نسبتاً استاندارد است و ارتباطی به علت واقعی ندارد. ما باید یک خطا را ثبت کنیم و اطمینان حاصل کنیم که می‌توانیم به کار ادامه دهیم. <p>در این مورد، از آنجایی که می‌دانیم کارهایی که انجام می‌دهیم تقریباً مشابه است، بدون توجه به استثنا، می‌توانیم کد خود را به طور قابل توجهی ساده کنیم با wrapping کردن API که فراخوانی می‌کنیم و اطمینان از اینکه نوع استثنای مشترکی را برمی‌گرداند:</p></div> <pre class="hljs"><code><span class="hljs-type">LocalPort</span> <span class="hljs-variable">port</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">LocalPort</span>(<span class="hljs-number">12</span>);
 <span class="hljs-keyword">try</span> {
   port.open();
 } <span class="hljs-keyword">catch</span> (PortDeviceFailure e) {
@@ -221,11 +106,7 @@ test ما شکست می‌خورد زیرا استثنایی پرتاب نمی�
 } <span class="hljs-keyword">finally</span> {
   …
 }
-</code></pre>
-<div dir="rtl">
-کلاس LocalPort ما فقط یک wrapper ساده است که استثناهای thrown شده توسط کلاس ACMEPort را catch و ترجمه می‌کند:
-</div>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">LocalPort</span> {
+</code></pre> <div dir="rtl"> کلاس LocalPort ما فقط یک wrapper ساده است که استثناهای thrown شده توسط کلاس ACMEPort را catch و ترجمه می‌کند: </div><pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">LocalPort</span> {
   <span class="hljs-keyword">private</span> ACMEPort innerPort;
   <span class="hljs-keyword">public</span> <span class="hljs-title function_">LocalPort</span><span class="hljs-params">(<span class="hljs-type">int</span> portNumber)</span> {
     innerPort = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ACMEPort</span>(portNumber);
@@ -242,44 +123,20 @@ test ما شکست می‌خورد زیرا استثنایی پرتاب نمی�
     }
   }…
 }
-</code></pre>
-<div dir="rtl">
-Wrapperها مانند آنچه برای ACMEPort تعریف کردیم می‌توانند بسیار مفید باشند. در واقع، wrapping APIهای شخص ثالث یک شیوه عالی است. زمانی که یک API شخص ثالث را wrap می‌کنید، وابستگی‌های خود به آن را حداقل می‌کنید: می‌توانید در آینده به یک کتابخانه دیگر منتقل شوید بدون اینکه هزینه زیادی بپردازید. Wrapping همچنین کار را برای mock کردن فراخوانی‌های شخص ثالث هنگام تست کد خود آسان‌تر می‌کند.
-<p>یک مزیت نهایی wrapping این است که شما به انتخاب‌های طراحی API یک فروشنده خاص وابسته نیستید. می‌توانید یک API تعریف کنید که با آن احساس راحتی کنید. در مثال قبلی، ما یک نوع استثنا برای خرابی دستگاه پورت تعریف کردیم و متوجه شدیم که می‌توانیم کد بسیار تمیزتری بنویسیم.</p>
-<p>اغلب یک کلاس استثنا برای یک حوزه خاص از کد کافی است. اطلاعات ارسال شده با استثنا می‌تواند خطاها را متمایز کند. فقط در صورتی از کلاس‌های مختلف استفاده کنید که زمان‌هایی وجود داشته باشد که بخواهید یک استثنا را catch کنید و اجازه دهید دیگری عبور کند.</p>
-<h2>تعریف جریان عادی</h2>
-<p><img src="../../../assets/image/07/img-7.2.png" alt=""></p>
-<p>اگر از نکات مطرح شده در بخش‌های قبلی پیروی کنید، به جدایی خوبی بین منطق کسب‌وکار و مدیریت خطا خواهید رسید. بخش عمده کد شما شروع به شکل‌گیری به‌عنوان یک الگوریتم تمیز و ساده می‌کند. با این حال، این فرآیند تشخیص خطا را به حاشیه‌های برنامه شما می‌برد. شما APIهای خارجی را wrap می‌کنید تا بتوانید استثناهای خود را thrown کنید و یک handler بالاتر از کد خود تعریف می‌کنید تا بتوانید با هر محاسبه‌ای که متوقف می‌شود، برخورد کنید. بیشتر اوقات، این یک رویکرد عالی است، اما گاهی اوقات ممکن است نخواهید محاسبه را متوقف کنید.</p>
-<p>بیایید به یک مثال نگاه کنیم. در اینجا کد نامناسبی وجود دارد که هزینه‌ها را در یک برنامه صورتحساب جمع می‌کند:</p>
-</div>
-<pre class="hljs"><code><span class="hljs-keyword">try</span> {
+</code></pre> <div dir="rtl"> Wrapperها مانند آنچه برای ACMEPort تعریف کردیم می‌توانند بسیار مفید باشند. در واقع، wrapping APIهای شخص ثالث یک شیوه عالی است. زمانی که یک API شخص ثالث را wrap می‌کنید، وابستگی‌های خود به آن را حداقل می‌کنید: می‌توانید در آینده به یک کتابخانه دیگر منتقل شوید بدون اینکه هزینه زیادی بپردازید. Wrapping همچنین کار را برای mock کردن فراخوانی‌های شخص ثالث هنگام تست کد خود آسان‌تر می‌کند. <p>یک مزیت نهایی wrapping این است که شما به انتخاب‌های طراحی API یک فروشنده خاص وابسته نیستید. می‌توانید یک API تعریف کنید که با آن احساس راحتی کنید. در مثال قبلی، ما یک نوع استثنا برای خرابی دستگاه پورت تعریف کردیم و متوجه شدیم که می‌توانیم کد بسیار تمیزتری بنویسیم.</p><p>اغلب یک کلاس استثنا برای یک حوزه خاص از کد کافی است. اطلاعات ارسال شده با استثنا می‌تواند خطاها را متمایز کند. فقط در صورتی از کلاس‌های مختلف استفاده کنید که زمان‌هایی وجود داشته باشد که بخواهید یک استثنا را catch کنید و اجازه دهید دیگری عبور کند.</p><h2>تعریف جریان عادی</h2><p><img src="../../../assets/image/07/img-7.2.png" alt="" loading="lazy" decoding="async"></p><p>اگر از نکات مطرح شده در بخش‌های قبلی پیروی کنید، به جدایی خوبی بین منطق کسب‌وکار و مدیریت خطا خواهید رسید. بخش عمده کد شما شروع به شکل‌گیری به‌عنوان یک الگوریتم تمیز و ساده می‌کند. با این حال، این فرآیند تشخیص خطا را به حاشیه‌های برنامه شما می‌برد. شما APIهای خارجی را wrap می‌کنید تا بتوانید استثناهای خود را thrown کنید و یک handler بالاتر از کد خود تعریف می‌کنید تا بتوانید با هر محاسبه‌ای که متوقف می‌شود، برخورد کنید. بیشتر اوقات، این یک رویکرد عالی است، اما گاهی اوقات ممکن است نخواهید محاسبه را متوقف کنید.</p><p>بیایید به یک مثال نگاه کنیم. در اینجا کد نامناسبی وجود دارد که هزینه‌ها را در یک برنامه صورتحساب جمع می‌کند:</p></div> <pre class="hljs"><code><span class="hljs-keyword">try</span> {
  <span class="hljs-type">MealExpenses</span> <span class="hljs-variable">expenses</span> <span class="hljs-operator">=</span> expenseReportDAO.getMeals(employee.getID());
  m_total += expenses.getTotal();
 } <span class="hljs-keyword">catch</span>(MealExpensesNotFound e) {
  m_total += getMealPerDiem();
 }
-</code></pre>
-<div dir="rtl">
-در این کسب‌وکار، اگر وعده‌های غذایی هزینه شوند، به مجموع اضافه می‌شوند. اگر هزینه نشوند، کارمند مبلغی به عنوان دستمزد وعده غذایی برای آن روز دریافت می‌کند. این استثنا منطق را شلوغ می‌کند. آیا بهتر نیست که نیازی به برخورد با این مورد خاص نداشته باشیم؟ اگر این‌طور بود، کد ما بسیار ساده‌تر به نظر می‌رسید. کد ما به این شکل خواهد بود:
-</div>
-<pre class="hljs"><code><span class="hljs-type">MealExpenses</span> <span class="hljs-variable">expenses</span> <span class="hljs-operator">=</span> expenseReportDAO.getMeals(employee.getID());
+</code></pre> <div dir="rtl"> در این کسب‌وکار، اگر وعده‌های غذایی هزینه شوند، به مجموع اضافه می‌شوند. اگر هزینه نشوند، کارمند مبلغی به عنوان دستمزد وعده غذایی برای آن روز دریافت می‌کند. این استثنا منطق را شلوغ می‌کند. آیا بهتر نیست که نیازی به برخورد با این مورد خاص نداشته باشیم؟ اگر این‌طور بود، کد ما بسیار ساده‌تر به نظر می‌رسید. کد ما به این شکل خواهد بود: </div><pre class="hljs"><code><span class="hljs-type">MealExpenses</span> <span class="hljs-variable">expenses</span> <span class="hljs-operator">=</span> expenseReportDAO.getMeals(employee.getID());
 m_total += expenses.getTotal();
-</code></pre>
-<div dir="rtl">
-آیا می‌توانیم کد را تا این حد ساده کنیم؟ به نظر می‌رسد که می‌توانیم. می‌توانیم کلاس ExpenseReportDAO را طوری تغییر دهیم که همیشه یک شیء MealExpense را برگرداند. اگر هزینه‌ای برای وعده‌های غذایی وجود نداشته باشد، یک شیء MealExpense برمی‌گرداند که دستمزد را به عنوان مجموع خود برمی‌گرداند:
-</div>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">PerDiemMealExpenses</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">MealExpenses</span> {
+</code></pre> <div dir="rtl"> آیا می‌توانیم کد را تا این حد ساده کنیم؟ به نظر می‌رسد که می‌توانیم. می‌توانیم کلاس ExpenseReportDAO را طوری تغییر دهیم که همیشه یک شیء MealExpense را برگرداند. اگر هزینه‌ای برای وعده‌های غذایی وجود نداشته باشد، یک شیء MealExpense برمی‌گرداند که دستمزد را به عنوان مجموع خود برمی‌گرداند: </div><pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">PerDiemMealExpenses</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">MealExpenses</span> {
  <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">getTotal</span><span class="hljs-params">()</span> {
  <span class="hljs-comment">// return the per diem default</span>
  }
 }
-</code></pre>
-<div dir="rtl">
-این الگوی خاص [Fowler] نامیده می‌شود . شما یک کلاس ایجاد می‌کنید یا یک شیء را پیکربندی می‌کنید تا مورد خاصی را برای شما مدیریت کند. وقتی این کار را انجام می‌دهید، کد کلاینت نیازی به برخورد با رفتارهای استثنایی ندارد. آن رفتار در شیء مورد خاص کپسوله شده است.
-<h2>null برنگردانید</h2>
-<p>به نظر من هر بحثی در مورد مدیریت خطا باید شامل اشاره به کارهایی باشد که ما را به سمت خطا سوق می‌دهند. اولین مورد در این لیست، بازگرداندن null است. نمی‌توانم تعداد برنامه‌هایی را که دیده‌ام که تقریباً هر خط دیگر آن‌ها یک بررسی برای null بود، بشمارم. در اینجا یک کد نمونه وجود دارد:</p>
-</div>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">registerItem</span><span class="hljs-params">(Item item)</span> {
+</code></pre> <div dir="rtl"> این الگوی خاص [Fowler] نامیده می‌شود . شما یک کلاس ایجاد می‌کنید یا یک شیء را پیکربندی می‌کنید تا مورد خاصی را برای شما مدیریت کند. وقتی این کار را انجام می‌دهید، کد کلاینت نیازی به برخورد با رفتارهای استثنایی ندارد. آن رفتار در شیء مورد خاص کپسوله شده است. <h2>null برنگردانید</h2><p>به نظر من هر بحثی در مورد مدیریت خطا باید شامل اشاره به کارهایی باشد که ما را به سمت خطا سوق می‌دهند. اولین مورد در این لیست، بازگرداندن null است. نمی‌توانم تعداد برنامه‌هایی را که دیده‌ام که تقریباً هر خط دیگر آن‌ها یک بررسی برای null بود، بشمارم. در اینجا یک کد نمونه وجود دارد:</p></div> <pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">registerItem</span><span class="hljs-params">(Item item)</span> {
   <span class="hljs-keyword">if</span> (item != <span class="hljs-literal">null</span>) {
     <span class="hljs-type">ItemRegistry</span> <span class="hljs-variable">registry</span> <span class="hljs-operator">=</span> peristentStore.getItemRegistry();
     <span class="hljs-keyword">if</span> (registry != <span class="hljs-literal">null</span>) {
@@ -290,58 +147,29 @@ m_total += expenses.getTotal();
     }
   }
 }
-</code></pre>
-<div dir="rtl">
-اگر در یک پایگاه کد با کدی مانند این کار کنید، ممکن است به نظر شما چندان بد نباشد، اما واقعاً بد است! وقتی null را باز می‌گردانیم، در واقع داریم برای خودمان کار ایجاد می‌کنیم و مشکلات را به دوش فراخواننده‌ها می‌گذاریم. تنها کافی است یک بررسی null فراموش شود تا یک برنامه از کنترل خارج شود.
-<p>آیا متوجه شدید که در خط دوم آن دستور if تو در تو، هیچ بررسی null وجود نداشت؟ اگر persistentStore null بود، در زمان اجرا چه اتفاقی می‌افتاد؟ ما با یک NullPointerException در زمان اجرا مواجه می‌شدیم، و یا کسی در سطح بالا NullPointerException را catch می‌کند یا نمی‌کند. در هر صورت، این بد است. دقیقاً چه باید کرد در پاسخ به یک NullPointerException که از عمق برنامه شما thrown شده است؟</p>
-<p>گفتن اینکه مشکل کد بالا این است که یک بررسی null ندارد، آسان است، اما در واقعیت، مشکل این است که بیش از حد بررسی null دارد. اگر وسوسه می‌شوید که از یک متد null را بازگردانید، به جای آن، در نظر داشته باشید که یک استثنا thrown کنید یا یک شیء مورد خاص برگردانید. اگر از یک متد شخص ثالث که null باز می‌گرداند، فراخوانی می‌کنید، در نظر داشته باشید که آن متد را با متدی که یا یک استثنا thrown می‌کند یا یک شیء مورد خاص برمی‌گرداند، wrap کنید.</p>
-<p>در بسیاری از موارد، شیء مورد خاص یک درمان آسان است. تصور کنید که کدی مانند این دارید:</p>
-</div>
-<pre class="hljs"><code>List &lt;Employee&gt; employees = getEmployees();
+</code></pre> <div dir="rtl"> اگر در یک پایگاه کد با کدی مانند این کار کنید، ممکن است به نظر شما چندان بد نباشد، اما واقعاً بد است! وقتی null را باز می‌گردانیم، در واقع داریم برای خودمان کار ایجاد می‌کنیم و مشکلات را به دوش فراخواننده‌ها می‌گذاریم. تنها کافی است یک بررسی null فراموش شود تا یک برنامه از کنترل خارج شود. <p>آیا متوجه شدید که در خط دوم آن دستور if تو در تو، هیچ بررسی null وجود نداشت؟ اگر persistentStore null بود، در زمان اجرا چه اتفاقی می‌افتاد؟ ما با یک NullPointerException در زمان اجرا مواجه می‌شدیم، و یا کسی در سطح بالا NullPointerException را catch می‌کند یا نمی‌کند. در هر صورت، این بد است. دقیقاً چه باید کرد در پاسخ به یک NullPointerException که از عمق برنامه شما thrown شده است؟</p><p>گفتن اینکه مشکل کد بالا این است که یک بررسی null ندارد، آسان است، اما در واقعیت، مشکل این است که بیش از حد بررسی null دارد. اگر وسوسه می‌شوید که از یک متد null را بازگردانید، به جای آن، در نظر داشته باشید که یک استثنا thrown کنید یا یک شیء مورد خاص برگردانید. اگر از یک متد شخص ثالث که null باز می‌گرداند، فراخوانی می‌کنید، در نظر داشته باشید که آن متد را با متدی که یا یک استثنا thrown می‌کند یا یک شیء مورد خاص برمی‌گرداند، wrap کنید.</p><p>در بسیاری از موارد، شیء مورد خاص یک درمان آسان است. تصور کنید که کدی مانند این دارید:</p></div> <pre class="hljs"><code>List &lt;Employee&gt; employees = getEmployees();
 <span class="hljs-keyword">if</span> (employees != <span class="hljs-literal">null</span>) {
   <span class="hljs-keyword">for</span> (Employee e: employees) {
     totalPay += e.getPay();
   }
 }
-</code></pre>
-<div dir="rtl">
-در حال حاضر، متد getEmployees می‌تواند null را برگرداند، اما آیا لازم است؟ اگر ما متد getEmployee را طوری تغییر دهیم که یک لیست خالی را بازگرداند، می‌توانیم کد را تمیزتر کنیم:
-</div>
-<pre class="hljs"><code>List &lt;Employee&gt; employees = getEmployees();
+</code></pre> <div dir="rtl"> در حال حاضر، متد getEmployees می‌تواند null را برگرداند، اما آیا لازم است؟ اگر ما متد getEmployee را طوری تغییر دهیم که یک لیست خالی را بازگرداند، می‌توانیم کد را تمیزتر کنیم: </div><pre class="hljs"><code>List &lt;Employee&gt; employees = getEmployees();
 <span class="hljs-keyword">for</span> (Employee e: employees) {
   totalPay += e.getPay();
 }
-</code></pre>
-<div dir="rtl">
-خوشبختانه، جاوا دارای Collections.emptyList() است که یک لیست از پیش‌تعریف‌شده و غیرقابل تغییر را برمی‌گرداند که می‌توانیم برای این منظور از آن استفاده کنیم:
-</div>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> List&lt;Employee&gt; <span class="hljs-title function_">getEmployees</span><span class="hljs-params">()</span> {
+</code></pre> <div dir="rtl"> خوشبختانه، جاوا دارای Collections.emptyList() است که یک لیست از پیش‌تعریف‌شده و غیرقابل تغییر را برمی‌گرداند که می‌توانیم برای این منظور از آن استفاده کنیم: </div><pre class="hljs"><code><span class="hljs-keyword">public</span> List&lt;Employee&gt; <span class="hljs-title function_">getEmployees</span><span class="hljs-params">()</span> {
  <span class="hljs-keyword">if</span>( .. there are no employees .. ) 
   <span class="hljs-keyword">return</span> Collections.emptyList();
 }
-</code></pre>
-<div dir="rtl">
-اگر به این روش کدنویسی کنید، احتمال وقوع NullPointerExceptions را به حداقل می‌رسانید و کد شما تمیزتر خواهد بود.
-<h2>null پاس ندهید</h2>
-<p>بازگرداندن null از متدها بد است، اما پاس دادن null به داخل متدها بدتر است. مگر اینکه با API کار کنید که از شما بخواهد null را پاس دهید، باید تا حد امکان از پاس دادن null در کد خود پرهیز کنید.</p>
-<p>بیایید به یک مثال نگاه کنیم تا ببینیم چرا. در اینجا یک متد ساده وجود دارد که یک معیار را برای دو نقطه محاسبه می‌کند:</p>
-</div>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MetricsCalculator</span> 
+</code></pre> <div dir="rtl"> اگر به این روش کدنویسی کنید، احتمال وقوع NullPointerExceptions را به حداقل می‌رسانید و کد شما تمیزتر خواهد بود. <h2>null پاس ندهید</h2><p>بازگرداندن null از متدها بد است، اما پاس دادن null به داخل متدها بدتر است. مگر اینکه با API کار کنید که از شما بخواهد null را پاس دهید، باید تا حد امکان از پاس دادن null در کد خود پرهیز کنید.</p><p>بیایید به یک مثال نگاه کنیم تا ببینیم چرا. در اینجا یک متد ساده وجود دارد که یک معیار را برای دو نقطه محاسبه می‌کند:</p></div> <pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MetricsCalculator</span> 
 {
  <span class="hljs-keyword">public</span> <span class="hljs-type">double</span> <span class="hljs-title function_">xProjection</span><span class="hljs-params">(Point p1, Point p2)</span> {
  <span class="hljs-keyword">return</span> (p2.x – p1.x) * <span class="hljs-number">1.5</span>;
  }
  …
 }
-</code></pre>
-<div dir="rtl">زمانی که کسی null را به عنوان یک آرگومان عبور می‌دهد، چه اتفاقی می‌افتد؟</div>
-<pre class="hljs"><code>calculator.xProjection(<span class="hljs-literal">null</span>, <span class="hljs-keyword">new</span> <span class="hljs-title class_">Point</span>(<span class="hljs-number">12</span>, <span class="hljs-number">13</span>));
-</code></pre>
-<div dir="rtl">
-البته، ما یک NullPointerException خواهیم گرفت.
-<p>چگونه می‌توانیم این مشکل را برطرف کنیم؟ می‌توانیم یک نوع استثنا جدید ایجاد کنیم و آن را thrown کنیم:</p>
-</div>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MetricsCalculator</span> {
+</code></pre> <div dir="rtl">زمانی که کسی null را به عنوان یک آرگومان عبور می‌دهد، چه اتفاقی می‌افتد؟</div><pre class="hljs"><code>calculator.xProjection(<span class="hljs-literal">null</span>, <span class="hljs-keyword">new</span> <span class="hljs-title class_">Point</span>(<span class="hljs-number">12</span>, <span class="hljs-number">13</span>));
+</code></pre> <div dir="rtl"> البته، ما یک NullPointerException خواهیم گرفت. <p>چگونه می‌توانیم این مشکل را برطرف کنیم؟ می‌توانیم یک نوع استثنا جدید ایجاد کنیم و آن را thrown کنیم:</p></div> <pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MetricsCalculator</span> {
   <span class="hljs-keyword">public</span> <span class="hljs-type">double</span> <span class="hljs-title function_">xProjection</span><span class="hljs-params">(Point p1, Point p2)</span> {
     <span class="hljs-keyword">if</span> (p1 == <span class="hljs-literal">null</span> || p2 == <span class="hljs-literal">null</span>) {
       <span class="hljs-keyword">throw</span> InvalidArgumentException(
@@ -351,136 +179,223 @@ m_total += expenses.getTotal();
   }
 }
 
-</code></pre>
-<div dir="rtl">
-آیا این بهتر است؟ ممکن است کمی بهتر از یک NullPointerException باشد، اما به خاطر داشته باشید که باید یک handler برای InvalidArgumentException تعریف کنیم. این handler باید چه کاری انجام دهد؟ آیا راه حل مناسبی وجود دارد؟
-<p>یک گزینه دیگر نیز وجود دارد. می‌توانیم از مجموعه‌ای از assertions استفاده کنیم:</p>
-</div>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MetricsCalculator</span> {
+</code></pre> <div dir="rtl"> آیا این بهتر است؟ ممکن است کمی بهتر از یک NullPointerException باشد، اما به خاطر داشته باشید که باید یک handler برای InvalidArgumentException تعریف کنیم. این handler باید چه کاری انجام دهد؟ آیا راه حل مناسبی وجود دارد؟ <p>یک گزینه دیگر نیز وجود دارد. می‌توانیم از مجموعه‌ای از assertions استفاده کنیم:</p></div> <pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MetricsCalculator</span> {
   <span class="hljs-keyword">public</span> <span class="hljs-type">double</span> <span class="hljs-title function_">xProjection</span><span class="hljs-params">(Point p1, Point p2)</span> {
     <span class="hljs-keyword">assert</span> p1 != <span class="hljs-literal">null</span>: <span class="hljs-string">&quot;p1 should not be null&quot;</span>;
     <span class="hljs-keyword">assert</span> p2 != <span class="hljs-literal">null</span>: <span class="hljs-string">&quot;p2 should not be null&quot;</span>;
     <span class="hljs-keyword">return</span> (p2.x– p1.x) * <span class="hljs-number">1.5</span>;
   }
 }
-</code></pre>
-<div dir="rtl">
-این مستندات خوبند اما مشکل را حل نمی‌کنند. اگر کسی null را عبور دهد، همچنان با یک خطای زمان اجرا (runtime error) مواجه خواهیم شد.
-<p>در بیشتر زبان‌های برنامه‌نویسی، راه خوبی برای مدیریت null که به طور تصادفی توسط یک فراخواننده عبور داده می‌شود وجود ندارد. به همین دلیل، رویکرد منطقی این است که به طور پیش‌فرض از عبور دادن null جلوگیری کنیم. وقتی این کار را انجام می‌دهید، می‌توانید با این دانش کدنویسی کنید که یک null در لیست آرگومان‌ها نشانه‌ای از یک مشکل است و در نهایت با اشتباهات کمتری مواجه خواهید شد.</p>
-<h2>نتیجه‌گیری</h2>
-<p>کد تمیز قابل خواندن است، اما باید (قوی) robust نیز باشد. این اهداف متضاد نیستند. ما می‌توانیم کد تمیز و robust بنویسیم اگر به مدیریت خطا به عنوان یک نگرانی جداگانه نگاه کنیم، چیزی که به طور مستقل از منطق اصلی ما قابل مشاهده است. به میزانی که قادر به انجام این کار باشیم، می‌توانیم به طور مستقل در مورد آن استدلال کنیم و پیشرفت‌های زیادی در نگهداری کد خود داشته باشیم.</p>
-</div>
-
-  </main>
-
-  <!-- فوتر مشترک -->
-  <footer class="footer">
-    <div class="container">
-      <p>
-        <img src="/Gitab/icone/copyright.svg" alt="کپی‌رایت" width="14" height="14"
-             style="vertical-align:middle;margin-inline:4px">
-        <span id="y"></span> Gitab — تمامی حقوق محفوظ است.
-      </p>
-    </div>
-  </footer>
-
-  <!-- سال و اسکریپت تغییر تم -->
-  <script>
+</code></pre> <div dir="rtl"> این مستندات خوبند اما مشکل را حل نمی‌کنند. اگر کسی null را عبور دهد، همچنان با یک خطای زمان اجرا (runtime error) مواجه خواهیم شد. <p>در بیشتر زبان‌های برنامه‌نویسی، راه خوبی برای مدیریت null که به طور تصادفی توسط یک فراخواننده عبور داده می‌شود وجود ندارد. به همین دلیل، رویکرد منطقی این است که به طور پیش‌فرض از عبور دادن null جلوگیری کنیم. وقتی این کار را انجام می‌دهید، می‌توانید با این دانش کدنویسی کنید که یک null در لیست آرگومان‌ها نشانه‌ای از یک مشکل است و در نهایت با اشتباهات کمتری مواجه خواهید شد.</p><h2>نتیجه‌گیری</h2><p>کد تمیز قابل خواندن است، اما باید (قوی) robust نیز باشد. این اهداف متضاد نیستند. ما می‌توانیم کد تمیز و robust بنویسیم اگر به مدیریت خطا به عنوان یک نگرانی جداگانه نگاه کنیم، چیزی که به طور مستقل از منطق اصلی ما قابل مشاهده است. به میزانی که قادر به انجام این کار باشیم، می‌توانیم به طور مستقل در مورد آن استدلال کنیم و پیشرفت‌های زیادی در نگهداری کد خود داشته باشیم.</p></div> </article><nav class="chapter-single-next-nav"> <a href="/Gitab/books/book3/Book/08_Boundaries/Boundaries/" class="btn-next-chapter-action" id="nextChapterBtn" data-hub="/Gitab/books/book3/"> <span class="next-btn-text">فصل بعدی: مرزها و ادغام با کدهای بیرونی</span> <span class="next-btn-arrow">←</span> </a> </nav></div> <button class="fab-back-to-top" id="backToTopBtn" type="button" aria-label="رفتن به بالای صفحه" title="رفتن به بالا"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"> <polyline points="18 15 12 9 6 15"></polyline> </svg> </button></main> <footer class="footer-minimal"><div class="footer-container"> <div class="footer-top-row"><div class="footer-brand-side"> <a href="/Gitab/" class="footer-brand-anchor"> <img src="/Gitab/icone/logo.svg" alt="Gitab" width="28" height="28" loading="lazy" decoding="async"> <span class="footer-brand-title">گیتاب (Gitab)</span> </a> <p class="footer-tagline"> پلتفرم آزاد و مستقل برای ترجمهٔ دقیق و روان کتاب‌های مرجع مهندسی نرم‌افزار. </p></div> <div class="footer-nav-cols"><div class="footer-nav-col"> <span class="footer-nav-heading">موضوعات</span><ul class="footer-nav-list"> <li><a href="/Gitab/books/list-books/?cat=csharp">سی‌شارپ و دات‌نت</a></li><li><a href="/Gitab/books/list-books/?cat=clean-code">کد تمیز و بازآفرینی</a></li><li><a href="/Gitab/books/list-books/?cat=architecture">معماری و طراحی دامنه</a></li><li><a href="/Gitab/books/list-books/?cat=system">لینوکس و خط فرمان</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">بخش‌های سایت</span><ul class="footer-nav-list"> <li><a href="/Gitab/">صفحه اصلی</a></li><li><a href="/Gitab/books/list-books/">کتابخانه کامل</a></li><li><a href="/Gitab/courses/">دوره‌های آموزشی</a></li><li><a href="/Gitab/translator.html">تالار مترجمین</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">مشارکت و جامعه</span><ul class="footer-nav-list"> <li><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer">راهنمای همکاری در ترجمه</a></li><li><a href="https://github.com/hheydarian/Gitab/issues" target="_blank" rel="noopener noreferrer">پیشنهاد کتاب یا گزارش خطا</a></li></ul> </div></div> </div><div class="footer-bottom-line"> <span>© <span id="y">2026</span> Gitab — توسعه‌یافته برای جامعهٔ مهندسان نرم‌افزار ایرانی</span></div> </div></footer> <script>
   (() => {
     const root = document.documentElement;
     const btn = document.getElementById('themeToggle');
+    const sunIcon = btn ? btn.querySelector('.icon-sun') : null;
+    const moonIcon = btn ? btn.querySelector('.icon-moon') : null;
     const KEY = 'gitab-theme';
 
-    function updateTheme(s) {
-      root.setAttribute('data-theme', s);
-      const mode = s;  // فقط `dark` یا `light` خواهد بود
+    function updateTheme(mode) {
+      root.setAttribute('data-theme', mode);
       root.dataset.colorMode = mode;
-      btn.dataset.icon = mode === 'dark' ? 'moon' : 'sun';
+      if (sunIcon && moonIcon) {
+        if (mode === 'dark') {
+          sunIcon.style.display = 'inline-block';
+          moonIcon.style.display = 'none';
+        } else {
+          sunIcon.style.display = 'none';
+          moonIcon.style.display = 'inline-block';
+        }
+      }
     }
 
-    // وضعیت تم ذخیره شده از localStorage
-    let saved = localStorage.getItem(KEY) || 'light'; // پیش‌فرض روشن
+    let saved = 'dark';
+    try { saved = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
     updateTheme(saved);
 
-    // تنظیم مجدد تم هنگام تغییر وضعیت دکمه
-    btn.addEventListener('click', () => {
-      const current = localStorage.getItem(KEY) || 'light';
-      const next = current === 'dark' ? 'light' : 'dark';  // فقط دو حالت: تاریک و روشن
-      localStorage.setItem(KEY, next);
-      updateTheme(next);
-    });
+    if (btn) {
+      btn.addEventListener('click', () => {
+        let current = 'dark';
+        try { current = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+        const next = current === 'dark' ? 'light' : 'dark';
+        try { localStorage.setItem(KEY, next); } catch (e) {}
+        updateTheme(next);
+      });
+    }
 
-    // هنگام بارگذاری صفحه
     document.addEventListener('DOMContentLoaded', () => {
-      updateTheme(localStorage.getItem(KEY) || 'light');
+      let mode = 'dark';
+      try { mode = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+      updateTheme(mode);
+      const yearSpan = document.getElementById('y');
+      if (yearSpan) yearSpan.textContent = new Date().getFullYear();
     });
+
+    const mobBtn = document.getElementById('mobileMenuBtn');
+    const mobDrawer = document.getElementById('mobileDrawer');
+    if (mobBtn && mobDrawer) {
+      const setDrawerOpen = (open) => {
+        mobDrawer.classList.toggle('open', open);
+        mobBtn.classList.toggle('is-open', open);
+        mobBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        mobBtn.setAttribute('aria-label', open ? 'بستن منو' : 'باز کردن منو');
+        mobDrawer.setAttribute('aria-hidden', open ? 'false' : 'true');
+      };
+
+      mobBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        setDrawerOpen(!mobDrawer.classList.contains('open'));
+      });
+
+      mobDrawer.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => setDrawerOpen(false));
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && mobDrawer.classList.contains('open')) {
+          setDrawerOpen(false);
+        }
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!mobDrawer.contains(e.target) && !mobBtn.contains(e.target)) {
+          setDrawerOpen(false);
+        }
+      });
+    }
+
+    if ('serviceWorker' in navigator) {
+      const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+      if (isLocalhost) {
+        navigator.serviceWorker.getRegistrations().then(regs => {
+          for (const reg of regs) reg.unregister();
+        });
+        if ('caches' in window) {
+          caches.keys().then(names => {
+            for (const name of names) caches.delete(name);
+          });
+        }
+      } else {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/Gitab/sw.js').catch(() => {});
+        });
+      }
+    }
   })();
-</script>
-
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-  <script>hljs.highlightAll();</script>
-
-  <script>
+  </script> <script>
   document.querySelectorAll('pre code').forEach(block => {
+    const pre = block.parentNode;
+    if (!pre || pre.querySelector('.copy-btn')) return;
+
+    const copySvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
+    const okSvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+
     const btn = document.createElement('button');
     btn.className = 'copy-btn';
-
-    const icon = document.createElement('img');
-    icon.src = "/Gitab/icone/copy.svg";
-    icon.alt = 'Copy';
-    btn.appendChild(icon);
-
-    block.parentNode.insertBefore(btn, block);
+    btn.setAttribute('aria-label', 'کپی کد');
+    btn.setAttribute('title', 'کپی کد');
+    btn.setAttribute('type', 'button');
+    btn.innerHTML = copySvg;
+    pre.appendChild(btn);
 
     btn.addEventListener('click', async () => {
-      await navigator.clipboard.writeText(block.textContent);
-      btn.classList.add('copied');
-      setTimeout(() => btn.classList.remove('copied'), 1500);
-    });
-  });
-  </script>
-
-  <script>
-  document.body.dataset.page = window.location.pathname;
-
-  const menuBtn = document.querySelector(".menu-toggle");
-  const nav = document.querySelector(".nav");
-
-  if (menuBtn && nav) {
-    menuBtn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      nav.classList.toggle("show");
-    });
-
-    document.addEventListener("click", (e) => {
-      const clickedInsideNav = nav.contains(e.target);
-      const clickedMenuButton = menuBtn.contains(e.target);
-      if (!clickedInsideNav && !clickedMenuButton) {
-        nav.classList.remove("show");
+      try {
+        await navigator.clipboard.writeText(block.textContent);
+        btn.classList.add('copied');
+        btn.innerHTML = okSvg;
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          btn.innerHTML = copySvg;
+        }, 1800);
+      } catch (err) {
+        console.error('Copy failed:', err);
       }
     });
-  }
-  </script>
-
-  <script>
-    document.getElementById('y').textContent = new Date().getFullYear();
-  </script>
-  <script>
-document.getElementById("openDonate").addEventListener("click", () => {
-  document.getElementById("donateModal").style.display = "block";
-});
-document.getElementById("closeDonate").addEventListener("click", () => {
-  document.getElementById("donateModal").style.display = "none";
-});
-document.querySelectorAll(".copy-btn").forEach(btn => {
-  btn.addEventListener("click", () => {
-    navigator.clipboard.writeText(btn.dataset.copy);
-  
-    setTimeout(() => (btn.textContent = "کپی"), 2000);
   });
-});
-</script>
+  </script> <script>
+  (() => {
+    const article = document.getElementById('chapterArticle');
+    if (!article) return;
 
-</body>
-</html>
+    const progressBar = document.getElementById('readingProgressBar');
+    if (progressBar) {
+      window.addEventListener('scroll', () => {
+        const docElem = document.documentElement;
+        const totalHeight = docElem.scrollHeight - docElem.clientHeight;
+        if (totalHeight > 0) {
+          const progress = (window.pageYOffset / totalHeight) * 100;
+          progressBar.style.width = Math.min(100, Math.max(0, progress)) + '%';
+        }
+      }, { passive: true });
+    }
+
+    const btt = document.getElementById('backToTopBtn');
+    if (btt) {
+      window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 250) {
+          btt.classList.add('visible');
+        } else {
+          btt.classList.remove('visible');
+        }
+      }, { passive: true });
+
+      btt.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+
+    article.querySelectorAll('img').forEach(img => {
+      if (!img.hasAttribute('loading')) img.loading = 'lazy';
+      if (!img.hasAttribute('decoding')) img.decoding = 'async';
+      const parent = img.parentElement;
+      if (parent && parent.tagName === 'P') {
+        parent.style.textAlign = 'center';
+      }
+
+      img.addEventListener('error', function() {
+        const src = this.getAttribute('src');
+        if (src && src.includes('assets/image/')) {
+          const parts = src.split('assets/image/');
+          const corrected = '/Gitab/books/book3/assets/image/' + parts[1];
+          if (this.src !== corrected) {
+            this.src = corrected;
+          }
+        }
+      });
+    });
+
+    article.querySelectorAll('p').forEach(p => {
+      const trimmed = p.innerText.trim();
+      if (trimmed.startsWith('💡') || trimmed.startsWith('نکته:')) {
+        p.classList.add('react-callout', 'callout-tip');
+      } else if (trimmed.startsWith('⚠️') || trimmed.startsWith('هشدار:')) {
+        p.classList.add('react-callout', 'callout-warning');
+      } else if (trimmed.startsWith('📌') || trimmed.startsWith('مهم:')) {
+        p.classList.add('react-callout', 'callout-important');
+      } else if (trimmed.startsWith('🔹') || trimmed.startsWith('🔸')) {
+        p.classList.add('react-callout', 'callout-note');
+      }
+    });
+  })();
+  </script> <script type="speculationrules">{"prefetch":[{"where":{"and":[{"href_matches":"/Gitab/*"},{"not":{"href_matches":"/Gitab/downloads/*"}},{"not":{"selector_matches":"[download], [target='_blank']"}}]},"eagerness":"moderate"}]}</script> <script>
+  (() => {
+    if (window.HTMLScriptElement && HTMLScriptElement.supports && HTMLScriptElement.supports('speculationrules')) return;
+    const seen = new Set([window.location.href]);
+    let count = 0;
+    const prefetchLink = (e) => {
+      if (count >= 12) return;
+      const a = e.target && e.target.closest ? e.target.closest('header a, .chapter-single-next-nav a, .syllabus-chapter-item a, .btn-hero-read, .btn-card-read') : null;
+      if (!a || !a.href || a.hasAttribute('download') || a.target === '_blank') return;
+      if (a.origin !== window.location.origin || a.pathname.includes('/downloads/')) return;
+      const clean = a.href.split('#')[0];
+      if (!clean || seen.has(clean)) return;
+      seen.add(clean);
+      count++;
+      const l = document.createElement('link');
+      l.rel = 'prefetch';
+      l.href = clean;
+      document.head.appendChild(l);
+    };
+    document.addEventListener('pointerenter', prefetchLink, { capture: true, passive: true });
+    document.addEventListener('touchstart', prefetchLink, { capture: true, passive: true });
+  })();
+  </script></body></html>

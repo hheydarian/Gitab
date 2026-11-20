@@ -1,168 +1,34 @@
-
-
-<!doctype html>
-<html lang="fa" dir="rtl">
-<head>
-  <meta charset="utf-8">
-  <link rel="icon" type="image/png" href="/Gitab/favicon.png">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>LINQ to XML</title>
-  <meta name="description" content="ترجمه‌های فارسی کتاب‌های فنی — سریع، مینیمال و قابل اتکا.">
-
-  <!-- استایل‌ها -->
-  <link rel="stylesheet" href="/Gitab/styles/main.css">
-  <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
-
-  <style>
-  @font-face {
-    font-family: 'Vazir';
-    src: url('/Gitab/fonts/Vazir-FD-WOL.ttf') format('truetype');
-    font-display: swap;
-  }
-  @font-face {
-    font-family: "Lalezar";
-    src: url('fonts/Lalezar.ttf') format('truetype');
-    font-display: swap;
-}
-  body {
-    font-family: 'Vazir', sans-serif;
-  }
-  </style>
-</head>
-
-<body>
-  <!-- هدر مشترک -->
-  <header class="header">
-    <div class="container nav-wrap">
-      <a href="/Gitab/" class="brand">
-        <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="26" height="26">
-        <span>Gitab</span>
-      </a>
-
-       <nav class="nav">
-         <a href="/Gitab/" >خانه</a>
-         <a href="/Gitab/books/list-books" >کتاب‌ها</a>
-         <a href="/Gitab/giter.html" >دوره ها</a>
-          <!-- 
-         <a href="/Gitab/translator.html" >مترجمین</a>
-           -->
-       </nav>
-
-      <div class="nav-actions">
-        <button id="themeToggle" class="icon-btn theme-btn" data-icon="moon" aria-label="تغییر تم">
-          <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن">
-          <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک">
-        </button>
-
-        <a class="icon-btn" href="https://github.com/hheydarian/Gitab" target="_blank" title="GitHub">
-          <img src="/Gitab/icone/github.svg" alt="GitHub">
-        </a>
-
-        <!-- دکمه منو برای موبایل -->
-        <button class="menu-toggle" aria-label="منو">
-          <img src="/Gitab/icone/menu.svg" alt="menu">
-        </button>
-      </div>
-    </div>
-  </header>
-
-  
-  <main class="site-main book-page">
-    <h1>فصل دهم:  LINQ to XML</h1>
-<p>.NET تعداد زیادی API برای کار با داده‌های XML فراهم می‌کند. انتخاب اصلی برای پردازش عمومی اسناد XML، <strong>LINQ to XML</strong> است.<br>
-LINQ to XML شامل یک مدل شیء سند XML (<strong>DOM</strong>) سبک و سازگار با LINQ است، به‌علاوه مجموعه‌ای از عملگرهای پرس‌وجوی تکمیلی.</p>
-<p>در این فصل، ما به‌طور کامل روی LINQ to XML تمرکز می‌کنیم. در فصل ۱۱، به <strong>خواننده/نویسنده XML</strong> یک‌طرفه (forward-only) می‌پردازیم و در ضمیمه‌ی آنلاین، نوع‌هایی برای کار با <strong>schemaها</strong> و <strong>stylesheetها</strong> را پوشش می‌دهیم. .NET همچنین شامل DOM قدیمی مبتنی بر <strong>XmlDocument</strong> است که ما آن را پوشش نمی‌دهیم.</p>
-<p>DOM مربوط به LINQ to XML بسیار خوب طراحی شده و از نظر کارایی بسیار قوی است. حتی بدون LINQ، این DOM به‌عنوان یک لایه‌ی سبک روی کلاس‌های سطح پایین <strong>XmlReader</strong> و <strong>XmlWriter</strong> ارزشمند است.</p>
-<p>تمام نوع‌های LINQ to XML در فضای نام <strong>System.Xml.Linq</strong> تعریف شده‌اند.</p>
-<hr>
-<h2>🏛 نمای کلی معماری (Architectural Overview)</h2>
-<p>این بخش با معرفی بسیار کوتاهی از مفهوم <strong>DOM</strong> شروع می‌شود و سپس منطق پشت DOM در LINQ to XML را توضیح می‌دهد.</p>
-<hr>
-<h3>❓ DOM چیست؟ (What Is a DOM?)</h3>
-<p>به فایل XML زیر توجه کنید:</p>
-<pre class="hljs"><code><span class="hljs-meta">&lt;?xml version=<span class="hljs-string">&quot;1.0&quot;</span> encoding=<span class="hljs-string">&quot;utf-8&quot;</span>?&gt;</span>
+<!doctype html><html lang="fa" dir="rtl"> <head><script>
+    if (window.location.pathname.startsWith('/gitab/')) {
+      window.location.replace(window.location.pathname.replace(/^\/gitab\//i, '/Gitab/') + window.location.search + window.location.hash);
+    }
+    (() => {
+      try {
+        const t = localStorage.getItem('gitab-theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', t);
+        document.documentElement.dataset.colorMode = t;
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        document.documentElement.dataset.colorMode = 'dark';
+      }
+    })();
+  </script> <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5"> <title>LINQ to XML</title><meta name="description" content="LINQ to XML — مطالعه آنلاین و رایگان از کتاب «سی‌شارپ ۱۲ در یک نگاه» (C# 12 in a Nutshell) اثر Joseph Albahari با ترجمه حامد حیدریان در گیتاب."> <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"><meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"> <meta name="theme-color" content="#090d16"><meta name="referrer" content="strict-origin-when-cross-origin"> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https:; frame-src https://www.youtube.com https://www.youtube-nocookie.com https://maps.google.com https://www.google.com; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self';"><link rel="icon" type="image/png" href="/Gitab/favicon.png"> <link rel="canonical" href="https://hheydarian.github.io/Gitab/books/book1/Book/10/LINQ-to-XML/"><link rel="alternate" hreflang="fa" href="https://hheydarian.github.io/Gitab/books/book1/Book/10/LINQ-to-XML/"> <link rel="alternate" hreflang="x-default" href="https://hheydarian.github.io/Gitab/books/book1/Book/10/LINQ-to-XML/"><link rel="alternate" type="text/plain" title="LLMs.txt" href="/Gitab/llms.txt"> <link rel="sitemap" type="application/xml" title="Sitemap" href="/Gitab/sitemap.xml"><meta property="og:locale" content="fa_IR"> <meta property="og:type" content="article"><meta property="og:site_name" content="گیتاب | Gitab"> <meta property="og:title" content="LINQ to XML"><meta property="og:description" content="LINQ to XML — مطالعه آنلاین و رایگان از کتاب «سی‌شارپ ۱۲ در یک نگاه» (C# 12 in a Nutshell) اثر Joseph Albahari با ترجمه حامد حیدریان در گیتاب."> <meta property="og:url" content="https://hheydarian.github.io/Gitab/books/book1/Book/10/LINQ-to-XML/"><meta property="og:image" content="https://hheydarian.github.io/Gitab/images/csharp-12/Cover.jpg"> <meta property="og:image:alt" content="LINQ to XML"><meta name="twitter:card" content="summary_large_image"> <meta name="twitter:title" content="LINQ to XML"><meta name="twitter:description" content="LINQ to XML — مطالعه آنلاین و رایگان از کتاب «سی‌شارپ ۱۲ در یک نگاه» (C# 12 in a Nutshell) اثر Joseph Albahari با ترجمه حامد حیدریان در گیتاب."> <meta name="twitter:image" content="https://hheydarian.github.io/Gitab/images/csharp-12/Cover.jpg"><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://hheydarian.github.io/Gitab/#organization","name":"گیتاب | Gitab","alternateName":"Gitab","url":"https://hheydarian.github.io/Gitab/","logo":{"@type":"ImageObject","url":"https://hheydarian.github.io/Gitab/favicon.png"},"sameAs":["https://github.com/hheydarian/Gitab"]},{"@type":"WebSite","@id":"https://hheydarian.github.io/Gitab/#website","url":"https://hheydarian.github.io/Gitab/","name":"گیتاب | Gitab","inLanguage":"fa-IR","publisher":{"@id":"https://hheydarian.github.io/Gitab/#organization"},"potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://hheydarian.github.io/Gitab/books/list-books/?q={search_term_string}"},"query-input":"required name=search_term_string"}},{"@type":"WebPage","@id":"https://hheydarian.github.io/Gitab/books/book1/Book/10/LINQ-to-XML/#webpage","url":"https://hheydarian.github.io/Gitab/books/book1/Book/10/LINQ-to-XML/","name":"LINQ to XML","description":"LINQ to XML — مطالعه آنلاین و رایگان از کتاب «سی‌شارپ ۱۲ در یک نگاه» (C# 12 in a Nutshell) اثر Joseph Albahari با ترجمه حامد حیدریان در گیتاب.","inLanguage":"fa-IR","isPartOf":{"@id":"https://hheydarian.github.io/Gitab/#website"}},{"@type":"TechArticle","headline":"LINQ to XML","description":"LINQ to XML — مطالعه آنلاین و رایگان از کتاب «سی‌شارپ ۱۲ در یک نگاه» (C# 12 in a Nutshell) اثر Joseph Albahari با ترجمه حامد حیدریان در گیتاب.","url":"https://hheydarian.github.io/Gitab/books/book1/Book/10/LINQ-to-XML/","inLanguage":"fa-IR","isAccessibleForFree":true,"author":{"@type":"Person","name":"Joseph Albahari"},"translator":{"@type":"Person","name":"حامد حیدریان"},"isPartOf":{"@type":"Book","name":"سی‌شارپ ۱۲ در یک نگاه","alternateName":"C# 12 in a Nutshell","url":"https://hheydarian.github.io/Gitab/books/book1/"}}]}</script> <link rel="preload" href="/Gitab/fonts/Vazirmatn.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/Gitab/styles/main.css?v=2.4" as="style"> <link rel="preload" href="/Gitab/styles/gitab-modern.css?v=2.5" as="style"><style>@font-face{font-family:'Lalezar';src:url('/Gitab/fonts/Lalezar.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}@font-face{font-family:'Vazirmatn';src:url('/Gitab/fonts/Vazirmatn.woff2') format('woff2');font-weight:100 900;font-style:normal;font-display:swap}html,body,button,input,optgroup,select,textarea,.filter-pill{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}input::placeholder,textarea::placeholder{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}</style> <link rel="stylesheet" href="/Gitab/styles/main.css?v=2.4"><link rel="stylesheet" href="/Gitab/styles/gitab-modern.css?v=2.5"> <link rel="stylesheet" href="/Gitab/styles/vendor/github-dark.min.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="/Gitab/styles/vendor/github-dark.min.css"></noscript></head> <body><header class="header"> <div class="container nav-wrap"><a href="/Gitab/" class="brand" aria-label="صفحه اصلی گیتاب"> <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="30" height="30" decoding="async"> <span class="brand-text">Gitab</span> </a> <nav class="nav" id="mainNav"><a href="/Gitab/" >خانه</a> <a href="/Gitab/books/list-books" aria-current="page">کتاب‌ها</a> <a href="/Gitab/courses/" >دوره‌ها</a> <a href="/Gitab/translator.html" >مترجمین</a></nav> <div class="nav-actions"><button id="themeToggle" class="theme-toggle-btn" aria-label="تغییر تم" title="تغییر تم"> <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن" width="18" height="18" decoding="async" style="display:none"> <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک" width="18" height="18" decoding="async"> </button> <a class="btn-github-pill" href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" title="مشاهده سورس گیتاب در گیت‌هاب"> <img src="/Gitab/icone/github.svg" alt="GitHub" width="16" height="16" decoding="async"> <span>گیت‌هاب</span> </a> <button class="mobile-menu-btn" id="mobileMenuBtn" type="button" aria-label="باز کردن منو" aria-expanded="false"> <svg class="mob-icon-open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="4" y1="7" x2="20" y2="7"></line> <line x1="4" y1="12" x2="20" y2="12"></line> <line x1="4" y1="17" x2="14" y2="17"></line> </svg> <svg class="mob-icon-close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="18" y1="6" x2="6" y2="18"></line> <line x1="6" y1="6" x2="18" y2="18"></line> </svg> </button></div> </div><div class="mobile-drawer" id="mobileDrawer" aria-hidden="true"> <div class="mobile-drawer-inner"><div class="mobile-drawer-section-label">ناوبری سریع</div><nav class="mobile-drawer-links" aria-label="منوی موبایل"> <a href="/Gitab/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M3 10.5 12 3l9 7.5"></path> <path d="M5 9.5V20a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V9.5"></path> </svg> </span> <span class="mob-nav-text">صفحه نخست</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/books/list-books" class="mobile-drawer-link active" aria-current="page"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path> </svg> </span> <span class="mob-nav-text">کتابخانه و فهرست کتاب‌ها</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/courses/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path> <path d="M6 12v5c3 3 9 3 12 0v-5"></path> </svg> </span> <span class="mob-nav-text">دوره‌های آموزشی</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/translator.html" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path> <circle cx="9" cy="7" r="4"></circle> <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path> <path d="M16 3.13a4 4 0 0 1 0 7.75"></path> </svg> </span> <span class="mob-nav-text">مترجمین و همکاران</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> </nav><div class="mobile-drawer-divider"></div><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" class="mobile-drawer-link mobile-drawer-gh"> <span class="mob-nav-icon" aria-hidden="true"> <img src="/Gitab/icone/github.svg" alt="" width="17" height="17" loading="lazy" decoding="async"> </span> <span class="mob-nav-text">مخزن گیت‌هاب پروژه</span> <span class="mob-nav-ext" aria-hidden="true">↗</span> </a> </div></div> </header><div class="reading-progress-track"> <div class="reading-progress-fill" id="readingProgressBar"></div></div> <main class="site-main chapter-reading-page"><div class="chapter-page-wrapper"> <nav class="chapter-clean-breadcrumb" aria-label="مسیر راهنما" dir="rtl"><a href="/Gitab/">خانه</a> <span class="bc-sep" aria-hidden="true">/</span> <a href="/Gitab/books/list-books/">کتاب‌ها</a> <span class="bc-sep" aria-hidden="true">/</span> <a href="/Gitab/books/book1/"><bdi>سی‌شارپ ۱۲ در یک نگاه</bdi></a> <span class="bc-sep" aria-hidden="true">/</span> <span class="bc-current-leaf"><bdi>LINQ to XML</bdi></span></nav> <article class="chapter-prose-container markdown-body" id="chapterArticle" dir="rtl"><h1>فصل دهم: LINQ to XML</h1><p>.NET تعداد زیادی API برای کار با داده‌های XML فراهم می‌کند. انتخاب اصلی برای پردازش عمومی اسناد XML، <strong>LINQ to XML</strong> است.<br> LINQ to XML شامل یک مدل شیء سند XML (<strong>DOM</strong>) سبک و سازگار با LINQ است، به‌علاوه مجموعه‌ای از عملگرهای پرس‌وجوی تکمیلی.</p><p>در این فصل، ما به‌طور کامل روی LINQ to XML تمرکز می‌کنیم. در فصل ۱۱، به <strong>خواننده/نویسنده XML</strong> یک‌طرفه (forward-only) می‌پردازیم و در ضمیمه‌ی آنلاین، نوع‌هایی برای کار با <strong>schemaها</strong> و <strong>stylesheetها</strong> را پوشش می‌دهیم. .NET همچنین شامل DOM قدیمی مبتنی بر <strong>XmlDocument</strong> است که ما آن را پوشش نمی‌دهیم.</p><p>DOM مربوط به LINQ to XML بسیار خوب طراحی شده و از نظر کارایی بسیار قوی است. حتی بدون LINQ، این DOM به‌عنوان یک لایه‌ی سبک روی کلاس‌های سطح پایین <strong>XmlReader</strong> و <strong>XmlWriter</strong> ارزشمند است.</p><p>تمام نوع‌های LINQ to XML در فضای نام <strong>System.Xml.Linq</strong> تعریف شده‌اند.</p><hr> <h2>نمای کلی معماری (Architectural Overview)</h2><p>این بخش با معرفی بسیار کوتاهی از مفهوم <strong>DOM</strong> شروع می‌شود و سپس منطق پشت DOM در LINQ to XML را توضیح می‌دهد.</p><hr> <h3>DOM چیست؟ (What Is a DOM?)</h3><p>به فایل XML زیر توجه کنید:</p><pre class="hljs"><code><span class="hljs-meta">&lt;?xml version=<span class="hljs-string">&quot;1.0&quot;</span> encoding=<span class="hljs-string">&quot;utf-8&quot;</span>?&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">customer</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;123&quot;</span> <span class="hljs-attr">status</span>=<span class="hljs-string">&quot;archived&quot;</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">firstname</span>&gt;</span>Joe<span class="hljs-tag">&lt;/<span class="hljs-name">firstname</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">lastname</span>&gt;</span>Bloggs<span class="hljs-tag">&lt;/<span class="hljs-name">lastname</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">customer</span>&gt;</span>
-</code></pre>
-<p>همان‌طور که در همه‌ی فایل‌های XML وجود دارد، ما با یک <strong>اعلان (declaration)</strong> شروع می‌کنیم و سپس یک عنصر ریشه (<strong>root element</strong>) داریم که نام آن <code>customer</code> است.<br>
-عنصر <code>customer</code> دو ویژگی (<strong>attribute</strong>) دارد، هرکدام با یک نام (id و status) و مقدار (&quot;123&quot; و &quot;archived&quot;).<br>
-درون <code>customer</code>، دو عنصر فرزند (<strong>child element</strong>) وجود دارد: <code>firstname</code> و <code>lastname</code>، که هرکدام محتوای متنی ساده‌ای (&quot;Joe&quot; و &quot;Bloggs&quot;) دارند.</p>
-<p>هرکدام از این ساختارها—اعلان، عنصر، ویژگی، مقدار، و محتوای متنی—می‌توانند با یک <strong>کلاس (class)</strong> نمایش داده شوند. و اگر چنین کلاس‌هایی خصوصیت‌های مجموعه‌ای (<strong>collection properties</strong>) برای ذخیره‌ی محتوای فرزند داشته باشند، می‌توانیم یک <strong>درخت از اشیاء</strong> بسازیم که یک سند را به‌طور کامل توصیف کند.<br>
-به این مدل، <strong>Document Object Model</strong> یا <strong>DOM</strong> گفته می‌شود.</p>
-<hr>
-<h3>🧩 DOM در LINQ to XML</h3>
-<p>LINQ to XML از دو بخش تشکیل شده است:</p>
-<ul>
-<li>یک DOM مربوط به XML که آن را <strong>X-DOM</strong> می‌نامیم.</li>
-<li>مجموعه‌ای از حدود ۱۰ عملگر پرس‌وجوی تکمیلی.</li>
-</ul>
-<p>همان‌طور که انتظار می‌رود، <strong>X-DOM</strong> شامل نوع‌هایی مثل <strong>XDocument</strong>، <strong>XElement</strong> و <strong>XAttribute</strong> است.<br>
-نکته‌ی جالب این است که نوع‌های X-DOM به LINQ وابسته نیستند—شما می‌توانید یک X-DOM را بارگذاری (load)، نمونه‌سازی (instantiate)، به‌روزرسانی (update) و ذخیره (save) کنید بدون آنکه هیچ پرس‌وجوی LINQ بنویسید.</p>
-<p>برعکس، شما می‌توانید از LINQ برای پرس‌وجو در یک DOM که با نوع‌های قدیمی و سازگار با <strong>W3C</strong> ساخته شده، استفاده کنید. با این حال، این کار محدودکننده و آزاردهنده خواهد بود.<br>
-ویژگی متمایز <strong>X-DOM</strong> این است که سازگار با LINQ (<strong>LINQ-friendly</strong>) است، یعنی:</p>
-<ul>
-<li>متدهایی دارد که توالی‌های <strong>IEnumerable</strong> مفیدی تولید می‌کنند که می‌توانید روی آن‌ها پرس‌وجو کنید.</li>
-<li>سازنده‌های آن به‌گونه‌ای طراحی شده‌اند که می‌توانید یک درخت X-DOM را از طریق یک <strong>LINQ projection</strong> بسازید.</li>
-</ul>
-<hr>
-<h3>📊 نمای کلی X-DOM</h3>
-<p>شکل ۱۰-۱ نوع‌های اصلی X-DOM را نشان می‌دهد.<br>
-پرکاربردترین این نوع‌ها <strong>XElement</strong> است.<br>
-<strong>XObject</strong> ریشه‌ی سلسله‌مراتب وراثت است؛ و <strong>XElement</strong> و <strong>XDocument</strong> ریشه‌های سلسله‌مراتب دربرگیری (<strong>containership hierarchy</strong>) هستند.</p>
-<div align="center">
-<p><img src="../../../assets/image/10/Table-10-1.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<p>شکل ۱۰-۲ درخت X-DOM ساخته‌شده از کد زیر را نشان می‌دهد:</p>
-<pre class="hljs"><code><span class="hljs-built_in">string</span> xml = <span class="hljs-string">@&quot;&lt;customer id=&#x27;123&#x27; status=&#x27;archived&#x27;&gt;
+</code></pre> <p>همان‌طور که در همه‌ی فایل‌های XML وجود دارد، ما با یک <strong>اعلان (declaration)</strong> شروع می‌کنیم و سپس یک عنصر ریشه (<strong>root element</strong>) داریم که نام آن <code>customer</code> است.<br> عنصر <code>customer</code> دو ویژگی (<strong>attribute</strong>) دارد، هرکدام با یک نام (id و status) و مقدار (&quot;123&quot; و &quot;archived&quot;).<br> درون <code>customer</code>، دو عنصر فرزند (<strong>child element</strong>) وجود دارد: <code>firstname</code> و <code>lastname</code>، که هرکدام محتوای متنی ساده‌ای (&quot;Joe&quot; و &quot;Bloggs&quot;) دارند.</p><p>هرکدام از این ساختارها—اعلان، عنصر، ویژگی، مقدار، و محتوای متنی—می‌توانند با یک <strong>کلاس (class)</strong> نمایش داده شوند. و اگر چنین کلاس‌هایی خصوصیت‌های مجموعه‌ای (<strong>collection properties</strong>) برای ذخیره‌ی محتوای فرزند داشته باشند، می‌توانیم یک <strong>درخت از اشیاء</strong> بسازیم که یک سند را به‌طور کامل توصیف کند.<br> به این مدل، <strong>Document Object Model</strong> یا <strong>DOM</strong> گفته می‌شود.</p><hr> <h3>DOM در LINQ to XML</h3><p>LINQ to XML از دو بخش تشکیل شده است:</p><ul> <li>یک DOM مربوط به XML که آن را <strong>X-DOM</strong> می‌نامیم.</li><li>مجموعه‌ای از حدود ۱۰ عملگر پرس‌وجوی تکمیلی.</li></ul> <p>همان‌طور که انتظار می‌رود، <strong>X-DOM</strong> شامل نوع‌هایی مثل <strong>XDocument</strong>، <strong>XElement</strong> و <strong>XAttribute</strong> است.<br> نکته‌ی جالب این است که نوع‌های X-DOM به LINQ وابسته نیستند—شما می‌توانید یک X-DOM را بارگذاری (load)، نمونه‌سازی (instantiate)، به‌روزرسانی (update) و ذخیره (save) کنید بدون آنکه هیچ پرس‌وجوی LINQ بنویسید.</p><p>برعکس، شما می‌توانید از LINQ برای پرس‌وجو در یک DOM که با نوع‌های قدیمی و سازگار با <strong>W3C</strong> ساخته شده، استفاده کنید. با این حال، این کار محدودکننده و آزاردهنده خواهد بود.<br> ویژگی متمایز <strong>X-DOM</strong> این است که سازگار با LINQ (<strong>LINQ-friendly</strong>) است، یعنی:</p><ul> <li>متدهایی دارد که توالی‌های <strong>IEnumerable</strong> مفیدی تولید می‌کنند که می‌توانید روی آن‌ها پرس‌وجو کنید.</li><li>سازنده‌های آن به‌گونه‌ای طراحی شده‌اند که می‌توانید یک درخت X-DOM را از طریق یک <strong>LINQ projection</strong> بسازید.</li></ul> <hr><h3>نمای کلی X-DOM</h3><p>شکل ۱۰-۱ نوع‌های اصلی X-DOM را نشان می‌دهد.<br> پرکاربردترین این نوع‌ها <strong>XElement</strong> است.<br><strong>XObject</strong> ریشه‌ی سلسله‌مراتب وراثت است؛ و <strong>XElement</strong> و <strong>XDocument</strong> ریشه‌های سلسله‌مراتب دربرگیری (<strong>containership hierarchy</strong>) هستند.</p><div align="center"> <p><img src="../../../assets/image/10/Table-10-1.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <p>شکل ۱۰-۲ درخت X-DOM ساخته‌شده از کد زیر را نشان می‌دهد:</p><pre class="hljs"><code><span class="hljs-built_in">string</span> xml = <span class="hljs-string">@&quot;&lt;customer id=&#x27;123&#x27; status=&#x27;archived&#x27;&gt;
                  &lt;firstname&gt;Joe&lt;/firstname&gt;
                  &lt;lastname&gt;Bloggs&lt;!--nice name--&gt;&lt;/lastname&gt;
                &lt;/customer&gt;&quot;</span>;
 XElement customer = XElement.Parse (xml);
-</code></pre>
-<div align="center">
-<p><img src="../../../assets/image/10/Table-10-2.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<h3>🧩 XObject</h3>
-<p><strong>XObject</strong> کلاس پایه‌ی انتزاعی برای تمام محتوای XML است. این کلاس یک پیوند به عنصر <strong>Parent</strong> (والد) در درخت دربرگیری (containership tree) تعریف می‌کند و همچنین می‌تواند یک <strong>XDocument</strong> اختیاری داشته باشد.</p>
-<hr>
-<h3>🧩 XNode</h3>
-<p><strong>XNode</strong> کلاس پایه برای بیشتر محتوای XML (به‌جز attributeها) است. ویژگی متمایز XNode این است که می‌تواند در یک مجموعه‌ی مرتب‌شده از XNodeهای چندنوعی قرار بگیرد.</p>
-<p>برای مثال، به XML زیر توجه کنید:</p>
-<pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">data</span>&gt;</span>
+</code></pre> <div align="center"><p><img src="../../../assets/image/10/Table-10-2.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <h3>XObject</h3><p><strong>XObject</strong> کلاس پایه‌ی انتزاعی برای تمام محتوای XML است. این کلاس یک پیوند به عنصر <strong>Parent</strong> (والد) در درخت دربرگیری (containership tree) تعریف می‌کند و همچنین می‌تواند یک <strong>XDocument</strong> اختیاری داشته باشد.</p><hr> <h3>XNode</h3><p><strong>XNode</strong> کلاس پایه برای بیشتر محتوای XML (به‌جز attributeها) است. ویژگی متمایز XNode این است که می‌تواند در یک مجموعه‌ی مرتب‌شده از XNodeهای چندنوعی قرار بگیرد.</p><p>برای مثال، به XML زیر توجه کنید:</p><pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">data</span>&gt;</span>
  Hello world
  <span class="hljs-tag">&lt;<span class="hljs-name">subelement1</span>/&gt;</span>
  <span class="hljs-comment">&lt;!--comment--&gt;</span>
  <span class="hljs-tag">&lt;<span class="hljs-name">subelement2</span>/&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">data</span>&gt;</span>
-</code></pre>
-<p>درون عنصر والد <code>&lt;data&gt;</code>، ابتدا یک <strong>XText node</strong> (&quot;Hello world&quot;) قرار دارد، سپس یک <strong>XElement node</strong>، بعد یک <strong>XComment node</strong>، و در پایان یک <strong>XElement node</strong> دیگر.<br>
-در مقابل، یک <strong>XAttribute</strong> تنها سایر XAttributeها را به‌عنوان هم‌سطح (peer) می‌پذیرد.</p>
-<p>با اینکه یک <strong>XNode</strong> می‌تواند به عنصر والد خود (<strong>XElement</strong>) دسترسی داشته باشد، اما هیچ مفهومی از <strong>child node</strong> ندارد؛ این وظیفه‌ی زیرکلاس آن یعنی <strong>XContainer</strong> است.</p>
-<hr>
-<h3>🧩 XContainer</h3>
-<p><strong>XContainer</strong> اعضایی برای کار با فرزندان تعریف می‌کند و کلاس پایه‌ی انتزاعی برای <strong>XElement</strong> و <strong>XDocument</strong> است.</p>
-<hr>
-<h3>🧩 XElement</h3>
-<p><strong>XElement</strong> اعضایی برای مدیریت attributeها معرفی می‌کند—و همچنین خصوصیت‌های <strong>Name</strong> و <strong>Value</strong> را.<br>
-در حالتی که یک عنصر تنها یک فرزند از نوع <strong>XText</strong> داشته باشد (که حالت نسبتاً رایجی است)، خصوصیت <strong>Value</strong> در XElement محتوای این فرزند را هم برای عملیات <strong>get</strong> و هم برای <strong>set</strong> دربرمی‌گیرد و نیاز به پیمایش غیرضروری را حذف می‌کند.<br>
-به لطف <strong>Value</strong>، معمولاً نیازی به کار مستقیم با <strong>XText nodeها</strong> ندارید.</p>
-<hr>
-<h3>🧩 XDocument</h3>
-<p><strong>XDocument</strong> ریشه‌ی یک درخت XML را نمایش می‌دهد. به‌طور دقیق‌تر، این کلاس عنصر ریشه (<strong>root XElement</strong>) را دربر می‌گیرد و یک <strong>XDeclaration</strong>، دستورالعمل‌های پردازش (processing instructions) و سایر موارد سطح ریشه را اضافه می‌کند.</p>
-<p>برخلاف DOM در استاندارد <strong>W3C</strong>، استفاده از XDocument اختیاری است: شما می‌توانید یک X-DOM را بارگذاری، دست‌کاری و ذخیره کنید بدون اینکه هیچ‌وقت یک XDocument بسازید!<br>
-همچنین مستقل بودن از XDocument باعث می‌شود بتوانید یک زیر‌درخت node را به‌طور کارآمد و آسان به سلسله‌مراتب X-DOM دیگری منتقل کنید.</p>
-<hr>
-<h2>📥 بارگذاری و تجزیه (Loading and Parsing)</h2>
-<p>هم <strong>XElement</strong> و هم <strong>XDocument</strong> متدهای ایستای (<strong>static</strong>) <strong>Load</strong> و <strong>Parse</strong> را برای ساختن یک درخت X-DOM از یک منبع موجود ارائه می‌دهند:</p>
-<ul>
-<li><strong>Load</strong> یک X-DOM را از فایل، URI، Stream، TextReader یا XmlReader می‌سازد.</li>
-<li><strong>Parse</strong> یک X-DOM را از یک رشته (string) می‌سازد.</li>
-</ul>
-<p>مثال:</p>
-<pre class="hljs"><code>XDocument fromWeb = XDocument.Load (<span class="hljs-string">&quot;http://albahari.com/sample.xml&quot;</span>);
+</code></pre> <p>درون عنصر والد <code>&lt;data&gt;</code>، ابتدا یک <strong>XText node</strong> (&quot;Hello world&quot;) قرار دارد، سپس یک <strong>XElement node</strong>، بعد یک <strong>XComment node</strong>، و در پایان یک <strong>XElement node</strong> دیگر.<br> در مقابل، یک <strong>XAttribute</strong> تنها سایر XAttributeها را به‌عنوان هم‌سطح (peer) می‌پذیرد.</p><p>با اینکه یک <strong>XNode</strong> می‌تواند به عنصر والد خود (<strong>XElement</strong>) دسترسی داشته باشد، اما هیچ مفهومی از <strong>child node</strong> ندارد؛ این وظیفه‌ی زیرکلاس آن یعنی <strong>XContainer</strong> است.</p><hr> <h3>XContainer</h3><p><strong>XContainer</strong> اعضایی برای کار با فرزندان تعریف می‌کند و کلاس پایه‌ی انتزاعی برای <strong>XElement</strong> و <strong>XDocument</strong> است.</p><hr> <h3>XElement</h3><p><strong>XElement</strong> اعضایی برای مدیریت attributeها معرفی می‌کند—و همچنین خصوصیت‌های <strong>Name</strong> و <strong>Value</strong> را.<br> در حالتی که یک عنصر تنها یک فرزند از نوع <strong>XText</strong> داشته باشد (که حالت نسبتاً رایجی است)، خصوصیت <strong>Value</strong> در XElement محتوای این فرزند را هم برای عملیات <strong>get</strong> و هم برای <strong>set</strong> دربرمی‌گیرد و نیاز به پیمایش غیرضروری را حذف می‌کند.<br> به لطف <strong>Value</strong>، معمولاً نیازی به کار مستقیم با <strong>XText nodeها</strong> ندارید.</p><hr> <h3>XDocument</h3><p><strong>XDocument</strong> ریشه‌ی یک درخت XML را نمایش می‌دهد. به‌طور دقیق‌تر، این کلاس عنصر ریشه (<strong>root XElement</strong>) را دربر می‌گیرد و یک <strong>XDeclaration</strong>، دستورالعمل‌های پردازش (processing instructions) و سایر موارد سطح ریشه را اضافه می‌کند.</p><p>برخلاف DOM در استاندارد <strong>W3C</strong>، استفاده از XDocument اختیاری است: شما می‌توانید یک X-DOM را بارگذاری، دست‌کاری و ذخیره کنید بدون اینکه هیچ‌وقت یک XDocument بسازید!<br> همچنین مستقل بودن از XDocument باعث می‌شود بتوانید یک زیر‌درخت node را به‌طور کارآمد و آسان به سلسله‌مراتب X-DOM دیگری منتقل کنید.</p><hr> <h2>بارگذاری و تجزیه (Loading and Parsing)</h2><p>هم <strong>XElement</strong> و هم <strong>XDocument</strong> متدهای ایستای (<strong>static</strong>) <strong>Load</strong> و <strong>Parse</strong> را برای ساختن یک درخت X-DOM از یک منبع موجود ارائه می‌دهند:</p><ul> <li><strong>Load</strong> یک X-DOM را از فایل، URI، Stream، TextReader یا XmlReader می‌سازد.</li><li><strong>Parse</strong> یک X-DOM را از یک رشته (string) می‌سازد.</li></ul> <p>مثال:</p><pre class="hljs"><code>XDocument fromWeb = XDocument.Load (<span class="hljs-string">&quot;http://albahari.com/sample.xml&quot;</span>);
 XElement fromFile = XElement.Load (<span class="hljs-string">@&quot;e:\media\somefile.xml&quot;</span>);
 XElement config = XElement.Parse (
  <span class="hljs-string">@&quot;&lt;configuration&gt;
@@ -170,10 +36,7 @@ XElement config = XElement.Parse (
       &lt;timeout&gt;30&lt;/timeout&gt;
     &lt;/client&gt;
   &lt;/configuration&gt;&quot;</span>);
-</code></pre>
-<p>در بخش‌های بعدی، روش پیمایش و به‌روزرسانی یک X-DOM را توضیح می‌دهیم.<br>
-به‌عنوان یک پیش‌نمایش سریع، در اینجا نحوه‌ی دست‌کاری عنصر <code>config</code> که همین الان ساختیم آمده است:</p>
-<pre class="hljs"><code><span class="hljs-keyword">foreach</span> (XElement child <span class="hljs-keyword">in</span> config.Elements())
+</code></pre> <p>در بخش‌های بعدی، روش پیمایش و به‌روزرسانی یک X-DOM را توضیح می‌دهیم.<br> به‌عنوان یک پیش‌نمایش سریع، در اینجا نحوه‌ی دست‌کاری عنصر <code>config</code> که همین الان ساختیم آمده است:</p><pre class="hljs"><code><span class="hljs-keyword">foreach</span> (XElement child <span class="hljs-keyword">in</span> config.Elements())
   Console.WriteLine (child.Name);                     <span class="hljs-comment">// client</span>
 
 XElement client = config.Element (<span class="hljs-string">&quot;client&quot;</span>);
@@ -190,64 +53,31 @@ client.Element (<span class="hljs-string">&quot;timeout&quot;</span>).SetValue (
 client.Add (<span class="hljs-keyword">new</span> XElement (<span class="hljs-string">&quot;retries&quot;</span>, <span class="hljs-number">3</span>));             <span class="hljs-comment">// Add new element</span>
 
 Console.WriteLine (config);   <span class="hljs-comment">// Implicitly call config.ToString()</span>
-</code></pre>
-<p>نتیجه‌ی آخرین دستور <code>Console.WriteLine</code> به‌شکل زیر خواهد بود:</p>
-<pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">configuration</span>&gt;</span>
+</code></pre> <p>نتیجه‌ی آخرین دستور <code>Console.WriteLine</code> به‌شکل زیر خواهد بود:</p><pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">configuration</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">client</span> <span class="hljs-attr">enabled</span>=<span class="hljs-string">&quot;false&quot;</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">timeout</span>&gt;</span>60<span class="hljs-tag">&lt;/<span class="hljs-name">timeout</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">retries</span>&gt;</span>3<span class="hljs-tag">&lt;/<span class="hljs-name">retries</span>&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-name">client</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">configuration</span>&gt;</span>
-</code></pre>
-<hr>
-<h3>🧩 XNode.ReadFrom</h3>
-<p><strong>XNode</strong> همچنین یک متد ایستای <strong>ReadFrom</strong> دارد که هر نوع node را از یک <strong>XmlReader</strong> نمونه‌سازی و مقداردهی می‌کند.<br>
-برخلاف <strong>Load</strong>، این متد پس از خواندن یک node کامل متوقف می‌شود، بنابراین شما می‌توانید به‌طور دستی از همان XmlReader ادامه‌ی خواندن را انجام دهید.</p>
-<p>همچنین می‌توانید برعکس عمل کنید و با استفاده از متدهای <strong>CreateReader</strong> و <strong>CreateWriter</strong>، از یک XmlReader یا XmlWriter برای خواندن یا نوشتن یک XNode استفاده کنید.</p>
-<p>ما در فصل ۱۱ خواننده‌ها و نویسنده‌های XML و نحوه‌ی استفاده از آن‌ها با X-DOM را توضیح خواهیم داد.</p>
-<hr>
-<h2>💾 ذخیره‌سازی و سریال‌سازی (Saving and Serializing)</h2>
-<p>فراخوانی <strong>ToString</strong> روی هر node، محتوای آن را به یک رشته‌ی XML تبدیل می‌کند—با قالب‌بندی شامل شکست خط و تورفتگی، همان‌طور که دیدیم.<br>
-(می‌توانید شکست خط و تورفتگی را غیرفعال کنید، با مشخص کردن <strong>SaveOptions.DisableFormatting</strong> هنگام فراخوانی ToString.)</p>
-<p><strong>XElement</strong> و <strong>XDocument</strong> همچنین متد <strong>Save</strong> دارند که یک X-DOM را در فایل، Stream، TextWriter یا XmlWriter می‌نویسد. اگر یک فایل مشخص کنید، به‌طور خودکار یک <strong>XML declaration</strong> نوشته می‌شود.</p>
-<p>همچنین متد <strong>WriteTo</strong> در کلاس <strong>XNode</strong> تعریف شده است که فقط یک <strong>XmlWriter</strong> می‌پذیرد.</p>
-<p>ما جزئیات بیشتری درباره‌ی نحوه‌ی مدیریت اعلان‌های XML هنگام ذخیره‌سازی را در بخش <strong>“Documents and Declarations”</strong> در صفحه‌ی ۵۳۹ توضیح خواهیم داد.<br>
-نمونه‌سازی یک X-DOM<br>
-به‌جای استفاده از متدهای <strong>Load</strong> یا <strong>Parse</strong>، می‌توانید یک درخت X-DOM را با نمونه‌سازی دستی اشیاء و افزودن آن‌ها به یک والد از طریق متد <strong>Add</strong> در کلاس <strong>XContainer</strong> بسازید.</p>
-<p>برای ساختن یک <strong>XElement</strong> و <strong>XAttribute</strong> کافی است یک نام و مقدار مشخص کنید:</p>
-<pre class="hljs"><code>XElement lastName = <span class="hljs-keyword">new</span> XElement(<span class="hljs-string">&quot;lastname&quot;</span>, <span class="hljs-string">&quot;Bloggs&quot;</span>);
+</code></pre> <hr><h3>XNode.ReadFrom</h3><p><strong>XNode</strong> همچنین یک متد ایستای <strong>ReadFrom</strong> دارد که هر نوع node را از یک <strong>XmlReader</strong> نمونه‌سازی و مقداردهی می‌کند.<br> برخلاف <strong>Load</strong>، این متد پس از خواندن یک node کامل متوقف می‌شود، بنابراین شما می‌توانید به‌طور دستی از همان XmlReader ادامه‌ی خواندن را انجام دهید.</p><p>همچنین می‌توانید برعکس عمل کنید و با استفاده از متدهای <strong>CreateReader</strong> و <strong>CreateWriter</strong>، از یک XmlReader یا XmlWriter برای خواندن یا نوشتن یک XNode استفاده کنید.</p><p>ما در فصل ۱۱ خواننده‌ها و نویسنده‌های XML و نحوه‌ی استفاده از آن‌ها با X-DOM را توضیح خواهیم داد.</p><hr> <h2>ذخیره‌سازی و سریال‌سازی (Saving and Serializing)</h2><p>فراخوانی <strong>ToString</strong> روی هر node، محتوای آن را به یک رشته‌ی XML تبدیل می‌کند—با قالب‌بندی شامل شکست خط و تورفتگی، همان‌طور که دیدیم.<br> (می‌توانید شکست خط و تورفتگی را غیرفعال کنید، با مشخص کردن <strong>SaveOptions.DisableFormatting</strong> هنگام فراخوانی ToString.)</p><p><strong>XElement</strong> و <strong>XDocument</strong> همچنین متد <strong>Save</strong> دارند که یک X-DOM را در فایل، Stream، TextWriter یا XmlWriter می‌نویسد. اگر یک فایل مشخص کنید، به‌طور خودکار یک <strong>XML declaration</strong> نوشته می‌شود.</p><p>همچنین متد <strong>WriteTo</strong> در کلاس <strong>XNode</strong> تعریف شده است که فقط یک <strong>XmlWriter</strong> می‌پذیرد.</p><p>ما جزئیات بیشتری درباره‌ی نحوه‌ی مدیریت اعلان‌های XML هنگام ذخیره‌سازی را در بخش <strong>“Documents and Declarations”</strong> در صفحه‌ی ۵۳۹ توضیح خواهیم داد.<br> نمونه‌سازی یک X-DOM<br> به‌جای استفاده از متدهای <strong>Load</strong> یا <strong>Parse</strong>، می‌توانید یک درخت X-DOM را با نمونه‌سازی دستی اشیاء و افزودن آن‌ها به یک والد از طریق متد <strong>Add</strong> در کلاس <strong>XContainer</strong> بسازید.</p><p>برای ساختن یک <strong>XElement</strong> و <strong>XAttribute</strong> کافی است یک نام و مقدار مشخص کنید:</p><pre class="hljs"><code>XElement lastName = <span class="hljs-keyword">new</span> XElement(<span class="hljs-string">&quot;lastname&quot;</span>, <span class="hljs-string">&quot;Bloggs&quot;</span>);
 lastName.Add(<span class="hljs-keyword">new</span> XComment(<span class="hljs-string">&quot;nice name&quot;</span>));
 XElement customer = <span class="hljs-keyword">new</span> XElement(<span class="hljs-string">&quot;customer&quot;</span>);
 customer.Add(<span class="hljs-keyword">new</span> XAttribute(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-number">123</span>));
 customer.Add(<span class="hljs-keyword">new</span> XElement(<span class="hljs-string">&quot;firstname&quot;</span>, <span class="hljs-string">&quot;Joe&quot;</span>));
 customer.Add(lastName);
 Console.WriteLine(customer.ToString());
-</code></pre>
-<p>خروجی به این صورت است:</p>
-<pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">customer</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;123&quot;</span>&gt;</span>
+</code></pre> <p>خروجی به این صورت است:</p><pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">customer</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;123&quot;</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">firstname</span>&gt;</span>Joe<span class="hljs-tag">&lt;/<span class="hljs-name">firstname</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">lastname</span>&gt;</span>Bloggs<span class="hljs-comment">&lt;!--nice name--&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">lastname</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">customer</span>&gt;</span>
-</code></pre>
-<p>وقتی یک <strong>XElement</strong> می‌سازید، مقدار (value) اختیاری است — می‌توانید فقط نام عنصر را بدهید و بعداً محتوا اضافه کنید. توجه کنید که وقتی مقداری تعیین کردیم، یک رشته‌ی ساده کافی بود؛ لازم نبود که به‌طور صریح یک <strong>XText</strong> بسازیم و اضافه کنیم. X-DOM این کار را به‌طور خودکار انجام می‌دهد، بنابراین شما فقط با &quot;مقدار&quot; سروکار دارید.</p>
-<hr>
-<h3>ساختار تابعی (Functional Construction)</h3>
-<p>در مثال قبل، خواندن ساختار XML از روی کد کمی دشوار است. X-DOM یک حالت دیگر نمونه‌سازی به نام <strong>ساختار تابعی</strong> (از برنامه‌نویسی تابعی) پشتیبانی می‌کند. در این حالت، می‌توانید کل درخت را در یک عبارت واحد بسازید:</p>
-<pre class="hljs"><code>XElement customer =
+</code></pre> <p>وقتی یک <strong>XElement</strong> می‌سازید، مقدار (value) اختیاری است — می‌توانید فقط نام عنصر را بدهید و بعداً محتوا اضافه کنید. توجه کنید که وقتی مقداری تعیین کردیم، یک رشته‌ی ساده کافی بود؛ لازم نبود که به‌طور صریح یک <strong>XText</strong> بسازیم و اضافه کنیم. X-DOM این کار را به‌طور خودکار انجام می‌دهد، بنابراین شما فقط با &quot;مقدار&quot; سروکار دارید.</p><hr> <h3>ساختار تابعی (Functional Construction)</h3><p>در مثال قبل، خواندن ساختار XML از روی کد کمی دشوار است. X-DOM یک حالت دیگر نمونه‌سازی به نام <strong>ساختار تابعی</strong> (از برنامه‌نویسی تابعی) پشتیبانی می‌کند. در این حالت، می‌توانید کل درخت را در یک عبارت واحد بسازید:</p><pre class="hljs"><code>XElement customer =
   <span class="hljs-keyword">new</span> XElement(<span class="hljs-string">&quot;customer&quot;</span>, <span class="hljs-keyword">new</span> XAttribute(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-number">123</span>),
     <span class="hljs-keyword">new</span> XElement(<span class="hljs-string">&quot;firstname&quot;</span>, <span class="hljs-string">&quot;joe&quot;</span>),
     <span class="hljs-keyword">new</span> XElement(<span class="hljs-string">&quot;lastname&quot;</span>, <span class="hljs-string">&quot;bloggs&quot;</span>,
       <span class="hljs-keyword">new</span> XComment(<span class="hljs-string">&quot;nice name&quot;</span>)
     )
   );
-</code></pre>
-<p>این روش دو مزیت دارد:</p>
-<ol>
-<li>کد شبیه ساختار XML می‌شود.</li>
-<li>می‌توان آن را در عبارت <strong>select</strong> یک کوئری LINQ استفاده کرد.</li>
-</ol>
-<p>مثلاً، کوئری زیر از یک کلاس موجودیت EF Core به یک X-DOM پروجکت می‌کند:</p>
-<pre class="hljs"><code>XElement query =
+</code></pre> <p>این روش دو مزیت دارد:</p><ol> <li>کد شبیه ساختار XML می‌شود.</li><li>می‌توان آن را در عبارت <strong>select</strong> یک کوئری LINQ استفاده کرد.</li></ol> <p>مثلاً، کوئری زیر از یک کلاس موجودیت EF Core به یک X-DOM پروجکت می‌کند:</p><pre class="hljs"><code>XElement query =
   <span class="hljs-keyword">new</span> XElement(<span class="hljs-string">&quot;customers&quot;</span>,
     <span class="hljs-keyword">from</span> c <span class="hljs-keyword">in</span> dbContext.Customers.AsEnumerable()
     <span class="hljs-function"><span class="hljs-keyword">select</span>
@@ -258,40 +88,9 @@ Console.WriteLine(customer.ToString());
         )
       )
   )</span>;
-</code></pre>
-<p>(این موضوع را بعداً در همین فصل در بخش «پروجکت کردن به داخل یک X-DOM» بررسی می‌کنیم.)</p>
-<hr>
-<h3>تعیین محتوا (Specifying Content)</h3>
-<p>ساختار تابعی امکان‌پذیر است چون سازنده‌های <strong>XElement</strong> (و <strong>XDocument</strong>) طوری overload شده‌اند که یک <code>params object[]</code> را بپذیرند:</p>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">XElement</span> (<span class="hljs-params">XName name, <span class="hljs-keyword">params</span> <span class="hljs-built_in">object</span>[] content</span>)
-</span></code></pre>
-<p>همین موضوع برای متد <strong>Add</strong> در <strong>XContainer</strong> نیز صدق می‌کند:</p>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Add</span> (<span class="hljs-params"><span class="hljs-keyword">params</span> <span class="hljs-built_in">object</span>[] content</span>)
-</span></code></pre>
-<p>بنابراین، هنگام ساخت یا اضافه کردن به یک X-DOM می‌توانید هر تعداد شیء با هر نوعی را به‌عنوان فرزند مشخص کنید. دلیل این کار این است که هر چیزی می‌تواند محتوای قانونی باشد. در اینجا تصمیماتی که <strong>XContainer</strong> برای پردازش هر شیء می‌گیرد آمده است:</p>
-<ol>
-<li>اگر شیء <strong>null</strong> باشد، نادیده گرفته می‌شود.</li>
-<li>اگر شیء از نوع <strong>XNode</strong> یا <strong>XStreamingElement</strong> باشد، مستقیماً به کالکشن <strong>Nodes</strong> اضافه می‌شود.</li>
-<li>اگر شیء یک <strong>XAttribute</strong> باشد، به کالکشن <strong>Attributes</strong> اضافه می‌شود.</li>
-<li>اگر شیء یک <strong>string</strong> باشد، در یک <strong>XText</strong> قرار گرفته و به <strong>Nodes</strong> افزوده می‌شود.</li>
-<li>اگر شیء از <strong>IEnumerable</strong> پیروی کند، اعضای آن پیمایش شده و همین قوانین روی هر عضو اعمال می‌شود.</li>
-<li>در غیر این صورت، شیء به رشته تبدیل شده، در یک <strong>XText</strong> قرار گرفته و به <strong>Nodes</strong> اضافه می‌شود.</li>
-</ol>
-<blockquote>
-<p>نکته: X-DOM این مرحله را بهینه‌سازی می‌کند و محتوای متنی ساده را در یک <strong>string</strong> ذخیره می‌کند. نود <strong>XText</strong> واقعاً ساخته نمی‌شود تا وقتی که متد <strong>Nodes()</strong> را روی XContainer فراخوانی کنید.</p>
-</blockquote>
-<p>در نهایت، همه چیز یا در <strong>Nodes</strong> قرار می‌گیرد یا در <strong>Attributes</strong>.</p>
-<p>پیش از صدا زدن <strong>ToString</strong> روی یک نوع دلخواه، <strong>XContainer</strong> بررسی می‌کند که آیا از انواع زیر هست یا خیر:</p>
-<ul>
-<li><code>float, double, decimal, bool, DateTime, DateTimeOffset, TimeSpan</code></li>
-</ul>
-<p>اگر چنین باشد، به‌جای <strong>ToString</strong> معمولی، متد مناسب <strong>XmlConvert</strong> فراخوانی می‌شود تا داده‌ها قابلیت <strong>round-trip</strong> داشته باشند و با قوانین استاندارد XML سازگار باشند.</p>
-<hr>
-<h3>کلون‌گیری عمیق خودکار (Automatic Deep Cloning)</h3>
-<p>وقتی یک نود یا attribute به یک element اضافه می‌شود (چه از طریق ساختار تابعی یا متد <strong>Add</strong>)، خاصیت <strong>Parent</strong> آن نود یا attribute به آن عنصر تنظیم می‌شود.<br>
-از آنجا که هر نود فقط می‌تواند یک والد داشته باشد، اگر یک نودِ والددار را به والد دیگری اضافه کنید، آن نود به‌طور خودکار <strong>کلون عمیق (deep clone)</strong> می‌شود.</p>
-<p>مثال:</p>
-<pre class="hljs"><code><span class="hljs-keyword">var</span> address = <span class="hljs-keyword">new</span> XElement(<span class="hljs-string">&quot;address&quot;</span>,
+</code></pre> <p>(این موضوع را بعداً در همین فصل در بخش «پروجکت کردن به داخل یک X-DOM» بررسی می‌کنیم.)</p><hr> <h3>تعیین محتوا (Specifying Content)</h3><p>ساختار تابعی امکان‌پذیر است چون سازنده‌های <strong>XElement</strong> (و <strong>XDocument</strong>) طوری overload شده‌اند که یک <code>params object[]</code> را بپذیرند:</p><pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">XElement</span> (<span class="hljs-params">XName name, <span class="hljs-keyword">params</span> <span class="hljs-built_in">object</span>[] content</span>)
+</span></code></pre> <p>همین موضوع برای متد <strong>Add</strong> در <strong>XContainer</strong> نیز صدق می‌کند:</p><pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Add</span> (<span class="hljs-params"><span class="hljs-keyword">params</span> <span class="hljs-built_in">object</span>[] content</span>)
+</span></code></pre> <p>بنابراین، هنگام ساخت یا اضافه کردن به یک X-DOM می‌توانید هر تعداد شیء با هر نوعی را به‌عنوان فرزند مشخص کنید. دلیل این کار این است که هر چیزی می‌تواند محتوای قانونی باشد. در اینجا تصمیماتی که <strong>XContainer</strong> برای پردازش هر شیء می‌گیرد آمده است:</p><ol> <li>اگر شیء <strong>null</strong> باشد، نادیده گرفته می‌شود.</li><li>اگر شیء از نوع <strong>XNode</strong> یا <strong>XStreamingElement</strong> باشد، مستقیماً به کالکشن <strong>Nodes</strong> اضافه می‌شود.</li><li>اگر شیء یک <strong>XAttribute</strong> باشد، به کالکشن <strong>Attributes</strong> اضافه می‌شود.</li><li>اگر شیء یک <strong>string</strong> باشد، در یک <strong>XText</strong> قرار گرفته و به <strong>Nodes</strong> افزوده می‌شود.</li><li>اگر شیء از <strong>IEnumerable</strong> پیروی کند، اعضای آن پیمایش شده و همین قوانین روی هر عضو اعمال می‌شود.</li><li>در غیر این صورت، شیء به رشته تبدیل شده، در یک <strong>XText</strong> قرار گرفته و به <strong>Nodes</strong> اضافه می‌شود.</li></ol> <blockquote><p>نکته: X-DOM این مرحله را بهینه‌سازی می‌کند و محتوای متنی ساده را در یک <strong>string</strong> ذخیره می‌کند. نود <strong>XText</strong> واقعاً ساخته نمی‌شود تا وقتی که متد <strong>Nodes()</strong> را روی XContainer فراخوانی کنید.</p></blockquote> <p>در نهایت، همه چیز یا در <strong>Nodes</strong> قرار می‌گیرد یا در <strong>Attributes</strong>.</p><p>پیش از صدا زدن <strong>ToString</strong> روی یک نوع دلخواه، <strong>XContainer</strong> بررسی می‌کند که آیا از انواع زیر هست یا خیر:</p><ul> <li><code>float, double, decimal, bool, DateTime, DateTimeOffset, TimeSpan</code></li></ul> <p>اگر چنین باشد، به‌جای <strong>ToString</strong> معمولی، متد مناسب <strong>XmlConvert</strong> فراخوانی می‌شود تا داده‌ها قابلیت <strong>round-trip</strong> داشته باشند و با قوانین استاندارد XML سازگار باشند.</p><hr> <h3>کلون‌گیری عمیق خودکار (Automatic Deep Cloning)</h3><p>وقتی یک نود یا attribute به یک element اضافه می‌شود (چه از طریق ساختار تابعی یا متد <strong>Add</strong>)، خاصیت <strong>Parent</strong> آن نود یا attribute به آن عنصر تنظیم می‌شود.<br> از آنجا که هر نود فقط می‌تواند یک والد داشته باشد، اگر یک نودِ والددار را به والد دیگری اضافه کنید، آن نود به‌طور خودکار <strong>کلون عمیق (deep clone)</strong> می‌شود.</p><p>مثال:</p><pre class="hljs"><code><span class="hljs-keyword">var</span> address = <span class="hljs-keyword">new</span> XElement(<span class="hljs-string">&quot;address&quot;</span>,
                  <span class="hljs-keyword">new</span> XElement(<span class="hljs-string">&quot;street&quot;</span>, <span class="hljs-string">&quot;Lawley St&quot;</span>),
                  <span class="hljs-keyword">new</span> XElement(<span class="hljs-string">&quot;town&quot;</span>, <span class="hljs-string">&quot;North Beach&quot;</span>)
              );
@@ -303,30 +102,7 @@ customer1.Element(<span class="hljs-string">&quot;address&quot;</span>).Element(
 
 Console.WriteLine(
   customer2.Element(<span class="hljs-string">&quot;address&quot;</span>).Element(<span class="hljs-string">&quot;street&quot;</span>).Value);   <span class="hljs-comment">// Lawley St</span>
-</code></pre>
-<p>این تکثیر خودکار باعث می‌شود نمونه‌سازی X-DOM بدون <strong>side effect</strong> باشد — که یکی دیگر از ویژگی‌های کلیدی برنامه‌نویسی تابعی است. ✅</p>
-<p>پیمایش و کوئری‌گیری (Navigating and Querying)<br>
-همان‌طور که انتظار دارید، کلاس‌های <strong>XNode</strong> و <strong>XContainer</strong> متدها و ویژگی‌هایی برای پیمایش درخت X-DOM تعریف می‌کنند. اما برخلاف یک DOM سنتی، این توابع مجموعه‌ای که <strong>IList<T></strong> را پیاده‌سازی کند برنمی‌گردانند. در عوض، یا یک مقدار منفرد یا یک دنباله (sequence) که <strong>IEnumerable<T></strong> را پیاده‌سازی می‌کند برمی‌گردانند — و شما انتظار می‌رود که روی آن یا یک کوئری LINQ اجرا کنید یا با یک <strong>foreach</strong> پیمایش کنید.</p>
-<p>این موضوع امکان اجرای کوئری‌های پیشرفته را در کنار وظایف ساده‌ی پیمایش، با استفاده از همان سینتکس آشنای LINQ، فراهم می‌کند. ✅</p>
-<hr>
-<blockquote>
-<p><strong>نکته:</strong> همانند XML، در X-DOM نام عناصر (Element) و صفات (Attribute) <strong>حساس به حروف کوچک و بزرگ</strong> هستند.</p>
-</blockquote>
-<hr>
-<h3>پیمایش نودهای فرزند (Child Node Navigation)</h3>
-<div align="center">
-<p><img src="../../../assets/image/10/Table-10-3.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<p>تابع‌هایی که در ستون سوم جدول (اینجا و در جدول‌های دیگر) با یک ستاره (*) علامت‌گذاری شده‌اند، روی دنباله‌هایی از همان نوع هم عمل می‌کنند.<br>
-برای مثال، می‌توانید متد <strong>Nodes</strong> را هم روی یک شیء <strong>XContainer</strong> و هم روی یک دنباله از اشیاء <strong>XContainer</strong> فراخوانی کنید. این قابلیت به لطف <strong>extension method</strong>هایی است که در فضای نام <strong>System.Xml.Linq</strong> تعریف شده‌اند—یعنی همان <strong>عملگرهای کمکی کوئری</strong> که در بخش مروری (overview) درباره‌شان صحبت کردیم.</p>
-<hr>
-<h3>🟢 FirstNode، LastNode و Nodes</h3>
-<ul>
-<li><strong>FirstNode</strong> و <strong>LastNode</strong> دسترسی مستقیم به اولین یا آخرین نود فرزند می‌دهند.</li>
-<li><strong>Nodes</strong> همه‌ی فرزندها را به صورت یک دنباله (sequence) برمی‌گرداند.</li>
-</ul>
-<p>هر سه این تابع‌ها فقط فرزندان مستقیم (direct descendants) را در نظر می‌گیرند:</p>
-<pre class="hljs"><code><span class="hljs-keyword">var</span> bench = <span class="hljs-keyword">new</span> XElement (<span class="hljs-string">&quot;bench&quot;</span>,
+</code></pre> <p>این تکثیر خودکار باعث می‌شود نمونه‌سازی X-DOM بدون <strong>side effect</strong> باشد — که یکی دیگر از ویژگی‌های کلیدی برنامه‌نویسی تابعی است.</p><p>پیمایش و کوئری‌گیری (Navigating and Querying)<br> همان‌طور که انتظار دارید، کلاس‌های <strong>XNode</strong> و <strong>XContainer</strong> متدها و ویژگی‌هایی برای پیمایش درخت X-DOM تعریف می‌کنند. اما برخلاف یک DOM سنتی، این توابع مجموعه‌ای که <strong>IList<T></strong> را پیاده‌سازی کند برنمی‌گردانند. در عوض، یا یک مقدار منفرد یا یک دنباله (sequence) که <strong>IEnumerable<T></strong> را پیاده‌سازی می‌کند برمی‌گردانند — و شما انتظار می‌رود که روی آن یا یک کوئری LINQ اجرا کنید یا با یک <strong>foreach</strong> پیمایش کنید.</p><p>این موضوع امکان اجرای کوئری‌های پیشرفته را در کنار وظایف ساده‌ی پیمایش، با استفاده از همان سینتکس آشنای LINQ، فراهم می‌کند.</p><hr> <blockquote><p><strong>نکته:</strong> همانند XML، در X-DOM نام عناصر (Element) و صفات (Attribute) <strong>حساس به حروف کوچک و بزرگ</strong> هستند.</p></blockquote> <hr><h3>پیمایش نودهای فرزند (Child Node Navigation)</h3><div align="center"> <p><img src="../../../assets/image/10/Table-10-3.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <p>تابع‌هایی که در ستون سوم جدول (اینجا و در جدول‌های دیگر) با یک ستاره (*) علامت‌گذاری شده‌اند، روی دنباله‌هایی از همان نوع هم عمل می‌کنند.<br> برای مثال، می‌توانید متد <strong>Nodes</strong> را هم روی یک شیء <strong>XContainer</strong> و هم روی یک دنباله از اشیاء <strong>XContainer</strong> فراخوانی کنید. این قابلیت به لطف <strong>extension method</strong>هایی است که در فضای نام <strong>System.Xml.Linq</strong> تعریف شده‌اند—یعنی همان <strong>عملگرهای کمکی کوئری</strong> که در بخش مروری (overview) درباره‌شان صحبت کردیم.</p><hr> <h3>FirstNode، LastNode و Nodes</h3><ul> <li><strong>FirstNode</strong> و <strong>LastNode</strong> دسترسی مستقیم به اولین یا آخرین نود فرزند می‌دهند.</li><li><strong>Nodes</strong> همه‌ی فرزندها را به صورت یک دنباله (sequence) برمی‌گرداند.</li></ul> <p>هر سه این تابع‌ها فقط فرزندان مستقیم (direct descendants) را در نظر می‌گیرند:</p><pre class="hljs"><code><span class="hljs-keyword">var</span> bench = <span class="hljs-keyword">new</span> XElement (<span class="hljs-string">&quot;bench&quot;</span>,
               <span class="hljs-keyword">new</span> XElement (<span class="hljs-string">&quot;toolbox&quot;</span>,
                 <span class="hljs-keyword">new</span> XElement (<span class="hljs-string">&quot;handtool&quot;</span>, <span class="hljs-string">&quot;Hammer&quot;</span>),
                 <span class="hljs-keyword">new</span> XElement (<span class="hljs-string">&quot;handtool&quot;</span>, <span class="hljs-string">&quot;Rasp&quot;</span>)
@@ -340,98 +116,40 @@ Console.WriteLine(
 
 <span class="hljs-keyword">foreach</span> (XNode node <span class="hljs-keyword">in</span> bench.Nodes())
   Console.WriteLine (node.ToString (SaveOptions.DisableFormatting) + <span class="hljs-string">&quot;.&quot;</span>);
-</code></pre>
-<p>🔹 خروجی کد بالا:</p>
-<pre class="hljs"><code>&lt;toolbox&gt;&lt;handtool&gt;Hammer&lt;/handtool&gt;&lt;handtool&gt;Rasp&lt;/handtool&gt;&lt;/toolbox&gt;.
+</code></pre> <p>خروجی کد بالا:</p><pre class="hljs"><code>&lt;toolbox&gt;&lt;handtool&gt;Hammer&lt;/handtool&gt;&lt;handtool&gt;Rasp&lt;/handtool&gt;&lt;/toolbox&gt;.
 &lt;toolbox&gt;&lt;handtool&gt;Saw&lt;/handtool&gt;&lt;powertool&gt;Nailgun&lt;/powertool&gt;&lt;/toolbox&gt;.
 &lt;!--Be careful with the nailgun--&gt;.
-</code></pre>
-<hr>
-<h3>🟢 بازیابی عناصر (Retrieving elements)</h3>
-<p>متد <strong>Elements</strong> فقط نودهای فرزند از نوع <strong>XElement</strong> را برمی‌گرداند:</p>
-<pre class="hljs"><code><span class="hljs-keyword">foreach</span> (XElement e <span class="hljs-keyword">in</span> bench.Elements())
+</code></pre> <hr><h3>بازیابی عناصر (Retrieving elements)</h3><p>متد <strong>Elements</strong> فقط نودهای فرزند از نوع <strong>XElement</strong> را برمی‌گرداند:</p><pre class="hljs"><code><span class="hljs-keyword">foreach</span> (XElement e <span class="hljs-keyword">in</span> bench.Elements())
   Console.WriteLine (e.Name + <span class="hljs-string">&quot;=&quot;</span> + e.Value);
 <span class="hljs-comment">// toolbox=HammerRasp</span>
 <span class="hljs-comment">// toolbox=SawNailgun</span>
-</code></pre>
-<p>🔹 کوئری زیر جعبه‌ابزاری (<strong>toolbox</strong>) را پیدا می‌کند که درونش ابزار <strong>Nailgun</strong> وجود دارد:</p>
-<pre class="hljs"><code>IEnumerable&lt;<span class="hljs-built_in">string</span>&gt; query =
+</code></pre> <p>کوئری زیر جعبه‌ابزاری (<strong>toolbox</strong>) را پیدا می‌کند که درونش ابزار <strong>Nailgun</strong> وجود دارد:</p><pre class="hljs"><code>IEnumerable&lt;<span class="hljs-built_in">string</span>&gt; query =
   <span class="hljs-keyword">from</span> toolbox <span class="hljs-keyword">in</span> bench.Elements()
   <span class="hljs-keyword">where</span> toolbox.Elements().Any (tool =&gt; tool.Value == <span class="hljs-string">&quot;Nailgun&quot;</span>)
   <span class="hljs-keyword">select</span> toolbox.Value;
 
 <span class="hljs-comment">// RESULT: { &quot;SawNailgun&quot; }</span>
-</code></pre>
-<p>🔹 در مثال بعدی از <strong>SelectMany</strong> استفاده می‌کنیم تا ابزارهای دستی (<strong>handtool</strong>) همه‌ی جعبه‌ابزارها را به‌دست بیاوریم:</p>
-<pre class="hljs"><code>IEnumerable&lt;<span class="hljs-built_in">string</span>&gt; query =
+</code></pre> <p>در مثال بعدی از <strong>SelectMany</strong> استفاده می‌کنیم تا ابزارهای دستی (<strong>handtool</strong>) همه‌ی جعبه‌ابزارها را به‌دست بیاوریم:</p><pre class="hljs"><code>IEnumerable&lt;<span class="hljs-built_in">string</span>&gt; query =
   <span class="hljs-keyword">from</span> toolbox <span class="hljs-keyword">in</span> bench.Elements()
   <span class="hljs-keyword">from</span> tool <span class="hljs-keyword">in</span> toolbox.Elements()
   <span class="hljs-keyword">where</span> tool.Name == <span class="hljs-string">&quot;handtool&quot;</span>
   <span class="hljs-keyword">select</span> tool.Value;
 
 <span class="hljs-comment">// RESULT: { &quot;Hammer&quot;, &quot;Rasp&quot;, &quot;Saw&quot; }</span>
-</code></pre>
-<hr>
-<h3>🟢 نکته درباره Elements</h3>
-<ul>
-<li>متد <strong>Elements</strong> معادل یک کوئری LINQ روی <strong>Nodes</strong> است.<br>
-مثلاً کوئری قبل می‌توانست این‌طور شروع شود:</li>
-</ul>
-<pre class="hljs"><code><span class="hljs-keyword">from</span> toolbox <span class="hljs-keyword">in</span> bench.Nodes().OfType&lt;XElement&gt;()
+</code></pre> <hr><h3>نکته درباره Elements</h3><ul> <li>متد <strong>Elements</strong> معادل یک کوئری LINQ روی <strong>Nodes</strong> است.<br> مثلاً کوئری قبل می‌توانست این‌طور شروع شود:</li></ul> <pre class="hljs"><code><span class="hljs-keyword">from</span> toolbox <span class="hljs-keyword">in</span> bench.Nodes().OfType&lt;XElement&gt;()
 <span class="hljs-keyword">where</span> ...
-</code></pre>
-<ul>
-<li>متد <strong>Elements</strong> می‌تواند فقط عناصر با یک نام مشخص را هم برگرداند:</li>
-</ul>
-<pre class="hljs"><code><span class="hljs-built_in">int</span> x = bench.Elements(<span class="hljs-string">&quot;toolbox&quot;</span>).Count();    <span class="hljs-comment">// 2</span>
-</code></pre>
-<p>این کد معادل است با:</p>
-<pre class="hljs"><code><span class="hljs-built_in">int</span> x = bench.Elements().Where (e =&gt; e.Name == <span class="hljs-string">&quot;toolbox&quot;</span>).Count();  <span class="hljs-comment">// 2</span>
-</code></pre>
-<ul>
-<li>متد <strong>Elements</strong> به‌عنوان یک <strong>extension method</strong> هم تعریف شده که یک <strong>IEnumerable<XContainer></strong> (یا دقیق‌تر: <code>IEnumerable&lt;T&gt; where T : XContainer</code>) می‌پذیرد.<br>
-به همین دلیل، می‌تواند روی دنباله‌ای از عناصر هم کار کند.</li>
-</ul>
-<p>مثال بازنویسی‌شده برای یافتن ابزارهای دستی:</p>
-<pre class="hljs"><code><span class="hljs-keyword">from</span> tool <span class="hljs-keyword">in</span> bench.Elements(<span class="hljs-string">&quot;toolbox&quot;</span>).Elements(<span class="hljs-string">&quot;handtool&quot;</span>)
+</code></pre> <ul><li>متد <strong>Elements</strong> می‌تواند فقط عناصر با یک نام مشخص را هم برگرداند:</li></ul> <pre class="hljs"><code><span class="hljs-built_in">int</span> x = bench.Elements(<span class="hljs-string">&quot;toolbox&quot;</span>).Count();    <span class="hljs-comment">// 2</span>
+</code></pre> <p>این کد معادل است با:</p><pre class="hljs"><code><span class="hljs-built_in">int</span> x = bench.Elements().Where (e =&gt; e.Name == <span class="hljs-string">&quot;toolbox&quot;</span>).Count();  <span class="hljs-comment">// 2</span>
+</code></pre> <ul><li>متد <strong>Elements</strong> به‌عنوان یک <strong>extension method</strong> هم تعریف شده که یک <strong>IEnumerable<XContainer></strong> (یا دقیق‌تر: <code>IEnumerable&lt;T&gt; where T : XContainer</code>) می‌پذیرد.<br> به همین دلیل، می‌تواند روی دنباله‌ای از عناصر هم کار کند.</li></ul> <p>مثال بازنویسی‌شده برای یافتن ابزارهای دستی:</p><pre class="hljs"><code><span class="hljs-keyword">from</span> tool <span class="hljs-keyword">in</span> bench.Elements(<span class="hljs-string">&quot;toolbox&quot;</span>).Elements(<span class="hljs-string">&quot;handtool&quot;</span>)
 <span class="hljs-keyword">select</span> tool.Value;
-</code></pre>
-<p>🔹 در اینجا:</p>
-<ul>
-<li>فراخوانی اول <strong>Elements</strong> به متد نمونه‌ای (instance method) در <strong>XContainer</strong> متصل می‌شود.</li>
-<li>فراخوانی دوم <strong>Elements</strong> به متد توسعه‌ای (extension method) متصل می‌شود.</li>
-</ul>
-<h3>بازیابی یک عنصر منفرد (Retrieving a Single Element)</h3>
-<p>متد <strong>Element</strong> (تک‌جمع) اولین عنصر مطابق با نام داده‌شده را برمی‌گرداند.<br>
-این متد برای پیمایش ساده مفید است، مانند مثال زیر:</p>
-<pre class="hljs"><code>XElement settings = XElement.Load(<span class="hljs-string">&quot;databaseSettings.xml&quot;</span>);
+</code></pre> <p>در اینجا:</p><ul> <li>فراخوانی اول <strong>Elements</strong> به متد نمونه‌ای (instance method) در <strong>XContainer</strong> متصل می‌شود.</li><li>فراخوانی دوم <strong>Elements</strong> به متد توسعه‌ای (extension method) متصل می‌شود.</li></ul> <h3>بازیابی یک عنصر منفرد (Retrieving a Single Element)</h3><p>متد <strong>Element</strong> (تک‌جمع) اولین عنصر مطابق با نام داده‌شده را برمی‌گرداند.<br> این متد برای پیمایش ساده مفید است، مانند مثال زیر:</p><pre class="hljs"><code>XElement settings = XElement.Load(<span class="hljs-string">&quot;databaseSettings.xml&quot;</span>);
 <span class="hljs-built_in">string</span> cx = settings.Element(<span class="hljs-string">&quot;database&quot;</span>).Element(<span class="hljs-string">&quot;connectString&quot;</span>).Value;
-</code></pre>
-<p>متد <strong>Element</strong> معادل فراخوانی <strong>Elements()</strong> و سپس اعمال <strong>FirstOrDefault</strong> با یک predicate برای مطابقت نام است.<br>
-اگر عنصر درخواست‌شده وجود نداشته باشد، <strong>Element</strong> مقدار <strong>null</strong> برمی‌گرداند.</p>
-<blockquote>
-<p>توجه: فراخوانی <code>Element(&quot;xyz&quot;).Value</code> زمانی که عنصر <code>xyz</code> وجود نداشته باشد، باعث <strong>NullReferenceException</strong> می‌شود.<br>
-برای جلوگیری از استثنا می‌توانید از <strong>null-conditional operator</strong> استفاده کنید:</p>
-</blockquote>
-<pre class="hljs"><code>Element(<span class="hljs-string">&quot;xyz&quot;</span>)?.Value
-</code></pre>
-<p>یا عنصر <strong>XElement</strong> را مستقیماً به <strong>string</strong> تبدیل کنید:</p>
-<pre class="hljs"><code><span class="hljs-built_in">string</span> xyz = (<span class="hljs-built_in">string</span>)settings.Element(<span class="hljs-string">&quot;xyz&quot;</span>);
-</code></pre>
-<p>این کار امکان‌پذیر است چون <strong>XElement</strong> یک تبدیل صریح به رشته (explicit string conversion) تعریف کرده است. ✅</p>
-<hr>
-<h3>بازیابی فرزندان و نوه‌ها (Retrieving Descendants)</h3>
-<p>کلاس <strong>XContainer</strong> همچنین متدهای <strong>Descendants</strong> و <strong>DescendantNodes</strong> را ارائه می‌دهد که عناصر یا نودهای فرزند و تمامی فرزندان آن‌ها (کل درخت) را برمی‌گردانند.<br>
-متد <strong>Descendants</strong> یک نام عنصر اختیاری هم می‌پذیرد.</p>
-<p>مثال:</p>
-<pre class="hljs"><code>Console.WriteLine(bench.Descendants(<span class="hljs-string">&quot;handtool&quot;</span>).Count());  <span class="hljs-comment">// 3</span>
-</code></pre>
-<p>هم والدها و هم برگ‌ها شامل می‌شوند، همان‌طور که مثال زیر نشان می‌دهد:</p>
-<pre class="hljs"><code><span class="hljs-keyword">foreach</span> (XNode node <span class="hljs-keyword">in</span> bench.DescendantNodes())
+</code></pre> <p>متد <strong>Element</strong> معادل فراخوانی <strong>Elements()</strong> و سپس اعمال <strong>FirstOrDefault</strong> با یک predicate برای مطابقت نام است.<br> اگر عنصر درخواست‌شده وجود نداشته باشد، <strong>Element</strong> مقدار <strong>null</strong> برمی‌گرداند.</p><blockquote> <p>توجه: فراخوانی <code>Element(&quot;xyz&quot;).Value</code> زمانی که عنصر <code>xyz</code> وجود نداشته باشد، باعث <strong>NullReferenceException</strong> می‌شود.<br> برای جلوگیری از استثنا می‌توانید از <strong>null-conditional operator</strong> استفاده کنید:</p></blockquote> <pre class="hljs"><code>Element(<span class="hljs-string">&quot;xyz&quot;</span>)?.Value
+</code></pre> <p>یا عنصر <strong>XElement</strong> را مستقیماً به <strong>string</strong> تبدیل کنید:</p><pre class="hljs"><code><span class="hljs-built_in">string</span> xyz = (<span class="hljs-built_in">string</span>)settings.Element(<span class="hljs-string">&quot;xyz&quot;</span>);
+</code></pre> <p>این کار امکان‌پذیر است چون <strong>XElement</strong> یک تبدیل صریح به رشته (explicit string conversion) تعریف کرده است.</p><hr> <h3>بازیابی فرزندان و نوه‌ها (Retrieving Descendants)</h3><p>کلاس <strong>XContainer</strong> همچنین متدهای <strong>Descendants</strong> و <strong>DescendantNodes</strong> را ارائه می‌دهد که عناصر یا نودهای فرزند و تمامی فرزندان آن‌ها (کل درخت) را برمی‌گردانند.<br> متد <strong>Descendants</strong> یک نام عنصر اختیاری هم می‌پذیرد.</p><p>مثال:</p><pre class="hljs"><code>Console.WriteLine(bench.Descendants(<span class="hljs-string">&quot;handtool&quot;</span>).Count());  <span class="hljs-comment">// 3</span>
+</code></pre> <p>هم والدها و هم برگ‌ها شامل می‌شوند، همان‌طور که مثال زیر نشان می‌دهد:</p><pre class="hljs"><code><span class="hljs-keyword">foreach</span> (XNode node <span class="hljs-keyword">in</span> bench.DescendantNodes())
   Console.WriteLine(node.ToString(SaveOptions.DisableFormatting));
-</code></pre>
-<p>🔹 خروجی:</p>
-<pre class="hljs"><code>&lt;toolbox&gt;&lt;handtool&gt;Hammer&lt;/handtool&gt;&lt;handtool&gt;Rasp&lt;/handtool&gt;&lt;/toolbox&gt;
+</code></pre> <p>خروجی:</p><pre class="hljs"><code>&lt;toolbox&gt;&lt;handtool&gt;Hammer&lt;/handtool&gt;&lt;handtool&gt;Rasp&lt;/handtool&gt;&lt;/toolbox&gt;
 &lt;handtool&gt;Hammer&lt;/handtool&gt;
 Hammer
 &lt;handtool&gt;Rasp&lt;/handtool&gt;
@@ -442,150 +160,36 @@ Saw
 &lt;powertool&gt;Nailgun&lt;/powertool&gt;
 Nailgun
 &lt;!--Be careful with the nailgun--&gt;
-</code></pre>
-<p>کوئری بعدی تمام <strong>comment</strong>های داخل X-DOM که شامل کلمه‌ی &quot;careful&quot; هستند را استخراج می‌کند:</p>
-<pre class="hljs"><code>IEnumerable&lt;<span class="hljs-built_in">string</span>&gt; query =
+</code></pre> <p>کوئری بعدی تمام <strong>comment</strong>های داخل X-DOM که شامل کلمه‌ی &quot;careful&quot; هستند را استخراج می‌کند:</p><pre class="hljs"><code>IEnumerable&lt;<span class="hljs-built_in">string</span>&gt; query =
   <span class="hljs-keyword">from</span> c <span class="hljs-keyword">in</span> bench.DescendantNodes().OfType&lt;XComment&gt;()
   <span class="hljs-keyword">where</span> c.Value.Contains(<span class="hljs-string">&quot;careful&quot;</span>)
   <span class="hljs-keyword">orderby</span> c.Value
   <span class="hljs-keyword">select</span> c.Value;
-</code></pre>
-<hr>
-<h3>پیمایش والدین (Parent Navigation)</h3>
-<p>تمام <strong>XNode</strong>ها دارای خصوصیت <strong>Parent</strong> و متدهای <strong>AncestorXXX</strong> برای پیمایش والدین هستند.<br>
-یک والد همیشه از نوع <strong>XElement</strong> است.</p>
-<div align="center">
-<p><img src="../../../assets/image/10/Table-10-4.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<p>اگر <strong>x</strong> یک <strong>XElement</strong> باشد، کد زیر همیشه مقدار <strong>true</strong> چاپ می‌کند:</p>
-<pre class="hljs"><code><span class="hljs-keyword">foreach</span> (XNode child <span class="hljs-keyword">in</span> x.Nodes())
+</code></pre> <hr><h3>پیمایش والدین (Parent Navigation)</h3><p>تمام <strong>XNode</strong>ها دارای خصوصیت <strong>Parent</strong> و متدهای <strong>AncestorXXX</strong> برای پیمایش والدین هستند.<br> یک والد همیشه از نوع <strong>XElement</strong> است.</p><div align="center"> <p><img src="../../../assets/image/10/Table-10-4.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <p>اگر <strong>x</strong> یک <strong>XElement</strong> باشد، کد زیر همیشه مقدار <strong>true</strong> چاپ می‌کند:</p><pre class="hljs"><code><span class="hljs-keyword">foreach</span> (XNode child <span class="hljs-keyword">in</span> x.Nodes())
   Console.WriteLine(child.Parent == x);
-</code></pre>
-<p>با این حال، این موضوع در مورد <strong>XDocument</strong> صادق نیست. <strong>XDocument</strong> کمی متفاوت است: می‌تواند فرزند داشته باشد اما هرگز نمی‌تواند والد هیچ نودی باشد!</p>
-<p>برای دسترسی به <strong>XDocument</strong>، باید از خصوصیت <strong>Document</strong> استفاده کنید؛ این ویژگی روی هر شیء در درخت X-DOM کار می‌کند.</p>
-<hr>
-<h3>پیمایش والدین (Ancestors)</h3>
-<ul>
-<li>متد <strong>Ancestors</strong> یک دنباله برمی‌گرداند که اولین عنصر آن <strong>Parent</strong> است، عنصر بعدی <strong>Parent.Parent</strong> و به همین ترتیب تا رسیدن به عنصر ریشه ادامه دارد.</li>
-<li>می‌توانید با کوئری LINQ زیر به عنصر ریشه دسترسی پیدا کنید:</li>
-</ul>
-<pre class="hljs"><code>AncestorsAndSelf().Last();
-</code></pre>
-<ul>
-<li>روش دیگر برای رسیدن به عنصر ریشه این است که از <strong>Document.Root</strong> استفاده کنید، البته این فقط زمانی کار می‌کند که یک <strong>XDocument</strong> موجود باشد.</li>
-</ul>
-<hr>
-<h3>پیمایش نودهای هم‌سطح (Peer Node Navigation)</h3>
-<div align="center">
-<p><img src="../../../assets/image/10/Table-10-5.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<p>با <strong>PreviousNode</strong> و <strong>NextNode</strong> (و همچنین <strong>FirstNode</strong> و <strong>LastNode</strong>) می‌توانید نودها را مانند یک <strong>لیست پیوندی (linked list)</strong> پیمایش کنید.<br>
-این اتفاق تصادفی نیست: در سطح داخلی، نودها در یک <strong>لیست پیوندی</strong> ذخیره می‌شوند.</p>
-<blockquote>
-<p>توجه: <strong>XNode</strong> از یک لیست پیوندی تک‌جهته استفاده می‌کند، بنابراین <strong>PreviousNode</strong> عملکرد چندان بهینه‌ای ندارد.</p>
-</blockquote>
-<hr>
-<h3>پیمایش صفات (Attribute Navigation)</h3>
-<div align="center">
-<p><img src="../../../assets/image/10/Table-10-6.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<p>علاوه بر این، <strong>XAttribute</strong> خصوصیات <strong>PreviousAttribute</strong> و <strong>NextAttribute</strong> را تعریف می‌کند و همچنین <strong>Parent</strong> را دارد.</p>
-<p>متد <strong>Attributes</strong> که یک نام را می‌پذیرد، یک دنباله با صفر یا یک عنصر برمی‌گرداند؛ زیرا یک عنصر نمی‌تواند در XML صفات با نام‌های تکراری داشته باشد. ✅</p>
-<hr>
-<h3>به‌روزرسانی X-DOM (Updating an X-DOM)</h3>
-<p>می‌توانید عناصر و صفات را به روش‌های زیر به‌روزرسانی کنید:</p>
-<ul>
-<li>فراخوانی <strong>SetValue</strong> یا اختصاص دوباره به خصوصیت <strong>Value</strong>.</li>
-<li>فراخوانی <strong>SetElementValue</strong> یا <strong>SetAttributeValue</strong>.</li>
-<li>فراخوانی یکی از متدهای <strong>RemoveXXX</strong>.</li>
-<li>فراخوانی یکی از متدهای <strong>AddXXX</strong> یا <strong>ReplaceXXX</strong> و مشخص کردن محتوای جدید.</li>
-</ul>
-<p>همچنین می‌توانید خصوصیت <strong>Name</strong> را روی اشیاء <strong>XElement</strong> دوباره اختصاص دهید.</p>
-<hr>
-<h3>به‌روزرسانی ساده مقادیر (Simple Value Updates)</h3>
-<div align="center">
-<p><img src="../../../assets/image/10/Table-10-7.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<p>متد <strong>SetValue</strong> محتوای یک عنصر یا صفت را با یک مقدار ساده جایگزین می‌کند.<br>
-اختصاص مقدار به خصوصیت <strong>Value</strong> نیز همین کار را انجام می‌دهد، اما فقط داده‌های رشته‌ای (<strong>string</strong>) را می‌پذیرد.<br>
-هر دوی این توابع به‌طور دقیق‌تر در بخش «Working with Values» در صفحه 537 توضیح داده شده‌اند. ✅</p>
-<p>یکی از اثرات فراخوانی <strong>SetValue</strong> (یا اختصاص دوباره به <strong>Value</strong>) این است که <strong>تمام نودهای فرزند را جایگزین می‌کند</strong>:</p>
-<pre class="hljs"><code>XElement settings = <span class="hljs-keyword">new</span> XElement(<span class="hljs-string">&quot;settings&quot;</span>,
+</code></pre> <p>با این حال، این موضوع در مورد <strong>XDocument</strong> صادق نیست. <strong>XDocument</strong> کمی متفاوت است: می‌تواند فرزند داشته باشد اما هرگز نمی‌تواند والد هیچ نودی باشد!</p><p>برای دسترسی به <strong>XDocument</strong>، باید از خصوصیت <strong>Document</strong> استفاده کنید؛ این ویژگی روی هر شیء در درخت X-DOM کار می‌کند.</p><hr> <h3>پیمایش والدین (Ancestors)</h3><ul> <li>متد <strong>Ancestors</strong> یک دنباله برمی‌گرداند که اولین عنصر آن <strong>Parent</strong> است، عنصر بعدی <strong>Parent.Parent</strong> و به همین ترتیب تا رسیدن به عنصر ریشه ادامه دارد.</li><li>می‌توانید با کوئری LINQ زیر به عنصر ریشه دسترسی پیدا کنید:</li></ul> <pre class="hljs"><code>AncestorsAndSelf().Last();
+</code></pre> <ul><li>روش دیگر برای رسیدن به عنصر ریشه این است که از <strong>Document.Root</strong> استفاده کنید، البته این فقط زمانی کار می‌کند که یک <strong>XDocument</strong> موجود باشد.</li></ul> <hr><h3>پیمایش نودهای هم‌سطح (Peer Node Navigation)</h3><div align="center"> <p><img src="../../../assets/image/10/Table-10-5.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <p>با <strong>PreviousNode</strong> و <strong>NextNode</strong> (و همچنین <strong>FirstNode</strong> و <strong>LastNode</strong>) می‌توانید نودها را مانند یک <strong>لیست پیوندی (linked list)</strong> پیمایش کنید.<br> این اتفاق تصادفی نیست: در سطح داخلی، نودها در یک <strong>لیست پیوندی</strong> ذخیره می‌شوند.</p><blockquote> <p>توجه: <strong>XNode</strong> از یک لیست پیوندی تک‌جهته استفاده می‌کند، بنابراین <strong>PreviousNode</strong> عملکرد چندان بهینه‌ای ندارد.</p></blockquote> <hr><h3>پیمایش صفات (Attribute Navigation)</h3><div align="center"> <p><img src="../../../assets/image/10/Table-10-6.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <p>علاوه بر این، <strong>XAttribute</strong> خصوصیات <strong>PreviousAttribute</strong> و <strong>NextAttribute</strong> را تعریف می‌کند و همچنین <strong>Parent</strong> را دارد.</p><p>متد <strong>Attributes</strong> که یک نام را می‌پذیرد، یک دنباله با صفر یا یک عنصر برمی‌گرداند؛ زیرا یک عنصر نمی‌تواند در XML صفات با نام‌های تکراری داشته باشد.</p><hr> <h3>به‌روزرسانی X-DOM (Updating an X-DOM)</h3><p>می‌توانید عناصر و صفات را به روش‌های زیر به‌روزرسانی کنید:</p><ul> <li>فراخوانی <strong>SetValue</strong> یا اختصاص دوباره به خصوصیت <strong>Value</strong>.</li><li>فراخوانی <strong>SetElementValue</strong> یا <strong>SetAttributeValue</strong>.</li><li>فراخوانی یکی از متدهای <strong>RemoveXXX</strong>.</li><li>فراخوانی یکی از متدهای <strong>AddXXX</strong> یا <strong>ReplaceXXX</strong> و مشخص کردن محتوای جدید.</li></ul> <p>همچنین می‌توانید خصوصیت <strong>Name</strong> را روی اشیاء <strong>XElement</strong> دوباره اختصاص دهید.</p><hr> <h3>به‌روزرسانی ساده مقادیر (Simple Value Updates)</h3><div align="center"> <p><img src="../../../assets/image/10/Table-10-7.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <p>متد <strong>SetValue</strong> محتوای یک عنصر یا صفت را با یک مقدار ساده جایگزین می‌کند.<br> اختصاص مقدار به خصوصیت <strong>Value</strong> نیز همین کار را انجام می‌دهد، اما فقط داده‌های رشته‌ای (<strong>string</strong>) را می‌پذیرد.<br> هر دوی این توابع به‌طور دقیق‌تر در بخش «Working with Values» در صفحه 537 توضیح داده شده‌اند.</p><p>یکی از اثرات فراخوانی <strong>SetValue</strong> (یا اختصاص دوباره به <strong>Value</strong>) این است که <strong>تمام نودهای فرزند را جایگزین می‌کند</strong>:</p><pre class="hljs"><code>XElement settings = <span class="hljs-keyword">new</span> XElement(<span class="hljs-string">&quot;settings&quot;</span>,
                       <span class="hljs-keyword">new</span> XElement(<span class="hljs-string">&quot;timeout&quot;</span>, <span class="hljs-number">30</span>)
                     );
 
 settings.SetValue(<span class="hljs-string">&quot;blah&quot;</span>);
 Console.WriteLine(settings.ToString());  <span class="hljs-comment">// &lt;settings&gt;blah&lt;/settings&gt;</span>
-</code></pre>
-<hr>
-<h3>به‌روزرسانی نودهای فرزند و صفات (Updating Child Nodes and Attributes)</h3>
-<div align="center">
-<p><img src="../../../assets/image/10/Table-10-8.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<p>راحت‌ترین متدها در این گروه، دو متد آخر یعنی <strong>SetElementValue</strong> و <strong>SetAttributeValue</strong> هستند.<br>
-این متدها به‌عنوان <strong>میان‌بر</strong> برای ایجاد یک <strong>XElement</strong> یا <strong>XAttribute</strong> و سپس <strong>افزودن آن به والد</strong> عمل می‌کنند، و در صورت وجود عنصر یا صفتی با همان نام، آن را جایگزین می‌کنند:</p>
-<pre class="hljs"><code>XElement settings = <span class="hljs-keyword">new</span> XElement(<span class="hljs-string">&quot;settings&quot;</span>);
+</code></pre> <hr><h3>به‌روزرسانی نودهای فرزند و صفات (Updating Child Nodes and Attributes)</h3><div align="center"> <p><img src="../../../assets/image/10/Table-10-8.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <p>راحت‌ترین متدها در این گروه، دو متد آخر یعنی <strong>SetElementValue</strong> و <strong>SetAttributeValue</strong> هستند.<br> این متدها به‌عنوان <strong>میان‌بر</strong> برای ایجاد یک <strong>XElement</strong> یا <strong>XAttribute</strong> و سپس <strong>افزودن آن به والد</strong> عمل می‌کنند، و در صورت وجود عنصر یا صفتی با همان نام، آن را جایگزین می‌کنند:</p><pre class="hljs"><code>XElement settings = <span class="hljs-keyword">new</span> XElement(<span class="hljs-string">&quot;settings&quot;</span>);
 
 settings.SetElementValue(<span class="hljs-string">&quot;timeout&quot;</span>, <span class="hljs-number">30</span>);  <span class="hljs-comment">// افزودن نود فرزند</span>
 settings.SetElementValue(<span class="hljs-string">&quot;timeout&quot;</span>, <span class="hljs-number">60</span>);  <span class="hljs-comment">// به‌روزرسانی به 60</span>
-</code></pre>
-<ul>
-<li>
-<p>متد <strong>Add</strong> یک نود فرزند به یک عنصر یا سند اضافه می‌کند.</p>
-</li>
-<li>
-<p>متد <strong>AddFirst</strong> همین کار را انجام می‌دهد اما در ابتدای مجموعه اضافه می‌کند، نه در انتها.</p>
-</li>
-<li>
-<p>می‌توانید تمام نودهای فرزند یا صفات را یکجا با <strong>RemoveNodes</strong> یا <strong>RemoveAttributes</strong> حذف کنید.</p>
-</li>
-<li>
-<p><strong>RemoveAll</strong> معادل فراخوانی هر دو متد است.</p>
-</li>
-<li>
-<p>متدهای <strong>ReplaceXXX</strong> معادل حذف و سپس افزودن هستند. این متدها از ورودی <strong>snapshot</strong> می‌گیرند، بنابراین فراخوانی‌ای مانند:</p>
-</li>
-</ul>
-<pre class="hljs"><code>e.ReplaceNodes(e.Nodes())
-</code></pre>
-<p>به‌طور مورد انتظار عمل می‌کند.</p>
-<hr>
-<h3>به‌روزرسانی از طریق والد (Updating Through the Parent)</h3>
-<div align="center">
-<p><img src="../../../assets/image/10/Table-10-9.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<p>متدهای <strong>AddBeforeSelf</strong>، <strong>AddAfterSelf</strong>، <strong>Remove</strong> و <strong>ReplaceWith</strong> روی فرزندان نود عمل نمی‌کنند.<br>
-در عوض، این متدها روی <strong>مجموعه‌ای که خود نود در آن قرار دارد</strong> عمل می‌کنند.<br>
-برای این کار، نود باید دارای <strong>والد (Parent)</strong> باشد؛ در غیر این صورت، یک استثنا (exception) ایجاد می‌شود.</p>
-<ul>
-<li><strong>AddBeforeSelf</strong> و <strong>AddAfterSelf</strong> برای درج یک نود در <strong>موقعیت دلخواه</strong> مفید هستند:</li>
-</ul>
-<pre class="hljs"><code>XElement items = <span class="hljs-keyword">new</span> XElement(<span class="hljs-string">&quot;items&quot;</span>,
+</code></pre> <ul><li> <p>متد <strong>Add</strong> یک نود فرزند به یک عنصر یا سند اضافه می‌کند.</p></li> <li><p>متد <strong>AddFirst</strong> همین کار را انجام می‌دهد اما در ابتدای مجموعه اضافه می‌کند، نه در انتها.</p></li> <li><p>می‌توانید تمام نودهای فرزند یا صفات را یکجا با <strong>RemoveNodes</strong> یا <strong>RemoveAttributes</strong> حذف کنید.</p></li> <li><p><strong>RemoveAll</strong> معادل فراخوانی هر دو متد است.</p></li> <li><p>متدهای <strong>ReplaceXXX</strong> معادل حذف و سپس افزودن هستند. این متدها از ورودی <strong>snapshot</strong> می‌گیرند، بنابراین فراخوانی‌ای مانند:</p></li> </ul><pre class="hljs"><code>e.ReplaceNodes(e.Nodes())
+</code></pre> <p>به‌طور مورد انتظار عمل می‌کند.</p><hr> <h3>به‌روزرسانی از طریق والد (Updating Through the Parent)</h3><div align="center"> <p><img src="../../../assets/image/10/Table-10-9.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <p>متدهای <strong>AddBeforeSelf</strong>، <strong>AddAfterSelf</strong>، <strong>Remove</strong> و <strong>ReplaceWith</strong> روی فرزندان نود عمل نمی‌کنند.<br> در عوض، این متدها روی <strong>مجموعه‌ای که خود نود در آن قرار دارد</strong> عمل می‌کنند.<br> برای این کار، نود باید دارای <strong>والد (Parent)</strong> باشد؛ در غیر این صورت، یک استثنا (exception) ایجاد می‌شود.</p><ul> <li><strong>AddBeforeSelf</strong> و <strong>AddAfterSelf</strong> برای درج یک نود در <strong>موقعیت دلخواه</strong> مفید هستند:</li></ul> <pre class="hljs"><code>XElement items = <span class="hljs-keyword">new</span> XElement(<span class="hljs-string">&quot;items&quot;</span>,
                    <span class="hljs-keyword">new</span> XElement(<span class="hljs-string">&quot;one&quot;</span>),
                    <span class="hljs-keyword">new</span> XElement(<span class="hljs-string">&quot;three&quot;</span>)
                  );
 
 items.FirstNode.AddAfterSelf(<span class="hljs-keyword">new</span> XElement(<span class="hljs-string">&quot;two&quot;</span>));
-</code></pre>
-<p>🔹 نتیجه:</p>
-<pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">items</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">one</span> /&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">two</span> /&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">three</span> /&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">items</span>&gt;</span>
-</code></pre>
-<p>درج در یک موقعیت دلخواه در یک دنباله طولانی از عناصر <strong>کارآمد</strong> است زیرا نودها به‌صورت داخلی در یک <strong>لیست پیوندی</strong> ذخیره شده‌اند.</p>
-<ul>
-<li>متد <strong>Remove</strong> نود جاری را از والد خود حذف می‌کند.</li>
-<li>متد <strong>ReplaceWith</strong> همین کار را انجام می‌دهد و سپس محتوای دیگری را در همان موقعیت درج می‌کند:</li>
-</ul>
-<pre class="hljs"><code>XElement items = XElement.Parse(<span class="hljs-string">&quot;&lt;items&gt;&lt;one/&gt;&lt;two/&gt;&lt;three/&gt;&lt;/items&gt;&quot;</span>);
+</code></pre> <p>نتیجه:</p><pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">items</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">one</span> /&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">two</span> /&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">three</span> /&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">items</span>&gt;</span>
+</code></pre> <p>درج در یک موقعیت دلخواه در یک دنباله طولانی از عناصر <strong>کارآمد</strong> است زیرا نودها به‌صورت داخلی در یک <strong>لیست پیوندی</strong> ذخیره شده‌اند.</p><ul> <li>متد <strong>Remove</strong> نود جاری را از والد خود حذف می‌کند.</li><li>متد <strong>ReplaceWith</strong> همین کار را انجام می‌دهد و سپس محتوای دیگری را در همان موقعیت درج می‌کند:</li></ul> <pre class="hljs"><code>XElement items = XElement.Parse(<span class="hljs-string">&quot;&lt;items&gt;&lt;one/&gt;&lt;two/&gt;&lt;three/&gt;&lt;/items&gt;&quot;</span>);
 items.FirstNode.ReplaceWith(<span class="hljs-keyword">new</span> XComment(<span class="hljs-string">&quot;One was here&quot;</span>));
-</code></pre>
-<p>🔹 نتیجه:</p>
-<pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">items</span>&gt;</span><span class="hljs-comment">&lt;!--One was here--&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">two</span> /&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">three</span> /&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">items</span>&gt;</span>
-</code></pre>
-<hr>
-<h3>حذف یک دنباله از نودها یا صفات (Removing a Sequence of Nodes or Attributes)</h3>
-<p>به لطف <strong>extension method</strong>های موجود در <strong>System.Xml.Linq</strong>، می‌توانید متد <strong>Remove</strong> را روی یک دنباله از نودها یا صفات هم فراخوانی کنید.</p>
-<p>مثال X-DOM:</p>
-<pre class="hljs"><code>XElement contacts = XElement.Parse(
+</code></pre> <p>نتیجه:</p><pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">items</span>&gt;</span><span class="hljs-comment">&lt;!--One was here--&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">two</span> /&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">three</span> /&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">items</span>&gt;</span>
+</code></pre> <hr><h3>حذف یک دنباله از نودها یا صفات (Removing a Sequence of Nodes or Attributes)</h3><p>به لطف <strong>extension method</strong>های موجود در <strong>System.Xml.Linq</strong>، می‌توانید متد <strong>Remove</strong> را روی یک دنباله از نودها یا صفات هم فراخوانی کنید.</p><p>مثال X-DOM:</p><pre class="hljs"><code>XElement contacts = XElement.Parse(
 <span class="hljs-string">@&quot;&lt;contacts&gt;
     &lt;customer name=&#x27;Mary&#x27;/&gt;
     &lt;customer name=&#x27;Chris&#x27; archived=&#x27;true&#x27;/&gt;
@@ -593,125 +197,36 @@ items.FirstNode.ReplaceWith(<span class="hljs-keyword">new</span> XComment(<span
       &lt;phone archived=&#x27;true&#x27;&gt;012345678&lt;!--confidential--&gt;&lt;/phone&gt;
     &lt;/supplier&gt;
 &lt;/contacts&gt;&quot;</span>);
-</code></pre>
-<ul>
-<li>حذف تمام مشتریان:</li>
-</ul>
-<pre class="hljs"><code>contacts.Elements(<span class="hljs-string">&quot;customer&quot;</span>).Remove();
-</code></pre>
-<ul>
-<li>حذف تمام عناصر آرشیو شده (Chris حذف می‌شود):</li>
-</ul>
-<pre class="hljs"><code>contacts.Elements()
+</code></pre> <ul><li>حذف تمام مشتریان:</li></ul> <pre class="hljs"><code>contacts.Elements(<span class="hljs-string">&quot;customer&quot;</span>).Remove();
+</code></pre> <ul><li>حذف تمام عناصر آرشیو شده (Chris حذف می‌شود):</li></ul> <pre class="hljs"><code>contacts.Elements()
         .Where(e =&gt; (<span class="hljs-built_in">bool</span>?) e.Attribute(<span class="hljs-string">&quot;archived&quot;</span>) == <span class="hljs-literal">true</span>)
         .Remove();
-</code></pre>
-<ul>
-<li>اگر <strong>Elements()</strong> را با <strong>Descendants()</strong> جایگزین کنیم، تمام عناصر آرشیو شده در کل DOM حذف می‌شوند، و نتیجه این خواهد بود:</li>
-</ul>
-<pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">contacts</span>&gt;</span>
+</code></pre> <ul><li>اگر <strong>Elements()</strong> را با <strong>Descendants()</strong> جایگزین کنیم، تمام عناصر آرشیو شده در کل DOM حذف می‌شوند، و نتیجه این خواهد بود:</li></ul> <pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">contacts</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">customer</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;Mary&quot;</span> /&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">supplier</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;Susan&quot;</span> /&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">contacts</span>&gt;</span>
-</code></pre>
-<ul>
-<li>مثال بعدی، حذف تمام تماس‌هایی که در هر جای درخت کامنت &quot;confidential&quot; دارند:</li>
-</ul>
-<pre class="hljs"><code>contacts.Elements()
+</code></pre> <ul><li>مثال بعدی، حذف تمام تماس‌هایی که در هر جای درخت کامنت &quot;confidential&quot; دارند:</li></ul> <pre class="hljs"><code>contacts.Elements()
         .Where(e =&gt; e.DescendantNodes()
                      .OfType&lt;XComment&gt;()
                      .Any(c =&gt; c.Value == <span class="hljs-string">&quot;confidential&quot;</span>))
         .Remove();
-</code></pre>
-<p>🔹 نتیجه:</p>
-<pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">contacts</span>&gt;</span>
+</code></pre> <p>نتیجه:</p><pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">contacts</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">customer</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;Mary&quot;</span> /&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">customer</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;Chris&quot;</span> <span class="hljs-attr">archived</span>=<span class="hljs-string">&quot;true&quot;</span> /&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">contacts</span>&gt;</span>
-</code></pre>
-<ul>
-<li>مقایسه با کوئری ساده‌تر که تمام نودهای کامنت را از درخت حذف می‌کند:</li>
-</ul>
-<pre class="hljs"><code>contacts.DescendantNodes().OfType&lt;XComment&gt;().Remove();
-</code></pre>
-<blockquote>
-<p>در سطح داخلی، متد <strong>Remove</strong> ابتدا همه عناصر مطابق را در یک لیست موقت می‌خواند و سپس روی همان لیست موقت پیمایش کرده و حذف را انجام می‌دهد.<br>
-این کار از خطاهایی جلوگیری می‌کند که ممکن است هنگام <strong>حذف و پرس‌وجو همزمان</strong> رخ دهند.</p>
-</blockquote>
-<h3>کار با مقادیر (Working with Values)</h3>
-<p>هم <strong>XElement</strong> و هم <strong>XAttribute</strong> دارای خصوصیت <strong>Value</strong> از نوع <strong>string</strong> هستند.</p>
-<ul>
-<li>اگر یک عنصر تنها یک نود فرزند <strong>XText</strong> داشته باشد، خصوصیت <strong>Value</strong> در <strong>XElement</strong> به‌عنوان یک <strong>میان‌بر مناسب</strong> برای محتوای آن نود عمل می‌کند.</li>
-<li>در <strong>XAttribute</strong>، خصوصیت <strong>Value</strong> صرفاً مقدار صفت را نگه می‌دارد.</li>
-</ul>
-<p>با وجود تفاوت‌های ذخیره‌سازی، <strong>X-DOM</strong> مجموعه‌ای یکنواخت از عملیات برای کار با مقادیر عناصر و صفات ارائه می‌دهد. ✅</p>
-<hr>
-<h3>اختصاص مقادیر (Setting Values)</h3>
-<p>دو روش برای اختصاص مقدار وجود دارد: فراخوانی <strong>SetValue</strong> یا اختصاص به خصوصیت <strong>Value</strong>.</p>
-<ul>
-<li><strong>SetValue</strong> انعطاف‌پذیری بیشتری دارد، زیرا فقط رشته را نمی‌پذیرد بلکه انواع داده ساده دیگر را نیز قبول می‌کند:</li>
-</ul>
-<pre class="hljs"><code><span class="hljs-keyword">var</span> e = <span class="hljs-keyword">new</span> XElement(<span class="hljs-string">&quot;date&quot;</span>, DateTime.Now);
+</code></pre> <ul><li>مقایسه با کوئری ساده‌تر که تمام نودهای کامنت را از درخت حذف می‌کند:</li></ul> <pre class="hljs"><code>contacts.DescendantNodes().OfType&lt;XComment&gt;().Remove();
+</code></pre> <blockquote><p>در سطح داخلی، متد <strong>Remove</strong> ابتدا همه عناصر مطابق را در یک لیست موقت می‌خواند و سپس روی همان لیست موقت پیمایش کرده و حذف را انجام می‌دهد.<br> این کار از خطاهایی جلوگیری می‌کند که ممکن است هنگام <strong>حذف و پرس‌وجو همزمان</strong> رخ دهند.</p></blockquote> <h3>کار با مقادیر (Working with Values)</h3><p>هم <strong>XElement</strong> و هم <strong>XAttribute</strong> دارای خصوصیت <strong>Value</strong> از نوع <strong>string</strong> هستند.</p><ul> <li>اگر یک عنصر تنها یک نود فرزند <strong>XText</strong> داشته باشد، خصوصیت <strong>Value</strong> در <strong>XElement</strong> به‌عنوان یک <strong>میان‌بر مناسب</strong> برای محتوای آن نود عمل می‌کند.</li><li>در <strong>XAttribute</strong>، خصوصیت <strong>Value</strong> صرفاً مقدار صفت را نگه می‌دارد.</li></ul> <p>با وجود تفاوت‌های ذخیره‌سازی، <strong>X-DOM</strong> مجموعه‌ای یکنواخت از عملیات برای کار با مقادیر عناصر و صفات ارائه می‌دهد.</p><hr> <h3>اختصاص مقادیر (Setting Values)</h3><p>دو روش برای اختصاص مقدار وجود دارد: فراخوانی <strong>SetValue</strong> یا اختصاص به خصوصیت <strong>Value</strong>.</p><ul> <li><strong>SetValue</strong> انعطاف‌پذیری بیشتری دارد، زیرا فقط رشته را نمی‌پذیرد بلکه انواع داده ساده دیگر را نیز قبول می‌کند:</li></ul> <pre class="hljs"><code><span class="hljs-keyword">var</span> e = <span class="hljs-keyword">new</span> XElement(<span class="hljs-string">&quot;date&quot;</span>, DateTime.Now);
 e.SetValue(DateTime.Now.AddDays(<span class="hljs-number">1</span>));
 Console.Write(e.Value);  <span class="hljs-comment">// 2019-10-02T16:39:10.734375+09:00</span>
-</code></pre>
-<p>می‌توانستیم به جای آن، مستقیماً <strong>Value</strong> را اختصاص دهیم، اما در این صورت مجبور بودیم <strong>DateTime</strong> را دستی به رشته تبدیل کنیم که پیچیده‌تر است و نیاز به استفاده از <strong>XmlConvert</strong> برای نتیجه سازگار با XML دارد.</p>
-<ul>
-<li>
-<p>هنگام ارسال مقدار به سازنده <strong>XElement</strong> یا <strong>XAttribute</strong>، تبدیل خودکار برای انواع غیررشته‌ای نیز انجام می‌شود. این اطمینان می‌دهد که:</p>
-<ul>
-<li><strong>DateTime</strong> به‌درستی فرمت می‌شود</li>
-<li><strong>true</strong> با حروف کوچک نوشته می‌شود</li>
-<li><strong>double.NegativeInfinity</strong> به صورت &quot;-INF&quot; نوشته می‌شود</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h3>بازیابی مقادیر (Getting Values)</h3>
-<p>برای برعکس کردن، یعنی تبدیل <strong>Value</strong> به نوع پایه، کافی است <strong>XElement</strong> یا <strong>XAttribute</strong> را به نوع مورد نظر <strong>cast</strong> کنید:</p>
-<pre class="hljs"><code>XElement e = <span class="hljs-keyword">new</span> XElement(<span class="hljs-string">&quot;now&quot;</span>, DateTime.Now);
+</code></pre> <p>می‌توانستیم به جای آن، مستقیماً <strong>Value</strong> را اختصاص دهیم، اما در این صورت مجبور بودیم <strong>DateTime</strong> را دستی به رشته تبدیل کنیم که پیچیده‌تر است و نیاز به استفاده از <strong>XmlConvert</strong> برای نتیجه سازگار با XML دارد.</p><ul> <li><p>هنگام ارسال مقدار به سازنده <strong>XElement</strong> یا <strong>XAttribute</strong>، تبدیل خودکار برای انواع غیررشته‌ای نیز انجام می‌شود. این اطمینان می‌دهد که:</p><ul> <li><strong>DateTime</strong> به‌درستی فرمت می‌شود</li><li><strong>true</strong> با حروف کوچک نوشته می‌شود</li><li><strong>double.NegativeInfinity</strong> به صورت &quot;-INF&quot; نوشته می‌شود</li></ul> </li></ul> <hr><h3>بازیابی مقادیر (Getting Values)</h3><p>برای برعکس کردن، یعنی تبدیل <strong>Value</strong> به نوع پایه، کافی است <strong>XElement</strong> یا <strong>XAttribute</strong> را به نوع مورد نظر <strong>cast</strong> کنید:</p><pre class="hljs"><code>XElement e = <span class="hljs-keyword">new</span> XElement(<span class="hljs-string">&quot;now&quot;</span>, DateTime.Now);
 DateTime dt = (DateTime)e;
 
 XAttribute a = <span class="hljs-keyword">new</span> XAttribute(<span class="hljs-string">&quot;resolution&quot;</span>, <span class="hljs-number">1.234</span>);
 <span class="hljs-built_in">double</span> res = (<span class="hljs-built_in">double</span>)a;
-</code></pre>
-<ul>
-<li>عناصر یا صفات به‌طور بومی <strong>DateTime</strong> یا اعداد را ذخیره نمی‌کنند؛ همیشه به‌صورت متن ذخیره و در صورت نیاز تجزیه می‌شوند.</li>
-<li>نوع اصلی ذخیره شده «به یاد نمی‌ماند»، بنابراین باید <strong>cast</strong> را به‌درستی انجام دهید تا از خطای زمان اجرا جلوگیری شود.</li>
-<li>برای ایجاد کد مقاوم، می‌توانید <strong>cast</strong> را در بلوک <strong>try/catch</strong> قرار دهید و <strong>FormatException</strong> را مدیریت کنید.</li>
-</ul>
-<hr>
-<h3>انواع پشتیبانی شده برای cast صریح</h3>
-<p><strong>XElement</strong> و <strong>XAttribute</strong> می‌توانند به انواع زیر cast شوند:</p>
-<ul>
-<li>
-<p>تمام انواع عددی استاندارد</p>
-</li>
-<li>
-<p><strong>string</strong>، <strong>bool</strong>، <strong>DateTime</strong>، <strong>DateTimeOffset</strong>، <strong>TimeSpan</strong>، و <strong>Guid</strong></p>
-</li>
-<li>
-<p>نسخه‌های <strong>Nullable&lt;&gt;</strong> از انواع بالا</p>
-</li>
-<li>
-<p>استفاده از <strong>nullable</strong> مفید است هنگام استفاده از متدهای <strong>Element</strong> و <strong>Attribute</strong>، زیرا اگر نام مورد نظر وجود نداشته باشد، cast هنوز کار می‌کند:</p>
-</li>
-</ul>
-<pre class="hljs"><code><span class="hljs-built_in">int</span> timeout = (<span class="hljs-built_in">int</span>)x.Element(<span class="hljs-string">&quot;timeout&quot;</span>);      <span class="hljs-comment">// خطا</span>
+</code></pre> <ul><li>عناصر یا صفات به‌طور بومی <strong>DateTime</strong> یا اعداد را ذخیره نمی‌کنند؛ همیشه به‌صورت متن ذخیره و در صورت نیاز تجزیه می‌شوند.</li><li>نوع اصلی ذخیره شده «به یاد نمی‌ماند»، بنابراین باید <strong>cast</strong> را به‌درستی انجام دهید تا از خطای زمان اجرا جلوگیری شود.</li><li>برای ایجاد کد مقاوم، می‌توانید <strong>cast</strong> را در بلوک <strong>try/catch</strong> قرار دهید و <strong>FormatException</strong> را مدیریت کنید.</li></ul> <hr><h3>انواع پشتیبانی شده برای cast صریح</h3><p><strong>XElement</strong> و <strong>XAttribute</strong> می‌توانند به انواع زیر cast شوند:</p><ul> <li><p>تمام انواع عددی استاندارد</p></li> <li><p><strong>string</strong>، <strong>bool</strong>، <strong>DateTime</strong>، <strong>DateTimeOffset</strong>، <strong>TimeSpan</strong>، و <strong>Guid</strong></p></li> <li><p>نسخه‌های <strong>Nullable&lt;&gt;</strong> از انواع بالا</p></li> <li><p>استفاده از <strong>nullable</strong> مفید است هنگام استفاده از متدهای <strong>Element</strong> و <strong>Attribute</strong>، زیرا اگر نام مورد نظر وجود نداشته باشد، cast هنوز کار می‌کند:</p></li> </ul><pre class="hljs"><code><span class="hljs-built_in">int</span> timeout = (<span class="hljs-built_in">int</span>)x.Element(<span class="hljs-string">&quot;timeout&quot;</span>);      <span class="hljs-comment">// خطا</span>
 <span class="hljs-built_in">int</span>? timeout = (<span class="hljs-built_in">int</span>?)x.Element(<span class="hljs-string">&quot;timeout&quot;</span>);    <span class="hljs-comment">// درست؛ timeout = null</span>
-</code></pre>
-<ul>
-<li>می‌توانید مقدار پیش‌فرض را با عملگر <strong>??</strong> مشخص کنید:</li>
-</ul>
-<pre class="hljs"><code><span class="hljs-built_in">double</span> resolution = (<span class="hljs-built_in">double</span>?)x.Attribute(<span class="hljs-string">&quot;resolution&quot;</span>) ?? <span class="hljs-number">1.0</span>;
-</code></pre>
-<blockquote>
-<p>توجه: cast به nullable شما را از خطا در صورتی که مقدار عنصر یا صفت خالی یا با فرمت نادرست باشد، نجات نمی‌دهد. در این موارد باید <strong>FormatException</strong> را مدیریت کنید.</p>
-</blockquote>
-<hr>
-<h3>استفاده از cast در کوئری‌های LINQ</h3>
-<p>مثال: بازگرداندن نام مشتریانی که اعتبار بالای 100 دارند:</p>
-<pre class="hljs"><code><span class="hljs-keyword">var</span> data = XElement.Parse(
+</code></pre> <ul><li>می‌توانید مقدار پیش‌فرض را با عملگر <strong>??</strong> مشخص کنید:</li></ul> <pre class="hljs"><code><span class="hljs-built_in">double</span> resolution = (<span class="hljs-built_in">double</span>?)x.Attribute(<span class="hljs-string">&quot;resolution&quot;</span>) ?? <span class="hljs-number">1.0</span>;
+</code></pre> <blockquote><p>توجه: cast به nullable شما را از خطا در صورتی که مقدار عنصر یا صفت خالی یا با فرمت نادرست باشد، نجات نمی‌دهد. در این موارد باید <strong>FormatException</strong> را مدیریت کنید.</p></blockquote> <hr><h3>استفاده از cast در کوئری‌های LINQ</h3><p>مثال: بازگرداندن نام مشتریانی که اعتبار بالای 100 دارند:</p><pre class="hljs"><code><span class="hljs-keyword">var</span> data = XElement.Parse(
 <span class="hljs-string">@&quot;&lt;data&gt;
       &lt;customer id=&#x27;1&#x27; name=&#x27;Mary&#x27; credit=&#x27;100&#x27; /&gt;
       &lt;customer id=&#x27;2&#x27; name=&#x27;John&#x27; credit=&#x27;150&#x27; /&gt;
@@ -721,91 +236,21 @@ XAttribute a = <span class="hljs-keyword">new</span> XAttribute(<span class="hlj
 IEnumerable&lt;<span class="hljs-built_in">string</span>&gt; query = <span class="hljs-keyword">from</span> cust <span class="hljs-keyword">in</span> data.Elements()
                             <span class="hljs-keyword">where</span> (<span class="hljs-built_in">int</span>?)cust.Attribute(<span class="hljs-string">&quot;credit&quot;</span>) &gt; <span class="hljs-number">100</span>
                             <span class="hljs-keyword">select</span> cust.Attribute(<span class="hljs-string">&quot;name&quot;</span>).Value;
-</code></pre>
-<ul>
-<li>استفاده از <strong>nullable int</strong> از بروز <strong>NullReferenceException</strong> برای مشتری‌ای مثل Anne که صفت credit ندارد جلوگیری می‌کند.</li>
-<li>اصول مشابه برای پرس‌وجو روی مقادیر عناصر نیز اعمال می‌شود.</li>
-</ul>
-<hr>
-<h3>مقادیر و نودهای محتوای ترکیبی (Values and Mixed Content Nodes)</h3>
-<p>زمانی که محتوا <strong>مختلط</strong> است، ممکن است نیاز باشد مستقیماً با <strong>XText</strong> کار کنید:</p>
-<pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">summary</span>&gt;</span>An XAttribute is <span class="hljs-tag">&lt;<span class="hljs-name">bold</span>&gt;</span>not<span class="hljs-tag">&lt;/<span class="hljs-name">bold</span>&gt;</span> an XNode<span class="hljs-tag">&lt;/<span class="hljs-name">summary</span>&gt;</span>
-</code></pre>
-<ul>
-<li>عنصر <strong>summary</strong> سه فرزند دارد: <strong>XText</strong>، سپس <strong>XElement</strong>، سپس دوباره <strong>XText</strong>.</li>
-</ul>
-<p>ساخت آن:</p>
-<pre class="hljs"><code>XElement summary = <span class="hljs-keyword">new</span> XElement(<span class="hljs-string">&quot;summary&quot;</span>,
+</code></pre> <ul><li>استفاده از <strong>nullable int</strong> از بروز <strong>NullReferenceException</strong> برای مشتری‌ای مثل Anne که صفت credit ندارد جلوگیری می‌کند.</li><li>اصول مشابه برای پرس‌وجو روی مقادیر عناصر نیز اعمال می‌شود.</li></ul> <hr><h3>مقادیر و نودهای محتوای ترکیبی (Values and Mixed Content Nodes)</h3><p>زمانی که محتوا <strong>مختلط</strong> است، ممکن است نیاز باشد مستقیماً با <strong>XText</strong> کار کنید:</p><pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">summary</span>&gt;</span>An XAttribute is <span class="hljs-tag">&lt;<span class="hljs-name">bold</span>&gt;</span>not<span class="hljs-tag">&lt;/<span class="hljs-name">bold</span>&gt;</span> an XNode<span class="hljs-tag">&lt;/<span class="hljs-name">summary</span>&gt;</span>
+</code></pre> <ul><li>عنصر <strong>summary</strong> سه فرزند دارد: <strong>XText</strong>، سپس <strong>XElement</strong>، سپس دوباره <strong>XText</strong>.</li></ul> <p>ساخت آن:</p><pre class="hljs"><code>XElement summary = <span class="hljs-keyword">new</span> XElement(<span class="hljs-string">&quot;summary&quot;</span>,
                       <span class="hljs-keyword">new</span> XText(<span class="hljs-string">&quot;An XAttribute is &quot;</span>),
                       <span class="hljs-keyword">new</span> XElement(<span class="hljs-string">&quot;bold&quot;</span>, <span class="hljs-string">&quot;not&quot;</span>),
                       <span class="hljs-keyword">new</span> XText(<span class="hljs-string">&quot; an XNode&quot;</span>));
-</code></pre>
-<ul>
-<li>جالب اینجاست که می‌توانیم هنوز <strong>summary.Value</strong> را کوئری کنیم بدون ایجاد استثنا؛ حاصل <strong>ترکیب مقادیر همه فرزندان</strong> است:</li>
-</ul>
-<pre class="hljs"><code>An XAttribute is not an XNode
-</code></pre>
-<ul>
-<li>می‌توان مقدار <strong>Value</strong> را دوباره اختصاص داد، اما همه فرزندان قبلی با یک نود <strong>XText</strong> جدید جایگزین می‌شوند.</li>
-</ul>
-<hr>
-<h3>ترکیب خودکار XText</h3>
-<ul>
-<li>وقتی محتوای ساده‌ای به یک <strong>XElement</strong> اضافه می‌کنید، <strong>X-DOM</strong> به جای ایجاد نود جدید، به <strong>XText</strong> موجود اضافه می‌کند.</li>
-</ul>
-<p>مثال‌ها:</p>
-<pre class="hljs"><code><span class="hljs-keyword">var</span> e1 = <span class="hljs-keyword">new</span> XElement(<span class="hljs-string">&quot;test&quot;</span>, <span class="hljs-string">&quot;Hello&quot;</span>); e1.Add(<span class="hljs-string">&quot;World&quot;</span>);
+</code></pre> <ul><li>جالب اینجاست که می‌توانیم هنوز <strong>summary.Value</strong> را کوئری کنیم بدون ایجاد استثنا؛ حاصل <strong>ترکیب مقادیر همه فرزندان</strong> است:</li></ul> <pre class="hljs"><code>An XAttribute is not an XNode
+</code></pre> <ul><li>می‌توان مقدار <strong>Value</strong> را دوباره اختصاص داد، اما همه فرزندان قبلی با یک نود <strong>XText</strong> جدید جایگزین می‌شوند.</li></ul> <hr><h3>ترکیب خودکار XText</h3><ul> <li>وقتی محتوای ساده‌ای به یک <strong>XElement</strong> اضافه می‌کنید، <strong>X-DOM</strong> به جای ایجاد نود جدید، به <strong>XText</strong> موجود اضافه می‌کند.</li></ul> <p>مثال‌ها:</p><pre class="hljs"><code><span class="hljs-keyword">var</span> e1 = <span class="hljs-keyword">new</span> XElement(<span class="hljs-string">&quot;test&quot;</span>, <span class="hljs-string">&quot;Hello&quot;</span>); e1.Add(<span class="hljs-string">&quot;World&quot;</span>);
 <span class="hljs-keyword">var</span> e2 = <span class="hljs-keyword">new</span> XElement(<span class="hljs-string">&quot;test&quot;</span>, <span class="hljs-string">&quot;Hello&quot;</span>, <span class="hljs-string">&quot;World&quot;</span>);
-</code></pre>
-<ul>
-<li>
-<p>هر دو <strong>e1</strong> و <strong>e2</strong> فقط یک فرزند <strong>XText</strong> دارند با مقدار <code>&quot;HelloWorld&quot;</code>.</p>
-</li>
-<li>
-<p>اگر صریحاً چند نود <strong>XText</strong> بسازید، چند فرزند خواهید داشت:</p>
-</li>
-</ul>
-<pre class="hljs"><code><span class="hljs-keyword">var</span> e = <span class="hljs-keyword">new</span> XElement(<span class="hljs-string">&quot;test&quot;</span>, <span class="hljs-keyword">new</span> XText(<span class="hljs-string">&quot;Hello&quot;</span>), <span class="hljs-keyword">new</span> XText(<span class="hljs-string">&quot;World&quot;</span>));
+</code></pre> <ul><li> <p>هر دو <strong>e1</strong> و <strong>e2</strong> فقط یک فرزند <strong>XText</strong> دارند با مقدار <code>&quot;HelloWorld&quot;</code>.</p></li> <li><p>اگر صریحاً چند نود <strong>XText</strong> بسازید، چند فرزند خواهید داشت:</p></li> </ul><pre class="hljs"><code><span class="hljs-keyword">var</span> e = <span class="hljs-keyword">new</span> XElement(<span class="hljs-string">&quot;test&quot;</span>, <span class="hljs-keyword">new</span> XText(<span class="hljs-string">&quot;Hello&quot;</span>), <span class="hljs-keyword">new</span> XText(<span class="hljs-string">&quot;World&quot;</span>));
 Console.WriteLine(e.Value);           <span class="hljs-comment">// HelloWorld</span>
 Console.WriteLine(e.Nodes().Count()); <span class="hljs-comment">// 2</span>
-</code></pre>
-<ul>
-<li><strong>XElement</strong> نودهای <strong>XText</strong> را به هم متصل نمی‌کند، بنابراین <strong>هویت اشیاء نودها حفظ می‌شود</strong>.</li>
-</ul>
-<h3>اسناد و اعلان‌ها (Documents and Declarations)</h3>
-<h4>XDocument</h4>
-<p>همانطور که قبلاً گفتیم، <strong>XDocument</strong> یک عنصر ریشه <strong>XElement</strong> را بسته‌بندی می‌کند و امکان اضافه کردن موارد زیر را فراهم می‌کند:</p>
-<ul>
-<li><strong>XDeclaration</strong> (اعلان XML)</li>
-<li>دستورات پردازشی (<strong>Processing Instructions</strong>)</li>
-<li>نوع سند (<strong>XDocumentType</strong>)</li>
-<li>نظرات در سطح ریشه (<strong>XComment</strong>)</li>
-</ul>
-<blockquote>
-<p><strong>نکته مهم:</strong> وجود <strong>XDocument</strong> اختیاری است و می‌توان آن را نادیده گرفت یا حذف کرد. برخلاف <strong>W3C DOM</strong>، XDocument به‌عنوان «چسب» برای نگه داشتن همه چیز کنار هم عمل نمی‌کند.</p>
-</blockquote>
-<hr>
-<h4>محتویات مجاز XDocument</h4>
-<p>XDocument می‌تواند فقط انواع محدودی از محتوا را بپذیرد:</p>
-<ul>
-<li>یک <strong>XElement</strong> (عنصر ریشه) – اجباری برای داشتن XDocument معتبر</li>
-<li>یک <strong>XDeclaration</strong> – اختیاری، اگر حذف شود، مقادیر پیش‌فرض هنگام سریال‌سازی اعمال می‌شوند</li>
-<li>یک <strong>XDocumentType</strong> (برای ارجاع به DTD)</li>
-<li>هر تعداد <strong>XProcessingInstruction</strong></li>
-<li>هر تعداد <strong>XComment</strong></li>
-</ul>
-<hr>
-<h4>نمونه ساده از XDocument معتبر</h4>
-<pre class="hljs"><code><span class="hljs-keyword">var</span> doc = <span class="hljs-keyword">new</span> XDocument(
+</code></pre> <ul><li><strong>XElement</strong> نودهای <strong>XText</strong> را به هم متصل نمی‌کند، بنابراین <strong>هویت اشیاء نودها حفظ می‌شود</strong>.</li></ul> <h3>اسناد و اعلان‌ها (Documents and Declarations)</h3><h4>XDocument</h4><p>همانطور که قبلاً گفتیم، <strong>XDocument</strong> یک عنصر ریشه <strong>XElement</strong> را بسته‌بندی می‌کند و امکان اضافه کردن موارد زیر را فراهم می‌کند:</p><ul> <li><strong>XDeclaration</strong> (اعلان XML)</li><li>دستورات پردازشی (<strong>Processing Instructions</strong>)</li><li>نوع سند (<strong>XDocumentType</strong>)</li><li>نظرات در سطح ریشه (<strong>XComment</strong>)</li></ul> <blockquote><p><strong>نکته مهم:</strong> وجود <strong>XDocument</strong> اختیاری است و می‌توان آن را نادیده گرفت یا حذف کرد. برخلاف <strong>W3C DOM</strong>، XDocument به‌عنوان «چسب» برای نگه داشتن همه چیز کنار هم عمل نمی‌کند.</p></blockquote> <hr><h4>محتویات مجاز XDocument</h4><p>XDocument می‌تواند فقط انواع محدودی از محتوا را بپذیرد:</p><ul> <li>یک <strong>XElement</strong> (عنصر ریشه) – اجباری برای داشتن XDocument معتبر</li><li>یک <strong>XDeclaration</strong> – اختیاری، اگر حذف شود، مقادیر پیش‌فرض هنگام سریال‌سازی اعمال می‌شوند</li><li>یک <strong>XDocumentType</strong> (برای ارجاع به DTD)</li><li>هر تعداد <strong>XProcessingInstruction</strong></li><li>هر تعداد <strong>XComment</strong></li></ul> <hr><h4>نمونه ساده از XDocument معتبر</h4><pre class="hljs"><code><span class="hljs-keyword">var</span> doc = <span class="hljs-keyword">new</span> XDocument(
     <span class="hljs-keyword">new</span> XElement(<span class="hljs-string">&quot;test&quot;</span>, <span class="hljs-string">&quot;data&quot;</span>)
 );
-</code></pre>
-<ul>
-<li>در مثال بالا <strong>XDeclaration</strong> وارد نشده است، اما هنگام فراخوانی <strong>doc.Save</strong>، یک اعلان XML به‌صورت پیش‌فرض تولید می‌شود.</li>
-</ul>
-<hr>
-<h4>نمونه ایجاد یک فایل XHTML</h4>
-<pre class="hljs"><code><span class="hljs-keyword">var</span> styleInstruction = <span class="hljs-keyword">new</span> XProcessingInstruction(
+</code></pre> <ul><li>در مثال بالا <strong>XDeclaration</strong> وارد نشده است، اما هنگام فراخوانی <strong>doc.Save</strong>، یک اعلان XML به‌صورت پیش‌فرض تولید می‌شود.</li></ul> <hr><h4>نمونه ایجاد یک فایل XHTML</h4><pre class="hljs"><code><span class="hljs-keyword">var</span> styleInstruction = <span class="hljs-keyword">new</span> XProcessingInstruction(
     <span class="hljs-string">&quot;xml-stylesheet&quot;</span>, <span class="hljs-string">&quot;href=&#x27;styles.css&#x27; type=&#x27;text/css&#x27;&quot;</span>
 );
 <span class="hljs-keyword">var</span> docType = <span class="hljs-keyword">new</span> XDocumentType(
@@ -835,11 +280,7 @@ XNamespace ns = <span class="hljs-string">&quot;http://www.w3.org/1999/xhtml&quo
 );
 
 doc.Save(<span class="hljs-string">&quot;test.html&quot;</span>);
-</code></pre>
-<ul>
-<li>محتوای <strong>test.html</strong> تولید شده:</li>
-</ul>
-<pre class="hljs"><code><span class="hljs-meta">&lt;?xml version=<span class="hljs-string">&quot;1.0&quot;</span> encoding=<span class="hljs-string">&quot;utf-8&quot;</span> standalone=<span class="hljs-string">&quot;no&quot;</span>?&gt;</span>
+</code></pre> <ul><li>محتوای <strong>test.html</strong> تولید شده:</li></ul> <pre class="hljs"><code><span class="hljs-meta">&lt;?xml version=<span class="hljs-string">&quot;1.0&quot;</span> encoding=<span class="hljs-string">&quot;utf-8&quot;</span> standalone=<span class="hljs-string">&quot;no&quot;</span>?&gt;</span>
 <span class="hljs-comment">&lt;!--Reference a stylesheet--&gt;</span>
 <span class="hljs-meta">&lt;?xml-stylesheet href=&#x27;styles.css&#x27; type=&#x27;text/css&#x27;?&gt;</span>
 <span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-keyword">html</span> <span class="hljs-keyword">PUBLIC</span> <span class="hljs-string">&quot;-//W3C//DTD XHTML 1.0 Strict//EN&quot;</span>
@@ -852,67 +293,19 @@ doc.Save(<span class="hljs-string">&quot;test.html&quot;</span>);
     <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>This is the content<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
-</code></pre>
-<hr>
-<h4>دسترسی به ریشه و ارتباطات</h4>
-<ul>
-<li>خصوصیت <strong>Root</strong> در <strong>XDocument</strong> یک میان‌بر برای دسترسی به عنصر ریشه است.</li>
-<li>لینک معکوس از هر شیء در درخت با خصوصیت <strong>Document</strong> از <strong>XObject</strong> ارائه می‌شود:</li>
-</ul>
-<pre class="hljs"><code>Console.WriteLine(doc.Root.Name.LocalName);          <span class="hljs-comment">// html</span>
+</code></pre> <hr><h4>دسترسی به ریشه و ارتباطات</h4><ul> <li>خصوصیت <strong>Root</strong> در <strong>XDocument</strong> یک میان‌بر برای دسترسی به عنصر ریشه است.</li><li>لینک معکوس از هر شیء در درخت با خصوصیت <strong>Document</strong> از <strong>XObject</strong> ارائه می‌شود:</li></ul> <pre class="hljs"><code>Console.WriteLine(doc.Root.Name.LocalName);          <span class="hljs-comment">// html</span>
 XElement bodyNode = doc.Root.Element(ns + <span class="hljs-string">&quot;body&quot;</span>);
 Console.WriteLine(bodyNode.Document == doc);         <span class="hljs-comment">// True</span>
-</code></pre>
-<ul>
-<li>فرزندان یک سند هیچ والد (Parent) ندارند:</li>
-</ul>
-<pre class="hljs"><code>Console.WriteLine(doc.Root.Parent == <span class="hljs-literal">null</span>);          <span class="hljs-comment">// True</span>
+</code></pre> <ul><li>فرزندان یک سند هیچ والد (Parent) ندارند:</li></ul> <pre class="hljs"><code>Console.WriteLine(doc.Root.Parent == <span class="hljs-literal">null</span>);          <span class="hljs-comment">// True</span>
 <span class="hljs-keyword">foreach</span> (XNode node <span class="hljs-keyword">in</span> doc.Nodes())
     Console.Write(node.Parent == <span class="hljs-literal">null</span>);              <span class="hljs-comment">// TrueTrueTrueTrue</span>
-</code></pre>
-<blockquote>
-<p>توجه: <strong>XDeclaration</strong> یک <strong>XNode</strong> نیست و در مجموعه <strong>Nodes</strong> سند ظاهر نمی‌شود. فقط به خصوصیت <strong>Declaration</strong> اختصاص داده می‌شود. به همین دلیل در مثال بالا، مقدار &quot;True&quot; چهار بار تکرار شد و نه پنج بار.</p>
-</blockquote>
-<h3>اعلان‌های XML (XML Declarations)</h3>
-<p>یک فایل XML استاندارد با یک اعلان شروع می‌شود، مانند:</p>
-<pre class="hljs"><code><span class="hljs-meta">&lt;?xml version=<span class="hljs-string">&quot;1.0&quot;</span> encoding=<span class="hljs-string">&quot;utf-8&quot;</span> standalone=<span class="hljs-string">&quot;yes&quot;</span>?&gt;</span>
-</code></pre>
-<ul>
-<li>اعلان XML تضمین می‌کند که فایل به درستی توسط خواننده (Reader) پردازش و درک شود.</li>
-</ul>
-<h4>رفتار XElement و XDocument هنگام تولید اعلان XML</h4>
-<ul>
-<li><strong>Save با نام فایل</strong> → همیشه یک اعلان می‌نویسد.</li>
-<li><strong>Save با XmlWriter</strong> → اعلان می‌نویسد مگر اینکه XmlWriter به نحوی تنظیم شود که اعلان تولید نکند.</li>
-<li><strong>ToString</strong> → هیچ‌گاه اعلان XML تولید نمی‌کند.</li>
-</ul>
-<blockquote>
-<p>برای جلوگیری از تولید اعلان، می‌توان <strong>OmitXmlDeclaration</strong> و <strong>ConformanceLevel</strong> را در <strong>XmlWriterSettings</strong> هنگام ساخت XmlWriter تنظیم کرد.</p>
-</blockquote>
-<hr>
-<h4>نقش XDeclaration</h4>
-<p>وجود یا عدم وجود <strong>XDeclaration</strong> بر نوشتن اعلان تأثیری ندارد. هدف اصلی XDeclaration این است که به سریال‌سازی XML راهنمایی کند:</p>
-<ul>
-<li>چه <strong>کدگذاری متنی</strong> (encoding) استفاده شود</li>
-<li>چه مقادیری در <strong>ویژگی‌های encoding و standalone</strong> اعلان XML نوشته شوند</li>
-</ul>
-<h4>نمونه ایجاد XDeclaration و XDocument با UTF-16</h4>
-<pre class="hljs"><code><span class="hljs-keyword">var</span> doc = <span class="hljs-keyword">new</span> XDocument(
+</code></pre> <blockquote><p>توجه: <strong>XDeclaration</strong> یک <strong>XNode</strong> نیست و در مجموعه <strong>Nodes</strong> سند ظاهر نمی‌شود. فقط به خصوصیت <strong>Declaration</strong> اختصاص داده می‌شود. به همین دلیل در مثال بالا، مقدار &quot;True&quot; چهار بار تکرار شد و نه پنج بار.</p></blockquote> <h3>اعلان‌های XML (XML Declarations)</h3><p>یک فایل XML استاندارد با یک اعلان شروع می‌شود، مانند:</p><pre class="hljs"><code><span class="hljs-meta">&lt;?xml version=<span class="hljs-string">&quot;1.0&quot;</span> encoding=<span class="hljs-string">&quot;utf-8&quot;</span> standalone=<span class="hljs-string">&quot;yes&quot;</span>?&gt;</span>
+</code></pre> <ul><li>اعلان XML تضمین می‌کند که فایل به درستی توسط خواننده (Reader) پردازش و درک شود.</li></ul> <h4>رفتار XElement و XDocument هنگام تولید اعلان XML</h4><ul> <li><strong>Save با نام فایل</strong> → همیشه یک اعلان می‌نویسد.</li><li><strong>Save با XmlWriter</strong> → اعلان می‌نویسد مگر اینکه XmlWriter به نحوی تنظیم شود که اعلان تولید نکند.</li><li><strong>ToString</strong> → هیچ‌گاه اعلان XML تولید نمی‌کند.</li></ul> <blockquote><p>برای جلوگیری از تولید اعلان، می‌توان <strong>OmitXmlDeclaration</strong> و <strong>ConformanceLevel</strong> را در <strong>XmlWriterSettings</strong> هنگام ساخت XmlWriter تنظیم کرد.</p></blockquote> <hr><h4>نقش XDeclaration</h4><p>وجود یا عدم وجود <strong>XDeclaration</strong> بر نوشتن اعلان تأثیری ندارد. هدف اصلی XDeclaration این است که به سریال‌سازی XML راهنمایی کند:</p><ul> <li>چه <strong>کدگذاری متنی</strong> (encoding) استفاده شود</li><li>چه مقادیری در <strong>ویژگی‌های encoding و standalone</strong> اعلان XML نوشته شوند</li></ul> <h4>نمونه ایجاد XDeclaration و XDocument با UTF-16</h4><pre class="hljs"><code><span class="hljs-keyword">var</span> doc = <span class="hljs-keyword">new</span> XDocument(
     <span class="hljs-keyword">new</span> XDeclaration(<span class="hljs-string">&quot;1.0&quot;</span>, <span class="hljs-string">&quot;utf-16&quot;</span>, <span class="hljs-string">&quot;yes&quot;</span>),
     <span class="hljs-keyword">new</span> XElement(<span class="hljs-string">&quot;test&quot;</span>, <span class="hljs-string">&quot;data&quot;</span>)
 );
 doc.Save(<span class="hljs-string">&quot;test.xml&quot;</span>);
-</code></pre>
-<ul>
-<li>توجه: نسخه (version) همیشه به &quot;1.0&quot; نوشته می‌شود.</li>
-<li>encoding باید یک کد IETF مانند <code>&quot;utf-16&quot;</code> باشد.</li>
-</ul>
-<hr>
-<h4>نوشتن اعلان به رشته (String)</h4>
-<ul>
-<li><strong>ToString</strong> اعلان تولید نمی‌کند، بنابراین باید از <strong>XmlWriter</strong> استفاده کرد:</li>
-</ul>
-<pre class="hljs"><code><span class="hljs-keyword">var</span> doc = <span class="hljs-keyword">new</span> XDocument(
+</code></pre> <ul><li>توجه: نسخه (version) همیشه به &quot;1.0&quot; نوشته می‌شود.</li><li>encoding باید یک کد IETF مانند <code>&quot;utf-16&quot;</code> باشد.</li></ul> <hr><h4>نوشتن اعلان به رشته (String)</h4><ul> <li><strong>ToString</strong> اعلان تولید نمی‌کند، بنابراین باید از <strong>XmlWriter</strong> استفاده کرد:</li></ul> <pre class="hljs"><code><span class="hljs-keyword">var</span> doc = <span class="hljs-keyword">new</span> XDocument(
     <span class="hljs-keyword">new</span> XDeclaration(<span class="hljs-string">&quot;1.0&quot;</span>, <span class="hljs-string">&quot;utf-8&quot;</span>, <span class="hljs-string">&quot;yes&quot;</span>),
     <span class="hljs-keyword">new</span> XElement(<span class="hljs-string">&quot;test&quot;</span>, <span class="hljs-string">&quot;data&quot;</span>)
 );
@@ -924,220 +317,74 @@ doc.Save(<span class="hljs-string">&quot;test.xml&quot;</span>);
     doc.Save(xw);
 
 Console.WriteLine(output.ToString());
-</code></pre>
-<ul>
-<li>خروجی:</li>
-</ul>
-<pre class="hljs"><code><span class="hljs-meta">&lt;?xml version=<span class="hljs-string">&quot;1.0&quot;</span> encoding=<span class="hljs-string">&quot;utf-16&quot;</span> standalone=<span class="hljs-string">&quot;yes&quot;</span>?&gt;</span>
+</code></pre> <ul><li>خروجی:</li></ul> <pre class="hljs"><code><span class="hljs-meta">&lt;?xml version=<span class="hljs-string">&quot;1.0&quot;</span> encoding=<span class="hljs-string">&quot;utf-16&quot;</span> standalone=<span class="hljs-string">&quot;yes&quot;</span>?&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">test</span>&gt;</span>data<span class="hljs-tag">&lt;/<span class="hljs-name">test</span>&gt;</span>
-</code></pre>
-<blockquote>
-<p>دلیل UTF-16: رشته‌ها در حافظه داخلی به صورت UTF-16 ذخیره می‌شوند، بنابراین XmlWriter به‌درستی &quot;utf-16&quot; می‌نویسد تا اطلاعات نادرست تولید نشود.</p>
-</blockquote>
-<hr>
-<h4>نکته مهم درباره ToString</h4>
-<p>اگر بجای Save، از کد زیر استفاده کنید:</p>
-<pre class="hljs"><code>File.WriteAllText(<span class="hljs-string">&quot;data.xml&quot;</span>, doc.ToString());
-</code></pre>
-<ul>
-<li>فایل <strong>data.xml</strong> بدون اعلان XML ذخیره می‌شود.</li>
-<li>اگر ToString اعلان تولید می‌کرد، encoding نادرست (UTF-16) درج می‌شد که ممکن بود باعث عدم خوانده شدن فایل شود.</li>
-</ul>
-<hr>
-<h3>نام‌ها و فضای نام‌ها (Names and Namespaces)</h3>
-<ul>
-<li>
-<p>همان‌طور که نوع‌ها در .NET می‌توانند namespace داشته باشند، عناصر و attributes در XML نیز می‌توانند namespace داشته باشند.</p>
-</li>
-<li>
-<p><strong>کاربرد namespace در XML:</strong></p>
-<ol>
-<li>جلوگیری از برخورد نام‌ها هنگام ترکیب داده‌ها از فایل‌های مختلف</li>
-<li>دادن معنای دقیق به یک نام</li>
-</ol>
-</li>
-</ul>
-<h4>نمونه تعریف namespace پیش‌فرض</h4>
-<pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">customer</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">&quot;OReilly.Nutshell.CSharp&quot;</span>/&gt;</span>
-</code></pre>
-<ul>
-<li>
-<p><code>xmlns</code> نامعتبر است و دو کار انجام می‌دهد:</p>
-<ol>
-<li>namespace عنصر جاری را مشخص می‌کند</li>
-<li>namespace پیش‌فرض برای تمام عناصر فرزند تعیین می‌کند</li>
-</ol>
-</li>
-</ul>
-<p>مثال با عناصر فرزند:</p>
-<pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">customer</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">&quot;OReilly.Nutshell.CSharp&quot;</span>&gt;</span>
+</code></pre> <blockquote><p>دلیل UTF-16: رشته‌ها در حافظه داخلی به صورت UTF-16 ذخیره می‌شوند، بنابراین XmlWriter به‌درستی &quot;utf-16&quot; می‌نویسد تا اطلاعات نادرست تولید نشود.</p></blockquote> <hr><h4>نکته مهم درباره ToString</h4><p>اگر بجای Save، از کد زیر استفاده کنید:</p><pre class="hljs"><code>File.WriteAllText(<span class="hljs-string">&quot;data.xml&quot;</span>, doc.ToString());
+</code></pre> <ul><li>فایل <strong>data.xml</strong> بدون اعلان XML ذخیره می‌شود.</li><li>اگر ToString اعلان تولید می‌کرد، encoding نادرست (UTF-16) درج می‌شد که ممکن بود باعث عدم خوانده شدن فایل شود.</li></ul> <hr><h3>نام‌ها و فضای نام‌ها (Names and Namespaces)</h3><ul> <li><p>همان‌طور که نوع‌ها در .NET می‌توانند namespace داشته باشند، عناصر و attributes در XML نیز می‌توانند namespace داشته باشند.</p></li> <li><p><strong>کاربرد namespace در XML:</strong></p><ol> <li>جلوگیری از برخورد نام‌ها هنگام ترکیب داده‌ها از فایل‌های مختلف</li><li>دادن معنای دقیق به یک نام</li></ol> </li></ul> <h4>نمونه تعریف namespace پیش‌فرض</h4><pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">customer</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">&quot;OReilly.Nutshell.CSharp&quot;</span>/&gt;</span>
+</code></pre> <ul><li> <p><code>xmlns</code> نامعتبر است و دو کار انجام می‌دهد:</p><ol> <li>namespace عنصر جاری را مشخص می‌کند</li><li>namespace پیش‌فرض برای تمام عناصر فرزند تعیین می‌کند</li></ol> </li></ul> <p>مثال با عناصر فرزند:</p><pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">customer</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">&quot;OReilly.Nutshell.CSharp&quot;</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">address</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">postcode</span>&gt;</span>02138<span class="hljs-tag">&lt;/<span class="hljs-name">postcode</span>&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-name">address</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">customer</span>&gt;</span>
-</code></pre>
-<ul>
-<li>عناصر <code>address</code> و <code>postcode</code> به طور پیش‌فرض در namespace <code>OReilly.Nutshell.CSharp</code> قرار دارند.</li>
-</ul>
-<h4>حذف namespace برای عناصر فرزند</h4>
-<pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">customer</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">&quot;OReilly.Nutshell.CSharp&quot;</span>&gt;</span>
+</code></pre> <ul><li>عناصر <code>address</code> و <code>postcode</code> به طور پیش‌فرض در namespace <code>OReilly.Nutshell.CSharp</code> قرار دارند.</li></ul> <h4>حذف namespace برای عناصر فرزند</h4><pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">customer</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">&quot;OReilly.Nutshell.CSharp&quot;</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">address</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">&quot;&quot;</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">postcode</span>&gt;</span>02138<span class="hljs-tag">&lt;/<span class="hljs-name">postcode</span>&gt;</span>  <span class="hljs-comment">&lt;!-- اکنون postcode در namespace خالی است --&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-name">address</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">customer</span>&gt;</span>
-</code></pre>
-<h3>پیشوندها (Prefixes)</h3>
-<p>یکی دیگر از روش‌های تعیین namespace استفاده از <strong>پیشوند (prefix)</strong> است.</p>
-<ul>
-<li><strong>پیشوند</strong> یک نام مستعار برای namespace است که به شما اجازه می‌دهد کمتر تایپ کنید.</li>
-<li>دو مرحله دارد: تعریف پیشوند و استفاده از آن.</li>
-</ul>
-<h4>تعریف و استفاده همزمان از پیشوند</h4>
-<pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">nut:customer</span> <span class="hljs-attr">xmlns:nut</span>=<span class="hljs-string">&quot;OReilly.Nutshell.CSharp&quot;</span>/&gt;</span>
-</code></pre>
-<ul>
-<li>سمت راست: <code>xmlns:nut=&quot;...&quot;</code> → پیشوند <code>nut</code> را تعریف می‌کند.</li>
-<li>سمت چپ: <code>nut:customer</code> → پیشوند تعریف شده را به عنصر <code>customer</code> نسبت می‌دهد.</li>
-</ul>
-<hr>
-<h4>نکته‌ها درباره پیشوندها</h4>
-<ul>
-<li><strong>عنصر دارای پیشوند، فضای نام پیش‌فرض برای فرزندان ایجاد نمی‌کند.</strong></li>
-<li>برای اینکه فرزند هم همان پیشوند را داشته باشد، باید صراحتاً از آن استفاده کنید:</li>
-</ul>
-<pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">nut:customer</span> <span class="hljs-attr">xmlns:nut</span>=<span class="hljs-string">&quot;OReilly.Nutshell.CSharp&quot;</span>&gt;</span>
+</code></pre> <h3>پیشوندها (Prefixes)</h3><p>یکی دیگر از روش‌های تعیین namespace استفاده از <strong>پیشوند (prefix)</strong> است.</p><ul> <li><strong>پیشوند</strong> یک نام مستعار برای namespace است که به شما اجازه می‌دهد کمتر تایپ کنید.</li><li>دو مرحله دارد: تعریف پیشوند و استفاده از آن.</li></ul> <h4>تعریف و استفاده همزمان از پیشوند</h4><pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">nut:customer</span> <span class="hljs-attr">xmlns:nut</span>=<span class="hljs-string">&quot;OReilly.Nutshell.CSharp&quot;</span>/&gt;</span>
+</code></pre> <ul><li>سمت راست: <code>xmlns:nut=&quot;...&quot;</code> → پیشوند <code>nut</code> را تعریف می‌کند.</li><li>سمت چپ: <code>nut:customer</code> → پیشوند تعریف شده را به عنصر <code>customer</code> نسبت می‌دهد.</li></ul> <hr><h4>نکته‌ها درباره پیشوندها</h4><ul> <li><strong>عنصر دارای پیشوند، فضای نام پیش‌فرض برای فرزندان ایجاد نمی‌کند.</strong></li><li>برای اینکه فرزند هم همان پیشوند را داشته باشد، باید صراحتاً از آن استفاده کنید:</li></ul> <pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">nut:customer</span> <span class="hljs-attr">xmlns:nut</span>=<span class="hljs-string">&quot;OReilly.Nutshell.CSharp&quot;</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">nut:firstname</span>&gt;</span>Joe<span class="hljs-tag">&lt;/<span class="hljs-name">nut:firstname</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">nut:customer</span>&gt;</span>
-</code></pre>
-<ul>
-<li>می‌توانید پیشوند تعریف کنید بدون اینکه آن را به عنصر جاری اختصاص دهید، برای راحتی فرزندان:</li>
-</ul>
-<pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">customer</span> <span class="hljs-attr">xmlns:i</span>=<span class="hljs-string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+</code></pre> <ul><li>می‌توانید پیشوند تعریف کنید بدون اینکه آن را به عنصر جاری اختصاص دهید، برای راحتی فرزندان:</li></ul> <pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">customer</span> <span class="hljs-attr">xmlns:i</span>=<span class="hljs-string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
           <span class="hljs-attr">xmlns:z</span>=<span class="hljs-string">&quot;http://schemas.microsoft.com/2003/10/Serialization/&quot;</span>&gt;</span>
   ...
 <span class="hljs-tag">&lt;/<span class="hljs-name">customer</span>&gt;</span>
-</code></pre>
-<ul>
-<li>پیشوندها مخصوصاً زمانی مفید هستند که عناصر از چند namespace استفاده کنند.</li>
-<li><strong>همیشه از URIهای معتبر برای namespace استفاده کنید</strong> تا یکتا باشند:</li>
-</ul>
-<pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">customer</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">&quot;http://oreilly.com/schemas/nutshell/csharp&quot;</span>/&gt;</span>
+</code></pre> <ul><li>پیشوندها مخصوصاً زمانی مفید هستند که عناصر از چند namespace استفاده کنند.</li><li><strong>همیشه از URIهای معتبر برای namespace استفاده کنید</strong> تا یکتا باشند:</li></ul> <pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">customer</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">&quot;http://oreilly.com/schemas/nutshell/csharp&quot;</span>/&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">nut:customer</span> <span class="hljs-attr">xmlns:nut</span>=<span class="hljs-string">&quot;http://oreilly.com/schemas/nutshell/csharp&quot;</span>/&gt;</span>
-</code></pre>
-<hr>
-<h3>namespace برای Attributes</h3>
-<ul>
-<li>یک Attribute همیشه برای داشتن namespace نیاز به <strong>پیشوند</strong> دارد:</li>
-</ul>
-<pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">customer</span> <span class="hljs-attr">xmlns:nut</span>=<span class="hljs-string">&quot;OReilly.Nutshell.CSharp&quot;</span> <span class="hljs-attr">nut:id</span>=<span class="hljs-string">&quot;123&quot;</span> /&gt;</span>
-</code></pre>
-<ul>
-<li>Attribute بدون پیشوند همیشه در <strong>namespace خالی</strong> است و فضای نام والد را به ارث نمی‌برد.</li>
-<li>معمولاً Attributes نیازی به namespace ندارند مگر برای metadata یا کاربرد عمومی:</li>
-</ul>
-<pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">customer</span> <span class="hljs-attr">xmlns:xsi</span>=<span class="hljs-string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>&gt;</span>
+</code></pre> <hr><h3>namespace برای Attributes</h3><ul> <li>یک Attribute همیشه برای داشتن namespace نیاز به <strong>پیشوند</strong> دارد:</li></ul> <pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">customer</span> <span class="hljs-attr">xmlns:nut</span>=<span class="hljs-string">&quot;OReilly.Nutshell.CSharp&quot;</span> <span class="hljs-attr">nut:id</span>=<span class="hljs-string">&quot;123&quot;</span> /&gt;</span>
+</code></pre> <ul><li>Attribute بدون پیشوند همیشه در <strong>namespace خالی</strong> است و فضای نام والد را به ارث نمی‌برد.</li><li>معمولاً Attributes نیازی به namespace ندارند مگر برای metadata یا کاربرد عمومی:</li></ul> <pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">customer</span> <span class="hljs-attr">xmlns:xsi</span>=<span class="hljs-string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">firstname</span>&gt;</span>Joe<span class="hljs-tag">&lt;/<span class="hljs-name">firstname</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">lastname</span> <span class="hljs-attr">xsi:nil</span>=<span class="hljs-string">&quot;true&quot;</span>/&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">customer</span>&gt;</span>
-</code></pre>
-<hr>
-<h3>تعیین namespace در X-DOM</h3>
-<ul>
-<li>تا به حال از <strong>رشته ساده</strong> برای نام XElement و XAttribute استفاده کردیم که معادل <strong>namespace خالی</strong> است.</li>
-<li>برای تعیین namespace، دو روش داریم:</li>
-</ul>
-<ol>
-<li><strong>استفاده از آکولاد در نام رشته‌ای:</strong></li>
-</ol>
-<pre class="hljs"><code><span class="hljs-keyword">var</span> e = <span class="hljs-keyword">new</span> XElement(<span class="hljs-string">&quot;{http://domain.com/xmlspace}customer&quot;</span>, <span class="hljs-string">&quot;Bloggs&quot;</span>);
+</code></pre> <hr><h3>تعیین namespace در X-DOM</h3><ul> <li>تا به حال از <strong>رشته ساده</strong> برای نام XElement و XAttribute استفاده کردیم که معادل <strong>namespace خالی</strong> است.</li><li>برای تعیین namespace، دو روش داریم:</li></ul> <ol><li><strong>استفاده از آکولاد در نام رشته‌ای:</strong></li></ol> <pre class="hljs"><code><span class="hljs-keyword">var</span> e = <span class="hljs-keyword">new</span> XElement(<span class="hljs-string">&quot;{http://domain.com/xmlspace}customer&quot;</span>, <span class="hljs-string">&quot;Bloggs&quot;</span>);
 Console.WriteLine(e.ToString());
-</code></pre>
-<p>خروجی:</p>
-<pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">customer</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">&quot;http://domain.com/xmlspace&quot;</span>&gt;</span>Bloggs<span class="hljs-tag">&lt;/<span class="hljs-name">customer</span>&gt;</span>
-</code></pre>
-<ol start="2">
-<li><strong>استفاده از XNamespace و XName (روش بهینه‌تر):</strong></li>
-</ol>
-<pre class="hljs"><code>XNamespace ns = <span class="hljs-string">&quot;http://domain.com/xmlspace&quot;</span>;
+</code></pre> <p>خروجی:</p><pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">customer</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">&quot;http://domain.com/xmlspace&quot;</span>&gt;</span>Bloggs<span class="hljs-tag">&lt;/<span class="hljs-name">customer</span>&gt;</span>
+</code></pre> <ol start="2"><li><strong>استفاده از XNamespace و XName (روش بهینه‌تر):</strong></li></ol> <pre class="hljs"><code>XNamespace ns = <span class="hljs-string">&quot;http://domain.com/xmlspace&quot;</span>;
 XName fullName = ns + <span class="hljs-string">&quot;customer&quot;</span>;
 
 <span class="hljs-keyword">var</span> data = <span class="hljs-keyword">new</span> XElement(ns + <span class="hljs-string">&quot;data&quot;</span>,
               <span class="hljs-keyword">new</span> XAttribute(ns + <span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-number">123</span>)
            );
-</code></pre>
-<ul>
-<li>
-<p><strong>XNamespace</strong> و <strong>XName</strong> کلاس‌هایی هستند که namespace و نام محلی (local name) را مدیریت می‌کنند.</p>
-</li>
-<li>
-<p>همه متدها و سازنده‌های X-DOM، XName می‌پذیرند، ولی می‌توان رشته ساده نیز استفاده کرد به دلیل <strong>تبدیل ضمنی (implicit cast)</strong>.</p>
-</li>
-<li>
-<p>نتیجه استفاده از namespace در عناصر و attributes یکسان است و تنها با استفاده از <code>+</code> یا آکولاد مشخص می‌شود.</p>
-</li>
-</ul>
-<h3>X-DOM و فضای نام پیش‌فرض (Default Namespaces)</h3>
-<p>در <strong>X-DOM</strong>، مفهوم <strong>فضای نام پیش‌فرض</strong> تا زمان <strong>تبدیل به XML واقعی</strong> نادیده گرفته می‌شود.</p>
-<ul>
-<li>یعنی وقتی یک عنصر فرزند (XElement) می‌سازید، <strong>فضای نام والد به طور خودکار به آن منتقل نمی‌شود</strong>.</li>
-<li>شما باید <strong>explicit</strong> namespace را مشخص کنید:</li>
-</ul>
-<pre class="hljs"><code>XNamespace ns = <span class="hljs-string">&quot;http://domain.com/xmlspace&quot;</span>;
+</code></pre> <ul><li> <p><strong>XNamespace</strong> و <strong>XName</strong> کلاس‌هایی هستند که namespace و نام محلی (local name) را مدیریت می‌کنند.</p></li> <li><p>همه متدها و سازنده‌های X-DOM، XName می‌پذیرند، ولی می‌توان رشته ساده نیز استفاده کرد به دلیل <strong>تبدیل ضمنی (implicit cast)</strong>.</p></li> <li><p>نتیجه استفاده از namespace در عناصر و attributes یکسان است و تنها با استفاده از <code>+</code> یا آکولاد مشخص می‌شود.</p></li> </ul><h3>X-DOM و فضای نام پیش‌فرض (Default Namespaces)</h3><p>در <strong>X-DOM</strong>، مفهوم <strong>فضای نام پیش‌فرض</strong> تا زمان <strong>تبدیل به XML واقعی</strong> نادیده گرفته می‌شود.</p><ul> <li>یعنی وقتی یک عنصر فرزند (XElement) می‌سازید، <strong>فضای نام والد به طور خودکار به آن منتقل نمی‌شود</strong>.</li><li>شما باید <strong>explicit</strong> namespace را مشخص کنید:</li></ul> <pre class="hljs"><code>XNamespace ns = <span class="hljs-string">&quot;http://domain.com/xmlspace&quot;</span>;
 <span class="hljs-keyword">var</span> data = <span class="hljs-keyword">new</span> XElement(ns + <span class="hljs-string">&quot;data&quot;</span>,
             <span class="hljs-keyword">new</span> XElement(ns + <span class="hljs-string">&quot;customer&quot;</span>, <span class="hljs-string">&quot;Bloggs&quot;</span>),
             <span class="hljs-keyword">new</span> XElement(ns + <span class="hljs-string">&quot;purchase&quot;</span>, <span class="hljs-string">&quot;Bicycle&quot;</span>)
           );
 Console.WriteLine(data.ToString());
-</code></pre>
-<p><strong>خروجی:</strong></p>
-<pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">data</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">&quot;http://domain.com/xmlspace&quot;</span>&gt;</span>
+</code></pre> <p><strong>خروجی:</strong></p><pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">data</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">&quot;http://domain.com/xmlspace&quot;</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">customer</span>&gt;</span>Bloggs<span class="hljs-tag">&lt;/<span class="hljs-name">customer</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">purchase</span>&gt;</span>Bicycle<span class="hljs-tag">&lt;/<span class="hljs-name">purchase</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">data</span>&gt;</span>
-</code></pre>
-<ul>
-<li>اگر فرزندان بدون namespace ساخته شوند، فضای نام خالی (<code>xmlns=&quot;&quot;</code>) به آن‌ها اعمال می‌شود:</li>
-</ul>
-<pre class="hljs"><code><span class="hljs-keyword">var</span> data2 = <span class="hljs-keyword">new</span> XElement(ns + <span class="hljs-string">&quot;data&quot;</span>,
+</code></pre> <ul><li>اگر فرزندان بدون namespace ساخته شوند، فضای نام خالی (<code>xmlns=&quot;&quot;</code>) به آن‌ها اعمال می‌شود:</li></ul> <pre class="hljs"><code><span class="hljs-keyword">var</span> data2 = <span class="hljs-keyword">new</span> XElement(ns + <span class="hljs-string">&quot;data&quot;</span>,
             <span class="hljs-keyword">new</span> XElement(<span class="hljs-string">&quot;customer&quot;</span>, <span class="hljs-string">&quot;Bloggs&quot;</span>),
             <span class="hljs-keyword">new</span> XElement(<span class="hljs-string">&quot;purchase&quot;</span>, <span class="hljs-string">&quot;Bicycle&quot;</span>)
           );
 Console.WriteLine(data2.ToString());
-</code></pre>
-<p>خروجی:</p>
-<pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">data</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">&quot;http://domain.com/xmlspace&quot;</span>&gt;</span>
+</code></pre> <p>خروجی:</p><pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">data</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">&quot;http://domain.com/xmlspace&quot;</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">customer</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">&quot;&quot;</span>&gt;</span>Bloggs<span class="hljs-tag">&lt;/<span class="hljs-name">customer</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">purchase</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">&quot;&quot;</span>&gt;</span>Bicycle<span class="hljs-tag">&lt;/<span class="hljs-name">purchase</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">data</span>&gt;</span>
-</code></pre>
-<hr>
-<h3>هشدار در ناوبری X-DOM</h3>
-<ul>
-<li>هنگام استفاده از <code>Element()</code> یا سایر متدهای جستجو، <strong>فراموش کردن namespace باعث بازگشت null می‌شود</strong>:</li>
-</ul>
-<pre class="hljs"><code>XNamespace ns = <span class="hljs-string">&quot;http://domain.com/xmlspace&quot;</span>;
+</code></pre> <hr><h3>هشدار در ناوبری X-DOM</h3><ul> <li>هنگام استفاده از <code>Element()</code> یا سایر متدهای جستجو، <strong>فراموش کردن namespace باعث بازگشت null می‌شود</strong>:</li></ul> <pre class="hljs"><code>XNamespace ns = <span class="hljs-string">&quot;http://domain.com/xmlspace&quot;</span>;
 <span class="hljs-keyword">var</span> data = <span class="hljs-keyword">new</span> XElement(ns + <span class="hljs-string">&quot;data&quot;</span>,
             <span class="hljs-keyword">new</span> XElement(ns + <span class="hljs-string">&quot;customer&quot;</span>, <span class="hljs-string">&quot;Bloggs&quot;</span>)
           );
 
 XElement x = data.Element(ns + <span class="hljs-string">&quot;customer&quot;</span>); <span class="hljs-comment">// درست</span>
 XElement y = data.Element(<span class="hljs-string">&quot;customer&quot;</span>);      <span class="hljs-comment">// null</span>
-</code></pre>
-<ul>
-<li>اگر X-DOM بدون namespace ساخته شد، می‌توانید بعداً همه عناصر را به یک namespace واحد اختصاص دهید:</li>
-</ul>
-<pre class="hljs"><code><span class="hljs-keyword">foreach</span> (XElement e <span class="hljs-keyword">in</span> data.DescendantsAndSelf())
+</code></pre> <ul><li>اگر X-DOM بدون namespace ساخته شد، می‌توانید بعداً همه عناصر را به یک namespace واحد اختصاص دهید:</li></ul> <pre class="hljs"><code><span class="hljs-keyword">foreach</span> (XElement e <span class="hljs-keyword">in</span> data.DescendantsAndSelf())
   <span class="hljs-keyword">if</span> (e.Name.Namespace == <span class="hljs-string">&quot;&quot;</span>)
     e.Name = ns + e.Name.LocalName;
-</code></pre>
-<hr>
-<h3>پیشوندها (Prefixes) در X-DOM</h3>
-<ul>
-<li>X-DOM پیشوندها را فقط برای <strong>serialization</strong> استفاده می‌کند.</li>
-<li>در عملیات ساخت، جستجو و بروزرسانی X-DOM <strong>می‌توان پیشوندها را نادیده گرفت</strong>.</li>
-</ul>
-<p>مثال:</p>
-<pre class="hljs"><code>XNamespace ns1 = <span class="hljs-string">&quot;http://domain.com/space1&quot;</span>;
+</code></pre> <hr><h3>پیشوندها (Prefixes) در X-DOM</h3><ul> <li>X-DOM پیشوندها را فقط برای <strong>serialization</strong> استفاده می‌کند.</li><li>در عملیات ساخت، جستجو و بروزرسانی X-DOM <strong>می‌توان پیشوندها را نادیده گرفت</strong>.</li></ul> <p>مثال:</p><pre class="hljs"><code>XNamespace ns1 = <span class="hljs-string">&quot;http://domain.com/space1&quot;</span>;
 XNamespace ns2 = <span class="hljs-string">&quot;http://domain.com/space2&quot;</span>;
 <span class="hljs-keyword">var</span> mix = <span class="hljs-keyword">new</span> XElement(ns1 + <span class="hljs-string">&quot;data&quot;</span>,
             <span class="hljs-keyword">new</span> XElement(ns2 + <span class="hljs-string">&quot;element&quot;</span>, <span class="hljs-string">&quot;value&quot;</span>),
@@ -1145,35 +392,20 @@ XNamespace ns2 = <span class="hljs-string">&quot;http://domain.com/space2&quot;<
             <span class="hljs-keyword">new</span> XElement(ns2 + <span class="hljs-string">&quot;element&quot;</span>, <span class="hljs-string">&quot;value&quot;</span>)
           );
 Console.WriteLine(mix.ToString());
-</code></pre>
-<p>خروجی بدون پیشوند:</p>
-<pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">data</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">&quot;http://domain.com/space1&quot;</span>&gt;</span>
+</code></pre> <p>خروجی بدون پیشوند:</p><pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">data</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">&quot;http://domain.com/space1&quot;</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">element</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">&quot;http://domain.com/space2&quot;</span>&gt;</span>value<span class="hljs-tag">&lt;/<span class="hljs-name">element</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">element</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">&quot;http://domain.com/space2&quot;</span>&gt;</span>value<span class="hljs-tag">&lt;/<span class="hljs-name">element</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">element</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">&quot;http://domain.com/space2&quot;</span>&gt;</span>value<span class="hljs-tag">&lt;/<span class="hljs-name">element</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">data</span>&gt;</span>
-</code></pre>
-<ul>
-<li>برای کاهش تکرار، می‌توان پیشوندها را به root اضافه کرد:</li>
-</ul>
-<pre class="hljs"><code>mix.SetAttributeValue(XNamespace.Xmlns + <span class="hljs-string">&quot;ns1&quot;</span>, ns1);
+</code></pre> <ul><li>برای کاهش تکرار، می‌توان پیشوندها را به root اضافه کرد:</li></ul> <pre class="hljs"><code>mix.SetAttributeValue(XNamespace.Xmlns + <span class="hljs-string">&quot;ns1&quot;</span>, ns1);
 mix.SetAttributeValue(XNamespace.Xmlns + <span class="hljs-string">&quot;ns2&quot;</span>, ns2);
-</code></pre>
-<p>خروجی بهینه:</p>
-<pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">ns1:data</span> <span class="hljs-attr">xmlns:ns1</span>=<span class="hljs-string">&quot;http://domain.com/space1&quot;</span>
+</code></pre> <p>خروجی بهینه:</p><pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">ns1:data</span> <span class="hljs-attr">xmlns:ns1</span>=<span class="hljs-string">&quot;http://domain.com/space1&quot;</span>
           <span class="hljs-attr">xmlns:ns2</span>=<span class="hljs-string">&quot;http://domain.com/space2&quot;</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">ns2:element</span>&gt;</span>value<span class="hljs-tag">&lt;/<span class="hljs-name">ns2:element</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">ns2:element</span>&gt;</span>value<span class="hljs-tag">&lt;/<span class="hljs-name">ns2:element</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">ns2:element</span>&gt;</span>value<span class="hljs-tag">&lt;/<span class="hljs-name">ns2:element</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">ns1:data</span>&gt;</span>
-</code></pre>
-<hr>
-<h3>پیشوندها برای Attributes</h3>
-<ul>
-<li>پیشوندها در زمان <strong>serializing attributes</strong> هم اعمال می‌شوند.</li>
-<li>مثال استفاده از namespace استاندارد W3C برای نشان دادن nil:</li>
-</ul>
-<pre class="hljs"><code>XNamespace xsi = <span class="hljs-string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>;
+</code></pre> <hr><h3>پیشوندها برای Attributes</h3><ul> <li>پیشوندها در زمان <strong>serializing attributes</strong> هم اعمال می‌شوند.</li><li>مثال استفاده از namespace استاندارد W3C برای نشان دادن nil:</li></ul> <pre class="hljs"><code>XNamespace xsi = <span class="hljs-string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>;
 <span class="hljs-keyword">var</span> nil = <span class="hljs-keyword">new</span> XAttribute(xsi + <span class="hljs-string">&quot;nil&quot;</span>, <span class="hljs-literal">true</span>);
 
 <span class="hljs-keyword">var</span> cust = <span class="hljs-keyword">new</span> XElement(<span class="hljs-string">&quot;customers&quot;</span>,
@@ -1184,48 +416,21 @@ mix.SetAttributeValue(XNamespace.Xmlns + <span class="hljs-string">&quot;ns2&quo
                 <span class="hljs-keyword">new</span> XElement(<span class="hljs-string">&quot;credit&quot;</span>, nil)
               )
             );
-</code></pre>
-<p>خروجی:</p>
-<pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">customers</span> <span class="hljs-attr">xmlns:xsi</span>=<span class="hljs-string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>&gt;</span>
+</code></pre> <p>خروجی:</p><pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">customers</span> <span class="hljs-attr">xmlns:xsi</span>=<span class="hljs-string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">customer</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">lastname</span>&gt;</span>Bloggs<span class="hljs-tag">&lt;/<span class="hljs-name">lastname</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">dob</span> <span class="hljs-attr">xsi:nil</span>=<span class="hljs-string">&quot;true&quot;</span> /&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">credit</span> <span class="hljs-attr">xsi:nil</span>=<span class="hljs-string">&quot;true&quot;</span> /&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-name">customer</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">customers</span>&gt;</span>
-</code></pre>
-<ul>
-<li>یک attribute می‌تواند چند بار در X-DOM استفاده شود؛ X-DOM به طور خودکار آن را duplicate می‌کند.</li>
-</ul>
-<h3>Annotations در LINQ to XML</h3>
-<p>در <strong>LINQ to XML</strong> می‌توانید داده‌های دلخواه خود را به هر <strong>XObject</strong> (مثل <code>XElement</code> یا <code>XAttribute</code>) بچسبانید. این داده‌ها به عنوان <strong>Annotations</strong> شناخته می‌شوند و X-DOM آن‌ها را <strong>به صورت یک جعبه سیاه (black box)</strong> مدیریت می‌کند.</p>
-<ul>
-<li>مفهومی مشابه <code>Tag</code> در Windows Forms یا WPF، با این تفاوت که <strong>چندین annotation</strong> می‌توانید اضافه کنید و هر کدام می‌توانند <strong>خصوصی و غیرقابل مشاهده توسط دیگران</strong> باشند.</li>
-</ul>
-<hr>
-<h4>اضافه کردن و حذف Annotations</h4>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">AddAnnotation</span>(<span class="hljs-params"><span class="hljs-built_in">object</span> annotation</span>)
+</code></pre> <ul><li>یک attribute می‌تواند چند بار در X-DOM استفاده شود؛ X-DOM به طور خودکار آن را duplicate می‌کند.</li></ul> <h3>Annotations در LINQ to XML</h3><p>در <strong>LINQ to XML</strong> می‌توانید داده‌های دلخواه خود را به هر <strong>XObject</strong> (مثل <code>XElement</code> یا <code>XAttribute</code>) بچسبانید. این داده‌ها به عنوان <strong>Annotations</strong> شناخته می‌شوند و X-DOM آن‌ها را <strong>به صورت یک جعبه سیاه (black box)</strong> مدیریت می‌کند.</p><ul> <li>مفهومی مشابه <code>Tag</code> در Windows Forms یا WPF، با این تفاوت که <strong>چندین annotation</strong> می‌توانید اضافه کنید و هر کدام می‌توانند <strong>خصوصی و غیرقابل مشاهده توسط دیگران</strong> باشند.</li></ul> <hr><h4>اضافه کردن و حذف Annotations</h4><pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">AddAnnotation</span>(<span class="hljs-params"><span class="hljs-built_in">object</span> annotation</span>)
 <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">RemoveAnnotations</span>&lt;<span class="hljs-title">T</span>&gt;() <span class="hljs-keyword">where</span> T : <span class="hljs-keyword">class</span>
-</span></code></pre>
-<h4>بازیابی Annotations</h4>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">public</span> T <span class="hljs-title">Annotation</span>&lt;<span class="hljs-title">T</span>&gt;() <span class="hljs-keyword">where</span> T : <span class="hljs-keyword">class</span>
+</span></code></pre> <h4>بازیابی Annotations</h4><pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">public</span> T <span class="hljs-title">Annotation</span>&lt;<span class="hljs-title">T</span>&gt;() <span class="hljs-keyword">where</span> T : <span class="hljs-keyword">class</span>
 <span class="hljs-keyword">public</span> <span class="hljs-title">IEnumerable</span>&lt;<span class="hljs-title">T</span>&gt; <span class="hljs-title">Annotations</span>&lt;<span class="hljs-title">T</span>&gt;() <span class="hljs-keyword">where</span> T : <span class="hljs-keyword">class</span>
-</span></code></pre>
-<ul>
-<li>کلید هر annotation نوع داده‌ای آن است و باید <strong>Reference Type</strong> باشد.</li>
-</ul>
-<p><strong>مثال ساده با string:</strong></p>
-<pre class="hljs"><code>XElement e = <span class="hljs-keyword">new</span> XElement(<span class="hljs-string">&quot;test&quot;</span>);
+</span></code></pre> <ul><li>کلید هر annotation نوع داده‌ای آن است و باید <strong>Reference Type</strong> باشد.</li></ul> <p><strong>مثال ساده با string:</strong></p><pre class="hljs"><code>XElement e = <span class="hljs-keyword">new</span> XElement(<span class="hljs-string">&quot;test&quot;</span>);
 e.AddAnnotation(<span class="hljs-string">&quot;Hello&quot;</span>);
 Console.WriteLine(e.Annotation&lt;<span class="hljs-built_in">string</span>&gt;());   <span class="hljs-comment">// Hello</span>
-</code></pre>
-<ul>
-<li>می‌توانید چند annotation از یک نوع اضافه کنید و با <code>Annotations&lt;T&gt;()</code> همه را دریافت کنید.</li>
-</ul>
-<hr>
-<h4>استفاده از کلاس خصوصی برای ایمنی</h4>
-<p>برای جلوگیری از تداخل دیگر کدها:</p>
-<pre class="hljs"><code><span class="hljs-keyword">class</span> <span class="hljs-title">X</span>
+</code></pre> <ul><li>می‌توانید چند annotation از یک نوع اضافه کنید و با <code>Annotations&lt;T&gt;()</code> همه را دریافت کنید.</li></ul> <hr><h4>استفاده از کلاس خصوصی برای ایمنی</h4><p>برای جلوگیری از تداخل دیگر کدها:</p><pre class="hljs"><code><span class="hljs-keyword">class</span> <span class="hljs-title">X</span>
 {
     <span class="hljs-keyword">class</span> <span class="hljs-title">CustomData</span> { <span class="hljs-keyword">internal</span> <span class="hljs-built_in">string</span> Message; }   <span class="hljs-comment">// Private nested type</span>
 
@@ -1236,29 +441,8 @@ Console.WriteLine(e.Annotation&lt;<span class="hljs-built_in">string</span>&gt;(
         Console.WriteLine(e.Annotations&lt;CustomData&gt;().First().Message);  <span class="hljs-comment">// Hello</span>
     }
 }
-</code></pre>
-<ul>
-<li>برای حذف annotation، باید به نوع آن دسترسی داشته باشید:</li>
-</ul>
-<pre class="hljs"><code>e.RemoveAnnotations&lt;CustomData&gt;();
-</code></pre>
-<hr>
-<h3>Projection به X-DOM با LINQ</h3>
-<ul>
-<li>
-<p>علاوه بر <strong>استخراج داده</strong>، می‌توانید با LINQ <strong>داده‌ها را به X-DOM تبدیل کنید</strong>.</p>
-</li>
-<li>
-<p>منابع (sources) می‌توانند:</p>
-<ul>
-<li>EF Core entities</li>
-<li>یک Collection محلی</li>
-<li>یا حتی یک X-DOM دیگر باشند</li>
-</ul>
-</li>
-</ul>
-<h4>مثال: ساخت XML از پایگاه داده</h4>
-<pre class="hljs"><code><span class="hljs-keyword">var</span> customers =
+</code></pre> <ul><li>برای حذف annotation، باید به نوع آن دسترسی داشته باشید:</li></ul> <pre class="hljs"><code>e.RemoveAnnotations&lt;CustomData&gt;();
+</code></pre> <hr><h3>Projection به X-DOM با LINQ</h3><ul> <li><p>علاوه بر <strong>استخراج داده</strong>، می‌توانید با LINQ <strong>داده‌ها را به X-DOM تبدیل کنید</strong>.</p></li> <li><p>منابع (sources) می‌توانند:</p><ul> <li>EF Core entities</li><li>یک Collection محلی</li><li>یا حتی یک X-DOM دیگر باشند</li></ul> </li></ul> <h4>مثال: ساخت XML از پایگاه داده</h4><pre class="hljs"><code><span class="hljs-keyword">var</span> customers =
   <span class="hljs-keyword">new</span> XElement(<span class="hljs-string">&quot;customers&quot;</span>,
     <span class="hljs-keyword">from</span> c <span class="hljs-keyword">in</span> dbContext.Customers.AsEnumerable()  <span class="hljs-comment">// توجه به AsEnumerable به دلیل bug در EF Core</span>
     <span class="hljs-function"><span class="hljs-keyword">select</span> <span class="hljs-keyword">new</span> <span class="hljs-title">XElement</span>(<span class="hljs-params"><span class="hljs-string">&quot;customer&quot;</span>, <span class="hljs-keyword">new</span> XAttribute(<span class="hljs-string">&quot;id&quot;</span>, c.ID</span>),
@@ -1266,9 +450,7 @@ Console.WriteLine(e.Annotation&lt;<span class="hljs-built_in">string</span>&gt;(
         <span class="hljs-keyword">new</span> <span class="hljs-title">XElement</span>(<span class="hljs-params"><span class="hljs-string">&quot;buys&quot;</span>, c.Purchases.Count</span>)
     )
   )</span>;
-</code></pre>
-<p><strong>خروجی نمونه:</strong></p>
-<pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">customers</span>&gt;</span>
+</code></pre> <p><strong>خروجی نمونه:</strong></p><pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">customers</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">customer</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;1&quot;</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">name</span>&gt;</span>Tom<span class="hljs-tag">&lt;/<span class="hljs-name">name</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">buys</span>&gt;</span>3<span class="hljs-tag">&lt;/<span class="hljs-name">buys</span>&gt;</span>
@@ -1278,33 +460,14 @@ Console.WriteLine(e.Annotation&lt;<span class="hljs-built_in">string</span>&gt;(
     <span class="hljs-tag">&lt;<span class="hljs-name">buys</span>&gt;</span>2<span class="hljs-tag">&lt;/<span class="hljs-name">buys</span>&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-name">customer</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">customers</span>&gt;</span>
-</code></pre>
-<h4>توضیح دو مرحله‌ای</h4>
-<ol>
-<li>ابتدا projection به <code>XElement</code>:</li>
-</ol>
-<pre class="hljs"><code>IEnumerable&lt;XElement&gt; sqlQuery =
+</code></pre> <h4>توضیح دو مرحله‌ای</h4><ol> <li>ابتدا projection به <code>XElement</code>:</li></ol> <pre class="hljs"><code>IEnumerable&lt;XElement&gt; sqlQuery =
   <span class="hljs-keyword">from</span> c <span class="hljs-keyword">in</span> dbContext.Customers.AsEnumerable()
   <span class="hljs-function"><span class="hljs-keyword">select</span> <span class="hljs-keyword">new</span> <span class="hljs-title">XElement</span>(<span class="hljs-params"><span class="hljs-string">&quot;customer&quot;</span>, <span class="hljs-keyword">new</span> XAttribute(<span class="hljs-string">&quot;id&quot;</span>, c.ID</span>),
       <span class="hljs-keyword">new</span> <span class="hljs-title">XElement</span>(<span class="hljs-params"><span class="hljs-string">&quot;name&quot;</span>, c.Name</span>),
       <span class="hljs-keyword">new</span> <span class="hljs-title">XElement</span>(<span class="hljs-params"><span class="hljs-string">&quot;buys&quot;</span>, c.Purchases.Count</span>)
   )</span>;
-</code></pre>
-<ol start="2">
-<li>سپس ریشه را می‌سازیم:</li>
-</ol>
-<pre class="hljs"><code><span class="hljs-keyword">var</span> customers = <span class="hljs-keyword">new</span> XElement(<span class="hljs-string">&quot;customers&quot;</span>, sqlQuery);
-</code></pre>
-<ul>
-<li><code>sqlQuery</code> یک <code>IEnumerable&lt;XElement&gt;</code> است، بنابراین هر عنصر به طور خودکار به عنوان child اضافه می‌شود.</li>
-</ul>
-<hr>
-<p>این قابلیت باعث می‌شود که <strong>LINQ به X-DOM</strong> هم <strong>خواندن</strong> و هم <strong>ساختن XML</strong> به صورت کاملاً تابعی و انعطاف‌پذیر امکان‌پذیر باشد.</p>
-<h3>حذف عناصر خالی و استفاده از XStreamingElement در LINQ to XML</h3>
-<h4>1️⃣ حذف عناصر خالی</h4>
-<p>گاهی در <strong>پروژه کردن داده‌ها به X-DOM</strong>، می‌خواهیم <strong>عناصری که مقدار ندارند</strong> یا داده‌ای برای آن‌ها موجود نیست، تولید نشوند.</p>
-<p>مثال: اضافه کردن آخرین خرید با ارزش بالا برای هر مشتری</p>
-<pre class="hljs"><code><span class="hljs-keyword">var</span> customers =
+</code></pre> <ol start="2"><li>سپس ریشه را می‌سازیم:</li></ol> <pre class="hljs"><code><span class="hljs-keyword">var</span> customers = <span class="hljs-keyword">new</span> XElement(<span class="hljs-string">&quot;customers&quot;</span>, sqlQuery);
+</code></pre> <ul><li><code>sqlQuery</code> یک <code>IEnumerable&lt;XElement&gt;</code> است، بنابراین هر عنصر به طور خودکار به عنوان child اضافه می‌شود.</li></ul> <hr><p>این قابلیت باعث می‌شود که <strong>LINQ به X-DOM</strong> هم <strong>خواندن</strong> و هم <strong>ساختن XML</strong> به صورت کاملاً تابعی و انعطاف‌پذیر امکان‌پذیر باشد.</p><h3>حذف عناصر خالی و استفاده از XStreamingElement در LINQ to XML</h3><h4>1⃣ حذف عناصر خالی</h4><p>گاهی در <strong>پروژه کردن داده‌ها به X-DOM</strong>، می‌خواهیم <strong>عناصری که مقدار ندارند</strong> یا داده‌ای برای آن‌ها موجود نیست، تولید نشوند.</p><p>مثال: اضافه کردن آخرین خرید با ارزش بالا برای هر مشتری</p><pre class="hljs"><code><span class="hljs-keyword">var</span> customers =
   <span class="hljs-keyword">new</span> XElement(<span class="hljs-string">&quot;customers&quot;</span>,
     <span class="hljs-keyword">from</span> c <span class="hljs-keyword">in</span> dbContext.Customers.AsEnumerable()
     <span class="hljs-keyword">let</span> lastBigBuy = (<span class="hljs-keyword">from</span> p <span class="hljs-keyword">in</span> c.Purchases
@@ -1314,35 +477,14 @@ Console.WriteLine(e.Annotation&lt;<span class="hljs-built_in">string</span>&gt;(
     <span class="hljs-function"><span class="hljs-keyword">select</span> <span class="hljs-keyword">new</span> <span class="hljs-title">XElement</span>(<span class="hljs-params"><span class="hljs-string">&quot;customer&quot;</span>, <span class="hljs-keyword">new</span> XAttribute(<span class="hljs-string">&quot;id&quot;</span>, c.ID</span>),
         <span class="hljs-keyword">new</span> <span class="hljs-title">XElement</span>(<span class="hljs-params"><span class="hljs-string">&quot;name&quot;</span>, c.Name</span>),
         <span class="hljs-keyword">new</span> <span class="hljs-title">XElement</span>(<span class="hljs-params"><span class="hljs-string">&quot;buys&quot;</span>, c.Purchases.Count</span>),
-        lastBigBuy</span> == <span class="hljs-literal">null</span> ? <span class="hljs-literal">null</span> :                     <span class="hljs-comment">// ❌ شرط حذف عنصر خالی</span>
+        lastBigBuy</span> == <span class="hljs-literal">null</span> ? <span class="hljs-literal">null</span> :                     <span class="hljs-comment">//  شرط حذف عنصر خالی</span>
         <span class="hljs-keyword">new</span> XElement(<span class="hljs-string">&quot;lastBigBuy&quot;</span>,
             <span class="hljs-keyword">new</span> XElement(<span class="hljs-string">&quot;description&quot;</span>, lastBigBuy.Description),
             <span class="hljs-keyword">new</span> XElement(<span class="hljs-string">&quot;price&quot;</span>, lastBigBuy.Price)
         )
     )
   );
-</code></pre>
-<ul>
-<li>اگر مشتری <strong>خرید با ارزش بالا نداشته باشد</strong>، به جای تولید یک <code>XElement</code> خالی، <strong>null</strong> قرار داده می‌شود.</li>
-<li>X-DOM هنگام ساختن XML، محتوای <strong>null را نادیده می‌گیرد</strong> و عنصر تولید نمی‌شود. ✅</li>
-</ul>
-<hr>
-<h4>2️⃣ افزایش کارایی با XStreamingElement</h4>
-<ul>
-<li>
-<p>اگر هدف فقط <strong>ذخیره یا نمایش XML</strong> باشد، می‌توان از <strong>XStreamingElement</strong> استفاده کرد تا حافظه بهتر مدیریت شود.</p>
-</li>
-<li>
-<p><strong>XStreamingElement</strong> شبیه XElement است اما:</p>
-<ul>
-<li>محتوای child را <strong>تنبل (deferred)</strong> بارگذاری می‌کند.</li>
-<li>روش‌های traversal مثل <code>Elements()</code> یا <code>Attributes()</code> ندارد.</li>
-<li>فقط می‌توان <code>Save</code>, <code>ToString</code>, <code>WriteTo</code> یا <code>Add</code> را روی آن استفاده کرد.</li>
-</ul>
-</li>
-</ul>
-<p>مثال:</p>
-<pre class="hljs"><code><span class="hljs-keyword">var</span> customers =
+</code></pre> <ul><li>اگر مشتری <strong>خرید با ارزش بالا نداشته باشد</strong>، به جای تولید یک <code>XElement</code> خالی، <strong>null</strong> قرار داده می‌شود.</li><li>X-DOM هنگام ساختن XML، محتوای <strong>null را نادیده می‌گیرد</strong> و عنصر تولید نمی‌شود.</li></ul> <hr><h4>2⃣ افزایش کارایی با XStreamingElement</h4><ul> <li><p>اگر هدف فقط <strong>ذخیره یا نمایش XML</strong> باشد، می‌توان از <strong>XStreamingElement</strong> استفاده کرد تا حافظه بهتر مدیریت شود.</p></li> <li><p><strong>XStreamingElement</strong> شبیه XElement است اما:</p><ul> <li>محتوای child را <strong>تنبل (deferred)</strong> بارگذاری می‌کند.</li><li>روش‌های traversal مثل <code>Elements()</code> یا <code>Attributes()</code> ندارد.</li><li>فقط می‌توان <code>Save</code>, <code>ToString</code>, <code>WriteTo</code> یا <code>Add</code> را روی آن استفاده کرد.</li></ul> </li></ul> <p>مثال:</p><pre class="hljs"><code><span class="hljs-keyword">var</span> customers =
   <span class="hljs-keyword">new</span> XStreamingElement(<span class="hljs-string">&quot;customers&quot;</span>,
     <span class="hljs-keyword">from</span> c <span class="hljs-keyword">in</span> dbContext.<span class="hljs-function">Customers
     <span class="hljs-keyword">select</span> <span class="hljs-keyword">new</span> <span class="hljs-title">XStreamingElement</span>(<span class="hljs-params"><span class="hljs-string">&quot;customer&quot;</span>, <span class="hljs-keyword">new</span> XAttribute(<span class="hljs-string">&quot;id&quot;</span>, c.ID</span>),
@@ -1352,122 +494,216 @@ Console.WriteLine(e.Annotation&lt;<span class="hljs-built_in">string</span>&gt;(
   )</span>;
 
 customers.Save(<span class="hljs-string">&quot;data.xml&quot;</span>);
-</code></pre>
-<ul>
-<li>پرس‌وجوها <strong>تا زمان فراخوانی Save یا ToString</strong> ارزیابی نمی‌شوند؛ بنابراین کل X-DOM به حافظه بارگذاری نمی‌شود.</li>
-<li>توجه: XStreamingElement قابلیت پیمایش ندارد و فقط برای <strong>تولید خروجی XML</strong> مناسب است.</li>
-</ul>
-
-  </main>
-
-  <!-- فوتر مشترک -->
-  <footer class="footer">
-    <div class="container">
-      <p>
-        <img src="/Gitab/icone/copyright.svg" alt="کپی‌رایت" width="14" height="14"
-             style="vertical-align:middle;margin-inline:4px">
-        <span id="y"></span> Gitab — تمامی حقوق محفوظ است.
-      </p>
-    </div>
-  </footer>
-
-  <!-- سال و اسکریپت تغییر تم -->
-  <script>
+</code></pre> <ul><li>پرس‌وجوها <strong>تا زمان فراخوانی Save یا ToString</strong> ارزیابی نمی‌شوند؛ بنابراین کل X-DOM به حافظه بارگذاری نمی‌شود.</li><li>توجه: XStreamingElement قابلیت پیمایش ندارد و فقط برای <strong>تولید خروجی XML</strong> مناسب است.</li></ul> </article><nav class="chapter-single-next-nav"> <a href="/Gitab/books/book1/Book/11/Other-XML-and-JSON/" class="btn-next-chapter-action" id="nextChapterBtn" data-hub="/Gitab/books/book1/"> <span class="next-btn-text">فصل بعدی: دیگر فرمت‌های XML و JSON</span> <span class="next-btn-arrow">←</span> </a> </nav></div> <button class="fab-back-to-top" id="backToTopBtn" type="button" aria-label="رفتن به بالای صفحه" title="رفتن به بالا"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"> <polyline points="18 15 12 9 6 15"></polyline> </svg> </button></main> <footer class="footer-minimal"><div class="footer-container"> <div class="footer-top-row"><div class="footer-brand-side"> <a href="/Gitab/" class="footer-brand-anchor"> <img src="/Gitab/icone/logo.svg" alt="Gitab" width="28" height="28" loading="lazy" decoding="async"> <span class="footer-brand-title">گیتاب (Gitab)</span> </a> <p class="footer-tagline"> پلتفرم آزاد و مستقل برای ترجمهٔ دقیق و روان کتاب‌های مرجع مهندسی نرم‌افزار. </p></div> <div class="footer-nav-cols"><div class="footer-nav-col"> <span class="footer-nav-heading">موضوعات</span><ul class="footer-nav-list"> <li><a href="/Gitab/books/list-books/?cat=csharp">سی‌شارپ و دات‌نت</a></li><li><a href="/Gitab/books/list-books/?cat=clean-code">کد تمیز و بازآفرینی</a></li><li><a href="/Gitab/books/list-books/?cat=architecture">معماری و طراحی دامنه</a></li><li><a href="/Gitab/books/list-books/?cat=system">لینوکس و خط فرمان</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">بخش‌های سایت</span><ul class="footer-nav-list"> <li><a href="/Gitab/">صفحه اصلی</a></li><li><a href="/Gitab/books/list-books/">کتابخانه کامل</a></li><li><a href="/Gitab/courses/">دوره‌های آموزشی</a></li><li><a href="/Gitab/translator.html">تالار مترجمین</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">مشارکت و جامعه</span><ul class="footer-nav-list"> <li><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer">راهنمای همکاری در ترجمه</a></li><li><a href="https://github.com/hheydarian/Gitab/issues" target="_blank" rel="noopener noreferrer">پیشنهاد کتاب یا گزارش خطا</a></li></ul> </div></div> </div><div class="footer-bottom-line"> <span>© <span id="y">2026</span> Gitab — توسعه‌یافته برای جامعهٔ مهندسان نرم‌افزار ایرانی</span></div> </div></footer> <script>
   (() => {
     const root = document.documentElement;
     const btn = document.getElementById('themeToggle');
+    const sunIcon = btn ? btn.querySelector('.icon-sun') : null;
+    const moonIcon = btn ? btn.querySelector('.icon-moon') : null;
     const KEY = 'gitab-theme';
 
-    function updateTheme(s) {
-      root.setAttribute('data-theme', s);
-      const mode = s;  // فقط `dark` یا `light` خواهد بود
+    function updateTheme(mode) {
+      root.setAttribute('data-theme', mode);
       root.dataset.colorMode = mode;
-      btn.dataset.icon = mode === 'dark' ? 'moon' : 'sun';
+      if (sunIcon && moonIcon) {
+        if (mode === 'dark') {
+          sunIcon.style.display = 'inline-block';
+          moonIcon.style.display = 'none';
+        } else {
+          sunIcon.style.display = 'none';
+          moonIcon.style.display = 'inline-block';
+        }
+      }
     }
 
-    // وضعیت تم ذخیره شده از localStorage
-    let saved = localStorage.getItem(KEY) || 'light'; // پیش‌فرض روشن
+    let saved = 'dark';
+    try { saved = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
     updateTheme(saved);
 
-    // تنظیم مجدد تم هنگام تغییر وضعیت دکمه
-    btn.addEventListener('click', () => {
-      const current = localStorage.getItem(KEY) || 'light';
-      const next = current === 'dark' ? 'light' : 'dark';  // فقط دو حالت: تاریک و روشن
-      localStorage.setItem(KEY, next);
-      updateTheme(next);
-    });
+    if (btn) {
+      btn.addEventListener('click', () => {
+        let current = 'dark';
+        try { current = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+        const next = current === 'dark' ? 'light' : 'dark';
+        try { localStorage.setItem(KEY, next); } catch (e) {}
+        updateTheme(next);
+      });
+    }
 
-    // هنگام بارگذاری صفحه
     document.addEventListener('DOMContentLoaded', () => {
-      updateTheme(localStorage.getItem(KEY) || 'light');
+      let mode = 'dark';
+      try { mode = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+      updateTheme(mode);
+      const yearSpan = document.getElementById('y');
+      if (yearSpan) yearSpan.textContent = new Date().getFullYear();
     });
+
+    const mobBtn = document.getElementById('mobileMenuBtn');
+    const mobDrawer = document.getElementById('mobileDrawer');
+    if (mobBtn && mobDrawer) {
+      const setDrawerOpen = (open) => {
+        mobDrawer.classList.toggle('open', open);
+        mobBtn.classList.toggle('is-open', open);
+        mobBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        mobBtn.setAttribute('aria-label', open ? 'بستن منو' : 'باز کردن منو');
+        mobDrawer.setAttribute('aria-hidden', open ? 'false' : 'true');
+      };
+
+      mobBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        setDrawerOpen(!mobDrawer.classList.contains('open'));
+      });
+
+      mobDrawer.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => setDrawerOpen(false));
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && mobDrawer.classList.contains('open')) {
+          setDrawerOpen(false);
+        }
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!mobDrawer.contains(e.target) && !mobBtn.contains(e.target)) {
+          setDrawerOpen(false);
+        }
+      });
+    }
+
+    if ('serviceWorker' in navigator) {
+      const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+      if (isLocalhost) {
+        navigator.serviceWorker.getRegistrations().then(regs => {
+          for (const reg of regs) reg.unregister();
+        });
+        if ('caches' in window) {
+          caches.keys().then(names => {
+            for (const name of names) caches.delete(name);
+          });
+        }
+      } else {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/Gitab/sw.js').catch(() => {});
+        });
+      }
+    }
   })();
-</script>
-
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-  <script>hljs.highlightAll();</script>
-
-  <script>
+  </script> <script>
   document.querySelectorAll('pre code').forEach(block => {
+    const pre = block.parentNode;
+    if (!pre || pre.querySelector('.copy-btn')) return;
+
+    const copySvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
+    const okSvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+
     const btn = document.createElement('button');
     btn.className = 'copy-btn';
-
-    const icon = document.createElement('img');
-    icon.src = "/Gitab/icone/copy.svg";
-    icon.alt = 'Copy';
-    btn.appendChild(icon);
-
-    block.parentNode.insertBefore(btn, block);
+    btn.setAttribute('aria-label', 'کپی کد');
+    btn.setAttribute('title', 'کپی کد');
+    btn.setAttribute('type', 'button');
+    btn.innerHTML = copySvg;
+    pre.appendChild(btn);
 
     btn.addEventListener('click', async () => {
-      await navigator.clipboard.writeText(block.textContent);
-      btn.classList.add('copied');
-      setTimeout(() => btn.classList.remove('copied'), 1500);
-    });
-  });
-  </script>
-
-  <script>
-  document.body.dataset.page = window.location.pathname;
-
-  const menuBtn = document.querySelector(".menu-toggle");
-  const nav = document.querySelector(".nav");
-
-  if (menuBtn && nav) {
-    menuBtn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      nav.classList.toggle("show");
-    });
-
-    document.addEventListener("click", (e) => {
-      const clickedInsideNav = nav.contains(e.target);
-      const clickedMenuButton = menuBtn.contains(e.target);
-      if (!clickedInsideNav && !clickedMenuButton) {
-        nav.classList.remove("show");
+      try {
+        await navigator.clipboard.writeText(block.textContent);
+        btn.classList.add('copied');
+        btn.innerHTML = okSvg;
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          btn.innerHTML = copySvg;
+        }, 1800);
+      } catch (err) {
+        console.error('Copy failed:', err);
       }
     });
-  }
-  </script>
-
-  <script>
-    document.getElementById('y').textContent = new Date().getFullYear();
-  </script>
-  <script>
-document.getElementById("openDonate").addEventListener("click", () => {
-  document.getElementById("donateModal").style.display = "block";
-});
-document.getElementById("closeDonate").addEventListener("click", () => {
-  document.getElementById("donateModal").style.display = "none";
-});
-document.querySelectorAll(".copy-btn").forEach(btn => {
-  btn.addEventListener("click", () => {
-    navigator.clipboard.writeText(btn.dataset.copy);
-  
-    setTimeout(() => (btn.textContent = "کپی"), 2000);
   });
-});
-</script>
+  </script> <script>
+  (() => {
+    const article = document.getElementById('chapterArticle');
+    if (!article) return;
 
-</body>
-</html>
+    const progressBar = document.getElementById('readingProgressBar');
+    if (progressBar) {
+      window.addEventListener('scroll', () => {
+        const docElem = document.documentElement;
+        const totalHeight = docElem.scrollHeight - docElem.clientHeight;
+        if (totalHeight > 0) {
+          const progress = (window.pageYOffset / totalHeight) * 100;
+          progressBar.style.width = Math.min(100, Math.max(0, progress)) + '%';
+        }
+      }, { passive: true });
+    }
+
+    const btt = document.getElementById('backToTopBtn');
+    if (btt) {
+      window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 250) {
+          btt.classList.add('visible');
+        } else {
+          btt.classList.remove('visible');
+        }
+      }, { passive: true });
+
+      btt.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+
+    article.querySelectorAll('img').forEach(img => {
+      if (!img.hasAttribute('loading')) img.loading = 'lazy';
+      if (!img.hasAttribute('decoding')) img.decoding = 'async';
+      const parent = img.parentElement;
+      if (parent && parent.tagName === 'P') {
+        parent.style.textAlign = 'center';
+      }
+
+      img.addEventListener('error', function() {
+        const src = this.getAttribute('src');
+        if (src && src.includes('assets/image/')) {
+          const parts = src.split('assets/image/');
+          const corrected = '/Gitab/books/book1/assets/image/' + parts[1];
+          if (this.src !== corrected) {
+            this.src = corrected;
+          }
+        }
+      });
+    });
+
+    article.querySelectorAll('p').forEach(p => {
+      const trimmed = p.innerText.trim();
+      if (trimmed.startsWith('💡') || trimmed.startsWith('نکته:')) {
+        p.classList.add('react-callout', 'callout-tip');
+      } else if (trimmed.startsWith('⚠️') || trimmed.startsWith('هشدار:')) {
+        p.classList.add('react-callout', 'callout-warning');
+      } else if (trimmed.startsWith('📌') || trimmed.startsWith('مهم:')) {
+        p.classList.add('react-callout', 'callout-important');
+      } else if (trimmed.startsWith('🔹') || trimmed.startsWith('🔸')) {
+        p.classList.add('react-callout', 'callout-note');
+      }
+    });
+  })();
+  </script> <script type="speculationrules">{"prefetch":[{"where":{"and":[{"href_matches":"/Gitab/*"},{"not":{"href_matches":"/Gitab/downloads/*"}},{"not":{"selector_matches":"[download], [target='_blank']"}}]},"eagerness":"moderate"}]}</script> <script>
+  (() => {
+    if (window.HTMLScriptElement && HTMLScriptElement.supports && HTMLScriptElement.supports('speculationrules')) return;
+    const seen = new Set([window.location.href]);
+    let count = 0;
+    const prefetchLink = (e) => {
+      if (count >= 12) return;
+      const a = e.target && e.target.closest ? e.target.closest('header a, .chapter-single-next-nav a, .syllabus-chapter-item a, .btn-hero-read, .btn-card-read') : null;
+      if (!a || !a.href || a.hasAttribute('download') || a.target === '_blank') return;
+      if (a.origin !== window.location.origin || a.pathname.includes('/downloads/')) return;
+      const clean = a.href.split('#')[0];
+      if (!clean || seen.has(clean)) return;
+      seen.add(clean);
+      count++;
+      const l = document.createElement('link');
+      l.rel = 'prefetch';
+      l.href = clean;
+      document.head.appendChild(l);
+    };
+    document.addEventListener('pointerenter', prefetchLink, { capture: true, passive: true });
+    document.addEventListener('touchstart', prefetchLink, { capture: true, passive: true });
+  })();
+  </script></body></html>

@@ -1,94 +1,18 @@
-
-
-<!doctype html>
-<html lang="fa" dir="rtl">
-<head>
-  <meta charset="utf-8">
-  <link rel="icon" type="image/png" href="/Gitab/favicon.png">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>کنترل جریان</title>
-  <meta name="description" content="ترجمه‌های فارسی کتاب‌های فنی — سریع، مینیمال و قابل اتکا.">
-
-  <!-- استایل‌ها -->
-  <link rel="stylesheet" href="/Gitab/styles/main.css">
-  <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
-
-  <style>
-  @font-face {
-    font-family: 'Vazir';
-    src: url('/Gitab/fonts/Vazir-FD-WOL.ttf') format('truetype');
-    font-display: swap;
-  }
-  @font-face {
-    font-family: "Lalezar";
-    src: url('fonts/Lalezar.ttf') format('truetype');
-    font-display: swap;
-}
-  body {
-    font-family: 'Vazir', sans-serif;
-  }
-  </style>
-</head>
-
-<body>
-  <!-- هدر مشترک -->
-  <header class="header">
-    <div class="container nav-wrap">
-      <a href="/Gitab/" class="brand">
-        <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="26" height="26">
-        <span>Gitab</span>
-      </a>
-
-       <nav class="nav">
-         <a href="/Gitab/" >خانه</a>
-         <a href="/Gitab/books/list-books" >کتاب‌ها</a>
-         <a href="/Gitab/giter.html" >دوره ها</a>
-          <!-- 
-         <a href="/Gitab/translator.html" >مترجمین</a>
-           -->
-       </nav>
-
-      <div class="nav-actions">
-        <button id="themeToggle" class="icon-btn theme-btn" data-icon="moon" aria-label="تغییر تم">
-          <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن">
-          <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک">
-        </button>
-
-        <a class="icon-btn" href="https://github.com/hheydarian/Gitab" target="_blank" title="GitHub">
-          <img src="/Gitab/icone/github.svg" alt="GitHub">
-        </a>
-
-        <!-- دکمه منو برای موبایل -->
-        <button class="menu-toggle" aria-label="منو">
-          <img src="/Gitab/icone/menu.svg" alt="menu">
-        </button>
-      </div>
-    </div>
-  </header>
-
-  
-  <main class="site-main book-page">
-    <h1>ترجمه فصل ۲۹ – کنترل جریان: حلقه‌زدن با while / until</h1>
-<p>در فصل قبل، یک برنامه منویی ساختیم که انواع مختلفی از اطلاعات سیستم را تولید می‌کرد. برنامه کار می‌کرد، اما یک مشکل جدی در استفاده‌پذیری داشت. فقط یک بار یک گزینه را اجرا می‌کرد و بعد تمام می‌شد. بدتر اینکه اگر یک انتخاب نامعتبر انجام می‌شد، برنامه با خطا تمام می‌شد، بدون اینکه به کاربر فرصت دوباره‌ امتحان بدهد. بهتر بود می‌توانستیم برنامه را طوری بسازیم که منو را پشت‌سر‌هم تکرار کند تا زمانی که کاربر گزینه خروج را انتخاب کند.</p>
-<p>در این فصل، به مفهوم برنامه‌نویسی‌ای به نام <strong>حلقه‌زدن (looping)</strong> نگاه می‌کنیم که برای تکرار بخش‌هایی از برنامه استفاده می‌شود. شل سه دستور ترکیبی برای حلقه‌زدن ارائه می‌دهد. در این فصل دو تای آن‌ها را بررسی می‌کنیم و سومی را در فصل بعد.</p>
-<hr>
-<h3><strong>حلقه‌زدن</strong></h3>
-<p>زندگی روزمره پر از فعالیت‌های تکراری است. هر روز رفتن سر کار، راه بردن سگ، یا خرد کردن هویج همگی شامل تکرار مجموعه‌ای از مراحل هستند. مثلا بیایید خرد کردن هویج را بررسی کنیم. اگر این کار را به صورت شبه‌کد بنویسیم، چیزی شبیه این می‌شود:</p>
-<ol>
-<li>تخته آشپزی را بردار</li>
-<li>چاقو را بردار</li>
-<li>هویج را روی تخته بگذار</li>
-<li>چاقو را بالا ببر</li>
-<li>هویج را جلو بده</li>
-<li>هویج را ببر</li>
-<li>اگر تمام هویج برش داده شده، تمام کن؛ وگرنه برو به مرحله ۴</li>
-</ol>
-<p>مراحل ۴ تا ۷ یک حلقه تشکیل می‌دهند. این کارها تا زمانی تکرار می‌شوند که شرط «تمام هویج برش خورده» برقرار شود.</p>
-<hr>
-<h3><strong>while</strong></h3>
-<p>bash می‌تواند همین ایده را پیاده کند. فرض کنید می‌خواهیم پنج عدد را پشت سر هم از یک تا پنج نمایش بدهیم. یک اسکریپت bash می‌تواند این‌طور باشد:</p>
-<pre class="hljs"><code><span class="hljs-meta">#!/bin/bash</span>
+<!doctype html><html lang="fa" dir="rtl"> <head><script>
+    if (window.location.pathname.startsWith('/gitab/')) {
+      window.location.replace(window.location.pathname.replace(/^\/gitab\//i, '/Gitab/') + window.location.search + window.location.hash);
+    }
+    (() => {
+      try {
+        const t = localStorage.getItem('gitab-theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', t);
+        document.documentElement.dataset.colorMode = t;
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        document.documentElement.dataset.colorMode = 'dark';
+      }
+    })();
+  </script> <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5"> <title>کنترل جریان</title><meta name="description" content="کنترل جریان — مطالعه آنلاین و رایگان از کتاب «خط فرمان لینوکس (TLCL)» (The Linux Command Line) اثر William Shotts با ترجمه هیمن صادقی در گیتاب."> <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"><meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"> <meta name="theme-color" content="#090d16"><meta name="referrer" content="strict-origin-when-cross-origin"> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https:; frame-src https://www.youtube.com https://www.youtube-nocookie.com https://maps.google.com https://www.google.com; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self';"><link rel="icon" type="image/png" href="/Gitab/favicon.png"> <link rel="canonical" href="https://hheydarian.github.io/Gitab/books/book5/Book/29/chapter29/"><link rel="alternate" hreflang="fa" href="https://hheydarian.github.io/Gitab/books/book5/Book/29/chapter29/"> <link rel="alternate" hreflang="x-default" href="https://hheydarian.github.io/Gitab/books/book5/Book/29/chapter29/"><link rel="alternate" type="text/plain" title="LLMs.txt" href="/Gitab/llms.txt"> <link rel="sitemap" type="application/xml" title="Sitemap" href="/Gitab/sitemap.xml"><meta property="og:locale" content="fa_IR"> <meta property="og:type" content="article"><meta property="og:site_name" content="گیتاب | Gitab"> <meta property="og:title" content="کنترل جریان"><meta property="og:description" content="کنترل جریان — مطالعه آنلاین و رایگان از کتاب «خط فرمان لینوکس (TLCL)» (The Linux Command Line) اثر William Shotts با ترجمه هیمن صادقی در گیتاب."> <meta property="og:url" content="https://hheydarian.github.io/Gitab/books/book5/Book/29/chapter29/"><meta property="og:image" content="https://hheydarian.github.io/Gitab/images/the-linux-command-line/Cover.jpg"> <meta property="og:image:alt" content="کنترل جریان"><meta name="twitter:card" content="summary_large_image"> <meta name="twitter:title" content="کنترل جریان"><meta name="twitter:description" content="کنترل جریان — مطالعه آنلاین و رایگان از کتاب «خط فرمان لینوکس (TLCL)» (The Linux Command Line) اثر William Shotts با ترجمه هیمن صادقی در گیتاب."> <meta name="twitter:image" content="https://hheydarian.github.io/Gitab/images/the-linux-command-line/Cover.jpg"><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://hheydarian.github.io/Gitab/#organization","name":"گیتاب | Gitab","alternateName":"Gitab","url":"https://hheydarian.github.io/Gitab/","logo":{"@type":"ImageObject","url":"https://hheydarian.github.io/Gitab/favicon.png"},"sameAs":["https://github.com/hheydarian/Gitab"]},{"@type":"WebSite","@id":"https://hheydarian.github.io/Gitab/#website","url":"https://hheydarian.github.io/Gitab/","name":"گیتاب | Gitab","inLanguage":"fa-IR","publisher":{"@id":"https://hheydarian.github.io/Gitab/#organization"},"potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://hheydarian.github.io/Gitab/books/list-books/?q={search_term_string}"},"query-input":"required name=search_term_string"}},{"@type":"WebPage","@id":"https://hheydarian.github.io/Gitab/books/book5/Book/29/chapter29/#webpage","url":"https://hheydarian.github.io/Gitab/books/book5/Book/29/chapter29/","name":"کنترل جریان","description":"کنترل جریان — مطالعه آنلاین و رایگان از کتاب «خط فرمان لینوکس (TLCL)» (The Linux Command Line) اثر William Shotts با ترجمه هیمن صادقی در گیتاب.","inLanguage":"fa-IR","isPartOf":{"@id":"https://hheydarian.github.io/Gitab/#website"}},{"@type":"TechArticle","headline":"کنترل جریان","description":"کنترل جریان — مطالعه آنلاین و رایگان از کتاب «خط فرمان لینوکس (TLCL)» (The Linux Command Line) اثر William Shotts با ترجمه هیمن صادقی در گیتاب.","url":"https://hheydarian.github.io/Gitab/books/book5/Book/29/chapter29/","inLanguage":"fa-IR","isAccessibleForFree":true,"author":{"@type":"Person","name":"William Shotts"},"translator":{"@type":"Person","name":"هیمن صادقی"},"isPartOf":{"@type":"Book","name":"خط فرمان لینوکس (TLCL)","alternateName":"The Linux Command Line","url":"https://hheydarian.github.io/Gitab/books/book5/"}}]}</script> <link rel="preload" href="/Gitab/fonts/Vazirmatn.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/Gitab/styles/main.css?v=2.4" as="style"> <link rel="preload" href="/Gitab/styles/gitab-modern.css?v=2.5" as="style"><style>@font-face{font-family:'Lalezar';src:url('/Gitab/fonts/Lalezar.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}@font-face{font-family:'Vazirmatn';src:url('/Gitab/fonts/Vazirmatn.woff2') format('woff2');font-weight:100 900;font-style:normal;font-display:swap}html,body,button,input,optgroup,select,textarea,.filter-pill{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}input::placeholder,textarea::placeholder{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}</style> <link rel="stylesheet" href="/Gitab/styles/main.css?v=2.4"><link rel="stylesheet" href="/Gitab/styles/gitab-modern.css?v=2.5"> <link rel="stylesheet" href="/Gitab/styles/vendor/github-dark.min.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="/Gitab/styles/vendor/github-dark.min.css"></noscript></head> <body><header class="header"> <div class="container nav-wrap"><a href="/Gitab/" class="brand" aria-label="صفحه اصلی گیتاب"> <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="30" height="30" decoding="async"> <span class="brand-text">Gitab</span> </a> <nav class="nav" id="mainNav"><a href="/Gitab/" >خانه</a> <a href="/Gitab/books/list-books" aria-current="page">کتاب‌ها</a> <a href="/Gitab/courses/" >دوره‌ها</a> <a href="/Gitab/translator.html" >مترجمین</a></nav> <div class="nav-actions"><button id="themeToggle" class="theme-toggle-btn" aria-label="تغییر تم" title="تغییر تم"> <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن" width="18" height="18" decoding="async" style="display:none"> <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک" width="18" height="18" decoding="async"> </button> <a class="btn-github-pill" href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" title="مشاهده سورس گیتاب در گیت‌هاب"> <img src="/Gitab/icone/github.svg" alt="GitHub" width="16" height="16" decoding="async"> <span>گیت‌هاب</span> </a> <button class="mobile-menu-btn" id="mobileMenuBtn" type="button" aria-label="باز کردن منو" aria-expanded="false"> <svg class="mob-icon-open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="4" y1="7" x2="20" y2="7"></line> <line x1="4" y1="12" x2="20" y2="12"></line> <line x1="4" y1="17" x2="14" y2="17"></line> </svg> <svg class="mob-icon-close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="18" y1="6" x2="6" y2="18"></line> <line x1="6" y1="6" x2="18" y2="18"></line> </svg> </button></div> </div><div class="mobile-drawer" id="mobileDrawer" aria-hidden="true"> <div class="mobile-drawer-inner"><div class="mobile-drawer-section-label">ناوبری سریع</div><nav class="mobile-drawer-links" aria-label="منوی موبایل"> <a href="/Gitab/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M3 10.5 12 3l9 7.5"></path> <path d="M5 9.5V20a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V9.5"></path> </svg> </span> <span class="mob-nav-text">صفحه نخست</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/books/list-books" class="mobile-drawer-link active" aria-current="page"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path> </svg> </span> <span class="mob-nav-text">کتابخانه و فهرست کتاب‌ها</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/courses/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path> <path d="M6 12v5c3 3 9 3 12 0v-5"></path> </svg> </span> <span class="mob-nav-text">دوره‌های آموزشی</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/translator.html" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path> <circle cx="9" cy="7" r="4"></circle> <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path> <path d="M16 3.13a4 4 0 0 1 0 7.75"></path> </svg> </span> <span class="mob-nav-text">مترجمین و همکاران</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> </nav><div class="mobile-drawer-divider"></div><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" class="mobile-drawer-link mobile-drawer-gh"> <span class="mob-nav-icon" aria-hidden="true"> <img src="/Gitab/icone/github.svg" alt="" width="17" height="17" loading="lazy" decoding="async"> </span> <span class="mob-nav-text">مخزن گیت‌هاب پروژه</span> <span class="mob-nav-ext" aria-hidden="true">↗</span> </a> </div></div> </header><div class="reading-progress-track"> <div class="reading-progress-fill" id="readingProgressBar"></div></div> <main class="site-main chapter-reading-page"><div class="chapter-page-wrapper"> <nav class="chapter-clean-breadcrumb" aria-label="مسیر راهنما" dir="rtl"><a href="/Gitab/">خانه</a> <span class="bc-sep" aria-hidden="true">/</span> <a href="/Gitab/books/list-books/">کتاب‌ها</a> <span class="bc-sep" aria-hidden="true">/</span> <a href="/Gitab/books/book5/"><bdi>خط فرمان لینوکس</bdi></a> <span class="bc-sep" aria-hidden="true">/</span> <span class="bc-current-leaf"><bdi>کنترل جریان</bdi></span></nav> <article class="chapter-prose-container markdown-body" id="chapterArticle" dir="rtl"><h1>ترجمه فصل ۲۹ – کنترل جریان: حلقه‌زدن با while / until</h1><p>در فصل قبل، یک برنامه منویی ساختیم که انواع مختلفی از اطلاعات سیستم را تولید می‌کرد. برنامه کار می‌کرد، اما یک مشکل جدی در استفاده‌پذیری داشت. فقط یک بار یک گزینه را اجرا می‌کرد و بعد تمام می‌شد. بدتر اینکه اگر یک انتخاب نامعتبر انجام می‌شد، برنامه با خطا تمام می‌شد، بدون اینکه به کاربر فرصت دوباره‌ امتحان بدهد. بهتر بود می‌توانستیم برنامه را طوری بسازیم که منو را پشت‌سر‌هم تکرار کند تا زمانی که کاربر گزینه خروج را انتخاب کند.</p><p>در این فصل، به مفهوم برنامه‌نویسی‌ای به نام <strong>حلقه‌زدن (looping)</strong> نگاه می‌کنیم که برای تکرار بخش‌هایی از برنامه استفاده می‌شود. شل سه دستور ترکیبی برای حلقه‌زدن ارائه می‌دهد. در این فصل دو تای آن‌ها را بررسی می‌کنیم و سومی را در فصل بعد.</p><hr> <h3><strong>حلقه‌زدن</strong></h3><p>زندگی روزمره پر از فعالیت‌های تکراری است. هر روز رفتن سر کار، راه بردن سگ، یا خرد کردن هویج همگی شامل تکرار مجموعه‌ای از مراحل هستند. مثلا بیایید خرد کردن هویج را بررسی کنیم. اگر این کار را به صورت شبه‌کد بنویسیم، چیزی شبیه این می‌شود:</p><ol> <li>تخته آشپزی را بردار</li><li>چاقو را بردار</li><li>هویج را روی تخته بگذار</li><li>چاقو را بالا ببر</li><li>هویج را جلو بده</li><li>هویج را ببر</li><li>اگر تمام هویج برش داده شده، تمام کن؛ وگرنه برو به مرحله ۴</li></ol> <p>مراحل ۴ تا ۷ یک حلقه تشکیل می‌دهند. این کارها تا زمانی تکرار می‌شوند که شرط «تمام هویج برش خورده» برقرار شود.</p><hr> <h3><strong>while</strong></h3><p>bash می‌تواند همین ایده را پیاده کند. فرض کنید می‌خواهیم پنج عدد را پشت سر هم از یک تا پنج نمایش بدهیم. یک اسکریپت bash می‌تواند این‌طور باشد:</p><pre class="hljs"><code><span class="hljs-meta">#!/bin/bash</span>
 <span class="hljs-comment"># while-count: display a series of numbers</span>
 count=1
 <span class="hljs-keyword">while</span> [[ <span class="hljs-variable">$count</span> -le 5 ]]; <span class="hljs-keyword">do</span>
@@ -96,23 +20,14 @@ count=1
     count=$((count + <span class="hljs-number">1</span>))
 <span class="hljs-keyword">done</span>
 <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Finished.&quot;</span>
-</code></pre>
-<p>وقتی اجرا شود، این خروجی را می‌دهد:</p>
-<pre class="hljs"><code>1
+</code></pre> <p>وقتی اجرا شود، این خروجی را می‌دهد:</p><pre class="hljs"><code>1
 2
 3
 4
 5
 Finished.
-</code></pre>
-<p>ساختار دستور while این است:</p>
-<pre class="hljs"><code>while commands; do commands; done
-</code></pre>
-<p>مثل دستور if، while وضعیت خروج مجموعه‌ای از دستورات را بررسی می‌کند. تا زمانی که وضعیت خروج <strong>صفر</strong> باشد، دستورات داخل حلقه را اجرا می‌کند.</p>
-<p>در اسکریپت بالا، متغیر <code>count</code> ایجاد شده و مقدار اولیه ۱ می‌گیرد. دستور while وضعیت خروج دستور <code>test</code> را بررسی می‌کند. تا وقتی این دستور وضعیت صفر برگرداند، دستورات داخل حلقه اجرا می‌شود. در پایان هر چرخه، دستور test دوباره اجرا می‌شود. بعد از شش بار اجرای حلقه، مقدار count به ۶ می‌رسد، test دیگر صفر نمی‌دهد و حلقه متوقف می‌شود. برنامه ادامه می‌دهد و به دستور بعد از حلقه می‌رسد.</p>
-<hr>
-<h3><strong>بهبود برنامه read-menu با یک حلقه while</strong></h3>
-<pre class="hljs"><code><span class="hljs-meta">#!/bin/bash</span>
+</code></pre> <p>ساختار دستور while این است:</p><pre class="hljs"><code>while commands; do commands; done
+</code></pre> <p>مثل دستور if، while وضعیت خروج مجموعه‌ای از دستورات را بررسی می‌کند. تا زمانی که وضعیت خروج <strong>صفر</strong> باشد، دستورات داخل حلقه را اجرا می‌کند.</p><p>در اسکریپت بالا، متغیر <code>count</code> ایجاد شده و مقدار اولیه ۱ می‌گیرد. دستور while وضعیت خروج دستور <code>test</code> را بررسی می‌کند. تا وقتی این دستور وضعیت صفر برگرداند، دستورات داخل حلقه اجرا می‌شود. در پایان هر چرخه، دستور test دوباره اجرا می‌شود. بعد از شش بار اجرای حلقه، مقدار count به ۶ می‌رسد، test دیگر صفر نمی‌دهد و حلقه متوقف می‌شود. برنامه ادامه می‌دهد و به دستور بعد از حلقه می‌رسد.</p><hr> <h3><strong>بهبود برنامه read-menu با یک حلقه while</strong></h3><pre class="hljs"><code><span class="hljs-meta">#!/bin/bash</span>
 <span class="hljs-comment"># while-menu: a menu driven system information program</span>
 
 DELAY=3   <span class="hljs-comment"># تعداد ثانیه نمایش نتایج</span>
@@ -158,15 +73,7 @@ _EOF_</span>
 <span class="hljs-keyword">done</span>
 
 <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Program terminated.&quot;</span>
-</code></pre>
-<p>با قرار دادن منو داخل یک حلقهٔ while، برنامه می‌تواند بعد از هر انتخاب، دوباره منو را نمایش دهد. حلقه تا زمانی ادامه پیدا می‌کند که مقدار REPLY برابر “0” نباشد؛ بنابراین منو دوباره نشان داده می‌شود و کاربر فرصت دارد انتخاب دیگری انجام دهد. در پایان هر عمل، دستور sleep اجرا می‌شود تا برنامه چند ثانیه مکث کند و نتایج قابل دیدن باشد، قبل از اینکه صفحه پاک شود و منو دوباره نمایش داده شود. وقتی مقدار REPLY برابر “0” شد، که یعنی گزینهٔ “خروج” انتخاب شده است، حلقه پایان می‌یابد و اجرای برنامه با خطی که بعد از done قرار دارد ادامه پیدا می‌کند.</p>
-<hr>
-<h3><strong>خروج از یک حلقه</strong></h3>
-<p>bash دو دستور داخلی فراهم می‌کند که می‌توانند جریان اجرای برنامه را داخل حلقه کنترل کنند.<br>
-دستور <strong>break</strong> بلافاصله یک حلقه را متوقف می‌کند و کنترل برنامه به اولین دستور بعد از حلقه منتقل می‌شود.<br>
-دستور <strong>continue</strong> باعث می‌شود بخش باقی‌ماندهٔ حلقه نادیده گرفته شود و اجرای برنامه با تکرار بعدی حلقه ادامه پیدا کند.</p>
-<p>در اینجا نسخه‌ای از برنامه while-menu را می‌بینیم که هر دو دستور break و continue در آن به‌کار رفته‌اند:</p>
-<pre class="hljs"><code><span class="hljs-meta">#!/bin/bash</span>
+</code></pre> <p>با قرار دادن منو داخل یک حلقهٔ while، برنامه می‌تواند بعد از هر انتخاب، دوباره منو را نمایش دهد. حلقه تا زمانی ادامه پیدا می‌کند که مقدار REPLY برابر “0” نباشد؛ بنابراین منو دوباره نشان داده می‌شود و کاربر فرصت دارد انتخاب دیگری انجام دهد. در پایان هر عمل، دستور sleep اجرا می‌شود تا برنامه چند ثانیه مکث کند و نتایج قابل دیدن باشد، قبل از اینکه صفحه پاک شود و منو دوباره نمایش داده شود. وقتی مقدار REPLY برابر “0” شد، که یعنی گزینهٔ “خروج” انتخاب شده است، حلقه پایان می‌یابد و اجرای برنامه با خطی که بعد از done قرار دارد ادامه پیدا می‌کند.</p><hr> <h3><strong>خروج از یک حلقه</strong></h3><p>bash دو دستور داخلی فراهم می‌کند که می‌توانند جریان اجرای برنامه را داخل حلقه کنترل کنند.<br> دستور <strong>break</strong> بلافاصله یک حلقه را متوقف می‌کند و کنترل برنامه به اولین دستور بعد از حلقه منتقل می‌شود.<br> دستور <strong>continue</strong> باعث می‌شود بخش باقی‌ماندهٔ حلقه نادیده گرفته شود و اجرای برنامه با تکرار بعدی حلقه ادامه پیدا کند.</p><p>در اینجا نسخه‌ای از برنامه while-menu را می‌بینیم که هر دو دستور break و continue در آن به‌کار رفته‌اند:</p><pre class="hljs"><code><span class="hljs-meta">#!/bin/bash</span>
 <span class="hljs-comment"># while-menu2: a menu driven system information program</span>
 
 DELAY=3   <span class="hljs-comment"># Number of seconds to display results</span>
@@ -219,15 +126,7 @@ _EOF_</span>
 <span class="hljs-keyword">done</span>
 
 <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Program terminated.&quot;</span>
-</code></pre>
-<p>در این نسخه از اسکریپت، یک حلقهٔ بی‌پایان ایجاد کرده‌ایم (حلقه‌ای که خودش هرگز تمام نمی‌شود) با استفاده از دستور <strong>true</strong> که برای while یک وضعیت خروج ارائه می‌دهد. چون true همیشه وضعیت خروج صفر برمی‌گرداند، حلقه هیچ‌وقت به‌صورت خودکار تمام نخواهد شد. این یک تکنیک بسیار رایج در اسکریپت‌نویسی است.</p>
-<p>از آنجا که حلقه خودش هیچ‌وقت تمام نمی‌شود، برنامه‌نویس باید راهی فراهم کند تا در زمان مناسب از حلقه خارج شود. در این اسکریپت، دستور <strong>break</strong> برای خروج از حلقه استفاده می‌شود وقتی گزینهٔ “0” انتخاب شود.</p>
-<p>دستور <strong>continue</strong> در پایان سایر گزینه‌ها برای اجرای کارآمدتر قرار داده شده است. با استفاده از continue، اسکریپت از اجرای کدهایی که لازم نیستند عبور می‌کند. مثلاً اگر گزینهٔ “1” انتخاب و شناخته شد، دیگر دلیلی برای بررسی گزینه‌های دیگر وجود ندارد.</p>
-<hr>
-<h3><strong>until</strong></h3>
-<p>دستور <strong>until</strong> خیلی شبیه while است، با این تفاوت که به‌جای پایان دادن به حلقه هنگام دریافت یک وضعیت خروج غیرصفر، برعکس عمل می‌کند. یک حلقهٔ until تا زمانی ادامه پیدا می‌کند که وضعیت خروج <strong>صفر</strong> دریافت کند.</p>
-<p>در اسکریپت while-count، حلقه را تا زمانی ادامه دادیم که مقدار متغیر count کمتر یا مساوی ۵ بود. می‌توانیم همان نتیجه را با استفاده از until بگیریم:</p>
-<pre class="hljs"><code><span class="hljs-meta">#!/bin/bash</span>
+</code></pre> <p>در این نسخه از اسکریپت، یک حلقهٔ بی‌پایان ایجاد کرده‌ایم (حلقه‌ای که خودش هرگز تمام نمی‌شود) با استفاده از دستور <strong>true</strong> که برای while یک وضعیت خروج ارائه می‌دهد. چون true همیشه وضعیت خروج صفر برمی‌گرداند، حلقه هیچ‌وقت به‌صورت خودکار تمام نخواهد شد. این یک تکنیک بسیار رایج در اسکریپت‌نویسی است.</p><p>از آنجا که حلقه خودش هیچ‌وقت تمام نمی‌شود، برنامه‌نویس باید راهی فراهم کند تا در زمان مناسب از حلقه خارج شود. در این اسکریپت، دستور <strong>break</strong> برای خروج از حلقه استفاده می‌شود وقتی گزینهٔ “0” انتخاب شود.</p><p>دستور <strong>continue</strong> در پایان سایر گزینه‌ها برای اجرای کارآمدتر قرار داده شده است. با استفاده از continue، اسکریپت از اجرای کدهایی که لازم نیستند عبور می‌کند. مثلاً اگر گزینهٔ “1” انتخاب و شناخته شد، دیگر دلیلی برای بررسی گزینه‌های دیگر وجود ندارد.</p><hr> <h3><strong>until</strong></h3><p>دستور <strong>until</strong> خیلی شبیه while است، با این تفاوت که به‌جای پایان دادن به حلقه هنگام دریافت یک وضعیت خروج غیرصفر، برعکس عمل می‌کند. یک حلقهٔ until تا زمانی ادامه پیدا می‌کند که وضعیت خروج <strong>صفر</strong> دریافت کند.</p><p>در اسکریپت while-count، حلقه را تا زمانی ادامه دادیم که مقدار متغیر count کمتر یا مساوی ۵ بود. می‌توانیم همان نتیجه را با استفاده از until بگیریم:</p><pre class="hljs"><code><span class="hljs-meta">#!/bin/bash</span>
 <span class="hljs-comment"># until-count: display a series of numbers</span>
 
 count=1
@@ -237,12 +136,7 @@ count=1
 <span class="hljs-keyword">done</span>
 
 <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Finished.&quot;</span>
-</code></pre>
-<p>با تغییر عبارت شرطی به <code>$count -gt 5</code>، دستور until حلقه را در زمان درست متوقف می‌کند. انتخاب بین while و until معمولاً به این بستگی دارد که کدام‌یک امکان نوشتن شرطی شفاف‌تر را فراهم می‌کند.</p>
-<hr>
-<h3><strong>خواندن فایل‌ها با حلقه‌ها</strong></h3>
-<p>دستورات while و until می‌توانند ورودی استاندارد را پردازش کنند. این ویژگی باعث می‌شود بتوان فایل‌ها را نیز با این حلقه‌ها پردازش کرد. در مثال زیر، محتوای فایل distros.txt که در فصل‌های قبلی استفاده شد چاپ می‌کنیم:</p>
-<pre class="hljs"><code><span class="hljs-meta">#!/bin/bash</span>
+</code></pre> <p>با تغییر عبارت شرطی به <code>$count -gt 5</code>، دستور until حلقه را در زمان درست متوقف می‌کند. انتخاب بین while و until معمولاً به این بستگی دارد که کدام‌یک امکان نوشتن شرطی شفاف‌تر را فراهم می‌کند.</p><hr> <h3><strong>خواندن فایل‌ها با حلقه‌ها</strong></h3><p>دستورات while و until می‌توانند ورودی استاندارد را پردازش کنند. این ویژگی باعث می‌شود بتوان فایل‌ها را نیز با این حلقه‌ها پردازش کرد. در مثال زیر، محتوای فایل distros.txt که در فصل‌های قبلی استفاده شد چاپ می‌کنیم:</p><pre class="hljs"><code><span class="hljs-meta">#!/bin/bash</span>
 <span class="hljs-comment"># while-read: read lines from a file</span>
 
 <span class="hljs-keyword">while</span> <span class="hljs-built_in">read</span> distro version release; <span class="hljs-keyword">do</span>
@@ -251,10 +145,7 @@ count=1
         <span class="hljs-variable">$version</span> \
         <span class="hljs-variable">$release</span>
 <span class="hljs-keyword">done</span> &lt; distros.txt
-</code></pre>
-<p>برای اینکه یک فایل را به حلقه منتقل کنیم، عملگر بازپرستی (redirection) را <strong>بعد از دستور done</strong> قرار می‌دهیم. حلقه از دستور read برای خواندن فیلدهای ورودی استفاده می‌کند. دستور read بعد از هر خط با وضعیت خروج صفر پایان می‌یابد، تا زمانی که به انتهای فایل برسد؛ آن‌وقت با وضعیت غیرصفر خارج می‌شود و حلقه خاتمه پیدا می‌کند.</p>
-<p>امکان انتقال ورودی استاندارد از طریق pipe نیز وجود دارد:</p>
-<pre class="hljs"><code><span class="hljs-meta">#!/bin/bash</span>
+</code></pre> <p>برای اینکه یک فایل را به حلقه منتقل کنیم، عملگر بازپرستی (redirection) را <strong>بعد از دستور done</strong> قرار می‌دهیم. حلقه از دستور read برای خواندن فیلدهای ورودی استفاده می‌کند. دستور read بعد از هر خط با وضعیت خروج صفر پایان می‌یابد، تا زمانی که به انتهای فایل برسد؛ آن‌وقت با وضعیت غیرصفر خارج می‌شود و حلقه خاتمه پیدا می‌کند.</p><p>امکان انتقال ورودی استاندارد از طریق pipe نیز وجود دارد:</p><pre class="hljs"><code><span class="hljs-meta">#!/bin/bash</span>
 <span class="hljs-comment"># while-read2: read lines from a file</span>
 
 <span class="hljs-built_in">sort</span> -k 1,1 -k 2n distros.txt | <span class="hljs-keyword">while</span> <span class="hljs-built_in">read</span> distro version release; <span class="hljs-keyword">do</span>
@@ -263,134 +154,216 @@ count=1
         <span class="hljs-variable">$version</span> \
         <span class="hljs-variable">$release</span>
 <span class="hljs-keyword">done</span>
-</code></pre>
-<p>در اینجا خروجی دستور sort را گرفته و به حلقه ارسال کرده‌ایم. توجه به یک نکته مهم ضروری است: چون استفاده از pipe باعث می‌شود حلقه در یک <strong>زیرشل (subshell)</strong> اجرا شود، هر متغیری که داخل حلقه ساخته یا مقداردهی شود، بعد از پایان حلقه <strong>از دست می‌رود</strong>.</p>
-<hr>
-<h3><strong>جمع‌بندی</strong></h3>
-<p>با معرفی حلقه‌ها و مباحث قبلی مثل انشعاب‌ها، زیربرنامه‌ها و توالی‌ها، حالا مهم‌ترین انواع کنترل جریان برنامه را پوشش داده‌ایم. bash چند قابلیت دیگر هم دارد، اما آن‌ها بیشتر حالت‌های تکمیلی همین مفاهیم پایه هستند.</p>
-<hr>
-<h3><strong>برای مطالعه بیشتر</strong></h3>
-<ul>
-<li>
-<p><strong>Bash Guide for Beginners</strong> از Linux Documentation Project، مثال‌های بیشتری از حلقه‌های while دارد:<br>
-<a href="http://tldp.org/LDP/Bash-Beginners-Guide/html/sect_09_02.html">http://tldp.org/LDP/Bash-Beginners-Guide/html/sect_09_02.html</a></p>
-</li>
-<li>
-<p>مقالهٔ ویکی‌پدیا دربارهٔ حلقه‌ها که بخشی از مقالهٔ کنترل جریان است:<br>
-<a href="http://en.wikipedia.org/wiki/Control_flow#Loops">http://en.wikipedia.org/wiki/Control_flow#Loops</a></p>
-</li>
-</ul>
-
-  </main>
-
-  <!-- فوتر مشترک -->
-  <footer class="footer">
-    <div class="container">
-      <p>
-        <img src="/Gitab/icone/copyright.svg" alt="کپی‌رایت" width="14" height="14"
-             style="vertical-align:middle;margin-inline:4px">
-        <span id="y"></span> Gitab — تمامی حقوق محفوظ است.
-      </p>
-    </div>
-  </footer>
-
-  <!-- سال و اسکریپت تغییر تم -->
-  <script>
+</code></pre> <p>در اینجا خروجی دستور sort را گرفته و به حلقه ارسال کرده‌ایم. توجه به یک نکته مهم ضروری است: چون استفاده از pipe باعث می‌شود حلقه در یک <strong>زیرشل (subshell)</strong> اجرا شود، هر متغیری که داخل حلقه ساخته یا مقداردهی شود، بعد از پایان حلقه <strong>از دست می‌رود</strong>.</p><hr> <h3><strong>جمع‌بندی</strong></h3><p>با معرفی حلقه‌ها و مباحث قبلی مثل انشعاب‌ها، زیربرنامه‌ها و توالی‌ها، حالا مهم‌ترین انواع کنترل جریان برنامه را پوشش داده‌ایم. bash چند قابلیت دیگر هم دارد، اما آن‌ها بیشتر حالت‌های تکمیلی همین مفاهیم پایه هستند.</p><hr> <h3><strong>برای مطالعه بیشتر</strong></h3><ul> <li><p><strong>Bash Guide for Beginners</strong> از Linux Documentation Project، مثال‌های بیشتری از حلقه‌های while دارد:<br><a href="http://tldp.org/LDP/Bash-Beginners-Guide/html/sect_09_02.html">http://tldp.org/LDP/Bash-Beginners-Guide/html/sect_09_02.html</a></p></li> <li><p>مقالهٔ ویکی‌پدیا دربارهٔ حلقه‌ها که بخشی از مقالهٔ کنترل جریان است:<br><a href="http://en.wikipedia.org/wiki/Control_flow#Loops">http://en.wikipedia.org/wiki/Control_flow#Loops</a></p></li> </ul></article> <nav class="chapter-single-next-nav"><a href="/Gitab/books/book5/Book/30/chapter30/" class="btn-next-chapter-action" id="nextChapterBtn" data-hub="/Gitab/books/book5/"> <span class="next-btn-text">فصل بعدی: عیب‌یابی و رفع اشکال (Troubleshooting)</span> <span class="next-btn-arrow">←</span> </a> </nav></div> <button class="fab-back-to-top" id="backToTopBtn" type="button" aria-label="رفتن به بالای صفحه" title="رفتن به بالا"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"> <polyline points="18 15 12 9 6 15"></polyline> </svg> </button></main> <footer class="footer-minimal"><div class="footer-container"> <div class="footer-top-row"><div class="footer-brand-side"> <a href="/Gitab/" class="footer-brand-anchor"> <img src="/Gitab/icone/logo.svg" alt="Gitab" width="28" height="28" loading="lazy" decoding="async"> <span class="footer-brand-title">گیتاب (Gitab)</span> </a> <p class="footer-tagline"> پلتفرم آزاد و مستقل برای ترجمهٔ دقیق و روان کتاب‌های مرجع مهندسی نرم‌افزار. </p></div> <div class="footer-nav-cols"><div class="footer-nav-col"> <span class="footer-nav-heading">موضوعات</span><ul class="footer-nav-list"> <li><a href="/Gitab/books/list-books/?cat=csharp">سی‌شارپ و دات‌نت</a></li><li><a href="/Gitab/books/list-books/?cat=clean-code">کد تمیز و بازآفرینی</a></li><li><a href="/Gitab/books/list-books/?cat=architecture">معماری و طراحی دامنه</a></li><li><a href="/Gitab/books/list-books/?cat=system">لینوکس و خط فرمان</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">بخش‌های سایت</span><ul class="footer-nav-list"> <li><a href="/Gitab/">صفحه اصلی</a></li><li><a href="/Gitab/books/list-books/">کتابخانه کامل</a></li><li><a href="/Gitab/courses/">دوره‌های آموزشی</a></li><li><a href="/Gitab/translator.html">تالار مترجمین</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">مشارکت و جامعه</span><ul class="footer-nav-list"> <li><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer">راهنمای همکاری در ترجمه</a></li><li><a href="https://github.com/hheydarian/Gitab/issues" target="_blank" rel="noopener noreferrer">پیشنهاد کتاب یا گزارش خطا</a></li></ul> </div></div> </div><div class="footer-bottom-line"> <span>© <span id="y">2026</span> Gitab — توسعه‌یافته برای جامعهٔ مهندسان نرم‌افزار ایرانی</span></div> </div></footer> <script>
   (() => {
     const root = document.documentElement;
     const btn = document.getElementById('themeToggle');
+    const sunIcon = btn ? btn.querySelector('.icon-sun') : null;
+    const moonIcon = btn ? btn.querySelector('.icon-moon') : null;
     const KEY = 'gitab-theme';
 
-    function updateTheme(s) {
-      root.setAttribute('data-theme', s);
-      const mode = s;  // فقط `dark` یا `light` خواهد بود
+    function updateTheme(mode) {
+      root.setAttribute('data-theme', mode);
       root.dataset.colorMode = mode;
-      btn.dataset.icon = mode === 'dark' ? 'moon' : 'sun';
+      if (sunIcon && moonIcon) {
+        if (mode === 'dark') {
+          sunIcon.style.display = 'inline-block';
+          moonIcon.style.display = 'none';
+        } else {
+          sunIcon.style.display = 'none';
+          moonIcon.style.display = 'inline-block';
+        }
+      }
     }
 
-    // وضعیت تم ذخیره شده از localStorage
-    let saved = localStorage.getItem(KEY) || 'light'; // پیش‌فرض روشن
+    let saved = 'dark';
+    try { saved = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
     updateTheme(saved);
 
-    // تنظیم مجدد تم هنگام تغییر وضعیت دکمه
-    btn.addEventListener('click', () => {
-      const current = localStorage.getItem(KEY) || 'light';
-      const next = current === 'dark' ? 'light' : 'dark';  // فقط دو حالت: تاریک و روشن
-      localStorage.setItem(KEY, next);
-      updateTheme(next);
-    });
+    if (btn) {
+      btn.addEventListener('click', () => {
+        let current = 'dark';
+        try { current = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+        const next = current === 'dark' ? 'light' : 'dark';
+        try { localStorage.setItem(KEY, next); } catch (e) {}
+        updateTheme(next);
+      });
+    }
 
-    // هنگام بارگذاری صفحه
     document.addEventListener('DOMContentLoaded', () => {
-      updateTheme(localStorage.getItem(KEY) || 'light');
+      let mode = 'dark';
+      try { mode = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+      updateTheme(mode);
+      const yearSpan = document.getElementById('y');
+      if (yearSpan) yearSpan.textContent = new Date().getFullYear();
     });
+
+    const mobBtn = document.getElementById('mobileMenuBtn');
+    const mobDrawer = document.getElementById('mobileDrawer');
+    if (mobBtn && mobDrawer) {
+      const setDrawerOpen = (open) => {
+        mobDrawer.classList.toggle('open', open);
+        mobBtn.classList.toggle('is-open', open);
+        mobBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        mobBtn.setAttribute('aria-label', open ? 'بستن منو' : 'باز کردن منو');
+        mobDrawer.setAttribute('aria-hidden', open ? 'false' : 'true');
+      };
+
+      mobBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        setDrawerOpen(!mobDrawer.classList.contains('open'));
+      });
+
+      mobDrawer.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => setDrawerOpen(false));
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && mobDrawer.classList.contains('open')) {
+          setDrawerOpen(false);
+        }
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!mobDrawer.contains(e.target) && !mobBtn.contains(e.target)) {
+          setDrawerOpen(false);
+        }
+      });
+    }
+
+    if ('serviceWorker' in navigator) {
+      const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+      if (isLocalhost) {
+        navigator.serviceWorker.getRegistrations().then(regs => {
+          for (const reg of regs) reg.unregister();
+        });
+        if ('caches' in window) {
+          caches.keys().then(names => {
+            for (const name of names) caches.delete(name);
+          });
+        }
+      } else {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/Gitab/sw.js').catch(() => {});
+        });
+      }
+    }
   })();
-</script>
-
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-  <script>hljs.highlightAll();</script>
-
-  <script>
+  </script> <script>
   document.querySelectorAll('pre code').forEach(block => {
+    const pre = block.parentNode;
+    if (!pre || pre.querySelector('.copy-btn')) return;
+
+    const copySvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
+    const okSvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+
     const btn = document.createElement('button');
     btn.className = 'copy-btn';
-
-    const icon = document.createElement('img');
-    icon.src = "/Gitab/icone/copy.svg";
-    icon.alt = 'Copy';
-    btn.appendChild(icon);
-
-    block.parentNode.insertBefore(btn, block);
+    btn.setAttribute('aria-label', 'کپی کد');
+    btn.setAttribute('title', 'کپی کد');
+    btn.setAttribute('type', 'button');
+    btn.innerHTML = copySvg;
+    pre.appendChild(btn);
 
     btn.addEventListener('click', async () => {
-      await navigator.clipboard.writeText(block.textContent);
-      btn.classList.add('copied');
-      setTimeout(() => btn.classList.remove('copied'), 1500);
-    });
-  });
-  </script>
-
-  <script>
-  document.body.dataset.page = window.location.pathname;
-
-  const menuBtn = document.querySelector(".menu-toggle");
-  const nav = document.querySelector(".nav");
-
-  if (menuBtn && nav) {
-    menuBtn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      nav.classList.toggle("show");
-    });
-
-    document.addEventListener("click", (e) => {
-      const clickedInsideNav = nav.contains(e.target);
-      const clickedMenuButton = menuBtn.contains(e.target);
-      if (!clickedInsideNav && !clickedMenuButton) {
-        nav.classList.remove("show");
+      try {
+        await navigator.clipboard.writeText(block.textContent);
+        btn.classList.add('copied');
+        btn.innerHTML = okSvg;
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          btn.innerHTML = copySvg;
+        }, 1800);
+      } catch (err) {
+        console.error('Copy failed:', err);
       }
     });
-  }
-  </script>
-
-  <script>
-    document.getElementById('y').textContent = new Date().getFullYear();
-  </script>
-  <script>
-document.getElementById("openDonate").addEventListener("click", () => {
-  document.getElementById("donateModal").style.display = "block";
-});
-document.getElementById("closeDonate").addEventListener("click", () => {
-  document.getElementById("donateModal").style.display = "none";
-});
-document.querySelectorAll(".copy-btn").forEach(btn => {
-  btn.addEventListener("click", () => {
-    navigator.clipboard.writeText(btn.dataset.copy);
-  
-    setTimeout(() => (btn.textContent = "کپی"), 2000);
   });
-});
-</script>
+  </script> <script>
+  (() => {
+    const article = document.getElementById('chapterArticle');
+    if (!article) return;
 
-</body>
-</html>
+    const progressBar = document.getElementById('readingProgressBar');
+    if (progressBar) {
+      window.addEventListener('scroll', () => {
+        const docElem = document.documentElement;
+        const totalHeight = docElem.scrollHeight - docElem.clientHeight;
+        if (totalHeight > 0) {
+          const progress = (window.pageYOffset / totalHeight) * 100;
+          progressBar.style.width = Math.min(100, Math.max(0, progress)) + '%';
+        }
+      }, { passive: true });
+    }
+
+    const btt = document.getElementById('backToTopBtn');
+    if (btt) {
+      window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 250) {
+          btt.classList.add('visible');
+        } else {
+          btt.classList.remove('visible');
+        }
+      }, { passive: true });
+
+      btt.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+
+    article.querySelectorAll('img').forEach(img => {
+      if (!img.hasAttribute('loading')) img.loading = 'lazy';
+      if (!img.hasAttribute('decoding')) img.decoding = 'async';
+      const parent = img.parentElement;
+      if (parent && parent.tagName === 'P') {
+        parent.style.textAlign = 'center';
+      }
+
+      img.addEventListener('error', function() {
+        const src = this.getAttribute('src');
+        if (src && src.includes('assets/image/')) {
+          const parts = src.split('assets/image/');
+          const corrected = '/Gitab/books/book5/assets/image/' + parts[1];
+          if (this.src !== corrected) {
+            this.src = corrected;
+          }
+        }
+      });
+    });
+
+    article.querySelectorAll('p').forEach(p => {
+      const trimmed = p.innerText.trim();
+      if (trimmed.startsWith('💡') || trimmed.startsWith('نکته:')) {
+        p.classList.add('react-callout', 'callout-tip');
+      } else if (trimmed.startsWith('⚠️') || trimmed.startsWith('هشدار:')) {
+        p.classList.add('react-callout', 'callout-warning');
+      } else if (trimmed.startsWith('📌') || trimmed.startsWith('مهم:')) {
+        p.classList.add('react-callout', 'callout-important');
+      } else if (trimmed.startsWith('🔹') || trimmed.startsWith('🔸')) {
+        p.classList.add('react-callout', 'callout-note');
+      }
+    });
+  })();
+  </script> <script type="speculationrules">{"prefetch":[{"where":{"and":[{"href_matches":"/Gitab/*"},{"not":{"href_matches":"/Gitab/downloads/*"}},{"not":{"selector_matches":"[download], [target='_blank']"}}]},"eagerness":"moderate"}]}</script> <script>
+  (() => {
+    if (window.HTMLScriptElement && HTMLScriptElement.supports && HTMLScriptElement.supports('speculationrules')) return;
+    const seen = new Set([window.location.href]);
+    let count = 0;
+    const prefetchLink = (e) => {
+      if (count >= 12) return;
+      const a = e.target && e.target.closest ? e.target.closest('header a, .chapter-single-next-nav a, .syllabus-chapter-item a, .btn-hero-read, .btn-card-read') : null;
+      if (!a || !a.href || a.hasAttribute('download') || a.target === '_blank') return;
+      if (a.origin !== window.location.origin || a.pathname.includes('/downloads/')) return;
+      const clean = a.href.split('#')[0];
+      if (!clean || seen.has(clean)) return;
+      seen.add(clean);
+      count++;
+      const l = document.createElement('link');
+      l.rel = 'prefetch';
+      l.href = clean;
+      document.head.appendChild(l);
+    };
+    document.addEventListener('pointerenter', prefetchLink, { capture: true, passive: true });
+    document.addEventListener('touchstart', prefetchLink, { capture: true, passive: true });
+  })();
+  </script></body></html>

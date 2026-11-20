@@ -1,116 +1,18 @@
-
-
-<!doctype html>
-<html lang="fa" dir="rtl">
-<head>
-  <meta charset="utf-8">
-  <link rel="icon" type="image/png" href="/Gitab/favicon.png">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Exception Handling</title>
-  <meta name="description" content="ترجمه‌های فارسی کتاب‌های فنی — سریع، مینیمال و قابل اتکا.">
-
-  <!-- استایل‌ها -->
-  <link rel="stylesheet" href="/Gitab/styles/main.css">
-  <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
-
-  <style>
-  @font-face {
-    font-family: 'Vazir';
-    src: url('/Gitab/fonts/Vazir-FD-WOL.ttf') format('truetype');
-    font-display: swap;
-  }
-  @font-face {
-    font-family: "Lalezar";
-    src: url('fonts/Lalezar.ttf') format('truetype');
-    font-display: swap;
-}
-  body {
-    font-family: 'Vazir', sans-serif;
-  }
-  </style>
-</head>
-
-<body>
-  <!-- هدر مشترک -->
-  <header class="header">
-    <div class="container nav-wrap">
-      <a href="/Gitab/" class="brand">
-        <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="26" height="26">
-        <span>Gitab</span>
-      </a>
-
-       <nav class="nav">
-         <a href="/Gitab/" >خانه</a>
-         <a href="/Gitab/books/list-books" >کتاب‌ها</a>
-         <a href="/Gitab/giter.html" >دوره ها</a>
-          <!-- 
-         <a href="/Gitab/translator.html" >مترجمین</a>
-           -->
-       </nav>
-
-      <div class="nav-actions">
-        <button id="themeToggle" class="icon-btn theme-btn" data-icon="moon" aria-label="تغییر تم">
-          <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن">
-          <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک">
-        </button>
-
-        <a class="icon-btn" href="https://github.com/hheydarian/Gitab" target="_blank" title="GitHub">
-          <img src="/Gitab/icone/github.svg" alt="GitHub">
-        </a>
-
-        <!-- دکمه منو برای موبایل -->
-        <button class="menu-toggle" aria-label="منو">
-          <img src="/Gitab/icone/menu.svg" alt="menu">
-        </button>
-      </div>
-    </div>
-  </header>
-
-  
-  <main class="site-main book-page">
-    <h1>فصل پنجم:  مدیریت استثناها (Exception Handling) ⚠️</h1>
-<p>در فصل قبل، ما به توابع نگاه کردیم. با وجود تلاش‌های برنامه‌نویسان برای نوشتن کدهای مقاوم و پایدار، توابع در مقطعی از اجرا <strong>استثناها (exceptions)</strong> ایجاد خواهند کرد. این استثناها می‌توانند دلایل مختلفی داشته باشند، مانند:</p>
-<ul>
-<li>فایل یا پوشه‌ای وجود ندارد</li>
-<li>مقدار <strong>null</strong> یا خالی است</li>
-<li>مکان مورد نظر قابل نوشتن نیست</li>
-<li>دسترسی کاربر محدود شده است</li>
-</ul>
-<p>با در نظر گرفتن این مسائل، در این فصل با روش‌های مناسب برای <strong>مدیریت استثناها</strong> آشنا خواهید شد تا کد C# تمیز و قابل اطمینان بنویسید.</p>
-<hr>
-<h3>موضوعات این فصل</h3>
-<p>1️⃣ بررسی استثناهای <strong>Checked</strong> و <strong>Unchecked</strong>، به‌ویژه در رابطه با <strong>OverflowException</strong></p>
-<p>2️⃣ جلوگیری از <strong>NullPointerException</strong></p>
-<p>3️⃣ پیاده‌سازی قوانین کسب‌وکار برای انواع خاصی از استثناها (<strong>Business Rule Exceptions</strong>)</p>
-<p>4️⃣ اطمینان از اینکه استثناها اطلاعات معنادار ارائه دهند</p>
-<p>5️⃣ ساخت <strong>Custom Exceptions</strong></p>
-<p>6️⃣ و در نهایت، بررسی اینکه چرا نباید از استثناها برای کنترل جریان برنامه استفاده کنیم</p>
-<hr>
-<h3>مهارت‌هایی که پس از این فصل کسب خواهید کرد</h3>
-<ul>
-<li>درک تفاوت استثناهای <strong>Checked و Unchecked</strong> و دلیل وجود آن‌ها در C#</li>
-<li>درک <strong>OverflowException</strong> و روش گرفتن آن‌ها در زمان <strong>Compile</strong></li>
-<li>شناخت <strong>NullPointerException</strong> و نحوه جلوگیری از آن‌ها</li>
-<li>توانایی نوشتن <strong>Custom Exceptions</strong> که اطلاعات معنادار ارائه می‌دهند و به شما و دیگر برنامه‌نویسان کمک می‌کنند مشکلات را به‌سرعت شناسایی و رفع کنید</li>
-<li>درک اینکه چرا نباید از استثناها برای کنترل جریان برنامه استفاده کنید</li>
-<li>توانایی جایگزین کردن استثناهای قوانین کسب‌وکار با دستورات C# و بررسی‌های Boolean برای کنترل جریان برنامه</li>
-</ul>
-<hr>
-<p>اگر آماده باشی، می‌توانیم فصل را با بخش اول یعنی <strong>استثناهای Checked و Unchecked</strong> شروع کنیم. ⚡</p>
-<h3>⚖️ استثناهای Checked و Unchecked</h3>
-<p>در <strong>حالت Unchecked</strong>، اگر یک <strong>Overflow</strong> (سرریز) عددی رخ دهد، نادیده گرفته می‌شود. در این حالت، <strong>بیت‌های با ارزش بالا</strong> که نمی‌توانند به نوع مقصد اختصاص داده شوند، از نتیجه حذف می‌شوند.</p>
-<p>به‌طور پیش‌فرض، C# هنگام انجام <strong>عبارات غیرثابت (non-constant)</strong> در زمان اجرا، در <strong>context Unchecked</strong> عمل می‌کند. اما <strong>عبارات ثابت در زمان Compile</strong> همیشه به‌صورت پیش‌فرض <strong>Checked</strong> هستند.</p>
-<p>وقتی در <strong>حالت Checked</strong> با سرریز عددی مواجه شویم، یک <strong>OverflowException</strong> ایجاد می‌شود. یکی از دلایلی که از حالت Unchecked استفاده می‌شود، <strong>افزایش عملکرد برنامه</strong> است، زیرا بررسی استثناهای Checked می‌تواند کمی عملکرد روش‌ها را کاهش دهد.</p>
-<hr>
-<h4>✅ قاعده کلی</h4>
-<p>همیشه بهتر است که عملیات عددی خود را در <strong>context Checked</strong> انجام دهید. با این کار، هر گونه Overflow به‌صورت <strong>خطا در زمان Compile</strong> شناسایی می‌شود و می‌توانید قبل از انتشار کد، آن را اصلاح کنید. این بسیار بهتر از این است که کد را منتشر کنید و بعد مجبور شوید خطاهای زمان اجرا برای مشتری را اصلاح کنید.</p>
-<p>اجرای کد در <strong>حالت Unchecked</strong> خطرناک است زیرا شما بر اساس <strong>فرضیات</strong> عمل می‌کنید، نه حقایق. این فرضیات ممکن است منجر به ایجاد استثنا در زمان اجرا شوند. استثناهای زمان اجرا باعث کاهش رضایت مشتری و ایجاد مشکلات جدی بعدی می‌شوند که می‌توانند تأثیر منفی بر مشتری داشته باشند.</p>
-<p>اجازه دادن به برنامه برای ادامه اجرا پس از تجربه <strong>OverflowException</strong> از نظر کسب‌وکار بسیار خطرناک است. دلیل آن این است که داده‌ها ممکن است به <strong>وضعیت غیرقابل بازگشت و نامعتبر</strong> وارد شوند. اگر این داده‌ها داده‌های حساس مشتری باشند، این موضوع می‌تواند هزینه زیادی برای کسب‌وکار داشته باشد، و قطعاً نمی‌خواهید این بار روی دوش شما باشد.</p>
-<hr>
-<h4>💳 مثال بانکی: خطر سرریز Unchecked</h4>
-<p>کد زیر نشان می‌دهد که چقدر یک Overflow <strong>Unchecked</strong> می‌تواند در دنیای بانکداری مشتری خطرناک باشد:</p>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">UncheckedBankAccountException</span>()</span>
+<!doctype html><html lang="fa" dir="rtl"> <head><script>
+    if (window.location.pathname.startsWith('/gitab/')) {
+      window.location.replace(window.location.pathname.replace(/^\/gitab\//i, '/Gitab/') + window.location.search + window.location.hash);
+    }
+    (() => {
+      try {
+        const t = localStorage.getItem('gitab-theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', t);
+        document.documentElement.dataset.colorMode = t;
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        document.documentElement.dataset.colorMode = 'dark';
+      }
+    })();
+  </script> <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5"> <title>Exception Handling</title><meta name="description" content="Exception Handling — مطالعه آنلاین و رایگان از کتاب «کدنویسی تمیز در سی‌شارپ» (Clean Code in C#) اثر Jason Alls با ترجمه حامد حیدریان در گیتاب."> <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"><meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"> <meta name="theme-color" content="#090d16"><meta name="referrer" content="strict-origin-when-cross-origin"> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https:; frame-src https://www.youtube.com https://www.youtube-nocookie.com https://maps.google.com https://www.google.com; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self';"><link rel="icon" type="image/png" href="/Gitab/favicon.png"> <link rel="canonical" href="https://hheydarian.github.io/Gitab/books/book2/Book/05/Exception-Handling/"><link rel="alternate" hreflang="fa" href="https://hheydarian.github.io/Gitab/books/book2/Book/05/Exception-Handling/"> <link rel="alternate" hreflang="x-default" href="https://hheydarian.github.io/Gitab/books/book2/Book/05/Exception-Handling/"><link rel="alternate" type="text/plain" title="LLMs.txt" href="/Gitab/llms.txt"> <link rel="sitemap" type="application/xml" title="Sitemap" href="/Gitab/sitemap.xml"><meta property="og:locale" content="fa_IR"> <meta property="og:type" content="article"><meta property="og:site_name" content="گیتاب | Gitab"> <meta property="og:title" content="Exception Handling"><meta property="og:description" content="Exception Handling — مطالعه آنلاین و رایگان از کتاب «کدنویسی تمیز در سی‌شارپ» (Clean Code in C#) اثر Jason Alls با ترجمه حامد حیدریان در گیتاب."> <meta property="og:url" content="https://hheydarian.github.io/Gitab/books/book2/Book/05/Exception-Handling/"><meta property="og:image" content="https://hheydarian.github.io/Gitab/images/clean-code-csharp/Cover.jpg"> <meta property="og:image:alt" content="Exception Handling"><meta name="twitter:card" content="summary_large_image"> <meta name="twitter:title" content="Exception Handling"><meta name="twitter:description" content="Exception Handling — مطالعه آنلاین و رایگان از کتاب «کدنویسی تمیز در سی‌شارپ» (Clean Code in C#) اثر Jason Alls با ترجمه حامد حیدریان در گیتاب."> <meta name="twitter:image" content="https://hheydarian.github.io/Gitab/images/clean-code-csharp/Cover.jpg"><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://hheydarian.github.io/Gitab/#organization","name":"گیتاب | Gitab","alternateName":"Gitab","url":"https://hheydarian.github.io/Gitab/","logo":{"@type":"ImageObject","url":"https://hheydarian.github.io/Gitab/favicon.png"},"sameAs":["https://github.com/hheydarian/Gitab"]},{"@type":"WebSite","@id":"https://hheydarian.github.io/Gitab/#website","url":"https://hheydarian.github.io/Gitab/","name":"گیتاب | Gitab","inLanguage":"fa-IR","publisher":{"@id":"https://hheydarian.github.io/Gitab/#organization"},"potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://hheydarian.github.io/Gitab/books/list-books/?q={search_term_string}"},"query-input":"required name=search_term_string"}},{"@type":"WebPage","@id":"https://hheydarian.github.io/Gitab/books/book2/Book/05/Exception-Handling/#webpage","url":"https://hheydarian.github.io/Gitab/books/book2/Book/05/Exception-Handling/","name":"Exception Handling","description":"Exception Handling — مطالعه آنلاین و رایگان از کتاب «کدنویسی تمیز در سی‌شارپ» (Clean Code in C#) اثر Jason Alls با ترجمه حامد حیدریان در گیتاب.","inLanguage":"fa-IR","isPartOf":{"@id":"https://hheydarian.github.io/Gitab/#website"}},{"@type":"TechArticle","headline":"Exception Handling","description":"Exception Handling — مطالعه آنلاین و رایگان از کتاب «کدنویسی تمیز در سی‌شارپ» (Clean Code in C#) اثر Jason Alls با ترجمه حامد حیدریان در گیتاب.","url":"https://hheydarian.github.io/Gitab/books/book2/Book/05/Exception-Handling/","inLanguage":"fa-IR","isAccessibleForFree":true,"author":{"@type":"Person","name":"Jason Alls"},"translator":{"@type":"Person","name":"حامد حیدریان"},"isPartOf":{"@type":"Book","name":"کدنویسی تمیز در سی‌شارپ","alternateName":"Clean Code in C#","url":"https://hheydarian.github.io/Gitab/books/book2/"}}]}</script> <link rel="preload" href="/Gitab/fonts/Vazirmatn.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/Gitab/styles/main.css?v=2.4" as="style"> <link rel="preload" href="/Gitab/styles/gitab-modern.css?v=2.5" as="style"><style>@font-face{font-family:'Lalezar';src:url('/Gitab/fonts/Lalezar.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}@font-face{font-family:'Vazirmatn';src:url('/Gitab/fonts/Vazirmatn.woff2') format('woff2');font-weight:100 900;font-style:normal;font-display:swap}html,body,button,input,optgroup,select,textarea,.filter-pill{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}input::placeholder,textarea::placeholder{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}</style> <link rel="stylesheet" href="/Gitab/styles/main.css?v=2.4"><link rel="stylesheet" href="/Gitab/styles/gitab-modern.css?v=2.5"> <link rel="stylesheet" href="/Gitab/styles/vendor/github-dark.min.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="/Gitab/styles/vendor/github-dark.min.css"></noscript></head> <body><header class="header"> <div class="container nav-wrap"><a href="/Gitab/" class="brand" aria-label="صفحه اصلی گیتاب"> <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="30" height="30" decoding="async"> <span class="brand-text">Gitab</span> </a> <nav class="nav" id="mainNav"><a href="/Gitab/" >خانه</a> <a href="/Gitab/books/list-books" aria-current="page">کتاب‌ها</a> <a href="/Gitab/courses/" >دوره‌ها</a> <a href="/Gitab/translator.html" >مترجمین</a></nav> <div class="nav-actions"><button id="themeToggle" class="theme-toggle-btn" aria-label="تغییر تم" title="تغییر تم"> <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن" width="18" height="18" decoding="async" style="display:none"> <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک" width="18" height="18" decoding="async"> </button> <a class="btn-github-pill" href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" title="مشاهده سورس گیتاب در گیت‌هاب"> <img src="/Gitab/icone/github.svg" alt="GitHub" width="16" height="16" decoding="async"> <span>گیت‌هاب</span> </a> <button class="mobile-menu-btn" id="mobileMenuBtn" type="button" aria-label="باز کردن منو" aria-expanded="false"> <svg class="mob-icon-open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="4" y1="7" x2="20" y2="7"></line> <line x1="4" y1="12" x2="20" y2="12"></line> <line x1="4" y1="17" x2="14" y2="17"></line> </svg> <svg class="mob-icon-close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="18" y1="6" x2="6" y2="18"></line> <line x1="6" y1="6" x2="18" y2="18"></line> </svg> </button></div> </div><div class="mobile-drawer" id="mobileDrawer" aria-hidden="true"> <div class="mobile-drawer-inner"><div class="mobile-drawer-section-label">ناوبری سریع</div><nav class="mobile-drawer-links" aria-label="منوی موبایل"> <a href="/Gitab/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M3 10.5 12 3l9 7.5"></path> <path d="M5 9.5V20a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V9.5"></path> </svg> </span> <span class="mob-nav-text">صفحه نخست</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/books/list-books" class="mobile-drawer-link active" aria-current="page"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path> </svg> </span> <span class="mob-nav-text">کتابخانه و فهرست کتاب‌ها</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/courses/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path> <path d="M6 12v5c3 3 9 3 12 0v-5"></path> </svg> </span> <span class="mob-nav-text">دوره‌های آموزشی</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/translator.html" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path> <circle cx="9" cy="7" r="4"></circle> <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path> <path d="M16 3.13a4 4 0 0 1 0 7.75"></path> </svg> </span> <span class="mob-nav-text">مترجمین و همکاران</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> </nav><div class="mobile-drawer-divider"></div><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" class="mobile-drawer-link mobile-drawer-gh"> <span class="mob-nav-icon" aria-hidden="true"> <img src="/Gitab/icone/github.svg" alt="" width="17" height="17" loading="lazy" decoding="async"> </span> <span class="mob-nav-text">مخزن گیت‌هاب پروژه</span> <span class="mob-nav-ext" aria-hidden="true">↗</span> </a> </div></div> </header><div class="reading-progress-track"> <div class="reading-progress-fill" id="readingProgressBar"></div></div> <main class="site-main chapter-reading-page"><div class="chapter-page-wrapper"> <nav class="chapter-clean-breadcrumb" aria-label="مسیر راهنما" dir="rtl"><a href="/Gitab/">خانه</a> <span class="bc-sep" aria-hidden="true">/</span> <a href="/Gitab/books/list-books/">کتاب‌ها</a> <span class="bc-sep" aria-hidden="true">/</span> <a href="/Gitab/books/book2/"><bdi>کدنویسی تمیز در سی‌شارپ</bdi></a> <span class="bc-sep" aria-hidden="true">/</span> <span class="bc-current-leaf"><bdi>Exception Handling</bdi></span></nav> <article class="chapter-prose-container markdown-body" id="chapterArticle" dir="rtl"><h1>فصل پنجم: مدیریت استثناها (Exception Handling)</h1><p>در فصل قبل، ما به توابع نگاه کردیم. با وجود تلاش‌های برنامه‌نویسان برای نوشتن کدهای مقاوم و پایدار، توابع در مقطعی از اجرا <strong>استثناها (exceptions)</strong> ایجاد خواهند کرد. این استثناها می‌توانند دلایل مختلفی داشته باشند، مانند:</p><ul> <li>فایل یا پوشه‌ای وجود ندارد</li><li>مقدار <strong>null</strong> یا خالی است</li><li>مکان مورد نظر قابل نوشتن نیست</li><li>دسترسی کاربر محدود شده است</li></ul> <p>با در نظر گرفتن این مسائل، در این فصل با روش‌های مناسب برای <strong>مدیریت استثناها</strong> آشنا خواهید شد تا کد C# تمیز و قابل اطمینان بنویسید.</p><hr> <h3>موضوعات این فصل</h3><p>1⃣ بررسی استثناهای <strong>Checked</strong> و <strong>Unchecked</strong>، به‌ویژه در رابطه با <strong>OverflowException</strong></p><p>2⃣ جلوگیری از <strong>NullPointerException</strong></p><p>3⃣ پیاده‌سازی قوانین کسب‌وکار برای انواع خاصی از استثناها (<strong>Business Rule Exceptions</strong>)</p><p>4⃣ اطمینان از اینکه استثناها اطلاعات معنادار ارائه دهند</p><p>5⃣ ساخت <strong>Custom Exceptions</strong></p><p>6⃣ و در نهایت، بررسی اینکه چرا نباید از استثناها برای کنترل جریان برنامه استفاده کنیم</p><hr> <h3>مهارت‌هایی که پس از این فصل کسب خواهید کرد</h3><ul> <li>درک تفاوت استثناهای <strong>Checked و Unchecked</strong> و دلیل وجود آن‌ها در C#</li><li>درک <strong>OverflowException</strong> و روش گرفتن آن‌ها در زمان <strong>Compile</strong></li><li>شناخت <strong>NullPointerException</strong> و نحوه جلوگیری از آن‌ها</li><li>توانایی نوشتن <strong>Custom Exceptions</strong> که اطلاعات معنادار ارائه می‌دهند و به شما و دیگر برنامه‌نویسان کمک می‌کنند مشکلات را به‌سرعت شناسایی و رفع کنید</li><li>درک اینکه چرا نباید از استثناها برای کنترل جریان برنامه استفاده کنید</li><li>توانایی جایگزین کردن استثناهای قوانین کسب‌وکار با دستورات C# و بررسی‌های Boolean برای کنترل جریان برنامه</li></ul> <hr><p>اگر آماده باشی، می‌توانیم فصل را با بخش اول یعنی <strong>استثناهای Checked و Unchecked</strong> شروع کنیم.</p><h3>استثناهای Checked و Unchecked</h3><p>در <strong>حالت Unchecked</strong>، اگر یک <strong>Overflow</strong> (سرریز) عددی رخ دهد، نادیده گرفته می‌شود. در این حالت، <strong>بیت‌های با ارزش بالا</strong> که نمی‌توانند به نوع مقصد اختصاص داده شوند، از نتیجه حذف می‌شوند.</p><p>به‌طور پیش‌فرض، C# هنگام انجام <strong>عبارات غیرثابت (non-constant)</strong> در زمان اجرا، در <strong>context Unchecked</strong> عمل می‌کند. اما <strong>عبارات ثابت در زمان Compile</strong> همیشه به‌صورت پیش‌فرض <strong>Checked</strong> هستند.</p><p>وقتی در <strong>حالت Checked</strong> با سرریز عددی مواجه شویم، یک <strong>OverflowException</strong> ایجاد می‌شود. یکی از دلایلی که از حالت Unchecked استفاده می‌شود، <strong>افزایش عملکرد برنامه</strong> است، زیرا بررسی استثناهای Checked می‌تواند کمی عملکرد روش‌ها را کاهش دهد.</p><hr> <h4>قاعده کلی</h4><p>همیشه بهتر است که عملیات عددی خود را در <strong>context Checked</strong> انجام دهید. با این کار، هر گونه Overflow به‌صورت <strong>خطا در زمان Compile</strong> شناسایی می‌شود و می‌توانید قبل از انتشار کد، آن را اصلاح کنید. این بسیار بهتر از این است که کد را منتشر کنید و بعد مجبور شوید خطاهای زمان اجرا برای مشتری را اصلاح کنید.</p><p>اجرای کد در <strong>حالت Unchecked</strong> خطرناک است زیرا شما بر اساس <strong>فرضیات</strong> عمل می‌کنید، نه حقایق. این فرضیات ممکن است منجر به ایجاد استثنا در زمان اجرا شوند. استثناهای زمان اجرا باعث کاهش رضایت مشتری و ایجاد مشکلات جدی بعدی می‌شوند که می‌توانند تأثیر منفی بر مشتری داشته باشند.</p><p>اجازه دادن به برنامه برای ادامه اجرا پس از تجربه <strong>OverflowException</strong> از نظر کسب‌وکار بسیار خطرناک است. دلیل آن این است که داده‌ها ممکن است به <strong>وضعیت غیرقابل بازگشت و نامعتبر</strong> وارد شوند. اگر این داده‌ها داده‌های حساس مشتری باشند، این موضوع می‌تواند هزینه زیادی برای کسب‌وکار داشته باشد، و قطعاً نمی‌خواهید این بار روی دوش شما باشد.</p><hr> <h4>مثال بانکی: خطر سرریز Unchecked</h4><p>کد زیر نشان می‌دهد که چقدر یک Overflow <strong>Unchecked</strong> می‌تواند در دنیای بانکداری مشتری خطرناک باشد:</p><pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">UncheckedBankAccountException</span>()</span>
 {
     <span class="hljs-keyword">var</span> currentBalance = <span class="hljs-built_in">int</span>.MaxValue;
     Console.WriteLine(<span class="hljs-string">$&quot;Current Balance: <span class="hljs-subst">{currentBalance}</span>&quot;</span>);
@@ -118,22 +20,8 @@
     Console.WriteLine(<span class="hljs-string">$&quot;Current Balance + 1 = <span class="hljs-subst">{currentBalance}</span>&quot;</span>);
     Console.ReadKey();
 }
-</code></pre>
-<p>تصور کنید چقدر ترسناک است وقتی مشتری می‌بیند با افزودن <strong>£1</strong> به موجودی بانک خود که برابر با <strong>£2,147,483,647</strong> است، موجودی او به <strong>-£2,147,483,648</strong> تبدیل می‌شود! 😱</p>
-<div align="center">
-<p><img src="../../../assets/image/05/Table%205-1.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<h3>⚠️ مثال عملی از استثناهای Checked و Unchecked</h3>
-<p>اکنون وقت آن است که <strong>استثناهای Checked و Unchecked</strong> را با <strong>مثال کد عملی</strong> نشان دهیم.</p>
-<hr>
-<p>ابتدا یک <strong>Console Application</strong> جدید ایجاد کنید و برخی متغیرها را اعلام کنید:</p>
-<pre class="hljs"><code><span class="hljs-keyword">static</span> <span class="hljs-built_in">byte</span> y, z;
-</code></pre>
-<p>کد بالا دو متغیر از نوع <strong>byte</strong> اعلام می‌کند که در مثال‌های محاسباتی بعدی استفاده خواهند شد.</p>
-<hr>
-<h4>1️⃣ متد CheckedAdd()</h4>
-<p>این متد یک <strong>OverflowException</strong> ایجاد می‌کند اگر جمع دو عدد منجر به عددی شود که نتواند در یک <strong>byte</strong> ذخیره شود:</p>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">CheckedAdd</span>()</span>
+</code></pre> <p>تصور کنید چقدر ترسناک است وقتی مشتری می‌بیند با افزودن <strong>£1</strong> به موجودی بانک خود که برابر با <strong>£2,147,483,647</strong> است، موجودی او به <strong>-£2,147,483,648</strong> تبدیل می‌شود!</p><div align="center"> <p><img src="../../../assets/image/05/Table%205-1.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <h3>مثال عملی از استثناهای Checked و Unchecked</h3><p>اکنون وقت آن است که <strong>استثناهای Checked و Unchecked</strong> را با <strong>مثال کد عملی</strong> نشان دهیم.</p><hr> <p>ابتدا یک <strong>Console Application</strong> جدید ایجاد کنید و برخی متغیرها را اعلام کنید:</p><pre class="hljs"><code><span class="hljs-keyword">static</span> <span class="hljs-built_in">byte</span> y, z;
+</code></pre> <p>کد بالا دو متغیر از نوع <strong>byte</strong> اعلام می‌کند که در مثال‌های محاسباتی بعدی استفاده خواهند شد.</p><hr> <h4>1⃣ متد CheckedAdd()</h4><p>این متد یک <strong>OverflowException</strong> ایجاد می‌کند اگر جمع دو عدد منجر به عددی شود که نتواند در یک <strong>byte</strong> ذخیره شود:</p><pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">CheckedAdd</span>()</span>
 {
     <span class="hljs-keyword">try</span>
     {
@@ -146,11 +34,7 @@
         Console.WriteLine(<span class="hljs-string">$&quot;CheckedAdd: <span class="hljs-subst">{oex.Message}</span>&quot;</span>);
     }
 }
-</code></pre>
-<hr>
-<h4>2️⃣ متد CheckedMultiplication()</h4>
-<p>این متد نیز در صورت سرریز هنگام ضرب دو عدد، یک <strong>OverflowException</strong> ایجاد می‌کند:</p>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">CheckedMultiplication</span>()</span>
+</code></pre> <hr><h4>2⃣ متد CheckedMultiplication()</h4><p>این متد نیز در صورت سرریز هنگام ضرب دو عدد، یک <strong>OverflowException</strong> ایجاد می‌کند:</p><pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">CheckedMultiplication</span>()</span>
 {
     <span class="hljs-keyword">try</span>
     {
@@ -163,11 +47,7 @@
         Console.WriteLine(<span class="hljs-string">$&quot;CheckedMultiplication: <span class="hljs-subst">{oex.Message}</span>&quot;</span>);
     }
 }
-</code></pre>
-<hr>
-<h4>3️⃣ متد UncheckedAdd()</h4>
-<p>این متد هرگونه Overflow را نادیده می‌گیرد و <strong>هیچ استثنایی ایجاد نمی‌شود</strong>. نتیجه نادرست خواهد بود، اما برنامه ادامه می‌یابد:</p>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">UncheckedAdd</span>()</span>
+</code></pre> <hr><h4>3⃣ متد UncheckedAdd()</h4><p>این متد هرگونه Overflow را نادیده می‌گیرد و <strong>هیچ استثنایی ایجاد نمی‌شود</strong>. نتیجه نادرست خواهد بود، اما برنامه ادامه می‌یابد:</p><pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">UncheckedAdd</span>()</span>
 {
     <span class="hljs-keyword">try</span>
     {
@@ -180,11 +60,7 @@
         Console.WriteLine(<span class="hljs-string">$&quot;CheckedAdd: <span class="hljs-subst">{oex.Message}</span>&quot;</span>);
     }
 }
-</code></pre>
-<hr>
-<h4>4️⃣ متد UncheckedMultiplication()</h4>
-<p>این متد نیز هنگام Overflow نتیجه ضرب را نادیده می‌گیرد و <strong>مقدار نادرست در byte ذخیره می‌شود</strong>:</p>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">UncheckedMultiplication</span>()</span>
+</code></pre> <hr><h4>4⃣ متد UncheckedMultiplication()</h4><p>این متد نیز هنگام Overflow نتیجه ضرب را نادیده می‌گیرد و <strong>مقدار نادرست در byte ذخیره می‌شود</strong>:</p><pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">UncheckedMultiplication</span>()</span>
 {
     <span class="hljs-keyword">try</span>
     {
@@ -197,11 +73,7 @@
         Console.WriteLine(<span class="hljs-string">$&quot;CheckedMultiplication: <span class="hljs-subst">{oex.Message}</span>&quot;</span>);
     }
 }
-</code></pre>
-<hr>
-<h4>5️⃣ متد Main()</h4>
-<p>در نهایت، متد Main را به‌گونه‌ای تغییر دهید که متغیرها مقداردهی اولیه شوند و همه متدها اجرا شوند:</p>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Main</span>(<span class="hljs-params"><span class="hljs-built_in">string</span>[] <span class="hljs-keyword">args</span></span>)</span>
+</code></pre> <hr><h4>5⃣ متد Main()</h4><p>در نهایت، متد Main را به‌گونه‌ای تغییر دهید که متغیرها مقداردهی اولیه شوند و همه متدها اجرا شوند:</p><pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Main</span>(<span class="hljs-params"><span class="hljs-built_in">string</span>[] <span class="hljs-keyword">args</span></span>)</span>
 {
     y = <span class="hljs-built_in">byte</span>.MaxValue; <span class="hljs-comment">// بیشترین مقدار ممکن برای byte</span>
     z = <span class="hljs-number">2</span>;
@@ -212,27 +84,7 @@
     Console.WriteLine(<span class="hljs-string">&quot;Press any key to exit.&quot;</span>);
     Console.ReadLine();
 }
-</code></pre>
-<p>در این مثال:</p>
-<ul>
-<li>متدهای <strong>CheckedAdd</strong> و <strong>CheckedMultiplication</strong> منجر به <strong>OverflowException</strong> می‌شوند زیرا y بیشترین مقدار برای byte است.</li>
-<li>متدهای <strong>UncheckedAdd</strong> و <strong>UncheckedMultiplication</strong> Overflow را نادیده می‌گیرند و نتیجه اشتباه محاسبه می‌شود، بدون اینکه استثنایی رخ دهد.</li>
-</ul>
-<div align="center">
-<p><img src="../../../assets/image/05/Table%205-2.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<p>همان‌طور که مشاهده می‌کنید، وقتی از <strong>checked exceptions</strong> استفاده می‌کنیم، در مواجهه با <strong>OverflowException</strong> استثنا ایجاد می‌شود. اما وقتی از <strong>unchecked exceptions</strong> استفاده می‌کنیم، هیچ استثنایی ایجاد نمی‌شود. ⚠️</p>
-<p>مشخص است که مشکلات می‌توانند از مقادیر غیرمنتظره به وجود آیند و برخی رفتارهای ناخواسته هنگام استفاده از <strong>unchecked exceptions</strong> ایجاد شوند. بنابراین، قانون کلی هنگام انجام عملیات‌های حسابی این است که همیشه از <strong>checked exceptions</strong> استفاده کنید. ✅</p>
-<p>حالا به سراغ یک استثنای بسیار رایج می‌رویم که برنامه‌نویسان اغلب با آن مواجه می‌شوند، به نام <strong>NullPointerException</strong>.</p>
-<hr>
-<h3>جلوگیری از <strong>NullPointerExceptions</strong> 🛡️</h3>
-<p><strong>NullReferenceException</strong> یک استثنای رایج است که اکثر برنامه‌نویسان تجربه کرده‌اند. این استثنا زمانی رخ می‌دهد که سعی شود به یک <strong>property</strong> یا <strong>method</strong> روی یک <strong>null object</strong> دسترسی پیدا شود.</p>
-<p>برای جلوگیری از کرش برنامه، معمولاً برنامه‌نویسان از بلوک‌های <code>try { ... } catch (NullReferenceException nre) { ... }</code> استفاده می‌کنند.<br>
-این بخشی از <strong>برنامه‌نویسی دفاعی (Defensive Programming)</strong> است. اما مشکل این است که اغلب اوقات خطا فقط <strong>لاگ</strong> می‌شود و دوباره پرتاب می‌گردد. علاوه بر این، محاسبات اضافی و بیهوده‌ای انجام می‌شود که قابل اجتناب بود.</p>
-<p>راه بسیار بهتر برای مدیریت <strong>ArgumentNullExceptions</strong>، پیاده‌سازی <strong>ArgumentNullValidator</strong> است. پارامترهای یک متد معمولاً منبع یک <strong>null object</strong> هستند. بنابراین منطقی است که قبل از استفاده، پارامترهای متد را بررسی کنیم و اگر نامعتبر بودند، یک <strong>Exception</strong> مناسب پرتاب کنیم. در مورد <strong>ArgumentNullValidator</strong>، این اعتبارسنج را در ابتدای متد قرار می‌دهیم و هر پارامتر را بررسی می‌کنیم. اگر هر پارامتری <strong>null</strong> بود، <strong>NullReferenceException</strong> پرتاب می‌شود. این کار باعث صرفه‌جویی در محاسبات و حذف نیاز به استفاده از بلوک <code>try...catch</code> می‌شود.</p>
-<hr>
-<p>برای روشن شدن موضوع، <strong>ArgumentNullValidator</strong> را پیاده‌سازی می‌کنیم و آن را در یک متد برای بررسی پارامترهای متد استفاده می‌کنیم:</p>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Person</span>
+</code></pre> <p>در این مثال:</p><ul> <li>متدهای <strong>CheckedAdd</strong> و <strong>CheckedMultiplication</strong> منجر به <strong>OverflowException</strong> می‌شوند زیرا y بیشترین مقدار برای byte است.</li><li>متدهای <strong>UncheckedAdd</strong> و <strong>UncheckedMultiplication</strong> Overflow را نادیده می‌گیرند و نتیجه اشتباه محاسبه می‌شود، بدون اینکه استثنایی رخ دهد.</li></ul> <div align="center"><p><img src="../../../assets/image/05/Table%205-2.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <p>همان‌طور که مشاهده می‌کنید، وقتی از <strong>checked exceptions</strong> استفاده می‌کنیم، در مواجهه با <strong>OverflowException</strong> استثنا ایجاد می‌شود. اما وقتی از <strong>unchecked exceptions</strong> استفاده می‌کنیم، هیچ استثنایی ایجاد نمی‌شود.</p><p>مشخص است که مشکلات می‌توانند از مقادیر غیرمنتظره به وجود آیند و برخی رفتارهای ناخواسته هنگام استفاده از <strong>unchecked exceptions</strong> ایجاد شوند. بنابراین، قانون کلی هنگام انجام عملیات‌های حسابی این است که همیشه از <strong>checked exceptions</strong> استفاده کنید.</p><p>حالا به سراغ یک استثنای بسیار رایج می‌رویم که برنامه‌نویسان اغلب با آن مواجه می‌شوند، به نام <strong>NullPointerException</strong>.</p><hr> <h3>جلوگیری از <strong>NullPointerExceptions</strong></h3><p><strong>NullReferenceException</strong> یک استثنای رایج است که اکثر برنامه‌نویسان تجربه کرده‌اند. این استثنا زمانی رخ می‌دهد که سعی شود به یک <strong>property</strong> یا <strong>method</strong> روی یک <strong>null object</strong> دسترسی پیدا شود.</p><p>برای جلوگیری از کرش برنامه، معمولاً برنامه‌نویسان از بلوک‌های <code>try { ... } catch (NullReferenceException nre) { ... }</code> استفاده می‌کنند.<br> این بخشی از <strong>برنامه‌نویسی دفاعی (Defensive Programming)</strong> است. اما مشکل این است که اغلب اوقات خطا فقط <strong>لاگ</strong> می‌شود و دوباره پرتاب می‌گردد. علاوه بر این، محاسبات اضافی و بیهوده‌ای انجام می‌شود که قابل اجتناب بود.</p><p>راه بسیار بهتر برای مدیریت <strong>ArgumentNullExceptions</strong>، پیاده‌سازی <strong>ArgumentNullValidator</strong> است. پارامترهای یک متد معمولاً منبع یک <strong>null object</strong> هستند. بنابراین منطقی است که قبل از استفاده، پارامترهای متد را بررسی کنیم و اگر نامعتبر بودند، یک <strong>Exception</strong> مناسب پرتاب کنیم. در مورد <strong>ArgumentNullValidator</strong>، این اعتبارسنج را در ابتدای متد قرار می‌دهیم و هر پارامتر را بررسی می‌کنیم. اگر هر پارامتری <strong>null</strong> بود، <strong>NullReferenceException</strong> پرتاب می‌شود. این کار باعث صرفه‌جویی در محاسبات و حذف نیاز به استفاده از بلوک <code>try...catch</code> می‌شود.</p><hr> <p>برای روشن شدن موضوع، <strong>ArgumentNullValidator</strong> را پیاده‌سازی می‌کنیم و آن را در یک متد برای بررسی پارامترهای متد استفاده می‌کنیم:</p><pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Person</span>
 {
     <span class="hljs-keyword">public</span> <span class="hljs-built_in">string</span> Name { <span class="hljs-keyword">get</span>; }
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Person</span>(<span class="hljs-params"><span class="hljs-built_in">string</span> name</span>)</span>
@@ -240,14 +92,9 @@
          Name = name;
     }
 }
-</code></pre>
-<p>در کد بالا، ما کلاس <strong>Person</strong> را با یک <strong>property</strong> فقط خواندنی به نام <strong>Name</strong> ایجاد کرده‌ایم. این شیء را به متدهای نمونه می‌دهیم تا <strong>NullReferenceException</strong> ایجاد شود.</p>
-<p>سپس <strong>Attribute</strong> مربوط به اعتبارسنج را ایجاد می‌کنیم به نام <strong>ValidatedNotNullAttribute</strong>:</p>
-<pre class="hljs"><code>[<span class="hljs-meta">AttributeUsage(AttributeTargets.All, Inherited = false, AllowMultiple = true)</span>]
+</code></pre> <p>در کد بالا، ما کلاس <strong>Person</strong> را با یک <strong>property</strong> فقط خواندنی به نام <strong>Name</strong> ایجاد کرده‌ایم. این شیء را به متدهای نمونه می‌دهیم تا <strong>NullReferenceException</strong> ایجاد شود.</p><p>سپس <strong>Attribute</strong> مربوط به اعتبارسنج را ایجاد می‌کنیم به نام <strong>ValidatedNotNullAttribute</strong>:</p><pre class="hljs"><code>[<span class="hljs-meta">AttributeUsage(AttributeTargets.All, Inherited = false, AllowMultiple = true)</span>]
 <span class="hljs-keyword">internal</span> <span class="hljs-keyword">sealed</span> <span class="hljs-keyword">class</span> <span class="hljs-title">ValidatedNotNullAttribute</span> : <span class="hljs-title">Attribute</span> { }
-</code></pre>
-<p>حالا زمان نوشتن <strong>validator</strong> است:</p>
-<pre class="hljs"><code><span class="hljs-keyword">internal</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">class</span> <span class="hljs-title">ArgumentNullValidator</span>
+</code></pre> <p>حالا زمان نوشتن <strong>validator</strong> است:</p><pre class="hljs"><code><span class="hljs-keyword">internal</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">class</span> <span class="hljs-title">ArgumentNullValidator</span>
 {
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">NotNull</span>(<span class="hljs-params"><span class="hljs-built_in">string</span> name, [ValidatedNotNull] <span class="hljs-built_in">object</span> <span class="hljs-keyword">value</span></span>)</span>
     {
@@ -257,16 +104,7 @@
         }
     }
 }
-</code></pre>
-<p><strong>ArgumentNullValidator</strong> دو آرگومان می‌گیرد:</p>
-<ol>
-<li>نام شیء</li>
-<li>خود شیء</li>
-</ol>
-<p>شیء بررسی می‌شود که <strong>null</strong> باشد یا نه. اگر <strong>null</strong> باشد، <strong>ArgumentNullException</strong> با نام شیء پرتاب می‌شود.</p>
-<hr>
-<p>متد نمونه <strong>try/catch</strong> به صورت زیر است. توجه کنید که پیام <strong>log</strong> می‌شود و استثنا پرتاب می‌گردد. اما پارامتر استثنا استفاده نمی‌شود، و در واقع این پارامتر باید حذف شود. چنین مواردی در کدها اغلب دیده می‌شود و غیرضروری است:</p>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">TryCatchExample</span>(<span class="hljs-params">Person person</span>)</span>
+</code></pre> <p><strong>ArgumentNullValidator</strong> دو آرگومان می‌گیرد:</p><ol> <li>نام شیء</li><li>خود شیء</li></ol> <p>شیء بررسی می‌شود که <strong>null</strong> باشد یا نه. اگر <strong>null</strong> باشد، <strong>ArgumentNullException</strong> با نام شیء پرتاب می‌شود.</p><hr> <p>متد نمونه <strong>try/catch</strong> به صورت زیر است. توجه کنید که پیام <strong>log</strong> می‌شود و استثنا پرتاب می‌گردد. اما پارامتر استثنا استفاده نمی‌شود، و در واقع این پارامتر باید حذف شود. چنین مواردی در کدها اغلب دیده می‌شود و غیرضروری است:</p><pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">TryCatchExample</span>(<span class="hljs-params">Person person</span>)</span>
 {
     <span class="hljs-keyword">try</span>
     {
@@ -278,50 +116,13 @@
         <span class="hljs-keyword">throw</span>;
     }
 }
-</code></pre>
-<hr>
-<p>حالا متد نمونه‌ای می‌نویسیم که از <strong>ArgumentNullValidator</strong> استفاده می‌کند، به نام <strong>ArgumentNullValidatorExample</strong>:</p>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ArgumentNullValidatorExample</span>(<span class="hljs-params">Person person</span>)</span>
+</code></pre> <hr><p>حالا متد نمونه‌ای می‌نویسیم که از <strong>ArgumentNullValidator</strong> استفاده می‌کند، به نام <strong>ArgumentNullValidatorExample</strong>:</p><pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ArgumentNullValidatorExample</span>(<span class="hljs-params">Person person</span>)</span>
 {
     ArgumentNullValidator.NotNull(<span class="hljs-string">&quot;Person&quot;</span>, person);
     Console.WriteLine(<span class="hljs-string">$&quot;Person&#x27;s Name: <span class="hljs-subst">{person.Name}</span>&quot;</span>);
     Console.ReadKey();
 }
-</code></pre>
-<p>توجه کنید که از نه خط کد شامل آکولادها، به فقط دو خط رسیده‌ایم. همچنین دیگر تلاش نمی‌کنیم تا قبل از اعتبارسنجی، مقدار را استفاده کنیم. تنها کاری که اکنون لازم است، اصلاح <strong>Main method</strong> برای اجرای این متدها است.</p>
-<p>هر متد را می‌توان با کامنت کردن یکی از متدها و اجرای برنامه، تست کرد و بهترین کار این است که قدم‌به‌قدم کد را بررسی کنید تا روند کار را مشاهده کنید.</p>
-<p>خروجی اجرای متد <strong>TryCatchExample</strong> به شکل زیر خواهد بود:</p>
-<div align="center">
-<p><img src="../../../assets/image/05/Table%205-3.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<p>خروجی اجرای متد ArgumentNullValidatorExample به شکل زیر خواهد بود:</p>
-<div align="center">
-<p><img src="../../../assets/image/05/Table%205-4.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<p>همان‌طور که در مثال قبلی مشاهده کردید، وقتی از <strong>ArgumentNullValidatorExample</strong> استفاده می‌کنیم، خطا فقط یک‌بار ثبت می‌شود. اما هنگام استفاده از <strong>TryCatchExample</strong>، خطا دو بار ثبت می‌شود.<br>
-بار اول پیام خطا معنی‌دار است، اما بار دوم پیام مبهم و نامفهوم است. با این حال، استثنایی که توسط متد فراخوان <strong>Main</strong> ثبت می‌شود، اصلاً مبهم نیست و کاملاً مفید است، زیرا نشان می‌دهد که مقدار پارامتر <strong>Person</strong> نمی‌تواند <strong>null</strong> باشد. ✅</p>
-<p>این بخش نشان داد که بررسی پارامترها در سازنده‌ها و متدها قبل از استفاده از آن‌ها چقدر ارزشمند است. با استفاده از <strong>Argument Validators</strong>، کد شما کاهش یافته، خواناتر و ایمن‌تر می‌شود. 💡</p>
-<hr>
-<h3>استثناهای قانون کسب‌وکار (Business Rule Exceptions) 🏦</h3>
-<p>استثناهای فنی (Technical Exceptions) ناشی از اشتباهات برنامه‌نویس یا مشکلات محیطی مانند کمبود فضای دیسک هستند. اما <strong>استثناهای قانون کسب‌وکار</strong> متفاوتند. این نوع استثناها برای کنترل جریان برنامه استفاده می‌شوند، در حالی که در واقع استثناها باید <strong>استثنا</strong> باشند و نه خروجی پیش‌بینی‌شده یک متد.</p>
-<p>برای مثال، فرض کنید شخصی از <strong>ATM</strong> مبلغ 100 پوند برداشت می‌کند، اما حساب او 0 پوند دارد و امکان برداشت بیش از موجودی (Overdrawn) وجود ندارد. اگر کد از استثنا استفاده کند، متد <strong>Withdraw(100)</strong> اجرا شده، موجودی کم است و <strong>InsufficientFundsException()</strong> پرتاب می‌شود.</p>
-<p>ممکن است فکر کنید این روش خوب است چون صریح و قابل شناسایی است، اما واقعیت این است که چنین کاری ایده مناسبی نیست. ✅</p>
-<p>در چنین سناریویی، بهترین روش این است که قبل از انجام تراکنش، <strong>اعتبارسنجی</strong> شود که برداشت امکان‌پذیر است یا خیر. اگر امکان‌پذیر بود، تراکنش انجام شود، وگرنه جریان برنامه به صورت معمول ادامه یافته، تراکنش لغو شده و کاربر مطلع شود بدون اینکه استثنایی پرتاب شود.</p>
-<p>این روش باعث می‌شود برنامه <strong>درست و منطقی</strong> و با استفاده از <strong>چک‌های Boolean</strong> جریان برنامه را کنترل کند و تراکنش‌های مجاز و غیرمجاز به‌درستی مدیریت شوند.</p>
-<hr>
-<h3>پیاده‌سازی دو سناریو</h3>
-<p>ما دو سناریو را پیاده‌سازی می‌کنیم:</p>
-<ol>
-<li><strong>استفاده از Business Rule Exceptions (BREs)</strong></li>
-<li><strong>استفاده از جریان برنامه معمول (Program Flow)</strong></li>
-</ol>
-<p>ابتدا یک برنامه کنسول جدید بسازید و دو فولدر ایجاد کنید:</p>
-<ul>
-<li><code>BankAccountUsingExceptions</code></li>
-<li><code>BankAccountUsingProgramFlow</code></li>
-</ul>
-<p>سپس متد <strong>Main</strong> را به شکل زیر به‌روزرسانی کنید:</p>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Main</span>(<span class="hljs-params"><span class="hljs-built_in">string</span>[] <span class="hljs-keyword">args</span></span>)</span>
+</code></pre> <p>توجه کنید که از نه خط کد شامل آکولادها، به فقط دو خط رسیده‌ایم. همچنین دیگر تلاش نمی‌کنیم تا قبل از اعتبارسنجی، مقدار را استفاده کنیم. تنها کاری که اکنون لازم است، اصلاح <strong>Main method</strong> برای اجرای این متدها است.</p><p>هر متد را می‌توان با کامنت کردن یکی از متدها و اجرای برنامه، تست کرد و بهترین کار این است که قدم‌به‌قدم کد را بررسی کنید تا روند کار را مشاهده کنید.</p><p>خروجی اجرای متد <strong>TryCatchExample</strong> به شکل زیر خواهد بود:</p><div align="center"> <p><img src="../../../assets/image/05/Table%205-3.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <p>خروجی اجرای متد ArgumentNullValidatorExample به شکل زیر خواهد بود:</p><div align="center"> <p><img src="../../../assets/image/05/Table%205-4.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <p>همان‌طور که در مثال قبلی مشاهده کردید، وقتی از <strong>ArgumentNullValidatorExample</strong> استفاده می‌کنیم، خطا فقط یک‌بار ثبت می‌شود. اما هنگام استفاده از <strong>TryCatchExample</strong>، خطا دو بار ثبت می‌شود.<br> بار اول پیام خطا معنی‌دار است، اما بار دوم پیام مبهم و نامفهوم است. با این حال، استثنایی که توسط متد فراخوان <strong>Main</strong> ثبت می‌شود، اصلاً مبهم نیست و کاملاً مفید است، زیرا نشان می‌دهد که مقدار پارامتر <strong>Person</strong> نمی‌تواند <strong>null</strong> باشد.</p><p>این بخش نشان داد که بررسی پارامترها در سازنده‌ها و متدها قبل از استفاده از آن‌ها چقدر ارزشمند است. با استفاده از <strong>Argument Validators</strong>، کد شما کاهش یافته، خواناتر و ایمن‌تر می‌شود.</p><hr> <h3>استثناهای قانون کسب‌وکار (Business Rule Exceptions)</h3><p>استثناهای فنی (Technical Exceptions) ناشی از اشتباهات برنامه‌نویس یا مشکلات محیطی مانند کمبود فضای دیسک هستند. اما <strong>استثناهای قانون کسب‌وکار</strong> متفاوتند. این نوع استثناها برای کنترل جریان برنامه استفاده می‌شوند، در حالی که در واقع استثناها باید <strong>استثنا</strong> باشند و نه خروجی پیش‌بینی‌شده یک متد.</p><p>برای مثال، فرض کنید شخصی از <strong>ATM</strong> مبلغ 100 پوند برداشت می‌کند، اما حساب او 0 پوند دارد و امکان برداشت بیش از موجودی (Overdrawn) وجود ندارد. اگر کد از استثنا استفاده کند، متد <strong>Withdraw(100)</strong> اجرا شده، موجودی کم است و <strong>InsufficientFundsException()</strong> پرتاب می‌شود.</p><p>ممکن است فکر کنید این روش خوب است چون صریح و قابل شناسایی است، اما واقعیت این است که چنین کاری ایده مناسبی نیست.</p><p>در چنین سناریویی، بهترین روش این است که قبل از انجام تراکنش، <strong>اعتبارسنجی</strong> شود که برداشت امکان‌پذیر است یا خیر. اگر امکان‌پذیر بود، تراکنش انجام شود، وگرنه جریان برنامه به صورت معمول ادامه یافته، تراکنش لغو شده و کاربر مطلع شود بدون اینکه استثنایی پرتاب شود.</p><p>این روش باعث می‌شود برنامه <strong>درست و منطقی</strong> و با استفاده از <strong>چک‌های Boolean</strong> جریان برنامه را کنترل کند و تراکنش‌های مجاز و غیرمجاز به‌درستی مدیریت شوند.</p><hr> <h3>پیاده‌سازی دو سناریو</h3><p>ما دو سناریو را پیاده‌سازی می‌کنیم:</p><ol> <li><strong>استفاده از Business Rule Exceptions (BREs)</strong></li><li><strong>استفاده از جریان برنامه معمول (Program Flow)</strong></li></ol> <p>ابتدا یک برنامه کنسول جدید بسازید و دو فولدر ایجاد کنید:</p><ul> <li><code>BankAccountUsingExceptions</code></li><li><code>BankAccountUsingProgramFlow</code></li></ul> <p>سپس متد <strong>Main</strong> را به شکل زیر به‌روزرسانی کنید:</p><pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Main</span>(<span class="hljs-params"><span class="hljs-built_in">string</span>[] <span class="hljs-keyword">args</span></span>)</span>
 {
     <span class="hljs-keyword">var</span> usingBrExceptions = <span class="hljs-keyword">new</span> UsingBusinessRuleExceptions();
     usingBrExceptions.Run();
@@ -329,15 +130,7 @@
     <span class="hljs-keyword">var</span> usingPflow = <span class="hljs-keyword">new</span> UsingProgramFlow();
     usingPflow.Run();
 }
-</code></pre>
-<ul>
-<li><code>UsingBusinessRuleExceptions()</code> سناریویی را نشان می‌دهد که استثناها به عنوان خروجی پیش‌بینی‌شده برای کنترل جریان برنامه استفاده می‌شوند.</li>
-<li><code>UsingProgramFlow()</code> جریان برنامه تمیز و بدون شرایط استثنایی را نشان می‌دهد. ✅</li>
-</ul>
-<hr>
-<h3>کلاس حساب جاری (CurrentAccount) 💳</h3>
-<p>یک کلاس به نام <strong>CurrentAccount</strong> برای نگهداری اطلاعات حساب ایجاد کنید:</p>
-<pre class="hljs"><code><span class="hljs-keyword">internal</span> <span class="hljs-keyword">class</span> <span class="hljs-title">CurrentAccount</span>
+</code></pre> <ul><li><code>UsingBusinessRuleExceptions()</code> سناریویی را نشان می‌دهد که استثناها به عنوان خروجی پیش‌بینی‌شده برای کنترل جریان برنامه استفاده می‌شوند.</li><li><code>UsingProgramFlow()</code> جریان برنامه تمیز و بدون شرایط استثنایی را نشان می‌دهد.</li></ul> <hr><h3>کلاس حساب جاری (CurrentAccount)</h3><p>یک کلاس به نام <strong>CurrentAccount</strong> برای نگهداری اطلاعات حساب ایجاد کنید:</p><pre class="hljs"><code><span class="hljs-keyword">internal</span> <span class="hljs-keyword">class</span> <span class="hljs-title">CurrentAccount</span>
 {
     <span class="hljs-keyword">public</span> <span class="hljs-built_in">long</span> CustomerId { <span class="hljs-keyword">get</span>; }
     <span class="hljs-keyword">public</span> <span class="hljs-built_in">decimal</span> AgreedOverdraft { <span class="hljs-keyword">get</span>; }
@@ -347,10 +140,7 @@
     <span class="hljs-keyword">public</span> <span class="hljs-built_in">int</span> AtmDailyLimit { <span class="hljs-keyword">get</span>; }
     <span class="hljs-keyword">public</span> <span class="hljs-built_in">int</span> AtmWithdrawalAmountToday { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">private</span> <span class="hljs-keyword">set</span>; }
 }
-</code></pre>
-<p>ویژگی‌های این کلاس فقط از طریق <strong>سازنده</strong> یا درون کلاس قابل مقداردهی هستند.</p>
-<p>سازنده کلاس را اضافه کنید که تنها پارامترش <strong>customerId</strong> باشد:</p>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">CurrentAccount</span>(<span class="hljs-params"><span class="hljs-built_in">long</span> customerId</span>)</span>
+</code></pre> <p>ویژگی‌های این کلاس فقط از طریق <strong>سازنده</strong> یا درون کلاس قابل مقداردهی هستند.</p><p>سازنده کلاس را اضافه کنید که تنها پارامترش <strong>customerId</strong> باشد:</p><pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">CurrentAccount</span>(<span class="hljs-params"><span class="hljs-built_in">long</span> customerId</span>)</span>
 {
     CustomerId = customerId;
     AgreedOverdraft = GetAgreedOverdraftLimit();
@@ -360,54 +150,27 @@
     AtmDailyLimit = GetAtmDailyLimit();
     AtmWithdrawalAmountToday = <span class="hljs-number">0</span>;
 }
-</code></pre>
-<hr>
-<h3>پیاده‌سازی متدهای کمکی</h3>
-<ul>
-<li>محدودیت برداشت توافق‌شده:</li>
-</ul>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-built_in">decimal</span> <span class="hljs-title">GetAgreedOverdraftLimit</span>()</span>
+</code></pre> <hr><h3>پیاده‌سازی متدهای کمکی</h3><ul> <li>محدودیت برداشت توافق‌شده:</li></ul> <pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-built_in">decimal</span> <span class="hljs-title">GetAgreedOverdraftLimit</span>()</span>
 {
     <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
 }
-</code></pre>
-<ul>
-<li>امکان برداشت بیش از موجودی:</li>
-</ul>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-built_in">bool</span> <span class="hljs-title">GetIsAllowedToGoOverdrawn</span>()</span>
+</code></pre> <ul><li>امکان برداشت بیش از موجودی:</li></ul> <pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-built_in">bool</span> <span class="hljs-title">GetIsAllowedToGoOverdrawn</span>()</span>
 {
     <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
 }
-</code></pre>
-<ul>
-<li>موجودی فعلی حساب:</li>
-</ul>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-built_in">decimal</span> <span class="hljs-title">GetCurrentBalance</span>()</span>
+</code></pre> <ul><li>موجودی فعلی حساب:</li></ul> <pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-built_in">decimal</span> <span class="hljs-title">GetCurrentBalance</span>()</span>
 {
     <span class="hljs-keyword">return</span> <span class="hljs-number">250.00</span>M;
 }
-</code></pre>
-<ul>
-<li>موجودی قابل برداشت:</li>
-</ul>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-built_in">decimal</span> <span class="hljs-title">GetAvailableBalance</span>()</span>
+</code></pre> <ul><li>موجودی قابل برداشت:</li></ul> <pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-built_in">decimal</span> <span class="hljs-title">GetAvailableBalance</span>()</span>
 {
     <span class="hljs-keyword">return</span> <span class="hljs-number">173.64</span>M;
 }
-</code></pre>
-<ul>
-<li>محدودیت روزانه ATM:</li>
-</ul>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-built_in">int</span> <span class="hljs-title">GetAtmDailyLimit</span>()</span>
+</code></pre> <ul><li>محدودیت روزانه ATM:</li></ul> <pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-built_in">int</span> <span class="hljs-title">GetAtmDailyLimit</span>()</span>
 {
     <span class="hljs-keyword">return</span> <span class="hljs-number">250</span>;
 }
-</code></pre>
-<hr>
-<p>در مرحله بعد، کد دو سناریو را پیاده‌سازی خواهیم کرد: یکی با استفاده از <strong>Business Rule Exceptions</strong> و دیگری با جریان برنامه معمول برای مدیریت شرایط مختلف در برنامه. ✅</p>
-<h3>مثال ۱ – مدیریت شرایط با استثناهای قانون کسب‌وکار 🏦💥</h3>
-<p>یک کلاس جدید به نام <strong>UsingBusinessRuleExceptions</strong> به پروژه اضافه کنید و متد زیر را در آن بنویسید:</p>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">UsingBusinessRuleExceptions</span>
+</code></pre> <hr><p>در مرحله بعد، کد دو سناریو را پیاده‌سازی خواهیم کرد: یکی با استفاده از <strong>Business Rule Exceptions</strong> و دیگری با جریان برنامه معمول برای مدیریت شرایط مختلف در برنامه.</p><h3>مثال ۱ – مدیریت شرایط با استثناهای قانون کسب‌وکار</h3><p>یک کلاس جدید به نام <strong>UsingBusinessRuleExceptions</strong> به پروژه اضافه کنید و متد زیر را در آن بنویسید:</p><pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">UsingBusinessRuleExceptions</span>
 {
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Run</span>()</span>
     {
@@ -415,10 +178,7 @@
         ExceedAvailableBalance();
     }
 }
-</code></pre>
-<p>متد <strong>Run()</strong> دو متد را فراخوانی می‌کند:<br>
-1️⃣ <strong>ExceedAtmDailyLimit()</strong>: این متد به صورت عمدی مقدار برداشت روزانه مجاز از ATM را بیش از حد تعیین می‌کند و باعث پرتاب <strong>ExceededAtmDailyLimitException</strong> می‌شود.</p>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ExceedAtmDailyLimit</span>()</span>
+</code></pre> <p>متد <strong>Run()</strong> دو متد را فراخوانی می‌کند:<br> 1⃣ <strong>ExceedAtmDailyLimit()</strong>: این متد به صورت عمدی مقدار برداشت روزانه مجاز از ATM را بیش از حد تعیین می‌کند و باعث پرتاب <strong>ExceededAtmDailyLimitException</strong> می‌شود.</p><pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ExceedAtmDailyLimit</span>()</span>
 {
     <span class="hljs-keyword">try</span>
     {
@@ -431,9 +191,7 @@
         Console.WriteLine(eadlex.Message);
     }
 }
-</code></pre>
-<p>2️⃣ <strong>ExceedAvailableBalance()</strong>: این متد نیز به صورت عمدی باعث <strong>InsufficientFundsException</strong> می‌شود، زیرا موجودی قابل برداشت کمتر از مقدار درخواست‌شده است:</p>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ExceedAvailableBalance</span>()</span>
+</code></pre> <p>2⃣ <strong>ExceedAvailableBalance()</strong>: این متد نیز به صورت عمدی باعث <strong>InsufficientFundsException</strong> می‌شود، زیرا موجودی قابل برداشت کمتر از مقدار درخواست‌شده است:</p><pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ExceedAvailableBalance</span>()</span>
 {
     <span class="hljs-keyword">try</span>
     {
@@ -446,12 +204,7 @@
         Console.WriteLine(ifex.Message);
     }
 }
-</code></pre>
-<p>با این کار، مشاهده می‌کنیم که چگونه می‌توان شرایط مختلف را با استفاده از <strong>Business Rule Exceptions (BREs)</strong> مدیریت کرد. ✅</p>
-<hr>
-<h3>مثال ۲ – مدیریت شرایط با جریان برنامه معمول 🏦🟢</h3>
-<p>یک کلاس به نام <strong>UsingProgramFlow</strong> ایجاد کنید و کد زیر را در آن قرار دهید:</p>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">UsingProgramFlow</span>
+</code></pre> <p>با این کار، مشاهده می‌کنیم که چگونه می‌توان شرایط مختلف را با استفاده از <strong>Business Rule Exceptions (BREs)</strong> مدیریت کرد.</p><hr> <h3>مثال ۲ – مدیریت شرایط با جریان برنامه معمول</h3><p>یک کلاس به نام <strong>UsingProgramFlow</strong> ایجاد کنید و کد زیر را در آن قرار دهید:</p><pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">UsingProgramFlow</span>
 {
     <span class="hljs-keyword">private</span> <span class="hljs-built_in">int</span> _requestedAmount;
     <span class="hljs-keyword">private</span> <span class="hljs-keyword">readonly</span> CurrentAccount _currentAccount;
@@ -461,10 +214,7 @@
         _currentAccount = <span class="hljs-keyword">new</span> CurrentAccount(<span class="hljs-number">1</span>);
     }
 }
-</code></pre>
-<p>در سازنده کلاس، یک <strong>CurrentAccount</strong> ایجاد شده و شناسه مشتری به آن پاس داده می‌شود.</p>
-<p>سپس متد <strong>Run()</strong> را اضافه کنید:</p>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Run</span>()</span>
+</code></pre> <p>در سازنده کلاس، یک <strong>CurrentAccount</strong> ایجاد شده و شناسه مشتری به آن پاس داده می‌شود.</p><p>سپس متد <strong>Run()</strong> را اضافه کنید:</p><pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Run</span>()</span>
 {
     _requestedAmount = <span class="hljs-number">300</span>;
     Console.WriteLine(<span class="hljs-string">$&quot;Request: Withdraw <span class="hljs-subst">{_requestedAmount}</span>&quot;</span>);
@@ -478,31 +228,17 @@
     Console.WriteLine(<span class="hljs-string">$&quot;Request: Withdraw <span class="hljs-subst">{_requestedAmount}</span>&quot;</span>);
     WithdrawMoney();
 }
-</code></pre>
-<p>متد <strong>Run()</strong> سه بار مقدار <strong>_requestedAmount</strong> را تعیین می‌کند و هر بار، پیامی در کنسول چاپ می‌شود قبل از فراخوانی متد <strong>WithdrawMoney()</strong>.</p>
-<hr>
-<h3>بررسی محدودیت‌ها با متدهای Boolean ✅</h3>
-<ul>
-<li>بررسی حد برداشت روزانه ATM:</li>
-</ul>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-built_in">bool</span> <span class="hljs-title">ExceedsDailyLimit</span>()</span>
+</code></pre> <p>متد <strong>Run()</strong> سه بار مقدار <strong>_requestedAmount</strong> را تعیین می‌کند و هر بار، پیامی در کنسول چاپ می‌شود قبل از فراخوانی متد <strong>WithdrawMoney()</strong>.</p><hr> <h3>بررسی محدودیت‌ها با متدهای Boolean</h3><ul> <li>بررسی حد برداشت روزانه ATM:</li></ul> <pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-built_in">bool</span> <span class="hljs-title">ExceedsDailyLimit</span>()</span>
 {
     <span class="hljs-keyword">return</span> (_requestedAmount &gt; _currentAccount.AtmDailyLimit)
         || (_requestedAmount + _currentAccount.AtmWithdrawalAmountToday &gt;
             _currentAccount.AtmDailyLimit);
 }
-</code></pre>
-<ul>
-<li>بررسی موجودی قابل برداشت:</li>
-</ul>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-built_in">bool</span> <span class="hljs-title">ExceedsAvailableBalance</span>()</span>
+</code></pre> <ul><li>بررسی موجودی قابل برداشت:</li></ul> <pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-built_in">bool</span> <span class="hljs-title">ExceedsAvailableBalance</span>()</span>
 {
     <span class="hljs-keyword">return</span> _requestedAmount &gt; _currentAccount.AvailableBalance;
 }
-</code></pre>
-<hr>
-<h3>متد نهایی WithdrawMoney() 💳</h3>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">WithdrawMoney</span>()</span>
+</code></pre> <hr><h3>متد نهایی WithdrawMoney()</h3><pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">WithdrawMoney</span>()</span>
 {
     <span class="hljs-keyword">if</span> (ExceedsDailyLimit())
         Console.WriteLine(<span class="hljs-string">&quot;Cannot exceed ATM Daily Limit. Request denied.&quot;</span>);
@@ -511,41 +247,7 @@
     <span class="hljs-keyword">else</span>
         Console.WriteLine(<span class="hljs-string">&quot;Request granted. Take card and cash.&quot;</span>);
 }
-</code></pre>
-<p>در این روش، جریان برنامه بدون استفاده از <strong>BREs</strong> مدیریت می‌شود. روش منطقی و خواناتر است، زیرا:</p>
-<ul>
-<li>اگر مقدار درخواست‌شده بیش از حد برداشت روزانه باشد، درخواست رد می‌شود.</li>
-<li>اگر مقدار درخواست‌شده بیش از موجودی قابل برداشت باشد، باز هم رد می‌شود.</li>
-<li>در غیر این صورت، تراکنش با موفقیت انجام می‌شود. ✅</li>
-</ul>
-<hr>
-<p>می‌بینید که کنترل جریان برنامه با <strong>منطق موجود</strong> بسیار تمیزتر و درست‌تر است تا اینکه انتظار داشته باشیم <strong>استثناها</strong> پرتاب شوند. استثناها باید تنها برای شرایط <strong>استثنایی و غیرعادی</strong> استفاده شوند.</p>
-<p>وقتی استثناها به درستی پرتاب می‌شوند، مهم است که <strong>اطلاعات معنی‌دار</strong> ارائه کنند. پیام‌های خطای مبهم هیچ کمکی نمی‌کنند و می‌توانند استرس غیرضروری برای کاربران یا توسعه‌دهندگان ایجاد کنند. 💡</p>
-<p>در بخش بعدی، به نحوه ارائه <strong>اطلاعات مفید و معنی‌دار</strong> در استثناهای پرتاب‌شده خواهیم پرداخت.</p>
-<h3>استثناها باید اطلاعات معنی‌دار ارائه کنند ⚠️💡</h3>
-<p>خطاهای بحرانی که پیام می‌دهند «هیچ خطایی وجود ندارد» و سپس برنامه را متوقف می‌کنند، اصلاً مفید نیستند. من شخصاً با چنین خطای بحرانی روبرو شده‌ام: خطایی که برنامه را متوقف می‌کند، اما پیام می‌دهد که هیچ خطایی وجود ندارد! 🤯</p>
-<p>اگر هیچ خطایی نیست، پس چرا هشدار خطای بحرانی روی صفحه ظاهر شده و چرا نمی‌توانم از برنامه استفاده کنم؟ واضح است که برای پرتاب این استثنا، باید خطای بحرانی واقعی رخ داده باشد، اما <strong>کجا و چرا؟</strong></p>
-<p>این نوع استثناها زمانی آزاردهنده‌تر می‌شوند که در <strong>فریمورک یا کتابخانه‌ای</strong> رخ دهند که شما کنترل آن را ندارید و به سورس‌کد آن دسترسی ندارید. چنین استثناهایی باعث می‌شوند برنامه‌نویسان از سر ناامیدی حرف‌های منفی بزنند. یکی از دلایل اصلی ناامیدی این است که <strong>کد خطا داده، اما هیچ اطلاعات مفیدی برای فهم مشکل یا اقدام اصلاحی ارائه نمی‌کند.</strong></p>
-<p>استثناها باید اطلاعاتی <strong>کاربرپسند و قابل فهم</strong> ارائه دهند، مخصوصاً برای کسانی که از نظر فنی تجربه کمی دارند. در تجربه من در توسعه نرم‌افزارهای آزمون و ارزیابی دیسکلسی، بسیاری از معلمان و تکنسین‌های IT هنگام مواجهه با پیام‌های استثنا، اغلب گیج می‌شدند.</p>
-<p>مثالی که بسیاری از کاربران نرم‌افزار با آن سردرگم شدند:<br>
-<strong>Error 76: Path not found</strong> 🗂️❌<br>
-این یک استثنای قدیمی مایکروسافت است که از زمان Windows 95 وجود داشته و هنوز هم وجود دارد. پیام خطا برای کاربر نهایی کاملاً بی‌فایده است. برای کاربر مفید خواهد بود که بداند <strong>کدام فایل و مسیر پیدا نشده</strong> و چه اقداماتی برای رفع مشکل انجام دهد.</p>
-<p>راه‌حل پیشنهادی:<br>
-1️⃣ بررسی وجود مسیر یا فایل<br>
-2️⃣ اگر مسیر وجود ندارد یا دسترسی denied است، نمایش دیالوگ save/open فایل<br>
-3️⃣ ذخیره مسیر انتخاب‌شده توسط کاربر در یک فایل تنظیمات برای استفاده بعدی<br>
-4️⃣ در اجراهای بعدی همان کد، از مسیر انتخاب‌شده توسط کاربر استفاده شود</p>
-<p>اگر همچنان پیام خطا را نگه دارید، حداقل نام فایل یا مسیر گمشده را نشان دهید.</p>
-<hr>
-<h3>ایجاد استثناهای سفارشی 🛠️✨</h3>
-<p>فریمورک <strong>Microsoft .NET</strong> تعداد زیادی استثنا دارد که می‌توانید از آن‌ها استفاده کنید، اما گاهی نیاز است یک <strong>استثنای سفارشی</strong> بسازید که اطلاعات دقیق‌تر و کاربرپسندتری ارائه دهد.</p>
-<p>برای ایجاد استثنای سفارشی کافی است:</p>
-<ul>
-<li>نام کلاس با <strong>Exception</strong> ختم شود</li>
-<li>از <strong>System.Exception</strong> ارث‌بری کند</li>
-<li>سه سازنده داشته باشد:</li>
-</ul>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">TickerListNotFoundException</span> : <span class="hljs-title">Exception</span>
+</code></pre> <p>در این روش، جریان برنامه بدون استفاده از <strong>BREs</strong> مدیریت می‌شود. روش منطقی و خواناتر است، زیرا:</p><ul> <li>اگر مقدار درخواست‌شده بیش از حد برداشت روزانه باشد، درخواست رد می‌شود.</li><li>اگر مقدار درخواست‌شده بیش از موجودی قابل برداشت باشد، باز هم رد می‌شود.</li><li>در غیر این صورت، تراکنش با موفقیت انجام می‌شود.</li></ul> <hr><p>می‌بینید که کنترل جریان برنامه با <strong>منطق موجود</strong> بسیار تمیزتر و درست‌تر است تا اینکه انتظار داشته باشیم <strong>استثناها</strong> پرتاب شوند. استثناها باید تنها برای شرایط <strong>استثنایی و غیرعادی</strong> استفاده شوند.</p><p>وقتی استثناها به درستی پرتاب می‌شوند، مهم است که <strong>اطلاعات معنی‌دار</strong> ارائه کنند. پیام‌های خطای مبهم هیچ کمکی نمی‌کنند و می‌توانند استرس غیرضروری برای کاربران یا توسعه‌دهندگان ایجاد کنند.</p><p>در بخش بعدی، به نحوه ارائه <strong>اطلاعات مفید و معنی‌دار</strong> در استثناهای پرتاب‌شده خواهیم پرداخت.</p><h3>استثناها باید اطلاعات معنی‌دار ارائه کنند</h3><p>خطاهای بحرانی که پیام می‌دهند «هیچ خطایی وجود ندارد» و سپس برنامه را متوقف می‌کنند، اصلاً مفید نیستند. من شخصاً با چنین خطای بحرانی روبرو شده‌ام: خطایی که برنامه را متوقف می‌کند، اما پیام می‌دهد که هیچ خطایی وجود ندارد!</p><p>اگر هیچ خطایی نیست، پس چرا هشدار خطای بحرانی روی صفحه ظاهر شده و چرا نمی‌توانم از برنامه استفاده کنم؟ واضح است که برای پرتاب این استثنا، باید خطای بحرانی واقعی رخ داده باشد، اما <strong>کجا و چرا؟</strong></p><p>این نوع استثناها زمانی آزاردهنده‌تر می‌شوند که در <strong>فریمورک یا کتابخانه‌ای</strong> رخ دهند که شما کنترل آن را ندارید و به سورس‌کد آن دسترسی ندارید. چنین استثناهایی باعث می‌شوند برنامه‌نویسان از سر ناامیدی حرف‌های منفی بزنند. یکی از دلایل اصلی ناامیدی این است که <strong>کد خطا داده، اما هیچ اطلاعات مفیدی برای فهم مشکل یا اقدام اصلاحی ارائه نمی‌کند.</strong></p><p>استثناها باید اطلاعاتی <strong>کاربرپسند و قابل فهم</strong> ارائه دهند، مخصوصاً برای کسانی که از نظر فنی تجربه کمی دارند. در تجربه من در توسعه نرم‌افزارهای آزمون و ارزیابی دیسکلسی، بسیاری از معلمان و تکنسین‌های IT هنگام مواجهه با پیام‌های استثنا، اغلب گیج می‌شدند.</p><p>مثالی که بسیاری از کاربران نرم‌افزار با آن سردرگم شدند:<br><strong>Error 76: Path not found</strong><br> این یک استثنای قدیمی مایکروسافت است که از زمان Windows 95 وجود داشته و هنوز هم وجود دارد. پیام خطا برای کاربر نهایی کاملاً بی‌فایده است. برای کاربر مفید خواهد بود که بداند <strong>کدام فایل و مسیر پیدا نشده</strong> و چه اقداماتی برای رفع مشکل انجام دهد.</p><p>راه‌حل پیشنهادی:<br> 1⃣ بررسی وجود مسیر یا فایل<br> 2⃣ اگر مسیر وجود ندارد یا دسترسی denied است، نمایش دیالوگ save/open فایل<br> 3⃣ ذخیره مسیر انتخاب‌شده توسط کاربر در یک فایل تنظیمات برای استفاده بعدی<br> 4⃣ در اجراهای بعدی همان کد، از مسیر انتخاب‌شده توسط کاربر استفاده شود</p><p>اگر همچنان پیام خطا را نگه دارید، حداقل نام فایل یا مسیر گمشده را نشان دهید.</p><hr> <h3>ایجاد استثناهای سفارشی</h3><p>فریمورک <strong>Microsoft .NET</strong> تعداد زیادی استثنا دارد که می‌توانید از آن‌ها استفاده کنید، اما گاهی نیاز است یک <strong>استثنای سفارشی</strong> بسازید که اطلاعات دقیق‌تر و کاربرپسندتری ارائه دهد.</p><p>برای ایجاد استثنای سفارشی کافی است:</p><ul> <li>نام کلاس با <strong>Exception</strong> ختم شود</li><li>از <strong>System.Exception</strong> ارث‌بری کند</li><li>سه سازنده داشته باشد:</li></ul> <pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">TickerListNotFoundException</span> : <span class="hljs-title">Exception</span>
 {
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">TickerListNotFoundException</span>() : <span class="hljs-title">base</span>()</span> { }
 
@@ -555,25 +257,13 @@
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">TickerListNotFoundException</span>(<span class="hljs-params"><span class="hljs-built_in">string</span> message, Exception innerException</span>)
         : <span class="hljs-title">base</span>(<span class="hljs-params">message, innerException</span>)</span> { }
 }
-</code></pre>
-<p><strong>TickerListNotFoundException</strong> از کلاس <strong>System.Exception</strong> ارث‌بری می‌کند و سه سازنده اجباری دارد:<br>
-1️⃣ سازنده پیش‌فرض<br>
-2️⃣ سازنده‌ای که پیام متنی استثنا را می‌پذیرد<br>
-3️⃣ سازنده‌ای که پیام متنی و یک استثنای داخلی (<strong>InnerException</strong>) می‌پذیرد</p>
-<hr>
-<h3>اجرای سازنده‌های استثنای سفارشی 💻</h3>
-<p>در متد <strong>Main</strong> سه متد برای آزمایش سازنده‌ها اجرا می‌کنیم:</p>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Main</span>(<span class="hljs-params"><span class="hljs-built_in">string</span>[] <span class="hljs-keyword">args</span></span>)</span>
+</code></pre> <p><strong>TickerListNotFoundException</strong> از کلاس <strong>System.Exception</strong> ارث‌بری می‌کند و سه سازنده اجباری دارد:<br> 1⃣ سازنده پیش‌فرض<br> 2⃣ سازنده‌ای که پیام متنی استثنا را می‌پذیرد<br> 3⃣ سازنده‌ای که پیام متنی و یک استثنای داخلی (<strong>InnerException</strong>) می‌پذیرد</p><hr> <h3>اجرای سازنده‌های استثنای سفارشی</h3><p>در متد <strong>Main</strong> سه متد برای آزمایش سازنده‌ها اجرا می‌کنیم:</p><pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Main</span>(<span class="hljs-params"><span class="hljs-built_in">string</span>[] <span class="hljs-keyword">args</span></span>)</span>
 {
     ThrowCustomExceptionA();
     ThrowCustomExceptionB();
     ThrowCustomExceptionC();
 }
-</code></pre>
-<ul>
-<li><strong>ThrowCustomExceptionA()</strong>: استفاده از سازنده پیش‌فرض</li>
-</ul>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ThrowCustomExceptionA</span>()</span>
+</code></pre> <ul><li><strong>ThrowCustomExceptionA()</strong>: استفاده از سازنده پیش‌فرض</li></ul> <pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ThrowCustomExceptionA</span>()</span>
 {
     <span class="hljs-keyword">try</span>
     {
@@ -585,11 +275,7 @@
         Console.WriteLine(tlnfex.Message);
     }
 }
-</code></pre>
-<ul>
-<li><strong>ThrowCustomExceptionB()</strong>: استفاده از سازنده با پیام متنی</li>
-</ul>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ThrowCustomExceptionB</span>()</span>
+</code></pre> <ul><li><strong>ThrowCustomExceptionB()</strong>: استفاده از سازنده با پیام متنی</li></ul> <pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ThrowCustomExceptionB</span>()</span>
 {
     <span class="hljs-keyword">try</span>
     {
@@ -601,11 +287,7 @@
         Console.WriteLine(tlnfex.Message);
     }
 }
-</code></pre>
-<ul>
-<li><strong>ThrowCustomExceptionC()</strong>: استفاده از سازنده با پیام متنی و استثنای داخلی</li>
-</ul>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ThrowCustomExceptionC</span>()</span>
+</code></pre> <ul><li><strong>ThrowCustomExceptionC()</strong>: استفاده از سازنده با پیام متنی و استثنای داخلی</li></ul> <pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ThrowCustomExceptionC</span>()</span>
 {
     <span class="hljs-keyword">try</span>
     {
@@ -623,169 +305,216 @@
         Console.WriteLine(<span class="hljs-string">$&quot;<span class="hljs-subst">{tlnfex.Message}</span>\n<span class="hljs-subst">{tlnfex.InnerException}</span>&quot;</span>);
     }
 }
-</code></pre>
-<p>در این مثال، پیام <strong>معنادار</strong> و استثنای داخلی جزئیات بیشتری درباره فایل پیدا نشده ارائه می‌کند. 📝</p>
-<hr>
-<h3>نکات بهترین شیوه در مدیریت استثناها در C# ✅</h3>
-<ul>
-<li>از بلوک‌های <strong>try/catch/finally</strong> برای بازیابی خطا یا آزادسازی منابع استفاده کنید.</li>
-<li>شرایط معمول را بدون پرتاب استثنا مدیریت کنید.</li>
-<li>کلاس‌ها را طوری طراحی کنید که امکان جلوگیری از استثنا وجود داشته باشد.</li>
-<li>به جای بازگرداندن کد خطا، استثنا پرتاب کنید.</li>
-<li>از انواع استثنای از پیش تعریف‌شده .NET استفاده کنید.</li>
-<li>نام کلاس‌های استثنا با <strong>Exception</strong> خاتمه یابد.</li>
-<li>سه سازنده در کلاس‌های استثنای سفارشی درج شود.</li>
-<li>داده‌های استثنا در اجرای راه دور نیز قابل دسترسی باشند.</li>
-<li>پیام‌های خطا از نظر دستوری صحیح باشند.</li>
-<li>پیام‌های محلی‌سازی‌شده در هر استثنا درج شود.</li>
-<li>ویژگی‌های اضافی لازم در استثناهای سفارشی ارائه شود.</li>
-<li>مکان پرتاب استثنا طوری باشد که <strong>StackTrace</strong> مفید باشد.</li>
-<li>از متدهای سازنده استثنا استفاده کنید.</li>
-<li>هنگام ناتمام ماندن متدها به دلیل استثنا، وضعیت را بازگردانید.</li>
-</ul>
-<p>اکنون زمان آن است که خلاصه‌ای از آنچه درباره <strong>مدیریت استثناها</strong> آموخته‌ایم ارائه دهیم.</p>
-<h3>خلاصه 📚✨</h3>
-<p>در این فصل، شما با <strong>استثناهای چک‌شده (checked exceptions)</strong> و <strong>استثناهای چک‌نشده (unchecked exceptions)</strong> آشنا شدید.</p>
-<ul>
-<li><strong>Checked exceptions</strong> از ورود شرایط overflow حسابی به کد تولید جلوگیری می‌کنند، زیرا این خطاها در <strong>زمان کامپایل</strong> شناسایی می‌شوند.</li>
-<li><strong>Unchecked exceptions</strong> در زمان کامپایل شناسایی نمی‌شوند و ممکن است وارد کد تولید شوند، که می‌تواند باعث ایجاد باگ‌های سخت برای ردیابی و حتی کرش برنامه شود. ⚠️</li>
-</ul>
-<p>سپس با <strong>NullPointerException</strong> و نحوه اعتبارسنجی پارامترهای ورودی با استفاده از <strong>Attribute</strong> و <strong>Validator</strong> سفارشی آشنا شدید که در بالای متدها قرار می‌گیرند. این روش به شما اجازه می‌دهد بازخورد معنی‌دار ارائه دهید و برنامه‌های مقاوم‌تری بسازید. ✅</p>
-<p>بعد از آن، استفاده از <strong>BREs (Business Rule Exceptions)</strong> برای کنترل جریان برنامه بررسی شد. دیدید چگونه جریان برنامه با انتظار خروجی استثنایی کنترل می‌شود و سپس نشان داده شد که با استفاده از <strong>چک‌های شرطی (conditional checks)</strong> می‌توان کنترل بهتری بر جریان برنامه داشت، بدون اینکه نیاز به استفاده از استثناها باشد.</p>
-<p>بحث بعدی درباره اهمیت ارائه <strong>پیام‌های استثنایی معنی‌دار</strong> بود و اینکه چگونه می‌توان این کار را با نوشتن <strong>استثناهای سفارشی</strong> انجام داد که از کلاس Exception ارث‌بری کرده و سه سازنده ضروری را پیاده‌سازی می‌کنند.</p>
-<p>از طریق مثال‌های ارائه‌شده، یاد گرفتید چگونه از استثناهای سفارشی استفاده کنید و چگونه به <strong>دیباگ بهتر و رفع مشکلات سریع‌تر</strong> کمک می‌کنند. 🛠️</p>
-<p>اکنون زمان آن است که آنچه آموخته‌اید را با پاسخ به چند سؤال تمرین کنید. همچنین منابع پیشنهادی برای مطالعه بیشتر ارائه شده است.</p>
-<hr>
-<h3>سؤالات ❓</h3>
-<p>1️⃣ استثنای چک‌شده (checked exception) چیست؟<br>
-2️⃣ استثنای چک‌نشده (unchecked exception) چیست؟<br>
-3️⃣ استثنای overflow حسابی (arithmetic overflow exception) چیست؟<br>
-4️⃣ NullPointerException چیست؟<br>
-5️⃣ چگونه می‌توان پارامترهای null را اعتبارسنجی کرد تا کیفیت کد بهبود یابد؟<br>
-6️⃣ BRE مخفف چیست؟<br>
-7️⃣ آیا استفاده از BREها روش خوبی است یا بد؟ چرا؟<br>
-8️⃣ جایگزین BREها چیست، آیا خوب است یا بد؟ چرا؟<br>
-9️⃣ چگونه می‌توان پیام‌های استثنایی معنی‌دار ارائه داد؟<br>
-🔟 الزامات نوشتن استثناهای سفارشی چیست؟</p>
-<hr>
-<h3>منابع پیشنهادی برای مطالعه بیشتر 📖</h3>
-<ul>
-<li><a href="https://docs.microsoft.com/en-us/dotnet/standard/exceptions/">Documentation رسمی Microsoft برای مدیریت استثناها در .NET</a></li>
-<li><a href="https://reflectoring.io/business-exceptions/">مقاله‌ای درباره دلایل منفی بودن BREها</a></li>
-<li><a href="https://docs.microsoft.com/en-us/dotnet/standard/exceptions/best-practices-for-exceptions">بهترین شیوه‌های Microsoft برای مدیریت استثناها در C#</a></li>
-</ul>
-<p>این منابع به شما کمک می‌کنند درک عمیق‌تری از مدیریت استثناها و بهترین شیوه‌ها در C# پیدا کنید.</p>
-
-  </main>
-
-  <!-- فوتر مشترک -->
-  <footer class="footer">
-    <div class="container">
-      <p>
-        <img src="/Gitab/icone/copyright.svg" alt="کپی‌رایت" width="14" height="14"
-             style="vertical-align:middle;margin-inline:4px">
-        <span id="y"></span> Gitab — تمامی حقوق محفوظ است.
-      </p>
-    </div>
-  </footer>
-
-  <!-- سال و اسکریپت تغییر تم -->
-  <script>
+</code></pre> <p>در این مثال، پیام <strong>معنادار</strong> و استثنای داخلی جزئیات بیشتری درباره فایل پیدا نشده ارائه می‌کند.</p><hr> <h3>نکات بهترین شیوه در مدیریت استثناها در C#</h3><ul> <li>از بلوک‌های <strong>try/catch/finally</strong> برای بازیابی خطا یا آزادسازی منابع استفاده کنید.</li><li>شرایط معمول را بدون پرتاب استثنا مدیریت کنید.</li><li>کلاس‌ها را طوری طراحی کنید که امکان جلوگیری از استثنا وجود داشته باشد.</li><li>به جای بازگرداندن کد خطا، استثنا پرتاب کنید.</li><li>از انواع استثنای از پیش تعریف‌شده .NET استفاده کنید.</li><li>نام کلاس‌های استثنا با <strong>Exception</strong> خاتمه یابد.</li><li>سه سازنده در کلاس‌های استثنای سفارشی درج شود.</li><li>داده‌های استثنا در اجرای راه دور نیز قابل دسترسی باشند.</li><li>پیام‌های خطا از نظر دستوری صحیح باشند.</li><li>پیام‌های محلی‌سازی‌شده در هر استثنا درج شود.</li><li>ویژگی‌های اضافی لازم در استثناهای سفارشی ارائه شود.</li><li>مکان پرتاب استثنا طوری باشد که <strong>StackTrace</strong> مفید باشد.</li><li>از متدهای سازنده استثنا استفاده کنید.</li><li>هنگام ناتمام ماندن متدها به دلیل استثنا، وضعیت را بازگردانید.</li></ul> <p>اکنون زمان آن است که خلاصه‌ای از آنچه درباره <strong>مدیریت استثناها</strong> آموخته‌ایم ارائه دهیم.</p><h3>خلاصه</h3><p>در این فصل، شما با <strong>استثناهای چک‌شده (checked exceptions)</strong> و <strong>استثناهای چک‌نشده (unchecked exceptions)</strong> آشنا شدید.</p><ul> <li><strong>Checked exceptions</strong> از ورود شرایط overflow حسابی به کد تولید جلوگیری می‌کنند، زیرا این خطاها در <strong>زمان کامپایل</strong> شناسایی می‌شوند.</li><li><strong>Unchecked exceptions</strong> در زمان کامپایل شناسایی نمی‌شوند و ممکن است وارد کد تولید شوند، که می‌تواند باعث ایجاد باگ‌های سخت برای ردیابی و حتی کرش برنامه شود.</li></ul> <p>سپس با <strong>NullPointerException</strong> و نحوه اعتبارسنجی پارامترهای ورودی با استفاده از <strong>Attribute</strong> و <strong>Validator</strong> سفارشی آشنا شدید که در بالای متدها قرار می‌گیرند. این روش به شما اجازه می‌دهد بازخورد معنی‌دار ارائه دهید و برنامه‌های مقاوم‌تری بسازید.</p><p>بعد از آن، استفاده از <strong>BREs (Business Rule Exceptions)</strong> برای کنترل جریان برنامه بررسی شد. دیدید چگونه جریان برنامه با انتظار خروجی استثنایی کنترل می‌شود و سپس نشان داده شد که با استفاده از <strong>چک‌های شرطی (conditional checks)</strong> می‌توان کنترل بهتری بر جریان برنامه داشت، بدون اینکه نیاز به استفاده از استثناها باشد.</p><p>بحث بعدی درباره اهمیت ارائه <strong>پیام‌های استثنایی معنی‌دار</strong> بود و اینکه چگونه می‌توان این کار را با نوشتن <strong>استثناهای سفارشی</strong> انجام داد که از کلاس Exception ارث‌بری کرده و سه سازنده ضروری را پیاده‌سازی می‌کنند.</p><p>از طریق مثال‌های ارائه‌شده، یاد گرفتید چگونه از استثناهای سفارشی استفاده کنید و چگونه به <strong>دیباگ بهتر و رفع مشکلات سریع‌تر</strong> کمک می‌کنند.</p><p>اکنون زمان آن است که آنچه آموخته‌اید را با پاسخ به چند سؤال تمرین کنید. همچنین منابع پیشنهادی برای مطالعه بیشتر ارائه شده است.</p><hr> <h3>سؤالات</h3><p>1⃣ استثنای چک‌شده (checked exception) چیست؟<br> 2⃣ استثنای چک‌نشده (unchecked exception) چیست؟<br> 3⃣ استثنای overflow حسابی (arithmetic overflow exception) چیست؟<br> 4⃣ NullPointerException چیست؟<br> 5⃣ چگونه می‌توان پارامترهای null را اعتبارسنجی کرد تا کیفیت کد بهبود یابد؟<br> 6⃣ BRE مخفف چیست؟<br> 7⃣ آیا استفاده از BREها روش خوبی است یا بد؟ چرا؟<br> 8⃣ جایگزین BREها چیست، آیا خوب است یا بد؟ چرا؟<br> 9⃣ چگونه می‌توان پیام‌های استثنایی معنی‌دار ارائه داد؟<br> الزامات نوشتن استثناهای سفارشی چیست؟</p><hr> <h3>منابع پیشنهادی برای مطالعه بیشتر</h3><ul> <li><a href="https://docs.microsoft.com/en-us/dotnet/standard/exceptions/">Documentation رسمی Microsoft برای مدیریت استثناها در .NET</a></li><li><a href="https://reflectoring.io/business-exceptions/">مقاله‌ای درباره دلایل منفی بودن BREها</a></li><li><a href="https://docs.microsoft.com/en-us/dotnet/standard/exceptions/best-practices-for-exceptions">بهترین شیوه‌های Microsoft برای مدیریت استثناها در C#</a></li></ul> <p>این منابع به شما کمک می‌کنند درک عمیق‌تری از مدیریت استثناها و بهترین شیوه‌ها در C# پیدا کنید.</p></article> <nav class="chapter-single-next-nav"><a href="/Gitab/books/book2/Book/06/Unit-Testing/" class="btn-next-chapter-action" id="nextChapterBtn" data-hub="/Gitab/books/book2/"> <span class="next-btn-text">فصل بعدی: تست واحد Unit Testing</span> <span class="next-btn-arrow">←</span> </a> </nav></div> <button class="fab-back-to-top" id="backToTopBtn" type="button" aria-label="رفتن به بالای صفحه" title="رفتن به بالا"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"> <polyline points="18 15 12 9 6 15"></polyline> </svg> </button></main> <footer class="footer-minimal"><div class="footer-container"> <div class="footer-top-row"><div class="footer-brand-side"> <a href="/Gitab/" class="footer-brand-anchor"> <img src="/Gitab/icone/logo.svg" alt="Gitab" width="28" height="28" loading="lazy" decoding="async"> <span class="footer-brand-title">گیتاب (Gitab)</span> </a> <p class="footer-tagline"> پلتفرم آزاد و مستقل برای ترجمهٔ دقیق و روان کتاب‌های مرجع مهندسی نرم‌افزار. </p></div> <div class="footer-nav-cols"><div class="footer-nav-col"> <span class="footer-nav-heading">موضوعات</span><ul class="footer-nav-list"> <li><a href="/Gitab/books/list-books/?cat=csharp">سی‌شارپ و دات‌نت</a></li><li><a href="/Gitab/books/list-books/?cat=clean-code">کد تمیز و بازآفرینی</a></li><li><a href="/Gitab/books/list-books/?cat=architecture">معماری و طراحی دامنه</a></li><li><a href="/Gitab/books/list-books/?cat=system">لینوکس و خط فرمان</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">بخش‌های سایت</span><ul class="footer-nav-list"> <li><a href="/Gitab/">صفحه اصلی</a></li><li><a href="/Gitab/books/list-books/">کتابخانه کامل</a></li><li><a href="/Gitab/courses/">دوره‌های آموزشی</a></li><li><a href="/Gitab/translator.html">تالار مترجمین</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">مشارکت و جامعه</span><ul class="footer-nav-list"> <li><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer">راهنمای همکاری در ترجمه</a></li><li><a href="https://github.com/hheydarian/Gitab/issues" target="_blank" rel="noopener noreferrer">پیشنهاد کتاب یا گزارش خطا</a></li></ul> </div></div> </div><div class="footer-bottom-line"> <span>© <span id="y">2026</span> Gitab — توسعه‌یافته برای جامعهٔ مهندسان نرم‌افزار ایرانی</span></div> </div></footer> <script>
   (() => {
     const root = document.documentElement;
     const btn = document.getElementById('themeToggle');
+    const sunIcon = btn ? btn.querySelector('.icon-sun') : null;
+    const moonIcon = btn ? btn.querySelector('.icon-moon') : null;
     const KEY = 'gitab-theme';
 
-    function updateTheme(s) {
-      root.setAttribute('data-theme', s);
-      const mode = s;  // فقط `dark` یا `light` خواهد بود
+    function updateTheme(mode) {
+      root.setAttribute('data-theme', mode);
       root.dataset.colorMode = mode;
-      btn.dataset.icon = mode === 'dark' ? 'moon' : 'sun';
+      if (sunIcon && moonIcon) {
+        if (mode === 'dark') {
+          sunIcon.style.display = 'inline-block';
+          moonIcon.style.display = 'none';
+        } else {
+          sunIcon.style.display = 'none';
+          moonIcon.style.display = 'inline-block';
+        }
+      }
     }
 
-    // وضعیت تم ذخیره شده از localStorage
-    let saved = localStorage.getItem(KEY) || 'light'; // پیش‌فرض روشن
+    let saved = 'dark';
+    try { saved = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
     updateTheme(saved);
 
-    // تنظیم مجدد تم هنگام تغییر وضعیت دکمه
-    btn.addEventListener('click', () => {
-      const current = localStorage.getItem(KEY) || 'light';
-      const next = current === 'dark' ? 'light' : 'dark';  // فقط دو حالت: تاریک و روشن
-      localStorage.setItem(KEY, next);
-      updateTheme(next);
-    });
+    if (btn) {
+      btn.addEventListener('click', () => {
+        let current = 'dark';
+        try { current = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+        const next = current === 'dark' ? 'light' : 'dark';
+        try { localStorage.setItem(KEY, next); } catch (e) {}
+        updateTheme(next);
+      });
+    }
 
-    // هنگام بارگذاری صفحه
     document.addEventListener('DOMContentLoaded', () => {
-      updateTheme(localStorage.getItem(KEY) || 'light');
+      let mode = 'dark';
+      try { mode = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+      updateTheme(mode);
+      const yearSpan = document.getElementById('y');
+      if (yearSpan) yearSpan.textContent = new Date().getFullYear();
     });
+
+    const mobBtn = document.getElementById('mobileMenuBtn');
+    const mobDrawer = document.getElementById('mobileDrawer');
+    if (mobBtn && mobDrawer) {
+      const setDrawerOpen = (open) => {
+        mobDrawer.classList.toggle('open', open);
+        mobBtn.classList.toggle('is-open', open);
+        mobBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        mobBtn.setAttribute('aria-label', open ? 'بستن منو' : 'باز کردن منو');
+        mobDrawer.setAttribute('aria-hidden', open ? 'false' : 'true');
+      };
+
+      mobBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        setDrawerOpen(!mobDrawer.classList.contains('open'));
+      });
+
+      mobDrawer.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => setDrawerOpen(false));
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && mobDrawer.classList.contains('open')) {
+          setDrawerOpen(false);
+        }
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!mobDrawer.contains(e.target) && !mobBtn.contains(e.target)) {
+          setDrawerOpen(false);
+        }
+      });
+    }
+
+    if ('serviceWorker' in navigator) {
+      const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+      if (isLocalhost) {
+        navigator.serviceWorker.getRegistrations().then(regs => {
+          for (const reg of regs) reg.unregister();
+        });
+        if ('caches' in window) {
+          caches.keys().then(names => {
+            for (const name of names) caches.delete(name);
+          });
+        }
+      } else {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/Gitab/sw.js').catch(() => {});
+        });
+      }
+    }
   })();
-</script>
-
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-  <script>hljs.highlightAll();</script>
-
-  <script>
+  </script> <script>
   document.querySelectorAll('pre code').forEach(block => {
+    const pre = block.parentNode;
+    if (!pre || pre.querySelector('.copy-btn')) return;
+
+    const copySvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
+    const okSvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+
     const btn = document.createElement('button');
     btn.className = 'copy-btn';
-
-    const icon = document.createElement('img');
-    icon.src = "/Gitab/icone/copy.svg";
-    icon.alt = 'Copy';
-    btn.appendChild(icon);
-
-    block.parentNode.insertBefore(btn, block);
+    btn.setAttribute('aria-label', 'کپی کد');
+    btn.setAttribute('title', 'کپی کد');
+    btn.setAttribute('type', 'button');
+    btn.innerHTML = copySvg;
+    pre.appendChild(btn);
 
     btn.addEventListener('click', async () => {
-      await navigator.clipboard.writeText(block.textContent);
-      btn.classList.add('copied');
-      setTimeout(() => btn.classList.remove('copied'), 1500);
-    });
-  });
-  </script>
-
-  <script>
-  document.body.dataset.page = window.location.pathname;
-
-  const menuBtn = document.querySelector(".menu-toggle");
-  const nav = document.querySelector(".nav");
-
-  if (menuBtn && nav) {
-    menuBtn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      nav.classList.toggle("show");
-    });
-
-    document.addEventListener("click", (e) => {
-      const clickedInsideNav = nav.contains(e.target);
-      const clickedMenuButton = menuBtn.contains(e.target);
-      if (!clickedInsideNav && !clickedMenuButton) {
-        nav.classList.remove("show");
+      try {
+        await navigator.clipboard.writeText(block.textContent);
+        btn.classList.add('copied');
+        btn.innerHTML = okSvg;
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          btn.innerHTML = copySvg;
+        }, 1800);
+      } catch (err) {
+        console.error('Copy failed:', err);
       }
     });
-  }
-  </script>
-
-  <script>
-    document.getElementById('y').textContent = new Date().getFullYear();
-  </script>
-  <script>
-document.getElementById("openDonate").addEventListener("click", () => {
-  document.getElementById("donateModal").style.display = "block";
-});
-document.getElementById("closeDonate").addEventListener("click", () => {
-  document.getElementById("donateModal").style.display = "none";
-});
-document.querySelectorAll(".copy-btn").forEach(btn => {
-  btn.addEventListener("click", () => {
-    navigator.clipboard.writeText(btn.dataset.copy);
-  
-    setTimeout(() => (btn.textContent = "کپی"), 2000);
   });
-});
-</script>
+  </script> <script>
+  (() => {
+    const article = document.getElementById('chapterArticle');
+    if (!article) return;
 
-</body>
-</html>
+    const progressBar = document.getElementById('readingProgressBar');
+    if (progressBar) {
+      window.addEventListener('scroll', () => {
+        const docElem = document.documentElement;
+        const totalHeight = docElem.scrollHeight - docElem.clientHeight;
+        if (totalHeight > 0) {
+          const progress = (window.pageYOffset / totalHeight) * 100;
+          progressBar.style.width = Math.min(100, Math.max(0, progress)) + '%';
+        }
+      }, { passive: true });
+    }
+
+    const btt = document.getElementById('backToTopBtn');
+    if (btt) {
+      window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 250) {
+          btt.classList.add('visible');
+        } else {
+          btt.classList.remove('visible');
+        }
+      }, { passive: true });
+
+      btt.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+
+    article.querySelectorAll('img').forEach(img => {
+      if (!img.hasAttribute('loading')) img.loading = 'lazy';
+      if (!img.hasAttribute('decoding')) img.decoding = 'async';
+      const parent = img.parentElement;
+      if (parent && parent.tagName === 'P') {
+        parent.style.textAlign = 'center';
+      }
+
+      img.addEventListener('error', function() {
+        const src = this.getAttribute('src');
+        if (src && src.includes('assets/image/')) {
+          const parts = src.split('assets/image/');
+          const corrected = '/Gitab/books/book2/assets/image/' + parts[1];
+          if (this.src !== corrected) {
+            this.src = corrected;
+          }
+        }
+      });
+    });
+
+    article.querySelectorAll('p').forEach(p => {
+      const trimmed = p.innerText.trim();
+      if (trimmed.startsWith('💡') || trimmed.startsWith('نکته:')) {
+        p.classList.add('react-callout', 'callout-tip');
+      } else if (trimmed.startsWith('⚠️') || trimmed.startsWith('هشدار:')) {
+        p.classList.add('react-callout', 'callout-warning');
+      } else if (trimmed.startsWith('📌') || trimmed.startsWith('مهم:')) {
+        p.classList.add('react-callout', 'callout-important');
+      } else if (trimmed.startsWith('🔹') || trimmed.startsWith('🔸')) {
+        p.classList.add('react-callout', 'callout-note');
+      }
+    });
+  })();
+  </script> <script type="speculationrules">{"prefetch":[{"where":{"and":[{"href_matches":"/Gitab/*"},{"not":{"href_matches":"/Gitab/downloads/*"}},{"not":{"selector_matches":"[download], [target='_blank']"}}]},"eagerness":"moderate"}]}</script> <script>
+  (() => {
+    if (window.HTMLScriptElement && HTMLScriptElement.supports && HTMLScriptElement.supports('speculationrules')) return;
+    const seen = new Set([window.location.href]);
+    let count = 0;
+    const prefetchLink = (e) => {
+      if (count >= 12) return;
+      const a = e.target && e.target.closest ? e.target.closest('header a, .chapter-single-next-nav a, .syllabus-chapter-item a, .btn-hero-read, .btn-card-read') : null;
+      if (!a || !a.href || a.hasAttribute('download') || a.target === '_blank') return;
+      if (a.origin !== window.location.origin || a.pathname.includes('/downloads/')) return;
+      const clean = a.href.split('#')[0];
+      if (!clean || seen.has(clean)) return;
+      seen.add(clean);
+      count++;
+      const l = document.createElement('link');
+      l.rel = 'prefetch';
+      l.href = clean;
+      document.head.appendChild(l);
+    };
+    document.addEventListener('pointerenter', prefetchLink, { capture: true, passive: true });
+    document.addEventListener('touchstart', prefetchLink, { capture: true, passive: true });
+  })();
+  </script></body></html>

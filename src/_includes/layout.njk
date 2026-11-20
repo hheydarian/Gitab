@@ -1,185 +1,729 @@
-{% set base = "/" | url %}
+{%- set base = "/" | url -%}
+{%- set pageUrlClean = page.url or '/' -%}
+{%- set isBookChapter = '/Book/' in pageUrlClean -%}
+{%- set isCourseLesson = '/lessons/' in pageUrlClean -%}
+{%- set matchedBook = null -%}
+{%- for b in books -%}
+  {%- if b.url in pageUrlClean -%}
+    {%- set matchedBook = b -%}
+  {%- endif -%}
+{%- endfor -%}
+{%- set matchedCourse = null -%}
+{%- for c in courses -%}
+  {%- if c.url in pageUrlClean -%}
+    {%- set matchedCourse = c -%}
+  {%- endif -%}
+{%- endfor -%}
+{%- set metaTitle = title or site.title -%}
+{%- set metaDesc = description -%}
+{%- if not metaDesc and matchedBook -%}
+  {%- if isBookChapter -%}
+    {%- set metaDesc = (title or matchedBook.persianTitle) + ' — مطالعه آنلاین و رایگان از کتاب «' + matchedBook.persianTitle + '» (' + matchedBook.title + ') اثر ' + matchedBook.author + ' با ترجمه ' + matchedBook.translator + ' در گیتاب.' -%}
+  {%- else -%}
+    {%- set metaDesc = matchedBook.desc -%}
+  {%- endif -%}
+{%- elseif not metaDesc and matchedCourse -%}
+  {%- set metaDesc = matchedCourse.desc -%}
+{%- elseif not metaDesc -%}
+  {%- set metaDesc = site.description -%}
+{%- endif -%}
+{%- set canonicalUrl = site.url + (pageUrlClean | url) -%}
+{%- if matchedBook and matchedBook.cover -%}
+  {%- set rawOgImage = matchedBook.cover -%}
+{%- elseif matchedCourse and matchedCourse.thumbnail -%}
+  {%- set rawOgImage = matchedCourse.thumbnail -%}
+{%- else -%}
+  {%- set rawOgImage = site.defaultImage -%}
+{%- endif -%}
+{%- set ogImageUrl = site.url + (rawOgImage | url) -%}
+{%- set ogType = 'article' if (isBookChapter or isCourseLesson) else ('book' if matchedBook else 'website') -%}
 
 <!doctype html>
 <html lang="fa" dir="rtl">
 <head>
+  <script>
+    if (window.location.pathname.startsWith('/gitab/')) {
+      window.location.replace(window.location.pathname.replace(/^\/gitab\//i, '/Gitab/') + window.location.search + window.location.hash);
+    }
+    (() => {
+      try {
+        const t = localStorage.getItem('gitab-theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', t);
+        document.documentElement.dataset.colorMode = t;
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        document.documentElement.dataset.colorMode = 'dark';
+      }
+    })();
+  </script>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+  <title>{{ metaTitle }}</title>
+  <meta name="description" content="{{ metaDesc }}">
+  {% if keywords %}
+  <meta name="keywords" content="{{ keywords }}">
+  {% elif tags %}
+  <meta name="keywords" content="{{ tags | join(', ') }}">
+  {% endif %}
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <meta name="theme-color" content="#090d16">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https:; frame-src https://www.youtube.com https://www.youtube-nocookie.com https://maps.google.com https://www.google.com; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self';">
   <link rel="icon" type="image/png" href="{{ '/favicon.png' | url }}">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{{ title or "Gitab | گیتاب" }}</title>
-  <meta name="description" content="{{ description or 'ترجمه‌های فارسی کتاب‌های فنی — سریع، مینیمال و قابل اتکا.' }}">
+  <link rel="canonical" href="{{ canonicalUrl }}">
+  <link rel="alternate" hreflang="fa" href="{{ canonicalUrl }}">
+  <link rel="alternate" hreflang="x-default" href="{{ canonicalUrl }}">
+  <link rel="alternate" type="text/plain" title="LLMs.txt" href="{{ '/llms.txt' | url }}">
+  <link rel="sitemap" type="application/xml" title="Sitemap" href="{{ '/sitemap.xml' | url }}">
 
-  <!-- استایل‌ها -->
-  <link rel="stylesheet" href="{{ '/styles/main.css' | url }}">
-  <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+  <!-- Open Graph & Social Cards -->
+  <meta property="og:locale" content="{{ site.locale }}">
+  <meta property="og:type" content="{{ ogType }}">
+  <meta property="og:site_name" content="{{ site.name }}">
+  <meta property="og:title" content="{{ metaTitle }}">
+  <meta property="og:description" content="{{ metaDesc }}">
+  <meta property="og:url" content="{{ canonicalUrl }}">
+  <meta property="og:image" content="{{ ogImageUrl }}">
+  <meta property="og:image:alt" content="{{ metaTitle }}">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ metaTitle }}">
+  <meta name="twitter:description" content="{{ metaDesc }}">
+  <meta name="twitter:image" content="{{ ogImageUrl }}">
 
+  <!-- Structured Data (Schema.org 2027 SEO & AI Discovery) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": {{ (site.baseUrl + '/#organization') | dump | safe }},
+        "name": {{ site.name | dump | safe }},
+        "alternateName": "Gitab",
+        "url": {{ (site.baseUrl + '/') | dump | safe }},
+        "logo": {
+          "@type": "ImageObject",
+          "url": {{ (site.url + (site.logo | url)) | dump | safe }}
+        },
+        "sameAs": [{{ site.github | dump | safe }}]
+      },
+      {
+        "@type": "WebSite",
+        "@id": {{ (site.baseUrl + '/#website') | dump | safe }},
+        "url": {{ (site.baseUrl + '/') | dump | safe }},
+        "name": {{ site.name | dump | safe }},
+        "inLanguage": "fa-IR",
+        "publisher": { "@id": {{ (site.baseUrl + '/#organization') | dump | safe }} },
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": {{ (site.baseUrl + '/books/list-books/?q={search_term_string}') | dump | safe }}
+          },
+          "query-input": "required name=search_term_string"
+        }
+      },
+      {
+        "@type": "WebPage",
+        "@id": {{ (canonicalUrl + '#webpage') | dump | safe }},
+        "url": {{ canonicalUrl | dump | safe }},
+        "name": {{ metaTitle | dump | safe }},
+        "description": {{ metaDesc | dump | safe }},
+        "inLanguage": "fa-IR",
+        "isPartOf": { "@id": {{ (site.baseUrl + '/#website') | dump | safe }} }
+      }
+      {%- if matchedBook and isBookChapter -%}
+      ,{
+        "@type": "TechArticle",
+        "headline": {{ metaTitle | dump | safe }},
+        "description": {{ metaDesc | dump | safe }},
+        "url": {{ canonicalUrl | dump | safe }},
+        "inLanguage": "fa-IR",
+        "isAccessibleForFree": true,
+        "author": { "@type": "Person", "name": {{ matchedBook.author | dump | safe }} },
+        "translator": { "@type": "Person", "name": {{ matchedBook.translator | dump | safe }} },
+        "isPartOf": {
+          "@type": "Book",
+          "name": {{ matchedBook.persianTitle | dump | safe }},
+          "alternateName": {{ matchedBook.title | dump | safe }},
+          "url": {{ (site.url + (matchedBook.url | url)) | dump | safe }}
+        }
+      }
+      {%- elseif matchedBook -%}
+      ,{
+        "@type": "Book",
+        "name": {{ matchedBook.persianTitle | dump | safe }},
+        "alternateName": {{ matchedBook.title | dump | safe }},
+        "description": {{ metaDesc | dump | safe }},
+        "url": {{ canonicalUrl | dump | safe }},
+        "image": {{ ogImageUrl | dump | safe }},
+        "inLanguage": "fa-IR",
+        "isAccessibleForFree": true,
+        "author": { "@type": "Person", "name": {{ matchedBook.author | dump | safe }} },
+        "translator": { "@type": "Person", "name": {{ matchedBook.translator | dump | safe }} },
+        "publisher": { "@id": {{ (site.baseUrl + '/#organization') | dump | safe }} }
+      }
+      {%- elseif matchedCourse and isCourseLesson -%}
+      ,{
+        "@type": "LearningResource",
+        "learningResourceType": "Lesson",
+        "name": {{ metaTitle | dump | safe }},
+        "description": {{ metaDesc | dump | safe }},
+        "url": {{ canonicalUrl | dump | safe }},
+        "inLanguage": "fa-IR",
+        "isAccessibleForFree": true,
+        "isPartOf": {
+          "@type": "Course",
+          "name": {{ matchedCourse.persianTitle | dump | safe }},
+          "url": {{ (site.url + (matchedCourse.url | url)) | dump | safe }}
+        }
+      }
+      {%- elseif matchedCourse -%}
+      ,{
+        "@type": "Course",
+        "name": {{ matchedCourse.persianTitle | dump | safe }},
+        "alternateName": {{ matchedCourse.title | dump | safe }},
+        "description": {{ metaDesc | dump | safe }},
+        "url": {{ canonicalUrl | dump | safe }},
+        "image": {{ ogImageUrl | dump | safe }},
+        "inLanguage": "fa-IR",
+        "isAccessibleForFree": true,
+        "educationalLevel": {{ matchedCourse.level | dump | safe }},
+        "provider": { "@id": {{ (site.baseUrl + '/#organization') | dump | safe }} }
+      }
+      {%- endif -%}
+    ]
+  }
+  </script>
+
+  <!-- پیش‌بارگذاری فونت و استایل‌های حیاتی -->
+  <link rel="preload" href="{{ '/fonts/Vazirmatn.woff2' | url }}" as="font" type="font/woff2" crossorigin>
+  {%- if not isBookChapter and not isCourseLesson %}
+  <link rel="preload" href="{{ '/fonts/Lalezar.woff2' | url }}" as="font" type="font/woff2" crossorigin>
+  {%- endif %}
+  <link rel="preload" href="{{ '/styles/main.css?v=2.4' | url }}" as="style">
+  <link rel="preload" href="{{ '/styles/gitab-modern.css?v=2.5' | url }}" as="style">
+
+  <!-- فونت‌های رسمی پروژه: لاله‌زار و وزیرمتن متغیر (WOFF2) -->
   <style>
   @font-face {
-    font-family: 'Vazir';
-    src: url('{{ '/fonts/Vazir-FD-WOL.ttf' | url }}') format('truetype');
+    font-family: 'Lalezar';
+    src: url('{{ '/fonts/Lalezar.woff2' | url }}') format('woff2');
+    font-weight: 400;
+    font-style: normal;
     font-display: swap;
   }
+
   @font-face {
-    font-family: "Lalezar";
-    src: url('{{ 'fonts/Lalezar.ttf' | url }}') format('truetype');
+    font-family: 'Vazirmatn';
+    src: url('{{ '/fonts/Vazirmatn.woff2' | url }}') format('woff2');
+    font-weight: 100 900;
+    font-style: normal;
     font-display: swap;
-}
-  body {
-    font-family: 'Vazir', sans-serif;
+  }
+
+  /* اعمال صریح فونت به تمام عناصر و کنترل‌های فرم */
+  html, body, button, input, optgroup, select, textarea, .filter-pill {
+    font-family: 'Vazirmatn', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+  }
+  input::placeholder, textarea::placeholder {
+    font-family: 'Vazirmatn', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
   }
   </style>
+
+  <!-- استایل‌ها -->
+  {%- set hasCodeBlocks = ('<pre' in content) or ('hljs' in content) -%}
+  <link rel="stylesheet" href="{{ '/styles/main.css?v=2.4' | url }}">
+  <link rel="stylesheet" href="{{ '/styles/gitab-modern.css?v=2.5' | url }}">
+  {%- if hasCodeBlocks %}
+  <link rel="stylesheet" href="{{ '/styles/vendor/github-dark.min.css' | url }}" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="{{ '/styles/vendor/github-dark.min.css' | url }}"></noscript>
+  {%- endif %}
 </head>
 
 <body>
-  <!-- هدر مشترک -->
+  <!-- نوبار شناور مدرن (Island Navbar) -->
   <header class="header">
     <div class="container nav-wrap">
-      <a href="{{ '/' | url }}" class="brand">
-        <img src="{{ '/icone/logo.svg' | url }}" alt="Gitab logo" width="26" height="26">
-        <span>Gitab</span>
+      <a href="{{ '/' | url }}" class="brand" aria-label="صفحه اصلی گیتاب">
+        <img src="{{ '/icone/logo.svg' | url }}" alt="Gitab logo" width="30" height="30" decoding="async">
+        <span class="brand-text">Gitab</span>
+        
       </a>
 
-       <nav class="nav">
-         <a href="{{ '/' | url }}" {% if page.url == '/' %}aria-current="page"{% endif %}>خانه</a>
-         <a href="{{ '/books/list-books' | url }}" {% if page.url == '/books/list-books/' %}aria-current="page"{% endif %}>کتاب‌ها</a>
-         <a href="{{ '/giter.html' | url }}" {% if page.url == '/giter.html' %}aria-current="page"{% endif %}>دوره ها</a>
-          <!-- 
-         <a href="{{ '/translator.html' | url }}" {% if page.url == '/translator.html' %}aria-current="page"{% endif %}>مترجمین</a>
-           -->
-       </nav>
+      <!-- منوی اصلی -->
+      <nav class="nav" id="mainNav">
+        <a href="{{ '/' | url }}" {% if page.url == '/' %}aria-current="page"{% endif %}>خانه</a>
+        <a href="{{ '/books/list-books' | url }}" {% if '/books/' in page.url and page.url != '/books/' %}aria-current="page"{% endif %}>کتاب‌ها</a>
+        <a href="{{ '/courses/' | url }}" {% if '/courses/' in page.url %}aria-current="page"{% endif %}>دوره‌ها</a>
+        <a href="{{ '/translator.html' | url }}" {% if page.url == '/translator.html' %}aria-current="page"{% endif %}>مترجمین</a>
+      </nav>
 
       <div class="nav-actions">
-        <button id="themeToggle" class="icon-btn theme-btn" data-icon="moon" aria-label="تغییر تم">
-          <img src="{{ '/icone/sun.svg' | url }}" class="icon-sun" alt="روشن">
-          <img src="{{ '/icone/moon.svg' | url }}" class="icon-moon" alt="تاریک">
+        <!-- کلید تغییر تم -->
+        <button id="themeToggle" class="theme-toggle-btn" aria-label="تغییر تم" title="تغییر تم">
+          <img src="{{ '/icone/sun.svg' | url }}" class="icon-sun" alt="روشن" width="18" height="18" decoding="async" style="display:none">
+          <img src="{{ '/icone/moon.svg' | url }}" class="icon-moon" alt="تاریک" width="18" height="18" decoding="async">
         </button>
 
-        <a class="icon-btn" href="https://github.com/hheydarian/Gitab" target="_blank" title="GitHub">
-          <img src="{{ '/icone/github.svg' | url }}" alt="GitHub">
+        <!-- لینک گیت‌هاب -->
+        <a class="btn-github-pill" href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" title="مشاهده سورس گیتاب در گیت‌هاب">
+          <img src="{{ '/icone/github.svg' | url }}" alt="GitHub" width="16" height="16" decoding="async">
+          <span>گیت‌هاب</span>
         </a>
 
-        <!-- دکمه منو برای موبایل -->
-        <button class="menu-toggle" aria-label="منو">
-          <img src="{{ '/icone/menu.svg' | url }}" alt="menu">
+        <!-- دکمه همبرگری موبایل -->
+        <button class="mobile-menu-btn" id="mobileMenuBtn" type="button" aria-label="باز کردن منو" aria-expanded="false">
+          <svg class="mob-icon-open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="4" y1="7" x2="20" y2="7"></line>
+            <line x1="4" y1="12" x2="20" y2="12"></line>
+            <line x1="4" y1="17" x2="14" y2="17"></line>
+          </svg>
+          <svg class="mob-icon-close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
         </button>
+      </div>
+    </div>
+
+    <!-- منوی کشویی مدرن موبایل -->
+    <div class="mobile-drawer" id="mobileDrawer" aria-hidden="true">
+      <div class="mobile-drawer-inner">
+        <div class="mobile-drawer-section-label">ناوبری سریع</div>
+        <nav class="mobile-drawer-links" aria-label="منوی موبایل">
+          <a href="{{ '/' | url }}" class="mobile-drawer-link{% if page.url == '/' %} active{% endif %}"{% if page.url == '/' %} aria-current="page"{% endif %}>
+            <span class="mob-nav-icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 10.5 12 3l9 7.5"></path>
+                <path d="M5 9.5V20a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V9.5"></path>
+              </svg>
+            </span>
+            <span class="mob-nav-text">صفحه نخست</span>
+            <span class="mob-nav-arrow" aria-hidden="true">←</span>
+          </a>
+          <a href="{{ '/books/list-books' | url }}" class="mobile-drawer-link{% if '/books/' in page.url and page.url != '/books/' %} active{% endif %}"{% if '/books/' in page.url and page.url != '/books/' %} aria-current="page"{% endif %}>
+            <span class="mob-nav-icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path>
+              </svg>
+            </span>
+            <span class="mob-nav-text">کتابخانه و فهرست کتاب‌ها</span>
+            <span class="mob-nav-arrow" aria-hidden="true">←</span>
+          </a>
+          <a href="{{ '/courses/' | url }}" class="mobile-drawer-link{% if '/courses/' in page.url %} active{% endif %}"{% if '/courses/' in page.url %} aria-current="page"{% endif %}>
+            <span class="mob-nav-icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
+                <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
+              </svg>
+            </span>
+            <span class="mob-nav-text">دوره‌های آموزشی</span>
+            <span class="mob-nav-arrow" aria-hidden="true">←</span>
+          </a>
+          <a href="{{ '/translator.html' | url }}" class="mobile-drawer-link{% if page.url == '/translator.html' %} active{% endif %}"{% if page.url == '/translator.html' %} aria-current="page"{% endif %}>
+            <span class="mob-nav-icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                <circle cx="9" cy="7" r="4"></circle>
+                <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+              </svg>
+            </span>
+            <span class="mob-nav-text">مترجمین و همکاران</span>
+            <span class="mob-nav-arrow" aria-hidden="true">←</span>
+          </a>
+        </nav>
+
+        <div class="mobile-drawer-divider"></div>
+
+        <a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" class="mobile-drawer-link mobile-drawer-gh">
+          <span class="mob-nav-icon" aria-hidden="true">
+            <img src="{{ '/icone/github.svg' | url }}" alt="" width="17" height="17" loading="lazy" decoding="async">
+          </span>
+          <span class="mob-nav-text">مخزن گیت‌هاب پروژه</span>
+          <span class="mob-nav-ext" aria-hidden="true">↗</span>
+        </a>
       </div>
     </div>
   </header>
 
-  {% set isBookPage = page.filePathStem and '/books/' in page.filePathStem %}
-  <main class="site-main{% if isBookPage %} book-page{% endif %}">
-    {{ content | safe }}
-  </main>
+  {% set isBookPage = page.filePathStem and ('/books/' in page.filePathStem or pageUrlClean == '/courses/') %}
+  {% set isChapterPage = page.filePathStem and '/Book/' in page.filePathStem %}
 
-  <!-- فوتر مشترک -->
-  <footer class="footer">
-    <div class="container">
-      <p>
-        <img src="{{ '/icone/copyright.svg' | url }}" alt="کپی‌رایت" width="14" height="14"
-             style="vertical-align:middle;margin-inline:4px">
-        <span id="y"></span> Gitab — تمامی حقوق محفوظ است.
-      </p>
+  {% if isChapterPage %}
+    {% set bookId = page.filePathStem.split('/')[2] %}
+    {% set bookHubUrl = ('/books/' + bookId + '/') | url %}
+        {% set bookTitles = {
+      "book1": "سی‌شارپ ۱۲ در یک نگاه",
+      "book2": "کدنویسی تمیز در سی‌شارپ",
+      "book3": "کد تمیز",
+      "book4": "برنامه‌نویسی تسک در سی‌شارپ",
+      "book5": "خط فرمان لینوکس",
+      "book6": "الگوهای شاگردی",
+      "book7": "برنامه‌نویس عمل‌گرا",
+      "book8": "درک طراحی دامنه‌محور",
+      "book9": "مهندسی پرامپت",
+      "book10": "فقط برای تفریح",
+      "book11": "راز بیت",
+      "book12": "لینوکس و زندگی",
+      "book13": "راهنمای آزمون LPIC-1",
+      "book14": "ذن و هنر نگهداری دوچرخه",
+      "book15": "برنامه‌نویس پرشور",
+      "book16": "روان‌شناسی پول"
+    } %}
+    {% set currentBookTitle = bookTitles[bookId] or "کتاب" %}
+
+    <!-- نوار پیشرفت مطالعه بالا (Reading Progress Bar) -->
+    <div class="reading-progress-track">
+      <div class="reading-progress-fill" id="readingProgressBar"></div>
+    </div>
+
+    <main class="site-main chapter-reading-page">
+      <div class="chapter-page-wrapper">
+        <!-- ۱. نوار آدرس‌دهی تمیز، کامل و سلسله‌مراتبی -->
+        <nav class="chapter-clean-breadcrumb" aria-label="مسیر راهنما" dir="rtl">
+          <a href="{{ '/' | url }}">خانه</a>
+          <span class="bc-sep" aria-hidden="true">/</span>
+          <a href="{{ '/books/list-books/' | url }}">کتاب‌ها</a>
+          <span class="bc-sep" aria-hidden="true">/</span>
+          <a href="{{ bookHubUrl }}"><bdi>{{ currentBookTitle }}</bdi></a>
+          <span class="bc-sep" aria-hidden="true">/</span>
+          <span class="bc-current-leaf"><bdi>{{ title }}</bdi></span>
+        </nav>
+
+        <!-- ۲. کانتینر بدنه مقاله (همراه با عنوان اصلی خود فصل) -->
+        <article class="chapter-prose-container markdown-body" id="chapterArticle" dir="rtl">
+          {{ content | safe }}
+        </article>
+
+        <!-- ۴. تک دکمه شیک فصل بعدی (تولید استاتیک و قطعی در زمان بیلد) -->
+        {% set nextChapterInfo = page.url | getNextChapterInfo(bookId, bookChapters) %}
+        <nav class="chapter-single-next-nav">
+          {% if nextChapterInfo and not nextChapterInfo.isLast %}
+            <a href="{{ nextChapterInfo.url | url }}" class="btn-next-chapter-action" id="nextChapterBtn" data-hub="{{ bookHubUrl }}">
+              <span class="next-btn-text">فصل بعدی: {{ nextChapterInfo.title }}</span>
+              <span class="next-btn-arrow">←</span>
+            </a>
+          {% else %}
+            <a href="{{ bookHubUrl }}" class="btn-next-chapter-action" id="nextChapterBtn" data-hub="{{ bookHubUrl }}">
+              <span class="next-btn-text">پایان کتاب — بازگشت به فهرست سرفصل‌ها</span>
+              <span class="next-btn-arrow">←</span>
+            </a>
+          {% endif %}
+        </nav>
+      </div>
+
+      <!-- دکمه شناور پرواز به بالا (Back to Top) -->
+      <button class="fab-back-to-top" id="backToTopBtn" type="button" aria-label="رفتن به بالای صفحه" title="رفتن به بالا">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="18 15 12 9 6 15"></polyline>
+        </svg>
+      </button>
+    </main>
+  {% else %}
+    <main class="site-main{% if isBookPage %} book-page{% endif %}">
+      {{ content | safe }}
+    </main>
+  {% endif %}
+
+  <!-- فوتر مینیمال، تمیز و استاندارد جهانی (Minimal Tech Footer) -->
+  <footer class="footer-minimal">
+    <div class="footer-container">
+      <div class="footer-top-row">
+        <!-- هویت و توضیحات مختصر برند -->
+        <div class="footer-brand-side">
+          <a href="{{ '/' | url }}" class="footer-brand-anchor">
+            <img src="{{ '/icone/logo.svg' | url }}" alt="Gitab" width="28" height="28" loading="lazy" decoding="async">
+            <span class="footer-brand-title">گیتاب (Gitab)</span>
+          </a>
+          <p class="footer-tagline">
+            پلتفرم آزاد و مستقل برای ترجمهٔ دقیق و روان کتاب‌های مرجع مهندسی نرم‌افزار.
+          </p>
+        </div>
+
+        <!-- ستون‌های پیوند منظم، خلوت و بدون شلوغی -->
+        <div class="footer-nav-cols">
+          <div class="footer-nav-col">
+            <span class="footer-nav-heading">موضوعات</span>
+            <ul class="footer-nav-list">
+              <li><a href="{{ '/books/list-books/' | url }}?cat=csharp">سی‌شارپ و دات‌نت</a></li>
+              <li><a href="{{ '/books/list-books/' | url }}?cat=clean-code">کد تمیز و بازآفرینی</a></li>
+              <li><a href="{{ '/books/list-books/' | url }}?cat=architecture">معماری و طراحی دامنه</a></li>
+              <li><a href="{{ '/books/list-books/' | url }}?cat=system">لینوکس و خط فرمان</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-nav-col">
+            <span class="footer-nav-heading">بخش‌های سایت</span>
+            <ul class="footer-nav-list">
+              <li><a href="{{ '/' | url }}">صفحه اصلی</a></li>
+              <li><a href="{{ '/books/list-books/' | url }}">کتابخانه کامل</a></li>
+              <li><a href="{{ '/courses/' | url }}">دوره‌های آموزشی</a></li>
+              <li><a href="{{ '/translator.html' | url }}">تالار مترجمین</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-nav-col">
+            <span class="footer-nav-heading">مشارکت و جامعه</span>
+            <ul class="footer-nav-list">
+              <li><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer">راهنمای همکاری در ترجمه</a></li>
+              <li><a href="https://github.com/hheydarian/Gitab/issues" target="_blank" rel="noopener noreferrer">پیشنهاد کتاب یا گزارش خطا</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- نوار پایینی خلوت و آرام -->
+      <div class="footer-bottom-line">
+        <span>© <span id="y">2026</span> Gitab — توسعه‌یافته برای جامعهٔ مهندسان نرم‌افزار ایرانی</span>
+      </div>
     </div>
   </footer>
 
-  <!-- سال و اسکریپت تغییر تم -->
+  <!-- اسکریپت‌های سیستمی تم، ناوبری و سرویس‌ورکر -->
   <script>
   (() => {
     const root = document.documentElement;
     const btn = document.getElementById('themeToggle');
+    const sunIcon = btn ? btn.querySelector('.icon-sun') : null;
+    const moonIcon = btn ? btn.querySelector('.icon-moon') : null;
     const KEY = 'gitab-theme';
 
-    function updateTheme(s) {
-      root.setAttribute('data-theme', s);
-      const mode = s;  // فقط `dark` یا `light` خواهد بود
+    function updateTheme(mode) {
+      root.setAttribute('data-theme', mode);
       root.dataset.colorMode = mode;
-      btn.dataset.icon = mode === 'dark' ? 'moon' : 'sun';
+      if (sunIcon && moonIcon) {
+        if (mode === 'dark') {
+          sunIcon.style.display = 'inline-block';
+          moonIcon.style.display = 'none';
+        } else {
+          sunIcon.style.display = 'none';
+          moonIcon.style.display = 'inline-block';
+        }
+      }
     }
 
-    // وضعیت تم ذخیره شده از localStorage
-    let saved = localStorage.getItem(KEY) || 'light'; // پیش‌فرض روشن
+    let saved = 'dark';
+    try { saved = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
     updateTheme(saved);
 
-    // تنظیم مجدد تم هنگام تغییر وضعیت دکمه
-    btn.addEventListener('click', () => {
-      const current = localStorage.getItem(KEY) || 'light';
-      const next = current === 'dark' ? 'light' : 'dark';  // فقط دو حالت: تاریک و روشن
-      localStorage.setItem(KEY, next);
-      updateTheme(next);
-    });
+    if (btn) {
+      btn.addEventListener('click', () => {
+        let current = 'dark';
+        try { current = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+        const next = current === 'dark' ? 'light' : 'dark';
+        try { localStorage.setItem(KEY, next); } catch (e) {}
+        updateTheme(next);
+      });
+    }
 
-    // هنگام بارگذاری صفحه
     document.addEventListener('DOMContentLoaded', () => {
-      updateTheme(localStorage.getItem(KEY) || 'light');
+      let mode = 'dark';
+      try { mode = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+      updateTheme(mode);
+      const yearSpan = document.getElementById('y');
+      if (yearSpan) yearSpan.textContent = new Date().getFullYear();
     });
+
+    const mobBtn = document.getElementById('mobileMenuBtn');
+    const mobDrawer = document.getElementById('mobileDrawer');
+    if (mobBtn && mobDrawer) {
+      const setDrawerOpen = (open) => {
+        mobDrawer.classList.toggle('open', open);
+        mobBtn.classList.toggle('is-open', open);
+        mobBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        mobBtn.setAttribute('aria-label', open ? 'بستن منو' : 'باز کردن منو');
+        mobDrawer.setAttribute('aria-hidden', open ? 'false' : 'true');
+      };
+
+      mobBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        setDrawerOpen(!mobDrawer.classList.contains('open'));
+      });
+
+      mobDrawer.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => setDrawerOpen(false));
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && mobDrawer.classList.contains('open')) {
+          setDrawerOpen(false);
+        }
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!mobDrawer.contains(e.target) && !mobBtn.contains(e.target)) {
+          setDrawerOpen(false);
+        }
+      });
+    }
+
+    if ('serviceWorker' in navigator) {
+      const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+      if (isLocalhost) {
+        navigator.serviceWorker.getRegistrations().then(regs => {
+          for (const reg of regs) reg.unregister();
+        });
+        if ('caches' in window) {
+          caches.keys().then(names => {
+            for (const name of names) caches.delete(name);
+          });
+        }
+      } else {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('{{ "/sw.js" | url }}').catch(() => {});
+        });
+      }
+    }
   })();
-</script>
+  </script>
 
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-  <script>hljs.highlightAll();</script>
-
+  {%- if hasCodeBlocks %}
+  <!-- دکمه کپی مینیمال برای بلوک‌های کد -->
   <script>
   document.querySelectorAll('pre code').forEach(block => {
+    const pre = block.parentNode;
+    if (!pre || pre.querySelector('.copy-btn')) return;
+
+    const copySvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
+    const okSvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+
     const btn = document.createElement('button');
     btn.className = 'copy-btn';
-
-    const icon = document.createElement('img');
-    icon.src = "{{ '/icone/copy.svg' | url }}";
-    icon.alt = 'Copy';
-    btn.appendChild(icon);
-
-    block.parentNode.insertBefore(btn, block);
+    btn.setAttribute('aria-label', 'کپی کد');
+    btn.setAttribute('title', 'کپی کد');
+    btn.setAttribute('type', 'button');
+    btn.innerHTML = copySvg;
+    pre.appendChild(btn);
 
     btn.addEventListener('click', async () => {
-      await navigator.clipboard.writeText(block.textContent);
-      btn.classList.add('copied');
-      setTimeout(() => btn.classList.remove('copied'), 1500);
-    });
-  });
-  </script>
-
-  <script>
-  document.body.dataset.page = window.location.pathname;
-
-  const menuBtn = document.querySelector(".menu-toggle");
-  const nav = document.querySelector(".nav");
-
-  if (menuBtn && nav) {
-    menuBtn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      nav.classList.toggle("show");
-    });
-
-    document.addEventListener("click", (e) => {
-      const clickedInsideNav = nav.contains(e.target);
-      const clickedMenuButton = menuBtn.contains(e.target);
-      if (!clickedInsideNav && !clickedMenuButton) {
-        nav.classList.remove("show");
+      try {
+        await navigator.clipboard.writeText(block.textContent);
+        btn.classList.add('copied');
+        btn.innerHTML = okSvg;
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          btn.innerHTML = copySvg;
+        }, 1800);
+      } catch (err) {
+        console.error('Copy failed:', err);
       }
     });
+  });
+  </script>
+  {%- endif %}
+
+  {%- if isChapterPage %}
+  <!-- امکانات تعاملی تجربه مطالعه فصل‌ها -->
+  <script>
+  (() => {
+    const article = document.getElementById('chapterArticle');
+    if (!article) return;
+
+    const progressBar = document.getElementById('readingProgressBar');
+    if (progressBar) {
+      window.addEventListener('scroll', () => {
+        const docElem = document.documentElement;
+        const totalHeight = docElem.scrollHeight - docElem.clientHeight;
+        if (totalHeight > 0) {
+          const progress = (window.pageYOffset / totalHeight) * 100;
+          progressBar.style.width = Math.min(100, Math.max(0, progress)) + '%';
+        }
+      }, { passive: true });
+    }
+
+    const btt = document.getElementById('backToTopBtn');
+    if (btt) {
+      window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 250) {
+          btt.classList.add('visible');
+        } else {
+          btt.classList.remove('visible');
+        }
+      }, { passive: true });
+
+      btt.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+
+    article.querySelectorAll('img').forEach(img => {
+      if (!img.hasAttribute('loading')) img.loading = 'lazy';
+      if (!img.hasAttribute('decoding')) img.decoding = 'async';
+      const parent = img.parentElement;
+      if (parent && parent.tagName === 'P') {
+        parent.style.textAlign = 'center';
+      }
+
+      img.addEventListener('error', function() {
+        const src = this.getAttribute('src');
+        if (src && src.includes('assets/image/')) {
+          const parts = src.split('assets/image/');
+          const corrected = '{{ ("/books/" + bookId + "/assets/image/") | url }}' + parts[1];
+          if (this.src !== corrected) {
+            this.src = corrected;
+          }
+        }
+      });
+    });
+
+    article.querySelectorAll('p').forEach(p => {
+      const trimmed = p.innerText.trim();
+      if (trimmed.startsWith('💡') || trimmed.startsWith('نکته:')) {
+        p.classList.add('react-callout', 'callout-tip');
+      } else if (trimmed.startsWith('⚠️') || trimmed.startsWith('هشدار:')) {
+        p.classList.add('react-callout', 'callout-warning');
+      } else if (trimmed.startsWith('📌') || trimmed.startsWith('مهم:')) {
+        p.classList.add('react-callout', 'callout-important');
+      } else if (trimmed.startsWith('🔹') || trimmed.startsWith('🔸')) {
+        p.classList.add('react-callout', 'callout-note');
+      }
+    });
+  })();
+  </script>
+  {%- endif %}
+
+  <!-- پیش‌واکشی هوشمند ناوبری (Speculation Rules + Fallback) -->
+  <script type="speculationrules">
+  {
+    "prefetch": [
+      {
+        "where": {
+          "and": [
+            { "href_matches": "{{ '/' | url }}*" },
+            { "not": { "href_matches": "{{ '/downloads/*' | url }}" } },
+            { "not": { "selector_matches": "[download], [target='_blank']" } }
+          ]
+        },
+        "eagerness": "moderate"
+      }
+    ]
   }
   </script>
-
   <script>
-    document.getElementById('y').textContent = new Date().getFullYear();
+  (() => {
+    if (window.HTMLScriptElement && HTMLScriptElement.supports && HTMLScriptElement.supports('speculationrules')) return;
+    const seen = new Set([window.location.href]);
+    let count = 0;
+    const prefetchLink = (e) => {
+      if (count >= 12) return;
+      const a = e.target && e.target.closest ? e.target.closest('header a, .chapter-single-next-nav a, .syllabus-chapter-item a, .btn-hero-read, .btn-card-read') : null;
+      if (!a || !a.href || a.hasAttribute('download') || a.target === '_blank') return;
+      if (a.origin !== window.location.origin || a.pathname.includes('/downloads/')) return;
+      const clean = a.href.split('#')[0];
+      if (!clean || seen.has(clean)) return;
+      seen.add(clean);
+      count++;
+      const l = document.createElement('link');
+      l.rel = 'prefetch';
+      l.href = clean;
+      document.head.appendChild(l);
+    };
+    document.addEventListener('pointerenter', prefetchLink, { capture: true, passive: true });
+    document.addEventListener('touchstart', prefetchLink, { capture: true, passive: true });
+  })();
   </script>
-  <script>
-document.getElementById("openDonate").addEventListener("click", () => {
-  document.getElementById("donateModal").style.display = "block";
-});
-document.getElementById("closeDonate").addEventListener("click", () => {
-  document.getElementById("donateModal").style.display = "none";
-});
-document.querySelectorAll(".copy-btn").forEach(btn => {
-  btn.addEventListener("click", () => {
-    navigator.clipboard.writeText(btn.dataset.copy);
-  
-    setTimeout(() => (btn.textContent = "کپی"), 2000);
-  });
-});
-</script>
-
 </body>
 </html>

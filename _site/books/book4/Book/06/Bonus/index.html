@@ -1,86 +1,18 @@
-
-
-<!doctype html>
-<html lang="fa" dir="rtl">
-<head>
-  <meta charset="utf-8">
-  <link rel="icon" type="image/png" href="/Gitab/favicon.png">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>موارد اضافی</title>
-  <meta name="description" content="ترجمه‌های فارسی کتاب‌های فنی — سریع، مینیمال و قابل اتکا.">
-
-  <!-- استایل‌ها -->
-  <link rel="stylesheet" href="/Gitab/styles/main.css">
-  <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
-
-  <style>
-  @font-face {
-    font-family: 'Vazir';
-    src: url('/Gitab/fonts/Vazir-FD-WOL.ttf') format('truetype');
-    font-display: swap;
-  }
-  @font-face {
-    font-family: "Lalezar";
-    src: url('fonts/Lalezar.ttf') format('truetype');
-    font-display: swap;
-}
-  body {
-    font-family: 'Vazir', sans-serif;
-  }
-  </style>
-</head>
-
-<body>
-  <!-- هدر مشترک -->
-  <header class="header">
-    <div class="container nav-wrap">
-      <a href="/Gitab/" class="brand">
-        <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="26" height="26">
-        <span>Gitab</span>
-      </a>
-
-       <nav class="nav">
-         <a href="/Gitab/" >خانه</a>
-         <a href="/Gitab/books/list-books" >کتاب‌ها</a>
-         <a href="/Gitab/giter.html" >دوره ها</a>
-          <!-- 
-         <a href="/Gitab/translator.html" >مترجمین</a>
-           -->
-       </nav>
-
-      <div class="nav-actions">
-        <button id="themeToggle" class="icon-btn theme-btn" data-icon="moon" aria-label="تغییر تم">
-          <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن">
-          <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک">
-        </button>
-
-        <a class="icon-btn" href="https://github.com/hheydarian/Gitab" target="_blank" title="GitHub">
-          <img src="/Gitab/icone/github.svg" alt="GitHub">
-        </a>
-
-        <!-- دکمه منو برای موبایل -->
-        <button class="menu-toggle" aria-label="منو">
-          <img src="/Gitab/icone/menu.svg" alt="menu">
-        </button>
-      </div>
-    </div>
-  </header>
-
-  
-  <main class="site-main book-page">
-    <h1>فصل ششم: موارد اضافی 📝</h1>
-<p>در این فصل، چند موضوع تکمیلی درباره <strong>برنامه‌نویسی Task</strong> بررسی می‌شود.</p>
-<hr>
-<h3>گزارش پیشرفت (Progress Reporting) 📊</h3>
-<p>حتماً دیده‌اید هنگام <strong>به‌روزرسانی سیستم‌عامل</strong> یا <strong>نصب نسخه جدید Visual Studio</strong> روی یک کامپیوتر، وضعیت پیشرفت کار نمایش داده می‌شود. حالا بیایید ببینیم آیا می‌توانید با استفاده از <strong>برنامه‌نویسی Task</strong> یک برنامه با ویژگی مشابه بسازید؟</p>
-<hr>
-<h3>درک نیاز (Understanding the Need) 🤔</h3>
-<p>فرض کنید در حال پردازش تعداد زیادی <strong>رکورد (Record)</strong> مختلف هستید. برای شبیه‌سازی شرایط واقعی، تصور کنید که <strong>زمان پردازش هر رکورد متفاوت است</strong>. از آن‌جایی که این عملیات ممکن است <strong>زمان‌بر</strong> باشد، نمی‌خواهید <strong>رشته اصلی (Main Thread)</strong> مسدود شود. در عوض تصمیم می‌گیرید این کار را از طریق یک <strong>Task پس‌زمینه</strong> انجام دهید.</p>
-<hr>
-<h3>نمایش اولیه (Demonstration 1) 🖥️</h3>
-<p>با این حال، اگر هنگام پردازش این رکوردها <strong>وضعیت پیشرفت را نمایش ندهید</strong>، کاربر ممکن است <strong>سردرگم شود</strong>. برای ساده‌تر کردن موضوع، بیایید یک نمونه آزمایشی ببینیم که فقط با <strong>۵ رکورد</strong> کار می‌کند:</p>
-<pre class="hljs"><code><span class="hljs-keyword">using</span> <span class="hljs-keyword">static</span> System.Console;
+<!doctype html><html lang="fa" dir="rtl"> <head><script>
+    if (window.location.pathname.startsWith('/gitab/')) {
+      window.location.replace(window.location.pathname.replace(/^\/gitab\//i, '/Gitab/') + window.location.search + window.location.hash);
+    }
+    (() => {
+      try {
+        const t = localStorage.getItem('gitab-theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', t);
+        document.documentElement.dataset.colorMode = t;
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        document.documentElement.dataset.colorMode = 'dark';
+      }
+    })();
+  </script> <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5"> <title>موارد اضافی</title><meta name="description" content="موارد اضافی — مطالعه آنلاین و رایگان از کتاب «برنامه‌نویسی تسک و ناهمگام در سی‌شارپ» (Task Programming in C#) اثر Vaskaran Sarcar با ترجمه حامد حیدریان در گیتاب."> <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"><meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"> <meta name="theme-color" content="#090d16"><meta name="referrer" content="strict-origin-when-cross-origin"> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https:; frame-src https://www.youtube.com https://www.youtube-nocookie.com https://maps.google.com https://www.google.com; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self';"><link rel="icon" type="image/png" href="/Gitab/favicon.png"> <link rel="canonical" href="https://hheydarian.github.io/Gitab/books/book4/Book/06/Bonus/"><link rel="alternate" hreflang="fa" href="https://hheydarian.github.io/Gitab/books/book4/Book/06/Bonus/"> <link rel="alternate" hreflang="x-default" href="https://hheydarian.github.io/Gitab/books/book4/Book/06/Bonus/"><link rel="alternate" type="text/plain" title="LLMs.txt" href="/Gitab/llms.txt"> <link rel="sitemap" type="application/xml" title="Sitemap" href="/Gitab/sitemap.xml"><meta property="og:locale" content="fa_IR"> <meta property="og:type" content="article"><meta property="og:site_name" content="گیتاب | Gitab"> <meta property="og:title" content="موارد اضافی"><meta property="og:description" content="موارد اضافی — مطالعه آنلاین و رایگان از کتاب «برنامه‌نویسی تسک و ناهمگام در سی‌شارپ» (Task Programming in C#) اثر Vaskaran Sarcar با ترجمه حامد حیدریان در گیتاب."> <meta property="og:url" content="https://hheydarian.github.io/Gitab/books/book4/Book/06/Bonus/"><meta property="og:image" content="https://hheydarian.github.io/Gitab/images/task-programming/Cover.jpg"> <meta property="og:image:alt" content="موارد اضافی"><meta name="twitter:card" content="summary_large_image"> <meta name="twitter:title" content="موارد اضافی"><meta name="twitter:description" content="موارد اضافی — مطالعه آنلاین و رایگان از کتاب «برنامه‌نویسی تسک و ناهمگام در سی‌شارپ» (Task Programming in C#) اثر Vaskaran Sarcar با ترجمه حامد حیدریان در گیتاب."> <meta name="twitter:image" content="https://hheydarian.github.io/Gitab/images/task-programming/Cover.jpg"><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://hheydarian.github.io/Gitab/#organization","name":"گیتاب | Gitab","alternateName":"Gitab","url":"https://hheydarian.github.io/Gitab/","logo":{"@type":"ImageObject","url":"https://hheydarian.github.io/Gitab/favicon.png"},"sameAs":["https://github.com/hheydarian/Gitab"]},{"@type":"WebSite","@id":"https://hheydarian.github.io/Gitab/#website","url":"https://hheydarian.github.io/Gitab/","name":"گیتاب | Gitab","inLanguage":"fa-IR","publisher":{"@id":"https://hheydarian.github.io/Gitab/#organization"},"potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://hheydarian.github.io/Gitab/books/list-books/?q={search_term_string}"},"query-input":"required name=search_term_string"}},{"@type":"WebPage","@id":"https://hheydarian.github.io/Gitab/books/book4/Book/06/Bonus/#webpage","url":"https://hheydarian.github.io/Gitab/books/book4/Book/06/Bonus/","name":"موارد اضافی","description":"موارد اضافی — مطالعه آنلاین و رایگان از کتاب «برنامه‌نویسی تسک و ناهمگام در سی‌شارپ» (Task Programming in C#) اثر Vaskaran Sarcar با ترجمه حامد حیدریان در گیتاب.","inLanguage":"fa-IR","isPartOf":{"@id":"https://hheydarian.github.io/Gitab/#website"}},{"@type":"TechArticle","headline":"موارد اضافی","description":"موارد اضافی — مطالعه آنلاین و رایگان از کتاب «برنامه‌نویسی تسک و ناهمگام در سی‌شارپ» (Task Programming in C#) اثر Vaskaran Sarcar با ترجمه حامد حیدریان در گیتاب.","url":"https://hheydarian.github.io/Gitab/books/book4/Book/06/Bonus/","inLanguage":"fa-IR","isAccessibleForFree":true,"author":{"@type":"Person","name":"Vaskaran Sarcar"},"translator":{"@type":"Person","name":"حامد حیدریان"},"isPartOf":{"@type":"Book","name":"برنامه‌نویسی تسک و ناهمگام در سی‌شارپ","alternateName":"Task Programming in C#","url":"https://hheydarian.github.io/Gitab/books/book4/"}}]}</script> <link rel="preload" href="/Gitab/fonts/Vazirmatn.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/Gitab/styles/main.css?v=2.4" as="style"> <link rel="preload" href="/Gitab/styles/gitab-modern.css?v=2.5" as="style"><style>@font-face{font-family:'Lalezar';src:url('/Gitab/fonts/Lalezar.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}@font-face{font-family:'Vazirmatn';src:url('/Gitab/fonts/Vazirmatn.woff2') format('woff2');font-weight:100 900;font-style:normal;font-display:swap}html,body,button,input,optgroup,select,textarea,.filter-pill{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}input::placeholder,textarea::placeholder{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}</style> <link rel="stylesheet" href="/Gitab/styles/main.css?v=2.4"><link rel="stylesheet" href="/Gitab/styles/gitab-modern.css?v=2.5"> <link rel="stylesheet" href="/Gitab/styles/vendor/github-dark.min.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="/Gitab/styles/vendor/github-dark.min.css"></noscript></head> <body><header class="header"> <div class="container nav-wrap"><a href="/Gitab/" class="brand" aria-label="صفحه اصلی گیتاب"> <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="30" height="30" decoding="async"> <span class="brand-text">Gitab</span> </a> <nav class="nav" id="mainNav"><a href="/Gitab/" >خانه</a> <a href="/Gitab/books/list-books" aria-current="page">کتاب‌ها</a> <a href="/Gitab/courses/" >دوره‌ها</a> <a href="/Gitab/translator.html" >مترجمین</a></nav> <div class="nav-actions"><button id="themeToggle" class="theme-toggle-btn" aria-label="تغییر تم" title="تغییر تم"> <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن" width="18" height="18" decoding="async" style="display:none"> <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک" width="18" height="18" decoding="async"> </button> <a class="btn-github-pill" href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" title="مشاهده سورس گیتاب در گیت‌هاب"> <img src="/Gitab/icone/github.svg" alt="GitHub" width="16" height="16" decoding="async"> <span>گیت‌هاب</span> </a> <button class="mobile-menu-btn" id="mobileMenuBtn" type="button" aria-label="باز کردن منو" aria-expanded="false"> <svg class="mob-icon-open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="4" y1="7" x2="20" y2="7"></line> <line x1="4" y1="12" x2="20" y2="12"></line> <line x1="4" y1="17" x2="14" y2="17"></line> </svg> <svg class="mob-icon-close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="18" y1="6" x2="6" y2="18"></line> <line x1="6" y1="6" x2="18" y2="18"></line> </svg> </button></div> </div><div class="mobile-drawer" id="mobileDrawer" aria-hidden="true"> <div class="mobile-drawer-inner"><div class="mobile-drawer-section-label">ناوبری سریع</div><nav class="mobile-drawer-links" aria-label="منوی موبایل"> <a href="/Gitab/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M3 10.5 12 3l9 7.5"></path> <path d="M5 9.5V20a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V9.5"></path> </svg> </span> <span class="mob-nav-text">صفحه نخست</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/books/list-books" class="mobile-drawer-link active" aria-current="page"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path> </svg> </span> <span class="mob-nav-text">کتابخانه و فهرست کتاب‌ها</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/courses/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path> <path d="M6 12v5c3 3 9 3 12 0v-5"></path> </svg> </span> <span class="mob-nav-text">دوره‌های آموزشی</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/translator.html" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path> <circle cx="9" cy="7" r="4"></circle> <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path> <path d="M16 3.13a4 4 0 0 1 0 7.75"></path> </svg> </span> <span class="mob-nav-text">مترجمین و همکاران</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> </nav><div class="mobile-drawer-divider"></div><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" class="mobile-drawer-link mobile-drawer-gh"> <span class="mob-nav-icon" aria-hidden="true"> <img src="/Gitab/icone/github.svg" alt="" width="17" height="17" loading="lazy" decoding="async"> </span> <span class="mob-nav-text">مخزن گیت‌هاب پروژه</span> <span class="mob-nav-ext" aria-hidden="true">↗</span> </a> </div></div> </header><div class="reading-progress-track"> <div class="reading-progress-fill" id="readingProgressBar"></div></div> <main class="site-main chapter-reading-page"><div class="chapter-page-wrapper"> <nav class="chapter-clean-breadcrumb" aria-label="مسیر راهنما" dir="rtl"><a href="/Gitab/">خانه</a> <span class="bc-sep" aria-hidden="true">/</span> <a href="/Gitab/books/list-books/">کتاب‌ها</a> <span class="bc-sep" aria-hidden="true">/</span> <a href="/Gitab/books/book4/"><bdi>برنامه‌نویسی تسک در سی‌شارپ</bdi></a> <span class="bc-sep" aria-hidden="true">/</span> <span class="bc-current-leaf"><bdi>موارد اضافی</bdi></span></nav> <article class="chapter-prose-container markdown-body" id="chapterArticle" dir="rtl"><h1>فصل ششم: موارد اضافی</h1><p>در این فصل، چند موضوع تکمیلی درباره <strong>برنامه‌نویسی Task</strong> بررسی می‌شود.</p><hr> <h3>گزارش پیشرفت (Progress Reporting)</h3><p>حتماً دیده‌اید هنگام <strong>به‌روزرسانی سیستم‌عامل</strong> یا <strong>نصب نسخه جدید Visual Studio</strong> روی یک کامپیوتر، وضعیت پیشرفت کار نمایش داده می‌شود. حالا بیایید ببینیم آیا می‌توانید با استفاده از <strong>برنامه‌نویسی Task</strong> یک برنامه با ویژگی مشابه بسازید؟</p><hr> <h3>درک نیاز (Understanding the Need)</h3><p>فرض کنید در حال پردازش تعداد زیادی <strong>رکورد (Record)</strong> مختلف هستید. برای شبیه‌سازی شرایط واقعی، تصور کنید که <strong>زمان پردازش هر رکورد متفاوت است</strong>. از آن‌جایی که این عملیات ممکن است <strong>زمان‌بر</strong> باشد، نمی‌خواهید <strong>رشته اصلی (Main Thread)</strong> مسدود شود. در عوض تصمیم می‌گیرید این کار را از طریق یک <strong>Task پس‌زمینه</strong> انجام دهید.</p><hr> <h3>نمایش اولیه (Demonstration 1)</h3><p>با این حال، اگر هنگام پردازش این رکوردها <strong>وضعیت پیشرفت را نمایش ندهید</strong>، کاربر ممکن است <strong>سردرگم شود</strong>. برای ساده‌تر کردن موضوع، بیایید یک نمونه آزمایشی ببینیم که فقط با <strong>۵ رکورد</strong> کار می‌کند:</p><pre class="hljs"><code><span class="hljs-keyword">using</span> <span class="hljs-keyword">static</span> System.Console;
 
 WriteLine(<span class="hljs-string">&quot;The main thread is initiating a task to process some records.&quot;</span>);
 <span class="hljs-keyword">var</span> recordProcessingTask = Task.Run(ProcessRecords);
@@ -98,33 +30,12 @@ recordProcessingTask.Wait();
     }
     WriteLine(<span class="hljs-string">&quot;All the records are processed.&quot;</span>);
 }
-</code></pre>
-<hr>
-<h3>خروجی (Output) 🖨️</h3>
-<p>نمونه‌ای از خروجی که جای تعجبی ندارد به این صورت است:</p>
-<pre class="hljs"><code>The main thread is initiating a task to process some records.
+</code></pre> <hr><h3>خروجی (Output)</h3><p>نمونه‌ای از خروجی که جای تعجبی ندارد به این صورت است:</p><pre class="hljs"><code>The main thread is initiating a task to process some records.
 The main thread is doing other work now.
 Starts processing the records...
 All the records are processed.
-</code></pre>
-<hr>
-<h3>تحلیل (Analysis) 🔍</h3>
-<p>همان‌طور که مشاهده می‌کنید، خط <strong>&quot;All the records are processed.&quot;</strong> بعد از <strong>مدتی قابل توجه</strong> نمایش داده می‌شود. از دید کاربر این رفتار <strong>گیج‌کننده</strong> است؛ چون بعد از دیدن جمله <strong>&quot;Starts processing the records...&quot;</strong> نمی‌دانید در پس‌زمینه چه اتفاقی در حال رخ دادن است.</p>
-<p>اینجاست که متوجه می‌شوید <strong>گزارش پیشرفت (Progress Reporting)</strong> می‌تواند در چنین شرایطی بسیار مفید باشد، به‌ویژه هنگام اجرای <strong>یک Task طولانی‌مدت</strong>.</p>
-<hr>
-<h3>چگونه پیشرفت را گزارش کنیم؟</h3>
-<p>این موضوع کاملاً به شما بستگی دارد. به‌عنوان مثال:</p>
-<ul>
-<li>می‌توانید به‌سادگی چاپ کنید که <strong>کدام رکورد در حال پردازش است</strong>.</li>
-<li>یا می‌توانید پیشرفت را به‌صورت <strong>درصدی</strong> نمایش دهید، مثل:</li>
-</ul>
-<pre class="hljs"><code>completed processing: 60%
-</code></pre>
-<p>در مثال بعدی، می‌خواهم یک <strong>نمونه عملی</strong> با استفاده از <strong>ساختارهای داخلی برای گزارش پیشرفت</strong> به شما نشان دهم. بیایید بحث را شروع کنیم.</p>
-<hr>
-<h3>رابط IProgress و کلاس Progress<T> 🛠️</h3>
-<p>یک رابط (<strong>Interface</strong>) به نام <strong>IProgress</strong> در فضای نام <strong>System</strong> وجود دارد. این رابط یک متد به نام <strong>Report</strong> دارد که می‌تواند به شما کمک کند پیشرفت را نمایش دهید. نمای این رابط در Visual Studio به شکل زیر است:</p>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title">IProgress</span>&lt;<span class="hljs-keyword">in</span> <span class="hljs-title">T</span>&gt;
+</code></pre> <hr><h3>تحلیل (Analysis)</h3><p>همان‌طور که مشاهده می‌کنید، خط <strong>&quot;All the records are processed.&quot;</strong> بعد از <strong>مدتی قابل توجه</strong> نمایش داده می‌شود. از دید کاربر این رفتار <strong>گیج‌کننده</strong> است؛ چون بعد از دیدن جمله <strong>&quot;Starts processing the records...&quot;</strong> نمی‌دانید در پس‌زمینه چه اتفاقی در حال رخ دادن است.</p><p>اینجاست که متوجه می‌شوید <strong>گزارش پیشرفت (Progress Reporting)</strong> می‌تواند در چنین شرایطی بسیار مفید باشد، به‌ویژه هنگام اجرای <strong>یک Task طولانی‌مدت</strong>.</p><hr> <h3>چگونه پیشرفت را گزارش کنیم؟</h3><p>این موضوع کاملاً به شما بستگی دارد. به‌عنوان مثال:</p><ul> <li>می‌توانید به‌سادگی چاپ کنید که <strong>کدام رکورد در حال پردازش است</strong>.</li><li>یا می‌توانید پیشرفت را به‌صورت <strong>درصدی</strong> نمایش دهید، مثل:</li></ul> <pre class="hljs"><code>completed processing: 60%
+</code></pre> <p>در مثال بعدی، می‌خواهم یک <strong>نمونه عملی</strong> با استفاده از <strong>ساختارهای داخلی برای گزارش پیشرفت</strong> به شما نشان دهم. بیایید بحث را شروع کنیم.</p><hr> <h3>رابط IProgress و کلاس Progress<T></h3><p>یک رابط (<strong>Interface</strong>) به نام <strong>IProgress</strong> در فضای نام <strong>System</strong> وجود دارد. این رابط یک متد به نام <strong>Report</strong> دارد که می‌تواند به شما کمک کند پیشرفت را نمایش دهید. نمای این رابط در Visual Studio به شکل زیر است:</p><pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title">IProgress</span>&lt;<span class="hljs-keyword">in</span> <span class="hljs-title">T</span>&gt;
 {
     <span class="hljs-comment">//</span>
     <span class="hljs-comment">// Summary:</span>
@@ -135,30 +46,8 @@ All the records are processed.
     <span class="hljs-comment">//     The value of the updated progress.</span>
     <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Report</span>(<span class="hljs-params">T <span class="hljs-keyword">value</span></span>)</span>;
 }
-</code></pre>
-<p>با استفاده از این رابط، می‌توانید یک <strong>پیاده‌سازی سفارشی</strong> برای گزارش پیشرفت ایجاد کنید.</p>
-<p>همچنین یک کلاس داخلی به نام <strong>Progress<T></strong> وجود دارد که <strong>رابط IProgress</strong> را از قبل پیاده‌سازی کرده است. بنابراین می‌توانید از این کلاس برای رسیدن به هدف خود استفاده کنید.</p>
-<p>این کلاس یک <strong>رویداد (Event)</strong> به نام <strong>ProgressChanged</strong> ارائه می‌دهد که می‌تواند با هر به‌روزرسانی پیشرفت از کد ناهمزمان <strong>فعال شود</strong>.</p>
-<hr>
-<h3>استفاده از Delegate در Progress</h3>
-<p>یک نکته جالب دیگر این است که این کلاس <strong>Progress</strong> دارای دو <strong>سازنده (Constructor)</strong> است که یکی از آن‌ها به شکل زیر است:</p>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Progress</span>(<span class="hljs-params">Action&lt;T&gt; handler</span>)</span>;
-</code></pre>
-<p>این نکته به شما سرنخی می‌دهد که می‌توانید یک <strong>Delegate</strong> را به عنوان <strong>پارامتر سازنده</strong> کلاس Progress ارسال کنید. این Delegate عملاً نقش یک <strong>Event Handler</strong> را دارد که می‌توانید از آن برای <strong>گزارش پیشرفت</strong> استفاده کنید.</p>
-<p>بیایید <strong>کد قبلی را به‌روزرسانی کنیم</strong> تا ببینیم این کار چگونه انجام می‌شود.</p>
-<p>ابتدا تابع <strong>ProcessRecords</strong> را تغییر دادم تا بتواند <strong>IProgress<int></strong> را به عنوان یک <strong>پارامتر</strong> دریافت کند. بیایید نسخه اصلاح‌شده این تابع را ببینیم که تغییرات کلیدی آن <strong>پررنگ</strong> شده است.</p>
-<div align="center">
-<p><img src="../../../assets/image/06/Table%206-1.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<h3>نکات مهم (POINTS TO NOTE) 📝</h3>
-<p>به نکات زیر توجه داشته باشید:</p>
-<ul>
-<li>برای ساده‌سازی، من از <strong>پارامتر int</strong> استفاده کرده‌ام.<br>
-با این حال، شما می‌توانید انواع داده‌های دیگر را نیز انتخاب کنید.</li>
-<li>از آن‌جایی که <strong>۵ رکورد</strong> وجود دارد، بعد از پردازش هر رکورد، <strong>درصد پیشرفت را ۲۰٪ افزایش می‌دهم</strong>.</li>
-</ul>
-<p>نمونه کد:</p>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ProcessRecords</span>(<span class="hljs-params">IProgress&lt;<span class="hljs-built_in">int</span>&gt; progress</span>)</span>
+</code></pre> <p>با استفاده از این رابط، می‌توانید یک <strong>پیاده‌سازی سفارشی</strong> برای گزارش پیشرفت ایجاد کنید.</p><p>همچنین یک کلاس داخلی به نام <strong>Progress<T></strong> وجود دارد که <strong>رابط IProgress</strong> را از قبل پیاده‌سازی کرده است. بنابراین می‌توانید از این کلاس برای رسیدن به هدف خود استفاده کنید.</p><p>این کلاس یک <strong>رویداد (Event)</strong> به نام <strong>ProgressChanged</strong> ارائه می‌دهد که می‌تواند با هر به‌روزرسانی پیشرفت از کد ناهمزمان <strong>فعال شود</strong>.</p><hr> <h3>استفاده از Delegate در Progress</h3><p>یک نکته جالب دیگر این است که این کلاس <strong>Progress</strong> دارای دو <strong>سازنده (Constructor)</strong> است که یکی از آن‌ها به شکل زیر است:</p><pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Progress</span>(<span class="hljs-params">Action&lt;T&gt; handler</span>)</span>;
+</code></pre> <p>این نکته به شما سرنخی می‌دهد که می‌توانید یک <strong>Delegate</strong> را به عنوان <strong>پارامتر سازنده</strong> کلاس Progress ارسال کنید. این Delegate عملاً نقش یک <strong>Event Handler</strong> را دارد که می‌توانید از آن برای <strong>گزارش پیشرفت</strong> استفاده کنید.</p><p>بیایید <strong>کد قبلی را به‌روزرسانی کنیم</strong> تا ببینیم این کار چگونه انجام می‌شود.</p><p>ابتدا تابع <strong>ProcessRecords</strong> را تغییر دادم تا بتواند <strong>IProgress<int></strong> را به عنوان یک <strong>پارامتر</strong> دریافت کند. بیایید نسخه اصلاح‌شده این تابع را ببینیم که تغییرات کلیدی آن <strong>پررنگ</strong> شده است.</p><div align="center"> <p><img src="../../../assets/image/06/Table%206-1.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <h3>نکات مهم (POINTS TO NOTE)</h3><p>به نکات زیر توجه داشته باشید:</p><ul> <li>برای ساده‌سازی، من از <strong>پارامتر int</strong> استفاده کرده‌ام.<br> با این حال، شما می‌توانید انواع داده‌های دیگر را نیز انتخاب کنید.</li><li>از آن‌جایی که <strong>۵ رکورد</strong> وجود دارد، بعد از پردازش هر رکورد، <strong>درصد پیشرفت را ۲۰٪ افزایش می‌دهم</strong>.</li></ul> <p>نمونه کد:</p><pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ProcessRecords</span>(<span class="hljs-params">IProgress&lt;<span class="hljs-built_in">int</span>&gt; progress</span>)</span>
 {
     WriteLine(<span class="hljs-string">$&quot;Starts processing the records...&quot;</span>);
     <span class="hljs-built_in">int</span> progressPercentage = <span class="hljs-number">0</span>;
@@ -171,24 +60,13 @@ All the records are processed.
     }
     WriteLine(<span class="hljs-string">&quot;All the records are processed.&quot;</span>);
 }
-</code></pre>
-<hr>
-<h3>به‌روزرسانی کد فراخوانی (Calling Code) 🔄</h3>
-<p>برای استفاده از این تابع اصلاح‌شده، نیاز داشتم <strong>کد فراخوانی‌کننده</strong> را هم به‌روزرسانی کنم. بنابراین خط زیر:</p>
-<pre class="hljs"><code><span class="hljs-keyword">var</span> recordProcessingTask = Task.Run(ProcessRecords);
-</code></pre>
-<p>را با خطوط زیر جایگزین کردم:</p>
-<pre class="hljs"><code>IProgress&lt;<span class="hljs-built_in">int</span>&gt; reportProgress = <span class="hljs-keyword">new</span> Progress&lt;<span class="hljs-built_in">int</span>&gt;(
+</code></pre> <hr><h3>به‌روزرسانی کد فراخوانی (Calling Code)</h3><p>برای استفاده از این تابع اصلاح‌شده، نیاز داشتم <strong>کد فراخوانی‌کننده</strong> را هم به‌روزرسانی کنم. بنابراین خط زیر:</p><pre class="hljs"><code><span class="hljs-keyword">var</span> recordProcessingTask = Task.Run(ProcessRecords);
+</code></pre> <p>را با خطوط زیر جایگزین کردم:</p><pre class="hljs"><code>IProgress&lt;<span class="hljs-built_in">int</span>&gt; reportProgress = <span class="hljs-keyword">new</span> Progress&lt;<span class="hljs-built_in">int</span>&gt;(
     i =&gt; WriteLine(<span class="hljs-string">$&quot;Completed: <span class="hljs-subst">{i}</span>%&quot;</span>)
 );
 
 <span class="hljs-keyword">var</span> recordProcessingTask = Task.Run(() =&gt; ProcessRecords(reportProgress));
-</code></pre>
-<p>می‌بینید که <strong>سازنده Progress<int></strong> حالا یک <strong>Delegate</strong> می‌پذیرد که داده‌های پیشرفت را به عنوان <strong>پارامتر</strong> دریافت می‌کند. این Delegate هر بار که گزارش پیشرفت ارسال می‌شود، <strong>اجرا خواهد شد</strong>.</p>
-<hr>
-<h3>نمایش دوم (Demonstration 2) 🖥️</h3>
-<p>بیایید اجرای اصلاح‌شده را ببینیم:</p>
-<pre class="hljs"><code><span class="hljs-keyword">using</span> <span class="hljs-keyword">static</span> System.Console;
+</code></pre> <p>می‌بینید که <strong>سازنده Progress<int></strong> حالا یک <strong>Delegate</strong> می‌پذیرد که داده‌های پیشرفت را به عنوان <strong>پارامتر</strong> دریافت می‌کند. این Delegate هر بار که گزارش پیشرفت ارسال می‌شود، <strong>اجرا خواهد شد</strong>.</p><hr> <h3>نمایش دوم (Demonstration 2)</h3><p>بیایید اجرای اصلاح‌شده را ببینیم:</p><pre class="hljs"><code><span class="hljs-keyword">using</span> <span class="hljs-keyword">static</span> System.Console;
 
 WriteLine(<span class="hljs-string">&quot;The main thread is initiating a task to process some records.&quot;</span>);
 IProgress&lt;<span class="hljs-built_in">int</span>&gt; reportProgress = <span class="hljs-keyword">new</span> Progress&lt;<span class="hljs-built_in">int</span>&gt;(
@@ -200,12 +78,7 @@ WriteLine(<span class="hljs-string">&quot;The main thread is doing other work no
 recordProcessingTask.Wait();
 
 <span class="hljs-comment">// The ProcessRecords function is placed here. It is not shown again to avoid repetition.</span>
-</code></pre>
-<p><strong>توجه:</strong> برای مشاهده نمونه کامل، پروژه <strong>Chapter6_Demo2</strong> را دانلود کنید.</p>
-<hr>
-<h3>خروجی (Output) 🖨️</h3>
-<p>نمونه خروجی:</p>
-<pre class="hljs"><code>The main thread is initiating a task to process some records.
+</code></pre> <p><strong>توجه:</strong> برای مشاهده نمونه کامل، پروژه <strong>Chapter6_Demo2</strong> را دانلود کنید.</p><hr> <h3>خروجی (Output)</h3><p>نمونه خروجی:</p><pre class="hljs"><code>The main thread is initiating a task to process some records.
 The main thread is doing other work now.
 Starts processing the records...
 Completed: 20%
@@ -214,33 +87,8 @@ Completed: 60%
 Completed: 80%
 All the records are processed.
 Completed: 100%
-</code></pre>
-<p>همان‌طور که می‌بینید، برنامه به‌خوبی <strong>وضعیت به‌روزرسانی پیشرفت</strong> را چاپ می‌کند.</p>
-<hr>
-<h3>ایجاد و اجرای Taskها به‌صورت ضمنی (Creating and Running Tasks Implicitly) ⚙️</h3>
-<p>در سطح بالا، <strong>TPL</strong> (Task Parallel Library) شامل بخش‌های زیر است:</p>
-<ul>
-<li><strong>ساختارهای موازی‌سازی Taskها (Task parallelism constructs)</strong></li>
-<li><strong>کلاس Parallel</strong></li>
-</ul>
-<p><strong>TPL</strong> از <strong>موازی‌سازی داده‌ها</strong> از طریق کلاس <strong>Parallel</strong> پشتیبانی می‌کند. می‌توانید <strong>نسخه موازی حلقه for</strong> (با استفاده از <strong>Parallel.For</strong>) و <strong>حلقه foreach</strong> (با استفاده از <strong>Parallel.ForEach</strong>) را در این کلاس استفاده کنید.</p>
-<p>جزئیات کامل کلاس <strong>Parallel</strong> خارج از محدوده این کتاب است. با این حال، بد نیست بدانید که این کلاس یک متد مفید به نام <strong>Invoke</strong> دارد که به شما کمک می‌کند <strong>چندین Task را به‌صورت هم‌زمان اجرا کنید</strong>.</p>
-<p><strong>یادداشت نویسنده:</strong> از آن‌جایی که بخش اول (<strong>ساختارهای موازی‌سازی Taskها</strong>) قبلاً در این کتاب پوشش داده شده است، در این بخش به آن نمی‌پردازیم.</p>
-<hr>
-<h3>استفاده از Parallel.Invoke 🧩</h3>
-<p>لینک آنلاین زیر بیان می‌کند:<br>
-<a href="https://learn.microsoft.com/en-us/previousversions/msp-n-p/ff963549%28v=pandp.10%29?redirectedfrom=MSDN">https://learn.microsoft.com/en-us/previousversions/msp-n-p/ff963549(v=pandp.10)?redirectedfrom=MSDN</a></p>
-<blockquote>
-<p><strong>Parallel.Invoke</strong> ساده‌ترین بیان الگوی Task موازی است. این متد برای هر <strong>Delegate Method</strong> که در آرایه <strong>params</strong> آن قرار دارد، <strong>Taskهای موازی جدید</strong> ایجاد می‌کند. متد <strong>Invoke</strong> زمانی برمی‌گردد که <strong>همه Taskها تمام شده باشند</strong>.</p>
-</blockquote>
-<p>در زمان نگارش این کتاب، دو <strong>بارگذاری (Overload)</strong> برای متد موازی <strong>Invoke</strong> وجود دارد. در اینجا ساده‌ترین آن‌ها را در نظر می‌گیریم که به این صورت است:</p>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Invoke</span>(<span class="hljs-params"><span class="hljs-keyword">params</span> Action[] actions</span>)</span>;
-</code></pre>
-<p>می‌دانید که هنگام استفاده از این متد، می‌توانید تعداد متغیری از <strong>Action Instance</strong>ها را به متد <strong>Invoke</strong> ارسال کنید. بیایید <strong>سه نمونه Action</strong> بسازیم و آن‌ها را در برنامه زیر ارسال کنیم.</p>
-<hr>
-<h3>نمایش سوم (Demonstration 3) 🖥️</h3>
-<p>نمونه کامل برنامه:</p>
-<pre class="hljs"><code><span class="hljs-keyword">using</span> <span class="hljs-keyword">static</span> System.Console;
+</code></pre> <p>همان‌طور که می‌بینید، برنامه به‌خوبی <strong>وضعیت به‌روزرسانی پیشرفت</strong> را چاپ می‌کند.</p><hr> <h3>ایجاد و اجرای Taskها به‌صورت ضمنی (Creating and Running Tasks Implicitly)</h3><p>در سطح بالا، <strong>TPL</strong> (Task Parallel Library) شامل بخش‌های زیر است:</p><ul> <li><strong>ساختارهای موازی‌سازی Taskها (Task parallelism constructs)</strong></li><li><strong>کلاس Parallel</strong></li></ul> <p><strong>TPL</strong> از <strong>موازی‌سازی داده‌ها</strong> از طریق کلاس <strong>Parallel</strong> پشتیبانی می‌کند. می‌توانید <strong>نسخه موازی حلقه for</strong> (با استفاده از <strong>Parallel.For</strong>) و <strong>حلقه foreach</strong> (با استفاده از <strong>Parallel.ForEach</strong>) را در این کلاس استفاده کنید.</p><p>جزئیات کامل کلاس <strong>Parallel</strong> خارج از محدوده این کتاب است. با این حال، بد نیست بدانید که این کلاس یک متد مفید به نام <strong>Invoke</strong> دارد که به شما کمک می‌کند <strong>چندین Task را به‌صورت هم‌زمان اجرا کنید</strong>.</p><p><strong>یادداشت نویسنده:</strong> از آن‌جایی که بخش اول (<strong>ساختارهای موازی‌سازی Taskها</strong>) قبلاً در این کتاب پوشش داده شده است، در این بخش به آن نمی‌پردازیم.</p><hr> <h3>استفاده از Parallel.Invoke</h3><p>لینک آنلاین زیر بیان می‌کند:<br><a href="https://learn.microsoft.com/en-us/previousversions/msp-n-p/ff963549%28v=pandp.10%29?redirectedfrom=MSDN">https://learn.microsoft.com/en-us/previousversions/msp-n-p/ff963549(v=pandp.10)?redirectedfrom=MSDN</a></p><blockquote> <p><strong>Parallel.Invoke</strong> ساده‌ترین بیان الگوی Task موازی است. این متد برای هر <strong>Delegate Method</strong> که در آرایه <strong>params</strong> آن قرار دارد، <strong>Taskهای موازی جدید</strong> ایجاد می‌کند. متد <strong>Invoke</strong> زمانی برمی‌گردد که <strong>همه Taskها تمام شده باشند</strong>.</p></blockquote> <p>در زمان نگارش این کتاب، دو <strong>بارگذاری (Overload)</strong> برای متد موازی <strong>Invoke</strong> وجود دارد. در اینجا ساده‌ترین آن‌ها را در نظر می‌گیریم که به این صورت است:</p><pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Invoke</span>(<span class="hljs-params"><span class="hljs-keyword">params</span> Action[] actions</span>)</span>;
+</code></pre> <p>می‌دانید که هنگام استفاده از این متد، می‌توانید تعداد متغیری از <strong>Action Instance</strong>ها را به متد <strong>Invoke</strong> ارسال کنید. بیایید <strong>سه نمونه Action</strong> بسازیم و آن‌ها را در برنامه زیر ارسال کنیم.</p><hr> <h3>نمایش سوم (Demonstration 3)</h3><p>نمونه کامل برنامه:</p><pre class="hljs"><code><span class="hljs-keyword">using</span> <span class="hljs-keyword">static</span> System.Console;
 
 <span class="hljs-meta">#<span class="hljs-keyword">region</span> Parallel.Invoke</span>
 WriteLine(<span class="hljs-string">&quot;Using Parallel.Invoke method.&quot;</span>);
@@ -252,45 +100,12 @@ Action ask = <span class="hljs-keyword">new</span>(() =&gt; WriteLine(<span clas
 Parallel.Invoke(greet, printMsg, ask);
 WriteLine(<span class="hljs-string">&quot;End Parallel.Invoke&quot;</span>);
 <span class="hljs-meta">#<span class="hljs-keyword">endregion</span></span>
-</code></pre>
-<h3>خروجی (Output) 🖨️</h3>
-<p>نمونه خروجی اجرای <strong>Parallel.Invoke</strong>:</p>
-<pre class="hljs"><code>Using Parallel.Invoke method.
+</code></pre> <h3>خروجی (Output)</h3><p>نمونه خروجی اجرای <strong>Parallel.Invoke</strong>:</p><pre class="hljs"><code>Using Parallel.Invoke method.
 Task 3 says: Hello reader!
 Task 1 says: This is a beautiful day.
 Task 2 says: How are you?
 End Parallel.Invoke
-</code></pre>
-<hr>
-<h3>پیشنهادات تکمیلی (Additional Suggestions) 💡</h3>
-<p>قبل از پایان این بخش، چند پیشنهاد برای شما دارم:</p>
-<ul>
-<li>برای کنترل بیشتر بر <strong>اجرای Taskها</strong>، بهتر است آن‌ها را به‌صورت <strong>صریح ایجاد و اجرا کنید</strong>.</li>
-<li>زمانی که این کتاب را به پایان رساندید و دانش بیشتری در مورد <strong>برنامه‌نویسی ناهمزمان</strong> کسب کردید، می‌توانید پست آنلاین زیر را مطالعه کنید که این رویکردها را مقایسه کرده است:<br>
-<a href="https://devblogs.microsoft.com/pfxteam/task-run-vs-task-factory-startnew/">https://devblogs.microsoft.com/pfxteam/task-run-vs-task-factory-startnew/</a></li>
-</ul>
-<p>هرچند این مقاله مدت‌ها پیش نوشته شده، همچنان مفید است. البته برای درک آن باید با <strong>کلیدواژه‌های async و await</strong> آشنا باشید.</p>
-<hr>
-<h3>پرسش و پاسخ (Q&amp;A Session) ❓💬</h3>
-<p><strong>سوال ۶.۱:</strong><br>
-می‌بینم که <strong>Task ۲</strong> بعد از <strong>Task ۳</strong> در خروجی قبلی تمام شده است. آیا این رفتار طبیعی است؟ همچنین می‌بینم که شما منتظر اتمام Taskها نشدید. آیا این درست است؟</p>
-<p><strong>پاسخ:</strong><br>
-بله. لینک آنلاین زیر بیان می‌کند:<br>
-<a href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.parallel.invoke?view=net-9.0">https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.parallel.invoke?view=net-9.0</a></p>
-<blockquote>
-<p>این متد برای اجرای مجموعه‌ای از عملیات استفاده می‌شود، که ممکن است به‌صورت موازی اجرا شوند. <strong>هیچ تضمینی در مورد ترتیب اجرای عملیات یا موازی بودن آن‌ها وجود ندارد</strong>. این متد قبل از این که تمام عملیات ارائه‌شده تمام شوند (چه به‌طور عادی و چه با خطا)، <strong>برنمی‌گردد</strong>.</p>
-</blockquote>
-<hr>
-<p><strong>سوال ۶.۲:</strong><br>
-به نظر می‌رسد که من می‌توانم <strong>Taskهای جداگانه بسازم</strong> و منتظر بمانم تا اجرای آن‌ها تمام شود، به‌جای استفاده از <strong>Parallel.Invoke</strong>. آیا درست است؟</p>
-<p><strong>پاسخ:</strong><br>
-مشاهده خوبی است. لینک آنلاین زیر نیز این موضوع را تأیید می‌کند:<br>
-<a href="https://learn.microsoft.com/en-us/previous-versions/msp-n-p/ff963549%28v=pandp.10%29?redirectedfrom=MSDN">https://learn.microsoft.com/en-us/previous-versions/msp-n-p/ff963549(v=pandp.10)?redirectedfrom=MSDN</a></p>
-<blockquote>
-<p>درونی، <strong>Parallel.Invoke</strong> Taskهای جدید ایجاد کرده و منتظر آن‌ها می‌ماند. این کار را با استفاده از متدهای کلاس <strong>Task</strong> انجام می‌دهد.</p>
-</blockquote>
-<p>اگر به لینک بالا مراجعه کنید، متوجه می‌شوید که می‌توانم برنامه معادل زیر را بنویسم:</p>
-<pre class="hljs"><code><span class="hljs-keyword">using</span> <span class="hljs-keyword">static</span> System.Console;
+</code></pre> <hr><h3>پیشنهادات تکمیلی (Additional Suggestions)</h3><p>قبل از پایان این بخش، چند پیشنهاد برای شما دارم:</p><ul> <li>برای کنترل بیشتر بر <strong>اجرای Taskها</strong>، بهتر است آن‌ها را به‌صورت <strong>صریح ایجاد و اجرا کنید</strong>.</li><li>زمانی که این کتاب را به پایان رساندید و دانش بیشتری در مورد <strong>برنامه‌نویسی ناهمزمان</strong> کسب کردید، می‌توانید پست آنلاین زیر را مطالعه کنید که این رویکردها را مقایسه کرده است:<br><a href="https://devblogs.microsoft.com/pfxteam/task-run-vs-task-factory-startnew/">https://devblogs.microsoft.com/pfxteam/task-run-vs-task-factory-startnew/</a></li></ul> <p>هرچند این مقاله مدت‌ها پیش نوشته شده، همچنان مفید است. البته برای درک آن باید با <strong>کلیدواژه‌های async و await</strong> آشنا باشید.</p><hr> <h3>پرسش و پاسخ (Q&amp;A Session)</h3><p><strong>سوال ۶.۱:</strong><br> می‌بینم که <strong>Task ۲</strong> بعد از <strong>Task ۳</strong> در خروجی قبلی تمام شده است. آیا این رفتار طبیعی است؟ همچنین می‌بینم که شما منتظر اتمام Taskها نشدید. آیا این درست است؟</p><p><strong>پاسخ:</strong><br> بله. لینک آنلاین زیر بیان می‌کند:<br><a href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.parallel.invoke?view=net-9.0">https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.parallel.invoke?view=net-9.0</a></p><blockquote> <p>این متد برای اجرای مجموعه‌ای از عملیات استفاده می‌شود، که ممکن است به‌صورت موازی اجرا شوند. <strong>هیچ تضمینی در مورد ترتیب اجرای عملیات یا موازی بودن آن‌ها وجود ندارد</strong>. این متد قبل از این که تمام عملیات ارائه‌شده تمام شوند (چه به‌طور عادی و چه با خطا)، <strong>برنمی‌گردد</strong>.</p></blockquote> <hr><p><strong>سوال ۶.۲:</strong><br> به نظر می‌رسد که من می‌توانم <strong>Taskهای جداگانه بسازم</strong> و منتظر بمانم تا اجرای آن‌ها تمام شود، به‌جای استفاده از <strong>Parallel.Invoke</strong>. آیا درست است؟</p><p><strong>پاسخ:</strong><br> مشاهده خوبی است. لینک آنلاین زیر نیز این موضوع را تأیید می‌کند:<br><a href="https://learn.microsoft.com/en-us/previous-versions/msp-n-p/ff963549%28v=pandp.10%29?redirectedfrom=MSDN">https://learn.microsoft.com/en-us/previous-versions/msp-n-p/ff963549(v=pandp.10)?redirectedfrom=MSDN</a></p><blockquote> <p>درونی، <strong>Parallel.Invoke</strong> Taskهای جدید ایجاد کرده و منتظر آن‌ها می‌ماند. این کار را با استفاده از متدهای کلاس <strong>Task</strong> انجام می‌دهد.</p></blockquote> <p>اگر به لینک بالا مراجعه کنید، متوجه می‌شوید که می‌توانم برنامه معادل زیر را بنویسم:</p><pre class="hljs"><code><span class="hljs-keyword">using</span> <span class="hljs-keyword">static</span> System.Console;
 
 Task greet2 = Task.Factory.StartNew(
     () =&gt; WriteLine(<span class="hljs-string">$&quot;Task <span class="hljs-subst">{Task.CurrentId}</span> says: Hello reader!&quot;</span>)
@@ -305,27 +120,7 @@ Task ask2 = Task.Factory.StartNew(
 );
 
 Task.WaitAll(greet2, printMsg2, ask2);
-</code></pre>
-<p><strong>نکته:</strong> زمانی که با تعداد زیادی <strong>Delegate</strong> کار می‌کنید، ایجاد Taskهای جداگانه برای هرکدام و مدیریت آن‌ها <strong>راه‌حل مناسبی نیست</strong>. استفاده از <strong>Parallel.Invoke</strong> باعث راحتی و <strong>کارایی بیشتر</strong> در چنین مواردی می‌شود.</p>
-<hr>
-<p><strong>سوال ۶.۳:</strong><br>
-تفاوت <strong>موازی‌سازی داده‌ها (Data Parallelism)</strong> و <strong>موازی‌سازی Taskها (Task Parallelism)</strong> چیست؟</p>
-<p><strong>پاسخ:</strong><br>
-مایکروسافت این تفاوت را به‌خوبی این‌گونه بیان می‌کند:</p>
-<blockquote>
-<p><strong>موازی‌سازی داده‌ها</strong> و <strong>موازی‌سازی Taskها</strong> دو انتهای یک طیف هستند.<br>
-در موازی‌سازی داده‌ها، یک عملیات واحد روی <strong>ورودی‌های متعدد</strong> اعمال می‌شود.<br>
-در موازی‌سازی Taskها، از <strong>عملیات مختلف</strong> استفاده می‌شود که هرکدام <strong>ورودی خاص خود را دارند</strong>.</p>
-</blockquote>
-<hr>
-<h3>Taskهای پیش‌محاسبه‌شده (Precomputed Tasks) ⚡</h3>
-<p>یکی از مزایای اصلی انجام عملیات <strong>ناهمزمان (Asynchronous)</strong>، <strong>اجرای سریع‌تر</strong> است. با این حال، برخی از عملیات‌ها حتی با تلاش زیاد شما همچنان <strong>زمان‌بر</strong> هستند. برای مقابله با این مشکل می‌توانید از <strong>مکانیسم کش (Caching)</strong> استفاده کنید. بیایید این موضوع را دقیق‌تر بررسی کنیم.</p>
-<hr>
-<h3>بدون کش (Without Caching) 🚫</h3>
-<p>برنامه زیر متدی <strong>زمان‌بر</strong> به نام <strong>TimeConsumingMethod</strong> را اجرا می‌کند. هر بار که این متد را فراخوانی می‌کنید، باید <strong>بیش از ۳ ثانیه منتظر بمانید</strong> تا یک عدد تصادفی تولید شود. حالا برنامه‌ای بنویسیم که این متد را چندین بار فراخوانی کند:</p>
-<hr>
-<h3>نمایش چهارم (Demonstration 4) 🖥️</h3>
-<pre class="hljs"><code><span class="hljs-keyword">using</span> System.Diagnostics;
+</code></pre> <p><strong>نکته:</strong> زمانی که با تعداد زیادی <strong>Delegate</strong> کار می‌کنید، ایجاد Taskهای جداگانه برای هرکدام و مدیریت آن‌ها <strong>راه‌حل مناسبی نیست</strong>. استفاده از <strong>Parallel.Invoke</strong> باعث راحتی و <strong>کارایی بیشتر</strong> در چنین مواردی می‌شود.</p><hr> <p><strong>سوال ۶.۳:</strong><br> تفاوت <strong>موازی‌سازی داده‌ها (Data Parallelism)</strong> و <strong>موازی‌سازی Taskها (Task Parallelism)</strong> چیست؟</p><p><strong>پاسخ:</strong><br> مایکروسافت این تفاوت را به‌خوبی این‌گونه بیان می‌کند:</p><blockquote> <p><strong>موازی‌سازی داده‌ها</strong> و <strong>موازی‌سازی Taskها</strong> دو انتهای یک طیف هستند.<br> در موازی‌سازی داده‌ها، یک عملیات واحد روی <strong>ورودی‌های متعدد</strong> اعمال می‌شود.<br> در موازی‌سازی Taskها، از <strong>عملیات مختلف</strong> استفاده می‌شود که هرکدام <strong>ورودی خاص خود را دارند</strong>.</p></blockquote> <hr><h3>Taskهای پیش‌محاسبه‌شده (Precomputed Tasks)</h3><p>یکی از مزایای اصلی انجام عملیات <strong>ناهمزمان (Asynchronous)</strong>، <strong>اجرای سریع‌تر</strong> است. با این حال، برخی از عملیات‌ها حتی با تلاش زیاد شما همچنان <strong>زمان‌بر</strong> هستند. برای مقابله با این مشکل می‌توانید از <strong>مکانیسم کش (Caching)</strong> استفاده کنید. بیایید این موضوع را دقیق‌تر بررسی کنیم.</p><hr> <h3>بدون کش (Without Caching)</h3><p>برنامه زیر متدی <strong>زمان‌بر</strong> به نام <strong>TimeConsumingMethod</strong> را اجرا می‌کند. هر بار که این متد را فراخوانی می‌کنید، باید <strong>بیش از ۳ ثانیه منتظر بمانید</strong> تا یک عدد تصادفی تولید شود. حالا برنامه‌ای بنویسیم که این متد را چندین بار فراخوانی کند:</p><hr> <h3>نمایش چهارم (Demonstration 4)</h3><pre class="hljs"><code><span class="hljs-keyword">using</span> System.Diagnostics;
 <span class="hljs-keyword">using</span> <span class="hljs-keyword">static</span> System.Console;
 
 Stopwatch stopwatch = Stopwatch.StartNew();
@@ -357,29 +152,13 @@ WriteLine(<span class="hljs-string">$&quot;Elapsed time: <span class="hljs-subst
         );
     }
 }
-</code></pre>
-<h3>خروجی (Output) 🖨️</h3>
-<p>نمونه خروجی اجرای برنامه:</p>
-<pre class="hljs"><code>Forming the value...
+</code></pre> <h3>خروجی (Output)</h3><p>نمونه خروجی اجرای برنامه:</p><pre class="hljs"><code>Forming the value...
 87
 Elapsed time: 3092 milliseconds
 Forming the value...
 45
 Elapsed time: 3017 milliseconds
-</code></pre>
-<hr>
-<h3>تحلیل (Analysis) 🔍</h3>
-<p>می‌بینید که هر بار که <strong>متد زمان‌بر</strong> فراخوانی می‌شود، <strong>بیش از ۳ ثانیه</strong> طول می‌کشد تا یک عدد برگرداند.</p>
-<hr>
-<h3>اعمال مکانیزم کش (Applying Caching Mechanism) 💾</h3>
-<p>برای بهبود برنامه می‌توانید از <strong>مکانیزم کش (Cache)</strong> استفاده کنید. ایده به این صورت است:<br>
-وقتی مقدار یک‌بار محاسبه شد، آن را در <strong>کش نگه می‌داریم</strong>؛ در نتیجه، بار بعدی که کاربر متد را فراخوانی می‌کند، همان مقدار ذخیره‌شده در کش به او برگردانده می‌شود.</p>
-<p>در این زمینه می‌توانید از متد <strong>Task.FromResult</strong> استفاده کنید. این متد به شما کمک می‌کند <strong>یک شیء Task<TResult> آماده</strong> را برگردانید که مقدار موردنظر در ویژگی <strong>Result</strong> آن نگه‌داری شده است.</p>
-<p>این روش به‌ویژه زمانی مفید است که یک عملیات <strong>ناهمزمان (Asynchronous)</strong> انجام می‌دهید که <strong>Task<TResult></strong> برمی‌گرداند، اما نتیجه آن قبلاً در دسترس است.</p>
-<hr>
-<h3>نمایش پنجم (Demonstration 5) 🖥️</h3>
-<p>بیایید متد زمان‌بر کلاس Sample را به شکل زیر اصلاح کنیم:</p>
-<pre class="hljs"><code><span class="hljs-comment">// There is no other change in the previous code</span>
+</code></pre> <hr><h3>تحلیل (Analysis)</h3><p>می‌بینید که هر بار که <strong>متد زمان‌بر</strong> فراخوانی می‌شود، <strong>بیش از ۳ ثانیه</strong> طول می‌کشد تا یک عدد برگرداند.</p><hr> <h3>اعمال مکانیزم کش (Applying Caching Mechanism)</h3><p>برای بهبود برنامه می‌توانید از <strong>مکانیزم کش (Cache)</strong> استفاده کنید. ایده به این صورت است:<br> وقتی مقدار یک‌بار محاسبه شد، آن را در <strong>کش نگه می‌داریم</strong>؛ در نتیجه، بار بعدی که کاربر متد را فراخوانی می‌کند، همان مقدار ذخیره‌شده در کش به او برگردانده می‌شود.</p><p>در این زمینه می‌توانید از متد <strong>Task.FromResult</strong> استفاده کنید. این متد به شما کمک می‌کند <strong>یک شیء Task<TResult> آماده</strong> را برگردانید که مقدار موردنظر در ویژگی <strong>Result</strong> آن نگه‌داری شده است.</p><p>این روش به‌ویژه زمانی مفید است که یک عملیات <strong>ناهمزمان (Asynchronous)</strong> انجام می‌دهید که <strong>Task<TResult></strong> برمی‌گرداند، اما نتیجه آن قبلاً در دسترس است.</p><hr> <h3>نمایش پنجم (Demonstration 5)</h3><p>بیایید متد زمان‌بر کلاس Sample را به شکل زیر اصلاح کنیم:</p><pre class="hljs"><code><span class="hljs-comment">// There is no other change in the previous code</span>
 <span class="hljs-keyword">class</span> <span class="hljs-title">Sample</span>
 {
     <span class="hljs-keyword">static</span> <span class="hljs-built_in">bool</span> cacheFormed;
@@ -407,65 +186,13 @@ Elapsed time: 3017 milliseconds
         });
     }
 }
-</code></pre>
-<hr>
-<h3>خروجی (Output) 🖨️</h3>
-<p>نمونه خروجی:</p>
-<pre class="hljs"><code>First call: forming the value...
+</code></pre> <hr><h3>خروجی (Output)</h3><p>نمونه خروجی:</p><pre class="hljs"><code>First call: forming the value...
 42
 Elapsed time: 3026 milliseconds
 Subsequent call(s): getting the value from the cache.
 42
 Elapsed time: 1 milliseconds
-</code></pre>
-<hr>
-<h3>تحلیل (Analysis) 🔍</h3>
-<p>می‌بینید که مکانیزم کش باعث شد در فراخوانی‌های بعدی <strong>زمان پاسخ‌دهی به‌طور چشمگیری کاهش پیدا کند</strong>.</p>
-<hr>
-<h3>پرسش و پاسخ (Q&amp;A Session) ❓💬</h3>
-<p><strong>سوال ۶.۴:</strong><br>
-می‌توانید یک نمونه واقعی بگویید که در آن از <strong>Taskهای پیش‌محاسبه‌شده (Precomputed Tasks)</strong> استفاده کنم؟</p>
-<p><strong>پاسخ:</strong><br>
-فرض کنید برنامه‌ای دارید که کاربر یک <strong>URL</strong> وارد می‌کند، سپس برنامه شروع به <strong>دانلود داده‌ها از آن URL</strong> برای پردازش‌های بعدی می‌کند. در این حالت، برای جلوگیری از دانلودهای تکراری، می‌توانید <strong>URL و داده‌های مربوطه را در کش ذخیره کنید</strong>.</p>
-<hr>
-<h3>استفاده از TaskCompletionSource 🛠️</h3>
-<p>دیدید که <strong>Taskها</strong> می‌توانند به شما کمک کنند تا <strong>کارهای پس‌زمینه</strong> را انجام دهید. همچنین برای <strong>مدیریت آیتم‌های کاری</strong> مثل انجام <strong>کارهای ادامه‌دار (Continuation Works)</strong>، مدیریت <strong>Taskهای فرزند (Child Tasks)</strong> یا <strong>مدیریت خطاها (Exceptions)</strong> مفید هستند.</p>
-<p>اما گاهی لازم است <strong>کنترل بیشتری بر Taskها داشته باشید</strong>. در چنین شرایطی، کلاس <strong>TaskCompletionSource<TResult></strong> می‌تواند بسیار مفید باشد. بیایید استفاده از آن را بررسی کنیم.</p>
-<p>کلاس <strong>TaskCompletionSource<TResult></strong> به شما امکان می‌دهد <strong>یک Task را از هر عملیاتی که قرار است در آینده کامل شود ایجاد کنید</strong>.</p>
-<p>مایکروسافت در لینک زیر این کلاس را این‌گونه توضیح داده است:<br>
-<a href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.taskcompletionsource-1?view=net-8.0">https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.taskcompletionsource-1?view=net-8.0</a></p>
-<blockquote>
-<p>نماینده سمت تولیدکننده یک <strong>Task<TResult></strong> است که به هیچ <strong>Delegate</strong> خاصی متصل نیست و <strong>سمت مصرف‌کننده</strong> از طریق ویژگی <strong>Task</strong> به آن دسترسی دارد.</p>
-</blockquote>
-<p>به بیان ساده‌تر، در پشت‌صحنه، با استفاده از این کلاس، یک <strong>Task وابسته (Slave Task)</strong> دارید که می‌توانید <strong>به‌صورت دستی آن را کامل کنید</strong>. این قابلیت برای کارهای <strong>I/O محور</strong> بسیار ایده‌آل است، چون می‌توانید از <strong>مزایای Taskها</strong> استفاده کنید بدون این‌که <strong>رشته فراخوانی‌کننده را مسدود کنید</strong>.</p>
-<h3>نحوه استفاده (How to Use?) 🛠️</h3>
-<p>حالا سؤال این است: <strong>چطور باید از این کلاس استفاده کنیم؟</strong></p>
-<p>اولین قدم این است که <strong>یک نمونه (Instance)</strong> از این کلاس ایجاد کنید.<br>
-به‌محض نمونه‌سازی، چند <strong>متد داخلی (Built-in Methods)</strong> در اختیار شما قرار می‌گیرد که می‌توانند نیازهای شما را برآورده کنند.</p>
-<p>در تصویر زیر (نمونه اسکرین‌شات از Visual Studio) جزئیات این کلاس نشان داده شده است (شکل <strong>6-1</strong> را ببینید).</p>
-<div align="center">
-<p><img src="../../../assets/image/06/Table%206-2.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<h3>از روی این اسکرین‌شات چه متوجه می‌شویم؟</h3>
-<p>از تصویر مشخص است که <strong>نام متدها یا با “Set” شروع می‌شوند یا با “TrySet”</strong>.</p>
-<ul>
-<li><strong>گروه اول (Set)</strong> مقدار بازگشتی ندارد (<strong>void</strong>).</li>
-<li><strong>گروه دوم (TrySet)</strong> مقدار بازگشتی بولی (<strong>bool</strong>) دارد.</li>
-</ul>
-<p>نکات مهم درباره این متدها:</p>
-<ul>
-<li>زمانی که هرکدام از این متدها را صدا می‌زنید، <strong>تسک وارد یکی از حالات نهایی (RanToCompletion، Faulted، یا Canceled)</strong> می‌شود.</li>
-<li>متدهای گروه اول (یعنی متدهایی که با <strong>Set</strong> شروع می‌شوند) <strong>باید دقیقاً یک‌بار فراخوانی شوند</strong>؛ در غیر این صورت با <strong>Exception</strong> مواجه می‌شوید. (پاسخ <strong>سوال 6.5</strong> بیشتر توضیح می‌دهد.)</li>
-</ul>
-<hr>
-<h3><strong>دمو 6 – TaskCompletionSource در عمل</strong></h3>
-<p>برای درک بهتر، این برنامه را بررسی کنید:</p>
-<ul>
-<li>در ابتدای برنامه، یک نمونه از کلاس <strong>TaskCompletionSource<string></strong> به نام <strong>tcs</strong> ایجاد شده است. در نتیجه می‌توانیم در مراحل بعدی از ویژگی <strong>Task</strong> آن استفاده کنیم.</li>
-<li>کاربر می‌تواند با فشردن کلید <strong>y</strong> جزئیات عملیات پس‌زمینه را دریافت کند. اگر کلید دیگری وارد کند، برنامه بدون نمایش جزئیات پایان می‌یابد.</li>
-</ul>
-<p><strong>کد نمونه:</strong></p>
-<pre class="hljs"><code><span class="hljs-keyword">using</span> <span class="hljs-keyword">static</span> System.Console;
+</code></pre> <hr><h3>تحلیل (Analysis)</h3><p>می‌بینید که مکانیزم کش باعث شد در فراخوانی‌های بعدی <strong>زمان پاسخ‌دهی به‌طور چشمگیری کاهش پیدا کند</strong>.</p><hr> <h3>پرسش و پاسخ (Q&amp;A Session)</h3><p><strong>سوال ۶.۴:</strong><br> می‌توانید یک نمونه واقعی بگویید که در آن از <strong>Taskهای پیش‌محاسبه‌شده (Precomputed Tasks)</strong> استفاده کنم؟</p><p><strong>پاسخ:</strong><br> فرض کنید برنامه‌ای دارید که کاربر یک <strong>URL</strong> وارد می‌کند، سپس برنامه شروع به <strong>دانلود داده‌ها از آن URL</strong> برای پردازش‌های بعدی می‌کند. در این حالت، برای جلوگیری از دانلودهای تکراری، می‌توانید <strong>URL و داده‌های مربوطه را در کش ذخیره کنید</strong>.</p><hr> <h3>استفاده از TaskCompletionSource</h3><p>دیدید که <strong>Taskها</strong> می‌توانند به شما کمک کنند تا <strong>کارهای پس‌زمینه</strong> را انجام دهید. همچنین برای <strong>مدیریت آیتم‌های کاری</strong> مثل انجام <strong>کارهای ادامه‌دار (Continuation Works)</strong>، مدیریت <strong>Taskهای فرزند (Child Tasks)</strong> یا <strong>مدیریت خطاها (Exceptions)</strong> مفید هستند.</p><p>اما گاهی لازم است <strong>کنترل بیشتری بر Taskها داشته باشید</strong>. در چنین شرایطی، کلاس <strong>TaskCompletionSource<TResult></strong> می‌تواند بسیار مفید باشد. بیایید استفاده از آن را بررسی کنیم.</p><p>کلاس <strong>TaskCompletionSource<TResult></strong> به شما امکان می‌دهد <strong>یک Task را از هر عملیاتی که قرار است در آینده کامل شود ایجاد کنید</strong>.</p><p>مایکروسافت در لینک زیر این کلاس را این‌گونه توضیح داده است:<br><a href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.taskcompletionsource-1?view=net-8.0">https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.taskcompletionsource-1?view=net-8.0</a></p><blockquote> <p>نماینده سمت تولیدکننده یک <strong>Task<TResult></strong> است که به هیچ <strong>Delegate</strong> خاصی متصل نیست و <strong>سمت مصرف‌کننده</strong> از طریق ویژگی <strong>Task</strong> به آن دسترسی دارد.</p></blockquote> <p>به بیان ساده‌تر، در پشت‌صحنه، با استفاده از این کلاس، یک <strong>Task وابسته (Slave Task)</strong> دارید که می‌توانید <strong>به‌صورت دستی آن را کامل کنید</strong>. این قابلیت برای کارهای <strong>I/O محور</strong> بسیار ایده‌آل است، چون می‌توانید از <strong>مزایای Taskها</strong> استفاده کنید بدون این‌که <strong>رشته فراخوانی‌کننده را مسدود کنید</strong>.</p><h3>نحوه استفاده (How to Use?)</h3><p>حالا سؤال این است: <strong>چطور باید از این کلاس استفاده کنیم؟</strong></p><p>اولین قدم این است که <strong>یک نمونه (Instance)</strong> از این کلاس ایجاد کنید.<br> به‌محض نمونه‌سازی، چند <strong>متد داخلی (Built-in Methods)</strong> در اختیار شما قرار می‌گیرد که می‌توانند نیازهای شما را برآورده کنند.</p><p>در تصویر زیر (نمونه اسکرین‌شات از Visual Studio) جزئیات این کلاس نشان داده شده است (شکل <strong>6-1</strong> را ببینید).</p><div align="center"> <p><img src="../../../assets/image/06/Table%206-2.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <h3>از روی این اسکرین‌شات چه متوجه می‌شویم؟</h3><p>از تصویر مشخص است که <strong>نام متدها یا با “Set” شروع می‌شوند یا با “TrySet”</strong>.</p><ul> <li><strong>گروه اول (Set)</strong> مقدار بازگشتی ندارد (<strong>void</strong>).</li><li><strong>گروه دوم (TrySet)</strong> مقدار بازگشتی بولی (<strong>bool</strong>) دارد.</li></ul> <p>نکات مهم درباره این متدها:</p><ul> <li>زمانی که هرکدام از این متدها را صدا می‌زنید، <strong>تسک وارد یکی از حالات نهایی (RanToCompletion، Faulted، یا Canceled)</strong> می‌شود.</li><li>متدهای گروه اول (یعنی متدهایی که با <strong>Set</strong> شروع می‌شوند) <strong>باید دقیقاً یک‌بار فراخوانی شوند</strong>؛ در غیر این صورت با <strong>Exception</strong> مواجه می‌شوید. (پاسخ <strong>سوال 6.5</strong> بیشتر توضیح می‌دهد.)</li></ul> <hr><h3><strong>دمو 6 – TaskCompletionSource در عمل</strong></h3><p>برای درک بهتر، این برنامه را بررسی کنید:</p><ul> <li>در ابتدای برنامه، یک نمونه از کلاس <strong>TaskCompletionSource<string></strong> به نام <strong>tcs</strong> ایجاد شده است. در نتیجه می‌توانیم در مراحل بعدی از ویژگی <strong>Task</strong> آن استفاده کنیم.</li><li>کاربر می‌تواند با فشردن کلید <strong>y</strong> جزئیات عملیات پس‌زمینه را دریافت کند. اگر کلید دیگری وارد کند، برنامه بدون نمایش جزئیات پایان می‌یابد.</li></ul> <p><strong>کد نمونه:</strong></p><pre class="hljs"><code><span class="hljs-keyword">using</span> <span class="hljs-keyword">static</span> System.Console;
 
 WriteLine(<span class="hljs-string">$&quot;The TaskCompletionSource demo.&quot;</span>);
 
@@ -498,65 +225,24 @@ WriteLine(<span class="hljs-string">&quot;\nEnter a key (if interested, press &#
 }
 
 WriteLine(<span class="hljs-string">&quot;\nThank you!&quot;</span>);
-</code></pre>
-<hr>
-<h3><strong>نمونه خروجی‌ها:</strong></h3>
-<p><strong>حالت 1 (کاربر جزئیات را می‌خواهد):</strong></p>
-<pre class="hljs"><code>The TaskCompletionSource demo.
+</code></pre> <hr><h3><strong>نمونه خروجی‌ها:</strong></h3><p><strong>حالت 1 (کاربر جزئیات را می‌خواهد):</strong></p><pre class="hljs"><code>The TaskCompletionSource demo.
 Enter a key (if interested, press 'y' to get the details).
 Monitoring the activity before setting the result.
 y
 The result is set successfully.
 Received: Everything went well.
 Thank you!
-</code></pre>
-<p><strong>حالت 2 (کاربر جزئیات را نمی‌خواهد و مثلاً “n” وارد می‌کند):</strong></p>
-<pre class="hljs"><code>The TaskCompletionSource demo.
+</code></pre> <p><strong>حالت 2 (کاربر جزئیات را نمی‌خواهد و مثلاً “n” وارد می‌کند):</strong></p><pre class="hljs"><code>The TaskCompletionSource demo.
 Enter a key (if interested, press 'y' to get the details).
 Monitoring the activity before setting the result.
 n
 Thank you!
-</code></pre>
-<hr>
-<h3><strong>پرسش و پاسخ</strong></h3>
-<p><strong>سوال 6.5 – چرا گفتید متدهای Set را فقط یک‌بار باید فراخوانی کرد؟</strong></p>
-<p>اگر این متدها را بیش از یک‌بار فراخوانی کنید، با Exception مواجه می‌شوید:</p>
-<pre class="hljs"><code>tcs.SetResult(<span class="hljs-string">&quot;Everything went well.&quot;</span>);
+</code></pre> <hr><h3><strong>پرسش و پاسخ</strong></h3><p><strong>سوال 6.5 – چرا گفتید متدهای Set را فقط یک‌بار باید فراخوانی کرد؟</strong></p><p>اگر این متدها را بیش از یک‌بار فراخوانی کنید، با Exception مواجه می‌شوید:</p><pre class="hljs"><code>tcs.SetResult(<span class="hljs-string">&quot;Everything went well.&quot;</span>);
 tcs.SetResult(<span class="hljs-string">&quot;The result is set for the second time.&quot;</span>); <span class="hljs-comment">// Exception!</span>
-</code></pre>
-<p><strong>خروجی خطا:</strong></p>
-<pre class="hljs"><code>Unhandled exception. System.AggregateException:
+</code></pre> <p><strong>خروجی خطا:</strong></p><pre class="hljs"><code>Unhandled exception. System.AggregateException:
 One or more errors occurred.
 (An attempt was made to transition a task to a final state when it had already completed.)
-</code></pre>
-<p>برای جلوگیری از این مشکل، <strong>TrySetResult</strong> بهتر است چون <strong>true یا false برمی‌گرداند</strong> و Exception نمی‌دهد.</p>
-<hr>
-<p><strong>سوال 6.6 – کجا می‌توانم از TaskCompletionSource استفاده کنم؟</strong></p>
-<p>یک سناریوی واقعی: فرض کنید برنامه‌ای رویدادمحور دارید که کاربر باید <strong>اطلاعات کاربری یا Credential</strong> وارد کند.</p>
-<ul>
-<li>اگر اطلاعات درست باشد، برنامه فعالیت کاربر را در پایگاه داده ذخیره می‌کند.</li>
-<li>اگر اطلاعات اشتباه باشد، برنامه <strong>Exception</strong> ایجاد کرده و خطا را نمایش می‌دهد.</li>
-</ul>
-<p>در چنین مواردی می‌توانید از <strong>TaskCompletionSource<TResult></strong> برای کنترل روند کار استفاده کنید.</p>
-<h3>خلاصه</h3>
-<p>این فصل مطالب تکمیلی‌ای را ارائه می‌دهد که می‌تواند در برنامه‌نویسی با <strong>Task</strong> به شما کمک کند. پس از مطالعه این فصل، قادر خواهید بود به پرسش‌های زیر پاسخ دهید:</p>
-<ul>
-<li><strong>چگونه می‌توان هنگام اجرای یک وظیفه طولانی، میزان پیشرفت را گزارش کرد؟</strong></li>
-<li><strong>چگونه می‌توان وظایف را به‌صورت ضمنی (Implicitly) ایجاد کرد؟</strong></li>
-<li><strong>چگونه می‌توان از یک وظیفه از پیش محاسبه‌شده (Precomputed Task) بهره برد؟</strong></li>
-<li><strong>کلاس <code>TaskCompletionSource</code> چگونه می‌تواند به شما در مدیریت یک وظیفه I/O-محور کمک کند؟</strong></li>
-</ul>
-<h3>تمرین‌ها ✍️</h3>
-<p>دانسته‌های خود را با انجام تمرین‌های زیر بسنجید:</p>
-<div align="center">
-<p><img src="../../../assets/image/06/Table%206-3.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<h3>یادآوری 📝</h3>
-<p>همان‌طور که قبلاً گفته شد، می‌توانید با خیال راحت فرض کنید که تمام <strong>namespace</strong>‌های لازم برای این قطعه‌کدها در دسترس هستند. این توضیح برای تمامی تمرین‌های این کتاب هم صدق می‌کند.</p>
-<hr>
-<h3><strong>تمرین 6.1</strong></h3>
-<p>اگر کد زیر را اجرا کنید، می‌توانید خروجی را پیش‌بینی کنید؟</p>
-<pre class="hljs"><code><span class="hljs-keyword">using</span> <span class="hljs-keyword">static</span> System.Console;
+</code></pre> <p>برای جلوگیری از این مشکل، <strong>TrySetResult</strong> بهتر است چون <strong>true یا false برمی‌گرداند</strong> و Exception نمی‌دهد.</p><hr> <p><strong>سوال 6.6 – کجا می‌توانم از TaskCompletionSource استفاده کنم؟</strong></p><p>یک سناریوی واقعی: فرض کنید برنامه‌ای رویدادمحور دارید که کاربر باید <strong>اطلاعات کاربری یا Credential</strong> وارد کند.</p><ul> <li>اگر اطلاعات درست باشد، برنامه فعالیت کاربر را در پایگاه داده ذخیره می‌کند.</li><li>اگر اطلاعات اشتباه باشد، برنامه <strong>Exception</strong> ایجاد کرده و خطا را نمایش می‌دهد.</li></ul> <p>در چنین مواردی می‌توانید از <strong>TaskCompletionSource<TResult></strong> برای کنترل روند کار استفاده کنید.</p><h3>خلاصه</h3><p>این فصل مطالب تکمیلی‌ای را ارائه می‌دهد که می‌تواند در برنامه‌نویسی با <strong>Task</strong> به شما کمک کند. پس از مطالعه این فصل، قادر خواهید بود به پرسش‌های زیر پاسخ دهید:</p><ul> <li><strong>چگونه می‌توان هنگام اجرای یک وظیفه طولانی، میزان پیشرفت را گزارش کرد؟</strong></li><li><strong>چگونه می‌توان وظایف را به‌صورت ضمنی (Implicitly) ایجاد کرد؟</strong></li><li><strong>چگونه می‌توان از یک وظیفه از پیش محاسبه‌شده (Precomputed Task) بهره برد؟</strong></li><li><strong>کلاس <code>TaskCompletionSource</code> چگونه می‌تواند به شما در مدیریت یک وظیفه I/O-محور کمک کند؟</strong></li></ul> <h3>تمرین‌ها</h3><p>دانسته‌های خود را با انجام تمرین‌های زیر بسنجید:</p><div align="center"> <p><img src="../../../assets/image/06/Table%206-3.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <h3>یادآوری</h3><p>همان‌طور که قبلاً گفته شد، می‌توانید با خیال راحت فرض کنید که تمام <strong>namespace</strong>‌های لازم برای این قطعه‌کدها در دسترس هستند. این توضیح برای تمامی تمرین‌های این کتاب هم صدق می‌کند.</p><hr> <h3><strong>تمرین 6.1</strong></h3><p>اگر کد زیر را اجرا کنید، می‌توانید خروجی را پیش‌بینی کنید؟</p><pre class="hljs"><code><span class="hljs-keyword">using</span> <span class="hljs-keyword">static</span> System.Console;
 TaskCompletionSource&lt;<span class="hljs-built_in">int</span>&gt; tcs = <span class="hljs-keyword">new</span>();
 <span class="hljs-built_in">int</span> <span class="hljs-keyword">value</span> = <span class="hljs-number">10</span>;
 <span class="hljs-keyword">var</span> task1 = Task.Run(() =&gt; <span class="hljs-keyword">value</span>++);
@@ -566,20 +252,12 @@ task1.Wait();
     tcs.SetResult(<span class="hljs-keyword">value</span> * <span class="hljs-number">10</span>);
 });
 WriteLine(<span class="hljs-string">$&quot;The final result is: <span class="hljs-subst">{tcs.Task.Result}</span>&quot;</span>);
-</code></pre>
-<hr>
-<h3><strong>تمرین 6.2</strong></h3>
-<p>می‌توانید خروجی برنامه زیر را پیش‌بینی کنید؟</p>
-<pre class="hljs"><code><span class="hljs-keyword">using</span> <span class="hljs-keyword">static</span> System.Console;
+</code></pre> <hr><h3><strong>تمرین 6.2</strong></h3><p>می‌توانید خروجی برنامه زیر را پیش‌بینی کنید؟</p><pre class="hljs"><code><span class="hljs-keyword">using</span> <span class="hljs-keyword">static</span> System.Console;
 <span class="hljs-keyword">var</span> task = Task.Run(() =&gt; <span class="hljs-string">&quot;Thanks God!&quot;</span>);
 <span class="hljs-built_in">string</span> msg = <span class="hljs-built_in">string</span>.Concat(task.Result, <span class="hljs-string">&quot; What a beautiful day!&quot;</span>);
 <span class="hljs-keyword">var</span> task2 = Task.FromResult(msg);
 WriteLine(task2.Result);
-</code></pre>
-<hr>
-<h3><strong>تمرین 6.3</strong></h3>
-<p>می‌توانید خروجی برنامه زیر را پیش‌بینی کنید؟</p>
-<pre class="hljs"><code><span class="hljs-keyword">using</span> <span class="hljs-keyword">static</span> System.Console;
+</code></pre> <hr><h3><strong>تمرین 6.3</strong></h3><p>می‌توانید خروجی برنامه زیر را پیش‌بینی کنید؟</p><pre class="hljs"><code><span class="hljs-keyword">using</span> <span class="hljs-keyword">static</span> System.Console;
 <span class="hljs-keyword">try</span>
 {
     Action greet = <span class="hljs-keyword">new</span>(() =&gt; WriteLine(<span class="hljs-string">$&quot;Hello reader!&quot;</span>));
@@ -594,143 +272,220 @@ WriteLine(task2.Result);
         WriteLine(ex.Message);
     }
 }
-</code></pre>
-<hr>
-<h2><strong>پاسخ تمرین‌ها</strong> ✅</h2>
-<p><strong>تمرین 6.1</strong><br>
-خروجی زیر را مشاهده خواهید کرد:</p>
-<pre class="hljs"><code>The final result is: 110
-</code></pre>
-<p>🔑 <strong>نکته:</strong> دقت کنید که <code>task1</code> مقدار اولیه را به <strong>11</strong> تغییر می‌دهد، و سپس <code>task2</code> آن را به <strong>11×10=110</strong> تنظیم می‌کند. دستور <code>Wait</code> برای حفظ ترتیب اجرا قرار داده شده است.</p>
-<hr>
-<p><strong>تمرین 6.2</strong><br>
-خروجی زیر را مشاهده خواهید کرد:</p>
-<pre class="hljs"><code>Thanks God! What a beautiful day!
-</code></pre>
-<hr>
-<p><strong>تمرین 6.3</strong><br>
-خروجی زیر را مشاهده خواهید کرد:</p>
-<pre class="hljs"><code>Hello reader!
+</code></pre> <hr><h2><strong>پاسخ تمرین‌ها</strong></h2><p><strong>تمرین 6.1</strong><br> خروجی زیر را مشاهده خواهید کرد:</p><pre class="hljs"><code>The final result is: 110
+</code></pre> <p><strong>نکته:</strong> دقت کنید که <code>task1</code> مقدار اولیه را به <strong>11</strong> تغییر می‌دهد، و سپس <code>task2</code> آن را به <strong>11×10=110</strong> تنظیم می‌کند. دستور <code>Wait</code> برای حفظ ترتیب اجرا قرار داده شده است.</p><hr> <p><strong>تمرین 6.2</strong><br> خروجی زیر را مشاهده خواهید کرد:</p><pre class="hljs"><code>Thanks God! What a beautiful day!
+</code></pre> <hr><p><strong>تمرین 6.3</strong><br> خروجی زیر را مشاهده خواهید کرد:</p><pre class="hljs"><code>Hello reader!
 There is a problem.
-</code></pre>
-<p>✍️ <strong>یادداشت نویسنده:</strong> این خروجی قابل پیش‌بینی است. چرا؟ چون همیشه پیام خطا <strong>&quot;There is a problem.&quot;</strong> بعد از خط <strong>&quot;Hello reader!&quot;</strong> نمایش داده می‌شود.</p>
-<p>لینک رسمی برای تأیید این موضوع:<br>
-<a href="https://learn.microsoft.com/en-us/previous-versions/msp-n-p/ff963549%28v=pandp.10%29?redirectedfrom=MSDN">Parallel.Invoke exceptions – Microsoft Docs</a></p>
-<p>متن می‌گوید:</p>
-<blockquote>
-<p>هر استثنایی که هنگام اجرای <code>Parallel.Invoke</code> رخ دهد، <strong>به تعویق می‌افتد</strong> و پس از اتمام تمام وظایف دوباره پرتاب می‌شود. تمام استثناها به‌صورت <strong>inner exception</strong>‌های یک نمونه‌ی <strong>AggregateException</strong> بازگردانده می‌شوند.</p>
-</blockquote>
-
-  </main>
-
-  <!-- فوتر مشترک -->
-  <footer class="footer">
-    <div class="container">
-      <p>
-        <img src="/Gitab/icone/copyright.svg" alt="کپی‌رایت" width="14" height="14"
-             style="vertical-align:middle;margin-inline:4px">
-        <span id="y"></span> Gitab — تمامی حقوق محفوظ است.
-      </p>
-    </div>
-  </footer>
-
-  <!-- سال و اسکریپت تغییر تم -->
-  <script>
+</code></pre> <p><strong>یادداشت نویسنده:</strong> این خروجی قابل پیش‌بینی است. چرا؟ چون همیشه پیام خطا <strong>&quot;There is a problem.&quot;</strong> بعد از خط <strong>&quot;Hello reader!&quot;</strong> نمایش داده می‌شود.</p><p>لینک رسمی برای تأیید این موضوع:<br><a href="https://learn.microsoft.com/en-us/previous-versions/msp-n-p/ff963549%28v=pandp.10%29?redirectedfrom=MSDN">Parallel.Invoke exceptions – Microsoft Docs</a></p><p>متن می‌گوید:</p><blockquote> <p>هر استثنایی که هنگام اجرای <code>Parallel.Invoke</code> رخ دهد، <strong>به تعویق می‌افتد</strong> و پس از اتمام تمام وظایف دوباره پرتاب می‌شود. تمام استثناها به‌صورت <strong>inner exception</strong>‌های یک نمونه‌ی <strong>AggregateException</strong> بازگردانده می‌شوند.</p></blockquote> </article><nav class="chapter-single-next-nav"> <a href="/Gitab/books/book4/Book/APPENDIX_A/" class="btn-next-chapter-action" id="nextChapterBtn" data-hub="/Gitab/books/book4/"> <span class="next-btn-text">فصل بعدی: ضمیمه A: مفاهیم پایه Thread &amp;amp; ThreadPool</span> <span class="next-btn-arrow">←</span> </a> </nav></div> <button class="fab-back-to-top" id="backToTopBtn" type="button" aria-label="رفتن به بالای صفحه" title="رفتن به بالا"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"> <polyline points="18 15 12 9 6 15"></polyline> </svg> </button></main> <footer class="footer-minimal"><div class="footer-container"> <div class="footer-top-row"><div class="footer-brand-side"> <a href="/Gitab/" class="footer-brand-anchor"> <img src="/Gitab/icone/logo.svg" alt="Gitab" width="28" height="28" loading="lazy" decoding="async"> <span class="footer-brand-title">گیتاب (Gitab)</span> </a> <p class="footer-tagline"> پلتفرم آزاد و مستقل برای ترجمهٔ دقیق و روان کتاب‌های مرجع مهندسی نرم‌افزار. </p></div> <div class="footer-nav-cols"><div class="footer-nav-col"> <span class="footer-nav-heading">موضوعات</span><ul class="footer-nav-list"> <li><a href="/Gitab/books/list-books/?cat=csharp">سی‌شارپ و دات‌نت</a></li><li><a href="/Gitab/books/list-books/?cat=clean-code">کد تمیز و بازآفرینی</a></li><li><a href="/Gitab/books/list-books/?cat=architecture">معماری و طراحی دامنه</a></li><li><a href="/Gitab/books/list-books/?cat=system">لینوکس و خط فرمان</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">بخش‌های سایت</span><ul class="footer-nav-list"> <li><a href="/Gitab/">صفحه اصلی</a></li><li><a href="/Gitab/books/list-books/">کتابخانه کامل</a></li><li><a href="/Gitab/courses/">دوره‌های آموزشی</a></li><li><a href="/Gitab/translator.html">تالار مترجمین</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">مشارکت و جامعه</span><ul class="footer-nav-list"> <li><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer">راهنمای همکاری در ترجمه</a></li><li><a href="https://github.com/hheydarian/Gitab/issues" target="_blank" rel="noopener noreferrer">پیشنهاد کتاب یا گزارش خطا</a></li></ul> </div></div> </div><div class="footer-bottom-line"> <span>© <span id="y">2026</span> Gitab — توسعه‌یافته برای جامعهٔ مهندسان نرم‌افزار ایرانی</span></div> </div></footer> <script>
   (() => {
     const root = document.documentElement;
     const btn = document.getElementById('themeToggle');
+    const sunIcon = btn ? btn.querySelector('.icon-sun') : null;
+    const moonIcon = btn ? btn.querySelector('.icon-moon') : null;
     const KEY = 'gitab-theme';
 
-    function updateTheme(s) {
-      root.setAttribute('data-theme', s);
-      const mode = s;  // فقط `dark` یا `light` خواهد بود
+    function updateTheme(mode) {
+      root.setAttribute('data-theme', mode);
       root.dataset.colorMode = mode;
-      btn.dataset.icon = mode === 'dark' ? 'moon' : 'sun';
+      if (sunIcon && moonIcon) {
+        if (mode === 'dark') {
+          sunIcon.style.display = 'inline-block';
+          moonIcon.style.display = 'none';
+        } else {
+          sunIcon.style.display = 'none';
+          moonIcon.style.display = 'inline-block';
+        }
+      }
     }
 
-    // وضعیت تم ذخیره شده از localStorage
-    let saved = localStorage.getItem(KEY) || 'light'; // پیش‌فرض روشن
+    let saved = 'dark';
+    try { saved = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
     updateTheme(saved);
 
-    // تنظیم مجدد تم هنگام تغییر وضعیت دکمه
-    btn.addEventListener('click', () => {
-      const current = localStorage.getItem(KEY) || 'light';
-      const next = current === 'dark' ? 'light' : 'dark';  // فقط دو حالت: تاریک و روشن
-      localStorage.setItem(KEY, next);
-      updateTheme(next);
-    });
+    if (btn) {
+      btn.addEventListener('click', () => {
+        let current = 'dark';
+        try { current = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+        const next = current === 'dark' ? 'light' : 'dark';
+        try { localStorage.setItem(KEY, next); } catch (e) {}
+        updateTheme(next);
+      });
+    }
 
-    // هنگام بارگذاری صفحه
     document.addEventListener('DOMContentLoaded', () => {
-      updateTheme(localStorage.getItem(KEY) || 'light');
+      let mode = 'dark';
+      try { mode = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+      updateTheme(mode);
+      const yearSpan = document.getElementById('y');
+      if (yearSpan) yearSpan.textContent = new Date().getFullYear();
     });
+
+    const mobBtn = document.getElementById('mobileMenuBtn');
+    const mobDrawer = document.getElementById('mobileDrawer');
+    if (mobBtn && mobDrawer) {
+      const setDrawerOpen = (open) => {
+        mobDrawer.classList.toggle('open', open);
+        mobBtn.classList.toggle('is-open', open);
+        mobBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        mobBtn.setAttribute('aria-label', open ? 'بستن منو' : 'باز کردن منو');
+        mobDrawer.setAttribute('aria-hidden', open ? 'false' : 'true');
+      };
+
+      mobBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        setDrawerOpen(!mobDrawer.classList.contains('open'));
+      });
+
+      mobDrawer.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => setDrawerOpen(false));
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && mobDrawer.classList.contains('open')) {
+          setDrawerOpen(false);
+        }
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!mobDrawer.contains(e.target) && !mobBtn.contains(e.target)) {
+          setDrawerOpen(false);
+        }
+      });
+    }
+
+    if ('serviceWorker' in navigator) {
+      const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+      if (isLocalhost) {
+        navigator.serviceWorker.getRegistrations().then(regs => {
+          for (const reg of regs) reg.unregister();
+        });
+        if ('caches' in window) {
+          caches.keys().then(names => {
+            for (const name of names) caches.delete(name);
+          });
+        }
+      } else {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/Gitab/sw.js').catch(() => {});
+        });
+      }
+    }
   })();
-</script>
-
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-  <script>hljs.highlightAll();</script>
-
-  <script>
+  </script> <script>
   document.querySelectorAll('pre code').forEach(block => {
+    const pre = block.parentNode;
+    if (!pre || pre.querySelector('.copy-btn')) return;
+
+    const copySvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
+    const okSvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+
     const btn = document.createElement('button');
     btn.className = 'copy-btn';
-
-    const icon = document.createElement('img');
-    icon.src = "/Gitab/icone/copy.svg";
-    icon.alt = 'Copy';
-    btn.appendChild(icon);
-
-    block.parentNode.insertBefore(btn, block);
+    btn.setAttribute('aria-label', 'کپی کد');
+    btn.setAttribute('title', 'کپی کد');
+    btn.setAttribute('type', 'button');
+    btn.innerHTML = copySvg;
+    pre.appendChild(btn);
 
     btn.addEventListener('click', async () => {
-      await navigator.clipboard.writeText(block.textContent);
-      btn.classList.add('copied');
-      setTimeout(() => btn.classList.remove('copied'), 1500);
-    });
-  });
-  </script>
-
-  <script>
-  document.body.dataset.page = window.location.pathname;
-
-  const menuBtn = document.querySelector(".menu-toggle");
-  const nav = document.querySelector(".nav");
-
-  if (menuBtn && nav) {
-    menuBtn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      nav.classList.toggle("show");
-    });
-
-    document.addEventListener("click", (e) => {
-      const clickedInsideNav = nav.contains(e.target);
-      const clickedMenuButton = menuBtn.contains(e.target);
-      if (!clickedInsideNav && !clickedMenuButton) {
-        nav.classList.remove("show");
+      try {
+        await navigator.clipboard.writeText(block.textContent);
+        btn.classList.add('copied');
+        btn.innerHTML = okSvg;
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          btn.innerHTML = copySvg;
+        }, 1800);
+      } catch (err) {
+        console.error('Copy failed:', err);
       }
     });
-  }
-  </script>
-
-  <script>
-    document.getElementById('y').textContent = new Date().getFullYear();
-  </script>
-  <script>
-document.getElementById("openDonate").addEventListener("click", () => {
-  document.getElementById("donateModal").style.display = "block";
-});
-document.getElementById("closeDonate").addEventListener("click", () => {
-  document.getElementById("donateModal").style.display = "none";
-});
-document.querySelectorAll(".copy-btn").forEach(btn => {
-  btn.addEventListener("click", () => {
-    navigator.clipboard.writeText(btn.dataset.copy);
-  
-    setTimeout(() => (btn.textContent = "کپی"), 2000);
   });
-});
-</script>
+  </script> <script>
+  (() => {
+    const article = document.getElementById('chapterArticle');
+    if (!article) return;
 
-</body>
-</html>
+    const progressBar = document.getElementById('readingProgressBar');
+    if (progressBar) {
+      window.addEventListener('scroll', () => {
+        const docElem = document.documentElement;
+        const totalHeight = docElem.scrollHeight - docElem.clientHeight;
+        if (totalHeight > 0) {
+          const progress = (window.pageYOffset / totalHeight) * 100;
+          progressBar.style.width = Math.min(100, Math.max(0, progress)) + '%';
+        }
+      }, { passive: true });
+    }
+
+    const btt = document.getElementById('backToTopBtn');
+    if (btt) {
+      window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 250) {
+          btt.classList.add('visible');
+        } else {
+          btt.classList.remove('visible');
+        }
+      }, { passive: true });
+
+      btt.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+
+    article.querySelectorAll('img').forEach(img => {
+      if (!img.hasAttribute('loading')) img.loading = 'lazy';
+      if (!img.hasAttribute('decoding')) img.decoding = 'async';
+      const parent = img.parentElement;
+      if (parent && parent.tagName === 'P') {
+        parent.style.textAlign = 'center';
+      }
+
+      img.addEventListener('error', function() {
+        const src = this.getAttribute('src');
+        if (src && src.includes('assets/image/')) {
+          const parts = src.split('assets/image/');
+          const corrected = '/Gitab/books/book4/assets/image/' + parts[1];
+          if (this.src !== corrected) {
+            this.src = corrected;
+          }
+        }
+      });
+    });
+
+    article.querySelectorAll('p').forEach(p => {
+      const trimmed = p.innerText.trim();
+      if (trimmed.startsWith('💡') || trimmed.startsWith('نکته:')) {
+        p.classList.add('react-callout', 'callout-tip');
+      } else if (trimmed.startsWith('⚠️') || trimmed.startsWith('هشدار:')) {
+        p.classList.add('react-callout', 'callout-warning');
+      } else if (trimmed.startsWith('📌') || trimmed.startsWith('مهم:')) {
+        p.classList.add('react-callout', 'callout-important');
+      } else if (trimmed.startsWith('🔹') || trimmed.startsWith('🔸')) {
+        p.classList.add('react-callout', 'callout-note');
+      }
+    });
+  })();
+  </script> <script type="speculationrules">{"prefetch":[{"where":{"and":[{"href_matches":"/Gitab/*"},{"not":{"href_matches":"/Gitab/downloads/*"}},{"not":{"selector_matches":"[download], [target='_blank']"}}]},"eagerness":"moderate"}]}</script> <script>
+  (() => {
+    if (window.HTMLScriptElement && HTMLScriptElement.supports && HTMLScriptElement.supports('speculationrules')) return;
+    const seen = new Set([window.location.href]);
+    let count = 0;
+    const prefetchLink = (e) => {
+      if (count >= 12) return;
+      const a = e.target && e.target.closest ? e.target.closest('header a, .chapter-single-next-nav a, .syllabus-chapter-item a, .btn-hero-read, .btn-card-read') : null;
+      if (!a || !a.href || a.hasAttribute('download') || a.target === '_blank') return;
+      if (a.origin !== window.location.origin || a.pathname.includes('/downloads/')) return;
+      const clean = a.href.split('#')[0];
+      if (!clean || seen.has(clean)) return;
+      seen.add(clean);
+      count++;
+      const l = document.createElement('link');
+      l.rel = 'prefetch';
+      l.href = clean;
+      document.head.appendChild(l);
+    };
+    document.addEventListener('pointerenter', prefetchLink, { capture: true, passive: true });
+    document.addEventListener('touchstart', prefetchLink, { capture: true, passive: true });
+  })();
+  </script></body></html>

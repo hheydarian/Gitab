@@ -6,7 +6,7 @@ title: بازتاب (Reflection) و متادیتا
 
 همان‌طور که در فصل ۱۷ دیدیم، یک برنامه‌ی C# به یک **Assembly** کامپایل می‌شود که شامل **متادیتا (Metadata)**، کد کامپایل‌شده و منابع (Resources) است. بررسی متادیتا و کد کامپایل‌شده در زمان اجرا را **Reflection (بازتاب)** می‌نامند.
 
-کد کامپایل‌شده در یک Assembly تقریباً تمام محتوای کد منبع اصلی را در بر دارد. با این حال، برخی اطلاعات مانند نام متغیرهای محلی، توضیحات (Comments) و دستورهای پیش‌پردازنده (Preprocessor Directives) از دست می‌روند. اما بازتاب به ما امکان دسترسی به تقریباً تمام موارد دیگر را می‌دهد—حتی تا حدی که می‌توان یک **Decompiler** (دی‌کامپایلر) نوشت. 🔎
+کد کامپایل‌شده در یک Assembly تقریباً تمام محتوای کد منبع اصلی را در بر دارد. با این حال، برخی اطلاعات مانند نام متغیرهای محلی، توضیحات (Comments) و دستورهای پیش‌پردازنده (Preprocessor Directives) از دست می‌روند. اما بازتاب به ما امکان دسترسی به تقریباً تمام موارد دیگر را می‌دهد—حتی تا حدی که می‌توان یک **Decompiler** (دی‌کامپایلر) نوشت. 
 
 بسیاری از سرویس‌های موجود در .NET و در دسترس از طریق C# (مانند **Dynamic Binding**، **Serialization** و **Data Binding**) به وجود متادیتا وابسته هستند. همچنین برنامه‌های شما نیز می‌توانند از این متادیتا استفاده کنند و حتی آن را با اطلاعات جدید از طریق **Custom Attributes** گسترش دهند. فضای نام `System.Reflection` شامل API مربوط به Reflection است. علاوه بر این، در زمان اجرا می‌توان متادیتا و دستورالعمل‌های اجرایی جدیدی در سطح **Intermediate Language (IL)** با استفاده از کلاس‌های موجود در فضای نام `System.Reflection.Emit` ایجاد کرد.
 
@@ -18,17 +18,17 @@ title: بازتاب (Reflection) و متادیتا
 * **Reflection** نسبت به آن کمی دست‌وپاگیرتر است، اما انعطاف بیشتری در ارتباط با **CLR** ارائه می‌دهد.
 
 برای مثال، Reflection به شما اجازه می‌دهد:
-✔️ فهرستی از **Types** و **Members** دریافت کنید.
-✔️ یک شیء را با نامی که از یک رشته (String) می‌آید بسازید.
-✔️ در لحظه (On the fly) Assembly تولید کنید.
+ فهرستی از **Types** و **Members** دریافت کنید.
+ یک شیء را با نامی که از یک رشته (String) می‌آید بسازید.
+ در لحظه (On the fly) Assembly تولید کنید.
 
 ---
 
-## 🔍 Reflecting and Activating Types
+## Reflecting and Activating Types
 
 در این بخش بررسی می‌کنیم که چگونه می‌توان یک **Type** را به دست آورد، متادیتای آن را بررسی کرد و از آن برای ایجاد دینامیکی یک شیء استفاده نمود.
 
-### 📌 Obtaining a Type
+### Obtaining a Type
 
 یک نمونه از `System.Type` نمایانگر متادیتای یک Type است. از آن‌جا که **Type** بسیار پرکاربرد است، در فضای نام `System` قرار دارد، نه در `System.Reflection`.
 
@@ -84,7 +84,7 @@ bool isPublic   = stringType.IsPublic;      // true
 
 ---
 
-## 📘 TypeInfo
+## TypeInfo
 
 اگر شما هدف‌گذاری روی **.NET Core 1.x** (یا پروفایل‌های قدیمی‌تر Windows Store) داشته باشید، بسیاری از اعضای `Type` در دسترس نیستند. این اعضا به جای آن در کلاسی به نام `TypeInfo` ارائه می‌شوند که از طریق فراخوانی `GetTypeInfo` به‌دست می‌آید.
 
@@ -102,7 +102,7 @@ bool isPublic = stringType.GetTypeInfo().IsPublic;
 
 همچنین `TypeInfo` ویژگی‌ها و متدهای اضافی برای بازتاب روی اعضا (Reflecting over Members) در اختیار قرار می‌دهد.
 
-## 📦 به‌دست‌آوردن انواع آرایه‌ها (Obtaining Array Types)
+## به‌دست‌آوردن انواع آرایه‌ها (Obtaining Array Types)
 
 همان‌طور که دیدیم، `typeof` و `GetType` با آرایه‌ها کار می‌کنند. علاوه بر این می‌توانید با فراخوانی `MakeArrayType` روی **نوع المنت (Element Type)**، یک نوع آرایه بسازید:
 
@@ -132,7 +132,7 @@ int rank = typeof(int[,,]).GetArrayRank();  // 3
 
 ---
 
-## 🧩 به‌دست‌آوردن نوع‌های تو در تو (Obtaining Nested Types)
+## به‌دست‌آوردن نوع‌های تو در تو (Obtaining Nested Types)
 
 برای گرفتن نوع‌های تو در تو (Nested Types)، متد `GetNestedTypes` را روی نوع حاوی (Containing Type) فراخوانی کنید:
 
@@ -155,7 +155,7 @@ foreach (TypeInfo t in typeof(System.Environment)
     Debug.WriteLine(t.FullName);
 ```
 
-⚠️ تنها نکته این است که CLR یک نوع تو در تو را با سطوح دسترسی ویژه «Nested» در نظر می‌گیرد:
+ تنها نکته این است که CLR یک نوع تو در تو را با سطوح دسترسی ویژه «Nested» در نظر می‌گیرد:
 
 ```csharp
 Type t = typeof(System.Environment.SpecialFolder);
@@ -165,7 +165,7 @@ Console.WriteLine(t.IsNestedPublic); // True
 
 ---
 
-## 🏷 نام انواع (Type Names)
+## نام انواع (Type Names)
 
 یک Type دارای ویژگی‌های `Namespace`، `Name` و `FullName` است. در بیشتر موارد، `FullName` ترکیبی از دو مورد اول است:
 
@@ -176,7 +176,7 @@ Console.WriteLine(t.Name);       // StringBuilder
 Console.WriteLine(t.FullName);   // System.Text.StringBuilder
 ```
 
-🔑 دو استثنا وجود دارد:
+ دو استثنا وجود دارد:
 
 1. نوع‌های تو در تو (Nested Types)
 2. نوع‌های جنریک بسته (Closed Generic Types)
@@ -185,7 +185,7 @@ Console.WriteLine(t.FullName);   // System.Text.StringBuilder
 
 ---
 
-### 🔗 نام نوع‌های تو در تو (Nested Type Names)
+### نام نوع‌های تو در تو (Nested Type Names)
 
 در نوع‌های تو در تو، نوع حاوی تنها در `FullName` ظاهر می‌شود:
 
@@ -196,11 +196,11 @@ Console.WriteLine(t.Name);       // SpecialFolder
 Console.WriteLine(t.FullName);   // System.Environment+SpecialFolder
 ```
 
-🔹 علامت `+` نوع حاوی را از فضای نام تو در تو جدا می‌کند.
+ علامت `+` نوع حاوی را از فضای نام تو در تو جدا می‌کند.
 
 ---
 
-### 🌀 نام نوع‌های جنریک (Generic Type Names)
+### نام نوع‌های جنریک (Generic Type Names)
 
 نام نوع‌های جنریک با علامت بک‌تیک (`` ` ``) و سپس تعداد پارامترهای نوع مشخص می‌شوند.
 
@@ -231,7 +231,7 @@ System.Collections.Generic.Dictionary`2[
 
 ---
 
-### 📚 نام انواع آرایه و پوینتر (Array and Pointer Type Names)
+### نام انواع آرایه و پوینتر (Array and Pointer Type Names)
 
 آرایه‌ها با همان پسوندی نمایش داده می‌شوند که در عبارت `typeof` استفاده می‌کنید:
 
@@ -249,7 +249,7 @@ Console.WriteLine(typeof(byte*).Name);     // Byte*
 
 ---
 
-### 🔄 نام انواع پارامترهای ref و out
+### نام انواع پارامترهای ref و out
 
 یک `Type` که نماینده‌ی پارامتر `ref` یا `out` باشد، پسوند `&` دارد:
 
@@ -265,7 +265,7 @@ public void RefMethod(ref int p)
 
 ---
 
-## 🧬 Base Types و Interfaces
+## Base Types و Interfaces
 
 کلاس `Type` یک ویژگی به نام `BaseType` دارد:
 
@@ -292,11 +292,11 @@ IComparable`1
 IEquatable`1
 ```
 
-(متد `GetInterfaceMap` یک ساختار بازمی‌گرداند که نشان می‌دهد هر عضو از یک Interface چگونه در یک کلاس یا Struct پیاده‌سازی شده است—نمونه‌ی آن در بخش «Calling Static Virtual/Abstract Interface Members» در صفحه 826 آمده است.)
+(متد `GetInterfaceMap` یک ساختار بازمی‌گرداند که نشان می‌دهد هر عضو از یک Interface چگونه در یک کلاس یا Struct پیاده‌سازی شده است—نمونه‌ی آن در بخش «Calling Static Virtual/Abstract Interface Members» در بخش‌های مرتبط توضیح داده شده است.)
 
 ---
 
-## ⚖️ معادل‌های پویا برای عملگر is در C\#
+## معادل‌های پویا برای عملگر is در C\#
 
 Reflection سه معادل پویا برای عملگر ایستای `is` در C# ارائه می‌دهد:
 
@@ -322,7 +322,7 @@ Console.WriteLine(target.IsAssignableFrom(source));  // True
 
 متد `IsSubclassOf` هم بر اساس همان اصل `IsAssignableFrom` کار می‌کند، با این تفاوت که Interfaceها را در نظر نمی‌گیرد.
 
-## 🏗 ایجاد نمونه از انواع (Instantiating Types)
+## ایجاد نمونه از انواع (Instantiating Types)
 
 دو روش برای ایجاد دینامیکی یک شیء از روی نوع (Type) وجود دارد:
 
@@ -331,7 +331,7 @@ Console.WriteLine(target.IsAssignableFrom(source));  // True
 
 ---
 
-### 🔹 استفاده از Activator.CreateInstance
+### استفاده از Activator.CreateInstance
 
 متد `Activator.CreateInstance` یک Type و آرگومان‌های اختیاری دریافت می‌کند و آن‌ها را به سازنده (Constructor) پاس می‌دهد:
 
@@ -343,11 +343,11 @@ DateTime dt = (DateTime)Activator.CreateInstance(typeof(DateTime),
 ```
 
 این متد گزینه‌های بیشتری نیز فراهم می‌کند، مانند مشخص‌کردن Assembly برای بارگذاری نوع یا امکان اتصال به سازنده‌های **Nonpublic**.
-اگر CLR نتواند سازنده‌ی مناسب پیدا کند، یک استثناء از نوع `MissingMethodException` پرتاب می‌شود. ⚠️
+اگر CLR نتواند سازنده‌ی مناسب پیدا کند، یک استثناء از نوع `MissingMethodException` پرتاب می‌شود. 
 
 ---
 
-### 🔹 استفاده از ConstructorInfo.Invoke
+### استفاده از ConstructorInfo.Invoke
 
 گاهی اوقات باید از `ConstructorInfo.Invoke` استفاده کنید، به‌ویژه زمانی که مقدار آرگومان‌ها نمی‌تواند بین سازنده‌های Overload تمایز ایجاد کند.
 
@@ -379,20 +379,20 @@ ConstructorInfo ci = typeof(X).GetTypeInfo().DeclaredConstructors
 
 ---
 
-### ⚡ نکته‌ی عملکردی
+### نکته‌ی عملکردی
 
 ایجاد نمونه‌ی دینامیکی چند **میکروثانیه** به زمان ساخت شیء اضافه می‌کند. این مقدار در مقیاس نسبی زیاد است، چون CLR به‌طور عادی بسیار سریع در ایجاد اشیاء عمل می‌کند (یک `new` ساده روی یک کلاس کوچک در حد چند **نانوسانیه** زمان می‌برد).
 
 ---
 
-### 📚 ایجاد دینامیکی آرایه‌ها و جنریک‌ها
+### ایجاد دینامیکی آرایه‌ها و جنریک‌ها
 
 برای ایجاد آرایه‌ها به‌صورت دینامیکی، ابتدا باید `MakeArrayType` را فراخوانی کنید.
 ایجاد نوع‌های جنریک نیز ممکن است (در بخش بعدی توضیح داده می‌شود).
 
 ---
 
-### 🪝 ایجاد دینامیکی Delegateها
+### ایجاد دینامیکی Delegateها
 
 برای ایجاد Delegate به‌صورت دینامیکی، متد `Delegate.CreateDelegate` را فراخوانی کنید. مثال زیر ایجاد هر دو نوع Delegate (استاتیک و Instance) را نشان می‌دهد:
 
@@ -425,19 +425,19 @@ IntFunc f = (IntFunc)staticD;
 Console.WriteLine(f(3));   // 9 (اما بسیار سریع‌تر!)
 ```
 
-همچنین می‌توانید به‌جای نام متد، یک `MethodInfo` به `CreateDelegate` بدهید. جزئیات مربوط به `MethodInfo` در بخش **“Reflecting and Invoking Members”** در صفحه 813 آمده است، همراه با دلیل اینکه چرا بهتر است یک Delegate ایجادشده‌ی دینامیکی را دوباره به نوع Delegate ایستای خودش Cast کنیم.
+همچنین می‌توانید به‌جای نام متد، یک `MethodInfo` به `CreateDelegate` بدهید. جزئیات مربوط به `MethodInfo` در بخش **“Reflecting and Invoking Members”** در بخش‌های مرتبط توضیح داده شده است، همراه با دلیل اینکه چرا بهتر است یک Delegate ایجادشده‌ی دینامیکی را دوباره به نوع Delegate ایستای خودش Cast کنیم.
 
-## 🧩 انواع جنریک (Generic Types)
+## انواع جنریک (Generic Types)
 
 یک شیء از نوع `Type` می‌تواند نشان‌دهنده‌ی یک نوع جنریک **بسته (Closed)** یا **باز (Unbound)** باشد.
 همانند زمان کامپایل، فقط نوع جنریک بسته را می‌توان نمونه‌سازی کرد، در حالی‌که نوع باز غیرقابل نمونه‌سازی است:
 
 ```csharp
 Type closed = typeof(List<int>);
-List<int> list = (List<int>)Activator.CreateInstance(closed);  // OK ✅
+List<int> list = (List<int>)Activator.CreateInstance(closed);  // OK 
 
 Type unbound = typeof(List<>);
-object anError = Activator.CreateInstance(unbound);            // خطای زمان اجرا ❌
+object anError = Activator.CreateInstance(unbound);            // خطای زمان اجرا 
 ```
 
 برای تبدیل یک نوع جنریک باز به بسته از متد `MakeGenericType` استفاده می‌کنیم:
@@ -453,7 +453,7 @@ Type closed = unbound.MakeGenericType(typeof(int));
 Type unbound2 = closed.GetGenericTypeDefinition();  // unbound == unbound2
 ```
 
-🔎 ویژگی‌های کلیدی:
+ ویژگی‌های کلیدی:
 
 * `IsGenericType` → بررسی می‌کند که آیا یک نوع، جنریک است یا نه.
 * `IsGenericTypeDefinition` → بررسی می‌کند که آیا نوع، **باز (unbound)** است یا نه.
@@ -475,7 +475,7 @@ Console.WriteLine(nullable.GetGenericArguments()[0]); // System.Boolean
 Console.WriteLine(unbound.GetGenericArguments()[0]);  // T (پلا‌یس‌هولدر)
 ```
 
-📌 در زمان اجرا، تمام انواع جنریک یا **باز (Unbound)** هستند یا **بسته (Closed)**.
+ در زمان اجرا، تمام انواع جنریک یا **باز (Unbound)** هستند یا **بسته (Closed)**.
 
 * حالت باز فقط در موارد نادری مثل `typeof(Foo<>)` رخ می‌دهد.
 * هیچ‌وقت نوع «باز» واقعی در زمان اجرا وجود ندارد؛ کامپایلر همه را به نوع بسته تبدیل می‌کند.
@@ -492,7 +492,7 @@ class Foo<T>
 
 ---
 
-## 🔍 بازتاب اعضا (Reflecting and Invoking Members)
+## بازتاب اعضا (Reflecting and Invoking Members)
 
 برای بازتاب اعضای یک نوع، از متد `GetMembers` استفاده می‌کنیم.
 
@@ -521,7 +521,7 @@ Void .ctor()
 
 ---
 
-### 🔹 TypeInfo و بازتاب اعضا
+### TypeInfo و بازتاب اعضا
 
 کلاس `TypeInfo` یک پروتکل ساده‌تر برای بازتاب اعضا ارائه می‌دهد.
 
@@ -555,7 +555,7 @@ MethodInfo method = typeof(int).GetTypeInfo().DeclaredMethods
 
 ---
 
-### 🔹 جزئیات بیشتر در مورد GetMembers
+### جزئیات بیشتر در مورد GetMembers
 
 * بدون آرگومان → تمام اعضای public نوع و پایه‌هایش برگردانده می‌شوند.
 * `GetMember("Crack")` → عضو خاصی را با نام می‌گیرد (اما به‌صورت آرایه برمی‌گرداند چون ممکن است overload داشته باشد).
@@ -574,11 +574,11 @@ NestedType, Property, TypeInfo
 
 می‌توان با استفاده از این enum نتیجه‌ی متد `GetMembers` را محدود کرد یا مستقیماً از متدهای اختصاصی مثل `GetMethods`, `GetFields`, `GetProperties` و ... استفاده کرد.
 
-✅ توصیه: همیشه هنگام گرفتن اعضا، تا جای ممکن دقیق باشید. مثلاً هنگام گرفتن متدی با نام خاص، نوع همه‌ی پارامترها را مشخص کنید تا اگر بعداً متد overload شد، کد شما همچنان درست کار کند.
+ توصیه: همیشه هنگام گرفتن اعضا، تا جای ممکن دقیق باشید. مثلاً هنگام گرفتن متدی با نام خاص، نوع همه‌ی پارامترها را مشخص کنید تا اگر بعداً متد overload شد، کد شما همچنان درست کار کند.
 
 ---
 
-### 🔹 DeclaringType و ReflectedType
+### DeclaringType و ReflectedType
 
 یک شیء `MemberInfo` دو ویژگی دارد:
 
@@ -610,14 +610,14 @@ Console.WriteLine(test.MetadataToken == obj.MetadataToken
 
 ---
 
-### 📝 نکات پایانی
+### نکات پایانی
 
 * `MethodHandle` → برای هر متد متمایز در یک پروسه یکتا است.
 * `MetadataToken` → برای تمام انواع و اعضا در یک Assembly Module یکتا است.
 * `MemberInfo` متدهایی برای دریافت Attributeهای سفارشی هم دارد (بخش «Retrieving Attributes at Runtime» در صفحه 832).
 * متد `MethodBase.GetCurrentMethod`، متد در حال اجرا را بازمی‌گرداند.
 
-📌 در نهایت، `MemberInfo` خودش انتزاعی است و پایه‌ای برای انواع دیگر است (به شکل **Figure 18-1** در کتاب).
+ در نهایت، `MemberInfo` خودش انتزاعی است و پایه‌ای برای انواع دیگر است (به شکل **Figure 18-1** در کتاب).
 <div align="center">
 
 ![Conventions-UsedThis-Book](../../../assets/image/18/Table-18-1.jpeg)
@@ -650,7 +650,7 @@ Console.Write (method == member);   // True
 
 این کش شدن علاوه بر حفظ هویت شیء، کارایی را هم در یک API نسبتاً کند بهبود می‌دهد.
 
-### اعضای C# در برابر اعضای CLR ⚖️
+### اعضای C# در برابر اعضای CLR
 
 جدول قبلی نشان داد که برخی از ساختارهای C# به‌طور مستقیم و یک‌به‌یک (1:1) با ساختارهای CLR متناظر نیستند. این منطقی است چون CLR و Reflection API برای تمام زبان‌های .NET طراحی شده‌اند—حتی می‌توان از Reflection در Visual Basic هم استفاده کرد.
 
@@ -661,7 +661,7 @@ Console.Write (method == member);   // True
 * یک **C# operator** به متدی استاتیک با نامی خاص (شروع‌شده با `op_` مثل `"op_Addition"`) ترجمه می‌شود.
 * یک **C# finalizer** به متدی ترجمه می‌شود که `Finalize` را override می‌کند.
 
-❗ پیچیدگی دیگر این است که پراپرتی‌ها و رویدادها در واقع شامل دو چیز هستند:
+ پیچیدگی دیگر این است که پراپرتی‌ها و رویدادها در واقع شامل دو چیز هستند:
 
 * متادیتایی که پراپرتی یا رویداد را توصیف می‌کند (در قالب `PropertyInfo` یا `EventInfo`)
 * یک یا دو متد پشتیبان (backing methods)
@@ -710,7 +710,7 @@ PropertyInfo p = mi.DeclaringType.GetProperties()
 
 ---
 
-### پراپرتی‌های Init-only 🛠️
+### پراپرتی‌های Init-only
 
 پراپرتی‌های Init-only که در C# 9 معرفی شدند، می‌توانند از طریق **object initializer** مقداردهی شوند، اما بعد از آن توسط کامپایلر فقط به‌عنوان *فقط-خواندنی* در نظر گرفته می‌شوند.
 
@@ -728,7 +728,7 @@ bool IsInitOnly (PropertyInfo pi) => pi
 
 ---
 
-### NullabilityInfoContext ☑️
+### NullabilityInfoContext
 
 از .NET 6 به بعد، می‌توانید با کلاس `NullabilityInfoContext` اطلاعاتی درباره **annotation**‌های nullability برای فیلد، پراپرتی، رویداد یا پارامترها به دست آورید:
 
@@ -744,7 +744,7 @@ void PrintPropertyNullability (PropertyInfo pi)
 
 ---
 
-### اعضای نوع جنریک 🔁
+### اعضای نوع جنریک
 
 می‌توانید متادیتای اعضا را هم برای **انواع جنریک باز (unbound generic types)** و هم برای **انواع جنریک بسته (closed generic types)** به دست آورید:
 
@@ -769,9 +769,9 @@ Console.WriteLine (unbound.DeclaringType.IsGenericTypeDefinition); // True
 Console.WriteLine (closed.DeclaringType.IsGenericTypeDefinition); // False
 ```
 
-❌ اعضای انواع جنریک باز (**unbound generic types**) را نمی‌توان به‌صورت داینامیک invoke کرد.
+ اعضای انواع جنریک باز (**unbound generic types**) را نمی‌توان به‌صورت داینامیک invoke کرد.
 
-### فراخوانی پویا اعضا ⚡
+### فراخوانی پویا اعضا
 
 فراخوانی پویا یک عضو می‌تواند با استفاده از کتابخانه‌ی **Uncapsulator** (متن‌باز و موجود در NuGet و GitHub) بسیار راحت‌تر انجام شود. این کتابخانه که توسط نویسنده‌ی کتاب نوشته شده، یک API روان برای فراخوانی اعضای عمومی و غیرعمومی از طریق Reflection، با استفاده از یک **dynamic binder** سفارشی ارائه می‌دهد.
 
@@ -800,7 +800,7 @@ int length = (int) prop.GetValue (s, null);   // 5
 
 ---
 
-### پارامترهای متد 📑
+### پارامترهای متد
 
 فرض کنید بخواهیم متد `Substring` رشته را پویا فراخوانی کنیم. در حالت عادی (static):
 
@@ -834,7 +834,7 @@ foreach (ParameterInfo x in paramList)
 
 ---
 
-### برخورد با پارامترهای ref و out 🔄
+### برخورد با پارامترهای ref و out
 
 برای پاس دادن پارامترهای `ref` یا `out`، باید قبل از گرفتن متد، متد `MakeByRefType` را روی نوع صدا بزنید. برای نمونه، اجرای پویا کد زیر:
 
@@ -857,7 +857,7 @@ Console.WriteLine (successfulParse + " " + args[1]);   // True 23
 
 ---
 
-### بازیابی و فراخوانی متدهای جنریک 🔧
+### بازیابی و فراخوانی متدهای جنریک
 
 گاهی لازم است هنگام فراخوانی `GetMethod` نوع پارامترها را مشخص کنیم تا بین متدهای overload تمایز قائل شویم. اما امکان مشخص کردن **نوع‌های جنریک** به‌طور مستقیم وجود ندارد.
 
@@ -904,7 +904,7 @@ foreach (int element in query) Console.Write (element + "|");   // 3|5|7|
 
 ---
 
-### استفاده از System.Linq.Expressions 🎭
+### استفاده از System.Linq.Expressions
 
 اگر از API مربوط به `System.Linq.Expressions` برای ساخت داینامیک expressionها استفاده کنید (فصل ۸)، دیگر نیازی به این کارهای دستی برای مشخص کردن متد جنریک ندارید. متد `Expression.Call` overloadهایی دارد که اجازه می‌دهد نوع‌های بسته‌ی جنریک را مشخص کنید:
 
@@ -919,7 +919,7 @@ var callExpression = Expression.Call (
  sourceExpr, predicateExpr);
 ```
 
-### استفاده از Delegate برای بهبود عملکرد ⚡
+### استفاده از Delegate برای بهبود عملکرد
 
 فراخوانی‌های داینامیک نسبتاً کم‌کارآمد هستند و معمولاً overhead آن‌ها در محدوده‌ی چند میکروثانیه است. اگر یک متد را بارها در یک حلقه فراخوانی می‌کنید، می‌توانید این overhead را به سطح نانوثانیه کاهش دهید، با ایجاد یک **delegate داینامیک** که به متد داینامیک شما اشاره می‌کند.
 
@@ -939,7 +939,7 @@ for (int i = 0; i < 1000000; i++)
 
 ---
 
-### دسترسی به اعضای غیرعمومی 🔒
+### دسترسی به اعضای غیرعمومی
 
 تمام متدهای بازتابی برای بررسی metadata (مثل `GetProperty`, `GetField` و غیره) overloadهایی دارند که یک `BindingFlags` می‌گیرند. این enum به‌عنوان یک فیلتر عمل می‌کند و اجازه می‌دهد معیارهای انتخاب پیش‌فرض را تغییر دهید. رایج‌ترین کاربرد، بازیابی اعضای غیرعمومی است (کار می‌کند فقط در اپلیکیشن‌های دسکتاپ).
 
@@ -967,7 +967,7 @@ Console.WriteLine(w);   // False
 
 ---
 
-### مقدمه‌ای بر BindingFlags 🏷
+### مقدمه‌ای بر BindingFlags
 
 `BindingFlags` برای ترکیب بیتی طراحی شده است. برای اینکه چیزی پیدا شود، باید یکی از چهار ترکیب زیر را انتخاب کنید:
 
@@ -994,7 +994,7 @@ members = typeof(object).GetMembers(nonPublicBinding);
 
 ---
 
-### فراخوانی متدهای جنریک 🎯
+### فراخوانی متدهای جنریک
 
 شما نمی‌توانید مستقیماً متدهای جنریک را Invoke کنید؛ مثال زیر خطا می‌دهد:
 
@@ -1120,7 +1120,7 @@ foreach (Type t in a.ExportedTypes)
 
 می‌توانید لیست همه ماژول‌های یک اسمبلی را با فراخوانی `GetModules` به‌دست آورید. همچنین می‌توانید به ماژول اصلی یک اسمبلی مستقیماً از طریق ویژگی `ManifestModule` دسترسی داشته باشید.
 
-### کار با Attributes 🏷️
+### کار با Attributes
 
 CLR اجازه می‌دهد **متادیتای اضافی** به نوع‌ها، اعضا و اسمبلی‌ها از طریق Attributes متصل شود. این مکانیزم باعث می‌شود برخی از عملکردهای مهم CLR (مانند شناسایی اسمبلی یا marshaling نوع‌ها برای تعامل با native code) هدایت شوند و Attributes را به بخشی جدایی‌ناپذیر از برنامه تبدیل می‌کند.
 
@@ -1522,7 +1522,7 @@ gen.Emit(OpCodes.Ret);
 dynMeth.Invoke(null, null); // 42
 ```
 
-### شاخه‌بندی (Branching) 🔀
+### شاخه‌بندی (Branching)
 
 در IL، حلقه‌های `while`، `do` و `for` وجود ندارند؛ همه با **Labels** و opcodeهای مشابه `goto` و شرطی انجام می‌شود:
 
@@ -1630,7 +1630,7 @@ dynMeth.Invoke(null, null);  // Hello, world!
 
 توجه: اگر به‌طور غیرvirtual متد `ToString` از نوع `object` را فراخوانی می‌کردیم، نتیجه `System.Text.StringBuilder` می‌شد و بازنویسی `ToString` نادیده گرفته می‌شد.
 
-### مدیریت استثناها (Exception Handling) ⚠️
+### مدیریت استثناها (Exception Handling)
 
 ILGenerator متدهای مخصوص مدیریت استثنا دارد. مثال معادل IL برای کد C# زیر:
 
@@ -1972,7 +1972,7 @@ Console.WriteLine(text);  // Good emissions!
 * برای ایجاد events، از `DefineEvent` روی TypeBuilder استفاده کنید.
 * سپس متدهای add و remove را نوشته و با `SetAddOnMethod` و `SetRemoveOnMethod` به EventBuilder متصل کنید.
 
-### تولید سازنده‌ها 🏗️
+### تولید سازنده‌ها
 
 می‌توانید سازنده‌های دلخواه خود را با فراخوانی **DefineConstructor** روی یک **TypeBuilder** تعریف کنید. لازم نیست حتماً این کار را انجام دهید—اگر این کار را نکنید، یک سازنده‌ی پیش‌فرض بدون پارامتر به‌طور خودکار ارائه می‌شود. سازنده‌ی پیش‌فرض، سازنده‌ی کلاس پایه را فراخوانی می‌کند (اگر از یک کلاس دیگر ارث‌بری می‌کنید)، دقیقاً مانند C#. اما اگر یک یا چند سازنده تعریف کنید، این سازنده‌ی پیش‌فرض جایگزین می‌شود.
 
@@ -2007,7 +2007,7 @@ gen.Emit(OpCodes.Ret);            // بازگشت
 
 ---
 
-### فراخوانی سازنده‌های پایه 🏛️
+### فراخوانی سازنده‌های پایه
 
 اگر از یک کلاس دیگر ارث‌بری می‌کنید، سازنده‌ای که تعریف کردیم، **سازنده‌ی کلاس پایه را نادیده می‌گیرد**. این برخلاف C# است، که سازنده‌ی کلاس پایه همیشه فراخوانی می‌شود (مستقیماً یا غیرمستقیم).
 
@@ -2032,11 +2032,11 @@ ConstructorInfo baseConstr = typeof(A).GetConstructor(new Type[0]);
 gen.Emit(OpCodes.Call, baseConstr);
 ```
 
-فراخوانی سازنده‌ها با پارامتر نیز دقیقاً مشابه متدها است. 🎯
+فراخوانی سازنده‌ها با پارامتر نیز دقیقاً مشابه متدها است. 
 
 ---
 
-### الحاق ویژگی‌ها (Attributes) 🏷️
+### الحاق ویژگی‌ها (Attributes)
 
 می‌توانید **Custom Attribute**ها را به یک سازه‌ی داینامیک اضافه کنید با فراخوانی **SetCustomAttribute** و استفاده از **CustomAttributeBuilder**.
 
@@ -2070,9 +2070,9 @@ myFieldBuilder.SetCustomAttribute(att);
 // typeBuilder.SetCustomAttribute(att);  و غیره
 ```
 
-این روش به شما امکان می‌دهد ویژگی‌ها را به صورت داینامیک به فیلدها، پراپرتی‌ها و خود نوع‌ها اضافه کنید. 🛠️
+این روش به شما امکان می‌دهد ویژگی‌ها را به صورت داینامیک به فیلدها، پراپرتی‌ها و خود نوع‌ها اضافه کنید. 
 
-### انتشار متدها و تایپ‌های جنریک 🧩
+### انتشار متدها و تایپ‌های جنریک
 
 تمام مثال‌های این بخش فرض می‌کنند که **modBuilder** به شکل زیر مقداردهی اولیه شده است:
 
@@ -2085,7 +2085,7 @@ ModuleBuilder modBuilder = assemBuilder.DefineDynamicModule("MainModule");
 
 ---
 
-#### تعریف متدهای جنریک 📝
+#### تعریف متدهای جنریک
 
 برای انتشار یک متد جنریک:
 
@@ -2168,9 +2168,9 @@ genericParams[0].SetInterfaceConstraints(
 * **Covariant**
 * **Contravariant**
 
-دو مقدار آخر معادل استفاده از **out** و **in** روی پارامترهای نوع هستند. ✅
+دو مقدار آخر معادل استفاده از **out** و **in** روی پارامترهای نوع هستند. 
 
-### تعریف تایپ‌های جنریک 🏗️
+### تعریف تایپ‌های جنریک
 
 می‌توانید تایپ‌های جنریک را به شکل مشابه متدها تعریف کنید. تفاوت اصلی این است که **DefineGenericParameters** را روی **TypeBuilder** فراخوانی می‌کنید، نه **MethodBuilder**.
 
@@ -2193,11 +2193,11 @@ GenericTypeParameterBuilder[] genericParams
 tb.DefineField("Value", genericParams[0], FieldAttributes.Public);
 ```
 
-محدودیت‌های جنریک را می‌توان دقیقاً همانند متدها اضافه کرد. ✅
+محدودیت‌های جنریک را می‌توان دقیقاً همانند متدها اضافه کرد. 
 
 ---
 
-### اهداف انتشار نامتعارف ⚠️
+### اهداف انتشار نامتعارف
 
 تمام مثال‌های این بخش فرض می‌کنند که **modBuilder** همانند بخش‌های قبلی مقداردهی اولیه شده است.
 
@@ -2257,7 +2257,7 @@ Type variableType = typeof(List<>).MakeGenericType(tb);
 
 ---
 
-#### راه حل غیر مستقیم 💡
+#### راه حل غیر مستقیم
 
 **TypeBuilder** سه متد استاتیک ارائه می‌دهد:
 
@@ -2288,7 +2288,7 @@ gen.Emit(OpCodes.Stloc, listVar);
 gen.Emit(OpCodes.Ret);
 ```
 
-### وابستگی‌های دایره‌ای 🔄
+### وابستگی‌های دایره‌ای
 
 فرض کنید می‌خواهید دو تایپ بسازید که به یکدیگر ارجاع دارند، مانند این مثال:
 
@@ -2312,7 +2312,7 @@ Type realA = aBuilder.CreateType();
 Type realB = bBuilder.CreateType();
 ```
 
-توجه کنید که ما **تا زمانی که هر دو تایپ پر نشده‌اند،** روی **aBuilder** یا **bBuilder** تابع **CreateType** را فراخوانی نکردیم. اصل موضوع این است: اول همه چیز را متصل کنید، سپس **CreateType** را روی هر **TypeBuilder** فراخوانی کنید. ✅
+توجه کنید که ما **تا زمانی که هر دو تایپ پر نشده‌اند،** روی **aBuilder** یا **bBuilder** تابع **CreateType** را فراخوانی نکردیم. اصل موضوع این است: اول همه چیز را متصل کنید، سپس **CreateType** را روی هر **TypeBuilder** فراخوانی کنید. 
 
 ---
 
@@ -2400,7 +2400,7 @@ AppDomain.CurrentDomain.TypeResolve -= handler;
 
 رویداد **TypeResolve** هنگام فراخوانی **aBuilder.CreateType** فعال می‌شود، در نقطه‌ای که نیاز است شما **CreateType** را روی **bBuilder** فراخوانی کنید.
 
-### تجزیه IL 🧩
+### تجزیه IL
 
 می‌توانید اطلاعاتی درباره محتوای یک متد موجود با فراخوانی **GetMethodBody** روی یک شیء **MethodBase** به دست آورید. این متد یک **MethodBody** بازمی‌گرداند که دارای خصوصیات برای بررسی متغیرهای محلی، بلوک‌های مدیریت استثنا، اندازه پشته و همچنین **IL خام** است. تقریباً مانند معکوس **Reflection.Emit**!
 
@@ -2412,7 +2412,7 @@ AppDomain.CurrentDomain.TypeResolve -= handler;
 
 ---
 
-### نوشتن یک دیس‌اسمبلر 🛠️
+### نوشتن یک دیس‌اسمبلر
 
 نمونه‌ای از خروجی که دیس‌اسمبلر ما تولید خواهد کرد:
 
@@ -2489,9 +2489,9 @@ static Disassembler()
 }
 ```
 
-* این کار در **سازنده استاتیک** انجام شده تا تنها یک بار اجرا شود. ✅
+* این کار در **سازنده استاتیک** انجام شده تا تنها یک بار اجرا شود. 
 
-### نوشتن DisassembleNextInstruction 🛠️
+### نوشتن DisassembleNextInstruction
 
 هر دستور IL از یک **opcode یک یا دو بایتی** تشکیل شده و پس از آن یک **عملوند** با طول صفر، یک، دو، چهار یا هشت بایت می‌آید.
 (استثنا: **inline switch opcodes** که پس از آن تعداد متغیری از عملوندها می‌آید.)
@@ -2511,7 +2511,7 @@ void DisassembleNextInstruction()
 
 ---
 
-#### خواندن یک Opcode 🔍
+#### خواندن یک Opcode
 
 برای خواندن یک **opcode**:
 
@@ -2533,7 +2533,7 @@ OpCode ReadOpCode()
 
 ---
 
-#### خواندن عملوند ⚙️
+#### خواندن عملوند
 
 ابتدا باید طول عملوند را تعیین کنیم. می‌توان این کار را بر اساس **نوع عملوند** انجام داد.
 چون بیشتر عملوندها ۴ بایت طول دارند، استثناها به راحتی در یک شرط فیلتر می‌شوند.
@@ -2591,7 +2591,7 @@ IL_00C3:  call         91 00 00 0A
 
 ---
 
-#### قالب‌بندی عملوندها 📐
+#### قالب‌بندی عملوندها
 
 متد **FormatOperand** این کار را انجام می‌دهد و موارد خاصی که نیاز به قالب‌بندی دارند، شناسایی می‌کند. این شامل اکثر عملوندهای چهار بایتی و دستورهای **short branch** است:
 
@@ -2612,9 +2612,9 @@ string FormatOperand(OpCode c, int operandLength)
 
 ---
 
-با این روش، اکنون پایه برای **یک دیس‌اسمبلر IL کامل و قابل توسعه** آماده است. ✅
+با این روش، اکنون پایه برای **یک دیس‌اسمبلر IL کامل و قابل توسعه** آماده است. 
 
-### پردازش عملوندهای چهار بایتی و شاخه‌ها 🧩
+### پردازش عملوندهای چهار بایتی و شاخه‌ها
 
 سه نوع عملوند چهار بایتی وجود دارد که باید به شکل خاصی پردازش شوند:
 
@@ -2669,7 +2669,7 @@ string Get4ByteOperand(OpCode c)
 
 ---
 
-### شاخه‌های کوتاه و inline switch 🚦
+### شاخه‌های کوتاه و inline switch
 
 * **شاخه کوتاه (Short branch target)**: آفست مقصد به صورت یک بایت با علامت نشان داده می‌شود (در انتهای دستور فعلی، + یک بایت).
 * **Switch target**: پس از آن تعداد متغیری از مقاصد چهار بایتی قرار می‌گیرد.
@@ -2705,4 +2705,4 @@ MethodInfo mi = typeof(Disassembler).GetMethod(
 Console.WriteLine(Disassembler.Disassemble(mi));
 ```
 
-* این خروجی IL خوانا و مشابه **ildasm** تولید می‌کند. ✅
+* این خروجی IL خوانا و مشابه **ildasm** تولید می‌کند. 

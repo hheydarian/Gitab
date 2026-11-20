@@ -18,7 +18,7 @@ title: شبکه‌سازی
 
 ---
 
-### معماری شبکه 🏗️
+### معماری شبکه
 
 شکل ۱۶-۱ انواع شبکه‌ای .NET و لایه‌های ارتباطی که در آن‌ها قرار دارند را نشان می‌دهد. بیشتر انواع در **لایه‌ی انتقال (Transport layer)** یا **لایه‌ی کاربرد (Application layer)** قرار دارند.
 
@@ -41,7 +41,7 @@ title: شبکه‌سازی
 
 ---
 
-### پروتکل HTTP و اهمیت آن 🌍
+### پروتکل HTTP و اهمیت آن
 
 در بین پروتکل‌های کاربردی، **HTTP** به دلیل کاربرد عمومی‌اش اهمیت ویژه‌ای دارد. حالت پایه‌ای عملکرد آن—«این صفحه‌ی وب با این URL را به من بده»—به‌خوبی با الگوهای دیگر مثل «نتیجه‌ی فراخوانی این endpoint با این آرگومان‌ها را به من بده» سازگار می‌شود.
 
@@ -58,7 +58,7 @@ title: شبکه‌سازی
 
 ---
 
-همان‌طور که از بحث‌های بالا مشخص است، حوزه‌ی شبکه‌سازی پر از **اختصارنویسی‌ها (acronyms)** است. متداول‌ترین آن‌ها در **جدول ۱۶-۱** فهرست شده‌اند. 📑
+همان‌طور که از بحث‌های بالا مشخص است، حوزه‌ی شبکه‌سازی پر از **اختصارنویسی‌ها (acronyms)** است. متداول‌ترین آن‌ها در **جدول ۱۶-۱** فهرست شده‌اند. 
 <div align="center">
 
 ![Conventions-UsedThis-Book](../../../assets/image/16/Table-16-2.jpeg)
@@ -93,7 +93,7 @@ Console.WriteLine (a3.AddressFamily);     // InterNetworkV6
 
 ---
 
-### پورت‌ها 🔌
+### پورت‌ها
 
 پروتکل‌های **TCP** و **UDP** هر آدرس IP را به **۶۵٬۵۳۵ پورت** تقسیم می‌کنند. این کار به یک کامپیوتر در یک آدرس واحد اجازه می‌دهد چندین برنامه را اجرا کند، هرکدام روی پورت خودش.
 
@@ -114,7 +114,7 @@ Console.WriteLine (ep.ToString());            // 101.102.103.104:222
 
 ---
 
-### URI 📑
+### URI
 
 **فایروال‌ها (Firewalls)** پورت‌ها را مسدود می‌کنند. در بسیاری از محیط‌های شرکتی، فقط تعداد کمی از پورت‌ها باز هستند—معمولاً:
 
@@ -139,7 +139,7 @@ Console.WriteLine (ep.ToString());            // 101.102.103.104:222
 ![Conventions-UsedThis-Book](../../../assets/image/16/Table-16-3.jpeg)
 </div>
 
-### کلاس Uri 🧭
+### کلاس Uri
 
 کلاس **Uri** زمانی مفید است که نیاز داشته باشید قالب یک رشته‌ی **URI** را اعتبارسنجی کنید یا یک URI را به بخش‌های تشکیل‌دهنده‌اش تقسیم کنید. در غیر این صورت، می‌توانید URI را صرفاً مثل یک رشته در نظر بگیرید—بیشتر متدهای شبکه‌ای هم **overload** شده‌اند تا هم یک شیء **Uri** و هم یک رشته را بپذیرند.
 
@@ -148,7 +148,7 @@ Console.WriteLine (ep.ToString());            // 101.102.103.104:222
 * یک رشته‌ی **URI**، مثل:
   `http://www.ebay.com` یا `file://janespc/sharedpics/dolphin.jpg`
 * یک مسیر مطلق به یک فایل روی هارد دیسک، مثل:
-  `c:\myfiles\data.xlsx` (روی ویندوز) یا `/tmp/myfiles/data.xlsx` (روی یونیکس)
+  `csharp:\myfiles\data.xlsx` (روی ویندوز) یا `/tmp/myfiles/data.xlsx` (روی یونیکس)
 * یک مسیر **UNC** به یک فایل در شبکه LAN، مثل:
   `\\janespc\sharedpics\dolphin.jpg`
 
@@ -172,7 +172,7 @@ Console.WriteLine (ep.ToString());            // 101.102.103.104:222
 
 ---
 
-### متدها و مثال‌ها 📌
+### متدها و مثال‌ها
 
 کلاس **Uri** متدهایی برای مقایسه و تفریق مسیرها فراهم می‌کند:
 
@@ -198,7 +198,7 @@ Uri u = new Uri ("page.html", UriKind.Relative);
 
 ---
 
-### اهمیت اسلش انتهایی `/` ⚠️
+### اهمیت اسلش انتهایی `/`
 
 اسلش انتهایی در یک URI مهم است و روی پردازش درخواست توسط سرور تأثیر می‌گذارد.
 
@@ -211,7 +211,7 @@ Uri u = new Uri ("page.html", UriKind.Relative);
 
 ---
 
-### متدهای استاتیک مفید 🌟
+### متدهای استاتیک مفید
 
 کلاس **Uri** متدهای کمکی استاتیک نیز دارد، مثل:
 
@@ -220,23 +220,23 @@ Uri u = new Uri ("page.html", UriKind.Relative);
 
 ---
 
-## HttpClient 🚀
+## HttpClient
 
 کلاس **HttpClient** یک API مدرن برای عملیات کلاینت HTTP ارائه می‌دهد و جایگزین **WebClient** و **WebRequest/WebResponse** (که اکنون **obsolete** شده‌اند) است.
 
 این کلاس در واکنش به رشد **APIهای وب مبتنی بر HTTP** و **سرویس‌های REST** طراحی شد و تجربه‌ی بهتری برای پروتکل‌های پیچیده‌تر از فقط دریافت یک صفحه‌ی وب ارائه می‌دهد.
 
-### قابلیت‌های کلیدی HttpClient ✅
+### قابلیت‌های کلیدی HttpClient
 
 * یک نمونه‌ی **HttpClient** می‌تواند درخواست‌های هم‌زمان را مدیریت کند و به‌خوبی با قابلیت‌هایی مثل **هدرهای سفارشی، کوکی‌ها و روش‌های احراز هویت** کار کند.
 * اجازه می‌دهد **Message Handler**های سفارشی بنویسید و اضافه کنید → برای **mocking** در تست‌های واحد و ایجاد **pipelineهای سفارشی** (مثل لاگ‌برداری، فشرده‌سازی، رمزنگاری و …).
 * یک سیستم نوعی (type system) غنی و قابل‌گسترش برای **Headers** و **Content** دارد.
 
-⚠️ **HttpClient از گزارش پیشرفت (progress reporting) پشتیبانی نمی‌کند**. برای راه‌حل، می‌توانید به نمونه‌ی `HttpClient with Progress.linq` در سایت نویسنده یا گالری نمونه‌های LINQPad مراجعه کنید.
+ **HttpClient از گزارش پیشرفت (progress reporting) پشتیبانی نمی‌کند**. برای راه‌حل، می‌توانید به نمونه‌ی `HttpClient with Progress.linq` در سایت نویسنده یا گالری نمونه‌های LINQPad مراجعه کنید.
 
 ---
 
-### استفاده‌ی ساده از HttpClient 📝
+### استفاده‌ی ساده از HttpClient
 
 ساده‌ترین روش: نمونه‌سازی و استفاده از متدهای **Get\***:
 
@@ -246,7 +246,7 @@ string html = await new HttpClient().GetStringAsync ("http://linqpad.net");
 
 همچنین متدهای **GetByteArrayAsync** و **GetStreamAsync** وجود دارند. تمام متدهای I/O در **HttpClient** به‌صورت **asynchronous** هستند.
 
-💡 برخلاف WebRequest/WebResponse، برای بهترین کارایی باید از **یک نمونه‌ی HttpClient** استفاده‌ی مجدد کنید؛ در غیر این صورت، عملیات‌هایی مثل **DNS resolution** دوباره و دوباره انجام می‌شوند و **ساکت‌ها** (sockets) بیشتر از حد لازم باز می‌مانند.
+ برخلاف WebRequest/WebResponse، برای بهترین کارایی باید از **یک نمونه‌ی HttpClient** استفاده‌ی مجدد کنید؛ در غیر این صورت، عملیات‌هایی مثل **DNS resolution** دوباره و دوباره انجام می‌شوند و **ساکت‌ها** (sockets) بیشتر از حد لازم باز می‌مانند.
 
 نمونه:
 
@@ -261,7 +261,7 @@ Console.WriteLine (await task2);
 
 ---
 
-### ویژگی‌ها و پیکربندی ⚙️
+### ویژگی‌ها و پیکربندی
 
 * **Timeout** → تعیین می‌کند یک درخواست چقدر می‌تواند طول بکشد.
 * **BaseAddress** → یک URI پایه به همه‌ی درخواست‌ها اضافه می‌کند.
@@ -279,7 +279,7 @@ var client = new HttpClient (handler);
 
 ---
 
-### GetAsync و Response Messages 📩
+### GetAsync و Response Messages
 
 متدهای **GetStringAsync**، **GetByteArrayAsync** و **GetStreamAsync** میانبرهایی برای متد عمومی‌تر **GetAsync** هستند که یک **HttpResponseMessage** برمی‌گرداند:
 
@@ -307,7 +307,7 @@ using (var fileStream = File.Create ("linqpad.html"))
 
 ---
 
-### SendAsync و Request Messages 📨
+### SendAsync و Request Messages
 
 متدهای **GetAsync، PostAsync، PutAsync و DeleteAsync** همگی میانبرهایی برای **SendAsync** هستند، متد سطح‌پایین که همه چیز به آن ختم می‌شود.
 
@@ -323,7 +323,7 @@ response.EnsureSuccessStatusCode();
 
 ایجاد یک **HttpRequestMessage** به شما امکان می‌دهد propertyهای درخواست مثل **Headers** و **Content** را شخصی‌سازی کنید، که شامل آپلود داده‌ها نیز می‌شود.
 
-### 📤 آپلود داده‌ها و HttpContent
+### آپلود داده‌ها و HttpContent
 
 بعد از نمونه‌سازی یک شیء از نوع `HttpRequestMessage`، می‌توانید با مقداردهی به ویژگی **Content** داده‌ای برای آپلود مشخص کنید. نوع این ویژگی یک کلاس انتزاعی به نام `HttpContent` است. .NET چندین زیرکلاس مشخص برای انواع مختلف داده فراهم کرده است (و البته می‌توانید کلاس اختصاصی خودتان را هم بنویسید):
 
@@ -332,7 +332,7 @@ response.EnsureSuccessStatusCode();
 * `FormUrlEncodedContent` (بخش **Uploading Form Data** در صفحه 754 را ببینید)
 * `StreamContent`
 
-🔹 مثال:
+ مثال:
 
 ```csharp
 var client = new HttpClient (new HttpClientHandler { UseProxy = false });
@@ -346,7 +346,7 @@ Console.WriteLine (await response.Content.ReadAsStringAsync());
 
 ---
 
-### ⚙️ HttpMessageHandler
+### HttpMessageHandler
 
 قبلاً گفتیم که بیشتر ویژگی‌های سفارشی‌سازی درخواست‌ها نه در `HttpClient` بلکه در `HttpClientHandler` تعریف شده‌اند. در واقع، `HttpClientHandler` زیرکلاسی از کلاس انتزاعی `HttpMessageHandler` است که به شکل زیر تعریف می‌شود:
 
@@ -365,7 +365,7 @@ public abstract class HttpMessageHandler : IDisposable
 
 ---
 
-### 🧪 Unit Testing و Mocking
+### Unit Testing و Mocking
 
 می‌توانیم `HttpMessageHandler` را زیرکلاس کنیم تا یک **Mocking Handler** برای کمک به تست واحد بسازیم:
 
@@ -389,11 +389,11 @@ class MockHandler : HttpMessageHandler
 }
 ```
 
-🔹 سازنده‌ی این کلاس یک تابع دریافت می‌کند که مشخص می‌کند پاسخ از روی درخواست چگونه ساخته شود. این رویکرد بسیار انعطاف‌پذیر است زیرا همان هندلر می‌تواند چندین درخواست مختلف را تست کند.
+ سازنده‌ی این کلاس یک تابع دریافت می‌کند که مشخص می‌کند پاسخ از روی درخواست چگونه ساخته شود. این رویکرد بسیار انعطاف‌پذیر است زیرا همان هندلر می‌تواند چندین درخواست مختلف را تست کند.
 
 متد `SendAsync` در اینجا به‌صورت **همگام** عمل می‌کند چون از `Task.FromResult` استفاده کرده‌ایم. البته می‌توانستیم با برگرداندن `Task<HttpResponseMessage>` از تابع پاسخ‌ساز، حالت **غیرهمگام** را هم حفظ کنیم، اما از آنجا که تابع Mock معمولاً کوتاه و سریع است، ضرورتی ندارد.
 
-🔹 نحوه‌ی استفاده:
+ نحوه‌ی استفاده:
 
 ```csharp
 var mocker = new MockHandler (request => 
@@ -411,11 +411,11 @@ Assert.AreEqual ("You asked for http://www.linqpad.net/", result);
 
 ---
 
-### 🔗 زنجیره‌سازی هندلرها با DelegatingHandler
+### زنجیره‌سازی هندلرها با DelegatingHandler
 
 می‌توانید یک Message Handler بسازید که یک هندلر دیگر را فراخوانی کند (و در نتیجه زنجیره‌ای از هندلرها ایجاد شود). این کار از طریق زیرکلاس کردن `DelegatingHandler` انجام می‌شود. با این روش می‌توانید پروتکل‌های سفارشی مانند **احراز هویت، فشرده‌سازی و رمزگذاری** را پیاده‌سازی کنید.
 
-🔹 نمونه‌ی یک هندلر لاگ ساده:
+ نمونه‌ی یک هندلر لاگ ساده:
 
 ```csharp
 class LoggingHandler : DelegatingHandler 
@@ -435,11 +435,11 @@ class LoggingHandler : DelegatingHandler
 }
 ```
 
-✅ در اینجا ما **غیرهمزمانی** را در Override کردن `SendAsync` حفظ کرده‌ایم. استفاده از `async` در متدهایی که خروجی Task دارند هم قانونی است و هم در اینجا مطلوب.
+ در اینجا ما **غیرهمزمانی** را در Override کردن `SendAsync` حفظ کرده‌ایم. استفاده از `async` در متدهایی که خروجی Task دارند هم قانونی است و هم در اینجا مطلوب.
 
 ---
 
-### 🌐 پروکسی (Proxy)
+### پروکسی (Proxy)
 
 یک **Proxy Server** واسطه‌ای است که درخواست‌های HTTP از طریق آن مسیردهی می‌شوند. سازمان‌ها معمولاً برای دسترسی کارکنان به اینترنت از طریق یک پروکسی استفاده می‌کنند چون مدیریت امنیت را ساده‌تر می‌کند. پروکسی آدرس خودش را دارد و می‌تواند احراز هویت بخواهد تا فقط کاربران انتخاب‌شده در LAN به اینترنت دسترسی داشته باشند.
 
@@ -465,7 +465,7 @@ HttpClient.DefaultWebProxy = myWebProxy;
 
 ---
 
-### 🔐 احراز هویت (Authentication)
+### احراز هویت (Authentication)
 
 می‌توانید نام کاربری و رمز عبور را به این صورت به `HttpClient` بدهید:
 
@@ -507,7 +507,7 @@ ATmKAAAAD0lVDRdPUksHUq9VUA==
 
 این مکانیزم شفاف است، اما باعث می‌شود هر درخواست یک رفت‌وبرگشت اضافی ایجاد کند. برای جلوگیری از این موضوع در درخواست‌های بعدی به همان URI، می‌توانید ویژگی `PreAuthenticate` در `HttpClientHandler` را روی true قرار دهید.
 
-### 🔑 CredentialCache
+### CredentialCache
 
 می‌توانید با استفاده از شیء `CredentialCache` یک **پروتکل احراز هویت خاص** را مجبور کنید.
 یک Credential Cache شامل یک یا چند شیء `NetworkCredential` است که هرکدام به یک پروتکل و یک **URI prefix** خاص متصل هستند.
@@ -527,7 +527,7 @@ handler.Credentials = cache;
 پروتکل احراز هویت به صورت رشته‌ای مشخص می‌شود. مقادیر معتبر شامل موارد زیر هستند:
 `Basic`, `Digest`, `NTLM`, `Kerberos`, `Negotiate`
 
-🔹 در این مثال، پروتکل **Negotiate** انتخاب می‌شود چون سرور در هدرهای احراز هویت خود پشتیبانی از Digest را اعلام نکرده است.
+ در این مثال، پروتکل **Negotiate** انتخاب می‌شود چون سرور در هدرهای احراز هویت خود پشتیبانی از Digest را اعلام نکرده است.
 Negotiate یک پروتکل ویندوزی است که در عمل به **Kerberos** یا **NTLM** ترجمه می‌شود، بسته به اینکه سرور چه قابلیتی داشته باشد. این مکانیزم باعث می‌شود اپلیکیشن شما در برابر استانداردهای امنیتی آینده هم **سازگار** باقی بماند.
 
 برای افزودن کاربر فعلی ویندوز به Credential Cache بدون نیاز به رمز عبور، می‌توانید از ویژگی ایستا `CredentialCache.DefaultNetworkCredentials` استفاده کنید:
@@ -538,7 +538,7 @@ cache.Add (prefix, "Negotiate", CredentialCache.DefaultNetworkCredentials);
 
 ---
 
-### 📨 احراز هویت از طریق Header
+### احراز هویت از طریق Header
 
 راه دیگر احراز هویت، تنظیم مستقیم **هدر احراز هویت** است:
 
@@ -554,7 +554,7 @@ client.DefaultRequestHeaders.Authorization =
 
 ---
 
-### 📑 هدرها (Headers)
+### هدرها (Headers)
 
 `HttpClient` به شما اجازه می‌دهد که به یک درخواست، هدرهای HTTP سفارشی اضافه کنید یا هدرهای پاسخ را مرور کنید.
 یک هدر در اصل یک جفت **کلید/مقدار** است که شامل **متادیتا** می‌شود (مثل نوع محتوای پیام یا نرم‌افزار سرور).
@@ -572,11 +572,11 @@ client.DefaultRequestHeaders.Add ("CustomHeader", "VisualStudio/2022");
 
 ---
 
-### ❓ Query Strings
+### Query Strings
 
 **Query String** رشته‌ای است که به URI اضافه می‌شود (بعد از علامت سؤال) و برای ارسال داده‌های ساده به سرور استفاده می‌شود.
 
-🔹 ساختار کلی:
+ ساختار کلی:
 
 ```
 ?key1=value1&key2=value2&key3=value3...
@@ -597,7 +597,7 @@ string requestURI = "http://www.google.com/search?q=" + search +
                    "&hl=" + language;
 ```
 
-🔹 نتیجه:
+ نتیجه:
 
 ```
 http://www.google.com/search?q=(HttpClient%20OR%20HttpRequestMessage)&hl=fr
@@ -607,7 +607,7 @@ http://www.google.com/search?q=(HttpClient%20OR%20HttpRequestMessage)&hl=fr
 
 ---
 
-### 📤 آپلود داده‌های فرم (Uploading Form Data)
+### آپلود داده‌های فرم (Uploading Form Data)
 
 برای آپلود داده‌های فرم HTML، یک شیء از نوع `FormUrlEncodedContent` بسازید و مقادیر را در آن قرار دهید. سپس می‌توانید آن را به متد `PostAsync` بدهید یا به ویژگی `Content` یک درخواست اختصاص دهید:
 
@@ -627,11 +627,11 @@ Console.WriteLine (await response.Content.ReadAsStringAsync());
 
 ---
 
-### 🍪 کوکی‌ها (Cookies)
+### کوکی‌ها (Cookies)
 
 یک **Cookie** جفت رشته **نام/مقدار** است که یک سرور HTTP در هدر پاسخ برای کلاینت ارسال می‌کند. مرورگرها معمولاً کوکی‌ها را ذخیره می‌کنند و در هر درخواست بعدی (به همان آدرس) دوباره به سرور می‌فرستند تا زمان انقضا.
 
-🔹 هدف کوکی: سرور بتواند بفهمد آیا همچنان با همان کلاینت قبلی در ارتباط است یا خیر (بدون نیاز به Query String‌های اضافی).
+ هدف کوکی: سرور بتواند بفهمد آیا همچنان با همان کلاینت قبلی در ارتباط است یا خیر (بدون نیاز به Query String‌های اضافی).
 
 به‌طور پیش‌فرض، `HttpClient` کوکی‌های دریافتی را **نادیده می‌گیرد**. برای پذیرش کوکی‌ها باید یک `CookieContainer` بسازید و آن را به `HttpClientHandler` اختصاص دهید:
 
@@ -658,7 +658,7 @@ freshCookieContainer.Add (c);
 
 یک `CookieContainer` در سمت کلاینت می‌تواند کوکی‌هایی از چندین مبدا مختلف را در خود جای دهد؛ `HttpClient` فقط کوکی‌هایی را می‌فرستد که مسیر و دامنه‌شان با سرور درخواست‌شده مطابقت داشته باشند.
 
-### 🖥️ نوشتن یک HTTP Server
+### نوشتن یک HTTP Server
 
 اگر نیاز به نوشتن یک **HTTP server** داشته باشید، یک رویکرد سطح بالاتر (از .NET 6 به بعد) استفاده از **ASP.NET Minimal API** است. برای شروع فقط کافی است:
 
@@ -702,7 +702,7 @@ class SimpleHttpServer : IDisposable
 }
 ```
 
-📤 **خروجی:**
+ **خروجی:**
 
 ```
 You asked for: /MyApp/Request.txt
@@ -774,7 +774,7 @@ class WebServer
 }
 ```
 
-📌 راه‌اندازی:
+ راه‌اندازی:
 
 ```csharp
 var server = new WebServer ("http://localhost:51111/", @"d:\webroot");
@@ -791,25 +791,25 @@ finally { server.Stop(); }
 
 ---
 
-### 🌐 استفاده از DNS
+### استفاده از DNS
 
 کلاس استاتیک **Dns** عملیات **Domain Name System** را کپسوله می‌کند.
 
-🔹 تبدیل نام دامنه به IP:
+ تبدیل نام دامنه به IP:
 
 ```csharp
 foreach (IPAddress a in Dns.GetHostAddresses ("albahari.com"))
   Console.WriteLine (a.ToString());  // 205.210.42.167
 ```
 
-🔹 تبدیل IP به نام دامنه:
+ تبدیل IP به نام دامنه:
 
 ```csharp
 IPHostEntry entry = Dns.GetHostEntry ("205.210.42.167");
 Console.WriteLine (entry.HostName);  // albahari.com
 ```
 
-🔹 روش ناهمزمان:
+ روش ناهمزمان:
 
 ```csharp
 foreach (IPAddress a in await Dns.GetHostAddressesAsync ("albahari.com"))
@@ -818,7 +818,7 @@ foreach (IPAddress a in await Dns.GetHostAddressesAsync ("albahari.com"))
 
 ---
 
-### 📧 ارسال ایمیل با SmtpClient
+### ارسال ایمیل با SmtpClient
 
 کلاس **SmtpClient** در فضای نام `System.Net.Mail` برای ارسال ایمیل با پروتکل **SMTP** استفاده می‌شود.
 
@@ -830,7 +830,7 @@ client.Host = "mail.myserver.com";
 client.Send ("from@adomain.com", "to@adomain.com", "subject", "body");
 ```
 
-📎 افزودن پیوست‌ها:
+ افزودن پیوست‌ها:
 
 ```csharp
 SmtpClient client = new SmtpClient();
@@ -850,7 +850,7 @@ mm.Attachments.Add (a);
 client.Send (mm);
 ```
 
-🔐 بیشتر سرورهای SMTP فقط ارتباط‌های **احراز هویت‌شده و امن (SSL/TLS)** را قبول می‌کنند:
+ بیشتر سرورهای SMTP فقط ارتباط‌های **احراز هویت‌شده و امن (SSL/TLS)** را قبول می‌کنند:
 
 ```csharp
 var client = new SmtpClient ("smtp.myisp.com", 587)
@@ -862,7 +862,7 @@ client.Send ("me@myisp.com", "someone@somewhere.com", "Subject", "Body");
 Console.WriteLine ("Sent");
 ```
 
-📂 در زمان توسعه، می‌توانید ایمیل‌ها را به جای ارسال، در یک پوشه ذخیره کنید:
+ در زمان توسعه، می‌توانید ایمیل‌ها را به جای ارسال، در یک پوشه ذخیره کنید:
 
 ```csharp
 SmtpClient client = new SmtpClient();
@@ -872,16 +872,16 @@ client.PickupDirectoryLocation = @"c:\mail";
 
 ---
 
-✨ در این بخش یاد گرفتیم چطور در .NET یک **HTTP server** ساده بنویسیم، با **DNS** کار کنیم و با استفاده از **SMTP** ایمیل ارسال کنیم.
+ در این بخش یاد گرفتیم چطور در .NET یک **HTTP server** ساده بنویسیم، با **DNS** کار کنیم و با استفاده از **SMTP** ایمیل ارسال کنیم.
 
-## استفاده از TCP 🌐
+## استفاده از TCP
 
 TCP و UDP پروتکل‌های لایه‌ی **Transport** هستند که بیشتر سرویس‌های اینترنت و شبکه‌های محلی (LAN) بر پایه‌ی آن‌ها ساخته شده‌اند. به‌عنوان نمونه:
 
 * پروتکل‌های HTTP (نسخه‌ی ۲ و پایین‌تر)، FTP و SMTP از **TCP** استفاده می‌کنند.
 * پروتکل‌های DNS و HTTP نسخه‌ی ۳ از **UDP** استفاده می‌کنند.
 
-TCP یک پروتکل **Connection-Oriented** است و مکانیزم‌های اطمینان (Reliability) دارد، در حالی که UDP **Connectionless** بوده، سربار (Overhead) کمتری دارد و از **Broadcasting** پشتیبانی می‌کند. برای نمونه، **BitTorrent** و **Voice over IP (VoIP)** از UDP بهره می‌برند. ⚡
+TCP یک پروتکل **Connection-Oriented** است و مکانیزم‌های اطمینان (Reliability) دارد، در حالی که UDP **Connectionless** بوده، سربار (Overhead) کمتری دارد و از **Broadcasting** پشتیبانی می‌کند. برای نمونه، **BitTorrent** و **Voice over IP (VoIP)** از UDP بهره می‌برند. 
 
 لایه‌ی Transport نسبت به لایه‌های بالاتر انعطاف‌پذیری بیشتری فراهم می‌کند و می‌تواند کارایی بهتری هم داشته باشد، اما باید کارهایی مثل **Authentication** و **Encryption** را خودتان مدیریت کنید.
 
@@ -938,7 +938,7 @@ listener.Stop();
 * متد **AcceptTcpClient** تا دریافت درخواست از یک Client بلوکه می‌ماند (نسخه‌ی غیرهمگام آن نیز وجود دارد).
 * پس از دریافت اتصال، مشابه Client، از **GetStream** برای ارتباط استفاده می‌کنیم.
 
-⚠️ هنگام کار در لایه‌ی Transport باید یک **پروتکل مکالمه** تعریف کنید (چه کسی چه زمانی صحبت کند و چه زمانی گوش دهد). اگر هر دو طرف هم‌زمان صحبت یا هم‌زمان گوش کنند، ارتباط از کار می‌افتد—مثل واکی‌تاکی! 🎙️
+ هنگام کار در لایه‌ی Transport باید یک **پروتکل مکالمه** تعریف کنید (چه کسی چه زمانی صحبت کند و چه زمانی گوش دهد). اگر هر دو طرف هم‌زمان صحبت یا هم‌زمان گوش کنند، ارتباط از کار می‌افتد—مثل واکی‌تاکی! 
 
 ---
 
@@ -990,12 +990,12 @@ void Server()   // فقط یک درخواست را پردازش می‌کند
 * برای ارسال و دریافت متن‌ها از **BinaryWriter** و **BinaryReader** استفاده کرده‌ایم.
 * این ابزارها برخلاف **StreamReader/StreamWriter** رشته‌ها را با یک عدد طول (Length Prefix) ذخیره می‌کنند، بنابراین **BinaryReader** دقیقاً می‌داند چند بایت باید بخواند.
 
-اگر از **StreamReader.ReadToEnd** استفاده کنید، ممکن است اتصال هیچ‌وقت تمام نشود و عملیات خواندن برای همیشه بلوکه شود، چون **NetworkStream** انتهای مشخصی ندارد. ⚠️
+اگر از **StreamReader.ReadToEnd** استفاده کنید، ممکن است اتصال هیچ‌وقت تمام نشود و عملیات خواندن برای همیشه بلوکه شود، چون **NetworkStream** انتهای مشخصی ندارد. 
 همچنین **StreamReader** به دلیل داشتن **Read-Ahead Buffer**، ممکن است بیش از حد نیاز بخواند و باعث بلوکه شدن شود. اما **FileStream** چنین مشکلی ندارد چون انتهای مشخصی دارد و متد **Read** در پایان مقدار `0` بازمی‌گرداند.
 
 ---
 
-### هم‌زمانی (Concurrency) با TCP ⚡
+### هم‌زمانی (Concurrency) با TCP
 
 کلاس‌های **TcpClient** و **TcpListener** متدهای **Asynchronous** دارند که برای مقیاس‌پذیری بهتر استفاده می‌شوند. کافی است متدهای بلوکه‌شونده را با نسخه‌ی Async جایگزین کرده و نتیجه را **await** کنید.
 
@@ -1036,11 +1036,11 @@ async Task Accept(TcpClient client)
 ```
 
 این برنامه **Scalable** است چون برای کل مدت درخواست یک Thread اشغال نمی‌کند.
-مثلاً اگر ۱۰۰۰ Client هم‌زمان متصل شوند و هرکدام چند ثانیه طول بکشد، این راهکار نیازی به ۱۰۰۰ Thread ندارد. فقط در بازه‌های کوتاه قبل و بعد از عبارت‌های `await` از Thread استفاده می‌کند. ✅
+مثلاً اگر ۱۰۰۰ Client هم‌زمان متصل شوند و هرکدام چند ثانیه طول بکشد، این راهکار نیازی به ۱۰۰۰ Thread ندارد. فقط در بازه‌های کوتاه قبل و بعد از عبارت‌های `await` از Thread استفاده می‌کند. 
 
 ---
 
-### دریافت ایمیل POP3 با TCP 📧
+### دریافت ایمیل POP3 با TCP
 
 در .NET پشتیبانی در سطح **Application Layer** برای پروتکل **POP3** وجود ندارد. بنابراین باید در **TCP Layer** کدنویسی کنید. خوشبختانه، پروتکل POP3 ساده است و گفتگوی آن به‌صورت زیر پیش می‌رود:
 
@@ -1049,7 +1049,7 @@ async Task Accept(TcpClient client)
 ![Conventions-UsedThis-Book](../../../assets/image/16/Table-16-4.jpeg)
 </div>
 
-## دریافت ایمیل POP3 با TCP 📧
+## دریافت ایمیل POP3 با TCP
 
 هر دستور و پاسخ در پروتکل **POP3** با یک خط جدید (**CR + LF**) پایان می‌یابد، به‌جز دستورات چندخطی مثل **LIST** و **RETR** که با یک نقطه (`.`) در یک خط جداگانه تمام می‌شوند.
 از آن‌جا که نمی‌توانیم از **StreamReader** با **NetworkStream** استفاده کنیم، ابتدا یک متد کمکی برای خواندن یک خط متن به‌صورت **بدون بافر (Nonbuffered)** می‌نویسیم:
@@ -1070,7 +1070,7 @@ string ReadLine (Stream s)
 
 ---
 
-### متد کمکی برای ارسال دستور ✉️
+### متد کمکی برای ارسال دستور
 
 همچنین یک متد کمکی برای ارسال دستور نیاز داریم. چون همیشه انتظار داریم پاسخ با **+OK** شروع شود، می‌توانیم پاسخ را در همان لحظه بخوانیم و اعتبارسنجی کنیم:
 
@@ -1087,7 +1087,7 @@ void SendCommand (Stream stream, string line)
 
 ---
 
-### دریافت ایمیل‌ها از سرور 📬
+### دریافت ایمیل‌ها از سرور
 
 با داشتن این متدها، کار دریافت ایمیل ساده می‌شود. کافی است یک اتصال TCP روی پورت **۱۱۰** (پورت پیش‌فرض POP3) برقرار کنیم و با سرور گفتگو را آغاز کنیم. در این مثال، هر پیام ایمیل در یک فایل تصادفی با پسوند **.eml** ذخیره می‌شود و سپس از روی سرور حذف می‌گردد:
 
@@ -1129,7 +1129,7 @@ using (NetworkStream n = client.GetStream())
 
 ---
 
-### نکته 💡
+### نکته
 
 در **NuGet** کتابخانه‌های متن‌باز (**Open Source**) برای POP3 وجود دارد که قابلیت‌هایی مثل:
 
@@ -1137,4 +1137,4 @@ using (NetworkStream n = client.GetStream())
 * برقراری ارتباط امن **TLS/SSL**
 * و پردازش پیام‌ها با **MIME Parsing**
 
-را در اختیار شما قرار می‌دهند. ✅
+را در اختیار شما قرار می‌دهند. 

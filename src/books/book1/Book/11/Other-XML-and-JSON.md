@@ -7,11 +7,11 @@ title: سایر تکنولوژی‌های XML و JSON
 در **فصل ۱۰**، ما API مربوط به **LINQ-to-XML** و به‌طور کلی XML را بررسی کردیم.
 در این فصل، به سراغ **کلاس‌های سطح پایین XmlReader/XmlWriter** و همچنین **انواع داده‌هایی برای کار با JSON (JavaScript Object Notation)** می‌رویم، که به‌عنوان یک جایگزین محبوب برای XML شناخته می‌شود.
 
-در ضمیمه‌ی آنلاین 📎، ابزارهایی برای کار با **XML Schema** و **Stylesheet**‌ها توضیح داده شده‌اند.
+در ضمیمه‌ی آنلاین ، ابزارهایی برای کار با **XML Schema** و **Stylesheet**‌ها توضیح داده شده‌اند.
 
 ---
 
-### XmlReader ⚡
+### XmlReader
 
 **XmlReader** یک کلاس با کارایی بالا است که برای خواندن یک جریان (Stream) از XML به‌صورت سطح پایین و فقط رو به جلو استفاده می‌شود.
 
@@ -82,7 +82,7 @@ using XmlReader reader = XmlReader.Create("customer.xml", settings);
 
 ---
 
-### خواندن Nodeها 📌
+### خواندن Nodeها
 
 واحدهای یک جریان XML، **Nodeها** هستند.
 Reader جریان XML را به‌ترتیب متنی (به‌صورت **Depth-First**) پیمایش می‌کند.
@@ -105,7 +105,7 @@ Reader جریان XML را به‌ترتیب متنی (به‌صورت **Depth-F
 
 ---
 
-### مثال: خواندن همه Nodeها 👇
+### مثال: خواندن همه Nodeها
 
 در این مثال، ما هر node موجود در جریان XML را می‌خوانیم و نوع هر node را چاپ می‌کنیم:
 
@@ -147,11 +147,11 @@ Element Name=customer
 EndElement Name=customer
 ```
 
-🔎 توجه کنید که **Attributes** (ویژگی‌ها) در پیمایش مبتنی بر `Read` لحاظ نمی‌شوند. (برای این موضوع به بخش **Reading Attributes** در صفحه‌ی ۵۵۹ مراجعه کنید.)
+ توجه کنید که **Attributes** (ویژگی‌ها) در پیمایش مبتنی بر `Read` لحاظ نمی‌شوند. (برای این موضوع به بخش **Reading Attributes** در صفحه‌ی ۵۵۹ مراجعه کنید.)
 
 ---
 
-### XmlNodeType 🏷️
+### XmlNodeType
 
 ویژگی `NodeType` از نوع `XmlNodeType` است که یک **enum** می‌باشد و شامل اعضای زیر است:
 
@@ -174,12 +174,12 @@ EndElement Name=customer
 * Whitespace
 * SignificantWhitespace
 
-### خواندن Elementها در XML 🏷️📖
+### خواندن Elementها در XML
 
-اغلب اوقات شما از قبل ساختار سند XML که می‌خواهید بخوانید را می‌دانید. برای ساده‌تر کردن این کار، **XmlReader** مجموعه‌ای از متدها را فراهم کرده است که هنگام خواندن، فرض می‌کنند ساختار مشخصی وجود دارد. این متدها هم کد شما را ساده‌تر می‌کنند و هم به‌طور هم‌زمان بخشی از **Validation** را انجام می‌دهند ✅.
+اغلب اوقات شما از قبل ساختار سند XML که می‌خواهید بخوانید را می‌دانید. برای ساده‌تر کردن این کار، **XmlReader** مجموعه‌ای از متدها را فراهم کرده است که هنگام خواندن، فرض می‌کنند ساختار مشخصی وجود دارد. این متدها هم کد شما را ساده‌تر می‌کنند و هم به‌طور هم‌زمان بخشی از **Validation** را انجام می‌دهند .
 
 اگر هرگونه Validation شکست بخورد، `XmlReader` یک **XmlException** پرتاب می‌کند.
-این استثنا ویژگی‌های **LineNumber** و **LinePosition** را دارد که نشان می‌دهد خطا در کجا رخ داده است—ثبت (Log کردن) این اطلاعات برای فایل‌های بزرگ XML بسیار ضروری است ⚠️.
+این استثنا ویژگی‌های **LineNumber** و **LinePosition** را دارد که نشان می‌دهد خطا در کجا رخ داده است—ثبت (Log کردن) این اطلاعات برای فایل‌های بزرگ XML بسیار ضروری است .
 
 ---
 
@@ -205,7 +205,7 @@ reader.ReadEndElement();
 
 ---
 
-### متدهای خلاصه‌تر 🛠️
+### متدهای خلاصه‌تر
 
 متد `ReadElementContentAsString` همه‌ی مراحل بالا را یک‌جا انجام می‌دهد:
 
@@ -225,7 +225,7 @@ string firstName = reader.ReadElementContentAsString("firstname", "");
 
 ---
 
-### مثال کامل‌تر 📝
+### مثال کامل‌تر
 
 بیایید به سند XML زیر برگردیم:
 
@@ -258,7 +258,7 @@ r.ReadEndElement();     // خواندن تگ پایانی customer
 
 ---
 
-### متد MoveToContent ⚡
+### متد MoveToContent
 
 متد `MoveToContent` بسیار کاربردی است. این متد از روی تمام بخش‌های اضافی پرش می‌کند:
 
@@ -271,7 +271,7 @@ r.ReadEndElement();     // خواندن تگ پایانی customer
 
 ---
 
-### Elementهای اختیاری 🌀
+### Elementهای اختیاری
 
 در مثال قبلی، فرض کنید که `<lastname>` اختیاری باشد. راه‌حل ساده است:
 
@@ -285,7 +285,7 @@ decimal creditLimit = r.ReadElementContentAsDecimal("creditlimit", "");
 
 ---
 
-### ترتیب تصادفی Elementها 🔀
+### ترتیب تصادفی Elementها
 
 مثال‌های این بخش فرض می‌کنند که عناصر در فایل XML به‌ترتیب مشخصی قرار گرفته‌اند.
 اگر نیاز دارید با عناصری که به ترتیب‌های مختلف می‌آیند کار کنید، ساده‌ترین راه این است که آن بخش از XML را به‌صورت یک **X-DOM** بخوانید. ما نحوه‌ی این کار را در بخش **Patterns for Using XmlReader/XmlWriter** در صفحه‌ی ۵۶۳ توضیح می‌دهیم.
@@ -294,7 +294,7 @@ decimal creditLimit = r.ReadElementContentAsDecimal("creditlimit", "");
 
 ### Elementهای خالی ⬜
 
-نحوه‌ی برخورد `XmlReader` با Elementهای خالی می‌تواند یک **دام خطرناک** باشد 😅.
+نحوه‌ی برخورد `XmlReader` با Elementهای خالی می‌تواند یک **دام خطرناک** باشد .
 
 به این مثال توجه کنید:
 
@@ -329,11 +329,11 @@ if (!isEmpty) reader.ReadEndElement();
 
 در عمل، این مشکل فقط زمانی آزاردهنده است که Element موردنظر قرار است **child element**‌ها داشته باشد (مثل یک customer list).
 برای Elementهایی که تنها متن ساده دارند (مثل firstname)، می‌توانید کل این موضوع را با استفاده از متدهایی مثل `ReadElementContentAsString` نادیده بگیرید.
-متدهای `ReadElementXXX` هر دو نوع **Elementهای خالی** را به‌درستی مدیریت می‌کنند ✅.
+متدهای `ReadElementXXX` هر دو نوع **Elementهای خالی** را به‌درستی مدیریت می‌کنند .
 
 ---
 
-### سایر متدهای ReadXXX 📚
+### سایر متدهای ReadXXX
 
 جدول **۱۱-۱** تمام متدهای `ReadXXX` در **XmlReader** را خلاصه می‌کند.
 بیشتر این متدها برای کار با **Elementها** طراحی شده‌اند. در این جدول، بخش **Bold** شده از XML نمونه، قسمت خوانده‌شده توسط متد توضیح داده‌شده را نشان می‌دهد.
@@ -343,13 +343,13 @@ if (!isEmpty) reader.ReadEndElement();
 ![Conventions-UsedThis-Book](../../../assets/image/11/Table-11-1.jpeg)
 </div>
 
-### حرکت بین Siblingها ➡️
+### حرکت بین Siblingها
 
 متد **NextSibling** مکان‌نما (Cursor) را به ابتدای **اولین Node هم‌سطح (Sibling)** با نام/namespace مشخص‌شده منتقل می‌کند.
 
 ---
 
-### متدهای قدیمی (Legacy Methods) ⚠️
+### متدهای قدیمی (Legacy Methods)
 
 دو متد قدیمی وجود دارند:
 
@@ -358,12 +358,12 @@ if (!isEmpty) reader.ReadEndElement();
 
 این‌ها شبیه به `ReadContentAsString` و `ReadElementContentAsString` عمل می‌کنند، اما اگر داخل Element بیش از **یک Text Node** وجود داشته باشد، **استثنا** پرتاب می‌کنند.
 
-🔴 مشکل دیگر: اگر یک **Comment** در Element باشد، این متدها هم استثنا پرتاب می‌کنند.
+ مشکل دیگر: اگر یک **Comment** در Element باشد، این متدها هم استثنا پرتاب می‌کنند.
 بنابراین باید از استفاده‌ی آن‌ها خودداری کنید.
 
 ---
 
-## خواندن Attributes 🏷️
+## خواندن Attributes
 
 کلاس **XmlReader** یک **Indexer** فراهم می‌کند که به شما دسترسی مستقیم (Random Access) به Attributeهای یک Element می‌دهد—چه از طریق **نام** و چه از طریق **موقعیت (Index)**.
 
@@ -383,12 +383,12 @@ Console.WriteLine(reader["status"]);          // archived
 Console.WriteLine(reader["bogus"] == null);   // True
 ```
 
-⚠️ نکته: `XmlReader` باید **روی یک Start Element** قرار داشته باشد تا بتوان Attributeها را خواند.
+> **نکته:** `XmlReader` باید **روی یک Start Element** قرار داشته باشد تا بتوان Attributeها را خواند.
 بعد از اینکه `ReadStartElement` فراخوانی شد، Attributeها برای همیشه از دست می‌روند!
 
 ---
 
-### دسترسی بر اساس موقعیت (Ordinal Position) 🔢
+### دسترسی بر اساس موقعیت (Ordinal Position)
 
 اگرچه ترتیب Attributeها از نظر معنایی بی‌اهمیت است، شما می‌توانید آن‌ها را با شماره‌ی Index بخوانید:
 
@@ -403,7 +403,7 @@ Console.WriteLine(reader[1]);   // archived
 
 ---
 
-## Attribute Nodeها 🧩
+## Attribute Nodeها
 
 برای پیمایش مستقیم در Attribute Nodeها، باید از مسیر معمولی خواندن با `Read` کمی **منحرف شوید**.
 این کار زمانی مفید است که بخواهید مقدار Attribute را به انواع دیگر تبدیل کنید (با استفاده از متدهای `ReadContentAsXXX`).
@@ -415,7 +415,7 @@ Console.WriteLine(reader[1]);   // archived
 
 ---
 
-### مثال عملی 📝
+### مثال عملی
 
 بازگردیم به مثال قبلی:
 
@@ -433,11 +433,11 @@ reader.MoveToAttribute("id");
 int id = reader.ReadContentAsInt();
 ```
 
-🔍 اگر Attribute مشخص‌شده وجود نداشته باشد، `MoveToAttribute` مقدار **false** برمی‌گرداند.
+ اگر Attribute مشخص‌شده وجود نداشته باشد، `MoveToAttribute` مقدار **false** برمی‌گرداند.
 
 ---
 
-### پیمایش همه Attributeها 🔄
+### پیمایش همه Attributeها
 
 می‌توانید هر Attribute را به‌ترتیب پیمایش کنید:
 
@@ -450,7 +450,7 @@ if (reader.MoveToFirstAttribute())
     while (reader.MoveToNextAttribute());
 ```
 
-🔽 خروجی:
+ خروجی:
 
 ```
 id=123
@@ -459,7 +459,7 @@ status=archived
 
 ---
 
-## Namespaces و Prefixes 🌐
+## Namespaces و Prefixes
 
 کلاس **XmlReader** دو سیستم موازی برای ارجاع به نام عناصر و Attributeها فراهم می‌کند:
 
@@ -478,7 +478,7 @@ status=archived
 ![Conventions-UsedThis-Book](../../../assets/image/11/Table-11-2.jpeg)
 </div>
 
-### 📝 نام‌فضاها (Namespaces) و پیشوندها (Prefixes)
+### نام‌فضاها (Namespaces) و پیشوندها (Prefixes)
 
 کد زیر با دو حالت اول کار می‌کند:
 
@@ -516,11 +516,11 @@ reader.ReadStartElement("address",  "DefaultNamespace");
 reader.ReadStartElement("city",     "OtherNamespace");
 ```
 
-✅ انتزاع پیشوندها معمولاً همان چیزی است که می‌خواهید. اما اگر لازم باشد، می‌توانید ببینید چه پیشوندی استفاده شده است (از طریق ویژگی **Prefix**) و سپس آن را به یک نام‌فضا تبدیل کنید (با فراخوانی **LookupNamespace**).
+ انتزاع پیشوندها معمولاً همان چیزی است که می‌خواهید. اما اگر لازم باشد، می‌توانید ببینید چه پیشوندی استفاده شده است (از طریق ویژگی **Prefix**) و سپس آن را به یک نام‌فضا تبدیل کنید (با فراخوانی **LookupNamespace**).
 
 ---
 
-### ✍️ XmlWriter
+### XmlWriter
 
 **XmlWriter** یک نویسنده‌ی فقط-رو‌به-جلو (forward-only) برای جریان XML است. طراحی XmlWriter به‌طور متقارن شبیه **XmlReader** است.
 
@@ -550,7 +550,7 @@ writer.WriteEndElement();
 
 ---
 
-### ⚙️ تنظیمات XmlWriter
+### تنظیمات XmlWriter
 
 * به‌طور پیش‌فرض، **XmlWriter** اعلان (declaration) بالا را می‌نویسد.
 * اگر نمی‌خواهید این اعلان نوشته شود، باید در **XmlWriterSettings** ویژگی **OmitXmlDeclaration = true** یا **ConformanceLevel = Fragment** را تنظیم کنید.
@@ -558,7 +558,7 @@ writer.WriteEndElement();
 
 ---
 
-### 🔡 نوشتن مقادیر
+### نوشتن مقادیر
 
 * متد **WriteValue** یک گره متنی منفرد می‌نویسد. این متد هم رشته‌ها و هم انواع غیررشته‌ای مثل `bool` و `DateTime` را می‌پذیرد و به‌طور داخلی از **XmlConvert** برای تبدیل رشته‌های سازگار با XML استفاده می‌کند:
 
@@ -581,7 +581,7 @@ WriteElementString("birthdate", DateTime.Now.ToString());
 
 ---
 
-### 🏷️ نوشتن Attributeها
+### نوشتن Attributeها
 
 می‌توانید درست بعد از نوشتن یک StartElement، Attributeها را بنویسید:
 
@@ -601,7 +601,7 @@ WriteEndAttribute();
 
 ---
 
-### 🧩 نوشتن انواع دیگر Node
+### نوشتن انواع دیگر Node
 
 XmlWriter متدهایی برای نوشتن انواع دیگر گره‌ها نیز دارد:
 
@@ -629,7 +629,7 @@ XmlWriter متدهایی برای نوشتن انواع دیگر گره‌ها �
 
 ---
 
-### 🌐 نام‌فضاها و پیشوندها در XmlWriter
+### نام‌فضاها و پیشوندها در XmlWriter
 
 نسخه‌های Overload متدهای Write\* به شما امکان می‌دهند یک عنصر یا Attribute را به یک نام‌فضا متصل کنید.
 
@@ -652,13 +652,13 @@ writer.WriteEndElement();
 </o:customer>
 ```
 
-🔍 توجه کنید که برای اختصار، **XmlWriter** اعلام نام‌فضای عناصر فرزند را حذف می‌کند چون قبلاً توسط عنصر والد تعریف شده‌اند.
+ توجه کنید که برای اختصار، **XmlWriter** اعلام نام‌فضای عناصر فرزند را حذف می‌کند چون قبلاً توسط عنصر والد تعریف شده‌اند.
 
-### 📌 الگوها برای استفاده از XmlReader/XmlWriter
+### الگوها برای استفاده از XmlReader/XmlWriter
 
 ---
 
-### 📂 کار با داده‌های سلسله‌مراتبی (Hierarchical Data)
+### کار با داده‌های سلسله‌مراتبی (Hierarchical Data)
 
 در نظر بگیرید کلاس‌های زیر را داریم:
 
@@ -693,18 +693,18 @@ public class Supplier { public string Name; }
 
 ---
 
-### ✨ بهترین روش
+### بهترین روش
 
 بهترین راه این نیست که یک متد بزرگ بنویسیم، بلکه این است که قابلیت‌های XML را داخل خود کلاس‌های `Customer` و `Supplier` کپسوله کنیم. این کار با نوشتن متدهای `ReadXml` و `WriteXml` روی این کلاس‌ها انجام می‌شود.
 
-🔑 الگوی کار به این صورت است:
+ الگوی کار به این صورت است:
 
 * متدهای **ReadXml** و **WriteXml** هنگام خروج در همان عمق (Depth) Reader/Writer را ترک می‌کنند.
 * **ReadXml** عنصر بیرونی (Outer Element) را می‌خواند، درحالی‌که **WriteXml** فقط محتوای داخلی (Inner Content) را می‌نویسد.
 
 ---
 
-### 👤 کلاس Customer
+### کلاس Customer
 
 ```csharp
 public class Customer
@@ -733,7 +733,7 @@ public class Customer
 }
 ```
 
-🔍 دقت کنید:
+ دقت کنید:
 
 * `ReadXml` عناصر شروع و پایان بیرونی را می‌خواند. اگر این کار توسط Caller انجام می‌شد، کلاس Customer نمی‌توانست Attributeهای خودش را بخواند.
 * `WriteXml` متقارن (Symmetrical) نوشته نشده چون:
@@ -745,7 +745,7 @@ public class Customer
 
 ---
 
-### 🏢 کلاس Supplier
+### کلاس Supplier
 
 ```csharp
 public class Supplier
@@ -769,7 +769,7 @@ public class Supplier
 
 ---
 
-### 📒 کلاس Contacts
+### کلاس Contacts
 
 در کلاس `Contacts`، باید در `ReadXml` عناصر را پیمایش کنیم و بررسی کنیم که هر زیرعنصر یک `customer` است یا یک `supplier`. همچنین باید حالت عنصر خالی `<contacts/>` را مدیریت کنیم:
 
@@ -811,7 +811,7 @@ public void WriteXml (XmlWriter w)
 
 ---
 
-### 📤 سریال‌سازی Contacts به XML
+### سریال‌سازی Contacts به XML
 
 ```csharp
 var settings = new XmlWriterSettings();
@@ -826,7 +826,7 @@ writer.WriteEndElement();
 
 ---
 
-### 📥 دسریال‌سازی از همان فایل
+### دسریال‌سازی از همان فایل
 
 ```csharp
 var settings = new XmlReaderSettings();
@@ -842,14 +842,14 @@ cts.ReadXml(reader);
 
 ---
 
-### 🔄 ترکیب XmlReader/XmlWriter با X-DOM
+### ترکیب XmlReader/XmlWriter با X-DOM
 
 در هر نقطه از درخت XML که کار با XmlReader یا XmlWriter سخت شد، می‌توانید از **X-DOM** وارد شوید.
 این کار اجازه می‌دهد مزیت راحتی X-DOM را با مصرف کم حافظه‌ی XmlReader/XmlWriter ترکیب کنید.
 
 ---
 
-### 📖 استفاده از XmlReader همراه با XElement
+### استفاده از XmlReader همراه با XElement
 
 برای خواندن یک عنصر جاری به یک **X-DOM**، از متد:
 
@@ -892,7 +892,7 @@ r.ReadEndElement();
 
 ---
 
-### 🧩 استفاده از XElement در ReadXml
+### استفاده از XElement در ReadXml
 
 اگر الگوی بالا را دنبال کنید، می‌توانید XElement را مستقیماً در متدهای `ReadXml` یا `WriteXml` استفاده کنید، بدون اینکه Caller متوجه شود.
 
@@ -910,7 +910,7 @@ public void ReadXml (XmlReader r)
 
 ---
 
-### 🌐 مدیریت نام‌فضاها در XElement
+### مدیریت نام‌فضاها در XElement
 
 **XElement** با XmlReader همکاری می‌کند تا نام‌فضاها را حفظ کند و پیشوندها را درست گسترش دهد—even اگر در سطح بیرونی تعریف شده باشند.
 
@@ -922,9 +922,9 @@ public void ReadXml (XmlReader r)
   ...
 ```
 
-در این حالت، `XElement`هایی که در سطح `logentry` ساخته می‌شوند، نام‌فضای بیرونی را به‌درستی به ارث می‌برند. ✅
+در این حالت، `XElement`هایی که در سطح `logentry` ساخته می‌شوند، نام‌فضای بیرونی را به‌درستی به ارث می‌برند. 
 
-### 📄 استفاده از XmlWriter همراه با XElement
+### استفاده از XmlWriter همراه با XElement
 
 شما می‌توانید از **XElement** فقط برای نوشتن المنت‌های داخلی در یک **XmlWriter** استفاده کنید. کد زیر یک میلیون المنت **logentry** را داخل یک فایل XML می‌نویسد، بدون اینکه کل فایل در حافظه ذخیره شود:
 
@@ -946,29 +946,29 @@ w.WriteEndElement ();
 
 ---
 
-### 🌐 کار با JSON
+### کار با JSON
 
 **JSON** به یک جایگزین محبوب برای **XML** تبدیل شده است. گرچه JSON امکانات پیشرفته XML (مثل **namespaces**، **prefixes** و **schemas**) را ندارد، اما به دلیل سادگی و خوانایی بیشتر، محبوبیت زیادی دارد. قالب آن هم شبیه چیزی است که وقتی یک شیء **JavaScript** را به رشته تبدیل کنید به دست می‌آید.
 
-📌 به‌صورت تاریخی، .NET هیچ پشتیبانی داخلی برای JSON نداشت و مجبور بودید از کتابخانه‌های شخص ثالث مثل **Json.NET** استفاده کنید. هرچند این موضوع دیگر صادق نیست، ولی کتابخانه **Json.NET** همچنان به دلایل زیر محبوب باقی مانده است:
+ به‌صورت تاریخی، .NET هیچ پشتیبانی داخلی برای JSON نداشت و مجبور بودید از کتابخانه‌های شخص ثالث مثل **Json.NET** استفاده کنید. هرچند این موضوع دیگر صادق نیست، ولی کتابخانه **Json.NET** همچنان به دلایل زیر محبوب باقی مانده است:
 
-* 📅 از سال ۲۰۱۱ تاکنون وجود دارد.
-* 🔄 همان API روی نسخه‌های قدیمی‌تر .NET هم اجرا می‌شود.
-* ⚙️ از نظر قابلیت‌ها (حداقل در گذشته) کاربردی‌تر از APIهای JSON مایکروسافت در نظر گرفته می‌شد.
+*  از سال ۲۰۱۱ تاکنون وجود دارد.
+*  همان API روی نسخه‌های قدیمی‌تر .NET هم اجرا می‌شود.
+*  از نظر قابلیت‌ها (حداقل در گذشته) کاربردی‌تر از APIهای JSON مایکروسافت در نظر گرفته می‌شد.
 
 APIهای JSON مایکروسافت اما این مزیت را دارند که از پایه طراحی شده‌اند تا **بسیار ساده و فوق‌العاده سریع** باشند. همچنین، از .NET 6 به بعد، قابلیت‌های آن‌ها بسیار به Json.NET نزدیک شده است.
 
 در این بخش به موضوعات زیر می‌پردازیم:
 
-* 📖 **Utf8JsonReader** و **Utf8JsonWriter** (خواننده و نویسنده رو به جلو)
-* 📖 **JsonDocument** (خواننده DOM فقط-خواندنی)
-* 📖 **JsonNode** (خواننده/نویسنده DOM با قابلیت خواندن و نوشتن)
+*  **Utf8JsonReader** و **Utf8JsonWriter** (خواننده و نویسنده رو به جلو)
+*  **JsonDocument** (خواننده DOM فقط-خواندنی)
+*  **JsonNode** (خواننده/نویسنده DOM با قابلیت خواندن و نوشتن)
 
 در بخش "Serialization" در مکمل آنلاین به آدرس: [http://www.albahari.com/nutshell](http://www.albahari.com/nutshell)، موضوع **JsonSerializer** بررسی می‌شود که به‌طور خودکار JSON را به کلاس‌ها **سریالایز** و **دسریالایز** می‌کند.
 
 ---
 
-### ⚡ Utf8JsonReader
+### Utf8JsonReader
 
 کلاس **System.Text.Json.Utf8JsonReader** یک **خواننده بهینه‌شده رو به جلو** برای متن JSON با **کدگذاری UTF-8** است. از نظر مفهومی، بسیار شبیه **XmlReader** است که پیش‌تر در این فصل معرفی شد و تقریباً به همان شکل استفاده می‌شود.
 
@@ -988,7 +988,7 @@ APIهای JSON مایکروسافت اما این مزیت را دارند که 
 
 ---
 
-### 🧩 پیمایش JSON با Utf8JsonReader
+### پیمایش JSON با Utf8JsonReader
 
 کد زیر فایل بالا را با شمارش **tokenهای JSON** تجزیه می‌کند. هر **token** می‌تواند شامل موارد زیر باشد:
 
@@ -1035,7 +1035,7 @@ while (reader.Read())
 
 ---
 
-### 📊 خروجی برنامه
+### خروجی برنامه
 
 ```
 Start of object
@@ -1050,15 +1050,15 @@ End of array
 End of object
 ```
 
-✅ از آنجایی که **Utf8JsonReader** مستقیماً با UTF-8 کار می‌کند، می‌تواند **گام‌به‌گام tokenها** را بدون تبدیل ورودی به UTF-16 (فرمت رشته‌های .NET) بخواند. تبدیل به UTF-16 فقط وقتی انجام می‌شود که متدی مثل **GetString()** فراخوانی شود.
+ از آنجایی که **Utf8JsonReader** مستقیماً با UTF-8 کار می‌کند، می‌تواند **گام‌به‌گام tokenها** را بدون تبدیل ورودی به UTF-16 (فرمت رشته‌های .NET) بخواند. تبدیل به UTF-16 فقط وقتی انجام می‌شود که متدی مثل **GetString()** فراخوانی شود.
 
 جالب است بدانید که سازنده **Utf8JsonReader** مستقیماً یک **آرایه بایت** نمی‌پذیرد، بلکه یک **ReadOnlySpan<byte>** دریافت می‌کند (به همین دلیل Utf8JsonReader به‌صورت یک **ref struct** تعریف شده است). شما می‌توانید یک آرایه بایت پاس دهید چون یک **تبدیل ضمنی** از `T[]` به `ReadOnlySpan<T>` وجود دارد.
 
-📌 در فصل ۲۳ توضیح داده خواهد شد که **Spanها** چگونه کار می‌کنند و چطور می‌توانند عملکرد را با کمینه کردن تخصیص حافظه بهبود دهند.
+ در فصل ۲۳ توضیح داده خواهد شد که **Spanها** چگونه کار می‌کنند و چطور می‌توانند عملکرد را با کمینه کردن تخصیص حافظه بهبود دهند.
 
 ---
 
-### ⚙️ JsonReaderOptions
+### JsonReaderOptions
 
 به‌طور پیش‌فرض، **Utf8JsonReader** الزام می‌کند که JSON دقیقاً مطابق استاندارد **RFC 8259** باشد. اما شما می‌توانید با پاس دادن یک نمونه از **JsonReaderOptions** به سازنده Utf8JsonReader، آن را انعطاف‌پذیرتر کنید.
 
@@ -1073,21 +1073,21 @@ End of object
 * **کنترل حداکثر عمق تو در تو شدن (Maximum nesting depth)**
   به‌طور پیش‌فرض، اشیاء و آرایه‌ها می‌توانند تا **۶۴ سطح** تو در تو شوند. با تنظیم **MaxDepth** می‌توانید این مقدار را تغییر دهید.
 
-### ✍️ Utf8JsonWriter
+### Utf8JsonWriter
 
 کلاس **System.Text.Json.Utf8JsonWriter** یک **نویسنده JSON رو به جلو** است. این کلاس از انواع زیر پشتیبانی می‌کند:
 
-* 📝 **String** و **DateTime** (که به‌صورت یک رشته JSON نوشته می‌شوند)
-* 🔢 انواع عددی: **Int32، UInt32، Int64، UInt64، Single، Double و Decimal** (که به‌صورت اعداد JSON نوشته می‌شوند)
-* ✅ **bool** (که به‌صورت مقادیر true/false در JSON ذخیره می‌شود)
-* 🚫 **null** در JSON
-* 📦 **آرایه‌ها (Arrays)**
+*  **String** و **DateTime** (که به‌صورت یک رشته JSON نوشته می‌شوند)
+*  انواع عددی: **Int32، UInt32، Int64، UInt64، Single، Double و Decimal** (که به‌صورت اعداد JSON نوشته می‌شوند)
+*  **bool** (که به‌صورت مقادیر true/false در JSON ذخیره می‌شود)
+*  **null** در JSON
+*  **آرایه‌ها (Arrays)**
 
 شما می‌توانید این داده‌ها را مطابق استاندارد JSON در قالب **object** سازمان‌دهی کنید. همچنین امکان نوشتن **comment** وجود دارد، هرچند که توضیحات بخشی از استاندارد JSON نیستند، اما اغلب توسط **JSON parserها** پشتیبانی می‌شوند.
 
 ---
 
-### 🖥️ نمونه کد استفاده از Utf8JsonWriter
+### نمونه کد استفاده از Utf8JsonWriter
 
 ```csharp
 var options = new JsonWriterOptions { Indented = true };
@@ -1108,7 +1108,7 @@ using (var writer = new Utf8JsonWriter (stream, options))
 }
 ```
 
-📄 خروجی فایل تولیدشده به این صورت خواهد بود:
+ خروجی فایل تولیدشده به این صورت خواهد بود:
 
 ```json
 {
@@ -1123,7 +1123,7 @@ using (var writer = new Utf8JsonWriter (stream, options))
 
 ---
 
-### 📐 تنظیمات JsonWriterOptions
+### تنظیمات JsonWriterOptions
 
 در مثال بالا، ویژگی **Indented = true** تنظیم شده بود تا خروجی خواناتر شود. اگر این کار انجام نمی‌شد، خروجی به این شکل فشرده می‌بود:
 
@@ -1138,7 +1138,7 @@ using (var writer = new Utf8JsonWriter (stream, options))
 
 ---
 
-### 📖 JsonDocument
+### JsonDocument
 
 کلاس **System.Text.Json.JsonDocument** داده‌های JSON را به یک **DOM فقط-خواندنی** تجزیه می‌کند که از نمونه‌های **JsonElement** ساخته می‌شوند. این نمونه‌ها در صورت نیاز (on demand) ایجاد می‌شوند.
 
@@ -1146,32 +1146,32 @@ using (var writer = new Utf8JsonWriter (stream, options))
 
 **JsonDocument** یکی از دو API مبتنی بر DOM برای کار با JSON است. دیگری **JsonNode** است (که در بخش بعد توضیح داده می‌شود).
 
-* 🆕 **JsonNode** در .NET 6 معرفی شد، عمدتاً برای پشتیبانی از **DOM قابل‌نوشتن (writable DOM)**.
+*  **JsonNode** در .NET 6 معرفی شد، عمدتاً برای پشتیبانی از **DOM قابل‌نوشتن (writable DOM)**.
 * البته **JsonNode** در حالت فقط‌خواندنی هم مناسب است و رابط برنامه‌نویسی (API) روان‌تری را ارائه می‌دهد که از یک DOM سنتی مبتنی بر کلاس‌ها برای مقادیر، آرایه‌ها و اشیاء استفاده می‌کند.
 * در مقابل، **JsonDocument** بسیار سبک است و فقط شامل یک کلاس اصلی (**JsonDocument**) و دو ساختار سبک (**JsonElement** و **JsonProperty**) می‌شود که داده‌های زیربنایی را به‌صورت آنی تجزیه می‌کنند.
 
-📊 تفاوت این دو API در **شکل 11-1** نشان داده شده است.
+ تفاوت این دو API در **شکل 11-1** نشان داده شده است.
 
 ---
 
-✅ در بیشتر سناریوهای واقعی، **تفاوت عملکردی JsonDocument و JsonNode ناچیز است**. بنابراین اگر ترجیح می‌دهید فقط یکی از این دو را یاد بگیرید، می‌توانید مستقیماً به سراغ **JsonNode** بروید.
+ در بیشتر سناریوهای واقعی، **تفاوت عملکردی JsonDocument و JsonNode ناچیز است**. بنابراین اگر ترجیح می‌دهید فقط یکی از این دو را یاد بگیرید، می‌توانید مستقیماً به سراغ **JsonNode** بروید.
 
 <div align="center">
 
 ![Conventions-UsedThis-Book](../../../assets/image/11/Table-11-3.jpeg)
 </div>
 
-### 📘 JsonDocument و مدیریت حافظه
+### JsonDocument و مدیریت حافظه
 
 کلاس **JsonDocument** کارایی خود را با استفاده از **حافظه اشتراکی (pooled memory)** افزایش می‌دهد تا نیاز به **garbage collection** کمتر شود.
 این به این معناست که شما **بعد از اتمام استفاده، باید JsonDocument را Dispose کنید**؛ در غیر این صورت، حافظه آن به استخر بازگردانده نمی‌شود.
 
-👉 بنابراین، اگر یک کلاس بخواهد **JsonDocument** را در یک **field** نگه دارد، باید رابط **IDisposable** را هم پیاده‌سازی کند.
+ بنابراین، اگر یک کلاس بخواهد **JsonDocument** را در یک **field** نگه دارد، باید رابط **IDisposable** را هم پیاده‌سازی کند.
 اگر این کار برایتان سنگین و دست‌وپاگیر است، بهتر است به جای آن از **JsonNode** استفاده کنید.
 
 ---
 
-### 🏗️ ایجاد یک JsonDocument
+### ایجاد یک JsonDocument
 
 متد **Parse** به‌صورت استاتیک یک **JsonDocument** را از **stream**، **string** یا **memory buffer** می‌سازد:
 
@@ -1184,7 +1184,7 @@ using JsonDocument document = JsonDocument.Parse (jsonString);
 
 ---
 
-### 🌳 دسترسی به RootElement
+### دسترسی به RootElement
 
 پس از ساخت، می‌توانید از طریق ویژگی **RootElement** به DOM دسترسی داشته باشید:
 
@@ -1197,7 +1197,7 @@ Console.WriteLine (root.ValueKind);   // Number
 یک **JsonElement** می‌تواند یک **مقدار JSON** (رشته، عدد، true/false، null)، یا یک **آرایه** یا یک **شیء** را نمایش دهد.
 ویژگی **ValueKind** مشخص می‌کند که نوع آن چیست.
 
-⚠️ متدهایی که در ادامه معرفی می‌شوند **اگر نوع المنت مطابق انتظار نباشد، استثنا (Exception) پرتاب می‌کنند**.
+ متدهایی که در ادامه معرفی می‌شوند **اگر نوع المنت مطابق انتظار نباشد، استثنا (Exception) پرتاب می‌کنند**.
 اگر از **schema** فایل JSON مطمئن نیستید، می‌توانید ابتدا **ValueKind** را بررسی کنید یا از نسخه‌های **TryGet**\* استفاده کنید.
 
 همچنین، **JsonElement** دو متد عمومی برای هر نوع المنت دارد:
@@ -1207,7 +1207,7 @@ Console.WriteLine (root.ValueKind);   // Number
 
 ---
 
-### 🔢 خواندن مقادیر ساده
+### خواندن مقادیر ساده
 
 اگر المنت یک مقدار JSON باشد، می‌توانید مقدار آن را با متدهایی مثل `GetString()`، `GetInt32()`، `GetBoolean()` و غیره بگیرید:
 
@@ -1221,7 +1221,7 @@ int number = document.RootElement.GetInt32();
 
 ---
 
-### 📦 خواندن آرایه‌های JSON
+### خواندن آرایه‌های JSON
 
 اگر **JsonElement** نماینده یک **آرایه** باشد، می‌توانید از متدهای زیر استفاده کنید:
 
@@ -1238,7 +1238,7 @@ int value  = document.RootElement[3].GetInt32();      // 4
 
 ---
 
-### 🗂️ خواندن اشیاء JSON
+### خواندن اشیاء JSON
 
 اگر المنت یک **شیء JSON** باشد، متدهای زیر در دسترس هستند:
 
@@ -1264,7 +1264,7 @@ Console.WriteLine (value.ValueKind);    // Number
 Console.WriteLine (value.GetInt32());   // 32
 ```
 
-### 🔎 JsonDocument و LINQ
+### JsonDocument و LINQ
 
 کلاس **JsonDocument** به‌خوبی با **LINQ** سازگار است. فرض کنید فایل JSON زیر را داریم:
 
@@ -1309,11 +1309,11 @@ var query =
   };
 ```
 
-⚠️ توجه کنید: از آنجا که کوئری‌های **LINQ** به‌صورت **Lazy** اجرا می‌شوند، باید قبل از خارج شدن محدوده (scope) و **Dispose شدن JsonDocument** (که به دلیل استفاده از دستور `using` به‌طور خودکار اتفاق می‌افتد)، کوئری را پیمایش (enumerate) کنید.
+ توجه کنید: از آنجا که کوئری‌های **LINQ** به‌صورت **Lazy** اجرا می‌شوند، باید قبل از خارج شدن محدوده (scope) و **Dispose شدن JsonDocument** (که به دلیل استفاده از دستور `using` به‌طور خودکار اتفاق می‌افتد)، کوئری را پیمایش (enumerate) کنید.
 
 ---
 
-### ✍️ ایجاد تغییر با JSON Writer
+### ایجاد تغییر با JSON Writer
 
 کلاس **JsonDocument** فقط خواندنی (read-only) است، اما می‌توانید محتوای یک **JsonElement** را با متد **WriteTo** به یک **Utf8JsonWriter** بفرستید.
 این روش امکانی برای تولید نسخه‌ای تغییر یافته از JSON فراهم می‌کند.
@@ -1339,11 +1339,11 @@ using (var writer = new Utf8JsonWriter (outputStream, options))
 }
 ```
 
-👉 اما اگر به **قابلیت به‌روزرسانی مستقیم DOM** نیاز دارید، بهتر است از **JsonNode** استفاده کنید.
+ اما اگر به **قابلیت به‌روزرسانی مستقیم DOM** نیاز دارید، بهتر است از **JsonNode** استفاده کنید.
 
 ---
 
-### 🌐 JsonNode
+### JsonNode
 
 کلاس **JsonNode** (در فضای نام `System.Text.Json.Nodes`) در **.NET 6** معرفی شد.
 هدف اصلی آن، پاسخ به نیاز یک **DOM قابل ویرایش (writable DOM)** بود.
@@ -1355,7 +1355,7 @@ using (var writer = new Utf8JsonWriter (outputStream, options))
 
 ---
 
-### 🛠️ ساخت JsonNode
+### ساخت JsonNode
 
 متد استاتیک **Parse** یک **JsonNode** را از **stream**، **string**، **memory buffer** یا **Utf8JsonReader** می‌سازد:
 
@@ -1365,11 +1365,11 @@ JsonNode node = JsonNode.Parse (jsonString);
 
 هنگام فراخوانی `Parse` می‌توانید مثل JsonDocument یک **JsonDocumentOptions** هم بدهید تا نحوه مدیریت **کاماهای اضافی**، **کامنت‌ها** و **حداکثر عمق** کنترل شود.
 
-🔑 برخلاف **JsonDocument**، اینجا دیگر نیازی به **Dispose کردن** وجود ندارد.
+ برخلاف **JsonDocument**، اینجا دیگر نیازی به **Dispose کردن** وجود ندارد.
 
 ---
 
-### 📜 رشته‌سازی (Stringify) در JsonNode
+### رشته‌سازی (Stringify) در JsonNode
 
 * متد `ToString()` → خروجی JSON با فرمت **خوانا و تو‌دار (indented)** برمی‌گرداند.
 * متد `ToJsonString()` → خروجی JSON **فشرده و بدون فاصله‌های اضافی** برمی‌گرداند.
@@ -1381,7 +1381,7 @@ JsonNode node = JsonNode.Parse (jsonString);
 
 ---
 
-### 🧩 انواع JsonNode
+### انواع JsonNode
 
 متد `Parse` یکی از زیردسته‌های **JsonNode** را برمی‌گرداند:
 
@@ -1411,7 +1411,7 @@ int number = node.GetValue<int>();
 // همانند node.AsValue().GetValue<int>();
 ```
 
-### خواندن مقادیر ساده 🔹
+### خواندن مقادیر ساده
 
 همان‌طور که دیدیم، می‌توانید یک مقدار ساده را با استفاده از متد **GetValue** و مشخص کردن نوع، استخراج یا تبدیل کنید. برای آسان‌تر کردن این کار، **JsonNode** عملگرهای تبدیل صریح (**explicit cast operators**) در C# را بازتعریف کرده است، که امکان استفاده از میانبر زیر را فراهم می‌کند:
 
@@ -1441,7 +1441,7 @@ JsonElement je = node.GetValue<JsonElement>();
 
 ---
 
-### خواندن آرایه‌های JSON 📦
+### خواندن آرایه‌های JSON
 
 یک **JsonNode** که نماینده یک آرایه JSON است، از نوع **JsonArray** خواهد بود.
 **JsonArray** رابط `IList<JsonNode>` را پیاده‌سازی می‌کند، بنابراین می‌توانید روی آن پیمایش کنید و عناصر را مانند یک آرایه یا لیست دسترسی داشته باشید:
@@ -1469,7 +1469,7 @@ int[] values = node.AsArray().GetValues<int>().ToArray();
 
 ---
 
-### خواندن اشیاء JSON 🗂️
+### خواندن اشیاء JSON
 
 یک **JsonNode** که نماینده یک شیء JSON است، از نوع **JsonObject** خواهد بود.
 **JsonObject** رابط `IDictionary<string, JsonNode>` را پیاده‌سازی می‌کند، بنابراین می‌توانید یک عضو را با اندیس‌دهنده دریافت کنید و همچنین روی کلید/مقدارهای دیکشنری پیمایش کنید.
@@ -1503,7 +1503,7 @@ if (node.AsObject().TryGetPropertyValue("Name", out JsonNode nameNode))
 
 ---
 
-### پیمایش Fluent و LINQ 🔍
+### پیمایش Fluent و LINQ
 
 می‌توانید با استفاده از اندیس‌دهنده‌ها، به عمق ساختار JSON دسترسی پیدا کنید. به عنوان مثال، با داشتن فایل JSON زیر:
 
@@ -1556,7 +1556,7 @@ var query =
 
 ---
 
-### به‌روزرسانی با JsonNode ✏️
+### به‌روزرسانی با JsonNode
 
 **JsonObject** و **JsonArray** قابل تغییر هستند، بنابراین می‌توانید محتوای آن‌ها را به‌روزرسانی کنید.
 ساده‌ترین روش برای جایگزینی یا افزودن ویژگی به یک **JsonObject**، استفاده از اندیس‌دهنده است:
@@ -1607,7 +1607,7 @@ var color = node["Color"];
 color.ReplaceWith("Blue");
 ```
 
-### ساخت DOM برای JsonNode به صورت برنامه‌نویسی 🏗️
+### ساخت DOM برای JsonNode به صورت برنامه‌نویسی
 
 **JsonArray** و **JsonObject** سازندگانی دارند که از **object initialization syntax** پشتیبانی می‌کنند، و این امکان را می‌دهند که کل DOM یک **JsonNode** را در یک عبارت بسازید:
 

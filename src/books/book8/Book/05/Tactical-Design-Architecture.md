@@ -90,7 +90,7 @@ title: فرآیند طراحی فنی
 Entity ، Value Object و Domain Service ها مواردی هستند که باید در پوشه Domain قرار بگیرند، اما، نحوه قرار گیری آنها مهم است. زمانی که فقط یک Entity در دامنه مربوطه وجود داشته باشد می توان آن یک مورد را به تنهایی داخل پوشه Domain قرار داد اما زمانی که تعداد زیادی Entity ، Value Object و Domian Service داشته باشیم و هر کدام به یک قسمتی از دامنه مربوط باشند بهتر است آنها را دسته بندی کنیم به طوری که اسم هر دسته بندی گویای داستان آن دسته بندی باشد. به هر کدام از این دسته بندی ها یک Module گفته میشود. فرض کنید در دامنه یک پروژه این موجودیت ها را پیاده سازی کرده اید:
 Customer.cs ، CustomerRegisteredEvent.cs ، CustomerService.cs ، Order.cs ، OrderService.cs ، در این سناریو می توانید دو Module بسازید یکی به اسم Customer و دیگری به اسم Order و موارد مربوطه را داخل هر کدام قرار دهید.
 
-```text
+```csharp
 Domain
 ├─ Customers
 │ ├─ Customer.cs

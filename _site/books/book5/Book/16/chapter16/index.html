@@ -1,151 +1,34 @@
-
-
-<!doctype html>
-<html lang="fa" dir="rtl">
-<head>
-  <meta charset="utf-8">
-  <link rel="icon" type="image/png" href="/Gitab/favicon.png">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>شبکه</title>
-  <meta name="description" content="ترجمه‌های فارسی کتاب‌های فنی — سریع، مینیمال و قابل اتکا.">
-
-  <!-- استایل‌ها -->
-  <link rel="stylesheet" href="/Gitab/styles/main.css">
-  <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
-
-  <style>
-  @font-face {
-    font-family: 'Vazir';
-    src: url('/Gitab/fonts/Vazir-FD-WOL.ttf') format('truetype');
-    font-display: swap;
-  }
-  @font-face {
-    font-family: "Lalezar";
-    src: url('fonts/Lalezar.ttf') format('truetype');
-    font-display: swap;
-}
-  body {
-    font-family: 'Vazir', sans-serif;
-  }
-  </style>
-</head>
-
-<body>
-  <!-- هدر مشترک -->
-  <header class="header">
-    <div class="container nav-wrap">
-      <a href="/Gitab/" class="brand">
-        <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="26" height="26">
-        <span>Gitab</span>
-      </a>
-
-       <nav class="nav">
-         <a href="/Gitab/" >خانه</a>
-         <a href="/Gitab/books/list-books" >کتاب‌ها</a>
-         <a href="/Gitab/giter.html" >دوره ها</a>
-          <!-- 
-         <a href="/Gitab/translator.html" >مترجمین</a>
-           -->
-       </nav>
-
-      <div class="nav-actions">
-        <button id="themeToggle" class="icon-btn theme-btn" data-icon="moon" aria-label="تغییر تم">
-          <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن">
-          <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک">
-        </button>
-
-        <a class="icon-btn" href="https://github.com/hheydarian/Gitab" target="_blank" title="GitHub">
-          <img src="/Gitab/icone/github.svg" alt="GitHub">
-        </a>
-
-        <!-- دکمه منو برای موبایل -->
-        <button class="menu-toggle" aria-label="منو">
-          <img src="/Gitab/icone/menu.svg" alt="menu">
-        </button>
-      </div>
-    </div>
-  </header>
-
-  
-  <main class="site-main book-page">
-    <h1>فصل ۱۶ – شبکه (Networking)</h1>
-<p>وقتی صحبت از شبکه می‌شود، تقریباً هیچ کاری نیست که نتوان با لینوکس انجام داد.<br>
-لینوکس برای ساخت انواع سیستم‌ها و ابزارهای شبکه‌ای به کار می‌رود — از جمله <strong>فایروال‌ها، روترها، سرورهای نام (DNS)، دستگاه‌های ذخیره‌سازی تحت شبکه (NAS)</strong> و بسیاری موارد دیگر.</p>
-<p>همان‌طور که دنیای شبکه‌ وسیع است، دستورات قابل استفاده برای پیکربندی و کنترل آن نیز بسیار زیادند.<br>
-در این فصل فقط روی چند دستور پرکاربرد تمرکز می‌کنیم — به‌ویژه دستورهایی برای <strong>پایش و بررسی شبکه</strong> و <strong>انتقال فایل‌ها</strong>، و در کنار آن برنامه‌ی <strong>ssh</strong> برای ورود از راه دور.</p>
-<p>در این فصل یاد می‌گیریم:</p>
-<ul>
-<li><strong>ping</strong> – ارسال بسته‌ی ICMP ECHO_REQUEST به میزبان‌های شبکه</li>
-<li><strong>traceroute</strong> – نمایش مسیر بسته‌ها تا رسیدن به مقصد</li>
-<li><strong>netstat</strong> – نمایش ارتباطات شبکه، جدول مسیریابی، آمار واسط‌ها، ارتباطات ماسک‌گذاری‌شده و عضویت در گروه‌های چندپخشی</li>
-<li><strong>ftp</strong> – ابزار انتقال فایل در اینترنت</li>
-<li><strong>wget</strong> – دانلودکننده‌ی غیرتعاملی فایل‌ها از شبکه</li>
-<li><strong>ssh</strong> – کلاینت OpenSSH برای ورود از راه دور</li>
-</ul>
-<p>فرض می‌کنیم شما تا حدی با مفاهیم شبکه آشنا هستید؛ چون در دنیای اینترنت امروز، هر کسی که از کامپیوتر استفاده می‌کند باید درکی پایه‌ای از شبکه داشته باشد.<br>
-برای استفاده‌ی کامل از این فصل، بهتر است با اصطلاحات زیر آشنا باشید:</p>
-<ul>
-<li>آدرس <strong>IP (Internet Protocol)</strong></li>
-<li><strong>نام میزبان (Host name)</strong> و <strong>دامنه (Domain name)</strong></li>
-<li><strong>شناسه‌ی یکنواخت منبع (URI: Uniform Resource Identifier)</strong></li>
-</ul>
-<p>در بخش «مطالعه‌ی بیشتر» در پایان فصل، مقالات مفیدی برای آشنایی با این مفاهیم معرفی شده‌اند.</p>
-<blockquote>
-<p><strong>توجه:</strong> بعضی از دستوراتی که در این فصل بررسی می‌کنیم ممکن است بسته به نوع توزیع لینوکس شما، نیاز به نصب پکیج‌های اضافی از مخازن سیستم داشته باشند،<br>
-و برخی از آن‌ها تنها با <strong>دسترسی کاربر ریشه (superuser)</strong> قابل اجرا هستند.</p>
-</blockquote>
-<hr>
-<h3>بررسی و پایش شبکه</h3>
-<p>حتی اگر مدیر سیستم هم نباشید، گاهی لازم است عملکرد شبکه را بررسی کنید.</p>
-<h4>ping</h4>
-<p>پایه‌ای‌ترین دستور شبکه <strong>ping</strong> است. این دستور یک بسته‌ی خاص با نام <strong>ICMP ECHO_REQUEST</strong> به میزبان مقصد ارسال می‌کند.<br>
-اغلب دستگاه‌های شبکه وقتی چنین بسته‌ای دریافت می‌کنند، پاسخ می‌دهند؛ و این امکان را فراهم می‌کند که اتصال شبکه را آزمایش کنیم.</p>
-<blockquote>
-<p><strong>نکته:</strong> می‌توان بیشتر دستگاه‌های شبکه (از جمله میزبان‌های لینوکسی) را طوری پیکربندی کرد که این بسته‌ها را <strong>نادیده بگیرند</strong> — معمولاً برای دلایل امنیتی،<br>
-تا میزبان در برابر مهاجم احتمالی پنهان‌تر باشد. همچنین فایروال‌ها معمولاً طوری تنظیم می‌شوند که ترافیک ICMP را مسدود کنند.</p>
-</blockquote>
-<p>برای مثال، اگر بخواهیم ببینیم آیا می‌توانیم به سایت <strong><a href="http://linuxcommand.org">linuxcommand.org</a></strong> دسترسی پیدا کنیم، از دستور زیر استفاده می‌کنیم:</p>
-<pre class="hljs"><code>[me@linuxbox ~]$ ping linuxcommand.org
-</code></pre>
-<p>وقتی اجرا شود، ping به طور پیش‌فرض هر ثانیه یک بسته ارسال می‌کند تا زمانی که آن را با <strong>Ctrl+C</strong> متوقف کنیم:</p>
-<pre class="hljs"><code>PING linuxcommand.org (66.35.250.210) 56(84) bytes of data.
+<!doctype html><html lang="fa" dir="rtl"> <head><script>
+    if (window.location.pathname.startsWith('/gitab/')) {
+      window.location.replace(window.location.pathname.replace(/^\/gitab\//i, '/Gitab/') + window.location.search + window.location.hash);
+    }
+    (() => {
+      try {
+        const t = localStorage.getItem('gitab-theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', t);
+        document.documentElement.dataset.colorMode = t;
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        document.documentElement.dataset.colorMode = 'dark';
+      }
+    })();
+  </script> <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5"> <title>شبکه</title><meta name="description" content="شبکه — مطالعه آنلاین و رایگان از کتاب «خط فرمان لینوکس (TLCL)» (The Linux Command Line) اثر William Shotts با ترجمه هیمن صادقی در گیتاب."> <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"><meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"> <meta name="theme-color" content="#090d16"><meta name="referrer" content="strict-origin-when-cross-origin"> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https:; frame-src https://www.youtube.com https://www.youtube-nocookie.com https://maps.google.com https://www.google.com; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self';"><link rel="icon" type="image/png" href="/Gitab/favicon.png"> <link rel="canonical" href="https://hheydarian.github.io/Gitab/books/book5/Book/16/chapter16/"><link rel="alternate" hreflang="fa" href="https://hheydarian.github.io/Gitab/books/book5/Book/16/chapter16/"> <link rel="alternate" hreflang="x-default" href="https://hheydarian.github.io/Gitab/books/book5/Book/16/chapter16/"><link rel="alternate" type="text/plain" title="LLMs.txt" href="/Gitab/llms.txt"> <link rel="sitemap" type="application/xml" title="Sitemap" href="/Gitab/sitemap.xml"><meta property="og:locale" content="fa_IR"> <meta property="og:type" content="article"><meta property="og:site_name" content="گیتاب | Gitab"> <meta property="og:title" content="شبکه"><meta property="og:description" content="شبکه — مطالعه آنلاین و رایگان از کتاب «خط فرمان لینوکس (TLCL)» (The Linux Command Line) اثر William Shotts با ترجمه هیمن صادقی در گیتاب."> <meta property="og:url" content="https://hheydarian.github.io/Gitab/books/book5/Book/16/chapter16/"><meta property="og:image" content="https://hheydarian.github.io/Gitab/images/the-linux-command-line/Cover.jpg"> <meta property="og:image:alt" content="شبکه"><meta name="twitter:card" content="summary_large_image"> <meta name="twitter:title" content="شبکه"><meta name="twitter:description" content="شبکه — مطالعه آنلاین و رایگان از کتاب «خط فرمان لینوکس (TLCL)» (The Linux Command Line) اثر William Shotts با ترجمه هیمن صادقی در گیتاب."> <meta name="twitter:image" content="https://hheydarian.github.io/Gitab/images/the-linux-command-line/Cover.jpg"><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://hheydarian.github.io/Gitab/#organization","name":"گیتاب | Gitab","alternateName":"Gitab","url":"https://hheydarian.github.io/Gitab/","logo":{"@type":"ImageObject","url":"https://hheydarian.github.io/Gitab/favicon.png"},"sameAs":["https://github.com/hheydarian/Gitab"]},{"@type":"WebSite","@id":"https://hheydarian.github.io/Gitab/#website","url":"https://hheydarian.github.io/Gitab/","name":"گیتاب | Gitab","inLanguage":"fa-IR","publisher":{"@id":"https://hheydarian.github.io/Gitab/#organization"},"potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://hheydarian.github.io/Gitab/books/list-books/?q={search_term_string}"},"query-input":"required name=search_term_string"}},{"@type":"WebPage","@id":"https://hheydarian.github.io/Gitab/books/book5/Book/16/chapter16/#webpage","url":"https://hheydarian.github.io/Gitab/books/book5/Book/16/chapter16/","name":"شبکه","description":"شبکه — مطالعه آنلاین و رایگان از کتاب «خط فرمان لینوکس (TLCL)» (The Linux Command Line) اثر William Shotts با ترجمه هیمن صادقی در گیتاب.","inLanguage":"fa-IR","isPartOf":{"@id":"https://hheydarian.github.io/Gitab/#website"}},{"@type":"TechArticle","headline":"شبکه","description":"شبکه — مطالعه آنلاین و رایگان از کتاب «خط فرمان لینوکس (TLCL)» (The Linux Command Line) اثر William Shotts با ترجمه هیمن صادقی در گیتاب.","url":"https://hheydarian.github.io/Gitab/books/book5/Book/16/chapter16/","inLanguage":"fa-IR","isAccessibleForFree":true,"author":{"@type":"Person","name":"William Shotts"},"translator":{"@type":"Person","name":"هیمن صادقی"},"isPartOf":{"@type":"Book","name":"خط فرمان لینوکس (TLCL)","alternateName":"The Linux Command Line","url":"https://hheydarian.github.io/Gitab/books/book5/"}}]}</script> <link rel="preload" href="/Gitab/fonts/Vazirmatn.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/Gitab/styles/main.css?v=2.4" as="style"> <link rel="preload" href="/Gitab/styles/gitab-modern.css?v=2.5" as="style"><style>@font-face{font-family:'Lalezar';src:url('/Gitab/fonts/Lalezar.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}@font-face{font-family:'Vazirmatn';src:url('/Gitab/fonts/Vazirmatn.woff2') format('woff2');font-weight:100 900;font-style:normal;font-display:swap}html,body,button,input,optgroup,select,textarea,.filter-pill{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}input::placeholder,textarea::placeholder{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}</style> <link rel="stylesheet" href="/Gitab/styles/main.css?v=2.4"><link rel="stylesheet" href="/Gitab/styles/gitab-modern.css?v=2.5"> <link rel="stylesheet" href="/Gitab/styles/vendor/github-dark.min.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="/Gitab/styles/vendor/github-dark.min.css"></noscript></head> <body><header class="header"> <div class="container nav-wrap"><a href="/Gitab/" class="brand" aria-label="صفحه اصلی گیتاب"> <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="30" height="30" decoding="async"> <span class="brand-text">Gitab</span> </a> <nav class="nav" id="mainNav"><a href="/Gitab/" >خانه</a> <a href="/Gitab/books/list-books" aria-current="page">کتاب‌ها</a> <a href="/Gitab/courses/" >دوره‌ها</a> <a href="/Gitab/translator.html" >مترجمین</a></nav> <div class="nav-actions"><button id="themeToggle" class="theme-toggle-btn" aria-label="تغییر تم" title="تغییر تم"> <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن" width="18" height="18" decoding="async" style="display:none"> <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک" width="18" height="18" decoding="async"> </button> <a class="btn-github-pill" href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" title="مشاهده سورس گیتاب در گیت‌هاب"> <img src="/Gitab/icone/github.svg" alt="GitHub" width="16" height="16" decoding="async"> <span>گیت‌هاب</span> </a> <button class="mobile-menu-btn" id="mobileMenuBtn" type="button" aria-label="باز کردن منو" aria-expanded="false"> <svg class="mob-icon-open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="4" y1="7" x2="20" y2="7"></line> <line x1="4" y1="12" x2="20" y2="12"></line> <line x1="4" y1="17" x2="14" y2="17"></line> </svg> <svg class="mob-icon-close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="18" y1="6" x2="6" y2="18"></line> <line x1="6" y1="6" x2="18" y2="18"></line> </svg> </button></div> </div><div class="mobile-drawer" id="mobileDrawer" aria-hidden="true"> <div class="mobile-drawer-inner"><div class="mobile-drawer-section-label">ناوبری سریع</div><nav class="mobile-drawer-links" aria-label="منوی موبایل"> <a href="/Gitab/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M3 10.5 12 3l9 7.5"></path> <path d="M5 9.5V20a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V9.5"></path> </svg> </span> <span class="mob-nav-text">صفحه نخست</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/books/list-books" class="mobile-drawer-link active" aria-current="page"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path> </svg> </span> <span class="mob-nav-text">کتابخانه و فهرست کتاب‌ها</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/courses/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path> <path d="M6 12v5c3 3 9 3 12 0v-5"></path> </svg> </span> <span class="mob-nav-text">دوره‌های آموزشی</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/translator.html" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path> <circle cx="9" cy="7" r="4"></circle> <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path> <path d="M16 3.13a4 4 0 0 1 0 7.75"></path> </svg> </span> <span class="mob-nav-text">مترجمین و همکاران</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> </nav><div class="mobile-drawer-divider"></div><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" class="mobile-drawer-link mobile-drawer-gh"> <span class="mob-nav-icon" aria-hidden="true"> <img src="/Gitab/icone/github.svg" alt="" width="17" height="17" loading="lazy" decoding="async"> </span> <span class="mob-nav-text">مخزن گیت‌هاب پروژه</span> <span class="mob-nav-ext" aria-hidden="true">↗</span> </a> </div></div> </header><div class="reading-progress-track"> <div class="reading-progress-fill" id="readingProgressBar"></div></div> <main class="site-main chapter-reading-page"><div class="chapter-page-wrapper"> <nav class="chapter-clean-breadcrumb" aria-label="مسیر راهنما" dir="rtl"><a href="/Gitab/">خانه</a> <span class="bc-sep" aria-hidden="true">/</span> <a href="/Gitab/books/list-books/">کتاب‌ها</a> <span class="bc-sep" aria-hidden="true">/</span> <a href="/Gitab/books/book5/"><bdi>خط فرمان لینوکس</bdi></a> <span class="bc-sep" aria-hidden="true">/</span> <span class="bc-current-leaf"><bdi>شبکه</bdi></span></nav> <article class="chapter-prose-container markdown-body" id="chapterArticle" dir="rtl"><h1>فصل ۱۶ – شبکه (Networking)</h1><p>وقتی صحبت از شبکه می‌شود، تقریباً هیچ کاری نیست که نتوان با لینوکس انجام داد.<br> لینوکس برای ساخت انواع سیستم‌ها و ابزارهای شبکه‌ای به کار می‌رود — از جمله <strong>فایروال‌ها، روترها، سرورهای نام (DNS)، دستگاه‌های ذخیره‌سازی تحت شبکه (NAS)</strong> و بسیاری موارد دیگر.</p><p>همان‌طور که دنیای شبکه‌ وسیع است، دستورات قابل استفاده برای پیکربندی و کنترل آن نیز بسیار زیادند.<br> در این فصل فقط روی چند دستور پرکاربرد تمرکز می‌کنیم — به‌ویژه دستورهایی برای <strong>پایش و بررسی شبکه</strong> و <strong>انتقال فایل‌ها</strong>، و در کنار آن برنامه‌ی <strong>ssh</strong> برای ورود از راه دور.</p><p>در این فصل یاد می‌گیریم:</p><ul> <li><strong>ping</strong> – ارسال بسته‌ی ICMP ECHO_REQUEST به میزبان‌های شبکه</li><li><strong>traceroute</strong> – نمایش مسیر بسته‌ها تا رسیدن به مقصد</li><li><strong>netstat</strong> – نمایش ارتباطات شبکه، جدول مسیریابی، آمار واسط‌ها، ارتباطات ماسک‌گذاری‌شده و عضویت در گروه‌های چندپخشی</li><li><strong>ftp</strong> – ابزار انتقال فایل در اینترنت</li><li><strong>wget</strong> – دانلودکننده‌ی غیرتعاملی فایل‌ها از شبکه</li><li><strong>ssh</strong> – کلاینت OpenSSH برای ورود از راه دور</li></ul> <p>فرض می‌کنیم شما تا حدی با مفاهیم شبکه آشنا هستید؛ چون در دنیای اینترنت امروز، هر کسی که از کامپیوتر استفاده می‌کند باید درکی پایه‌ای از شبکه داشته باشد.<br> برای استفاده‌ی کامل از این فصل، بهتر است با اصطلاحات زیر آشنا باشید:</p><ul> <li>آدرس <strong>IP (Internet Protocol)</strong></li><li><strong>نام میزبان (Host name)</strong> و <strong>دامنه (Domain name)</strong></li><li><strong>شناسه‌ی یکنواخت منبع (URI: Uniform Resource Identifier)</strong></li></ul> <p>در بخش «مطالعه‌ی بیشتر» در پایان فصل، مقالات مفیدی برای آشنایی با این مفاهیم معرفی شده‌اند.</p><blockquote> <p><strong>توجه:</strong> بعضی از دستوراتی که در این فصل بررسی می‌کنیم ممکن است بسته به نوع توزیع لینوکس شما، نیاز به نصب پکیج‌های اضافی از مخازن سیستم داشته باشند،<br> و برخی از آن‌ها تنها با <strong>دسترسی کاربر ریشه (superuser)</strong> قابل اجرا هستند.</p></blockquote> <hr><h3>بررسی و پایش شبکه</h3><p>حتی اگر مدیر سیستم هم نباشید، گاهی لازم است عملکرد شبکه را بررسی کنید.</p><h4>ping</h4><p>پایه‌ای‌ترین دستور شبکه <strong>ping</strong> است. این دستور یک بسته‌ی خاص با نام <strong>ICMP ECHO_REQUEST</strong> به میزبان مقصد ارسال می‌کند.<br> اغلب دستگاه‌های شبکه وقتی چنین بسته‌ای دریافت می‌کنند، پاسخ می‌دهند؛ و این امکان را فراهم می‌کند که اتصال شبکه را آزمایش کنیم.</p><blockquote> <p><strong>نکته:</strong> می‌توان بیشتر دستگاه‌های شبکه (از جمله میزبان‌های لینوکسی) را طوری پیکربندی کرد که این بسته‌ها را <strong>نادیده بگیرند</strong> — معمولاً برای دلایل امنیتی،<br> تا میزبان در برابر مهاجم احتمالی پنهان‌تر باشد. همچنین فایروال‌ها معمولاً طوری تنظیم می‌شوند که ترافیک ICMP را مسدود کنند.</p></blockquote> <p>برای مثال، اگر بخواهیم ببینیم آیا می‌توانیم به سایت <strong><a href="http://linuxcommand.org">linuxcommand.org</a></strong> دسترسی پیدا کنیم، از دستور زیر استفاده می‌کنیم:</p><pre class="hljs"><code>[me@linuxbox ~]$ ping linuxcommand.org
+</code></pre> <p>وقتی اجرا شود، ping به طور پیش‌فرض هر ثانیه یک بسته ارسال می‌کند تا زمانی که آن را با <strong>Ctrl+C</strong> متوقف کنیم:</p><pre class="hljs"><code>PING linuxcommand.org (66.35.250.210) 56(84) bytes of data.
 64 bytes from vhost.sourceforge.net (66.35.250.210): icmp_seq=1 ttl=43 time=107 ms
 64 bytes from vhost.sourceforge.net (66.35.250.210): icmp_seq=2 ttl=43 time=108 ms
 ...
 --- linuxcommand.org ping statistics ---
 6 packets transmitted, 6 received, 0% packet loss, time 6010ms
 rtt min/avg/max/mdev = 105.647/107.052/108.118/0.824 ms
-</code></pre>
-<p>پس از قطع اجرا، ping آمار عملکرد را چاپ می‌کند.<br>
-در شبکه‌ای که درست کار می‌کند، <strong>درصد از‌دست‌رفتن بسته‌ها باید صفر</strong> باشد.<br>
-یک ping موفق نشان می‌دهد که اجزای شبکه (کارت شبکه، کابل‌ها، مسیرها و دروازه‌ها) به‌طور کلی در وضعیت سالم هستند.</p>
-<hr>
-<h4>traceroute</h4>
-<p>برنامه‌ی <strong>traceroute</strong> (در برخی سیستم‌ها با نام <strong>tracepath</strong>) مسیر تمام گره‌هایی را که بسته‌های شبکه برای رسیدن از سیستم ما به مقصد طی می‌کنند، نمایش می‌دهد.</p>
-<p>برای نمونه، برای دیدن مسیر تا سایت <strong><a href="http://slashdot.org">slashdot.org</a></strong>:</p>
-<pre class="hljs"><code>[me@linuxbox ~]$ traceroute slashdot.org
-</code></pre>
-<p>خروجی چیزی شبیه این است:</p>
-<pre class="hljs"><code>traceroute to slashdot.org (216.34.181.45), 30 hops max, 40 byte packets
+</code></pre> <p>پس از قطع اجرا، ping آمار عملکرد را چاپ می‌کند.<br> در شبکه‌ای که درست کار می‌کند، <strong>درصد از‌دست‌رفتن بسته‌ها باید صفر</strong> باشد.<br> یک ping موفق نشان می‌دهد که اجزای شبکه (کارت شبکه، کابل‌ها، مسیرها و دروازه‌ها) به‌طور کلی در وضعیت سالم هستند.</p><hr> <h4>traceroute</h4><p>برنامه‌ی <strong>traceroute</strong> (در برخی سیستم‌ها با نام <strong>tracepath</strong>) مسیر تمام گره‌هایی را که بسته‌های شبکه برای رسیدن از سیستم ما به مقصد طی می‌کنند، نمایش می‌دهد.</p><p>برای نمونه، برای دیدن مسیر تا سایت <strong><a href="http://slashdot.org">slashdot.org</a></strong>:</p><pre class="hljs"><code>[me@linuxbox ~]$ traceroute slashdot.org
+</code></pre> <p>خروجی چیزی شبیه این است:</p><pre class="hljs"><code>traceroute to slashdot.org (216.34.181.45), 30 hops max, 40 byte packets
  1  ipcop.localdomain (192.168.1.1)  1.066 ms  1.366 ms  1.720 ms
  2  * * *
  3  ge-4-13-ur01.rockville.md.bad.comcast.net (68.87.130.9)  14.622 ms  14.885 ms  15.169 ms
  ...
 16  slashdot.org (216.34.181.45)  42.727 ms  42.016 ms  41.437 ms
-</code></pre>
-<p>در این خروجی می‌بینیم که برای رسیدن از سیستم ما به مقصد، باید از <strong>۱۶ روتر</strong> عبور شود.<br>
-روترهایی که اطلاعات هویتی ارائه می‌دهند، <strong>نام میزبان، آدرس IP و زمان رفت‌وبرگشت (round-trip time)</strong> در سه نمونه مختلف نمایش داده می‌شود.<br>
-روترهایی که اطلاعاتشان را پنهان کرده‌اند یا به دلیل <strong>ازدحام شبکه یا فایروال</strong> پاسخ نمی‌دهند، با علامت <code>*</code> نمایش داده می‌شوند (مثل پرش شماره‌ی ۲ در مثال بالا).</p>
-<hr>
-<h3>netstat</h3>
-<p>برنامه‌ی <strong>netstat</strong> برای بررسی تنظیمات و آمارهای مختلف شبکه استفاده می‌شود.<br>
-با استفاده از گزینه‌های متعدد آن، می‌توان اطلاعات زیادی درباره‌ی وضعیت شبکه‌ی سیستم مشاهده کرد.</p>
-<p>به‌عنوان مثال، با گزینه‌ی ‎<code>-ie</code>‎ می‌توان رابط‌های شبکه‌ی سیستم را بررسی کرد:</p>
-<pre class="hljs"><code>[me@linuxbox ~]$ netstat -ie
-</code></pre>
-<p>خروجی نمونه:</p>
-<pre class="hljs"><code>eth0    Link encap:Ethernet  HWaddr 00:1d:09:9b:99:67  
+</code></pre> <p>در این خروجی می‌بینیم که برای رسیدن از سیستم ما به مقصد، باید از <strong>۱۶ روتر</strong> عبور شود.<br> روترهایی که اطلاعات هویتی ارائه می‌دهند، <strong>نام میزبان، آدرس IP و زمان رفت‌وبرگشت (round-trip time)</strong> در سه نمونه مختلف نمایش داده می‌شود.<br> روترهایی که اطلاعاتشان را پنهان کرده‌اند یا به دلیل <strong>ازدحام شبکه یا فایروال</strong> پاسخ نمی‌دهند، با علامت <code>*</code> نمایش داده می‌شوند (مثل پرش شماره‌ی ۲ در مثال بالا).</p><hr> <h3>netstat</h3><p>برنامه‌ی <strong>netstat</strong> برای بررسی تنظیمات و آمارهای مختلف شبکه استفاده می‌شود.<br> با استفاده از گزینه‌های متعدد آن، می‌توان اطلاعات زیادی درباره‌ی وضعیت شبکه‌ی سیستم مشاهده کرد.</p><p>به‌عنوان مثال، با گزینه‌ی ‎<code>-ie</code>‎ می‌توان رابط‌های شبکه‌ی سیستم را بررسی کرد:</p><pre class="hljs"><code>[me@linuxbox ~]$ netstat -ie
+</code></pre> <p>خروجی نمونه:</p><pre class="hljs"><code>eth0    Link encap:Ethernet  HWaddr 00:1d:09:9b:99:67  
         inet addr:192.168.1.2 Bcast:192.168.1.255 Mask:255.255.255.0 
         inet6 addr: fe80::21d:9ff:fe9b:9967/64 Scope:Link 
         UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1 
@@ -163,49 +46,12 @@ lo      Link encap:Local Loopback
         TX packets:2208 errors:0 dropped:0 overruns:0 carrier:0 
         collisions:0 txqueuelen:0 
         RX bytes:111490 (108.8 KB)  TX bytes:111490 (108.8 KB)
-</code></pre>
-<p>در این خروجی، سیستم دو رابط شبکه دارد:</p>
-<ul>
-<li><strong>eth0</strong>: رابط اترنت (شبکه‌ی کابلی)</li>
-<li><strong>lo</strong>: رابط مجازی <strong>loopback</strong> که سیستم برای ارتباط با خودش از آن استفاده می‌کند.</li>
-</ul>
-<p>در بررسی‌های اولیه‌ی شبکه، باید به دو نکته توجه کرد:</p>
-<ol>
-<li>وجود واژه‌ی <strong>UP</strong> در ابتدای خط چهارم هر رابط که نشان می‌دهد رابط فعال است.</li>
-<li>وجود یک آدرس IP معتبر در فیلد <strong>inet addr</strong> (خط دوم).</li>
-</ol>
-<p>در سیستم‌هایی که از <strong>DHCP</strong> استفاده می‌کنند، وجود آدرس IP معتبر در این قسمت تأیید می‌کند که DHCP به‌درستی کار می‌کند.</p>
-<hr>
-<p>با گزینه‌ی ‎<code>-r</code>‎ می‌توان جدول مسیریابی کرنل را دید — یعنی نحوه‌ی ارسال بسته‌ها بین شبکه‌ها:</p>
-<pre class="hljs"><code>[me@linuxbox ~]$ netstat -r
-</code></pre>
-<p>خروجی نمونه:</p>
-<pre class="hljs"><code>Kernel IP routing table 
+</code></pre> <p>در این خروجی، سیستم دو رابط شبکه دارد:</p><ul> <li><strong>eth0</strong>: رابط اترنت (شبکه‌ی کابلی)</li><li><strong>lo</strong>: رابط مجازی <strong>loopback</strong> که سیستم برای ارتباط با خودش از آن استفاده می‌کند.</li></ul> <p>در بررسی‌های اولیه‌ی شبکه، باید به دو نکته توجه کرد:</p><ol> <li>وجود واژه‌ی <strong>UP</strong> در ابتدای خط چهارم هر رابط که نشان می‌دهد رابط فعال است.</li><li>وجود یک آدرس IP معتبر در فیلد <strong>inet addr</strong> (خط دوم).</li></ol> <p>در سیستم‌هایی که از <strong>DHCP</strong> استفاده می‌کنند، وجود آدرس IP معتبر در این قسمت تأیید می‌کند که DHCP به‌درستی کار می‌کند.</p><hr> <p>با گزینه‌ی ‎<code>-r</code>‎ می‌توان جدول مسیریابی کرنل را دید — یعنی نحوه‌ی ارسال بسته‌ها بین شبکه‌ها:</p><pre class="hljs"><code>[me@linuxbox ~]$ netstat -r
+</code></pre> <p>خروجی نمونه:</p><pre class="hljs"><code>Kernel IP routing table 
 Destination  Gateway     Genmask       Flags   MSS Window  irtt Iface 
 192.168.1.0  *           255.255.255.0 U         0 0          0 eth0  
 default      192.168.1.1 0.0.0.0       UG        0 0          0 eth0 
-</code></pre>
-<p>در این مثال، جدول مسیریابی یک سیستم معمولی در شبکه‌ی محلی (LAN) پشت یک روتر/فایروال را نشان می‌دهد.</p>
-<ul>
-<li>خط اول مقصد <strong>192.168.1.0</strong> را دارد. آدرس‌هایی که به صفر ختم می‌شوند، به معنی <strong>کل شبکه</strong> هستند، نه یک میزبان خاص.</li>
-<li>ستون <strong>Gateway</strong> نشان‌دهنده‌ی نام یا آدرس IP دروازه (روتر) است که بسته‌ها از طریق آن به شبکه‌ی دیگر فرستاده می‌شوند. علامت <code>*</code> یعنی نیازی به دروازه نیست.</li>
-<li>خط آخر با <strong>default</strong> یعنی هر ترافیکی که مقصدش در جدول مشخص نشده، باید از این مسیر عبور کند.<br>
-در اینجا دروازه‌ی پیش‌فرض <strong>192.168.1.1</strong> است که احتمالاً همان روتر اصلی شبکه است.</li>
-</ul>
-<p>برنامه‌ی netstat گزینه‌های زیادی دارد و ما فقط چند مورد از آن‌ها را دیدیم. برای جزئیات کامل، صفحه‌ی <strong>man netstat</strong> را ببینید.</p>
-<hr>
-<h3>انتقال فایل‌ها از طریق شبکه</h3>
-<p>شبکه چه فایده‌ای دارد اگر نتوانیم فایل‌ها را با آن منتقل کنیم؟<br>
-ابزارهای زیادی برای انتقال داده از طریق شبکه وجود دارد؛ در این بخش دو ابزار کلاسیک را بررسی می‌کنیم.</p>
-<hr>
-<h4>ftp</h4>
-<p>برنامه‌ی <strong>ftp</strong> یکی از قدیمی‌ترین ابزارهای انتقال فایل است و نام خود را از پروتکل <strong>File Transfer Protocol</strong> گرفته است.<br>
-FTP سال‌ها در اینترنت برای دانلود فایل‌ها استفاده می‌شده و اکثر مرورگرهای وب نیز از آن پشتیبانی می‌کنند (با نشانی‌هایی مانند <code>ftp://</code>).</p>
-<p>پیش از پیدایش مرورگرها، کاربران برای دریافت و ارسال فایل از دستور <strong>ftp</strong> استفاده می‌کردند تا با سرورهای FTP ارتباط برقرار کنند.</p>
-<p>اما <strong>FTP امن نیست</strong> — چون نام کاربری و گذرواژه را به صورت <strong>متن ساده (cleartext)</strong> ارسال می‌کند و هر کسی که شبکه را شنود کند می‌تواند آن‌ها را ببیند.<br>
-به همین دلیل، تقریباً تمام سرورهای FTP عمومی امروزه از <strong>Anonymous FTP</strong> استفاده می‌کنند؛ یعنی هرکسی می‌تواند با نام کاربری <strong>anonymous</strong> وارد شود و گذرواژه‌ی بی‌اهمیتی وارد کند.</p>
-<p>نمونه‌ای از یک نشست کاری FTP برای دانلود فایل Ubuntu ISO از سرور فایل:</p>
-<pre class="hljs"><code>[me@linuxbox ~]$ ftp fileserver
+</code></pre> <p>در این مثال، جدول مسیریابی یک سیستم معمولی در شبکه‌ی محلی (LAN) پشت یک روتر/فایروال را نشان می‌دهد.</p><ul> <li>خط اول مقصد <strong>192.168.1.0</strong> را دارد. آدرس‌هایی که به صفر ختم می‌شوند، به معنی <strong>کل شبکه</strong> هستند، نه یک میزبان خاص.</li><li>ستون <strong>Gateway</strong> نشان‌دهنده‌ی نام یا آدرس IP دروازه (روتر) است که بسته‌ها از طریق آن به شبکه‌ی دیگر فرستاده می‌شوند. علامت <code>*</code> یعنی نیازی به دروازه نیست.</li><li>خط آخر با <strong>default</strong> یعنی هر ترافیکی که مقصدش در جدول مشخص نشده، باید از این مسیر عبور کند.<br> در اینجا دروازه‌ی پیش‌فرض <strong>192.168.1.1</strong> است که احتمالاً همان روتر اصلی شبکه است.</li></ul> <p>برنامه‌ی netstat گزینه‌های زیادی دارد و ما فقط چند مورد از آن‌ها را دیدیم. برای جزئیات کامل، صفحه‌ی <strong>man netstat</strong> را ببینید.</p><hr> <h3>انتقال فایل‌ها از طریق شبکه</h3><p>شبکه چه فایده‌ای دارد اگر نتوانیم فایل‌ها را با آن منتقل کنیم؟<br> ابزارهای زیادی برای انتقال داده از طریق شبکه وجود دارد؛ در این بخش دو ابزار کلاسیک را بررسی می‌کنیم.</p><hr> <h4>ftp</h4><p>برنامه‌ی <strong>ftp</strong> یکی از قدیمی‌ترین ابزارهای انتقال فایل است و نام خود را از پروتکل <strong>File Transfer Protocol</strong> گرفته است.<br> FTP سال‌ها در اینترنت برای دانلود فایل‌ها استفاده می‌شده و اکثر مرورگرهای وب نیز از آن پشتیبانی می‌کنند (با نشانی‌هایی مانند <code>ftp://</code>).</p><p>پیش از پیدایش مرورگرها، کاربران برای دریافت و ارسال فایل از دستور <strong>ftp</strong> استفاده می‌کردند تا با سرورهای FTP ارتباط برقرار کنند.</p><p>اما <strong>FTP امن نیست</strong> — چون نام کاربری و گذرواژه را به صورت <strong>متن ساده (cleartext)</strong> ارسال می‌کند و هر کسی که شبکه را شنود کند می‌تواند آن‌ها را ببیند.<br> به همین دلیل، تقریباً تمام سرورهای FTP عمومی امروزه از <strong>Anonymous FTP</strong> استفاده می‌کنند؛ یعنی هرکسی می‌تواند با نام کاربری <strong>anonymous</strong> وارد شود و گذرواژه‌ی بی‌اهمیتی وارد کند.</p><p>نمونه‌ای از یک نشست کاری FTP برای دانلود فایل Ubuntu ISO از سرور فایل:</p><pre class="hljs"><code>[me@linuxbox ~]$ ftp fileserver
 Connected to fileserver.localdomain.
 220 (vsFTPd 2.0.1)
 Name (fileserver:me): anonymous
@@ -224,71 +70,8 @@ ftp&gt; get ubuntu-8.04-desktop-i386.iso
 ...
 733079552 bytes received <span class="hljs-keyword">in</span> 68.56 secs (10441.5 kB/s)
 ftp&gt; <span class="hljs-built_in">bye</span>
-</code></pre>
-<hr>
-<h4>توضیح دستورات جلسه بالا</h4>
-<table>
-<thead>
-<tr>
-<th>دستور</th>
-<th>توضیح</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>ftp fileserver</code></td>
-<td>اجرای برنامه ftp و اتصال به سرور <code>fileserver</code></td>
-</tr>
-<tr>
-<td><code>anonymous</code></td>
-<td>ورود با حساب عمومی؛ برخی سرورها گذرواژه خالی را می‌پذیرند و برخی ایمیل می‌خواهند (مثلاً <code>user@example.com</code>)</td>
-</tr>
-<tr>
-<td><code>cd pub/cd_images/Ubuntu-8.04</code></td>
-<td>ورود به پوشه‌ی موردنظر در سرور راه‌دور</td>
-</tr>
-<tr>
-<td><code>ls</code></td>
-<td>نمایش لیست فایل‌های موجود در آن پوشه</td>
-</tr>
-<tr>
-<td><code>lcd Desktop</code></td>
-<td>تغییر مسیر محلی (در سیستم کاربر) به دسکتاپ</td>
-</tr>
-<tr>
-<td><code>get ubuntu-8.04-desktop-i386.iso</code></td>
-<td>دانلود فایل موردنظر به مسیر محلی فعلی</td>
-</tr>
-<tr>
-<td><code>bye</code></td>
-<td>خروج از سرور و بستن نشست FTP (می‌توان از <code>quit</code> یا <code>exit</code> هم استفاده کرد)</td>
-</tr>
-</tbody>
-</table>
-<p>اگر در محیط <code>ftp&gt;</code> دستور <code>help</code> را تایپ کنید، فهرست کامل فرمان‌های پشتیبانی‌شده نمایش داده می‌شود.<br>
-با اینکه کار با ftp کمی زمخت است، ولی همچنان در محیط‌هایی که دسترسی مجاز دارند، می‌تواند بسیاری از کارهای ساده‌ی مدیریت فایل را انجام دهد — هرچند دیگر ابزارهای مدرن‌تر جایگزین آن شده‌اند.</p>
-<hr>
-<h3>lftp – نسخه‌ی بهتر FTP</h3>
-<p>دستور <strong>ftp</strong> تنها ابزار خط فرمان برای اتصال به سرورهای FTP نیست.<br>
-در واقع، ابزارهای زیادی برای این کار وجود دارند. یکی از بهترین و محبوب‌ترین آن‌ها <strong>lftp</strong> است که توسط <em>Alexander Lukyanov</em> توسعه داده شده.</p>
-<p>lftp از نظر ظاهر و نحوه‌ی کار شبیه ftp سنتی است، اما امکانات بسیار بیشتری دارد، از جمله:</p>
-<ul>
-<li>پشتیبانی از چندین پروتکل (از جمله <strong>HTTP</strong>)</li>
-<li><strong>تلاش خودکار مجدد (auto retry)</strong> در صورت قطع دانلود</li>
-<li>امکان اجرای دانلود در <strong>پس‌زمینه (background)</strong></li>
-<li><strong>تکمیل خودکار مسیرها (tab completion)</strong></li>
-<li>و بسیاری ویژگی‌های دیگر که کار با آن را راحت‌تر و حرفه‌ای‌تر می‌کند.</li>
-</ul>
-<hr>
-<h3>wget</h3>
-<p>ابزار پرکاربرد دیگر برای دانلود فایل‌ها در خط فرمان، <strong>wget</strong> است.<br>
-wget برای دانلود از <strong>وب‌سایت‌ها و سرورهای FTP</strong> استفاده می‌شود.<br>
-می‌تواند <strong>تک فایل، چند فایل یا حتی کل یک وب‌سایت</strong> را دانلود کند.</p>
-<p>برای نمونه، برای دریافت صفحه‌ی اصلی سایت <em><a href="http://linuxcommand.org">linuxcommand.org</a></em> از دستور زیر استفاده می‌کنیم:</p>
-<pre class="hljs"><code>[me@linuxbox ~]$ wget http://linuxcommand.org/index.php
-</code></pre>
-<p>خروجی نمونه:</p>
-<pre class="hljs"><code>--11:02:51--  http://linuxcommand.org/index.php
+</code></pre> <hr><h4>توضیح دستورات جلسه بالا</h4><table> <thead><tr> <th>دستور</th><th>توضیح</th></tr> </thead><tbody> <tr><td><code>ftp fileserver</code></td><td>اجرای برنامه ftp و اتصال به سرور <code>fileserver</code></td></tr> <tr><td><code>anonymous</code></td><td>ورود با حساب عمومی؛ برخی سرورها گذرواژه خالی را می‌پذیرند و برخی ایمیل می‌خواهند (مثلاً <code>user@example.com</code>)</td></tr> <tr><td><code>cd pub/cd_images/Ubuntu-8.04</code></td><td>ورود به پوشه‌ی موردنظر در سرور راه‌دور</td></tr> <tr><td><code>ls</code></td><td>نمایش لیست فایل‌های موجود در آن پوشه</td></tr> <tr><td><code>lcd Desktop</code></td><td>تغییر مسیر محلی (در سیستم کاربر) به دسکتاپ</td></tr> <tr><td><code>get ubuntu-8.04-desktop-i386.iso</code></td><td>دانلود فایل موردنظر به مسیر محلی فعلی</td></tr> <tr><td><code>bye</code></td><td>خروج از سرور و بستن نشست FTP (می‌توان از <code>quit</code> یا <code>exit</code> هم استفاده کرد)</td></tr> </tbody></table> <p>اگر در محیط <code>ftp&gt;</code> دستور <code>help</code> را تایپ کنید، فهرست کامل فرمان‌های پشتیبانی‌شده نمایش داده می‌شود.<br> با اینکه کار با ftp کمی زمخت است، ولی همچنان در محیط‌هایی که دسترسی مجاز دارند، می‌تواند بسیاری از کارهای ساده‌ی مدیریت فایل را انجام دهد — هرچند دیگر ابزارهای مدرن‌تر جایگزین آن شده‌اند.</p><hr> <h3>lftp – نسخه‌ی بهتر FTP</h3><p>دستور <strong>ftp</strong> تنها ابزار خط فرمان برای اتصال به سرورهای FTP نیست.<br> در واقع، ابزارهای زیادی برای این کار وجود دارند. یکی از بهترین و محبوب‌ترین آن‌ها <strong>lftp</strong> است که توسط <em>Alexander Lukyanov</em> توسعه داده شده.</p><p>lftp از نظر ظاهر و نحوه‌ی کار شبیه ftp سنتی است، اما امکانات بسیار بیشتری دارد، از جمله:</p><ul> <li>پشتیبانی از چندین پروتکل (از جمله <strong>HTTP</strong>)</li><li><strong>تلاش خودکار مجدد (auto retry)</strong> در صورت قطع دانلود</li><li>امکان اجرای دانلود در <strong>پس‌زمینه (background)</strong></li><li><strong>تکمیل خودکار مسیرها (tab completion)</strong></li><li>و بسیاری ویژگی‌های دیگر که کار با آن را راحت‌تر و حرفه‌ای‌تر می‌کند.</li></ul> <hr><h3>wget</h3><p>ابزار پرکاربرد دیگر برای دانلود فایل‌ها در خط فرمان، <strong>wget</strong> است.<br> wget برای دانلود از <strong>وب‌سایت‌ها و سرورهای FTP</strong> استفاده می‌شود.<br> می‌تواند <strong>تک فایل، چند فایل یا حتی کل یک وب‌سایت</strong> را دانلود کند.</p><p>برای نمونه، برای دریافت صفحه‌ی اصلی سایت <em><a href="http://linuxcommand.org">linuxcommand.org</a></em> از دستور زیر استفاده می‌کنیم:</p><pre class="hljs"><code>[me@linuxbox ~]$ wget http://linuxcommand.org/index.php
+</code></pre> <p>خروجی نمونه:</p><pre class="hljs"><code>--11:02:51--  http://linuxcommand.org/index.php
            =&gt; `index.php'
 Resolving linuxcommand.org... 66.35.250.210
 Connecting to linuxcommand.org|66.35.250.210|:80... connected.
@@ -296,84 +79,20 @@ HTTP request sent, awaiting response... 200 OK
 Length: unspecified [text/html]
     [ &lt;=&gt;                                 ] 3,120         --.--K/s
 11:02:51 (161.75 MB/s) - `index.php' saved [3120]
-</code></pre>
-<p>گزینه‌های متعدد wget اجازه می‌دهند تا:</p>
-<ul>
-<li>دانلود را <strong>به‌صورت بازگشتی (recursive)</strong> انجام دهد.</li>
-<li>فایل‌ها را <strong>در پس‌زمینه</strong> دانلود کند (حتی اگر از سیستم خارج شوید).</li>
-<li><strong>ادامه‌ی دانلود ناقص</strong> را از همان‌جا انجام دهد.</li>
-</ul>
-<p>تمام این قابلیت‌ها در صفحه‌ی راهنمای (man page) آن به‌خوبی مستند شده‌اند.</p>
-<hr>
-<h3>ارتباط امن با میزبان‌های راه‌دور</h3>
-<p>در سیستم‌های شبه‌یونیکس، از مدت‌ها پیش امکان <strong>مدیریت از راه دور از طریق شبکه</strong> وجود داشته است.<br>
-در گذشته (قبل از رواج گسترده‌ی اینترنت)، ابزارهایی مانند <strong>rlogin</strong> و <strong>telnet</strong> برای ورود از راه دور استفاده می‌شدند.</p>
-<p>اما این برنامه‌ها یک ایراد جدی دارند — درست مانند ftp — تمام داده‌ها، از جمله <strong>نام کاربری و گذرواژه</strong> را به‌صورت <strong>متن ساده (cleartext)</strong> ارسال می‌کنند.<br>
-بنابراین، برای دنیای اینترنت مدرن، کاملاً <strong>ناامن و نامناسب</strong> هستند.</p>
-<hr>
-<h3>ssh</h3>
-<p>برای رفع این مشکل، پروتکلی جدید با نام <strong>SSH (Secure Shell)</strong> طراحی شد.</p>
-<p>SSH دو مشکل اساسی ارتباط امن با سیستم راه‌دور را حل می‌کند:</p>
-<ol>
-<li><strong>تأیید هویت (authentication)</strong> میزبان مقصد، تا از حمله‌ی «مرد میانی» (man-in-the-middle) جلوگیری شود.</li>
-<li><strong>رمزگذاری کامل تمام ارتباطات</strong> بین سیستم محلی و راه‌دور.</li>
-</ol>
-<p>SSH از دو بخش تشکیل شده است:</p>
-<ul>
-<li><strong>سرور SSH</strong> روی سیستم مقصد اجرا می‌شود و روی پورت <strong>۲۲</strong> منتظر اتصال است.</li>
-<li><strong>کلاینت SSH</strong> روی سیستم محلی اجرا می‌شود تا با سرور ارتباط برقرار کند.</li>
-</ul>
-<p>اکثر توزیع‌های لینوکس نسخه‌ای از SSH به نام <strong>OpenSSH</strong> (توسعه‌یافته توسط پروژه‌ی OpenBSD) را همراه خود دارند.</p>
-<p>برخی توزیع‌ها (مثل <strong>Red Hat</strong>) هم کلاینت و هم سرور را به‌صورت پیش‌فرض نصب می‌کنند،<br>
-در حالی که برخی دیگر (مثل <strong>Ubuntu</strong>) فقط کلاینت را دارند.</p>
-<p>برای اینکه سیستمی بتواند اتصالات SSH را دریافت کند باید:</p>
-<ul>
-<li>بسته‌ی <strong>OpenSSH-server</strong> روی آن نصب و پیکربندی شده باشد،</li>
-<li>سرویس SSH در حال اجرا باشد،</li>
-<li>و اگر فایروال فعال است، <strong>پورت TCP شماره‌ی ۲۲</strong> برای اتصال باز باشد.</li>
-</ul>
-<blockquote>
-<p>💡 <strong>نکته:</strong><br>
-اگر سیستم راه‌دور در دسترس ندارید اما می‌خواهید ssh را امتحان کنید،<br>
-مطمئن شوید که بسته‌ی OpenSSH-server روی سیستم شما نصب است و از نام <strong>localhost</strong> به‌عنوان میزبان مقصد استفاده کنید.<br>
-در این صورت، سیستم شما به خودش از طریق شبکه متصل می‌شود و می‌توانید عملکرد ssh را تمرین کنید.</p>
-</blockquote>
-<p>برنامه‌ی <strong>کلاینت SSH</strong> که برای اتصال به سرورهای SSH راه‌دور استفاده می‌شود، به‌طور مناسب <strong>ssh</strong> نام دارد.</p>
-<p>برای اتصال به سیستمی راه‌دور با نام <code>remote-sys</code> از دستور زیر استفاده می‌کنیم:</p>
-<pre class="hljs"><code>[me@linuxbox ~]$ ssh remote-sys
-</code></pre>
-<p>خروجی اولیه ممکن است چنین پیامی نمایش دهد:</p>
-<pre class="hljs"><code>The authenticity of host 'remote-sys (192.168.1.4)' can't be established.
+</code></pre> <p>گزینه‌های متعدد wget اجازه می‌دهند تا:</p><ul> <li>دانلود را <strong>به‌صورت بازگشتی (recursive)</strong> انجام دهد.</li><li>فایل‌ها را <strong>در پس‌زمینه</strong> دانلود کند (حتی اگر از سیستم خارج شوید).</li><li><strong>ادامه‌ی دانلود ناقص</strong> را از همان‌جا انجام دهد.</li></ul> <p>تمام این قابلیت‌ها در صفحه‌ی راهنمای (man page) آن به‌خوبی مستند شده‌اند.</p><hr> <h3>ارتباط امن با میزبان‌های راه‌دور</h3><p>در سیستم‌های شبه‌یونیکس، از مدت‌ها پیش امکان <strong>مدیریت از راه دور از طریق شبکه</strong> وجود داشته است.<br> در گذشته (قبل از رواج گسترده‌ی اینترنت)، ابزارهایی مانند <strong>rlogin</strong> و <strong>telnet</strong> برای ورود از راه دور استفاده می‌شدند.</p><p>اما این برنامه‌ها یک ایراد جدی دارند — درست مانند ftp — تمام داده‌ها، از جمله <strong>نام کاربری و گذرواژه</strong> را به‌صورت <strong>متن ساده (cleartext)</strong> ارسال می‌کنند.<br> بنابراین، برای دنیای اینترنت مدرن، کاملاً <strong>ناامن و نامناسب</strong> هستند.</p><hr> <h3>ssh</h3><p>برای رفع این مشکل، پروتکلی جدید با نام <strong>SSH (Secure Shell)</strong> طراحی شد.</p><p>SSH دو مشکل اساسی ارتباط امن با سیستم راه‌دور را حل می‌کند:</p><ol> <li><strong>تأیید هویت (authentication)</strong> میزبان مقصد، تا از حمله‌ی «مرد میانی» (man-in-the-middle) جلوگیری شود.</li><li><strong>رمزگذاری کامل تمام ارتباطات</strong> بین سیستم محلی و راه‌دور.</li></ol> <p>SSH از دو بخش تشکیل شده است:</p><ul> <li><strong>سرور SSH</strong> روی سیستم مقصد اجرا می‌شود و روی پورت <strong>۲۲</strong> منتظر اتصال است.</li><li><strong>کلاینت SSH</strong> روی سیستم محلی اجرا می‌شود تا با سرور ارتباط برقرار کند.</li></ul> <p>اکثر توزیع‌های لینوکس نسخه‌ای از SSH به نام <strong>OpenSSH</strong> (توسعه‌یافته توسط پروژه‌ی OpenBSD) را همراه خود دارند.</p><p>برخی توزیع‌ها (مثل <strong>Red Hat</strong>) هم کلاینت و هم سرور را به‌صورت پیش‌فرض نصب می‌کنند،<br> در حالی که برخی دیگر (مثل <strong>Ubuntu</strong>) فقط کلاینت را دارند.</p><p>برای اینکه سیستمی بتواند اتصالات SSH را دریافت کند باید:</p><ul> <li>بسته‌ی <strong>OpenSSH-server</strong> روی آن نصب و پیکربندی شده باشد،</li><li>سرویس SSH در حال اجرا باشد،</li><li>و اگر فایروال فعال است، <strong>پورت TCP شماره‌ی ۲۲</strong> برای اتصال باز باشد.</li></ul> <blockquote><p><strong>نکته:</strong><br> اگر سیستم راه‌دور در دسترس ندارید اما می‌خواهید ssh را امتحان کنید،<br> مطمئن شوید که بسته‌ی OpenSSH-server روی سیستم شما نصب است و از نام <strong>localhost</strong> به‌عنوان میزبان مقصد استفاده کنید.<br> در این صورت، سیستم شما به خودش از طریق شبکه متصل می‌شود و می‌توانید عملکرد ssh را تمرین کنید.</p></blockquote> <p>برنامه‌ی <strong>کلاینت SSH</strong> که برای اتصال به سرورهای SSH راه‌دور استفاده می‌شود، به‌طور مناسب <strong>ssh</strong> نام دارد.</p><p>برای اتصال به سیستمی راه‌دور با نام <code>remote-sys</code> از دستور زیر استفاده می‌کنیم:</p><pre class="hljs"><code>[me@linuxbox ~]$ ssh remote-sys
+</code></pre> <p>خروجی اولیه ممکن است چنین پیامی نمایش دهد:</p><pre class="hljs"><code>The authenticity of host 'remote-sys (192.168.1.4)' can't be established.
 RSA key fingerprint is 41:ed:7a:df:23:19:bf:3c:a5:17:bc:61:b3:7f:d9:bb.
 Are you sure you want to continue connecting (yes/no)?
-</code></pre>
-<p>بارِ نخست که تلاش می‌کنیم به یک میزبان جدید متصل شویم، چنین هشداری نمایش داده می‌شود،<br>
-چون برنامه‌ی ssh تا به حال با آن میزبان تماس نداشته و در نتیجه <strong>کلید امنیتی آن را نمی‌شناسد</strong>.</p>
-<p>برای تأیید و پذیرش هویت میزبان راه‌دور، باید در پاسخ بنویسیم:</p>
-<pre class="hljs"><code>yes
-</code></pre>
-<p>پس از تأیید، کلاینت ssh کلید میزبان را در لیست میزبان‌های شناخته‌شده ذخیره می‌کند و سپس از ما رمز عبور می‌خواهد:</p>
-<pre class="hljs"><code>Warning: Permanently added 'remote-sys,192.168.1.4' (RSA) to the list of known hosts.
+</code></pre> <p>بارِ نخست که تلاش می‌کنیم به یک میزبان جدید متصل شویم، چنین هشداری نمایش داده می‌شود،<br> چون برنامه‌ی ssh تا به حال با آن میزبان تماس نداشته و در نتیجه <strong>کلید امنیتی آن را نمی‌شناسد</strong>.</p><p>برای تأیید و پذیرش هویت میزبان راه‌دور، باید در پاسخ بنویسیم:</p><pre class="hljs"><code>yes
+</code></pre> <p>پس از تأیید، کلاینت ssh کلید میزبان را در لیست میزبان‌های شناخته‌شده ذخیره می‌کند و سپس از ما رمز عبور می‌خواهد:</p><pre class="hljs"><code>Warning: Permanently added 'remote-sys,192.168.1.4' (RSA) to the list of known hosts.
 me@remote-sys's password:
-</code></pre>
-<p>با وارد کردن صحیح رمز، وارد پوسته‌ی سیستم راه‌دور می‌شویم و اعلان (prompt) جدید از آن سیستم نمایش داده می‌شود:</p>
-<pre class="hljs"><code>Last login: Sat Aug 30 13:00:48 2008
+</code></pre> <p>با وارد کردن صحیح رمز، وارد پوسته‌ی سیستم راه‌دور می‌شویم و اعلان (prompt) جدید از آن سیستم نمایش داده می‌شود:</p><pre class="hljs"><code>Last login: Sat Aug 30 13:00:48 2008
 [me@remote-sys ~]$
-</code></pre>
-<p>از این لحظه، شما در <strong>یک نشست پوسته‌ی راه‌دور (remote shell session)</strong> قرار دارید.<br>
-برای بستن ارتباط و بازگشت به پوسته‌ی محلی، کافی است دستور <code>exit</code> را وارد کنید.</p>
-<hr>
-<p>همچنین می‌توان با نام کاربری متفاوتی به سیستم راه‌دور وصل شد.<br>
-مثلاً اگر کاربر محلی ما «me» باشد ولی در سیستم راه‌دور حسابی با نام «bob» داشته باشیم، اتصال به این صورت انجام می‌شود:</p>
-<pre class="hljs"><code>[me@linuxbox ~]$ ssh bob@remote-sys
+</code></pre> <p>از این لحظه، شما در <strong>یک نشست پوسته‌ی راه‌دور (remote shell session)</strong> قرار دارید.<br> برای بستن ارتباط و بازگشت به پوسته‌ی محلی، کافی است دستور <code>exit</code> را وارد کنید.</p><hr> <p>همچنین می‌توان با نام کاربری متفاوتی به سیستم راه‌دور وصل شد.<br> مثلاً اگر کاربر محلی ما «me» باشد ولی در سیستم راه‌دور حسابی با نام «bob» داشته باشیم، اتصال به این صورت انجام می‌شود:</p><pre class="hljs"><code>[me@linuxbox ~]$ ssh bob@remote-sys
 bob@remote-sys<span class="hljs-string">&#x27;s password:
 Last login: Sat Aug 30 13:03:21 2008
 [bob@remote-sys ~]$
-</span></code></pre>
-<hr>
-<p>همان‌طور که قبلاً گفته شد، ssh <strong>صحت هویت میزبان راه‌دور</strong> را بررسی می‌کند.<br>
-اگر این تأیید با شکست مواجه شود، پیامی هشداردهنده مانند زیر ظاهر می‌شود:</p>
-<pre class="hljs"><code>@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+</span></code></pre> <hr><p>همان‌طور که قبلاً گفته شد، ssh <strong>صحت هویت میزبان راه‌دور</strong> را بررسی می‌کند.<br> اگر این تأیید با شکست مواجه شود، پیامی هشداردهنده مانند زیر ظاهر می‌شود:</p><pre class="hljs"><code>@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @    WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!     @
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 IT IS POSSIBLE THAT SOMEONE IS DOING SOMETHING NASTY!
@@ -386,108 +105,29 @@ Add correct host key in /home/me/.ssh/known_hosts to get rid of this message.
 Offending key in /home/me/.ssh/known_hosts:1
 RSA host key for remote-sys has changed and you have requested strict checking.
 Host key verification failed.
-</code></pre>
-<p>این پیام معمولاً به یکی از دو دلیل زیر ظاهر می‌شود:</p>
-<ol>
-<li><strong>حمله‌ی «مرد میانی» (Man-in-the-middle attack)</strong> در حال انجام است و فردی در تلاش است تا ارتباط شما را شنود یا دست‌کاری کند.<br>
-(این حالت نادر است، چون ssh برای همین موضوع هشدار می‌دهد.)</li>
-<li><strong>تغییر واقعی در سیستم مقصد</strong> اتفاق افتاده است — مثلاً سیستم عامل یا سرور SSH آن دوباره نصب شده است.</li>
-</ol>
-<p>با وجود اینکه احتمال دوم شایع‌تر است، نباید مورد اول را بدون بررسی رد کرد.<br>
-همیشه وقتی چنین پیامی دیدید، <strong>با مدیر سیستم مقصد تماس بگیرید</strong> و اطمینان حاصل کنید که تغییر مجاز بوده است.</p>
-<hr>
-<p>وقتی مطمئن شدید دلیل هشدار بی‌خطر است، می‌توانید مشکل را در سمت کلاینت اصلاح کنید.<br>
-برای این کار باید <strong>کلید قدیمی و منسوخ‌شده‌ی میزبان</strong> را از فایل زیر حذف کنید:</p>
-<pre class="hljs"><code>~/.ssh/known_hosts
-</code></pre>
-<p>در مثال بالا، خط مشکل‌دار این‌گونه مشخص شده بود:</p>
-<pre class="hljs"><code>Offending key in /home/me/.ssh/known_hosts:1
-</code></pre>
-<p>یعنی کلید میزبان نادرست در <strong>خط شماره ۱</strong> از فایل <code>known_hosts</code> قرار دارد.<br>
-کافی است با یک ویرایشگر متنی (مثلاً <code>vim</code> یا <code>nano</code>) آن خط را حذف کنید تا مشکل برطرف شود.</p>
-<p>این یعنی خط اول فایل <code>known_hosts</code> شامل کلید نامعتبر است.<br>
-برای رفع مشکل کافی است <strong>آن خط را از فایل حذف کنید</strong> تا برنامه‌ی <code>ssh</code> بتواند مجدداً اعتبارنامه‌های جدید میزبان را بپذیرد.</p>
-<hr>
-<h3>اجرای دستورات روی سیستم راه‌دور با SSH</h3>
-<p>علاوه بر باز کردن یک نشست پوسته (shell session) روی سیستم راه‌دور،<br>
-ssh می‌تواند برای <strong>اجرای یک دستور خاص روی آن سیستم</strong> نیز استفاده شود.</p>
-<p>برای مثال، برای اجرای دستور <code>free</code> روی سیستمی با نام <code>remote-sys</code> و نمایش نتیجه در سیستم محلی:</p>
-<pre class="hljs"><code>[me@linuxbox ~]$ ssh remote-sys free
+</code></pre> <p>این پیام معمولاً به یکی از دو دلیل زیر ظاهر می‌شود:</p><ol> <li><strong>حمله‌ی «مرد میانی» (Man-in-the-middle attack)</strong> در حال انجام است و فردی در تلاش است تا ارتباط شما را شنود یا دست‌کاری کند.<br> (این حالت نادر است، چون ssh برای همین موضوع هشدار می‌دهد.)</li><li><strong>تغییر واقعی در سیستم مقصد</strong> اتفاق افتاده است — مثلاً سیستم عامل یا سرور SSH آن دوباره نصب شده است.</li></ol> <p>با وجود اینکه احتمال دوم شایع‌تر است، نباید مورد اول را بدون بررسی رد کرد.<br> همیشه وقتی چنین پیامی دیدید، <strong>با مدیر سیستم مقصد تماس بگیرید</strong> و اطمینان حاصل کنید که تغییر مجاز بوده است.</p><hr> <p>وقتی مطمئن شدید دلیل هشدار بی‌خطر است، می‌توانید مشکل را در سمت کلاینت اصلاح کنید.<br> برای این کار باید <strong>کلید قدیمی و منسوخ‌شده‌ی میزبان</strong> را از فایل زیر حذف کنید:</p><pre class="hljs"><code>~/.ssh/known_hosts
+</code></pre> <p>در مثال بالا، خط مشکل‌دار این‌گونه مشخص شده بود:</p><pre class="hljs"><code>Offending key in /home/me/.ssh/known_hosts:1
+</code></pre> <p>یعنی کلید میزبان نادرست در <strong>خط شماره ۱</strong> از فایل <code>known_hosts</code> قرار دارد.<br> کافی است با یک ویرایشگر متنی (مثلاً <code>vim</code> یا <code>nano</code>) آن خط را حذف کنید تا مشکل برطرف شود.</p><p>این یعنی خط اول فایل <code>known_hosts</code> شامل کلید نامعتبر است.<br> برای رفع مشکل کافی است <strong>آن خط را از فایل حذف کنید</strong> تا برنامه‌ی <code>ssh</code> بتواند مجدداً اعتبارنامه‌های جدید میزبان را بپذیرد.</p><hr> <h3>اجرای دستورات روی سیستم راه‌دور با SSH</h3><p>علاوه بر باز کردن یک نشست پوسته (shell session) روی سیستم راه‌دور،<br> ssh می‌تواند برای <strong>اجرای یک دستور خاص روی آن سیستم</strong> نیز استفاده شود.</p><p>برای مثال، برای اجرای دستور <code>free</code> روی سیستمی با نام <code>remote-sys</code> و نمایش نتیجه در سیستم محلی:</p><pre class="hljs"><code>[me@linuxbox ~]$ ssh remote-sys free
 me@twin4<span class="hljs-string">&#x27;s password: 
              total     used     free     shared    buffers     cached 
 Mem:        775536   507184   268352          0     110068     154596
 -/+ buffers/cache:   242520   533016 
 Swap:      1572856        0    1572856
 [me@linuxbox ~]$
-</span></code></pre>
-<p>در این حالت، دستور روی سیستم راه‌دور اجرا می‌شود،<br>
-اما خروجی آن مستقیماً در ترمینال سیستم محلی شما نمایش داده می‌شود.</p>
-<hr>
-<p>می‌توان از این روش به شکل‌های جالب‌تری هم استفاده کرد.<br>
-مثلاً در مثال زیر، دستور <code>ls</code> روی سیستم راه‌دور اجرا می‌شود،<br>
-ولی خروجی آن در فایلی روی سیستم محلی ذخیره می‌گردد:</p>
-<pre class="hljs"><code>[me@linuxbox ~]$ ssh remote-sys <span class="hljs-string">&#x27;ls *&#x27;</span> &gt; dirlist.txt
+</span></code></pre> <p>در این حالت، دستور روی سیستم راه‌دور اجرا می‌شود،<br> اما خروجی آن مستقیماً در ترمینال سیستم محلی شما نمایش داده می‌شود.</p><hr> <p>می‌توان از این روش به شکل‌های جالب‌تری هم استفاده کرد.<br> مثلاً در مثال زیر، دستور <code>ls</code> روی سیستم راه‌دور اجرا می‌شود،<br> ولی خروجی آن در فایلی روی سیستم محلی ذخیره می‌گردد:</p><pre class="hljs"><code>[me@linuxbox ~]$ ssh remote-sys <span class="hljs-string">&#x27;ls *&#x27;</span> &gt; dirlist.txt
 me@twin4<span class="hljs-string">&#x27;s password:
 [me@linuxbox ~]$
-</span></code></pre>
-<p>به <strong>استفاده از تک‌گیومه (‘ ’)</strong> در دستور بالا توجه کنید.<br>
-دلیلش این است که <strong>گسترش مسیرها (pathname expansion)</strong> باید روی سیستم راه‌دور انجام شود، نه در سیستم محلی.</p>
-<p>و اگر بخواهیم خروجی در همان سیستم راه‌دور ذخیره شود،<br>
-علامت تغییر مسیر (<code>&gt;</code>) و نام فایل را هم داخل همان تک‌گیومه‌ها قرار می‌دهیم:</p>
-<pre class="hljs"><code>[me@linuxbox ~]$ ssh remote-sys <span class="hljs-string">&#x27;ls * &gt; dirlist.txt&#x27;</span>
-</code></pre>
-<hr>
-<h3>تونل‌سازی با SSH (SSH Tunneling)</h3>
-<p>وقتی بین سیستم محلی و راه‌دور از طریق SSH ارتباط برقرار می‌کنیم،<br>
-در واقع <strong>یک تونل رمزگذاری‌شده (Encrypted Tunnel)</strong> بین این دو ایجاد می‌شود.</p>
-<p>به‌صورت معمول، این تونل برای ارسال امن دستورات و دریافت خروجی از راه‌دور استفاده می‌شود.<br>
-اما پروتکل SSH می‌تواند <strong>انواع دیگری از ترافیک شبکه را نیز از درون این تونل عبور دهد</strong> —<br>
-به نوعی مثل یک <strong>VPN (شبکه‌ی خصوصی مجازی)</strong> بین دو سیستم عمل می‌کند.</p>
-<p>یکی از رایج‌ترین کاربردهای این قابلیت، انتقال ترافیک <strong>سیستم پنجره‌ای X (X Window System)</strong> است.</p>
-<p>اگر سیستمی دارید که <strong>X Server</strong> در آن در حال اجراست (یعنی همان سیستم نمایش رابط گرافیکی)،<br>
-می‌توانید برنامه‌ی گرافیکی (X Client) را روی سیستم راه‌دور اجرا کرده<br>
-و رابط گرافیکی آن را در سیستم محلی خود ببینید.</p>
-<p>انجام این کار بسیار ساده است.<br>
-فرض کنید در سیستم محلی‌ای به نام <code>linuxbox</code> نشسته‌ایم که X Server دارد<br>
-و می‌خواهیم برنامه‌ی <code>xload</code> را روی سیستم راه‌دوری به نام <code>remote-sys</code> اجرا کنیم<br>
-و خروجی گرافیکی آن روی سیستم خودمان نمایش داده شود.</p>
-<p>کافی است بنویسیم:</p>
-<pre class="hljs"><code>[me@linuxbox ~]$ ssh -X remote-sys
+</span></code></pre> <p>به <strong>استفاده از تک‌گیومه (‘ ’)</strong> در دستور بالا توجه کنید.<br> دلیلش این است که <strong>گسترش مسیرها (pathname expansion)</strong> باید روی سیستم راه‌دور انجام شود، نه در سیستم محلی.</p><p>و اگر بخواهیم خروجی در همان سیستم راه‌دور ذخیره شود،<br> علامت تغییر مسیر (<code>&gt;</code>) و نام فایل را هم داخل همان تک‌گیومه‌ها قرار می‌دهیم:</p><pre class="hljs"><code>[me@linuxbox ~]$ ssh remote-sys <span class="hljs-string">&#x27;ls * &gt; dirlist.txt&#x27;</span>
+</code></pre> <hr><h3>تونل‌سازی با SSH (SSH Tunneling)</h3><p>وقتی بین سیستم محلی و راه‌دور از طریق SSH ارتباط برقرار می‌کنیم،<br> در واقع <strong>یک تونل رمزگذاری‌شده (Encrypted Tunnel)</strong> بین این دو ایجاد می‌شود.</p><p>به‌صورت معمول، این تونل برای ارسال امن دستورات و دریافت خروجی از راه‌دور استفاده می‌شود.<br> اما پروتکل SSH می‌تواند <strong>انواع دیگری از ترافیک شبکه را نیز از درون این تونل عبور دهد</strong> —<br> به نوعی مثل یک <strong>VPN (شبکه‌ی خصوصی مجازی)</strong> بین دو سیستم عمل می‌کند.</p><p>یکی از رایج‌ترین کاربردهای این قابلیت، انتقال ترافیک <strong>سیستم پنجره‌ای X (X Window System)</strong> است.</p><p>اگر سیستمی دارید که <strong>X Server</strong> در آن در حال اجراست (یعنی همان سیستم نمایش رابط گرافیکی)،<br> می‌توانید برنامه‌ی گرافیکی (X Client) را روی سیستم راه‌دور اجرا کرده<br> و رابط گرافیکی آن را در سیستم محلی خود ببینید.</p><p>انجام این کار بسیار ساده است.<br> فرض کنید در سیستم محلی‌ای به نام <code>linuxbox</code> نشسته‌ایم که X Server دارد<br> و می‌خواهیم برنامه‌ی <code>xload</code> را روی سیستم راه‌دوری به نام <code>remote-sys</code> اجرا کنیم<br> و خروجی گرافیکی آن روی سیستم خودمان نمایش داده شود.</p><p>کافی است بنویسیم:</p><pre class="hljs"><code>[me@linuxbox ~]$ ssh -X remote-sys
 me@remote-sys<span class="hljs-string">&#x27;s password:
 Last login: Mon Sep 08 13:23:11 2008
 [me@remote-sys ~]$ xload
-</span></code></pre>
-<p>پس از اجرای دستور <code>xload</code> روی سیستم راه‌دور،<br>
-پنجره‌ی آن روی سیستم محلی شما ظاهر می‌شود.</p>
-<blockquote>
-<p>🔸 در برخی سیستم‌ها ممکن است لازم باشد به‌جای گزینه‌ی <code>-X</code> از گزینه‌ی <strong><code>-Y</code></strong> استفاده کنید<br>
-(به‌ویژه وقتی تنظیمات امنیتی X محدودتر است).</p>
-</blockquote>
-<hr>
-<h3>scp و sftp</h3>
-<p>بسته‌ی <strong>OpenSSH</strong> شامل دو ابزار دیگر نیز هست که می‌توانند از طریق تونل رمزگذاری‌شده‌ی SSH، فایل‌ها را در شبکه جابه‌جا کنند.</p>
-<hr>
-<h4>🔹 scp (Secure Copy)</h4>
-<p>برنامه‌ی <strong>scp</strong> تقریباً شبیه دستور <strong>cp</strong> عمل می‌کند، با این تفاوت که می‌تواند فایل‌ها را <strong>بین دو سیستم از طریق شبکه‌ی امن SSH</strong> منتقل کند.<br>
-در مسیر مبدأ یا مقصد، می‌توان نام میزبان راه‌دور را قبل از مسیر فایل و با علامت «:<strong>:</strong>» مشخص کرد.</p>
-<p>برای مثال، اگر بخواهیم فایلی به نام <code>document.txt</code> را از پوشه‌ی خانگی‌مان روی سیستم راه‌دور <code>remote-sys</code> به مسیر فعلی سیستم محلی خود منتقل کنیم:</p>
-<pre class="hljs"><code>[me@linuxbox ~]$ scp remote-sys:document.txt .
+</span></code></pre> <p>پس از اجرای دستور <code>xload</code> روی سیستم راه‌دور،<br> پنجره‌ی آن روی سیستم محلی شما ظاهر می‌شود.</p><blockquote> <p>در برخی سیستم‌ها ممکن است لازم باشد به‌جای گزینه‌ی <code>-X</code> از گزینه‌ی <strong><code>-Y</code></strong> استفاده کنید<br> (به‌ویژه وقتی تنظیمات امنیتی X محدودتر است).</p></blockquote> <hr><h3>scp و sftp</h3><p>بسته‌ی <strong>OpenSSH</strong> شامل دو ابزار دیگر نیز هست که می‌توانند از طریق تونل رمزگذاری‌شده‌ی SSH، فایل‌ها را در شبکه جابه‌جا کنند.</p><hr> <h4>scp (Secure Copy)</h4><p>برنامه‌ی <strong>scp</strong> تقریباً شبیه دستور <strong>cp</strong> عمل می‌کند، با این تفاوت که می‌تواند فایل‌ها را <strong>بین دو سیستم از طریق شبکه‌ی امن SSH</strong> منتقل کند.<br> در مسیر مبدأ یا مقصد، می‌توان نام میزبان راه‌دور را قبل از مسیر فایل و با علامت «:<strong>:</strong>» مشخص کرد.</p><p>برای مثال، اگر بخواهیم فایلی به نام <code>document.txt</code> را از پوشه‌ی خانگی‌مان روی سیستم راه‌دور <code>remote-sys</code> به مسیر فعلی سیستم محلی خود منتقل کنیم:</p><pre class="hljs"><code>[me@linuxbox ~]$ scp remote-sys:document.txt .
 me@remote-sys<span class="hljs-string">&#x27;s password:
 document.txt                           100% 5581     5.5KB/s   00:00
 [me@linuxbox ~]$
-</span></code></pre>
-<p>اگر نام کاربری روی سیستم راه‌دور با کاربر فعلی ما فرق داشته باشد، می‌توان آن را به‌صورت زیر مشخص کرد:</p>
-<pre class="hljs"><code>[me@linuxbox ~]$ scp bob@remote-sys:document.txt .
-</code></pre>
-<hr>
-<h4>🔹 sftp (Secure FTP)</h4>
-<p>دومین ابزار انتقال فایل مبتنی بر SSH، برنامه‌ی <strong>sftp</strong> است که همان‌طور که از نامش پیداست، <strong>جایگزینی امن برای ftp</strong> محسوب می‌شود.</p>
-<p><code>sftp</code> دقیقاً مانند <code>ftp</code> کار می‌کند — با این تفاوت مهم که تمام داده‌ها، از جمله نام کاربری و رمز عبور، در <strong>تونل رمزگذاری‌شده‌ی SSH</strong> منتقل می‌شوند.</p>
-<p>مزیت بزرگ دیگر sftp این است که نیازی به اجرای <strong>FTP Server</strong> در سمت راه‌دور ندارد؛<br>
-فقط کافی است <strong>SSH Server</strong> فعال باشد.<br>
-یعنی هر سیستمی که بتوان با آن از طریق SSH ارتباط گرفت، می‌تواند مانند یک سرور FTP نیز مورد استفاده قرار گیرد.</p>
-<p>نمونه‌ی یک نشست کاری sftp:</p>
-<pre class="hljs"><code>[me@linuxbox ~]$ sftp remote-sys
+</span></code></pre> <p>اگر نام کاربری روی سیستم راه‌دور با کاربر فعلی ما فرق داشته باشد، می‌توان آن را به‌صورت زیر مشخص کرد:</p><pre class="hljs"><code>[me@linuxbox ~]$ scp bob@remote-sys:document.txt .
+</code></pre> <hr><h4>sftp (Secure FTP)</h4><p>دومین ابزار انتقال فایل مبتنی بر SSH، برنامه‌ی <strong>sftp</strong> است که همان‌طور که از نامش پیداست، <strong>جایگزینی امن برای ftp</strong> محسوب می‌شود.</p><p><code>sftp</code> دقیقاً مانند <code>ftp</code> کار می‌کند — با این تفاوت مهم که تمام داده‌ها، از جمله نام کاربری و رمز عبور، در <strong>تونل رمزگذاری‌شده‌ی SSH</strong> منتقل می‌شوند.</p><p>مزیت بزرگ دیگر sftp این است که نیازی به اجرای <strong>FTP Server</strong> در سمت راه‌دور ندارد؛<br> فقط کافی است <strong>SSH Server</strong> فعال باشد.<br> یعنی هر سیستمی که بتوان با آن از طریق SSH ارتباط گرفت، می‌تواند مانند یک سرور FTP نیز مورد استفاده قرار گیرد.</p><p>نمونه‌ی یک نشست کاری sftp:</p><pre class="hljs"><code>[me@linuxbox ~]$ sftp remote-sys
 Connecting to remote-sys...
 me@remote-sys<span class="hljs-string">&#x27;s password:
 sftp&gt; ls
@@ -497,147 +137,216 @@ sftp&gt; get ubuntu-8.04-desktop-i386.iso
 Fetching /home/me/ubuntu-8.04-desktop-i386.iso to ubuntu-8.04-desktop-i386.iso
 /home/me/ubuntu-8.04-desktop-i386.iso 100% 699MB 7.4MB/s 01:35
 sftp&gt; bye
-</span></code></pre>
-<blockquote>
-<p>💡 <strong>نکته:</strong><br>
-پروتکل <strong>SFTP</strong> در بسیاری از <strong>مدیران فایل گرافیکی</strong> لینوکس (مانند <em>Nautilus</em> در محیط GNOME و <em>Konqueror</em> در KDE) پشتیبانی می‌شود.<br>
-می‌توانید در نوار آدرس آن‌ها، مسیرهایی با پیشوند <code>sftp://</code> وارد کنید تا به فایل‌های سیستم راه‌دور متصل شوید.</p>
-</blockquote>
-<hr>
-<h3>کلاینت SSH برای ویندوز</h3>
-<p>فرض کنید پشت یک سیستم <strong>ویندوزی</strong> نشسته‌اید اما لازم دارید به سرور لینوکسی خود متصل شوید تا کاری انجام دهید — چه باید کرد؟<br>
-پاسخ ساده است: باید یک <strong>کلاینت SSH برای ویندوز</strong> نصب کنید.</p>
-<p>محبوب‌ترین آن‌ها <strong>PuTTY</strong> است که توسط <em>Simon Tatham</em> و تیمش ساخته شده.<br>
-برنامه‌ی PuTTY یک پنجره‌ی ترمینال باز می‌کند و به کاربر ویندوز اجازه می‌دهد تا از طریق <strong>SSH یا Telnet</strong> به میزبان‌های راه‌دور متصل شود.<br>
-این برنامه همچنین ابزارهایی مشابه <strong>scp</strong> و <strong>sftp</strong> نیز ارائه می‌دهد.</p>
-<p>می‌توانید PuTTY را از این آدرس دریافت کنید:<br>
-👉 <a href="http://www.chiark.greenend.org.uk/~sgtatham/putty/">http://www.chiark.greenend.org.uk/~sgtatham/putty/</a></p>
-<hr>
-<h3>جمع‌بندی</h3>
-<p>در این فصل با ابزارهای اصلی شبکه در لینوکس آشنا شدیم.<br>
-لینوکس به‌دلیل استفاده‌ی گسترده در سرورها و تجهیزات شبکه، ابزارهای متنوعی برای مدیریت و پایش شبکه در اختیار دارد.<br>
-با همین مجموعه‌ی پایه، می‌توان بسیاری از کارهای شبکه‌ای مفید — از بررسی وضعیت اتصال تا انتقال فایل و مدیریت راه‌دور — را انجام داد.</p>
-<hr>
-<h3>مطالعه‌ی بیشتر</h3>
-<p>🔹 راهنمای جامع (هرچند قدیمی) مدیریت شبکه در لینوکس از <em>Linux Documentation Project</em>:<br>
-<a href="http://tldp.org/LDP/nag2/index.html">http://tldp.org/LDP/nag2/index.html</a></p>
-<p>🔹 مقالات مفید و پایه‌ای در ویکی‌پدیا:</p>
-<ul>
-<li><a href="http://en.wikipedia.org/wiki/Internet_protocol_address">Internet Protocol Address</a></li>
-<li><a href="http://en.wikipedia.org/wiki/Host_name">Host Name</a></li>
-<li><a href="http://en.wikipedia.org/wiki/Uniform_Resource_Identifier">Uniform Resource Identifier</a></li>
-</ul>
-
-  </main>
-
-  <!-- فوتر مشترک -->
-  <footer class="footer">
-    <div class="container">
-      <p>
-        <img src="/Gitab/icone/copyright.svg" alt="کپی‌رایت" width="14" height="14"
-             style="vertical-align:middle;margin-inline:4px">
-        <span id="y"></span> Gitab — تمامی حقوق محفوظ است.
-      </p>
-    </div>
-  </footer>
-
-  <!-- سال و اسکریپت تغییر تم -->
-  <script>
+</span></code></pre> <blockquote><p><strong>نکته:</strong><br> پروتکل <strong>SFTP</strong> در بسیاری از <strong>مدیران فایل گرافیکی</strong> لینوکس (مانند <em>Nautilus</em> در محیط GNOME و <em>Konqueror</em> در KDE) پشتیبانی می‌شود.<br> می‌توانید در نوار آدرس آن‌ها، مسیرهایی با پیشوند <code>sftp://</code> وارد کنید تا به فایل‌های سیستم راه‌دور متصل شوید.</p></blockquote> <hr><h3>کلاینت SSH برای ویندوز</h3><p>فرض کنید پشت یک سیستم <strong>ویندوزی</strong> نشسته‌اید اما لازم دارید به سرور لینوکسی خود متصل شوید تا کاری انجام دهید — چه باید کرد؟<br> پاسخ ساده است: باید یک <strong>کلاینت SSH برای ویندوز</strong> نصب کنید.</p><p>محبوب‌ترین آن‌ها <strong>PuTTY</strong> است که توسط <em>Simon Tatham</em> و تیمش ساخته شده.<br> برنامه‌ی PuTTY یک پنجره‌ی ترمینال باز می‌کند و به کاربر ویندوز اجازه می‌دهد تا از طریق <strong>SSH یا Telnet</strong> به میزبان‌های راه‌دور متصل شود.<br> این برنامه همچنین ابزارهایی مشابه <strong>scp</strong> و <strong>sftp</strong> نیز ارائه می‌دهد.</p><p>می‌توانید PuTTY را از این آدرس دریافت کنید:<br><a href="http://www.chiark.greenend.org.uk/~sgtatham/putty/">http://www.chiark.greenend.org.uk/~sgtatham/putty/</a></p><hr> <h3>جمع‌بندی</h3><p>در این فصل با ابزارهای اصلی شبکه در لینوکس آشنا شدیم.<br> لینوکس به‌دلیل استفاده‌ی گسترده در سرورها و تجهیزات شبکه، ابزارهای متنوعی برای مدیریت و پایش شبکه در اختیار دارد.<br> با همین مجموعه‌ی پایه، می‌توان بسیاری از کارهای شبکه‌ای مفید — از بررسی وضعیت اتصال تا انتقال فایل و مدیریت راه‌دور — را انجام داد.</p><hr> <h3>مطالعه‌ی بیشتر</h3><p>راهنمای جامع (هرچند قدیمی) مدیریت شبکه در لینوکس از <em>Linux Documentation Project</em>:<br><a href="http://tldp.org/LDP/nag2/index.html">http://tldp.org/LDP/nag2/index.html</a></p><p>مقالات مفید و پایه‌ای در ویکی‌پدیا:</p><ul> <li><a href="http://en.wikipedia.org/wiki/Internet_protocol_address">Internet Protocol Address</a></li><li><a href="http://en.wikipedia.org/wiki/Host_name">Host Name</a></li><li><a href="http://en.wikipedia.org/wiki/Uniform_Resource_Identifier">Uniform Resource Identifier</a></li></ul> </article><nav class="chapter-single-next-nav"> <a href="/Gitab/books/book5/Book/17/chapter17/" class="btn-next-chapter-action" id="nextChapterBtn" data-hub="/Gitab/books/book5/"> <span class="next-btn-text">فصل بعدی: جست‌وجوی پیشرفته فایل‌ها</span> <span class="next-btn-arrow">←</span> </a> </nav></div> <button class="fab-back-to-top" id="backToTopBtn" type="button" aria-label="رفتن به بالای صفحه" title="رفتن به بالا"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"> <polyline points="18 15 12 9 6 15"></polyline> </svg> </button></main> <footer class="footer-minimal"><div class="footer-container"> <div class="footer-top-row"><div class="footer-brand-side"> <a href="/Gitab/" class="footer-brand-anchor"> <img src="/Gitab/icone/logo.svg" alt="Gitab" width="28" height="28" loading="lazy" decoding="async"> <span class="footer-brand-title">گیتاب (Gitab)</span> </a> <p class="footer-tagline"> پلتفرم آزاد و مستقل برای ترجمهٔ دقیق و روان کتاب‌های مرجع مهندسی نرم‌افزار. </p></div> <div class="footer-nav-cols"><div class="footer-nav-col"> <span class="footer-nav-heading">موضوعات</span><ul class="footer-nav-list"> <li><a href="/Gitab/books/list-books/?cat=csharp">سی‌شارپ و دات‌نت</a></li><li><a href="/Gitab/books/list-books/?cat=clean-code">کد تمیز و بازآفرینی</a></li><li><a href="/Gitab/books/list-books/?cat=architecture">معماری و طراحی دامنه</a></li><li><a href="/Gitab/books/list-books/?cat=system">لینوکس و خط فرمان</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">بخش‌های سایت</span><ul class="footer-nav-list"> <li><a href="/Gitab/">صفحه اصلی</a></li><li><a href="/Gitab/books/list-books/">کتابخانه کامل</a></li><li><a href="/Gitab/courses/">دوره‌های آموزشی</a></li><li><a href="/Gitab/translator.html">تالار مترجمین</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">مشارکت و جامعه</span><ul class="footer-nav-list"> <li><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer">راهنمای همکاری در ترجمه</a></li><li><a href="https://github.com/hheydarian/Gitab/issues" target="_blank" rel="noopener noreferrer">پیشنهاد کتاب یا گزارش خطا</a></li></ul> </div></div> </div><div class="footer-bottom-line"> <span>© <span id="y">2026</span> Gitab — توسعه‌یافته برای جامعهٔ مهندسان نرم‌افزار ایرانی</span></div> </div></footer> <script>
   (() => {
     const root = document.documentElement;
     const btn = document.getElementById('themeToggle');
+    const sunIcon = btn ? btn.querySelector('.icon-sun') : null;
+    const moonIcon = btn ? btn.querySelector('.icon-moon') : null;
     const KEY = 'gitab-theme';
 
-    function updateTheme(s) {
-      root.setAttribute('data-theme', s);
-      const mode = s;  // فقط `dark` یا `light` خواهد بود
+    function updateTheme(mode) {
+      root.setAttribute('data-theme', mode);
       root.dataset.colorMode = mode;
-      btn.dataset.icon = mode === 'dark' ? 'moon' : 'sun';
+      if (sunIcon && moonIcon) {
+        if (mode === 'dark') {
+          sunIcon.style.display = 'inline-block';
+          moonIcon.style.display = 'none';
+        } else {
+          sunIcon.style.display = 'none';
+          moonIcon.style.display = 'inline-block';
+        }
+      }
     }
 
-    // وضعیت تم ذخیره شده از localStorage
-    let saved = localStorage.getItem(KEY) || 'light'; // پیش‌فرض روشن
+    let saved = 'dark';
+    try { saved = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
     updateTheme(saved);
 
-    // تنظیم مجدد تم هنگام تغییر وضعیت دکمه
-    btn.addEventListener('click', () => {
-      const current = localStorage.getItem(KEY) || 'light';
-      const next = current === 'dark' ? 'light' : 'dark';  // فقط دو حالت: تاریک و روشن
-      localStorage.setItem(KEY, next);
-      updateTheme(next);
-    });
+    if (btn) {
+      btn.addEventListener('click', () => {
+        let current = 'dark';
+        try { current = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+        const next = current === 'dark' ? 'light' : 'dark';
+        try { localStorage.setItem(KEY, next); } catch (e) {}
+        updateTheme(next);
+      });
+    }
 
-    // هنگام بارگذاری صفحه
     document.addEventListener('DOMContentLoaded', () => {
-      updateTheme(localStorage.getItem(KEY) || 'light');
+      let mode = 'dark';
+      try { mode = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+      updateTheme(mode);
+      const yearSpan = document.getElementById('y');
+      if (yearSpan) yearSpan.textContent = new Date().getFullYear();
     });
+
+    const mobBtn = document.getElementById('mobileMenuBtn');
+    const mobDrawer = document.getElementById('mobileDrawer');
+    if (mobBtn && mobDrawer) {
+      const setDrawerOpen = (open) => {
+        mobDrawer.classList.toggle('open', open);
+        mobBtn.classList.toggle('is-open', open);
+        mobBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        mobBtn.setAttribute('aria-label', open ? 'بستن منو' : 'باز کردن منو');
+        mobDrawer.setAttribute('aria-hidden', open ? 'false' : 'true');
+      };
+
+      mobBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        setDrawerOpen(!mobDrawer.classList.contains('open'));
+      });
+
+      mobDrawer.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => setDrawerOpen(false));
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && mobDrawer.classList.contains('open')) {
+          setDrawerOpen(false);
+        }
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!mobDrawer.contains(e.target) && !mobBtn.contains(e.target)) {
+          setDrawerOpen(false);
+        }
+      });
+    }
+
+    if ('serviceWorker' in navigator) {
+      const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+      if (isLocalhost) {
+        navigator.serviceWorker.getRegistrations().then(regs => {
+          for (const reg of regs) reg.unregister();
+        });
+        if ('caches' in window) {
+          caches.keys().then(names => {
+            for (const name of names) caches.delete(name);
+          });
+        }
+      } else {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/Gitab/sw.js').catch(() => {});
+        });
+      }
+    }
   })();
-</script>
-
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-  <script>hljs.highlightAll();</script>
-
-  <script>
+  </script> <script>
   document.querySelectorAll('pre code').forEach(block => {
+    const pre = block.parentNode;
+    if (!pre || pre.querySelector('.copy-btn')) return;
+
+    const copySvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
+    const okSvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+
     const btn = document.createElement('button');
     btn.className = 'copy-btn';
-
-    const icon = document.createElement('img');
-    icon.src = "/Gitab/icone/copy.svg";
-    icon.alt = 'Copy';
-    btn.appendChild(icon);
-
-    block.parentNode.insertBefore(btn, block);
+    btn.setAttribute('aria-label', 'کپی کد');
+    btn.setAttribute('title', 'کپی کد');
+    btn.setAttribute('type', 'button');
+    btn.innerHTML = copySvg;
+    pre.appendChild(btn);
 
     btn.addEventListener('click', async () => {
-      await navigator.clipboard.writeText(block.textContent);
-      btn.classList.add('copied');
-      setTimeout(() => btn.classList.remove('copied'), 1500);
-    });
-  });
-  </script>
-
-  <script>
-  document.body.dataset.page = window.location.pathname;
-
-  const menuBtn = document.querySelector(".menu-toggle");
-  const nav = document.querySelector(".nav");
-
-  if (menuBtn && nav) {
-    menuBtn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      nav.classList.toggle("show");
-    });
-
-    document.addEventListener("click", (e) => {
-      const clickedInsideNav = nav.contains(e.target);
-      const clickedMenuButton = menuBtn.contains(e.target);
-      if (!clickedInsideNav && !clickedMenuButton) {
-        nav.classList.remove("show");
+      try {
+        await navigator.clipboard.writeText(block.textContent);
+        btn.classList.add('copied');
+        btn.innerHTML = okSvg;
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          btn.innerHTML = copySvg;
+        }, 1800);
+      } catch (err) {
+        console.error('Copy failed:', err);
       }
     });
-  }
-  </script>
-
-  <script>
-    document.getElementById('y').textContent = new Date().getFullYear();
-  </script>
-  <script>
-document.getElementById("openDonate").addEventListener("click", () => {
-  document.getElementById("donateModal").style.display = "block";
-});
-document.getElementById("closeDonate").addEventListener("click", () => {
-  document.getElementById("donateModal").style.display = "none";
-});
-document.querySelectorAll(".copy-btn").forEach(btn => {
-  btn.addEventListener("click", () => {
-    navigator.clipboard.writeText(btn.dataset.copy);
-  
-    setTimeout(() => (btn.textContent = "کپی"), 2000);
   });
-});
-</script>
+  </script> <script>
+  (() => {
+    const article = document.getElementById('chapterArticle');
+    if (!article) return;
 
-</body>
-</html>
+    const progressBar = document.getElementById('readingProgressBar');
+    if (progressBar) {
+      window.addEventListener('scroll', () => {
+        const docElem = document.documentElement;
+        const totalHeight = docElem.scrollHeight - docElem.clientHeight;
+        if (totalHeight > 0) {
+          const progress = (window.pageYOffset / totalHeight) * 100;
+          progressBar.style.width = Math.min(100, Math.max(0, progress)) + '%';
+        }
+      }, { passive: true });
+    }
+
+    const btt = document.getElementById('backToTopBtn');
+    if (btt) {
+      window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 250) {
+          btt.classList.add('visible');
+        } else {
+          btt.classList.remove('visible');
+        }
+      }, { passive: true });
+
+      btt.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+
+    article.querySelectorAll('img').forEach(img => {
+      if (!img.hasAttribute('loading')) img.loading = 'lazy';
+      if (!img.hasAttribute('decoding')) img.decoding = 'async';
+      const parent = img.parentElement;
+      if (parent && parent.tagName === 'P') {
+        parent.style.textAlign = 'center';
+      }
+
+      img.addEventListener('error', function() {
+        const src = this.getAttribute('src');
+        if (src && src.includes('assets/image/')) {
+          const parts = src.split('assets/image/');
+          const corrected = '/Gitab/books/book5/assets/image/' + parts[1];
+          if (this.src !== corrected) {
+            this.src = corrected;
+          }
+        }
+      });
+    });
+
+    article.querySelectorAll('p').forEach(p => {
+      const trimmed = p.innerText.trim();
+      if (trimmed.startsWith('💡') || trimmed.startsWith('نکته:')) {
+        p.classList.add('react-callout', 'callout-tip');
+      } else if (trimmed.startsWith('⚠️') || trimmed.startsWith('هشدار:')) {
+        p.classList.add('react-callout', 'callout-warning');
+      } else if (trimmed.startsWith('📌') || trimmed.startsWith('مهم:')) {
+        p.classList.add('react-callout', 'callout-important');
+      } else if (trimmed.startsWith('🔹') || trimmed.startsWith('🔸')) {
+        p.classList.add('react-callout', 'callout-note');
+      }
+    });
+  })();
+  </script> <script type="speculationrules">{"prefetch":[{"where":{"and":[{"href_matches":"/Gitab/*"},{"not":{"href_matches":"/Gitab/downloads/*"}},{"not":{"selector_matches":"[download], [target='_blank']"}}]},"eagerness":"moderate"}]}</script> <script>
+  (() => {
+    if (window.HTMLScriptElement && HTMLScriptElement.supports && HTMLScriptElement.supports('speculationrules')) return;
+    const seen = new Set([window.location.href]);
+    let count = 0;
+    const prefetchLink = (e) => {
+      if (count >= 12) return;
+      const a = e.target && e.target.closest ? e.target.closest('header a, .chapter-single-next-nav a, .syllabus-chapter-item a, .btn-hero-read, .btn-card-read') : null;
+      if (!a || !a.href || a.hasAttribute('download') || a.target === '_blank') return;
+      if (a.origin !== window.location.origin || a.pathname.includes('/downloads/')) return;
+      const clean = a.href.split('#')[0];
+      if (!clean || seen.has(clean)) return;
+      seen.add(clean);
+      count++;
+      const l = document.createElement('link');
+      l.rel = 'prefetch';
+      l.href = clean;
+      document.head.appendChild(l);
+    };
+    document.addEventListener('pointerenter', prefetchLink, { capture: true, passive: true });
+    document.addEventListener('touchstart', prefetchLink, { capture: true, passive: true });
+  })();
+  </script></body></html>

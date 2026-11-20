@@ -1,0 +1,141 @@
+---
+layout: layout.njk
+title: "دوره‌های تخصصی مهندسی نرم‌افزار و هوش مصنوعی | گیتاب"
+description: "کاوش و یادگیری دوره‌های جامع، متن‌باز و استاندارد جهانی با ترجمه روان و درسنامه‌های تعاملی فارسی در گیتاب."
+permalink: /courses/index.html
+---
+
+<div class="catalog-container">
+  <!-- هدر کاتالوگ هماهنگ و یکپارچه با صفحه کتاب‌ها -->
+  <header class="catalog-header">
+    <h1>دوره‌های تخصصی و کاربردی</h1>
+    <p>
+      دوره‌های پروژه‌محور و استاندارد جهانی با ساختار منظم، درسنامه‌های مرتب، سورس‌کد کامل و ترجمه روان به زبان فارسی.
+    </p>
+  </header>
+
+  <!-- باکس جستجوی تمیز و مدرن استاندارد گیتاب (دقیقاً مشابه صفحه کتاب‌ها) -->
+  <div class="filter-dock">
+    <div class="search-input-wrap">
+      <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8"></circle>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+      </svg>
+      <input type="text" id="courseSearchInput" placeholder="جستجوی سریع در دوره‌ها (عنوان، سرفصل، فناوری، مدرس)..." autocomplete="off">
+      <span class="search-kbd-hint">Ctrl K</span>
+      <button id="searchClearBtn" class="search-clear-btn" aria-label="پاک کردن جستجو">✕</button>
+    </div>
+  </div>
+
+  <!-- لیست دوره‌ها با کارت‌های مرتب و خلوت -->
+  <div class="courses-grid-container" id="coursesGrid">
+    {% for course in courses %}
+    <article class="course-modern-card"
+             data-title="{{ course.title | lower }}"
+             data-persian="{{ course.persianTitle }}"
+             data-desc="{{ course.desc }}"
+             data-instructor="{{ course.instructorFa }}">
+      
+      <!-- بنر تصویر دوره با فریم شیک و سازگار با تم تیره -->
+      <a href="{{ course.url | url }}" class="course-card-media" aria-label="{{ course.persianTitle }}">
+        <div class="media-backdrop">
+          <img src="{{ course.thumbnail | url }}" alt="{{ course.persianTitle }}" class="course-img" {% if loop.index == 1 %}fetchpriority="high" {% else %}loading="lazy" {% endif %}decoding="async">
+        </div>
+        <span class="course-media-badge">{{ course.badge }}</span>
+      </a>
+
+      <!-- اطلاعات و مشخصات دوره -->
+      <div class="course-card-details">
+
+        <h2 class="course-title">
+          <a href="{{ course.url | url }}">{{ course.persianTitle }}</a>
+        </h2>
+        <div class="course-subtitle" dir="ltr">{{ course.title }}</div>
+
+        <p class="course-description">
+          {{ course.desc }}
+        </p>
+
+        <div class="course-card-actions">
+          <a href="{{ course.url | url }}" class="btn-primary-course">
+            <span>ورود به دوره و سرفصل‌ها</span>
+            <span class="arrow">←</span>
+          </a>
+          <a href="{{ course.github }}" target="_blank" rel="noopener noreferrer" class="btn-secondary-gh" title="مشاهده مخزن در گیت‌هاب">
+            <img src="{{ '/icone/github.svg' | url }}" alt="GitHub" width="18" height="18" loading="lazy" decoding="async">
+            <span>گیت‌هاب</span>
+          </a>
+        </div>
+      </div>
+    </article>
+    {% endfor %}
+
+    <!-- کارت جذاب و اختصاصی پیشنهاد دوره جدید در شبکه دوره‌ها -->
+    <article class="course-propose-card">
+      <div class="propose-card-icon">🎓</div>
+      <div class="propose-card-body">
+        <span class="propose-badge">✨ دانش آزاد و جامعه‌محور</span>
+        <h3 class="propose-card-title">دوره‌ای در گیت‌هاب می‌شناسید که جایش در گیتاب خالی است؟</h3>
+        <p class="propose-card-desc">
+          گیتاب تلاشی آزاد برای ارتقای دانش مهندسان فارسی‌زبان است. اگر دوره یا مرجع بین‌المللی باکیفیتی سراغ دارید، پیشنهاد دهید تا با همراهی جامعه توسعه‌دهندگان ترجمه و بازنویسی شود.
+        </p>
+      </div>
+      <a href="https://github.com/hheydarian/Gitab/issues/new?title=%D9%BE%DB%8C%D8%B4%D9%86%D9%87%D8%A7%D8%AF+%D8%AF%D9%88%D8%B1%D9%87+%D8%AC%D8%AF%DB%8C%D8%AF" target="_blank" rel="noopener noreferrer" class="btn-propose-cta">
+        <img src="{{ '/icone/github.svg' | url }}" alt="GitHub" width="18" height="18" loading="lazy" decoding="async">
+        <span>ثبت پیشنهاد دوره</span>
+        <span>←</span>
+      </a>
+    </article>
+  </div>
+</div>
+
+<script>
+(function() {
+  const searchInput = document.getElementById('courseSearchInput');
+  const clearBtn = document.getElementById('searchClearBtn');
+  const coursesGrid = document.getElementById('coursesGrid');
+  const cards = coursesGrid ? coursesGrid.querySelectorAll('.course-modern-card') : [];
+
+  function filterCourses() {
+    const q = (searchInput ? searchInput.value : '').trim().toLowerCase();
+
+    cards.forEach(card => {
+      const title = card.getAttribute('data-title') || '';
+      const persian = card.getAttribute('data-persian') || '';
+      const desc = card.getAttribute('data-desc') || '';
+      const instructor = card.getAttribute('data-instructor') || '';
+
+      const match = !q || title.includes(q) || persian.includes(q) || desc.includes(q) || instructor.includes(q);
+      
+      if (match) {
+        card.style.display = '';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+
+    if (clearBtn) {
+      clearBtn.style.display = q.length > 0 ? 'inline-flex' : 'none';
+    }
+  }
+
+  if (searchInput) {
+    searchInput.addEventListener('input', filterCourses);
+  }
+
+  if (clearBtn) {
+    clearBtn.addEventListener('click', () => {
+      searchInput.value = '';
+      filterCourses();
+      searchInput.focus();
+    });
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+      e.preventDefault();
+      if (searchInput) searchInput.focus();
+    }
+  });
+})();
+</script>

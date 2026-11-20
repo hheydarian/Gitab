@@ -1,184 +1,23 @@
-
-
-<!doctype html>
-<html lang="fa" dir="rtl">
-<head>
-  <meta charset="utf-8">
-  <link rel="icon" type="image/png" href="/Gitab/favicon.png">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Unit Testing</title>
-  <meta name="description" content="ترجمه‌های فارسی کتاب‌های فنی — سریع، مینیمال و قابل اتکا.">
-
-  <!-- استایل‌ها -->
-  <link rel="stylesheet" href="/Gitab/styles/main.css">
-  <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
-
-  <style>
-  @font-face {
-    font-family: 'Vazir';
-    src: url('/Gitab/fonts/Vazir-FD-WOL.ttf') format('truetype');
-    font-display: swap;
-  }
-  @font-face {
-    font-family: "Lalezar";
-    src: url('fonts/Lalezar.ttf') format('truetype');
-    font-display: swap;
-}
-  body {
-    font-family: 'Vazir', sans-serif;
-  }
-  </style>
-</head>
-
-<body>
-  <!-- هدر مشترک -->
-  <header class="header">
-    <div class="container nav-wrap">
-      <a href="/Gitab/" class="brand">
-        <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="26" height="26">
-        <span>Gitab</span>
-      </a>
-
-       <nav class="nav">
-         <a href="/Gitab/" >خانه</a>
-         <a href="/Gitab/books/list-books" >کتاب‌ها</a>
-         <a href="/Gitab/giter.html" >دوره ها</a>
-          <!-- 
-         <a href="/Gitab/translator.html" >مترجمین</a>
-           -->
-       </nav>
-
-      <div class="nav-actions">
-        <button id="themeToggle" class="icon-btn theme-btn" data-icon="moon" aria-label="تغییر تم">
-          <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن">
-          <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک">
-        </button>
-
-        <a class="icon-btn" href="https://github.com/hheydarian/Gitab" target="_blank" title="GitHub">
-          <img src="/Gitab/icone/github.svg" alt="GitHub">
-        </a>
-
-        <!-- دکمه منو برای موبایل -->
-        <button class="menu-toggle" aria-label="منو">
-          <img src="/Gitab/icone/menu.svg" alt="menu">
-        </button>
-      </div>
-    </div>
-  </header>
-
-  
-  <main class="site-main book-page">
-    <h1>فصل ششم: تست واحد (Unit Testing) 🧪</h1>
-<p>قبلاً به بررسی <strong>مدیریت استثناها (Exception Handling)</strong> پرداختیم، چگونگی پیاده‌سازی صحیح آن و این که چگونه این کار می‌تواند برای <strong>مشتری</strong> و <strong>برنامه‌نویس</strong> هنگام بروز مشکلات مفید باشد. در این فصل، نگاهی می‌اندازیم به اینکه <strong>برنامه‌نویسان چگونه می‌توانند تضمین کیفیت خود (QA)</strong> را پیاده‌سازی کنند تا <strong>کد باکیفیت، مقاوم و کم‌احتمال تولید استثنا در محیط تولید</strong> ارائه دهند.</p>
-<p>ابتدا بررسی می‌کنیم <strong>چرا باید کد خودمان را تست کنیم</strong> و یک تست خوب چه ویژگی‌هایی دارد. سپس به <strong>چند ابزار تست</strong> که برای برنامه‌نویسان C# در دسترس است می‌پردازیم. بعد، سه ستون اصلی <strong>تست واحد (Unit Testing)</strong> را مرور می‌کنیم: <strong>Fail، Pass و Refactor</strong>. در نهایت، به <strong>تست‌های واحد اضافی (Redundant Unit Tests)</strong> و دلیل حذف آن‌ها می‌پردازیم.</p>
-<p>در این فصل، مباحث زیر پوشش داده می‌شوند:</p>
-<ul>
-<li>درک <strong>دلایل داشتن یک تست خوب</strong> ✅</li>
-<li>درک <strong>ابزارهای تست</strong> 🛠️</li>
-<li>تمرین <strong>متدولوژی TDD – Fail، Pass و Refactor</strong> 🔄</li>
-<li>حذف <strong>تست‌ها، کامنت‌ها و کدهای مرده اضافی</strong> 🗑️</li>
-</ul>
-<p>تا پایان این فصل، شما مهارت‌های زیر را کسب خواهید کرد:</p>
-<ul>
-<li>توانایی <strong>شرح مزایای داشتن کد خوب</strong> ✨</li>
-<li>توانایی <strong>شرح مشکلات احتمالی که از عدم تست واحد ایجاد می‌شود</strong> ⚠️</li>
-<li>توانایی <strong>نصب و استفاده از MSTest برای نوشتن و اجرای تست‌های واحد</strong> 🖥️</li>
-<li>توانایی <strong>نصب و استفاده از NUnit برای نوشتن و اجرای تست‌های واحد</strong> 🖥️</li>
-<li>توانایی <strong>نصب و استفاده از Moq برای نوشتن اشیاء جعلی (Mock Objects)</strong> 🎭</li>
-<li>توانایی <strong>نصب و استفاده از SpecFlow برای نوشتن نرم‌افزار مطابق با مشخصات مشتری</strong> 📋</li>
-<li>توانایی <strong>نوشتن تست‌هایی که ابتدا Fail می‌شوند، سپس Pass شوند و در نهایت هر Refactoring لازم را انجام دهید</strong> 🔄</li>
-</ul>
-<hr>
-<h2><strong>نیازمندی‌های فنی 🛠️</strong></h2>
-<p>برای دسترسی به فایل‌های کد این فصل، می‌توانید به این لینک مراجعه کنید:<br>
-<a href="https://github.com/PacktPublishing/Clean-Code-in-C-/tree/master/CH06">https://github.com/PacktPublishing/Clean-Code-in-C-/tree/master/CH06</a> 📂</p>
-<h3><strong>درک دلایل داشتن یک تست خوب 🧩</strong></h3>
-<p>به‌عنوان یک برنامه‌نویس، کار روی یک پروژه توسعه جدید که برایتان جذاب است بسیار لذت‌بخش است، مخصوصاً اگر انگیزه بالایی برای انجام آن داشته باشید. اما وقتی ناگهان مجبور می‌شوید برای رفع یک <strong>باگ (Bug)</strong> به پروژه‌ای دیگر بروید، این موضوع می‌تواند بسیار ناامیدکننده باشد. وضعیت بدتر وقتی است که آن کد، <strong>کد خودتان نباشد</strong> و شما درک کامل از پشت صحنه‌ی آن نداشته باشید. و بدتر از همه وقتی است که <strong>کد خودتان باشد</strong> و لحظه‌ای داشته باشید که فکر کنید: «واقعاً داشتم به چه چیزی فکر می‌کردم؟!»</p>
-<p>هر چه بیشتر از توسعه جدید کنار گذاشته شوید تا به <strong>نگهداری کد موجود</strong> بپردازید، بیشتر به اهمیت <strong>تست واحد (Unit Testing)</strong> پی می‌برید. با افزایش این درک، به مزایای واقعی <strong>یادگیری متدولوژی‌ها و تکنیک‌های تست مانند TDD و BDD</strong> پی خواهید برد.</p>
-<hr>
-<p>وقتی مدتی به‌عنوان برنامه‌نویس نگهداری روی کد دیگران کار کرده باشید، با <strong>کد خوب، بد و زشت</strong> مواجه می‌شوید. چنین تجربه‌ای می‌تواند به شما آموزش دهد که چه کارهایی را نباید انجام دهید و چرا، و در نتیجه روش بهتری برای برنامه‌نویسی یاد بگیرید. کدهای بد ممکن است باعث شوند فریاد بزنید: «نه! واقعاً نه!» و کدهای زشت ممکن است چشمتان را بسوزاند و ذهن شما را فلج کند. 😖</p>
-<hr>
-<p>وقتی مستقیم با مشتریان در تماس هستید و به آن‌ها <strong>پشتیبانی فنی</strong> می‌دهید، اهمیت تجربه‌ی خوب مشتری را در موفقیت کسب‌وکار می‌بینید. برعکس، تجربه‌ی بد مشتری می‌تواند منجر به مشتریان بسیار ناراضی، عصبانی و حتی پرخاشگر شود و فروش به‌سرعت کاهش یابد، به‌ویژه اگر مشتریان نظر منفی خود را در شبکه‌های اجتماعی و سایت‌های نقد منتشر کنند. 📉💬</p>
-<hr>
-<p>به‌عنوان <strong>تک‌لید (Tech Lead)</strong>، مسئولیت شما انجام <strong>بازبینی کد فنی (Code Review)</strong> است تا اطمینان حاصل شود که کارکنان از <strong>راهنمای کدنویسی و سیاست‌های شرکت</strong> پیروی می‌کنند، باگ‌ها را بررسی و اولویت‌بندی می‌کنید و به <strong>مدیر پروژه</strong> در مدیریت تیم خود کمک می‌کنید. مهارت‌های لازم شامل: <strong>مدیریت پروژه سطح بالا، جمع‌آوری و تحلیل نیازمندی‌ها، طراحی معماری، برنامه‌نویسی پاک (Clean Programming)</strong> و داشتن مهارت‌های ارتباطی خوب است. 🤝</p>
-<p>مدیر پروژه معمولاً تنها به <strong>تحویل پروژه به موقع و طبق بودجه</strong> اهمیت می‌دهد و چندان اهمیتی به نحوه‌ی کدنویسی شما نمی‌دهد؛ مهم این است که نرم‌افزار به‌موقع و مطابق با بودجه تحویل داده شود. همچنین کیفیت کد می‌تواند برند شرکت را تقویت یا تخریب کند. 🏢⚡</p>
-<hr>
-<p>به‌عنوان تک‌لید، شما بین مدیر پروژه و تیم پروژه قرار دارید. در کار روزمره، <strong>جلسات اسکرام (Scrum Meetings)</strong> برگزار می‌کنید و با مشکلات روزمره برخورد می‌کنید: برنامه‌نویسان نیازمند منابع از تحلیل‌گران، تسترها منتظر رفع باگ‌ها، و غیره. سخت‌ترین کار، انجام <strong>بازبینی کد همکاران (Peer Code Review)</strong> و ارائه بازخورد سازنده است که نتیجه مطلوب بدهد بدون اینکه کسی آزرده شود. به همین دلیل <strong>تست واحد و کدنویسی پاک</strong> باید جدی گرفته شود. ⚖️</p>
-<hr>
-<p>به همین دلیل، به‌عنوان تک‌لید، تشویق به <strong>TDD</strong> بسیار مهم است و بهترین راه <strong>الگوبرداری از خودتان</strong> است. حتی برنامه‌نویسان با تجربه ممکن است نسبت به TDD مقاومت داشته باشند، زیرا یادگیری و پیاده‌سازی آن <strong>زمان‌بر</strong> به نظر می‌رسد، مخصوصاً در کدهای پیچیده‌تر. اما اگر می‌خواهید واقعاً مطمئن باشید که پس از نوشتن کد، کیفیت آن تضمین شده و باگ به شما بازنمی‌گردد، <strong>TDD یک روش عالی برای ارتقای مهارت‌های شماست</strong>. 💡</p>
-<hr>
-<p>همچنین، میزان اهمیت تست واحد به <strong>حساسیت نرم‌افزار</strong> بستگی دارد. باگ در یک اپلیکیشن ساده یادداشت‌برداری فاجعه‌آمیز نیست، اما در <strong>صنعت دفاع یا سلامت</strong> ممکن است عواقب مرگباری داشته باشد. مثال‌ها: موشک هدایت‌شده به سوی غیرنظامیان، تجهیزات پزشکی که به دلیل باگ باعث مرگ بیمار می‌شود یا نرم‌افزار ایمنی هواپیما که باعث سقوط می‌شود. ✈️💥</p>
-<p>هر چه نرم‌افزار حساس‌تر باشد، <strong>تکنیک‌های تست واحد مانند TDD و BDD</strong> اهمیت بیشتری پیدا می‌کنند. هنگام نوشتن نرم‌افزار، تصور کنید اگر شما مشتری بودید و کد خراب شد، چه پیامدی داشت؟ چگونه بر خانواده، دوستان و همکاران تأثیر می‌گذاشت؟ همچنین پیامدهای <strong>اخلاقی و قانونی</strong> را در نظر بگیرید. ⚖️👨‍👩‍👧‍👦</p>
-<hr>
-<p>با اینکه گفته می‌شود: &quot;برنامه‌نویس نباید کد خود را تست کند&quot;، این تنها زمانی صحیح است که <strong>کد تمام شده و آماده تست قبل از تولید</strong> باشد. در طول برنامه‌نویسی، برنامه‌نویسان همیشه باید <strong>کد خود را تست کنند</strong>.</p>
-<p>تست واحد به شما کمک می‌کند <strong>عادات برنامه‌نویسی پاک</strong> ایجاد کنید: ابتدا تست می‌نویسید، سپس کد کافی برای موفقیت تست اضافه می‌کنید و بعد کد را بازسازی (Refactor) می‌کنید. این چرخه باعث می‌شود کد شما <strong>خواناتر، قابل نگهداری و قابل اعتماد</strong> باشد. 🔄</p>
-<hr>
-<p>در حین نوشتن کد، تست‌ها باید <strong>Atomic یا تک وظیفه‌ای</strong> باشند؛ یعنی هر تست فقط یک ویژگی را بررسی کند. تست باید <strong>تکرارپذیر، قابل اطمینان و سریع (میلی‌ثانیه‌ای)</strong> باشد. کدهای تست طولانی یا وابسته به دیگر تست‌ها مناسب نیستند. اگر نیاز به یک ثانیه یا بیشتر دارند، باید <strong>Refactor یا استفاده از Mock Objects</strong> در نظر گرفته شود. ⏱️🧪</p>
-<hr>
-<p>چرخه‌ی تست واحد شامل مراحل زیر است:</p>
-<ol>
-<li>نوشتن <strong>کلاس تست و شبه‌کد (Pseudocode)</strong></li>
-<li>نوشتن <strong>متدهای تست که ابتدا Fail می‌شوند</strong></li>
-<li>نوشتن کد کافی برای <strong>Pass شدن تست</strong></li>
-<li><strong>Refactor کد</strong> و ادامه به تست بعدی</li>
-</ol>
-<hr>
-<p>در ادامه، فصل به بررسی <strong>Use Case، Test Design، Test Case و Test Suite</strong> و نحوه تعامل آن‌ها با یکدیگر می‌پردازد:</p>
-<ul>
-<li><strong>Use Case:</strong> جریان عملیاتی یک عملیات واحد، مانند افزودن رکورد مشتری.</li>
-<li><strong>Test Design:</strong> شامل یک یا چند <strong>Test Case</strong> برای سناریوهای مختلف Use Case.</li>
-<li><strong>Test Case:</strong> می‌تواند دستی یا خودکار باشد.</li>
-<li><strong>Test Suite:</strong> نرم‌افزاری برای کشف، اجرای تست‌ها و گزارش نتایج به کاربر نهایی.</li>
-</ul>
-<p>توسعه‌دهندگان باید روی نوشتن و استفاده از <strong>تست واحد خود</strong> تمرکز کنند تا کدهایی که <strong>Fail، Pass و Refactor</strong> می‌شوند، تولید کنند. 🖥️✅</p>
-<div align="center">
-<p><img src="../../../assets/image/06/Table%206-1.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<h3><strong>درک ابزارهای تست 🛠️</strong></h3>
-<p>در این فصل، ما <strong>تست‌های واحد (Unit Tests)</strong> و <strong>اشیاء جعلی (Mock Objects)</strong> خواهیم نوشت. اما قبل از آن، باید با <strong>ابزارهایی که به‌عنوان برنامه‌نویس C# در دسترس داریم</strong> آشنا شویم.</p>
-<p>ابزارهای تستی که در <strong>Visual Studio</strong> بررسی می‌کنیم عبارتند از: <strong>MSTest، NUnit، Moq و SpecFlow</strong>. هر ابزار تست، یک <strong>کنسول اپلیکیشن</strong> و پروژه تست مربوطه را ایجاد می‌کند.</p>
-<ul>
-<li><strong>NUnit و MSTest</strong> فریم‌ورک‌های تست واحد هستند. NUnit نسبت به MSTest قدیمی‌تر است و <strong>API کامل‌تر و بالغ‌تری</strong> دارد. شخصاً <strong>NUnit را ترجیح می‌دهم</strong>.</li>
-<li><strong>Moq</strong> با MSTest و NUnit متفاوت است؛ زیرا یک فریم‌ورک تست نیست، بلکه یک <strong>فریم‌ورک Mocking</strong> است. فریم‌ورک Mocking کلاس‌های واقعی پروژه شما را با پیاده‌سازی‌های جعلی (Fake) جایگزین می‌کند تا برای اهداف تست استفاده شود. می‌توان Moq را همراه با MSTest یا NUnit استفاده کرد.</li>
-<li><strong>SpecFlow</strong> یک فریم‌ورک <strong>BDD</strong> است. ابتدا یک <strong>Feature</strong> در فایل Feature می‌نویسید با زبانی که هم کاربر و هم برنامه‌نویس فنی متوجه می‌شوند. سپس یک <strong>Step File</strong> برای آن Feature تولید می‌شود که شامل متدهایی به‌صورت گام‌های لازم برای پیاده‌سازی Feature است.</li>
-</ul>
-<p>تا پایان این فصل، شما خواهید دانست هر ابزار چه کاری انجام می‌دهد و قادر خواهید بود از آن‌ها در پروژه‌های خود استفاده کنید. پس بیایید با <strong>MSTest</strong> شروع کنیم. 🚀</p>
-<hr>
-<h3><strong>MSTest 🧪</strong></h3>
-<p>در این بخش، <strong>فریم‌ورک MSTest را نصب و پیکربندی</strong> خواهیم کرد. یک <strong>کلاس تست</strong> با <strong>متدهای تست</strong> خواهیم نوشت و آن را مقداردهی اولیه (Initialize) می‌کنیم. همچنین <strong>Assembly Setup و Cleanup، Class Cleanup، Method Cleanup</strong> و <strong>Assertions</strong> را انجام می‌دهیم.</p>
-<p>برای نصب <strong>MSTest Framework</strong> از <strong>خط فرمان (Command Line)</strong> در Visual Studio، ابتدا باید <strong>Package Manager Console</strong> را از مسیر زیر باز کنید:</p>
-<p><strong>Tools | NuGet Package Manager | Package Manager Console</strong> 💻</p>
-<div align="center">
-<p><img src="../../../assets/image/06/Table%206-2.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<p>سپس، سه دستور زیر را اجرا کنید تا <strong>فریم‌ورک MSTest نصب شود</strong>:</p>
-<pre class="hljs"><code><span class="hljs-built_in">install-package</span> mstest.testframework
+<!doctype html><html lang="fa" dir="rtl"> <head><script>
+    if (window.location.pathname.startsWith('/gitab/')) {
+      window.location.replace(window.location.pathname.replace(/^\/gitab\//i, '/Gitab/') + window.location.search + window.location.hash);
+    }
+    (() => {
+      try {
+        const t = localStorage.getItem('gitab-theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', t);
+        document.documentElement.dataset.colorMode = t;
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        document.documentElement.dataset.colorMode = 'dark';
+      }
+    })();
+  </script> <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5"> <title>Unit Testing</title><meta name="description" content="Unit Testing — مطالعه آنلاین و رایگان از کتاب «کدنویسی تمیز در سی‌شارپ» (Clean Code in C#) اثر Jason Alls با ترجمه حامد حیدریان در گیتاب."> <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"><meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"> <meta name="theme-color" content="#090d16"><meta name="referrer" content="strict-origin-when-cross-origin"> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https:; frame-src https://www.youtube.com https://www.youtube-nocookie.com https://maps.google.com https://www.google.com; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self';"><link rel="icon" type="image/png" href="/Gitab/favicon.png"> <link rel="canonical" href="https://hheydarian.github.io/Gitab/books/book2/Book/06/Unit-Testing/"><link rel="alternate" hreflang="fa" href="https://hheydarian.github.io/Gitab/books/book2/Book/06/Unit-Testing/"> <link rel="alternate" hreflang="x-default" href="https://hheydarian.github.io/Gitab/books/book2/Book/06/Unit-Testing/"><link rel="alternate" type="text/plain" title="LLMs.txt" href="/Gitab/llms.txt"> <link rel="sitemap" type="application/xml" title="Sitemap" href="/Gitab/sitemap.xml"><meta property="og:locale" content="fa_IR"> <meta property="og:type" content="article"><meta property="og:site_name" content="گیتاب | Gitab"> <meta property="og:title" content="Unit Testing"><meta property="og:description" content="Unit Testing — مطالعه آنلاین و رایگان از کتاب «کدنویسی تمیز در سی‌شارپ» (Clean Code in C#) اثر Jason Alls با ترجمه حامد حیدریان در گیتاب."> <meta property="og:url" content="https://hheydarian.github.io/Gitab/books/book2/Book/06/Unit-Testing/"><meta property="og:image" content="https://hheydarian.github.io/Gitab/images/clean-code-csharp/Cover.jpg"> <meta property="og:image:alt" content="Unit Testing"><meta name="twitter:card" content="summary_large_image"> <meta name="twitter:title" content="Unit Testing"><meta name="twitter:description" content="Unit Testing — مطالعه آنلاین و رایگان از کتاب «کدنویسی تمیز در سی‌شارپ» (Clean Code in C#) اثر Jason Alls با ترجمه حامد حیدریان در گیتاب."> <meta name="twitter:image" content="https://hheydarian.github.io/Gitab/images/clean-code-csharp/Cover.jpg"><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://hheydarian.github.io/Gitab/#organization","name":"گیتاب | Gitab","alternateName":"Gitab","url":"https://hheydarian.github.io/Gitab/","logo":{"@type":"ImageObject","url":"https://hheydarian.github.io/Gitab/favicon.png"},"sameAs":["https://github.com/hheydarian/Gitab"]},{"@type":"WebSite","@id":"https://hheydarian.github.io/Gitab/#website","url":"https://hheydarian.github.io/Gitab/","name":"گیتاب | Gitab","inLanguage":"fa-IR","publisher":{"@id":"https://hheydarian.github.io/Gitab/#organization"},"potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://hheydarian.github.io/Gitab/books/list-books/?q={search_term_string}"},"query-input":"required name=search_term_string"}},{"@type":"WebPage","@id":"https://hheydarian.github.io/Gitab/books/book2/Book/06/Unit-Testing/#webpage","url":"https://hheydarian.github.io/Gitab/books/book2/Book/06/Unit-Testing/","name":"Unit Testing","description":"Unit Testing — مطالعه آنلاین و رایگان از کتاب «کدنویسی تمیز در سی‌شارپ» (Clean Code in C#) اثر Jason Alls با ترجمه حامد حیدریان در گیتاب.","inLanguage":"fa-IR","isPartOf":{"@id":"https://hheydarian.github.io/Gitab/#website"}},{"@type":"TechArticle","headline":"Unit Testing","description":"Unit Testing — مطالعه آنلاین و رایگان از کتاب «کدنویسی تمیز در سی‌شارپ» (Clean Code in C#) اثر Jason Alls با ترجمه حامد حیدریان در گیتاب.","url":"https://hheydarian.github.io/Gitab/books/book2/Book/06/Unit-Testing/","inLanguage":"fa-IR","isAccessibleForFree":true,"author":{"@type":"Person","name":"Jason Alls"},"translator":{"@type":"Person","name":"حامد حیدریان"},"isPartOf":{"@type":"Book","name":"کدنویسی تمیز در سی‌شارپ","alternateName":"Clean Code in C#","url":"https://hheydarian.github.io/Gitab/books/book2/"}}]}</script> <link rel="preload" href="/Gitab/fonts/Vazirmatn.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/Gitab/styles/main.css?v=2.4" as="style"> <link rel="preload" href="/Gitab/styles/gitab-modern.css?v=2.5" as="style"><style>@font-face{font-family:'Lalezar';src:url('/Gitab/fonts/Lalezar.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}@font-face{font-family:'Vazirmatn';src:url('/Gitab/fonts/Vazirmatn.woff2') format('woff2');font-weight:100 900;font-style:normal;font-display:swap}html,body,button,input,optgroup,select,textarea,.filter-pill{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}input::placeholder,textarea::placeholder{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}</style> <link rel="stylesheet" href="/Gitab/styles/main.css?v=2.4"><link rel="stylesheet" href="/Gitab/styles/gitab-modern.css?v=2.5"> <link rel="stylesheet" href="/Gitab/styles/vendor/github-dark.min.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="/Gitab/styles/vendor/github-dark.min.css"></noscript></head> <body><header class="header"> <div class="container nav-wrap"><a href="/Gitab/" class="brand" aria-label="صفحه اصلی گیتاب"> <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="30" height="30" decoding="async"> <span class="brand-text">Gitab</span> </a> <nav class="nav" id="mainNav"><a href="/Gitab/" >خانه</a> <a href="/Gitab/books/list-books" aria-current="page">کتاب‌ها</a> <a href="/Gitab/courses/" >دوره‌ها</a> <a href="/Gitab/translator.html" >مترجمین</a></nav> <div class="nav-actions"><button id="themeToggle" class="theme-toggle-btn" aria-label="تغییر تم" title="تغییر تم"> <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن" width="18" height="18" decoding="async" style="display:none"> <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک" width="18" height="18" decoding="async"> </button> <a class="btn-github-pill" href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" title="مشاهده سورس گیتاب در گیت‌هاب"> <img src="/Gitab/icone/github.svg" alt="GitHub" width="16" height="16" decoding="async"> <span>گیت‌هاب</span> </a> <button class="mobile-menu-btn" id="mobileMenuBtn" type="button" aria-label="باز کردن منو" aria-expanded="false"> <svg class="mob-icon-open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="4" y1="7" x2="20" y2="7"></line> <line x1="4" y1="12" x2="20" y2="12"></line> <line x1="4" y1="17" x2="14" y2="17"></line> </svg> <svg class="mob-icon-close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="18" y1="6" x2="6" y2="18"></line> <line x1="6" y1="6" x2="18" y2="18"></line> </svg> </button></div> </div><div class="mobile-drawer" id="mobileDrawer" aria-hidden="true"> <div class="mobile-drawer-inner"><div class="mobile-drawer-section-label">ناوبری سریع</div><nav class="mobile-drawer-links" aria-label="منوی موبایل"> <a href="/Gitab/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M3 10.5 12 3l9 7.5"></path> <path d="M5 9.5V20a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V9.5"></path> </svg> </span> <span class="mob-nav-text">صفحه نخست</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/books/list-books" class="mobile-drawer-link active" aria-current="page"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path> </svg> </span> <span class="mob-nav-text">کتابخانه و فهرست کتاب‌ها</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/courses/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path> <path d="M6 12v5c3 3 9 3 12 0v-5"></path> </svg> </span> <span class="mob-nav-text">دوره‌های آموزشی</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/translator.html" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path> <circle cx="9" cy="7" r="4"></circle> <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path> <path d="M16 3.13a4 4 0 0 1 0 7.75"></path> </svg> </span> <span class="mob-nav-text">مترجمین و همکاران</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> </nav><div class="mobile-drawer-divider"></div><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" class="mobile-drawer-link mobile-drawer-gh"> <span class="mob-nav-icon" aria-hidden="true"> <img src="/Gitab/icone/github.svg" alt="" width="17" height="17" loading="lazy" decoding="async"> </span> <span class="mob-nav-text">مخزن گیت‌هاب پروژه</span> <span class="mob-nav-ext" aria-hidden="true">↗</span> </a> </div></div> </header><div class="reading-progress-track"> <div class="reading-progress-fill" id="readingProgressBar"></div></div> <main class="site-main chapter-reading-page"><div class="chapter-page-wrapper"> <nav class="chapter-clean-breadcrumb" aria-label="مسیر راهنما" dir="rtl"><a href="/Gitab/">خانه</a> <span class="bc-sep" aria-hidden="true">/</span> <a href="/Gitab/books/list-books/">کتاب‌ها</a> <span class="bc-sep" aria-hidden="true">/</span> <a href="/Gitab/books/book2/"><bdi>کدنویسی تمیز در سی‌شارپ</bdi></a> <span class="bc-sep" aria-hidden="true">/</span> <span class="bc-current-leaf"><bdi>Unit Testing</bdi></span></nav> <article class="chapter-prose-container markdown-body" id="chapterArticle" dir="rtl"><h1>فصل ششم: تست واحد (Unit Testing)</h1><p>قبلاً به بررسی <strong>مدیریت استثناها (Exception Handling)</strong> پرداختیم، چگونگی پیاده‌سازی صحیح آن و این که چگونه این کار می‌تواند برای <strong>مشتری</strong> و <strong>برنامه‌نویس</strong> هنگام بروز مشکلات مفید باشد. در این فصل، نگاهی می‌اندازیم به اینکه <strong>برنامه‌نویسان چگونه می‌توانند تضمین کیفیت خود (QA)</strong> را پیاده‌سازی کنند تا <strong>کد باکیفیت، مقاوم و کم‌احتمال تولید استثنا در محیط تولید</strong> ارائه دهند.</p><p>ابتدا بررسی می‌کنیم <strong>چرا باید کد خودمان را تست کنیم</strong> و یک تست خوب چه ویژگی‌هایی دارد. سپس به <strong>چند ابزار تست</strong> که برای برنامه‌نویسان C# در دسترس است می‌پردازیم. بعد، سه ستون اصلی <strong>تست واحد (Unit Testing)</strong> را مرور می‌کنیم: <strong>Fail، Pass و Refactor</strong>. در نهایت، به <strong>تست‌های واحد اضافی (Redundant Unit Tests)</strong> و دلیل حذف آن‌ها می‌پردازیم.</p><p>در این فصل، مباحث زیر پوشش داده می‌شوند:</p><ul> <li>درک <strong>دلایل داشتن یک تست خوب</strong></li><li>درک <strong>ابزارهای تست</strong></li><li>تمرین <strong>متدولوژی TDD – Fail، Pass و Refactor</strong></li><li>حذف <strong>تست‌ها، کامنت‌ها و کدهای مرده اضافی</strong></li></ul> <p>تا پایان این فصل، شما مهارت‌های زیر را کسب خواهید کرد:</p><ul> <li>توانایی <strong>شرح مزایای داشتن کد خوب</strong></li><li>توانایی <strong>شرح مشکلات احتمالی که از عدم تست واحد ایجاد می‌شود</strong></li><li>توانایی <strong>نصب و استفاده از MSTest برای نوشتن و اجرای تست‌های واحد</strong></li><li>توانایی <strong>نصب و استفاده از NUnit برای نوشتن و اجرای تست‌های واحد</strong></li><li>توانایی <strong>نصب و استفاده از Moq برای نوشتن اشیاء جعلی (Mock Objects)</strong></li><li>توانایی <strong>نصب و استفاده از SpecFlow برای نوشتن نرم‌افزار مطابق با مشخصات مشتری</strong></li><li>توانایی <strong>نوشتن تست‌هایی که ابتدا Fail می‌شوند، سپس Pass شوند و در نهایت هر Refactoring لازم را انجام دهید</strong></li></ul> <hr><h2>**نیازمندی‌های فنی **</h2><p>برای دسترسی به فایل‌های کد این فصل، می‌توانید به این لینک مراجعه کنید:<br><a href="https://github.com/PacktPublishing/Clean-Code-in-C-/tree/master/CH06">https://github.com/PacktPublishing/Clean-Code-in-C-/tree/master/CH06</a></p><h3>**درک دلایل داشتن یک تست خوب **</h3><p>به‌عنوان یک برنامه‌نویس، کار روی یک پروژه توسعه جدید که برایتان جذاب است بسیار لذت‌بخش است، مخصوصاً اگر انگیزه بالایی برای انجام آن داشته باشید. اما وقتی ناگهان مجبور می‌شوید برای رفع یک <strong>باگ (Bug)</strong> به پروژه‌ای دیگر بروید، این موضوع می‌تواند بسیار ناامیدکننده باشد. وضعیت بدتر وقتی است که آن کد، <strong>کد خودتان نباشد</strong> و شما درک کامل از پشت صحنه‌ی آن نداشته باشید. و بدتر از همه وقتی است که <strong>کد خودتان باشد</strong> و لحظه‌ای داشته باشید که فکر کنید: «واقعاً داشتم به چه چیزی فکر می‌کردم؟!»</p><p>هر چه بیشتر از توسعه جدید کنار گذاشته شوید تا به <strong>نگهداری کد موجود</strong> بپردازید، بیشتر به اهمیت <strong>تست واحد (Unit Testing)</strong> پی می‌برید. با افزایش این درک، به مزایای واقعی <strong>یادگیری متدولوژی‌ها و تکنیک‌های تست مانند TDD و BDD</strong> پی خواهید برد.</p><hr> <p>وقتی مدتی به‌عنوان برنامه‌نویس نگهداری روی کد دیگران کار کرده باشید، با <strong>کد خوب، بد و زشت</strong> مواجه می‌شوید. چنین تجربه‌ای می‌تواند به شما آموزش دهد که چه کارهایی را نباید انجام دهید و چرا، و در نتیجه روش بهتری برای برنامه‌نویسی یاد بگیرید. کدهای بد ممکن است باعث شوند فریاد بزنید: «نه! واقعاً نه!» و کدهای زشت ممکن است چشمتان را بسوزاند و ذهن شما را فلج کند.</p><hr> <p>وقتی مستقیم با مشتریان در تماس هستید و به آن‌ها <strong>پشتیبانی فنی</strong> می‌دهید، اهمیت تجربه‌ی خوب مشتری را در موفقیت کسب‌وکار می‌بینید. برعکس، تجربه‌ی بد مشتری می‌تواند منجر به مشتریان بسیار ناراضی، عصبانی و حتی پرخاشگر شود و فروش به‌سرعت کاهش یابد، به‌ویژه اگر مشتریان نظر منفی خود را در شبکه‌های اجتماعی و سایت‌های نقد منتشر کنند.</p><hr> <p>به‌عنوان <strong>تک‌لید (Tech Lead)</strong>، مسئولیت شما انجام <strong>بازبینی کد فنی (Code Review)</strong> است تا اطمینان حاصل شود که کارکنان از <strong>راهنمای کدنویسی و سیاست‌های شرکت</strong> پیروی می‌کنند، باگ‌ها را بررسی و اولویت‌بندی می‌کنید و به <strong>مدیر پروژه</strong> در مدیریت تیم خود کمک می‌کنید. مهارت‌های لازم شامل: <strong>مدیریت پروژه سطح بالا، جمع‌آوری و تحلیل نیازمندی‌ها، طراحی معماری، برنامه‌نویسی پاک (Clean Programming)</strong> و داشتن مهارت‌های ارتباطی خوب است.</p><p>مدیر پروژه معمولاً تنها به <strong>تحویل پروژه به موقع و طبق بودجه</strong> اهمیت می‌دهد و چندان اهمیتی به نحوه‌ی کدنویسی شما نمی‌دهد؛ مهم این است که نرم‌افزار به‌موقع و مطابق با بودجه تحویل داده شود. همچنین کیفیت کد می‌تواند برند شرکت را تقویت یا تخریب کند.</p><hr> <p>به‌عنوان تک‌لید، شما بین مدیر پروژه و تیم پروژه قرار دارید. در کار روزمره، <strong>جلسات اسکرام (Scrum Meetings)</strong> برگزار می‌کنید و با مشکلات روزمره برخورد می‌کنید: برنامه‌نویسان نیازمند منابع از تحلیل‌گران، تسترها منتظر رفع باگ‌ها، و غیره. سخت‌ترین کار، انجام <strong>بازبینی کد همکاران (Peer Code Review)</strong> و ارائه بازخورد سازنده است که نتیجه مطلوب بدهد بدون اینکه کسی آزرده شود. به همین دلیل <strong>تست واحد و کدنویسی پاک</strong> باید جدی گرفته شود.</p><hr> <p>به همین دلیل، به‌عنوان تک‌لید، تشویق به <strong>TDD</strong> بسیار مهم است و بهترین راه <strong>الگوبرداری از خودتان</strong> است. حتی برنامه‌نویسان با تجربه ممکن است نسبت به TDD مقاومت داشته باشند، زیرا یادگیری و پیاده‌سازی آن <strong>زمان‌بر</strong> به نظر می‌رسد، مخصوصاً در کدهای پیچیده‌تر. اما اگر می‌خواهید واقعاً مطمئن باشید که پس از نوشتن کد، کیفیت آن تضمین شده و باگ به شما بازنمی‌گردد، <strong>TDD یک روش عالی برای ارتقای مهارت‌های شماست</strong>.</p><hr> <p>همچنین، میزان اهمیت تست واحد به <strong>حساسیت نرم‌افزار</strong> بستگی دارد. باگ در یک اپلیکیشن ساده یادداشت‌برداری فاجعه‌آمیز نیست، اما در <strong>صنعت دفاع یا سلامت</strong> ممکن است عواقب مرگباری داشته باشد. مثال‌ها: موشک هدایت‌شده به سوی غیرنظامیان، تجهیزات پزشکی که به دلیل باگ باعث مرگ بیمار می‌شود یا نرم‌افزار ایمنی هواپیما که باعث سقوط می‌شود.</p><p>هر چه نرم‌افزار حساس‌تر باشد، <strong>تکنیک‌های تست واحد مانند TDD و BDD</strong> اهمیت بیشتری پیدا می‌کنند. هنگام نوشتن نرم‌افزار، تصور کنید اگر شما مشتری بودید و کد خراب شد، چه پیامدی داشت؟ چگونه بر خانواده، دوستان و همکاران تأثیر می‌گذاشت؟ همچنین پیامدهای <strong>اخلاقی و قانونی</strong> را در نظر بگیرید. ‍‍‍</p><hr> <p>با اینکه گفته می‌شود: &quot;برنامه‌نویس نباید کد خود را تست کند&quot;، این تنها زمانی صحیح است که <strong>کد تمام شده و آماده تست قبل از تولید</strong> باشد. در طول برنامه‌نویسی، برنامه‌نویسان همیشه باید <strong>کد خود را تست کنند</strong>.</p><p>تست واحد به شما کمک می‌کند <strong>عادات برنامه‌نویسی پاک</strong> ایجاد کنید: ابتدا تست می‌نویسید، سپس کد کافی برای موفقیت تست اضافه می‌کنید و بعد کد را بازسازی (Refactor) می‌کنید. این چرخه باعث می‌شود کد شما <strong>خواناتر، قابل نگهداری و قابل اعتماد</strong> باشد.</p><hr> <p>در حین نوشتن کد، تست‌ها باید <strong>Atomic یا تک وظیفه‌ای</strong> باشند؛ یعنی هر تست فقط یک ویژگی را بررسی کند. تست باید <strong>تکرارپذیر، قابل اطمینان و سریع (میلی‌ثانیه‌ای)</strong> باشد. کدهای تست طولانی یا وابسته به دیگر تست‌ها مناسب نیستند. اگر نیاز به یک ثانیه یا بیشتر دارند، باید <strong>Refactor یا استفاده از Mock Objects</strong> در نظر گرفته شود. ⏱</p><hr> <p>چرخه‌ی تست واحد شامل مراحل زیر است:</p><ol> <li>نوشتن <strong>کلاس تست و شبه‌کد (Pseudocode)</strong></li><li>نوشتن <strong>متدهای تست که ابتدا Fail می‌شوند</strong></li><li>نوشتن کد کافی برای <strong>Pass شدن تست</strong></li><li><strong>Refactor کد</strong> و ادامه به تست بعدی</li></ol> <hr><p>در ادامه، فصل به بررسی <strong>Use Case، Test Design، Test Case و Test Suite</strong> و نحوه تعامل آن‌ها با یکدیگر می‌پردازد:</p><ul> <li><strong>Use Case:</strong> جریان عملیاتی یک عملیات واحد، مانند افزودن رکورد مشتری.</li><li><strong>Test Design:</strong> شامل یک یا چند <strong>Test Case</strong> برای سناریوهای مختلف Use Case.</li><li><strong>Test Case:</strong> می‌تواند دستی یا خودکار باشد.</li><li><strong>Test Suite:</strong> نرم‌افزاری برای کشف، اجرای تست‌ها و گزارش نتایج به کاربر نهایی.</li></ul> <p>توسعه‌دهندگان باید روی نوشتن و استفاده از <strong>تست واحد خود</strong> تمرکز کنند تا کدهایی که <strong>Fail، Pass و Refactor</strong> می‌شوند، تولید کنند.</p><div align="center"> <p><img src="../../../assets/image/06/Table%206-1.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <h3>**درک ابزارهای تست **</h3><p>در این فصل، ما <strong>تست‌های واحد (Unit Tests)</strong> و <strong>اشیاء جعلی (Mock Objects)</strong> خواهیم نوشت. اما قبل از آن، باید با <strong>ابزارهایی که به‌عنوان برنامه‌نویس C# در دسترس داریم</strong> آشنا شویم.</p><p>ابزارهای تستی که در <strong>Visual Studio</strong> بررسی می‌کنیم عبارتند از: <strong>MSTest، NUnit، Moq و SpecFlow</strong>. هر ابزار تست، یک <strong>کنسول اپلیکیشن</strong> و پروژه تست مربوطه را ایجاد می‌کند.</p><ul> <li><strong>NUnit و MSTest</strong> فریم‌ورک‌های تست واحد هستند. NUnit نسبت به MSTest قدیمی‌تر است و <strong>API کامل‌تر و بالغ‌تری</strong> دارد. شخصاً <strong>NUnit را ترجیح می‌دهم</strong>.</li><li><strong>Moq</strong> با MSTest و NUnit متفاوت است؛ زیرا یک فریم‌ورک تست نیست، بلکه یک <strong>فریم‌ورک Mocking</strong> است. فریم‌ورک Mocking کلاس‌های واقعی پروژه شما را با پیاده‌سازی‌های جعلی (Fake) جایگزین می‌کند تا برای اهداف تست استفاده شود. می‌توان Moq را همراه با MSTest یا NUnit استفاده کرد.</li><li><strong>SpecFlow</strong> یک فریم‌ورک <strong>BDD</strong> است. ابتدا یک <strong>Feature</strong> در فایل Feature می‌نویسید با زبانی که هم کاربر و هم برنامه‌نویس فنی متوجه می‌شوند. سپس یک <strong>Step File</strong> برای آن Feature تولید می‌شود که شامل متدهایی به‌صورت گام‌های لازم برای پیاده‌سازی Feature است.</li></ul> <p>تا پایان این فصل، شما خواهید دانست هر ابزار چه کاری انجام می‌دهد و قادر خواهید بود از آن‌ها در پروژه‌های خود استفاده کنید. پس بیایید با <strong>MSTest</strong> شروع کنیم.</p><hr> <h3>**MSTest **</h3><p>در این بخش، <strong>فریم‌ورک MSTest را نصب و پیکربندی</strong> خواهیم کرد. یک <strong>کلاس تست</strong> با <strong>متدهای تست</strong> خواهیم نوشت و آن را مقداردهی اولیه (Initialize) می‌کنیم. همچنین <strong>Assembly Setup و Cleanup، Class Cleanup، Method Cleanup</strong> و <strong>Assertions</strong> را انجام می‌دهیم.</p><p>برای نصب <strong>MSTest Framework</strong> از <strong>خط فرمان (Command Line)</strong> در Visual Studio، ابتدا باید <strong>Package Manager Console</strong> را از مسیر زیر باز کنید:</p><p><strong>Tools | NuGet Package Manager | Package Manager Console</strong></p><div align="center"> <p><img src="../../../assets/image/06/Table%206-2.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <p>سپس، سه دستور زیر را اجرا کنید تا <strong>فریم‌ورک MSTest نصب شود</strong>:</p><pre class="hljs"><code><span class="hljs-built_in">install-package</span> mstest.testframework
 <span class="hljs-built_in">install-package</span> mstest.testadapter
 <span class="hljs-built_in">install-package</span> microsoft.net.tests.sdk
-</code></pre>
-<hr>
-<p>به‌طور جایگزین، می‌توانید یک پروژه جدید اضافه کنید و گزینه <strong>Unit Test Project (.NET Framework)</strong> را از مسیر <strong>Context | Add</strong> در <strong>Solution Explorer</strong> انتخاب کنید. 🖥️</p>
-<p>در نام‌گذاری پروژه‌های تست، استاندارد پذیرفته‌شده به شکل زیر است:</p>
-<pre class="hljs"><code>&lt;ProjectName&gt;.Tests
-</code></pre>
-<p>این استاندارد کمک می‌کند تا پروژه‌های تست <strong>به‌راحتی با پروژه اصلی مرتبط شوند</strong> و آن‌ها را از پروژه‌ای که تحت تست قرار دارد، متمایز کند. 🧩✅</p>
-<div align="center">
-<p><img src="../../../assets/image/06/Table%206-3.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<h3><strong>کد پیش‌فرض تست واحد در MSTest 🧪</strong></h3>
-<p>کدی که در ادامه می‌بینید، <strong>کد پیش‌فرض تست واحد</strong> است که وقتی یک <strong>پروژه MSTest</strong> به <strong>Solution</strong> اضافه می‌کنید، تولید می‌شود. همان‌طور که مشاهده می‌کنید، این کلاس <strong>Namespace</strong> زیر را وارد می‌کند:</p>
-<pre class="hljs"><code><span class="hljs-keyword">using</span> Microsoft.VisualStudio.TestTools.UnitTesting;
-</code></pre>
-<ul>
-<li><strong>[TestClass]</strong> مشخص می‌کند که این کلاس یک <strong>کلاس تست</strong> برای <strong>MS Test Framework</strong> است.</li>
-<li><strong>[TestMethod]</strong> مشخص می‌کند که متد یک <strong>متد تست</strong> است. تمام کلاس‌هایی که این ویژگی را دارند، در <strong>Test Explorer</strong> ظاهر می‌شوند.</li>
-</ul>
-<blockquote>
-<p>ویژگی‌های <strong>[TestClass] و [TestMethod] اجباری هستند</strong>.</p>
-</blockquote>
-<p>نمونه کد پیش‌فرض:</p>
-<pre class="hljs"><code><span class="hljs-keyword">namespace</span> <span class="hljs-title">CH05_MSTestUnitTesting.Tests</span>
+</code></pre> <hr><p>به‌طور جایگزین، می‌توانید یک پروژه جدید اضافه کنید و گزینه <strong>Unit Test Project (.NET Framework)</strong> را از مسیر <strong>Context | Add</strong> در <strong>Solution Explorer</strong> انتخاب کنید.</p><p>در نام‌گذاری پروژه‌های تست، استاندارد پذیرفته‌شده به شکل زیر است:</p><pre class="hljs"><code>&lt;ProjectName&gt;.Tests
+</code></pre> <p>این استاندارد کمک می‌کند تا پروژه‌های تست <strong>به‌راحتی با پروژه اصلی مرتبط شوند</strong> و آن‌ها را از پروژه‌ای که تحت تست قرار دارد، متمایز کند.</p><div align="center"> <p><img src="../../../assets/image/06/Table%206-3.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <h3>**کد پیش‌فرض تست واحد در MSTest **</h3><p>کدی که در ادامه می‌بینید، <strong>کد پیش‌فرض تست واحد</strong> است که وقتی یک <strong>پروژه MSTest</strong> به <strong>Solution</strong> اضافه می‌کنید، تولید می‌شود. همان‌طور که مشاهده می‌کنید، این کلاس <strong>Namespace</strong> زیر را وارد می‌کند:</p><pre class="hljs"><code><span class="hljs-keyword">using</span> Microsoft.VisualStudio.TestTools.UnitTesting;
+</code></pre> <ul><li><strong>[TestClass]</strong> مشخص می‌کند که این کلاس یک <strong>کلاس تست</strong> برای <strong>MS Test Framework</strong> است.</li><li><strong>[TestMethod]</strong> مشخص می‌کند که متد یک <strong>متد تست</strong> است. تمام کلاس‌هایی که این ویژگی را دارند، در <strong>Test Explorer</strong> ظاهر می‌شوند.</li></ul> <blockquote><p>ویژگی‌های <strong>[TestClass] و [TestMethod] اجباری هستند</strong>.</p></blockquote> <p>نمونه کد پیش‌فرض:</p><pre class="hljs"><code><span class="hljs-keyword">namespace</span> <span class="hljs-title">CH05_MSTestUnitTesting.Tests</span>
 {
     [<span class="hljs-meta">TestClass</span>]
     <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">UnitTest1</span>
@@ -189,68 +28,39 @@
         }
     }
 }
-</code></pre>
-<hr>
-<h3><strong>ویژگی‌ها و متدهای اختیاری برای workflow کامل تست</strong></h3>
-<p>علاوه بر موارد بالا، می‌توان ویژگی‌های اختیاری زیر را نیز ترکیب کرد:</p>
-<ul>
-<li><code>[AssemblyInitialize]</code></li>
-<li><code>[AssemblyCleanup]</code></li>
-<li><code>[ClassInitialize]</code></li>
-<li><code>[ClassCleanup]</code></li>
-<li><code>[TestInitialize]</code></li>
-<li><code>[TestCleanup]</code></li>
-</ul>
-<blockquote>
-<p>همان‌طور که از نام آن‌ها پیداست، ویژگی‌های <strong>Initialize</strong> برای انجام مقداردهی اولیه در سطح <strong>Assembly، Class و Method</strong> قبل از اجرای تست‌ها استفاده می‌شوند. ویژگی‌های <strong>Cleanup</strong> نیز بعد از اجرای تست‌ها برای انجام عملیات پاک‌سازی مورد نیاز اجرا می‌شوند.</p>
-</blockquote>
-<hr>
-<h3><strong>متد کمکی برای جدا کردن خروجی تست‌ها</strong></h3>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">WriteSeparatorLine</span>()</span>
+</code></pre> <hr><h3><strong>ویژگی‌ها و متدهای اختیاری برای workflow کامل تست</strong></h3><p>علاوه بر موارد بالا، می‌توان ویژگی‌های اختیاری زیر را نیز ترکیب کرد:</p><ul> <li><code>[AssemblyInitialize]</code></li><li><code>[AssemblyCleanup]</code></li><li><code>[ClassInitialize]</code></li><li><code>[ClassCleanup]</code></li><li><code>[TestInitialize]</code></li><li><code>[TestCleanup]</code></li></ul> <blockquote><p>همان‌طور که از نام آن‌ها پیداست، ویژگی‌های <strong>Initialize</strong> برای انجام مقداردهی اولیه در سطح <strong>Assembly، Class و Method</strong> قبل از اجرای تست‌ها استفاده می‌شوند. ویژگی‌های <strong>Cleanup</strong> نیز بعد از اجرای تست‌ها برای انجام عملیات پاک‌سازی مورد نیاز اجرا می‌شوند.</p></blockquote> <hr><h3><strong>متد کمکی برای جدا کردن خروجی تست‌ها</strong></h3><pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">WriteSeparatorLine</span>()</span>
 {
     Debug.WriteLine(<span class="hljs-string">&quot;--------------------------------------------------&quot;</span>);
 }
-</code></pre>
-<hr>
-<h3><strong>مثال‌های Initialize و Cleanup</strong></h3>
-<h4><strong>AssemblyInitialize</strong></h4>
-<pre class="hljs"><code>[<span class="hljs-meta">AssemblyInitialize</span>]
+</code></pre> <hr><h3><strong>مثال‌های Initialize و Cleanup</strong></h3><h4><strong>AssemblyInitialize</strong></h4><pre class="hljs"><code>[<span class="hljs-meta">AssemblyInitialize</span>]
 <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">AssemblyInit</span>(<span class="hljs-params">TestContext context</span>)</span>
 {
     WriteSeparatorLine();
     Debug.WriteLine(<span class="hljs-string">&quot;Optional: AssemblyInitialize&quot;</span>);
     Debug.WriteLine(<span class="hljs-string">&quot;Executes once before the test run.&quot;</span>);
 }
-</code></pre>
-<h4><strong>ClassInitialize</strong></h4>
-<pre class="hljs"><code>[<span class="hljs-meta">ClassInitialize</span>]
+</code></pre> <h4><strong>ClassInitialize</strong></h4><pre class="hljs"><code>[<span class="hljs-meta">ClassInitialize</span>]
 <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">TestFixtureSetup</span>(<span class="hljs-params">TestContext context</span>)</span>
 {
     WriteSeparatorLine();
     Console.WriteLine(<span class="hljs-string">&quot;Optional: ClassInitialize&quot;</span>);
     Console.WriteLine(<span class="hljs-string">&quot;Executes once for the test class.&quot;</span>);
 }
-</code></pre>
-<h4><strong>TestInitialize</strong></h4>
-<pre class="hljs"><code>[<span class="hljs-meta">TestInitialize</span>]
+</code></pre> <h4><strong>TestInitialize</strong></h4><pre class="hljs"><code>[<span class="hljs-meta">TestInitialize</span>]
 <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Setup</span>()</span>
 {
     WriteSeparatorLine();
     Debug.WriteLine(<span class="hljs-string">&quot;Optional: TestInitialize&quot;</span>);
     Debug.WriteLine(<span class="hljs-string">&quot;Runs before each test.&quot;</span>);
 }
-</code></pre>
-<h4><strong>AssemblyCleanup</strong></h4>
-<pre class="hljs"><code>[<span class="hljs-meta">AssemblyCleanup</span>]
+</code></pre> <h4><strong>AssemblyCleanup</strong></h4><pre class="hljs"><code>[<span class="hljs-meta">AssemblyCleanup</span>]
 <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">AssemblyCleanup</span>()</span>
 {
     WriteSeparatorLine();
     Debug.WriteLine(<span class="hljs-string">&quot;Optional: AssemblyCleanup&quot;</span>);
     Debug.WriteLine(<span class="hljs-string">&quot;Executes once after the test run.&quot;</span>);
 }
-</code></pre>
-<h4><strong>ClassCleanup</strong></h4>
-<pre class="hljs"><code>[<span class="hljs-meta">ClassCleanup</span>]
+</code></pre> <h4><strong>ClassCleanup</strong></h4><pre class="hljs"><code>[<span class="hljs-meta">ClassCleanup</span>]
 <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">TestFixtureTearDown</span>()</span>
 {
     WriteSeparatorLine();
@@ -258,9 +68,7 @@
     Debug.WriteLine(<span class="hljs-string">&quot;Runs once after all tests in the class have been executed.&quot;</span>);
     Debug.WriteLine(<span class="hljs-string">&quot;Not guaranteed that it executes instantly after all tests the class have executed.&quot;</span>);
 }
-</code></pre>
-<h4><strong>TestCleanup</strong></h4>
-<pre class="hljs"><code>[<span class="hljs-meta">TestCleanup</span>]
+</code></pre> <h4><strong>TestCleanup</strong></h4><pre class="hljs"><code>[<span class="hljs-meta">TestCleanup</span>]
 <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">TearDown</span>()</span>
 {
     WriteSeparatorLine();
@@ -268,20 +76,7 @@
     Debug.WriteLine(<span class="hljs-string">&quot;Runs after each test.&quot;</span>);
     Assert.Fail();
 }
-</code></pre>
-<hr>
-<p>پس از قرار دادن این کد، <strong>Solution</strong> را Build کنید. سپس از منوی <strong>Test</strong> گزینه <strong>Test Explorer</strong> را انتخاب کنید. در <strong>Test Explorer</strong> می‌توانید تست‌ها را مشاهده کنید، همان‌طور که در تصویر نشان داده شده، هنوز هیچ تستی اجرا نشده است. ✅</p>
-<div align="center">
-<p><img src="../../../assets/image/06/Table%206-4.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<p>پس بیایید تنها تست خود را اجرا کنیم. 😬</p>
-<p>وای نه! تست ما <strong>Fail شد</strong>، همان‌طور که در تصویر زیر مشاهده می‌کنید: ❌</p>
-<p>این همان مرحله‌ای است که <strong>چرخه TDD</strong> آغاز می‌شود: ابتدا تست‌ها Fail می‌شوند، سپس کد کافی نوشته می‌شود تا تست‌ها <strong>Pass</strong> شوند، و در نهایت کد <strong>Refactor</strong> می‌شود. 🔄</p>
-<div align="center">
-<p><img src="../../../assets/image/06/Table%206-5.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<p>کد <strong>TestMethod1()</strong> را به شکل زیر به‌روزرسانی کنید و سپس تست را دوباره اجرا کنید:</p>
-<pre class="hljs"><code>[<span class="hljs-meta">TestMethod</span>]
+</code></pre> <hr><p>پس از قرار دادن این کد، <strong>Solution</strong> را Build کنید. سپس از منوی <strong>Test</strong> گزینه <strong>Test Explorer</strong> را انتخاب کنید. در <strong>Test Explorer</strong> می‌توانید تست‌ها را مشاهده کنید، همان‌طور که در تصویر نشان داده شده، هنوز هیچ تستی اجرا نشده است.</p><div align="center"> <p><img src="../../../assets/image/06/Table%206-4.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <p>پس بیایید تنها تست خود را اجرا کنیم.</p><p>وای نه! تست ما <strong>Fail شد</strong>، همان‌طور که در تصویر زیر مشاهده می‌کنید:</p><p>این همان مرحله‌ای است که <strong>چرخه TDD</strong> آغاز می‌شود: ابتدا تست‌ها Fail می‌شوند، سپس کد کافی نوشته می‌شود تا تست‌ها <strong>Pass</strong> شوند، و در نهایت کد <strong>Refactor</strong> می‌شود.</p><div align="center"> <p><img src="../../../assets/image/06/Table%206-5.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <p>کد <strong>TestMethod1()</strong> را به شکل زیر به‌روزرسانی کنید و سپس تست را دوباره اجرا کنید:</p><pre class="hljs"><code>[<span class="hljs-meta">TestMethod</span>]
 <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">TestMethod1</span>()</span>
 {
     WriteSeparatorLine();
@@ -290,45 +85,7 @@
     Debug.WriteLine(<span class="hljs-string">&quot;This method will appear in the test list.&quot;</span>);
     Assert.IsTrue(<span class="hljs-literal">true</span>);
 }
-</code></pre>
-<p>پس از این تغییر، مشاهده خواهید کرد که <strong>تست در Test Explorer با موفقیت Pass شد</strong> ✅، همان‌طور که در تصویر بعدی نمایش داده شده است.</p>
-<p>این نشان‌دهنده مرحله دوم چرخه <strong>TDD</strong> است: نوشتن کدی که تست‌ها را پاس می‌کند. 🔄</p>
-<div align="center">
-<p><img src="../../../assets/image/06/Table%206-6.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<p>پس، همان‌طور که از <strong>تصاویر قبلی</strong> مشاهده می‌کنید:</p>
-<ul>
-<li><strong>تست‌هایی که اجرا نشده‌اند</strong> آبی هستند 🔵</li>
-<li><strong>تست‌هایی که Fail شده‌اند</strong> قرمز هستند 🔴</li>
-<li><strong>تست‌هایی که Pass شده‌اند</strong> سبز هستند ✅</li>
-</ul>
-<p>برای مشاهده جزئیات بیشتر، مسیر زیر را دنبال کنید:<br>
-<strong>Tools | Options | Debugging | General</strong> و گزینه <strong>Redirect all Output Window text to the Immediate Window</strong> را انتخاب کنید.<br>
-سپس به مسیر <strong>Run | Debug All Tests</strong> بروید.</p>
-<p>هنگامی که تست‌ها اجرا می‌شوند و خروجی در <strong>Immediate Window</strong> چاپ می‌شود، به‌وضوح می‌توانید <strong>ترتیب اجرای Attributeها</strong> را مشاهده کنید.<br>
-تصویر زیر خروجی متدهای تست ما را نشان می‌دهد، که ترتیب و عملکرد هر Attribute مشخص است. 🖥️🧪</p>
-<div align="center">
-<p><img src="../../../assets/image/06/Table%206-7.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<p>همان‌طور که تاکنون مشاهده کرده‌اید، ما از دو متد <strong>Assert</strong> استفاده کرده‌ایم:</p>
-<ul>
-<li><code>Assert.Fail()</code></li>
-<li><code>Assert.IsTrue(true)</code> ✅</li>
-</ul>
-<p>کلاس <strong>Assert</strong> بسیار کاربردی است و بنابراین آشنایی با <strong>متدهای موجود در این کلاس برای تست واحد</strong> بسیار مفید است.</p>
-<p>متدهای قابل استفاده در کلاس Assert به شرح زیر هستند: 📋</p>
-<p>(در ادامه فصل، هر یک از این متدها با توضیح کاربرد و مثال ارائه می‌شوند تا بتوانید از آن‌ها در <strong>Unit Testing</strong> استفاده کنید.)</p>
-<div align="center">
-<p><img src="../../../assets/image/06/Table%206-8.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<p>حالا که با <strong>MSTest</strong> آشنا شدیم، زمان آن رسیده که <strong>NUnit</strong> را بررسی کنیم. 🧪</p>
-<hr>
-<h3><strong>NUnit</strong></h3>
-<p>اگر <strong>NUnit</strong> برای Visual Studio نصب نشده است، آن را از مسیر زیر دانلود و نصب کنید:<br>
-<strong>Extensions | Manage Extensions</strong></p>
-<p>سپس یک <strong>NUnit Test Project (.NET Core)</strong> جدید ایجاد کنید.</p>
-<p>کد زیر کلاس پیش‌فرضی است که NUnit ایجاد می‌کند، به نام <strong>Tests</strong>:</p>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Tests</span>
+</code></pre> <p>پس از این تغییر، مشاهده خواهید کرد که <strong>تست در Test Explorer با موفقیت Pass شد</strong> ، همان‌طور که در تصویر بعدی نمایش داده شده است.</p><p>این نشان‌دهنده مرحله دوم چرخه <strong>TDD</strong> است: نوشتن کدی که تست‌ها را پاس می‌کند.</p><div align="center"> <p><img src="../../../assets/image/06/Table%206-6.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <p>پس، همان‌طور که از <strong>تصاویر قبلی</strong> مشاهده می‌کنید:</p><ul> <li><strong>تست‌هایی که اجرا نشده‌اند</strong> آبی هستند</li><li><strong>تست‌هایی که Fail شده‌اند</strong> قرمز هستند</li><li><strong>تست‌هایی که Pass شده‌اند</strong> سبز هستند</li></ul> <p>برای مشاهده جزئیات بیشتر، مسیر زیر را دنبال کنید:<br><strong>Tools | Options | Debugging | General</strong> و گزینه <strong>Redirect all Output Window text to the Immediate Window</strong> را انتخاب کنید.<br> سپس به مسیر <strong>Run | Debug All Tests</strong> بروید.</p><p>هنگامی که تست‌ها اجرا می‌شوند و خروجی در <strong>Immediate Window</strong> چاپ می‌شود، به‌وضوح می‌توانید <strong>ترتیب اجرای Attributeها</strong> را مشاهده کنید.<br> تصویر زیر خروجی متدهای تست ما را نشان می‌دهد، که ترتیب و عملکرد هر Attribute مشخص است.</p><div align="center"> <p><img src="../../../assets/image/06/Table%206-7.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <p>همان‌طور که تاکنون مشاهده کرده‌اید، ما از دو متد <strong>Assert</strong> استفاده کرده‌ایم:</p><ul> <li><code>Assert.Fail()</code></li><li><code>Assert.IsTrue(true)</code></li></ul> <p>کلاس <strong>Assert</strong> بسیار کاربردی است و بنابراین آشنایی با <strong>متدهای موجود در این کلاس برای تست واحد</strong> بسیار مفید است.</p><p>متدهای قابل استفاده در کلاس Assert به شرح زیر هستند:</p><p>(در ادامه فصل، هر یک از این متدها با توضیح کاربرد و مثال ارائه می‌شوند تا بتوانید از آن‌ها در <strong>Unit Testing</strong> استفاده کنید.)</p><div align="center"> <p><img src="../../../assets/image/06/Table%206-8.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <p>حالا که با <strong>MSTest</strong> آشنا شدیم، زمان آن رسیده که <strong>NUnit</strong> را بررسی کنیم.</p><hr> <h3><strong>NUnit</strong></h3><p>اگر <strong>NUnit</strong> برای Visual Studio نصب نشده است، آن را از مسیر زیر دانلود و نصب کنید:<br><strong>Extensions | Manage Extensions</strong></p><p>سپس یک <strong>NUnit Test Project (.NET Core)</strong> جدید ایجاد کنید.</p><p>کد زیر کلاس پیش‌فرضی است که NUnit ایجاد می‌کند، به نام <strong>Tests</strong>:</p><pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Tests</span>
 {
     [<span class="hljs-meta">SetUp</span>]
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Setup</span>()</span>
@@ -341,23 +98,7 @@
         Assert.Pass();
     }
 }
-</code></pre>
-<hr>
-<p>همان‌طور که در متد <strong>Test1</strong> مشاهده می‌کنید، متدهای تست نیز از کلاس <strong>Assert</strong> استفاده می‌کنند، درست مانند <strong>MSTest</strong> برای بررسی Assertions در کد.</p>
-<p>کلاس <strong>Assert در NUnit</strong> متدهای مختلفی را در اختیار ما قرار می‌دهد. توجه داشته باشید که متدهایی که با <strong>[NUnit]</strong> مشخص شده‌اند، اختصاصی <strong>NUnit</strong> هستند و سایر متدها در <strong>MSTest</strong> نیز موجودند. 🛠️</p>
-<div align="center">
-<p><img src="../../../assets/image/06/Table%206-9.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<h3><strong>چرخه حیات NUnit 🌀</strong></h3>
-<p>چرخه حیات <strong>NUnit</strong> به شکل زیر است:</p>
-<ol>
-<li><strong>TestFixtureSetup</strong> قبل از اجرای اولین <strong>SetUp</strong> اجرا می‌شود (یک بار).</li>
-<li><strong>SetUp</strong> قبل از هر تست اجرا می‌شود.</li>
-<li>بعد از اجرای هر تست، <strong>TearDown</strong> اجرا می‌شود.</li>
-<li>در نهایت، <strong>TestFixtureTearDown</strong> بعد از آخرین <strong>TearDown</strong> اجرا می‌شود (یک بار).</li>
-</ol>
-<p>حالا کلاس <strong>Tests</strong> را به‌روزرسانی می‌کنیم تا بتوانیم چرخه حیات NUnit را در عمل مشاهده کنیم:</p>
-<pre class="hljs"><code><span class="hljs-keyword">using</span> System;
+</code></pre> <hr><p>همان‌طور که در متد <strong>Test1</strong> مشاهده می‌کنید، متدهای تست نیز از کلاس <strong>Assert</strong> استفاده می‌کنند، درست مانند <strong>MSTest</strong> برای بررسی Assertions در کد.</p><p>کلاس <strong>Assert در NUnit</strong> متدهای مختلفی را در اختیار ما قرار می‌دهد. توجه داشته باشید که متدهایی که با <strong>[NUnit]</strong> مشخص شده‌اند، اختصاصی <strong>NUnit</strong> هستند و سایر متدها در <strong>MSTest</strong> نیز موجودند.</p><div align="center"> <p><img src="../../../assets/image/06/Table%206-9.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <h3>**چرخه حیات NUnit **</h3><p>چرخه حیات <strong>NUnit</strong> به شکل زیر است:</p><ol> <li><strong>TestFixtureSetup</strong> قبل از اجرای اولین <strong>SetUp</strong> اجرا می‌شود (یک بار).</li><li><strong>SetUp</strong> قبل از هر تست اجرا می‌شود.</li><li>بعد از اجرای هر تست، <strong>TearDown</strong> اجرا می‌شود.</li><li>در نهایت، <strong>TestFixtureTearDown</strong> بعد از آخرین <strong>TearDown</strong> اجرا می‌شود (یک بار).</li></ol> <p>حالا کلاس <strong>Tests</strong> را به‌روزرسانی می‌کنیم تا بتوانیم چرخه حیات NUnit را در عمل مشاهده کنیم:</p><pre class="hljs"><code><span class="hljs-keyword">using</span> System;
 <span class="hljs-keyword">using</span> System.Diagnostics;
 <span class="hljs-keyword">using</span> NUnit.Framework;
 
@@ -448,67 +189,7 @@
         }
     }
 }
-</code></pre>
-<hr>
-<ul>
-<li>ما <strong>[TestFixture]</strong> را به کلاس اضافه کرده‌ایم و رابط <strong>IDisposable</strong> را پیاده‌سازی کرده‌ایم.</li>
-<li>متد <strong>WriteSeparatorLine()</strong> برای جدا کردن خروجی دیباگ استفاده می‌شود.</li>
-<li><strong>[OneTimeSetUp]</strong> فقط یک بار قبل از تمامی تست‌ها اجرا می‌شود.</li>
-<li><strong>[OneTimeTearDown]</strong> بعد از اجرای همه تست‌ها و قبل از Dispose شدن کلاس اجرا می‌شود.</li>
-<li><strong>[SetUp]</strong> قبل از هر تست و <strong>[TearDown]</strong> بعد از هر تست اجرا می‌شوند.</li>
-</ul>
-<hr>
-<h3>ترتیب اجرای تست‌ها با ویژگی [Order]</h3>
-<ul>
-<li><strong>Test1</strong>: [Order(0)] → Pass ✅</li>
-<li><strong>Test2</strong>: [Order(1)] → Inconclusive ⚠️</li>
-<li><strong>Test3</strong>: [Order(2)] → Fail ❌</li>
-</ul>
-<hr>
-<p>وقتی تمام تست‌ها را دیباگ می‌کنید، خروجی <strong>Immediate Window</strong> ترتیب اجرای متدها و چرخه حیات NUnit را نشان خواهد داد. 🖥️🔄</p>
-<div align="center">
-<p><img src="../../../assets/image/06/Table%206-10.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<p>اکنون شما با <strong>MSTest</strong> و <strong>NUnit</strong> آشنا شده‌اید و چرخه حیات تست هر فریم‌ورک را در عمل دیده‌اید. 🧪<br>
-حالا زمان آن رسیده که به <strong>Moq</strong> نگاهی بیندازیم. 👀</p>
-<p>همان‌طور که از جدول متدهای <strong>NUnit</strong> در مقایسه با جدول متدهای <strong>MSTest</strong> مشاهده می‌کنید، <strong>NUnit</strong> امکان تست واحد دقیق‌تر و با عملکرد بهتر نسبت به MSTest را فراهم می‌کند، به همین دلیل بیشتر از MSTest مورد استفاده قرار می‌گیرد. ⚡</p>
-<hr>
-<h3><strong>Moq</strong></h3>
-<p>یک <strong>Unit Test</strong> باید فقط <strong>متد تحت تست</strong> را بررسی کند.<br>
-به نمودار زیر توجه کنید: 📊</p>
-<p>اگر متد تحت تست، متدهای دیگری را صدا بزند—چه در همان کلاس و چه در کلاس‌های دیگر—در این صورت <strong>نه تنها متد تحت تست، بلکه متدهای دیگر نیز مورد تست قرار می‌گیرند</strong>.</p>
-<p>این همان جایی است که <strong>Moq</strong> وارد عمل می‌شود و به شما اجازه می‌دهد <strong>متدهای وابسته را به صورت شبیه‌سازی‌شده (Mock) جایگزین کنید</strong> تا فقط متد اصلی تحت تست باقی بماند. 🎯</p>
-<div align="center">
-<p><img src="../../../assets/image/06/Table%206-11.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<h3><strong>Moq – استفاده از اشیاء شبیه‌سازی‌شده (Mock Objects) 🛠️</strong></h3>
-<p>یکی از راه‌های حل مشکل تست متدهایی که به متدهای دیگر وابسته‌اند، استفاده از <strong>اشیاء شبیه‌سازی‌شده (mock/fake objects)</strong> است. 🎯</p>
-<ul>
-<li>یک <strong>mock object</strong> فقط <strong>متدی را که می‌خواهید تست کنید</strong> بررسی می‌کند.</li>
-<li>شما می‌توانید رفتار mock را به هر نحوی که می‌خواهید تنظیم کنید.</li>
-<li>اگر خودتان بخواهید mock بسازید، خیلی زود متوجه می‌شوید که کار سخت و زمان‌بری است؛ مخصوصاً در پروژه‌های حساس به زمان و وقتی کد پیچیده می‌شود، ساخت mock پیچیده‌تر خواهد شد.</li>
-</ul>
-<p>به همین دلیل معمولاً از <strong>فریم‌ورک‌های Mock</strong> استفاده می‌کنیم. دو نمونه معروف برای <strong>.NET Framework</strong> عبارت‌اند از <strong>Rhino Mocks</strong> و <strong>Moq</strong>. ✅<br>
-در این فصل، فقط با <strong>Moq</strong> کار می‌کنیم چون نسبت به Rhino Mocks ساده‌تر است. 🌟</p>
-<hr>
-<h3>روند تست با Moq</h3>
-<ol>
-<li>ابتدا <strong>mock object</strong> را ایجاد می‌کنیم.</li>
-<li>رفتار آن را پیکربندی می‌کنیم.</li>
-<li>بررسی می‌کنیم که پیکربندی درست کار می‌کند و mock فراخوانی شده است.</li>
-</ol>
-<blockquote>
-<p>نکته: <strong>Moq فقط اشیاء شبیه‌سازی‌شده تولید می‌کند و خودش کد را تست نمی‌کند</strong>. هنوز به یک <strong>فریم‌ورک تست</strong> مانند <strong>NUnit</strong> نیاز دارید. 🧪</p>
-</blockquote>
-<hr>
-<h3>مثال عملی: ترکیب Moq و NUnit</h3>
-<ol>
-<li>یک <strong>Console Application</strong> جدید ایجاد کرده و نام آن را <code>CH06_Moq</code> بگذارید.</li>
-<li>اینترفیس و کلاس‌های زیر را اضافه کنید: <strong>IFoo, Bar, Baz, UnitTests</strong>.</li>
-<li>از <strong>NuGet Package Manager</strong>، بسته‌های <strong>Moq, NUnit, NUnit3TestAdapter</strong> را نصب کنید.</li>
-</ol>
-<h4>کلاس Bar</h4>
-<pre class="hljs"><code><span class="hljs-keyword">namespace</span> <span class="hljs-title">CH06_Moq</span>
+</code></pre> <hr><ul> <li>ما <strong>[TestFixture]</strong> را به کلاس اضافه کرده‌ایم و رابط <strong>IDisposable</strong> را پیاده‌سازی کرده‌ایم.</li><li>متد <strong>WriteSeparatorLine()</strong> برای جدا کردن خروجی دیباگ استفاده می‌شود.</li><li><strong>[OneTimeSetUp]</strong> فقط یک بار قبل از تمامی تست‌ها اجرا می‌شود.</li><li><strong>[OneTimeTearDown]</strong> بعد از اجرای همه تست‌ها و قبل از Dispose شدن کلاس اجرا می‌شود.</li><li><strong>[SetUp]</strong> قبل از هر تست و <strong>[TearDown]</strong> بعد از هر تست اجرا می‌شوند.</li></ul> <hr><h3>ترتیب اجرای تست‌ها با ویژگی [Order]</h3><ul> <li><strong>Test1</strong>: [Order(0)] → Pass</li><li><strong>Test2</strong>: [Order(1)] → Inconclusive</li><li><strong>Test3</strong>: [Order(2)] → Fail</li></ul> <hr><p>وقتی تمام تست‌ها را دیباگ می‌کنید، خروجی <strong>Immediate Window</strong> ترتیب اجرای متدها و چرخه حیات NUnit را نشان خواهد داد.</p><div align="center"> <p><img src="../../../assets/image/06/Table%206-10.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <p>اکنون شما با <strong>MSTest</strong> و <strong>NUnit</strong> آشنا شده‌اید و چرخه حیات تست هر فریم‌ورک را در عمل دیده‌اید.<br> حالا زمان آن رسیده که به <strong>Moq</strong> نگاهی بیندازیم.</p><p>همان‌طور که از جدول متدهای <strong>NUnit</strong> در مقایسه با جدول متدهای <strong>MSTest</strong> مشاهده می‌کنید، <strong>NUnit</strong> امکان تست واحد دقیق‌تر و با عملکرد بهتر نسبت به MSTest را فراهم می‌کند، به همین دلیل بیشتر از MSTest مورد استفاده قرار می‌گیرد.</p><hr> <h3><strong>Moq</strong></h3><p>یک <strong>Unit Test</strong> باید فقط <strong>متد تحت تست</strong> را بررسی کند.<br> به نمودار زیر توجه کنید:</p><p>اگر متد تحت تست، متدهای دیگری را صدا بزند—چه در همان کلاس و چه در کلاس‌های دیگر—در این صورت <strong>نه تنها متد تحت تست، بلکه متدهای دیگر نیز مورد تست قرار می‌گیرند</strong>.</p><p>این همان جایی است که <strong>Moq</strong> وارد عمل می‌شود و به شما اجازه می‌دهد <strong>متدهای وابسته را به صورت شبیه‌سازی‌شده (Mock) جایگزین کنید</strong> تا فقط متد اصلی تحت تست باقی بماند.</p><div align="center"> <p><img src="../../../assets/image/06/Table%206-11.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <h3>**Moq – استفاده از اشیاء شبیه‌سازی‌شده (Mock Objects) **</h3><p>یکی از راه‌های حل مشکل تست متدهایی که به متدهای دیگر وابسته‌اند، استفاده از <strong>اشیاء شبیه‌سازی‌شده (mock/fake objects)</strong> است.</p><ul> <li>یک <strong>mock object</strong> فقط <strong>متدی را که می‌خواهید تست کنید</strong> بررسی می‌کند.</li><li>شما می‌توانید رفتار mock را به هر نحوی که می‌خواهید تنظیم کنید.</li><li>اگر خودتان بخواهید mock بسازید، خیلی زود متوجه می‌شوید که کار سخت و زمان‌بری است؛ مخصوصاً در پروژه‌های حساس به زمان و وقتی کد پیچیده می‌شود، ساخت mock پیچیده‌تر خواهد شد.</li></ul> <p>به همین دلیل معمولاً از <strong>فریم‌ورک‌های Mock</strong> استفاده می‌کنیم. دو نمونه معروف برای <strong>.NET Framework</strong> عبارت‌اند از <strong>Rhino Mocks</strong> و <strong>Moq</strong>.<br> در این فصل، فقط با <strong>Moq</strong> کار می‌کنیم چون نسبت به Rhino Mocks ساده‌تر است.</p><hr> <h3>روند تست با Moq</h3><ol> <li>ابتدا <strong>mock object</strong> را ایجاد می‌کنیم.</li><li>رفتار آن را پیکربندی می‌کنیم.</li><li>بررسی می‌کنیم که پیکربندی درست کار می‌کند و mock فراخوانی شده است.</li></ol> <blockquote><p>نکته: <strong>Moq فقط اشیاء شبیه‌سازی‌شده تولید می‌کند و خودش کد را تست نمی‌کند</strong>. هنوز به یک <strong>فریم‌ورک تست</strong> مانند <strong>NUnit</strong> نیاز دارید.</p></blockquote> <hr><h3>مثال عملی: ترکیب Moq و NUnit</h3><ol> <li>یک <strong>Console Application</strong> جدید ایجاد کرده و نام آن را <code>CH06_Moq</code> بگذارید.</li><li>اینترفیس و کلاس‌های زیر را اضافه کنید: <strong>IFoo, Bar, Baz, UnitTests</strong>.</li><li>از <strong>NuGet Package Manager</strong>، بسته‌های <strong>Moq, NUnit, NUnit3TestAdapter</strong> را نصب کنید.</li></ol> <h4>کلاس Bar</h4><pre class="hljs"><code><span class="hljs-keyword">namespace</span> <span class="hljs-title">CH06_Moq</span>
 {
     <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Bar</span>
     {
@@ -516,24 +197,14 @@
         <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">virtual</span> <span class="hljs-built_in">bool</span> <span class="hljs-title">Submit</span>()</span> { <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>; }
     }
 }
-</code></pre>
-<ul>
-<li>Bar شامل یک <strong>property مجازی از نوع Baz</strong> و یک <strong>متد مجازی Submit()</strong> است که مقدار <code>false</code> برمی‌گرداند.</li>
-</ul>
-<h4>کلاس Baz</h4>
-<pre class="hljs"><code><span class="hljs-keyword">namespace</span> <span class="hljs-title">CH06_Moq</span>
+</code></pre> <ul><li>Bar شامل یک <strong>property مجازی از نوع Baz</strong> و یک <strong>متد مجازی Submit()</strong> است که مقدار <code>false</code> برمی‌گرداند.</li></ul> <h4>کلاس Baz</h4><pre class="hljs"><code><span class="hljs-keyword">namespace</span> <span class="hljs-title">CH06_Moq</span>
 {
     <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Baz</span>
     {
         <span class="hljs-keyword">public</span> <span class="hljs-keyword">virtual</span> <span class="hljs-built_in">string</span> Name { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">set</span>; }
     }
 }
-</code></pre>
-<ul>
-<li>Baz فقط یک property مجازی از نوع <strong>string</strong> دارد به نام <strong>Name</strong>.</li>
-</ul>
-<h4>اینترفیس IFoo</h4>
-<pre class="hljs"><code><span class="hljs-keyword">namespace</span> <span class="hljs-title">CH06_Moq</span>
+</code></pre> <ul><li>Baz فقط یک property مجازی از نوع <strong>string</strong> دارد به نام <strong>Name</strong>.</li></ul> <h4>اینترفیس IFoo</h4><pre class="hljs"><code><span class="hljs-keyword">namespace</span> <span class="hljs-title">CH06_Moq</span>
 {
     <span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title">IFoo</span>
     {
@@ -549,13 +220,7 @@
         <span class="hljs-function"><span class="hljs-built_in">bool</span> <span class="hljs-title">Add</span>(<span class="hljs-params"><span class="hljs-built_in">int</span> <span class="hljs-keyword">value</span></span>)</span>;
     }
 }
-</code></pre>
-<ul>
-<li>این اینترفیس شامل چندین property و متد است و ارجاعی به کلاس <strong>Bar</strong> دارد، که خود Bar هم ارجاع به Baz دارد.</li>
-</ul>
-<hr>
-<h3>کلاس UnitTests برای NUnit و Moq</h3>
-<pre class="hljs"><code><span class="hljs-keyword">using</span> Moq;
+</code></pre> <ul><li>این اینترفیس شامل چندین property و متد است و ارجاعی به کلاس <strong>Bar</strong> دارد، که خود Bar هم ارجاع به Baz دارد.</li></ul> <hr><h3>کلاس UnitTests برای NUnit و Moq</h3><pre class="hljs"><code><span class="hljs-keyword">using</span> Moq;
 <span class="hljs-keyword">using</span> NUnit.Framework;
 <span class="hljs-keyword">using</span> System;
 
@@ -566,10 +231,7 @@
     {
     }
 }
-</code></pre>
-<hr>
-<h3>متد AssertThrows</h3>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-built_in">bool</span> <span class="hljs-title">AssertThrows</span>&lt;<span class="hljs-title">TException</span>&gt;(<span class="hljs-params">
+</code></pre> <hr><h3>متد AssertThrows</h3><pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-built_in">bool</span> <span class="hljs-title">AssertThrows</span>&lt;<span class="hljs-title">TException</span>&gt;(<span class="hljs-params">
     Action action,
     Func&lt;TException, <span class="hljs-built_in">bool</span>&gt; exceptionCondition = <span class="hljs-literal">null</span>
 </span>) <span class="hljs-keyword">where</span> TException : Exception</span>
@@ -590,40 +252,21 @@
     }
     <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
 }
-</code></pre>
-<ul>
-<li>این متد بررسی می‌کند که <strong>آیا Exception مشخص شده پرتاب شده است یا نه</strong>. ✅</li>
-</ul>
-<hr>
-<h3>مثال‌های عملی با Moq</h3>
-<h4>متد DoSomethingReturnsTrue</h4>
-<pre class="hljs"><code>[<span class="hljs-meta">Test</span>]
+</code></pre> <ul><li>این متد بررسی می‌کند که <strong>آیا Exception مشخص شده پرتاب شده است یا نه</strong>.</li></ul> <hr><h3>مثال‌های عملی با Moq</h3><h4>متد DoSomethingReturnsTrue</h4><pre class="hljs"><code>[<span class="hljs-meta">Test</span>]
 <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">DoSomethingReturnsTrue</span>()</span>
 {
     <span class="hljs-keyword">var</span> mock = <span class="hljs-keyword">new</span> Mock&lt;IFoo&gt;();
     mock.Setup(foo =&gt; foo.DoSomething(<span class="hljs-string">&quot;ping&quot;</span>)).Returns(<span class="hljs-literal">true</span>);
     Assert.IsTrue(mock.Object.DoSomething(<span class="hljs-string">&quot;ping&quot;</span>));
 }
-</code></pre>
-<ul>
-<li>ایجاد یک mock از IFoo</li>
-<li>تنظیم متد DoSomething برای مقدار &quot;ping&quot; که <strong>true</strong> برگرداند</li>
-<li>بررسی اینکه خروجی واقعاً <strong>true</strong> است ✅</li>
-</ul>
-<h4>متد DoSomethingReturnsFalse</h4>
-<pre class="hljs"><code>[<span class="hljs-meta">Test</span>]
+</code></pre> <ul><li>ایجاد یک mock از IFoo</li><li>تنظیم متد DoSomething برای مقدار &quot;ping&quot; که <strong>true</strong> برگرداند</li><li>بررسی اینکه خروجی واقعاً <strong>true</strong> است</li></ul> <h4>متد DoSomethingReturnsFalse</h4><pre class="hljs"><code>[<span class="hljs-meta">Test</span>]
 <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">DoSomethingReturnsFalse</span>()</span>
 {
     <span class="hljs-keyword">var</span> mock = <span class="hljs-keyword">new</span> Mock&lt;IFoo&gt;();
     mock.Setup(foo =&gt; foo.DoSomething(<span class="hljs-string">&quot;tracert&quot;</span>)).Returns(<span class="hljs-literal">false</span>);
     Assert.IsFalse(mock.Object.DoSomething(<span class="hljs-string">&quot;tracert&quot;</span>));
 }
-</code></pre>
-<ul>
-<li>مشابه مثال قبل، ولی برای مقدار &quot;tracert&quot; خروجی <strong>false</strong> برمی‌گردد ❌</li>
-</ul>
-<h4>متد OutArguments</h4>
-<pre class="hljs"><code>[<span class="hljs-meta">Test</span>]
+</code></pre> <ul><li>مشابه مثال قبل، ولی برای مقدار &quot;tracert&quot; خروجی <strong>false</strong> برمی‌گردد</li></ul> <h4>متد OutArguments</h4><pre class="hljs"><code>[<span class="hljs-meta">Test</span>]
 <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">OutArguments</span>()</span>
 {
     <span class="hljs-keyword">var</span> mock = <span class="hljs-keyword">new</span> Mock&lt;IFoo&gt;();
@@ -632,12 +275,7 @@
     Assert.AreEqual(<span class="hljs-string">&quot;ack&quot;</span>, outString);
     Assert.IsTrue(mock.Object.TryParse(<span class="hljs-string">&quot;ping&quot;</span>, <span class="hljs-keyword">out</span> outString));
 }
-</code></pre>
-<ul>
-<li>تست خروجی از نوع <strong>out parameter</strong> و بررسی مقدار آن</li>
-</ul>
-<h4>متد RefArguments</h4>
-<pre class="hljs"><code>[<span class="hljs-meta">Test</span>]
+</code></pre> <ul><li>تست خروجی از نوع <strong>out parameter</strong> و بررسی مقدار آن</li></ul> <h4>متد RefArguments</h4><pre class="hljs"><code>[<span class="hljs-meta">Test</span>]
 <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">RefArguments</span>()</span>
 {
     <span class="hljs-keyword">var</span> instance = <span class="hljs-keyword">new</span> Bar();
@@ -645,12 +283,7 @@
     mock.Setup(foo =&gt; foo.Submit(<span class="hljs-keyword">ref</span> instance)).Returns(<span class="hljs-literal">true</span>);
     Assert.AreEqual(<span class="hljs-literal">true</span>, mock.Object.Submit(<span class="hljs-keyword">ref</span> instance));
 }
-</code></pre>
-<ul>
-<li>تست ورودی از نوع <strong>ref</strong> و بررسی مقدار برگشتی</li>
-</ul>
-<h4>متد AccessInvocationArguments</h4>
-<pre class="hljs"><code>[<span class="hljs-meta">Test</span>]
+</code></pre> <ul><li>تست ورودی از نوع <strong>ref</strong> و بررسی مقدار برگشتی</li></ul> <h4>متد AccessInvocationArguments</h4><pre class="hljs"><code>[<span class="hljs-meta">Test</span>]
 <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">AccessInvocationArguments</span>()</span>
 {
     <span class="hljs-keyword">var</span> mock = <span class="hljs-keyword">new</span> Mock&lt;IFoo&gt;();
@@ -658,12 +291,7 @@
         .Returns((<span class="hljs-built_in">string</span> s) =&gt; s.ToLower());
     Assert.AreEqual(<span class="hljs-string">&quot;i like oranges!&quot;</span>, mock.Object.DoSomethingStringy(<span class="hljs-string">&quot;I LIKE ORANGES!&quot;</span>));
 }
-</code></pre>
-<ul>
-<li>تست متدی که رشته ورودی را به <strong>حروف کوچک</strong> تبدیل می‌کند 🔤</li>
-</ul>
-<h4>متد ThrowingWhenInvokedWithSpecificParameters</h4>
-<pre class="hljs"><code>[<span class="hljs-meta">Test</span>]
+</code></pre> <ul><li>تست متدی که رشته ورودی را به <strong>حروف کوچک</strong> تبدیل می‌کند</li></ul> <h4>متد ThrowingWhenInvokedWithSpecificParameters</h4><pre class="hljs"><code>[<span class="hljs-meta">Test</span>]
 <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ThrowingWhenInvokedWithSpecificParameters</span>()</span>
 {
     <span class="hljs-keyword">var</span> mock = <span class="hljs-keyword">new</span> Mock&lt;IFoo&gt;();
@@ -681,42 +309,7 @@
           () =&gt; mock.Object.DoSomething(<span class="hljs-string">&quot;&quot;</span>)
     );
 }
-</code></pre>
-<ul>
-<li>تنظیم رفتار برای پرتاب <strong>Exception</strong> بر اساس پارامتر ورودی ⚠️</li>
-</ul>
-<hr>
-<p>✅ تا اینجا شما دیدید که چگونه از <strong>Moq</strong> برای ساخت <strong>mock objects</strong> و تست کد با <strong>NUnit</strong> استفاده می‌کنیم.</p>
-<p>فریم‌ورک بعدی که بررسی خواهیم کرد، <strong>SpecFlow</strong> است که یک ابزار <strong>BDD</strong> می‌باشد. 🧩</p>
-<h3><strong>SpecFlow – تست رفتاری کاربرمحور (BDD) 🧩</strong></h3>
-<p><strong>SpecFlow</strong> برای پیاده‌سازی <strong>BDD (Behavior Driven Development)</strong> استفاده می‌شود، روشی برای توسعه نرم‌افزار که از <strong>TDD (Test Driven Development)</strong> تکامل یافته است. ✅</p>
-<ul>
-<li>در BDD، <strong>تست‌ها قبل از نوشتن کد</strong> بر اساس رفتار کاربر طراحی می‌شوند.</li>
-<li>کار با <strong>لیست ویژگی‌ها (Features)</strong> شروع می‌شود؛ این ویژگی‌ها به زبان رسمی و کسب‌وکاری نوشته می‌شوند تا <strong>تمام ذی‌نفعان پروژه</strong> بتوانند آن‌ها را درک کنند. 📝</li>
-<li>پس از تأیید و تولید ویژگی‌ها، توسعه‌دهندگان <strong>Step Definitions</strong> را برای هر ویژگی ایجاد می‌کنند.</li>
-<li>سپس یک پروژه خارجی برای پیاده‌سازی ویژگی ساخته و به پروژه اصلی ارجاع داده می‌شود.</li>
-<li>Step Definitions برای پیاده‌سازی کد واقعی ویژگی توسعه داده می‌شوند.</li>
-</ul>
-<p>💡 <strong>مزیت این رویکرد:</strong><br>
-به عنوان برنامه‌نویس، مطمئن هستید که دقیقاً آنچه <strong>کسب‌وکار خواسته</strong> را ارائه می‌دهید، نه چیزی که فکر می‌کنید خواسته شده است. این روش می‌تواند <strong>هزینه‌ها و زمان زیادی را صرفه‌جویی کند</strong>. تجربه نشان داده که بسیاری از پروژه‌ها به دلیل <strong>عدم وضوح خواسته‌ها بین تیم‌های کسب‌وکار و برنامه‌نویسی</strong> شکست خورده‌اند.</p>
-<hr>
-<h3>مثال عملی: پیاده‌سازی یک ماشین‌حساب ساده 🧮</h3>
-<ol>
-<li>
-<p>یک <strong>Class Library جدید</strong> بسازید و بسته‌های زیر را اضافه کنید:</p>
-<ul>
-<li>NUnit</li>
-<li>NUnit3TestAdapter</li>
-<li>SpecFlow</li>
-<li>SpecRun.SpecFlow</li>
-<li>SpecFlow.NUnit</li>
-</ul>
-</li>
-<li>
-<p>یک <strong>SpecFlow Feature File</strong> جدید با نام <code>Calculator</code> بسازید:</p>
-</li>
-</ol>
-<pre class="hljs"><code><span class="hljs-keyword">Feature</span>: Calculator
+</code></pre> <ul><li>تنظیم رفتار برای پرتاب <strong>Exception</strong> بر اساس پارامتر ورودی</li></ul> <hr><p>تا اینجا شما دیدید که چگونه از <strong>Moq</strong> برای ساخت <strong>mock objects</strong> و تست کد با <strong>NUnit</strong> استفاده می‌کنیم.</p><p>فریم‌ورک بعدی که بررسی خواهیم کرد، <strong>SpecFlow</strong> است که یک ابزار <strong>BDD</strong> می‌باشد.</p><h3>**SpecFlow – تست رفتاری کاربرمحور (BDD) **</h3><p><strong>SpecFlow</strong> برای پیاده‌سازی <strong>BDD (Behavior Driven Development)</strong> استفاده می‌شود، روشی برای توسعه نرم‌افزار که از <strong>TDD (Test Driven Development)</strong> تکامل یافته است.</p><ul> <li>در BDD، <strong>تست‌ها قبل از نوشتن کد</strong> بر اساس رفتار کاربر طراحی می‌شوند.</li><li>کار با <strong>لیست ویژگی‌ها (Features)</strong> شروع می‌شود؛ این ویژگی‌ها به زبان رسمی و کسب‌وکاری نوشته می‌شوند تا <strong>تمام ذی‌نفعان پروژه</strong> بتوانند آن‌ها را درک کنند.</li><li>پس از تأیید و تولید ویژگی‌ها، توسعه‌دهندگان <strong>Step Definitions</strong> را برای هر ویژگی ایجاد می‌کنند.</li><li>سپس یک پروژه خارجی برای پیاده‌سازی ویژگی ساخته و به پروژه اصلی ارجاع داده می‌شود.</li><li>Step Definitions برای پیاده‌سازی کد واقعی ویژگی توسعه داده می‌شوند.</li></ul> <p><strong>مزیت این رویکرد:</strong><br> به عنوان برنامه‌نویس، مطمئن هستید که دقیقاً آنچه <strong>کسب‌وکار خواسته</strong> را ارائه می‌دهید، نه چیزی که فکر می‌کنید خواسته شده است. این روش می‌تواند <strong>هزینه‌ها و زمان زیادی را صرفه‌جویی کند</strong>. تجربه نشان داده که بسیاری از پروژه‌ها به دلیل <strong>عدم وضوح خواسته‌ها بین تیم‌های کسب‌وکار و برنامه‌نویسی</strong> شکست خورده‌اند.</p><hr> <h3>مثال عملی: پیاده‌سازی یک ماشین‌حساب ساده</h3><ol> <li><p>یک <strong>Class Library جدید</strong> بسازید و بسته‌های زیر را اضافه کنید:</p><ul> <li>NUnit</li><li>NUnit3TestAdapter</li><li>SpecFlow</li><li>SpecRun.SpecFlow</li><li>SpecFlow.NUnit</li></ul> </li><li> <p>یک <strong>SpecFlow Feature File</strong> جدید با نام <code>Calculator</code> بسازید:</p></li> </ol><pre class="hljs"><code><span class="hljs-keyword">Feature</span>: Calculator
   In order to avoid silly mistakes
   As a math idiot
   I want to be told the sum of two numbers
@@ -727,29 +320,7 @@
     <span class="hljs-keyword">And</span> I have entered 70 into the calculator
     <span class="hljs-keyword">When</span> I press add
     <span class="hljs-keyword">Then</span> the result should be 120 on the screen
-</code></pre>
-<ul>
-<li>متن بالا به صورت <strong>خودکار</strong> در فایل <code>Calculator.feature</code> اضافه می‌شود و <strong>نقطه شروع یادگیری BDD با SpecFlow</strong> است.</li>
-</ul>
-<p>💡 نکته:<br>
-SpecFlow و SpecMap اکنون توسط <strong>Tricentis</strong> خریداری شده‌اند و <strong>همچنان رایگان</strong> خواهند بود، بنابراین زمان خوبی برای یادگیری و استفاده از آن‌ها است.</p>
-<hr>
-<h3>ایجاد Step Definitions</h3>
-<ul>
-<li>پس از داشتن فایل Feature، باید <strong>Step Definitions</strong> ایجاد کنید تا درخواست‌های ویژگی به کد شما متصل شوند.</li>
-<li>روی فایل Feature <strong>راست‌کلیک</strong> کنید و از منوی زمینه گزینه <strong>Generate Step Definitions</strong> را انتخاب کنید.</li>
-<li>یک پنجره دیالوگ برای ایجاد Step Definitions ظاهر می‌شود که مراحل بعدی آموزش BDD را شروع می‌کند.</li>
-</ul>
-<div align="center">
-<p><img src="../../../assets/image/06/Table%206-12.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<h3><strong>ایجاد کلاس Step Definitions – CalculatorSteps 🛠️</strong></h3>
-<ol>
-<li><strong>نام کلاس</strong> را <code>CalculatorSteps</code> وارد کنید.</li>
-<li>روی <strong>Generate</strong> کلیک کنید تا Step Definitions ایجاد شود و فایل ذخیره گردد.</li>
-<li>فایل <code>CalculatorSteps.cs</code> را باز کنید. محتوای آن به شکل زیر خواهد بود:</li>
-</ol>
-<pre class="hljs"><code><span class="hljs-keyword">using</span> TechTalk.SpecFlow;
+</code></pre> <ul><li>متن بالا به صورت <strong>خودکار</strong> در فایل <code>Calculator.feature</code> اضافه می‌شود و <strong>نقطه شروع یادگیری BDD با SpecFlow</strong> است.</li></ul> <blockquote><p><strong>نکته:</strong><br> SpecFlow و SpecMap اکنون توسط <strong>Tricentis</strong> خریداری شده‌اند و <strong>همچنان رایگان</strong> خواهند بود، بنابراین زمان خوبی برای یادگیری و استفاده از آن‌ها است.</p></blockquote> <hr><h3>ایجاد Step Definitions</h3><ul> <li>پس از داشتن فایل Feature، باید <strong>Step Definitions</strong> ایجاد کنید تا درخواست‌های ویژگی به کد شما متصل شوند.</li><li>روی فایل Feature <strong>راست‌کلیک</strong> کنید و از منوی زمینه گزینه <strong>Generate Step Definitions</strong> را انتخاب کنید.</li><li>یک پنجره دیالوگ برای ایجاد Step Definitions ظاهر می‌شود که مراحل بعدی آموزش BDD را شروع می‌کند.</li></ul> <div align="center"><p><img src="../../../assets/image/06/Table%206-12.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <h3>**ایجاد کلاس Step Definitions – CalculatorSteps **</h3><ol> <li><strong>نام کلاس</strong> را <code>CalculatorSteps</code> وارد کنید.</li><li>روی <strong>Generate</strong> کلیک کنید تا Step Definitions ایجاد شود و فایل ذخیره گردد.</li><li>فایل <code>CalculatorSteps.cs</code> را باز کنید. محتوای آن به شکل زیر خواهد بود:</li></ol> <pre class="hljs"><code><span class="hljs-keyword">using</span> TechTalk.SpecFlow;
 
 <span class="hljs-keyword">namespace</span> <span class="hljs-title">CH06_SpecFlow</span>
 {
@@ -775,122 +346,34 @@ SpecFlow و SpecMap اکنون توسط <strong>Tricentis</strong> خریدار�
         }
     }
 }
-</code></pre>
-<ul>
-<li>همان‌طور که می‌بینید، <strong>Step Definitions</strong> ایجاد شده با <strong>عبارات Feature File</strong> مطابقت دارد.</li>
-<li>متدهای <code>[Given]</code>، <code>[When]</code> و <code>[Then]</code> به صورت خودکار ایجاد شده‌اند و در حال حاضر <strong>در حالت Pending</strong> هستند تا بعداً کد واقعی برای آنها نوشته شود. ⚡</li>
-</ul>
-<p>💡 نکته: این مطابقت بین Feature و Steps تضمین می‌کند که تست‌های رفتاری دقیقاً همان چیزی را بررسی کنند که در Feature File مشخص شده است.</p>
-<div align="center">
-<p><img src="../../../assets/image/06/Table%206-13.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<h3><strong>پیاده‌سازی Feature در فایل جداگانه – CH06_SpecFlow.Implementation 📝</strong></h3>
-<ol>
-<li>یک <strong>Class Library جدید</strong> ایجاد کنید و نام آن را <code>CH06_SpecFlow.Implementation</code> بگذارید.</li>
-<li>در آن یک فایل جدید به نام <code>Calculator.cs</code> اضافه کنید.</li>
-<li>به پروژه SpecFlow یک <strong>Reference</strong> به این کتابخانه اضافه کنید.</li>
-<li>در بالای فایل <code>CalculatorSteps.cs</code> این خط را اضافه کنید:</li>
-</ol>
-<pre class="hljs"><code><span class="hljs-keyword">private</span> Calculator _calculator = <span class="hljs-keyword">new</span> Calculator();
-</code></pre>
-<hr>
-<h3><strong>گسترش Step Definitions برای اجرای کد برنامه</strong></h3>
-<h4>1️⃣ افزودن Properties در کلاس Calculator</h4>
-<p>در بالای کلاس Calculator دو <strong>Property عمومی</strong> اضافه کنید:</p>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-built_in">int</span> FirstNumber { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">set</span>; }
+</code></pre> <ul><li>همان‌طور که می‌بینید، <strong>Step Definitions</strong> ایجاد شده با <strong>عبارات Feature File</strong> مطابقت دارد.</li><li>متدهای <code>[Given]</code>، <code>[When]</code> و <code>[Then]</code> به صورت خودکار ایجاد شده‌اند و در حال حاضر <strong>در حالت Pending</strong> هستند تا بعداً کد واقعی برای آنها نوشته شود.</li></ul> <blockquote><p><strong>نکته:</strong> این مطابقت بین Feature و Steps تضمین می‌کند که تست‌های رفتاری دقیقاً همان چیزی را بررسی کنند که در Feature File مشخص شده است.</p></blockquote> <div align="center"><p><img src="../../../assets/image/06/Table%206-13.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <h3>**پیاده‌سازی Feature در فایل جداگانه – CH06_SpecFlow.Implementation **</h3><ol> <li>یک <strong>Class Library جدید</strong> ایجاد کنید و نام آن را <code>CH06_SpecFlow.Implementation</code> بگذارید.</li><li>در آن یک فایل جدید به نام <code>Calculator.cs</code> اضافه کنید.</li><li>به پروژه SpecFlow یک <strong>Reference</strong> به این کتابخانه اضافه کنید.</li><li>در بالای فایل <code>CalculatorSteps.cs</code> این خط را اضافه کنید:</li></ol> <pre class="hljs"><code><span class="hljs-keyword">private</span> Calculator _calculator = <span class="hljs-keyword">new</span> Calculator();
+</code></pre> <hr><h3><strong>گسترش Step Definitions برای اجرای کد برنامه</strong></h3><h4>1⃣ افزودن Properties در کلاس Calculator</h4><p>در بالای کلاس Calculator دو <strong>Property عمومی</strong> اضافه کنید:</p><pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-built_in">int</span> FirstNumber { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">set</span>; }
 <span class="hljs-keyword">public</span> <span class="hljs-built_in">int</span> SecondNumber { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">set</span>; }
-</code></pre>
-<h4>2️⃣ به‌روزرسانی متد <code>[Given]</code></h4>
-<p>در کلاس <code>CalculatorSteps</code>، متد <code>GivenIHaveEnteredIntoTheCalculator()</code> را به شکل زیر تغییر دهید:</p>
-<pre class="hljs"><code>[<span class="hljs-meta">Given(@<span class="hljs-string">&quot;I have entered (.*) into the calculator&quot;</span>)</span>]
+</code></pre> <h4>2⃣ به‌روزرسانی متد <code>[Given]</code></h4><p>در کلاس <code>CalculatorSteps</code>، متد <code>GivenIHaveEnteredIntoTheCalculator()</code> را به شکل زیر تغییر دهید:</p><pre class="hljs"><code>[<span class="hljs-meta">Given(@<span class="hljs-string">&quot;I have entered (.*) into the calculator&quot;</span>)</span>]
 <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">GivenIHaveEnteredIntoTheCalculator</span>(<span class="hljs-params"><span class="hljs-built_in">int</span> number</span>)</span>
 {
     _calculator.FirstNumber = number;
 }
-</code></pre>
-<h4>3️⃣ افزودن متد دوم <code>[Given]</code></h4>
-<p>اگر متد <code>GivenIHaveAlsoEnteredIntoTheCalculator()</code> موجود نیست، اضافه کنید:</p>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">GivenIHaveAlsoEnteredIntoTheCalculator</span>(<span class="hljs-params"><span class="hljs-built_in">int</span> number</span>)</span>
+</code></pre> <h4>3⃣ افزودن متد دوم <code>[Given]</code></h4><p>اگر متد <code>GivenIHaveAlsoEnteredIntoTheCalculator()</code> موجود نیست، اضافه کنید:</p><pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">GivenIHaveAlsoEnteredIntoTheCalculator</span>(<span class="hljs-params"><span class="hljs-built_in">int</span> number</span>)</span>
 {
     _calculator.SecondNumber = number;
 }
-</code></pre>
-<hr>
-<h3><strong>افزودن متغیر نتیجه و متد Add()</strong></h3>
-<ol>
-<li>در بالای کلاس <code>CalculatorSteps</code> و قبل از هر Step، متغیر زیر را اضافه کنید:</li>
-</ol>
-<pre class="hljs"><code><span class="hljs-keyword">private</span> <span class="hljs-built_in">int</span> _result;
-</code></pre>
-<ol start="2">
-<li>در کلاس <code>Calculator</code>، متد <code>Add()</code> را اضافه کنید:</li>
-</ol>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-built_in">int</span> <span class="hljs-title">Add</span>()</span>
+</code></pre> <hr><h3><strong>افزودن متغیر نتیجه و متد Add()</strong></h3><ol> <li>در بالای کلاس <code>CalculatorSteps</code> و قبل از هر Step، متغیر زیر را اضافه کنید:</li></ol> <pre class="hljs"><code><span class="hljs-keyword">private</span> <span class="hljs-built_in">int</span> _result;
+</code></pre> <ol start="2"><li>در کلاس <code>Calculator</code>، متد <code>Add()</code> را اضافه کنید:</li></ol> <pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-built_in">int</span> <span class="hljs-title">Add</span>()</span>
 {
     <span class="hljs-keyword">return</span> FirstNumber + SecondNumber;
 }
-</code></pre>
-<hr>
-<h3><strong>به‌روزرسانی متد <code>[When]</code></strong></h3>
-<p>در کلاس <code>CalculatorSteps</code> متد <code>WhenIPressAdd()</code> را به شکل زیر تغییر دهید:</p>
-<pre class="hljs"><code>[<span class="hljs-meta">When(@<span class="hljs-string">&quot;I press add&quot;</span>)</span>]
+</code></pre> <hr><h3><strong>به‌روزرسانی متد <code>[When]</code></strong></h3><p>در کلاس <code>CalculatorSteps</code> متد <code>WhenIPressAdd()</code> را به شکل زیر تغییر دهید:</p><pre class="hljs"><code>[<span class="hljs-meta">When(@<span class="hljs-string">&quot;I press add&quot;</span>)</span>]
 <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">WhenIPressAdd</span>()</span>
 {
     _result = _calculator.Add();
 }
-</code></pre>
-<hr>
-<h3><strong>به‌روزرسانی متد <code>[Then]</code></strong></h3>
-<p>در کلاس <code>CalculatorSteps</code> متد <code>ThenTheResultShouldBeOnTheScreen()</code> را تغییر دهید:</p>
-<pre class="hljs"><code>[<span class="hljs-meta">Then(@<span class="hljs-string">&quot;the result should be (.*) on the screen&quot;</span>)</span>]
+</code></pre> <hr><h3><strong>به‌روزرسانی متد <code>[Then]</code></strong></h3><p>در کلاس <code>CalculatorSteps</code> متد <code>ThenTheResultShouldBeOnTheScreen()</code> را تغییر دهید:</p><pre class="hljs"><code>[<span class="hljs-meta">Then(@<span class="hljs-string">&quot;the result should be (.*) on the screen&quot;</span>)</span>]
 <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ThenTheResultShouldBeOnTheScreen</span>(<span class="hljs-params"><span class="hljs-built_in">int</span> expectedResult</span>)</span>
 {
     Assert.AreEqual(expectedResult, _result);
 }
-</code></pre>
-<hr>
-<p>✅ <strong>تست و اجرای پروژه</strong></p>
-<ul>
-<li>پروژه را <strong>Build</strong> کنید و تست‌ها را اجرا کنید.</li>
-<li>خواهید دید که <strong>تمام تست‌ها با موفقیت گذرانده شدند</strong>.</li>
-<li>فقط کدی نوشته شده که برای پاس شدن Feature لازم بود.</li>
-</ul>
-<hr>
-<p>💡 <strong>منابع بیشتر:</strong> برای اطلاعات بیشتر درباره SpecFlow به <a href="https://specflow.org/docs/">SpecFlow Documentation</a> مراجعه کنید.</p>
-<p>در ادامه، پس از معرفی ابزارها، نوبت به <strong>نمونه ساده‌ای از TDD</strong> می‌رسد:</p>
-<ul>
-<li>ابتدا کدی می‌نویسیم که <strong>Fail</strong> می‌شود.</li>
-<li>سپس فقط به‌اندازه لازم برای <strong>Compile شدن تست</strong> کد می‌نویسیم.</li>
-<li>در نهایت، کد را <strong>Refactor</strong> می‌کنیم. ⚡</li>
-</ul>
-<h3><strong>تمرین روش‌شناسی TDD – Fail, Pass و Refactor ⚡</strong></h3>
-<p>در این بخش، شما خواهید آموخت که چگونه تست‌هایی بنویسید که ابتدا <strong>Fail</strong> شوند. سپس تنها به‌اندازه لازم کد می‌نویسیم تا تست <strong>Pass</strong> شود و در نهایت، در صورت نیاز، <strong>Refactor</strong> انجام می‌دهیم تا کد تمیزتر و قابل استفاده مجدد شود.</p>
-<hr>
-<h3><strong>چرا به TDD نیاز داریم؟ 🤔</strong></h3>
-<p>در بخش قبل، دیدید که چگونه می‌توان با استفاده از <strong>Feature Files</strong> و <strong>Step Files</strong> کدی نوشت که نیاز کسب‌وکار را برآورده کند. اما یک روش دیگر برای تضمین اینکه کد شما <strong>مطابق با نیازهای کسب‌وکار</strong> باشد، استفاده از <strong>TDD</strong> است.</p>
-<ul>
-<li>در TDD ابتدا یک تست می‌نویسید که <strong>Fail</strong> شود.</li>
-<li>سپس تنها کد لازم برای <strong>Pass</strong> کردن تست را می‌نویسید.</li>
-<li>در نهایت، در صورت نیاز، کد را Refactor می‌کنید.</li>
-</ul>
-<p>این چرخه تا زمانی که <strong>تمام Features</strong> کدنویسی شوند، تکرار می‌شود.</p>
-<hr>
-<h3><strong>نقش TDD در نرم‌افزارهای حیاتی 💼</strong></h3>
-<p>برخی نرم‌افزارها نمی‌توانند دارای باگ باشند، مانند:</p>
-<ul>
-<li>سیستم‌های مالی 💰 که سرمایه‌های خصوصی و تجاری را مدیریت می‌کنند.</li>
-<li>تجهیزات پزشکی ⚕️، شامل دستگاه‌های حیاتی و اسکن، که نرم‌افزار صحیح برای عملکرد لازم دارند.</li>
-<li>نرم‌افزارهای مدیریت ترافیک و ناوبری 🚦.</li>
-<li>سیستم‌های فضایی 🚀 و سیستم‌های تسلیحاتی 🛡️.</li>
-</ul>
-<p>در چنین پروژه‌هایی، TDD تضمین می‌کند که کد <strong>مطمئن و قابل اطمینان</strong> نوشته شود.</p>
-<hr>
-<h3><strong>مراحل TDD 🛠️</strong></h3>
-<ol>
-<li>یک <strong>پروژه جدید</strong> ایجاد کنید (<code>CH06_FailPassRefactor</code>).</li>
-<li>یک کلاس به نام <code>UnitTests</code> بسازید و <strong>Pseudocode</strong> زیر را در آن قرار دهید:</li>
-</ol>
-<pre class="hljs"><code><span class="hljs-keyword">using</span> NUnit.Framework;
+</code></pre> <hr><p><strong>تست و اجرای پروژه</strong></p><ul> <li>پروژه را <strong>Build</strong> کنید و تست‌ها را اجرا کنید.</li><li>خواهید دید که <strong>تمام تست‌ها با موفقیت گذرانده شدند</strong>.</li><li>فقط کدی نوشته شده که برای پاس شدن Feature لازم بود.</li></ul> <hr><p><strong>منابع بیشتر:</strong> برای اطلاعات بیشتر درباره SpecFlow به <a href="https://specflow.org/docs/">SpecFlow Documentation</a> مراجعه کنید.</p><p>در ادامه، پس از معرفی ابزارها، نوبت به <strong>نمونه ساده‌ای از TDD</strong> می‌رسد:</p><ul> <li>ابتدا کدی می‌نویسیم که <strong>Fail</strong> می‌شود.</li><li>سپس فقط به‌اندازه لازم برای <strong>Compile شدن تست</strong> کد می‌نویسیم.</li><li>در نهایت، کد را <strong>Refactor</strong> می‌کنیم.</li></ul> <h3>**تمرین روش‌شناسی TDD – Fail, Pass و Refactor **</h3><p>در این بخش، شما خواهید آموخت که چگونه تست‌هایی بنویسید که ابتدا <strong>Fail</strong> شوند. سپس تنها به‌اندازه لازم کد می‌نویسیم تا تست <strong>Pass</strong> شود و در نهایت، در صورت نیاز، <strong>Refactor</strong> انجام می‌دهیم تا کد تمیزتر و قابل استفاده مجدد شود.</p><hr> <h3>**چرا به TDD نیاز داریم؟ **</h3><p>در بخش قبل، دیدید که چگونه می‌توان با استفاده از <strong>Feature Files</strong> و <strong>Step Files</strong> کدی نوشت که نیاز کسب‌وکار را برآورده کند. اما یک روش دیگر برای تضمین اینکه کد شما <strong>مطابق با نیازهای کسب‌وکار</strong> باشد، استفاده از <strong>TDD</strong> است.</p><ul> <li>در TDD ابتدا یک تست می‌نویسید که <strong>Fail</strong> شود.</li><li>سپس تنها کد لازم برای <strong>Pass</strong> کردن تست را می‌نویسید.</li><li>در نهایت، در صورت نیاز، کد را Refactor می‌کنید.</li></ul> <p>این چرخه تا زمانی که <strong>تمام Features</strong> کدنویسی شوند، تکرار می‌شود.</p><hr> <h3>**نقش TDD در نرم‌افزارهای حیاتی **</h3><p>برخی نرم‌افزارها نمی‌توانند دارای باگ باشند، مانند:</p><ul> <li>سیستم‌های مالی که سرمایه‌های خصوصی و تجاری را مدیریت می‌کنند.</li><li>تجهیزات پزشکی ، شامل دستگاه‌های حیاتی و اسکن، که نرم‌افزار صحیح برای عملکرد لازم دارند.</li><li>نرم‌افزارهای مدیریت ترافیک و ناوبری .</li><li>سیستم‌های فضایی و سیستم‌های تسلیحاتی .</li></ul> <p>در چنین پروژه‌هایی، TDD تضمین می‌کند که کد <strong>مطمئن و قابل اطمینان</strong> نوشته شود.</p><hr> <h3>**مراحل TDD **</h3><ol> <li>یک <strong>پروژه جدید</strong> ایجاد کنید (<code>CH06_FailPassRefactor</code>).</li><li>یک کلاس به نام <code>UnitTests</code> بسازید و <strong>Pseudocode</strong> زیر را در آن قرار دهید:</li></ol> <pre class="hljs"><code><span class="hljs-keyword">using</span> NUnit.Framework;
 
 <span class="hljs-keyword">namespace</span> <span class="hljs-title">CH06_FailPassRefactor</span>
 {
@@ -903,28 +386,14 @@ SpecFlow و SpecMap اکنون توسط <strong>Tricentis</strong> خریدار�
         <span class="hljs-comment">// [3] Write the text to a file with a timestamp.</span>
     }
 }
-</code></pre>
-<hr>
-<h3><strong>نوشتن اولین تست – Fail Test</strong></h3>
-<pre class="hljs"><code>[<span class="hljs-meta">Test</span>]
+</code></pre> <hr><h3><strong>نوشتن اولین تست – Fail Test</strong></h3><pre class="hljs"><code>[<span class="hljs-meta">Test</span>]
 <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">LogException</span>()</span>
 {
     <span class="hljs-keyword">var</span> logger = <span class="hljs-keyword">new</span> Logger();
     <span class="hljs-keyword">var</span> logFileName = logger.Log(<span class="hljs-keyword">new</span> ArgumentException(<span class="hljs-string">&quot;Argument cannot be null&quot;</span>));
     Assert.Pass();
 }
-</code></pre>
-<blockquote>
-<p>این تست اجرا نمی‌شود زیرا کلاس <strong>Logger</strong> وجود ندارد.</p>
-</blockquote>
-<ol>
-<li>یک کلاس داخلی به نام <code>Logger</code> بسازید.</li>
-<li>سپس تست را اجرا کنید. همچنان Fail خواهد شد زیرا متد <code>Log()</code> وجود ندارد.</li>
-<li>متد <code>Log()</code> را اضافه کنید تا تست Pass شود.</li>
-</ol>
-<hr>
-<h3><strong>ایجاد Exception با Inner Exception</strong></h3>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">private</span> Exception <span class="hljs-title">GetException</span>()</span>
+</code></pre> <blockquote><p>این تست اجرا نمی‌شود زیرا کلاس <strong>Logger</strong> وجود ندارد.</p></blockquote> <ol><li>یک کلاس داخلی به نام <code>Logger</code> بسازید.</li><li>سپس تست را اجرا کنید. همچنان Fail خواهد شد زیرا متد <code>Log()</code> وجود ندارد.</li><li>متد <code>Log()</code> را اضافه کنید تا تست Pass شود.</li></ol> <hr><h3><strong>ایجاد Exception با Inner Exception</strong></h3><pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">private</span> Exception <span class="hljs-title">GetException</span>()</span>
 {
     <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Exception(
         <span class="hljs-string">&quot;Exception: Main exception.&quot;</span>,
@@ -934,29 +403,15 @@ SpecFlow و SpecMap اکنون توسط <strong>Tricentis</strong> خریدار�
         )
     );
 }
-</code></pre>
-<hr>
-<h3><strong>تست وجود فایل لاگ</strong></h3>
-<pre class="hljs"><code>[<span class="hljs-meta">Test</span>]
+</code></pre> <hr><h3><strong>تست وجود فایل لاگ</strong></h3><pre class="hljs"><code>[<span class="hljs-meta">Test</span>]
 <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">CheckFileExists</span>()</span>
 {
     <span class="hljs-keyword">var</span> logger = <span class="hljs-keyword">new</span> Logger();
     <span class="hljs-keyword">var</span> logFile = logger.Log(GetException());
     FileAssert.Exists(logFile);
 }
-</code></pre>
-<blockquote>
-<p>در ابتدا این تست Fail خواهد شد.</p>
-</blockquote>
-<ul>
-<li>در کلاس <code>Logger</code> یک <strong>StringBuilder خصوصی</strong> اضافه کنید:</li>
-</ul>
-<pre class="hljs"><code><span class="hljs-keyword">private</span> StringBuilder _stringBuilder;
-</code></pre>
-<ul>
-<li>متد <code>Log()</code> و متد <code>SaveLog()</code> را اضافه کنید تا فایل لاگ ایجاد شود:</li>
-</ul>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-built_in">string</span> <span class="hljs-title">Log</span>(<span class="hljs-params">Exception ex</span>)</span>
+</code></pre> <blockquote><p>در ابتدا این تست Fail خواهد شد.</p></blockquote> <ul><li>در کلاس <code>Logger</code> یک <strong>StringBuilder خصوصی</strong> اضافه کنید:</li></ul> <pre class="hljs"><code><span class="hljs-keyword">private</span> StringBuilder _stringBuilder;
+</code></pre> <ul><li>متد <code>Log()</code> و متد <code>SaveLog()</code> را اضافه کنید تا فایل لاگ ایجاد شود:</li></ul> <pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-built_in">string</span> <span class="hljs-title">Log</span>(<span class="hljs-params">Exception ex</span>)</span>
 {
     _stringBuilder = <span class="hljs-keyword">new</span> StringBuilder();
     <span class="hljs-keyword">return</span> SaveLog();
@@ -969,10 +424,7 @@ SpecFlow و SpecMap اکنون توسط <strong>Tricentis</strong> خریدار�
     <span class="hljs-keyword">var</span> <span class="hljs-keyword">file</span> = <span class="hljs-string">$&quot;<span class="hljs-subst">{dir}</span>\\<span class="hljs-subst">{fileName}</span>&quot;</span>;
     <span class="hljs-keyword">return</span> <span class="hljs-keyword">file</span>;
 }
-</code></pre>
-<hr>
-<h3><strong>تست پیام Exception شامل Inner Exception</strong></h3>
-<pre class="hljs"><code>[<span class="hljs-meta">Test</span>]
+</code></pre> <hr><h3><strong>تست پیام Exception شامل Inner Exception</strong></h3><pre class="hljs"><code>[<span class="hljs-meta">Test</span>]
 <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ContainsMessage</span>()</span>
 {
     <span class="hljs-keyword">var</span> logger = <span class="hljs-keyword">new</span> Logger();
@@ -980,11 +432,7 @@ SpecFlow و SpecMap اکنون توسط <strong>Tricentis</strong> خریدار�
     <span class="hljs-keyword">var</span> msg = File.ReadAllText(logFile);
     Assert.IsTrue(msg.Contains(<span class="hljs-string">&quot;Exception: Inner Exception Inner Exception&quot;</span>));
 }
-</code></pre>
-<ul>
-<li>اکنون باید متدی بسازیم که پیام Exception و Inner Exception‌ها را بسازد:</li>
-</ul>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">BuildExceptionMessage</span>(<span class="hljs-params">Exception ex, <span class="hljs-built_in">bool</span> isInnerException</span>)</span>
+</code></pre> <ul><li>اکنون باید متدی بسازیم که پیام Exception و Inner Exception‌ها را بسازد:</li></ul> <pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">BuildExceptionMessage</span>(<span class="hljs-params">Exception ex, <span class="hljs-built_in">bool</span> isInnerException</span>)</span>
 {
     <span class="hljs-keyword">if</span> (isInnerException)
         _stringBuilder.Append(<span class="hljs-string">&quot;Inner Exception: &quot;</span>).AppendLine(ex.Message);
@@ -994,11 +442,7 @@ SpecFlow و SpecMap اکنون توسط <strong>Tricentis</strong> خریدار�
     <span class="hljs-keyword">if</span> (ex.InnerException != <span class="hljs-literal">null</span>)
         BuildExceptionMessage(ex.InnerException, <span class="hljs-literal">true</span>);
 }
-</code></pre>
-<ul>
-<li>متد <code>Log()</code> را به‌روزرسانی کنید:</li>
-</ul>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-built_in">string</span> <span class="hljs-title">Log</span>(<span class="hljs-params">Exception ex</span>)</span>
+</code></pre> <ul><li>متد <code>Log()</code> را به‌روزرسانی کنید:</li></ul> <pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-built_in">string</span> <span class="hljs-title">Log</span>(<span class="hljs-params">Exception ex</span>)</span>
 {
     _stringBuilder = <span class="hljs-keyword">new</span> StringBuilder();
     _stringBuilder.AppendLine(<span class="hljs-string">&quot;--------------------------------------------------------------&quot;</span>);
@@ -1006,13 +450,7 @@ SpecFlow و SpecMap اکنون توسط <strong>Tricentis</strong> خریدار�
     _stringBuilder.AppendLine(<span class="hljs-string">&quot;--------------------------------------------------------------&quot;</span>);
     <span class="hljs-keyword">return</span> SaveLog();
 }
-</code></pre>
-<hr>
-<h3><strong>Refactor کد با کلاس Text 🧹</strong></h3>
-<ul>
-<li>کلاس جدید <code>Text</code> بسازید و پیام Exception و Inner Exception‌ها را مدیریت کنید:</li>
-</ul>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Text</span>
+</code></pre> <hr><h3>**Refactor کد با کلاس Text **</h3><ul> <li>کلاس جدید <code>Text</code> بسازید و پیام Exception و Inner Exception‌ها را مدیریت کنید:</li></ul> <pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Text</span>
 {
     <span class="hljs-keyword">private</span> StringBuilder _stringBuilder = <span class="hljs-keyword">new</span> StringBuilder();
 
@@ -1041,11 +479,7 @@ SpecFlow و SpecMap اکنون توسط <strong>Tricentis</strong> خریدار�
         <span class="hljs-keyword">return</span> <span class="hljs-string">$&quot;<span class="hljs-subst">{dir}</span>\\<span class="hljs-subst">{fileName}</span>&quot;</span>;
     }
 }
-</code></pre>
-<ul>
-<li>کلاس <code>Logger</code> را به شکل زیر بازنویسی کنید:</li>
-</ul>
-<pre class="hljs"><code><span class="hljs-keyword">private</span> Text _text;
+</code></pre> <ul><li>کلاس <code>Logger</code> را به شکل زیر بازنویسی کنید:</li></ul> <pre class="hljs"><code><span class="hljs-keyword">private</span> Text _text;
 
 <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-built_in">string</span> <span class="hljs-title">Log</span>(<span class="hljs-params">Exception ex</span>)</span>
 {
@@ -1065,233 +499,216 @@ SpecFlow و SpecMap اکنون توسط <strong>Tricentis</strong> خریدار�
     File.WriteAllText(filename, _text.ExceptionMessage);
     <span class="hljs-keyword">return</span> filename;
 }
-</code></pre>
-<p>✅ <strong>نتیجه:</strong><br>
-تمام تست‌ها اکنون پاس هستند و کد تمیزتر، خواناتر و قابل استفاده مجدد است.</p>
-<hr>
-<p>در بخش بعد، نگاهی کوتاه به <strong>تست‌های تکراری (Redundant Tests)</strong> خواهیم داشت. 🔍</p>
-<h3><strong>حذف تست‌های تکراری، کامنت‌ها و کد مرده 🗑️</strong></h3>
-<p>همان‌طور که در کتاب اشاره شد، هدف ما نوشتن <strong>کد تمیز</strong> است. با رشد برنامه‌ها و تست‌ها و انجام Refactor، برخی از کدها ممکن است <strong>تکراری یا بلااستفاده</strong> شوند.</p>
-<ul>
-<li><strong>کد مرده (Dead Code)</strong> به هر کدی گفته می‌شود که تکراری است و هیچ‌گاه اجرا نمی‌شود.</li>
-<li>کد مرده باید بلافاصله حذف شود، زیرا هرچند در کد نهایی اجرا نمی‌شود، اما همچنان بخشی از <strong>کدبیس</strong> است که باید نگهداری شود.</li>
-<li>فایل‌هایی که کد مرده دارند طولانی‌تر و خواندن آن‌ها سخت‌تر است. این موضوع می‌تواند باعث <strong>گیجی برنامه‌نویس</strong> و اتلاف وقت شود، مخصوصاً برای کسانی که تازه به پروژه وارد شده‌اند.</li>
-</ul>
-<hr>
-<h3><strong>کامنت‌ها 💬</strong></h3>
-<ul>
-<li>
-<p>کامنت‌ها در صورتی مفید هستند که <strong>به درستی</strong> نوشته شوند، به‌ویژه برای <strong>مستندسازی API</strong>.</p>
-</li>
-<li>
-<p>برخی کامنت‌ها فقط <strong>صدای اضافی</strong> به فایل اضافه می‌کنند و می‌توانند برنامه‌نویس را آزار دهند.</p>
-</li>
-<li>
-<p>دیدگاه‌ها درباره کامنت‌ها متفاوت است:</p>
-<ol>
-<li>گروهی همه چیز را کامنت می‌کنند.</li>
-<li>گروهی هیچ کامنتی نمی‌گذارند، زیرا معتقدند کد باید <strong>مانند یک کتاب خوانده شود</strong>.</li>
-<li>گروهی متعادل عمل می‌کنند و فقط زمانی کامنت می‌گذارند که برای درک کد ضروری باشد.</li>
-</ol>
-</li>
-</ul>
-<blockquote>
-<p>اگر با کامنت‌هایی مانند:<br>
-<code>&quot;This generates a random bug every so often. Don't know why. But you're welcome to fix it!&quot;</code><br>
-مواجه شدید، باید <strong>هشدار دهید</strong>. برنامه‌نویس باید تا یافتن و رفع باگ، کد را ترک نکند.</p>
-</blockquote>
-<ul>
-<li>اگر بلوک‌های کامنت‌شده‌ای از کد مشاهده کردید که <strong>تایید شده‌اند</strong>، آن‌ها را حذف کنید. نسخه کنترل (Version Control) امکان بازیابی آن‌ها را فراهم می‌کند.</li>
-</ul>
-<hr>
-<h3><strong>خوانایی کد 📖</strong></h3>
-<ul>
-<li>کد باید <strong>مانند یک کتاب خوانده شود</strong>.</li>
-<li>از نوشتن کد <strong>مرموز یا پیچیده فقط برای جلب توجه</strong> خودداری کنید.</li>
-<li>بازگشت به کد خودتان پس از چند هفته ممکن است باعث سردرگمی شود اگر کد پیچیده باشد.</li>
-</ul>
-<hr>
-<h3><strong>تست‌های تکراری 🔄</strong></h3>
-<ul>
-<li>تست‌های تکراری باید حذف شوند.</li>
-<li>فقط تست‌هایی اجرا شوند که <strong>ضروری هستند</strong>.</li>
-<li>تست‌های کد تکراری <strong>هیچ ارزشی ندارند</strong> و می‌توانند زمان زیادی را هدر دهند.</li>
-<li>در محیط‌های CI/CD که تست‌ها در <strong>کلود</strong> اجرا می‌شوند، تست‌های اضافی و کد مرده <strong>هزینه‌های عملیاتی</strong> ایجاد می‌کنند.</li>
-</ul>
-<blockquote>
-<p>هرچه خطوط کد کمتری آپلود، بیلد و تست شوند، هزینه کمتری برای شرکت خواهد داشت.</p>
-</blockquote>
-<hr>
-<h3><strong>خلاصه فصل ✅</strong></h3>
-<ol>
-<li>
-<p>اهمیت نوشتن <strong>Unit Test</strong> برای تولید کد با کیفیت بررسی شد.</p>
-</li>
-<li>
-<p>مشکلات نظری ناشی از باگ‌ها و تأثیرات آن‌ها مانند خسارت‌های مالی و حتی خطرات جانی بیان شد.</p>
-</li>
-<li>
-<p>ویژگی‌های یک <strong>Unit Test خوب</strong>:</p>
-<ul>
-<li>Atomic</li>
-<li>Deterministic</li>
-<li>Repeatable</li>
-<li>Fast</li>
-</ul>
-</li>
-<li>
-<p>ابزارهای TDD و BDD بررسی شد:</p>
-<ul>
-<li>MSTest و NUnit</li>
-<li>Moq برای تست <strong>Mock Objects</strong></li>
-<li>SpecFlow برای نوشتن Feature‌ها به زبان کسب‌وکار</li>
-</ul>
-</li>
-<li>
-<p>مثال عملی TDD با روش <strong>Fail, Pass, Refactor</strong> ارائه شد.</p>
-</li>
-<li>
-<p>ضرورت حذف <strong>کامنت‌های اضافی، تست‌های تکراری و کد مرده</strong> توضیح داده شد.</p>
-</li>
-</ol>
-<hr>
-<h3><strong>سؤالات برای مرور 📝</strong></h3>
-<ol>
-<li>یک Unit Test خوب چه ویژگی‌هایی دارد؟</li>
-<li>یک Unit Test خوب چه چیزی نباید باشد؟</li>
-<li>TDD مخفف چیست؟</li>
-<li>BDD مخفف چیست؟</li>
-<li>Unit Test چیست؟</li>
-<li>Mock Object چیست؟</li>
-<li>Fake Object چیست؟</li>
-<li>چند فریمورک Unit Testing نام ببرید.</li>
-<li>چند فریمورک Mocking نام ببرید.</li>
-<li>یک فریمورک BDD نام ببرید.</li>
-<li>چه مواردی باید از فایل‌های کد حذف شوند؟</li>
-</ol>
-<hr>
-<h3><strong>مطالعه بیشتر 📚</strong></h3>
-<ul>
-<li>
-<p>مروری کوتاه بر Unit Testing، شامل <strong>Integration Testing</strong>، <strong>Acceptance Testing</strong> و <strong>شرح وظایف تستر</strong>:<br>
-<a href="http://softwaretestingfundamentals.com/unit-testing">softwaretestingfundamentals.com/unit-testing</a></p>
-</li>
-<li>
-<p>صفحه اصلی <strong>Rhino Mocks</strong>:<br>
-<a href="http://hibernatingrhinos.com/oss/rhino-mocks">hibernatingrhinos.com/oss/rhino-mocks</a></p>
-</li>
-</ul>
-
-  </main>
-
-  <!-- فوتر مشترک -->
-  <footer class="footer">
-    <div class="container">
-      <p>
-        <img src="/Gitab/icone/copyright.svg" alt="کپی‌رایت" width="14" height="14"
-             style="vertical-align:middle;margin-inline:4px">
-        <span id="y"></span> Gitab — تمامی حقوق محفوظ است.
-      </p>
-    </div>
-  </footer>
-
-  <!-- سال و اسکریپت تغییر تم -->
-  <script>
+</code></pre> <p><strong>نتیجه:</strong><br> تمام تست‌ها اکنون پاس هستند و کد تمیزتر، خواناتر و قابل استفاده مجدد است.</p><hr> <p>در بخش بعد، نگاهی کوتاه به <strong>تست‌های تکراری (Redundant Tests)</strong> خواهیم داشت.</p><h3>**حذف تست‌های تکراری، کامنت‌ها و کد مرده **</h3><p>همان‌طور که در کتاب اشاره شد، هدف ما نوشتن <strong>کد تمیز</strong> است. با رشد برنامه‌ها و تست‌ها و انجام Refactor، برخی از کدها ممکن است <strong>تکراری یا بلااستفاده</strong> شوند.</p><ul> <li><strong>کد مرده (Dead Code)</strong> به هر کدی گفته می‌شود که تکراری است و هیچ‌گاه اجرا نمی‌شود.</li><li>کد مرده باید بلافاصله حذف شود، زیرا هرچند در کد نهایی اجرا نمی‌شود، اما همچنان بخشی از <strong>کدبیس</strong> است که باید نگهداری شود.</li><li>فایل‌هایی که کد مرده دارند طولانی‌تر و خواندن آن‌ها سخت‌تر است. این موضوع می‌تواند باعث <strong>گیجی برنامه‌نویس</strong> و اتلاف وقت شود، مخصوصاً برای کسانی که تازه به پروژه وارد شده‌اند.</li></ul> <hr><h3>**کامنت‌ها **</h3><ul> <li><p>کامنت‌ها در صورتی مفید هستند که <strong>به درستی</strong> نوشته شوند، به‌ویژه برای <strong>مستندسازی API</strong>.</p></li> <li><p>برخی کامنت‌ها فقط <strong>صدای اضافی</strong> به فایل اضافه می‌کنند و می‌توانند برنامه‌نویس را آزار دهند.</p></li> <li><p>دیدگاه‌ها درباره کامنت‌ها متفاوت است:</p><ol> <li>گروهی همه چیز را کامنت می‌کنند.</li><li>گروهی هیچ کامنتی نمی‌گذارند، زیرا معتقدند کد باید <strong>مانند یک کتاب خوانده شود</strong>.</li><li>گروهی متعادل عمل می‌کنند و فقط زمانی کامنت می‌گذارند که برای درک کد ضروری باشد.</li></ol> </li></ul> <blockquote><p>اگر با کامنت‌هایی مانند:<br><code>&quot;This generates a random bug every so often. Don't know why. But you're welcome to fix it!&quot;</code><br> مواجه شدید، باید <strong>هشدار دهید</strong>. برنامه‌نویس باید تا یافتن و رفع باگ، کد را ترک نکند.</p></blockquote> <ul><li>اگر بلوک‌های کامنت‌شده‌ای از کد مشاهده کردید که <strong>تایید شده‌اند</strong>، آن‌ها را حذف کنید. نسخه کنترل (Version Control) امکان بازیابی آن‌ها را فراهم می‌کند.</li></ul> <hr><h3>**خوانایی کد **</h3><ul> <li>کد باید <strong>مانند یک کتاب خوانده شود</strong>.</li><li>از نوشتن کد <strong>مرموز یا پیچیده فقط برای جلب توجه</strong> خودداری کنید.</li><li>بازگشت به کد خودتان پس از چند هفته ممکن است باعث سردرگمی شود اگر کد پیچیده باشد.</li></ul> <hr><h3>**تست‌های تکراری **</h3><ul> <li>تست‌های تکراری باید حذف شوند.</li><li>فقط تست‌هایی اجرا شوند که <strong>ضروری هستند</strong>.</li><li>تست‌های کد تکراری <strong>هیچ ارزشی ندارند</strong> و می‌توانند زمان زیادی را هدر دهند.</li><li>در محیط‌های CI/CD که تست‌ها در <strong>کلود</strong> اجرا می‌شوند، تست‌های اضافی و کد مرده <strong>هزینه‌های عملیاتی</strong> ایجاد می‌کنند.</li></ul> <blockquote><p>هرچه خطوط کد کمتری آپلود، بیلد و تست شوند، هزینه کمتری برای شرکت خواهد داشت.</p></blockquote> <hr><h3>**خلاصه فصل **</h3><ol> <li><p>اهمیت نوشتن <strong>Unit Test</strong> برای تولید کد با کیفیت بررسی شد.</p></li> <li><p>مشکلات نظری ناشی از باگ‌ها و تأثیرات آن‌ها مانند خسارت‌های مالی و حتی خطرات جانی بیان شد.</p></li> <li><p>ویژگی‌های یک <strong>Unit Test خوب</strong>:</p><ul> <li>Atomic</li><li>Deterministic</li><li>Repeatable</li><li>Fast</li></ul> </li><li> <p>ابزارهای TDD و BDD بررسی شد:</p><ul> <li>MSTest و NUnit</li><li>Moq برای تست <strong>Mock Objects</strong></li><li>SpecFlow برای نوشتن Feature‌ها به زبان کسب‌وکار</li></ul> </li><li> <p>مثال عملی TDD با روش <strong>Fail, Pass, Refactor</strong> ارائه شد.</p></li> <li><p>ضرورت حذف <strong>کامنت‌های اضافی، تست‌های تکراری و کد مرده</strong> توضیح داده شد.</p></li> </ol><hr> <h3>**سؤالات برای مرور **</h3><ol> <li>یک Unit Test خوب چه ویژگی‌هایی دارد؟</li><li>یک Unit Test خوب چه چیزی نباید باشد؟</li><li>TDD مخفف چیست؟</li><li>BDD مخفف چیست؟</li><li>Unit Test چیست؟</li><li>Mock Object چیست؟</li><li>Fake Object چیست؟</li><li>چند فریمورک Unit Testing نام ببرید.</li><li>چند فریمورک Mocking نام ببرید.</li><li>یک فریمورک BDD نام ببرید.</li><li>چه مواردی باید از فایل‌های کد حذف شوند؟</li></ol> <hr><h3>**مطالعه بیشتر **</h3><ul> <li><p>مروری کوتاه بر Unit Testing، شامل <strong>Integration Testing</strong>، <strong>Acceptance Testing</strong> و <strong>شرح وظایف تستر</strong>:<br><a href="http://softwaretestingfundamentals.com/unit-testing">softwaretestingfundamentals.com/unit-testing</a></p></li> <li><p>صفحه اصلی <strong>Rhino Mocks</strong>:<br><a href="http://hibernatingrhinos.com/oss/rhino-mocks">hibernatingrhinos.com/oss/rhino-mocks</a></p></li> </ul></article> <nav class="chapter-single-next-nav"><a href="/Gitab/books/book2/Book/07/End-to-End-System-Testing/" class="btn-next-chapter-action" id="nextChapterBtn" data-hub="/Gitab/books/book2/"> <span class="next-btn-text">فصل بعدی: تست انتها-به-انتهاِ سیستم</span> <span class="next-btn-arrow">←</span> </a> </nav></div> <button class="fab-back-to-top" id="backToTopBtn" type="button" aria-label="رفتن به بالای صفحه" title="رفتن به بالا"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"> <polyline points="18 15 12 9 6 15"></polyline> </svg> </button></main> <footer class="footer-minimal"><div class="footer-container"> <div class="footer-top-row"><div class="footer-brand-side"> <a href="/Gitab/" class="footer-brand-anchor"> <img src="/Gitab/icone/logo.svg" alt="Gitab" width="28" height="28" loading="lazy" decoding="async"> <span class="footer-brand-title">گیتاب (Gitab)</span> </a> <p class="footer-tagline"> پلتفرم آزاد و مستقل برای ترجمهٔ دقیق و روان کتاب‌های مرجع مهندسی نرم‌افزار. </p></div> <div class="footer-nav-cols"><div class="footer-nav-col"> <span class="footer-nav-heading">موضوعات</span><ul class="footer-nav-list"> <li><a href="/Gitab/books/list-books/?cat=csharp">سی‌شارپ و دات‌نت</a></li><li><a href="/Gitab/books/list-books/?cat=clean-code">کد تمیز و بازآفرینی</a></li><li><a href="/Gitab/books/list-books/?cat=architecture">معماری و طراحی دامنه</a></li><li><a href="/Gitab/books/list-books/?cat=system">لینوکس و خط فرمان</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">بخش‌های سایت</span><ul class="footer-nav-list"> <li><a href="/Gitab/">صفحه اصلی</a></li><li><a href="/Gitab/books/list-books/">کتابخانه کامل</a></li><li><a href="/Gitab/courses/">دوره‌های آموزشی</a></li><li><a href="/Gitab/translator.html">تالار مترجمین</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">مشارکت و جامعه</span><ul class="footer-nav-list"> <li><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer">راهنمای همکاری در ترجمه</a></li><li><a href="https://github.com/hheydarian/Gitab/issues" target="_blank" rel="noopener noreferrer">پیشنهاد کتاب یا گزارش خطا</a></li></ul> </div></div> </div><div class="footer-bottom-line"> <span>© <span id="y">2026</span> Gitab — توسعه‌یافته برای جامعهٔ مهندسان نرم‌افزار ایرانی</span></div> </div></footer> <script>
   (() => {
     const root = document.documentElement;
     const btn = document.getElementById('themeToggle');
+    const sunIcon = btn ? btn.querySelector('.icon-sun') : null;
+    const moonIcon = btn ? btn.querySelector('.icon-moon') : null;
     const KEY = 'gitab-theme';
 
-    function updateTheme(s) {
-      root.setAttribute('data-theme', s);
-      const mode = s;  // فقط `dark` یا `light` خواهد بود
+    function updateTheme(mode) {
+      root.setAttribute('data-theme', mode);
       root.dataset.colorMode = mode;
-      btn.dataset.icon = mode === 'dark' ? 'moon' : 'sun';
+      if (sunIcon && moonIcon) {
+        if (mode === 'dark') {
+          sunIcon.style.display = 'inline-block';
+          moonIcon.style.display = 'none';
+        } else {
+          sunIcon.style.display = 'none';
+          moonIcon.style.display = 'inline-block';
+        }
+      }
     }
 
-    // وضعیت تم ذخیره شده از localStorage
-    let saved = localStorage.getItem(KEY) || 'light'; // پیش‌فرض روشن
+    let saved = 'dark';
+    try { saved = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
     updateTheme(saved);
 
-    // تنظیم مجدد تم هنگام تغییر وضعیت دکمه
-    btn.addEventListener('click', () => {
-      const current = localStorage.getItem(KEY) || 'light';
-      const next = current === 'dark' ? 'light' : 'dark';  // فقط دو حالت: تاریک و روشن
-      localStorage.setItem(KEY, next);
-      updateTheme(next);
-    });
+    if (btn) {
+      btn.addEventListener('click', () => {
+        let current = 'dark';
+        try { current = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+        const next = current === 'dark' ? 'light' : 'dark';
+        try { localStorage.setItem(KEY, next); } catch (e) {}
+        updateTheme(next);
+      });
+    }
 
-    // هنگام بارگذاری صفحه
     document.addEventListener('DOMContentLoaded', () => {
-      updateTheme(localStorage.getItem(KEY) || 'light');
+      let mode = 'dark';
+      try { mode = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+      updateTheme(mode);
+      const yearSpan = document.getElementById('y');
+      if (yearSpan) yearSpan.textContent = new Date().getFullYear();
     });
+
+    const mobBtn = document.getElementById('mobileMenuBtn');
+    const mobDrawer = document.getElementById('mobileDrawer');
+    if (mobBtn && mobDrawer) {
+      const setDrawerOpen = (open) => {
+        mobDrawer.classList.toggle('open', open);
+        mobBtn.classList.toggle('is-open', open);
+        mobBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        mobBtn.setAttribute('aria-label', open ? 'بستن منو' : 'باز کردن منو');
+        mobDrawer.setAttribute('aria-hidden', open ? 'false' : 'true');
+      };
+
+      mobBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        setDrawerOpen(!mobDrawer.classList.contains('open'));
+      });
+
+      mobDrawer.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => setDrawerOpen(false));
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && mobDrawer.classList.contains('open')) {
+          setDrawerOpen(false);
+        }
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!mobDrawer.contains(e.target) && !mobBtn.contains(e.target)) {
+          setDrawerOpen(false);
+        }
+      });
+    }
+
+    if ('serviceWorker' in navigator) {
+      const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+      if (isLocalhost) {
+        navigator.serviceWorker.getRegistrations().then(regs => {
+          for (const reg of regs) reg.unregister();
+        });
+        if ('caches' in window) {
+          caches.keys().then(names => {
+            for (const name of names) caches.delete(name);
+          });
+        }
+      } else {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/Gitab/sw.js').catch(() => {});
+        });
+      }
+    }
   })();
-</script>
-
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-  <script>hljs.highlightAll();</script>
-
-  <script>
+  </script> <script>
   document.querySelectorAll('pre code').forEach(block => {
+    const pre = block.parentNode;
+    if (!pre || pre.querySelector('.copy-btn')) return;
+
+    const copySvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
+    const okSvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+
     const btn = document.createElement('button');
     btn.className = 'copy-btn';
-
-    const icon = document.createElement('img');
-    icon.src = "/Gitab/icone/copy.svg";
-    icon.alt = 'Copy';
-    btn.appendChild(icon);
-
-    block.parentNode.insertBefore(btn, block);
+    btn.setAttribute('aria-label', 'کپی کد');
+    btn.setAttribute('title', 'کپی کد');
+    btn.setAttribute('type', 'button');
+    btn.innerHTML = copySvg;
+    pre.appendChild(btn);
 
     btn.addEventListener('click', async () => {
-      await navigator.clipboard.writeText(block.textContent);
-      btn.classList.add('copied');
-      setTimeout(() => btn.classList.remove('copied'), 1500);
-    });
-  });
-  </script>
-
-  <script>
-  document.body.dataset.page = window.location.pathname;
-
-  const menuBtn = document.querySelector(".menu-toggle");
-  const nav = document.querySelector(".nav");
-
-  if (menuBtn && nav) {
-    menuBtn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      nav.classList.toggle("show");
-    });
-
-    document.addEventListener("click", (e) => {
-      const clickedInsideNav = nav.contains(e.target);
-      const clickedMenuButton = menuBtn.contains(e.target);
-      if (!clickedInsideNav && !clickedMenuButton) {
-        nav.classList.remove("show");
+      try {
+        await navigator.clipboard.writeText(block.textContent);
+        btn.classList.add('copied');
+        btn.innerHTML = okSvg;
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          btn.innerHTML = copySvg;
+        }, 1800);
+      } catch (err) {
+        console.error('Copy failed:', err);
       }
     });
-  }
-  </script>
-
-  <script>
-    document.getElementById('y').textContent = new Date().getFullYear();
-  </script>
-  <script>
-document.getElementById("openDonate").addEventListener("click", () => {
-  document.getElementById("donateModal").style.display = "block";
-});
-document.getElementById("closeDonate").addEventListener("click", () => {
-  document.getElementById("donateModal").style.display = "none";
-});
-document.querySelectorAll(".copy-btn").forEach(btn => {
-  btn.addEventListener("click", () => {
-    navigator.clipboard.writeText(btn.dataset.copy);
-  
-    setTimeout(() => (btn.textContent = "کپی"), 2000);
   });
-});
-</script>
+  </script> <script>
+  (() => {
+    const article = document.getElementById('chapterArticle');
+    if (!article) return;
 
-</body>
-</html>
+    const progressBar = document.getElementById('readingProgressBar');
+    if (progressBar) {
+      window.addEventListener('scroll', () => {
+        const docElem = document.documentElement;
+        const totalHeight = docElem.scrollHeight - docElem.clientHeight;
+        if (totalHeight > 0) {
+          const progress = (window.pageYOffset / totalHeight) * 100;
+          progressBar.style.width = Math.min(100, Math.max(0, progress)) + '%';
+        }
+      }, { passive: true });
+    }
+
+    const btt = document.getElementById('backToTopBtn');
+    if (btt) {
+      window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 250) {
+          btt.classList.add('visible');
+        } else {
+          btt.classList.remove('visible');
+        }
+      }, { passive: true });
+
+      btt.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+
+    article.querySelectorAll('img').forEach(img => {
+      if (!img.hasAttribute('loading')) img.loading = 'lazy';
+      if (!img.hasAttribute('decoding')) img.decoding = 'async';
+      const parent = img.parentElement;
+      if (parent && parent.tagName === 'P') {
+        parent.style.textAlign = 'center';
+      }
+
+      img.addEventListener('error', function() {
+        const src = this.getAttribute('src');
+        if (src && src.includes('assets/image/')) {
+          const parts = src.split('assets/image/');
+          const corrected = '/Gitab/books/book2/assets/image/' + parts[1];
+          if (this.src !== corrected) {
+            this.src = corrected;
+          }
+        }
+      });
+    });
+
+    article.querySelectorAll('p').forEach(p => {
+      const trimmed = p.innerText.trim();
+      if (trimmed.startsWith('💡') || trimmed.startsWith('نکته:')) {
+        p.classList.add('react-callout', 'callout-tip');
+      } else if (trimmed.startsWith('⚠️') || trimmed.startsWith('هشدار:')) {
+        p.classList.add('react-callout', 'callout-warning');
+      } else if (trimmed.startsWith('📌') || trimmed.startsWith('مهم:')) {
+        p.classList.add('react-callout', 'callout-important');
+      } else if (trimmed.startsWith('🔹') || trimmed.startsWith('🔸')) {
+        p.classList.add('react-callout', 'callout-note');
+      }
+    });
+  })();
+  </script> <script type="speculationrules">{"prefetch":[{"where":{"and":[{"href_matches":"/Gitab/*"},{"not":{"href_matches":"/Gitab/downloads/*"}},{"not":{"selector_matches":"[download], [target='_blank']"}}]},"eagerness":"moderate"}]}</script> <script>
+  (() => {
+    if (window.HTMLScriptElement && HTMLScriptElement.supports && HTMLScriptElement.supports('speculationrules')) return;
+    const seen = new Set([window.location.href]);
+    let count = 0;
+    const prefetchLink = (e) => {
+      if (count >= 12) return;
+      const a = e.target && e.target.closest ? e.target.closest('header a, .chapter-single-next-nav a, .syllabus-chapter-item a, .btn-hero-read, .btn-card-read') : null;
+      if (!a || !a.href || a.hasAttribute('download') || a.target === '_blank') return;
+      if (a.origin !== window.location.origin || a.pathname.includes('/downloads/')) return;
+      const clean = a.href.split('#')[0];
+      if (!clean || seen.has(clean)) return;
+      seen.add(clean);
+      count++;
+      const l = document.createElement('link');
+      l.rel = 'prefetch';
+      l.href = clean;
+      document.head.appendChild(l);
+    };
+    document.addEventListener('pointerenter', prefetchLink, { capture: true, passive: true });
+    document.addEventListener('touchstart', prefetchLink, { capture: true, passive: true });
+  })();
+  </script></body></html>

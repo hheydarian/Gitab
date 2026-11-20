@@ -1,84 +1,19 @@
-
-
-<!doctype html>
-<html lang="fa" dir="rtl">
-<head>
-  <meta charset="utf-8">
-  <link rel="icon" type="image/png" href="/Gitab/favicon.png">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>یکپارچه‌سازی با Native و COM</title>
-  <meta name="description" content="ترجمه‌های فارسی کتاب‌های فنی — سریع، مینیمال و قابل اتکا.">
-
-  <!-- استایل‌ها -->
-  <link rel="stylesheet" href="/Gitab/styles/main.css">
-  <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
-
-  <style>
-  @font-face {
-    font-family: 'Vazir';
-    src: url('/Gitab/fonts/Vazir-FD-WOL.ttf') format('truetype');
-    font-display: swap;
-  }
-  @font-face {
-    font-family: "Lalezar";
-    src: url('fonts/Lalezar.ttf') format('truetype');
-    font-display: swap;
-}
-  body {
-    font-family: 'Vazir', sans-serif;
-  }
-  </style>
-</head>
-
-<body>
-  <!-- هدر مشترک -->
-  <header class="header">
-    <div class="container nav-wrap">
-      <a href="/Gitab/" class="brand">
-        <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="26" height="26">
-        <span>Gitab</span>
-      </a>
-
-       <nav class="nav">
-         <a href="/Gitab/" >خانه</a>
-         <a href="/Gitab/books/list-books" >کتاب‌ها</a>
-         <a href="/Gitab/giter.html" >دوره ها</a>
-          <!-- 
-         <a href="/Gitab/translator.html" >مترجمین</a>
-           -->
-       </nav>
-
-      <div class="nav-actions">
-        <button id="themeToggle" class="icon-btn theme-btn" data-icon="moon" aria-label="تغییر تم">
-          <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن">
-          <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک">
-        </button>
-
-        <a class="icon-btn" href="https://github.com/hheydarian/Gitab" target="_blank" title="GitHub">
-          <img src="/Gitab/icone/github.svg" alt="GitHub">
-        </a>
-
-        <!-- دکمه منو برای موبایل -->
-        <button class="menu-toggle" aria-label="منو">
-          <img src="/Gitab/icone/menu.svg" alt="menu">
-        </button>
-      </div>
-    </div>
-  </header>
-
-  
-  <main class="site-main book-page">
-    <h1>فصل بیست و چهارم: یکپارچه‌سازی با Native و COM</h1>
-<p>این فصل توضیح می‌دهد چگونه با کتابخانه‌های Native (غیرمدیریت‌شده) Dynamic-Link (DLL) و کامپوننت‌های Component Object Model (COM) یکپارچه شوید. مگر اینکه خلاف آن ذکر شده باشد، انواع داده‌ای که در این فصل آمده‌اند در فضای نام <strong>System</strong> یا <strong>System.Runtime.InteropServices</strong> وجود دارند.</p>
-<hr>
-<h4>فراخوانی DLLهای Native 📦</h4>
-<p><strong>P/Invoke</strong>، کوتاه شده‌ی <strong>Platform Invocation Services</strong>، به شما اجازه می‌دهد به توابع، ساختارها و callback‌ها در DLLهای غیرمدیریت‌شده (کتابخانه‌های مشترک در Unix) دسترسی پیدا کنید.</p>
-<p>برای مثال، تابع <code>MessageBox</code> که در DLL ویندوز <strong>user32.dll</strong> تعریف شده است به شکل زیر است:</p>
-<pre class="hljs"><code><span class="hljs-type">int</span> <span class="hljs-title function_">MessageBox</span><span class="hljs-params">(HWND hWnd, LPCTSTR lpText, LPCTSTR lpCaption, UINT uType)</span>;
-</code></pre>
-<p>می‌توانید این تابع را مستقیماً با تعریف یک متد <strong>static</strong> با همان نام، استفاده از کلمه کلیدی <code>extern</code> و افزودن attribute <code>DllImport</code> فراخوانی کنید:</p>
-<pre class="hljs"><code><span class="hljs-keyword">using</span> System;
+<!doctype html><html lang="fa" dir="rtl"> <head><script>
+    if (window.location.pathname.startsWith('/gitab/')) {
+      window.location.replace(window.location.pathname.replace(/^\/gitab\//i, '/Gitab/') + window.location.search + window.location.hash);
+    }
+    (() => {
+      try {
+        const t = localStorage.getItem('gitab-theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', t);
+        document.documentElement.dataset.colorMode = t;
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        document.documentElement.dataset.colorMode = 'dark';
+      }
+    })();
+  </script> <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5"> <title>یکپارچه‌سازی با Native و COM</title><meta name="description" content="یکپارچه‌سازی با Native و COM — مطالعه آنلاین و رایگان از کتاب «سی‌شارپ ۱۲ در یک نگاه» (C# 12 in a Nutshell) اثر Joseph Albahari با ترجمه حامد حیدریان در گیتاب."> <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"><meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"> <meta name="theme-color" content="#090d16"><meta name="referrer" content="strict-origin-when-cross-origin"> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https:; frame-src https://www.youtube.com https://www.youtube-nocookie.com https://maps.google.com https://www.google.com; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self';"><link rel="icon" type="image/png" href="/Gitab/favicon.png"> <link rel="canonical" href="https://hheydarian.github.io/Gitab/books/book1/Book/24/Native-and-COM-Interoperability/"><link rel="alternate" hreflang="fa" href="https://hheydarian.github.io/Gitab/books/book1/Book/24/Native-and-COM-Interoperability/"> <link rel="alternate" hreflang="x-default" href="https://hheydarian.github.io/Gitab/books/book1/Book/24/Native-and-COM-Interoperability/"><link rel="alternate" type="text/plain" title="LLMs.txt" href="/Gitab/llms.txt"> <link rel="sitemap" type="application/xml" title="Sitemap" href="/Gitab/sitemap.xml"><meta property="og:locale" content="fa_IR"> <meta property="og:type" content="article"><meta property="og:site_name" content="گیتاب | Gitab"> <meta property="og:title" content="یکپارچه‌سازی با Native و COM"><meta property="og:description" content="یکپارچه‌سازی با Native و COM — مطالعه آنلاین و رایگان از کتاب «سی‌شارپ ۱۲ در یک نگاه» (C# 12 in a Nutshell) اثر Joseph Albahari با ترجمه حامد حیدریان در گیتاب."> <meta property="og:url" content="https://hheydarian.github.io/Gitab/books/book1/Book/24/Native-and-COM-Interoperability/"><meta property="og:image" content="https://hheydarian.github.io/Gitab/images/csharp-12/Cover.jpg"> <meta property="og:image:alt" content="یکپارچه‌سازی با Native و COM"><meta name="twitter:card" content="summary_large_image"> <meta name="twitter:title" content="یکپارچه‌سازی با Native و COM"><meta name="twitter:description" content="یکپارچه‌سازی با Native و COM — مطالعه آنلاین و رایگان از کتاب «سی‌شارپ ۱۲ در یک نگاه» (C# 12 in a Nutshell) اثر Joseph Albahari با ترجمه حامد حیدریان در گیتاب."> <meta name="twitter:image" content="https://hheydarian.github.io/Gitab/images/csharp-12/Cover.jpg"><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://hheydarian.github.io/Gitab/#organization","name":"گیتاب | Gitab","alternateName":"Gitab","url":"https://hheydarian.github.io/Gitab/","logo":{"@type":"ImageObject","url":"https://hheydarian.github.io/Gitab/favicon.png"},"sameAs":["https://github.com/hheydarian/Gitab"]},{"@type":"WebSite","@id":"https://hheydarian.github.io/Gitab/#website","url":"https://hheydarian.github.io/Gitab/","name":"گیتاب | Gitab","inLanguage":"fa-IR","publisher":{"@id":"https://hheydarian.github.io/Gitab/#organization"},"potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://hheydarian.github.io/Gitab/books/list-books/?q={search_term_string}"},"query-input":"required name=search_term_string"}},{"@type":"WebPage","@id":"https://hheydarian.github.io/Gitab/books/book1/Book/24/Native-and-COM-Interoperability/#webpage","url":"https://hheydarian.github.io/Gitab/books/book1/Book/24/Native-and-COM-Interoperability/","name":"یکپارچه‌سازی با Native و COM","description":"یکپارچه‌سازی با Native و COM — مطالعه آنلاین و رایگان از کتاب «سی‌شارپ ۱۲ در یک نگاه» (C# 12 in a Nutshell) اثر Joseph Albahari با ترجمه حامد حیدریان در گیتاب.","inLanguage":"fa-IR","isPartOf":{"@id":"https://hheydarian.github.io/Gitab/#website"}},{"@type":"TechArticle","headline":"یکپارچه‌سازی با Native و COM","description":"یکپارچه‌سازی با Native و COM — مطالعه آنلاین و رایگان از کتاب «سی‌شارپ ۱۲ در یک نگاه» (C# 12 in a Nutshell) اثر Joseph Albahari با ترجمه حامد حیدریان در گیتاب.","url":"https://hheydarian.github.io/Gitab/books/book1/Book/24/Native-and-COM-Interoperability/","inLanguage":"fa-IR","isAccessibleForFree":true,"author":{"@type":"Person","name":"Joseph Albahari"},"translator":{"@type":"Person","name":"حامد حیدریان"},"isPartOf":{"@type":"Book","name":"سی‌شارپ ۱۲ در یک نگاه","alternateName":"C# 12 in a Nutshell","url":"https://hheydarian.github.io/Gitab/books/book1/"}}]}</script> <link rel="preload" href="/Gitab/fonts/Vazirmatn.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/Gitab/styles/main.css?v=2.4" as="style"> <link rel="preload" href="/Gitab/styles/gitab-modern.css?v=2.5" as="style"><style>@font-face{font-family:'Lalezar';src:url('/Gitab/fonts/Lalezar.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}@font-face{font-family:'Vazirmatn';src:url('/Gitab/fonts/Vazirmatn.woff2') format('woff2');font-weight:100 900;font-style:normal;font-display:swap}html,body,button,input,optgroup,select,textarea,.filter-pill{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}input::placeholder,textarea::placeholder{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}</style> <link rel="stylesheet" href="/Gitab/styles/main.css?v=2.4"><link rel="stylesheet" href="/Gitab/styles/gitab-modern.css?v=2.5"> <link rel="stylesheet" href="/Gitab/styles/vendor/github-dark.min.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="/Gitab/styles/vendor/github-dark.min.css"></noscript></head> <body><header class="header"> <div class="container nav-wrap"><a href="/Gitab/" class="brand" aria-label="صفحه اصلی گیتاب"> <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="30" height="30" decoding="async"> <span class="brand-text">Gitab</span> </a> <nav class="nav" id="mainNav"><a href="/Gitab/" >خانه</a> <a href="/Gitab/books/list-books" aria-current="page">کتاب‌ها</a> <a href="/Gitab/courses/" >دوره‌ها</a> <a href="/Gitab/translator.html" >مترجمین</a></nav> <div class="nav-actions"><button id="themeToggle" class="theme-toggle-btn" aria-label="تغییر تم" title="تغییر تم"> <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن" width="18" height="18" decoding="async" style="display:none"> <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک" width="18" height="18" decoding="async"> </button> <a class="btn-github-pill" href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" title="مشاهده سورس گیتاب در گیت‌هاب"> <img src="/Gitab/icone/github.svg" alt="GitHub" width="16" height="16" decoding="async"> <span>گیت‌هاب</span> </a> <button class="mobile-menu-btn" id="mobileMenuBtn" type="button" aria-label="باز کردن منو" aria-expanded="false"> <svg class="mob-icon-open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="4" y1="7" x2="20" y2="7"></line> <line x1="4" y1="12" x2="20" y2="12"></line> <line x1="4" y1="17" x2="14" y2="17"></line> </svg> <svg class="mob-icon-close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="18" y1="6" x2="6" y2="18"></line> <line x1="6" y1="6" x2="18" y2="18"></line> </svg> </button></div> </div><div class="mobile-drawer" id="mobileDrawer" aria-hidden="true"> <div class="mobile-drawer-inner"><div class="mobile-drawer-section-label">ناوبری سریع</div><nav class="mobile-drawer-links" aria-label="منوی موبایل"> <a href="/Gitab/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M3 10.5 12 3l9 7.5"></path> <path d="M5 9.5V20a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V9.5"></path> </svg> </span> <span class="mob-nav-text">صفحه نخست</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/books/list-books" class="mobile-drawer-link active" aria-current="page"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path> </svg> </span> <span class="mob-nav-text">کتابخانه و فهرست کتاب‌ها</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/courses/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path> <path d="M6 12v5c3 3 9 3 12 0v-5"></path> </svg> </span> <span class="mob-nav-text">دوره‌های آموزشی</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/translator.html" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path> <circle cx="9" cy="7" r="4"></circle> <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path> <path d="M16 3.13a4 4 0 0 1 0 7.75"></path> </svg> </span> <span class="mob-nav-text">مترجمین و همکاران</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> </nav><div class="mobile-drawer-divider"></div><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" class="mobile-drawer-link mobile-drawer-gh"> <span class="mob-nav-icon" aria-hidden="true"> <img src="/Gitab/icone/github.svg" alt="" width="17" height="17" loading="lazy" decoding="async"> </span> <span class="mob-nav-text">مخزن گیت‌هاب پروژه</span> <span class="mob-nav-ext" aria-hidden="true">↗</span> </a> </div></div> </header><div class="reading-progress-track"> <div class="reading-progress-fill" id="readingProgressBar"></div></div> <main class="site-main chapter-reading-page"><div class="chapter-page-wrapper"> <nav class="chapter-clean-breadcrumb" aria-label="مسیر راهنما" dir="rtl"><a href="/Gitab/">خانه</a> <span class="bc-sep" aria-hidden="true">/</span> <a href="/Gitab/books/list-books/">کتاب‌ها</a> <span class="bc-sep" aria-hidden="true">/</span> <a href="/Gitab/books/book1/"><bdi>سی‌شارپ ۱۲ در یک نگاه</bdi></a> <span class="bc-sep" aria-hidden="true">/</span> <span class="bc-current-leaf"><bdi>یکپارچه‌سازی با Native و COM</bdi></span></nav> <article class="chapter-prose-container markdown-body" id="chapterArticle" dir="rtl"><h1>فصل بیست و چهارم: یکپارچه‌سازی با Native و COM</h1><p>این فصل توضیح می‌دهد چگونه با کتابخانه‌های Native (غیرمدیریت‌شده) Dynamic-Link (DLL) و کامپوننت‌های Component Object Model (COM) یکپارچه شوید. مگر اینکه خلاف آن ذکر شده باشد، انواع داده‌ای که در این فصل آمده‌اند در فضای نام <strong>System</strong> یا <strong>System.Runtime.InteropServices</strong> وجود دارند.</p><hr> <h4>فراخوانی DLLهای Native</h4><p><strong>P/Invoke</strong>، کوتاه شده‌ی <strong>Platform Invocation Services</strong>، به شما اجازه می‌دهد به توابع، ساختارها و callback‌ها در DLLهای غیرمدیریت‌شده (کتابخانه‌های مشترک در Unix) دسترسی پیدا کنید.</p><p>برای مثال، تابع <code>MessageBox</code> که در DLL ویندوز <strong>user32.dll</strong> تعریف شده است به شکل زیر است:</p><pre class="hljs"><code><span class="hljs-function"><span class="hljs-built_in">int</span> <span class="hljs-title">MessageBox</span>(<span class="hljs-params">HWND hWnd, LPCTSTR lpText, LPCTSTR lpCaption, UINT uType</span>)</span>;
+</code></pre> <p>می‌توانید این تابع را مستقیماً با تعریف یک متد <strong>static</strong> با همان نام، استفاده از کلمه کلیدی <code>extern</code> و افزودن attribute <code>DllImport</code> فراخوانی کنید:</p><pre class="hljs"><code><span class="hljs-keyword">using</span> System;
 <span class="hljs-keyword">using</span> System.Runtime.InteropServices;
 
 MessageBox(IntPtr.Zero, 
@@ -86,54 +21,26 @@ MessageBox(IntPtr.Zero,
 
 [<span class="hljs-meta">DllImport(<span class="hljs-string">&quot;user32.dll&quot;</span>)</span>]
 <span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">extern</span> <span class="hljs-built_in">int</span> <span class="hljs-title">MessageBox</span>(<span class="hljs-params">IntPtr hWnd, <span class="hljs-built_in">string</span> text, <span class="hljs-built_in">string</span> caption, <span class="hljs-built_in">int</span> type</span>)</span>;
-</code></pre>
-<p>کلاس‌های <code>MessageBox</code> در فضای نام‌های <strong>System.Windows</strong> و <strong>System.Windows.Forms</strong> خودشان متدهای مشابه غیرمدیریت‌شده را فراخوانی می‌کنند.</p>
-<p>نمونه‌ای از <code>DllImport</code> برای <strong>Ubuntu Linux</strong>:</p>
-<pre class="hljs"><code>Console.WriteLine(<span class="hljs-string">$&quot;User ID: <span class="hljs-subst">{getuid()}</span>&quot;</span>);
+</code></pre> <p>کلاس‌های <code>MessageBox</code> در فضای نام‌های <strong>System.Windows</strong> و <strong>System.Windows.Forms</strong> خودشان متدهای مشابه غیرمدیریت‌شده را فراخوانی می‌کنند.</p><p>نمونه‌ای از <code>DllImport</code> برای <strong>Ubuntu Linux</strong>:</p><pre class="hljs"><code>Console.WriteLine(<span class="hljs-string">$&quot;User ID: <span class="hljs-subst">{getuid()}</span>&quot;</span>);
 
 [<span class="hljs-meta">DllImport(<span class="hljs-string">&quot;libc&quot;</span>)</span>]
 <span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">extern</span> <span class="hljs-built_in">uint</span> <span class="hljs-title">getuid</span>()</span>;
-</code></pre>
-<p>CLR شامل یک <strong>marshaler</strong> است که می‌داند چگونه پارامترها و مقادیر بازگشتی بین انواع .NET و انواع غیرمدیریت‌شده تبدیل شوند. در مثال ویندوز، پارامترهای <code>int</code> مستقیماً به عدد صحیح چهار بایتی که تابع انتظار دارد تبدیل می‌شوند و پارامترهای <code>string</code> به آرایه‌های Unicode پایان‌یافته با null (UTF-16) تبدیل می‌شوند.<br>
-<code>IntPtr</code> یک struct است که برای پوشش یک <strong>handle</strong> غیرمدیریت‌شده طراحی شده؛ در پلتفرم‌های ۳۲ بیتی، ۳۲ بیت و در پلتفرم‌های ۶۴ بیتی، ۶۴ بیت عرض دارد. تبدیل مشابهی در Unix نیز انجام می‌شود. (از C# 9 به بعد، می‌توانید از نوع <code>nint</code> هم استفاده کنید که به <code>IntPtr</code> نگاشت می‌شود.)</p>
-<hr>
-<h4>Marshaling انواع و پارامترها ⚙️</h4>
-<h5>Marshaling انواع رایج</h5>
-<p>در سمت غیرمدیریت‌شده، ممکن است برای نمایش یک نوع داده بیش از یک روش وجود داشته باشد.<br>
-برای مثال، یک رشته (<code>string</code>) می‌تواند شامل کاراکترهای تک‌بایتی ANSI یا کاراکترهای Unicode UTF-16 باشد و طول آن می‌تواند با پیش‌وند مشخص شود، یا null-terminated باشد، یا طول ثابت داشته باشد.</p>
-<p>با استفاده از attribute <code>MarshalAs</code> می‌توانید به marshaler CLR مشخص کنید کدام حالت استفاده شود تا تبدیل صحیح انجام گیرد. مثال:</p>
-<pre class="hljs"><code>[<span class="hljs-meta">DllImport(<span class="hljs-string">&quot;...&quot;</span>)</span>]
+</code></pre> <p>CLR شامل یک <strong>marshaler</strong> است که می‌داند چگونه پارامترها و مقادیر بازگشتی بین انواع .NET و انواع غیرمدیریت‌شده تبدیل شوند. در مثال ویندوز، پارامترهای <code>int</code> مستقیماً به عدد صحیح چهار بایتی که تابع انتظار دارد تبدیل می‌شوند و پارامترهای <code>string</code> به آرایه‌های Unicode پایان‌یافته با null (UTF-16) تبدیل می‌شوند.<br><code>IntPtr</code> یک struct است که برای پوشش یک <strong>handle</strong> غیرمدیریت‌شده طراحی شده؛ در پلتفرم‌های ۳۲ بیتی، ۳۲ بیت و در پلتفرم‌های ۶۴ بیتی، ۶۴ بیت عرض دارد. تبدیل مشابهی در Unix نیز انجام می‌شود. (از C# 9 به بعد، می‌توانید از نوع <code>nint</code> هم استفاده کنید که به <code>IntPtr</code> نگاشت می‌شود.)</p><hr> <h4>Marshaling انواع و پارامترها</h4><h5>Marshaling انواع رایج</h5><p>در سمت غیرمدیریت‌شده، ممکن است برای نمایش یک نوع داده بیش از یک روش وجود داشته باشد.<br> برای مثال، یک رشته (<code>string</code>) می‌تواند شامل کاراکترهای تک‌بایتی ANSI یا کاراکترهای Unicode UTF-16 باشد و طول آن می‌تواند با پیش‌وند مشخص شود، یا null-terminated باشد، یا طول ثابت داشته باشد.</p><p>با استفاده از attribute <code>MarshalAs</code> می‌توانید به marshaler CLR مشخص کنید کدام حالت استفاده شود تا تبدیل صحیح انجام گیرد. مثال:</p><pre class="hljs"><code>[<span class="hljs-meta">DllImport(<span class="hljs-string">&quot;...&quot;</span>)</span>]
 <span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">extern</span> <span class="hljs-built_in">int</span> <span class="hljs-title">Foo</span>(<span class="hljs-params">[MarshalAs(UnmanagedType.LPStr</span>)] <span class="hljs-built_in">string</span> s)</span>;
-</code></pre>
-<p>enum <code>UnmanagedType</code> شامل تمام انواع Win32 و COM است که marshaler آن‌ها را می‌شناسد. در این مثال، marshaler به ترجمه به <code>LPStr</code> دستور داده شد، که یک رشته تک‌بایتی ANSI پایان‌یافته با null است.</p>
-<p>در سمت .NET نیز شما می‌توانید نوع داده‌ای که استفاده می‌کنید را انتخاب کنید. <strong>Handles</strong> غیرمدیریت‌شده، برای مثال، می‌توانند به <code>IntPtr</code>، <code>int</code>، <code>uint</code>، <code>long</code> یا <code>ulong</code> نگاشت شوند.</p>
-<p>بیشتر handles غیرمدیریت‌شده یک آدرس یا pointer را در بر دارند و بنابراین برای سازگاری با سیستم‌عامل‌های ۳۲ و ۶۴ بیتی باید به <code>IntPtr</code> نگاشت شوند. یک مثال معمول، <code>HWND</code> است.</p>
-<p>اغلب در توابع Win32 و POSIX، با پارامترهای عدد صحیح مواجه می‌شوید که مجموعه‌ای از <strong>constants</strong> را می‌پذیرند، که در فایل هدر C++ مانند <code>WinUser.h</code> تعریف شده‌اند. به جای تعریف آن‌ها به عنوان constants ساده در C#، می‌توانید آن‌ها را در یک <strong>enum</strong> تعریف کنید. استفاده از enum باعث تمیزتر شدن کد و افزایش ایمنی نوعی می‌شود. نمونه‌ای در بخش «Shared Memory» در صفحه ۹۹۵ ارائه شده است.</p>
-<hr>
-<p>هنگام نصب <strong>Microsoft Visual Studio</strong>، حتماً فایل‌های هدر C++ را نصب کنید—حتی اگر هیچ مورد دیگری از دسته C++ انتخاب نکرده باشید. اینجا جایی است که تمام constants بومی Win32 تعریف شده‌اند. سپس می‌توانید همه فایل‌های هدر را با جستجوی <code>*.h</code> در دایرکتوری برنامه Visual Studio پیدا کنید.</p>
-<p>در Unix، استاندارد POSIX نام‌های constants را تعریف می‌کند، اما پیاده‌سازی‌های فردی سیستم‌های Unix سازگار با POSIX ممکن است مقادیر عددی متفاوتی برای این constants اختصاص دهند. باید از مقدار عددی صحیح برای سیستم‌عامل خود استفاده کنید. همچنین، POSIX یک استاندارد برای structهای استفاده‌شده در فراخوانی interop تعریف می‌کند. ترتیب فیلدها در struct توسط استاندارد ثابت نشده و ممکن است پیاده‌سازی Unix فیلدهای اضافی اضافه کند. فایل‌های هدر C++ که توابع و انواع را تعریف می‌کنند معمولاً در <code>/usr/include</code> یا <code>/usr/local/include</code> نصب می‌شوند.</p>
-<hr>
-<p>دریافت رشته‌ها از کد غیرمدیریت‌شده به .NET نیازمند مدیریت حافظه است. marshaler به طور خودکار این کار را انجام می‌دهد اگر متد خارجی را با <code>StringBuilder</code> به جای <code>string</code> اعلام کنید، مانند:</p>
-<pre class="hljs"><code>StringBuilder s = <span class="hljs-keyword">new</span> StringBuilder(<span class="hljs-number">256</span>);
+</code></pre> <p>enum <code>UnmanagedType</code> شامل تمام انواع Win32 و COM است که marshaler آن‌ها را می‌شناسد. در این مثال، marshaler به ترجمه به <code>LPStr</code> دستور داده شد، که یک رشته تک‌بایتی ANSI پایان‌یافته با null است.</p><p>در سمت .NET نیز شما می‌توانید نوع داده‌ای که استفاده می‌کنید را انتخاب کنید. <strong>Handles</strong> غیرمدیریت‌شده، برای مثال، می‌توانند به <code>IntPtr</code>، <code>int</code>، <code>uint</code>، <code>long</code> یا <code>ulong</code> نگاشت شوند.</p><p>بیشتر handles غیرمدیریت‌شده یک آدرس یا pointer را در بر دارند و بنابراین برای سازگاری با سیستم‌عامل‌های ۳۲ و ۶۴ بیتی باید به <code>IntPtr</code> نگاشت شوند. یک مثال معمول، <code>HWND</code> است.</p><p>اغلب در توابع Win32 و POSIX، با پارامترهای عدد صحیح مواجه می‌شوید که مجموعه‌ای از <strong>constants</strong> را می‌پذیرند، که در فایل هدر C++ مانند <code>WinUser.h</code> تعریف شده‌اند. به جای تعریف آن‌ها به عنوان constants ساده در C#، می‌توانید آن‌ها را در یک <strong>enum</strong> تعریف کنید. استفاده از enum باعث تمیزتر شدن کد و افزایش ایمنی نوعی می‌شود. نمونه‌ای در بخش «Shared Memory» در صفحه ۹۹۵ ارائه شده است.</p><hr> <p>هنگام نصب <strong>Microsoft Visual Studio</strong>، حتماً فایل‌های هدر C++ را نصب کنید—حتی اگر هیچ مورد دیگری از دسته C++ انتخاب نکرده باشید. اینجا جایی است که تمام constants بومی Win32 تعریف شده‌اند. سپس می‌توانید همه فایل‌های هدر را با جستجوی <code>*.h</code> در دایرکتوری برنامه Visual Studio پیدا کنید.</p><p>در Unix، استاندارد POSIX نام‌های constants را تعریف می‌کند، اما پیاده‌سازی‌های فردی سیستم‌های Unix سازگار با POSIX ممکن است مقادیر عددی متفاوتی برای این constants اختصاص دهند. باید از مقدار عددی صحیح برای سیستم‌عامل خود استفاده کنید. همچنین، POSIX یک استاندارد برای structهای استفاده‌شده در فراخوانی interop تعریف می‌کند. ترتیب فیلدها در struct توسط استاندارد ثابت نشده و ممکن است پیاده‌سازی Unix فیلدهای اضافی اضافه کند. فایل‌های هدر C++ که توابع و انواع را تعریف می‌کنند معمولاً در <code>/usr/include</code> یا <code>/usr/local/include</code> نصب می‌شوند.</p><hr> <p>دریافت رشته‌ها از کد غیرمدیریت‌شده به .NET نیازمند مدیریت حافظه است. marshaler به طور خودکار این کار را انجام می‌دهد اگر متد خارجی را با <code>StringBuilder</code> به جای <code>string</code> اعلام کنید، مانند:</p><pre class="hljs"><code>StringBuilder s = <span class="hljs-keyword">new</span> StringBuilder(<span class="hljs-number">256</span>);
 GetWindowsDirectory(s, <span class="hljs-number">256</span>);
 Console.WriteLine(s);
 
 [<span class="hljs-meta">DllImport(<span class="hljs-string">&quot;kernel32.dll&quot;</span>)</span>]
 <span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">extern</span> <span class="hljs-built_in">int</span> <span class="hljs-title">GetWindowsDirectory</span>(<span class="hljs-params">StringBuilder sb, <span class="hljs-built_in">int</span> maxChars</span>)</span>;
-</code></pre>
-<p>در Unix نیز مشابه عمل می‌کند. مثال زیر تابع <code>getcwd</code> را فراخوانی می‌کند تا مسیر جاری را بازگرداند:</p>
-<pre class="hljs"><code><span class="hljs-keyword">var</span> sb = <span class="hljs-keyword">new</span> StringBuilder(<span class="hljs-number">256</span>);
+</code></pre> <p>در Unix نیز مشابه عمل می‌کند. مثال زیر تابع <code>getcwd</code> را فراخوانی می‌کند تا مسیر جاری را بازگرداند:</p><pre class="hljs"><code><span class="hljs-keyword">var</span> sb = <span class="hljs-keyword">new</span> StringBuilder(<span class="hljs-number">256</span>);
 Console.WriteLine(getcwd(sb, sb.Capacity));
 
 [<span class="hljs-meta">DllImport(<span class="hljs-string">&quot;libc&quot;</span>)</span>]
 <span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">extern</span> <span class="hljs-built_in">string</span> <span class="hljs-title">getcwd</span>(<span class="hljs-params">StringBuilder buf, <span class="hljs-built_in">int</span> size</span>)</span>;
-</code></pre>
-<p>اگرچه استفاده از <code>StringBuilder</code> راحت است، اما کمی ناکارآمد است زیرا CLR باید تخصیص‌های حافظه اضافی و کپی‌کردن‌ها را انجام دهد. در نقاط حساس عملکرد، می‌توانید با استفاده از <code>char[]</code> این سربار را کاهش دهید:</p>
-<pre class="hljs"><code>[<span class="hljs-meta">DllImport(<span class="hljs-string">&quot;kernel32.dll&quot;</span>, CharSet = CharSet.Unicode)</span>]
+</code></pre> <p>اگرچه استفاده از <code>StringBuilder</code> راحت است، اما کمی ناکارآمد است زیرا CLR باید تخصیص‌های حافظه اضافی و کپی‌کردن‌ها را انجام دهد. در نقاط حساس عملکرد، می‌توانید با استفاده از <code>char[]</code> این سربار را کاهش دهید:</p><pre class="hljs"><code>[<span class="hljs-meta">DllImport(<span class="hljs-string">&quot;kernel32.dll&quot;</span>, CharSet = CharSet.Unicode)</span>]
 <span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">extern</span> <span class="hljs-built_in">int</span> <span class="hljs-title">GetWindowsDirectory</span>(<span class="hljs-params"><span class="hljs-built_in">char</span>[] buffer, <span class="hljs-built_in">int</span> maxChars</span>)</span>;
-</code></pre>
-<p>توجه کنید که باید <code>CharSet</code> را در attribute <code>DllImport</code> مشخص کنید. همچنین پس از فراخوانی تابع، باید رشته خروجی را به طول مناسب برش دهید. می‌توانید این کار را با حداقل تخصیص حافظه با استفاده از <strong>array pooling</strong> (صفحه ۵۹۹) انجام دهید:</p>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-built_in">string</span> <span class="hljs-title">GetWindowsDirectory</span>()</span>
+</code></pre> <p>توجه کنید که باید <code>CharSet</code> را در attribute <code>DllImport</code> مشخص کنید. همچنین پس از فراخوانی تابع، باید رشته خروجی را به طول مناسب برش دهید. می‌توانید این کار را با حداقل تخصیص حافظه با استفاده از <strong>array pooling</strong> (صفحه ۵۹۹) انجام دهید:</p><pre class="hljs"><code><span class="hljs-function"><span class="hljs-built_in">string</span> <span class="hljs-title">GetWindowsDirectory</span>()</span>
 {
     <span class="hljs-keyword">var</span> array = ArrayPool&lt;<span class="hljs-built_in">char</span>&gt;.Shared.Rent(<span class="hljs-number">256</span>);
     <span class="hljs-keyword">try</span>
@@ -143,15 +50,8 @@ Console.WriteLine(getcwd(sb, sb.Capacity));
     }
     <span class="hljs-keyword">finally</span> { ArrayPool&lt;<span class="hljs-built_in">char</span>&gt;.Shared.Return(array); }
 }
-</code></pre>
-<p>(البته، این مثال صرفاً آموزشی است و شما می‌توانید مسیر Windows را از طریق متد داخلی <code>Environment.GetFolderPath</code> دریافت کنید.)</p>
-<p>اگر مطمئن نیستید چگونه یک متد خاص Win32 یا Unix را فراخوانی کنید، معمولاً با جستجوی نام تابع و <code>DllImport</code> در اینترنت، نمونه‌ای پیدا خواهید کرد. برای ویندوز، سایت <a href="http://www.pinvoke.net">http://www.pinvoke.net</a> یک ویکی است که هدف آن مستندسازی تمام signatureهای Win32 است.</p>
-<h3>Marshaling کلاس‌ها و Structها 📦</h3>
-<p>گاهی اوقات نیاز دارید یک <strong>struct</strong> را به یک متد غیرمدیریت‌شده ارسال کنید. برای مثال، تابع <code>GetSystemTime</code> در API ویندوز به شکل زیر تعریف شده است:</p>
-<pre class="hljs"><code><span class="hljs-type">void</span> <span class="hljs-title function_">GetSystemTime</span><span class="hljs-params">(LPSYSTEMTIME lpSystemTime)</span>;
-</code></pre>
-<p><code>LPSYSTEMTIME</code> مطابق با این struct در C است:</p>
-<pre class="hljs"><code><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> _<span class="hljs-title">SYSTEMTIME</span> {</span>
+</code></pre> <p>(البته، این مثال صرفاً آموزشی است و شما می‌توانید مسیر Windows را از طریق متد داخلی <code>Environment.GetFolderPath</code> دریافت کنید.)</p><p>اگر مطمئن نیستید چگونه یک متد خاص Win32 یا Unix را فراخوانی کنید، معمولاً با جستجوی نام تابع و <code>DllImport</code> در اینترنت، نمونه‌ای پیدا خواهید کرد. برای ویندوز، سایت <a href="http://www.pinvoke.net">http://www.pinvoke.net</a> یک ویکی است که هدف آن مستندسازی تمام signatureهای Win32 است.</p><h3>Marshaling کلاس‌ها و Structها</h3><p>گاهی اوقات نیاز دارید یک <strong>struct</strong> را به یک متد غیرمدیریت‌شده ارسال کنید. برای مثال، تابع <code>GetSystemTime</code> در API ویندوز به شکل زیر تعریف شده است:</p><pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">GetSystemTime</span>(<span class="hljs-params">LPSYSTEMTIME lpSystemTime</span>)</span>;
+</code></pre> <p><code>LPSYSTEMTIME</code> مطابق با این struct در C است:</p><pre class="hljs"><code>typedef <span class="hljs-keyword">struct</span> _SYSTEMTIME {
   WORD wYear;
   WORD wMonth;
   WORD wDayOfWeek;
@@ -161,9 +61,7 @@ Console.WriteLine(getcwd(sb, sb.Capacity));
   WORD wSecond;
   WORD wMilliseconds;
 } SYSTEMTIME, *PSYSTEMTIME;
-</code></pre>
-<p>برای فراخوانی <code>GetSystemTime</code>، باید یک کلاس یا struct در .NET تعریف کنیم که با این struct در C مطابقت داشته باشد:</p>
-<pre class="hljs"><code><span class="hljs-keyword">using</span> System;
+</code></pre> <p>برای فراخوانی <code>GetSystemTime</code>، باید یک کلاس یا struct در .NET تعریف کنیم که با این struct در C مطابقت داشته باشد:</p><pre class="hljs"><code><span class="hljs-keyword">using</span> System;
 <span class="hljs-keyword">using</span> System.Runtime.InteropServices;
 
 [<span class="hljs-meta">StructLayout(LayoutKind.Sequential)</span>]
@@ -178,18 +76,13 @@ Console.WriteLine(getcwd(sb, sb.Capacity));
     <span class="hljs-keyword">public</span> <span class="hljs-built_in">ushort</span> Second;
     <span class="hljs-keyword">public</span> <span class="hljs-built_in">ushort</span> Milliseconds;
 }
-</code></pre>
-<p>Attribute <code>StructLayout</code> به marshaler می‌گوید چگونه هر فیلد را به معادل غیرمدیریت‌شده‌اش نگاشت کند. <code>LayoutKind.Sequential</code> به این معنی است که فیلدها به ترتیب پشت سر هم و روی مرزهای <strong>pack-size</strong> قرار می‌گیرند (که بعداً توضیح داده می‌شود)، درست مانند struct در C. نام فیلدها اهمیت ندارد، بلکه <strong>ترتیب فیلدها</strong> مهم است.</p>
-<p>حالا می‌توانیم <code>GetSystemTime</code> را فراخوانی کنیم:</p>
-<pre class="hljs"><code>SystemTime t = <span class="hljs-keyword">new</span> SystemTime();
+</code></pre> <p>Attribute <code>StructLayout</code> به marshaler می‌گوید چگونه هر فیلد را به معادل غیرمدیریت‌شده‌اش نگاشت کند. <code>LayoutKind.Sequential</code> به این معنی است که فیلدها به ترتیب پشت سر هم و روی مرزهای <strong>pack-size</strong> قرار می‌گیرند (که بعداً توضیح داده می‌شود)، درست مانند struct در C. نام فیلدها اهمیت ندارد، بلکه <strong>ترتیب فیلدها</strong> مهم است.</p><p>حالا می‌توانیم <code>GetSystemTime</code> را فراخوانی کنیم:</p><pre class="hljs"><code>SystemTime t = <span class="hljs-keyword">new</span> SystemTime();
 GetSystemTime(t);
 Console.WriteLine(t.Year);
 
 [<span class="hljs-meta">DllImport(<span class="hljs-string">&quot;kernel32.dll&quot;</span>)</span>]
 <span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">extern</span> <span class="hljs-keyword">void</span> <span class="hljs-title">GetSystemTime</span>(<span class="hljs-params">SystemTime t</span>)</span>;
-</code></pre>
-<p>به‌طور مشابه، در Unix:</p>
-<pre class="hljs"><code>Console.WriteLine(GetSystemTime());
+</code></pre> <p>به‌طور مشابه، در Unix:</p><pre class="hljs"><code>Console.WriteLine(GetSystemTime());
 
 <span class="hljs-function"><span class="hljs-keyword">static</span> DateTime <span class="hljs-title">GetSystemTime</span>()</span>
 {
@@ -209,61 +102,15 @@ Console.WriteLine(t.Year);
     <span class="hljs-keyword">public</span> <span class="hljs-built_in">long</span> tv_sec;   <span class="hljs-comment">/* ثانیه */</span>
     <span class="hljs-keyword">public</span> <span class="hljs-built_in">long</span> tv_nsec;  <span class="hljs-comment">/* نانوثانیه */</span>
 }
-</code></pre>
-<p>در هر دو زبان C و C#، فیلدهای یک شیء در فاصله‌ای از آدرس آن شیء قرار دارند. تفاوت در این است که در برنامه C#، CLR این <strong>offset</strong> را با استفاده از token فیلد پیدا می‌کند؛ اما در C، نام فیلد مستقیماً به offset کامپایل می‌شود.<br>
-برای مثال، در C، <code>wDay</code> فقط یک token است که نشان می‌دهد چه چیزی در آدرس یک نمونه <code>SystemTime</code> به اضافه ۲۴ بایت قرار دارد.</p>
-<p>برای سرعت دسترسی، هر فیلد در offsetی قرار می‌گیرد که مضربی از اندازه فیلد است. این ضریب حداکثر به x بایت محدود است، که x اندازه <strong>pack</strong> است. در پیاده‌سازی فعلی، pack پیش‌فرض ۸ بایت است، بنابراین یک struct شامل <code>sbyte</code> و سپس یک <code>long</code> (۸ بایت) به ۱۶ بایت اشغال می‌شود و ۷ بایت بعد از <code>sbyte</code> هدر می‌رود. با تعیین اندازه pack از طریق ویژگی <code>Pack</code> در attribute <code>StructLayout</code> می‌توان این هدر رفت را کاهش یا حذف کرد. برای مثال، با pack برابر ۱، همان struct تنها ۹ بایت اشغال می‌کند. می‌توانید pack‌های ۱، ۲، ۴، ۸ یا ۱۶ بایت تعیین کنید.</p>
-<p>Attribute <code>StructLayout</code> همچنین اجازه می‌دهد <strong>offsetهای صریح فیلدها</strong> را مشخص کنید (صفحه ۹۹۴: «Simulating a C Union»).</p>
-<hr>
-<h4>In و Out Marshaling ↔️</h4>
-<p>در مثال قبلی، <code>SystemTime</code> به صورت کلاس پیاده‌سازی شد. می‌توانستیم به جای آن struct انتخاب کنیم—مشروط بر اینکه <code>GetSystemTime</code> با پارامتر <code>ref</code> یا <code>out</code> اعلام شود:</p>
-<pre class="hljs"><code>[<span class="hljs-meta">DllImport(<span class="hljs-string">&quot;kernel32.dll&quot;</span>)</span>]
+</code></pre> <p>در هر دو زبان C و C#، فیلدهای یک شیء در فاصله‌ای از آدرس آن شیء قرار دارند. تفاوت در این است که در برنامه C#، CLR این <strong>offset</strong> را با استفاده از token فیلد پیدا می‌کند؛ اما در C، نام فیلد مستقیماً به offset کامپایل می‌شود.<br> برای مثال، در C، <code>wDay</code> فقط یک token است که نشان می‌دهد چه چیزی در آدرس یک نمونه <code>SystemTime</code> به اضافه ۲۴ بایت قرار دارد.</p><p>برای سرعت دسترسی، هر فیلد در offsetی قرار می‌گیرد که مضربی از اندازه فیلد است. این ضریب حداکثر به x بایت محدود است، که x اندازه <strong>pack</strong> است. در پیاده‌سازی فعلی، pack پیش‌فرض ۸ بایت است، بنابراین یک struct شامل <code>sbyte</code> و سپس یک <code>long</code> (۸ بایت) به ۱۶ بایت اشغال می‌شود و ۷ بایت بعد از <code>sbyte</code> هدر می‌رود. با تعیین اندازه pack از طریق ویژگی <code>Pack</code> در attribute <code>StructLayout</code> می‌توان این هدر رفت را کاهش یا حذف کرد. برای مثال، با pack برابر ۱، همان struct تنها ۹ بایت اشغال می‌کند. می‌توانید pack‌های ۱، ۲، ۴، ۸ یا ۱۶ بایت تعیین کنید.</p><p>Attribute <code>StructLayout</code> همچنین اجازه می‌دهد <strong>offsetهای صریح فیلدها</strong> را مشخص کنید (صفحه ۹۹۴: «Simulating a C Union»).</p><hr> <h4>In و Out Marshaling ↔</h4><p>در مثال قبلی، <code>SystemTime</code> به صورت کلاس پیاده‌سازی شد. می‌توانستیم به جای آن struct انتخاب کنیم—مشروط بر اینکه <code>GetSystemTime</code> با پارامتر <code>ref</code> یا <code>out</code> اعلام شود:</p><pre class="hljs"><code>[<span class="hljs-meta">DllImport(<span class="hljs-string">&quot;kernel32.dll&quot;</span>)</span>]
 <span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">extern</span> <span class="hljs-keyword">void</span> <span class="hljs-title">GetSystemTime</span>(<span class="hljs-params"><span class="hljs-keyword">out</span> SystemTime t</span>)</span>;
-</code></pre>
-<p>در اکثر موارد، semantics پارامترهای جهت‌دار C# با متدهای خارجی یکسان است:</p>
-<ul>
-<li>پارامترهای <strong>Pass-by-value</strong> کپی می‌شوند،</li>
-<li>پارامترهای <code>ref</code> کپی در/خارج می‌شوند،</li>
-<li>پارامترهای <code>out</code> کپی خروجی می‌شوند.</li>
-</ul>
-<p>با این حال، برای برخی نوع‌ها که تبدیل خاصی دارند، استثنا وجود دارد. برای مثال، کلاس‌های آرایه و <code>StringBuilder</code> هنگام خروج از تابع نیاز به کپی دارند، بنابراین رفتارشان <strong>in/out</strong> است. گاهی اوقات مفید است که این رفتار را با attributes <code>In</code> و <code>Out</code> بازنویسی کنیم.</p>
-<p>برای مثال، اگر یک آرایه باید <strong>فقط خواندنی</strong> باشد، modifier <code>in</code> مشخص می‌کند که فقط کپی ورودی آرایه به تابع انجام شود، نه خروجی آن:</p>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">extern</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Foo</span>(<span class="hljs-params">[In] <span class="hljs-built_in">int</span>[] array</span>)</span>;
-</code></pre>
-<h3>Calling Conventions ⚙️</h3>
-<p>متدهای غیرمدیریت‌شده آرگومان‌ها و مقادیر بازگشتی را از طریق <strong>stack</strong> و (اختیاری) <strong>CPU registers</strong> دریافت می‌کنند. از آنجا که چندین روش برای انجام این کار وجود دارد، پروتکل‌های مختلفی شکل گرفته‌اند که به آن‌ها <strong>calling conventions</strong> گفته می‌شود.</p>
-<p>CLR در حال حاضر از سه calling convention پشتیبانی می‌کند:</p>
-<ul>
-<li><code>StdCall</code></li>
-<li><code>Cdecl</code></li>
-<li><code>ThisCall</code></li>
-</ul>
-<p>به طور پیش‌فرض، CLR از <strong>calling convention پیش‌فرض پلتفرم</strong> استفاده می‌کند (convention استاندارد برای آن پلتفرم). در ویندوز، این convention برابر با <code>StdCall</code> است و در لینوکس x86 برابر با <code>Cdecl</code>.</p>
-<p>اگر یک متد غیرمدیریت‌شده از این پیش‌فرض پیروی نکند، می‌توانید به صورت صریح calling convention آن را مشخص کنید:</p>
-<pre class="hljs"><code>[<span class="hljs-meta">DllImport(<span class="hljs-string">&quot;MyLib.dll&quot;</span>, CallingConvention=CallingConvention.Cdecl)</span>]
+</code></pre> <p>در اکثر موارد، semantics پارامترهای جهت‌دار C# با متدهای خارجی یکسان است:</p><ul> <li>پارامترهای <strong>Pass-by-value</strong> کپی می‌شوند،</li><li>پارامترهای <code>ref</code> کپی در/خارج می‌شوند،</li><li>پارامترهای <code>out</code> کپی خروجی می‌شوند.</li></ul> <p>با این حال، برای برخی نوع‌ها که تبدیل خاصی دارند، استثنا وجود دارد. برای مثال، کلاس‌های آرایه و <code>StringBuilder</code> هنگام خروج از تابع نیاز به کپی دارند، بنابراین رفتارشان <strong>in/out</strong> است. گاهی اوقات مفید است که این رفتار را با attributes <code>In</code> و <code>Out</code> بازنویسی کنیم.</p><p>برای مثال، اگر یک آرایه باید <strong>فقط خواندنی</strong> باشد، modifier <code>in</code> مشخص می‌کند که فقط کپی ورودی آرایه به تابع انجام شود، نه خروجی آن:</p><pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">extern</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Foo</span>(<span class="hljs-params">[In] <span class="hljs-built_in">int</span>[] array</span>)</span>;
+</code></pre> <h3>Calling Conventions</h3><p>متدهای غیرمدیریت‌شده آرگومان‌ها و مقادیر بازگشتی را از طریق <strong>stack</strong> و (اختیاری) <strong>CPU registers</strong> دریافت می‌کنند. از آنجا که چندین روش برای انجام این کار وجود دارد، پروتکل‌های مختلفی شکل گرفته‌اند که به آن‌ها <strong>calling conventions</strong> گفته می‌شود.</p><p>CLR در حال حاضر از سه calling convention پشتیبانی می‌کند:</p><ul> <li><code>StdCall</code></li><li><code>Cdecl</code></li><li><code>ThisCall</code></li></ul> <p>به طور پیش‌فرض، CLR از <strong>calling convention پیش‌فرض پلتفرم</strong> استفاده می‌کند (convention استاندارد برای آن پلتفرم). در ویندوز، این convention برابر با <code>StdCall</code> است و در لینوکس x86 برابر با <code>Cdecl</code>.</p><p>اگر یک متد غیرمدیریت‌شده از این پیش‌فرض پیروی نکند، می‌توانید به صورت صریح calling convention آن را مشخص کنید:</p><pre class="hljs"><code>[<span class="hljs-meta">DllImport(<span class="hljs-string">&quot;MyLib.dll&quot;</span>, CallingConvention=CallingConvention.Cdecl)</span>]
 <span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">extern</span> <span class="hljs-keyword">void</span> <span class="hljs-title">SomeFunc</span>(<span class="hljs-params">...</span>)</span>;
-</code></pre>
-<p>توجه داشته باشید که نام somewhat misleading <code>CallingConvention.WinApi</code> به convention پیش‌فرض پلتفرم اشاره دارد.</p>
-<hr>
-<h3>فراخوانی بازگشتی از کد غیرمدیریت‌شده 🔄</h3>
-<p>C# همچنین اجازه می‌دهد توابع خارجی، کد C# را فراخوانی کنند، از طریق <strong>callbacks</strong>. دو روش برای پیاده‌سازی callbacks وجود دارد:</p>
-<ul>
-<li>از طریق <strong>function pointers</strong></li>
-<li>از طریق <strong>delegates</strong></li>
-</ul>
-<p>برای مثال، تابع زیر در <code>User32.dll</code> ویندوز، تمام handles پنجره‌های سطح بالا را enumerate می‌کند:</p>
-<pre class="hljs"><code>BOOL <span class="hljs-title function_">EnumWindows</span><span class="hljs-params">(WNDENUMPROC lpEnumFunc, LPARAM lParam)</span>;
-</code></pre>
-<p><code>WNDENUMPROC</code> یک callback است که برای هر handle پنجره به ترتیب فراخوانی می‌شود (یا تا زمانی که callback <code>false</code> بازگرداند). تعریف آن به شکل زیر است:</p>
-<pre class="hljs"><code>BOOL CALLBACK <span class="hljs-title function_">EnumWindowsProc</span><span class="hljs-params">(HWND hwnd, LPARAM lParam)</span>;
-</code></pre>
-<hr>
-<h4>Callbacks با Function Pointers 🔹</h4>
-<p>از <strong>C# 9</strong>، ساده‌ترین و سریع‌ترین گزینه—وقتی callback شما یک متد <strong>static</strong> است—استفاده از function pointer است. در مورد callback <code>WNDENUMPROC</code>، می‌توان از function pointer زیر استفاده کرد:</p>
-<pre class="hljs"><code><span class="hljs-built_in">delegate</span>*&lt;IntPtr, IntPtr, <span class="hljs-built_in">bool</span>&gt;
-</code></pre>
-<p>این یک تابع را نشان می‌دهد که دو آرگومان <code>IntPtr</code> می‌گیرد و <code>bool</code> برمی‌گرداند. سپس می‌توانید با استفاده از عملگر <code>&amp;</code> آن را به یک متد static اختصاص دهید:</p>
-<pre class="hljs"><code><span class="hljs-keyword">using</span> System;
+</code></pre> <p>توجه داشته باشید که نام somewhat misleading <code>CallingConvention.WinApi</code> به convention پیش‌فرض پلتفرم اشاره دارد.</p><hr> <h3>فراخوانی بازگشتی از کد غیرمدیریت‌شده</h3><p>C# همچنین اجازه می‌دهد توابع خارجی، کد C# را فراخوانی کنند، از طریق <strong>callbacks</strong>. دو روش برای پیاده‌سازی callbacks وجود دارد:</p><ul> <li>از طریق <strong>function pointers</strong></li><li>از طریق <strong>delegates</strong></li></ul> <p>برای مثال، تابع زیر در <code>User32.dll</code> ویندوز، تمام handles پنجره‌های سطح بالا را enumerate می‌کند:</p><pre class="hljs"><code><span class="hljs-function">BOOL <span class="hljs-title">EnumWindows</span>(<span class="hljs-params">WNDENUMPROC lpEnumFunc, LPARAM lParam</span>)</span>;
+</code></pre> <p><code>WNDENUMPROC</code> یک callback است که برای هر handle پنجره به ترتیب فراخوانی می‌شود (یا تا زمانی که callback <code>false</code> بازگرداند). تعریف آن به شکل زیر است:</p><pre class="hljs"><code><span class="hljs-function">BOOL CALLBACK <span class="hljs-title">EnumWindowsProc</span>(<span class="hljs-params">HWND hwnd, LPARAM lParam</span>)</span>;
+</code></pre> <hr><h4>Callbacks با Function Pointers</h4><p>از <strong>C# 9</strong>، ساده‌ترین و سریع‌ترین گزینه—وقتی callback شما یک متد <strong>static</strong> است—استفاده از function pointer است. در مورد callback <code>WNDENUMPROC</code>، می‌توان از function pointer زیر استفاده کرد:</p><pre class="hljs"><code><span class="hljs-built_in">delegate</span>*&lt;IntPtr, IntPtr, <span class="hljs-built_in">bool</span>&gt;
+</code></pre> <p>این یک تابع را نشان می‌دهد که دو آرگومان <code>IntPtr</code> می‌گیرد و <code>bool</code> برمی‌گرداند. سپس می‌توانید با استفاده از عملگر <code>&amp;</code> آن را به یک متد static اختصاص دهید:</p><pre class="hljs"><code><span class="hljs-keyword">using</span> System;
 <span class="hljs-keyword">using</span> System.Runtime.InteropServices;
 
 <span class="hljs-keyword">unsafe</span>
@@ -279,12 +126,7 @@ Console.WriteLine(t.Year);
         <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
     }
 }
-</code></pre>
-<p>با function pointers، callback باید یک متد <strong>static</strong> باشد (یا یک <strong>static local function</strong> همانند مثال بالا).</p>
-<hr>
-<h4>UnmanagedCallersOnly ⚡</h4>
-<p>می‌توانید با اعمال <strong>unmanaged</strong> به declaration function pointer و attribute <code>[UnmanagedCallersOnly]</code> به متد callback، عملکرد را بهبود دهید:</p>
-<pre class="hljs"><code><span class="hljs-keyword">using</span> System;
+</code></pre> <p>با function pointers، callback باید یک متد <strong>static</strong> باشد (یا یک <strong>static local function</strong> همانند مثال بالا).</p><hr> <h4>UnmanagedCallersOnly</h4><p>می‌توانید با اعمال <strong>unmanaged</strong> به declaration function pointer و attribute <code>[UnmanagedCallersOnly]</code> به متد callback، عملکرد را بهبود دهید:</p><pre class="hljs"><code><span class="hljs-keyword">using</span> System;
 <span class="hljs-keyword">using</span> System.Runtime.CompilerServices;
 <span class="hljs-keyword">using</span> System.Runtime.InteropServices;
 
@@ -302,35 +144,11 @@ Console.WriteLine(t.Year);
         <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
     }
 }
-</code></pre>
-<p>این attribute به CLR اطلاع می‌دهد که متد <code>PrintWindow</code> تنها از کد غیرمدیریت‌شده قابل فراخوانی است و اجازه می‌دهد runtime برخی shortcuts را اعمال کند. توجه کنید که نوع بازگشتی متد از <code>bool</code> به <code>byte</code> تغییر کرده است، زیرا متدهایی که <code>[UnmanagedCallersOnly]</code> دارند، تنها می‌توانند از <strong>blittable value types</strong> در signature استفاده کنند.</p>
-<p><strong>Blittable types</strong> آن‌هایی هستند که نیاز به marshaling خاص ندارند، زیرا در محیط‌های مدیریت‌شده و غیرمدیریت‌شده به یک شکل نمایش داده می‌شوند. این نوع‌ها شامل:</p>
-<ul>
-<li>انواع صحیح ابتدایی (primitive integral types)</li>
-<li><code>float</code> و <code>double</code></li>
-<li>structهایی که تنها شامل blittable types هستند</li>
-</ul>
-<p>نوع <code>char</code> نیز blittable است، اگر بخشی از structی باشد که attribute <code>StructLayout</code> آن <strong>CharSet.Unicode</strong> را مشخص کرده باشد:</p>
-<pre class="hljs"><code>[<span class="hljs-meta">StructLayout(LayoutKind.Sequential, CharSet=CharSet.Unicode)</span>]
-</code></pre>
-<h3>Nondefault Calling Conventions ⚙️</h3>
-<p>به طور پیش‌فرض، کامپایلر فرض می‌کند که callback غیرمدیریت‌شده از <strong>calling convention پیش‌فرض پلتفرم</strong> پیروی می‌کند. اگر این‌گونه نباشد، می‌توانید به صورت صریح calling convention آن را با استفاده از پارامتر <code>CallConvs</code> در attribute <code>[UnmanagedCallersOnly]</code> مشخص کنید:</p>
-<pre class="hljs"><code>[<span class="hljs-meta">UnmanagedCallersOnly(CallConvs = new[</span>] { <span class="hljs-keyword">typeof</span>(CallConvStdcall) })]
+</code></pre> <p>این attribute به CLR اطلاع می‌دهد که متد <code>PrintWindow</code> تنها از کد غیرمدیریت‌شده قابل فراخوانی است و اجازه می‌دهد runtime برخی shortcuts را اعمال کند. توجه کنید که نوع بازگشتی متد از <code>bool</code> به <code>byte</code> تغییر کرده است، زیرا متدهایی که <code>[UnmanagedCallersOnly]</code> دارند، تنها می‌توانند از <strong>blittable value types</strong> در signature استفاده کنند.</p><p><strong>Blittable types</strong> آن‌هایی هستند که نیاز به marshaling خاص ندارند، زیرا در محیط‌های مدیریت‌شده و غیرمدیریت‌شده به یک شکل نمایش داده می‌شوند. این نوع‌ها شامل:</p><ul> <li>انواع صحیح ابتدایی (primitive integral types)</li><li><code>float</code> و <code>double</code></li><li>structهایی که تنها شامل blittable types هستند</li></ul> <p>نوع <code>char</code> نیز blittable است، اگر بخشی از structی باشد که attribute <code>StructLayout</code> آن <strong>CharSet.Unicode</strong> را مشخص کرده باشد:</p><pre class="hljs"><code>[<span class="hljs-meta">StructLayout(LayoutKind.Sequential, CharSet=CharSet.Unicode)</span>]
+</code></pre> <h3>Nondefault Calling Conventions</h3><p>به طور پیش‌فرض، کامپایلر فرض می‌کند که callback غیرمدیریت‌شده از <strong>calling convention پیش‌فرض پلتفرم</strong> پیروی می‌کند. اگر این‌گونه نباشد، می‌توانید به صورت صریح calling convention آن را با استفاده از پارامتر <code>CallConvs</code> در attribute <code>[UnmanagedCallersOnly]</code> مشخص کنید:</p><pre class="hljs"><code>[<span class="hljs-meta">UnmanagedCallersOnly(CallConvs = new[</span>] { <span class="hljs-keyword">typeof</span>(CallConvStdcall) })]
 <span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-built_in">byte</span> <span class="hljs-title">PrintWindow</span>(<span class="hljs-params">IntPtr hWnd, IntPtr lParam</span>) ...
-</span></code></pre>
-<p>همچنین باید نوع function pointer را با درج یک <strong>modifier خاص</strong> بعد از کلمه کلیدی <code>unmanaged</code> به‌روزرسانی کنید:</p>
-<pre class="hljs"><code><span class="hljs-built_in">delegate</span>* <span class="hljs-keyword">unmanaged</span>[Stdcall]&lt;IntPtr, IntPtr, <span class="hljs-built_in">byte</span>&gt; hWnd, IntPtr lParam);
-</code></pre>
-<p>کامپایلر اجازه می‌دهد هر شناسه‌ای (مثل <code>XYZ</code>) را داخل کروشه‌ها قرار دهید، مشروط بر اینکه یک نوع .NET به نام <code>CallConvXYZ</code> وجود داشته باشد که توسط runtime درک شود و با چیزی که هنگام اعمال <code>[UnmanagedCallersOnly]</code> مشخص کرده‌اید مطابقت داشته باشد. این ویژگی به مایکروسافت اجازه می‌دهد در آینده <strong>calling conventions</strong> جدید اضافه کند.</p>
-<p>در این مثال، ما <code>StdCall</code> را مشخص کردیم، که <strong>calling convention پیش‌فرض ویندوز</strong> است (در لینوکس x86، پیش‌فرض <code>Cdecl</code> است).<br>
-در ادامه، تمام گزینه‌هایی که در حال حاضر پشتیبانی می‌شوند ارائه شده‌اند:</p>
- <div align="center">
-<p><img src="../../../assets/image/24/Table-24-1.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<h3>Callbacks با Delegates 🔄</h3>
-<p>می‌توان callbacks غیرمدیریت‌شده را با استفاده از <strong>delegates</strong> نیز پیاده‌سازی کرد. این روش در تمام نسخه‌های C# کار می‌کند و اجازه می‌دهد callbackهایی که به متدهای <strong>instance</strong> اشاره دارند نیز استفاده شوند.</p>
-<p>برای انجام این کار، ابتدا یک نوع delegate با signature مشابه callback تعریف می‌کنیم. سپس می‌توان یک نمونه delegate را به متد خارجی پاس داد:</p>
-<pre class="hljs"><code><span class="hljs-keyword">class</span> <span class="hljs-title">CallbackFun</span>
+</span></code></pre> <p>همچنین باید نوع function pointer را با درج یک <strong>modifier خاص</strong> بعد از کلمه کلیدی <code>unmanaged</code> به‌روزرسانی کنید:</p><pre class="hljs"><code><span class="hljs-built_in">delegate</span>* <span class="hljs-keyword">unmanaged</span>[Stdcall]&lt;IntPtr, IntPtr, <span class="hljs-built_in">byte</span>&gt; hWnd, IntPtr lParam);
+</code></pre> <p>کامپایلر اجازه می‌دهد هر شناسه‌ای (مثل <code>XYZ</code>) را داخل کروشه‌ها قرار دهید، مشروط بر اینکه یک نوع .NET به نام <code>CallConvXYZ</code> وجود داشته باشد که توسط runtime درک شود و با چیزی که هنگام اعمال <code>[UnmanagedCallersOnly]</code> مشخص کرده‌اید مطابقت داشته باشد. این ویژگی به مایکروسافت اجازه می‌دهد در آینده <strong>calling conventions</strong> جدید اضافه کند.</p><p>در این مثال، ما <code>StdCall</code> را مشخص کردیم، که <strong>calling convention پیش‌فرض ویندوز</strong> است (در لینوکس x86، پیش‌فرض <code>Cdecl</code> است).<br> در ادامه، تمام گزینه‌هایی که در حال حاضر پشتیبانی می‌شوند ارائه شده‌اند:</p><div align="center"> <p><img src="../../../assets/image/24/Table-24-1.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <h3>Callbacks با Delegates</h3><p>می‌توان callbacks غیرمدیریت‌شده را با استفاده از <strong>delegates</strong> نیز پیاده‌سازی کرد. این روش در تمام نسخه‌های C# کار می‌کند و اجازه می‌دهد callbackهایی که به متدهای <strong>instance</strong> اشاره دارند نیز استفاده شوند.</p><p>برای انجام این کار، ابتدا یک نوع delegate با signature مشابه callback تعریف می‌کنیم. سپس می‌توان یک نمونه delegate را به متد خارجی پاس داد:</p><pre class="hljs"><code><span class="hljs-keyword">class</span> <span class="hljs-title">CallbackFun</span>
 {
     <span class="hljs-function"><span class="hljs-built_in">delegate</span> <span class="hljs-built_in">bool</span> <span class="hljs-title">EnumWindowsCallback</span>(<span class="hljs-params">IntPtr hWnd, IntPtr lParam</span>)</span>;
 
@@ -347,27 +165,11 @@ Console.WriteLine(t.Year);
 
     <span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Main</span>()</span> =&gt; EnumWindows(printWindowFunc, IntPtr.Zero);
 }
-</code></pre>
-<p>استفاده از delegates برای callbacks غیرمدیریت‌شده <strong>ironically unsafe</strong> است، زیرا ممکن است callback بعد از خارج شدن نمونه delegate از scope رخ دهد و در این صورت delegate واجد شرایط <strong>garbage collection</strong> می‌شود. این می‌تواند منجر به شدیدترین نوع exception در runtime شود—یکی بدون <strong>stack trace</strong> مفید.</p>
-<p>در مورد callbackهای متد static، می‌توان با اختصاص نمونه delegate به یک <strong>read-only static field</strong> از این مشکل جلوگیری کرد (همانند مثال بالا). اما برای callbackهای متد instance، این روش کافی نیست و باید با دقت کدنویسی کنید تا حداقل یک reference به نمونه delegate برای مدت زمان هر callback احتمالی حفظ شود. حتی در این حالت، اگر یک باگ در سمت غیرمدیریت‌شده وجود داشته باشد—که callback را بعد از اینکه به آن گفته‌اید اجرا کند—ممکن است همچنان با یک exception غیرقابل ردیابی مواجه شوید. یک راهکار این است که برای هر تابع غیرمدیریت‌شده، یک نوع delegate منحصر به فرد تعریف کنید؛ این کار در تشخیص مشکلات کمک می‌کند، زیرا نوع delegate در exception گزارش می‌شود.</p>
-<hr>
-<p>می‌توانید <strong>calling convention</strong> callback را از پیش‌فرض پلتفرم تغییر دهید با اعمال attribute <code>[UnmanagedFunctionPointer]</code> روی delegate:</p>
-<pre class="hljs"><code>[<span class="hljs-meta">UnmanagedFunctionPointer(CallingConvention.Cdecl)</span>]
+</code></pre> <p>استفاده از delegates برای callbacks غیرمدیریت‌شده <strong>ironically unsafe</strong> است، زیرا ممکن است callback بعد از خارج شدن نمونه delegate از scope رخ دهد و در این صورت delegate واجد شرایط <strong>garbage collection</strong> می‌شود. این می‌تواند منجر به شدیدترین نوع exception در runtime شود—یکی بدون <strong>stack trace</strong> مفید.</p><p>در مورد callbackهای متد static، می‌توان با اختصاص نمونه delegate به یک <strong>read-only static field</strong> از این مشکل جلوگیری کرد (همانند مثال بالا). اما برای callbackهای متد instance، این روش کافی نیست و باید با دقت کدنویسی کنید تا حداقل یک reference به نمونه delegate برای مدت زمان هر callback احتمالی حفظ شود. حتی در این حالت، اگر یک باگ در سمت غیرمدیریت‌شده وجود داشته باشد—که callback را بعد از اینکه به آن گفته‌اید اجرا کند—ممکن است همچنان با یک exception غیرقابل ردیابی مواجه شوید. یک راهکار این است که برای هر تابع غیرمدیریت‌شده، یک نوع delegate منحصر به فرد تعریف کنید؛ این کار در تشخیص مشکلات کمک می‌کند، زیرا نوع delegate در exception گزارش می‌شود.</p><hr> <p>می‌توانید <strong>calling convention</strong> callback را از پیش‌فرض پلتفرم تغییر دهید با اعمال attribute <code>[UnmanagedFunctionPointer]</code> روی delegate:</p><pre class="hljs"><code>[<span class="hljs-meta">UnmanagedFunctionPointer(CallingConvention.Cdecl)</span>]
 <span class="hljs-function"><span class="hljs-built_in">delegate</span> <span class="hljs-keyword">void</span> <span class="hljs-title">MyCallback</span>(<span class="hljs-params"><span class="hljs-built_in">int</span> foo, <span class="hljs-built_in">short</span> bar</span>)</span>;
-</code></pre>
-<hr>
-<h3>شبیه‌سازی C Union 🔧</h3>
-<p>هر فیلد در یک struct فضای کافی برای ذخیره داده خود دارد.<br>
-فرض کنید structی شامل یک <code>int</code> و یک <code>char</code> داریم. <code>int</code> احتمالاً از offset صفر شروع می‌شود و حداقل چهار بایت فضا دارد. بنابراین <code>char</code> حداقل از offset ۴ شروع می‌شود. اگر به هر دلیلی <code>char</code> از offset ۲ شروع شود، مقدار <code>int</code> تغییر می‌کند. عجیب است، اما زبان C نوعی variation از struct به نام <strong>union</strong> دارد که دقیقاً همین کار را انجام می‌دهد.</p>
-<p>در C# می‌توان این کار را با <code>LayoutKind.Explicit</code> و attribute <code>FieldOffset</code> شبیه‌سازی کرد.</p>
-<hr>
-<p>ممکن است سخت باشد موردی پیدا کنید که این کاربردی باشد. اما فرض کنید می‌خواهید یک نت موسیقی را روی یک <strong>synthesizer خارجی</strong> پخش کنید. Windows Multimedia API یک تابع برای این کار از طریق پروتکل MIDI فراهم می‌کند:</p>
-<pre class="hljs"><code>[<span class="hljs-meta">DllImport(<span class="hljs-string">&quot;winmm.dll&quot;</span>)</span>]
+</code></pre> <hr><h3>شبیه‌سازی C Union</h3><p>هر فیلد در یک struct فضای کافی برای ذخیره داده خود دارد.<br> فرض کنید structی شامل یک <code>int</code> و یک <code>char</code> داریم. <code>int</code> احتمالاً از offset صفر شروع می‌شود و حداقل چهار بایت فضا دارد. بنابراین <code>char</code> حداقل از offset ۴ شروع می‌شود. اگر به هر دلیلی <code>char</code> از offset ۲ شروع شود، مقدار <code>int</code> تغییر می‌کند. عجیب است، اما زبان C نوعی variation از struct به نام <strong>union</strong> دارد که دقیقاً همین کار را انجام می‌دهد.</p><p>در C# می‌توان این کار را با <code>LayoutKind.Explicit</code> و attribute <code>FieldOffset</code> شبیه‌سازی کرد.</p><hr> <p>ممکن است سخت باشد موردی پیدا کنید که این کاربردی باشد. اما فرض کنید می‌خواهید یک نت موسیقی را روی یک <strong>synthesizer خارجی</strong> پخش کنید. Windows Multimedia API یک تابع برای این کار از طریق پروتکل MIDI فراهم می‌کند:</p><pre class="hljs"><code>[<span class="hljs-meta">DllImport(<span class="hljs-string">&quot;winmm.dll&quot;</span>)</span>]
 <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">extern</span> <span class="hljs-built_in">uint</span> <span class="hljs-title">midiOutShortMsg</span>(<span class="hljs-params">IntPtr handle, <span class="hljs-built_in">uint</span> message</span>)</span>;
-</code></pre>
-<p>آرگومان دوم، <code>message</code>، مشخص می‌کند چه نتی پخش شود. مشکل در ساخت این عدد ۳۲ بیتی unsigned است: این عدد به بایت‌هایی تقسیم می‌شود که نماینده <strong>کانال MIDI، نت، و سرعت ضربه</strong> هستند.</p>
-<p>راه حل کلاسیک، استفاده از عملگرهای بیتی <code>&lt;&lt;</code>, <code>&gt;&gt;</code>, <code>&amp;</code>, <code>|</code> برای تبدیل بین بایت‌ها و عدد ۳۲ بیتی است. اما روش ساده‌تر، تعریف یک struct با <strong>layout صریح</strong> است:</p>
-<pre class="hljs"><code>[<span class="hljs-meta">StructLayout(LayoutKind.Explicit)</span>]
+</code></pre> <p>آرگومان دوم، <code>message</code>، مشخص می‌کند چه نتی پخش شود. مشکل در ساخت این عدد ۳۲ بیتی unsigned است: این عدد به بایت‌هایی تقسیم می‌شود که نماینده <strong>کانال MIDI، نت، و سرعت ضربه</strong> هستند.</p><p>راه حل کلاسیک، استفاده از عملگرهای بیتی <code>&lt;&lt;</code>, <code>&gt;&gt;</code>, <code>&amp;</code>, <code>|</code> برای تبدیل بین بایت‌ها و عدد ۳۲ بیتی است. اما روش ساده‌تر، تعریف یک struct با <strong>layout صریح</strong> است:</p><pre class="hljs"><code>[<span class="hljs-meta">StructLayout(LayoutKind.Explicit)</span>]
 <span class="hljs-keyword">public</span> <span class="hljs-keyword">struct</span> NoteMessage
 {
     [<span class="hljs-meta">FieldOffset(0)</span>] <span class="hljs-keyword">public</span> <span class="hljs-built_in">uint</span> PackedMsg;    <span class="hljs-comment">// 4 بایت</span>
@@ -375,9 +177,7 @@ Console.WriteLine(t.Year);
     [<span class="hljs-meta">FieldOffset(1)</span>] <span class="hljs-keyword">public</span> <span class="hljs-built_in">byte</span> Note;
     [<span class="hljs-meta">FieldOffset(2)</span>] <span class="hljs-keyword">public</span> <span class="hljs-built_in">byte</span> Velocity;
 }
-</code></pre>
-<p>فیلدهای <code>Channel</code>, <code>Note</code> و <code>Velocity</code> عمداً با عدد ۳۲ بیتی packed overlap دارند. این امکان را می‌دهد که بتوانید از هر دو روش خواندن و نوشتن کنید، بدون نیاز به محاسبات اضافی برای هماهنگی فیلدها:</p>
-<pre class="hljs"><code>NoteMessage n = <span class="hljs-keyword">new</span> NoteMessage();
+</code></pre> <p>فیلدهای <code>Channel</code>, <code>Note</code> و <code>Velocity</code> عمداً با عدد ۳۲ بیتی packed overlap دارند. این امکان را می‌دهد که بتوانید از هر دو روش خواندن و نوشتن کنید، بدون نیاز به محاسبات اضافی برای هماهنگی فیلدها:</p><pre class="hljs"><code>NoteMessage n = <span class="hljs-keyword">new</span> NoteMessage();
 Console.WriteLine(n.PackedMsg);  <span class="hljs-comment">// 0</span>
 
 n.Channel = <span class="hljs-number">10</span>;
@@ -387,12 +187,7 @@ Console.WriteLine(n.PackedMsg);  <span class="hljs-comment">// 3302410</span>
 
 n.PackedMsg = <span class="hljs-number">3328010</span>;
 Console.WriteLine(n.Note);       <span class="hljs-comment">// 200</span>
-</code></pre>
-<h3>Shared Memory 🗂️</h3>
-<p><strong>Memory-mapped files</strong> یا <strong>shared memory</strong> قابلیتی در ویندوز است که به چندین فرآیند روی یک کامپیوتر اجازه می‌دهد داده‌ها را با هم به اشتراک بگذارند. Shared memory بسیار سریع است و بر خلاف <strong>pipes</strong>، امکان <strong>دسترسی تصادفی</strong> به داده‌های مشترک را فراهم می‌کند. در فصل ۱۵ دیدیم که چگونه می‌توان از کلاس <code>MemoryMappedFile</code> برای دسترسی به فایل‌های memory-mapped استفاده کرد؛ اما عبور از این کلاس و فراخوانی مستقیم متدهای Win32، راهی عالی برای نشان دادن <strong>P/Invoke</strong> است.</p>
-<p>تابع Win32 به نام <code>CreateFileMapping</code> حافظه مشترک اختصاص می‌دهد. شما تعداد بایت مورد نیاز و نامی که برای شناسایی share استفاده می‌شود را مشخص می‌کنید. سپس یک برنامه دیگر می‌تواند با فراخوانی <code>OpenFileMapping</code> و استفاده از همان نام، به این حافظه مشترک متصل شود. هر دو متد یک <strong>handle</strong> بازمی‌گردانند که با فراخوانی <code>MapViewOfFile</code> می‌توان آن را به یک <strong>pointer</strong> تبدیل کرد.</p>
-<p>در ادامه، یک کلاس که دسترسی به shared memory را encapsulate می‌کند مشاهده می‌کنید:</p>
-<pre class="hljs"><code><span class="hljs-keyword">using</span> System;
+</code></pre> <h3>Shared Memory</h3><p><strong>Memory-mapped files</strong> یا <strong>shared memory</strong> قابلیتی در ویندوز است که به چندین فرآیند روی یک کامپیوتر اجازه می‌دهد داده‌ها را با هم به اشتراک بگذارند. Shared memory بسیار سریع است و بر خلاف <strong>pipes</strong>، امکان <strong>دسترسی تصادفی</strong> به داده‌های مشترک را فراهم می‌کند. در فصل ۱۵ دیدیم که چگونه می‌توان از کلاس <code>MemoryMappedFile</code> برای دسترسی به فایل‌های memory-mapped استفاده کرد؛ اما عبور از این کلاس و فراخوانی مستقیم متدهای Win32، راهی عالی برای نشان دادن <strong>P/Invoke</strong> است.</p><p>تابع Win32 به نام <code>CreateFileMapping</code> حافظه مشترک اختصاص می‌دهد. شما تعداد بایت مورد نیاز و نامی که برای شناسایی share استفاده می‌شود را مشخص می‌کنید. سپس یک برنامه دیگر می‌تواند با فراخوانی <code>OpenFileMapping</code> و استفاده از همان نام، به این حافظه مشترک متصل شود. هر دو متد یک <strong>handle</strong> بازمی‌گردانند که با فراخوانی <code>MapViewOfFile</code> می‌توان آن را به یک <strong>pointer</strong> تبدیل کرد.</p><p>در ادامه، یک کلاس که دسترسی به shared memory را encapsulate می‌کند مشاهده می‌کنید:</p><pre class="hljs"><code><span class="hljs-keyword">using</span> System;
 <span class="hljs-keyword">using</span> System.Runtime.InteropServices;
 <span class="hljs-keyword">using</span> System.ComponentModel;
 
@@ -468,85 +263,42 @@ Console.WriteLine(n.Note);       <span class="hljs-comment">// 200</span>
         fileMap = fileHandle = IntPtr.Zero;
     }
 }
-</code></pre>
-<p>در این مثال، برای متدهای <code>DllImport</code> که از پروتکل <code>SetLastError</code> برای ارائه کدهای خطا استفاده می‌کنند، <code>SetLastError=true</code> تنظیم شده است. این باعث می‌شود که هنگام ایجاد <strong>Win32Exception</strong>، جزئیات خطا به درستی پر شود. همچنین می‌توان خطا را به صورت صریح با فراخوانی <code>Marshal.GetLastWin32Error</code> پرس و جو کرد.</p>
-<hr>
-<p>برای آزمایش این کلاس، نیاز به اجرای دو برنامه داریم:</p>
-<ol>
-<li>برنامه اول shared memory را ایجاد می‌کند:</li>
-</ol>
-<pre class="hljs"><code><span class="hljs-keyword">using</span> (SharedMem sm = <span class="hljs-keyword">new</span> SharedMem(<span class="hljs-string">&quot;MyShare&quot;</span>, <span class="hljs-literal">false</span>, <span class="hljs-number">1000</span>))
+</code></pre> <p>در این مثال، برای متدهای <code>DllImport</code> که از پروتکل <code>SetLastError</code> برای ارائه کدهای خطا استفاده می‌کنند، <code>SetLastError=true</code> تنظیم شده است. این باعث می‌شود که هنگام ایجاد <strong>Win32Exception</strong>، جزئیات خطا به درستی پر شود. همچنین می‌توان خطا را به صورت صریح با فراخوانی <code>Marshal.GetLastWin32Error</code> پرس و جو کرد.</p><hr> <p>برای آزمایش این کلاس، نیاز به اجرای دو برنامه داریم:</p><ol> <li>برنامه اول shared memory را ایجاد می‌کند:</li></ol> <pre class="hljs"><code><span class="hljs-keyword">using</span> (SharedMem sm = <span class="hljs-keyword">new</span> SharedMem(<span class="hljs-string">&quot;MyShare&quot;</span>, <span class="hljs-literal">false</span>, <span class="hljs-number">1000</span>))
 {
     IntPtr root = sm.Root;
     <span class="hljs-comment">// حافظه مشترک آماده است!</span>
     Console.ReadLine(); <span class="hljs-comment">// در اینجا برنامه دوم شروع می‌شود...</span>
 }
-</code></pre>
-<ol start="2">
-<li>برنامه دوم با ساخت یک شیء <code>SharedMem</code> با همان نام و مقدار <code>existing = true</code> به حافظه مشترک متصل می‌شود:</li>
-</ol>
-<pre class="hljs"><code><span class="hljs-keyword">using</span> (SharedMem sm = <span class="hljs-keyword">new</span> SharedMem(<span class="hljs-string">&quot;MyShare&quot;</span>, <span class="hljs-literal">true</span>, <span class="hljs-number">1000</span>))
+</code></pre> <ol start="2"><li>برنامه دوم با ساخت یک شیء <code>SharedMem</code> با همان نام و مقدار <code>existing = true</code> به حافظه مشترک متصل می‌شود:</li></ol> <pre class="hljs"><code><span class="hljs-keyword">using</span> (SharedMem sm = <span class="hljs-keyword">new</span> SharedMem(<span class="hljs-string">&quot;MyShare&quot;</span>, <span class="hljs-literal">true</span>, <span class="hljs-number">1000</span>))
 {
     IntPtr root = sm.Root;
     <span class="hljs-comment">// من هم به همان حافظه مشترک دسترسی دارم!</span>
     <span class="hljs-comment">// ...</span>
 }
-</code></pre>
-<p>نتیجه این است که هر برنامه یک <code>IntPtr</code>—یک pointer به همان حافظه unmanaged—دارد. حالا دو برنامه می‌توانند داده‌ها را از طریق این pointer مشترک بخوانند و بنویسند.</p>
-<p>یک روش این است که یک کلاس برای encapsulate کل داده‌های مشترک تعریف کنید و سپس داده‌ها را با استفاده از <code>UnmanagedMemoryStream</code> <strong>serialize</strong> و <strong>deserialize</strong> کنید. اما اگر حجم داده زیاد باشد، این روش ناکارآمد است.<br>
-مثلاً اگر کلاس حافظه مشترک یک مگابایت داده داشته باشد و فقط یک عدد صحیح نیاز به بروزرسانی داشته باشد، این روش بسیار سنگین خواهد بود.</p>
-<p>روش بهتر این است که داده‌های مشترک را به صورت یک <strong>struct</strong> تعریف کنید و سپس آن را مستقیماً در حافظه مشترک map کنید. این موضوع در بخش بعدی توضیح داده خواهد شد.</p>
-<h3>Mapping a Struct to Unmanaged Memory 🧩</h3>
-<p>می‌توان یک <strong>struct</strong> با <code>StructLayout</code> از نوع <code>Sequential</code> یا <code>Explicit</code> را مستقیماً به حافظه غیرمدیریت‌شده map کرد. به مثال زیر توجه کنید:</p>
-<pre class="hljs"><code>[<span class="hljs-meta">StructLayout(LayoutKind.Sequential)</span>]
+</code></pre> <p>نتیجه این است که هر برنامه یک <code>IntPtr</code>—یک pointer به همان حافظه unmanaged—دارد. حالا دو برنامه می‌توانند داده‌ها را از طریق این pointer مشترک بخوانند و بنویسند.</p><p>یک روش این است که یک کلاس برای encapsulate کل داده‌های مشترک تعریف کنید و سپس داده‌ها را با استفاده از <code>UnmanagedMemoryStream</code> <strong>serialize</strong> و <strong>deserialize</strong> کنید. اما اگر حجم داده زیاد باشد، این روش ناکارآمد است.<br> مثلاً اگر کلاس حافظه مشترک یک مگابایت داده داشته باشد و فقط یک عدد صحیح نیاز به بروزرسانی داشته باشد، این روش بسیار سنگین خواهد بود.</p><p>روش بهتر این است که داده‌های مشترک را به صورت یک <strong>struct</strong> تعریف کنید و سپس آن را مستقیماً در حافظه مشترک map کنید. این موضوع در بخش بعدی توضیح داده خواهد شد.</p><h3>Mapping a Struct to Unmanaged Memory</h3><p>می‌توان یک <strong>struct</strong> با <code>StructLayout</code> از نوع <code>Sequential</code> یا <code>Explicit</code> را مستقیماً به حافظه غیرمدیریت‌شده map کرد. به مثال زیر توجه کنید:</p><pre class="hljs"><code>[<span class="hljs-meta">StructLayout(LayoutKind.Sequential)</span>]
 <span class="hljs-keyword">unsafe</span> <span class="hljs-keyword">struct</span> MySharedData
 {
     <span class="hljs-keyword">public</span> <span class="hljs-built_in">int</span> Value;
     <span class="hljs-keyword">public</span> <span class="hljs-built_in">char</span> Letter;
     <span class="hljs-keyword">public</span> <span class="hljs-keyword">fixed</span> <span class="hljs-built_in">float</span> Numbers[<span class="hljs-number">50</span>];
 }
-</code></pre>
-<p>دستور <code>fixed</code> به ما اجازه می‌دهد <strong>آرایه‌هایی با طول ثابت از نوع value</strong> را درون struct تعریف کنیم، و همین ویژگی ما را وارد فضای <strong>unsafe</strong> می‌کند. فضای لازم برای ۵۰ عدد اعشاری (float) به صورت inline در struct اختصاص می‌یابد. بر خلاف آرایه‌های معمولی C#، <code>Numbers</code> یک reference به آرایه نیست—خود آرایه است.</p>
-<p>اگر کد زیر را اجرا کنیم:</p>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">unsafe</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Main</span>()</span> =&gt; Console.WriteLine(<span class="hljs-keyword">sizeof</span>(MySharedData));
-</code></pre>
-<p>نتیجه برابر با <strong>208</strong> خواهد بود:</p>
-<ul>
-<li>۵۰ عدد float چهار بایتی</li>
-<li>۴ بایت برای <code>Value</code></li>
-<li>۲ بایت برای <code>Letter</code></li>
-</ul>
-<p>مجموع ۲۰۶ بایت به دلیل alignment بر روی مرزهای چهار بایتی، به ۲۰۸ بایت گرد شده است (اندازه float = ۴ بایت).</p>
-<hr>
-<p>می‌توانیم <code>MySharedData</code> را در یک <strong>context unsafe</strong> با حافظه تخصیص‌یافته روی stack آزمایش کنیم:</p>
-<pre class="hljs"><code>MySharedData d;
+</code></pre> <p>دستور <code>fixed</code> به ما اجازه می‌دهد <strong>آرایه‌هایی با طول ثابت از نوع value</strong> را درون struct تعریف کنیم، و همین ویژگی ما را وارد فضای <strong>unsafe</strong> می‌کند. فضای لازم برای ۵۰ عدد اعشاری (float) به صورت inline در struct اختصاص می‌یابد. بر خلاف آرایه‌های معمولی C#، <code>Numbers</code> یک reference به آرایه نیست—خود آرایه است.</p><p>اگر کد زیر را اجرا کنیم:</p><pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">unsafe</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Main</span>()</span> =&gt; Console.WriteLine(<span class="hljs-keyword">sizeof</span>(MySharedData));
+</code></pre> <p>نتیجه برابر با <strong>208</strong> خواهد بود:</p><ul> <li>۵۰ عدد float چهار بایتی</li><li>۴ بایت برای <code>Value</code></li><li>۲ بایت برای <code>Letter</code></li></ul> <p>مجموع ۲۰۶ بایت به دلیل alignment بر روی مرزهای چهار بایتی، به ۲۰۸ بایت گرد شده است (اندازه float = ۴ بایت).</p><hr> <p>می‌توانیم <code>MySharedData</code> را در یک <strong>context unsafe</strong> با حافظه تخصیص‌یافته روی stack آزمایش کنیم:</p><pre class="hljs"><code>MySharedData d;
 MySharedData* data = &amp;d;  <span class="hljs-comment">// گرفتن آدرس d</span>
 data-&gt;Value = <span class="hljs-number">123</span>;
 data-&gt;Letter = <span class="hljs-string">&#x27;X&#x27;</span>;
 data-&gt;Numbers[<span class="hljs-number">10</span>] = <span class="hljs-number">1.45f</span>;
-</code></pre>
-<p>یا:</p>
-<pre class="hljs"><code><span class="hljs-comment">// تخصیص آرایه روی stack</span>
+</code></pre> <p>یا:</p><pre class="hljs"><code><span class="hljs-comment">// تخصیص آرایه روی stack</span>
 MySharedData* data = <span class="hljs-keyword">stackalloc</span> MySharedData[<span class="hljs-number">1</span>];
 data-&gt;Value = <span class="hljs-number">123</span>;
 data-&gt;Letter = <span class="hljs-string">&#x27;X&#x27;</span>;
 data-&gt;Numbers[<span class="hljs-number">10</span>] = <span class="hljs-number">1.45f</span>;
-</code></pre>
-<p>البته، این روش چیزی بیش از آنچه در managed context می‌توان انجام داد، نشان نمی‌دهد. اما اگر بخواهیم یک نمونه از <code>MySharedData</code> را روی <strong>heap غیرمدیریت‌شده</strong> ذخیره کنیم، خارج از محدوده garbage collector CLR، اینجاست که <strong>pointers</strong> واقعاً مفید می‌شوند:</p>
-<pre class="hljs"><code>MySharedData* data = (MySharedData*) Marshal.AllocHGlobal(<span class="hljs-keyword">sizeof</span>(MySharedData)).ToPointer();
+</code></pre> <p>البته، این روش چیزی بیش از آنچه در managed context می‌توان انجام داد، نشان نمی‌دهد. اما اگر بخواهیم یک نمونه از <code>MySharedData</code> را روی <strong>heap غیرمدیریت‌شده</strong> ذخیره کنیم، خارج از محدوده garbage collector CLR، اینجاست که <strong>pointers</strong> واقعاً مفید می‌شوند:</p><pre class="hljs"><code>MySharedData* data = (MySharedData*) Marshal.AllocHGlobal(<span class="hljs-keyword">sizeof</span>(MySharedData)).ToPointer();
 data-&gt;Value = <span class="hljs-number">123</span>;
 data-&gt;Letter = <span class="hljs-string">&#x27;X&#x27;</span>;
 data-&gt;Numbers[<span class="hljs-number">10</span>] = <span class="hljs-number">1.45f</span>;
-</code></pre>
-<p>تابع <code>Marshal.AllocHGlobal</code> حافظه‌ای روی <strong>heap غیرمدیریت‌شده</strong> اختصاص می‌دهد. برای آزاد کردن این حافظه:</p>
-<pre class="hljs"><code>Marshal.FreeHGlobal(<span class="hljs-keyword">new</span> IntPtr(data));
-</code></pre>
-<p>(فراموش کردن آزادسازی حافظه، منجر به <strong>memory leak</strong> می‌شود.)</p>
-<hr>
-<p>از <strong>.NET 6</strong> به بعد، می‌توان از کلاس <code>NativeMemory</code> برای تخصیص و آزادسازی حافظه غیرمدیریت‌شده استفاده کرد. این کلاس از API جدیدتر و بهتری نسبت به <code>AllocHGlobal</code> بهره می‌برد و متدهایی برای تخصیص aligned نیز ارائه می‌کند.</p>
-<hr>
-<p>در ادامه، ما <code>MySharedData</code> را با کلاس <code>SharedMem</code> که در بخش قبل نوشتیم، ترکیب می‌کنیم. برنامه زیر یک بلوک حافظه مشترک تخصیص می‌دهد و struct را مستقیماً در آن map می‌کند:</p>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">unsafe</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Main</span>()</span>
+</code></pre> <p>تابع <code>Marshal.AllocHGlobal</code> حافظه‌ای روی <strong>heap غیرمدیریت‌شده</strong> اختصاص می‌دهد. برای آزاد کردن این حافظه:</p><pre class="hljs"><code>Marshal.FreeHGlobal(<span class="hljs-keyword">new</span> IntPtr(data));
+</code></pre> <p>(فراموش کردن آزادسازی حافظه، منجر به <strong>memory leak</strong> می‌شود.)</p><hr> <p>از <strong>.NET 6</strong> به بعد، می‌توان از کلاس <code>NativeMemory</code> برای تخصیص و آزادسازی حافظه غیرمدیریت‌شده استفاده کرد. این کلاس از API جدیدتر و بهتری نسبت به <code>AllocHGlobal</code> بهره می‌برد و متدهایی برای تخصیص aligned نیز ارائه می‌کند.</p><hr> <p>در ادامه، ما <code>MySharedData</code> را با کلاس <code>SharedMem</code> که در بخش قبل نوشتیم، ترکیب می‌کنیم. برنامه زیر یک بلوک حافظه مشترک تخصیص می‌دهد و struct را مستقیماً در آن map می‌کند:</p><pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">unsafe</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Main</span>()</span>
 {
     <span class="hljs-keyword">using</span> (SharedMem sm = <span class="hljs-keyword">new</span> SharedMem(<span class="hljs-string">&quot;MyShare&quot;</span>, <span class="hljs-literal">false</span>, (<span class="hljs-built_in">uint</span>)<span class="hljs-keyword">sizeof</span>(MySharedData)))
     {
@@ -566,9 +318,7 @@ data-&gt;Numbers[<span class="hljs-number">10</span>] = <span class="hljs-number
         Console.ReadLine();
     }
 }
-</code></pre>
-<p>می‌توان به جای <code>SharedMem</code> از کلاس built-in <code>MemoryMappedFile</code> نیز استفاده کرد:</p>
-<pre class="hljs"><code><span class="hljs-keyword">using</span> (MemoryMappedFile mmFile = MemoryMappedFile.CreateNew(<span class="hljs-string">&quot;MyShare&quot;</span>, <span class="hljs-number">1000</span>))
+</code></pre> <p>می‌توان به جای <code>SharedMem</code> از کلاس built-in <code>MemoryMappedFile</code> نیز استفاده کرد:</p><pre class="hljs"><code><span class="hljs-keyword">using</span> (MemoryMappedFile mmFile = MemoryMappedFile.CreateNew(<span class="hljs-string">&quot;MyShare&quot;</span>, <span class="hljs-number">1000</span>))
 <span class="hljs-keyword">using</span> (MemoryMappedViewAccessor accessor = mmFile.CreateViewAccessor())
 {
     <span class="hljs-built_in">byte</span>* pointer = <span class="hljs-literal">null</span>;
@@ -576,10 +326,7 @@ data-&gt;Numbers[<span class="hljs-number">10</span>] = <span class="hljs-number
     <span class="hljs-keyword">void</span>* root = pointer;
     ...
 }
-</code></pre>
-<hr>
-<p>برنامه دوم می‌تواند به همان حافظه مشترک متصل شود و مقادیر نوشته شده توسط برنامه اول را بخواند:</p>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">unsafe</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Main</span>()</span>
+</code></pre> <hr><p>برنامه دوم می‌تواند به همان حافظه مشترک متصل شود و مقادیر نوشته شده توسط برنامه اول را بخواند:</p><pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">unsafe</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Main</span>()</span>
 {
     <span class="hljs-keyword">using</span> (SharedMem sm = <span class="hljs-keyword">new</span> SharedMem(<span class="hljs-string">&quot;MyShare&quot;</span>, <span class="hljs-literal">true</span>, (<span class="hljs-built_in">uint</span>)<span class="hljs-keyword">sizeof</span>(MySharedData)))
     {
@@ -599,33 +346,15 @@ data-&gt;Numbers[<span class="hljs-number">10</span>] = <span class="hljs-number
         Console.ReadLine();
     }
 }
-</code></pre>
-<p>خروجی هر دو برنامه:</p>
-<ul>
-<li>
-<p><strong>برنامه اول</strong>:</p>
-<pre class="hljs"><code>Written to shared memory
+</code></pre> <p>خروجی هر دو برنامه:</p><ul> <li><p><strong>برنامه اول</strong>:</p><pre class="hljs"><code>Written to shared memory
 Value is 124
 Letter is !
 11th Number is 987.5
-</code></pre>
-</li>
-<li>
-<p><strong>برنامه دوم</strong>:</p>
-<pre class="hljs"><code>Value is 123
+</code></pre></li><li> <p><strong>برنامه دوم</strong>:</p><pre class="hljs"><code>Value is 123
 Letter is X
 11th Number is 1.45
 Updated shared memory
-</code></pre>
-</li>
-</ul>
-<hr>
-<p>نگران pointers نباشید: برنامه‌نویسان C++ از آن‌ها در سراسر برنامه‌ها استفاده می‌کنند و معمولاً همه چیز را درست اجرا می‌کنند. کاربرد ما نسبتاً ساده است.</p>
-<p>به علاوه، این مثال از نظر <strong>thread-safety</strong> (یا دقیق‌تر، <strong>process-safety</strong>) unsafe است، زیرا دو برنامه همزمان به همان حافظه دسترسی دارند. برای استفاده در برنامه‌های واقعی، باید keyword <code>volatile</code> را به فیلدهای <code>Value</code> و <code>Letter</code> اضافه کنیم تا از cache شدن آن‌ها توسط <strong>JIT compiler</strong> یا سخت‌افزار CPU جلوگیری شود.</p>
-<p>همچنین، در تعامل پیچیده‌تر با فیلدها، احتمالاً نیاز است دسترسی به آن‌ها را با یک <strong>cross-process Mutex</strong> محافظت کنیم، درست همانند استفاده از <strong>lock</strong> برای محافظت از دسترسی به فیلدها در برنامه‌های multithreaded. در فصل ۲۱ به طور کامل درباره thread safety صحبت کرده‌ایم.</p>
-<h3>fixed و fixed {...} 🔒</h3>
-<p>یکی از محدودیت‌های <strong>map کردن مستقیم struct به حافظه</strong> این است که struct تنها می‌تواند شامل <strong>unmanaged types</strong> باشد. اگر نیاز دارید داده‌ای از نوع <strong>string</strong> را به اشتراک بگذارید، باید به جای آن از <strong>آرایه‌ای از کاراکترهای ثابت</strong> استفاده کنید. این یعنی تبدیل دستی بین string و آرایه. مثال:</p>
-<pre class="hljs"><code>[<span class="hljs-meta">StructLayout(LayoutKind.Sequential)</span>]
+</code></pre></li></ul> <hr><p>نگران pointers نباشید: برنامه‌نویسان C++ از آن‌ها در سراسر برنامه‌ها استفاده می‌کنند و معمولاً همه چیز را درست اجرا می‌کنند. کاربرد ما نسبتاً ساده است.</p><p>به علاوه، این مثال از نظر <strong>thread-safety</strong> (یا دقیق‌تر، <strong>process-safety</strong>) unsafe است، زیرا دو برنامه همزمان به همان حافظه دسترسی دارند. برای استفاده در برنامه‌های واقعی، باید keyword <code>volatile</code> را به فیلدهای <code>Value</code> و <code>Letter</code> اضافه کنیم تا از cache شدن آن‌ها توسط <strong>JIT compiler</strong> یا سخت‌افزار CPU جلوگیری شود.</p><p>همچنین، در تعامل پیچیده‌تر با فیلدها، احتمالاً نیاز است دسترسی به آن‌ها را با یک <strong>cross-process Mutex</strong> محافظت کنیم، درست همانند استفاده از <strong>lock</strong> برای محافظت از دسترسی به فیلدها در برنامه‌های multithreaded. در فصل ۲۱ به طور کامل درباره thread safety صحبت کرده‌ایم.</p><h3>fixed و fixed {...}</h3><p>یکی از محدودیت‌های <strong>map کردن مستقیم struct به حافظه</strong> این است که struct تنها می‌تواند شامل <strong>unmanaged types</strong> باشد. اگر نیاز دارید داده‌ای از نوع <strong>string</strong> را به اشتراک بگذارید، باید به جای آن از <strong>آرایه‌ای از کاراکترهای ثابت</strong> استفاده کنید. این یعنی تبدیل دستی بین string و آرایه. مثال:</p><pre class="hljs"><code>[<span class="hljs-meta">StructLayout(LayoutKind.Sequential)</span>]
 <span class="hljs-keyword">unsafe</span> <span class="hljs-keyword">struct</span> MySharedData
 {
     ...
@@ -650,87 +379,14 @@ Updated shared memory
         }
     }
 }
-</code></pre>
-<p>هیچ مفهومی به نام <strong>reference به یک آرایه fixed</strong> وجود ندارد؛ به جای آن، یک <strong>pointer</strong> دریافت می‌کنید. وقتی به یک آرایه fixed اندیس‌دهی می‌کنید، در واقع <strong>arithmetics pointer</strong> انجام می‌دهید!</p>
-<p>در اولین استفاده از keyword <code>fixed</code>، ما فضای لازم برای ۲۰۰ کاراکتر را <strong>inline</strong> در struct اختصاص دادیم. همین keyword در property معنای متفاوتی دارد: به CLR می‌گوید که <strong>object را pin کند</strong> تا اگر garbage collection رخ داد، محتوای struct جابجا نشود، زیرا داریم مستقیماً با memory pointers به آن دسترسی پیدا می‌کنیم.</p>
-<p>ممکن است بپرسید چرا MySharedData می‌تواند در managed memory جابجا شود، وقتی که در unmanaged memory قرار دارد. پاسخ این است که <strong>کامپایلر نمی‌داند</strong> و فرض می‌کند ممکن است MySharedData در context مدیریت‌شده استفاده شود، پس insist می‌کند که <code>fixed</code> اضافه شود تا کد unsafe ما در managed context امن شود. و واقعاً هم درست است، زیرا کافی است:</p>
-<pre class="hljs"><code><span class="hljs-built_in">object</span> obj = <span class="hljs-keyword">new</span> MySharedData();
-</code></pre>
-<p>این باعث می‌شود MySharedData روی heap قرار گیرد و <strong>boxed</strong> شود و تحت تاثیر garbage collection قرار گیرد.</p>
-<p>این مثال نشان می‌دهد چگونه می‌توان یک <strong>string</strong> را در structی که به unmanaged memory map شده است، نمایش داد. برای نوع داده‌های پیچیده‌تر، می‌توان از <strong>کدهای serialization موجود</strong> استفاده کرد، با این شرط که طول داده serialize شده از فضای اختصاص‌یافته در struct تجاوز نکند؛ در غیر این صورت، نتیجه می‌تواند <strong>تداخل ناخواسته با فیلدهای بعدی</strong> باشد.</p>
-<hr>
-<h3>COM Interoperability 🖥️</h3>
-<p><strong>Runtime .NET</strong> پشتیبانی ویژه‌ای از COM ارائه می‌دهد و اجازه می‌دهد <strong>COM objects</strong> از .NET استفاده شوند و بالعکس. COM تنها در Windows در دسترس است.</p>
-<hr>
-<h4>هدف COM</h4>
-<p>COM مخفف <strong>Component Object Model</strong> است؛ یک استاندارد باینری برای تعامل با کتابخانه‌ها که توسط مایکروسافت در سال ۱۹۹۳ ارائه شد. هدف از ایجاد COM این بود که <strong>کامپوننت‌ها بتوانند به صورت مستقل از زبان و مقاوم در برابر نسخه‌بندی با هم ارتباط برقرار کنند</strong>.</p>
-<p>قبل از COM، در Windows معمولاً DLLهایی منتشر می‌شدند که ساختارها و توابع را با زبان C تعریف می‌کردند. این روش:</p>
-<ul>
-<li><strong>مختص زبان بود</strong></li>
-<li><strong>ضعیف و شکننده</strong> بود؛ حتی اضافه کردن یک فیلد جدید به یک struct، specification آن را خراب می‌کرد.</li>
-</ul>
-<p>زیبایی COM در این بود که specification یک نوع را از پیاده‌سازی آن جدا کرد <strong>از طریق COM interface</strong>. COM همچنین اجازه می‌دهد که <strong>متدهای stateful objects</strong> فراخوانی شوند، نه فقط procedureهای ساده.</p>
-<p>به نوعی، مدل برنامه‌نویسی .NET یک <strong>تکامل از اصول برنامه‌نویسی COM</strong> است:</p>
-<ul>
-<li>توسعه cross-language</li>
-<li>امکان تغییر binary components بدون شکستن برنامه‌هایی که به آن‌ها وابسته‌اند.</li>
-</ul>
-<hr>
-<h4>اصول سیستم نوع COM</h4>
-<p>سیستم نوع COM حول <strong>interfaces</strong> می‌چرخد. یک COM interface شبیه یک .NET interface است، اما کاربرد آن گسترده‌تر است، زیرا COM تنها از طریق interface قابلیت‌های خود را ارائه می‌دهد.</p>
-<p>مثال در دنیای .NET:</p>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Foo</span>
+</code></pre> <p>هیچ مفهومی به نام <strong>reference به یک آرایه fixed</strong> وجود ندارد؛ به جای آن، یک <strong>pointer</strong> دریافت می‌کنید. وقتی به یک آرایه fixed اندیس‌دهی می‌کنید، در واقع <strong>arithmetics pointer</strong> انجام می‌دهید!</p><p>در اولین استفاده از keyword <code>fixed</code>، ما فضای لازم برای ۲۰۰ کاراکتر را <strong>inline</strong> در struct اختصاص دادیم. همین keyword در property معنای متفاوتی دارد: به CLR می‌گوید که <strong>object را pin کند</strong> تا اگر garbage collection رخ داد، محتوای struct جابجا نشود، زیرا داریم مستقیماً با memory pointers به آن دسترسی پیدا می‌کنیم.</p><p>ممکن است بپرسید چرا MySharedData می‌تواند در managed memory جابجا شود، وقتی که در unmanaged memory قرار دارد. پاسخ این است که <strong>کامپایلر نمی‌داند</strong> و فرض می‌کند ممکن است MySharedData در context مدیریت‌شده استفاده شود، پس insist می‌کند که <code>fixed</code> اضافه شود تا کد unsafe ما در managed context امن شود. و واقعاً هم درست است، زیرا کافی است:</p><pre class="hljs"><code><span class="hljs-built_in">object</span> obj = <span class="hljs-keyword">new</span> MySharedData();
+</code></pre> <p>این باعث می‌شود MySharedData روی heap قرار گیرد و <strong>boxed</strong> شود و تحت تاثیر garbage collection قرار گیرد.</p><p>این مثال نشان می‌دهد چگونه می‌توان یک <strong>string</strong> را در structی که به unmanaged memory map شده است، نمایش داد. برای نوع داده‌های پیچیده‌تر، می‌توان از <strong>کدهای serialization موجود</strong> استفاده کرد، با این شرط که طول داده serialize شده از فضای اختصاص‌یافته در struct تجاوز نکند؛ در غیر این صورت، نتیجه می‌تواند <strong>تداخل ناخواسته با فیلدهای بعدی</strong> باشد.</p><hr> <h3>COM Interoperability</h3><p><strong>Runtime .NET</strong> پشتیبانی ویژه‌ای از COM ارائه می‌دهد و اجازه می‌دهد <strong>COM objects</strong> از .NET استفاده شوند و بالعکس. COM تنها در Windows در دسترس است.</p><hr> <h4>هدف COM</h4><p>COM مخفف <strong>Component Object Model</strong> است؛ یک استاندارد باینری برای تعامل با کتابخانه‌ها که توسط مایکروسافت در سال ۱۹۹۳ ارائه شد. هدف از ایجاد COM این بود که <strong>کامپوننت‌ها بتوانند به صورت مستقل از زبان و مقاوم در برابر نسخه‌بندی با هم ارتباط برقرار کنند</strong>.</p><p>قبل از COM، در Windows معمولاً DLLهایی منتشر می‌شدند که ساختارها و توابع را با زبان C تعریف می‌کردند. این روش:</p><ul> <li><strong>مختص زبان بود</strong></li><li><strong>ضعیف و شکننده</strong> بود؛ حتی اضافه کردن یک فیلد جدید به یک struct، specification آن را خراب می‌کرد.</li></ul> <p>زیبایی COM در این بود که specification یک نوع را از پیاده‌سازی آن جدا کرد <strong>از طریق COM interface</strong>. COM همچنین اجازه می‌دهد که <strong>متدهای stateful objects</strong> فراخوانی شوند، نه فقط procedureهای ساده.</p><p>به نوعی، مدل برنامه‌نویسی .NET یک <strong>تکامل از اصول برنامه‌نویسی COM</strong> است:</p><ul> <li>توسعه cross-language</li><li>امکان تغییر binary components بدون شکستن برنامه‌هایی که به آن‌ها وابسته‌اند.</li></ul> <hr><h4>اصول سیستم نوع COM</h4><p>سیستم نوع COM حول <strong>interfaces</strong> می‌چرخد. یک COM interface شبیه یک .NET interface است، اما کاربرد آن گسترده‌تر است، زیرا COM تنها از طریق interface قابلیت‌های خود را ارائه می‌دهد.</p><p>مثال در دنیای .NET:</p><pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Foo</span>
 {
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-built_in">string</span> <span class="hljs-title">Test</span>()</span> =&gt; <span class="hljs-string">&quot;Hello, world&quot;</span>;
 }
-</code></pre>
-<p>کاربران می‌توانند Foo را مستقیم استفاده کنند. اگر بعدها implementation تابع Test() تغییر کند، assemblyهای فراخوان نیازی به recompile ندارند.</p>
-<p>در COM، Foo برای جداسازی interface از implementation، <strong>قابلیت‌های خود را از طریق یک interface ارائه می‌دهد</strong>:</p>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title">IFoo</span> { <span class="hljs-function"><span class="hljs-built_in">string</span> <span class="hljs-title">Test</span>()</span>; }
-</code></pre>
-<p>اضافه کردن overload در COM پیچیده‌تر است، زیرا:</p>
-<ul>
-<li>interfaces منتشرشده immutable هستند.</li>
-<li>COM اجازه method overloading نمی‌دهد.</li>
-</ul>
-<p>راه‌حل: ایجاد interface دوم:</p>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title">IFoo2</span> { <span class="hljs-function"><span class="hljs-built_in">string</span> <span class="hljs-title">Test</span>(<span class="hljs-params"><span class="hljs-built_in">string</span> s</span>)</span>; }
-</code></pre>
-<p>پشتیبانی از چندین interface کلیدی است تا <strong>کتابخانه‌های COM versionable</strong> شوند.</p>
-<hr>
-<h4>IUnknown و IDispatch</h4>
-<p>تمام COM interfaces با یک <strong>GUID (Globally Unique Identifier)</strong> شناسایی می‌شوند.</p>
-<ul>
-<li>
-<p><strong>IUnknown</strong>: root interface در COM است و تمام COM objects باید آن را پیاده‌سازی کنند. متدهای آن:</p>
-<ul>
-<li><code>AddRef</code> و <code>Release</code> برای مدیریت طول عمر (COM از reference counting استفاده می‌کند، نه garbage collection خودکار).</li>
-<li><code>QueryInterface</code> برای بازگرداندن reference به یک interface پشتیبانی‌شده.</li>
-</ul>
-</li>
-<li>
-<p><strong>IDispatch</strong>: برای برنامه‌نویسی داینامیک (مانند scripting و automation). امکان فراخوانی late-bound مشابه dynamic در C# را فراهم می‌کند (برای simple invocations).</p>
-</li>
-</ul>
-<h3>فراخوانی یک کامپوننت COM از C# 🖥️</h3>
-<p>CLR در <strong>پشتیبانی داخلی از COM</strong> به شما اجازه نمی‌دهد مستقیماً با <code>IUnknown</code> و <code>IDispatch</code> کار کنید. به جای آن، شما با <strong>CLR objects</strong> کار می‌کنید و runtime فراخوانی‌های شما را به دنیای COM <strong>از طریق Runtime-Callable Wrappers (RCWs)</strong> منتقل می‌کند.</p>
-<ul>
-<li><strong>مدیریت طول عمر</strong>: runtime هنگام finalize شدن شیء .NET، به صورت خودکار <code>AddRef</code> و <code>Release</code> را فراخوانی می‌کند.</li>
-<li><strong>تبدیل نوع داده‌ها</strong>: primitive types مثل int و string بین دنیای managed و unmanaged به شکل مناسب تبدیل می‌شوند.</li>
-</ul>
-<hr>
-<h3>COM Interop Types</h3>
-<p>برای دسترسی به RCWs به صورت <strong>type-safe</strong>، از <strong>COM interop types</strong> استفاده می‌کنیم. این‌ها <strong>proxy types</strong> هستند که برای هر member COM، یک member .NET ایجاد می‌کنند.</p>
-<ul>
-<li>ابزار <code>tlbimp.exe</code> می‌تواند COM interop types را از <strong>type library</strong> بسازد و آن‌ها را در یک <strong>COM interop assembly</strong> قرار دهد.</li>
-<li>اگر یک کامپوننت COM چندین interface داشته باشد، <code>tlbimp.exe</code> یک type واحد ایجاد می‌کند که شامل <strong>union اعضا از همه interfaces</strong> است.</li>
-</ul>
-<p>در <strong>Visual Studio</strong>:</p>
-<ul>
-<li>از <strong>Add Reference</strong> &gt; COM tab، کتابخانه مورد نظر را انتخاب کنید (مثلاً Microsoft Excel Object Library).</li>
-<li>کد نمونه برای ایجاد یک Workbook و پر کردن یک سلول در Excel:</li>
-</ul>
-<pre class="hljs"><code><span class="hljs-keyword">using</span> System;
+</code></pre> <p>کاربران می‌توانند Foo را مستقیم استفاده کنند. اگر بعدها implementation تابع Test() تغییر کند، assemblyهای فراخوان نیازی به recompile ندارند.</p><p>در COM، Foo برای جداسازی interface از implementation، <strong>قابلیت‌های خود را از طریق یک interface ارائه می‌دهد</strong>:</p><pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title">IFoo</span> { <span class="hljs-function"><span class="hljs-built_in">string</span> <span class="hljs-title">Test</span>()</span>; }
+</code></pre> <p>اضافه کردن overload در COM پیچیده‌تر است، زیرا:</p><ul> <li>interfaces منتشرشده immutable هستند.</li><li>COM اجازه method overloading نمی‌دهد.</li></ul> <p>راه‌حل: ایجاد interface دوم:</p><pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title">IFoo2</span> { <span class="hljs-function"><span class="hljs-built_in">string</span> <span class="hljs-title">Test</span>(<span class="hljs-params"><span class="hljs-built_in">string</span> s</span>)</span>; }
+</code></pre> <p>پشتیبانی از چندین interface کلیدی است تا <strong>کتابخانه‌های COM versionable</strong> شوند.</p><hr> <h4>IUnknown و IDispatch</h4><p>تمام COM interfaces با یک <strong>GUID (Globally Unique Identifier)</strong> شناسایی می‌شوند.</p><ul> <li><p><strong>IUnknown</strong>: root interface در COM است و تمام COM objects باید آن را پیاده‌سازی کنند. متدهای آن:</p><ul> <li><code>AddRef</code> و <code>Release</code> برای مدیریت طول عمر (COM از reference counting استفاده می‌کند، نه garbage collection خودکار).</li><li><code>QueryInterface</code> برای بازگرداندن reference به یک interface پشتیبانی‌شده.</li></ul> </li><li> <p><strong>IDispatch</strong>: برای برنامه‌نویسی داینامیک (مانند scripting و automation). امکان فراخوانی late-bound مشابه dynamic در C# را فراهم می‌کند (برای simple invocations).</p></li> </ul><h3>فراخوانی یک کامپوننت COM از C#</h3><p>CLR در <strong>پشتیبانی داخلی از COM</strong> به شما اجازه نمی‌دهد مستقیماً با <code>IUnknown</code> و <code>IDispatch</code> کار کنید. به جای آن، شما با <strong>CLR objects</strong> کار می‌کنید و runtime فراخوانی‌های شما را به دنیای COM <strong>از طریق Runtime-Callable Wrappers (RCWs)</strong> منتقل می‌کند.</p><ul> <li><strong>مدیریت طول عمر</strong>: runtime هنگام finalize شدن شیء .NET، به صورت خودکار <code>AddRef</code> و <code>Release</code> را فراخوانی می‌کند.</li><li><strong>تبدیل نوع داده‌ها</strong>: primitive types مثل int و string بین دنیای managed و unmanaged به شکل مناسب تبدیل می‌شوند.</li></ul> <hr><h3>COM Interop Types</h3><p>برای دسترسی به RCWs به صورت <strong>type-safe</strong>، از <strong>COM interop types</strong> استفاده می‌کنیم. این‌ها <strong>proxy types</strong> هستند که برای هر member COM، یک member .NET ایجاد می‌کنند.</p><ul> <li>ابزار <code>tlbimp.exe</code> می‌تواند COM interop types را از <strong>type library</strong> بسازد و آن‌ها را در یک <strong>COM interop assembly</strong> قرار دهد.</li><li>اگر یک کامپوننت COM چندین interface داشته باشد، <code>tlbimp.exe</code> یک type واحد ایجاد می‌کند که شامل <strong>union اعضا از همه interfaces</strong> است.</li></ul> <p>در <strong>Visual Studio</strong>:</p><ul> <li>از <strong>Add Reference</strong> &gt; COM tab، کتابخانه مورد نظر را انتخاب کنید (مثلاً Microsoft Excel Object Library).</li><li>کد نمونه برای ایجاد یک Workbook و پر کردن یک سلول در Excel:</li></ul> <pre class="hljs"><code><span class="hljs-keyword">using</span> System;
 <span class="hljs-keyword">using</span> Excel = Microsoft.Office.Interop.Excel;
 
 <span class="hljs-keyword">var</span> excel = <span class="hljs-keyword">new</span> Excel.Application();
@@ -742,129 +398,32 @@ Excel.Workbook workBook = excel.Workbooks.Add();
 ((Excel.Range)excel.Cells[<span class="hljs-number">1</span>, <span class="hljs-number">1</span>]).Value2 = <span class="hljs-string">&quot;Hello World&quot;</span>;
 
 workBook.SaveAs(<span class="hljs-string">@&quot;d:\temp.xlsx&quot;</span>);
-</code></pre>
-<p><strong>نکته مهم:</strong> برای اینکه runtime بتواند interop types را پیدا کند، باید <strong>Embed Interop Types</strong> را فعال کنید.</p>
-<ul>
-<li>در Visual Studio: روی COM reference کلیک کنید و <code>Embed Interop Types = true</code> تنظیم کنید.</li>
-<li>یا در <code>.csproj</code>:</li>
-</ul>
-<pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">ItemGroup</span>&gt;</span>
+</code></pre> <p><strong>نکته مهم:</strong> برای اینکه runtime بتواند interop types را پیدا کند، باید <strong>Embed Interop Types</strong> را فعال کنید.</p><ul> <li>در Visual Studio: روی COM reference کلیک کنید و <code>Embed Interop Types = true</code> تنظیم کنید.</li><li>یا در <code>.csproj</code>:</li></ul> <pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">ItemGroup</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">COMReference</span> <span class="hljs-attr">Include</span>=<span class="hljs-string">&quot;Microsoft.Office.Excel.dll&quot;</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">EmbedInteropTypes</span>&gt;</span>true<span class="hljs-tag">&lt;/<span class="hljs-name">EmbedInteropTypes</span>&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-name">COMReference</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">ItemGroup</span>&gt;</span>
-</code></pre>
-<hr>
-<h3>Optional Parameters و Named Arguments</h3>
-<p>COM APIs معمولاً تابع‌هایی با <strong>تعداد زیادی پارامتر اختیاری</strong> دارند، زیرا overloading ندارند.</p>
-<ul>
-<li>C# <strong>COM-aware</strong> است و می‌توانید از optional parameters استفاده کنید:</li>
-</ul>
-<pre class="hljs"><code>workBook.SaveAs(<span class="hljs-string">@&quot;d:\temp.xlsx&quot;</span>);
-</code></pre>
-<ul>
-<li><strong>Named arguments</strong> امکان مشخص کردن پارامترها بدون توجه به موقعیت را فراهم می‌کنند:</li>
-</ul>
-<pre class="hljs"><code>workBook.SaveAs(<span class="hljs-string">@&quot;d:\test.xlsx&quot;</span>, Password: <span class="hljs-string">&quot;foo&quot;</span>);
-</code></pre>
-<hr>
-<h3>Implicit ref Parameters</h3>
-<p>برخی COM APIs (مثل Microsoft Word) <strong>تمام پارامترها را به صورت pass-by-reference</strong> تعریف می‌کنند، حتی اگر تغییر ندهند.</p>
-<ul>
-<li>قبلاً مجبور بودید <code>ref</code> را برای هر پارامتر استفاده کنید، که optional parameters را غیرممکن می‌کرد:</li>
-</ul>
-<pre class="hljs"><code><span class="hljs-built_in">object</span> filename = <span class="hljs-string">&quot;foo.doc&quot;</span>;
+</code></pre> <hr><h3>Optional Parameters و Named Arguments</h3><p>COM APIs معمولاً تابع‌هایی با <strong>تعداد زیادی پارامتر اختیاری</strong> دارند، زیرا overloading ندارند.</p><ul> <li>C# <strong>COM-aware</strong> است و می‌توانید از optional parameters استفاده کنید:</li></ul> <pre class="hljs"><code>workBook.SaveAs(<span class="hljs-string">@&quot;d:\temp.xlsx&quot;</span>);
+</code></pre> <ul><li><strong>Named arguments</strong> امکان مشخص کردن پارامترها بدون توجه به موقعیت را فراهم می‌کنند:</li></ul> <pre class="hljs"><code>workBook.SaveAs(<span class="hljs-string">@&quot;d:\test.xlsx&quot;</span>, Password: <span class="hljs-string">&quot;foo&quot;</span>);
+</code></pre> <hr><h3>Implicit ref Parameters</h3><p>برخی COM APIs (مثل Microsoft Word) <strong>تمام پارامترها را به صورت pass-by-reference</strong> تعریف می‌کنند، حتی اگر تغییر ندهند.</p><ul> <li>قبلاً مجبور بودید <code>ref</code> را برای هر پارامتر استفاده کنید، که optional parameters را غیرممکن می‌کرد:</li></ul> <pre class="hljs"><code><span class="hljs-built_in">object</span> filename = <span class="hljs-string">&quot;foo.doc&quot;</span>;
 <span class="hljs-built_in">object</span> notUsed = Missing.Value;
 word.Open(<span class="hljs-keyword">ref</span> filename, <span class="hljs-keyword">ref</span> notUsed, ...);
-</code></pre>
-<ul>
-<li>با implicit ref parameters در C#، می‌توانید بدون <code>ref</code> فراخوانی کنید:</li>
-</ul>
-<pre class="hljs"><code>word.Open(<span class="hljs-string">&quot;foo.doc&quot;</span>);
-</code></pre>
-<blockquote>
-<p>هشدار: اگر COM method واقعا یک پارامتر را تغییر دهد، هیچ خطای compile-time یا runtime دریافت نمی‌کنید.</p>
-</blockquote>
-<hr>
-<h3>Indexers</h3>
-<ul>
-<li>حذف نیاز به <code>ref</code> اجازه می‌دهد COM <strong>indexers با پارامتر ref</strong> را به شکل ordinary C# indexer استفاده کنید:</li>
-</ul>
-<pre class="hljs"><code>myComObject.Foo[<span class="hljs-number">123</span>] = <span class="hljs-string">&quot;Hello&quot;</span>;
-</code></pre>
-<ul>
-<li>خودتان نمی‌توانید چنین indexerهایی بسازید؛ فقط COM می‌تواند چنین propertyهایی ارائه دهد که خودشان indexer دارند.</li>
-</ul>
-<hr>
-<h3>Dynamic Binding</h3>
-<ul>
-<li>اجازه دسترسی به COM component بدون <strong>COM interop type</strong>:</li>
-</ul>
-<pre class="hljs"><code>Type excelAppType = Type.GetTypeFromProgID(<span class="hljs-string">&quot;Excel.Application&quot;</span>, <span class="hljs-literal">true</span>);
+</code></pre> <ul><li>با implicit ref parameters در C#، می‌توانید بدون <code>ref</code> فراخوانی کنید:</li></ul> <pre class="hljs"><code>word.Open(<span class="hljs-string">&quot;foo.doc&quot;</span>);
+</code></pre> <blockquote><p>هشدار: اگر COM method واقعا یک پارامتر را تغییر دهد، هیچ خطای compile-time یا runtime دریافت نمی‌کنید.</p></blockquote> <hr><h3>Indexers</h3><ul> <li>حذف نیاز به <code>ref</code> اجازه می‌دهد COM <strong>indexers با پارامتر ref</strong> را به شکل ordinary C# indexer استفاده کنید:</li></ul> <pre class="hljs"><code>myComObject.Foo[<span class="hljs-number">123</span>] = <span class="hljs-string">&quot;Hello&quot;</span>;
+</code></pre> <ul><li>خودتان نمی‌توانید چنین indexerهایی بسازید؛ فقط COM می‌تواند چنین propertyهایی ارائه دهد که خودشان indexer دارند.</li></ul> <hr><h3>Dynamic Binding</h3><ul> <li>اجازه دسترسی به COM component بدون <strong>COM interop type</strong>:</li></ul> <pre class="hljs"><code>Type excelAppType = Type.GetTypeFromProgID(<span class="hljs-string">&quot;Excel.Application&quot;</span>, <span class="hljs-literal">true</span>);
 <span class="hljs-built_in">dynamic</span> excel = Activator.CreateInstance(excelAppType);
 excel.Visible = <span class="hljs-literal">true</span>;
 <span class="hljs-built_in">dynamic</span> wb = excel.Workbooks.Add();
 excel.Cells[<span class="hljs-number">1</span>, <span class="hljs-number">1</span>].Value2 = <span class="hljs-string">&quot;foo&quot;</span>;
-</code></pre>
-<ul>
-<li>جایگزین قدیمی و سخت‌تر: استفاده از reflection به جای dynamic.</li>
-<li>Dynamic همچنین می‌تواند با <strong>COM variant type</strong> بهتر کار کند (معادل object در .NET). با فعال کردن <strong>Embed Interop Types</strong>، variant به dynamic map می‌شود و نیازی به cast نیست:</li>
-</ul>
-<pre class="hljs"><code>excel.Cells[<span class="hljs-number">1</span>, <span class="hljs-number">1</span>].Font.FontStyle = <span class="hljs-string">&quot;Bold&quot;</span>;
-</code></pre>
-<ul>
-<li>معایب dynamic: <strong>از دست دادن IntelliSense</strong> و چک‌های compile-time.</li>
-<li>راه معمول: تبدیل نتیجه به interop type شناخته شده:</li>
-</ul>
-<pre class="hljs"><code>Excel.Range range = excel.Cells[<span class="hljs-number">1</span>, <span class="hljs-number">1</span>];
+</code></pre> <ul><li>جایگزین قدیمی و سخت‌تر: استفاده از reflection به جای dynamic.</li><li>Dynamic همچنین می‌تواند با <strong>COM variant type</strong> بهتر کار کند (معادل object در .NET). با فعال کردن <strong>Embed Interop Types</strong>، variant به dynamic map می‌شود و نیازی به cast نیست:</li></ul> <pre class="hljs"><code>excel.Cells[<span class="hljs-number">1</span>, <span class="hljs-number">1</span>].Font.FontStyle = <span class="hljs-string">&quot;Bold&quot;</span>;
+</code></pre> <ul><li>معایب dynamic: <strong>از دست دادن IntelliSense</strong> و چک‌های compile-time.</li><li>راه معمول: تبدیل نتیجه به interop type شناخته شده:</li></ul> <pre class="hljs"><code>Excel.Range range = excel.Cells[<span class="hljs-number">1</span>, <span class="hljs-number">1</span>];
 range.Font.FontStyle = <span class="hljs-string">&quot;Bold&quot;</span>;
-</code></pre>
-<blockquote>
-<p>mapping variant → dynamic پیش‌فرض است و وابسته به فعال بودن Embed Interop Types می‌باشد.</p>
-</blockquote>
-<h3>جاسازی Interop Types در C# 🧩</h3>
-<p>در گذشته، C# برای فراخوانی کامپوننت‌های COM نیاز داشت که <strong>Interop Assemblies</strong> را به پروژه اضافه کند (مثلاً با <code>tlbimp.exe</code>). اما این کار مشکلاتی داشت:</p>
-<ul>
-<li>این Interop Assemblies گاهی بسیار بزرگ می‌شدند.</li>
-<li>حتی یک add-in کوچک برای Word می‌توانست Interop Assembly چندین برابر خودش حجم داشته باشد.</li>
-</ul>
-<p>به جای افزودن کل Assembly، می‌توانید فقط بخش‌هایی که استفاده می‌کنید را <strong>embed</strong> کنید:</p>
-<ul>
-<li><strong>کامپایلر</strong> فقط memberهایی که استفاده می‌کنید را تحلیل کرده و مستقیماً در برنامه شما جاسازی می‌کند.</li>
-<li>این کار باعث کاهش حجم و عدم نیاز به فایل اضافی می‌شود.</li>
-</ul>
-<p><strong>فعال‌سازی در Visual Studio:</strong></p>
-<ul>
-<li>روی COM reference کلیک کرده و <code>Embed Interop Types = true</code> را در Properties فعال کنید.</li>
-<li>یا در <code>.csproj</code>:</li>
-</ul>
-<pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">ItemGroup</span>&gt;</span>
+</code></pre> <blockquote><p>mapping variant → dynamic پیش‌فرض است و وابسته به فعال بودن Embed Interop Types می‌باشد.</p></blockquote> <h3>جاسازی Interop Types در C#</h3><p>در گذشته، C# برای فراخوانی کامپوننت‌های COM نیاز داشت که <strong>Interop Assemblies</strong> را به پروژه اضافه کند (مثلاً با <code>tlbimp.exe</code>). اما این کار مشکلاتی داشت:</p><ul> <li>این Interop Assemblies گاهی بسیار بزرگ می‌شدند.</li><li>حتی یک add-in کوچک برای Word می‌توانست Interop Assembly چندین برابر خودش حجم داشته باشد.</li></ul> <p>به جای افزودن کل Assembly، می‌توانید فقط بخش‌هایی که استفاده می‌کنید را <strong>embed</strong> کنید:</p><ul> <li><strong>کامپایلر</strong> فقط memberهایی که استفاده می‌کنید را تحلیل کرده و مستقیماً در برنامه شما جاسازی می‌کند.</li><li>این کار باعث کاهش حجم و عدم نیاز به فایل اضافی می‌شود.</li></ul> <p><strong>فعال‌سازی در Visual Studio:</strong></p><ul> <li>روی COM reference کلیک کرده و <code>Embed Interop Types = true</code> را در Properties فعال کنید.</li><li>یا در <code>.csproj</code>:</li></ul> <pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">ItemGroup</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">COMReference</span> <span class="hljs-attr">Include</span>=<span class="hljs-string">&quot;Microsoft.Office.Excel.dll&quot;</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">EmbedInteropTypes</span>&gt;</span>true<span class="hljs-tag">&lt;/<span class="hljs-name">EmbedInteropTypes</span>&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-name">COMReference</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">ItemGroup</span>&gt;</span>
-</code></pre>
-<hr>
-<h3>Type Equivalence ⚖️</h3>
-<p>CLR از <strong>Type Equivalence</strong> برای linked interop types پشتیبانی می‌کند:</p>
-<ul>
-<li>اگر دو Assembly به یک COM type لینک شوند، آن‌ها <strong>معادل</strong> در نظر گرفته می‌شوند حتی اگر Interop Assemblies جداگانه تولید شده باشند.</li>
-<li>این ویژگی بر پایه <code>TypeIdentifierAttribute</code> در فضای نام <code>System.Runtime.InteropServices</code> کار می‌کند.</li>
-<li>COM types با <strong>GUID یکسان</strong> برابر در نظر گرفته می‌شوند.</li>
-</ul>
-<hr>
-<h3>انتشار اشیاء C# به COM (CCW)</h3>
-<p>برای اینکه یک کلاس C# در دنیای COM قابل استفاده باشد:</p>
-<ul>
-<li>از <strong>COM-Callable Wrapper (CCW)</strong> استفاده می‌شود که type‌ها را بین دنیای managed و unmanaged marshaling می‌کند.</li>
-<li>CCW <code>IUnknown</code> و در صورت نیاز <code>IDispatch</code> را پیاده‌سازی می‌کند.</li>
-<li>طول عمر از سمت COM با <strong>reference counting</strong> کنترل می‌شود.</li>
-</ul>
-<h4>مراحل</h4>
-<ol>
-<li>ایجاد یک interface و اختصاص GUID یکتا به آن:</li>
-</ol>
-<pre class="hljs"><code><span class="hljs-keyword">namespace</span> <span class="hljs-title">MyCom</span>
+</code></pre> <hr><h3>Type Equivalence</h3><p>CLR از <strong>Type Equivalence</strong> برای linked interop types پشتیبانی می‌کند:</p><ul> <li>اگر دو Assembly به یک COM type لینک شوند، آن‌ها <strong>معادل</strong> در نظر گرفته می‌شوند حتی اگر Interop Assemblies جداگانه تولید شده باشند.</li><li>این ویژگی بر پایه <code>TypeIdentifierAttribute</code> در فضای نام <code>System.Runtime.InteropServices</code> کار می‌کند.</li><li>COM types با <strong>GUID یکسان</strong> برابر در نظر گرفته می‌شوند.</li></ul> <hr><h3>انتشار اشیاء C# به COM (CCW)</h3><p>برای اینکه یک کلاس C# در دنیای COM قابل استفاده باشد:</p><ul> <li>از <strong>COM-Callable Wrapper (CCW)</strong> استفاده می‌شود که type‌ها را بین دنیای managed و unmanaged marshaling می‌کند.</li><li>CCW <code>IUnknown</code> و در صورت نیاز <code>IDispatch</code> را پیاده‌سازی می‌کند.</li><li>طول عمر از سمت COM با <strong>reference counting</strong> کنترل می‌شود.</li></ul> <h4>مراحل</h4><ol> <li>ایجاد یک interface و اختصاص GUID یکتا به آن:</li></ol> <pre class="hljs"><code><span class="hljs-keyword">namespace</span> <span class="hljs-title">MyCom</span>
 {
   [<span class="hljs-meta">ComVisible(true)</span>]
   [<span class="hljs-meta">Guid(<span class="hljs-string">&quot;226E5561-C68E-4B2B-BD28-25103ABCA3B1&quot;</span>)</span>]
@@ -874,11 +433,7 @@ range.Font.FontStyle = <span class="hljs-string">&quot;Bold&quot;</span>;
       <span class="hljs-function"><span class="hljs-built_in">int</span> <span class="hljs-title">Fibonacci</span>()</span>;
   }
 }
-</code></pre>
-<ol start="2">
-<li>پیاده‌سازی interface و اختصاص GUID به کلاس:</li>
-</ol>
-<pre class="hljs"><code><span class="hljs-keyword">namespace</span> <span class="hljs-title">MyCom</span>
+</code></pre> <ol start="2"><li>پیاده‌سازی interface و اختصاص GUID به کلاس:</li></ol> <pre class="hljs"><code><span class="hljs-keyword">namespace</span> <span class="hljs-title">MyCom</span>
 {
   [<span class="hljs-meta">ComVisible(true)</span>]
   [<span class="hljs-meta">Guid(<span class="hljs-string">&quot;09E01FCD-9970-4DB3-B537-0EC555967DD9&quot;</span>)</span>]
@@ -898,158 +453,229 @@ range.Font.FontStyle = <span class="hljs-string">&quot;Bold&quot;</span>;
       }
   }
 }
-</code></pre>
-<ol start="3">
-<li>فعال کردن COM hosting در <code>.csproj</code>:</li>
-</ol>
-<pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">PropertyGroup</span>&gt;</span>
+</code></pre> <ol start="3"><li>فعال کردن COM hosting در <code>.csproj</code>:</li></ol> <pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">PropertyGroup</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">EnableComHosting</span>&gt;</span>true<span class="hljs-tag">&lt;/<span class="hljs-name">EnableComHosting</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">PropertyGroup</span>&gt;</span>
-</code></pre>
-<ol start="4">
-<li>فایل تولید شده (<code>MyCom.comhost.dll</code>) را با <code>regsvr32</code> ثبت کنید.</li>
-</ol>
-<hr>
-<h3>مصرف COM از سایر زبان‌ها</h3>
-<p>مثال با <strong>VBScript</strong>:</p>
-<pre class="hljs"><code><span class="hljs-comment">REM Save as ComClient.vbs</span>
+</code></pre> <ol start="4"><li>فایل تولید شده (<code>MyCom.comhost.dll</code>) را با <code>regsvr32</code> ثبت کنید.</li></ol> <hr><h3>مصرف COM از سایر زبان‌ها</h3><p>مثال با <strong>VBScript</strong>:</p><pre class="hljs"><code><span class="hljs-comment">REM Save as ComClient.vbs</span>
 <span class="hljs-keyword">Dim</span> obj
 <span class="hljs-keyword">Set</span> obj = CreateObject(<span class="hljs-string">&quot;MyCom.Server&quot;</span>)
 result = obj.Fibonacci(<span class="hljs-number">12</span>)
 Wscript.Echo result
-</code></pre>
-<blockquote>
-<p>توجه: .NET Framework و .NET 5+ / .NET Core نمی‌توانند در یک process بارگذاری شوند؛ بنابراین COM server در .NET 5+ نمی‌تواند در .NET Framework client فراخوانی شود.</p>
-</blockquote>
-<hr>
-<h3>COM بدون رجیستری (Registry-Free COM) 🗂️</h3>
-<ul>
-<li>به جای ثبت COM object در رجیستری، از <strong>manifest فایل</strong> استفاده می‌شود.</li>
-<li>فعال‌سازی در <code>.csproj</code>:</li>
-</ul>
-<pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">PropertyGroup</span>&gt;</span>
+</code></pre> <blockquote><p>توجه: .NET Framework و .NET 5+ / .NET Core نمی‌توانند در یک process بارگذاری شوند؛ بنابراین COM server در .NET 5+ نمی‌تواند در .NET Framework client فراخوانی شود.</p></blockquote> <hr><h3>COM بدون رجیستری (Registry-Free COM)</h3><ul> <li>به جای ثبت COM object در رجیستری، از <strong>manifest فایل</strong> استفاده می‌شود.</li><li>فعال‌سازی در <code>.csproj</code>:</li></ul> <pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">PropertyGroup</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">TargetFramework</span>&gt;</span>netcoreapp3.0<span class="hljs-tag">&lt;/<span class="hljs-name">TargetFramework</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">EnableComHosting</span>&gt;</span>true<span class="hljs-tag">&lt;/<span class="hljs-name">EnableComHosting</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">EnableRegFreeCom</span>&gt;</span>true<span class="hljs-tag">&lt;/<span class="hljs-name">EnableRegFreeCom</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">PropertyGroup</span>&gt;</span>
-</code></pre>
-<ul>
-<li>در این حالت فایل <code>MyCom.X.manifest</code> ساخته می‌شود.</li>
-</ul>
-<blockquote>
-<p>در .NET 5+ امکان تولید <strong>COM type library (*.tlb)</strong> به صورت خودکار وجود ندارد. باید دستی IDL یا header C++ ایجاد کنید.</p>
-</blockquote>
-
-  </main>
-
-  <!-- فوتر مشترک -->
-  <footer class="footer">
-    <div class="container">
-      <p>
-        <img src="/Gitab/icone/copyright.svg" alt="کپی‌رایت" width="14" height="14"
-             style="vertical-align:middle;margin-inline:4px">
-        <span id="y"></span> Gitab — تمامی حقوق محفوظ است.
-      </p>
-    </div>
-  </footer>
-
-  <!-- سال و اسکریپت تغییر تم -->
-  <script>
+</code></pre> <ul><li>در این حالت فایل <code>MyCom.X.manifest</code> ساخته می‌شود.</li></ul> <blockquote><p>در .NET 5+ امکان تولید <strong>COM type library (*.tlb)</strong> به صورت خودکار وجود ندارد. باید دستی IDL یا header C++ ایجاد کنید.</p></blockquote> </article><nav class="chapter-single-next-nav"> <a href="/Gitab/books/book1/Book/25/Regular-Expressions/" class="btn-next-chapter-action" id="nextChapterBtn" data-hub="/Gitab/books/book1/"> <span class="next-btn-text">فصل بعدی: عبارات منظم Regex</span> <span class="next-btn-arrow">←</span> </a> </nav></div> <button class="fab-back-to-top" id="backToTopBtn" type="button" aria-label="رفتن به بالای صفحه" title="رفتن به بالا"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"> <polyline points="18 15 12 9 6 15"></polyline> </svg> </button></main> <footer class="footer-minimal"><div class="footer-container"> <div class="footer-top-row"><div class="footer-brand-side"> <a href="/Gitab/" class="footer-brand-anchor"> <img src="/Gitab/icone/logo.svg" alt="Gitab" width="28" height="28" loading="lazy" decoding="async"> <span class="footer-brand-title">گیتاب (Gitab)</span> </a> <p class="footer-tagline"> پلتفرم آزاد و مستقل برای ترجمهٔ دقیق و روان کتاب‌های مرجع مهندسی نرم‌افزار. </p></div> <div class="footer-nav-cols"><div class="footer-nav-col"> <span class="footer-nav-heading">موضوعات</span><ul class="footer-nav-list"> <li><a href="/Gitab/books/list-books/?cat=csharp">سی‌شارپ و دات‌نت</a></li><li><a href="/Gitab/books/list-books/?cat=clean-code">کد تمیز و بازآفرینی</a></li><li><a href="/Gitab/books/list-books/?cat=architecture">معماری و طراحی دامنه</a></li><li><a href="/Gitab/books/list-books/?cat=system">لینوکس و خط فرمان</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">بخش‌های سایت</span><ul class="footer-nav-list"> <li><a href="/Gitab/">صفحه اصلی</a></li><li><a href="/Gitab/books/list-books/">کتابخانه کامل</a></li><li><a href="/Gitab/courses/">دوره‌های آموزشی</a></li><li><a href="/Gitab/translator.html">تالار مترجمین</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">مشارکت و جامعه</span><ul class="footer-nav-list"> <li><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer">راهنمای همکاری در ترجمه</a></li><li><a href="https://github.com/hheydarian/Gitab/issues" target="_blank" rel="noopener noreferrer">پیشنهاد کتاب یا گزارش خطا</a></li></ul> </div></div> </div><div class="footer-bottom-line"> <span>© <span id="y">2026</span> Gitab — توسعه‌یافته برای جامعهٔ مهندسان نرم‌افزار ایرانی</span></div> </div></footer> <script>
   (() => {
     const root = document.documentElement;
     const btn = document.getElementById('themeToggle');
+    const sunIcon = btn ? btn.querySelector('.icon-sun') : null;
+    const moonIcon = btn ? btn.querySelector('.icon-moon') : null;
     const KEY = 'gitab-theme';
 
-    function updateTheme(s) {
-      root.setAttribute('data-theme', s);
-      const mode = s;  // فقط `dark` یا `light` خواهد بود
+    function updateTheme(mode) {
+      root.setAttribute('data-theme', mode);
       root.dataset.colorMode = mode;
-      btn.dataset.icon = mode === 'dark' ? 'moon' : 'sun';
+      if (sunIcon && moonIcon) {
+        if (mode === 'dark') {
+          sunIcon.style.display = 'inline-block';
+          moonIcon.style.display = 'none';
+        } else {
+          sunIcon.style.display = 'none';
+          moonIcon.style.display = 'inline-block';
+        }
+      }
     }
 
-    // وضعیت تم ذخیره شده از localStorage
-    let saved = localStorage.getItem(KEY) || 'light'; // پیش‌فرض روشن
+    let saved = 'dark';
+    try { saved = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
     updateTheme(saved);
 
-    // تنظیم مجدد تم هنگام تغییر وضعیت دکمه
-    btn.addEventListener('click', () => {
-      const current = localStorage.getItem(KEY) || 'light';
-      const next = current === 'dark' ? 'light' : 'dark';  // فقط دو حالت: تاریک و روشن
-      localStorage.setItem(KEY, next);
-      updateTheme(next);
-    });
+    if (btn) {
+      btn.addEventListener('click', () => {
+        let current = 'dark';
+        try { current = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+        const next = current === 'dark' ? 'light' : 'dark';
+        try { localStorage.setItem(KEY, next); } catch (e) {}
+        updateTheme(next);
+      });
+    }
 
-    // هنگام بارگذاری صفحه
     document.addEventListener('DOMContentLoaded', () => {
-      updateTheme(localStorage.getItem(KEY) || 'light');
+      let mode = 'dark';
+      try { mode = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+      updateTheme(mode);
+      const yearSpan = document.getElementById('y');
+      if (yearSpan) yearSpan.textContent = new Date().getFullYear();
     });
+
+    const mobBtn = document.getElementById('mobileMenuBtn');
+    const mobDrawer = document.getElementById('mobileDrawer');
+    if (mobBtn && mobDrawer) {
+      const setDrawerOpen = (open) => {
+        mobDrawer.classList.toggle('open', open);
+        mobBtn.classList.toggle('is-open', open);
+        mobBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        mobBtn.setAttribute('aria-label', open ? 'بستن منو' : 'باز کردن منو');
+        mobDrawer.setAttribute('aria-hidden', open ? 'false' : 'true');
+      };
+
+      mobBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        setDrawerOpen(!mobDrawer.classList.contains('open'));
+      });
+
+      mobDrawer.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => setDrawerOpen(false));
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && mobDrawer.classList.contains('open')) {
+          setDrawerOpen(false);
+        }
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!mobDrawer.contains(e.target) && !mobBtn.contains(e.target)) {
+          setDrawerOpen(false);
+        }
+      });
+    }
+
+    if ('serviceWorker' in navigator) {
+      const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+      if (isLocalhost) {
+        navigator.serviceWorker.getRegistrations().then(regs => {
+          for (const reg of regs) reg.unregister();
+        });
+        if ('caches' in window) {
+          caches.keys().then(names => {
+            for (const name of names) caches.delete(name);
+          });
+        }
+      } else {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/Gitab/sw.js').catch(() => {});
+        });
+      }
+    }
   })();
-</script>
-
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-  <script>hljs.highlightAll();</script>
-
-  <script>
+  </script> <script>
   document.querySelectorAll('pre code').forEach(block => {
+    const pre = block.parentNode;
+    if (!pre || pre.querySelector('.copy-btn')) return;
+
+    const copySvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
+    const okSvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+
     const btn = document.createElement('button');
     btn.className = 'copy-btn';
-
-    const icon = document.createElement('img');
-    icon.src = "/Gitab/icone/copy.svg";
-    icon.alt = 'Copy';
-    btn.appendChild(icon);
-
-    block.parentNode.insertBefore(btn, block);
+    btn.setAttribute('aria-label', 'کپی کد');
+    btn.setAttribute('title', 'کپی کد');
+    btn.setAttribute('type', 'button');
+    btn.innerHTML = copySvg;
+    pre.appendChild(btn);
 
     btn.addEventListener('click', async () => {
-      await navigator.clipboard.writeText(block.textContent);
-      btn.classList.add('copied');
-      setTimeout(() => btn.classList.remove('copied'), 1500);
-    });
-  });
-  </script>
-
-  <script>
-  document.body.dataset.page = window.location.pathname;
-
-  const menuBtn = document.querySelector(".menu-toggle");
-  const nav = document.querySelector(".nav");
-
-  if (menuBtn && nav) {
-    menuBtn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      nav.classList.toggle("show");
-    });
-
-    document.addEventListener("click", (e) => {
-      const clickedInsideNav = nav.contains(e.target);
-      const clickedMenuButton = menuBtn.contains(e.target);
-      if (!clickedInsideNav && !clickedMenuButton) {
-        nav.classList.remove("show");
+      try {
+        await navigator.clipboard.writeText(block.textContent);
+        btn.classList.add('copied');
+        btn.innerHTML = okSvg;
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          btn.innerHTML = copySvg;
+        }, 1800);
+      } catch (err) {
+        console.error('Copy failed:', err);
       }
     });
-  }
-  </script>
-
-  <script>
-    document.getElementById('y').textContent = new Date().getFullYear();
-  </script>
-  <script>
-document.getElementById("openDonate").addEventListener("click", () => {
-  document.getElementById("donateModal").style.display = "block";
-});
-document.getElementById("closeDonate").addEventListener("click", () => {
-  document.getElementById("donateModal").style.display = "none";
-});
-document.querySelectorAll(".copy-btn").forEach(btn => {
-  btn.addEventListener("click", () => {
-    navigator.clipboard.writeText(btn.dataset.copy);
-  
-    setTimeout(() => (btn.textContent = "کپی"), 2000);
   });
-});
-</script>
+  </script> <script>
+  (() => {
+    const article = document.getElementById('chapterArticle');
+    if (!article) return;
 
-</body>
-</html>
+    const progressBar = document.getElementById('readingProgressBar');
+    if (progressBar) {
+      window.addEventListener('scroll', () => {
+        const docElem = document.documentElement;
+        const totalHeight = docElem.scrollHeight - docElem.clientHeight;
+        if (totalHeight > 0) {
+          const progress = (window.pageYOffset / totalHeight) * 100;
+          progressBar.style.width = Math.min(100, Math.max(0, progress)) + '%';
+        }
+      }, { passive: true });
+    }
+
+    const btt = document.getElementById('backToTopBtn');
+    if (btt) {
+      window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 250) {
+          btt.classList.add('visible');
+        } else {
+          btt.classList.remove('visible');
+        }
+      }, { passive: true });
+
+      btt.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+
+    article.querySelectorAll('img').forEach(img => {
+      if (!img.hasAttribute('loading')) img.loading = 'lazy';
+      if (!img.hasAttribute('decoding')) img.decoding = 'async';
+      const parent = img.parentElement;
+      if (parent && parent.tagName === 'P') {
+        parent.style.textAlign = 'center';
+      }
+
+      img.addEventListener('error', function() {
+        const src = this.getAttribute('src');
+        if (src && src.includes('assets/image/')) {
+          const parts = src.split('assets/image/');
+          const corrected = '/Gitab/books/book1/assets/image/' + parts[1];
+          if (this.src !== corrected) {
+            this.src = corrected;
+          }
+        }
+      });
+    });
+
+    article.querySelectorAll('p').forEach(p => {
+      const trimmed = p.innerText.trim();
+      if (trimmed.startsWith('💡') || trimmed.startsWith('نکته:')) {
+        p.classList.add('react-callout', 'callout-tip');
+      } else if (trimmed.startsWith('⚠️') || trimmed.startsWith('هشدار:')) {
+        p.classList.add('react-callout', 'callout-warning');
+      } else if (trimmed.startsWith('📌') || trimmed.startsWith('مهم:')) {
+        p.classList.add('react-callout', 'callout-important');
+      } else if (trimmed.startsWith('🔹') || trimmed.startsWith('🔸')) {
+        p.classList.add('react-callout', 'callout-note');
+      }
+    });
+  })();
+  </script> <script type="speculationrules">{"prefetch":[{"where":{"and":[{"href_matches":"/Gitab/*"},{"not":{"href_matches":"/Gitab/downloads/*"}},{"not":{"selector_matches":"[download], [target='_blank']"}}]},"eagerness":"moderate"}]}</script> <script>
+  (() => {
+    if (window.HTMLScriptElement && HTMLScriptElement.supports && HTMLScriptElement.supports('speculationrules')) return;
+    const seen = new Set([window.location.href]);
+    let count = 0;
+    const prefetchLink = (e) => {
+      if (count >= 12) return;
+      const a = e.target && e.target.closest ? e.target.closest('header a, .chapter-single-next-nav a, .syllabus-chapter-item a, .btn-hero-read, .btn-card-read') : null;
+      if (!a || !a.href || a.hasAttribute('download') || a.target === '_blank') return;
+      if (a.origin !== window.location.origin || a.pathname.includes('/downloads/')) return;
+      const clean = a.href.split('#')[0];
+      if (!clean || seen.has(clean)) return;
+      seen.add(clean);
+      count++;
+      const l = document.createElement('link');
+      l.rel = 'prefetch';
+      l.href = clean;
+      document.head.appendChild(l);
+    };
+    document.addEventListener('pointerenter', prefetchLink, { capture: true, passive: true });
+    document.addEventListener('touchstart', prefetchLink, { capture: true, passive: true });
+  })();
+  </script></body></html>

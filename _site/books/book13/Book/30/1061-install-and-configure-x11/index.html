@@ -1,0 +1,344 @@
+<!doctype html><html lang="fa" dir="rtl"> <head><script>
+    if (window.location.pathname.startsWith('/gitab/')) {
+      window.location.replace(window.location.pathname.replace(/^\/gitab\//i, '/Gitab/') + window.location.search + window.location.hash);
+    }
+    (() => {
+      try {
+        const t = localStorage.getItem('gitab-theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', t);
+        document.documentElement.dataset.colorMode = t;
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        document.documentElement.dataset.colorMode = 'dark';
+      }
+    })();
+  </script> <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5"> <title>۱۰۶.۱ نصب و پیکربندی سیستم پنجره‌ای X11</title><meta name="description" content="۱۰۶.۱ نصب و پیکربندی سیستم پنجره‌ای X11 — مطالعه آنلاین و رایگان از کتاب «راهنمای آزمون LPIC-1 (ورژن ۵۰۰)» (LPIC-1 Study Guide (Version 500)) اثر جادی میرمیرانی با ترجمه جادی میرمیرانی در گیتاب."> <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"><meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"> <meta name="theme-color" content="#090d16"><meta name="referrer" content="strict-origin-when-cross-origin"> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https:; frame-src https://www.youtube.com https://www.youtube-nocookie.com https://maps.google.com https://www.google.com; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self';"><link rel="icon" type="image/png" href="/Gitab/favicon.png"> <link rel="canonical" href="https://hheydarian.github.io/Gitab/books/book13/Book/30/1061-install-and-configure-x11/"><link rel="alternate" hreflang="fa" href="https://hheydarian.github.io/Gitab/books/book13/Book/30/1061-install-and-configure-x11/"> <link rel="alternate" hreflang="x-default" href="https://hheydarian.github.io/Gitab/books/book13/Book/30/1061-install-and-configure-x11/"><link rel="alternate" type="text/plain" title="LLMs.txt" href="/Gitab/llms.txt"> <link rel="sitemap" type="application/xml" title="Sitemap" href="/Gitab/sitemap.xml"><meta property="og:locale" content="fa_IR"> <meta property="og:type" content="article"><meta property="og:site_name" content="گیتاب | Gitab"> <meta property="og:title" content="۱۰۶.۱ نصب و پیکربندی سیستم پنجره‌ای X11"><meta property="og:description" content="۱۰۶.۱ نصب و پیکربندی سیستم پنجره‌ای X11 — مطالعه آنلاین و رایگان از کتاب «راهنمای آزمون LPIC-1 (ورژن ۵۰۰)» (LPIC-1 Study Guide (Version 500)) اثر جادی میرمیرانی با ترجمه جادی میرمیرانی در گیتاب."> <meta property="og:url" content="https://hheydarian.github.io/Gitab/books/book13/Book/30/1061-install-and-configure-x11/"><meta property="og:image" content="https://hheydarian.github.io/Gitab/images/lpic1book/Cover.jpg"> <meta property="og:image:alt" content="۱۰۶.۱ نصب و پیکربندی سیستم پنجره‌ای X11"><meta name="twitter:card" content="summary_large_image"> <meta name="twitter:title" content="۱۰۶.۱ نصب و پیکربندی سیستم پنجره‌ای X11"><meta name="twitter:description" content="۱۰۶.۱ نصب و پیکربندی سیستم پنجره‌ای X11 — مطالعه آنلاین و رایگان از کتاب «راهنمای آزمون LPIC-1 (ورژن ۵۰۰)» (LPIC-1 Study Guide (Version 500)) اثر جادی میرمیرانی با ترجمه جادی میرمیرانی در گیتاب."> <meta name="twitter:image" content="https://hheydarian.github.io/Gitab/images/lpic1book/Cover.jpg"><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://hheydarian.github.io/Gitab/#organization","name":"گیتاب | Gitab","alternateName":"Gitab","url":"https://hheydarian.github.io/Gitab/","logo":{"@type":"ImageObject","url":"https://hheydarian.github.io/Gitab/favicon.png"},"sameAs":["https://github.com/hheydarian/Gitab"]},{"@type":"WebSite","@id":"https://hheydarian.github.io/Gitab/#website","url":"https://hheydarian.github.io/Gitab/","name":"گیتاب | Gitab","inLanguage":"fa-IR","publisher":{"@id":"https://hheydarian.github.io/Gitab/#organization"},"potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://hheydarian.github.io/Gitab/books/list-books/?q={search_term_string}"},"query-input":"required name=search_term_string"}},{"@type":"WebPage","@id":"https://hheydarian.github.io/Gitab/books/book13/Book/30/1061-install-and-configure-x11/#webpage","url":"https://hheydarian.github.io/Gitab/books/book13/Book/30/1061-install-and-configure-x11/","name":"۱۰۶.۱ نصب و پیکربندی سیستم پنجره‌ای X11","description":"۱۰۶.۱ نصب و پیکربندی سیستم پنجره‌ای X11 — مطالعه آنلاین و رایگان از کتاب «راهنمای آزمون LPIC-1 (ورژن ۵۰۰)» (LPIC-1 Study Guide (Version 500)) اثر جادی میرمیرانی با ترجمه جادی میرمیرانی در گیتاب.","inLanguage":"fa-IR","isPartOf":{"@id":"https://hheydarian.github.io/Gitab/#website"}},{"@type":"TechArticle","headline":"۱۰۶.۱ نصب و پیکربندی سیستم پنجره‌ای X11","description":"۱۰۶.۱ نصب و پیکربندی سیستم پنجره‌ای X11 — مطالعه آنلاین و رایگان از کتاب «راهنمای آزمون LPIC-1 (ورژن ۵۰۰)» (LPIC-1 Study Guide (Version 500)) اثر جادی میرمیرانی با ترجمه جادی میرمیرانی در گیتاب.","url":"https://hheydarian.github.io/Gitab/books/book13/Book/30/1061-install-and-configure-x11/","inLanguage":"fa-IR","isAccessibleForFree":true,"author":{"@type":"Person","name":"جادی میرمیرانی"},"translator":{"@type":"Person","name":"جادی میرمیرانی"},"isPartOf":{"@type":"Book","name":"راهنمای آزمون LPIC-1 (ورژن ۵۰۰)","alternateName":"LPIC-1 Study Guide (Version 500)","url":"https://hheydarian.github.io/Gitab/books/book13/"}}]}</script> <link rel="preload" href="/Gitab/fonts/Vazirmatn.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/Gitab/styles/main.css?v=2.4" as="style"> <link rel="preload" href="/Gitab/styles/gitab-modern.css?v=2.5" as="style"><style>@font-face{font-family:'Lalezar';src:url('/Gitab/fonts/Lalezar.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}@font-face{font-family:'Vazirmatn';src:url('/Gitab/fonts/Vazirmatn.woff2') format('woff2');font-weight:100 900;font-style:normal;font-display:swap}html,body,button,input,optgroup,select,textarea,.filter-pill{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}input::placeholder,textarea::placeholder{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}</style> <link rel="stylesheet" href="/Gitab/styles/main.css?v=2.4"><link rel="stylesheet" href="/Gitab/styles/gitab-modern.css?v=2.5"> <link rel="stylesheet" href="/Gitab/styles/vendor/github-dark.min.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="/Gitab/styles/vendor/github-dark.min.css"></noscript></head> <body><header class="header"> <div class="container nav-wrap"><a href="/Gitab/" class="brand" aria-label="صفحه اصلی گیتاب"> <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="30" height="30" decoding="async"> <span class="brand-text">Gitab</span> </a> <nav class="nav" id="mainNav"><a href="/Gitab/" >خانه</a> <a href="/Gitab/books/list-books" aria-current="page">کتاب‌ها</a> <a href="/Gitab/courses/" >دوره‌ها</a> <a href="/Gitab/translator.html" >مترجمین</a></nav> <div class="nav-actions"><button id="themeToggle" class="theme-toggle-btn" aria-label="تغییر تم" title="تغییر تم"> <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن" width="18" height="18" decoding="async" style="display:none"> <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک" width="18" height="18" decoding="async"> </button> <a class="btn-github-pill" href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" title="مشاهده سورس گیتاب در گیت‌هاب"> <img src="/Gitab/icone/github.svg" alt="GitHub" width="16" height="16" decoding="async"> <span>گیت‌هاب</span> </a> <button class="mobile-menu-btn" id="mobileMenuBtn" type="button" aria-label="باز کردن منو" aria-expanded="false"> <svg class="mob-icon-open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="4" y1="7" x2="20" y2="7"></line> <line x1="4" y1="12" x2="20" y2="12"></line> <line x1="4" y1="17" x2="14" y2="17"></line> </svg> <svg class="mob-icon-close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="18" y1="6" x2="6" y2="18"></line> <line x1="6" y1="6" x2="18" y2="18"></line> </svg> </button></div> </div><div class="mobile-drawer" id="mobileDrawer" aria-hidden="true"> <div class="mobile-drawer-inner"><div class="mobile-drawer-section-label">ناوبری سریع</div><nav class="mobile-drawer-links" aria-label="منوی موبایل"> <a href="/Gitab/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M3 10.5 12 3l9 7.5"></path> <path d="M5 9.5V20a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V9.5"></path> </svg> </span> <span class="mob-nav-text">صفحه نخست</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/books/list-books" class="mobile-drawer-link active" aria-current="page"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path> </svg> </span> <span class="mob-nav-text">کتابخانه و فهرست کتاب‌ها</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/courses/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path> <path d="M6 12v5c3 3 9 3 12 0v-5"></path> </svg> </span> <span class="mob-nav-text">دوره‌های آموزشی</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/translator.html" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path> <circle cx="9" cy="7" r="4"></circle> <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path> <path d="M16 3.13a4 4 0 0 1 0 7.75"></path> </svg> </span> <span class="mob-nav-text">مترجمین و همکاران</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> </nav><div class="mobile-drawer-divider"></div><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" class="mobile-drawer-link mobile-drawer-gh"> <span class="mob-nav-icon" aria-hidden="true"> <img src="/Gitab/icone/github.svg" alt="" width="17" height="17" loading="lazy" decoding="async"> </span> <span class="mob-nav-text">مخزن گیت‌هاب پروژه</span> <span class="mob-nav-ext" aria-hidden="true">↗</span> </a> </div></div> </header><div class="reading-progress-track"> <div class="reading-progress-fill" id="readingProgressBar"></div></div> <main class="site-main chapter-reading-page"><div class="chapter-page-wrapper"> <nav class="chapter-clean-breadcrumb" aria-label="مسیر راهنما" dir="rtl"><a href="/Gitab/">خانه</a> <span class="bc-sep" aria-hidden="true">/</span> <a href="/Gitab/books/list-books/">کتاب‌ها</a> <span class="bc-sep" aria-hidden="true">/</span> <a href="/Gitab/books/book13/"><bdi>راهنمای آزمون LPIC-1</bdi></a> <span class="bc-sep" aria-hidden="true">/</span> <span class="bc-current-leaf"><bdi>۱۰۶.۱ نصب و پیکربندی سیستم پنجره‌ای X11</bdi></span></nav> <article class="chapter-prose-container markdown-body" id="chapterArticle" dir="rtl"><h1>۱۰۶.۱ نصب و پیکربندی سیستم پنجره‌ای X11</h1><div class="callout callout-info" style="background: rgba(59, 130, 246, 0.08); border-right: 4px solid #3b82f6; padding: 16px 20px; border-radius: 8px; margin-bottom: 24px;"> <strong>خلاصه هدف آزمون:</strong> معماری کلاینت-سرور در Xorg، فایل xorg.conf، ماژول‌های کارت گرافیک و متغیر DISPLAY. </div><div class="video-container" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; border-radius: 12px; margin: 24px 0; border: 1px solid var(--g-border-dim);"> <iframe src="https://www.youtube.com/embed/JqiT4rsTvUo" title="ویدئوی آموزشی جادی برای این سرفصل" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen></iframe></div> <h2>🎯 اهداف و سرفصل‌های این بخش</h2><p>در این درسنامه موارد زیر را بررسی و مرور می‌کنیم:</p><ul> <li>مفاهیم کلیدی مورد پرسش در آزمون بین‌المللی LPIC-1</li><li>دستورات، فایل‌های پیکربندی و ابزارهای مرتبط در خط فرمان</li><li>نکات پرتکرار آزمون‌های ۱۰۱ و ۱۰۲ همراه با نمونه‌های کاربردی</li></ul> <hr><h2>📝 متن درسنامه و توضیحات تکمیلی</h2><p><em>ضریب اهمیت (Weight): ۲</em></p><p>داوطلبان باید توانایی نصب و پیکربندی سیستم پنجره‌ای <code>X11</code> را داشته باشند.</p><h3>حوزه‌های دانش کلیدی</h3><ul> <li>درک معماری <code>X11</code></li><li>آشنایی و درک پایه از فایل پیکربندی سیستم پنجره‌ای X</li><li>بازنویسی بخش‌های خاصی از پیکربندی <code>Xorg</code> (مانند چیدمان صفحه‌کلید)</li><li>شناخت اجزای محیط‌های دسکتاپ، از جمله مدیرهای نمایش (Display Managers) و مدیرهای پنجره (Window Managers)</li><li>مدیریت دسترسی به سرور X و نمایش برنامه‌های گرافیکی روی سرورهای X راه‌دور</li><li>آشنایی با <code>Wayland</code></li></ul> <h3>اصطلاحات و ابزارها</h3><div dir="ltr"> <ul><li><code>/etc/X11/xorg.conf</code></li><li><code>/etc/X11/xorg.conf.d/</code></li><li><code>~/.xsession-errors</code></li><li><code>xhost</code></li><li><code>xauth</code></li><li><code>DISPLAY</code></li><li><code>X</code></li></ul> </div><h2>مقدمه</h2><p>خیلی از آدم‌ها ترجیح می‌دهند از طریق یک رابط کاربری گرافیکی (یا به اختصار <strong>GUI</strong>) با سیستم خودشان کار کنند و بین فایل‌ها و برنامه‌ها بچرخند. یک سیستم‌عامل مبتنی بر GUI آیکون‌ها، ماوس، پنجره‌ها و پوشه‌ها را در اختیار کاربر می‌گذارد؛ استعاره‌ای از همان «میز کار» یا دسکتاپ روزمره خودمان. اما این اتفاق چطور می‌افتد؟ مثل خیلی چیزهای دیگر در دنیای یونیکس، اینجا هم همه‌چیز از طریق لایه‌هایی از برنامه‌ها انجام می‌شود که هر کدام یک کار مشخص را به بهترین شکل ممکن انجام می‌دهند. تصویر زیر یک نمای کلی و تقریبی از این پشته (Stack) را نشان می‌دهد:</p><div class="book-img-frame" style="text-align: center; margin: 24px 0;"><img src="/Gitab/books/book13/assets/gui_stack.png" alt="پشته رابط گرافیکی لینوکس (Linux GUI stack)" style="max-width: 100%; border-radius: 8px; border: 1px solid var(--g-border-dim);" loading="lazy"></div><p>در پایین‌ترین سطح، سخت‌افزار (مثلاً مانیتور شما) قرار دارد و روی آن هسته لینوکس (Kernel) و درایورهایش نشسته‌اند. بالای سر آن‌ها نرم‌افزاری به نام <strong>سرور نمایش (Display Server)</strong> یا <strong>مدیر نمایش (Display Manager)</strong> قرار می‌گیرد. این برنامه می‌تواند از سیستم‌عامل (کرنل) بخواهد کارهایی را که مدیر دسکتاپ درخواست کرده انجام دهد. به زبان ساده‌تر، سرور نمایش درخواست‌های رابط کاربری را دریافت می‌کند (حتی از طریق شبکه!) و آن‌ها را به زبانی ترجمه می‌کند که کرنل و درایورهایش متوجه شوند.</p><p>در این بخش تمرکز ما روی <strong>X</strong> است که یکی از دو سرور نمایش اصلی در لینوکس محسوب می‌شود، و در انتها هم نگاهی کوتاه به رقیب مدرن‌تر آن یعنی <strong>Wayland</strong> می‌اندازیم.</p><h2>سیستم پنجره‌ای X</h2><p><strong>X Window System</strong> یک سیستم پنجره‌ای شفاف در برابر شبکه (Network-transparent) است که روی طیف گسترده‌ای از ماشین‌های محاسباتی و گرافیکی اجرا می‌شود؛ از جمله روی اکثر توزیع‌های گنو/لینوکس هر وقت که به رابط گرافیکی نیاز داشته باشند. تاریخچه آن کمی طولانی است؛ همه‌چیز با پروژه <em>XFree86</em> شروع شد و بعد سازمان <em><a href="http://X.Org">X.Org</a></em> سرور X خودش را راه‌اندازی کرد که امروزه آن را با نام <strong>X11</strong> می‌شناسیم.</p><blockquote> <p>اگر بخواهیم کمی عمیق‌تر شویم: <em>X Window System</em> (یا به اختصار <em>X</em>) در دهه ۱۹۸۰ سیستم پنجره‌ای پیش‌فرض در اکثر سیستم‌های یونیکس و شبه‌یونیکس بود. سرور <em><a href="http://X.Org">X.Org</a></em> پیاده‌سازی آزاد و متن‌باز سرور نمایش X Window System توسط بنیاد <a href="http://X.Org">X.Org</a> است. امروزه وقتی می‌گوییم <em>X</em>، منظورمان کل خانواده پروتکل‌های شبکه‌ای است که مشخص می‌کنند پیام‌ها بین یک کلاینت (برنامه گرافیکی) و سرور نمایش چطور ردوبدل شوند؛ و <code>X11</code> یازدهمین نسخه از همین پروتکل است.</p></blockquote> <h3>فایل <code>/etc/X11/xorg.conf</code></h3><p>این فایل در گذشته فایل پیکربندی اصلی برای X بود. این روزها X هنگام بالا آمدن خودش سخت‌افزارها را تشخیص می‌دهد و پیکربندی را انجام می‌دهد و معمولاً نیازی به فایل کانفیگ ندارد. اما اگر بخواهید در فرآیند راه‌اندازی تغییراتی بدهید، می‌توانید با اجرای دستور زیر یک فایل جدید به نام <code>xorg.conf.new</code> بسازید:</p><pre class="hljs"><code>Xorg -configure
+</code></pre> <p>و بعد آن را به مسیر <code>/etc/X11/xorg.conf</code> منتقل کنید. این فایل بخش‌های مختلفی دارد. بیایید نگاهی به چند تا از آن‌ها بیندازیم:</p><pre class="hljs"><code>Section &quot;Files&quot;
+    FontPath    &quot;/usr/share/X11/fonts/misc&quot;
+    FontPath    &quot;/usr/share/X11/fonts/100dpi/:unscaled&quot;
+    FontPath    &quot;/usr/share/X11/fonts/75dpi/:unscaled&quot;
+    FontPath    &quot;/usr/share/X11/fonts/Type1&quot;
+    FontPath    &quot;/usr/share/X11/fonts/100dpi&quot;
+    FontPath    &quot;/usr/share/X11/fonts/75dpi&quot;
+    FontPath    &quot;/var/lib/defoma/x-ttcidfont-conf.d/dirs/TrueType&quot;
+EndSection
+</code></pre> <p>این بخش مربوط به فونت‌ها است. وقتی X-Server اجرا می‌شود به این فایل‌ها نیاز دارد. <code>FontPath</code> به X11 می‌گوید فونت‌ها کجا هستند. حتی می‌تواند به IP یک فونت‌سرور (Font Server) اشاره کند که البته این روزها دیگر مرسوم نیست. قدیم‌ترها فونت‌سرورها وظیفه رندر کردن فونت‌ها برای نمایش روی کلاینت‌ها را بر عهده داشتند، اما کامپیوترهای امروزی به اندازه کافی سریع هستند و خودشان فونت‌ها را رندر می‌کنند؛ بنابراین فونت‌سرورها کم‌کم از مد افتاده‌اند!</p><pre class="hljs"><code>Section &quot;Module&quot;
+    Load    &quot;bitmap&quot;
+    Load    &quot;ddc&quot;
+    Load    &quot;dri&quot;
+    Load    &quot;extmod&quot;
+    Load    &quot;freetype&quot;
+    Load    &quot;glx&quot;
+    Load    &quot;int10&quot;
+    Load    &quot;type1&quot;
+    Load    &quot;vbe&quot;
+    Load    &quot;dbe&quot;
+EndSection
+</code></pre> <p>این‌ها ماژول‌ها هستند. مثلاً <code>glx</code> مسئول افکت‌های <em>گرافیکی سه‌بعدی (3D)</em> است و ما از X می‌خواهیم آن را همراه بقیه ماژول‌ها بارگذاری کند.</p><p>در ادامه بخش دستگاه‌های ورودی (<code>InputDevice</code>) را می‌بینیم:</p><pre class="hljs"><code>Section &quot;InputDevice&quot;
+    Identifier    &quot;Generic Keyboard&quot;
+    Driver        &quot;kbd&quot;
+    Option        &quot;CoreKeyboard&quot;
+    Option        &quot;XkbRules&quot;    &quot;xorg&quot;
+    Option        &quot;XkbModel&quot;    &quot;pc105&quot;
+    Option        &quot;XkbLayout&quot;    &quot;us&quot;
+EndSection
+
+Section &quot;InputDevice&quot;
+    Identifier    &quot;Configured Mouse&quot;
+    Driver        &quot;mouse&quot;
+    Option        &quot;CorePointer&quot;
+    Option        &quot;Device&quot;        &quot;/dev/input/mice&quot;
+    Option        &quot;Protocol&quot;        &quot;ImPS/2&quot;
+    Option        &quot;Emulate3Buttons&quot;    &quot;true&quot;
+    Option        &quot;ZAxisMapping&quot;        &quot;4 5&quot;
+EndSection
+
+Section &quot;InputDevice&quot;
+        Identifier      &quot;Synaptics Touchpad&quot;
+        Driver          &quot;synaptics&quot;
+        Option          &quot;SendCoreEvents&quot;        &quot;true&quot;
+        Option          &quot;Device&quot;                &quot;/dev/psaux&quot;
+        Option          &quot;Protocol&quot;              &quot;auto-dev&quot;
+        Option          &quot;RightEdge&quot;        &quot;5000&quot;
+EndSection
+</code></pre> <p>همان‌طور که می‌بینید، هر دستگاه یک شناسه (<code>Identifier</code>)، یک درایور (<code>Driver</code>) و تعدادی گزینه (<code>Option</code>) دارد. در بالا یک ماوس، یک صفحه‌کلید و یک تاچ‌پد تعریف کردیم و به هر کدام اسمی دادیم.</p><pre class="hljs"><code>Section &quot;Device&quot;
+    Identifier    &quot;ATI Technologies, Inc. Radeon Mobility 7500 (M7 LW)&quot;
+    Driver        &quot;radeon&quot;
+    BusID        &quot;PCI:1:0:0&quot;
+    Option        &quot;DynamicClocks&quot;    &quot;on&quot;
+    Option        &quot;CRT2HSync&quot;    &quot;30-80&quot;
+    Option        &quot;CRT2VRefresh&quot;    &quot;59-75&quot;
+      Option        &quot;MetaModes&quot;    &quot;1024x768 800x600 640x480 1024x768+1280x1024&quot;
+EndSection
+</code></pre> <p>این هم یک کارت گرافیک! باز هم شناسه (نام)، درایور و یک سری گزینه (مثل رزولوشن‌های پشتیبانی‌شده، نرخ تازه‌سازی تصویر یا Refresh Rate و...) دارد. این دستگاه به یک صفحه نمایش (<code>Screen</code>) و یک مانیتور (<code>Monitor</code>) هم نیاز دارد:</p><blockquote> <p><strong>نکته:</strong> درایور <code>vesa</code> به یک درایور با رزولوشن پایین اشاره دارد که تقریباً همیشه کار می‌کند و معمولاً برای عیب‌یابی به کار می‌رود.</p></blockquote> <pre class="hljs"><code>Section &quot;Monitor&quot;
+    Identifier    &quot;Generic Monitor&quot;
+    Option        &quot;DPMS&quot;
+EndSection
+
+Section &quot;Screen&quot;
+    Identifier    &quot;Screen0&quot;
+    Device        &quot;Screen0 ATI Technologies, Inc. Radeon Mobility 7500 (M7 LW)&quot;
+    Monitor        &quot;Generic Monitor&quot;
+    DefaultDepth    24
+    SubSection &quot;Display&quot;
+        Depth        1
+        Modes        &quot;1024x768&quot;
+    EndSubSection
+    SubSection &quot;Display&quot;
+        Depth        4
+        Modes        &quot;1024x768&quot;
+    EndSubSection
+    SubSection &quot;Display&quot;
+        Depth        8
+        Modes        &quot;1024x768&quot;
+    EndSubSection
+    SubSection &quot;Display&quot;
+        Depth        15
+        Modes        &quot;1024x768&quot;
+    EndSubSection
+    SubSection &quot;Display&quot;
+        Depth        16
+        Modes        &quot;1024x768&quot;
+    EndSubSection
+    SubSection &quot;Display&quot;
+        Depth        24
+        Modes        &quot;1024x768&quot;
+    EndSubSection
+EndSection
+</code></pre> <p>دقت کنید که بخش <code>Screen</code> چطور از مانیتوری که قبلاً تعریف کرده‌ایم (با شناسه <code>&quot;Generic Monitor&quot;</code>) و کارت گرافیک تعریف‌شده استفاده می‌کند. به عمق رنگ‌های مختلف (مثلاً ۲۴ بیت با رزولوشن <code>1024x768</code>) هم توجه کنید.</p><p>در نهایت، باید همه بخش‌های بالا را در یک جا به عنوان <code>ServerLayout</code> به هم بچسبانیم:</p><pre class="hljs"><code>Section &quot;ServerLayout&quot;
+    Identifier    &quot;DefaultLayout&quot;
+    Screen        &quot;Default Screen&quot;
+    InputDevice    &quot;Generic Keyboard&quot;
+    InputDevice    &quot;Configured Mouse&quot;
+    InputDevice    &quot;Synaptics Touchpad&quot;
+EndSection
+</code></pre> <p>حالا یک چیدمان کامل با یک صفحه نمایش و ۳ دستگاه ورودی داریم :)</p><blockquote> <p><strong>نکته:</strong> نترسید! داشتن یک درک کلی از ساختار فایل <code>xorg.conf</code> برای آزمون کافی است.</p></blockquote> <h3>دایرکتوری <code>/etc/X11/xorg.conf.d/</code></h3><p>اگر فایل <code>/etc/program.conf</code> را ویرایش کنید و بعد سیستم را آپدیت کنید، چه اتفاقی می‌افتد؟ آیا سیستم فایل ویرایش‌شده شما را با نسخه جدید توزیع جایگزین می‌کند؟ یا تغییرات نسخه جدید را به خاطر ویرایش‌های محلی شما نادیده می‌گیرد؟ هر دو حالت <strong>بد</strong> است.</p><p>برای حل این مشکل، خیلی از برنامه‌ها یک دایرکتوری پیکربندی مثل <code>/etc/program/program.conf.d/</code> می‌سازند و از شما می‌خواهند تنظیمات <em>محلی</em> خودتان را آنجا بگذارید. این‌طوری فایل اصلی کانفیگ توزیع در <code>/etc/program/program.conf</code> دست‌نخورده می‌ماند و تمام تنظیمات شخصی شما به صورت فایل‌های جداگانه داخل <code>/etc/program/program.conf.d/</code> قرار می‌گیرند. هم مدیریتش خیلی راحت‌تر است (چون فایل‌های کوچک و اتمیک برای هر تنظیم دارید) و هم تنظیمات محلی به فایل اصلی توزیع دست نمی‌زنند. باحال است، نه؟ بله... دقیقاً همین اتفاق در X11 هم افتاده است. تنظیمات شخصی شما باید داخل <code>/etc/X11/xorg.conf.d/</code> بروند و فایل <code>/etc/X11/xorg.conf</code> بدون تغییر باقی بماند.</p><h3>فایل <code>~/.xsession-errors</code></h3><p>اگر در حین بالا آمدن یا اجرای X مشکلی پیش بیاید، خطاها در این فایل ثبت می‌شوند. پس اگر در راه‌اندازی رابط گرافیکی به مشکلی برخوردید، این همان فایلی است که باید سراغش بروید تا ببینید چه خطایی رخ داده است.</p><h3>xhost</h3><p>این دستور دسترسی به سرور X را کنترل می‌کند. اگر روی یک سرور X باشید و دستور <code>xhost</code> را اجرا کنید، وضعیت دسترسی را به شما نشان می‌دهد:</p><pre class="hljs"><code>$ xhost
+access control enabled, only authorized clients can connect
+SI:localuser:jadi
+</code></pre> <p>همان‌طور که می‌بینید، فقط کلاینت‌های مجاز می‌توانند متصل شوند. برای باز کردن دسترسی برای همه:</p><pre class="hljs"><code>jadi@funlife:~$ xhost +
+access control disabled, clients can connect from any host
+</code></pre> <p>و برای بستن دوباره آن:</p><pre class="hljs"><code>jadi@funlife:~$ xhost -
+access control enabled, only authorized clients can connect
+</code></pre> <p>یا می‌توانید دسترسی را فقط برای یک IP خاص باز کنید:</p><pre class="hljs"><code>jadi@funlife:~$ xhost +192.168.42.85
+192.168.42.85 being added to access control list
+jadi@funlife:~$ xhost
+access control enabled, only authorized clients can connect
+INET:192.168.42.85    (no nameserver response within 5 seconds)
+SI:localuser:jadi
+</code></pre> <p>حالا ماشین <code>192.168.42.85</code> (کلاینت یا REMOTE) می‌تواند درخواست‌های گرافیکی خودش را به این ماشین بفرستد. کاربردش چیست؟ بخش بعدی را بخوانید (فرض می‌کنیم این ماشین <code>192.168.42.80</code> (SERVER) است و ما دسترسی X11 آن را برای <code>192.168.42.85</code> (REMOTE) باز کرده‌ایم).</p><h3>متغیر <code>DISPLAY</code></h3><p>این متغیر به برنامه‌های گرافیکی می‌گوید خروجی گرافیکی خودشان را کجا بفرستند. مقدار پیش‌فرض آن این است:</p><pre class="hljs"><code>$ echo $DISPLAY
+:0
+</code></pre> <p>بنابراین اگر هر برنامه گرافیکی را روی ماشین خودم اجرا کنم، خروجی آن روی همین ماشین نمایش داده می‌شود.</p><p>اما بیایید مقدار آن را به ماشین <code>192.168.42.80</code> (SERVER) تغییر دهیم... یادتان هست که همین الان به آن گفتیم این ماشین (REMOTE) اجازه دارد به آن وصل شود:</p><pre class="hljs"><code>$ export DISPLAY=192.168.42.80:0
+$ xeyes # the eyes will be shown on 192.168.42.80 machine
+</code></pre> <p>باحال است، نه؟ ولی این روش ممکن است روی سیستم شما کار نکند. در اکثر توزیع‌های امروزی، X به دلایل امنیتی به طور پیش‌فرض به اتصالات از راه دور گوش نمی‌دهد.</p><blockquote> <p>در فصل بعدی می‌بینیم که چطور می‌توانیم به شکل اصولی و امن برنامه‌های گرافیکی را روی سرورهای راه‌دور اجرا کنیم و تصویر گرافیکی آن‌ها را روی سیستم خودمان دریافت کنیم.</p></blockquote> <h3>دستور <code>xauth</code></h3><p>برنامه <code>xauth</code> برای ویرایش و نمایش اطلاعات احراز هویت (Authorization) جهت اتصال به سرور X استفاده می‌شود. در بخش <a href="#xhost">xhost</a> دیدید که چطور می‌توان X را به روی IPهای راه‌دور باز کرد؛ با استفاده از <code>xauth</code> می‌توانید همین کار را بر اساس یک «رمز مشترک» (Shared Secret) انجام دهید.</p><p>در این روش، <code>X</code> یک فایل به نام <code>.XAuthority</code> در دایرکتوری خانه شما می‌سازد و هر کس محتوای آن را داشته باشد می‌تواند با X ارتباط برقرار کند.</p><blockquote> <p>اگر <code>X</code> شما درست کار نمی‌کند، یکی از راه‌حل‌های اولیه می‌تواند پاک کردن (<code>rm</code>) فایل <code>.XAuthority</code> و راه‌اندازی مجدد X باشد.</p></blockquote> <h2>سرور نمایش Wayland</h2><p><em>X11</em> خیلی قدیمی شده است و الان فقط با کلی پچ و وصله‌پینه قابل استفاده مانده. به همین دلیل یکی از توسعه‌دهندگان خود X یک سرور نمایش مدرن به نام <em>Wayland</em> را شروع کرد. در سال‌های اخیر بسیاری از توزیع‌ها در حال مهاجرت از <em>X11</em> پیش‌فرض به <em>Wayland</em> هستند و X11 را فقط به عنوان یک گزینه پشتیبان نگه می‌دارند. Wayland بسیار امن‌تر و نگهداری آن خیلی ساده‌تر است و مطمئن باشید طی چند سال آینده بیشتر و بیشتر از آن خواهید شنید.</p><hr> <div class="callout callout-tip" style="background: rgba(147, 51, 234, 0.08); border-right: 4px solid #9333ea; padding: 16px 20px; border-radius: 8px; margin-top: 32px;"><strong>🔗 نسخه اصلی به زبان انگلیسی:</strong> این درسنامه بر اساس منبع انگلیسی جادی در مخزن <a href="https://github.com/jadijadi/lpic1book/blob/master/content/1061_install_and_configure_x11.md" target="_blank" rel="noopener noreferrer">jadijadi/lpic1book</a> تدوین و سازماندهی شده است. </div></article> <nav class="chapter-single-next-nav"><a href="/Gitab/books/book13/Book/31/1062-graphical-desktops/" class="btn-next-chapter-action" id="nextChapterBtn" data-hub="/Gitab/books/book13/"> <span class="next-btn-text">فصل بعدی: ۱۰۶.۲ مدیرهای دسکتاپ و نمایش (Display Managers)</span> <span class="next-btn-arrow">←</span> </a> </nav></div> <button class="fab-back-to-top" id="backToTopBtn" type="button" aria-label="رفتن به بالای صفحه" title="رفتن به بالا"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"> <polyline points="18 15 12 9 6 15"></polyline> </svg> </button></main> <footer class="footer-minimal"><div class="footer-container"> <div class="footer-top-row"><div class="footer-brand-side"> <a href="/Gitab/" class="footer-brand-anchor"> <img src="/Gitab/icone/logo.svg" alt="Gitab" width="28" height="28" loading="lazy" decoding="async"> <span class="footer-brand-title">گیتاب (Gitab)</span> </a> <p class="footer-tagline"> پلتفرم آزاد و مستقل برای ترجمهٔ دقیق و روان کتاب‌های مرجع مهندسی نرم‌افزار. </p></div> <div class="footer-nav-cols"><div class="footer-nav-col"> <span class="footer-nav-heading">موضوعات</span><ul class="footer-nav-list"> <li><a href="/Gitab/books/list-books/?cat=csharp">سی‌شارپ و دات‌نت</a></li><li><a href="/Gitab/books/list-books/?cat=clean-code">کد تمیز و بازآفرینی</a></li><li><a href="/Gitab/books/list-books/?cat=architecture">معماری و طراحی دامنه</a></li><li><a href="/Gitab/books/list-books/?cat=system">لینوکس و خط فرمان</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">بخش‌های سایت</span><ul class="footer-nav-list"> <li><a href="/Gitab/">صفحه اصلی</a></li><li><a href="/Gitab/books/list-books/">کتابخانه کامل</a></li><li><a href="/Gitab/courses/">دوره‌های آموزشی</a></li><li><a href="/Gitab/translator.html">تالار مترجمین</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">مشارکت و جامعه</span><ul class="footer-nav-list"> <li><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer">راهنمای همکاری در ترجمه</a></li><li><a href="https://github.com/hheydarian/Gitab/issues" target="_blank" rel="noopener noreferrer">پیشنهاد کتاب یا گزارش خطا</a></li></ul> </div></div> </div><div class="footer-bottom-line"> <span>© <span id="y">2026</span> Gitab — توسعه‌یافته برای جامعهٔ مهندسان نرم‌افزار ایرانی</span></div> </div></footer> <script>
+  (() => {
+    const root = document.documentElement;
+    const btn = document.getElementById('themeToggle');
+    const sunIcon = btn ? btn.querySelector('.icon-sun') : null;
+    const moonIcon = btn ? btn.querySelector('.icon-moon') : null;
+    const KEY = 'gitab-theme';
+
+    function updateTheme(mode) {
+      root.setAttribute('data-theme', mode);
+      root.dataset.colorMode = mode;
+      if (sunIcon && moonIcon) {
+        if (mode === 'dark') {
+          sunIcon.style.display = 'inline-block';
+          moonIcon.style.display = 'none';
+        } else {
+          sunIcon.style.display = 'none';
+          moonIcon.style.display = 'inline-block';
+        }
+      }
+    }
+
+    let saved = 'dark';
+    try { saved = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+    updateTheme(saved);
+
+    if (btn) {
+      btn.addEventListener('click', () => {
+        let current = 'dark';
+        try { current = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+        const next = current === 'dark' ? 'light' : 'dark';
+        try { localStorage.setItem(KEY, next); } catch (e) {}
+        updateTheme(next);
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      let mode = 'dark';
+      try { mode = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+      updateTheme(mode);
+      const yearSpan = document.getElementById('y');
+      if (yearSpan) yearSpan.textContent = new Date().getFullYear();
+    });
+
+    const mobBtn = document.getElementById('mobileMenuBtn');
+    const mobDrawer = document.getElementById('mobileDrawer');
+    if (mobBtn && mobDrawer) {
+      const setDrawerOpen = (open) => {
+        mobDrawer.classList.toggle('open', open);
+        mobBtn.classList.toggle('is-open', open);
+        mobBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        mobBtn.setAttribute('aria-label', open ? 'بستن منو' : 'باز کردن منو');
+        mobDrawer.setAttribute('aria-hidden', open ? 'false' : 'true');
+      };
+
+      mobBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        setDrawerOpen(!mobDrawer.classList.contains('open'));
+      });
+
+      mobDrawer.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => setDrawerOpen(false));
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && mobDrawer.classList.contains('open')) {
+          setDrawerOpen(false);
+        }
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!mobDrawer.contains(e.target) && !mobBtn.contains(e.target)) {
+          setDrawerOpen(false);
+        }
+      });
+    }
+
+    if ('serviceWorker' in navigator) {
+      const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+      if (isLocalhost) {
+        navigator.serviceWorker.getRegistrations().then(regs => {
+          for (const reg of regs) reg.unregister();
+        });
+        if ('caches' in window) {
+          caches.keys().then(names => {
+            for (const name of names) caches.delete(name);
+          });
+        }
+      } else {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/Gitab/sw.js').catch(() => {});
+        });
+      }
+    }
+  })();
+  </script> <script>
+  document.querySelectorAll('pre code').forEach(block => {
+    const pre = block.parentNode;
+    if (!pre || pre.querySelector('.copy-btn')) return;
+
+    const copySvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
+    const okSvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+
+    const btn = document.createElement('button');
+    btn.className = 'copy-btn';
+    btn.setAttribute('aria-label', 'کپی کد');
+    btn.setAttribute('title', 'کپی کد');
+    btn.setAttribute('type', 'button');
+    btn.innerHTML = copySvg;
+    pre.appendChild(btn);
+
+    btn.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(block.textContent);
+        btn.classList.add('copied');
+        btn.innerHTML = okSvg;
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          btn.innerHTML = copySvg;
+        }, 1800);
+      } catch (err) {
+        console.error('Copy failed:', err);
+      }
+    });
+  });
+  </script> <script>
+  (() => {
+    const article = document.getElementById('chapterArticle');
+    if (!article) return;
+
+    const progressBar = document.getElementById('readingProgressBar');
+    if (progressBar) {
+      window.addEventListener('scroll', () => {
+        const docElem = document.documentElement;
+        const totalHeight = docElem.scrollHeight - docElem.clientHeight;
+        if (totalHeight > 0) {
+          const progress = (window.pageYOffset / totalHeight) * 100;
+          progressBar.style.width = Math.min(100, Math.max(0, progress)) + '%';
+        }
+      }, { passive: true });
+    }
+
+    const btt = document.getElementById('backToTopBtn');
+    if (btt) {
+      window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 250) {
+          btt.classList.add('visible');
+        } else {
+          btt.classList.remove('visible');
+        }
+      }, { passive: true });
+
+      btt.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+
+    article.querySelectorAll('img').forEach(img => {
+      if (!img.hasAttribute('loading')) img.loading = 'lazy';
+      if (!img.hasAttribute('decoding')) img.decoding = 'async';
+      const parent = img.parentElement;
+      if (parent && parent.tagName === 'P') {
+        parent.style.textAlign = 'center';
+      }
+
+      img.addEventListener('error', function() {
+        const src = this.getAttribute('src');
+        if (src && src.includes('assets/image/')) {
+          const parts = src.split('assets/image/');
+          const corrected = '/Gitab/books/book13/assets/image/' + parts[1];
+          if (this.src !== corrected) {
+            this.src = corrected;
+          }
+        }
+      });
+    });
+
+    article.querySelectorAll('p').forEach(p => {
+      const trimmed = p.innerText.trim();
+      if (trimmed.startsWith('💡') || trimmed.startsWith('نکته:')) {
+        p.classList.add('react-callout', 'callout-tip');
+      } else if (trimmed.startsWith('⚠️') || trimmed.startsWith('هشدار:')) {
+        p.classList.add('react-callout', 'callout-warning');
+      } else if (trimmed.startsWith('📌') || trimmed.startsWith('مهم:')) {
+        p.classList.add('react-callout', 'callout-important');
+      } else if (trimmed.startsWith('🔹') || trimmed.startsWith('🔸')) {
+        p.classList.add('react-callout', 'callout-note');
+      }
+    });
+  })();
+  </script> <script type="speculationrules">{"prefetch":[{"where":{"and":[{"href_matches":"/Gitab/*"},{"not":{"href_matches":"/Gitab/downloads/*"}},{"not":{"selector_matches":"[download], [target='_blank']"}}]},"eagerness":"moderate"}]}</script> <script>
+  (() => {
+    if (window.HTMLScriptElement && HTMLScriptElement.supports && HTMLScriptElement.supports('speculationrules')) return;
+    const seen = new Set([window.location.href]);
+    let count = 0;
+    const prefetchLink = (e) => {
+      if (count >= 12) return;
+      const a = e.target && e.target.closest ? e.target.closest('header a, .chapter-single-next-nav a, .syllabus-chapter-item a, .btn-hero-read, .btn-card-read') : null;
+      if (!a || !a.href || a.hasAttribute('download') || a.target === '_blank') return;
+      if (a.origin !== window.location.origin || a.pathname.includes('/downloads/')) return;
+      const clean = a.href.split('#')[0];
+      if (!clean || seen.has(clean)) return;
+      seen.add(clean);
+      count++;
+      const l = document.createElement('link');
+      l.rel = 'prefetch';
+      l.href = clean;
+      document.head.appendChild(l);
+    };
+    document.addEventListener('pointerenter', prefetchLink, { capture: true, passive: true });
+    document.addEventListener('touchstart', prefetchLink, { capture: true, passive: true });
+  })();
+  </script></body></html>

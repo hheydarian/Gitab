@@ -1,0 +1,305 @@
+<!doctype html><html lang="fa" dir="rtl"> <head><script>
+    if (window.location.pathname.startsWith('/gitab/')) {
+      window.location.replace(window.location.pathname.replace(/^\/gitab\//i, '/Gitab/') + window.location.search + window.location.hash);
+    }
+    (() => {
+      try {
+        const t = localStorage.getItem('gitab-theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', t);
+        document.documentElement.dataset.colorMode = t;
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        document.documentElement.dataset.colorMode = 'dark';
+      }
+    })();
+  </script> <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5"> <title>فصل 39: ابزار nc (Linux nc Command)</title><meta name="description" content="فصل 39: ابزار nc (Linux nc Command) — مطالعه آنلاین و رایگان از کتاب «راز بیت (The Secret Bit — دانشنامه آزاد لینوکس و ابزارها)» (The Secret Bit) اثر محمد شبانه و جامعه متن‌باز با ترجمه محمد شبانه در گیتاب."> <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"><meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"> <meta name="theme-color" content="#090d16"><meta name="referrer" content="strict-origin-when-cross-origin"> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https:; frame-src https://www.youtube.com https://www.youtube-nocookie.com https://maps.google.com https://www.google.com; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self';"><link rel="icon" type="image/png" href="/Gitab/favicon.png"> <link rel="canonical" href="https://hheydarian.github.io/Gitab/books/book11/Book/39/nc/"><link rel="alternate" hreflang="fa" href="https://hheydarian.github.io/Gitab/books/book11/Book/39/nc/"> <link rel="alternate" hreflang="x-default" href="https://hheydarian.github.io/Gitab/books/book11/Book/39/nc/"><link rel="alternate" type="text/plain" title="LLMs.txt" href="/Gitab/llms.txt"> <link rel="sitemap" type="application/xml" title="Sitemap" href="/Gitab/sitemap.xml"><meta property="og:locale" content="fa_IR"> <meta property="og:type" content="article"><meta property="og:site_name" content="گیتاب | Gitab"> <meta property="og:title" content="فصل 39: ابزار nc (Linux nc Command)"><meta property="og:description" content="فصل 39: ابزار nc (Linux nc Command) — مطالعه آنلاین و رایگان از کتاب «راز بیت (The Secret Bit — دانشنامه آزاد لینوکس و ابزارها)» (The Secret Bit) اثر محمد شبانه و جامعه متن‌باز با ترجمه محمد شبانه در گیتاب."> <meta property="og:url" content="https://hheydarian.github.io/Gitab/books/book11/Book/39/nc/"><meta property="og:image" content="https://hheydarian.github.io/Gitab/images/the-secret-bit/Cover.jpg"> <meta property="og:image:alt" content="فصل 39: ابزار nc (Linux nc Command)"><meta name="twitter:card" content="summary_large_image"> <meta name="twitter:title" content="فصل 39: ابزار nc (Linux nc Command)"><meta name="twitter:description" content="فصل 39: ابزار nc (Linux nc Command) — مطالعه آنلاین و رایگان از کتاب «راز بیت (The Secret Bit — دانشنامه آزاد لینوکس و ابزارها)» (The Secret Bit) اثر محمد شبانه و جامعه متن‌باز با ترجمه محمد شبانه در گیتاب."> <meta name="twitter:image" content="https://hheydarian.github.io/Gitab/images/the-secret-bit/Cover.jpg"><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://hheydarian.github.io/Gitab/#organization","name":"گیتاب | Gitab","alternateName":"Gitab","url":"https://hheydarian.github.io/Gitab/","logo":{"@type":"ImageObject","url":"https://hheydarian.github.io/Gitab/favicon.png"},"sameAs":["https://github.com/hheydarian/Gitab"]},{"@type":"WebSite","@id":"https://hheydarian.github.io/Gitab/#website","url":"https://hheydarian.github.io/Gitab/","name":"گیتاب | Gitab","inLanguage":"fa-IR","publisher":{"@id":"https://hheydarian.github.io/Gitab/#organization"},"potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://hheydarian.github.io/Gitab/books/list-books/?q={search_term_string}"},"query-input":"required name=search_term_string"}},{"@type":"WebPage","@id":"https://hheydarian.github.io/Gitab/books/book11/Book/39/nc/#webpage","url":"https://hheydarian.github.io/Gitab/books/book11/Book/39/nc/","name":"فصل 39: ابزار nc (Linux nc Command)","description":"فصل 39: ابزار nc (Linux nc Command) — مطالعه آنلاین و رایگان از کتاب «راز بیت (The Secret Bit — دانشنامه آزاد لینوکس و ابزارها)» (The Secret Bit) اثر محمد شبانه و جامعه متن‌باز با ترجمه محمد شبانه در گیتاب.","inLanguage":"fa-IR","isPartOf":{"@id":"https://hheydarian.github.io/Gitab/#website"}},{"@type":"TechArticle","headline":"فصل 39: ابزار nc (Linux nc Command)","description":"فصل 39: ابزار nc (Linux nc Command) — مطالعه آنلاین و رایگان از کتاب «راز بیت (The Secret Bit — دانشنامه آزاد لینوکس و ابزارها)» (The Secret Bit) اثر محمد شبانه و جامعه متن‌باز با ترجمه محمد شبانه در گیتاب.","url":"https://hheydarian.github.io/Gitab/books/book11/Book/39/nc/","inLanguage":"fa-IR","isAccessibleForFree":true,"author":{"@type":"Person","name":"محمد شبانه و جامعه متن‌باز"},"translator":{"@type":"Person","name":"محمد شبانه"},"isPartOf":{"@type":"Book","name":"راز بیت (The Secret Bit — دانشنامه آزاد لینوکس و ابزارها)","alternateName":"The Secret Bit","url":"https://hheydarian.github.io/Gitab/books/book11/"}}]}</script> <link rel="preload" href="/Gitab/fonts/Vazirmatn.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/Gitab/styles/main.css?v=2.4" as="style"> <link rel="preload" href="/Gitab/styles/gitab-modern.css?v=2.5" as="style"><style>@font-face{font-family:'Lalezar';src:url('/Gitab/fonts/Lalezar.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}@font-face{font-family:'Vazirmatn';src:url('/Gitab/fonts/Vazirmatn.woff2') format('woff2');font-weight:100 900;font-style:normal;font-display:swap}html,body,button,input,optgroup,select,textarea,.filter-pill{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}input::placeholder,textarea::placeholder{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}</style> <link rel="stylesheet" href="/Gitab/styles/main.css?v=2.4"><link rel="stylesheet" href="/Gitab/styles/gitab-modern.css?v=2.5"> <link rel="stylesheet" href="/Gitab/styles/vendor/github-dark.min.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="/Gitab/styles/vendor/github-dark.min.css"></noscript></head> <body><header class="header"> <div class="container nav-wrap"><a href="/Gitab/" class="brand" aria-label="صفحه اصلی گیتاب"> <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="30" height="30" decoding="async"> <span class="brand-text">Gitab</span> </a> <nav class="nav" id="mainNav"><a href="/Gitab/" >خانه</a> <a href="/Gitab/books/list-books" aria-current="page">کتاب‌ها</a> <a href="/Gitab/courses/" >دوره‌ها</a> <a href="/Gitab/translator.html" >مترجمین</a></nav> <div class="nav-actions"><button id="themeToggle" class="theme-toggle-btn" aria-label="تغییر تم" title="تغییر تم"> <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن" width="18" height="18" decoding="async" style="display:none"> <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک" width="18" height="18" decoding="async"> </button> <a class="btn-github-pill" href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" title="مشاهده سورس گیتاب در گیت‌هاب"> <img src="/Gitab/icone/github.svg" alt="GitHub" width="16" height="16" decoding="async"> <span>گیت‌هاب</span> </a> <button class="mobile-menu-btn" id="mobileMenuBtn" type="button" aria-label="باز کردن منو" aria-expanded="false"> <svg class="mob-icon-open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="4" y1="7" x2="20" y2="7"></line> <line x1="4" y1="12" x2="20" y2="12"></line> <line x1="4" y1="17" x2="14" y2="17"></line> </svg> <svg class="mob-icon-close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="18" y1="6" x2="6" y2="18"></line> <line x1="6" y1="6" x2="18" y2="18"></line> </svg> </button></div> </div><div class="mobile-drawer" id="mobileDrawer" aria-hidden="true"> <div class="mobile-drawer-inner"><div class="mobile-drawer-section-label">ناوبری سریع</div><nav class="mobile-drawer-links" aria-label="منوی موبایل"> <a href="/Gitab/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M3 10.5 12 3l9 7.5"></path> <path d="M5 9.5V20a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V9.5"></path> </svg> </span> <span class="mob-nav-text">صفحه نخست</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/books/list-books" class="mobile-drawer-link active" aria-current="page"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path> </svg> </span> <span class="mob-nav-text">کتابخانه و فهرست کتاب‌ها</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/courses/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path> <path d="M6 12v5c3 3 9 3 12 0v-5"></path> </svg> </span> <span class="mob-nav-text">دوره‌های آموزشی</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/translator.html" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path> <circle cx="9" cy="7" r="4"></circle> <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path> <path d="M16 3.13a4 4 0 0 1 0 7.75"></path> </svg> </span> <span class="mob-nav-text">مترجمین و همکاران</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> </nav><div class="mobile-drawer-divider"></div><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" class="mobile-drawer-link mobile-drawer-gh"> <span class="mob-nav-icon" aria-hidden="true"> <img src="/Gitab/icone/github.svg" alt="" width="17" height="17" loading="lazy" decoding="async"> </span> <span class="mob-nav-text">مخزن گیت‌هاب پروژه</span> <span class="mob-nav-ext" aria-hidden="true">↗</span> </a> </div></div> </header><div class="reading-progress-track"> <div class="reading-progress-fill" id="readingProgressBar"></div></div> <main class="site-main chapter-reading-page"><div class="chapter-page-wrapper"> <nav class="chapter-clean-breadcrumb" aria-label="مسیر راهنما" dir="rtl"><a href="/Gitab/">خانه</a> <span class="bc-sep" aria-hidden="true">/</span> <a href="/Gitab/books/list-books/">کتاب‌ها</a> <span class="bc-sep" aria-hidden="true">/</span> <a href="/Gitab/books/book11/"><bdi>راز بیت</bdi></a> <span class="bc-sep" aria-hidden="true">/</span> <span class="bc-current-leaf"><bdi>فصل 39: ابزار nc (Linux nc Command)</bdi></span></nav> <article class="chapter-prose-container markdown-body" id="chapterArticle" dir="rtl"><h1>فصل 39: ابزار nc (Linux nc Command)</h1><div class="book-img-frame" style="text-align: center; margin: 24px 0;"><img src="/Gitab/books/book11/assets/nc/nc.png" alt="netcat" style="max-width: 100%; border-radius: 8px; border: 1px solid var(--g-border-dim);" loading="lazy"></div><h3>مرور</h3><p>ابزار<br> netcat<br> ابزار ساده‌ای است که می‌تواند داده ها را تحت شبکه بنویسد و با بخواند.<br> netcat<br> یک ابزار شبکه است که هکر ها بسیار طرفدار آن‌اند و البته این ابزار با تمامی قابلیت هایش<br> بسیار سبک است.<br> netcat<br> اجازه می‌دهد دو کامپیوتر توسط پروتکل های<br> tcp, udp<br> در لایه<br> ip،<br> به یکدیگر داده ارسال کنند.<br> netcat<br> می‌تواند هم به عنوان<br> client<br> و هم<br> server<br> عمل کند. برخی از کار های معمولی این ابزار عبارتند از: استفاده به عنوان <em>پیامرسان،</em><br><em>ارسال فایل</em>، <em>اسکن پورت</em> و<br><em>banner grabing</em>.</p><hr> <h3>مفاهیم پیشنیاز</h3><p>چند مفهوم وجود دارد که احتمالا بلدش هستید، اما بد نیست مروری به این مفاهیم داشته باشیم.</p><blockquote> <ol><li><strong>Ip</strong></li></ol> <p>همانطور که می‌دانید ما از چند نوع<br> ip<br> برای<br> شنود استفاده می‌کنیم، مثلا وقتی درحال شنود روی یک پورت هستید ممکن است نیاز داشته باشید که<br> این پورت فقط برای ای‌پی های لوکال قابل دسترسی باشد<br> از این رو باید فقط از ای‌پی لوکال خود استفاده کنید، با دستور<br><code>ipconfig</code><br> می‌توانید ای‌پی لوکال خودتون رو ببینید، این ای‌پی ها معمولا با این اعداد شروع می‌شوند:<br><code>10.x.x.x</code><br> یا<br><code>172.16.x.x</code><br> و یا<br><code>192.168.x.x</code><br> و خب اگر شما نیاز دارید تا شنود محدود به ای‌پی لوکال نشود کافیست ای‌پی را به این<br> ای‌پی تنظیم کنید<br><code>0.0.0.0</code></p></blockquote> <blockquote><ol start="2"> <li><strong>Cypher</strong></li></ol> <p>یادتون باشه که<br> netcat<br> هیچ رمزنگاری روی داده ها انجام نمی‌دهد.</p></blockquote> <blockquote><ol start="3"> <li><strong>Port</strong></li></ol> <p>در شبکه، پورت های زیر 1024 همه رزرو شده هستند، سعی کنید از این پورت ها استفاده نکنید<br> و یا اگر مجبور به استفاده از این پورت ها هستید، حتما باید با دسترسی روت<br> netcat<br> را اجرا کنید.</p></blockquote> <blockquote><ol start="4"> <li><strong>TCP/UDP</strong></li></ol> <p>در حالت پیشفرض<br> netcat<br> از پروتکل<br> TPC<br> برای اتصال استفاده می‌کند. برای تغییر این پورتکل به<br> UDP<br> باید از سوییچ<br><code>-u</code><br> استفاده کنید. فراموش نکنید که این سوییچ را باید برای هم سرور و هم کلاینت<br> به کار ببرید. درواقع هر دو باید از یک پروتکل یکسان استفاده کنند.</p></blockquote> <hr><h3>درست کردن چت سرور</h3><p>برای درست کردن یک چت سرور به دو مفهوم<br><strong>کلاینت</strong><br> و<br><strong>سرور</strong><br> نیاز داریم. اول بریم سراغ سرور، ما قراره بین دو کامپیوتر<br> چت کنیم، یکی از کامپیوتر ها روی یک پورت خاص شروع به شنود می‌کنه.<br> برای درست کردن سرور این دستور را وارد کنید</p><pre class="hljs"><code>nc -l 0.0.0.0 1337
+</code></pre> <p>این دستور روی پورت 1337 از هر نوع ای‌پی که باشد، یک کانکشن رو قبول می‌کنه<br> سوییچ<br><code>-l</code><br> مشخص می‌کند که<br> netcat<br> باید باید<br> listener(شنونده)<br> باشد.</p><p>به زبان ساده‌تر، یکی از سیستم ها برای یک اتصال از یک سیستم<br> منتظز می‌ماند. کلاینت باید با دادن ای‌پی سرور به<br> netcat،<br> به سرور متصل شود.<br> برای اینکه کلاینت را به سرور متصل کنیم، فرض کنید ای‌پی لوکال سرور<br><code>192.168.1.2</code><br> است، حال در سیستم کلاینت این دستور را برای اتصال به سرور وارد می‌کنیم</p><pre class="hljs"><code>nc 192.168.1.2 1337
+</code></pre> <p>این دستور برای<br> nc<br> مشخص می‌کند که باید به پورت 1337 سیستمی با آدرس ای‌پی 192.168.1.2<br> متصل شود.</p><blockquote> <p><strong>نکته</strong>:<br> بهتره است<br> از سوییچ<br><code>v-</code><br> برای حالت<br><em>verbose</em><br> استفاده کنید، این سوییچ باعث میشه تا لاگ رخداد ها را ببینید، برای مثلال اگر سیستمی<br> کانکت شد<br> و یا به دلیلی اتصال یک سیستم قطع شد، یک خروجی متنی نمایش داده می‌شود</p></blockquote> <hr><h3>اتصال به یک پورت خاص</h3><p>همانطور که در دستورات قبلی مشاهده کردیم، متصل شدن به یک پورت مشخص<br> دو ورودی می‌گیرد، اولی برای مشخص کردن ای‌پی سرور و دومین ورودی پورت را مشخص<br> می‌کند. برای مثال برای متصل شدن به سیستمی با ای‌پی <strong>192.168.1.1</strong> و پورت <strong>23</strong></p><pre class="hljs"><code>nc 192.168.1.1 23
+</code></pre> <blockquote><p><strong>نکته:</strong><br> این پروت پیشفرض<br> telnet<br> است، اگر سیستم یا روتر شما از این پروتکل استفاده می‌کند، شما با وارد کردن<br> این دستور درواقع شما به سیستم<br> telnet<br> کرده اید.</p></blockquote> <hr><h3>انتقال فایل</h3><p>انتقال فایل با<br> netcat<br> یکی از پرکاربرد ترین کار ها برای من بوده، چرا که توی شرکت و حتی در<br> خانه نیازی به نصب و استفاده از ابزار های دیگه ای نداشتم.</p><p>اولین قدم این است که سیستمی که قرار است فایل را دریافت کند را تبدیل به یک سرور کنیم.<br> netcat<br> به صورت پیشفرض تمامی دیتایی که دریافت می‌کند را سعی می‌کند در خروجی چاپ کند،<br> اما فایل ها که به درستی در خروجی چاپ نمی‌شود، ما نیاز داریم تا فایل را ذخیره کنیم.<br> برای ذخیره داده های دریافتی کافیت از دستور ریدایرکت استفاده کنیم.</p><pre class="hljs"><code>nc -lv 0.0.0.0 1337 &gt; fileName.jpg
+</code></pre> <p>علامت<br><code>&gt;</code><br> دستور ریدایرکت است که بعد از دستور<br> netcat<br> قرار داده‌ایم، و بعد از این علامت باید یک نام دلخواه به فایل بدهیم، ولی سعی کنید پسوند<br> فایل را درست وارد کنید.</p><p>کلاینت برای ارسال فایل به این سرور باید فایل را بخواند و سپس آن را به<br> netcat<br> پایپ کند.</p><p>برای خواندن فایل از دستور<br><code>cat</code><br> استفاده می‌کنیم. پایپ کردن به این معنی است که خروجی یک دستور را به عنوان ورودی<br> به یک دستور دیگر بدهیم.<br> توی این مورد ما فایل<br> jpg<br> را می‌خوانیم و آن را به سرور ارسال می‌کنیم. فرض کنید ای‌پی سرور 192.168.1.2.<br> و نام فایل عکس ما<br> image.jpg<br> است.</p><pre class="hljs"><code><span class="hljs-built_in">cat</span> image.jpg | nc -v 192.168.1.2 1337
+</code></pre> <p>علامت<br><code>|</code><br> همان دستور پایپ است.</p><blockquote> <p><strong>نکته:</strong><br> برای اینکه سرعت ارسال و حجم ارسال شده داده را در لحظه ببینید از دستور<br> pv<br> استفاده کنید. به زبان ساده تر خروجی دستور اول را به<br> pv<br> و خروجی<br> pv<br> را به<br> nc<br> پایپ کنید</p></blockquote> <pre class="hljs"><code><span class="hljs-built_in">cat</span> image.jpg | pv | nc -v 192.168.1.2 1337
+</code></pre> <hr><h3>اسکن کردن پورت</h3><p>این کار برای این است که چک کنیم چه پورت هایی از سیستم باز است.<br> برای مثال برای این که ببینیم پورت 80 سرور گوگل باز است یا نه،<br> دامنه<br><a href="http://google.com">google.com</a><br> را به<br><code>nc -z</code><br> می‌دهیم تا چک کند که آیا پورت 80 این سرور باز است یا خیر.<br> این نکته را بخاطر داشته باشید که در حالت عادی این سویچ هیچ خروجی ندارد،<br> و ما باید با استفاده از سوییچ<br><code>-v</code><br> خروجی را ببینیم.</p><pre class="hljs"><code>nc -vz google.com 80
+</code></pre> <p>در صورتی که پورت باز باشد خروجی به این شکل است</p><pre class="hljs"><code>Connection to google.com (142.250.186.174) 80 port [tcp/http] succeeded!
+</code></pre> <p>اما اگر شما می‌خواید یک محدوده خاصی از پورت های یک سرور را چک کنید باید از علامت<br><code>-</code><br> بین پورت ها استفاده کنید.</p><p>برای مثال من پورت های 21 تا 80 سیستم خودم را چک می‌کنم</p><pre class="hljs"><code>nc -zv 127.0.0.1 21-80
+</code></pre> <p>و در خروجی</p><pre class="hljs"><code>Connection to 127.0.0.1 21 port [tcp/*] succeeded!
+Connection to 127.0.0.1 22 port [tcp/*] succeeded!
+nc: connect to 127.0.0.1 port 23 (tcp) failed: Connection refused
+nc: connect to 127.0.0.1 port 24 (tcp) failed: Connection refused
+nc: connect to 127.0.0.1 port 25 (tcp) failed: Connection refused
+nc: connect to 127.0.0.1 port 26 (tcp) failed: Connection refused
+nc: connect to 127.0.0.1 port 27 (tcp) failed: Connection refused
+nc: connect to 127.0.0.1 port 28 (tcp) failed: Connection refused
+nc: connect to 127.0.0.1 port 29 (tcp) failed: Connection refused
+nc: connect to 127.0.0.1 port 30 (tcp) failed: Connection refused
+nc: connect to 127.0.0.1 port 31 (tcp) failed: Connection refused
+nc: connect to 127.0.0.1 port 32 (tcp) failed: Connection refused
+nc: connect to 127.0.0.1 port 33 (tcp) failed: Connection refused
+nc: connect to 127.0.0.1 port 34 (tcp) failed: Connection refused
+nc: connect to 127.0.0.1 port 35 (tcp) failed: Connection refused
+nc: connect to 127.0.0.1 port 36 (tcp) failed: Connection refused
+nc: connect to 127.0.0.1 port 37 (tcp) failed: Connection refused
+nc: connect to 127.0.0.1 port 38 (tcp) failed: Connection refused
+nc: connect to 127.0.0.1 port 39 (tcp) failed: Connection refused
+nc: connect to 127.0.0.1 port 40 (tcp) failed: Connection refused
+nc: connect to 127.0.0.1 port 41 (tcp) failed: Connection refused
+nc: connect to 127.0.0.1 port 42 (tcp) failed: Connection refused
+nc: connect to 127.0.0.1 port 43 (tcp) failed: Connection refused
+nc: connect to 127.0.0.1 port 44 (tcp) failed: Connection refused
+nc: connect to 127.0.0.1 port 45 (tcp) failed: Connection refused
+nc: connect to 127.0.0.1 port 46 (tcp) failed: Connection refused
+nc: connect to 127.0.0.1 port 47 (tcp) failed: Connection refused
+nc: connect to 127.0.0.1 port 48 (tcp) failed: Connection refused
+nc: connect to 127.0.0.1 port 49 (tcp) failed: Connection refused
+nc: connect to 127.0.0.1 port 50 (tcp) failed: Connection refused
+nc: connect to 127.0.0.1 port 51 (tcp) failed: Connection refused
+nc: connect to 127.0.0.1 port 52 (tcp) failed: Connection refused
+nc: connect to 127.0.0.1 port 53 (tcp) failed: Connection refused
+nc: connect to 127.0.0.1 port 54 (tcp) failed: Connection refused
+nc: connect to 127.0.0.1 port 55 (tcp) failed: Connection refused
+nc: connect to 127.0.0.1 port 56 (tcp) failed: Connection refused
+nc: connect to 127.0.0.1 port 57 (tcp) failed: Connection refused
+nc: connect to 127.0.0.1 port 58 (tcp) failed: Connection refused
+nc: connect to 127.0.0.1 port 59 (tcp) failed: Connection refused
+nc: connect to 127.0.0.1 port 60 (tcp) failed: Connection refused
+nc: connect to 127.0.0.1 port 61 (tcp) failed: Connection refused
+nc: connect to 127.0.0.1 port 62 (tcp) failed: Connection refused
+nc: connect to 127.0.0.1 port 63 (tcp) failed: Connection refused
+nc: connect to 127.0.0.1 port 64 (tcp) failed: Connection refused
+nc: connect to 127.0.0.1 port 65 (tcp) failed: Connection refused
+nc: connect to 127.0.0.1 port 66 (tcp) failed: Connection refused
+nc: connect to 127.0.0.1 port 67 (tcp) failed: Connection refused
+nc: connect to 127.0.0.1 port 68 (tcp) failed: Connection refused
+nc: connect to 127.0.0.1 port 69 (tcp) failed: Connection refused
+nc: connect to 127.0.0.1 port 70 (tcp) failed: Connection refused
+nc: connect to 127.0.0.1 port 71 (tcp) failed: Connection refused
+nc: connect to 127.0.0.1 port 72 (tcp) failed: Connection refused
+nc: connect to 127.0.0.1 port 73 (tcp) failed: Connection refused
+nc: connect to 127.0.0.1 port 74 (tcp) failed: Connection refused
+nc: connect to 127.0.0.1 port 75 (tcp) failed: Connection refused
+nc: connect to 127.0.0.1 port 76 (tcp) failed: Connection refused
+nc: connect to 127.0.0.1 port 77 (tcp) failed: Connection refused
+nc: connect to 127.0.0.1 port 78 (tcp) failed: Connection refused
+nc: connect to 127.0.0.1 port 79 (tcp) failed: Connection refused
+Connection to 127.0.0.1 80 port [tcp/*] succeeded!
+</code></pre> <p>در این خروجی مشاهده می‌کنید که سه تا از پورت های من باز است و دیگر پورت ها<br> بسته هستند.</p><blockquote> <p><strong>نکته:</strong><br> سرور ها معمولا فایروال در جلو خود دارند این باعث میشه که وقتی شما درحال برسی<br> یک محدوده خاصی از پورت ها هستید، پورت هایی که توسط فایروال بسته شده است<br> زمان زیادی صرف کند تا تیجه را ببینید، و البته که نتیجه درست را نمایش نمی‌دهد<br> به این دلیل که<br> netcat<br> بخاطر فایروال نتوانسته است بسته بودن و یا باز بودن پروت را تشخیص دهد.<br> برای این که زمان کمی‌ صرف پورت های فیلتر شده شود، از سوییچ<br><code>-w</code><br> استفاده کنید، این سوییچ مخفف<br><em>wait</em><br> به معنی انتظار است، و در برابر این سوییچ عدد 1 که کمترین زمان انتظار است را قرار<br> بدهید.</p></blockquote> <pre class="hljs"><code>nc -znv 127.0.0.1 21-80 -w 1
+</code></pre> <hr><h3>banner grabing</h3><p>این اصطلاح به این معنی است که با متصل شدن به پورت یک سیستم<br> تشخیص بدهیم که چه برنامه‌ای و چه نسخه ای از آن برنامه درحال استفاده از پورت است.<br> این به ما کمک می‌کند تا تشخیص بدهیم که آیا آن برنامه حفره امنیتی دارد و یا اینکه با<br> تشخیص نوع سرویس آن پورت سعی کنیم به نحوی از آن سرویس سوء استفاده کنیم.</p><p>برای مثال روی سیستم من یک سرویس<br> FTP<br> درحال اجرا است، هکر برای اینکه برنامه و ورژن سرویس<br> FTP<br> من را بدست بیارد، می‌تواند فقط با متصل شدن به پورت 21 این اطلاعات را بدست بیارد</p><pre class="hljs"><code>nc 127.0.0.1 21
+</code></pre> <p>و خروجی این دستور</p><pre class="hljs"><code>220 (vsFTPd 3.0.3)
+</code></pre> <p>و یا همچنین من یک سرویس<br> SSH<br> هم اجرا کرده‌ام، برای بدست اوردن اطلاعات آن هم کافیست به پورت<br> SSH<br> متصل بشویم.</p><pre class="hljs"><code>nc 127.0.0.1 22
+</code></pre> <p>و خروجی</p><pre class="hljs"><code>SSH-2.0-OpenSSH_8.4p1 Ubuntu-5ubuntu1.1
+</code></pre> <hr><h3>درست کردن درب پشتی</h3><p>درب پشتی<br> (backdoor)<br> یک اصطلاح پر کاربرد در دنیای کامپیوتر است. فرض کنید در خانه‌ای هستید که فقط یک راه<br> ورود و خروج دارد. اگر به هر نحوی این راه مسدود شود، شما دیگر راهی<br> برای خروج نخواهید داشت.</p><p>در دنیای کامپیوتر به اینگونه است که فرض کنید شما به سیستمی نفوذ کرده اید،<br> ممکن است هر لحظه مدیر سیستم به این اتفاق پی‌ببرد و دسترسی شما را از سیستم قطع کند.<br> به همین دلیل شما باید قبل از تشخیص مدیر سیستم، یک درب پشتی کار بگذارید. البته<br> این روش فقط به عنوان درب پشتی نیست، ممکن است شما نیاز داشته باشید تا به صورت موقت یک<br> remote shell<br> درست کنید و از سیستم دیگری به آن متصل شوید.</p><blockquote> <p><strong>نکته:</strong><br> نکته‌ای که باید به آن توجه کنید این است که می‌توانیم با <strong>دو</strong> روش<br> backdoor<br> راه اندازی کنیم.<br><strong>straight</strong><br> و<br><strong>reverse</strong>.<br> استفاده از این دو روش بستگی به موقعیت و وضعیت دارد.</p></blockquote> <p>در قدم اول سیستم هدف<br> را مستقیما روی یک پورت مشخص مشغول به شنود می‌کنیم.<br> به معنای دیگر این سیستم را تبدیل به یک سرور چت ‌می‌کنیم، اما تفاوت در این است<br> که بجای نمایش متن هایی که به سرور ارسال می‌شود، آن ها را به عنوان کامند<br> اجرا می‌کنیم و خروجی را به سمت کلاینت باز می‌گردانیم.</p><pre class="hljs"><code><span class="hljs-built_in">mkfifo</span> /tmp/evilfun
+<span class="hljs-built_in">cat</span> /tmp/evilfun | sh -i 2&gt;&amp;1 | nc -l 0.0.0.0 2100 &gt; /tmp/evilfun
+</code></pre> <blockquote><p>در خط اول ما یک فایلی به نام<br> evilfun<br> درست کردیم، این نوع فایل ها، فایل<br> fifo(first in first out)<br> هستند، درواقع هر داده که وارد این فایل شود در رم ذخیره می‌شود تا زمانی که یک پردازش<br> آن محتوا را بخواند، و زمانی که محتوا خوانده شد، آن محتوا از حذف و فایل<br> خالی می‌شود.</p></blockquote> <blockquote><p><strong>روش وارونه</strong></p><p>استفاده از این روش بسیار مرسوم است، چرا که سیستم های شخص دارای ای‌پی<br> استاتیک(ایستا) نیستند و همچنین این سیستم ها پشت روتر قرار دارند<br> که این باعث می‌شود شما نتوانید به پورت های باز سیستم های پشت روتر متصل شوید.</p><ul> <li>برای اجرای این روش شما باید<br> در سیستم خود شروع به شنود کنید<br> و از سیستم هدف به سیستم خود متصل شوید.<br> و هر متنی را که از سیستم خود به سیستم هدف ارسال می‌کنید را به<br> bash<br> برای اجرا، بدهید.</li></ul> </blockquote><hr> <h3>رمزنگاری ارتباط</h3><p>استفاده از<br> netcat<br> در شبکه برای ارسال داده های حساس ممکنه است داده شما را به خطر بیاندازد.<br> netcat<br> در حالت پیشفرض هیچ رمزنگاری انجام نمی‌دهد، به همین دلیل باید از ابزار و راه هایی<br> استفاده کنیم که داده ها را قبل از ارسال رمزنگاری و بعد از دریافت رمزگشایی کند.<br> راه های متفاوی وجود دارند که یکی از آنها استفاده از ابزار<br><strong>cryptcat</strong><br> است. این ابزار با استفاده از<br> netcat<br> داده ها ارسال می‌کند که به این معنی است که سوییچ های یکسانی دارند.<br> این ابزار از رمزنگاری متقارنی به اسم<br><strong>two fish</strong><br> برای رمزنگاری استفاده می‌کند.</p><blockquote> <p>سوییچ<br><code>-k</code><br> متفاوت است.<br> در<br> cryptcat<br> به عنوان key(کلید)<br> استفاده می‌شود.</p></blockquote> <p>برای انتقال فایل و یا ارسال متن اکثر سوییچ ها یکسان هستند و نحوه<br> کار کردن با این ابزار تفاوت با<br> netcat<br> نمی‌کند. اما برای نمونه یک چت سرور راه اندازی می‌کنیم.</p><pre class="hljs"><code>cryptcat -k passWord -lv -s 192.168.1.2 -p 1337
+</code></pre> <p>چت سرور ما با رمز<br><em>passWord</em><br> و ادرس آی‌پی <em>192.168.1.2</em><br> و روی پورت <em>1337</em> درحال شنود است.</p><p>حال باید سمت کلاینت به این پورت متصل شد. برای اینکار تنها تفاوت این است که<br> باید کلمه عبور را هم علاوه بر آی‌پی و پورت مشخص کنیم.</p><pre class="hljs"><code>cryptcat -k passWord 192.168.1.2 1337
+</code></pre> <blockquote><p>فراموش نکنید<br> cryptcat<br> بر خلاف<br> netcat.<br> روی همه ای‌پی ها(0.0.0.0) شنود می‌کند.</p></blockquote> <hr><h3>سوییچ های پر استفاده</h3><ol> <li><p>سوییچ<br><strong><code>-l</code></strong><br> برای سیستم سمت سرور استفاده می‌شود. این سوییچ مشخص می‌کند که<br> سیستم باید شنونده باشد.</p></li> <li><p>سوییچ<br><strong><code>-v</code></strong><br> برای حالت پر حرف استفاده می‌شود. به این معنا که شما لاگ های رخداد های<br> مختلف مانند قطع، وصل و ای‌پی و پورت مقصد را خواهید دید.</p></li> <li><p>سوییچ<br><strong><code>-k</code></strong>.<br> قبل از توضح این سوییچ، باید بگم که اگر شما به سیستمی که با<br> netcat<br> درحال شنود است متصل شوید و پس از اتمام کار ارتباط خود را قطع کنید،<br> سیستم درحال شنود هم دیگر شنود نخواهد کرد. برای اینکه سرور همیشه درحال شنود<br> باقی بماند و پس از پایان ارتباط، همچنان شنود را ادامه بدهد،<br> در سمت سرور باید از سوییچ<br><code>-k</code><br> استفاده کرد.</p></li> </ol><hr> <h3>Author or Authors:</h3><ul> <li><em><a href="https://github.com/shabane">Arya</a></em> | <strong><a href="mailto:m.mohamadshabane@gmail.com">m.mohamadshabane@gmail.com</a></strong></li></ul> </article><nav class="chapter-single-next-nav"> <a href="/Gitab/books/book11/Book/40/neofetch/" class="btn-next-chapter-action" id="nextChapterBtn" data-hub="/Gitab/books/book11/"> <span class="next-btn-text">فصل بعدی: فصل 40: ابزار neofetch (Linux neofetch Command)</span> <span class="next-btn-arrow">←</span> </a> </nav></div> <button class="fab-back-to-top" id="backToTopBtn" type="button" aria-label="رفتن به بالای صفحه" title="رفتن به بالا"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"> <polyline points="18 15 12 9 6 15"></polyline> </svg> </button></main> <footer class="footer-minimal"><div class="footer-container"> <div class="footer-top-row"><div class="footer-brand-side"> <a href="/Gitab/" class="footer-brand-anchor"> <img src="/Gitab/icone/logo.svg" alt="Gitab" width="28" height="28" loading="lazy" decoding="async"> <span class="footer-brand-title">گیتاب (Gitab)</span> </a> <p class="footer-tagline"> پلتفرم آزاد و مستقل برای ترجمهٔ دقیق و روان کتاب‌های مرجع مهندسی نرم‌افزار. </p></div> <div class="footer-nav-cols"><div class="footer-nav-col"> <span class="footer-nav-heading">موضوعات</span><ul class="footer-nav-list"> <li><a href="/Gitab/books/list-books/?cat=csharp">سی‌شارپ و دات‌نت</a></li><li><a href="/Gitab/books/list-books/?cat=clean-code">کد تمیز و بازآفرینی</a></li><li><a href="/Gitab/books/list-books/?cat=architecture">معماری و طراحی دامنه</a></li><li><a href="/Gitab/books/list-books/?cat=system">لینوکس و خط فرمان</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">بخش‌های سایت</span><ul class="footer-nav-list"> <li><a href="/Gitab/">صفحه اصلی</a></li><li><a href="/Gitab/books/list-books/">کتابخانه کامل</a></li><li><a href="/Gitab/courses/">دوره‌های آموزشی</a></li><li><a href="/Gitab/translator.html">تالار مترجمین</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">مشارکت و جامعه</span><ul class="footer-nav-list"> <li><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer">راهنمای همکاری در ترجمه</a></li><li><a href="https://github.com/hheydarian/Gitab/issues" target="_blank" rel="noopener noreferrer">پیشنهاد کتاب یا گزارش خطا</a></li></ul> </div></div> </div><div class="footer-bottom-line"> <span>© <span id="y">2026</span> Gitab — توسعه‌یافته برای جامعهٔ مهندسان نرم‌افزار ایرانی</span></div> </div></footer> <script>
+  (() => {
+    const root = document.documentElement;
+    const btn = document.getElementById('themeToggle');
+    const sunIcon = btn ? btn.querySelector('.icon-sun') : null;
+    const moonIcon = btn ? btn.querySelector('.icon-moon') : null;
+    const KEY = 'gitab-theme';
+
+    function updateTheme(mode) {
+      root.setAttribute('data-theme', mode);
+      root.dataset.colorMode = mode;
+      if (sunIcon && moonIcon) {
+        if (mode === 'dark') {
+          sunIcon.style.display = 'inline-block';
+          moonIcon.style.display = 'none';
+        } else {
+          sunIcon.style.display = 'none';
+          moonIcon.style.display = 'inline-block';
+        }
+      }
+    }
+
+    let saved = 'dark';
+    try { saved = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+    updateTheme(saved);
+
+    if (btn) {
+      btn.addEventListener('click', () => {
+        let current = 'dark';
+        try { current = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+        const next = current === 'dark' ? 'light' : 'dark';
+        try { localStorage.setItem(KEY, next); } catch (e) {}
+        updateTheme(next);
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      let mode = 'dark';
+      try { mode = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+      updateTheme(mode);
+      const yearSpan = document.getElementById('y');
+      if (yearSpan) yearSpan.textContent = new Date().getFullYear();
+    });
+
+    const mobBtn = document.getElementById('mobileMenuBtn');
+    const mobDrawer = document.getElementById('mobileDrawer');
+    if (mobBtn && mobDrawer) {
+      const setDrawerOpen = (open) => {
+        mobDrawer.classList.toggle('open', open);
+        mobBtn.classList.toggle('is-open', open);
+        mobBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        mobBtn.setAttribute('aria-label', open ? 'بستن منو' : 'باز کردن منو');
+        mobDrawer.setAttribute('aria-hidden', open ? 'false' : 'true');
+      };
+
+      mobBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        setDrawerOpen(!mobDrawer.classList.contains('open'));
+      });
+
+      mobDrawer.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => setDrawerOpen(false));
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && mobDrawer.classList.contains('open')) {
+          setDrawerOpen(false);
+        }
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!mobDrawer.contains(e.target) && !mobBtn.contains(e.target)) {
+          setDrawerOpen(false);
+        }
+      });
+    }
+
+    if ('serviceWorker' in navigator) {
+      const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+      if (isLocalhost) {
+        navigator.serviceWorker.getRegistrations().then(regs => {
+          for (const reg of regs) reg.unregister();
+        });
+        if ('caches' in window) {
+          caches.keys().then(names => {
+            for (const name of names) caches.delete(name);
+          });
+        }
+      } else {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/Gitab/sw.js').catch(() => {});
+        });
+      }
+    }
+  })();
+  </script> <script>
+  document.querySelectorAll('pre code').forEach(block => {
+    const pre = block.parentNode;
+    if (!pre || pre.querySelector('.copy-btn')) return;
+
+    const copySvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
+    const okSvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+
+    const btn = document.createElement('button');
+    btn.className = 'copy-btn';
+    btn.setAttribute('aria-label', 'کپی کد');
+    btn.setAttribute('title', 'کپی کد');
+    btn.setAttribute('type', 'button');
+    btn.innerHTML = copySvg;
+    pre.appendChild(btn);
+
+    btn.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(block.textContent);
+        btn.classList.add('copied');
+        btn.innerHTML = okSvg;
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          btn.innerHTML = copySvg;
+        }, 1800);
+      } catch (err) {
+        console.error('Copy failed:', err);
+      }
+    });
+  });
+  </script> <script>
+  (() => {
+    const article = document.getElementById('chapterArticle');
+    if (!article) return;
+
+    const progressBar = document.getElementById('readingProgressBar');
+    if (progressBar) {
+      window.addEventListener('scroll', () => {
+        const docElem = document.documentElement;
+        const totalHeight = docElem.scrollHeight - docElem.clientHeight;
+        if (totalHeight > 0) {
+          const progress = (window.pageYOffset / totalHeight) * 100;
+          progressBar.style.width = Math.min(100, Math.max(0, progress)) + '%';
+        }
+      }, { passive: true });
+    }
+
+    const btt = document.getElementById('backToTopBtn');
+    if (btt) {
+      window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 250) {
+          btt.classList.add('visible');
+        } else {
+          btt.classList.remove('visible');
+        }
+      }, { passive: true });
+
+      btt.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+
+    article.querySelectorAll('img').forEach(img => {
+      if (!img.hasAttribute('loading')) img.loading = 'lazy';
+      if (!img.hasAttribute('decoding')) img.decoding = 'async';
+      const parent = img.parentElement;
+      if (parent && parent.tagName === 'P') {
+        parent.style.textAlign = 'center';
+      }
+
+      img.addEventListener('error', function() {
+        const src = this.getAttribute('src');
+        if (src && src.includes('assets/image/')) {
+          const parts = src.split('assets/image/');
+          const corrected = '/Gitab/books/book11/assets/image/' + parts[1];
+          if (this.src !== corrected) {
+            this.src = corrected;
+          }
+        }
+      });
+    });
+
+    article.querySelectorAll('p').forEach(p => {
+      const trimmed = p.innerText.trim();
+      if (trimmed.startsWith('💡') || trimmed.startsWith('نکته:')) {
+        p.classList.add('react-callout', 'callout-tip');
+      } else if (trimmed.startsWith('⚠️') || trimmed.startsWith('هشدار:')) {
+        p.classList.add('react-callout', 'callout-warning');
+      } else if (trimmed.startsWith('📌') || trimmed.startsWith('مهم:')) {
+        p.classList.add('react-callout', 'callout-important');
+      } else if (trimmed.startsWith('🔹') || trimmed.startsWith('🔸')) {
+        p.classList.add('react-callout', 'callout-note');
+      }
+    });
+  })();
+  </script> <script type="speculationrules">{"prefetch":[{"where":{"and":[{"href_matches":"/Gitab/*"},{"not":{"href_matches":"/Gitab/downloads/*"}},{"not":{"selector_matches":"[download], [target='_blank']"}}]},"eagerness":"moderate"}]}</script> <script>
+  (() => {
+    if (window.HTMLScriptElement && HTMLScriptElement.supports && HTMLScriptElement.supports('speculationrules')) return;
+    const seen = new Set([window.location.href]);
+    let count = 0;
+    const prefetchLink = (e) => {
+      if (count >= 12) return;
+      const a = e.target && e.target.closest ? e.target.closest('header a, .chapter-single-next-nav a, .syllabus-chapter-item a, .btn-hero-read, .btn-card-read') : null;
+      if (!a || !a.href || a.hasAttribute('download') || a.target === '_blank') return;
+      if (a.origin !== window.location.origin || a.pathname.includes('/downloads/')) return;
+      const clean = a.href.split('#')[0];
+      if (!clean || seen.has(clean)) return;
+      seen.add(clean);
+      count++;
+      const l = document.createElement('link');
+      l.rel = 'prefetch';
+      l.href = clean;
+      document.head.appendChild(l);
+    };
+    document.addEventListener('pointerenter', prefetchLink, { capture: true, passive: true });
+    document.addEventListener('touchstart', prefetchLink, { capture: true, passive: true });
+  })();
+  </script></body></html>

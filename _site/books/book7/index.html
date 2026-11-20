@@ -1,517 +1,145 @@
-
-
-<!doctype html>
-<html lang="fa" dir="rtl">
-<head>
-  <meta charset="utf-8">
-  <link rel="icon" type="image/png" href="/Gitab/favicon.png">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>The Pragmatic Programmer</title>
-  <meta name="description" content="ترجمه‌های فارسی کتاب‌های فنی — سریع، مینیمال و قابل اتکا.">
-
-  <!-- استایل‌ها -->
-  <link rel="stylesheet" href="/Gitab/styles/main.css">
-  <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
-
-  <style>
-  @font-face {
-    font-family: 'Vazir';
-    src: url('/Gitab/fonts/Vazir-FD-WOL.ttf') format('truetype');
-    font-display: swap;
-  }
-  @font-face {
-    font-family: "Lalezar";
-    src: url('fonts/Lalezar.ttf') format('truetype');
-    font-display: swap;
-}
-  body {
-    font-family: 'Vazir', sans-serif;
-  }
-  </style>
-</head>
-
-<body>
-  <!-- هدر مشترک -->
-  <header class="header">
-    <div class="container nav-wrap">
-      <a href="/Gitab/" class="brand">
-        <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="26" height="26">
-        <span>Gitab</span>
-      </a>
-
-       <nav class="nav">
-         <a href="/Gitab/" >خانه</a>
-         <a href="/Gitab/books/list-books" >کتاب‌ها</a>
-         <a href="/Gitab/giter.html" >دوره ها</a>
-          <!-- 
-         <a href="/Gitab/translator.html" >مترجمین</a>
-           -->
-       </nav>
-
-      <div class="nav-actions">
-        <button id="themeToggle" class="icon-btn theme-btn" data-icon="moon" aria-label="تغییر تم">
-          <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن">
-          <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک">
-        </button>
-
-        <a class="icon-btn" href="https://github.com/hheydarian/Gitab" target="_blank" title="GitHub">
-          <img src="/Gitab/icone/github.svg" alt="GitHub">
-        </a>
-
-        <!-- دکمه منو برای موبایل -->
-        <button class="menu-toggle" aria-label="منو">
-          <img src="/Gitab/icone/menu.svg" alt="menu">
-        </button>
-      </div>
-    </div>
-  </header>
-
-  
-  <main class="site-main book-page">
-    <section class="book-header">
-    <div class="book-cover">
-        <img src="/Gitab/images/the-pragmatic-programmer/Cover.jpg" alt="The Pragmatic Programmer" />
-    </div>
-    <div class="book-meta">
-        <h1>The Pragmatic Programmer</h1>
-        <p class="subtitle">۲۰ سال تجربهٔ ناب — ذهنیت پراگماتیک در مهندسی نرم‌افزار</p>
-        <div class="book-tags">
-            <span>Pragmatic#</span>
-            <span>SoftwareEngineering#</span>
-            <span>Craftsmanship#</span>
-        </div>
-        <div class="donate-buttons">
-            <button class="donate-btn" id="openDonate">حمایت مالی از مترجم</button>
-            <!-- فایل اصلی -->
-            <div class="download-wrapper">
-                <button class="donate-btn download" id="mainDownload"
-                    data-link="https://drive.google.com/uc?export=download&id=1Q_IaUxa3hYZflm2csBE5sndbDGYF4wum">
-                    فایل اصلی
-                </button>
-                <span class="tooltip-download" id="tooltipDownload">در حال آماده‌سازی...</span>
-            </div>
-            <div class="download-wrapper">
-                <button class="donate-btn downloadfa" id="faDownload" data-link="#">
-                    فایل فارسی
-                </button>
-            </div>
-        </div>
-        <div id="donateModal" class="donate-modal">
-            <div class="donate-overlay"></div>
-            <div class="donate-content">
-                <!-- کارت بانکی -->
-                <div class="donate-section">
-                    <div class="donate-row">
-                        <img src="/Gitab/icone/card.svg" alt="card" class="icon">
-                        <span class="label">کارت بانکی:</span>
-                        <span class="value">6219 8619 4472 0969</span>
-                        <button class="copy-btn donate-copy" data-copy="6219861944720969">کپی</button>
-                    </div>
-                </div>
-
-                <!-- کیف پول -->
-                <div class="donate-section">
-                    <div class="donate-row">
-                        <img src="/Gitab/icone/money.svg" alt="crypto" class="icon">
-                        <span class="label">آدرس کیف پول:</span>
-                        <span class="value wallet">UQDOulaN5nql7J...uXY6Jdri7Y6</span>
-                        <img src="/Gitab/icone/ton.svg" alt="TON" class="ton-icon">
-                        <button class="copy-btn donate-copy"
-                            data-copy="UQDOulaN5nql7JSfL0Q56j2d-yWlWAb2JFozmuXY6Jdri7Y6">کپی</button>
-                    </div>
-                </div>
-
-                <button class="close-btn" id="closeDonate">بستن</button>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="book-intro">
-    <p>
-        کتاب <strong>The Pragmatic Programmer</strong> نوشتهٔ <em>Andrew Hunt</em> و <em>David Thomas</em>
-        یکی از ماندگارترین و تأثیرگذارترین کتاب‌ها در مسیر حرفه‌ای برنامه‌نویسان است.
-        این کتاب بینشی کاربردی و ماندگار برای تبدیل‌شدن به یک توسعه‌دهندهٔ «پراگماتیک» ارائه می‌دهد.
-    </p>
-
-    <div class="key-points">
-        <div><strong>📅 نسخه:</strong> 2020</div>
-        <div><strong>📚 سطح:</strong> از مبتدی تا حرفه‌ای</div>
-        <div><strong>🧩 تمرکز:</strong> تفکر و مهارت‌های پراگماتیک</div>
-        <div><strong>✍️ وضعیت ترجمه:</strong> در حال انجام</div>
-        <div><strong>📝 نویسندگان:</strong> Andrew Hunt, David</div>
-        <div><strong>💬 مترجم:</strong>
-            <a href="/Gitab/translator.html" target="_blank">حامد حیدریان</a>
-        </div>
-    </div>
-</section>
-
-<section id="chapters" class="book-chapters">
-    <h2>فهرست سرفصل‌ها</h2>
-    <!-- بخش ۱ — مفاهیم پایه و آشنایی -->
-    <details open>
-        <summary>بخش ۱ — مفاهیم پایه و آشنایی</summary>
-        <ul>
-            <li>
-                <a href="/Gitab/books/book7/Book/00/chapter00/">
-                    <span class="chapter-box">0</span> Foreword
-                </a>
-            </li>
-            <li>
-                <a href="/Gitab/books/book7/Book/00/chapter00-1/">
-                    <span class="chapter-box">0</span> Preface to the Second Edition
-                </a>
-            </li>
-            <li>
-                <a href="/Gitab/books/book7/Book/00/chapter00-2/">
-                    <span class="chapter-box">0</span> From the Preface to the First
-                    Edition
-                </a>
-            </li>
-            <li>
-                <a href="/Gitab/books/book7/Book/01/chapter01">
-                    <span class="chapter-box">1</span> A Pragmatic Philosophy
-                </a>
-            </li>
-            <li>
-                <a href="/Gitab/books/book7/Book/02/chapter02">
-                    <span class="chapter-box">2</span> A Pragmatic Approach
-                </a>
-            </li>
-            <li>
-                <a href="/Gitab/books/book7/Book/03/chapter03">
-                    <span class="chapter-box">3</span> The Basic Tools
-                </a>
-            </li>
-        </ul>
-    </details>
-    <!-- بخش ۲ — مفاهیم پیشرفته -->
-    <details>
-        <summary>بخش ۲ — مفاهیم پیشرفته</summary>
-        <ul>
-            <li>
-                <a href="/Gitab/books/book7/Book/04/chapter04">
-                    <span class="chapter-box">4</span> Pragmatic Paranoia
-                </a>
-            </li>
-            <li>
-                <a href="/Gitab/books/book7/Book/05/chapter05">
-                    <span class="chapter-box">5</span> Bend, Or Break
-                </a>
-            </li>
-            <li>
-                <a href="/Gitab/books/book7/Book/06/chapter06">
-                    <span class="chapter-box">6</span> Concurrency
-                </a>
-            </li>
-            <li>
-                <a href="/Gitab/books/book7/Book/07/chapter07">
-                    <span class="chapter-box">7</span> While You Are Coding
-                </a>
-            </li>
-        </ul>
-    </details>
-    <!-- بخش ۳ — پروژه و طراحی -->
-    <details>
-        <summary>بخش ۳ — قبل از شروع پروژه</summary>
-        <ul>
-            <li>
-                <a href="/Gitab/books/book7/Book/08/chapter08">
-                    <span class="chapter-box">8</span> Before the Project
-                </a>
-            </li>
-            <li>
-                <a href="/Gitab/books/book7/Book/09/chapter09">
-                    <span class="chapter-box">9</span> Pragmatic Projects
-                </a>
-            </li>
-        </ul>
-    </details>
-    <!-- بخش ۴ — ضمیمه‌ها و منابع تکمیلی -->
-    <details>
-        <summary>بخش ۴ — ضمیمه‌ها و منابع تکمیلی</summary>
-        <ul>
-            <li>
-                <a href="/Gitab/books/book7/Book/10/chapter10">
-                    <span class="chapter-box">10</span> Postface
-                </a>
-            </li>
-            <li>
-                <a href="/Gitab/books/book7/Book/11/chapter11">
-                    <span class="chapter-box">A</span> Topic Map
-                </a>
-            </li>
-            <li>
-                <a href="/Gitab/books/book7/Book/12/chapter12">
-                    <span class="chapter-box">B</span> Resources
-                </a>
-            </li>
-        </ul>
-    </details>
-</section>
-
-<script>
-    // باز/بستن مودال
-    const modal = document.getElementById('donateModal');
-    document.getElementById('openDonate').addEventListener('click', () => modal.style.display = 'block');
-    document.getElementById('closeDonate').addEventListener('click', () => modal.style.display = 'none');
-    modal.querySelector('.donate-overlay').addEventListener('click', () => modal.style.display = 'none');
-
-    // کپی با بازخورد
-    document.querySelectorAll('.copy-btn').forEach(btn =>
-    {
-        btn.addEventListener('click', async () =>
-        {
-            try
-            {
-                await navigator.clipboard.writeText(btn.dataset.copy || '');
-                const old = btn.textContent;
-                btn.textContent = 'کپی شد ✓';
-                btn.disabled = true;
-                setTimeout(() =>
-                {
-                    btn.textContent = old;
-                    btn.disabled = false;
-                }, 1600);
-            } catch (e)
-            {
-                alert('کپی نشد. دستی کپی کنید 🙏');
-            }
-        });
-    });
-</script>
-<script>
-    // 🎯 تول‌تیپ برای فایل اصلی
-    const downloadBtn = document.getElementById("mainDownload");
-    const tooltip = document.getElementById("tooltipDownload");
-
-    downloadBtn.addEventListener("click", (e) =>
-    {
-        e.preventDefault();
-        const link = downloadBtn.dataset.link;
-
-        tooltip.classList.add("show");
-
-        setTimeout(() =>
-        {
-            tooltip.classList.remove("show");
-
-            // شروع دانلود
-            const a = document.createElement("a");
-            a.href = link;
-            a.download = "";
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-        }, 2000);
-    });
-
-    // 🎯 هدایت به صفحه پرداخت (فایل فارسی)
-    const faDownload = document.getElementById("faDownload");
-    faDownload.addEventListener("click", () =>
-    {
-        const link = faDownload.dataset.link;
-        window.open(link, "_blank"); // باز شدن در تب جدید
-    });
-</script>
-<script>
-    (() =>
-    {
-        // قیمت — اگر خواستی عوض کنی فقط این را تغییر بده
-        const PRICE = 168000;
-
-        const byId = id => document.getElementById(id);
-        const setSheet = (id, open) => byId(id).setAttribute('aria-hidden', open ? 'false' : 'true');
-
-        // دکمه فایل فارسی -> مودال اصلی
-        const faBuy = byId('faBuy');
-        const payModal = byId('payModal');
-        if (faBuy) faBuy.addEventListener('click', () => setSheet('payModal', true));
-
-        // قیمت را به حروف فارسی با جداکننده تنظیم کن
-        const faPrice = byId('faPrice');
-        if (faPrice) faPrice.textContent = PRICE.toLocaleString('fa-IR');
-
-        // بازکردن مودال‌های تو در تو بدون بستن والد
-        byId('openCardPay')?.addEventListener('click', () => setSheet('cardModal', true));
-        byId('openCryptoPay')?.addEventListener('click', () => setSheet('cryptoModal', true));
-
-        // بستن با کلیک روی اوورلی یا دکمه ×
-        document.addEventListener('click', (e) =>
-        {
-            const btn = e.target.closest('[data-close]');
-            if (!btn) return;
-            const id = btn.getAttribute('data-close');
-            setSheet(id, false);
-        });
-
-        // کپی کلیپ‌بورد با بازخورد
-        document.querySelectorAll('.copy-btn').forEach(btn =>
-        {
-            btn.addEventListener('click', async () =>
-            {
-                try
-                {
-                    await navigator.clipboard.writeText(btn.dataset.copy || '');
-                    const old = btn.textContent;
-                    btn.textContent = 'کپی شد ✓';
-                    btn.disabled = true;
-                    setTimeout(() => { btn.textContent = old; btn.disabled = false; }, 1400);
-                } catch { alert('کپی نشد؛ لطفاً دستی کپی کنید.'); }
-            });
-        });
-
-        // پیش‌نمایش (گوگل‌درایو)
-        const previewModal = byId('previewModal');
-        const previewFrame = byId('previewFrame');
-        byId('openPreview')?.addEventListener('click', () =>
-        {
-            // اگر لازم شد، اینجا می‌توانی FILE_ID را پویا ست کنی
-            setSheet('previewModal', true);
-        });
-
-        // پرینت محتوای iframe
-        byId('printPreview')?.addEventListener('click', () =>
-        {
-            const fileUrl = 'https://drive.google.com/file/d/15ID-d3Zgp-hD6mtKitUd_ViHvR5YsrwW/view';
-            window.open(fileUrl, '_blank');
-        });
-
-        document.addEventListener('click', e =>
-        {
-            if (e.target.dataset.close === 'previewModal')
-            {
-                previewFrame.src = ''; // پاک‌کردن iframe هنگام بستن
-                setTimeout(() =>
-                {
-                    previewFrame.src = 'https://drive.google.com/file/d/15ID-d3Zgp-hD6mtKitUd_ViHvR5YsrwW/preview';
-                }, 300);
-            }
-        });
-
-        // ESC برای بستن نزدیک‌ترین شیت باز
-        document.addEventListener('keydown', e =>
-        {
-            if (e.key !== 'Escape') return;
-            // اولویت: پیش‌نمایش، بعد nested ها، بعد اصلی
-            if (previewModal.getAttribute('aria-hidden') === 'false') return setSheet('previewModal', false);
-            if (byId('cryptoModal').getAttribute('aria-hidden') === 'false') return setSheet('cryptoModal', false);
-            if (byId('cardModal').getAttribute('aria-hidden') === 'false') return setSheet('cardModal', false);
-            if (payModal.getAttribute('aria-hidden') === 'false') return setSheet('payModal', false);
-        });
+<!doctype html><html lang="fa" dir="rtl"> <head><script>
+    if (window.location.pathname.startsWith('/gitab/')) {
+      window.location.replace(window.location.pathname.replace(/^\/gitab\//i, '/Gitab/') + window.location.search + window.location.hash);
+    }
+    (() => {
+      try {
+        const t = localStorage.getItem('gitab-theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', t);
+        document.documentElement.dataset.colorMode = t;
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        document.documentElement.dataset.colorMode = 'dark';
+      }
     })();
-</script>
-  </main>
-
-  <!-- فوتر مشترک -->
-  <footer class="footer">
-    <div class="container">
-      <p>
-        <img src="/Gitab/icone/copyright.svg" alt="کپی‌رایت" width="14" height="14"
-             style="vertical-align:middle;margin-inline:4px">
-        <span id="y"></span> Gitab — تمامی حقوق محفوظ است.
-      </p>
-    </div>
-  </footer>
-
-  <!-- سال و اسکریپت تغییر تم -->
-  <script>
+  </script> <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5"> <title>The Pragmatic Programmer | Gitab — کتابخانه مراجع تخصصی</title><meta name="description" content="۲۰ سال تجربه ناب در مهندسی نرم‌افزار؛ راهنمایی بی‌بدیل برای کسب طرز فکر نقادانه، تسلط بر جعبه‌ابزار و حرفه‌ای‌گری."> <meta name="keywords" content="Pragmatic, SoftwareEngineering, Craftsmanship, Architecture, Philosophy, برنامه نویس عملگرا, مهندسی نرم افزار"><meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"> <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"><meta name="theme-color" content="#090d16"> <meta name="referrer" content="strict-origin-when-cross-origin"><meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https:; frame-src https://www.youtube.com https://www.youtube-nocookie.com https://maps.google.com https://www.google.com; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self';"> <link rel="icon" type="image/png" href="/Gitab/favicon.png"><link rel="canonical" href="https://hheydarian.github.io/Gitab/books/book7/"> <link rel="alternate" hreflang="fa" href="https://hheydarian.github.io/Gitab/books/book7/"><link rel="alternate" hreflang="x-default" href="https://hheydarian.github.io/Gitab/books/book7/"> <link rel="alternate" type="text/plain" title="LLMs.txt" href="/Gitab/llms.txt"><link rel="sitemap" type="application/xml" title="Sitemap" href="/Gitab/sitemap.xml"> <meta property="og:locale" content="fa_IR"><meta property="og:type" content="book"> <meta property="og:site_name" content="گیتاب | Gitab"><meta property="og:title" content="The Pragmatic Programmer | Gitab — کتابخانه مراجع تخصصی"> <meta property="og:description" content="۲۰ سال تجربه ناب در مهندسی نرم‌افزار؛ راهنمایی بی‌بدیل برای کسب طرز فکر نقادانه، تسلط بر جعبه‌ابزار و حرفه‌ای‌گری."><meta property="og:url" content="https://hheydarian.github.io/Gitab/books/book7/"> <meta property="og:image" content="https://hheydarian.github.io/Gitab/images/the-pragmatic-programmer/Cover.jpg"><meta property="og:image:alt" content="The Pragmatic Programmer | Gitab — کتابخانه مراجع تخصصی"> <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="The Pragmatic Programmer | Gitab — کتابخانه مراجع تخصصی"> <meta name="twitter:description" content="۲۰ سال تجربه ناب در مهندسی نرم‌افزار؛ راهنمایی بی‌بدیل برای کسب طرز فکر نقادانه، تسلط بر جعبه‌ابزار و حرفه‌ای‌گری."><meta name="twitter:image" content="https://hheydarian.github.io/Gitab/images/the-pragmatic-programmer/Cover.jpg"> <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://hheydarian.github.io/Gitab/#organization","name":"گیتاب | Gitab","alternateName":"Gitab","url":"https://hheydarian.github.io/Gitab/","logo":{"@type":"ImageObject","url":"https://hheydarian.github.io/Gitab/favicon.png"},"sameAs":["https://github.com/hheydarian/Gitab"]},{"@type":"WebSite","@id":"https://hheydarian.github.io/Gitab/#website","url":"https://hheydarian.github.io/Gitab/","name":"گیتاب | Gitab","inLanguage":"fa-IR","publisher":{"@id":"https://hheydarian.github.io/Gitab/#organization"},"potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://hheydarian.github.io/Gitab/books/list-books/?q={search_term_string}"},"query-input":"required name=search_term_string"}},{"@type":"WebPage","@id":"https://hheydarian.github.io/Gitab/books/book7/#webpage","url":"https://hheydarian.github.io/Gitab/books/book7/","name":"The Pragmatic Programmer | Gitab — کتابخانه مراجع تخصصی","description":"۲۰ سال تجربه ناب در مهندسی نرم‌افزار؛ راهنمایی بی‌بدیل برای کسب طرز فکر نقادانه، تسلط بر جعبه‌ابزار و حرفه‌ای‌گری.","inLanguage":"fa-IR","isPartOf":{"@id":"https://hheydarian.github.io/Gitab/#website"}},{"@type":"Book","name":"برنامه‌نویس عمل‌گرا","alternateName":"The Pragmatic Programmer","description":"۲۰ سال تجربه ناب در مهندسی نرم‌افزار؛ راهنمایی بی‌بدیل برای کسب طرز فکر نقادانه، تسلط بر جعبه‌ابزار و حرفه‌ای‌گری.","url":"https://hheydarian.github.io/Gitab/books/book7/","image":"https://hheydarian.github.io/Gitab/images/the-pragmatic-programmer/Cover.jpg","inLanguage":"fa-IR","isAccessibleForFree":true,"author":{"@type":"Person","name":"David Thomas, Andrew Hunt"},"translator":{"@type":"Person","name":"حامد حیدریان"},"publisher":{"@id":"https://hheydarian.github.io/Gitab/#organization"}}]}</script> <link rel="preload" href="/Gitab/fonts/Vazirmatn.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/Gitab/fonts/Lalezar.woff2" as="font" type="font/woff2" crossorigin> <link rel="preload" href="/Gitab/styles/main.css?v=2.4" as="style"><link rel="preload" href="/Gitab/styles/gitab-modern.css?v=2.5" as="style"> <style>@font-face{font-family:'Lalezar';src:url('/Gitab/fonts/Lalezar.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}@font-face{font-family:'Vazirmatn';src:url('/Gitab/fonts/Vazirmatn.woff2') format('woff2');font-weight:100 900;font-style:normal;font-display:swap}html,body,button,input,optgroup,select,textarea,.filter-pill{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}input::placeholder,textarea::placeholder{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}</style> <link rel="stylesheet" href="/Gitab/styles/main.css?v=2.4"><link rel="stylesheet" href="/Gitab/styles/gitab-modern.css?v=2.5"> </head><body> <header class="header"><div class="container nav-wrap"> <a href="/Gitab/" class="brand" aria-label="صفحه اصلی گیتاب"> <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="30" height="30" decoding="async"> <span class="brand-text">Gitab</span> </a> <nav class="nav" id="mainNav"><a href="/Gitab/" >خانه</a> <a href="/Gitab/books/list-books" aria-current="page">کتاب‌ها</a> <a href="/Gitab/courses/" >دوره‌ها</a> <a href="/Gitab/translator.html" >مترجمین</a></nav> <div class="nav-actions"><button id="themeToggle" class="theme-toggle-btn" aria-label="تغییر تم" title="تغییر تم"> <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن" width="18" height="18" decoding="async" style="display:none"> <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک" width="18" height="18" decoding="async"> </button> <a class="btn-github-pill" href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" title="مشاهده سورس گیتاب در گیت‌هاب"> <img src="/Gitab/icone/github.svg" alt="GitHub" width="16" height="16" decoding="async"> <span>گیت‌هاب</span> </a> <button class="mobile-menu-btn" id="mobileMenuBtn" type="button" aria-label="باز کردن منو" aria-expanded="false"> <svg class="mob-icon-open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="4" y1="7" x2="20" y2="7"></line> <line x1="4" y1="12" x2="20" y2="12"></line> <line x1="4" y1="17" x2="14" y2="17"></line> </svg> <svg class="mob-icon-close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="18" y1="6" x2="6" y2="18"></line> <line x1="6" y1="6" x2="18" y2="18"></line> </svg> </button></div> </div><div class="mobile-drawer" id="mobileDrawer" aria-hidden="true"> <div class="mobile-drawer-inner"><div class="mobile-drawer-section-label">ناوبری سریع</div><nav class="mobile-drawer-links" aria-label="منوی موبایل"> <a href="/Gitab/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M3 10.5 12 3l9 7.5"></path> <path d="M5 9.5V20a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V9.5"></path> </svg> </span> <span class="mob-nav-text">صفحه نخست</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/books/list-books" class="mobile-drawer-link active" aria-current="page"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path> </svg> </span> <span class="mob-nav-text">کتابخانه و فهرست کتاب‌ها</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/courses/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path> <path d="M6 12v5c3 3 9 3 12 0v-5"></path> </svg> </span> <span class="mob-nav-text">دوره‌های آموزشی</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/translator.html" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path> <circle cx="9" cy="7" r="4"></circle> <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path> <path d="M16 3.13a4 4 0 0 1 0 7.75"></path> </svg> </span> <span class="mob-nav-text">مترجمین و همکاران</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> </nav><div class="mobile-drawer-divider"></div><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" class="mobile-drawer-link mobile-drawer-gh"> <span class="mob-nav-icon" aria-hidden="true"> <img src="/Gitab/icone/github.svg" alt="" width="17" height="17" loading="lazy" decoding="async"> </span> <span class="mob-nav-text">مخزن گیت‌هاب پروژه</span> <span class="mob-nav-ext" aria-hidden="true">↗</span> </a> </div></div> </header><main class="site-main book-page"> <div class="book-detail-wrapper" style="--book-glow: rgba(139, 92, 246, 0.28);"><meta itemprop="keywords" content="Pragmatic, SoftwareEngineering, Craftsmanship, Architecture, Philosophy"> <section class="book-detail-hero"><div class="book-hero-ambient-glow"></div><div class="book-hero-content"> <h1 class="book-hero-title"><bdi class="en-title" dir="ltr">The Pragmatic Programmer</bdi></h1> <div class="book-hero-fa-title">برنامه‌نویس عمل‌گرا (پراگماتیک)</div><p class="book-hero-subtitle"> کتاب کلاسیک و دگرگون‌کننده فلسفه کدنویسی، مسئولیت حرفه‌ای و مهارت‌های ماندگار مهندسی. </p><div class="book-hero-actions-v2"> <div class="hero-actions-primary-row"><a class="btn-hero-read" href="/Gitab/books/book7/Book/00/chapter00/"> <span>مطالعه آنلاین کتاب</span> <span>←</span> </a> <a class="btn-hero-epub" href="/Gitab/downloads/the-pragmatic-programmer-persian.epub" download="The Pragmatic Programmer - Persian.epub"><span>دانلود نسخه EPUB</span></a></div> <div class="hero-actions-sub-row"><a class="btn-hero-pdf" href="/Gitab/downloads/the-pragmatic-programmer-persian.pdf" download="The Pragmatic Programmer - Persian.pdf"> <span>دانلود PDF فارسی</span> </a> <a class="btn-hero-orig" href="https://drive.google.com/uc?export=download&id=1Q_IaUxa3hYZflm2csBE5sndbDGYF4wum" target="_blank" rel="noopener noreferrer"> <span>دریافت نسخه اصلی (انگلیسی)</span> </a> </div><div class="hero-actions-sub-row" style="grid-template-columns: 1fr;"> <a class="btn-hero-gh" href="https://github.com/hheydarian/the-pragmatic-programmer-persian" target="_blank" rel="noopener noreferrer" title="مشاهده مخزن ترجمه در گیت‌هاب"> <img src="/Gitab/icone/github.svg" alt="GitHub" width="16" height="16" decoding="async"> <span>مخزن گیت‌هاب</span> </a> </div></div> </div><div class="book-hero-cover-col"> <div class="book-cover-3d-large"><div class="cover-inner-large"> <img src="/Gitab/images/the-pragmatic-programmer/Cover.jpg" alt="The Pragmatic Programmer کاور" fetchpriority="high" decoding="async"></div> </div></div> </section><section class="book-specs-bento"> <div class="book-spec-card"><span class="spec-label">✍️ نویسندگان اثر</span> <span class="spec-val"><bdi dir="ltr">David Thomas, Andrew Hunt</bdi></span></div> <div class="book-spec-card"><span class="spec-label">💬 مترجم فارسی</span> <span class="spec-val"><a href="/Gitab/translator.html">حامد حیدریان</a></span></div> <div class="book-spec-card"><span class="spec-label">🎯 سطح فنی مخاطبان</span> <span class="spec-val">تمامی مهندسان و برنامه‌نویسان</span></div> <div class="book-spec-card"><span class="spec-label">📅 سال انتشار</span> <span class="spec-val">۲۰۱۹ (ویرایش بیستم)</span></div> <div class="book-spec-card"><span class="spec-label">📑 سرفصل‌های ترجمه‌شده</span> <span class="spec-val">۱۵ فصل و پیوست کامل</span></div> <div class="book-spec-card"><span class="spec-label">⚡ تمرکز کتاب</span> <span class="spec-val">فلسفه کدنویسی، جعبه‌ابزار و حرفه‌ای‌گری</span></div> </section><section class="book-editorial-card"> <div class="editorial-header"><span class="editorial-title">✨ درباره این اثر</span></div> <p class="editorial-lead"> کتابی که شیوه اندیشیدن نسل‌هایی از مهندسان نرم‌افزار را دگرگون کرده است. از پذیرش مسئولیت حرفه‌ای و مهار پنجره‌های شکسته در کد، تا اتوماسیون هوشمند، تفکر انتقادی و ساخت نرم‌افزارهای سازگار با تغییرات زمانه؛ این اثر عصارهٔ خرد عملی برنامه‌نویسی است. </p></section> <section class="book-syllabus-wrapper" id="chapters"><div class="syllabus-head-row"> <h2 class="syllabus-title">📚 فهرست سرفصل‌ها و مباحث کتاب</h2><button class="btn-syllabus-toggle" id="toggleAllChaptersBtn" type="button"> <span>🔄 باز کردن / بستن همه</span> </button> </div><details class="syllabus-accordion-card" open> <summary class="syllabus-summary-head"><div class="syllabus-summary-right"> <span class="syllabus-sec-tag">بخش ۱</span> <span class="syllabus-sec-title">مفاهیم پایه و فلسفه عمل‌گرایی</span></div> <div class="syllabus-summary-left"><span class="syllabus-ch-count">۶ بخش</span> <svg class="syllabus-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"> <polyline points="6 9 12 15 18 9"></polyline> </svg> </div></summary> <ul class="syllabus-chapters-list"><li class="syllabus-chapter-item"> <a href="/Gitab/books/book7/Book/00/chapter00/"><div class="ch-info-side"> <span class="ch-num-badge">۰۰</span> <span class="ch-name-text"><span>پیشگفتار کتاب</span> <span class="ch-en-sub" dir="ltr">Foreword</span></span></div> <div class="ch-action-side"><span>مطالعه فصل</span> <span>←</span></div> </a></li> <li class="syllabus-chapter-item"><a href="/Gitab/books/book7/Book/00/chapter00-1/"> <div class="ch-info-side"><span class="ch-num-badge">۰۰</span> <span class="ch-name-text"><span>پیشگفتار ویرایش دوم</span> <span class="ch-en-sub" dir="ltr">Preface to the Second Edition</span></span></div> <div class="ch-action-side"><span>مطالعه فصل</span> <span>←</span></div> </a></li> <li class="syllabus-chapter-item"><a href="/Gitab/books/book7/Book/00/chapter00-2/"> <div class="ch-info-side"><span class="ch-num-badge">۰۰</span> <span class="ch-name-text"><span>از پیشگفتار ویرایش اول</span> <span class="ch-en-sub" dir="ltr">From the Preface to First Edition</span></span></div> <div class="ch-action-side"><span>مطالعه فصل</span> <span>←</span></div> </a></li> <li class="syllabus-chapter-item"><a href="/Gitab/books/book7/Book/01/chapter01/"> <div class="ch-info-side"><span class="ch-num-badge">۰۱</span> <span class="ch-name-text"><span>فلسفه پراگماتیک</span> <span class="ch-en-sub" dir="ltr">A Pragmatic Philosophy</span></span></div> <div class="ch-action-side"><span>مطالعه فصل</span> <span>←</span></div> </a></li> <li class="syllabus-chapter-item"><a href="/Gitab/books/book7/Book/02/chapter02/"> <div class="ch-info-side"><span class="ch-num-badge">۰۲</span> <span class="ch-name-text"><span>رویکرد پراگماتیک</span> <span class="ch-en-sub" dir="ltr">A Pragmatic Approach</span></span></div> <div class="ch-action-side"><span>مطالعه فصل</span> <span>←</span></div> </a></li> <li class="syllabus-chapter-item"><a href="/Gitab/books/book7/Book/03/chapter03/"> <div class="ch-info-side"><span class="ch-num-badge">۰۳</span> <span class="ch-name-text"><span>ابزارهای پایه مهندسی</span> <span class="ch-en-sub" dir="ltr">The Basic Tools</span></span></div> <div class="ch-action-side"><span>مطالعه فصل</span> <span>←</span></div> </a></li> </ul></details> <details class="syllabus-accordion-card"><summary class="syllabus-summary-head"> <div class="syllabus-summary-right"><span class="syllabus-sec-tag">بخش ۲</span> <span class="syllabus-sec-title">مفاهیم پیشرفته و کدنویسی تاب‌آور</span></div> <div class="syllabus-summary-left"><span class="syllabus-ch-count">۴ فصل</span> <svg class="syllabus-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"> <polyline points="6 9 12 15 18 9"></polyline> </svg> </div></summary> <ul class="syllabus-chapters-list"><li class="syllabus-chapter-item"> <a href="/Gitab/books/book7/Book/04/chapter04/"><div class="ch-info-side"> <span class="ch-num-badge">۰۴</span> <span class="ch-name-text"><span>پارانویای پراگماتیک</span> <span class="ch-en-sub" dir="ltr">Pragmatic Paranoia</span></span></div> <div class="ch-action-side"><span>مطالعه فصل</span> <span>←</span></div> </a></li> <li class="syllabus-chapter-item"><a href="/Gitab/books/book7/Book/05/chapter05/"> <div class="ch-info-side"><span class="ch-num-badge">۰۵</span> <span class="ch-name-text"><span>خم شو یا بشکن: انعطاف‌پذیری کد</span> <span class="ch-en-sub" dir="ltr">Bend, Or Break</span></span></div> <div class="ch-action-side"><span>مطالعه فصل</span> <span>←</span></div> </a></li> <li class="syllabus-chapter-item"><a href="/Gitab/books/book7/Book/06/chapter06/"> <div class="ch-info-side"><span class="ch-num-badge">۰۶</span> <span class="ch-name-text"><span>همزمانی و سیستم‌های موازی</span> <span class="ch-en-sub" dir="ltr">Concurrency</span></span></div> <div class="ch-action-side"><span>مطالعه فصل</span> <span>←</span></div> </a></li> <li class="syllabus-chapter-item"><a href="/Gitab/books/book7/Book/07/chapter07/"> <div class="ch-info-side"><span class="ch-num-badge">۰۷</span> <span class="ch-name-text"><span>هنگام کدنویسی</span> <span class="ch-en-sub" dir="ltr">While You Are Coding</span></span></div> <div class="ch-action-side"><span>مطالعه فصل</span> <span>←</span></div> </a></li> </ul></details> <details class="syllabus-accordion-card"><summary class="syllabus-summary-head"> <div class="syllabus-summary-right"><span class="syllabus-sec-tag">بخش ۳</span> <span class="syllabus-sec-title">طراحی پروژه و تیم‌های عمل‌گرا</span></div> <div class="syllabus-summary-left"><span class="syllabus-ch-count">۲ فصل</span> <svg class="syllabus-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"> <polyline points="6 9 12 15 18 9"></polyline> </svg> </div></summary> <ul class="syllabus-chapters-list"><li class="syllabus-chapter-item"> <a href="/Gitab/books/book7/Book/08/chapter08/"><div class="ch-info-side"> <span class="ch-num-badge">۰۸</span> <span class="ch-name-text"><span>پیش از آغاز پروژه</span> <span class="ch-en-sub" dir="ltr">Before the Project</span></span></div> <div class="ch-action-side"><span>مطالعه فصل</span> <span>←</span></div> </a></li> <li class="syllabus-chapter-item"><a href="/Gitab/books/book7/Book/09/chapter09/"> <div class="ch-info-side"><span class="ch-num-badge">۰۹</span> <span class="ch-name-text"><span>پروژه‌های پراگماتیک</span> <span class="ch-en-sub" dir="ltr">Pragmatic Projects</span></span></div> <div class="ch-action-side"><span>مطالعه فصل</span> <span>←</span></div> </a></li> </ul></details> <details class="syllabus-accordion-card"><summary class="syllabus-summary-head"> <div class="syllabus-summary-right"><span class="syllabus-sec-tag">بخش ۴</span> <span class="syllabus-sec-title">پس‌گفتار و منابع تکمیلی</span></div> <div class="syllabus-summary-left"><span class="syllabus-ch-count">۳ فصل</span> <svg class="syllabus-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"> <polyline points="6 9 12 15 18 9"></polyline> </svg> </div></summary> <ul class="syllabus-chapters-list"><li class="syllabus-chapter-item"> <a href="/Gitab/books/book7/Book/10/chapter10/"><div class="ch-info-side"> <span class="ch-num-badge">۱۰</span> <span class="ch-name-text"><span>پس‌گفتار</span> <span class="ch-en-sub" dir="ltr">Postface</span></span></div> <div class="ch-action-side"><span>مطالعه فصل</span> <span>←</span></div> </a></li> <li class="syllabus-chapter-item"><a href="/Gitab/books/book7/Book/11/chapter11/"> <div class="ch-info-side"><span class="ch-num-badge">۱۱</span> <span class="ch-name-text"><span>پیوست الف: نقشه موضوعی</span> <span class="ch-en-sub" dir="ltr">Topic Map</span></span></div> <div class="ch-action-side"><span>مطالعه فصل</span> <span>←</span></div> </a></li> <li class="syllabus-chapter-item"><a href="/Gitab/books/book7/Book/12/chapter12/"> <div class="ch-info-side"><span class="ch-num-badge">۱۲</span> <span class="ch-name-text"><span>پیوست ب: منابع و مراجع</span> <span class="ch-en-sub" dir="ltr">Resources</span></span></div> <div class="ch-action-side"><span>مطالعه فصل</span> <span>←</span></div> </a></li> </ul></details> </section></div> <script>
+(() => {
+  const toggleBtn = document.getElementById('toggleAllChaptersBtn');
+  if (!toggleBtn) return;
+  let allOpen = false;
+  toggleBtn.addEventListener('click', () => {
+    allOpen = !allOpen;
+    document.querySelectorAll('.syllabus-accordion-card').forEach(acc => {
+      acc.open = allOpen;
+    });
+    toggleBtn.innerHTML = allOpen ? '<span>🔺 بستن همه</span>' : '<span>🔻 باز کردن همه</span>';
+  });
+})();
+</script></main><footer class="footer-minimal"> <div class="footer-container"><div class="footer-top-row"> <div class="footer-brand-side"><a href="/Gitab/" class="footer-brand-anchor"> <img src="/Gitab/icone/logo.svg" alt="Gitab" width="28" height="28" loading="lazy" decoding="async"> <span class="footer-brand-title">گیتاب (Gitab)</span> </a> <p class="footer-tagline"> پلتفرم آزاد و مستقل برای ترجمهٔ دقیق و روان کتاب‌های مرجع مهندسی نرم‌افزار. </p></div> <div class="footer-nav-cols"><div class="footer-nav-col"> <span class="footer-nav-heading">موضوعات</span><ul class="footer-nav-list"> <li><a href="/Gitab/books/list-books/?cat=csharp">سی‌شارپ و دات‌نت</a></li><li><a href="/Gitab/books/list-books/?cat=clean-code">کد تمیز و بازآفرینی</a></li><li><a href="/Gitab/books/list-books/?cat=architecture">معماری و طراحی دامنه</a></li><li><a href="/Gitab/books/list-books/?cat=system">لینوکس و خط فرمان</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">بخش‌های سایت</span><ul class="footer-nav-list"> <li><a href="/Gitab/">صفحه اصلی</a></li><li><a href="/Gitab/books/list-books/">کتابخانه کامل</a></li><li><a href="/Gitab/courses/">دوره‌های آموزشی</a></li><li><a href="/Gitab/translator.html">تالار مترجمین</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">مشارکت و جامعه</span><ul class="footer-nav-list"> <li><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer">راهنمای همکاری در ترجمه</a></li><li><a href="https://github.com/hheydarian/Gitab/issues" target="_blank" rel="noopener noreferrer">پیشنهاد کتاب یا گزارش خطا</a></li></ul> </div></div> </div><div class="footer-bottom-line"> <span>© <span id="y">2026</span> Gitab — توسعه‌یافته برای جامعهٔ مهندسان نرم‌افزار ایرانی</span></div> </div></footer> <script>
   (() => {
     const root = document.documentElement;
     const btn = document.getElementById('themeToggle');
+    const sunIcon = btn ? btn.querySelector('.icon-sun') : null;
+    const moonIcon = btn ? btn.querySelector('.icon-moon') : null;
     const KEY = 'gitab-theme';
 
-    function updateTheme(s) {
-      root.setAttribute('data-theme', s);
-      const mode = s;  // فقط `dark` یا `light` خواهد بود
+    function updateTheme(mode) {
+      root.setAttribute('data-theme', mode);
       root.dataset.colorMode = mode;
-      btn.dataset.icon = mode === 'dark' ? 'moon' : 'sun';
+      if (sunIcon && moonIcon) {
+        if (mode === 'dark') {
+          sunIcon.style.display = 'inline-block';
+          moonIcon.style.display = 'none';
+        } else {
+          sunIcon.style.display = 'none';
+          moonIcon.style.display = 'inline-block';
+        }
+      }
     }
 
-    // وضعیت تم ذخیره شده از localStorage
-    let saved = localStorage.getItem(KEY) || 'light'; // پیش‌فرض روشن
+    let saved = 'dark';
+    try { saved = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
     updateTheme(saved);
 
-    // تنظیم مجدد تم هنگام تغییر وضعیت دکمه
-    btn.addEventListener('click', () => {
-      const current = localStorage.getItem(KEY) || 'light';
-      const next = current === 'dark' ? 'light' : 'dark';  // فقط دو حالت: تاریک و روشن
-      localStorage.setItem(KEY, next);
-      updateTheme(next);
-    });
+    if (btn) {
+      btn.addEventListener('click', () => {
+        let current = 'dark';
+        try { current = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+        const next = current === 'dark' ? 'light' : 'dark';
+        try { localStorage.setItem(KEY, next); } catch (e) {}
+        updateTheme(next);
+      });
+    }
 
-    // هنگام بارگذاری صفحه
     document.addEventListener('DOMContentLoaded', () => {
-      updateTheme(localStorage.getItem(KEY) || 'light');
-    });
-  })();
-</script>
-
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-  <script>hljs.highlightAll();</script>
-
-  <script>
-  document.querySelectorAll('pre code').forEach(block => {
-    const btn = document.createElement('button');
-    btn.className = 'copy-btn';
-
-    const icon = document.createElement('img');
-    icon.src = "/Gitab/icone/copy.svg";
-    icon.alt = 'Copy';
-    btn.appendChild(icon);
-
-    block.parentNode.insertBefore(btn, block);
-
-    btn.addEventListener('click', async () => {
-      await navigator.clipboard.writeText(block.textContent);
-      btn.classList.add('copied');
-      setTimeout(() => btn.classList.remove('copied'), 1500);
-    });
-  });
-  </script>
-
-  <script>
-  document.body.dataset.page = window.location.pathname;
-
-  const menuBtn = document.querySelector(".menu-toggle");
-  const nav = document.querySelector(".nav");
-
-  if (menuBtn && nav) {
-    menuBtn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      nav.classList.toggle("show");
+      let mode = 'dark';
+      try { mode = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+      updateTheme(mode);
+      const yearSpan = document.getElementById('y');
+      if (yearSpan) yearSpan.textContent = new Date().getFullYear();
     });
 
-    document.addEventListener("click", (e) => {
-      const clickedInsideNav = nav.contains(e.target);
-      const clickedMenuButton = menuBtn.contains(e.target);
-      if (!clickedInsideNav && !clickedMenuButton) {
-        nav.classList.remove("show");
+    const mobBtn = document.getElementById('mobileMenuBtn');
+    const mobDrawer = document.getElementById('mobileDrawer');
+    if (mobBtn && mobDrawer) {
+      const setDrawerOpen = (open) => {
+        mobDrawer.classList.toggle('open', open);
+        mobBtn.classList.toggle('is-open', open);
+        mobBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        mobBtn.setAttribute('aria-label', open ? 'بستن منو' : 'باز کردن منو');
+        mobDrawer.setAttribute('aria-hidden', open ? 'false' : 'true');
+      };
+
+      mobBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        setDrawerOpen(!mobDrawer.classList.contains('open'));
+      });
+
+      mobDrawer.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => setDrawerOpen(false));
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && mobDrawer.classList.contains('open')) {
+          setDrawerOpen(false);
+        }
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!mobDrawer.contains(e.target) && !mobBtn.contains(e.target)) {
+          setDrawerOpen(false);
+        }
+      });
+    }
+
+    if ('serviceWorker' in navigator) {
+      const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+      if (isLocalhost) {
+        navigator.serviceWorker.getRegistrations().then(regs => {
+          for (const reg of regs) reg.unregister();
+        });
+        if ('caches' in window) {
+          caches.keys().then(names => {
+            for (const name of names) caches.delete(name);
+          });
+        }
+      } else {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/Gitab/sw.js').catch(() => {});
+        });
       }
-    });
-  }
-  </script>
-
-  <script>
-    document.getElementById('y').textContent = new Date().getFullYear();
-  </script>
-  <script>
-document.getElementById("openDonate").addEventListener("click", () => {
-  document.getElementById("donateModal").style.display = "block";
-});
-document.getElementById("closeDonate").addEventListener("click", () => {
-  document.getElementById("donateModal").style.display = "none";
-});
-document.querySelectorAll(".copy-btn").forEach(btn => {
-  btn.addEventListener("click", () => {
-    navigator.clipboard.writeText(btn.dataset.copy);
-  
-    setTimeout(() => (btn.textContent = "کپی"), 2000);
-  });
-});
-</script>
-
-</body>
-</html>
+    }
+  })();
+  </script> <script type="speculationrules">{"prefetch":[{"where":{"and":[{"href_matches":"/Gitab/*"},{"not":{"href_matches":"/Gitab/downloads/*"}},{"not":{"selector_matches":"[download], [target='_blank']"}}]},"eagerness":"moderate"}]}</script> <script>
+  (() => {
+    if (window.HTMLScriptElement && HTMLScriptElement.supports && HTMLScriptElement.supports('speculationrules')) return;
+    const seen = new Set([window.location.href]);
+    let count = 0;
+    const prefetchLink = (e) => {
+      if (count >= 12) return;
+      const a = e.target && e.target.closest ? e.target.closest('header a, .chapter-single-next-nav a, .syllabus-chapter-item a, .btn-hero-read, .btn-card-read') : null;
+      if (!a || !a.href || a.hasAttribute('download') || a.target === '_blank') return;
+      if (a.origin !== window.location.origin || a.pathname.includes('/downloads/')) return;
+      const clean = a.href.split('#')[0];
+      if (!clean || seen.has(clean)) return;
+      seen.add(clean);
+      count++;
+      const l = document.createElement('link');
+      l.rel = 'prefetch';
+      l.href = clean;
+      document.head.appendChild(l);
+    };
+    document.addEventListener('pointerenter', prefetchLink, { capture: true, passive: true });
+    document.addEventListener('touchstart', prefetchLink, { capture: true, passive: true });
+  })();
+  </script></body></html>

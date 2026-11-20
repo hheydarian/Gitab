@@ -1,90 +1,18 @@
-
-
-<!doctype html>
-<html lang="fa" dir="rtl">
-<head>
-  <meta charset="utf-8">
-  <link rel="icon" type="image/png" href="/Gitab/favicon.png">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>کلاس ها</title>
-  <meta name="description" content="ترجمه‌های فارسی کتاب‌های فنی — سریع، مینیمال و قابل اتکا.">
-
-  <!-- استایل‌ها -->
-  <link rel="stylesheet" href="/Gitab/styles/main.css">
-  <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
-
-  <style>
-  @font-face {
-    font-family: 'Vazir';
-    src: url('/Gitab/fonts/Vazir-FD-WOL.ttf') format('truetype');
-    font-display: swap;
-  }
-  @font-face {
-    font-family: "Lalezar";
-    src: url('fonts/Lalezar.ttf') format('truetype');
-    font-display: swap;
-}
-  body {
-    font-family: 'Vazir', sans-serif;
-  }
-  </style>
-</head>
-
-<body>
-  <!-- هدر مشترک -->
-  <header class="header">
-    <div class="container nav-wrap">
-      <a href="/Gitab/" class="brand">
-        <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="26" height="26">
-        <span>Gitab</span>
-      </a>
-
-       <nav class="nav">
-         <a href="/Gitab/" >خانه</a>
-         <a href="/Gitab/books/list-books" >کتاب‌ها</a>
-         <a href="/Gitab/giter.html" >دوره ها</a>
-          <!-- 
-         <a href="/Gitab/translator.html" >مترجمین</a>
-           -->
-       </nav>
-
-      <div class="nav-actions">
-        <button id="themeToggle" class="icon-btn theme-btn" data-icon="moon" aria-label="تغییر تم">
-          <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن">
-          <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک">
-        </button>
-
-        <a class="icon-btn" href="https://github.com/hheydarian/Gitab" target="_blank" title="GitHub">
-          <img src="/Gitab/icone/github.svg" alt="GitHub">
-        </a>
-
-        <!-- دکمه منو برای موبایل -->
-        <button class="menu-toggle" aria-label="منو">
-          <img src="/Gitab/icone/menu.svg" alt="menu">
-        </button>
-      </div>
-    </div>
-  </header>
-
-  
-  <main class="site-main book-page">
-    <h1>کلاس ها</h1>
-<p><img src="../../../assets/image/10/img-10.1.png" alt="classes image"></p>
-<div dir="rtl">
-تا اینجا در این کتاب بر روی نحوه‌ی نوشتن خطوط و بلوک‌های کد به‌خوبی تمرکز کرده‌ایم. به ترکیب مناسب توابع و نحوه‌ی ارتباط آن‌ها با یکدیگر پرداخته‌ایم. اما با وجود تمام توجهی که به بیان‌گری جملات کد و توابعی که تشکیل می‌دهند کرده‌ایم، هنوز به کد تمیز نرسیده‌ایم تا زمانی که به سطوح بالاتر سازماندهی کد توجه نکنیم. بیایید درباره کلاس‌های تمیز صحبت کنیم.
-<h2>سازماندهی کلاس</h2>
-<p>طبق شیوه استاندارد جاوا، یک کلاس باید با لیستی از متغیرها آغاز شود. ثابت‌های عمومی و استاتیک، در صورت وجود، باید اول بیایند. سپس متغیرهای استاتیک خصوصی و بعد از آن متغیرهای نمونه خصوصی قرار می‌گیرند. به‌ندرت دلیل خوبی برای داشتن یک متغیر عمومی وجود دارد.</p>
-<p>توابع عمومی باید پس از لیست متغیرها قرار بگیرند. ما ترجیح می‌دهیم توابع کمکی خصوصی که توسط یک تابع عمومی فراخوانی می‌شوند، بلافاصله بعد از خود آن تابع عمومی قرار بگیرند. این کار به پیروی از قانون کاهش مرحله کمک می‌کند و باعث می‌شود برنامه مانند یک مقاله روزنامه خوانده شود.</p>
-<h3>کپسوله‌سازی</h3>
-<p>ما دوست داریم متغیرها و توابع کمکی‌مان خصوصی باشند، اما به شدت روی آن پافشاری نمی‌کنیم. گاهی اوقات نیاز داریم که یک متغیر یا تابع کمکی را محافظت‌شده (protected) کنیم تا از طریق یک تست قابل دسترسی باشد. برای ما، تست‌ها اهمیت بالایی دارند. اگر یک تست در همان بسته نیاز به فراخوانی یک تابع یا دسترسی به یک متغیر داشته باشد، آن را محافظت‌شده یا با دامنه بسته (package scope) قرار می‌دهیم. با این حال، ابتدا به دنبال راهی برای حفظ حریم خصوصی خواهیم بود. کاهش کپسوله‌سازی همیشه آخرین گزینه است.</p>
-<h2>کلاس‌ها باید کوچک باشند</h2>
-<p>اولین قانون درباره کلاس‌ها این است که باید کوچک باشند. دومین قانون این است که باید از آن هم کوچکتر باشند. نه، ما قصد نداریم متن دقیقی را که در فصل توابع گفتیم، تکرار کنیم. اما همانند توابع، کوچک بودن، قانون اصلی در طراحی کلاس‌ها است. سوال فوری ما همیشه این است: &quot;چقدر کوچک؟&quot;</p>
-<p>برای توابع، اندازه را با شمردن خطوط فیزیکی اندازه‌گیری می‌کردیم. برای کلاس‌ها از معیار متفاوتی استفاده می‌کنیم: ما مسئولیت‌ها را شمارش می‌کنیم.</p>
-<p>در فهرست ۱۰-۱، کلاسی به نام SuperDashboard معرفی شده است که حدود ۷۰ متد عمومی را در معرض دید قرار می‌دهد. بیشتر توسعه‌دهندگان با این نظر موافقند که این کلاس از نظر اندازه کمی بیش از حد بزرگ است. برخی توسعه‌دهندگان ممکن است SuperDashboard را به عنوان یک &quot;کلاس خدا&quot; (God class) خطاب کنند.</p>
-</div>
-<p>Listing 10-1 -- Too Many Responsibilities</p>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">SuperDashboard</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">JFrame</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">MetaDataUser</span>
+<!doctype html><html lang="fa" dir="rtl"> <head><script>
+    if (window.location.pathname.startsWith('/gitab/')) {
+      window.location.replace(window.location.pathname.replace(/^\/gitab\//i, '/Gitab/') + window.location.search + window.location.hash);
+    }
+    (() => {
+      try {
+        const t = localStorage.getItem('gitab-theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', t);
+        document.documentElement.dataset.colorMode = t;
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        document.documentElement.dataset.colorMode = 'dark';
+      }
+    })();
+  </script> <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5"> <title>کلاس ها</title><meta name="description" content="کلاس ها — مطالعه آنلاین و رایگان از کتاب «کد تمیز (عمو باب)» (Clean Code) اثر Robert C. Martin با ترجمه مجتبی افراز در گیتاب."> <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"><meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"> <meta name="theme-color" content="#090d16"><meta name="referrer" content="strict-origin-when-cross-origin"> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https:; frame-src https://www.youtube.com https://www.youtube-nocookie.com https://maps.google.com https://www.google.com; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self';"><link rel="icon" type="image/png" href="/Gitab/favicon.png"> <link rel="canonical" href="https://hheydarian.github.io/Gitab/books/book3/Book/10_Classes/Classes/"><link rel="alternate" hreflang="fa" href="https://hheydarian.github.io/Gitab/books/book3/Book/10_Classes/Classes/"> <link rel="alternate" hreflang="x-default" href="https://hheydarian.github.io/Gitab/books/book3/Book/10_Classes/Classes/"><link rel="alternate" type="text/plain" title="LLMs.txt" href="/Gitab/llms.txt"> <link rel="sitemap" type="application/xml" title="Sitemap" href="/Gitab/sitemap.xml"><meta property="og:locale" content="fa_IR"> <meta property="og:type" content="article"><meta property="og:site_name" content="گیتاب | Gitab"> <meta property="og:title" content="کلاس ها"><meta property="og:description" content="کلاس ها — مطالعه آنلاین و رایگان از کتاب «کد تمیز (عمو باب)» (Clean Code) اثر Robert C. Martin با ترجمه مجتبی افراز در گیتاب."> <meta property="og:url" content="https://hheydarian.github.io/Gitab/books/book3/Book/10_Classes/Classes/"><meta property="og:image" content="https://hheydarian.github.io/Gitab/images/clean-code/Cover.webp"> <meta property="og:image:alt" content="کلاس ها"><meta name="twitter:card" content="summary_large_image"> <meta name="twitter:title" content="کلاس ها"><meta name="twitter:description" content="کلاس ها — مطالعه آنلاین و رایگان از کتاب «کد تمیز (عمو باب)» (Clean Code) اثر Robert C. Martin با ترجمه مجتبی افراز در گیتاب."> <meta name="twitter:image" content="https://hheydarian.github.io/Gitab/images/clean-code/Cover.webp"><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://hheydarian.github.io/Gitab/#organization","name":"گیتاب | Gitab","alternateName":"Gitab","url":"https://hheydarian.github.io/Gitab/","logo":{"@type":"ImageObject","url":"https://hheydarian.github.io/Gitab/favicon.png"},"sameAs":["https://github.com/hheydarian/Gitab"]},{"@type":"WebSite","@id":"https://hheydarian.github.io/Gitab/#website","url":"https://hheydarian.github.io/Gitab/","name":"گیتاب | Gitab","inLanguage":"fa-IR","publisher":{"@id":"https://hheydarian.github.io/Gitab/#organization"},"potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://hheydarian.github.io/Gitab/books/list-books/?q={search_term_string}"},"query-input":"required name=search_term_string"}},{"@type":"WebPage","@id":"https://hheydarian.github.io/Gitab/books/book3/Book/10_Classes/Classes/#webpage","url":"https://hheydarian.github.io/Gitab/books/book3/Book/10_Classes/Classes/","name":"کلاس ها","description":"کلاس ها — مطالعه آنلاین و رایگان از کتاب «کد تمیز (عمو باب)» (Clean Code) اثر Robert C. Martin با ترجمه مجتبی افراز در گیتاب.","inLanguage":"fa-IR","isPartOf":{"@id":"https://hheydarian.github.io/Gitab/#website"}},{"@type":"TechArticle","headline":"کلاس ها","description":"کلاس ها — مطالعه آنلاین و رایگان از کتاب «کد تمیز (عمو باب)» (Clean Code) اثر Robert C. Martin با ترجمه مجتبی افراز در گیتاب.","url":"https://hheydarian.github.io/Gitab/books/book3/Book/10_Classes/Classes/","inLanguage":"fa-IR","isAccessibleForFree":true,"author":{"@type":"Person","name":"Robert C. Martin"},"translator":{"@type":"Person","name":"مجتبی افراز"},"isPartOf":{"@type":"Book","name":"کد تمیز (عمو باب)","alternateName":"Clean Code","url":"https://hheydarian.github.io/Gitab/books/book3/"}}]}</script> <link rel="preload" href="/Gitab/fonts/Vazirmatn.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/Gitab/styles/main.css?v=2.4" as="style"> <link rel="preload" href="/Gitab/styles/gitab-modern.css?v=2.5" as="style"><style>@font-face{font-family:'Lalezar';src:url('/Gitab/fonts/Lalezar.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}@font-face{font-family:'Vazirmatn';src:url('/Gitab/fonts/Vazirmatn.woff2') format('woff2');font-weight:100 900;font-style:normal;font-display:swap}html,body,button,input,optgroup,select,textarea,.filter-pill{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}input::placeholder,textarea::placeholder{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}</style> <link rel="stylesheet" href="/Gitab/styles/main.css?v=2.4"><link rel="stylesheet" href="/Gitab/styles/gitab-modern.css?v=2.5"> <link rel="stylesheet" href="/Gitab/styles/vendor/github-dark.min.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="/Gitab/styles/vendor/github-dark.min.css"></noscript></head> <body><header class="header"> <div class="container nav-wrap"><a href="/Gitab/" class="brand" aria-label="صفحه اصلی گیتاب"> <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="30" height="30" decoding="async"> <span class="brand-text">Gitab</span> </a> <nav class="nav" id="mainNav"><a href="/Gitab/" >خانه</a> <a href="/Gitab/books/list-books" aria-current="page">کتاب‌ها</a> <a href="/Gitab/courses/" >دوره‌ها</a> <a href="/Gitab/translator.html" >مترجمین</a></nav> <div class="nav-actions"><button id="themeToggle" class="theme-toggle-btn" aria-label="تغییر تم" title="تغییر تم"> <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن" width="18" height="18" decoding="async" style="display:none"> <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک" width="18" height="18" decoding="async"> </button> <a class="btn-github-pill" href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" title="مشاهده سورس گیتاب در گیت‌هاب"> <img src="/Gitab/icone/github.svg" alt="GitHub" width="16" height="16" decoding="async"> <span>گیت‌هاب</span> </a> <button class="mobile-menu-btn" id="mobileMenuBtn" type="button" aria-label="باز کردن منو" aria-expanded="false"> <svg class="mob-icon-open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="4" y1="7" x2="20" y2="7"></line> <line x1="4" y1="12" x2="20" y2="12"></line> <line x1="4" y1="17" x2="14" y2="17"></line> </svg> <svg class="mob-icon-close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="18" y1="6" x2="6" y2="18"></line> <line x1="6" y1="6" x2="18" y2="18"></line> </svg> </button></div> </div><div class="mobile-drawer" id="mobileDrawer" aria-hidden="true"> <div class="mobile-drawer-inner"><div class="mobile-drawer-section-label">ناوبری سریع</div><nav class="mobile-drawer-links" aria-label="منوی موبایل"> <a href="/Gitab/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M3 10.5 12 3l9 7.5"></path> <path d="M5 9.5V20a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V9.5"></path> </svg> </span> <span class="mob-nav-text">صفحه نخست</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/books/list-books" class="mobile-drawer-link active" aria-current="page"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path> </svg> </span> <span class="mob-nav-text">کتابخانه و فهرست کتاب‌ها</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/courses/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path> <path d="M6 12v5c3 3 9 3 12 0v-5"></path> </svg> </span> <span class="mob-nav-text">دوره‌های آموزشی</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/translator.html" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path> <circle cx="9" cy="7" r="4"></circle> <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path> <path d="M16 3.13a4 4 0 0 1 0 7.75"></path> </svg> </span> <span class="mob-nav-text">مترجمین و همکاران</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> </nav><div class="mobile-drawer-divider"></div><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" class="mobile-drawer-link mobile-drawer-gh"> <span class="mob-nav-icon" aria-hidden="true"> <img src="/Gitab/icone/github.svg" alt="" width="17" height="17" loading="lazy" decoding="async"> </span> <span class="mob-nav-text">مخزن گیت‌هاب پروژه</span> <span class="mob-nav-ext" aria-hidden="true">↗</span> </a> </div></div> </header><div class="reading-progress-track"> <div class="reading-progress-fill" id="readingProgressBar"></div></div> <main class="site-main chapter-reading-page"><div class="chapter-page-wrapper"> <nav class="chapter-clean-breadcrumb" aria-label="مسیر راهنما" dir="rtl"><a href="/Gitab/">خانه</a> <span class="bc-sep" aria-hidden="true">/</span> <a href="/Gitab/books/list-books/">کتاب‌ها</a> <span class="bc-sep" aria-hidden="true">/</span> <a href="/Gitab/books/book3/"><bdi>کد تمیز</bdi></a> <span class="bc-sep" aria-hidden="true">/</span> <span class="bc-current-leaf"><bdi>کلاس ها</bdi></span></nav> <article class="chapter-prose-container markdown-body" id="chapterArticle" dir="rtl"><h1>کلاس ها</h1><p><img src="../../../assets/image/10/img-10.1.png" alt="classes image" loading="lazy" decoding="async"></p><div dir="rtl"> تا اینجا در این کتاب بر روی نحوه‌ی نوشتن خطوط و بلوک‌های کد به‌خوبی تمرکز کرده‌ایم. به ترکیب مناسب توابع و نحوه‌ی ارتباط آن‌ها با یکدیگر پرداخته‌ایم. اما با وجود تمام توجهی که به بیان‌گری جملات کد و توابعی که تشکیل می‌دهند کرده‌ایم، هنوز به کد تمیز نرسیده‌ایم تا زمانی که به سطوح بالاتر سازماندهی کد توجه نکنیم. بیایید درباره کلاس‌های تمیز صحبت کنیم. <h2>سازماندهی کلاس</h2><p>طبق شیوه استاندارد جاوا، یک کلاس باید با لیستی از متغیرها آغاز شود. ثابت‌های عمومی و استاتیک، در صورت وجود، باید اول بیایند. سپس متغیرهای استاتیک خصوصی و بعد از آن متغیرهای نمونه خصوصی قرار می‌گیرند. به‌ندرت دلیل خوبی برای داشتن یک متغیر عمومی وجود دارد.</p><p>توابع عمومی باید پس از لیست متغیرها قرار بگیرند. ما ترجیح می‌دهیم توابع کمکی خصوصی که توسط یک تابع عمومی فراخوانی می‌شوند، بلافاصله بعد از خود آن تابع عمومی قرار بگیرند. این کار به پیروی از قانون کاهش مرحله کمک می‌کند و باعث می‌شود برنامه مانند یک مقاله روزنامه خوانده شود.</p><h3>کپسوله‌سازی</h3><p>ما دوست داریم متغیرها و توابع کمکی‌مان خصوصی باشند، اما به شدت روی آن پافشاری نمی‌کنیم. گاهی اوقات نیاز داریم که یک متغیر یا تابع کمکی را محافظت‌شده (protected) کنیم تا از طریق یک تست قابل دسترسی باشد. برای ما، تست‌ها اهمیت بالایی دارند. اگر یک تست در همان بسته نیاز به فراخوانی یک تابع یا دسترسی به یک متغیر داشته باشد، آن را محافظت‌شده یا با دامنه بسته (package scope) قرار می‌دهیم. با این حال، ابتدا به دنبال راهی برای حفظ حریم خصوصی خواهیم بود. کاهش کپسوله‌سازی همیشه آخرین گزینه است.</p><h2>کلاس‌ها باید کوچک باشند</h2><p>اولین قانون درباره کلاس‌ها این است که باید کوچک باشند. دومین قانون این است که باید از آن هم کوچکتر باشند. نه، ما قصد نداریم متن دقیقی را که در فصل توابع گفتیم، تکرار کنیم. اما همانند توابع، کوچک بودن، قانون اصلی در طراحی کلاس‌ها است. سوال فوری ما همیشه این است: &quot;چقدر کوچک؟&quot;</p><p>برای توابع، اندازه را با شمردن خطوط فیزیکی اندازه‌گیری می‌کردیم. برای کلاس‌ها از معیار متفاوتی استفاده می‌کنیم: ما مسئولیت‌ها را شمارش می‌کنیم.</p><p>در فهرست ۱۰-۱، کلاسی به نام SuperDashboard معرفی شده است که حدود ۷۰ متد عمومی را در معرض دید قرار می‌دهد. بیشتر توسعه‌دهندگان با این نظر موافقند که این کلاس از نظر اندازه کمی بیش از حد بزرگ است. برخی توسعه‌دهندگان ممکن است SuperDashboard را به عنوان یک &quot;کلاس خدا&quot; (God class) خطاب کنند.</p></div> <p>Listing 10-1 -- Too Many Responsibilities</p><pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">SuperDashboard</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">JFrame</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">MetaDataUser</span>
 <span class="hljs-keyword">public</span> String <span class="hljs-title function_">getCustomizerLanguagePath</span><span class="hljs-params">()</span>
 <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">setSystemConfigPath</span><span class="hljs-params">(String systemConfigPath)</span>
 <span class="hljs-keyword">public</span> String <span class="hljs-title function_">getSystemConfigDocument</span><span class="hljs-params">()</span>
@@ -157,51 +85,19 @@
 <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">showHelper</span><span class="hljs-params">(MetaObject metaObject, String propertyName)</span>
 <span class="hljs-comment">// ... many non-public methods follow ...</span>
 }
-</code></pre>
-<div dir="rtl">
-اما اگر SuperDashboard فقط شامل متدهایی باشد که در فهرست ۱۰-۲ نشان داده شده‌اند، چه؟
-</div>
-<p>Listing 10-2 -- Small Enough?</p>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">SuperDashboard</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">JFrame</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">MetaDataUser</span>
+</code></pre> <div dir="rtl"> اما اگر SuperDashboard فقط شامل متدهایی باشد که در فهرست ۱۰-۲ نشان داده شده‌اند، چه؟ </div><p>Listing 10-2 -- Small Enough?</p><pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">SuperDashboard</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">JFrame</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">MetaDataUser</span>
  <span class="hljs-keyword">public</span> Component <span class="hljs-title function_">getLastFocusedComponent</span><span class="hljs-params">()</span> 
  <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">setLastFocused</span><span class="hljs-params">(Component lastFocused)</span> 
  <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">getMajorVersionNumber</span><span class="hljs-params">()</span> 
  <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">getMinorVersionNumber</span><span class="hljs-params">()</span> 
  <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">getBuildNumber</span><span class="hljs-params">()</span> 
 }
-</code></pre>
-<div dir="rtl">
-پنج متد زیاد نیست، درست است؟
-در این حالت، با وجود تعداد کم متدها، SuperDashboard دارای مسئولیت‌های زیادی است. نام یک کلاس باید توصیف‌کننده‌ی مسئولیت‌هایی باشد که آن کلاس بر عهده دارد. در واقع، نام‌گذاری احتمالاً اولین راهی است که به ما کمک می‌کند اندازه‌ی کلاس را تعیین کنیم. اگر نتوانیم نامی مختصر برای یک کلاس پیدا کنیم، احتمالاً آن کلاس بیش از حد بزرگ است. هر چه نام کلاس مبهم‌تر باشد، احتمالاً مسئولیت‌های بیشتری دارد. برای مثال، نام کلاس‌هایی که شامل واژه‌های مبهمی مثل Processor، Manager یا Super هستند، معمولاً به تجمع نامطلوب مسئولیت‌ها اشاره دارد.
-<p>ما همچنین باید بتوانیم توصیف کوتاهی از کلاس را در حدود ۲۵ کلمه بنویسیم، بدون اینکه از واژه‌های “if”، “and”، “or” یا “but” استفاده کنیم. چگونه می‌توانیم SuperDashboard را توصیف کنیم؟ SuperDashboard به مؤلفه‌ای که آخرین بار بر روی آن فوکوس شده دسترسی می‌دهد و همچنین به ما اجازه می‌دهد نسخه و Build Number را پیگیری کنیم.&quot; اولین &quot;and&quot; نشانه‌ای است که SuperDashboard مسئولیت‌های زیادی دارد.</p>
-<h2>اصل مسئولیت واحد</h2>
-<p>اصل مسئولیت واحد (Single Responsibility Principle - SRP) بیان می‌کند که یک کلاس یا ماژول باید یک، و فقط یک، دلیل برای تغییر داشته باشد. این اصل هم تعریفی از مسئولیت به ما می‌دهد و هم راهنمایی برای اندازه کلاس. کلاس‌ها باید یک مسئولیت داشته باشند—یک دلیل برای تغییر.</p>
-<p>کلاس به‌ظاهر کوچک SuperDashboard در فهرست ۱۰-۲ دو دلیل برای تغییر دارد.</p>
-<p>اول، این کلاس اطلاعات نسخه را پیگیری می‌کند که به نظر می‌رسد هر بار که نرم‌افزار منتشر می‌شود، نیاز به به‌روزرسانی دارد. دوم، این کلاس مؤلفه‌های جاوا سوئینگ را مدیریت می‌کند (که خود یک زیرکلاس از JFrame است، نمای سوئینگ از یک پنجره GUI سطح بالا). بدون شک، اگر کدی از سوئینگ را تغییر دهیم، می‌خواهیم شماره نسخه را به‌روزرسانی کنیم، اما برعکس این موضوع الزامی نیست: ممکن است بر اساس تغییرات دیگر کد در سیستم، اطلاعات نسخه را تغییر دهیم.</p>
-<p>تلاش برای شناسایی مسئولیت‌ها (دلایل تغییر) معمولاً به ما کمک می‌کند تا انتزاعات بهتری در کد خود شناسایی و ایجاد کنیم. ما می‌توانیم به راحتی تمام سه متدی که در SuperDashboard به اطلاعات نسخه مربوط می‌شوند را استخراج کرده و در یک کلاس جداگانه به نام Version قرار دهیم (به فهرست ۱۰-۳ مراجعه کنید). کلاس Version ساختاری است که پتانسیل بالایی برای استفاده مجدد در سایر برنامه‌ها دارد!</p>
-</div>
-<p>Listing 10-3 -- A single-responsibility class</p>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Version</span> {
+</code></pre> <div dir="rtl"> پنج متد زیاد نیست، درست است؟ در این حالت، با وجود تعداد کم متدها، SuperDashboard دارای مسئولیت‌های زیادی است. نام یک کلاس باید توصیف‌کننده‌ی مسئولیت‌هایی باشد که آن کلاس بر عهده دارد. در واقع، نام‌گذاری احتمالاً اولین راهی است که به ما کمک می‌کند اندازه‌ی کلاس را تعیین کنیم. اگر نتوانیم نامی مختصر برای یک کلاس پیدا کنیم، احتمالاً آن کلاس بیش از حد بزرگ است. هر چه نام کلاس مبهم‌تر باشد، احتمالاً مسئولیت‌های بیشتری دارد. برای مثال، نام کلاس‌هایی که شامل واژه‌های مبهمی مثل Processor، Manager یا Super هستند، معمولاً به تجمع نامطلوب مسئولیت‌ها اشاره دارد. <p>ما همچنین باید بتوانیم توصیف کوتاهی از کلاس را در حدود ۲۵ کلمه بنویسیم، بدون اینکه از واژه‌های “if”، “and”، “or” یا “but” استفاده کنیم. چگونه می‌توانیم SuperDashboard را توصیف کنیم؟ SuperDashboard به مؤلفه‌ای که آخرین بار بر روی آن فوکوس شده دسترسی می‌دهد و همچنین به ما اجازه می‌دهد نسخه و Build Number را پیگیری کنیم.&quot; اولین &quot;and&quot; نشانه‌ای است که SuperDashboard مسئولیت‌های زیادی دارد.</p><h2>اصل مسئولیت واحد</h2><p>اصل مسئولیت واحد (Single Responsibility Principle - SRP) بیان می‌کند که یک کلاس یا ماژول باید یک، و فقط یک، دلیل برای تغییر داشته باشد. این اصل هم تعریفی از مسئولیت به ما می‌دهد و هم راهنمایی برای اندازه کلاس. کلاس‌ها باید یک مسئولیت داشته باشند—یک دلیل برای تغییر.</p><p>کلاس به‌ظاهر کوچک SuperDashboard در فهرست ۱۰-۲ دو دلیل برای تغییر دارد.</p><p>اول، این کلاس اطلاعات نسخه را پیگیری می‌کند که به نظر می‌رسد هر بار که نرم‌افزار منتشر می‌شود، نیاز به به‌روزرسانی دارد. دوم، این کلاس مؤلفه‌های جاوا سوئینگ را مدیریت می‌کند (که خود یک زیرکلاس از JFrame است، نمای سوئینگ از یک پنجره GUI سطح بالا). بدون شک، اگر کدی از سوئینگ را تغییر دهیم، می‌خواهیم شماره نسخه را به‌روزرسانی کنیم، اما برعکس این موضوع الزامی نیست: ممکن است بر اساس تغییرات دیگر کد در سیستم، اطلاعات نسخه را تغییر دهیم.</p><p>تلاش برای شناسایی مسئولیت‌ها (دلایل تغییر) معمولاً به ما کمک می‌کند تا انتزاعات بهتری در کد خود شناسایی و ایجاد کنیم. ما می‌توانیم به راحتی تمام سه متدی که در SuperDashboard به اطلاعات نسخه مربوط می‌شوند را استخراج کرده و در یک کلاس جداگانه به نام Version قرار دهیم (به فهرست ۱۰-۳ مراجعه کنید). کلاس Version ساختاری است که پتانسیل بالایی برای استفاده مجدد در سایر برنامه‌ها دارد!</p></div> <p>Listing 10-3 -- A single-responsibility class</p><pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Version</span> {
  <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">getMajorVersionNumber</span><span class="hljs-params">()</span> 
  <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">getMinorVersionNumber</span><span class="hljs-params">()</span> 
  <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">getBuildNumber</span><span class="hljs-params">()</span> 
 }
-</code></pre>
-<div dir="rtl">
-SRP یکی از مفاهیم مهم در طراحی شی‌گرا است. همچنین یکی از ساده‌ترین مفاهیم برای درک و پیروی از آن به شمار می‌آید. با این حال، به طرز عجیبی، SRP اغلب به بدترین شکل در طراحی کلاس‌ها مورد سوءاستفاده قرار می‌گیرد. ما به‌طور منظم با کلاس‌هایی مواجه می‌شویم که کارهای بسیار زیادی انجام می‌دهند. چرا؟
-<p>به کار انداختن نرم‌افزار و تمیز نگه‌داشتن آن دو فعالیت بسیار متفاوت هستند. بیشتر ما ظرفیت محدودی برای پردازش اطلاعات داریم، بنابراین بیشتر بر روی کار کردن کد تمرکز می‌کنیم تا سازماندهی و پاکیزگی آن. این موضوع کاملاً قابل درک است. حفظ جدایی بین نگرانی‌ها در فعالیت‌های برنامه‌نویسی ما به همان اندازه در برنامه‌های ما اهمیت دارد.</p>
-<p>مشکل این است که بسیاری از ما فکر می‌کنیم که وقتی برنامه کار می‌کند، کار تمام شده است. ما از تغییر به سمت نگرانی‌های دیگر، مانند سازماندهی و پاکیزگی، غافل می‌شویم. به جای اینکه به سراغ مشکلات بعدی برویم، باید به عقب برگردیم و کلاس‌های بیش از حد شلوغ را به واحدهای جداگانه با مسئولیت‌های واحد تقسیم کنیم.</p>
-<p>در عین حال، بسیاری از توسعه‌دهندگان نگران این هستند که تعداد زیادی کلاس کوچک و تک‌منظوره، درک تصویر کلی را دشوارتر کند. آن‌ها نگران هستند که باید از کلاسی به کلاس دیگر بروند تا بفهمند یک بخش بزرگ‌تر چگونه انجام می‌شود.</p>
-<p>با این حال، یک سیستم با کلاس‌های کوچک بیشتر از یک سیستم با چند کلاس بزرگ اجزای متحرک ندارد. همان اندازه که باید در سیستم با کلاس‌های بزرگ بیاموزیم، در سیستم با کلاس‌های کوچک نیز به یادگیری نیاز داریم. بنابراین سوال این است: آیا می‌خواهید ابزارهای شما در جعبه‌ابزارهایی با کشوهای کوچک و مشخصی که شامل اجزای خوب تعریف شده و با برچسب هستند، سازمان‌دهی شوند؟ یا اینکه چند کشو داشته باشید که همه چیز را در آن‌ها ریخته‌اید؟</p>
-<p>هر سیستم بزرگ شامل مقدار زیادی منطق و پیچیدگی خواهد بود. هدف اصلی در مدیریت چنین پیچیدگی‌ای این است که آن را به گونه‌ای سازمان‌دهی کنیم که یک توسعه‌دهنده بداند کجا باید به دنبال موارد بگردد و فقط نیاز داشته باشد که در هر لحظه پیچیدگی مستقیماً مرتبط را درک کند. در مقابل، سیستم‌هایی با کلاس‌های بزرگ و چندمنظوره همیشه ما را با این واقعیت مواجه می‌کنند که باید از میان چیزهای زیادی که در حال حاضر نیازی به دانستن آن‌ها نداریم، عبور کنیم.</p>
-<p>برای تأکید بر نکات قبلی: ما می‌خواهیم سیستم‌های ما شامل بسیاری کلاس‌های کوچک باشد، نه چند کلاس بزرگ. هر کلاس کوچک یک مسئولیت واحد را در بر می‌گیرد، یک دلیل برای تغییر دارد و با چند کلاس دیگر همکاری می‌کند تا رفتارهای مورد نظر سیستم را به دست آورد.</p>
-<h2>همبستگی (Cohesion)</h2>
-<p>کلاس‌ها باید تعداد کمی متغیر نمونه داشته باشند. هر یک از متدهای یک کلاس باید یکی یا چندتا از این متغیرها را دستکاری کند. به‌طور کلی، هر چه تعداد متغیرهایی که یک متد دستکاری می‌کند بیشتر باشد، آن متد همبستگی بیشتری با کلاس خود خواهد داشت. یک کلاس که در آن هر متغیر توسط هر متد استفاده می‌شود، حداکثر همبستگی را دارد.</p>
-<p>به‌طور کلی، ایجاد چنین کلاس‌های حداکثری همبسته نه تنها توصیه نمی‌شود بلکه غیرممکن است؛ با این حال، ما می‌خواهیم همبستگی بالا باشد. وقتی همبستگی بالا است، به این معناست که متدها و متغیرهای کلاس وابستگی متقابل دارند و به‌عنوان یک کل منطقی با هم پیوند دارند.</p>
-<p>به پیاده‌سازی یک پشته (Stack) در فهرست ۱۰-۴ توجه کنید. این یک کلاس بسیار همبسته است. از میان سه متد، تنها متد size() است که از هر دو متغیر استفاده نمی‌کند.</p>
-</div>
-<p>Listing 10-4  -- Stack.java A cohesive class.</p>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Stack</span> {
+</code></pre> <div dir="rtl"> SRP یکی از مفاهیم مهم در طراحی شی‌گرا است. همچنین یکی از ساده‌ترین مفاهیم برای درک و پیروی از آن به شمار می‌آید. با این حال، به طرز عجیبی، SRP اغلب به بدترین شکل در طراحی کلاس‌ها مورد سوءاستفاده قرار می‌گیرد. ما به‌طور منظم با کلاس‌هایی مواجه می‌شویم که کارهای بسیار زیادی انجام می‌دهند. چرا؟ <p>به کار انداختن نرم‌افزار و تمیز نگه‌داشتن آن دو فعالیت بسیار متفاوت هستند. بیشتر ما ظرفیت محدودی برای پردازش اطلاعات داریم، بنابراین بیشتر بر روی کار کردن کد تمرکز می‌کنیم تا سازماندهی و پاکیزگی آن. این موضوع کاملاً قابل درک است. حفظ جدایی بین نگرانی‌ها در فعالیت‌های برنامه‌نویسی ما به همان اندازه در برنامه‌های ما اهمیت دارد.</p><p>مشکل این است که بسیاری از ما فکر می‌کنیم که وقتی برنامه کار می‌کند، کار تمام شده است. ما از تغییر به سمت نگرانی‌های دیگر، مانند سازماندهی و پاکیزگی، غافل می‌شویم. به جای اینکه به سراغ مشکلات بعدی برویم، باید به عقب برگردیم و کلاس‌های بیش از حد شلوغ را به واحدهای جداگانه با مسئولیت‌های واحد تقسیم کنیم.</p><p>در عین حال، بسیاری از توسعه‌دهندگان نگران این هستند که تعداد زیادی کلاس کوچک و تک‌منظوره، درک تصویر کلی را دشوارتر کند. آن‌ها نگران هستند که باید از کلاسی به کلاس دیگر بروند تا بفهمند یک بخش بزرگ‌تر چگونه انجام می‌شود.</p><p>با این حال، یک سیستم با کلاس‌های کوچک بیشتر از یک سیستم با چند کلاس بزرگ اجزای متحرک ندارد. همان اندازه که باید در سیستم با کلاس‌های بزرگ بیاموزیم، در سیستم با کلاس‌های کوچک نیز به یادگیری نیاز داریم. بنابراین سوال این است: آیا می‌خواهید ابزارهای شما در جعبه‌ابزارهایی با کشوهای کوچک و مشخصی که شامل اجزای خوب تعریف شده و با برچسب هستند، سازمان‌دهی شوند؟ یا اینکه چند کشو داشته باشید که همه چیز را در آن‌ها ریخته‌اید؟</p><p>هر سیستم بزرگ شامل مقدار زیادی منطق و پیچیدگی خواهد بود. هدف اصلی در مدیریت چنین پیچیدگی‌ای این است که آن را به گونه‌ای سازمان‌دهی کنیم که یک توسعه‌دهنده بداند کجا باید به دنبال موارد بگردد و فقط نیاز داشته باشد که در هر لحظه پیچیدگی مستقیماً مرتبط را درک کند. در مقابل، سیستم‌هایی با کلاس‌های بزرگ و چندمنظوره همیشه ما را با این واقعیت مواجه می‌کنند که باید از میان چیزهای زیادی که در حال حاضر نیازی به دانستن آن‌ها نداریم، عبور کنیم.</p><p>برای تأکید بر نکات قبلی: ما می‌خواهیم سیستم‌های ما شامل بسیاری کلاس‌های کوچک باشد، نه چند کلاس بزرگ. هر کلاس کوچک یک مسئولیت واحد را در بر می‌گیرد، یک دلیل برای تغییر دارد و با چند کلاس دیگر همکاری می‌کند تا رفتارهای مورد نظر سیستم را به دست آورد.</p><h2>همبستگی (Cohesion)</h2><p>کلاس‌ها باید تعداد کمی متغیر نمونه داشته باشند. هر یک از متدهای یک کلاس باید یکی یا چندتا از این متغیرها را دستکاری کند. به‌طور کلی، هر چه تعداد متغیرهایی که یک متد دستکاری می‌کند بیشتر باشد، آن متد همبستگی بیشتری با کلاس خود خواهد داشت. یک کلاس که در آن هر متغیر توسط هر متد استفاده می‌شود، حداکثر همبستگی را دارد.</p><p>به‌طور کلی، ایجاد چنین کلاس‌های حداکثری همبسته نه تنها توصیه نمی‌شود بلکه غیرممکن است؛ با این حال، ما می‌خواهیم همبستگی بالا باشد. وقتی همبستگی بالا است، به این معناست که متدها و متغیرهای کلاس وابستگی متقابل دارند و به‌عنوان یک کل منطقی با هم پیوند دارند.</p><p>به پیاده‌سازی یک پشته (Stack) در فهرست ۱۰-۴ توجه کنید. این یک کلاس بسیار همبسته است. از میان سه متد، تنها متد size() است که از هر دو متغیر استفاده نمی‌کند.</p></div> <p>Listing 10-4 -- Stack.java A cohesive class.</p><pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Stack</span> {
   <span class="hljs-keyword">private</span> <span class="hljs-type">int</span> <span class="hljs-variable">topOfStack</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
   List &lt;Integer&gt; elements = <span class="hljs-keyword">new</span> <span class="hljs-title class_">LinkedList</span> &lt;Integer&gt; ();
   <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">size</span><span class="hljs-params">()</span> {
@@ -219,19 +115,7 @@ SRP یکی از مفاهیم مهم در طراحی شی‌گرا است. همچ
     <span class="hljs-keyword">return</span> element;
   }
 }
-</code></pre>
-<div dir="rtl">
-حفظ همبستگی و نتایج آن در ایجاد کلاس‌های کوچک
-استراتژی نگه‌داشتن توابع کوچک و کوتاه کردن لیست پارامترها می‌تواند گاهی منجر به افزایش تعداد متغیرهای نمونه‌ای شود که توسط یک زیرمجموعه از متدها استفاده می‌شوند. وقتی این اتفاق می‌افتد، تقریباً همیشه به این معناست که حداقل یک کلاس دیگر در تلاش است تا از کلاس بزرگ‌تر خارج شود. شما باید سعی کنید متغیرها و متدها را به دو یا چند کلاس جداگانه تقسیم کنید به‌طوری‌که کلاس‌های جدید همبستگی بیشتری داشته باشند.
-<h2>حفظ همبستگی باعث ایجاد کلاس‌های کوچک‌تر می‌شود</h2>
-<p>فقط عمل تقسیم توابع بزرگ به توابع کوچک‌تر، باعث افزایش تعداد کلاس‌ها می‌شود. فرض کنید یک تابع بزرگ با تعداد زیادی متغیر در آن اعلام شده است. اگر بخواهید یک بخش کوچک از آن تابع را به یک تابع جداگانه استخراج کنید، آیا باید همه چهار متغیر اعلام شده در تابع را به عنوان آرگومان به تابع جدید منتقل کنید؟</p>
-<p>خیر! اگر آن چهار متغیر را به متغیرهای نمونه کلاس ارتقا دهید، می‌توانید کد را بدون انتقال هیچ متغیری استخراج کنید. این کار باعث می‌شود که تابع را به قطعات کوچک‌تر تقسیم کنید.</p>
-<p>متأسفانه، این همچنین به این معناست که کلاس‌های ما همبستگی خود را از دست می‌دهند، زیرا متغیرهای نمونه بیشتری را جمع‌آوری می‌کنند که فقط برای اجازه دادن به اشتراک‌گذاری چند تابع وجود دارند. اما صبر کنید! اگر چند تابع وجود داشته باشند که بخواهند برخی از متغیرها را به اشتراک بگذارند، آیا این به معنای آن نیست که آن‌ها به خودی خود یک کلاس هستند؟ قطعاً همین‌طور است. وقتی کلاس‌ها همبستگی خود را از دست می‌دهند، آن‌ها را تقسیم کنید!</p>
-<p>بنابراین، شکستن یک تابع بزرگ به توابع کوچک‌تر اغلب به ما این فرصت را می‌دهد که چند کلاس کوچک‌تر را نیز جدا کنیم. این به برنامه ما سازماندهی بهتری می‌دهد و ساختاری شفاف‌تر فراهم می‌آورد.</p>
-<p>به عنوان نمونه‌ای از آنچه که منظورم است، بیایید از یک مثال قدیمی استفاده کنیم که از کتاب فوق‌العاده Knuth با عنوان Literate Programming گرفته شده است. فهرست ۱۰-۵ یک ترجمه به زبان جاوا از برنامه PrintPrimes نوشته Knuth را نشان می‌دهد. برای اینکه به Knuth انصاف بدهیم، این برنامه همان‌طور که او نوشته است نیست، بلکه به‌عنوان خروجی ابزار WEB او ارائه شده است. من از آن استفاده می‌کنم زیرا نقطه شروع خوبی برای شکستن یک تابع بزرگ به توابع و کلاس‌های کوچک‌تر است.</p>
-</div>
-<p>Listing 10-5 -- PrintPrimes.java</p>
-<pre class="hljs"><code><span class="hljs-keyword">package</span> literatePrimes;
+</code></pre> <div dir="rtl"> حفظ همبستگی و نتایج آن در ایجاد کلاس‌های کوچک استراتژی نگه‌داشتن توابع کوچک و کوتاه کردن لیست پارامترها می‌تواند گاهی منجر به افزایش تعداد متغیرهای نمونه‌ای شود که توسط یک زیرمجموعه از متدها استفاده می‌شوند. وقتی این اتفاق می‌افتد، تقریباً همیشه به این معناست که حداقل یک کلاس دیگر در تلاش است تا از کلاس بزرگ‌تر خارج شود. شما باید سعی کنید متغیرها و متدها را به دو یا چند کلاس جداگانه تقسیم کنید به‌طوری‌که کلاس‌های جدید همبستگی بیشتری داشته باشند. <h2>حفظ همبستگی باعث ایجاد کلاس‌های کوچک‌تر می‌شود</h2><p>فقط عمل تقسیم توابع بزرگ به توابع کوچک‌تر، باعث افزایش تعداد کلاس‌ها می‌شود. فرض کنید یک تابع بزرگ با تعداد زیادی متغیر در آن اعلام شده است. اگر بخواهید یک بخش کوچک از آن تابع را به یک تابع جداگانه استخراج کنید، آیا باید همه چهار متغیر اعلام شده در تابع را به عنوان آرگومان به تابع جدید منتقل کنید؟</p><p>خیر! اگر آن چهار متغیر را به متغیرهای نمونه کلاس ارتقا دهید، می‌توانید کد را بدون انتقال هیچ متغیری استخراج کنید. این کار باعث می‌شود که تابع را به قطعات کوچک‌تر تقسیم کنید.</p><p>متأسفانه، این همچنین به این معناست که کلاس‌های ما همبستگی خود را از دست می‌دهند، زیرا متغیرهای نمونه بیشتری را جمع‌آوری می‌کنند که فقط برای اجازه دادن به اشتراک‌گذاری چند تابع وجود دارند. اما صبر کنید! اگر چند تابع وجود داشته باشند که بخواهند برخی از متغیرها را به اشتراک بگذارند، آیا این به معنای آن نیست که آن‌ها به خودی خود یک کلاس هستند؟ قطعاً همین‌طور است. وقتی کلاس‌ها همبستگی خود را از دست می‌دهند، آن‌ها را تقسیم کنید!</p><p>بنابراین، شکستن یک تابع بزرگ به توابع کوچک‌تر اغلب به ما این فرصت را می‌دهد که چند کلاس کوچک‌تر را نیز جدا کنیم. این به برنامه ما سازماندهی بهتری می‌دهد و ساختاری شفاف‌تر فراهم می‌آورد.</p><p>به عنوان نمونه‌ای از آنچه که منظورم است، بیایید از یک مثال قدیمی استفاده کنیم که از کتاب فوق‌العاده Knuth با عنوان Literate Programming گرفته شده است. فهرست ۱۰-۵ یک ترجمه به زبان جاوا از برنامه PrintPrimes نوشته Knuth را نشان می‌دهد. برای اینکه به Knuth انصاف بدهیم، این برنامه همان‌طور که او نوشته است نیست، بلکه به‌عنوان خروجی ابزار WEB او ارائه شده است. من از آن استفاده می‌کنم زیرا نقطه شروع خوبی برای شکستن یک تابع بزرگ به توابع و کلاس‌های کوچک‌تر است.</p></div> <p>Listing 10-5 -- PrintPrimes.java</p><pre class="hljs"><code><span class="hljs-keyword">package</span> literatePrimes;
 <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">PrintPrimes</span> {
   <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> {
     <span class="hljs-keyword">final</span> <span class="hljs-type">int</span> <span class="hljs-variable">M</span> <span class="hljs-operator">=</span> <span class="hljs-number">1000</span>;
@@ -296,13 +180,7 @@ SRP یکی از مفاهیم مهم در طراحی شی‌گرا است. همچ
     }
   }
 }
-</code></pre>
-<div dir="rtl">
-این برنامه که به‌صورت یک تابع واحد نوشته شده، بسیار نامنظم است. ساختار آن به شدت تو در تو است، شامل تعداد زیادی متغیر نامناسب می‌باشد و ساختاری به شدت وابسته دارد. حداقل باید این تابع بزرگ به چند تابع کوچک‌تر تقسیم شود.
-<p>فهرست‌های ۱۰-۶ تا ۱۰-۸ نتایج تقسیم کد موجود در فهرست ۱۰-۵ به کلاس‌ها و توابع کوچک‌تر را نشان می‌دهند و همچنین نام‌های معناداری برای آن کلاس‌ها، توابع و متغیرها انتخاب شده است.</p>
-</div>
-<p>Listing 10-6 -- PrimePrinter.java (refactored)</p>
-<pre class="hljs"><code><span class="hljs-keyword">package</span> literatePrimes;
+</code></pre> <div dir="rtl"> این برنامه که به‌صورت یک تابع واحد نوشته شده، بسیار نامنظم است. ساختار آن به شدت تو در تو است، شامل تعداد زیادی متغیر نامناسب می‌باشد و ساختاری به شدت وابسته دارد. حداقل باید این تابع بزرگ به چند تابع کوچک‌تر تقسیم شود. <p>فهرست‌های ۱۰-۶ تا ۱۰-۸ نتایج تقسیم کد موجود در فهرست ۱۰-۵ به کلاس‌ها و توابع کوچک‌تر را نشان می‌دهند و همچنین نام‌های معناداری برای آن کلاس‌ها، توابع و متغیرها انتخاب شده است.</p></div> <p>Listing 10-6 -- PrimePrinter.java (refactored)</p><pre class="hljs"><code><span class="hljs-keyword">package</span> literatePrimes;
 <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">PrimePrinter</span> {
   <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> {
     <span class="hljs-keyword">final</span> <span class="hljs-type">int</span> <span class="hljs-variable">NUMBER_OF_PRIMES</span> <span class="hljs-operator">=</span> <span class="hljs-number">1000</span>;
@@ -317,9 +195,7 @@ SRP یکی از مفاهیم مهم در طراحی شی‌گرا است. همچ
     tablePrinter.print(primes);
   }
 }
-</code></pre>
-<p>Listing 10-7 -- RowColumnPagePrinter.java</p>
-<pre class="hljs"><code><span class="hljs-keyword">package</span> literatePrimes;
+</code></pre> <p>Listing 10-7 -- RowColumnPagePrinter.java</p><pre class="hljs"><code><span class="hljs-keyword">package</span> literatePrimes;
 <span class="hljs-keyword">import</span> java.io.PrintStream;
 <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">RowColumnPagePrinter</span> {
   <span class="hljs-keyword">private</span> <span class="hljs-type">int</span> rowsPerPage;
@@ -376,9 +252,7 @@ SRP یکی از مفاهیم مهم در طراحی شی‌گرا است. همچ
     <span class="hljs-built_in">this</span>.printStream = printStream;
   }
 }
-</code></pre>
-<p>Listing 10-8 -- PrimeGenerator.java</p>
-<pre class="hljs"><code><span class="hljs-keyword">package</span> literatePrimes;
+</code></pre> <p>Listing 10-8 -- PrimeGenerator.java</p><pre class="hljs"><code><span class="hljs-keyword">package</span> literatePrimes;
 <span class="hljs-keyword">import</span> java.util.ArrayList;
 <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">PrimeGenerator</span> {
   <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-type">int</span>[] primes;
@@ -436,20 +310,7 @@ SRP یکی از مفاهیم مهم در طراحی شی‌گرا است. همچ
     <span class="hljs-keyword">return</span> multiple;
   }
 }
-</code></pre>
-<div dir="rtl">
-اولین چیزی که ممکن است متوجه شوید این است که برنامه به طور قابل توجهی طولانی‌تر شده است. این برنامه از کمی بیش از یک صفحه به نزدیک به سه صفحه طول کشیده است. دلایل متعددی برای این رشد وجود دارد. اول، برنامه بازنویسی‌شده از نام‌های متغیر طولانی‌تر و توصیفی‌تری استفاده می‌کند. دوم، برنامه بازنویسی‌شده از اعلان‌های تابع و کلاس به‌عنوان راهی برای افزودن توضیحات به کد استفاده می‌کند. سوم، از فضا و تکنیک‌های فرمت‌بندی برای حفظ خوانایی برنامه استفاده شده است.
-<p>توجه کنید که برنامه به سه مسئولیت اصلی تقسیم شده است. برنامه اصلی در کلاس PrimePrinter به‌طور مستقل قرار دارد. مسئولیت این کلاس مدیریت محیط اجرای برنامه است. این کلاس در صورت تغییر روش فراخوانی تغییر خواهد کرد. به‌عنوان مثال، اگر این برنامه به یک سرویس SOAP تبدیل شود، این کلاس است که تحت تأثیر قرار می‌گیرد.</p>
-<p>کلاس RowColumnPagePrinter همه چیز را در مورد نحوه فرمت کردن یک لیست از اعداد به صفحات با تعداد مشخصی از ردیف‌ها و ستون‌ها می‌داند. اگر نیاز به تغییر فرمت خروجی باشد، این کلاس است که تحت تأثیر قرار می‌گیرد.</p>
-<p>کلاس PrimeGenerator می‌داند که چگونه یک لیست از اعداد اول تولید کند. توجه کنید که این کلاس برای نمونه‌سازی به‌عنوان یک شیء طراحی نشده است. این کلاس تنها یک فضای مفید است که می‌توان در آن متغیرها را اعلام و پنهان کرد. اگر الگوریتم محاسبه اعداد اول تغییر کند، این کلاس تغییر خواهد کرد.</p>
-<p>این یک بازنویسی نبود! ما از ابتدا شروع نکردیم و برنامه را دوباره نوشتیم. در واقع، اگر به‌دقت به دو برنامه مختلف نگاه کنید، متوجه می‌شوید که آنها از همان الگوریتم و مکانیسم‌ها برای انجام کار خود استفاده می‌کنند.</p>
-<p>این تغییر با نوشتن یک مجموعه آزمایشی که رفتار دقیق برنامه اول را تأیید می‌کرد، انجام شد. سپس تغییرات کوچک و متعددی یکی پس از دیگری انجام شد. پس از هر تغییر، برنامه اجرا شد تا اطمینان حاصل شود که رفتار آن تغییر نکرده است. یک قدم کوچک پس از دیگری، برنامه اول تمیز و به برنامه دوم تبدیل شد.</p>
-<h2>سازماندهی برای تغییر</h2>
-<p>برای اکثر سیستم‌ها، تغییر مداوم است. هر تغییری ما را در معرض این خطر قرار می‌دهد که بخش‌های دیگر سیستم دیگر به درستی کار نکنند. در یک سیستم تمیز، ما کلاس‌های خود را به‌گونه‌ای سازمان‌دهی می‌کنیم که خطر تغییر را کاهش دهیم.</p>
-<p>کلاس Sql در فهرست 10-9 برای تولید رشته‌های SQL به‌طور صحیح با توجه به متادیتای مناسب استفاده می‌شود. این کلاس در حال توسعه است و هنوز از قابلیت‌هایی مانند عبارات به‌روزرسانی SQL پشتیبانی نمی‌کند. هنگامی که زمان آن فرا برسد که کلاس Sql از یک عبارت به‌روزرسانی پشتیبانی کند، باید این کلاس را &quot;باز کنیم&quot; تا تغییرات لازم را اعمال کنیم. مشکل با باز کردن یک کلاس این است که خطر را افزایش می‌دهد. هرگونه تغییر در کلاس می‌تواند به شکستن سایر کدهای موجود در آن کلاس منجر شود. بنابراین، باید آن را به‌طور کامل دوباره آزمایش کرد.</p>
-</div>
-<p>Listing 10-9 -- A class that must be opened for change</p>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Sql</span> {
+</code></pre> <div dir="rtl"> اولین چیزی که ممکن است متوجه شوید این است که برنامه به طور قابل توجهی طولانی‌تر شده است. این برنامه از کمی بیش از یک صفحه به نزدیک به سه صفحه طول کشیده است. دلایل متعددی برای این رشد وجود دارد. اول، برنامه بازنویسی‌شده از نام‌های متغیر طولانی‌تر و توصیفی‌تری استفاده می‌کند. دوم، برنامه بازنویسی‌شده از اعلان‌های تابع و کلاس به‌عنوان راهی برای افزودن توضیحات به کد استفاده می‌کند. سوم، از فضا و تکنیک‌های فرمت‌بندی برای حفظ خوانایی برنامه استفاده شده است. <p>توجه کنید که برنامه به سه مسئولیت اصلی تقسیم شده است. برنامه اصلی در کلاس PrimePrinter به‌طور مستقل قرار دارد. مسئولیت این کلاس مدیریت محیط اجرای برنامه است. این کلاس در صورت تغییر روش فراخوانی تغییر خواهد کرد. به‌عنوان مثال، اگر این برنامه به یک سرویس SOAP تبدیل شود، این کلاس است که تحت تأثیر قرار می‌گیرد.</p><p>کلاس RowColumnPagePrinter همه چیز را در مورد نحوه فرمت کردن یک لیست از اعداد به صفحات با تعداد مشخصی از ردیف‌ها و ستون‌ها می‌داند. اگر نیاز به تغییر فرمت خروجی باشد، این کلاس است که تحت تأثیر قرار می‌گیرد.</p><p>کلاس PrimeGenerator می‌داند که چگونه یک لیست از اعداد اول تولید کند. توجه کنید که این کلاس برای نمونه‌سازی به‌عنوان یک شیء طراحی نشده است. این کلاس تنها یک فضای مفید است که می‌توان در آن متغیرها را اعلام و پنهان کرد. اگر الگوریتم محاسبه اعداد اول تغییر کند، این کلاس تغییر خواهد کرد.</p><p>این یک بازنویسی نبود! ما از ابتدا شروع نکردیم و برنامه را دوباره نوشتیم. در واقع، اگر به‌دقت به دو برنامه مختلف نگاه کنید، متوجه می‌شوید که آنها از همان الگوریتم و مکانیسم‌ها برای انجام کار خود استفاده می‌کنند.</p><p>این تغییر با نوشتن یک مجموعه آزمایشی که رفتار دقیق برنامه اول را تأیید می‌کرد، انجام شد. سپس تغییرات کوچک و متعددی یکی پس از دیگری انجام شد. پس از هر تغییر، برنامه اجرا شد تا اطمینان حاصل شود که رفتار آن تغییر نکرده است. یک قدم کوچک پس از دیگری، برنامه اول تمیز و به برنامه دوم تبدیل شد.</p><h2>سازماندهی برای تغییر</h2><p>برای اکثر سیستم‌ها، تغییر مداوم است. هر تغییری ما را در معرض این خطر قرار می‌دهد که بخش‌های دیگر سیستم دیگر به درستی کار نکنند. در یک سیستم تمیز، ما کلاس‌های خود را به‌گونه‌ای سازمان‌دهی می‌کنیم که خطر تغییر را کاهش دهیم.</p><p>کلاس Sql در فهرست 10-9 برای تولید رشته‌های SQL به‌طور صحیح با توجه به متادیتای مناسب استفاده می‌شود. این کلاس در حال توسعه است و هنوز از قابلیت‌هایی مانند عبارات به‌روزرسانی SQL پشتیبانی نمی‌کند. هنگامی که زمان آن فرا برسد که کلاس Sql از یک عبارت به‌روزرسانی پشتیبانی کند، باید این کلاس را &quot;باز کنیم&quot; تا تغییرات لازم را اعمال کنیم. مشکل با باز کردن یک کلاس این است که خطر را افزایش می‌دهد. هرگونه تغییر در کلاس می‌تواند به شکستن سایر کدهای موجود در آن کلاس منجر شود. بنابراین، باید آن را به‌طور کامل دوباره آزمایش کرد.</p></div> <p>Listing 10-9 -- A class that must be opened for change</p><pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Sql</span> {
   <span class="hljs-keyword">public</span> <span class="hljs-title function_">Sql</span><span class="hljs-params">(String table, Column[] columns)</span>
   <span class="hljs-keyword">public</span> String <span class="hljs-title function_">create</span><span class="hljs-params">()</span>
   <span class="hljs-keyword">public</span> String <span class="hljs-title function_">insert</span><span class="hljs-params">(Object[] fields)</span>
@@ -463,14 +324,7 @@ SRP یکی از مفاهیم مهم در طراحی شی‌گرا است. همچ
   <span class="hljs-keyword">private</span> String <span class="hljs-title function_">selectWithCriteria</span><span class="hljs-params">(String criteria)</span>
   <span class="hljs-keyword">private</span> String <span class="hljs-title function_">placeholderList</span><span class="hljs-params">(Column[] columns)</span>
 }
-</code></pre>
-<div dir="rtl">
-کلاس Sql باید تغییر کند زمانی که نوع جدیدی از عبارت را اضافه می‌کنیم. همچنین باید تغییر کند زمانی که جزئیات یک نوع عبارت خاص را تغییر می‌دهیم به عنوان مثال، اگر بخواهیم عملکرد select را برای پشتیبانی از subselect‌ها اصلاح کنیم. این دو دلیل برای تغییر به این معناست که کلاس Sql اصل مسئولیت واحد (SRP) را نقض می‌کند.
-<p>می‌توانیم این نقض SRP را از یک منظر سازمانی ساده شناسایی کنیم. طرح متدهای کلاس Sql نشان می‌دهد که متدهای خصوصی، مانند selectWithCriteria، به نظر می‌رسد که تنها به عبارات select مربوط باشند. رفتار متدهای خصوصی که تنها به یک زیرمجموعه کوچک از کلاس مربوط می‌شوند، می‌تواند به‌عنوان یک قاعده مفید برای شناسایی مناطق بالقوه برای بهبود عمل کند. با این حال، محرک اصلی برای اقدام باید خود تغییر سیستم باشد. اگر کلاس Sql به‌طور منطقی کامل در نظر گرفته شود، نیازی به جداسازی مسئولیت‌ها نداریم. اگر برای آینده قابل پیش‌بینی به عملکرد update نیاز نداشته باشیم، باید کلاس Sql را به حال خود بگذاریم. اما به محض اینکه خود را در حال باز کردن یک کلاس یافتیم، باید در نظر داشته باشیم که طراحی‌مان را اصلاح کنیم.</p>
-<p>چه می‌شود اگر یک راه‌حل مشابه آنچه در فهرست 10-10 آمده است، در نظر بگیریم؟ هر متد عمومی که در کلاس Sql قبلی از فهرست 10-9 تعریف شده بود، به نسخه‌های فرعی خود از کلاس Sql جدا شده است. توجه کنید که متدهای خصوصی، مانند valuesList، مستقیماً به جایی که نیاز دارند منتقل می‌شوند. رفتار خصوصی مشترک به دو کلاس کاربردی، یعنی Where و ColumnList، جداسازی شده است.</p>
-</div>
-<p>Listing 10-10 -- A set of closed classes</p>
-<pre class="hljs"><code><span class="hljs-keyword">abstract</span> <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Sql</span> {
+</code></pre> <div dir="rtl"> کلاس Sql باید تغییر کند زمانی که نوع جدیدی از عبارت را اضافه می‌کنیم. همچنین باید تغییر کند زمانی که جزئیات یک نوع عبارت خاص را تغییر می‌دهیم به عنوان مثال، اگر بخواهیم عملکرد select را برای پشتیبانی از subselect‌ها اصلاح کنیم. این دو دلیل برای تغییر به این معناست که کلاس Sql اصل مسئولیت واحد (SRP) را نقض می‌کند. <p>می‌توانیم این نقض SRP را از یک منظر سازمانی ساده شناسایی کنیم. طرح متدهای کلاس Sql نشان می‌دهد که متدهای خصوصی، مانند selectWithCriteria، به نظر می‌رسد که تنها به عبارات select مربوط باشند. رفتار متدهای خصوصی که تنها به یک زیرمجموعه کوچک از کلاس مربوط می‌شوند، می‌تواند به‌عنوان یک قاعده مفید برای شناسایی مناطق بالقوه برای بهبود عمل کند. با این حال، محرک اصلی برای اقدام باید خود تغییر سیستم باشد. اگر کلاس Sql به‌طور منطقی کامل در نظر گرفته شود، نیازی به جداسازی مسئولیت‌ها نداریم. اگر برای آینده قابل پیش‌بینی به عملکرد update نیاز نداشته باشیم، باید کلاس Sql را به حال خود بگذاریم. اما به محض اینکه خود را در حال باز کردن یک کلاس یافتیم، باید در نظر داشته باشیم که طراحی‌مان را اصلاح کنیم.</p><p>چه می‌شود اگر یک راه‌حل مشابه آنچه در فهرست 10-10 آمده است، در نظر بگیریم؟ هر متد عمومی که در کلاس Sql قبلی از فهرست 10-9 تعریف شده بود، به نسخه‌های فرعی خود از کلاس Sql جدا شده است. توجه کنید که متدهای خصوصی، مانند valuesList، مستقیماً به جایی که نیاز دارند منتقل می‌شوند. رفتار خصوصی مشترک به دو کلاس کاربردی، یعنی Where و ColumnList، جداسازی شده است.</p></div> <p>Listing 10-10 -- A set of closed classes</p><pre class="hljs"><code><span class="hljs-keyword">abstract</span> <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Sql</span> {
   <span class="hljs-keyword">public</span> <span class="hljs-title function_">Sql</span><span class="hljs-params">(String table, Column[] columns)</span>
   <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">public</span> String <span class="hljs-title function_">generate</span><span class="hljs-params">()</span>;
 }
@@ -515,36 +369,17 @@ SRP یکی از مفاهیم مهم در طراحی شی‌گرا است. همچ
     <span class="hljs-keyword">public</span> <span class="hljs-title function_">ColumnList</span><span class="hljs-params">(Column[] columns)</span>
     <span class="hljs-keyword">public</span> String <span class="hljs-title function_">generate</span><span class="hljs-params">()</span>
   }
-</code></pre>
-<div dir="rtl">
-کد در هر کلاس به شدت ساده می‌شود. زمان لازم برای درک هر کلاس به حداقل می‌رسد و خطر اینکه یک تابع دیگری را خراب کند، به طرز چشمگیری کاهش می‌یابد. از نظر تست، اثبات تمام بخش‌های منطقی این راه‌حل آسان‌تر می‌شود، زیرا کلاس‌ها به طور مستقل از یکدیگر هستند.
-<p>به‌همین ترتیب، زمانی که زمان افزودن عبارات به‌روزرسانی فرا برسد، هیچ‌یک از کلاس‌های موجود نیازی به تغییر ندارند! ما منطق ساخت عبارات به‌روزرسانی را در یک زیرکلاس جدید از Sql به نام UpdateSql کدنویسی می‌کنیم. هیچ کد دیگری در سیستم به خاطر این تغییر خراب نخواهد شد.</p>
-<p>منطق بازسازی‌شده Sql ما بهترین وضعیت را نمایندگی می‌کند. این منطق از اصل مسئولیت واحد (SRP) پشتیبانی می‌کند. همچنین از یک اصل کلیدی دیگر در طراحی کلاس‌های شیءگرا به نام اصل باز-بسته (Open-Closed Principle یا OCP) نیز پشتیبانی می‌کند: کلاس‌ها باید برای گسترش باز باشند اما برای تغییر بسته. کلاس Sql بازسازی‌شده ما به‌گونه‌ای طراحی شده است که اجازه اضافه کردن عملکرد جدید از طریق زیرکلاس‌ها را می‌دهد، اما می‌توانیم این تغییر را در حالی انجام دهیم که سایر کلاس‌ها بدون تغییر باقی بمانند. به سادگی کلاس UpdateSql را در محل خود قرار می‌دهیم.</p>
-<p>ما می‌خواهیم سیستم‌های خود را به گونه‌ای ساختاربندی کنیم که در هنگام به‌روزرسانی با ویژگی‌های جدید یا تغییر یافته، به کمترین میزان ممکن دست بزنیم. در یک سیستم ایده‌آل، ویژگی‌های جدید را با گسترش سیستم ادغام می‌کنیم، نه با تغییر کدهای موجود.</p>
-<h2>جداسازی از تغییر</h2>
-<p>نیازها تغییر می‌کنند، بنابراین کد نیز تغییر خواهد کرد. ما در درس OO 101 یاد گرفتیم که کلاس‌های عینی وجود دارند که جزئیات پیاده‌سازی (کد) را شامل می‌شوند و کلاس‌های انتزاعی که تنها مفاهیم را نمایندگی می‌کنند. یک کلاس مشتری که به جزئیات عینی وابسته است، در خطر است زمانی که آن جزئیات تغییر می‌کنند. ما می‌توانیم واسط‌ها و کلاس‌های انتزاعی را معرفی کنیم تا به جداسازی تأثیر آن جزئیات کمک کنیم.</p>
-<p>وابستگی به جزئیات عینی چالش‌هایی برای تست سیستم ما ایجاد می‌کند. اگر ما یک کلاس Portfolio بسازیم و آن به یک API خارجی به نام TokyoStockExchange وابسته باشد تا ارزش Portfolio را تعیین کند، موارد آزمایشی ما تحت تأثیر نوسانات چنین جستجویی قرار می‌گیرد. نوشتن یک تست دشوار است زمانی که هر پنج دقیقه یک پاسخ متفاوت دریافت می‌کنیم!</p>
-<p>به‌جای طراحی Portfolio به گونه‌ای که به‌طور مستقیم به TokyoStockExchange وابسته باشد، یک واسط به نام StockExchange ایجاد می‌کنیم که یک متد واحد را اعلام می‌کند:</p>
-</div>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">StockExchange</span> {
+</code></pre> <div dir="rtl"> کد در هر کلاس به شدت ساده می‌شود. زمان لازم برای درک هر کلاس به حداقل می‌رسد و خطر اینکه یک تابع دیگری را خراب کند، به طرز چشمگیری کاهش می‌یابد. از نظر تست، اثبات تمام بخش‌های منطقی این راه‌حل آسان‌تر می‌شود، زیرا کلاس‌ها به طور مستقل از یکدیگر هستند. <p>به‌همین ترتیب، زمانی که زمان افزودن عبارات به‌روزرسانی فرا برسد، هیچ‌یک از کلاس‌های موجود نیازی به تغییر ندارند! ما منطق ساخت عبارات به‌روزرسانی را در یک زیرکلاس جدید از Sql به نام UpdateSql کدنویسی می‌کنیم. هیچ کد دیگری در سیستم به خاطر این تغییر خراب نخواهد شد.</p><p>منطق بازسازی‌شده Sql ما بهترین وضعیت را نمایندگی می‌کند. این منطق از اصل مسئولیت واحد (SRP) پشتیبانی می‌کند. همچنین از یک اصل کلیدی دیگر در طراحی کلاس‌های شیءگرا به نام اصل باز-بسته (Open-Closed Principle یا OCP) نیز پشتیبانی می‌کند: کلاس‌ها باید برای گسترش باز باشند اما برای تغییر بسته. کلاس Sql بازسازی‌شده ما به‌گونه‌ای طراحی شده است که اجازه اضافه کردن عملکرد جدید از طریق زیرکلاس‌ها را می‌دهد، اما می‌توانیم این تغییر را در حالی انجام دهیم که سایر کلاس‌ها بدون تغییر باقی بمانند. به سادگی کلاس UpdateSql را در محل خود قرار می‌دهیم.</p><p>ما می‌خواهیم سیستم‌های خود را به گونه‌ای ساختاربندی کنیم که در هنگام به‌روزرسانی با ویژگی‌های جدید یا تغییر یافته، به کمترین میزان ممکن دست بزنیم. در یک سیستم ایده‌آل، ویژگی‌های جدید را با گسترش سیستم ادغام می‌کنیم، نه با تغییر کدهای موجود.</p><h2>جداسازی از تغییر</h2><p>نیازها تغییر می‌کنند، بنابراین کد نیز تغییر خواهد کرد. ما در درس OO 101 یاد گرفتیم که کلاس‌های عینی وجود دارند که جزئیات پیاده‌سازی (کد) را شامل می‌شوند و کلاس‌های انتزاعی که تنها مفاهیم را نمایندگی می‌کنند. یک کلاس مشتری که به جزئیات عینی وابسته است، در خطر است زمانی که آن جزئیات تغییر می‌کنند. ما می‌توانیم واسط‌ها و کلاس‌های انتزاعی را معرفی کنیم تا به جداسازی تأثیر آن جزئیات کمک کنیم.</p><p>وابستگی به جزئیات عینی چالش‌هایی برای تست سیستم ما ایجاد می‌کند. اگر ما یک کلاس Portfolio بسازیم و آن به یک API خارجی به نام TokyoStockExchange وابسته باشد تا ارزش Portfolio را تعیین کند، موارد آزمایشی ما تحت تأثیر نوسانات چنین جستجویی قرار می‌گیرد. نوشتن یک تست دشوار است زمانی که هر پنج دقیقه یک پاسخ متفاوت دریافت می‌کنیم!</p><p>به‌جای طراحی Portfolio به گونه‌ای که به‌طور مستقیم به TokyoStockExchange وابسته باشد، یک واسط به نام StockExchange ایجاد می‌کنیم که یک متد واحد را اعلام می‌کند:</p></div> <pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">StockExchange</span> {
  Money <span class="hljs-title function_">currentPrice</span><span class="hljs-params">(String symbol)</span>;
 }
-</code></pre>
-<div dir="rtl">
-ما TokyoStockExchange را طوری طراحی می‌کنیم که این واسط را پیاده‌سازی کند. همچنین اطمینان حاصل می‌کنیم که سازنده کلاس Portfolio یک مرجع از StockExchange را به‌عنوان آرگومان دریافت می‌کند:
-</div>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> Portfolio {
+</code></pre> <div dir="rtl"> ما TokyoStockExchange را طوری طراحی می‌کنیم که این واسط را پیاده‌سازی کند. همچنین اطمینان حاصل می‌کنیم که سازنده کلاس Portfolio یک مرجع از StockExchange را به‌عنوان آرگومان دریافت می‌کند: </div><pre class="hljs"><code><span class="hljs-keyword">public</span> Portfolio {
  <span class="hljs-keyword">private</span> StockExchange exchange;
  <span class="hljs-keyword">public</span> <span class="hljs-title function_">Portfolio</span><span class="hljs-params">(StockExchange exchange)</span> {
  <span class="hljs-built_in">this</span>.exchange = exchange;
  }
  <span class="hljs-comment">// ...</span>
 }
-</code></pre>
-<div dir="rtl">
-اکنون تست ما می‌تواند یک پیاده‌سازی قابل تست از واسط StockExchange ایجاد کند که رفتار TokyoStockExchange را شبیه‌سازی می‌کند. این پیاده‌سازی تست، مقدار فعلی را برای هر نماد مورد استفاده در تست ثابت می‌کند. اگر تست ما خرید پنج سهم از مایکروسافت را برای پرتفوی ما نشان دهد، پیاده‌سازی تست را طوری کدنویسی می‌کنیم که همیشه 100 دلار به‌ازای هر سهم مایکروسافت برگرداند. پیاده‌سازی تست ما از واسط StockExchange به یک جستجوی ساده در جدول کاهش می‌یابد. سپس می‌توانیم تستی بنویسیم که انتظار دارد ارزش کلی Portfolio ما 500 دلار باشد.
-</div>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">PortfolioTest</span> {
+</code></pre> <div dir="rtl"> اکنون تست ما می‌تواند یک پیاده‌سازی قابل تست از واسط StockExchange ایجاد کند که رفتار TokyoStockExchange را شبیه‌سازی می‌کند. این پیاده‌سازی تست، مقدار فعلی را برای هر نماد مورد استفاده در تست ثابت می‌کند. اگر تست ما خرید پنج سهم از مایکروسافت را برای پرتفوی ما نشان دهد، پیاده‌سازی تست را طوری کدنویسی می‌کنیم که همیشه 100 دلار به‌ازای هر سهم مایکروسافت برگرداند. پیاده‌سازی تست ما از واسط StockExchange به یک جستجوی ساده در جدول کاهش می‌یابد. سپس می‌توانیم تستی بنویسیم که انتظار دارد ارزش کلی Portfolio ما 500 دلار باشد. </div><pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">PortfolioTest</span> {
   <span class="hljs-keyword">private</span> FixedStockExchangeStub exchange;
   <span class="hljs-keyword">private</span> Portfolio portfolio;
   <span class="hljs-meta">@Before</span>
@@ -559,123 +394,216 @@ SRP یکی از مفاهیم مهم در طراحی شی‌گرا است. همچ
     Assert.assertEquals(<span class="hljs-number">500</span>, portfolio.value());
   }
 }
-</code></pre>
-<div dir="rtl">
-اگر یک سیستم به اندازه کافی از هم جدا باشد که به این صورت تست شود، همچنین انعطاف‌پذیری بیشتری خواهد داشت و امکان استفاده مجدد بیشتری را فراهم می‌آورد. عدم وابستگی به این معناست که عناصر سیستم ما بهتر از یکدیگر و از تغییرات جدا هستند. این جداسازی فهم هر عنصر سیستم را آسان‌تر می‌کند.
-<p>با حداقل کردن وابستگی به این شکل، کلاس‌های ما به یک اصل طراحی کلاس دیگر به نام اصل وارونگی وابستگی (Dependency Inversion Principle یا DIP) پایبند می‌شوند. به‌طور اساسی، DIP می‌گوید که کلاس‌های ما باید به انتزاعات وابسته باشند، نه به جزئیات عینی.</p>
-<p>به‌جای اینکه به جزئیات پیاده‌سازی کلاس TokyoStockExchange وابسته باشد، اکنون کلاس Portfolio به واسط StockExchange وابسته است. واسط StockExchange مفهوم انتزاعی درخواست قیمت فعلی یک نماد را نمایندگی می‌کند. این انتزاع تمام جزئیات خاص به‌دست آوردن چنین قیمتی، از جمله منبع به‌دست آوردن آن قیمت را جدا می‌کند.</p>
-</div>
-
-  </main>
-
-  <!-- فوتر مشترک -->
-  <footer class="footer">
-    <div class="container">
-      <p>
-        <img src="/Gitab/icone/copyright.svg" alt="کپی‌رایت" width="14" height="14"
-             style="vertical-align:middle;margin-inline:4px">
-        <span id="y"></span> Gitab — تمامی حقوق محفوظ است.
-      </p>
-    </div>
-  </footer>
-
-  <!-- سال و اسکریپت تغییر تم -->
-  <script>
+</code></pre> <div dir="rtl"> اگر یک سیستم به اندازه کافی از هم جدا باشد که به این صورت تست شود، همچنین انعطاف‌پذیری بیشتری خواهد داشت و امکان استفاده مجدد بیشتری را فراهم می‌آورد. عدم وابستگی به این معناست که عناصر سیستم ما بهتر از یکدیگر و از تغییرات جدا هستند. این جداسازی فهم هر عنصر سیستم را آسان‌تر می‌کند. <p>با حداقل کردن وابستگی به این شکل، کلاس‌های ما به یک اصل طراحی کلاس دیگر به نام اصل وارونگی وابستگی (Dependency Inversion Principle یا DIP) پایبند می‌شوند. به‌طور اساسی، DIP می‌گوید که کلاس‌های ما باید به انتزاعات وابسته باشند، نه به جزئیات عینی.</p><p>به‌جای اینکه به جزئیات پیاده‌سازی کلاس TokyoStockExchange وابسته باشد، اکنون کلاس Portfolio به واسط StockExchange وابسته است. واسط StockExchange مفهوم انتزاعی درخواست قیمت فعلی یک نماد را نمایندگی می‌کند. این انتزاع تمام جزئیات خاص به‌دست آوردن چنین قیمتی، از جمله منبع به‌دست آوردن آن قیمت را جدا می‌کند.</p></div> </article><nav class="chapter-single-next-nav"> <a href="/Gitab/books/book3/Book/11_Systems/Systems/" class="btn-next-chapter-action" id="nextChapterBtn" data-hub="/Gitab/books/book3/"> <span class="next-btn-text">فصل بعدی: سیستم‌ها و تفکیک دغدغه‌ها</span> <span class="next-btn-arrow">←</span> </a> </nav></div> <button class="fab-back-to-top" id="backToTopBtn" type="button" aria-label="رفتن به بالای صفحه" title="رفتن به بالا"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"> <polyline points="18 15 12 9 6 15"></polyline> </svg> </button></main> <footer class="footer-minimal"><div class="footer-container"> <div class="footer-top-row"><div class="footer-brand-side"> <a href="/Gitab/" class="footer-brand-anchor"> <img src="/Gitab/icone/logo.svg" alt="Gitab" width="28" height="28" loading="lazy" decoding="async"> <span class="footer-brand-title">گیتاب (Gitab)</span> </a> <p class="footer-tagline"> پلتفرم آزاد و مستقل برای ترجمهٔ دقیق و روان کتاب‌های مرجع مهندسی نرم‌افزار. </p></div> <div class="footer-nav-cols"><div class="footer-nav-col"> <span class="footer-nav-heading">موضوعات</span><ul class="footer-nav-list"> <li><a href="/Gitab/books/list-books/?cat=csharp">سی‌شارپ و دات‌نت</a></li><li><a href="/Gitab/books/list-books/?cat=clean-code">کد تمیز و بازآفرینی</a></li><li><a href="/Gitab/books/list-books/?cat=architecture">معماری و طراحی دامنه</a></li><li><a href="/Gitab/books/list-books/?cat=system">لینوکس و خط فرمان</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">بخش‌های سایت</span><ul class="footer-nav-list"> <li><a href="/Gitab/">صفحه اصلی</a></li><li><a href="/Gitab/books/list-books/">کتابخانه کامل</a></li><li><a href="/Gitab/courses/">دوره‌های آموزشی</a></li><li><a href="/Gitab/translator.html">تالار مترجمین</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">مشارکت و جامعه</span><ul class="footer-nav-list"> <li><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer">راهنمای همکاری در ترجمه</a></li><li><a href="https://github.com/hheydarian/Gitab/issues" target="_blank" rel="noopener noreferrer">پیشنهاد کتاب یا گزارش خطا</a></li></ul> </div></div> </div><div class="footer-bottom-line"> <span>© <span id="y">2026</span> Gitab — توسعه‌یافته برای جامعهٔ مهندسان نرم‌افزار ایرانی</span></div> </div></footer> <script>
   (() => {
     const root = document.documentElement;
     const btn = document.getElementById('themeToggle');
+    const sunIcon = btn ? btn.querySelector('.icon-sun') : null;
+    const moonIcon = btn ? btn.querySelector('.icon-moon') : null;
     const KEY = 'gitab-theme';
 
-    function updateTheme(s) {
-      root.setAttribute('data-theme', s);
-      const mode = s;  // فقط `dark` یا `light` خواهد بود
+    function updateTheme(mode) {
+      root.setAttribute('data-theme', mode);
       root.dataset.colorMode = mode;
-      btn.dataset.icon = mode === 'dark' ? 'moon' : 'sun';
+      if (sunIcon && moonIcon) {
+        if (mode === 'dark') {
+          sunIcon.style.display = 'inline-block';
+          moonIcon.style.display = 'none';
+        } else {
+          sunIcon.style.display = 'none';
+          moonIcon.style.display = 'inline-block';
+        }
+      }
     }
 
-    // وضعیت تم ذخیره شده از localStorage
-    let saved = localStorage.getItem(KEY) || 'light'; // پیش‌فرض روشن
+    let saved = 'dark';
+    try { saved = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
     updateTheme(saved);
 
-    // تنظیم مجدد تم هنگام تغییر وضعیت دکمه
-    btn.addEventListener('click', () => {
-      const current = localStorage.getItem(KEY) || 'light';
-      const next = current === 'dark' ? 'light' : 'dark';  // فقط دو حالت: تاریک و روشن
-      localStorage.setItem(KEY, next);
-      updateTheme(next);
-    });
+    if (btn) {
+      btn.addEventListener('click', () => {
+        let current = 'dark';
+        try { current = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+        const next = current === 'dark' ? 'light' : 'dark';
+        try { localStorage.setItem(KEY, next); } catch (e) {}
+        updateTheme(next);
+      });
+    }
 
-    // هنگام بارگذاری صفحه
     document.addEventListener('DOMContentLoaded', () => {
-      updateTheme(localStorage.getItem(KEY) || 'light');
+      let mode = 'dark';
+      try { mode = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+      updateTheme(mode);
+      const yearSpan = document.getElementById('y');
+      if (yearSpan) yearSpan.textContent = new Date().getFullYear();
     });
+
+    const mobBtn = document.getElementById('mobileMenuBtn');
+    const mobDrawer = document.getElementById('mobileDrawer');
+    if (mobBtn && mobDrawer) {
+      const setDrawerOpen = (open) => {
+        mobDrawer.classList.toggle('open', open);
+        mobBtn.classList.toggle('is-open', open);
+        mobBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        mobBtn.setAttribute('aria-label', open ? 'بستن منو' : 'باز کردن منو');
+        mobDrawer.setAttribute('aria-hidden', open ? 'false' : 'true');
+      };
+
+      mobBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        setDrawerOpen(!mobDrawer.classList.contains('open'));
+      });
+
+      mobDrawer.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => setDrawerOpen(false));
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && mobDrawer.classList.contains('open')) {
+          setDrawerOpen(false);
+        }
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!mobDrawer.contains(e.target) && !mobBtn.contains(e.target)) {
+          setDrawerOpen(false);
+        }
+      });
+    }
+
+    if ('serviceWorker' in navigator) {
+      const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+      if (isLocalhost) {
+        navigator.serviceWorker.getRegistrations().then(regs => {
+          for (const reg of regs) reg.unregister();
+        });
+        if ('caches' in window) {
+          caches.keys().then(names => {
+            for (const name of names) caches.delete(name);
+          });
+        }
+      } else {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/Gitab/sw.js').catch(() => {});
+        });
+      }
+    }
   })();
-</script>
-
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-  <script>hljs.highlightAll();</script>
-
-  <script>
+  </script> <script>
   document.querySelectorAll('pre code').forEach(block => {
+    const pre = block.parentNode;
+    if (!pre || pre.querySelector('.copy-btn')) return;
+
+    const copySvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
+    const okSvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+
     const btn = document.createElement('button');
     btn.className = 'copy-btn';
-
-    const icon = document.createElement('img');
-    icon.src = "/Gitab/icone/copy.svg";
-    icon.alt = 'Copy';
-    btn.appendChild(icon);
-
-    block.parentNode.insertBefore(btn, block);
+    btn.setAttribute('aria-label', 'کپی کد');
+    btn.setAttribute('title', 'کپی کد');
+    btn.setAttribute('type', 'button');
+    btn.innerHTML = copySvg;
+    pre.appendChild(btn);
 
     btn.addEventListener('click', async () => {
-      await navigator.clipboard.writeText(block.textContent);
-      btn.classList.add('copied');
-      setTimeout(() => btn.classList.remove('copied'), 1500);
-    });
-  });
-  </script>
-
-  <script>
-  document.body.dataset.page = window.location.pathname;
-
-  const menuBtn = document.querySelector(".menu-toggle");
-  const nav = document.querySelector(".nav");
-
-  if (menuBtn && nav) {
-    menuBtn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      nav.classList.toggle("show");
-    });
-
-    document.addEventListener("click", (e) => {
-      const clickedInsideNav = nav.contains(e.target);
-      const clickedMenuButton = menuBtn.contains(e.target);
-      if (!clickedInsideNav && !clickedMenuButton) {
-        nav.classList.remove("show");
+      try {
+        await navigator.clipboard.writeText(block.textContent);
+        btn.classList.add('copied');
+        btn.innerHTML = okSvg;
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          btn.innerHTML = copySvg;
+        }, 1800);
+      } catch (err) {
+        console.error('Copy failed:', err);
       }
     });
-  }
-  </script>
-
-  <script>
-    document.getElementById('y').textContent = new Date().getFullYear();
-  </script>
-  <script>
-document.getElementById("openDonate").addEventListener("click", () => {
-  document.getElementById("donateModal").style.display = "block";
-});
-document.getElementById("closeDonate").addEventListener("click", () => {
-  document.getElementById("donateModal").style.display = "none";
-});
-document.querySelectorAll(".copy-btn").forEach(btn => {
-  btn.addEventListener("click", () => {
-    navigator.clipboard.writeText(btn.dataset.copy);
-  
-    setTimeout(() => (btn.textContent = "کپی"), 2000);
   });
-});
-</script>
+  </script> <script>
+  (() => {
+    const article = document.getElementById('chapterArticle');
+    if (!article) return;
 
-</body>
-</html>
+    const progressBar = document.getElementById('readingProgressBar');
+    if (progressBar) {
+      window.addEventListener('scroll', () => {
+        const docElem = document.documentElement;
+        const totalHeight = docElem.scrollHeight - docElem.clientHeight;
+        if (totalHeight > 0) {
+          const progress = (window.pageYOffset / totalHeight) * 100;
+          progressBar.style.width = Math.min(100, Math.max(0, progress)) + '%';
+        }
+      }, { passive: true });
+    }
+
+    const btt = document.getElementById('backToTopBtn');
+    if (btt) {
+      window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 250) {
+          btt.classList.add('visible');
+        } else {
+          btt.classList.remove('visible');
+        }
+      }, { passive: true });
+
+      btt.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+
+    article.querySelectorAll('img').forEach(img => {
+      if (!img.hasAttribute('loading')) img.loading = 'lazy';
+      if (!img.hasAttribute('decoding')) img.decoding = 'async';
+      const parent = img.parentElement;
+      if (parent && parent.tagName === 'P') {
+        parent.style.textAlign = 'center';
+      }
+
+      img.addEventListener('error', function() {
+        const src = this.getAttribute('src');
+        if (src && src.includes('assets/image/')) {
+          const parts = src.split('assets/image/');
+          const corrected = '/Gitab/books/book3/assets/image/' + parts[1];
+          if (this.src !== corrected) {
+            this.src = corrected;
+          }
+        }
+      });
+    });
+
+    article.querySelectorAll('p').forEach(p => {
+      const trimmed = p.innerText.trim();
+      if (trimmed.startsWith('💡') || trimmed.startsWith('نکته:')) {
+        p.classList.add('react-callout', 'callout-tip');
+      } else if (trimmed.startsWith('⚠️') || trimmed.startsWith('هشدار:')) {
+        p.classList.add('react-callout', 'callout-warning');
+      } else if (trimmed.startsWith('📌') || trimmed.startsWith('مهم:')) {
+        p.classList.add('react-callout', 'callout-important');
+      } else if (trimmed.startsWith('🔹') || trimmed.startsWith('🔸')) {
+        p.classList.add('react-callout', 'callout-note');
+      }
+    });
+  })();
+  </script> <script type="speculationrules">{"prefetch":[{"where":{"and":[{"href_matches":"/Gitab/*"},{"not":{"href_matches":"/Gitab/downloads/*"}},{"not":{"selector_matches":"[download], [target='_blank']"}}]},"eagerness":"moderate"}]}</script> <script>
+  (() => {
+    if (window.HTMLScriptElement && HTMLScriptElement.supports && HTMLScriptElement.supports('speculationrules')) return;
+    const seen = new Set([window.location.href]);
+    let count = 0;
+    const prefetchLink = (e) => {
+      if (count >= 12) return;
+      const a = e.target && e.target.closest ? e.target.closest('header a, .chapter-single-next-nav a, .syllabus-chapter-item a, .btn-hero-read, .btn-card-read') : null;
+      if (!a || !a.href || a.hasAttribute('download') || a.target === '_blank') return;
+      if (a.origin !== window.location.origin || a.pathname.includes('/downloads/')) return;
+      const clean = a.href.split('#')[0];
+      if (!clean || seen.has(clean)) return;
+      seen.add(clean);
+      count++;
+      const l = document.createElement('link');
+      l.rel = 'prefetch';
+      l.href = clean;
+      document.head.appendChild(l);
+    };
+    document.addEventListener('pointerenter', prefetchLink, { capture: true, passive: true });
+    document.addEventListener('touchstart', prefetchLink, { capture: true, passive: true });
+  })();
+  </script></body></html>

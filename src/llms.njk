@@ -1,0 +1,29 @@
+---
+permalink: /llms.txt
+eleventyExcludeFromCollections: true
+---
+# گیتاب (Gitab)
+
+> پلتفرم آزاد و رایگان ترجمه دقیق فارسی کتاب‌های مرجع مهندسی نرم‌افزار، کد تمیز، سی‌شارپ و دات‌نت، معماری دامنه‌محور، لینوکس و دوره‌های کاربردی هوش مصنوعی مولد.
+> Open Persian digital library of translated software engineering books, Linux references, and practical AI developer courses hosted under `/Gitab/`.
+
+## Core Navigation & Search
+
+- [صفحه اصلی گیتاب]({{ site.url }}{{ '/' | url }}): معرفی پلتفرم، برگزیده‌ها و دسترسی سریع به موضوعات مهندسی نرم‌افزار
+- [کتابخانه کامل کتاب‌ها]({{ site.url }}{{ '/books/list-books/' | url }}): کاتالوگ تمام {{ books.length }} کتاب فنی ترجمه‌شده با امکان جستجو و فیلتر دسته‌بندی (`?cat=csharp`, `?cat=clean-code`, `?cat=architecture`, `?cat=system`, `?cat=ai`, `?cat=career`, `?cat=psychology`, `?cat=general`)
+- [دوره‌های تخصصی و کاربردی]({{ site.url }}{{ '/courses/' | url }}): دوره‌های پروژه‌محور هوش مصنوعی مولد با درسنامه‌های فارسی و کدهای عملی پایتون و تایپ‌اسکریپت
+- [تالار مترجمین و همکاران]({{ site.url }}{{ '/translator.html' | url }}): معرفی مترجمان، ویراستاران و مشارکت‌کنندگان گیتاب
+- [فهرست کامل فصل‌ها و درسنامه‌ها (LLMs Full Index)]({{ site.baseUrl }}/llms-full.txt): نمایه تفصیلی تمام فصل‌های کتاب‌ها و جلسات دوره‌ها برای عامل‌های هوش مصنوعی
+- [نقشه سایت (XML Sitemap)]({{ site.baseUrl }}/sitemap.xml): نقشه کامل آدرس‌های ایندکس‌شده سایت
+
+## کتاب‌های تخصصی (Translated Books)
+
+{% for book in books -%}
+- [{{ book.title | safe }} — {{ book.persianTitle | safe }}]({{ site.url }}{{ book.url | url }}): {{ book.desc | safe }} (نویسنده: {{ book.author | safe }} | مترجم: {{ book.translator | safe }} | موضوع: {{ book.categoryName | safe }} | {{ book.chaptersCount }} فصل)
+{% endfor %}
+
+## دوره‌های آموزشی (Courses)
+
+{% for course in courses -%}
+- [{{ course.title | safe }} — {{ course.persianTitle | safe }}]({{ site.url }}{{ course.url | url }}): {{ course.desc | safe }} (سطح: {{ course.level | safe }} | {{ course.lessonsCount }} جلسه کامل)
+{% endfor %}

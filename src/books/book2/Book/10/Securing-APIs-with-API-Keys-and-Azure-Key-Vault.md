@@ -2,7 +2,7 @@
 layout: layout.njk
 title: امن‌سازی APIها با کلیدهای API و Azure Key Vault
 ---
-# فصل دهم: 🔒 امن‌سازی APIها با کلیدهای API و Azure Key Vault
+# فصل دهم:  امن‌سازی APIها با کلیدهای API و Azure Key Vault
 
 در این فصل، می‌خواهیم ببینیم چگونه می‌توانیم اسرار و اطلاعات حساس را در **Azure Key Vault** نگه‌داری کنیم. همچنین بررسی خواهیم کرد که چگونه می‌توانیم با استفاده از **کلیدهای API**، کلیدهای خود را با **احراز هویت** و **مجوز مبتنی بر نقش (Role-Based Authorization)** امن کنیم. برای کسب تجربه عملی در زمینه امنیت API، یک **API کامل و کاربردی در حوزه FinTech** خواهیم ساخت.
 
@@ -21,20 +21,20 @@ API ما داده‌های API شخص ثالث را با استفاده از ی�
 
 ---
 
-### 🎯 اهداف فصل
+###  اهداف فصل
 
 با مطالعه این فصل، شما با اصول طراحی خوب API آشنا خواهید شد و مهارت‌های لازم برای ارتقای توانایی‌های خود در کار با API را کسب خواهید کرد. این فصل به شما کمک می‌کند تا مهارت‌های زیر را بیاموزید:
 
-* امن‌سازی یک API با **کلید API مشتری (Client API Key)** 🔑
+* امن‌سازی یک API با **کلید API مشتری (Client API Key)** 
 * ذخیره و بازیابی اسرار با استفاده از **Azure Key Vault**
 * اجرای دستورات API با **Postman** برای ارسال و دریافت داده
 * درخواست و استفاده از APIهای شخص ثالث در **RapidAPI.com**
 * محدودسازی استفاده از API (**API Throttling**)
-* نوشتن **FinTech APIs** که از داده‌های مالی آنلاین استفاده می‌کنند 💹
+* نوشتن **FinTech APIs** که از داده‌های مالی آنلاین استفاده می‌کنند 
 
 ---
 
-### ⚙️ پیش‌نیازهای فنی
+###  پیش‌نیازهای فنی
 
 برای بهره‌مندی کامل از این فصل، مطمئن شوید که پیش‌نیازهای فنی زیر را آماده کرده‌اید:
 
@@ -47,7 +47,7 @@ API ما داده‌های API شخص ثالث را با استفاده از ی�
 
 ---
 
-### 🚀 شروع پروژه API – تقویم سود سهام
+###  شروع پروژه API – تقویم سود سهام
 
 بهترین روش یادگیری، **یادگیری با عمل کردن** است. بنابراین، ما یک API کاربردی می‌سازیم و آن را امن می‌کنیم. این API ممکن است کامل نباشد و جا برای بهبود داشته باشد، اما شما می‌توانید این بهبودها را خودتان پیاده‌سازی کرده و پروژه را توسعه دهید. هدف اصلی این است که یک API کاملاً عملی داشته باشیم که **یک کار انجام دهد:** بازگرداندن داده‌های مالی شامل **تمام سود سهام شرکت‌ها در سال جاری**.
 
@@ -59,7 +59,7 @@ API تقویم سود سهام ما، که در این فصل خواهیم سا�
 
 ---
 
-### 🏗️ ساختار پروژه
+###  ساختار پروژه
 
 پروژه‌ای که در این فصل خواهیم ساخت، یک **Web API** است که **JSON پردازش‌شده** از APIهای مالی شخص ثالث را بازمی‌گرداند. پروژه، **لیستی از شرکت‌ها از یک بورس مشخص** دریافت می‌کند و سپس برای هر شرکت، داده‌های **سود سهام** را دریافت می‌کند. داده‌های سود سهام برای سال جاری پردازش می‌شوند و در نهایت به **فراخواننده API** در قالب **JSON** بازگردانده می‌شوند.
 
@@ -71,15 +71,15 @@ APIهایی که استفاده خواهیم کرد، بخشی از **Morningsta
 
 ---
 
-### 🧩 جزئیات پروژه
+###  جزئیات پروژه
 
 راه‌حل ما شامل یک پروژه خواهد بود: یک **ASP.NET Core Application** که **Target Framework** آن **.NET Core 3.1** یا بالاتر است.
 
-در ادامه، نحوه **دسترسی به Morningstar API** را بررسی خواهیم کرد. ✅
+در ادامه، نحوه **دسترسی به Morningstar API** را بررسی خواهیم کرد. 
 
-### 🌐 دسترسی به Morningstar API
+###  دسترسی به Morningstar API
 
-به آدرس [https://rapidapi.com/integraatio/api/morningstar1](https://rapidapi.com/integraatio/api/morningstar1) بروید و **کلید دسترسی API** خود را درخواست کنید. این API یک **Freemium API** است، به این معنا که شما مجاز هستید تعداد مشخصی فراخوانی را به صورت رایگان برای مدت محدودی انجام دهید و پس از آن نیاز به پرداخت هزینه دارید. کمی زمان بگذارید و مستندات API را مطالعه کنید. به **پلن‌های قیمتی** توجه کنید و پس از دریافت کلید، آن را **محرمانه نگه دارید** 🔑.
+به آدرس [https://rapidapi.com/integraatio/api/morningstar1](https://rapidapi.com/integraatio/api/morningstar1) بروید و **کلید دسترسی API** خود را درخواست کنید. این API یک **Freemium API** است، به این معنا که شما مجاز هستید تعداد مشخصی فراخوانی را به صورت رایگان برای مدت محدودی انجام دهید و پس از آن نیاز به پرداخت هزینه دارید. کمی زمان بگذارید و مستندات API را مطالعه کنید. به **پلن‌های قیمتی** توجه کنید و پس از دریافت کلید، آن را **محرمانه نگه دارید** .
 
 APIهایی که ما به آن‌ها علاقه‌مندیم به شرح زیر هستند:
 
@@ -97,11 +97,11 @@ APIهایی که ما به آن‌ها علاقه‌مندیم به شرح زی�
 
 مهم نیست یک شرکت چند داده سود سهام دارد؛ ما تنها به **اولین رکورد** که **به‌روزترین** است، علاقه‌مندیم.
 
-حالا که کلید API خود را دارید (فرض بر این است که مراحل را دنبال کرده‌اید)، می‌توانیم **ساخت API خود را شروع کنیم** 🚀.
+حالا که کلید API خود را دارید (فرض بر این است که مراحل را دنبال کرده‌اید)، می‌توانیم **ساخت API خود را شروع کنیم** .
 
 ---
 
-### 🔐 ذخیره کلید Morningstar API در Azure Key Vault
+###  ذخیره کلید Morningstar API در Azure Key Vault
 
 ما از **Azure Key Vault** و **Managed Service Identity (MSI)** در یک برنامه وب **ASP.NET Core** استفاده خواهیم کرد. بنابراین، قبل از ادامه، به یک **اشتراک Azure** نیاز دارید. برای مشتریان جدید، یک پیشنهاد رایگان ۱۲ ماهه در دسترس است: [Azure Free](http://azure.microsoft.com/en-us/free)
 
@@ -120,15 +120,15 @@ APIهایی که ما به آن‌ها علاقه‌مندیم به شرح زی�
 ![Conventions-UsedThis-Book](../../../assets/image/10/Table%2010-1.jpeg)
 </div>
 
-### 🏢 استفاده از Azure AD و MSI برای احراز هویت
+###  استفاده از Azure AD و MSI برای احراز هویت
 
 **Azure Active Directory (Azure AD)** توسط **MSI** برای تزریق **Service Principal** به نمونه سرویس استفاده می‌شود. یک منبع Azure به نام **Local Metadata Service** برای دریافت **Access Token** استفاده می‌شود و برای احراز هویت دسترسی سرویس به **Azure Key Vault** کاربرد دارد.
 
-کد ما سپس با **Local Metadata Service** که روی منبع Azure در دسترس است، تماس می‌گیرد تا **Access Token** را دریافت کند. این Access Token که از **Local MSI Endpoint** استخراج شده، توسط کد ما برای **احراز هویت در سرویس Azure Key Vault** استفاده می‌شود 🔑.
+کد ما سپس با **Local Metadata Service** که روی منبع Azure در دسترس است، تماس می‌گیرد تا **Access Token** را دریافت کند. این Access Token که از **Local MSI Endpoint** استخراج شده، توسط کد ما برای **احراز هویت در سرویس Azure Key Vault** استفاده می‌شود .
 
 ---
 
-### 🔹 ورود به Azure و ایجاد Resource Group
+###  ورود به Azure و ایجاد Resource Group
 
 Azure CLI را باز کرده و دستور زیر را برای ورود به Azure تایپ کنید:
 
@@ -148,7 +148,7 @@ az group create --name "<YourResourceGroupName>" --location "East US"
 
 ---
 
-### 🔑 ایجاد Key Vault
+###  ایجاد Key Vault
 
 برای ایجاد یک **Key Vault**، اطلاعات زیر مورد نیاز است:
 
@@ -166,7 +166,7 @@ az keyvault create --name "<YourKeyVaultName>" --resource-group "<YourResourceGr
 
 ---
 
-### 🔹 افزودن کلید Morningstar API به Key Vault
+###  افزودن کلید Morningstar API به Key Vault
 
 کلیدی که باید به پروژه اضافه کنیم، **MorningstarApiKey** است. برای افزودن این کلید به Key Vault، دستور زیر را اجرا کنید:
 
@@ -180,11 +180,11 @@ az keyvault secret set --vault-name "<YourKeyVaultName>" --name "MorningstarApiK
 az keyvault secret show --name "MorningstarApiKey" --vault-name "<YourKeyVaultName>"
 ```
 
-اگر همه چیز درست باشد، مقدار کلید در **کنسول نمایش داده می‌شود** و نام و مقدار کلید ذخیره‌شده را خواهید دید ✅.
+اگر همه چیز درست باشد، مقدار کلید در **کنسول نمایش داده می‌شود** و نام و مقدار کلید ذخیره‌شده را خواهید دید .
 
 ---
 
-### 🌐 ایجاد برنامه وب ASP.NET Core – تقویم سود سهام در Azure
+###  ایجاد برنامه وب ASP.NET Core – تقویم سود سهام در Azure
 
 برای تکمیل این مرحله از پروژه، به **Visual Studio 2019** با **ASP.NET و Web Development Workload** نصب‌شده نیاز دارید.
 
@@ -195,7 +195,7 @@ az keyvault secret show --name "MorningstarApiKey" --vault-name "<YourKeyVaultNa
 ![Conventions-UsedThis-Book](../../../assets/image/10/Table%2010-2.jpeg)
 </div>
 
-۲. مطمئن شوید که **API** انتخاب شده و گزینه **No Authentication** تنظیم شده باشد 🔧
+۲. مطمئن شوید که **API** انتخاب شده و گزینه **No Authentication** تنظیم شده باشد 
 <div align="center">
 
 ![Conventions-UsedThis-Book](../../../assets/image/10/Table%2010-3.jpeg)
@@ -215,7 +215,7 @@ az keyvault secret show --name "MorningstarApiKey" --vault-name "<YourKeyVaultNa
 
 ---
 
-### ☁️ انتشار برنامه وب ما در Azure
+###  انتشار برنامه وب ما در Azure
 
 قبل از اینکه بتوانیم برنامه‌های وب خود را منتشر کنیم، ابتدا باید یک **Azure App Service جدید** ایجاد کنیم تا برنامه را روی آن منتشر کنیم.
 برای این کار، نیاز به یک **Resource Group** برای نگهداری App Service داریم و همچنین به یک **Hosting Plan جدید** که شامل **مکان، اندازه و ویژگی‌های سرور وب** باشد، نیاز داریم.
@@ -238,7 +238,7 @@ az keyvault secret show --name "MorningstarApiKey" --vault-name "<YourKeyVaultNa
 ![Conventions-UsedThis-Book](../../../assets/image/10/Table%2010-5.jpeg)
 </div>
 
-۳. **Resource Group** را انتخاب کنید. همچنین توصیه می‌شود که **تنظیمات Application Insights** را نیز پیکربندی کنید 🔍
+۳. **Resource Group** را انتخاب کنید. همچنین توصیه می‌شود که **تنظیمات Application Insights** را نیز پیکربندی کنید 
 <div align="center">
 
 ![Conventions-UsedThis-Book](../../../assets/image/10/Table%2010-6.jpeg)
@@ -277,7 +277,7 @@ https://dividend-calendar.azurewebsites.net/weatherforecast
 ]
 ```
 
-خدمات ما اکنون **زنده و فعال** است ✅.
+خدمات ما اکنون **زنده و فعال** است .
 اگر وارد **Azure Portal** شوید و به **Resource Group** مربوط به **Hosting Plan** خود بروید، چهار منبع خواهید دید:
 
 1. **App Service:** dividend-calendar
@@ -292,23 +292,23 @@ https://dividend-calendar.azurewebsites.net/weatherforecast
 
 اگر از **صفحه اصلی Azure Portal** ([https://portal.azure.com/#home](https://portal.azure.com/#home)) روی **App Service** خود کلیک کنید، خواهید دید که می‌توانید:
 
-* به سرویس خود دسترسی داشته باشید و آن را مرور کنید 🌐
-* سرویس را **متوقف (Stop)** کنید ⏹️
-* سرویس را **راه‌اندازی مجدد (Restart)** کنید 🔄
-* سرویس را **حذف (Delete)** کنید 🗑️
+* به سرویس خود دسترسی داشته باشید و آن را مرور کنید 
+* سرویس را **متوقف (Stop)** کنید ⏹
+* سرویس را **راه‌اندازی مجدد (Restart)** کنید 
+* سرویس را **حذف (Delete)** کنید 
 
 <div align="center">
 
 ![Conventions-UsedThis-Book](../../../assets/image/10/Table%2010-10.jpeg)
 </div>
 
-### 🗂️ آماده‌سازی پروژه و شروع ساخت تقویم سود سهام
+###  آماده‌سازی پروژه و شروع ساخت تقویم سود سهام
 
 حالا که پروژه ما با **Application Insights** آماده است و **کلید Morningstar API** به‌صورت امن ذخیره شده، می‌توانیم **ساخت تقویم سود سهام** را آغاز کنیم.
 
 ---
 
-### 🔑 استفاده از کلید API برای امن‌سازی Dividend Calendar API
+###  استفاده از کلید API برای امن‌سازی Dividend Calendar API
 
 برای امن‌سازی دسترسی به **Dividend Calendar API**، از **کلید API مشتری (Client API Key)** استفاده خواهیم کرد. روش‌های مختلفی برای اشتراک‌گذاری کلیدهای مشتری با کاربران وجود دارد، اما ما اینجا به آن نمی‌پردازیم؛ شما می‌توانید استراتژی خود را داشته باشید. تمرکز ما روی **فعال‌سازی دسترسی احراز هویت‌شده و مجاز به API** است.
 
@@ -321,7 +321,7 @@ https://dividend-calendar.azurewebsites.net/weatherforecast
 
 ---
 
-### 🏗️ راه‌اندازی Repository
+###  راه‌اندازی Repository
 
 ۱. یک **پوشه جدید با نام Repository** به پروژه اضافه کنید.
 ۲. یک **Interface** به نام `IRepository` و یک کلاس به نام `InMemoryRepository` که این Interface را پیاده‌سازی می‌کند، اضافه کنید.
@@ -346,7 +346,7 @@ namespace CH09_DividendCalendar.Repository
 
 ---
 
-### ⚙️ پیاده‌سازی InMemoryRepository
+###  پیاده‌سازی InMemoryRepository
 
 **Usingها:**
 
@@ -394,7 +394,7 @@ public class InMemoryRepository : IRepository
 
 ---
 
-### 📡 استفاده از X-Api-Key
+###  استفاده از X-Api-Key
 
 ما از **HTTP Header** به نام `X-Api-Key` استفاده خواهیم کرد که **کلید API مشتری** را نگه‌داری کرده و برای **احراز هویت و مجوز** به API ارسال می‌شود.
 
@@ -420,7 +420,7 @@ namespace CH09_DividendCalendar.Shared
 
 ---
 
-### 📄 تنظیم JSON Naming Policy
+###  تنظیم JSON Naming Policy
 
 از آنجا که با داده‌های JSON کار می‌کنیم، نیاز به **تنظیم سیاست نام‌گذاری JSON** داریم.
 
@@ -446,9 +446,9 @@ namespace CH09_DividendCalendar.Json
 
 ---
 
-اکنون آماده‌ایم تا **احراز هویت و مجوز** را به API خود اضافه کنیم ✅.
+اکنون آماده‌ایم تا **احراز هویت و مجوز** را به API خود اضافه کنیم .
 
-### 🔒 راه‌اندازی Authentication و Authorization
+###  راه‌اندازی Authentication و Authorization
 
 حال به سراغ ساخت **کلاس‌های امنیتی برای احراز هویت و مجوز** می‌رویم. قبل از شروع، بهتر است تفاوت بین **Authentication** و **Authorization** را روشن کنیم:
 
@@ -457,7 +457,7 @@ namespace CH09_DividendCalendar.Json
 
 ---
 
-### 🛡️ افزودن Authentication
+###  افزودن Authentication
 
 ۱. یک پوشه به نام **Security** به پروژه اضافه کنید.
 ۲. درون این پوشه، دو پوشه جدید به نام‌های **Authentication** و **Authorisation** ایجاد کنید.
@@ -490,7 +490,7 @@ public ApiKey(int id, string owner, string key, DateTime created,
 
 ---
 
-### ⚠️ کلاس UnauthorizedProblemDetails
+###  کلاس UnauthorizedProblemDetails
 
 در صورت عدم موفقیت در احراز هویت، کاربر با **Error 403 Unauthorized** مواجه می‌شود.
 
@@ -511,7 +511,7 @@ public class UnauthorizedProblemDetails : ProblemDetails
 
 ---
 
-### 🧩 افزودن AuthenticationBuilderExtensions
+###  افزودن AuthenticationBuilderExtensions
 
 ```csharp
 public static class AuthenticationBuilderExtensions
@@ -533,7 +533,7 @@ public static class AuthenticationBuilderExtensions
 
 ---
 
-### ⚙️ کلاس ApiKeyAuthenticationOptions
+###  کلاس ApiKeyAuthenticationOptions
 
 ```csharp
 public class ApiKeyAuthenticationOptions : AuthenticationSchemeOptions
@@ -548,7 +548,7 @@ public class ApiKeyAuthenticationOptions : AuthenticationSchemeOptions
 
 ---
 
-### 🔑 کلاس ApiKeyAuthenticationHandler
+###  کلاس ApiKeyAuthenticationHandler
 
 این کلاس **اصلی برای اعتبارسنجی کلید API** و اطمینان از دسترسی مشتری به API است:
 
@@ -566,7 +566,7 @@ public class ApiKeyAuthenticationHandler : AuthenticationHandler<ApiKeyAuthentic
 
 ---
 
-### 🔧 Constructor
+###  Constructor
 
 ```csharp
 public ApiKeyAuthenticationHandler(
@@ -586,7 +586,7 @@ public ApiKeyAuthenticationHandler(
 
 ---
 
-### ⚡ متدهای HandleChallengeAsync و HandleForbiddenAsync
+###  متدهای HandleChallengeAsync و HandleForbiddenAsync
 
 ```csharp
 protected override async Task HandleChallengeAsync(AuthenticationProperties properties)
@@ -611,7 +611,7 @@ protected override async Task HandleForbiddenAsync(AuthenticationProperties prop
 
 ---
 
-### 🔍 متد HandleAuthenticateAsync
+###  متد HandleAuthenticateAsync
 
 ```csharp
 protected override async Task<AuthenticateResult> HandleAuthenticateAsync()
@@ -645,15 +645,15 @@ protected override async Task<AuthenticateResult> HandleAuthenticateAsync()
 
 ---
 
-✅ با این کار **احراز هویت (Authentication)** کامل شد. مرحله بعدی، **پیاده‌سازی Authorization** است.
+ با این کار **احراز هویت (Authentication)** کامل شد. مرحله بعدی، **پیاده‌سازی Authorization** است.
 
-### 🛡️ افزودن Authorization
+###  افزودن Authorization
 
 کلاس‌های **Authorization** را در پوشه **Authorisation** اضافه می‌کنیم.
 
 ---
 
-### 🔑 تعریف نقش‌ها (Roles)
+###  تعریف نقش‌ها (Roles)
 
 ```csharp
 public struct Roles
@@ -668,7 +668,7 @@ public struct Roles
 
 ---
 
-### 📜 تعریف سیاست‌ها (Policies)
+###  تعریف سیاست‌ها (Policies)
 
 ```csharp
 public struct Policies
@@ -682,7 +682,7 @@ public struct Policies
 
 ---
 
-### ⚠️ کلاس ForbiddenProblemDetails
+###  کلاس ForbiddenProblemDetails
 
 ```csharp
 public class ForbiddenProblemDetails : ProblemDetails
@@ -702,7 +702,7 @@ public class ForbiddenProblemDetails : ProblemDetails
 
 ---
 
-### 🧩 Authorization Handlers
+###  Authorization Handlers
 
 #### ExternalAuthorisationHandler
 
@@ -756,7 +756,7 @@ public class InternalRequirement : IAuthorizationRequirement
 
 ---
 
-### ⚙️ بروزرسانی کلاس Startup
+###  بروزرسانی کلاس Startup
 
 #### متد Configure
 
@@ -808,15 +808,15 @@ services.AddAuthorization(options =>
 
 ---
 
-✅ حالا تمام کلاس‌های **امنیت API Key** اضافه شدند و می‌توانیم با **Postman** صحت عملکرد **Authentication و Authorization** را تست کنیم.
+ حالا تمام کلاس‌های **امنیت API Key** اضافه شدند و می‌توانیم با **Postman** صحت عملکرد **Authentication و Authorization** را تست کنیم.
 
-### 🧪 تست امنیت API Key
+###  تست امنیت API Key
 
 در این بخش، قصد داریم **احراز هویت و مجوز API Key** خود را با **Postman** تست کنیم.
 
 ---
 
-### ۱️⃣ ایجاد کنترلر DividendCalendar
+### ۱⃣ ایجاد کنترلر DividendCalendar
 
 به پوشه **Controllers** یک کلاس به نام `DividendCalendar` اضافه کنید و آن را به شکل زیر بروزرسانی کنید:
 
@@ -848,7 +848,7 @@ public class DividendCalendar : ControllerBase
 
 ---
 
-### ۲️⃣ تست با Postman
+### ۲⃣ تست با Postman
 
 ۱. **Postman** را باز کنید و یک درخواست جدید **GET** بسازید.
 2\. URL زیر را وارد کنید:
@@ -876,13 +876,13 @@ Hello from GetDividendCalendar.
 ![Conventions-UsedThis-Book](../../../assets/image/10/Table%2010-11.jpeg)
 </div>
 
-### 🔐 تست امنیت API بدون کلید
+###  تست امنیت API بدون کلید
 
 همان‌طور که مشاهده می‌کنید، **بدون قرار دادن API Key** در درخواست API، پاسخ **401 Unauthorized** دریافت می‌شود و JSON خطا مطابق با کلاس **ForbiddenProblemDetails** نمایش داده می‌شود.
 
 ---
 
-### ۱️⃣ افزودن هدر X-Api-Key
+### ۱⃣ افزودن هدر X-Api-Key
 
 * در Postman به بخش **Headers** بروید و هدر زیر را اضافه کنید:
 
@@ -893,7 +893,7 @@ Value: C5BFF7F0-B4DF-475E-A331-F737424F013C
 
 ---
 
-### ۲️⃣ ارسال درخواست
+### ۲⃣ ارسال درخواست
 
 * پس از افزودن هدر، روی **Send** کلیک کنید.
 * این بار، با وجود **API Key معتبر**، پاسخ موفقیت‌آمیز داخلی دریافت می‌کنید:
@@ -902,13 +902,13 @@ Value: C5BFF7F0-B4DF-475E-A331-F737424F013C
 Hello from GetDividendCalendar.
 ```
 
-✅ بدین ترتیب، **احراز هویت و مجوز کاربران داخلی** با موفقیت تست شد.
+ بدین ترتیب، **احراز هویت و مجوز کاربران داخلی** با موفقیت تست شد.
 <div align="center">
 
 ![Conventions-UsedThis-Book](../../../assets/image/10/Table%2010-12.jpeg)
 </div>
 
-### ✅ دریافت وضعیت 200 OK
+###  دریافت وضعیت 200 OK
 
 * حالا وضعیت پاسخ **200 OK** خواهید داشت.
 * این یعنی **درخواست API با موفقیت انجام شده است**.
@@ -921,7 +921,7 @@ Hello from GetDividendCalendar.
 
 ---
 
-### 🔄 تست مسیر خارجی
+###  تست مسیر خارجی
 
 * درخواست را دوباره اجرا کنید، اما این بار **URL را از internal به external تغییر دهید**.
 * URL جدید باید به شکل زیر باشد:
@@ -937,14 +937,14 @@ https://localhost:44325/api/dividendcalendar/external
 ![Conventions-UsedThis-Book](../../../assets/image/10/Table%2010-13.jpeg)
 </div>
 
-### ⛔ دریافت وضعیت 403 Forbidden
+###  دریافت وضعیت 403 Forbidden
 
 * اکنون باید وضعیت پاسخ **403 Forbidden** را دریافت کنید و **JSON خطا** مطابق با ForbiddenProblemDetails نمایش داده شود.
 * دلیل این امر این است که **API Key معتبر است**، اما مسیر مربوط به **کاربران خارجی** است و **کاربر خارجی دسترسی به API داخلی ندارد**.
 
 ---
 
-### ۱️⃣ تغییر مقدار هدر X-Api-Key
+### ۱⃣ تغییر مقدار هدر X-Api-Key
 
 * مقدار هدر **X-Api-Key** را به شکل زیر تغییر دهید:
 
@@ -954,7 +954,7 @@ Value: 9218FACE-3EAC-6574-C3F0-08357FEDABE9
 
 ---
 
-### ۲️⃣ ارسال مجدد درخواست
+### ۲⃣ ارسال مجدد درخواست
 
 * پس از تغییر مقدار هدر، روی **Send** کلیک کنید.
 * حالا درخواست با **API Key خارجی معتبر** ارسال شده و باید بتوانید **دسترسی خارجی را با موفقیت بررسی کنید**.
@@ -964,7 +964,7 @@ Value: 9218FACE-3EAC-6574-C3F0-08357FEDABE9
 ![Conventions-UsedThis-Book](../../../assets/image/10/Table%2010-14.jpeg)
 </div>
 
-### ✅ مشاهده وضعیت 200 OK
+###  مشاهده وضعیت 200 OK
 
 * اکنون وضعیت پاسخ **200 OK** را مشاهده خواهید کرد و در بخش body پیام زیر نمایش داده می‌شود:
 
@@ -974,11 +974,11 @@ External access is currently unavailable
 
 * خبر خوب! سیستم **امنیت مبتنی بر نقش** ما با استفاده از **API key authentication و authorization** تست شده و کار می‌کند.
 * قبل از اینکه حتی **FinTech API** واقعی خود را اضافه کنیم، **API Key امنیتی** را پیاده‌سازی و آزمایش کرده‌ایم. بنابراین امنیت API را **قبل از نوشتن حتی یک خط کد از API واقعی** رعایت کرده‌ایم.
-* اکنون می‌توانیم با اطمینان شروع کنیم به ساخت **Dividend Calendar API**، زیرا می‌دانیم امنیت آن برقرار است. 🛡️
+* اکنون می‌توانیم با اطمینان شروع کنیم به ساخت **Dividend Calendar API**، زیرا می‌دانیم امنیت آن برقرار است. 
 
 ---
 
-## 📝 افزودن کد Dividend Calendar
+##  افزودن کد Dividend Calendar
 
 * API داخلی ما تنها یک هدف دارد: ساخت یک **آرایه از dividend ها** که قرار است در سال جاری پرداخت شوند.
 * شما می‌توانید پروژه را توسعه دهید تا **JSON را در یک فایل یا پایگاه داده ذخیره کنید** و به این ترتیب تنها **یک بار در ماه به API داخلی فراخوانی بزنید** تا هزینه‌ها کاهش یابد.
@@ -986,7 +986,7 @@ External access is currently unavailable
 
 ---
 
-### ۱️⃣ ایجاد مدل Dividend
+### ۱⃣ ایجاد مدل Dividend
 
 * مدل داخلی ما قبلاً کنترلر دارد و امنیت آن از دسترسی غیرمجاز جلوگیری می‌کند.
 * اکنون باید **JSON dividend calendar** را تولید کنیم تا متد ما بازگرداند.
@@ -1024,7 +1024,7 @@ public class Dividend
 
 ---
 
-### ۲️⃣ ایجاد مدل Company
+### ۲⃣ ایجاد مدل Company
 
 ```csharp
 public class Company
@@ -1041,7 +1041,7 @@ public class Company
 
 ---
 
-### ۳️⃣ ایجاد مدل Companies
+### ۳⃣ ایجاد مدل Companies
 
 ```csharp
 public class Companies
@@ -1062,7 +1062,7 @@ public class Companies
 
 ---
 
-### ۴️⃣ ایجاد مدل Dividends
+### ۴⃣ ایجاد مدل Dividends
 
 ```csharp
 public class Dividends
@@ -1078,7 +1078,7 @@ public class Dividends
 
 ---
 
-### ۵️⃣ ایجاد مدل ResponseStatus
+### ۵⃣ ایجاد مدل ResponseStatus
 
 ```csharp
 public class ResponseStatus
@@ -1101,15 +1101,15 @@ public class ResponseStatus
 
 ---
 
-✅ تا این مرحله، تمام مدل‌های لازم برای **API Dividend Calendar** آماده شده‌اند و می‌توانیم به نوشتن منطق پردازش داده‌ها و بازگرداندن JSON ادامه دهیم.
+ تا این مرحله، تمام مدل‌های لازم برای **API Dividend Calendar** آماده شده‌اند و می‌توانیم به نوشتن منطق پردازش داده‌ها و بازگرداندن JSON ادامه دهیم.
 
-### 🛠️ پیاده‌سازی فراخوانی‌های API برای ساخت Dividend Calendar
+###  پیاده‌سازی فراخوانی‌های API برای ساخت Dividend Calendar
 
 حال که تمام **مدل‌های لازم** آماده شده‌اند، می‌توانیم شروع کنیم به **فراخوانی‌های API** برای ساخت **تقویم پرداخت dividend**.
 
 ---
 
-### ۱️⃣ متد FormatStringDate()
+### ۱⃣ متد FormatStringDate()
 
 ```csharp
 private DateTime? FormatStringDate(string date)
@@ -1120,11 +1120,11 @@ private DateTime? FormatStringDate(string date)
 
 * این متد یک **رشته تاریخ** می‌گیرد.
 * اگر رشته **null یا خالی** باشد، مقدار null باز می‌گرداند.
-* در غیر این صورت، رشته را به **DateTime nullable** تبدیل کرده و باز می‌گرداند. 🗓️
+* در غیر این صورت، رشته را به **DateTime nullable** تبدیل کرده و باز می‌گرداند. 
 
 ---
 
-### ۲️⃣ متد GetMorningstarApiKey()
+### ۲⃣ متد GetMorningstarApiKey()
 
 ```csharp
 private async Task<string> GetMorningstarApiKey()
@@ -1152,11 +1152,11 @@ private async Task<string> GetMorningstarApiKey()
 * این متد **AzureServiceTokenProvider** را ایجاد می‌کند.
 * سپس یک **KeyVaultClient** می‌سازد که عملیات رمزنگاری انجام می‌دهد.
 * با فراخوانی **GetSecretAsync**، API Key مربوط به Morningstar از **Azure Key Vault** دریافت می‌شود.
-* در صورت بروز خطا، پیام خطا بازگردانده می‌شود. 🔑
+* در صورت بروز خطا، پیام خطا بازگردانده می‌شود. 
 
 ---
 
-### ۳️⃣ متد GetCompanies()
+### ۳⃣ متد GetCompanies()
 
 ```csharp
 private Companies GetCompanies(string mic)
@@ -1173,11 +1173,11 @@ private Companies GetCompanies(string mic)
 
 * این متد یک **REST client** می‌سازد که لیست شرکت‌های موجود در بورس مشخص شده را باز می‌گرداند.
 * نوع درخواست **GET** است و هدرهای **x-rapidapi-host، x-rapidapi-key و accept** اضافه می‌شوند.
-* سپس JSON بازگشتی به مدل **Companies** دسیریالایز می‌شود. 🏢
+* سپس JSON بازگشتی به مدل **Companies** دسیریالایز می‌شود. 
 
 ---
 
-### ۴️⃣ متد GetDividends()
+### ۴⃣ متد GetDividends()
 
 ```csharp
 private Dividends GetDividends(string mic, string ticker)
@@ -1192,11 +1192,11 @@ private Dividends GetDividends(string mic, string ticker)
 }
 ```
 
-* مشابه **GetCompanies()** است، اما این بار **dividends** هر شرکت مشخص را باز می‌گرداند. 💰
+* مشابه **GetCompanies()** است، اما این بار **dividends** هر شرکت مشخص را باز می‌گرداند. 
 
 ---
 
-### ۵️⃣ متد BuildDividendCalendar()
+### ۵⃣ متد BuildDividendCalendar()
 
 ```csharp
 private List<Dividend> BuildDividendCalendar()
@@ -1243,11 +1243,11 @@ private List<Dividend> BuildDividendCalendar()
 * در آینده می‌توانیم این متد و **endpoint** عمومی را برای دریافت MIC به عنوان پارامتر به‌روزرسانی کنیم.
 * ابتدا لیست **شرکت‌ها** از Morningstar API دریافت می‌شود.
 * سپس برای هر شرکت، **dividendهای آن شرکت** گرفته می‌شود و بررسی می‌کنیم که تاریخ پرداخت بعد از **31 دسامبر سال قبل** باشد.
-* در نهایت، لیست **dividendهای امسال** ساخته می‌شود و بازگردانده می‌شود. 🔄
+* در نهایت، لیست **dividendهای امسال** ساخته می‌شود و بازگردانده می‌شود. 
 
 ---
 
-### ۶️⃣ به‌روزرسانی GetDividendCalendar()
+### ۶⃣ به‌روزرسانی GetDividendCalendar()
 
 ```csharp
 [Authorize(Policy = Policies.Internal)]
@@ -1265,10 +1265,10 @@ public IActionResult GetDividendCalendar()
 [{"Mic":"XLON","Ticker":"ABDP","CompanyName":"AB Dynamics PLC","DividendYield":0.0,"Amount":0.0279,...}]
 ```
 
-* ⚠️ این کوئری **زمان زیادی** می‌برد (\~20 دقیقه) و نتایج **در طول سال تغییر می‌کند**.
-* پیشنهاد: می‌توان API را **ماهانه اجرا** کرد و JSON را در **فایل یا پایگاه داده** ذخیره نمود. سپس endpoint خارجی از این داده ذخیره شده استفاده کند. 🗄️
+*  این کوئری **زمان زیادی** می‌برد (\~20 دقیقه) و نتایج **در طول سال تغییر می‌کند**.
+* پیشنهاد: می‌توان API را **ماهانه اجرا** کرد و JSON را در **فایل یا پایگاه داده** ذخیره نمود. سپس endpoint خارجی از این داده ذخیره شده استفاده کند. 
 
-### ⏱️ محدودسازی (Throttle) API
+### ⏱ محدودسازی (Throttle) API
 
 هنگامی که APIها را در دسترس قرار می‌دهید، **باید آن‌ها را محدود کنید (Throttle)**.
 روش‌های مختلفی برای این کار وجود دارد؛ مثل **محدود کردن تعداد کاربران همزمان** یا **تعداد فراخوانی‌ها در یک بازه زمانی مشخص**.
@@ -1277,7 +1277,7 @@ public IActionResult GetDividendCalendar()
 
 ---
 
-### ۱️⃣ اضافه کردن کلید به appsettings.json
+### ۱⃣ اضافه کردن کلید به appsettings.json
 
 در فایل **appsettings.json**، خط زیر را اضافه کنید:
 
@@ -1285,11 +1285,11 @@ public IActionResult GetDividendCalendar()
 "MorningstarNextRunDate": null,
 ```
 
-* این مقدار، **تاریخ اجرای بعدی API** را ذخیره خواهد کرد. 📅
+* این مقدار، **تاریخ اجرای بعدی API** را ذخیره خواهد کرد. 
 
 ---
 
-### ۲️⃣ کلاس AppSettings
+### ۲⃣ کلاس AppSettings
 
 در ریشه پروژه، کلاس زیر را اضافه کنید:
 
@@ -1304,7 +1304,7 @@ public class AppSettings
 
 ---
 
-### ۳️⃣ متد AddOrUpdateAppSetting()
+### ۳⃣ متد AddOrUpdateAppSetting()
 
 ```csharp
 public static void AddOrUpdateAppSetting<T>(string sectionPathKey, T value)
@@ -1325,11 +1325,11 @@ public static void AddOrUpdateAppSetting<T>(string sectionPathKey, T value)
 }
 ```
 
-* این متد **appsettings.json** را می‌خواند، JSON را دسیریالایز می‌کند، مقدار مورد نظر را تنظیم می‌کند و دوباره JSON را در فایل ذخیره می‌کند. 📝
+* این متد **appsettings.json** را می‌خواند، JSON را دسیریالایز می‌کند، مقدار مورد نظر را تنظیم می‌کند و دوباره JSON را در فایل ذخیره می‌کند. 
 
 ---
 
-### ۴️⃣ متد SetValueRecursively()
+### ۴⃣ متد SetValueRecursively()
 
 ```csharp
 private static void SetValueRecursively<T>(string sectionPathKey, dynamic jsonObj, T value)
@@ -1348,11 +1348,11 @@ private static void SetValueRecursively<T>(string sectionPathKey, dynamic jsonOb
 }
 ```
 
-* این متد، مسیر کلید را به صورت **بازگشتی** دنبال می‌کند و در نهایت مقدار مورد نظر را تنظیم می‌کند. 🔄
+* این متد، مسیر کلید را به صورت **بازگشتی** دنبال می‌کند و در نهایت مقدار مورد نظر را تنظیم می‌کند. 
 
 ---
 
-### ۵️⃣ تعریف ThrottleMonthDay
+### ۵⃣ تعریف ThrottleMonthDay
 
 ```csharp
 public const int ThrottleMonthDay = 25;
@@ -1362,7 +1362,7 @@ public const int ThrottleMonthDay = 25;
 
 ---
 
-### ۶️⃣ متد ThrottleMessage()
+### ۶⃣ متد ThrottleMessage()
 
 ```csharp
 private string ThrottleMessage()
@@ -1371,11 +1371,11 @@ private string ThrottleMessage()
 }
 ```
 
-* این متد پیام هشدار محدودیت را برمی‌گرداند. 🚫
+* این متد پیام هشدار محدودیت را برمی‌گرداند. 
 
 ---
 
-### ۷️⃣ دسترسی به AppSettings در Controller
+### ۷⃣ دسترسی به AppSettings در Controller
 
 ```csharp
 public DividendCalendarController(IOptions<AppSettings> appSettings)
@@ -1388,7 +1388,7 @@ public DividendCalendarController(IOptions<AppSettings> appSettings)
 
 ---
 
-### ۸️⃣ پیکربندی در Startup
+### ۸⃣ پیکربندی در Startup
 
 ```csharp
 var appSettingsSection = Configuration.GetSection("AppSettings");
@@ -1399,7 +1399,7 @@ services.Configure<AppSettings>(appSettingsSection);
 
 ---
 
-### ۹️⃣ متد SetMorningstarNextRunDate()
+### ۹⃣ متد SetMorningstarNextRunDate()
 
 ```csharp
 private DateTime? SetMorningstarNextRunDate()
@@ -1423,7 +1423,7 @@ private DateTime? SetMorningstarNextRunDate()
 
 ---
 
-### 🔟 متد CanExecuteApiRequest()
+###  متد CanExecuteApiRequest()
 
 ```csharp
 private bool CanExecuteApiRequest()
@@ -1452,11 +1452,11 @@ private bool CanExecuteApiRequest()
 ```
 
 * بررسی می‌کند که آیا **API در روز 25 ماه جاری** قابل اجرا است یا خیر.
-* اگر شرط‌ها برقرار باشند، **true** برمی‌گردد، در غیر این صورت **false**. ✅
+* اگر شرط‌ها برقرار باشند، **true** برمی‌گردد، در غیر این صورت **false**. 
 
 ---
 
-### ۱۱️⃣ به‌روزرسانی GetDividendCalendar()
+### ۱۱⃣ به‌روزرسانی GetDividendCalendar()
 
 ```csharp
 [Authorize(Policy = Policies.Internal)]
@@ -1475,24 +1475,24 @@ public IActionResult GetDividendCalendar()
 
 ---
 
-### ✅ جمع‌بندی
+###  جمع‌بندی
 
 * پروژه کامل شد، اما **جا برای بهبود و توسعه** وجود دارد.
 * مرحله بعدی: **مستندسازی API** و **استقرار آن** همراه با **لاگ‌گیری و مانیتورینگ**.
 * **Logging** برای ذخیره جزئیات استثناها و پیگیری استفاده از API مفید است.
 * **Monitoring** برای بررسی سلامت API و دریافت هشدار در صورت بروز مشکل کاربرد دارد.
 
-این تمرین می‌تواند تجربه بسیار خوبی برای توسعه و بهبود مهارت‌های شما باشد. 🌟
+این تمرین می‌تواند تجربه بسیار خوبی برای توسعه و بهبود مهارت‌های شما باشد. 
 
-### 📚 خلاصه فصل ۱۰ – امنیت API با API Key و Azure Key Vault
+###  خلاصه فصل ۱۰ – امنیت API با API Key و Azure Key Vault
 
-در این فصل، شما با یک **API شخص ثالث** ثبت‌نام کردید و **کلید API مخصوص خودتان** را دریافت کردید. این کلید در **Azure Key Vault** ذخیره شد تا از دسترسی کاربران غیرمجاز محافظت شود. 🔑
+در این فصل، شما با یک **API شخص ثالث** ثبت‌نام کردید و **کلید API مخصوص خودتان** را دریافت کردید. این کلید در **Azure Key Vault** ذخیره شد تا از دسترسی کاربران غیرمجاز محافظت شود. 
 
 سپس یک برنامه **ASP.NET Core** ایجاد کرده و آن را در **Azure** منتشر کردید. بعد از آن، به **امن‌سازی برنامه وب** با استفاده از **احراز هویت (Authentication)** و **مجوزدهی مبتنی بر نقش (Role-based Authorization)** پرداختید.
 
 ---
 
-### 🔒 امنیت و مجوزدهی
+###  امنیت و مجوزدهی
 
 * **Authorization** که تنظیم شد، با استفاده از **API Key** انجام می‌شود.
 
@@ -1503,11 +1503,11 @@ public IActionResult GetDividendCalendar()
 
 * **تست امنیت API و API Key** با **Postman** انجام شد.
 
-  * Postman یک ابزار بسیار کاربردی برای **تست درخواست‌ها و پاسخ‌های HTTP** است. 🛠️
+  * Postman یک ابزار بسیار کاربردی برای **تست درخواست‌ها و پاسخ‌های HTTP** است. 
 
 ---
 
-### 📆 API Dividend Calendar
+###  API Dividend Calendar
 
 * سپس کد **Dividend Calendar API** اضافه شد و **دسترسی داخلی و خارجی** بر اساس **API Key** فعال شد.
 * پروژه چندین **فراخوانی API** انجام داد تا **لیستی از شرکت‌هایی که قصد پرداخت سود سهام دارند** ایجاد شود.
@@ -1516,7 +1516,7 @@ public IActionResult GetDividendCalendar()
 
 ---
 
-### 💡 نتیجه
+###  نتیجه
 
 با طی کردن این فصل:
 
@@ -1526,14 +1526,14 @@ public IActionResult GetDividendCalendar()
 
 ---
 
-### 🔧 فصل بعدی
+###  فصل بعدی
 
 در فصل بعدی، از **PostSharp** برای پیاده‌سازی **برنامه‌نویسی مبتنی بر Aspect (AOP)** استفاده می‌کنیم.
 با این فریمورک AOP، یاد می‌گیریم که چگونه **عملکردهای مشترک** مثل **مدیریت استثنا، لاگ‌گیری، امنیت و تراکنش‌ها** را در برنامه‌هایمان مدیریت کنیم.
 
 ---
 
-### ❓ سوالات تمرینی
+###  سوالات تمرینی
 
 1. چه URLهایی منابع خوبی برای **میزبانی API خود** و **دسترسی به API شخص ثالث** هستند؟
 2. دو بخش لازم برای **امن‌سازی API** چیست؟
@@ -1543,7 +1543,7 @@ public IActionResult GetDividendCalendar()
 
 ---
 
-### 📖 مطالعه بیشتر
+###  مطالعه بیشتر
 
 * [Microsoft: Web API Security Guide](https://docs.microsoft.com/en-us/aspnet/web-api/overview/security/individual-accounts-in-web-api) – راهنمای جامع امنیت وب API
 * [ASP.NET Membership Database](https://docs.microsoft.com/en-us/aspnet/web-forms/overview/older-versions-security/membership/creating-the-membership-schema-in-sqlserver-vb) – ایجاد پایگاه داده عضویت

@@ -1,0 +1,341 @@
+<!doctype html><html lang="fa" dir="rtl"> <head><script>
+    if (window.location.pathname.startsWith('/gitab/')) {
+      window.location.replace(window.location.pathname.replace(/^\/gitab\//i, '/Gitab/') + window.location.search + window.location.hash);
+    }
+    (() => {
+      try {
+        const t = localStorage.getItem('gitab-theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', t);
+        document.documentElement.dataset.colorMode = t;
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        document.documentElement.dataset.colorMode = 'dark';
+      }
+    })();
+  </script> <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5"> <title>فصل 17: ابزار df (Linux df Command)</title><meta name="description" content="فصل 17: ابزار df (Linux df Command) — مطالعه آنلاین و رایگان از کتاب «راز بیت (The Secret Bit — دانشنامه آزاد لینوکس و ابزارها)» (The Secret Bit) اثر محمد شبانه و جامعه متن‌باز با ترجمه محمد شبانه در گیتاب."> <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"><meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"> <meta name="theme-color" content="#090d16"><meta name="referrer" content="strict-origin-when-cross-origin"> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https:; frame-src https://www.youtube.com https://www.youtube-nocookie.com https://maps.google.com https://www.google.com; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self';"><link rel="icon" type="image/png" href="/Gitab/favicon.png"> <link rel="canonical" href="https://hheydarian.github.io/Gitab/books/book11/Book/17/df/"><link rel="alternate" hreflang="fa" href="https://hheydarian.github.io/Gitab/books/book11/Book/17/df/"> <link rel="alternate" hreflang="x-default" href="https://hheydarian.github.io/Gitab/books/book11/Book/17/df/"><link rel="alternate" type="text/plain" title="LLMs.txt" href="/Gitab/llms.txt"> <link rel="sitemap" type="application/xml" title="Sitemap" href="/Gitab/sitemap.xml"><meta property="og:locale" content="fa_IR"> <meta property="og:type" content="article"><meta property="og:site_name" content="گیتاب | Gitab"> <meta property="og:title" content="فصل 17: ابزار df (Linux df Command)"><meta property="og:description" content="فصل 17: ابزار df (Linux df Command) — مطالعه آنلاین و رایگان از کتاب «راز بیت (The Secret Bit — دانشنامه آزاد لینوکس و ابزارها)» (The Secret Bit) اثر محمد شبانه و جامعه متن‌باز با ترجمه محمد شبانه در گیتاب."> <meta property="og:url" content="https://hheydarian.github.io/Gitab/books/book11/Book/17/df/"><meta property="og:image" content="https://hheydarian.github.io/Gitab/images/the-secret-bit/Cover.jpg"> <meta property="og:image:alt" content="فصل 17: ابزار df (Linux df Command)"><meta name="twitter:card" content="summary_large_image"> <meta name="twitter:title" content="فصل 17: ابزار df (Linux df Command)"><meta name="twitter:description" content="فصل 17: ابزار df (Linux df Command) — مطالعه آنلاین و رایگان از کتاب «راز بیت (The Secret Bit — دانشنامه آزاد لینوکس و ابزارها)» (The Secret Bit) اثر محمد شبانه و جامعه متن‌باز با ترجمه محمد شبانه در گیتاب."> <meta name="twitter:image" content="https://hheydarian.github.io/Gitab/images/the-secret-bit/Cover.jpg"><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://hheydarian.github.io/Gitab/#organization","name":"گیتاب | Gitab","alternateName":"Gitab","url":"https://hheydarian.github.io/Gitab/","logo":{"@type":"ImageObject","url":"https://hheydarian.github.io/Gitab/favicon.png"},"sameAs":["https://github.com/hheydarian/Gitab"]},{"@type":"WebSite","@id":"https://hheydarian.github.io/Gitab/#website","url":"https://hheydarian.github.io/Gitab/","name":"گیتاب | Gitab","inLanguage":"fa-IR","publisher":{"@id":"https://hheydarian.github.io/Gitab/#organization"},"potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://hheydarian.github.io/Gitab/books/list-books/?q={search_term_string}"},"query-input":"required name=search_term_string"}},{"@type":"WebPage","@id":"https://hheydarian.github.io/Gitab/books/book11/Book/17/df/#webpage","url":"https://hheydarian.github.io/Gitab/books/book11/Book/17/df/","name":"فصل 17: ابزار df (Linux df Command)","description":"فصل 17: ابزار df (Linux df Command) — مطالعه آنلاین و رایگان از کتاب «راز بیت (The Secret Bit — دانشنامه آزاد لینوکس و ابزارها)» (The Secret Bit) اثر محمد شبانه و جامعه متن‌باز با ترجمه محمد شبانه در گیتاب.","inLanguage":"fa-IR","isPartOf":{"@id":"https://hheydarian.github.io/Gitab/#website"}},{"@type":"TechArticle","headline":"فصل 17: ابزار df (Linux df Command)","description":"فصل 17: ابزار df (Linux df Command) — مطالعه آنلاین و رایگان از کتاب «راز بیت (The Secret Bit — دانشنامه آزاد لینوکس و ابزارها)» (The Secret Bit) اثر محمد شبانه و جامعه متن‌باز با ترجمه محمد شبانه در گیتاب.","url":"https://hheydarian.github.io/Gitab/books/book11/Book/17/df/","inLanguage":"fa-IR","isAccessibleForFree":true,"author":{"@type":"Person","name":"محمد شبانه و جامعه متن‌باز"},"translator":{"@type":"Person","name":"محمد شبانه"},"isPartOf":{"@type":"Book","name":"راز بیت (The Secret Bit — دانشنامه آزاد لینوکس و ابزارها)","alternateName":"The Secret Bit","url":"https://hheydarian.github.io/Gitab/books/book11/"}}]}</script> <link rel="preload" href="/Gitab/fonts/Vazirmatn.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/Gitab/styles/main.css?v=2.4" as="style"> <link rel="preload" href="/Gitab/styles/gitab-modern.css?v=2.5" as="style"><style>@font-face{font-family:'Lalezar';src:url('/Gitab/fonts/Lalezar.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}@font-face{font-family:'Vazirmatn';src:url('/Gitab/fonts/Vazirmatn.woff2') format('woff2');font-weight:100 900;font-style:normal;font-display:swap}html,body,button,input,optgroup,select,textarea,.filter-pill{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}input::placeholder,textarea::placeholder{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}</style> <link rel="stylesheet" href="/Gitab/styles/main.css?v=2.4"><link rel="stylesheet" href="/Gitab/styles/gitab-modern.css?v=2.5"> <link rel="stylesheet" href="/Gitab/styles/vendor/github-dark.min.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="/Gitab/styles/vendor/github-dark.min.css"></noscript></head> <body><header class="header"> <div class="container nav-wrap"><a href="/Gitab/" class="brand" aria-label="صفحه اصلی گیتاب"> <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="30" height="30" decoding="async"> <span class="brand-text">Gitab</span> </a> <nav class="nav" id="mainNav"><a href="/Gitab/" >خانه</a> <a href="/Gitab/books/list-books" aria-current="page">کتاب‌ها</a> <a href="/Gitab/courses/" >دوره‌ها</a> <a href="/Gitab/translator.html" >مترجمین</a></nav> <div class="nav-actions"><button id="themeToggle" class="theme-toggle-btn" aria-label="تغییر تم" title="تغییر تم"> <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن" width="18" height="18" decoding="async" style="display:none"> <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک" width="18" height="18" decoding="async"> </button> <a class="btn-github-pill" href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" title="مشاهده سورس گیتاب در گیت‌هاب"> <img src="/Gitab/icone/github.svg" alt="GitHub" width="16" height="16" decoding="async"> <span>گیت‌هاب</span> </a> <button class="mobile-menu-btn" id="mobileMenuBtn" type="button" aria-label="باز کردن منو" aria-expanded="false"> <svg class="mob-icon-open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="4" y1="7" x2="20" y2="7"></line> <line x1="4" y1="12" x2="20" y2="12"></line> <line x1="4" y1="17" x2="14" y2="17"></line> </svg> <svg class="mob-icon-close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="18" y1="6" x2="6" y2="18"></line> <line x1="6" y1="6" x2="18" y2="18"></line> </svg> </button></div> </div><div class="mobile-drawer" id="mobileDrawer" aria-hidden="true"> <div class="mobile-drawer-inner"><div class="mobile-drawer-section-label">ناوبری سریع</div><nav class="mobile-drawer-links" aria-label="منوی موبایل"> <a href="/Gitab/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M3 10.5 12 3l9 7.5"></path> <path d="M5 9.5V20a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V9.5"></path> </svg> </span> <span class="mob-nav-text">صفحه نخست</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/books/list-books" class="mobile-drawer-link active" aria-current="page"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path> </svg> </span> <span class="mob-nav-text">کتابخانه و فهرست کتاب‌ها</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/courses/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path> <path d="M6 12v5c3 3 9 3 12 0v-5"></path> </svg> </span> <span class="mob-nav-text">دوره‌های آموزشی</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/translator.html" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path> <circle cx="9" cy="7" r="4"></circle> <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path> <path d="M16 3.13a4 4 0 0 1 0 7.75"></path> </svg> </span> <span class="mob-nav-text">مترجمین و همکاران</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> </nav><div class="mobile-drawer-divider"></div><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" class="mobile-drawer-link mobile-drawer-gh"> <span class="mob-nav-icon" aria-hidden="true"> <img src="/Gitab/icone/github.svg" alt="" width="17" height="17" loading="lazy" decoding="async"> </span> <span class="mob-nav-text">مخزن گیت‌هاب پروژه</span> <span class="mob-nav-ext" aria-hidden="true">↗</span> </a> </div></div> </header><div class="reading-progress-track"> <div class="reading-progress-fill" id="readingProgressBar"></div></div> <main class="site-main chapter-reading-page"><div class="chapter-page-wrapper"> <nav class="chapter-clean-breadcrumb" aria-label="مسیر راهنما" dir="rtl"><a href="/Gitab/">خانه</a> <span class="bc-sep" aria-hidden="true">/</span> <a href="/Gitab/books/list-books/">کتاب‌ها</a> <span class="bc-sep" aria-hidden="true">/</span> <a href="/Gitab/books/book11/"><bdi>راز بیت</bdi></a> <span class="bc-sep" aria-hidden="true">/</span> <span class="bc-current-leaf"><bdi>فصل 17: ابزار df (Linux df Command)</bdi></span></nav> <article class="chapter-prose-container markdown-body" id="chapterArticle" dir="rtl"><h1>فصل 17: ابزار df (Linux df Command)</h1><h3>مقدمه</h3><p>ابزار df برای بررسی فضای خالی یا فضای استفاده شده در یک فایل سیستم لینوکس استفاده می‌شود.</p><p>ساختار کلی این دستور به شکل زیر است:</p><pre class="hljs"><code>$ df [option] ... [FILE] ...
+</code></pre> <hr><h3>بررسی تمام فضاهای مانت شده</h3><p>اگر دستور df بدون هیچ آرگومانی استفاده شود لیستی را از فضاهای موجود در تمام فایل سیستم‌هایی که در حال حاضر مانت شده‌اند، نشان می‌دهد.</p><p>باید توجه داشته باشید که این دستور، فایل سیستم‌های مانت نشده را نشان نمی‌دهد.</p><pre class="hljs"><code>$ df
+
+# Filesystem     1K-blocks      Used Available Use% Mounted on
+# tmpfs            1589124      2688   1586436   1% /run
+# /dev/nvme0n1p6  60373924  44709612  12571784  79% /
+# tmpfs            7945612     41424   7904188   1% /dev/shm
+# tmpfs               5120         4      5116   1% /run/lock
+# /dev/nvme0n1p8  79407872  52876308  22452156  71% /home
+# /dev/nvme0n1p1     98304     33879     64425  35% /boot/efi
+# tmpfs            1589120       156   1588964   1% /run/user/1000
+# /dev/sda3      958786348 901281808   8727580 100% /media/rahim/makhzan
+</code></pre> <hr><h3>بررسی یک فایل سیستم خاص</h3><p>وارد کردن نام و آدرس فایل سیستم مانت شده:</p><pre class="hljs"><code>$ df /dev/sda3
+
+# Filesystem     1K-blocks     Used Available Use% Mounted on
+# /dev/sda3      958786348 901281808   8727580 100% /media/rahim/makhzan
+</code></pre> <hr><h3>بررسی یک فایل سیستم حاوی یک فایل</h3><p>اگر یک فایل به دستور df داده شود اطلاعات فایل سیستمی را می‌دهد که شامل این فایل خاص باشد. برای این کار کافی است که مسیر فایل را جلوی این دستور اضافه کنید:</p><pre class="hljs"><code>$ df sample.txt
+
+# Filesystem     1K-blocks     Used Available Use% Mounted on
+# /dev/nvme0n1p8  79407872 52873308  22455156  71% /home
+</code></pre> <p>چون این فایل در دایرکتوری home قرار دارد، نتیجه نمایش داده شده همان نتیجه‌ای است که در مثال اول در ردیف پنجم نتایج، لیست شده بود</p><hr> <h3>دیدن تمام فایل سیستم ها</h3><p><strong>-a, --all</strong></p><p>تمام انواع فایل سیستم‌ها (حتی با سایز صفر) را هم نشان می‌دهد</p><pre class="hljs"><code>$ df -a
+
+# Filesystem     1K-blocks     Used Available Use% Mounted on
+# sysfs                  0         0         0    - /sys
+# proc                   0         0         0    - /proc
+# udev             7910236         0   7910236   0% /dev
+# devpts                 0         0         0    - /dev/pts
+# tmpfs            1589124      2692   1586432   1% /run
+# /dev/nvme0n1p6  60373924  44717800  12563596  79% /
+...
+</code></pre> <hr><h3>تعیین مقیاس نمایش</h3><p><strong>-B, --block-size=SIZE</strong></p><p>تمام اندازه‌ها را بر اساس مقیاس مشخص شده در SIZE نشان می‌دهد:</p><pre class="hljs"><code>$ df df -B M
+
+# Filesystem     1M-blocks     Used Available Use% Mounted on
+# tmpfs              1552M      3M     1550M   1% /run
+# /dev/nvme0n1p6    58959M  43670M    12270M  79% /
+# tmpfs              7760M     18M     7742M   1% /dev/shm
+...
+</code></pre> <p>آرگومان SIZE یک واحد اختیاری است که اگر به صورت 10K استفاده شود بر اساس ضرایب 1024 است و اگر به صورت KB استفاده شود بر اساس ضرایب 1000 خواهد بود. پیشوندهای باینری ماننند KiB=B هم قابل استفاده هستند.</p><hr> <h3>دیدن مقیاس به صورت ساده شده</h3><p><strong>-h, --human-readable</strong></p><p>سایزها را بر اساس ضرایب 1024 نشان می‌دهد (مانند 1023M)</p><pre class="hljs"><code>$ df -h
+
+# Filesystem      Size  Used Avail Use% Mounted on
+# tmpfs           1.6G  2.7M  1.6G   1% /run
+# /dev/nvme0n1p6   58G   43G   12G  79% /
+# tmpfs           7.6G   18M  7.6G   1% /dev/shm
+
+</code></pre> <hr><h3>مقیاس 1000</h3><p><strong>-H, --si</strong></p><p>نتایج را بر اساس ضرایب 1000 نشان می‌دهد (مانند 1.1G):</p><pre class="hljs"><code>$ df -H
+
+# Filesystem      Size  Used Avail Use% Mounted on
+# tmpfs           1.7G  2.8M  1.7G   1% /run
+# /dev/nvme0n1p6   62G   46G   13G  79% /
+# tmpfs           8.2G   22M  8.2G   1% /dev/shm
+...
+</code></pre> <hr><h3>نمایش آی نودها</h3><p><strong>-i, --inodes</strong></p><p>لیستی از اطلاعات inodeها را به جای اطلاعات بلوک‌ها نمایش می‌دهد:</p><pre class="hljs"><code>$ df -i
+# Filesystem       Inodes   IUsed    IFree IUse% Mounted on
+# tmpfs           1986403    1496  1984907    1% /run
+# /dev/nvme0n1p6  3842720 1869070  1973650   49% /
+# tmpfs           1986403      68  1986335    1% /dev/shm
+...
+</code></pre> <hr><h3>تعیین سایز بلوک</h3><p><strong>-k</strong></p><p>مانند آن است که سایز واحد نمایش را به صورت --block-size=1K تعریف کنیم:</p><pre class="hljs"><code>$ df -k
+
+# Filesystem     1K-blocks      Used Available Use% Mounted on
+# tmpfs            1589124      2692   1586432   1% /run
+# /dev/nvme0n1p6  60373924  44717860  12563536  79% /
+# tmpfs            7945612     21448   7924164   1% /dev/shm
+...
+</code></pre> <hr><h3>نمایش فایل سیستم های لوکال</h3><p><strong>-l, --local</strong></p><p>لیست ننایج را به فایل سیستم‌های لوکال محدود می‌کند:</p><pre class="hljs"><code>$ df -l
+# Filesystem     1K-blocks      Used Available Use% Mounted on
+# tmpfs            1589124      2692   1586432   1% /run
+# /dev/nvme0n1p6  60373924  44717864  12563532  79% /
+# tmpfs            7945612     18376   7927236   1% /dev/shm
+</code></pre> <hr><h3>نتایج بدون سینک کردن</h3><p><strong>--no-sync</strong></p><p>قبل از دریافت اطلاعات سینک را انجام نمی‌دهد (به صورت پیشفرض این گزینه فعال است).</p><hr> <h3>تعیین فیلدهای خروجی</h3><p><strong>--output[=FIELD_LIST]</strong></p><p>فرمت خروجی را مشخص می‌کند. اگر مقداری برای آن تعریف نشود تمام فیلدها را نشان می‌دهد:</p><pre class="hljs"><code>$ df --output=source,avail
+
+# Filesystem        Avail
+# tmpfs           1586432
+# /dev/nvme0n1p6 12563520
+# tmpfs           7927236
+</code></pre> <p>مقدارهای معتبر برای فیلدها موارد زیر هستند:</p><pre class="hljs"><code>'source', 'fstype', 'itotal', 'iused', 'iavail', 
+'ipcent', 'size', 'used', 'avail', 'pcent' and 'target' 
+</code></pre> <hr><h3>نتایج بر اساس POSIX</h3><p><strong>-P,- -portability</strong></p><p>از فرمت POSIX برای نشان دادن نتایج استفاده می‌کند:</p><pre class="hljs"><code>$ df -P
+
+# Filesystem     1024-blocks      Used Available Capacity Mounted on
+# tmpfs              1589124      2692   1586432       1% /run
+# /dev/nvme0n1p6    60373924  44717876  12563520      79% /
+# tmpfs              7945612     18376   7927236       1% /dev/sh
+</code></pre> <hr><h3>دیدن نتایج به همراه سینک کردن</h3><p><strong>--sync</strong></p><p>قبل از گرفتن اطلاعات سینک انجام می‌دهد.</p><hr> <h3>محاسبه مجموع فضاها</h3><p><strong>--total</strong></p><p>تمام مقادیر ناچیز را حذف می‌کند و یک مقدار مجموع هم در آخر نتایج محاسبه می‌کند:</p><pre class="hljs"><code>$ df --total
+
+# Filesystem      1K-blocks      Used Available Use% Mounted on
+# tmpfs             1589124      2692   1586432   1% /run
+# /dev/nvme0n1p6   60373924  44717880  12563516  79% /
+# tmpfs             7945612     18376   7927236   1% /dev/shm
+# tmpfs                5120         4      5116   1% /run/lock
+# /dev/nvme0n1p8   79407872  52871212  22457252  71% /home
+# /dev/nvme0n1p1      98304     33879     64425  35% /boot/efi
+# tmpfs             1589120       148   1588972   1% /run/user/1000
+# /dev/sda3       958786348 901281812   8727576 100% /media/rahim/makhzan
+# total          1109795424 998926003  54920525  95% -
+</code></pre> <hr><h3>نمایش فضاهای یک نوع فایل سیستم</h3><p><strong>-t, --type=TYPE</strong></p><p>نتایج را به یک نوع خاص از فایل سیستم محدود می‌کند:</p><pre class="hljs"><code>$ df -t tmpfs   
+
+# Filesystem     1K-blocks  Used Available Use% Mounted on
+# tmpfs            1589124  2692   1586432   1% /run
+# tmpfs            7945612 18376   7927236   1% /dev/shm
+# tmpfs               5120     4      5116   1% /run/lock
+# tmpfs            1589120   148   1588972   1% /run/user/1000
+</code></pre> <hr><h3>نمایش ستون نوع فایل سیستم</h3><p><strong>-T, --print-type</strong></p><p>نوع فایل سیستم را نیز نشان می‌دهد:</p><pre class="hljs"><code>$ df -T
+
+# Filesystem     Type  1K-blocks      Used Available Use% # Mounted on
+# tmpfs          tmpfs   1589124      2692   1586432   1% /run
+# /dev/nvme0n1p6 ext4   60373924  44717888  12563508  79% /
+# tmpfs          tmpfs   7945612     18376   7927236   1% /dev/shm
+</code></pre> <hr><h3>حذف یک فایل سیستم خاص از نتایج</h3><p><strong>-x, --exclude-type=TYPE</strong></p><p>یک نوع خاص از فایل سیستم را از نتایج حذف می‌کند:</p><pre class="hljs"><code>$ df -x tmpfs
+
+# Filesystem     1K-blocks      Used Available Use% Mounted on
+# /dev/nvme0n1p6  60373924  44717888  12563508  79% /
+# /dev/nvme0n1p8  79407872  52874604  22453860  71% /home
+# /dev/nvme0n1p1     98304     33879     64425  35% /boot/efi
+</code></pre> <hr><h3>واحدهای نمایش</h3><p>دستور<br> df<br> به صورت پیشفرض از<br> 1 K blocks<br> برای نمایش واحد استفاده می‌کند.</p><p>واحد مورد نظر یا از گزینه<br> –block-size<br> و یا اولین واحد مشخص شده در یکی از متغیرهای محیطی<br> DF_BLOCK_SIZE, BLOCKSIZE AND BLOCK_SIZE<br> برداشت شده و استفاده می‌شود.</p><p>بلوک سایز به ترتیب یکی از واحدهای زیر را می‌تواند داشته باشد:</p><p><strong>K</strong> as in Kilo, <strong>M</strong>, <strong>G</strong>, <strong>T</strong>, <strong>P</strong>, <strong>E</strong>, <strong>Z</strong>, <strong>Y</strong></p><hr> <p>Author or Authors:</p><ul> <li><em><a href="https://github.com/rahimz">Rahim</a></em> | <strong><a href="mailto:rahim.django.projects@gmail.com">rahim.django.projects@gmail.com</a></strong></li></ul> </article><nav class="chapter-single-next-nav"> <a href="/Gitab/books/book11/Book/18/fdisk/" class="btn-next-chapter-action" id="nextChapterBtn" data-hub="/Gitab/books/book11/"> <span class="next-btn-text">فصل بعدی: فصل 18: ابزار fdisk (Linux fdisk Command)</span> <span class="next-btn-arrow">←</span> </a> </nav></div> <button class="fab-back-to-top" id="backToTopBtn" type="button" aria-label="رفتن به بالای صفحه" title="رفتن به بالا"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"> <polyline points="18 15 12 9 6 15"></polyline> </svg> </button></main> <footer class="footer-minimal"><div class="footer-container"> <div class="footer-top-row"><div class="footer-brand-side"> <a href="/Gitab/" class="footer-brand-anchor"> <img src="/Gitab/icone/logo.svg" alt="Gitab" width="28" height="28" loading="lazy" decoding="async"> <span class="footer-brand-title">گیتاب (Gitab)</span> </a> <p class="footer-tagline"> پلتفرم آزاد و مستقل برای ترجمهٔ دقیق و روان کتاب‌های مرجع مهندسی نرم‌افزار. </p></div> <div class="footer-nav-cols"><div class="footer-nav-col"> <span class="footer-nav-heading">موضوعات</span><ul class="footer-nav-list"> <li><a href="/Gitab/books/list-books/?cat=csharp">سی‌شارپ و دات‌نت</a></li><li><a href="/Gitab/books/list-books/?cat=clean-code">کد تمیز و بازآفرینی</a></li><li><a href="/Gitab/books/list-books/?cat=architecture">معماری و طراحی دامنه</a></li><li><a href="/Gitab/books/list-books/?cat=system">لینوکس و خط فرمان</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">بخش‌های سایت</span><ul class="footer-nav-list"> <li><a href="/Gitab/">صفحه اصلی</a></li><li><a href="/Gitab/books/list-books/">کتابخانه کامل</a></li><li><a href="/Gitab/courses/">دوره‌های آموزشی</a></li><li><a href="/Gitab/translator.html">تالار مترجمین</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">مشارکت و جامعه</span><ul class="footer-nav-list"> <li><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer">راهنمای همکاری در ترجمه</a></li><li><a href="https://github.com/hheydarian/Gitab/issues" target="_blank" rel="noopener noreferrer">پیشنهاد کتاب یا گزارش خطا</a></li></ul> </div></div> </div><div class="footer-bottom-line"> <span>© <span id="y">2026</span> Gitab — توسعه‌یافته برای جامعهٔ مهندسان نرم‌افزار ایرانی</span></div> </div></footer> <script>
+  (() => {
+    const root = document.documentElement;
+    const btn = document.getElementById('themeToggle');
+    const sunIcon = btn ? btn.querySelector('.icon-sun') : null;
+    const moonIcon = btn ? btn.querySelector('.icon-moon') : null;
+    const KEY = 'gitab-theme';
+
+    function updateTheme(mode) {
+      root.setAttribute('data-theme', mode);
+      root.dataset.colorMode = mode;
+      if (sunIcon && moonIcon) {
+        if (mode === 'dark') {
+          sunIcon.style.display = 'inline-block';
+          moonIcon.style.display = 'none';
+        } else {
+          sunIcon.style.display = 'none';
+          moonIcon.style.display = 'inline-block';
+        }
+      }
+    }
+
+    let saved = 'dark';
+    try { saved = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+    updateTheme(saved);
+
+    if (btn) {
+      btn.addEventListener('click', () => {
+        let current = 'dark';
+        try { current = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+        const next = current === 'dark' ? 'light' : 'dark';
+        try { localStorage.setItem(KEY, next); } catch (e) {}
+        updateTheme(next);
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      let mode = 'dark';
+      try { mode = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+      updateTheme(mode);
+      const yearSpan = document.getElementById('y');
+      if (yearSpan) yearSpan.textContent = new Date().getFullYear();
+    });
+
+    const mobBtn = document.getElementById('mobileMenuBtn');
+    const mobDrawer = document.getElementById('mobileDrawer');
+    if (mobBtn && mobDrawer) {
+      const setDrawerOpen = (open) => {
+        mobDrawer.classList.toggle('open', open);
+        mobBtn.classList.toggle('is-open', open);
+        mobBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        mobBtn.setAttribute('aria-label', open ? 'بستن منو' : 'باز کردن منو');
+        mobDrawer.setAttribute('aria-hidden', open ? 'false' : 'true');
+      };
+
+      mobBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        setDrawerOpen(!mobDrawer.classList.contains('open'));
+      });
+
+      mobDrawer.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => setDrawerOpen(false));
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && mobDrawer.classList.contains('open')) {
+          setDrawerOpen(false);
+        }
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!mobDrawer.contains(e.target) && !mobBtn.contains(e.target)) {
+          setDrawerOpen(false);
+        }
+      });
+    }
+
+    if ('serviceWorker' in navigator) {
+      const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+      if (isLocalhost) {
+        navigator.serviceWorker.getRegistrations().then(regs => {
+          for (const reg of regs) reg.unregister();
+        });
+        if ('caches' in window) {
+          caches.keys().then(names => {
+            for (const name of names) caches.delete(name);
+          });
+        }
+      } else {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/Gitab/sw.js').catch(() => {});
+        });
+      }
+    }
+  })();
+  </script> <script>
+  document.querySelectorAll('pre code').forEach(block => {
+    const pre = block.parentNode;
+    if (!pre || pre.querySelector('.copy-btn')) return;
+
+    const copySvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
+    const okSvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+
+    const btn = document.createElement('button');
+    btn.className = 'copy-btn';
+    btn.setAttribute('aria-label', 'کپی کد');
+    btn.setAttribute('title', 'کپی کد');
+    btn.setAttribute('type', 'button');
+    btn.innerHTML = copySvg;
+    pre.appendChild(btn);
+
+    btn.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(block.textContent);
+        btn.classList.add('copied');
+        btn.innerHTML = okSvg;
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          btn.innerHTML = copySvg;
+        }, 1800);
+      } catch (err) {
+        console.error('Copy failed:', err);
+      }
+    });
+  });
+  </script> <script>
+  (() => {
+    const article = document.getElementById('chapterArticle');
+    if (!article) return;
+
+    const progressBar = document.getElementById('readingProgressBar');
+    if (progressBar) {
+      window.addEventListener('scroll', () => {
+        const docElem = document.documentElement;
+        const totalHeight = docElem.scrollHeight - docElem.clientHeight;
+        if (totalHeight > 0) {
+          const progress = (window.pageYOffset / totalHeight) * 100;
+          progressBar.style.width = Math.min(100, Math.max(0, progress)) + '%';
+        }
+      }, { passive: true });
+    }
+
+    const btt = document.getElementById('backToTopBtn');
+    if (btt) {
+      window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 250) {
+          btt.classList.add('visible');
+        } else {
+          btt.classList.remove('visible');
+        }
+      }, { passive: true });
+
+      btt.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+
+    article.querySelectorAll('img').forEach(img => {
+      if (!img.hasAttribute('loading')) img.loading = 'lazy';
+      if (!img.hasAttribute('decoding')) img.decoding = 'async';
+      const parent = img.parentElement;
+      if (parent && parent.tagName === 'P') {
+        parent.style.textAlign = 'center';
+      }
+
+      img.addEventListener('error', function() {
+        const src = this.getAttribute('src');
+        if (src && src.includes('assets/image/')) {
+          const parts = src.split('assets/image/');
+          const corrected = '/Gitab/books/book11/assets/image/' + parts[1];
+          if (this.src !== corrected) {
+            this.src = corrected;
+          }
+        }
+      });
+    });
+
+    article.querySelectorAll('p').forEach(p => {
+      const trimmed = p.innerText.trim();
+      if (trimmed.startsWith('💡') || trimmed.startsWith('نکته:')) {
+        p.classList.add('react-callout', 'callout-tip');
+      } else if (trimmed.startsWith('⚠️') || trimmed.startsWith('هشدار:')) {
+        p.classList.add('react-callout', 'callout-warning');
+      } else if (trimmed.startsWith('📌') || trimmed.startsWith('مهم:')) {
+        p.classList.add('react-callout', 'callout-important');
+      } else if (trimmed.startsWith('🔹') || trimmed.startsWith('🔸')) {
+        p.classList.add('react-callout', 'callout-note');
+      }
+    });
+  })();
+  </script> <script type="speculationrules">{"prefetch":[{"where":{"and":[{"href_matches":"/Gitab/*"},{"not":{"href_matches":"/Gitab/downloads/*"}},{"not":{"selector_matches":"[download], [target='_blank']"}}]},"eagerness":"moderate"}]}</script> <script>
+  (() => {
+    if (window.HTMLScriptElement && HTMLScriptElement.supports && HTMLScriptElement.supports('speculationrules')) return;
+    const seen = new Set([window.location.href]);
+    let count = 0;
+    const prefetchLink = (e) => {
+      if (count >= 12) return;
+      const a = e.target && e.target.closest ? e.target.closest('header a, .chapter-single-next-nav a, .syllabus-chapter-item a, .btn-hero-read, .btn-card-read') : null;
+      if (!a || !a.href || a.hasAttribute('download') || a.target === '_blank') return;
+      if (a.origin !== window.location.origin || a.pathname.includes('/downloads/')) return;
+      const clean = a.href.split('#')[0];
+      if (!clean || seen.has(clean)) return;
+      seen.add(clean);
+      count++;
+      const l = document.createElement('link');
+      l.rel = 'prefetch';
+      l.href = clean;
+      document.head.appendChild(l);
+    };
+    document.addEventListener('pointerenter', prefetchLink, { capture: true, passive: true });
+    document.addEventListener('touchstart', prefetchLink, { capture: true, passive: true });
+  })();
+  </script></body></html>

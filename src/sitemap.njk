@@ -1,0 +1,33 @@
+---
+permalink: /sitemap.xml
+eleventyExcludeFromCollections: true
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+{%- for item in collections.all %}
+  {%- if item.url and item.url != '/404.html' and item.url != '/sitemap.xml' and item.url != '/robots.txt' and item.url != '/llms.txt' and item.url != '/llms-full.txt' %}
+  <url>
+    <loc>{{ site.url }}{{ item.url | url }}</loc>
+    {%- if item.date %}
+    <lastmod>{{ item.date.toISOString().slice(0, 10) }}</lastmod>
+    {%- endif %}
+    {%- if item.url == '/' %}
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+    {%- elseif item.url == '/books/list-books/' or item.url == '/courses/' or item.url == '/translator.html' %}
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    {%- elseif '/Book/' in item.url or '/lessons/' in item.url %}
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    {%- elseif '/books/' in item.url or '/courses/' in item.url %}
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    {%- else %}
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    {%- endif %}
+  </url>
+  {%- endif %}
+{%- endfor %}
+</urlset>

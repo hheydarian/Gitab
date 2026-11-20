@@ -1,0 +1,143 @@
+---
+layout: layout.njk
+title: "فصل 47: ابزار rar (Linux rar Command)"
+---
+{% raw %}
+# فصل 47: ابزار rar (Linux rar Command)
+
+### مقدمه
+یکی از ابزارهایی که با آن می‌توان فایلی را با فرمت rar فشرده و یا آرشیو کرد ابزار *rar* است.
+با سوییچ های مختلف این ابزار به جز فشرده سازی می‌توان
+فایل های
+rar
+را استخراج کرد.
+
+> سوییچ های
+> rar
+> نیاز به پیشوند های - و - - ندارند
+
+
+
+
+
+---
+
+
+### فشرده کردن فایل
+
+سوییچ
+a
+برای فشرده سازی فایل استفاده می‌شود. اولین ارگومان این سوییچ نام فایل شما بعد از فشرده سازی است،
+ارگومان هایی بعدی مسیر فایل هایی است که نیاز دارید فشرده شوند.
+
+
+    
+    $ rar a amir.rar amir.txt ali.txt
+    
+    # OUTPUT
+    # Trial version             Type 'rar -?' for help
+ 
+    # Evaluation copy. Please register.
+    # 
+    # Creating archive amir.rar
+    # 
+    # Adding    amir.txt                                                    OK 
+    # Adding    ali.txt                                                     OK 
+    # Done
+
+
+---
+
+
+### تعمیر فایل های فشرده
+با استفاده از سوییچ r میتوانید فایل فشرده خود را تعمیر کنید.
+این سوییچ زمانی کاربرد دارد که فایل فشرده شما به مشکل خورده یا در هیچ حالتی نمیتوانید فایل را از حالت فشرده خارج کنید.
+
+
+    $ rar r test.rar
+
+
+
+---
+
+
+### اضافه کردن فایل های جدید به فایل فشرده شده
+
+زمانی که شما فایلی هایی را فشرده کرده‌اید و بعد از گذشت زمان، مجدد نیاز دارید تا به فایل
+فشرده قبلی چند فایل دیگر هم اضافه کنید
+می‌توانید با استفاده از سوییچ
+u
+فایل فشرده قبلی را اپدیت کنید.
+
+ارگومان اول این سوییچ مسیر فایل فشرده است، و ارگومان دوم مسیر فایل هایی است که باید به
+فایل فشرده اضافه شوند.
+
+
+
+    $ rar u test.rar fileadd.txt
+
+
+---
+
+
+### ست کردن پسورد برای فایل فشرده
+با استفاده از سوییچ p- میتوانید برای فایل های فشرده خود پسورد ست کنید.
+
+
+
+    $ rar -p a amir.rar
+    # Enter password (will not be echoed):
+  
+    # Reenter password:
+    # *****
+    # RAR 5.50   Copyright (c) 1993-2017 Alexander Roshal   11 Aug 2017
+    # Shareware version         Type RAR -? for help
+    # 
+    # Evaluation copy. Please register.
+    # 
+    # Updating archive amir.rar
+
+
+---
+
+
+### استخراج فایل 
+
+برای استخراج فایل دو سوییچ e و x استفاده می‌شوند.
+- سوییچ
+x
+مسیر کامل هر فایل را می‌سازد.
+
+- سوییچ
+e
+هیچ پوشه‌ای برای فایل ها نمی‌سازد و تمامی فایل ها را دورن پوشه فعلی استخراج می‌کند.
+
+
+
+    $ rar x amir.rar
+    # RAR 5.50   Copyright (c) 1993-2017 Alexander Roshal   11 Aug 2017
+    # Shareware version         Type RAR -? for help
+    # 
+    # Extracting from amir.rar
+    # 
+    # Creating    amir                                                   OK
+    # Extracting  amir/index.php                                         OK
+    # Extracting  amir/index.html                                        OK
+    # Extracting  amir/xyz.txt                                           OK
+    # Extracting  amir/abc.txt                                           OK
+
+    # All OK
+
+
+
+---
+
+### همچنین مطالعه کنید
+[unrar](/Gitab/books/book11/Book/65/unrar/)
+
+---
+### Author or Authors
+
+- *[Amirhosein](https://github.com/amirhoseinsb)* | **<amirhoseinsohrabi.official@gmail.com>**
+- *[Arya](https://github.com/shabane)* | **<m.mohamadshabane@gmail.com>**
+{% endraw %}

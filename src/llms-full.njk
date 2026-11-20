@@ -1,0 +1,41 @@
+---
+permalink: /llms-full.txt
+eleventyExcludeFromCollections: true
+---
+# گیتاب (Gitab) — فهرست کامل کتاب‌ها، فصل‌ها و جلسات دوره‌ها برای هوش مصنوعی و موتورهای پاسخ‌گو
+
+> Canonical Base URL: {{ site.baseUrl }}/
+> Language: Persian (fa-IR) with preserved English technical terminology (`ltr`)
+> Total Books: {{ books.length }} | Total Courses: {{ courses.length }}
+
+## 1. کتاب‌ها و فهرست کامل فصل‌ها (Books & Chapters)
+
+{% for book in books -%}
+### {{ book.persianTitle | safe }} ({{ book.title | safe }})
+- URL: {{ site.url }}{{ book.url | url }}
+- Author: {{ book.author | safe }}
+- Translator: {{ book.translator | safe }}
+- Category: {{ book.categoryName | safe }} (`{{ book.category }}`)
+- Summary: {{ book.desc | safe }}
+- First Chapter: {{ site.url }}{{ book.firstChapterUrl | url }}
+- Chapters:
+{% for ch in bookChapters[book.id] -%}
+  - [{{ ch.title | safe }}]({{ site.url }}{{ ch.url | url }})
+{% endfor %}
+
+{% endfor -%}
+## 2. دوره‌های آموزشی و درسنامه‌ها (Courses & Lessons)
+
+{% for course in courses -%}
+### {{ course.persianTitle | safe }} ({{ course.title | safe }})
+- URL: {{ site.url }}{{ course.url | url }}
+- Instructor: {{ course.instructorFa | safe }}
+- Summary: {{ course.desc | safe }}
+- Lessons:
+{% for item in collections.all -%}
+  {%- if item.url and '/lessons/' in item.url and course.slug in item.url %}
+  - [{{ item.data.title | safe }}]({{ site.url }}{{ item.url | url }}){% if item.data.description %}: {{ item.data.description | safe }}{% endif %}
+  {%- endif %}
+{% endfor -%}
+
+{% endfor -%}

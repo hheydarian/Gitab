@@ -21,7 +21,7 @@ title:  اسمبلی‌ها (Assemblies)
 
 ---
 
-### 🔹 محتوای یک اسمبلی (What’s in an Assembly) 🔹
+### محتوای یک اسمبلی (What’s in an Assembly)
 
 یک اسمبلی شامل چهار نوع محتوا است:
 
@@ -45,7 +45,7 @@ title:  اسمبلی‌ها (Assemblies)
 
 ---
 
-### 🔹 Assembly Manifest 🔹
+### Assembly Manifest
 
 **Assembly Manifest** دو هدف دارد:
 
@@ -58,7 +58,7 @@ title:  اسمبلی‌ها (Assemblies)
 
 ---
 
-### 🔹 داده‌های مهم ذخیره‌شده در Manifest 🔹
+### داده‌های مهم ذخیره‌شده در Manifest
 
 * نام ساده‌ی اسمبلی
 * شماره نسخه (**AssemblyVersion**)
@@ -78,13 +78,13 @@ title:  اسمبلی‌ها (Assemblies)
 
 ---
 
-### 🔹 مشاهده محتویات Manifest 🔹
+### مشاهده محتویات Manifest
 
 می‌توانید محتویات **assembly manifest** را با ابزار **.NET** به نام `ildasm.exe` مشاهده کنید. در فصل بعدی (۱۸) توضیح داده می‌شود که چگونه می‌توان این کار را به‌صورت برنامه‌نویسی با **reflection** انجام داد.
 
 ---
 
-### 🔹 مشخص کردن Assembly Attributes 🔹
+### مشخص کردن Assembly Attributes
 
 ویژگی‌های معمول اسمبلی را می‌توان در **Visual Studio**، در صفحه Properties پروژه و در تب **Package** مشخص کرد. تنظیمات این تب به فایل پروژه (.csproj) اضافه می‌شوند.
 
@@ -99,7 +99,7 @@ using System.Runtime.CompilerServices;
 
 ---
 
-### 🔹 Application Manifest (ویندوز) 🔹
+### Application Manifest (ویندوز)
 
 **Application Manifest** یک فایل XML است که اطلاعاتی درباره‌ی اسمبلی به سیستم‌عامل منتقل می‌کند. این فایل در هنگام ساخت، به‌عنوان یک **Win32 resource** داخل فایل اجرایی قرار می‌گیرد. اگر موجود باشد، قبل از بارگذاری اسمبلی توسط CLR خوانده شده و پردازش می‌شود و می‌تواند نحوه اجرای فرآیند برنامه در ویندوز را تحت تأثیر قرار دهد.
 
@@ -127,11 +127,11 @@ using System.Runtime.CompilerServices;
 </assembly>
 ```
 
-> ⚠️ برنامه‌های **UWP** دارای manifest بسیار پیچیده‌تری هستند که در فایل `Package.appxmanifest` توصیف شده است و شامل اعلام قابلیت‌های برنامه است که مشخص می‌کند سیستم‌عامل چه مجوزهایی می‌دهد. ساده‌ترین روش برای ویرایش این فایل، استفاده از **Visual Studio** است که با دوبار کلیک روی فایل، یک دیالوگ نمایش می‌دهد.
+>  برنامه‌های **UWP** دارای manifest بسیار پیچیده‌تری هستند که در فایل `Package.appxmanifest` توصیف شده است و شامل اعلام قابلیت‌های برنامه است که مشخص می‌کند سیستم‌عامل چه مجوزهایی می‌دهد. ساده‌ترین روش برای ویرایش این فایل، استفاده از **Visual Studio** است که با دوبار کلیک روی فایل، یک دیالوگ نمایش می‌دهد.
 
 ---
 
-### 🔹 استقرار Application Manifest 🔹
+### استقرار Application Manifest
 
 برای افزودن یک **application manifest** به پروژه .NET در **Visual Studio**:
 
@@ -143,13 +143,13 @@ using System.Runtime.CompilerServices;
 
 ---
 
-### 🔹 Modules 🔹
+### Modules
 
 ابزار `ildasm.exe` وجود یک **application manifest** جاسازی‌شده را تشخیص نمی‌دهد، اما **Visual Studio** هنگام دوبار کلیک روی اسمبلی در **Solution Explorer** نشان می‌دهد که آیا manifest موجود است یا خیر.
 
 در واقع، محتویات یک اسمبلی داخل یک **container** میانی به نام **module** بسته‌بندی می‌شود. هر **module** متناظر با یک فایل حاوی محتویات اسمبلی است. دلیل این لایه اضافی این است که در **.NET Framework** امکان توزیع یک اسمبلی در چند فایل وجود دارد، اما این ویژگی در **.NET 5+ و .NET Core** وجود ندارد.
 
-📌 شکل 17-1 رابطه بین **assembly** و **module** را نشان می‌دهد.
+ شکل 17-1 رابطه بین **assembly** و **module** را نشان می‌دهد.
 
 <div align="center">
 
@@ -160,7 +160,7 @@ using System.Runtime.CompilerServices;
 
 ---
 
-### 🔹 کلاس Assembly 🔹
+### کلاس Assembly
 
 کلاس **Assembly** در فضای نام `System.Reflection` دروازه‌ای برای دسترسی به **metadata** اسمبلی‌ها در زمان اجرا (**runtime**) است. روش‌های مختلفی برای به‌دست آوردن یک **assembly object** وجود دارد؛ ساده‌ترین روش، استفاده از ویژگی **Assembly** یک **Type** است:
 
@@ -181,13 +181,13 @@ Assembly a = typeof(Program).Assembly;
 
 پس از داشتن یک **Assembly object**، می‌توانید از **properties** و **methods** آن برای پرس‌وجوی **metadata** اسمبلی و بازتاب (**reflect**) بر روی **type**های آن استفاده کنید.
 
-📌 جدول ۱۷-۱ خلاصه‌ای از این توابع را نشان می‌دهد.
+ جدول ۱۷-۱ خلاصه‌ای از این توابع را نشان می‌دهد.
 <div align="center">
 
 ![Conventions-UsedThis-Book](../../../assets/image/17/Table-17-2.jpeg)
 </div>
 
-### 🔹 اسامی قوی و امضای اسمبلی (Strong Names and Assembly Signing) 🔹
+### اسامی قوی و امضای اسمبلی (Strong Names and Assembly Signing)
 
 داشتن **strong name** برای یک اسمبلی در **.NET Framework** اهمیت داشت، به دو دلیل:
 
@@ -203,7 +203,7 @@ Assembly a = typeof(Program).Assembly;
 
 این فرآیند نیازمند یک جفت **کلید عمومی/خصوصی** است. کلید عمومی شماره یکتای شناسایی را فراهم می‌کند و کلید خصوصی برای امضا استفاده می‌شود.
 
-> ⚠️ **Strong-name-signing** با **Authenticode-signing** متفاوت است. **Authenticode** بعداً در همین فصل توضیح داده خواهد شد.
+>  **Strong-name-signing** با **Authenticode-signing** متفاوت است. **Authenticode** بعداً در همین فصل توضیح داده خواهد شد.
 
 کلید عمومی در تضمین یکتایی ارجاعات به اسمبلی‌ها ارزشمند است: یک **strongly named assembly** کلید عمومی را در هویت خود وارد می‌کند.
 
@@ -213,7 +213,7 @@ Assembly a = typeof(Program).Assembly;
 
 ---
 
-### 🔹 چگونه یک اسمبلی را Strongly Name کنیم 🔹
+### چگونه یک اسمبلی را Strongly Name کنیم
 
 برای دادن **strong name** به یک اسمبلی، ابتدا یک جفت کلید عمومی/خصوصی با ابزار `sn.exe` تولید کنید:
 
@@ -235,7 +235,7 @@ sn.exe -k MyKeyPair.snk
 
 ---
 
-### 🔹 اسامی اسمبلی (Assembly Names) 🔹
+### اسامی اسمبلی (Assembly Names)
 
 هویت یک اسمبلی شامل چهار بخش از **metadata** در **manifest** است:
 
@@ -264,7 +264,7 @@ major.minor.build.revision
 
 ---
 
-### 🔹 اسامی کامل (Fully Qualified Names) 🔹
+### اسامی کامل (Fully Qualified Names)
 
 یک نام کامل اسمبلی رشته‌ای است که شامل هر چهار بخش هویت است، به شکل:
 
@@ -282,11 +282,11 @@ System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d
 
 ویژگی **FullName** یک **Assembly object** نام کامل آن را برمی‌گرداند. کامپایلر همیشه از نام کامل برای ثبت ارجاعات به اسمبلی در **manifest** استفاده می‌کند.
 
-> ⚠️ نام کامل اسمبلی شامل مسیر دایرکتوری نیست. یافتن اسمبلی در دایرکتوری دیگر موضوعی جداگانه است که در بخش «Loading, Resolving, and Isolating Assemblies» صفحه ۷۸۳ توضیح داده می‌شود.
+>  نام کامل اسمبلی شامل مسیر دایرکتوری نیست. یافتن اسمبلی در دایرکتوری دیگر موضوعی جداگانه است که در بخش «Loading, Resolving, and Isolating Assemblies» صفحه ۷۸۳ توضیح داده می‌شود.
 
 ---
 
-### 🔹 کلاس AssemblyName 🔹
+### کلاس AssemblyName
 
 کلاس **AssemblyName** دارای ویژگی‌های typed برای هر چهار بخش نام کامل اسمبلی است. دو کاربرد اصلی دارد:
 
@@ -303,7 +303,7 @@ System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d
 
 ---
 
-### 🔹 ویژگی‌ها و متدهای اصلی AssemblyName 🔹
+### ویژگی‌ها و متدهای اصلی AssemblyName
 
 | نوع         | نام                                       | توضیح                       |
 | ----------- | ----------------------------------------- | --------------------------- |
@@ -336,7 +336,7 @@ string v = myAssembly.GetName().Version.ToString();
 
 ---
 
-### 🔹 نسخه‌های اطلاعاتی و فایل اسمبلی 🔹
+### نسخه‌های اطلاعاتی و فایل اسمبلی
 
 دو ویژگی دیگر برای بیان اطلاعات مربوط به نسخه وجود دارد. برخلاف **AssemblyVersion**، این دو ویژگی هویت اسمبلی را تغییر نمی‌دهند و تأثیری بر کامپایل یا زمان اجرا ندارند:
 
@@ -346,7 +346,7 @@ string v = myAssembly.GetName().Version.ToString();
 * **AssemblyFileVersion**
   معمولاً به شماره **build** آن اسمبلی اشاره دارد. در دیالوگ **Windows File Properties** به‌عنوان **File Version** دیده می‌شود. مشابه **AssemblyVersion**، باید رشته‌ای شامل حداکثر چهار عدد جداشده با نقطه باشد.
 
-### 🔹 امضای Authenticode 🔹
+### امضای Authenticode
 
 **Authenticode** یک سیستم **code-signing** است که هدف آن اثبات هویت ناشر برنامه است.
 امضای **Authenticode** و **strong-name signing** مستقل از هم هستند؛ می‌توانید یک اسمبلی را با هر یک یا هر دو سیستم امضا کنید.
@@ -355,7 +355,7 @@ string v = myAssembly.GetName().Version.ToString();
 
 **Authenticode** هنگام دانلود برنامه‌ها از اینترنت مفید است، زیرا تضمین می‌کند برنامه دقیقاً از همان شخصی آمده که توسط **Certificate Authority** معرفی شده و در مسیر انتقال تغییر نکرده است. همچنین مانع نمایش هشدار “Unknown Publisher” هنگام اجرای برنامه دانلود شده برای اولین بار می‌شود.
 
-> ⚠️ امضای Authenticode همچنین شرط ارسال برنامه‌ها به **Windows Store** است.
+>  امضای Authenticode همچنین شرط ارسال برنامه‌ها به **Windows Store** است.
 
 ---
 
@@ -367,7 +367,7 @@ CLR امضای **Authenticode** را به‌عنوان بخشی از هویت ا
 
 ---
 
-### 🔹 نحوه امضا با Authenticode 🔹
+### نحوه امضا با Authenticode
 
 #### ۱. به‌دست آوردن و نصب گواهی‌نامه
 
@@ -399,7 +399,7 @@ CLR امضای **Authenticode** را به‌عنوان بخشی از هویت ا
 
 پس از وارد کردن گواهی، روی آن **View** کلیک کنید، به تب **Details** بروید و **thumbprint** آن را کپی کنید. این همان هش SHA-256 است که برای امضا نیاز دارید.
 
-> ⚠️ اگر قصد دارید همزمان **strong-name** هم استفاده کنید، ابتدا باید **strong-name-signing** انجام شود، سپس Authenticode. اگر ترتیب برعکس باشد، CLR اضافه شدن strong name بعد از Authenticode را به‌عنوان تغییر غیرمجاز در نظر می‌گیرد.
+>  اگر قصد دارید همزمان **strong-name** هم استفاده کنید، ابتدا باید **strong-name-signing** انجام شود، سپس Authenticode. اگر ترتیب برعکس باشد، CLR اضافه شدن strong name بعد از Authenticode را به‌عنوان تغییر غیرمجاز در نظر می‌گیرد.
 
 ---
 
@@ -419,7 +419,7 @@ signtool sign /n "Joseph Albahari" /fd sha256 LINQPad.exe
 ... /d LINQPad /du http://www.linqpad.net
 ```
 
-> ⚠️ معمولاً برای حفظ اعتبار پس از انقضای گواهی، باید **time-stamping server** هم مشخص شود.
+>  معمولاً برای حفظ اعتبار پس از انقضای گواهی، باید **time-stamping server** هم مشخص شود.
 
 #### Time Stamping
 
@@ -435,7 +435,7 @@ signtool sign /n "Joseph Albahari" /fd sha256 LINQPad.exe
 
 ---
 
-### 🔹 منابع و Satellite Assemblies 🔹
+### منابع و Satellite Assemblies
 
 یک برنامه معمولاً نه تنها شامل کد اجرایی است، بلکه محتواهایی مانند متن، تصویر یا فایل XML نیز دارد. این محتواها می‌توانند در یک اسمبلی از طریق **resource** گنجانده شوند.
 
@@ -467,13 +467,13 @@ signtool sign /n "Joseph Albahari" /fd sha256 LINQPad.exe
 
 **Localized .resources** می‌توانند به‌صورت **satellite assembly** جداگانه بسته‌بندی شوند و در زمان اجرا بر اساس زبان سیستم کاربر به‌طور خودکار انتخاب شوند.
 
-📌 شکل 17-2 یک اسمبلی را نشان می‌دهد که دو **resource** مستقیماً جاسازی‌شده و یک کانتینر `.resources` به نام `welcome.resources` دارد که برای آن دو **satellite assembly** محلی‌سازی شده ایجاد شده است.
+ شکل 17-2 یک اسمبلی را نشان می‌دهد که دو **resource** مستقیماً جاسازی‌شده و یک کانتینر `.resources` به نام `welcome.resources` دارد که برای آن دو **satellite assembly** محلی‌سازی شده ایجاد شده است.
 <div align="center">
 
 ![Conventions-UsedThis-Book](../../../assets/image/17/Table-17-3.jpeg)
 </div>
 
-### 🔹 جاسازی مستقیم منابع 🔹
+### جاسازی مستقیم منابع
 
 جاسازی **resources** در داخل اسمبلی‌ها در برنامه‌های **Windows Store** پشتیبانی نمی‌شود. به جای آن، فایل‌های اضافی را به **deployment package** اضافه کرده و از طریق **StorageFolder** برنامه خود (**Package.Current.InstalledLocation**) به آن‌ها دسترسی پیدا کنید.
 
@@ -489,7 +489,7 @@ Visual Studio همیشه نام منابع را با **namespace پیش‌فرض
 Westwind.Reports.pictures.banner.jpg
 ```
 
-> ⚠️ نام منابع **حساس به حروف بزرگ و کوچک** است، بنابراین نام پوشه‌های پروژه که شامل منابع هستند، به‌طور مؤثر حساس به حروف خواهند بود.
+>  نام منابع **حساس به حروف بزرگ و کوچک** است، بنابراین نام پوشه‌های پروژه که شامل منابع هستند، به‌طور مؤثر حساس به حروف خواهند بود.
 
 ---
 
@@ -522,7 +522,7 @@ using (Stream s = a.GetManifestResourceStream("TestProject.banner.jpg"))
     data = new BinaryReader(s).ReadBytes((int)s.Length);
 ```
 
-> ⚠️ اگر از Visual Studio برای جاسازی resource استفاده کرده‌اید، فراموش نکنید پیشوند namespace را لحاظ کنید.
+>  اگر از Visual Studio برای جاسازی resource استفاده کرده‌اید، فراموش نکنید پیشوند namespace را لحاظ کنید.
 > برای کاهش خطا، می‌توانید پیشوند را با یک نوع مشخص کنید:
 
 ```csharp
@@ -551,7 +551,7 @@ using (Stream s = a.GetManifestResourceStream(typeof(X), "data.xml"))
 
 ---
 
-### 🔹 فایل‌های .resources 🔹
+### فایل‌های .resources
 
 فایل‌های `.resources` کانتینرهایی برای محتوای قابل محلی‌سازی هستند. این فایل‌ها در نهایت به‌عنوان یک **embedded resource** داخل اسمبلی قرار می‌گیرند، درست مانند سایر فایل‌ها. تفاوت آن‌ها:
 
@@ -585,7 +585,7 @@ using (Stream s = a.GetManifestResourceStream(typeof(X), "data.xml"))
    * فایل `.resx` را به `.resources` تبدیل و در اسمبلی جاسازی می‌کند.
    * کلاسی برای دسترسی به داده‌ها تولید می‌کند.
 
-> ⚠️ designer منابع تصویری را به‌صورت typed **Image objects** (System.Drawing.dll) اضافه می‌کند که برای WPF مناسب نیستند.
+>  designer منابع تصویری را به‌صورت typed **Image objects** (System.Drawing.dll) اضافه می‌کند که برای WPF مناسب نیستند.
 
 ---
 
@@ -600,7 +600,7 @@ ResourceManager r = new ResourceManager("welcome",
                                         Assembly.GetExecutingAssembly());
 ```
 
-> ⚠️ اگر resource در Visual Studio کامپایل شده، آرگومان اول باید **namespace-prefixed** باشد.
+>  اگر resource در Visual Studio کامپایل شده، آرگومان اول باید **namespace-prefixed** باشد.
 
 دسترسی به محتوا:
 
@@ -621,7 +621,7 @@ foreach (System.Collections.DictionaryEntry entry in set)
 
 ---
 
-### 🔹 ایجاد resource با pack URI در Visual Studio 🔹
+### ایجاد resource با pack URI در Visual Studio
 
 در برنامه‌های WPF، فایل‌های XAML باید بتوانند منابع را از طریق URI بخوانند، مانند:
 
@@ -639,7 +639,7 @@ foreach (System.Collections.DictionaryEntry entry in set)
 </Button>
 ```
 
-> ⚠️ کلمه **Component** کلیدواژه ثابت است.
+>  کلمه **Component** کلیدواژه ثابت است.
 
 برای ایجاد چنین منابعی نمی‌توان از فایل‌های `.resx` استفاده کرد. باید فایل‌ها را به پروژه اضافه کرده و **Build Action** را روی **Resource** قرار دهید (نه Embedded Resource).
 Visual Studio سپس آن‌ها را به فایل `.resources` به نام `<AssemblyName>.g.resources` تبدیل می‌کند و همچنین فایل‌های XAML کامپایل‌شده (.baml) نیز در همانجا قرار می‌گیرند.
@@ -673,7 +673,7 @@ using (Stream s = r.GetStream("flag.png"))
 
 **ResourceManager** همچنین اجازه می‌دهد محتوای یک کانتینر `.g.resources` داخل یک اسمبلی را فهرست کنید.
 
-### 🌐 اسمبلی‌های ماهواره‌ای (Satellite Assemblies) 🌐
+### اسمبلی‌های ماهواره‌ای (Satellite Assemblies)
 
 داده‌های جاسازی‌شده در فایل‌های `.resources` **قابلیت محلی‌سازی (localizable)** دارند.
 محلی‌سازی منابع زمانی اهمیت دارد که برنامه شما روی نسخه‌ای از ویندوز اجرا شود که تمام محیط آن به زبانی دیگر نمایش داده می‌شود. برای یکپارچگی، برنامه شما نیز باید از همان زبان استفاده کند.
@@ -687,7 +687,7 @@ using (Stream s = r.GetStream("flag.png"))
 
 > این یعنی می‌توانید پشتیبانی از زبان‌های جدید را تنها با اضافه کردن satellite جدید فراهم کنید، بدون اینکه main assembly تغییر کند.
 
-> ⚠️ یک satellite assembly نمی‌تواند شامل کد اجرایی باشد، تنها منابع را می‌تواند نگه دارد.
+>  یک satellite assembly نمی‌تواند شامل کد اجرایی باشد، تنها منابع را می‌تواند نگه دارد.
 
 ---
 
@@ -752,7 +752,7 @@ System.Threading.Thread.CurrentThread.CurrentUICulture
     = new System.Globalization.CultureInfo("de");
 ```
 
-> ⚠️ `CultureInfo.CurrentUICulture` نسخه فقط‌خواندنی همین property است.
+>  `CultureInfo.CurrentUICulture` نسخه فقط‌خواندنی همین property است.
 
 یک استراتژی مفید برای تست این است که کلمات را **ℓѻ¢αℓïʐɘ** کنید؛ یعنی به شکلی که هنوز به انگلیسی قابل خواندن باشند، اما از کاراکترهای استاندارد رومی استفاده نکنند.
 
@@ -805,7 +805,7 @@ CurrentCulture      → en-AU
 CurrentUICulture    → en-US
 ```
 
-> ⚠️ `CurrentCulture` تنظیمات منطقه‌ای **Control Panel ویندوز** را نشان می‌دهد، در حالی که `CurrentUICulture` زبان سیستم عامل را مشخص می‌کند.
+>  `CurrentCulture` تنظیمات منطقه‌ای **Control Panel ویندوز** را نشان می‌دهد، در حالی که `CurrentUICulture` زبان سیستم عامل را مشخص می‌کند.
 > تنظیمات منطقه‌ای شامل **منطقه زمانی، قالب تاریخ و ارز** است. `CurrentCulture` رفتار پیش‌فرض توابعی مانند `DateTime.Parse` را تعیین می‌کند.
 > `CurrentUICulture` زبانی را مشخص می‌کند که سیستم با کاربر ارتباط برقرار می‌کند.
 
@@ -815,14 +815,14 @@ CurrentUICulture    → en-US
 * در غیر این صورت، به **generic culture** بازمی‌گردد.
 * اگر generic culture هم موجود نباشد، به **default culture** در main assembly بازمی‌گردد.
 
-### ⚙️ بارگذاری، حل وابستگی و جداسازی اسمبلی‌ها (Loading, Resolving, and Isolating Assemblies) ⚙️
+### بارگذاری، حل وابستگی و جداسازی اسمبلی‌ها (Loading, Resolving, and Isolating Assemblies)
 
 بارگذاری یک اسمبلی از یک مسیر مشخص نسبتاً ساده است و به آن **assembly loading** گفته می‌شود.
 اما اغلب، شما یا CLR نیاز دارید که یک اسمبلی را فقط با نام کامل یا ساده‌اش بارگذاری کنید. به این کار **assembly resolution** گفته می‌شود. تفاوت اصلی بین بارگذاری و حل وابستگی این است که در **resolution** ابتدا باید اسمبلی **پیدا شود**.
 
 ---
 
-#### 🔹 زمان‌های رخ دادن Assembly Resolution
+#### زمان‌های رخ دادن Assembly Resolution
 
 1. توسط CLR، وقتی نیاز به حل وابستگی (dependency) داشته باشد.
 2. صریحاً، وقتی شما متدی مانند `Assembly.Load(AssemblyName)` را فراخوانی می‌کنید.
@@ -840,13 +840,13 @@ UIEngine.dll         // Referenced assembly
 
 ---
 
-### ⚙️ Assembly Load Contexts (ALC) – بارگذاری و جداسازی اسمبلی‌ها ⚙️
+### Assembly Load Contexts (ALC) – بارگذاری و جداسازی اسمبلی‌ها
 
 کلاس **`AssemblyLoadContext`** مسئول بارگذاری (loading) و حل وابستگی (resolving) اسمبلی‌ها و همچنین فراهم کردن **مکانیزم جداسازی** (isolation) است.
 
 ---
 
-#### 🔹 هر اسمبلی متعلق به یک ALC است
+#### هر اسمبلی متعلق به یک ALC است
 
 هر **Assembly** در .NET دقیقاً در یک **ALC** قرار دارد.
 می‌توانید ALC یک اسمبلی را به این شکل دریافت کنید:
@@ -868,7 +868,7 @@ foreach (Assembly a in context.Assemblies)
 
 ---
 
-#### 🔹 ساخت و سفارشی‌سازی ALC
+#### ساخت و سفارشی‌سازی ALC
 
 * می‌توانید یک **ALC جدید** فقط با نمونه‌سازی `AssemblyLoadContext` و ارائه یک نام ایجاد کنید:
 
@@ -880,7 +880,7 @@ var alc = new AssemblyLoadContext("MyALC");
 
 ---
 
-### 🔹 بارگذاری صریح اسمبلی‌ها
+### بارگذاری صریح اسمبلی‌ها
 
 ALC دو متد مهم برای بارگذاری فراهم می‌کند:
 
@@ -902,7 +902,7 @@ Assembly assem = alc.LoadFromStream(ms);
 
 ---
 
-#### 🔹 محدودیت‌ها و نکات مهم
+#### محدودیت‌ها و نکات مهم
 
 * **نام ساده اسمبلی باید در یک ALC منحصر به فرد باشد.**
   برای بارگذاری نسخه‌های مختلف، باید ALCهای جداگانه بسازید:
@@ -921,7 +921,7 @@ var assem2 = alc2.LoadFromAssemblyPath(@"c:\temp\foo.dll");
 
 ---
 
-#### 🔹 تفاوت بین بارگذاری از فایل و از حافظه
+#### تفاوت بین بارگذاری از فایل و از حافظه
 
 * **LoadFromAssemblyPath:**
 
@@ -935,7 +935,7 @@ var assem2 = alc2.LoadFromAssemblyPath(@"c:\temp\foo.dll");
   * property `Location` خالی خواهد بود.
   * مصرف حافظه سریعاً افزایش می‌یابد.
 
-### 🔹 Assembly Resolution in .NET – بارگذاری و حل وابستگی اسمبلی‌ها
+### Assembly Resolution in .NET – بارگذاری و حل وابستگی اسمبلی‌ها
 
 کلاس **`AssemblyLoadContext`** علاوه بر بارگذاری اسمبلی‌ها از مسیر یا استریم، یک روش دیگر هم دارد: **بارگذاری از نام اسمبلی**.
 
@@ -948,7 +948,7 @@ public Assembly LoadFromAssemblyName(AssemblyName assemblyName);
 
 ---
 
-### 🔹 چگونگی حل وابستگی‌ها (Resolving Assemblies)
+### چگونگی حل وابستگی‌ها (Resolving Assemblies)
 
 هنگام بارگذاری وابستگی‌ها، CLR فرآیند حل وابستگی را به صورت زیر انجام می‌دهد:
 
@@ -971,7 +971,7 @@ public Assembly LoadFromAssemblyName(AssemblyName assemblyName);
 
 ---
 
-### 🔹 دو روش برای حل وابستگی در Custom ALC
+### دو روش برای حل وابستگی در Custom ALC
 
 1. **Override متد Load**
 
@@ -985,11 +985,11 @@ public Assembly LoadFromAssemblyName(AssemblyName assemblyName);
 
 ---
 
-### 🔹 مثال عملی: بارگذاری اسمبلی با وابستگی خصوصی
+### مثال عملی: بارگذاری اسمبلی با وابستگی خصوصی
 
 فرض کنید داریم:
 
-* foo.dll در `c:\temp`
+* foo.dll در `csharp:\temp`
 * bar.dll به عنوان وابستگی خصوصی foo.dll
 
 #### روش ۱: subclass و override Load
@@ -1041,12 +1041,12 @@ Assembly foo = alc.LoadFromAssemblyName(new AssemblyName("foo"));
 
 ---
 
-#### 🔹 نکات کلیدی
+#### نکات کلیدی
 
 * متد **FolderBasedALC** برای درک مفهوم حل وابستگی عالی است، اما در پروژه‌های واقعی با NuGet و وابستگی‌های platform-specific محدودیت دارد.
 * راه‌حل پیشرفته‌تر: استفاده از **AssemblyDependencyResolver** برای مدیریت وابستگی‌ها در پروژه‌های واقعی.
 
-### 🔹 ALC پیش‌فرض (The Default ALC) ⚙️
+### ALC پیش‌فرض (The Default ALC)
 
 وقتی یک برنامه شروع می‌شود، **CLR** یک **ALC ویژه** را به پراپرتی ایستا **`AssemblyLoadContext.Default`** اختصاص می‌دهد.
 ALC پیش‌فرض جایی است که **assembly شروع برنامه** بارگذاری می‌شود، همراه با وابستگی‌های استاتیک آن و اسمبلی‌های BCL مربوط به **.NET runtime**.
@@ -1090,7 +1090,7 @@ AssemblyLoadContext.Default.LoadFromAssemblyName("System.Xml");
 
 ---
 
-### 🔹 مسیرهای پیش‌فرض جستجو (Default Probing) 🗂️
+### مسیرهای پیش‌فرض جستجو (Default Probing)
 
 مسیرهای پیش‌فرض معمولاً شامل موارد زیر هستند:
 
@@ -1104,7 +1104,7 @@ AssemblyLoadContext.Default.LoadFromAssemblyName("System.Xml");
 
 ---
 
-### 🔹 ALC “جاری” (The “Current” ALC) 🔄
+### ALC “جاری” (The “Current” ALC)
 
 در بخش قبل، نسبت به بارگذاری مستقیم اسمبلی در **ALC پیش‌فرض** هشدار دادیم. معمولاً چیزی که می‌خواهید، بارگذاری/حل در **ALC جاری** است.
 
@@ -1146,7 +1146,7 @@ var alc = AssemblyLoadContext.GetLoadContext(assem);
 var obj = Deserialize(someStream, alc);
 ```
 
-### 🔹 Assembly.Load و ALCهای زمینه‌ای (Contextual ALCs) ⚙️
+### Assembly.Load و ALCهای زمینه‌ای (Contextual ALCs)
 
 برای سناریوی رایج بارگذاری یک اسمبلی در **ALC در حال اجرای جاری**، معمولاً کد زیر را می‌نویسیم:
 
@@ -1224,7 +1224,7 @@ Assembly Load(string name)
 
 ---
 
-### 🔹 EnterContextualReflection 🌐
+### EnterContextualReflection
 
 استراتژی Assembly.Load که از **ALC اسمبلی فراخواننده** استفاده می‌کند، زمانی شکست می‌خورد که **Assembly.Load توسط واسطه‌ای** مثل serializer یا unit test runner فراخوانی شود.
 اگر واسطه در یک assembly متفاوت باشد، ALC واسطه به جای ALC فراخواننده استفاده می‌شود.
@@ -1275,7 +1275,7 @@ Assembly Load(string name)
 
 > در .NET Framework هیچ معادلی برای EnterContextualReflection وجود ندارد و نیاز هم نیست، چون ایزوله‌سازی اساساً با **application domain** انجام می‌شود، که هر domain خودش یک default load context دارد و بنابراین ایزوله‌سازی حتی با استفاده از ALC پیش‌فرض هم امکان‌پذیر است.
 >
-### 🔹 بارگذاری و حل وابستگی کتابخانه‌های unmanaged 🛠️
+### بارگذاری و حل وابستگی کتابخانه‌های unmanaged
 
 ALCها می‌توانند **کتابخانه‌های native** را نیز بارگذاری و حل کنند.
 حل وابستگی native زمانی اتفاق می‌افتد که شما متدی خارجی را فراخوانی کنید که با صفت `[DllImport]` مشخص شده است:
@@ -1289,7 +1289,7 @@ static extern int SomeNativeMethod(string text);
 
 ---
 
-### 🔹 متدهای مرتبط با کتابخانه‌های unmanaged
+### متدهای مرتبط با کتابخانه‌های unmanaged
 
 * متد **virtual resolving** در ALC: `LoadUnmanagedDll`
 * متد **بارگذاری**: `LoadUnmanagedDllFromPath`
@@ -1309,7 +1309,7 @@ protected override IntPtr LoadUnmanagedDll(string unmanagedDllName)
 
 ---
 
-### 🔹 نکته جالب
+### نکته جالب
 
 متد `LoadUnmanagedDllFromPath` **protected** است، بنابراین معمولاً نمی‌توانید از handler رویداد `ResolvingUnmanagedDll` مستقیماً آن را فراخوانی کنید.
 با این حال، می‌توانید همان نتیجه را با **`NativeLibrary.Load`** استاتیک به دست آورید:
@@ -1327,7 +1327,7 @@ someALC.ResolvingUnmanagedDll += (requestingAssembly, unmanagedDllName) =>
 
 ---
 
-### 🔹 AssemblyDependencyResolver 📦
+### AssemblyDependencyResolver
 
 در بخش **Default probing** گفتیم که ALC پیش‌فرض برای حل وابستگی‌های **platform-specific** و **NuGet زمان توسعه**، فایل‌های `.deps.json` و `.runtimeconfig.json` را بررسی می‌کند.
 
@@ -1347,13 +1347,13 @@ var resolver = new AssemblyDependencyResolver(@"c:\temp\foo.dll");
 string path = resolver.ResolveAssemblyToPath(new AssemblyName("bar"));
 ```
 
-اگر `.deps.json` وجود نداشته باشد یا شامل اطلاعاتی درباره `bar.dll` نباشد، مسیر به صورت پیش‌فرض به `c:\temp\bar.dll` ارزیابی می‌شود.
+اگر `.deps.json` وجود نداشته باشد یا شامل اطلاعاتی درباره `bar.dll` نباشد، مسیر به صورت پیش‌فرض به `csharp:\temp\bar.dll` ارزیابی می‌شود.
 
 همین کار برای وابستگی‌های unmanaged نیز با `ResolveUnmanagedDllToPath` امکان‌پذیر است.
 
 ---
 
-### 🔹 مثال عملی با NuGet
+### مثال عملی با NuGet
 
 1. یک پروژه Console به نام `ClientApp` بسازید.
 2. یک reference به `Microsoft.Data.SqlClient` اضافه کنید.
@@ -1396,7 +1396,7 @@ C:\source\ClientApp\bin\Debug\netcoreapp3.0\runtimes\win\lib\netcoreapp2.1\Micro
 
 > یک مثال کامل در بخش **Writing a Plug-In System** در صفحه 799 ارائه شده است.
 >
-### 🔹 خارج کردن ALCها از حافظه و آزادسازی منابع 🗑️
+### خارج کردن ALCها از حافظه و آزادسازی منابع
 
 در موارد ساده، می‌توان یک **AssemblyLoadContext غیر پیش‌فرض** را از حافظه خارج کرد تا هم حافظه آزاد شود و هم قفل فایل‌های بارگذاری‌شده رفع شود.
 برای این کار، هنگام ایجاد ALC باید **پارامتر `isCollectible` را true** قرار دهید:
@@ -1418,7 +1418,7 @@ var alc = new AssemblyLoadContext("test", isCollectible: true);
 
 ---
 
-### 🔹 متدهای Legacy برای بارگذاری 📜
+### متدهای Legacy برای بارگذاری
 
 اگر هنوز از **.NET Framework** استفاده می‌کنید یا لایبری می‌نویسید که باید با .NET Framework سازگار باشد، نمی‌توانید از **AssemblyLoadContext** استفاده کنید.
 بارگذاری با متدهای زیر انجام می‌شود:
@@ -1437,7 +1437,7 @@ public static Assembly Load(byte[] rawAssembly);
 
 ---
 
-### 🔹 LoadFrom
+### LoadFrom
 
 * اسمبلی را از مسیر مشخص شده در **default ALC** بارگذاری می‌کند.
 * مشابه `AssemblyLoadContext.Default.LoadFromAssemblyPath` است، با تفاوت‌های زیر:
@@ -1454,7 +1454,7 @@ public static Assembly Load(byte[] rawAssembly);
 
 ---
 
-### 🔹 LoadFile و Load(byte\[])
+### LoadFile و Load(byte\[])
 
 * این متدها اسمبلی را از مسیر فایل یا آرایه بایت در **ALC جدید** بارگذاری می‌کنند.
 * برخلاف `LoadFrom`، ایزوله‌سازی ارائه می‌دهند و می‌توان چند نسخه از همان اسمبلی را بارگذاری کرد.
@@ -1487,7 +1487,7 @@ AppDomain.CurrentDomain.AssemblyResolve += (sender, args) =>
 AssemblyLoadContext.All.SelectMany(a => a.Assemblies)
 ```
 
-### 🔹 نوشتن یک سیستم پلاگین با ALCهای قابل خارج‌سازی 🧩
+### نوشتن یک سیستم پلاگین با ALCهای قابل خارج‌سازی
 
 برای نشان دادن کامل مفاهیمی که در این بخش بررسی کردیم، بیایید یک **سیستم پلاگین** بسازیم که از **ALCهای قابل unload** استفاده می‌کند تا هر پلاگین به صورت ایزوله اجرا شود.
 
@@ -1511,7 +1511,7 @@ c:\source\PluginDemo\Plugin.Host
 
 ---
 
-### 🔹 Plugin.Common
+### Plugin.Common
 
 اگر **Plugin.Host** به **Capitalizer** ارجاع می‌داد، دیگر یک سیستم پلاگین واقعی نبود؛ ایده اصلی این است که پلاگین‌ها توسط **سوم‌شخص‌ها** پس از انتشار **Plugin.Host** و **Plugin.Common** نوشته شوند.
 
@@ -1535,7 +1535,7 @@ namespace Plugin.Common
 
 ---
 
-### 🔹 Capitalizer (پلاگین)
+### Capitalizer (پلاگین)
 
 پلاگین **Capitalizer** به **Plugin.Common** ارجاع می‌دهد و یک کلاس دارد.
 برای ساده نگه داشتن، هیچ وابستگی اضافی ندارد:
@@ -1554,7 +1554,7 @@ Capitalizer.dll      // اسمبلی پلاگین ما
 Plugin.Common.dll    // اسمبلی ارجاع داده شده
 ```
 
-### 🔹 Plugin.Host 🖥️
+### Plugin.Host
 
 **Plugin.Host** یک اپلیکیشن Console است که شامل دو کلاس است.
 کلاس اول یک **ALC سفارشی** برای بارگذاری پلاگین‌ها است:
@@ -1618,7 +1618,7 @@ if (assemblyName.Name == typeof(ITextPlugin).Assembly.GetName().Name)
 
 ---
 
-### 🔹 کلاس Program
+### کلاس Program
 
 برای سادگی، مسیر پلاگین Capitalizer به صورت hardcode شده است (در عمل، مسیرها را می‌توان با جستجوی DLLها یا خواندن فایل کانفیگ پیدا کرد):
 
@@ -1673,7 +1673,7 @@ BIG APPLE
 
 ---
 
-### 🔹 افزودن وابستگی‌ها
+### افزودن وابستگی‌ها
 
 کد ما اکنون قابلیت حل و ایزوله‌سازی وابستگی‌ها را دارد.
 برای مثال، ابتدا یک **NuGet reference** به **Humanizer.Core** نسخه 2.6.2 اضافه کنید:
@@ -1705,7 +1705,7 @@ BigApple
 
 ---
 
-### 🔹 پلاگین جدید: Pluralizer
+### پلاگین جدید: Pluralizer
 
 یک پروژه کتابخانه جدید ایجاد کنید و NuGet reference به **Humanizer.Core** نسخه 2.7.9 اضافه کنید:
 
@@ -1730,7 +1730,7 @@ namespace Pluralizer
 
 ---
 
-### 🔹 فراخوانی پلاگین Pluralizer در Main
+### فراخوانی پلاگین Pluralizer در Main
 
 ```csharp
 static void Main()
@@ -1752,7 +1752,7 @@ big apples
 
 ---
 
-### 🔹 مشاهده ALCها و اسمبلی‌ها
+### مشاهده ALCها و اسمبلی‌ها
 
 اگر **UseCollectibleContexts** را **false** کنید و کد زیر را به Main اضافه کنید:
 

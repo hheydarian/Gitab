@@ -1,119 +1,19 @@
-
-
-<!doctype html>
-<html lang="fa" dir="rtl">
-<head>
-  <meta charset="utf-8">
-  <link rel="icon" type="image/png" href="/Gitab/favicon.png">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>تست های واحد</title>
-  <meta name="description" content="ترجمه‌های فارسی کتاب‌های فنی — سریع، مینیمال و قابل اتکا.">
-
-  <!-- استایل‌ها -->
-  <link rel="stylesheet" href="/Gitab/styles/main.css">
-  <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
-
-  <style>
-  @font-face {
-    font-family: 'Vazir';
-    src: url('/Gitab/fonts/Vazir-FD-WOL.ttf') format('truetype');
-    font-display: swap;
-  }
-  @font-face {
-    font-family: "Lalezar";
-    src: url('fonts/Lalezar.ttf') format('truetype');
-    font-display: swap;
-}
-  body {
-    font-family: 'Vazir', sans-serif;
-  }
-  </style>
-</head>
-
-<body>
-  <!-- هدر مشترک -->
-  <header class="header">
-    <div class="container nav-wrap">
-      <a href="/Gitab/" class="brand">
-        <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="26" height="26">
-        <span>Gitab</span>
-      </a>
-
-       <nav class="nav">
-         <a href="/Gitab/" >خانه</a>
-         <a href="/Gitab/books/list-books" >کتاب‌ها</a>
-         <a href="/Gitab/giter.html" >دوره ها</a>
-          <!-- 
-         <a href="/Gitab/translator.html" >مترجمین</a>
-           -->
-       </nav>
-
-      <div class="nav-actions">
-        <button id="themeToggle" class="icon-btn theme-btn" data-icon="moon" aria-label="تغییر تم">
-          <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن">
-          <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک">
-        </button>
-
-        <a class="icon-btn" href="https://github.com/hheydarian/Gitab" target="_blank" title="GitHub">
-          <img src="/Gitab/icone/github.svg" alt="GitHub">
-        </a>
-
-        <!-- دکمه منو برای موبایل -->
-        <button class="menu-toggle" aria-label="منو">
-          <img src="/Gitab/icone/menu.svg" alt="menu">
-        </button>
-      </div>
-    </div>
-  </header>
-
-  
-  <main class="site-main book-page">
-    <h1>تست های واحد</h1>
-<p><img src="../../../assets/image/09/img-9.1.png" alt="unit tests" title="unit tests"></p>
-<div dir="rtl">
-<p>حرفه ما مسیر زیادی را در طی 10 سال گذشته پیموده است. در سال 1997 هیچکس در مورد توسعه آزمون محور چیزی نشنیده بود. برای اکثریت قریب به اتفاق ما ، تست های واحد چند خط کد بدرد نخور بودند که مطمئن شویم برنامه کار میکند. ما با زحمت کلاس ها و متد هایمان را مینوشتیم و بعد با چندین خط کد کثیف و از سرباز کنی، آن ها را تست می کردیم. معمولاً این حرکت شامل این میشود که یک برنامه درایور ساده را به پروژه اضافه کنیم، تا بتوانیم به صورت دستی کد را تست کنیم.</p>
-<p>یادم میاد در اواسط دهه 90 داشتم یک برنامه با زبان ++C برای یک سیستم نهفته می نوشتم. برنامه یک تایمر ساده به شرح زیر بود:</p>
-</div>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">Timer::ScheduleCommand</span><span class="hljs-params">(Command* theCommand, <span class="hljs-type">int</span> milliseconds)</span>
-</span></code></pre>
-<div dir="rtl">
-الگوریتم کار ساده بود، متد execute از آبجکت command باید بعد از گذشت چند میلی ثانیه مشخص داخل یک ترد جدید فراخوانی می شد. اما مشکل اصلی این بود که چه طور باید این الگوریتم را تست کنیم.
-برای انجام این کار خیلی سریع یک برنامه درایور صفحه کلید نوشتم. هر وقت که یک حرف تایپ می شد، برنامه فرمان چاپ را پنج ثانیه بعد صادر میکند. سپس یک شعر ریتمیک را تایپ کردم و منتظر ماندم تا شعر با پنج ثانیه تاخیر در صفحه چاپ شود.
-<p><code>من ... یکی رو میخواستم ... فقط ... اون دختری که از ... دواج ... کرد ... با بابای ... عزیز... و پیرم</code></p>
-<p>در واقع من آن  شعر را در حالی که کلید <code>.</code> را تایپ میکردم می خواندم. و بعد آن را دوباره هنگامی که نقطه ها چاپ شده بودند، خواندم.<br>
-این تست من شد! بعد از اینکه از کار کردن آن مطمئن شدم و آن را برای همکارانم توضیح دادم، کد تست را پاک کردم.</p>
-<p>همینطور که قبلا گفتم، حرفه ما راه زیادی را طی کرده است. امروزه من برای تمام سوراخ و سنبه ها و گوشه های نرم افزار تست می نویسم تا مطمئن باشم همانطوری که من انتظار دارم کار می کند. من وابستگی کد را نسبت به سیستم عامل حذف میکنم، به جای آنکه بخواهم توابع مدیریت زمان مربوط به سیستم عامل را صدا بزنم. من برای کنترل کامل بر زمان، تمام توابع مدیریت زمان را به صورت جعلی می نویسم. من فرمان هایی که پرچم های وضعیت را تغییر می دهند، برنامه ریزی میکنم و بعد زمان را جلو می برم و پرچم ها را زیر نظر میگیرم که مقدارشان از <code>false</code> به <code>true</code> تغییر کند، آن هم درست زمانی که من مقدار زمان را تغییر دهم.</p>
-<p>وقتی که تمام تست ها پاس شدند، من مطمئن می شوم که اجرا کردن آن ها برای هر کسی که نیاز دارد با کد کار کند، راحت باشد. همینطور مطمئن می شوم که کد و تست با هم در یک پکیج حاضر شوند.</p>
-<p>بله ما راه زیادی را طی کرده ایم. ، اما هنوز باید جلوتر برویم. روش چابک (Agile) و توسعه آزمون محور (TDD) خیلی از برنامه نویس ها را تشویق کرده که تست های واحد اتوماتیک بنویسند و همینطور به تعداد آن ها افزوده می شود. اما عجله زیاد برای افزودن تست، باعث شده که بسیاری از برنامه نویسان نکات مهم و حیاطی نوشتن تست خوب را جا بیندازند.</p>
-<h2>سه قانون توسعه آزمون محور</h2>
-<p>تا الان همه می دانند که توسعه آزمون محور از ما میخواهد قبل از نوشتن کد نهایی (Production Code)، تست های واحد را بنویسیم. اما این قانون فقط قسمت کوچکی از توسعه آزمون محور است. این سه قانون را در نظر بگیرید:</p>
-<p><code>قانون اول</code> تنها زمانی شروع به نوشتن کد نهایی کنید که می خواهید یک تست شکست خورده را پاس کنید.</p>
-<p><code>قانون دوم</code> با شکست خوردن تست از نوشتن تست بعدی جلوگیری کنید.</p>
-<p><code>قانون سوم</code> تنها به مقداری کد نهایی بنویسید که برای پاس کردن تست شکست خورده کافی باشد.</p>
-<p>این سه قانون شما را وارد یک چرخه ای می کند که شاید 30 ثانیه طول بکشد. تست ها و کد نهایی با هم نوشته می شوند، با این تفاوت که تست ها چند ثانیه از کد نهایی جلوتر هستند.<br>
-اگر ما به این روش کار کنیم، ده ها تست به طور روزانه، صد ها تست ماهانه و هزاران تست در سال خواهیم نوشت. اگر به این روش کار کینم، این تست ها تمام کد های نهایی ما را پوشش می دهند. بخش عمده این تست ها که میتواند با اندازه کد نهایی رقابت کند، میتواند یک مشکل مدیریتی دلهره آور را ایجاد کند.</p>
-<h2>تمیز نگه داشتن کدها</h2>
-<p>چندسال پیش از من درخواست شده بود تا مربی تیمی شوم که صراحتا تصمیم گرفته بود کد آزمون آن ها نباید مطابق با استاندارد کیفیت تولید آن ها نگهداری<br>
-شود.آن ها به یکدیگر اجازه می دادند تا در آزمون های واحد خود قوانین را زیرپا بگذارند.کلیدواژه سریع و کثیف بود.متغیرهای آن ها لازم نیست با نام های خوبی نام گذاری شود و توابع لازم نیست تا کوتاه و توصیفی باشند.کد آزمون آن ها لازم نیست به خوبی طراحی و فکر شده تقسیم بندی شده باشد.تا<br>
-زمانی که کد تست کار می کرد و تا زمانی که  کدتولید را پوشش می داد به اندازه کافی خوب بود.</p>
-<p>بعضی از شماها که در حال خواندن این متن هستید ممکن است با آن همدردری کنید.شاید شما در زمان گذشته آزمون هایی از نوع همان که من برای آن تایمر  نوشتم می نوشتید.این یک قدم بزرگ برای نوشتن این نوع آزمون بدردنخور است برای نوشتن مجموعه ای از  آزمون های واحد خودکار است.خب مثل تیمی که من مربی آن ها بودم ممکن است شماهم این تصمیم را بگیرید که داشتن آزمون های کثیف بهتر از نداشتن آزمون است.</p>
-<p>چیزی که این تیم متوجه نشده بود این بود که داشتن آزمون های کثیف بدتر از نداشتن آزمون است.مشکل این است که آزمون ها باید با تکامل کد تولید تغییر کنند.هرچقدر آن ها کثیف تر باشند سخت تر می توان آن ها را تغییر داد.هرچقدر کد آزمون درهم تر باشد ،احتمال اینکه شما وقت بیشتری را صرف جمع کردن آزمون های بیشتری کنید بیشتر از نوشتن کد تولید جدیداست. همانطور که شما کدهای تولید را تغییر می دهید آزمون های قدیمی شروع به شکست خوردن می کنند و آشفتگی در کد تست ها ،گذراندن مجدد آن آزمون ها را سخت می کند.پس آزمون ها مثل یک بدهی رو به افزایش در نظر گرفته می شوند.</p>
-<p>هزینه نگهداری مجموعه آزمایشی تیم من از زمان انتشار تا آزادسازی افزایش یافت.در نهایت این مورد به بزرگترین شکایت در میان توسعه دهندگان تبدیل شدزمانی که مدیران پرسیدند چرا تخمین‌هایشان اینقدر بزرگ شده است، توسعه‌دهندگان آزمایش‌ها را مقصر می‌دانستند.در پایان آنها مجبور شدند مجموعه آزمایشی را به طور کامل دور بیندازند.</p>
-<p>اما بدون مجموعه آزمون ها آن ها این توانایی که تغییرات در پایه کد آن ها همان طور که انتظار می رفت کار می کند را از دست دادند.بدون مجموعه آزمون ها آن ها نمی توانستند اطمینان حاصل کنند که تغییرات در یک قسمت از سیستم آن ها باعث خراب شدن سایر بخش های سیستم آن ها نمی شود.بنابراین میزان<br>
-نقص آنها شروع به افزایش کرد.با افزایش تعداد نقص های ناخواسته، آنها شروع به ترس از ایجاد تغییرات کردند .آن ها تمیز کردن کدهایشان را متوقف .کردند زیرا می ترسیدند تغییرات آن ها بیشتر از اینکه مفید باشد ضرر داشته باشد.کد تولید آن ها شروع به پوسیده شدن کرد.در آخرآن ها بدون آزمون ها ماندند . کد تولیددرهم و پر از اشکال ،مشتریان نا امید شدند و احساس می کردند آزمایش آن ها را شکست داده است</p>
-<p>به نوعی حق با آن ها بود آزمایش آن ها را شکست داده بوداما این تصمیم آن ها بود که اجازه دادند کدها درهم باشند و این بذر شکست آن ها را کاشت!اگر کد ها را تمیز نگه می داشتند آزمایش آن ها شکست نمی خورد.این را می توانم با قاطعیت بگویم زیرا در تیم های زیادی حضور داشته و مربیگری کرده ام که با واحد تمیز موافق بوده اند.</p>
-<p>نکته اخلاقی داستان ساده است کد آزمون ها به اندازه کد تولید مهم است.این یک جنس درجه دو یا کم ارزش نیست پس نیاز به تفکر و طراحی دارد و باید همانند کد تولید تمیز نگه داشته شود.</p>
-<h2>آزمون ها مشکلات را به وجود می آورند</h2>
-<p>اگر شما کدهایتان را تمیز نگهداری نکنید آن ها را از دست خواهید داد،و بدون آن ها شما همان چیزی که تولید شما را منعطف نگه می دارد را از دست می دهید.بله شما آن را درست خواندید . این آزمون های واحد هستند که کد ما را انعطاف پذیر ،قابل نگهداری و قابل استفاده مجدد نگه می دارند.علت آن ساده است، اگر شما آزمون ها را دارید دیگر نباید از تغییر در کدهایتان بترسید! بدون آزمون ها هر تغییری می تواند یک مشکل باشد. مهم نیست که معماری کد شما چقدر انعطاف پذیر است،مهم نیست طراحی شما چقدر خوب تقسیم بندی شده است  ،بدون آزمون ها شما از ترس اینکه اشکالات شناسایی نشده را معرفی کنید تمایلی به ایجاد تغییرات ندارید.</p>
-<p>اما با داشتن آزمون ها ترس ها عملا از بین می روند هر چقدر پوشش تست شما بیشتر باشد شما کمتر می ترسید. شما می توانید بدون جریمه کدهایی را تغییر  که معماری کمتر ستاره ای و طراحی درهم و نا واضح هستند در واقع شما می توانید آن معماری را بدون ترس بهبود ببخشید.بنابر این داشتن مجموعه ای خودکار از آزمون های واحد که کد تولید را پوشش می دهند کلید این است تا معماریتان و طراحیتان را به تمیز ترین شکل ممکن نگهداری کنید.آزمون ها مشکلات را فعال می کنند زیرا آزمون ها اعمال تغییرات را امکان پذیر می کنند.</p>
-<p>پس اگر کد آزمون های شما کثیف هستند شما برای اینکه در کدتان تغییر ایجاد کنید با مشکل مواجه می شوید و شما شروع به از دست دادن توانایی خود در ایجاد بهبود درساختار آن کد می شوید.هر چقدر آزمون های شما کثیف تر باشد کد شما نیز کثیف تر می شود. در نهایت آزمون ها را از دست می دهیدو کد شما پوسیده می شود.</p>
-<h2>آزمون های تمیز</h2>
-<p>چه چیزی یک تست تمیز را می سازد؟سه چیز:خوانایی،خوانایی و خوانایی.خوانایی شاید در آزمون های واحد مهم تر از کد تولید باشد.چه چیزی یک آزمون را خوانا می کند؟همان چیزی که همه کدها را قابل خواندن می کند :در یک آزمون شما می خواهید با کمترین عبارات ممکن چیزهای زیادی بگویید.</p>
-<p>کد FitNesse را در فهرست 9-1 در نظر بگیرید. درک این سه آزمون دشوار است و مطمئناً قابل بهبود هستند. اول، مقدار وحشتناکی از کد تکراری [G5] در تماس های مکرر به addPage و assertSubString وجود دارد. مهمتر از آن، این کد فقط با جزئیاتی بارگذاری شده است که با بیان آزمون تداخل دارد.</p>
-</div>
-<p>Listing 9-1 -- SerializedPageResponderTest.java</p>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">testGetPageHieratchyAsXml</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> Exception {
+<!doctype html><html lang="fa" dir="rtl"> <head><script>
+    if (window.location.pathname.startsWith('/gitab/')) {
+      window.location.replace(window.location.pathname.replace(/^\/gitab\//i, '/Gitab/') + window.location.search + window.location.hash);
+    }
+    (() => {
+      try {
+        const t = localStorage.getItem('gitab-theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', t);
+        document.documentElement.dataset.colorMode = t;
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        document.documentElement.dataset.colorMode = 'dark';
+      }
+    })();
+  </script> <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5"> <title>تست های واحد</title><meta name="description" content="تست های واحد — مطالعه آنلاین و رایگان از کتاب «کد تمیز (عمو باب)» (Clean Code) اثر Robert C. Martin با ترجمه مجتبی افراز در گیتاب."> <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"><meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"> <meta name="theme-color" content="#090d16"><meta name="referrer" content="strict-origin-when-cross-origin"> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https:; frame-src https://www.youtube.com https://www.youtube-nocookie.com https://maps.google.com https://www.google.com; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self';"><link rel="icon" type="image/png" href="/Gitab/favicon.png"> <link rel="canonical" href="https://hheydarian.github.io/Gitab/books/book3/Book/09_Unit_Tests/Unit_Tests/"><link rel="alternate" hreflang="fa" href="https://hheydarian.github.io/Gitab/books/book3/Book/09_Unit_Tests/Unit_Tests/"> <link rel="alternate" hreflang="x-default" href="https://hheydarian.github.io/Gitab/books/book3/Book/09_Unit_Tests/Unit_Tests/"><link rel="alternate" type="text/plain" title="LLMs.txt" href="/Gitab/llms.txt"> <link rel="sitemap" type="application/xml" title="Sitemap" href="/Gitab/sitemap.xml"><meta property="og:locale" content="fa_IR"> <meta property="og:type" content="article"><meta property="og:site_name" content="گیتاب | Gitab"> <meta property="og:title" content="تست های واحد"><meta property="og:description" content="تست های واحد — مطالعه آنلاین و رایگان از کتاب «کد تمیز (عمو باب)» (Clean Code) اثر Robert C. Martin با ترجمه مجتبی افراز در گیتاب."> <meta property="og:url" content="https://hheydarian.github.io/Gitab/books/book3/Book/09_Unit_Tests/Unit_Tests/"><meta property="og:image" content="https://hheydarian.github.io/Gitab/images/clean-code/Cover.webp"> <meta property="og:image:alt" content="تست های واحد"><meta name="twitter:card" content="summary_large_image"> <meta name="twitter:title" content="تست های واحد"><meta name="twitter:description" content="تست های واحد — مطالعه آنلاین و رایگان از کتاب «کد تمیز (عمو باب)» (Clean Code) اثر Robert C. Martin با ترجمه مجتبی افراز در گیتاب."> <meta name="twitter:image" content="https://hheydarian.github.io/Gitab/images/clean-code/Cover.webp"><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://hheydarian.github.io/Gitab/#organization","name":"گیتاب | Gitab","alternateName":"Gitab","url":"https://hheydarian.github.io/Gitab/","logo":{"@type":"ImageObject","url":"https://hheydarian.github.io/Gitab/favicon.png"},"sameAs":["https://github.com/hheydarian/Gitab"]},{"@type":"WebSite","@id":"https://hheydarian.github.io/Gitab/#website","url":"https://hheydarian.github.io/Gitab/","name":"گیتاب | Gitab","inLanguage":"fa-IR","publisher":{"@id":"https://hheydarian.github.io/Gitab/#organization"},"potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://hheydarian.github.io/Gitab/books/list-books/?q={search_term_string}"},"query-input":"required name=search_term_string"}},{"@type":"WebPage","@id":"https://hheydarian.github.io/Gitab/books/book3/Book/09_Unit_Tests/Unit_Tests/#webpage","url":"https://hheydarian.github.io/Gitab/books/book3/Book/09_Unit_Tests/Unit_Tests/","name":"تست های واحد","description":"تست های واحد — مطالعه آنلاین و رایگان از کتاب «کد تمیز (عمو باب)» (Clean Code) اثر Robert C. Martin با ترجمه مجتبی افراز در گیتاب.","inLanguage":"fa-IR","isPartOf":{"@id":"https://hheydarian.github.io/Gitab/#website"}},{"@type":"TechArticle","headline":"تست های واحد","description":"تست های واحد — مطالعه آنلاین و رایگان از کتاب «کد تمیز (عمو باب)» (Clean Code) اثر Robert C. Martin با ترجمه مجتبی افراز در گیتاب.","url":"https://hheydarian.github.io/Gitab/books/book3/Book/09_Unit_Tests/Unit_Tests/","inLanguage":"fa-IR","isAccessibleForFree":true,"author":{"@type":"Person","name":"Robert C. Martin"},"translator":{"@type":"Person","name":"مجتبی افراز"},"isPartOf":{"@type":"Book","name":"کد تمیز (عمو باب)","alternateName":"Clean Code","url":"https://hheydarian.github.io/Gitab/books/book3/"}}]}</script> <link rel="preload" href="/Gitab/fonts/Vazirmatn.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/Gitab/styles/main.css?v=2.4" as="style"> <link rel="preload" href="/Gitab/styles/gitab-modern.css?v=2.5" as="style"><style>@font-face{font-family:'Lalezar';src:url('/Gitab/fonts/Lalezar.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}@font-face{font-family:'Vazirmatn';src:url('/Gitab/fonts/Vazirmatn.woff2') format('woff2');font-weight:100 900;font-style:normal;font-display:swap}html,body,button,input,optgroup,select,textarea,.filter-pill{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}input::placeholder,textarea::placeholder{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}</style> <link rel="stylesheet" href="/Gitab/styles/main.css?v=2.4"><link rel="stylesheet" href="/Gitab/styles/gitab-modern.css?v=2.5"> <link rel="stylesheet" href="/Gitab/styles/vendor/github-dark.min.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="/Gitab/styles/vendor/github-dark.min.css"></noscript></head> <body><header class="header"> <div class="container nav-wrap"><a href="/Gitab/" class="brand" aria-label="صفحه اصلی گیتاب"> <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="30" height="30" decoding="async"> <span class="brand-text">Gitab</span> </a> <nav class="nav" id="mainNav"><a href="/Gitab/" >خانه</a> <a href="/Gitab/books/list-books" aria-current="page">کتاب‌ها</a> <a href="/Gitab/courses/" >دوره‌ها</a> <a href="/Gitab/translator.html" >مترجمین</a></nav> <div class="nav-actions"><button id="themeToggle" class="theme-toggle-btn" aria-label="تغییر تم" title="تغییر تم"> <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن" width="18" height="18" decoding="async" style="display:none"> <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک" width="18" height="18" decoding="async"> </button> <a class="btn-github-pill" href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" title="مشاهده سورس گیتاب در گیت‌هاب"> <img src="/Gitab/icone/github.svg" alt="GitHub" width="16" height="16" decoding="async"> <span>گیت‌هاب</span> </a> <button class="mobile-menu-btn" id="mobileMenuBtn" type="button" aria-label="باز کردن منو" aria-expanded="false"> <svg class="mob-icon-open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="4" y1="7" x2="20" y2="7"></line> <line x1="4" y1="12" x2="20" y2="12"></line> <line x1="4" y1="17" x2="14" y2="17"></line> </svg> <svg class="mob-icon-close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="18" y1="6" x2="6" y2="18"></line> <line x1="6" y1="6" x2="18" y2="18"></line> </svg> </button></div> </div><div class="mobile-drawer" id="mobileDrawer" aria-hidden="true"> <div class="mobile-drawer-inner"><div class="mobile-drawer-section-label">ناوبری سریع</div><nav class="mobile-drawer-links" aria-label="منوی موبایل"> <a href="/Gitab/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M3 10.5 12 3l9 7.5"></path> <path d="M5 9.5V20a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V9.5"></path> </svg> </span> <span class="mob-nav-text">صفحه نخست</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/books/list-books" class="mobile-drawer-link active" aria-current="page"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path> </svg> </span> <span class="mob-nav-text">کتابخانه و فهرست کتاب‌ها</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/courses/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path> <path d="M6 12v5c3 3 9 3 12 0v-5"></path> </svg> </span> <span class="mob-nav-text">دوره‌های آموزشی</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/translator.html" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path> <circle cx="9" cy="7" r="4"></circle> <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path> <path d="M16 3.13a4 4 0 0 1 0 7.75"></path> </svg> </span> <span class="mob-nav-text">مترجمین و همکاران</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> </nav><div class="mobile-drawer-divider"></div><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" class="mobile-drawer-link mobile-drawer-gh"> <span class="mob-nav-icon" aria-hidden="true"> <img src="/Gitab/icone/github.svg" alt="" width="17" height="17" loading="lazy" decoding="async"> </span> <span class="mob-nav-text">مخزن گیت‌هاب پروژه</span> <span class="mob-nav-ext" aria-hidden="true">↗</span> </a> </div></div> </header><div class="reading-progress-track"> <div class="reading-progress-fill" id="readingProgressBar"></div></div> <main class="site-main chapter-reading-page"><div class="chapter-page-wrapper"> <nav class="chapter-clean-breadcrumb" aria-label="مسیر راهنما" dir="rtl"><a href="/Gitab/">خانه</a> <span class="bc-sep" aria-hidden="true">/</span> <a href="/Gitab/books/list-books/">کتاب‌ها</a> <span class="bc-sep" aria-hidden="true">/</span> <a href="/Gitab/books/book3/"><bdi>کد تمیز</bdi></a> <span class="bc-sep" aria-hidden="true">/</span> <span class="bc-current-leaf"><bdi>تست های واحد</bdi></span></nav> <article class="chapter-prose-container markdown-body" id="chapterArticle" dir="rtl"><h1>تست های واحد</h1><p><img src="../../../assets/image/09/img-9.1.png" alt="unit tests" title="unit tests" loading="lazy" decoding="async"></p><div dir="rtl"> <p>حرفه ما مسیر زیادی را در طی 10 سال گذشته پیموده است. در سال 1997 هیچکس در مورد توسعه آزمون محور چیزی نشنیده بود. برای اکثریت قریب به اتفاق ما ، تست های واحد چند خط کد بدرد نخور بودند که مطمئن شویم برنامه کار میکند. ما با زحمت کلاس ها و متد هایمان را مینوشتیم و بعد با چندین خط کد کثیف و از سرباز کنی، آن ها را تست می کردیم. معمولاً این حرکت شامل این میشود که یک برنامه درایور ساده را به پروژه اضافه کنیم، تا بتوانیم به صورت دستی کد را تست کنیم.</p><p>یادم میاد در اواسط دهه 90 داشتم یک برنامه با زبان ++C برای یک سیستم نهفته می نوشتم. برنامه یک تایمر ساده به شرح زیر بود:</p></div> <pre class="hljs"><code><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">Timer::ScheduleCommand</span><span class="hljs-params">(Command* theCommand, <span class="hljs-type">int</span> milliseconds)</span>
+</span></code></pre> <div dir="rtl"> الگوریتم کار ساده بود، متد execute از آبجکت command باید بعد از گذشت چند میلی ثانیه مشخص داخل یک ترد جدید فراخوانی می شد. اما مشکل اصلی این بود که چه طور باید این الگوریتم را تست کنیم. برای انجام این کار خیلی سریع یک برنامه درایور صفحه کلید نوشتم. هر وقت که یک حرف تایپ می شد، برنامه فرمان چاپ را پنج ثانیه بعد صادر میکند. سپس یک شعر ریتمیک را تایپ کردم و منتظر ماندم تا شعر با پنج ثانیه تاخیر در صفحه چاپ شود. <p><code>من ... یکی رو میخواستم ... فقط ... اون دختری که از ... دواج ... کرد ... با بابای ... عزیز... و پیرم</code></p><p>در واقع من آن شعر را در حالی که کلید <code>.</code> را تایپ میکردم می خواندم. و بعد آن را دوباره هنگامی که نقطه ها چاپ شده بودند، خواندم.<br> این تست من شد! بعد از اینکه از کار کردن آن مطمئن شدم و آن را برای همکارانم توضیح دادم، کد تست را پاک کردم.</p><p>همینطور که قبلا گفتم، حرفه ما راه زیادی را طی کرده است. امروزه من برای تمام سوراخ و سنبه ها و گوشه های نرم افزار تست می نویسم تا مطمئن باشم همانطوری که من انتظار دارم کار می کند. من وابستگی کد را نسبت به سیستم عامل حذف میکنم، به جای آنکه بخواهم توابع مدیریت زمان مربوط به سیستم عامل را صدا بزنم. من برای کنترل کامل بر زمان، تمام توابع مدیریت زمان را به صورت جعلی می نویسم. من فرمان هایی که پرچم های وضعیت را تغییر می دهند، برنامه ریزی میکنم و بعد زمان را جلو می برم و پرچم ها را زیر نظر میگیرم که مقدارشان از <code>false</code> به <code>true</code> تغییر کند، آن هم درست زمانی که من مقدار زمان را تغییر دهم.</p><p>وقتی که تمام تست ها پاس شدند، من مطمئن می شوم که اجرا کردن آن ها برای هر کسی که نیاز دارد با کد کار کند، راحت باشد. همینطور مطمئن می شوم که کد و تست با هم در یک پکیج حاضر شوند.</p><p>بله ما راه زیادی را طی کرده ایم. ، اما هنوز باید جلوتر برویم. روش چابک (Agile) و توسعه آزمون محور (TDD) خیلی از برنامه نویس ها را تشویق کرده که تست های واحد اتوماتیک بنویسند و همینطور به تعداد آن ها افزوده می شود. اما عجله زیاد برای افزودن تست، باعث شده که بسیاری از برنامه نویسان نکات مهم و حیاطی نوشتن تست خوب را جا بیندازند.</p><h2>سه قانون توسعه آزمون محور</h2><p>تا الان همه می دانند که توسعه آزمون محور از ما میخواهد قبل از نوشتن کد نهایی (Production Code)، تست های واحد را بنویسیم. اما این قانون فقط قسمت کوچکی از توسعه آزمون محور است. این سه قانون را در نظر بگیرید:</p><p><code>قانون اول</code> تنها زمانی شروع به نوشتن کد نهایی کنید که می خواهید یک تست شکست خورده را پاس کنید.</p><p><code>قانون دوم</code> با شکست خوردن تست از نوشتن تست بعدی جلوگیری کنید.</p><p><code>قانون سوم</code> تنها به مقداری کد نهایی بنویسید که برای پاس کردن تست شکست خورده کافی باشد.</p><p>این سه قانون شما را وارد یک چرخه ای می کند که شاید 30 ثانیه طول بکشد. تست ها و کد نهایی با هم نوشته می شوند، با این تفاوت که تست ها چند ثانیه از کد نهایی جلوتر هستند.<br> اگر ما به این روش کار کنیم، ده ها تست به طور روزانه، صد ها تست ماهانه و هزاران تست در سال خواهیم نوشت. اگر به این روش کار کینم، این تست ها تمام کد های نهایی ما را پوشش می دهند. بخش عمده این تست ها که میتواند با اندازه کد نهایی رقابت کند، میتواند یک مشکل مدیریتی دلهره آور را ایجاد کند.</p><h2>تمیز نگه داشتن کدها</h2><p>چندسال پیش از من درخواست شده بود تا مربی تیمی شوم که صراحتا تصمیم گرفته بود کد آزمون آن ها نباید مطابق با استاندارد کیفیت تولید آن ها نگهداری<br> شود.آن ها به یکدیگر اجازه می دادند تا در آزمون های واحد خود قوانین را زیرپا بگذارند.کلیدواژه سریع و کثیف بود.متغیرهای آن ها لازم نیست با نام های خوبی نام گذاری شود و توابع لازم نیست تا کوتاه و توصیفی باشند.کد آزمون آن ها لازم نیست به خوبی طراحی و فکر شده تقسیم بندی شده باشد.تا<br> زمانی که کد تست کار می کرد و تا زمانی که کدتولید را پوشش می داد به اندازه کافی خوب بود.</p><p>بعضی از شماها که در حال خواندن این متن هستید ممکن است با آن همدردری کنید.شاید شما در زمان گذشته آزمون هایی از نوع همان که من برای آن تایمر نوشتم می نوشتید.این یک قدم بزرگ برای نوشتن این نوع آزمون بدردنخور است برای نوشتن مجموعه ای از آزمون های واحد خودکار است.خب مثل تیمی که من مربی آن ها بودم ممکن است شماهم این تصمیم را بگیرید که داشتن آزمون های کثیف بهتر از نداشتن آزمون است.</p><p>چیزی که این تیم متوجه نشده بود این بود که داشتن آزمون های کثیف بدتر از نداشتن آزمون است.مشکل این است که آزمون ها باید با تکامل کد تولید تغییر کنند.هرچقدر آن ها کثیف تر باشند سخت تر می توان آن ها را تغییر داد.هرچقدر کد آزمون درهم تر باشد ،احتمال اینکه شما وقت بیشتری را صرف جمع کردن آزمون های بیشتری کنید بیشتر از نوشتن کد تولید جدیداست. همانطور که شما کدهای تولید را تغییر می دهید آزمون های قدیمی شروع به شکست خوردن می کنند و آشفتگی در کد تست ها ،گذراندن مجدد آن آزمون ها را سخت می کند.پس آزمون ها مثل یک بدهی رو به افزایش در نظر گرفته می شوند.</p><p>هزینه نگهداری مجموعه آزمایشی تیم من از زمان انتشار تا آزادسازی افزایش یافت.در نهایت این مورد به بزرگترین شکایت در میان توسعه دهندگان تبدیل شدزمانی که مدیران پرسیدند چرا تخمین‌هایشان اینقدر بزرگ شده است، توسعه‌دهندگان آزمایش‌ها را مقصر می‌دانستند.در پایان آنها مجبور شدند مجموعه آزمایشی را به طور کامل دور بیندازند.</p><p>اما بدون مجموعه آزمون ها آن ها این توانایی که تغییرات در پایه کد آن ها همان طور که انتظار می رفت کار می کند را از دست دادند.بدون مجموعه آزمون ها آن ها نمی توانستند اطمینان حاصل کنند که تغییرات در یک قسمت از سیستم آن ها باعث خراب شدن سایر بخش های سیستم آن ها نمی شود.بنابراین میزان<br> نقص آنها شروع به افزایش کرد.با افزایش تعداد نقص های ناخواسته، آنها شروع به ترس از ایجاد تغییرات کردند .آن ها تمیز کردن کدهایشان را متوقف .کردند زیرا می ترسیدند تغییرات آن ها بیشتر از اینکه مفید باشد ضرر داشته باشد.کد تولید آن ها شروع به پوسیده شدن کرد.در آخرآن ها بدون آزمون ها ماندند . کد تولیددرهم و پر از اشکال ،مشتریان نا امید شدند و احساس می کردند آزمایش آن ها را شکست داده است</p><p>به نوعی حق با آن ها بود آزمایش آن ها را شکست داده بوداما این تصمیم آن ها بود که اجازه دادند کدها درهم باشند و این بذر شکست آن ها را کاشت!اگر کد ها را تمیز نگه می داشتند آزمایش آن ها شکست نمی خورد.این را می توانم با قاطعیت بگویم زیرا در تیم های زیادی حضور داشته و مربیگری کرده ام که با واحد تمیز موافق بوده اند.</p><p>نکته اخلاقی داستان ساده است کد آزمون ها به اندازه کد تولید مهم است.این یک جنس درجه دو یا کم ارزش نیست پس نیاز به تفکر و طراحی دارد و باید همانند کد تولید تمیز نگه داشته شود.</p><h2>آزمون ها مشکلات را به وجود می آورند</h2><p>اگر شما کدهایتان را تمیز نگهداری نکنید آن ها را از دست خواهید داد،و بدون آن ها شما همان چیزی که تولید شما را منعطف نگه می دارد را از دست می دهید.بله شما آن را درست خواندید . این آزمون های واحد هستند که کد ما را انعطاف پذیر ،قابل نگهداری و قابل استفاده مجدد نگه می دارند.علت آن ساده است، اگر شما آزمون ها را دارید دیگر نباید از تغییر در کدهایتان بترسید! بدون آزمون ها هر تغییری می تواند یک مشکل باشد. مهم نیست که معماری کد شما چقدر انعطاف پذیر است،مهم نیست طراحی شما چقدر خوب تقسیم بندی شده است ،بدون آزمون ها شما از ترس اینکه اشکالات شناسایی نشده را معرفی کنید تمایلی به ایجاد تغییرات ندارید.</p><p>اما با داشتن آزمون ها ترس ها عملا از بین می روند هر چقدر پوشش تست شما بیشتر باشد شما کمتر می ترسید. شما می توانید بدون جریمه کدهایی را تغییر که معماری کمتر ستاره ای و طراحی درهم و نا واضح هستند در واقع شما می توانید آن معماری را بدون ترس بهبود ببخشید.بنابر این داشتن مجموعه ای خودکار از آزمون های واحد که کد تولید را پوشش می دهند کلید این است تا معماریتان و طراحیتان را به تمیز ترین شکل ممکن نگهداری کنید.آزمون ها مشکلات را فعال می کنند زیرا آزمون ها اعمال تغییرات را امکان پذیر می کنند.</p><p>پس اگر کد آزمون های شما کثیف هستند شما برای اینکه در کدتان تغییر ایجاد کنید با مشکل مواجه می شوید و شما شروع به از دست دادن توانایی خود در ایجاد بهبود درساختار آن کد می شوید.هر چقدر آزمون های شما کثیف تر باشد کد شما نیز کثیف تر می شود. در نهایت آزمون ها را از دست می دهیدو کد شما پوسیده می شود.</p><h2>آزمون های تمیز</h2><p>چه چیزی یک تست تمیز را می سازد؟سه چیز:خوانایی،خوانایی و خوانایی.خوانایی شاید در آزمون های واحد مهم تر از کد تولید باشد.چه چیزی یک آزمون را خوانا می کند؟همان چیزی که همه کدها را قابل خواندن می کند :در یک آزمون شما می خواهید با کمترین عبارات ممکن چیزهای زیادی بگویید.</p><p>کد FitNesse را در فهرست 9-1 در نظر بگیرید. درک این سه آزمون دشوار است و مطمئناً قابل بهبود هستند. اول، مقدار وحشتناکی از کد تکراری [G5] در تماس های مکرر به addPage و assertSubString وجود دارد. مهمتر از آن، این کد فقط با جزئیاتی بارگذاری شده است که با بیان آزمون تداخل دارد.</p></div> <p>Listing 9-1 -- SerializedPageResponderTest.java</p><pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">testGetPageHieratchyAsXml</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> Exception {
     crawler.addPage(root, PathParser.parse(<span class="hljs-string">&quot;PageOne&quot;</span>));
     crawler.addPage(root, PathParser.parse(<span class="hljs-string">&quot;PageOne.ChildOne&quot;</span>));
     crawler.addPage(root, PathParser.parse(<span class="hljs-string">&quot;PageTwo&quot;</span>));
@@ -165,14 +65,7 @@
     assertSubString(<span class="hljs-string">&quot;test page&quot;</span>, xml);
     assertSubString(<span class="hljs-string">&quot;Test&quot;</span>, xml);
 }
-</code></pre>
-<div dir="rtl">
-به عنوان مثال به فراخوانی های PathParser نگاه کنید.آن ها رشته ها را به نمونه های PathPage  تبدیل می کنند که توسط crawler استفاده می شود. این تبدیل کاملاً بی ربط به آزمون حاضر است و فقط هدف را مبهم  می کند. جزئیات مربوط به ایجاد پاسخ دهنده و جمع آوری و ریخته گری پاسخ نیز فقط نویز است. سپس راهی وجود دارد که URL درخواست از یک منبع و یک آرگومان ساخته می شود. )من به نوشتن این کد کمک کردم، بنابراین می توانم به طور کامل از آن انتقاد کنم).
-<p>در نهایت این کد برای خواندن طراحی نشده است.خواننده کم تجربه با انبوهی از جزییات مواجه می شود که قبل از اینکه آزمون ها واقعی شوند ( اجرایی شوند ) باید درک شوند. اکنون آزمون های بهبود یافته در فهرست 9-2 را در نظر بگیرید.<br>
-این آزمون ها دقیقاً همین کار را انجام می‌دهند، اما به شکلی بسیار تمیزتر و واضح تر تبدیل شده‌اند.</p>
-</div>
-<p>Listing 9-2 -- SerializedPageResponderTest.java (refactored)</p>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">testGetPageHierarchyAsXml</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> Exception {
+</code></pre> <div dir="rtl"> به عنوان مثال به فراخوانی های PathParser نگاه کنید.آن ها رشته ها را به نمونه های PathPage تبدیل می کنند که توسط crawler استفاده می شود. این تبدیل کاملاً بی ربط به آزمون حاضر است و فقط هدف را مبهم می کند. جزئیات مربوط به ایجاد پاسخ دهنده و جمع آوری و ریخته گری پاسخ نیز فقط نویز است. سپس راهی وجود دارد که URL درخواست از یک منبع و یک آرگومان ساخته می شود. )من به نوشتن این کد کمک کردم، بنابراین می توانم به طور کامل از آن انتقاد کنم). <p>در نهایت این کد برای خواندن طراحی نشده است.خواننده کم تجربه با انبوهی از جزییات مواجه می شود که قبل از اینکه آزمون ها واقعی شوند ( اجرایی شوند ) باید درک شوند. اکنون آزمون های بهبود یافته در فهرست 9-2 را در نظر بگیرید.<br> این آزمون ها دقیقاً همین کار را انجام می‌دهند، اما به شکلی بسیار تمیزتر و واضح تر تبدیل شده‌اند.</p></div> <p>Listing 9-2 -- SerializedPageResponderTest.java (refactored)</p><pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">testGetPageHierarchyAsXml</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> Exception {
     makePages(<span class="hljs-string">&quot;PageOne&quot;</span>, <span class="hljs-string">&quot;PageOne.ChildOne&quot;</span>, <span class="hljs-string">&quot;PageTwo&quot;</span>);
     submitRequest(<span class="hljs-string">&quot;root&quot;</span>, <span class="hljs-string">&quot;type:pages&quot;</span>);
     assertResponseIsXML();
@@ -196,21 +89,7 @@
         assertResponseIsXML();
         assertResponseContains(<span class="hljs-string">&quot;
         }
-</span></code></pre>
-<div dir="rtl">
-الگوی BUILD-OPERATE-CHECK2 با ساختار این تست ها آشکار می شود. هر یک از آزمون ها به وضوح به سه بخش تقسیم می شوند.
-بخش اول داده های آزمون را می سازد ، بخش دوم روی آن داده های آزمایشی کار می کند و بخش سوم برررسی می کند که آیا عملیات نتایج مرود انتظار را به همراه داشته است .
-<p>توجه داشته باشید که بیشترجزییات آزاردهنده (مشکل ساز) حذف شده اند. تست ها دقیقاً به نقطه اصلی می رسند و فقط از داده ها و توابعی استفاده می کنند که واقعاً به آنها نیاز دارند. هر کسی که این آزمون‌ ها را می‌خواند باید بتواند کارهایی را که انجام می‌دهد خیلی سریع بدون اشتباه یا بدون دقت در جزئیات انجام دهد.</p>
-<h2>زبان آزمون دامنه خاص</h2>
-<p>آزمون ‌های فهرست 9-2 تکنیک ساخت یک زبان دامنه خاص برای آزمون‌های شما را نشان می‌دهند. به‌جای استفاده از APIهایی که برنامه‌نویسان برای دستکاری سیستم استفاده می‌کنند، مجموعه‌ای از توابع و ابزارهای کاربردی ایجاد می‌کنیم که از آن APIها استفاده می‌کنند و تست‌ها را برای نوشتن راحت‌تر و خواندن آسان‌تر می‌کنند. این توابع و ابزارهای کاربردی تبدیل به یک API تخصصی می شوند که توسط آزمون ها استفاده می شود. آنها یک زبان آزمون هستند که برنامه نویسان برای کمک به خودشان در نوشتن آزمون ها و برای کمک به کسانی که بعداً باید آن آزمون ها را بخوانند از آن استفاده می کنند.</p>
-<p>این API آزمایشی از قبل طراحی نشده است. بلکه از بازسازی مداوم کد آزمون که بیش از حد با جزئیات مبهم شده است، به وجود آمده است همانطور که دیدید من لیست 9-1 را به لیست 9-2 تغییر می دهم، توسعه دهندگان منظم تر نیز کد آزمون خود را به شکل های مختصر و گویا تر تغییر می دهند.</p>
-<h2>یک استاندارد دوگانه</h2>
-<p>از طرفی تیمی که در ابتدای فصل به آن اشاره کردم شرایط درستی داشت. کد موجود در API آزمایشی دارای مجموعه‌ای از استانداردهای مهندسی متفاوت از کد تولید است. هنوز هم باید ساده، مختصر و گویا باشد، اما لازم نیست به اندازه کد تولید کارآمد باشد. به هر حال، در یک محیط آزمون اجرا می شود، نه یک محیط تولید، و این دو محیط نیازهای بسیار متفاوتی  دارند.</p>
-<p>آزمون فهرست 9-3 را در نظر بگیرید. من این آزمون را به عنوان بخشی از یک سیستم کنترل محیط  که در حال ساخت نمونه اولیه بودم نوشتم.<br>
-بدون پرداختن به جزئیات، می‌توانید بگویید که این آزمایش بررسی می‌کند که هشدار دمای پایین، بخاری و دمنده همگی در زمانی که دما «خیلی پایین است» روشن می‌شوند.</p>
-</div>
-<p>Listing 9-3 -- EnvironmentControllerTest.java</p>
-<pre class="hljs"><code><span class="hljs-meta">@Test</span>
+</span></code></pre> <div dir="rtl"> الگوی BUILD-OPERATE-CHECK2 با ساختار این تست ها آشکار می شود. هر یک از آزمون ها به وضوح به سه بخش تقسیم می شوند. بخش اول داده های آزمون را می سازد ، بخش دوم روی آن داده های آزمایشی کار می کند و بخش سوم برررسی می کند که آیا عملیات نتایج مرود انتظار را به همراه داشته است . <p>توجه داشته باشید که بیشترجزییات آزاردهنده (مشکل ساز) حذف شده اند. تست ها دقیقاً به نقطه اصلی می رسند و فقط از داده ها و توابعی استفاده می کنند که واقعاً به آنها نیاز دارند. هر کسی که این آزمون‌ ها را می‌خواند باید بتواند کارهایی را که انجام می‌دهد خیلی سریع بدون اشتباه یا بدون دقت در جزئیات انجام دهد.</p><h2>زبان آزمون دامنه خاص</h2><p>آزمون ‌های فهرست 9-2 تکنیک ساخت یک زبان دامنه خاص برای آزمون‌های شما را نشان می‌دهند. به‌جای استفاده از APIهایی که برنامه‌نویسان برای دستکاری سیستم استفاده می‌کنند، مجموعه‌ای از توابع و ابزارهای کاربردی ایجاد می‌کنیم که از آن APIها استفاده می‌کنند و تست‌ها را برای نوشتن راحت‌تر و خواندن آسان‌تر می‌کنند. این توابع و ابزارهای کاربردی تبدیل به یک API تخصصی می شوند که توسط آزمون ها استفاده می شود. آنها یک زبان آزمون هستند که برنامه نویسان برای کمک به خودشان در نوشتن آزمون ها و برای کمک به کسانی که بعداً باید آن آزمون ها را بخوانند از آن استفاده می کنند.</p><p>این API آزمایشی از قبل طراحی نشده است. بلکه از بازسازی مداوم کد آزمون که بیش از حد با جزئیات مبهم شده است، به وجود آمده است همانطور که دیدید من لیست 9-1 را به لیست 9-2 تغییر می دهم، توسعه دهندگان منظم تر نیز کد آزمون خود را به شکل های مختصر و گویا تر تغییر می دهند.</p><h2>یک استاندارد دوگانه</h2><p>از طرفی تیمی که در ابتدای فصل به آن اشاره کردم شرایط درستی داشت. کد موجود در API آزمایشی دارای مجموعه‌ای از استانداردهای مهندسی متفاوت از کد تولید است. هنوز هم باید ساده، مختصر و گویا باشد، اما لازم نیست به اندازه کد تولید کارآمد باشد. به هر حال، در یک محیط آزمون اجرا می شود، نه یک محیط تولید، و این دو محیط نیازهای بسیار متفاوتی دارند.</p><p>آزمون فهرست 9-3 را در نظر بگیرید. من این آزمون را به عنوان بخشی از یک سیستم کنترل محیط که در حال ساخت نمونه اولیه بودم نوشتم.<br> بدون پرداختن به جزئیات، می‌توانید بگویید که این آزمایش بررسی می‌کند که هشدار دمای پایین، بخاری و دمنده همگی در زمانی که دما «خیلی پایین است» روشن می‌شوند.</p></div> <p>Listing 9-3 -- EnvironmentControllerTest.java</p><pre class="hljs"><code><span class="hljs-meta">@Test</span>
 <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">turnOnLoTempAlarmAtThreashold</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> Exception {
     hw.setTemp(WAY_TOO_COLD);
     controller.tic();
@@ -220,25 +99,12 @@
     assertFalse(hw.hiTempAlarm());
     assertTrue(hw.loTempAlarm());
 }
-</code></pre>
-<div dir="rtl">
-البته در اینجا جزئیات زیادی وجود دارد. به عنوان مثال، آن تابع tic در مورد چیست؟ در واقع، ترجیح می‌دهم هنگام خواندن این آزمون نگران این موضوع نباشید. ترجیح می‌دهم فقط نگران این باشید که آیا موافقید که وضعیت پایانی سیستم با خیلی سرد بودن دما مطابقت دارد یا خیر. توجه کنید، همانطور که آزمون را می خوانید، چشم شما باید بین نام حالتی که بررسی می کنید و وضعیت حالتی که بررسی می شود به عقب و جلو بچرخد. HeaterState را می بینید، و سپس چشمان شما به سمت چپ می رود تا به عنوان `True` اعلام شود. شما coolerState را می بینید و چشمان شما باید سمت چپ را دنبال کند تا assertFalse شود. این خسته کننده و نا مطمئن است و خواندن آزمون را سخت می کند.
-<p>من خواندن این آزمون را با تبدیل آن به لیست 9-4 بسیار بهبود دادم.</p>
-</div>
-<p>Listing 9-4 -- EnvironmentControllerTest.java (refactored)</p>
-<pre class="hljs"><code><span class="hljs-meta">@Test</span>
+</code></pre> <div dir="rtl"> البته در اینجا جزئیات زیادی وجود دارد. به عنوان مثال، آن تابع tic در مورد چیست؟ در واقع، ترجیح می‌دهم هنگام خواندن این آزمون نگران این موضوع نباشید. ترجیح می‌دهم فقط نگران این باشید که آیا موافقید که وضعیت پایانی سیستم با خیلی سرد بودن دما مطابقت دارد یا خیر. توجه کنید، همانطور که آزمون را می خوانید، چشم شما باید بین نام حالتی که بررسی می کنید و وضعیت حالتی که بررسی می شود به عقب و جلو بچرخد. HeaterState را می بینید، و سپس چشمان شما به سمت چپ می رود تا به عنوان `True` اعلام شود. شما coolerState را می بینید و چشمان شما باید سمت چپ را دنبال کند تا assertFalse شود. این خسته کننده و نا مطمئن است و خواندن آزمون را سخت می کند. <p>من خواندن این آزمون را با تبدیل آن به لیست 9-4 بسیار بهبود دادم.</p></div> <p>Listing 9-4 -- EnvironmentControllerTest.java (refactored)</p><pre class="hljs"><code><span class="hljs-meta">@Test</span>
 <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">turnOnLoTempAlarmAtThreshold</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> Exception {
     wayTooCold();
     assertEquals(<span class="hljs-string">&quot;HBchL&quot;</span>, hw.getState());
 }
-</code></pre>
-<div dir="rtl">
-البته من جزئیات تابع tic را با ایجاد یک تابع wayTooCold پنهان کردم. اما نکته ای که باید به آن توجه کرد رشته عجیب در assertEquals است. حروف بزرگ به معنی روشن، حروف کوچک به معنی خاموش و حروف همیشه به ترتیب زیر هستند:
-{heater, blower, cooler,hi-temp-alarm, lo-temp-alarm}.
-<p>اگرچه این امر شبیه به یک تجسم ذهنی است، در این مورد مناسب به نظر می رسد. توجه کنید، هنگامی که متوجه آن باشید، چشمانتان به سمت آن سر می خورد آن رشته و شما می توانید به سرعت نتایج را تفسیر کنید. خواندن تست تقریباً به یک لذت تبدیل می شود. فقط نگاهی به لیست 9-5 بیندازید و ببینید درک این تست ها چقدر آسان است.</p>
-</div>
-<p>Listing 9-5 -- EnvironmentControllerTest.java (bigger selection)</p>
-<pre class="hljs"><code><span class="hljs-meta">@Test</span>
+</code></pre> <div dir="rtl"> البته من جزئیات تابع tic را با ایجاد یک تابع wayTooCold پنهان کردم. اما نکته ای که باید به آن توجه کرد رشته عجیب در assertEquals است. حروف بزرگ به معنی روشن، حروف کوچک به معنی خاموش و حروف همیشه به ترتیب زیر هستند: {heater, blower, cooler,hi-temp-alarm, lo-temp-alarm}. <p>اگرچه این امر شبیه به یک تجسم ذهنی است، در این مورد مناسب به نظر می رسد. توجه کنید، هنگامی که متوجه آن باشید، چشمانتان به سمت آن سر می خورد آن رشته و شما می توانید به سرعت نتایج را تفسیر کنید. خواندن تست تقریباً به یک لذت تبدیل می شود. فقط نگاهی به لیست 9-5 بیندازید و ببینید درک این تست ها چقدر آسان است.</p></div> <p>Listing 9-5 -- EnvironmentControllerTest.java (bigger selection)</p><pre class="hljs"><code><span class="hljs-meta">@Test</span>
 <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">turnOnCoolerAndBlowerIfTooHot</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> Exception {
     tooHot();
     assertEquals(<span class="hljs-string">&quot;hBChl&quot;</span>, hw.getState());
@@ -258,12 +124,7 @@
     wayTooCold();
     assertEquals(<span class="hljs-string">&quot;HBchL&quot;</span>, hw.getState());
 }
-</code></pre>
-<div dir="rtl">
-تابع getState در لیست Listing 9-6 نشان داده شده است.توجه کنید که کد خیلی کارآمد نیست و برای اینکه آن را کارآمد کنیم احتمالا باید StringBuffer  را استفاده کنیم.
-</div>
-<p>Listing 9-6 -- MockControlHardware.java</p>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> String <span class="hljs-title function_">getState</span><span class="hljs-params">()</span> {
+</code></pre> <div dir="rtl"> تابع getState در لیست Listing 9-6 نشان داده شده است.توجه کنید که کد خیلی کارآمد نیست و برای اینکه آن را کارآمد کنیم احتمالا باید StringBuffer را استفاده کنیم. </div><p>Listing 9-6 -- MockControlHardware.java</p><pre class="hljs"><code><span class="hljs-keyword">public</span> String <span class="hljs-title function_">getState</span><span class="hljs-params">()</span> {
         <span class="hljs-type">String</span> <span class="hljs-variable">state</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;&quot;</span>;
         state += heater ? <span class="hljs-string">&quot;H&quot;</span> : <span class="hljs-string">&quot;h&quot;</span>;
         state += blower ? <span class="hljs-string">&quot;B&quot;</span> : <span class="hljs-string">&quot;b&quot;</span>;
@@ -272,15 +133,7 @@
         state += loTempAlarm ? <span class="hljs-string">&quot;L&quot;</span> : <span class="hljs-string">&quot;l&quot;</span>;
         <span class="hljs-keyword">return</span> state;
 }
-</code></pre>
-<div dir="rtl">
-StringBuffer  ها کمی نازیبا هستند.حتی اگر هزینه در کد تولید  بسیار کم باشد من از آن ها اجتناب می کنم و می توانید استدلال کنید که هزینه در کد در لیست  6-9 بسیار ناچیز است به هر حال این اپلیکیشن یک سیستم بلادرنگ تعبیه شده است و به نظر می رسد منابع رایانه و حافظه بسیار محدود هستند. محیط آزمون به احتمال زیاد اصلا محدود نیست.
-<p>این طبیعت استاندارد دوگانه است. در محیط آزمون چیزهایی وجود دارند که ممکن است شما در محیط تولید انجام ندهید اما در محیط آزمون بسیار خوب هستند.معمولا آن ها مسائل مربوط به حافظه و کارایی پردازنده را شامل می شوند.اما آن ها هرگز مسائل تمیزی کد را شامل نمی شوند.</p>
-<h2>یک ادعا در آزمون</h2>
-<p>یک مکتب فکری وجود دارد که می گوید هر تابع آزمون در یک آزمون JUnit باید یک و فقط یک عبارت ادعا داشته باشد. این قانون ممکن است سخت بنظر برسد اما مزیت آن را می توان در لیست 5-9 مشاهده کرد.آن آزمون ها به نتایج واحد می رسند که درک آن آسان و سریع است.</p>
-</div>
-<p>Listing 9-7 -- SerializedPageResponderTest.java (Single Assert)</p>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">testGetPageHierarchyAsXml</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> Exception {
+</code></pre> <div dir="rtl"> StringBuffer ها کمی نازیبا هستند.حتی اگر هزینه در کد تولید بسیار کم باشد من از آن ها اجتناب می کنم و می توانید استدلال کنید که هزینه در کد در لیست 6-9 بسیار ناچیز است به هر حال این اپلیکیشن یک سیستم بلادرنگ تعبیه شده است و به نظر می رسد منابع رایانه و حافظه بسیار محدود هستند. محیط آزمون به احتمال زیاد اصلا محدود نیست. <p>این طبیعت استاندارد دوگانه است. در محیط آزمون چیزهایی وجود دارند که ممکن است شما در محیط تولید انجام ندهید اما در محیط آزمون بسیار خوب هستند.معمولا آن ها مسائل مربوط به حافظه و کارایی پردازنده را شامل می شوند.اما آن ها هرگز مسائل تمیزی کد را شامل نمی شوند.</p><h2>یک ادعا در آزمون</h2><p>یک مکتب فکری وجود دارد که می گوید هر تابع آزمون در یک آزمون JUnit باید یک و فقط یک عبارت ادعا داشته باشد. این قانون ممکن است سخت بنظر برسد اما مزیت آن را می توان در لیست 5-9 مشاهده کرد.آن آزمون ها به نتایج واحد می رسند که درک آن آسان و سریع است.</p></div> <p>Listing 9-7 -- SerializedPageResponderTest.java (Single Assert)</p><pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">testGetPageHierarchyAsXml</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> Exception {
     givenPages(<span class="hljs-string">&quot;PageOne&quot;</span>, <span class="hljs-string">&quot;PageOne.ChildOne&quot;</span>, <span class="hljs-string">&quot;PageTwo&quot;</span>);
     whenRequestIsIssued(<span class="hljs-string">&quot;root&quot;</span>, <span class="hljs-string">&quot;type:pages&quot;</span>);
     thenResponseShouldBeXML();
@@ -291,16 +144,7 @@ StringBuffer  ها کمی نازیبا هستند.حتی اگر هزینه در 
     thenResponseShouldContain(
         <span class="hljs-string">&quot;&lt;name&gt;PageOne&lt;/name&gt;&quot;</span>, <span class="hljs-string">&quot;&lt;name&gt;PageTwo&lt;/name&gt;&quot;</span>, <span class="hljs-string">&quot;&lt;name&gt;ChildOne&lt;/name&gt;&quot;</span>);
 }
-</code></pre>
-<div dir="rtl">
-<p>توجه داشته باشید من اسم تابع ها را عوض کردم تا از قرارداد مشترک given-whenthen5 convention تغییر دادم.این آزمون ها را خیلی خوانا تر می کند. متأسفانه، تقسیم تست ها همانطور که نشان داده شده است باعث ایجاد کدهای تکراری زیادی می شود.</p>
-<p>می‌توانیم با استفاده از الگوی TEMPLATE METHOD و قرار دادن قسمت‌های داده‌شده در کلاس پایه، و قسمت‌ها سپس در مشتقات مختلف، تکرار را حذف کنیم. یا می‌توانیم یک کلاس آزمون کاملاً مجزا ایجاد کنیم و قسمت‌های داده شده, and when را در تابع @Before و قسمت‌های When را در هر تابع @Test قرار دهیم. اما به نظر می رسد این مکانیسم بیش از حد برای چنین موضوع جزئی است. در پایان، من ادعاهای متعدد در فهرست 9-2 را ترجیح می دهم.</p>
-<p>من فکر می‌کنم قانون ادعای واحد راهنمایی خوبی است. من معمولاً سعی می کنم یک زبان آزمایشی خاص دامنه ایجاد کنم که از آن پشتیبانی کند، مانند فهرست9-5  . اما من از قرار دادن بیش از یک ادعا در یک آزمون نمی ترسم. من فکر می کنم بهترین چیزی که می توانیم بگوییم این است که تعداد ادعاها در یک آزمون باید به کمترین میزان برسد.</p>
-<h2>مفهوم واحد در هر آزمون</h2>
-<p>شاید یک قانون بهتر این باشد که ما می خواهیم یک مفهوم واحد را در هر تابع آزمون آزمایش کنیم . ما توابع آزمون طولانی نمی خواهیم که موارد متفرقه را یکی پس از دیگری آزمایش کنند. فهرست  9-8نمونه ای از چنین آزمونی است. این آزمون باید به سه آزمون مستقل تقسیم شود زیرا سه چیز مستقل را آزمایش می کند. ادغام همه آنها در یک تابع یکسان خواننده را وادار می کند تا دریابد که چرا هر بخش وجود دارد و چه چیزی توسط آن بخش آزمایش می شود.</p>
-</div>
-<p>Listing 9-8</p>
-<pre class="hljs"><code><span class="hljs-comment">/**
+</code></pre> <div dir="rtl"><p>توجه داشته باشید من اسم تابع ها را عوض کردم تا از قرارداد مشترک given-whenthen5 convention تغییر دادم.این آزمون ها را خیلی خوانا تر می کند. متأسفانه، تقسیم تست ها همانطور که نشان داده شده است باعث ایجاد کدهای تکراری زیادی می شود.</p><p>می‌توانیم با استفاده از الگوی TEMPLATE METHOD و قرار دادن قسمت‌های داده‌شده در کلاس پایه، و قسمت‌ها سپس در مشتقات مختلف، تکرار را حذف کنیم. یا می‌توانیم یک کلاس آزمون کاملاً مجزا ایجاد کنیم و قسمت‌های داده شده, and when را در تابع @Before و قسمت‌های When را در هر تابع @Test قرار دهیم. اما به نظر می رسد این مکانیسم بیش از حد برای چنین موضوع جزئی است. در پایان، من ادعاهای متعدد در فهرست 9-2 را ترجیح می دهم.</p><p>من فکر می‌کنم قانون ادعای واحد راهنمایی خوبی است. من معمولاً سعی می کنم یک زبان آزمایشی خاص دامنه ایجاد کنم که از آن پشتیبانی کند، مانند فهرست9-5 . اما من از قرار دادن بیش از یک ادعا در یک آزمون نمی ترسم. من فکر می کنم بهترین چیزی که می توانیم بگوییم این است که تعداد ادعاها در یک آزمون باید به کمترین میزان برسد.</p><h2>مفهوم واحد در هر آزمون</h2><p>شاید یک قانون بهتر این باشد که ما می خواهیم یک مفهوم واحد را در هر تابع آزمون آزمایش کنیم . ما توابع آزمون طولانی نمی خواهیم که موارد متفرقه را یکی پس از دیگری آزمایش کنند. فهرست 9-8نمونه ای از چنین آزمونی است. این آزمون باید به سه آزمون مستقل تقسیم شود زیرا سه چیز مستقل را آزمایش می کند. ادغام همه آنها در یک تابع یکسان خواننده را وادار می کند تا دریابد که چرا هر بخش وجود دارد و چه چیزی توسط آن بخش آزمایش می شود.</p></div> <p>Listing 9-8</p><pre class="hljs"><code><span class="hljs-comment">/**
 * Miscellaneous tests for the addMonths() method.
 */</span>
 <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">testAddMonths</span><span class="hljs-params">()</span> {
@@ -318,140 +162,216 @@ StringBuffer  ها کمی نازیبا هستند.حتی اگر هزینه در 
     assertEquals(<span class="hljs-number">7</span>, d4.getMonth());
     assertEquals(<span class="hljs-number">2004</span>, d4.getYYYY());
 }
-</code></pre>
-<div dir="rtl">
-<p>سه تابع آزمون احتمالاً باید به این صورت باشد:<br>
-با توجه به آخرین روز یک ماه با 31 روز (مانند اردیبهشت):<br>
-1- وقتی یک ماه اضافه کنید، به طوری که آخرین روز آن ماه سی ام باشد(مثل ژوئن) پس تاریخ باید 30 آن ماه باشد، نه<br>
-31<br>
-2- وقتی دو ماه به آن تاریخ اضافه کنید، به طوری که ماه آخر 31 روز باشد، سپس تاریخ باید 31 باشد</p>
-<p>با توجه به آخرین روز یک ماه با 30 روز (مثل ژوئن):<br>
-1- وقتی یک ماه را طوری اضافه کنید که آخرین روز آن ماه 31 روز داشته باشد، تاریخ باید سی ام باشد نه سی و یکمین.</p>
-<p>با بیان این‌گونه، می‌توانید ببینید که یک قانون کلی در میان آزمایش‌های متفرقه پنهان شده است. وقتی ماه را افزایش می دهید، تاریخ نمی تواند بزرگتر از آخرین روز ماه باشد. این بدان معناست که افزایش ماه در 28 فوریه باید 28 مارس را به همراه داشته باشد. آن آزمون برای نوشتن آزمون مفیدی خواهد بود.</p>
-<p>بنابراین این ادعاهای متعدد در هر بخش از فهرست 9-8 نیست که باعث ایجاد مشکل می شود. بلکه این واقعیت است که بیش از یک مفهوم در حال آزمایش است. بنابراین احتمالاً بهترین قانون این است که شما باید تعداد ادعاها هر مفهوم را به کمترین میزان برسانید و فقط یک مفهوم را در هر تابع آزمون آزمایش کنید.</p>
-<h2>F.I.R.S.T</h2>
-<p>آزمون های تمیز از پنج قانون دیگر پیروی می کنند که موارد زیر را تشکیل می دهند:</p>
-<p>آزمون های <code>سریع</code> باید سریع باشند. آنها باید سریع اجرا کنند. وقتی آزمون ها کند هستند، نمی‌خواهید آن‌ها را مرتب اجرا کنید. اگر آنها را به طور مکرر اجرا نکنید، آنقدر زود مشکلاتی پیدا نخواهید کرد که به راحتی آنها را برطرف کنید. شما برای پاک کردن کد احساس آزادی نخواهید کرد. در نهایت کد شروع به پوسیدگی می کند.</p>
-<p>آزمون های <code>مستقل</code> نباید به یکدیگر وابسته باشند. یک آزمون نباید شرایط آزمون بعدی را فراهم کند. شما باید بتوانید هر تست را به طور مستقل اجرا کنید و تست ها را به هر ترتیبی که دوست دارید اجرا کنید. وقتی تست ها به یکدیگر بستگی دارند، اولین موردی که شکست می خورد باعث زنجیر می شود<br>
-خرابی های دست پایین، تشخیص را دشوار می کند و نقص های پایین دست را پنهان می کند</p>
-<p>آزمون های <code>قابل تکرار</code> باید در هر محیطی قابل تکرار باشند. شما باید بتوانید آزمون ها را در محیط تولید، در محیط QA و روی لپ تاپ خود در حالی که بدون شبکه در قطار به خانه می روید انجام دهید. اگر آزمون های شما در هیچ محیطی قابل تکرار نیستند، آنگاه همیشه بهانه ای برای شکست آنها خواهید داشت. همچنین زمانی که محیط در دسترس نباشد، نمی توانید آزمایش ها را اجرا کنید.</p>
-<p><code>خود اعتبارسنجی</code> آزمون ها باید خروجی <code>boolean</code> داشته باشند. یا می گذرند یا شکست می خورند. برای تشخیص موفقیت آمیز بودن آزمون ها، مجبور نیستید یک فایل گزارش را بخوانید. شما نباید به صورت دستی دو فایل متنی مختلف را با هم مقایسه کنید تا ببینید آیا آزمون ها موفق می شوند یا خیر. اگر آزمایش ها اینطور نیستند<br>
-خود تأیید می شود، سپس شکست می تواند ذهنی شود</p>
-<p>آزمون ها باید <code>به موقع</code> نوشته شوند. آزمون های واحد باید درست قبل از کد تولیدی که باعث قبولی آنها می شود نوشته شود. اگر آزمون ها را بعد از کد تولید بنویسید، ممکن است آزمون کد تولید سخت باشد. ممکن است تصمیم بگیرید که آزمایش برخی از کدهای تولید خیلی سخت است. ممکن است کد تولید را طوری طراحی نکنید که قابل آزمایش باشد.</p>
-<h2>نتیجه</h2>
-<p>ما به خوبی آزمون ها را بررسی کرده ایم . در واقع، من فکر می کنم می توان یک کتاب کامل در مورد آزمون های تمیز نوشت. آزمون ها به اندازه کد تولید برای سلامت یک پروژه مهم هستند حتی شاید مهم تر باشند، زیرا آزمایش ها باعث حفظ و تقویت انعطاف پذیری، قابلیت نگهداری و قابلیت استفاده مجدد کد تولید می شوند. آزمون های خود را دائماً تمیز نگه دارید. کار کنید تا آنها را رسا و مختصر کنید API. های آزمایشی را اختراع کنید که به عنوان زبان مخصوص دامنه عمل می کنند و به شما در نوشتن آزمون ها کمک می کنند. اگر اجازه بدهید آزمون ها پوسیده شوند، کد شما نیز پوسیده می شودپس  آزمون های خود را تمیز نگه دارید.</p>
-</div>
-
-  </main>
-
-  <!-- فوتر مشترک -->
-  <footer class="footer">
-    <div class="container">
-      <p>
-        <img src="/Gitab/icone/copyright.svg" alt="کپی‌رایت" width="14" height="14"
-             style="vertical-align:middle;margin-inline:4px">
-        <span id="y"></span> Gitab — تمامی حقوق محفوظ است.
-      </p>
-    </div>
-  </footer>
-
-  <!-- سال و اسکریپت تغییر تم -->
-  <script>
+</code></pre> <div dir="rtl"><p>سه تابع آزمون احتمالاً باید به این صورت باشد:<br> با توجه به آخرین روز یک ماه با 31 روز (مانند اردیبهشت):<br> 1- وقتی یک ماه اضافه کنید، به طوری که آخرین روز آن ماه سی ام باشد(مثل ژوئن) پس تاریخ باید 30 آن ماه باشد، نه<br> 31<br> 2- وقتی دو ماه به آن تاریخ اضافه کنید، به طوری که ماه آخر 31 روز باشد، سپس تاریخ باید 31 باشد</p><p>با توجه به آخرین روز یک ماه با 30 روز (مثل ژوئن):<br> 1- وقتی یک ماه را طوری اضافه کنید که آخرین روز آن ماه 31 روز داشته باشد، تاریخ باید سی ام باشد نه سی و یکمین.</p><p>با بیان این‌گونه، می‌توانید ببینید که یک قانون کلی در میان آزمایش‌های متفرقه پنهان شده است. وقتی ماه را افزایش می دهید، تاریخ نمی تواند بزرگتر از آخرین روز ماه باشد. این بدان معناست که افزایش ماه در 28 فوریه باید 28 مارس را به همراه داشته باشد. آن آزمون برای نوشتن آزمون مفیدی خواهد بود.</p><p>بنابراین این ادعاهای متعدد در هر بخش از فهرست 9-8 نیست که باعث ایجاد مشکل می شود. بلکه این واقعیت است که بیش از یک مفهوم در حال آزمایش است. بنابراین احتمالاً بهترین قانون این است که شما باید تعداد ادعاها هر مفهوم را به کمترین میزان برسانید و فقط یک مفهوم را در هر تابع آزمون آزمایش کنید.</p><h2>F.I.R.S.T</h2><p>آزمون های تمیز از پنج قانون دیگر پیروی می کنند که موارد زیر را تشکیل می دهند:</p><p>آزمون های <code>سریع</code> باید سریع باشند. آنها باید سریع اجرا کنند. وقتی آزمون ها کند هستند، نمی‌خواهید آن‌ها را مرتب اجرا کنید. اگر آنها را به طور مکرر اجرا نکنید، آنقدر زود مشکلاتی پیدا نخواهید کرد که به راحتی آنها را برطرف کنید. شما برای پاک کردن کد احساس آزادی نخواهید کرد. در نهایت کد شروع به پوسیدگی می کند.</p><p>آزمون های <code>مستقل</code> نباید به یکدیگر وابسته باشند. یک آزمون نباید شرایط آزمون بعدی را فراهم کند. شما باید بتوانید هر تست را به طور مستقل اجرا کنید و تست ها را به هر ترتیبی که دوست دارید اجرا کنید. وقتی تست ها به یکدیگر بستگی دارند، اولین موردی که شکست می خورد باعث زنجیر می شود<br> خرابی های دست پایین، تشخیص را دشوار می کند و نقص های پایین دست را پنهان می کند</p><p>آزمون های <code>قابل تکرار</code> باید در هر محیطی قابل تکرار باشند. شما باید بتوانید آزمون ها را در محیط تولید، در محیط QA و روی لپ تاپ خود در حالی که بدون شبکه در قطار به خانه می روید انجام دهید. اگر آزمون های شما در هیچ محیطی قابل تکرار نیستند، آنگاه همیشه بهانه ای برای شکست آنها خواهید داشت. همچنین زمانی که محیط در دسترس نباشد، نمی توانید آزمایش ها را اجرا کنید.</p><p><code>خود اعتبارسنجی</code> آزمون ها باید خروجی <code>boolean</code> داشته باشند. یا می گذرند یا شکست می خورند. برای تشخیص موفقیت آمیز بودن آزمون ها، مجبور نیستید یک فایل گزارش را بخوانید. شما نباید به صورت دستی دو فایل متنی مختلف را با هم مقایسه کنید تا ببینید آیا آزمون ها موفق می شوند یا خیر. اگر آزمایش ها اینطور نیستند<br> خود تأیید می شود، سپس شکست می تواند ذهنی شود</p><p>آزمون ها باید <code>به موقع</code> نوشته شوند. آزمون های واحد باید درست قبل از کد تولیدی که باعث قبولی آنها می شود نوشته شود. اگر آزمون ها را بعد از کد تولید بنویسید، ممکن است آزمون کد تولید سخت باشد. ممکن است تصمیم بگیرید که آزمایش برخی از کدهای تولید خیلی سخت است. ممکن است کد تولید را طوری طراحی نکنید که قابل آزمایش باشد.</p><h2>نتیجه</h2><p>ما به خوبی آزمون ها را بررسی کرده ایم . در واقع، من فکر می کنم می توان یک کتاب کامل در مورد آزمون های تمیز نوشت. آزمون ها به اندازه کد تولید برای سلامت یک پروژه مهم هستند حتی شاید مهم تر باشند، زیرا آزمایش ها باعث حفظ و تقویت انعطاف پذیری، قابلیت نگهداری و قابلیت استفاده مجدد کد تولید می شوند. آزمون های خود را دائماً تمیز نگه دارید. کار کنید تا آنها را رسا و مختصر کنید API. های آزمایشی را اختراع کنید که به عنوان زبان مخصوص دامنه عمل می کنند و به شما در نوشتن آزمون ها کمک می کنند. اگر اجازه بدهید آزمون ها پوسیده شوند، کد شما نیز پوسیده می شودپس آزمون های خود را تمیز نگه دارید.</p></div> </article><nav class="chapter-single-next-nav"> <a href="/Gitab/books/book3/Book/10_Classes/Classes/" class="btn-next-chapter-action" id="nextChapterBtn" data-hub="/Gitab/books/book3/"> <span class="next-btn-text">فصل بعدی: کلاس‌ها و اصل تک‌مسئولیتی</span> <span class="next-btn-arrow">←</span> </a> </nav></div> <button class="fab-back-to-top" id="backToTopBtn" type="button" aria-label="رفتن به بالای صفحه" title="رفتن به بالا"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"> <polyline points="18 15 12 9 6 15"></polyline> </svg> </button></main> <footer class="footer-minimal"><div class="footer-container"> <div class="footer-top-row"><div class="footer-brand-side"> <a href="/Gitab/" class="footer-brand-anchor"> <img src="/Gitab/icone/logo.svg" alt="Gitab" width="28" height="28" loading="lazy" decoding="async"> <span class="footer-brand-title">گیتاب (Gitab)</span> </a> <p class="footer-tagline"> پلتفرم آزاد و مستقل برای ترجمهٔ دقیق و روان کتاب‌های مرجع مهندسی نرم‌افزار. </p></div> <div class="footer-nav-cols"><div class="footer-nav-col"> <span class="footer-nav-heading">موضوعات</span><ul class="footer-nav-list"> <li><a href="/Gitab/books/list-books/?cat=csharp">سی‌شارپ و دات‌نت</a></li><li><a href="/Gitab/books/list-books/?cat=clean-code">کد تمیز و بازآفرینی</a></li><li><a href="/Gitab/books/list-books/?cat=architecture">معماری و طراحی دامنه</a></li><li><a href="/Gitab/books/list-books/?cat=system">لینوکس و خط فرمان</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">بخش‌های سایت</span><ul class="footer-nav-list"> <li><a href="/Gitab/">صفحه اصلی</a></li><li><a href="/Gitab/books/list-books/">کتابخانه کامل</a></li><li><a href="/Gitab/courses/">دوره‌های آموزشی</a></li><li><a href="/Gitab/translator.html">تالار مترجمین</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">مشارکت و جامعه</span><ul class="footer-nav-list"> <li><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer">راهنمای همکاری در ترجمه</a></li><li><a href="https://github.com/hheydarian/Gitab/issues" target="_blank" rel="noopener noreferrer">پیشنهاد کتاب یا گزارش خطا</a></li></ul> </div></div> </div><div class="footer-bottom-line"> <span>© <span id="y">2026</span> Gitab — توسعه‌یافته برای جامعهٔ مهندسان نرم‌افزار ایرانی</span></div> </div></footer> <script>
   (() => {
     const root = document.documentElement;
     const btn = document.getElementById('themeToggle');
+    const sunIcon = btn ? btn.querySelector('.icon-sun') : null;
+    const moonIcon = btn ? btn.querySelector('.icon-moon') : null;
     const KEY = 'gitab-theme';
 
-    function updateTheme(s) {
-      root.setAttribute('data-theme', s);
-      const mode = s;  // فقط `dark` یا `light` خواهد بود
+    function updateTheme(mode) {
+      root.setAttribute('data-theme', mode);
       root.dataset.colorMode = mode;
-      btn.dataset.icon = mode === 'dark' ? 'moon' : 'sun';
+      if (sunIcon && moonIcon) {
+        if (mode === 'dark') {
+          sunIcon.style.display = 'inline-block';
+          moonIcon.style.display = 'none';
+        } else {
+          sunIcon.style.display = 'none';
+          moonIcon.style.display = 'inline-block';
+        }
+      }
     }
 
-    // وضعیت تم ذخیره شده از localStorage
-    let saved = localStorage.getItem(KEY) || 'light'; // پیش‌فرض روشن
+    let saved = 'dark';
+    try { saved = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
     updateTheme(saved);
 
-    // تنظیم مجدد تم هنگام تغییر وضعیت دکمه
-    btn.addEventListener('click', () => {
-      const current = localStorage.getItem(KEY) || 'light';
-      const next = current === 'dark' ? 'light' : 'dark';  // فقط دو حالت: تاریک و روشن
-      localStorage.setItem(KEY, next);
-      updateTheme(next);
-    });
+    if (btn) {
+      btn.addEventListener('click', () => {
+        let current = 'dark';
+        try { current = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+        const next = current === 'dark' ? 'light' : 'dark';
+        try { localStorage.setItem(KEY, next); } catch (e) {}
+        updateTheme(next);
+      });
+    }
 
-    // هنگام بارگذاری صفحه
     document.addEventListener('DOMContentLoaded', () => {
-      updateTheme(localStorage.getItem(KEY) || 'light');
+      let mode = 'dark';
+      try { mode = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+      updateTheme(mode);
+      const yearSpan = document.getElementById('y');
+      if (yearSpan) yearSpan.textContent = new Date().getFullYear();
     });
+
+    const mobBtn = document.getElementById('mobileMenuBtn');
+    const mobDrawer = document.getElementById('mobileDrawer');
+    if (mobBtn && mobDrawer) {
+      const setDrawerOpen = (open) => {
+        mobDrawer.classList.toggle('open', open);
+        mobBtn.classList.toggle('is-open', open);
+        mobBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        mobBtn.setAttribute('aria-label', open ? 'بستن منو' : 'باز کردن منو');
+        mobDrawer.setAttribute('aria-hidden', open ? 'false' : 'true');
+      };
+
+      mobBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        setDrawerOpen(!mobDrawer.classList.contains('open'));
+      });
+
+      mobDrawer.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => setDrawerOpen(false));
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && mobDrawer.classList.contains('open')) {
+          setDrawerOpen(false);
+        }
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!mobDrawer.contains(e.target) && !mobBtn.contains(e.target)) {
+          setDrawerOpen(false);
+        }
+      });
+    }
+
+    if ('serviceWorker' in navigator) {
+      const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+      if (isLocalhost) {
+        navigator.serviceWorker.getRegistrations().then(regs => {
+          for (const reg of regs) reg.unregister();
+        });
+        if ('caches' in window) {
+          caches.keys().then(names => {
+            for (const name of names) caches.delete(name);
+          });
+        }
+      } else {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/Gitab/sw.js').catch(() => {});
+        });
+      }
+    }
   })();
-</script>
-
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-  <script>hljs.highlightAll();</script>
-
-  <script>
+  </script> <script>
   document.querySelectorAll('pre code').forEach(block => {
+    const pre = block.parentNode;
+    if (!pre || pre.querySelector('.copy-btn')) return;
+
+    const copySvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
+    const okSvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+
     const btn = document.createElement('button');
     btn.className = 'copy-btn';
-
-    const icon = document.createElement('img');
-    icon.src = "/Gitab/icone/copy.svg";
-    icon.alt = 'Copy';
-    btn.appendChild(icon);
-
-    block.parentNode.insertBefore(btn, block);
+    btn.setAttribute('aria-label', 'کپی کد');
+    btn.setAttribute('title', 'کپی کد');
+    btn.setAttribute('type', 'button');
+    btn.innerHTML = copySvg;
+    pre.appendChild(btn);
 
     btn.addEventListener('click', async () => {
-      await navigator.clipboard.writeText(block.textContent);
-      btn.classList.add('copied');
-      setTimeout(() => btn.classList.remove('copied'), 1500);
-    });
-  });
-  </script>
-
-  <script>
-  document.body.dataset.page = window.location.pathname;
-
-  const menuBtn = document.querySelector(".menu-toggle");
-  const nav = document.querySelector(".nav");
-
-  if (menuBtn && nav) {
-    menuBtn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      nav.classList.toggle("show");
-    });
-
-    document.addEventListener("click", (e) => {
-      const clickedInsideNav = nav.contains(e.target);
-      const clickedMenuButton = menuBtn.contains(e.target);
-      if (!clickedInsideNav && !clickedMenuButton) {
-        nav.classList.remove("show");
+      try {
+        await navigator.clipboard.writeText(block.textContent);
+        btn.classList.add('copied');
+        btn.innerHTML = okSvg;
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          btn.innerHTML = copySvg;
+        }, 1800);
+      } catch (err) {
+        console.error('Copy failed:', err);
       }
     });
-  }
-  </script>
-
-  <script>
-    document.getElementById('y').textContent = new Date().getFullYear();
-  </script>
-  <script>
-document.getElementById("openDonate").addEventListener("click", () => {
-  document.getElementById("donateModal").style.display = "block";
-});
-document.getElementById("closeDonate").addEventListener("click", () => {
-  document.getElementById("donateModal").style.display = "none";
-});
-document.querySelectorAll(".copy-btn").forEach(btn => {
-  btn.addEventListener("click", () => {
-    navigator.clipboard.writeText(btn.dataset.copy);
-  
-    setTimeout(() => (btn.textContent = "کپی"), 2000);
   });
-});
-</script>
+  </script> <script>
+  (() => {
+    const article = document.getElementById('chapterArticle');
+    if (!article) return;
 
-</body>
-</html>
+    const progressBar = document.getElementById('readingProgressBar');
+    if (progressBar) {
+      window.addEventListener('scroll', () => {
+        const docElem = document.documentElement;
+        const totalHeight = docElem.scrollHeight - docElem.clientHeight;
+        if (totalHeight > 0) {
+          const progress = (window.pageYOffset / totalHeight) * 100;
+          progressBar.style.width = Math.min(100, Math.max(0, progress)) + '%';
+        }
+      }, { passive: true });
+    }
+
+    const btt = document.getElementById('backToTopBtn');
+    if (btt) {
+      window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 250) {
+          btt.classList.add('visible');
+        } else {
+          btt.classList.remove('visible');
+        }
+      }, { passive: true });
+
+      btt.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+
+    article.querySelectorAll('img').forEach(img => {
+      if (!img.hasAttribute('loading')) img.loading = 'lazy';
+      if (!img.hasAttribute('decoding')) img.decoding = 'async';
+      const parent = img.parentElement;
+      if (parent && parent.tagName === 'P') {
+        parent.style.textAlign = 'center';
+      }
+
+      img.addEventListener('error', function() {
+        const src = this.getAttribute('src');
+        if (src && src.includes('assets/image/')) {
+          const parts = src.split('assets/image/');
+          const corrected = '/Gitab/books/book3/assets/image/' + parts[1];
+          if (this.src !== corrected) {
+            this.src = corrected;
+          }
+        }
+      });
+    });
+
+    article.querySelectorAll('p').forEach(p => {
+      const trimmed = p.innerText.trim();
+      if (trimmed.startsWith('💡') || trimmed.startsWith('نکته:')) {
+        p.classList.add('react-callout', 'callout-tip');
+      } else if (trimmed.startsWith('⚠️') || trimmed.startsWith('هشدار:')) {
+        p.classList.add('react-callout', 'callout-warning');
+      } else if (trimmed.startsWith('📌') || trimmed.startsWith('مهم:')) {
+        p.classList.add('react-callout', 'callout-important');
+      } else if (trimmed.startsWith('🔹') || trimmed.startsWith('🔸')) {
+        p.classList.add('react-callout', 'callout-note');
+      }
+    });
+  })();
+  </script> <script type="speculationrules">{"prefetch":[{"where":{"and":[{"href_matches":"/Gitab/*"},{"not":{"href_matches":"/Gitab/downloads/*"}},{"not":{"selector_matches":"[download], [target='_blank']"}}]},"eagerness":"moderate"}]}</script> <script>
+  (() => {
+    if (window.HTMLScriptElement && HTMLScriptElement.supports && HTMLScriptElement.supports('speculationrules')) return;
+    const seen = new Set([window.location.href]);
+    let count = 0;
+    const prefetchLink = (e) => {
+      if (count >= 12) return;
+      const a = e.target && e.target.closest ? e.target.closest('header a, .chapter-single-next-nav a, .syllabus-chapter-item a, .btn-hero-read, .btn-card-read') : null;
+      if (!a || !a.href || a.hasAttribute('download') || a.target === '_blank') return;
+      if (a.origin !== window.location.origin || a.pathname.includes('/downloads/')) return;
+      const clean = a.href.split('#')[0];
+      if (!clean || seen.has(clean)) return;
+      seen.add(clean);
+      count++;
+      const l = document.createElement('link');
+      l.rel = 'prefetch';
+      l.href = clean;
+      document.head.appendChild(l);
+    };
+    document.addEventListener('pointerenter', prefetchLink, { capture: true, passive: true });
+    document.addEventListener('touchstart', prefetchLink, { capture: true, passive: true });
+  })();
+  </script></body></html>

@@ -17,7 +17,7 @@ title: برنامه‌نویسی پویا (Dynamic Programming)
 
 ---
 
-### 🌀 Dynamic Language Runtime
+### Dynamic Language Runtime
 
 زبان C# برای انجام **dynamic binding** به **DLR** متکی است.
 
@@ -38,7 +38,7 @@ DLR همچنین نوشتن زبان‌های پویا جدید در **.NET** ر
 
 ---
 
-### ❓ Call Site چیست؟
+### Call Site چیست؟
 
 وقتی کامپایلر با یک **dynamic expression** روبه‌رو می‌شود، نمی‌داند چه کسی آن عبارت را در زمان اجرا ارزیابی خواهد کرد.
 
@@ -97,14 +97,14 @@ public object Foo ([Dynamic] object x, [Dynamic] object y)
 
 ---
 
-### ⚡ Dynamic Member Overload Resolution
+### Dynamic Member Overload Resolution
 
 فراخوانی یک متد **statically known** با آرگومان‌های **dynamically typed** باعث می‌شود که **member overload resolution** از زمان کامپایل به زمان اجرا منتقل شود.
 
 این ویژگی برای ساده‌سازی برخی وظایف برنامه‌نویسی مفید است—مثل ساده‌تر کردن **Visitor design pattern**.
 همچنین در دور زدن محدودیت‌های اعمال‌شده توسط **static typing** در C# بسیار کاربرد دارد.
 
-### 🎯 ساده‌سازی الگوی Visitor
+### ساده‌سازی الگوی Visitor
 
 به‌طور خلاصه، **Visitor pattern** این امکان را می‌دهد که بدون تغییر در کلاس‌های موجود، یک متد به یک سلسله‌مراتب کلاسی (class hierarchy) “اضافه” کنید.
 
@@ -176,7 +176,7 @@ class ToXElementPersonVisitor
 
 ---
 
-### 📌 مثال اجرا
+### مثال اجرا
 
 ```csharp
 var cust = new Customer
@@ -193,7 +193,7 @@ Console.WriteLine (new ToXElementPersonVisitor().DynamicVisit (cust));
 
 ---
 
-### 📤 خروجی
+### خروجی
 
 ```xml
 <Person Type="Customer">
@@ -208,7 +208,7 @@ Console.WriteLine (new ToXElementPersonVisitor().DynamicVisit (cust));
 </Person>
 ```
 
-### 🔀 گونه‌ها (Variations)
+### گونه‌ها (Variations)
 
 اگر قصد داشته باشید بیش از یک کلاس Visitor بنویسید، یک تغییر مفید این است که یک کلاس پایه‌ی انتزاعی (**abstract base class**) برای Visitorها تعریف کنید:
 
@@ -265,7 +265,7 @@ class ToXElementPersonVisitor : PersonVisitor<XElement>
 
 ---
 
-### 📌 صدا زدن ناشناس اعضای یک نوع Generic
+### صدا زدن ناشناس اعضای یک نوع Generic
 
 سخت‌گیری **static typing** در C# یک شمشیر دو لبه است:
 
@@ -294,7 +294,7 @@ static void Write (object obj)
 
 ---
 
-### ✨ راه‌حل با dynamic binding
+### راه‌حل با dynamic binding
 
 راه اول این است که **Value** را به‌صورت پویا (dynamic) صدا بزنید:
 
@@ -308,7 +308,7 @@ static void Write (dynamic obj)
 
 ---
 
-### 🐾 Multiple Dispatch
+### Multiple Dispatch
 
 زبان C# و CLR همیشه یک شکل محدود از پویایی را با **virtual method calls** پشتیبانی کرده‌اند.
 تفاوت آن با **dynamic binding** در این است که در **virtual calls**، کامپایلر باید در زمان کامپایل متعهد شود که کدام عضو مجازی صدا زده خواهد شد (بر اساس نام و امضای متدی که فراخوانی شده است).
@@ -332,7 +332,7 @@ animal.Walk (owner);
 
 ---
 
-### 💡 Dynamic Multiple Dispatch
+### Dynamic Multiple Dispatch
 
 در مقابل، یک فراخوانی پویا (dynamic call) انتخاب overload را تا زمان اجرا به تأخیر می‌اندازد:
 
@@ -345,7 +345,7 @@ animal.Walk ((dynamic) owner);
 
 ---
 
-### ⚠️ مشکلات و راه‌حل بهتر
+### مشکلات و راه‌حل بهتر
 
 روش قبلی این مزیت را دارد که با هر شیئی که یک **Value field** یا **Value property** داشته باشد کار می‌کند.
 اما مشکلاتی هم دارد:
@@ -358,7 +358,7 @@ animal.Walk ((dynamic) owner);
 
 ---
 
-### ✅ راه‌حل بهتر: متد کمکی overload شده
+### راه‌حل بهتر: متد کمکی overload شده
 
 ```csharp
 static void Write (dynamic obj)
@@ -377,7 +377,7 @@ static object GetFooValue (object foo) => null;
 
 ---
 
-### 🆚 گزینه‌ی دیگر
+### گزینه‌ی دیگر
 
 فقط overload اول را بنویسیم و سپس **RuntimeBinderException** را catch کنیم.
 
@@ -386,7 +386,7 @@ static object GetFooValue (object foo) => null;
 
 ---
 
-### 🔎 مثال: ToStringEx با dynamic binding
+### مثال: ToStringEx با dynamic binding
 
 در فصل ۱۸، همین مشکل را برای یک interface با استفاده از reflection حل کردیم (که تلاش بیشتری نیاز داشت).
 مثال ما طراحی نسخه‌ی قدرتمندتری از **ToString()** بود که می‌توانست اشیائی مانند **IEnumerable** و **IGrouping<,>** را درک کند.
@@ -420,13 +420,13 @@ public static string ToStringEx (object value)
 
 ---
 
-### ▶️ اجرای کد
+### ▶ اجرای کد
 
 ```csharp
 Console.WriteLine (ToStringEx ("xyyzzz".GroupBy (c => c) ));
 ```
 
-🔽 خروجی:
+ خروجی:
 
 ```
 Group with key=x: x
@@ -459,7 +459,7 @@ internal class Grouping : IGrouping<TKey,TElement>, ...
 حتی اگر property **Key** به‌صورت public تعریف شده باشد، کلاس حاوی آن **internal** است و بنابراین فقط از طریق **IGrouping<,>** قابل دسترسی است.
 و همان‌طور که در فصل ۴ توضیح دادیم، هیچ راهی وجود ندارد که به DLR بگوییم هنگام صدا زدن dynamic member، به آن interface bind شود.
 
-### پیاده‌سازی اشیای پویا 🦆✨
+### پیاده‌سازی اشیای پویا
 
 یک شیء می‌تواند با پیاده‌سازی **IDynamicMetaObjectProvider** معناشناسی (binding semantics) خودش را فراهم کند—یا راحت‌تر از آن، با ارث‌بری از کلاس **DynamicObject**، که یک پیاده‌سازی پیش‌فرض از این اینترفیس ارائه می‌دهد.
 
@@ -484,7 +484,7 @@ public class Duck : DynamicObject
 
 ---
 
-### DynamicObject 🛠️
+### DynamicObject
 
 در مثال بالا، ما متد **TryInvokeMember** را بازنویسی (override) کردیم، که به مصرف‌کننده اجازه می‌دهد روی شیء پویا (dynamic object) یک متد فراخوانی کند—مثل **Quack** یا **Waddle**.
 
@@ -495,13 +495,13 @@ public class Duck : DynamicObject
 ![Conventions-UsedThis-Book](../../../assets/image/19/Table-19-1.jpeg)
 </div>
 
-### متدهای پویا در DynamicObject ⚡
+### متدهای پویا در DynamicObject
 
-این متدها باید در صورت موفقیت، مقدار **true** برگردانند. اگر مقدار **false** برگردانده شود، **DLR** (Dynamic Language Runtime) به binder زبان برمی‌گردد تا به‌دنبال عضوی هم‌نام در خود شیء پویا (زیرکلاس DynamicObject) بگردد. اگر این کار هم شکست بخورد، یک استثنای **RuntimeBinderException** پرتاب خواهد شد. 🚨
+این متدها باید در صورت موفقیت، مقدار **true** برگردانند. اگر مقدار **false** برگردانده شود، **DLR** (Dynamic Language Runtime) به binder زبان برمی‌گردد تا به‌دنبال عضوی هم‌نام در خود شیء پویا (زیرکلاس DynamicObject) بگردد. اگر این کار هم شکست بخورد، یک استثنای **RuntimeBinderException** پرتاب خواهد شد. 
 
 ---
 
-### نمونه با `TryGetMember` و `TrySetMember` 📝
+### نمونه با `TryGetMember` و `TrySetMember`
 
 در مثال زیر، کلاسی ساخته‌ایم که به ما امکان می‌دهد به‌صورت پویا به attributeها در یک **XElement (System.Xml.Linq)** دسترسی پیدا کنیم:
 
@@ -533,7 +533,7 @@ static class XExtensions
 }
 ```
 
-📌 نحوه‌ی استفاده:
+ نحوه‌ی استفاده:
 
 ```csharp
 XElement x = XElement.Parse (@"<Label Text=""Hello"" Id=""5""/>");
@@ -546,7 +546,7 @@ Console.WriteLine (x.ToString()); // <Label Text="Foo" Id="5" />
 
 ---
 
-### نمونه با `System.Data.IDataRecord` 📊
+### نمونه با `System.Data.IDataRecord`
 
 در مثال بعدی، برای ساده‌تر کردن کار با **data reader**‌ها، از DynamicObject استفاده شده است:
 
@@ -579,7 +579,7 @@ using (IDataReader reader = someDbCommand.ExecuteReader())
 
 ---
 
-### نمونه با `TryBinaryOperation` و `TryInvoke` ➕🔔
+### نمونه با `TryBinaryOperation` و `TryInvoke`
 
 ```csharp
 dynamic d = new Duck();
@@ -608,15 +608,15 @@ public class Duck : DynamicObject
 
 ---
 
-### متدهای تکمیلی برای زبان‌های پویا 🌐
+### متدهای تکمیلی برای زبان‌های پویا
 
 کلاس **DynamicObject** همچنین چند متد مجازی دیگر را برای راحتی زبان‌های پویا فراهم می‌کند.
 
-🔹 به‌طور خاص، بازنویسی متد **GetDynamicMemberNames** این امکان را می‌دهد که لیستی از تمام نام اعضایی که شیء پویا ارائه می‌دهد، برگردانده شود.
+ به‌طور خاص، بازنویسی متد **GetDynamicMemberNames** این امکان را می‌دهد که لیستی از تمام نام اعضایی که شیء پویا ارائه می‌دهد، برگردانده شود.
 
-🔹 دلیل دیگر برای پیاده‌سازی **GetDynamicMemberNames** این است که **دیباگر Visual Studio** از این متد استفاده می‌کند تا نمایی از یک شیء پویا را نمایش دهد. 🖥️
+ دلیل دیگر برای پیاده‌سازی **GetDynamicMemberNames** این است که **دیباگر Visual Studio** از این متد استفاده می‌کند تا نمایی از یک شیء پویا را نمایش دهد. 
 
-### ExpandoObject 🪄
+### ExpandoObject
 
 یک کاربرد ساده دیگر از **DynamicObject** می‌تواند این باشد که یک کلاس پویا بنویسیم که اشیاء را در یک **Dictionary** ذخیره و بازیابی کند (کلیدها از نوع string). اما این قابلیت از قبل توسط کلاس **ExpandoObject** فراهم شده است:
 
@@ -629,7 +629,7 @@ Console.WriteLine (x.FavoriteColor);   // Green
 Console.WriteLine (x.FavoriteNumber);  // 7
 ```
 
-🔑 در واقع، **ExpandoObject** اینترفیس **IDictionary\<string, object>** را پیاده‌سازی می‌کند. بنابراین می‌توانیم مثال بالا را این‌طور ادامه دهیم:
+ در واقع، **ExpandoObject** اینترفیس **IDictionary\<string, object>** را پیاده‌سازی می‌کند. بنابراین می‌توانیم مثال بالا را این‌طور ادامه دهیم:
 
 ```csharp
 var dict = (IDictionary<string,object>) x;
@@ -640,7 +640,7 @@ Console.WriteLine (dict.Count);              // 2
 
 ---
 
-### تعامل با زبان‌های پویا 🌍
+### تعامل با زبان‌های پویا
 
 اگرچه C# از طریق کلمه کلیدی **dynamic** از **dynamic binding** پشتیبانی می‌کند، اما اجازه نمی‌دهد یک عبارت ذخیره‌شده به شکل رشته (string) را در زمان اجرا مستقیماً اجرا کنید:
 
@@ -651,23 +651,23 @@ string expr = "2 * 3";
 
 علت این است که ترجمه‌ی یک رشته به یک **expression tree** نیازمند یک **lexical parser** و **semantic parser** است که در کامپایلر C# وجود دارند، اما به‌صورت سرویس در زمان اجرا در دسترس نیستند. در زمان اجرا، C# فقط یک **binder** فراهم می‌کند که به **DLR** می‌گوید چگونه یک expression tree از قبل ساخته‌شده را تفسیر کند.
 
-👨‍💻 در زبان‌های واقعاً پویا مثل **IronPython** و **IronRuby**، می‌توان رشته‌ها را به‌صورت مستقیم اجرا کرد. این موضوع برای کارهایی مثل **اسکریپت‌نویسی**، ساخت **سیستم‌های پیکربندی پویا**، و پیاده‌سازی **rules engine** بسیار مفید است. بنابراین، اگرچه می‌توانید بیشتر برنامه را در C# بنویسید، اما ممکن است برای برخی وظایف خاص، به استفاده از یک زبان پویا نیاز داشته باشید.
+‍ در زبان‌های واقعاً پویا مثل **IronPython** و **IronRuby**، می‌توان رشته‌ها را به‌صورت مستقیم اجرا کرد. این موضوع برای کارهایی مثل **اسکریپت‌نویسی**، ساخت **سیستم‌های پیکربندی پویا**، و پیاده‌سازی **rules engine** بسیار مفید است. بنابراین، اگرچه می‌توانید بیشتر برنامه را در C# بنویسید، اما ممکن است برای برخی وظایف خاص، به استفاده از یک زبان پویا نیاز داشته باشید.
 
 همچنین گاهی ممکن است بخواهید از **API**ای استفاده کنید که در یک زبان پویا نوشته شده و معادل آن در **.NET** وجود ندارد.
 
 ---
 
-### اجرای کد C# به شکل رشته با Roslyn 🧩
+### اجرای کد C# به شکل رشته با Roslyn
 
 پکیج **Microsoft.CodeAnalysis.CSharp.Scripting** (از مجموعه Roslyn) این قابلیت را فراهم می‌کند که یک رشته C# را اجرا کنید. البته این کار با **کامپایل** رشته به یک برنامه انجام می‌شود، بنابراین سربار عملکردی بیشتری نسبت به زبان‌هایی مثل Python دارد (مگر اینکه همان عبارت بارها تکراراً اجرا شود).
 
 ---
 
-### مثال با IronPython 🐍
+### مثال با IronPython
 
 در مثال زیر، از **IronPython** برای ارزیابی یک عبارت در زمان اجرا از درون C# استفاده می‌کنیم. می‌توان از این روش برای ساخت یک ماشین حساب ساده بهره برد.
 
-📌 برای اجرای این کد، باید پکیج‌های **DynamicLanguageRuntime** (توجه کنید با System.Dynamic.Runtime فرق دارد) و **IronPython** را نصب کنید.
+ برای اجرای این کد، باید پکیج‌های **DynamicLanguageRuntime** (توجه کنید با System.Dynamic.Runtime فرق دارد) و **IronPython** را نصب کنید.
 
 ```csharp
 using System;
@@ -685,7 +685,7 @@ object Calculate (string expression)
 }
 ```
 
-✅ توجه کنید: چون رشته به **Python** پاس داده می‌شود، عبارت بر اساس قوانین Python ارزیابی خواهد شد، نه C#.
+ توجه کنید: چون رشته به **Python** پاس داده می‌شود، عبارت بر اساس قوانین Python ارزیابی خواهد شد، نه C#.
 
 برای مثال، می‌توان از امکانات زبان Python مثل **لیست‌ها** استفاده کرد:
 
@@ -696,7 +696,7 @@ foreach (int n in list) Console.Write (n);  // 12345
 
 ---
 
-### عبور وضعیت بین C# و اسکریپت 🔄
+### عبور وضعیت بین C# و اسکریپت
 
 برای انتقال متغیرها از C# به Python، مراحل بیشتری نیاز است. مثال زیر این موضوع را نشان می‌دهد و می‌تواند پایه‌ای برای یک **rules engine** باشد:
 
@@ -717,7 +717,7 @@ bool auditRequired = (bool) source.Execute (scope);
 Console.WriteLine (auditRequired);   // True
 ```
 
-📥 همچنین می‌توانید متغیرها را از اسکریپت به C# برگردانید:
+ همچنین می‌توانید متغیرها را از اسکریپت به C# برگردانید:
 
 ```csharp
 string code = "result = input * 3";
@@ -738,10 +738,10 @@ Console.WriteLine (scope.GetVariable ("result"));   // 6
 
 ---
 
-### تبادل انواع بین C# و Python 🔗
+### تبادل انواع بین C# و Python
 
-🔹 نوع‌ها به‌طور خودکار بین دنیای **.NET** و **Python** منتقل (marshal) می‌شوند.
-🔹 حتی می‌توانید اعضای یک شیء .NET را از سمت اسکریپت فراخوانی کنید:
+ نوع‌ها به‌طور خودکار بین دنیای **.NET** و **Python** منتقل (marshal) می‌شوند.
+ حتی می‌توانید اعضای یک شیء .NET را از سمت اسکریپت فراخوانی کنید:
 
 ```csharp
 string code = @"sb.Append (""World"")";

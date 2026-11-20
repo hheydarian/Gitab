@@ -1,0 +1,324 @@
+<!doctype html><html lang="fa" dir="rtl"> <head><script>
+    if (window.location.pathname.startsWith('/gitab/')) {
+      window.location.replace(window.location.pathname.replace(/^\/gitab\//i, '/Gitab/') + window.location.search + window.location.hash);
+    }
+    (() => {
+      try {
+        const t = localStorage.getItem('gitab-theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', t);
+        document.documentElement.dataset.colorMode = t;
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        document.documentElement.dataset.colorMode = 'dark';
+      }
+    })();
+  </script> <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5"> <title>۱۰۴.۵ مدیریت سطوح دسترسی و مالکیت فایل‌ها</title><meta name="description" content="۱۰۴.۵ مدیریت سطوح دسترسی و مالکیت فایل‌ها — مطالعه آنلاین و رایگان از کتاب «راهنمای آزمون LPIC-1 (ورژن ۵۰۰)» (LPIC-1 Study Guide (Version 500)) اثر جادی میرمیرانی با ترجمه جادی میرمیرانی در گیتاب."> <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"><meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"> <meta name="theme-color" content="#090d16"><meta name="referrer" content="strict-origin-when-cross-origin"> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https:; frame-src https://www.youtube.com https://www.youtube-nocookie.com https://maps.google.com https://www.google.com; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self';"><link rel="icon" type="image/png" href="/Gitab/favicon.png"> <link rel="canonical" href="https://hheydarian.github.io/Gitab/books/book13/Book/24/1045-manage-file-permissions-and-ownership/"><link rel="alternate" hreflang="fa" href="https://hheydarian.github.io/Gitab/books/book13/Book/24/1045-manage-file-permissions-and-ownership/"> <link rel="alternate" hreflang="x-default" href="https://hheydarian.github.io/Gitab/books/book13/Book/24/1045-manage-file-permissions-and-ownership/"><link rel="alternate" type="text/plain" title="LLMs.txt" href="/Gitab/llms.txt"> <link rel="sitemap" type="application/xml" title="Sitemap" href="/Gitab/sitemap.xml"><meta property="og:locale" content="fa_IR"> <meta property="og:type" content="article"><meta property="og:site_name" content="گیتاب | Gitab"> <meta property="og:title" content="۱۰۴.۵ مدیریت سطوح دسترسی و مالکیت فایل‌ها"><meta property="og:description" content="۱۰۴.۵ مدیریت سطوح دسترسی و مالکیت فایل‌ها — مطالعه آنلاین و رایگان از کتاب «راهنمای آزمون LPIC-1 (ورژن ۵۰۰)» (LPIC-1 Study Guide (Version 500)) اثر جادی میرمیرانی با ترجمه جادی میرمیرانی در گیتاب."> <meta property="og:url" content="https://hheydarian.github.io/Gitab/books/book13/Book/24/1045-manage-file-permissions-and-ownership/"><meta property="og:image" content="https://hheydarian.github.io/Gitab/images/lpic1book/Cover.jpg"> <meta property="og:image:alt" content="۱۰۴.۵ مدیریت سطوح دسترسی و مالکیت فایل‌ها"><meta name="twitter:card" content="summary_large_image"> <meta name="twitter:title" content="۱۰۴.۵ مدیریت سطوح دسترسی و مالکیت فایل‌ها"><meta name="twitter:description" content="۱۰۴.۵ مدیریت سطوح دسترسی و مالکیت فایل‌ها — مطالعه آنلاین و رایگان از کتاب «راهنمای آزمون LPIC-1 (ورژن ۵۰۰)» (LPIC-1 Study Guide (Version 500)) اثر جادی میرمیرانی با ترجمه جادی میرمیرانی در گیتاب."> <meta name="twitter:image" content="https://hheydarian.github.io/Gitab/images/lpic1book/Cover.jpg"><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://hheydarian.github.io/Gitab/#organization","name":"گیتاب | Gitab","alternateName":"Gitab","url":"https://hheydarian.github.io/Gitab/","logo":{"@type":"ImageObject","url":"https://hheydarian.github.io/Gitab/favicon.png"},"sameAs":["https://github.com/hheydarian/Gitab"]},{"@type":"WebSite","@id":"https://hheydarian.github.io/Gitab/#website","url":"https://hheydarian.github.io/Gitab/","name":"گیتاب | Gitab","inLanguage":"fa-IR","publisher":{"@id":"https://hheydarian.github.io/Gitab/#organization"},"potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://hheydarian.github.io/Gitab/books/list-books/?q={search_term_string}"},"query-input":"required name=search_term_string"}},{"@type":"WebPage","@id":"https://hheydarian.github.io/Gitab/books/book13/Book/24/1045-manage-file-permissions-and-ownership/#webpage","url":"https://hheydarian.github.io/Gitab/books/book13/Book/24/1045-manage-file-permissions-and-ownership/","name":"۱۰۴.۵ مدیریت سطوح دسترسی و مالکیت فایل‌ها","description":"۱۰۴.۵ مدیریت سطوح دسترسی و مالکیت فایل‌ها — مطالعه آنلاین و رایگان از کتاب «راهنمای آزمون LPIC-1 (ورژن ۵۰۰)» (LPIC-1 Study Guide (Version 500)) اثر جادی میرمیرانی با ترجمه جادی میرمیرانی در گیتاب.","inLanguage":"fa-IR","isPartOf":{"@id":"https://hheydarian.github.io/Gitab/#website"}},{"@type":"TechArticle","headline":"۱۰۴.۵ مدیریت سطوح دسترسی و مالکیت فایل‌ها","description":"۱۰۴.۵ مدیریت سطوح دسترسی و مالکیت فایل‌ها — مطالعه آنلاین و رایگان از کتاب «راهنمای آزمون LPIC-1 (ورژن ۵۰۰)» (LPIC-1 Study Guide (Version 500)) اثر جادی میرمیرانی با ترجمه جادی میرمیرانی در گیتاب.","url":"https://hheydarian.github.io/Gitab/books/book13/Book/24/1045-manage-file-permissions-and-ownership/","inLanguage":"fa-IR","isAccessibleForFree":true,"author":{"@type":"Person","name":"جادی میرمیرانی"},"translator":{"@type":"Person","name":"جادی میرمیرانی"},"isPartOf":{"@type":"Book","name":"راهنمای آزمون LPIC-1 (ورژن ۵۰۰)","alternateName":"LPIC-1 Study Guide (Version 500)","url":"https://hheydarian.github.io/Gitab/books/book13/"}}]}</script> <link rel="preload" href="/Gitab/fonts/Vazirmatn.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/Gitab/styles/main.css?v=2.4" as="style"> <link rel="preload" href="/Gitab/styles/gitab-modern.css?v=2.5" as="style"><style>@font-face{font-family:'Lalezar';src:url('/Gitab/fonts/Lalezar.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}@font-face{font-family:'Vazirmatn';src:url('/Gitab/fonts/Vazirmatn.woff2') format('woff2');font-weight:100 900;font-style:normal;font-display:swap}html,body,button,input,optgroup,select,textarea,.filter-pill{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}input::placeholder,textarea::placeholder{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}</style> <link rel="stylesheet" href="/Gitab/styles/main.css?v=2.4"><link rel="stylesheet" href="/Gitab/styles/gitab-modern.css?v=2.5"> <link rel="stylesheet" href="/Gitab/styles/vendor/github-dark.min.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="/Gitab/styles/vendor/github-dark.min.css"></noscript></head> <body><header class="header"> <div class="container nav-wrap"><a href="/Gitab/" class="brand" aria-label="صفحه اصلی گیتاب"> <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="30" height="30" decoding="async"> <span class="brand-text">Gitab</span> </a> <nav class="nav" id="mainNav"><a href="/Gitab/" >خانه</a> <a href="/Gitab/books/list-books" aria-current="page">کتاب‌ها</a> <a href="/Gitab/courses/" >دوره‌ها</a> <a href="/Gitab/translator.html" >مترجمین</a></nav> <div class="nav-actions"><button id="themeToggle" class="theme-toggle-btn" aria-label="تغییر تم" title="تغییر تم"> <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن" width="18" height="18" decoding="async" style="display:none"> <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک" width="18" height="18" decoding="async"> </button> <a class="btn-github-pill" href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" title="مشاهده سورس گیتاب در گیت‌هاب"> <img src="/Gitab/icone/github.svg" alt="GitHub" width="16" height="16" decoding="async"> <span>گیت‌هاب</span> </a> <button class="mobile-menu-btn" id="mobileMenuBtn" type="button" aria-label="باز کردن منو" aria-expanded="false"> <svg class="mob-icon-open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="4" y1="7" x2="20" y2="7"></line> <line x1="4" y1="12" x2="20" y2="12"></line> <line x1="4" y1="17" x2="14" y2="17"></line> </svg> <svg class="mob-icon-close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="18" y1="6" x2="6" y2="18"></line> <line x1="6" y1="6" x2="18" y2="18"></line> </svg> </button></div> </div><div class="mobile-drawer" id="mobileDrawer" aria-hidden="true"> <div class="mobile-drawer-inner"><div class="mobile-drawer-section-label">ناوبری سریع</div><nav class="mobile-drawer-links" aria-label="منوی موبایل"> <a href="/Gitab/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M3 10.5 12 3l9 7.5"></path> <path d="M5 9.5V20a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V9.5"></path> </svg> </span> <span class="mob-nav-text">صفحه نخست</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/books/list-books" class="mobile-drawer-link active" aria-current="page"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path> </svg> </span> <span class="mob-nav-text">کتابخانه و فهرست کتاب‌ها</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/courses/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path> <path d="M6 12v5c3 3 9 3 12 0v-5"></path> </svg> </span> <span class="mob-nav-text">دوره‌های آموزشی</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/translator.html" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path> <circle cx="9" cy="7" r="4"></circle> <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path> <path d="M16 3.13a4 4 0 0 1 0 7.75"></path> </svg> </span> <span class="mob-nav-text">مترجمین و همکاران</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> </nav><div class="mobile-drawer-divider"></div><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" class="mobile-drawer-link mobile-drawer-gh"> <span class="mob-nav-icon" aria-hidden="true"> <img src="/Gitab/icone/github.svg" alt="" width="17" height="17" loading="lazy" decoding="async"> </span> <span class="mob-nav-text">مخزن گیت‌هاب پروژه</span> <span class="mob-nav-ext" aria-hidden="true">↗</span> </a> </div></div> </header><div class="reading-progress-track"> <div class="reading-progress-fill" id="readingProgressBar"></div></div> <main class="site-main chapter-reading-page"><div class="chapter-page-wrapper"> <nav class="chapter-clean-breadcrumb" aria-label="مسیر راهنما" dir="rtl"><a href="/Gitab/">خانه</a> <span class="bc-sep" aria-hidden="true">/</span> <a href="/Gitab/books/list-books/">کتاب‌ها</a> <span class="bc-sep" aria-hidden="true">/</span> <a href="/Gitab/books/book13/"><bdi>راهنمای آزمون LPIC-1</bdi></a> <span class="bc-sep" aria-hidden="true">/</span> <span class="bc-current-leaf"><bdi>۱۰۴.۵ مدیریت سطوح دسترسی و مالکیت فایل‌ها</bdi></span></nav> <article class="chapter-prose-container markdown-body" id="chapterArticle" dir="rtl"><h1>۱۰۴.۵ مدیریت سطوح دسترسی و مالکیت فایل‌ها</h1><div class="callout callout-info" style="background: rgba(59, 130, 246, 0.08); border-right: 4px solid #3b82f6; padding: 16px 20px; border-radius: 8px; margin-bottom: 24px;"> <strong>خلاصه هدف آزمون:</strong> مجوزهای خواندن، نوشتن و اجرا (rwx)، محاسبات عددی اکتال، دستورات chmod، chown، chgrp و مجوزهای ویژه SUID، SGID و Sticky Bit. </div><h2>🎯 اهداف و سرفصل‌های این بخش</h2><p>در این درسنامه موارد زیر را بررسی و مرور می‌کنیم:</p><ul> <li>مفاهیم کلیدی مورد پرسش در آزمون بین‌المللی LPIC-1</li><li>دستورات، فایل‌های پیکربندی و ابزارهای مرتبط در خط فرمان</li><li>نکات پرتکرار آزمون‌های ۱۰۱ و ۱۰۲ همراه با نمونه‌های کاربردی</li></ul> <hr><h2>📝 متن درسنامه و توضیحات تکمیلی</h2><p><em>ضریب اهمیت (Weight): ۳</em></p><p>داوطلبان باید بتوانند دسترسی به فایل‌ها را از طریق استفاده صحیح از مجوزها (Permissions) و مالکیت‌ها (Ownerships) کنترل کنند.</p><h3>حوزه‌های دانش کلیدی</h3><ul> <li>مدیریت مجوزهای دسترسی روی فایل‌های معمولی، فایل‌های ویژه و دایرکتوری‌ها.</li><li>استفاده از حالت‌های دسترسی مانند <code>suid</code>، <code>sgid</code> و <code>sticky bit</code> برای حفظ امنیت.</li><li>آشنایی با نحوه تغییر ماسک ایجاد فایل (<code>umask</code>).</li><li>استفاده از فیلد گروه برای اعطای دسترسی فایل به اعضای گروه.</li></ul> <h3>دستورات و اصطلاحات کلیدی</h3><ul> <li><code>chmod</code></li><li><code>umask</code></li><li><code>chown</code></li><li><code>chgrp</code></li></ul> <h2>کاربران و گروه‌ها (Users and Groups)</h2><p>یک سیستم لینوکسی می‌تواند کاربران و گروه‌های زیادی داشته باشد. شما می‌توانید با یک کاربر وارد سیستم شوید و با دستور <code>su</code> به کاربر یا گروه دیگری تغییر وضعیت دهید. هر کاربر به یک گروه اصلی (Primary Group) تعلق دارد و می‌تواند عضو گروه‌های دیگری هم باشد.</p><p>برای بررسی کاربر و گروه‌های خودتان از دستورات <code>whoami</code>، <code>groups</code> و <code>id</code> استفاده کنید:</p><pre class="hljs"><code>- $ whoami
+jadi
+- $ groups
+jadi adm cdrom sudo dip plugdev netdev lpadmin sambashare debian-tor
+- $ id
+uid=1000(jadi) gid=1000(jadi) groups=1000(jadi),4(adm),24(cdrom),27(sudo),30(dip),46(plugdev),102(netdev),108(lpadmin),124(sambashare),125(debian-tor)
+- $ su root -
+Password:
+- # id
+uid=0(root) gid=0(root) groups=0(root)
+- # exit
+exit
+- $ whoami
+jadi
+</code></pre> <p>همانطور که می‌بینید، دستور <code>id</code> هم اطلاعات کاربر و هم اطلاعات گروه را نمایش می‌دهد.</p><blockquote> <p><strong>نکته:</strong> شناسه کاربری (<code>UID</code>) شماره <code>0</code> و شناسه گروه (<code>GID</code>) شماره <code>0</code> متعلق به کاربر <code>root</code> و گروه <code>root</code> است.</p></blockquote> <p>این اطلاعات در فایل‌های <code>/etc/passwd</code> و <code>/etc/group</code> ذخیره می‌شوند.</p><pre class="hljs"><code>$ cat /etc/group | grep adm
+adm:x:4:syslog,jadi
+lpadmin:x:108:jadi
+</code></pre> <h2>مالکیت و مجوزهای فایل (File ownership &amp; permissions)</h2><p>لینوکس برای هر فایل یا دایرکتوری از سه لایه دسترسی/مجوز استفاده می‌کند: کاربر مالک (User)، گروه (Group) و سایرین (Others).</p><p>هر فایل متعلق به یک کاربر و یک گروه است و آن کاربر و اعضای آن گروه، دسترسی‌های مشخص خواندن، نوشتن و اجرا روی آن دارند. به این نمونه نگاه کنید:</p><pre class="hljs"><code>$ ls -ltrh script.sh
+-rwxr-xr-x 1 jadi adm 34 Mar  5  2023 script.sh
+</code></pre> <p>در مثال بالا، <code>jadi</code> مالک فایل است. فایل به گروه <code>adm</code> تعلق دارد و مالک (در اینجا <code>jadi</code>) مجوزهای خواندن (<strong>r</strong>ead)، نوشتن (<strong>w</strong>rite، شامل حذف و ویرایش) و اجرا (e<strong>x</strong>ecute، و در مورد دایرکتوری به معنای خواندن محتویات آن) را روی فایل دارد؛ در حالی که اعضای گروه <code>adm</code> و <strong>سایرین (others)</strong> فقط دسترسی خواندن و اجرا دارند.</p><div class="book-img-frame" style="text-align: center; margin: 24px 0;"><img src="/Gitab/books/book13/assets/file_permissions.png" alt="" style="max-width: 100%; border-radius: 8px; border: 1px solid var(--g-border-dim);" loading="lazy"></div><blockquote> <p><strong>نکته:</strong> در بسیاری از توزیع‌ها، وقتی کاربری را می‌سازید، سیستم گروهی با همان نام ایجاد می‌کند و فایل‌های آن کاربر را به همان گروه اختصاص می‌دهد.</p></blockquote> <p>جدول زیر اطلاعات بیشتری درباره بخش اول خروجی دستور <code>ls -l</code> نشان می‌دهد:</p><table> <thead><tr> <th style="text-align:center">موقعیت</th><th style="text-align:left">معنا</th></tr> </thead><tbody> <tr><td style="text-align:center">۱</td><td style="text-align:left">نوع ورودی را مشخص می‌کند. خط تیره (<code>-</code>) برای فایل‌های معمولی، <code>l</code> برای لینک‌ها و <code>d</code> برای دایرکتوری است.</td></tr> <tr><td style="text-align:center">۲، ۳، ۴</td><td style="text-align:left">دسترسی خواندن، نوشتن و اجرا برای مالک (Owner)</td></tr> <tr><td style="text-align:center">۵، ۶، ۷</td><td style="text-align:left">دسترسی خواندن، نوشتن و اجرا برای اعضای گروه (Group)</td></tr> <tr><td style="text-align:center">۸، ۹، ۱۰</td><td style="text-align:left">دسترسی خواندن، نوشتن و اجرا برای سایر کاربران (Others)</td></tr> <tr><td style="text-align:center">۱۱</td><td style="text-align:left">نشان می‌دهد که آیا روش‌های دسترسی دیگری (مانند SELinux) روی این فایل اعمال شده است یا خیر (جزو سرفصل آزمون LPIC 101 نیست).</td></tr> </tbody></table> <p>بیایید مثال دیگری را بررسی کنیم:</p><pre class="hljs"><code>$ ls -l /sbin/fdisk
+-rwxr-xr-x 1 root root 267176 Oct 15 18:58 /sbin/fdisk
+</code></pre> <p>می‌بینیم که فایل <code>fdisk</code> توسط مالک آن (<code>root</code>) قابل خواندن، نوشتن و اجرا است. سایر کاربران (حتی اگر عضو گروه <code>root</code> باشند) فقط می‌توانند آن را بخوانند و اجرا کنند.</p><blockquote> <p><strong>نکته:</strong> اگرچه کاربران غیر <code>root</code> می‌توانند <code>fdisk</code> را اجرا کنند، اما این برنامه اگر ببیند کاربر غیرادمین آن را اجرا کرده، کار خاصی انجام نخواهد داد.</p></blockquote> <p>بیایید به مثال دیگری نگاه کنیم:</p><pre class="hljs"><code>$ ls -l /home/
+total 12
+drwxr-xr-x 160 jadi jadi 12288 Feb  7 11:44 jadi
+</code></pre> <p>کاراکتر اول <code>d</code> است، پس این یک دایرکتوری است. مالک (<code>jadi</code>) دسترسی خواندن، نوشتن و اجرا دارد، اما سایر اعضای گروه <code>jadi</code> و <strong>سایرین</strong> فقط دسترسی خواندن و اجرا روی این دایرکتوری دارند.</p><p>دسترسی اجرا (کاراکتر <code>x</code>) روی دایرکتوری به این معناست که کاربران می‌توانند وارد آن شوند و فایل‌های داخلش را ببینند؛ ببینید اگر یک دایرکتوری مجوز <code>x</code> نداشته باشد چه اتفاقی می‌افتد:</p><pre class="hljs"><code>(with root user)
+$ tree /tmp/FOO
+FOO
+├── Bar1
+└── Bar2
+
+$ ls -ld /tmp/FOO/
+drw-r--r--. 2 jadi jadi 80 Mar 23 19:32 FOO/
+
+(With other user)
+$ ls -l FOO/
+ls: cannot access &#x27;FOO/Bar2&#x27;: Permission denied
+ls: cannot access &#x27;FOO/Bar1&#x27;: Permission denied
+total 0
+-????????? ? ? ? ?            ? Bar1
+-????????? ? ? ? ?            ? Bar2
+</code></pre> <h3>تغییر مجوزها (Changing permissions)</h3><p>با استفاده از دستور <code>chmod</code> می‌توانیم مجوزهای فایل‌ها و دایرکتوری‌ها را تغییر دهیم. دو روش برای گفتن خواسته‌مان به این دستور وجود دارد:</p><p>۱. استفاده از کدهای مبنای ۸ (اکتال / Octal)<br> ۲. استفاده از کدهای کوتاه نمادین (Symbolic)</p><p>وقتی از کدهای اکتال استفاده می‌کنید، باید یک عدد در مبنای ۸ بسازید تا به <code>chmod</code> بگویید چه می‌خواهید. در این روش، <code>0</code> یعنی هیچ دسترسی، <code>1</code> یعنی اجرا (execute)، <code>2</code> یعنی نوشتن (write) و <code>4</code> یعنی خواندن (read). بنابراین اگر بخواهید دسترسی <em><strong>خواندن</strong></em> + <em><strong>اجرا</strong></em> بدهید، باید <code>4</code> + <code>1</code> یعنی <code>5</code> را بدهید. جدول زیر تمام ترکیب‌های ممکن را نشان می‌دهد:</p><table> <thead><tr> <th style="text-align:center">نمادین (Symbolic)</th><th style="text-align:center">اکتال (Octal)</th></tr> </thead><tbody> <tr><td style="text-align:center"><code>rwx</code></td><td style="text-align:center">7</td></tr> <tr><td style="text-align:center"><code>rw-</code></td><td style="text-align:center">6</td></tr> <tr><td style="text-align:center"><code>r-x</code></td><td style="text-align:center">5</td></tr> <tr><td style="text-align:center"><code>r--</code></td><td style="text-align:center">4</td></tr> <tr><td style="text-align:center"><code>-wx</code></td><td style="text-align:center">3</td></tr> <tr><td style="text-align:center"><code>-w-</code></td><td style="text-align:center">2</td></tr> <tr><td style="text-align:center"><code>--x</code></td><td style="text-align:center">1</td></tr> <tr><td style="text-align:center"><code>---</code></td><td style="text-align:center">0</td></tr> </tbody></table> <p>بنابراین اگر بخواهید به مالک <code>rwx</code>، به گروه <code>rx</code> و به سایرین فقط <code>x</code> بدهید، باید از <code>751</code> استفاده کنید:</p><pre class="hljs"><code>$ ls -ltrh myfile
+-rw-rw-r-- 1 jadi jadi 0 Feb  8 21:01 myfile
+$ chmod 751 myfile
+$ ls -ltrh myfile
+-rwxr-x--x 1 jadi jadi 0 Feb  8 21:01 myfile
+</code></pre> <p>این کار ممکن است در ابتدا سخت به نظر برسد، اما ترکیب‌های بسیار پرکاربردی مثل <code>755</code> برای فایل‌های اجرایی عمومی یا <code>600</code> برای فایل‌های شخصی وجود دارد که خیلی زود دستتان می‌آید.</p><p>یک روش <em>ساده‌تر</em> هم هست. در این روش <code>u</code> به معنای کاربر (user)، <code>g</code> به معنای گروه (group) و <code>o</code> به معنای سایرین (others) است. می‌توانید <code>+x</code> را اضافه کنید تا مجوز اجرا بدهید، <code>+r</code> برای مجوز خواندن و <code>+w</code> برای مجوز نوشتن. برای مثال <code>u+x</code> مجوز اجرا را به کاربر مالک می‌دهد. اگر بخواهید مجوزی را حذف کنید، از علامت <code>-</code> استفاده کنید؛ مثلاً <code>g-r</code> برای اینکه اعضای <code>group</code> نتوانند فایل را بخوانند:</p><pre class="hljs"><code>$ ls -ltrh myfile
+-rwxr-x--x 1 jadi jadi 0 Feb  8 21:01 myfile
+$ chmod u-x myfile
+$ ls -ltrh myfile
+-rw-r-x--x 1 jadi jadi 0 Feb  8 21:01 myfile
+$ chmod +x myfile
+$ chmod uo+xr myfile
+$ ls -ltrh myfile
+-rwxr-xr-x 1 jadi jadi 0 Feb  8 21:01 myfile
+</code></pre> <p>یکی از سوئیچ‌های بسیار رایج در <code>chmod</code> سوئیچ <code>-R</code> برای اعمال بازگشتی (Recursive) روی تمام فایل‌ها و زیردایرکتوری‌ها است. دستور زیر مجوز <code>read</code> تمام فایل‌های داخل <code>/tmp</code> را به همه کاربران می‌دهد:</p><pre class="hljs"><code># chmod -R o+r /tmp
+</code></pre> <h3>تغییر مالک و گروه (Changing owner and groups)</h3><p>اگر لازم باشد مالکیت یا گروه یک فایل یا دایرکتوری را تغییر دهید، از دستور <code>chown</code> استفاده کنید:</p><pre class="hljs"><code>$ ls -ltrh newfile
+-rw-rw-r-- 1 jadi jadi 0 Feb  8 21:38 newfile
+$ chown root:root newfile
+chown: changing ownership of ‘newfile’: Operation not permitted
+$ sudo chown root:root newfile
+[sudo] password for jadi:
+$ ls -ltrh newfile
+-rw-rw-r-- 1 root root 0 Feb  8 21:38 newfile
+</code></pre> <p>یک سوئیچ رایج در اینجا هم <code>-R</code> است تا <code>chown</code> به صورت بازگشتی روی کل پوشه‌ها و زیرمجموعه‌ها اعمال شود.</p><p>اگر فقط بخواهید گروه یک فایل را تغییر دهید، می‌توانید از دستور <code>chgrp</code> استفاده کنید:</p><pre class="hljs"><code>$ sudo chgrp postgres newfile
+$ ls -ltrh newfile
+-rw-rw-r-- 1 root postgres 0 Feb  8 21:38 newfile
+</code></pre> <p>با دستور <code>usermod</code> هم می‌توان گروه‌های بیشتری به یک کاربر اختصاص داد:</p><pre class="hljs"><code>$ <span class="hljs-built_in">sudo</span> usermod -aG <span class="hljs-built_in">sudo</span> jadi <span class="hljs-comment"># will add jadi to the sudo group</span>
+</code></pre> <p>از آنجا که کاربران می‌توانند عضو گروه‌های متعددی باشند، ممکن است هنگام ساخت فایل‌های جدید نیاز داشته باشند <strong>گروه پیش‌فرض</strong> خود را موقتاً تغییر دهند. برای این کار با دستور <code>groups</code> گروه‌ها را چک کنید و با <code>newgrp</code> گروه پیش‌فرض را تنظیم نمایید:</p><pre class="hljs"><code>$ touch newfile
+$ ls -ltrh newfile
+-rw------- 1 jadi jadi 0 Feb  8 21:53 newfile
+$ groups
+jadi adm cdrom sudo dip plugdev netdev lpadmin sambashare debian-tor
+$ newgrp adm
+$ touch newerfile
+$ ls -ltrh new*
+-rw------- 1 jadi jadi 0 Feb  8 21:53 newfile
+-rw------- 1 jadi adm  0 Feb  8 21:54 newerfile
+</code></pre> <h2>حالت‌های دسترسی ویژه (Access modes)</h2><p>یک سوال برای شما: اگر ما دسترسی نوشتن روی <code>/etc/passwd</code> یا <code>/etc/shadow</code> نداریم، پس چطور می‌توانیم رمز عبور خودمان را تغییر دهیم؟</p><p>به صورت عادی وقتی برنامه‌ای را اجرا می‌کنید، آن برنامه با سطح دسترسی <em>خود شما</em> اجرا می‌شود. اما چه می‌شود اگر لازم باشد برنامه‌ای را با سطح دسترسی بالاتر اجرا کنید؟ مثلاً برای ایجاد تغییر در فایل‌های رمز عبور؟ برای این منظور لینوکس دو بیت ویژه برای فایل‌ها در نظر گرفته است: <strong>suid</strong> (set user id) و <strong>sgid</strong> (set group id). اگر این بیت‌ها روی یک فایل تنظیم شده باشند، آن فایل هنگام اجرا با سطح دسترسی <strong>مالک</strong> (یا <strong>گروه</strong>) فایل اجرا می‌شود، نه کاربری که دستور را فراخوانی کرده است.</p><pre class="hljs"><code>$ ls -ltrh /usr/bin/passwd
+-rwsr-xr-x 1 root root 50K Jul 18  2014 /usr/bin/passwd
+</code></pre> <p>متوجه حرف <code>s</code> در <em>بیت اجرایی</em> مجوزهای کاربر (و همین‌طور برای گروه) شدید؟ این یعنی وقتی هر کاربری این برنامه را اجرا کند، برنامه با سطح دسترسی مالک فایل (که <code>root</code> است) اجرا می‌شود و نه با شناسه آن کاربر.</p><p>با استفاده از <code>chmod</code> و <code>+s</code> یا <code>-s</code> (به جای <code>x</code>) می‌توانید <code>suid</code> و <code>sgid</code> را فعال یا غیرفعال کنید.</p><p>تا بحث اینجاست، اجازه دهید آخرین بیت ویژه را هم معرفی کنم. نامش <strong>sticky bit</strong> است و اگر تنظیم شود، فایل را در برابر <em><strong>حذف شدن</strong></em> مقاوم می‌کند. اگر sticky bit روی یک دایرکتوری تنظیم شده باشد، فقط مالک فایل (یا مالک دایرکتوری و <code>root</code>) می‌تواند فایل را پاک کند، حتی اگر سایرین دسترسی نوشتن در آن دایرکتوری داشته باشند. این ویژگی برای جاهایی مثل <code>/tmp</code> بسیار کاربردی است (همه در دایرکتوری <code>/tmp</code> دسترسی نوشتن دارند، اما نمی‌خواهیم دیگران فایل‌های ما را پاک کنند).</p><p>بیت چسبان (Sticky bit) با <code>t</code> مشخص می‌شود و در آخرین کاراکتر مجوزهای خروجی <code>ls -l</code> دیده می‌شود:</p><pre class="hljs"><code>$ ls -dl /tmp
+drwxrwxrwt 13 root root 77824 Feb  8 21:27 /tmp
+</code></pre> <p>همانطور که می‌بینید، sticky bit تنظیم شده و اگرچه همه کاربران در این دایرکتوری دسترسی نوشتن دارند، اما نمی‌توانند فایل‌های یکدیگر را حذف کنند.</p><p>بیایید نحوه تنظیم این حالت‌های دسترسی را مرور کنیم:</p><table> <thead><tr> <th style="text-align:center">حالت دسترسی</th><th style="text-align:center">اکتال</th><th style="text-align:center">نمادین</th></tr> </thead><tbody> <tr><td style="text-align:center"><code>suid</code></td><td style="text-align:center">4000</td><td style="text-align:center"><code>u+s</code></td></tr> <tr><td style="text-align:center"><code>sgid</code></td><td style="text-align:center">2000</td><td style="text-align:center"><code>g+s</code></td></tr> <tr><td style="text-align:center"><code>sticky</code></td><td style="text-align:center">1000</td><td style="text-align:center"><code>+t</code></td></tr> </tbody></table> <blockquote><p><strong>نکته:</strong> تنظیم <code>sgid</code> روی یک دایرکتوری باعث می‌شود هر فایل جدیدی که داخل آن دایرکتوری ساخته می‌شود، به صورت خودکار گروه (GID) همان دایرکتوری را به ارث ببرد.</p></blockquote> <h2>دستور umask</h2><p>یک سوال نکته‌دار دیگر: مجوزهای یک فایل تازه ساخته‌شده چقدر است؟ وقتی یک فایل غیرموجود را <code>touch</code> می‌کنید چه اتفاقی می‌افتد؟ مجوزهای آن چه خواهد بود؟ این موضوع توسط <code>umask</code> تعیین می‌شود. این دستور به سیستم می‌گوید چه مجوزهایی (علاوه بر مجوز اجرا) <strong>نباید</strong> به فایل‌های جدید داده شود. به عبارت دیگر، تصور کنید همه فایل‌های جدید مجوز اکتال <code>666</code> (خواندن + نوشتن برای کاربر، گروه و سایرین) می‌گیرند؛ بنابراین یک <code>umask</code> برابر با <code>0002</code> (بله! ۴ رقم) عدد <code>2</code> (نوشتن) را برای سایرین کم می‌کند (<code>666 - 0002 = 664</code>):</p><pre class="hljs"><code>$ umask
+0002
+</code></pre> <p>اگر لازم باشد <code>umask</code> را تغییر دهیم، با همین دستور انجام می‌شود:</p><pre class="hljs"><code>$ umask
+0002
+$ touch newfile
+$ ls -ltrh newfile
+-rw-rw-r-- 1 jadi jadi 0 Feb  8 21:38 newfile
+$ mkdir newdir
+$ ls -ltrhd newdir
+drwxrwxr-x 2 jadi jadi 4.0K Feb  8 21:38 newdir
+$ umask u=rw,g=,o=
+$ touch newerfile
+$ ls -l newerfile
+-rw------- 1 jadi jadi 0 Feb  8 21:41 newerfile
+$ umask
+0177
+</code></pre> <blockquote><p><strong>نکته:</strong> دقت کنید چطور از <code>u=rw,g=,o=</code> استفاده کردم تا دقیقاً به <code>umask</code> (یا <code>chmod</code>) بگویم چه مجوزهایی می‌خواهم.</p></blockquote> <hr><div class="callout callout-tip" style="background: rgba(147, 51, 234, 0.08); border-right: 4px solid #9333ea; padding: 16px 20px; border-radius: 8px; margin-top: 32px;"> <strong>🔗 نسخه اصلی به زبان انگلیسی:</strong> این درسنامه بر اساس منبع انگلیسی جادی در مخزن <a href="https://github.com/jadijadi/lpic1book/blob/master/content/1045_manage_file_permissions_and_ownership.md" target="_blank" rel="noopener noreferrer">jadijadi/lpic1book</a> تدوین و سازماندهی شده است. </div></article> <nav class="chapter-single-next-nav"><a href="/Gitab/books/book13/Book/25/1046-create-and-change-hard-and-symbolic-links/" class="btn-next-chapter-action" id="nextChapterBtn" data-hub="/Gitab/books/book13/"> <span class="next-btn-text">فصل بعدی: ۱۰۴.۶ ساخت پیوندهای سخت و نمادین (Links)</span> <span class="next-btn-arrow">←</span> </a> </nav></div> <button class="fab-back-to-top" id="backToTopBtn" type="button" aria-label="رفتن به بالای صفحه" title="رفتن به بالا"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"> <polyline points="18 15 12 9 6 15"></polyline> </svg> </button></main> <footer class="footer-minimal"><div class="footer-container"> <div class="footer-top-row"><div class="footer-brand-side"> <a href="/Gitab/" class="footer-brand-anchor"> <img src="/Gitab/icone/logo.svg" alt="Gitab" width="28" height="28" loading="lazy" decoding="async"> <span class="footer-brand-title">گیتاب (Gitab)</span> </a> <p class="footer-tagline"> پلتفرم آزاد و مستقل برای ترجمهٔ دقیق و روان کتاب‌های مرجع مهندسی نرم‌افزار. </p></div> <div class="footer-nav-cols"><div class="footer-nav-col"> <span class="footer-nav-heading">موضوعات</span><ul class="footer-nav-list"> <li><a href="/Gitab/books/list-books/?cat=csharp">سی‌شارپ و دات‌نت</a></li><li><a href="/Gitab/books/list-books/?cat=clean-code">کد تمیز و بازآفرینی</a></li><li><a href="/Gitab/books/list-books/?cat=architecture">معماری و طراحی دامنه</a></li><li><a href="/Gitab/books/list-books/?cat=system">لینوکس و خط فرمان</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">بخش‌های سایت</span><ul class="footer-nav-list"> <li><a href="/Gitab/">صفحه اصلی</a></li><li><a href="/Gitab/books/list-books/">کتابخانه کامل</a></li><li><a href="/Gitab/courses/">دوره‌های آموزشی</a></li><li><a href="/Gitab/translator.html">تالار مترجمین</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">مشارکت و جامعه</span><ul class="footer-nav-list"> <li><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer">راهنمای همکاری در ترجمه</a></li><li><a href="https://github.com/hheydarian/Gitab/issues" target="_blank" rel="noopener noreferrer">پیشنهاد کتاب یا گزارش خطا</a></li></ul> </div></div> </div><div class="footer-bottom-line"> <span>© <span id="y">2026</span> Gitab — توسعه‌یافته برای جامعهٔ مهندسان نرم‌افزار ایرانی</span></div> </div></footer> <script>
+  (() => {
+    const root = document.documentElement;
+    const btn = document.getElementById('themeToggle');
+    const sunIcon = btn ? btn.querySelector('.icon-sun') : null;
+    const moonIcon = btn ? btn.querySelector('.icon-moon') : null;
+    const KEY = 'gitab-theme';
+
+    function updateTheme(mode) {
+      root.setAttribute('data-theme', mode);
+      root.dataset.colorMode = mode;
+      if (sunIcon && moonIcon) {
+        if (mode === 'dark') {
+          sunIcon.style.display = 'inline-block';
+          moonIcon.style.display = 'none';
+        } else {
+          sunIcon.style.display = 'none';
+          moonIcon.style.display = 'inline-block';
+        }
+      }
+    }
+
+    let saved = 'dark';
+    try { saved = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+    updateTheme(saved);
+
+    if (btn) {
+      btn.addEventListener('click', () => {
+        let current = 'dark';
+        try { current = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+        const next = current === 'dark' ? 'light' : 'dark';
+        try { localStorage.setItem(KEY, next); } catch (e) {}
+        updateTheme(next);
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      let mode = 'dark';
+      try { mode = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+      updateTheme(mode);
+      const yearSpan = document.getElementById('y');
+      if (yearSpan) yearSpan.textContent = new Date().getFullYear();
+    });
+
+    const mobBtn = document.getElementById('mobileMenuBtn');
+    const mobDrawer = document.getElementById('mobileDrawer');
+    if (mobBtn && mobDrawer) {
+      const setDrawerOpen = (open) => {
+        mobDrawer.classList.toggle('open', open);
+        mobBtn.classList.toggle('is-open', open);
+        mobBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        mobBtn.setAttribute('aria-label', open ? 'بستن منو' : 'باز کردن منو');
+        mobDrawer.setAttribute('aria-hidden', open ? 'false' : 'true');
+      };
+
+      mobBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        setDrawerOpen(!mobDrawer.classList.contains('open'));
+      });
+
+      mobDrawer.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => setDrawerOpen(false));
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && mobDrawer.classList.contains('open')) {
+          setDrawerOpen(false);
+        }
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!mobDrawer.contains(e.target) && !mobBtn.contains(e.target)) {
+          setDrawerOpen(false);
+        }
+      });
+    }
+
+    if ('serviceWorker' in navigator) {
+      const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+      if (isLocalhost) {
+        navigator.serviceWorker.getRegistrations().then(regs => {
+          for (const reg of regs) reg.unregister();
+        });
+        if ('caches' in window) {
+          caches.keys().then(names => {
+            for (const name of names) caches.delete(name);
+          });
+        }
+      } else {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/Gitab/sw.js').catch(() => {});
+        });
+      }
+    }
+  })();
+  </script> <script>
+  document.querySelectorAll('pre code').forEach(block => {
+    const pre = block.parentNode;
+    if (!pre || pre.querySelector('.copy-btn')) return;
+
+    const copySvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
+    const okSvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+
+    const btn = document.createElement('button');
+    btn.className = 'copy-btn';
+    btn.setAttribute('aria-label', 'کپی کد');
+    btn.setAttribute('title', 'کپی کد');
+    btn.setAttribute('type', 'button');
+    btn.innerHTML = copySvg;
+    pre.appendChild(btn);
+
+    btn.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(block.textContent);
+        btn.classList.add('copied');
+        btn.innerHTML = okSvg;
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          btn.innerHTML = copySvg;
+        }, 1800);
+      } catch (err) {
+        console.error('Copy failed:', err);
+      }
+    });
+  });
+  </script> <script>
+  (() => {
+    const article = document.getElementById('chapterArticle');
+    if (!article) return;
+
+    const progressBar = document.getElementById('readingProgressBar');
+    if (progressBar) {
+      window.addEventListener('scroll', () => {
+        const docElem = document.documentElement;
+        const totalHeight = docElem.scrollHeight - docElem.clientHeight;
+        if (totalHeight > 0) {
+          const progress = (window.pageYOffset / totalHeight) * 100;
+          progressBar.style.width = Math.min(100, Math.max(0, progress)) + '%';
+        }
+      }, { passive: true });
+    }
+
+    const btt = document.getElementById('backToTopBtn');
+    if (btt) {
+      window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 250) {
+          btt.classList.add('visible');
+        } else {
+          btt.classList.remove('visible');
+        }
+      }, { passive: true });
+
+      btt.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+
+    article.querySelectorAll('img').forEach(img => {
+      if (!img.hasAttribute('loading')) img.loading = 'lazy';
+      if (!img.hasAttribute('decoding')) img.decoding = 'async';
+      const parent = img.parentElement;
+      if (parent && parent.tagName === 'P') {
+        parent.style.textAlign = 'center';
+      }
+
+      img.addEventListener('error', function() {
+        const src = this.getAttribute('src');
+        if (src && src.includes('assets/image/')) {
+          const parts = src.split('assets/image/');
+          const corrected = '/Gitab/books/book13/assets/image/' + parts[1];
+          if (this.src !== corrected) {
+            this.src = corrected;
+          }
+        }
+      });
+    });
+
+    article.querySelectorAll('p').forEach(p => {
+      const trimmed = p.innerText.trim();
+      if (trimmed.startsWith('💡') || trimmed.startsWith('نکته:')) {
+        p.classList.add('react-callout', 'callout-tip');
+      } else if (trimmed.startsWith('⚠️') || trimmed.startsWith('هشدار:')) {
+        p.classList.add('react-callout', 'callout-warning');
+      } else if (trimmed.startsWith('📌') || trimmed.startsWith('مهم:')) {
+        p.classList.add('react-callout', 'callout-important');
+      } else if (trimmed.startsWith('🔹') || trimmed.startsWith('🔸')) {
+        p.classList.add('react-callout', 'callout-note');
+      }
+    });
+  })();
+  </script> <script type="speculationrules">{"prefetch":[{"where":{"and":[{"href_matches":"/Gitab/*"},{"not":{"href_matches":"/Gitab/downloads/*"}},{"not":{"selector_matches":"[download], [target='_blank']"}}]},"eagerness":"moderate"}]}</script> <script>
+  (() => {
+    if (window.HTMLScriptElement && HTMLScriptElement.supports && HTMLScriptElement.supports('speculationrules')) return;
+    const seen = new Set([window.location.href]);
+    let count = 0;
+    const prefetchLink = (e) => {
+      if (count >= 12) return;
+      const a = e.target && e.target.closest ? e.target.closest('header a, .chapter-single-next-nav a, .syllabus-chapter-item a, .btn-hero-read, .btn-card-read') : null;
+      if (!a || !a.href || a.hasAttribute('download') || a.target === '_blank') return;
+      if (a.origin !== window.location.origin || a.pathname.includes('/downloads/')) return;
+      const clean = a.href.split('#')[0];
+      if (!clean || seen.has(clean)) return;
+      seen.add(clean);
+      count++;
+      const l = document.createElement('link');
+      l.rel = 'prefetch';
+      l.href = clean;
+      document.head.appendChild(l);
+    };
+    document.addEventListener('pointerenter', prefetchLink, { capture: true, passive: true });
+    document.addEventListener('touchstart', prefetchLink, { capture: true, passive: true });
+  })();
+  </script></body></html>

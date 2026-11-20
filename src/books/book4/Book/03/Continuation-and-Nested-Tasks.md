@@ -2,13 +2,13 @@
 layout: layout.njk
 title: ادامه و Task های تو در تو 
 ---
-# فصل سوم: ادامه و Taskهای تو در تو 🧵
+# فصل سوم: ادامه و Taskهای تو در تو 
 
 این فصل مروری بر Task Continuations، Taskهای تو در تو (Nested Tasks) و موضوعات مرتبط ارائه می‌دهد.
 
 شما خواهید آموخت چگونه می‌توان کارها را پس از اتمام یک Task ادامه داد و چگونه Taskها می‌توانند داخل یکدیگر اجرا شوند تا ساختار برنامه منظم و بهینه باقی بماند.
 
-## وظایف ادامه‌دهنده (Continuation Tasks) 🔗
+## وظایف ادامه‌دهنده (Continuation Tasks) 
 
 فرض کنید دو وظیفه داریم به نام Task A و Task B. اگر بخواهید اجرای Task B را تنها بعد از Task A شروع کنید، احتمالاً می‌خواهید از callbackها استفاده کنید. اما TPL این کار را بسیار ساده می‌کند. این قابلیت از طریق یک **وظیفه ادامه‌دهنده (continuation task)** فراهم می‌شود که چیزی جز یک **وظیفه غیرهمزمان (asynchronous task)** نیست. ایده همان است: وقتی یک **وظیفه پیشین (antecedent task)** به پایان رسید، وظیفه بعدی که می‌خواهید ادامه دهید، فراخوانی می‌شود. در مثال ما، Task A همان **وظیفه پیشین** و Task B همان **وظیفه ادامه‌دهنده** است.
 
@@ -23,7 +23,7 @@ title: ادامه و Task های تو در تو
 
 ---
 
-### ادامه ساده (Simple Continuation) 🍽️
+### ادامه ساده (Simple Continuation) 
 
 فرض کنید فردی به نام Jack می‌خواهد دوستانش را به یک **مهمانی شام** دعوت کند. در سطح بالا، فعالیت کلی را می‌توان به دو وظیفه تقسیم کرد:
 • دعوت از دوستان
@@ -53,13 +53,13 @@ var orderTask = inviteTask.ContinueWith(previousTask =>
 ![Conventions-UsedThis-Book](../../../assets/image/03/Table%203-1.jpeg)
 </div>
 
-نکته مهم ⚠️
+نکته مهم 
 
 برای اینکه خروجی کامل برنامه را نشان دهم، در این مثال از متد `ReadLine` استفاده کرده‌ام تا از پایان زودهنگام برنامه کنسول جلوگیری شود. همین نکته زمانی که من از `ReadKey` یا `ReadLine` در مثال‌های دیگر این کتاب استفاده می‌کنم نیز صدق می‌کند.
 
 ---
 
-### نمایش 1 (Demonstration 1) 💻
+### نمایش 1 (Demonstration 1) 
 
 در اینجا نمایش کامل برنامه آمده است:
 
@@ -83,7 +83,7 @@ WriteLine("The host is decorating the house.");
 ReadLine();
 ```
 
-#### خروجی (Output) 🖥️
+#### خروجی (Output) 
 
 نمونه خروجی برای شما به این شکل خواهد بود:
 
@@ -96,7 +96,7 @@ Food is ordered now.
 
 ---
 
-### تحلیل (Analysis) 🔍
+### تحلیل (Analysis) 
 
 خروجی بالا ویژگی‌های زیر را تأیید می‌کند:
 • **نخ اصلی (main thread)** در هنگام اجرای **وظیفه ادامه‌دهنده** مسدود نشده بود. به همین دلیل خط `"The host is decorating the house."` قبل از خط `"Invitation is done."` نمایش داده شد.
@@ -105,11 +105,11 @@ Food is ordered now.
 
 ---
 
-### ادامه‌های شرطی (Conditional Continuations) ⚙️
+### ادامه‌های شرطی (Conditional Continuations) 
 
 نمایش 1 یک نمونه ساده از **وظیفه ادامه‌دهنده** را نشان داد. با این حال، شما می‌توانید کنترل بیشتری بر فرآیند ادامه داشته باشید. بیایید این مفهوم را با برخی **مطالعات موردی (case studies)** بررسی کنیم.
 
-#### مطالعه موردی 1 (Case Study 1) 📝
+#### مطالعه موردی 1 (Case Study 1) 
 
 حتی پس از دعوت مهمان‌ها، ممکن است میزبان به دلایلی ناگزیر مجبور شود **تاریخ مهمانی را تغییر دهد**. در این حالت، به جای سفارش غذا، فرض کنیم میزبان **به مهمان اطلاع می‌دهد** و تاریخ مهمانی را جابه‌جا می‌کند. آیا می‌توانید برنامه‌ای بنویسید که این وضعیت را شبیه‌سازی کند؟
 
@@ -120,7 +120,7 @@ Food is ordered now.
 ![Conventions-UsedThis-Book](../../../assets/image/03/Table%203-2.jpeg)
 </div>
 
-نکته مهم ⚠️
+نکته مهم 
 
 بحث در مورد همه‌ی اعضای `TaskContinuationOptions` باعث حجیم شدن بی‌مورد کتاب می‌شود. اگر علاقه‌مند هستید، می‌توانید با باز کردن آن‌ها در Visual Studio یا از لینک آنلاین زیر اطلاعات بیشتری کسب کنید:
 [TaskContinuationOptions – Microsoft Docs](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.taskcontinuationoptions?view=net-8.0)
@@ -134,7 +134,7 @@ Food is ordered now.
 
 ---
 
-### نمایش 2 (Demonstration 2) 💻
+### نمایش 2 (Demonstration 2) 
 
 بیایید برنامه کامل را ببینیم:
 
@@ -173,7 +173,7 @@ WriteLine("The host is decorating the house.");
 ReadLine();
 ```
 
-#### خروجی (Output) 🖥️
+#### خروجی (Output) 
 
 نمونه‌ای از خروجی ممکن بدون استثنا:
 
@@ -194,7 +194,7 @@ Party date is shifted due to some unavoidable circumstances.
 
 ---
 
-### مطالعه موردی 2 (Case Study 2) 📚
+### مطالعه موردی 2 (Case Study 2) 
 
 وظایف ادامه‌دهنده به شما کمک می‌کنند با **وضعیت‌های مختلف** به‌خوبی کنار بیایید. اجازه دهید یک **مطالعه موردی دیگر** را بررسی کنیم. قبلاً گفتیم که **ادامه‌ها می‌توانند به یک یا چند وظیفه پیشین متصل شوند**. بیایید یک مثال ببینیم.
 
@@ -229,7 +229,7 @@ var arrangeDinnerTask = Task.Factory.ContinueWhenAll(
 ![Conventions-UsedThis-Book](../../../assets/image/03/Table%203-3.jpeg)
 </div>
 
-نکته مهم ⚠️
+نکته مهم 
 
 شاید توجه کرده باشید که ویژگی **“Collection expressions”** در C# 12 اجازه می‌دهد `arrangeDinnerTask` را به این شکل بنویسیم. اگر از نسخه قدیمی‌تر C# استفاده می‌کنید، لازم است آن را به صورت زیر بنویسید (تغییر مهم با **bold** مشخص شده است):
 
@@ -245,7 +245,7 @@ var arrangeDinnerTask = Task.Factory.ContinueWhenAll(
 
 ---
 
-### نمایش 3 (Demonstration 3) 💻
+### نمایش 3 (Demonstration 3) 
 
 بیایید برنامه کامل را ببینیم:
 
@@ -267,7 +267,7 @@ var arrangeDinnerTask = Task.Factory.ContinueWhenAll(
 ReadLine();
 ```
 
-#### خروجی (Output) 🖥️
+#### خروجی (Output) 
 
 نمونه‌ای از خروجی ممکن وقتی ابتدا غذا سفارش داده می‌شود:
 
@@ -287,13 +287,13 @@ Arranging dinner.
 
 ---
 
-### تحلیل (Analysis) 🔍
+### تحلیل (Analysis) 
 
 در هر حالت می‌توان مشاهده کرد که **شام تنها پس از تکمیل وظیفه سفارش غذا و انجام دعوت‌ها** چیده شده است.
 
 ---
 
-### مطالعه موردی 3 (Case Study 3) 🍽️
+### مطالعه موردی 3 (Case Study 3) 
 
 بیایید یک مطالعه موردی دیگر را بررسی کنیم که در آن **وظیفه ادامه‌دهنده زمانی اجرا می‌شود که هر یک از وظایف قبلی تکمیل شوند**. در این حالت می‌توانید از متد `ContinueWhenAny` به جای `ContinueWhenAll` استفاده کنید.
 
@@ -315,9 +315,9 @@ var inviteTask = Task.Run(() =>
 });
 ```
 
-💡 نکته: شما همچنین می‌توانید پروژه **Chapter3\_Demo3\_CaseStudy3** را دانلود کنید تا این مطالعه موردی را تمرین کنید.
+> **نکته:** شما همچنین می‌توانید پروژه **Chapter3\_Demo3\_CaseStudy3** را دانلود کنید تا این مطالعه موردی را تمرین کنید.
 
-شناسایی یک وظیفه و وضعیت آن 🆔
+شناسایی یک وظیفه و وضعیت آن 
 
 وقتی در یک محیط **چندنخی (multithreaded)** با چندین وظیفه کار می‌کنید، ضروری است که **وظایف همراه با وضعیت آن‌ها شناسایی شوند**. با استفاده از `Task.CurrentId` می‌توانید **شناسه (ID) وظیفه‌ای که در حال اجراست** را دریافت کنید.
 <div align="center">
@@ -325,7 +325,7 @@ var inviteTask = Task.Run(() =>
 ![Conventions-UsedThis-Book](../../../assets/image/03/Table%203-4.jpeg)
 </div>
 
-نکته مهم ⚠️
+نکته مهم 
 
 `CurrentId` برای دریافت **شناسه وظیفه‌ای که در حال اجراست** از داخل کدی که وظیفه اجرا می‌کند استفاده می‌شود. با این حال، این یک **ویژگی ایستا (static property)** است و با ویژگی `Id` متفاوت است. ویژگی `Id` **شناسه یک نمونه مشخص از Task** را برمی‌گرداند. تلاش برای دریافت مقدار `CurrentId` از خارج کدی که وظیفه در حال اجراست، **مقدار null** بازمی‌گرداند.
 
@@ -335,20 +335,20 @@ var inviteTask = Task.Run(() =>
 ![Conventions-UsedThis-Book](../../../assets/image/03/Table%203-5.jpeg)
 </div>
 
-### وضعیت نهایی یک Task و تحلیل آن 📝
+### وضعیت نهایی یک Task و تحلیل آن 
 
 در یک محیط **همزمان (concurrent)** ممکن است زمانی که مقدار وضعیت یک وظیفه را دریافت می‌کنید، وضعیت آن تغییر کرده باشد. اما نکته جالب این است که **زمانی که یک وضعیت به دست آمد، نمی‌تواند به وضعیت قبلی بازگردد**. برای مثال، وقتی یک وظیفه به **وضعیت نهایی (final state)** برسد، نمی‌تواند به وضعیت `Created` بازگردد.
 
 سه وضعیت نهایی ممکن وجود دارد:
-• `RanToCompletion` ✅ – نشان می‌دهد وظیفه با موفقیت کامل شده است.
-• `Canceled` ❌ – نشان می‌دهد وظیفه لغو شده است، که می‌تواند به دلایلی مثل دخالت کاربر، تایم‌اوت‌ها، یا منطق برنامه رخ دهد.
-• `Faulted` ⚠️ – نشان می‌دهد وظیفه به دلیل یک **استثنای مدیریت‌نشده** کامل شده است.
+• `RanToCompletion`  – نشان می‌دهد وظیفه با موفقیت کامل شده است.
+• `Canceled`  – نشان می‌دهد وظیفه لغو شده است، که می‌تواند به دلایلی مثل دخالت کاربر، تایم‌اوت‌ها، یا منطق برنامه رخ دهد.
+• `Faulted`  – نشان می‌دهد وظیفه به دلیل یک **استثنای مدیریت‌نشده** کامل شده است.
 
 توضیحات بیشتر درباره استثناها و لغو وظایف در **فصل ۴ و فصل ۵** ارائه خواهد شد.
 
 ---
 
-### نمایش 4 (Demonstration 4) 💻
+### نمایش 4 (Demonstration 4) 
 
 در برنامه زیر، دو وظیفه داریم:
 
@@ -380,7 +380,7 @@ var statusCheckerTask = doSomethingTask.ContinueWith(previousTask =>
 ReadKey();
 ```
 
-#### خروجی (Output) 🖥️
+#### خروجی (Output) 
 
 نمونه‌ای از خروجی وقتی استثنا رخ داده است:
 
@@ -401,7 +401,7 @@ The task 8's status is: RanToCompletion
 
 ---
 
-### تحلیل و مدیریت شاخه‌های مختلف 🔄
+### تحلیل و مدیریت شاخه‌های مختلف 
 
 در صورت نیاز، می‌توانید برنامه را طوری تغییر دهید که **شاخه‌های جداگانه برای مدیریت سناریوهای مختلف** ایجاد کنید، مشابه نمایش 2. برای مثال، می‌توان `statusCheckerTask` را با دو شاخه زیر جایگزین کرد:
 
@@ -438,7 +438,7 @@ The task 8's status is: RanToCompletion
 
 ---
 
-### پرسش و پاسخ (Q\&A) ❓
+### پرسش و پاسخ (Q\&A) 
 
 **Q3.1:** در خروجی‌ها، شناسه وظیفه والد 7 یا 8 بود. آیا درست است که وظایف دیگری نیز همزمان اجرا می‌شدند؟
 
@@ -450,13 +450,13 @@ The random number is:0
 The task 1's status is: Faulted
 ```
 
-📌 برای انتخاب تنظیمات موردنظر: روی **Solution Explorer** راست‌کلیک کنید ➤ **Configuration Manager…** ➤ **Debug یا Release** را برای پروژه انتخاب کنید.
+ برای انتخاب تنظیمات موردنظر: روی **Solution Explorer** راست‌کلیک کنید  **Configuration Manager…**  **Debug یا Release** را برای پروژه انتخاب کنید.
 <div align="center">
 
 ![Conventions-UsedThis-Book](../../../assets/image/03/Table%203-6.jpeg)
 </div>
 
-نکته مهم ⚠️
+نکته مهم 
 
 من اغلب برنامه‌هایم را در **حالت Debug** اجرا می‌کنم. بنابراین، برای دیدن **شناسه‌های پایین‌تر وظایف** مانند 1، 2، 3 و… در خروجی، معمولاً آن برنامه‌ها را با **غیرفعال کردن تنظیم “Hot Reload”** اجرا می‌کنم.
 
@@ -469,13 +469,13 @@ The task 1's status is: Faulted
 
 ---
 
-### وظایف تو در تو (Nested Tasks) 🔄
+### وظایف تو در تو (Nested Tasks) 
 
 وظایف می‌توانند **تو در تو** باشند. یعنی می‌توان یک **وظیفه را در دلیگیت کاربر یک وظیفه دیگر** ایجاد کرد. **وظیفه بیرونی** که وظیفه فرزند در آن ایجاد می‌شود، معمولاً به عنوان **وظیفه والد (parent task)** شناخته می‌شود.
 
 یک **وظیفه فرزند** می‌تواند یکی از انواع زیر باشد:
-• **Attached** 📎 – با گزینه `TaskCreationOptions.AttachedToParent` ایجاد می‌شود (در صورتی که والد اجازه اتصال داشته باشد).
-• **Detached** 🚀 – به طور مستقل اجرا می‌شود.
+• **Attached**  – با گزینه `TaskCreationOptions.AttachedToParent` ایجاد می‌شود (در صورتی که والد اجازه اتصال داشته باشد).
+• **Detached**  – به طور مستقل اجرا می‌شود.
 
 #### وظیفه فرزند Detached
 
@@ -483,7 +483,7 @@ The task 1's status is: Faulted
 
 ---
 
-### نمایش 5 (Demonstration 5) 💻
+### نمایش 5 (Demonstration 5) 
 
 کد زیر دو نمونه Task به نام‌های **parent** و **child** ایجاد می‌کند. توجه داشته باشید که **وظیفه فرزند داخل وظیفه والد ایجاد شده است**. با این حال، من **وظیفه فرزند را به والد متصل نکردم**. به همین دلیل، خط `TaskCreationOptions.AttachedToParent` در کد زیر **کامنت شده است**.
 <div align="center">
@@ -491,13 +491,13 @@ The task 1's status is: Faulted
 ![Conventions-UsedThis-Book](../../../assets/image/03/Table%203-7.jpeg)
 </div>
 
-نکته مهم ⚠️
+نکته مهم 
 
 متد `Task.Factory.StartNew` یک **بارگذاری اضافی (overload)** دارد که **`TaskCreationOptions`** را به عنوان پارامتر می‌پذیرد. این امکان برای متد `Task.Run` وجود ندارد.
 
 ---
 
-### مثال Detached Nested Task 💻
+### مثال Detached Nested Task 
 
 ```csharp
 using static System.Console;
@@ -524,7 +524,7 @@ parent.Wait();
 WriteLine($"The parent task has finished now.");
 ```
 
-#### خروجی نمونه 🖥️
+#### خروجی نمونه 
 
 ```
 The parent task has started.
@@ -536,7 +536,7 @@ The parent task has finished now.
 
 ---
 
-### پرسش و پاسخ (Q\&A) ❓
+### پرسش و پاسخ (Q\&A) 
 
 **Q3.3:** اگر بخواهم خط `parent.Wait();` را با `Task.WaitAll(parent, child);` جایگزین کنم تا مطمئن شوم وظیفه فرزند هم اجرا شده است، آیا درست است؟
 
@@ -552,7 +552,7 @@ CS0103 The name 'child' does not exist in the current context
 
 ---
 
-### Attached Nested Task 📎
+### Attached Nested Task 
 
 حالا خط
 
@@ -562,7 +562,7 @@ CS0103 The name 'child' does not exist in the current context
 
 را از کامنت خارج کرده و برنامه را دوباره اجرا می‌کنیم. این بار، **وضعیت تکمیل وظیفه فرزند** نیز نمایش داده خواهد شد.
 
-#### خروجی نمونه 🖥️
+#### خروجی نمونه 
 
 ```
 The parent task has started.
@@ -576,7 +576,7 @@ The parent task has finished now.
 ![Conventions-UsedThis-Book](../../../assets/image/03/Table%203-8.jpeg)
 </div>
 
-نکات مهم ⚠️
+نکات مهم 
 
 می‌توانید یک **وظیفه فرزند (child task)** را به **وظیفه والد (parent task)** متصل کنید، **فقط در صورتی که والد اجازه این کار را بدهد**. در این زمینه، دو نکته مهم از مستندات رسمی ([لینک](https://learn.microsoft.com/en-us/dotnet/standard/parallel-programming/attached-and-detached-child-tasks)) قابل ذکر است:
 
@@ -585,7 +585,7 @@ The parent task has finished now.
 
 ---
 
-### پرسش و پاسخ (Q\&A) ❓
+### پرسش و پاسخ (Q\&A) 
 
 **Q3.5:** در نمایش قبلی (Demonstration 5)، فقط `parent.Wait();` نوشته شده بود. این یعنی شما فقط منتظر تکمیل وظیفه والد هستید و برای وظیفه فرزند چنین نیست. بنابراین هیچ تضمینی وجود ندارد که خروجی نشان دهد وظیفه فرزند تکمیل شده است. آیا این درک صحیح است؟
 
@@ -593,13 +593,13 @@ The parent task has finished now.
 
 ---
 
-### وادار کردن والد به انتظار برای فرزند 👨‍👩‍👧
+### وادار کردن والد به انتظار برای فرزند ‍‍
 
 می‌توانید **وظیفه والد را وادار کنید تا منتظر تکمیل وظیفه فرزند شود** (حتی اگر یک وظیفه فرزند Detached باشد) با دسترسی به ویژگی `Task<TResult>.Result` وظیفه فرزند.
 
 ---
 
-### نمایش 6 (Demonstration 6) 💻
+### نمایش 6 (Demonstration 6) 
 
 در این مثال، برنامه قبلی کمی تغییر کرده است. کد جدید با **bold** مشخص شده و کد قدیمی کامنت شده است:
 
@@ -633,7 +633,7 @@ return child.Result;
 WriteLine($"The parent task confirms that {parent.Result}");
 ```
 
-#### خروجی 🖥️
+#### خروجی 
 
 ```
 The parent task has started.
@@ -643,7 +643,7 @@ The parent task confirms that the child task has finished.
 
 ---
 
-### باز کردن وظایف تو در تو (Unwrapping Nested Tasks) 🔄
+### باز کردن وظایف تو در تو (Unwrapping Nested Tasks) 
 
 در مورد وظایف تو در تو، مثال زیر را در نظر بگیرید:
 
@@ -671,7 +671,7 @@ System.Threading.Tasks.Task`1[System.Int32]
 ![Conventions-UsedThis-Book](../../../assets/image/03/Table%203-9.jpeg)
 </div>
 
-### متد Unwrap 🔄
+### متد Unwrap 
 
 متد `Unwrap` دو بارگذاری (overload) دارد:
 
@@ -684,7 +684,7 @@ public static Task<TResult> Unwrap<TResult>(this Task<Task<TResult>> task);
 
 ---
 
-### مثال 💻
+### مثال 
 
 ```csharp
 var someTask1 = Task.Factory.StartNew(
@@ -694,7 +694,7 @@ var someTask1 = Task.Factory.StartNew(
 WriteLine($"Received: {someTask1.Result}");
 ```
 
-#### خروجی 🖥️
+#### خروجی 
 
 ```
 Received: 200
@@ -732,11 +732,11 @@ WriteLine($"Received: {await someTask3.Result}");
 
 این کد نیز کامپایل می‌شود و خروجی مشابه دارد.
 
-💡 نکته: پروژه **Chapter3\_demo\_unwrappingnestedtasks** را دانلود کنید تا این قطعات کد را تمرین کنید. این پروژه در پوشه **Chapter3** قرار دارد.
+> **نکته:** پروژه **Chapter3\_demo\_unwrappingnestedtasks** را دانلود کنید تا این قطعات کد را تمرین کنید. این پروژه در پوشه **Chapter3** قرار دارد.
 
 ---
 
-### خلاصه فصل 📚
+### خلاصه فصل 
 
 این فصل به **ادامه وظایف (task continuations)** و **وظایف تو در تو (nested tasks)** پرداخته است و به طور خلاصه به سوالات زیر پاسخ داده است:
 
@@ -745,7 +745,7 @@ WriteLine($"Received: {await someTask3.Result}");
 • چگونه می‌توان **وضعیت وظیفه فعلی** را بررسی کرد؟
 • چگونه می‌توان یک **وظیفه تو در تو ایجاد، مدیریت و unwrap** کرد؟
 
-### تمرین‌ها 📝
+### تمرین‌ها 
 
 برای بررسی میزان درک خود، **تمرین‌های زیر را انجام دهید** (برای این تمرین‌ها نیازی به مدیریت استثناها یا لغو وظایف نیست):
 <div align="center">
@@ -753,13 +753,13 @@ WriteLine($"Received: {await someTask3.Result}");
 ![Conventions-UsedThis-Book](../../../assets/image/03/Table%203-10.jpeg)
 </div>
 
-### یادآوری ⚠️
+### یادآوری 
 
 همان‌طور که قبلاً گفته شد، می‌توانید با اطمینان فرض کنید که **تمام namespaceهای لازم** برای این قطعات کد در دسترس هستند. این نکته برای **تمام تمرین‌های این کتاب** نیز صدق می‌کند.
 
 ---
 
-## تمرین‌ها و نمونه راه‌حل‌ها 📝💻
+## تمرین‌ها و نمونه راه‌حل‌ها 
 
 ### E3.1
 
@@ -782,10 +782,10 @@ Employee emp = new("Bob", 1);
 ```
 
 فرض کنید دو وظیفه داریم:
-1️⃣ اولین وظیفه، یک نمونه Employee ایجاد می‌کند.
-2️⃣ وظیفه دوم، پس از اتمام وظیفه اول اجرا شده و ابتدا بررسی می‌کند که آیا وظیفه اول با موفقیت تکمیل شده است یا خیر، سپس **تاریخ و زمان جاری** را چاپ می‌کند.
+1⃣ اولین وظیفه، یک نمونه Employee ایجاد می‌کند.
+2⃣ وظیفه دوم، پس از اتمام وظیفه اول اجرا شده و ابتدا بررسی می‌کند که آیا وظیفه اول با موفقیت تکمیل شده است یا خیر، سپس **تاریخ و زمان جاری** را چاپ می‌کند.
 
-#### نمونه برنامه 💻
+#### نمونه برنامه 
 
 ```csharp
 using static System.Console;
@@ -813,7 +813,7 @@ class Employee (string name, int id)
 }
 ```
 
-#### خروجی نمونه 🖥️
+#### خروجی نمونه 
 
 ```
 Created an employee with Name: Bob Id: 1
@@ -827,7 +827,7 @@ Current time:10/16/2024 9:58:08 AM
 
 ایجاد یک **وظیفه پس‌زمینه** که یک URL را ping می‌کند (مثلاً `www.google.com`) و سپس ایجاد یک **وظیفه ادامه** که نتیجه را در کنسول نمایش دهد.
 
-#### نمونه برنامه 💻
+#### نمونه برنامه 
 
 ```csharp
 using static System.Console;
@@ -849,7 +849,7 @@ WriteLine($"The main thread is ready to do other work.");
 statusTask.Wait();
 ```
 
-#### خروجی نمونه 🖥️
+#### خروجی نمونه 
 
 ```
 The main thread initiates a task that starts pinging www.google.com
@@ -857,7 +857,7 @@ The main thread is ready to do other work.
 Ping Status of www.google.com: Success
 ```
 
-📌 **نسخه جایگزین بدون متغیر statusTask:**
+ **نسخه جایگزین بدون متغیر statusTask:**
 
 ```csharp
 var pingTask = Task.Run(() => new Ping().Send(url))
@@ -890,13 +890,13 @@ var helloTask = Task.Run(() =>
 helloTask.Wait();
 ```
 
-#### خروجی معمول 🖥️
+#### خروجی معمول 
 
 ```
 Hello reader!
 ```
 
-❗ دلیل: برنامه قبل از اتمام aboutTask خاتمه یافته است.
+ دلیل: برنامه قبل از اتمام aboutTask خاتمه یافته است.
 
 با استفاده از `ReadKey()` یا `ReadLine()` در پایان نخ اصلی، می‌توانید برنامه را تا مشاهده خروجی کامل نگه دارید:
 
@@ -921,7 +921,7 @@ var someTask = Task.Factory.StartNew(() => Task.Run(() => 300)).Unwrap();
 WriteLine($"Received: {someTask.Result}");
 ```
 
-✅ بله، خروجی:
+ بله، خروجی:
 
 ```
 Received: 300
@@ -945,7 +945,7 @@ var getGift = Task.Factory.StartNew(() => "Sunny wins a book")
 WriteLine(getGift.Result);
 ```
 
-#### خروجی 🖥️
+#### خروجی 
 
 ```
 Sunny wins a book and a laptop.

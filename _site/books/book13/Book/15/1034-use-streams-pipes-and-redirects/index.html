@@ -1,0 +1,330 @@
+<!doctype html><html lang="fa" dir="rtl"> <head><script>
+    if (window.location.pathname.startsWith('/gitab/')) {
+      window.location.replace(window.location.pathname.replace(/^\/gitab\//i, '/Gitab/') + window.location.search + window.location.hash);
+    }
+    (() => {
+      try {
+        const t = localStorage.getItem('gitab-theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', t);
+        document.documentElement.dataset.colorMode = t;
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        document.documentElement.dataset.colorMode = 'dark';
+      }
+    })();
+  </script> <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5"> <title>۱۰۳.۴ استفاده از خط لوله‌ها، ورودی و خروجی‌ها</title><meta name="description" content="۱۰۳.۴ استفاده از خط لوله‌ها، ورودی و خروجی‌ها — مطالعه آنلاین و رایگان از کتاب «راهنمای آزمون LPIC-1 (ورژن ۵۰۰)» (LPIC-1 Study Guide (Version 500)) اثر جادی میرمیرانی با ترجمه جادی میرمیرانی در گیتاب."> <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"><meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"> <meta name="theme-color" content="#090d16"><meta name="referrer" content="strict-origin-when-cross-origin"> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https:; frame-src https://www.youtube.com https://www.youtube-nocookie.com https://maps.google.com https://www.google.com; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self';"><link rel="icon" type="image/png" href="/Gitab/favicon.png"> <link rel="canonical" href="https://hheydarian.github.io/Gitab/books/book13/Book/15/1034-use-streams-pipes-and-redirects/"><link rel="alternate" hreflang="fa" href="https://hheydarian.github.io/Gitab/books/book13/Book/15/1034-use-streams-pipes-and-redirects/"> <link rel="alternate" hreflang="x-default" href="https://hheydarian.github.io/Gitab/books/book13/Book/15/1034-use-streams-pipes-and-redirects/"><link rel="alternate" type="text/plain" title="LLMs.txt" href="/Gitab/llms.txt"> <link rel="sitemap" type="application/xml" title="Sitemap" href="/Gitab/sitemap.xml"><meta property="og:locale" content="fa_IR"> <meta property="og:type" content="article"><meta property="og:site_name" content="گیتاب | Gitab"> <meta property="og:title" content="۱۰۳.۴ استفاده از خط لوله‌ها، ورودی و خروجی‌ها"><meta property="og:description" content="۱۰۳.۴ استفاده از خط لوله‌ها، ورودی و خروجی‌ها — مطالعه آنلاین و رایگان از کتاب «راهنمای آزمون LPIC-1 (ورژن ۵۰۰)» (LPIC-1 Study Guide (Version 500)) اثر جادی میرمیرانی با ترجمه جادی میرمیرانی در گیتاب."> <meta property="og:url" content="https://hheydarian.github.io/Gitab/books/book13/Book/15/1034-use-streams-pipes-and-redirects/"><meta property="og:image" content="https://hheydarian.github.io/Gitab/images/lpic1book/Cover.jpg"> <meta property="og:image:alt" content="۱۰۳.۴ استفاده از خط لوله‌ها، ورودی و خروجی‌ها"><meta name="twitter:card" content="summary_large_image"> <meta name="twitter:title" content="۱۰۳.۴ استفاده از خط لوله‌ها، ورودی و خروجی‌ها"><meta name="twitter:description" content="۱۰۳.۴ استفاده از خط لوله‌ها، ورودی و خروجی‌ها — مطالعه آنلاین و رایگان از کتاب «راهنمای آزمون LPIC-1 (ورژن ۵۰۰)» (LPIC-1 Study Guide (Version 500)) اثر جادی میرمیرانی با ترجمه جادی میرمیرانی در گیتاب."> <meta name="twitter:image" content="https://hheydarian.github.io/Gitab/images/lpic1book/Cover.jpg"><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://hheydarian.github.io/Gitab/#organization","name":"گیتاب | Gitab","alternateName":"Gitab","url":"https://hheydarian.github.io/Gitab/","logo":{"@type":"ImageObject","url":"https://hheydarian.github.io/Gitab/favicon.png"},"sameAs":["https://github.com/hheydarian/Gitab"]},{"@type":"WebSite","@id":"https://hheydarian.github.io/Gitab/#website","url":"https://hheydarian.github.io/Gitab/","name":"گیتاب | Gitab","inLanguage":"fa-IR","publisher":{"@id":"https://hheydarian.github.io/Gitab/#organization"},"potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://hheydarian.github.io/Gitab/books/list-books/?q={search_term_string}"},"query-input":"required name=search_term_string"}},{"@type":"WebPage","@id":"https://hheydarian.github.io/Gitab/books/book13/Book/15/1034-use-streams-pipes-and-redirects/#webpage","url":"https://hheydarian.github.io/Gitab/books/book13/Book/15/1034-use-streams-pipes-and-redirects/","name":"۱۰۳.۴ استفاده از خط لوله‌ها، ورودی و خروجی‌ها","description":"۱۰۳.۴ استفاده از خط لوله‌ها، ورودی و خروجی‌ها — مطالعه آنلاین و رایگان از کتاب «راهنمای آزمون LPIC-1 (ورژن ۵۰۰)» (LPIC-1 Study Guide (Version 500)) اثر جادی میرمیرانی با ترجمه جادی میرمیرانی در گیتاب.","inLanguage":"fa-IR","isPartOf":{"@id":"https://hheydarian.github.io/Gitab/#website"}},{"@type":"TechArticle","headline":"۱۰۳.۴ استفاده از خط لوله‌ها، ورودی و خروجی‌ها","description":"۱۰۳.۴ استفاده از خط لوله‌ها، ورودی و خروجی‌ها — مطالعه آنلاین و رایگان از کتاب «راهنمای آزمون LPIC-1 (ورژن ۵۰۰)» (LPIC-1 Study Guide (Version 500)) اثر جادی میرمیرانی با ترجمه جادی میرمیرانی در گیتاب.","url":"https://hheydarian.github.io/Gitab/books/book13/Book/15/1034-use-streams-pipes-and-redirects/","inLanguage":"fa-IR","isAccessibleForFree":true,"author":{"@type":"Person","name":"جادی میرمیرانی"},"translator":{"@type":"Person","name":"جادی میرمیرانی"},"isPartOf":{"@type":"Book","name":"راهنمای آزمون LPIC-1 (ورژن ۵۰۰)","alternateName":"LPIC-1 Study Guide (Version 500)","url":"https://hheydarian.github.io/Gitab/books/book13/"}}]}</script> <link rel="preload" href="/Gitab/fonts/Vazirmatn.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/Gitab/styles/main.css?v=2.4" as="style"> <link rel="preload" href="/Gitab/styles/gitab-modern.css?v=2.5" as="style"><style>@font-face{font-family:'Lalezar';src:url('/Gitab/fonts/Lalezar.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}@font-face{font-family:'Vazirmatn';src:url('/Gitab/fonts/Vazirmatn.woff2') format('woff2');font-weight:100 900;font-style:normal;font-display:swap}html,body,button,input,optgroup,select,textarea,.filter-pill{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}input::placeholder,textarea::placeholder{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}</style> <link rel="stylesheet" href="/Gitab/styles/main.css?v=2.4"><link rel="stylesheet" href="/Gitab/styles/gitab-modern.css?v=2.5"> <link rel="stylesheet" href="/Gitab/styles/vendor/github-dark.min.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="/Gitab/styles/vendor/github-dark.min.css"></noscript></head> <body><header class="header"> <div class="container nav-wrap"><a href="/Gitab/" class="brand" aria-label="صفحه اصلی گیتاب"> <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="30" height="30" decoding="async"> <span class="brand-text">Gitab</span> </a> <nav class="nav" id="mainNav"><a href="/Gitab/" >خانه</a> <a href="/Gitab/books/list-books" aria-current="page">کتاب‌ها</a> <a href="/Gitab/courses/" >دوره‌ها</a> <a href="/Gitab/translator.html" >مترجمین</a></nav> <div class="nav-actions"><button id="themeToggle" class="theme-toggle-btn" aria-label="تغییر تم" title="تغییر تم"> <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن" width="18" height="18" decoding="async" style="display:none"> <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک" width="18" height="18" decoding="async"> </button> <a class="btn-github-pill" href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" title="مشاهده سورس گیتاب در گیت‌هاب"> <img src="/Gitab/icone/github.svg" alt="GitHub" width="16" height="16" decoding="async"> <span>گیت‌هاب</span> </a> <button class="mobile-menu-btn" id="mobileMenuBtn" type="button" aria-label="باز کردن منو" aria-expanded="false"> <svg class="mob-icon-open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="4" y1="7" x2="20" y2="7"></line> <line x1="4" y1="12" x2="20" y2="12"></line> <line x1="4" y1="17" x2="14" y2="17"></line> </svg> <svg class="mob-icon-close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="18" y1="6" x2="6" y2="18"></line> <line x1="6" y1="6" x2="18" y2="18"></line> </svg> </button></div> </div><div class="mobile-drawer" id="mobileDrawer" aria-hidden="true"> <div class="mobile-drawer-inner"><div class="mobile-drawer-section-label">ناوبری سریع</div><nav class="mobile-drawer-links" aria-label="منوی موبایل"> <a href="/Gitab/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M3 10.5 12 3l9 7.5"></path> <path d="M5 9.5V20a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V9.5"></path> </svg> </span> <span class="mob-nav-text">صفحه نخست</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/books/list-books" class="mobile-drawer-link active" aria-current="page"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path> </svg> </span> <span class="mob-nav-text">کتابخانه و فهرست کتاب‌ها</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/courses/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path> <path d="M6 12v5c3 3 9 3 12 0v-5"></path> </svg> </span> <span class="mob-nav-text">دوره‌های آموزشی</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/translator.html" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path> <circle cx="9" cy="7" r="4"></circle> <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path> <path d="M16 3.13a4 4 0 0 1 0 7.75"></path> </svg> </span> <span class="mob-nav-text">مترجمین و همکاران</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> </nav><div class="mobile-drawer-divider"></div><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" class="mobile-drawer-link mobile-drawer-gh"> <span class="mob-nav-icon" aria-hidden="true"> <img src="/Gitab/icone/github.svg" alt="" width="17" height="17" loading="lazy" decoding="async"> </span> <span class="mob-nav-text">مخزن گیت‌هاب پروژه</span> <span class="mob-nav-ext" aria-hidden="true">↗</span> </a> </div></div> </header><div class="reading-progress-track"> <div class="reading-progress-fill" id="readingProgressBar"></div></div> <main class="site-main chapter-reading-page"><div class="chapter-page-wrapper"> <nav class="chapter-clean-breadcrumb" aria-label="مسیر راهنما" dir="rtl"><a href="/Gitab/">خانه</a> <span class="bc-sep" aria-hidden="true">/</span> <a href="/Gitab/books/list-books/">کتاب‌ها</a> <span class="bc-sep" aria-hidden="true">/</span> <a href="/Gitab/books/book13/"><bdi>راهنمای آزمون LPIC-1</bdi></a> <span class="bc-sep" aria-hidden="true">/</span> <span class="bc-current-leaf"><bdi>۱۰۳.۴ استفاده از خط لوله‌ها، ورودی و خروجی‌ها</bdi></span></nav> <article class="chapter-prose-container markdown-body" id="chapterArticle" dir="rtl"><h1>۱۰۳.۴ استفاده از خط لوله‌ها، ورودی و خروجی‌ها</h1><div class="callout callout-info" style="background: rgba(59, 130, 246, 0.08); border-right: 4px solid #3b82f6; padding: 16px 20px; border-radius: 8px; margin-bottom: 24px;"> <strong>خلاصه هدف آزمون:</strong> جریان‌های استاندارد stdin (0)، stdout (1)، stderr (2)، خط لوله |، دستور tee و xargs. </div><div class="video-container" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; border-radius: 12px; margin: 24px 0; border: 1px solid var(--g-border-dim);"> <iframe src="https://www.youtube.com/embed/PeUhwMoSCko" title="ویدئوی آموزشی جادی برای این سرفصل" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen></iframe></div> <h2>🎯 اهداف و سرفصل‌های این بخش</h2><p>در این درسنامه موارد زیر را بررسی و مرور می‌کنیم:</p><ul> <li>مفاهیم کلیدی مورد پرسش در آزمون بین‌المللی LPIC-1</li><li>دستورات، فایل‌های پیکربندی و ابزارهای مرتبط در خط فرمان</li><li>نکات پرتکرار آزمون‌های ۱۰۱ و ۱۰۲ همراه با نمونه‌های کاربردی</li></ul> <hr><h2>📝 متن درسنامه و توضیحات تکمیلی</h2><p><strong>ضریب اهمیت در آزمون (Weight):</strong> ۴</p><p>داوطلبان باید بتوانند جریان‌ها را تغییر مسیر (Redirect) دهند و آن‌ها را برای پردازش کارآمد داده‌های متنی به یکدیگر متصل کنند. این وظایف شامل تغییر مسیر ورودی استاندارد، خروجی استاندارد و خطای استاندارد، لوله کردن (Pipe) خروجی یک دستور به ورودی دستور دیگر، استفاده از خروجی یک دستور به عنوان آرگومان‌های دستور دیگر، و ارسال هم‌زمان خروجی هم به <code>stdout</code> و هم به یک فایل است.</p><h3>اهداف آموزشی</h3><ul> <li>تغییر مسیر ورودی استاندارد (<code>stdin</code>)، خروجی استاندارد (<code>stdout</code>) و خطای استاندارد (<code>stderr</code>)</li><li>لوله کردن خروجی یک دستور به ورودی دستور دیگر</li><li>استفاده از خروجی یک دستور به عنوان آرگومان برای دستور دیگر</li><li>ارسال خروجی به صورت هم‌زمان هم به <code>stdout</code> و هم به یک فایل</li></ul> <h3>فهرست بخشی از فایل‌ها، اصطلاحات و ابزارهای کاربردی</h3><div dir="ltr"> <ul><li><code>tee</code></li><li><code>xargs</code></li></ul> </div><p>این قابلیت‌ها به ما کمک می‌کنند ورودی و خروجی دستورات را کنترل کنیم و کارهایی مثل ذخیره خروجی یک دستور در فایل، گرفتن ورودی یک دستور از خروجی دستور دیگر، یا جدا کردن خروجی عادی از خطاها را انجام دهیم. قبلاً هم در بخش‌های پیشین از آن‌ها استفاده کرده‌ایم، اما بیایید بیشتر یاد بگیریم و درکمان را از این مفاهیم عمیق‌تر کنیم.</p><h2>تغییر مسیر ورودی و خروجی استاندارد (Redirecting Standard I/O)</h2><p>در سیستم‌های لینوکسی، بیشتر پوسته‌ها برای ورودی و خروجی از جریان‌ها (Streams) استفاده می‌کنند. این جریان‌ها می‌توانند از سمت (و به سمت) چیزهای مختلفی مثل صفحه‌کلید، دستگاه‌های بلوکی (هارددیسک، فلش USB و...)، فایل‌ها و غیره باشند.</p><p>ما ۳ جریان استاندارد مختلف داریم:</p><ol start="0"> <li><b>STDIN</b> جریان ورودی استاندارد است که ورودی را برای یک دستور فراهم می‌کند.</li><li><b>STDOUT</b> جریان خروجی استاندارد است که شامل خروجی عادی یک دستور می‌شود.</li><li><b>STDERR</b> جریان خطای استاندارد است که شامل خروجی خطاهای یک دستور می‌شود.</li></ol> <blockquote><p><strong>نکته:</strong> شماره‌گذاری <code>0</code>، <code>1</code> و <code>2</code> به ترتیب نشان‌دهنده <em><strong>STDIN</strong></em>، <em><strong>STDOUT</strong></em> و <em><strong>STDERR</strong></em> است. برای مثال، اگر بخواهید خطای استاندارد را تغییر مسیر دهید، می‌توانید از <code>2&gt;</code> استفاده کنید تا <code>STDERR</code> به مقصد جدید هدایت شود.</p></blockquote> <p>عملگرهای تغییر مسیر دیگری که می‌توانید استفاده کنید عبارت‌اند از:</p><table> <thead><tr> <th style="text-align:left">عملگر</th><th style="text-align:left">کاربرد</th></tr> </thead><tbody> <tr><td style="text-align:left"><code>&gt;</code></td><td style="text-align:left">تغییر مسیر <code>STDOUT</code> به یک فایل؛ در صورت وجود فایل، آن را بازنویسی می‌کند</td></tr> <tr><td style="text-align:left"><code>&gt;&gt;</code></td><td style="text-align:left">تغییر مسیر <code>STDOUT</code> به یک فایل؛ در صورت وجود فایل، به انتهای آن اضافه (Append) می‌کند</td></tr> <tr><td style="text-align:left"><code>2&gt;</code></td><td style="text-align:left">تغییر مسیر <code>STDERR</code> به یک فایل؛ در صورت وجود فایل، آن را بازنویسی می‌کند</td></tr> <tr><td style="text-align:left"><code>2&gt;&gt;</code></td><td style="text-align:left">تغییر مسیر <code>STDERR</code> به یک فایل؛ در صورت وجود فایل، به انتهای آن اضافه می‌کند</td></tr> <tr><td style="text-align:left"><code>&amp;&gt;</code></td><td style="text-align:left">تغییر مسیر هم‌زمان <code>STDOUT</code> و <code>STDERR</code>؛ در صورت وجود فایل، بازنویسی می‌کند</td></tr> <tr><td style="text-align:left"><code>&amp;&gt;&gt;</code></td><td style="text-align:left">تغییر مسیر هم‌زمان <code>STDOUT</code> و <code>STDERR</code>؛ در صورت وجود فایل، به انتها اضافه می‌کند</td></tr> <tr><td style="text-align:left"><code>&lt;</code></td><td style="text-align:left">تغییر مسیر <code>STDIN</code> از یک فایل (خواندن ورودی از فایل)</td></tr> <tr><td style="text-align:left"><code>&lt;&gt;</code></td><td style="text-align:left">تغییر مسیر <code>STDIN</code> از فایل و ارسال <code>STDOUT</code> به همان فایل</td></tr> </tbody></table> <p>چند مثال:</p><pre class="hljs"><code>$ ls
+bob	jack	jadi	linus	sara who_uses_what.txt
+$ ls x*
+ls: x*: No such file or directory
+$ ls j*
+jack	jadi
+$ ls j* x* &gt; output 2&gt; errors
+$ cat output
+jack
+jadi
+$ cat errors
+ls: x*: No such file or directory
+$ cat who_uses_what.txt
+jadi, fedora
+linux, fedora
+bob, ubuntu
+jack, arch
+sara, fedora
+$ tr &#x27; &#x27;, &#x27;&#x27; &lt; who_uses_what.txt
+tr: empty string2
+$ cat who
+$ tr &#x27;,&#x27;, &#x27;|&#x27; &lt; who_uses_what.txt
+jadi| fedora
+linux| fedora
+bob| ubuntu
+jack| arch
+sara| fedora
+</code></pre> <p>همچنین می‌توانید از <code>&amp;1</code>، <code>&amp;2</code> و <code>&amp;0</code> برای اشاره به <strong>مقصدِ</strong> <code>STDOUT</code>، <code>STDERR</code> و <code>STDIN</code> استفاده کنید. در این حالت <code>ls &gt; file1 2&gt;&amp;1</code> یعنی <em>خروجی را به <code>file1</code> هدایت کن و <code>stderr</code> را هم به همان جایی بفرست که <code>stdout</code> می‌رود (یعنی <code>file1</code>)</em>.</p><blockquote> <p><strong>هشدار:</strong> مراقب ترتیب باشید! دستور <code>ls 2&gt;&amp;1 &gt; file1</code> به این معناست که <em>ابتدا <code>stderr</code> را به مکان فعلی <code>stdout</code> (یعنی ترمینال) بفرست و سپس <code>stdout</code> را به <code>file1</code> تغییر بده</em>!</p></blockquote> <h4>فرستادن به هیچ‌کجا (<code>/dev/null</code>)</h4><p>در لینوکس، دستگاه <strong><code>/dev/null</code></strong> مثل یک سیاه‌چاله عمل می‌کند. می‌توانید هر چیزی را به آنجا بفرستید و بدون هیچ باری روی سیستم، ناپدید می‌شود. بنابراین بسیار عادی است که بنویسید:</p><pre class="hljs"><code>$ ls j* x* &gt; file1
+ls: x*: No such file or directory
+$ ls j* x* &gt; file1 2&gt;/dev/null
+$ cat file1
+jack
+jadi
+</code></pre> <h4>Here-Documents</h4><p>بسیاری از پوسته‌ها قابلیتی به نام here-documents (یا به اختصار here-docs) به عنوان روشی برای دادن ورودی دارند. از <code>&lt;&lt;</code> همراه با یک <code>WORD</code> استفاده می‌کنید و هر چه تایپ کنید به عنوان <code>stdin</code> در نظر گرفته می‌شود تا زمانی که در یک خط جداگانه فقط همان <code>WORD</code> را بنویسید.</p><pre class="hljs"><code>$ tr &#x27; &#x27; &#x27;.&#x27; &lt;&lt; END_OF_DATA
+&gt; this is a line
+&gt; and then this
+&gt;
+&gt; we&#x27;ll still type
+&gt; and,
+&gt; done!
+&gt; END_OF_DATA
+this.is.a.line
+and.then.this
+
+we&#x27;ll.still.type
+and,
+done!
+</code></pre> <blockquote><p><strong>نکته:</strong> Here-Documentها وقتی دارید اسکریپت می‌نویسید و کارهای خودکار انجام می‌دهید، بسیار مفیدند.</p></blockquote> <h3>خط لوله‌ها (Pipes)</h3><p>با خط لوله (<code>|</code>) می‌توانید <code>STDOUT</code>، <code>STDIN</code> و <code>STDERR</code> را بین چند دستور و همگی در یک خط فرمان به هم متصل کنید. وقتی می‌نویسید <code>command1 | command2</code>، دستور <code>command1</code> اجرا می‌شود و <code>STDOUT</code> آن به عنوان <code>STDIN</code> به دستور <code>command2</code> فرستاده می‌شود.</p><pre class="hljs"><code>$ cat who_uses_what.txt
+jadi, fedora
+linux, fedora
+bob, ubuntu
+jack, arch
+sara, fedora
+$ cut -f2 -d, who_uses_what.txt | sed -e &#x27;s/ //g&#x27; | sort  | uniq -c | sort -nr
+   3 fedora
+   1 ubuntu
+   1 arch
+</code></pre> <blockquote><p><strong>نکته:</strong> اگر نیاز دارید خط لوله خود را با محتوای یک فایل شروع کنید، یا با <code>cat filename | ...</code> شروع کنید یا از تغییر مسیر ورودی <code>&lt;</code> استفاده نمایید.</p></blockquote> <p>خط لوله‌ها یکی از ویژگی‌های فوق‌العاده قدرتمند و شگفت‌انگیز دنیای یونیکس هستند. آن‌ها به شما اجازه می‌دهند با ترکیب ابزارهایی که کارهای کوچک و اتمی انجام می‌دهند، ابزارهای <em>جدید</em> بسازید.</p><h3>دستور <code>xargs</code></h3><p>ابزار <code>xargs</code> رشته‌هایی را که با فاصله، تب، خط جدید یا پایان فایل از هم جدا شده‌اند از ورودی استاندارد می‌خواند و دستور داده‌شده را با آن رشته‌ها به عنوان آرگومان اجرا می‌کند.</p><pre class="hljs"><code>$ ls
+bob			file1			jadi			output			who_uses_what.txt
+errors			jack			linus			sara
+$ ls | xargs echo these are files:
+these are files: bob errors file1 jack jadi linus output sara who_uses_what.txt
+</code></pre> <blockquote><p><strong>نکته:</strong> اگر هیچ دستوری به <code>xargs</code> ندهید، دستور پیش‌فرض آن <code>echo</code> خواهد بود.</p></blockquote> <p>یکی از سوئیچ‌های رایج <code>-I</code> است. این سوئیچ زمانی کاربرد دارد که لازم باشد آرگومان‌های <code>stdin</code> را در وسط (یا حتی ابتدای) دستور خود قرار دهید. به این شکل از آن استفاده کنید: <code>xargs -I SOMETHING echo here is SOMETHING end</code>:</p><pre class="hljs"><code>$ cat who_uses_what.txt
+jadi, fedora
+linus, fedora
+bob, ubuntu
+jack, arch
+sara, fedora
+$ cat who_uses_what.txt | xargs -I DATA echo name is DATA is the choice.
+name is jadi, fedora is the choice.
+name is linus, fedora is the choice.
+name is bob, ubuntu is the choice.
+name is jack, arch is the choice.
+name is sara, fedora is the choice.
+</code></pre> <p>دو سوئیچ مفید دیگر:</p><ol> <li><code>-L 1</code> ورودی را بر اساس خطوط جدید می‌شکند (در هر اجرا یک خط).</li><li><code>-n 1</code> به <code>xargs</code> می‌گوید پس از دریافت هر ۱ آرگومان، دستور مورد نظر را فراخوانی کند.</li></ol> <h3>دستور <code>tee</code></h3><p>مشکل تغییر مسیر (Redirection) این است که نمی‌توانید هم‌زمان پیشرفت کار دستور را در همان ترمینال ببینید. ابزار <code>tee</code> این مشکل را حل می‌کند. اگر نیاز دارید خروجی را هم روی صفحه ببینید و هم در یک فایل ذخیره کنید، <code>tee</code> دوست شماست. کافی است یک یا چند نام فایل به آن بدهید تا کارش را انجام دهد.</p><pre class="hljs"><code>$ ls -1 | tee allfiles myfiles
+bob
+errors
+file1
+jack
+jadi
+linus
+output
+sara
+who_uses_what.txt
+$ cat allfiles myfiles
+bob
+errors
+file1
+jack
+jadi
+linus
+output
+sara
+who_uses_what.txt
+bob
+errors
+file1
+jack
+jadi
+linus
+output
+sara
+who_uses_what.txt
+</code></pre> <p>سوئیچ <code>-a</code> در صورتی که فایل‌ها از قبل وجود داشته باشند، خروجی را به انتهای آن‌ها اضافه (Append) می‌کند.</p><blockquote> <p><strong>نکته:</strong> اگر لازم است <em><strong>stderr</strong></em> را هم ذخیره کنید، ابتدا آن را به <em><strong>stdout</strong></em> هدایت کنید (مثلاً <code>2&gt;&amp;1 | tee ...</code>).</p></blockquote> <hr><div class="callout callout-tip" style="background: rgba(147, 51, 234, 0.08); border-right: 4px solid #9333ea; padding: 16px 20px; border-radius: 8px; margin-top: 32px;"> <strong>🔗 نسخه اصلی به زبان انگلیسی:</strong> این درسنامه بر اساس منبع انگلیسی جادی در مخزن <a href="https://github.com/jadijadi/lpic1book/blob/master/content/1034_use_streams_pipes_and_redirects.md" target="_blank" rel="noopener noreferrer">jadijadi/lpic1book</a> تدوین و سازماندهی شده است. </div></article> <nav class="chapter-single-next-nav"><a href="/Gitab/books/book13/Book/16/1035-create--monitor-and-kill-processes/" class="btn-next-chapter-action" id="nextChapterBtn" data-hub="/Gitab/books/book13/"> <span class="next-btn-text">فصل بعدی: ۱۰۳.۵ ایجاد، پایش و متوقف‌سازی فرآیندها</span> <span class="next-btn-arrow">←</span> </a> </nav></div> <button class="fab-back-to-top" id="backToTopBtn" type="button" aria-label="رفتن به بالای صفحه" title="رفتن به بالا"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"> <polyline points="18 15 12 9 6 15"></polyline> </svg> </button></main> <footer class="footer-minimal"><div class="footer-container"> <div class="footer-top-row"><div class="footer-brand-side"> <a href="/Gitab/" class="footer-brand-anchor"> <img src="/Gitab/icone/logo.svg" alt="Gitab" width="28" height="28" loading="lazy" decoding="async"> <span class="footer-brand-title">گیتاب (Gitab)</span> </a> <p class="footer-tagline"> پلتفرم آزاد و مستقل برای ترجمهٔ دقیق و روان کتاب‌های مرجع مهندسی نرم‌افزار. </p></div> <div class="footer-nav-cols"><div class="footer-nav-col"> <span class="footer-nav-heading">موضوعات</span><ul class="footer-nav-list"> <li><a href="/Gitab/books/list-books/?cat=csharp">سی‌شارپ و دات‌نت</a></li><li><a href="/Gitab/books/list-books/?cat=clean-code">کد تمیز و بازآفرینی</a></li><li><a href="/Gitab/books/list-books/?cat=architecture">معماری و طراحی دامنه</a></li><li><a href="/Gitab/books/list-books/?cat=system">لینوکس و خط فرمان</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">بخش‌های سایت</span><ul class="footer-nav-list"> <li><a href="/Gitab/">صفحه اصلی</a></li><li><a href="/Gitab/books/list-books/">کتابخانه کامل</a></li><li><a href="/Gitab/courses/">دوره‌های آموزشی</a></li><li><a href="/Gitab/translator.html">تالار مترجمین</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">مشارکت و جامعه</span><ul class="footer-nav-list"> <li><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer">راهنمای همکاری در ترجمه</a></li><li><a href="https://github.com/hheydarian/Gitab/issues" target="_blank" rel="noopener noreferrer">پیشنهاد کتاب یا گزارش خطا</a></li></ul> </div></div> </div><div class="footer-bottom-line"> <span>© <span id="y">2026</span> Gitab — توسعه‌یافته برای جامعهٔ مهندسان نرم‌افزار ایرانی</span></div> </div></footer> <script>
+  (() => {
+    const root = document.documentElement;
+    const btn = document.getElementById('themeToggle');
+    const sunIcon = btn ? btn.querySelector('.icon-sun') : null;
+    const moonIcon = btn ? btn.querySelector('.icon-moon') : null;
+    const KEY = 'gitab-theme';
+
+    function updateTheme(mode) {
+      root.setAttribute('data-theme', mode);
+      root.dataset.colorMode = mode;
+      if (sunIcon && moonIcon) {
+        if (mode === 'dark') {
+          sunIcon.style.display = 'inline-block';
+          moonIcon.style.display = 'none';
+        } else {
+          sunIcon.style.display = 'none';
+          moonIcon.style.display = 'inline-block';
+        }
+      }
+    }
+
+    let saved = 'dark';
+    try { saved = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+    updateTheme(saved);
+
+    if (btn) {
+      btn.addEventListener('click', () => {
+        let current = 'dark';
+        try { current = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+        const next = current === 'dark' ? 'light' : 'dark';
+        try { localStorage.setItem(KEY, next); } catch (e) {}
+        updateTheme(next);
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      let mode = 'dark';
+      try { mode = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+      updateTheme(mode);
+      const yearSpan = document.getElementById('y');
+      if (yearSpan) yearSpan.textContent = new Date().getFullYear();
+    });
+
+    const mobBtn = document.getElementById('mobileMenuBtn');
+    const mobDrawer = document.getElementById('mobileDrawer');
+    if (mobBtn && mobDrawer) {
+      const setDrawerOpen = (open) => {
+        mobDrawer.classList.toggle('open', open);
+        mobBtn.classList.toggle('is-open', open);
+        mobBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        mobBtn.setAttribute('aria-label', open ? 'بستن منو' : 'باز کردن منو');
+        mobDrawer.setAttribute('aria-hidden', open ? 'false' : 'true');
+      };
+
+      mobBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        setDrawerOpen(!mobDrawer.classList.contains('open'));
+      });
+
+      mobDrawer.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => setDrawerOpen(false));
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && mobDrawer.classList.contains('open')) {
+          setDrawerOpen(false);
+        }
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!mobDrawer.contains(e.target) && !mobBtn.contains(e.target)) {
+          setDrawerOpen(false);
+        }
+      });
+    }
+
+    if ('serviceWorker' in navigator) {
+      const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+      if (isLocalhost) {
+        navigator.serviceWorker.getRegistrations().then(regs => {
+          for (const reg of regs) reg.unregister();
+        });
+        if ('caches' in window) {
+          caches.keys().then(names => {
+            for (const name of names) caches.delete(name);
+          });
+        }
+      } else {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/Gitab/sw.js').catch(() => {});
+        });
+      }
+    }
+  })();
+  </script> <script>
+  document.querySelectorAll('pre code').forEach(block => {
+    const pre = block.parentNode;
+    if (!pre || pre.querySelector('.copy-btn')) return;
+
+    const copySvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
+    const okSvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+
+    const btn = document.createElement('button');
+    btn.className = 'copy-btn';
+    btn.setAttribute('aria-label', 'کپی کد');
+    btn.setAttribute('title', 'کپی کد');
+    btn.setAttribute('type', 'button');
+    btn.innerHTML = copySvg;
+    pre.appendChild(btn);
+
+    btn.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(block.textContent);
+        btn.classList.add('copied');
+        btn.innerHTML = okSvg;
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          btn.innerHTML = copySvg;
+        }, 1800);
+      } catch (err) {
+        console.error('Copy failed:', err);
+      }
+    });
+  });
+  </script> <script>
+  (() => {
+    const article = document.getElementById('chapterArticle');
+    if (!article) return;
+
+    const progressBar = document.getElementById('readingProgressBar');
+    if (progressBar) {
+      window.addEventListener('scroll', () => {
+        const docElem = document.documentElement;
+        const totalHeight = docElem.scrollHeight - docElem.clientHeight;
+        if (totalHeight > 0) {
+          const progress = (window.pageYOffset / totalHeight) * 100;
+          progressBar.style.width = Math.min(100, Math.max(0, progress)) + '%';
+        }
+      }, { passive: true });
+    }
+
+    const btt = document.getElementById('backToTopBtn');
+    if (btt) {
+      window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 250) {
+          btt.classList.add('visible');
+        } else {
+          btt.classList.remove('visible');
+        }
+      }, { passive: true });
+
+      btt.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+
+    article.querySelectorAll('img').forEach(img => {
+      if (!img.hasAttribute('loading')) img.loading = 'lazy';
+      if (!img.hasAttribute('decoding')) img.decoding = 'async';
+      const parent = img.parentElement;
+      if (parent && parent.tagName === 'P') {
+        parent.style.textAlign = 'center';
+      }
+
+      img.addEventListener('error', function() {
+        const src = this.getAttribute('src');
+        if (src && src.includes('assets/image/')) {
+          const parts = src.split('assets/image/');
+          const corrected = '/Gitab/books/book13/assets/image/' + parts[1];
+          if (this.src !== corrected) {
+            this.src = corrected;
+          }
+        }
+      });
+    });
+
+    article.querySelectorAll('p').forEach(p => {
+      const trimmed = p.innerText.trim();
+      if (trimmed.startsWith('💡') || trimmed.startsWith('نکته:')) {
+        p.classList.add('react-callout', 'callout-tip');
+      } else if (trimmed.startsWith('⚠️') || trimmed.startsWith('هشدار:')) {
+        p.classList.add('react-callout', 'callout-warning');
+      } else if (trimmed.startsWith('📌') || trimmed.startsWith('مهم:')) {
+        p.classList.add('react-callout', 'callout-important');
+      } else if (trimmed.startsWith('🔹') || trimmed.startsWith('🔸')) {
+        p.classList.add('react-callout', 'callout-note');
+      }
+    });
+  })();
+  </script> <script type="speculationrules">{"prefetch":[{"where":{"and":[{"href_matches":"/Gitab/*"},{"not":{"href_matches":"/Gitab/downloads/*"}},{"not":{"selector_matches":"[download], [target='_blank']"}}]},"eagerness":"moderate"}]}</script> <script>
+  (() => {
+    if (window.HTMLScriptElement && HTMLScriptElement.supports && HTMLScriptElement.supports('speculationrules')) return;
+    const seen = new Set([window.location.href]);
+    let count = 0;
+    const prefetchLink = (e) => {
+      if (count >= 12) return;
+      const a = e.target && e.target.closest ? e.target.closest('header a, .chapter-single-next-nav a, .syllabus-chapter-item a, .btn-hero-read, .btn-card-read') : null;
+      if (!a || !a.href || a.hasAttribute('download') || a.target === '_blank') return;
+      if (a.origin !== window.location.origin || a.pathname.includes('/downloads/')) return;
+      const clean = a.href.split('#')[0];
+      if (!clean || seen.has(clean)) return;
+      seen.add(clean);
+      count++;
+      const l = document.createElement('link');
+      l.rel = 'prefetch';
+      l.href = clean;
+      document.head.appendChild(l);
+    };
+    document.addEventListener('pointerenter', prefetchLink, { capture: true, passive: true });
+    document.addEventListener('touchstart', prefetchLink, { capture: true, passive: true });
+  })();
+  </script></body></html>

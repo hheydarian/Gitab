@@ -1,0 +1,284 @@
+<!doctype html><html lang="fa" dir="rtl"> <head><script>
+    if (window.location.pathname.startsWith('/gitab/')) {
+      window.location.replace(window.location.pathname.replace(/^\/gitab\//i, '/Gitab/') + window.location.search + window.location.hash);
+    }
+    (() => {
+      try {
+        const t = localStorage.getItem('gitab-theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', t);
+        document.documentElement.dataset.colorMode = t;
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        document.documentElement.dataset.colorMode = 'dark';
+      }
+    })();
+  </script> <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5"> <title>۱۱۰.۲ برقراری امنیت هاست و سرویس‌های باز</title><meta name="description" content="۱۱۰.۲ برقراری امنیت هاست و سرویس‌های باز — مطالعه آنلاین و رایگان از کتاب «راهنمای آزمون LPIC-1 (ورژن ۵۰۰)» (LPIC-1 Study Guide (Version 500)) اثر جادی میرمیرانی با ترجمه جادی میرمیرانی در گیتاب."> <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"><meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"> <meta name="theme-color" content="#090d16"><meta name="referrer" content="strict-origin-when-cross-origin"> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https:; frame-src https://www.youtube.com https://www.youtube-nocookie.com https://maps.google.com https://www.google.com; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self';"><link rel="icon" type="image/png" href="/Gitab/favicon.png"> <link rel="canonical" href="https://hheydarian.github.io/Gitab/books/book13/Book/45/1102-setup-host-security/"><link rel="alternate" hreflang="fa" href="https://hheydarian.github.io/Gitab/books/book13/Book/45/1102-setup-host-security/"> <link rel="alternate" hreflang="x-default" href="https://hheydarian.github.io/Gitab/books/book13/Book/45/1102-setup-host-security/"><link rel="alternate" type="text/plain" title="LLMs.txt" href="/Gitab/llms.txt"> <link rel="sitemap" type="application/xml" title="Sitemap" href="/Gitab/sitemap.xml"><meta property="og:locale" content="fa_IR"> <meta property="og:type" content="article"><meta property="og:site_name" content="گیتاب | Gitab"> <meta property="og:title" content="۱۱۰.۲ برقراری امنیت هاست و سرویس‌های باز"><meta property="og:description" content="۱۱۰.۲ برقراری امنیت هاست و سرویس‌های باز — مطالعه آنلاین و رایگان از کتاب «راهنمای آزمون LPIC-1 (ورژن ۵۰۰)» (LPIC-1 Study Guide (Version 500)) اثر جادی میرمیرانی با ترجمه جادی میرمیرانی در گیتاب."> <meta property="og:url" content="https://hheydarian.github.io/Gitab/books/book13/Book/45/1102-setup-host-security/"><meta property="og:image" content="https://hheydarian.github.io/Gitab/images/lpic1book/Cover.jpg"> <meta property="og:image:alt" content="۱۱۰.۲ برقراری امنیت هاست و سرویس‌های باز"><meta name="twitter:card" content="summary_large_image"> <meta name="twitter:title" content="۱۱۰.۲ برقراری امنیت هاست و سرویس‌های باز"><meta name="twitter:description" content="۱۱۰.۲ برقراری امنیت هاست و سرویس‌های باز — مطالعه آنلاین و رایگان از کتاب «راهنمای آزمون LPIC-1 (ورژن ۵۰۰)» (LPIC-1 Study Guide (Version 500)) اثر جادی میرمیرانی با ترجمه جادی میرمیرانی در گیتاب."> <meta name="twitter:image" content="https://hheydarian.github.io/Gitab/images/lpic1book/Cover.jpg"><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://hheydarian.github.io/Gitab/#organization","name":"گیتاب | Gitab","alternateName":"Gitab","url":"https://hheydarian.github.io/Gitab/","logo":{"@type":"ImageObject","url":"https://hheydarian.github.io/Gitab/favicon.png"},"sameAs":["https://github.com/hheydarian/Gitab"]},{"@type":"WebSite","@id":"https://hheydarian.github.io/Gitab/#website","url":"https://hheydarian.github.io/Gitab/","name":"گیتاب | Gitab","inLanguage":"fa-IR","publisher":{"@id":"https://hheydarian.github.io/Gitab/#organization"},"potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://hheydarian.github.io/Gitab/books/list-books/?q={search_term_string}"},"query-input":"required name=search_term_string"}},{"@type":"WebPage","@id":"https://hheydarian.github.io/Gitab/books/book13/Book/45/1102-setup-host-security/#webpage","url":"https://hheydarian.github.io/Gitab/books/book13/Book/45/1102-setup-host-security/","name":"۱۱۰.۲ برقراری امنیت هاست و سرویس‌های باز","description":"۱۱۰.۲ برقراری امنیت هاست و سرویس‌های باز — مطالعه آنلاین و رایگان از کتاب «راهنمای آزمون LPIC-1 (ورژن ۵۰۰)» (LPIC-1 Study Guide (Version 500)) اثر جادی میرمیرانی با ترجمه جادی میرمیرانی در گیتاب.","inLanguage":"fa-IR","isPartOf":{"@id":"https://hheydarian.github.io/Gitab/#website"}},{"@type":"TechArticle","headline":"۱۱۰.۲ برقراری امنیت هاست و سرویس‌های باز","description":"۱۱۰.۲ برقراری امنیت هاست و سرویس‌های باز — مطالعه آنلاین و رایگان از کتاب «راهنمای آزمون LPIC-1 (ورژن ۵۰۰)» (LPIC-1 Study Guide (Version 500)) اثر جادی میرمیرانی با ترجمه جادی میرمیرانی در گیتاب.","url":"https://hheydarian.github.io/Gitab/books/book13/Book/45/1102-setup-host-security/","inLanguage":"fa-IR","isAccessibleForFree":true,"author":{"@type":"Person","name":"جادی میرمیرانی"},"translator":{"@type":"Person","name":"جادی میرمیرانی"},"isPartOf":{"@type":"Book","name":"راهنمای آزمون LPIC-1 (ورژن ۵۰۰)","alternateName":"LPIC-1 Study Guide (Version 500)","url":"https://hheydarian.github.io/Gitab/books/book13/"}}]}</script> <link rel="preload" href="/Gitab/fonts/Vazirmatn.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/Gitab/styles/main.css?v=2.4" as="style"> <link rel="preload" href="/Gitab/styles/gitab-modern.css?v=2.5" as="style"><style>@font-face{font-family:'Lalezar';src:url('/Gitab/fonts/Lalezar.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}@font-face{font-family:'Vazirmatn';src:url('/Gitab/fonts/Vazirmatn.woff2') format('woff2');font-weight:100 900;font-style:normal;font-display:swap}html,body,button,input,optgroup,select,textarea,.filter-pill{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}input::placeholder,textarea::placeholder{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}</style> <link rel="stylesheet" href="/Gitab/styles/main.css?v=2.4"><link rel="stylesheet" href="/Gitab/styles/gitab-modern.css?v=2.5"> <link rel="stylesheet" href="/Gitab/styles/vendor/github-dark.min.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="/Gitab/styles/vendor/github-dark.min.css"></noscript></head> <body><header class="header"> <div class="container nav-wrap"><a href="/Gitab/" class="brand" aria-label="صفحه اصلی گیتاب"> <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="30" height="30" decoding="async"> <span class="brand-text">Gitab</span> </a> <nav class="nav" id="mainNav"><a href="/Gitab/" >خانه</a> <a href="/Gitab/books/list-books" aria-current="page">کتاب‌ها</a> <a href="/Gitab/courses/" >دوره‌ها</a> <a href="/Gitab/translator.html" >مترجمین</a></nav> <div class="nav-actions"><button id="themeToggle" class="theme-toggle-btn" aria-label="تغییر تم" title="تغییر تم"> <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن" width="18" height="18" decoding="async" style="display:none"> <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک" width="18" height="18" decoding="async"> </button> <a class="btn-github-pill" href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" title="مشاهده سورس گیتاب در گیت‌هاب"> <img src="/Gitab/icone/github.svg" alt="GitHub" width="16" height="16" decoding="async"> <span>گیت‌هاب</span> </a> <button class="mobile-menu-btn" id="mobileMenuBtn" type="button" aria-label="باز کردن منو" aria-expanded="false"> <svg class="mob-icon-open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="4" y1="7" x2="20" y2="7"></line> <line x1="4" y1="12" x2="20" y2="12"></line> <line x1="4" y1="17" x2="14" y2="17"></line> </svg> <svg class="mob-icon-close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="18" y1="6" x2="6" y2="18"></line> <line x1="6" y1="6" x2="18" y2="18"></line> </svg> </button></div> </div><div class="mobile-drawer" id="mobileDrawer" aria-hidden="true"> <div class="mobile-drawer-inner"><div class="mobile-drawer-section-label">ناوبری سریع</div><nav class="mobile-drawer-links" aria-label="منوی موبایل"> <a href="/Gitab/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M3 10.5 12 3l9 7.5"></path> <path d="M5 9.5V20a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V9.5"></path> </svg> </span> <span class="mob-nav-text">صفحه نخست</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/books/list-books" class="mobile-drawer-link active" aria-current="page"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path> </svg> </span> <span class="mob-nav-text">کتابخانه و فهرست کتاب‌ها</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/courses/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path> <path d="M6 12v5c3 3 9 3 12 0v-5"></path> </svg> </span> <span class="mob-nav-text">دوره‌های آموزشی</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/translator.html" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path> <circle cx="9" cy="7" r="4"></circle> <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path> <path d="M16 3.13a4 4 0 0 1 0 7.75"></path> </svg> </span> <span class="mob-nav-text">مترجمین و همکاران</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> </nav><div class="mobile-drawer-divider"></div><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" class="mobile-drawer-link mobile-drawer-gh"> <span class="mob-nav-icon" aria-hidden="true"> <img src="/Gitab/icone/github.svg" alt="" width="17" height="17" loading="lazy" decoding="async"> </span> <span class="mob-nav-text">مخزن گیت‌هاب پروژه</span> <span class="mob-nav-ext" aria-hidden="true">↗</span> </a> </div></div> </header><div class="reading-progress-track"> <div class="reading-progress-fill" id="readingProgressBar"></div></div> <main class="site-main chapter-reading-page"><div class="chapter-page-wrapper"> <nav class="chapter-clean-breadcrumb" aria-label="مسیر راهنما" dir="rtl"><a href="/Gitab/">خانه</a> <span class="bc-sep" aria-hidden="true">/</span> <a href="/Gitab/books/list-books/">کتاب‌ها</a> <span class="bc-sep" aria-hidden="true">/</span> <a href="/Gitab/books/book13/"><bdi>راهنمای آزمون LPIC-1</bdi></a> <span class="bc-sep" aria-hidden="true">/</span> <span class="bc-current-leaf"><bdi>۱۱۰.۲ برقراری امنیت هاست و سرویس‌های باز</bdi></span></nav> <article class="chapter-prose-container markdown-body" id="chapterArticle" dir="rtl"><h1>۱۱۰.۲ برقراری امنیت هاست و سرویس‌های باز</h1><div class="callout callout-info" style="background: rgba(59, 130, 246, 0.08); border-right: 4px solid #3b82f6; padding: 16px 20px; border-radius: 8px; margin-bottom: 24px;"> <strong>خلاصه هدف آزمون:</strong> بستن پورت‌های غیرضروری، پیکربندی فایروال، امن‌سازی سرور SSH در /etc/ssh/sshd_config (تغییر پورت و غیرفعال کردن ورود پسوردی روت). </div><div class="video-container" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; border-radius: 12px; margin: 24px 0; border: 1px solid var(--g-border-dim);"> <iframe src="https://www.youtube.com/embed/HoQtVkcSqz8" title="ویدئوی آموزشی جادی برای این سرفصل" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen></iframe></div> <h2>🎯 اهداف و سرفصل‌های این بخش</h2><p>در این درسنامه موارد زیر را بررسی و مرور می‌کنیم:</p><ul> <li>مفاهیم کلیدی مورد پرسش در آزمون بین‌المللی LPIC-1</li><li>دستورات، فایل‌های پیکربندی و ابزارهای مرتبط در خط فرمان</li><li>نکات پرتکرار آزمون‌های ۱۰۱ و ۱۰۲ همراه با نمونه‌های کاربردی</li></ul> <hr><h2>📝 متن درسنامه و توضیحات تکمیلی</h2><p><em>ضریب اهمیت در آزمون (Weight): ۳</em></p><p>داوطلبان باید بدانند چگونه یک سطح پایه از امنیت را روی میزبان (Host) پیاده‌سازی کنند.</p><h3>حوزه‌های دانش کلیدی</h3><ul> <li>آشنایی با رمزهای عبور Shadow و نحوه کارکرد آن‌ها.</li><li>خاموش کردن سرویس‌های شبکه‌ای که استفاده نمی‌شوند.</li><li>درک نقش TCP Wrapperها.</li></ul> <h3>اصطلاحات و ابزارها</h3><div dir="ltr"> <ul><li><code>/etc/nologin</code></li><li><code>/etc/passwd</code></li><li><code>/etc/shadow</code></li><li><code>/etc/xinetd.d/</code></li><li><code>/etc/xinetd.conf</code></li><li><code>systemd.socket</code></li><li><code>/etc/inittab</code></li><li><code>/etc/init.d/</code></li><li><code>/etc/hosts.allow</code></li><li><code>/etc/hosts.deny</code></li></ul> </div><h4>رمزهای عبور در فایل <code>shadow</code></h4><p>قبلاً درباره <code>/etc/passwd</code> صحبت کرده‌ایم. این فایل در گذشته شامل رمز عبور کاربران بود، اما یک مشکل منطقی وجود داشت: اگر یک کاربر قرار باشد بتواند رمز عبور خودش را تغییر دهد (یا برنامه‌ها اطلاعات کاربران را بخوانند)، باید به این فایل دسترسی داشته باشد؛ و در این صورت می‌تواند رمز عبور بقیه افراد را هم ببیند. این موضوع اصلاً جالب نیست، حتی وقتی رمزها هش شده باشند (یعنی با استفاده از یک تابع یک‌طرفه به شکل پیچیده‌تری نمایش داده شده باشند).</p><pre class="hljs"><code>$ ls -ltrh /etc/passwd
+-rw-r--r-- 1 root root 2.5K Jun  5 19:14 /etc/passwd
+</code></pre> <p>برای جلوگیری از این مشکل، فایل <code>/etc/shadow</code> معرفی شد. در سیستم‌های امروزی، در فایل <code>/etc/passwd</code> به جای رمز عبور فقط یک حرف <code>x</code> نمایش می‌دهیم و رمز عبور واقعی را در <code>/etc/shadow</code> ذخیره می‌کنیم که دسترسی بسیار محدودی دارد:</p><pre class="hljs"><code>jadi@funlife ~$ grep jadi /etc/passwd
+jadi:x:1000:1000:jadi,,,:/home/jadi:/bin/bash
+jadi@funlife ~$ grep jadi /etc/shadow
+grep: /etc/shadow: Permission denied
+jadi@funlife ~$ sudo grep jadi /etc/shadow
+[sudo] password for jadi:
+jadi:$6$bp01DBX.$I6dt4pz8GeXJl6asgPeKhSdepf40bgepTz8zwB3HFmN56SdcsxjTETdZAmRt17biwMYOI7SoGFOXssHqeNFgw/:16963:0:99999:7:::
+jadi@funlife ~$ sudo ls -ltrh /etc/shadow
+-rw-r----- 1 root shadow 1.5K Jun 11 17:36 /etc/shadow
+</code></pre> <h4>فایل <code>/etc/nologin</code></h4><p>فایل <code>/etc/nologin</code> خیلی باحال است! اگر آن را بسازید و متنی داخلش بنویسید، محتوای آن به هر کسی که تلاش کند وارد سیستم (Login) شود نمایش داده می‌شود و در عین حال تلاش برای ورود ناموفق خواهد ماند. این فایل برای زمان‌های تعمیر و نگهداری (Maintenance) بسیار کاربردی است. کافی است این فایل را پاک کنید تا کاربران دوباره بتوانند وارد شوند.</p><blockquote> <p><strong>نکته:</strong> کاربر <code>root</code> حتی با وجود فایل <code>/etc/nologin</code> همچنان می‌تواند وارد سیستم شود.</p></blockquote> <p>همچنین توجه داشته باشید که یک شلِ صوری به نام <code>nologin</code> وجود دارد و می‌توانید آن را به‌عنوان شلِ هر کاربری که می‌خواهید از ورودش به سیستم از طریق شل جلوگیری کنید تنظیم نمایید. دقت کنید چنین کاربری همچنان یک حساب فعال دارد و می‌تواند از سرویس‌های دیگر (مثلاً ایمیل یا FTP) استفاده کند، اما نمی‌تواند وارد شل شود:</p><pre class="hljs"><code><span class="hljs-built_in">sudo</span> usermod -s /sbin/nologin baduser
+</code></pre> <h3>سوپرسرورها (Super-servers)</h3><p>یک سوپرسرور (که گاهی به آن Service Dispatcher هم می‌گویند) نوعی دیمن (Daemon) است که عمدتاً روی سیستم‌های شبه‌ونیکسی به دلایل امنیتی و مدیریت منابع اجرا می‌شود. این برنامه روی پورت‌هایی که برایش پیکربندی شده گوش می‌دهد و فقط در زمانی که نیاز باشد سرویس هدف را راه‌اندازی می‌کند تا به درخواست‌ها پاسخ دهد. این کار یک لایه امنیت به ارتباطات شما اضافه می‌کند و همچنین اجازه می‌دهد برخی سرویس‌ها وقتی نیازی به آن‌ها نداریم غیرفعال بمانند. می‌توانید یک سوپرسرور یا سوپردیمن را مثل یک پوشش (Wrapper) در سطح TCP (و UDP یا حتی ICMP) دور سرویس‌های دیگر تصور کنید.</p><div class="book-img-frame" style="text-align: center; margin: 24px 0;"><img src="/Gitab/books/book13/assets/super-server.png" alt="سوپرسرور" style="max-width: 100%; border-radius: 8px; border: 1px solid var(--g-border-dim);" loading="lazy"></div><p>امروزه تعداد کمی از سیستم‌های گنو/لینوکس از TCP Wrapperهایی مثل <code>xinetd</code> استفاده می‌کنند، اما ممکن است آن را در برخی نصب‌ها یا ردپایی از آن را در مسیر <code>/etc/xinetd.d</code> ببینید. در صورت نیاز، این امکان هم وجود دارد که <code>systemd.socket</code> را به‌عنوان یک TCP Wrapper برای سرویس‌های دیگر پیکربندی کنید.</p><p>این یک نمونه فایل پیکربندی <code>xinetd</code> است:</p><pre class="hljs"><code>service telnet
+{
+        disable         = no
+        flags           = REUSE
+        socket_type     = stream
+        wait            = no
+        user            = root
+        server          = /usr/sbin/in.telnetd
+        log_on_failure  += USERID
+        no_access       = 10.0.1.0/24
+        log_on_success  += PID HOST EXIT
+        access_times    = 09:45-16:15
+}
+</code></pre> <p>اگر مقدار <code>disable</code> را تغییر دهیم (مثلاً از <code>yes</code> به <code>no</code>) و <code>xinetd</code> را ریستارت کنیم، دیمن <code>telnet</code> شروع به کار می‌کند. فایل‌های متعددی برای کنترل تنظیمات مربوط به <code>xinetd</code> وجود دارد.</p><p>همان‌طور که اشاره شد، امروزه واحدهای <code>systemd.socket</code> جایگزین <code>xinetd</code> شده‌اند. برخی سرویس‌ها مانند <code>ssh</code> و <code>cups</code> ممکن است در توزیع شما در کنار واحد Service یک واحد Socket هم داشته باشند. در این حالت کافی است <code>ssh.service</code> را متوقف و غیرفعال کنید و به‌جای آن <code>ssh.socket</code> را استارت بزنید. حالا <code>systemd.socket</code> مثل یک پوشش دور پورت ۲۲ عمل می‌کند و اگر کسی به این سرویس نیاز داشته باشد، سرور SSH را برای پاسخ‌گویی بالا می‌آورد.</p><h4>فایل‌های <code>/etc/hosts.allow</code> و <code>/etc/hosts.deny</code></h4><p>این دو فایل دسترسی از میزبان‌های مشخص را مجاز یا مسدود می‌کنند. منطق کارشان شبیه به <code>cron.deny</code> و <code>cron.allow</code> است. اگر چیزی مجاز (Allow) شود، بقیه چیزها رد می‌شوند؛ اما اگر چیزی را به <code>/etc/hosts.deny</code> اضافه کنید، فقط همان مورد خاص مسدود می‌شود (و هر چیز دیگری مجاز است).</p><pre class="hljs"><code>jadi@funlife ~$ cat /etc/hosts.allow
+# /etc/hosts.allow: list of hosts that are allowed to access the system.
+#                   See the manual pages hosts_access(5) and hosts_options(5).
+#
+# Example:    ALL: LOCAL @some_netgroup
+#             ALL: .foobar.edu EXCEPT terminalserver.foobar.edu
+#
+# If you&#x27;re going to protect the portmapper use the name &quot;rpcbind&quot; for the
+# daemon name. See rpcbind(8) and rpc.mountd(8) for further information.
+#
+
+vsftpd: 10.10.100.
+</code></pre> <p>سرویس <code>vsftpd</code> چطور از وجود این فایل باخبر می‌شود؟ چون در کد منبع خودش از کتابخانه <code>libwrap</code> استفاده می‌کند و <code>libwrap</code> ابزارهای Wrapper را می‌فهمد. می‌توانید این ادعا را با جست‌وجوی <code>libwrap</code> در فهرست کتابخانه‌هایی که <code>vsftpd</code> استفاده می‌کند بررسی کنید:</p><pre class="hljs"><code>➜  ~ ldd /usr/sbin/vsftpd | grep libwrap
+	libwrap.so.0 =&gt; /lib/x86_64-linux-gnu/libwrap.so.0 (0x00007fb293921000)
+</code></pre> <p>در اینجا سرویس <code>vsftpd</code> فقط از محدوده <code>10.10.100.*</code> مجاز است. همچنین می‌توان از <code>ALL</code> به‌عنوان نام سرویس استفاده کرد تا همه سرویس‌ها مجاز یا مسدود شوند.</p><blockquote> <p><strong>نکته:</strong> پس از تغییر این فایل، <code>xinetd</code> باید ریستارت شود.</p></blockquote> <p>همان‌طور که اشاره شد، سوپرسرورها دیگر خیلی استفاده نمی‌شوند و بیشتر توزیع‌ها از سرویس‌های مستقل (Standalone) بهره می‌برند.</p><h3>حذف سرویس‌های بلااستفاده</h3><p>بسته به توزیع لینوکسی خود، می‌توانید سرویس‌های در حال اجرا را با دستور <code>service</code> یا <code>systemctl</code> بررسی کنید. اگر از سیستم راه‌انداز SysV init (عمدتاً در توزیع‌های قدیمی‌تر) استفاده می‌کنید یا ابزارهای سازگاری آن نصب است، به شکل زیر عمل کنید:</p><pre class="hljs"><code>~ sudo service --status-all
+ [ - ]  alsa-utils
+ ....
+ [ + ]  ufw
+ [ + ]  unattended-upgrades
+ [ + ]  uuidd
+ [ + ]  vpn-unlimited-daemon
+ [ + ]  vsftpd
+ [ - ]  whoopsie
+ [ - ]  x11-common
+</code></pre> <p>روی ماشین‌های مبتنی بر RedHat می‌توانید یک سرویس را با این دستور متوقف و غیرفعال کنید:</p><pre class="hljs"><code><span class="hljs-built_in">sudo</span> chkconfig vsftpd off
+</code></pre> <p>و روی ماشین‌های مبتنی بر Debian:</p><pre class="hljs"><code><span class="hljs-built_in">sudo</span> update-rc.d vsftpd remove
+</code></pre> <p>اگر از <code>systemd</code> استفاده می‌کنید، برای بررسی و توقف/غیرفعال‌سازی یک سرویس این‌گونه عمل کنید:</p><pre class="hljs"><code>systemctl list-units --state active --<span class="hljs-built_in">type</span> service
+systemctl status
+systemctl <span class="hljs-built_in">disable</span> vsftpd.service --now
+</code></pre> <p>همچنین به یاد داشته باشید که در سیستم‌های قدیمی‌تر، تمام اسکریپت‌های Init را در پوشه‌های <code>/etc/init.d</code> و <code>/etc/rcX.d</code> داشتیم. یک فایل <code>/etc/inittab</code> هم وجود داشت که فایل پیکربندی برای راه‌اندازی سیستم لینوکس با SysV بود و خطوطی در این قالب داشت:</p><pre class="hljs"><code>id:runlevel:action:process
+</code></pre> <p>این خط به سیستم init می‌گفت که روی <code>process</code> در یک <code>runlevel</code> مشخص چه <code>action</code>هایی انجام دهد. برای مثال:</p><pre class="hljs"><code>1:2345:respawn:/sbin/mingetty tty1
+</code></pre> <p>این دستور به init می‌گوید دستور <code>mingetty tty1</code> را در سطوح اجرای (Runlevels) <code>2</code>، <code>3</code>، <code>4</code> و <code>5</code> اجرا کند (و اگر کشته شد دوباره راه‌اندازیش کند).</p><p>و به‌عنوان نکته آخر، این مهم‌ترین خط در فایل <code>inittab</code> بود؛ چون به init می‌گفت در سطح اجرای ۳ بالا بیاید:</p><pre class="hljs"><code>id:3:initdefault:
+</code></pre> <p>برای اطلاعات بیشتر درباره <code>runlevels</code> لطفاً به <a href="/Gitab/books/book13/Book/05/1013-change-runlevels-and-shutdown-or-reboot-system/">فصل ۱۰۱.۳</a> مراجعه کنید.</p><hr> <div class="callout callout-tip" style="background: rgba(147, 51, 234, 0.08); border-right: 4px solid #9333ea; padding: 16px 20px; border-radius: 8px; margin-top: 32px;"><strong>🔗 نسخه اصلی به زبان انگلیسی:</strong> این درسنامه بر اساس منبع انگلیسی جادی در مخزن <a href="https://github.com/jadijadi/lpic1book/blob/master/content/1102_setup_host_security.md" target="_blank" rel="noopener noreferrer">jadijadi/lpic1book</a> تدوین و سازماندهی شده است. </div></article> <nav class="chapter-single-next-nav"><a href="/Gitab/books/book13/Book/46/1103-securing-data-with-encryption/" class="btn-next-chapter-action" id="nextChapterBtn" data-hub="/Gitab/books/book13/"> <span class="next-btn-text">فصل بعدی: ۱۱۰.۳ امن‌سازی و حفاظت از داده‌ها با رمزنگاری</span> <span class="next-btn-arrow">←</span> </a> </nav></div> <button class="fab-back-to-top" id="backToTopBtn" type="button" aria-label="رفتن به بالای صفحه" title="رفتن به بالا"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"> <polyline points="18 15 12 9 6 15"></polyline> </svg> </button></main> <footer class="footer-minimal"><div class="footer-container"> <div class="footer-top-row"><div class="footer-brand-side"> <a href="/Gitab/" class="footer-brand-anchor"> <img src="/Gitab/icone/logo.svg" alt="Gitab" width="28" height="28" loading="lazy" decoding="async"> <span class="footer-brand-title">گیتاب (Gitab)</span> </a> <p class="footer-tagline"> پلتفرم آزاد و مستقل برای ترجمهٔ دقیق و روان کتاب‌های مرجع مهندسی نرم‌افزار. </p></div> <div class="footer-nav-cols"><div class="footer-nav-col"> <span class="footer-nav-heading">موضوعات</span><ul class="footer-nav-list"> <li><a href="/Gitab/books/list-books/?cat=csharp">سی‌شارپ و دات‌نت</a></li><li><a href="/Gitab/books/list-books/?cat=clean-code">کد تمیز و بازآفرینی</a></li><li><a href="/Gitab/books/list-books/?cat=architecture">معماری و طراحی دامنه</a></li><li><a href="/Gitab/books/list-books/?cat=system">لینوکس و خط فرمان</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">بخش‌های سایت</span><ul class="footer-nav-list"> <li><a href="/Gitab/">صفحه اصلی</a></li><li><a href="/Gitab/books/list-books/">کتابخانه کامل</a></li><li><a href="/Gitab/courses/">دوره‌های آموزشی</a></li><li><a href="/Gitab/translator.html">تالار مترجمین</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">مشارکت و جامعه</span><ul class="footer-nav-list"> <li><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer">راهنمای همکاری در ترجمه</a></li><li><a href="https://github.com/hheydarian/Gitab/issues" target="_blank" rel="noopener noreferrer">پیشنهاد کتاب یا گزارش خطا</a></li></ul> </div></div> </div><div class="footer-bottom-line"> <span>© <span id="y">2026</span> Gitab — توسعه‌یافته برای جامعهٔ مهندسان نرم‌افزار ایرانی</span></div> </div></footer> <script>
+  (() => {
+    const root = document.documentElement;
+    const btn = document.getElementById('themeToggle');
+    const sunIcon = btn ? btn.querySelector('.icon-sun') : null;
+    const moonIcon = btn ? btn.querySelector('.icon-moon') : null;
+    const KEY = 'gitab-theme';
+
+    function updateTheme(mode) {
+      root.setAttribute('data-theme', mode);
+      root.dataset.colorMode = mode;
+      if (sunIcon && moonIcon) {
+        if (mode === 'dark') {
+          sunIcon.style.display = 'inline-block';
+          moonIcon.style.display = 'none';
+        } else {
+          sunIcon.style.display = 'none';
+          moonIcon.style.display = 'inline-block';
+        }
+      }
+    }
+
+    let saved = 'dark';
+    try { saved = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+    updateTheme(saved);
+
+    if (btn) {
+      btn.addEventListener('click', () => {
+        let current = 'dark';
+        try { current = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+        const next = current === 'dark' ? 'light' : 'dark';
+        try { localStorage.setItem(KEY, next); } catch (e) {}
+        updateTheme(next);
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      let mode = 'dark';
+      try { mode = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+      updateTheme(mode);
+      const yearSpan = document.getElementById('y');
+      if (yearSpan) yearSpan.textContent = new Date().getFullYear();
+    });
+
+    const mobBtn = document.getElementById('mobileMenuBtn');
+    const mobDrawer = document.getElementById('mobileDrawer');
+    if (mobBtn && mobDrawer) {
+      const setDrawerOpen = (open) => {
+        mobDrawer.classList.toggle('open', open);
+        mobBtn.classList.toggle('is-open', open);
+        mobBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        mobBtn.setAttribute('aria-label', open ? 'بستن منو' : 'باز کردن منو');
+        mobDrawer.setAttribute('aria-hidden', open ? 'false' : 'true');
+      };
+
+      mobBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        setDrawerOpen(!mobDrawer.classList.contains('open'));
+      });
+
+      mobDrawer.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => setDrawerOpen(false));
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && mobDrawer.classList.contains('open')) {
+          setDrawerOpen(false);
+        }
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!mobDrawer.contains(e.target) && !mobBtn.contains(e.target)) {
+          setDrawerOpen(false);
+        }
+      });
+    }
+
+    if ('serviceWorker' in navigator) {
+      const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+      if (isLocalhost) {
+        navigator.serviceWorker.getRegistrations().then(regs => {
+          for (const reg of regs) reg.unregister();
+        });
+        if ('caches' in window) {
+          caches.keys().then(names => {
+            for (const name of names) caches.delete(name);
+          });
+        }
+      } else {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/Gitab/sw.js').catch(() => {});
+        });
+      }
+    }
+  })();
+  </script> <script>
+  document.querySelectorAll('pre code').forEach(block => {
+    const pre = block.parentNode;
+    if (!pre || pre.querySelector('.copy-btn')) return;
+
+    const copySvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
+    const okSvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+
+    const btn = document.createElement('button');
+    btn.className = 'copy-btn';
+    btn.setAttribute('aria-label', 'کپی کد');
+    btn.setAttribute('title', 'کپی کد');
+    btn.setAttribute('type', 'button');
+    btn.innerHTML = copySvg;
+    pre.appendChild(btn);
+
+    btn.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(block.textContent);
+        btn.classList.add('copied');
+        btn.innerHTML = okSvg;
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          btn.innerHTML = copySvg;
+        }, 1800);
+      } catch (err) {
+        console.error('Copy failed:', err);
+      }
+    });
+  });
+  </script> <script>
+  (() => {
+    const article = document.getElementById('chapterArticle');
+    if (!article) return;
+
+    const progressBar = document.getElementById('readingProgressBar');
+    if (progressBar) {
+      window.addEventListener('scroll', () => {
+        const docElem = document.documentElement;
+        const totalHeight = docElem.scrollHeight - docElem.clientHeight;
+        if (totalHeight > 0) {
+          const progress = (window.pageYOffset / totalHeight) * 100;
+          progressBar.style.width = Math.min(100, Math.max(0, progress)) + '%';
+        }
+      }, { passive: true });
+    }
+
+    const btt = document.getElementById('backToTopBtn');
+    if (btt) {
+      window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 250) {
+          btt.classList.add('visible');
+        } else {
+          btt.classList.remove('visible');
+        }
+      }, { passive: true });
+
+      btt.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+
+    article.querySelectorAll('img').forEach(img => {
+      if (!img.hasAttribute('loading')) img.loading = 'lazy';
+      if (!img.hasAttribute('decoding')) img.decoding = 'async';
+      const parent = img.parentElement;
+      if (parent && parent.tagName === 'P') {
+        parent.style.textAlign = 'center';
+      }
+
+      img.addEventListener('error', function() {
+        const src = this.getAttribute('src');
+        if (src && src.includes('assets/image/')) {
+          const parts = src.split('assets/image/');
+          const corrected = '/Gitab/books/book13/assets/image/' + parts[1];
+          if (this.src !== corrected) {
+            this.src = corrected;
+          }
+        }
+      });
+    });
+
+    article.querySelectorAll('p').forEach(p => {
+      const trimmed = p.innerText.trim();
+      if (trimmed.startsWith('💡') || trimmed.startsWith('نکته:')) {
+        p.classList.add('react-callout', 'callout-tip');
+      } else if (trimmed.startsWith('⚠️') || trimmed.startsWith('هشدار:')) {
+        p.classList.add('react-callout', 'callout-warning');
+      } else if (trimmed.startsWith('📌') || trimmed.startsWith('مهم:')) {
+        p.classList.add('react-callout', 'callout-important');
+      } else if (trimmed.startsWith('🔹') || trimmed.startsWith('🔸')) {
+        p.classList.add('react-callout', 'callout-note');
+      }
+    });
+  })();
+  </script> <script type="speculationrules">{"prefetch":[{"where":{"and":[{"href_matches":"/Gitab/*"},{"not":{"href_matches":"/Gitab/downloads/*"}},{"not":{"selector_matches":"[download], [target='_blank']"}}]},"eagerness":"moderate"}]}</script> <script>
+  (() => {
+    if (window.HTMLScriptElement && HTMLScriptElement.supports && HTMLScriptElement.supports('speculationrules')) return;
+    const seen = new Set([window.location.href]);
+    let count = 0;
+    const prefetchLink = (e) => {
+      if (count >= 12) return;
+      const a = e.target && e.target.closest ? e.target.closest('header a, .chapter-single-next-nav a, .syllabus-chapter-item a, .btn-hero-read, .btn-card-read') : null;
+      if (!a || !a.href || a.hasAttribute('download') || a.target === '_blank') return;
+      if (a.origin !== window.location.origin || a.pathname.includes('/downloads/')) return;
+      const clean = a.href.split('#')[0];
+      if (!clean || seen.has(clean)) return;
+      seen.add(clean);
+      count++;
+      const l = document.createElement('link');
+      l.rel = 'prefetch';
+      l.href = clean;
+      document.head.appendChild(l);
+    };
+    document.addEventListener('pointerenter', prefetchLink, { capture: true, passive: true });
+    document.addEventListener('touchstart', prefetchLink, { capture: true, passive: true });
+  })();
+  </script></body></html>

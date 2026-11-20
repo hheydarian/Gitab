@@ -8,9 +8,9 @@ title: Regular Expressions
 
 Regular Expressions برای کارهایی مثل موارد زیر استفاده می‌شوند:
 
-* ✅ اعتبارسنجی ورودی متنی مثل رمز عبور یا شماره تلفن
-* ✅ تجزیه داده‌های متنی به فرم‌های ساختارمندتر (مثلاً یک رشته نسخه NuGet)
-* ✅ جایگزینی الگوهای متنی در یک سند (برای مثال فقط کلمات کامل)
+*  اعتبارسنجی ورودی متنی مثل رمز عبور یا شماره تلفن
+*  تجزیه داده‌های متنی به فرم‌های ساختارمندتر (مثلاً یک رشته نسخه NuGet)
+*  جایگزینی الگوهای متنی در یک سند (برای مثال فقط کلمات کامل)
 
 این فصل به دو بخش تقسیم شده است:
 
@@ -19,16 +19,16 @@ Regular Expressions برای کارهایی مثل موارد زیر استفا�
 
 تمام تایپ‌های Regular Expression در فضای نام **System.Text.RegularExpressions** تعریف شده‌اند.
 
-📌 نمونه‌های این فصل از قبل در **LINQPad** بارگذاری شده‌اند. این ابزار همچنین یک ابزار تعاملی برای Regular Expressions دارد (کلیدهای `Ctrl+Shift+F1`). یک ابزار آنلاین هم در دسترس است: 🌐 [http://regexstorm.net/tester](http://regexstorm.net/tester).
+ نمونه‌های این فصل از قبل در **LINQPad** بارگذاری شده‌اند. این ابزار همچنین یک ابزار تعاملی برای Regular Expressions دارد (کلیدهای `Ctrl+Shift+F1`). یک ابزار آنلاین هم در دسترس است:  [http://regexstorm.net/tester](http://regexstorm.net/tester).
 
 ---
 
-## 🧩 مبانی Regular Expression
+## مبانی Regular Expression
 
 یکی از رایج‌ترین عملگرهای Regular Expression چیزی است به نام **Quantifier** (تکرارگر).
 علامت `?` یک Quantifier است که آیتم قبلی را **۰ یا ۱ بار** تطبیق می‌دهد. به عبارت دیگر `?` به معنای «اختیاری بودن» است.
 
-🔹 یک آیتم می‌تواند یک کاراکتر ساده یا یک ساختار پیچیده از کاراکترها داخل کروشه‌ها `[]` باشد.
+ یک آیتم می‌تواند یک کاراکتر ساده یا یک ساختار پیچیده از کاراکترها داخل کروشه‌ها `[]` باشد.
 
 مثال: عبارت `"colou?r"` می‌تواند **color** و **colour** را تطبیق دهد، اما **colouur** را نه:
 
@@ -53,7 +53,7 @@ Console.WriteLine (m.ToString());  // colour
 
 متد **IsMatch** یک میانبر است برای صدا زدن Match و سپس بررسی ویژگی Success.
 
-🔸 موتور Regular Expressions به صورت پیش‌فرض از **چپ به راست** کار می‌کند، بنابراین فقط اولین تطبیق بازگردانده می‌شود.
+ موتور Regular Expressions به صورت پیش‌فرض از **چپ به راست** کار می‌کند، بنابراین فقط اولین تطبیق بازگردانده می‌شود.
 با متد **NextMatch** می‌توان تطبیق‌های بعدی را گرفت:
 
 ```csharp
@@ -74,7 +74,7 @@ foreach (Match m in Regex.Matches
 
 ---
 
-## 🔀 عملگر Alternator
+## عملگر Alternator
 
 یکی دیگر از عملگرهای متداول در Regular Expressions چیزی است به نام **Alternator** که با خط عمودی `|` نمایش داده می‌شود. این عملگر نشان‌دهنده **گزینه‌های جایگزین** است.
 
@@ -84,7 +84,7 @@ foreach (Match m in Regex.Matches
 Console.WriteLine (Regex.IsMatch ("Jenny", "Jen(ny|nifer)?"));  // True
 ```
 
-🔹 پرانتزها در اطراف Alternator باعث می‌شوند این گزینه‌ها از بقیه عبارت جدا شوند.
+ پرانتزها در اطراف Alternator باعث می‌شوند این گزینه‌ها از بقیه عبارت جدا شوند.
 
 ---
 
@@ -98,7 +98,7 @@ Console.WriteLine (Regex.IsMatch ("Jenny", "Jen(ny|nifer)?"));  // True
 
 ---
 
-# ⚡ Compiled Regular Expressions
+# Compiled Regular Expressions
 
 در بعضی از مثال‌های قبلی، بارها یک متد استاتیک **Regex** را با همان الگو صدا زدیم. یک روش جایگزین این است که یک شیء **Regex** با الگو و گزینه **RegexOptions.Compiled** ایجاد کرده و سپس متدهای نمونه را صدا بزنیم:
 
@@ -110,17 +110,17 @@ Console.WriteLine (r.Match ("sausages"));  // sausages
 
 گزینه **RegexOptions.Compiled** به نمونه Regex می‌گوید از **تولید کد سبک‌وزن** (با استفاده از DynamicMethod در Reflection.Emit) برای ساخت و کامپایل پویا کدی که مخصوص همان Regular Expression است استفاده کند.
 
-🔹 نتیجه این کار: تطبیق سریع‌تر، اما با هزینه اولیه‌ی کامپایل.
+ نتیجه این کار: تطبیق سریع‌تر، اما با هزینه اولیه‌ی کامپایل.
 
 همچنین می‌توانید یک شیء Regex بدون استفاده از **RegexOptions.Compiled** بسازید. شیء Regex **تغییرناپذیر (Immutable)** است.
 
 ---
 
-# ⚙️ RegexOptions
+# RegexOptions
 
 موتور Regular Expressions سریع است. حتی بدون کامپایل، یک تطبیق ساده معمولاً کمتر از یک میکروثانیه طول می‌کشد.
 
-🔸 **RegexOptions** یک enum از نوع flags است که به شما امکان می‌دهد رفتار تطبیق را تنظیم کنید.
+ **RegexOptions** یک enum از نوع flags است که به شما امکان می‌دهد رفتار تطبیق را تنظیم کنید.
 
 یکی از استفاده‌های رایج آن انجام جستجوی **Case-Insensitive** (غیرحساس به بزرگی/کوچکی حروف) است:
 
@@ -135,7 +135,7 @@ Console.WriteLine (Regex.Match ("a", "A", RegexOptions.IgnoreCase
                                         | RegexOptions.CultureInvariant));
 ```
 
-🔹 بیشتر گزینه‌های RegexOptions را می‌توان داخل خود عبارت Regular Expression با کد تک‌حرفی فعال کرد:
+ بیشتر گزینه‌های RegexOptions را می‌توان داخل خود عبارت Regular Expression با کد تک‌حرفی فعال کرد:
 
 ```csharp
 Console.WriteLine (Regex.Match ("a", @"(?i)A"));                     // a
@@ -149,16 +149,16 @@ Console.WriteLine (Regex.Match ("AAAa", @"(?i)a(?-i)a"));            // Aa
 
 یک گزینه مفید دیگر **IgnorePatternWhitespace** یا `(?x)` است. این گزینه به شما اجازه می‌دهد برای خوانایی بهتر، فاصله (Whitespace) داخل عبارت قرار دهید—بدون اینکه آن فاصله به‌عنوان بخشی از الگو در نظر گرفته شود.
 
-🔸 گزینه **NonBacktracking** (از .NET 7) به موتور Regex می‌گوید فقط از الگوریتم تطبیق رو‌به‌جلو استفاده کند. این کار معمولاً سرعت را کمتر می‌کند و بعضی قابلیت‌های پیشرفته مثل Lookahead یا Lookbehind را غیرفعال می‌کند. اما از اجرای تقریباً بی‌نهایت الگوهای خراب یا مخرب جلوگیری کرده و جلوی حمله‌های **ReDOS** (Regular Expression Denial of Service) را می‌گیرد. در این شرایط تعیین Timeout هم بسیار مفید است.
+ گزینه **NonBacktracking** (از .NET 7) به موتور Regex می‌گوید فقط از الگوریتم تطبیق رو‌به‌جلو استفاده کند. این کار معمولاً سرعت را کمتر می‌کند و بعضی قابلیت‌های پیشرفته مثل Lookahead یا Lookbehind را غیرفعال می‌کند. اما از اجرای تقریباً بی‌نهایت الگوهای خراب یا مخرب جلوگیری کرده و جلوی حمله‌های **ReDOS** (Regular Expression Denial of Service) را می‌گیرد. در این شرایط تعیین Timeout هم بسیار مفید است.
 
-📊 جدول **25-1** تمام مقادیر **RegexOptions** را همراه با کد تک‌حرفی آن‌ها فهرست می‌کند.
+ جدول **25-1** تمام مقادیر **RegexOptions** را همراه با کد تک‌حرفی آن‌ها فهرست می‌کند.
 
  <div align="center">
 
 ![Conventions-UsedThis-Book](../../../assets/image/25/Table-25-1.jpeg)
 </div>
 
-## 🔤 Character Escapes
+## Character Escapes
 
 در **Regular Expressions** تعدادی **متاکاراکتر (Metacharacter)** وجود دارند که معنای ویژه‌ای دارند و به صورت **لیترال (literal)** تفسیر نمی‌شوند:
 
@@ -175,11 +175,11 @@ Console.WriteLine (Regex.Match ("what?", @"what\?")); // what? (درست)
 Console.WriteLine (Regex.Match ("what?", @"what?"));  // what  (نادرست)
 ```
 
-📌 نکته: اگر کاراکتر داخل یک **مجموعه (Set)** باشد (یعنی داخل براکت‌های `[]` نوشته شده باشد)، این قانون اعمال نمی‌شود و متاکاراکترها همان‌طور که هستند به صورت **لیترال** در نظر گرفته می‌شوند. (مجموعه‌ها را در بخش بعدی بررسی می‌کنیم).
+> **نکته:** اگر کاراکتر داخل یک **مجموعه (Set)** باشد (یعنی داخل براکت‌های `[]` نوشته شده باشد)، این قانون اعمال نمی‌شود و متاکاراکترها همان‌طور که هستند به صورت **لیترال** در نظر گرفته می‌شوند. (مجموعه‌ها را در بخش بعدی بررسی می‌کنیم).
 
 ---
 
-## 🛠️ متدهای Escape و Unescape در Regex
+## متدهای Escape و Unescape در Regex
 
 کلاس **Regex** دو متد مهم دارد:
 
@@ -195,11 +195,11 @@ Console.WriteLine (Regex.Unescape (@"\?"));    // ?>
 
 ---
 
-## 💡 نکته درباره @ در رشته‌های C #
+## نکته درباره @ در رشته‌های C #
 
 تمام رشته‌های Regular Expression در این فصل با پیشوند **@** در C# نوشته شده‌اند. دلیلش این است که مکانیزم Escape خود زبان C# هم از **بک‌اسلش** استفاده می‌کند.
 
-اگر `@` استفاده نشود، برای نمایش یک بک‌اسلش ساده باید چهار تا بک‌اسلش بنویسید! 😅
+اگر `@` استفاده نشود، برای نمایش یک بک‌اسلش ساده باید چهار تا بک‌اسلش بنویسید! 
 
 مثال:
 
@@ -209,7 +209,7 @@ Console.WriteLine (Regex.Match ("\\", "\\\\"));    // \
 
 ---
 
-## ⚠️ فاصله‌ها در Regular Expressions
+## فاصله‌ها در Regular Expressions
 
 مگر اینکه گزینه `(?x)` فعال باشد، فاصله‌ها (Space) در Regular Expressions **به صورت لیترال** در نظر گرفته می‌شوند.
 
@@ -221,7 +221,7 @@ Console.Write (Regex.IsMatch ("hello world", @"hello world"));  // True
 
 ---
 
-## 🎭 Character Sets
+## Character Sets
 
 **Character Sets** (مجموعه کاراکترها) مثل **Wildcards** عمل می‌کنند، با این تفاوت که فقط برای یک مجموعه خاص از کاراکترها استفاده می‌شوند.
 
@@ -230,7 +230,7 @@ Console.Write (Regex.IsMatch ("hello world", @"hello world"));  // True
 ![Conventions-UsedThis-Book](../../../assets/image/25/Table-25-2.jpeg)
 </div>
 
-## 🎭 Character Sets (مجموعه کاراکترها)
+## Character Sets (مجموعه کاراکترها)
 
 برای تطبیق دقیقاً یکی از کاراکترهای یک مجموعه، باید آن مجموعه را داخل براکت‌های مربعی `[]` قرار دهید:
 
@@ -238,11 +238,11 @@ Console.Write (Regex.IsMatch ("hello world", @"hello world"));  // True
 Console.Write (Regex.Matches ("That is that.", "[Tt]hat").Count);   // 2
 ```
 
-🔹 در مثال بالا، الگو `[Tt]hat` هم کلمه **That** (با T بزرگ) و هم **that** (با t کوچک) را پیدا می‌کند. نتیجه برابر **۲** خواهد بود.
+ در مثال بالا، الگو `[Tt]hat` هم کلمه **That** (با T بزرگ) و هم **that** (با t کوچک) را پیدا می‌کند. نتیجه برابر **۲** خواهد بود.
 
 ---
 
-### ❌ مجموعه‌های منفی
+### مجموعه‌های منفی
 
 برای تطبیق هر کاراکتری به‌جز آن‌هایی که در یک مجموعه هستند، کافیست علامت `^` را در ابتدای مجموعه قرار دهید:
 
@@ -250,11 +250,11 @@ Console.Write (Regex.Matches ("That is that.", "[Tt]hat").Count);   // 2
 Console.Write (Regex.Match ("quiz qwerty", "q[^aeiou]").Index);    // 5
 ```
 
-🔹 در اینجا الگو `q[^aeiou]` به دنبال یک حرف `q` است که بعد از آن **هیچ‌کدام از حروف صدادار a, e, i, o, u** نیاید. نتیجه این است که تطبیق از ایندکس ۵ پیدا می‌شود.
+ در اینجا الگو `q[^aeiou]` به دنبال یک حرف `q` است که بعد از آن **هیچ‌کدام از حروف صدادار a, e, i, o, u** نیاید. نتیجه این است که تطبیق از ایندکس ۵ پیدا می‌شود.
 
 ---
 
-### 🔡 محدوده کاراکترها
+### محدوده کاراکترها
 
 شما می‌توانید یک محدوده از کاراکترها را با استفاده از **خط فاصله (hyphen)** مشخص کنید. مثال زیر یک حرکت شطرنج را تطبیق می‌دهد:
 
@@ -262,14 +262,14 @@ Console.Write (Regex.Match ("quiz qwerty", "q[^aeiou]").Index);    // 5
 Console.Write (Regex.Match ("b1-c4", @"[a-h]\d-[a-h]\d").Success);  // True
 ```
 
-🔹 در اینجا `[a-h]` یعنی هر حرفی بین **a تا h**، و `\d` یعنی یک عدد (رقم). بنابراین عبارت کل حرکت شطرنج **b1-c4** را شناسایی می‌کند ✅.
+ در اینجا `[a-h]` یعنی هر حرفی بین **a تا h**، و `\d` یعنی یک عدد (رقم). بنابراین عبارت کل حرکت شطرنج **b1-c4** را شناسایی می‌کند .
 
 ---
 
-## 🔢 شورتکات‌های پرکاربرد در Regular Expressions
+## شورتکات‌های پرکاربرد در Regular Expressions
 
 * `\d` → نشان‌دهنده یک کاراکتر **رقم (Digit)** است.
-  🔹 پس `\d` هر عددی را تطبیق می‌دهد.
+   پس `\d` هر عددی را تطبیق می‌دهد.
 
 * `\D` → نشان‌دهنده هر کاراکتری است که **عدد نباشد**.
 
@@ -280,12 +280,12 @@ Console.Write (Regex.Match ("b1-c4", @"[a-h]\d-[a-h]\d").Success);  // True
 
 * `\W` → نشان‌دهنده هر کاراکتری است که **کلمه‌ای نباشد**.
 
-📌 این‌ها برای حروف غیرانگلیسی (مثل الفبای سیریلیک) هم همان‌طور که انتظار می‌رود عمل می‌کنند.
+ این‌ها برای حروف غیرانگلیسی (مثل الفبای سیریلیک) هم همان‌طور که انتظار می‌رود عمل می‌کنند.
 
 ---
 
 * `.` → هر کاراکتری به جز `\n` (خط جدید) را تطبیق می‌دهد.
-  🔹 البته `\r` (Carriage return) را مجاز می‌داند.
+   البته `\r` (Carriage return) را مجاز می‌داند.
 
 ---
 
@@ -300,15 +300,15 @@ Console.Write (Regex.Match ("b1-c4", @"[a-h]\d-[a-h]\d").Success);  // True
 Console.Write (Regex.IsMatch ("Yes, please", @"\p{P}"));   // True
 ```
 
-🔹 در اینجا چون رشته `"Yes, please"` شامل علامت ویرگول (,) است، نتیجه `True` خواهد بود.
+ در اینجا چون رشته `"Yes, please"` شامل علامت ویرگول (,) است، نتیجه `True` خواهد بود.
 
 ---
 
-💡 ما در ادامه، وقتی این موارد (`\d`, `\w`, `.`) را با **Quantifiers** (تکرارگرها) ترکیب کنیم، استفاده‌های بیشتری از آن‌ها خواهیم دید.
+ ما در ادامه، وقتی این موارد (`\d`, `\w`, `.`) را با **Quantifiers** (تکرارگرها) ترکیب کنیم، استفاده‌های بیشتری از آن‌ها خواهیم دید.
 
 ---
 
-## 🔁 Quantifiers (تکرارگرها)
+## Quantifiers (تکرارگرها)
 
 **Quantifiers** مشخص می‌کنند که یک آیتم چند بار باید تطبیق داده شود.
 
@@ -317,7 +317,7 @@ Console.Write (Regex.IsMatch ("Yes, please", @"\p{P}"));   // True
 ![Conventions-UsedThis-Book](../../../assets/image/25/Table-25-3.jpeg)
 </div>
 
-## 🔢 Quantifiers (تکرارگرها)
+## Quantifiers (تکرارگرها)
 
 تکرارگر `*` کاراکتر یا گروه قبلی را **صفر بار یا بیشتر** تطبیق می‌دهد. مثال زیر `cv.docx` را تطبیق می‌دهد، همراه با هر نسخه‌ی شماره‌گذاری‌شده‌ی همان فایل (مثلاً `cv2.docx`، `cv15.docx`):
 
@@ -352,7 +352,7 @@ Console.WriteLine (bp.Match ("Now it's only 115/75"));   // 115/75
 
 ---
 
-## ⚖️ Greedy در مقابل Lazy Quantifiers
+## Greedy در مقابل Lazy Quantifiers
 
 به‌طور پیش‌فرض، تکرارگرها **Greedy (حریص)** هستند، نه **Lazy (تنبل)**.
 
@@ -398,14 +398,14 @@ foreach (Match m in Regex.Matches (html, @"<i>.*?</i>"))
 
 ---
 
-## 🪝 Zero-Width Assertions
+## Zero-Width Assertions
 
 زبان Regular Expressions اجازه می‌دهد شرط‌هایی روی آنچه قبل یا بعد از یک تطبیق رخ می‌دهد اعمال کنیم، از طریق **lookbehind**، **lookahead**، **anchors** و **word boundaries**.
 به این‌ها **zero-width assertions** گفته می‌شود، چون طول (یا اندازه) تطبیق را افزایش نمی‌دهند.
 
 ---
 
-### 🔮 Lookahead و Lookbehind
+### Lookahead و Lookbehind
 
 ساختار `(?=expr)` بررسی می‌کند که آیا متن بعدی با `expr` مطابقت دارد، بدون اینکه `expr` را در نتیجه برگرداند. این را **positive lookahead** می‌نامند.
 
@@ -415,7 +415,7 @@ foreach (Match m in Regex.Matches (html, @"<i>.*?</i>"))
 Console.WriteLine (Regex.Match ("say 25 miles more", @"\d+\s(?=miles)"));
 ```
 
-📤 خروجی:
+ خروجی:
 
 ```
 25
@@ -429,7 +429,7 @@ Console.WriteLine (Regex.Match ("say 25 miles more", @"\d+\s(?=miles)"));
 Console.WriteLine (Regex.Match ("say 25 miles more", @"\d+\s(?=miles).*"));
 ```
 
-📤 خروجی:
+ خروجی:
 
 ```
 25 miles more
@@ -437,7 +437,7 @@ Console.WriteLine (Regex.Match ("say 25 miles more", @"\d+\s(?=miles).*"));
 
 ---
 
-✅ Lookahead می‌تواند برای اعمال قوانین روی پسوردهای قوی مفید باشد. فرض کنید پسورد باید حداقل ۶ کاراکتر باشد و حداقل یک عدد داشته باشد. با یک lookahead می‌توانیم این شرط را برقرار کنیم:
+ Lookahead می‌تواند برای اعمال قوانین روی پسوردهای قوی مفید باشد. فرض کنید پسورد باید حداقل ۶ کاراکتر باشد و حداقل یک عدد داشته باشد. با یک lookahead می‌توانیم این شرط را برقرار کنیم:
 
 ```csharp
 string password = "...";
@@ -473,9 +473,9 @@ Console.WriteLine (Regex.IsMatch ("Very good, thanks!", regex));  // True
 
 ---
 
-🔖 ما می‌توانیم این مثال‌ها را با اضافه کردن **word boundary assertions** (که به‌زودی معرفی می‌کنیم) بهبود دهیم.
+ ما می‌توانیم این مثال‌ها را با اضافه کردن **word boundary assertions** (که به‌زودی معرفی می‌کنیم) بهبود دهیم.
 
-## ⚓ Anchors (لنگرها)
+## Anchors (لنگرها)
 
 لنگرهای `^` و `$` یک موقعیت خاص را تطبیق می‌دهند. به‌طور پیش‌فرض:
 
@@ -489,8 +489,8 @@ Console.WriteLine (Regex.Match ("Not now", "^[Nn]o"));   // No
 Console.WriteLine (Regex.Match ("f = 0.2F", "[Ff]$"));   // F
 ```
 
-🔹 `^` دو معنای وابسته به متن دارد: **یک لنگر** و **علامت نفی در کلاس کاراکتر**.
-🔹 `$` هم دو معنای وابسته به متن دارد: **یک لنگر** و **نشانه‌ی گروه جایگزین (replacement group denoter)**.
+ `^` دو معنای وابسته به متن دارد: **یک لنگر** و **علامت نفی در کلاس کاراکتر**.
+ `$` هم دو معنای وابسته به متن دارد: **یک لنگر** و **نشانه‌ی گروه جایگزین (replacement group denoter)**.
 
 ---
 
@@ -499,7 +499,7 @@ Console.WriteLine (Regex.Match ("f = 0.2F", "[Ff]$"));   // F
 * `^` ابتدای رشته یا ابتدای خط (بلافاصله بعد از `\n`) را تطبیق می‌دهد.
 * `$` انتهای رشته یا انتهای خط (بلافاصله قبل از `\n`) را تطبیق می‌دهد.
 
-اما یک نکته وجود دارد ⚠️: در ویندوز، پایان خط معمولاً با `\r\n` مشخص می‌شود نه فقط `\n`. بنابراین برای اینکه `$` در حالت چندخطی مفید باشد، باید معمولاً `\r` را هم با یک **positive lookahead** تطبیق دهید:
+اما یک نکته وجود دارد : در ویندوز، پایان خط معمولاً با `\r\n` مشخص می‌شود نه فقط `\n`. بنابراین برای اینکه `$` در حالت چندخطی مفید باشد، باید معمولاً `\r` را هم با یک **positive lookahead** تطبیق دهید:
 
 ```
 (?=\r?$)
@@ -516,7 +516,7 @@ foreach (Match m in Regex.Matches (fileNames, r, RegexOptions.Multiline))
   Console.Write (m + " ");
 ```
 
-📤 خروجی:
+ خروجی:
 
 ```
 a.txt c.txt
@@ -546,7 +546,7 @@ Console.WriteLine (Regex.Match ("x", "$").Length);   // 0
 
 ---
 
-## 🔠 Word Boundaries (مرزهای کلمه)
+## Word Boundaries (مرزهای کلمه)
 
 عبارت `\b` جایی را تطبیق می‌دهد که کاراکترهای کلمه (`\w`) در کنار یکی از این موارد باشند:
 
@@ -560,7 +560,7 @@ foreach (Match m in Regex.Matches ("Wedding in Sarajevo", @"\b\w+\b"))
   Console.WriteLine (m);
 ```
 
-📤 خروجی:
+ خروجی:
 
 ```
 Wedding
@@ -588,7 +588,7 @@ Console.Write (Regex.Match (text, @"\b\w+\b\s(?=\(sic\))"));  // loose
 
 ---
 
-## 🧩 Groups (گروه‌ها)
+## Groups (گروه‌ها)
 
 گاهی مفید است که یک عبارت باقاعده را به مجموعه‌ای از زیربخش‌ها یا **گروه‌ها** تقسیم کنیم.
 
@@ -613,7 +613,7 @@ Console.WriteLine (m.Groups[1]);   // 206
 Console.WriteLine (m.Groups[2]);   // 465-1918
 ```
 
-🔹 گروه صفر، کل تطبیق را نمایش می‌دهد. یعنی همان مقداری که در `Value` وجود دارد:
+ گروه صفر، کل تطبیق را نمایش می‌دهد. یعنی همان مقداری که در `Value` وجود دارد:
 
 ```csharp
 Console.WriteLine (m.Groups[0]);   // 206-465-1918
@@ -635,10 +635,10 @@ foreach (Match m in Regex.Matches ("pop pope peep", @"\b(\w)\w+\1\b"))
   Console.Write (m + " ");  // pop peep
 ```
 
-🔎 پرانتزهای اطراف `\w` به موتور Regular Expressions می‌گویند که این زیربخش (در اینجا یک حرف) را در یک گروه ذخیره کند تا بعداً استفاده شود.
+ پرانتزهای اطراف `\w` به موتور Regular Expressions می‌گویند که این زیربخش (در اینجا یک حرف) را در یک گروه ذخیره کند تا بعداً استفاده شود.
 ما بعداً با `\1` به آن گروه اشاره می‌کنیم، یعنی گروه اول در عبارت.
 
-## 🏷 Named Groups (گروه‌های نام‌گذاری‌شده)
+## Named Groups (گروه‌های نام‌گذاری‌شده)
 
 در یک عبارت طولانی یا پیچیده، کار با گروه‌ها با **نام** به جای اندیس می‌تواند راحت‌تر باشد.
 در مثال زیر، نسخه‌ی قبلی با یک گروه به نام `'letter'` بازنویسی شده است:
@@ -682,11 +682,11 @@ Console.WriteLine (m.Groups ["tag"]);          // h1
 Console.WriteLine (m.Groups ["text"]);         // hello
 ```
 
-📌 توجه: تطبیق تمام حالات ممکن در ساختار XML، مانند عناصر تو در تو، پیچیده‌تر است. موتور Regular Expressions در .NET از ویژگی پیشرفته‌ای به نام **matched balanced constructs** پشتیبانی می‌کند که می‌تواند در این موارد کمک کند.
+ توجه: تطبیق تمام حالات ممکن در ساختار XML، مانند عناصر تو در تو، پیچیده‌تر است. موتور Regular Expressions در .NET از ویژگی پیشرفته‌ای به نام **matched balanced constructs** پشتیبانی می‌کند که می‌تواند در این موارد کمک کند.
 
 ---
 
-## 🔄 Replacing and Splitting Text (جایگزینی و تقسیم متن)
+## Replacing and Splitting Text (جایگزینی و تقسیم متن)
 
 ### جایگزینی متن
 
@@ -700,7 +700,7 @@ string replace = "dog";
 Console.WriteLine (Regex.Replace ("catapult the cat", find, replace));
 ```
 
-📤 خروجی:
+ خروجی:
 
 ```
 catapult the dog
@@ -715,13 +715,13 @@ string text = "10 plus 20 makes 30";
 Console.WriteLine (Regex.Replace (text, @"\d+", @"<$0>"));
 ```
 
-📤 خروجی:
+ خروجی:
 
 ```
 <10> plus <20> makes <30>
 ```
 
-🔹 می‌توان به گروه‌های گرفته‌شده با `$1, $2, $3` یا `${name}` برای گروه‌های نام‌گذاری‌شده دسترسی داشت.
+ می‌توان به گروه‌های گرفته‌شده با `$1, $2, $3` یا `${name}` برای گروه‌های نام‌گذاری‌شده دسترسی داشت.
 
 مثال قبل با XML ساده را می‌توان با جابه‌جایی گروه‌ها جایگزین کرد تا محتوای عنصر به یک **attribute** منتقل شود:
 
@@ -735,7 +735,7 @@ string regReplace =
 Console.Write (Regex.Replace ("<msg>hello</msg>", regFind, regReplace));
 ```
 
-📤 خروجی:
+ خروجی:
 
 ```
 <msg value="hello"/>
@@ -752,7 +752,7 @@ Console.WriteLine (Regex.Replace ("5 is less than 10", @"\d+",
                    m => (int.Parse (m.Value) * 10).ToString()) );
 ```
 
-📤 خروجی:
+ خروجی:
 
 ```
 50 is less than 100
@@ -782,7 +782,7 @@ foreach (string s in Regex.Split ("oneTwoThree", @"(?=[A-Z])"))
 
 ---
 
-## 📖 Cookbook Regular Expressions (دستورالعمل‌ها)
+## Cookbook Regular Expressions (دستورالعمل‌ها)
 
 ### تطبیق شماره SSN / شماره تلفن آمریکا
 
@@ -799,7 +799,7 @@ Console.WriteLine (Regex.IsMatch ("123-456-7890",   phone));   // True
 Console.WriteLine (Regex.IsMatch ("(123) 456-7890", phone));   // True
 ```
 
-## 🔹 استخراج زوج‌های "name = value" (یک مورد در هر خط)
+## استخراج زوج‌های "name = value" (یک مورد در هر خط)
 
 توجه داشته باشید که این مثال با **multiline directive** شروع می‌شود:
 
@@ -814,7 +814,7 @@ foreach (Match m in Regex.Matches (text, r))
   Console.WriteLine (m.Groups["name"] + " is " + m.Groups["value"]);
 ```
 
-📤 خروجی:
+ خروجی:
 
 ```
 id is 3
@@ -824,7 +824,7 @@ timeout is 30
 
 ---
 
-## 🔐 اعتبارسنجی پسورد قوی
+## اعتبارسنجی پسورد قوی
 
 این مثال بررسی می‌کند که آیا یک پسورد حداقل **شش کاراکتر** دارد و حداقل یک **عدد، نماد یا علامت نگارشی** شامل می‌شود:
 
@@ -837,7 +837,7 @@ Console.WriteLine (Regex.IsMatch ("ab88yz", r));    // True
 
 ---
 
-## 📏 خطوط حداقل ۸۰ کاراکتری
+## خطوط حداقل ۸۰ کاراکتری
 
 ```csharp
 string r = @"(?m)^.{80,}(?=\r?$)";
@@ -849,7 +849,7 @@ Console.WriteLine (Regex.Matches (text, r).Count);   // 2
 
 ---
 
-## 📅 تجزیه تاریخ/زمان (N/N/N H:M:S AM/PM)
+## تجزیه تاریخ/زمان (N/N/N H:M:S AM/PM)
 
 این عبارت از فرمت‌های مختلف عددی تاریخ پشتیبانی می‌کند و فرقی نمی‌کند که سال اول باشد یا آخر.
 
@@ -868,7 +868,7 @@ foreach (Group g in Regex.Match (text, r).Groups)
   Console.WriteLine (g.Value + " ");
 ```
 
-📤 خروجی:
+ خروجی:
 
 ```
 01/02/2008 5:20:50 PM 01 02 2008 5 20 50 PM
@@ -878,7 +878,7 @@ foreach (Group g in Regex.Match (text, r).Groups)
 
 ---
 
-## 🏛 تطبیق اعداد رومی
+## تطبیق اعداد رومی
 
 ```csharp
 string r =
@@ -893,7 +893,7 @@ Console.WriteLine (Regex.IsMatch ("MCMLXXXIV", r));   // True
 
 ---
 
-## 🔁 حذف کلمات تکراری
+## حذف کلمات تکراری
 
 در این مثال، یک گروه نامگذاری‌شده به نام `dupe` گرفته می‌شود:
 
@@ -903,7 +903,7 @@ string text = "In the the beginning...";
 Console.WriteLine (Regex.Replace (text, r, "${dupe}"));
 ```
 
-📤 خروجی:
+ خروجی:
 
 ```
 In the beginning
@@ -911,7 +911,7 @@ In the beginning
 
 ---
 
-## 🔢 شمارش کلمات
+## شمارش کلمات
 
 ```csharp
 string r = @"\b(\w|[-'])+\b";
@@ -921,7 +921,7 @@ Console.WriteLine (Regex.Matches (text, r).Count);   // 5
 
 ---
 
-## 🧩 تطبیق GUID
+## تطبیق GUID
 
 ```csharp
 string r =
@@ -939,7 +939,7 @@ Console.WriteLine (Regex.Match (text, r).Index);                    // 12
 
 ---
 
-## 🏷 تجزیه تگ XML/HTML
+## تجزیه تگ XML/HTML
 
 عبارت منظم می‌تواند برای تجزیه **HTML fragments** مفید باشد، مخصوصاً وقتی سند ناقص باشد:
 
@@ -957,7 +957,7 @@ Console.WriteLine (m.Groups ["text"]);      // hello
 
 ---
 
-## 🐫 تقسیم کلمات CamelCase
+## تقسیم کلمات CamelCase
 
 برای شامل کردن جداکننده‌های بزرگ، نیاز به **positive lookahead** داریم:
 
@@ -969,7 +969,7 @@ foreach (string s in Regex.Split ("oneTwoThree", r))
 
 ---
 
-## 🗂 به‌دست آوردن نام فایل معتبر
+## به‌دست آوردن نام فایل معتبر
 
 ```csharp
 string input = "My \"good\" <recipes>.txt";
@@ -979,7 +979,7 @@ string valid = Regex.Replace (input, "[" + invalidString + "]", "");
 Console.WriteLine (valid);
 ```
 
-📤 خروجی:
+ خروجی:
 
 ```
 My good recipes.txt
@@ -987,7 +987,7 @@ My good recipes.txt
 
 ---
 
-## 🌐 Escape کردن کاراکترهای Unicode برای HTML
+## Escape کردن کاراکترهای Unicode برای HTML
 
 ```csharp
 string htmlFragment = "© 2007";
@@ -996,7 +996,7 @@ string result = Regex.Replace (htmlFragment, @"[\u0080-\uFFFF]",
 Console.WriteLine (result);        // &#169; 2007
 ```
 
-## 🔓 تبدیل کاراکترهای Escape شده در یک **HTTP query string**
+## تبدیل کاراکترهای Escape شده در یک **HTTP query string**
 
 ```csharp
 string sample = "C%23 rocks";
@@ -1011,7 +1011,7 @@ Console.WriteLine (result);   // C# rocks
 
 ---
 
-## 🔍 استخراج عبارت‌های جستجوی Google از یک **web stats log**
+## استخراج عبارت‌های جستجوی Google از یک **web stats log**
 
 این مثال معمولاً همراه با نمونه‌ی قبلی استفاده می‌شود تا کاراکترهای Escape شده در **query string** بازگردانده شوند:
 
@@ -1029,7 +1029,7 @@ foreach (string keyword in keywords)
 
 ---
 
-## 📚 مرجع زبان **Regular Expressions**
+## مرجع زبان **Regular Expressions**
 
 جداول **25-2 تا 25-12** دستور زبان و سینتکس **regular expressions** پشتیبانی شده در پیاده‌سازی **.NET** را خلاصه می‌کنند.
  <div align="center">
@@ -1037,7 +1037,7 @@ foreach (string keyword in keywords)
 ![Conventions-UsedThis-Book](../../../assets/image/25/Table-25-4.jpeg)
 </div>
 
-💡 **حالت ویژه**
+ **حالت ویژه**
 
 در یک **regular expression**، `\b` به معنای **word boundary** است، **به جز زمانی که داخل یک مجموعه `[ ]` قرار گیرد**، که در آن صورت `\b` به معنای **کاراکتر backspace** است.
  <div align="center">
@@ -1055,13 +1055,13 @@ foreach (string keyword in keywords)
 ![Conventions-UsedThis-Book](../../../assets/image/25/Table-25-7.jpeg)
 </div>
 
-❓ پسوند `?` می‌تواند به هر یک از **quantifierها** اعمال شود تا آن‌ها را **lazy** کند، به جای اینکه **greedy** باشند.
+ پسوند `?` می‌تواند به هر یک از **quantifierها** اعمال شود تا آن‌ها را **lazy** کند، به جای اینکه **greedy** باشند.
  <div align="center">
 
 ![Conventions-UsedThis-Book](../../../assets/image/25/Table-25-8.jpeg)
 </div>
 
-🔄 **Substitutions** تنها درون **replacement pattern** مشخص می‌شوند.
+ **Substitutions** تنها درون **replacement pattern** مشخص می‌شوند.
  <div align="center">
 
 ![Conventions-UsedThis-Book](../../../assets/image/25/Table-25-9.jpeg)

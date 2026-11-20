@@ -1,100 +1,26 @@
-
-
-<!doctype html>
-<html lang="fa" dir="rtl">
-<head>
-  <meta charset="utf-8">
-  <link rel="icon" type="image/png" href="/Gitab/favicon.png">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>مدیریت Disposal و Garbage Collection</title>
-  <meta name="description" content="ترجمه‌های فارسی کتاب‌های فنی — سریع، مینیمال و قابل اتکا.">
-
-  <!-- استایل‌ها -->
-  <link rel="stylesheet" href="/Gitab/styles/main.css">
-  <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
-
-  <style>
-  @font-face {
-    font-family: 'Vazir';
-    src: url('/Gitab/fonts/Vazir-FD-WOL.ttf') format('truetype');
-    font-display: swap;
-  }
-  @font-face {
-    font-family: "Lalezar";
-    src: url('fonts/Lalezar.ttf') format('truetype');
-    font-display: swap;
-}
-  body {
-    font-family: 'Vazir', sans-serif;
-  }
-  </style>
-</head>
-
-<body>
-  <!-- هدر مشترک -->
-  <header class="header">
-    <div class="container nav-wrap">
-      <a href="/Gitab/" class="brand">
-        <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="26" height="26">
-        <span>Gitab</span>
-      </a>
-
-       <nav class="nav">
-         <a href="/Gitab/" >خانه</a>
-         <a href="/Gitab/books/list-books" >کتاب‌ها</a>
-         <a href="/Gitab/giter.html" >دوره ها</a>
-          <!-- 
-         <a href="/Gitab/translator.html" >مترجمین</a>
-           -->
-       </nav>
-
-      <div class="nav-actions">
-        <button id="themeToggle" class="icon-btn theme-btn" data-icon="moon" aria-label="تغییر تم">
-          <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن">
-          <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک">
-        </button>
-
-        <a class="icon-btn" href="https://github.com/hheydarian/Gitab" target="_blank" title="GitHub">
-          <img src="/Gitab/icone/github.svg" alt="GitHub">
-        </a>
-
-        <!-- دکمه منو برای موبایل -->
-        <button class="menu-toggle" aria-label="منو">
-          <img src="/Gitab/icone/menu.svg" alt="menu">
-        </button>
-      </div>
-    </div>
-  </header>
-
-  
-  <main class="site-main book-page">
-    <h1>فصل دوازدهم: مدیریت Disposal و Garbage Collection</h1>
-<p>برخی از اشیاء نیازمند کدهای مخصوص برای <strong>جمع‌کردن (tear-down)</strong> هستند تا منابعی مثل فایل‌های باز، قفل‌ها (locks)، هندل‌های سیستم‌عامل و اشیاء <strong>unmanaged</strong> آزاد بشن. در اصطلاح دات‌نت، به این کار <strong>Disposal</strong> گفته می‌شه و از طریق اینترفیس <strong>IDisposable</strong> پشتیبانی می‌شه.</p>
-<p>همچنین حافظه مدیریت‌شده (Managed Memory) که توسط اشیاء استفاده‌نشده اشغال شده، باید در یک نقطه آزاد بشه. این کار <strong>Garbage Collection</strong> نام داره و توسط <strong>CLR</strong> انجام می‌شه.</p>
-<p>تفاوت Disposal و Garbage Collection در اینه که:</p>
-<ul>
-<li><strong>Disposal</strong> معمولاً به‌صورت صریح و توسط برنامه‌نویس انجام می‌شه. 🧑‍💻</li>
-<li><strong>Garbage Collection</strong> کاملاً خودکار هست و توسط CLR مدیریت می‌شه. ⚙️</li>
-</ul>
-<p>به عبارت دیگه، آزاد کردن چیزهایی مثل <strong>file handles</strong>، <strong>locks</strong> و منابع سیستم‌عامل بر عهده‌ی برنامه‌نویس هست، در حالی که آزادسازی حافظه رو CLR به‌طور خودکار انجام می‌ده.</p>
-<p>این فصل به هر دو موضوع <strong>Disposal</strong> و <strong>Garbage Collection</strong> می‌پردازه و همچنین <strong>Finalizer</strong>‌های سی‌شارپ و الگوی (Pattern) مرتبط رو توضیح می‌ده که می‌تونن نقش پشتیبان برای Disposal داشته باشن. در نهایت، به جزئیات <strong>Garbage Collector</strong> و سایر گزینه‌های مدیریت حافظه خواهیم پرداخت.</p>
-<hr>
-<h2>♻️ IDisposable، Dispose و Close</h2>
-<p>دات‌نت یک اینترفیس خاص برای تایپ‌هایی که نیازمند متد tear-down هستن تعریف کرده:</p>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title">IDisposable</span>
+<!doctype html><html lang="fa" dir="rtl"> <head><script>
+    if (window.location.pathname.startsWith('/gitab/')) {
+      window.location.replace(window.location.pathname.replace(/^\/gitab\//i, '/Gitab/') + window.location.search + window.location.hash);
+    }
+    (() => {
+      try {
+        const t = localStorage.getItem('gitab-theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', t);
+        document.documentElement.dataset.colorMode = t;
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        document.documentElement.dataset.colorMode = 'dark';
+      }
+    })();
+  </script> <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5"> <title>مدیریت Disposal و Garbage Collection</title><meta name="description" content="مدیریت Disposal و Garbage Collection — مطالعه آنلاین و رایگان از کتاب «سی‌شارپ ۱۲ در یک نگاه» (C# 12 in a Nutshell) اثر Joseph Albahari با ترجمه حامد حیدریان در گیتاب."> <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"><meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"> <meta name="theme-color" content="#090d16"><meta name="referrer" content="strict-origin-when-cross-origin"> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https:; frame-src https://www.youtube.com https://www.youtube-nocookie.com https://maps.google.com https://www.google.com; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self';"><link rel="icon" type="image/png" href="/Gitab/favicon.png"> <link rel="canonical" href="https://hheydarian.github.io/Gitab/books/book1/Book/12/Disposal-and-Garbage-Collection/"><link rel="alternate" hreflang="fa" href="https://hheydarian.github.io/Gitab/books/book1/Book/12/Disposal-and-Garbage-Collection/"> <link rel="alternate" hreflang="x-default" href="https://hheydarian.github.io/Gitab/books/book1/Book/12/Disposal-and-Garbage-Collection/"><link rel="alternate" type="text/plain" title="LLMs.txt" href="/Gitab/llms.txt"> <link rel="sitemap" type="application/xml" title="Sitemap" href="/Gitab/sitemap.xml"><meta property="og:locale" content="fa_IR"> <meta property="og:type" content="article"><meta property="og:site_name" content="گیتاب | Gitab"> <meta property="og:title" content="مدیریت Disposal و Garbage Collection"><meta property="og:description" content="مدیریت Disposal و Garbage Collection — مطالعه آنلاین و رایگان از کتاب «سی‌شارپ ۱۲ در یک نگاه» (C# 12 in a Nutshell) اثر Joseph Albahari با ترجمه حامد حیدریان در گیتاب."> <meta property="og:url" content="https://hheydarian.github.io/Gitab/books/book1/Book/12/Disposal-and-Garbage-Collection/"><meta property="og:image" content="https://hheydarian.github.io/Gitab/images/csharp-12/Cover.jpg"> <meta property="og:image:alt" content="مدیریت Disposal و Garbage Collection"><meta name="twitter:card" content="summary_large_image"> <meta name="twitter:title" content="مدیریت Disposal و Garbage Collection"><meta name="twitter:description" content="مدیریت Disposal و Garbage Collection — مطالعه آنلاین و رایگان از کتاب «سی‌شارپ ۱۲ در یک نگاه» (C# 12 in a Nutshell) اثر Joseph Albahari با ترجمه حامد حیدریان در گیتاب."> <meta name="twitter:image" content="https://hheydarian.github.io/Gitab/images/csharp-12/Cover.jpg"><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://hheydarian.github.io/Gitab/#organization","name":"گیتاب | Gitab","alternateName":"Gitab","url":"https://hheydarian.github.io/Gitab/","logo":{"@type":"ImageObject","url":"https://hheydarian.github.io/Gitab/favicon.png"},"sameAs":["https://github.com/hheydarian/Gitab"]},{"@type":"WebSite","@id":"https://hheydarian.github.io/Gitab/#website","url":"https://hheydarian.github.io/Gitab/","name":"گیتاب | Gitab","inLanguage":"fa-IR","publisher":{"@id":"https://hheydarian.github.io/Gitab/#organization"},"potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://hheydarian.github.io/Gitab/books/list-books/?q={search_term_string}"},"query-input":"required name=search_term_string"}},{"@type":"WebPage","@id":"https://hheydarian.github.io/Gitab/books/book1/Book/12/Disposal-and-Garbage-Collection/#webpage","url":"https://hheydarian.github.io/Gitab/books/book1/Book/12/Disposal-and-Garbage-Collection/","name":"مدیریت Disposal و Garbage Collection","description":"مدیریت Disposal و Garbage Collection — مطالعه آنلاین و رایگان از کتاب «سی‌شارپ ۱۲ در یک نگاه» (C# 12 in a Nutshell) اثر Joseph Albahari با ترجمه حامد حیدریان در گیتاب.","inLanguage":"fa-IR","isPartOf":{"@id":"https://hheydarian.github.io/Gitab/#website"}},{"@type":"TechArticle","headline":"مدیریت Disposal و Garbage Collection","description":"مدیریت Disposal و Garbage Collection — مطالعه آنلاین و رایگان از کتاب «سی‌شارپ ۱۲ در یک نگاه» (C# 12 in a Nutshell) اثر Joseph Albahari با ترجمه حامد حیدریان در گیتاب.","url":"https://hheydarian.github.io/Gitab/books/book1/Book/12/Disposal-and-Garbage-Collection/","inLanguage":"fa-IR","isAccessibleForFree":true,"author":{"@type":"Person","name":"Joseph Albahari"},"translator":{"@type":"Person","name":"حامد حیدریان"},"isPartOf":{"@type":"Book","name":"سی‌شارپ ۱۲ در یک نگاه","alternateName":"C# 12 in a Nutshell","url":"https://hheydarian.github.io/Gitab/books/book1/"}}]}</script> <link rel="preload" href="/Gitab/fonts/Vazirmatn.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/Gitab/styles/main.css?v=2.4" as="style"> <link rel="preload" href="/Gitab/styles/gitab-modern.css?v=2.5" as="style"><style>@font-face{font-family:'Lalezar';src:url('/Gitab/fonts/Lalezar.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}@font-face{font-family:'Vazirmatn';src:url('/Gitab/fonts/Vazirmatn.woff2') format('woff2');font-weight:100 900;font-style:normal;font-display:swap}html,body,button,input,optgroup,select,textarea,.filter-pill{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}input::placeholder,textarea::placeholder{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}</style> <link rel="stylesheet" href="/Gitab/styles/main.css?v=2.4"><link rel="stylesheet" href="/Gitab/styles/gitab-modern.css?v=2.5"> <link rel="stylesheet" href="/Gitab/styles/vendor/github-dark.min.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="/Gitab/styles/vendor/github-dark.min.css"></noscript></head> <body><header class="header"> <div class="container nav-wrap"><a href="/Gitab/" class="brand" aria-label="صفحه اصلی گیتاب"> <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="30" height="30" decoding="async"> <span class="brand-text">Gitab</span> </a> <nav class="nav" id="mainNav"><a href="/Gitab/" >خانه</a> <a href="/Gitab/books/list-books" aria-current="page">کتاب‌ها</a> <a href="/Gitab/courses/" >دوره‌ها</a> <a href="/Gitab/translator.html" >مترجمین</a></nav> <div class="nav-actions"><button id="themeToggle" class="theme-toggle-btn" aria-label="تغییر تم" title="تغییر تم"> <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن" width="18" height="18" decoding="async" style="display:none"> <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک" width="18" height="18" decoding="async"> </button> <a class="btn-github-pill" href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" title="مشاهده سورس گیتاب در گیت‌هاب"> <img src="/Gitab/icone/github.svg" alt="GitHub" width="16" height="16" decoding="async"> <span>گیت‌هاب</span> </a> <button class="mobile-menu-btn" id="mobileMenuBtn" type="button" aria-label="باز کردن منو" aria-expanded="false"> <svg class="mob-icon-open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="4" y1="7" x2="20" y2="7"></line> <line x1="4" y1="12" x2="20" y2="12"></line> <line x1="4" y1="17" x2="14" y2="17"></line> </svg> <svg class="mob-icon-close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="18" y1="6" x2="6" y2="18"></line> <line x1="6" y1="6" x2="18" y2="18"></line> </svg> </button></div> </div><div class="mobile-drawer" id="mobileDrawer" aria-hidden="true"> <div class="mobile-drawer-inner"><div class="mobile-drawer-section-label">ناوبری سریع</div><nav class="mobile-drawer-links" aria-label="منوی موبایل"> <a href="/Gitab/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M3 10.5 12 3l9 7.5"></path> <path d="M5 9.5V20a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V9.5"></path> </svg> </span> <span class="mob-nav-text">صفحه نخست</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/books/list-books" class="mobile-drawer-link active" aria-current="page"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path> </svg> </span> <span class="mob-nav-text">کتابخانه و فهرست کتاب‌ها</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/courses/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path> <path d="M6 12v5c3 3 9 3 12 0v-5"></path> </svg> </span> <span class="mob-nav-text">دوره‌های آموزشی</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/translator.html" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path> <circle cx="9" cy="7" r="4"></circle> <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path> <path d="M16 3.13a4 4 0 0 1 0 7.75"></path> </svg> </span> <span class="mob-nav-text">مترجمین و همکاران</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> </nav><div class="mobile-drawer-divider"></div><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" class="mobile-drawer-link mobile-drawer-gh"> <span class="mob-nav-icon" aria-hidden="true"> <img src="/Gitab/icone/github.svg" alt="" width="17" height="17" loading="lazy" decoding="async"> </span> <span class="mob-nav-text">مخزن گیت‌هاب پروژه</span> <span class="mob-nav-ext" aria-hidden="true">↗</span> </a> </div></div> </header><div class="reading-progress-track"> <div class="reading-progress-fill" id="readingProgressBar"></div></div> <main class="site-main chapter-reading-page"><div class="chapter-page-wrapper"> <nav class="chapter-clean-breadcrumb" aria-label="مسیر راهنما" dir="rtl"><a href="/Gitab/">خانه</a> <span class="bc-sep" aria-hidden="true">/</span> <a href="/Gitab/books/list-books/">کتاب‌ها</a> <span class="bc-sep" aria-hidden="true">/</span> <a href="/Gitab/books/book1/"><bdi>سی‌شارپ ۱۲ در یک نگاه</bdi></a> <span class="bc-sep" aria-hidden="true">/</span> <span class="bc-current-leaf"><bdi>مدیریت Disposal و Garbage Collection</bdi></span></nav> <article class="chapter-prose-container markdown-body" id="chapterArticle" dir="rtl"><h1>فصل دوازدهم: مدیریت Disposal و Garbage Collection</h1><p>برخی از اشیاء نیازمند کدهای مخصوص برای <strong>جمع‌کردن (tear-down)</strong> هستند تا منابعی مثل فایل‌های باز، قفل‌ها (locks)، هندل‌های سیستم‌عامل و اشیاء <strong>unmanaged</strong> آزاد بشن. در اصطلاح دات‌نت، به این کار <strong>Disposal</strong> گفته می‌شه و از طریق اینترفیس <strong>IDisposable</strong> پشتیبانی می‌شه.</p><p>همچنین حافظه مدیریت‌شده (Managed Memory) که توسط اشیاء استفاده‌نشده اشغال شده، باید در یک نقطه آزاد بشه. این کار <strong>Garbage Collection</strong> نام داره و توسط <strong>CLR</strong> انجام می‌شه.</p><p>تفاوت Disposal و Garbage Collection در اینه که:</p><ul> <li><strong>Disposal</strong> معمولاً به‌صورت صریح و توسط برنامه‌نویس انجام می‌شه. ‍</li><li><strong>Garbage Collection</strong> کاملاً خودکار هست و توسط CLR مدیریت می‌شه.</li></ul> <p>به عبارت دیگه، آزاد کردن چیزهایی مثل <strong>file handles</strong>، <strong>locks</strong> و منابع سیستم‌عامل بر عهده‌ی برنامه‌نویس هست، در حالی که آزادسازی حافظه رو CLR به‌طور خودکار انجام می‌ده.</p><p>این فصل به هر دو موضوع <strong>Disposal</strong> و <strong>Garbage Collection</strong> می‌پردازه و همچنین <strong>Finalizer</strong>‌های سی‌شارپ و الگوی (Pattern) مرتبط رو توضیح می‌ده که می‌تونن نقش پشتیبان برای Disposal داشته باشن. در نهایت، به جزئیات <strong>Garbage Collector</strong> و سایر گزینه‌های مدیریت حافظه خواهیم پرداخت.</p><hr> <h2>IDisposable، Dispose و Close</h2><p>دات‌نت یک اینترفیس خاص برای تایپ‌هایی که نیازمند متد tear-down هستن تعریف کرده:</p><pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title">IDisposable</span>
 {
   <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Dispose</span>()</span>;
 }
-</code></pre>
-<p>سی‌شارپ دستور <strong>using</strong> رو به‌عنوان یک میان‌بُر نحوی (syntactic shortcut) فراهم کرده تا به‌صورت خودکار متد <strong>Dispose</strong> روی اشیائی که از <strong>IDisposable</strong> پیروی می‌کنن فراخوانی بشه. این کار در پشت‌صحنه با استفاده از یک بلاک <strong>try/finally</strong> انجام می‌شه:</p>
-<pre class="hljs"><code><span class="hljs-keyword">using</span> (FileStream fs = <span class="hljs-keyword">new</span> FileStream(<span class="hljs-string">&quot;myFile.txt&quot;</span>, FileMode.Open))
+</code></pre> <p>سی‌شارپ دستور <strong>using</strong> رو به‌عنوان یک میان‌بُر نحوی (syntactic shortcut) فراهم کرده تا به‌صورت خودکار متد <strong>Dispose</strong> روی اشیائی که از <strong>IDisposable</strong> پیروی می‌کنن فراخوانی بشه. این کار در پشت‌صحنه با استفاده از یک بلاک <strong>try/finally</strong> انجام می‌شه:</p><pre class="hljs"><code><span class="hljs-keyword">using</span> (FileStream fs = <span class="hljs-keyword">new</span> FileStream(<span class="hljs-string">&quot;myFile.txt&quot;</span>, FileMode.Open))
 {
   <span class="hljs-comment">// ... Write to the file ...</span>
 }
-</code></pre>
-<p>کامپایلر این رو به کد زیر تبدیل می‌کنه:</p>
-<pre class="hljs"><code>FileStream fs = <span class="hljs-keyword">new</span> FileStream(<span class="hljs-string">&quot;myFile.txt&quot;</span>, FileMode.Open);
+</code></pre> <p>کامپایلر این رو به کد زیر تبدیل می‌کنه:</p><pre class="hljs"><code>FileStream fs = <span class="hljs-keyword">new</span> FileStream(<span class="hljs-string">&quot;myFile.txt&quot;</span>, FileMode.Open);
 <span class="hljs-keyword">try</span>
 {
   <span class="hljs-comment">// ... Write to the file ...</span>
@@ -103,14 +29,9 @@
 {
   <span class="hljs-keyword">if</span> (fs != <span class="hljs-literal">null</span>) ((IDisposable)fs).Dispose();
 }
-</code></pre>
-<p>بلاک <strong>finally</strong> تضمین می‌کنه که متد <strong>Dispose</strong> حتی در صورتی که <strong>Exception</strong> رخ بده یا کد زودتر از بلاک خارج بشه، حتماً فراخوانی بشه.</p>
-<p>به‌طور مشابه، نوشتن کد به شکل زیر تضمین می‌کنه که <strong>Dispose</strong> به‌محض خروج <strong>fs</strong> از محدوده‌ی (scope) خودش انجام بشه:</p>
-<pre class="hljs"><code><span class="hljs-keyword">using</span> FileStream fs = <span class="hljs-keyword">new</span> FileStream(<span class="hljs-string">&quot;myFile.txt&quot;</span>, FileMode.Open);
+</code></pre> <p>بلاک <strong>finally</strong> تضمین می‌کنه که متد <strong>Dispose</strong> حتی در صورتی که <strong>Exception</strong> رخ بده یا کد زودتر از بلاک خارج بشه، حتماً فراخوانی بشه.</p><p>به‌طور مشابه، نوشتن کد به شکل زیر تضمین می‌کنه که <strong>Dispose</strong> به‌محض خروج <strong>fs</strong> از محدوده‌ی (scope) خودش انجام بشه:</p><pre class="hljs"><code><span class="hljs-keyword">using</span> FileStream fs = <span class="hljs-keyword">new</span> FileStream(<span class="hljs-string">&quot;myFile.txt&quot;</span>, FileMode.Open);
 <span class="hljs-comment">// ... Write to the file ...</span>
-</code></pre>
-<p>در سناریوهای ساده، نوشتن یک تایپ disposable فقط نیازمند پیاده‌سازی <strong>IDisposable</strong> و نوشتن متد <strong>Dispose</strong> هست:</p>
-<pre class="hljs"><code><span class="hljs-keyword">sealed</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Demo</span> : <span class="hljs-title">IDisposable</span>
+</code></pre> <p>در سناریوهای ساده، نوشتن یک تایپ disposable فقط نیازمند پیاده‌سازی <strong>IDisposable</strong> و نوشتن متد <strong>Dispose</strong> هست:</p><pre class="hljs"><code><span class="hljs-keyword">sealed</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Demo</span> : <span class="hljs-title">IDisposable</span>
 {
   <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Dispose</span>()</span>
   {
@@ -118,100 +39,8 @@
     ...
   }
 }
-</code></pre>
-<p>این الگو برای موارد ساده و کلاس‌های <strong>sealed</strong> (غیرقابل ارث‌بری) خیلی خوب عمل می‌کنه. در بخش «Calling Dispose from a Finalizer» (صفحه ۵۹۰) یک الگوی پیشرفته‌تر توضیح داده می‌شه که می‌تونه برای مصرف‌کنندگانی که <strong>Dispose</strong> رو فراموش می‌کنن، نقش پشتیبان داشته باشه.</p>
-<p>برای تایپ‌های <strong>unsealed</strong> (قابل ارث‌بری)، بهتره از همون ابتدا از این الگوی پیشرفته‌تر پیروی بشه، چون در غیر این صورت اگه زیرکلاس بخواد چنین قابلیتی اضافه کنه، اوضاع خیلی پیچیده می‌شه.</p>
-<hr>
-<h2>📏 قوانین استاندارد Disposal</h2>
-<p>دات‌نت یک مجموعه‌ی غیررسمی (de facto) از قوانین برای منطق Disposal داره. این قوانین مستقیماً در دات‌نت یا زبان C# کدنویسی نشدن، اما هدف‌شون ایجاد یک <strong>پروتکل سازگار برای مصرف‌کنندگان</strong> هست. قوانین عبارت‌اند از:</p>
-<p>۱. بعد از اینکه یک شیء Dispose شد، دیگه قابل استفاده نیست. نمی‌شه دوباره فعالش کرد و هرگونه فراخوانی متد یا property (به‌جز <strong>Dispose</strong>) باعث پرتاب شدن <strong>ObjectDisposedException</strong> می‌شه.<br>
-۲. فراخوانی چندباره‌ی متد <strong>Dispose</strong> روی یک شیء هیچ خطایی ایجاد نمی‌کنه.<br>
-۳. اگر یک شیء disposable به‌نام <strong>x</strong> مالک یک شیء disposable دیگه به‌نام <strong>y</strong> باشه، متد <strong>Dispose</strong> شیء <strong>x</strong> به‌طور خودکار متد <strong>Dispose</strong> شیء <strong>y</strong> رو فراخوانی می‌کنه—مگر اینکه خلاف این موضوع مشخص شده باشه.</p>
-<p>این قوانین هنگام نوشتن تایپ‌های جدید هم مفید هستن، هرچند <strong>اجباری</strong> نیستن. چیزی جلوی شما رو برای نوشتن متدی مثل «Undispose» نمی‌گیره—البته احتمالاً با واکنش منفی همکارانتون روبه‌رو خواهید شد! 😅</p>
-<p>طبق قانون سوم، یک <strong>container object</strong> به‌طور خودکار اشیاء فرزند خودش رو Dispose می‌کنه.</p>
-<ul>
-<li>مثال خوب این موضوع کنترل‌های کانتینر در <strong>Windows Forms</strong> مثل <strong>Form</strong> یا <strong>Panel</strong> هستن. وقتی این کنترل‌ها بسته یا Dispose می‌شن، همه‌ی کنترل‌های فرزند هم به‌طور خودکار Dispose می‌شن.</li>
-<li>مثال دیگه، زمانی هست که یک <strong>FileStream</strong> رو داخل یک <strong>DeflateStream</strong> می‌پیچیم. Dispose کردن <strong>DeflateStream</strong> به‌طور خودکار <strong>FileStream</strong> رو هم Dispose می‌کنه—مگر اینکه خلاف این موضوع در سازنده (constructor) مشخص شده باشه.</li>
-</ul>
-<hr>
-<h2>🔒 Close و Stop</h2>
-<p>برخی تایپ‌ها علاوه بر متد <strong>Dispose</strong>، متدی به‌نام <strong>Close</strong> هم دارن. کتابخانه‌ی اصلی دات‌نت (BCL) در مورد معنای دقیق متد Close کاملاً سازگار نیست، اما تقریباً همیشه یکی از این دو حالت هست:</p>
-<ul>
-<li>از نظر کارکردی کاملاً برابر با <strong>Dispose</strong>.</li>
-<li>زیرمجموعه‌ای از کارکرد <strong>Dispose</strong>.</li>
-</ul>
-<p>مثال حالت دوم <strong>IDbConnection</strong> هست:</p>
-<ul>
-<li>یک connection که بسته (Closed) شده می‌تونه دوباره باز بشه (Re-Opened).</li>
-<li>اما connection که Dispose شده باشه دیگه نمی‌تونه.</li>
-</ul>
-<p>مثال دیگه یک <strong>Windows Form</strong> هست که با <strong>ShowDialog</strong> فعال شده:</p>
-<ul>
-<li>فراخوانی <strong>Close</strong> فقط فرم رو مخفی می‌کنه.</li>
-<li>اما فراخوانی <strong>Dispose</strong> منابعش رو هم آزاد می‌کنه.</li>
-</ul>
-<p>برخی کلاس‌ها متدی به‌نام <strong>Stop</strong> تعریف کردن (مثل <strong>Timer</strong> یا <strong>HttpListener</strong>).</p>
-<ul>
-<li>متد <strong>Stop</strong> ممکنه مثل <strong>Dispose</strong> منابع unmanaged رو آزاد کنه،</li>
-<li>اما بر خلاف Dispose، اجازه‌ی <strong>شروع مجدد (Restarting)</strong> رو می‌ده.</li>
-</ul>
-<h2>🗑️ چه زمانی باید Dispose کنیم؟</h2>
-<p>یک قانون امن (در تقریباً همه‌ی موارد) اینه که:<br>
-👉 <strong>«اگر شک داری، Dispose کن.»</strong></p>
-<p>اشیائی که یک <strong>unmanaged resource handle</strong> رو در خودشون نگه می‌دارن، تقریباً همیشه نیازمند Dispose هستن تا اون هندل آزاد بشه. نمونه‌ها شامل:</p>
-<ul>
-<li><strong>File یا Network Stream</strong>‌ها</li>
-<li><strong>Network Socket</strong>‌ها</li>
-<li>کنترل‌های <strong>Windows Forms</strong></li>
-<li>ابزارهای <strong>GDI+</strong> مثل <strong>pen</strong>، <strong>brush</strong> و <strong>bitmap</strong></li>
-</ul>
-<p>از طرف دیگه، اگه یک تایپ <strong>disposable</strong> باشه، معمولاً (اما نه همیشه) به‌طور مستقیم یا غیرمستقیم یک <strong>unmanaged handle</strong> رو مرجع‌دهی می‌کنه. دلیلش اینه که unmanaged handleها دروازه‌ای به «دنیای بیرون» مثل منابع سیستم‌عامل، اتصال‌های شبکه و قفل‌های دیتابیس هستن—راه اصلی‌ای که اشیاء می‌تونن در صورت رها شدن نادرست، بیرون از خودشون دردسر ایجاد کنن. ⚠️</p>
-<hr>
-<h3>📌 سه سناریوی عدم نیاز به Dispose</h3>
-<p>البته سه حالت هست که نباید Dispose انجام بشه:</p>
-<p>۱. زمانی که شما <strong>مالک شیء نیستید</strong>—مثلاً وقتی یک شیء مشترک رو از طریق یک <strong>static field یا property</strong> می‌گیرید.<br>
-۲. زمانی که متد <strong>Dispose</strong> شیء کاری انجام می‌ده که شما نمی‌خواید.<br>
-۳. زمانی که متد <strong>Dispose</strong> برای شیء <strong>اصلاً طراحی نشده</strong> و Dispose کردن اون فقط پیچیدگی غیرضروری به برنامه اضافه می‌کنه.</p>
-<hr>
-<h3>🔵 دسته اول: موارد نادر</h3>
-<p>این حالت خیلی کم پیش میاد. نمونه‌های اصلی در فضای نام <strong>System.Drawing</strong> دیده می‌شن:</p>
-<ul>
-<li>اشیاء GDI+ که از طریق <strong>static field یا property</strong> به‌دست میان (مثل <strong>Brushes.Blue</strong>) هرگز نباید Dispose بشن، چون همون نمونه در تمام طول عمر برنامه استفاده می‌شه.</li>
-<li>اما نمونه‌هایی که از طریق <strong>constructor</strong> ساخته می‌شن (مثل <strong>new SolidBrush</strong>) یا نمونه‌هایی که از طریق <strong>static method</strong> مثل <strong>Font.FromHdc</strong> به‌دست میان، باید Dispose بشن.</li>
-</ul>
-<hr>
-<h3>📙 دسته دوم: موارد رایج‌تر</h3>
-<p>این دسته خیلی بیشتر دیده می‌شه. نمونه‌های خوبش در فضای نام‌های <strong><a href="http://System.IO">System.IO</a></strong> و <strong>System.Data</strong> هستن.</p>
-<div align="center">
-<p><img src="../../../assets/image/12/Table-12-1.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<h2>🗑️ MemoryStream و دسته‌ی سوم از عدم نیاز به Dispose</h2>
-<p>متد <strong>Dispose</strong> در کلاس <strong>MemoryStream</strong> فقط شیء رو غیرفعال می‌کنه؛ هیچ عملیات مهمی برای پاک‌سازی انجام نمی‌ده چون MemoryStream هیچ <strong>unmanaged handle</strong> یا منبع مشابهی در اختیار نداره.</p>
-<p>دسته‌ی سوم شامل کلاس‌هایی مثل <strong>StringReader</strong> و <strong>StringWriter</strong> می‌شه. این تایپ‌ها به‌خاطر <strong>base class</strong> خودشون disposable هستن، نه به این دلیل که واقعاً نیازمند پاک‌سازی حیاتی باشن.</p>
-<ul>
-<li>اگه چنین شیئی رو فقط داخل یک متد بسازید و ازش استفاده کنید، پیچیدن اون داخل یک بلاک <strong>using</strong> کار سختی نیست.</li>
-<li>اما اگه عمر اون شیء طولانی‌تر باشه، مدیریت اینکه چه زمانی دیگه استفاده نمی‌شه و Dispose کردنش، فقط پیچیدگی غیرضروری به برنامه اضافه می‌کنه.</li>
-</ul>
-<p>در چنین مواردی می‌تونید به‌سادگی <strong>Dispose رو نادیده بگیرید</strong>. البته نادیده گرفتن Dispose گاهی می‌تونه هزینه‌ی کارایی داشته باشه (بخش «Calling Dispose from a Finalizer» صفحه ۵۹۰ رو ببینید).</p>
-<hr>
-<h2>🧹 پاک‌سازی فیلدها در Dispose</h2>
-<p>به‌طور کلی، در متد <strong>Dispose</strong> لازم نیست فیلدهای یک شیء رو پاک کنید. با این حال، یک کار خوب اینه که از <strong>event</strong>‌هایی که شیء در طول عمرش به اون‌ها subscribe کرده، <strong>unsubscribe</strong> کنید (برای نمونه، بخش «Managed Memory Leaks» در صفحه ۶۰۰ رو ببینید).</p>
-<p>این کار باعث می‌شه:</p>
-<ul>
-<li>اعلان‌های ناخواسته دریافت نکنید.</li>
-<li>و جلوی زنده موندن ناخواسته‌ی شیء در نگاه <strong>Garbage Collector (GC)</strong> گرفته بشه.</li>
-</ul>
-<p>خود متد <strong>Dispose</strong> باعث آزادسازی حافظه‌ی مدیریت‌شده (Managed Memory) نمی‌شه—این فقط در زمان <strong>Garbage Collection</strong> اتفاق می‌افته.</p>
-<p>همچنین خوبه یک فیلد قرار بدید تا نشون بده شیء Dispose شده. اینطوری اگه بعداً مصرف‌کننده بخواد روی شیء متدی صدا بزنه، می‌تونید یک <strong>ObjectDisposedException</strong> پرتاب کنید:</p>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-built_in">bool</span> IsDisposed { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">private</span> <span class="hljs-keyword">set</span>; }
-</code></pre>
-<p>علاوه بر این، (هرچند از نظر فنی ضروری نیست) بهتره هندلرهای event داخلی شیء رو هم در متد Dispose پاک کنید (با مقداردهی <strong>null</strong>). این باعث می‌شه اون eventها حین یا بعد از Dispose شدن، اجرا نشن.</p>
-<p>گاهی یک شیء داده‌های محرمانه و حساس مثل کلیدهای رمزنگاری نگه می‌داره. در این حالت منطقیه که اون داده‌ها رو هنگام Dispose پاک کنید (برای جلوگیری از کشف احتمالی توسط سایر پردازه‌ها وقتی حافظه بعداً به سیستم‌عامل بازگردونده می‌شه). کلاس <strong>SymmetricAlgorithm</strong> در فضای نام <strong>System.Security.Cryptography</strong> دقیقاً همین کار رو می‌کنه و روی آرایه‌ی بایتی که کلید رمزنگاری رو نگه می‌داره، متد <strong>Array.Clear</strong> رو صدا می‌زنه.</p>
-<hr>
-<h2>🕹️ Anonymous Disposal</h2>
-<p>گاهی مفیده که <strong>IDisposable</strong> رو پیاده‌سازی کنیم بدون اینکه یک کلاس کامل بنویسیم.</p>
-<p>فرض کنید می‌خواید در یک کلاس، متدهایی برای <strong>suspend</strong> و <strong>resume</strong> کردن پردازش event داشته باشید:</p>
-<pre class="hljs"><code><span class="hljs-keyword">class</span> <span class="hljs-title">Foo</span>
+</code></pre> <p>این الگو برای موارد ساده و کلاس‌های <strong>sealed</strong> (غیرقابل ارث‌بری) خیلی خوب عمل می‌کنه. در بخش «Calling Dispose from a Finalizer» (صفحه ۵۹۰) یک الگوی پیشرفته‌تر توضیح داده می‌شه که می‌تونه برای مصرف‌کنندگانی که <strong>Dispose</strong> رو فراموش می‌کنن، نقش پشتیبان داشته باشه.</p><p>برای تایپ‌های <strong>unsealed</strong> (قابل ارث‌بری)، بهتره از همون ابتدا از این الگوی پیشرفته‌تر پیروی بشه، چون در غیر این صورت اگه زیرکلاس بخواد چنین قابلیتی اضافه کنه، اوضاع خیلی پیچیده می‌شه.</p><hr> <h2>قوانین استاندارد Disposal</h2><p>دات‌نت یک مجموعه‌ی غیررسمی (de facto) از قوانین برای منطق Disposal داره. این قوانین مستقیماً در دات‌نت یا زبان C# کدنویسی نشدن، اما هدف‌شون ایجاد یک <strong>پروتکل سازگار برای مصرف‌کنندگان</strong> هست. قوانین عبارت‌اند از:</p><p>۱. بعد از اینکه یک شیء Dispose شد، دیگه قابل استفاده نیست. نمی‌شه دوباره فعالش کرد و هرگونه فراخوانی متد یا property (به‌جز <strong>Dispose</strong>) باعث پرتاب شدن <strong>ObjectDisposedException</strong> می‌شه.<br> ۲. فراخوانی چندباره‌ی متد <strong>Dispose</strong> روی یک شیء هیچ خطایی ایجاد نمی‌کنه.<br> ۳. اگر یک شیء disposable به‌نام <strong>x</strong> مالک یک شیء disposable دیگه به‌نام <strong>y</strong> باشه، متد <strong>Dispose</strong> شیء <strong>x</strong> به‌طور خودکار متد <strong>Dispose</strong> شیء <strong>y</strong> رو فراخوانی می‌کنه—مگر اینکه خلاف این موضوع مشخص شده باشه.</p><p>این قوانین هنگام نوشتن تایپ‌های جدید هم مفید هستن، هرچند <strong>اجباری</strong> نیستن. چیزی جلوی شما رو برای نوشتن متدی مثل «Undispose» نمی‌گیره—البته احتمالاً با واکنش منفی همکارانتون روبه‌رو خواهید شد!</p><p>طبق قانون سوم، یک <strong>container object</strong> به‌طور خودکار اشیاء فرزند خودش رو Dispose می‌کنه.</p><ul> <li>مثال خوب این موضوع کنترل‌های کانتینر در <strong>Windows Forms</strong> مثل <strong>Form</strong> یا <strong>Panel</strong> هستن. وقتی این کنترل‌ها بسته یا Dispose می‌شن، همه‌ی کنترل‌های فرزند هم به‌طور خودکار Dispose می‌شن.</li><li>مثال دیگه، زمانی هست که یک <strong>FileStream</strong> رو داخل یک <strong>DeflateStream</strong> می‌پیچیم. Dispose کردن <strong>DeflateStream</strong> به‌طور خودکار <strong>FileStream</strong> رو هم Dispose می‌کنه—مگر اینکه خلاف این موضوع در سازنده (constructor) مشخص شده باشه.</li></ul> <hr><h2>Close و Stop</h2><p>برخی تایپ‌ها علاوه بر متد <strong>Dispose</strong>، متدی به‌نام <strong>Close</strong> هم دارن. کتابخانه‌ی اصلی دات‌نت (BCL) در مورد معنای دقیق متد Close کاملاً سازگار نیست، اما تقریباً همیشه یکی از این دو حالت هست:</p><ul> <li>از نظر کارکردی کاملاً برابر با <strong>Dispose</strong>.</li><li>زیرمجموعه‌ای از کارکرد <strong>Dispose</strong>.</li></ul> <p>مثال حالت دوم <strong>IDbConnection</strong> هست:</p><ul> <li>یک connection که بسته (Closed) شده می‌تونه دوباره باز بشه (Re-Opened).</li><li>اما connection که Dispose شده باشه دیگه نمی‌تونه.</li></ul> <p>مثال دیگه یک <strong>Windows Form</strong> هست که با <strong>ShowDialog</strong> فعال شده:</p><ul> <li>فراخوانی <strong>Close</strong> فقط فرم رو مخفی می‌کنه.</li><li>اما فراخوانی <strong>Dispose</strong> منابعش رو هم آزاد می‌کنه.</li></ul> <p>برخی کلاس‌ها متدی به‌نام <strong>Stop</strong> تعریف کردن (مثل <strong>Timer</strong> یا <strong>HttpListener</strong>).</p><ul> <li>متد <strong>Stop</strong> ممکنه مثل <strong>Dispose</strong> منابع unmanaged رو آزاد کنه،</li><li>اما بر خلاف Dispose، اجازه‌ی <strong>شروع مجدد (Restarting)</strong> رو می‌ده.</li></ul> <h2>چه زمانی باید Dispose کنیم؟</h2><p>یک قانون امن (در تقریباً همه‌ی موارد) اینه که:<br><strong>«اگر شک داری، Dispose کن.»</strong></p><p>اشیائی که یک <strong>unmanaged resource handle</strong> رو در خودشون نگه می‌دارن، تقریباً همیشه نیازمند Dispose هستن تا اون هندل آزاد بشه. نمونه‌ها شامل:</p><ul> <li><strong>File یا Network Stream</strong>‌ها</li><li><strong>Network Socket</strong>‌ها</li><li>کنترل‌های <strong>Windows Forms</strong></li><li>ابزارهای <strong>GDI+</strong> مثل <strong>pen</strong>، <strong>brush</strong> و <strong>bitmap</strong></li></ul> <p>از طرف دیگه، اگه یک تایپ <strong>disposable</strong> باشه، معمولاً (اما نه همیشه) به‌طور مستقیم یا غیرمستقیم یک <strong>unmanaged handle</strong> رو مرجع‌دهی می‌کنه. دلیلش اینه که unmanaged handleها دروازه‌ای به «دنیای بیرون» مثل منابع سیستم‌عامل، اتصال‌های شبکه و قفل‌های دیتابیس هستن—راه اصلی‌ای که اشیاء می‌تونن در صورت رها شدن نادرست، بیرون از خودشون دردسر ایجاد کنن.</p><hr> <h3>سه سناریوی عدم نیاز به Dispose</h3><p>البته سه حالت هست که نباید Dispose انجام بشه:</p><p>۱. زمانی که شما <strong>مالک شیء نیستید</strong>—مثلاً وقتی یک شیء مشترک رو از طریق یک <strong>static field یا property</strong> می‌گیرید.<br> ۲. زمانی که متد <strong>Dispose</strong> شیء کاری انجام می‌ده که شما نمی‌خواید.<br> ۳. زمانی که متد <strong>Dispose</strong> برای شیء <strong>اصلاً طراحی نشده</strong> و Dispose کردن اون فقط پیچیدگی غیرضروری به برنامه اضافه می‌کنه.</p><hr> <h3>دسته اول: موارد نادر</h3><p>این حالت خیلی کم پیش میاد. نمونه‌های اصلی در فضای نام <strong>System.Drawing</strong> دیده می‌شن:</p><ul> <li>اشیاء GDI+ که از طریق <strong>static field یا property</strong> به‌دست میان (مثل <strong>Brushes.Blue</strong>) هرگز نباید Dispose بشن، چون همون نمونه در تمام طول عمر برنامه استفاده می‌شه.</li><li>اما نمونه‌هایی که از طریق <strong>constructor</strong> ساخته می‌شن (مثل <strong>new SolidBrush</strong>) یا نمونه‌هایی که از طریق <strong>static method</strong> مثل <strong>Font.FromHdc</strong> به‌دست میان، باید Dispose بشن.</li></ul> <hr><h3>دسته دوم: موارد رایج‌تر</h3><p>این دسته خیلی بیشتر دیده می‌شه. نمونه‌های خوبش در فضای نام‌های <strong><a href="http://System.IO">System.IO</a></strong> و <strong>System.Data</strong> هستن.</p><div align="center"> <p><img src="../../../assets/image/12/Table-12-1.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <h2>MemoryStream و دسته‌ی سوم از عدم نیاز به Dispose</h2><p>متد <strong>Dispose</strong> در کلاس <strong>MemoryStream</strong> فقط شیء رو غیرفعال می‌کنه؛ هیچ عملیات مهمی برای پاک‌سازی انجام نمی‌ده چون MemoryStream هیچ <strong>unmanaged handle</strong> یا منبع مشابهی در اختیار نداره.</p><p>دسته‌ی سوم شامل کلاس‌هایی مثل <strong>StringReader</strong> و <strong>StringWriter</strong> می‌شه. این تایپ‌ها به‌خاطر <strong>base class</strong> خودشون disposable هستن، نه به این دلیل که واقعاً نیازمند پاک‌سازی حیاتی باشن.</p><ul> <li>اگه چنین شیئی رو فقط داخل یک متد بسازید و ازش استفاده کنید، پیچیدن اون داخل یک بلاک <strong>using</strong> کار سختی نیست.</li><li>اما اگه عمر اون شیء طولانی‌تر باشه، مدیریت اینکه چه زمانی دیگه استفاده نمی‌شه و Dispose کردنش، فقط پیچیدگی غیرضروری به برنامه اضافه می‌کنه.</li></ul> <p>در چنین مواردی می‌تونید به‌سادگی <strong>Dispose رو نادیده بگیرید</strong>. البته نادیده گرفتن Dispose گاهی می‌تونه هزینه‌ی کارایی داشته باشه (بخش «Calling Dispose from a Finalizer» صفحه ۵۹۰ رو ببینید).</p><hr> <h2>پاک‌سازی فیلدها در Dispose</h2><p>به‌طور کلی، در متد <strong>Dispose</strong> لازم نیست فیلدهای یک شیء رو پاک کنید. با این حال، یک کار خوب اینه که از <strong>event</strong>‌هایی که شیء در طول عمرش به اون‌ها subscribe کرده، <strong>unsubscribe</strong> کنید (برای نمونه، بخش «Managed Memory Leaks» در صفحه ۶۰۰ رو ببینید).</p><p>این کار باعث می‌شه:</p><ul> <li>اعلان‌های ناخواسته دریافت نکنید.</li><li>و جلوی زنده موندن ناخواسته‌ی شیء در نگاه <strong>Garbage Collector (GC)</strong> گرفته بشه.</li></ul> <p>خود متد <strong>Dispose</strong> باعث آزادسازی حافظه‌ی مدیریت‌شده (Managed Memory) نمی‌شه—این فقط در زمان <strong>Garbage Collection</strong> اتفاق می‌افته.</p><p>همچنین خوبه یک فیلد قرار بدید تا نشون بده شیء Dispose شده. اینطوری اگه بعداً مصرف‌کننده بخواد روی شیء متدی صدا بزنه، می‌تونید یک <strong>ObjectDisposedException</strong> پرتاب کنید:</p><pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-built_in">bool</span> IsDisposed { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">private</span> <span class="hljs-keyword">set</span>; }
+</code></pre> <p>علاوه بر این، (هرچند از نظر فنی ضروری نیست) بهتره هندلرهای event داخلی شیء رو هم در متد Dispose پاک کنید (با مقداردهی <strong>null</strong>). این باعث می‌شه اون eventها حین یا بعد از Dispose شدن، اجرا نشن.</p><p>گاهی یک شیء داده‌های محرمانه و حساس مثل کلیدهای رمزنگاری نگه می‌داره. در این حالت منطقیه که اون داده‌ها رو هنگام Dispose پاک کنید (برای جلوگیری از کشف احتمالی توسط سایر پردازه‌ها وقتی حافظه بعداً به سیستم‌عامل بازگردونده می‌شه). کلاس <strong>SymmetricAlgorithm</strong> در فضای نام <strong>System.Security.Cryptography</strong> دقیقاً همین کار رو می‌کنه و روی آرایه‌ی بایتی که کلید رمزنگاری رو نگه می‌داره، متد <strong>Array.Clear</strong> رو صدا می‌زنه.</p><hr> <h2>Anonymous Disposal</h2><p>گاهی مفیده که <strong>IDisposable</strong> رو پیاده‌سازی کنیم بدون اینکه یک کلاس کامل بنویسیم.</p><p>فرض کنید می‌خواید در یک کلاس، متدهایی برای <strong>suspend</strong> و <strong>resume</strong> کردن پردازش event داشته باشید:</p><pre class="hljs"><code><span class="hljs-keyword">class</span> <span class="hljs-title">Foo</span>
 {
   <span class="hljs-built_in">int</span> _suspendCount;
   <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">SuspendEvents</span>()</span> =&gt; _suspendCount++;           
@@ -223,9 +52,7 @@
   }
   ...
 }
-</code></pre>
-<p>این API دست‌وپاگیر هست چون مصرف‌کننده‌ها باید حتماً <strong>ResumeEvents</strong> رو صدا بزنن. برای مطمئن بودن، باید این کار رو داخل یک بلاک <strong>finally</strong> انجام بدن (در صورتی که Exception رخ بده):</p>
-<pre class="hljs"><code><span class="hljs-keyword">var</span> foo = <span class="hljs-keyword">new</span> Foo();
+</code></pre> <p>این API دست‌وپاگیر هست چون مصرف‌کننده‌ها باید حتماً <strong>ResumeEvents</strong> رو صدا بزنن. برای مطمئن بودن، باید این کار رو داخل یک بلاک <strong>finally</strong> انجام بدن (در صورتی که Exception رخ بده):</p><pre class="hljs"><code><span class="hljs-keyword">var</span> foo = <span class="hljs-keyword">new</span> Foo();
 foo.SuspendEvents();
 <span class="hljs-keyword">try</span>
 {
@@ -235,15 +62,11 @@ foo.SuspendEvents();
 {
   foo.ResumeEvents();   <span class="hljs-comment">// باید حتماً اینجا صدا زده بشه</span>
 }
-</code></pre>
-<p>یک الگوی بهتر اینه که متد <strong>ResumeEvents</strong> رو حذف کنیم و متد <strong>SuspendEvents</strong> یک <strong>IDisposable</strong> برگردونه. مصرف‌کننده‌ها می‌تونن اینطوری استفاده کنن:</p>
-<pre class="hljs"><code><span class="hljs-keyword">using</span> (foo.SuspendEvents())
+</code></pre> <p>یک الگوی بهتر اینه که متد <strong>ResumeEvents</strong> رو حذف کنیم و متد <strong>SuspendEvents</strong> یک <strong>IDisposable</strong> برگردونه. مصرف‌کننده‌ها می‌تونن اینطوری استفاده کنن:</p><pre class="hljs"><code><span class="hljs-keyword">using</span> (foo.SuspendEvents())
 {
   ... <span class="hljs-keyword">do</span> stuff ...
 }
-</code></pre>
-<p>اما مشکل اینجاست که پیاده‌سازی متد <strong>SuspendEvents</strong> برای ما زحمت اضافه درست می‌کنه:</p>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">public</span> IDisposable <span class="hljs-title">SuspendEvents</span>()</span>
+</code></pre> <p>اما مشکل اینجاست که پیاده‌سازی متد <strong>SuspendEvents</strong> برای ما زحمت اضافه درست می‌کنه:</p><pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">public</span> IDisposable <span class="hljs-title">SuspendEvents</span>()</span>
 {
   _suspendCount++;
   <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> SuspendToken(<span class="hljs-keyword">this</span>);
@@ -259,11 +82,7 @@ foo.SuspendEvents();
     _foo = <span class="hljs-literal">null</span>;  <span class="hljs-comment">// جلوگیری از دوبار Dispose شدن</span>
   }
 }
-</code></pre>
-<hr>
-<h3>🪄 الگوی Anonymous Disposal</h3>
-<p>این مشکل با استفاده از یک کلاس <strong>Disposable</strong> قابل استفاده‌ی مجدد حل می‌شه:</p>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Disposable</span> : <span class="hljs-title">IDisposable</span>
+</code></pre> <hr><h3>الگوی Anonymous Disposal</h3><p>این مشکل با استفاده از یک کلاس <strong>Disposable</strong> قابل استفاده‌ی مجدد حل می‌شه:</p><pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Disposable</span> : <span class="hljs-title">IDisposable</span>
 {
   <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Disposable <span class="hljs-title">Create</span>(<span class="hljs-params">Action onDispose</span>)</span>
     =&gt; <span class="hljs-keyword">new</span> Disposable(onDispose);
@@ -275,97 +94,29 @@ foo.SuspendEvents();
     _onDispose = <span class="hljs-literal">null</span>;      <span class="hljs-comment">// جلوگیری از اجرای دوباره</span>
   }
 }
-</code></pre>
-<p>حالا می‌تونیم متد <strong>SuspendEvents</strong> رو به‌شکل زیر ساده کنیم:</p>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">public</span> IDisposable <span class="hljs-title">SuspendEvents</span>()</span>
+</code></pre> <p>حالا می‌تونیم متد <strong>SuspendEvents</strong> رو به‌شکل زیر ساده کنیم:</p><pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">public</span> IDisposable <span class="hljs-title">SuspendEvents</span>()</span>
 {
   _suspendCount++;
   <span class="hljs-keyword">return</span> Disposable.Create(() =&gt; _suspendCount--);
 }
-</code></pre>
-<h2>⚙️ Garbage Collection خودکار</h2>
-<p>فرقی نمی‌کنه یک شیء نیازمند متد <strong>Dispose</strong> برای منطق tear-down سفارشی باشه یا نه، در هر صورت حافظه‌ای که روی heap اشغال کرده باید در یک نقطه آزاد بشه. این بخش به‌طور کامل به‌صورت خودکار توسط <strong>CLR</strong> و از طریق یک <strong>Garbage Collector (GC)</strong> خودکار مدیریت می‌شه. شما هیچ‌وقت حافظه‌ی مدیریت‌شده (Managed Memory) رو خودتون آزاد نمی‌کنید.</p>
-<p>مثال:</p>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Test</span>()</span>
+</code></pre> <h2>Garbage Collection خودکار</h2><p>فرقی نمی‌کنه یک شیء نیازمند متد <strong>Dispose</strong> برای منطق tear-down سفارشی باشه یا نه، در هر صورت حافظه‌ای که روی heap اشغال کرده باید در یک نقطه آزاد بشه. این بخش به‌طور کامل به‌صورت خودکار توسط <strong>CLR</strong> و از طریق یک <strong>Garbage Collector (GC)</strong> خودکار مدیریت می‌شه. شما هیچ‌وقت حافظه‌ی مدیریت‌شده (Managed Memory) رو خودتون آزاد نمی‌کنید.</p><p>مثال:</p><pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Test</span>()</span>
 {
   <span class="hljs-built_in">byte</span>[] myArray = <span class="hljs-keyword">new</span> <span class="hljs-built_in">byte</span>[<span class="hljs-number">1000</span>];
   ...
 }
-</code></pre>
-<p>وقتی متد <strong>Test</strong> اجرا می‌شه، یک آرایه برای نگهداری ۱۰۰۰ بایت روی heap تخصیص داده می‌شه. این آرایه توسط متغیر <strong>myArray</strong> که روی stack متغیرهای محلی قرار داره، مرجع‌دهی می‌شه. وقتی متد خارج می‌شه، این متغیر محلی از scope خارج می‌شه، یعنی دیگه هیچ چیزی به اون آرایه روی heap اشاره نمی‌کنه. در این حالت، آرایه‌ی بی‌صاحب می‌تونه در فرآیند Garbage Collection آزاد بشه.</p>
-<p>در <strong>حالت Debug</strong> وقتی بهینه‌سازی‌ها غیرفعال باشن، طول عمر یک شیء که توسط متغیر محلی مرجع‌دهی می‌شه تا پایان بلاک کد ادامه پیدا می‌کنه تا اشکال‌زدایی راحت‌تر باشه. در غیر این صورت، شیء در اولین نقطه‌ای که دیگه استفاده نمی‌شه، واجد شرایط جمع‌آوری می‌شه.</p>
-<p>Garbage Collection بلافاصله بعد از بی‌صاحب شدن یک شیء انجام نمی‌شه. درست مثل جمع‌آوری زباله در خیابان، این کار به‌صورت دوره‌ای انجام می‌شه—البته بر خلاف جمع‌آوری زباله در خیابان، زمان‌بندی ثابتی نداره. تصمیم CLR برای اجرای GC بر اساس عواملی مثل میزان حافظه‌ی موجود، حجم تخصیص حافظه، و مدت زمان گذشته از آخرین GC گرفته می‌شه (GC خودش رو بر اساس الگوهای دسترسی حافظه‌ی برنامه تنظیم می‌کنه).</p>
-<p>به همین خاطر، یک تأخیر نامشخص بین بی‌صاحب شدن یک شیء و آزاد شدن حافظه‌ی اون وجود داره. این تأخیر می‌تونه از نانوثانیه تا چند روز طول بکشه.</p>
-<p>GC همه‌ی زباله‌ها رو در هر بار جمع‌آوری پاک نمی‌کنه.<br>
-مدیر حافظه اشیاء رو به <strong>generation</strong>‌ها تقسیم می‌کنه و GC اشیاء تازه (جدیداً تخصیص داده‌شده) رو بیشتر از اشیاء قدیمی (با طول عمر زیاد) جمع‌آوری می‌کنه. جزئیات این موضوع در بخش «How the GC Works» (صفحه ۵۹۳) توضیح داده شده.</p>
-<hr>
-<h2>📉 Garbage Collection و مصرف حافظه</h2>
-<p>GC تلاش می‌کنه بین <strong>زمانی که صرف جمع‌آوری می‌کنه</strong> و <strong>میزان حافظه‌ای که برنامه مصرف می‌کنه (Working Set)</strong> تعادل برقرار کنه. به همین دلیل، برنامه‌ها می‌تونن بیشتر از نیازشون حافظه مصرف کنن، به‌ویژه وقتی آرایه‌های موقت بزرگ ساخته می‌شن.</p>
-<p>شما می‌تونید مصرف حافظه‌ی یک پردازه رو از طریق <strong>Windows Task Manager</strong> یا <strong>Resource Monitor</strong> مانیتور کنید—یا به‌صورت برنامه‌نویسی، با استفاده از <strong>PerformanceCounter</strong>:</p>
-<pre class="hljs"><code><span class="hljs-comment">// این تایپ‌ها در System.Diagnostics هستن:</span>
+</code></pre> <p>وقتی متد <strong>Test</strong> اجرا می‌شه، یک آرایه برای نگهداری ۱۰۰۰ بایت روی heap تخصیص داده می‌شه. این آرایه توسط متغیر <strong>myArray</strong> که روی stack متغیرهای محلی قرار داره، مرجع‌دهی می‌شه. وقتی متد خارج می‌شه، این متغیر محلی از scope خارج می‌شه، یعنی دیگه هیچ چیزی به اون آرایه روی heap اشاره نمی‌کنه. در این حالت، آرایه‌ی بی‌صاحب می‌تونه در فرآیند Garbage Collection آزاد بشه.</p><p>در <strong>حالت Debug</strong> وقتی بهینه‌سازی‌ها غیرفعال باشن، طول عمر یک شیء که توسط متغیر محلی مرجع‌دهی می‌شه تا پایان بلاک کد ادامه پیدا می‌کنه تا اشکال‌زدایی راحت‌تر باشه. در غیر این صورت، شیء در اولین نقطه‌ای که دیگه استفاده نمی‌شه، واجد شرایط جمع‌آوری می‌شه.</p><p>Garbage Collection بلافاصله بعد از بی‌صاحب شدن یک شیء انجام نمی‌شه. درست مثل جمع‌آوری زباله در خیابان، این کار به‌صورت دوره‌ای انجام می‌شه—البته بر خلاف جمع‌آوری زباله در خیابان، زمان‌بندی ثابتی نداره. تصمیم CLR برای اجرای GC بر اساس عواملی مثل میزان حافظه‌ی موجود، حجم تخصیص حافظه، و مدت زمان گذشته از آخرین GC گرفته می‌شه (GC خودش رو بر اساس الگوهای دسترسی حافظه‌ی برنامه تنظیم می‌کنه).</p><p>به همین خاطر، یک تأخیر نامشخص بین بی‌صاحب شدن یک شیء و آزاد شدن حافظه‌ی اون وجود داره. این تأخیر می‌تونه از نانوثانیه تا چند روز طول بکشه.</p><p>GC همه‌ی زباله‌ها رو در هر بار جمع‌آوری پاک نمی‌کنه.<br> مدیر حافظه اشیاء رو به <strong>generation</strong>‌ها تقسیم می‌کنه و GC اشیاء تازه (جدیداً تخصیص داده‌شده) رو بیشتر از اشیاء قدیمی (با طول عمر زیاد) جمع‌آوری می‌کنه. جزئیات این موضوع در بخش «How the GC Works» (صفحه ۵۹۳) توضیح داده شده.</p><hr> <h2>Garbage Collection و مصرف حافظه</h2><p>GC تلاش می‌کنه بین <strong>زمانی که صرف جمع‌آوری می‌کنه</strong> و <strong>میزان حافظه‌ای که برنامه مصرف می‌کنه (Working Set)</strong> تعادل برقرار کنه. به همین دلیل، برنامه‌ها می‌تونن بیشتر از نیازشون حافظه مصرف کنن، به‌ویژه وقتی آرایه‌های موقت بزرگ ساخته می‌شن.</p><p>شما می‌تونید مصرف حافظه‌ی یک پردازه رو از طریق <strong>Windows Task Manager</strong> یا <strong>Resource Monitor</strong> مانیتور کنید—یا به‌صورت برنامه‌نویسی، با استفاده از <strong>PerformanceCounter</strong>:</p><pre class="hljs"><code><span class="hljs-comment">// این تایپ‌ها در System.Diagnostics هستن:</span>
 <span class="hljs-built_in">string</span> procName = Process.GetCurrentProcess().ProcessName;
 <span class="hljs-keyword">using</span> PerformanceCounter pc = <span class="hljs-keyword">new</span> PerformanceCounter
      (<span class="hljs-string">&quot;Process&quot;</span>, <span class="hljs-string">&quot;Private Bytes&quot;</span>, procName);
 Console.WriteLine(pc.NextValue());
-</code></pre>
-<p>این کد <strong>Private Working Set</strong> رو برمی‌گردونه که بهترین نشونه برای مصرف حافظه‌ی برنامه‌ست. این مقدار به‌طور خاص حافظه‌ای رو که CLR به‌صورت داخلی آزاد کرده و آماده‌ست به سیستم‌عامل پس بده (اگه یک پردازه‌ی دیگه به اون نیاز داشته باشه)، شامل نمی‌شه.</p>
-<hr>
-<h2>🌱 Root</h2>
-<p><strong>Root</strong> چیزی هست که باعث می‌شه یک شیء زنده بمونه. اگه یک شیء به‌طور مستقیم یا غیرمستقیم توسط یک Root مرجع‌دهی نشه، واجد شرایط Garbage Collection می‌شه.</p>
-<p>Root می‌تونه یکی از موارد زیر باشه:</p>
-<ul>
-<li>یک متغیر محلی یا پارامتر در یک متد در حال اجرا (یا در هر متدی در call stack اون)</li>
-<li>یک متغیر <strong>static</strong></li>
-<li>یک شیء در صفی که اشیاء آماده برای <strong>Finalization</strong> رو ذخیره می‌کنه</li>
-</ul>
-<p>از اون‌جایی که غیرممکنه کدی در یک شیء حذف‌شده اجرا بشه، اگه احتمال اجرای یک متد instance وجود داشته باشه، اون شیء باید به یکی از این روش‌ها مرجع‌دهی بشه.</p>
-<p>توجه کنید که گروهی از اشیائی که به‌صورت چرخه‌ای به همدیگه مرجع می‌دن، بدون یک Root <strong>مرده</strong> محسوب می‌شن (شکل ۱۲-۱ رو ببینید). به بیان دیگه، اشیائی که نتونید با دنبال کردن پیکان‌ها (references) از یک Root به اون‌ها دسترسی پیدا کنید، <strong>unreachable</strong> هستن—و بنابراین مشمول جمع‌آوری می‌شن.</p>
-<div align="center">
-<p><img src="../../../assets/image/12/Table-12-2.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<h2>⚰️ Finalizers</h2>
-<p>پیش از اینکه یک شیء از حافظه آزاد بشه، اگر <strong>Finalizer</strong> داشته باشه، اجرا می‌شه. یک Finalizer شبیه به یک سازنده (<strong>Constructor</strong>) تعریف می‌شه، با این تفاوت که قبل از اسم کلاس علامت <code>~</code> قرار می‌گیره:</p>
-<pre class="hljs"><code><span class="hljs-keyword">class</span> <span class="hljs-title">Test</span>
+</code></pre> <p>این کد <strong>Private Working Set</strong> رو برمی‌گردونه که بهترین نشونه برای مصرف حافظه‌ی برنامه‌ست. این مقدار به‌طور خاص حافظه‌ای رو که CLR به‌صورت داخلی آزاد کرده و آماده‌ست به سیستم‌عامل پس بده (اگه یک پردازه‌ی دیگه به اون نیاز داشته باشه)، شامل نمی‌شه.</p><hr> <h2>Root</h2><p><strong>Root</strong> چیزی هست که باعث می‌شه یک شیء زنده بمونه. اگه یک شیء به‌طور مستقیم یا غیرمستقیم توسط یک Root مرجع‌دهی نشه، واجد شرایط Garbage Collection می‌شه.</p><p>Root می‌تونه یکی از موارد زیر باشه:</p><ul> <li>یک متغیر محلی یا پارامتر در یک متد در حال اجرا (یا در هر متدی در call stack اون)</li><li>یک متغیر <strong>static</strong></li><li>یک شیء در صفی که اشیاء آماده برای <strong>Finalization</strong> رو ذخیره می‌کنه</li></ul> <p>از اون‌جایی که غیرممکنه کدی در یک شیء حذف‌شده اجرا بشه، اگه احتمال اجرای یک متد instance وجود داشته باشه، اون شیء باید به یکی از این روش‌ها مرجع‌دهی بشه.</p><p>توجه کنید که گروهی از اشیائی که به‌صورت چرخه‌ای به همدیگه مرجع می‌دن، بدون یک Root <strong>مرده</strong> محسوب می‌شن (شکل ۱۲-۱ رو ببینید). به بیان دیگه، اشیائی که نتونید با دنبال کردن پیکان‌ها (references) از یک Root به اون‌ها دسترسی پیدا کنید، <strong>unreachable</strong> هستن—و بنابراین مشمول جمع‌آوری می‌شن.</p><div align="center"> <p><img src="../../../assets/image/12/Table-12-2.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <h2>Finalizers</h2><p>پیش از اینکه یک شیء از حافظه آزاد بشه، اگر <strong>Finalizer</strong> داشته باشه، اجرا می‌شه. یک Finalizer شبیه به یک سازنده (<strong>Constructor</strong>) تعریف می‌شه، با این تفاوت که قبل از اسم کلاس علامت <code>~</code> قرار می‌گیره:</p><pre class="hljs"><code><span class="hljs-keyword">class</span> <span class="hljs-title">Test</span>
 {
   ~Test()
   {
     <span class="hljs-comment">// Finalizer logic...</span>
   }
 }
-</code></pre>
-<p>(اگرچه در نحو نوشتن شبیه سازنده‌ست، اما <strong>Finalizer</strong>‌ها نمی‌تونن <code>public</code> یا <code>static</code> باشن، پارامتر بگیرن یا سازنده‌ی پایه (base class) رو صدا بزنن.)</p>
-<p>وجود Finalizerها به این خاطر ممکنه که فرآیند Garbage Collection در چندین فاز انجام می‌شه. در مرحله‌ی اول، GC اشیاء بلااستفاده رو شناسایی می‌کنه. اون‌هایی که Finalizer ندارن، فوراً حذف می‌شن. اما اشیائی که Finalizer دارن، موقتاً زنده نگه داشته می‌شن و توی یک صف خاص قرار می‌گیرن.</p>
-<p>در اون لحظه، فرآیند Garbage Collection تموم می‌شه و برنامه‌ی شما به اجرای خودش ادامه می‌ده. بعد نخ (Thread) مربوط به Finalizer وارد عمل می‌شه و به‌صورت موازی با برنامه اجرا می‌شه؛ اشیاء رو از صف برمی‌داره و متد Finalizer اون‌ها رو اجرا می‌کنه.</p>
-<p>تا پیش از اجرای Finalizer هر شیء، اون هنوز «زنده» حساب می‌شه—چون اون صف به‌عنوان یک Root عمل می‌کنه. بعد از خارج شدن از صف و اجرای Finalizer، شیء بی‌صاحب می‌شه و در جمع‌آوری بعدی (برای همون Generation) حذف خواهد شد.</p>
-<hr>
-<h3>⚠️ نکات مهم درباره Finalizerها</h3>
-<ul>
-<li>🚫 Finalizerها سرعت تخصیص و جمع‌آوری حافظه رو کاهش می‌دن (چون GC باید دنبال کنه که کدوم Finalizer اجرا شده).</li>
-<li>⏳ طول عمر شیء و اشیاء مرجع اون‌ها رو طولانی‌تر می‌کنن.</li>
-<li>🔄 ترتیب اجرای Finalizerها برای مجموعه‌ای از اشیاء غیرقابل پیش‌بینیه.</li>
-<li>🎛️ کنترل شما روی زمان اجرای Finalizer خیلی محدوده.</li>
-<li>🛑 اگر کدی در Finalizer مسدود بشه، بقیه اشیاء هم نمی‌تونن Finalize بشن.</li>
-<li>❌ Finalizerها ممکنه به‌طور کامل دور زده بشن اگر برنامه به‌درستی unload نشه.</li>
-</ul>
-<p>🔍 در کل، Finalizerها شبیه وکیل هستن—هرچند در بعضی شرایط واقعاً بهشون نیاز دارید، ولی به‌طور کلی بهتره مگر در صورت ضرورت مطلق ازشون استفاده نکنید.</p>
-<hr>
-<h3>📌 دستورالعمل‌های پیاده‌سازی Finalizerها</h3>
-<ul>
-<li>✅ مطمئن بشید Finalizer سریع اجرا می‌شه.</li>
-<li>⛔ هرگز در Finalizer بلاک نکنید (به بخش “Blocking” در صفحه ۶۳۴ مراجعه کنید).</li>
-<li>🚫 به اشیاء دیگه‌ای که خودشون Finalizer دارن ارجاع ندید.</li>
-<li>❌ استثنا (Exception) پرتاب نکنید.</li>
-</ul>
-<blockquote>
-<p>نکته: CLR می‌تونه Finalizer یک شیء رو حتی اگر در طول سازنده استثنایی رخ داده باشه، فراخوانی کنه. پس نباید فرض کنید فیلدها همیشه به‌درستی مقداردهی شدن.</p>
-</blockquote>
-<hr>
-<h2>🔄 فراخوانی Dispose از Finalizer</h2>
-<p>یک الگوی متداول اینه که Finalizer متد <strong>Dispose</strong> رو فراخوانی کنه. این کار منطقیه وقتی پاک‌سازی فوری لازم نیست و صدا زدن Dispose بیشتر یک <strong>بهینه‌سازی</strong> حساب می‌شه تا یک ضرورت.</p>
-<p>اما توجه کنید که این الگو باعث می‌شه آزادسازی حافظه و آزادسازی منابع (Resource) به هم گره بخورن—که ممکنه اهداف متفاوتی داشته باشن. همچنین بار بیشتری به نخ Finalizer وارد می‌کنه.</p>
-<p>این الگو به‌عنوان <strong>پشتیبان</strong> هم به‌کار می‌ره، برای وقتی که مصرف‌کننده شیء فراموش کنه Dispose رو صدا بزنه. در این حالت، بهتره خطا رو لاگ کنید تا بعداً بتونید مشکل رو رفع کنید.</p>
-<p>یک الگوی استاندارد برای پیاده‌سازی این روش به شکل زیره:</p>
-<pre class="hljs"><code><span class="hljs-keyword">class</span> <span class="hljs-title">Test</span> : <span class="hljs-title">IDisposable</span>
+</code></pre> <p>(اگرچه در نحو نوشتن شبیه سازنده‌ست، اما <strong>Finalizer</strong>‌ها نمی‌تونن <code>public</code> یا <code>static</code> باشن، پارامتر بگیرن یا سازنده‌ی پایه (base class) رو صدا بزنن.)</p><p>وجود Finalizerها به این خاطر ممکنه که فرآیند Garbage Collection در چندین فاز انجام می‌شه. در مرحله‌ی اول، GC اشیاء بلااستفاده رو شناسایی می‌کنه. اون‌هایی که Finalizer ندارن، فوراً حذف می‌شن. اما اشیائی که Finalizer دارن، موقتاً زنده نگه داشته می‌شن و توی یک صف خاص قرار می‌گیرن.</p><p>در اون لحظه، فرآیند Garbage Collection تموم می‌شه و برنامه‌ی شما به اجرای خودش ادامه می‌ده. بعد نخ (Thread) مربوط به Finalizer وارد عمل می‌شه و به‌صورت موازی با برنامه اجرا می‌شه؛ اشیاء رو از صف برمی‌داره و متد Finalizer اون‌ها رو اجرا می‌کنه.</p><p>تا پیش از اجرای Finalizer هر شیء، اون هنوز «زنده» حساب می‌شه—چون اون صف به‌عنوان یک Root عمل می‌کنه. بعد از خارج شدن از صف و اجرای Finalizer، شیء بی‌صاحب می‌شه و در جمع‌آوری بعدی (برای همون Generation) حذف خواهد شد.</p><hr> <h3>نکات مهم درباره Finalizerها</h3><ul> <li>Finalizerها سرعت تخصیص و جمع‌آوری حافظه رو کاهش می‌دن (چون GC باید دنبال کنه که کدوم Finalizer اجرا شده).</li><li>⏳ طول عمر شیء و اشیاء مرجع اون‌ها رو طولانی‌تر می‌کنن.</li><li>ترتیب اجرای Finalizerها برای مجموعه‌ای از اشیاء غیرقابل پیش‌بینیه.</li><li>کنترل شما روی زمان اجرای Finalizer خیلی محدوده.</li><li>اگر کدی در Finalizer مسدود بشه، بقیه اشیاء هم نمی‌تونن Finalize بشن.</li><li>Finalizerها ممکنه به‌طور کامل دور زده بشن اگر برنامه به‌درستی unload نشه.</li></ul> <p>در کل، Finalizerها شبیه وکیل هستن—هرچند در بعضی شرایط واقعاً بهشون نیاز دارید، ولی به‌طور کلی بهتره مگر در صورت ضرورت مطلق ازشون استفاده نکنید.</p><hr> <h3>دستورالعمل‌های پیاده‌سازی Finalizerها</h3><ul> <li>مطمئن بشید Finalizer سریع اجرا می‌شه.</li><li>هرگز در Finalizer بلاک نکنید (به بخش “Blocking” در صفحه ۶۳۴ مراجعه کنید).</li><li>به اشیاء دیگه‌ای که خودشون Finalizer دارن ارجاع ندید.</li><li>استثنا (Exception) پرتاب نکنید.</li></ul> <blockquote><p>نکته: CLR می‌تونه Finalizer یک شیء رو حتی اگر در طول سازنده استثنایی رخ داده باشه، فراخوانی کنه. پس نباید فرض کنید فیلدها همیشه به‌درستی مقداردهی شدن.</p></blockquote> <hr><h2>فراخوانی Dispose از Finalizer</h2><p>یک الگوی متداول اینه که Finalizer متد <strong>Dispose</strong> رو فراخوانی کنه. این کار منطقیه وقتی پاک‌سازی فوری لازم نیست و صدا زدن Dispose بیشتر یک <strong>بهینه‌سازی</strong> حساب می‌شه تا یک ضرورت.</p><p>اما توجه کنید که این الگو باعث می‌شه آزادسازی حافظه و آزادسازی منابع (Resource) به هم گره بخورن—که ممکنه اهداف متفاوتی داشته باشن. همچنین بار بیشتری به نخ Finalizer وارد می‌کنه.</p><p>این الگو به‌عنوان <strong>پشتیبان</strong> هم به‌کار می‌ره، برای وقتی که مصرف‌کننده شیء فراموش کنه Dispose رو صدا بزنه. در این حالت، بهتره خطا رو لاگ کنید تا بعداً بتونید مشکل رو رفع کنید.</p><p>یک الگوی استاندارد برای پیاده‌سازی این روش به شکل زیره:</p><pre class="hljs"><code><span class="hljs-keyword">class</span> <span class="hljs-title">Test</span> : <span class="hljs-title">IDisposable</span>
 {
   <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Dispose</span>()             <span class="hljs-comment">// NOT virtual</span></span>
   {
@@ -386,36 +137,13 @@ Console.WriteLine(pc.NextValue());
 
   ~Test() =&gt; Dispose(<span class="hljs-literal">false</span>);
 }
-</code></pre>
-<p>در اینجا:</p>
-<ul>
-<li>متد <strong>Dispose بدون پارامتر</strong>، <code>virtual</code> نیست و فقط نسخه‌ی توسعه‌یافته رو با مقدار <code>true</code> صدا می‌زنه.</li>
-<li>نسخه‌ی توسعه‌یافته <code>protected</code> و <code>virtual</code> هست و منطق اصلی آزادسازی رو داره.</li>
-<li>پارامتر <strong>disposing</strong> مشخص می‌کنه آیا متد از Dispose صدا زده شده (true) یا از Finalizer (false).</li>
-</ul>
-<p>وقتی disposing برابر false باشه، نباید به اشیائی که Finalizer دارن ارجاع بدید، چون ممکنه خودشون قبلاً Finalize شده باشن.</p>
-<p>کارهایی که همچنان در این حالت می‌شه انجام داد:</p>
-<ul>
-<li>آزاد کردن مراجع مستقیم به منابع سیستم‌عامل (مثلاً از طریق P/Invoke به Win32 API).</li>
-<li>حذف فایل موقتی که در سازنده ساخته شده.</li>
-</ul>
-<p>برای مقاوم‌سازی، هر کدی که ممکنه استثنا پرتاب کنه باید در بلوک try/catch قرار بگیره و استثنا لاگ بشه (به ساده‌ترین و مطمئن‌ترین شکل).</p>
-<p>فراخوانی <strong>GC.SuppressFinalize</strong> در Dispose بدون پارامتر باعث می‌شه Finalizer بعداً اجرا نشه. این کار علاوه بر بهبود کارایی، اجازه می‌ده شیء (و اشیاء مرجع اون) در یک چرخه GC آزاد بشن.</p>
-<hr>
-<h2>🧟 Resurrection</h2>
-<p>فرض کنید یک Finalizer، شیء زنده‌ای رو طوری تغییر بده که به شیء در حال مرگ ارجاع بده. در این صورت، وقتی GC بعدی اجرا بشه، CLR اون شیء رو دیگه بی‌صاحب نمی‌بینه و بنابراین از جمع‌آوری فرار می‌کنه. به این سناریو <strong>Resurrection</strong> می‌گن.</p>
-<p>مثال: نوشتن کلاسی برای مدیریت یک فایل موقت:</p>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">TempFileRef</span>
+</code></pre> <p>در اینجا:</p><ul> <li>متد <strong>Dispose بدون پارامتر</strong>، <code>virtual</code> نیست و فقط نسخه‌ی توسعه‌یافته رو با مقدار <code>true</code> صدا می‌زنه.</li><li>نسخه‌ی توسعه‌یافته <code>protected</code> و <code>virtual</code> هست و منطق اصلی آزادسازی رو داره.</li><li>پارامتر <strong>disposing</strong> مشخص می‌کنه آیا متد از Dispose صدا زده شده (true) یا از Finalizer (false).</li></ul> <p>وقتی disposing برابر false باشه، نباید به اشیائی که Finalizer دارن ارجاع بدید، چون ممکنه خودشون قبلاً Finalize شده باشن.</p><p>کارهایی که همچنان در این حالت می‌شه انجام داد:</p><ul> <li>آزاد کردن مراجع مستقیم به منابع سیستم‌عامل (مثلاً از طریق P/Invoke به Win32 API).</li><li>حذف فایل موقتی که در سازنده ساخته شده.</li></ul> <p>برای مقاوم‌سازی، هر کدی که ممکنه استثنا پرتاب کنه باید در بلوک try/catch قرار بگیره و استثنا لاگ بشه (به ساده‌ترین و مطمئن‌ترین شکل).</p><p>فراخوانی <strong>GC.SuppressFinalize</strong> در Dispose بدون پارامتر باعث می‌شه Finalizer بعداً اجرا نشه. این کار علاوه بر بهبود کارایی، اجازه می‌ده شیء (و اشیاء مرجع اون) در یک چرخه GC آزاد بشن.</p><hr> <h2>Resurrection</h2><p>فرض کنید یک Finalizer، شیء زنده‌ای رو طوری تغییر بده که به شیء در حال مرگ ارجاع بده. در این صورت، وقتی GC بعدی اجرا بشه، CLR اون شیء رو دیگه بی‌صاحب نمی‌بینه و بنابراین از جمع‌آوری فرار می‌کنه. به این سناریو <strong>Resurrection</strong> می‌گن.</p><p>مثال: نوشتن کلاسی برای مدیریت یک فایل موقت:</p><pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">TempFileRef</span>
 {
   <span class="hljs-keyword">public</span> <span class="hljs-keyword">readonly</span> <span class="hljs-built_in">string</span> FilePath;
   <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">TempFileRef</span>(<span class="hljs-params"><span class="hljs-built_in">string</span> filePath</span>)</span> { FilePath = filePath; }
   ~TempFileRef() { File.Delete(FilePath); }
 }
-</code></pre>
-<p>⚠️ مشکل: <code>File.Delete</code> ممکنه استثنا پرتاب کنه (مثلاً به خاطر نداشتن دسترسی، در حال استفاده بودن فایل یا قبلاً حذف شدن). این خطا باعث کرش کل برنامه می‌شه و مانع اجرای Finalizerهای دیگه هم خواهد شد.</p>
-<p>می‌تونیم استثنا رو با یک بلوک catch خالی ببلعیم، اما هیچ‌وقت متوجه نمی‌شیم که خطایی رخ داده. یا می‌تونیم یک API پیچیده‌ی گزارش خطا صدا بزنیم، اما این بار نخ Finalizer رو سنگین می‌کنه. بنابراین باید عملیات Finalizer رو به وظایف ساده، مطمئن و سریع محدود کنیم.</p>
-<p>راه بهتر: ثبت خطا در یک کالکشن استاتیک:</p>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">TempFileRef</span>
+</code></pre> <p>مشکل: <code>File.Delete</code> ممکنه استثنا پرتاب کنه (مثلاً به خاطر نداشتن دسترسی، در حال استفاده بودن فایل یا قبلاً حذف شدن). این خطا باعث کرش کل برنامه می‌شه و مانع اجرای Finalizerهای دیگه هم خواهد شد.</p><p>می‌تونیم استثنا رو با یک بلوک catch خالی ببلعیم، اما هیچ‌وقت متوجه نمی‌شیم که خطایی رخ داده. یا می‌تونیم یک API پیچیده‌ی گزارش خطا صدا بزنیم، اما این بار نخ Finalizer رو سنگین می‌کنه. بنابراین باید عملیات Finalizer رو به وظایف ساده، مطمئن و سریع محدود کنیم.</p><p>راه بهتر: ثبت خطا در یک کالکشن استاتیک:</p><pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">TempFileRef</span>
 {
   <span class="hljs-keyword">static</span> <span class="hljs-keyword">internal</span> <span class="hljs-keyword">readonly</span> ConcurrentQueue&lt;TempFileRef&gt; FailedDeletions
     = <span class="hljs-keyword">new</span> ConcurrentQueue&lt;TempFileRef&gt;();
@@ -435,18 +163,7 @@ Console.WriteLine(pc.NextValue());
     }
   }
 }
-</code></pre>
-<p>اضافه کردن شیء به کالکشن <strong>FailedDeletions</strong> یک مرجع جدید براش ایجاد می‌کنه و باعث می‌شه زنده بمونه تا زمانی که dequeue بشه.</p>
-<p><code>ConcurrentQueue&lt;T&gt;</code> نسخه‌ی <strong>Thread-Safe</strong> از <code>Queue&lt;T&gt;</code> هست و در فضای نام <code>System.Collections.Concurrent</code> تعریف شده (بخش ۲۲).</p>
-<p>دلایل استفاده از کالکشن Thread-Safe:</p>
-<ol>
-<li>CLR می‌تونه Finalizerها رو روی بیش از یک Thread به‌طور موازی اجرا کنه، پس وقتی به state مشترکی مثل یک کالکشن استاتیک دسترسی داریم، باید احتمال Finalize شدن هم‌زمان دو شیء رو در نظر بگیریم.</li>
-<li>در نهایت باید اشیاء رو از <code>FailedDeletions</code> dequeue کنیم تا بتونیم کاری براشون انجام بدیم. این عملیات هم باید Thread-Safe باشه، چون ممکنه هم‌زمان با enqueue شدن یک شیء توسط Finalizer انجام بشه.</li>
-</ol>
-<h2>🔄 GC.ReRegisterForFinalize</h2>
-<p>یک شیء که <strong>Resurrect</strong> شده (دوباره زنده شده) دیگه Finalizerش برای بار دوم اجرا نمی‌شه—مگر اینکه شما متد <strong>GC.ReRegisterForFinalize</strong> رو صدا بزنید.</p>
-<p>در مثال زیر، ما تلاش می‌کنیم در Finalizer یک فایل موقت رو حذف کنیم (مثل مثال قبلی). اما اگر حذف شکست خورد، شیء رو دوباره ثبت می‌کنیم تا در Garbage Collection بعدی دوباره امتحان کنه:</p>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">TempFileRef</span>
+</code></pre> <p>اضافه کردن شیء به کالکشن <strong>FailedDeletions</strong> یک مرجع جدید براش ایجاد می‌کنه و باعث می‌شه زنده بمونه تا زمانی که dequeue بشه.</p><p><code>ConcurrentQueue&lt;T&gt;</code> نسخه‌ی <strong>Thread-Safe</strong> از <code>Queue&lt;T&gt;</code> هست و در فضای نام <code>System.Collections.Concurrent</code> تعریف شده (بخش ۲۲).</p><p>دلایل استفاده از کالکشن Thread-Safe:</p><ol> <li>CLR می‌تونه Finalizerها رو روی بیش از یک Thread به‌طور موازی اجرا کنه، پس وقتی به state مشترکی مثل یک کالکشن استاتیک دسترسی داریم، باید احتمال Finalize شدن هم‌زمان دو شیء رو در نظر بگیریم.</li><li>در نهایت باید اشیاء رو از <code>FailedDeletions</code> dequeue کنیم تا بتونیم کاری براشون انجام بدیم. این عملیات هم باید Thread-Safe باشه، چون ممکنه هم‌زمان با enqueue شدن یک شیء توسط Finalizer انجام بشه.</li></ol> <h2>GC.ReRegisterForFinalize</h2><p>یک شیء که <strong>Resurrect</strong> شده (دوباره زنده شده) دیگه Finalizerش برای بار دوم اجرا نمی‌شه—مگر اینکه شما متد <strong>GC.ReRegisterForFinalize</strong> رو صدا بزنید.</p><p>در مثال زیر، ما تلاش می‌کنیم در Finalizer یک فایل موقت رو حذف کنیم (مثل مثال قبلی). اما اگر حذف شکست خورد، شیء رو دوباره ثبت می‌کنیم تا در Garbage Collection بعدی دوباره امتحان کنه:</p><pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">TempFileRef</span>
 {
   <span class="hljs-keyword">public</span> <span class="hljs-keyword">readonly</span> <span class="hljs-built_in">string</span> FilePath;
   <span class="hljs-built_in">int</span> _deleteAttempt;
@@ -463,94 +180,8 @@ Console.WriteLine(pc.NextValue());
     }
   }
 }
-</code></pre>
-<p>بعد از سومین تلاش ناموفق، Finalizer ما بدون سر و صدا از حذف فایل دست می‌کشه.<br>
-🔧 می‌تونیم این رو بهتر کنیم و با مثال قبلی ترکیب کنیم—یعنی بعد از سومین شکست، شیء رو به صف <strong>FailedDeletions</strong> اضافه کنیم.</p>
-<p>⚠️ توجه:<br>
-حتماً فقط <strong>یک‌بار</strong> درون Finalizer متد ReRegisterForFinalize رو صدا بزنید.<br>
-اگه دوبار صدا بزنید، شیء دوباره دوبار ثبت می‌شه و باید دو بار دیگه Finalize بشه!</p>
-<hr>
-<h2>⚙️ GC چگونه کار می‌کند؟</h2>
-<p><strong>CLR</strong> از یک Garbage Collector استاندارد <strong>Generational Mark-and-Compact</strong> استفاده می‌کنه که مدیریت حافظه‌ی خودکار برای اشیاء ذخیره‌شده در <strong>Managed Heap</strong> رو انجام می‌ده.</p>
-<p>GC یک <strong>Tracing GC</strong> محسوب می‌شه، چون جلوی هر دسترسی به شیء رو نمی‌گیره. بلکه به‌طور دوره‌ای بیدار می‌شه و گراف اشیاء موجود در heap رو دنبال می‌کنه تا بفهمه کدوم اشیاء دیگه استفاده نمی‌شن و باید جمع‌آوری بشن.</p>
-<hr>
-<h3>🛠️ چه زمانی GC فعال می‌شه؟</h3>
-<ul>
-<li>وقتی تخصیص حافظه جدید با <code>new</code> انجام بشه و مقدار مشخصی از حافظه مصرف شده باشه.</li>
-<li>یا در زمان‌های دیگه برای کاهش میزان حافظه مصرفی برنامه.</li>
-<li>همچنین می‌تونید به‌صورت دستی متد <code>System.GC.Collect</code> رو صدا بزنید.</li>
-</ul>
-<p>📌 در طول Garbage Collection، ممکنه همه‌ی Threadها متوقف (Freeze) بشن (توضیحات بیشتر در بخش بعدی).</p>
-<hr>
-<h3>🔍 فرآیند جمع‌آوری</h3>
-<ol>
-<li>
-<p>GC از <strong>Root object references</strong> شروع می‌کنه و گراف اشیاء رو دنبال می‌کنه.</p>
-</li>
-<li>
-<p>همه‌ی اشیائی که در این مسیر لمس بشن به‌عنوان <strong>reachable</strong> علامت‌گذاری می‌شن.</p>
-</li>
-<li>
-<p>اشیائی که علامت نخورده باشن، بلااستفاده محسوب می‌شن و قابل جمع‌آوری هستن.</p>
-<ul>
-<li>اشیاء بلااستفاده <strong>بدون Finalizer</strong> فوراً حذف می‌شن.</li>
-<li>اشیاء بلااستفاده <strong>دارای Finalizer</strong> به صف Finalizer Thread اضافه می‌شن و در GC بعدی (برای همون Generation) حذف خواهند شد (مگر اینکه Resurrect بشن).</li>
-</ul>
-</li>
-<li>
-<p>اشیاء باقی‌مانده‌ی زنده به ابتدای Heap منتقل می‌شن (<strong>Compaction</strong>).</p>
-</li>
-</ol>
-<p>📌 مزایا:</p>
-<ul>
-<li>جلوگیری از <strong>Fragmentation</strong> حافظه.</li>
-<li>ساده‌تر شدن استراتژی تخصیص حافظه (همیشه در انتهای Heap).</li>
-</ul>
-<hr>
-<h3>🚨 خطای کمبود حافظه</h3>
-<p>اگر بعد از Garbage Collection فضای کافی برای تخصیص حافظه جدید نباشه و سیستم‌عامل هم نتونه حافظه بیشتری بده، یک <strong>OutOfMemoryException</strong> پرتاب می‌شه.</p>
-<hr>
-<h3>📊 نظارت بر وضعیت Heap</h3>
-<p>می‌تونید اطلاعات وضعیت فعلی Heap رو با فراخوانی:</p>
-<pre class="hljs"><code>GC.GetGCMemoryInfo();
-</code></pre>
-<p>از .NET 5 به بعد، این متد داده‌های مربوط به کارایی رو هم برمی‌گردونه.</p>
-<hr>
-<h2>🚀 تکنیک‌های بهینه‌سازی GC</h2>
-<h3>🌱 Generational Collection</h3>
-<p>مهم‌ترین بهینه‌سازی GC اینه که <strong>نسلی (Generational)</strong> عمل می‌کنه.</p>
-<p>مشاهده شده که خیلی از اشیاء سریع ساخته و سریع هم رها می‌شن، اما بعضی از اشیاء <strong>طول عمر بیشتری</strong> دارن و نیازی نیست هر بار بررسی بشن.</p>
-<p>به همین خاطر، Heap به سه نسل تقسیم می‌شه:</p>
-<ul>
-<li><strong>Gen0</strong> → اشیاء تازه ساخته‌شده.</li>
-<li><strong>Gen1</strong> → اشیائی که یک چرخه GC رو پشت سر گذاشتن.</li>
-<li><strong>Gen2</strong> → همه‌ی اشیاء دیگه (بلندمدت).</li>
-</ul>
-<blockquote>
-<p>Gen0 و Gen1 به‌عنوان نسل‌های <strong>Ephemeral (کوتاه‌عمر)</strong> شناخته می‌شن.</p>
-</blockquote>
-<hr>
-<h3>⚡ اندازه نسل‌ها</h3>
-<ul>
-<li>بخش Gen0 معمولاً کوچیکه (چند صد KB تا چند MB).</li>
-<li>وقتی Gen0 پر می‌شه، یک <strong>Gen0 Collection</strong> اتفاق می‌افته (خیلی سریع و رایج).</li>
-<li>همین منطق برای Gen1 هم وجود داره (مثل یک بافر برای Gen2).</li>
-<li>اما <strong>Full Collection</strong> (که شامل Gen2 هم می‌شه) خیلی سنگین‌تره و به‌ندرت اتفاق می‌افته.</li>
-</ul>
-<p>📊 شکل 12-2 در کتاب اثر یک Full Collection رو نشون می‌ده.</p>
-<div align="center">
-<p><img src="../../../assets/image/12/Table-12-3.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<h2>⚡ سرعت جمع‌آوری نسل‌ها (Gen0 و Gen2)</h2>
-<p>به‌طور تقریبی:</p>
-<ul>
-<li>یک <strong>Gen0 Collection</strong> معمولاً کمتر از <strong>۱ میلی‌ثانیه</strong> طول می‌کشه 🚀 و در یک برنامه‌ی عادی اصلاً قابل توجه نیست.</li>
-<li>یک <strong>Full Collection (شامل Gen2)</strong> ممکنه تا <strong>۱۰۰ میلی‌ثانیه</strong> طول بکشه ⏳، مخصوصاً در برنامه‌هایی با گراف اشیاء بزرگ.</li>
-</ul>
-<p>این اعداد بسته به شرایط خیلی تغییر می‌کنن، به‌ویژه در مورد <strong>Gen2</strong> که اندازه‌ی ثابتی نداره (برخلاف Gen0 و Gen1).<br>
-📌 نتیجه: اشیاء کوتاه‌عمر خیلی بهینه با GC کار می‌کنن.</p>
-<p>مثلاً در این متد، StringBuilderهایی که ساخته شدن به احتمال زیاد خیلی سریع توی Gen0 جمع‌آوری می‌شن:</p>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-built_in">string</span> <span class="hljs-title">Foo</span>()</span>
+</code></pre> <p>بعد از سومین تلاش ناموفق، Finalizer ما بدون سر و صدا از حذف فایل دست می‌کشه.<br> می‌تونیم این رو بهتر کنیم و با مثال قبلی ترکیب کنیم—یعنی بعد از سومین شکست، شیء رو به صف <strong>FailedDeletions</strong> اضافه کنیم.</p><p>توجه:<br> حتماً فقط <strong>یک‌بار</strong> درون Finalizer متد ReRegisterForFinalize رو صدا بزنید.<br> اگه دوبار صدا بزنید، شیء دوباره دوبار ثبت می‌شه و باید دو بار دیگه Finalize بشه!</p><hr> <h2>GC چگونه کار می‌کند؟</h2><p><strong>CLR</strong> از یک Garbage Collector استاندارد <strong>Generational Mark-and-Compact</strong> استفاده می‌کنه که مدیریت حافظه‌ی خودکار برای اشیاء ذخیره‌شده در <strong>Managed Heap</strong> رو انجام می‌ده.</p><p>GC یک <strong>Tracing GC</strong> محسوب می‌شه، چون جلوی هر دسترسی به شیء رو نمی‌گیره. بلکه به‌طور دوره‌ای بیدار می‌شه و گراف اشیاء موجود در heap رو دنبال می‌کنه تا بفهمه کدوم اشیاء دیگه استفاده نمی‌شن و باید جمع‌آوری بشن.</p><hr> <h3>چه زمانی GC فعال می‌شه؟</h3><ul> <li>وقتی تخصیص حافظه جدید با <code>new</code> انجام بشه و مقدار مشخصی از حافظه مصرف شده باشه.</li><li>یا در زمان‌های دیگه برای کاهش میزان حافظه مصرفی برنامه.</li><li>همچنین می‌تونید به‌صورت دستی متد <code>System.GC.Collect</code> رو صدا بزنید.</li></ul> <p>در طول Garbage Collection، ممکنه همه‌ی Threadها متوقف (Freeze) بشن (توضیحات بیشتر در بخش بعدی).</p><hr> <h3>فرآیند جمع‌آوری</h3><ol> <li><p>GC از <strong>Root object references</strong> شروع می‌کنه و گراف اشیاء رو دنبال می‌کنه.</p></li> <li><p>همه‌ی اشیائی که در این مسیر لمس بشن به‌عنوان <strong>reachable</strong> علامت‌گذاری می‌شن.</p></li> <li><p>اشیائی که علامت نخورده باشن، بلااستفاده محسوب می‌شن و قابل جمع‌آوری هستن.</p><ul> <li>اشیاء بلااستفاده <strong>بدون Finalizer</strong> فوراً حذف می‌شن.</li><li>اشیاء بلااستفاده <strong>دارای Finalizer</strong> به صف Finalizer Thread اضافه می‌شن و در GC بعدی (برای همون Generation) حذف خواهند شد (مگر اینکه Resurrect بشن).</li></ul> </li><li> <p>اشیاء باقی‌مانده‌ی زنده به ابتدای Heap منتقل می‌شن (<strong>Compaction</strong>).</p></li> </ol><p>مزایا:</p><ul> <li>جلوگیری از <strong>Fragmentation</strong> حافظه.</li><li>ساده‌تر شدن استراتژی تخصیص حافظه (همیشه در انتهای Heap).</li></ul> <hr><h3>خطای کمبود حافظه</h3><p>اگر بعد از Garbage Collection فضای کافی برای تخصیص حافظه جدید نباشه و سیستم‌عامل هم نتونه حافظه بیشتری بده، یک <strong>OutOfMemoryException</strong> پرتاب می‌شه.</p><hr> <h3>نظارت بر وضعیت Heap</h3><p>می‌تونید اطلاعات وضعیت فعلی Heap رو با فراخوانی:</p><pre class="hljs"><code>GC.GetGCMemoryInfo();
+</code></pre> <p>از .NET 5 به بعد، این متد داده‌های مربوط به کارایی رو هم برمی‌گردونه.</p><hr> <h2>تکنیک‌های بهینه‌سازی GC</h2><h3>Generational Collection</h3><p>مهم‌ترین بهینه‌سازی GC اینه که <strong>نسلی (Generational)</strong> عمل می‌کنه.</p><p>مشاهده شده که خیلی از اشیاء سریع ساخته و سریع هم رها می‌شن، اما بعضی از اشیاء <strong>طول عمر بیشتری</strong> دارن و نیازی نیست هر بار بررسی بشن.</p><p>به همین خاطر، Heap به سه نسل تقسیم می‌شه:</p><ul> <li><strong>Gen0</strong> → اشیاء تازه ساخته‌شده.</li><li><strong>Gen1</strong> → اشیائی که یک چرخه GC رو پشت سر گذاشتن.</li><li><strong>Gen2</strong> → همه‌ی اشیاء دیگه (بلندمدت).</li></ul> <blockquote><p>Gen0 و Gen1 به‌عنوان نسل‌های <strong>Ephemeral (کوتاه‌عمر)</strong> شناخته می‌شن.</p></blockquote> <hr><h3>اندازه نسل‌ها</h3><ul> <li>بخش Gen0 معمولاً کوچیکه (چند صد KB تا چند MB).</li><li>وقتی Gen0 پر می‌شه، یک <strong>Gen0 Collection</strong> اتفاق می‌افته (خیلی سریع و رایج).</li><li>همین منطق برای Gen1 هم وجود داره (مثل یک بافر برای Gen2).</li><li>اما <strong>Full Collection</strong> (که شامل Gen2 هم می‌شه) خیلی سنگین‌تره و به‌ندرت اتفاق می‌افته.</li></ul> <p>شکل 12-2 در کتاب اثر یک Full Collection رو نشون می‌ده.</p><div align="center"> <p><img src="../../../assets/image/12/Table-12-3.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <h2>سرعت جمع‌آوری نسل‌ها (Gen0 و Gen2)</h2><p>به‌طور تقریبی:</p><ul> <li>یک <strong>Gen0 Collection</strong> معمولاً کمتر از <strong>۱ میلی‌ثانیه</strong> طول می‌کشه و در یک برنامه‌ی عادی اصلاً قابل توجه نیست.</li><li>یک <strong>Full Collection (شامل Gen2)</strong> ممکنه تا <strong>۱۰۰ میلی‌ثانیه</strong> طول بکشه ⏳، مخصوصاً در برنامه‌هایی با گراف اشیاء بزرگ.</li></ul> <p>این اعداد بسته به شرایط خیلی تغییر می‌کنن، به‌ویژه در مورد <strong>Gen2</strong> که اندازه‌ی ثابتی نداره (برخلاف Gen0 و Gen1).<br> نتیجه: اشیاء کوتاه‌عمر خیلی بهینه با GC کار می‌کنن.</p><p>مثلاً در این متد، StringBuilderهایی که ساخته شدن به احتمال زیاد خیلی سریع توی Gen0 جمع‌آوری می‌شن:</p><pre class="hljs"><code><span class="hljs-function"><span class="hljs-built_in">string</span> <span class="hljs-title">Foo</span>()</span>
 {
   <span class="hljs-keyword">var</span> sb1 = <span class="hljs-keyword">new</span> StringBuilder(<span class="hljs-string">&quot;test&quot;</span>);
   sb1.Append(<span class="hljs-string">&quot;...&quot;</span>);
@@ -558,224 +189,36 @@ Console.WriteLine(pc.NextValue());
   sb2.Append(sb1.ToString());
   <span class="hljs-keyword">return</span> sb2.ToString();
 }
-</code></pre>
-<hr>
-<h2>🗄️ Large Object Heap (LOH)</h2>
-<p>GC یک heap جداگانه برای اشیاء بزرگ‌تر از <strong>۸۵,۰۰۰ بایت</strong> داره.<br>
-هدفش اینه که:</p>
-<ul>
-<li>هزینه‌ی بالای جابه‌جایی (Compaction) اشیاء بزرگ رو حذف کنه.</li>
-<li>جلوی تریگر شدن مکرر Gen0 Collection رو بگیره.</li>
-</ul>
-<h3>ویژگی‌ها</h3>
-<ul>
-<li>
-<p><strong>پیش‌فرض</strong>: LOH فشرده (Compact) نمی‌شه، چون جابه‌جایی بلوک‌های خیلی بزرگ هزینه‌ی زیادی داره.</p>
-</li>
-<li>
-<p><strong>نتایج</strong>:</p>
-<ul>
-<li>تخصیص حافظه کندتر می‌شه چون GC باید توی وسط heap هم دنبال حفره‌های آزاد بگرده (با لیست پیوندی).</li>
-<li><strong>Fragmentation</strong> رخ می‌ده: آزاد شدن یک شیء ممکنه حفره‌ای ایجاد کنه که بعداً سخت پر بشه. مثلاً حفره‌ی مربوط به شیء ۸۶,۰۰۰ بایتی فقط با اشیائی پر می‌شه که بین ۸۵,۰۰۰ تا ۸۶,۰۰۰ بایت باشن (مگر اینکه با حفره‌های دیگه یکی بشه).</li>
-</ul>
-</li>
-</ul>
-<h3>راهکارها</h3>
-<ol>
-<li>
-<p>فشرده‌سازی LOH در جمع‌آوری بعدی:</p>
-<pre class="hljs"><code>GCSettings.LargeObjectHeapCompactionMode =
+</code></pre> <hr><h2>Large Object Heap (LOH)</h2><p>GC یک heap جداگانه برای اشیاء بزرگ‌تر از <strong>۸۵,۰۰۰ بایت</strong> داره.<br> هدفش اینه که:</p><ul> <li>هزینه‌ی بالای جابه‌جایی (Compaction) اشیاء بزرگ رو حذف کنه.</li><li>جلوی تریگر شدن مکرر Gen0 Collection رو بگیره.</li></ul> <h3>ویژگی‌ها</h3><ul> <li><p><strong>پیش‌فرض</strong>: LOH فشرده (Compact) نمی‌شه، چون جابه‌جایی بلوک‌های خیلی بزرگ هزینه‌ی زیادی داره.</p></li> <li><p><strong>نتایج</strong>:</p><ul> <li>تخصیص حافظه کندتر می‌شه چون GC باید توی وسط heap هم دنبال حفره‌های آزاد بگرده (با لیست پیوندی).</li><li><strong>Fragmentation</strong> رخ می‌ده: آزاد شدن یک شیء ممکنه حفره‌ای ایجاد کنه که بعداً سخت پر بشه. مثلاً حفره‌ی مربوط به شیء ۸۶,۰۰۰ بایتی فقط با اشیائی پر می‌شه که بین ۸۵,۰۰۰ تا ۸۶,۰۰۰ بایت باشن (مگر اینکه با حفره‌های دیگه یکی بشه).</li></ul> </li></ul> <h3>راهکارها</h3><ol> <li><p>فشرده‌سازی LOH در جمع‌آوری بعدی:</p><pre class="hljs"><code>GCSettings.LargeObjectHeapCompactionMode =
     GCLargeObjectHeapCompactionMode.CompactOnce;
-</code></pre>
-</li>
-<li>
-<p>استفاده از <strong>Array Pooling</strong> (صفحه 599) برای برنامه‌هایی که زیاد آرایه‌های بزرگ می‌سازن.</p>
-</li>
-</ol>
-<p>📌 نکته: LOH نسلی (Generational) نیست—همه‌ی اشیاء LOH در Gen2 قرار می‌گیرن.</p>
-<hr>
-<h2>🖥️ Workstation vs Server Collection</h2>
-<p>.NET دو حالت GC ارائه می‌ده:</p>
-<ul>
-<li><strong>Workstation (پیش‌فرض)</strong></li>
-<li><strong>Server</strong> (برای پردازش‌های سنگین)</li>
-</ul>
-<p>فعال‌سازی حالت Server در <code>.csproj</code>:</p>
-<pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">PropertyGroup</span>&gt;</span>
+</code></pre></li><li> <p>استفاده از <strong>Array Pooling</strong> (صفحه 599) برای برنامه‌هایی که زیاد آرایه‌های بزرگ می‌سازن.</p></li> </ol><blockquote> <p><strong>نکته:</strong> LOH نسلی (Generational) نیست—همه‌ی اشیاء LOH در Gen2 قرار می‌گیرن.</p></blockquote> <hr><h2>Workstation vs Server Collection</h2><p>.NET دو حالت GC ارائه می‌ده:</p><ul> <li><strong>Workstation (پیش‌فرض)</strong></li><li><strong>Server</strong> (برای پردازش‌های سنگین)</li></ul> <p>فعال‌سازی حالت Server در <code>.csproj</code>:</p><pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">PropertyGroup</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">ServerGarbageCollection</span>&gt;</span>true<span class="hljs-tag">&lt;/<span class="hljs-name">ServerGarbageCollection</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">PropertyGroup</span>&gt;</span>
-</code></pre>
-<p>و در فایل <code>.runtimeconfig.json</code> میاد:</p>
-<pre class="hljs"><code><span class="hljs-attr">&quot;runtimeOptions&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+</code></pre> <p>و در فایل <code>.runtimeconfig.json</code> میاد:</p><pre class="hljs"><code><span class="hljs-attr">&quot;runtimeOptions&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;configProperties&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
     <span class="hljs-attr">&quot;System.GC.Server&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span>
   <span class="hljs-punctuation">}</span>
 <span class="hljs-punctuation">}</span>
-</code></pre>
-<h3>تفاوت‌ها</h3>
-<ul>
-<li>
-<p>در حالت <strong>Server</strong>، CLR برای هر <strong>هسته‌ی CPU</strong> یک Heap و یک GC جدا درست می‌کنه.</p>
-<ul>
-<li>✅ سرعت بالاتر در جمع‌آوری</li>
-<li>❌ مصرف بیشتر حافظه و CPU (هر هسته یک Thread اختصاصی می‌خواد)</li>
-</ul>
-</li>
-<li>
-<p>در سیستم‌هایی با پردازش‌های زیاد، این موضوع می‌تونه باعث <strong>CPU Oversubscription</strong> بشه → سیستم کند و غیرقابل‌پاسخ به نظر میاد.</p>
-</li>
-<li>
-<p>فقط روی سیستم‌های <strong>چند‌هسته‌ای</strong> فعال می‌شه. روی تک‌هسته‌ای‌ها (یا VM تک‌هسته‌ای) نادیده گرفته می‌شه.</p>
-</li>
-</ul>
-<hr>
-<h2>🔄 Background Collection</h2>
-<p>در هر دو حالت Workstation و Server، پیش‌فرض <strong>Background GC</strong> فعاله.</p>
-<p>می‌تونید در <code>.csproj</code> غیرفعالش کنید:</p>
-<pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">PropertyGroup</span>&gt;</span>
+</code></pre> <h3>تفاوت‌ها</h3><ul> <li><p>در حالت <strong>Server</strong>، CLR برای هر <strong>هسته‌ی CPU</strong> یک Heap و یک GC جدا درست می‌کنه.</p><ul> <li>سرعت بالاتر در جمع‌آوری</li><li>مصرف بیشتر حافظه و CPU (هر هسته یک Thread اختصاصی می‌خواد)</li></ul> </li><li> <p>در سیستم‌هایی با پردازش‌های زیاد، این موضوع می‌تونه باعث <strong>CPU Oversubscription</strong> بشه → سیستم کند و غیرقابل‌پاسخ به نظر میاد.</p></li> <li><p>فقط روی سیستم‌های <strong>چند‌هسته‌ای</strong> فعال می‌شه. روی تک‌هسته‌ای‌ها (یا VM تک‌هسته‌ای) نادیده گرفته می‌شه.</p></li> </ul><hr> <h2>Background Collection</h2><p>در هر دو حالت Workstation و Server، پیش‌فرض <strong>Background GC</strong> فعاله.</p><p>می‌تونید در <code>.csproj</code> غیرفعالش کنید:</p><pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">PropertyGroup</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">ConcurrentGarbageCollection</span>&gt;</span>false<span class="hljs-tag">&lt;/<span class="hljs-name">ConcurrentGarbageCollection</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">PropertyGroup</span>&gt;</span>
-</code></pre>
-<p>و در <code>.runtimeconfig.json</code>:</p>
-<pre class="hljs"><code><span class="hljs-attr">&quot;runtimeOptions&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+</code></pre> <p>و در <code>.runtimeconfig.json</code>:</p><pre class="hljs"><code><span class="hljs-attr">&quot;runtimeOptions&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;configProperties&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
     <span class="hljs-attr">&quot;System.GC.Concurrent&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span>
   <span class="hljs-punctuation">}</span>
 <span class="hljs-punctuation">}</span>
-</code></pre>
-<h3>اثرات</h3>
-<ul>
-<li>
-<p>با فعال بودن:</p>
-<ul>
-<li>اپلیکیشن روان‌تره چون <strong>Pauseها</strong> کوتاه‌تر می‌شن.</li>
-<li>هزینه‌ی کمی روی CPU و حافظه داره.</li>
-</ul>
-</li>
-<li>
-<p>با غیرفعال بودن:</p>
-<ul>
-<li>مصرف CPU و حافظه کمی کمتره.</li>
-<li>ولی <strong>وقفه‌ها (Latency)</strong> موقع GC طولانی‌تر می‌شن.</li>
-</ul>
-</li>
-</ul>
-<p>📌 Background Collection فقط برای <strong>Gen2</strong> به‌کار می‌ره، چون Gen0 و Gen1 خیلی سریع هستن.</p>
-<blockquote>
-<p>این نسخه بهبود‌یافته‌ی <strong>Concurrent Collection</strong> قدیمیه، و مشکل قدیمی پر شدن Gen0 حین اجرای Gen2 رو حل کرده.</p>
-</blockquote>
-<hr>
-<h2>🔔 GC Notifications</h2>
-<p>وقتی <strong>Background Collection</strong> غیرفعال باشه، می‌تونید از GC بخواید <strong>قبل از یک Full GC</strong> بهتون اطلاع بده.</p>
-<p>📌 کاربرد: در <strong>Server Farms</strong> → قبل از GC درخواست‌ها رو به سرور دیگه بفرستید، بعد GC رو انجام بدید، سپس درخواست‌ها رو برگردونید.</p>
-<h3>مراحل</h3>
-<ol>
-<li>
-<p>ثبت‌نام برای اعلان:</p>
-<pre class="hljs"><code>GC.RegisterForFullGCNotification();
-</code></pre>
-</li>
-<li>
-<p>اجرای یک Thread که:</p>
-<ul>
-<li><code>GC.WaitForFullGCApproach</code> → وقتی GC نزدیکه.</li>
-<li>درخواست‌ها رو به سرورهای دیگه منتقل کنید.</li>
-<li>دستی <code>GC.Collect()</code> رو صدا بزنید.</li>
-<li><code>GC.WaitForFullGCComplete</code> → وقتی GC تموم شد، دوباره درخواست‌ها رو بگیرید.</li>
-</ul>
-</li>
-</ol>
-<p>و این چرخه تکرار می‌شه.</p>
-<h2>🧹 وادار کردن Garbage Collection</h2>
-<p>شما می‌تونید هر زمان به‌صورت دستی <strong>GC.Collect</strong> رو صدا بزنید تا یک Garbage Collection انجام بشه.</p>
-<ul>
-<li>بدون آرگومان: یک <strong>Full Collection</strong> اجرا می‌شه.</li>
-<li>با عدد (مثل <code>GC.Collect(0)</code>): فقط تا همون نسل جمع‌آوری می‌شه → اینجا فقط <strong>Gen0</strong> به‌سرعت پاک‌سازی می‌شه.</li>
-</ul>
-<p>📌 توصیه:<br>
-معمولاً بهتره بذارید خود <strong>GC</strong> زمان مناسب جمع‌آوری رو تشخیص بده. چون:</p>
-<ul>
-<li>ممکنه باعث <strong>ارتقاء غیرضروری</strong> اشیاء بشه (Gen0 → Gen1، یا Gen1 → Gen2).</li>
-<li>می‌تونه تنظیمات خودکار و هوشمند GC رو به‌هم بزنه.</li>
-</ul>
-<h3>استثناها</h3>
-<p>یک سناریوی رایج: وقتی برنامه برای مدتی <strong>به خواب می‌ره</strong>.<br>
-مثال: یک <strong>Windows Service</strong> که روزی یک‌بار اجرا می‌شه. بعد از اجرای فعالیت روزانه (مثلاً بررسی آپدیت‌ها)، به‌مدت ۲۴ ساعت دیگه هیچ کاری انجام نمی‌ده. چون هیچ تخصیص حافظه‌ای اتفاق نمی‌افته، GC هم فعال نمی‌شه. در این حالت حافظه‌ای که مصرف شده برای کل ۲۴ ساعت آزاد نمی‌شه—even اگر گراف اشیاء خالی باشه!</p>
-<p>✅ راه‌حل:<br>
-بلافاصله بعد از انجام فعالیت روزانه، صدا بزنید:</p>
-<pre class="hljs"><code>GC.Collect();
+</code></pre> <h3>اثرات</h3><ul> <li><p>با فعال بودن:</p><ul> <li>اپلیکیشن روان‌تره چون <strong>Pauseها</strong> کوتاه‌تر می‌شن.</li><li>هزینه‌ی کمی روی CPU و حافظه داره.</li></ul> </li><li> <p>با غیرفعال بودن:</p><ul> <li>مصرف CPU و حافظه کمی کمتره.</li><li>ولی <strong>وقفه‌ها (Latency)</strong> موقع GC طولانی‌تر می‌شن.</li></ul> </li></ul> <p>Background Collection فقط برای <strong>Gen2</strong> به‌کار می‌ره، چون Gen0 و Gen1 خیلی سریع هستن.</p><blockquote> <p>این نسخه بهبود‌یافته‌ی <strong>Concurrent Collection</strong> قدیمیه، و مشکل قدیمی پر شدن Gen0 حین اجرای Gen2 رو حل کرده.</p></blockquote> <hr><h2>GC Notifications</h2><p>وقتی <strong>Background Collection</strong> غیرفعال باشه، می‌تونید از GC بخواید <strong>قبل از یک Full GC</strong> بهتون اطلاع بده.</p><p>کاربرد: در <strong>Server Farms</strong> → قبل از GC درخواست‌ها رو به سرور دیگه بفرستید، بعد GC رو انجام بدید، سپس درخواست‌ها رو برگردونید.</p><h3>مراحل</h3><ol> <li><p>ثبت‌نام برای اعلان:</p><pre class="hljs"><code>GC.RegisterForFullGCNotification();
+</code></pre></li><li> <p>اجرای یک Thread که:</p><ul> <li><code>GC.WaitForFullGCApproach</code> → وقتی GC نزدیکه.</li><li>درخواست‌ها رو به سرورهای دیگه منتقل کنید.</li><li>دستی <code>GC.Collect()</code> رو صدا بزنید.</li><li><code>GC.WaitForFullGCComplete</code> → وقتی GC تموم شد، دوباره درخواست‌ها رو بگیرید.</li></ul> </li></ol> <p>و این چرخه تکرار می‌شه.</p><h2>وادار کردن Garbage Collection</h2><p>شما می‌تونید هر زمان به‌صورت دستی <strong>GC.Collect</strong> رو صدا بزنید تا یک Garbage Collection انجام بشه.</p><ul> <li>بدون آرگومان: یک <strong>Full Collection</strong> اجرا می‌شه.</li><li>با عدد (مثل <code>GC.Collect(0)</code>): فقط تا همون نسل جمع‌آوری می‌شه → اینجا فقط <strong>Gen0</strong> به‌سرعت پاک‌سازی می‌شه.</li></ul> <p>توصیه:<br> معمولاً بهتره بذارید خود <strong>GC</strong> زمان مناسب جمع‌آوری رو تشخیص بده. چون:</p><ul> <li>ممکنه باعث <strong>ارتقاء غیرضروری</strong> اشیاء بشه (Gen0 → Gen1، یا Gen1 → Gen2).</li><li>می‌تونه تنظیمات خودکار و هوشمند GC رو به‌هم بزنه.</li></ul> <h3>استثناها</h3><p>یک سناریوی رایج: وقتی برنامه برای مدتی <strong>به خواب می‌ره</strong>.<br> مثال: یک <strong>Windows Service</strong> که روزی یک‌بار اجرا می‌شه. بعد از اجرای فعالیت روزانه (مثلاً بررسی آپدیت‌ها)، به‌مدت ۲۴ ساعت دیگه هیچ کاری انجام نمی‌ده. چون هیچ تخصیص حافظه‌ای اتفاق نمی‌افته، GC هم فعال نمی‌شه. در این حالت حافظه‌ای که مصرف شده برای کل ۲۴ ساعت آزاد نمی‌شه—even اگر گراف اشیاء خالی باشه!</p><p>راه‌حل:<br> بلافاصله بعد از انجام فعالیت روزانه، صدا بزنید:</p><pre class="hljs"><code>GC.Collect();
 GC.WaitForPendingFinalizers();
 GC.Collect();
-</code></pre>
-<p>این تضمین می‌کنه حتی اشیائی که Finalizer دارن هم پاک بشن. (گاهی داخل یک حلقه اجرا می‌شه چون اجرای Finalizerها خودش باعث آزاد شدن اشیاء بیشتری می‌شه).</p>
-<p>📌 مورد دیگه: وقتی دارید کلاسی با <strong>Finalizer</strong> رو تست می‌کنید.</p>
-<hr>
-<h2>⚙️ تنظیم Garbage Collection در زمان اجرا</h2>
-<p>تنظیم با <code>GCSettings.LatencyMode</code>:</p>
-<ul>
-<li><strong>Interactive (پیش‌فرض)</strong> → تعادل بین پاسخ‌دهی و کارایی.</li>
-<li><strong>LowLatency</strong> یا <strong>SustainedLowLatency</strong> → جمع‌آوری سریع‌تر ولی مکررتر → مناسب برای اپلیکیشن‌های Real-Time ⚡.</li>
-<li><strong>Batch</strong> → بیشترین Throughput، ولی پاسخ‌دهی ضعیف‌تر → مناسب پردازش‌های Batch.</li>
-</ul>
-<p>📌 نکته: اگر Background GC غیرفعال باشه، حالت <strong>SustainedLowLatency</strong> پشتیبانی نمی‌شه.</p>
-<p>همچنین می‌تونید:</p>
-<ul>
-<li>موقتاً GC رو متوقف کنید: <code>GC.TryStartNoGCRegion()</code></li>
-<li>دوباره فعال کنید: <code>GC.EndNoGCRegion()</code></li>
-</ul>
-<hr>
-<h2>📊 Memory Pressure</h2>
-<p>زمان اجرای CLR تصمیم می‌گیره کی GC انجام بده، بر اساس فاکتورهایی مثل <strong>بار حافظه‌ی کل سیستم</strong>.</p>
-<p>اما اگر برنامه‌تون <strong>حافظه‌ی Unmanaged</strong> تخصیص بده (مثل P/Invoke یا Native Code)، CLR فقط از Managed Memory خبر داره → یعنی میزان مصرف واقعی حافظه کمتر از چیزی که هست نشون داده می‌شه.</p>
-<p>راه‌حل:</p>
-<ul>
-<li>
-<p>به CLR اعلام کنید که حافظه‌ی Unmanaged تخصیص داده شده:</p>
-<pre class="hljs"><code>GC.AddMemoryPressure(size);
-</code></pre>
-</li>
-<li>
-<p>وقتی آزاد شد:</p>
-<pre class="hljs"><code>GC.RemoveMemoryPressure(size);
-</code></pre>
-</li>
-</ul>
-<hr>
-<h2>🔄 Array Pooling</h2>
-<p>اگر زیاد آرایه می‌سازید، می‌تونید با <strong>Array Pooling</strong> بار GC رو کم کنید. این قابلیت از .NET Core 3 معرفی شد.</p>
-<ul>
-<li>
-<p>اجاره‌ی آرایه:</p>
-<pre class="hljs"><code><span class="hljs-built_in">int</span>[] pooledArray = ArrayPool&lt;<span class="hljs-built_in">int</span>&gt;.Shared.Rent(<span class="hljs-number">100</span>); <span class="hljs-comment">// حداقل 100 بایت</span>
-</code></pre>
-<p>(ممکنه آرایه‌ای بزرگ‌تر برگرده، معمولاً در توان‌های ۲ تخصیص داده می‌شه).</p>
-</li>
-<li>
-<p>برگرداندن آرایه:</p>
-<pre class="hljs"><code>ArrayPool&lt;<span class="hljs-built_in">int</span>&gt;.Shared.Return(pooledArray);
-</code></pre>
-<p>(می‌تونید یک <code>bool</code> هم بدید که قبل از بازگشت، آرایه پاک بشه).</p>
-</li>
-</ul>
-<p>📌 محدودیت:<br>
-اگر بعد از Return همچنان از آرایه استفاده کنید → خطای جدی رخ می‌ده ❌. چون ممکنه توسط APIهای دیگه مثل <strong><a href="http://ASP.NET">ASP.NET</a> Core</strong> دوباره استفاده بشه.</p>
-<hr>
-<h2>🛠️ Pool اختصاصی</h2>
-<p>به‌جای Pool اشتراکی می‌تونید Pool شخصی بسازید:</p>
-<pre class="hljs"><code><span class="hljs-keyword">var</span> myPool = ArrayPool&lt;<span class="hljs-built_in">int</span>&gt;.Create();
+</code></pre> <p>این تضمین می‌کنه حتی اشیائی که Finalizer دارن هم پاک بشن. (گاهی داخل یک حلقه اجرا می‌شه چون اجرای Finalizerها خودش باعث آزاد شدن اشیاء بیشتری می‌شه).</p><p>مورد دیگه: وقتی دارید کلاسی با <strong>Finalizer</strong> رو تست می‌کنید.</p><hr> <h2>تنظیم Garbage Collection در زمان اجرا</h2><p>تنظیم با <code>GCSettings.LatencyMode</code>:</p><ul> <li><strong>Interactive (پیش‌فرض)</strong> → تعادل بین پاسخ‌دهی و کارایی.</li><li><strong>LowLatency</strong> یا <strong>SustainedLowLatency</strong> → جمع‌آوری سریع‌تر ولی مکررتر → مناسب برای اپلیکیشن‌های Real-Time .</li><li><strong>Batch</strong> → بیشترین Throughput، ولی پاسخ‌دهی ضعیف‌تر → مناسب پردازش‌های Batch.</li></ul> <blockquote><p><strong>نکته:</strong> اگر Background GC غیرفعال باشه، حالت <strong>SustainedLowLatency</strong> پشتیبانی نمی‌شه.</p></blockquote> <p>همچنین می‌تونید:</p><ul> <li>موقتاً GC رو متوقف کنید: <code>GC.TryStartNoGCRegion()</code></li><li>دوباره فعال کنید: <code>GC.EndNoGCRegion()</code></li></ul> <hr><h2>Memory Pressure</h2><p>زمان اجرای CLR تصمیم می‌گیره کی GC انجام بده، بر اساس فاکتورهایی مثل <strong>بار حافظه‌ی کل سیستم</strong>.</p><p>اما اگر برنامه‌تون <strong>حافظه‌ی Unmanaged</strong> تخصیص بده (مثل P/Invoke یا Native Code)، CLR فقط از Managed Memory خبر داره → یعنی میزان مصرف واقعی حافظه کمتر از چیزی که هست نشون داده می‌شه.</p><p>راه‌حل:</p><ul> <li><p>به CLR اعلام کنید که حافظه‌ی Unmanaged تخصیص داده شده:</p><pre class="hljs"><code>GC.AddMemoryPressure(size);
+</code></pre></li><li> <p>وقتی آزاد شد:</p><pre class="hljs"><code>GC.RemoveMemoryPressure(size);
+</code></pre></li></ul> <hr><h2>Array Pooling</h2><p>اگر زیاد آرایه می‌سازید، می‌تونید با <strong>Array Pooling</strong> بار GC رو کم کنید. این قابلیت از .NET Core 3 معرفی شد.</p><ul> <li><p>اجاره‌ی آرایه:</p><pre class="hljs"><code><span class="hljs-built_in">int</span>[] pooledArray = ArrayPool&lt;<span class="hljs-built_in">int</span>&gt;.Shared.Rent(<span class="hljs-number">100</span>); <span class="hljs-comment">// حداقل 100 بایت</span>
+</code></pre> <p>(ممکنه آرایه‌ای بزرگ‌تر برگرده، معمولاً در توان‌های ۲ تخصیص داده می‌شه).</p></li> <li><p>برگرداندن آرایه:</p><pre class="hljs"><code>ArrayPool&lt;<span class="hljs-built_in">int</span>&gt;.Shared.Return(pooledArray);
+</code></pre> <p>(می‌تونید یک <code>bool</code> هم بدید که قبل از بازگشت، آرایه پاک بشه).</p></li> </ul><p>محدودیت:<br> اگر بعد از Return همچنان از آرایه استفاده کنید → خطای جدی رخ می‌ده . چون ممکنه توسط APIهای دیگه مثل <strong><a href="http://ASP.NET">ASP.NET</a> Core</strong> دوباره استفاده بشه.</p><hr> <h2>Pool اختصاصی</h2><p>به‌جای Pool اشتراکی می‌تونید Pool شخصی بسازید:</p><pre class="hljs"><code><span class="hljs-keyword">var</span> myPool = ArrayPool&lt;<span class="hljs-built_in">int</span>&gt;.Create();
 <span class="hljs-built_in">int</span>[] array = myPool.Rent(<span class="hljs-number">100</span>);
 ...
-</code></pre>
-<p>این کار:</p>
-<ul>
-<li>✅ ریسک خراب کردن APIهای دیگه رو کم می‌کنه.</li>
-<li>❌ ولی مصرف حافظه‌ی کلی رو بالا می‌بره (چون فرصت‌های Reuse کم‌تر می‌شه).</li>
-</ul>
-<p>💾 <strong>نشت حافظه مدیریت‌شده (Managed Memory Leaks)</strong></p>
-<p>در زبان‌های unmanaged مانند C++، شما باید به‌صورت دستی حافظه را زمانی که یک شیء دیگر نیاز نیست آزاد کنید؛ در غیر این صورت، نشت حافظه رخ می‌دهد. در دنیای managed، این نوع خطا به‌دلیل سیستم <strong>garbage collection</strong> خودکار <strong>CLR</strong> غیرممکن است.</p>
-<p>با این حال، برنامه‌های بزرگ و پیچیده .NET می‌توانند نوعی فرم خفیف از همین مشکل را نشان دهند که نتیجه آن مشابه است: برنامه در طول عمر خود حافظه بیشتری مصرف می‌کند تا نهایتاً نیاز به راه‌اندازی مجدد پیدا کند. خبر خوب این است که <strong>نشت حافظه مدیریت‌شده</strong> معمولاً راحت‌تر قابل تشخیص و پیشگیری است.</p>
-<p>نشت حافظه مدیریت‌شده زمانی رخ می‌دهد که اشیاء استفاده‌نشده به‌واسطه مراجع فراموش‌شده یا استفاده‌نشده هنوز زنده بمانند. یک نمونه رایج <strong>event handlers</strong> هستند—این‌ها یک مرجع به شیء هدف نگه می‌دارند (مگر اینکه هدف یک متد static باشد). به‌عنوان مثال، کلاس‌های زیر را در نظر بگیرید:</p>
-<pre class="hljs"><code><span class="hljs-keyword">class</span> <span class="hljs-title">Host</span>
+</code></pre> <p>این کار:</p><ul> <li>ریسک خراب کردن APIهای دیگه رو کم می‌کنه.</li><li>ولی مصرف حافظه‌ی کلی رو بالا می‌بره (چون فرصت‌های Reuse کم‌تر می‌شه).</li></ul> <p><strong>نشت حافظه مدیریت‌شده (Managed Memory Leaks)</strong></p><p>در زبان‌های unmanaged مانند C++، شما باید به‌صورت دستی حافظه را زمانی که یک شیء دیگر نیاز نیست آزاد کنید؛ در غیر این صورت، نشت حافظه رخ می‌دهد. در دنیای managed، این نوع خطا به‌دلیل سیستم <strong>garbage collection</strong> خودکار <strong>CLR</strong> غیرممکن است.</p><p>با این حال، برنامه‌های بزرگ و پیچیده .NET می‌توانند نوعی فرم خفیف از همین مشکل را نشان دهند که نتیجه آن مشابه است: برنامه در طول عمر خود حافظه بیشتری مصرف می‌کند تا نهایتاً نیاز به راه‌اندازی مجدد پیدا کند. خبر خوب این است که <strong>نشت حافظه مدیریت‌شده</strong> معمولاً راحت‌تر قابل تشخیص و پیشگیری است.</p><p>نشت حافظه مدیریت‌شده زمانی رخ می‌دهد که اشیاء استفاده‌نشده به‌واسطه مراجع فراموش‌شده یا استفاده‌نشده هنوز زنده بمانند. یک نمونه رایج <strong>event handlers</strong> هستند—این‌ها یک مرجع به شیء هدف نگه می‌دارند (مگر اینکه هدف یک متد static باشد). به‌عنوان مثال، کلاس‌های زیر را در نظر بگیرید:</p><pre class="hljs"><code><span class="hljs-keyword">class</span> <span class="hljs-title">Host</span>
 {
  <span class="hljs-keyword">public</span> <span class="hljs-keyword">event</span> EventHandler Click;
 }
@@ -790,9 +233,7 @@ GC.Collect();
  }
  <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">HostClicked</span> (<span class="hljs-params"><span class="hljs-built_in">object</span> sender, EventArgs e</span>)</span> { ... }
 }
-</code></pre>
-<p>کلاس تست زیر یک متد دارد که ۱۰۰۰ شیء Client ایجاد می‌کند:</p>
-<pre class="hljs"><code><span class="hljs-keyword">class</span> <span class="hljs-title">Test</span>
+</code></pre> <p>کلاس تست زیر یک متد دارد که ۱۰۰۰ شیء Client ایجاد می‌کند:</p><pre class="hljs"><code><span class="hljs-keyword">class</span> <span class="hljs-title">Test</span>
 {
  <span class="hljs-keyword">static</span> Host _host = <span class="hljs-keyword">new</span> Host();
  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">CreateClients</span>()</span>
@@ -803,21 +244,9 @@ GC.Collect();
    <span class="hljs-comment">// انجام کار با clients ...</span>
  }
 }
-</code></pre>
-<p>ممکن است انتظار داشته باشید پس از اجرای <strong>CreateClients</strong>، این ۱۰۰۰ شیء Client واجد شرایط جمع‌آوری شوند. متأسفانه، هر Client یک مرجع دیگر هم دارد: شیء <strong>_host</strong> که event <strong>Click</strong> هر نمونه Client را نگه می‌دارد.</p>
-<p>این مشکل ممکن است نادیده گرفته شود اگر event <strong>Click</strong> اجرا نشود یا متد <strong>HostClicked</strong> کاری انجام ندهد که توجه را جلب کند.</p>
-<p>یکی از راه‌حل‌ها این است که <strong>Client</strong> را پیاده‌سازی کنید تا <strong>IDisposable</strong> باشد و در متد <strong>Dispose</strong>، <strong>event handler</strong> را لغو اشتراک کنید:</p>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Dispose</span>()</span> { _host.Click -= HostClicked; }
-</code></pre>
-<p>سپس مصرف‌کنندگان Client پس از اتمام استفاده از نمونه‌ها آن‌ها را Dispose می‌کنند:</p>
-<pre class="hljs"><code>Array.ForEach(clients, c =&gt; c.Dispose());
-</code></pre>
-<hr>
-<p>⏱ <strong>Timers</strong></p>
-<p>در بخش «Weak References» در صفحه 603، راه‌حل دیگری برای این مشکل ارائه شده است که در محیط‌هایی که تمایل به استفاده از اشیاء disposable ندارند (مثلاً <strong>WPF</strong>) مفید است. در واقع، WPF یک کلاس به نام <strong>WeakEventManager</strong> ارائه می‌دهد که از الگوی weak references استفاده می‌کند.</p>
-<p>تایمرهای فراموش‌شده نیز می‌توانند باعث نشت حافظه شوند (در فصل 21 تایمرها را بررسی کرده‌ایم). دو سناریوی متفاوت وجود دارد، بسته به نوع تایمر:</p>
-<p>ابتدا تایمر در <strong>System.Timers</strong> را بررسی می‌کنیم. در مثال زیر، کلاس <strong>Foo</strong> (هنگام نمونه‌سازی) هر ثانیه متد <strong>tmr_Elapsed</strong> را فراخوانی می‌کند:</p>
-<pre class="hljs"><code><span class="hljs-keyword">using</span> System.Timers;
+</code></pre> <p>ممکن است انتظار داشته باشید پس از اجرای <strong>CreateClients</strong>، این ۱۰۰۰ شیء Client واجد شرایط جمع‌آوری شوند. متأسفانه، هر Client یک مرجع دیگر هم دارد: شیء <strong>_host</strong> که event <strong>Click</strong> هر نمونه Client را نگه می‌دارد.</p><p>این مشکل ممکن است نادیده گرفته شود اگر event <strong>Click</strong> اجرا نشود یا متد <strong>HostClicked</strong> کاری انجام ندهد که توجه را جلب کند.</p><p>یکی از راه‌حل‌ها این است که <strong>Client</strong> را پیاده‌سازی کنید تا <strong>IDisposable</strong> باشد و در متد <strong>Dispose</strong>، <strong>event handler</strong> را لغو اشتراک کنید:</p><pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Dispose</span>()</span> { _host.Click -= HostClicked; }
+</code></pre> <p>سپس مصرف‌کنندگان Client پس از اتمام استفاده از نمونه‌ها آن‌ها را Dispose می‌کنند:</p><pre class="hljs"><code>Array.ForEach(clients, c =&gt; c.Dispose());
+</code></pre> <hr><p>⏱ <strong>Timers</strong></p><p>در بخش «Weak References» در صفحه 603، راه‌حل دیگری برای این مشکل ارائه شده است که در محیط‌هایی که تمایل به استفاده از اشیاء disposable ندارند (مثلاً <strong>WPF</strong>) مفید است. در واقع، WPF یک کلاس به نام <strong>WeakEventManager</strong> ارائه می‌دهد که از الگوی weak references استفاده می‌کند.</p><p>تایمرهای فراموش‌شده نیز می‌توانند باعث نشت حافظه شوند (در فصل 21 تایمرها را بررسی کرده‌ایم). دو سناریوی متفاوت وجود دارد، بسته به نوع تایمر:</p><p>ابتدا تایمر در <strong>System.Timers</strong> را بررسی می‌کنیم. در مثال زیر، کلاس <strong>Foo</strong> (هنگام نمونه‌سازی) هر ثانیه متد <strong>tmr_Elapsed</strong> را فراخوانی می‌کند:</p><pre class="hljs"><code><span class="hljs-keyword">using</span> System.Timers;
 <span class="hljs-keyword">class</span> <span class="hljs-title">Foo</span>
 {
  Timer _timer;
@@ -829,23 +258,12 @@ GC.Collect();
  }
  <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">tmr_Elapsed</span>(<span class="hljs-params"><span class="hljs-built_in">object</span> sender, ElapsedEventArgs e</span>)</span> { ... }
 }
-</code></pre>
-<p>متأسفانه، نمونه‌های Foo هرگز جمع‌آوری نمی‌شوند! مشکل این است که runtime خودش به تایمرهای فعال مرجع دارد تا بتواند event <strong>Elapsed</strong> آن‌ها را اجرا کند؛ بنابراین:</p>
-<ul>
-<li>runtime شیء <strong>_timer</strong> را زنده نگه می‌دارد.</li>
-<li><strong>_timer</strong> شیء Foo را از طریق <strong>tmr_Elapsed</strong> زنده نگه می‌دارد.</li>
-</ul>
-<p>راه حل واضح است: چون <strong>Timer</strong> پیاده‌سازی <strong>IDisposable</strong> دارد، با Dispose کردن تایمر، اجرای آن متوقف شده و runtime دیگر به شیء مرجع ندارد:</p>
-<pre class="hljs"><code><span class="hljs-keyword">class</span> <span class="hljs-title">Foo</span> : <span class="hljs-title">IDisposable</span>
+</code></pre> <p>متأسفانه، نمونه‌های Foo هرگز جمع‌آوری نمی‌شوند! مشکل این است که runtime خودش به تایمرهای فعال مرجع دارد تا بتواند event <strong>Elapsed</strong> آن‌ها را اجرا کند؛ بنابراین:</p><ul> <li>runtime شیء <strong>_timer</strong> را زنده نگه می‌دارد.</li><li><strong>_timer</strong> شیء Foo را از طریق <strong>tmr_Elapsed</strong> زنده نگه می‌دارد.</li></ul> <p>راه حل واضح است: چون <strong>Timer</strong> پیاده‌سازی <strong>IDisposable</strong> دارد، با Dispose کردن تایمر، اجرای آن متوقف شده و runtime دیگر به شیء مرجع ندارد:</p><pre class="hljs"><code><span class="hljs-keyword">class</span> <span class="hljs-title">Foo</span> : <span class="hljs-title">IDisposable</span>
 {
  ...
  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Dispose</span>()</span> { _timer.Dispose(); }
 }
-</code></pre>
-<p>یک دستورالعمل خوب این است که اگر هر فیلدی در کلاس شما به شیئی اختصاص دارد که <strong>IDisposable</strong> را پیاده‌سازی کرده، خودتان IDisposable را پیاده‌سازی کنید.</p>
-<p>تایمرهای <strong>WPF</strong> و <strong>Windows Forms</strong> نیز به همین شکل رفتار می‌کنند.</p>
-<p>تایمر در <strong>System.Threading</strong>، با این حال، خاص است. .NET به تایمرهای threading فعال مرجع ندارد؛ بلکه مستقیماً delegate‌های callback را مرجع می‌کند. این بدان معناست که اگر Dispose کردن تایمر threading فراموش شود، یک finalizer می‌تواند اجرا شود و تایمر را به‌صورت خودکار متوقف و Dispose کند:</p>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Main</span>()</span>
+</code></pre> <p>یک دستورالعمل خوب این است که اگر هر فیلدی در کلاس شما به شیئی اختصاص دارد که <strong>IDisposable</strong> را پیاده‌سازی کرده، خودتان IDisposable را پیاده‌سازی کنید.</p><p>تایمرهای <strong>WPF</strong> و <strong>Windows Forms</strong> نیز به همین شکل رفتار می‌کنند.</p><p>تایمر در <strong>System.Threading</strong>، با این حال، خاص است. .NET به تایمرهای threading فعال مرجع ندارد؛ بلکه مستقیماً delegate‌های callback را مرجع می‌کند. این بدان معناست که اگر Dispose کردن تایمر threading فراموش شود، یک finalizer می‌تواند اجرا شود و تایمر را به‌صورت خودکار متوقف و Dispose کند:</p><pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Main</span>()</span>
 {
  <span class="hljs-keyword">var</span> tmr = <span class="hljs-keyword">new</span> System.Threading.Timer(TimerTick, <span class="hljs-literal">null</span>, <span class="hljs-number">1000</span>, <span class="hljs-number">1000</span>);
  GC.Collect();
@@ -853,46 +271,23 @@ GC.Collect();
 }
 
 <span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">TimerTick</span>(<span class="hljs-params"><span class="hljs-built_in">object</span> notUsed</span>)</span> { Console.WriteLine(<span class="hljs-string">&quot;tick&quot;</span>); }
-</code></pre>
-<p>اگر این مثال در حالت release (debug غیرفعال و بهینه‌سازی فعال) کامپایل شود، تایمر قبل از اینکه یک بار هم اجرا شود، جمع‌آوری و نهایی خواهد شد!</p>
-<p>دوباره، این مشکل با Dispose کردن تایمر هنگام اتمام استفاده برطرف می‌شود:</p>
-<pre class="hljs"><code><span class="hljs-keyword">using</span> (<span class="hljs-keyword">var</span> tmr = <span class="hljs-keyword">new</span> System.Threading.Timer(TimerTick, <span class="hljs-literal">null</span>, <span class="hljs-number">1000</span>, <span class="hljs-number">1000</span>))
+</code></pre> <p>اگر این مثال در حالت release (debug غیرفعال و بهینه‌سازی فعال) کامپایل شود، تایمر قبل از اینکه یک بار هم اجرا شود، جمع‌آوری و نهایی خواهد شد!</p><p>دوباره، این مشکل با Dispose کردن تایمر هنگام اتمام استفاده برطرف می‌شود:</p><pre class="hljs"><code><span class="hljs-keyword">using</span> (<span class="hljs-keyword">var</span> tmr = <span class="hljs-keyword">new</span> System.Threading.Timer(TimerTick, <span class="hljs-literal">null</span>, <span class="hljs-number">1000</span>, <span class="hljs-number">1000</span>))
 {
  GC.Collect();
  System.Threading.Thread.Sleep(<span class="hljs-number">10000</span>); <span class="hljs-comment">// صبر 10 ثانیه</span>
 }
-</code></pre>
-<p>فراخوانی ضمنی <strong>tmr.Dispose</strong> در پایان <strong>using</strong> باعث می‌شود که متغیر <strong>tmr</strong> “استفاده‌شده” در نظر گرفته شود و تا پایان بلوک توسط GC مرده محسوب نشود.</p>
-<p>طنز این است که این فراخوانی Dispose در واقع عمر شیء را طولانی‌تر می‌کند! 🎯</p>
-<p>🕵️‍♂️ <strong>تشخیص نشت حافظه (Diagnosing Memory Leaks)</strong></p>
-<p>ساده‌ترین راه برای جلوگیری از <strong>نشت حافظه مدیریت‌شده</strong> این است که از همان ابتدا مصرف حافظه را در حین نوشتن برنامه تحت نظر داشته باشید. می‌توانید مصرف فعلی حافظه اشیاء برنامه را به این صورت به‌دست آورید (آرگومان <strong>true</strong> به GC می‌گوید ابتدا یک جمع‌آوری انجام دهد):</p>
-<pre class="hljs"><code><span class="hljs-built_in">long</span> memoryUsed = GC.GetTotalMemory(<span class="hljs-literal">true</span>);
-</code></pre>
-<p>اگر از توسعه مبتنی بر تست (<strong>test-driven development</strong>) استفاده می‌کنید، می‌توانید از <strong>unit test</strong>ها برای اطمینان از آزاد شدن حافظه استفاده کنید. اگر این بررسی شکست خورد، فقط کافی است تغییرات اخیر خود را بررسی کنید.</p>
-<p>اگر قبلاً یک برنامه بزرگ با <strong>نشت حافظه مدیریت‌شده</strong> دارید، ابزار <strong>windbg.exe</strong> می‌تواند کمک‌کننده باشد. همچنین ابزارهای گرافیکی دوستانه‌تری مانند <strong>CLR Profiler</strong> مایکروسافت، <strong>Memory Profiler</strong> شرکت SciTech و <strong>ANTS Memory Profiler</strong> شرکت Red Gate نیز موجود هستند.</p>
-<p><strong>CLR</strong> همچنین شمارنده‌های رویداد مختلفی ارائه می‌دهد تا در نظارت بر منابع کمک کند.</p>
-<hr>
-<p>🔗 <strong>Weak References</strong></p>
-<p>گاهی اوقات مفید است که یک مرجع به شیئی داشته باشیم که برای <strong>GC</strong> «نامرئی» باشد و مانع جمع‌آوری آن نشود. این نوع مرجع را <strong>weak reference</strong> می‌نامند و با کلاس <strong>System.WeakReference</strong> پیاده‌سازی می‌شود.</p>
-<p>برای استفاده از <strong>WeakReference</strong>، آن را با شیء هدف ایجاد کنید:</p>
-<pre class="hljs"><code><span class="hljs-keyword">var</span> sb = <span class="hljs-keyword">new</span> StringBuilder(<span class="hljs-string">&quot;this is a test&quot;</span>);
+</code></pre> <p>فراخوانی ضمنی <strong>tmr.Dispose</strong> در پایان <strong>using</strong> باعث می‌شود که متغیر <strong>tmr</strong> “استفاده‌شده” در نظر گرفته شود و تا پایان بلوک توسط GC مرده محسوب نشود.</p><p>طنز این است که این فراخوانی Dispose در واقع عمر شیء را طولانی‌تر می‌کند!</p><p>‍ <strong>تشخیص نشت حافظه (Diagnosing Memory Leaks)</strong></p><p>ساده‌ترین راه برای جلوگیری از <strong>نشت حافظه مدیریت‌شده</strong> این است که از همان ابتدا مصرف حافظه را در حین نوشتن برنامه تحت نظر داشته باشید. می‌توانید مصرف فعلی حافظه اشیاء برنامه را به این صورت به‌دست آورید (آرگومان <strong>true</strong> به GC می‌گوید ابتدا یک جمع‌آوری انجام دهد):</p><pre class="hljs"><code><span class="hljs-built_in">long</span> memoryUsed = GC.GetTotalMemory(<span class="hljs-literal">true</span>);
+</code></pre> <p>اگر از توسعه مبتنی بر تست (<strong>test-driven development</strong>) استفاده می‌کنید، می‌توانید از <strong>unit test</strong>ها برای اطمینان از آزاد شدن حافظه استفاده کنید. اگر این بررسی شکست خورد، فقط کافی است تغییرات اخیر خود را بررسی کنید.</p><p>اگر قبلاً یک برنامه بزرگ با <strong>نشت حافظه مدیریت‌شده</strong> دارید، ابزار <strong>windbg.exe</strong> می‌تواند کمک‌کننده باشد. همچنین ابزارهای گرافیکی دوستانه‌تری مانند <strong>CLR Profiler</strong> مایکروسافت، <strong>Memory Profiler</strong> شرکت SciTech و <strong>ANTS Memory Profiler</strong> شرکت Red Gate نیز موجود هستند.</p><p><strong>CLR</strong> همچنین شمارنده‌های رویداد مختلفی ارائه می‌دهد تا در نظارت بر منابع کمک کند.</p><hr> <p><strong>Weak References</strong></p><p>گاهی اوقات مفید است که یک مرجع به شیئی داشته باشیم که برای <strong>GC</strong> «نامرئی» باشد و مانع جمع‌آوری آن نشود. این نوع مرجع را <strong>weak reference</strong> می‌نامند و با کلاس <strong>System.WeakReference</strong> پیاده‌سازی می‌شود.</p><p>برای استفاده از <strong>WeakReference</strong>، آن را با شیء هدف ایجاد کنید:</p><pre class="hljs"><code><span class="hljs-keyword">var</span> sb = <span class="hljs-keyword">new</span> StringBuilder(<span class="hljs-string">&quot;this is a test&quot;</span>);
 <span class="hljs-keyword">var</span> weak = <span class="hljs-keyword">new</span> WeakReference(sb);
 Console.WriteLine(weak.Target); <span class="hljs-comment">// This is a test</span>
-</code></pre>
-<p>اگر شیء هدف تنها توسط یک یا چند <strong>weak reference</strong> مرجع شود، GC آن را واجد شرایط جمع‌آوری می‌داند. پس از جمع‌آوری، ویژگی <strong>Target</strong> برابر <strong>null</strong> خواهد بود:</p>
-<pre class="hljs"><code><span class="hljs-keyword">var</span> weak = GetWeakRef();
+</code></pre> <p>اگر شیء هدف تنها توسط یک یا چند <strong>weak reference</strong> مرجع شود، GC آن را واجد شرایط جمع‌آوری می‌داند. پس از جمع‌آوری، ویژگی <strong>Target</strong> برابر <strong>null</strong> خواهد بود:</p><pre class="hljs"><code><span class="hljs-keyword">var</span> weak = GetWeakRef();
 GC.Collect();
 Console.WriteLine(weak.Target); <span class="hljs-comment">// (nothing)</span>
 
 <span class="hljs-function">WeakReference <span class="hljs-title">GetWeakRef</span>()</span> =&gt; <span class="hljs-keyword">new</span> WeakReference(<span class="hljs-keyword">new</span> StringBuilder(<span class="hljs-string">&quot;weak&quot;</span>));
-</code></pre>
-<p>برای جلوگیری از جمع‌آوری هدف بین بررسی null و استفاده از آن، آن را به یک متغیر محلی اختصاص دهید:</p>
-<pre class="hljs"><code><span class="hljs-keyword">var</span> sb = (StringBuilder)weak.Target;
+</code></pre> <p>برای جلوگیری از جمع‌آوری هدف بین بررسی null و استفاده از آن، آن را به یک متغیر محلی اختصاص دهید:</p><pre class="hljs"><code><span class="hljs-keyword">var</span> sb = (StringBuilder)weak.Target;
 <span class="hljs-keyword">if</span> (sb != <span class="hljs-literal">null</span>) { <span class="hljs-comment">/* استفاده از sb */</span> }
-</code></pre>
-<p>پس از اختصاص هدف به یک متغیر محلی، آن یک <strong>strong root</strong> پیدا می‌کند و تا زمانی که متغیر در استفاده باشد، جمع‌آوری نمی‌شود.</p>
-<p>کلاس زیر از <strong>weak references</strong> برای پیگیری همه اشیاء <strong>Widget</strong> که ایجاد شده‌اند استفاده می‌کند، بدون اینکه مانع جمع‌آوری آن‌ها شود:</p>
-<pre class="hljs"><code><span class="hljs-keyword">class</span> <span class="hljs-title">Widget</span>
+</code></pre> <p>پس از اختصاص هدف به یک متغیر محلی، آن یک <strong>strong root</strong> پیدا می‌کند و تا زمانی که متغیر در استفاده باشد، جمع‌آوری نمی‌شود.</p><p>کلاس زیر از <strong>weak references</strong> برای پیگیری همه اشیاء <strong>Widget</strong> که ایجاد شده‌اند استفاده می‌کند، بدون اینکه مانع جمع‌آوری آن‌ها شود:</p><pre class="hljs"><code><span class="hljs-keyword">class</span> <span class="hljs-title">Widget</span>
 {
  <span class="hljs-keyword">static</span> List&lt;WeakReference&gt; _allWidgets = <span class="hljs-keyword">new</span> List&lt;WeakReference&gt;();
  <span class="hljs-keyword">public</span> <span class="hljs-keyword">readonly</span> <span class="hljs-built_in">string</span> Name;
@@ -910,23 +305,11 @@ Console.WriteLine(weak.Target); <span class="hljs-comment">// (nothing)</span>
    }
  }
 }
-</code></pre>
-<p>تنها نکته این است که این <strong>static list</strong> با گذشت زمان رشد می‌کند و <strong>weak references</strong> با <strong>target null</strong> جمع می‌شوند. بنابراین، باید یک <strong>استراتژی پاکسازی</strong> پیاده‌سازی کنید.</p>
-<hr>
-<p>💾 <strong>Weak References و Caching</strong></p>
-<p>یکی از کاربردهای <strong>WeakReference</strong>، <strong>cache کردن اشیاء بزرگ</strong> است. این روش اجازه می‌دهد داده‌های پرحجم به طور موقت ذخیره شوند بدون اینکه مصرف حافظه بیش از حد شود:</p>
-<pre class="hljs"><code>_weakCache = <span class="hljs-keyword">new</span> WeakReference(...); <span class="hljs-comment">// _weakCache یک فیلد است</span>
+</code></pre> <p>تنها نکته این است که این <strong>static list</strong> با گذشت زمان رشد می‌کند و <strong>weak references</strong> با <strong>target null</strong> جمع می‌شوند. بنابراین، باید یک <strong>استراتژی پاکسازی</strong> پیاده‌سازی کنید.</p><hr> <p><strong>Weak References و Caching</strong></p><p>یکی از کاربردهای <strong>WeakReference</strong>، <strong>cache کردن اشیاء بزرگ</strong> است. این روش اجازه می‌دهد داده‌های پرحجم به طور موقت ذخیره شوند بدون اینکه مصرف حافظه بیش از حد شود:</p><pre class="hljs"><code>_weakCache = <span class="hljs-keyword">new</span> WeakReference(...); <span class="hljs-comment">// _weakCache یک فیلد است</span>
 ...
 <span class="hljs-keyword">var</span> cache = _weakCache.Target;
 <span class="hljs-keyword">if</span> (cache == <span class="hljs-literal">null</span>) { <span class="hljs-comment">/* cache را دوباره ایجاد و به _weakCache اختصاص دهید */</span> }
-</code></pre>
-<p>این استراتژی در عمل فقط تا حدی مؤثر است، زیرا شما کنترلی بر زمان اجرای GC و نسل جمع‌آوری شده ندارید. به‌ویژه اگر cache شما در <strong>Gen0</strong> باشد، ممکن است ظرف میکروثانیه جمع‌آوری شود. بنابراین، بهتر است از <strong>cache دو سطحی</strong> استفاده کنید: ابتدا با <strong>strong references</strong> شروع کنید و سپس به <strong>weak references</strong> تبدیل کنید.</p>
-<hr>
-<p>🔔 <strong>Weak References و Events</strong></p>
-<p>قبلاً دیدیم که <strong>events</strong> می‌توانند باعث نشت حافظه شوند. ساده‌ترین راه حل این است که از subscribe در چنین شرایطی اجتناب کنید یا یک متد <strong>Dispose</strong> برای unsubscribe پیاده‌سازی کنید. <strong>Weak references</strong> راه حل دیگری ارائه می‌دهند.</p>
-<p>تصور کنید یک <strong>delegate</strong> که فقط <strong>weak references</strong> به اهداف خود نگه می‌دارد. چنین delegate‌ای اهداف را زنده نگه نمی‌دارد—مگر اینکه آن اهداف مرجع مستقلی داشته باشند. البته این مانع اجرای delegate نمی‌شود که ممکن است به هدف بدون مرجع برسد، بین زمانی که هدف واجد شرایط جمع‌آوری شده و GC هنوز آن را جمع‌آوری نکرده است.</p>
-<p>برای اینکه چنین راه‌حلی مؤثر باشد، کد شما باید در این سناریو مقاوم باشد. در این صورت می‌توانید کلاس <strong>weak delegate</strong> را به این شکل پیاده‌سازی کنید:</p>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">WeakDelegate</span>&lt;<span class="hljs-title">TDelegate</span>&gt; <span class="hljs-keyword">where</span> <span class="hljs-title">TDelegate</span> : <span class="hljs-title">Delegate</span>
+</code></pre> <p>این استراتژی در عمل فقط تا حدی مؤثر است، زیرا شما کنترلی بر زمان اجرای GC و نسل جمع‌آوری شده ندارید. به‌ویژه اگر cache شما در <strong>Gen0</strong> باشد، ممکن است ظرف میکروثانیه جمع‌آوری شود. بنابراین، بهتر است از <strong>cache دو سطحی</strong> استفاده کنید: ابتدا با <strong>strong references</strong> شروع کنید و سپس به <strong>weak references</strong> تبدیل کنید.</p><hr> <p><strong>Weak References و Events</strong></p><p>قبلاً دیدیم که <strong>events</strong> می‌توانند باعث نشت حافظه شوند. ساده‌ترین راه حل این است که از subscribe در چنین شرایطی اجتناب کنید یا یک متد <strong>Dispose</strong> برای unsubscribe پیاده‌سازی کنید. <strong>Weak references</strong> راه حل دیگری ارائه می‌دهند.</p><p>تصور کنید یک <strong>delegate</strong> که فقط <strong>weak references</strong> به اهداف خود نگه می‌دارد. چنین delegate‌ای اهداف را زنده نگه نمی‌دارد—مگر اینکه آن اهداف مرجع مستقلی داشته باشند. البته این مانع اجرای delegate نمی‌شود که ممکن است به هدف بدون مرجع برسد، بین زمانی که هدف واجد شرایط جمع‌آوری شده و GC هنوز آن را جمع‌آوری نکرده است.</p><p>برای اینکه چنین راه‌حلی مؤثر باشد، کد شما باید در این سناریو مقاوم باشد. در این صورت می‌توانید کلاس <strong>weak delegate</strong> را به این شکل پیاده‌سازی کنید:</p><pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">WeakDelegate</span>&lt;<span class="hljs-title">TDelegate</span>&gt; <span class="hljs-keyword">where</span> <span class="hljs-title">TDelegate</span> : <span class="hljs-title">Delegate</span>
 {
  <span class="hljs-keyword">class</span> <span class="hljs-title">MethodTarget</span>
  {
@@ -984,12 +367,7 @@ Console.WriteLine(weak.Target); <span class="hljs-comment">// (nothing)</span>
    }
  }
 }
-</code></pre>
-<p>در متدهای <strong>Combine</strong> و <strong>Remove</strong>، تبدیل مرجع از target به <strong>Delegate</strong> با <strong>as operator</strong> انجام می‌شود تا از ابهام بالقوه بین <strong>custom conversion</strong> و <strong>reference conversion</strong> جلوگیری شود.</p>
-<p>در ویژگی <strong>Target</strong>، یک <strong>multicast delegate</strong> ایجاد می‌کنیم که همه delegateهای زنده‌ای که توسط <strong>weak references</strong> نگه داشته شده‌اند را ترکیب می‌کند و مابقی (dead) را از لیست حذف می‌کند تا لیست _targets بی‌پایان رشد نکند.</p>
-<hr>
-<p>📌 مثال استفاده از این delegate در پیاده‌سازی event:</p>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Foo</span>
+</code></pre> <p>در متدهای <strong>Combine</strong> و <strong>Remove</strong>، تبدیل مرجع از target به <strong>Delegate</strong> با <strong>as operator</strong> انجام می‌شود تا از ابهام بالقوه بین <strong>custom conversion</strong> و <strong>reference conversion</strong> جلوگیری شود.</p><p>در ویژگی <strong>Target</strong>، یک <strong>multicast delegate</strong> ایجاد می‌کنیم که همه delegateهای زنده‌ای که توسط <strong>weak references</strong> نگه داشته شده‌اند را ترکیب می‌کند و مابقی (dead) را از لیست حذف می‌کند تا لیست _targets بی‌پایان رشد نکند.</p><hr> <p>مثال استفاده از این delegate در پیاده‌سازی event:</p><pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Foo</span>
 {
  WeakDelegate&lt;EventHandler&gt; _click = <span class="hljs-keyword">new</span> WeakDelegate&lt;EventHandler&gt;();
  <span class="hljs-keyword">public</span> <span class="hljs-keyword">event</span> EventHandler Click
@@ -1000,118 +378,216 @@ Console.WriteLine(weak.Target); <span class="hljs-comment">// (nothing)</span>
  <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">OnClick</span>(<span class="hljs-params">EventArgs e</span>)</span>
    =&gt; _click.Target?.Invoke(<span class="hljs-keyword">this</span>, e);
 }
-</code></pre>
-
-  </main>
-
-  <!-- فوتر مشترک -->
-  <footer class="footer">
-    <div class="container">
-      <p>
-        <img src="/Gitab/icone/copyright.svg" alt="کپی‌رایت" width="14" height="14"
-             style="vertical-align:middle;margin-inline:4px">
-        <span id="y"></span> Gitab — تمامی حقوق محفوظ است.
-      </p>
-    </div>
-  </footer>
-
-  <!-- سال و اسکریپت تغییر تم -->
-  <script>
+</code></pre></article><nav class="chapter-single-next-nav"> <a href="/Gitab/books/book1/Book/13/Diagnostics/" class="btn-next-chapter-action" id="nextChapterBtn" data-hub="/Gitab/books/book1/"> <span class="next-btn-text">فصل بعدی: عیب‌یابی و Diagnostics</span> <span class="next-btn-arrow">←</span> </a> </nav></div> <button class="fab-back-to-top" id="backToTopBtn" type="button" aria-label="رفتن به بالای صفحه" title="رفتن به بالا"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"> <polyline points="18 15 12 9 6 15"></polyline> </svg> </button></main> <footer class="footer-minimal"><div class="footer-container"> <div class="footer-top-row"><div class="footer-brand-side"> <a href="/Gitab/" class="footer-brand-anchor"> <img src="/Gitab/icone/logo.svg" alt="Gitab" width="28" height="28" loading="lazy" decoding="async"> <span class="footer-brand-title">گیتاب (Gitab)</span> </a> <p class="footer-tagline"> پلتفرم آزاد و مستقل برای ترجمهٔ دقیق و روان کتاب‌های مرجع مهندسی نرم‌افزار. </p></div> <div class="footer-nav-cols"><div class="footer-nav-col"> <span class="footer-nav-heading">موضوعات</span><ul class="footer-nav-list"> <li><a href="/Gitab/books/list-books/?cat=csharp">سی‌شارپ و دات‌نت</a></li><li><a href="/Gitab/books/list-books/?cat=clean-code">کد تمیز و بازآفرینی</a></li><li><a href="/Gitab/books/list-books/?cat=architecture">معماری و طراحی دامنه</a></li><li><a href="/Gitab/books/list-books/?cat=system">لینوکس و خط فرمان</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">بخش‌های سایت</span><ul class="footer-nav-list"> <li><a href="/Gitab/">صفحه اصلی</a></li><li><a href="/Gitab/books/list-books/">کتابخانه کامل</a></li><li><a href="/Gitab/courses/">دوره‌های آموزشی</a></li><li><a href="/Gitab/translator.html">تالار مترجمین</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">مشارکت و جامعه</span><ul class="footer-nav-list"> <li><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer">راهنمای همکاری در ترجمه</a></li><li><a href="https://github.com/hheydarian/Gitab/issues" target="_blank" rel="noopener noreferrer">پیشنهاد کتاب یا گزارش خطا</a></li></ul> </div></div> </div><div class="footer-bottom-line"> <span>© <span id="y">2026</span> Gitab — توسعه‌یافته برای جامعهٔ مهندسان نرم‌افزار ایرانی</span></div> </div></footer> <script>
   (() => {
     const root = document.documentElement;
     const btn = document.getElementById('themeToggle');
+    const sunIcon = btn ? btn.querySelector('.icon-sun') : null;
+    const moonIcon = btn ? btn.querySelector('.icon-moon') : null;
     const KEY = 'gitab-theme';
 
-    function updateTheme(s) {
-      root.setAttribute('data-theme', s);
-      const mode = s;  // فقط `dark` یا `light` خواهد بود
+    function updateTheme(mode) {
+      root.setAttribute('data-theme', mode);
       root.dataset.colorMode = mode;
-      btn.dataset.icon = mode === 'dark' ? 'moon' : 'sun';
+      if (sunIcon && moonIcon) {
+        if (mode === 'dark') {
+          sunIcon.style.display = 'inline-block';
+          moonIcon.style.display = 'none';
+        } else {
+          sunIcon.style.display = 'none';
+          moonIcon.style.display = 'inline-block';
+        }
+      }
     }
 
-    // وضعیت تم ذخیره شده از localStorage
-    let saved = localStorage.getItem(KEY) || 'light'; // پیش‌فرض روشن
+    let saved = 'dark';
+    try { saved = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
     updateTheme(saved);
 
-    // تنظیم مجدد تم هنگام تغییر وضعیت دکمه
-    btn.addEventListener('click', () => {
-      const current = localStorage.getItem(KEY) || 'light';
-      const next = current === 'dark' ? 'light' : 'dark';  // فقط دو حالت: تاریک و روشن
-      localStorage.setItem(KEY, next);
-      updateTheme(next);
-    });
+    if (btn) {
+      btn.addEventListener('click', () => {
+        let current = 'dark';
+        try { current = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+        const next = current === 'dark' ? 'light' : 'dark';
+        try { localStorage.setItem(KEY, next); } catch (e) {}
+        updateTheme(next);
+      });
+    }
 
-    // هنگام بارگذاری صفحه
     document.addEventListener('DOMContentLoaded', () => {
-      updateTheme(localStorage.getItem(KEY) || 'light');
+      let mode = 'dark';
+      try { mode = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+      updateTheme(mode);
+      const yearSpan = document.getElementById('y');
+      if (yearSpan) yearSpan.textContent = new Date().getFullYear();
     });
+
+    const mobBtn = document.getElementById('mobileMenuBtn');
+    const mobDrawer = document.getElementById('mobileDrawer');
+    if (mobBtn && mobDrawer) {
+      const setDrawerOpen = (open) => {
+        mobDrawer.classList.toggle('open', open);
+        mobBtn.classList.toggle('is-open', open);
+        mobBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        mobBtn.setAttribute('aria-label', open ? 'بستن منو' : 'باز کردن منو');
+        mobDrawer.setAttribute('aria-hidden', open ? 'false' : 'true');
+      };
+
+      mobBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        setDrawerOpen(!mobDrawer.classList.contains('open'));
+      });
+
+      mobDrawer.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => setDrawerOpen(false));
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && mobDrawer.classList.contains('open')) {
+          setDrawerOpen(false);
+        }
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!mobDrawer.contains(e.target) && !mobBtn.contains(e.target)) {
+          setDrawerOpen(false);
+        }
+      });
+    }
+
+    if ('serviceWorker' in navigator) {
+      const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+      if (isLocalhost) {
+        navigator.serviceWorker.getRegistrations().then(regs => {
+          for (const reg of regs) reg.unregister();
+        });
+        if ('caches' in window) {
+          caches.keys().then(names => {
+            for (const name of names) caches.delete(name);
+          });
+        }
+      } else {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/Gitab/sw.js').catch(() => {});
+        });
+      }
+    }
   })();
-</script>
-
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-  <script>hljs.highlightAll();</script>
-
-  <script>
+  </script> <script>
   document.querySelectorAll('pre code').forEach(block => {
+    const pre = block.parentNode;
+    if (!pre || pre.querySelector('.copy-btn')) return;
+
+    const copySvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
+    const okSvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+
     const btn = document.createElement('button');
     btn.className = 'copy-btn';
-
-    const icon = document.createElement('img');
-    icon.src = "/Gitab/icone/copy.svg";
-    icon.alt = 'Copy';
-    btn.appendChild(icon);
-
-    block.parentNode.insertBefore(btn, block);
+    btn.setAttribute('aria-label', 'کپی کد');
+    btn.setAttribute('title', 'کپی کد');
+    btn.setAttribute('type', 'button');
+    btn.innerHTML = copySvg;
+    pre.appendChild(btn);
 
     btn.addEventListener('click', async () => {
-      await navigator.clipboard.writeText(block.textContent);
-      btn.classList.add('copied');
-      setTimeout(() => btn.classList.remove('copied'), 1500);
-    });
-  });
-  </script>
-
-  <script>
-  document.body.dataset.page = window.location.pathname;
-
-  const menuBtn = document.querySelector(".menu-toggle");
-  const nav = document.querySelector(".nav");
-
-  if (menuBtn && nav) {
-    menuBtn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      nav.classList.toggle("show");
-    });
-
-    document.addEventListener("click", (e) => {
-      const clickedInsideNav = nav.contains(e.target);
-      const clickedMenuButton = menuBtn.contains(e.target);
-      if (!clickedInsideNav && !clickedMenuButton) {
-        nav.classList.remove("show");
+      try {
+        await navigator.clipboard.writeText(block.textContent);
+        btn.classList.add('copied');
+        btn.innerHTML = okSvg;
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          btn.innerHTML = copySvg;
+        }, 1800);
+      } catch (err) {
+        console.error('Copy failed:', err);
       }
     });
-  }
-  </script>
-
-  <script>
-    document.getElementById('y').textContent = new Date().getFullYear();
-  </script>
-  <script>
-document.getElementById("openDonate").addEventListener("click", () => {
-  document.getElementById("donateModal").style.display = "block";
-});
-document.getElementById("closeDonate").addEventListener("click", () => {
-  document.getElementById("donateModal").style.display = "none";
-});
-document.querySelectorAll(".copy-btn").forEach(btn => {
-  btn.addEventListener("click", () => {
-    navigator.clipboard.writeText(btn.dataset.copy);
-  
-    setTimeout(() => (btn.textContent = "کپی"), 2000);
   });
-});
-</script>
+  </script> <script>
+  (() => {
+    const article = document.getElementById('chapterArticle');
+    if (!article) return;
 
-</body>
-</html>
+    const progressBar = document.getElementById('readingProgressBar');
+    if (progressBar) {
+      window.addEventListener('scroll', () => {
+        const docElem = document.documentElement;
+        const totalHeight = docElem.scrollHeight - docElem.clientHeight;
+        if (totalHeight > 0) {
+          const progress = (window.pageYOffset / totalHeight) * 100;
+          progressBar.style.width = Math.min(100, Math.max(0, progress)) + '%';
+        }
+      }, { passive: true });
+    }
+
+    const btt = document.getElementById('backToTopBtn');
+    if (btt) {
+      window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 250) {
+          btt.classList.add('visible');
+        } else {
+          btt.classList.remove('visible');
+        }
+      }, { passive: true });
+
+      btt.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+
+    article.querySelectorAll('img').forEach(img => {
+      if (!img.hasAttribute('loading')) img.loading = 'lazy';
+      if (!img.hasAttribute('decoding')) img.decoding = 'async';
+      const parent = img.parentElement;
+      if (parent && parent.tagName === 'P') {
+        parent.style.textAlign = 'center';
+      }
+
+      img.addEventListener('error', function() {
+        const src = this.getAttribute('src');
+        if (src && src.includes('assets/image/')) {
+          const parts = src.split('assets/image/');
+          const corrected = '/Gitab/books/book1/assets/image/' + parts[1];
+          if (this.src !== corrected) {
+            this.src = corrected;
+          }
+        }
+      });
+    });
+
+    article.querySelectorAll('p').forEach(p => {
+      const trimmed = p.innerText.trim();
+      if (trimmed.startsWith('💡') || trimmed.startsWith('نکته:')) {
+        p.classList.add('react-callout', 'callout-tip');
+      } else if (trimmed.startsWith('⚠️') || trimmed.startsWith('هشدار:')) {
+        p.classList.add('react-callout', 'callout-warning');
+      } else if (trimmed.startsWith('📌') || trimmed.startsWith('مهم:')) {
+        p.classList.add('react-callout', 'callout-important');
+      } else if (trimmed.startsWith('🔹') || trimmed.startsWith('🔸')) {
+        p.classList.add('react-callout', 'callout-note');
+      }
+    });
+  })();
+  </script> <script type="speculationrules">{"prefetch":[{"where":{"and":[{"href_matches":"/Gitab/*"},{"not":{"href_matches":"/Gitab/downloads/*"}},{"not":{"selector_matches":"[download], [target='_blank']"}}]},"eagerness":"moderate"}]}</script> <script>
+  (() => {
+    if (window.HTMLScriptElement && HTMLScriptElement.supports && HTMLScriptElement.supports('speculationrules')) return;
+    const seen = new Set([window.location.href]);
+    let count = 0;
+    const prefetchLink = (e) => {
+      if (count >= 12) return;
+      const a = e.target && e.target.closest ? e.target.closest('header a, .chapter-single-next-nav a, .syllabus-chapter-item a, .btn-hero-read, .btn-card-read') : null;
+      if (!a || !a.href || a.hasAttribute('download') || a.target === '_blank') return;
+      if (a.origin !== window.location.origin || a.pathname.includes('/downloads/')) return;
+      const clean = a.href.split('#')[0];
+      if (!clean || seen.has(clean)) return;
+      seen.add(clean);
+      count++;
+      const l = document.createElement('link');
+      l.rel = 'prefetch';
+      l.href = clean;
+      document.head.appendChild(l);
+    };
+    document.addEventListener('pointerenter', prefetchLink, { capture: true, passive: true });
+    document.addEventListener('touchstart', prefetchLink, { capture: true, passive: true });
+  })();
+  </script></body></html>

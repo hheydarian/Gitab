@@ -1,404 +1,80 @@
-
-
-<!doctype html>
-<html lang="fa" dir="rtl">
-<head>
-  <meta charset="utf-8">
-  <link rel="icon" type="image/png" href="/Gitab/favicon.png">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Value Types</title>
-  <meta name="description" content="ترجمه‌های فارسی کتاب‌های فنی — سریع، مینیمال و قابل اتکا.">
-
-  <!-- استایل‌ها -->
-  <link rel="stylesheet" href="/Gitab/styles/main.css">
-  <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
-
-  <style>
-  @font-face {
-    font-family: 'Vazir';
-    src: url('/Gitab/fonts/Vazir-FD-WOL.ttf') format('truetype');
-    font-display: swap;
-  }
-  @font-face {
-    font-family: "Lalezar";
-    src: url('fonts/Lalezar.ttf') format('truetype');
-    font-display: swap;
-}
-  body {
-    font-family: 'Vazir', sans-serif;
-  }
-  </style>
-</head>
-
-<body>
-  <!-- هدر مشترک -->
-  <header class="header">
-    <div class="container nav-wrap">
-      <a href="/Gitab/" class="brand">
-        <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="26" height="26">
-        <span>Gitab</span>
-      </a>
-
-       <nav class="nav">
-         <a href="/Gitab/" >خانه</a>
-         <a href="/Gitab/books/list-books" >کتاب‌ها</a>
-         <a href="/Gitab/giter.html" >دوره ها</a>
-          <!-- 
-         <a href="/Gitab/translator.html" >مترجمین</a>
-           -->
-       </nav>
-
-      <div class="nav-actions">
-        <button id="themeToggle" class="icon-btn theme-btn" data-icon="moon" aria-label="تغییر تم">
-          <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن">
-          <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک">
-        </button>
-
-        <a class="icon-btn" href="https://github.com/hheydarian/Gitab" target="_blank" title="GitHub">
-          <img src="/Gitab/icone/github.svg" alt="GitHub">
-        </a>
-
-        <!-- دکمه منو برای موبایل -->
-        <button class="menu-toggle" aria-label="منو">
-          <img src="/Gitab/icone/menu.svg" alt="menu">
-        </button>
-      </div>
-    </div>
-  </header>
-
-  
-  <main class="site-main">
-    
-
-<div class="valuetypes-wrapper">
-
-    <h1 class="page-title">Value Types</h1>
-    <p class="page-desc">
-        آموزش کامل انواع دادهٔ مقداری   
-    </p>
-
-    <!-- ============================ NUMERIC TYPES ============================ -->
-    <section id="numeric-types" class="topic-section">
-
-        <h2>Numeric Types</h2>
-
-        <p>
-            در سی‌شارپ، انواع عددی (Numeric Types) برای ذخیره‌سازی اعداد صحیح استفاده می‌شوند.
-            این نوع داده‌ها <strong>Value Type</strong> هستند و روی <strong>Stack</strong> ذخیره می‌شوند؛
-            یعنی سرعت بسیار بالایی دارند و برای محاسبات روزمره بهترین انتخاب‌اند.
-            وقتی یک تازه‌کار وارد دنیای دات‌نت می‌شود، اولین نوع داده‌ای که باید به آن مسلط باشد همین‌ها هستند،
-            چون تقریباً در تمام پروژه‌ها از محاسبهٔ قیمت محصول تا شمارنده‌های صفحه‌سازی (Pagination)
-            یا حتی مدیریت زمان و تاریخ، با داده‌های عددی سروکار دارید.
-        </p>
-
-        <h3>چرا انواع عددی مهم هستند؟</h3>
-        <p>
-            انواع عددی پایهٔ تمام محاسبات در برنامه‌نویسی هستند.
-            اگر انتخاب درستی نداشته باشید ممکن است:
-        <ul>
-            <li>برنامه بیش از حد حافظه مصرف کند</li>
-            <li>RunTime Overflow رخ دهد</li>
-            <li>سرعت اجرای برنامه کاهش پیدا کند</li>
-        </ul>
-        به همین دلیل انتخاب نوع درست کاملاً ضروری است.
-        </p>
-
-        <h3>معرفی انواع عددی پرکاربرد</h3>
-        <p>مهم‌ترین انواع عددی در سی‌شارپ:</p>
-
-        <ul>
-            <li><strong><code>byte</code></strong> — یک بایت، مقدار بین 0 تا 255 — مناسب داده‌های باینری و شبکه</li>
-            <li><strong><code>short</code></strong> — اعداد کوچک‌تر، مناسب سناریوهای Embedded</li>
-            <li><strong><code>int</code></strong> — استاندارد و پیش‌فرض برای اکثر محاسبات — ۹۹٪ مواقع همین را انتخاب
-                می‌کنیم</li>
-            <li><strong><code>long</code></strong> — مناسب اعداد بسیار بزرگ مانند Unix Timestamp یا جمعیت کشورها</li>
-        </ul>
-
-        <h3>unsigned و signed چیست؟</h3>
-        <p>
-            برخی انواع نسخهٔ unsigned نیز دارند، یعنی فقط اعداد مثبت را ذخیره می‌کنند
-            اما بازهٔ بزرگ‌تری ارائه می‌دهند:
-        </p>
-
-        <ul>
-            <li><code>byte</code> → <code>sbyte</code></li>
-            <li><code>int</code> → <code>uint</code></li>
-            <li><code>long</code> → <code>ulong</code></li>
-        </ul>
-
-        <p>
-            در پروژه‌های معمولی کمتر به unsigned نیاز داریم،
-            ولی برای کار با داده‌های حافظه، شبکه، I/O بسیار مفید هستند.
-        </p>
-
-        <h3>نمونه‌کد پایه:</h3>
-
-        <pre><code class="language-csharp">
+<!doctype html><html lang="fa" dir="rtl"> <head><script>
+    if (window.location.pathname.startsWith('/gitab/')) {
+      window.location.replace(window.location.pathname.replace(/^\/gitab\//i, '/Gitab/') + window.location.search + window.location.hash);
+    }
+    (() => {
+      try {
+        const t = localStorage.getItem('gitab-theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', t);
+        document.documentElement.dataset.colorMode = t;
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        document.documentElement.dataset.colorMode = 'dark';
+      }
+    })();
+  </script> <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5"> <title>Value Types</title><meta name="description" content="گیتاب پلتفرم آزاد و رایگان مطالعه و ترجمه دقیق فارسی کتاب‌های مرجع مهندسی نرم‌افزار، کد تمیز، سی‌شارپ، لینوکس، طراحی دامنه و دوره‌های رسمی هوش مصنوعی مولد است."> <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"><meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"> <meta name="theme-color" content="#090d16"><meta name="referrer" content="strict-origin-when-cross-origin"> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https:; frame-src https://www.youtube.com https://www.youtube-nocookie.com https://maps.google.com https://www.google.com; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self';"><link rel="icon" type="image/png" href="/Gitab/favicon.png"> <link rel="canonical" href="https://hheydarian.github.io/Gitab/Giter/CSharp/syllabus/ValueTypes/"><link rel="alternate" hreflang="fa" href="https://hheydarian.github.io/Gitab/Giter/CSharp/syllabus/ValueTypes/"> <link rel="alternate" hreflang="x-default" href="https://hheydarian.github.io/Gitab/Giter/CSharp/syllabus/ValueTypes/"><link rel="alternate" type="text/plain" title="LLMs.txt" href="/Gitab/llms.txt"> <link rel="sitemap" type="application/xml" title="Sitemap" href="/Gitab/sitemap.xml"><meta property="og:locale" content="fa_IR"> <meta property="og:type" content="website"><meta property="og:site_name" content="گیتاب | Gitab"> <meta property="og:title" content="Value Types"><meta property="og:description" content="گیتاب پلتفرم آزاد و رایگان مطالعه و ترجمه دقیق فارسی کتاب‌های مرجع مهندسی نرم‌افزار، کد تمیز، سی‌شارپ، لینوکس، طراحی دامنه و دوره‌های رسمی هوش مصنوعی مولد است."> <meta property="og:url" content="https://hheydarian.github.io/Gitab/Giter/CSharp/syllabus/ValueTypes/"><meta property="og:image" content="https://hheydarian.github.io/Gitab/images/csharp-12/Cover.jpg"> <meta property="og:image:alt" content="Value Types"><meta name="twitter:card" content="summary_large_image"> <meta name="twitter:title" content="Value Types"><meta name="twitter:description" content="گیتاب پلتفرم آزاد و رایگان مطالعه و ترجمه دقیق فارسی کتاب‌های مرجع مهندسی نرم‌افزار، کد تمیز، سی‌شارپ، لینوکس، طراحی دامنه و دوره‌های رسمی هوش مصنوعی مولد است."> <meta name="twitter:image" content="https://hheydarian.github.io/Gitab/images/csharp-12/Cover.jpg"><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://hheydarian.github.io/Gitab/#organization","name":"گیتاب | Gitab","alternateName":"Gitab","url":"https://hheydarian.github.io/Gitab/","logo":{"@type":"ImageObject","url":"https://hheydarian.github.io/Gitab/favicon.png"},"sameAs":["https://github.com/hheydarian/Gitab"]},{"@type":"WebSite","@id":"https://hheydarian.github.io/Gitab/#website","url":"https://hheydarian.github.io/Gitab/","name":"گیتاب | Gitab","inLanguage":"fa-IR","publisher":{"@id":"https://hheydarian.github.io/Gitab/#organization"},"potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://hheydarian.github.io/Gitab/books/list-books/?q={search_term_string}"},"query-input":"required name=search_term_string"}},{"@type":"WebPage","@id":"https://hheydarian.github.io/Gitab/Giter/CSharp/syllabus/ValueTypes/#webpage","url":"https://hheydarian.github.io/Gitab/Giter/CSharp/syllabus/ValueTypes/","name":"Value Types","description":"گیتاب پلتفرم آزاد و رایگان مطالعه و ترجمه دقیق فارسی کتاب‌های مرجع مهندسی نرم‌افزار، کد تمیز، سی‌شارپ، لینوکس، طراحی دامنه و دوره‌های رسمی هوش مصنوعی مولد است.","inLanguage":"fa-IR","isPartOf":{"@id":"https://hheydarian.github.io/Gitab/#website"}}]}</script> <link rel="preload" href="/Gitab/fonts/Vazirmatn.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/Gitab/fonts/Lalezar.woff2" as="font" type="font/woff2" crossorigin> <link rel="preload" href="/Gitab/styles/main.css?v=2.4" as="style"><link rel="preload" href="/Gitab/styles/gitab-modern.css?v=2.5" as="style"> <style>@font-face{font-family:'Lalezar';src:url('/Gitab/fonts/Lalezar.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}@font-face{font-family:'Vazirmatn';src:url('/Gitab/fonts/Vazirmatn.woff2') format('woff2');font-weight:100 900;font-style:normal;font-display:swap}html,body,button,input,optgroup,select,textarea,.filter-pill{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}input::placeholder,textarea::placeholder{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}</style> <link rel="stylesheet" href="/Gitab/styles/main.css?v=2.4"><link rel="stylesheet" href="/Gitab/styles/gitab-modern.css?v=2.5"> <link rel="stylesheet" href="/Gitab/styles/vendor/github-dark.min.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="/Gitab/styles/vendor/github-dark.min.css"></noscript></head> <body><header class="header"> <div class="container nav-wrap"><a href="/Gitab/" class="brand" aria-label="صفحه اصلی گیتاب"> <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="30" height="30" decoding="async"> <span class="brand-text">Gitab</span> </a> <nav class="nav" id="mainNav"><a href="/Gitab/" >خانه</a> <a href="/Gitab/books/list-books" >کتاب‌ها</a> <a href="/Gitab/courses/" >دوره‌ها</a> <a href="/Gitab/translator.html" >مترجمین</a></nav> <div class="nav-actions"><button id="themeToggle" class="theme-toggle-btn" aria-label="تغییر تم" title="تغییر تم"> <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن" width="18" height="18" decoding="async" style="display:none"> <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک" width="18" height="18" decoding="async"> </button> <a class="btn-github-pill" href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" title="مشاهده سورس گیتاب در گیت‌هاب"> <img src="/Gitab/icone/github.svg" alt="GitHub" width="16" height="16" decoding="async"> <span>گیت‌هاب</span> </a> <button class="mobile-menu-btn" id="mobileMenuBtn" type="button" aria-label="باز کردن منو" aria-expanded="false"> <svg class="mob-icon-open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="4" y1="7" x2="20" y2="7"></line> <line x1="4" y1="12" x2="20" y2="12"></line> <line x1="4" y1="17" x2="14" y2="17"></line> </svg> <svg class="mob-icon-close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="18" y1="6" x2="6" y2="18"></line> <line x1="6" y1="6" x2="18" y2="18"></line> </svg> </button></div> </div><div class="mobile-drawer" id="mobileDrawer" aria-hidden="true"> <div class="mobile-drawer-inner"><div class="mobile-drawer-section-label">ناوبری سریع</div><nav class="mobile-drawer-links" aria-label="منوی موبایل"> <a href="/Gitab/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M3 10.5 12 3l9 7.5"></path> <path d="M5 9.5V20a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V9.5"></path> </svg> </span> <span class="mob-nav-text">صفحه نخست</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/books/list-books" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path> </svg> </span> <span class="mob-nav-text">کتابخانه و فهرست کتاب‌ها</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/courses/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path> <path d="M6 12v5c3 3 9 3 12 0v-5"></path> </svg> </span> <span class="mob-nav-text">دوره‌های آموزشی</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/translator.html" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path> <circle cx="9" cy="7" r="4"></circle> <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path> <path d="M16 3.13a4 4 0 0 1 0 7.75"></path> </svg> </span> <span class="mob-nav-text">مترجمین و همکاران</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> </nav><div class="mobile-drawer-divider"></div><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" class="mobile-drawer-link mobile-drawer-gh"> <span class="mob-nav-icon" aria-hidden="true"> <img src="/Gitab/icone/github.svg" alt="" width="17" height="17" loading="lazy" decoding="async"> </span> <span class="mob-nav-text">مخزن گیت‌هاب پروژه</span> <span class="mob-nav-ext" aria-hidden="true">↗</span> </a> </div></div> </header><main class="site-main"> <div class="valuetypes-wrapper"><h1 class="page-title">Value Types</h1><p class="page-desc"> آموزش کامل انواع دادهٔ مقداری </p><section id="numeric-types" class="topic-section"> <h2>Numeric Types</h2><p> در سی‌شارپ، انواع عددی (Numeric Types) برای ذخیره‌سازی اعداد صحیح استفاده می‌شوند. این نوع داده‌ها <strong>Value Type</strong> هستند و روی <strong>Stack</strong> ذخیره می‌شوند؛ یعنی سرعت بسیار بالایی دارند و برای محاسبات روزمره بهترین انتخاب‌اند. وقتی یک تازه‌کار وارد دنیای دات‌نت می‌شود، اولین نوع داده‌ای که باید به آن مسلط باشد همین‌ها هستند، چون تقریباً در تمام پروژه‌ها از محاسبهٔ قیمت محصول تا شمارنده‌های صفحه‌سازی (Pagination) یا حتی مدیریت زمان و تاریخ، با داده‌های عددی سروکار دارید. </p><h3>چرا انواع عددی مهم هستند؟</h3><p> انواع عددی پایهٔ تمام محاسبات در برنامه‌نویسی هستند. اگر انتخاب درستی نداشته باشید ممکن است: <ul><li>برنامه بیش از حد حافظه مصرف کند</li><li>RunTime Overflow رخ دهد</li><li>سرعت اجرای برنامه کاهش پیدا کند</li></ul> به همین دلیل انتخاب نوع درست کاملاً ضروری است. </p><h3>معرفی انواع عددی پرکاربرد</h3><p>مهم‌ترین انواع عددی در سی‌شارپ:</p><ul> <li><strong><code>byte</code></strong> — یک بایت، مقدار بین 0 تا 255 — مناسب داده‌های باینری و شبکه</li><li><strong><code>short</code></strong> — اعداد کوچک‌تر، مناسب سناریوهای Embedded</li><li><strong><code>int</code></strong> — استاندارد و پیش‌فرض برای اکثر محاسبات — ۹۹٪ مواقع همین را انتخاب می‌کنیم</li><li><strong><code>long</code></strong> — مناسب اعداد بسیار بزرگ مانند Unix Timestamp یا جمعیت کشورها</li></ul> <h3>unsigned و signed چیست؟</h3><p> برخی انواع نسخهٔ unsigned نیز دارند، یعنی فقط اعداد مثبت را ذخیره می‌کنند اما بازهٔ بزرگ‌تری ارائه می‌دهند: </p><ul> <li><code>byte</code> → <code>sbyte</code></li><li><code>int</code> → <code>uint</code></li><li><code>long</code> → <code>ulong</code></li></ul> <p> در پروژه‌های معمولی کمتر به unsigned نیاز داریم، ولی برای کار با داده‌های حافظه، شبکه، I/O بسیار مفید هستند. </p><h3>نمونه‌کد پایه:</h3><pre><code class="language-csharp">
 int age = 25;
 long population = 84000000;
 byte code = 0xAF;   // هگزادسیمال
-</code></pre>
-
-        <h3>تبدیل ضمنی و تبدیل صریح (Implicit / Explicit)</h3>
-
-        <p><strong>تبدیل ضمنی (Implicit)</strong> زمانی است که تبدیل امن باشد:</p>
-
-        <pre><code class="language-csharp">
+</code></pre> <h3>تبدیل ضمنی و تبدیل صریح (Implicit / Explicit)</h3><p><strong>تبدیل ضمنی (Implicit)</strong> زمانی است که تبدیل امن باشد:</p><pre><code class="language-csharp">
 int x = 100;
 long y = x; // تبدیل امن است — implicit
-</code></pre>
-
-        <p><strong>تبدیل صریح (Explicit)</strong> زمانی لازم است که داده ممکن است از دست برود:</p>
-
-        <pre><code class="language-csharp">
+</code></pre> <p><strong>تبدیل صریح (Explicit)</strong> زمانی لازم است که داده ممکن است از دست برود:</p><pre><code class="language-csharp">
 long bigValue = 9_000_000_000;
 int num = (int)bigValue;  // ممکن است Overflow رخ دهد
-</code></pre>
-
-        <h3>Overflow چیست؟</h3>
-        <p>
-            اگر مقدار بزرگ‌تر از ظرفیت نوع داده باشد، به مقدار اشتباه تبدیل می‌شود
-            (Wrap-Around). برای جلوگیری:
-        </p>
-
-        <pre><code class="language-csharp">
+</code></pre> <h3>Overflow چیست؟</h3><p> اگر مقدار بزرگ‌تر از ظرفیت نوع داده باشد، به مقدار اشتباه تبدیل می‌شود (Wrap-Around). برای جلوگیری: </p><pre><code class="language-csharp">
 checked
 {
     int n = (int)9_000_000_000; // Exception
 }
-</code></pre>
-
-        <h3>مثال واقعی پروژه‌ای</h3>
-        <p>
-            فرض کنید یک فروشگاه اینترنتی دارید و باید تعداد محصولات، تعداد بازدید،
-            و موجودی انبار را ذخیره کنید. بهترین انتخاب:
-        </p>
-
-        <ul>
-            <li>تعداد بازدید → <code>long</code></li>
-            <li>موجودی انبار → <code>int</code></li>
-            <li>کد محصول → <code>int</code> یا <code>long</code></li>
-        </ul>
-
-        <pre><code class="language-csharp">
+</code></pre> <h3>مثال واقعی پروژه‌ای</h3><p> فرض کنید یک فروشگاه اینترنتی دارید و باید تعداد محصولات، تعداد بازدید، و موجودی انبار را ذخیره کنید. بهترین انتخاب: </p><ul> <li>تعداد بازدید → <code>long</code></li><li>موجودی انبار → <code>int</code></li><li>کد محصول → <code>int</code> یا <code>long</code></li></ul> <pre><code class="language-csharp">
 long totalViews = 145_200_000;
 int stock = 120;
 int productId = 90452;
-</code></pre>
-
-        <h3>تمرین‌های عملی</h3>
-        <ol>
-            <li>برنامه‌ای بنویس که قد، وزن، سن و سال تولد را گرفته و BMI را محاسبه کند.</li>
-            <li>برنامه‌ای بنویس که میزان حافظهٔ مصرفی سه عدد (byte, int, long) را چاپ کند.</li>
-            <li>فهرستی از جمعیت شهرهای ایران تعریف کن و مجموع آن‌ها را محاسبه کن.</li>
-        </ol>
-
-        <p class="ref">
-            مستندات رسمی:
-            <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/integral-numeric-types"
-                target="_blank">
-                Integral Numeric Types — Microsoft Docs
-            </a>
-        </p>
-
-    </section>
-
-
-
-
-    <!-- ============================ FLOATING POINT TYPES ============================ -->
-    <section id="floating-point" class="topic-section">
-
-        <h2>Floating Point Types</h2>
-
-        <p>
-            انواع اعشاری (Floating Point Types) برای ذخیره‌سازی <strong>اعداد همراه اعشار</strong> استفاده می‌شوند.
-            این نوع داده‌ها زمانی ضروری هستند که با اندازه‌گیری، محاسبات علمی، درصدها، دما، مختصات، سرعت،
-            و هر چیزی که نیاز به دقت اعشاری دارد سروکار داریم.
-        </p>
-
-        <p>
-            در سی‌شارپ سه نوع اعشاری اصلی داریم:
-        </p>
-
-        <ul>
-            <li><strong><code>float</code></strong> — سریع، سبک، دقت پایین‌تر — مناسب گرافیک و بازی‌سازی</li>
-            <li><strong><code>double</code></strong> — پیش‌فرض برای محاسبات علمی و مهندسی</li>
-            <li><strong><code>decimal</code></strong> — بسیار دقیق — مناسب محاسبات مالی و پولی</li>
-        </ul>
-
-        <h3>چرا انواع اعشاری متفاوت هستند؟</h3>
-        <p>
-            تفاوت اصلی این سه نوع در <strong>دقت (Precision)</strong> و <strong>نحوهٔ ذخیره‌سازی</strong> است.
-            انواع float و double طبق استاندارد IEEE754 ذخیره می‌شوند و در دقت‌های بالا خطای ریز (Floating Point Error)
-            ایجاد می‌کنند.
-            اما decimal بر اساس مبنای ده‌دهی ذخیره می‌شود و <strong>برای قیمت‌ها، پول، درصد سود، مالیات</strong> بهترین
-            انتخاب است.
-        </p>
-
-        <h3>مثال عددی مهم — چرا double خطا دارد؟</h3>
-
-        <pre><code class="language-csharp">
+</code></pre> <h3>تمرین‌های عملی</h3><ol> <li>برنامه‌ای بنویس که قد، وزن، سن و سال تولد را گرفته و BMI را محاسبه کند.</li><li>برنامه‌ای بنویس که میزان حافظهٔ مصرفی سه عدد (byte, int, long) را چاپ کند.</li><li>فهرستی از جمعیت شهرهای ایران تعریف کن و مجموع آن‌ها را محاسبه کن.</li></ol> <p class="ref"> مستندات رسمی: <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/integral-numeric-types" target="_blank" rel="noopener noreferrer"> Integral Numeric Types — Microsoft Docs </a></p> </section><section id="floating-point" class="topic-section"> <h2>Floating Point Types</h2><p> انواع اعشاری (Floating Point Types) برای ذخیره‌سازی <strong>اعداد همراه اعشار</strong> استفاده می‌شوند. این نوع داده‌ها زمانی ضروری هستند که با اندازه‌گیری، محاسبات علمی، درصدها، دما، مختصات، سرعت، و هر چیزی که نیاز به دقت اعشاری دارد سروکار داریم. </p><p> در سی‌شارپ سه نوع اعشاری اصلی داریم: </p><ul> <li><strong><code>float</code></strong> — سریع، سبک، دقت پایین‌تر — مناسب گرافیک و بازی‌سازی</li><li><strong><code>double</code></strong> — پیش‌فرض برای محاسبات علمی و مهندسی</li><li><strong><code>decimal</code></strong> — بسیار دقیق — مناسب محاسبات مالی و پولی</li></ul> <h3>چرا انواع اعشاری متفاوت هستند؟</h3><p> تفاوت اصلی این سه نوع در <strong>دقت (Precision)</strong> و <strong>نحوهٔ ذخیره‌سازی</strong> است. انواع float و double طبق استاندارد IEEE754 ذخیره می‌شوند و در دقت‌های بالا خطای ریز (Floating Point Error) ایجاد می‌کنند. اما decimal بر اساس مبنای ده‌دهی ذخیره می‌شود و <strong>برای قیمت‌ها، پول، درصد سود، مالیات</strong> بهترین انتخاب است. </p><h3>مثال عددی مهم — چرا double خطا دارد؟</h3><pre><code class="language-csharp">
 Console.WriteLine(0.1 + 0.2);  
 // خروجی: 0.30000000000000004
-</code></pre>
-
-        <p>
-            دلیل این رفتار نحوهٔ ذخیره‌سازی دودویی double است.
-            اما decimal این خطا را ندارد:
-        </p>
-
-        <pre><code class="language-csharp">
+</code></pre> <p> دلیل این رفتار نحوهٔ ذخیره‌سازی دودویی double است. اما decimal این خطا را ندارد: </p><pre><code class="language-csharp">
 decimal x = 0.1m;
 decimal y = 0.2m;
 Console.WriteLine(x + y);  
 // خروجی: 0.3
-</code></pre>
-
-        <h3>اندازه و ظرفیت</h3>
-        <ul>
-            <li><strong>float</strong> — 4 بایت — حدود 7 رقم دقت</li>
-            <li><strong>double</strong> — 8 بایت — حدود 15 رقم دقت</li>
-            <li><strong>decimal</strong> — 16 بایت — حدود 28–34 رقم دقت</li>
-        </ul>
-
-        <h3>نمونه کدهای کاربردی</h3>
-
-        <pre><code class="language-csharp">
+</code></pre> <h3>اندازه و ظرفیت</h3><ul> <li><strong>float</strong> — 4 بایت — حدود 7 رقم دقت</li><li><strong>double</strong> — 8 بایت — حدود 15 رقم دقت</li><li><strong>decimal</strong> — 16 بایت — حدود 28–34 رقم دقت</li></ul> <h3>نمونه کدهای کاربردی</h3><pre><code class="language-csharp">
 float temperature = 36.6f;
 double distance = 384_400.0;          // فاصله زمین تا ماه
 decimal productPrice = 249_900.75m;   // قیمت کالا با دقت مالی
-</code></pre>
-
-        <h3>مثال پروژه‌ای — محاسبه سود و مالیات</h3>
-
-        <pre><code class="language-csharp">
+</code></pre> <h3>مثال پروژه‌ای — محاسبه سود و مالیات</h3><pre><code class="language-csharp">
 decimal price = 150000m;
 decimal tax = price * 0.09m;      // مالیات 9 درصدی
 decimal total = price + tax;
 
 Console.WriteLine($"Total Price: {total}");
-</code></pre>
-
-        <p>
-            استفاده از double در این مثال می‌تواند اختلاف مالی ایجاد کند، بنابراین فقط decimal مناسب است.
-        </p>
-
-        <h3>تبدیل انواع اعشاری</h3>
-
-        <pre><code class="language-csharp">
+</code></pre> <p> استفاده از double در این مثال می‌تواند اختلاف مالی ایجاد کند، بنابراین فقط decimal مناسب است. </p><h3>تبدیل انواع اعشاری</h3><pre><code class="language-csharp">
 float f = 12.5f;
 double d = f;          // تبدیل ضمنی (بدون خطر)
 decimal dec = (decimal)d;  // تبدیل صریح (ممکن است Precision کم شود)
-</code></pre>
-
-        <h3>تمرین‌های پیشنهادی</h3>
-        <ol>
-            <li>دمای 10 شهر را با float ذخیره کن و میانگین آن‌ها را حساب کن.</li>
-            <li>برنامه‌ای بنویس که یک double بزرگ را به decimal تبدیل کرده و تفاوت دقت را نمایش دهد.</li>
-            <li>قیمت 5 محصول را با decimal گرفته، مالیات 9٪ هرکدام را محاسبه کن و مجموع را چاپ کن.</li>
-        </ol>
-
-        <p class="ref">
-            مستندات رسمی:
-            <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/floating-point-numeric-types"
-                target="_blank">
-                Floating Point Types — Microsoft Docs
-            </a>
-        </p>
-
-    </section>
-
-
-
-    <!-- ============================ BOOL ============================ -->
-    <section id="bool" class="topic-section">
-
-        <h2>Bool</h2>
-
-        <p>
-            نوع <strong>bool</strong> یکی از مهم‌ترین انواع داده در سی‌شارپ و تمام زبان‌های برنامه‌نویسی است.
-            مقدارهای منطقی فقط می‌توانند دو حالت داشته باشند:
-            <strong>true</strong> (درست) و <strong>false</strong> (نادرست).
-            تمام تصمیم‌گیری‌های برنامه—از چک کردن وضعیت کاربر گرفته تا مدیریت خطا، دسترسی، محاسبات شرطی، حلقه‌ها،
-            و حتی هوش مصنوعی—بر پایهٔ همین نوع داده انجام می‌شود.
-        </p>
-
-        <h3>چرا Bool اینقدر مهم است؟</h3>
-        <p>
-            بدون Bool هیچ «منطق»ی در برنامه وجود ندارد.
-            مثلاً:
-        <ul>
-            <li>آیا کاربر وارد شده است؟</li>
-            <li>آیا رمز اشتباه است؟</li>
-            <li>آیا مبلغ کافی است؟</li>
-            <li>آیا سفارش ثبت شود؟</li>
-            <li>آیا حلقه ادامه یابد؟</li>
-        </ul>
-        همهٔ این‌ها با bool کنترل می‌شوند.
-        </p>
-
-        <h3>نمونهٔ پایه</h3>
-
-        <pre><code class="language-csharp">
+</code></pre> <h3>تمرین‌های پیشنهادی</h3><ol> <li>دمای 10 شهر را با float ذخیره کن و میانگین آن‌ها را حساب کن.</li><li>برنامه‌ای بنویس که یک double بزرگ را به decimal تبدیل کرده و تفاوت دقت را نمایش دهد.</li><li>قیمت 5 محصول را با decimal گرفته، مالیات 9٪ هرکدام را محاسبه کن و مجموع را چاپ کن.</li></ol> <p class="ref"> مستندات رسمی: <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/floating-point-numeric-types" target="_blank" rel="noopener noreferrer"> Floating Point Types — Microsoft Docs </a></p> </section><section id="bool" class="topic-section"> <h2>Bool</h2><p> نوع <strong>bool</strong> یکی از مهم‌ترین انواع داده در سی‌شارپ و تمام زبان‌های برنامه‌نویسی است. مقدارهای منطقی فقط می‌توانند دو حالت داشته باشند: <strong>true</strong> (درست) و <strong>false</strong> (نادرست). تمام تصمیم‌گیری‌های برنامه—از چک کردن وضعیت کاربر گرفته تا مدیریت خطا، دسترسی، محاسبات شرطی، حلقه‌ها، و حتی هوش مصنوعی—بر پایهٔ همین نوع داده انجام می‌شود. </p><h3>چرا Bool اینقدر مهم است؟</h3><p> بدون Bool هیچ «منطق»ی در برنامه وجود ندارد. مثلاً: <ul><li>آیا کاربر وارد شده است؟</li><li>آیا رمز اشتباه است؟</li><li>آیا مبلغ کافی است؟</li><li>آیا سفارش ثبت شود؟</li><li>آیا حلقه ادامه یابد؟</li></ul> همهٔ این‌ها با bool کنترل می‌شوند. </p><h3>نمونهٔ پایه</h3><pre><code class="language-csharp">
 bool isLoggedIn = true;
 bool isAdult = age >= 18;
 bool hasAccess = isLoggedIn && isAdult;
-</code></pre>
-
-        <h3>عملگرهای منطقی (Logical Operators)</h3>
-
-        <ul>
-            <li><code>&&</code> — AND — هر دو شرط باید true باشند</li>
-            <li><code>||</code> — OR — حداقل یکی باید true باشد</li>
-            <li><code>!</code> — NOT — نتیجه را برعکس می‌کند</li>
-        </ul>
-
-        <pre><code class="language-csharp">
+</code></pre> <h3>عملگرهای منطقی (Logical Operators)</h3><ul> <li><code>&&</code> — AND — هر دو شرط باید true باشند</li><li><code>||</code> — OR — حداقل یکی باید true باشد</li><li><code>!</code> — NOT — نتیجه را برعکس می‌کند</li></ul> <pre><code class="language-csharp">
 bool isVip = true;
 bool hasCredit = false;
 
 bool canBuy = isVip || hasCredit;  // True
 bool mustDeny = !isVip;            // False
-</code></pre>
-
-        <h3>یک موضوع خیلی مهم: Short-Circuit Evaluation</h3>
-        <p>
-            در شرط‌های AND و OR، اگر نتیجهٔ نهایی بدون بررسی ادامهٔ شرط مشخص باشد،
-            قسمت دوم اصلاً بررسی نمی‌شود (Performance + جلوگیری از خطا).
-        </p>
-
-        <pre><code class="language-csharp">
+</code></pre> <h3>یک موضوع خیلی مهم: Short-Circuit Evaluation</h3><p> در شرط‌های AND و OR، اگر نتیجهٔ نهایی بدون بررسی ادامهٔ شرط مشخص باشد، قسمت دوم اصلاً بررسی نمی‌شود (Performance + جلوگیری از خطا). </p><pre><code class="language-csharp">
 User user = null;
 
 // بدون Short-Circuit برنامه کرش می‌کند
 bool ok = user != null && user.IsActive;
-</code></pre>
-
-        <p>
-            این تکنیک یکی از پایه‌های نوشتن کد ایمن در دات‌نت است.
-        </p>
-
-        <h3>اشتباه رایج تازه‌کارها</h3>
-
-        <p><strong>اشتباه:</strong> مقایسهٔ مستقیم با true یا false</p>
-
-        <pre><code class="language-csharp">
+</code></pre> <p> این تکنیک یکی از پایه‌های نوشتن کد ایمن در دات‌نت است. </p><h3>اشتباه رایج تازه‌کارها</h3><p><strong>اشتباه:</strong> مقایسهٔ مستقیم با true یا false</p><pre><code class="language-csharp">
 // اشتباه
 if (isLoggedIn == true) { }
 
 // صحیح
 if (isLoggedIn) { }
-</code></pre>
-
-        <p><strong>اشتباه دوم:</strong> استفاده از Bool برای ذخیرهٔ چند وضعیت مختلف
-            (باید از Enum یا Flag استفاده کرد، نه bool).
-        </p>
-
-        <h3>مثال واقعی پروژه‌ای — سیستم ورود</h3>
-
-        <pre><code class="language-csharp">
+</code></pre> <p><strong>اشتباه دوم:</strong> استفاده از Bool برای ذخیرهٔ چند وضعیت مختلف (باید از Enum یا Flag استفاده کرد، نه bool). </p><h3>مثال واقعی پروژه‌ای — سیستم ورود</h3><pre><code class="language-csharp">
 bool isLoggedIn = true;
 bool isAdmin = false;
 
@@ -414,110 +90,20 @@ else
 {
     Console.WriteLine("Please login.");
 }
-</code></pre>
-
-        <h3>تمرین‌های پیشنهادی</h3>
-        <ol>
-            <li>
-                برنامه‌ای بنویس که:
-                <ul>
-                    <li>سن کاربر</li>
-                    <li>وضعیت ثبت‌نام</li>
-                    <li>وضعیت پرداخت</li>
-                </ul>
-                را دریافت کرده و مشخص کند آیا اجازهٔ ورود به دوره را دارد یا خیر.
-            </li>
-
-            <li>
-                یک سیستم سادهٔ «سبد خرید» بساز که اگر:
-                <ul>
-                    <li>موجودی کافی بود</li>
-                    <li>پرداخت موفق بود</li>
-                    <li>کاربر وارد شده بود</li>
-                </ul>
-                اجازهٔ خرید صادر کند.
-            </li>
-
-            <li>
-                سه شرط مختلف تعریف کن و با AND/OR/NOT خروجی منطقی آن‌ها را بررسی کن.
-            </li>
-        </ol>
-
-        <p class="ref">
-            مستندات رسمی:
-            <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/bool"
-                target="_blank">
-                bool — Microsoft Docs
-            </a>
-        </p>
-
-    </section>
-
-
-
-
-    <!-- ============================ CHAR ============================ -->
-    <section id="char" class="topic-section">
-
-        <h2>Char</h2>
-
-        <p>
-            نوع <strong>char</strong> برای ذخیره‌سازی یک <strong>کاراکتر واحد</strong> استفاده می‌شود.
-            این کاراکتر می‌تواند حرف انگلیسی، حرف فارسی، عدد، نماد، یا حتی ایموجی باشد.
-            دلیل این قابلیت گسترده این است که char در دات‌نت بر اساس استاندارد
-            <strong>Unicode UTF-16</strong> ذخیره می‌شود؛ بنابراین تقریباً تمام زبان‌های دنیا را پشتیبانی می‌کند.
-        </p>
-
-        <h3>Char دقیقاً چه چیزی را ذخیره می‌کند؟</h3>
-        <p>
-            هر char در سی‌شارپ یک عدد 16 بیتی (unsigned) است که نشان‌دهندهٔ یک کد یونیکد می‌باشد.
-            یعنی در پشت صحنه، <code>'A'</code> فقط یک عدد است؛
-            اما Console آن عدد را به شکل کاراکتر نمایش می‌دهد.
-        </p>
-
-        <pre><code class="language-csharp">
+</code></pre> <h3>تمرین‌های پیشنهادی</h3><ol> <li> برنامه‌ای بنویس که: <ul><li>سن کاربر</li><li>وضعیت ثبت‌نام</li><li>وضعیت پرداخت</li></ul> را دریافت کرده و مشخص کند آیا اجازهٔ ورود به دوره را دارد یا خیر. </li><li> یک سیستم سادهٔ «سبد خرید» بساز که اگر: <ul><li>موجودی کافی بود</li><li>پرداخت موفق بود</li><li>کاربر وارد شده بود</li></ul> اجازهٔ خرید صادر کند. </li><li> سه شرط مختلف تعریف کن و با AND/OR/NOT خروجی منطقی آن‌ها را بررسی کن. </li></ol> <p class="ref"> مستندات رسمی: <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/bool" target="_blank" rel="noopener noreferrer"> bool — Microsoft Docs </a></p> </section><section id="char" class="topic-section"> <h2>Char</h2><p> نوع <strong>char</strong> برای ذخیره‌سازی یک <strong>کاراکتر واحد</strong> استفاده می‌شود. این کاراکتر می‌تواند حرف انگلیسی، حرف فارسی، عدد، نماد، یا حتی ایموجی باشد. دلیل این قابلیت گسترده این است که char در دات‌نت بر اساس استاندارد <strong>Unicode UTF-16</strong> ذخیره می‌شود؛ بنابراین تقریباً تمام زبان‌های دنیا را پشتیبانی می‌کند. </p><h3>Char دقیقاً چه چیزی را ذخیره می‌کند؟</h3><p> هر char در سی‌شارپ یک عدد 16 بیتی (unsigned) است که نشان‌دهندهٔ یک کد یونیکد می‌باشد. یعنی در پشت صحنه، <code>'A'</code> فقط یک عدد است؛ اما Console آن عدد را به شکل کاراکتر نمایش می‌دهد. </p><pre><code class="language-csharp">
 char c = 'A';
 Console.WriteLine( (int)c );  
 // خروجی: 65
-</code></pre>
-
-        <p>
-            این یعنی char و int از نظر فنی قابل تبدیل به هم هستند.
-        </p>
-
-        <h3>نحوهٔ تعریف کاراکتر</h3>
-
-        <pre><code class="language-csharp">
+</code></pre> <p> این یعنی char و int از نظر فنی قابل تبدیل به هم هستند. </p><h3>نحوهٔ تعریف کاراکتر</h3><pre><code class="language-csharp">
 char letter = 'A';
 char number = '5';
 char symbol = '#';
 char persian = 'ش';
 char emoji = '❤';
-</code></pre>
-
-        <h3>مقایسهٔ Char با String</h3>
-
-        <p>
-            تفاوت بسیار مهمی که تازه‌کارها اشتباه می‌کنند:
-        </p>
-
-        <ul>
-            <li><strong>char</strong> فقط یک کاراکتر ذخیره می‌کند → <code>'A'</code></li>
-            <li><strong>string</strong> مجموعه‌ای از کاراکترها است → <code>"Ali"</code></li>
-        </ul>
-
-        <pre><code class="language-csharp">
+</code></pre> <h3>مقایسهٔ Char با String</h3><p> تفاوت بسیار مهمی که تازه‌کارها اشتباه می‌کنند: </p><ul> <li><strong>char</strong> فقط یک کاراکتر ذخیره می‌کند → <code>'A'</code></li><li><strong>string</strong> مجموعه‌ای از کاراکترها است → <code>"Ali"</code></li></ul> <pre><code class="language-csharp">
 char c = 'A';     // فقط 1 کاراکتر
 string name = "Ali"; // تعداد کاراکتر دلخواه
-</code></pre>
-
-        <h3>متدهای کمکی برای تشخیص نوع کاراکتر</h3>
-
-        <p>
-            کلاس <code>char</code> در دات‌نت متدهای مفیدی دارد برای تشخیص نوع ورودی:
-        </p>
-
-        <pre><code class="language-csharp">
+</code></pre> <h3>متدهای کمکی برای تشخیص نوع کاراکتر</h3><p> کلاس <code>char</code> در دات‌نت متدهای مفیدی دارد برای تشخیص نوع ورودی: </p><pre><code class="language-csharp">
 char ch = '9';
 
 bool isDigit = char.IsDigit(ch);         // آیا رقم است؟
@@ -525,15 +111,7 @@ bool isLetter = char.IsLetter(ch);       // آیا حرف است؟
 bool isLower = char.IsLower(ch);         // آیا حرف کوچک است؟
 bool isUpper = char.IsUpper(ch);         // آیا حرف بزرگ است؟
 bool isWhite = char.IsWhiteSpace(ch);    // آیا فاصله است؟
-</code></pre>
-
-        <p>
-            این متدها در اعتبارسنجی فرم‌ها، پردازش متن، و کار با فایل‌ها بسیار مفید هستند.
-        </p>
-
-        <h3>مثال کاربردی — بررسی رمز عبور</h3>
-
-        <pre><code class="language-csharp">
+</code></pre> <p> این متدها در اعتبارسنجی فرم‌ها، پردازش متن، و کار با فایل‌ها بسیار مفید هستند. </p><h3>مثال کاربردی — بررسی رمز عبور</h3><pre><code class="language-csharp">
 string password = "Test123!";
 bool hasDigit = false;
 bool hasUpper = false;
@@ -550,103 +128,15 @@ if (hasDigit && hasUpper && hasSymbol)
     Console.WriteLine("Password is strong.");
 else
     Console.WriteLine("Weak password.");
-</code></pre>
-
-        <p>
-            این یک مثال واقعی در پروژه‌هاست؛ تشخیص محتوای هر کاراکتر.
-        </p>
-
-        <h3>نکته مهم: Escape Characters</h3>
-        <p>
-            برخی کاراکترها قابل چاپ نیستند و با \ نمایش داده می‌شوند:
-        </p>
-
-        <pre><code class="language-csharp">
+</code></pre> <p> این یک مثال واقعی در پروژه‌هاست؛ تشخیص محتوای هر کاراکتر. </p><h3>نکته مهم: Escape Characters</h3><p> برخی کاراکترها قابل چاپ نیستند و با \ نمایش داده می‌شوند: </p><pre><code class="language-csharp">
 char newline = '\n';
 char tab = '\t';
 char quote = '\'';
-</code></pre>
-
-        <p>این‌ها در فرمت‌بندی خروجی و فایل‌ها استفاده می‌شوند.</p>
-
-        <h3>تمرین‌های پیشنهادی</h3>
-        <ol>
-            <li>
-                برنامه‌ای بنویس که از کاربر یک کاراکتر بگیرد و:
-                <ul>
-                    <li>نوع آن (حرف، عدد، نماد) را تشخیص دهد</li>
-                    <li>اگر حرف بود، بررسی کند بزرگ است یا کوچک</li>
-                    <li>کد یونیکد آن را چاپ کند</li>
-                </ul>
-            </li>
-
-            <li>
-                برنامه‌ای بنویس که رشته‌ای را گرفته و تعداد ارقام، حروف و نمادهای آن را بشمارد.
-            </li>
-
-            <li>
-                با استفاده از char یک سیستم رمزنگاری ساده بساز
-                (مثلاً هر کاراکتر را 1 واحد در یونیکد افزایش بده).
-            </li>
-        </ol>
-
-        <p class="ref">
-            مستندات رسمی:
-            <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/char"
-                target="_blank">
-                char — Microsoft Docs
-            </a>
-        </p>
-
-    </section>
-
-
-
-    <!-- ============================ ENUM ============================ -->
-    <section id="enum" class="topic-section">
-
-        <h2>Enum</h2>
-
-        <p>
-            <strong>Enum</strong> یا «نوع شمارشی» راهی برای تعریف مجموعه‌ای از مقادیر ثابت و معنادار است.
-            به زبان ساده: Enum کمک می‌کند به‌جای استفاده از عدد یا رشته‌های پراکنده،
-            <strong>یک دسته مقدار استاندارد و قابل فهم</strong> تعریف کنیم.
-        </p>
-
-        <p>
-            وقتی می‌گوییم:
-        </p>
-        <pre><code class="language-csharp">
+</code></pre> <p>این‌ها در فرمت‌بندی خروجی و فایل‌ها استفاده می‌شوند.</p><h3>تمرین‌های پیشنهادی</h3><ol> <li> برنامه‌ای بنویس که از کاربر یک کاراکتر بگیرد و: <ul><li>نوع آن (حرف، عدد، نماد) را تشخیص دهد</li><li>اگر حرف بود، بررسی کند بزرگ است یا کوچک</li><li>کد یونیکد آن را چاپ کند</li></ul> </li><li> برنامه‌ای بنویس که رشته‌ای را گرفته و تعداد ارقام، حروف و نمادهای آن را بشمارد. </li><li> با استفاده از char یک سیستم رمزنگاری ساده بساز (مثلاً هر کاراکتر را 1 واحد در یونیکد افزایش بده). </li></ol> <p class="ref"> مستندات رسمی: <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/char" target="_blank" rel="noopener noreferrer"> char — Microsoft Docs </a></p> </section><section id="enum" class="topic-section"> <h2>Enum</h2><p> <strong>Enum</strong> یا «نوع شمارشی» راهی برای تعریف مجموعه‌ای از مقادیر ثابت و معنادار است. به زبان ساده: Enum کمک می‌کند به‌جای استفاده از عدد یا رشته‌های پراکنده، <strong>یک دسته مقدار استاندارد و قابل فهم</strong> تعریف کنیم. </p><p> وقتی می‌گوییم: </p><pre><code class="language-csharp">
 Role.Admin
-</code></pre>
-        <p>
-            بسیار قابل فهم‌تر از این است که بنویسیم:
-        </p>
-        <pre><code class="language-csharp">
+</code></pre> <p> بسیار قابل فهم‌تر از این است که بنویسیم: </p><pre><code class="language-csharp">
 1   // یعنی چی؟ Admin؟ User؟
-</code></pre>
-
-        <h3>چرا Enum مهم است؟</h3>
-        <p>
-            در پروژه‌های واقعی همیشه با «وضعیت‌ها» سروکار داریم.
-            مثلاً:
-        </p>
-
-        <ul>
-            <li>وضعیت سفارش: <code>Pending</code> / <code>Paid</code> / <code>Shipped</code></li>
-            <li>نقش کاربر: <code>Admin</code> / <code>User</code> / <code>Guest</code></li>
-            <li>سطح دسترسی: <code>Normal</code> / <code>Vip</code></li>
-            <li>روزهای هفته</li>
-            <li>نوع اعلان (NotificationType)</li>
-        </ul>
-
-        <p>
-            اگر Enum نداشتیم، مجبور بودیم از رشته یا عدد استفاده کنیم که باعث اشتباه، تایپو، خطا و خوانایی پایین می‌شد.
-        </p>
-
-        <h3>ساده‌ترین شکل Enum</h3>
-
-        <pre><code class="language-csharp">
+</code></pre> <h3>چرا Enum مهم است؟</h3><p> در پروژه‌های واقعی همیشه با «وضعیت‌ها» سروکار داریم. مثلاً: </p><ul> <li>وضعیت سفارش: <code>Pending</code> / <code>Paid</code> / <code>Shipped</code></li><li>نقش کاربر: <code>Admin</code> / <code>User</code> / <code>Guest</code></li><li>سطح دسترسی: <code>Normal</code> / <code>Vip</code></li><li>روزهای هفته</li><li>نوع اعلان (NotificationType)</li></ul> <p> اگر Enum نداشتیم، مجبور بودیم از رشته یا عدد استفاده کنیم که باعث اشتباه، تایپو، خطا و خوانایی پایین می‌شد. </p><h3>ساده‌ترین شکل Enum</h3><pre><code class="language-csharp">
 enum Role 
 { 
     Admin, 
@@ -658,15 +148,7 @@ Role userRole = Role.Admin;
 
 if (userRole == Role.Admin)
     Console.WriteLine("Welcome Admin");
-</code></pre>
-
-        <p>
-            مقدارهای Enum از 0 شروع می‌شوند مگر اینکه خودت مقدار بدهی.
-        </p>
-
-        <h3>مقداردهی دستی به Enum</h3>
-
-        <pre><code class="language-csharp">
+</code></pre> <p> مقدارهای Enum از 0 شروع می‌شوند مگر اینکه خودت مقدار بدهی. </p><h3>مقداردهی دستی به Enum</h3><pre><code class="language-csharp">
 enum OrderStatus
 {
     Pending = 1,
@@ -674,38 +156,16 @@ enum OrderStatus
     Shipped = 3,
     Delivered = 4
 }
-</code></pre>
-
-        <p>
-            این کار زمانی مفید است که:
-        </p>
-
-        <ul>
-            <li>دیتابیس از قبل عدد خاصی دارد</li>
-            <li>باید مقدار Enum را در API برای کلاینت ثابت نگه داریم</li>
-            <li>نیاز به ترتیب و ساختار مشخص داریم</li>
-        </ul>
-
-        <h3>تبدیل Enum به عدد و برعکس</h3>
-
-        <pre><code class="language-csharp">
+</code></pre> <p> این کار زمانی مفید است که: </p><ul> <li>دیتابیس از قبل عدد خاصی دارد</li><li>باید مقدار Enum را در API برای کلاینت ثابت نگه داریم</li><li>نیاز به ترتیب و ساختار مشخص داریم</li></ul> <h3>تبدیل Enum به عدد و برعکس</h3><pre><code class="language-csharp">
 int code = (int)OrderStatus.Shipped;  
 // خروجی: 3
 
 OrderStatus s = (OrderStatus)2;
 // تبدیل عدد به Enum
-</code></pre>
-
-        <h3>نمایش مقدار Enum به صورت رشته</h3>
-
-        <pre><code class="language-csharp">
+</code></pre> <h3>نمایش مقدار Enum به صورت رشته</h3><pre><code class="language-csharp">
 Console.WriteLine(OrderStatus.Pending.ToString());
 // خروجی: "Pending"
-</code></pre>
-
-        <h3>کاربرد واقعی Enum در پروژه‌ها</h3>
-
-        <pre><code class="language-csharp">
+</code></pre> <h3>کاربرد واقعی Enum در پروژه‌ها</h3><pre><code class="language-csharp">
 OrderStatus status = OrderStatus.Pending;
 
 switch (status)
@@ -722,15 +182,7 @@ switch (status)
         Console.WriteLine("Order is on the way");
         break;
 }
-</code></pre>
-
-        <h3>نکتهٔ حرفه‌ای: Flags Enum (مناسب سطح کمی‌پیشرفته)</h3>
-
-        <p>
-            وقتی بخواهیم چند مقدار هم‌زمان فعال باشند (مثلاً دسترسی کاربر)، از Flags استفاده می‌کنیم.
-        </p>
-
-        <pre><code class="language-csharp">
+</code></pre> <h3>نکتهٔ حرفه‌ای: Flags Enum (مناسب سطح کمی‌پیشرفته)</h3><p> وقتی بخواهیم چند مقدار هم‌زمان فعال باشند (مثلاً دسترسی کاربر)، از Flags استفاده می‌کنیم. </p><pre><code class="language-csharp">
 [Flags]
 enum Permissions
 {
@@ -744,67 +196,7 @@ Permissions p = Permissions.Read | Permissions.Write;
 
 Console.WriteLine(p);  
 // خروجی: Read, Write
-</code></pre>
-
-        <p>
-            این قابلیت مخصوص مواردی است که می‌خواهیم چند وضعیت روی هم اعمال شوند.
-        </p>
-
-        <h3>اشتباهات رایج تازه‌کارها</h3>
-        <ul>
-            <li>استفاده از string به‌جای Enum برای وضعیت‌ها → پر از خطا</li>
-            <li>تکیه بر عدد Enum به‌جای خود اسم آن → کد خوانا نیست</li>
-            <li>فراموش کردن مقداردهی مخصوص دیتابیس → در مهاجرت‌ها مشکل می‌سازد</li>
-        </ul>
-
-        <h3>تمرین‌های پیشنهادی</h3>
-        <ol>
-            <li>یک Enum کامل برای وضعیت پرداخت بساز: <code>Pending</code>، <code>Paid</code>، <code>Failed</code>،
-                <code>Refunded</code>.
-            </li>
-            <li>برنامه‌ای بنویس که عدد ورودی کاربر را به Enum وضعیت پرداخت تبدیل کند.</li>
-            <li>برای نقش‌های کاربر (Admin, Moderator, User, Guest) یک Enum بساز و با switch پیام مناسب نمایش بده.</li>
-        </ol>
-
-        <p class="ref">
-            مستندات رسمی:
-            <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/enum"
-                target="_blank">
-                Enum — Microsoft Docs
-            </a>
-        </p>
-
-    </section>
-
-
-
-
-    <!-- ============================ STRUCT ============================ -->
-    <section id="struct" class="topic-section">
-
-        <h2>Struct / Ref Struct</h2>
-
-        <p>
-            <strong>struct</strong> در سی‌شارپ یک <strong>Value Type</strong> است؛
-            یعنی داده‌ی آن روی <strong>Stack</strong> ذخیره می‌شود و هنگام کپی شدن،
-            <strong>مستقیماً مقدار آن کپی می‌شود، نه آدرس آن</strong>.
-            به همین دلیل Struct بسیار سریع و سبک است و برای داده‌های کوچک و کوتاه‌عمر بهترین انتخاب است.
-        </p>
-
-        <h3>Struct دقیقاً چه زمانی استفاده می‌شود؟</h3>
-        <p>
-            از Struct زمانی استفاده می‌کنیم که:
-        </p>
-        <ul>
-            <li>یک «دادهٔ کوچک» داریم (مثلاً Point، Color، Money، Size)</li>
-            <li>رفتار «Immutable» یا بدون تغییر داریم (پس از ساخت تغییر نمی‌کند)</li>
-            <li>هدف ما بهبود Performance و کاهش فشار روی Garbage Collector است</li>
-            <li>نیازی به ارث‌بری از کلاس دیگر نداریم (struct ارث‌بری پشتیبانی نمی‌کند)</li>
-        </ul>
-
-        <h3>مثال ساده:</h3>
-
-        <pre><code class="language-csharp">
+</code></pre> <p> این قابلیت مخصوص مواردی است که می‌خواهیم چند وضعیت روی هم اعمال شوند. </p><h3>اشتباهات رایج تازه‌کارها</h3><ul> <li>استفاده از string به‌جای Enum برای وضعیت‌ها → پر از خطا</li><li>تکیه بر عدد Enum به‌جای خود اسم آن → کد خوانا نیست</li><li>فراموش کردن مقداردهی مخصوص دیتابیس → در مهاجرت‌ها مشکل می‌سازد</li></ul> <h3>تمرین‌های پیشنهادی</h3><ol> <li>یک Enum کامل برای وضعیت پرداخت بساز: <code>Pending</code>، <code>Paid</code>، <code>Failed</code>، <code>Refunded</code>. </li><li>برنامه‌ای بنویس که عدد ورودی کاربر را به Enum وضعیت پرداخت تبدیل کند.</li><li>برای نقش‌های کاربر (Admin, Moderator, User, Guest) یک Enum بساز و با switch پیام مناسب نمایش بده.</li></ol> <p class="ref"> مستندات رسمی: <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/enum" target="_blank" rel="noopener noreferrer"> Enum — Microsoft Docs </a></p> </section><section id="struct" class="topic-section"> <h2>Struct / Ref Struct</h2><p> <strong>struct</strong> در سی‌شارپ یک <strong>Value Type</strong> است؛ یعنی داده‌ی آن روی <strong>Stack</strong> ذخیره می‌شود و هنگام کپی شدن، <strong>مستقیماً مقدار آن کپی می‌شود، نه آدرس آن</strong>. به همین دلیل Struct بسیار سریع و سبک است و برای داده‌های کوچک و کوتاه‌عمر بهترین انتخاب است. </p><h3>Struct دقیقاً چه زمانی استفاده می‌شود؟</h3><p> از Struct زمانی استفاده می‌کنیم که: </p><ul> <li>یک «دادهٔ کوچک» داریم (مثلاً Point، Color، Money، Size)</li><li>رفتار «Immutable» یا بدون تغییر داریم (پس از ساخت تغییر نمی‌کند)</li><li>هدف ما بهبود Performance و کاهش فشار روی Garbage Collector است</li><li>نیازی به ارث‌بری از کلاس دیگر نداریم (struct ارث‌بری پشتیبانی نمی‌کند)</li></ul> <h3>مثال ساده:</h3><pre><code class="language-csharp">
 struct Point
 {
     public int X;
@@ -822,55 +214,7 @@ Point p2 = p1;   // کپی کامل داده
 p2.X = 10;
 
 Console.WriteLine(p1.X);  // خروجی: 5  (تغییر نکرد)
-</code></pre>
-
-        <p>
-            این تفاوت مهمی با کلاس‌ها دارد، چون class یک Reference Type است و مقدار آن اشتراکی خواهد بود.
-        </p>
-
-        <h3>تفاوت Struct و Class — توضیح ساده و کاربردی</h3>
-
-        <table>
-            <tr>
-                <th>Struct</th>
-                <th>Class</th>
-            </tr>
-            <tr>
-                <td>Value Type (روی Stack)</td>
-                <td>Reference Type (روی Heap)</td>
-            </tr>
-            <tr>
-                <td>کپی = کپی واقعی داده</td>
-                <td>کپی = اشتراک آدرس</td>
-            </tr>
-            <tr>
-                <td>برای داده‌های کوچک و سبک</td>
-                <td>برای آبجکت‌های سنگین و پیچیده</td>
-            </tr>
-            <tr>
-                <td>ارث‌بری ندارد</td>
-                <td>ارث‌بری دارد</td>
-            </tr>
-            <tr>
-                <td>GC دخالتی ندارد</td>
-                <td>نیازمند Garbage Collector</td>
-            </tr>
-        </table>
-
-        <h3>چرا Struct باید کوچک باشد؟</h3>
-        <p>
-            هر بار که Struct کپی می‌شود، کل دادهٔ آن کپی می‌شود.
-            اگر Struct خیلی سنگین باشد (مثلاً 50 فیلد داشته باشد)،
-            برنامه کند و مدیریت حافظه سخت می‌شود.
-            بنابراین Struct باید سبک، کوچک و Purpose-Specific باشد.
-        </p>
-
-        <h3>Struct های Immutable (بهترین روش)</h3>
-        <p>
-            معمولاً Struct را <strong>Immutable</strong> می‌سازیم تا رفتار آن مشابه عددها باشد:
-        </p>
-
-        <pre><code class="language-csharp">
+</code></pre> <p> این تفاوت مهمی با کلاس‌ها دارد، چون class یک Reference Type است و مقدار آن اشتراکی خواهد بود. </p><h3>تفاوت Struct و Class — توضیح ساده و کاربردی</h3><table> <tr><th>Struct</th><th>Class</th></tr> <tr><td>Value Type (روی Stack)</td><td>Reference Type (روی Heap)</td></tr> <tr><td>کپی = کپی واقعی داده</td><td>کپی = اشتراک آدرس</td></tr> <tr><td>برای داده‌های کوچک و سبک</td><td>برای آبجکت‌های سنگین و پیچیده</td></tr> <tr><td>ارث‌بری ندارد</td><td>ارث‌بری دارد</td></tr> <tr><td>GC دخالتی ندارد</td><td>نیازمند Garbage Collector</td></tr> </table><h3>چرا Struct باید کوچک باشد؟</h3><p> هر بار که Struct کپی می‌شود، کل دادهٔ آن کپی می‌شود. اگر Struct خیلی سنگین باشد (مثلاً 50 فیلد داشته باشد)، برنامه کند و مدیریت حافظه سخت می‌شود. بنابراین Struct باید سبک، کوچک و Purpose-Specific باشد. </p><h3>Struct های Immutable (بهترین روش)</h3><p> معمولاً Struct را <strong>Immutable</strong> می‌سازیم تا رفتار آن مشابه عددها باشد: </p><pre><code class="language-csharp">
 struct Money
 {
     public decimal Amount { get; }
@@ -882,20 +226,7 @@ struct Money
         Currency = currency;
     }
 }
-</code></pre>
-
-        <p>
-            Immutable بودن باعث جلوگیری از اشتباه و افزایش پایداری کد می‌شود.
-        </p>
-
-        <h3>Ref Struct چیست؟ و کی استفاده می‌شود؟</h3>
-        <p>
-            <strong>ref struct</strong> نسخهٔ خاص Struct است که فقط روی Stack وجود دارد
-            و نمی‌تواند در Heap ذخیره شود.
-            این نوع برای کار با حافظهٔ خام و <strong>Span&lt;T&gt;</strong> معرفی شد.
-        </p>
-
-        <pre><code class="language-csharp">
+</code></pre> <p> Immutable بودن باعث جلوگیری از اشتباه و افزایش پایداری کد می‌شود. </p><h3>Ref Struct چیست؟ و کی استفاده می‌شود؟</h3><p> <strong>ref struct</strong> نسخهٔ خاص Struct است که فقط روی Stack وجود دارد و نمی‌تواند در Heap ذخیره شود. این نوع برای کار با حافظهٔ خام و <strong>Span&lt;T&gt;</strong> معرفی شد. </p><pre><code class="language-csharp">
 ref struct BufferReader
 {
     public Span<byte> Data;
@@ -905,25 +236,7 @@ ref struct BufferReader
         Data = data;
     }
 }
-</code></pre>
-
-        <p>
-            این ساختارها در:
-        <ul>
-            <li>پردازش فایل</li>
-            <li>شبکه</li>
-            <li>Game Engine ها</li>
-            <li>High-Performance Code</li>
-        </ul>
-        اهمیت بسیار زیادی دارند.
-        </p>
-
-        <h3>مثال پروژه‌ای (حالت واقعی)</h3>
-        <p>
-            فرض کنید در یک بازی مختصات شخصیت‌ها را ذخیره می‌کنید:
-        </p>
-
-        <pre><code class="language-csharp">
+</code></pre> <p> این ساختارها در: <ul><li>پردازش فایل</li><li>شبکه</li><li>Game Engine ها</li><li>High-Performance Code</li></ul> اهمیت بسیار زیادی دارند. </p><h3>مثال پروژه‌ای (حالت واقعی)</h3><p> فرض کنید در یک بازی مختصات شخصیت‌ها را ذخیره می‌کنید: </p><pre><code class="language-csharp">
 struct Position
 {
     public float X { get; }
@@ -938,13 +251,7 @@ struct Position
 
 Position pos1 = new Position(10f, 15f);
 Position pos2 = pos1;   // کپی داده، بدون اشتراک
-</code></pre>
-
-        <p>
-            یا در یک فروشگاه اینترنتی، قیمت و واحد پول:
-        </p>
-
-        <pre><code class="language-csharp">
+</code></pre> <p> یا در یک فروشگاه اینترنتی، قیمت و واحد پول: </p><pre><code class="language-csharp">
 struct Price
 {
     public decimal Amount { get; }
@@ -958,120 +265,19 @@ struct Price
 }
 
 Price p = new Price(199000, "IRR");
-</code></pre>
-
-        <h3>تمرین‌های پیشنهادی</h3>
-        <ol>
-            <li>
-                یک Struct برای «کتاب» بساز با خصوصیات:
-                <ul>
-                    <li>Title</li>
-                    <li>Pages</li>
-                    <li>Price</li>
-                </ul>
-                و سپس یک لیست از کتاب‌ها ساخته و میانگین قیمت را محاسبه کن.
-            </li>
-
-            <li>
-                یک Struct Immutable برای ذخیرهٔ مختصات سه‌بعدی (X, Y, Z) طراحی کن.
-            </li>
-
-            <li>
-                یک Struct برای زمان پخش موسیقی بساز (Minutes, Seconds)
-                و متدی بنویس که دو زمان را با هم جمع کند.
-            </li>
-        </ol>
-
-        <p class="ref">
-            مستندات رسمی:
-            <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/struct"
-                target="_blank">
-                Struct — Microsoft Docs
-            </a>
-        </p>
-
-    </section>
-
-
-
-
-    <!-- ============================ TUPLES ============================ -->
-    <section id="tuples" class="topic-section">
-
-        <h2>Tuples</h2>
-
-        <p>
-            <strong>Tuple</strong> در سی‌شارپ راهی سریع، سبک و بسیار کاربردی است برای اینکه
-            <strong>چند مقدار را بدون ساخت کلاس جدید</strong> کنار یکدیگر ذخیره کنیم.
-            این نوع داده زمانی معرفی شد که نیاز بود توابع بیش از یک مقدار را برگردانند
-            بدون اینکه مجبور شویم کلاس‌های اضافی تعریف کنیم.
-        </p>
-
-        <h3>چرا Tuple مهم است؟</h3>
-        <p>
-            در برنامه‌نویسی روزمره بارها اتفاق می‌افتد که یک تابع باید چند مقدار را برگرداند.
-            مثلاً:
-        </p>
-
-        <ul>
-            <li>جستجو در دیتابیس → نتیجه + تعداد رکوردها</li>
-            <li>ورود کاربر → وضعیت ورود + پیام خطا</li>
-            <li>محاسبه قیمت → قیمت اصلی + قیمت پس از تخفیف</li>
-        </ul>
-
-        <p>
-            بدون Tuple مجبور بودیم:
-        <ul>
-            <li>کلاس بسازیم</li>
-            <li>out parameter استفاده کنیم</li>
-            <li>یا چند بار تابع بنویسیم</li>
-        </ul>
-        در حالی که Tuple همه این‌ها را ساده می‌کند.
-        </p>
-
-        <h3>نوع‌های Tuple در سی‌شارپ</h3>
-        <p>دو نوع Tuple داریم:</p>
-
-        <ul>
-            <li><strong>ValueTuple</strong> (نسخه جدید، سریع و بهینه، توصیه شده)</li>
-            <li><strong>Tuple&lt;...&gt;</strong> قدیمی (Reference Type، کندتر و کمتر استفاده می‌شود)</li>
-        </ul>
-
-        <p>نسخهٔ جدید همان چیزی است که با دستور زیر می‌سازیم:</p>
-
-        <pre><code class="language-csharp">
+</code></pre> <h3>تمرین‌های پیشنهادی</h3><ol> <li> یک Struct برای «کتاب» بساز با خصوصیات: <ul><li>Title</li><li>Pages</li><li>Price</li></ul> و سپس یک لیست از کتاب‌ها ساخته و میانگین قیمت را محاسبه کن. </li><li> یک Struct Immutable برای ذخیرهٔ مختصات سه‌بعدی (X, Y, Z) طراحی کن. </li><li> یک Struct برای زمان پخش موسیقی بساز (Minutes, Seconds) و متدی بنویس که دو زمان را با هم جمع کند. </li></ol> <p class="ref"> مستندات رسمی: <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/struct" target="_blank" rel="noopener noreferrer"> Struct — Microsoft Docs </a></p> </section><section id="tuples" class="topic-section"> <h2>Tuples</h2><p> <strong>Tuple</strong> در سی‌شارپ راهی سریع، سبک و بسیار کاربردی است برای اینکه <strong>چند مقدار را بدون ساخت کلاس جدید</strong> کنار یکدیگر ذخیره کنیم. این نوع داده زمانی معرفی شد که نیاز بود توابع بیش از یک مقدار را برگردانند بدون اینکه مجبور شویم کلاس‌های اضافی تعریف کنیم. </p><h3>چرا Tuple مهم است؟</h3><p> در برنامه‌نویسی روزمره بارها اتفاق می‌افتد که یک تابع باید چند مقدار را برگرداند. مثلاً: </p><ul> <li>جستجو در دیتابیس → نتیجه + تعداد رکوردها</li><li>ورود کاربر → وضعیت ورود + پیام خطا</li><li>محاسبه قیمت → قیمت اصلی + قیمت پس از تخفیف</li></ul> <p> بدون Tuple مجبور بودیم: <ul><li>کلاس بسازیم</li><li>out parameter استفاده کنیم</li><li>یا چند بار تابع بنویسیم</li></ul> در حالی که Tuple همه این‌ها را ساده می‌کند. </p><h3>نوع‌های Tuple در سی‌شارپ</h3><p>دو نوع Tuple داریم:</p><ul> <li><strong>ValueTuple</strong> (نسخه جدید، سریع و بهینه، توصیه شده)</li><li><strong>Tuple&lt;...&gt;</strong> قدیمی (Reference Type، کندتر و کمتر استفاده می‌شود)</li></ul> <p>نسخهٔ جدید همان چیزی است که با دستور زیر می‌سازیم:</p><pre><code class="language-csharp">
 var person = (Name: "Ali", Age: 30);
-</code></pre>
-
-        <h3>Named Tuple و Unnamed Tuple</h3>
-
-        <p><strong>Unnamed Tuple:</strong></p>
-        <pre><code class="language-csharp">
+</code></pre> <h3>Named Tuple و Unnamed Tuple</h3><p><strong>Unnamed Tuple:</strong></p><pre><code class="language-csharp">
 var data = ("Ali", 30);
 Console.WriteLine(data.Item1); // Ali
-</code></pre>
-
-        <p><strong>Named Tuple (بهتر و خواناتر):</strong></p>
-        <pre><code class="language-csharp">
+</code></pre> <p><strong>Named Tuple (بهتر و خواناتر):</strong></p><pre><code class="language-csharp">
 var person = (Name: "Ali", Age: 30);
 Console.WriteLine(person.Name); // Ali
-</code></pre>
-
-        <p>در پروژه‌های واقعی همیشه از Named Tuple استفاده می‌کنیم.</p>
-
-        <h3>Deconstruction (بازکردن مقادیر)</h3>
-
-        <pre><code class="language-csharp">
+</code></pre> <p>در پروژه‌های واقعی همیشه از Named Tuple استفاده می‌کنیم.</p><h3>Deconstruction (بازکردن مقادیر)</h3><pre><code class="language-csharp">
 var (name, age) = ("Ali", 30);
 Console.WriteLine(name);
 Console.WriteLine(age);
-</code></pre>
-
-        <p>این قابلیت کد را بسیار کوتاه و تمیز می‌کند.</p>
-
-        <h3>بازگرداندن چند مقدار از یک تابع</h3>
-
-        <pre><code class="language-csharp">
+</code></pre> <p>این قابلیت کد را بسیار کوتاه و تمیز می‌کند.</p><h3>بازگرداندن چند مقدار از یک تابع</h3><pre><code class="language-csharp">
 (int sum, double avg) Calculate(int a, int b, int c)
 {
     int total = a + b + c;
@@ -1082,11 +288,7 @@ Console.WriteLine(age);
 var result = Calculate(10, 20, 30);
 Console.WriteLine(result.sum);
 Console.WriteLine(result.avg);
-</code></pre>
-
-        <h3>استفادهٔ Tuple در LINQ</h3>
-
-        <pre><code class="language-csharp">
+</code></pre> <h3>استفادهٔ Tuple در LINQ</h3><pre><code class="language-csharp">
 var products = new[] { 10, 20, 30 };
 
 var stats = (
@@ -1096,90 +298,11 @@ var stats = (
 );
 
 Console.WriteLine(stats.Max);
-</code></pre>
-
-        <h3>اشتباهات رایج</h3>
-        <ul>
-            <li>استفاده از Unnamed Tuple → خوانایی پایین</li>
-            <li>استفاده از Tuple برای مدل‌های سنگین → باید کلاس ساخت</li>
-            <li>تکیه بر نام Tuple هنگام تغییر API → نوع شکننده می‌شود</li>
-        </ul>
-
-        <h3>تمرین‌های پیشنهادی</h3>
-        <ol>
-            <li>
-                تابعی بنویس که:
-                <ul>
-                    <li>قد</li>
-                    <li>وزن</li>
-                </ul>
-                را گرفته و BMI و وضعیت فرد (Normal, Fat, Thin) را به‌صورت Tuple برگرداند.
-            </li>
-
-            <li>
-                یک تابع بساز که سه عدد گرفته و خروجی آن باشد:
-                <strong>(Max, Min, Average)</strong>.
-            </li>
-
-            <li>
-                برنامه‌ای بنویس که در یک فروشگاه:
-                <ul>
-                    <li>جمع قیمت‌ها</li>
-                    <li>تعداد آیتم‌ها</li>
-                </ul>
-                را با Tuple برگرداند.
-            </li>
-        </ol>
-
-        <p class="ref">
-            مستندات رسمی:
-            <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/value-tuples"
-                target="_blank">
-                Value Tuples — Microsoft Docs
-            </a>
-        </p>
-
-    </section>
-
-
-
-
-    <!-- ============================ NULLABLE TYPES ============================ -->
-    <section id="nullable" class="topic-section">
-
-        <h2>Nullable Value Types</h2>
-
-        <p>
-            در سی‌شارپ، <strong>انواع مقداری</strong> مثل <code>int</code>، <code>bool</code> و <code>double</code>
-            به‌صورت پیش‌فرض نمی‌توانند مقدار <code>null</code> داشته باشند.
-            اما در بسیاری از سناریوها—مثل فرم‌ها، دیتابیس، API—ممکن است یک مقدار هنوز مشخص نشده باشد.
-            برای حل این مشکل، سی‌شارپ قابلیت <strong>Nullable Value Types</strong> را معرفی کرد.
-        </p>
-
-        <p>
-            برای Nullable کردن یک نوع مقداری کافی است از علامت <strong>?</strong> استفاده کنیم:
-        </p>
-
-        <pre><code class="language-csharp">
+</code></pre> <h3>اشتباهات رایج</h3><ul> <li>استفاده از Unnamed Tuple → خوانایی پایین</li><li>استفاده از Tuple برای مدل‌های سنگین → باید کلاس ساخت</li><li>تکیه بر نام Tuple هنگام تغییر API → نوع شکننده می‌شود</li></ul> <h3>تمرین‌های پیشنهادی</h3><ol> <li> تابعی بنویس که: <ul><li>قد</li><li>وزن</li></ul> را گرفته و BMI و وضعیت فرد (Normal, Fat, Thin) را به‌صورت Tuple برگرداند. </li><li> یک تابع بساز که سه عدد گرفته و خروجی آن باشد: <strong>(Max, Min, Average)</strong>. </li><li> برنامه‌ای بنویس که در یک فروشگاه: <ul><li>جمع قیمت‌ها</li><li>تعداد آیتم‌ها</li></ul> را با Tuple برگرداند. </li></ol> <p class="ref"> مستندات رسمی: <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/value-tuples" target="_blank" rel="noopener noreferrer"> Value Tuples — Microsoft Docs </a></p> </section><section id="nullable" class="topic-section"> <h2>Nullable Value Types</h2><p> در سی‌شارپ، <strong>انواع مقداری</strong> مثل <code>int</code>، <code>bool</code> و <code>double</code> به‌صورت پیش‌فرض نمی‌توانند مقدار <code>null</code> داشته باشند. اما در بسیاری از سناریوها—مثل فرم‌ها، دیتابیس، API—ممکن است یک مقدار هنوز مشخص نشده باشد. برای حل این مشکل، سی‌شارپ قابلیت <strong>Nullable Value Types</strong> را معرفی کرد. </p><p> برای Nullable کردن یک نوع مقداری کافی است از علامت <strong>?</strong> استفاده کنیم: </p><pre><code class="language-csharp">
 int? age = null;
 bool? isActive = null;
 decimal? price = null;
-</code></pre>
-
-        <h3>Nullable دقیقاً چیست؟</h3>
-        <p>
-            پشت صحنه، نوع nullable در سی‌شارپ در قالب
-            <code>Nullable&lt;T&gt;</code> ذخیره می‌شود، که شامل دو بخش است:
-        </p>
-
-        <ul>
-            <li><strong>HasValue</strong> — آیا مقدار دارد یا خیر؟</li>
-            <li><strong>Value</strong> — مقدار واقعی</li>
-        </ul>
-
-        <p>مثال:</p>
-
-        <pre><code class="language-csharp">
+</code></pre> <h3>Nullable دقیقاً چیست؟</h3><p> پشت صحنه، نوع nullable در سی‌شارپ در قالب <code>Nullable&lt;T&gt;</code> ذخیره می‌شود، که شامل دو بخش است: </p><ul> <li><strong>HasValue</strong> — آیا مقدار دارد یا خیر؟</li><li><strong>Value</strong> — مقدار واقعی</li></ul> <p>مثال:</p><pre><code class="language-csharp">
 int? score = null;
 
 if (!score.HasValue)
@@ -1188,508 +311,206 @@ if (!score.HasValue)
 score = 90;
 
 Console.WriteLine(score.Value);  // 90
-</code></pre>
-
-        <h3>دسترسی ایمن به مقدار</h3>
-        <p>
-            اگر به <code>Value</code> دسترسی پیدا کنید و مقدار null باشد، برنامه خطا می‌دهد.
-            به همین دلیل همیشه باید <code>HasValue</code> را بررسی کنید.
-        </p>
-
-        <h3>Null Coalescing Operator — ??</h3>
-        <p>
-            اگر مقدار null بود، مقدار جایگزین تنظیم می‌کند:
-        </p>
-
-        <pre><code class="language-csharp">
+</code></pre> <h3>دسترسی ایمن به مقدار</h3><p> اگر به <code>Value</code> دسترسی پیدا کنید و مقدار null باشد، برنامه خطا می‌دهد. به همین دلیل همیشه باید <code>HasValue</code> را بررسی کنید. </p><h3>Null Coalescing Operator — ??</h3><p> اگر مقدار null بود، مقدار جایگزین تنظیم می‌کند: </p><pre><code class="language-csharp">
 int? stock = null;
 int finalStock = stock ?? 0;
 
 Console.WriteLine(finalStock);   // خروجی: 0
-</code></pre>
-
-        <h3>Null Coalescing Assignment — ??=</h3>
-        <p>اگر مقدار null بود، همان‌جا مقداردهی می‌کند:</p>
-
-        <pre><code class="language-csharp">
+</code></pre> <h3>Null Coalescing Assignment — ??=</h3><p>اگر مقدار null بود، همان‌جا مقداردهی می‌کند:</p><pre><code class="language-csharp">
 int? count = null;
 count ??= 10;
 
 Console.WriteLine(count);  // خروجی: 10
-</code></pre>
-
-        <h3>عملگر شرطی ?. برای Nullable ها</h3>
-        <p>این عملگر دسترسی امن به اعضا را فراهم می‌کند:</p>
-
-        <pre><code class="language-csharp">
+</code></pre> <h3>عملگر شرطی ?. برای Nullable ها</h3><p>این عملگر دسترسی امن به اعضا را فراهم می‌کند:</p><pre><code class="language-csharp">
 int? length = person?.Name?.Length;
-</code></pre>
-
-        <h3>Nullable در دیتابیس و EF Core</h3>
-        <p>
-            در دیتابیس، ستون‌هایی مانند:
-        </p>
-
-        <ul>
-            <li>تاریخ فوت (ممکن است خالی باشد)</li>
-            <li>تاریخ تایید سفارش</li>
-            <li>نمره دانشجو</li>
-            <li>وضعیت فعال بودن کاربر</li>
-        </ul>
-
-        <p>
-            همیشه Nullable هستند.
-            در EF Core نیز اگر نوع C# را Nullable تعریف کنید، ستون دیتابیس به صورت NULLABLE ساخته می‌شود:
-        </p>
-
-        <pre><code class="language-csharp">
+</code></pre> <h3>Nullable در دیتابیس و EF Core</h3><p> در دیتابیس، ستون‌هایی مانند: </p><ul> <li>تاریخ فوت (ممکن است خالی باشد)</li><li>تاریخ تایید سفارش</li><li>نمره دانشجو</li><li>وضعیت فعال بودن کاربر</li></ul> <p> همیشه Nullable هستند. در EF Core نیز اگر نوع C# را Nullable تعریف کنید، ستون دیتابیس به صورت NULLABLE ساخته می‌شود: </p><pre><code class="language-csharp">
 public int? DiscountPercent { get; set; }
-</code></pre>
-
-        <h3>اشتباهات رایج تازه‌کارها</h3>
-        <ul>
-            <li>استفاده از <code>.Value</code> بدون بررسی null → خطا</li>
-            <li>استفاده بیش از حد از Nullable بدون دلیل → خوانایی پایین</li>
-            <li>فراموش کردن مقدار جایگزین در API → NullReferenceException</li>
-        </ul>
-
-        <h3>مثال پروژه‌ای — اعتبارسنجی فرم</h3>
-
-        <pre><code class="language-csharp">
+</code></pre> <h3>اشتباهات رایج تازه‌کارها</h3><ul> <li>استفاده از <code>.Value</code> بدون بررسی null → خطا</li><li>استفاده بیش از حد از Nullable بدون دلیل → خوانایی پایین</li><li>فراموش کردن مقدار جایگزین در API → NullReferenceException</li></ul> <h3>مثال پروژه‌ای — اعتبارسنجی فرم</h3><pre><code class="language-csharp">
 int? salary = null;
 
 if (salary is null)
     Console.WriteLine("Salary is required.");
 else
     Console.WriteLine($"Salary: {salary}");
-</code></pre>
-
-        <h3>تمرین‌های پیشنهادی</h3>
-        <ol>
-            <li>برنامه‌ای بنویس که سن Nullable ورودی کاربر را گرفته و اگر null بود، مقدار ۰ تنظیم کند.</li>
-            <li>سیستمی طراحی کن که Nullable بودن قیمت تخفیف را بررسی کرده، اگر null بود مقدار 0 بگذارد.</li>
-            <li>دوتا عدد Nullable گرفته و جمع آن‌ها را محاسبه کن—اگر هرکدام null بود، آن را 0 در نظر بگیر.</li>
-        </ol>
-
-        <p class="ref">
-            مستندات رسمی:
-            <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/nullable-value-types"
-                target="_blank">
-                Nullable Types — Microsoft Docs
-            </a>
-        </p>
-
-    </section>
-
-
-
-
-    <!-- ============================ DATETIME ============================ -->
-    <section id="datetime" class="topic-section">
-
-        <h2>DateTime / DateTimeOffset</h2>
-
-        <p>
-            کار با تاریخ و زمان در سی‌شارپ یکی از بخش‌های بسیار مهم و گاهی پیچیده است.
-            برای مدیریت زمان در اپلیکیشن‌های ساده می‌توان از <strong>DateTime</strong> استفاده کرد،
-            اما برای سیستم‌های شبکه‌ای، API، دیتابیس و اپلیکیشن‌های جهانی
-            <strong>DateTimeOffset</strong> انتخاب ایمن‌تر، دقیق‌تر و پیشنهاد شده است.
-        </p>
-
-        <h3>DateTime چیست؟</h3>
-        <p>
-            DateTime فقط یک مقدار تاریخ و زمان ذخیره می‌کند و نوع زمان آن می‌تواند سه حالت داشته باشد:
-        </p>
-
-        <ul>
-            <li><strong>Local</strong> → طبق ساعت کامپیوتر</li>
-            <li><strong>Utc</strong> → استاندارد جهانی</li>
-            <li><strong>Unspecified</strong> → نامشخص (خطرناک برای برنامه‌نویسان تازه‌کار)</li>
-        </ul>
-
-        <pre><code class="language-csharp">
+</code></pre> <h3>تمرین‌های پیشنهادی</h3><ol> <li>برنامه‌ای بنویس که سن Nullable ورودی کاربر را گرفته و اگر null بود، مقدار ۰ تنظیم کند.</li><li>سیستمی طراحی کن که Nullable بودن قیمت تخفیف را بررسی کرده، اگر null بود مقدار 0 بگذارد.</li><li>دوتا عدد Nullable گرفته و جمع آن‌ها را محاسبه کن—اگر هرکدام null بود، آن را 0 در نظر بگیر.</li></ol> <p class="ref"> مستندات رسمی: <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/nullable-value-types" target="_blank" rel="noopener noreferrer"> Nullable Types — Microsoft Docs </a></p> </section><section id="datetime" class="topic-section"> <h2>DateTime / DateTimeOffset</h2><p> کار با تاریخ و زمان در سی‌شارپ یکی از بخش‌های بسیار مهم و گاهی پیچیده است. برای مدیریت زمان در اپلیکیشن‌های ساده می‌توان از <strong>DateTime</strong> استفاده کرد، اما برای سیستم‌های شبکه‌ای، API، دیتابیس و اپلیکیشن‌های جهانی <strong>DateTimeOffset</strong> انتخاب ایمن‌تر، دقیق‌تر و پیشنهاد شده است. </p><h3>DateTime چیست؟</h3><p> DateTime فقط یک مقدار تاریخ و زمان ذخیره می‌کند و نوع زمان آن می‌تواند سه حالت داشته باشد: </p><ul> <li><strong>Local</strong> → طبق ساعت کامپیوتر</li><li><strong>Utc</strong> → استاندارد جهانی</li><li><strong>Unspecified</strong> → نامشخص (خطرناک برای برنامه‌نویسان تازه‌کار)</li></ul> <pre><code class="language-csharp">
 DateTime local = DateTime.Now;           // Local Time
 DateTime utc = DateTime.UtcNow;          // UTC Time
 DateTime unspecified = new DateTime(2025, 5, 1);
-</code></pre>
-
-        <h3>مشکل بزرگ DateTime</h3>
-        <p>
-            DateTime اطلاعات منطقه زمانی (Time Zone) را نگه نمی‌دارد.
-            یعنی اگر یک کاربر از ایران و کاربر دیگری از آلمان زمان را ذخیره کنند،
-            بعداً مشخص نیست که مقدار مربوط به کدام منطقه بوده است.
-            این باعث بروز خطاهای بزرگ در:
-        </p>
-
-        <ul>
-            <li>دیتابیس</li>
-            <li>تراکنش‌های مالی</li>
-            <li>سامانه‌های جهانی</li>
-            <li>سیستم‌های رزرو و حمل‌ونقل</li>
-        </ul>
-
-        <p>
-            به همین دلیل مایکروسافت توصیه می‌کند برای ۹۰٪ سناریوها از
-            <strong>DateTimeOffset</strong> استفاده کنیم.
-        </p>
-
-        <h3>DateTimeOffset چیست؟</h3>
-        <p>
-            این نوع داده مانند DateTime زمان را ذخیره می‌کند اما یک <strong>offset</strong> نیز اضافه دارد
-            که نشان می‌دهد این زمان، چند ساعت با UTC اختلاف دارد.
-            همین یک ویژگی باعث می‌شود زمان‌ها قابل اعتماد، قابل حمل و استاندارد شوند.
-        </p>
-
-        <pre><code class="language-csharp">
+</code></pre> <h3>مشکل بزرگ DateTime</h3><p> DateTime اطلاعات منطقه زمانی (Time Zone) را نگه نمی‌دارد. یعنی اگر یک کاربر از ایران و کاربر دیگری از آلمان زمان را ذخیره کنند، بعداً مشخص نیست که مقدار مربوط به کدام منطقه بوده است. این باعث بروز خطاهای بزرگ در: </p><ul> <li>دیتابیس</li><li>تراکنش‌های مالی</li><li>سامانه‌های جهانی</li><li>سیستم‌های رزرو و حمل‌ونقل</li></ul> <p> به همین دلیل مایکروسافت توصیه می‌کند برای ۹۰٪ سناریوها از <strong>DateTimeOffset</strong> استفاده کنیم. </p><h3>DateTimeOffset چیست؟</h3><p> این نوع داده مانند DateTime زمان را ذخیره می‌کند اما یک <strong>offset</strong> نیز اضافه دارد که نشان می‌دهد این زمان، چند ساعت با UTC اختلاف دارد. همین یک ویژگی باعث می‌شود زمان‌ها قابل اعتماد، قابل حمل و استاندارد شوند. </p><pre><code class="language-csharp">
 DateTimeOffset iranTime = DateTimeOffset.Now;     // +03:30
 DateTimeOffset utcTime = DateTimeOffset.UtcNow;   // +00:00
-</code></pre>
-
-        <h3>مثال تفاوت: ایران و آلمان</h3>
-
-        <pre><code class="language-csharp">
+</code></pre> <h3>مثال تفاوت: ایران و آلمان</h3><pre><code class="language-csharp">
 DateTimeOffset tehran = new DateTimeOffset(2025, 1, 1, 10, 0, 0, TimeSpan.FromHours(3.5));
 DateTimeOffset berlin = new DateTimeOffset(2025, 1, 1, 6, 30, 0, TimeSpan.FromHours(1));
 
 Console.WriteLine(tehran.ToUniversalTime());
 Console.WriteLine(berlin.ToUniversalTime());
-</code></pre>
-
-        <p>
-            هر دو به همان لحظه در زمان اشاره می‌کنند، فقط در منطقه‌های مختلف.
-        </p>
-
-        <h3>مقایسه و اختلاف بین زمان‌ها</h3>
-
-        <pre><code class="language-csharp">
+</code></pre> <p> هر دو به همان لحظه در زمان اشاره می‌کنند، فقط در منطقه‌های مختلف. </p><h3>مقایسه و اختلاف بین زمان‌ها</h3><pre><code class="language-csharp">
 DateTimeOffset t1 = DateTimeOffset.Now;
 DateTimeOffset t2 = t1.AddHours(5);
 
 TimeSpan diff = t2 - t1;
 Console.WriteLine(diff.TotalHours);   // 5
-</code></pre>
-
-        <h3>تبدیل بین DateTime و DateTimeOffset</h3>
-
-        <pre><code class="language-csharp">
+</code></pre> <h3>تبدیل بین DateTime و DateTimeOffset</h3><pre><code class="language-csharp">
 // DateTime → DateTimeOffset
 DateTime dt = DateTime.Now;
 DateTimeOffset dto = new DateTimeOffset(dt);
 
 // DateTimeOffset → DateTime
 DateTime dt2 = dto.DateTime;
-</code></pre>
-
-        <p>
-            اما همیشه بهتر است DateTimeOffset نگه داریم و فقط هنگام نمایش تبدیل کنیم.
-        </p>
-
-        <h3>استفاده در دیتابیس (Entity Framework)</h3>
-        <p>
-            اگر می‌خواهید زمان دقیق ثبت لاگ، ایجاد سفارش، پرداخت، Token و…
-            در دیتابیس بدون اختلاف ذخیره شود:
-        </p>
-
-        <pre><code class="language-csharp">
+</code></pre> <p> اما همیشه بهتر است DateTimeOffset نگه داریم و فقط هنگام نمایش تبدیل کنیم. </p><h3>استفاده در دیتابیس (Entity Framework)</h3><p> اگر می‌خواهید زمان دقیق ثبت لاگ، ایجاد سفارش، پرداخت، Token و… در دیتابیس بدون اختلاف ذخیره شود: </p><pre><code class="language-csharp">
 public DateTimeOffset CreatedAt { get; set; } = DateTimeOffset.UtcNow;
-</code></pre>
-
-        <p>
-            EF این مقدار را دقیقاً با Offset ذخیره می‌کند و در هر سرور قابل اعتماد خواهد بود.
-        </p>
-
-        <h3>مثال پروژه‌ای — ثبت زمان سفارش</h3>
-
-        <pre><code class="language-csharp">
+</code></pre> <p> EF این مقدار را دقیقاً با Offset ذخیره می‌کند و در هر سرور قابل اعتماد خواهد بود. </p><h3>مثال پروژه‌ای — ثبت زمان سفارش</h3><pre><code class="language-csharp">
 public class Order
 {
     public int Id { get; set; }
     public DateTimeOffset CreatedAt { get; set; } = DateTimeOffset.UtcNow;
 }
-</code></pre>
-
-        <p>
-            این کار باعث می‌شود زمان سفارش در تمام سیستم‌ها استاندارد باقی بماند.
-        </p>
-
-        <h3>تمرین‌های پیشنهادی</h3>
-        <ol>
-            <li>برنامه‌ای بنویس که ساعت فعلی ایران و UTC را چاپ کند.</li>
-            <li>تاریخ تولد کاربر را گرفته و محاسبه کند چند روز از عمر او گذشته است.</li>
-            <li>زمان یک رویداد در ایران را به زمان آلمان تبدیل کن.</li>
-            <li>دو DateTimeOffset مختلف گرفته و مدت‌زمان اختلاف را محاسبه کن.</li>
-        </ol>
-
-        <p class="ref">
-            مستندات رسمی:
-            <a href="https://learn.microsoft.com/en-us/dotnet/standard/datetime/" target="_blank">
-                DateTime — Microsoft Docs
-            </a>
-        </p>
-
-    </section>
-
-
-</div>
-
-
-
-<style>
-    .valuetypes-wrapper {
-        max-width: 960px;
-        margin: 0 auto;
-        padding: 10px 20px;
-        transition: max-width .3s ease;
-    }
-
-    @media (max-width: 768px) {
-        .valuetypes-wrapper {
-            max-width: 100%;
-            padding: 10px 18px;
-        }
-    }
-
-    @media (max-width: 480px) {
-        .valuetypes-wrapper {
-            padding: 10px 12px;
-        }
-    }
-
-    /* عنوان صفحه */
-    .page-title {
-        text-align: center;
-        font-size: 40px;
-        font-weight: bold;
-        color: #ff7b00;
-        margin-bottom: 5px;
-    }
-
-    @media (max-width: 768px) {
-        .page-title {
-            font-size: 34px;
-        }
-    }
-
-    .page-desc {
-        text-align: center;
-        opacity: .8;
-        font-size: 30px;
-        margin-bottom: 40px;
-        font-family: "Lalezar", "VazirFD";
-    }
-
-    @media (max-width: 768px) {
-        .page-desc {
-            font-size: 18px;
-        }
-    }
-
-    /* سکشن‌ها */
-    .topic-section {
-        margin-bottom: 70px;
-        padding: 25px;
-        border-radius: 14px;
-        background: rgba(215, 215, 215, 0.03);
-        border-right: 4px solid #ff7b00;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-    }
-
-    html.light .topic-section {
-        background: #ffffff;
-        border-bottom-color: #e5e5e5;
-    }
-
-    .topic-section h2 {
-        text-align: left;
-        color: #ff7b00;
-        font-size: 28px;
-        margin-bottom: 15px;
-        position: relative;
-    }
-
-    .topic-section h2::after {
-        content: "";
-        width: 60px;
-        height: 3px;
-        background: #ff7b00;
-        position: absolute;
-        bottom: -6px;
-        left: 0;
-        border-radius: 3px;
-    }
-
-    .topic-section p {
-        line-height: 1.85;
-        margin-bottom: 14px;
-    }
-
-    .topic-section h3 {
-        margin-top: 25px;
-        font-size: 20px;
-        color: #ff9f45;
-    }
-
-    ul li,
-    ol li {
-        margin-bottom: 6px;
-    }
-
-    /* لینک‌ها */
-    .ref a {
-        color: #4ea3ff;
-        font-weight: 600;
-        transition: color .2s, text-shadow .2s;
-    }
-
-    .ref a:hover {
-        color: #82c5ff;
-        text-shadow: 0 0 8px rgba(78, 163, 255, 0.6);
-    }
-
-    /* کد بلاک */
-    pre {
-        background: #161616;
-        border: 1px solid #333;
-        padding: 16px;
-        border-radius: 10px;
-        overflow-x: auto;
-        margin-top: 15px;
-        font-family: "JetBrains Mono", Menlo, Consolas, monospace;
-        font-size: 15px;
-        line-height: 1.6;
-    }
-
-    html.light pre {
-        background: #f9f9f9;
-        border-color: #dfdfdf;
-        color: #222;
-    }
-
-    /* نکته ویژه - نقل‌قول */
-    .valuetypes-wrapper blockquote {
-        padding: 15px 20px;
-        border-right: 4px solid #ff7b00;
-        background: rgba(228, 228, 228, 0.04);
-        border-radius: 10px;
-        margin: 25px 0;
-        font-style: italic;
-        opacity: .95;
-    }
-
-    html.light .valuetypes-wrapper blockquote {
-        background: #fff8f0;
-    }
-</style>
-  </main>
-
-  <!-- فوتر مشترک -->
-  <footer class="footer">
-    <div class="container">
-      <p>
-        <img src="/Gitab/icone/copyright.svg" alt="کپی‌رایت" width="14" height="14"
-             style="vertical-align:middle;margin-inline:4px">
-        <span id="y"></span> Gitab — تمامی حقوق محفوظ است.
-      </p>
-    </div>
-  </footer>
-
-  <!-- سال و اسکریپت تغییر تم -->
-  <script>
+</code></pre> <p> این کار باعث می‌شود زمان سفارش در تمام سیستم‌ها استاندارد باقی بماند. </p><h3>تمرین‌های پیشنهادی</h3><ol> <li>برنامه‌ای بنویس که ساعت فعلی ایران و UTC را چاپ کند.</li><li>تاریخ تولد کاربر را گرفته و محاسبه کند چند روز از عمر او گذشته است.</li><li>زمان یک رویداد در ایران را به زمان آلمان تبدیل کن.</li><li>دو DateTimeOffset مختلف گرفته و مدت‌زمان اختلاف را محاسبه کن.</li></ol> <p class="ref"> مستندات رسمی: <a href="https://learn.microsoft.com/en-us/dotnet/standard/datetime/" target="_blank" rel="noopener noreferrer"> DateTime — Microsoft Docs </a></p> </section></div> <style>.valuetypes-wrapper{max-width:960px;margin:0 auto;padding:10px 20px;transition:max-width .3s ease}@media (max-width:768px){.valuetypes-wrapper{max-width:100%;padding:10px 18px}}@media (max-width:480px){.valuetypes-wrapper{padding:10px 12px}}.page-title{text-align:center;font-size:40px;font-weight:bold;color:#ff7b00;margin-bottom:5px}@media (max-width:768px){.page-title{font-size:34px}}.page-desc{text-align:center;opacity:.8;font-size:30px;margin-bottom:40px;font-family:"Lalezar","VazirFD"}@media (max-width:768px){.page-desc{font-size:18px}}.topic-section{margin-bottom:70px;padding:25px;border-radius:14px;background:rgba(215,215,215,0.03);border-right:4px solid #ff7b00;border-bottom:1px solid rgba(255,255,255,0.06)}html.light .topic-section{background:#ffffff;border-bottom-color:#e5e5e5}.topic-section h2{text-align:left;color:#ff7b00;font-size:28px;margin-bottom:15px;position:relative}.topic-section h2::after{content:"";width:60px;height:3px;background:#ff7b00;position:absolute;bottom:-6px;left:0;border-radius:3px}.topic-section p{line-height:1.85;margin-bottom:14px}.topic-section h3{margin-top:25px;font-size:20px;color:#ff9f45}ul li,ol li{margin-bottom:6px}.ref a{color:#4ea3ff;font-weight:600;transition:color .2s,text-shadow .2s}.ref a:hover{color:#82c5ff;text-shadow:0 0 8px rgba(78,163,255,0.6)}pre{background:#161616;border:1px solid #333;padding:16px;border-radius:10px;overflow-x:auto;margin-top:15px;font-family:"JetBrains Mono",Menlo,Consolas,monospace;font-size:15px;line-height:1.6}html.light pre{background:#f9f9f9;border-color:#dfdfdf;color:#222}.valuetypes-wrapper blockquote{padding:15px 20px;border-right:4px solid #ff7b00;background:rgba(228,228,228,0.04);border-radius:10px;margin:25px 0;font-style:italic;opacity:.95}html.light .valuetypes-wrapper blockquote{background:#fff8f0}</style></main><footer class="footer-minimal"> <div class="footer-container"><div class="footer-top-row"> <div class="footer-brand-side"><a href="/Gitab/" class="footer-brand-anchor"> <img src="/Gitab/icone/logo.svg" alt="Gitab" width="28" height="28" loading="lazy" decoding="async"> <span class="footer-brand-title">گیتاب (Gitab)</span> </a> <p class="footer-tagline"> پلتفرم آزاد و مستقل برای ترجمهٔ دقیق و روان کتاب‌های مرجع مهندسی نرم‌افزار. </p></div> <div class="footer-nav-cols"><div class="footer-nav-col"> <span class="footer-nav-heading">موضوعات</span><ul class="footer-nav-list"> <li><a href="/Gitab/books/list-books/?cat=csharp">سی‌شارپ و دات‌نت</a></li><li><a href="/Gitab/books/list-books/?cat=clean-code">کد تمیز و بازآفرینی</a></li><li><a href="/Gitab/books/list-books/?cat=architecture">معماری و طراحی دامنه</a></li><li><a href="/Gitab/books/list-books/?cat=system">لینوکس و خط فرمان</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">بخش‌های سایت</span><ul class="footer-nav-list"> <li><a href="/Gitab/">صفحه اصلی</a></li><li><a href="/Gitab/books/list-books/">کتابخانه کامل</a></li><li><a href="/Gitab/courses/">دوره‌های آموزشی</a></li><li><a href="/Gitab/translator.html">تالار مترجمین</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">مشارکت و جامعه</span><ul class="footer-nav-list"> <li><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer">راهنمای همکاری در ترجمه</a></li><li><a href="https://github.com/hheydarian/Gitab/issues" target="_blank" rel="noopener noreferrer">پیشنهاد کتاب یا گزارش خطا</a></li></ul> </div></div> </div><div class="footer-bottom-line"> <span>© <span id="y">2026</span> Gitab — توسعه‌یافته برای جامعهٔ مهندسان نرم‌افزار ایرانی</span></div> </div></footer> <script>
   (() => {
     const root = document.documentElement;
     const btn = document.getElementById('themeToggle');
+    const sunIcon = btn ? btn.querySelector('.icon-sun') : null;
+    const moonIcon = btn ? btn.querySelector('.icon-moon') : null;
     const KEY = 'gitab-theme';
 
-    function updateTheme(s) {
-      root.setAttribute('data-theme', s);
-      const mode = s;  // فقط `dark` یا `light` خواهد بود
+    function updateTheme(mode) {
+      root.setAttribute('data-theme', mode);
       root.dataset.colorMode = mode;
-      btn.dataset.icon = mode === 'dark' ? 'moon' : 'sun';
+      if (sunIcon && moonIcon) {
+        if (mode === 'dark') {
+          sunIcon.style.display = 'inline-block';
+          moonIcon.style.display = 'none';
+        } else {
+          sunIcon.style.display = 'none';
+          moonIcon.style.display = 'inline-block';
+        }
+      }
     }
 
-    // وضعیت تم ذخیره شده از localStorage
-    let saved = localStorage.getItem(KEY) || 'light'; // پیش‌فرض روشن
+    let saved = 'dark';
+    try { saved = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
     updateTheme(saved);
 
-    // تنظیم مجدد تم هنگام تغییر وضعیت دکمه
-    btn.addEventListener('click', () => {
-      const current = localStorage.getItem(KEY) || 'light';
-      const next = current === 'dark' ? 'light' : 'dark';  // فقط دو حالت: تاریک و روشن
-      localStorage.setItem(KEY, next);
-      updateTheme(next);
-    });
+    if (btn) {
+      btn.addEventListener('click', () => {
+        let current = 'dark';
+        try { current = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+        const next = current === 'dark' ? 'light' : 'dark';
+        try { localStorage.setItem(KEY, next); } catch (e) {}
+        updateTheme(next);
+      });
+    }
 
-    // هنگام بارگذاری صفحه
     document.addEventListener('DOMContentLoaded', () => {
-      updateTheme(localStorage.getItem(KEY) || 'light');
+      let mode = 'dark';
+      try { mode = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+      updateTheme(mode);
+      const yearSpan = document.getElementById('y');
+      if (yearSpan) yearSpan.textContent = new Date().getFullYear();
     });
+
+    const mobBtn = document.getElementById('mobileMenuBtn');
+    const mobDrawer = document.getElementById('mobileDrawer');
+    if (mobBtn && mobDrawer) {
+      const setDrawerOpen = (open) => {
+        mobDrawer.classList.toggle('open', open);
+        mobBtn.classList.toggle('is-open', open);
+        mobBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        mobBtn.setAttribute('aria-label', open ? 'بستن منو' : 'باز کردن منو');
+        mobDrawer.setAttribute('aria-hidden', open ? 'false' : 'true');
+      };
+
+      mobBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        setDrawerOpen(!mobDrawer.classList.contains('open'));
+      });
+
+      mobDrawer.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => setDrawerOpen(false));
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && mobDrawer.classList.contains('open')) {
+          setDrawerOpen(false);
+        }
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!mobDrawer.contains(e.target) && !mobBtn.contains(e.target)) {
+          setDrawerOpen(false);
+        }
+      });
+    }
+
+    if ('serviceWorker' in navigator) {
+      const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+      if (isLocalhost) {
+        navigator.serviceWorker.getRegistrations().then(regs => {
+          for (const reg of regs) reg.unregister();
+        });
+        if ('caches' in window) {
+          caches.keys().then(names => {
+            for (const name of names) caches.delete(name);
+          });
+        }
+      } else {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/Gitab/sw.js').catch(() => {});
+        });
+      }
+    }
   })();
-</script>
-
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-  <script>hljs.highlightAll();</script>
-
-  <script>
+  </script> <script>
   document.querySelectorAll('pre code').forEach(block => {
+    const pre = block.parentNode;
+    if (!pre || pre.querySelector('.copy-btn')) return;
+
+    const copySvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
+    const okSvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+
     const btn = document.createElement('button');
     btn.className = 'copy-btn';
-
-    const icon = document.createElement('img');
-    icon.src = "/Gitab/icone/copy.svg";
-    icon.alt = 'Copy';
-    btn.appendChild(icon);
-
-    block.parentNode.insertBefore(btn, block);
+    btn.setAttribute('aria-label', 'کپی کد');
+    btn.setAttribute('title', 'کپی کد');
+    btn.setAttribute('type', 'button');
+    btn.innerHTML = copySvg;
+    pre.appendChild(btn);
 
     btn.addEventListener('click', async () => {
-      await navigator.clipboard.writeText(block.textContent);
-      btn.classList.add('copied');
-      setTimeout(() => btn.classList.remove('copied'), 1500);
-    });
-  });
-  </script>
-
-  <script>
-  document.body.dataset.page = window.location.pathname;
-
-  const menuBtn = document.querySelector(".menu-toggle");
-  const nav = document.querySelector(".nav");
-
-  if (menuBtn && nav) {
-    menuBtn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      nav.classList.toggle("show");
-    });
-
-    document.addEventListener("click", (e) => {
-      const clickedInsideNav = nav.contains(e.target);
-      const clickedMenuButton = menuBtn.contains(e.target);
-      if (!clickedInsideNav && !clickedMenuButton) {
-        nav.classList.remove("show");
+      try {
+        await navigator.clipboard.writeText(block.textContent);
+        btn.classList.add('copied');
+        btn.innerHTML = okSvg;
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          btn.innerHTML = copySvg;
+        }, 1800);
+      } catch (err) {
+        console.error('Copy failed:', err);
       }
     });
-  }
-  </script>
-
-  <script>
-    document.getElementById('y').textContent = new Date().getFullYear();
-  </script>
-  <script>
-document.getElementById("openDonate").addEventListener("click", () => {
-  document.getElementById("donateModal").style.display = "block";
-});
-document.getElementById("closeDonate").addEventListener("click", () => {
-  document.getElementById("donateModal").style.display = "none";
-});
-document.querySelectorAll(".copy-btn").forEach(btn => {
-  btn.addEventListener("click", () => {
-    navigator.clipboard.writeText(btn.dataset.copy);
-  
-    setTimeout(() => (btn.textContent = "کپی"), 2000);
   });
-});
-</script>
-
-</body>
-</html>
+  </script> <script type="speculationrules">{"prefetch":[{"where":{"and":[{"href_matches":"/Gitab/*"},{"not":{"href_matches":"/Gitab/downloads/*"}},{"not":{"selector_matches":"[download], [target='_blank']"}}]},"eagerness":"moderate"}]}</script> <script>
+  (() => {
+    if (window.HTMLScriptElement && HTMLScriptElement.supports && HTMLScriptElement.supports('speculationrules')) return;
+    const seen = new Set([window.location.href]);
+    let count = 0;
+    const prefetchLink = (e) => {
+      if (count >= 12) return;
+      const a = e.target && e.target.closest ? e.target.closest('header a, .chapter-single-next-nav a, .syllabus-chapter-item a, .btn-hero-read, .btn-card-read') : null;
+      if (!a || !a.href || a.hasAttribute('download') || a.target === '_blank') return;
+      if (a.origin !== window.location.origin || a.pathname.includes('/downloads/')) return;
+      const clean = a.href.split('#')[0];
+      if (!clean || seen.has(clean)) return;
+      seen.add(clean);
+      count++;
+      const l = document.createElement('link');
+      l.rel = 'prefetch';
+      l.href = clean;
+      document.head.appendChild(l);
+    };
+    document.addEventListener('pointerenter', prefetchLink, { capture: true, passive: true });
+    document.addEventListener('touchstart', prefetchLink, { capture: true, passive: true });
+  })();
+  </script></body></html>

@@ -77,7 +77,7 @@ command -options arguments
 [me@linuxbox ~]$ ls -lt --reverse
 ```
 
-📌 توجه: گزینه‌ها مانند نام فایل‌ها در لینوکس حساس به بزرگی و کوچکی حروف‌اند.  
+ توجه: گزینه‌ها مانند نام فایل‌ها در لینوکس حساس به بزرگی و کوچکی حروف‌اند.  
 
 ---
 
@@ -126,7 +126,7 @@ command -options arguments
 picture.jpg: JPEG image data, JFIF standard 1.01
 ```
 
-📌 در لینوکس شعار این است: «همه‌چیز یک فایل است.»  
+ در لینوکس شعار این است: «همه‌چیز یک فایل است.»  
 
 ---
 
@@ -152,7 +152,7 @@ picture.jpg: JPEG image data, JFIF standard 1.01
 | `h` | نمایش راهنما |
 | `q` | خروج |
 
-📌 نام `less` یک بازی زبانی از عبارت «Less is more» است.  
+ نام `less` یک بازی زبانی از عبارت «Less is more» است.  
 
 ---
 
@@ -169,7 +169,7 @@ picture.jpg: JPEG image data, JFIF standard 1.01
 4. مشاهده با `less` اگر متنی بود  
 5. اگر فایل غیرمتنی بود و ترمینال را به‌هم ریخت، دستور `reset` را اجرا کنید  
 
-📌 کاربران عادی نمی‌توانند سیستم را خراب کنند؛ این مسئولیت مدیر سیستم است!  
+ کاربران عادی نمی‌توانند سیستم را خراب کنند؛ این مسئولیت مدیر سیستم است!  
 
 ---
 
@@ -223,7 +223,7 @@ lrwxrwxrwx 1 root root 11 2007-08-11 07:34 libc.so.6 -> libc-2.6.so
 - تفاوت لینک‌های نمادین و سخت  
 - اهمیت فایل‌های متنی در لینوکس  
 
-📚 منابع بیشتر:  
+ منابع بیشتر:  
 
 - [Linux Filesystem Hierarchy Standard](https://refspecs.linuxfoundation.org/fhs.shtml)  
 - [Unix Directory Structure](http://en.wikipedia.org/wiki/Unix_directory_structure)  

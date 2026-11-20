@@ -1,621 +1,236 @@
-
-
-<!doctype html>
-<html lang="fa" dir="rtl">
-<head>
-  <meta charset="utf-8">
-  <link rel="icon" type="image/png" href="/Gitab/favicon.png">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>مدیریت بسته‌ها</title>
-  <meta name="description" content="ترجمه‌های فارسی کتاب‌های فنی — سریع، مینیمال و قابل اتکا.">
-
-  <!-- استایل‌ها -->
-  <link rel="stylesheet" href="/Gitab/styles/main.css">
-  <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
-
-  <style>
-  @font-face {
-    font-family: 'Vazir';
-    src: url('/Gitab/fonts/Vazir-FD-WOL.ttf') format('truetype');
-    font-display: swap;
-  }
-  @font-face {
-    font-family: "Lalezar";
-    src: url('fonts/Lalezar.ttf') format('truetype');
-    font-display: swap;
-}
-  body {
-    font-family: 'Vazir', sans-serif;
-  }
-  </style>
-</head>
-
-<body>
-  <!-- هدر مشترک -->
-  <header class="header">
-    <div class="container nav-wrap">
-      <a href="/Gitab/" class="brand">
-        <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="26" height="26">
-        <span>Gitab</span>
-      </a>
-
-       <nav class="nav">
-         <a href="/Gitab/" >خانه</a>
-         <a href="/Gitab/books/list-books" >کتاب‌ها</a>
-         <a href="/Gitab/giter.html" >دوره ها</a>
-          <!-- 
-         <a href="/Gitab/translator.html" >مترجمین</a>
-           -->
-       </nav>
-
-      <div class="nav-actions">
-        <button id="themeToggle" class="icon-btn theme-btn" data-icon="moon" aria-label="تغییر تم">
-          <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن">
-          <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک">
-        </button>
-
-        <a class="icon-btn" href="https://github.com/hheydarian/Gitab" target="_blank" title="GitHub">
-          <img src="/Gitab/icone/github.svg" alt="GitHub">
-        </a>
-
-        <!-- دکمه منو برای موبایل -->
-        <button class="menu-toggle" aria-label="منو">
-          <img src="/Gitab/icone/menu.svg" alt="menu">
-        </button>
-      </div>
-    </div>
-  </header>
-
-  
-  <main class="site-main book-page">
-    <h1>فصل ۱۴ – مدیریت بسته‌ها</h1>
-<p>اگر مدتی را در جامعهٔ لینوکس بگذرانیم، حتماً با دیدگاه‌های گوناگونی دربارهٔ این‌که «کدام توزیع لینوکس بهترین است» روبه‌رو می‌شویم. این بحث‌ها گاهی بسیار سطحی می‌شوند و مثلاً به رنگ پس‌زمینهٔ دسکتاپ یا تم پیش‌فرض اوبونتو گیر می‌دهند! در حالی‌که مهم‌ترین عامل تعیین‌کنندهٔ کیفیت یک توزیع، <strong>سیستم بسته‌بندی (Package System)</strong> و <strong>پویایی جامعهٔ پشتیبان آن</strong> است.</p>
-<p>هرچه بیشتر با لینوکس کار کنیم، درمی‌یابیم که فضای نرم‌افزاری آن بسیار پویـا و در حال تغییر است. تقریباً همهٔ توزیع‌های مطرح هر شش ماه نسخهٔ جدید منتشر می‌کنند و هر روز به‌روزرسانی‌های زیادی برای برنامه‌ها ارائه می‌شود. برای همراهی با این سیل نرم‌افزار، به ابزارهای قوی برای مدیریت بسته‌ها نیاز داریم.</p>
-<hr>
-<h3>مدیریت بسته چیست؟</h3>
-<p>مدیریت بسته روشی برای نصب و نگهداری نرم‌افزار روی سیستم است. امروزه بیشتر کاربران تمام نیازهای نرم‌افزاری خود را با نصب بسته‌هایی که از سوی توزیع لینوکسی‌شان ارائه می‌شود برطرف می‌کنند. در روزهای اولیهٔ لینوکس، کاربران مجبور بودند کد منبع را دانلود و خودشان آن را کامپایل کنند. البته دسترسی به کد منبع از شگفتی‌های لینوکس است و به ما اجازه می‌دهد سیستم را بررسی و بهبود دهیم، اما استفاده از بسته‌های از پیش کامپایل‌شده سریع‌تر و راحت‌تر است.</p>
-<p>در این فصل با ابزارهای خط فرمانی که برای مدیریت بسته‌ها استفاده می‌شوند آشنا می‌شویم. هرچند ابزارهای گرافیکی زیادی برای این کار وجود دارد، اما دانستن دستورات خط فرمان ضروری است؛ زیرا بسیاری از وظایف پیشرفته تنها از این راه قابل انجام هستند.</p>
-<hr>
-<h3>سیستم‌های بسته‌بندی</h3>
-<p>هر توزیع لینوکس سیستم بسته‌بندی خاص خود را دارد، و به‌طور کلی بسته‌ای که برای یک توزیع ساخته شده با توزیع دیگر سازگار نیست. بیشتر توزیع‌ها در دو خانوادهٔ اصلی جای می‌گیرند:</p>
-<table>
-<thead>
-<tr>
-<th>سیستم بسته‌بندی</th>
-<th>نمونه توزیع‌ها</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>سبک Debian (.deb)</td>
-<td>Debian، Ubuntu، Xandros، Linspire</td>
-</tr>
-<tr>
-<td>سبک Red Hat (.rpm)</td>
-<td>Fedora، CentOS، RHEL، OpenSUSE، Mandriva، PCLinuxOS</td>
-</tr>
-</tbody>
-</table>
-<p>البته توزیع‌هایی مانند Gentoo، Slackware و Foresight از سیستم‌های متفاوتی استفاده می‌کنند.</p>
-<hr>
-<h3>نحوهٔ کار یک سیستم بسته‌بندی</h3>
-<p>در نرم‌افزارهای تجاری معمولاً کاربر باید دیسک نصب را خریداری کرده و برنامهٔ نصاب (wizard) را اجرا کند.<br>
-اما در لینوکس تقریباً تمام نرم‌افزارها از اینترنت دریافت می‌شوند. بیشتر آن‌ها توسط توزیع ارائه می‌شوند و باقی به صورت کد منبع برای نصب دستی در دسترس‌اند.</p>
-<hr>
-<h3>فایل‌های بسته (Package Files)</h3>
-<p>واحد پایهٔ نرم‌افزار در سیستم بسته‌بندی، <strong>فایل بسته</strong> است. این فایل مجموعه‌ای فشرده از فایل‌هایی است که برنامه را تشکیل می‌دهند. هر بسته ممکن است شامل چندین برنامه و داده‌های پشتیبان آن‌ها باشد.<br>
-به‌علاوه، فایل بسته شامل <strong>متاداده‌ها</strong> (مثل توضیحات، نسخه، وابستگی‌ها) و اسکریپت‌های پیش‌از‌نصب و پس‌از‌نصب است که وظایف پیکربندی را انجام می‌دهند.</p>
-<p>فایل بسته توسط فردی به‌نام <strong>نگه‌دارندهٔ بسته (Package Maintainer)</strong> ساخته می‌شود. او کد منبع را از توسعه‌دهندهٔ اصلی دریافت کرده، آن را کامپایل می‌کند، و متاداده‌ها و اسکریپت‌ها را اضافه می‌نماید. گاهی برای بهبود سازگاری با بقیهٔ اجزای توزیع، تغییراتی نیز در کد منبع ایجاد می‌کند.</p>
-<hr>
-<h3>مخازن (Repositories)</h3>
-<p>بیشتر بسته‌ها توسط شرکت یا تیم توسعه‌دهندهٔ توزیع ساخته و در <strong>مخازن مرکزی</strong> قرار می‌گیرند؛ جایی که هزاران بسته برای نصب در دسترس کاربران آن توزیع قرار دارد.</p>
-<p>معمولاً هر توزیع چند نوع مخزن دارد، مانند:</p>
-<ul>
-<li><strong>testing (آزمایشی):</strong> شامل بسته‌های تازه‌ساخته‌شده که هنوز در مرحلهٔ تست هستند.</li>
-<li><strong>development (توسعه):</strong> شامل بسته‌های در حال کار که برای نسخهٔ بعدی توزیع آماده می‌شوند.</li>
-</ul>
-<p>برخی توزیع‌ها همچنین از <strong>مخازن شخص ثالث (third-party)</strong> پشتیبانی می‌کنند؛ مثلاً برای نرم‌افزارهایی که به‌دلیل محدودیت‌های قانونی (مثل حق ثبت اختراع یا DRM) نمی‌توانند در مخزن اصلی باشند. نمونهٔ معروف آن پشتیبانی از DVD رمزگذاری‌شده است که در ایالات متحده قانونی نیست. این مخازن معمولاً در کشورهای دیگر اداره می‌شوند و برای استفاده از آن‌ها باید به‌صورت دستی در فایل تنظیمات سیستم بسته اضافه شوند.</p>
-<hr>
-<h3>وابستگی‌ها (Dependencies)</h3>
-<p>برنامه‌ها معمولاً مستقل عمل نمی‌کنند و به سایر مؤلفه‌های نرم‌افزاری وابسته‌اند. بسیاری از قابلیت‌های مشترک (مثل ورودی/خروجی) توسط <strong>کتابخانه‌های اشتراکی (shared libraries)</strong> فراهم می‌شود.</p>
-<p>اگر بسته‌ای به یک منبع اشتراکی نیاز داشته باشد، می‌گوییم <strong>وابستگی (dependency)</strong> دارد. سیستم‌های مدرن مدیریت بسته، مکانیزم‌هایی برای <strong>حل وابستگی‌ها (dependency resolution)</strong> دارند تا هنگام نصب یک بسته، تمام اجزای موردنیاز آن به‌صورت خودکار نصب شوند.</p>
-<hr>
-<h3>ابزارهای سطح بالا و پایین در مدیریت بسته‌ها</h3>
-<p>سیستم‌های مدیریت بسته معمولاً از دو نوع ابزار تشکیل شده‌اند:</p>
-<ul>
-<li><strong>ابزارهای سطح پایین (Low-Level Tools):</strong> کارهایی مانند نصب، حذف یا باز کردن بسته‌ها را مستقیماً انجام می‌دهند.</li>
-<li><strong>ابزارهای سطح بالا (High-Level Tools):</strong> وظایفی مثل جستجوی متادیتا، بررسی وابستگی‌ها و به‌روزرسانی خودکار بسته‌ها را مدیریت می‌کنند.</li>
-</ul>
-<p>در این فصل، ابزارهای مورد استفاده در سیستم‌های <strong>سبک دبیان (Debian-style)</strong> مثل <em>اوبونتو</em> و ابزارهای <strong>سبک ردهت (Red Hat-style)</strong> بررسی می‌شوند. همهٔ توزیع‌های خانوادهٔ ردهت از برنامهٔ سطح پایین <strong>rpm</strong> استفاده می‌کنند، اما ابزارهای سطح بالای متفاوتی دارند. در این‌جا تمرکز ما بر روی <strong>yum</strong> خواهد بود که در <em>Fedora</em>، <em>Red Hat Enterprise Linux</em> و <em>CentOS</em> به کار می‌رود.</p>
-<hr>
-<h4>جدول ۱۴-۲: ابزارهای مدیریت بسته در توزیع‌های مختلف</h4>
-<table>
-<thead>
-<tr>
-<th>توزیع‌ها</th>
-<th>ابزارهای سطح پایین</th>
-<th>ابزارهای سطح بالا</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>سبک دبیان</td>
-<td>dpkg</td>
-<td>apt-get، aptitude</td>
-</tr>
-<tr>
-<td>فدورا، ردهت، CentOS</td>
-<td>rpm</td>
-<td>yum</td>
-</tr>
-</tbody>
-</table>
-<hr>
-<h3>وظایف رایج در مدیریت بسته‌ها</h3>
-<p>ابزارهای خط فرمانی برای مدیریت بسته‌ها عملیات متنوعی را پشتیبانی می‌کنند. در این‌جا به پرکاربردترین آن‌ها می‌پردازیم.<br>
-توجه داشته باشید که ابزارهای سطح پایین قابلیت <strong>ساخت بسته‌ها</strong> را نیز دارند، اما این موضوع خارج از دامنهٔ این فصل است.</p>
-<p>در توضیحات زیر، منظور از <code>package_name</code> نام خود بسته است (مثلاً <code>emacs</code>)، و <code>package_file</code> نام فایل حاوی آن (مثلاً <code>emacs_1.2.3.deb</code> یا <code>emacs-1.2.3.rpm</code>).</p>
-<hr>
-<h3>یافتن یک بسته در مخزن</h3>
-<p>با استفاده از ابزارهای سطح بالا می‌توان در متادیتای مخازن جستجو کرد تا بسته‌ای را بر اساس نام یا توضیحش پیدا کنیم.</p>
-<h4>جدول ۱۴-۳: دستورات جستجوی بسته</h4>
-<table>
-<thead>
-<tr>
-<th>سبک</th>
-<th>دستور(ها)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Debian</td>
-<td><code>apt-get update</code></td>
-</tr>
-<tr>
-<td><code>apt-cache search search_string</code></td>
-<td></td>
-</tr>
-<tr>
-<td>Red Hat</td>
-<td><code>yum search search_string</code></td>
-</tr>
-</tbody>
-</table>
-<p><strong>نمونه:</strong><br>
-برای جستجوی ویرایشگر متن <em>emacs</em> در مخزن yum، دستور زیر استفاده می‌شود:</p>
-<pre class="hljs"><code>yum search emacs
-</code></pre>
-<hr>
-<h3>نصب یک بسته از مخزن</h3>
-<p>ابزارهای سطح بالا امکان دانلود و نصب بسته‌ها را از مخازن با درنظرگرفتن تمام وابستگی‌ها فراهم می‌کنند.</p>
-<h4>جدول ۱۴-۴: دستورات نصب بسته</h4>
-<table>
-<thead>
-<tr>
-<th>سبک</th>
-<th>دستور(ها)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Debian</td>
-<td></td>
-</tr>
-<tr>
-<td><code>apt-get update</code></td>
-<td></td>
-</tr>
-<tr>
-<td><code>apt-get install package_name</code></td>
-<td></td>
-</tr>
-<tr>
-<td>Red Hat</td>
-<td></td>
-</tr>
-<tr>
-<td><code>yum install package_name</code></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<p><strong>نمونه:</strong><br>
-برای نصب ویرایشگر <em>emacs</em> از مخزن apt، دستور زیر اجرا می‌شود:</p>
-<pre class="hljs"><code>apt-get update; apt-get install emacs
-</code></pre>
-<hr>
-<h3>نصب بسته از روی فایل (Package File Installation)</h3>
-<p>اگر بسته‌ای را از منبعی به‌جز مخزن (repository) دانلود کرده باشیم، می‌توان آن را به‌طور مستقیم با استفاده از ابزار <strong>سطح پایین</strong> نصب کرد. در این روش <strong>وابستگی‌ها به‌صورت خودکار بررسی نمی‌شوند</strong>.</p>
-<h4>جدول ۱۴-۵: دستورات نصب بسته با ابزار سطح پایین</h4>
-<table>
-<thead>
-<tr>
-<th>سبک</th>
-<th>دستور(ها)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Debian</td>
-<td><code>dpkg --install package_file</code></td>
-</tr>
-<tr>
-<td>Red Hat</td>
-<td><code>rpm -i package_file</code></td>
-</tr>
-</tbody>
-</table>
-<p><strong>نمونه:</strong><br>
-اگر فایل بسته‌ای با نام <code>emacs-22.1-7.fc7-i386.rpm</code> از سایتی خارج از مخزن رسمی دانلود شده باشد، با دستور زیر نصب می‌شود:</p>
-<pre class="hljs"><code>rpm -i emacs-22.1-7.fc7-i386.rpm
-</code></pre>
-<blockquote>
-<p><strong>توجه:</strong><br>
-در این روش از ابزار سطح پایین <code>rpm</code> برای نصب استفاده می‌شود و بنابراین هیچ‌گونه <strong>حل وابستگی (dependency resolution)</strong> انجام نمی‌گیرد.<br>
-اگر <code>rpm</code> تشخیص دهد بسته‌ای که نیاز است وجود ندارد، عملیات نصب را با خطا متوقف می‌کند.</p>
-</blockquote>
-<hr>
-<h3>حذف بسته‌ها (Removing a Package)</h3>
-<p>برای حذف یک بسته می‌توان از ابزارهای سطح پایین یا سطح بالا استفاده کرد. در عمل، ابزارهای سطح بالا کاربردی‌تر هستند زیرا وابستگی‌ها و وضعیت سیستم را نیز در نظر می‌گیرند.</p>
-<h4>جدول ۱۴-۶: دستورات حذف بسته</h4>
-<table>
-<thead>
-<tr>
-<th>سبک</th>
-<th>دستور(ها)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Debian</td>
-<td><code>apt-get remove package_name</code></td>
-</tr>
-<tr>
-<td>Red Hat</td>
-<td><code>yum erase package_name</code></td>
-</tr>
-</tbody>
-</table>
-<p><strong>نمونه:</strong><br>
-برای حذف بستهٔ <code>emacs</code> از یک سیستم سبک دبیان:</p>
-<pre class="hljs"><code>apt-get remove emacs
-</code></pre>
-<hr>
-<h3>به‌روزرسانی بسته‌ها از مخزن (Updating Packages from a Repository)</h3>
-<p>رایج‌ترین وظیفه در مدیریت بسته‌ها، <strong>به‌روزرسانی سیستم با آخرین نسخه‌های موجود</strong> است. ابزارهای سطح بالا این کار را تنها با یک یا دو دستور انجام می‌دهند.</p>
-<h4>جدول ۱۴-۷: دستورات به‌روزرسانی بسته‌ها</h4>
-<table>
-<thead>
-<tr>
-<th>سبک</th>
-<th>دستور(ها)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Debian</td>
-<td><code>apt-get update; apt-get upgrade</code></td>
-</tr>
-<tr>
-<td>Red Hat</td>
-<td><code>yum update</code></td>
-</tr>
-</tbody>
-</table>
-<p><strong>نمونه:</strong><br>
-برای اعمال به‌روزرسانی‌های در دسترس در سیستم سبک دبیان:</p>
-<pre class="hljs"><code>apt-get update; apt-get upgrade
-</code></pre>
-<hr>
-<h3>ارتقای بسته از روی فایل (Upgrading a Package from a File)</h3>
-<p>اگر نسخهٔ جدیدتری از یک بسته را از منبعی غیر از مخزن رسمی دریافت کرده باشیم، می‌توان با نصب نسخهٔ جدید، نسخهٔ قبلی را <strong>جایگزین</strong> کرد.</p>
-<h4>جدول ۱۴-۸: دستورات ارتقای بسته با ابزار سطح پایین</h4>
-<table>
-<thead>
-<tr>
-<th>سبک</th>
-<th>دستور(ها)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Debian</td>
-<td><code>dpkg --install package_file</code></td>
-</tr>
-<tr>
-<td>Red Hat</td>
-<td><code>rpm -U package_file</code></td>
-</tr>
-</tbody>
-</table>
-<p><strong>نمونه:</strong><br>
-برای ارتقای بستهٔ <code>emacs</code> به نسخهٔ جدیدتر در یک سیستم سبک ردهت:</p>
-<pre class="hljs"><code>rpm -U emacs-22.1-7.fc7-i386.rpm
-</code></pre>
-<blockquote>
-<p><strong>نکته:</strong><br>
-در حالی‌که ابزار <code>rpm</code> دستور ویژه‌ای برای <strong>ارتقا (Upgrade)</strong> دارد (<code>-U</code>)، ابزار <code>dpkg</code> چنین گزینه‌ای ندارد و همان دستور نصب (<code>--install</code>) برای هر دو کاربرد استفاده می‌شود.</p>
-</blockquote>
-<hr>
-<h3>فهرست‌کردن بسته‌های نصب‌شده (Listing Installed Packages)</h3>
-<p>برای مشاهده‌ی فهرست تمام بسته‌هایی که روی سیستم نصب شده‌اند، می‌توان از دستورات زیر استفاده کرد:</p>
-<h4>جدول ۱۴-۹: دستورات نمایش فهرست بسته‌ها</h4>
-<table>
-<thead>
-<tr>
-<th>سبک</th>
-<th>دستور(ها)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Debian</td>
-<td><code>dpkg --list</code></td>
-</tr>
-<tr>
-<td>Red Hat</td>
-<td><code>rpm -qa</code></td>
-</tr>
-</tbody>
-</table>
-<hr>
-<h3>بررسی نصب بودن یک بسته (Determining if a Package is Installed)</h3>
-<p>برای فهمیدن اینکه آیا یک بستهٔ مشخص روی سیستم نصب شده است یا نه، ابزارهای سطح پایین دستورهای زیر را ارائه می‌کنند:</p>
-<h4>جدول ۱۴-۱۰: دستورات بررسی وضعیت بسته</h4>
-<table>
-<thead>
-<tr>
-<th>سبک</th>
-<th>دستور(ها)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Debian</td>
-<td><code>dpkg --status package_name</code></td>
-</tr>
-<tr>
-<td>Red Hat</td>
-<td><code>rpm -q package_name</code></td>
-</tr>
-</tbody>
-</table>
-<p><strong>نمونه:</strong><br>
-برای بررسی اینکه بستهٔ <code>emacs</code> در سیستم دبیان نصب شده یا نه:</p>
-<pre class="hljs"><code>dpkg --status emacs
-</code></pre>
-<hr>
-<h3>مشاهده‌ی اطلاعات یک بسته‌ی نصب‌شده (Displaying Info About an Installed Package)</h3>
-<p>اگر نام بسته‌ای که از قبل نصب شده را بدانیم، می‌توانیم توضیحات و مشخصات آن را با دستورات زیر ببینیم:</p>
-<h4>جدول ۱۴-۱۱: دستورات نمایش اطلاعات بسته</h4>
-<table>
-<thead>
-<tr>
-<th>سبک</th>
-<th>دستور(ها)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Debian</td>
-<td><code>apt-cache show package_name</code></td>
-</tr>
-<tr>
-<td>Red Hat</td>
-<td><code>yum info package_name</code></td>
-</tr>
-</tbody>
-</table>
-<p><strong>نمونه:</strong><br>
-برای مشاهده‌ی توضیحات بستهٔ <code>emacs</code> در سیستم دبیان:</p>
-<pre class="hljs"><code>apt-cache show emacs
-</code></pre>
-<hr>
-<h3>شناسایی بسته‌ای که یک فایل را نصب کرده است (Finding Which Package Installed a File)</h3>
-<p>برای فهمیدن اینکه کدام بسته مسئول نصب یک فایل خاص بوده، می‌توان از دستورات زیر استفاده کرد:</p>
-<h4>جدول ۱۴-۱۲: دستورات شناسایی بسته بر اساس فایل</h4>
-<table>
-<thead>
-<tr>
-<th>سبک</th>
-<th>دستور(ها)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Debian</td>
-<td><code>dpkg --search file_name</code></td>
-</tr>
-<tr>
-<td>Red Hat</td>
-<td><code>rpm -qf file_name</code></td>
-</tr>
-</tbody>
-</table>
-<p><strong>نمونه:</strong><br>
-برای تشخیص اینکه فایل <code>/usr/bin/vim</code> توسط کدام بسته روی سیستم ردهت نصب شده است:</p>
-<pre class="hljs"><code>rpm -qf /usr/bin/vim
-</code></pre>
-<hr>
-<h3>جمع‌بندی (Summing Up)</h3>
-<p>در فصل‌های بعدی با برنامه‌های مختلفی از حوزه‌های گوناگون آشنا خواهیم شد. بسیاری از این برنامه‌ها معمولاً به‌صورت پیش‌فرض در سیستم نصب هستند، اما اگر برنامه‌ای در دسترس نبود، حالا می‌دانیم چطور با استفاده از ابزارهای مدیریت بسته آن را نصب و نگهداری کنیم.</p>
-<p>با این درک تازه از <strong>مدیریت بسته‌ها (Package Management)</strong>، می‌توانیم با اطمینان کامل نرم‌افزارهای موردنیاز خود را نصب، به‌روزرسانی و مدیریت کنیم — بدون آنکه در پیچیدگی‌های وابستگی‌ها و نسخه‌ها گرفتار شویم.</p>
-<hr>
-<h3>افسانه‌ی سخت بودن نصب نرم‌افزار در لینوکس (The Linux Software Installation Myth)</h3>
-<p>افرادی که از سیستم‌عامل‌های دیگر به لینوکس مهاجرت می‌کنند، گاهی گرفتار این تصور اشتباه می‌شوند که <strong>نصب نرم‌افزار در لینوکس دشوار است</strong> یا تنوع سیستم‌های بسته‌بندی بین توزیع‌های مختلف مانع بزرگی است.<br>
-در واقع این تنوع شاید برای <strong>شرکت‌های نرم‌افزاری تجاری</strong> که فقط نسخهٔ دودویی (binary-only) از نرم‌افزارهای بسته و محرمانه‌ی خود را منتشر می‌کنند دردسر باشد، اما <strong>برای کاربران لینوکس نه‌تنها مانع نیست بلکه یک مزیت است.</strong></p>
-<hr>
-<h3>فلسفه‌ی متن‌باز و یکپارچگی نرم‌افزارها</h3>
-<p>اکوسیستم نرم‌افزاری لینوکس بر پایه‌ی ایده‌ی <strong>متن‌باز بودن (Open Source)</strong> ساخته شده است.<br>
-اگر توسعه‌دهنده‌ای کد منبع برنامه‌اش را منتشر کند، معمولاً یکی از اعضای جامعهٔ توزیع‌ها آن را <strong>بسته‌بندی</strong> کرده و در <strong>مخزن رسمی</strong> توزیع خود قرار می‌دهد.<br>
-این روش باعث می‌شود که برنامه:</p>
-<ul>
-<li>به‌خوبی با سیستم عامل یکپارچه شود، و</li>
-<li>کاربر بتواند در همان محیط بسته‌های دیگر، آن را نصب و به‌روزرسانی کند، بدون نیاز به گشتن در سایت‌های گوناگون.</li>
-</ul>
-<p>در نتیجه، نصب نرم‌افزار در لینوکس شبیه یک <strong>فروشگاه متمرکز نرم‌افزار (one-stop shop)</strong> است.</p>
-<hr>
-<h3>درایورها در لینوکس</h3>
-<p>درایورهای سخت‌افزار نیز تقریباً به همین شکل مدیریت می‌شوند.<br>
-به‌جای اینکه هر سخت‌افزار دیسک جداگانه‌ای برای درایور داشته باشد، درایورها <strong>به بخشی از هستهٔ لینوکس (Linux kernel)</strong> تبدیل می‌شوند.</p>
-<p>به‌طور کلی در لینوکس چیزی به نام «دیسک درایور» وجود ندارد؛ یا <strong>هسته از آن دستگاه پشتیبانی می‌کند یا خیر.</strong><br>
-و در واقع، هستهٔ لینوکس <strong>تعداد بسیار بیشتری از دستگاه‌ها را نسبت به ویندوز</strong> پشتیبانی می‌کند.<br>
-اما اگر دستگاه شما پشتیبانی نشود، یکی از سه علت زیر را دارد:</p>
-<hr>
-<h3>سه دلیل اصلی برای نبود درایور</h3>
-<ol>
-<li>
-<p><strong>دستگاه خیلی جدید است.</strong><br>
-بسیاری از شرکت‌های سخت‌افزاری از توسعهٔ درایور برای لینوکس پشتیبانی رسمی نمی‌کنند.<br>
-در این موارد، اعضای جامعهٔ لینوکس خودشان باید درایور را بنویسند — کاری که زمان می‌برد.</p>
-</li>
-<li>
-<p><strong>دستگاه خیلی خاص یا ناشناخته است.</strong><br>
-هر توزیع، هستهٔ مخصوص خودش را می‌سازد و ممکن است برخی درایورها را کنار گذاشته باشد.<br>
-با پیدا کردن کد منبع درایور، شما (بله خود شما) می‌توانید آن را <strong>کامپایل و نصب کنید.</strong><br>
-این کار چندان دشوار نیست، ولی نیازمند دقت و چند مرحلهٔ فنی است (در فصل‌های بعد دربارهٔ کامپایل نرم‌افزار صحبت خواهد شد).</p>
-</li>
-<li>
-<p><strong>سازنده در حال پنهان‌کاری است.</strong><br>
-اگر شرکت سازنده نه کد منبع درایور را منتشر کرده باشد و نه مستندات فنی برای توسعه‌دهندگان ارائه دهد، یعنی قصد دارد <strong>رابط‌های سخت‌افزار را مخفی نگه دارد.</strong><br>
-چنین سخت‌افزاری در دنیای آزاد لینوکس جایی ندارد؛ پیشنهاد نویسنده روشن است:<br>
-«این قطعه را از سیستم‌تان جدا کنید و همراه با وسایل بی‌فایدهٔ دیگر به سطل زباله بیندازید.»</p>
-</li>
-</ol>
-<hr>
-<h3>مطالعه‌ی بیشتر (Further Reading)</h3>
-<p>برای درک بهتر سیستم مدیریت بسته در توزیع خود، وقت بگذارید و مستندات آن را بخوانید.<br>
-همچنین منابع زیر می‌توانند مفید باشند:</p>
-<ul>
-<li>
-<p><strong>سؤالات متداول دبیان (Debian FAQ) در مورد مدیریت بسته‌ها:</strong><br>
-<a href="http://www.debian.org/doc/FAQ/ch-pkgtools.en.html">http://www.debian.org/doc/FAQ/ch-pkgtools.en.html</a></p>
-</li>
-<li>
-<p><strong>صفحهٔ رسمی پروژهٔ RPM:</strong><br>
-<a href="http://www.rpm.org">http://www.rpm.org</a></p>
-</li>
-<li>
-<p><strong>صفحهٔ رسمی پروژهٔ YUM در دانشگاه Duke:</strong><br>
-<a href="http://linux.duke.edu/projects/yum/">http://linux.duke.edu/projects/yum/</a></p>
-</li>
-<li>
-<p><strong>مقاله‌ای در ویکی‌پدیا دربارهٔ متادیتا (Metadata):</strong><br>
-<a href="http://en.wikipedia.org/wiki/Metadata">http://en.wikipedia.org/wiki/Metadata</a></p>
-</li>
-</ul>
-
-  </main>
-
-  <!-- فوتر مشترک -->
-  <footer class="footer">
-    <div class="container">
-      <p>
-        <img src="/Gitab/icone/copyright.svg" alt="کپی‌رایت" width="14" height="14"
-             style="vertical-align:middle;margin-inline:4px">
-        <span id="y"></span> Gitab — تمامی حقوق محفوظ است.
-      </p>
-    </div>
-  </footer>
-
-  <!-- سال و اسکریپت تغییر تم -->
-  <script>
+<!doctype html><html lang="fa" dir="rtl"> <head><script>
+    if (window.location.pathname.startsWith('/gitab/')) {
+      window.location.replace(window.location.pathname.replace(/^\/gitab\//i, '/Gitab/') + window.location.search + window.location.hash);
+    }
+    (() => {
+      try {
+        const t = localStorage.getItem('gitab-theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', t);
+        document.documentElement.dataset.colorMode = t;
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        document.documentElement.dataset.colorMode = 'dark';
+      }
+    })();
+  </script> <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5"> <title>مدیریت بسته‌ها</title><meta name="description" content="مدیریت بسته‌ها — مطالعه آنلاین و رایگان از کتاب «خط فرمان لینوکس (TLCL)» (The Linux Command Line) اثر William Shotts با ترجمه هیمن صادقی در گیتاب."> <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"><meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"> <meta name="theme-color" content="#090d16"><meta name="referrer" content="strict-origin-when-cross-origin"> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https:; frame-src https://www.youtube.com https://www.youtube-nocookie.com https://maps.google.com https://www.google.com; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self';"><link rel="icon" type="image/png" href="/Gitab/favicon.png"> <link rel="canonical" href="https://hheydarian.github.io/Gitab/books/book5/Book/14/chapter14/"><link rel="alternate" hreflang="fa" href="https://hheydarian.github.io/Gitab/books/book5/Book/14/chapter14/"> <link rel="alternate" hreflang="x-default" href="https://hheydarian.github.io/Gitab/books/book5/Book/14/chapter14/"><link rel="alternate" type="text/plain" title="LLMs.txt" href="/Gitab/llms.txt"> <link rel="sitemap" type="application/xml" title="Sitemap" href="/Gitab/sitemap.xml"><meta property="og:locale" content="fa_IR"> <meta property="og:type" content="article"><meta property="og:site_name" content="گیتاب | Gitab"> <meta property="og:title" content="مدیریت بسته‌ها"><meta property="og:description" content="مدیریت بسته‌ها — مطالعه آنلاین و رایگان از کتاب «خط فرمان لینوکس (TLCL)» (The Linux Command Line) اثر William Shotts با ترجمه هیمن صادقی در گیتاب."> <meta property="og:url" content="https://hheydarian.github.io/Gitab/books/book5/Book/14/chapter14/"><meta property="og:image" content="https://hheydarian.github.io/Gitab/images/the-linux-command-line/Cover.jpg"> <meta property="og:image:alt" content="مدیریت بسته‌ها"><meta name="twitter:card" content="summary_large_image"> <meta name="twitter:title" content="مدیریت بسته‌ها"><meta name="twitter:description" content="مدیریت بسته‌ها — مطالعه آنلاین و رایگان از کتاب «خط فرمان لینوکس (TLCL)» (The Linux Command Line) اثر William Shotts با ترجمه هیمن صادقی در گیتاب."> <meta name="twitter:image" content="https://hheydarian.github.io/Gitab/images/the-linux-command-line/Cover.jpg"><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://hheydarian.github.io/Gitab/#organization","name":"گیتاب | Gitab","alternateName":"Gitab","url":"https://hheydarian.github.io/Gitab/","logo":{"@type":"ImageObject","url":"https://hheydarian.github.io/Gitab/favicon.png"},"sameAs":["https://github.com/hheydarian/Gitab"]},{"@type":"WebSite","@id":"https://hheydarian.github.io/Gitab/#website","url":"https://hheydarian.github.io/Gitab/","name":"گیتاب | Gitab","inLanguage":"fa-IR","publisher":{"@id":"https://hheydarian.github.io/Gitab/#organization"},"potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://hheydarian.github.io/Gitab/books/list-books/?q={search_term_string}"},"query-input":"required name=search_term_string"}},{"@type":"WebPage","@id":"https://hheydarian.github.io/Gitab/books/book5/Book/14/chapter14/#webpage","url":"https://hheydarian.github.io/Gitab/books/book5/Book/14/chapter14/","name":"مدیریت بسته‌ها","description":"مدیریت بسته‌ها — مطالعه آنلاین و رایگان از کتاب «خط فرمان لینوکس (TLCL)» (The Linux Command Line) اثر William Shotts با ترجمه هیمن صادقی در گیتاب.","inLanguage":"fa-IR","isPartOf":{"@id":"https://hheydarian.github.io/Gitab/#website"}},{"@type":"TechArticle","headline":"مدیریت بسته‌ها","description":"مدیریت بسته‌ها — مطالعه آنلاین و رایگان از کتاب «خط فرمان لینوکس (TLCL)» (The Linux Command Line) اثر William Shotts با ترجمه هیمن صادقی در گیتاب.","url":"https://hheydarian.github.io/Gitab/books/book5/Book/14/chapter14/","inLanguage":"fa-IR","isAccessibleForFree":true,"author":{"@type":"Person","name":"William Shotts"},"translator":{"@type":"Person","name":"هیمن صادقی"},"isPartOf":{"@type":"Book","name":"خط فرمان لینوکس (TLCL)","alternateName":"The Linux Command Line","url":"https://hheydarian.github.io/Gitab/books/book5/"}}]}</script> <link rel="preload" href="/Gitab/fonts/Vazirmatn.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/Gitab/styles/main.css?v=2.4" as="style"> <link rel="preload" href="/Gitab/styles/gitab-modern.css?v=2.5" as="style"><style>@font-face{font-family:'Lalezar';src:url('/Gitab/fonts/Lalezar.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}@font-face{font-family:'Vazirmatn';src:url('/Gitab/fonts/Vazirmatn.woff2') format('woff2');font-weight:100 900;font-style:normal;font-display:swap}html,body,button,input,optgroup,select,textarea,.filter-pill{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}input::placeholder,textarea::placeholder{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}</style> <link rel="stylesheet" href="/Gitab/styles/main.css?v=2.4"><link rel="stylesheet" href="/Gitab/styles/gitab-modern.css?v=2.5"> <link rel="stylesheet" href="/Gitab/styles/vendor/github-dark.min.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="/Gitab/styles/vendor/github-dark.min.css"></noscript></head> <body><header class="header"> <div class="container nav-wrap"><a href="/Gitab/" class="brand" aria-label="صفحه اصلی گیتاب"> <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="30" height="30" decoding="async"> <span class="brand-text">Gitab</span> </a> <nav class="nav" id="mainNav"><a href="/Gitab/" >خانه</a> <a href="/Gitab/books/list-books" aria-current="page">کتاب‌ها</a> <a href="/Gitab/courses/" >دوره‌ها</a> <a href="/Gitab/translator.html" >مترجمین</a></nav> <div class="nav-actions"><button id="themeToggle" class="theme-toggle-btn" aria-label="تغییر تم" title="تغییر تم"> <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن" width="18" height="18" decoding="async" style="display:none"> <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک" width="18" height="18" decoding="async"> </button> <a class="btn-github-pill" href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" title="مشاهده سورس گیتاب در گیت‌هاب"> <img src="/Gitab/icone/github.svg" alt="GitHub" width="16" height="16" decoding="async"> <span>گیت‌هاب</span> </a> <button class="mobile-menu-btn" id="mobileMenuBtn" type="button" aria-label="باز کردن منو" aria-expanded="false"> <svg class="mob-icon-open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="4" y1="7" x2="20" y2="7"></line> <line x1="4" y1="12" x2="20" y2="12"></line> <line x1="4" y1="17" x2="14" y2="17"></line> </svg> <svg class="mob-icon-close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="18" y1="6" x2="6" y2="18"></line> <line x1="6" y1="6" x2="18" y2="18"></line> </svg> </button></div> </div><div class="mobile-drawer" id="mobileDrawer" aria-hidden="true"> <div class="mobile-drawer-inner"><div class="mobile-drawer-section-label">ناوبری سریع</div><nav class="mobile-drawer-links" aria-label="منوی موبایل"> <a href="/Gitab/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M3 10.5 12 3l9 7.5"></path> <path d="M5 9.5V20a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V9.5"></path> </svg> </span> <span class="mob-nav-text">صفحه نخست</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/books/list-books" class="mobile-drawer-link active" aria-current="page"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path> </svg> </span> <span class="mob-nav-text">کتابخانه و فهرست کتاب‌ها</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/courses/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path> <path d="M6 12v5c3 3 9 3 12 0v-5"></path> </svg> </span> <span class="mob-nav-text">دوره‌های آموزشی</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/translator.html" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path> <circle cx="9" cy="7" r="4"></circle> <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path> <path d="M16 3.13a4 4 0 0 1 0 7.75"></path> </svg> </span> <span class="mob-nav-text">مترجمین و همکاران</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> </nav><div class="mobile-drawer-divider"></div><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" class="mobile-drawer-link mobile-drawer-gh"> <span class="mob-nav-icon" aria-hidden="true"> <img src="/Gitab/icone/github.svg" alt="" width="17" height="17" loading="lazy" decoding="async"> </span> <span class="mob-nav-text">مخزن گیت‌هاب پروژه</span> <span class="mob-nav-ext" aria-hidden="true">↗</span> </a> </div></div> </header><div class="reading-progress-track"> <div class="reading-progress-fill" id="readingProgressBar"></div></div> <main class="site-main chapter-reading-page"><div class="chapter-page-wrapper"> <nav class="chapter-clean-breadcrumb" aria-label="مسیر راهنما" dir="rtl"><a href="/Gitab/">خانه</a> <span class="bc-sep" aria-hidden="true">/</span> <a href="/Gitab/books/list-books/">کتاب‌ها</a> <span class="bc-sep" aria-hidden="true">/</span> <a href="/Gitab/books/book5/"><bdi>خط فرمان لینوکس</bdi></a> <span class="bc-sep" aria-hidden="true">/</span> <span class="bc-current-leaf"><bdi>مدیریت بسته‌ها</bdi></span></nav> <article class="chapter-prose-container markdown-body" id="chapterArticle" dir="rtl"><h1>فصل ۱۴ – مدیریت بسته‌ها</h1><p>اگر مدتی را در جامعهٔ لینوکس بگذرانیم، حتماً با دیدگاه‌های گوناگونی دربارهٔ این‌که «کدام توزیع لینوکس بهترین است» روبه‌رو می‌شویم. این بحث‌ها گاهی بسیار سطحی می‌شوند و مثلاً به رنگ پس‌زمینهٔ دسکتاپ یا تم پیش‌فرض اوبونتو گیر می‌دهند! در حالی‌که مهم‌ترین عامل تعیین‌کنندهٔ کیفیت یک توزیع، <strong>سیستم بسته‌بندی (Package System)</strong> و <strong>پویایی جامعهٔ پشتیبان آن</strong> است.</p><p>هرچه بیشتر با لینوکس کار کنیم، درمی‌یابیم که فضای نرم‌افزاری آن بسیار پویـا و در حال تغییر است. تقریباً همهٔ توزیع‌های مطرح هر شش ماه نسخهٔ جدید منتشر می‌کنند و هر روز به‌روزرسانی‌های زیادی برای برنامه‌ها ارائه می‌شود. برای همراهی با این سیل نرم‌افزار، به ابزارهای قوی برای مدیریت بسته‌ها نیاز داریم.</p><hr> <h3>مدیریت بسته چیست؟</h3><p>مدیریت بسته روشی برای نصب و نگهداری نرم‌افزار روی سیستم است. امروزه بیشتر کاربران تمام نیازهای نرم‌افزاری خود را با نصب بسته‌هایی که از سوی توزیع لینوکسی‌شان ارائه می‌شود برطرف می‌کنند. در روزهای اولیهٔ لینوکس، کاربران مجبور بودند کد منبع را دانلود و خودشان آن را کامپایل کنند. البته دسترسی به کد منبع از شگفتی‌های لینوکس است و به ما اجازه می‌دهد سیستم را بررسی و بهبود دهیم، اما استفاده از بسته‌های از پیش کامپایل‌شده سریع‌تر و راحت‌تر است.</p><p>در این فصل با ابزارهای خط فرمانی که برای مدیریت بسته‌ها استفاده می‌شوند آشنا می‌شویم. هرچند ابزارهای گرافیکی زیادی برای این کار وجود دارد، اما دانستن دستورات خط فرمان ضروری است؛ زیرا بسیاری از وظایف پیشرفته تنها از این راه قابل انجام هستند.</p><hr> <h3>سیستم‌های بسته‌بندی</h3><p>هر توزیع لینوکس سیستم بسته‌بندی خاص خود را دارد، و به‌طور کلی بسته‌ای که برای یک توزیع ساخته شده با توزیع دیگر سازگار نیست. بیشتر توزیع‌ها در دو خانوادهٔ اصلی جای می‌گیرند:</p><table> <thead><tr> <th>سیستم بسته‌بندی</th><th>نمونه توزیع‌ها</th></tr> </thead><tbody> <tr><td>سبک Debian (.deb)</td><td>Debian، Ubuntu، Xandros، Linspire</td></tr> <tr><td>سبک Red Hat (.rpm)</td><td>Fedora، CentOS، RHEL، OpenSUSE، Mandriva، PCLinuxOS</td></tr> </tbody></table> <p>البته توزیع‌هایی مانند Gentoo، Slackware و Foresight از سیستم‌های متفاوتی استفاده می‌کنند.</p><hr> <h3>نحوهٔ کار یک سیستم بسته‌بندی</h3><p>در نرم‌افزارهای تجاری معمولاً کاربر باید دیسک نصب را خریداری کرده و برنامهٔ نصاب (wizard) را اجرا کند.<br> اما در لینوکس تقریباً تمام نرم‌افزارها از اینترنت دریافت می‌شوند. بیشتر آن‌ها توسط توزیع ارائه می‌شوند و باقی به صورت کد منبع برای نصب دستی در دسترس‌اند.</p><hr> <h3>فایل‌های بسته (Package Files)</h3><p>واحد پایهٔ نرم‌افزار در سیستم بسته‌بندی، <strong>فایل بسته</strong> است. این فایل مجموعه‌ای فشرده از فایل‌هایی است که برنامه را تشکیل می‌دهند. هر بسته ممکن است شامل چندین برنامه و داده‌های پشتیبان آن‌ها باشد.<br> به‌علاوه، فایل بسته شامل <strong>متاداده‌ها</strong> (مثل توضیحات، نسخه، وابستگی‌ها) و اسکریپت‌های پیش‌از‌نصب و پس‌از‌نصب است که وظایف پیکربندی را انجام می‌دهند.</p><p>فایل بسته توسط فردی به‌نام <strong>نگه‌دارندهٔ بسته (Package Maintainer)</strong> ساخته می‌شود. او کد منبع را از توسعه‌دهندهٔ اصلی دریافت کرده، آن را کامپایل می‌کند، و متاداده‌ها و اسکریپت‌ها را اضافه می‌نماید. گاهی برای بهبود سازگاری با بقیهٔ اجزای توزیع، تغییراتی نیز در کد منبع ایجاد می‌کند.</p><hr> <h3>مخازن (Repositories)</h3><p>بیشتر بسته‌ها توسط شرکت یا تیم توسعه‌دهندهٔ توزیع ساخته و در <strong>مخازن مرکزی</strong> قرار می‌گیرند؛ جایی که هزاران بسته برای نصب در دسترس کاربران آن توزیع قرار دارد.</p><p>معمولاً هر توزیع چند نوع مخزن دارد، مانند:</p><ul> <li><strong>testing (آزمایشی):</strong> شامل بسته‌های تازه‌ساخته‌شده که هنوز در مرحلهٔ تست هستند.</li><li><strong>development (توسعه):</strong> شامل بسته‌های در حال کار که برای نسخهٔ بعدی توزیع آماده می‌شوند.</li></ul> <p>برخی توزیع‌ها همچنین از <strong>مخازن شخص ثالث (third-party)</strong> پشتیبانی می‌کنند؛ مثلاً برای نرم‌افزارهایی که به‌دلیل محدودیت‌های قانونی (مثل حق ثبت اختراع یا DRM) نمی‌توانند در مخزن اصلی باشند. نمونهٔ معروف آن پشتیبانی از DVD رمزگذاری‌شده است که در ایالات متحده قانونی نیست. این مخازن معمولاً در کشورهای دیگر اداره می‌شوند و برای استفاده از آن‌ها باید به‌صورت دستی در فایل تنظیمات سیستم بسته اضافه شوند.</p><hr> <h3>وابستگی‌ها (Dependencies)</h3><p>برنامه‌ها معمولاً مستقل عمل نمی‌کنند و به سایر مؤلفه‌های نرم‌افزاری وابسته‌اند. بسیاری از قابلیت‌های مشترک (مثل ورودی/خروجی) توسط <strong>کتابخانه‌های اشتراکی (shared libraries)</strong> فراهم می‌شود.</p><p>اگر بسته‌ای به یک منبع اشتراکی نیاز داشته باشد، می‌گوییم <strong>وابستگی (dependency)</strong> دارد. سیستم‌های مدرن مدیریت بسته، مکانیزم‌هایی برای <strong>حل وابستگی‌ها (dependency resolution)</strong> دارند تا هنگام نصب یک بسته، تمام اجزای موردنیاز آن به‌صورت خودکار نصب شوند.</p><hr> <h3>ابزارهای سطح بالا و پایین در مدیریت بسته‌ها</h3><p>سیستم‌های مدیریت بسته معمولاً از دو نوع ابزار تشکیل شده‌اند:</p><ul> <li><strong>ابزارهای سطح پایین (Low-Level Tools):</strong> کارهایی مانند نصب، حذف یا باز کردن بسته‌ها را مستقیماً انجام می‌دهند.</li><li><strong>ابزارهای سطح بالا (High-Level Tools):</strong> وظایفی مثل جستجوی متادیتا، بررسی وابستگی‌ها و به‌روزرسانی خودکار بسته‌ها را مدیریت می‌کنند.</li></ul> <p>در این فصل، ابزارهای مورد استفاده در سیستم‌های <strong>سبک دبیان (Debian-style)</strong> مثل <em>اوبونتو</em> و ابزارهای <strong>سبک ردهت (Red Hat-style)</strong> بررسی می‌شوند. همهٔ توزیع‌های خانوادهٔ ردهت از برنامهٔ سطح پایین <strong>rpm</strong> استفاده می‌کنند، اما ابزارهای سطح بالای متفاوتی دارند. در این‌جا تمرکز ما بر روی <strong>yum</strong> خواهد بود که در <em>Fedora</em>، <em>Red Hat Enterprise Linux</em> و <em>CentOS</em> به کار می‌رود.</p><hr> <h4>جدول ۱۴-۲: ابزارهای مدیریت بسته در توزیع‌های مختلف</h4><table> <thead><tr> <th>توزیع‌ها</th><th>ابزارهای سطح پایین</th><th>ابزارهای سطح بالا</th></tr> </thead><tbody> <tr><td>سبک دبیان</td><td>dpkg</td><td>apt-get، aptitude</td></tr> <tr><td>فدورا، ردهت، CentOS</td><td>rpm</td><td>yum</td></tr> </tbody></table> <hr><h3>وظایف رایج در مدیریت بسته‌ها</h3><p>ابزارهای خط فرمانی برای مدیریت بسته‌ها عملیات متنوعی را پشتیبانی می‌کنند. در این‌جا به پرکاربردترین آن‌ها می‌پردازیم.<br> توجه داشته باشید که ابزارهای سطح پایین قابلیت <strong>ساخت بسته‌ها</strong> را نیز دارند، اما این موضوع خارج از دامنهٔ این فصل است.</p><p>در توضیحات زیر، منظور از <code>package_name</code> نام خود بسته است (مثلاً <code>emacs</code>)، و <code>package_file</code> نام فایل حاوی آن (مثلاً <code>emacs_1.2.3.deb</code> یا <code>emacs-1.2.3.rpm</code>).</p><hr> <h3>یافتن یک بسته در مخزن</h3><p>با استفاده از ابزارهای سطح بالا می‌توان در متادیتای مخازن جستجو کرد تا بسته‌ای را بر اساس نام یا توضیحش پیدا کنیم.</p><h4>جدول ۱۴-۳: دستورات جستجوی بسته</h4><table> <thead><tr> <th>سبک</th><th>دستور(ها)</th></tr> </thead><tbody> <tr><td>Debian</td><td><code>apt-get update</code></td></tr> <tr><td><code>apt-cache search search_string</code></td><td></td></tr> <tr><td>Red Hat</td><td><code>yum search search_string</code></td></tr> </tbody></table> <p><strong>نمونه:</strong><br> برای جستجوی ویرایشگر متن <em>emacs</em> در مخزن yum، دستور زیر استفاده می‌شود:</p><pre class="hljs"><code>yum search emacs
+</code></pre> <hr><h3>نصب یک بسته از مخزن</h3><p>ابزارهای سطح بالا امکان دانلود و نصب بسته‌ها را از مخازن با درنظرگرفتن تمام وابستگی‌ها فراهم می‌کنند.</p><h4>جدول ۱۴-۴: دستورات نصب بسته</h4><table> <thead><tr> <th>سبک</th><th>دستور(ها)</th></tr> </thead><tbody> <tr><td>Debian</td><td></td></tr> <tr><td><code>apt-get update</code></td><td></td></tr> <tr><td><code>apt-get install package_name</code></td><td></td></tr> <tr><td>Red Hat</td><td></td></tr> <tr><td><code>yum install package_name</code></td><td></td></tr> </tbody></table> <p><strong>نمونه:</strong><br> برای نصب ویرایشگر <em>emacs</em> از مخزن apt، دستور زیر اجرا می‌شود:</p><pre class="hljs"><code>apt-get update; apt-get install emacs
+</code></pre> <hr><h3>نصب بسته از روی فایل (Package File Installation)</h3><p>اگر بسته‌ای را از منبعی به‌جز مخزن (repository) دانلود کرده باشیم، می‌توان آن را به‌طور مستقیم با استفاده از ابزار <strong>سطح پایین</strong> نصب کرد. در این روش <strong>وابستگی‌ها به‌صورت خودکار بررسی نمی‌شوند</strong>.</p><h4>جدول ۱۴-۵: دستورات نصب بسته با ابزار سطح پایین</h4><table> <thead><tr> <th>سبک</th><th>دستور(ها)</th></tr> </thead><tbody> <tr><td>Debian</td><td><code>dpkg --install package_file</code></td></tr> <tr><td>Red Hat</td><td><code>rpm -i package_file</code></td></tr> </tbody></table> <p><strong>نمونه:</strong><br> اگر فایل بسته‌ای با نام <code>emacs-22.1-7.fc7-i386.rpm</code> از سایتی خارج از مخزن رسمی دانلود شده باشد، با دستور زیر نصب می‌شود:</p><pre class="hljs"><code>rpm -i emacs-22.1-7.fc7-i386.rpm
+</code></pre> <blockquote><p><strong>توجه:</strong><br> در این روش از ابزار سطح پایین <code>rpm</code> برای نصب استفاده می‌شود و بنابراین هیچ‌گونه <strong>حل وابستگی (dependency resolution)</strong> انجام نمی‌گیرد.<br> اگر <code>rpm</code> تشخیص دهد بسته‌ای که نیاز است وجود ندارد، عملیات نصب را با خطا متوقف می‌کند.</p></blockquote> <hr><h3>حذف بسته‌ها (Removing a Package)</h3><p>برای حذف یک بسته می‌توان از ابزارهای سطح پایین یا سطح بالا استفاده کرد. در عمل، ابزارهای سطح بالا کاربردی‌تر هستند زیرا وابستگی‌ها و وضعیت سیستم را نیز در نظر می‌گیرند.</p><h4>جدول ۱۴-۶: دستورات حذف بسته</h4><table> <thead><tr> <th>سبک</th><th>دستور(ها)</th></tr> </thead><tbody> <tr><td>Debian</td><td><code>apt-get remove package_name</code></td></tr> <tr><td>Red Hat</td><td><code>yum erase package_name</code></td></tr> </tbody></table> <p><strong>نمونه:</strong><br> برای حذف بستهٔ <code>emacs</code> از یک سیستم سبک دبیان:</p><pre class="hljs"><code>apt-get remove emacs
+</code></pre> <hr><h3>به‌روزرسانی بسته‌ها از مخزن (Updating Packages from a Repository)</h3><p>رایج‌ترین وظیفه در مدیریت بسته‌ها، <strong>به‌روزرسانی سیستم با آخرین نسخه‌های موجود</strong> است. ابزارهای سطح بالا این کار را تنها با یک یا دو دستور انجام می‌دهند.</p><h4>جدول ۱۴-۷: دستورات به‌روزرسانی بسته‌ها</h4><table> <thead><tr> <th>سبک</th><th>دستور(ها)</th></tr> </thead><tbody> <tr><td>Debian</td><td><code>apt-get update; apt-get upgrade</code></td></tr> <tr><td>Red Hat</td><td><code>yum update</code></td></tr> </tbody></table> <p><strong>نمونه:</strong><br> برای اعمال به‌روزرسانی‌های در دسترس در سیستم سبک دبیان:</p><pre class="hljs"><code>apt-get update; apt-get upgrade
+</code></pre> <hr><h3>ارتقای بسته از روی فایل (Upgrading a Package from a File)</h3><p>اگر نسخهٔ جدیدتری از یک بسته را از منبعی غیر از مخزن رسمی دریافت کرده باشیم، می‌توان با نصب نسخهٔ جدید، نسخهٔ قبلی را <strong>جایگزین</strong> کرد.</p><h4>جدول ۱۴-۸: دستورات ارتقای بسته با ابزار سطح پایین</h4><table> <thead><tr> <th>سبک</th><th>دستور(ها)</th></tr> </thead><tbody> <tr><td>Debian</td><td><code>dpkg --install package_file</code></td></tr> <tr><td>Red Hat</td><td><code>rpm -U package_file</code></td></tr> </tbody></table> <p><strong>نمونه:</strong><br> برای ارتقای بستهٔ <code>emacs</code> به نسخهٔ جدیدتر در یک سیستم سبک ردهت:</p><pre class="hljs"><code>rpm -U emacs-22.1-7.fc7-i386.rpm
+</code></pre> <blockquote><p><strong>نکته:</strong><br> در حالی‌که ابزار <code>rpm</code> دستور ویژه‌ای برای <strong>ارتقا (Upgrade)</strong> دارد (<code>-U</code>)، ابزار <code>dpkg</code> چنین گزینه‌ای ندارد و همان دستور نصب (<code>--install</code>) برای هر دو کاربرد استفاده می‌شود.</p></blockquote> <hr><h3>فهرست‌کردن بسته‌های نصب‌شده (Listing Installed Packages)</h3><p>برای مشاهده‌ی فهرست تمام بسته‌هایی که روی سیستم نصب شده‌اند، می‌توان از دستورات زیر استفاده کرد:</p><h4>جدول ۱۴-۹: دستورات نمایش فهرست بسته‌ها</h4><table> <thead><tr> <th>سبک</th><th>دستور(ها)</th></tr> </thead><tbody> <tr><td>Debian</td><td><code>dpkg --list</code></td></tr> <tr><td>Red Hat</td><td><code>rpm -qa</code></td></tr> </tbody></table> <hr><h3>بررسی نصب بودن یک بسته (Determining if a Package is Installed)</h3><p>برای فهمیدن اینکه آیا یک بستهٔ مشخص روی سیستم نصب شده است یا نه، ابزارهای سطح پایین دستورهای زیر را ارائه می‌کنند:</p><h4>جدول ۱۴-۱۰: دستورات بررسی وضعیت بسته</h4><table> <thead><tr> <th>سبک</th><th>دستور(ها)</th></tr> </thead><tbody> <tr><td>Debian</td><td><code>dpkg --status package_name</code></td></tr> <tr><td>Red Hat</td><td><code>rpm -q package_name</code></td></tr> </tbody></table> <p><strong>نمونه:</strong><br> برای بررسی اینکه بستهٔ <code>emacs</code> در سیستم دبیان نصب شده یا نه:</p><pre class="hljs"><code>dpkg --status emacs
+</code></pre> <hr><h3>مشاهده‌ی اطلاعات یک بسته‌ی نصب‌شده (Displaying Info About an Installed Package)</h3><p>اگر نام بسته‌ای که از قبل نصب شده را بدانیم، می‌توانیم توضیحات و مشخصات آن را با دستورات زیر ببینیم:</p><h4>جدول ۱۴-۱۱: دستورات نمایش اطلاعات بسته</h4><table> <thead><tr> <th>سبک</th><th>دستور(ها)</th></tr> </thead><tbody> <tr><td>Debian</td><td><code>apt-cache show package_name</code></td></tr> <tr><td>Red Hat</td><td><code>yum info package_name</code></td></tr> </tbody></table> <p><strong>نمونه:</strong><br> برای مشاهده‌ی توضیحات بستهٔ <code>emacs</code> در سیستم دبیان:</p><pre class="hljs"><code>apt-cache show emacs
+</code></pre> <hr><h3>شناسایی بسته‌ای که یک فایل را نصب کرده است (Finding Which Package Installed a File)</h3><p>برای فهمیدن اینکه کدام بسته مسئول نصب یک فایل خاص بوده، می‌توان از دستورات زیر استفاده کرد:</p><h4>جدول ۱۴-۱۲: دستورات شناسایی بسته بر اساس فایل</h4><table> <thead><tr> <th>سبک</th><th>دستور(ها)</th></tr> </thead><tbody> <tr><td>Debian</td><td><code>dpkg --search file_name</code></td></tr> <tr><td>Red Hat</td><td><code>rpm -qf file_name</code></td></tr> </tbody></table> <p><strong>نمونه:</strong><br> برای تشخیص اینکه فایل <code>/usr/bin/vim</code> توسط کدام بسته روی سیستم ردهت نصب شده است:</p><pre class="hljs"><code>rpm -qf /usr/bin/vim
+</code></pre> <hr><h3>جمع‌بندی (Summing Up)</h3><p>در فصل‌های بعدی با برنامه‌های مختلفی از حوزه‌های گوناگون آشنا خواهیم شد. بسیاری از این برنامه‌ها معمولاً به‌صورت پیش‌فرض در سیستم نصب هستند، اما اگر برنامه‌ای در دسترس نبود، حالا می‌دانیم چطور با استفاده از ابزارهای مدیریت بسته آن را نصب و نگهداری کنیم.</p><p>با این درک تازه از <strong>مدیریت بسته‌ها (Package Management)</strong>، می‌توانیم با اطمینان کامل نرم‌افزارهای موردنیاز خود را نصب، به‌روزرسانی و مدیریت کنیم — بدون آنکه در پیچیدگی‌های وابستگی‌ها و نسخه‌ها گرفتار شویم.</p><hr> <h3>افسانه‌ی سخت بودن نصب نرم‌افزار در لینوکس (The Linux Software Installation Myth)</h3><p>افرادی که از سیستم‌عامل‌های دیگر به لینوکس مهاجرت می‌کنند، گاهی گرفتار این تصور اشتباه می‌شوند که <strong>نصب نرم‌افزار در لینوکس دشوار است</strong> یا تنوع سیستم‌های بسته‌بندی بین توزیع‌های مختلف مانع بزرگی است.<br> در واقع این تنوع شاید برای <strong>شرکت‌های نرم‌افزاری تجاری</strong> که فقط نسخهٔ دودویی (binary-only) از نرم‌افزارهای بسته و محرمانه‌ی خود را منتشر می‌کنند دردسر باشد، اما <strong>برای کاربران لینوکس نه‌تنها مانع نیست بلکه یک مزیت است.</strong></p><hr> <h3>فلسفه‌ی متن‌باز و یکپارچگی نرم‌افزارها</h3><p>اکوسیستم نرم‌افزاری لینوکس بر پایه‌ی ایده‌ی <strong>متن‌باز بودن (Open Source)</strong> ساخته شده است.<br> اگر توسعه‌دهنده‌ای کد منبع برنامه‌اش را منتشر کند، معمولاً یکی از اعضای جامعهٔ توزیع‌ها آن را <strong>بسته‌بندی</strong> کرده و در <strong>مخزن رسمی</strong> توزیع خود قرار می‌دهد.<br> این روش باعث می‌شود که برنامه:</p><ul> <li>به‌خوبی با سیستم عامل یکپارچه شود، و</li><li>کاربر بتواند در همان محیط بسته‌های دیگر، آن را نصب و به‌روزرسانی کند، بدون نیاز به گشتن در سایت‌های گوناگون.</li></ul> <p>در نتیجه، نصب نرم‌افزار در لینوکس شبیه یک <strong>فروشگاه متمرکز نرم‌افزار (one-stop shop)</strong> است.</p><hr> <h3>درایورها در لینوکس</h3><p>درایورهای سخت‌افزار نیز تقریباً به همین شکل مدیریت می‌شوند.<br> به‌جای اینکه هر سخت‌افزار دیسک جداگانه‌ای برای درایور داشته باشد، درایورها <strong>به بخشی از هستهٔ لینوکس (Linux kernel)</strong> تبدیل می‌شوند.</p><p>به‌طور کلی در لینوکس چیزی به نام «دیسک درایور» وجود ندارد؛ یا <strong>هسته از آن دستگاه پشتیبانی می‌کند یا خیر.</strong><br> و در واقع، هستهٔ لینوکس <strong>تعداد بسیار بیشتری از دستگاه‌ها را نسبت به ویندوز</strong> پشتیبانی می‌کند.<br> اما اگر دستگاه شما پشتیبانی نشود، یکی از سه علت زیر را دارد:</p><hr> <h3>سه دلیل اصلی برای نبود درایور</h3><ol> <li><p><strong>دستگاه خیلی جدید است.</strong><br> بسیاری از شرکت‌های سخت‌افزاری از توسعهٔ درایور برای لینوکس پشتیبانی رسمی نمی‌کنند.<br> در این موارد، اعضای جامعهٔ لینوکس خودشان باید درایور را بنویسند — کاری که زمان می‌برد.</p></li> <li><p><strong>دستگاه خیلی خاص یا ناشناخته است.</strong><br> هر توزیع، هستهٔ مخصوص خودش را می‌سازد و ممکن است برخی درایورها را کنار گذاشته باشد.<br> با پیدا کردن کد منبع درایور، شما (بله خود شما) می‌توانید آن را <strong>کامپایل و نصب کنید.</strong><br> این کار چندان دشوار نیست، ولی نیازمند دقت و چند مرحلهٔ فنی است (در فصل‌های بعد دربارهٔ کامپایل نرم‌افزار صحبت خواهد شد).</p></li> <li><p><strong>سازنده در حال پنهان‌کاری است.</strong><br> اگر شرکت سازنده نه کد منبع درایور را منتشر کرده باشد و نه مستندات فنی برای توسعه‌دهندگان ارائه دهد، یعنی قصد دارد <strong>رابط‌های سخت‌افزار را مخفی نگه دارد.</strong><br> چنین سخت‌افزاری در دنیای آزاد لینوکس جایی ندارد؛ پیشنهاد نویسنده روشن است:<br> «این قطعه را از سیستم‌تان جدا کنید و همراه با وسایل بی‌فایدهٔ دیگر به سطل زباله بیندازید.»</p></li> </ol><hr> <h3>مطالعه‌ی بیشتر (Further Reading)</h3><p>برای درک بهتر سیستم مدیریت بسته در توزیع خود، وقت بگذارید و مستندات آن را بخوانید.<br> همچنین منابع زیر می‌توانند مفید باشند:</p><ul> <li><p><strong>سؤالات متداول دبیان (Debian FAQ) در مورد مدیریت بسته‌ها:</strong><br><a href="http://www.debian.org/doc/FAQ/ch-pkgtools.en.html">http://www.debian.org/doc/FAQ/ch-pkgtools.en.html</a></p></li> <li><p><strong>صفحهٔ رسمی پروژهٔ RPM:</strong><br><a href="http://www.rpm.org">http://www.rpm.org</a></p></li> <li><p><strong>صفحهٔ رسمی پروژهٔ YUM در دانشگاه Duke:</strong><br><a href="http://linux.duke.edu/projects/yum/">http://linux.duke.edu/projects/yum/</a></p></li> <li><p><strong>مقاله‌ای در ویکی‌پدیا دربارهٔ متادیتا (Metadata):</strong><br><a href="http://en.wikipedia.org/wiki/Metadata">http://en.wikipedia.org/wiki/Metadata</a></p></li> </ul></article> <nav class="chapter-single-next-nav"><a href="/Gitab/books/book5/Book/15/chapter15/" class="btn-next-chapter-action" id="nextChapterBtn" data-hub="/Gitab/books/book5/"> <span class="next-btn-text">فصل بعدی: رسانه‌های ذخیره‌سازی و دیسک‌ها</span> <span class="next-btn-arrow">←</span> </a> </nav></div> <button class="fab-back-to-top" id="backToTopBtn" type="button" aria-label="رفتن به بالای صفحه" title="رفتن به بالا"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"> <polyline points="18 15 12 9 6 15"></polyline> </svg> </button></main> <footer class="footer-minimal"><div class="footer-container"> <div class="footer-top-row"><div class="footer-brand-side"> <a href="/Gitab/" class="footer-brand-anchor"> <img src="/Gitab/icone/logo.svg" alt="Gitab" width="28" height="28" loading="lazy" decoding="async"> <span class="footer-brand-title">گیتاب (Gitab)</span> </a> <p class="footer-tagline"> پلتفرم آزاد و مستقل برای ترجمهٔ دقیق و روان کتاب‌های مرجع مهندسی نرم‌افزار. </p></div> <div class="footer-nav-cols"><div class="footer-nav-col"> <span class="footer-nav-heading">موضوعات</span><ul class="footer-nav-list"> <li><a href="/Gitab/books/list-books/?cat=csharp">سی‌شارپ و دات‌نت</a></li><li><a href="/Gitab/books/list-books/?cat=clean-code">کد تمیز و بازآفرینی</a></li><li><a href="/Gitab/books/list-books/?cat=architecture">معماری و طراحی دامنه</a></li><li><a href="/Gitab/books/list-books/?cat=system">لینوکس و خط فرمان</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">بخش‌های سایت</span><ul class="footer-nav-list"> <li><a href="/Gitab/">صفحه اصلی</a></li><li><a href="/Gitab/books/list-books/">کتابخانه کامل</a></li><li><a href="/Gitab/courses/">دوره‌های آموزشی</a></li><li><a href="/Gitab/translator.html">تالار مترجمین</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">مشارکت و جامعه</span><ul class="footer-nav-list"> <li><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer">راهنمای همکاری در ترجمه</a></li><li><a href="https://github.com/hheydarian/Gitab/issues" target="_blank" rel="noopener noreferrer">پیشنهاد کتاب یا گزارش خطا</a></li></ul> </div></div> </div><div class="footer-bottom-line"> <span>© <span id="y">2026</span> Gitab — توسعه‌یافته برای جامعهٔ مهندسان نرم‌افزار ایرانی</span></div> </div></footer> <script>
   (() => {
     const root = document.documentElement;
     const btn = document.getElementById('themeToggle');
+    const sunIcon = btn ? btn.querySelector('.icon-sun') : null;
+    const moonIcon = btn ? btn.querySelector('.icon-moon') : null;
     const KEY = 'gitab-theme';
 
-    function updateTheme(s) {
-      root.setAttribute('data-theme', s);
-      const mode = s;  // فقط `dark` یا `light` خواهد بود
+    function updateTheme(mode) {
+      root.setAttribute('data-theme', mode);
       root.dataset.colorMode = mode;
-      btn.dataset.icon = mode === 'dark' ? 'moon' : 'sun';
+      if (sunIcon && moonIcon) {
+        if (mode === 'dark') {
+          sunIcon.style.display = 'inline-block';
+          moonIcon.style.display = 'none';
+        } else {
+          sunIcon.style.display = 'none';
+          moonIcon.style.display = 'inline-block';
+        }
+      }
     }
 
-    // وضعیت تم ذخیره شده از localStorage
-    let saved = localStorage.getItem(KEY) || 'light'; // پیش‌فرض روشن
+    let saved = 'dark';
+    try { saved = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
     updateTheme(saved);
 
-    // تنظیم مجدد تم هنگام تغییر وضعیت دکمه
-    btn.addEventListener('click', () => {
-      const current = localStorage.getItem(KEY) || 'light';
-      const next = current === 'dark' ? 'light' : 'dark';  // فقط دو حالت: تاریک و روشن
-      localStorage.setItem(KEY, next);
-      updateTheme(next);
-    });
+    if (btn) {
+      btn.addEventListener('click', () => {
+        let current = 'dark';
+        try { current = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+        const next = current === 'dark' ? 'light' : 'dark';
+        try { localStorage.setItem(KEY, next); } catch (e) {}
+        updateTheme(next);
+      });
+    }
 
-    // هنگام بارگذاری صفحه
     document.addEventListener('DOMContentLoaded', () => {
-      updateTheme(localStorage.getItem(KEY) || 'light');
+      let mode = 'dark';
+      try { mode = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+      updateTheme(mode);
+      const yearSpan = document.getElementById('y');
+      if (yearSpan) yearSpan.textContent = new Date().getFullYear();
     });
+
+    const mobBtn = document.getElementById('mobileMenuBtn');
+    const mobDrawer = document.getElementById('mobileDrawer');
+    if (mobBtn && mobDrawer) {
+      const setDrawerOpen = (open) => {
+        mobDrawer.classList.toggle('open', open);
+        mobBtn.classList.toggle('is-open', open);
+        mobBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        mobBtn.setAttribute('aria-label', open ? 'بستن منو' : 'باز کردن منو');
+        mobDrawer.setAttribute('aria-hidden', open ? 'false' : 'true');
+      };
+
+      mobBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        setDrawerOpen(!mobDrawer.classList.contains('open'));
+      });
+
+      mobDrawer.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => setDrawerOpen(false));
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && mobDrawer.classList.contains('open')) {
+          setDrawerOpen(false);
+        }
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!mobDrawer.contains(e.target) && !mobBtn.contains(e.target)) {
+          setDrawerOpen(false);
+        }
+      });
+    }
+
+    if ('serviceWorker' in navigator) {
+      const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+      if (isLocalhost) {
+        navigator.serviceWorker.getRegistrations().then(regs => {
+          for (const reg of regs) reg.unregister();
+        });
+        if ('caches' in window) {
+          caches.keys().then(names => {
+            for (const name of names) caches.delete(name);
+          });
+        }
+      } else {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/Gitab/sw.js').catch(() => {});
+        });
+      }
+    }
   })();
-</script>
-
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-  <script>hljs.highlightAll();</script>
-
-  <script>
+  </script> <script>
   document.querySelectorAll('pre code').forEach(block => {
+    const pre = block.parentNode;
+    if (!pre || pre.querySelector('.copy-btn')) return;
+
+    const copySvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
+    const okSvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+
     const btn = document.createElement('button');
     btn.className = 'copy-btn';
-
-    const icon = document.createElement('img');
-    icon.src = "/Gitab/icone/copy.svg";
-    icon.alt = 'Copy';
-    btn.appendChild(icon);
-
-    block.parentNode.insertBefore(btn, block);
+    btn.setAttribute('aria-label', 'کپی کد');
+    btn.setAttribute('title', 'کپی کد');
+    btn.setAttribute('type', 'button');
+    btn.innerHTML = copySvg;
+    pre.appendChild(btn);
 
     btn.addEventListener('click', async () => {
-      await navigator.clipboard.writeText(block.textContent);
-      btn.classList.add('copied');
-      setTimeout(() => btn.classList.remove('copied'), 1500);
-    });
-  });
-  </script>
-
-  <script>
-  document.body.dataset.page = window.location.pathname;
-
-  const menuBtn = document.querySelector(".menu-toggle");
-  const nav = document.querySelector(".nav");
-
-  if (menuBtn && nav) {
-    menuBtn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      nav.classList.toggle("show");
-    });
-
-    document.addEventListener("click", (e) => {
-      const clickedInsideNav = nav.contains(e.target);
-      const clickedMenuButton = menuBtn.contains(e.target);
-      if (!clickedInsideNav && !clickedMenuButton) {
-        nav.classList.remove("show");
+      try {
+        await navigator.clipboard.writeText(block.textContent);
+        btn.classList.add('copied');
+        btn.innerHTML = okSvg;
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          btn.innerHTML = copySvg;
+        }, 1800);
+      } catch (err) {
+        console.error('Copy failed:', err);
       }
     });
-  }
-  </script>
-
-  <script>
-    document.getElementById('y').textContent = new Date().getFullYear();
-  </script>
-  <script>
-document.getElementById("openDonate").addEventListener("click", () => {
-  document.getElementById("donateModal").style.display = "block";
-});
-document.getElementById("closeDonate").addEventListener("click", () => {
-  document.getElementById("donateModal").style.display = "none";
-});
-document.querySelectorAll(".copy-btn").forEach(btn => {
-  btn.addEventListener("click", () => {
-    navigator.clipboard.writeText(btn.dataset.copy);
-  
-    setTimeout(() => (btn.textContent = "کپی"), 2000);
   });
-});
-</script>
+  </script> <script>
+  (() => {
+    const article = document.getElementById('chapterArticle');
+    if (!article) return;
 
-</body>
-</html>
+    const progressBar = document.getElementById('readingProgressBar');
+    if (progressBar) {
+      window.addEventListener('scroll', () => {
+        const docElem = document.documentElement;
+        const totalHeight = docElem.scrollHeight - docElem.clientHeight;
+        if (totalHeight > 0) {
+          const progress = (window.pageYOffset / totalHeight) * 100;
+          progressBar.style.width = Math.min(100, Math.max(0, progress)) + '%';
+        }
+      }, { passive: true });
+    }
+
+    const btt = document.getElementById('backToTopBtn');
+    if (btt) {
+      window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 250) {
+          btt.classList.add('visible');
+        } else {
+          btt.classList.remove('visible');
+        }
+      }, { passive: true });
+
+      btt.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+
+    article.querySelectorAll('img').forEach(img => {
+      if (!img.hasAttribute('loading')) img.loading = 'lazy';
+      if (!img.hasAttribute('decoding')) img.decoding = 'async';
+      const parent = img.parentElement;
+      if (parent && parent.tagName === 'P') {
+        parent.style.textAlign = 'center';
+      }
+
+      img.addEventListener('error', function() {
+        const src = this.getAttribute('src');
+        if (src && src.includes('assets/image/')) {
+          const parts = src.split('assets/image/');
+          const corrected = '/Gitab/books/book5/assets/image/' + parts[1];
+          if (this.src !== corrected) {
+            this.src = corrected;
+          }
+        }
+      });
+    });
+
+    article.querySelectorAll('p').forEach(p => {
+      const trimmed = p.innerText.trim();
+      if (trimmed.startsWith('💡') || trimmed.startsWith('نکته:')) {
+        p.classList.add('react-callout', 'callout-tip');
+      } else if (trimmed.startsWith('⚠️') || trimmed.startsWith('هشدار:')) {
+        p.classList.add('react-callout', 'callout-warning');
+      } else if (trimmed.startsWith('📌') || trimmed.startsWith('مهم:')) {
+        p.classList.add('react-callout', 'callout-important');
+      } else if (trimmed.startsWith('🔹') || trimmed.startsWith('🔸')) {
+        p.classList.add('react-callout', 'callout-note');
+      }
+    });
+  })();
+  </script> <script type="speculationrules">{"prefetch":[{"where":{"and":[{"href_matches":"/Gitab/*"},{"not":{"href_matches":"/Gitab/downloads/*"}},{"not":{"selector_matches":"[download], [target='_blank']"}}]},"eagerness":"moderate"}]}</script> <script>
+  (() => {
+    if (window.HTMLScriptElement && HTMLScriptElement.supports && HTMLScriptElement.supports('speculationrules')) return;
+    const seen = new Set([window.location.href]);
+    let count = 0;
+    const prefetchLink = (e) => {
+      if (count >= 12) return;
+      const a = e.target && e.target.closest ? e.target.closest('header a, .chapter-single-next-nav a, .syllabus-chapter-item a, .btn-hero-read, .btn-card-read') : null;
+      if (!a || !a.href || a.hasAttribute('download') || a.target === '_blank') return;
+      if (a.origin !== window.location.origin || a.pathname.includes('/downloads/')) return;
+      const clean = a.href.split('#')[0];
+      if (!clean || seen.has(clean)) return;
+      seen.add(clean);
+      count++;
+      const l = document.createElement('link');
+      l.rel = 'prefetch';
+      l.href = clean;
+      document.head.appendChild(l);
+    };
+    document.addEventListener('pointerenter', prefetchLink, { capture: true, passive: true });
+    document.addEventListener('touchstart', prefetchLink, { capture: true, passive: true });
+  })();
+  </script></body></html>

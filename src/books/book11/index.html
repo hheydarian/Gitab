@@ -1,0 +1,833 @@
+---
+layout: layout.njk
+title: The Secret Bit (راز بیت) | Gitab — کتابخانه مراجع تخصصی
+description: کتاب آزاد و جامع لینوکس به زبان فارسی؛ بررسی مفاهیم بنیادین یونیکس (پایپ، متغیرها، سطوح دسترسی، شبانگ، سواپ) و آموزش ۶۶ ابزار حیاتی خط فرمان لینوکس. تألیف محمد شبانه و جامعه متن‌باز.
+keywords: Linux, Bash, Shell, CLI, TheSecretBit, لینوکس, راز بیت, آموزش لینوکس, خط فرمان, ابزارهای لینوکس
+permalink: /books/book11/index.html
+---
+
+<div class="book-detail-wrapper" style="--book-glow: rgba(16, 185, 129, 0.28);">
+  <meta itemprop="keywords" content="Linux, Bash, Shell, CLI, TheSecretBit">
+
+  <!-- ۱. هیرو بنتو با کاور سه‌بعدی و اکشن‌های مدرن ۲۰۲۶ -->
+  <section class="book-detail-hero">
+    <div class="book-hero-ambient-glow" style="background: radial-gradient(circle at 50% 50%, rgba(16, 185, 129, 0.15) 0%, transparent 70%);"></div>
+
+    <div class="book-hero-content">
+      <h1 class="book-hero-title">
+        <bdi class="en-title" dir="ltr">The Secret Bit</bdi>
+      </h1>
+
+      <div class="book-hero-fa-title">راز بیت: دانشنامه آزاد و مفهومی ابزارهای لینوکس</div>
+
+      <p class="book-hero-subtitle">
+        احتمالاً اولین کتاب آزاد فارسی لینوکس که توسط جامعه برای جامعه نوشته شده است. هدف این اثر آموزش سینتکس خشک نیست؛ بلکه شناخت، دید درست و درک عمیق از نحوه تفکر یونیکس و بکارگیری بیش از ۶۶ ابزار حیاتی خط فرمان است.
+      </p>
+
+      <!-- نوار دکمه‌های اکشن کاملاً منظم و لوکس ۲۰۲۶ -->
+            <div class="book-hero-actions-v2">
+        <div class="hero-actions-primary-row">
+          <a class="btn-hero-read" href="{{ '/books/book11/Book/00/Preface/' | url }}">
+            <span>مطالعه آنلاین کتاب</span>
+            <span>←</span>
+          </a>
+          <a class="btn-hero-epub" href="{{ '/downloads/the-secret-bit-persian.epub' | url }}" download="The Secret Bit - Persian.epub"><span>دانلود نسخه EPUB</span></a>
+        </div>
+        <div class="hero-actions-sub-row">
+          <a class="btn-hero-pdf" href="https://bit-orbit.github.io/the-secret-bit/" target="_blank" rel="noopener noreferrer">
+            <span>وب‌سایت اصلی کتاب</span>
+          </a>
+          <a class="btn-hero-gh" href="https://github.com/bit-orbit/the-secret-bit" target="_blank" rel="noopener noreferrer" title="مشاهده مخزن در گیت‌هاب" style="justify-content: center;">
+            <img src="{{ '/icone/github.svg' | url }}" alt="GitHub" width="16" height="16" decoding="async">
+            <span>مشاهده سورس و مخزن در گیت‌هاب</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- استیج کاور سه‌بعدی شناور Stripe Press Style -->
+    <div class="book-hero-cover-col">
+      <div class="book-cover-3d-large">
+        <div class="cover-inner-large">
+          <img src="{{ '/images/the-secret-bit/Cover.jpg' | url }}" alt="The Secret Bit کاور" fetchpriority="high" decoding="async">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ۲. شناسنامه مهندسی کتاب (Bento Specifications Grid) -->
+  <section class="book-specs-bento">
+    <div class="book-spec-card">
+      <span class="spec-label">✍️ پدیدآورنده و سرپرست</span>
+      <span class="spec-val">محمد شبانه (با مشارکت جامعه متن‌باز)</span>
+    </div>
+
+    <div class="book-spec-card">
+      <span class="spec-label">🌐 نوع اثر</span>
+      <span class="spec-val">کتاب آزاد و جامعه‌محور فارسی</span>
+    </div>
+
+    <div class="book-spec-card">
+      <span class="spec-label">🎯 مخاطبان هدف</span>
+      <span class="spec-val">توسعه‌دهندگان، مهندسان دواپس و کاربران لینوکس</span>
+    </div>
+
+    <div class="book-spec-card">
+      <span class="spec-label">📅 سال نگارش</span>
+      <span class="spec-val">۱۴۰۱ تا کنون (پروژه پویا و آزاد)</span>
+    </div>
+
+    <div class="book-spec-card">
+      <span class="spec-label">📑 سرفصل‌های تدوین‌شده</span>
+      <span class="spec-val">۷۳ فصل و مدخل آموزشی کامل</span>
+    </div>
+
+    <div class="book-spec-card">
+      <span class="spec-label">⚡ پیام محوری</span>
+      <span class="spec-val">شناخت فلسفه ابزارها به جای حفظ کردن دستورات</span>
+    </div>
+  </section>
+
+  <!-- ۳. معرفی متنی و خلاصه کتاب -->
+  <section class="book-editorial-card">
+    <div class="editorial-header">
+      <span class="editorial-title">🐧 درباره این دانشنامه متن‌باز</span>
+    </div>
+    <p class="editorial-lead">
+      «راز بیت» پاسخی است به نیاز جامعه مهندسی فارسی‌زبان برای داشتن یک مرجع مدرن، روان و مبتنی بر مثال‌های کاربردی در اکوسیستم گنو/لینوکس. این کتاب از مباحث زیربنایی چون پایپلاین‌ها، شبانگ و سطوح دسترسی آغاز می‌شود و سپس به تک‌تک ابزارهای قدرتمند شل نظیر sed, awk, curl, grep, btop, cron و ده‌ها ابزار دیگر با رویکرد حل مسائل واقعی دنیای توسعه نرم‌افزار و سرور می‌پردازد.
+    </p>
+  </section>
+
+  <!-- ۴. فهرست تعاملی و هوشمند سرفصل‌ها (Smart Interactive Syllabus) -->
+  <section class="book-syllabus-wrapper" id="chapters">
+    <div class="syllabus-head-row">
+      <h2 class="syllabus-title">📚 فهرست سرفصل‌ها و بخش‌های کتاب</h2>
+      <button class="btn-syllabus-toggle" id="toggleAllChaptersBtn" type="button">
+        <span>🔄 باز کردن / بستن همه</span>
+      </button>
+    </div>
+
+    <!-- بخش ۰: مقدمه -->
+    <details class="syllabus-accordion-card" open>
+      <summary class="syllabus-summary-head">
+        <div class="syllabus-summary-right">
+          <span class="syllabus-sec-tag" style="background: rgba(16, 185, 129, 0.15); color: #059669;">پیش‌گفتار</span>
+          <span class="syllabus-sec-title">معرفی و نقشه راه کتاب راز بیت</span>
+        </div>
+        <div class="syllabus-summary-left">
+          <span class="syllabus-ch-count">۱ فصل</span>
+          <svg class="syllabus-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </div>
+      </summary>
+      <ul class="syllabus-chapters-list">
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book11/Book/00/Preface/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">📖</span>
+              <span class="ch-name-text">پیش‌گفتار و معرفی کتاب راز بیت</span>
+            </div>
+            <span class="ch-action-arrow">←</span>
+          </a>
+        </li>
+      </ul>
+    </details>
+
+    <!-- بخش ۱: مفاهیم پایه -->
+    <details class="syllabus-accordion-card" open>
+      <summary class="syllabus-summary-head">
+        <div class="syllabus-summary-right">
+          <span class="syllabus-sec-tag" style="background: rgba(59, 130, 246, 0.15); color: #2563eb;">مفاهیم پایه</span>
+          <span class="syllabus-sec-title">اصول بنیادین سیستم‌عامل لینوکس (Linux Fundamentals)</span>
+        </div>
+        <div class="syllabus-summary-left">
+          <span class="syllabus-ch-count">۶ فصل</span>
+          <svg class="syllabus-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </div>
+      </summary>
+      <ul class="syllabus-chapters-list">
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book11/Book/01/environment-variables/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">📖</span>
+              <span class="ch-name-text">فصل 01: متغیرهای محیطی (Environment Variables)</span>
+            </div>
+            <span class="ch-action-arrow">←</span>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book11/Book/02/loop-device/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">📖</span>
+              <span class="ch-name-text">فصل 02: دستگاه‌های حلقه (Loop Device)</span>
+            </div>
+            <span class="ch-action-arrow">←</span>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book11/Book/03/permissions/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">📖</span>
+              <span class="ch-name-text">فصل 03: مجوزها و سطوح دسترسی (Permissions)</span>
+            </div>
+            <span class="ch-action-arrow">←</span>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book11/Book/04/pipe/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">📖</span>
+              <span class="ch-name-text">فصل 04: پایپ و خط لوله (Pipe & Redirection)</span>
+            </div>
+            <span class="ch-action-arrow">←</span>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book11/Book/05/shebang/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">📖</span>
+              <span class="ch-name-text">فصل 05: شبانگ در اسکریپت‌ها (Shebang!)</span>
+            </div>
+            <span class="ch-action-arrow">←</span>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book11/Book/06/swap/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">📖</span>
+              <span class="ch-name-text">فصل 06: فضای سواپ در لینوکس (Swap Space)</span>
+            </div>
+            <span class="ch-action-arrow">←</span>
+          </a>
+        </li>
+      </ul>
+    </details>
+
+    <!-- بخش ۲: ابزارها -->
+    <details class="syllabus-accordion-card" open>
+      <summary class="syllabus-summary-head">
+        <div class="syllabus-summary-right">
+          <span class="syllabus-sec-tag" style="background: rgba(139, 92, 246, 0.15); color: #7c3aed;">جعبه‌ابزار خط فرمان</span>
+          <span class="syllabus-sec-title">۶۶ ابزار کاربردی و روزمره لینوکس (Linux CLI Tools)</span>
+        </div>
+        <div class="syllabus-summary-left">
+          <span class="syllabus-ch-count">۶۶ ابزار</span>
+          <svg class="syllabus-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </div>
+      </summary>
+      <ul class="syllabus-chapters-list">
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book11/Book/07/git/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">📖</span>
+              <span class="ch-name-text">فصل 07: ابزار Git (Linux Git Command)</span>
+            </div>
+            <span class="ch-action-arrow">←</span>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book11/Book/08/btop/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">📖</span>
+              <span class="ch-name-text">فصل 08: ابزار btop (Linux btop Command)</span>
+            </div>
+            <span class="ch-action-arrow">←</span>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book11/Book/09/cat/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">📖</span>
+              <span class="ch-name-text">فصل 09: ابزار cat (Linux cat Command)</span>
+            </div>
+            <span class="ch-action-arrow">←</span>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book11/Book/10/cd/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">📖</span>
+              <span class="ch-name-text">فصل 10: ابزار cd (Linux cd Command)</span>
+            </div>
+            <span class="ch-action-arrow">←</span>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book11/Book/11/chmod/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">📖</span>
+              <span class="ch-name-text">فصل 11: ابزار chmod (Linux chmod Command)</span>
+            </div>
+            <span class="ch-action-arrow">←</span>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book11/Book/12/cp/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">📖</span>
+              <span class="ch-name-text">فصل 12: ابزار cp (Linux cp Command)</span>
+            </div>
+            <span class="ch-action-arrow">←</span>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book11/Book/13/cron/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">📖</span>
+              <span class="ch-name-text">فصل 13: ابزار cron (Linux cron Command)</span>
+            </div>
+            <span class="ch-action-arrow">←</span>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book11/Book/14/cut/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">📖</span>
+              <span class="ch-name-text">فصل 14: ابزار cut (Linux cut Command)</span>
+            </div>
+            <span class="ch-action-arrow">←</span>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book11/Book/15/date/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">📖</span>
+              <span class="ch-name-text">فصل 15: ابزار date (Linux date Command)</span>
+            </div>
+            <span class="ch-action-arrow">←</span>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book11/Book/16/dd/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">📖</span>
+              <span class="ch-name-text">فصل 16: ابزار dd (Linux dd Command)</span>
+            </div>
+            <span class="ch-action-arrow">←</span>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book11/Book/17/df/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">📖</span>
+              <span class="ch-name-text">فصل 17: ابزار df (Linux df Command)</span>
+            </div>
+            <span class="ch-action-arrow">←</span>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book11/Book/18/fdisk/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">📖</span>
+              <span class="ch-name-text">فصل 18: ابزار fdisk (Linux fdisk Command)</span>
+            </div>
+            <span class="ch-action-arrow">←</span>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book11/Book/19/file/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">📖</span>
+              <span class="ch-name-text">فصل 19: ابزار file (Linux file Command)</span>
+            </div>
+            <span class="ch-action-arrow">←</span>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book11/Book/20/find/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">📖</span>
+              <span class="ch-name-text">فصل 20: ابزار find (Linux find Command)</span>
+            </div>
+            <span class="ch-action-arrow">←</span>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book11/Book/21/fmt/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">📖</span>
+              <span class="ch-name-text">فصل 21: ابزار fmt (Linux fmt Command)</span>
+            </div>
+            <span class="ch-action-arrow">←</span>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book11/Book/22/free/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">📖</span>
+              <span class="ch-name-text">فصل 22: ابزار free (Linux free Command)</span>
+            </div>
+            <span class="ch-action-arrow">←</span>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book11/Book/23/grep/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">📖</span>
+              <span class="ch-name-text">فصل 23: ابزار grep (Linux grep Command)</span>
+            </div>
+            <span class="ch-action-arrow">←</span>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book11/Book/24/groupadd/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">📖</span>
+              <span class="ch-name-text">فصل 24: ابزار groupadd (Linux groupadd Command)</span>
+            </div>
+            <span class="ch-action-arrow">←</span>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book11/Book/25/gzip/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">📖</span>
+              <span class="ch-name-text">فصل 25: ابزار gzip (Linux gzip Command)</span>
+            </div>
+            <span class="ch-action-arrow">←</span>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book11/Book/26/head/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">📖</span>
+              <span class="ch-name-text">فصل 26: ابزار head (Linux head Command)</span>
+            </div>
+            <span class="ch-action-arrow">←</span>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book11/Book/27/history/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">📖</span>
+              <span class="ch-name-text">فصل 27: ابزار history (Linux history Command)</span>
+            </div>
+            <span class="ch-action-arrow">←</span>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book11/Book/28/htop/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">📖</span>
+              <span class="ch-name-text">فصل 28: ابزار htop (Linux htop Command)</span>
+            </div>
+            <span class="ch-action-arrow">←</span>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book11/Book/29/ip/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">📖</span>
+              <span class="ch-name-text">فصل 29: ابزار ip (Linux ip Command)</span>
+            </div>
+            <span class="ch-action-arrow">←</span>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book11/Book/30/less/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">📖</span>
+              <span class="ch-name-text">فصل 30: ابزار less (Linux less Command)</span>
+            </div>
+            <span class="ch-action-arrow">←</span>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book11/Book/31/locate/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">📖</span>
+              <span class="ch-name-text">فصل 31: ابزار locate (Linux locate Command)</span>
+            </div>
+            <span class="ch-action-arrow">←</span>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book11/Book/32/ls/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">📖</span>
+              <span class="ch-name-text">فصل 32: ابزار ls (Linux ls Command)</span>
+            </div>
+            <span class="ch-action-arrow">←</span>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book11/Book/33/lsusb/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">📖</span>
+              <span class="ch-name-text">فصل 33: ابزار lsusb (Linux lsusb Command)</span>
+            </div>
+            <span class="ch-action-arrow">←</span>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book11/Book/34/mkdir/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">📖</span>
+              <span class="ch-name-text">فصل 34: ابزار mkdir (Linux mkdir Command)</span>
+            </div>
+            <span class="ch-action-arrow">←</span>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book11/Book/35/mkfs/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">📖</span>
+              <span class="ch-name-text">فصل 35: ابزار mkfs (Linux mkfs Command)</span>
+            </div>
+            <span class="ch-action-arrow">←</span>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book11/Book/36/mount/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">📖</span>
+              <span class="ch-name-text">فصل 36: ابزار mount (Linux mount Command)</span>
+            </div>
+            <span class="ch-action-arrow">←</span>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book11/Book/37/mv/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">📖</span>
+              <span class="ch-name-text">فصل 37: ابزار mv (Linux mv Command)</span>
+            </div>
+            <span class="ch-action-arrow">←</span>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book11/Book/38/nano/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">📖</span>
+              <span class="ch-name-text">فصل 38: ابزار nano (Linux nano Command)</span>
+            </div>
+            <span class="ch-action-arrow">←</span>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book11/Book/39/nc/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">📖</span>
+              <span class="ch-name-text">فصل 39: ابزار nc (Linux nc Command)</span>
+            </div>
+            <span class="ch-action-arrow">←</span>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book11/Book/40/neofetch/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">📖</span>
+              <span class="ch-name-text">فصل 40: ابزار neofetch (Linux neofetch Command)</span>
+            </div>
+            <span class="ch-action-arrow">←</span>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book11/Book/41/nl/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">📖</span>
+              <span class="ch-name-text">فصل 41: ابزار nl (Linux nl Command)</span>
+            </div>
+            <span class="ch-action-arrow">←</span>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book11/Book/42/passwd/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">📖</span>
+              <span class="ch-name-text">فصل 42: ابزار passwd (Linux passwd Command)</span>
+            </div>
+            <span class="ch-action-arrow">←</span>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book11/Book/43/paste/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">📖</span>
+              <span class="ch-name-text">فصل 43: ابزار paste (Linux paste Command)</span>
+            </div>
+            <span class="ch-action-arrow">←</span>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book11/Book/44/ping/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">📖</span>
+              <span class="ch-name-text">فصل 44: ابزار ping (Linux ping Command)</span>
+            </div>
+            <span class="ch-action-arrow">←</span>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book11/Book/45/ps/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">📖</span>
+              <span class="ch-name-text">فصل 45: ابزار ps (Linux ps Command)</span>
+            </div>
+            <span class="ch-action-arrow">←</span>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book11/Book/46/pwd/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">📖</span>
+              <span class="ch-name-text">فصل 46: ابزار pwd (Linux pwd Command)</span>
+            </div>
+            <span class="ch-action-arrow">←</span>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book11/Book/47/rar/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">📖</span>
+              <span class="ch-name-text">فصل 47: ابزار rar (Linux rar Command)</span>
+            </div>
+            <span class="ch-action-arrow">←</span>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book11/Book/48/reboot/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">📖</span>
+              <span class="ch-name-text">فصل 48: ابزار reboot (Linux reboot Command)</span>
+            </div>
+            <span class="ch-action-arrow">←</span>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book11/Book/49/redshift/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">📖</span>
+              <span class="ch-name-text">فصل 49: ابزار redshift (Linux redshift Command)</span>
+            </div>
+            <span class="ch-action-arrow">←</span>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book11/Book/50/rm/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">📖</span>
+              <span class="ch-name-text">فصل 50: ابزار rm (Linux rm Command)</span>
+            </div>
+            <span class="ch-action-arrow">←</span>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book11/Book/51/rsync/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">📖</span>
+              <span class="ch-name-text">فصل 51: ابزار rsync (Linux rsync Command)</span>
+            </div>
+            <span class="ch-action-arrow">←</span>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book11/Book/52/scp/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">📖</span>
+              <span class="ch-name-text">فصل 52: ابزار scp (Linux scp Command)</span>
+            </div>
+            <span class="ch-action-arrow">←</span>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book11/Book/53/sed/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">📖</span>
+              <span class="ch-name-text">فصل 53: ابزار sed (Linux sed Command)</span>
+            </div>
+            <span class="ch-action-arrow">←</span>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book11/Book/54/shutdown/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">📖</span>
+              <span class="ch-name-text">فصل 54: ابزار shutdown (Linux shutdown Command)</span>
+            </div>
+            <span class="ch-action-arrow">←</span>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book11/Book/55/sort/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">📖</span>
+              <span class="ch-name-text">فصل 55: ابزار sort (Linux sort Command)</span>
+            </div>
+            <span class="ch-action-arrow">←</span>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book11/Book/56/ssh/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">📖</span>
+              <span class="ch-name-text">فصل 56: ابزار ssh (Linux ssh Command)</span>
+            </div>
+            <span class="ch-action-arrow">←</span>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book11/Book/57/systemctl/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">📖</span>
+              <span class="ch-name-text">فصل 57: ابزار systemctl (Linux systemctl Command)</span>
+            </div>
+            <span class="ch-action-arrow">←</span>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book11/Book/58/tail/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">📖</span>
+              <span class="ch-name-text">فصل 58: ابزار tail (Linux tail Command)</span>
+            </div>
+            <span class="ch-action-arrow">←</span>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book11/Book/59/terminator/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">📖</span>
+              <span class="ch-name-text">فصل 59: ابزار terminator (Linux terminator Command)</span>
+            </div>
+            <span class="ch-action-arrow">←</span>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book11/Book/60/top/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">📖</span>
+              <span class="ch-name-text">فصل 60: ابزار top (Linux top Command)</span>
+            </div>
+            <span class="ch-action-arrow">←</span>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book11/Book/61/touch/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">📖</span>
+              <span class="ch-name-text">فصل 61: ابزار touch (Linux touch Command)</span>
+            </div>
+            <span class="ch-action-arrow">←</span>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book11/Book/62/tree/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">📖</span>
+              <span class="ch-name-text">فصل 62: ابزار tree (Linux tree Command)</span>
+            </div>
+            <span class="ch-action-arrow">←</span>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book11/Book/63/uname/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">📖</span>
+              <span class="ch-name-text">فصل 63: ابزار uname (Linux uname Command)</span>
+            </div>
+            <span class="ch-action-arrow">←</span>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book11/Book/64/uniq/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">📖</span>
+              <span class="ch-name-text">فصل 64: ابزار uniq (Linux uniq Command)</span>
+            </div>
+            <span class="ch-action-arrow">←</span>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book11/Book/65/unrar/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">📖</span>
+              <span class="ch-name-text">فصل 65: ابزار unrar (Linux unrar Command)</span>
+            </div>
+            <span class="ch-action-arrow">←</span>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book11/Book/66/useradd/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">📖</span>
+              <span class="ch-name-text">فصل 66: ابزار useradd (Linux useradd Command)</span>
+            </div>
+            <span class="ch-action-arrow">←</span>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book11/Book/67/usermod/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">📖</span>
+              <span class="ch-name-text">فصل 67: ابزار usermod (Linux usermod Command)</span>
+            </div>
+            <span class="ch-action-arrow">←</span>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book11/Book/68/vim/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">📖</span>
+              <span class="ch-name-text">فصل 68: ابزار vim (Linux vim Command)</span>
+            </div>
+            <span class="ch-action-arrow">←</span>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book11/Book/69/w/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">📖</span>
+              <span class="ch-name-text">فصل 69: ابزار w (Linux w Command)</span>
+            </div>
+            <span class="ch-action-arrow">←</span>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book11/Book/70/watch/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">📖</span>
+              <span class="ch-name-text">فصل 70: ابزار watch (Linux watch Command)</span>
+            </div>
+            <span class="ch-action-arrow">←</span>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book11/Book/71/wc/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">📖</span>
+              <span class="ch-name-text">فصل 71: ابزار wc (Linux wc Command)</span>
+            </div>
+            <span class="ch-action-arrow">←</span>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book11/Book/72/wget/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">📖</span>
+              <span class="ch-name-text">فصل 72: ابزار wget (Linux wget Command)</span>
+            </div>
+            <span class="ch-action-arrow">←</span>
+          </a>
+        </li>
+      </ul>
+    </details>
+  </section>
+</div>
+
+<script>
+(() => {
+  const toggleBtn = document.getElementById('toggleAllChaptersBtn');
+  if (!toggleBtn) return;
+  toggleBtn.addEventListener('click', () => {
+    const allDetails = document.querySelectorAll('.syllabus-accordion-card');
+    const anyOpen = Array.from(allDetails).some(d => d.open);
+    allDetails.forEach(d => d.open = !anyOpen);
+  });
+})();
+</script>

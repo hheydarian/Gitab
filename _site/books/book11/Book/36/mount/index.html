@@ -1,0 +1,238 @@
+<!doctype html><html lang="fa" dir="rtl"> <head><script>
+    if (window.location.pathname.startsWith('/gitab/')) {
+      window.location.replace(window.location.pathname.replace(/^\/gitab\//i, '/Gitab/') + window.location.search + window.location.hash);
+    }
+    (() => {
+      try {
+        const t = localStorage.getItem('gitab-theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', t);
+        document.documentElement.dataset.colorMode = t;
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        document.documentElement.dataset.colorMode = 'dark';
+      }
+    })();
+  </script> <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5"> <title>فصل 36: ابزار mount (Linux mount Command)</title><meta name="description" content="فصل 36: ابزار mount (Linux mount Command) — مطالعه آنلاین و رایگان از کتاب «راز بیت (The Secret Bit — دانشنامه آزاد لینوکس و ابزارها)» (The Secret Bit) اثر محمد شبانه و جامعه متن‌باز با ترجمه محمد شبانه در گیتاب."> <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"><meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"> <meta name="theme-color" content="#090d16"><meta name="referrer" content="strict-origin-when-cross-origin"> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https:; frame-src https://www.youtube.com https://www.youtube-nocookie.com https://maps.google.com https://www.google.com; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self';"><link rel="icon" type="image/png" href="/Gitab/favicon.png"> <link rel="canonical" href="https://hheydarian.github.io/Gitab/books/book11/Book/36/mount/"><link rel="alternate" hreflang="fa" href="https://hheydarian.github.io/Gitab/books/book11/Book/36/mount/"> <link rel="alternate" hreflang="x-default" href="https://hheydarian.github.io/Gitab/books/book11/Book/36/mount/"><link rel="alternate" type="text/plain" title="LLMs.txt" href="/Gitab/llms.txt"> <link rel="sitemap" type="application/xml" title="Sitemap" href="/Gitab/sitemap.xml"><meta property="og:locale" content="fa_IR"> <meta property="og:type" content="article"><meta property="og:site_name" content="گیتاب | Gitab"> <meta property="og:title" content="فصل 36: ابزار mount (Linux mount Command)"><meta property="og:description" content="فصل 36: ابزار mount (Linux mount Command) — مطالعه آنلاین و رایگان از کتاب «راز بیت (The Secret Bit — دانشنامه آزاد لینوکس و ابزارها)» (The Secret Bit) اثر محمد شبانه و جامعه متن‌باز با ترجمه محمد شبانه در گیتاب."> <meta property="og:url" content="https://hheydarian.github.io/Gitab/books/book11/Book/36/mount/"><meta property="og:image" content="https://hheydarian.github.io/Gitab/images/the-secret-bit/Cover.jpg"> <meta property="og:image:alt" content="فصل 36: ابزار mount (Linux mount Command)"><meta name="twitter:card" content="summary_large_image"> <meta name="twitter:title" content="فصل 36: ابزار mount (Linux mount Command)"><meta name="twitter:description" content="فصل 36: ابزار mount (Linux mount Command) — مطالعه آنلاین و رایگان از کتاب «راز بیت (The Secret Bit — دانشنامه آزاد لینوکس و ابزارها)» (The Secret Bit) اثر محمد شبانه و جامعه متن‌باز با ترجمه محمد شبانه در گیتاب."> <meta name="twitter:image" content="https://hheydarian.github.io/Gitab/images/the-secret-bit/Cover.jpg"><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://hheydarian.github.io/Gitab/#organization","name":"گیتاب | Gitab","alternateName":"Gitab","url":"https://hheydarian.github.io/Gitab/","logo":{"@type":"ImageObject","url":"https://hheydarian.github.io/Gitab/favicon.png"},"sameAs":["https://github.com/hheydarian/Gitab"]},{"@type":"WebSite","@id":"https://hheydarian.github.io/Gitab/#website","url":"https://hheydarian.github.io/Gitab/","name":"گیتاب | Gitab","inLanguage":"fa-IR","publisher":{"@id":"https://hheydarian.github.io/Gitab/#organization"},"potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://hheydarian.github.io/Gitab/books/list-books/?q={search_term_string}"},"query-input":"required name=search_term_string"}},{"@type":"WebPage","@id":"https://hheydarian.github.io/Gitab/books/book11/Book/36/mount/#webpage","url":"https://hheydarian.github.io/Gitab/books/book11/Book/36/mount/","name":"فصل 36: ابزار mount (Linux mount Command)","description":"فصل 36: ابزار mount (Linux mount Command) — مطالعه آنلاین و رایگان از کتاب «راز بیت (The Secret Bit — دانشنامه آزاد لینوکس و ابزارها)» (The Secret Bit) اثر محمد شبانه و جامعه متن‌باز با ترجمه محمد شبانه در گیتاب.","inLanguage":"fa-IR","isPartOf":{"@id":"https://hheydarian.github.io/Gitab/#website"}},{"@type":"TechArticle","headline":"فصل 36: ابزار mount (Linux mount Command)","description":"فصل 36: ابزار mount (Linux mount Command) — مطالعه آنلاین و رایگان از کتاب «راز بیت (The Secret Bit — دانشنامه آزاد لینوکس و ابزارها)» (The Secret Bit) اثر محمد شبانه و جامعه متن‌باز با ترجمه محمد شبانه در گیتاب.","url":"https://hheydarian.github.io/Gitab/books/book11/Book/36/mount/","inLanguage":"fa-IR","isAccessibleForFree":true,"author":{"@type":"Person","name":"محمد شبانه و جامعه متن‌باز"},"translator":{"@type":"Person","name":"محمد شبانه"},"isPartOf":{"@type":"Book","name":"راز بیت (The Secret Bit — دانشنامه آزاد لینوکس و ابزارها)","alternateName":"The Secret Bit","url":"https://hheydarian.github.io/Gitab/books/book11/"}}]}</script> <link rel="preload" href="/Gitab/fonts/Vazirmatn.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/Gitab/styles/main.css?v=2.4" as="style"> <link rel="preload" href="/Gitab/styles/gitab-modern.css?v=2.5" as="style"><style>@font-face{font-family:'Lalezar';src:url('/Gitab/fonts/Lalezar.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}@font-face{font-family:'Vazirmatn';src:url('/Gitab/fonts/Vazirmatn.woff2') format('woff2');font-weight:100 900;font-style:normal;font-display:swap}html,body,button,input,optgroup,select,textarea,.filter-pill{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}input::placeholder,textarea::placeholder{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}</style> <link rel="stylesheet" href="/Gitab/styles/main.css?v=2.4"><link rel="stylesheet" href="/Gitab/styles/gitab-modern.css?v=2.5"> <link rel="stylesheet" href="/Gitab/styles/vendor/github-dark.min.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="/Gitab/styles/vendor/github-dark.min.css"></noscript></head> <body><header class="header"> <div class="container nav-wrap"><a href="/Gitab/" class="brand" aria-label="صفحه اصلی گیتاب"> <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="30" height="30" decoding="async"> <span class="brand-text">Gitab</span> </a> <nav class="nav" id="mainNav"><a href="/Gitab/" >خانه</a> <a href="/Gitab/books/list-books" aria-current="page">کتاب‌ها</a> <a href="/Gitab/courses/" >دوره‌ها</a> <a href="/Gitab/translator.html" >مترجمین</a></nav> <div class="nav-actions"><button id="themeToggle" class="theme-toggle-btn" aria-label="تغییر تم" title="تغییر تم"> <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن" width="18" height="18" decoding="async" style="display:none"> <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک" width="18" height="18" decoding="async"> </button> <a class="btn-github-pill" href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" title="مشاهده سورس گیتاب در گیت‌هاب"> <img src="/Gitab/icone/github.svg" alt="GitHub" width="16" height="16" decoding="async"> <span>گیت‌هاب</span> </a> <button class="mobile-menu-btn" id="mobileMenuBtn" type="button" aria-label="باز کردن منو" aria-expanded="false"> <svg class="mob-icon-open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="4" y1="7" x2="20" y2="7"></line> <line x1="4" y1="12" x2="20" y2="12"></line> <line x1="4" y1="17" x2="14" y2="17"></line> </svg> <svg class="mob-icon-close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="18" y1="6" x2="6" y2="18"></line> <line x1="6" y1="6" x2="18" y2="18"></line> </svg> </button></div> </div><div class="mobile-drawer" id="mobileDrawer" aria-hidden="true"> <div class="mobile-drawer-inner"><div class="mobile-drawer-section-label">ناوبری سریع</div><nav class="mobile-drawer-links" aria-label="منوی موبایل"> <a href="/Gitab/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M3 10.5 12 3l9 7.5"></path> <path d="M5 9.5V20a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V9.5"></path> </svg> </span> <span class="mob-nav-text">صفحه نخست</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/books/list-books" class="mobile-drawer-link active" aria-current="page"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path> </svg> </span> <span class="mob-nav-text">کتابخانه و فهرست کتاب‌ها</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/courses/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path> <path d="M6 12v5c3 3 9 3 12 0v-5"></path> </svg> </span> <span class="mob-nav-text">دوره‌های آموزشی</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/translator.html" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path> <circle cx="9" cy="7" r="4"></circle> <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path> <path d="M16 3.13a4 4 0 0 1 0 7.75"></path> </svg> </span> <span class="mob-nav-text">مترجمین و همکاران</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> </nav><div class="mobile-drawer-divider"></div><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" class="mobile-drawer-link mobile-drawer-gh"> <span class="mob-nav-icon" aria-hidden="true"> <img src="/Gitab/icone/github.svg" alt="" width="17" height="17" loading="lazy" decoding="async"> </span> <span class="mob-nav-text">مخزن گیت‌هاب پروژه</span> <span class="mob-nav-ext" aria-hidden="true">↗</span> </a> </div></div> </header><div class="reading-progress-track"> <div class="reading-progress-fill" id="readingProgressBar"></div></div> <main class="site-main chapter-reading-page"><div class="chapter-page-wrapper"> <nav class="chapter-clean-breadcrumb" aria-label="مسیر راهنما" dir="rtl"><a href="/Gitab/">خانه</a> <span class="bc-sep" aria-hidden="true">/</span> <a href="/Gitab/books/list-books/">کتاب‌ها</a> <span class="bc-sep" aria-hidden="true">/</span> <a href="/Gitab/books/book11/"><bdi>راز بیت</bdi></a> <span class="bc-sep" aria-hidden="true">/</span> <span class="bc-current-leaf"><bdi>فصل 36: ابزار mount (Linux mount Command)</bdi></span></nav> <article class="chapter-prose-container markdown-body" id="chapterArticle" dir="rtl"><h1>فصل 36: ابزار mount (Linux mount Command)</h1><h3>مقدمه</h3><p>دستور &quot;mount&quot; در لینوکس برای نصب فایل سیستم ها استفاده می شود و آنها را برای سیستم قابل دسترسی می کند. این دستور به شما امکان دسترسی به فایل‌ها و دایرکتوری‌های موجود در دستگاه‌های خارجی، فایل‌های اشتراک گذاری شده شبکه و سایر دستگاه‌های ذخیره‌سازی را می دهد بطوریکه گویی در فایل سیستم لوکال قرار دارند.</p><hr> <h3>ساختار دستور</h3><p>ساختار دستور اصلی دستور &quot;mount&quot; به شرح زیر است:</p><pre class="hljs"><code>$ mount device <span class="hljs-built_in">dir</span> [-t <span class="hljs-built_in">type</span>] [-o options]
+</code></pre> <ul><li><code>device</code>: فایل سیستم یا دستگاهی است که می خواهید نصب کنید.</li><li><code>dir</code>: دایرکتوری ای که فایل سیستم در آن نصب خواهد شد.</li><li><span dir='ltr'><code>[-t type]</code></span>: ورودی اختیاری برای تعیین نوع فایل سیستم.</li><li><span dir='ltr'><code>[-o options]</code></span>: ورودی اختیاری برای سفارشی کردن فرآیند نصب که شامل گزینه‌های مختلفی است.</li></ul> <hr><h3>گزینه ها</h3><p>دستور &quot;mount&quot; در لینوکس دارای تعداد زیادی گزینه است که می توان از آنها برای سفارشی کردن فرآیند نصب استفاده کرد. در اینجا یک نمای کلی از رایج ترین گزینه های مورد استفاده آورده شده است:</p><ul> <li><span dir='ltr'><code>-a</code>, <code>--all</code></span></li></ul> <p>همه سیستم های فایل (از انواع داده شده) ذکر شده در <span dir='ltr'>/etc/fstab (fstab)</span> را نصب میکند به جز آنهایی که حاوی کلمه کلیدی noauto هستند. این فایل سیستم ها به ترتیب خود در fstab نصب می شوند.</p><ul> <li><span dir='ltr'><code>-t</code>, <code>--type</code> vfstype</span></li></ul> <p>نوع فایل سیستم را مشخص میکند. به عنوان مثال <span dir='ltr'>-t ext4</span><br> برخی از انواع فایل سیستم ها عبارتند از minix, msdos, ext, ext2, ext3, ext4, exfat, xfs, fat, ntfs, nfs, btrfs, sysfs, proc.<br><br><br> فایل سیستم های قابل پشتیبانی بسته به kernel ممکن است متفاوت باشد.<br> برای مشاهده لیست فایل سیستم ها به آدرس های زیر را ببینید:</p><br> <span dir='ltr'> /proc/filesystems <br> /lib/modules/$(uname -r)/kernel/fs </span><br> <p>اگر نوع مشخص نشود ویا از auto استفاده شود دستور mount سعی میکند نوع فایل سیستم را با توجه به superblock و لیست /etc/filesystems و اگر موجود نباشد از /proc/filesystems پیدا کند. در این صورت میتوان استثنا را نیز بوسیله لیبل nodev مشخص کرد. به عنوان مثال:</p><pre class="hljs"><code>$ <span class="hljs-built_in">sudo</span> mount -a -t nomsdos,smbfs
+</code></pre> <p>همه فایل سیستم ها (-a) به جز msdos و smbfs را نصب میکند.</p><ul> <li><span dir='ltr'><code>-B</code>, <code>--bind</code></span></li></ul> <p>یک فایل یا دایرکتوری را در جای دیگری نصب میکند به طوری که محتویات آن باشد در هر دو مکان در دسترس باشد. مثال:</p><pre class="hljs"><code>$ <span class="hljs-built_in">sudo</span> mount --<span class="hljs-built_in">bind</span> olddir newdir
+</code></pre> <p>بعد از اجرای این دستور محتوای مورد نظر در هر دو آدرس در دسترس خواهد بود.</p><ul> <li><span dir='ltr'><code>-R</code>, <code>--rbind</code></span></li></ul> <p>تفاوت این سوییچ با <code>--bind</code> در این است که این سوییچ یک کپی بازگشتی (recursive) از محل نصب اصلی ایجاد می کند که تغییرات ایجاد شده در نسخه اصلی را منعکس می کند. مثال:</p><pre class="hljs"><code>$ <span class="hljs-built_in">sudo</span> mount --rbind olddir newdir
+</code></pre> <p>با این دستور محل جدید یعنی newdir از محل اصلی کپی میگیرد و تمام تغییراتی که به olddir اعمال شوند در محل جدید نیز اعمال میشود و بالعکس.</p><ul> <li><span dir='ltr'><code>--move</code></span></li></ul> <p>یک فایل یا دایرکتوری نصب شده را به مکان دیگری منتقل میکند. مثال:</p><pre class="hljs"><code>$ <span class="hljs-built_in">sudo</span> mount --move olddir newdir
+</code></pre> <p>این گزینه باعث می شود که محتوایی که قبلا در محل olddir ظاهر می شد اکنون در newdir قابل دسترسی باشد. با این کار محل فیزیکی فایل ها تغییر نمیکند. توجه داشته باشید که olddir باید یک محل از پیش نصب شده باشد و همچنین توجه داشته باشید که جابجایی یک directory در subdirectory آن مشترک نامعتبر است.</p><ul> <li><span dir='ltr'><code>-L</code>, <code>--label</code> label</span></li></ul> <p>این گزینه برای نصب فایل سیستم با تعیین برچسب (label) آن به جای نام دستگاه (که در صورت تعویض دستگاه ذخیره‌سازی یا تغییر محل آن در سیستم می‌تواند تغییر کند) استفاده می شود.</p><pre class="hljs"><code>$ <span class="hljs-built_in">sudo</span> mount -L mylabel newdir
+</code></pre> <p>با این دستور فایل سیستم با برچسب mylabel در newdir نصب می شود. اگر فایل سیستم قبلا نصب شده باشد، این دستور با شکست مواجه می شود.</p><ul> <li><span dir='ltr'><code>-n</code>, <code>--no-mtab</code></span></li></ul> <p>این گزینه به سیستم می‌گوید که فایل <span dir='ltr'>/etc/mtab</span> را به‌روزرسانی نکند. این فایل همه فایل سیستمهای نصب شده را فهرست می‌کند. به طور پیش فرض، هنگامی که یک فایل سیستم نصب می شود، اطلاعات آن در <span dir='ltr'>/etc/mtab</span> نوشته می شود. با این حال با استفاده از گزینه <span dir='ltr'>-n</span> می توانید از تغییر فایل <span dir='ltr'>/etc/mtab</span> توسط دستور mount جلوگیری کنید.</p><ul> <li><span dir='ltr'><code>-r</code>, <code>--read-only</code></span></li></ul> <p>فایل سیستم را بصورت (read-only) نصب میکند. مشابه گزینه <span dir='ltr'>-o ro</span> که در قسمت <span dir='ltr'>-o</span> در ادامه توضیح داده خواهد شد.</p><ul> <li><span dir='ltr'><code>-w</code>, <code>--rw</code>, <code>--read-write</code></span></li></ul> <p>فایل سیستم را برای خواندن و نوشتن (read-write) نصب میکند. این گزینه بصورت پیش فرض در کرنل فعال است. مشابه گزینه <span dir='ltr'>-o rw</span> که در قسمت <span dir='ltr'>-o</span> در ادامه توضیح داده خواهد شد.</p><p>توجه داشته باشید که استفاده از این گزینه دستور mount را مجبور میکند به هیچ وجه روش read-only را بروی دستگاههای write-protected امتحان کند.</p><p>اگر دستور mount قبلا فراخوانی شده با روش read-write با شکست مواجه شود پیش فرض به read-only تغییر میکند</p><ul> <li><span dir='ltr'><code>-U</code>, <code>--uuid uuid</code></span></li></ul> <p>این گزینه برای نصب فایل سیستم با UUID آن به جای نام دستگاه استفاده می شود.</p><ul> <li><span dir='ltr'><code>-v</code>, <code>--verbose</code></span></li></ul> <p>حالت پرحرف (verbose). این گزینه خروجی اضافی در مورد فرآیند نصب ارائه می دهد.</p><ul> <li><span dir='ltr'><code>-o</code>, <code>--options</code> opts</span></li></ul> <p>این گزینه خود برای تنظیم گزینه های مختلف نصب استفاده می شود که بر روند نصب تأثیر می گذارند. ورودی opts یک لیست جدا شده با ویرگول است. مثال:</p><pre class="hljs"><code>$ <span class="hljs-built_in">sudo</span> mount -o noatime,nodev,nosuid
+</code></pre> <p>برخی گزینه های پرکاربرد قابل استفاده برای این سوییچ (مستقل از نوع فایل سیستم):</p><ul> <ul><li>sync تمام ورودی/خروجی ها به فایل سیستم را بصورت همزمان انجام میدهد. این گزینه میتواند باعث کوتاه شدن عمر وسیله هایی مثل حافظه های فلش شود که تعداد محدود ی سیکل نوشتن دارند.</li><li>async تمام ورودی/خروجی ها به فایل سیستم را بصورت ناهمگام انجام میدهد.</li><li>atime زمان دسترسی (atime) در inode (index node) توسط کرنل کنترل شود.</li><li>noatime زمان دسترسی با خواندن فایل بروزرسانی نشود. این گزینه میتواند باعث تسریع پروسه خواندن شود.</li><li>relatime زمان دسترسی را نسبت به زمان اصلاح (mtime) یا تغییر فایل (ctime) و دیرکتوری بروزرسانی میکند.</li><li>norelatime مشخصا اعلام میکند که از گزینه realtime استفاده نشود.</li><li>strictatime اجازه میدهد که صریحا بروزرسانی کامل atime درخواست شود. این گزینه پیش فرض کرنل را تغییر میدهد. پیش فرض ها در <span dir='ltr'>/proc/mounts</span> قرار دارند.</li><li>nostrictatime از پیش فرض کرنل برای بروزرسانی atime استفاده شود.</li><li>lazytime زمان های فایل را (atime, mtime, ctime) فقط در inode حافظه بروزرسانی میکند.</li><li>nolazytime مشخصا اعلام میکند که از گزینه lazytime استفاده نشود.</li><li>diratime زمان دسترسی دیرکتوری را بروزرسانی میکند. این گزینه بصورت پیش فرض عموما فعال است. اگر noatime استفاده شود این گزینه نادیده گرفته میشود.</li><li>nodiratime زمان دسترسی دیرکتوری را بروزرسانی نمیکند. گزینه noatime این گزینه را هم در بر دارد.</li><li>auto و noauto مشخص میکنند که فایل سیستم با بوت شدن سیستم بصورت خودکار نصب شود یا خیر.</li><li>dev مشخص میکند که فایل سیستم باید اجازه ایجاد فایل های دستگاه (فایل های خاصی هستند که برای تعامل با دستگاه های سخت افزاری یا سایر اجزای سیستم سطح پایین استفاده می شوند) را بدهد.</li><li>nodev این گزینه در شرایطی کاربردی است که می‌خواهید توانایی تعامل با دستگاه‌های سیستم را محدود کنید، یا زمانی که می‌خواهید از ایجاد تصادفی فایل‌های دستگاه که می‌تواند باعث مشکلات امنیتی یا پایداری شود، جلوگیری کنید.</li><li>ro فایل سیستم را فقط خواندنی نصب میکند.</li><li>rw فایل سیستم را برای خواندن و نوشتن نصب میکند.</li><li>exec و noexec مشخص میکند که آیا باید اجرای فایل های باینری و اسکریپت های موجود در فایل سیستم را مجاز یا غیرمجاز کند. exec پیش‌فرض اکثر فایل سیستم ها است و به کاربران اجازه می‌دهد تا برنامه‌ها و اسکریپت‌های واقع در فایل سیستم را اجرا کنند.</li><li>suid و nosuid برای تعیین اینکه آیا یک فایل سیستم باید اجرای فایل های باینری را با مجموعه بیت set-user-ID (SUID) مجاز یا غیرمجاز کند. بیت SUID یک ویژگی فایل سیستم است که به یک فایل باینری اجازه می دهد تا با امتیازات مالک فایل به جای امتیازات کاربری که فایل را اجرا می کند، اجرا شود. این می تواند یک ویژگی مفید برای sys admin هایی باشد که نیاز به دادن اختیارات بالا به کاربران خاص برای کارهای خاص دارند. </li><li>nofail مشخص میکند که اگر دستگاه در حال نصب وجود نداشته باشد، باید از محل نصب صرفنظر شود و گزارش اخطار داده نشود. این گزینه معمولا با دستگاه‌های ذخیره‌سازی قابل جابجایی، مانند درایوهای USB یا هارد دیسک‌های خارجی، که ممکن است همیشه به سیستم متصل نباشند، استفاده می‌شود. </li></ul> </ul><p>علاوه بر این گزینه ها، گزینه های بسیار دیگری نیز برای هر نوع فایل سیستم مشخص وجود دارند.</p><p>برخی از این گزینه ها میتوانند بصورت پیش فرض غیرفعال یا فعال شوند. برای مشاهده تنظیمات موجود میتوانید <span dir='ltr'>/proc/mounts</span> را چک کنید.</p><hr> <h3>خروجی</h3><p>دستور mount یکی از مقادیر زیر را برمی گرداند که نشان دهنده وضعیت تکمیل فرآیند است:</p><table> <thead><tr> <th style="text-align:center">خروجی</th><th style="text-align:center">توضیح</th></tr> </thead><tbody> <tr><td style="text-align:center">0</td><td style="text-align:center">موفقیت</td></tr> <tr><td style="text-align:center">1</td><td style="text-align:center">فراخوانی نادرست دستور یا مجوزهای ناکافی</td></tr> <tr><td style="text-align:center">2</td><td style="text-align:center">خطای سیستم</td></tr> <tr><td style="text-align:center">4</td><td style="text-align:center">اشکال نصب داخلی</td></tr> <tr><td style="text-align:center">8</td><td style="text-align:center">عملیات توسط کاربر قطع شده است</td></tr> <tr><td style="text-align:center">16</td><td style="text-align:center">مشکلات مربوط به نوشتن یا قفل کردن فایل /etc/mtab</td></tr> <tr><td style="text-align:center">32</td><td style="text-align:center">شکست در نصب</td></tr> <tr><td style="text-align:center">64</td><td style="text-align:center">حداقل یک عملیات نصب موفقیت آمیز بود، اما نه همه</td></tr> </tbody></table> <hr><h3>مثال</h3><h4>نصب فایل سیستم</h4><p>برای نصب فایل سیستم، باید نام دستگاه و دایرکتوری را که می‌خواهید آن را نصب کنید، بدانید. به عنوان مثال، برای نصب یک فایل سیستم واقع در دستگاه &quot;/dev/sdb1&quot; در پوشه &quot;/mnt/sdb1&quot;، از دستور زیر استفاده می کنید:</p><pre class="hljs"><code>$ <span class="hljs-built_in">sudo</span> mount /dev/sdb1 /mnt/sdb1
+</code></pre> <h4>نصب فایل سیستم با گزینه ها</h4><p>برای نصب فایل سیستم با گزینه ها، می توانید از گزینه &quot;-o&quot; و سپس گزینه های مورد نظر استفاده کنید. به عنوان مثال، برای نصب فایل سیستم &quot;/dev/sdb1&quot; در پوشه &quot;/mnt/sdb1&quot; در حالت خواندن و نوشتن، از دستور زیر استفاده می کنید:</p><pre class="hljs"><code>$ <span class="hljs-built_in">sudo</span> mount -o rw /dev/sdb1 /mnt/sdb1
+</code></pre> <h4>نصب فایل سیستم با نوع</h4><p>اگر نوع فایل سیستم به طور خودکار شناسایی نشد، می توانید از گزینه &quot;-t&quot; برای تعیین نوع فایل سیستم استفاده کنید. به عنوان مثال، برای نصب یک فایل سیستم NTFS واقع در دستگاه &quot;/dev/sdb1&quot; در پوشه &quot;/mnt/sdb1&quot;، از دستور زیر استفاده می کنید:</p><pre class="hljs"><code>$ <span class="hljs-built_in">sudo</span> mount -t ntfs /dev/sdb1 /mnt/sdb1
+</code></pre> <h4>نصب فایل سیستم شبکه</h4><p>برای نصب فایل سیستم شبکه، مانند اشتراک‌گذاری NFS یا SMB، می‌توانید از گزینه «-t» برای تعیین نوع فایل سیستم و به دنبال آن دستگاه و دایرکتوری استفاده کنید. به عنوان مثال، برای نصب یک اشتراک NFS واقع در &quot;192.168.1.100:/share&quot; در پوشه &quot;/mnt/nfs&quot;، باید از دستور زیر استفاده کنید:</p><pre class="hljs"><code>$ <span class="hljs-built_in">sudo</span> mount -t nfs 192.168.1.100:/share /mnt/nfs
+</code></pre> <h3>همچنین مطالعه کنید</h3><ul> <li>دستور <code>umount</code> (برای جدا کردن سیستم‌فایل‌های مانت‌شده)</li></ul> <hr><h3>Author or Authors</h3><ul> <li><em><a href="https://github.com/BehrouzSohrabi">Behrouz</a></em> | <strong><a href="mailto:sohrabi.beh@gmail.com">sohrabi.beh@gmail.com</a></strong></li></ul> </article><nav class="chapter-single-next-nav"> <a href="/Gitab/books/book11/Book/37/mv/" class="btn-next-chapter-action" id="nextChapterBtn" data-hub="/Gitab/books/book11/"> <span class="next-btn-text">فصل بعدی: فصل 37: ابزار mv (Linux mv Command)</span> <span class="next-btn-arrow">←</span> </a> </nav></div> <button class="fab-back-to-top" id="backToTopBtn" type="button" aria-label="رفتن به بالای صفحه" title="رفتن به بالا"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"> <polyline points="18 15 12 9 6 15"></polyline> </svg> </button></main> <footer class="footer-minimal"><div class="footer-container"> <div class="footer-top-row"><div class="footer-brand-side"> <a href="/Gitab/" class="footer-brand-anchor"> <img src="/Gitab/icone/logo.svg" alt="Gitab" width="28" height="28" loading="lazy" decoding="async"> <span class="footer-brand-title">گیتاب (Gitab)</span> </a> <p class="footer-tagline"> پلتفرم آزاد و مستقل برای ترجمهٔ دقیق و روان کتاب‌های مرجع مهندسی نرم‌افزار. </p></div> <div class="footer-nav-cols"><div class="footer-nav-col"> <span class="footer-nav-heading">موضوعات</span><ul class="footer-nav-list"> <li><a href="/Gitab/books/list-books/?cat=csharp">سی‌شارپ و دات‌نت</a></li><li><a href="/Gitab/books/list-books/?cat=clean-code">کد تمیز و بازآفرینی</a></li><li><a href="/Gitab/books/list-books/?cat=architecture">معماری و طراحی دامنه</a></li><li><a href="/Gitab/books/list-books/?cat=system">لینوکس و خط فرمان</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">بخش‌های سایت</span><ul class="footer-nav-list"> <li><a href="/Gitab/">صفحه اصلی</a></li><li><a href="/Gitab/books/list-books/">کتابخانه کامل</a></li><li><a href="/Gitab/courses/">دوره‌های آموزشی</a></li><li><a href="/Gitab/translator.html">تالار مترجمین</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">مشارکت و جامعه</span><ul class="footer-nav-list"> <li><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer">راهنمای همکاری در ترجمه</a></li><li><a href="https://github.com/hheydarian/Gitab/issues" target="_blank" rel="noopener noreferrer">پیشنهاد کتاب یا گزارش خطا</a></li></ul> </div></div> </div><div class="footer-bottom-line"> <span>© <span id="y">2026</span> Gitab — توسعه‌یافته برای جامعهٔ مهندسان نرم‌افزار ایرانی</span></div> </div></footer> <script>
+  (() => {
+    const root = document.documentElement;
+    const btn = document.getElementById('themeToggle');
+    const sunIcon = btn ? btn.querySelector('.icon-sun') : null;
+    const moonIcon = btn ? btn.querySelector('.icon-moon') : null;
+    const KEY = 'gitab-theme';
+
+    function updateTheme(mode) {
+      root.setAttribute('data-theme', mode);
+      root.dataset.colorMode = mode;
+      if (sunIcon && moonIcon) {
+        if (mode === 'dark') {
+          sunIcon.style.display = 'inline-block';
+          moonIcon.style.display = 'none';
+        } else {
+          sunIcon.style.display = 'none';
+          moonIcon.style.display = 'inline-block';
+        }
+      }
+    }
+
+    let saved = 'dark';
+    try { saved = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+    updateTheme(saved);
+
+    if (btn) {
+      btn.addEventListener('click', () => {
+        let current = 'dark';
+        try { current = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+        const next = current === 'dark' ? 'light' : 'dark';
+        try { localStorage.setItem(KEY, next); } catch (e) {}
+        updateTheme(next);
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      let mode = 'dark';
+      try { mode = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+      updateTheme(mode);
+      const yearSpan = document.getElementById('y');
+      if (yearSpan) yearSpan.textContent = new Date().getFullYear();
+    });
+
+    const mobBtn = document.getElementById('mobileMenuBtn');
+    const mobDrawer = document.getElementById('mobileDrawer');
+    if (mobBtn && mobDrawer) {
+      const setDrawerOpen = (open) => {
+        mobDrawer.classList.toggle('open', open);
+        mobBtn.classList.toggle('is-open', open);
+        mobBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        mobBtn.setAttribute('aria-label', open ? 'بستن منو' : 'باز کردن منو');
+        mobDrawer.setAttribute('aria-hidden', open ? 'false' : 'true');
+      };
+
+      mobBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        setDrawerOpen(!mobDrawer.classList.contains('open'));
+      });
+
+      mobDrawer.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => setDrawerOpen(false));
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && mobDrawer.classList.contains('open')) {
+          setDrawerOpen(false);
+        }
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!mobDrawer.contains(e.target) && !mobBtn.contains(e.target)) {
+          setDrawerOpen(false);
+        }
+      });
+    }
+
+    if ('serviceWorker' in navigator) {
+      const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+      if (isLocalhost) {
+        navigator.serviceWorker.getRegistrations().then(regs => {
+          for (const reg of regs) reg.unregister();
+        });
+        if ('caches' in window) {
+          caches.keys().then(names => {
+            for (const name of names) caches.delete(name);
+          });
+        }
+      } else {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/Gitab/sw.js').catch(() => {});
+        });
+      }
+    }
+  })();
+  </script> <script>
+  document.querySelectorAll('pre code').forEach(block => {
+    const pre = block.parentNode;
+    if (!pre || pre.querySelector('.copy-btn')) return;
+
+    const copySvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
+    const okSvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+
+    const btn = document.createElement('button');
+    btn.className = 'copy-btn';
+    btn.setAttribute('aria-label', 'کپی کد');
+    btn.setAttribute('title', 'کپی کد');
+    btn.setAttribute('type', 'button');
+    btn.innerHTML = copySvg;
+    pre.appendChild(btn);
+
+    btn.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(block.textContent);
+        btn.classList.add('copied');
+        btn.innerHTML = okSvg;
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          btn.innerHTML = copySvg;
+        }, 1800);
+      } catch (err) {
+        console.error('Copy failed:', err);
+      }
+    });
+  });
+  </script> <script>
+  (() => {
+    const article = document.getElementById('chapterArticle');
+    if (!article) return;
+
+    const progressBar = document.getElementById('readingProgressBar');
+    if (progressBar) {
+      window.addEventListener('scroll', () => {
+        const docElem = document.documentElement;
+        const totalHeight = docElem.scrollHeight - docElem.clientHeight;
+        if (totalHeight > 0) {
+          const progress = (window.pageYOffset / totalHeight) * 100;
+          progressBar.style.width = Math.min(100, Math.max(0, progress)) + '%';
+        }
+      }, { passive: true });
+    }
+
+    const btt = document.getElementById('backToTopBtn');
+    if (btt) {
+      window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 250) {
+          btt.classList.add('visible');
+        } else {
+          btt.classList.remove('visible');
+        }
+      }, { passive: true });
+
+      btt.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+
+    article.querySelectorAll('img').forEach(img => {
+      if (!img.hasAttribute('loading')) img.loading = 'lazy';
+      if (!img.hasAttribute('decoding')) img.decoding = 'async';
+      const parent = img.parentElement;
+      if (parent && parent.tagName === 'P') {
+        parent.style.textAlign = 'center';
+      }
+
+      img.addEventListener('error', function() {
+        const src = this.getAttribute('src');
+        if (src && src.includes('assets/image/')) {
+          const parts = src.split('assets/image/');
+          const corrected = '/Gitab/books/book11/assets/image/' + parts[1];
+          if (this.src !== corrected) {
+            this.src = corrected;
+          }
+        }
+      });
+    });
+
+    article.querySelectorAll('p').forEach(p => {
+      const trimmed = p.innerText.trim();
+      if (trimmed.startsWith('💡') || trimmed.startsWith('نکته:')) {
+        p.classList.add('react-callout', 'callout-tip');
+      } else if (trimmed.startsWith('⚠️') || trimmed.startsWith('هشدار:')) {
+        p.classList.add('react-callout', 'callout-warning');
+      } else if (trimmed.startsWith('📌') || trimmed.startsWith('مهم:')) {
+        p.classList.add('react-callout', 'callout-important');
+      } else if (trimmed.startsWith('🔹') || trimmed.startsWith('🔸')) {
+        p.classList.add('react-callout', 'callout-note');
+      }
+    });
+  })();
+  </script> <script type="speculationrules">{"prefetch":[{"where":{"and":[{"href_matches":"/Gitab/*"},{"not":{"href_matches":"/Gitab/downloads/*"}},{"not":{"selector_matches":"[download], [target='_blank']"}}]},"eagerness":"moderate"}]}</script> <script>
+  (() => {
+    if (window.HTMLScriptElement && HTMLScriptElement.supports && HTMLScriptElement.supports('speculationrules')) return;
+    const seen = new Set([window.location.href]);
+    let count = 0;
+    const prefetchLink = (e) => {
+      if (count >= 12) return;
+      const a = e.target && e.target.closest ? e.target.closest('header a, .chapter-single-next-nav a, .syllabus-chapter-item a, .btn-hero-read, .btn-card-read') : null;
+      if (!a || !a.href || a.hasAttribute('download') || a.target === '_blank') return;
+      if (a.origin !== window.location.origin || a.pathname.includes('/downloads/')) return;
+      const clean = a.href.split('#')[0];
+      if (!clean || seen.has(clean)) return;
+      seen.add(clean);
+      count++;
+      const l = document.createElement('link');
+      l.rel = 'prefetch';
+      l.href = clean;
+      document.head.appendChild(l);
+    };
+    document.addEventListener('pointerenter', prefetchLink, { capture: true, passive: true });
+    document.addEventListener('touchstart', prefetchLink, { capture: true, passive: true });
+  })();
+  </script></body></html>

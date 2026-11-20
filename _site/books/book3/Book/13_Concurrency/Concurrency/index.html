@@ -1,338 +1,24 @@
-
-
-<!doctype html>
-<html lang="fa" dir="rtl">
-<head>
-  <meta charset="utf-8">
-  <link rel="icon" type="image/png" href="/Gitab/favicon.png">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>هم‌زمانی</title>
-  <meta name="description" content="ترجمه‌های فارسی کتاب‌های فنی — سریع، مینیمال و قابل اتکا.">
-
-  <!-- استایل‌ها -->
-  <link rel="stylesheet" href="/Gitab/styles/main.css">
-  <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
-
-  <style>
-  @font-face {
-    font-family: 'Vazir';
-    src: url('/Gitab/fonts/Vazir-FD-WOL.ttf') format('truetype');
-    font-display: swap;
-  }
-  @font-face {
-    font-family: "Lalezar";
-    src: url('fonts/Lalezar.ttf') format('truetype');
-    font-display: swap;
-}
-  body {
-    font-family: 'Vazir', sans-serif;
-  }
-  </style>
-</head>
-
-<body>
-  <!-- هدر مشترک -->
-  <header class="header">
-    <div class="container nav-wrap">
-      <a href="/Gitab/" class="brand">
-        <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="26" height="26">
-        <span>Gitab</span>
-      </a>
-
-       <nav class="nav">
-         <a href="/Gitab/" >خانه</a>
-         <a href="/Gitab/books/list-books" >کتاب‌ها</a>
-         <a href="/Gitab/giter.html" >دوره ها</a>
-          <!-- 
-         <a href="/Gitab/translator.html" >مترجمین</a>
-           -->
-       </nav>
-
-      <div class="nav-actions">
-        <button id="themeToggle" class="icon-btn theme-btn" data-icon="moon" aria-label="تغییر تم">
-          <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن">
-          <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک">
-        </button>
-
-        <a class="icon-btn" href="https://github.com/hheydarian/Gitab" target="_blank" title="GitHub">
-          <img src="/Gitab/icone/github.svg" alt="GitHub">
-        </a>
-
-        <!-- دکمه منو برای موبایل -->
-        <button class="menu-toggle" aria-label="منو">
-          <img src="/Gitab/icone/menu.svg" alt="menu">
-        </button>
-      </div>
-    </div>
-  </header>
-
-  
-  <main class="site-main book-page">
-    <h1>هم‌زمانی</h1>
-<p>اشیا انتزاعی از پردازش هستند. رشته‌ها انتزاعی از زمان‌بندی هستند.</p>
-<p><img src="../../../assets/image/13/img-13.1.png" alt="image"></p>
-<div dir="rtl">
-<p>نوشتن برنامه‌های همروند <strong>(Concurrent)</strong> تمیز بسیار سخت است — بسیار سخت. نوشتن کدی که در یک نخ <strong>(Thread)</strong> منفرد اجرا شود بسیار آسان‌تر است. همچنین نوشتن کد چندنخی <strong>(Multithreaded)</strong> که در ظاهر خوب به نظر برسد ولی در لایه‌های عمیق‌تر خراب باشد نیز آسان است. چنین کدی تا زمانی که سیستم تحت فشار قرار نگیرد، به درستی کار می‌کند.</p>
-<p>در این فصل، نیاز به برنامه‌نویسی هم‌روند و سختی‌های آن را بررسی می‌کنیم. سپس چندین توصیه برای مقابله با این سختی‌ها و نوشتن کد هم‌روند تمیز ارائه می‌دهیم. در پایان نیز به مسائل مربوط به تست کردن کد هم‌روند می‌پردازیم.</p>
-<p>هم‌روندی <strong>(Clean Concurrency)</strong> موضوعی پیچیده است که شایسته‌ی یک کتاب کامل می‌باشد. استراتژی ما در این کتاب این است که ابتدا نمای کلی‌ای از آن ارائه دهیم و سپس در فصل <code>«Concurrency II»</code> در صفحه ۳۱۷ آموزش دقیق‌تری ارائه کنیم.</p>
-<p>اگر صرفاً کنجکاو درباره‌ی هم‌روندی هستید، این فصل برای شما کفایت می‌کند. اما اگر نیاز دارید که هم‌روندی را در سطحی عمیق‌تر درک کنید، باید آموزش تکمیلی را نیز مطالعه نمایید.</p>
-<h2>چرا هم‌روندی (Concurrency)؟</h2>
-<p>هم‌روندی یک استراتژی جداسازی (<code>Decoupling</code>) است. این کار به ما کمک می‌کند آنچه انجام می‌شود (<code>what</code>) را از زمان انجام آن (<code>when</code>) جدا کنیم.</p>
-<p>در برنامه‌های تک‌نخی (<code>Single-threaded</code>)، what و when چنان به هم گره خورده‌اند که حالت کل برنامه اغلب با نگاه به backtrace استک قابل تعیین است. برنامه‌نویسی که چنین سیستمی را دیباگ می‌کند می‌تواند یک یا چند breakpoint تنظیم کند و با توجه به breakهایی که زده می‌شود، وضعیت سیستم را بفهمد.</p>
-<p>جداسازی what از when می‌تواند هم توان عملیاتی (throughput) و هم ساختارهای برنامه را به طرز چشمگیری بهبود بخشد. از دیدگاه ساختاری، برنامه شبیه چندین رایانه‌ی کوچک همکاری‌کننده خواهد شد، نه یک حلقه‌ی اصلی بزرگ. این موضوع می‌تواند سیستم را قابل‌فهم‌تر کند و فرصت‌هایی قدرتمند برای جداسازی دغدغه‌ها (<code>Separation of Concerns</code>) فراهم آورد.</p>
-<p>به عنوان مثال، مدل استاندارد &quot;<code>Servlet</code>&quot; در برنامه‌های وب را در نظر بگیرید. این سیستم‌ها زیر چتر یک <code>container</code> وب یا <code>EJB</code> اجرا می‌شوند که تا حدی مدیریت هم‌روندی را برای شما انجام می‌دهد.</p>
-<p>Servlet ها به صورت ناهمزمان (<code>Asynchronously</code>) و هر زمان که درخواست‌های وب وارد می‌شوند اجرا می‌شوند. برنامه‌نویس <code>servlet</code> لازم نیست تمام درخواست‌های ورودی را به طور مستقیم مدیریت کند. به طور نظری، اجرای هر servlet در دنیای کوچک خودش زندگی می‌کند و از اجرای سایر <code>servlet</code> ها جداست.</p>
-<p>البته اگر اینقدر ساده بود، این فصل ضرورتی نداشت! در حقیقت، میزان جداسازی که توسط وب‌کانتینرها فراهم می‌شود، بسیار کمتر از حد کامل است. برنامه‌نویسان <code>servlet</code> باید کاملاً آگاه و بسیار محتاط باشند تا از درستی برنامه‌های هم‌روند خود اطمینان حاصل کنند.<br>
-با این وجود، مزایای ساختاری مدل <code>servlet</code> قابل توجه است.</p>
-<p>اما ساختار تنها انگیزه‌ی پذیرش هم‌روندی نیست. برخی سیستم‌ها محدودیت‌های پاسخ‌دهی (<code>Response Time</code>) و توان عملیاتی (<code>Throughput</code>) دارند که نیازمند راهکارهای هم‌روند دست‌ساز هستند.<br>
-برای مثال، یک سیستم تک‌نخی برای جمع‌آوری اطلاعات از وب‌سایت‌های مختلف و ترکیب آن‌ها به یک خلاصه‌ی روزانه را در نظر بگیرید. چون این سیستم تک‌نخی است، هر سایت را به ترتیب می‌زند و هر کدام را کامل می‌کند قبل از اینکه به سراغ بعدی برود.<br>
-اجرای روزانه باید کمتر از ۲۴ ساعت طول بکشد. اما با اضافه شدن وب‌سایت‌های بیشتر، زمان اجرای کامل بیشتر شده و از ۲۴ ساعت فراتر می‌رود. بخش زیادی از این زمان صرف انتظار برای کامل شدن عملیات I/O در سوکت‌های وب می‌شود.<br>
-ما می‌توانیم با استفاده از یک الگوریتم چندنخی که همزمان به چند وب‌سایت مراجعه کند، عملکرد را بهبود بخشیم.</p>
-<p>یا سیستم دیگری را تصور کنید که در هر لحظه فقط یک کاربر را پردازش می‌کند و برای هر کاربر تنها به یک ثانیه زمان نیاز دارد. این سیستم برای تعداد کمی کاربر پاسخگوست، اما با افزایش تعداد کاربران، زمان پاسخگویی به شدت بالا می‌رود. هیچ کاربری دوست ندارد پشت صف ۱۵۰ نفره منتظر بماند!<br>
-ما می‌توانیم با پردازش هم‌زمان چندین کاربر، زمان پاسخ را بهبود دهیم.</p>
-<p>یا سیستمی را در نظر بگیرید که مجموعه داده‌های عظیمی را تفسیر می‌کند ولی فقط پس از پردازش کامل همه‌ی آن‌ها می‌تواند یک راه‌حل کامل ارائه دهد. شاید بتوان هر مجموعه داده را روی یک رایانه‌ی جداگانه پردازش کرد تا پردازش به صورت موازی انجام شود.</p>
-<h2>باورهای نادرست (Myths and Misconceptions)</h2>
-<p>دلایل قانع‌کننده‌ای برای پذیرش هم‌روندی وجود دارد. با این حال، همانطور که گفتیم، هم‌روندی دشوار است. اگر خیلی محتاط نباشید، می‌توانید موقعیت‌های بسیار بدی ایجاد کنید. در ادامه به برخی باورهای غلط رایج اشاره می‌کنیم:</p>
-<ul>
-<li>
-<p>هم‌روندی همیشه عملکرد را بهبود می‌بخشد.<br>
-هم‌روندی می‌تواند گاهی اوقات عملکرد را بهبود دهد، اما فقط زمانی که زمان‌های انتظار زیادی وجود داشته باشد که بتوان بین چند نخ یا چند پردازنده به اشتراک گذاشت. هیچ‌کدام از این شرایط ساده نیستند.</p>
-</li>
-<li>
-<p>طراحی هنگام نوشتن برنامه‌های هم‌روند تغییر نمی‌کند.<br>
-در واقع، طراحی یک الگوریتم هم‌روند می‌تواند به طرز چشمگیری با طراحی یک سیستم تک‌نخی متفاوت باشد. جداسازی what از when معمولاً تأثیر بزرگی روی ساختار سیستم می‌گذارد.</p>
-</li>
-<li>
-<p>در هنگام کار با یک container مانند وب‌کانتینر یا EJB container نیازی به درک مسائل هم‌روندی نیست.<br>
-در حقیقت، شما باید دقیقاً بدانید container شما چه کاری انجام می‌دهد و چطور باید در برابر مشکلات به‌روزرسانی هم‌زمان (Concurrent Update) و بن‌بست (Deadlock) که در ادامه این فصل توضیح داده شده، محافظت کنید.</p>
-</li>
-</ul>
-<p>و در نهایت چند نکته‌ی واقع‌بینانه درباره‌ی نوشتن نرم‌افزار هم‌روند:</p>
-<ul>
-<li>
-<p>هم‌روندی سرباری هم در عملکرد و هم در میزان کد اضافه‌شده ایجاد می‌کند.</p>
-</li>
-<li>
-<p>هم‌روندی صحیح حتی برای مسائل ساده نیز پیچیده است.</p>
-</li>
-<li>
-<p>اشکالات هم‌روندی معمولاً قابل تکرار نیستند، بنابراین اغلب به عنوان موارد استثنایی (One-off) نادیده گرفته می‌شوند، در حالی که در واقع نقص‌های واقعی هستند.</p>
-</li>
-<li>
-<p>هم‌روندی اغلب نیازمند تغییر اساسی در استراتژی طراحی است.</p>
-</li>
-</ul>
-<h2>چالش‌ها (Challenges)</h2>
-<p>چه چیزی برنامه‌نویسی هم‌روند را تا این اندازه دشوار می‌کند؟ برای درک بهتر، کلاس ساده‌ی زیر را در نظر بگیرید:</p>
-</div>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">X</span> {
+<!doctype html><html lang="fa" dir="rtl"> <head><script>
+    if (window.location.pathname.startsWith('/gitab/')) {
+      window.location.replace(window.location.pathname.replace(/^\/gitab\//i, '/Gitab/') + window.location.search + window.location.hash);
+    }
+    (() => {
+      try {
+        const t = localStorage.getItem('gitab-theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', t);
+        document.documentElement.dataset.colorMode = t;
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        document.documentElement.dataset.colorMode = 'dark';
+      }
+    })();
+  </script> <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5"> <title>هم‌زمانی</title><meta name="description" content="هم‌زمانی — مطالعه آنلاین و رایگان از کتاب «کد تمیز (عمو باب)» (Clean Code) اثر Robert C. Martin با ترجمه مجتبی افراز در گیتاب."> <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"><meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"> <meta name="theme-color" content="#090d16"><meta name="referrer" content="strict-origin-when-cross-origin"> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https:; frame-src https://www.youtube.com https://www.youtube-nocookie.com https://maps.google.com https://www.google.com; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self';"><link rel="icon" type="image/png" href="/Gitab/favicon.png"> <link rel="canonical" href="https://hheydarian.github.io/Gitab/books/book3/Book/13_Concurrency/Concurrency/"><link rel="alternate" hreflang="fa" href="https://hheydarian.github.io/Gitab/books/book3/Book/13_Concurrency/Concurrency/"> <link rel="alternate" hreflang="x-default" href="https://hheydarian.github.io/Gitab/books/book3/Book/13_Concurrency/Concurrency/"><link rel="alternate" type="text/plain" title="LLMs.txt" href="/Gitab/llms.txt"> <link rel="sitemap" type="application/xml" title="Sitemap" href="/Gitab/sitemap.xml"><meta property="og:locale" content="fa_IR"> <meta property="og:type" content="article"><meta property="og:site_name" content="گیتاب | Gitab"> <meta property="og:title" content="هم‌زمانی"><meta property="og:description" content="هم‌زمانی — مطالعه آنلاین و رایگان از کتاب «کد تمیز (عمو باب)» (Clean Code) اثر Robert C. Martin با ترجمه مجتبی افراز در گیتاب."> <meta property="og:url" content="https://hheydarian.github.io/Gitab/books/book3/Book/13_Concurrency/Concurrency/"><meta property="og:image" content="https://hheydarian.github.io/Gitab/images/clean-code/Cover.webp"> <meta property="og:image:alt" content="هم‌زمانی"><meta name="twitter:card" content="summary_large_image"> <meta name="twitter:title" content="هم‌زمانی"><meta name="twitter:description" content="هم‌زمانی — مطالعه آنلاین و رایگان از کتاب «کد تمیز (عمو باب)» (Clean Code) اثر Robert C. Martin با ترجمه مجتبی افراز در گیتاب."> <meta name="twitter:image" content="https://hheydarian.github.io/Gitab/images/clean-code/Cover.webp"><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://hheydarian.github.io/Gitab/#organization","name":"گیتاب | Gitab","alternateName":"Gitab","url":"https://hheydarian.github.io/Gitab/","logo":{"@type":"ImageObject","url":"https://hheydarian.github.io/Gitab/favicon.png"},"sameAs":["https://github.com/hheydarian/Gitab"]},{"@type":"WebSite","@id":"https://hheydarian.github.io/Gitab/#website","url":"https://hheydarian.github.io/Gitab/","name":"گیتاب | Gitab","inLanguage":"fa-IR","publisher":{"@id":"https://hheydarian.github.io/Gitab/#organization"},"potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://hheydarian.github.io/Gitab/books/list-books/?q={search_term_string}"},"query-input":"required name=search_term_string"}},{"@type":"WebPage","@id":"https://hheydarian.github.io/Gitab/books/book3/Book/13_Concurrency/Concurrency/#webpage","url":"https://hheydarian.github.io/Gitab/books/book3/Book/13_Concurrency/Concurrency/","name":"هم‌زمانی","description":"هم‌زمانی — مطالعه آنلاین و رایگان از کتاب «کد تمیز (عمو باب)» (Clean Code) اثر Robert C. Martin با ترجمه مجتبی افراز در گیتاب.","inLanguage":"fa-IR","isPartOf":{"@id":"https://hheydarian.github.io/Gitab/#website"}},{"@type":"TechArticle","headline":"هم‌زمانی","description":"هم‌زمانی — مطالعه آنلاین و رایگان از کتاب «کد تمیز (عمو باب)» (Clean Code) اثر Robert C. Martin با ترجمه مجتبی افراز در گیتاب.","url":"https://hheydarian.github.io/Gitab/books/book3/Book/13_Concurrency/Concurrency/","inLanguage":"fa-IR","isAccessibleForFree":true,"author":{"@type":"Person","name":"Robert C. Martin"},"translator":{"@type":"Person","name":"مجتبی افراز"},"isPartOf":{"@type":"Book","name":"کد تمیز (عمو باب)","alternateName":"Clean Code","url":"https://hheydarian.github.io/Gitab/books/book3/"}}]}</script> <link rel="preload" href="/Gitab/fonts/Vazirmatn.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/Gitab/styles/main.css?v=2.4" as="style"> <link rel="preload" href="/Gitab/styles/gitab-modern.css?v=2.5" as="style"><style>@font-face{font-family:'Lalezar';src:url('/Gitab/fonts/Lalezar.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}@font-face{font-family:'Vazirmatn';src:url('/Gitab/fonts/Vazirmatn.woff2') format('woff2');font-weight:100 900;font-style:normal;font-display:swap}html,body,button,input,optgroup,select,textarea,.filter-pill{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}input::placeholder,textarea::placeholder{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}</style> <link rel="stylesheet" href="/Gitab/styles/main.css?v=2.4"><link rel="stylesheet" href="/Gitab/styles/gitab-modern.css?v=2.5"> <link rel="stylesheet" href="/Gitab/styles/vendor/github-dark.min.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="/Gitab/styles/vendor/github-dark.min.css"></noscript></head> <body><header class="header"> <div class="container nav-wrap"><a href="/Gitab/" class="brand" aria-label="صفحه اصلی گیتاب"> <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="30" height="30" decoding="async"> <span class="brand-text">Gitab</span> </a> <nav class="nav" id="mainNav"><a href="/Gitab/" >خانه</a> <a href="/Gitab/books/list-books" aria-current="page">کتاب‌ها</a> <a href="/Gitab/courses/" >دوره‌ها</a> <a href="/Gitab/translator.html" >مترجمین</a></nav> <div class="nav-actions"><button id="themeToggle" class="theme-toggle-btn" aria-label="تغییر تم" title="تغییر تم"> <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن" width="18" height="18" decoding="async" style="display:none"> <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک" width="18" height="18" decoding="async"> </button> <a class="btn-github-pill" href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" title="مشاهده سورس گیتاب در گیت‌هاب"> <img src="/Gitab/icone/github.svg" alt="GitHub" width="16" height="16" decoding="async"> <span>گیت‌هاب</span> </a> <button class="mobile-menu-btn" id="mobileMenuBtn" type="button" aria-label="باز کردن منو" aria-expanded="false"> <svg class="mob-icon-open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="4" y1="7" x2="20" y2="7"></line> <line x1="4" y1="12" x2="20" y2="12"></line> <line x1="4" y1="17" x2="14" y2="17"></line> </svg> <svg class="mob-icon-close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="18" y1="6" x2="6" y2="18"></line> <line x1="6" y1="6" x2="18" y2="18"></line> </svg> </button></div> </div><div class="mobile-drawer" id="mobileDrawer" aria-hidden="true"> <div class="mobile-drawer-inner"><div class="mobile-drawer-section-label">ناوبری سریع</div><nav class="mobile-drawer-links" aria-label="منوی موبایل"> <a href="/Gitab/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M3 10.5 12 3l9 7.5"></path> <path d="M5 9.5V20a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V9.5"></path> </svg> </span> <span class="mob-nav-text">صفحه نخست</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/books/list-books" class="mobile-drawer-link active" aria-current="page"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path> </svg> </span> <span class="mob-nav-text">کتابخانه و فهرست کتاب‌ها</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/courses/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path> <path d="M6 12v5c3 3 9 3 12 0v-5"></path> </svg> </span> <span class="mob-nav-text">دوره‌های آموزشی</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/translator.html" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path> <circle cx="9" cy="7" r="4"></circle> <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path> <path d="M16 3.13a4 4 0 0 1 0 7.75"></path> </svg> </span> <span class="mob-nav-text">مترجمین و همکاران</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> </nav><div class="mobile-drawer-divider"></div><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" class="mobile-drawer-link mobile-drawer-gh"> <span class="mob-nav-icon" aria-hidden="true"> <img src="/Gitab/icone/github.svg" alt="" width="17" height="17" loading="lazy" decoding="async"> </span> <span class="mob-nav-text">مخزن گیت‌هاب پروژه</span> <span class="mob-nav-ext" aria-hidden="true">↗</span> </a> </div></div> </header><div class="reading-progress-track"> <div class="reading-progress-fill" id="readingProgressBar"></div></div> <main class="site-main chapter-reading-page"><div class="chapter-page-wrapper"> <nav class="chapter-clean-breadcrumb" aria-label="مسیر راهنما" dir="rtl"><a href="/Gitab/">خانه</a> <span class="bc-sep" aria-hidden="true">/</span> <a href="/Gitab/books/list-books/">کتاب‌ها</a> <span class="bc-sep" aria-hidden="true">/</span> <a href="/Gitab/books/book3/"><bdi>کد تمیز</bdi></a> <span class="bc-sep" aria-hidden="true">/</span> <span class="bc-current-leaf"><bdi>هم‌زمانی</bdi></span></nav> <article class="chapter-prose-container markdown-body" id="chapterArticle" dir="rtl"><h1>هم‌زمانی</h1><p>اشیا انتزاعی از پردازش هستند. رشته‌ها انتزاعی از زمان‌بندی هستند.</p><p><img src="../../../assets/image/13/img-13.1.png" alt="image" loading="lazy" decoding="async"></p><div dir="rtl"> <p>نوشتن برنامه‌های همروند <strong>(Concurrent)</strong> تمیز بسیار سخت است — بسیار سخت. نوشتن کدی که در یک نخ <strong>(Thread)</strong> منفرد اجرا شود بسیار آسان‌تر است. همچنین نوشتن کد چندنخی <strong>(Multithreaded)</strong> که در ظاهر خوب به نظر برسد ولی در لایه‌های عمیق‌تر خراب باشد نیز آسان است. چنین کدی تا زمانی که سیستم تحت فشار قرار نگیرد، به درستی کار می‌کند.</p><p>در این فصل، نیاز به برنامه‌نویسی هم‌روند و سختی‌های آن را بررسی می‌کنیم. سپس چندین توصیه برای مقابله با این سختی‌ها و نوشتن کد هم‌روند تمیز ارائه می‌دهیم. در پایان نیز به مسائل مربوط به تست کردن کد هم‌روند می‌پردازیم.</p><p>هم‌روندی <strong>(Clean Concurrency)</strong> موضوعی پیچیده است که شایسته‌ی یک کتاب کامل می‌باشد. استراتژی ما در این کتاب این است که ابتدا نمای کلی‌ای از آن ارائه دهیم و سپس در فصل <code>«Concurrency II»</code> در صفحه ۳۱۷ آموزش دقیق‌تری ارائه کنیم.</p><p>اگر صرفاً کنجکاو درباره‌ی هم‌روندی هستید، این فصل برای شما کفایت می‌کند. اما اگر نیاز دارید که هم‌روندی را در سطحی عمیق‌تر درک کنید، باید آموزش تکمیلی را نیز مطالعه نمایید.</p><h2>چرا هم‌روندی (Concurrency)؟</h2><p>هم‌روندی یک استراتژی جداسازی (<code>Decoupling</code>) است. این کار به ما کمک می‌کند آنچه انجام می‌شود (<code>what</code>) را از زمان انجام آن (<code>when</code>) جدا کنیم.</p><p>در برنامه‌های تک‌نخی (<code>Single-threaded</code>)، what و when چنان به هم گره خورده‌اند که حالت کل برنامه اغلب با نگاه به backtrace استک قابل تعیین است. برنامه‌نویسی که چنین سیستمی را دیباگ می‌کند می‌تواند یک یا چند breakpoint تنظیم کند و با توجه به breakهایی که زده می‌شود، وضعیت سیستم را بفهمد.</p><p>جداسازی what از when می‌تواند هم توان عملیاتی (throughput) و هم ساختارهای برنامه را به طرز چشمگیری بهبود بخشد. از دیدگاه ساختاری، برنامه شبیه چندین رایانه‌ی کوچک همکاری‌کننده خواهد شد، نه یک حلقه‌ی اصلی بزرگ. این موضوع می‌تواند سیستم را قابل‌فهم‌تر کند و فرصت‌هایی قدرتمند برای جداسازی دغدغه‌ها (<code>Separation of Concerns</code>) فراهم آورد.</p><p>به عنوان مثال، مدل استاندارد &quot;<code>Servlet</code>&quot; در برنامه‌های وب را در نظر بگیرید. این سیستم‌ها زیر چتر یک <code>container</code> وب یا <code>EJB</code> اجرا می‌شوند که تا حدی مدیریت هم‌روندی را برای شما انجام می‌دهد.</p><p>Servlet ها به صورت ناهمزمان (<code>Asynchronously</code>) و هر زمان که درخواست‌های وب وارد می‌شوند اجرا می‌شوند. برنامه‌نویس <code>servlet</code> لازم نیست تمام درخواست‌های ورودی را به طور مستقیم مدیریت کند. به طور نظری، اجرای هر servlet در دنیای کوچک خودش زندگی می‌کند و از اجرای سایر <code>servlet</code> ها جداست.</p><p>البته اگر اینقدر ساده بود، این فصل ضرورتی نداشت! در حقیقت، میزان جداسازی که توسط وب‌کانتینرها فراهم می‌شود، بسیار کمتر از حد کامل است. برنامه‌نویسان <code>servlet</code> باید کاملاً آگاه و بسیار محتاط باشند تا از درستی برنامه‌های هم‌روند خود اطمینان حاصل کنند.<br> با این وجود، مزایای ساختاری مدل <code>servlet</code> قابل توجه است.</p><p>اما ساختار تنها انگیزه‌ی پذیرش هم‌روندی نیست. برخی سیستم‌ها محدودیت‌های پاسخ‌دهی (<code>Response Time</code>) و توان عملیاتی (<code>Throughput</code>) دارند که نیازمند راهکارهای هم‌روند دست‌ساز هستند.<br> برای مثال، یک سیستم تک‌نخی برای جمع‌آوری اطلاعات از وب‌سایت‌های مختلف و ترکیب آن‌ها به یک خلاصه‌ی روزانه را در نظر بگیرید. چون این سیستم تک‌نخی است، هر سایت را به ترتیب می‌زند و هر کدام را کامل می‌کند قبل از اینکه به سراغ بعدی برود.<br> اجرای روزانه باید کمتر از ۲۴ ساعت طول بکشد. اما با اضافه شدن وب‌سایت‌های بیشتر، زمان اجرای کامل بیشتر شده و از ۲۴ ساعت فراتر می‌رود. بخش زیادی از این زمان صرف انتظار برای کامل شدن عملیات I/O در سوکت‌های وب می‌شود.<br> ما می‌توانیم با استفاده از یک الگوریتم چندنخی که همزمان به چند وب‌سایت مراجعه کند، عملکرد را بهبود بخشیم.</p><p>یا سیستم دیگری را تصور کنید که در هر لحظه فقط یک کاربر را پردازش می‌کند و برای هر کاربر تنها به یک ثانیه زمان نیاز دارد. این سیستم برای تعداد کمی کاربر پاسخگوست، اما با افزایش تعداد کاربران، زمان پاسخگویی به شدت بالا می‌رود. هیچ کاربری دوست ندارد پشت صف ۱۵۰ نفره منتظر بماند!<br> ما می‌توانیم با پردازش هم‌زمان چندین کاربر، زمان پاسخ را بهبود دهیم.</p><p>یا سیستمی را در نظر بگیرید که مجموعه داده‌های عظیمی را تفسیر می‌کند ولی فقط پس از پردازش کامل همه‌ی آن‌ها می‌تواند یک راه‌حل کامل ارائه دهد. شاید بتوان هر مجموعه داده را روی یک رایانه‌ی جداگانه پردازش کرد تا پردازش به صورت موازی انجام شود.</p><h2>باورهای نادرست (Myths and Misconceptions)</h2><p>دلایل قانع‌کننده‌ای برای پذیرش هم‌روندی وجود دارد. با این حال، همانطور که گفتیم، هم‌روندی دشوار است. اگر خیلی محتاط نباشید، می‌توانید موقعیت‌های بسیار بدی ایجاد کنید. در ادامه به برخی باورهای غلط رایج اشاره می‌کنیم:</p><ul> <li><p>هم‌روندی همیشه عملکرد را بهبود می‌بخشد.<br> هم‌روندی می‌تواند گاهی اوقات عملکرد را بهبود دهد، اما فقط زمانی که زمان‌های انتظار زیادی وجود داشته باشد که بتوان بین چند نخ یا چند پردازنده به اشتراک گذاشت. هیچ‌کدام از این شرایط ساده نیستند.</p></li> <li><p>طراحی هنگام نوشتن برنامه‌های هم‌روند تغییر نمی‌کند.<br> در واقع، طراحی یک الگوریتم هم‌روند می‌تواند به طرز چشمگیری با طراحی یک سیستم تک‌نخی متفاوت باشد. جداسازی what از when معمولاً تأثیر بزرگی روی ساختار سیستم می‌گذارد.</p></li> <li><p>در هنگام کار با یک container مانند وب‌کانتینر یا EJB container نیازی به درک مسائل هم‌روندی نیست.<br> در حقیقت، شما باید دقیقاً بدانید container شما چه کاری انجام می‌دهد و چطور باید در برابر مشکلات به‌روزرسانی هم‌زمان (Concurrent Update) و بن‌بست (Deadlock) که در ادامه این فصل توضیح داده شده، محافظت کنید.</p></li> </ul><p>و در نهایت چند نکته‌ی واقع‌بینانه درباره‌ی نوشتن نرم‌افزار هم‌روند:</p><ul> <li><p>هم‌روندی سرباری هم در عملکرد و هم در میزان کد اضافه‌شده ایجاد می‌کند.</p></li> <li><p>هم‌روندی صحیح حتی برای مسائل ساده نیز پیچیده است.</p></li> <li><p>اشکالات هم‌روندی معمولاً قابل تکرار نیستند، بنابراین اغلب به عنوان موارد استثنایی (One-off) نادیده گرفته می‌شوند، در حالی که در واقع نقص‌های واقعی هستند.</p></li> <li><p>هم‌روندی اغلب نیازمند تغییر اساسی در استراتژی طراحی است.</p></li> </ul><h2>چالش‌ها (Challenges)</h2><p>چه چیزی برنامه‌نویسی هم‌روند را تا این اندازه دشوار می‌کند؟ برای درک بهتر، کلاس ساده‌ی زیر را در نظر بگیرید:</p></div> <pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">X</span> {
     <span class="hljs-keyword">private</span> <span class="hljs-type">int</span> lastIdUsed;
     <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">getNextId</span><span class="hljs-params">()</span> {
         <span class="hljs-keyword">return</span> ++lastIdUsed;
     }
 }
-</code></pre>
-<div dir="rtl">
-<p>فرض کنیم یک نمونه از کلاس X می‌سازیم، مقدار فیلد <code>lastIdUsed</code> را روی ۴۲ تنظیم می‌کنیم، و سپس این نمونه را بین دو نخ (Thread) به اشتراک می‌گذاریم. حال فرض کنید هر دو نخ متد <code>getNextId()</code> را فراخوانی می‌کنند؛ در این حالت سه نتیجه‌ی ممکن وجود دارد:</p>
-<ul>
-<li>نخ اول مقدار ۴۳ را دریافت می‌کند، نخ دوم مقدار ۴۴ را دریافت می‌کند، و <code>lastIdUsed</code> برابر ۴۴ می‌شود.</li>
-<li>نخ اول مقدار ۴۴ را دریافت می‌کند، نخ دوم مقدار ۴۳ را دریافت می‌کند، و <code>lastIdUsed</code> برابر ۴۴ می‌شود.</li>
-<li>نخ اول مقدار ۴۳ را دریافت می‌کند، نخ دوم نیز مقدار ۴۳ را دریافت می‌کند، و <code>lastIdUsed</code> برابر ۴۳ می‌شود.</li>
-</ul>
-<p>نتیجه‌ی سوم که تعجب‌برانگیز است زمانی اتفاق می‌افتد که دو نخ همزمان بر روی یکدیگر تأثیر می‌گذارند. این اتفاق به این دلیل رخ می‌دهد که مسیرهای متعددی وجود دارند که دو نخ می‌توانند از طریق آن‌ها از همان خط کد جاوا عبور کنند و بعضی از این مسیرها نتایج نادرستی ایجاد می‌کنند. چند مسیر ممکن وجود دارد؟ برای پاسخ واقعی به این سوال باید بدانیم کامپایلر JIT چه کار می‌کند و مدل حافظه‌ی جاوا چه چیزی را عملیات اتمیک (atomic) در نظر می‌گیرد.</p>
-<p>پاسخ سریع، با بررسی فقط بایت‌کد تولید شده این است که ۱۲٬۸۷۰ مسیر اجرایی متفاوت برای این دو نخ در متد <code>getNextId</code> وجود دارد. اگر نوع <code>lastIdUsed</code> از int به <code>long</code> تغییر کند، تعداد مسیرهای ممکن به ۲٬۷۰۴٬۱۵۶ می‌رسد. البته بیشتر این مسیرها نتایج صحیحی تولید می‌کنند. مشکل اینجاست که برخی از آن‌ها اینطور نیستند.</p>
-<h2>اصول دفاع در برابر مشکلات همزمانی</h2>
-<p>در ادامه مجموعه‌ای از اصول و تکنیک‌ها برای دفاع از سیستم‌های خود در برابر مشکلات ناشی از کدنویسی همزمان ارائه شده است.</p>
-<h3>اصل مسئولیت واحد (SRP)</h3>
-<p>اصل SRP بیان می‌کند که یک متد/کلاس/کامپوننت باید فقط یک دلیل برای تغییر داشته باشد. طراحی همزمانی به حد کافی پیچیده است که خود به تنهایی یک دلیل برای تغییر باشد و بنابراین باید از بقیه‌ی کد جدا شود. متأسفانه، معمولاً جزئیات پیاده‌سازی همزمانی مستقیماً وارد کد تولیدی می‌شوند.</p>
-<p>مواردی که باید مد نظر قرار دهید:</p>
-<ul>
-<li>کدهای مربوط به همزمانی چرخه‌ی توسعه، تغییر و بهینه‌سازی مخصوص به خود دارند.</li>
-<li>این کدها چالش‌های خاص خود را دارند که اغلب سخت‌تر از کدهای غیرهمزمانی است.</li>
-<li>تعداد راه‌های ممکن برای شکست کدهای همزمانی اشتباه نوشته شده، بسیار زیاد است.</li>
-</ul>
-<p><strong>توصیه: کدهای مربوط به همزمانی را از دیگر کدها جدا نگه دارید.</strong></p>
-<h3>قاعده: محدود کردن دامنه‌ی داده‌ها</h3>
-<p>همانطور که دیدیم، زمانی که دو نخ یک فیلد مشترک را تغییر می‌دهند، می‌توانند باعث بروز رفتار غیرمنتظره شوند. یکی از راهکارها استفاده از کلمه کلیدی synchronized برای محافظت از بخش بحرانی کدی است که از شیء مشترک استفاده می‌کند.</p>
-<p>هرچه تعداد این بخش‌های بحرانی بیشتر باشد:</p>
-<ul>
-<li>احتمال فراموش کردن محافظت از یکی از این بخش‌ها بیشتر می‌شود.</li>
-<li>دوباره‌کاری برای محافظت از همه‌ی بخش‌ها افزایش می‌یابد (نقض اصل DRY).</li>
-<li>پیدا کردن منبع خطا سخت‌تر می‌شود.</li>
-</ul>
-<p><strong>توصیه: اصل کپسوله‌سازی داده را رعایت کنید؛ دسترسی به داده‌های مشترک را به شدت محدود کنید.</strong></p>
-<h3>قاعده: استفاده از کپی داده‌ها</h3>
-<p>راهکار خوب دیگر این است که داده‌ها را اصلاً به اشتراک نگذارید. در برخی موارد می‌توان اشیا را کپی کرد و فقط به صورت فقط‌خواندنی با آن‌ها کار کرد. یا می‌توان نتایج را از چند نخ جمع‌آوری کرد و سپس در یک نخ ادغام نمود.</p>
-<p>نگران هزینه‌ی ایجاد اشیای اضافه نباشید؛ اگر این کار باعث حذف قفل‌ها شود، صرفه‌جویی در زمان به مراتب ارزشمندتر خواهد بود.</p>
-<h3>توصیه: تا حد امکان از به اشتراک‌گذاری داده‌ها اجتناب کنید</h3>
-<p>قاعده: نخ‌ها باید تا حد ممکن مستقل باشند<br>
-کدی بنویسید که هر نخ داده‌های مورد نیاز خود را از یک منبع غیرمشترک دریافت کند و فقط از متغیرهای محلی استفاده نماید. این کار باعث می‌شود نخ‌ها گویی تنها نخ سیستم هستند و نیاز به همگام‌سازی نداشته باشند.</p>
-<p>مثال: در کلاس‌هایی که از <code>HttpServlet</code> ارث‌بری می‌کنند، تمام داده‌ها از طریق پارامترهای <code>doGet</code> و <code>doPost</code> وارد می‌شوند.</p>
-<p><strong>توصیه: داده‌ها را طوری تقسیم کنید که نخ‌ها بتوانند به صورت مستقل روی بخش‌های مختلف کار کنند.</strong></p>
-<h3>کتابخانه‌های استاندارد را بشناسید</h3>
-<p>جاوا ۵ امکانات زیادی برای توسعه‌ی همزمانی نسبت به نسخه‌های قبلی فراهم کرده است. نکاتی که باید در نظر داشته باشید:</p>
-<ul>
-<li>از مجموعه‌های داده‌ی نخ-ایمن استفاده کنید.</li>
-<li>از چارچوب Executor برای اجرای وظایف مستقل استفاده کنید.</li>
-<li>از راهکارهای غیرمسدودکننده استفاده کنید.</li>
-<li>برخی کلاس‌های کتابخانه‌ای نخ-ایمن نیستند.</li>
-</ul>
-<h3>کالکشن‌های Thread-Safe (ایمن در برابر چندنخی بودن)</h3>
-<p>در دوران اولیه‌ی جاوا، داگ لیا (Doug Lea) کتاب مهمی با عنوان Concurrent Programming in Java نوشت.<br>
-به همراه این کتاب، او چند کالکشن thread-safe توسعه داد که بعدها به بخشی از بسته‌ی <code>java.util.concurrent</code> در JDK تبدیل شدند.</p>
-<p>کالکشن‌های موجود در این بسته برای استفاده در موقعیت‌های چندنخی ایمن هستند و عملکرد خوبی نیز دارند.<br>
-در واقع، پیاده‌سازی <code>ConcurrentHashMap</code> در اغلب موارد عملکرد بهتری نسبت به <code>HashMap</code> دارد.<br>
-این کلاس امکان خواندن و نوشتن هم‌زمان را فراهم می‌کند و دارای متدهایی برای انجام عملیات ترکیبی رایج است که در حالت عادی thread-safe نیستند.</p>
-<p>اگر محیط اجرایی شما Java 5 یا بالاتر است، کار خود را با <code>ConcurrentHashMap</code> آغاز کنید.</p>
-<p>چندین کلاس دیگر نیز برای پشتیبانی از طراحی‌های پیشرفته‌ی هم‌زمانی (concurrency) به این بسته افزوده شده‌اند. در ادامه چند نمونه از آن‌ها آمده است:</p>
-<table>
-<thead>
-<tr>
-<th>کلاس</th>
-<th>توضیح</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>ReentrantLock</code></td>
-<td>یک قفل که می‌تواند در یک متد گرفته شود و در متدی دیگر آزاد گردد.</td>
-</tr>
-<tr>
-<td><code>Semaphore</code></td>
-<td>پیاده‌سازی‌ای از سمفور کلاسیک؛ قفلی با شمارنده.</td>
-</tr>
-<tr>
-<td><code>CountDownLatch</code></td>
-<td>قفلی که منتظر وقوع چند رویداد می‌ماند تا همه‌ی نخ‌هایی که منتظر آن هستند را آزاد کند. این کار به نخ‌ها فرصت برابر برای شروع تقریباً همزمان می‌دهد.</td>
-</tr>
-</tbody>
-</table>
-<p><strong>توصیه: کلاس‌هایی که در دسترست هستند را بررسی کن. اگر با زبان Java کار می‌کنی، با بسته‌های <code>java.util.concurrent</code>، <code>java.util.concurrent.atomic</code> و <code>java.util.concurrent.locks</code> آشنا شو.</strong></p>
-<h2>مدل‌های اجرایی خود را بشناسید</h2>
-<p>راه‌های مختلفی برای تقسیم رفتار در یک برنامه‌ی هم‌روند (concurrent) وجود دارد.<br>
-برای صحبت درباره‌ی آن‌ها، باید چند تعریف پایه‌ای را بشناسیم.</p>
-<table>
-<thead>
-<tr>
-<th>مفهوم</th>
-<th>توضیح</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>منابع محدود</strong></td>
-<td>منابعی با اندازه ثابت یا تعداد ثابت که در یک محیط همزمان استفاده می‌شوند، مانند اتصالات پایگاه داده و بافرهای خواندن/نوشتن.</td>
-</tr>
-<tr>
-<td><strong>حذف متقابل</strong></td>
-<td>فقط یک رشته می‌تواند در یک زمان به داده‌های مشترک یا منبع مشترک دسترسی داشته باشد.</td>
-</tr>
-<tr>
-<td><strong>گرسنگی</strong></td>
-<td>یک رشته یا گروهی از رشته‌ها از پیشرفت برای مدت زمان طولانی یا برای همیشه منع می‌شوند، مانند جلوگیری از اجرای رشته‌های کندتر توسط رشته‌های سریع‌تر.</td>
-</tr>
-<tr>
-<td><strong>بن‌بست</strong></td>
-<td>دو یا چند رشته منتظر پایان یکدیگر هستند؛ هر رشته دارای منبعی است که رشته دیگر نیاز دارد، و هیچ‌کدام نمی‌توانند بدون دریافت منبع دیگر به پایان برسند.</td>
-</tr>
-<tr>
-<td><strong>قفل زنده</strong></td>
-<td>رشته‌ها در هماهنگی تلاش می‌کنند که کار انجام دهند اما دیگری مانع راه است؛ به دلیل تشدید، رشته‌ها همچنان سعی می‌کنند پیشرفت کنند اما قادر به انجام آن نیستند.</td>
-</tr>
-</tbody>
-</table>
-<p>راه‌های مختلفی برای تقسیم رفتار در یک برنامه‌ی هم‌روند (concurrent) وجود دارد. برای اینکه بتوانیم درباره آن‌ها صحبت کنیم، ابتدا باید چند تعریف پایه را بدانیم.</p>
-<h2>مدل تولیدکننده-مصرف‌کننده</h2>
-<p>در این مدل، یک یا چند نخ (thread) تولیدکننده کاری را انجام می‌دهند و نتیجه آن را داخل یک صف یا بافر قرار می‌دهند. سپس یک یا چند نخ مصرف‌کننده آن کارها را از صف می‌گیرند و ادامه می‌دهند.</p>
-<p>این صف یک منبع محدود است؛ یعنی اگر صف پر باشد، تولیدکننده باید منتظر بماند و اگر صف خالی باشد، مصرف‌کننده باید صبر کند. هماهنگی بین تولیدکننده‌ها و مصرف‌کننده‌ها از طریق این صف انجام می‌شود: تولیدکننده‌ها بعد از قرار دادن کار در صف، اطلاع می‌دهند که صف خالی نیست و مصرف‌کننده‌ها بعد از برداشتن کار، اطلاع می‌دهند که صف پر نیست.</p>
-<h2>مدل خواننده-نویسنده</h2>
-<p>وقتی منبعی وجود دارد که اغلب برای خواندن استفاده می‌شود ولی گاهی هم نیاز به نوشتن دارد، باید بین عملکرد و هماهنگی دقت زیادی داشت. اگر به خواندن زیاد اولویت بدهیم، ممکن است نویسنده‌ها مدت زیادی منتظر بمانند. اگر به نوشتن اولویت دهیم، ممکن است عملکرد کلی کاهش یابد. باید بین این دو توازن برقرار شود تا هم عملکرد خوب باشد و هم خطا ایجاد نشود.</p>
-<h2>مسئله‌ی فیلسوفان شام‌خور</h2>
-<p>چند فیلسوف دور یک میز نشسته‌اند و بین هر دو فیلسوف یک چنگال قرار دارد. هر فیلسوف وقتی گرسنه می‌شود، باید هر دو چنگال کناری خود را بردارد تا غذا بخورد. اگر چنگالی در اختیار فیلسوف کناری باشد، باید منتظر بماند.</p>
-<p>اگر فیلسوف‌ها را نخ‌ها (threads) و چنگال‌ها را منابع در نظر بگیریم، این وضعیت شبیه به سیستم‌هایی است که منابع را بین چند فرآیند تقسیم می‌کنند. اگر مراقب نباشیم، این نوع طراحی می‌تواند باعث بن‌بست (deadlock)، قفل زنده (livelock) یا کاهش عملکرد شود.</p>
-<p><strong>توصیه: این الگوریتم‌های پایه را یاد بگیرید و راه‌حل‌های آن‌ها را تمرین کنید تا وقتی با مسائل هم‌روندی روبرو شدید، آمادگی داشته باشید.</strong></p>
-<h2>مراقب وابستگی بین متدهای synchronized باشید</h2>
-<p>در جاوا، استفاده از کلمه‌ی کلیدی synchronized باعث می‌شود فقط یک نخ بتواند وارد یک بخش از کد شود. اما اگر چند متد synchronized روی یک شیء مشترک داشته باشید، ممکن است باگ‌های پیچیده‌ای ایجاد شود.</p>
-<p><strong>توصیه: سعی کنید بیش از یک متد روی یک شیء مشترک استفاده نکنید.</strong><br>
-اگر مجبور شدید، یکی از این سه روش را استفاده کنید:</p>
-<ul>
-<li><strong>قفل‌گذاری در سمت مشتری</strong>: قبل از استفاده از متدها، مشتری قفل را بگیرد و تا پایان کار نگه دارد.</li>
-<li><strong>قفل‌گذاری در سمت سرور</strong>: یک متد جدید در سرور ایجاد کنید که قفل را بگیرد، همه متدها را صدا بزند و سپس قفل را آزاد کند.</li>
-<li><strong>سرور واسطه</strong>: یک کلاس واسط ایجاد کنید که قفل‌گذاری را انجام دهد.</li>
-</ul>
-<h2>بخش‌های synchronized را کوچک نگه دارید</h2>
-<p>قفل‌ها باعث کندی سیستم می‌شوند، چون فقط یک نخ در هر لحظه می‌تواند وارد بخش قفل‌شده شود. اگر بخش زیادی از کد را <code>synchronized</code> کنید، رقابت بین نخ‌ها بیشتر شده و عملکرد کاهش می‌یابد.</p>
-<p>توصیه: بخش‌های قفل‌شده (critical section) را تا حد ممکن کوچک نگه دارید.</p>
-<h2>نوشتن کدی که درست خاموش شود، سخت است</h2>
-<p>نوشتن سیستمی که همیشه روشن بماند با سیستمی که باید به‌درستی خاموش شود فرق دارد. خاموش‌کردن درست سیستم ممکن است باعث بن‌بست شود.</p>
-<p>مثلاً تصور کنید یک نخ والد چند نخ فرزند ایجاد می‌کند و منتظر می‌ماند همه آن‌ها تمام شوند. اگر یکی از نخ‌های فرزند در بن‌بست گیر کند، نخ والد هم هیچ‌وقت تمام نمی‌شود.</p>
-<p>یا اگر والد به فرزندها بگوید کار را رها کنند و تمام شوند، اما یکی از فرزندها منتظر داده‌ای از دیگری باشد که دیگر تولید نمی‌شود، آن نخ گیر می‌افتد و باعث می‌شود سیستم کامل بسته نشود.</p>
-<p><strong>توصیه: از همان ابتدا به خاموش‌سازی فکر کنید و زودتر آن را پیاده‌سازی کنید. این کار از چیزی که فکر می‌کنید سخت‌تر است.</strong></p>
-<h2>آزمایش کدهای هم‌روند (Threaded)</h2>
-<p>اثبات درستی کامل یک کد تقریباً غیرممکن است. آزمایش هم تضمینی برای درستی نمی‌دهد، اما آزمایش خوب می‌تواند ریسک را کاهش دهد. این موضوع در مورد برنامه‌های تک‌نخی هم صدق می‌کند، اما به‌محض اینکه دو یا چند نخ به‌طور همزمان روی یک کد یا داده‌ی مشترک کار کنند، پیچیدگی‌ها به‌طور چشم‌گیری افزایش می‌یابد.</p>
-<p><strong>توصیه: تست‌هایی بنویس که امکان آشکار کردن مشکلات را داشته باشند و آن‌ها را مرتباً با پیکربندی‌های مختلف برنامه، سیستم و میزان بار مختلف اجرا کن.</strong></p>
-<ul>
-<li>اگر حتی یک‌بار تستی شکست خورد، علت را پیدا کن.</li>
-<li>شکست را فقط به این خاطر که در اجرای بعدی تست موفق شده، نادیده نگیر.</li>
-<li>کد چندنخی خود را قابل اتصال (pluggable) طراحی کنید.</li>
-<li>کد چندنخی خود را قابل تنظیم (tunable) طراحی کنید.</li>
-<li>برنامه را با تعداد نخ‌هایی بیشتر از تعداد پردازنده‌ها اجرا کنید.</li>
-<li>برنامه را روی پلتفرم‌های مختلف اجرا کنید.</li>
-<li>کد خود را ابزارگذاری (instrument) کنید تا خطاها را به‌صورت اجباری ایجاد نمایید.</li>
-</ul>
-<h3>شکست‌های پراکنده را به‌عنوان نشانه‌هایی از مشکلات چندنخی در نظر بگیرید</h3>
-<p>کد چندنخی باعث شکست‌هایی می‌شود که &quot;اساساً نباید شکست بخورند.&quot;<br>
-بیشتر توسعه‌دهندگان (از جمله نویسندگان این متن) درک شهودی درستی از نحوه‌ی تعامل نخ‌ها با سایر بخش‌های کد ندارند.<br>
-باگ‌های موجود در کد چندنخی ممکن است تنها یک‌بار در هزار یا حتی یک میلیون اجرای برنامه بروز کنند.<br>
-تلاش برای تکرار این شرایط می‌تواند بسیار آزاردهنده باشد. این موضوع معمولاً باعث می‌شود که توسعه‌دهندگان این شکست‌ها را به عواملی مانند پرتوهای کیهانی، اشکالات سخت‌افزاری یا سایر خطاهای غیرقابل تکرار نسبت دهند.<br>
-اما بهترین کار این است که فرض کنید خطاهای &quot;یک‌باره&quot; اصلاً وجود ندارند. هرچه این خطاهای نادر بیشتر نادیده گرفته شوند، کد بیشتری ممکن است بر پایه‌ی یک روش معیوب ساخته شود.</p>
-<p><strong>توصیه: شکست‌های سیستمی را به‌عنوان خطاهای یک‌باره نادیده نگیرید.</strong></p>
-<h3>ابتدا از عملکرد صحیح کد غیرچندنخی مطمئن شوید</h3>
-<p>شاید بدیهی به نظر برسد، اما تأکید بر آن ضرری ندارد.<br>
-اطمینان حاصل کنید که کد، خارج از محیط چندنخی نیز به‌درستی کار می‌کند.<br>
-در حالت کلی، این به معنای ساختن POJOهایی است که توسط نخ‌ها فراخوانی می‌شوند.<br>
-این POJOها از وجود نخ‌ها بی‌اطلاع هستند و بنابراین می‌توان آن‌ها را خارج از محیط چندنخی تست کرد.<br>
-هرچه بتوانید بخش‌های بیشتری از سیستم را به این شکل پیاده‌سازی کنید، بهتر خواهد بود.</p>
-<p><strong>توصیه: تلاش نکنید هم‌زمان باگ‌های چندنخی و غیرچندنخی را رفع کنید. ابتدا مطمئن شوید کدتان در خارج از محیط نخ‌ها درست کار می‌کند.</strong></p>
-<h3>کد چندنخی خود را قابل اتصال طراحی کنید</h3>
-<p>کدی بنویسید که پشتیبانی از هم‌روندی را به‌گونه‌ای فراهم کند که در پیکربندی‌های مختلف قابل اجرا باشد:</p>
-<p>اجرای یک نخ، چند نخ، یا تغییر در طول اجرا<br>
-تعامل کد چندنخی با اجزایی که هم می‌توانند واقعی باشند و هم تست‌دابل (test double)<br>
-اجرای تست‌ها با تست‌دابل‌هایی که سریع، کند یا با سرعت متغیر عمل می‌کنند<br>
-پیکربندی تست‌ها برای اجرا در تعداد دفعات مشخص</p>
-<p><strong>توصیه: کدهای مبتنی بر نخ را به‌گونه‌ای طراحی کنید که به‌راحتی در پیکربندی‌های مختلف قابل استفاده باشند</strong></p>
-<h3>تعداد نخ‌ها (threads) باید به‌راحتی قابل تنظیم باشند</h3>
-<p>در نظر بگیرید که امکان تغییر آن‌ها در زمان اجرای سیستم فراهم باشد.<br>
-همچنین در نظر داشته باشید که سیستم بتواند به‌صورت خودکار و بر اساس میزان توان عملیاتی (throughput) و استفاده از منابع سیستم (system utilization) خودش را تنظیم کند.</p>
-<h3>اجرای برنامه با تعداد نخ‌های بیشتر از تعداد پردازنده‌ها</h3>
-<p>وقتی سیستم بین وظایف مختلف جابه‌جا می‌شود، اتفاقاتی رخ می‌دهد.<br>
-برای تشویق به تعویض وظایف (task swapping)، برنامه را با تعداد نخ‌هایی بیشتر از تعداد پردازنده‌ها یا هسته‌ها اجرا کنید. هر چه وظایف بیشتر جابه‌جا شوند، احتمال مواجهه با کدی که بخش بحرانی (critical section) ندارد یا منجر به بن‌بست (deadlock) می‌شود، بیشتر خواهد شد.</p>
-<h3>اجرای برنامه روی پلتفرم‌های مختلف</h3>
-<p>در میانه‌ی سال ۲۰۰۷ ما دوره‌ای درباره‌ی برنامه‌نویسی هم‌روند (concurrent programming) طراحی کردیم. توسعه‌ی این دوره عمدتاً در سیستم‌عامل OS X انجام شد.<br>
-اما کلاس با استفاده از Windows XP که در یک ماشین مجازی (VM) اجرا می‌شد، برگزار شد.<br>
-تست‌هایی که برای نشان دادن شرایط شکست نوشته شده بودند، در محیط XP به اندازه‌ی اجرای آن‌ها در OS X دچار شکست نمی‌شدند.</p>
-<p>در تمام موارد، مشخص بود که کد تحت آزمایش نادرست است. این تجربه فقط این حقیقت را تقویت کرد که سیستم‌عامل‌های مختلف، سیاست‌های نخ‌پردازی متفاوتی دارند که هرکدام روی نحوه‌ی اجرای کد تأثیر می‌گذارند.<br>
-کد چندنخی در محیط‌های مختلف رفتاری متفاوت از خود نشان می‌دهد.</p>
-<p><strong>توصیه: کدهای چندنخی خود را از همان ابتدا و به‌صورت مکرر روی تمام پلتفرم‌های هدف اجرا کنید.</strong></p>
-<h3>کد خود را برای تلاش در ایجاد خطا ابزارگذاری کنید</h3>
-<p>مخفی ماندن نقص‌ها در کدهای هم‌روند (concurrent) یک امر طبیعی است.<br>
-آزمایش‌های ساده معمولاً این مشکلات را آشکار نمی‌کنند. در واقع، این نقص‌ها اغلب در پردازش‌های معمول نیز پنهان می‌مانند. ممکن است تنها هر چند ساعت، روز یا هفته یک‌بار ظاهر شوند!</p>
-<p>دلیل این‌که باگ‌های مربوط به نخ‌ها (threading bugs) می‌توانند نادر، پراکنده و سخت برای تکرار باشند، این است که تنها تعداد بسیار کمی از مسیرهای ممکن در یک بخش آسیب‌پذیر واقعاً به خطا منتهی می‌شوند. بنابراین احتمال طی شدن یک مسیر خطادار می‌تواند بسیار پایین باشد. این امر تشخیص و اشکال‌زدایی را بسیار دشوار می‌کند.<br>
-چگونه می‌توانید شانس خود را برای کشف چنین اتفاقات نادری افزایش دهید؟</p>
-<p>شما می‌توانید کد خود را ابزارگذاری (instrument) کنید و ترتیب اجرای آن را با اضافه کردن فراخوانی‌هایی به متدهایی مانند <code>Object.wait()</code>، <code>Object.sleep()</code>، <code>Object.yield()</code> و <code>Object.priority()</code> تغییر دهید.<br>
-هر یک از این متدها می‌توانند ترتیب اجرا را تحت تأثیر قرار دهند و در نتیجه احتمال کشف یک نقص را افزایش دهند. بهتر است کد معیوب هر چه زودتر و به دفعات بیشتری دچار شکست شود.<br>
-برای ابزارگذاری کد دو گزینه وجود دارد:</p>
-<ul>
-<li>کدنویسی دستی (Hand-coded)</li>
-<li>ابزارگذاری خودکار (Automated)</li>
-</ul>
-<h2>کدنویسی دستی</h2>
-<p>شما می‌توانید به صورت دستی در کد خود فراخوانی‌هایی به متدهای wait()، sleep()، yield() و priority() اضافه کنید.<br>
-این کار ممکن است هنگام تست یک بخش به‌خصوص دشوار از کد، دقیقاً همان چیزی باشد که نیاز دارید.<br>
-در ادامه یک نمونه از انجام این کار آورده شده است:</p>
-</div>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">synchronized</span> String <span class="hljs-title function_">nextUrlOrNull</span><span class="hljs-params">()</span> {
+</code></pre> <div dir="rtl"><p>فرض کنیم یک نمونه از کلاس X می‌سازیم، مقدار فیلد <code>lastIdUsed</code> را روی ۴۲ تنظیم می‌کنیم، و سپس این نمونه را بین دو نخ (Thread) به اشتراک می‌گذاریم. حال فرض کنید هر دو نخ متد <code>getNextId()</code> را فراخوانی می‌کنند؛ در این حالت سه نتیجه‌ی ممکن وجود دارد:</p><ul> <li>نخ اول مقدار ۴۳ را دریافت می‌کند، نخ دوم مقدار ۴۴ را دریافت می‌کند، و <code>lastIdUsed</code> برابر ۴۴ می‌شود.</li><li>نخ اول مقدار ۴۴ را دریافت می‌کند، نخ دوم مقدار ۴۳ را دریافت می‌کند، و <code>lastIdUsed</code> برابر ۴۴ می‌شود.</li><li>نخ اول مقدار ۴۳ را دریافت می‌کند، نخ دوم نیز مقدار ۴۳ را دریافت می‌کند، و <code>lastIdUsed</code> برابر ۴۳ می‌شود.</li></ul> <p>نتیجه‌ی سوم که تعجب‌برانگیز است زمانی اتفاق می‌افتد که دو نخ همزمان بر روی یکدیگر تأثیر می‌گذارند. این اتفاق به این دلیل رخ می‌دهد که مسیرهای متعددی وجود دارند که دو نخ می‌توانند از طریق آن‌ها از همان خط کد جاوا عبور کنند و بعضی از این مسیرها نتایج نادرستی ایجاد می‌کنند. چند مسیر ممکن وجود دارد؟ برای پاسخ واقعی به این سوال باید بدانیم کامپایلر JIT چه کار می‌کند و مدل حافظه‌ی جاوا چه چیزی را عملیات اتمیک (atomic) در نظر می‌گیرد.</p><p>پاسخ سریع، با بررسی فقط بایت‌کد تولید شده این است که ۱۲٬۸۷۰ مسیر اجرایی متفاوت برای این دو نخ در متد <code>getNextId</code> وجود دارد. اگر نوع <code>lastIdUsed</code> از int به <code>long</code> تغییر کند، تعداد مسیرهای ممکن به ۲٬۷۰۴٬۱۵۶ می‌رسد. البته بیشتر این مسیرها نتایج صحیحی تولید می‌کنند. مشکل اینجاست که برخی از آن‌ها اینطور نیستند.</p><h2>اصول دفاع در برابر مشکلات همزمانی</h2><p>در ادامه مجموعه‌ای از اصول و تکنیک‌ها برای دفاع از سیستم‌های خود در برابر مشکلات ناشی از کدنویسی همزمان ارائه شده است.</p><h3>اصل مسئولیت واحد (SRP)</h3><p>اصل SRP بیان می‌کند که یک متد/کلاس/کامپوننت باید فقط یک دلیل برای تغییر داشته باشد. طراحی همزمانی به حد کافی پیچیده است که خود به تنهایی یک دلیل برای تغییر باشد و بنابراین باید از بقیه‌ی کد جدا شود. متأسفانه، معمولاً جزئیات پیاده‌سازی همزمانی مستقیماً وارد کد تولیدی می‌شوند.</p><p>مواردی که باید مد نظر قرار دهید:</p><ul> <li>کدهای مربوط به همزمانی چرخه‌ی توسعه، تغییر و بهینه‌سازی مخصوص به خود دارند.</li><li>این کدها چالش‌های خاص خود را دارند که اغلب سخت‌تر از کدهای غیرهمزمانی است.</li><li>تعداد راه‌های ممکن برای شکست کدهای همزمانی اشتباه نوشته شده، بسیار زیاد است.</li></ul> <p><strong>توصیه: کدهای مربوط به همزمانی را از دیگر کدها جدا نگه دارید.</strong></p><h3>قاعده: محدود کردن دامنه‌ی داده‌ها</h3><p>همانطور که دیدیم، زمانی که دو نخ یک فیلد مشترک را تغییر می‌دهند، می‌توانند باعث بروز رفتار غیرمنتظره شوند. یکی از راهکارها استفاده از کلمه کلیدی synchronized برای محافظت از بخش بحرانی کدی است که از شیء مشترک استفاده می‌کند.</p><p>هرچه تعداد این بخش‌های بحرانی بیشتر باشد:</p><ul> <li>احتمال فراموش کردن محافظت از یکی از این بخش‌ها بیشتر می‌شود.</li><li>دوباره‌کاری برای محافظت از همه‌ی بخش‌ها افزایش می‌یابد (نقض اصل DRY).</li><li>پیدا کردن منبع خطا سخت‌تر می‌شود.</li></ul> <p><strong>توصیه: اصل کپسوله‌سازی داده را رعایت کنید؛ دسترسی به داده‌های مشترک را به شدت محدود کنید.</strong></p><h3>قاعده: استفاده از کپی داده‌ها</h3><p>راهکار خوب دیگر این است که داده‌ها را اصلاً به اشتراک نگذارید. در برخی موارد می‌توان اشیا را کپی کرد و فقط به صورت فقط‌خواندنی با آن‌ها کار کرد. یا می‌توان نتایج را از چند نخ جمع‌آوری کرد و سپس در یک نخ ادغام نمود.</p><p>نگران هزینه‌ی ایجاد اشیای اضافه نباشید؛ اگر این کار باعث حذف قفل‌ها شود، صرفه‌جویی در زمان به مراتب ارزشمندتر خواهد بود.</p><h3>توصیه: تا حد امکان از به اشتراک‌گذاری داده‌ها اجتناب کنید</h3><p>قاعده: نخ‌ها باید تا حد ممکن مستقل باشند<br> کدی بنویسید که هر نخ داده‌های مورد نیاز خود را از یک منبع غیرمشترک دریافت کند و فقط از متغیرهای محلی استفاده نماید. این کار باعث می‌شود نخ‌ها گویی تنها نخ سیستم هستند و نیاز به همگام‌سازی نداشته باشند.</p><p>مثال: در کلاس‌هایی که از <code>HttpServlet</code> ارث‌بری می‌کنند، تمام داده‌ها از طریق پارامترهای <code>doGet</code> و <code>doPost</code> وارد می‌شوند.</p><p><strong>توصیه: داده‌ها را طوری تقسیم کنید که نخ‌ها بتوانند به صورت مستقل روی بخش‌های مختلف کار کنند.</strong></p><h3>کتابخانه‌های استاندارد را بشناسید</h3><p>جاوا ۵ امکانات زیادی برای توسعه‌ی همزمانی نسبت به نسخه‌های قبلی فراهم کرده است. نکاتی که باید در نظر داشته باشید:</p><ul> <li>از مجموعه‌های داده‌ی نخ-ایمن استفاده کنید.</li><li>از چارچوب Executor برای اجرای وظایف مستقل استفاده کنید.</li><li>از راهکارهای غیرمسدودکننده استفاده کنید.</li><li>برخی کلاس‌های کتابخانه‌ای نخ-ایمن نیستند.</li></ul> <h3>کالکشن‌های Thread-Safe (ایمن در برابر چندنخی بودن)</h3><p>در دوران اولیه‌ی جاوا، داگ لیا (Doug Lea) کتاب مهمی با عنوان Concurrent Programming in Java نوشت.<br> به همراه این کتاب، او چند کالکشن thread-safe توسعه داد که بعدها به بخشی از بسته‌ی <code>java.util.concurrent</code> در JDK تبدیل شدند.</p><p>کالکشن‌های موجود در این بسته برای استفاده در موقعیت‌های چندنخی ایمن هستند و عملکرد خوبی نیز دارند.<br> در واقع، پیاده‌سازی <code>ConcurrentHashMap</code> در اغلب موارد عملکرد بهتری نسبت به <code>HashMap</code> دارد.<br> این کلاس امکان خواندن و نوشتن هم‌زمان را فراهم می‌کند و دارای متدهایی برای انجام عملیات ترکیبی رایج است که در حالت عادی thread-safe نیستند.</p><p>اگر محیط اجرایی شما Java 5 یا بالاتر است، کار خود را با <code>ConcurrentHashMap</code> آغاز کنید.</p><p>چندین کلاس دیگر نیز برای پشتیبانی از طراحی‌های پیشرفته‌ی هم‌زمانی (concurrency) به این بسته افزوده شده‌اند. در ادامه چند نمونه از آن‌ها آمده است:</p><table> <thead><tr> <th>کلاس</th><th>توضیح</th></tr> </thead><tbody> <tr><td><code>ReentrantLock</code></td><td>یک قفل که می‌تواند در یک متد گرفته شود و در متدی دیگر آزاد گردد.</td></tr> <tr><td><code>Semaphore</code></td><td>پیاده‌سازی‌ای از سمفور کلاسیک؛ قفلی با شمارنده.</td></tr> <tr><td><code>CountDownLatch</code></td><td>قفلی که منتظر وقوع چند رویداد می‌ماند تا همه‌ی نخ‌هایی که منتظر آن هستند را آزاد کند. این کار به نخ‌ها فرصت برابر برای شروع تقریباً همزمان می‌دهد.</td></tr> </tbody></table> <p><strong>توصیه: کلاس‌هایی که در دسترست هستند را بررسی کن. اگر با زبان Java کار می‌کنی، با بسته‌های <code>java.util.concurrent</code>، <code>java.util.concurrent.atomic</code> و <code>java.util.concurrent.locks</code> آشنا شو.</strong></p><h2>مدل‌های اجرایی خود را بشناسید</h2><p>راه‌های مختلفی برای تقسیم رفتار در یک برنامه‌ی هم‌روند (concurrent) وجود دارد.<br> برای صحبت درباره‌ی آن‌ها، باید چند تعریف پایه‌ای را بشناسیم.</p><table> <thead><tr> <th>مفهوم</th><th>توضیح</th></tr> </thead><tbody> <tr><td><strong>منابع محدود</strong></td><td>منابعی با اندازه ثابت یا تعداد ثابت که در یک محیط همزمان استفاده می‌شوند، مانند اتصالات پایگاه داده و بافرهای خواندن/نوشتن.</td></tr> <tr><td><strong>حذف متقابل</strong></td><td>فقط یک رشته می‌تواند در یک زمان به داده‌های مشترک یا منبع مشترک دسترسی داشته باشد.</td></tr> <tr><td><strong>گرسنگی</strong></td><td>یک رشته یا گروهی از رشته‌ها از پیشرفت برای مدت زمان طولانی یا برای همیشه منع می‌شوند، مانند جلوگیری از اجرای رشته‌های کندتر توسط رشته‌های سریع‌تر.</td></tr> <tr><td><strong>بن‌بست</strong></td><td>دو یا چند رشته منتظر پایان یکدیگر هستند؛ هر رشته دارای منبعی است که رشته دیگر نیاز دارد، و هیچ‌کدام نمی‌توانند بدون دریافت منبع دیگر به پایان برسند.</td></tr> <tr><td><strong>قفل زنده</strong></td><td>رشته‌ها در هماهنگی تلاش می‌کنند که کار انجام دهند اما دیگری مانع راه است؛ به دلیل تشدید، رشته‌ها همچنان سعی می‌کنند پیشرفت کنند اما قادر به انجام آن نیستند.</td></tr> </tbody></table> <p>راه‌های مختلفی برای تقسیم رفتار در یک برنامه‌ی هم‌روند (concurrent) وجود دارد. برای اینکه بتوانیم درباره آن‌ها صحبت کنیم، ابتدا باید چند تعریف پایه را بدانیم.</p><h2>مدل تولیدکننده-مصرف‌کننده</h2><p>در این مدل، یک یا چند نخ (thread) تولیدکننده کاری را انجام می‌دهند و نتیجه آن را داخل یک صف یا بافر قرار می‌دهند. سپس یک یا چند نخ مصرف‌کننده آن کارها را از صف می‌گیرند و ادامه می‌دهند.</p><p>این صف یک منبع محدود است؛ یعنی اگر صف پر باشد، تولیدکننده باید منتظر بماند و اگر صف خالی باشد، مصرف‌کننده باید صبر کند. هماهنگی بین تولیدکننده‌ها و مصرف‌کننده‌ها از طریق این صف انجام می‌شود: تولیدکننده‌ها بعد از قرار دادن کار در صف، اطلاع می‌دهند که صف خالی نیست و مصرف‌کننده‌ها بعد از برداشتن کار، اطلاع می‌دهند که صف پر نیست.</p><h2>مدل خواننده-نویسنده</h2><p>وقتی منبعی وجود دارد که اغلب برای خواندن استفاده می‌شود ولی گاهی هم نیاز به نوشتن دارد، باید بین عملکرد و هماهنگی دقت زیادی داشت. اگر به خواندن زیاد اولویت بدهیم، ممکن است نویسنده‌ها مدت زیادی منتظر بمانند. اگر به نوشتن اولویت دهیم، ممکن است عملکرد کلی کاهش یابد. باید بین این دو توازن برقرار شود تا هم عملکرد خوب باشد و هم خطا ایجاد نشود.</p><h2>مسئله‌ی فیلسوفان شام‌خور</h2><p>چند فیلسوف دور یک میز نشسته‌اند و بین هر دو فیلسوف یک چنگال قرار دارد. هر فیلسوف وقتی گرسنه می‌شود، باید هر دو چنگال کناری خود را بردارد تا غذا بخورد. اگر چنگالی در اختیار فیلسوف کناری باشد، باید منتظر بماند.</p><p>اگر فیلسوف‌ها را نخ‌ها (threads) و چنگال‌ها را منابع در نظر بگیریم، این وضعیت شبیه به سیستم‌هایی است که منابع را بین چند فرآیند تقسیم می‌کنند. اگر مراقب نباشیم، این نوع طراحی می‌تواند باعث بن‌بست (deadlock)، قفل زنده (livelock) یا کاهش عملکرد شود.</p><p><strong>توصیه: این الگوریتم‌های پایه را یاد بگیرید و راه‌حل‌های آن‌ها را تمرین کنید تا وقتی با مسائل هم‌روندی روبرو شدید، آمادگی داشته باشید.</strong></p><h2>مراقب وابستگی بین متدهای synchronized باشید</h2><p>در جاوا، استفاده از کلمه‌ی کلیدی synchronized باعث می‌شود فقط یک نخ بتواند وارد یک بخش از کد شود. اما اگر چند متد synchronized روی یک شیء مشترک داشته باشید، ممکن است باگ‌های پیچیده‌ای ایجاد شود.</p><p><strong>توصیه: سعی کنید بیش از یک متد روی یک شیء مشترک استفاده نکنید.</strong><br> اگر مجبور شدید، یکی از این سه روش را استفاده کنید:</p><ul> <li><strong>قفل‌گذاری در سمت مشتری</strong>: قبل از استفاده از متدها، مشتری قفل را بگیرد و تا پایان کار نگه دارد.</li><li><strong>قفل‌گذاری در سمت سرور</strong>: یک متد جدید در سرور ایجاد کنید که قفل را بگیرد، همه متدها را صدا بزند و سپس قفل را آزاد کند.</li><li><strong>سرور واسطه</strong>: یک کلاس واسط ایجاد کنید که قفل‌گذاری را انجام دهد.</li></ul> <h2>بخش‌های synchronized را کوچک نگه دارید</h2><p>قفل‌ها باعث کندی سیستم می‌شوند، چون فقط یک نخ در هر لحظه می‌تواند وارد بخش قفل‌شده شود. اگر بخش زیادی از کد را <code>synchronized</code> کنید، رقابت بین نخ‌ها بیشتر شده و عملکرد کاهش می‌یابد.</p><p>توصیه: بخش‌های قفل‌شده (critical section) را تا حد ممکن کوچک نگه دارید.</p><h2>نوشتن کدی که درست خاموش شود، سخت است</h2><p>نوشتن سیستمی که همیشه روشن بماند با سیستمی که باید به‌درستی خاموش شود فرق دارد. خاموش‌کردن درست سیستم ممکن است باعث بن‌بست شود.</p><p>مثلاً تصور کنید یک نخ والد چند نخ فرزند ایجاد می‌کند و منتظر می‌ماند همه آن‌ها تمام شوند. اگر یکی از نخ‌های فرزند در بن‌بست گیر کند، نخ والد هم هیچ‌وقت تمام نمی‌شود.</p><p>یا اگر والد به فرزندها بگوید کار را رها کنند و تمام شوند، اما یکی از فرزندها منتظر داده‌ای از دیگری باشد که دیگر تولید نمی‌شود، آن نخ گیر می‌افتد و باعث می‌شود سیستم کامل بسته نشود.</p><p><strong>توصیه: از همان ابتدا به خاموش‌سازی فکر کنید و زودتر آن را پیاده‌سازی کنید. این کار از چیزی که فکر می‌کنید سخت‌تر است.</strong></p><h2>آزمایش کدهای هم‌روند (Threaded)</h2><p>اثبات درستی کامل یک کد تقریباً غیرممکن است. آزمایش هم تضمینی برای درستی نمی‌دهد، اما آزمایش خوب می‌تواند ریسک را کاهش دهد. این موضوع در مورد برنامه‌های تک‌نخی هم صدق می‌کند، اما به‌محض اینکه دو یا چند نخ به‌طور همزمان روی یک کد یا داده‌ی مشترک کار کنند، پیچیدگی‌ها به‌طور چشم‌گیری افزایش می‌یابد.</p><p><strong>توصیه: تست‌هایی بنویس که امکان آشکار کردن مشکلات را داشته باشند و آن‌ها را مرتباً با پیکربندی‌های مختلف برنامه، سیستم و میزان بار مختلف اجرا کن.</strong></p><ul> <li>اگر حتی یک‌بار تستی شکست خورد، علت را پیدا کن.</li><li>شکست را فقط به این خاطر که در اجرای بعدی تست موفق شده، نادیده نگیر.</li><li>کد چندنخی خود را قابل اتصال (pluggable) طراحی کنید.</li><li>کد چندنخی خود را قابل تنظیم (tunable) طراحی کنید.</li><li>برنامه را با تعداد نخ‌هایی بیشتر از تعداد پردازنده‌ها اجرا کنید.</li><li>برنامه را روی پلتفرم‌های مختلف اجرا کنید.</li><li>کد خود را ابزارگذاری (instrument) کنید تا خطاها را به‌صورت اجباری ایجاد نمایید.</li></ul> <h3>شکست‌های پراکنده را به‌عنوان نشانه‌هایی از مشکلات چندنخی در نظر بگیرید</h3><p>کد چندنخی باعث شکست‌هایی می‌شود که &quot;اساساً نباید شکست بخورند.&quot;<br> بیشتر توسعه‌دهندگان (از جمله نویسندگان این متن) درک شهودی درستی از نحوه‌ی تعامل نخ‌ها با سایر بخش‌های کد ندارند.<br> باگ‌های موجود در کد چندنخی ممکن است تنها یک‌بار در هزار یا حتی یک میلیون اجرای برنامه بروز کنند.<br> تلاش برای تکرار این شرایط می‌تواند بسیار آزاردهنده باشد. این موضوع معمولاً باعث می‌شود که توسعه‌دهندگان این شکست‌ها را به عواملی مانند پرتوهای کیهانی، اشکالات سخت‌افزاری یا سایر خطاهای غیرقابل تکرار نسبت دهند.<br> اما بهترین کار این است که فرض کنید خطاهای &quot;یک‌باره&quot; اصلاً وجود ندارند. هرچه این خطاهای نادر بیشتر نادیده گرفته شوند، کد بیشتری ممکن است بر پایه‌ی یک روش معیوب ساخته شود.</p><p><strong>توصیه: شکست‌های سیستمی را به‌عنوان خطاهای یک‌باره نادیده نگیرید.</strong></p><h3>ابتدا از عملکرد صحیح کد غیرچندنخی مطمئن شوید</h3><p>شاید بدیهی به نظر برسد، اما تأکید بر آن ضرری ندارد.<br> اطمینان حاصل کنید که کد، خارج از محیط چندنخی نیز به‌درستی کار می‌کند.<br> در حالت کلی، این به معنای ساختن POJOهایی است که توسط نخ‌ها فراخوانی می‌شوند.<br> این POJOها از وجود نخ‌ها بی‌اطلاع هستند و بنابراین می‌توان آن‌ها را خارج از محیط چندنخی تست کرد.<br> هرچه بتوانید بخش‌های بیشتری از سیستم را به این شکل پیاده‌سازی کنید، بهتر خواهد بود.</p><p><strong>توصیه: تلاش نکنید هم‌زمان باگ‌های چندنخی و غیرچندنخی را رفع کنید. ابتدا مطمئن شوید کدتان در خارج از محیط نخ‌ها درست کار می‌کند.</strong></p><h3>کد چندنخی خود را قابل اتصال طراحی کنید</h3><p>کدی بنویسید که پشتیبانی از هم‌روندی را به‌گونه‌ای فراهم کند که در پیکربندی‌های مختلف قابل اجرا باشد:</p><p>اجرای یک نخ، چند نخ، یا تغییر در طول اجرا<br> تعامل کد چندنخی با اجزایی که هم می‌توانند واقعی باشند و هم تست‌دابل (test double)<br> اجرای تست‌ها با تست‌دابل‌هایی که سریع، کند یا با سرعت متغیر عمل می‌کنند<br> پیکربندی تست‌ها برای اجرا در تعداد دفعات مشخص</p><p><strong>توصیه: کدهای مبتنی بر نخ را به‌گونه‌ای طراحی کنید که به‌راحتی در پیکربندی‌های مختلف قابل استفاده باشند</strong></p><h3>تعداد نخ‌ها (threads) باید به‌راحتی قابل تنظیم باشند</h3><p>در نظر بگیرید که امکان تغییر آن‌ها در زمان اجرای سیستم فراهم باشد.<br> همچنین در نظر داشته باشید که سیستم بتواند به‌صورت خودکار و بر اساس میزان توان عملیاتی (throughput) و استفاده از منابع سیستم (system utilization) خودش را تنظیم کند.</p><h3>اجرای برنامه با تعداد نخ‌های بیشتر از تعداد پردازنده‌ها</h3><p>وقتی سیستم بین وظایف مختلف جابه‌جا می‌شود، اتفاقاتی رخ می‌دهد.<br> برای تشویق به تعویض وظایف (task swapping)، برنامه را با تعداد نخ‌هایی بیشتر از تعداد پردازنده‌ها یا هسته‌ها اجرا کنید. هر چه وظایف بیشتر جابه‌جا شوند، احتمال مواجهه با کدی که بخش بحرانی (critical section) ندارد یا منجر به بن‌بست (deadlock) می‌شود، بیشتر خواهد شد.</p><h3>اجرای برنامه روی پلتفرم‌های مختلف</h3><p>در میانه‌ی سال ۲۰۰۷ ما دوره‌ای درباره‌ی برنامه‌نویسی هم‌روند (concurrent programming) طراحی کردیم. توسعه‌ی این دوره عمدتاً در سیستم‌عامل OS X انجام شد.<br> اما کلاس با استفاده از Windows XP که در یک ماشین مجازی (VM) اجرا می‌شد، برگزار شد.<br> تست‌هایی که برای نشان دادن شرایط شکست نوشته شده بودند، در محیط XP به اندازه‌ی اجرای آن‌ها در OS X دچار شکست نمی‌شدند.</p><p>در تمام موارد، مشخص بود که کد تحت آزمایش نادرست است. این تجربه فقط این حقیقت را تقویت کرد که سیستم‌عامل‌های مختلف، سیاست‌های نخ‌پردازی متفاوتی دارند که هرکدام روی نحوه‌ی اجرای کد تأثیر می‌گذارند.<br> کد چندنخی در محیط‌های مختلف رفتاری متفاوت از خود نشان می‌دهد.</p><p><strong>توصیه: کدهای چندنخی خود را از همان ابتدا و به‌صورت مکرر روی تمام پلتفرم‌های هدف اجرا کنید.</strong></p><h3>کد خود را برای تلاش در ایجاد خطا ابزارگذاری کنید</h3><p>مخفی ماندن نقص‌ها در کدهای هم‌روند (concurrent) یک امر طبیعی است.<br> آزمایش‌های ساده معمولاً این مشکلات را آشکار نمی‌کنند. در واقع، این نقص‌ها اغلب در پردازش‌های معمول نیز پنهان می‌مانند. ممکن است تنها هر چند ساعت، روز یا هفته یک‌بار ظاهر شوند!</p><p>دلیل این‌که باگ‌های مربوط به نخ‌ها (threading bugs) می‌توانند نادر، پراکنده و سخت برای تکرار باشند، این است که تنها تعداد بسیار کمی از مسیرهای ممکن در یک بخش آسیب‌پذیر واقعاً به خطا منتهی می‌شوند. بنابراین احتمال طی شدن یک مسیر خطادار می‌تواند بسیار پایین باشد. این امر تشخیص و اشکال‌زدایی را بسیار دشوار می‌کند.<br> چگونه می‌توانید شانس خود را برای کشف چنین اتفاقات نادری افزایش دهید؟</p><p>شما می‌توانید کد خود را ابزارگذاری (instrument) کنید و ترتیب اجرای آن را با اضافه کردن فراخوانی‌هایی به متدهایی مانند <code>Object.wait()</code>، <code>Object.sleep()</code>، <code>Object.yield()</code> و <code>Object.priority()</code> تغییر دهید.<br> هر یک از این متدها می‌توانند ترتیب اجرا را تحت تأثیر قرار دهند و در نتیجه احتمال کشف یک نقص را افزایش دهند. بهتر است کد معیوب هر چه زودتر و به دفعات بیشتری دچار شکست شود.<br> برای ابزارگذاری کد دو گزینه وجود دارد:</p><ul> <li>کدنویسی دستی (Hand-coded)</li><li>ابزارگذاری خودکار (Automated)</li></ul> <h2>کدنویسی دستی</h2><p>شما می‌توانید به صورت دستی در کد خود فراخوانی‌هایی به متدهای wait()، sleep()، yield() و priority() اضافه کنید.<br> این کار ممکن است هنگام تست یک بخش به‌خصوص دشوار از کد، دقیقاً همان چیزی باشد که نیاز دارید.<br> در ادامه یک نمونه از انجام این کار آورده شده است:</p></div> <pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">synchronized</span> String <span class="hljs-title function_">nextUrlOrNull</span><span class="hljs-params">()</span> {
     <span class="hljs-keyword">if</span> (hasNext()) {
         <span class="hljs-type">String</span> <span class="hljs-variable">url</span> <span class="hljs-operator">=</span> urlGenerator.next();
         Thread.<span class="hljs-keyword">yield</span>(); <span class="hljs-comment">// inserted for testing.</span>
@@ -341,33 +27,10 @@
     }
     <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;
 }
-</code></pre>
-<div dir="rtl">
-<p>فراخوانی <code>yield()</code> که اضافه شده است، مسیرهای اجرایی کد را تغییر می‌دهد و ممکن است باعث شود که کدی که قبلاً مشکلی نداشت، اکنون دچار اشکال شود. اگر این اتفاق بیفتد، علت آن اضافه کردن <code>yield()</code> نبوده است؛ بلکه مشکل از قبل در کد وجود داشته و این تغییر فقط باعث نمایان شدن آن شده است.</p>
-<p>با این روش مشکلات زیادی وجود دارد:</p>
-<ul>
-<li>باید به صورت دستی مکان‌های مناسب برای اضافه کردن این دستورات را پیدا کنید.</li>
-<li>چگونه می‌توان فهمید کجا باید این فراخوانی‌ها را اضافه کرد و چه نوع فراخوانی‌ای مناسب است؟</li>
-<li>باقی گذاشتن چنین کدی در محیط تولید (Production) باعث کندی غیرضروری برنامه می‌شود.</li>
-<li>این روش شبیه به تیراندازی کورکورانه است؛ ممکن است اشکالات را پیدا کند یا نکند. در واقع، احتمال موفقیت چندان زیاد نیست.</li>
-</ul>
-<p>آنچه نیاز داریم، راهی است که بتوانیم این تغییرات را در زمان تست اعمال کنیم، اما در محیط تولید نداشته باشیم. همچنین نیاز داریم بتوانیم به راحتی بین اجراهای مختلف پیکربندی‌ها را تغییر دهیم، که این باعث افزایش احتمال کشف خطاها به طور کلی می‌شود.</p>
-<p>بدیهی است که اگر سیستم خود را به بخش‌هایی تقسیم کنیم که:</p>
-<p>یک سری POJO داشته باشیم که هیچ دانشی از نخ‌ها (Threading) ندارند،</p>
-<p>و کلاس‌هایی که کنترل نخ‌ها را بر عهده دارند،</p>
-<p>پیدا کردن مکان‌های مناسب برای ابزارگذاری (Instrumentation) کد آسان‌تر خواهد بود. علاوه بر این، می‌توان تست‌های مختلفی ایجاد کرد که POJOها را تحت الگوهای متفاوتی از فراخوانی‌های <code>sleep</code>, <code>yield</code> و سایر دستورات مشابه اجرا کند.</p>
-<h2>ابزارگذاری خودکار</h2>
-<p>شما می‌توانید از ابزارهایی مانند یک چارچوب مبتنی بر برنامه‌نویسی جنبه‌گرا (Aspect-Oriented Framework)، یا کتابخانه‌هایی مثل CGLIB یا ASM استفاده کنید تا به صورت برنامه‌نویسی شده (Programmatically) کد خود را ابزارگذاری کنید.<br>
-برای مثال، می‌توانید یک کلاسی ایجاد کنید که فقط یک متد داشته باشد.</p>
-</div>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ThreadJigglePoint</span> {
+</code></pre> <div dir="rtl"><p>فراخوانی <code>yield()</code> که اضافه شده است، مسیرهای اجرایی کد را تغییر می‌دهد و ممکن است باعث شود که کدی که قبلاً مشکلی نداشت، اکنون دچار اشکال شود. اگر این اتفاق بیفتد، علت آن اضافه کردن <code>yield()</code> نبوده است؛ بلکه مشکل از قبل در کد وجود داشته و این تغییر فقط باعث نمایان شدن آن شده است.</p><p>با این روش مشکلات زیادی وجود دارد:</p><ul> <li>باید به صورت دستی مکان‌های مناسب برای اضافه کردن این دستورات را پیدا کنید.</li><li>چگونه می‌توان فهمید کجا باید این فراخوانی‌ها را اضافه کرد و چه نوع فراخوانی‌ای مناسب است؟</li><li>باقی گذاشتن چنین کدی در محیط تولید (Production) باعث کندی غیرضروری برنامه می‌شود.</li><li>این روش شبیه به تیراندازی کورکورانه است؛ ممکن است اشکالات را پیدا کند یا نکند. در واقع، احتمال موفقیت چندان زیاد نیست.</li></ul> <p>آنچه نیاز داریم، راهی است که بتوانیم این تغییرات را در زمان تست اعمال کنیم، اما در محیط تولید نداشته باشیم. همچنین نیاز داریم بتوانیم به راحتی بین اجراهای مختلف پیکربندی‌ها را تغییر دهیم، که این باعث افزایش احتمال کشف خطاها به طور کلی می‌شود.</p><p>بدیهی است که اگر سیستم خود را به بخش‌هایی تقسیم کنیم که:</p><p>یک سری POJO داشته باشیم که هیچ دانشی از نخ‌ها (Threading) ندارند،</p><p>و کلاس‌هایی که کنترل نخ‌ها را بر عهده دارند،</p><p>پیدا کردن مکان‌های مناسب برای ابزارگذاری (Instrumentation) کد آسان‌تر خواهد بود. علاوه بر این، می‌توان تست‌های مختلفی ایجاد کرد که POJOها را تحت الگوهای متفاوتی از فراخوانی‌های <code>sleep</code>, <code>yield</code> و سایر دستورات مشابه اجرا کند.</p><h2>ابزارگذاری خودکار</h2><p>شما می‌توانید از ابزارهایی مانند یک چارچوب مبتنی بر برنامه‌نویسی جنبه‌گرا (Aspect-Oriented Framework)، یا کتابخانه‌هایی مثل CGLIB یا ASM استفاده کنید تا به صورت برنامه‌نویسی شده (Programmatically) کد خود را ابزارگذاری کنید.<br> برای مثال، می‌توانید یک کلاسی ایجاد کنید که فقط یک متد داشته باشد.</p></div> <pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ThreadJigglePoint</span> {
     <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">jiggle</span><span class="hljs-params">()</span> {}
 }
-</code></pre>
-<div dir="rtl">
-    شما می‌توانید فراخوانی‌هایی به این متد را در بخش‌های مختلفی از کد خود اضافه کنید.
-</div>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">synchronized</span> String <span class="hljs-title function_">nextUrlOrNull</span><span class="hljs-params">()</span> {
+</code></pre> <div dir="rtl"> شما می‌توانید فراخوانی‌هایی به این متد را در بخش‌های مختلفی از کد خود اضافه کنید. </div><pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">synchronized</span> String <span class="hljs-title function_">nextUrlOrNull</span><span class="hljs-params">()</span> {
     <span class="hljs-keyword">if</span> (hasNext()) {
         ThreadJiglePoint.jiggle();
         <span class="hljs-type">String</span> <span class="hljs-variable">url</span> <span class="hljs-operator">=</span> urlGenerator.next();
@@ -378,141 +41,216 @@
     }
     <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;
 }
-</code></pre>
-<div dir="rtl">
-    اکنون می‌توانید از یک Aspect ساده استفاده کنید که به صورت تصادفی یکی از گزینه‌های "هیچ کاری انجام ندادن"، "خوابیدن" (sleep) یا "تسلیم کردن" (yield) را انتخاب می‌کند.
-یا تصور کنید که کلاس ThreadJigglePoint دارای دو پیاده‌سازی باشد. پیاده‌سازی اول متد jiggle را طوری پیاده‌سازی می‌کند که هیچ کاری انجام نمی‌دهد و در محیط تولید (Production) استفاده می‌شود. پیاده‌سازی دوم یک عدد تصادفی تولید می‌کند تا میان خوابیدن، تسلیم شدن یا عبور بدون انجام عمل خاصی یکی را انتخاب کند. اگر تست‌های خود را هزار بار با این نوع تکان‌های تصادفی اجرا کنید، ممکن است برخی اشکالات را کشف کنید. اگر تست‌ها با موفقیت بگذرند، حداقل می‌توانید ادعا کنید که بررسی‌های لازم را انجام داده‌اید.
-هرچند این روش کمی ساده است، اما می‌تواند جایگزینی مناسب در نبود ابزارهای پیشرفته‌تر باشد.
-<p>ابزاری به نام ConTest، توسعه‌یافته توسط IBM، وجود دارد که کاری مشابه انجام می‌دهد، اما با پیچیدگی و کارایی بسیار بیشتر.</p>
-<p>نکته‌ی اصلی این است که کد را به نحوی تکان دهید که نخ‌ها (Threads) در هر بار اجرا به ترتیب‌های متفاوتی اجرا شوند. ترکیب تست‌های خوب و فرآیند تکان دادن می‌تواند به طور قابل توجهی احتمال یافتن خطاها را افزایش دهد.</p>
-<p>توصیه: از استراتژی‌های تکان دادن برای یافتن خطاها استفاده کنید.</p>
-<h2>نتیجه‌گیری</h2>
-<p>کدنویسی همزمان (Concurrent Programming) کاری دشوار است. کدی که پیگیری آن در حالت عادی ساده به نظر می‌رسد، هنگامی که چندین نخ و داده‌های مشترک وارد عمل می‌شوند، می‌تواند به کابوسی پیچیده تبدیل شود.<br>
-اگر با نگارش کد همزمان روبرو هستید، باید با سخت‌گیری و دقت زیاد کدی تمیز (Clean Code) بنویسید؛ در غیر این صورت با خطاهای ظریف و نادر مواجه خواهید شد.</p>
-<p>قبل از هر چیز، اصل تک مسئولیتی (Single Responsibility Principle) را رعایت کنید. سیستم خود را به POJOهایی تقسیم کنید که کد آگاه از نخ (Thread-Aware) را از کد ناآگاه از نخ (Thread-Ignorant) جدا می‌کنند. مطمئن شوید زمانی که در حال تست کدهای آگاه از نخ هستید، فقط همان بخش‌ها را آزمایش می‌کنید و نه بخش‌های دیگر. این موضوع به این معناست که کد آگاه از نخ باید کوچک و متمرکز باشد.</p>
-<p>منابع احتمالی مشکلات همزمانی را بشناسید: نخ‌های متعددی که بر روی داده‌های مشترک یا منابع مشترک کار می‌کنند. موارد مرزی مانند خاموش شدن تمیز (Clean Shutdown) یا پایان یک حلقه می‌توانند به ویژه مشکل‌ساز باشند.</p>
-<p>کتابخانه‌ی مورد استفاده‌ی خود را به خوبی بشناسید و با الگوریتم‌های بنیادی آشنا شوید. درک کنید که چگونه ویژگی‌های ارائه شده توسط کتابخانه می‌توانند در حل مسائلی مشابه الگوریتم‌های پایه کمک‌کننده باشند.</p>
-<p>یاد بگیرید چگونه بخش‌هایی از کد را که نیاز به قفل شدن دارند، شناسایی کرده و آنها را قفل کنید. مناطقی را که نیازی به قفل شدن ندارند، قفل نکنید. از فراخوانی یک بخش قفل‌شده از درون یک بخش قفل‌شده‌ی دیگر اجتناب کنید. این کار نیازمند درک عمیقی از این است که چه چیزی مشترک است و چه چیزی نیست.<br>
-میزان اشیاء مشترک و دامنه‌ی اشتراک‌گذاری را تا حد ممکن محدود نگه دارید. طراحی اشیایی که داده‌ی مشترک دارند را تغییر دهید تا با نیازهای کاربران سازگار شوند، به جای آنکه کاربران مجبور شوند وضعیت‌های مشترک را مدیریت کنند.</p>
-<p>مشکلاتی به وجود خواهند آمد. مشکلاتی که در مراحل اولیه ظاهر نمی‌شوند، معمولاً به عنوان رخدادهای نادر تلقی می‌شوند. این رخدادهای به اصطلاح &quot;یک‌باره&quot; غالباً تحت بار زیاد یا در زمان‌های به ظاهر تصادفی اتفاق می‌افتند.<br>
-بنابراین، باید بتوانید کدهای مربوط به نخ خود را در پیکربندی‌ها و بر روی پلتفرم‌های مختلف، به صورت مداوم و تکراری اجرا کنید.</p>
-<p>قابلیت تست‌پذیری (Testability)، که به طور طبیعی از رعایت سه قانون TDD به دست می‌آید، به معنای نوعی قابلیت اتصال‌پذیری (Plug-ability) است که پشتیبانی لازم برای اجرای کد در طیف گسترده‌ای از پیکربندی‌ها را فراهم می‌کند.</p>
-<p>با صرف زمان برای ابزارگذاری (Instrument) کد خود، شانس کشف خطاهای احتمالی را به طور چشمگیری افزایش می‌دهید.<br>
-این کار را می‌توانید به صورت دستی یا با استفاده از فناوری‌های خودکار انجام دهید.<br>
-از همان ابتدا روی این فرآیند سرمایه‌گذاری کنید. شما می‌خواهید کد مبتنی بر نخ خود را تا حد امکان طولانی‌تر قبل از ورود به محیط تولید اجرا کنید.</p>
-<p>اگر رویکردی تمیز و اصولی در پیش بگیرید، شانس شما برای دستیابی به کدی صحیح به طرز چشمگیری افزایش می‌یابد.</p>
-</div>
-
-  </main>
-
-  <!-- فوتر مشترک -->
-  <footer class="footer">
-    <div class="container">
-      <p>
-        <img src="/Gitab/icone/copyright.svg" alt="کپی‌رایت" width="14" height="14"
-             style="vertical-align:middle;margin-inline:4px">
-        <span id="y"></span> Gitab — تمامی حقوق محفوظ است.
-      </p>
-    </div>
-  </footer>
-
-  <!-- سال و اسکریپت تغییر تم -->
-  <script>
+</code></pre> <div dir="rtl"> اکنون می‌توانید از یک Aspect ساده استفاده کنید که به صورت تصادفی یکی از گزینه‌های "هیچ کاری انجام ندادن"، "خوابیدن" (sleep) یا "تسلیم کردن" (yield) را انتخاب می‌کند. یا تصور کنید که کلاس ThreadJigglePoint دارای دو پیاده‌سازی باشد. پیاده‌سازی اول متد jiggle را طوری پیاده‌سازی می‌کند که هیچ کاری انجام نمی‌دهد و در محیط تولید (Production) استفاده می‌شود. پیاده‌سازی دوم یک عدد تصادفی تولید می‌کند تا میان خوابیدن، تسلیم شدن یا عبور بدون انجام عمل خاصی یکی را انتخاب کند. اگر تست‌های خود را هزار بار با این نوع تکان‌های تصادفی اجرا کنید، ممکن است برخی اشکالات را کشف کنید. اگر تست‌ها با موفقیت بگذرند، حداقل می‌توانید ادعا کنید که بررسی‌های لازم را انجام داده‌اید. هرچند این روش کمی ساده است، اما می‌تواند جایگزینی مناسب در نبود ابزارهای پیشرفته‌تر باشد. <p>ابزاری به نام ConTest، توسعه‌یافته توسط IBM، وجود دارد که کاری مشابه انجام می‌دهد، اما با پیچیدگی و کارایی بسیار بیشتر.</p><p>نکته‌ی اصلی این است که کد را به نحوی تکان دهید که نخ‌ها (Threads) در هر بار اجرا به ترتیب‌های متفاوتی اجرا شوند. ترکیب تست‌های خوب و فرآیند تکان دادن می‌تواند به طور قابل توجهی احتمال یافتن خطاها را افزایش دهد.</p><p>توصیه: از استراتژی‌های تکان دادن برای یافتن خطاها استفاده کنید.</p><h2>نتیجه‌گیری</h2><p>کدنویسی همزمان (Concurrent Programming) کاری دشوار است. کدی که پیگیری آن در حالت عادی ساده به نظر می‌رسد، هنگامی که چندین نخ و داده‌های مشترک وارد عمل می‌شوند، می‌تواند به کابوسی پیچیده تبدیل شود.<br> اگر با نگارش کد همزمان روبرو هستید، باید با سخت‌گیری و دقت زیاد کدی تمیز (Clean Code) بنویسید؛ در غیر این صورت با خطاهای ظریف و نادر مواجه خواهید شد.</p><p>قبل از هر چیز، اصل تک مسئولیتی (Single Responsibility Principle) را رعایت کنید. سیستم خود را به POJOهایی تقسیم کنید که کد آگاه از نخ (Thread-Aware) را از کد ناآگاه از نخ (Thread-Ignorant) جدا می‌کنند. مطمئن شوید زمانی که در حال تست کدهای آگاه از نخ هستید، فقط همان بخش‌ها را آزمایش می‌کنید و نه بخش‌های دیگر. این موضوع به این معناست که کد آگاه از نخ باید کوچک و متمرکز باشد.</p><p>منابع احتمالی مشکلات همزمانی را بشناسید: نخ‌های متعددی که بر روی داده‌های مشترک یا منابع مشترک کار می‌کنند. موارد مرزی مانند خاموش شدن تمیز (Clean Shutdown) یا پایان یک حلقه می‌توانند به ویژه مشکل‌ساز باشند.</p><p>کتابخانه‌ی مورد استفاده‌ی خود را به خوبی بشناسید و با الگوریتم‌های بنیادی آشنا شوید. درک کنید که چگونه ویژگی‌های ارائه شده توسط کتابخانه می‌توانند در حل مسائلی مشابه الگوریتم‌های پایه کمک‌کننده باشند.</p><p>یاد بگیرید چگونه بخش‌هایی از کد را که نیاز به قفل شدن دارند، شناسایی کرده و آنها را قفل کنید. مناطقی را که نیازی به قفل شدن ندارند، قفل نکنید. از فراخوانی یک بخش قفل‌شده از درون یک بخش قفل‌شده‌ی دیگر اجتناب کنید. این کار نیازمند درک عمیقی از این است که چه چیزی مشترک است و چه چیزی نیست.<br> میزان اشیاء مشترک و دامنه‌ی اشتراک‌گذاری را تا حد ممکن محدود نگه دارید. طراحی اشیایی که داده‌ی مشترک دارند را تغییر دهید تا با نیازهای کاربران سازگار شوند، به جای آنکه کاربران مجبور شوند وضعیت‌های مشترک را مدیریت کنند.</p><p>مشکلاتی به وجود خواهند آمد. مشکلاتی که در مراحل اولیه ظاهر نمی‌شوند، معمولاً به عنوان رخدادهای نادر تلقی می‌شوند. این رخدادهای به اصطلاح &quot;یک‌باره&quot; غالباً تحت بار زیاد یا در زمان‌های به ظاهر تصادفی اتفاق می‌افتند.<br> بنابراین، باید بتوانید کدهای مربوط به نخ خود را در پیکربندی‌ها و بر روی پلتفرم‌های مختلف، به صورت مداوم و تکراری اجرا کنید.</p><p>قابلیت تست‌پذیری (Testability)، که به طور طبیعی از رعایت سه قانون TDD به دست می‌آید، به معنای نوعی قابلیت اتصال‌پذیری (Plug-ability) است که پشتیبانی لازم برای اجرای کد در طیف گسترده‌ای از پیکربندی‌ها را فراهم می‌کند.</p><p>با صرف زمان برای ابزارگذاری (Instrument) کد خود، شانس کشف خطاهای احتمالی را به طور چشمگیری افزایش می‌دهید.<br> این کار را می‌توانید به صورت دستی یا با استفاده از فناوری‌های خودکار انجام دهید.<br> از همان ابتدا روی این فرآیند سرمایه‌گذاری کنید. شما می‌خواهید کد مبتنی بر نخ خود را تا حد امکان طولانی‌تر قبل از ورود به محیط تولید اجرا کنید.</p><p>اگر رویکردی تمیز و اصولی در پیش بگیرید، شانس شما برای دستیابی به کدی صحیح به طرز چشمگیری افزایش می‌یابد.</p></div> </article><nav class="chapter-single-next-nav"> <a href="/Gitab/books/book3/Book/14_Successive_Refinement/Successive_Refinement/" class="btn-next-chapter-action" id="nextChapterBtn" data-hub="/Gitab/books/book3/"> <span class="next-btn-text">فصل بعدی: بهبود تدریجی Successive Refinement</span> <span class="next-btn-arrow">←</span> </a> </nav></div> <button class="fab-back-to-top" id="backToTopBtn" type="button" aria-label="رفتن به بالای صفحه" title="رفتن به بالا"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"> <polyline points="18 15 12 9 6 15"></polyline> </svg> </button></main> <footer class="footer-minimal"><div class="footer-container"> <div class="footer-top-row"><div class="footer-brand-side"> <a href="/Gitab/" class="footer-brand-anchor"> <img src="/Gitab/icone/logo.svg" alt="Gitab" width="28" height="28" loading="lazy" decoding="async"> <span class="footer-brand-title">گیتاب (Gitab)</span> </a> <p class="footer-tagline"> پلتفرم آزاد و مستقل برای ترجمهٔ دقیق و روان کتاب‌های مرجع مهندسی نرم‌افزار. </p></div> <div class="footer-nav-cols"><div class="footer-nav-col"> <span class="footer-nav-heading">موضوعات</span><ul class="footer-nav-list"> <li><a href="/Gitab/books/list-books/?cat=csharp">سی‌شارپ و دات‌نت</a></li><li><a href="/Gitab/books/list-books/?cat=clean-code">کد تمیز و بازآفرینی</a></li><li><a href="/Gitab/books/list-books/?cat=architecture">معماری و طراحی دامنه</a></li><li><a href="/Gitab/books/list-books/?cat=system">لینوکس و خط فرمان</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">بخش‌های سایت</span><ul class="footer-nav-list"> <li><a href="/Gitab/">صفحه اصلی</a></li><li><a href="/Gitab/books/list-books/">کتابخانه کامل</a></li><li><a href="/Gitab/courses/">دوره‌های آموزشی</a></li><li><a href="/Gitab/translator.html">تالار مترجمین</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">مشارکت و جامعه</span><ul class="footer-nav-list"> <li><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer">راهنمای همکاری در ترجمه</a></li><li><a href="https://github.com/hheydarian/Gitab/issues" target="_blank" rel="noopener noreferrer">پیشنهاد کتاب یا گزارش خطا</a></li></ul> </div></div> </div><div class="footer-bottom-line"> <span>© <span id="y">2026</span> Gitab — توسعه‌یافته برای جامعهٔ مهندسان نرم‌افزار ایرانی</span></div> </div></footer> <script>
   (() => {
     const root = document.documentElement;
     const btn = document.getElementById('themeToggle');
+    const sunIcon = btn ? btn.querySelector('.icon-sun') : null;
+    const moonIcon = btn ? btn.querySelector('.icon-moon') : null;
     const KEY = 'gitab-theme';
 
-    function updateTheme(s) {
-      root.setAttribute('data-theme', s);
-      const mode = s;  // فقط `dark` یا `light` خواهد بود
+    function updateTheme(mode) {
+      root.setAttribute('data-theme', mode);
       root.dataset.colorMode = mode;
-      btn.dataset.icon = mode === 'dark' ? 'moon' : 'sun';
+      if (sunIcon && moonIcon) {
+        if (mode === 'dark') {
+          sunIcon.style.display = 'inline-block';
+          moonIcon.style.display = 'none';
+        } else {
+          sunIcon.style.display = 'none';
+          moonIcon.style.display = 'inline-block';
+        }
+      }
     }
 
-    // وضعیت تم ذخیره شده از localStorage
-    let saved = localStorage.getItem(KEY) || 'light'; // پیش‌فرض روشن
+    let saved = 'dark';
+    try { saved = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
     updateTheme(saved);
 
-    // تنظیم مجدد تم هنگام تغییر وضعیت دکمه
-    btn.addEventListener('click', () => {
-      const current = localStorage.getItem(KEY) || 'light';
-      const next = current === 'dark' ? 'light' : 'dark';  // فقط دو حالت: تاریک و روشن
-      localStorage.setItem(KEY, next);
-      updateTheme(next);
-    });
+    if (btn) {
+      btn.addEventListener('click', () => {
+        let current = 'dark';
+        try { current = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+        const next = current === 'dark' ? 'light' : 'dark';
+        try { localStorage.setItem(KEY, next); } catch (e) {}
+        updateTheme(next);
+      });
+    }
 
-    // هنگام بارگذاری صفحه
     document.addEventListener('DOMContentLoaded', () => {
-      updateTheme(localStorage.getItem(KEY) || 'light');
+      let mode = 'dark';
+      try { mode = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+      updateTheme(mode);
+      const yearSpan = document.getElementById('y');
+      if (yearSpan) yearSpan.textContent = new Date().getFullYear();
     });
+
+    const mobBtn = document.getElementById('mobileMenuBtn');
+    const mobDrawer = document.getElementById('mobileDrawer');
+    if (mobBtn && mobDrawer) {
+      const setDrawerOpen = (open) => {
+        mobDrawer.classList.toggle('open', open);
+        mobBtn.classList.toggle('is-open', open);
+        mobBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        mobBtn.setAttribute('aria-label', open ? 'بستن منو' : 'باز کردن منو');
+        mobDrawer.setAttribute('aria-hidden', open ? 'false' : 'true');
+      };
+
+      mobBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        setDrawerOpen(!mobDrawer.classList.contains('open'));
+      });
+
+      mobDrawer.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => setDrawerOpen(false));
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && mobDrawer.classList.contains('open')) {
+          setDrawerOpen(false);
+        }
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!mobDrawer.contains(e.target) && !mobBtn.contains(e.target)) {
+          setDrawerOpen(false);
+        }
+      });
+    }
+
+    if ('serviceWorker' in navigator) {
+      const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+      if (isLocalhost) {
+        navigator.serviceWorker.getRegistrations().then(regs => {
+          for (const reg of regs) reg.unregister();
+        });
+        if ('caches' in window) {
+          caches.keys().then(names => {
+            for (const name of names) caches.delete(name);
+          });
+        }
+      } else {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/Gitab/sw.js').catch(() => {});
+        });
+      }
+    }
   })();
-</script>
-
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-  <script>hljs.highlightAll();</script>
-
-  <script>
+  </script> <script>
   document.querySelectorAll('pre code').forEach(block => {
+    const pre = block.parentNode;
+    if (!pre || pre.querySelector('.copy-btn')) return;
+
+    const copySvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
+    const okSvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+
     const btn = document.createElement('button');
     btn.className = 'copy-btn';
-
-    const icon = document.createElement('img');
-    icon.src = "/Gitab/icone/copy.svg";
-    icon.alt = 'Copy';
-    btn.appendChild(icon);
-
-    block.parentNode.insertBefore(btn, block);
+    btn.setAttribute('aria-label', 'کپی کد');
+    btn.setAttribute('title', 'کپی کد');
+    btn.setAttribute('type', 'button');
+    btn.innerHTML = copySvg;
+    pre.appendChild(btn);
 
     btn.addEventListener('click', async () => {
-      await navigator.clipboard.writeText(block.textContent);
-      btn.classList.add('copied');
-      setTimeout(() => btn.classList.remove('copied'), 1500);
-    });
-  });
-  </script>
-
-  <script>
-  document.body.dataset.page = window.location.pathname;
-
-  const menuBtn = document.querySelector(".menu-toggle");
-  const nav = document.querySelector(".nav");
-
-  if (menuBtn && nav) {
-    menuBtn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      nav.classList.toggle("show");
-    });
-
-    document.addEventListener("click", (e) => {
-      const clickedInsideNav = nav.contains(e.target);
-      const clickedMenuButton = menuBtn.contains(e.target);
-      if (!clickedInsideNav && !clickedMenuButton) {
-        nav.classList.remove("show");
+      try {
+        await navigator.clipboard.writeText(block.textContent);
+        btn.classList.add('copied');
+        btn.innerHTML = okSvg;
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          btn.innerHTML = copySvg;
+        }, 1800);
+      } catch (err) {
+        console.error('Copy failed:', err);
       }
     });
-  }
-  </script>
-
-  <script>
-    document.getElementById('y').textContent = new Date().getFullYear();
-  </script>
-  <script>
-document.getElementById("openDonate").addEventListener("click", () => {
-  document.getElementById("donateModal").style.display = "block";
-});
-document.getElementById("closeDonate").addEventListener("click", () => {
-  document.getElementById("donateModal").style.display = "none";
-});
-document.querySelectorAll(".copy-btn").forEach(btn => {
-  btn.addEventListener("click", () => {
-    navigator.clipboard.writeText(btn.dataset.copy);
-  
-    setTimeout(() => (btn.textContent = "کپی"), 2000);
   });
-});
-</script>
+  </script> <script>
+  (() => {
+    const article = document.getElementById('chapterArticle');
+    if (!article) return;
 
-</body>
-</html>
+    const progressBar = document.getElementById('readingProgressBar');
+    if (progressBar) {
+      window.addEventListener('scroll', () => {
+        const docElem = document.documentElement;
+        const totalHeight = docElem.scrollHeight - docElem.clientHeight;
+        if (totalHeight > 0) {
+          const progress = (window.pageYOffset / totalHeight) * 100;
+          progressBar.style.width = Math.min(100, Math.max(0, progress)) + '%';
+        }
+      }, { passive: true });
+    }
+
+    const btt = document.getElementById('backToTopBtn');
+    if (btt) {
+      window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 250) {
+          btt.classList.add('visible');
+        } else {
+          btt.classList.remove('visible');
+        }
+      }, { passive: true });
+
+      btt.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+
+    article.querySelectorAll('img').forEach(img => {
+      if (!img.hasAttribute('loading')) img.loading = 'lazy';
+      if (!img.hasAttribute('decoding')) img.decoding = 'async';
+      const parent = img.parentElement;
+      if (parent && parent.tagName === 'P') {
+        parent.style.textAlign = 'center';
+      }
+
+      img.addEventListener('error', function() {
+        const src = this.getAttribute('src');
+        if (src && src.includes('assets/image/')) {
+          const parts = src.split('assets/image/');
+          const corrected = '/Gitab/books/book3/assets/image/' + parts[1];
+          if (this.src !== corrected) {
+            this.src = corrected;
+          }
+        }
+      });
+    });
+
+    article.querySelectorAll('p').forEach(p => {
+      const trimmed = p.innerText.trim();
+      if (trimmed.startsWith('💡') || trimmed.startsWith('نکته:')) {
+        p.classList.add('react-callout', 'callout-tip');
+      } else if (trimmed.startsWith('⚠️') || trimmed.startsWith('هشدار:')) {
+        p.classList.add('react-callout', 'callout-warning');
+      } else if (trimmed.startsWith('📌') || trimmed.startsWith('مهم:')) {
+        p.classList.add('react-callout', 'callout-important');
+      } else if (trimmed.startsWith('🔹') || trimmed.startsWith('🔸')) {
+        p.classList.add('react-callout', 'callout-note');
+      }
+    });
+  })();
+  </script> <script type="speculationrules">{"prefetch":[{"where":{"and":[{"href_matches":"/Gitab/*"},{"not":{"href_matches":"/Gitab/downloads/*"}},{"not":{"selector_matches":"[download], [target='_blank']"}}]},"eagerness":"moderate"}]}</script> <script>
+  (() => {
+    if (window.HTMLScriptElement && HTMLScriptElement.supports && HTMLScriptElement.supports('speculationrules')) return;
+    const seen = new Set([window.location.href]);
+    let count = 0;
+    const prefetchLink = (e) => {
+      if (count >= 12) return;
+      const a = e.target && e.target.closest ? e.target.closest('header a, .chapter-single-next-nav a, .syllabus-chapter-item a, .btn-hero-read, .btn-card-read') : null;
+      if (!a || !a.href || a.hasAttribute('download') || a.target === '_blank') return;
+      if (a.origin !== window.location.origin || a.pathname.includes('/downloads/')) return;
+      const clean = a.href.split('#')[0];
+      if (!clean || seen.has(clean)) return;
+      seen.add(clean);
+      count++;
+      const l = document.createElement('link');
+      l.rel = 'prefetch';
+      l.href = clean;
+      document.head.appendChild(l);
+    };
+    document.addEventListener('pointerenter', prefetchLink, { capture: true, passive: true });
+    document.addEventListener('touchstart', prefetchLink, { capture: true, passive: true });
+  })();
+  </script></body></html>

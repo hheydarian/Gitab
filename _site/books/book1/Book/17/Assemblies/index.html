@@ -1,167 +1,24 @@
-
-
-<!doctype html>
-<html lang="fa" dir="rtl">
-<head>
-  <meta charset="utf-8">
-  <link rel="icon" type="image/png" href="/Gitab/favicon.png">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>اسمبلی‌ها (Assemblies)</title>
-  <meta name="description" content="ترجمه‌های فارسی کتاب‌های فنی — سریع، مینیمال و قابل اتکا.">
-
-  <!-- استایل‌ها -->
-  <link rel="stylesheet" href="/Gitab/styles/main.css">
-  <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
-
-  <style>
-  @font-face {
-    font-family: 'Vazir';
-    src: url('/Gitab/fonts/Vazir-FD-WOL.ttf') format('truetype');
-    font-display: swap;
-  }
-  @font-face {
-    font-family: "Lalezar";
-    src: url('fonts/Lalezar.ttf') format('truetype');
-    font-display: swap;
-}
-  body {
-    font-family: 'Vazir', sans-serif;
-  }
-  </style>
-</head>
-
-<body>
-  <!-- هدر مشترک -->
-  <header class="header">
-    <div class="container nav-wrap">
-      <a href="/Gitab/" class="brand">
-        <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="26" height="26">
-        <span>Gitab</span>
-      </a>
-
-       <nav class="nav">
-         <a href="/Gitab/" >خانه</a>
-         <a href="/Gitab/books/list-books" >کتاب‌ها</a>
-         <a href="/Gitab/giter.html" >دوره ها</a>
-          <!-- 
-         <a href="/Gitab/translator.html" >مترجمین</a>
-           -->
-       </nav>
-
-      <div class="nav-actions">
-        <button id="themeToggle" class="icon-btn theme-btn" data-icon="moon" aria-label="تغییر تم">
-          <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن">
-          <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک">
-        </button>
-
-        <a class="icon-btn" href="https://github.com/hheydarian/Gitab" target="_blank" title="GitHub">
-          <img src="/Gitab/icone/github.svg" alt="GitHub">
-        </a>
-
-        <!-- دکمه منو برای موبایل -->
-        <button class="menu-toggle" aria-label="منو">
-          <img src="/Gitab/icone/menu.svg" alt="menu">
-        </button>
-      </div>
-    </div>
-  </header>
-
-  
-  <main class="site-main book-page">
-    <h1>درس هفدهم:  اسمبلی‌ها (Assemblies)</h1>
-<p>یک <strong>assembly</strong> واحد پایه‌ای برای استقرار (deployment) در .NET است و همچنین محفظه‌ای برای تمام <strong>type</strong>ها به شمار می‌آید. یک اسمبلی شامل <strong>type</strong>های کامپایل‌شده به همراه کد <strong>Intermediate Language (IL)</strong>، منابع اجرایی (<strong>runtime resources</strong>) و اطلاعاتی برای مدیریت نسخه‌ها و ارجاع به سایر اسمبلی‌ها است. همچنین اسمبلی یک مرز برای <strong>type resolution</strong> تعریف می‌کند. در .NET، یک اسمبلی معمولاً شامل یک فایل با پسوند <code>.dll</code> است.</p>
-<p>زمانی که یک برنامه اجرایی در .NET می‌سازید، دو فایل ایجاد می‌شود:</p>
-<ul>
-<li>یک اسمبلی (.dll)</li>
-<li>یک <strong>executable launcher</strong> (.exe) که متناسب با پلتفرمی است که هدف قرار داده‌اید.</li>
-</ul>
-<p>این با چیزی که در <strong>.NET Framework</strong> اتفاق می‌افتد متفاوت است، جایی که یک <strong>portable executable (PE) assembly</strong> تولید می‌شود. یک PE با پسوند <code>.exe</code> هم به‌عنوان اسمبلی و هم به‌عنوان برنامه اجرایی عمل می‌کند و می‌تواند به‌طور همزمان نسخه‌های ۳۲ و ۶۴ بیتی ویندوز را هدف قرار دهد.</p>
-<p>اکثر <strong>type</strong>های این فصل از فضای نام‌های زیر آمده‌اند:</p>
-<ul>
-<li><code>System.Reflection</code></li>
-<li><code>System.Resources</code></li>
-<li><code>System.Globalization</code></li>
-</ul>
-<hr>
-<h3>🔹 محتوای یک اسمبلی (What’s in an Assembly) 🔹</h3>
-<p>یک اسمبلی شامل چهار نوع محتوا است:</p>
-<ol>
-<li>
-<p><strong>Assembly Manifest</strong></p>
-<ul>
-<li>اطلاعاتی به <strong>CLR</strong> می‌دهد، مانند نام اسمبلی، نسخه آن و سایر اسمبلی‌هایی که به آن ارجاع دارند.</li>
-</ul>
-</li>
-<li>
-<p><strong>Application Manifest</strong></p>
-<ul>
-<li>اطلاعاتی به سیستم‌عامل می‌دهد، مانند نحوه استقرار اسمبلی و این‌که آیا نیاز به دسترسی مدیریتی وجود دارد یا خیر.</li>
-</ul>
-</li>
-<li>
-<p><strong>Compiled Types</strong></p>
-<ul>
-<li>کد IL کامپایل‌شده و <strong>metadata</strong> مربوط به <strong>type</strong>های تعریف‌شده در اسمبلی.</li>
-</ul>
-</li>
-<li>
-<p><strong>Resources</strong></p>
-<ul>
-<li>سایر داده‌های تعبیه‌شده در اسمبلی، مانند تصاویر و متن‌های قابل بومی‌سازی (<strong>localizable text</strong>).</li>
-</ul>
-</li>
-</ol>
-<p>از این میان، تنها <strong>assembly manifest</strong> اجباری است، هرچند که تقریباً همیشه یک اسمبلی شامل <strong>type</strong>های کامپایل‌شده هم هست (مگر اینکه یک <strong>resource assembly</strong> باشد. برای جزئیات به بخش “Resources and Satellite Assemblies” در صفحه ۷۷۶ مراجعه کنید).</p>
-<hr>
-<h3>🔹 Assembly Manifest 🔹</h3>
-<p><strong>Assembly Manifest</strong> دو هدف دارد:</p>
-<ul>
-<li>اسمبلی را به محیط میزبانی مدیریت‌شده (<strong>managed hosting environment</strong>) معرفی می‌کند.</li>
-<li>به‌عنوان یک فهرست برای <strong>module</strong>ها، <strong>type</strong>ها و منابع موجود در اسمبلی عمل می‌کند.</li>
-</ul>
-<p>بنابراین، اسمبلی‌ها خودتوصیفی (<strong>self-describing</strong>) هستند. مصرف‌کننده می‌تواند تمام داده‌ها، <strong>type</strong>ها و عملکردهای یک اسمبلی را بدون نیاز به فایل‌های اضافی کشف کند.</p>
-<p><strong>Assembly Manifest</strong> به‌صورت دستی اضافه نمی‌شود؛ بلکه به‌طور خودکار در هنگام کامپایل داخل اسمبلی جاسازی می‌شود.</p>
-<hr>
-<h3>🔹 داده‌های مهم ذخیره‌شده در Manifest 🔹</h3>
-<ul>
-<li>نام ساده‌ی اسمبلی</li>
-<li>شماره نسخه (<strong>AssemblyVersion</strong>)</li>
-<li>کلید عمومی و هش امضا شده، در صورت داشتن <strong>strong name</strong></li>
-<li>فهرست اسمبلی‌های مرجع، شامل نسخه و کلید عمومی آن‌ها</li>
-<li>فهرست <strong>type</strong>های تعریف‌شده در اسمبلی</li>
-<li>فرهنگی که هدف قرار داده شده، در صورت <strong>satellite assembly</strong> (<strong>AssemblyCulture</strong>)</li>
-</ul>
-<p><strong>داده‌های اطلاعاتی دیگر شامل:</strong></p>
-<ul>
-<li>عنوان و توضیحات کامل (<strong>AssemblyTitle و AssemblyDescription</strong>)</li>
-<li>اطلاعات شرکت و حق نشر (<strong>AssemblyCompany و AssemblyCopyright</strong>)</li>
-<li>نسخه نمایشی (<strong>AssemblyInformationalVersion</strong>)</li>
-<li>ویژگی‌های اضافی برای داده‌های سفارشی</li>
-</ul>
-<p>بخشی از این داده‌ها از پارامترهای ورودی به کامپایلر استخراج می‌شوند، مانند فهرست اسمبلی‌های مرجع یا کلید عمومی برای امضای اسمبلی. بقیه از <strong>assembly attributes</strong> می‌آیند (که در پرانتز مشخص شده‌اند).</p>
-<hr>
-<h3>🔹 مشاهده محتویات Manifest 🔹</h3>
-<p>می‌توانید محتویات <strong>assembly manifest</strong> را با ابزار <strong>.NET</strong> به نام <code>ildasm.exe</code> مشاهده کنید. در فصل بعدی (۱۸) توضیح داده می‌شود که چگونه می‌توان این کار را به‌صورت برنامه‌نویسی با <strong>reflection</strong> انجام داد.</p>
-<hr>
-<h3>🔹 مشخص کردن Assembly Attributes 🔹</h3>
-<p>ویژگی‌های معمول اسمبلی را می‌توان در <strong>Visual Studio</strong>، در صفحه Properties پروژه و در تب <strong>Package</strong> مشخص کرد. تنظیمات این تب به فایل پروژه (.csproj) اضافه می‌شوند.</p>
-<p>برای مشخص کردن ویژگی‌هایی که توسط تب <strong>Package</strong> پشتیبانی نمی‌شوند، یا در صورت عدم کار با فایل .csproj، می‌توانید <strong>assembly attributes</strong> را در کد منبع تعیین کنید (اغلب در فایلی به نام <code>AssemblyInfo.cs</code>).</p>
-<p>مثال: برای دسترسی دادن به <strong>type</strong>های داخلی به یک پروژه تست واحد:</p>
-<pre class="hljs"><code><span class="hljs-keyword">using</span> System.Runtime.CompilerServices;
+<!doctype html><html lang="fa" dir="rtl"> <head><script>
+    if (window.location.pathname.startsWith('/gitab/')) {
+      window.location.replace(window.location.pathname.replace(/^\/gitab\//i, '/Gitab/') + window.location.search + window.location.hash);
+    }
+    (() => {
+      try {
+        const t = localStorage.getItem('gitab-theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', t);
+        document.documentElement.dataset.colorMode = t;
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        document.documentElement.dataset.colorMode = 'dark';
+      }
+    })();
+  </script> <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5"> <title>اسمبلی‌ها (Assemblies)</title><meta name="description" content="اسمبلی‌ها (Assemblies) — مطالعه آنلاین و رایگان از کتاب «سی‌شارپ ۱۲ در یک نگاه» (C# 12 in a Nutshell) اثر Joseph Albahari با ترجمه حامد حیدریان در گیتاب."> <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"><meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"> <meta name="theme-color" content="#090d16"><meta name="referrer" content="strict-origin-when-cross-origin"> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https:; frame-src https://www.youtube.com https://www.youtube-nocookie.com https://maps.google.com https://www.google.com; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self';"><link rel="icon" type="image/png" href="/Gitab/favicon.png"> <link rel="canonical" href="https://hheydarian.github.io/Gitab/books/book1/Book/17/Assemblies/"><link rel="alternate" hreflang="fa" href="https://hheydarian.github.io/Gitab/books/book1/Book/17/Assemblies/"> <link rel="alternate" hreflang="x-default" href="https://hheydarian.github.io/Gitab/books/book1/Book/17/Assemblies/"><link rel="alternate" type="text/plain" title="LLMs.txt" href="/Gitab/llms.txt"> <link rel="sitemap" type="application/xml" title="Sitemap" href="/Gitab/sitemap.xml"><meta property="og:locale" content="fa_IR"> <meta property="og:type" content="article"><meta property="og:site_name" content="گیتاب | Gitab"> <meta property="og:title" content="اسمبلی‌ها (Assemblies)"><meta property="og:description" content="اسمبلی‌ها (Assemblies) — مطالعه آنلاین و رایگان از کتاب «سی‌شارپ ۱۲ در یک نگاه» (C# 12 in a Nutshell) اثر Joseph Albahari با ترجمه حامد حیدریان در گیتاب."> <meta property="og:url" content="https://hheydarian.github.io/Gitab/books/book1/Book/17/Assemblies/"><meta property="og:image" content="https://hheydarian.github.io/Gitab/images/csharp-12/Cover.jpg"> <meta property="og:image:alt" content="اسمبلی‌ها (Assemblies)"><meta name="twitter:card" content="summary_large_image"> <meta name="twitter:title" content="اسمبلی‌ها (Assemblies)"><meta name="twitter:description" content="اسمبلی‌ها (Assemblies) — مطالعه آنلاین و رایگان از کتاب «سی‌شارپ ۱۲ در یک نگاه» (C# 12 in a Nutshell) اثر Joseph Albahari با ترجمه حامد حیدریان در گیتاب."> <meta name="twitter:image" content="https://hheydarian.github.io/Gitab/images/csharp-12/Cover.jpg"><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://hheydarian.github.io/Gitab/#organization","name":"گیتاب | Gitab","alternateName":"Gitab","url":"https://hheydarian.github.io/Gitab/","logo":{"@type":"ImageObject","url":"https://hheydarian.github.io/Gitab/favicon.png"},"sameAs":["https://github.com/hheydarian/Gitab"]},{"@type":"WebSite","@id":"https://hheydarian.github.io/Gitab/#website","url":"https://hheydarian.github.io/Gitab/","name":"گیتاب | Gitab","inLanguage":"fa-IR","publisher":{"@id":"https://hheydarian.github.io/Gitab/#organization"},"potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://hheydarian.github.io/Gitab/books/list-books/?q={search_term_string}"},"query-input":"required name=search_term_string"}},{"@type":"WebPage","@id":"https://hheydarian.github.io/Gitab/books/book1/Book/17/Assemblies/#webpage","url":"https://hheydarian.github.io/Gitab/books/book1/Book/17/Assemblies/","name":"اسمبلی‌ها (Assemblies)","description":"اسمبلی‌ها (Assemblies) — مطالعه آنلاین و رایگان از کتاب «سی‌شارپ ۱۲ در یک نگاه» (C# 12 in a Nutshell) اثر Joseph Albahari با ترجمه حامد حیدریان در گیتاب.","inLanguage":"fa-IR","isPartOf":{"@id":"https://hheydarian.github.io/Gitab/#website"}},{"@type":"TechArticle","headline":"اسمبلی‌ها (Assemblies)","description":"اسمبلی‌ها (Assemblies) — مطالعه آنلاین و رایگان از کتاب «سی‌شارپ ۱۲ در یک نگاه» (C# 12 in a Nutshell) اثر Joseph Albahari با ترجمه حامد حیدریان در گیتاب.","url":"https://hheydarian.github.io/Gitab/books/book1/Book/17/Assemblies/","inLanguage":"fa-IR","isAccessibleForFree":true,"author":{"@type":"Person","name":"Joseph Albahari"},"translator":{"@type":"Person","name":"حامد حیدریان"},"isPartOf":{"@type":"Book","name":"سی‌شارپ ۱۲ در یک نگاه","alternateName":"C# 12 in a Nutshell","url":"https://hheydarian.github.io/Gitab/books/book1/"}}]}</script> <link rel="preload" href="/Gitab/fonts/Vazirmatn.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/Gitab/styles/main.css?v=2.4" as="style"> <link rel="preload" href="/Gitab/styles/gitab-modern.css?v=2.5" as="style"><style>@font-face{font-family:'Lalezar';src:url('/Gitab/fonts/Lalezar.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}@font-face{font-family:'Vazirmatn';src:url('/Gitab/fonts/Vazirmatn.woff2') format('woff2');font-weight:100 900;font-style:normal;font-display:swap}html,body,button,input,optgroup,select,textarea,.filter-pill{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}input::placeholder,textarea::placeholder{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}</style> <link rel="stylesheet" href="/Gitab/styles/main.css?v=2.4"><link rel="stylesheet" href="/Gitab/styles/gitab-modern.css?v=2.5"> <link rel="stylesheet" href="/Gitab/styles/vendor/github-dark.min.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="/Gitab/styles/vendor/github-dark.min.css"></noscript></head> <body><header class="header"> <div class="container nav-wrap"><a href="/Gitab/" class="brand" aria-label="صفحه اصلی گیتاب"> <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="30" height="30" decoding="async"> <span class="brand-text">Gitab</span> </a> <nav class="nav" id="mainNav"><a href="/Gitab/" >خانه</a> <a href="/Gitab/books/list-books" aria-current="page">کتاب‌ها</a> <a href="/Gitab/courses/" >دوره‌ها</a> <a href="/Gitab/translator.html" >مترجمین</a></nav> <div class="nav-actions"><button id="themeToggle" class="theme-toggle-btn" aria-label="تغییر تم" title="تغییر تم"> <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن" width="18" height="18" decoding="async" style="display:none"> <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک" width="18" height="18" decoding="async"> </button> <a class="btn-github-pill" href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" title="مشاهده سورس گیتاب در گیت‌هاب"> <img src="/Gitab/icone/github.svg" alt="GitHub" width="16" height="16" decoding="async"> <span>گیت‌هاب</span> </a> <button class="mobile-menu-btn" id="mobileMenuBtn" type="button" aria-label="باز کردن منو" aria-expanded="false"> <svg class="mob-icon-open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="4" y1="7" x2="20" y2="7"></line> <line x1="4" y1="12" x2="20" y2="12"></line> <line x1="4" y1="17" x2="14" y2="17"></line> </svg> <svg class="mob-icon-close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="18" y1="6" x2="6" y2="18"></line> <line x1="6" y1="6" x2="18" y2="18"></line> </svg> </button></div> </div><div class="mobile-drawer" id="mobileDrawer" aria-hidden="true"> <div class="mobile-drawer-inner"><div class="mobile-drawer-section-label">ناوبری سریع</div><nav class="mobile-drawer-links" aria-label="منوی موبایل"> <a href="/Gitab/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M3 10.5 12 3l9 7.5"></path> <path d="M5 9.5V20a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V9.5"></path> </svg> </span> <span class="mob-nav-text">صفحه نخست</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/books/list-books" class="mobile-drawer-link active" aria-current="page"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path> </svg> </span> <span class="mob-nav-text">کتابخانه و فهرست کتاب‌ها</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/courses/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path> <path d="M6 12v5c3 3 9 3 12 0v-5"></path> </svg> </span> <span class="mob-nav-text">دوره‌های آموزشی</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/translator.html" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path> <circle cx="9" cy="7" r="4"></circle> <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path> <path d="M16 3.13a4 4 0 0 1 0 7.75"></path> </svg> </span> <span class="mob-nav-text">مترجمین و همکاران</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> </nav><div class="mobile-drawer-divider"></div><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" class="mobile-drawer-link mobile-drawer-gh"> <span class="mob-nav-icon" aria-hidden="true"> <img src="/Gitab/icone/github.svg" alt="" width="17" height="17" loading="lazy" decoding="async"> </span> <span class="mob-nav-text">مخزن گیت‌هاب پروژه</span> <span class="mob-nav-ext" aria-hidden="true">↗</span> </a> </div></div> </header><div class="reading-progress-track"> <div class="reading-progress-fill" id="readingProgressBar"></div></div> <main class="site-main chapter-reading-page"><div class="chapter-page-wrapper"> <nav class="chapter-clean-breadcrumb" aria-label="مسیر راهنما" dir="rtl"><a href="/Gitab/">خانه</a> <span class="bc-sep" aria-hidden="true">/</span> <a href="/Gitab/books/list-books/">کتاب‌ها</a> <span class="bc-sep" aria-hidden="true">/</span> <a href="/Gitab/books/book1/"><bdi>سی‌شارپ ۱۲ در یک نگاه</bdi></a> <span class="bc-sep" aria-hidden="true">/</span> <span class="bc-current-leaf"><bdi>اسمبلی‌ها (Assemblies)</bdi></span></nav> <article class="chapter-prose-container markdown-body" id="chapterArticle" dir="rtl"><h1>درس هفدهم: اسمبلی‌ها (Assemblies)</h1><p>یک <strong>assembly</strong> واحد پایه‌ای برای استقرار (deployment) در .NET است و همچنین محفظه‌ای برای تمام <strong>type</strong>ها به شمار می‌آید. یک اسمبلی شامل <strong>type</strong>های کامپایل‌شده به همراه کد <strong>Intermediate Language (IL)</strong>، منابع اجرایی (<strong>runtime resources</strong>) و اطلاعاتی برای مدیریت نسخه‌ها و ارجاع به سایر اسمبلی‌ها است. همچنین اسمبلی یک مرز برای <strong>type resolution</strong> تعریف می‌کند. در .NET، یک اسمبلی معمولاً شامل یک فایل با پسوند <code>.dll</code> است.</p><p>زمانی که یک برنامه اجرایی در .NET می‌سازید، دو فایل ایجاد می‌شود:</p><ul> <li>یک اسمبلی (.dll)</li><li>یک <strong>executable launcher</strong> (.exe) که متناسب با پلتفرمی است که هدف قرار داده‌اید.</li></ul> <p>این با چیزی که در <strong>.NET Framework</strong> اتفاق می‌افتد متفاوت است، جایی که یک <strong>portable executable (PE) assembly</strong> تولید می‌شود. یک PE با پسوند <code>.exe</code> هم به‌عنوان اسمبلی و هم به‌عنوان برنامه اجرایی عمل می‌کند و می‌تواند به‌طور همزمان نسخه‌های ۳۲ و ۶۴ بیتی ویندوز را هدف قرار دهد.</p><p>اکثر <strong>type</strong>های این فصل از فضای نام‌های زیر آمده‌اند:</p><ul> <li><code>System.Reflection</code></li><li><code>System.Resources</code></li><li><code>System.Globalization</code></li></ul> <hr><h3>محتوای یک اسمبلی (What’s in an Assembly)</h3><p>یک اسمبلی شامل چهار نوع محتوا است:</p><ol> <li><p><strong>Assembly Manifest</strong></p><ul> <li>اطلاعاتی به <strong>CLR</strong> می‌دهد، مانند نام اسمبلی، نسخه آن و سایر اسمبلی‌هایی که به آن ارجاع دارند.</li></ul> </li><li> <p><strong>Application Manifest</strong></p><ul> <li>اطلاعاتی به سیستم‌عامل می‌دهد، مانند نحوه استقرار اسمبلی و این‌که آیا نیاز به دسترسی مدیریتی وجود دارد یا خیر.</li></ul> </li><li> <p><strong>Compiled Types</strong></p><ul> <li>کد IL کامپایل‌شده و <strong>metadata</strong> مربوط به <strong>type</strong>های تعریف‌شده در اسمبلی.</li></ul> </li><li> <p><strong>Resources</strong></p><ul> <li>سایر داده‌های تعبیه‌شده در اسمبلی، مانند تصاویر و متن‌های قابل بومی‌سازی (<strong>localizable text</strong>).</li></ul> </li></ol> <p>از این میان، تنها <strong>assembly manifest</strong> اجباری است، هرچند که تقریباً همیشه یک اسمبلی شامل <strong>type</strong>های کامپایل‌شده هم هست (مگر اینکه یک <strong>resource assembly</strong> باشد. برای جزئیات به بخش “Resources and Satellite Assemblies” در صفحه ۷۷۶ مراجعه کنید).</p><hr> <h3>Assembly Manifest</h3><p><strong>Assembly Manifest</strong> دو هدف دارد:</p><ul> <li>اسمبلی را به محیط میزبانی مدیریت‌شده (<strong>managed hosting environment</strong>) معرفی می‌کند.</li><li>به‌عنوان یک فهرست برای <strong>module</strong>ها، <strong>type</strong>ها و منابع موجود در اسمبلی عمل می‌کند.</li></ul> <p>بنابراین، اسمبلی‌ها خودتوصیفی (<strong>self-describing</strong>) هستند. مصرف‌کننده می‌تواند تمام داده‌ها، <strong>type</strong>ها و عملکردهای یک اسمبلی را بدون نیاز به فایل‌های اضافی کشف کند.</p><p><strong>Assembly Manifest</strong> به‌صورت دستی اضافه نمی‌شود؛ بلکه به‌طور خودکار در هنگام کامپایل داخل اسمبلی جاسازی می‌شود.</p><hr> <h3>داده‌های مهم ذخیره‌شده در Manifest</h3><ul> <li>نام ساده‌ی اسمبلی</li><li>شماره نسخه (<strong>AssemblyVersion</strong>)</li><li>کلید عمومی و هش امضا شده، در صورت داشتن <strong>strong name</strong></li><li>فهرست اسمبلی‌های مرجع، شامل نسخه و کلید عمومی آن‌ها</li><li>فهرست <strong>type</strong>های تعریف‌شده در اسمبلی</li><li>فرهنگی که هدف قرار داده شده، در صورت <strong>satellite assembly</strong> (<strong>AssemblyCulture</strong>)</li></ul> <p><strong>داده‌های اطلاعاتی دیگر شامل:</strong></p><ul> <li>عنوان و توضیحات کامل (<strong>AssemblyTitle و AssemblyDescription</strong>)</li><li>اطلاعات شرکت و حق نشر (<strong>AssemblyCompany و AssemblyCopyright</strong>)</li><li>نسخه نمایشی (<strong>AssemblyInformationalVersion</strong>)</li><li>ویژگی‌های اضافی برای داده‌های سفارشی</li></ul> <p>بخشی از این داده‌ها از پارامترهای ورودی به کامپایلر استخراج می‌شوند، مانند فهرست اسمبلی‌های مرجع یا کلید عمومی برای امضای اسمبلی. بقیه از <strong>assembly attributes</strong> می‌آیند (که در پرانتز مشخص شده‌اند).</p><hr> <h3>مشاهده محتویات Manifest</h3><p>می‌توانید محتویات <strong>assembly manifest</strong> را با ابزار <strong>.NET</strong> به نام <code>ildasm.exe</code> مشاهده کنید. در فصل بعدی (۱۸) توضیح داده می‌شود که چگونه می‌توان این کار را به‌صورت برنامه‌نویسی با <strong>reflection</strong> انجام داد.</p><hr> <h3>مشخص کردن Assembly Attributes</h3><p>ویژگی‌های معمول اسمبلی را می‌توان در <strong>Visual Studio</strong>، در صفحه Properties پروژه و در تب <strong>Package</strong> مشخص کرد. تنظیمات این تب به فایل پروژه (.csproj) اضافه می‌شوند.</p><p>برای مشخص کردن ویژگی‌هایی که توسط تب <strong>Package</strong> پشتیبانی نمی‌شوند، یا در صورت عدم کار با فایل .csproj، می‌توانید <strong>assembly attributes</strong> را در کد منبع تعیین کنید (اغلب در فایلی به نام <code>AssemblyInfo.cs</code>).</p><p>مثال: برای دسترسی دادن به <strong>type</strong>های داخلی به یک پروژه تست واحد:</p><pre class="hljs"><code><span class="hljs-keyword">using</span> System.Runtime.CompilerServices;
 [<span class="hljs-meta">assembly: InternalsVisibleTo(<span class="hljs-string">&quot;MyUnitTestProject&quot;</span>)</span>]
-</code></pre>
-<hr>
-<h3>🔹 Application Manifest (ویندوز) 🔹</h3>
-<p><strong>Application Manifest</strong> یک فایل XML است که اطلاعاتی درباره‌ی اسمبلی به سیستم‌عامل منتقل می‌کند. این فایل در هنگام ساخت، به‌عنوان یک <strong>Win32 resource</strong> داخل فایل اجرایی قرار می‌گیرد. اگر موجود باشد، قبل از بارگذاری اسمبلی توسط CLR خوانده شده و پردازش می‌شود و می‌تواند نحوه اجرای فرآیند برنامه در ویندوز را تحت تأثیر قرار دهد.</p>
-<p>یک <strong>manifest</strong> در .NET دارای عنصر ریشه‌ای به نام <code>assembly</code> در فضای نام XML زیر است:</p>
-<pre class="hljs"><code><span class="hljs-meta">&lt;?xml version=<span class="hljs-string">&quot;1.0&quot;</span> encoding=<span class="hljs-string">&quot;utf-8&quot;</span>?&gt;</span>
+</code></pre> <hr><h3>Application Manifest (ویندوز)</h3><p><strong>Application Manifest</strong> یک فایل XML است که اطلاعاتی درباره‌ی اسمبلی به سیستم‌عامل منتقل می‌کند. این فایل در هنگام ساخت، به‌عنوان یک <strong>Win32 resource</strong> داخل فایل اجرایی قرار می‌گیرد. اگر موجود باشد، قبل از بارگذاری اسمبلی توسط CLR خوانده شده و پردازش می‌شود و می‌تواند نحوه اجرای فرآیند برنامه در ویندوز را تحت تأثیر قرار دهد.</p><p>یک <strong>manifest</strong> در .NET دارای عنصر ریشه‌ای به نام <code>assembly</code> در فضای نام XML زیر است:</p><pre class="hljs"><code><span class="hljs-meta">&lt;?xml version=<span class="hljs-string">&quot;1.0&quot;</span> encoding=<span class="hljs-string">&quot;utf-8&quot;</span>?&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">assembly</span> <span class="hljs-attr">manifestVersion</span>=<span class="hljs-string">&quot;1.0&quot;</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">&quot;urn:schemas-microsoft-com:asm.v1&quot;</span>&gt;</span>
   <span class="hljs-comment">&lt;!-- محتوای manifest --&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">assembly</span>&gt;</span>
-</code></pre>
-<p>مثالی که درخواست دسترسی مدیریتی (<strong>administrative elevation</strong>) می‌کند:</p>
-<pre class="hljs"><code><span class="hljs-meta">&lt;?xml version=<span class="hljs-string">&quot;1.0&quot;</span> encoding=<span class="hljs-string">&quot;utf-8&quot;</span>?&gt;</span>
+</code></pre> <p>مثالی که درخواست دسترسی مدیریتی (<strong>administrative elevation</strong>) می‌کند:</p><pre class="hljs"><code><span class="hljs-meta">&lt;?xml version=<span class="hljs-string">&quot;1.0&quot;</span> encoding=<span class="hljs-string">&quot;utf-8&quot;</span>?&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">assembly</span> <span class="hljs-attr">manifestVersion</span>=<span class="hljs-string">&quot;1.0&quot;</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">&quot;urn:schemas-microsoft-com:asm.v1&quot;</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">trustInfo</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">&quot;urn:schemas-microsoft-com:asm.v2&quot;</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">security</span>&gt;</span>
@@ -171,283 +28,19 @@
     <span class="hljs-tag">&lt;/<span class="hljs-name">security</span>&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-name">trustInfo</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">assembly</span>&gt;</span>
-</code></pre>
-<blockquote>
-<p>⚠️ برنامه‌های <strong>UWP</strong> دارای manifest بسیار پیچیده‌تری هستند که در فایل <code>Package.appxmanifest</code> توصیف شده است و شامل اعلام قابلیت‌های برنامه است که مشخص می‌کند سیستم‌عامل چه مجوزهایی می‌دهد. ساده‌ترین روش برای ویرایش این فایل، استفاده از <strong>Visual Studio</strong> است که با دوبار کلیک روی فایل، یک دیالوگ نمایش می‌دهد.</p>
-</blockquote>
-<hr>
-<h3>🔹 استقرار Application Manifest 🔹</h3>
-<p>برای افزودن یک <strong>application manifest</strong> به پروژه .NET در <strong>Visual Studio</strong>:</p>
-<ol>
-<li>روی پروژه در <strong>Solution Explorer</strong> راست‌کلیک کنید.</li>
-<li>انتخاب کنید <strong>Add → New Item</strong></li>
-<li>گزینه <strong>Application Manifest File</strong> را انتخاب کنید.</li>
-</ol>
-<p>پس از ساخت پروژه، <strong>manifest</strong> داخل <strong>output assembly</strong> جاسازی می‌شود.</p>
-<hr>
-<h3>🔹 Modules 🔹</h3>
-<p>ابزار <code>ildasm.exe</code> وجود یک <strong>application manifest</strong> جاسازی‌شده را تشخیص نمی‌دهد، اما <strong>Visual Studio</strong> هنگام دوبار کلیک روی اسمبلی در <strong>Solution Explorer</strong> نشان می‌دهد که آیا manifest موجود است یا خیر.</p>
-<p>در واقع، محتویات یک اسمبلی داخل یک <strong>container</strong> میانی به نام <strong>module</strong> بسته‌بندی می‌شود. هر <strong>module</strong> متناظر با یک فایل حاوی محتویات اسمبلی است. دلیل این لایه اضافی این است که در <strong>.NET Framework</strong> امکان توزیع یک اسمبلی در چند فایل وجود دارد، اما این ویژگی در <strong>.NET 5+ و .NET Core</strong> وجود ندارد.</p>
-<p>📌 شکل 17-1 رابطه بین <strong>assembly</strong> و <strong>module</strong> را نشان می‌دهد.</p>
-<div align="center">
-<p><img src="../../../assets/image/17/Table-17-1.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<p>اگرچه .NET از <strong>multifile assemblies</strong> پشتیبانی نمی‌کند، گاهی لازم است از لایه اضافی <strong>containership</strong> که <strong>module</strong>ها ایجاد می‌کنند، آگاه باشید. سناریوی اصلی این موضوع در <strong>reflection</strong> است (به بخش‌های «Reflecting Assemblies» در صفحه ۸۲۷ و «Emitting Assemblies and Types» در صفحه ۸۴۱ مراجعه کنید).</p>
-<hr>
-<h3>🔹 کلاس Assembly 🔹</h3>
-<p>کلاس <strong>Assembly</strong> در فضای نام <code>System.Reflection</code> دروازه‌ای برای دسترسی به <strong>metadata</strong> اسمبلی‌ها در زمان اجرا (<strong>runtime</strong>) است. روش‌های مختلفی برای به‌دست آوردن یک <strong>assembly object</strong> وجود دارد؛ ساده‌ترین روش، استفاده از ویژگی <strong>Assembly</strong> یک <strong>Type</strong> است:</p>
-<pre class="hljs"><code>Assembly a = <span class="hljs-keyword">typeof</span>(Program).Assembly;
-</code></pre>
-<p>همچنین می‌توانید با فراخوانی یکی از <strong>static method</strong>های کلاس <strong>Assembly</strong> یک شیء اسمبلی به‌دست آورید:</p>
-<ul>
-<li>
-<p><strong>GetExecutingAssembly</strong><br>
-اسمبلی نوعی را برمی‌گرداند که تابع جاری در آن تعریف شده است.</p>
-</li>
-<li>
-<p><strong>GetCallingAssembly</strong><br>
-عملکرد مشابه <strong>GetExecutingAssembly</strong> را دارد، اما برای تابعی که تابع جاری را فراخوانی کرده است.</p>
-</li>
-<li>
-<p><strong>GetEntryAssembly</strong><br>
-اسمبلی‌ای را برمی‌گرداند که متد ورود (<strong>entry method</strong>) اصلی برنامه را تعریف می‌کند.</p>
-</li>
-</ul>
-<p>پس از داشتن یک <strong>Assembly object</strong>، می‌توانید از <strong>properties</strong> و <strong>methods</strong> آن برای پرس‌وجوی <strong>metadata</strong> اسمبلی و بازتاب (<strong>reflect</strong>) بر روی <strong>type</strong>های آن استفاده کنید.</p>
-<p>📌 جدول ۱۷-۱ خلاصه‌ای از این توابع را نشان می‌دهد.</p>
-<div align="center">
-<p><img src="../../../assets/image/17/Table-17-2.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<h3>🔹 اسامی قوی و امضای اسمبلی (Strong Names and Assembly Signing) 🔹</h3>
-<p>داشتن <strong>strong name</strong> برای یک اسمبلی در <strong>.NET Framework</strong> اهمیت داشت، به دو دلیل:</p>
-<ul>
-<li>امکان بارگذاری اسمبلی در <strong>Global Assembly Cache (GAC)</strong>.</li>
-<li>امکان ارجاع سایر <strong>strongly named assemblies</strong> به آن.</li>
-</ul>
-<p>در <strong>.NET 5+</strong> و <strong>.NET Core</strong> این موضوع کمتر اهمیت دارد، زیرا این <strong>runtime</strong>ها نه <strong>global assembly cache</strong> دارند و نه محدودیت دوم را اعمال می‌کنند.</p>
-<p>یک <strong>strongly named assembly</strong> هویتی یکتا دارد. این کار با افزودن دو قطعه <strong>metadata</strong> به <strong>manifest</strong> انجام می‌شود:</p>
-<ul>
-<li>یک شماره یکتا متعلق به نویسندگان اسمبلی</li>
-<li>یک <strong>signed hash</strong> از اسمبلی که ثابت می‌کند صاحب شماره یکتا، اسمبلی را تولید کرده است</li>
-</ul>
-<p>این فرآیند نیازمند یک جفت <strong>کلید عمومی/خصوصی</strong> است. کلید عمومی شماره یکتای شناسایی را فراهم می‌کند و کلید خصوصی برای امضا استفاده می‌شود.</p>
-<blockquote>
-<p>⚠️ <strong>Strong-name-signing</strong> با <strong>Authenticode-signing</strong> متفاوت است. <strong>Authenticode</strong> بعداً در همین فصل توضیح داده خواهد شد.</p>
-</blockquote>
-<p>کلید عمومی در تضمین یکتایی ارجاعات به اسمبلی‌ها ارزشمند است: یک <strong>strongly named assembly</strong> کلید عمومی را در هویت خود وارد می‌کند.</p>
-<p>در <strong>.NET Framework</strong>، کلید خصوصی از تغییر و دستکاری اسمبلی جلوگیری می‌کند، زیرا بدون کلید خصوصی شما، هیچ‌کس نمی‌تواند نسخه تغییر یافته اسمبلی را منتشر کند بدون اینکه امضا خراب شود. در عمل، این برای بارگذاری اسمبلی در <strong>GAC</strong> کاربرد دارد. در <strong>.NET 5+</strong> و <strong>.NET Core</strong> امضا کمکی ندارد، زیرا بررسی نمی‌شود.</p>
-<p>اضافه کردن <strong>strong name</strong> به یک اسمبلی قبلاً «ضعیف» نام‌گذاری‌شده، هویت آن را تغییر می‌دهد. به همین دلیل، بهتر است از ابتدا اگر احتمال می‌دهید اسمبلی در آینده به <strong>strong name</strong> نیاز پیدا کند، آن را از ابتدا قوی نام‌گذاری کنید.</p>
-<hr>
-<h3>🔹 چگونه یک اسمبلی را Strongly Name کنیم 🔹</h3>
-<p>برای دادن <strong>strong name</strong> به یک اسمبلی، ابتدا یک جفت کلید عمومی/خصوصی با ابزار <code>sn.exe</code> تولید کنید:</p>
-<pre class="hljs"><code>sn.exe -k MyKeyPair.snk
-</code></pre>
-<p><strong>Visual Studio</strong> میانبری به نام <strong>Developer Command Prompt for VS</strong> نصب می‌کند که یک <strong>command prompt</strong> با مسیر ابزارهای توسعه (مانند <code>sn.exe</code>) فراهم می‌آورد.</p>
-<p>این دستور یک جفت کلید جدید تولید می‌کند و آن را در فایلی به نام <code>MyKeyPair.snk</code> ذخیره می‌کند. اگر بعداً این فایل را از دست بدهید، توانایی کامپایل مجدد اسمبلی با همان هویت را به‌طور دائمی از دست خواهید داد.</p>
-<p>می‌توانید با استفاده از این فایل، اسمبلی را امضا کنید. در <strong>Visual Studio</strong>:</p>
-<ol>
-<li>به <strong>Project Properties</strong> بروید</li>
-<li>در تب <strong>Signing</strong>، گزینه <strong>Sign the assembly</strong> را انتخاب کنید</li>
-<li>فایل <code>.snk</code> خود را مشخص کنید</li>
-</ol>
-<p>یک جفت کلید می‌تواند چندین اسمبلی را امضا کند؛ هر کدام هنوز هویت متمایزی خواهند داشت، اگر نام ساده آن‌ها متفاوت باشد.</p>
-<hr>
-<h3>🔹 اسامی اسمبلی (Assembly Names) 🔹</h3>
-<p>هویت یک اسمبلی شامل چهار بخش از <strong>metadata</strong> در <strong>manifest</strong> است:</p>
-<ul>
-<li><strong>نام ساده (Simple Name)</strong></li>
-<li><strong>نسخه (Version)</strong> — اگر موجود نباشد “0.0.0.0” است</li>
-<li><strong>فرهنگ (Culture)</strong> — اگر satellite assembly نباشد “neutral” است</li>
-<li><strong>Public Key Token</strong> — اگر <strong>strongly named</strong> نباشد “null” است</li>
-</ul>
-<p>نام ساده از ویژگی‌ها استخراج نمی‌شود، بلکه از نام فایل اصلی کامپایل‌شده (بدون پسوند) می‌آید. مثلاً نام ساده اسمبلی <code>System.Xml.dll</code> برابر با <code>System.Xml</code> است. تغییر نام فایل، نام ساده اسمبلی را تغییر نمی‌دهد.</p>
-<p>شماره نسخه از ویژگی <strong>AssemblyVersion</strong> می‌آید و رشته‌ای شامل چهار قسمت است:</p>
-<pre class="hljs"><code>major.minor.build.revision
-</code></pre>
-<p>مثال:</p>
-<pre class="hljs"><code>[<span class="hljs-meta">assembly: AssemblyVersion(<span class="hljs-string">&quot;2.5.6.7&quot;</span>)</span>]
-</code></pre>
-<p>فرهنگ از ویژگی <strong>AssemblyCulture</strong> گرفته می‌شود و برای <strong>satellite assembly</strong>ها کاربرد دارد (در بخش «Resources and Satellite Assemblies» صفحه ۷۷۶ توضیح داده شده است).</p>
-<p><strong>Public Key Token</strong> از <strong>strong name</strong> هنگام کامپایل به دست می‌آید.</p>
-<hr>
-<h3>🔹 اسامی کامل (Fully Qualified Names) 🔹</h3>
-<p>یک نام کامل اسمبلی رشته‌ای است که شامل هر چهار بخش هویت است، به شکل:</p>
-<pre class="hljs"><code>simple-name, Version=version, Culture=culture, PublicKeyToken=public-key
-</code></pre>
-<p>مثال: نام کامل <code>System.Private.CoreLib.dll</code>:</p>
-<pre class="hljs"><code>System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e
-</code></pre>
-<p>اگر ویژگی <strong>AssemblyVersion</strong> وجود نداشته باشد، نسخه به صورت <code>0.0.0.0</code> نمایش داده می‌شود. اگر unsigned باشد، <strong>public key token</strong> برابر <code>null</code> است.</p>
-<p>ویژگی <strong>FullName</strong> یک <strong>Assembly object</strong> نام کامل آن را برمی‌گرداند. کامپایلر همیشه از نام کامل برای ثبت ارجاعات به اسمبلی در <strong>manifest</strong> استفاده می‌کند.</p>
-<blockquote>
-<p>⚠️ نام کامل اسمبلی شامل مسیر دایرکتوری نیست. یافتن اسمبلی در دایرکتوری دیگر موضوعی جداگانه است که در بخش «Loading, Resolving, and Isolating Assemblies» صفحه ۷۸۳ توضیح داده می‌شود.</p>
-</blockquote>
-<hr>
-<h3>🔹 کلاس AssemblyName 🔹</h3>
-<p>کلاس <strong>AssemblyName</strong> دارای ویژگی‌های typed برای هر چهار بخش نام کامل اسمبلی است. دو کاربرد اصلی دارد:</p>
-<ul>
-<li>تجزیه یا ساخت نام کامل اسمبلی</li>
-<li>ذخیره داده‌های اضافی برای کمک به یافتن (<strong>resolve</strong>) اسمبلی</li>
-</ul>
-<p>روش‌های به‌دست آوردن یک <strong>AssemblyName object</strong>:</p>
-<ul>
-<li>ساخت یک <strong>AssemblyName</strong> با ارائه نام کامل</li>
-<li>فراخوانی <strong>GetName</strong> روی یک <strong>Assembly</strong> موجود</li>
-<li>فراخوانی <strong>AssemblyName.GetAssemblyName</strong> با مسیر فایل اسمبلی</li>
-</ul>
-<p>همچنین می‌توان یک <strong>AssemblyName</strong> بدون آرگومان ساخت و سپس هر ویژگی آن را تنظیم کرد تا یک نام کامل ساخته شود. در این حالت، <strong>AssemblyName</strong> قابل تغییر (<strong>mutable</strong>) است.</p>
-<hr>
-<h3>🔹 ویژگی‌ها و متدهای اصلی AssemblyName 🔹</h3>
-<table>
-<thead>
-<tr>
-<th>نوع</th>
-<th>نام</th>
-<th>توضیح</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>string</td>
-<td>FullName</td>
-<td>نام کامل</td>
-</tr>
-<tr>
-<td>string</td>
-<td>Name</td>
-<td>نام ساده</td>
-</tr>
-<tr>
-<td>Version</td>
-<td>Version</td>
-<td>نسخه اسمبلی</td>
-</tr>
-<tr>
-<td>CultureInfo</td>
-<td>CultureInfo</td>
-<td>برای <strong>satellite assembly</strong></td>
-</tr>
-<tr>
-<td>string</td>
-<td>CodeBase</td>
-<td>مکان اسمبلی</td>
-</tr>
-<tr>
-<td>byte[]</td>
-<td>GetPublicKey()</td>
-<td>کلید عمومی کامل (160 بایت)</td>
-</tr>
-<tr>
-<td>void</td>
-<td>SetPublicKey(byte[] key)</td>
-<td>تعیین کلید عمومی</td>
-</tr>
-<tr>
-<td>byte[]</td>
-<td>GetPublicKeyToken()</td>
-<td>نسخه ۸ بایتی کلید عمومی</td>
-</tr>
-<tr>
-<td>void</td>
-<td>SetPublicKeyToken(byte[] publicKeyToken)</td>
-<td>تعیین public key token</td>
-</tr>
-</tbody>
-</table>
-<ul>
-<li><strong>Version</strong> خود یک شیء strongly typed با ویژگی‌های <strong>Major, Minor, Build, Revision</strong> است.</li>
-<li><strong>GetPublicKey</strong> کلید عمومی رمزنگاری کامل را برمی‌گرداند.</li>
-<li><strong>GetPublicKeyToken</strong> آخرین ۸ بایت استفاده‌شده برای تعیین هویت را برمی‌گرداند.</li>
-</ul>
-<p>مثال: به‌دست آوردن نام ساده یک اسمبلی:</p>
-<pre class="hljs"><code>Console.WriteLine(<span class="hljs-keyword">typeof</span>(<span class="hljs-built_in">string</span>).Assembly.GetName().Name);
+</code></pre> <blockquote><p>برنامه‌های <strong>UWP</strong> دارای manifest بسیار پیچیده‌تری هستند که در فایل <code>Package.appxmanifest</code> توصیف شده است و شامل اعلام قابلیت‌های برنامه است که مشخص می‌کند سیستم‌عامل چه مجوزهایی می‌دهد. ساده‌ترین روش برای ویرایش این فایل، استفاده از <strong>Visual Studio</strong> است که با دوبار کلیک روی فایل، یک دیالوگ نمایش می‌دهد.</p></blockquote> <hr><h3>استقرار Application Manifest</h3><p>برای افزودن یک <strong>application manifest</strong> به پروژه .NET در <strong>Visual Studio</strong>:</p><ol> <li>روی پروژه در <strong>Solution Explorer</strong> راست‌کلیک کنید.</li><li>انتخاب کنید <strong>Add → New Item</strong></li><li>گزینه <strong>Application Manifest File</strong> را انتخاب کنید.</li></ol> <p>پس از ساخت پروژه، <strong>manifest</strong> داخل <strong>output assembly</strong> جاسازی می‌شود.</p><hr> <h3>Modules</h3><p>ابزار <code>ildasm.exe</code> وجود یک <strong>application manifest</strong> جاسازی‌شده را تشخیص نمی‌دهد، اما <strong>Visual Studio</strong> هنگام دوبار کلیک روی اسمبلی در <strong>Solution Explorer</strong> نشان می‌دهد که آیا manifest موجود است یا خیر.</p><p>در واقع، محتویات یک اسمبلی داخل یک <strong>container</strong> میانی به نام <strong>module</strong> بسته‌بندی می‌شود. هر <strong>module</strong> متناظر با یک فایل حاوی محتویات اسمبلی است. دلیل این لایه اضافی این است که در <strong>.NET Framework</strong> امکان توزیع یک اسمبلی در چند فایل وجود دارد، اما این ویژگی در <strong>.NET 5+ و .NET Core</strong> وجود ندارد.</p><p>شکل 17-1 رابطه بین <strong>assembly</strong> و <strong>module</strong> را نشان می‌دهد.</p><div align="center"> <p><img src="../../../assets/image/17/Table-17-1.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <p>اگرچه .NET از <strong>multifile assemblies</strong> پشتیبانی نمی‌کند، گاهی لازم است از لایه اضافی <strong>containership</strong> که <strong>module</strong>ها ایجاد می‌کنند، آگاه باشید. سناریوی اصلی این موضوع در <strong>reflection</strong> است (به بخش‌های «Reflecting Assemblies» در صفحه ۸۲۷ و «Emitting Assemblies and Types» در صفحه ۸۴۱ مراجعه کنید).</p><hr> <h3>کلاس Assembly</h3><p>کلاس <strong>Assembly</strong> در فضای نام <code>System.Reflection</code> دروازه‌ای برای دسترسی به <strong>metadata</strong> اسمبلی‌ها در زمان اجرا (<strong>runtime</strong>) است. روش‌های مختلفی برای به‌دست آوردن یک <strong>assembly object</strong> وجود دارد؛ ساده‌ترین روش، استفاده از ویژگی <strong>Assembly</strong> یک <strong>Type</strong> است:</p><pre class="hljs"><code>Assembly a = <span class="hljs-keyword">typeof</span>(Program).Assembly;
+</code></pre> <p>همچنین می‌توانید با فراخوانی یکی از <strong>static method</strong>های کلاس <strong>Assembly</strong> یک شیء اسمبلی به‌دست آورید:</p><ul> <li><p><strong>GetExecutingAssembly</strong><br> اسمبلی نوعی را برمی‌گرداند که تابع جاری در آن تعریف شده است.</p></li> <li><p><strong>GetCallingAssembly</strong><br> عملکرد مشابه <strong>GetExecutingAssembly</strong> را دارد، اما برای تابعی که تابع جاری را فراخوانی کرده است.</p></li> <li><p><strong>GetEntryAssembly</strong><br> اسمبلی‌ای را برمی‌گرداند که متد ورود (<strong>entry method</strong>) اصلی برنامه را تعریف می‌کند.</p></li> </ul><p>پس از داشتن یک <strong>Assembly object</strong>، می‌توانید از <strong>properties</strong> و <strong>methods</strong> آن برای پرس‌وجوی <strong>metadata</strong> اسمبلی و بازتاب (<strong>reflect</strong>) بر روی <strong>type</strong>های آن استفاده کنید.</p><p>جدول ۱۷-۱ خلاصه‌ای از این توابع را نشان می‌دهد.</p><div align="center"> <p><img src="../../../assets/image/17/Table-17-2.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <h3>اسامی قوی و امضای اسمبلی (Strong Names and Assembly Signing)</h3><p>داشتن <strong>strong name</strong> برای یک اسمبلی در <strong>.NET Framework</strong> اهمیت داشت، به دو دلیل:</p><ul> <li>امکان بارگذاری اسمبلی در <strong>Global Assembly Cache (GAC)</strong>.</li><li>امکان ارجاع سایر <strong>strongly named assemblies</strong> به آن.</li></ul> <p>در <strong>.NET 5+</strong> و <strong>.NET Core</strong> این موضوع کمتر اهمیت دارد، زیرا این <strong>runtime</strong>ها نه <strong>global assembly cache</strong> دارند و نه محدودیت دوم را اعمال می‌کنند.</p><p>یک <strong>strongly named assembly</strong> هویتی یکتا دارد. این کار با افزودن دو قطعه <strong>metadata</strong> به <strong>manifest</strong> انجام می‌شود:</p><ul> <li>یک شماره یکتا متعلق به نویسندگان اسمبلی</li><li>یک <strong>signed hash</strong> از اسمبلی که ثابت می‌کند صاحب شماره یکتا، اسمبلی را تولید کرده است</li></ul> <p>این فرآیند نیازمند یک جفت <strong>کلید عمومی/خصوصی</strong> است. کلید عمومی شماره یکتای شناسایی را فراهم می‌کند و کلید خصوصی برای امضا استفاده می‌شود.</p><blockquote> <p><strong>Strong-name-signing</strong> با <strong>Authenticode-signing</strong> متفاوت است. <strong>Authenticode</strong> بعداً در همین فصل توضیح داده خواهد شد.</p></blockquote> <p>کلید عمومی در تضمین یکتایی ارجاعات به اسمبلی‌ها ارزشمند است: یک <strong>strongly named assembly</strong> کلید عمومی را در هویت خود وارد می‌کند.</p><p>در <strong>.NET Framework</strong>، کلید خصوصی از تغییر و دستکاری اسمبلی جلوگیری می‌کند، زیرا بدون کلید خصوصی شما، هیچ‌کس نمی‌تواند نسخه تغییر یافته اسمبلی را منتشر کند بدون اینکه امضا خراب شود. در عمل، این برای بارگذاری اسمبلی در <strong>GAC</strong> کاربرد دارد. در <strong>.NET 5+</strong> و <strong>.NET Core</strong> امضا کمکی ندارد، زیرا بررسی نمی‌شود.</p><p>اضافه کردن <strong>strong name</strong> به یک اسمبلی قبلاً «ضعیف» نام‌گذاری‌شده، هویت آن را تغییر می‌دهد. به همین دلیل، بهتر است از ابتدا اگر احتمال می‌دهید اسمبلی در آینده به <strong>strong name</strong> نیاز پیدا کند، آن را از ابتدا قوی نام‌گذاری کنید.</p><hr> <h3>چگونه یک اسمبلی را Strongly Name کنیم</h3><p>برای دادن <strong>strong name</strong> به یک اسمبلی، ابتدا یک جفت کلید عمومی/خصوصی با ابزار <code>sn.exe</code> تولید کنید:</p><pre class="hljs"><code>sn.exe -k MyKeyPair.snk
+</code></pre> <p><strong>Visual Studio</strong> میانبری به نام <strong>Developer Command Prompt for VS</strong> نصب می‌کند که یک <strong>command prompt</strong> با مسیر ابزارهای توسعه (مانند <code>sn.exe</code>) فراهم می‌آورد.</p><p>این دستور یک جفت کلید جدید تولید می‌کند و آن را در فایلی به نام <code>MyKeyPair.snk</code> ذخیره می‌کند. اگر بعداً این فایل را از دست بدهید، توانایی کامپایل مجدد اسمبلی با همان هویت را به‌طور دائمی از دست خواهید داد.</p><p>می‌توانید با استفاده از این فایل، اسمبلی را امضا کنید. در <strong>Visual Studio</strong>:</p><ol> <li>به <strong>Project Properties</strong> بروید</li><li>در تب <strong>Signing</strong>، گزینه <strong>Sign the assembly</strong> را انتخاب کنید</li><li>فایل <code>.snk</code> خود را مشخص کنید</li></ol> <p>یک جفت کلید می‌تواند چندین اسمبلی را امضا کند؛ هر کدام هنوز هویت متمایزی خواهند داشت، اگر نام ساده آن‌ها متفاوت باشد.</p><hr> <h3>اسامی اسمبلی (Assembly Names)</h3><p>هویت یک اسمبلی شامل چهار بخش از <strong>metadata</strong> در <strong>manifest</strong> است:</p><ul> <li><strong>نام ساده (Simple Name)</strong></li><li><strong>نسخه (Version)</strong> — اگر موجود نباشد “0.0.0.0” است</li><li><strong>فرهنگ (Culture)</strong> — اگر satellite assembly نباشد “neutral” است</li><li><strong>Public Key Token</strong> — اگر <strong>strongly named</strong> نباشد “null” است</li></ul> <p>نام ساده از ویژگی‌ها استخراج نمی‌شود، بلکه از نام فایل اصلی کامپایل‌شده (بدون پسوند) می‌آید. مثلاً نام ساده اسمبلی <code>System.Xml.dll</code> برابر با <code>System.Xml</code> است. تغییر نام فایل، نام ساده اسمبلی را تغییر نمی‌دهد.</p><p>شماره نسخه از ویژگی <strong>AssemblyVersion</strong> می‌آید و رشته‌ای شامل چهار قسمت است:</p><pre class="hljs"><code>major.minor.build.revision
+</code></pre> <p>مثال:</p><pre class="hljs"><code>[<span class="hljs-meta">assembly: AssemblyVersion(<span class="hljs-string">&quot;2.5.6.7&quot;</span>)</span>]
+</code></pre> <p>فرهنگ از ویژگی <strong>AssemblyCulture</strong> گرفته می‌شود و برای <strong>satellite assembly</strong>ها کاربرد دارد (در بخش «Resources and Satellite Assemblies» صفحه ۷۷۶ توضیح داده شده است).</p><p><strong>Public Key Token</strong> از <strong>strong name</strong> هنگام کامپایل به دست می‌آید.</p><hr> <h3>اسامی کامل (Fully Qualified Names)</h3><p>یک نام کامل اسمبلی رشته‌ای است که شامل هر چهار بخش هویت است، به شکل:</p><pre class="hljs"><code>simple-name, Version=version, Culture=culture, PublicKeyToken=public-key
+</code></pre> <p>مثال: نام کامل <code>System.Private.CoreLib.dll</code>:</p><pre class="hljs"><code>System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e
+</code></pre> <p>اگر ویژگی <strong>AssemblyVersion</strong> وجود نداشته باشد، نسخه به صورت <code>0.0.0.0</code> نمایش داده می‌شود. اگر unsigned باشد، <strong>public key token</strong> برابر <code>null</code> است.</p><p>ویژگی <strong>FullName</strong> یک <strong>Assembly object</strong> نام کامل آن را برمی‌گرداند. کامپایلر همیشه از نام کامل برای ثبت ارجاعات به اسمبلی در <strong>manifest</strong> استفاده می‌کند.</p><blockquote> <p>نام کامل اسمبلی شامل مسیر دایرکتوری نیست. یافتن اسمبلی در دایرکتوری دیگر موضوعی جداگانه است که در بخش «Loading, Resolving, and Isolating Assemblies» صفحه ۷۸۳ توضیح داده می‌شود.</p></blockquote> <hr><h3>کلاس AssemblyName</h3><p>کلاس <strong>AssemblyName</strong> دارای ویژگی‌های typed برای هر چهار بخش نام کامل اسمبلی است. دو کاربرد اصلی دارد:</p><ul> <li>تجزیه یا ساخت نام کامل اسمبلی</li><li>ذخیره داده‌های اضافی برای کمک به یافتن (<strong>resolve</strong>) اسمبلی</li></ul> <p>روش‌های به‌دست آوردن یک <strong>AssemblyName object</strong>:</p><ul> <li>ساخت یک <strong>AssemblyName</strong> با ارائه نام کامل</li><li>فراخوانی <strong>GetName</strong> روی یک <strong>Assembly</strong> موجود</li><li>فراخوانی <strong>AssemblyName.GetAssemblyName</strong> با مسیر فایل اسمبلی</li></ul> <p>همچنین می‌توان یک <strong>AssemblyName</strong> بدون آرگومان ساخت و سپس هر ویژگی آن را تنظیم کرد تا یک نام کامل ساخته شود. در این حالت، <strong>AssemblyName</strong> قابل تغییر (<strong>mutable</strong>) است.</p><hr> <h3>ویژگی‌ها و متدهای اصلی AssemblyName</h3><table> <thead><tr> <th>نوع</th><th>نام</th><th>توضیح</th></tr> </thead><tbody> <tr><td>string</td><td>FullName</td><td>نام کامل</td></tr> <tr><td>string</td><td>Name</td><td>نام ساده</td></tr> <tr><td>Version</td><td>Version</td><td>نسخه اسمبلی</td></tr> <tr><td>CultureInfo</td><td>CultureInfo</td><td>برای <strong>satellite assembly</strong></td></tr> <tr><td>string</td><td>CodeBase</td><td>مکان اسمبلی</td></tr> <tr><td>byte[]</td><td>GetPublicKey()</td><td>کلید عمومی کامل (160 بایت)</td></tr> <tr><td>void</td><td>SetPublicKey(byte[] key)</td><td>تعیین کلید عمومی</td></tr> <tr><td>byte[]</td><td>GetPublicKeyToken()</td><td>نسخه ۸ بایتی کلید عمومی</td></tr> <tr><td>void</td><td>SetPublicKeyToken(byte[] publicKeyToken)</td><td>تعیین public key token</td></tr> </tbody></table> <ul><li><strong>Version</strong> خود یک شیء strongly typed با ویژگی‌های <strong>Major, Minor, Build, Revision</strong> است.</li><li><strong>GetPublicKey</strong> کلید عمومی رمزنگاری کامل را برمی‌گرداند.</li><li><strong>GetPublicKeyToken</strong> آخرین ۸ بایت استفاده‌شده برای تعیین هویت را برمی‌گرداند.</li></ul> <p>مثال: به‌دست آوردن نام ساده یک اسمبلی:</p><pre class="hljs"><code>Console.WriteLine(<span class="hljs-keyword">typeof</span>(<span class="hljs-built_in">string</span>).Assembly.GetName().Name);
 <span class="hljs-comment">// System.Private.CoreLib</span>
-</code></pre>
-<p>دریافت نسخه اسمبلی:</p>
-<pre class="hljs"><code><span class="hljs-built_in">string</span> v = myAssembly.GetName().Version.ToString();
-</code></pre>
-<hr>
-<h3>🔹 نسخه‌های اطلاعاتی و فایل اسمبلی 🔹</h3>
-<p>دو ویژگی دیگر برای بیان اطلاعات مربوط به نسخه وجود دارد. برخلاف <strong>AssemblyVersion</strong>، این دو ویژگی هویت اسمبلی را تغییر نمی‌دهند و تأثیری بر کامپایل یا زمان اجرا ندارند:</p>
-<ul>
-<li>
-<p><strong>AssemblyInformationalVersion</strong><br>
-نسخه‌ای که به کاربر نهایی نمایش داده می‌شود. در دیالوگ <strong>Windows File Properties</strong> به‌عنوان <strong>Product Version</strong> دیده می‌شود. هر رشته‌ای می‌تواند باشد، مانند <code>&quot;5.1 Beta 2&quot;</code>. معمولاً تمام اسمبلی‌های یک برنامه دارای همین شماره نسخه اطلاعاتی هستند.</p>
-</li>
-<li>
-<p><strong>AssemblyFileVersion</strong><br>
-معمولاً به شماره <strong>build</strong> آن اسمبلی اشاره دارد. در دیالوگ <strong>Windows File Properties</strong> به‌عنوان <strong>File Version</strong> دیده می‌شود. مشابه <strong>AssemblyVersion</strong>، باید رشته‌ای شامل حداکثر چهار عدد جداشده با نقطه باشد.</p>
-</li>
-</ul>
-<h3>🔹 امضای Authenticode 🔹</h3>
-<p><strong>Authenticode</strong> یک سیستم <strong>code-signing</strong> است که هدف آن اثبات هویت ناشر برنامه است.<br>
-امضای <strong>Authenticode</strong> و <strong>strong-name signing</strong> مستقل از هم هستند؛ می‌توانید یک اسمبلی را با هر یک یا هر دو سیستم امضا کنید.</p>
-<p>اگرچه <strong>strong-name signing</strong> می‌تواند اثبات کند که اسمبلی‌های A، B و C از یک ناشر آمده‌اند (با فرض اینکه کلید خصوصی لو نرفته باشد)، اما نمی‌تواند مشخص کند آن ناشر چه کسی است. برای مثال، برای دانستن اینکه ناشر <strong>Joe Albahari</strong> یا <strong>Microsoft Corporation</strong> بوده است، به <strong>Authenticode</strong> نیاز دارید.</p>
-<p><strong>Authenticode</strong> هنگام دانلود برنامه‌ها از اینترنت مفید است، زیرا تضمین می‌کند برنامه دقیقاً از همان شخصی آمده که توسط <strong>Certificate Authority</strong> معرفی شده و در مسیر انتقال تغییر نکرده است. همچنین مانع نمایش هشدار “Unknown Publisher” هنگام اجرای برنامه دانلود شده برای اولین بار می‌شود.</p>
-<blockquote>
-<p>⚠️ امضای Authenticode همچنین شرط ارسال برنامه‌ها به <strong>Windows Store</strong> است.</p>
-</blockquote>
-<hr>
-<p><strong>Authenticode</strong> نه تنها با اسمبلی‌های .NET کار می‌کند، بلکه با فایل‌های اجرایی unmanaged و باینری‌ها مانند فایل‌های نصب <code>.msi</code> نیز سازگار است. البته Authenticode تضمین نمی‌کند که برنامه فاقد <strong>malware</strong> باشد، ولی احتمال آن را کاهش می‌دهد.</p>
-<p>یک فرد یا سازمان حاضر شده نام خود (با پشتوانه پاسپورت یا مدارک شرکت) را پشت فایل اجرایی یا کتابخانه قرار دهد.</p>
-<p>CLR امضای <strong>Authenticode</strong> را به‌عنوان بخشی از هویت اسمبلی نمی‌شناسد، اما می‌تواند امضا را به‌صورت درخواستی (<strong>on demand</strong>) خوانده و اعتبارسنجی کند.</p>
-<hr>
-<h3>🔹 نحوه امضا با Authenticode 🔹</h3>
-<h4>۱. به‌دست آوردن و نصب گواهی‌نامه</h4>
-<p>ابتدا باید یک <strong>code-signing certificate</strong> از یک <strong>Certificate Authority (CA)</strong> دریافت کنید. سپس می‌توانید گواهی را به‌صورت فایل رمزدار استفاده کنید یا آن را در <strong>certificate store</strong> کامپیوتر بارگذاری کنید.</p>
-<p>مزیت بارگذاری در <strong>certificate store</strong> این است که می‌توانید بدون وارد کردن رمز امضا کنید، که برای اسکریپت‌های خودکار و فایل‌های batch ایمن‌تر است.</p>
-<h4>۲. محل دریافت گواهی‌نامه</h4>
-<p>تعداد کمی <strong>CA</strong> برای <strong>code-signing</strong> به‌صورت پیش‌فرض در ویندوز وجود دارند، مانند:</p>
-<ul>
-<li>Comodo</li>
-<li>GoDaddy</li>
-<li>GlobalSign</li>
-<li>DigiCert</li>
-<li>Thawte</li>
-<li>Symantec</li>
-</ul>
-<p>همچنین فروشندگانی مانند K Software وجود دارند که گواهی‌های code-signing این CAها را با تخفیف ارائه می‌دهند.</p>
-<p>گواهی‌های Authenticode از این فروشندگان معمولاً کمتر محدودکننده هستند و برنامه‌های غیر مایکروسافتی را نیز امضا می‌کنند. توجه داشته باشید که گواهی SSL معمولاً برای Authenticode قابل استفاده نیست، زیرا SSL مالکیت دامنه را اثبات می‌کند، اما Authenticode هویت ناشر را.</p>
-<p>برای بارگذاری گواهی در <strong>certificate store</strong>:</p>
-<ol>
-<li><strong>Certificate Manager</strong> را باز کنید</li>
-<li>پوشه <strong>Personal</strong> را باز کنید</li>
-<li>روی <strong>Certificates</strong> راست‌کلیک و <strong>All Tasks → Import</strong> را انتخاب کنید</li>
-<li>با <strong>import wizard</strong> مراحل را دنبال کنید</li>
-</ol>
-<p>پس از وارد کردن گواهی، روی آن <strong>View</strong> کلیک کنید، به تب <strong>Details</strong> بروید و <strong>thumbprint</strong> آن را کپی کنید. این همان هش SHA-256 است که برای امضا نیاز دارید.</p>
-<blockquote>
-<p>⚠️ اگر قصد دارید همزمان <strong>strong-name</strong> هم استفاده کنید، ابتدا باید <strong>strong-name-signing</strong> انجام شود، سپس Authenticode. اگر ترتیب برعکس باشد، CLR اضافه شدن strong name بعد از Authenticode را به‌عنوان تغییر غیرمجاز در نظر می‌گیرد.</p>
-</blockquote>
-<hr>
-<h4>۳. امضا با signtool.exe</h4>
-<p>می‌توانید از ابزار <strong>signtool</strong> که همراه Visual Studio نصب می‌شود استفاده کنید.</p>
-<p>مثال امضا فایل <code>LINQPad.exe</code> با گواهی در <strong>My Store</strong> به نام <code>&quot;Joseph Albahari&quot;</code> با الگوریتم SHA-256:</p>
-<pre class="hljs"><code>signtool sign /n <span class="hljs-string">&quot;Joseph Albahari&quot;</span> /fd sha256 LINQPad.exe
-</code></pre>
-<p>همچنین می‌توانید توضیح و URL محصول را اضافه کنید:</p>
-<pre class="hljs"><code>... /d LINQPad /du http://www.linqpad.net
-</code></pre>
-<blockquote>
-<p>⚠️ معمولاً برای حفظ اعتبار پس از انقضای گواهی، باید <strong>time-stamping server</strong> هم مشخص شود.</p>
-</blockquote>
-<h4>Time Stamping</h4>
-<p>با استفاده از time-stamping، برنامه‌هایی که قبل از انقضای گواهی امضا شده‌اند، هنوز معتبر باقی می‌مانند. CA یک URI برای این منظور ارائه می‌دهد، مانند:</p>
-<pre class="hljs"><code>... /tr http://timestamp.comodoca.com/authenticode /td SHA256
-</code></pre>
-<h4>بررسی امضا</h4>
-<p>ساده‌ترین روش برای مشاهده امضای Authenticode، نگاه کردن به <strong>Digital Signatures tab</strong> در <strong>Windows Explorer</strong> است. ابزار <strong>signtool</strong> نیز این امکان را فراهم می‌کند.</p>
-<hr>
-<h3>🔹 منابع و Satellite Assemblies 🔹</h3>
-<p>یک برنامه معمولاً نه تنها شامل کد اجرایی است، بلکه محتواهایی مانند متن، تصویر یا فایل XML نیز دارد. این محتواها می‌توانند در یک اسمبلی از طریق <strong>resource</strong> گنجانده شوند.</p>
-<p>دو کاربرد اصلی برای <strong>resources</strong>:</p>
-<ul>
-<li>افزودن داده‌هایی که نمی‌توانند در کد منبع باشند، مانند تصاویر</li>
-<li>ذخیره داده‌هایی که ممکن است در برنامه‌های چندزبانه نیاز به ترجمه داشته باشند</li>
-</ul>
-<p>یک <strong>assembly resource</strong> در نهایت یک <strong>byte stream</strong> با نام مشخص است. می‌توان یک اسمبلی را مانند یک دیکشنری از <strong>byte arrays</strong> در نظر گرفت که کلیدهای آن رشته هستند.</p>
-<p>مثال در <strong>ildasm</strong> از اسمبلی که دو resource به نام‌های <code>banner.jpg</code> و <code>data.xml</code> دارد:</p>
-<pre class="hljs"><code>.mresource public banner.jpg
+</code></pre> <p>دریافت نسخه اسمبلی:</p><pre class="hljs"><code><span class="hljs-built_in">string</span> v = myAssembly.GetName().Version.ToString();
+</code></pre> <hr><h3>نسخه‌های اطلاعاتی و فایل اسمبلی</h3><p>دو ویژگی دیگر برای بیان اطلاعات مربوط به نسخه وجود دارد. برخلاف <strong>AssemblyVersion</strong>، این دو ویژگی هویت اسمبلی را تغییر نمی‌دهند و تأثیری بر کامپایل یا زمان اجرا ندارند:</p><ul> <li><p><strong>AssemblyInformationalVersion</strong><br> نسخه‌ای که به کاربر نهایی نمایش داده می‌شود. در دیالوگ <strong>Windows File Properties</strong> به‌عنوان <strong>Product Version</strong> دیده می‌شود. هر رشته‌ای می‌تواند باشد، مانند <code>&quot;5.1 Beta 2&quot;</code>. معمولاً تمام اسمبلی‌های یک برنامه دارای همین شماره نسخه اطلاعاتی هستند.</p></li> <li><p><strong>AssemblyFileVersion</strong><br> معمولاً به شماره <strong>build</strong> آن اسمبلی اشاره دارد. در دیالوگ <strong>Windows File Properties</strong> به‌عنوان <strong>File Version</strong> دیده می‌شود. مشابه <strong>AssemblyVersion</strong>، باید رشته‌ای شامل حداکثر چهار عدد جداشده با نقطه باشد.</p></li> </ul><h3>امضای Authenticode</h3><p><strong>Authenticode</strong> یک سیستم <strong>code-signing</strong> است که هدف آن اثبات هویت ناشر برنامه است.<br> امضای <strong>Authenticode</strong> و <strong>strong-name signing</strong> مستقل از هم هستند؛ می‌توانید یک اسمبلی را با هر یک یا هر دو سیستم امضا کنید.</p><p>اگرچه <strong>strong-name signing</strong> می‌تواند اثبات کند که اسمبلی‌های A، B و C از یک ناشر آمده‌اند (با فرض اینکه کلید خصوصی لو نرفته باشد)، اما نمی‌تواند مشخص کند آن ناشر چه کسی است. برای مثال، برای دانستن اینکه ناشر <strong>Joe Albahari</strong> یا <strong>Microsoft Corporation</strong> بوده است، به <strong>Authenticode</strong> نیاز دارید.</p><p><strong>Authenticode</strong> هنگام دانلود برنامه‌ها از اینترنت مفید است، زیرا تضمین می‌کند برنامه دقیقاً از همان شخصی آمده که توسط <strong>Certificate Authority</strong> معرفی شده و در مسیر انتقال تغییر نکرده است. همچنین مانع نمایش هشدار “Unknown Publisher” هنگام اجرای برنامه دانلود شده برای اولین بار می‌شود.</p><blockquote> <p>امضای Authenticode همچنین شرط ارسال برنامه‌ها به <strong>Windows Store</strong> است.</p></blockquote> <hr><p><strong>Authenticode</strong> نه تنها با اسمبلی‌های .NET کار می‌کند، بلکه با فایل‌های اجرایی unmanaged و باینری‌ها مانند فایل‌های نصب <code>.msi</code> نیز سازگار است. البته Authenticode تضمین نمی‌کند که برنامه فاقد <strong>malware</strong> باشد، ولی احتمال آن را کاهش می‌دهد.</p><p>یک فرد یا سازمان حاضر شده نام خود (با پشتوانه پاسپورت یا مدارک شرکت) را پشت فایل اجرایی یا کتابخانه قرار دهد.</p><p>CLR امضای <strong>Authenticode</strong> را به‌عنوان بخشی از هویت اسمبلی نمی‌شناسد، اما می‌تواند امضا را به‌صورت درخواستی (<strong>on demand</strong>) خوانده و اعتبارسنجی کند.</p><hr> <h3>نحوه امضا با Authenticode</h3><h4>۱. به‌دست آوردن و نصب گواهی‌نامه</h4><p>ابتدا باید یک <strong>code-signing certificate</strong> از یک <strong>Certificate Authority (CA)</strong> دریافت کنید. سپس می‌توانید گواهی را به‌صورت فایل رمزدار استفاده کنید یا آن را در <strong>certificate store</strong> کامپیوتر بارگذاری کنید.</p><p>مزیت بارگذاری در <strong>certificate store</strong> این است که می‌توانید بدون وارد کردن رمز امضا کنید، که برای اسکریپت‌های خودکار و فایل‌های batch ایمن‌تر است.</p><h4>۲. محل دریافت گواهی‌نامه</h4><p>تعداد کمی <strong>CA</strong> برای <strong>code-signing</strong> به‌صورت پیش‌فرض در ویندوز وجود دارند، مانند:</p><ul> <li>Comodo</li><li>GoDaddy</li><li>GlobalSign</li><li>DigiCert</li><li>Thawte</li><li>Symantec</li></ul> <p>همچنین فروشندگانی مانند K Software وجود دارند که گواهی‌های code-signing این CAها را با تخفیف ارائه می‌دهند.</p><p>گواهی‌های Authenticode از این فروشندگان معمولاً کمتر محدودکننده هستند و برنامه‌های غیر مایکروسافتی را نیز امضا می‌کنند. توجه داشته باشید که گواهی SSL معمولاً برای Authenticode قابل استفاده نیست، زیرا SSL مالکیت دامنه را اثبات می‌کند، اما Authenticode هویت ناشر را.</p><p>برای بارگذاری گواهی در <strong>certificate store</strong>:</p><ol> <li><strong>Certificate Manager</strong> را باز کنید</li><li>پوشه <strong>Personal</strong> را باز کنید</li><li>روی <strong>Certificates</strong> راست‌کلیک و <strong>All Tasks → Import</strong> را انتخاب کنید</li><li>با <strong>import wizard</strong> مراحل را دنبال کنید</li></ol> <p>پس از وارد کردن گواهی، روی آن <strong>View</strong> کلیک کنید، به تب <strong>Details</strong> بروید و <strong>thumbprint</strong> آن را کپی کنید. این همان هش SHA-256 است که برای امضا نیاز دارید.</p><blockquote> <p>اگر قصد دارید همزمان <strong>strong-name</strong> هم استفاده کنید، ابتدا باید <strong>strong-name-signing</strong> انجام شود، سپس Authenticode. اگر ترتیب برعکس باشد، CLR اضافه شدن strong name بعد از Authenticode را به‌عنوان تغییر غیرمجاز در نظر می‌گیرد.</p></blockquote> <hr><h4>۳. امضا با signtool.exe</h4><p>می‌توانید از ابزار <strong>signtool</strong> که همراه Visual Studio نصب می‌شود استفاده کنید.</p><p>مثال امضا فایل <code>LINQPad.exe</code> با گواهی در <strong>My Store</strong> به نام <code>&quot;Joseph Albahari&quot;</code> با الگوریتم SHA-256:</p><pre class="hljs"><code>signtool sign /n <span class="hljs-string">&quot;Joseph Albahari&quot;</span> /fd sha256 LINQPad.exe
+</code></pre> <p>همچنین می‌توانید توضیح و URL محصول را اضافه کنید:</p><pre class="hljs"><code>... /d LINQPad /du http://www.linqpad.net
+</code></pre> <blockquote><p>معمولاً برای حفظ اعتبار پس از انقضای گواهی، باید <strong>time-stamping server</strong> هم مشخص شود.</p></blockquote> <h4>Time Stamping</h4><p>با استفاده از time-stamping، برنامه‌هایی که قبل از انقضای گواهی امضا شده‌اند، هنوز معتبر باقی می‌مانند. CA یک URI برای این منظور ارائه می‌دهد، مانند:</p><pre class="hljs"><code>... /tr http://timestamp.comodoca.com/authenticode /td SHA256
+</code></pre> <h4>بررسی امضا</h4><p>ساده‌ترین روش برای مشاهده امضای Authenticode، نگاه کردن به <strong>Digital Signatures tab</strong> در <strong>Windows Explorer</strong> است. ابزار <strong>signtool</strong> نیز این امکان را فراهم می‌کند.</p><hr> <h3>منابع و Satellite Assemblies</h3><p>یک برنامه معمولاً نه تنها شامل کد اجرایی است، بلکه محتواهایی مانند متن، تصویر یا فایل XML نیز دارد. این محتواها می‌توانند در یک اسمبلی از طریق <strong>resource</strong> گنجانده شوند.</p><p>دو کاربرد اصلی برای <strong>resources</strong>:</p><ul> <li>افزودن داده‌هایی که نمی‌توانند در کد منبع باشند، مانند تصاویر</li><li>ذخیره داده‌هایی که ممکن است در برنامه‌های چندزبانه نیاز به ترجمه داشته باشند</li></ul> <p>یک <strong>assembly resource</strong> در نهایت یک <strong>byte stream</strong> با نام مشخص است. می‌توان یک اسمبلی را مانند یک دیکشنری از <strong>byte arrays</strong> در نظر گرفت که کلیدهای آن رشته هستند.</p><p>مثال در <strong>ildasm</strong> از اسمبلی که دو resource به نام‌های <code>banner.jpg</code> و <code>data.xml</code> دارد:</p><pre class="hljs"><code>.mresource public banner.jpg
 {
   // Offset: 0x00000F58 Length: 0x000004F6
 }
@@ -455,81 +48,21 @@
 {
   // Offset: 0x00001458 Length: 0x0000027E
 }
-</code></pre>
-<p>در این مثال، <code>banner.jpg</code> و <code>data.xml</code> مستقیماً به اسمبلی اضافه شده‌اند، هر کدام به‌عنوان <strong>embedded resource</strong> خود. این ساده‌ترین روش برای کار با منابع است.</p>
-<hr>
-<p><strong>.NET</strong> همچنین اجازه می‌دهد محتوا را از طریق کانتینرهای میانی <code>.resources</code> اضافه کنید. این کانتینرها برای محتوایی طراحی شده‌اند که ممکن است نیاز به ترجمه در زبان‌های مختلف داشته باشند.</p>
-<p><strong>Localized .resources</strong> می‌توانند به‌صورت <strong>satellite assembly</strong> جداگانه بسته‌بندی شوند و در زمان اجرا بر اساس زبان سیستم کاربر به‌طور خودکار انتخاب شوند.</p>
-<p>📌 شکل 17-2 یک اسمبلی را نشان می‌دهد که دو <strong>resource</strong> مستقیماً جاسازی‌شده و یک کانتینر <code>.resources</code> به نام <code>welcome.resources</code> دارد که برای آن دو <strong>satellite assembly</strong> محلی‌سازی شده ایجاد شده است.</p>
-<div align="center">
-<p><img src="../../../assets/image/17/Table-17-3.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<h3>🔹 جاسازی مستقیم منابع 🔹</h3>
-<p>جاسازی <strong>resources</strong> در داخل اسمبلی‌ها در برنامه‌های <strong>Windows Store</strong> پشتیبانی نمی‌شود. به جای آن، فایل‌های اضافی را به <strong>deployment package</strong> اضافه کرده و از طریق <strong>StorageFolder</strong> برنامه خود (<strong>Package.Current.InstalledLocation</strong>) به آن‌ها دسترسی پیدا کنید.</p>
-<h4>نحوه جاسازی مستقیم منابع با Visual Studio</h4>
-<ol>
-<li>فایل را به پروژه اضافه کنید.</li>
-<li><strong>Build Action</strong> آن را روی <strong>Embedded Resource</strong> تنظیم کنید.</li>
-</ol>
-<p>Visual Studio همیشه نام منابع را با <strong>namespace پیش‌فرض پروژه</strong> و همچنین نام هر <strong>زیرپوشه</strong> که فایل در آن قرار دارد، پیشوند می‌کند.<br>
-مثلاً اگر namespace پیش‌فرض پروژه <code>Westwind.Reports</code> باشد و فایل <code>banner.jpg</code> در پوشه <code>pictures</code> باشد، نام resource به شکل زیر خواهد بود:</p>
-<pre class="hljs"><code>Westwind.Reports.pictures.banner.jpg
-</code></pre>
-<blockquote>
-<p>⚠️ نام منابع <strong>حساس به حروف بزرگ و کوچک</strong> است، بنابراین نام پوشه‌های پروژه که شامل منابع هستند، به‌طور مؤثر حساس به حروف خواهند بود.</p>
-</blockquote>
-<hr>
-<h4>دسترسی به منابع</h4>
-<p>برای دسترسی به یک resource، متد <strong>GetManifestResourceStream</strong> روی اسمبلی حاوی آن را صدا بزنید. این متد یک <strong>Stream</strong> برمی‌گرداند که می‌توانید مانند هر Stream دیگری آن را بخوانید:</p>
-<pre class="hljs"><code>Assembly a = Assembly.GetEntryAssembly();
+</code></pre> <p>در این مثال، <code>banner.jpg</code> و <code>data.xml</code> مستقیماً به اسمبلی اضافه شده‌اند، هر کدام به‌عنوان <strong>embedded resource</strong> خود. این ساده‌ترین روش برای کار با منابع است.</p><hr> <p><strong>.NET</strong> همچنین اجازه می‌دهد محتوا را از طریق کانتینرهای میانی <code>.resources</code> اضافه کنید. این کانتینرها برای محتوایی طراحی شده‌اند که ممکن است نیاز به ترجمه در زبان‌های مختلف داشته باشند.</p><p><strong>Localized .resources</strong> می‌توانند به‌صورت <strong>satellite assembly</strong> جداگانه بسته‌بندی شوند و در زمان اجرا بر اساس زبان سیستم کاربر به‌طور خودکار انتخاب شوند.</p><p>شکل 17-2 یک اسمبلی را نشان می‌دهد که دو <strong>resource</strong> مستقیماً جاسازی‌شده و یک کانتینر <code>.resources</code> به نام <code>welcome.resources</code> دارد که برای آن دو <strong>satellite assembly</strong> محلی‌سازی شده ایجاد شده است.</p><div align="center"> <p><img src="../../../assets/image/17/Table-17-3.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <h3>جاسازی مستقیم منابع</h3><p>جاسازی <strong>resources</strong> در داخل اسمبلی‌ها در برنامه‌های <strong>Windows Store</strong> پشتیبانی نمی‌شود. به جای آن، فایل‌های اضافی را به <strong>deployment package</strong> اضافه کرده و از طریق <strong>StorageFolder</strong> برنامه خود (<strong>Package.Current.InstalledLocation</strong>) به آن‌ها دسترسی پیدا کنید.</p><h4>نحوه جاسازی مستقیم منابع با Visual Studio</h4><ol> <li>فایل را به پروژه اضافه کنید.</li><li><strong>Build Action</strong> آن را روی <strong>Embedded Resource</strong> تنظیم کنید.</li></ol> <p>Visual Studio همیشه نام منابع را با <strong>namespace پیش‌فرض پروژه</strong> و همچنین نام هر <strong>زیرپوشه</strong> که فایل در آن قرار دارد، پیشوند می‌کند.<br> مثلاً اگر namespace پیش‌فرض پروژه <code>Westwind.Reports</code> باشد و فایل <code>banner.jpg</code> در پوشه <code>pictures</code> باشد، نام resource به شکل زیر خواهد بود:</p><pre class="hljs"><code>Westwind.Reports.pictures.banner.jpg
+</code></pre> <blockquote><p>نام منابع <strong>حساس به حروف بزرگ و کوچک</strong> است، بنابراین نام پوشه‌های پروژه که شامل منابع هستند، به‌طور مؤثر حساس به حروف خواهند بود.</p></blockquote> <hr><h4>دسترسی به منابع</h4><p>برای دسترسی به یک resource، متد <strong>GetManifestResourceStream</strong> روی اسمبلی حاوی آن را صدا بزنید. این متد یک <strong>Stream</strong> برمی‌گرداند که می‌توانید مانند هر Stream دیگری آن را بخوانید:</p><pre class="hljs"><code>Assembly a = Assembly.GetEntryAssembly();
 <span class="hljs-keyword">using</span> (Stream s = a.GetManifestResourceStream(<span class="hljs-string">&quot;TestProject.data.xml&quot;</span>))
 <span class="hljs-keyword">using</span> (XmlReader r = XmlReader.Create(s))
 {
     ...
 }
-</code></pre>
-<p>مثال دیگر برای تصویر:</p>
-<pre class="hljs"><code>System.Drawing.Image image;
+</code></pre> <p>مثال دیگر برای تصویر:</p><pre class="hljs"><code>System.Drawing.Image image;
 <span class="hljs-keyword">using</span> (Stream s = a.GetManifestResourceStream(<span class="hljs-string">&quot;TestProject.banner.jpg&quot;</span>))
     image = System.Drawing.Image.FromStream(s);
-</code></pre>
-<p>Stream بازگشتی قابل <strong>seek</strong> است، بنابراین می‌توانید به شکل زیر نیز داده‌ها را بخوانید:</p>
-<pre class="hljs"><code><span class="hljs-built_in">byte</span>[] data;
+</code></pre> <p>Stream بازگشتی قابل <strong>seek</strong> است، بنابراین می‌توانید به شکل زیر نیز داده‌ها را بخوانید:</p><pre class="hljs"><code><span class="hljs-built_in">byte</span>[] data;
 <span class="hljs-keyword">using</span> (Stream s = a.GetManifestResourceStream(<span class="hljs-string">&quot;TestProject.banner.jpg&quot;</span>))
     data = <span class="hljs-keyword">new</span> BinaryReader(s).ReadBytes((<span class="hljs-built_in">int</span>)s.Length);
-</code></pre>
-<blockquote>
-<p>⚠️ اگر از Visual Studio برای جاسازی resource استفاده کرده‌اید، فراموش نکنید پیشوند namespace را لحاظ کنید.<br>
-برای کاهش خطا، می‌توانید پیشوند را با یک نوع مشخص کنید:</p>
-</blockquote>
-<pre class="hljs"><code><span class="hljs-keyword">using</span> (Stream s = a.GetManifestResourceStream(<span class="hljs-keyword">typeof</span>(X), <span class="hljs-string">&quot;data.xml&quot;</span>))
-</code></pre>
-<p><code>X</code> می‌تواند هر نوعی باشد که دارای namespace موردنظر شما است (معمولاً نوعی در همان پوشه پروژه).</p>
-<hr>
-<h4>تفاوت با Resource در WPF</h4>
-<p>تنظیم <strong>Build Action</strong> یک آیتم پروژه به <strong>Resource</strong> در برنامه WPF با <strong>Embedded Resource</strong> متفاوت است.</p>
-<ul>
-<li><strong>Resource</strong> در WPF آیتم را به یک فایل <code>.resources</code> به نام <code>&lt;AssemblyName&gt;.g.resources</code> اضافه می‌کند.</li>
-<li>محتوای آن از طریق کلاس <strong>Application</strong> و با استفاده از URI دسترسی پیدا می‌کند.</li>
-</ul>
-<p>همچنین WPF اصطلاح <strong>resource</strong> را به روش‌های دیگری نیز به کار می‌برد:</p>
-<ul>
-<li><strong>Static resources</strong></li>
-<li><strong>Dynamic resources</strong></li>
-</ul>
-<p>این‌ها ارتباطی با منابع اسمبلی ندارند!</p>
-<p>برای دریافت نام همه منابع در یک اسمبلی، می‌توان از متد <strong>GetManifestResourceNames</strong> استفاده کرد.</p>
-<hr>
-<h3>🔹 فایل‌های .resources 🔹</h3>
-<p>فایل‌های <code>.resources</code> کانتینرهایی برای محتوای قابل محلی‌سازی هستند. این فایل‌ها در نهایت به‌عنوان یک <strong>embedded resource</strong> داخل اسمبلی قرار می‌گیرند، درست مانند سایر فایل‌ها. تفاوت آن‌ها:</p>
-<ol>
-<li>ابتدا محتوای خود را در فایل <code>.resources</code> بسته‌بندی می‌کنید.</li>
-<li>برای دسترسی به محتوا از <strong>ResourceManager</strong> یا <strong>pack URI</strong> استفاده می‌کنید، نه از <strong>GetManifestResourceStream</strong>.</li>
-</ol>
-<p>فایل‌های <code>.resources</code> به صورت <strong>binary</strong> هستند و قابل ویرایش مستقیم توسط انسان نیستند، بنابراین باید از ابزارهای .NET و Visual Studio استفاده کنید.</p>
-<h4>.resx Files</h4>
-<p>فایل‌های <code>.resx</code> فرمتی در زمان طراحی هستند که برای تولید <code>.resources</code> استفاده می‌شوند. این فایل‌ها با XML ساخته می‌شوند و ساختار آن‌ها به صورت <strong>name/value pairs</strong> است:</p>
-<pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">root</span>&gt;</span>
+</code></pre> <blockquote><p>اگر از Visual Studio برای جاسازی resource استفاده کرده‌اید، فراموش نکنید پیشوند namespace را لحاظ کنید.<br> برای کاهش خطا، می‌توانید پیشوند را با یک نوع مشخص کنید:</p></blockquote> <pre class="hljs"><code><span class="hljs-keyword">using</span> (Stream s = a.GetManifestResourceStream(<span class="hljs-keyword">typeof</span>(X), <span class="hljs-string">&quot;data.xml&quot;</span>))
+</code></pre> <p><code>X</code> می‌تواند هر نوعی باشد که دارای namespace موردنظر شما است (معمولاً نوعی در همان پوشه پروژه).</p><hr> <h4>تفاوت با Resource در WPF</h4><p>تنظیم <strong>Build Action</strong> یک آیتم پروژه به <strong>Resource</strong> در برنامه WPF با <strong>Embedded Resource</strong> متفاوت است.</p><ul> <li><strong>Resource</strong> در WPF آیتم را به یک فایل <code>.resources</code> به نام <code>&lt;AssemblyName&gt;.g.resources</code> اضافه می‌کند.</li><li>محتوای آن از طریق کلاس <strong>Application</strong> و با استفاده از URI دسترسی پیدا می‌کند.</li></ul> <p>همچنین WPF اصطلاح <strong>resource</strong> را به روش‌های دیگری نیز به کار می‌برد:</p><ul> <li><strong>Static resources</strong></li><li><strong>Dynamic resources</strong></li></ul> <p>این‌ها ارتباطی با منابع اسمبلی ندارند!</p><p>برای دریافت نام همه منابع در یک اسمبلی، می‌توان از متد <strong>GetManifestResourceNames</strong> استفاده کرد.</p><hr> <h3>فایل‌های .resources</h3><p>فایل‌های <code>.resources</code> کانتینرهایی برای محتوای قابل محلی‌سازی هستند. این فایل‌ها در نهایت به‌عنوان یک <strong>embedded resource</strong> داخل اسمبلی قرار می‌گیرند، درست مانند سایر فایل‌ها. تفاوت آن‌ها:</p><ol> <li>ابتدا محتوای خود را در فایل <code>.resources</code> بسته‌بندی می‌کنید.</li><li>برای دسترسی به محتوا از <strong>ResourceManager</strong> یا <strong>pack URI</strong> استفاده می‌کنید، نه از <strong>GetManifestResourceStream</strong>.</li></ol> <p>فایل‌های <code>.resources</code> به صورت <strong>binary</strong> هستند و قابل ویرایش مستقیم توسط انسان نیستند، بنابراین باید از ابزارهای .NET و Visual Studio استفاده کنید.</p><h4>.resx Files</h4><p>فایل‌های <code>.resx</code> فرمتی در زمان طراحی هستند که برای تولید <code>.resources</code> استفاده می‌شوند. این فایل‌ها با XML ساخته می‌شوند و ساختار آن‌ها به صورت <strong>name/value pairs</strong> است:</p><pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">root</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">data</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;Greeting&quot;</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">value</span>&gt;</span>hello<span class="hljs-tag">&lt;/<span class="hljs-name">value</span>&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-name">data</span>&gt;</span>
@@ -537,353 +70,81 @@
     <span class="hljs-tag">&lt;<span class="hljs-name">value</span>&gt;</span>10<span class="hljs-tag">&lt;/<span class="hljs-name">value</span>&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-name">data</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">root</span>&gt;</span>
-</code></pre>
-<p>در Visual Studio برای ایجاد <code>.resx</code>:</p>
-<ol>
-<li>
-<p>یک <strong>project item</strong> از نوع <strong>Resources File</strong> اضافه کنید.</p>
-</li>
-<li>
-<p>Visual Studio به‌صورت خودکار:</p>
-<ul>
-<li>هدر صحیح را ایجاد می‌کند.</li>
-<li><strong>designer</strong> برای اضافه کردن رشته‌ها، تصاویر و فایل‌ها ارائه می‌دهد.</li>
-<li>فایل <code>.resx</code> را به <code>.resources</code> تبدیل و در اسمبلی جاسازی می‌کند.</li>
-<li>کلاسی برای دسترسی به داده‌ها تولید می‌کند.</li>
-</ul>
-</li>
-</ol>
-<blockquote>
-<p>⚠️ designer منابع تصویری را به‌صورت typed <strong>Image objects</strong> (System.Drawing.dll) اضافه می‌کند که برای WPF مناسب نیستند.</p>
-</blockquote>
-<hr>
-<h4>خواندن فایل‌های .resources</h4>
-<p>کلاسی با همان نام <code>.resx</code> تولید می‌شود و دارای <strong>properties</strong> برای دسترسی به هر آیتم است.</p>
-<p><strong>ResourceManager</strong> برای خواندن فایل‌های <code>.resources</code> جاسازی‌شده در اسمبلی استفاده می‌شود:</p>
-<pre class="hljs"><code>ResourceManager r = <span class="hljs-keyword">new</span> ResourceManager(<span class="hljs-string">&quot;welcome&quot;</span>,
+</code></pre> <p>در Visual Studio برای ایجاد <code>.resx</code>:</p><ol> <li><p>یک <strong>project item</strong> از نوع <strong>Resources File</strong> اضافه کنید.</p></li> <li><p>Visual Studio به‌صورت خودکار:</p><ul> <li>هدر صحیح را ایجاد می‌کند.</li><li><strong>designer</strong> برای اضافه کردن رشته‌ها، تصاویر و فایل‌ها ارائه می‌دهد.</li><li>فایل <code>.resx</code> را به <code>.resources</code> تبدیل و در اسمبلی جاسازی می‌کند.</li><li>کلاسی برای دسترسی به داده‌ها تولید می‌کند.</li></ul> </li></ol> <blockquote><p>designer منابع تصویری را به‌صورت typed <strong>Image objects</strong> (System.Drawing.dll) اضافه می‌کند که برای WPF مناسب نیستند.</p></blockquote> <hr><h4>خواندن فایل‌های .resources</h4><p>کلاسی با همان نام <code>.resx</code> تولید می‌شود و دارای <strong>properties</strong> برای دسترسی به هر آیتم است.</p><p><strong>ResourceManager</strong> برای خواندن فایل‌های <code>.resources</code> جاسازی‌شده در اسمبلی استفاده می‌شود:</p><pre class="hljs"><code>ResourceManager r = <span class="hljs-keyword">new</span> ResourceManager(<span class="hljs-string">&quot;welcome&quot;</span>,
                                         Assembly.GetExecutingAssembly());
-</code></pre>
-<blockquote>
-<p>⚠️ اگر resource در Visual Studio کامپایل شده، آرگومان اول باید <strong>namespace-prefixed</strong> باشد.</p>
-</blockquote>
-<p>دسترسی به محتوا:</p>
-<pre class="hljs"><code><span class="hljs-built_in">string</span> greeting = r.GetString(<span class="hljs-string">&quot;Greeting&quot;</span>);
+</code></pre> <blockquote><p>اگر resource در Visual Studio کامپایل شده، آرگومان اول باید <strong>namespace-prefixed</strong> باشد.</p></blockquote> <p>دسترسی به محتوا:</p><pre class="hljs"><code><span class="hljs-built_in">string</span> greeting = r.GetString(<span class="hljs-string">&quot;Greeting&quot;</span>);
 <span class="hljs-built_in">int</span> fontSize = (<span class="hljs-built_in">int</span>) r.GetObject(<span class="hljs-string">&quot;DefaultFontSize&quot;</span>);
 Image image = (Image) r.GetObject(<span class="hljs-string">&quot;flag.png&quot;</span>);
-</code></pre>
-<p>برای فهرست کردن محتویات یک فایل <code>.resources</code>:</p>
-<pre class="hljs"><code>ResourceManager r = <span class="hljs-keyword">new</span> ResourceManager(...);
+</code></pre> <p>برای فهرست کردن محتویات یک فایل <code>.resources</code>:</p><pre class="hljs"><code>ResourceManager r = <span class="hljs-keyword">new</span> ResourceManager(...);
 ResourceSet <span class="hljs-keyword">set</span> = r.GetResourceSet(CultureInfo.CurrentUICulture, <span class="hljs-literal">true</span>, <span class="hljs-literal">true</span>);
 <span class="hljs-keyword">foreach</span> (System.Collections.DictionaryEntry entry <span class="hljs-keyword">in</span> <span class="hljs-keyword">set</span>)
     Console.WriteLine(entry.Key);
-</code></pre>
-<hr>
-<h3>🔹 ایجاد resource با pack URI در Visual Studio 🔹</h3>
-<p>در برنامه‌های WPF، فایل‌های XAML باید بتوانند منابع را از طریق URI بخوانند، مانند:</p>
-<pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">Button</span>&gt;</span>
+</code></pre> <hr><h3>ایجاد resource با pack URI در Visual Studio</h3><p>در برنامه‌های WPF، فایل‌های XAML باید بتوانند منابع را از طریق URI بخوانند، مانند:</p><pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">Button</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">Image</span> <span class="hljs-attr">Height</span>=<span class="hljs-string">&quot;50&quot;</span> <span class="hljs-attr">Source</span>=<span class="hljs-string">&quot;flag.png&quot;</span>/&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">Button</span>&gt;</span>
-</code></pre>
-<p>یا اگر resource در اسمبلی دیگری باشد:</p>
-<pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">Button</span>&gt;</span>
+</code></pre> <p>یا اگر resource در اسمبلی دیگری باشد:</p><pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">Button</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">Image</span> <span class="hljs-attr">Height</span>=<span class="hljs-string">&quot;50&quot;</span> <span class="hljs-attr">Source</span>=<span class="hljs-string">&quot;UtilsAssembly;Component/flag.png&quot;</span>/&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">Button</span>&gt;</span>
-</code></pre>
-<blockquote>
-<p>⚠️ کلمه <strong>Component</strong> کلیدواژه ثابت است.</p>
-</blockquote>
-<p>برای ایجاد چنین منابعی نمی‌توان از فایل‌های <code>.resx</code> استفاده کرد. باید فایل‌ها را به پروژه اضافه کرده و <strong>Build Action</strong> را روی <strong>Resource</strong> قرار دهید (نه Embedded Resource).<br>
-Visual Studio سپس آن‌ها را به فایل <code>.resources</code> به نام <code>&lt;AssemblyName&gt;.g.resources</code> تبدیل می‌کند و همچنین فایل‌های XAML کامپایل‌شده (.baml) نیز در همانجا قرار می‌گیرند.</p>
-<p>برای بارگذاری منابع با <strong>URI-key</strong> به‌صورت برنامه‌نویسی:</p>
-<pre class="hljs"><code>Uri u = <span class="hljs-keyword">new</span> Uri(<span class="hljs-string">&quot;flag.png&quot;</span>, UriKind.Relative);
+</code></pre> <blockquote><p>کلمه <strong>Component</strong> کلیدواژه ثابت است.</p></blockquote> <p>برای ایجاد چنین منابعی نمی‌توان از فایل‌های <code>.resx</code> استفاده کرد. باید فایل‌ها را به پروژه اضافه کرده و <strong>Build Action</strong> را روی <strong>Resource</strong> قرار دهید (نه Embedded Resource).<br> Visual Studio سپس آن‌ها را به فایل <code>.resources</code> به نام <code>&lt;AssemblyName&gt;.g.resources</code> تبدیل می‌کند و همچنین فایل‌های XAML کامپایل‌شده (.baml) نیز در همانجا قرار می‌گیرند.</p><p>برای بارگذاری منابع با <strong>URI-key</strong> به‌صورت برنامه‌نویسی:</p><pre class="hljs"><code>Uri u = <span class="hljs-keyword">new</span> Uri(<span class="hljs-string">&quot;flag.png&quot;</span>, UriKind.Relative);
 <span class="hljs-keyword">using</span> (Stream s = Application.GetResourceStream(u).Stream)
 {
     ...
 }
-</code></pre>
-<p>همچنین می‌توان از <strong>absolute URI</strong> به شکل زیر استفاده کرد:</p>
-<pre class="hljs"><code>Uri u = <span class="hljs-keyword">new</span> Uri(<span class="hljs-string">&quot;pack://application:,,,/flag.png&quot;</span>);
-</code></pre>
-<p>اگر بخواهید <strong>Assembly object</strong> مشخص کنید، می‌توانید از <strong>ResourceManager</strong> استفاده کنید:</p>
-<pre class="hljs"><code>Assembly a = Assembly.GetExecutingAssembly();
+</code></pre> <p>همچنین می‌توان از <strong>absolute URI</strong> به شکل زیر استفاده کرد:</p><pre class="hljs"><code>Uri u = <span class="hljs-keyword">new</span> Uri(<span class="hljs-string">&quot;pack://application:,,,/flag.png&quot;</span>);
+</code></pre> <p>اگر بخواهید <strong>Assembly object</strong> مشخص کنید، می‌توانید از <strong>ResourceManager</strong> استفاده کنید:</p><pre class="hljs"><code>Assembly a = Assembly.GetExecutingAssembly();
 ResourceManager r = <span class="hljs-keyword">new</span> ResourceManager(a.GetName().Name + <span class="hljs-string">&quot;.g&quot;</span>, a);
 <span class="hljs-keyword">using</span> (Stream s = r.GetStream(<span class="hljs-string">&quot;flag.png&quot;</span>))
 {
     ...
 }
-</code></pre>
-<p><strong>ResourceManager</strong> همچنین اجازه می‌دهد محتوای یک کانتینر <code>.g.resources</code> داخل یک اسمبلی را فهرست کنید.</p>
-<h3>🌐 اسمبلی‌های ماهواره‌ای (Satellite Assemblies) 🌐</h3>
-<p>داده‌های جاسازی‌شده در فایل‌های <code>.resources</code> <strong>قابلیت محلی‌سازی (localizable)</strong> دارند.<br>
-محلی‌سازی منابع زمانی اهمیت دارد که برنامه شما روی نسخه‌ای از ویندوز اجرا شود که تمام محیط آن به زبانی دیگر نمایش داده می‌شود. برای یکپارچگی، برنامه شما نیز باید از همان زبان استفاده کند.</p>
-<h4>ساختار معمول</h4>
-<ul>
-<li><strong>Main assembly</strong> شامل منابع <code>.resources</code> برای زبان پیش‌فرض یا <strong>fallback</strong> است.</li>
-<li><strong>Satellite assemblies</strong> جداگانه شامل منابع محلی‌شده برای زبان‌های مختلف هستند.</li>
-</ul>
-<p>زمانی که برنامه اجرا می‌شود، .NET زبان فعلی سیستم عامل را از <code>CultureInfo.CurrentUICulture</code> بررسی می‌کند. هرگاه بخواهید یک resource را از طریق <strong>ResourceManager</strong> بخوانید، runtime به دنبال یک <strong>satellite assembly</strong> محلی‌شده می‌گردد. اگر موجود باشد و شامل کلید resource مورد نظر شما باشد، جایگزین نسخه main assembly می‌شود.</p>
-<blockquote>
-<p>این یعنی می‌توانید پشتیبانی از زبان‌های جدید را تنها با اضافه کردن satellite جدید فراهم کنید، بدون اینکه main assembly تغییر کند.</p>
-</blockquote>
-<blockquote>
-<p>⚠️ یک satellite assembly نمی‌تواند شامل کد اجرایی باشد، تنها منابع را می‌تواند نگه دارد.</p>
-</blockquote>
-<hr>
-<h4>مسیرهای استقرار Satellite Assemblies</h4>
-<p>Satellite assemblies در زیرپوشه‌های فولدر اسمبلی قرار می‌گیرند:</p>
-<pre class="hljs"><code>programBaseFolder\MyProgram.exe
+</code></pre> <p><strong>ResourceManager</strong> همچنین اجازه می‌دهد محتوای یک کانتینر <code>.g.resources</code> داخل یک اسمبلی را فهرست کنید.</p><h3>اسمبلی‌های ماهواره‌ای (Satellite Assemblies)</h3><p>داده‌های جاسازی‌شده در فایل‌های <code>.resources</code> <strong>قابلیت محلی‌سازی (localizable)</strong> دارند.<br> محلی‌سازی منابع زمانی اهمیت دارد که برنامه شما روی نسخه‌ای از ویندوز اجرا شود که تمام محیط آن به زبانی دیگر نمایش داده می‌شود. برای یکپارچگی، برنامه شما نیز باید از همان زبان استفاده کند.</p><h4>ساختار معمول</h4><ul> <li><strong>Main assembly</strong> شامل منابع <code>.resources</code> برای زبان پیش‌فرض یا <strong>fallback</strong> است.</li><li><strong>Satellite assemblies</strong> جداگانه شامل منابع محلی‌شده برای زبان‌های مختلف هستند.</li></ul> <p>زمانی که برنامه اجرا می‌شود، .NET زبان فعلی سیستم عامل را از <code>CultureInfo.CurrentUICulture</code> بررسی می‌کند. هرگاه بخواهید یک resource را از طریق <strong>ResourceManager</strong> بخوانید، runtime به دنبال یک <strong>satellite assembly</strong> محلی‌شده می‌گردد. اگر موجود باشد و شامل کلید resource مورد نظر شما باشد، جایگزین نسخه main assembly می‌شود.</p><blockquote> <p>این یعنی می‌توانید پشتیبانی از زبان‌های جدید را تنها با اضافه کردن satellite جدید فراهم کنید، بدون اینکه main assembly تغییر کند.</p></blockquote> <blockquote><p>یک satellite assembly نمی‌تواند شامل کد اجرایی باشد، تنها منابع را می‌تواند نگه دارد.</p></blockquote> <hr><h4>مسیرهای استقرار Satellite Assemblies</h4><p>Satellite assemblies در زیرپوشه‌های فولدر اسمبلی قرار می‌گیرند:</p><pre class="hljs"><code>programBaseFolder\MyProgram.exe
                  \MyLibrary.exe
                  \XX\MyProgram.resources.dll
                  \XX\MyLibrary.resources.dll
-</code></pre>
-<p><code>XX</code> به کد دو حرفی زبان اشاره دارد (مثلاً <code>de</code> برای آلمانی) یا ترکیبی از زبان و منطقه (مثل <code>en-GB</code> برای انگلیسی در بریتانیا).<br>
-این سیستم نامگذاری به CLR اجازه می‌دهد تا به‌صورت خودکار satellite assembly مناسب را پیدا و بارگذاری کند.</p>
-<hr>
-<h4>ساخت Satellite Assemblies</h4>
-<p>فرض کنید مثال قبلی ما با <code>.resx</code> شامل این بود:</p>
-<pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">root</span>&gt;</span>
+</code></pre> <p><code>XX</code> به کد دو حرفی زبان اشاره دارد (مثلاً <code>de</code> برای آلمانی) یا ترکیبی از زبان و منطقه (مثل <code>en-GB</code> برای انگلیسی در بریتانیا).<br> این سیستم نامگذاری به CLR اجازه می‌دهد تا به‌صورت خودکار satellite assembly مناسب را پیدا و بارگذاری کند.</p><hr> <h4>ساخت Satellite Assemblies</h4><p>فرض کنید مثال قبلی ما با <code>.resx</code> شامل این بود:</p><pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">root</span>&gt;</span>
   ...
   <span class="hljs-tag">&lt;<span class="hljs-name">data</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;Greeting&quot;</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">value</span>&gt;</span>hello<span class="hljs-tag">&lt;/<span class="hljs-name">value</span>&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-name">data</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">root</span>&gt;</span>
-</code></pre>
-<p>و در زمان اجرا آن را به شکل زیر خواندیم:</p>
-<pre class="hljs"><code>ResourceManager r = <span class="hljs-keyword">new</span> ResourceManager(<span class="hljs-string">&quot;welcome&quot;</span>,
+</code></pre> <p>و در زمان اجرا آن را به شکل زیر خواندیم:</p><pre class="hljs"><code>ResourceManager r = <span class="hljs-keyword">new</span> ResourceManager(<span class="hljs-string">&quot;welcome&quot;</span>,
                                         Assembly.GetExecutingAssembly());
 Console.Write(r.GetString(<span class="hljs-string">&quot;Greeting&quot;</span>));
-</code></pre>
-<p>حال فرض کنید می‌خواهیم وقتی برنامه روی نسخه آلمانی ویندوز اجرا شد، <code>hello</code> به <code>hallo</code> تبدیل شود.<br>
-ابتدا یک فایل <code>.resx</code> دیگر به نام <code>welcome.de.resx</code> ایجاد می‌کنیم که مقدار را جایگزین کند:</p>
-<pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">root</span>&gt;</span>
+</code></pre> <p>حال فرض کنید می‌خواهیم وقتی برنامه روی نسخه آلمانی ویندوز اجرا شد، <code>hello</code> به <code>hallo</code> تبدیل شود.<br> ابتدا یک فایل <code>.resx</code> دیگر به نام <code>welcome.de.resx</code> ایجاد می‌کنیم که مقدار را جایگزین کند:</p><pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">root</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">data</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;Greeting&quot;</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">value</span>&gt;</span>hallo<span class="hljs-tag">&lt;/<span class="hljs-name">value</span>&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-name">data</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">root</span>&gt;</span>
-</code></pre>
-<p>در <strong>Visual Studio</strong> تنها کافی است این کار را انجام دهید. هنگام <strong>rebuild</strong>، به‌طور خودکار یک <strong>satellite assembly</strong> به نام <code>MyApp.resources.dll</code> در یک زیرپوشه <code>de</code> ساخته می‌شود.</p>
-<hr>
-<h4>تست Satellite Assemblies</h4>
-<p>برای شبیه‌سازی اجرای برنامه روی سیستم‌عاملی با زبان متفاوت، باید <strong>CurrentUICulture</strong> را با کلاس <code>Thread</code> تغییر دهید:</p>
-<pre class="hljs"><code>System.Threading.Thread.CurrentThread.CurrentUICulture
+</code></pre> <p>در <strong>Visual Studio</strong> تنها کافی است این کار را انجام دهید. هنگام <strong>rebuild</strong>، به‌طور خودکار یک <strong>satellite assembly</strong> به نام <code>MyApp.resources.dll</code> در یک زیرپوشه <code>de</code> ساخته می‌شود.</p><hr> <h4>تست Satellite Assemblies</h4><p>برای شبیه‌سازی اجرای برنامه روی سیستم‌عاملی با زبان متفاوت، باید <strong>CurrentUICulture</strong> را با کلاس <code>Thread</code> تغییر دهید:</p><pre class="hljs"><code>System.Threading.Thread.CurrentThread.CurrentUICulture
     = <span class="hljs-keyword">new</span> System.Globalization.CultureInfo(<span class="hljs-string">&quot;de&quot;</span>);
-</code></pre>
-<blockquote>
-<p>⚠️ <code>CultureInfo.CurrentUICulture</code> نسخه فقط‌خواندنی همین property است.</p>
-</blockquote>
-<p>یک استراتژی مفید برای تست این است که کلمات را <strong>ℓѻ¢αℓïʐɘ</strong> کنید؛ یعنی به شکلی که هنوز به انگلیسی قابل خواندن باشند، اما از کاراکترهای استاندارد رومی استفاده نکنند.</p>
-<hr>
-<h4>پشتیبانی طراح Visual Studio</h4>
-<p>طراح‌های Visual Studio امکان محلی‌سازی کامپوننت‌ها و عناصر بصری را فراهم می‌کنند:</p>
-<ul>
-<li><strong>WPF designer</strong> یک workflow مخصوص برای localization دارد.</li>
-<li>سایر designers مبتنی بر Component از یک property در زمان طراحی استفاده می‌کنند تا شبیه <strong>Language property</strong> نمایش داده شود.</li>
-<li>برای محلی‌سازی، کافی است <strong>Language property</strong> را تغییر داده و سپس شروع به تغییر کامپوننت کنید.</li>
-<li>تمام propertyهای کنترل که دارای صفت <strong>Localizable</strong> هستند، در فایل <code>.resx</code> مربوط به آن زبان ذخیره می‌شوند.</li>
-<li>می‌توانید در هر زمان بین زبان‌ها جابجا شوید فقط با تغییر Language property.</li>
-</ul>
-<hr>
-<h4>فرهنگ‌ها و زیرفرهنگ‌ها (Cultures and Subcultures)</h4>
-<ul>
-<li><strong>Culture</strong> یک زبان مشخص را نشان می‌دهد.</li>
-<li><strong>Subculture</strong> یک نسخه منطقه‌ای از همان زبان است.</li>
-<li>.NET مطابق استاندارد <strong>RFC1766</strong> از کدهای دو حرفی برای فرهنگ‌ها و زیرفرهنگ‌ها استفاده می‌کند:</li>
-</ul>
-<p><strong>مثال کد فرهنگ‌ها:</strong></p>
-<pre class="hljs"><code>En  → انگلیسی
+</code></pre> <blockquote><p><code>CultureInfo.CurrentUICulture</code> نسخه فقط‌خواندنی همین property است.</p></blockquote> <p>یک استراتژی مفید برای تست این است که کلمات را <strong>ℓѻ¢αℓïʐɘ</strong> کنید؛ یعنی به شکلی که هنوز به انگلیسی قابل خواندن باشند، اما از کاراکترهای استاندارد رومی استفاده نکنند.</p><hr> <h4>پشتیبانی طراح Visual Studio</h4><p>طراح‌های Visual Studio امکان محلی‌سازی کامپوننت‌ها و عناصر بصری را فراهم می‌کنند:</p><ul> <li><strong>WPF designer</strong> یک workflow مخصوص برای localization دارد.</li><li>سایر designers مبتنی بر Component از یک property در زمان طراحی استفاده می‌کنند تا شبیه <strong>Language property</strong> نمایش داده شود.</li><li>برای محلی‌سازی، کافی است <strong>Language property</strong> را تغییر داده و سپس شروع به تغییر کامپوننت کنید.</li><li>تمام propertyهای کنترل که دارای صفت <strong>Localizable</strong> هستند، در فایل <code>.resx</code> مربوط به آن زبان ذخیره می‌شوند.</li><li>می‌توانید در هر زمان بین زبان‌ها جابجا شوید فقط با تغییر Language property.</li></ul> <hr><h4>فرهنگ‌ها و زیرفرهنگ‌ها (Cultures and Subcultures)</h4><ul> <li><strong>Culture</strong> یک زبان مشخص را نشان می‌دهد.</li><li><strong>Subculture</strong> یک نسخه منطقه‌ای از همان زبان است.</li><li>.NET مطابق استاندارد <strong>RFC1766</strong> از کدهای دو حرفی برای فرهنگ‌ها و زیرفرهنگ‌ها استفاده می‌کند:</li></ul> <p><strong>مثال کد فرهنگ‌ها:</strong></p><pre class="hljs"><code>En  → انگلیسی
 de  → آلمانی
-</code></pre>
-<p><strong>مثال کد زیرفرهنگ‌ها:</strong></p>
-<pre class="hljs"><code>en-AU  → انگلیسی استرالیا
+</code></pre> <p><strong>مثال کد زیرفرهنگ‌ها:</strong></p><pre class="hljs"><code>en-AU  → انگلیسی استرالیا
 de-AT  → آلمانی اتریش
-</code></pre>
-<ul>
-<li>فرهنگ‌ها در .NET با کلاس <code>System.Globalization.CultureInfo</code> نمایش داده می‌شوند.</li>
-<li>بررسی فرهنگ فعلی برنامه:</li>
-</ul>
-<pre class="hljs"><code>Console.WriteLine(System.Threading.Thread.CurrentThread.CurrentCulture);
+</code></pre> <ul><li>فرهنگ‌ها در .NET با کلاس <code>System.Globalization.CultureInfo</code> نمایش داده می‌شوند.</li><li>بررسی فرهنگ فعلی برنامه:</li></ul> <pre class="hljs"><code>Console.WriteLine(System.Threading.Thread.CurrentThread.CurrentCulture);
 Console.WriteLine(System.Threading.Thread.CurrentThread.CurrentUICulture);
-</code></pre>
-<p>مثال برای سیستم محلی‌سازی‌شده برای استرالیا:</p>
-<pre class="hljs"><code>CurrentCulture      → en-AU
+</code></pre> <p>مثال برای سیستم محلی‌سازی‌شده برای استرالیا:</p><pre class="hljs"><code>CurrentCulture      → en-AU
 CurrentUICulture    → en-US
-</code></pre>
-<blockquote>
-<p>⚠️ <code>CurrentCulture</code> تنظیمات منطقه‌ای <strong>Control Panel ویندوز</strong> را نشان می‌دهد، در حالی که <code>CurrentUICulture</code> زبان سیستم عامل را مشخص می‌کند.<br>
-تنظیمات منطقه‌ای شامل <strong>منطقه زمانی، قالب تاریخ و ارز</strong> است. <code>CurrentCulture</code> رفتار پیش‌فرض توابعی مانند <code>DateTime.Parse</code> را تعیین می‌کند.<br>
-<code>CurrentUICulture</code> زبانی را مشخص می‌کند که سیستم با کاربر ارتباط برقرار می‌کند.</p>
-</blockquote>
-<p><strong>ResourceManager</strong> به‌طور پیش‌فرض از property <code>CurrentUICulture</code> thread فعلی برای یافتن satellite assembly مناسب استفاده می‌کند.</p>
-<ul>
-<li>اگر satellite assembly برای subculture موجود باشد، آن استفاده می‌شود.</li>
-<li>در غیر این صورت، به <strong>generic culture</strong> بازمی‌گردد.</li>
-<li>اگر generic culture هم موجود نباشد، به <strong>default culture</strong> در main assembly بازمی‌گردد.</li>
-</ul>
-<h3>⚙️ بارگذاری، حل وابستگی و جداسازی اسمبلی‌ها (Loading, Resolving, and Isolating Assemblies) ⚙️</h3>
-<p>بارگذاری یک اسمبلی از یک مسیر مشخص نسبتاً ساده است و به آن <strong>assembly loading</strong> گفته می‌شود.<br>
-اما اغلب، شما یا CLR نیاز دارید که یک اسمبلی را فقط با نام کامل یا ساده‌اش بارگذاری کنید. به این کار <strong>assembly resolution</strong> گفته می‌شود. تفاوت اصلی بین بارگذاری و حل وابستگی این است که در <strong>resolution</strong> ابتدا باید اسمبلی <strong>پیدا شود</strong>.</p>
-<hr>
-<h4>🔹 زمان‌های رخ دادن Assembly Resolution</h4>
-<ol>
-<li>توسط CLR، وقتی نیاز به حل وابستگی (dependency) داشته باشد.</li>
-<li>صریحاً، وقتی شما متدی مانند <code>Assembly.Load(AssemblyName)</code> را فراخوانی می‌کنید.</li>
-</ol>
-<p>مثال: یک برنامه با اسمبلی اصلی و تعدادی کتابخانه استاتیک:</p>
-<pre class="hljs"><code>AdventureGame.dll    // Main assembly
+</code></pre> <blockquote><p><code>CurrentCulture</code> تنظیمات منطقه‌ای <strong>Control Panel ویندوز</strong> را نشان می‌دهد، در حالی که <code>CurrentUICulture</code> زبان سیستم عامل را مشخص می‌کند.<br> تنظیمات منطقه‌ای شامل <strong>منطقه زمانی، قالب تاریخ و ارز</strong> است. <code>CurrentCulture</code> رفتار پیش‌فرض توابعی مانند <code>DateTime.Parse</code> را تعیین می‌کند.<br><code>CurrentUICulture</code> زبانی را مشخص می‌کند که سیستم با کاربر ارتباط برقرار می‌کند.</p></blockquote> <p><strong>ResourceManager</strong> به‌طور پیش‌فرض از property <code>CurrentUICulture</code> thread فعلی برای یافتن satellite assembly مناسب استفاده می‌کند.</p><ul> <li>اگر satellite assembly برای subculture موجود باشد، آن استفاده می‌شود.</li><li>در غیر این صورت، به <strong>generic culture</strong> بازمی‌گردد.</li><li>اگر generic culture هم موجود نباشد، به <strong>default culture</strong> در main assembly بازمی‌گردد.</li></ul> <h3>بارگذاری، حل وابستگی و جداسازی اسمبلی‌ها (Loading, Resolving, and Isolating Assemblies)</h3><p>بارگذاری یک اسمبلی از یک مسیر مشخص نسبتاً ساده است و به آن <strong>assembly loading</strong> گفته می‌شود.<br> اما اغلب، شما یا CLR نیاز دارید که یک اسمبلی را فقط با نام کامل یا ساده‌اش بارگذاری کنید. به این کار <strong>assembly resolution</strong> گفته می‌شود. تفاوت اصلی بین بارگذاری و حل وابستگی این است که در <strong>resolution</strong> ابتدا باید اسمبلی <strong>پیدا شود</strong>.</p><hr> <h4>زمان‌های رخ دادن Assembly Resolution</h4><ol> <li>توسط CLR، وقتی نیاز به حل وابستگی (dependency) داشته باشد.</li><li>صریحاً، وقتی شما متدی مانند <code>Assembly.Load(AssemblyName)</code> را فراخوانی می‌کنید.</li></ol> <p>مثال: یک برنامه با اسمبلی اصلی و تعدادی کتابخانه استاتیک:</p><pre class="hljs"><code>AdventureGame.dll    // Main assembly
 Terrain.dll          // Referenced assembly
 UIEngine.dll         // Referenced assembly
-</code></pre>
-<blockquote>
-<p>منظور از <strong>statically referenced</strong> این است که AdventureGame.dll هنگام کامپایل با ارجاع به Terrain.dll و UIEngine.dll ساخته شده است.<br>
-کامپایلر خودش نیاز به حل وابستگی ندارد، زیرا مسیرهای اسمبلی‌ها به او داده شده‌اند. اما در زمان اجرا، باید این اسمبلی‌ها <strong>resolve</strong> شوند.</p>
-</blockquote>
-<hr>
-<h3>⚙️ Assembly Load Contexts (ALC) – بارگذاری و جداسازی اسمبلی‌ها ⚙️</h3>
-<p>کلاس <strong><code>AssemblyLoadContext</code></strong> مسئول بارگذاری (loading) و حل وابستگی (resolving) اسمبلی‌ها و همچنین فراهم کردن <strong>مکانیزم جداسازی</strong> (isolation) است.</p>
-<hr>
-<h4>🔹 هر اسمبلی متعلق به یک ALC است</h4>
-<p>هر <strong>Assembly</strong> در .NET دقیقاً در یک <strong>ALC</strong> قرار دارد.<br>
-می‌توانید ALC یک اسمبلی را به این شکل دریافت کنید:</p>
-<pre class="hljs"><code>Assembly assem = Assembly.GetExecutingAssembly();
+</code></pre> <blockquote><p>منظور از <strong>statically referenced</strong> این است که AdventureGame.dll هنگام کامپایل با ارجاع به Terrain.dll و UIEngine.dll ساخته شده است.<br> کامپایلر خودش نیاز به حل وابستگی ندارد، زیرا مسیرهای اسمبلی‌ها به او داده شده‌اند. اما در زمان اجرا، باید این اسمبلی‌ها <strong>resolve</strong> شوند.</p></blockquote> <hr><h3>Assembly Load Contexts (ALC) – بارگذاری و جداسازی اسمبلی‌ها</h3><p>کلاس <strong><code>AssemblyLoadContext</code></strong> مسئول بارگذاری (loading) و حل وابستگی (resolving) اسمبلی‌ها و همچنین فراهم کردن <strong>مکانیزم جداسازی</strong> (isolation) است.</p><hr> <h4>هر اسمبلی متعلق به یک ALC است</h4><p>هر <strong>Assembly</strong> در .NET دقیقاً در یک <strong>ALC</strong> قرار دارد.<br> می‌توانید ALC یک اسمبلی را به این شکل دریافت کنید:</p><pre class="hljs"><code>Assembly assem = Assembly.GetExecutingAssembly();
 AssemblyLoadContext context = AssemblyLoadContext.GetLoadContext(assem);
 Console.WriteLine(context.Name);
-</code></pre>
-<p>همچنین، می‌توانید تمام اسمبلی‌های متعلق به یک ALC را با استفاده از property <code>Assemblies</code> ببینید:</p>
-<pre class="hljs"><code><span class="hljs-keyword">foreach</span> (Assembly a <span class="hljs-keyword">in</span> context.Assemblies)
+</code></pre> <p>همچنین، می‌توانید تمام اسمبلی‌های متعلق به یک ALC را با استفاده از property <code>Assemblies</code> ببینید:</p><pre class="hljs"><code><span class="hljs-keyword">foreach</span> (Assembly a <span class="hljs-keyword">in</span> context.Assemblies)
     Console.WriteLine(a.FullName);
-</code></pre>
-<p>کلاس <strong><code>AssemblyLoadContext</code></strong> همچنین یک property ایستاتیک <strong><code>All</code></strong> دارد که همه ALCها را فهرست می‌کند.</p>
-<hr>
-<h4>🔹 ساخت و سفارشی‌سازی ALC</h4>
-<ul>
-<li>می‌توانید یک <strong>ALC جدید</strong> فقط با نمونه‌سازی <code>AssemblyLoadContext</code> و ارائه یک نام ایجاد کنید:</li>
-</ul>
-<pre class="hljs"><code><span class="hljs-keyword">var</span> alc = <span class="hljs-keyword">new</span> AssemblyLoadContext(<span class="hljs-string">&quot;MyALC&quot;</span>);
-</code></pre>
-<ul>
-<li>معمولاً بهتر است کلاس را <strong>subclass کنید</strong> تا بتوانید منطق حل وابستگی‌ها (Load) را سفارشی‌سازی کنید و اسمبلی‌ها را از نامشان بارگذاری نمایید.</li>
-</ul>
-<hr>
-<h3>🔹 بارگذاری صریح اسمبلی‌ها</h3>
-<p>ALC دو متد مهم برای بارگذاری فراهم می‌کند:</p>
-<ol>
-<li><strong>از مسیر فایل:</strong></li>
-</ol>
-<pre class="hljs"><code>Assembly assem = alc.LoadFromAssemblyPath(<span class="hljs-string">@&quot;c:\temp\foo.dll&quot;</span>);
-</code></pre>
-<ol start="2">
-<li><strong>از Stream (مثلاً حافظه):</strong></li>
-</ol>
-<pre class="hljs"><code><span class="hljs-built_in">byte</span>[] bytes = File.ReadAllBytes(<span class="hljs-string">@&quot;c:\temp\foo.dll&quot;</span>);
+</code></pre> <p>کلاس <strong><code>AssemblyLoadContext</code></strong> همچنین یک property ایستاتیک <strong><code>All</code></strong> دارد که همه ALCها را فهرست می‌کند.</p><hr> <h4>ساخت و سفارشی‌سازی ALC</h4><ul> <li>می‌توانید یک <strong>ALC جدید</strong> فقط با نمونه‌سازی <code>AssemblyLoadContext</code> و ارائه یک نام ایجاد کنید:</li></ul> <pre class="hljs"><code><span class="hljs-keyword">var</span> alc = <span class="hljs-keyword">new</span> AssemblyLoadContext(<span class="hljs-string">&quot;MyALC&quot;</span>);
+</code></pre> <ul><li>معمولاً بهتر است کلاس را <strong>subclass کنید</strong> تا بتوانید منطق حل وابستگی‌ها (Load) را سفارشی‌سازی کنید و اسمبلی‌ها را از نامشان بارگذاری نمایید.</li></ul> <hr><h3>بارگذاری صریح اسمبلی‌ها</h3><p>ALC دو متد مهم برای بارگذاری فراهم می‌کند:</p><ol> <li><strong>از مسیر فایل:</strong></li></ol> <pre class="hljs"><code>Assembly assem = alc.LoadFromAssemblyPath(<span class="hljs-string">@&quot;c:\temp\foo.dll&quot;</span>);
+</code></pre> <ol start="2"><li><strong>از Stream (مثلاً حافظه):</strong></li></ol> <pre class="hljs"><code><span class="hljs-built_in">byte</span>[] bytes = File.ReadAllBytes(<span class="hljs-string">@&quot;c:\temp\foo.dll&quot;</span>);
 <span class="hljs-keyword">var</span> ms = <span class="hljs-keyword">new</span> MemoryStream(bytes);
 Assembly assem = alc.LoadFromStream(ms);
-</code></pre>
-<blockquote>
-<p>پارامتر دوم در <code>LoadFromStream</code> می‌تواند حاوی اطلاعات debug (.pdb) باشد تا stack traceها شامل اطلاعات سورس شوند.</p>
-</blockquote>
-<hr>
-<h4>🔹 محدودیت‌ها و نکات مهم</h4>
-<ul>
-<li><strong>نام ساده اسمبلی باید در یک ALC منحصر به فرد باشد.</strong><br>
-برای بارگذاری نسخه‌های مختلف، باید ALCهای جداگانه بسازید:</li>
-</ul>
-<pre class="hljs"><code><span class="hljs-keyword">var</span> alc1 = <span class="hljs-keyword">new</span> AssemblyLoadContext(<span class="hljs-string">&quot;ALC1&quot;</span>);
+</code></pre> <blockquote><p>پارامتر دوم در <code>LoadFromStream</code> می‌تواند حاوی اطلاعات debug (.pdb) باشد تا stack traceها شامل اطلاعات سورس شوند.</p></blockquote> <hr><h4>محدودیت‌ها و نکات مهم</h4><ul> <li><strong>نام ساده اسمبلی باید در یک ALC منحصر به فرد باشد.</strong><br> برای بارگذاری نسخه‌های مختلف، باید ALCهای جداگانه بسازید:</li></ul> <pre class="hljs"><code><span class="hljs-keyword">var</span> alc1 = <span class="hljs-keyword">new</span> AssemblyLoadContext(<span class="hljs-string">&quot;ALC1&quot;</span>);
 <span class="hljs-keyword">var</span> assem1 = alc1.LoadFromAssemblyPath(<span class="hljs-string">@&quot;c:\temp\foo.dll&quot;</span>);
 
 <span class="hljs-keyword">var</span> alc2 = <span class="hljs-keyword">new</span> AssemblyLoadContext(<span class="hljs-string">&quot;ALC2&quot;</span>);
 <span class="hljs-keyword">var</span> assem2 = alc2.LoadFromAssemblyPath(<span class="hljs-string">@&quot;c:\temp\foo.dll&quot;</span>);
-</code></pre>
-<blockquote>
-<p>حتی اگر محتویات اسمبلی‌ها یکسان باشند، <strong>typeهای آن‌ها با هم ناسازگار هستند</strong>.</p>
-</blockquote>
-<ul>
-<li>بعد از بارگذاری، یک اسمبلی <strong>فقط با unload کردن ALC مربوطه</strong> آزاد می‌شود.</li>
-</ul>
-<hr>
-<h4>🔹 تفاوت بین بارگذاری از فایل و از حافظه</h4>
-<ul>
-<li>
-<p><strong>LoadFromAssemblyPath:</strong></p>
-<ul>
-<li>از <strong>memory-mapped file</strong> استفاده می‌کند.</li>
-<li>امکان <strong>lazy loading</strong> و اشتراک حافظه بین پردازش‌ها وجود دارد.</li>
-<li>اگر حافظه کم شود، OS می‌تواند بخش‌هایی را آزاد و مجدداً بارگذاری کند.</li>
-</ul>
-</li>
-<li>
-<p><strong>LoadFromStream:</strong></p>
-<ul>
-<li>کل اسمبلی فوراً در حافظه خصوصی بارگذاری می‌شود.</li>
-<li>property <code>Location</code> خالی خواهد بود.</li>
-<li>مصرف حافظه سریعاً افزایش می‌یابد.</li>
-</ul>
-</li>
-</ul>
-<h3>🔹 Assembly Resolution in .NET – بارگذاری و حل وابستگی اسمبلی‌ها</h3>
-<p>کلاس <strong><code>AssemblyLoadContext</code></strong> علاوه بر بارگذاری اسمبلی‌ها از مسیر یا استریم، یک روش دیگر هم دارد: <strong>بارگذاری از نام اسمبلی</strong>.</p>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">public</span> Assembly <span class="hljs-title">LoadFromAssemblyName</span>(<span class="hljs-params">AssemblyName assemblyName</span>)</span>;
-</code></pre>
-<ul>
-<li>در این روش شما <strong>مسیر فایل</strong> را مشخص نمی‌کنید.</li>
-<li>ALC مسئول <strong>حل وابستگی و پیدا کردن اسمبلی</strong> است.</li>
-</ul>
-<hr>
-<h3>🔹 چگونگی حل وابستگی‌ها (Resolving Assemblies)</h3>
-<p>هنگام بارگذاری وابستگی‌ها، CLR فرآیند حل وابستگی را به صورت زیر انجام می‌دهد:</p>
-<ol>
-<li>
-<p>بررسی می‌کند که آیا همین اسمبلی قبلاً در همان ALC حل شده است یا نه.</p>
-<ul>
-<li>اگر حل شده باشد، همان <strong>Assembly</strong> برگردانده می‌شود.</li>
-</ul>
-</li>
-<li>
-<p>اگر حل نشده باشد، CLR متد <strong><code>Load</code></strong> کلاس ALC را فراخوانی می‌کند:</p>
-<ul>
-<li><strong>در Default ALC</strong>، قوانین از پیش تعریف‌شده هستند.</li>
-<li><strong>در Custom ALC</strong>، شما خودتان منطق حل وابستگی را پیاده‌سازی می‌کنید، مثلاً بررسی یک فولدر مشخص و فراخوانی <code>LoadFromAssemblyPath</code>.</li>
-</ul>
-</li>
-<li>
-<p>اگر <code>Load</code> null برگرداند، CLR متد <strong>Load متد Default ALC</strong> را فراخوانی می‌کند (Fallback برای اسمبلی‌های Runtime و عمومی).</p>
-</li>
-<li>
-<p>اگر هنوز حل نشد، رویدادهای <strong>Resolving</strong> در ALCهای مربوطه فراخوانی می‌شوند.</p>
-</li>
-<li>
-<p>برای سازگاری با .NET Framework، در نهایت <strong>AppDomain.CurrentDomain.AssemblyResolve</strong> فراخوانی می‌شود.</p>
-</li>
-</ol>
-<blockquote>
-<p>پس از بارگذاری، CLR بررسی می‌کند که <strong>نام ساده و توکن کلید عمومی</strong> با درخواست مطابقت دارد. نسخه می‌تواند بالاتر یا پایین‌تر باشد.</p>
-</blockquote>
-<hr>
-<h3>🔹 دو روش برای حل وابستگی در Custom ALC</h3>
-<ol>
-<li>
-<p><strong>Override متد Load</strong></p>
-<ul>
-<li>ALC شما <strong>اولین فرصت</strong> برای بارگذاری اسمبلی را دارد.</li>
-<li>ضروری برای <strong>ایزوله‌سازی</strong>.</li>
-</ul>
-</li>
-<li>
-<p><strong>Handling رویداد Resolving</strong></p>
-<ul>
-<li>فقط وقتی Default ALC نتواند اسمبلی را حل کند، اجرا می‌شود.</li>
-<li>اولین handler که مقدار غیر null برگرداند، برنده است.</li>
-</ul>
-</li>
-</ol>
-<hr>
-<h3>🔹 مثال عملی: بارگذاری اسمبلی با وابستگی خصوصی</h3>
-<p>فرض کنید داریم:</p>
-<ul>
-<li>foo.dll در <code>c:\temp</code></li>
-<li>bar.dll به عنوان وابستگی خصوصی foo.dll</li>
-</ul>
-<h4>روش ۱: subclass و override Load</h4>
-<pre class="hljs"><code><span class="hljs-keyword">using</span> System.IO;
+</code></pre> <blockquote><p>حتی اگر محتویات اسمبلی‌ها یکسان باشند، <strong>typeهای آن‌ها با هم ناسازگار هستند</strong>.</p></blockquote> <ul><li>بعد از بارگذاری، یک اسمبلی <strong>فقط با unload کردن ALC مربوطه</strong> آزاد می‌شود.</li></ul> <hr><h4>تفاوت بین بارگذاری از فایل و از حافظه</h4><ul> <li><p><strong>LoadFromAssemblyPath:</strong></p><ul> <li>از <strong>memory-mapped file</strong> استفاده می‌کند.</li><li>امکان <strong>lazy loading</strong> و اشتراک حافظه بین پردازش‌ها وجود دارد.</li><li>اگر حافظه کم شود، OS می‌تواند بخش‌هایی را آزاد و مجدداً بارگذاری کند.</li></ul> </li><li> <p><strong>LoadFromStream:</strong></p><ul> <li>کل اسمبلی فوراً در حافظه خصوصی بارگذاری می‌شود.</li><li>property <code>Location</code> خالی خواهد بود.</li><li>مصرف حافظه سریعاً افزایش می‌یابد.</li></ul> </li></ul> <h3>Assembly Resolution in .NET – بارگذاری و حل وابستگی اسمبلی‌ها</h3><p>کلاس <strong><code>AssemblyLoadContext</code></strong> علاوه بر بارگذاری اسمبلی‌ها از مسیر یا استریم، یک روش دیگر هم دارد: <strong>بارگذاری از نام اسمبلی</strong>.</p><pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">public</span> Assembly <span class="hljs-title">LoadFromAssemblyName</span>(<span class="hljs-params">AssemblyName assemblyName</span>)</span>;
+</code></pre> <ul><li>در این روش شما <strong>مسیر فایل</strong> را مشخص نمی‌کنید.</li><li>ALC مسئول <strong>حل وابستگی و پیدا کردن اسمبلی</strong> است.</li></ul> <hr><h3>چگونگی حل وابستگی‌ها (Resolving Assemblies)</h3><p>هنگام بارگذاری وابستگی‌ها، CLR فرآیند حل وابستگی را به صورت زیر انجام می‌دهد:</p><ol> <li><p>بررسی می‌کند که آیا همین اسمبلی قبلاً در همان ALC حل شده است یا نه.</p><ul> <li>اگر حل شده باشد، همان <strong>Assembly</strong> برگردانده می‌شود.</li></ul> </li><li> <p>اگر حل نشده باشد، CLR متد <strong><code>Load</code></strong> کلاس ALC را فراخوانی می‌کند:</p><ul> <li><strong>در Default ALC</strong>، قوانین از پیش تعریف‌شده هستند.</li><li><strong>در Custom ALC</strong>، شما خودتان منطق حل وابستگی را پیاده‌سازی می‌کنید، مثلاً بررسی یک فولدر مشخص و فراخوانی <code>LoadFromAssemblyPath</code>.</li></ul> </li><li> <p>اگر <code>Load</code> null برگرداند، CLR متد <strong>Load متد Default ALC</strong> را فراخوانی می‌کند (Fallback برای اسمبلی‌های Runtime و عمومی).</p></li> <li><p>اگر هنوز حل نشد، رویدادهای <strong>Resolving</strong> در ALCهای مربوطه فراخوانی می‌شوند.</p></li> <li><p>برای سازگاری با .NET Framework، در نهایت <strong>AppDomain.CurrentDomain.AssemblyResolve</strong> فراخوانی می‌شود.</p></li> </ol><blockquote> <p>پس از بارگذاری، CLR بررسی می‌کند که <strong>نام ساده و توکن کلید عمومی</strong> با درخواست مطابقت دارد. نسخه می‌تواند بالاتر یا پایین‌تر باشد.</p></blockquote> <hr><h3>دو روش برای حل وابستگی در Custom ALC</h3><ol> <li><p><strong>Override متد Load</strong></p><ul> <li>ALC شما <strong>اولین فرصت</strong> برای بارگذاری اسمبلی را دارد.</li><li>ضروری برای <strong>ایزوله‌سازی</strong>.</li></ul> </li><li> <p><strong>Handling رویداد Resolving</strong></p><ul> <li>فقط وقتی Default ALC نتواند اسمبلی را حل کند، اجرا می‌شود.</li><li>اولین handler که مقدار غیر null برگرداند، برنده است.</li></ul> </li></ol> <hr><h3>مثال عملی: بارگذاری اسمبلی با وابستگی خصوصی</h3><p>فرض کنید داریم:</p><ul> <li>foo.dll در <code>csharp:\temp</code></li><li>bar.dll به عنوان وابستگی خصوصی foo.dll</li></ul> <h4>روش ۱: subclass و override Load</h4><pre class="hljs"><code><span class="hljs-keyword">using</span> System.IO;
 <span class="hljs-keyword">using</span> System.Reflection;
 <span class="hljs-keyword">using</span> System.Runtime.Loader;
 
@@ -905,13 +166,7 @@ Assembly assem = alc.LoadFromStream(ms);
 <span class="hljs-comment">// استفاده:</span>
 <span class="hljs-keyword">var</span> alc = <span class="hljs-keyword">new</span> FolderBasedALC(<span class="hljs-string">@&quot;c:\temp&quot;</span>);
 Assembly foo = alc.LoadFromAssemblyName(<span class="hljs-keyword">new</span> AssemblyName(<span class="hljs-string">&quot;foo&quot;</span>));
-</code></pre>
-<blockquote>
-<p>Load method با null برگرداندن، اجازه می‌دهد <strong>وابستگی‌های BCL</strong> توسط Default ALC حل شوند.</p>
-</blockquote>
-<hr>
-<h4>روش ۲: رویداد Resolving</h4>
-<pre class="hljs"><code><span class="hljs-keyword">var</span> alc = <span class="hljs-keyword">new</span> AssemblyLoadContext(<span class="hljs-string">&quot;test&quot;</span>);
+</code></pre> <blockquote><p>Load method با null برگرداندن، اجازه می‌دهد <strong>وابستگی‌های BCL</strong> توسط Default ALC حل شوند.</p></blockquote> <hr><h4>روش ۲: رویداد Resolving</h4><pre class="hljs"><code><span class="hljs-keyword">var</span> alc = <span class="hljs-keyword">new</span> AssemblyLoadContext(<span class="hljs-string">&quot;test&quot;</span>);
 alc.Resolving += (context, assemblyName) =&gt;
 {
     <span class="hljs-built_in">string</span> targetPath = Path.Combine(<span class="hljs-string">@&quot;c:\temp&quot;</span>, assemblyName.Name + <span class="hljs-string">&quot;.dll&quot;</span>);
@@ -919,148 +174,43 @@ alc.Resolving += (context, assemblyName) =&gt;
 };
 
 Assembly foo = alc.LoadFromAssemblyName(<span class="hljs-keyword">new</span> AssemblyName(<span class="hljs-string">&quot;foo&quot;</span>));
-</code></pre>
-<ul>
-<li>مزیت: ساده‌تر است، چون Default ALC ابتدا بررسی می‌شود.</li>
-<li>عیب: اگر برنامه اصلی خودش نیاز به foo.dll یا bar.dll داشته باشد، ایزوله‌سازی برقرار نمی‌شود.</li>
-</ul>
-<hr>
-<h4>🔹 نکات کلیدی</h4>
-<ul>
-<li>متد <strong>FolderBasedALC</strong> برای درک مفهوم حل وابستگی عالی است، اما در پروژه‌های واقعی با NuGet و وابستگی‌های platform-specific محدودیت دارد.</li>
-<li>راه‌حل پیشرفته‌تر: استفاده از <strong>AssemblyDependencyResolver</strong> برای مدیریت وابستگی‌ها در پروژه‌های واقعی.</li>
-</ul>
-<h3>🔹 ALC پیش‌فرض (The Default ALC) ⚙️</h3>
-<p>وقتی یک برنامه شروع می‌شود، <strong>CLR</strong> یک <strong>ALC ویژه</strong> را به پراپرتی ایستا <strong><code>AssemblyLoadContext.Default</code></strong> اختصاص می‌دهد.<br>
-ALC پیش‌فرض جایی است که <strong>assembly شروع برنامه</strong> بارگذاری می‌شود، همراه با وابستگی‌های استاتیک آن و اسمبلی‌های BCL مربوط به <strong>.NET runtime</strong>.</p>
-<p>ALC پیش‌فرض ابتدا در <strong>مسیرهای پیش‌فرض جستجو (default probing paths)</strong> به دنبال اسمبلی‌ها می‌گردد تا آن‌ها را به‌طور خودکار حل کند (صفحه 791 را ببینید)؛ این مسیرها معمولاً همان مکان‌های مشخص‌شده در فایل‌های <strong>.deps.json</strong> و <strong>.runtimeconfig.json</strong> برنامه هستند.</p>
-<p>اگر ALC نتواند یک اسمبلی را در مسیرهای پیش‌فرض پیدا کند، رویداد <strong>Resolving</strong> آن فراخوانی می‌شود. مدیریت این رویداد به شما اجازه می‌دهد تا اسمبلی را از مکان‌های دیگر بارگذاری کنید. به این ترتیب، می‌توانید وابستگی‌های برنامه را در مسیرهای اضافی مانند زیرپوشه‌ها، پوشه‌های مشترک یا حتی به‌صورت یک منبع باینری داخل <strong>host assembly</strong> قرار دهید:</p>
-<pre class="hljs"><code>AssemblyLoadContext.Default.Resolving += (loadContext, assemblyName) =&gt;
+</code></pre> <ul><li>مزیت: ساده‌تر است، چون Default ALC ابتدا بررسی می‌شود.</li><li>عیب: اگر برنامه اصلی خودش نیاز به foo.dll یا bar.dll داشته باشد، ایزوله‌سازی برقرار نمی‌شود.</li></ul> <hr><h4>نکات کلیدی</h4><ul> <li>متد <strong>FolderBasedALC</strong> برای درک مفهوم حل وابستگی عالی است، اما در پروژه‌های واقعی با NuGet و وابستگی‌های platform-specific محدودیت دارد.</li><li>راه‌حل پیشرفته‌تر: استفاده از <strong>AssemblyDependencyResolver</strong> برای مدیریت وابستگی‌ها در پروژه‌های واقعی.</li></ul> <h3>ALC پیش‌فرض (The Default ALC)</h3><p>وقتی یک برنامه شروع می‌شود، <strong>CLR</strong> یک <strong>ALC ویژه</strong> را به پراپرتی ایستا <strong><code>AssemblyLoadContext.Default</code></strong> اختصاص می‌دهد.<br> ALC پیش‌فرض جایی است که <strong>assembly شروع برنامه</strong> بارگذاری می‌شود، همراه با وابستگی‌های استاتیک آن و اسمبلی‌های BCL مربوط به <strong>.NET runtime</strong>.</p><p>ALC پیش‌فرض ابتدا در <strong>مسیرهای پیش‌فرض جستجو (default probing paths)</strong> به دنبال اسمبلی‌ها می‌گردد تا آن‌ها را به‌طور خودکار حل کند (صفحه 791 را ببینید)؛ این مسیرها معمولاً همان مکان‌های مشخص‌شده در فایل‌های <strong>.deps.json</strong> و <strong>.runtimeconfig.json</strong> برنامه هستند.</p><p>اگر ALC نتواند یک اسمبلی را در مسیرهای پیش‌فرض پیدا کند، رویداد <strong>Resolving</strong> آن فراخوانی می‌شود. مدیریت این رویداد به شما اجازه می‌دهد تا اسمبلی را از مکان‌های دیگر بارگذاری کنید. به این ترتیب، می‌توانید وابستگی‌های برنامه را در مسیرهای اضافی مانند زیرپوشه‌ها، پوشه‌های مشترک یا حتی به‌صورت یک منبع باینری داخل <strong>host assembly</strong> قرار دهید:</p><pre class="hljs"><code>AssemblyLoadContext.Default.Resolving += (loadContext, assemblyName) =&gt;
 {
     <span class="hljs-comment">// تلاش برای پیدا کردن assemblyName و برگرداندن یک Assembly یا null</span>
     <span class="hljs-comment">// معمولاً پس از پیدا کردن فایل، LoadFromAssemblyPath فراخوانی می‌شود</span>
     <span class="hljs-comment">// ...</span>
 };
-</code></pre>
-<blockquote>
-<p>رویداد <strong>Resolving</strong> در ALC پیش‌فرض همچنین وقتی یک <strong>Custom ALC</strong> نتواند اسمبلی را حل کند (یعنی متد Load آن null برگرداند) و ALC پیش‌فرض نیز نتواند اسمبلی را حل کند، فراخوانی می‌شود.</p>
-</blockquote>
-<hr>
-<p>می‌توانید اسمبلی‌ها را خارج از رویداد <strong>Resolving</strong> نیز در ALC پیش‌فرض بارگذاری کنید.<br>
-با این حال، قبل از انجام این کار، بهتر است بررسی کنید که آیا می‌توانید مشکل را با استفاده از یک <strong>ALC جداگانه</strong> یا روش‌هایی که در بخش بعدی توضیح می‌دهیم (استفاده از ALC اجرایی و زمینه‌ای) بهتر حل کنید یا خیر.</p>
-<p>استفاده مستقیم از ALC پیش‌فرض باعث می‌شود کد شما شکننده شود، زیرا نمی‌توان آن را به طور کامل ایزوله کرد (برای مثال توسط فریم‌ورک‌های <strong>unit testing</strong> یا <strong>LINQPad</strong>).</p>
-<p>اگر باز هم می‌خواهید ادامه دهید، بهتر است از <strong>متد حل وابستگی</strong> مانند <code>LoadFromAssemblyName</code> استفاده کنید تا متد بارگذاری مانند <code>LoadFromAssemblyPath</code> — مخصوصاً اگر اسمبلی شما به صورت استاتیک ارجاع شده باشد.<br>
-چرا؟ چون ممکن است اسمبلی از قبل بارگذاری شده باشد؛ در این صورت <code>LoadFromAssemblyName</code> همان اسمبلی بارگذاری‌شده را برمی‌گرداند، ولی <code>LoadFromAssemblyPath</code> باعث ایجاد <strong>استثنا</strong> می‌شود.</p>
-<blockquote>
-<p>با <code>LoadFromAssemblyPath</code> همچنین ممکن است ریسک داشته باشید که اسمبلی از مکانی بارگذاری شود که با مکان پیش‌فرض ALC همخوانی ندارد.</p>
-</blockquote>
-<p>اگر اسمبلی در مکانی است که ALC به‌طور خودکار آن را پیدا نمی‌کند، باز هم می‌توانید همین روش را دنبال کرده و علاوه بر آن رویداد <strong>Resolving</strong> را مدیریت کنید.</p>
-<p>توجه داشته باشید که هنگام فراخوانی <code>LoadFromAssemblyName</code> نیازی به ارائه نام کامل نیست؛ <strong>نام ساده کافی است</strong> (و حتی اگر اسمبلی دارای Strong Name باشد معتبر است):</p>
-<pre class="hljs"><code>AssemblyLoadContext.Default.LoadFromAssemblyName(<span class="hljs-string">&quot;System.Xml&quot;</span>);
-</code></pre>
-<p>اما اگر <strong>Public Key Token</strong> را در نام قرار دهید، باید با آنچه بارگذاری شده مطابقت داشته باشد.</p>
-<hr>
-<h3>🔹 مسیرهای پیش‌فرض جستجو (Default Probing) 🗂️</h3>
-<p>مسیرهای پیش‌فرض معمولاً شامل موارد زیر هستند:</p>
-<ul>
-<li>مسیرهای مشخص‌شده در <strong>AppName.deps.json</strong> (که AppName نام اسمبلی اصلی برنامه است). اگر این فایل وجود نداشته باشد، از <strong>پوشه پایه برنامه</strong> استفاده می‌شود.</li>
-<li>پوشه‌های حاوی <strong>assemblyهای سیستم .NET runtime</strong> (اگر برنامه شما <strong>Framework-dependent</strong> باشد).</li>
-</ul>
-<p><strong>MSBuild</strong> به‌طور خودکار فایلی به نام <strong>AppName.deps.json</strong> ایجاد می‌کند که مسیر پیدا کردن همه وابستگی‌ها را مشخص می‌کند.<br>
-این شامل <strong>assemblyهای platform-agnostic</strong> است که در پوشه پایه برنامه قرار می‌گیرند و <strong>assemblyهای platform-specific</strong> که در زیرپوشه <code>runtimes\</code> تحت فولدری مانند <code>win</code> یا <code>unix</code> قرار می‌گیرند.</p>
-<p>مسیرهای مشخص‌شده در فایل <code>.deps.json</code> تولید شده نسبت به <strong>پوشه پایه برنامه</strong> هستند — یا هر پوشه اضافی که در بخش <strong>additionalProbingPaths</strong> فایل‌های <code>AppName.runtimeconfig.json</code> و/یا <code>AppName.runtimeconfig.dev.json</code> مشخص کرده‌اید.</p>
-<hr>
-<h3>🔹 ALC “جاری” (The “Current” ALC) 🔄</h3>
-<p>در بخش قبل، نسبت به بارگذاری مستقیم اسمبلی در <strong>ALC پیش‌فرض</strong> هشدار دادیم. معمولاً چیزی که می‌خواهید، بارگذاری/حل در <strong>ALC جاری</strong> است.</p>
-<p>در اکثر موارد، <strong>ALC جاری</strong> همان ALCی است که شامل <strong>assembly در حال اجرا</strong> است:</p>
-<pre class="hljs"><code><span class="hljs-keyword">var</span> executingAssem = Assembly.GetExecutingAssembly();
+</code></pre> <blockquote><p>رویداد <strong>Resolving</strong> در ALC پیش‌فرض همچنین وقتی یک <strong>Custom ALC</strong> نتواند اسمبلی را حل کند (یعنی متد Load آن null برگرداند) و ALC پیش‌فرض نیز نتواند اسمبلی را حل کند، فراخوانی می‌شود.</p></blockquote> <hr><p>می‌توانید اسمبلی‌ها را خارج از رویداد <strong>Resolving</strong> نیز در ALC پیش‌فرض بارگذاری کنید.<br> با این حال، قبل از انجام این کار، بهتر است بررسی کنید که آیا می‌توانید مشکل را با استفاده از یک <strong>ALC جداگانه</strong> یا روش‌هایی که در بخش بعدی توضیح می‌دهیم (استفاده از ALC اجرایی و زمینه‌ای) بهتر حل کنید یا خیر.</p><p>استفاده مستقیم از ALC پیش‌فرض باعث می‌شود کد شما شکننده شود، زیرا نمی‌توان آن را به طور کامل ایزوله کرد (برای مثال توسط فریم‌ورک‌های <strong>unit testing</strong> یا <strong>LINQPad</strong>).</p><p>اگر باز هم می‌خواهید ادامه دهید، بهتر است از <strong>متد حل وابستگی</strong> مانند <code>LoadFromAssemblyName</code> استفاده کنید تا متد بارگذاری مانند <code>LoadFromAssemblyPath</code> — مخصوصاً اگر اسمبلی شما به صورت استاتیک ارجاع شده باشد.<br> چرا؟ چون ممکن است اسمبلی از قبل بارگذاری شده باشد؛ در این صورت <code>LoadFromAssemblyName</code> همان اسمبلی بارگذاری‌شده را برمی‌گرداند، ولی <code>LoadFromAssemblyPath</code> باعث ایجاد <strong>استثنا</strong> می‌شود.</p><blockquote> <p>با <code>LoadFromAssemblyPath</code> همچنین ممکن است ریسک داشته باشید که اسمبلی از مکانی بارگذاری شود که با مکان پیش‌فرض ALC همخوانی ندارد.</p></blockquote> <p>اگر اسمبلی در مکانی است که ALC به‌طور خودکار آن را پیدا نمی‌کند، باز هم می‌توانید همین روش را دنبال کرده و علاوه بر آن رویداد <strong>Resolving</strong> را مدیریت کنید.</p><p>توجه داشته باشید که هنگام فراخوانی <code>LoadFromAssemblyName</code> نیازی به ارائه نام کامل نیست؛ <strong>نام ساده کافی است</strong> (و حتی اگر اسمبلی دارای Strong Name باشد معتبر است):</p><pre class="hljs"><code>AssemblyLoadContext.Default.LoadFromAssemblyName(<span class="hljs-string">&quot;System.Xml&quot;</span>);
+</code></pre> <p>اما اگر <strong>Public Key Token</strong> را در نام قرار دهید، باید با آنچه بارگذاری شده مطابقت داشته باشد.</p><hr> <h3>مسیرهای پیش‌فرض جستجو (Default Probing)</h3><p>مسیرهای پیش‌فرض معمولاً شامل موارد زیر هستند:</p><ul> <li>مسیرهای مشخص‌شده در <strong>AppName.deps.json</strong> (که AppName نام اسمبلی اصلی برنامه است). اگر این فایل وجود نداشته باشد، از <strong>پوشه پایه برنامه</strong> استفاده می‌شود.</li><li>پوشه‌های حاوی <strong>assemblyهای سیستم .NET runtime</strong> (اگر برنامه شما <strong>Framework-dependent</strong> باشد).</li></ul> <p><strong>MSBuild</strong> به‌طور خودکار فایلی به نام <strong>AppName.deps.json</strong> ایجاد می‌کند که مسیر پیدا کردن همه وابستگی‌ها را مشخص می‌کند.<br> این شامل <strong>assemblyهای platform-agnostic</strong> است که در پوشه پایه برنامه قرار می‌گیرند و <strong>assemblyهای platform-specific</strong> که در زیرپوشه <code>runtimes\</code> تحت فولدری مانند <code>win</code> یا <code>unix</code> قرار می‌گیرند.</p><p>مسیرهای مشخص‌شده در فایل <code>.deps.json</code> تولید شده نسبت به <strong>پوشه پایه برنامه</strong> هستند — یا هر پوشه اضافی که در بخش <strong>additionalProbingPaths</strong> فایل‌های <code>AppName.runtimeconfig.json</code> و/یا <code>AppName.runtimeconfig.dev.json</code> مشخص کرده‌اید.</p><hr> <h3>ALC “جاری” (The “Current” ALC)</h3><p>در بخش قبل، نسبت به بارگذاری مستقیم اسمبلی در <strong>ALC پیش‌فرض</strong> هشدار دادیم. معمولاً چیزی که می‌خواهید، بارگذاری/حل در <strong>ALC جاری</strong> است.</p><p>در اکثر موارد، <strong>ALC جاری</strong> همان ALCی است که شامل <strong>assembly در حال اجرا</strong> است:</p><pre class="hljs"><code><span class="hljs-keyword">var</span> executingAssem = Assembly.GetExecutingAssembly();
 <span class="hljs-keyword">var</span> alc = AssemblyLoadContext.GetLoadContext(executingAssem);
 Assembly assem = alc.LoadFromAssemblyName(...);  <span class="hljs-comment">// حل بر اساس نام</span>
 <span class="hljs-comment">// یا: = alc.LoadFromAssemblyPath(...);  // بارگذاری بر اساس مسیر</span>
-</code></pre>
-<p>یک روش انعطاف‌پذیر و واضح‌تر برای به‌دست آوردن ALC:</p>
-<pre class="hljs"><code><span class="hljs-keyword">var</span> myAssem = <span class="hljs-keyword">typeof</span>(SomeTypeInMyAssembly).Assembly;
+</code></pre> <p>یک روش انعطاف‌پذیر و واضح‌تر برای به‌دست آوردن ALC:</p><pre class="hljs"><code><span class="hljs-keyword">var</span> myAssem = <span class="hljs-keyword">typeof</span>(SomeTypeInMyAssembly).Assembly;
 <span class="hljs-keyword">var</span> alc = AssemblyLoadContext.GetLoadContext(myAssem);
 ...
-</code></pre>
-<p>گاهی امکان تعیین “ALC جاری” وجود ندارد.<br>
-مثلاً اگر مسئول نوشتن <strong>binary serializer</strong> در .NET باشید، این serializer نام کامل نوع‌ها (شامل نام اسمبلی) را می‌نویسد و باید هنگام <strong>deserialization</strong> حل شوند. سؤال این است: از کدام ALC استفاده کنیم؟<br>
-مشکل این است که اگر به <strong>executing assembly</strong> اتکا کنیم، ALC همان assembly را برمی‌گرداند که serializer را دارد، نه assembly‌ای که serializer را فراخوانی می‌کند.</p>
-<p>راه حل بهترین: <strong>صریح بودن</strong>:</p>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-built_in">object</span> <span class="hljs-title">Deserialize</span>(<span class="hljs-params">Stream stream, AssemblyLoadContext alc</span>)</span>
+</code></pre> <p>گاهی امکان تعیین “ALC جاری” وجود ندارد.<br> مثلاً اگر مسئول نوشتن <strong>binary serializer</strong> در .NET باشید، این serializer نام کامل نوع‌ها (شامل نام اسمبلی) را می‌نویسد و باید هنگام <strong>deserialization</strong> حل شوند. سؤال این است: از کدام ALC استفاده کنیم؟<br> مشکل این است که اگر به <strong>executing assembly</strong> اتکا کنیم، ALC همان assembly را برمی‌گرداند که serializer را دارد، نه assembly‌ای که serializer را فراخوانی می‌کند.</p><p>راه حل بهترین: <strong>صریح بودن</strong>:</p><pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-built_in">object</span> <span class="hljs-title">Deserialize</span>(<span class="hljs-params">Stream stream, AssemblyLoadContext alc</span>)</span>
 {
     ...
 }
-</code></pre>
-<p>با این کار، <strong>caller</strong> مشخص می‌کند که چه چیزی “ALC جاری” است:</p>
-<pre class="hljs"><code><span class="hljs-keyword">var</span> assem = <span class="hljs-keyword">typeof</span>(SomeTypeThatIWillBeDeserializing).Assembly;
+</code></pre> <p>با این کار، <strong>caller</strong> مشخص می‌کند که چه چیزی “ALC جاری” است:</p><pre class="hljs"><code><span class="hljs-keyword">var</span> assem = <span class="hljs-keyword">typeof</span>(SomeTypeThatIWillBeDeserializing).Assembly;
 <span class="hljs-keyword">var</span> alc = AssemblyLoadContext.GetLoadContext(assem);
 <span class="hljs-keyword">var</span> obj = Deserialize(someStream, alc);
-</code></pre>
-<h3>🔹 Assembly.Load و ALCهای زمینه‌ای (Contextual ALCs) ⚙️</h3>
-<p>برای سناریوی رایج بارگذاری یک اسمبلی در <strong>ALC در حال اجرای جاری</strong>، معمولاً کد زیر را می‌نویسیم:</p>
-<pre class="hljs"><code><span class="hljs-keyword">var</span> executingAssem = Assembly.GetExecutingAssembly();
+</code></pre> <h3>Assembly.Load و ALCهای زمینه‌ای (Contextual ALCs)</h3><p>برای سناریوی رایج بارگذاری یک اسمبلی در <strong>ALC در حال اجرای جاری</strong>، معمولاً کد زیر را می‌نویسیم:</p><pre class="hljs"><code><span class="hljs-keyword">var</span> executingAssem = Assembly.GetExecutingAssembly();
 <span class="hljs-keyword">var</span> alc = AssemblyLoadContext.GetLoadContext(executingAssem);
 Assembly assem = alc.LoadFromAssemblyName(...);
-</code></pre>
-<p>برای راحتی توسعه‌دهندگان، مایکروسافت متد زیر را در کلاس <strong>Assembly</strong> تعریف کرده است:</p>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Assembly <span class="hljs-title">Load</span>(<span class="hljs-params"><span class="hljs-built_in">string</span> assemblyString</span>)</span>;
-</code></pre>
-<p>همچنین نسخه‌ای کاملاً مشابه وجود دارد که <strong>یک شی AssemblyName</strong> می‌پذیرد:</p>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Assembly <span class="hljs-title">Load</span>(<span class="hljs-params">AssemblyName assemblyRef</span>)</span>;
-</code></pre>
-<blockquote>
-<p>این متدها با متد قدیمی <strong>Load(byte[])</strong> که رفتار کاملاً متفاوتی دارد متفاوت هستند (صفحه 798 را ببینید).</p>
-</blockquote>
-<p>همانند <code>LoadFromAssemblyName</code>، شما می‌توانید نام <strong>ساده، جزئی یا کامل</strong> اسمبلی را مشخص کنید:</p>
-<pre class="hljs"><code>Assembly a = Assembly.Load(<span class="hljs-string">&quot;System.Private.Xml&quot;</span>);
-</code></pre>
-<p>این دستور اسمبلی <code>System.Private.Xml</code> را در <strong>هر ALCی که assembly در آن بارگذاری شده است</strong>، بارگذاری می‌کند.</p>
-<p>می‌توانیم به جای نام ساده، از رشته‌های زیر هم استفاده کنیم و نتیجه در .NET یکسان خواهد بود:</p>
-<ul>
-<li><code>&quot;System.Private.Xml, PublicKeyToken=cc7b13ffcd2ddd51&quot;</code></li>
-<li><code>&quot;System.Private.Xml, Version=4.0.1.0&quot;</code></li>
-<li><code>&quot;System.Private.Xml, Version=4.0.1.0, PublicKeyToken=cc7b13ffcd2ddd51&quot;</code></li>
-</ul>
-<p>اگر <strong>public key token</strong> مشخص شود، باید با آنچه بارگذاری شده مطابقت داشته باشد.</p>
-<blockquote>
-<p>MSDN توصیه می‌کند از نام جزئی استفاده نکنید و بهتر است <strong>نسخه دقیق و public key token</strong> را مشخص کنید. دلیل آن مربوط به .NET Framework است، مانند تأثیرات <strong>Global Assembly Cache</strong> و <strong>Code Access Security</strong>.<br>
-در .NET 5+ و .NET Core، این محدودیت‌ها وجود ندارد و معمولاً استفاده از نام ساده یا جزئی امن است.</p>
-</blockquote>
-<p>هر دو متد فقط برای <strong>حل وابستگی (resolution)</strong> هستند، بنابراین نمی‌توانید مسیر فایل مشخص کنید. (اگر پراپرتی <code>CodeBase</code> در شی <strong>AssemblyName</strong> پر شود، نادیده گرفته می‌شود.)</p>
-<hr>
-<blockquote>
-<p>نکته مهم: از <strong>Assembly.Load</strong> برای بارگذاری یک اسمبلی که به صورت استاتیک ارجاع شده استفاده نکنید.<br>
-کافی است به یک <strong>type</strong> در آن assembly ارجاع دهید و assembly را از آن دریافت کنید:</p>
-</blockquote>
-<pre class="hljs"><code>Assembly a = <span class="hljs-keyword">typeof</span>(System.Xml.Formatting).Assembly;
-</code></pre>
-<p>یا حتی:</p>
-<pre class="hljs"><code>Assembly a = System.Xml.Formatting.Indented.GetType().Assembly;
-</code></pre>
-<p>این روش از <strong>hardcoding نام اسمبلی</strong> جلوگیری می‌کند و همزمان فرآیند <strong>assembly resolution</strong> در ALC در حال اجرای کد را فعال می‌کند (همان کاری که Assembly.Load انجام می‌دهد).</p>
-<hr>
-<p>اگر می‌خواستید خودتان متد Assembly.Load را بنویسید، تقریباً چنین چیزی می‌شد:</p>
-<pre class="hljs"><code>[<span class="hljs-meta">MethodImpl(MethodImplOptions.NoInlining)</span>]
+</code></pre> <p>برای راحتی توسعه‌دهندگان، مایکروسافت متد زیر را در کلاس <strong>Assembly</strong> تعریف کرده است:</p><pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Assembly <span class="hljs-title">Load</span>(<span class="hljs-params"><span class="hljs-built_in">string</span> assemblyString</span>)</span>;
+</code></pre> <p>همچنین نسخه‌ای کاملاً مشابه وجود دارد که <strong>یک شی AssemblyName</strong> می‌پذیرد:</p><pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Assembly <span class="hljs-title">Load</span>(<span class="hljs-params">AssemblyName assemblyRef</span>)</span>;
+</code></pre> <blockquote><p>این متدها با متد قدیمی <strong>Load(byte[])</strong> که رفتار کاملاً متفاوتی دارد متفاوت هستند (صفحه 798 را ببینید).</p></blockquote> <p>همانند <code>LoadFromAssemblyName</code>، شما می‌توانید نام <strong>ساده، جزئی یا کامل</strong> اسمبلی را مشخص کنید:</p><pre class="hljs"><code>Assembly a = Assembly.Load(<span class="hljs-string">&quot;System.Private.Xml&quot;</span>);
+</code></pre> <p>این دستور اسمبلی <code>System.Private.Xml</code> را در <strong>هر ALCی که assembly در آن بارگذاری شده است</strong>، بارگذاری می‌کند.</p><p>می‌توانیم به جای نام ساده، از رشته‌های زیر هم استفاده کنیم و نتیجه در .NET یکسان خواهد بود:</p><ul> <li><code>&quot;System.Private.Xml, PublicKeyToken=cc7b13ffcd2ddd51&quot;</code></li><li><code>&quot;System.Private.Xml, Version=4.0.1.0&quot;</code></li><li><code>&quot;System.Private.Xml, Version=4.0.1.0, PublicKeyToken=cc7b13ffcd2ddd51&quot;</code></li></ul> <p>اگر <strong>public key token</strong> مشخص شود، باید با آنچه بارگذاری شده مطابقت داشته باشد.</p><blockquote> <p>MSDN توصیه می‌کند از نام جزئی استفاده نکنید و بهتر است <strong>نسخه دقیق و public key token</strong> را مشخص کنید. دلیل آن مربوط به .NET Framework است، مانند تأثیرات <strong>Global Assembly Cache</strong> و <strong>Code Access Security</strong>.<br> در .NET 5+ و .NET Core، این محدودیت‌ها وجود ندارد و معمولاً استفاده از نام ساده یا جزئی امن است.</p></blockquote> <p>هر دو متد فقط برای <strong>حل وابستگی (resolution)</strong> هستند، بنابراین نمی‌توانید مسیر فایل مشخص کنید. (اگر پراپرتی <code>CodeBase</code> در شی <strong>AssemblyName</strong> پر شود، نادیده گرفته می‌شود.)</p><hr> <blockquote><p>نکته مهم: از <strong>Assembly.Load</strong> برای بارگذاری یک اسمبلی که به صورت استاتیک ارجاع شده استفاده نکنید.<br> کافی است به یک <strong>type</strong> در آن assembly ارجاع دهید و assembly را از آن دریافت کنید:</p></blockquote> <pre class="hljs"><code>Assembly a = <span class="hljs-keyword">typeof</span>(System.Xml.Formatting).Assembly;
+</code></pre> <p>یا حتی:</p><pre class="hljs"><code>Assembly a = System.Xml.Formatting.Indented.GetType().Assembly;
+</code></pre> <p>این روش از <strong>hardcoding نام اسمبلی</strong> جلوگیری می‌کند و همزمان فرآیند <strong>assembly resolution</strong> در ALC در حال اجرای کد را فعال می‌کند (همان کاری که Assembly.Load انجام می‌دهد).</p><hr> <p>اگر می‌خواستید خودتان متد Assembly.Load را بنویسید، تقریباً چنین چیزی می‌شد:</p><pre class="hljs"><code>[<span class="hljs-meta">MethodImpl(MethodImplOptions.NoInlining)</span>]
 <span class="hljs-function">Assembly <span class="hljs-title">Load</span>(<span class="hljs-params"><span class="hljs-built_in">string</span> name</span>)</span>
 {
     Assembly callingAssembly = Assembly.GetCallingAssembly();
     <span class="hljs-keyword">var</span> callingAlc = AssemblyLoadContext.GetLoadContext(callingAssembly);
     <span class="hljs-keyword">return</span> callingAlc.LoadFromAssemblyName(<span class="hljs-keyword">new</span> AssemblyName(name));
 }
-</code></pre>
-<hr>
-<h3>🔹 EnterContextualReflection 🌐</h3>
-<p>استراتژی Assembly.Load که از <strong>ALC اسمبلی فراخواننده</strong> استفاده می‌کند، زمانی شکست می‌خورد که <strong>Assembly.Load توسط واسطه‌ای</strong> مثل serializer یا unit test runner فراخوانی شود.<br>
-اگر واسطه در یک assembly متفاوت باشد، ALC واسطه به جای ALC فراخواننده استفاده می‌شود.</p>
-<p>راه حل ایده‌آل: <strong>اجبار caller به مشخص کردن ALC</strong> به جای حدس زدن با <code>Assembly.Load(string)</code>.</p>
-<p>اما چون .NET 5+ و .NET Core از .NET Framework تکامل یافته‌اند، جایی که <strong>ایزوله‌سازی با application domain</strong> انجام می‌شد و نه ALC، استفاده ایده‌آل رایج نیست و <code>Assembly.Load(string)</code> گاهی در سناریوهایی که ALC قابل اعتماد نیست، استفاده می‌شود (مثلاً در binary serializer).</p>
-<p>برای حل این مشکل، مایکروسافت متدی به نام <strong>EnterContextualReflection</strong> در AssemblyLoadContext اضافه کرده است. این متد یک ALC را به <strong>AssemblyLoadContext.CurrentContextualReflectionContext</strong> اختصاص می‌دهد.</p>
-<ul>
-<li>این پراپرتی استاتیک است، اما مقدار آن در <strong>AsyncLocal</strong> ذخیره می‌شود و می‌تواند در threadهای مختلف مقادیر جداگانه داشته باشد و همچنان در عملیات‌های asynchronous حفظ شود.</li>
-</ul>
-<p>اگر این پراپرتی غیر-null باشد، <strong>Assembly.Load</strong> به‌طور خودکار از آن استفاده می‌کند و اولویت بالاتری نسبت به ALC فراخواننده دارد:</p>
-<pre class="hljs"><code>Method1();
+</code></pre> <hr><h3>EnterContextualReflection</h3><p>استراتژی Assembly.Load که از <strong>ALC اسمبلی فراخواننده</strong> استفاده می‌کند، زمانی شکست می‌خورد که <strong>Assembly.Load توسط واسطه‌ای</strong> مثل serializer یا unit test runner فراخوانی شود.<br> اگر واسطه در یک assembly متفاوت باشد، ALC واسطه به جای ALC فراخواننده استفاده می‌شود.</p><p>راه حل ایده‌آل: <strong>اجبار caller به مشخص کردن ALC</strong> به جای حدس زدن با <code>Assembly.Load(string)</code>.</p><p>اما چون .NET 5+ و .NET Core از .NET Framework تکامل یافته‌اند، جایی که <strong>ایزوله‌سازی با application domain</strong> انجام می‌شد و نه ALC، استفاده ایده‌آل رایج نیست و <code>Assembly.Load(string)</code> گاهی در سناریوهایی که ALC قابل اعتماد نیست، استفاده می‌شود (مثلاً در binary serializer).</p><p>برای حل این مشکل، مایکروسافت متدی به نام <strong>EnterContextualReflection</strong> در AssemblyLoadContext اضافه کرده است. این متد یک ALC را به <strong>AssemblyLoadContext.CurrentContextualReflectionContext</strong> اختصاص می‌دهد.</p><ul> <li>این پراپرتی استاتیک است، اما مقدار آن در <strong>AsyncLocal</strong> ذخیره می‌شود و می‌تواند در threadهای مختلف مقادیر جداگانه داشته باشد و همچنان در عملیات‌های asynchronous حفظ شود.</li></ul> <p>اگر این پراپرتی غیر-null باشد، <strong>Assembly.Load</strong> به‌طور خودکار از آن استفاده می‌کند و اولویت بالاتری نسبت به ALC فراخواننده دارد:</p><pre class="hljs"><code>Method1();
 <span class="hljs-keyword">var</span> myALC = <span class="hljs-keyword">new</span> AssemblyLoadContext(<span class="hljs-string">&quot;test&quot;</span>);
 <span class="hljs-keyword">using</span> (myALC.EnterContextualReflection())
 {
@@ -1074,80 +224,28 @@ Method3();
 <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Method1</span>()</span> =&gt; Assembly.Load(<span class="hljs-string">&quot;...&quot;</span>); <span class="hljs-comment">// از ALC فراخواننده استفاده می‌کند</span>
 <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Method2</span>()</span> =&gt; Assembly.Load(<span class="hljs-string">&quot;...&quot;</span>); <span class="hljs-comment">// از myALC استفاده می‌کند</span>
 <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Method3</span>()</span> =&gt; Assembly.Load(<span class="hljs-string">&quot;...&quot;</span>); <span class="hljs-comment">// از ALC فراخواننده استفاده می‌کند</span>
-</code></pre>
-<hr>
-<p>قبلاً نشان دادیم چگونه می‌توان یک متد مشابه Assembly.Load نوشت.<br>
-نسخه‌ای دقیق‌تر که <strong>contextual reflection</strong> را هم در نظر می‌گیرد، چنین است:</p>
-<pre class="hljs"><code>[<span class="hljs-meta">MethodImpl(MethodImplOptions.NoInlining)</span>]
+</code></pre> <hr><p>قبلاً نشان دادیم چگونه می‌توان یک متد مشابه Assembly.Load نوشت.<br> نسخه‌ای دقیق‌تر که <strong>contextual reflection</strong> را هم در نظر می‌گیرد، چنین است:</p><pre class="hljs"><code>[<span class="hljs-meta">MethodImpl(MethodImplOptions.NoInlining)</span>]
 <span class="hljs-function">Assembly <span class="hljs-title">Load</span>(<span class="hljs-params"><span class="hljs-built_in">string</span> name</span>)</span>
 {
     <span class="hljs-keyword">var</span> alc = AssemblyLoadContext.CurrentContextualReflectionContext
               ?? AssemblyLoadContext.GetLoadContext(Assembly.GetCallingAssembly());
     <span class="hljs-keyword">return</span> alc.LoadFromAssemblyName(<span class="hljs-keyword">new</span> AssemblyName(name));
 }
-</code></pre>
-<p>هرچند contextual reflection برای اجرای کد legacy مفید است، <strong>راه حل مقاوم‌تر</strong> همان است که قبلاً گفتیم: کد فراخواننده را تغییر دهید تا <strong>LoadFromAssemblyName</strong> روی ALC مشخص‌شده توسط caller فراخوانی شود.</p>
-<blockquote>
-<p>در .NET Framework هیچ معادلی برای EnterContextualReflection وجود ندارد و نیاز هم نیست، چون ایزوله‌سازی اساساً با <strong>application domain</strong> انجام می‌شود، که هر domain خودش یک default load context دارد و بنابراین ایزوله‌سازی حتی با استفاده از ALC پیش‌فرض هم امکان‌پذیر است.</p>
-</blockquote>
-<h3>🔹 بارگذاری و حل وابستگی کتابخانه‌های unmanaged 🛠️</h3>
-<p>ALCها می‌توانند <strong>کتابخانه‌های native</strong> را نیز بارگذاری و حل کنند.<br>
-حل وابستگی native زمانی اتفاق می‌افتد که شما متدی خارجی را فراخوانی کنید که با صفت <code>[DllImport]</code> مشخص شده است:</p>
-<pre class="hljs"><code>[<span class="hljs-meta">DllImport(<span class="hljs-string">&quot;SomeNativeLibrary.dll&quot;</span>)</span>]
+</code></pre> <p>هرچند contextual reflection برای اجرای کد legacy مفید است، <strong>راه حل مقاوم‌تر</strong> همان است که قبلاً گفتیم: کد فراخواننده را تغییر دهید تا <strong>LoadFromAssemblyName</strong> روی ALC مشخص‌شده توسط caller فراخوانی شود.</p><blockquote> <p>در .NET Framework هیچ معادلی برای EnterContextualReflection وجود ندارد و نیاز هم نیست، چون ایزوله‌سازی اساساً با <strong>application domain</strong> انجام می‌شود، که هر domain خودش یک default load context دارد و بنابراین ایزوله‌سازی حتی با استفاده از ALC پیش‌فرض هم امکان‌پذیر است.</p></blockquote> <h3>بارگذاری و حل وابستگی کتابخانه‌های unmanaged</h3><p>ALCها می‌توانند <strong>کتابخانه‌های native</strong> را نیز بارگذاری و حل کنند.<br> حل وابستگی native زمانی اتفاق می‌افتد که شما متدی خارجی را فراخوانی کنید که با صفت <code>[DllImport]</code> مشخص شده است:</p><pre class="hljs"><code>[<span class="hljs-meta">DllImport(<span class="hljs-string">&quot;SomeNativeLibrary.dll&quot;</span>)</span>]
 <span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">extern</span> <span class="hljs-built_in">int</span> <span class="hljs-title">SomeNativeMethod</span>(<span class="hljs-params"><span class="hljs-built_in">string</span> text</span>)</span>;
-</code></pre>
-<p>چون در <code>[DllImport]</code> مسیر کامل مشخص نشده، فراخوانی <code>SomeNativeMethod</code> باعث <strong>trigger شدن حل وابستگی در همان ALC</strong> می‌شود که اسمبلی تعریف‌کننده <code>SomeNativeMethod</code> در آن قرار دارد.</p>
-<hr>
-<h3>🔹 متدهای مرتبط با کتابخانه‌های unmanaged</h3>
-<ul>
-<li>متد <strong>virtual resolving</strong> در ALC: <code>LoadUnmanagedDll</code></li>
-<li>متد <strong>بارگذاری</strong>: <code>LoadUnmanagedDllFromPath</code></li>
-</ul>
-<p>مثال:</p>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">override</span> IntPtr <span class="hljs-title">LoadUnmanagedDll</span>(<span class="hljs-params"><span class="hljs-built_in">string</span> unmanagedDllName</span>)</span>
+</code></pre> <p>چون در <code>[DllImport]</code> مسیر کامل مشخص نشده، فراخوانی <code>SomeNativeMethod</code> باعث <strong>trigger شدن حل وابستگی در همان ALC</strong> می‌شود که اسمبلی تعریف‌کننده <code>SomeNativeMethod</code> در آن قرار دارد.</p><hr> <h3>متدهای مرتبط با کتابخانه‌های unmanaged</h3><ul> <li>متد <strong>virtual resolving</strong> در ALC: <code>LoadUnmanagedDll</code></li><li>متد <strong>بارگذاری</strong>: <code>LoadUnmanagedDllFromPath</code></li></ul> <p>مثال:</p><pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">override</span> IntPtr <span class="hljs-title">LoadUnmanagedDll</span>(<span class="hljs-params"><span class="hljs-built_in">string</span> unmanagedDllName</span>)</span>
 {
     <span class="hljs-comment">// مسیر کامل unmanagedDllName را پیدا کنید...</span>
     <span class="hljs-built_in">string</span> fullPath = ...;
     <span class="hljs-keyword">return</span> LoadUnmanagedDllFromPath(fullPath); <span class="hljs-comment">// بارگذاری DLL</span>
 }
-</code></pre>
-<p>اگر نتوانید فایل را پیدا کنید، می‌توانید <code>IntPtr.Zero</code> برگردانید. در این صورت CLR رویداد <code>ResolvingUnmanagedDll</code> را در ALC فعال می‌کند.</p>
-<hr>
-<h3>🔹 نکته جالب</h3>
-<p>متد <code>LoadUnmanagedDllFromPath</code> <strong>protected</strong> است، بنابراین معمولاً نمی‌توانید از handler رویداد <code>ResolvingUnmanagedDll</code> مستقیماً آن را فراخوانی کنید.<br>
-با این حال، می‌توانید همان نتیجه را با <strong><code>NativeLibrary.Load</code></strong> استاتیک به دست آورید:</p>
-<pre class="hljs"><code>someALC.ResolvingUnmanagedDll += (requestingAssembly, unmanagedDllName) =&gt;
+</code></pre> <p>اگر نتوانید فایل را پیدا کنید، می‌توانید <code>IntPtr.Zero</code> برگردانید. در این صورت CLR رویداد <code>ResolvingUnmanagedDll</code> را در ALC فعال می‌کند.</p><hr> <h3>نکته جالب</h3><p>متد <code>LoadUnmanagedDllFromPath</code> <strong>protected</strong> است، بنابراین معمولاً نمی‌توانید از handler رویداد <code>ResolvingUnmanagedDll</code> مستقیماً آن را فراخوانی کنید.<br> با این حال، می‌توانید همان نتیجه را با <strong><code>NativeLibrary.Load</code></strong> استاتیک به دست آورید:</p><pre class="hljs"><code>someALC.ResolvingUnmanagedDll += (requestingAssembly, unmanagedDllName) =&gt;
 {
     <span class="hljs-keyword">return</span> NativeLibrary.Load(<span class="hljs-string">&quot;(full path to unmanaged DLL)&quot;</span>);
 };
-</code></pre>
-<blockquote>
-<p>کتابخانه‌های native معمولاً توسط ALC حل و بارگذاری می‌شوند، اما متعلق به ALC نیستند.<br>
-پس از بارگذاری، هر کتابخانه native مستقل است و مسئول حل وابستگی‌های transitve خود است.<br>
-همچنین کتابخانه‌های native برای کل <strong>process</strong> جهانی هستند، بنابراین نمی‌توان دو نسخه متفاوت با همان نام فایل را بارگذاری کرد.</p>
-</blockquote>
-<hr>
-<h3>🔹 AssemblyDependencyResolver 📦</h3>
-<p>در بخش <strong>Default probing</strong> گفتیم که ALC پیش‌فرض برای حل وابستگی‌های <strong>platform-specific</strong> و <strong>NuGet زمان توسعه</strong>، فایل‌های <code>.deps.json</code> و <code>.runtimeconfig.json</code> را بررسی می‌کند.</p>
-<p>اگر بخواهید یک اسمبلی را در <strong>ALC سفارشی</strong> با وابستگی‌های platform-specific یا NuGet بارگذاری کنید، باید این منطق را بازتولید کنید.<br>
-می‌توانستید این کار را با پارس کردن فایل‌ها انجام دهید، اما هم سخت است و هم اگر قوانین در نسخه بعدی .NET تغییر کنند، کد شما خراب می‌شود.</p>
-<p><strong>AssemblyDependencyResolver</strong> این مشکل را حل می‌کند.<br>
-ابتدا آن را با مسیر اسمبلی مورد نظر برای بررسی وابستگی‌ها نمونه‌سازی می‌کنیم:</p>
-<pre class="hljs"><code><span class="hljs-keyword">var</span> resolver = <span class="hljs-keyword">new</span> AssemblyDependencyResolver(<span class="hljs-string">@&quot;c:\temp\foo.dll&quot;</span>);
-</code></pre>
-<p>سپس برای پیدا کردن مسیر یک وابستگی، متد <code>ResolveAssemblyToPath</code> را فراخوانی می‌کنیم:</p>
-<pre class="hljs"><code><span class="hljs-built_in">string</span> path = resolver.ResolveAssemblyToPath(<span class="hljs-keyword">new</span> AssemblyName(<span class="hljs-string">&quot;bar&quot;</span>));
-</code></pre>
-<p>اگر <code>.deps.json</code> وجود نداشته باشد یا شامل اطلاعاتی درباره <code>bar.dll</code> نباشد، مسیر به صورت پیش‌فرض به <code>c:\temp\bar.dll</code> ارزیابی می‌شود.</p>
-<p>همین کار برای وابستگی‌های unmanaged نیز با <code>ResolveUnmanagedDllToPath</code> امکان‌پذیر است.</p>
-<hr>
-<h3>🔹 مثال عملی با NuGet</h3>
-<ol>
-<li>یک پروژه Console به نام <code>ClientApp</code> بسازید.</li>
-<li>یک reference به <code>Microsoft.Data.SqlClient</code> اضافه کنید.</li>
-<li>کلاس زیر را اضافه کنید:</li>
-</ol>
-<pre class="hljs"><code><span class="hljs-keyword">using</span> Microsoft.Data.SqlClient;
+</code></pre> <blockquote><p>کتابخانه‌های native معمولاً توسط ALC حل و بارگذاری می‌شوند، اما متعلق به ALC نیستند.<br> پس از بارگذاری، هر کتابخانه native مستقل است و مسئول حل وابستگی‌های transitve خود است.<br> همچنین کتابخانه‌های native برای کل <strong>process</strong> جهانی هستند، بنابراین نمی‌توان دو نسخه متفاوت با همان نام فایل را بارگذاری کرد.</p></blockquote> <hr><h3>AssemblyDependencyResolver</h3><p>در بخش <strong>Default probing</strong> گفتیم که ALC پیش‌فرض برای حل وابستگی‌های <strong>platform-specific</strong> و <strong>NuGet زمان توسعه</strong>، فایل‌های <code>.deps.json</code> و <code>.runtimeconfig.json</code> را بررسی می‌کند.</p><p>اگر بخواهید یک اسمبلی را در <strong>ALC سفارشی</strong> با وابستگی‌های platform-specific یا NuGet بارگذاری کنید، باید این منطق را بازتولید کنید.<br> می‌توانستید این کار را با پارس کردن فایل‌ها انجام دهید، اما هم سخت است و هم اگر قوانین در نسخه بعدی .NET تغییر کنند، کد شما خراب می‌شود.</p><p><strong>AssemblyDependencyResolver</strong> این مشکل را حل می‌کند.<br> ابتدا آن را با مسیر اسمبلی مورد نظر برای بررسی وابستگی‌ها نمونه‌سازی می‌کنیم:</p><pre class="hljs"><code><span class="hljs-keyword">var</span> resolver = <span class="hljs-keyword">new</span> AssemblyDependencyResolver(<span class="hljs-string">@&quot;c:\temp\foo.dll&quot;</span>);
+</code></pre> <p>سپس برای پیدا کردن مسیر یک وابستگی، متد <code>ResolveAssemblyToPath</code> را فراخوانی می‌کنیم:</p><pre class="hljs"><code><span class="hljs-built_in">string</span> path = resolver.ResolveAssemblyToPath(<span class="hljs-keyword">new</span> AssemblyName(<span class="hljs-string">&quot;bar&quot;</span>));
+</code></pre> <p>اگر <code>.deps.json</code> وجود نداشته باشد یا شامل اطلاعاتی درباره <code>bar.dll</code> نباشد، مسیر به صورت پیش‌فرض به <code>csharp:\temp\bar.dll</code> ارزیابی می‌شود.</p><p>همین کار برای وابستگی‌های unmanaged نیز با <code>ResolveUnmanagedDllToPath</code> امکان‌پذیر است.</p><hr> <h3>مثال عملی با NuGet</h3><ol> <li>یک پروژه Console به نام <code>ClientApp</code> بسازید.</li><li>یک reference به <code>Microsoft.Data.SqlClient</code> اضافه کنید.</li><li>کلاس زیر را اضافه کنید:</li></ol> <pre class="hljs"><code><span class="hljs-keyword">using</span> Microsoft.Data.SqlClient;
 
 <span class="hljs-keyword">namespace</span> <span class="hljs-title">ClientApp</span>
 {
@@ -1157,176 +255,39 @@ Method3();
         <span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Main</span>()</span> =&gt; GetConnection(); <span class="hljs-comment">// تست که resolve می‌شود</span>
     }
 }
-</code></pre>
-<p>اگر برنامه را بسازید و در پوشه خروجی نگاه کنید، فایل <code>Microsoft.Data.SqlClient.dll</code> وجود دارد.<br>
-اما این فایل هنگام اجرا بارگذاری نمی‌شود و تلاش برای بارگذاری صریح آن باعث Exception می‌شود.<br>
-assembly واقعی در زیرپوشه <code>runtimes\win</code> (یا <code>runtimes/unix</code>) قرار دارد و <strong>ALC پیش‌فرض با parsing فایل <code>ClientApp.deps.json</code> آن را بارگذاری می‌کند</strong>.</p>
-<hr>
-<p>اگر بخواهید <code>ClientApp.dll</code> را از برنامه دیگری بارگذاری کنید، نیاز به یک <strong>ALC سفارشی</strong> دارید که وابستگی آن یعنی <code>Microsoft.Data.SqlClient.dll</code> را حل کند.<br>
-کافی نیست فقط پوشه <code>ClientApp.dll</code> را بررسی کنید، بلکه باید <strong>AssemblyDependencyResolver</strong> مسیر دقیق فایل را برای پلتفرم فعلی پیدا کند:</p>
-<pre class="hljs"><code><span class="hljs-built_in">string</span> path = <span class="hljs-string">@&quot;C:\source\ClientApp\bin\Debug\netcoreapp3.0\ClientApp.dll&quot;</span>;
+</code></pre> <p>اگر برنامه را بسازید و در پوشه خروجی نگاه کنید، فایل <code>Microsoft.Data.SqlClient.dll</code> وجود دارد.<br> اما این فایل هنگام اجرا بارگذاری نمی‌شود و تلاش برای بارگذاری صریح آن باعث Exception می‌شود.<br> assembly واقعی در زیرپوشه <code>runtimes\win</code> (یا <code>runtimes/unix</code>) قرار دارد و <strong>ALC پیش‌فرض با parsing فایل <code>ClientApp.deps.json</code> آن را بارگذاری می‌کند</strong>.</p><hr> <p>اگر بخواهید <code>ClientApp.dll</code> را از برنامه دیگری بارگذاری کنید، نیاز به یک <strong>ALC سفارشی</strong> دارید که وابستگی آن یعنی <code>Microsoft.Data.SqlClient.dll</code> را حل کند.<br> کافی نیست فقط پوشه <code>ClientApp.dll</code> را بررسی کنید، بلکه باید <strong>AssemblyDependencyResolver</strong> مسیر دقیق فایل را برای پلتفرم فعلی پیدا کند:</p><pre class="hljs"><code><span class="hljs-built_in">string</span> path = <span class="hljs-string">@&quot;C:\source\ClientApp\bin\Debug\netcoreapp3.0\ClientApp.dll&quot;</span>;
 <span class="hljs-keyword">var</span> resolver = <span class="hljs-keyword">new</span> AssemblyDependencyResolver(path);
 <span class="hljs-keyword">var</span> sqlClient = <span class="hljs-keyword">new</span> AssemblyName(<span class="hljs-string">&quot;Microsoft.Data.SqlClient&quot;</span>);
 Console.WriteLine(resolver.ResolveAssemblyToPath(sqlClient));
-</code></pre>
-<p>خروجی در ویندوز معمولاً چنین است:</p>
-<pre class="hljs"><code>C:\source\ClientApp\bin\Debug\netcoreapp3.0\runtimes\win\lib\netcoreapp2.1\Microsoft.Data.SqlClient.dll
-</code></pre>
-<blockquote>
-<p>یک مثال کامل در بخش <strong>Writing a Plug-In System</strong> در صفحه 799 ارائه شده است.</p>
-</blockquote>
-<h3>🔹 خارج کردن ALCها از حافظه و آزادسازی منابع 🗑️</h3>
-<p>در موارد ساده، می‌توان یک <strong>AssemblyLoadContext غیر پیش‌فرض</strong> را از حافظه خارج کرد تا هم حافظه آزاد شود و هم قفل فایل‌های بارگذاری‌شده رفع شود.<br>
-برای این کار، هنگام ایجاد ALC باید <strong>پارامتر <code>isCollectible</code> را true</strong> قرار دهید:</p>
-<pre class="hljs"><code><span class="hljs-keyword">var</span> alc = <span class="hljs-keyword">new</span> AssemblyLoadContext(<span class="hljs-string">&quot;test&quot;</span>, isCollectible: <span class="hljs-literal">true</span>);
-</code></pre>
-<p>سپس می‌توانید متد <code>Unload</code> را فراخوانی کنید تا فرآیند unload آغاز شود.</p>
-<blockquote>
-<p>مدل unload به صورت <strong>همکاری (cooperative)</strong> است، نه اجباری (preemptive).<br>
-اگر هر متدی در هر اسمبلی ALC در حال اجرا باشد، unload تا پایان اجرای آن متدها به تعویق می‌افتد.</p>
-</blockquote>
-<p>بارگذاری واقعی هنگام <strong>garbage collection</strong> اتفاق می‌افتد.<br>
-اگر چیزی خارج از ALC به هر شیء داخلی ALC (شامل objectها، typeها یا assemblyها) ارجاع غیر-weak داشته باشد، unload انجام نمی‌شود.</p>
-<blockquote>
-<p>نکته: برخی APIها (حتی در .NET BCL) ممکن است objectها را در <strong>فیلدهای static یا دیکشنری‌ها cache</strong> کنند یا به eventها subscribe شوند. این می‌تواند موانعی برای unload ایجاد کند، مخصوصاً اگر کد داخل ALC از APIهای خارج از ALC به صورت پیچیده استفاده کند.<br>
-علت failure در unload معمولاً سخت است و نیاز به ابزارهایی مثل WinDbg دارد.</p>
-</blockquote>
-<hr>
-<h3>🔹 متدهای Legacy برای بارگذاری 📜</h3>
-<p>اگر هنوز از <strong>.NET Framework</strong> استفاده می‌کنید یا لایبری می‌نویسید که باید با .NET Framework سازگار باشد، نمی‌توانید از <strong>AssemblyLoadContext</strong> استفاده کنید.<br>
-بارگذاری با متدهای زیر انجام می‌شود:</p>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Assembly <span class="hljs-title">LoadFrom</span>(<span class="hljs-params"><span class="hljs-built_in">string</span> assemblyFile</span>)</span>;
+</code></pre> <p>خروجی در ویندوز معمولاً چنین است:</p><pre class="hljs"><code>C:\source\ClientApp\bin\Debug\netcoreapp3.0\runtimes\win\lib\netcoreapp2.1\Microsoft.Data.SqlClient.dll
+</code></pre> <blockquote><p>یک مثال کامل در بخش <strong>Writing a Plug-In System</strong> در صفحه 799 ارائه شده است.</p></blockquote> <h3>خارج کردن ALCها از حافظه و آزادسازی منابع</h3><p>در موارد ساده، می‌توان یک <strong>AssemblyLoadContext غیر پیش‌فرض</strong> را از حافظه خارج کرد تا هم حافظه آزاد شود و هم قفل فایل‌های بارگذاری‌شده رفع شود.<br> برای این کار، هنگام ایجاد ALC باید <strong>پارامتر <code>isCollectible</code> را true</strong> قرار دهید:</p><pre class="hljs"><code><span class="hljs-keyword">var</span> alc = <span class="hljs-keyword">new</span> AssemblyLoadContext(<span class="hljs-string">&quot;test&quot;</span>, isCollectible: <span class="hljs-literal">true</span>);
+</code></pre> <p>سپس می‌توانید متد <code>Unload</code> را فراخوانی کنید تا فرآیند unload آغاز شود.</p><blockquote> <p>مدل unload به صورت <strong>همکاری (cooperative)</strong> است، نه اجباری (preemptive).<br> اگر هر متدی در هر اسمبلی ALC در حال اجرا باشد، unload تا پایان اجرای آن متدها به تعویق می‌افتد.</p></blockquote> <p>بارگذاری واقعی هنگام <strong>garbage collection</strong> اتفاق می‌افتد.<br> اگر چیزی خارج از ALC به هر شیء داخلی ALC (شامل objectها، typeها یا assemblyها) ارجاع غیر-weak داشته باشد، unload انجام نمی‌شود.</p><blockquote> <p>نکته: برخی APIها (حتی در .NET BCL) ممکن است objectها را در <strong>فیلدهای static یا دیکشنری‌ها cache</strong> کنند یا به eventها subscribe شوند. این می‌تواند موانعی برای unload ایجاد کند، مخصوصاً اگر کد داخل ALC از APIهای خارج از ALC به صورت پیچیده استفاده کند.<br> علت failure در unload معمولاً سخت است و نیاز به ابزارهایی مثل WinDbg دارد.</p></blockquote> <hr><h3>متدهای Legacy برای بارگذاری</h3><p>اگر هنوز از <strong>.NET Framework</strong> استفاده می‌کنید یا لایبری می‌نویسید که باید با .NET Framework سازگار باشد، نمی‌توانید از <strong>AssemblyLoadContext</strong> استفاده کنید.<br> بارگذاری با متدهای زیر انجام می‌شود:</p><pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Assembly <span class="hljs-title">LoadFrom</span>(<span class="hljs-params"><span class="hljs-built_in">string</span> assemblyFile</span>)</span>;
 <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Assembly <span class="hljs-title">LoadFile</span>(<span class="hljs-params"><span class="hljs-built_in">string</span> path</span>)</span>;
 <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Assembly <span class="hljs-title">Load</span>(<span class="hljs-params"><span class="hljs-built_in">byte</span>[] rawAssembly</span>)</span>;
-</code></pre>
-<ul>
-<li><code>LoadFile</code> و <code>Load(byte[])</code> ایزوله‌سازی ارائه می‌دهند.</li>
-<li><code>LoadFrom</code> چنین ایزوله‌سازی ندارد.</li>
-</ul>
-<p>حل وابستگی‌ها با <strong>رویداد AssemblyResolve</strong> در AppDomain انجام می‌شود، مشابه رویداد <code>Resolving</code> در ALC پیش‌فرض.<br>
-متد <code>Assembly.Load(string)</code> نیز برای trigger کردن resolution در دسترس است و مشابه عمل می‌کند.</p>
-<hr>
-<h3>🔹 LoadFrom</h3>
-<ul>
-<li>اسمبلی را از مسیر مشخص شده در <strong>default ALC</strong> بارگذاری می‌کند.</li>
-<li>مشابه <code>AssemblyLoadContext.Default.LoadFromAssemblyPath</code> است، با تفاوت‌های زیر:</li>
-</ul>
-<ol>
-<li>
-<p>اگر اسمبلی با همان <strong>simple name</strong> قبلاً وجود داشته باشد، <code>LoadFrom</code> همان اسمبلی را برمی‌گرداند و Exception نمی‌دهد.</p>
-</li>
-<li>
-<p>اگر اسمبلی وجود نداشته باشد و بارگذاری صورت گیرد، به آن وضعیت ویژه‌ای به نام <strong>LoadFrom</strong> داده می‌شود.</p>
-<ul>
-<li>این وضعیت روی منطق resolution ALC پیش‌فرض اثر می‌گذارد و اگر اسمبلی وابستگی‌هایی در همان پوشه داشته باشد، آن‌ها به صورت خودکار حل می‌شوند.</li>
-</ul>
-</li>
-</ol>
-<blockquote>
-<p>در .NET Framework، اگر اسمبلی در <strong>Global Assembly Cache (GAC)</strong> وجود داشته باشد، CLR همیشه از آنجا بارگذاری می‌کند. این قانون برای هر سه روش بارگذاری صدق می‌کند.</p>
-</blockquote>
-<p>مزیت <code>LoadFrom</code> این است که وابستگی‌های transitve در همان پوشه را خودکار حل می‌کند، اما ممکن است assembly نادرست بارگذاری شود.<br>
-برای کنترل بهتر، بهتر است از <code>Load(string)</code> یا <code>LoadFile</code> استفاده کنید و وابستگی‌ها را با <strong>AssemblyResolve</strong> حل کنید.</p>
-<hr>
-<h3>🔹 LoadFile و Load(byte[])</h3>
-<ul>
-<li>این متدها اسمبلی را از مسیر فایل یا آرایه بایت در <strong>ALC جدید</strong> بارگذاری می‌کنند.</li>
-<li>برخلاف <code>LoadFrom</code>، ایزوله‌سازی ارائه می‌دهند و می‌توان چند نسخه از همان اسمبلی را بارگذاری کرد.</li>
-</ul>
-<blockquote>
-<p>دو نکته مهم:</p>
-</blockquote>
-<ol>
-<li>فراخوانی دوباره <code>LoadFile</code> با همان مسیر، همان اسمبلی قبلی را برمی‌گرداند.</li>
-<li>در .NET Framework، هر دو ابتدا GAC را بررسی می‌کنند و اگر موجود باشد، از آنجا بارگذاری می‌کنند.</li>
-</ol>
-<p>با <code>LoadFile</code> یا <code>Load(byte[])</code>، هر اسمبلی یک ALC جداگانه دارد. این باعث ایزوله‌سازی می‌شود، اما مدیریت آن کمی پیچیده‌تر است.</p>
-<p>برای حل وابستگی‌ها، رویداد <strong>AppDomain.CurrentDomain.AssemblyResolve</strong> را مدیریت کنید:</p>
-<pre class="hljs"><code>AppDomain.CurrentDomain.AssemblyResolve += (sender, <span class="hljs-keyword">args</span>) =&gt;
+</code></pre> <ul><li><code>LoadFile</code> و <code>Load(byte[])</code> ایزوله‌سازی ارائه می‌دهند.</li><li><code>LoadFrom</code> چنین ایزوله‌سازی ندارد.</li></ul> <p>حل وابستگی‌ها با <strong>رویداد AssemblyResolve</strong> در AppDomain انجام می‌شود، مشابه رویداد <code>Resolving</code> در ALC پیش‌فرض.<br> متد <code>Assembly.Load(string)</code> نیز برای trigger کردن resolution در دسترس است و مشابه عمل می‌کند.</p><hr> <h3>LoadFrom</h3><ul> <li>اسمبلی را از مسیر مشخص شده در <strong>default ALC</strong> بارگذاری می‌کند.</li><li>مشابه <code>AssemblyLoadContext.Default.LoadFromAssemblyPath</code> است، با تفاوت‌های زیر:</li></ul> <ol><li> <p>اگر اسمبلی با همان <strong>simple name</strong> قبلاً وجود داشته باشد، <code>LoadFrom</code> همان اسمبلی را برمی‌گرداند و Exception نمی‌دهد.</p></li> <li><p>اگر اسمبلی وجود نداشته باشد و بارگذاری صورت گیرد، به آن وضعیت ویژه‌ای به نام <strong>LoadFrom</strong> داده می‌شود.</p><ul> <li>این وضعیت روی منطق resolution ALC پیش‌فرض اثر می‌گذارد و اگر اسمبلی وابستگی‌هایی در همان پوشه داشته باشد، آن‌ها به صورت خودکار حل می‌شوند.</li></ul> </li></ol> <blockquote><p>در .NET Framework، اگر اسمبلی در <strong>Global Assembly Cache (GAC)</strong> وجود داشته باشد، CLR همیشه از آنجا بارگذاری می‌کند. این قانون برای هر سه روش بارگذاری صدق می‌کند.</p></blockquote> <p>مزیت <code>LoadFrom</code> این است که وابستگی‌های transitve در همان پوشه را خودکار حل می‌کند، اما ممکن است assembly نادرست بارگذاری شود.<br> برای کنترل بهتر، بهتر است از <code>Load(string)</code> یا <code>LoadFile</code> استفاده کنید و وابستگی‌ها را با <strong>AssemblyResolve</strong> حل کنید.</p><hr> <h3>LoadFile و Load(byte[])</h3><ul> <li>این متدها اسمبلی را از مسیر فایل یا آرایه بایت در <strong>ALC جدید</strong> بارگذاری می‌کنند.</li><li>برخلاف <code>LoadFrom</code>، ایزوله‌سازی ارائه می‌دهند و می‌توان چند نسخه از همان اسمبلی را بارگذاری کرد.</li></ul> <blockquote><p>دو نکته مهم:</p></blockquote> <ol><li>فراخوانی دوباره <code>LoadFile</code> با همان مسیر، همان اسمبلی قبلی را برمی‌گرداند.</li><li>در .NET Framework، هر دو ابتدا GAC را بررسی می‌کنند و اگر موجود باشد، از آنجا بارگذاری می‌کنند.</li></ol> <p>با <code>LoadFile</code> یا <code>Load(byte[])</code>، هر اسمبلی یک ALC جداگانه دارد. این باعث ایزوله‌سازی می‌شود، اما مدیریت آن کمی پیچیده‌تر است.</p><p>برای حل وابستگی‌ها، رویداد <strong>AppDomain.CurrentDomain.AssemblyResolve</strong> را مدیریت کنید:</p><pre class="hljs"><code>AppDomain.CurrentDomain.AssemblyResolve += (sender, <span class="hljs-keyword">args</span>) =&gt;
 {
     <span class="hljs-built_in">string</span> fullAssemblyName = <span class="hljs-keyword">args</span>.Name;
     <span class="hljs-comment">// یک Assembly بازگردانید یا null</span>
     ...
 };
-</code></pre>
-<blockquote>
-<p><code>args</code> شامل property ای به نام <code>RequestingAssembly</code> نیز هست که مشخص می‌کند کدام اسمبلی trigger کننده resolution بوده است.</p>
-</blockquote>
-<p>پس از یافتن اسمبلی، می‌توانید با <code>Assembly.LoadFile</code> آن را بارگذاری کنید.<br>
-همچنین می‌توانید تمام assemblyهای بارگذاری شده در AppDomain فعلی را با <code>AppDomain.CurrentDomain.GetAssemblies()</code> فهرست کنید.<br>
-این روش در .NET 5+ نیز کار می‌کند و معادل است با:</p>
-<pre class="hljs"><code>AssemblyLoadContext.All.SelectMany(a =&gt; a.Assemblies)
-</code></pre>
-<h3>🔹 نوشتن یک سیستم پلاگین با ALCهای قابل خارج‌سازی 🧩</h3>
-<p>برای نشان دادن کامل مفاهیمی که در این بخش بررسی کردیم، بیایید یک <strong>سیستم پلاگین</strong> بسازیم که از <strong>ALCهای قابل unload</strong> استفاده می‌کند تا هر پلاگین به صورت ایزوله اجرا شود.</p>
-<p>سیستم نمونه ما شامل سه پروژه .NET خواهد بود:</p>
-<table>
-<thead>
-<tr>
-<th>پروژه</th>
-<th>نوع</th>
-<th>توضیح</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Plugin.Common</td>
-<td>کتابخانه (Library)</td>
-<td>تعریف یک <strong>interface</strong> که پلاگین‌ها آن را پیاده‌سازی می‌کنند</td>
-</tr>
-<tr>
-<td>Capitalizer</td>
-<td>کتابخانه (Library)</td>
-<td>یک پلاگین که متن را <strong>به حروف بزرگ</strong> تبدیل می‌کند</td>
-</tr>
-<tr>
-<td>Plugin.Host</td>
-<td>اپلیکیشن Console</td>
-<td>پیدا کردن و اجرای پلاگین‌ها</td>
-</tr>
-</tbody>
-</table>
-<p>فرض کنید پروژه‌ها در مسیرهای زیر قرار دارند:</p>
-<pre class="hljs"><code>c:\source\PluginDemo\Plugin.Common
+</code></pre> <blockquote><p><code>args</code> شامل property ای به نام <code>RequestingAssembly</code> نیز هست که مشخص می‌کند کدام اسمبلی trigger کننده resolution بوده است.</p></blockquote> <p>پس از یافتن اسمبلی، می‌توانید با <code>Assembly.LoadFile</code> آن را بارگذاری کنید.<br> همچنین می‌توانید تمام assemblyهای بارگذاری شده در AppDomain فعلی را با <code>AppDomain.CurrentDomain.GetAssemblies()</code> فهرست کنید.<br> این روش در .NET 5+ نیز کار می‌کند و معادل است با:</p><pre class="hljs"><code>AssemblyLoadContext.All.SelectMany(a =&gt; a.Assemblies)
+</code></pre> <h3>نوشتن یک سیستم پلاگین با ALCهای قابل خارج‌سازی</h3><p>برای نشان دادن کامل مفاهیمی که در این بخش بررسی کردیم، بیایید یک <strong>سیستم پلاگین</strong> بسازیم که از <strong>ALCهای قابل unload</strong> استفاده می‌کند تا هر پلاگین به صورت ایزوله اجرا شود.</p><p>سیستم نمونه ما شامل سه پروژه .NET خواهد بود:</p><table> <thead><tr> <th>پروژه</th><th>نوع</th><th>توضیح</th></tr> </thead><tbody> <tr><td>Plugin.Common</td><td>کتابخانه (Library)</td><td>تعریف یک <strong>interface</strong> که پلاگین‌ها آن را پیاده‌سازی می‌کنند</td></tr> <tr><td>Capitalizer</td><td>کتابخانه (Library)</td><td>یک پلاگین که متن را <strong>به حروف بزرگ</strong> تبدیل می‌کند</td></tr> <tr><td>Plugin.Host</td><td>اپلیکیشن Console</td><td>پیدا کردن و اجرای پلاگین‌ها</td></tr> </tbody></table> <p>فرض کنید پروژه‌ها در مسیرهای زیر قرار دارند:</p><pre class="hljs"><code>c:\source\PluginDemo\Plugin.Common
 c:\source\PluginDemo\Capitalizer
 c:\source\PluginDemo\Plugin.Host
-</code></pre>
-<p>تمام پروژه‌ها به <strong>Plugin.Common</strong> ارجاع می‌دهند و هیچ ارجاع بین پروژه‌های دیگر وجود ندارد.</p>
-<hr>
-<h3>🔹 Plugin.Common</h3>
-<p>اگر <strong>Plugin.Host</strong> به <strong>Capitalizer</strong> ارجاع می‌داد، دیگر یک سیستم پلاگین واقعی نبود؛ ایده اصلی این است که پلاگین‌ها توسط <strong>سوم‌شخص‌ها</strong> پس از انتشار <strong>Plugin.Host</strong> و <strong>Plugin.Common</strong> نوشته شوند.</p>
-<blockquote>
-<p>اگر از Visual Studio استفاده می‌کنید، می‌توانید تمام سه پروژه را در یک <strong>solution</strong> قرار دهید تا مدیریت ساخت راحت‌تر شود.<br>
-سپس روی پروژه Plugin.Host راست‌کلیک کنید، مسیر <strong>Build Dependencies &gt; Project Dependencies</strong> را انتخاب کنید و پروژه Capitalizer را تیک بزنید. این باعث می‌شود Capitalizer هنگام ساخت Plugin.Host ساخته شود، بدون نیاز به افزودن ارجاع.</p>
-</blockquote>
-<p>در <strong>Plugin.Common</strong>، پلاگین‌ها یک وظیفه بسیار ساده دارند: <strong>تغییر یک رشته متن</strong>.<br>
-این interface به شکل زیر تعریف می‌شود:</p>
-<pre class="hljs"><code><span class="hljs-keyword">namespace</span> <span class="hljs-title">Plugin.Common</span>
+</code></pre> <p>تمام پروژه‌ها به <strong>Plugin.Common</strong> ارجاع می‌دهند و هیچ ارجاع بین پروژه‌های دیگر وجود ندارد.</p><hr> <h3>Plugin.Common</h3><p>اگر <strong>Plugin.Host</strong> به <strong>Capitalizer</strong> ارجاع می‌داد، دیگر یک سیستم پلاگین واقعی نبود؛ ایده اصلی این است که پلاگین‌ها توسط <strong>سوم‌شخص‌ها</strong> پس از انتشار <strong>Plugin.Host</strong> و <strong>Plugin.Common</strong> نوشته شوند.</p><blockquote> <p>اگر از Visual Studio استفاده می‌کنید، می‌توانید تمام سه پروژه را در یک <strong>solution</strong> قرار دهید تا مدیریت ساخت راحت‌تر شود.<br> سپس روی پروژه Plugin.Host راست‌کلیک کنید، مسیر <strong>Build Dependencies &gt; Project Dependencies</strong> را انتخاب کنید و پروژه Capitalizer را تیک بزنید. این باعث می‌شود Capitalizer هنگام ساخت Plugin.Host ساخته شود، بدون نیاز به افزودن ارجاع.</p></blockquote> <p>در <strong>Plugin.Common</strong>، پلاگین‌ها یک وظیفه بسیار ساده دارند: <strong>تغییر یک رشته متن</strong>.<br> این interface به شکل زیر تعریف می‌شود:</p><pre class="hljs"><code><span class="hljs-keyword">namespace</span> <span class="hljs-title">Plugin.Common</span>
 {
     <span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title">ITextPlugin</span>
     {
         <span class="hljs-function"><span class="hljs-built_in">string</span> <span class="hljs-title">TransformText</span>(<span class="hljs-params"><span class="hljs-built_in">string</span> input</span>)</span>;
     }
 }
-</code></pre>
-<p>همین کافی است برای Plugin.Common.</p>
-<hr>
-<h3>🔹 Capitalizer (پلاگین)</h3>
-<p>پلاگین <strong>Capitalizer</strong> به <strong>Plugin.Common</strong> ارجاع می‌دهد و یک کلاس دارد.<br>
-برای ساده نگه داشتن، هیچ وابستگی اضافی ندارد:</p>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">CapitalizerPlugin</span> : <span class="hljs-title">Plugin.Common.ITextPlugin</span>
+</code></pre> <p>همین کافی است برای Plugin.Common.</p><hr> <h3>Capitalizer (پلاگین)</h3><p>پلاگین <strong>Capitalizer</strong> به <strong>Plugin.Common</strong> ارجاع می‌دهد و یک کلاس دارد.<br> برای ساده نگه داشتن، هیچ وابستگی اضافی ندارد:</p><pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">CapitalizerPlugin</span> : <span class="hljs-title">Plugin.Common.ITextPlugin</span>
 {
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-built_in">string</span> <span class="hljs-title">TransformText</span>(<span class="hljs-params"><span class="hljs-built_in">string</span> input</span>)</span> =&gt; input.ToUpper();
 }
-</code></pre>
-<p>اگر هر دو پروژه را بسازید و به پوشه خروجی <strong>Capitalizer</strong> نگاه کنید، دو اسمبلی زیر را خواهید دید:</p>
-<pre class="hljs"><code>Capitalizer.dll      // اسمبلی پلاگین ما
+</code></pre> <p>اگر هر دو پروژه را بسازید و به پوشه خروجی <strong>Capitalizer</strong> نگاه کنید، دو اسمبلی زیر را خواهید دید:</p><pre class="hljs"><code>Capitalizer.dll      // اسمبلی پلاگین ما
 Plugin.Common.dll    // اسمبلی ارجاع داده شده
-</code></pre>
-<h3>🔹 Plugin.Host 🖥️</h3>
-<p><strong>Plugin.Host</strong> یک اپلیکیشن Console است که شامل دو کلاس است.<br>
-کلاس اول یک <strong>ALC سفارشی</strong> برای بارگذاری پلاگین‌ها است:</p>
-<pre class="hljs"><code><span class="hljs-keyword">class</span> <span class="hljs-title">PluginLoadContext</span> : <span class="hljs-title">AssemblyLoadContext</span>
+</code></pre> <h3>Plugin.Host</h3><p><strong>Plugin.Host</strong> یک اپلیکیشن Console است که شامل دو کلاس است.<br> کلاس اول یک <strong>ALC سفارشی</strong> برای بارگذاری پلاگین‌ها است:</p><pre class="hljs"><code><span class="hljs-keyword">class</span> <span class="hljs-title">PluginLoadContext</span> : <span class="hljs-title">AssemblyLoadContext</span>
 {
     AssemblyDependencyResolver _resolver;
 
@@ -1360,28 +321,9 @@ Plugin.Common.dll    // اسمبلی ارجاع داده شده
             : LoadUnmanagedDllFromPath(path);
     }
 }
-</code></pre>
-<p>در <strong>constructor</strong>، مسیر اصلی اسمبلی پلاگین و یک flag برای تعیین اینکه ALC قابل unload باشد یا خیر، دریافت می‌شود.</p>
-<ul>
-<li>متد <strong>Load</strong> جایی است که وابستگی‌ها مدیریت می‌شوند.</li>
-<li>تمام پلاگین‌ها باید به <strong>Plugin.Common</strong> ارجاع دهند تا بتوانند <strong>ITextPlugin</strong> را پیاده‌سازی کنند.</li>
-<li>بنابراین، Load ممکن است برای حل Plugin.Common فراخوانی شود.</li>
-<li>اگر نسخه‌ای از Plugin.Common.dll در پوشه خروجی پلاگین باشد و ما آن را بارگذاری کنیم، دو نسخه از همان اسمبلی وجود خواهد داشت: یکی در Default ALC میزبان و دیگری در PluginLoadContext پلاگین. این باعث ناسازگاری و خطا می‌شود.</li>
-</ul>
-<p>برای حل این مشکل، بررسی می‌کنیم:</p>
-<pre class="hljs"><code><span class="hljs-keyword">if</span> (assemblyName.Name == <span class="hljs-keyword">typeof</span>(ITextPlugin).Assembly.GetName().Name)
+</code></pre> <p>در <strong>constructor</strong>، مسیر اصلی اسمبلی پلاگین و یک flag برای تعیین اینکه ALC قابل unload باشد یا خیر، دریافت می‌شود.</p><ul> <li>متد <strong>Load</strong> جایی است که وابستگی‌ها مدیریت می‌شوند.</li><li>تمام پلاگین‌ها باید به <strong>Plugin.Common</strong> ارجاع دهند تا بتوانند <strong>ITextPlugin</strong> را پیاده‌سازی کنند.</li><li>بنابراین، Load ممکن است برای حل Plugin.Common فراخوانی شود.</li><li>اگر نسخه‌ای از Plugin.Common.dll در پوشه خروجی پلاگین باشد و ما آن را بارگذاری کنیم، دو نسخه از همان اسمبلی وجود خواهد داشت: یکی در Default ALC میزبان و دیگری در PluginLoadContext پلاگین. این باعث ناسازگاری و خطا می‌شود.</li></ul> <p>برای حل این مشکل، بررسی می‌کنیم:</p><pre class="hljs"><code><span class="hljs-keyword">if</span> (assemblyName.Name == <span class="hljs-keyword">typeof</span>(ITextPlugin).Assembly.GetName().Name)
     <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;
-</code></pre>
-<blockquote>
-<p>بازگرداندن <strong>null</strong> باعث می‌شود Default ALC میزبان، اسمبلی را حل کند.<br>
-می‌توانستیم typeof(ITextPlugin).Assembly را هم برگردانیم و نتیجه درست بود. چون PluginLoadContext در <strong>Plugin.Host</strong> تعریف شده، هر نوعی که مستقیماً از این کلاس ارجاع شود، در Default ALC میزبان حل می‌شود.</p>
-</blockquote>
-<p>سپس از <strong>AssemblyDependencyResolver</strong> برای پیدا کردن هر وابستگی خصوصی پلاگین استفاده می‌کنیم.<br>
-همچنین <strong>LoadUnmanagedDll</strong> override شده تا اگر پلاگین وابستگی unmanaged داشته باشد، درست بارگذاری شود.</p>
-<hr>
-<h3>🔹 کلاس Program</h3>
-<p>برای سادگی، مسیر پلاگین Capitalizer به صورت hardcode شده است (در عمل، مسیرها را می‌توان با جستجوی DLLها یا خواندن فایل کانفیگ پیدا کرد):</p>
-<pre class="hljs"><code><span class="hljs-keyword">class</span> <span class="hljs-title">Program</span>
+</code></pre> <blockquote><p>بازگرداندن <strong>null</strong> باعث می‌شود Default ALC میزبان، اسمبلی را حل کند.<br> می‌توانستیم typeof(ITextPlugin).Assembly را هم برگردانیم و نتیجه درست بود. چون PluginLoadContext در <strong>Plugin.Host</strong> تعریف شده، هر نوعی که مستقیماً از این کلاس ارجاع شود، در Default ALC میزبان حل می‌شود.</p></blockquote> <p>سپس از <strong>AssemblyDependencyResolver</strong> برای پیدا کردن هر وابستگی خصوصی پلاگین استفاده می‌کنیم.<br> همچنین <strong>LoadUnmanagedDll</strong> override شده تا اگر پلاگین وابستگی unmanaged داشته باشد، درست بارگذاری شود.</p><hr> <h3>کلاس Program</h3><p>برای سادگی، مسیر پلاگین Capitalizer به صورت hardcode شده است (در عمل، مسیرها را می‌توان با جستجوی DLLها یا خواندن فایل کانفیگ پیدا کرد):</p><pre class="hljs"><code><span class="hljs-keyword">class</span> <span class="hljs-title">Program</span>
 {
     <span class="hljs-keyword">const</span> <span class="hljs-built_in">bool</span> UseCollectibleContexts = <span class="hljs-literal">true</span>;
 
@@ -1414,29 +356,11 @@ Plugin.Common.dll    // اسمبلی ارجاع داده شده
         }
     }
 }
-</code></pre>
-<ul>
-<li>ابتدا یک <strong>ALC جدید</strong> برای پلاگین ساخته می‌شود.</li>
-<li>سپس اسمبلی پلاگین بارگذاری می‌شود.</li>
-<li>با <strong>Reflection</strong> نوعی که ITextPlugin را پیاده‌سازی می‌کند پیدا می‌کنیم.</li>
-<li>پلاگین را نمونه‌سازی کرده، متد <strong>TransformText</strong> را فراخوانی می‌کنیم و ALC را unload می‌کنیم.</li>
-</ul>
-<blockquote>
-<p>اگر نیاز به فراخوانی مکرر TransformText داشتید، بهتر است <strong>ALC را کش کنید</strong> و بعد از هر فراخوانی unload نکنید.</p>
-</blockquote>
-<p>خروجی:</p>
-<pre class="hljs"><code>BIG APPLE
-</code></pre>
-<hr>
-<h3>🔹 افزودن وابستگی‌ها</h3>
-<p>کد ما اکنون قابلیت حل و ایزوله‌سازی وابستگی‌ها را دارد.<br>
-برای مثال، ابتدا یک <strong>NuGet reference</strong> به <strong>Humanizer.Core</strong> نسخه 2.6.2 اضافه کنید:</p>
-<pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">ItemGroup</span>&gt;</span>
+</code></pre> <ul><li>ابتدا یک <strong>ALC جدید</strong> برای پلاگین ساخته می‌شود.</li><li>سپس اسمبلی پلاگین بارگذاری می‌شود.</li><li>با <strong>Reflection</strong> نوعی که ITextPlugin را پیاده‌سازی می‌کند پیدا می‌کنیم.</li><li>پلاگین را نمونه‌سازی کرده، متد <strong>TransformText</strong> را فراخوانی می‌کنیم و ALC را unload می‌کنیم.</li></ul> <blockquote><p>اگر نیاز به فراخوانی مکرر TransformText داشتید، بهتر است <strong>ALC را کش کنید</strong> و بعد از هر فراخوانی unload نکنید.</p></blockquote> <p>خروجی:</p><pre class="hljs"><code>BIG APPLE
+</code></pre> <hr><h3>افزودن وابستگی‌ها</h3><p>کد ما اکنون قابلیت حل و ایزوله‌سازی وابستگی‌ها را دارد.<br> برای مثال، ابتدا یک <strong>NuGet reference</strong> به <strong>Humanizer.Core</strong> نسخه 2.6.2 اضافه کنید:</p><pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">ItemGroup</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">PackageReference</span> <span class="hljs-attr">Include</span>=<span class="hljs-string">&quot;Humanizer.Core&quot;</span> <span class="hljs-attr">Version</span>=<span class="hljs-string">&quot;2.6.2&quot;</span> /&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">ItemGroup</span>&gt;</span>
-</code></pre>
-<p>سپس کلاس <strong>CapitalizerPlugin</strong> را به شکل زیر تغییر دهید:</p>
-<pre class="hljs"><code><span class="hljs-keyword">using</span> Humanizer;
+</code></pre> <p>سپس کلاس <strong>CapitalizerPlugin</strong> را به شکل زیر تغییر دهید:</p><pre class="hljs"><code><span class="hljs-keyword">using</span> Humanizer;
 <span class="hljs-keyword">namespace</span> <span class="hljs-title">Capitalizer</span>
 {
     <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">CapitalizerPlugin</span> : <span class="hljs-title">Plugin.Common.ITextPlugin</span>
@@ -1444,19 +368,11 @@ Plugin.Common.dll    // اسمبلی ارجاع داده شده
         <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-built_in">string</span> <span class="hljs-title">TransformText</span>(<span class="hljs-params"><span class="hljs-built_in">string</span> input</span>)</span> =&gt; input.Pascalize();
     }
 }
-</code></pre>
-<p>خروجی برنامه اکنون:</p>
-<pre class="hljs"><code>BigApple
-</code></pre>
-<hr>
-<h3>🔹 پلاگین جدید: Pluralizer</h3>
-<p>یک پروژه کتابخانه جدید ایجاد کنید و NuGet reference به <strong>Humanizer.Core</strong> نسخه 2.7.9 اضافه کنید:</p>
-<pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">ItemGroup</span>&gt;</span>
+</code></pre> <p>خروجی برنامه اکنون:</p><pre class="hljs"><code>BigApple
+</code></pre> <hr><h3>پلاگین جدید: Pluralizer</h3><p>یک پروژه کتابخانه جدید ایجاد کنید و NuGet reference به <strong>Humanizer.Core</strong> نسخه 2.7.9 اضافه کنید:</p><pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">ItemGroup</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">PackageReference</span> <span class="hljs-attr">Include</span>=<span class="hljs-string">&quot;Humanizer.Core&quot;</span> <span class="hljs-attr">Version</span>=<span class="hljs-string">&quot;2.7.9&quot;</span> /&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">ItemGroup</span>&gt;</span>
-</code></pre>
-<p>کلاس <strong>PluralizerPlugin</strong> را اضافه کنید که مشابه Capitalizer است، اما متد <strong>Pluralize</strong> را فراخوانی می‌کند:</p>
-<pre class="hljs"><code><span class="hljs-keyword">using</span> Humanizer;
+</code></pre> <p>کلاس <strong>PluralizerPlugin</strong> را اضافه کنید که مشابه Capitalizer است، اما متد <strong>Pluralize</strong> را فراخوانی می‌کند:</p><pre class="hljs"><code><span class="hljs-keyword">using</span> Humanizer;
 <span class="hljs-keyword">namespace</span> <span class="hljs-title">Pluralizer</span>
 {
     <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">PluralizerPlugin</span> : <span class="hljs-title">Plugin.Common.ITextPlugin</span>
@@ -1464,10 +380,7 @@ Plugin.Common.dll    // اسمبلی ارجاع داده شده
         <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-built_in">string</span> <span class="hljs-title">TransformText</span>(<span class="hljs-params"><span class="hljs-built_in">string</span> input</span>)</span> =&gt; input.Pluralize();
     }
 }
-</code></pre>
-<hr>
-<h3>🔹 فراخوانی پلاگین Pluralizer در Main</h3>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Main</span>()</span>
+</code></pre> <hr><h3>فراخوانی پلاگین Pluralizer در Main</h3><pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Main</span>()</span>
 {
     <span class="hljs-keyword">const</span> <span class="hljs-built_in">string</span> capitalizer = <span class="hljs-string">@&quot;C:\source\PluginDemo\Capitalizer\bin\Debug\netcoreapp3.0\Capitalizer.dll&quot;</span>;
     Console.WriteLine(TransformText(<span class="hljs-string">&quot;big apple&quot;</span>, capitalizer));
@@ -1475,25 +388,15 @@ Plugin.Common.dll    // اسمبلی ارجاع داده شده
     <span class="hljs-keyword">const</span> <span class="hljs-built_in">string</span> pluralizer = <span class="hljs-string">@&quot;C:\source\PluginDemo\Pluralizer\bin\Debug\netcoreapp3.0\Pluralizer.dll&quot;</span>;
     Console.WriteLine(TransformText(<span class="hljs-string">&quot;big apple&quot;</span>, pluralizer));
 }
-</code></pre>
-<p>خروجی:</p>
-<pre class="hljs"><code>BigApple
+</code></pre> <p>خروجی:</p><pre class="hljs"><code>BigApple
 big apples
-</code></pre>
-<hr>
-<h3>🔹 مشاهده ALCها و اسمبلی‌ها</h3>
-<p>اگر <strong>UseCollectibleContexts</strong> را <strong>false</strong> کنید و کد زیر را به Main اضافه کنید:</p>
-<pre class="hljs"><code><span class="hljs-keyword">foreach</span> (<span class="hljs-keyword">var</span> context <span class="hljs-keyword">in</span> AssemblyLoadContext.All)
+</code></pre> <hr><h3>مشاهده ALCها و اسمبلی‌ها</h3><p>اگر <strong>UseCollectibleContexts</strong> را <strong>false</strong> کنید و کد زیر را به Main اضافه کنید:</p><pre class="hljs"><code><span class="hljs-keyword">foreach</span> (<span class="hljs-keyword">var</span> context <span class="hljs-keyword">in</span> AssemblyLoadContext.All)
 {
     Console.WriteLine(<span class="hljs-string">$&quot;Context: <span class="hljs-subst">{context.GetType().Name}</span> <span class="hljs-subst">{context.Name}</span>&quot;</span>);
     <span class="hljs-keyword">foreach</span> (<span class="hljs-keyword">var</span> assembly <span class="hljs-keyword">in</span> context.Assemblies)
         Console.WriteLine(<span class="hljs-string">$&quot;  Assembly: <span class="hljs-subst">{assembly.FullName}</span>&quot;</span>);
 }
-</code></pre>
-<ul>
-<li>دو نسخه مختلف از <strong>Humanizer</strong> را مشاهده خواهید کرد، هر کدام در <strong>ALC جداگانه</strong>:</li>
-</ul>
-<pre class="hljs"><code>Context: PluginLoadContext Capitalizer.dll
+</code></pre> <ul><li>دو نسخه مختلف از <strong>Humanizer</strong> را مشاهده خواهید کرد، هر کدام در <strong>ALC جداگانه</strong>:</li></ul> <pre class="hljs"><code>Context: PluginLoadContext Capitalizer.dll
   Assembly: Capitalizer, Version=1.0.0.0, ...
   Assembly: Humanizer, Version=2.6.0.0, ...
 Context: PluginLoadContext Pluralizer.dll
@@ -1502,119 +405,216 @@ Context: PluginLoadContext Pluralizer.dll
 Context: DefaultAssemblyLoadContext Default
   Assembly: System.Private.CoreLib, ...
   Assembly: Host, Version=1.0.0.0, ...
-</code></pre>
-<p>حتی اگر هر دو پلاگین نسخه یکسان Humanizer را استفاده کنند، <strong>ایزوله‌سازی ALCها</strong> مزیت دارد، زیرا <strong>متغیرهای static هر پلاگین جدا خواهند بود</strong>.</p>
-
-  </main>
-
-  <!-- فوتر مشترک -->
-  <footer class="footer">
-    <div class="container">
-      <p>
-        <img src="/Gitab/icone/copyright.svg" alt="کپی‌رایت" width="14" height="14"
-             style="vertical-align:middle;margin-inline:4px">
-        <span id="y"></span> Gitab — تمامی حقوق محفوظ است.
-      </p>
-    </div>
-  </footer>
-
-  <!-- سال و اسکریپت تغییر تم -->
-  <script>
+</code></pre> <p>حتی اگر هر دو پلاگین نسخه یکسان Humanizer را استفاده کنند، <strong>ایزوله‌سازی ALCها</strong> مزیت دارد، زیرا <strong>متغیرهای static هر پلاگین جدا خواهند بود</strong>.</p></article> <nav class="chapter-single-next-nav"><a href="/Gitab/books/book1/Book/18/Reflection-and-Metadata/" class="btn-next-chapter-action" id="nextChapterBtn" data-hub="/Gitab/books/book1/"> <span class="next-btn-text">فصل بعدی: Reflection و متادیتا</span> <span class="next-btn-arrow">←</span> </a> </nav></div> <button class="fab-back-to-top" id="backToTopBtn" type="button" aria-label="رفتن به بالای صفحه" title="رفتن به بالا"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"> <polyline points="18 15 12 9 6 15"></polyline> </svg> </button></main> <footer class="footer-minimal"><div class="footer-container"> <div class="footer-top-row"><div class="footer-brand-side"> <a href="/Gitab/" class="footer-brand-anchor"> <img src="/Gitab/icone/logo.svg" alt="Gitab" width="28" height="28" loading="lazy" decoding="async"> <span class="footer-brand-title">گیتاب (Gitab)</span> </a> <p class="footer-tagline"> پلتفرم آزاد و مستقل برای ترجمهٔ دقیق و روان کتاب‌های مرجع مهندسی نرم‌افزار. </p></div> <div class="footer-nav-cols"><div class="footer-nav-col"> <span class="footer-nav-heading">موضوعات</span><ul class="footer-nav-list"> <li><a href="/Gitab/books/list-books/?cat=csharp">سی‌شارپ و دات‌نت</a></li><li><a href="/Gitab/books/list-books/?cat=clean-code">کد تمیز و بازآفرینی</a></li><li><a href="/Gitab/books/list-books/?cat=architecture">معماری و طراحی دامنه</a></li><li><a href="/Gitab/books/list-books/?cat=system">لینوکس و خط فرمان</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">بخش‌های سایت</span><ul class="footer-nav-list"> <li><a href="/Gitab/">صفحه اصلی</a></li><li><a href="/Gitab/books/list-books/">کتابخانه کامل</a></li><li><a href="/Gitab/courses/">دوره‌های آموزشی</a></li><li><a href="/Gitab/translator.html">تالار مترجمین</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">مشارکت و جامعه</span><ul class="footer-nav-list"> <li><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer">راهنمای همکاری در ترجمه</a></li><li><a href="https://github.com/hheydarian/Gitab/issues" target="_blank" rel="noopener noreferrer">پیشنهاد کتاب یا گزارش خطا</a></li></ul> </div></div> </div><div class="footer-bottom-line"> <span>© <span id="y">2026</span> Gitab — توسعه‌یافته برای جامعهٔ مهندسان نرم‌افزار ایرانی</span></div> </div></footer> <script>
   (() => {
     const root = document.documentElement;
     const btn = document.getElementById('themeToggle');
+    const sunIcon = btn ? btn.querySelector('.icon-sun') : null;
+    const moonIcon = btn ? btn.querySelector('.icon-moon') : null;
     const KEY = 'gitab-theme';
 
-    function updateTheme(s) {
-      root.setAttribute('data-theme', s);
-      const mode = s;  // فقط `dark` یا `light` خواهد بود
+    function updateTheme(mode) {
+      root.setAttribute('data-theme', mode);
       root.dataset.colorMode = mode;
-      btn.dataset.icon = mode === 'dark' ? 'moon' : 'sun';
+      if (sunIcon && moonIcon) {
+        if (mode === 'dark') {
+          sunIcon.style.display = 'inline-block';
+          moonIcon.style.display = 'none';
+        } else {
+          sunIcon.style.display = 'none';
+          moonIcon.style.display = 'inline-block';
+        }
+      }
     }
 
-    // وضعیت تم ذخیره شده از localStorage
-    let saved = localStorage.getItem(KEY) || 'light'; // پیش‌فرض روشن
+    let saved = 'dark';
+    try { saved = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
     updateTheme(saved);
 
-    // تنظیم مجدد تم هنگام تغییر وضعیت دکمه
-    btn.addEventListener('click', () => {
-      const current = localStorage.getItem(KEY) || 'light';
-      const next = current === 'dark' ? 'light' : 'dark';  // فقط دو حالت: تاریک و روشن
-      localStorage.setItem(KEY, next);
-      updateTheme(next);
-    });
+    if (btn) {
+      btn.addEventListener('click', () => {
+        let current = 'dark';
+        try { current = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+        const next = current === 'dark' ? 'light' : 'dark';
+        try { localStorage.setItem(KEY, next); } catch (e) {}
+        updateTheme(next);
+      });
+    }
 
-    // هنگام بارگذاری صفحه
     document.addEventListener('DOMContentLoaded', () => {
-      updateTheme(localStorage.getItem(KEY) || 'light');
+      let mode = 'dark';
+      try { mode = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+      updateTheme(mode);
+      const yearSpan = document.getElementById('y');
+      if (yearSpan) yearSpan.textContent = new Date().getFullYear();
     });
+
+    const mobBtn = document.getElementById('mobileMenuBtn');
+    const mobDrawer = document.getElementById('mobileDrawer');
+    if (mobBtn && mobDrawer) {
+      const setDrawerOpen = (open) => {
+        mobDrawer.classList.toggle('open', open);
+        mobBtn.classList.toggle('is-open', open);
+        mobBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        mobBtn.setAttribute('aria-label', open ? 'بستن منو' : 'باز کردن منو');
+        mobDrawer.setAttribute('aria-hidden', open ? 'false' : 'true');
+      };
+
+      mobBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        setDrawerOpen(!mobDrawer.classList.contains('open'));
+      });
+
+      mobDrawer.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => setDrawerOpen(false));
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && mobDrawer.classList.contains('open')) {
+          setDrawerOpen(false);
+        }
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!mobDrawer.contains(e.target) && !mobBtn.contains(e.target)) {
+          setDrawerOpen(false);
+        }
+      });
+    }
+
+    if ('serviceWorker' in navigator) {
+      const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+      if (isLocalhost) {
+        navigator.serviceWorker.getRegistrations().then(regs => {
+          for (const reg of regs) reg.unregister();
+        });
+        if ('caches' in window) {
+          caches.keys().then(names => {
+            for (const name of names) caches.delete(name);
+          });
+        }
+      } else {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/Gitab/sw.js').catch(() => {});
+        });
+      }
+    }
   })();
-</script>
-
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-  <script>hljs.highlightAll();</script>
-
-  <script>
+  </script> <script>
   document.querySelectorAll('pre code').forEach(block => {
+    const pre = block.parentNode;
+    if (!pre || pre.querySelector('.copy-btn')) return;
+
+    const copySvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
+    const okSvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+
     const btn = document.createElement('button');
     btn.className = 'copy-btn';
-
-    const icon = document.createElement('img');
-    icon.src = "/Gitab/icone/copy.svg";
-    icon.alt = 'Copy';
-    btn.appendChild(icon);
-
-    block.parentNode.insertBefore(btn, block);
+    btn.setAttribute('aria-label', 'کپی کد');
+    btn.setAttribute('title', 'کپی کد');
+    btn.setAttribute('type', 'button');
+    btn.innerHTML = copySvg;
+    pre.appendChild(btn);
 
     btn.addEventListener('click', async () => {
-      await navigator.clipboard.writeText(block.textContent);
-      btn.classList.add('copied');
-      setTimeout(() => btn.classList.remove('copied'), 1500);
-    });
-  });
-  </script>
-
-  <script>
-  document.body.dataset.page = window.location.pathname;
-
-  const menuBtn = document.querySelector(".menu-toggle");
-  const nav = document.querySelector(".nav");
-
-  if (menuBtn && nav) {
-    menuBtn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      nav.classList.toggle("show");
-    });
-
-    document.addEventListener("click", (e) => {
-      const clickedInsideNav = nav.contains(e.target);
-      const clickedMenuButton = menuBtn.contains(e.target);
-      if (!clickedInsideNav && !clickedMenuButton) {
-        nav.classList.remove("show");
+      try {
+        await navigator.clipboard.writeText(block.textContent);
+        btn.classList.add('copied');
+        btn.innerHTML = okSvg;
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          btn.innerHTML = copySvg;
+        }, 1800);
+      } catch (err) {
+        console.error('Copy failed:', err);
       }
     });
-  }
-  </script>
-
-  <script>
-    document.getElementById('y').textContent = new Date().getFullYear();
-  </script>
-  <script>
-document.getElementById("openDonate").addEventListener("click", () => {
-  document.getElementById("donateModal").style.display = "block";
-});
-document.getElementById("closeDonate").addEventListener("click", () => {
-  document.getElementById("donateModal").style.display = "none";
-});
-document.querySelectorAll(".copy-btn").forEach(btn => {
-  btn.addEventListener("click", () => {
-    navigator.clipboard.writeText(btn.dataset.copy);
-  
-    setTimeout(() => (btn.textContent = "کپی"), 2000);
   });
-});
-</script>
+  </script> <script>
+  (() => {
+    const article = document.getElementById('chapterArticle');
+    if (!article) return;
 
-</body>
-</html>
+    const progressBar = document.getElementById('readingProgressBar');
+    if (progressBar) {
+      window.addEventListener('scroll', () => {
+        const docElem = document.documentElement;
+        const totalHeight = docElem.scrollHeight - docElem.clientHeight;
+        if (totalHeight > 0) {
+          const progress = (window.pageYOffset / totalHeight) * 100;
+          progressBar.style.width = Math.min(100, Math.max(0, progress)) + '%';
+        }
+      }, { passive: true });
+    }
+
+    const btt = document.getElementById('backToTopBtn');
+    if (btt) {
+      window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 250) {
+          btt.classList.add('visible');
+        } else {
+          btt.classList.remove('visible');
+        }
+      }, { passive: true });
+
+      btt.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+
+    article.querySelectorAll('img').forEach(img => {
+      if (!img.hasAttribute('loading')) img.loading = 'lazy';
+      if (!img.hasAttribute('decoding')) img.decoding = 'async';
+      const parent = img.parentElement;
+      if (parent && parent.tagName === 'P') {
+        parent.style.textAlign = 'center';
+      }
+
+      img.addEventListener('error', function() {
+        const src = this.getAttribute('src');
+        if (src && src.includes('assets/image/')) {
+          const parts = src.split('assets/image/');
+          const corrected = '/Gitab/books/book1/assets/image/' + parts[1];
+          if (this.src !== corrected) {
+            this.src = corrected;
+          }
+        }
+      });
+    });
+
+    article.querySelectorAll('p').forEach(p => {
+      const trimmed = p.innerText.trim();
+      if (trimmed.startsWith('💡') || trimmed.startsWith('نکته:')) {
+        p.classList.add('react-callout', 'callout-tip');
+      } else if (trimmed.startsWith('⚠️') || trimmed.startsWith('هشدار:')) {
+        p.classList.add('react-callout', 'callout-warning');
+      } else if (trimmed.startsWith('📌') || trimmed.startsWith('مهم:')) {
+        p.classList.add('react-callout', 'callout-important');
+      } else if (trimmed.startsWith('🔹') || trimmed.startsWith('🔸')) {
+        p.classList.add('react-callout', 'callout-note');
+      }
+    });
+  })();
+  </script> <script type="speculationrules">{"prefetch":[{"where":{"and":[{"href_matches":"/Gitab/*"},{"not":{"href_matches":"/Gitab/downloads/*"}},{"not":{"selector_matches":"[download], [target='_blank']"}}]},"eagerness":"moderate"}]}</script> <script>
+  (() => {
+    if (window.HTMLScriptElement && HTMLScriptElement.supports && HTMLScriptElement.supports('speculationrules')) return;
+    const seen = new Set([window.location.href]);
+    let count = 0;
+    const prefetchLink = (e) => {
+      if (count >= 12) return;
+      const a = e.target && e.target.closest ? e.target.closest('header a, .chapter-single-next-nav a, .syllabus-chapter-item a, .btn-hero-read, .btn-card-read') : null;
+      if (!a || !a.href || a.hasAttribute('download') || a.target === '_blank') return;
+      if (a.origin !== window.location.origin || a.pathname.includes('/downloads/')) return;
+      const clean = a.href.split('#')[0];
+      if (!clean || seen.has(clean)) return;
+      seen.add(clean);
+      count++;
+      const l = document.createElement('link');
+      l.rel = 'prefetch';
+      l.href = clean;
+      document.head.appendChild(l);
+    };
+    document.addEventListener('pointerenter', prefetchLink, { capture: true, passive: true });
+    document.addEventListener('touchstart', prefetchLink, { capture: true, passive: true });
+  })();
+  </script></body></html>

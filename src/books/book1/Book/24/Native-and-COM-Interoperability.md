@@ -8,13 +8,13 @@ title: یکپارچه‌سازی با Native و COM
 
 ---
 
-#### فراخوانی DLLهای Native 📦
+#### فراخوانی DLLهای Native
 
 **P/Invoke**، کوتاه شده‌ی **Platform Invocation Services**، به شما اجازه می‌دهد به توابع، ساختارها و callback‌ها در DLLهای غیرمدیریت‌شده (کتابخانه‌های مشترک در Unix) دسترسی پیدا کنید.
 
 برای مثال، تابع `MessageBox` که در DLL ویندوز **user32.dll** تعریف شده است به شکل زیر است:
 
-```c
+```csharp
 int MessageBox(HWND hWnd, LPCTSTR lpText, LPCTSTR lpCaption, UINT uType);
 ```
 
@@ -47,7 +47,7 @@ CLR شامل یک **marshaler** است که می‌داند چگونه پارا�
 
 ---
 
-#### Marshaling انواع و پارامترها ⚙️
+#### Marshaling انواع و پارامترها
 
 ##### Marshaling انواع رایج
 
@@ -124,17 +124,17 @@ string GetWindowsDirectory()
 
 اگر مطمئن نیستید چگونه یک متد خاص Win32 یا Unix را فراخوانی کنید، معمولاً با جستجوی نام تابع و `DllImport` در اینترنت، نمونه‌ای پیدا خواهید کرد. برای ویندوز، سایت [http://www.pinvoke.net](http://www.pinvoke.net) یک ویکی است که هدف آن مستندسازی تمام signatureهای Win32 است.
 
-### Marshaling کلاس‌ها و Structها 📦
+### Marshaling کلاس‌ها و Structها
 
 گاهی اوقات نیاز دارید یک **struct** را به یک متد غیرمدیریت‌شده ارسال کنید. برای مثال، تابع `GetSystemTime` در API ویندوز به شکل زیر تعریف شده است:
 
-```c
+```csharp
 void GetSystemTime(LPSYSTEMTIME lpSystemTime);
 ```
 
 `LPSYSTEMTIME` مطابق با این struct در C است:
 
-```c
+```csharp
 typedef struct _SYSTEMTIME {
   WORD wYear;
   WORD wMonth;
@@ -214,7 +214,7 @@ Attribute `StructLayout` همچنین اجازه می‌دهد **offsetهای ص
 
 ---
 
-#### In و Out Marshaling ↔️
+#### In و Out Marshaling ↔
 
 در مثال قبلی، `SystemTime` به صورت کلاس پیاده‌سازی شد. می‌توانستیم به جای آن struct انتخاب کنیم—مشروط بر اینکه `GetSystemTime` با پارامتر `ref` یا `out` اعلام شود:
 
@@ -237,7 +237,7 @@ static extern void GetSystemTime(out SystemTime t);
 static extern void Foo([In] int[] array);
 ```
 
-### Calling Conventions ⚙️
+### Calling Conventions
 
 متدهای غیرمدیریت‌شده آرگومان‌ها و مقادیر بازگشتی را از طریق **stack** و (اختیاری) **CPU registers** دریافت می‌کنند. از آنجا که چندین روش برای انجام این کار وجود دارد، پروتکل‌های مختلفی شکل گرفته‌اند که به آن‌ها **calling conventions** گفته می‌شود.
 
@@ -260,7 +260,7 @@ static extern void SomeFunc(...);
 
 ---
 
-### فراخوانی بازگشتی از کد غیرمدیریت‌شده 🔄
+### فراخوانی بازگشتی از کد غیرمدیریت‌شده
 
 C# همچنین اجازه می‌دهد توابع خارجی، کد C# را فراخوانی کنند، از طریق **callbacks**. دو روش برای پیاده‌سازی callbacks وجود دارد:
 
@@ -269,19 +269,19 @@ C# همچنین اجازه می‌دهد توابع خارجی، کد C# را ف
 
 برای مثال، تابع زیر در `User32.dll` ویندوز، تمام handles پنجره‌های سطح بالا را enumerate می‌کند:
 
-```c
+```csharp
 BOOL EnumWindows(WNDENUMPROC lpEnumFunc, LPARAM lParam);
 ```
 
 `WNDENUMPROC` یک callback است که برای هر handle پنجره به ترتیب فراخوانی می‌شود (یا تا زمانی که callback `false` بازگرداند). تعریف آن به شکل زیر است:
 
-```c
+```csharp
 BOOL CALLBACK EnumWindowsProc(HWND hwnd, LPARAM lParam);
 ```
 
 ---
 
-#### Callbacks با Function Pointers 🔹
+#### Callbacks با Function Pointers
 
 از **C# 9**، ساده‌ترین و سریع‌ترین گزینه—وقتی callback شما یک متد **static** است—استفاده از function pointer است. در مورد callback `WNDENUMPROC`، می‌توان از function pointer زیر استفاده کرد:
 
@@ -314,7 +314,7 @@ unsafe
 
 ---
 
-#### UnmanagedCallersOnly ⚡
+#### UnmanagedCallersOnly
 
 می‌توانید با اعمال **unmanaged** به declaration function pointer و attribute `[UnmanagedCallersOnly]` به متد callback، عملکرد را بهبود دهید:
 
@@ -353,7 +353,7 @@ unsafe
 [StructLayout(LayoutKind.Sequential, CharSet=CharSet.Unicode)]
 ```
 
-### Nondefault Calling Conventions ⚙️
+### Nondefault Calling Conventions
 
 به طور پیش‌فرض، کامپایلر فرض می‌کند که callback غیرمدیریت‌شده از **calling convention پیش‌فرض پلتفرم** پیروی می‌کند. اگر این‌گونه نباشد، می‌توانید به صورت صریح calling convention آن را با استفاده از پارامتر `CallConvs` در attribute `[UnmanagedCallersOnly]` مشخص کنید:
 
@@ -377,7 +377,7 @@ delegate* unmanaged[Stdcall]<IntPtr, IntPtr, byte> hWnd, IntPtr lParam);
 ![Conventions-UsedThis-Book](../../../assets/image/24/Table-24-1.jpeg)
 </div>
 
-### Callbacks با Delegates 🔄
+### Callbacks با Delegates
 
 می‌توان callbacks غیرمدیریت‌شده را با استفاده از **delegates** نیز پیاده‌سازی کرد. این روش در تمام نسخه‌های C# کار می‌کند و اجازه می‌دهد callbackهایی که به متدهای **instance** اشاره دارند نیز استفاده شوند.
 
@@ -418,7 +418,7 @@ delegate void MyCallback(int foo, short bar);
 
 ---
 
-### شبیه‌سازی C Union 🔧
+### شبیه‌سازی C Union
 
 هر فیلد در یک struct فضای کافی برای ذخیره داده خود دارد.
 فرض کنید structی شامل یک `int` و یک `char` داریم. `int` احتمالاً از offset صفر شروع می‌شود و حداقل چهار بایت فضا دارد. بنابراین `char` حداقل از offset ۴ شروع می‌شود. اگر به هر دلیلی `char` از offset ۲ شروع شود، مقدار `int` تغییر می‌کند. عجیب است، اما زبان C نوعی variation از struct به نام **union** دارد که دقیقاً همین کار را انجام می‌دهد.
@@ -464,7 +464,7 @@ n.PackedMsg = 3328010;
 Console.WriteLine(n.Note);       // 200
 ```
 
-### Shared Memory 🗂️
+### Shared Memory
 
 **Memory-mapped files** یا **shared memory** قابلیتی در ویندوز است که به چندین فرآیند روی یک کامپیوتر اجازه می‌دهد داده‌ها را با هم به اشتراک بگذارند. Shared memory بسیار سریع است و بر خلاف **pipes**، امکان **دسترسی تصادفی** به داده‌های مشترک را فراهم می‌کند. در فصل ۱۵ دیدیم که چگونه می‌توان از کلاس `MemoryMappedFile` برای دسترسی به فایل‌های memory-mapped استفاده کرد؛ اما عبور از این کلاس و فراخوانی مستقیم متدهای Win32، راهی عالی برای نشان دادن **P/Invoke** است.
 
@@ -586,7 +586,7 @@ using (SharedMem sm = new SharedMem("MyShare", true, 1000))
 
 روش بهتر این است که داده‌های مشترک را به صورت یک **struct** تعریف کنید و سپس آن را مستقیماً در حافظه مشترک map کنید. این موضوع در بخش بعدی توضیح داده خواهد شد.
 
-### Mapping a Struct to Unmanaged Memory 🧩
+### Mapping a Struct to Unmanaged Memory
 
 می‌توان یک **struct** با `StructLayout` از نوع `Sequential` یا `Explicit` را مستقیماً به حافظه غیرمدیریت‌شده map کرد. به مثال زیر توجه کنید:
 
@@ -754,7 +754,7 @@ static unsafe void Main()
 
 همچنین، در تعامل پیچیده‌تر با فیلدها، احتمالاً نیاز است دسترسی به آن‌ها را با یک **cross-process Mutex** محافظت کنیم، درست همانند استفاده از **lock** برای محافظت از دسترسی به فیلدها در برنامه‌های multithreaded. در فصل ۲۱ به طور کامل درباره thread safety صحبت کرده‌ایم.
 
-### fixed و fixed {...} 🔒
+### fixed و fixed {...}
 
 یکی از محدودیت‌های **map کردن مستقیم struct به حافظه** این است که struct تنها می‌تواند شامل **unmanaged types** باشد. اگر نیاز دارید داده‌ای از نوع **string** را به اشتراک بگذارید، باید به جای آن از **آرایه‌ای از کاراکترهای ثابت** استفاده کنید. این یعنی تبدیل دستی بین string و آرایه. مثال:
 
@@ -802,7 +802,7 @@ object obj = new MySharedData();
 
 ---
 
-### COM Interoperability 🖥️
+### COM Interoperability
 
 **Runtime .NET** پشتیبانی ویژه‌ای از COM ارائه می‌دهد و اجازه می‌دهد **COM objects** از .NET استفاده شوند و بالعکس. COM تنها در Windows در دسترس است.
 
@@ -873,7 +873,7 @@ public interface IFoo2 { string Test(string s); }
 
 * **IDispatch**: برای برنامه‌نویسی داینامیک (مانند scripting و automation). امکان فراخوانی late-bound مشابه dynamic در C# را فراهم می‌کند (برای simple invocations).
 
-### فراخوانی یک کامپوننت COM از C# 🖥️
+### فراخوانی یک کامپوننت COM از C#
 
 CLR در **پشتیبانی داخلی از COM** به شما اجازه نمی‌دهد مستقیماً با `IUnknown` و `IDispatch` کار کنید. به جای آن، شما با **CLR objects** کار می‌کنید و runtime فراخوانی‌های شما را به دنیای COM **از طریق Runtime-Callable Wrappers (RCWs)** منتقل می‌کند.
 
@@ -1005,7 +1005,7 @@ range.Font.FontStyle = "Bold";
 
 > mapping variant → dynamic پیش‌فرض است و وابسته به فعال بودن Embed Interop Types می‌باشد.
 >
-### جاسازی Interop Types در C# 🧩
+### جاسازی Interop Types در C#
 
 در گذشته، C# برای فراخوانی کامپوننت‌های COM نیاز داشت که **Interop Assemblies** را به پروژه اضافه کند (مثلاً با `tlbimp.exe`). اما این کار مشکلاتی داشت:
 
@@ -1032,7 +1032,7 @@ range.Font.FontStyle = "Bold";
 
 ---
 
-### Type Equivalence ⚖️
+### Type Equivalence
 
 CLR از **Type Equivalence** برای linked interop types پشتیبانی می‌کند:
 
@@ -1120,7 +1120,7 @@ Wscript.Echo result
 
 ---
 
-### COM بدون رجیستری (Registry-Free COM) 🗂️
+### COM بدون رجیستری (Registry-Free COM)
 
 * به جای ثبت COM object در رجیستری، از **manifest فایل** استفاده می‌شود.
 * فعال‌سازی در `.csproj`:

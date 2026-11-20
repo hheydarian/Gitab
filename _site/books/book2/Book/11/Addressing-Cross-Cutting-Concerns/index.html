@@ -1,154 +1,21 @@
-
-
-<!doctype html>
-<html lang="fa" dir="rtl">
-<head>
-  <meta charset="utf-8">
-  <link rel="icon" type="image/png" href="/Gitab/favicon.png">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Cross-Cutting Concernsه</title>
-  <meta name="description" content="ترجمه‌های فارسی کتاب‌های فنی — سریع، مینیمال و قابل اتکا.">
-
-  <!-- استایل‌ها -->
-  <link rel="stylesheet" href="/Gitab/styles/main.css">
-  <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
-
-  <style>
-  @font-face {
-    font-family: 'Vazir';
-    src: url('/Gitab/fonts/Vazir-FD-WOL.ttf') format('truetype');
-    font-display: swap;
-  }
-  @font-face {
-    font-family: "Lalezar";
-    src: url('fonts/Lalezar.ttf') format('truetype');
-    font-display: swap;
-}
-  body {
-    font-family: 'Vazir', sans-serif;
-  }
-  </style>
-</head>
-
-<body>
-  <!-- هدر مشترک -->
-  <header class="header">
-    <div class="container nav-wrap">
-      <a href="/Gitab/" class="brand">
-        <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="26" height="26">
-        <span>Gitab</span>
-      </a>
-
-       <nav class="nav">
-         <a href="/Gitab/" >خانه</a>
-         <a href="/Gitab/books/list-books" >کتاب‌ها</a>
-         <a href="/Gitab/giter.html" >دوره ها</a>
-          <!-- 
-         <a href="/Gitab/translator.html" >مترجمین</a>
-           -->
-       </nav>
-
-      <div class="nav-actions">
-        <button id="themeToggle" class="icon-btn theme-btn" data-icon="moon" aria-label="تغییر تم">
-          <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن">
-          <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک">
-        </button>
-
-        <a class="icon-btn" href="https://github.com/hheydarian/Gitab" target="_blank" title="GitHub">
-          <img src="/Gitab/icone/github.svg" alt="GitHub">
-        </a>
-
-        <!-- دکمه منو برای موبایل -->
-        <button class="menu-toggle" aria-label="منو">
-          <img src="/Gitab/icone/menu.svg" alt="menu">
-        </button>
-      </div>
-    </div>
-  </header>
-
-  
-  <main class="site-main book-page">
-    <h1>فصل یازدهم:🎯 <strong>پرداختن به مسائل فراگیر (Cross-Cutting Concerns)</strong></h1>
-<p>وقتی که می‌خواهید <strong>کد تمیز (Clean Code)</strong> بنویسید، دو نوع <strong>مسئله (Concern)</strong> وجود دارد که باید به آن‌ها توجه کنید:</p>
-<ol>
-<li><strong>مسائل اصلی (Core Concerns):</strong> دلایل ایجاد نرم‌افزار و علت توسعه آن هستند.</li>
-<li><strong>مسائل فراگیر (Cross-Cutting Concerns):</strong> مسائلی که بخشی از نیازمندی‌های کسب‌وکار نیستند اما در تمام بخش‌های کد باید به آن‌ها توجه شود و با مسائل اصلی در ارتباط هستند.</li>
-</ol>
-<p>این موضوع را می‌توان به شکل زیر در نمودار نشان داد: 📊</p>
-<div align="center">
-<p><img src="../../../assets/image/11/Table%2011-1.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<p>این فصل بر <strong>مسائل فراگیر (Cross-Cutting Concerns)</strong> تمرکز دارد و هدف ما ساخت یک <strong>کتابخانه کلاس قابل استفاده مجدد (Reusable Class Library)</strong> است که می‌توانید آن را به دلخواه خود تغییر دهید یا گسترش دهید.</p>
-<p><strong>مسائل فراگیر</strong> شامل موارد زیر هستند:</p>
-<ul>
-<li>مدیریت پیکربندی (Configuration Management) ⚙️</li>
-<li>ثبت وقایع (Logging) 📝</li>
-<li>حسابرسی (Auditing) 📊</li>
-<li>امنیت (Security) 🔒</li>
-<li>اعتبارسنجی (Validation) ✔️</li>
-<li>مدیریت استثناها (Exception Handling) ⚠️</li>
-<li>ابزارسنجی (Instrumentation) 🛠️</li>
-<li>تراکنش‌ها (Transactions) 💳</li>
-<li>استفاده بهینه از منابع (Resource Pooling) 🏗️</li>
-<li>کشینگ (Caching) 🗄️</li>
-<li>چندنخی و همزمانی (Threading and Concurrency) 🧵</li>
-</ul>
-<p>برای ساخت <strong>کتابخانه قابل استفاده مجدد</strong>، از <strong>الگوی دکوراتور (Decorator Pattern)</strong> و <strong>چارچوب PostSharp Aspect</strong> استفاده خواهیم کرد که در زمان کامپایل به پروژه تزریق می‌شود.</p>
-<p>همچنین با مطالعه این فصل خواهید دید که <strong>برنامه‌نویسی مبتنی بر Attribute</strong> چگونه باعث می‌شود:</p>
-<ul>
-<li>حجم کدهای تکراری (Boilerplate Code) کاهش یابد،</li>
-<li>کد کوتاه‌تر، خواناتر و راحت‌تر برای نگهداری و توسعه باشد.</li>
-</ul>
-<p>در نتیجه، تنها <strong>کدهای ضروری کسب‌وکار</strong> در متدهای شما باقی می‌ماند و کدهای تکراری مدیریت می‌شوند.</p>
-<p>بسیاری از این ایده‌ها را قبلاً هم مطرح کرده‌ایم، اما دوباره ذکر می‌کنیم زیرا <strong>مسائل فراگیر</strong> هستند.</p>
-<p>در این فصل، موضوعات زیر را پوشش می‌دهیم:</p>
-<ol>
-<li>الگوی دکوراتور (Decorator Pattern) 🏷️</li>
-<li>الگوی پراکسی (Proxy Pattern) 🛡️</li>
-<li>برنامه‌نویسی مبتنی بر جنبه (Aspect-Oriented Programming – AOP) با PostSharp ⚙️</li>
-<li>پروژه – کتابخانه قابل استفاده مجدد برای مسائل فراگیر</li>
-</ol>
-<p><strong>در پایان این فصل، شما توانایی‌های زیر را کسب خواهید کرد:</strong></p>
-<ul>
-<li>پیاده‌سازی الگوی دکوراتور.</li>
-<li>پیاده‌سازی الگوی پراکسی.</li>
-<li>اعمال AOP با استفاده از PostSharp.</li>
-<li>ساخت کتابخانه AOP قابل استفاده مجدد که مسائل فراگیر شما را مدیریت کند.</li>
-</ul>
-<p><strong>پیش‌نیازهای فنی:</strong><br>
-برای بهره‌برداری کامل از این فصل، به <strong>Visual Studio 2019</strong> و <strong>PostSharp</strong> نیاز دارید.<br>
-برای دریافت فایل‌های کد این فصل، به لینک زیر مراجعه کنید:<br>
-<a href="https://github.com/PacktPublishing/Clean-Code-in-C-/tree/master/CH11">https://github.com/PacktPublishing/Clean-Code-in-C-/tree/master/CH11</a></p>
-<p>بیایید با <strong>الگوی دکوراتور</strong> شروع کنیم:</p>
-<hr>
-<h3>الگوی دکوراتور (Decorator Pattern) 🏷️</h3>
-<p>الگوی طراحی دکوراتور یک <strong>الگوی ساختاری (Structural Pattern)</strong> است که برای <strong>افزودن قابلیت‌های جدید به یک شیء موجود بدون تغییر ساختار آن</strong> استفاده می‌شود.<br>
-در این الگو، <strong>کلاس اصلی در کلاس دکوراتور قرار می‌گیرد</strong> و رفتارها و عملیات جدید در زمان اجرا به شیء اضافه می‌شوند.</p>
-<div align="center">
-<p><img src="../../../assets/image/11/Table%2011-2.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<p>رابطه <strong>Component</strong> و اعضایی که دارد، توسط کلاس‌های <strong>ConcreteComponent</strong> و <strong>Decorator</strong> پیاده‌سازی می‌شود.</p>
-<ul>
-<li>کلاس <strong>ConcreteComponent</strong> رابط <strong>Component</strong> را پیاده‌سازی می‌کند.</li>
-<li>کلاس <strong>Decorator</strong> یک کلاس <strong>انتزاعی (Abstract Class)</strong> است که رابط <strong>Component</strong> را پیاده‌سازی کرده و <strong>ارجاع به یک نمونه از Component</strong> را نگه می‌دارد.</li>
-<li>کلاس <strong>Decorator</strong> به‌عنوان کلاس پایه برای دکوراتورها عمل می‌کند.</li>
-<li>کلاس <strong>ConcreteDecorator</strong> از کلاس <strong>Decorator</strong> ارث‌بری می‌کند و یک دکوراتور برای Componentها فراهم می‌کند.</li>
-</ul>
-<hr>
-<p>حال یک مثال می‌نویسیم که یک <strong>عملیات را در یک بلاک try/catch</strong> قرار می‌دهد.<br>
-در هر دو بخش <strong>try</strong> و <strong>catch</strong>، یک رشته به کنسول چاپ خواهد شد.</p>
-<p>1️⃣ یک <strong>Console Application</strong> در .NET 4.8 به نام <strong>CH10_AddressingCrossCuttingConcerns</strong> بسازید.<br>
-2️⃣ یک فولدر به نام <strong>DecoratorPattern</strong> اضافه کنید.<br>
-3️⃣ یک <strong>interface</strong> جدید به نام <strong>IComponent</strong> اضافه کنید:</p>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title">IComponent</span> {
+<!doctype html><html lang="fa" dir="rtl"> <head><script>
+    if (window.location.pathname.startsWith('/gitab/')) {
+      window.location.replace(window.location.pathname.replace(/^\/gitab\//i, '/Gitab/') + window.location.search + window.location.hash);
+    }
+    (() => {
+      try {
+        const t = localStorage.getItem('gitab-theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', t);
+        document.documentElement.dataset.colorMode = t;
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        document.documentElement.dataset.colorMode = 'dark';
+      }
+    })();
+  </script> <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5"> <title>Cross-Cutting Concernsه</title><meta name="description" content="Cross-Cutting Concernsه — مطالعه آنلاین و رایگان از کتاب «کدنویسی تمیز در سی‌شارپ» (Clean Code in C#) اثر Jason Alls با ترجمه حامد حیدریان در گیتاب."> <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"><meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"> <meta name="theme-color" content="#090d16"><meta name="referrer" content="strict-origin-when-cross-origin"> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https:; frame-src https://www.youtube.com https://www.youtube-nocookie.com https://maps.google.com https://www.google.com; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self';"><link rel="icon" type="image/png" href="/Gitab/favicon.png"> <link rel="canonical" href="https://hheydarian.github.io/Gitab/books/book2/Book/11/Addressing-Cross-Cutting-Concerns/"><link rel="alternate" hreflang="fa" href="https://hheydarian.github.io/Gitab/books/book2/Book/11/Addressing-Cross-Cutting-Concerns/"> <link rel="alternate" hreflang="x-default" href="https://hheydarian.github.io/Gitab/books/book2/Book/11/Addressing-Cross-Cutting-Concerns/"><link rel="alternate" type="text/plain" title="LLMs.txt" href="/Gitab/llms.txt"> <link rel="sitemap" type="application/xml" title="Sitemap" href="/Gitab/sitemap.xml"><meta property="og:locale" content="fa_IR"> <meta property="og:type" content="article"><meta property="og:site_name" content="گیتاب | Gitab"> <meta property="og:title" content="Cross-Cutting Concernsه"><meta property="og:description" content="Cross-Cutting Concernsه — مطالعه آنلاین و رایگان از کتاب «کدنویسی تمیز در سی‌شارپ» (Clean Code in C#) اثر Jason Alls با ترجمه حامد حیدریان در گیتاب."> <meta property="og:url" content="https://hheydarian.github.io/Gitab/books/book2/Book/11/Addressing-Cross-Cutting-Concerns/"><meta property="og:image" content="https://hheydarian.github.io/Gitab/images/clean-code-csharp/Cover.jpg"> <meta property="og:image:alt" content="Cross-Cutting Concernsه"><meta name="twitter:card" content="summary_large_image"> <meta name="twitter:title" content="Cross-Cutting Concernsه"><meta name="twitter:description" content="Cross-Cutting Concernsه — مطالعه آنلاین و رایگان از کتاب «کدنویسی تمیز در سی‌شارپ» (Clean Code in C#) اثر Jason Alls با ترجمه حامد حیدریان در گیتاب."> <meta name="twitter:image" content="https://hheydarian.github.io/Gitab/images/clean-code-csharp/Cover.jpg"><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://hheydarian.github.io/Gitab/#organization","name":"گیتاب | Gitab","alternateName":"Gitab","url":"https://hheydarian.github.io/Gitab/","logo":{"@type":"ImageObject","url":"https://hheydarian.github.io/Gitab/favicon.png"},"sameAs":["https://github.com/hheydarian/Gitab"]},{"@type":"WebSite","@id":"https://hheydarian.github.io/Gitab/#website","url":"https://hheydarian.github.io/Gitab/","name":"گیتاب | Gitab","inLanguage":"fa-IR","publisher":{"@id":"https://hheydarian.github.io/Gitab/#organization"},"potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://hheydarian.github.io/Gitab/books/list-books/?q={search_term_string}"},"query-input":"required name=search_term_string"}},{"@type":"WebPage","@id":"https://hheydarian.github.io/Gitab/books/book2/Book/11/Addressing-Cross-Cutting-Concerns/#webpage","url":"https://hheydarian.github.io/Gitab/books/book2/Book/11/Addressing-Cross-Cutting-Concerns/","name":"Cross-Cutting Concernsه","description":"Cross-Cutting Concernsه — مطالعه آنلاین و رایگان از کتاب «کدنویسی تمیز در سی‌شارپ» (Clean Code in C#) اثر Jason Alls با ترجمه حامد حیدریان در گیتاب.","inLanguage":"fa-IR","isPartOf":{"@id":"https://hheydarian.github.io/Gitab/#website"}},{"@type":"TechArticle","headline":"Cross-Cutting Concernsه","description":"Cross-Cutting Concernsه — مطالعه آنلاین و رایگان از کتاب «کدنویسی تمیز در سی‌شارپ» (Clean Code in C#) اثر Jason Alls با ترجمه حامد حیدریان در گیتاب.","url":"https://hheydarian.github.io/Gitab/books/book2/Book/11/Addressing-Cross-Cutting-Concerns/","inLanguage":"fa-IR","isAccessibleForFree":true,"author":{"@type":"Person","name":"Jason Alls"},"translator":{"@type":"Person","name":"حامد حیدریان"},"isPartOf":{"@type":"Book","name":"کدنویسی تمیز در سی‌شارپ","alternateName":"Clean Code in C#","url":"https://hheydarian.github.io/Gitab/books/book2/"}}]}</script> <link rel="preload" href="/Gitab/fonts/Vazirmatn.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/Gitab/styles/main.css?v=2.4" as="style"> <link rel="preload" href="/Gitab/styles/gitab-modern.css?v=2.5" as="style"><style>@font-face{font-family:'Lalezar';src:url('/Gitab/fonts/Lalezar.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}@font-face{font-family:'Vazirmatn';src:url('/Gitab/fonts/Vazirmatn.woff2') format('woff2');font-weight:100 900;font-style:normal;font-display:swap}html,body,button,input,optgroup,select,textarea,.filter-pill{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}input::placeholder,textarea::placeholder{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}</style> <link rel="stylesheet" href="/Gitab/styles/main.css?v=2.4"><link rel="stylesheet" href="/Gitab/styles/gitab-modern.css?v=2.5"> <link rel="stylesheet" href="/Gitab/styles/vendor/github-dark.min.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="/Gitab/styles/vendor/github-dark.min.css"></noscript></head> <body><header class="header"> <div class="container nav-wrap"><a href="/Gitab/" class="brand" aria-label="صفحه اصلی گیتاب"> <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="30" height="30" decoding="async"> <span class="brand-text">Gitab</span> </a> <nav class="nav" id="mainNav"><a href="/Gitab/" >خانه</a> <a href="/Gitab/books/list-books" aria-current="page">کتاب‌ها</a> <a href="/Gitab/courses/" >دوره‌ها</a> <a href="/Gitab/translator.html" >مترجمین</a></nav> <div class="nav-actions"><button id="themeToggle" class="theme-toggle-btn" aria-label="تغییر تم" title="تغییر تم"> <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن" width="18" height="18" decoding="async" style="display:none"> <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک" width="18" height="18" decoding="async"> </button> <a class="btn-github-pill" href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" title="مشاهده سورس گیتاب در گیت‌هاب"> <img src="/Gitab/icone/github.svg" alt="GitHub" width="16" height="16" decoding="async"> <span>گیت‌هاب</span> </a> <button class="mobile-menu-btn" id="mobileMenuBtn" type="button" aria-label="باز کردن منو" aria-expanded="false"> <svg class="mob-icon-open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="4" y1="7" x2="20" y2="7"></line> <line x1="4" y1="12" x2="20" y2="12"></line> <line x1="4" y1="17" x2="14" y2="17"></line> </svg> <svg class="mob-icon-close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="18" y1="6" x2="6" y2="18"></line> <line x1="6" y1="6" x2="18" y2="18"></line> </svg> </button></div> </div><div class="mobile-drawer" id="mobileDrawer" aria-hidden="true"> <div class="mobile-drawer-inner"><div class="mobile-drawer-section-label">ناوبری سریع</div><nav class="mobile-drawer-links" aria-label="منوی موبایل"> <a href="/Gitab/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M3 10.5 12 3l9 7.5"></path> <path d="M5 9.5V20a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V9.5"></path> </svg> </span> <span class="mob-nav-text">صفحه نخست</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/books/list-books" class="mobile-drawer-link active" aria-current="page"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path> </svg> </span> <span class="mob-nav-text">کتابخانه و فهرست کتاب‌ها</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/courses/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path> <path d="M6 12v5c3 3 9 3 12 0v-5"></path> </svg> </span> <span class="mob-nav-text">دوره‌های آموزشی</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/translator.html" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path> <circle cx="9" cy="7" r="4"></circle> <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path> <path d="M16 3.13a4 4 0 0 1 0 7.75"></path> </svg> </span> <span class="mob-nav-text">مترجمین و همکاران</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> </nav><div class="mobile-drawer-divider"></div><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" class="mobile-drawer-link mobile-drawer-gh"> <span class="mob-nav-icon" aria-hidden="true"> <img src="/Gitab/icone/github.svg" alt="" width="17" height="17" loading="lazy" decoding="async"> </span> <span class="mob-nav-text">مخزن گیت‌هاب پروژه</span> <span class="mob-nav-ext" aria-hidden="true">↗</span> </a> </div></div> </header><div class="reading-progress-track"> <div class="reading-progress-fill" id="readingProgressBar"></div></div> <main class="site-main chapter-reading-page"><div class="chapter-page-wrapper"> <nav class="chapter-clean-breadcrumb" aria-label="مسیر راهنما" dir="rtl"><a href="/Gitab/">خانه</a> <span class="bc-sep" aria-hidden="true">/</span> <a href="/Gitab/books/list-books/">کتاب‌ها</a> <span class="bc-sep" aria-hidden="true">/</span> <a href="/Gitab/books/book2/"><bdi>کدنویسی تمیز در سی‌شارپ</bdi></a> <span class="bc-sep" aria-hidden="true">/</span> <span class="bc-current-leaf"><bdi>Cross-Cutting Concernsه</bdi></span></nav> <article class="chapter-prose-container markdown-body" id="chapterArticle" dir="rtl"><h1>فصل یازدهم: <strong>پرداختن به مسائل فراگیر (Cross-Cutting Concerns)</strong></h1><p>وقتی که می‌خواهید <strong>کد تمیز (Clean Code)</strong> بنویسید، دو نوع <strong>مسئله (Concern)</strong> وجود دارد که باید به آن‌ها توجه کنید:</p><ol> <li><strong>مسائل اصلی (Core Concerns):</strong> دلایل ایجاد نرم‌افزار و علت توسعه آن هستند.</li><li><strong>مسائل فراگیر (Cross-Cutting Concerns):</strong> مسائلی که بخشی از نیازمندی‌های کسب‌وکار نیستند اما در تمام بخش‌های کد باید به آن‌ها توجه شود و با مسائل اصلی در ارتباط هستند.</li></ol> <p>این موضوع را می‌توان به شکل زیر در نمودار نشان داد:</p><div align="center"> <p><img src="../../../assets/image/11/Table%2011-1.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <p>این فصل بر <strong>مسائل فراگیر (Cross-Cutting Concerns)</strong> تمرکز دارد و هدف ما ساخت یک <strong>کتابخانه کلاس قابل استفاده مجدد (Reusable Class Library)</strong> است که می‌توانید آن را به دلخواه خود تغییر دهید یا گسترش دهید.</p><p><strong>مسائل فراگیر</strong> شامل موارد زیر هستند:</p><ul> <li>مدیریت پیکربندی (Configuration Management)</li><li>ثبت وقایع (Logging)</li><li>حسابرسی (Auditing)</li><li>امنیت (Security)</li><li>اعتبارسنجی (Validation)</li><li>مدیریت استثناها (Exception Handling)</li><li>ابزارسنجی (Instrumentation)</li><li>تراکنش‌ها (Transactions)</li><li>استفاده بهینه از منابع (Resource Pooling)</li><li>کشینگ (Caching)</li><li>چندنخی و همزمانی (Threading and Concurrency)</li></ul> <p>برای ساخت <strong>کتابخانه قابل استفاده مجدد</strong>، از <strong>الگوی دکوراتور (Decorator Pattern)</strong> و <strong>چارچوب PostSharp Aspect</strong> استفاده خواهیم کرد که در زمان کامپایل به پروژه تزریق می‌شود.</p><p>همچنین با مطالعه این فصل خواهید دید که <strong>برنامه‌نویسی مبتنی بر Attribute</strong> چگونه باعث می‌شود:</p><ul> <li>حجم کدهای تکراری (Boilerplate Code) کاهش یابد،</li><li>کد کوتاه‌تر، خواناتر و راحت‌تر برای نگهداری و توسعه باشد.</li></ul> <p>در نتیجه، تنها <strong>کدهای ضروری کسب‌وکار</strong> در متدهای شما باقی می‌ماند و کدهای تکراری مدیریت می‌شوند.</p><p>بسیاری از این ایده‌ها را قبلاً هم مطرح کرده‌ایم، اما دوباره ذکر می‌کنیم زیرا <strong>مسائل فراگیر</strong> هستند.</p><p>در این فصل، موضوعات زیر را پوشش می‌دهیم:</p><ol> <li>الگوی دکوراتور (Decorator Pattern)</li><li>الگوی پراکسی (Proxy Pattern)</li><li>برنامه‌نویسی مبتنی بر جنبه (Aspect-Oriented Programming – AOP) با PostSharp</li><li>پروژه – کتابخانه قابل استفاده مجدد برای مسائل فراگیر</li></ol> <p><strong>در پایان این فصل، شما توانایی‌های زیر را کسب خواهید کرد:</strong></p><ul> <li>پیاده‌سازی الگوی دکوراتور.</li><li>پیاده‌سازی الگوی پراکسی.</li><li>اعمال AOP با استفاده از PostSharp.</li><li>ساخت کتابخانه AOP قابل استفاده مجدد که مسائل فراگیر شما را مدیریت کند.</li></ul> <p><strong>پیش‌نیازهای فنی:</strong><br> برای بهره‌برداری کامل از این فصل، به <strong>Visual Studio 2019</strong> و <strong>PostSharp</strong> نیاز دارید.<br> برای دریافت فایل‌های کد این فصل، به لینک زیر مراجعه کنید:<br><a href="https://github.com/PacktPublishing/Clean-Code-in-C-/tree/master/CH11">https://github.com/PacktPublishing/Clean-Code-in-C-/tree/master/CH11</a></p><p>بیایید با <strong>الگوی دکوراتور</strong> شروع کنیم:</p><hr> <h3>الگوی دکوراتور (Decorator Pattern)</h3><p>الگوی طراحی دکوراتور یک <strong>الگوی ساختاری (Structural Pattern)</strong> است که برای <strong>افزودن قابلیت‌های جدید به یک شیء موجود بدون تغییر ساختار آن</strong> استفاده می‌شود.<br> در این الگو، <strong>کلاس اصلی در کلاس دکوراتور قرار می‌گیرد</strong> و رفتارها و عملیات جدید در زمان اجرا به شیء اضافه می‌شوند.</p><div align="center"> <p><img src="../../../assets/image/11/Table%2011-2.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <p>رابطه <strong>Component</strong> و اعضایی که دارد، توسط کلاس‌های <strong>ConcreteComponent</strong> و <strong>Decorator</strong> پیاده‌سازی می‌شود.</p><ul> <li>کلاس <strong>ConcreteComponent</strong> رابط <strong>Component</strong> را پیاده‌سازی می‌کند.</li><li>کلاس <strong>Decorator</strong> یک کلاس <strong>انتزاعی (Abstract Class)</strong> است که رابط <strong>Component</strong> را پیاده‌سازی کرده و <strong>ارجاع به یک نمونه از Component</strong> را نگه می‌دارد.</li><li>کلاس <strong>Decorator</strong> به‌عنوان کلاس پایه برای دکوراتورها عمل می‌کند.</li><li>کلاس <strong>ConcreteDecorator</strong> از کلاس <strong>Decorator</strong> ارث‌بری می‌کند و یک دکوراتور برای Componentها فراهم می‌کند.</li></ul> <hr><p>حال یک مثال می‌نویسیم که یک <strong>عملیات را در یک بلاک try/catch</strong> قرار می‌دهد.<br> در هر دو بخش <strong>try</strong> و <strong>catch</strong>، یک رشته به کنسول چاپ خواهد شد.</p><p>1⃣ یک <strong>Console Application</strong> در .NET 4.8 به نام <strong>CH10_AddressingCrossCuttingConcerns</strong> بسازید.<br> 2⃣ یک فولدر به نام <strong>DecoratorPattern</strong> اضافه کنید.<br> 3⃣ یک <strong>interface</strong> جدید به نام <strong>IComponent</strong> اضافه کنید:</p><pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title">IComponent</span> {
    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Operation</span>()</span>;
 }
-</code></pre>
-<p>برای ساده نگه‌داشتن مثال، این interface فقط یک عملیات از نوع void دارد.</p>
-<hr>
-<p>حالا که interface آماده است، یک <strong>کلاس انتزاعی</strong> اضافه می‌کنیم که آن را پیاده‌سازی کند:</p>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Decorator</span> : <span class="hljs-title">IComponent</span> {
+</code></pre> <p>برای ساده نگه‌داشتن مثال، این interface فقط یک عملیات از نوع void دارد.</p><hr> <p>حالا که interface آماده است، یک <strong>کلاس انتزاعی</strong> اضافه می‌کنیم که آن را پیاده‌سازی کند:</p><pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Decorator</span> : <span class="hljs-title">IComponent</span> {
     <span class="hljs-keyword">private</span> IComponent _component;
 
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Decorator</span>(<span class="hljs-params">IComponent component</span>)</span> {
@@ -159,23 +26,12 @@
         _component.Operation();
     }
 }
-</code></pre>
-<ul>
-<li>متغیر عضو <strong>_component</strong> که شیء IComponent را نگه می‌دارد، از طریق <strong>سازنده (Constructor)</strong> مقداردهی می‌شود.</li>
-<li>متد <strong>Operation()</strong> به صورت <strong>virtual</strong> تعریف شده تا در کلاس‌های مشتق شده بتوان آن را بازنویسی کرد.</li>
-</ul>
-<hr>
-<p>حال کلاس <strong>ConcreteComponent</strong> را می‌سازیم:</p>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">ConcreteComponent</span> : <span class="hljs-title">IComponent</span> {
+</code></pre> <ul><li>متغیر عضو <strong>_component</strong> که شیء IComponent را نگه می‌دارد، از طریق <strong>سازنده (Constructor)</strong> مقداردهی می‌شود.</li><li>متد <strong>Operation()</strong> به صورت <strong>virtual</strong> تعریف شده تا در کلاس‌های مشتق شده بتوان آن را بازنویسی کرد.</li></ul> <hr><p>حال کلاس <strong>ConcreteComponent</strong> را می‌سازیم:</p><pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">ConcreteComponent</span> : <span class="hljs-title">IComponent</span> {
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Operation</span>()</span> {
         <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> NotImplementedException();
     }
 }
-</code></pre>
-<p>همان‌طور که می‌بینید، این کلاس فقط یک عملیات دارد که <strong>NotImplementedException</strong> پرتاب می‌کند.</p>
-<hr>
-<p>در ادامه کلاس <strong>ConcreteDecorator</strong> را می‌نویسیم:</p>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">ConcreteDecorator</span> : <span class="hljs-title">Decorator</span> {
+</code></pre> <p>همان‌طور که می‌بینید، این کلاس فقط یک عملیات دارد که <strong>NotImplementedException</strong> پرتاب می‌کند.</p><hr> <p>در ادامه کلاس <strong>ConcreteDecorator</strong> را می‌نویسیم:</p><pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">ConcreteDecorator</span> : <span class="hljs-title">Decorator</span> {
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">ConcreteDecorator</span>(<span class="hljs-params">IComponent component</span>) : <span class="hljs-title">base</span>(<span class="hljs-params">component</span>)</span> { }
 
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Operation</span>()</span> {
@@ -188,92 +44,22 @@
         }
     }
 }
-</code></pre>
-<ul>
-<li>
-<p>کلاس <strong>ConcreteDecorator</strong> از کلاس <strong>Decorator</strong> ارث‌بری می‌کند.</p>
-</li>
-<li>
-<p>سازنده، یک پارامتر <strong>IComponent</strong> دریافت کرده و آن را به سازنده پایه می‌دهد تا <strong>متغیر عضو</strong> مقداردهی شود.</p>
-</li>
-<li>
-<p>در متد <strong>Operation()</strong> بازنویسی شده، یک <strong>بلاک try/catch</strong> داریم:</p>
-<ul>
-<li>در <strong>try</strong>، پیامی به کنسول نوشته می‌شود و متد Operation() کلاس پایه اجرا می‌شود.</li>
-<li>در <strong>catch</strong>، در صورت بروز استثنا، پیام خطا همراه با متن Exception چاپ می‌شود.</li>
-</ul>
-</li>
-</ul>
-<hr>
-<p>قبل از استفاده از کد، کلاس <strong>Program</strong> را به‌روزرسانی می‌کنیم. متد <strong>DecoratorPatternExample()</strong> را اضافه کنید:</p>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">DecoratorPatternExample</span>()</span> {
+</code></pre> <ul><li> <p>کلاس <strong>ConcreteDecorator</strong> از کلاس <strong>Decorator</strong> ارث‌بری می‌کند.</p></li> <li><p>سازنده، یک پارامتر <strong>IComponent</strong> دریافت کرده و آن را به سازنده پایه می‌دهد تا <strong>متغیر عضو</strong> مقداردهی شود.</p></li> <li><p>در متد <strong>Operation()</strong> بازنویسی شده، یک <strong>بلاک try/catch</strong> داریم:</p><ul> <li>در <strong>try</strong>، پیامی به کنسول نوشته می‌شود و متد Operation() کلاس پایه اجرا می‌شود.</li><li>در <strong>catch</strong>، در صورت بروز استثنا، پیام خطا همراه با متن Exception چاپ می‌شود.</li></ul> </li></ul> <hr><p>قبل از استفاده از کد، کلاس <strong>Program</strong> را به‌روزرسانی می‌کنیم. متد <strong>DecoratorPatternExample()</strong> را اضافه کنید:</p><pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">DecoratorPatternExample</span>()</span> {
     <span class="hljs-keyword">var</span> concreteComponent = <span class="hljs-keyword">new</span> ConcreteComponent();
     <span class="hljs-keyword">var</span> concreteDecorator = <span class="hljs-keyword">new</span> ConcreteDecorator(concreteComponent);
     concreteDecorator.Operation();
 }
-</code></pre>
-<ul>
-<li>در این متد، یک <strong>ConcreteComponent</strong> ایجاد می‌کنیم.</li>
-<li>سپس آن را به سازنده یک <strong>ConcreteDecorator</strong> جدید می‌دهیم.</li>
-<li>در نهایت متد <strong>Operation()</strong> را روی ConcreteDecorator فراخوانی می‌کنیم.</li>
-</ul>
-<hr>
-<p>دو خط زیر را به <strong>Main()</strong> اضافه کنید:</p>
-<pre class="hljs"><code>DecoratorPatternExample();
+</code></pre> <ul><li>در این متد، یک <strong>ConcreteComponent</strong> ایجاد می‌کنیم.</li><li>سپس آن را به سازنده یک <strong>ConcreteDecorator</strong> جدید می‌دهیم.</li><li>در نهایت متد <strong>Operation()</strong> را روی ConcreteDecorator فراخوانی می‌کنیم.</li></ul> <hr><p>دو خط زیر را به <strong>Main()</strong> اضافه کنید:</p><pre class="hljs"><code>DecoratorPatternExample();
 Console.ReadKey();
-</code></pre>
-<ul>
-<li>این دو خط، مثال ما را اجرا می‌کنند و سپس منتظر می‌مانند تا کاربر یک کلید فشار دهد.</li>
-<li>با اجرای برنامه، خروجی مشابه تصویر نمونه نمایش داده می‌شود. 📺</li>
-</ul>
-<div align="center">
-<p><img src="../../../assets/image/11/Table%2011-3.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<p>با این، مرور ما بر <strong>الگوی دکوراتور (Decorator Pattern)</strong> به پایان رسید ✅.<br>
-حالا زمان آن است که به <strong>الگوی پراکسی (Proxy Pattern)</strong> بپردازیم.</p>
-<hr>
-<h3>الگوی پراکسی (Proxy Pattern) 🛡️</h3>
-<p>الگوی پراکسی یک <strong>الگوی طراحی ساختاری (Structural Design Pattern)</strong> است که <strong>اشیایی را فراهم می‌کند که به‌عنوان جایگزین برای اشیاء واقعی سرویس (Service Objects) مورد استفاده توسط کلاینت‌ها عمل می‌کنند</strong>.</p>
-<ul>
-<li>پروکسی‌ها درخواست‌های کلاینت را دریافت می‌کنند، کار مورد نیاز را انجام می‌دهند و سپس درخواست را به اشیاء سرویس منتقل می‌کنند.</li>
-<li>اشیاء پروکسی <strong>قابل تعویض با سرویس‌ها هستند</strong> زیرا همان <strong>رابط‌ها (Interfaces)</strong> را دارند.</li>
-</ul>
-<div align="center">
-<p><img src="../../../assets/image/11/Table%2011-4.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<p>یک نمونه‌ای از زمانی که می‌خواهید <strong>الگوی پراکسی (Proxy Pattern)</strong> را استفاده کنید، زمانی است که:</p>
-<ul>
-<li>یک کلاس دارید که نمی‌خواهید تغییر کند،</li>
-<li>اما نیاز دارید رفتارهای اضافی به آن اضافه شود.</li>
-</ul>
-<p>پروکسی‌ها کارها را به اشیاء دیگر واگذار می‌کنند. مگر اینکه پروکسی از سرویس مشتق شده باشد، متدهای پروکسی در نهایت باید به یک <strong>شیء Service</strong> ارجاع دهند.</p>
-<hr>
-<p>ما یک پیاده‌سازی ساده از <strong>الگوی پراکسی</strong> را بررسی می‌کنیم:</p>
-<p>1️⃣ یک فولدر به نام <strong>ProxyPattern</strong> در ریشه پروژه فصل ۱۱ اضافه کنید.<br>
-2️⃣ یک <strong>interface</strong> به نام <strong>IService</strong> با یک متد برای مدیریت درخواست بسازید:</p>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title">IService</span> {
+</code></pre> <ul><li>این دو خط، مثال ما را اجرا می‌کنند و سپس منتظر می‌مانند تا کاربر یک کلید فشار دهد.</li><li>با اجرای برنامه، خروجی مشابه تصویر نمونه نمایش داده می‌شود.</li></ul> <div align="center"><p><img src="../../../assets/image/11/Table%2011-3.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <p>با این، مرور ما بر <strong>الگوی دکوراتور (Decorator Pattern)</strong> به پایان رسید .<br> حالا زمان آن است که به <strong>الگوی پراکسی (Proxy Pattern)</strong> بپردازیم.</p><hr> <h3>الگوی پراکسی (Proxy Pattern)</h3><p>الگوی پراکسی یک <strong>الگوی طراحی ساختاری (Structural Design Pattern)</strong> است که <strong>اشیایی را فراهم می‌کند که به‌عنوان جایگزین برای اشیاء واقعی سرویس (Service Objects) مورد استفاده توسط کلاینت‌ها عمل می‌کنند</strong>.</p><ul> <li>پروکسی‌ها درخواست‌های کلاینت را دریافت می‌کنند، کار مورد نیاز را انجام می‌دهند و سپس درخواست را به اشیاء سرویس منتقل می‌کنند.</li><li>اشیاء پروکسی <strong>قابل تعویض با سرویس‌ها هستند</strong> زیرا همان <strong>رابط‌ها (Interfaces)</strong> را دارند.</li></ul> <div align="center"><p><img src="../../../assets/image/11/Table%2011-4.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <p>یک نمونه‌ای از زمانی که می‌خواهید <strong>الگوی پراکسی (Proxy Pattern)</strong> را استفاده کنید، زمانی است که:</p><ul> <li>یک کلاس دارید که نمی‌خواهید تغییر کند،</li><li>اما نیاز دارید رفتارهای اضافی به آن اضافه شود.</li></ul> <p>پروکسی‌ها کارها را به اشیاء دیگر واگذار می‌کنند. مگر اینکه پروکسی از سرویس مشتق شده باشد، متدهای پروکسی در نهایت باید به یک <strong>شیء Service</strong> ارجاع دهند.</p><hr> <p>ما یک پیاده‌سازی ساده از <strong>الگوی پراکسی</strong> را بررسی می‌کنیم:</p><p>1⃣ یک فولدر به نام <strong>ProxyPattern</strong> در ریشه پروژه فصل ۱۱ اضافه کنید.<br> 2⃣ یک <strong>interface</strong> به نام <strong>IService</strong> با یک متد برای مدیریت درخواست بسازید:</p><pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title">IService</span> {
     <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Request</span>()</span>;
 }
-</code></pre>
-<ul>
-<li>متد <strong>Request()</strong> کاری را انجام می‌دهد که درخواست را پردازش می‌کند.</li>
-<li>هم پروکسی و هم سرویس این رابط را پیاده‌سازی می‌کنند تا متد <strong>Request()</strong> را استفاده کنند.</li>
-</ul>
-<hr>
-<p>3️⃣ کلاس <strong>Service</strong> را اضافه کرده و رابط <strong>IService</strong> را پیاده‌سازی کنید:</p>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Service</span> : <span class="hljs-title">IService</span> {
+</code></pre> <ul><li>متد <strong>Request()</strong> کاری را انجام می‌دهد که درخواست را پردازش می‌کند.</li><li>هم پروکسی و هم سرویس این رابط را پیاده‌سازی می‌کنند تا متد <strong>Request()</strong> را استفاده کنند.</li></ul> <hr><p>3⃣ کلاس <strong>Service</strong> را اضافه کرده و رابط <strong>IService</strong> را پیاده‌سازی کنید:</p><pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Service</span> : <span class="hljs-title">IService</span> {
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Request</span>()</span> {
         Console.WriteLine(<span class="hljs-string">&quot;Service: Request();&quot;</span>);
     }
 }
-</code></pre>
-<ul>
-<li>کلاس <strong>Service</strong> متد واقعی <strong>Request()</strong> را پیاده‌سازی می‌کند.</li>
-<li>این متد توسط کلاس <strong>Proxy</strong> فراخوانی خواهد شد.</li>
-</ul>
-<hr>
-<p>4️⃣ حال، کلاس <strong>Proxy</strong> را می‌نویسیم:</p>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Proxy</span> : <span class="hljs-title">IService</span> {
+</code></pre> <ul><li>کلاس <strong>Service</strong> متد واقعی <strong>Request()</strong> را پیاده‌سازی می‌کند.</li><li>این متد توسط کلاس <strong>Proxy</strong> فراخوانی خواهد شد.</li></ul> <hr><p>4⃣ حال، کلاس <strong>Proxy</strong> را می‌نویسیم:</p><pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Proxy</span> : <span class="hljs-title">IService</span> {
     <span class="hljs-keyword">private</span> IService _service;
 
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Proxy</span>(<span class="hljs-params">IService service</span>)</span> {
@@ -285,15 +71,7 @@ Console.ReadKey();
         _service.Request();
     }
 }
-</code></pre>
-<ul>
-<li>کلاس <strong>Proxy</strong> رابط <strong>IService</strong> را پیاده‌سازی می‌کند و یک سازنده دارد که <strong>یک پارامتر IService</strong> می‌گیرد.</li>
-<li>متد <strong>Request()</strong> توسط کلاینت فراخوانی می‌شود.</li>
-<li><strong>Proxy.Request()</strong> کارهای مورد نیاز خود را انجام داده و سپس مسئول فراخوانی <strong>_service.Request()</strong> است.</li>
-</ul>
-<hr>
-<p>5️⃣ برای دیدن عملکرد، کلاس <strong>Program</strong> را به‌روزرسانی می‌کنیم:</p>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ProxyPatternExample</span>()</span> {
+</code></pre> <ul><li>کلاس <strong>Proxy</strong> رابط <strong>IService</strong> را پیاده‌سازی می‌کند و یک سازنده دارد که <strong>یک پارامتر IService</strong> می‌گیرد.</li><li>متد <strong>Request()</strong> توسط کلاینت فراخوانی می‌شود.</li><li><strong>Proxy.Request()</strong> کارهای مورد نیاز خود را انجام داده و سپس مسئول فراخوانی <strong>_service.Request()</strong> است.</li></ul> <hr><p>5⃣ برای دیدن عملکرد، کلاس <strong>Program</strong> را به‌روزرسانی می‌کنیم:</p><pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ProxyPatternExample</span>()</span> {
     Console.WriteLine(<span class="hljs-string">&quot;### Calling the Service directly. ###&quot;</span>);
     <span class="hljs-keyword">var</span> service = <span class="hljs-keyword">new</span> Service();
     service.Request();
@@ -301,115 +79,9 @@ Console.ReadKey();
     Console.WriteLine(<span class="hljs-string">&quot;## Calling the Service via a Proxy. ###&quot;</span>);
     <span class="hljs-keyword">new</span> Proxy(service).Request();
 }
-</code></pre>
-<ul>
-<li>این متد ابتدا <strong>Request()</strong> سرویس را به صورت مستقیم اجرا می‌کند.</li>
-<li>سپس همان متد را از طریق <strong>Proxy</strong> اجرا می‌کند.</li>
-</ul>
-<p>با اجرای پروژه، خروجی مشابه نمونه زیر مشاهده خواهد شد: 📺</p>
-<div align="center">
-<p><img src="../../../assets/image/11/Table%2011-5.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<p>حال که با <strong>الگوی دکوراتور</strong> و <strong>الگوی پراکسی</strong> آشنا شدید، بیایید نگاهی به <strong>برنامه‌نویسی مبتنی بر جنبه (AOP) با PostSharp</strong> بیندازیم. ⚙️</p>
-<hr>
-<h3>برنامه‌نویسی مبتنی بر جنبه (AOP) با PostSharp 🧩</h3>
-<ul>
-<li><strong>AOP</strong> می‌تواند با <strong>OOP</strong> استفاده شود.</li>
-<li>یک <strong>Aspect</strong> یک <strong>Attribute</strong> است که به کلاس‌ها، متدها، پارامترها و Properties اعمال می‌شود و در <strong>زمان کامپایل</strong> کد را به کلاس، متد، پارامتر یا Property مورد نظر تزریق می‌کند.</li>
-<li>این روش اجازه می‌دهد <strong>مسائل فراگیر (Cross-Cutting Concerns)</strong> از کد کسب‌وکار جدا شده و به یک <strong>کتابخانه کلاس</strong> منتقل شوند.</li>
-<li>این مسائل به عنوان Attributes اضافه می‌شوند و <strong>کامپایلر کد لازم را در زمان اجرا تزریق می‌کند</strong>، که باعث می‌شود کد کسب‌وکار شما <strong>کوچک، خوانا و ساده برای نگهداری و توسعه</strong> باشد.</li>
-</ul>
-<hr>
-<p>می‌توانید <strong>PostSharp</strong> را از لینک زیر دانلود کنید:<br>
-<a href="https://www.postsharp.net/download">https://www.postsharp.net/download</a></p>
-<p><strong>نحوه کار AOP با PostSharp:</strong><br>
-1️⃣ بسته PostSharp را به پروژه اضافه کنید.<br>
-2️⃣ کد خود را با Attributes نشانه‌گذاری کنید.<br>
-3️⃣ کامپایلر C# کد را به باینری تبدیل می‌کند و PostSharp باینری را تحلیل کرده و پیاده‌سازی Aspectها را تزریق می‌کند.</p>
-<ul>
-<li>اگرچه باینری‌ها در زمان کامپایل تغییر می‌کنند، <strong>کد منبع پروژه بدون تغییر باقی می‌ماند</strong>.</li>
-<li>این باعث می‌شود که کد شما <strong>تمیز، ساده و قابل نگهداری</strong> باشد و استفاده مجدد و گسترش آن در آینده آسان‌تر شود.</li>
-</ul>
-<hr>
-<p>PostSharp الگوهای آماده خوبی برای شما ارائه می‌دهد:</p>
-<ul>
-<li><strong>MVVM</strong></li>
-<li><strong>Caching</strong></li>
-<li><strong>Multi-threading</strong></li>
-<li><strong>Logging و Architecture Validation</strong></li>
-<li>و بسیاری دیگر</li>
-</ul>
-<p>اگر هیچکدام نیاز شما را برآورده نکرد، می‌توانید <strong>الگوهای خود را با توسعه Framework جنبه‌ها یا معماری</strong> خودکار کنید.</p>
-<hr>
-<h3>توسعه جنبه‌ها و چارچوب معماری</h3>
-<ul>
-<li>با <strong>Aspect Framework</strong>، شما جنبه ساده یا ترکیبی خود را توسعه داده، آن را به کد اعمال می‌کنید و استفاده آن را اعتبارسنجی می‌کنید.</li>
-<li>با <strong>Architectural Framework</strong>، محدودیت‌های معماری سفارشی خود را ایجاد می‌کنید.</li>
-</ul>
-<p><strong>نکته:</strong> هنگام نوشتن Aspect و Attributes باید بسته <strong>PostSharp.Redist NuGet</strong> را اضافه کنید.</p>
-<ul>
-<li>اگر Attributes و Aspectها کار نکردند، روی پروژه راست‌کلیک کرده و <strong>Add PostSharp to Project</strong> را انتخاب کنید.</li>
-</ul>
-<hr>
-<h3>توسعه یک جنبه ساده</h3>
-<ul>
-<li>جنبه ما ساده خواهد بود و شامل یک <strong>Transformation</strong> است.</li>
-<li>جنبه را از کلاس پایه <strong>Primitive Aspect</strong> مشتق می‌کنیم.</li>
-<li>برخی متدها را که به عنوان <strong>Advice</strong> شناخته می‌شوند، بازنویسی می‌کنیم.</li>
-<li>برای ساخت جنبه ترکیبی می‌توانید به لینک زیر مراجعه کنید:<br>
-<a href="https://doc.postsharp.net/complex-aspects">https://doc.postsharp.net/complex-aspects</a></li>
-</ul>
-<hr>
-<h3>تزریق رفتار قبل و بعد از اجرای متد</h3>
-<p>جنبه <strong>OnMethodBoundaryAspect</strong> الگوی دکوراتور را پیاده‌سازی می‌کند.</p>
-<ul>
-<li>با این جنبه، می‌توانید منطق را <strong>قبل و بعد از اجرای متد هدف</strong> اجرا کنید.</li>
-</ul>
-<p><strong>جدول متدهای Advice در OnMethodBoundaryAspect:</strong></p>
-<table>
-<thead>
-<tr>
-<th>Advice</th>
-<th>متد</th>
-<th>توضیح</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>OnEntry(MethodExecutionArgs)</td>
-<td>قبل از اجرای متد و قبل از هر کد کاربر اجرا می‌شود</td>
-<td></td>
-</tr>
-<tr>
-<td>OnSuccess(MethodExecutionArgs)</td>
-<td>بعد از اجرای موفق متد، بدون استثنا، اجرا می‌شود</td>
-<td></td>
-</tr>
-<tr>
-<td>OnException(MethodExecutionArgs)</td>
-<td>در صورت بروز Exception بعد از کد کاربر اجرا می‌شود، معادل catch است</td>
-<td></td>
-</tr>
-<tr>
-<td>OnExit(MethodExecutionArgs)</td>
-<td>هنگام خروج متد، چه موفق و چه با Exception، اجرا می‌شود، معادل finally است</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<hr>
-<h3>نمونه جنبه Logging</h3>
-<p>1️⃣ ابتدا PostSharp را به پروژه اضافه کنید.<br>
-2️⃣ یک فولدر به نام <strong>Aspects</strong> بسازید و یک کلاس جدید به نام <strong>LoggingAspect</strong> اضافه کنید:</p>
-<pre class="hljs"><code>[<span class="hljs-meta">PSerializable</span>]
+</code></pre> <ul><li>این متد ابتدا <strong>Request()</strong> سرویس را به صورت مستقیم اجرا می‌کند.</li><li>سپس همان متد را از طریق <strong>Proxy</strong> اجرا می‌کند.</li></ul> <p>با اجرای پروژه، خروجی مشابه نمونه زیر مشاهده خواهد شد:</p><div align="center"> <p><img src="../../../assets/image/11/Table%2011-5.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <p>حال که با <strong>الگوی دکوراتور</strong> و <strong>الگوی پراکسی</strong> آشنا شدید، بیایید نگاهی به <strong>برنامه‌نویسی مبتنی بر جنبه (AOP) با PostSharp</strong> بیندازیم.</p><hr> <h3>برنامه‌نویسی مبتنی بر جنبه (AOP) با PostSharp</h3><ul> <li><strong>AOP</strong> می‌تواند با <strong>OOP</strong> استفاده شود.</li><li>یک <strong>Aspect</strong> یک <strong>Attribute</strong> است که به کلاس‌ها، متدها، پارامترها و Properties اعمال می‌شود و در <strong>زمان کامپایل</strong> کد را به کلاس، متد، پارامتر یا Property مورد نظر تزریق می‌کند.</li><li>این روش اجازه می‌دهد <strong>مسائل فراگیر (Cross-Cutting Concerns)</strong> از کد کسب‌وکار جدا شده و به یک <strong>کتابخانه کلاس</strong> منتقل شوند.</li><li>این مسائل به عنوان Attributes اضافه می‌شوند و <strong>کامپایلر کد لازم را در زمان اجرا تزریق می‌کند</strong>، که باعث می‌شود کد کسب‌وکار شما <strong>کوچک، خوانا و ساده برای نگهداری و توسعه</strong> باشد.</li></ul> <hr><p>می‌توانید <strong>PostSharp</strong> را از لینک زیر دانلود کنید:<br><a href="https://www.postsharp.net/download">https://www.postsharp.net/download</a></p><p><strong>نحوه کار AOP با PostSharp:</strong><br> 1⃣ بسته PostSharp را به پروژه اضافه کنید.<br> 2⃣ کد خود را با Attributes نشانه‌گذاری کنید.<br> 3⃣ کامپایلر C# کد را به باینری تبدیل می‌کند و PostSharp باینری را تحلیل کرده و پیاده‌سازی Aspectها را تزریق می‌کند.</p><ul> <li>اگرچه باینری‌ها در زمان کامپایل تغییر می‌کنند، <strong>کد منبع پروژه بدون تغییر باقی می‌ماند</strong>.</li><li>این باعث می‌شود که کد شما <strong>تمیز، ساده و قابل نگهداری</strong> باشد و استفاده مجدد و گسترش آن در آینده آسان‌تر شود.</li></ul> <hr><p>PostSharp الگوهای آماده خوبی برای شما ارائه می‌دهد:</p><ul> <li><strong>MVVM</strong></li><li><strong>Caching</strong></li><li><strong>Multi-threading</strong></li><li><strong>Logging و Architecture Validation</strong></li><li>و بسیاری دیگر</li></ul> <p>اگر هیچکدام نیاز شما را برآورده نکرد، می‌توانید <strong>الگوهای خود را با توسعه Framework جنبه‌ها یا معماری</strong> خودکار کنید.</p><hr> <h3>توسعه جنبه‌ها و چارچوب معماری</h3><ul> <li>با <strong>Aspect Framework</strong>، شما جنبه ساده یا ترکیبی خود را توسعه داده، آن را به کد اعمال می‌کنید و استفاده آن را اعتبارسنجی می‌کنید.</li><li>با <strong>Architectural Framework</strong>، محدودیت‌های معماری سفارشی خود را ایجاد می‌کنید.</li></ul> <p><strong>نکته:</strong> هنگام نوشتن Aspect و Attributes باید بسته <strong>PostSharp.Redist NuGet</strong> را اضافه کنید.</p><ul> <li>اگر Attributes و Aspectها کار نکردند، روی پروژه راست‌کلیک کرده و <strong>Add PostSharp to Project</strong> را انتخاب کنید.</li></ul> <hr><h3>توسعه یک جنبه ساده</h3><ul> <li>جنبه ما ساده خواهد بود و شامل یک <strong>Transformation</strong> است.</li><li>جنبه را از کلاس پایه <strong>Primitive Aspect</strong> مشتق می‌کنیم.</li><li>برخی متدها را که به عنوان <strong>Advice</strong> شناخته می‌شوند، بازنویسی می‌کنیم.</li><li>برای ساخت جنبه ترکیبی می‌توانید به لینک زیر مراجعه کنید:<br><a href="https://doc.postsharp.net/complex-aspects">https://doc.postsharp.net/complex-aspects</a></li></ul> <hr><h3>تزریق رفتار قبل و بعد از اجرای متد</h3><p>جنبه <strong>OnMethodBoundaryAspect</strong> الگوی دکوراتور را پیاده‌سازی می‌کند.</p><ul> <li>با این جنبه، می‌توانید منطق را <strong>قبل و بعد از اجرای متد هدف</strong> اجرا کنید.</li></ul> <p><strong>جدول متدهای Advice در OnMethodBoundaryAspect:</strong></p><table> <thead><tr> <th>Advice</th><th>متد</th><th>توضیح</th></tr> </thead><tbody> <tr><td>OnEntry(MethodExecutionArgs)</td><td>قبل از اجرای متد و قبل از هر کد کاربر اجرا می‌شود</td><td></td></tr> <tr><td>OnSuccess(MethodExecutionArgs)</td><td>بعد از اجرای موفق متد، بدون استثنا، اجرا می‌شود</td><td></td></tr> <tr><td>OnException(MethodExecutionArgs)</td><td>در صورت بروز Exception بعد از کد کاربر اجرا می‌شود، معادل catch است</td><td></td></tr> <tr><td>OnExit(MethodExecutionArgs)</td><td>هنگام خروج متد، چه موفق و چه با Exception، اجرا می‌شود، معادل finally است</td><td></td></tr> </tbody></table> <hr><h3>نمونه جنبه Logging</h3><p>1⃣ ابتدا PostSharp را به پروژه اضافه کنید.<br> 2⃣ یک فولدر به نام <strong>Aspects</strong> بسازید و یک کلاس جدید به نام <strong>LoggingAspect</strong> اضافه کنید:</p><pre class="hljs"><code>[<span class="hljs-meta">PSerializable</span>]
 <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">LoggingAspect</span> : <span class="hljs-title">OnMethodBoundaryAspect</span> { }
-</code></pre>
-<ul>
-<li><code>[PSerializable]</code> باعث می‌شود PostSharp یک Serializer برای <strong>PortableFormatter</strong> ایجاد کند.</li>
-</ul>
-<hr>
-<h3>بازنویسی متدهای Advice</h3>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">void</span> <span class="hljs-title">OnEntry</span>(<span class="hljs-params">MethodExecutionArgs <span class="hljs-keyword">args</span></span>)</span> {
+</code></pre> <ul><li><code>[PSerializable]</code> باعث می‌شود PostSharp یک Serializer برای <strong>PortableFormatter</strong> ایجاد کند.</li></ul> <hr><h3>بازنویسی متدهای Advice</h3><pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">void</span> <span class="hljs-title">OnEntry</span>(<span class="hljs-params">MethodExecutionArgs <span class="hljs-keyword">args</span></span>)</span> {
     Console.WriteLine(<span class="hljs-string">&quot;The {0} method has been entered.&quot;</span>, <span class="hljs-keyword">args</span>.Method.Name);
 }
 
@@ -424,59 +96,20 @@ Console.ReadKey();
 <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">void</span> <span class="hljs-title">OnException</span>(<span class="hljs-params">MethodExecutionArgs <span class="hljs-keyword">args</span></span>)</span> {
     Console.WriteLine(<span class="hljs-string">&quot;An exception was thrown in {0}.&quot;</span>, <span class="hljs-keyword">args</span>.Method.Name);
 }
-</code></pre>
-<ul>
-<li><strong>OnEntry()</strong> قبل از اجرای هر کد کاربر اجرا می‌شود.</li>
-<li><strong>OnSuccess()</strong> بعد از اجرای موفق کد کاربر اجرا می‌شود.</li>
-<li><strong>OnExit()</strong> هنگام خروج متد اجرا می‌شود و معادل finally است.</li>
-<li><strong>OnException()</strong> در صورت بروز Exception اجرا می‌شود و معادل catch است.</li>
-</ul>
-<hr>
-<h3>استفاده از LoggingAspect</h3>
-<p>1️⃣ متد موفق:</p>
-<pre class="hljs"><code>[<span class="hljs-meta">LoggingAspect</span>]
+</code></pre> <ul><li><strong>OnEntry()</strong> قبل از اجرای هر کد کاربر اجرا می‌شود.</li><li><strong>OnSuccess()</strong> بعد از اجرای موفق کد کاربر اجرا می‌شود.</li><li><strong>OnExit()</strong> هنگام خروج متد اجرا می‌شود و معادل finally است.</li><li><strong>OnException()</strong> در صورت بروز Exception اجرا می‌شود و معادل catch است.</li></ul> <hr><h3>استفاده از LoggingAspect</h3><p>1⃣ متد موفق:</p><pre class="hljs"><code>[<span class="hljs-meta">LoggingAspect</span>]
 <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">SuccessfulMethod</span>()</span> {
     Console.WriteLine(<span class="hljs-string">&quot;Hello World, I am a success!&quot;</span>);
 }
-</code></pre>
-<p>2️⃣ متد ناموفق:</p>
-<pre class="hljs"><code>[<span class="hljs-meta">LoggingAspect</span>]
+</code></pre> <p>2⃣ متد ناموفق:</p><pre class="hljs"><code>[<span class="hljs-meta">LoggingAspect</span>]
 <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">FailedMethod</span>()</span> {
     Console.WriteLine(<span class="hljs-string">&quot;Hello World, I am a failure!&quot;</span>);
     <span class="hljs-keyword">var</span> x = <span class="hljs-number">1</span>;
     <span class="hljs-keyword">var</span> y = <span class="hljs-number">0</span>;
     <span class="hljs-keyword">var</span> z = x / y;
 }
-</code></pre>
-<ul>
-<li><strong>SuccessfulMethod()</strong> پیام موفقیت را چاپ می‌کند.</li>
-<li><strong>FailedMethod()</strong> پیام خطا چاپ کرده و عملیات <strong>تقسیم بر صفر</strong> انجام می‌دهد که باعث <strong>DivideByZeroException</strong> می‌شود.</li>
-</ul>
-<p>هر دو متد را از <strong>Main()</strong> فراخوانی کنید و پروژه را اجرا کنید. خروجی مشابه نمونه زیر خواهد بود: 📺</p>
-<div align="center">
-<p><img src="../../../assets/image/11/Table%2011-6.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<p>در این مرحله، <strong>Debugger</strong> باعث خروج برنامه خواهد شد. ✅<br>
-همان‌طور که می‌بینید، <strong>ایجاد جنبه‌های PostSharp خودتان</strong> برای برآورده کردن نیازهایتان، فرآیندی ساده است.</p>
-<p>حالا به سراغ <strong>افزودن محدودیت‌های معماری (Architectural Constraints)</strong> می‌رویم.</p>
-<hr>
-<h3>توسعه چارچوب معماری 🏗️</h3>
-<ul>
-<li><strong>محدودیت معماری</strong> یعنی پذیرش الگوهای طراحی سفارشی که باید در تمام ماژول‌ها رعایت شوند.</li>
-<li>ما یک <strong>Scalar Constraint</strong> ایجاد می‌کنیم که <strong>یک عنصر کد را اعتبارسنجی کند</strong>.</li>
-<li>Scalar Constraint ما به نام <strong>BusinessRulePatternValidation</strong>، بررسی می‌کند که هر کلاس مشتق شده از <strong>BusinessRule</strong> باید یک <strong>کلاس داخلی به نام Factory</strong> داشته باشد.</li>
-</ul>
-<hr>
-<p>ابتدا کلاس <strong>BusinessRulePatternValidation</strong> را اضافه کنید:</p>
-<pre class="hljs"><code>[<span class="hljs-meta">MulticastAttributeUsage(MulticastTargets.Class, Inheritance = MulticastInheritance.Strict)</span>]
+</code></pre> <ul><li><strong>SuccessfulMethod()</strong> پیام موفقیت را چاپ می‌کند.</li><li><strong>FailedMethod()</strong> پیام خطا چاپ کرده و عملیات <strong>تقسیم بر صفر</strong> انجام می‌دهد که باعث <strong>DivideByZeroException</strong> می‌شود.</li></ul> <p>هر دو متد را از <strong>Main()</strong> فراخوانی کنید و پروژه را اجرا کنید. خروجی مشابه نمونه زیر خواهد بود:</p><div align="center"> <p><img src="../../../assets/image/11/Table%2011-6.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <p>در این مرحله، <strong>Debugger</strong> باعث خروج برنامه خواهد شد.<br> همان‌طور که می‌بینید، <strong>ایجاد جنبه‌های PostSharp خودتان</strong> برای برآورده کردن نیازهایتان، فرآیندی ساده است.</p><p>حالا به سراغ <strong>افزودن محدودیت‌های معماری (Architectural Constraints)</strong> می‌رویم.</p><hr> <h3>توسعه چارچوب معماری</h3><ul> <li><strong>محدودیت معماری</strong> یعنی پذیرش الگوهای طراحی سفارشی که باید در تمام ماژول‌ها رعایت شوند.</li><li>ما یک <strong>Scalar Constraint</strong> ایجاد می‌کنیم که <strong>یک عنصر کد را اعتبارسنجی کند</strong>.</li><li>Scalar Constraint ما به نام <strong>BusinessRulePatternValidation</strong>، بررسی می‌کند که هر کلاس مشتق شده از <strong>BusinessRule</strong> باید یک <strong>کلاس داخلی به نام Factory</strong> داشته باشد.</li></ul> <hr><p>ابتدا کلاس <strong>BusinessRulePatternValidation</strong> را اضافه کنید:</p><pre class="hljs"><code>[<span class="hljs-meta">MulticastAttributeUsage(MulticastTargets.Class, Inheritance = MulticastInheritance.Strict)</span>]
 <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">BusinessRulePatternValidation</span> : <span class="hljs-title">ScalarConstraint</span> { }
-</code></pre>
-<ul>
-<li><code>[MulticastAttributeUsage]</code> مشخص می‌کند که این جنبه اعتبارسنجی فقط روی کلاس‌ها و با رعایت ارث‌بری کار می‌کند.</li>
-</ul>
-<hr>
-<p>متد <strong>ValidateCode()</strong> را بازنویسی می‌کنیم:</p>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">void</span> <span class="hljs-title">CodeValidation</span>(<span class="hljs-params"><span class="hljs-built_in">object</span> target</span>)</span>  {
+</code></pre> <ul><li><code>[MulticastAttributeUsage]</code> مشخص می‌کند که این جنبه اعتبارسنجی فقط روی کلاس‌ها و با رعایت ارث‌بری کار می‌کند.</li></ul> <hr><p>متد <strong>ValidateCode()</strong> را بازنویسی می‌کنیم:</p><pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">void</span> <span class="hljs-title">CodeValidation</span>(<span class="hljs-params"><span class="hljs-built_in">object</span> target</span>)</span>  {
     <span class="hljs-keyword">var</span> targetType = (Type)target;
     <span class="hljs-keyword">if</span> (targetType.GetNestedType(<span class="hljs-string">&quot;Factory&quot;</span>) == <span class="hljs-literal">null</span>) {
         Message.Write(
@@ -487,56 +120,9 @@ Console.ReadKey();
             targetType.Name);
     }
 }
-</code></pre>
-<ul>
-<li>این متد بررسی می‌کند که آیا کلاس هدف، نوع داخلی <strong>Factory</strong> دارد یا خیر.</li>
-<li>اگر <strong>Factory</strong> موجود نباشد، پیام هشدار در پنجره خروجی چاپ می‌شود.</li>
-</ul>
-<hr>
-<p>کلاس <strong>BusinessRule</strong> را اضافه کنید:</p>
-<pre class="hljs"><code>[<span class="hljs-meta">BusinessRulePatternValidation</span>]
+</code></pre> <ul><li>این متد بررسی می‌کند که آیا کلاس هدف، نوع داخلی <strong>Factory</strong> دارد یا خیر.</li><li>اگر <strong>Factory</strong> موجود نباشد، پیام هشدار در پنجره خروجی چاپ می‌شود.</li></ul> <hr><p>کلاس <strong>BusinessRule</strong> را اضافه کنید:</p><pre class="hljs"><code>[<span class="hljs-meta">BusinessRulePatternValidation</span>]
 <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">BusinessRule</span>  { }
-</code></pre>
-<ul>
-<li>کلاس <strong>BusinessRule</strong> خالی است و <strong>Factory</strong> ندارد.</li>
-<li>Attribute <strong>BusinessRulePatternValidation</strong> به آن اختصاص داده شده است، که یک <strong>محدودیت معماری</strong> است.</li>
-<li>پروژه را بسازید و پیام هشدار در پنجره خروجی مشاهده خواهد شد.</li>
-</ul>
-<hr>
-<h3>پروژه – کتابخانه قابل استفاده مجدد برای مسائل فراگیر</h3>
-<p>در این بخش، یک <strong>کتابخانه قابل استفاده مجدد</strong> برای مدیریت <strong>مسائل فراگیر</strong> می‌سازیم.</p>
-<ul>
-<li>این کتابخانه عملکرد محدودی دارد اما دانش لازم برای گسترش آن را به شما می‌دهد.</li>
-<li>کتابخانه‌ای که می‌سازید، <strong>.NET Standard Library</strong> خواهد بود تا در برنامه‌های <strong>.NET Framework و .NET Core</strong> قابل استفاده باشد.</li>
-<li>همچنین یک <strong>Console Application</strong> در .NET Framework ایجاد می‌کنیم تا کتابخانه را در عمل ببینیم.</li>
-</ul>
-<hr>
-<h3>شروع پروژه</h3>
-<p>1️⃣ یک <strong>.NET Standard Class Library</strong> به نام <strong>CrossCuttingConcerns</strong> بسازید.<br>
-2️⃣ یک <strong>.NET Framework Console Application</strong> به نام <strong>TestHarness</strong> به پروژه اضافه کنید.</p>
-<ul>
-<li>در این کتابخانه، قابلیت‌های قابل استفاده مجدد برای مدیریت مسائل مختلف اضافه می‌کنیم، از جمله <strong>Caching</strong>.</li>
-</ul>
-<hr>
-<h3>افزودن مسأله کشینگ (Caching) 🗄️</h3>
-<ul>
-<li><strong>Caching</strong> تکنیکی برای ذخیره‌سازی و افزایش عملکرد هنگام دسترسی به منابع مختلف است.</li>
-<li>کش می‌تواند <strong>حافظه، فایل‌سیستم یا دیتابیس</strong> باشد.</li>
-<li>برای ساده بودن، ما <strong>Memory Caching</strong> استفاده می‌کنیم.</li>
-</ul>
-<hr>
-<p>1️⃣ فولدری به نام <strong>Caching</strong> در پروژه <strong>CrossCuttingConcerns</strong> بسازید.<br>
-2️⃣ یک کلاس به نام <strong>MemoryCache</strong> اضافه کنید.<br>
-3️⃣ پکیج‌های NuGet زیر را اضافه کنید:</p>
-<ul>
-<li>PostSharp</li>
-<li>PostSharp.Patterns.Common</li>
-<li>PostSharp.Patterns.Diagnostics</li>
-<li>System.Runtime.Caching</li>
-</ul>
-<hr>
-<p>کلاس <strong>MemoryCache</strong> را به صورت زیر به‌روزرسانی کنید:</p>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">class</span> <span class="hljs-title">MemoryCache</span> {
+</code></pre> <ul><li>کلاس <strong>BusinessRule</strong> خالی است و <strong>Factory</strong> ندارد.</li><li>Attribute <strong>BusinessRulePatternValidation</strong> به آن اختصاص داده شده است، که یک <strong>محدودیت معماری</strong> است.</li><li>پروژه را بسازید و پیام هشدار در پنجره خروجی مشاهده خواهد شد.</li></ul> <hr><h3>پروژه – کتابخانه قابل استفاده مجدد برای مسائل فراگیر</h3><p>در این بخش، یک <strong>کتابخانه قابل استفاده مجدد</strong> برای مدیریت <strong>مسائل فراگیر</strong> می‌سازیم.</p><ul> <li>این کتابخانه عملکرد محدودی دارد اما دانش لازم برای گسترش آن را به شما می‌دهد.</li><li>کتابخانه‌ای که می‌سازید، <strong>.NET Standard Library</strong> خواهد بود تا در برنامه‌های <strong>.NET Framework و .NET Core</strong> قابل استفاده باشد.</li><li>همچنین یک <strong>Console Application</strong> در .NET Framework ایجاد می‌کنیم تا کتابخانه را در عمل ببینیم.</li></ul> <hr><h3>شروع پروژه</h3><p>1⃣ یک <strong>.NET Standard Class Library</strong> به نام <strong>CrossCuttingConcerns</strong> بسازید.<br> 2⃣ یک <strong>.NET Framework Console Application</strong> به نام <strong>TestHarness</strong> به پروژه اضافه کنید.</p><ul> <li>در این کتابخانه، قابلیت‌های قابل استفاده مجدد برای مدیریت مسائل مختلف اضافه می‌کنیم، از جمله <strong>Caching</strong>.</li></ul> <hr><h3>افزودن مسأله کشینگ (Caching)</h3><ul> <li><strong>Caching</strong> تکنیکی برای ذخیره‌سازی و افزایش عملکرد هنگام دسترسی به منابع مختلف است.</li><li>کش می‌تواند <strong>حافظه، فایل‌سیستم یا دیتابیس</strong> باشد.</li><li>برای ساده بودن، ما <strong>Memory Caching</strong> استفاده می‌کنیم.</li></ul> <hr><p>1⃣ فولدری به نام <strong>Caching</strong> در پروژه <strong>CrossCuttingConcerns</strong> بسازید.<br> 2⃣ یک کلاس به نام <strong>MemoryCache</strong> اضافه کنید.<br> 3⃣ پکیج‌های NuGet زیر را اضافه کنید:</p><ul> <li>PostSharp</li><li>PostSharp.Patterns.Common</li><li>PostSharp.Patterns.Diagnostics</li><li>System.Runtime.Caching</li></ul> <hr><p>کلاس <strong>MemoryCache</strong> را به صورت زیر به‌روزرسانی کنید:</p><pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">class</span> <span class="hljs-title">MemoryCache</span> {
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> T <span class="hljs-title">GetItem</span>&lt;<span class="hljs-title">T</span>&gt;(<span class="hljs-params"><span class="hljs-built_in">string</span> itemName, TimeSpan timeInCache, Func&lt;T&gt; itemCacheFunction</span>)</span> {
         <span class="hljs-keyword">var</span> cache = System.Runtime.Caching.MemoryCache.Default;
         <span class="hljs-keyword">var</span> cachedItem = (T) cache[itemName];
@@ -548,113 +134,40 @@ Console.ReadKey();
         <span class="hljs-keyword">return</span> cachedItem;
     }
 }
-</code></pre>
-<ul>
-<li><strong>GetItem()</strong> نام آیتم کش، مدت زمان نگهداری در کش و تابعی برای ایجاد آیتم در صورت نبود آن در کش را می‌گیرد.</li>
-</ul>
-<hr>
-<h3>افزودن کلاس تست</h3>
-<p>1️⃣ در پروژه <strong>TestHarness</strong> یک کلاس جدید به نام <strong>TestClass</strong> اضافه کنید.<br>
-2️⃣ متدهای <strong>GetCachedItem()</strong> و <strong>GetMessage()</strong> را اضافه کنید:</p>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-built_in">string</span> <span class="hljs-title">GetCachedItem</span>()</span> {
+</code></pre> <ul><li><strong>GetItem()</strong> نام آیتم کش، مدت زمان نگهداری در کش و تابعی برای ایجاد آیتم در صورت نبود آن در کش را می‌گیرد.</li></ul> <hr><h3>افزودن کلاس تست</h3><p>1⃣ در پروژه <strong>TestHarness</strong> یک کلاس جدید به نام <strong>TestClass</strong> اضافه کنید.<br> 2⃣ متدهای <strong>GetCachedItem()</strong> و <strong>GetMessage()</strong> را اضافه کنید:</p><pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-built_in">string</span> <span class="hljs-title">GetCachedItem</span>()</span> {
     <span class="hljs-keyword">return</span> MemoryCache.GetItem&lt;<span class="hljs-built_in">string</span>&gt;(<span class="hljs-string">&quot;Message&quot;</span>, TimeSpan.FromSeconds(<span class="hljs-number">30</span>), GetMessage);
 }
 
 <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-built_in">string</span> <span class="hljs-title">GetMessage</span>()</span> {
     <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Hello, world of cache!&quot;</span>;
 }
-</code></pre>
-<ul>
-<li><strong>GetCachedItem()</strong> آیتمی به نام <code>&quot;Message&quot;</code> را از کش می‌گیرد.</li>
-<li>اگر در کش موجود نباشد، <strong>GetMessage()</strong> آن را برای ۳۰ ثانیه در کش قرار می‌دهد.</li>
-</ul>
-<hr>
-<h3>به‌روزرسانی متد Main()</h3>
-<pre class="hljs"><code><span class="hljs-keyword">var</span> harness = <span class="hljs-keyword">new</span> TestClass();
+</code></pre> <ul><li><strong>GetCachedItem()</strong> آیتمی به نام <code>&quot;Message&quot;</code> را از کش می‌گیرد.</li><li>اگر در کش موجود نباشد، <strong>GetMessage()</strong> آن را برای ۳۰ ثانیه در کش قرار می‌دهد.</li></ul> <hr><h3>به‌روزرسانی متد Main()</h3><pre class="hljs"><code><span class="hljs-keyword">var</span> harness = <span class="hljs-keyword">new</span> TestClass();
 Console.WriteLine(harness.GetCachedItem());
 Console.WriteLine(harness.GetCachedItem());
 Thread.Sleep(TimeSpan.FromSeconds(<span class="hljs-number">1</span>));
 Console.WriteLine(harness.GetCachedItem());
-</code></pre>
-<ul>
-<li>اولین فراخوانی <strong>GetCachedItem()</strong> آیتم را در کش ذخیره و بازمی‌گرداند.</li>
-<li>فراخوانی دوم، آیتم را از کش دریافت و بازمی‌گرداند.</li>
-<li><strong>Thread.Sleep</strong> باعث منقضی شدن کش نمی‌شود چون زمان هنوز کمتر از ۳۰ ثانیه است، اما برای شبیه‌سازی عملیات بعدی مفید است.</li>
-<li>آخرین فراخوانی، آیتم را دوباره از کش دریافت و بازمی‌گرداند.</li>
-</ul>
-<h3>افزودن قابلیت لاگ‌گیری در فایل 📄</h3>
-<p>در پروژه ما، فرآیندهای <strong>Logging، Auditing و Instrumentation</strong> خروجی خود را به <strong>یک فایل متنی</strong> می‌فرستند.<br>
-برای این کار نیاز به یک کلاس داریم که:</p>
-<p>1️⃣ بررسی کند فایل مورد نظر وجود دارد یا خیر و در صورت عدم وجود، آن را ایجاد کند.<br>
-2️⃣ خروجی را به فایل اضافه کرده و ذخیره کند.</p>
-<hr>
-<p>1️⃣ یک فولدر به نام <strong>FileSystem</strong> در کتابخانه کلاس ایجاد کنید.<br>
-2️⃣ یک کلاس به نام <strong>LogFile</strong> بسازید و آن را <strong>public static</strong> تعریف کنید.<br>
-3️⃣ متغیرهای عضو زیر را اضافه کنید:</p>
-<pre class="hljs"><code><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-built_in">string</span> _location = <span class="hljs-built_in">string</span>.Empty;
+</code></pre> <ul><li>اولین فراخوانی <strong>GetCachedItem()</strong> آیتم را در کش ذخیره و بازمی‌گرداند.</li><li>فراخوانی دوم، آیتم را از کش دریافت و بازمی‌گرداند.</li><li><strong>Thread.Sleep</strong> باعث منقضی شدن کش نمی‌شود چون زمان هنوز کمتر از ۳۰ ثانیه است، اما برای شبیه‌سازی عملیات بعدی مفید است.</li><li>آخرین فراخوانی، آیتم را دوباره از کش دریافت و بازمی‌گرداند.</li></ul> <h3>افزودن قابلیت لاگ‌گیری در فایل</h3><p>در پروژه ما، فرآیندهای <strong>Logging، Auditing و Instrumentation</strong> خروجی خود را به <strong>یک فایل متنی</strong> می‌فرستند.<br> برای این کار نیاز به یک کلاس داریم که:</p><p>1⃣ بررسی کند فایل مورد نظر وجود دارد یا خیر و در صورت عدم وجود، آن را ایجاد کند.<br> 2⃣ خروجی را به فایل اضافه کرده و ذخیره کند.</p><hr> <p>1⃣ یک فولدر به نام <strong>FileSystem</strong> در کتابخانه کلاس ایجاد کنید.<br> 2⃣ یک کلاس به نام <strong>LogFile</strong> بسازید و آن را <strong>public static</strong> تعریف کنید.<br> 3⃣ متغیرهای عضو زیر را اضافه کنید:</p><pre class="hljs"><code><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-built_in">string</span> _location = <span class="hljs-built_in">string</span>.Empty;
 <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-built_in">string</span> _filename = <span class="hljs-built_in">string</span>.Empty;
 <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-built_in">string</span> _file = <span class="hljs-built_in">string</span>.Empty;
-</code></pre>
-<ul>
-<li><code>_location</code> مسیر فولدر <strong>Entry Assembly</strong> را نگه می‌دارد.</li>
-<li><code>_filename</code> نام فایل به همراه پسوند را نگه می‌دارد.</li>
-<li><code>_file</code> مسیر کامل فایل را نگه می‌دارد.</li>
-</ul>
-<hr>
-<h4>افزودن فولدر Logs در زمان اجرا</h4>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">AddDirectory</span>()</span> {
+</code></pre> <ul><li><code>_location</code> مسیر فولدر <strong>Entry Assembly</strong> را نگه می‌دارد.</li><li><code>_filename</code> نام فایل به همراه پسوند را نگه می‌دارد.</li><li><code>_file</code> مسیر کامل فایل را نگه می‌دارد.</li></ul> <hr><h4>افزودن فولدر Logs در زمان اجرا</h4><pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">AddDirectory</span>()</span> {
     <span class="hljs-keyword">if</span> (!Directory.Exists(_location))
         Directory.CreateDirectory(<span class="hljs-string">&quot;Logs&quot;</span>);
 }
-</code></pre>
-<ul>
-<li>این متد بررسی می‌کند که مسیر وجود دارد یا خیر، و در صورت عدم وجود، فولدر ایجاد می‌کند.</li>
-</ul>
-<hr>
-<h4>افزودن فایل در صورت عدم وجود</h4>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">AddFile</span>()</span> {
+</code></pre> <ul><li>این متد بررسی می‌کند که مسیر وجود دارد یا خیر، و در صورت عدم وجود، فولدر ایجاد می‌کند.</li></ul> <hr><h4>افزودن فایل در صورت عدم وجود</h4><pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">AddFile</span>()</span> {
     _file = Path.Combine(_location, _filename);
     <span class="hljs-keyword">if</span> (File.Exists(_file)) <span class="hljs-keyword">return</span>;
     <span class="hljs-keyword">using</span> (File.Create(<span class="hljs-string">$&quot;Logs\\<span class="hljs-subst">{_filename}</span>&quot;</span>)) { }
 }
-</code></pre>
-<ul>
-<li>مسیر و نام فایل ترکیب می‌شوند.</li>
-<li>اگر فایل وجود داشته باشد، متد خارج می‌شود. در غیر این صورت، فایل ایجاد می‌شود.</li>
-<li>استفاده از <strong>using</strong> از بروز <strong>IOException</strong> در ایجاد اولین رکورد جلوگیری می‌کند.</li>
-</ul>
-<hr>
-<h4>متد ذخیره داده در فایل</h4>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">AppendTextToFile</span>(<span class="hljs-params"><span class="hljs-built_in">string</span> filename, <span class="hljs-built_in">string</span> text</span>)</span> {
+</code></pre> <ul><li>مسیر و نام فایل ترکیب می‌شوند.</li><li>اگر فایل وجود داشته باشد، متد خارج می‌شود. در غیر این صورت، فایل ایجاد می‌شود.</li><li>استفاده از <strong>using</strong> از بروز <strong>IOException</strong> در ایجاد اولین رکورد جلوگیری می‌کند.</li></ul> <hr><h4>متد ذخیره داده در فایل</h4><pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">AppendTextToFile</span>(<span class="hljs-params"><span class="hljs-built_in">string</span> filename, <span class="hljs-built_in">string</span> text</span>)</span> {
     _location = <span class="hljs-string">$&quot;<span class="hljs-subst">{Path.GetDirectoryName(Assembly.GetEntryAssembly()?.Location)}</span>\\Logs&quot;</span>;
     _filename = filename;
     AddDirectory();
     AddFile();
     File.AppendAllText(_file, text);
 }
-</code></pre>
-<ul>
-<li>این متد نام فایل و متن را دریافت می‌کند و مسیر فولدر <strong>Entry Assembly</strong> را تنظیم می‌کند.</li>
-<li>سپس اطمینان حاصل می‌کند که فولدر و فایل موجود هستند و متن را به فایل اضافه می‌کند.</li>
-</ul>
-<hr>
-<h3>افزودن مسأله Logging 🖥️</h3>
-<ul>
-<li>اکثر برنامه‌ها به <strong>نوعی لاگ‌گیری</strong> نیاز دارند: کنسول، فایل، Event Log و دیتابیس.</li>
-<li>در پروژه ما، تنها به <strong>کنسول و فایل متنی</strong> می‌پردازیم.</li>
-</ul>
-<p>1️⃣ فولدری به نام <strong>Logging</strong> در کتابخانه کلاس ایجاد کنید.<br>
-2️⃣ یک کلاس به نام <strong>ConsoleLoggingAspect</strong> اضافه کنید و کد زیر را وارد کنید:</p>
-<pre class="hljs"><code>[<span class="hljs-meta">PSerializable</span>]
+</code></pre> <ul><li>این متد نام فایل و متن را دریافت می‌کند و مسیر فولدر <strong>Entry Assembly</strong> را تنظیم می‌کند.</li><li>سپس اطمینان حاصل می‌کند که فولدر و فایل موجود هستند و متن را به فایل اضافه می‌کند.</li></ul> <hr><h3>افزودن مسأله Logging</h3><ul> <li>اکثر برنامه‌ها به <strong>نوعی لاگ‌گیری</strong> نیاز دارند: کنسول، فایل، Event Log و دیتابیس.</li><li>در پروژه ما، تنها به <strong>کنسول و فایل متنی</strong> می‌پردازیم.</li></ul> <p>1⃣ فولدری به نام <strong>Logging</strong> در کتابخانه کلاس ایجاد کنید.<br> 2⃣ یک کلاس به نام <strong>ConsoleLoggingAspect</strong> اضافه کنید و کد زیر را وارد کنید:</p><pre class="hljs"><code>[<span class="hljs-meta">PSerializable</span>]
 <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">ConsoleLoggingAspect</span> : <span class="hljs-title">OnMethodBoundaryAspect</span> { }
-</code></pre>
-<ul>
-<li><code>[PSerializable]</code> به PostSharp می‌گوید که یک <strong>Serializer</strong> برای PortableFormatter تولید کند.</li>
-<li>کلاس <strong>ConsoleLoggingAspect</strong> از <strong>OnMethodBoundaryAspect</strong> ارث‌بری می‌کند.</li>
-</ul>
-<hr>
-<h3>بازنویسی متدهای Advice برای لاگ‌گیری در کنسول</h3>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">void</span> <span class="hljs-title">OnEntry</span>(<span class="hljs-params">MethodExecutionArgs <span class="hljs-keyword">args</span></span>)</span> {
+</code></pre> <ul><li><code>[PSerializable]</code> به PostSharp می‌گوید که یک <strong>Serializer</strong> برای PortableFormatter تولید کند.</li><li>کلاس <strong>ConsoleLoggingAspect</strong> از <strong>OnMethodBoundaryAspect</strong> ارث‌بری می‌کند.</li></ul> <hr><h3>بازنویسی متدهای Advice برای لاگ‌گیری در کنسول</h3><pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">void</span> <span class="hljs-title">OnEntry</span>(<span class="hljs-params">MethodExecutionArgs <span class="hljs-keyword">args</span></span>)</span> {
     Console.WriteLine(<span class="hljs-string">$&quot;Method: <span class="hljs-subst">{<span class="hljs-keyword">args</span>.Method.Name}</span>, OnEntry().&quot;</span>);
 }
 
@@ -669,46 +182,10 @@ Console.WriteLine(harness.GetCachedItem());
 <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">void</span> <span class="hljs-title">OnException</span>(<span class="hljs-params">MethodExecutionArgs <span class="hljs-keyword">args</span></span>)</span> {
     Console.WriteLine(<span class="hljs-string">$&quot;An exception was thrown in <span class="hljs-subst">{<span class="hljs-keyword">args</span>.Method.Name}</span>. <span class="hljs-subst">{<span class="hljs-keyword">args</span>}</span>&quot;</span>);
 }
-</code></pre>
-<ul>
-<li><strong>OnEntry()</strong> قبل از اجرای بدنه متد اجرا می‌شود و نام متد و نوع Advice را چاپ می‌کند.</li>
-<li><strong>OnExit()</strong> بعد از اتمام متد اجرا می‌شود.</li>
-<li><strong>OnSuccess()</strong> پس از اجرای موفقیت‌آمیز بدون Exception اجرا می‌شود.</li>
-<li><strong>OnException()</strong> هنگام بروز Exception اجرا می‌شود.</li>
-</ul>
-<hr>
-<h3>لاگ‌گیری در فایل متنی 📝</h3>
-<ul>
-<li>
-<p>یک کلاس به نام <strong>TextFileLoggingAspect</strong> اضافه کنید.</p>
-</li>
-<li>
-<p>این کلاس مشابه <strong>ConsoleLoggingAspect</strong> است، با این تفاوت که:</p>
-<ul>
-<li>متدهای <strong>OnEntry()، OnExit() و OnSuccess()</strong> از متد <strong>LogFile.AppendTextToFile()</strong> برای افزودن خروجی به فایل <strong>Log.txt</strong> استفاده می‌کنند.</li>
-<li>متد <strong>OnException()</strong> نیز خروجی را به <strong>Exception.log</strong> اضافه می‌کند.</li>
-</ul>
-</li>
-</ul>
-<p>مثال <strong>OnEntry()</strong> در <strong>TextFileLoggingAspect</strong>:</p>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">void</span> <span class="hljs-title">OnEntry</span>(<span class="hljs-params">MethodExecutionArgs <span class="hljs-keyword">args</span></span>)</span> {
+</code></pre> <ul><li><strong>OnEntry()</strong> قبل از اجرای بدنه متد اجرا می‌شود و نام متد و نوع Advice را چاپ می‌کند.</li><li><strong>OnExit()</strong> بعد از اتمام متد اجرا می‌شود.</li><li><strong>OnSuccess()</strong> پس از اجرای موفقیت‌آمیز بدون Exception اجرا می‌شود.</li><li><strong>OnException()</strong> هنگام بروز Exception اجرا می‌شود.</li></ul> <hr><h3>لاگ‌گیری در فایل متنی</h3><ul> <li><p>یک کلاس به نام <strong>TextFileLoggingAspect</strong> اضافه کنید.</p></li> <li><p>این کلاس مشابه <strong>ConsoleLoggingAspect</strong> است، با این تفاوت که:</p><ul> <li>متدهای <strong>OnEntry()، OnExit() و OnSuccess()</strong> از متد <strong>LogFile.AppendTextToFile()</strong> برای افزودن خروجی به فایل <strong>Log.txt</strong> استفاده می‌کنند.</li><li>متد <strong>OnException()</strong> نیز خروجی را به <strong>Exception.log</strong> اضافه می‌کند.</li></ul> </li></ul> <p>مثال <strong>OnEntry()</strong> در <strong>TextFileLoggingAspect</strong>:</p><pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">void</span> <span class="hljs-title">OnEntry</span>(<span class="hljs-params">MethodExecutionArgs <span class="hljs-keyword">args</span></span>)</span> {
     LogFile.AppendTextToFile(<span class="hljs-string">&quot;Log.txt&quot;</span>, <span class="hljs-string">$&quot;\nMethod: <span class="hljs-subst">{<span class="hljs-keyword">args</span>.Method.Name}</span>, OnEntry().&quot;</span>);
 }
-</code></pre>
-<hr>
-<p>با این کار قابلیت‌های <strong>لاگ‌گیری در فایل و کنسول</strong> آماده است.<br>
-در مرحله بعد، به <strong>مسأله Exceptions</strong> می‌پردازیم. ⚡</p>
-<h3>افزودن مسأله <strong>Exception-Handling</strong> ⚠️</h3>
-<p>در نرم‌افزار، تجربه <strong>Exceptions</strong> توسط کاربران اجتناب‌ناپذیر است.<br>
-پس باید روشی برای <strong>لاگ‌گیری آن‌ها</strong> داشته باشیم.</p>
-<ul>
-<li>روش معمول، ذخیره خطا در <strong>فایلی روی سیستم کاربر</strong> است، مثل <code>Exception.log</code>.</li>
-<li>ما در این بخش همین کار را انجام می‌دهیم.</li>
-</ul>
-<hr>
-<p>1️⃣ یک فولدر به نام <strong>Exceptions</strong> در کتابخانه کلاس ایجاد کنید.<br>
-2️⃣ یک فایل به نام <strong>ExceptionAspect</strong> بسازید و کد زیر را وارد کنید:</p>
-<pre class="hljs"><code>[<span class="hljs-meta">PSerializable</span>]
+</code></pre> <hr><p>با این کار قابلیت‌های <strong>لاگ‌گیری در فایل و کنسول</strong> آماده است.<br> در مرحله بعد، به <strong>مسأله Exceptions</strong> می‌پردازیم.</p><h3>افزودن مسأله <strong>Exception-Handling</strong></h3><p>در نرم‌افزار، تجربه <strong>Exceptions</strong> توسط کاربران اجتناب‌ناپذیر است.<br> پس باید روشی برای <strong>لاگ‌گیری آن‌ها</strong> داشته باشیم.</p><ul> <li>روش معمول، ذخیره خطا در <strong>فایلی روی سیستم کاربر</strong> است، مثل <code>Exception.log</code>.</li><li>ما در این بخش همین کار را انجام می‌دهیم.</li></ul> <hr><p>1⃣ یک فولدر به نام <strong>Exceptions</strong> در کتابخانه کلاس ایجاد کنید.<br> 2⃣ یک فایل به نام <strong>ExceptionAspect</strong> بسازید و کد زیر را وارد کنید:</p><pre class="hljs"><code>[<span class="hljs-meta">PSerializable</span>]
 <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">ExceptionAspect</span> : <span class="hljs-title">OnExceptionAspect</span> {
     <span class="hljs-keyword">public</span> <span class="hljs-built_in">string</span> Message { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">set</span>; }
     <span class="hljs-keyword">public</span> Type ExceptionType { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">set</span>; }
@@ -726,60 +203,13 @@ Console.WriteLine(harness.GetCachedItem());
         <span class="hljs-keyword">return</span> ExceptionType;
     }
 }
-</code></pre>
-<ul>
-<li>
-<p>کلاس <strong>ExceptionAspect</strong> ارث‌بری می‌کند از <strong>OnExceptionAspect</strong> و دارای سه ویژگی است:<br>
-1️⃣ <code>Message</code>: پیام خطا<br>
-2️⃣ <code>ExceptionType</code>: نوع Exception رخ داده<br>
-3️⃣ <code>FlowBehavior</code>: تعیین می‌کند بعد از مدیریت Exception، اجرای برنامه ادامه یابد یا متوقف شود.</p>
-</li>
-<li>
-<p><strong>OnException()</strong> ابتدا پیام خطا را می‌سازد، سپس با <strong>LogFile.AppendTextToFile()</strong> آن را در فایل ذخیره می‌کند.</p>
-</li>
-<li>
-<p><strong>GetExceptionType()</strong> نوع Exception رخ داده را برمی‌گرداند.</p>
-</li>
-<li>
-<p>برای استفاده، کافی است <strong>[ExceptionAspect]</strong> را به متد خود اضافه کنید.</p>
-</li>
-</ul>
-<hr>
-<h3>افزودن مسأله <strong>Security</strong> 🔒</h3>
-<ul>
-<li>نیازهای امنیتی بستگی به پروژه دارند.</li>
-<li>رایج‌ترین موارد: <strong>Authentication و Authorization</strong> برای دسترسی کاربران به بخش‌های مختلف سیستم.</li>
-<li>در این بخش از <strong>Decorator Pattern</strong> برای ایجاد یک <strong>Secure Component</strong> با <strong>Role-Based Methods</strong> استفاده می‌کنیم.</li>
-</ul>
-<blockquote>
-<p>امنیت موضوع بزرگی است و فراتر از این کتاب می‌باشد.<br>
-منابع پیشنهادی:</p>
-<ul>
-<li><a href="https://docs.microsoft.com/en-us/dotnet/standard/security/">Security in .NET</a></li>
-<li><a href="https://oauth.net/code/dotnet/">OAuth 2.0 in .NET</a></li>
-</ul>
-</blockquote>
-<ul>
-<li>ما در این فصل فقط <strong>امنیت سفارشی خودمان</strong> را با Decorator Pattern اضافه می‌کنیم.</li>
-</ul>
-<hr>
-<h3>ایجاد Component امن</h3>
-<p>1️⃣ فولدری به نام <strong>Security</strong> بسازید.<br>
-2️⃣ یک Interface به نام <strong>ISecureComponent</strong> اضافه کنید:</p>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title">ISecureComponent</span> {
+</code></pre> <ul><li> <p>کلاس <strong>ExceptionAspect</strong> ارث‌بری می‌کند از <strong>OnExceptionAspect</strong> و دارای سه ویژگی است:<br> 1⃣ <code>Message</code>: پیام خطا<br> 2⃣ <code>ExceptionType</code>: نوع Exception رخ داده<br> 3⃣ <code>FlowBehavior</code>: تعیین می‌کند بعد از مدیریت Exception، اجرای برنامه ادامه یابد یا متوقف شود.</p></li> <li><p><strong>OnException()</strong> ابتدا پیام خطا را می‌سازد، سپس با <strong>LogFile.AppendTextToFile()</strong> آن را در فایل ذخیره می‌کند.</p></li> <li><p><strong>GetExceptionType()</strong> نوع Exception رخ داده را برمی‌گرداند.</p></li> <li><p>برای استفاده، کافی است <strong>[ExceptionAspect]</strong> را به متد خود اضافه کنید.</p></li> </ul><hr> <h3>افزودن مسأله <strong>Security</strong></h3><ul> <li>نیازهای امنیتی بستگی به پروژه دارند.</li><li>رایج‌ترین موارد: <strong>Authentication و Authorization</strong> برای دسترسی کاربران به بخش‌های مختلف سیستم.</li><li>در این بخش از <strong>Decorator Pattern</strong> برای ایجاد یک <strong>Secure Component</strong> با <strong>Role-Based Methods</strong> استفاده می‌کنیم.</li></ul> <blockquote><p>امنیت موضوع بزرگی است و فراتر از این کتاب می‌باشد.<br> منابع پیشنهادی:</p><ul> <li><a href="https://docs.microsoft.com/en-us/dotnet/standard/security/">Security in .NET</a></li><li><a href="https://oauth.net/code/dotnet/">OAuth 2.0 in .NET</a></li></ul> </blockquote><ul> <li>ما در این فصل فقط <strong>امنیت سفارشی خودمان</strong> را با Decorator Pattern اضافه می‌کنیم.</li></ul> <hr><h3>ایجاد Component امن</h3><p>1⃣ فولدری به نام <strong>Security</strong> بسازید.<br> 2⃣ یک Interface به نام <strong>ISecureComponent</strong> اضافه کنید:</p><pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title">ISecureComponent</span> {
     <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">AddData</span>(<span class="hljs-params"><span class="hljs-built_in">dynamic</span> data</span>)</span>;
     <span class="hljs-function"><span class="hljs-built_in">int</span> <span class="hljs-title">EditData</span>(<span class="hljs-params"><span class="hljs-built_in">dynamic</span> data</span>)</span>;
     <span class="hljs-function"><span class="hljs-built_in">int</span> <span class="hljs-title">DeleteData</span>(<span class="hljs-params"><span class="hljs-built_in">dynamic</span> data</span>)</span>;
     <span class="hljs-function"><span class="hljs-built_in">dynamic</span> <span class="hljs-title">GetData</span>(<span class="hljs-params"><span class="hljs-built_in">dynamic</span> data</span>)</span>;
 }
-</code></pre>
-<ul>
-<li>چهار متد بالا واضح هستند.</li>
-<li><code>dynamic</code> یعنی هر نوع داده‌ای می‌تواند ورودی یا خروجی باشد.</li>
-</ul>
-<hr>
-<h3>ایجاد کلاس پایه DecoratorBase</h3>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">class</span> <span class="hljs-title">DecoratorBase</span> : <span class="hljs-title">ISecureComponent</span> {
+</code></pre> <ul><li>چهار متد بالا واضح هستند.</li><li><code>dynamic</code> یعنی هر نوع داده‌ای می‌تواند ورودی یا خروجی باشد.</li></ul> <hr><h3>ایجاد کلاس پایه DecoratorBase</h3><pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">class</span> <span class="hljs-title">DecoratorBase</span> : <span class="hljs-title">ISecureComponent</span> {
     <span class="hljs-keyword">private</span> <span class="hljs-keyword">readonly</span> ISecureComponent _secureComponent;
 
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">DecoratorBase</span>(<span class="hljs-params">ISecureComponent secureComponent</span>)</span> {
@@ -802,20 +232,7 @@ Console.WriteLine(harness.GetCachedItem());
         <span class="hljs-keyword">return</span> _secureComponent.GetData(data);
     }
 }
-</code></pre>
-<ul>
-<li>این کلاس متدهای Interface را پیاده‌سازی می‌کند و قابلیت <strong>Override</strong> در کلاس‌های مشتق را فراهم می‌کند.</li>
-</ul>
-<hr>
-<h3>کلاس ConcreteSecureComponent</h3>
-<ul>
-<li>کلاس واقعی که کار امن را انجام می‌دهد.</li>
-<li>هر متد پیام مربوطه را در <strong>Console</strong> چاپ می‌کند.</li>
-<li><code>DeleteData()</code> و <code>EditData()</code> مقدار ۱ برمی‌گردانند و <code>GetData()</code> مقدار <code>&quot;Hi!&quot;</code> را برمی‌گرداند.</li>
-</ul>
-<hr>
-<h3>مدیریت دسترسی کاربران</h3>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">readonly</span> <span class="hljs-keyword">struct</span> Credentials {
+</code></pre> <ul><li>این کلاس متدهای Interface را پیاده‌سازی می‌کند و قابلیت <strong>Override</strong> در کلاس‌های مشتق را فراهم می‌کند.</li></ul> <hr><h3>کلاس ConcreteSecureComponent</h3><ul> <li>کلاس واقعی که کار امن را انجام می‌دهد.</li><li>هر متد پیام مربوطه را در <strong>Console</strong> چاپ می‌کند.</li><li><code>DeleteData()</code> و <code>EditData()</code> مقدار ۱ برمی‌گردانند و <code>GetData()</code> مقدار <code>&quot;Hi!&quot;</code> را برمی‌گرداند.</li></ul> <hr><h3>مدیریت دسترسی کاربران</h3><pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">readonly</span> <span class="hljs-keyword">struct</span> Credentials {
     <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-built_in">string</span> Role { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">private</span> <span class="hljs-keyword">set</span>; }
 
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Credentials</span>(<span class="hljs-params"><span class="hljs-built_in">string</span> username, <span class="hljs-built_in">string</span> password</span>)</span> {
@@ -832,14 +249,7 @@ Console.WriteLine(harness.GetCachedItem());
         }
     }
 }
-</code></pre>
-<ul>
-<li><code>struct</code> نام کاربری و رمز عبور را می‌گیرد و <strong>Role مناسب</strong> را اختصاص می‌دهد.</li>
-<li>کاربران Restricted دسترسی کمتری نسبت به Administrator دارند.</li>
-</ul>
-<hr>
-<h3>کلاس ConcreteDecorator برای امنیت</h3>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">ConcreteDecorator</span> : <span class="hljs-title">DecoratorBase</span> {
+</code></pre> <ul><li><code>struct</code> نام کاربری و رمز عبور را می‌گیرد و <strong>Role مناسب</strong> را اختصاص می‌دهد.</li><li>کاربران Restricted دسترسی کمتری نسبت به Administrator دارند.</li></ul> <hr><h3>کلاس ConcreteDecorator برای امنیت</h3><pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">ConcreteDecorator</span> : <span class="hljs-title">DecoratorBase</span> {
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">ConcreteDecorator</span>(<span class="hljs-params">ISecureComponent secureComponent</span>) : <span class="hljs-title">base</span>(<span class="hljs-params">secureComponent</span>)</span> { }
 
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">void</span> <span class="hljs-title">AddData</span>(<span class="hljs-params"><span class="hljs-built_in">dynamic</span> data</span>)</span> {
@@ -871,14 +281,7 @@ Console.WriteLine(harness.GetCachedItem());
         <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> UnauthorizedAccessException(<span class="hljs-string">&quot;Unauthorized&quot;</span>);
     }
 }
-</code></pre>
-<ul>
-<li><strong>ConcreteDecorator</strong> بررسی می‌کند که کاربر <strong>در Role مجاز</strong> قرار دارد یا خیر.</li>
-<li>فقط کاربران Administrator و Restricted می‌توانند متدها را اجرا کنند.</li>
-</ul>
-<hr>
-<h3>آماده‌سازی برای اجرای امنیت</h3>
-<pre class="hljs"><code><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">readonly</span> ConcreteDecorator ConcreteDecorator = <span class="hljs-keyword">new</span> ConcreteDecorator(
+</code></pre> <ul><li><strong>ConcreteDecorator</strong> بررسی می‌کند که کاربر <strong>در Role مجاز</strong> قرار دارد یا خیر.</li><li>فقط کاربران Administrator و Restricted می‌توانند متدها را اجرا کنند.</li></ul> <hr><h3>آماده‌سازی برای اجرای امنیت</h3><pre class="hljs"><code><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">readonly</span> ConcreteDecorator ConcreteDecorator = <span class="hljs-keyword">new</span> ConcreteDecorator(
     <span class="hljs-keyword">new</span> ConcreteSecureComponent()
 );
 
@@ -888,86 +291,20 @@ Console.WriteLine(harness.GetCachedItem());
     Console.WriteLine(<span class="hljs-string">&quot;Press any key to exit.&quot;</span>);
     Console.ReadKey();
 }
-</code></pre>
-<ul>
-<li>
-<p>یک <strong>ConcreteDecorator</strong> ساخته و <strong>ConcreteSecureComponent</strong> را به آن پاس می‌دهیم.</p>
-</li>
-<li>
-<p>این شیء در متدهای داده‌ای ما استفاده می‌شود.</p>
-</li>
-<li>
-<p>سپس با وارد کردن <strong>نام کاربری و رمز عبور</strong>، کار امن آغاز می‌شود.<br>
-ما نام کاربری و رمز عبور را به <strong>struct Credentials</strong> اختصاص می‌دهیم. این کار باعث می‌شود <strong>Role</strong> تنظیم شود. سپس متد <strong>DoSecureWork()</strong> را فراخوانی می‌کنیم.</p>
-</li>
-<li>
-<p>متد <strong>DoSecureWork()</strong> مسئول فراخوانی همه متدهای داده‌ای است.</p>
-</li>
-<li>
-<p>در انتها، برنامه منتظر می‌ماند تا کاربر یک کلید فشار دهد و سپس خارج می‌شود.</p>
-</li>
-</ul>
-<hr>
-<h3>تعریف متد DoSecureWork()</h3>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">DoSecureWork</span>()</span> {
+</code></pre> <ul><li> <p>یک <strong>ConcreteDecorator</strong> ساخته و <strong>ConcreteSecureComponent</strong> را به آن پاس می‌دهیم.</p></li> <li><p>این شیء در متدهای داده‌ای ما استفاده می‌شود.</p></li> <li><p>سپس با وارد کردن <strong>نام کاربری و رمز عبور</strong>، کار امن آغاز می‌شود.<br> ما نام کاربری و رمز عبور را به <strong>struct Credentials</strong> اختصاص می‌دهیم. این کار باعث می‌شود <strong>Role</strong> تنظیم شود. سپس متد <strong>DoSecureWork()</strong> را فراخوانی می‌کنیم.</p></li> <li><p>متد <strong>DoSecureWork()</strong> مسئول فراخوانی همه متدهای داده‌ای است.</p></li> <li><p>در انتها، برنامه منتظر می‌ماند تا کاربر یک کلید فشار دهد و سپس خارج می‌شود.</p></li> </ul><hr> <h3>تعریف متد DoSecureWork()</h3><pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">DoSecureWork</span>()</span> {
     AddData();
     EditData();
     DeleteData();
     GetData();
 }
-</code></pre>
-<ul>
-<li>این متد، همه متدهای داده‌ای را فراخوانی می‌کند که در نهایت به <strong>ConcreteDecorator</strong> منتقل می‌شوند.</li>
-</ul>
-<hr>
-<h3>تعریف متد AddData() با ExceptionAspect ⚠️</h3>
-<pre class="hljs"><code>[<span class="hljs-meta">ExceptionAspect(consoleOutput: true)</span>]
+</code></pre> <ul><li>این متد، همه متدهای داده‌ای را فراخوانی می‌کند که در نهایت به <strong>ConcreteDecorator</strong> منتقل می‌شوند.</li></ul> <hr><h3>تعریف متد AddData() با ExceptionAspect</h3><pre class="hljs"><code>[<span class="hljs-meta">ExceptionAspect(consoleOutput: true)</span>]
 <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">AddData</span>()</span> {
     ConcreteDecorator.AddData(<span class="hljs-string">&quot;Hello, world!&quot;</span>);
 }
-</code></pre>
-<ul>
-<li><strong>[ExceptionAspect]</strong> به <strong>AddData()</strong> اعمال شده است.</li>
-<li>این اطمینان می‌دهد که هر خطایی در <strong>Exceptions.log</strong> ثبت می‌شود.</li>
-<li>پارامتر <code>consoleOutput: true</code> باعث می‌شود پیام خطا در <strong>کنسول</strong> هم نمایش داده شود.</li>
-<li>خود متد، متد <strong>AddData()</strong> را روی <strong>ConcreteDecorator</strong> فراخوانی می‌کند.</li>
-</ul>
-<hr>
-<h3>سایر متدهای داده‌ای</h3>
-<ul>
-<li>بقیه متدها (<strong>EditData()</strong>, <strong>DeleteData()</strong>, <strong>GetData()</strong>) را به همان روش تعریف کنید، با اعمال <strong>ExceptionAspect</strong> و فراخوانی متدهای متناظر در <strong>ConcreteDecorator</strong>.</li>
-</ul>
-<hr>
-<p>پس از اجرای برنامه، باید خروجی مشابه تصویر زیر را مشاهده کنید:</p>
-<p>✅ متدها اجرا می‌شوند<br>
-✅ پیام‌ها در کنسول چاپ می‌شوند<br>
-✅ هر خطایی در <strong>Exceptions.log</strong> ثبت می‌شود</p>
-<div align="center">
-<p><img src="../../../assets/image/11/Table%2011-7.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<p>اکنون ما یک <strong>شیء مبتنی بر نقش</strong> داریم که همراه با <strong>مدیریت استثناها</strong> کار می‌کند. گام بعدی ما، پیاده‌سازی <strong>Validation Concern</strong> یا بررسی اعتبار داده‌ها است. ✅</p>
-<hr>
-<h2>افزودن <strong>Validation Concern</strong> 🔍</h2>
-<p>تمام داده‌های وارد شده توسط کاربر باید <strong>اعتبارسنجی</strong> شوند، چرا که ممکن است <strong>خطرناک، ناقص یا با فرمت اشتباه</strong> باشند. هدف این است که اطمینان حاصل کنیم داده‌ها <strong>پاک و ایمن</strong> هستند.</p>
-<p>برای نمونه‌ی ما، <strong>اعتبارسنجی null</strong> را پیاده‌سازی می‌کنیم.</p>
-<h3>1️⃣ افزودن کلاس AllowNullAttribute</h3>
-<ul>
-<li>یک پوشه به نام <strong>Validation</strong> به پروژه اضافه کنید.</li>
-<li>سپس کلاس زیر را اضافه کنید:</li>
-</ul>
-<pre class="hljs"><code>[<span class="hljs-meta">AttributeUsage(AttributeTargets.Parameter | AttributeTargets.ReturnValue |
+</code></pre> <ul><li><strong>[ExceptionAspect]</strong> به <strong>AddData()</strong> اعمال شده است.</li><li>این اطمینان می‌دهد که هر خطایی در <strong>Exceptions.log</strong> ثبت می‌شود.</li><li>پارامتر <code>consoleOutput: true</code> باعث می‌شود پیام خطا در <strong>کنسول</strong> هم نمایش داده شود.</li><li>خود متد، متد <strong>AddData()</strong> را روی <strong>ConcreteDecorator</strong> فراخوانی می‌کند.</li></ul> <hr><h3>سایر متدهای داده‌ای</h3><ul> <li>بقیه متدها (<strong>EditData()</strong>, <strong>DeleteData()</strong>, <strong>GetData()</strong>) را به همان روش تعریف کنید، با اعمال <strong>ExceptionAspect</strong> و فراخوانی متدهای متناظر در <strong>ConcreteDecorator</strong>.</li></ul> <hr><p>پس از اجرای برنامه، باید خروجی مشابه تصویر زیر را مشاهده کنید:</p><p>متدها اجرا می‌شوند<br> پیام‌ها در کنسول چاپ می‌شوند<br> هر خطایی در <strong>Exceptions.log</strong> ثبت می‌شود</p><div align="center"> <p><img src="../../../assets/image/11/Table%2011-7.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <p>اکنون ما یک <strong>شیء مبتنی بر نقش</strong> داریم که همراه با <strong>مدیریت استثناها</strong> کار می‌کند. گام بعدی ما، پیاده‌سازی <strong>Validation Concern</strong> یا بررسی اعتبار داده‌ها است.</p><hr> <h2>افزودن <strong>Validation Concern</strong></h2><p>تمام داده‌های وارد شده توسط کاربر باید <strong>اعتبارسنجی</strong> شوند، چرا که ممکن است <strong>خطرناک، ناقص یا با فرمت اشتباه</strong> باشند. هدف این است که اطمینان حاصل کنیم داده‌ها <strong>پاک و ایمن</strong> هستند.</p><p>برای نمونه‌ی ما، <strong>اعتبارسنجی null</strong> را پیاده‌سازی می‌کنیم.</p><h3>1⃣ افزودن کلاس AllowNullAttribute</h3><ul> <li>یک پوشه به نام <strong>Validation</strong> به پروژه اضافه کنید.</li><li>سپس کلاس زیر را اضافه کنید:</li></ul> <pre class="hljs"><code>[<span class="hljs-meta">AttributeUsage(AttributeTargets.Parameter | AttributeTargets.ReturnValue |
  AttributeTargets.Property)</span>]
 <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">AllowNullAttribute</span> : <span class="hljs-title">Attribute</span> { }
-</code></pre>
-<ul>
-<li>این <strong>Attribute</strong> اجازه می‌دهد که پارامترها، مقادیر بازگشتی و Properties بتوانند <strong>null</strong> باشند.</li>
-</ul>
-<hr>
-<h3>2️⃣ افزودن enum ValidationFlags</h3>
-<ul>
-<li>در فایلی با همان نام، enum زیر را اضافه کنید:</li>
-</ul>
-<pre class="hljs"><code>[<span class="hljs-meta">Flags</span>]
+</code></pre> <ul><li>این <strong>Attribute</strong> اجازه می‌دهد که پارامترها، مقادیر بازگشتی و Properties بتوانند <strong>null</strong> باشند.</li></ul> <hr><h3>2⃣ افزودن enum ValidationFlags</h3><ul> <li>در فایلی با همان نام، enum زیر را اضافه کنید:</li></ul> <pre class="hljs"><code>[<span class="hljs-meta">Flags</span>]
 <span class="hljs-keyword">public</span> <span class="hljs-built_in">enum</span> ValidationFlags {
     Properties = <span class="hljs-number">1</span>,
     Methods = <span class="hljs-number">2</span>,
@@ -979,13 +316,7 @@ Console.WriteLine(harness.GetCachedItem());
     AllPublic = AllPublicArguments | OutValues | ReturnValues,
     All = AllPublic | NonPublic
 }
-</code></pre>
-<ul>
-<li>این <strong>Flags</strong> مشخص می‌کنند که <strong>Aspect</strong> بر روی چه اجزایی اعمال شود.</li>
-</ul>
-<hr>
-<h3>3️⃣ افزودن کلاس ReflectionExtensions</h3>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">class</span> <span class="hljs-title">ReflectionExtensions</span> {
+</code></pre> <ul><li>این <strong>Flags</strong> مشخص می‌کنند که <strong>Aspect</strong> بر روی چه اجزایی اعمال شود.</li></ul> <hr><h3>3⃣ افزودن کلاس ReflectionExtensions</h3><pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">class</span> <span class="hljs-title">ReflectionExtensions</span> {
     <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-built_in">bool</span> <span class="hljs-title">IsCustomAttributeDefined</span>&lt;<span class="hljs-title">T</span>&gt;(<span class="hljs-params"><span class="hljs-keyword">this</span> ICustomAttributeProvider <span class="hljs-keyword">value</span></span>) <span class="hljs-keyword">where</span> T : Attribute</span> {
         <span class="hljs-keyword">return</span> <span class="hljs-keyword">value</span>.IsDefined(<span class="hljs-keyword">typeof</span>(T), <span class="hljs-literal">false</span>);
     }
@@ -998,15 +329,7 @@ Console.WriteLine(harness.GetCachedItem());
         <span class="hljs-keyword">return</span> !arg.AllowsNull() &amp;&amp; !arg.IsOptional &amp;&amp; !arg.ParameterType.IsValueType;
     }
 }
-</code></pre>
-<ul>
-<li><strong>IsCustomAttributeDefined()</strong>: بررسی می‌کند که آیا Attribute مورد نظر روی عضو اعمال شده است یا نه.</li>
-<li><strong>AllowsNull()</strong>: بررسی می‌کند که آیا [AllowNull] اعمال شده است یا خیر.</li>
-<li><strong>MayNotBeNull()</strong>: بررسی می‌کند که null مجاز است یا خیر، پارامتر اختیاری است یا نه، و نوع داده پارامتر چیست. نتیجه <strong>Boolean</strong> بازگردانده می‌شود.</li>
-</ul>
-<hr>
-<h3>4️⃣ افزودن کلاس DisallowNonNullAspect</h3>
-<pre class="hljs"><code>[<span class="hljs-meta">PSerializable</span>]
+</code></pre> <ul><li><strong>IsCustomAttributeDefined()</strong>: بررسی می‌کند که آیا Attribute مورد نظر روی عضو اعمال شده است یا نه.</li><li><strong>AllowsNull()</strong>: بررسی می‌کند که آیا [AllowNull] اعمال شده است یا خیر.</li><li><strong>MayNotBeNull()</strong>: بررسی می‌کند که null مجاز است یا خیر، پارامتر اختیاری است یا نه، و نوع داده پارامتر چیست. نتیجه <strong>Boolean</strong> بازگردانده می‌شود.</li></ul> <hr><h3>4⃣ افزودن کلاس DisallowNonNullAspect</h3><pre class="hljs"><code>[<span class="hljs-meta">PSerializable</span>]
 <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">DisallowNonNullAspect</span> : <span class="hljs-title">OnMethodBoundaryAspect</span> {
     <span class="hljs-keyword">private</span> <span class="hljs-built_in">int</span>[] _inputArgumentsToValidate;
     <span class="hljs-keyword">private</span> <span class="hljs-built_in">int</span>[] _outputArgumentsToValidate;
@@ -1023,15 +346,7 @@ Console.WriteLine(harness.GetCachedItem());
 
     <span class="hljs-keyword">public</span> ValidationFlags ValidationFlags { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">set</span>; }
 }
-</code></pre>
-<ul>
-<li>کلاس <strong>DisallowNonNullAspect</strong> از <strong>OnMethodBoundaryAspect</strong> ارث‌بری می‌کند.</li>
-<li>متغیرها برای نگهداری پارامترهای ورودی، خروجی، نام پارامترها، بررسی مقادیر بازگشتی و نام عضو استفاده می‌شوند.</li>
-<li>سازنده پیش‌فرض برای اعمال Validator بر تمام اعضای عمومی است.</li>
-</ul>
-<hr>
-<h3>5️⃣ Override متد CompileTimeValidate</h3>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-built_in">bool</span> <span class="hljs-title">CompileTimeValidate</span>(<span class="hljs-params">MethodBase method</span>)</span> {
+</code></pre> <ul><li>کلاس <strong>DisallowNonNullAspect</strong> از <strong>OnMethodBoundaryAspect</strong> ارث‌بری می‌کند.</li><li>متغیرها برای نگهداری پارامترهای ورودی، خروجی، نام پارامترها، بررسی مقادیر بازگشتی و نام عضو استفاده می‌شوند.</li><li>سازنده پیش‌فرض برای اعمال Validator بر تمام اعضای عمومی است.</li></ul> <hr><h3>5⃣ Override متد CompileTimeValidate</h3><pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-built_in">bool</span> <span class="hljs-title">CompileTimeValidate</span>(<span class="hljs-params">MethodBase method</span>)</span> {
     <span class="hljs-keyword">var</span> methodInformation = MethodInformation.GetMethodInformation(method);
     <span class="hljs-keyword">var</span> parameters = method.GetParameters();
 
@@ -1060,13 +375,7 @@ Console.WriteLine(harness.GetCachedItem());
     <span class="hljs-keyword">var</span> validationRequired = _validateReturnValue || _inputArgumentsToValidate.Length &gt; <span class="hljs-number">0</span> || _outputArgumentsToValidate.Length &gt; <span class="hljs-number">0</span>;
     <span class="hljs-keyword">return</span> validationRequired;
 }
-</code></pre>
-<ul>
-<li>این متد تضمین می‌کند که <strong>Aspect</strong> در زمان <strong>Compile-Time</strong> بر عضو مناسب اعمال شده باشد.</li>
-</ul>
-<hr>
-<h3>6️⃣ Override متد OnEntry</h3>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">void</span> <span class="hljs-title">OnEntry</span>(<span class="hljs-params">MethodExecutionArgs <span class="hljs-keyword">args</span></span>)</span> {
+</code></pre> <ul><li>این متد تضمین می‌کند که <strong>Aspect</strong> در زمان <strong>Compile-Time</strong> بر عضو مناسب اعمال شده باشد.</li></ul> <hr><h3>6⃣ Override متد OnEntry</h3><pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">void</span> <span class="hljs-title">OnEntry</span>(<span class="hljs-params">MethodExecutionArgs <span class="hljs-keyword">args</span></span>)</span> {
     <span class="hljs-keyword">foreach</span> (<span class="hljs-keyword">var</span> argumentPosition <span class="hljs-keyword">in</span> _inputArgumentsToValidate) {
         <span class="hljs-keyword">if</span> (<span class="hljs-keyword">args</span>.Arguments[argumentPosition] != <span class="hljs-literal">null</span>) <span class="hljs-keyword">continue</span>;
         <span class="hljs-keyword">var</span> parameterName = _parameterNames[argumentPosition];
@@ -1077,13 +386,7 @@ Console.WriteLine(harness.GetCachedItem());
         }
     }
 }
-</code></pre>
-<ul>
-<li>بررسی می‌کند که پارامترهای ورودی <strong>null</strong> نباشند و در صورت وجود، <strong>ArgumentNullException</strong> پرتاب می‌شود.</li>
-</ul>
-<hr>
-<h3>7️⃣ Override متد OnSuccess</h3>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">void</span> <span class="hljs-title">OnSuccess</span>(<span class="hljs-params">MethodExecutionArgs <span class="hljs-keyword">args</span></span>)</span> {
+</code></pre> <ul><li>بررسی می‌کند که پارامترهای ورودی <strong>null</strong> نباشند و در صورت وجود، <strong>ArgumentNullException</strong> پرتاب می‌شود.</li></ul> <hr><h3>7⃣ Override متد OnSuccess</h3><pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">void</span> <span class="hljs-title">OnSuccess</span>(<span class="hljs-params">MethodExecutionArgs <span class="hljs-keyword">args</span></span>)</span> {
     <span class="hljs-keyword">foreach</span> (<span class="hljs-keyword">var</span> argumentPosition <span class="hljs-keyword">in</span> _outputArgumentsToValidate) {
         <span class="hljs-keyword">if</span> (<span class="hljs-keyword">args</span>.Arguments[argumentPosition] != <span class="hljs-literal">null</span>) <span class="hljs-keyword">continue</span>;
         <span class="hljs-keyword">var</span> parameterName = _parameterNames[argumentPosition];
@@ -1097,16 +400,7 @@ Console.WriteLine(harness.GetCachedItem());
     }
     <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> InvalidOperationException(<span class="hljs-string">$&quot;Return value of method &#x27;<span class="hljs-subst">{_memberName}</span>&#x27; is null.&quot;</span>);
 }
-</code></pre>
-<ul>
-<li>پارامترهای خروجی را بررسی می‌کند و در صورت <strong>null</strong> بودن، <strong>InvalidOperationException</strong> پرتاب می‌شود.</li>
-</ul>
-<hr>
-<h3>8️⃣ افزودن کلاس MethodInformation</h3>
-<ul>
-<li>برای استخراج اطلاعات متدها و سازنده‌ها:</li>
-</ul>
-<pre class="hljs"><code><span class="hljs-keyword">private</span> <span class="hljs-keyword">class</span> <span class="hljs-title">MethodInformation</span> {
+</code></pre> <ul><li>پارامترهای خروجی را بررسی می‌کند و در صورت <strong>null</strong> بودن، <strong>InvalidOperationException</strong> پرتاب می‌شود.</li></ul> <hr><h3>8⃣ افزودن کلاس MethodInformation</h3><ul> <li>برای استخراج اطلاعات متدها و سازنده‌ها:</li></ul> <pre class="hljs"><code><span class="hljs-keyword">private</span> <span class="hljs-keyword">class</span> <span class="hljs-title">MethodInformation</span> {
     <span class="hljs-keyword">public</span> <span class="hljs-built_in">string</span> Name { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">private</span> <span class="hljs-keyword">set</span>; }
     <span class="hljs-keyword">public</span> <span class="hljs-built_in">bool</span> IsProperty { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">private</span> <span class="hljs-keyword">set</span>; }
     <span class="hljs-keyword">public</span> <span class="hljs-built_in">bool</span> IsPublic { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">private</span> <span class="hljs-keyword">set</span>; }
@@ -1143,22 +437,7 @@ Console.WriteLine(harness.GetCachedItem());
         <span class="hljs-keyword">return</span> method == <span class="hljs-literal">null</span> ? <span class="hljs-literal">null</span> : CreateInstance(method);
     }
 }
-</code></pre>
-<hr>
-<p>📌 اکنون <strong>Validation Aspect</strong> آماده است و می‌توانید:</p>
-<ul>
-<li><code>[AllowNull]</code> برای مجاز کردن <strong>null</strong></li>
-<li><code>[DisallowNonNullAspect]</code> برای جلوگیری از <strong>null</strong></li>
-</ul>
-<p>گام بعدی ما اضافه کردن <strong>Transaction Concern</strong> خواهد بود.</p>
-<p>اکنون کتابخانه ما شامل چند <strong>Cross-Cutting Concern</strong> آماده و قابل استفاده است. بیایید بخش‌هایی که اضافه کرده‌ایم را به طور خلاصه مرور کنیم: ✅</p>
-<hr>
-<h2>1️⃣ <strong>Transaction Concern</strong> 💳</h2>
-<ul>
-<li><strong>هدف:</strong> تضمین اجرای کامل یا rollback تراکنش‌ها.</li>
-<li><strong>پیاده‌سازی:</strong></li>
-</ul>
-<pre class="hljs"><code>[<span class="hljs-meta">PSerializable</span>]
+</code></pre> <hr><p>اکنون <strong>Validation Aspect</strong> آماده است و می‌توانید:</p><ul> <li><code>[AllowNull]</code> برای مجاز کردن <strong>null</strong></li><li><code>[DisallowNonNullAspect]</code> برای جلوگیری از <strong>null</strong></li></ul> <p>گام بعدی ما اضافه کردن <strong>Transaction Concern</strong> خواهد بود.</p><p>اکنون کتابخانه ما شامل چند <strong>Cross-Cutting Concern</strong> آماده و قابل استفاده است. بیایید بخش‌هایی که اضافه کرده‌ایم را به طور خلاصه مرور کنیم:</p><hr> <h2>1⃣ <strong>Transaction Concern</strong></h2><ul> <li><strong>هدف:</strong> تضمین اجرای کامل یا rollback تراکنش‌ها.</li><li><strong>پیاده‌سازی:</strong></li></ul> <pre class="hljs"><code>[<span class="hljs-meta">PSerializable</span>]
 [<span class="hljs-meta">AttributeUsage(AttributeTargets.Method)</span>]
 <span class="hljs-keyword">public</span> <span class="hljs-keyword">sealed</span> <span class="hljs-keyword">class</span> <span class="hljs-title">RequiresTransactionAspect</span> : <span class="hljs-title">OnMethodBoundaryAspect</span> {
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">void</span> <span class="hljs-title">OnEntry</span>(<span class="hljs-params">MethodExecutionArgs <span class="hljs-keyword">args</span></span>)</span> {
@@ -1174,18 +453,7 @@ Console.WriteLine(harness.GetCachedItem());
         transactionScope.Dispose();
     }
 }
-</code></pre>
-<ul>
-<li><code>[RequiresTransactionAspect]</code> روی متد قرار می‌گیرد تا تراکنش آغاز شود، در صورت موفقیت کامل شود و در نهایت Dispose شود.</li>
-<li>برای ثبت خطاهای تراکنش، می‌توانید از <code>[ExceptionAspect]</code> نیز استفاده کنید.</li>
-</ul>
-<hr>
-<h2>2️⃣ <strong>Resource Pool Concern</strong> 🏊‍♂️</h2>
-<ul>
-<li><strong>هدف:</strong> بهبود عملکرد با ایجاد و استفاده مجدد از اشیاء گران‌قیمت.</li>
-<li><strong>کلاس ResourcePool<T></strong>:</li>
-</ul>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">ResourcePool</span>&lt;<span class="hljs-title">T</span>&gt; {
+</code></pre> <ul><li><code>[RequiresTransactionAspect]</code> روی متد قرار می‌گیرد تا تراکنش آغاز شود، در صورت موفقیت کامل شود و در نهایت Dispose شود.</li><li>برای ثبت خطاهای تراکنش، می‌توانید از <code>[ExceptionAspect]</code> نیز استفاده کنید.</li></ul> <hr><h2>2⃣ <strong>Resource Pool Concern</strong> ‍</h2><ul> <li><strong>هدف:</strong> بهبود عملکرد با ایجاد و استفاده مجدد از اشیاء گران‌قیمت.</li><li><strong>کلاس ResourcePool<T></strong>:</li></ul> <pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">ResourcePool</span>&lt;<span class="hljs-title">T</span>&gt; {
     <span class="hljs-keyword">private</span> <span class="hljs-keyword">readonly</span> ConcurrentBag&lt;T&gt; _resources;
     <span class="hljs-keyword">private</span> <span class="hljs-keyword">readonly</span> Func&lt;T&gt; _resourceGenerator;
 
@@ -1197,21 +465,10 @@ Console.WriteLine(harness.GetCachedItem());
     <span class="hljs-function"><span class="hljs-keyword">public</span> T <span class="hljs-title">Get</span>()</span> =&gt; _resources.TryTake(<span class="hljs-keyword">out</span> T item) ? item : _resourceGenerator();
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Return</span>(<span class="hljs-params">T item</span>)</span> =&gt; _resources.Add(item);
 }
-</code></pre>
-<ul>
-<li><strong>استفاده:</strong></li>
-</ul>
-<pre class="hljs"><code><span class="hljs-keyword">var</span> pool = <span class="hljs-keyword">new</span> ResourcePool&lt;Course&gt;(() =&gt; <span class="hljs-keyword">new</span> Course());
+</code></pre> <ul><li><strong>استفاده:</strong></li></ul> <pre class="hljs"><code><span class="hljs-keyword">var</span> pool = <span class="hljs-keyword">new</span> ResourcePool&lt;Course&gt;(() =&gt; <span class="hljs-keyword">new</span> Course());
 <span class="hljs-keyword">var</span> course = pool.Get();
 pool.Return(course);
-</code></pre>
-<hr>
-<h2>3️⃣ <strong>Configuration Settings Concern</strong> ⚙️</h2>
-<ul>
-<li><strong>هدف:</strong> مرکزی کردن تنظیمات برنامه (App.config یا Web.config).</li>
-<li><strong>کلاس Settings:</strong></li>
-</ul>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Settings</span> {
+</code></pre> <hr><h2>3⃣ <strong>Configuration Settings Concern</strong></h2><ul> <li><strong>هدف:</strong> مرکزی کردن تنظیمات برنامه (App.config یا Web.config).</li><li><strong>کلاس Settings:</strong></li></ul> <pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Settings</span> {
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-built_in">string</span> <span class="hljs-title">GetAppSetting</span>(<span class="hljs-params"><span class="hljs-built_in">string</span> key</span>)</span> {
         <span class="hljs-keyword">return</span> System.Configuration.ConfigurationManager.AppSettings[key];
     }
@@ -1219,21 +476,10 @@ pool.Return(course);
         System.Configuration.ConfigurationManager.AppSettings[key] = <span class="hljs-keyword">value</span>;
     }
 }
-</code></pre>
-<ul>
-<li>با <strong>import static</strong> می‌توان از کلاس بدون پیش‌وند استفاده کرد:</li>
-</ul>
-<pre class="hljs"><code>Console.WriteLine(GetAppSetting(<span class="hljs-string">&quot;Greeting&quot;</span>));
+</code></pre> <ul><li>با <strong>import static</strong> می‌توان از کلاس بدون پیش‌وند استفاده کرد:</li></ul> <pre class="hljs"><code>Console.WriteLine(GetAppSetting(<span class="hljs-string">&quot;Greeting&quot;</span>));
 <span class="hljs-string">&quot;Greeting&quot;</span>.SetAppSettings(<span class="hljs-string">&quot;Goodbye!&quot;</span>);
 Console.WriteLine(GetAppSetting(<span class="hljs-string">&quot;Greeting&quot;</span>));
-</code></pre>
-<hr>
-<h2>4️⃣ <strong>Instrumentation Concern</strong> ⏱️</h2>
-<ul>
-<li><strong>هدف:</strong> پروفایل و اندازه‌گیری زمان اجرای متدها.</li>
-<li><strong>کلاس InstrumentationAspect:</strong></li>
-</ul>
-<pre class="hljs"><code>[<span class="hljs-meta">PSerializable</span>]
+</code></pre> <hr><h2>4⃣ <strong>Instrumentation Concern</strong> ⏱</h2><ul> <li><strong>هدف:</strong> پروفایل و اندازه‌گیری زمان اجرای متدها.</li><li><strong>کلاس InstrumentationAspect:</strong></li></ul> <pre class="hljs"><code>[<span class="hljs-meta">PSerializable</span>]
 [<span class="hljs-meta">AttributeUsage(AttributeTargets.Method)</span>]
 <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">InstrumentationAspect</span> : <span class="hljs-title">OnMethodBoundaryAspect</span> {
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">void</span> <span class="hljs-title">OnEntry</span>(<span class="hljs-params">MethodExecutionArgs <span class="hljs-keyword">args</span></span>)</span> {
@@ -1249,230 +495,216 @@ Console.WriteLine(GetAppSetting(<span class="hljs-string">&quot;Greeting&quot;</
         LogFile.AppendTextToFile(<span class="hljs-string">&quot;Profile.log&quot;</span>, <span class="hljs-string">$&quot;\nMethod: <span class="hljs-subst">{<span class="hljs-keyword">args</span>.Method.Name}</span>, Stop Time: <span class="hljs-subst">{DateTime.Now}</span>, Duration: <span class="hljs-subst">{stopwatch.Elapsed}</span>&quot;</span>);
     }
 }
-</code></pre>
-<ul>
-<li>شروع و پایان متد ثبت شده و مدت زمان اجرای آن به <strong>Profile.log</strong> نوشته می‌شود.</li>
-<li>در صورت وقوع استثناء، خطا در <strong>Exception.log</strong> ذخیره می‌شود.</li>
-</ul>
-<hr>
-<h3>✅ نتیجه</h3>
-<p>حالا شما یک <strong>کتابخانه کامل از Cross-Cutting Concerns</strong> دارید که شامل موارد زیر است:</p>
-<ol>
-<li><strong>Caching</strong> – ذخیره موقت داده‌ها</li>
-<li><strong>File Logging &amp; Console Logging</strong> – لاگ‌گیری</li>
-<li><strong>Exception Handling</strong> – مدیریت استثناء‌ها</li>
-<li><strong>Security</strong> – امنیت مبتنی بر نقش</li>
-<li><strong>Validation</strong> – اعتبارسنجی داده‌ها</li>
-<li><strong>Transactions</strong> – تراکنش‌ها</li>
-<li><strong>Resource Pooling</strong> – استفاده مجدد از منابع</li>
-<li><strong>Configuration</strong> – مدیریت تنظیمات</li>
-<li><strong>Instrumentation</strong> – پروفایلینگ متدها</li>
-</ol>
-<p>تمام این موارد با <strong>AOP و Decorator Pattern</strong> پیاده‌سازی شده‌اند و شما می‌توانید به راحتی در پروژه‌های خود از آن‌ها استفاده کنید.</p>
-<h3>خلاصه فصل</h3>
-<p>در این فصل، ما موارد زیر را یاد گرفتیم:</p>
-<ol>
-<li>
-<p><strong>الگوی دکوراتور (Decorator Pattern)</strong></p>
-<ul>
-<li>امکان اضافه کردن رفتار جدید به اشیاء بدون تغییر کلاس اصلی.</li>
-</ul>
-</li>
-<li>
-<p><strong>الگوی پراکسی (Proxy Pattern)</strong></p>
-<ul>
-<li>ایجاد شیء جایگزین برای سرویس واقعی.</li>
-<li>پراکسی درخواست‌های مشتری را دریافت و پردازش کرده و به سرویس اصلی منتقل می‌کند.</li>
-<li>پراکسی و سرویس یک رابط (interface) مشترک دارند، بنابراین قابل جایگزینی هستند.</li>
-</ul>
-</li>
-<li>
-<p><strong>برنامه‌نویسی مبتنی بر جنبه (AOP) با PostSharp</strong></p>
-<ul>
-<li>
-<p><strong>Aspect</strong> و <strong>Attribute</strong> برای تزریق خودکار کد در زمان کامپایل استفاده می‌شوند.</p>
-</li>
-<li>
-<p>امکان مدیریت <strong>Cross-Cutting Concerns</strong> مانند:</p>
-<ul>
-<li><strong>Logging</strong> (لاگ‌گیری)</li>
-<li><strong>Auditing</strong> (ممیزی)</li>
-<li><strong>Security</strong> (امنیت)</li>
-<li><strong>Validation</strong> (اعتبارسنجی)</li>
-<li><strong>Exception Handling</strong> (مدیریت استثناء‌ها)</li>
-<li><strong>Instrumentation</strong> (پروفایلینگ متدها)</li>
-<li><strong>Transactions</strong> (تراکنش‌ها)</li>
-<li><strong>Resource Pooling</strong> (استفاده مجدد از منابع)</li>
-<li><strong>Caching</strong> (ذخیره موقت داده‌ها)</li>
-<li><strong>Threading &amp; Concurrency</strong> (چندنخی و همزمانی)</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>گسترش فریمورک Aspect</strong></p>
-<ul>
-<li>ساخت <strong>Aspect</strong> سفارشی و اعمال آن روی متدها یا کلاس‌ها.</li>
-<li>استفاده از PostSharp و الگوی دکوراتور برای مدیریت Concerns به‌صورت تمیز و قابل نگهداری.</li>
-</ul>
-</li>
-</ol>
-<hr>
-<h3>سوالات مرور</h3>
-<ol>
-<li>
-<p><strong>Cross-Cutting Concern چیست و AOP مخفف چیست؟</strong></p>
-<ul>
-<li><strong>Cross-Cutting Concern:</strong> مسائلی که بر بخش‌های مختلف برنامه اثر می‌گذارند و نمی‌توان آن‌ها را در یک ماژول خاص محدود کرد (مثل لاگ، امنیت، تراکنش).</li>
-<li><strong>AOP:</strong> <strong>Aspect-Oriented Programming</strong> یا برنامه‌نویسی مبتنی بر جنبه.</li>
-</ul>
-</li>
-<li>
-<p><strong>Aspect چیست و چگونه آن را اعمال می‌کنید؟</strong></p>
-<ul>
-<li><strong>Aspect:</strong> واحدی از رفتار که می‌تواند به روش‌های مختلف برنامه اضافه شود (مثلاً Logging).</li>
-<li>اعمال از طریق افزودن <strong>Attribute</strong> روی کلاس، متد، پارامتر یا property انجام می‌شود.</li>
-</ul>
-</li>
-<li>
-<p><strong>Attribute چیست و چگونه آن را اعمال می‌کنید؟</strong></p>
-<ul>
-<li><strong>Attribute:</strong> Metadata یا داده‌های توصیفی برای کد.</li>
-<li>با قرار دادن <code>[AttributeName]</code> روی کلاس یا متد اعمال می‌شود.</li>
-</ul>
-</li>
-<li>
-<p><strong>Aspects و Attributes چگونه با هم کار می‌کنند؟</strong></p>
-<ul>
-<li>Attribute جنبه (Aspect) را مشخص می‌کند.</li>
-<li>PostSharp در زمان کامپایل کد مربوط به Aspect را در محل مورد نظر تزریق می‌کند.</li>
-</ul>
-</li>
-<li>
-<p><strong>فرآیند ساخت (Build Process) با Aspects چگونه کار می‌کند؟</strong></p>
-<ul>
-<li>کامپایلر کد را به باینری تبدیل می‌کند.</li>
-<li>PostSharp باینری را تحلیل کرده و کد Aspect را تزریق می‌کند.</li>
-<li>نتیجه: کد اصلی دست‌نخورده باقی می‌ماند، اما رفتارهای اضافی در زمان اجرا اعمال می‌شوند.</li>
-</ul>
-</li>
-</ol>
-<hr>
-<h3>مطالعه بیشتر</h3>
-<ul>
-<li>صفحه اصلی PostSharp: <a href="https://www.postsharp.net/">https://www.postsharp.net/</a></li>
-</ul>
-
-  </main>
-
-  <!-- فوتر مشترک -->
-  <footer class="footer">
-    <div class="container">
-      <p>
-        <img src="/Gitab/icone/copyright.svg" alt="کپی‌رایت" width="14" height="14"
-             style="vertical-align:middle;margin-inline:4px">
-        <span id="y"></span> Gitab — تمامی حقوق محفوظ است.
-      </p>
-    </div>
-  </footer>
-
-  <!-- سال و اسکریپت تغییر تم -->
-  <script>
+</code></pre> <ul><li>شروع و پایان متد ثبت شده و مدت زمان اجرای آن به <strong>Profile.log</strong> نوشته می‌شود.</li><li>در صورت وقوع استثناء، خطا در <strong>Exception.log</strong> ذخیره می‌شود.</li></ul> <hr><h3>نتیجه</h3><p>حالا شما یک <strong>کتابخانه کامل از Cross-Cutting Concerns</strong> دارید که شامل موارد زیر است:</p><ol> <li><strong>Caching</strong> – ذخیره موقت داده‌ها</li><li><strong>File Logging &amp; Console Logging</strong> – لاگ‌گیری</li><li><strong>Exception Handling</strong> – مدیریت استثناء‌ها</li><li><strong>Security</strong> – امنیت مبتنی بر نقش</li><li><strong>Validation</strong> – اعتبارسنجی داده‌ها</li><li><strong>Transactions</strong> – تراکنش‌ها</li><li><strong>Resource Pooling</strong> – استفاده مجدد از منابع</li><li><strong>Configuration</strong> – مدیریت تنظیمات</li><li><strong>Instrumentation</strong> – پروفایلینگ متدها</li></ol> <p>تمام این موارد با <strong>AOP و Decorator Pattern</strong> پیاده‌سازی شده‌اند و شما می‌توانید به راحتی در پروژه‌های خود از آن‌ها استفاده کنید.</p><h3>خلاصه فصل</h3><p>در این فصل، ما موارد زیر را یاد گرفتیم:</p><ol> <li><p><strong>الگوی دکوراتور (Decorator Pattern)</strong></p><ul> <li>امکان اضافه کردن رفتار جدید به اشیاء بدون تغییر کلاس اصلی.</li></ul> </li><li> <p><strong>الگوی پراکسی (Proxy Pattern)</strong></p><ul> <li>ایجاد شیء جایگزین برای سرویس واقعی.</li><li>پراکسی درخواست‌های مشتری را دریافت و پردازش کرده و به سرویس اصلی منتقل می‌کند.</li><li>پراکسی و سرویس یک رابط (interface) مشترک دارند، بنابراین قابل جایگزینی هستند.</li></ul> </li><li> <p><strong>برنامه‌نویسی مبتنی بر جنبه (AOP) با PostSharp</strong></p><ul> <li><p><strong>Aspect</strong> و <strong>Attribute</strong> برای تزریق خودکار کد در زمان کامپایل استفاده می‌شوند.</p></li> <li><p>امکان مدیریت <strong>Cross-Cutting Concerns</strong> مانند:</p><ul> <li><strong>Logging</strong> (لاگ‌گیری)</li><li><strong>Auditing</strong> (ممیزی)</li><li><strong>Security</strong> (امنیت)</li><li><strong>Validation</strong> (اعتبارسنجی)</li><li><strong>Exception Handling</strong> (مدیریت استثناء‌ها)</li><li><strong>Instrumentation</strong> (پروفایلینگ متدها)</li><li><strong>Transactions</strong> (تراکنش‌ها)</li><li><strong>Resource Pooling</strong> (استفاده مجدد از منابع)</li><li><strong>Caching</strong> (ذخیره موقت داده‌ها)</li><li><strong>Threading &amp; Concurrency</strong> (چندنخی و همزمانی)</li></ul> </li></ul> </li><li> <p><strong>گسترش فریمورک Aspect</strong></p><ul> <li>ساخت <strong>Aspect</strong> سفارشی و اعمال آن روی متدها یا کلاس‌ها.</li><li>استفاده از PostSharp و الگوی دکوراتور برای مدیریت Concerns به‌صورت تمیز و قابل نگهداری.</li></ul> </li></ol> <hr><h3>سوالات مرور</h3><ol> <li><p><strong>Cross-Cutting Concern چیست و AOP مخفف چیست؟</strong></p><ul> <li><strong>Cross-Cutting Concern:</strong> مسائلی که بر بخش‌های مختلف برنامه اثر می‌گذارند و نمی‌توان آن‌ها را در یک ماژول خاص محدود کرد (مثل لاگ، امنیت، تراکنش).</li><li><strong>AOP:</strong> <strong>Aspect-Oriented Programming</strong> یا برنامه‌نویسی مبتنی بر جنبه.</li></ul> </li><li> <p><strong>Aspect چیست و چگونه آن را اعمال می‌کنید؟</strong></p><ul> <li><strong>Aspect:</strong> واحدی از رفتار که می‌تواند به روش‌های مختلف برنامه اضافه شود (مثلاً Logging).</li><li>اعمال از طریق افزودن <strong>Attribute</strong> روی کلاس، متد، پارامتر یا property انجام می‌شود.</li></ul> </li><li> <p><strong>Attribute چیست و چگونه آن را اعمال می‌کنید؟</strong></p><ul> <li><strong>Attribute:</strong> Metadata یا داده‌های توصیفی برای کد.</li><li>با قرار دادن <code>[AttributeName]</code> روی کلاس یا متد اعمال می‌شود.</li></ul> </li><li> <p><strong>Aspects و Attributes چگونه با هم کار می‌کنند؟</strong></p><ul> <li>Attribute جنبه (Aspect) را مشخص می‌کند.</li><li>PostSharp در زمان کامپایل کد مربوط به Aspect را در محل مورد نظر تزریق می‌کند.</li></ul> </li><li> <p><strong>فرآیند ساخت (Build Process) با Aspects چگونه کار می‌کند؟</strong></p><ul> <li>کامپایلر کد را به باینری تبدیل می‌کند.</li><li>PostSharp باینری را تحلیل کرده و کد Aspect را تزریق می‌کند.</li><li>نتیجه: کد اصلی دست‌نخورده باقی می‌ماند، اما رفتارهای اضافی در زمان اجرا اعمال می‌شوند.</li></ul> </li></ol> <hr><h3>مطالعه بیشتر</h3><ul> <li>صفحه اصلی PostSharp: <a href="https://www.postsharp.net/">https://www.postsharp.net/</a></li></ul> </article><nav class="chapter-single-next-nav"> <a href="/Gitab/books/book2/Book/12/Using-Tools-to-Improve-Code-Quality/" class="btn-next-chapter-action" id="nextChapterBtn" data-hub="/Gitab/books/book2/"> <span class="next-btn-text">فصل بعدی: ابزارها برای بهبود کیفیت کد</span> <span class="next-btn-arrow">←</span> </a> </nav></div> <button class="fab-back-to-top" id="backToTopBtn" type="button" aria-label="رفتن به بالای صفحه" title="رفتن به بالا"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"> <polyline points="18 15 12 9 6 15"></polyline> </svg> </button></main> <footer class="footer-minimal"><div class="footer-container"> <div class="footer-top-row"><div class="footer-brand-side"> <a href="/Gitab/" class="footer-brand-anchor"> <img src="/Gitab/icone/logo.svg" alt="Gitab" width="28" height="28" loading="lazy" decoding="async"> <span class="footer-brand-title">گیتاب (Gitab)</span> </a> <p class="footer-tagline"> پلتفرم آزاد و مستقل برای ترجمهٔ دقیق و روان کتاب‌های مرجع مهندسی نرم‌افزار. </p></div> <div class="footer-nav-cols"><div class="footer-nav-col"> <span class="footer-nav-heading">موضوعات</span><ul class="footer-nav-list"> <li><a href="/Gitab/books/list-books/?cat=csharp">سی‌شارپ و دات‌نت</a></li><li><a href="/Gitab/books/list-books/?cat=clean-code">کد تمیز و بازآفرینی</a></li><li><a href="/Gitab/books/list-books/?cat=architecture">معماری و طراحی دامنه</a></li><li><a href="/Gitab/books/list-books/?cat=system">لینوکس و خط فرمان</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">بخش‌های سایت</span><ul class="footer-nav-list"> <li><a href="/Gitab/">صفحه اصلی</a></li><li><a href="/Gitab/books/list-books/">کتابخانه کامل</a></li><li><a href="/Gitab/courses/">دوره‌های آموزشی</a></li><li><a href="/Gitab/translator.html">تالار مترجمین</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">مشارکت و جامعه</span><ul class="footer-nav-list"> <li><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer">راهنمای همکاری در ترجمه</a></li><li><a href="https://github.com/hheydarian/Gitab/issues" target="_blank" rel="noopener noreferrer">پیشنهاد کتاب یا گزارش خطا</a></li></ul> </div></div> </div><div class="footer-bottom-line"> <span>© <span id="y">2026</span> Gitab — توسعه‌یافته برای جامعهٔ مهندسان نرم‌افزار ایرانی</span></div> </div></footer> <script>
   (() => {
     const root = document.documentElement;
     const btn = document.getElementById('themeToggle');
+    const sunIcon = btn ? btn.querySelector('.icon-sun') : null;
+    const moonIcon = btn ? btn.querySelector('.icon-moon') : null;
     const KEY = 'gitab-theme';
 
-    function updateTheme(s) {
-      root.setAttribute('data-theme', s);
-      const mode = s;  // فقط `dark` یا `light` خواهد بود
+    function updateTheme(mode) {
+      root.setAttribute('data-theme', mode);
       root.dataset.colorMode = mode;
-      btn.dataset.icon = mode === 'dark' ? 'moon' : 'sun';
+      if (sunIcon && moonIcon) {
+        if (mode === 'dark') {
+          sunIcon.style.display = 'inline-block';
+          moonIcon.style.display = 'none';
+        } else {
+          sunIcon.style.display = 'none';
+          moonIcon.style.display = 'inline-block';
+        }
+      }
     }
 
-    // وضعیت تم ذخیره شده از localStorage
-    let saved = localStorage.getItem(KEY) || 'light'; // پیش‌فرض روشن
+    let saved = 'dark';
+    try { saved = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
     updateTheme(saved);
 
-    // تنظیم مجدد تم هنگام تغییر وضعیت دکمه
-    btn.addEventListener('click', () => {
-      const current = localStorage.getItem(KEY) || 'light';
-      const next = current === 'dark' ? 'light' : 'dark';  // فقط دو حالت: تاریک و روشن
-      localStorage.setItem(KEY, next);
-      updateTheme(next);
-    });
+    if (btn) {
+      btn.addEventListener('click', () => {
+        let current = 'dark';
+        try { current = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+        const next = current === 'dark' ? 'light' : 'dark';
+        try { localStorage.setItem(KEY, next); } catch (e) {}
+        updateTheme(next);
+      });
+    }
 
-    // هنگام بارگذاری صفحه
     document.addEventListener('DOMContentLoaded', () => {
-      updateTheme(localStorage.getItem(KEY) || 'light');
+      let mode = 'dark';
+      try { mode = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+      updateTheme(mode);
+      const yearSpan = document.getElementById('y');
+      if (yearSpan) yearSpan.textContent = new Date().getFullYear();
     });
+
+    const mobBtn = document.getElementById('mobileMenuBtn');
+    const mobDrawer = document.getElementById('mobileDrawer');
+    if (mobBtn && mobDrawer) {
+      const setDrawerOpen = (open) => {
+        mobDrawer.classList.toggle('open', open);
+        mobBtn.classList.toggle('is-open', open);
+        mobBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        mobBtn.setAttribute('aria-label', open ? 'بستن منو' : 'باز کردن منو');
+        mobDrawer.setAttribute('aria-hidden', open ? 'false' : 'true');
+      };
+
+      mobBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        setDrawerOpen(!mobDrawer.classList.contains('open'));
+      });
+
+      mobDrawer.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => setDrawerOpen(false));
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && mobDrawer.classList.contains('open')) {
+          setDrawerOpen(false);
+        }
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!mobDrawer.contains(e.target) && !mobBtn.contains(e.target)) {
+          setDrawerOpen(false);
+        }
+      });
+    }
+
+    if ('serviceWorker' in navigator) {
+      const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+      if (isLocalhost) {
+        navigator.serviceWorker.getRegistrations().then(regs => {
+          for (const reg of regs) reg.unregister();
+        });
+        if ('caches' in window) {
+          caches.keys().then(names => {
+            for (const name of names) caches.delete(name);
+          });
+        }
+      } else {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/Gitab/sw.js').catch(() => {});
+        });
+      }
+    }
   })();
-</script>
-
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-  <script>hljs.highlightAll();</script>
-
-  <script>
+  </script> <script>
   document.querySelectorAll('pre code').forEach(block => {
+    const pre = block.parentNode;
+    if (!pre || pre.querySelector('.copy-btn')) return;
+
+    const copySvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
+    const okSvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+
     const btn = document.createElement('button');
     btn.className = 'copy-btn';
-
-    const icon = document.createElement('img');
-    icon.src = "/Gitab/icone/copy.svg";
-    icon.alt = 'Copy';
-    btn.appendChild(icon);
-
-    block.parentNode.insertBefore(btn, block);
+    btn.setAttribute('aria-label', 'کپی کد');
+    btn.setAttribute('title', 'کپی کد');
+    btn.setAttribute('type', 'button');
+    btn.innerHTML = copySvg;
+    pre.appendChild(btn);
 
     btn.addEventListener('click', async () => {
-      await navigator.clipboard.writeText(block.textContent);
-      btn.classList.add('copied');
-      setTimeout(() => btn.classList.remove('copied'), 1500);
-    });
-  });
-  </script>
-
-  <script>
-  document.body.dataset.page = window.location.pathname;
-
-  const menuBtn = document.querySelector(".menu-toggle");
-  const nav = document.querySelector(".nav");
-
-  if (menuBtn && nav) {
-    menuBtn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      nav.classList.toggle("show");
-    });
-
-    document.addEventListener("click", (e) => {
-      const clickedInsideNav = nav.contains(e.target);
-      const clickedMenuButton = menuBtn.contains(e.target);
-      if (!clickedInsideNav && !clickedMenuButton) {
-        nav.classList.remove("show");
+      try {
+        await navigator.clipboard.writeText(block.textContent);
+        btn.classList.add('copied');
+        btn.innerHTML = okSvg;
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          btn.innerHTML = copySvg;
+        }, 1800);
+      } catch (err) {
+        console.error('Copy failed:', err);
       }
     });
-  }
-  </script>
-
-  <script>
-    document.getElementById('y').textContent = new Date().getFullYear();
-  </script>
-  <script>
-document.getElementById("openDonate").addEventListener("click", () => {
-  document.getElementById("donateModal").style.display = "block";
-});
-document.getElementById("closeDonate").addEventListener("click", () => {
-  document.getElementById("donateModal").style.display = "none";
-});
-document.querySelectorAll(".copy-btn").forEach(btn => {
-  btn.addEventListener("click", () => {
-    navigator.clipboard.writeText(btn.dataset.copy);
-  
-    setTimeout(() => (btn.textContent = "کپی"), 2000);
   });
-});
-</script>
+  </script> <script>
+  (() => {
+    const article = document.getElementById('chapterArticle');
+    if (!article) return;
 
-</body>
-</html>
+    const progressBar = document.getElementById('readingProgressBar');
+    if (progressBar) {
+      window.addEventListener('scroll', () => {
+        const docElem = document.documentElement;
+        const totalHeight = docElem.scrollHeight - docElem.clientHeight;
+        if (totalHeight > 0) {
+          const progress = (window.pageYOffset / totalHeight) * 100;
+          progressBar.style.width = Math.min(100, Math.max(0, progress)) + '%';
+        }
+      }, { passive: true });
+    }
+
+    const btt = document.getElementById('backToTopBtn');
+    if (btt) {
+      window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 250) {
+          btt.classList.add('visible');
+        } else {
+          btt.classList.remove('visible');
+        }
+      }, { passive: true });
+
+      btt.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+
+    article.querySelectorAll('img').forEach(img => {
+      if (!img.hasAttribute('loading')) img.loading = 'lazy';
+      if (!img.hasAttribute('decoding')) img.decoding = 'async';
+      const parent = img.parentElement;
+      if (parent && parent.tagName === 'P') {
+        parent.style.textAlign = 'center';
+      }
+
+      img.addEventListener('error', function() {
+        const src = this.getAttribute('src');
+        if (src && src.includes('assets/image/')) {
+          const parts = src.split('assets/image/');
+          const corrected = '/Gitab/books/book2/assets/image/' + parts[1];
+          if (this.src !== corrected) {
+            this.src = corrected;
+          }
+        }
+      });
+    });
+
+    article.querySelectorAll('p').forEach(p => {
+      const trimmed = p.innerText.trim();
+      if (trimmed.startsWith('💡') || trimmed.startsWith('نکته:')) {
+        p.classList.add('react-callout', 'callout-tip');
+      } else if (trimmed.startsWith('⚠️') || trimmed.startsWith('هشدار:')) {
+        p.classList.add('react-callout', 'callout-warning');
+      } else if (trimmed.startsWith('📌') || trimmed.startsWith('مهم:')) {
+        p.classList.add('react-callout', 'callout-important');
+      } else if (trimmed.startsWith('🔹') || trimmed.startsWith('🔸')) {
+        p.classList.add('react-callout', 'callout-note');
+      }
+    });
+  })();
+  </script> <script type="speculationrules">{"prefetch":[{"where":{"and":[{"href_matches":"/Gitab/*"},{"not":{"href_matches":"/Gitab/downloads/*"}},{"not":{"selector_matches":"[download], [target='_blank']"}}]},"eagerness":"moderate"}]}</script> <script>
+  (() => {
+    if (window.HTMLScriptElement && HTMLScriptElement.supports && HTMLScriptElement.supports('speculationrules')) return;
+    const seen = new Set([window.location.href]);
+    let count = 0;
+    const prefetchLink = (e) => {
+      if (count >= 12) return;
+      const a = e.target && e.target.closest ? e.target.closest('header a, .chapter-single-next-nav a, .syllabus-chapter-item a, .btn-hero-read, .btn-card-read') : null;
+      if (!a || !a.href || a.hasAttribute('download') || a.target === '_blank') return;
+      if (a.origin !== window.location.origin || a.pathname.includes('/downloads/')) return;
+      const clean = a.href.split('#')[0];
+      if (!clean || seen.has(clean)) return;
+      seen.add(clean);
+      count++;
+      const l = document.createElement('link');
+      l.rel = 'prefetch';
+      l.href = clean;
+      document.head.appendChild(l);
+    };
+    document.addEventListener('pointerenter', prefetchLink, { capture: true, passive: true });
+    document.addEventListener('touchstart', prefetchLink, { capture: true, passive: true });
+  })();
+  </script></body></html>

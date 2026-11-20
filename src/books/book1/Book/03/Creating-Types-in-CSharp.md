@@ -8,7 +8,7 @@ title:  ساخت انواع در سی‌شارپ
 
 ---
 
-### 📌 کلاس‌ها (Classes)
+### کلاس‌ها (Classes)
 
 یک **class** رایج‌ترین نوع از **reference type** است. ساده‌ترین شکل ممکن برای تعریف یک کلاس به این صورت است:
 
@@ -37,7 +37,7 @@ class YourClassName
   * interfaces
   * constraints
 
-⚠️ در این فصل، همه این ساختارها توضیح داده می‌شوند، **به‌جز** موارد زیر که در فصل ۴ پوشش داده خواهند شد:
+ در این فصل، همه این ساختارها توضیح داده می‌شوند، **به‌جز** موارد زیر که در فصل ۴ پوشش داده خواهند شد:
 
 * attributes
 * operator functions
@@ -47,7 +47,7 @@ class YourClassName
 
 ---
 
-### 📝 فیلدها (Fields)
+### فیلدها (Fields)
 
 یک **field** در واقع یک متغیر است که به‌عنوان عضوی از یک **class** یا **struct** تعریف می‌شود؛ برای مثال:
 
@@ -61,7 +61,7 @@ class Octopus
 
 ---
 
-#### 🔑 فیلدها می‌توانند شامل این modifiers باشند
+#### فیلدها می‌توانند شامل این modifiers باشند
 
 * **Static modifier** → `static`
 * **Access modifiers** → `public`, `internal`, `private`, `protected`
@@ -72,7 +72,7 @@ class Octopus
 
 ---
 
-#### 🐪 قراردادهای نام‌گذاری (Naming Conventions) برای فیلدهای private
+#### قراردادهای نام‌گذاری (Naming Conventions) برای فیلدهای private
 
 دو قرارداد پرکاربرد وجود دارد:
 
@@ -83,14 +83,14 @@ class Octopus
 
 ---
 
-#### 🔒 کلمه کلیدی `readonly`
+#### کلمه کلیدی `readonly`
 
 کلمه کلیدی **`readonly`** باعث می‌شود یک فیلد پس از ساخت (construction) دیگر قابل تغییر نباشد.
 یک فیلد **readonly** فقط می‌تواند در **اعلان آن** یا در **سازنده‌ی (constructor) همان type** مقداردهی شود.
 
 ---
 
-#### ⚙️ مقداردهی اولیه فیلدها (Field Initialization)
+#### مقداردهی اولیه فیلدها (Field Initialization)
 
 * مقداردهی اولیه برای فیلدها **اختیاری** است.
 * اگر یک فیلد مقداردهی نشود، مقدار پیش‌فرض خواهد داشت:
@@ -100,7 +100,7 @@ class Octopus
   * reference types: `null`
   * bool: `false`
 
-📌 مقداردهی اولیه فیلدها **قبل از constructorها** اجرا می‌شود:
+ مقداردهی اولیه فیلدها **قبل از constructorها** اجرا می‌شود:
 
 ```csharp
 public int Age = 10;
@@ -114,7 +114,7 @@ static readonly string TempFolder = System.IO.Path.GetTempPath();
 
 ---
 
-#### 📍 اعلان چند فیلد همزمان (Declaring Multiple Fields Together)
+#### اعلان چند فیلد همزمان (Declaring Multiple Fields Together)
 
 برای راحتی، می‌توانید چندین فیلد از یک نوع را در یک لیست جداشده با کاما تعریف کنید.
 این روش باعث می‌شود که همه فیلدها **attributes** و **field modifiers** یکسانی داشته باشند:
@@ -124,7 +124,7 @@ static readonly int legs = 8,
                    eyes = 2;
 ```
 
-### 🌟 ثابت‌ها (Constants)
+### ثابت‌ها (Constants)
 
 یک **constant** در زمان **compile time** به‌صورت ایستا (statically) ارزیابی می‌شود و کامپایلر مقدار آن را در هر جایی که استفاده شود، جایگزین می‌کند (شبیه به **macro** در ++C).
 
@@ -138,7 +138,7 @@ static readonly int legs = 8,
 
 ---
 
-#### 📝 تعریف constant
+#### تعریف constant
 
 یک **constant** با استفاده از کلمه کلیدی **`const`** تعریف می‌شود و باید در هنگام اعلان، مقداردهی اولیه شود.
 
@@ -153,7 +153,7 @@ public class Test
 
 ---
 
-#### ⚖️ تفاوت با `static readonly`
+#### تفاوت با `static readonly`
 
 یک constant می‌تواند نقشی شبیه به یک **static readonly field** ایفا کند، اما بسیار **محدودتر** است؛ هم از نظر نوع داده‌هایی که قابل استفاده‌اند و هم از نظر قواعد مقداردهی اولیه.
 
@@ -177,7 +177,7 @@ public static double Circumference(double radius)
 }
 ```
 
-🔹 بنابراین منطقی است که `PI` به‌صورت یک **constant** تعریف شود چون مقدار آن از قبل مشخص است.
+ بنابراین منطقی است که `PI` به‌صورت یک **constant** تعریف شود چون مقدار آن از قبل مشخص است.
 
 در مقابل:
 
@@ -189,7 +189,7 @@ static readonly DateTime StartupTime = DateTime.Now;
 
 ---
 
-#### ⚠️ مشکل نسخه‌ها با constant
+#### مشکل نسخه‌ها با constant
 
 اگر یک **assembly** (مثلاً X) یک constant را expose کند:
 
@@ -200,13 +200,13 @@ public const decimal ProgramVersion = 2.3m;
 و یک **assembly** دیگر (مثلاً Y) از آن استفاده کند، مقدار `2.3` هنگام کامپایل در assembly Y **ثابت‌سازی (baked in)** می‌شود.
 اگر بعدها X با مقدار جدید (مثلاً `2.4`) دوباره کامپایل شود، Y همچنان مقدار قدیمی `2.3` را استفاده می‌کند تا زمانی که Y هم دوباره کامپایل شود.
 
-🔹 استفاده از **static readonly field** این مشکل را برطرف می‌کند.
+ استفاده از **static readonly field** این مشکل را برطرف می‌کند.
 
 به بیان دیگر: هر مقداری که **ممکن است در آینده تغییر کند**، ذاتاً **constant** نیست و نباید به‌عنوان constant تعریف شود.
 
 ---
 
-#### 📍 ثابت‌های محلی (Local Constants)
+#### ثابت‌های محلی (Local Constants)
 
 شما می‌توانید داخل یک متد هم constant تعریف کنید:
 
@@ -220,14 +220,14 @@ void Test()
 
 ---
 
-#### 🔑 modifiers مجاز برای constantهای غیرمحلی
+#### modifiers مجاز برای constantهای غیرمحلی
 
 * **Access modifiers** → `public`, `internal`, `private`, `protected`
 * **Inheritance modifier** → `new`
 
 ---
 
-### 🔧 متدها (Methods)
+### متدها (Methods)
 
 یک **method** عملی را در قالب یک سری **statement**ها اجرا می‌کند.
 
@@ -238,7 +238,7 @@ void Test()
 
 ---
 
-#### 📌 امضای متد (Method Signature)
+#### امضای متد (Method Signature)
 
 * امضای یک متد باید در یک type **منحصر‌به‌فرد** باشد.
 * امضا شامل **نام متد** و **انواع پارامترها** به‌ترتیب است.
@@ -246,7 +246,7 @@ void Test()
 
 ---
 
-#### 🔑 modifiers مجاز برای متدها
+#### modifiers مجاز برای متدها
 
 * **Static modifier** → `static`
 * **Access modifiers** → `public`, `internal`, `private`, `protected`
@@ -257,7 +257,7 @@ void Test()
 
 ---
 
-#### ➡️ متدهای expression-bodied
+#### متدهای expression-bodied
 
 اگر متدی فقط یک **expression** داشته باشد:
 
@@ -279,7 +279,7 @@ void Foo(int x) => Console.WriteLine(x);
 
 ---
 
-#### 📍 متدهای محلی (Local Methods)
+#### متدهای محلی (Local Methods)
 
 می‌توانید یک متد را داخل متدی دیگر تعریف کنید:
 
@@ -298,7 +298,7 @@ void WriteCubes()
 * این کار باعث ساده‌تر شدن type می‌شود و سریعاً نشان می‌دهد که Cube جای دیگری استفاده نمی‌شود.
 * متدهای محلی می‌توانند به متغیرها و پارامترهای متد والد دسترسی داشته باشند.
 
-📌 جزئیات بیشتر در بخش **Capturing Outer Variables** (صفحه ۱۹۰) توضیح داده خواهد شد.
+ جزئیات بیشتر در بخش **Capturing Outer Variables** (صفحه ۱۹۰) توضیح داده خواهد شد.
 
 * متدهای محلی می‌توانند درون دیگر توابع مانند property accessors، constructorها و غیره نیز تعریف شوند.
 * حتی می‌توان متدهای محلی را داخل دیگر متدهای محلی یا داخل **lambda expression**ها (با statement block) قرار داد.
@@ -306,13 +306,13 @@ void WriteCubes()
 
 ---
 
-#### ⚡ متدهای محلی static (Static Local Methods)
+#### متدهای محلی static (Static Local Methods)
 
 از **C# 8** به بعد، افزودن **static modifier** به یک متد محلی باعث می‌شود آن متد دیگر به متغیرها و پارامترهای متد والد دسترسی نداشته باشد.
 
-🔹 این کار وابستگی (coupling) را کاهش می‌دهد و جلوی استفاده تصادفی از متغیرهای متد والد را می‌گیرد.
+ این کار وابستگی (coupling) را کاهش می‌دهد و جلوی استفاده تصادفی از متغیرهای متد والد را می‌گیرد.
 
-### 📍 متدهای محلی و Top-Level Statements
+### متدهای محلی و Top-Level Statements
 
 هر **method** که در **top-level statements** تعریف کنید، در واقع به‌عنوان یک **local method** در نظر گرفته می‌شود.
 این یعنی (مگر این‌که با `static` علامت‌گذاری شود) می‌توانند به متغیرهای تعریف‌شده در top-level دسترسی داشته باشند:
@@ -326,7 +326,7 @@ void Foo() => Console.WriteLine(x);
 
 ---
 
-### 🔄 Overloading متدها
+### Overloading متدها
 
 * **Local methods** قابل **overload** شدن نیستند.
   بنابراین، متدهایی که در **top-level statements** تعریف می‌شوند (که در واقع همان local methods هستند)، نمی‌توانند overload شوند.
@@ -342,7 +342,7 @@ void Foo(int x, float y) {...}
 void Foo(float x, int y) {...}
 ```
 
-📌 اما مثال‌های زیر **خطای زمان کامپایل** دارند، چون `return type` و `params modifier` بخشی از **امضا** محسوب نمی‌شوند:
+ اما مثال‌های زیر **خطای زمان کامپایل** دارند، چون `return type` و `params modifier` بخشی از **امضا** محسوب نمی‌شوند:
 
 ```csharp
 void  Foo(int x) {...}
@@ -354,18 +354,18 @@ void  Goo(params int[] x) {...}  // Compile-time error
 
 ---
 
-#### 📌 پارامترهای ref و out در امضا
+#### پارامترهای ref و out در امضا
 
 این‌که پارامترها به‌صورت **by-value** یا **by-reference** پاس داده شوند، بخشی از امضا محسوب می‌شود.
 
-✅ بنابراین:
+ بنابراین:
 
 ```csharp
 void Foo(int x) {...}
 void Foo(ref int x) {...}   // OK
 ```
 
-❌ اما:
+ اما:
 
 ```csharp
 void Foo(out int x) {...}   // Compile-time error
@@ -375,7 +375,7 @@ void Foo(out int x) {...}   // Compile-time error
 
 ---
 
-### 🏗️ Instance Constructors
+### Instance Constructors
 
 **Constructor**ها کدی برای مقداردهی اولیه (initialization) روی یک **class** یا **struct** اجرا می‌کنند.
 یک constructor مانند یک متد تعریف می‌شود، با این تفاوت که **نام متد** همان **نام type والد** است و هیچ **return type** ندارد:
@@ -396,14 +396,14 @@ public class Panda
 
 ---
 
-#### 🔑 modifiers مجاز برای constructors
+#### modifiers مجاز برای constructors
 
 * **Access modifiers** → `public`, `internal`, `private`, `protected`
 * **Unmanaged code modifiers** → `unsafe`, `extern`
 
 ---
 
-#### ➡️ Expression-bodied constructors
+#### Expression-bodied constructors
 
 اگر constructor یک statement ساده داشته باشد، می‌تواند به‌شکل کوتاه نوشته شود:
 
@@ -413,7 +413,7 @@ public Panda(string n) => name = n;
 
 ---
 
-#### 📌 رفع ابهام با `this`
+#### رفع ابهام با `this`
 
 اگر نام پارامتر با نام فیلد یکی باشد، می‌توانید با **`this`** فیلد را مشخص کنید:
 
@@ -423,7 +423,7 @@ public Panda(string name) => this.name = name;
 
 ---
 
-### 🔄 Overloading Constructors
+### Overloading Constructors
 
 یک کلاس یا struct می‌تواند **constructorهای overload** داشته باشد.
 
@@ -441,7 +441,7 @@ public class Wine
 }
 ```
 
-📌 در این حالت، constructor فراخوانی‌شده **ابتدا** اجرا می‌شود.
+ در این حالت، constructor فراخوانی‌شده **ابتدا** اجرا می‌شود.
 
 می‌توانید یک **عبارت** را نیز به constructor دیگر پاس دهید:
 
@@ -449,11 +449,11 @@ public class Wine
 public Wine(decimal price, DateTime year) : this(price, year.Year) { }
 ```
 
-⚠️ در این مرحله، فقط می‌توان به **اعضای static کلاس** دسترسی داشت، نه اعضای instance؛ چون هنوز شیء توسط constructor مقداردهی نشده است.
+ در این مرحله، فقط می‌توان به **اعضای static کلاس** دسترسی داشت، نه اعضای instance؛ چون هنوز شیء توسط constructor مقداردهی نشده است.
 
 ---
 
-#### 🛠️ جایگزین بهتر: پارامتر اختیاری
+#### جایگزین بهتر: پارامتر اختیاری
 
 مثال بالا را می‌توان با یک constructor ساده‌تر نوشت:
 
@@ -465,18 +465,18 @@ public Wine(decimal price, int year = 0)
 }
 ```
 
-📌 راه‌حل دیگری نیز در بخش **Object Initializers** (صفحه ۱۱۱) معرفی خواهد شد.
+ راه‌حل دیگری نیز در بخش **Object Initializers** (صفحه ۱۱۱) معرفی خواهد شد.
 
 ---
 
-### 🆓 Implicit Parameterless Constructors
+### Implicit Parameterless Constructors
 
 برای **class**ها، کامپایلر C# به‌طور خودکار یک **constructor بدون پارامتر public** تولید می‌کند، به‌شرطی که شما هیچ constructor دیگری تعریف نکرده باشید.
 اما به محض این‌که حداقل یک constructor تعریف کنید، دیگر این constructor پیش‌فرض ساخته نمی‌شود.
 
 ---
 
-### 🔄 ترتیب مقداردهی اولیه فیلد و constructor
+### ترتیب مقداردهی اولیه فیلد و constructor
 
 همان‌طور که دیدیم، می‌توان فیلدها را هنگام اعلان مقداردهی کرد:
 
@@ -488,9 +488,9 @@ class Player
 }
 ```
 
-📌 مقداردهی اولیه فیلدها **قبل از اجرای constructor** انجام می‌شود و به‌ترتیب اعلان فیلدها اجرا می‌گردد.
+ مقداردهی اولیه فیلدها **قبل از اجرای constructor** انجام می‌شود و به‌ترتیب اعلان فیلدها اجرا می‌گردد.
 
-### 🔹 سازنده‌های غیرعمومی (Nonpublic constructors)
+### سازنده‌های غیرعمومی (Nonpublic constructors)
 
 سازنده‌ها الزامی ندارند که عمومی (**public**) باشند. یک دلیل رایج برای داشتن سازنده‌های غیرعمومی این است که ایجاد نمونه‌ها (**instance creation**) فقط از طریق یک متد ایستا (**static method**) کنترل شود.
 
@@ -511,14 +511,14 @@ public class Class1
 
 ---
 
-### 🔹 دیکانستراکتور (Deconstructor)
+### دیکانستراکتور (Deconstructor)
 
 **دیکانستراکتور** یا **متد deconstructing** تقریباً برعکس یک سازنده عمل می‌کند:
 
 * سازنده معمولاً مجموعه‌ای از مقادیر ورودی (پارامترها) را گرفته و آن‌ها را به فیلدها نسبت می‌دهد.
 * دیکانستراکتور برعکس این کار را انجام می‌دهد: فیلدها را به مجموعه‌ای از متغیرها برمی‌گرداند.
 
-🔸 قوانین:
+ قوانین:
 
 * نام این متد باید دقیقاً `Deconstruct` باشد.
 * باید دارای یک یا چند **پارامتر out** باشد.
@@ -546,7 +546,7 @@ class Rectangle
 
 ---
 
-### 🔹 فراخوانی دیکانستراکتور
+### فراخوانی دیکانستراکتور
 
 ```csharp
 var rect = new Rectangle(3, 4);
@@ -554,7 +554,7 @@ var rect = new Rectangle(3, 4);
 Console.WriteLine(width + " " + height);   // 3 4
 ```
 
-🔹 این فراخوانی معادل است با:
+ این فراخوانی معادل است با:
 
 ```csharp
 float width, height;
@@ -569,7 +569,7 @@ rect.Deconstruct(out var width, out var height);
 
 ---
 
-### 🔹 نکات مهم در دیکانستراکشن
+### نکات مهم در دیکانستراکشن
 
 * امکان استفاده از **implicit typing** وجود دارد:
 
@@ -609,7 +609,7 @@ rect.Deconstruct(out var width, out var height);
 
 ---
 
-### 🔹 مقداردهی اولیه شیء (Object Initializers)
+### مقداردهی اولیه شیء (Object Initializers)
 
 برای ساده‌سازی مقداردهی اولیه، می‌توان **فیلدها یا propertyهای قابل دسترسی** را مستقیماً بعد از سازنده تنظیم کرد.
 
@@ -626,7 +626,7 @@ public class Bunny
 }
 ```
 
-📌 نمونه‌سازی با مقداردهی اولیه شیء:
+ نمونه‌سازی با مقداردهی اولیه شیء:
 
 ```csharp
 // سازنده بدون پارامتر می‌تواند پرانتز خالی را حذف کند
@@ -649,9 +649,9 @@ temp2.LikesHumans = false;
 Bunny b2 = temp2;
 ```
 
-🔸 دلیل استفاده از متغیرهای موقت این است که اگر در طول مقداردهی اولیه **exception** رخ دهد، شیء **نیمه‌سازمان‌یافته (half-initialized)** باقی نماند.
+ دلیل استفاده از متغیرهای موقت این است که اگر در طول مقداردهی اولیه **exception** رخ دهد، شیء **نیمه‌سازمان‌یافته (half-initialized)** باقی نماند.
 
-### 🔹 مقایسه مقداردهی اولیه شیء با پارامترهای اختیاری (Object Initializers Versus Optional Parameters)
+### مقایسه مقداردهی اولیه شیء با پارامترهای اختیاری (Object Initializers Versus Optional Parameters)
 
 به جای استفاده از **object initializer**، می‌توانیم سازنده‌ی کلاس `Bunny` را طوری بنویسیم که یک پارامتر اجباری و دو پارامتر اختیاری داشته باشد:
 
@@ -666,7 +666,7 @@ public Bunny (string name,
 }
 ```
 
-📌 این کار به ما اجازه می‌دهد شیء را به شکل زیر بسازیم:
+ این کار به ما اجازه می‌دهد شیء را به شکل زیر بسازیم:
 
 ```csharp
 Bunny b1 = new Bunny(name: "Bo", likesCarrots: true);
@@ -674,7 +674,7 @@ Bunny b1 = new Bunny(name: "Bo", likesCarrots: true);
 
 ---
 
-#### ✅ مزیت تاریخی استفاده از سازنده‌ها
+#### مزیت تاریخی استفاده از سازنده‌ها
 
 * در گذشته استفاده از سازنده‌ها برای مقداردهی اولیه مزیت داشت، چون می‌توانستیم فیلدها یا propertyها را **فقط-خواندنی (read-only)** کنیم.
 * ایجاد فیلد یا property فقط‌خواندنی کار خوبی است وقتی که نیازی به تغییر مقدار آن در طول عمر شیء وجود ندارد.
@@ -682,7 +682,7 @@ Bunny b1 = new Bunny(name: "Bo", likesCarrots: true);
 
 ---
 
-#### ❌ معایب پارامترهای اختیاری
+#### معایب پارامترهای اختیاری
 
 1. **نداشتن پشتیبانی آسان از تغییرات غیرمخرب (nondestructive mutation)**
 
@@ -694,7 +694,7 @@ Bunny b1 = new Bunny(name: "Bo", likesCarrots: true);
    * وقتی از پارامترهای اختیاری در کتابخانه‌های عمومی استفاده شود، افزودن پارامتر اختیاری جدید در آینده باعث می‌شود **سازگاری دودویی (binary compatibility)** با مصرف‌کنندگان قبلی شکسته شود.
    * به‌خصوص در کتابخانه‌هایی که روی **NuGet** منتشر می‌شوند مشکل‌ساز است.
 
-🔹 دلیل: مقدار پارامترهای اختیاری در **کد فراخوانی‌کننده** کامپایل و جایگزین می‌شود.
+ دلیل: مقدار پارامترهای اختیاری در **کد فراخوانی‌کننده** کامپایل و جایگزین می‌شود.
 مثال:
 
 ```csharp
@@ -707,7 +707,7 @@ Bunny b1 = new Bunny("Bo", true, false);
 
 ---
 
-#### 🔹 ملاحظه دیگر
+#### ملاحظه دیگر
 
 سازنده‌ها روی **ارث‌بری (Inheritance)** هم اثر می‌گذارند (بحث در صفحه 126).
 
@@ -716,7 +716,7 @@ Bunny b1 = new Bunny("Bo", true, false);
 
 ---
 
-### 🔹 مرجع `this`
+### مرجع `this`
 
 کلمه‌ی کلیدی `this` به نمونه‌ی جاری (instance) اشاره می‌کند.
 
@@ -744,11 +744,11 @@ public class Test
 }
 ```
 
-📌 مرجع `this` فقط در اعضای **nonstatic** کلاس یا struct معتبر است.
+ مرجع `this` فقط در اعضای **nonstatic** کلاس یا struct معتبر است.
 
 ---
 
-### 🔹 ویژگی‌ها (Properties)
+### ویژگی‌ها (Properties)
 
 ویژگی‌ها (**Properties**) از بیرون شبیه فیلدها به نظر می‌رسند، اما در درون منطق دارند (مثل متدها).
 
@@ -763,7 +763,7 @@ Console.WriteLine(msft.CurrentPrice);
 
 در ظاهر معلوم نیست که `CurrentPrice` یک فیلد است یا property.
 
-🔸 تعریف property:
+ تعریف property:
 
 ```csharp
 public class Stock
@@ -780,14 +780,14 @@ public class Stock
 * **get accessor** وقتی property خوانده می‌شود اجرا می‌شود.
 * **set accessor** وقتی مقداردهی می‌شود اجرا می‌شود و پارامتر ضمنی `value` دارد.
 
-📌 تفاوت اصلی با فیلدها:
+ تفاوت اصلی با فیلدها:
 
 * property امکان کنترل کامل روی خواندن/نوشتن مقدار را به برنامه‌نویس می‌دهد.
 * مثلاً می‌توان در setter بررسی کرد که مقدار ورودی در بازه معتبر باشد، و در غیر این صورت خطا پرتاب کرد.
 
 ---
 
-### 🔹 اصلاح‌کننده‌های مجاز روی Properties
+### اصلاح‌کننده‌های مجاز روی Properties
 
 * **Static modifier:** `static`
 * **Access modifiers:** `public internal private protected`
@@ -796,7 +796,7 @@ public class Stock
 
 ---
 
-### 🔹 ویژگی‌های فقط‌خواندنی و محاسباتی (Read-only and calculated properties)
+### ویژگی‌های فقط‌خواندنی و محاسباتی (Read-only and calculated properties)
 
 * اگر فقط **get accessor** تعریف شود → property فقط‌خواندنی است.
 * اگر فقط **set accessor** تعریف شود → property فقط‌نوشتنی است (به ندرت استفاده می‌شود).
@@ -812,7 +812,7 @@ public decimal Worth
 
 ---
 
-### 🔹 ویژگی‌های Expression-Bodied
+### ویژگی‌های Expression-Bodied
 
 برای نوشتن کوتاه‌تر propertyهای فقط‌خواندنی:
 
@@ -832,7 +832,7 @@ public decimal Worth
 
 ---
 
-### 🔹 ویژگی‌های خودکار (Automatic Properties)
+### ویژگی‌های خودکار (Automatic Properties)
 
 رایج‌ترین نوع property، ساده‌ترین پیاده‌سازی است: فقط خواندن/نوشتن به یک فیلد خصوصی.
 
@@ -848,11 +848,11 @@ public class Stock
 * کامپایلر به طور خودکار یک **backing field خصوصی** تولید می‌کند.
 * می‌توان setter را **private** یا **protected** کرد تا property برای دیگران فقط‌خواندنی باشد.
 
-📌 ویژگی‌های خودکار از C# 3.0 معرفی شدند.
+ ویژگی‌های خودکار از C# 3.0 معرفی شدند.
 
 ---
 
-### 🔹 مقداردهی اولیه property (Property Initializers)
+### مقداردهی اولیه property (Property Initializers)
 
 propertyهای خودکار می‌توانند مستقیماً مقدار اولیه داشته باشند:
 
@@ -870,11 +870,11 @@ public int Maximum { get; } = 999;
 مانند فیلدهای readonly، propertyهای خودکار readonly نیز می‌توانند در **constructor** مقداردهی شوند.
 این قابلیت برای ساختن **انواع immutable (فقط‌خواندنی)** بسیار کاربردی است.
 
-### 🔹 دسترسی در get و set (get and set accessibility)
+### دسترسی در get و set (get and set accessibility)
 
 در C# می‌توان **سطح دسترسی** (accessibility) متدهای `get` و `set` یک property را متفاوت تعریف کرد.
 
-📌 کاربرد رایج: داشتن یک property عمومی (**public**) با یک setter خصوصی یا داخلی (**private/internal**).
+ کاربرد رایج: داشتن یک property عمومی (**public**) با یک setter خصوصی یا داخلی (**private/internal**).
 
 مثال:
 
@@ -890,11 +890,11 @@ public class Foo
 }
 ```
 
-🔑 دقت کنید: property خودش سطح دسترسی بازتر (اینجا `public`) دارد، اما setter سطح دسترسی محدودتر (`private`).
+ دقت کنید: property خودش سطح دسترسی بازتر (اینجا `public`) دارد، اما setter سطح دسترسی محدودتر (`private`).
 
 ---
 
-### 🔹 Setterهای فقط-init (Init-only setters)
+### Setterهای فقط-init (Init-only setters)
 
 از **C# 9** می‌توان به جای `set` از **init** استفاده کرد:
 
@@ -915,14 +915,14 @@ var note = new Note { Pitch = 50 };
 * بعد از آن دیگر نمی‌توان مقدار را تغییر داد:
 
 ```csharp
-note.Pitch = 200;   // ❌ خطا – setter فقط-init
+note.Pitch = 200;   //  خطا – setter فقط-init
 ```
 
 * حتی از داخل کلاس هم قابل تغییر نیستند (مگر در initializer، constructor یا یک accessor دیگر از نوع init).
 
 ---
 
-### 🔹 جایگزین init-only properties
+### جایگزین init-only properties
 
 راه جایگزین، تعریف propertyهای فقط‌خواندنی و مقداردهی آن‌ها در constructor است:
 
@@ -938,12 +938,12 @@ public class Note
 }
 ```
 
-❗ مشکل: اگر این کلاس در یک **کتابخانه عمومی** باشد، افزودن پارامتر اختیاری جدید به constructor باعث شکستن **سازگاری دودویی (binary compatibility)** می‌شود.
+ مشکل: اگر این کلاس در یک **کتابخانه عمومی** باشد، افزودن پارامتر اختیاری جدید به constructor باعث شکستن **سازگاری دودویی (binary compatibility)** می‌شود.
 اما افزودن یک **property فقط-init** هیچ مشکلی ایجاد نمی‌کند.
 
 ---
 
-### 🔹 مزایای init-only properties
+### مزایای init-only properties
 
 * پشتیبانی از **nondestructive mutation** وقتی با **records** استفاده شوند (بخش Records، صفحه 227).
 * امکان پیاده‌سازی setter با منطق داخلی:
@@ -956,13 +956,13 @@ public class Note
 }
 ```
 
-💡 نکته: حتی می‌توان فیلدهای **readonly** را در setter فقط-init تغییر داد. این باعث می‌شود کلاس **immutable داخلی** باقی بماند.
+> **نکته:** حتی می‌توان فیلدهای **readonly** را در setter فقط-init تغییر داد. این باعث می‌شود کلاس **immutable داخلی** باقی بماند.
 
-⚠ تغییر یک accessor از `init` به `set` (یا برعکس) یک **تغییر سازگاری‌شکن (binary breaking change)** است. بنابراین اسمبلی‌های دیگر باید دوباره کامپایل شوند.
+ تغییر یک accessor از `init` به `set` (یا برعکس) یک **تغییر سازگاری‌شکن (binary breaking change)** است. بنابراین اسمبلی‌های دیگر باید دوباره کامپایل شوند.
 
 ---
 
-### 🔹 پیاده‌سازی property در CLR
+### پیاده‌سازی property در CLR
 
 در سطح CLR، propertyها به متدهایی تبدیل می‌شوند:
 
@@ -977,11 +977,11 @@ public void set_CurrentPrice (decimal value) {...}
 
 ---
 
-### 🔹 ایندکسرها (Indexers)
+### ایندکسرها (Indexers)
 
-ایندکسرها语 🌟 اجازه می‌دهند یک کلاس یا struct مثل آرایه رفتار کند.
+ایندکسرها语  اجازه می‌دهند یک کلاس یا struct مثل آرایه رفتار کند.
 
-📌 `string` یک ایندکسر دارد که اجازه می‌دهد با استفاده از یک اندیس عددی به هر `char` دسترسی پیدا کنید:
+ `string` یک ایندکسر دارد که اجازه می‌دهد با استفاده از یک اندیس عددی به هر `char` دسترسی پیدا کنید:
 
 ```csharp
 string s = "hello";
@@ -1001,7 +1001,7 @@ Console.WriteLine(s?[0]);  // چیزی چاپ نمی‌شود، خطایی هم 
 
 ---
 
-### 🔹 پیاده‌سازی ایندکسر
+### پیاده‌سازی ایندکسر
 
 برای تعریف ایندکسر، یک property با نام `this` می‌سازیم و پارامترها را داخل کروشه قرار می‌دهیم:
 
@@ -1046,7 +1046,7 @@ public string this[int wordNum] => words[wordNum];
 
 ---
 
-### 🔹 پیاده‌سازی ایندکسر در CLR
+### پیاده‌سازی ایندکسر در CLR
 
 ایندکسرها به متدهای زیر کامپایل می‌شوند:
 
@@ -1057,7 +1057,7 @@ public void set_Item(int wordNum, string value) {...}
 
 ---
 
-### 🔹 استفاده از Indices و Ranges در ایندکسرها
+### استفاده از Indices و Ranges در ایندکسرها
 
 می‌توان ایندکسرهایی برای `Index` و `Range` تعریف کرد (بخش Indices and Ranges، صفحه 63).
 
@@ -1076,7 +1076,7 @@ Console.WriteLine(s[^1]);          // fox
 string[] firstTwoWords = s[..2];   // (The, quick)
 ```
 
-### 🔹 سازنده‌های اصلی (Primary Constructors) در #C 12
+### سازنده‌های اصلی (Primary Constructors) در #C 12
 
 از نسخه‌ی **#C 12** می‌توانید یک لیست پارامتر را مستقیماً بعد از تعریف یک کلاس (یا struct) قرار دهید:
 
@@ -1094,7 +1094,7 @@ Person p = new Person("Alice", "Jones");
 p.Print();    // Alice Jones
 ```
 
-⚡ سازنده‌های اصلی برای **نمونه‌سازی سریع (prototyping)** و سناریوهای ساده مفید هستند.
+ سازنده‌های اصلی برای **نمونه‌سازی سریع (prototyping)** و سناریوهای ساده مفید هستند.
 روش جایگزین این است که فیلدها را تعریف کرده و یک سازنده معمولی بنویسید:
 
 ```csharp
@@ -1125,30 +1125,30 @@ class Person (string firstName, string lastName)
 }
 ```
 
-این باعث می‌شود پارامترهای سازنده‌ی اصلی همیشه مقداردهی شوند ✅.
+این باعث می‌شود پارامترهای سازنده‌ی اصلی همیشه مقداردهی شوند .
 
 ---
 
-### 📝 نکته درباره‌ی **Records**
+### نکته درباره‌ی **Records**
 
-در #C علاوه بر کلاس‌ها، **Records** هم وجود دارند (در صفحه‌ی 227 توضیح داده شده است).
+در #C علاوه بر کلاس‌ها، **Records** هم وجود دارند (در بخش‌های مرتبط توضیح داده شده است).
 Records نیز از **primary constructor** پشتیبانی می‌کنند، اما کامپایلر یک مرحله‌ی اضافه انجام می‌دهد: برای هر پارامتر سازنده‌ی اصلی، به‌طور پیش‌فرض یک **property عمومی با init-only** تولید می‌کند.
 اگر چنین رفتاری مدنظر شماست، بهتر است از **Record** استفاده کنید.
 
 ---
 
-### ⚠️ محدودیت‌های Primary Constructor
+### محدودیت‌های Primary Constructor
 
 این سازنده‌ها بیشتر برای سناریوهای ساده مناسب‌اند، زیرا:
 
 1. نمی‌توانید کد اضافی برای مقداردهی اولیه داخل primary constructor اضافه کنید.
 2. اگر بخواهید پارامترها را به‌عنوان property عمومی منتشر کنید، اضافه کردن **منطق اعتبارسنجی (validation logic)** آسان نیست (مگر property فقط خواندنی باشد).
 
-🔸 همچنین سازنده‌ی اصلی جایگزین **سازنده‌ی پیش‌فرض بدون پارامتر** می‌شود که در حالت عادی #C تولید می‌کرد.
+ همچنین سازنده‌ی اصلی جایگزین **سازنده‌ی پیش‌فرض بدون پارامتر** می‌شود که در حالت عادی #C تولید می‌کرد.
 
 ---
 
-### 📌 رفتار سازنده‌ی اصلی در مقایسه با سازنده معمولی
+### رفتار سازنده‌ی اصلی در مقایسه با سازنده معمولی
 
 در یک سازنده معمولی:
 
@@ -1168,7 +1168,7 @@ class Person
 
 ---
 
-### ⚙️ فیلدها و Property‌ها در Primary Constructor
+### فیلدها و Property‌ها در Primary Constructor
 
 دسترسی پارامترها به **initializerها** نیز گسترش می‌یابد:
 
@@ -1182,7 +1182,7 @@ class Person (string firstName, string lastName)
 
 ---
 
-### 🎭 ماسک‌گذاری (Masking) پارامترها
+### ماسک‌گذاری (Masking) پارامترها
 
 فیلدها یا Propertyها می‌توانند همان نام پارامترها را بگیرند:
 
@@ -1200,7 +1200,7 @@ class Person (string firstName, string lastName)
 
 ---
 
-### ✨ اعتبارسنجی و پردازش مقادیر
+### اعتبارسنجی و پردازش مقادیر
 
 مثال ذخیره‌سازی FullName با محاسبه در initializer:
 
@@ -1228,7 +1228,7 @@ class Person (string firstName, string lastName)
 
 ---
 
-### 🚨 اعتبارسنجی با استثنا (Exception)
+### اعتبارسنجی با استثنا (Exception)
 
 می‌توان از **throw expression** در initializer استفاده کرد:
 
@@ -1247,7 +1247,7 @@ class Person (string firstName, string lastName)
 
 ---
 
-### 🔄 انتشار پارامتر به‌عنوان Property با set
+### انتشار پارامتر به‌عنوان Property با set
 
 ```csharp
 class Person (string firstName, string lastName)
@@ -1259,9 +1259,9 @@ class Person (string firstName, string lastName)
 اما در این حالت اعتبارسنجی ساده نیست، چون باید هم در **set accessor** و هم در **initializer** اعتبارسنجی را پیاده‌سازی کنید (همین مشکل برای init-only هم وجود دارد).
 در چنین شرایطی بهتر است از **سازنده‌های معمولی و فیلدهای پشتیبان (backing fields)** استفاده کنید.
 
-### ⚡ سازنده‌های استاتیک (Static Constructors)
+### سازنده‌های استاتیک (Static Constructors)
 
-🔹 یک **static constructor** فقط یک بار برای هر **نوع (type)** اجرا می‌شود (نه برای هر نمونه).
+ یک **static constructor** فقط یک بار برای هر **نوع (type)** اجرا می‌شود (نه برای هر نمونه).
 یک نوع فقط می‌تواند **یک سازنده‌ی استاتیک** داشته باشد، این سازنده باید بدون پارامتر باشد و نام آن دقیقاً همان نام کلاس باشد:
 
 ```csharp
@@ -1273,16 +1273,16 @@ class Test
 
 زمان اجرا (runtime) این سازنده‌ی استاتیک را **به‌طور خودکار درست قبل از اولین استفاده از نوع** فراخوانی می‌کند. دو چیز این سازنده را فعال می‌کند:
 
-1. نمونه‌سازی از نوع 🆕
-2. دسترسی به یک عضو استاتیک در آن نوع ⚙️
+1. نمونه‌سازی از نوع 
+2. دسترسی به یک عضو استاتیک در آن نوع 
 
-🔸 تنها **modifier**هایی که در سازنده‌ی استاتیک مجاز هستند عبارت‌اند از: `unsafe` و `extern`.
+ تنها **modifier**هایی که در سازنده‌ی استاتیک مجاز هستند عبارت‌اند از: `unsafe` و `extern`.
 
-🚨 اگر یک سازنده‌ی استاتیک استثنای مدیریت‌نشده (unhandled exception) پرتاب کند، آن **نوع تا پایان عمر برنامه غیرقابل‌استفاده می‌شود**.
+ اگر یک سازنده‌ی استاتیک استثنای مدیریت‌نشده (unhandled exception) پرتاب کند، آن **نوع تا پایان عمر برنامه غیرقابل‌استفاده می‌شود**.
 
 ---
 
-### 🏗️ Module Initializers (از #C 9)
+### Module Initializers (از #C 9)
 
 از نسخه‌ی **#C 9** می‌توانید **Module Initializer** تعریف کنید که یک بار برای هر **assembly** و هنگام بارگذاری آن اجرا می‌شود:
 
@@ -1296,7 +1296,7 @@ internal static void InitAssembly()
 
 ---
 
-### 📌 سازنده‌های استاتیک و ترتیب مقداردهی فیلدها
+### سازنده‌های استاتیک و ترتیب مقداردهی فیلدها
 
 * مقداردهی اولیه‌ی فیلدهای استاتیک دقیقاً قبل از فراخوانی سازنده‌ی استاتیک اجرا می‌شود.
 * اگر نوعی سازنده‌ی استاتیک نداشته باشد، مقداردهی اولیه‌ی فیلدها درست قبل از اولین استفاده از نوع (یا زودتر، بسته به تصمیم runtime) انجام می‌شود.
@@ -1335,19 +1335,19 @@ class Foo
 
 ---
 
-### 🏷️ کلاس‌های استاتیک (Static Classes)
+### کلاس‌های استاتیک (Static Classes)
 
 * کلاسی که با `static` علامت‌گذاری شده باشد:
 
-  * نمی‌توان از آن نمونه ساخت 🚫
-  * نمی‌تواند زیرکلاس شود 🚫
+  * نمی‌توان از آن نمونه ساخت 
+  * نمی‌تواند زیرکلاس شود 
   * باید فقط شامل **اعضای استاتیک** باشد.
 
-📖 نمونه‌های معروف: `System.Console` و `System.Math`.
+ نمونه‌های معروف: `System.Console` و `System.Math`.
 
 ---
 
-### 🗑️ Finalizers
+### Finalizers
 
 **Finalizer** متدی است که درست قبل از آزاد شدن حافظه‌ی یک شیء توسط **Garbage Collector** اجرا می‌شود.
 
@@ -1373,7 +1373,7 @@ protected override void Finalize()
 }
 ```
 
-📌 توضیحات کامل درباره‌ی garbage collection و finalizerها در فصل 12 خواهد آمد.
+ توضیحات کامل درباره‌ی garbage collection و finalizerها در فصل 12 خواهد آمد.
 
 می‌توانید finalizer تک‌خطی هم بنویسید:
 
@@ -1383,9 +1383,9 @@ protected override void Finalize()
 
 ---
 
-### 🧩 Partial Types و Partial Methods
+### Partial Types و Partial Methods
 
-🔹 **Partial types** به شما اجازه می‌دهند تعریف یک نوع را به چند بخش (معمولاً در فایل‌های مختلف) تقسیم کنید.
+ **Partial types** به شما اجازه می‌دهند تعریف یک نوع را به چند بخش (معمولاً در فایل‌های مختلف) تقسیم کنید.
 
 سناریوی رایج:
 
@@ -1400,7 +1400,7 @@ partial class PaymentForm { ... }
 partial class PaymentForm { ... }
 ```
 
-⚠️ هر بخش باید `partial` باشد. این کد غیرقانونی است:
+ هر بخش باید `partial` باشد. این کد غیرقانونی است:
 
 ```csharp
 partial class PaymentForm {}
@@ -1415,7 +1415,7 @@ class PaymentForm {}
 
 ---
 
-### 🔧 Partial Methods
+### Partial Methods
 
 یک **partial type** می‌تواند شامل **partial method** باشد. این‌ها معمولاً برای فراهم کردن hook در کد auto-generated استفاده می‌شوند:
 
@@ -1437,13 +1437,13 @@ partial class PaymentForm    // فایل دستی
 
 * یک partial method شامل **تعریف (definition)** و **پیاده‌سازی (implementation)** است.
 * تعریف معمولاً توسط generator نوشته می‌شود؛ پیاده‌سازی دستی اضافه می‌شود.
-* اگر پیاده‌سازی ارائه نشود، هم تعریف و هم تمام فراخوانی‌های آن حذف می‌شوند ➝ هیچ هزینه‌ای برای کد ندارد ✅.
+* اگر پیاده‌سازی ارائه نشود، هم تعریف و هم تمام فراخوانی‌های آن حذف می‌شوند  هیچ هزینه‌ای برای کد ندارد .
 * partial methodها باید `void` باشند و ذاتاً `private` هستند.
 * نمی‌توانند `out parameter` داشته باشند.
 
-### 🧩 متدهای partial توسعه‌یافته (Extended Partial Methods)
+### متدهای partial توسعه‌یافته (Extended Partial Methods)
 
-🔹 متدهای partial توسعه‌یافته (از C# 9 به بعد) برای سناریوی معکوس تولید کد طراحی شده‌اند؛ جایی که یک برنامه‌نویس **hook**‌هایی تعریف می‌کند که یک **code generator** آن‌ها را پیاده‌سازی می‌کند.
+ متدهای partial توسعه‌یافته (از C# 9 به بعد) برای سناریوی معکوس تولید کد طراحی شده‌اند؛ جایی که یک برنامه‌نویس **hook**‌هایی تعریف می‌کند که یک **code generator** آن‌ها را پیاده‌سازی می‌کند.
 یک نمونه از کاربرد این موضوع، **source generators** هستند (قابلیتی در Roslyn) که به شما اجازه می‌دهند اسمبلی‌ای را به کامپایلر بدهید تا به‌صورت خودکار بخش‌هایی از کد شما را تولید کند.
 
 ---
@@ -1456,7 +1456,7 @@ public partial class Test
 }
 ```
 
-📌 اگر یک اعلان متد partial با یک **accessibility modifier** (مثل public یا private) آغاز شود، آن متد به‌عنوان یک متد partial توسعه‌یافته در نظر گرفته می‌شود.
+ اگر یک اعلان متد partial با یک **accessibility modifier** (مثل public یا private) آغاز شود، آن متد به‌عنوان یک متد partial توسعه‌یافته در نظر گرفته می‌شود.
 
 نکات مهم:
 
@@ -1476,16 +1476,16 @@ public partial class Test
 
 ---
 
-### 🏷️ عملگر nameof
+### عملگر nameof
 
-🔹 عملگر `nameof` نام هر **symbol** (مثل type، member، variable و …) را به‌صورت یک **string** برمی‌گرداند:
+ عملگر `nameof` نام هر **symbol** (مثل type، member، variable و …) را به‌صورت یک **string** برمی‌گرداند:
 
 ```csharp
 int count = 123;
 string name = nameof (count);   // مقدار name برابر است با "count"
 ```
 
-📌 مزیت اصلی `nameof` نسبت به نوشتن مستقیم یک رشته این است که از **static type checking** پشتیبانی می‌کند.
+ مزیت اصلی `nameof` نسبت به نوشتن مستقیم یک رشته این است که از **static type checking** پشتیبانی می‌کند.
 ابزارهایی مثل **Visual Studio** این ارجاع را می‌شناسند، بنابراین اگر شما نام symbol را تغییر دهید، تمام ارجاعات آن نیز به‌طور خودکار تغییر خواهند کرد.
 
 مثال برای **field** یا **property**:
@@ -1502,9 +1502,9 @@ nameof (StringBuilder) + "." + nameof (StringBuilder.Length);
 
 ---
 
-### 🏛️ وراثت (Inheritance)
+### وراثت (Inheritance)
 
-🔹 یک کلاس می‌تواند از کلاس دیگری **ارث‌بری (inherit)** کند تا آن را گسترش یا سفارشی‌سازی کند.
+ یک کلاس می‌تواند از کلاس دیگری **ارث‌بری (inherit)** کند تا آن را گسترش یا سفارشی‌سازی کند.
 با ارث‌بری می‌توان از امکانات یک کلاس استفاده کرد بدون اینکه از صفر همه‌چیز را بسازید.
 
 * یک کلاس فقط می‌تواند از یک کلاس ارث‌بری کند.
@@ -1541,16 +1541,16 @@ Console.WriteLine (mansion.Name);     // Mansion
 Console.WriteLine (mansion.Mortgage); // 250000
 ```
 
-📌 کلاس‌های `Stock` و `House` فیلد `Name` را از کلاس پایه‌ی `Asset` به ارث می‌برند.
+ کلاس‌های `Stock` و `House` فیلد `Name` را از کلاس پایه‌ی `Asset` به ارث می‌برند.
 
 * کلاس مشتق‌شده = **subclass**
 * کلاس پایه = **superclass**
 
 ---
 
-### 🔄 چندریختی (Polymorphism)
+### چندریختی (Polymorphism)
 
-🔹 در C# مراجع (**references**) چندریختی هستند.
+ در C# مراجع (**references**) چندریختی هستند.
 این یعنی یک متغیر از نوع `x` می‌تواند به یک شیء از نوعی که زیرکلاس `x` است اشاره کند.
 
 مثال:
@@ -1568,7 +1568,7 @@ Display (msft);     // OK
 Display (mansion);  // OK
 ```
 
-📌 دلیلش این است که کلاس‌های مشتق‌شده (`Stock` و `House`) همه‌ی ویژگی‌های کلاس پایه (`Asset`) را دارند.
+ دلیلش این است که کلاس‌های مشتق‌شده (`Stock` و `House`) همه‌ی ویژگی‌های کلاس پایه (`Asset`) را دارند.
 
 اما برعکس درست نیست:
 
@@ -1583,22 +1583,22 @@ public static void Display (House house)
 
 ---
 
-### 🎭 Casting و Reference Conversions
+### Casting و Reference Conversions
 
 یک مرجع (object reference) می‌تواند:
 
 * به‌طور **ضمنی (implicit)** به کلاس پایه **upcast** شود.
 * به‌طور **صریح (explicit)** به زیرکلاس **downcast** شود.
 
-📌 Upcast و Downcast بین انواع سازگار مرجع، درواقع یک **reference conversion** انجام می‌دهند:
+ Upcast و Downcast بین انواع سازگار مرجع، درواقع یک **reference conversion** انجام می‌دهند:
 یعنی یک مرجع جدید ساخته می‌شود که به همان شیء اشاره می‌کند.
 
-* Upcast همیشه موفق است ✅
-* Downcast فقط وقتی موفق است که شیء واقعاً از نوع مناسب باشد ⚠️
+* Upcast همیشه موفق است 
+* Downcast فقط وقتی موفق است که شیء واقعاً از نوع مناسب باشد 
 
 ---
 
-#### 🔼 Upcasting
+#### Upcasting
 
 ```csharp
 Stock msft = new Stock();
@@ -1613,10 +1613,10 @@ Console.WriteLine (a.Name);      // OK
 Console.WriteLine (a.SharesOwned); // خطای زمان کامپایل
 ```
 
-📌 دلیل خطای آخر: متغیر `a` از نوع `Asset` است، بنابراین فقط می‌تواند اعضای `Asset` را ببیند.
+ دلیل خطای آخر: متغیر `a` از نوع `Asset` است، بنابراین فقط می‌تواند اعضای `Asset` را ببیند.
 برای دسترسی به `SharesOwned` باید شیء را به `Stock` **downcast** کنید.
 
-### 🔽 Downcasting
+### Downcasting
 
 **Downcast** عملیاتی است که یک مرجع کلاس پایه را به مرجع کلاس مشتق‌شده تبدیل می‌کند:
 
@@ -1638,11 +1638,11 @@ Asset a = h;        // Upcast همیشه موفق
 Stock s = (Stock)a; // Downcast شکست می‌خورد، چون a از نوع Stock نیست
 ```
 
-⚠️ اگر Downcast شکست بخورد، یک **InvalidCastException** پرتاب می‌شود.
+ اگر Downcast شکست بخورد، یک **InvalidCastException** پرتاب می‌شود.
 
 ---
 
-### 🔹 عملگر `as`
+### عملگر `as`
 
 * انجام Downcast بدون پرتاب Exception در صورت شکست:
 
@@ -1658,12 +1658,12 @@ if (s != null)
     Console.WriteLine(s.SharesOwned);
 ```
 
-💡 تفاوت با cast صریح:
+ تفاوت با cast صریح:
 
 * `cast` → اطمینان از نوع دارید، اگر اشتباه باشد Exception پرتاب می‌شود.
 * `as` → نوع مطمئن نیست، می‌توانید بر اساس null تصمیم بگیرید.
 
-⚠️ محدودیت‌ها:
+ محدودیت‌ها:
 
 * نمی‌تواند تبدیل سفارشی یا عددی انجام دهد:
 
@@ -1673,7 +1673,7 @@ long x = 3 as long; // خطای کامپایل
 
 ---
 
-### 🔹 عملگر `is`
+### عملگر `is`
 
 * بررسی می‌کند که یک متغیر با نوع یا الگوی مشخص مطابقت دارد:
 
@@ -1702,7 +1702,7 @@ Console.WriteLine(s.SharesOwned); // هنوز در محدوده است
 
 ---
 
-### 🔹 Virtual Function Members
+### Virtual Function Members
 
 * متد، پراپرتی، ایندکسر و event می‌توانند **virtual** باشند تا کلاس‌های مشتق آن‌ها را **override** کنند:
 
@@ -1733,11 +1733,11 @@ Console.WriteLine(mansion.Liability); // 250000
 Console.WriteLine(a.Liability);       // 250000
 ```
 
-⚠️ **توجه:** فراخوانی متد virtual از داخل constructor می‌تواند خطرناک باشد، زیرا کلاس مشتق ممکن است هنوز به طور کامل مقداردهی نشده باشد.
+ **توجه:** فراخوانی متد virtual از داخل constructor می‌تواند خطرناک باشد، زیرا کلاس مشتق ممکن است هنوز به طور کامل مقداردهی نشده باشد.
 
 ---
 
-### 🔹 Covariant Return Types (C# 9)
+### Covariant Return Types (C# 9)
 
 * از C# 9 می‌توان متد را override کرد تا نوع بازگشتی **مشتق شده‌تر** داشته باشد:
 
@@ -1768,7 +1768,7 @@ House mansion1 = new House { Name="McMansion", Mortgage=250000 };
 House mansion2 = (House)mansion1.Clone();
 ```
 
-### 🔹 Abstract Classes and Abstract Members
+### Abstract Classes and Abstract Members
 
 * یک کلاس **abstract** هیچ‌گاه نمی‌تواند نمونه‌سازی شود؛ تنها زیرکلاس‌های **concrete** می‌توانند نمونه ایجاد کنند.
 * کلاس‌های abstract می‌توانند **abstract members** داشته باشند که شبیه virtual هستند، اما پیاده‌سازی پیش‌فرض ندارند. زیرکلاس موظف است آن‌ها را پیاده‌سازی کند مگر اینکه خودش هم abstract باشد.
@@ -1789,7 +1789,7 @@ public class Stock : Asset
 
 ---
 
-### 🔹 Hiding Inherited Members
+### Hiding Inherited Members
 
 * اگر کلاس پایه و کلاس مشتق **عضوهای هم‌نام** داشته باشند، عضو کلاس مشتق، عضو کلاس پایه را **مخفی می‌کند**.
 
@@ -1808,7 +1808,7 @@ public class B : A { public new int Counter = 2; }
 
 ---
 
-### 🔹 `new` versus `override`
+### `new` versus `override`
 
 * `override` → جایگزینی یک متد virtual در کلاس پایه
 * `new` → مخفی کردن یک عضو هم‌نام بدون override
@@ -1844,7 +1844,7 @@ b2.Foo();   // BaseClass.Foo
 
 ---
 
-### 🔹 Sealing Functions and Classes
+### Sealing Functions and Classes
 
 * با `sealed` می‌توان **یک متد override را مسدود** کرد تا توسط کلاس‌های مشتق دیگر override نشود:
 
@@ -1854,11 +1854,11 @@ public sealed override decimal Liability { get { return Mortgage; } }
 
 * همچنین می‌توان **یک کلاس را sealed** کرد تا امکان subclassing آن نباشد.
 
-⚠️ نمی‌توان یک عضو را در برابر **مخفی شدن با `new`** مسدود کرد.
+ نمی‌توان یک عضو را در برابر **مخفی شدن با `new`** مسدود کرد.
 
 ---
 
-### 🔹 The `base` Keyword
+### The `base` Keyword
 
 * `base` مشابه `this` است، اما برای موارد زیر استفاده می‌شود:
 
@@ -1877,7 +1877,7 @@ public class House : Asset
 
 ---
 
-### 🔹 Constructors and Inheritance
+### Constructors and Inheritance
 
 * زیرکلاس باید **constructor خودش** را تعریف کند. constructor های کلاس پایه به طور خودکار به کلاس مشتق منتقل نمی‌شوند.
 * برای استفاده از constructor کلاس پایه، از `base` استفاده می‌کنیم:
@@ -1898,7 +1898,7 @@ public class Subclass : Baseclass
 
 * **Base-class constructors همیشه اول اجرا می‌شوند** تا ابتدا مقداردهی کلاس پایه کامل شود.
 
-### 🔹 Implicit Calling of the Parameterless Base-Class Constructor
+### Implicit Calling of the Parameterless Base-Class Constructor
 
 * اگر در **زیرکلاس** از `base` استفاده نکنیم، **constructor بدون پارامتر کلاس پایه** به‌صورت ضمنی فراخوانی می‌شود:
 
@@ -1932,7 +1932,7 @@ public class Subclass : Baseclass
 
 ---
 
-### 🔹 Required Members (C# 11)
+### Required Members (C# 11)
 
 * با استفاده از **required members** می‌توان الزام کرد که یک فیلد یا property حتماً هنگام ساخت شیء مقداردهی شود:
 
@@ -1962,7 +1962,7 @@ public class Asset
 
 ---
 
-### 🔹 Constructor and Field Initialization Order
+### Constructor and Field Initialization Order
 
 هنگام نمونه‌سازی، **ترتیب مقداردهی** به شکل زیر است:
 
@@ -1993,7 +1993,7 @@ public class D : B
 
 ---
 
-### 🔹 Inheritance with Primary Constructors
+### Inheritance with Primary Constructors
 
 * کلاس‌ها با **primary constructors** می‌توانند به شکل زیر subclass شوند:
 
@@ -2006,7 +2006,7 @@ public class Subclass(int x, int y) : Baseclass(x) { ... }
 
 ---
 
-### 🔹 Overloading and Resolution
+### Overloading and Resolution
 
 * هنگام فراخوانی **overloaded methods**، **نوع دقیق‌تر** ارجحیت دارد:
 
@@ -2033,7 +2033,7 @@ Foo((dynamic)a);  // فراخوانی Foo(House) در زمان اجرا
 
 ---
 
-### 🔹 The `object` Type
+### The `object` Type
 
 * `object` پایه نهایی تمام نوع‌ها است. هر نوعی می‌تواند به `object` **upcast** شود.
 * مثال استفاده در یک **Stack ساده**:
@@ -2059,7 +2059,7 @@ int three = (int)stack.Pop();    // boxing/unboxing
 
 ---
 
-### 🔹 Boxing and Unboxing
+### Boxing and Unboxing
 
 * **Boxing** → تبدیل یک value type به object (یا interface):
 
@@ -2074,7 +2074,7 @@ object obj = x;  // boxing
 int y = (int)obj;  // unboxing
 ```
 
-⚠️ نوع اعلام شده باید دقیقاً با نوع واقعی مطابقت داشته باشد، در غیر این صورت `InvalidCastException` رخ می‌دهد:
+ نوع اعلام شده باید دقیقاً با نوع واقعی مطابقت داشته باشد، در غیر این صورت `InvalidCastException` رخ می‌دهد:
 
 ```csharp
 object obj = 9;
@@ -2099,7 +2099,7 @@ i = 5;
 Console.WriteLine(boxed);  // 3
 ```
 
-بررسی نوع به‌صورت **استاتیک و زمان اجرا** 🔍🖥️
+بررسی نوع به‌صورت **استاتیک و زمان اجرا** 
 
 برنامه‌های C# هم در زمان **کامپایل** (به‌صورت استاتیک) و هم در زمان **اجرای برنامه** (توسط CLR) بررسی نوع می‌شوند.
 
@@ -2124,7 +2124,7 @@ int z = (int)y;  // خطای زمان اجرا، downcast ناموفق
 
 ---
 
-### متد GetType و عملگر typeof 🏷️
+### متد GetType و عملگر typeof
 
 تمام انواع در C# در زمان اجرا با نمونه‌ای از `System.Type` نمایش داده می‌شوند. دو روش اصلی برای دریافت شیء `System.Type` وجود دارد:
 
@@ -2148,7 +2148,7 @@ public class Point { public int X, Y; }
 
 ---
 
-### متد ToString 📝
+### متد ToString
 
 متد `ToString` **نمایش متنی پیش‌فرض** یک نمونه از نوع را برمی‌گرداند. این متد در تمام انواع داخلی بازنویسی شده است:
 
@@ -2182,7 +2182,7 @@ string s2 = box.ToString();  // فراخوانی روی مقدار boxed
 
 ---
 
-### اعضای کلاس object 📦
+### اعضای کلاس object
 
 ```csharp
 public class Object
@@ -2203,7 +2203,7 @@ public class Object
 
 ---
 
-### Struct ها 📐
+### Struct ها
 
 یک `struct` شبیه کلاس است با تفاوت‌های کلیدی زیر:
 
@@ -2220,7 +2220,7 @@ Structها برای زمانی مناسب هستند که **رفتار نوع م
 
 ---
 
-### ساختار ساخت Struct 🏗️
+### ساختار ساخت Struct
 
 قبل از C# 11، هر فیلد struct باید به‌صورت **صریح در constructor یا field initializer** مقداردهی می‌شد. حالا این محدودیت برداشته شده است.
 
@@ -2267,9 +2267,9 @@ struct WebOptions
 }
 ```
 
-این روش باعث **سادگی و جلوگیری از رفتار گیج‌کننده** هنگام مقداردهی می‌شود. ✅
+این روش باعث **سادگی و جلوگیری از رفتار گیج‌کننده** هنگام مقداردهی می‌شود. 
 
-ساختارهای **خواندنی (Read-Only Structs) و توابع** 📌🖊️
+ساختارهای **خواندنی (Read-Only Structs) و توابع** 
 
 می‌توانید از **modifer `readonly`** روی یک struct استفاده کنید تا اطمینان حاصل شود که **تمام فیلدها فقط خواندنی هستند**. این کار هم نیت شما را واضح می‌کند و هم به کامپایلر اجازه می‌دهد بهینه‌سازی‌های بیشتری انجام دهد:
 
@@ -2294,7 +2294,7 @@ struct Point
 
 ---
 
-### Ref Structs 💎
+### Ref Structs
 
 **Ref struct**ها در C# 7.2 معرفی شدند و ویژگی‌ای خاص برای **Span<T>** و **ReadOnlySpan<T>** فراهم می‌کنند که در فصل 23 توضیح داده شده‌اند (و همچنین Utf8JsonReader در فصل 11). این structها به **میکروبهینه‌سازی حافظه** کمک می‌کنند.
 
@@ -2330,7 +2330,7 @@ Ref structها به دلیل محدودیت در زندگی روی stack، نم�
 
 ---
 
-### Access Modifiers 🔐
+### Access Modifiers
 
 برای **محدود کردن دسترسی** یک نوع یا عضو نوع به سایر نوع‌ها یا اسمبلی‌ها، می‌توان **access modifier** استفاده کرد:
 
@@ -2369,7 +2369,7 @@ class Subclass : BaseClass
 
 ---
 
-### Friend Assemblies 🤝
+### Friend Assemblies
 
 می‌توانید اعضای **internal** را به سایر friend assemblyها با استفاده از attribute زیر در سطح اسمبلی در دسترس قرار دهید:
 
@@ -2403,7 +2403,7 @@ internal class A {}
 public class B : A {}  // خطا
 ```
 
-**Interfaces (رابطه‌ها) 🧩**
+**Interfaces (رابطه‌ها) **
 
 یک **interface** شبیه یک کلاس است، اما تنها رفتار (Behavior) را مشخص می‌کند و **حالت (State)** یا داده نگه نمی‌دارد. بنابراین:
 
@@ -2448,7 +2448,7 @@ while (e.MoveNext())
 
 ---
 
-### گسترش یک Interface ➕
+### گسترش یک Interface
 
 Interfaces می‌توانند از سایر interfaceها ارث‌بری کنند:
 
@@ -2461,7 +2461,7 @@ public interface IRedoable : IUndoable { void Redo(); }
 
 ---
 
-### پیاده‌سازی صریح Interface 🔒
+### پیاده‌سازی صریح Interface
 
 پیاده‌سازی چند interface گاهی باعث **تداخل در امضاهای اعضا** می‌شود. می‌توانید این تداخل‌ها را با **پیاده‌سازی صریح** حل کنید:
 
@@ -2497,7 +2497,7 @@ w.Foo();         // Widget's implementation of I1.Foo
 
 ---
 
-### پیاده‌سازی مجازی Interface Members ⚡
+### پیاده‌سازی مجازی Interface Members
 
 یک عضو interface که به‌طور ضمنی پیاده‌سازی شده است، به‌صورت پیش‌فرض **sealed** است و برای override شدن باید در کلاس پایه **virtual یا abstract** علامت‌گذاری شود:
 
@@ -2526,7 +2526,7 @@ r.Undo();                // RichTextBox.Undo
 
 ---
 
-### پیاده‌سازی مجدد Interface در Subclass 🔄
+### پیاده‌سازی مجدد Interface در Subclass
 
 یک subclass می‌تواند هر عضو interface که قبلاً توسط کلاس پایه پیاده‌سازی شده است را **reimplement** کند. پیاده‌سازی مجدد وقتی که از طریق interface صدا زده شود، جایگزین پیاده‌سازی کلاس پایه می‌شود و فرقی ندارد عضو **virtual** باشد یا خیر.
 
@@ -2560,8 +2560,8 @@ r.Undo();                 // RichTextBox.Undo      Case 1
 ((TextBox)r).Undo();      // TextBox.Undo
 ```
 
-✅ نکته: پیاده‌سازی مجدد معمولاً **بهترین استراتژی برای override کردن اعضای صریح interface** است، زیرا تنها وقتی که عضو از طریق interface صدا زده شود، اثر می‌کند و از رفتار ناسازگار جلوگیری می‌کند.
-**جایگزین‌های پیاده‌سازی مجدد Interface 🔄**
+> **نکته:** پیاده‌سازی مجدد معمولاً **بهترین استراتژی برای override کردن اعضای صریح interface** است، زیرا تنها وقتی که عضو از طریق interface صدا زده شود، اثر می‌کند و از رفتار ناسازگار جلوگیری می‌کند.
+**جایگزین‌های پیاده‌سازی مجدد Interface **
 
 حتی با پیاده‌سازی صریح اعضا، پیاده‌سازی مجدد interface می‌تواند مشکل‌ساز باشد به چند دلیل:
 
@@ -2590,7 +2590,7 @@ public class RichTextBox : TextBox
 
 ---
 
-### Interface و Boxing 📦
+### Interface و Boxing
 
 تبدیل یک **struct** به یک interface باعث **boxing** می‌شود. اما فراخوانی یک عضو ضمنی پیاده‌سازی‌شده روی struct، باعث boxing نمی‌شود:
 
@@ -2606,7 +2606,7 @@ i.Foo();
 
 ---
 
-### Default Interface Members 🛠
+### Default Interface Members
 
 از C# 8 به بعد می‌توانید **پیاده‌سازی پیش‌فرض** برای اعضای interface اضافه کنید و اجرای آن را اختیاری کنید:
 
@@ -2630,7 +2630,7 @@ class Logger : ILogger { }
 
 ---
 
-### Static Interface Members ⚡
+### Static Interface Members
 
 یک interface می‌تواند **اعضای static** نیز داشته باشد. دو نوع static وجود دارد:
 
@@ -2677,7 +2677,7 @@ class CustomerTest : ITypeDescribable
 
 ---
 
-### نوشتن Class در مقابل Interface 🏗
+### نوشتن Class در مقابل Interface
 
 راهنما:
 
@@ -2714,7 +2714,7 @@ interface ICarnivore      {}
 ```
 
 * مثال واقعی: Bird و Insect می‌توانند معادل Windows control و web control باشند. FlyingCreature و Carnivore می‌توانند معادل IPrintable و IUndoable باشند.
-**Enums 🔢**
+**Enums **
 
 یک **enum** نوع ویژه‌ای از value type است که به شما امکان می‌دهد گروهی از **ثابت‌های عددی نام‌گذاری‌شده** را تعریف کنید. به عنوان مثال:
 
@@ -2750,7 +2750,7 @@ public enum BorderSide : byte { Left=1, Right=2, Top=10, Bottom=11 }
 
 ---
 
-### تبدیل‌های Enum 🔄
+### تبدیل‌های Enum
 
 می‌توانید یک نمونه enum را به نوع عددی زمینه‌ای و برعکس تبدیل کنید با **explicit cast**:
 
@@ -2789,7 +2789,7 @@ if (b == 0) ...
 
 ---
 
-### Flags Enums 🏴
+### Flags Enums
 
 می‌توانید اعضای enum را با هم ترکیب کنید. برای جلوگیری از ابهام، اعضای **combinable enum** باید مقادیر صریح داشته باشند، معمولاً به صورت توان‌های دو:
 
@@ -2839,7 +2839,7 @@ enum BorderSides
 
 ---
 
-### عملگرهای Enum ⚙️
+### عملگرهای Enum
 
 عملگرهایی که با enums کار می‌کنند:
 
@@ -2853,7 +2853,7 @@ enum BorderSides
 
 ---
 
-### مسائل Type-Safety ⚠️
+### مسائل Type-Safety
 
 فرض کنید داریم:
 
@@ -2916,7 +2916,7 @@ bool IsFlagDefined(Enum e)
 
 ---
 
-### Nested Types 🏗
+### Nested Types
 
 یک **nested type** در داخل محدوده یک نوع دیگر تعریف می‌شود:
 
@@ -2971,7 +2971,7 @@ Nested types توسط کامپایلر نیز برای ایجاد **کلاس‌�
 
 ---
 
-### Generics ⚙️
+### Generics
 
 اگر هدف از استفاده از nested type تنها جلوگیری از شلوغی namespace است، بهتر است از **nested namespace** استفاده کنید.
 
@@ -2983,7 +2983,7 @@ C# دو مکانیزم برای نوشتن کد قابل استفاده مجدد
 
 * Generics می‌توانند **type safety** را افزایش دهند و نیاز به casting و boxing را کاهش دهند.
 
-#### Generic Types 🧩
+#### Generic Types
 
 C# generics و C++ templates مشابه هستند اما رفتار متفاوتی دارند.
 
@@ -3048,7 +3048,7 @@ public class Stack<T>
 }
 ```
 
-### Why Generics Exist 🧩
+### Why Generics Exist
 
 Generics در C# وجود دارند تا بتوانید کدی **قابل استفاده مجدد برای انواع مختلف** بنویسید.
 
@@ -3092,7 +3092,7 @@ Stack<int> stack = new Stack<int>();
 
 ---
 
-### Generic Methods 🔄
+### Generic Methods
 
 متدهای generic پارامترهای نوعی خود را در **signature متد** معرفی می‌کنند.
 مثال: swap دو مقدار از هر نوع T
@@ -3124,7 +3124,7 @@ Swap<int>(ref x, ref y);
 
 ---
 
-### Declaring Type Parameters 📦
+### Declaring Type Parameters
 
 پارامترهای نوع می‌توانند در **کلاس‌ها، structها، interfaceها، delegateها و متدها** تعریف شوند.
 مثال:
@@ -3155,7 +3155,7 @@ Type a3 = typeof(A<int,int>); // Closed
 
 ---
 
-### Default Generic Value ⚙️
+### Default Generic Value
 
 کلمه کلیدی `default` برای گرفتن مقدار پیش‌فرض پارامتر نوعی استفاده می‌شود:
 
@@ -3175,7 +3175,7 @@ array[i] = default;
 
 ---
 
-### Generic Constraints 🛡️
+### Generic Constraints
 
 به‌طور پیش‌فرض می‌توان هر نوعی را جایگزین T کرد، اما **constraints** محدودیت‌هایی اضافه می‌کنند:
 
@@ -3209,7 +3209,7 @@ class GenericClass<T, U>
 
 ---
 
-### Example: Max Method Using Constraints ✅
+### Example: Max Method Using Constraints
 
 استفاده از interface constraint `IComparable<T>`:
 
@@ -3250,7 +3250,7 @@ class Stack<T>
 }
 ```
 
-### Subclassing Generic Types 🧬
+### Subclassing Generic Types
 
 یک کلاس generic می‌تواند مانند کلاس معمولی subclass شود. چند حالت وجود دارد:
 
@@ -3282,7 +3282,7 @@ class KeyedList<TElement, TKey> : List<TElement> { ... }
 
 ---
 
-### Self-Referencing Generic Declarations 🔄
+### Self-Referencing Generic Declarations
 
 یک نوع می‌تواند خودش را به عنوان **concrete type** معرفی کند:
 
@@ -3310,7 +3310,7 @@ class Bar<T> where T : Bar<T> { ... }
 
 ---
 
-### Static Data in Generic Types 💾
+### Static Data in Generic Types
 
 * **Static data** منحصر به هر **closed type** است:
 
@@ -3325,7 +3325,7 @@ Console.WriteLine(++Bob<object>.Count); // 1
 
 ---
 
-### Type Parameters and Conversions ⚖️
+### Type Parameters and Conversions
 
 C# چند نوع تبدیل را پشتیبانی می‌کند:
 
@@ -3370,7 +3370,7 @@ return (StringBuilder)(object)arg;
 
 ---
 
-### Covariance & Contravariance 🔁
+### Covariance & Contravariance
 
 * **Covariance**: اگر `A` به `B` قابل تبدیل باشد، نوع generic `X<A>` می‌تواند به `X<B>` تبدیل شود.
 * فقط برای **implicit reference conversions** اعمال می‌شود (مثل subclass یا interface implementation).
@@ -3406,7 +3406,7 @@ ZooCleaner.Wash(bears);
 
 ---
 
-### Arrays و Covariance ⚠️
+### Arrays و Covariance
 
 * Arrayها از نظر تاریخی covariant هستند:
 
@@ -3421,7 +3421,7 @@ Animal[] animals = bears;  // OK
 animals[0] = new Camel();  // Runtime error
 ```
 
-### اعلام یک پارامتر نوع کوواریانت 📐
+### اعلام یک پارامتر نوع کوواریانت
 
 پارامترهای نوع در **interfaces** و **delegates** می‌توانند با علامت‌گذاری با **modifer `out`** کوواریانت اعلام شوند. این **modifer** تضمین می‌کند که برخلاف آرایه‌ها، پارامترهای نوع کوواریانت کاملاً **ایمن از نظر نوع (type-safe)** هستند.
 
@@ -3443,7 +3443,7 @@ Animal a = animals.Pop();
 
 تبدیل از `bears` به `animals` توسط کامپایلر مجاز است، زیرا **پارامتر نوع کوواریانت است**. این تبدیل **ایمن از نظر نوع** است، زیرا موقعیتی که کامپایلر می‌خواهد از آن جلوگیری کند—قرار دادن یک **Camel** در استک—امکان‌پذیر نیست، چرا که هیچ راهی برای فرستادن Camel به یک interface که `T` تنها در خروجی ظاهر می‌شود، وجود ندارد.
 
-💡 کوواریانس (و کانترکوواریانس) در interfaces معمولاً **مصرف می‌شود** و کمتر پیش می‌آید که نیاز باشد **interfaces کوواریانت بنویسید**.
+ کوواریانس (و کانترکوواریانس) در interfaces معمولاً **مصرف می‌شود** و کمتر پیش می‌آید که نیاز باشد **interfaces کوواریانت بنویسید**.
 
 نکته جالب: پارامترهای متد که با `out` علامت‌گذاری شده‌اند، به دلیل محدودیت‌های CLR، **قابل کوواریانس نیستند**.
 
@@ -3456,19 +3456,19 @@ public class ZooCleaner
 }
 ```
 
-💡 **interfaces `IEnumerator<T>` و `IEnumerable<T>`** که در فصل ۷ توضیح داده شده‌اند، دارای پارامتر نوع کوواریانت `T` هستند. این باعث می‌شود بتوانید، برای مثال، `IEnumerable<string>` را به `IEnumerable<object>` تبدیل کنید.
+ **interfaces `IEnumerator<T>` و `IEnumerable<T>`** که در فصل ۷ توضیح داده شده‌اند، دارای پارامتر نوع کوواریانت `T` هستند. این باعث می‌شود بتوانید، برای مثال، `IEnumerable<string>` را به `IEnumerable<object>` تبدیل کنید.
 
 کامپایلر **خطا ایجاد می‌کند** اگر پارامتر نوع کوواریانت را در یک **موقعیت ورودی** (مثلاً پارامتر متد یا property قابل نوشتن) استفاده کنید.
 
 ---
 
-### کوواریانس (و کانترکوواریانس) و محدودیت‌ها ⚠️
+### کوواریانس (و کانترکوواریانس) و محدودیت‌ها
 
 کوواریانس و کانترکوواریانس **فقط برای عناصری با تبدیل مرجع (reference conversion)** کار می‌کند—نه برای تبدیل‌های boxing. این قانون هم برای **variance پارامتر نوع** و هم برای **variance آرایه‌ها** اعمال می‌شود. بنابراین اگر متدی پارامتری از نوع `IPoppable<object>` بپذیرد، می‌توان آن را با `IPoppable<string>` فراخوانی کرد اما **نه با `IPoppable<int>`**.
 
 ---
 
-### کانترکوواریانس 🔄
+### کانترکوواریانس
 
 فرض کنید `A` قابلیت تبدیل مرجع به `B` را دارد. اگر `X<A>` قابلیت تبدیل به `X<B>` را داشته باشد، پارامتر نوع `X` کوواریانت است.
 کانترکوواریانس زمانی است که بتوانید **در جهت معکوس** تبدیل کنید—از `X<B>` به `X<A>`. این زمانی امکان‌پذیر است که **پارامتر نوع تنها در موقعیت‌های ورودی استفاده شود** و با `in` علامت‌گذاری شود.
@@ -3491,11 +3491,11 @@ bears.Push(new Bear());
 
 کلاس `Stack<T>` ما می‌تواند همزمان **`IPushable<T>` و `IPoppable<T>`** را پیاده‌سازی کند، حتی اگر `T` در دو interface با **annotaion‌های variance مخالف** باشد! این کار امکان‌پذیر است زیرا **variance باید از طریق interface اعمال شود، نه کلاس**؛ بنابراین، قبل از انجام تبدیل variant، باید از دیدگاه IPoppable یا IPushable متعهد شوید. این دیدگاه سپس شما را به عملیات قانونی تحت قوانین variance محدود می‌کند.
 
-💡 این توضیح می‌دهد چرا **کلاس‌ها اجازه پارامتر نوع variant ندارند**: پیاده‌سازی‌های واقعی معمولاً نیاز دارند داده‌ها **در هر دو جهت جریان داشته باشند**.
+ این توضیح می‌دهد چرا **کلاس‌ها اجازه پارامتر نوع variant ندارند**: پیاده‌سازی‌های واقعی معمولاً نیاز دارند داده‌ها **در هر دو جهت جریان داشته باشند**.
 
 ---
 
-### مثال دیگر: IComparer<in T> 🧮
+### مثال دیگر: IComparer<in T>
 
 در فضای نام **System**:
 
@@ -3519,7 +3519,7 @@ int result = stringComparer.Compare("Brett", "Jemaine");
 
 ---
 
-### C# Generics در مقایسه با C++ Templates ⚙️
+### C# Generics در مقایسه با C++ Templates
 
 **Generics در C#** مشابه **templates در C++** هستند اما به شکل متفاوتی عمل می‌کنند. در هر دو حالت، یک **ترکیب بین تولیدکننده و مصرف‌کننده** صورت می‌گیرد که در آن **placeholder typeهای تولیدکننده** توسط مصرف‌کننده پر می‌شوند.
 

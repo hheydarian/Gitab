@@ -6,13 +6,13 @@ title: LINQ Operators
 
 این فصل به بررسی تک‌تک **عملگرهای LINQ** می‌پردازد. علاوه بر اینکه به‌عنوان یک مرجع عمل می‌کند، دو بخش **«Projecting»** (در صفحه ۴۷۳) و **«Joining»** (در صفحه ۴۷۳) مفاهیم مهمی را پوشش می‌دهند:
 
-* 📌 **Projecting object hierarchies** (ایجاد و نمایش سلسله‌مراتب اشیاء)
-* 📌 **Joining** با استفاده از `Select`، `SelectMany`، `Join` و `GroupJoin`
-* 📌 **Query expressions with multiple range variables** (عبارت‌های کوئری با چند متغیر دامنه‌ای)
+*  **Projecting object hierarchies** (ایجاد و نمایش سلسله‌مراتب اشیاء)
+*  **Joining** با استفاده از `Select`، `SelectMany`، `Join` و `GroupJoin`
+*  **Query expressions with multiple range variables** (عبارت‌های کوئری با چند متغیر دامنه‌ای)
 
 ---
 
-### 🔤 مثال پایه
+### مثال پایه
 
 تمامی مثال‌های این فصل فرض می‌کنند که یک آرایه از نام‌ها تعریف شده است:
 
@@ -54,7 +54,7 @@ public class NutshellContext : DbContext
 
 ---
 
-### 🧑‍💻 تعریف کلاس‌ها
+### ‍ تعریف کلاس‌ها
 
 ```csharp
 public class Customer
@@ -78,14 +78,14 @@ public class Purchase
 
 ---
 
-### 🛠 ابزار LINQPad
+### ابزار LINQPad
 
 تمامی مثال‌های این فصل در **LINQPad** از پیش بارگذاری شده‌اند، همراه با یک پایگاه‌داده نمونه که **Schema** مشابهی دارد.
-📥 می‌توانید LINQPad را از [www.linqpad.net](http://www.linqpad.net) دانلود کنید.
+ می‌توانید LINQPad را از [www.linqpad.net](http://www.linqpad.net) دانلود کنید.
 
 ---
 
-### 🗄 تعریف جدول‌های SQL Server متناظر
+### تعریف جدول‌های SQL Server متناظر
 
 ```sql
 CREATE TABLE Customer (
@@ -104,16 +104,16 @@ CREATE TABLE Purchase (
 
 ---
 
-## 🔎 مرور کلی (Overview)
+## مرور کلی (Overview)
 
 در این بخش، یک مرور کلی بر **عملگرهای استاندارد کوئری** ارائه می‌دهیم. این عملگرها در سه دسته تقسیم می‌شوند:
 
-1. 📌 **Sequence in, sequence out (sequence → sequence)**
-   ➝ یعنی ورودی یک دنباله (sequence) است و خروجی هم یک دنباله.
-2. 📌 **Sequence in, single element or scalar value out**
-   ➝ یعنی ورودی یک دنباله است اما خروجی فقط یک عنصر یا یک مقدار منفرد.
-3. 📌 **Nothing in, sequence out (generation methods)**
-   ➝ یعنی هیچ ورودی وجود ندارد اما خروجی یک دنباله تولید می‌شود.
+1.  **Sequence in, sequence out (sequence → sequence)**
+    یعنی ورودی یک دنباله (sequence) است و خروجی هم یک دنباله.
+2.  **Sequence in, single element or scalar value out**
+    یعنی ورودی یک دنباله است اما خروجی فقط یک عنصر یا یک مقدار منفرد.
+3.  **Nothing in, sequence out (generation methods)**
+    یعنی هیچ ورودی وجود ندارد اما خروجی یک دنباله تولید می‌شود.
 
 ---
 
@@ -121,81 +121,81 @@ CREATE TABLE Purchase (
 
 ---
 
-## 🔄 Sequence → Sequence
+## Sequence → Sequence
 
 بیشتر عملگرهای LINQ در این دسته قرار می‌گیرند. آن‌ها یک یا چند دنباله را به‌عنوان ورودی می‌گیرند و در خروجی یک دنباله تولید می‌کنند.
 
-📊 **شکل ۹-۱** عملگرهایی را نشان می‌دهد که ساختار دنباله‌ها را تغییر می‌دهند.
+ **شکل ۹-۱** عملگرهایی را نشان می‌دهد که ساختار دنباله‌ها را تغییر می‌دهند.
 
 <div align="center">
 
 ![Conventions-UsedThis-Book](../../../assets/image/09/Table-9-1.jpeg)
 </div>
 
-### 📖 عملگرهای LINQ – دسته‌بندی‌ها
+### عملگرهای LINQ – دسته‌بندی‌ها
 
 در این بخش، عملگرهای LINQ را بر اساس نوع ورودی و خروجی مرور می‌کنیم. هر دسته با مثال‌ها و توضیح کوتاه معرفی می‌شود.
 
 ---
 
-## 🔍 Filtering (فیلتر کردن)
+## Filtering (فیلتر کردن)
 
 **ورودی:** `IEnumerable<TSource>`
 **خروجی:** `IEnumerable<TSource>`
 
-🔹 وظیفه: برگرداندن یک زیرمجموعه از عناصر اصلی.
+ وظیفه: برگرداندن یک زیرمجموعه از عناصر اصلی.
 
-📌 عملگرها:
+ عملگرها:
 `Where`, `Take`, `TakeLast`, `TakeWhile`, `Skip`, `SkipLast`, `SkipWhile`,
 `Distinct`, `DistinctBy`
 
 ---
 
-## 🎨 Projecting (تبدیل/نمایش)
+## Projecting (تبدیل/نمایش)
 
 **ورودی:** `IEnumerable<TSource>`
 **خروجی:** `IEnumerable<TResult>`
 
-🔹 وظیفه: تغییر شکل هر عنصر با استفاده از یک **lambda function**.
+ وظیفه: تغییر شکل هر عنصر با استفاده از یک **lambda function**.
 
 * `SelectMany` دنباله‌های تو در تو (nested sequences) را **مسطح‌سازی (flatten)** می‌کند.
 * `Select` و `SelectMany` می‌توانند انواع مختلف **Join** (مانند inner join, left outer join, cross join, non-equi join) را با **EF Core** انجام دهند.
 
-📌 عملگرها:
+ عملگرها:
 `Select`, `SelectMany`
 
 ---
 
-## 🔗 Joining (اتصال/ترکیب)
+## Joining (اتصال/ترکیب)
 
 **ورودی:**
 `IEnumerable<TOuter>, IEnumerable<TInner>`
 **خروجی:**
 `IEnumerable<TResult>`
 
-🔹 وظیفه: ترکیب عناصر یک دنباله با دنباله‌ای دیگر.
+ وظیفه: ترکیب عناصر یک دنباله با دنباله‌ای دیگر.
 
 * `Join` و `GroupJoin` برای کارایی بهتر در کوئری‌های محلی طراحی شده‌اند و از **inner join** و **left outer join** پشتیبانی می‌کنند.
 * `Zip` دو دنباله را هم‌زمان پیمایش کرده و روی هر جفت عنصر یک تابع اعمال می‌کند.
 
-📌 عملگرها:
+ عملگرها:
 `Join`, `GroupJoin`, `Zip`
 
 ---
 
-## 📑 Ordering (مرتب‌سازی)
+## Ordering (مرتب‌سازی)
 
 **ورودی:** `IEnumerable<TSource>`
 **خروجی:** `IOrderedEnumerable<TSource>`
 
-🔹 وظیفه: بازگرداندن یک دنباله با ترتیب جدید.
+ وظیفه: بازگرداندن یک دنباله با ترتیب جدید.
 
-📌 عملگرها:
+ عملگرها:
 `OrderBy`, `OrderByDescending`, `ThenBy`, `ThenByDescending`, `Reverse`
 
 ---
 
-## 🗂 Grouping (گروه‌بندی)
+## Grouping (گروه‌بندی)
 
 **ورودی:** `IEnumerable<TSource>`
 **خروجی:**
@@ -203,95 +203,95 @@ CREATE TABLE Purchase (
 * `IEnumerable<IGrouping<TKey,TElement>>`
 * یا `IEnumerable<TElement[]>`
 
-🔹 وظیفه: تقسیم یک دنباله به زیر‌دنباله‌ها.
+ وظیفه: تقسیم یک دنباله به زیر‌دنباله‌ها.
 
-📌 عملگرها:
+ عملگرها:
 `GroupBy`, `Chunk`
 
 ---
 
-## 🔀 Set Operators (عملگرهای مجموعه‌ای)
+## Set Operators (عملگرهای مجموعه‌ای)
 
 **ورودی:**
 `IEnumerable<TSource>, IEnumerable<TSource>`
 **خروجی:**
 `IEnumerable<TSource>`
 
-🔹 وظیفه: گرفتن دو دنباله هم‌نوع و برگرداندن اشتراک، اجتماع یا تفاوت آن‌ها.
+ وظیفه: گرفتن دو دنباله هم‌نوع و برگرداندن اشتراک، اجتماع یا تفاوت آن‌ها.
 
-📌 عملگرها:
+ عملگرها:
 `Concat`, `Union`, `UnionBy`, `Intersect`, `IntersectBy`, `Except`, `ExceptBy`
 
 ---
 
-## 🔄 Conversion Methods (تبدیل)
+## Conversion Methods (تبدیل)
 
-### 🛠 Import
+### Import
 
 **ورودی:** `IEnumerable`
 **خروجی:** `IEnumerable<TResult>`
 
-📌 عملگرها:
+ عملگرها:
 `OfType`, `Cast`
 
-### 📤 Export
+### Export
 
 **ورودی:** `IEnumerable<TSource>`
 **خروجی:** یک آرایه، لیست، دیکشنری، Lookup یا دنباله
 
-📌 عملگرها:
+ عملگرها:
 `ToArray`, `ToList`, `ToDictionary`, `ToLookup`, `AsEnumerable`, `AsQueryable`
 
 ---
 
-## 🎯 Sequence → Element or Value
+## Sequence → Element or Value
 
-### 🔹 Element Operators (انتخاب عنصر)
+### Element Operators (انتخاب عنصر)
 
 **ورودی:** `IEnumerable<TSource>`
 **خروجی:** `TSource`
 
-📌 عملگرها:
+ عملگرها:
 `First`, `FirstOrDefault`, `Last`, `LastOrDefault`,
 `Single`, `SingleOrDefault`, `ElementAt`, `ElementAtOrDefault`,
 `MinBy`, `MaxBy`, `DefaultIfEmpty`
 
 ---
 
-### 🔹 Aggregation Methods (تجمیع)
+### Aggregation Methods (تجمیع)
 
 **ورودی:** `IEnumerable<TSource>`
 **خروجی:** یک مقدار منفرد (scalar)
 
-📌 وظیفه: انجام محاسبه روی یک دنباله و بازگرداندن یک مقدار عددی یا مشابه آن.
+ وظیفه: انجام محاسبه روی یک دنباله و بازگرداندن یک مقدار عددی یا مشابه آن.
 
-📌 عملگرها:
+ عملگرها:
 `Aggregate`, `Average`, `Count`, `LongCount`, `Sum`, `Max`, `Min`
 
 ---
 
-### 🔹 Quantifiers (کوانتیفایرها)
+### Quantifiers (کوانتیفایرها)
 
 **ورودی:** `IEnumerable<TSource>`
 **خروجی:** `bool`
 
-📌 وظیفه: برگرداندن نتیجه **true/false** به‌عنوان یک تجمیع.
+ وظیفه: برگرداندن نتیجه **true/false** به‌عنوان یک تجمیع.
 
-📌 عملگرها:
+ عملگرها:
 `All`, `Any`, `Contains`, `SequenceEqual`
 
 ---
 
-## 🌀 Void → Sequence
+## Void → Sequence
 
-### 🔹 Generation Methods (تولید)
+### Generation Methods (تولید)
 
 **ورودی:** `void`
 **خروجی:** `IEnumerable<TResult>`
 
-📌 وظیفه: ساخت یک دنباله ساده از صفر.
+ وظیفه: ساخت یک دنباله ساده از صفر.
 
-📌 عملگرها:
+ عملگرها:
 `Empty`, `Range`, `Repeat`
 
 <div align="center">
@@ -299,7 +299,7 @@ CREATE TABLE Purchase (
 ![Conventions-UsedThis-Book](../../../assets/image/09/Table-9-2.jpeg)
 </div>
 
-### 📖 نکته درباره ستون «SQL equivalents»
+### نکته درباره ستون «SQL equivalents»
 
 در جدول‌های مرجع این فصل، ستون **«SQL equivalents»** لزوماً همان چیزی نیست که یک پیاده‌سازی `IQueryable` مثل **EF Core** تولید می‌کند.
 بلکه این ستون نشان می‌دهد اگر خودتان می‌خواستید معادل آن کوئری را به زبان **SQL** بنویسید، معمولاً از چه چیزی استفاده می‌کردید.
@@ -309,7 +309,7 @@ CREATE TABLE Purchase (
 
 ---
 
-### 🧑‍💻 پیاده‌سازی Enumerable
+### ‍ پیاده‌سازی Enumerable
 
 وقتی کد پیاده‌سازی برای `Enumerable` نشان داده می‌شود، بررسی موارد زیر در آن حذف شده‌اند:
 
@@ -318,32 +318,32 @@ CREATE TABLE Purchase (
 
 ---
 
-### 🔍 درباره متدهای Filtering
+### درباره متدهای Filtering
 
 در هر یک از متدهای **Filtering**، همیشه خروجی شامل همان تعداد یا **کمتر** از عناصری است که در ورودی داشتید.
-⚠️ هیچ‌وقت نمی‌توانید عناصر بیشتری از آنچه وارد کرده‌اید به دست بیاورید!
+ هیچ‌وقت نمی‌توانید عناصر بیشتری از آنچه وارد کرده‌اید به دست بیاورید!
 علاوه بر این، عناصری که در خروجی دریافت می‌کنید **تبدیل یا تغییر شکل داده نمی‌شوند**؛ آن‌ها دقیقاً همان عناصری هستند که در ورودی وجود داشتند.
 
 ---
 
-## 📝 Where
+## Where
 
 <div align="center">
 
 ![Conventions-UsedThis-Book](../../../assets/image/09/Table-9-3.jpeg)
 </div>
 
-### 📖 Where در LINQ
+### Where در LINQ
 
 ---
 
-### ⚠️ محدودیت‌ها
+### محدودیت‌ها
 
-* ❌ استفاده از `Where` در **LINQ to SQL** و **Entity Framework (EF Core)** دارای محدودیت‌هایی است (برخی سناریوها پشتیبانی نمی‌شوند).
+*  استفاده از `Where` در **LINQ to SQL** و **Entity Framework (EF Core)** دارای محدودیت‌هایی است (برخی سناریوها پشتیبانی نمی‌شوند).
 
 ---
 
-### 📝 سینتکس کوئری
+### سینتکس کوئری
 
 ```csharp
 where bool-expression
@@ -351,7 +351,7 @@ where bool-expression
 
 ---
 
-### 🔧 پیاده‌سازی Enumerable.Where
+### پیاده‌سازی Enumerable.Where
 
 نسخه داخلی `Enumerable.Where` (بدون بررسی null) معادل کدی شبیه زیر است:
 
@@ -368,13 +368,13 @@ public static IEnumerable<TSource> Where<TSource>(
 
 ---
 
-### 📌 توضیح
+### توضیح
 
 `Where` عناصری از دنباله ورودی را برمی‌گرداند که شرط داده‌شده (**predicate**) را برآورده می‌کنند.
 
 ---
 
-### ✨ مثال ساده
+### مثال ساده
 
 ```csharp
 string[] names = { "Tom", "Dick", "Harry", "Mary", "Jay" };
@@ -387,7 +387,7 @@ IEnumerable<string> query = names.Where(name => name.EndsWith("y"));
 // Jay
 ```
 
-🔹 معادل در **Query Syntax**:
+ معادل در **Query Syntax**:
 
 ```csharp
 IEnumerable<string> query =
@@ -398,7 +398,7 @@ IEnumerable<string> query =
 
 ---
 
-### 🌀 چند شرط Where در یک کوئری
+### چند شرط Where در یک کوئری
 
 یک عبارت `where` می‌تواند چند بار در کوئری ظاهر شود و با `let`, `orderby`, یا `join` ترکیب شود:
 
@@ -414,11 +414,11 @@ select u;
 // MARY
 ```
 
-🔸 قوانین **scoping** استاندارد #C اعمال می‌شوند. یعنی نمی‌توانید قبل از تعریف یک متغیر (با `range variable` یا `let`) به آن ارجاع دهید.
+ قوانین **scoping** استاندارد #C اعمال می‌شوند. یعنی نمی‌توانید قبل از تعریف یک متغیر (با `range variable` یا `let`) به آن ارجاع دهید.
 
 ---
 
-### 🔢 Indexed Filtering (فیلترگذاری بر اساس ایندکس)
+### Indexed Filtering (فیلترگذاری بر اساس ایندکس)
 
 `Where` می‌تواند به‌صورت اختیاری آرگومان دوم از نوع `int` دریافت کند (نمایانگر **موقعیت عنصر** در دنباله). این ویژگی اجازه می‌دهد تصمیم‌گیری براساس موقعیت انجام شود.
 
@@ -431,11 +431,11 @@ IEnumerable<string> query = names.Where((n, i) => i % 2 == 0);
 // Jay
 ```
 
-⚠️ در **EF Core** استفاده از این قابلیت باعث **Exception** می‌شود.
+ در **EF Core** استفاده از این قابلیت باعث **Exception** می‌شود.
 
 ---
 
-### 🔍 مقایسه با LIKE در EF Core
+### مقایسه با LIKE در EF Core
 
 متدهای زیر در رشته‌ها به **SQL LIKE** ترجمه می‌شوند:
 
@@ -457,7 +457,7 @@ customer.Name LIKE '%abc%'
 
 > (در واقع نسخه **پارامتری‌شده** ساخته می‌شود، نه رشته مستقیم.)
 
-🔹 برای مقایسه با **ستون دیگر** باید از متد `EF.Functions.Like` استفاده کنید:
+ برای مقایسه با **ستون دیگر** باید از متد `EF.Functions.Like` استفاده کنید:
 
 ```csharp
 where EF.Functions.Like(c.Description, "%" + c.Name + "%")
@@ -471,7 +471,7 @@ LIKE 'abc%def%'
 
 ---
 
-### 🔠 مقایسه رشته‌ای با < و > در EF Core
+### مقایسه رشته‌ای با < و > در EF Core
 
 برای مقایسه ترتیبی رشته‌ها از متد `string.CompareTo` استفاده کنید:
 
@@ -480,11 +480,11 @@ dbContext.Purchases
     .Where(p => p.Description.CompareTo("C") < 0);
 ```
 
-📌 این کد به عملگرهای `<` و `>` در SQL نگاشت می‌شود.
+ این کد به عملگرهای `<` و `>` در SQL نگاشت می‌شود.
 
 ---
 
-### 🗂 استفاده از IN در EF Core
+### استفاده از IN در EF Core
 
 در EF Core می‌توانید `Contains` را روی یک مجموعه محلی استفاده کنید:
 
@@ -502,7 +502,7 @@ select c;
 WHERE customer.Name IN ("Tom", "Jay")
 ```
 
-⚠️ اگر مجموعه محلی آرایه‌ای از **entity** یا نوع غیر scalar باشد، EF Core ممکن است به‌جای آن **EXISTS** تولید کند.
+ اگر مجموعه محلی آرایه‌ای از **entity** یا نوع غیر scalar باشد، EF Core ممکن است به‌جای آن **EXISTS** تولید کند.
 
 ---
 
@@ -518,24 +518,24 @@ WHERE customer.Name IN ("Tom", "Jay")
 ![Conventions-UsedThis-Book](../../../assets/image/09/Table-9-4.jpeg)
 </div>
 
-### 📖 Take و Skip در LINQ
+### Take و Skip در LINQ
 
 ---
 
-### 📝 توضیح کلی
+### توضیح کلی
 
-* 🔹 متد `Take` اولین **n عنصر** از دنباله رو برمی‌گردونه و بقیه رو نادیده می‌گیره.
-* 🔹 متد `Skip` اولین **n عنصر** رو حذف می‌کنه و بقیه عناصر رو برمی‌گردونه.
+*  متد `Take` اولین **n عنصر** از دنباله رو برمی‌گردونه و بقیه رو نادیده می‌گیره.
+*  متد `Skip` اولین **n عنصر** رو حذف می‌کنه و بقیه عناصر رو برمی‌گردونه.
 
 این دو متد معمولاً **با هم** استفاده می‌شن، مخصوصاً وقتی می‌خوایم صفحه‌بندی (Paging) در یک اپلیکیشن وب رو پیاده‌سازی کنیم.
 
 ---
 
-### 🌐 مثال کاربردی (Paging در EF Core)
+### مثال کاربردی (Paging در EF Core)
 
 فرض کن کاربر توی دیتابیس کتاب‌ها دنبال عبارت `"mercury"` می‌گرده و **۱۰۰ نتیجه** پیدا می‌شه.
 
-📌 برای گرفتن **۲۰ نتیجه اول**:
+ برای گرفتن **۲۰ نتیجه اول**:
 
 ```csharp
 IQueryable<Book> query = dbContext.Books
@@ -544,7 +544,7 @@ IQueryable<Book> query = dbContext.Books
     .Take(20);
 ```
 
-📌 برای گرفتن **کتاب‌های شماره ۲۱ تا ۴۰**:
+ برای گرفتن **کتاب‌های شماره ۲۱ تا ۴۰**:
 
 ```csharp
 IQueryable<Book> query = dbContext.Books
@@ -556,7 +556,7 @@ IQueryable<Book> query = dbContext.Books
 
 ---
 
-### ⚙️ نحوه ترجمه در SQL
+### نحوه ترجمه در SQL
 
 در EF Core:
 
@@ -565,18 +565,18 @@ IQueryable<Book> query = dbContext.Books
 
 ---
 
-### 🔄 متدهای TakeLast و SkipLast
+### متدهای TakeLast و SkipLast
 
 * `TakeLast(n)` → آخرین **n عنصر** رو برمی‌گردونه.
 * `SkipLast(n)` → آخرین **n عنصر** رو حذف می‌کنه.
 
 ---
 
-### 🚀 قابلیت جدید از .NET 6
+### قابلیت جدید از .NET 6
 
 از نسخه **.NET 6**، متد `Take` یک نسخه overload جدید داره که متغیر `Range` رو قبول می‌کنه. این نسخه می‌تونه جایگزین تمام چهار متد بشه.
 
-📌 مثال‌ها:
+ مثال‌ها:
 
 ```csharp
 Take(5..)
@@ -586,7 +586,7 @@ Take(..^5)
 // معادل SkipLast(5)
 ```
 
-یعنی می‌تونی خیلی تمیزتر و کوتاه‌تر کد بزنی ✨
+یعنی می‌تونی خیلی تمیزتر و کوتاه‌تر کد بزنی 
 
 ---
 
@@ -600,11 +600,11 @@ Take(..^5)
 ![Conventions-UsedThis-Book](../../../assets/image/09/Table-9-5.jpeg)
 </div>
 
-### 🔹 TakeWhile و SkipWhile
+### TakeWhile و SkipWhile
 
 ---
 
-### ⚙️ TakeWhile
+### TakeWhile
 
 `TakeWhile` عناصر دنباله ورودی را **به ترتیب پیمایش** می‌کند و هر عنصر را **تا زمانی که شرط داده‌شده true باشد** برمی‌گرداند.
 به محض اینکه شرط false شود، بقیه عناصر نادیده گرفته می‌شوند.
@@ -616,7 +616,7 @@ var takeWhileSmall = numbers.TakeWhile(n => n < 100); // خروجی: { 3, 5, 2 }
 
 ---
 
-### ⚙️ SkipWhile
+### SkipWhile
 
 `SkipWhile` هم دنباله ورودی را پیمایش می‌کند، ولی **عناصر را تا زمانی که شرط true باشد نادیده می‌گیرد**.
 بعد از اولین عنصری که شرط false شد، بقیه عناصر **برگردانده می‌شوند**.
@@ -626,16 +626,16 @@ int[] numbers = { 3, 5, 2, 234, 4, 1 };
 var skipWhileSmall = numbers.SkipWhile(n => n < 100); // خروجی: { 234, 4, 1 }
 ```
 
-⚠️ توجه:
+ توجه:
 `TakeWhile` و `SkipWhile` هیچ معادل SQL ندارند و در کوئری‌های **EF Core** استفاده از آن‌ها باعث **Exception** می‌شود.
 
 ---
 
-### 🔹 Distinct و DistinctBy
+### Distinct و DistinctBy
 
 ---
 
-### ✅ Distinct
+### Distinct
 
 `Distinct` دنباله ورودی را بدون **تکراری‌ها** برمی‌گرداند.
 می‌توانید **custom equality comparer** هم به آن بدهید.
@@ -649,7 +649,7 @@ string s = new string(distinctLetters); // خروجی: "HeloWrd"
 
 ---
 
-### ✅ DistinctBy
+### DistinctBy
 
 * معرفی شده در **.NET 6**
 * امکان مشخص کردن یک **key selector** قبل از مقایسه تساوی را فراهم می‌کند.
@@ -666,11 +666,11 @@ new[] { 1.0, 1.1, 2.0, 2.1, 3.0, 3.1 }
 ![Conventions-UsedThis-Book](../../../assets/image/09/Table-9-6.jpeg)
 </div>
 
-### 🎨 Select و SelectMany در LINQ
+### Select و SelectMany در LINQ
 
 ---
 
-### ⚙️ توضیح کلی
+### توضیح کلی
 
 وقتی **روی پایگاه داده کوئری می‌زنیم**، `Select` و `SelectMany` **انعطاف‌پذیرترین ابزارها برای انجام join** هستند.
 اما برای **کوئری‌های محلی (Local queries)**، `Join` و `GroupJoin` **کارآمدترین و سریع‌ترین ابزارها برای join** محسوب می‌شوند.
@@ -687,13 +687,13 @@ new[] { 1.0, 1.1, 2.0, 2.1, 3.0, 3.1 }
 ![Conventions-UsedThis-Book](../../../assets/image/09/Table-9-8.jpeg)
 </div>
 
-### ⚠️ محدودیت EF Core
+### محدودیت EF Core
 
-* ❌ استفاده از `Select` به عنوان **subquery پیچیده یا indexed projection** در EF Core محدودیت دارد و برخی سناریوها ممکن است پشتیبانی نشود.
+*  استفاده از `Select` به عنوان **subquery پیچیده یا indexed projection** در EF Core محدودیت دارد و برخی سناریوها ممکن است پشتیبانی نشود.
 
 ---
 
-### 📝 سینتکس کوئری
+### سینتکس کوئری
 
 ```csharp
 select projection-expression
@@ -701,7 +701,7 @@ select projection-expression
 
 ---
 
-### 🔧 پیاده‌سازی Enumerable
+### پیاده‌سازی Enumerable
 
 نسخه داخلی `Enumerable.Select` به شکل زیر است:
 
@@ -717,14 +717,14 @@ public static IEnumerable<TResult> Select<TSource,TResult>(
 
 ---
 
-### 🔹 توضیح کلی
+### توضیح کلی
 
 * با `Select` همیشه **تعداد عناصر خروجی برابر با تعداد عناصر ورودی است**.
 * هر عنصر می‌تواند با **lambda function** به هر شکل دلخواه تبدیل شود.
 
 ---
 
-### 🔹 مثال پایه‌ای: گرفتن نام فونت‌ها
+### مثال پایه‌ای: گرفتن نام فونت‌ها
 
 ```csharp
 IEnumerable<string> query = from f in FontFamily.Families
@@ -734,7 +734,7 @@ foreach (string name in query)
     Console.WriteLine(name);
 ```
 
-🔹 معادل **Lambda Syntax**:
+ معادل **Lambda Syntax**:
 
 ```csharp
 IEnumerable<string> query = FontFamily.Families.Select(f => f.Name);
@@ -742,7 +742,7 @@ IEnumerable<string> query = FontFamily.Families.Select(f => f.Name);
 
 ---
 
-### 🔹 پروژه کردن به انواع ناشناس (Anonymous Types)
+### پروژه کردن به انواع ناشناس (Anonymous Types)
 
 ```csharp
 var query = from f in FontFamily.Families
@@ -766,10 +766,10 @@ foreach (FontFamily ff in query)
 
 ---
 
-### 🔹 Indexed Projection
+### Indexed Projection
 
 * `selector` می‌تواند آرگومان اختیاری دوم از نوع **int** بگیرد که نمایانگر **موقعیت عنصر** در دنباله است.
-* ⚠️ این قابلیت فقط در **کوئری‌های محلی** کار می‌کند.
+*  این قابلیت فقط در **کوئری‌های محلی** کار می‌کند.
 
 ```csharp
 string[] names = { "Tom", "Dick", "Harry", "Mary", "Jay" };
@@ -779,7 +779,7 @@ IEnumerable<string> query = names.Select((s, i) => i + "=" + s);
 
 ---
 
-### 🔹 Subqueries و Object Hierarchies
+### Subqueries و Object Hierarchies
 
 * می‌توان یک **subquery** را در `Select` جای داد تا **ساختار شیء (Object Hierarchy)** بسازیم.
 * مثال: دریافت هر دایرکتوری در مسیر `Path.GetTempPath()` همراه با لیست فایل‌های آن:
@@ -812,16 +812,16 @@ foreach (var dirFiles in query)
 
 ---
 
-### 🔹 Deferred Execution در Local Queries
+### Deferred Execution در Local Queries
 
 * در کوئری‌های محلی، subquery داخل `Select` باعث **double-deferred execution** می‌شود.
 * در مثال بالا، فایل‌ها تا زمانی که `foreach` داخلی اجرا نشود، **فیلتر یا پروژه نمی‌شوند**.
 
-### 🌀 Subqueries و Joins در EF Core
+### Subqueries و Joins در EF Core
 
 ---
 
-### 🔹 Subquery Projections در EF Core
+### Subquery Projections در EF Core
 
 * **Projection با subquery** در EF Core به خوبی کار می‌کند و می‌تواند جایگزین **SQL-style joins** باشد.
 * مثال: دریافت نام هر مشتری به همراه **خریدهای با ارزش بالای ۱۰۰۰**:
@@ -846,23 +846,23 @@ foreach (var namePurchases in query)
 }
 ```
 
-> ⚠️ دقت کنید که استفاده از `ToList` در subquery ضروری است، زیرا EF Core 3 نمی‌تواند **queryable** بسازد اگر subquery مستقیماً به `DbContext` ارجاع دهد. این محدودیت ممکن است در نسخه‌های بعدی EF Core برطرف شود.
+>  دقت کنید که استفاده از `ToList` در subquery ضروری است، زیرا EF Core 3 نمی‌تواند **queryable** بسازد اگر subquery مستقیماً به `DbContext` ارجاع دهد. این محدودیت ممکن است در نسخه‌های بعدی EF Core برطرف شود.
 
 ---
 
-### 🔹 مزیت این سبک
+### مزیت این سبک
 
 * این نوع کوئری **برای interpreted queries مناسب است**.
 
 * کوئری خارجی و subquery **به صورت یک واحد پردازش می‌شوند** و از round-tripping اضافی جلوگیری می‌کنند.
 
-* ⚠️ در کوئری‌های محلی (Local queries) این روش **غیر بهینه** است، چون تمام ترکیب‌های عناصر خارجی و داخلی باید پیمایش شوند.
+*  در کوئری‌های محلی (Local queries) این روش **غیر بهینه** است، چون تمام ترکیب‌های عناصر خارجی و داخلی باید پیمایش شوند.
 
 * جایگزین بهینه برای Local queries: استفاده از **Join** یا **GroupJoin**.
 
 ---
 
-### 🔹 نگاشت داده‌های سلسله‌مراتبی
+### نگاشت داده‌های سلسله‌مراتبی
 
 * این کوئری **اشیاء دو مجموعه متفاوت** را هم‌تراز می‌کند و می‌توان آن را یک نوع **join** در نظر گرفت.
 * تفاوت با join سنتی SQL:
@@ -871,7 +871,7 @@ foreach (var namePurchases in query)
 
 ---
 
-### 🔹 استفاده از Navigation Property
+### استفاده از Navigation Property
 
 مثال ساده‌تر با استفاده از Navigation Property `Purchases` در `Customer`:
 
@@ -892,7 +892,7 @@ select new
 
 ---
 
-### 🔹 شبیه‌سازی Inner Join
+### شبیه‌سازی Inner Join
 
 * برای حذف مشتری‌هایی که خرید با ارزش بالا ندارند، می‌توان شرط اضافه کرد:
 
@@ -907,7 +907,7 @@ select new {
 };
 ```
 
-* ⚠️ این روش کمی تکراری است (Price > 1000 دو بار نوشته می‌شود).
+*  این روش کمی تکراری است (Price > 1000 دو بار نوشته می‌شود).
 
 * با استفاده از `let` می‌توان تکرار را حذف کرد:
 
@@ -929,7 +929,7 @@ select new { c.Name, Purchases = highValueP };
 
 ---
 
-### 🔹 Projection به Types مشخص
+### Projection به Types مشخص
 
 * تا اینجا از **Anonymous Types** استفاده شد.
 * می‌توان **کلاس‌های معمولی (Named Classes)** نیز ساخت و با object initializer پر کرد.
@@ -961,7 +961,7 @@ List<CustomerEntity> result = query.ToList();
 
 ---
 
-### 🔹 نکته کلیدی
+### نکته کلیدی
 
 * تا اینجا **نیازی به Join یا SelectMany نداشتیم**.
 * دلیل: **ساختار سلسله‌مراتبی داده‌ها حفظ شده**، برخلاف SQL که معمولاً داده‌ها را flatten می‌کند.
@@ -971,18 +971,18 @@ List<CustomerEntity> result = query.ToList();
 ![Conventions-UsedThis-Book](../../../assets/image/09/Table-9-9.jpeg)
 </div>
 
-### 🌊 SelectMany در LINQ
+### SelectMany در LINQ
 
 <div align="center">
 
 ![Conventions-UsedThis-Book](../../../assets/image/09/Table-9-10.jpeg)
 </div>
 
-### 🌊 SelectMany در LINQ – جزئیات و مثال‌ها
+### SelectMany در LINQ – جزئیات و مثال‌ها
 
 ---
 
-### 🔹 Query Syntax
+### Query Syntax
 
 ```csharp
 from identifier1 in enumerable-expression1
@@ -994,7 +994,7 @@ from identifier2 in enumerable-expression2
 
 ---
 
-### 🔹 Enumerable Implementation
+### Enumerable Implementation
 
 ```csharp
 public static IEnumerable<TResult> SelectMany<TSource,TResult>
@@ -1016,7 +1016,7 @@ public static IEnumerable<TResult> SelectMany<TSource,TResult>
 
 ---
 
-### 🔹 مثال ساده: flatten کردن کلمات از fullNames
+### مثال ساده: flatten کردن کلمات از fullNames
 
 ```csharp
 string[] fullNames = { "Anne Williams", "John Fred Smith", "Sue Green" };
@@ -1040,7 +1040,7 @@ foreach (string[] stringArray in query)
 
 ---
 
-### 🔹 Query Syntax و چند متغیره بودن
+### Query Syntax و چند متغیره بودن
 
 ```csharp
 IEnumerable<string> query =
@@ -1070,7 +1070,7 @@ John came from John Fred Smith
 
 ---
 
-### 🔹 مشکل در Fluent Syntax
+### مشکل در Fluent Syntax
 
 * وقتی `SelectMany` را مستقیماً در **fluent syntax** بنویسیم و بخواهیم هر دو متغیر outer و inner را داشته باشیم، مشکل ایجاد می‌شود.
 * راه‌حل: **هر child element را در یک anonymous type بسته‌بندی کنیم** که outer element را هم نگه دارد:
@@ -1093,20 +1093,20 @@ IEnumerable<string> query = fullNames
     .Select(x => x.name + " came from " + x.fName);
 ```
 
-* 🔹 نکته: این تکنیک مشابه **resolve کردن let clause** در query syntax است.
+*  نکته: این تکنیک مشابه **resolve کردن let clause** در query syntax است.
 
-### 🤔 فکر کردن به سبک Query Syntax در LINQ
+### فکر کردن به سبک Query Syntax در LINQ
 
 ---
 
-### 🔹 چرا query syntax مفید است؟
+### چرا query syntax مفید است؟
 
 * وقتی به **چند متغیر دامنه (range variables)** نیاز دارید، query syntax کمک می‌کند تا مستقیم در همان چارچوب فکر کنید.
 * دو الگوی اصلی برای استفاده از **generatorهای اضافی** وجود دارد:
 
 ---
 
-### 1️⃣ گسترش و flatten کردن subsequenceها
+### 1⃣ گسترش و flatten کردن subsequenceها
 
 * با فراخوانی یک **property یا method** روی یک متغیر دامنه موجود در generator اضافی، می‌توان subsequenceها را گسترش داد.
 
@@ -1134,11 +1134,11 @@ Harry bought a Car
 ...
 ```
 
-* 🔹 هر مشتری به یک **subsequence از خریدها** تبدیل شده است.
+*  هر مشتری به یک **subsequence از خریدها** تبدیل شده است.
 
 ---
 
-### 2️⃣ تولید Cartesian Product یا Cross Join
+### 2⃣ تولید Cartesian Product یا Cross Join
 
 * هر عنصر از یک دنباله با هر عنصر دنباله دیگر ترکیب می‌شود.
 
@@ -1157,7 +1157,7 @@ IEnumerable<string> query =
 
 ---
 
-### 🔹 Join کردن با SelectMany
+### Join کردن با SelectMany
 
 * می‌توان با **اضافه کردن شرط فیلتر** روی نتیجه cross product، join ساخت:
 
@@ -1174,11 +1174,11 @@ IEnumerable<string> query =
 // خروجی: { "Jay vs Mary", "Jay vs Tom", "Mary vs Tom" }
 ```
 
-* 🔹 این یک **non-equi join** است چون شرط join از مقایسه نابرابری استفاده می‌کند.
+*  این یک **non-equi join** است چون شرط join از مقایسه نابرابری استفاده می‌کند.
 
 ---
 
-### 🔹 SelectMany در EF Core
+### SelectMany در EF Core
 
 * می‌تواند **cross joins, non-equi joins, inner joins, left outer joins** انجام دهد.
 * می‌توان از آن با **associations از قبل تعریف‌شده یا روابط ad hoc** استفاده کرد.
@@ -1203,11 +1203,11 @@ var query =
     select c.Name + " bought a " + p.Description;
 ```
 
-* 🔹 این ترجمه خوبی به SQL دارد و اجرای outer joins نیز با تغییرات کوچک ممکن است.
+*  این ترجمه خوبی به SQL دارد و اجرای outer joins نیز با تغییرات کوچک ممکن است.
 
 ---
 
-### 🔹 استفاده از Collection Navigation Properties
+### استفاده از Collection Navigation Properties
 
 * می‌توان به جای فیلتر روی cross product، **subcollectionها را گسترش داد**:
 
@@ -1221,7 +1221,7 @@ select new { c.Name, p.Description };
 
 ---
 
-### 🔹 اضافه کردن فیلترها
+### اضافه کردن فیلترها
 
 * مثال: مشتریانی که نامشان با "T" شروع می‌شود:
 
@@ -1237,7 +1237,7 @@ select new { c.Name, p.Description };
 
 ---
 
-### 🔹 اضافه کردن جداول فرزند
+### اضافه کردن جداول فرزند
 
 * مثال: هر خرید دارای چند PurchaseItem است:
 
@@ -1252,7 +1252,7 @@ select new { c.Name, p.Description, pi.Detail };
 
 ---
 
-### 🔹 استفاده از Navigation Property والد
+### استفاده از Navigation Property والد
 
 * برای دسترسی به داده‌های والد، نیازی به from جدید نیست:
 
@@ -1261,13 +1261,13 @@ from c in dbContext.Customers
 select new { Name = c.Name, SalesPerson = c.SalesPerson.Name };
 ```
 
-* 🔹 اینجا SelectMany لازم نیست چون **subcollection برای flatten کردن وجود ندارد**.
+*  اینجا SelectMany لازم نیست چون **subcollection برای flatten کردن وجود ندارد**.
 
-### ↔️ Outer Joins با SelectMany در LINQ و EF Core
+### ↔ Outer Joins با SelectMany در LINQ و EF Core
 
 ---
 
-### 🔹 مثال اولیه با Subquery
+### مثال اولیه با Subquery
 
 * یک **Select subquery** مشابه **left outer join** رفتار می‌کند:
 
@@ -1281,12 +1281,12 @@ select new {
 };
 ```
 
-* 🔹 در اینجا **هر مشتری** در خروجی ظاهر می‌شود، حتی اگر خریدی نداشته باشد.
+*  در اینجا **هر مشتری** در خروجی ظاهر می‌شود، حتی اگر خریدی نداشته باشد.
 * نتیجه یک **hierarchical result set** است.
 
 ---
 
-### 🔹 مشکل وقتی SelectMany استفاده شود
+### مشکل وقتی SelectMany استفاده شود
 
 * اگر بخواهیم خروجی **flat** داشته باشیم:
 
@@ -1297,12 +1297,12 @@ where p.Price > 1000
 select new { c.Name, p.Description, p.Price };
 ```
 
-* 🔹 اینجا join **به inner join تبدیل می‌شود**:
+*  اینجا join **به inner join تبدیل می‌شود**:
   مشتریان فقط زمانی ظاهر می‌شوند که **یک یا چند خرید با ارزش بالا** داشته باشند.
 
 ---
 
-### 🔹 راه حل برای Left Outer Join تخت
+### راه حل برای Left Outer Join تخت
 
 * از `DefaultIfEmpty()` روی **inner sequence** استفاده می‌کنیم.
 * این متد اگر sequence خالی باشد، یک عنصر null تولید می‌کند:
@@ -1313,12 +1313,12 @@ from p in c.Purchases.DefaultIfEmpty()
 select new { c.Name, p.Description, Price = (decimal?)p.Price };
 ```
 
-* ✅ EF Core همه مشتریان را برمی‌گرداند، حتی اگر خریدی نداشته باشند.
-* ⚠️ در local query، اگر p null باشد، دسترسی به `p.Description` یا `p.Price` باعث NullReferenceException می‌شود.
+*  EF Core همه مشتریان را برمی‌گرداند، حتی اگر خریدی نداشته باشند.
+*  در local query، اگر p null باشد، دسترسی به `p.Description` یا `p.Price` باعث NullReferenceException می‌شود.
 
 ---
 
-### 🔹 نسخه مقاوم (Robust)
+### نسخه مقاوم (Robust)
 
 ```csharp
 from c in dbContext.Customers
@@ -1334,7 +1334,7 @@ select new {
 
 ---
 
-### 🔹 اعمال فیلتر قیمت
+### اعمال فیلتر قیمت
 
 * نمی‌توانیم `where` را بعد از DefaultIfEmpty قرار دهیم، چون فیلتر بعد از اضافه کردن null اجرا می‌شود.
 * راه حل: فیلتر را قبل از DefaultIfEmpty با یک subquery اعمال کنیم:
@@ -1349,12 +1349,12 @@ select new {
 };
 ```
 
-* ✅ EF Core این را به **left outer join** ترجمه می‌کند.
+*  EF Core این را به **left outer join** ترجمه می‌کند.
 * این یک **الگوی موثر برای نوشتن چنین queryهایی** است.
 
 اگر به نوشتن **outer join** در SQL عادت داری، ممکنه وسوسه بشی که گزینه‌ی ساده‌تر یعنی **Select subquery** رو نادیده بگیری و به سمت روش تخت و پیچیده‌ی SQL-centric بری که آشناتر به نظر می‌رسه.
 
-✅ واقعیت اینه که **hierarchical result set** که از یک Select subquery به دست میاد، اغلب برای queryهای سبک outer join بهتره، چون نیازی به مدیریت nullهای اضافی نداری و کار تمیزتر انجام می‌شه.
+ واقعیت اینه که **hierarchical result set** که از یک Select subquery به دست میاد، اغلب برای queryهای سبک outer join بهتره، چون نیازی به مدیریت nullهای اضافی نداری و کار تمیزتر انجام می‌شه.
 
 ### Joining
 
@@ -1363,7 +1363,7 @@ select new {
 ![Conventions-UsedThis-Book](../../../assets/image/09/Table-9-11.jpeg)
 </div>
 
-### ✨ نحوۀ Query در LINQ
+### نحوۀ Query در LINQ
 
 ```
 from outer-var in outer-enumerable
@@ -1371,33 +1371,33 @@ join inner-var in inner-enumerable on outer-key-expr equals inner-key-expr
 [ into identifier ]
 ```
 
-### 📖 مرور کلی (Overview)
+### مرور کلی (Overview)
 
-🔹 **Join** و **GroupJoin** دو توالی ورودی (input sequences) را به یک توالی خروجی (output sequence) ترکیب می‌کنند.
+ **Join** و **GroupJoin** دو توالی ورودی (input sequences) را به یک توالی خروجی (output sequence) ترکیب می‌کنند.
 
 * **Join** خروجی مسطح (flat output) تولید می‌کند.
 * **GroupJoin** خروجی سلسله‌مراتبی (hierarchical output) تولید می‌کند.
 
-✨ **Join** و **GroupJoin** یک راهبرد جایگزین برای **Select** و **SelectMany** ارائه می‌دهند.
+ **Join** و **GroupJoin** یک راهبرد جایگزین برای **Select** و **SelectMany** ارائه می‌دهند.
 
-✅ **مزیت Join و GroupJoin** این است که آن‌ها به‌شکل کارآمد روی مجموعه‌های محلی (local in-memory collections) اجرا می‌شوند، چون ابتدا توالی درونی (inner sequence) را داخل یک lookup کلیددار (keyed lookup) بارگذاری می‌کنند و به این ترتیب از نیاز به پیمایش (enumerate) مکرر روی هر عنصر داخلی جلوگیری می‌کنند.
+ **مزیت Join و GroupJoin** این است که آن‌ها به‌شکل کارآمد روی مجموعه‌های محلی (local in-memory collections) اجرا می‌شوند، چون ابتدا توالی درونی (inner sequence) را داخل یک lookup کلیددار (keyed lookup) بارگذاری می‌کنند و به این ترتیب از نیاز به پیمایش (enumerate) مکرر روی هر عنصر داخلی جلوگیری می‌کنند.
 
-⚠️ **عیب آن‌ها** این است که تنها معادل **inner join** و **left outer join** را ارائه می‌دهند؛ برای **cross join** و **non-equi join** همچنان باید از **Select/SelectMany** استفاده کرد.
+ **عیب آن‌ها** این است که تنها معادل **inner join** و **left outer join** را ارائه می‌دهند؛ برای **cross join** و **non-equi join** همچنان باید از **Select/SelectMany** استفاده کرد.
 
-📌 در کوئری‌های **EF Core**، استفاده از **Join** و **GroupJoin** مزیت خاصی نسبت به **Select** و **SelectMany** ندارد.
+ در کوئری‌های **EF Core**، استفاده از **Join** و **GroupJoin** مزیت خاصی نسبت به **Select** و **SelectMany** ندارد.
 
-📊 جدول **۹-۱** تفاوت‌های میان هر یک از راهبردهای join را خلاصه می‌کند.
+ جدول **۹-۱** تفاوت‌های میان هر یک از راهبردهای join را خلاصه می‌کند.
 
 <div align="center">
 
 ![Conventions-UsedThis-Book](../../../assets/image/09/Table-9-12.jpeg)
 </div>
 
-### 🔗 Join
+### Join
 
 اپراتور **Join** یک **inner join** انجام می‌دهد و یک توالی خروجی مسطح (flat output sequence) تولید می‌کند.
 
-🔹 مثال زیر، همۀ مشتریان (customers) را همراه با خریدهایشان (purchases) فهرست می‌کند، بدون اینکه از ویژگی ناوبری (navigation property) استفاده شود:
+ مثال زیر، همۀ مشتریان (customers) را همراه با خریدهایشان (purchases) فهرست می‌کند، بدون اینکه از ویژگی ناوبری (navigation property) استفاده شود:
 
 ```csharp
 IQueryable<string> query =
@@ -1406,7 +1406,7 @@ IQueryable<string> query =
   select c.Name + " bought a " + p.Description;
 ```
 
-📋 نتایج دقیقاً همان چیزی است که با یک کوئری به سبک **SelectMany** به دست می‌آید:
+ نتایج دقیقاً همان چیزی است که با یک کوئری به سبک **SelectMany** به دست می‌آید:
 
 ```
 Tom bought a Bike
@@ -1417,7 +1417,7 @@ Harry bought a Car
 
 ---
 
-### ⚡ مزیت Join در برابر SelectMany
+### مزیت Join در برابر SelectMany
 
 برای دیدن مزیت **Join** در مقایسه با **SelectMany**، باید کوئری را به حالت محلی (local query) تبدیل کنیم.
 
@@ -1441,7 +1441,7 @@ var fastQuery = from c in customers
 
 ---
 
-### 📝 نحوۀ کلی Join
+### نحوۀ کلی Join
 
 نحوۀ نوشتن **join** به‌طور کلی به شکل زیر است:
 
@@ -1451,10 +1451,10 @@ join inner-var in inner-sequence on outer-key-expr equals inner-key-expr
 
 اپراتورهای **Join** در LINQ بین توالی بیرونی (outer sequence) و توالی درونی (inner sequence) تمایز قائل می‌شوند.
 
-* ✅ **outer sequence** → همان توالی ورودی است (در این مثال، customers).
-* ✅ **inner sequence** → مجموعه جدیدی است که معرفی می‌کنید (در این مثال، purchases).
+*  **outer sequence** → همان توالی ورودی است (در این مثال، customers).
+*  **inner sequence** → مجموعه جدیدی است که معرفی می‌کنید (در این مثال، purchases).
 
-📌 **Join** فقط **inner join** انجام می‌دهد؛ یعنی مشتریانی که خریدی ندارند از خروجی حذف می‌شوند.
+ **Join** فقط **inner join** انجام می‌دهد؛ یعنی مشتریانی که خریدی ندارند از خروجی حذف می‌شوند.
 در **inner join** می‌توانید توالی بیرونی و درونی را با هم جابه‌جا کنید و همچنان نتیجه یکسانی بگیرید:
 
 ```csharp
@@ -1465,7 +1465,7 @@ join c in customers on p.CustomerID equals c.ID    // c حالا inner است
 
 ---
 
-### 🧩 چندین Join در یک کوئری
+### چندین Join در یک کوئری
 
 شما می‌توانید چندین عبارت **join** در یک کوئری اضافه کنید.
 مثلاً اگر هر خرید (purchase) یک یا چند آیتم خرید (purchase items) داشته باشد:
@@ -1477,7 +1477,7 @@ join pi in purchaseItems on p.ID equals pi.PurchaseID     // second join
 ...
 ```
 
-📌 در اینجا، `purchases` در اولین join به‌عنوان **inner sequence** عمل می‌کند و در دومین join به‌عنوان **outer sequence**.
+ در اینجا، `purchases` در اولین join به‌عنوان **inner sequence** عمل می‌کند و در دومین join به‌عنوان **outer sequence**.
 
 معادل ناکارآمد همین کار با **foreach** به شکل زیر است:
 
@@ -1495,7 +1495,7 @@ foreach (Customer c in customers)
 
 ---
 
-### 🔑 Join با چند کلید
+### Join با چند کلید
 
 می‌توانید روی چند کلید به‌طور همزمان join انجام دهید. برای این کار از **anonymous types** استفاده می‌شود:
 
@@ -1509,9 +1509,9 @@ join y in sequenceY on new { K1 = x.Prop1, K2 = x.Prop2 }
 برای اینکه این کار درست انجام شود، دو **anonymous type** باید دقیقاً یک ساختار (structure) داشته باشند.
 کامپایلر هر دو را با یک نوع داخلی یکسان پیاده‌سازی می‌کند، بنابراین کلیدهای join با هم سازگار می‌شوند.
 
-### 🔗 Join در **Fluent Syntax**
+### Join در **Fluent Syntax**
 
-🔹 کوئری زیر در نحوۀ Query:
+ کوئری زیر در نحوۀ Query:
 
 ```csharp
 from c in customers
@@ -1531,11 +1531,11 @@ customers.Join(                // outer collection
 );
 ```
 
-📌 عبارت **result selector** در انتها، هر عنصر خروجی را می‌سازد.
+ عبارت **result selector** در انتها، هر عنصر خروجی را می‌سازد.
 
 ---
 
-### 📑 افزودن عبارات دیگر (orderby و …)
+### افزودن عبارات دیگر (orderby و …)
 
 اگر قبل از بخش **select** عباراتی مثل **orderby** داشته باشیم:
 
@@ -1546,7 +1546,7 @@ orderby p.Price
 select c.Name + " bought a " + p.Description;
 ```
 
-در **Fluent Syntax** باید یک نوع ناشناس موقت (temporary anonymous type) بسازیم تا هر دو متغیر `c` و `p` پس از join در دسترس باشند:
+در **Fluent Syntax** باید یک نوع ناشناس موقت (temporary anonymous type) بسازیم تا هر دو متغیر `csharp` و `p` پس از join در دسترس باشند:
 
 ```csharp
 customers.Join(                  // outer collection
@@ -1558,23 +1558,23 @@ customers.Join(                  // outer collection
     .Select(x => x.c.Name + " bought a " + x.p.Description);
 ```
 
-✅ در عمل، نحوۀ Query برای join معمولاً ترجیح داده می‌شود، چون ساده‌تر و خواناتر است.
+ در عمل، نحوۀ Query برای join معمولاً ترجیح داده می‌شود، چون ساده‌تر و خواناتر است.
 
 ---
 
-## 👥 GroupJoin
+## GroupJoin
 
-🔹 **GroupJoin** همان کار **Join** را انجام می‌دهد، اما به‌جای اینکه خروجی مسطح بدهد، یک خروجی سلسله‌مراتبی (hierarchical result) تولید می‌کند که بر اساس هر عنصر بیرونی (outer element) گروه‌بندی شده است.
+ **GroupJoin** همان کار **Join** را انجام می‌دهد، اما به‌جای اینکه خروجی مسطح بدهد، یک خروجی سلسله‌مراتبی (hierarchical result) تولید می‌کند که بر اساس هر عنصر بیرونی (outer element) گروه‌بندی شده است.
 همچنین امکان **left outer join** را فراهم می‌کند.
-📌 توجه: **GroupJoin** در حال حاضر در **EF Core** پشتیبانی نمی‌شود.
+ توجه: **GroupJoin** در حال حاضر در **EF Core** پشتیبانی نمی‌شود.
 
 ---
 
-### ✍️ نحوۀ Query برای GroupJoin
+### نحوۀ Query برای GroupJoin
 
 نحوۀ Query برای **GroupJoin** مثل **Join** است، اما با کلمۀ کلیدی **into** دنبال می‌شود.
 
-🔹 یک مثال ساده با کوئری محلی:
+ یک مثال ساده با کوئری محلی:
 
 ```csharp
 Customer[] customers = dbContext.Customers.ToArray();
@@ -1587,11 +1587,11 @@ IEnumerable<IEnumerable<Purchase>> query =
   select custPurchases;   // custPurchases یک توالی است
 ```
 
-📌 عبارت `into` تنها زمانی به **GroupJoin** تبدیل می‌شود که **بلافاصله بعد از یک join** بیاید.
+ عبارت `into` تنها زمانی به **GroupJoin** تبدیل می‌شود که **بلافاصله بعد از یک join** بیاید.
 اگر بعد از **select** یا **group** بیاید، معنایش **query continuation** است.
 هر دو مورد یک ویژگی مشترک دارند: معرفی یک متغیر جدید (range variable).
 
-🔹 خروجی یک **توالی از توالی‌ها** است که می‌توانیم آن را این‌طور پیمایش کنیم:
+ خروجی یک **توالی از توالی‌ها** است که می‌توانیم آن را این‌طور پیمایش کنیم:
 
 ```csharp
 foreach (IEnumerable<Purchase> purchaseSequence in query)
@@ -1601,7 +1601,7 @@ foreach (IEnumerable<Purchase> purchaseSequence in query)
 
 ---
 
-### 👤 استفاده کاربردی‌تر از GroupJoin
+### استفاده کاربردی‌تر از GroupJoin
 
 در حالت معمول، کوئری را این‌طور می‌نویسیم تا ارتباط مشتری با خریدهایش حفظ شود:
 
@@ -1625,7 +1625,7 @@ select new
 
 ---
 
-### 🔄 Left Outer Join در GroupJoin
+### Left Outer Join در GroupJoin
 
 به‌طور پیش‌فرض، **GroupJoin** معادل یک **left outer join** است.
 برای گرفتن **inner join** (حذف مشتریانی که خریدی ندارند)، باید روی `custPurchases` فیلتر بزنید:
@@ -1638,7 +1638,7 @@ where custPurchases.Any()
 select ...
 ```
 
-📌 عبارات بعد از **group-join into** روی **زیرتوالی‌ها (subsequences)** عمل می‌کنند، نه روی تک‌تک عناصر.
+ عبارات بعد از **group-join into** روی **زیرتوالی‌ها (subsequences)** عمل می‌کنند، نه روی تک‌تک عناصر.
 پس اگر بخواهید روی خریدهای منفرد فیلتر کنید، باید قبل از join از **Where** استفاده کنید:
 
 ```csharp
@@ -1652,14 +1652,14 @@ into custPurchases ...
 
 ---
 
-## 🪄 Flat Outer Joins
+## Flat Outer Joins
 
 گاهی می‌خواهید هم **outer join** داشته باشید و هم یک خروجی مسطح (flat result set).
 
 * **GroupJoin** → outer join می‌دهد.
 * **Join** → خروجی مسطح می‌دهد.
 
-📌 راه‌حل: اول **GroupJoin**، بعد **DefaultIfEmpty** روی هر زیرتوالی، و در نهایت **SelectMany**:
+ راه‌حل: اول **GroupJoin**، بعد **DefaultIfEmpty** روی هر زیرتوالی، و در نهایت **SelectMany**:
 
 ```csharp
 from c in customers
@@ -1672,10 +1672,10 @@ select new
 };
 ```
 
-✅ اگر زیرتوالی خریدها خالی باشد، **DefaultIfEmpty** یک توالی با مقدار null تولید می‌کند.
+ اگر زیرتوالی خریدها خالی باشد، **DefaultIfEmpty** یک توالی با مقدار null تولید می‌کند.
 عبارت دوم **from** به **SelectMany** ترجمه می‌شود و همه زیرتوالی‌های خرید را گسترش داده و در یک توالی واحد از عناصر خرید مسطح می‌کند.
 
-### 🔍 Joining with Lookups
+### Joining with Lookups
 
 اپراتورهای **Join** و **GroupJoin** در کلاس **Enumerable** در دو مرحله عمل می‌کنند:
 
@@ -1684,12 +1684,12 @@ select new
 
 ---
 
-### 📦 Lookup چیست؟
+### Lookup چیست؟
 
 یک **lookup** در واقع مجموعه‌ای از گروه‌ها (groupings) است که می‌توان به‌طور مستقیم با کلید (key) به آن‌ها دسترسی داشت.
 می‌توانید آن را مثل یک **دیکشنری از توالی‌ها** تصور کنید—یک دیکشنری که می‌تواند چندین عنصر را زیر یک کلید نگه دارد (گاهی به آن **multidictionary** می‌گویند).
 
-📌 Lookup فقط خواندنی (read-only) است و رابط آن به شکل زیر تعریف می‌شود:
+ Lookup فقط خواندنی (read-only) است و رابط آن به شکل زیر تعریف می‌شود:
 
 ```csharp
 public interface ILookup<TKey, TElement> :
@@ -1710,14 +1710,14 @@ public interface ILookup<TKey, TElement> :
 
 ---
 
-### 🛠 ساختن Lookup دستی
+### ساختن Lookup دستی
 
 می‌توانید lookup را به‌طور دستی بسازید و کوئری بزنید. این کار چند مزیت دارد:
 
-* ✅ می‌توانید یک lookup را در چندین کوئری و حتی در کد دستوری (imperative code) معمولی استفاده کنید.
-* ✅ پرس‌وجو (query) از lookup یک راه عالی برای درک نحوۀ کار **Join** و **GroupJoin** است.
+*  می‌توانید یک lookup را در چندین کوئری و حتی در کد دستوری (imperative code) معمولی استفاده کنید.
+*  پرس‌وجو (query) از lookup یک راه عالی برای درک نحوۀ کار **Join** و **GroupJoin** است.
 
-🔹 متد **ToLookup** یک lookup می‌سازد. مثال: بارگذاری تمام خریدها (purchases) در یک lookup که بر اساس **CustomerID** کلیدگذاری شده است:
+ متد **ToLookup** یک lookup می‌سازد. مثال: بارگذاری تمام خریدها (purchases) در یک lookup که بر اساس **CustomerID** کلیدگذاری شده است:
 
 ```csharp
 ILookup<int?, Purchase> purchLookup =
@@ -1729,7 +1729,7 @@ ILookup<int?, Purchase> purchLookup =
 
 ---
 
-### 📖 خواندن از Lookup
+### خواندن از Lookup
 
 خواندن از یک lookup شبیه خواندن از یک دیکشنری است، با این تفاوت که **Indexer** یک توالی از آیتم‌های منطبق برمی‌گرداند (نه فقط یک آیتم).
 
@@ -1742,11 +1742,11 @@ foreach (Purchase p in purchLookup[1])
 
 ---
 
-### ⚡ کارایی Lookup مثل Join/GroupJoin
+### کارایی Lookup مثل Join/GroupJoin
 
 وقتی یک lookup داشته باشید، می‌توانید کوئری‌های **SelectMany/Select** بنویسید که به‌اندازۀ کوئری‌های **Join/GroupJoin** کارآمد هستند.
 
-🔹 **Join** معادل استفاده از **SelectMany** روی یک lookup است:
+ **Join** معادل استفاده از **SelectMany** روی یک lookup است:
 
 ```csharp
 from c in customers
@@ -1754,7 +1754,7 @@ from p in purchLookup[c.ID]
 select new { c.Name, p.Description, p.Price };
 ```
 
-📋 خروجی:
+ خروجی:
 
 ```
 Tom Bike 500
@@ -1766,7 +1766,7 @@ Dick Phone 300
 
 ---
 
-### 🪄 Outer Join با DefaultIfEmpty
+### Outer Join با DefaultIfEmpty
 
 اضافه‌کردن **DefaultIfEmpty** باعث می‌شود کوئری معادل یک **outer join** شود:
 
@@ -1783,7 +1783,7 @@ select new
 
 ---
 
-### 🧩 GroupJoin معادل Lookup
+### GroupJoin معادل Lookup
 
 **GroupJoin** معادل این است که lookup را داخل projection بخوانیم:
 
@@ -1798,7 +1798,7 @@ select new
 
 ---
 
-## ⚙️ پیاده‌سازی Enumerable.Join
+## پیاده‌سازی Enumerable.Join
 
 ساده‌ترین پیاده‌سازی معتبر **Enumerable.Join** (بدون درنظر گرفتن null-check):
 
@@ -1821,7 +1821,7 @@ public static IEnumerable<TResult> Join
 
 ---
 
-## ⚙️ پیاده‌سازی Enumerable.GroupJoin
+## پیاده‌سازی Enumerable.GroupJoin
 
 پیاده‌سازی **GroupJoin** شبیه Join است، اما ساده‌تر:
 
@@ -1845,7 +1845,7 @@ public static IEnumerable<TResult> GroupJoin
 
 ---
 
-## 🔗 The Zip Operator
+## The Zip Operator
 
 ```csharp
 IEnumerable<TFirst>, IEnumerable<TSecond> → IEnumerable<TResult>
@@ -1853,7 +1853,7 @@ IEnumerable<TFirst>, IEnumerable<TSecond> → IEnumerable<TResult>
 
 اپراتور **Zip** دو توالی را **گام‌به‌گام** (مثل زیپ) پیمایش می‌کند و با اعمال یک تابع روی هر جفت عنصر، یک توالی جدید می‌سازد.
 
-🔹 مثال:
+ مثال:
 
 ```csharp
 int[] numbers = { 3, 5, 7 };
@@ -1863,7 +1863,7 @@ IEnumerable<string> zip =
     numbers.Zip(words, (n, w) => n + "=" + w);
 ```
 
-📋 خروجی:
+ خروجی:
 
 ```
 3=three
@@ -1871,10 +1871,10 @@ IEnumerable<string> zip =
 7=seven
 ```
 
-📌 عناصر اضافه در هر یک از توالی‌ها نادیده گرفته می‌شوند.
-⚠️ **Zip** در **EF Core** پشتیبانی نمی‌شود.
+ عناصر اضافه در هر یک از توالی‌ها نادیده گرفته می‌شوند.
+ **Zip** در **EF Core** پشتیبانی نمی‌شود.
 
-### 📑 مرتب‌سازی (Ordering)
+### مرتب‌سازی (Ordering)
 
 ```
 IEnumerable<TSource> → IOrderedEnumerable<TSource>
@@ -1887,9 +1887,9 @@ IEnumerable<TSource> → IOrderedEnumerable<TSource>
 
 عملگرهای مرتب‌سازی (Ordering operators) همان عناصر را بازمی‌گردانند، اما در **ترتیب متفاوت**.
 
-### 🔀 OrderBy, OrderByDescending, ThenBy, ThenByDescending
+### OrderBy, OrderByDescending, ThenBy, ThenByDescending
 
-#### 📌 آرگومان‌های OrderBy و OrderByDescending
+#### آرگومان‌های OrderBy و OrderByDescending
 
 <div align="center">
 
@@ -1898,14 +1898,14 @@ IEnumerable<TSource> → IOrderedEnumerable<TSource>
 
 نوع بازگشتی = `IOrderedEnumerable<TSource>`
 
-### 🔹 آرگومان‌های ThenBy و ThenByDescending
+### آرگومان‌های ThenBy و ThenByDescending
 
 <div align="center">
 
 ![Conventions-UsedThis-Book](../../../assets/image/09/Table-9-15.jpeg)
 </div>
 
-### 📑 نحوۀ Query (Query syntax)
+### نحوۀ Query (Query syntax)
 
 ```
 orderby expression1 [descending] [, expression2 [descending] ... ]
@@ -1913,7 +1913,7 @@ orderby expression1 [descending] [, expression2 [descending] ... ]
 
 ---
 
-### 📖 مرور کلی (Overview)
+### مرور کلی (Overview)
 
 * **OrderBy** نسخه‌ای مرتب‌شده از توالی ورودی را برمی‌گرداند و از **keySelector** برای مقایسه استفاده می‌کند.
 * مثال: تولید یک توالی از نام‌ها به ترتیب حروف الفبا:
@@ -1945,7 +1945,7 @@ names.OrderBy(s => s.Length).ThenBy(s => s[1]).ThenBy(s => s[0]);
 
 ---
 
-### 🔄 معادل در نحوۀ Query
+### معادل در نحوۀ Query
 
 ```csharp
 from s in names
@@ -1953,7 +1953,7 @@ orderby s.Length, s[1], s[0]
 select s;
 ```
 
-⚠️ نمونه اشتباه: این در واقع ابتدا بر اساس `s[1]` و سپس `s.Length` مرتب می‌کند (یا در کوئری پایگاه داده فقط بر اساس `s[1]` مرتب می‌کند و ترتیب قبلی را نادیده می‌گیرد):
+ نمونه اشتباه: این در واقع ابتدا بر اساس `s[1]` و سپس `s.Length` مرتب می‌کند (یا در کوئری پایگاه داده فقط بر اساس `s[1]` مرتب می‌کند و ترتیب قبلی را نادیده می‌گیرد):
 
 ```csharp
 from s in names
@@ -1964,7 +1964,7 @@ orderby s[1]
 
 ---
 
-### 🔽 OrderByDescending و ThenByDescending
+### OrderByDescending و ThenByDescending
 
 این اپراتورها همان کارهای قبلی را انجام می‌دهند اما خروجی را به ترتیب معکوس می‌دهند.
 
@@ -1984,7 +1984,7 @@ orderby p.Price descending, p.Description
 select p;
 ```
 
-### 📚 Comparers و Collations
+### Comparers و Collations
 
 * در یک **کوئری محلی (local query)**، خودِ اشیاء انتخاب‌شده توسط **key selector** الگوریتم مرتب‌سازی را از طریق پیاده‌سازی پیش‌فرض **IComparable** تعیین می‌کنند (رجوع کنید به فصل ۷).
 * شما می‌توانید الگوریتم مرتب‌سازی را با ارسال یک شیء **IComparer** بازنویسی کنید. مثال: مرتب‌سازی **غیرحساس به حروف بزرگ/کوچک**:
@@ -2005,7 +2005,7 @@ select p;
 
 ---
 
-### 🔹 IOrderedEnumerable و IOrderedQueryable
+### IOrderedEnumerable و IOrderedQueryable
 
 * اپراتورهای مرتب‌سازی، زیرنوع‌های خاصی از `IEnumerable<T>` را برمی‌گردانند:
 
@@ -2016,18 +2016,18 @@ select p;
 
 * اعضای اضافی این زیرنوع‌ها به‌صورت عمومی نمایان نیستند و شبیه توالی‌های عادی عمل می‌کنند.
 
-🔹 مثال: ساخت کوئری مرحله‌ای
+ مثال: ساخت کوئری مرحله‌ای
 
 ```csharp
 IOrderedEnumerable<string> query1 = names.OrderBy(s => s.Length);
 IOrderedEnumerable<string> query2 = query1.ThenBy(s => s);
 ```
 
-⚠️ اگر `query1` از نوع `IEnumerable<string>` تعریف شود، خط دوم کامپایل نمی‌شود—چون **ThenBy** به ورودی از نوع `IOrderedEnumerable<string>` نیاز دارد.
+ اگر `query1` از نوع `IEnumerable<string>` تعریف شود، خط دوم کامپایل نمی‌شود—چون **ThenBy** به ورودی از نوع `IOrderedEnumerable<string>` نیاز دارد.
 
 ---
 
-### 🔹 استفاده از تایپ ضمنی (Implicit Typing)
+### استفاده از تایپ ضمنی (Implicit Typing)
 
 ```csharp
 var query1 = names.OrderBy(s => s.Length);
@@ -2043,7 +2043,7 @@ query = query.Where(n => n.Length > 3);  // خطای زمان کامپایل
 
 * کامپایلر `query` را از نوع `IOrderedEnumerable<string>` استنتاج می‌کند، اما `Where` یک `IEnumerable<string>` برمی‌گرداند که نمی‌توان آن را دوباره به `query` اختصاص داد.
 
-✅ راه‌حل‌ها:
+ راه‌حل‌ها:
 
 1. استفاده از تایپ صریح
 2. یا فراخوانی `AsEnumerable()` بعد از `OrderBy`:
@@ -2062,7 +2062,7 @@ query = query.Where(n => n.Length > 3);  // درست
 ![Conventions-UsedThis-Book](../../../assets/image/09/Table-9-16.jpeg)
 </div>
 
-### 📚 GroupBy
+### GroupBy
 
 ```
 IEnumerable<TSource> → IEnumerable<IGrouping<TKey, TElement>>
@@ -2073,7 +2073,7 @@ IEnumerable<TSource> → IEnumerable<IGrouping<TKey, TElement>>
 ![Conventions-UsedThis-Book](../../../assets/image/09/Table-9-17.jpeg)
 </div>
 
-### 📑 GroupBy
+### GroupBy
 
 ```
 IEnumerable<TSource> → IEnumerable<IGrouping<TKey, TElement>>
@@ -2081,7 +2081,7 @@ IEnumerable<TSource> → IEnumerable<IGrouping<TKey, TElement>>
 
 ---
 
-### 🔍 نحوۀ Query (Query syntax)
+### نحوۀ Query (Query syntax)
 
 ```
 group element-expression by key-expression
@@ -2089,7 +2089,7 @@ group element-expression by key-expression
 
 ---
 
-### 📖 مرور کلی (Overview)
+### مرور کلی (Overview)
 
 * **GroupBy** یک توالی صاف (flat) را به توالی‌ای از گروه‌ها تبدیل می‌کند.
 * مثال: گروه‌بندی تمام فایل‌های موجود در `Path.GetTempPath()` بر اساس پسوند:
@@ -2109,7 +2109,7 @@ var query = files.GroupBy(file => Path.GetExtension(file));
 
 ---
 
-### 🔹 پیمایش نتایج
+### پیمایش نتایج
 
 ```csharp
 foreach (IGrouping<string, string> grouping in query)
@@ -2120,7 +2120,7 @@ foreach (IGrouping<string, string> grouping in query)
 }
 ```
 
-📋 خروجی نمونه:
+ خروجی نمونه:
 
 ```
 Extension: .pdf
@@ -2134,7 +2134,7 @@ Extension: .doc
 
 ---
 
-### 🛠 پیاده‌سازی داخلی
+### پیاده‌سازی داخلی
 
 * `Enumerable.GroupBy` عناصر ورودی را داخل یک دیکشنری موقت از لیست‌ها می‌خواند تا همه عناصر با کلید مشابه در یک زیرلیست قرار گیرند.
 * سپس یک توالی از **grouping**ها را تولید می‌کند.
@@ -2156,7 +2156,7 @@ files.GroupBy(file => Path.GetExtension(file), file => file.ToUpper());
 
 * در این حالت، **Key** هر گروه هنوز در حالت اصلی خود باقی می‌ماند.
 
-📋 خروجی نمونه:
+ خروجی نمونه:
 
 ```
 Extension: .pdf
@@ -2168,7 +2168,7 @@ Extension: .doc
 
 ---
 
-### ⚠️ نکات مهم
+### نکات مهم
 
 * زیرمجموعه‌ها بر اساس کلید به ترتیب الفبا صادر نمی‌شوند. **GroupBy** تنها گروه‌بندی می‌کند و مرتب‌سازی انجام نمی‌دهد.
 * برای مرتب‌سازی، باید از **OrderBy** استفاده کنید:
@@ -2180,7 +2180,7 @@ files.GroupBy(file => Path.GetExtension(file), file => file.ToUpper())
 
 ---
 
-### 🔹 معادل در نحوۀ Query
+### معادل در نحوۀ Query
 
 ```
 group element-expr by key-expr
@@ -2204,7 +2204,7 @@ select grouping;
 
 ---
 
-### 🔹 ادامه‌ی کوئری‌ها (Query Continuations)
+### ادامه‌ی کوئری‌ها (Query Continuations)
 
 * ادامه‌ی کوئری پس از **group by** مفید است، مثلاً فیلتر کردن گروه‌هایی که کمتر از پنج فایل دارند:
 
@@ -2220,7 +2220,7 @@ select grouping;
 
 ---
 
-### 🔹 مثال Aggregation
+### مثال Aggregation
 
 * گاهی تنها به نتیجه‌ی تجمیع روی گروه‌ها نیاز دارید و می‌توانید زیرتوالی‌ها را نادیده بگیرید:
 
@@ -2235,7 +2235,7 @@ IEnumerable<string> query = from vote in votes
 string winner = query.First();    // Dogs
 ```
 
-### 📑 GroupBy در EF Core
+### GroupBy در EF Core
 
 * گروه‌بندی در **EF Core** به همان شکل روی پایگاه داده عمل می‌کند.
 * اگر **navigation property**ها را تنظیم کرده باشید، اغلب نیازی به گروه‌بندی کمتر از حالت استاندارد SQL پیش می‌آید.
@@ -2266,7 +2266,7 @@ from p in dbContext.Purchases
 group p by p.Date.Year
 ```
 
-⚠️ این روش در **EF Core** کار نمی‌کند.
+ این روش در **EF Core** کار نمی‌کند.
 راه‌حل ساده: قبل از گروه‌بندی `.AsEnumerable()` فراخوانی کنید تا گروه‌بندی روی کلاینت انجام شود.
 
 * این روش تا زمانی که فیلترینگ قبل از گروه‌بندی انجام شود، کارآمد است، زیرا فقط داده‌های مورد نیاز از سرور فراخوانی می‌شوند.
@@ -2275,7 +2275,7 @@ group p by p.Date.Year
 
 ---
 
-### 🔹 گروه‌بندی با چند کلید
+### گروه‌بندی با چند کلید
 
 * می‌توانید با استفاده از **composite key** و **anonymous type** گروه‌بندی کنید:
 
@@ -2286,7 +2286,7 @@ group n by new { FirstLetter = n[0], Length = n.Length };
 
 ---
 
-### 🔹 مقایسه‌کننده‌های سفارشی (Custom equality comparers)
+### مقایسه‌کننده‌های سفارشی (Custom equality comparers)
 
 * می‌توانید یک **equality comparer** سفارشی به GroupBy بدهید تا الگوریتم مقایسه‌ی کلید تغییر کند.
 * به ندرت لازم است، زیرا تغییر عبارت **key selector** معمولاً کافی است.
@@ -2298,7 +2298,7 @@ group n by n.ToUpper()
 
 ---
 
-### 📑 Chunk
+### Chunk
 
 ```
 IEnumerable<TSource> → IEnumerable<TElement[]>
@@ -2309,7 +2309,7 @@ IEnumerable<TSource> → IEnumerable<TElement[]>
 ![Conventions-UsedThis-Book](../../../assets/image/09/Table-9-18.jpeg)
 </div>
 
-### 📦 Chunk
+### Chunk
 
 * معرفی‌شده در **.NET 6**، **Chunk** یک توالی را به بلوک‌هایی (chunks) با اندازه‌ی مشخص تقسیم می‌کند (یا کمتر، اگر عناصر کافی نباشند):
 
@@ -2328,7 +2328,7 @@ foreach (int[] chunk in new[] { 1, 2, 3, 4, 5, 6, 7, 8 }.Chunk(3))
 
 ---
 
-### 🔗 Set Operators
+### Set Operators
 
 ```
 IEnumerable<TSource>, IEnumerable<TSource> → IEnumerable<TSource>
@@ -2339,7 +2339,7 @@ IEnumerable<TSource>, IEnumerable<TSource> → IEnumerable<TSource>
 ![Conventions-UsedThis-Book](../../../assets/image/09/Table-9-19.jpeg)
 </div>
 
-### 🔗 Concat, Union, UnionBy
+### Concat, Union, UnionBy
 
 * **Concat** همه عناصر توالی اول را بازمی‌گرداند، سپس همه عناصر توالی دوم را اضافه می‌کند.
 * **Union** همان کار را می‌کند اما **تکراری‌ها را حذف می‌کند**:
@@ -2390,7 +2390,7 @@ var union = seq1.Union(seq2, StringComparer.InvariantCultureIgnoreCase);
 
 ---
 
-### 🔹 Intersect, IntersectBy, Except, ExceptBy
+### Intersect, IntersectBy, Except, ExceptBy
 
 * **Intersect** عناصر مشترک بین دو توالی را بازمی‌گرداند.
 * **Except** عناصر توالی اول که در توالی دوم نیستند را بازمی‌گرداند:
@@ -2416,7 +2416,7 @@ WHERE number NOT IN (SELECT number FROM numbers2Table)
 
 ---
 
-### 🔹 Conversion Methods
+### Conversion Methods
 
 * LINQ عمدتاً با توالی‌ها کار می‌کند (`IEnumerable<T>`).
 * **Conversion methods** برای تبدیل به و از انواع دیگر مجموعه‌ها استفاده می‌شوند.
@@ -2426,7 +2426,7 @@ WHERE number NOT IN (SELECT number FROM numbers2Table)
 ![Conventions-UsedThis-Book](../../../assets/image/09/Table-9-20.jpeg)
 </div>
 
-### 🔄 OfType و Cast
+### OfType و Cast
 
 * **OfType** و **Cast** یک مجموعه غیرجنریک (`IEnumerable`) را می‌گیرند و یک توالی جنریک (`IEnumerable<T>`) بازمی‌گردانند که می‌توانید روی آن عملیات LINQ انجام دهید:
 
@@ -2512,7 +2512,7 @@ from TreeNode node in myTreeView.Nodes
 
 ---
 
-### 🟢 ToArray, ToList, ToDictionary, ToHashSet, ToLookup
+### ToArray, ToList, ToDictionary, ToHashSet, ToLookup
 
 * **ToArray**, **ToList**, و **ToHashSet** نتایج را در یک **array**، **List<T>** یا **HashSet<T>** قرار می‌دهند.
 * اجرای آن‌ها موجب **enumeration فوری** توالی ورودی می‌شود (مراجعه کنید به “Deferred Execution”، صفحه ۴۳۲).
@@ -2523,7 +2523,7 @@ from TreeNode node in myTreeView.Nodes
 ![Conventions-UsedThis-Book](../../../assets/image/09/Table-9-21.jpeg)
 </div>
 
-### 🟡 ToDictionary و ToLookup
+### ToDictionary و ToLookup
 
 * **ToDictionary** نیز اجرای فوری (immediate execution) توالی را مجبور می‌کند و نتایج را در یک **Dictionary\<TK, TV>** قرار می‌دهد.
 * **keySelector** ارائه‌شده باید برای هر عنصر مقدار **منحصر به فرد** تولید کند، در غیر این صورت **استثناء** رخ می‌دهد.
@@ -2532,7 +2532,7 @@ from TreeNode node in myTreeView.Nodes
 
 ---
 
-### 🔹 AsEnumerable و AsQueryable
+### AsEnumerable و AsQueryable
 
 * **AsEnumerable** یک توالی را به `IEnumerable<T>` **upcast** می‌کند و باعث می‌شود کامپایلر اپراتورهای بعدی را به متدهای **Enumerable** وصل کند نه **Queryable**.
 * مثال: بخش “Combining Interpreted and Local Queries”، صفحه ۴۵۲.
@@ -2540,7 +2540,7 @@ from TreeNode node in myTreeView.Nodes
 
 ---
 
-### 🔹 Element Operators
+### Element Operators
 
 ```
 IEnumerable<TSource> → TSource
@@ -2551,21 +2551,21 @@ IEnumerable<TSource> → TSource
 ![Conventions-UsedThis-Book](../../../assets/image/09/Table-9-22.jpeg)
 </div>
 
-### ⚡ Methods ending in “OrDefault”
+### Methods ending in “OrDefault”
 
 * متدهایی که با **OrDefault** پایان می‌یابند، به جای پرتاب **exception** وقتی توالی ورودی خالی است یا هیچ عنصری با شرط داده شده مطابقت ندارد، مقدار **default(TSource)** بازمی‌گردانند.
 * مقدار **default(TSource)** برای انواع مرجع (**reference types**) برابر `null`، برای نوع `bool` برابر `false` و برای انواع عددی برابر صفر است.
 
 ---
 
-### 🔹 First, Last, and Single
+### First, Last, and Single
 
 <div align="center">
 
 ![Conventions-UsedThis-Book](../../../assets/image/09/Table-9-23.jpeg)
 </div>
 
-### 🔹 First و Last
+### First و Last
 
 مثال زیر **First** و **Last** را نشان می‌دهد:
 
@@ -2586,7 +2586,7 @@ int firstBigNumber = numbers.FirstOrDefault(n => n > 10); // 0
 
 ---
 
-### 🔹 Single و SingleOrDefault
+### Single و SingleOrDefault
 
 * **Single** نیاز دارد که **دقیقا یک عنصر** با شرط داده شده وجود داشته باشد.
 * **SingleOrDefault** اجازه می‌دهد **صفر یا یک عنصر** وجود داشته باشد.
@@ -2613,14 +2613,14 @@ Customer cust = dataContext.Customers.Single(c => c.ID == 3);
 
 ---
 
-### 🔹 ElementAt
+### ElementAt
 
 <div align="center">
 
 ![Conventions-UsedThis-Book](../../../assets/image/09/Table-9-24.jpeg)
 </div>
 
-### 🔹 ElementAt و ElementAtOrDefault
+### ElementAt و ElementAtOrDefault
 
 * **ElementAt** عنصر nام توالی را برمی‌گرداند:
 
@@ -2636,7 +2636,7 @@ int tenth      = numbers.ElementAtOrDefault(9); // 0
 
 ---
 
-### 🔹 MinBy و MaxBy
+### MinBy و MaxBy
 
 * معرفی‌شده در **.NET 6**، **MinBy** و **MaxBy** عنصری با کوچک‌ترین یا بزرگ‌ترین مقدار (بر اساس **keySelector**) را برمی‌گردانند:
 
@@ -2661,14 +2661,14 @@ Console.WriteLine(names.MinBy(n => n.Length));  // Tom
 
 ---
 
-### 🔹 DefaultIfEmpty
+### DefaultIfEmpty
 
 * **DefaultIfEmpty** توالی‌ای با یک عنصر شامل **default(TSource)** برمی‌گرداند اگر توالی ورودی خالی باشد؛ در غیر این صورت توالی ورودی را بدون تغییر بازمی‌گرداند.
 * این متد در نوشتن **flat outer joins** کاربرد دارد: بخش‌های “Outer joins with SelectMany” صفحه ۴۹۱ و “Flat outer joins” صفحه ۴۹۷.
 
 ---
 
-### 🔹 Aggregation Methods
+### Aggregation Methods
 
 ```
 IEnumerable<TSource> → scalar
@@ -2679,7 +2679,7 @@ IEnumerable<TSource> → scalar
 ![Conventions-UsedThis-Book](../../../assets/image/09/Table-9-25.jpeg)
 </div>
 
-### 🔹 Count و LongCount
+### Count و LongCount
 
 <div align="center">
 
@@ -2707,7 +2707,7 @@ int digitCount = "pa55w0rd".Count(c => char.IsDigit(c));   // 3
 
 ---
 
-### 🔹 Min و Max
+### Min و Max
 
 <div align="center">
 
@@ -2748,7 +2748,7 @@ Purchase cheapest = dbContext.Purchases
 
 ---
 
-### 🔹 Sum و Average
+### Sum و Average
 
 <div align="center">
 
@@ -2778,7 +2778,7 @@ int combinedLength = names.Sum(s => s.Length);   // 19
 ![Conventions-UsedThis-Book](../../../assets/image/09/Table-9-29.jpeg)
 </div>
 
-### 🔹 Aggregate و مسائل مرتبط
+### Aggregate و مسائل مرتبط
 
 * **Average** به‌طور ضمنی مقادیر ورودی را ارتقا می‌دهد تا از دست رفتن دقت جلوگیری شود. به همین دلیل مثال زیر کامپایل نمی‌شود:
 
@@ -2808,7 +2808,7 @@ select c.Name;
 
 ---
 
-### 🔹 Aggregate
+### Aggregate
 
 * **Aggregate** اجازه می‌دهد الگوریتم تجمیع سفارشی خود را پیاده‌سازی کنید. این متد در EF Core پشتیبانی نمی‌شود و کاربرد آن در موارد خاص است. مثال مشابه با **Sum**:
 
@@ -2825,7 +2825,7 @@ int sum = numbers.Aggregate(0, (total, n) => total + n); // 6
 
 ---
 
-### 🔹 تجمیع بدون Seed
+### تجمیع بدون Seed
 
 * می‌توان **seed** را حذف کرد. در این حالت، عنصر اول به‌صورت ضمنی **seed** شده و تجمیع از عنصر دوم آغاز می‌شود:
 
@@ -2846,7 +2846,7 @@ int y = numbers.Aggregate((prod, n) => prod * n);   // 1*2*3 = 6
 
 ---
 
-### ⚠️ مشکلات تجمیع بدون Seed
+### مشکلات تجمیع بدون Seed
 
 * توابع غیر جابجایی و غیر ترکیبی (**non-commutative / non-associative**) می‌توانند نتایج غیرمنتظره یا غیرقطعی تولید کنند.
 * مثال:
@@ -2892,7 +2892,7 @@ double sdev = Math.Sqrt(numbers.Average(n => {
 
 ---
 
-### 🔹 Quantifiers
+### Quantifiers
 
 `IEnumerable<TSource>` → `bool`
 <div align="center">
@@ -2900,7 +2900,7 @@ double sdev = Math.Sqrt(numbers.Average(n => {
 ![Conventions-UsedThis-Book](../../../assets/image/09/Table-9-30.jpeg)
 </div>
 
-### 🔹 Contains و Any
+### Contains و Any
 
 * متد **Contains** یک عنصر از نوع `TSource` می‌پذیرد و بررسی می‌کند آیا آن عنصر در توالی وجود دارد یا خیر.
 * متد **Any** یک شرط اختیاری (**predicate**) می‌گیرد و بررسی می‌کند آیا حداقل یک عنصر با شرط داده‌شده وجود دارد یا خیر.
@@ -2934,7 +2934,7 @@ select c
 
 ---
 
-### 🔹 All و SequenceEqual
+### All و SequenceEqual
 
 * **All** بررسی می‌کند که آیا همه عناصر شرط داده‌شده را رعایت می‌کنند یا خیر. مثال:
 
@@ -2946,7 +2946,7 @@ dbContext.Customers.Where(c => c.Purchases.All(p => p.Price < 100));
 
 ---
 
-### 🔹 Generation Methods
+### Generation Methods
 
 `void` → `IEnumerable<TResult>`
 
@@ -2955,13 +2955,13 @@ dbContext.Customers.Where(c => c.Purchases.All(p => p.Price < 100));
 ![Conventions-UsedThis-Book](../../../assets/image/09/Table-9-31.jpeg)
 </div>
 
-### 🔹 Empty, Repeat و Range
+### Empty, Repeat و Range
 
 متدهای **Empty**، **Repeat** و **Range** متدهای ایستا (**static**) هستند و توالی‌های ساده محلی را تولید می‌کنند.
 
 ---
 
-#### 🔹 Empty
+#### Empty
 
 متد **Empty** یک توالی خالی تولید می‌کند و تنها نیاز به نوع داده دارد:
 
@@ -2997,7 +2997,7 @@ foreach (int i in flat)
 
 ---
 
-#### 🔹 Range و Repeat
+#### Range و Repeat
 
 * **Range**: یک مقدار شروع و تعداد عناصر (هر دو از نوع `int`) می‌گیرد و توالی تولید می‌کند:
 

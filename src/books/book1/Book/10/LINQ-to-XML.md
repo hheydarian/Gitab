@@ -15,13 +15,13 @@ DOM مربوط به LINQ to XML بسیار خوب طراحی شده و از نظ
 
 ---
 
-## 🏛 نمای کلی معماری (Architectural Overview)
+## نمای کلی معماری (Architectural Overview)
 
 این بخش با معرفی بسیار کوتاهی از مفهوم **DOM** شروع می‌شود و سپس منطق پشت DOM در LINQ to XML را توضیح می‌دهد.
 
 ---
 
-### ❓ DOM چیست؟ (What Is a DOM?)
+### DOM چیست؟ (What Is a DOM?)
 
 به فایل XML زیر توجه کنید:
 
@@ -42,7 +42,7 @@ DOM مربوط به LINQ to XML بسیار خوب طراحی شده و از نظ
 
 ---
 
-### 🧩 DOM در LINQ to XML
+### DOM در LINQ to XML
 
 LINQ to XML از دو بخش تشکیل شده است:
 
@@ -60,7 +60,7 @@ LINQ to XML از دو بخش تشکیل شده است:
 
 ---
 
-### 📊 نمای کلی X-DOM
+### نمای کلی X-DOM
 
 شکل ۱۰-۱ نوع‌های اصلی X-DOM را نشان می‌دهد.
 پرکاربردترین این نوع‌ها **XElement** است.
@@ -86,13 +86,13 @@ XElement customer = XElement.Parse (xml);
 ![Conventions-UsedThis-Book](../../../assets/image/10/Table-10-2.jpeg)
 </div>
 
-### 🧩 XObject
+### XObject
 
 **XObject** کلاس پایه‌ی انتزاعی برای تمام محتوای XML است. این کلاس یک پیوند به عنصر **Parent** (والد) در درخت دربرگیری (containership tree) تعریف می‌کند و همچنین می‌تواند یک **XDocument** اختیاری داشته باشد.
 
 ---
 
-### 🧩 XNode
+### XNode
 
 **XNode** کلاس پایه برای بیشتر محتوای XML (به‌جز attributeها) است. ویژگی متمایز XNode این است که می‌تواند در یک مجموعه‌ی مرتب‌شده از XNodeهای چندنوعی قرار بگیرد.
 
@@ -114,13 +114,13 @@ XElement customer = XElement.Parse (xml);
 
 ---
 
-### 🧩 XContainer
+### XContainer
 
 **XContainer** اعضایی برای کار با فرزندان تعریف می‌کند و کلاس پایه‌ی انتزاعی برای **XElement** و **XDocument** است.
 
 ---
 
-### 🧩 XElement
+### XElement
 
 **XElement** اعضایی برای مدیریت attributeها معرفی می‌کند—و همچنین خصوصیت‌های **Name** و **Value** را.
 در حالتی که یک عنصر تنها یک فرزند از نوع **XText** داشته باشد (که حالت نسبتاً رایجی است)، خصوصیت **Value** در XElement محتوای این فرزند را هم برای عملیات **get** و هم برای **set** دربرمی‌گیرد و نیاز به پیمایش غیرضروری را حذف می‌کند.
@@ -128,7 +128,7 @@ XElement customer = XElement.Parse (xml);
 
 ---
 
-### 🧩 XDocument
+### XDocument
 
 **XDocument** ریشه‌ی یک درخت XML را نمایش می‌دهد. به‌طور دقیق‌تر، این کلاس عنصر ریشه (**root XElement**) را دربر می‌گیرد و یک **XDeclaration**، دستورالعمل‌های پردازش (processing instructions) و سایر موارد سطح ریشه را اضافه می‌کند.
 
@@ -137,7 +137,7 @@ XElement customer = XElement.Parse (xml);
 
 ---
 
-## 📥 بارگذاری و تجزیه (Loading and Parsing)
+## بارگذاری و تجزیه (Loading and Parsing)
 
 هم **XElement** و هم **XDocument** متدهای ایستای (**static**) **Load** و **Parse** را برای ساختن یک درخت X-DOM از یک منبع موجود ارائه می‌دهند:
 
@@ -193,7 +193,7 @@ Console.WriteLine (config);   // Implicitly call config.ToString()
 
 ---
 
-### 🧩 XNode.ReadFrom
+### XNode.ReadFrom
 
 **XNode** همچنین یک متد ایستای **ReadFrom** دارد که هر نوع node را از یک **XmlReader** نمونه‌سازی و مقداردهی می‌کند.
 برخلاف **Load**، این متد پس از خواندن یک node کامل متوقف می‌شود، بنابراین شما می‌توانید به‌طور دستی از همان XmlReader ادامه‌ی خواندن را انجام دهید.
@@ -204,7 +204,7 @@ Console.WriteLine (config);   // Implicitly call config.ToString()
 
 ---
 
-## 💾 ذخیره‌سازی و سریال‌سازی (Saving and Serializing)
+## ذخیره‌سازی و سریال‌سازی (Saving and Serializing)
 
 فراخوانی **ToString** روی هر node، محتوای آن را به یک رشته‌ی XML تبدیل می‌کند—با قالب‌بندی شامل شکست خط و تورفتگی، همان‌طور که دیدیم.
 (می‌توانید شکست خط و تورفتگی را غیرفعال کنید، با مشخص کردن **SaveOptions.DisableFormatting** هنگام فراخوانی ToString.)
@@ -338,12 +338,12 @@ Console.WriteLine(
   customer2.Element("address").Element("street").Value);   // Lawley St
 ```
 
-این تکثیر خودکار باعث می‌شود نمونه‌سازی X-DOM بدون **side effect** باشد — که یکی دیگر از ویژگی‌های کلیدی برنامه‌نویسی تابعی است. ✅
+این تکثیر خودکار باعث می‌شود نمونه‌سازی X-DOM بدون **side effect** باشد — که یکی دیگر از ویژگی‌های کلیدی برنامه‌نویسی تابعی است. 
 
 پیمایش و کوئری‌گیری (Navigating and Querying)
 همان‌طور که انتظار دارید، کلاس‌های **XNode** و **XContainer** متدها و ویژگی‌هایی برای پیمایش درخت X-DOM تعریف می‌کنند. اما برخلاف یک DOM سنتی، این توابع مجموعه‌ای که **IList<T>** را پیاده‌سازی کند برنمی‌گردانند. در عوض، یا یک مقدار منفرد یا یک دنباله (sequence) که **IEnumerable<T>** را پیاده‌سازی می‌کند برمی‌گردانند — و شما انتظار می‌رود که روی آن یا یک کوئری LINQ اجرا کنید یا با یک **foreach** پیمایش کنید.
 
-این موضوع امکان اجرای کوئری‌های پیشرفته را در کنار وظایف ساده‌ی پیمایش، با استفاده از همان سینتکس آشنای LINQ، فراهم می‌کند. ✅
+این موضوع امکان اجرای کوئری‌های پیشرفته را در کنار وظایف ساده‌ی پیمایش، با استفاده از همان سینتکس آشنای LINQ، فراهم می‌کند. 
 
 ---
 
@@ -363,7 +363,7 @@ Console.WriteLine(
 
 ---
 
-### 🟢 FirstNode، LastNode و Nodes
+### FirstNode، LastNode و Nodes
 
 * **FirstNode** و **LastNode** دسترسی مستقیم به اولین یا آخرین نود فرزند می‌دهند.
 * **Nodes** همه‌ی فرزندها را به صورت یک دنباله (sequence) برمی‌گرداند.
@@ -387,7 +387,7 @@ foreach (XNode node in bench.Nodes())
   Console.WriteLine (node.ToString (SaveOptions.DisableFormatting) + ".");
 ```
 
-🔹 خروجی کد بالا:
+ خروجی کد بالا:
 
 ```
 <toolbox><handtool>Hammer</handtool><handtool>Rasp</handtool></toolbox>.
@@ -397,7 +397,7 @@ foreach (XNode node in bench.Nodes())
 
 ---
 
-### 🟢 بازیابی عناصر (Retrieving elements)
+### بازیابی عناصر (Retrieving elements)
 
 متد **Elements** فقط نودهای فرزند از نوع **XElement** را برمی‌گرداند:
 
@@ -408,7 +408,7 @@ foreach (XElement e in bench.Elements())
 // toolbox=SawNailgun
 ```
 
-🔹 کوئری زیر جعبه‌ابزاری (**toolbox**) را پیدا می‌کند که درونش ابزار **Nailgun** وجود دارد:
+ کوئری زیر جعبه‌ابزاری (**toolbox**) را پیدا می‌کند که درونش ابزار **Nailgun** وجود دارد:
 
 ```csharp
 IEnumerable<string> query =
@@ -419,7 +419,7 @@ IEnumerable<string> query =
 // RESULT: { "SawNailgun" }
 ```
 
-🔹 در مثال بعدی از **SelectMany** استفاده می‌کنیم تا ابزارهای دستی (**handtool**) همه‌ی جعبه‌ابزارها را به‌دست بیاوریم:
+ در مثال بعدی از **SelectMany** استفاده می‌کنیم تا ابزارهای دستی (**handtool**) همه‌ی جعبه‌ابزارها را به‌دست بیاوریم:
 
 ```csharp
 IEnumerable<string> query =
@@ -433,7 +433,7 @@ IEnumerable<string> query =
 
 ---
 
-### 🟢 نکته درباره Elements
+### نکته درباره Elements
 
 * متد **Elements** معادل یک کوئری LINQ روی **Nodes** است.
   مثلاً کوئری قبل می‌توانست این‌طور شروع شود:
@@ -465,7 +465,7 @@ from tool in bench.Elements("toolbox").Elements("handtool")
 select tool.Value;
 ```
 
-🔹 در اینجا:
+ در اینجا:
 
 * فراخوانی اول **Elements** به متد نمونه‌ای (instance method) در **XContainer** متصل می‌شود.
 * فراخوانی دوم **Elements** به متد توسعه‌ای (extension method) متصل می‌شود.
@@ -496,7 +496,7 @@ Element("xyz")?.Value
 string xyz = (string)settings.Element("xyz");
 ```
 
-این کار امکان‌پذیر است چون **XElement** یک تبدیل صریح به رشته (explicit string conversion) تعریف کرده است. ✅
+این کار امکان‌پذیر است چون **XElement** یک تبدیل صریح به رشته (explicit string conversion) تعریف کرده است. 
 
 ---
 
@@ -518,7 +518,7 @@ foreach (XNode node in bench.DescendantNodes())
   Console.WriteLine(node.ToString(SaveOptions.DisableFormatting));
 ```
 
-🔹 خروجی:
+ خروجی:
 
 ```
 <toolbox><handtool>Hammer</handtool><handtool>Rasp</handtool></toolbox>
@@ -604,7 +604,7 @@ AncestorsAndSelf().Last();
 
 علاوه بر این، **XAttribute** خصوصیات **PreviousAttribute** و **NextAttribute** را تعریف می‌کند و همچنین **Parent** را دارد.
 
-متد **Attributes** که یک نام را می‌پذیرد، یک دنباله با صفر یا یک عنصر برمی‌گرداند؛ زیرا یک عنصر نمی‌تواند در XML صفات با نام‌های تکراری داشته باشد. ✅
+متد **Attributes** که یک نام را می‌پذیرد، یک دنباله با صفر یا یک عنصر برمی‌گرداند؛ زیرا یک عنصر نمی‌تواند در XML صفات با نام‌های تکراری داشته باشد. 
 
 ---
 
@@ -630,7 +630,7 @@ AncestorsAndSelf().Last();
 
 متد **SetValue** محتوای یک عنصر یا صفت را با یک مقدار ساده جایگزین می‌کند.
 اختصاص مقدار به خصوصیت **Value** نیز همین کار را انجام می‌دهد، اما فقط داده‌های رشته‌ای (**string**) را می‌پذیرد.
-هر دوی این توابع به‌طور دقیق‌تر در بخش «Working with Values» در صفحه 537 توضیح داده شده‌اند. ✅
+هر دوی این توابع به‌طور دقیق‌تر در بخش «Working with Values» در صفحه 537 توضیح داده شده‌اند. 
 
 یکی از اثرات فراخوانی **SetValue** (یا اختصاص دوباره به **Value**) این است که **تمام نودهای فرزند را جایگزین می‌کند**:
 
@@ -702,7 +702,7 @@ XElement items = new XElement("items",
 items.FirstNode.AddAfterSelf(new XElement("two"));
 ```
 
-🔹 نتیجه:
+ نتیجه:
 
 ```xml
 <items><one /><two /><three /></items>
@@ -718,7 +718,7 @@ XElement items = XElement.Parse("<items><one/><two/><three/></items>");
 items.FirstNode.ReplaceWith(new XComment("One was here"));
 ```
 
-🔹 نتیجه:
+ نتیجه:
 
 ```xml
 <items><!--One was here--><two /><three /></items>
@@ -776,7 +776,7 @@ contacts.Elements()
         .Remove();
 ```
 
-🔹 نتیجه:
+ نتیجه:
 
 ```xml
 <contacts>
@@ -801,7 +801,7 @@ contacts.DescendantNodes().OfType<XComment>().Remove();
 * اگر یک عنصر تنها یک نود فرزند **XText** داشته باشد، خصوصیت **Value** در **XElement** به‌عنوان یک **میان‌بر مناسب** برای محتوای آن نود عمل می‌کند.
 * در **XAttribute**، خصوصیت **Value** صرفاً مقدار صفت را نگه می‌دارد.
 
-با وجود تفاوت‌های ذخیره‌سازی، **X-DOM** مجموعه‌ای یکنواخت از عملیات برای کار با مقادیر عناصر و صفات ارائه می‌دهد. ✅
+با وجود تفاوت‌های ذخیره‌سازی، **X-DOM** مجموعه‌ای یکنواخت از عملیات برای کار با مقادیر عناصر و صفات ارائه می‌دهد. 
 
 ---
 
@@ -1567,7 +1567,7 @@ var customers = new XElement("customers", sqlQuery);
 
 ### حذف عناصر خالی و استفاده از XStreamingElement در LINQ to XML
 
-#### 1️⃣ حذف عناصر خالی
+#### 1⃣ حذف عناصر خالی
 
 گاهی در **پروژه کردن داده‌ها به X-DOM**، می‌خواهیم **عناصری که مقدار ندارند** یا داده‌ای برای آن‌ها موجود نیست، تولید نشوند.
 
@@ -1584,7 +1584,7 @@ var customers =
     select new XElement("customer", new XAttribute("id", c.ID),
         new XElement("name", c.Name),
         new XElement("buys", c.Purchases.Count),
-        lastBigBuy == null ? null :                     // ❌ شرط حذف عنصر خالی
+        lastBigBuy == null ? null :                     //  شرط حذف عنصر خالی
         new XElement("lastBigBuy",
             new XElement("description", lastBigBuy.Description),
             new XElement("price", lastBigBuy.Price)
@@ -1594,11 +1594,11 @@ var customers =
 ```
 
 * اگر مشتری **خرید با ارزش بالا نداشته باشد**، به جای تولید یک `XElement` خالی، **null** قرار داده می‌شود.
-* X-DOM هنگام ساختن XML، محتوای **null را نادیده می‌گیرد** و عنصر تولید نمی‌شود. ✅
+* X-DOM هنگام ساختن XML، محتوای **null را نادیده می‌گیرد** و عنصر تولید نمی‌شود. 
 
 ---
 
-#### 2️⃣ افزایش کارایی با XStreamingElement
+#### 2⃣ افزایش کارایی با XStreamingElement
 
 * اگر هدف فقط **ذخیره یا نمایش XML** باشد، می‌توان از **XStreamingElement** استفاده کرد تا حافظه بهتر مدیریت شود.
 * **XStreamingElement** شبیه XElement است اما:

@@ -1,229 +1,44 @@
-
-
-<!doctype html>
-<html lang="fa" dir="rtl">
-<head>
-  <meta charset="utf-8">
-  <link rel="icon" type="image/png" href="/Gitab/favicon.png">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>رمزنگاری</title>
-  <meta name="description" content="ترجمه‌های فارسی کتاب‌های فنی — سریع، مینیمال و قابل اتکا.">
-
-  <!-- استایل‌ها -->
-  <link rel="stylesheet" href="/Gitab/styles/main.css">
-  <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
-
-  <style>
-  @font-face {
-    font-family: 'Vazir';
-    src: url('/Gitab/fonts/Vazir-FD-WOL.ttf') format('truetype');
-    font-display: swap;
-  }
-  @font-face {
-    font-family: "Lalezar";
-    src: url('fonts/Lalezar.ttf') format('truetype');
-    font-display: swap;
-}
-  body {
-    font-family: 'Vazir', sans-serif;
-  }
-  </style>
-</head>
-
-<body>
-  <!-- هدر مشترک -->
-  <header class="header">
-    <div class="container nav-wrap">
-      <a href="/Gitab/" class="brand">
-        <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="26" height="26">
-        <span>Gitab</span>
-      </a>
-
-       <nav class="nav">
-         <a href="/Gitab/" >خانه</a>
-         <a href="/Gitab/books/list-books" >کتاب‌ها</a>
-         <a href="/Gitab/giter.html" >دوره ها</a>
-          <!-- 
-         <a href="/Gitab/translator.html" >مترجمین</a>
-           -->
-       </nav>
-
-      <div class="nav-actions">
-        <button id="themeToggle" class="icon-btn theme-btn" data-icon="moon" aria-label="تغییر تم">
-          <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن">
-          <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک">
-        </button>
-
-        <a class="icon-btn" href="https://github.com/hheydarian/Gitab" target="_blank" title="GitHub">
-          <img src="/Gitab/icone/github.svg" alt="GitHub">
-        </a>
-
-        <!-- دکمه منو برای موبایل -->
-        <button class="menu-toggle" aria-label="منو">
-          <img src="/Gitab/icone/menu.svg" alt="menu">
-        </button>
-      </div>
-    </div>
-  </header>
-
-  
-  <main class="site-main book-page">
-    <h1>فصل بیستم:  رمزنگاری</h1>
-<p>در این فصل، ما به بررسی APIهای اصلی <strong>Cryptography</strong> در .NET می‌پردازیم:</p>
-<ul>
-<li><strong>Windows Data Protection API (DPAPI)</strong></li>
-<li><strong>Hashing</strong></li>
-<li><strong>Symmetric encryption</strong></li>
-<li><strong>Public key encryption and signing</strong></li>
-</ul>
-<p>انواع (Types) پوشش داده شده در این فصل در <strong>namespace</strong>های زیر تعریف شده‌اند:</p>
-<pre class="hljs"><code>System.Security;
+<!doctype html><html lang="fa" dir="rtl"> <head><script>
+    if (window.location.pathname.startsWith('/gitab/')) {
+      window.location.replace(window.location.pathname.replace(/^\/gitab\//i, '/Gitab/') + window.location.search + window.location.hash);
+    }
+    (() => {
+      try {
+        const t = localStorage.getItem('gitab-theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', t);
+        document.documentElement.dataset.colorMode = t;
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        document.documentElement.dataset.colorMode = 'dark';
+      }
+    })();
+  </script> <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5"> <title>رمزنگاری</title><meta name="description" content="رمزنگاری — مطالعه آنلاین و رایگان از کتاب «سی‌شارپ ۱۲ در یک نگاه» (C# 12 in a Nutshell) اثر Joseph Albahari با ترجمه حامد حیدریان در گیتاب."> <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"><meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"> <meta name="theme-color" content="#090d16"><meta name="referrer" content="strict-origin-when-cross-origin"> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https:; frame-src https://www.youtube.com https://www.youtube-nocookie.com https://maps.google.com https://www.google.com; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self';"><link rel="icon" type="image/png" href="/Gitab/favicon.png"> <link rel="canonical" href="https://hheydarian.github.io/Gitab/books/book1/Book/20/Cryptography/"><link rel="alternate" hreflang="fa" href="https://hheydarian.github.io/Gitab/books/book1/Book/20/Cryptography/"> <link rel="alternate" hreflang="x-default" href="https://hheydarian.github.io/Gitab/books/book1/Book/20/Cryptography/"><link rel="alternate" type="text/plain" title="LLMs.txt" href="/Gitab/llms.txt"> <link rel="sitemap" type="application/xml" title="Sitemap" href="/Gitab/sitemap.xml"><meta property="og:locale" content="fa_IR"> <meta property="og:type" content="article"><meta property="og:site_name" content="گیتاب | Gitab"> <meta property="og:title" content="رمزنگاری"><meta property="og:description" content="رمزنگاری — مطالعه آنلاین و رایگان از کتاب «سی‌شارپ ۱۲ در یک نگاه» (C# 12 in a Nutshell) اثر Joseph Albahari با ترجمه حامد حیدریان در گیتاب."> <meta property="og:url" content="https://hheydarian.github.io/Gitab/books/book1/Book/20/Cryptography/"><meta property="og:image" content="https://hheydarian.github.io/Gitab/images/csharp-12/Cover.jpg"> <meta property="og:image:alt" content="رمزنگاری"><meta name="twitter:card" content="summary_large_image"> <meta name="twitter:title" content="رمزنگاری"><meta name="twitter:description" content="رمزنگاری — مطالعه آنلاین و رایگان از کتاب «سی‌شارپ ۱۲ در یک نگاه» (C# 12 in a Nutshell) اثر Joseph Albahari با ترجمه حامد حیدریان در گیتاب."> <meta name="twitter:image" content="https://hheydarian.github.io/Gitab/images/csharp-12/Cover.jpg"><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://hheydarian.github.io/Gitab/#organization","name":"گیتاب | Gitab","alternateName":"Gitab","url":"https://hheydarian.github.io/Gitab/","logo":{"@type":"ImageObject","url":"https://hheydarian.github.io/Gitab/favicon.png"},"sameAs":["https://github.com/hheydarian/Gitab"]},{"@type":"WebSite","@id":"https://hheydarian.github.io/Gitab/#website","url":"https://hheydarian.github.io/Gitab/","name":"گیتاب | Gitab","inLanguage":"fa-IR","publisher":{"@id":"https://hheydarian.github.io/Gitab/#organization"},"potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://hheydarian.github.io/Gitab/books/list-books/?q={search_term_string}"},"query-input":"required name=search_term_string"}},{"@type":"WebPage","@id":"https://hheydarian.github.io/Gitab/books/book1/Book/20/Cryptography/#webpage","url":"https://hheydarian.github.io/Gitab/books/book1/Book/20/Cryptography/","name":"رمزنگاری","description":"رمزنگاری — مطالعه آنلاین و رایگان از کتاب «سی‌شارپ ۱۲ در یک نگاه» (C# 12 in a Nutshell) اثر Joseph Albahari با ترجمه حامد حیدریان در گیتاب.","inLanguage":"fa-IR","isPartOf":{"@id":"https://hheydarian.github.io/Gitab/#website"}},{"@type":"TechArticle","headline":"رمزنگاری","description":"رمزنگاری — مطالعه آنلاین و رایگان از کتاب «سی‌شارپ ۱۲ در یک نگاه» (C# 12 in a Nutshell) اثر Joseph Albahari با ترجمه حامد حیدریان در گیتاب.","url":"https://hheydarian.github.io/Gitab/books/book1/Book/20/Cryptography/","inLanguage":"fa-IR","isAccessibleForFree":true,"author":{"@type":"Person","name":"Joseph Albahari"},"translator":{"@type":"Person","name":"حامد حیدریان"},"isPartOf":{"@type":"Book","name":"سی‌شارپ ۱۲ در یک نگاه","alternateName":"C# 12 in a Nutshell","url":"https://hheydarian.github.io/Gitab/books/book1/"}}]}</script> <link rel="preload" href="/Gitab/fonts/Vazirmatn.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/Gitab/styles/main.css?v=2.4" as="style"> <link rel="preload" href="/Gitab/styles/gitab-modern.css?v=2.5" as="style"><style>@font-face{font-family:'Lalezar';src:url('/Gitab/fonts/Lalezar.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}@font-face{font-family:'Vazirmatn';src:url('/Gitab/fonts/Vazirmatn.woff2') format('woff2');font-weight:100 900;font-style:normal;font-display:swap}html,body,button,input,optgroup,select,textarea,.filter-pill{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}input::placeholder,textarea::placeholder{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}</style> <link rel="stylesheet" href="/Gitab/styles/main.css?v=2.4"><link rel="stylesheet" href="/Gitab/styles/gitab-modern.css?v=2.5"> <link rel="stylesheet" href="/Gitab/styles/vendor/github-dark.min.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="/Gitab/styles/vendor/github-dark.min.css"></noscript></head> <body><header class="header"> <div class="container nav-wrap"><a href="/Gitab/" class="brand" aria-label="صفحه اصلی گیتاب"> <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="30" height="30" decoding="async"> <span class="brand-text">Gitab</span> </a> <nav class="nav" id="mainNav"><a href="/Gitab/" >خانه</a> <a href="/Gitab/books/list-books" aria-current="page">کتاب‌ها</a> <a href="/Gitab/courses/" >دوره‌ها</a> <a href="/Gitab/translator.html" >مترجمین</a></nav> <div class="nav-actions"><button id="themeToggle" class="theme-toggle-btn" aria-label="تغییر تم" title="تغییر تم"> <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن" width="18" height="18" decoding="async" style="display:none"> <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک" width="18" height="18" decoding="async"> </button> <a class="btn-github-pill" href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" title="مشاهده سورس گیتاب در گیت‌هاب"> <img src="/Gitab/icone/github.svg" alt="GitHub" width="16" height="16" decoding="async"> <span>گیت‌هاب</span> </a> <button class="mobile-menu-btn" id="mobileMenuBtn" type="button" aria-label="باز کردن منو" aria-expanded="false"> <svg class="mob-icon-open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="4" y1="7" x2="20" y2="7"></line> <line x1="4" y1="12" x2="20" y2="12"></line> <line x1="4" y1="17" x2="14" y2="17"></line> </svg> <svg class="mob-icon-close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="18" y1="6" x2="6" y2="18"></line> <line x1="6" y1="6" x2="18" y2="18"></line> </svg> </button></div> </div><div class="mobile-drawer" id="mobileDrawer" aria-hidden="true"> <div class="mobile-drawer-inner"><div class="mobile-drawer-section-label">ناوبری سریع</div><nav class="mobile-drawer-links" aria-label="منوی موبایل"> <a href="/Gitab/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M3 10.5 12 3l9 7.5"></path> <path d="M5 9.5V20a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V9.5"></path> </svg> </span> <span class="mob-nav-text">صفحه نخست</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/books/list-books" class="mobile-drawer-link active" aria-current="page"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path> </svg> </span> <span class="mob-nav-text">کتابخانه و فهرست کتاب‌ها</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/courses/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path> <path d="M6 12v5c3 3 9 3 12 0v-5"></path> </svg> </span> <span class="mob-nav-text">دوره‌های آموزشی</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/translator.html" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path> <circle cx="9" cy="7" r="4"></circle> <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path> <path d="M16 3.13a4 4 0 0 1 0 7.75"></path> </svg> </span> <span class="mob-nav-text">مترجمین و همکاران</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> </nav><div class="mobile-drawer-divider"></div><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" class="mobile-drawer-link mobile-drawer-gh"> <span class="mob-nav-icon" aria-hidden="true"> <img src="/Gitab/icone/github.svg" alt="" width="17" height="17" loading="lazy" decoding="async"> </span> <span class="mob-nav-text">مخزن گیت‌هاب پروژه</span> <span class="mob-nav-ext" aria-hidden="true">↗</span> </a> </div></div> </header><div class="reading-progress-track"> <div class="reading-progress-fill" id="readingProgressBar"></div></div> <main class="site-main chapter-reading-page"><div class="chapter-page-wrapper"> <nav class="chapter-clean-breadcrumb" aria-label="مسیر راهنما" dir="rtl"><a href="/Gitab/">خانه</a> <span class="bc-sep" aria-hidden="true">/</span> <a href="/Gitab/books/list-books/">کتاب‌ها</a> <span class="bc-sep" aria-hidden="true">/</span> <a href="/Gitab/books/book1/"><bdi>سی‌شارپ ۱۲ در یک نگاه</bdi></a> <span class="bc-sep" aria-hidden="true">/</span> <span class="bc-current-leaf"><bdi>رمزنگاری</bdi></span></nav> <article class="chapter-prose-container markdown-body" id="chapterArticle" dir="rtl"><h1>فصل بیستم: رمزنگاری</h1><p>در این فصل، ما به بررسی APIهای اصلی <strong>Cryptography</strong> در .NET می‌پردازیم:</p><ul> <li><strong>Windows Data Protection API (DPAPI)</strong></li><li><strong>Hashing</strong></li><li><strong>Symmetric encryption</strong></li><li><strong>Public key encryption and signing</strong></li></ul> <p>انواع (Types) پوشش داده شده در این فصل در <strong>namespace</strong>های زیر تعریف شده‌اند:</p><pre class="hljs"><code>System.Security;
 System.Security.Cryptography;
-</code></pre>
-<hr>
-<h3>مروری کلی 📑</h3>
-<p>جدول <strong>۲۰-۱</strong> خلاصه‌ای از گزینه‌های <strong>Cryptography</strong> در .NET را نشان می‌دهد. در بخش‌های بعدی، هر یک از این موارد را به تفصیل بررسی خواهیم کرد.</p>
- <div align="center">
-<p><img src="../../../assets/image/20/Table-20-1.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<h3>پشتیبانی‌های ویژه‌تر در .NET ✨</h3>
-<p>.NET همچنین پشتیبانی‌های تخصصی‌تری برای <strong>ایجاد و اعتبارسنجی امضاهای مبتنی بر XML</strong> در <code>System.Security.Cryptography.Xml</code> و همچنین <strong>انواع (Types) مرتبط با کار با گواهی‌های دیجیتال</strong> در <code>System.Security.Cryptography.X509Certificates</code> ارائه می‌دهد.</p>
-<hr>
-<h3>Windows Data Protection 🪟🔐</h3>
-<p>ویژگی <strong>Windows Data Protection</strong> فقط روی ویندوز در دسترس است و در سیستم‌عامل‌های دیگر یک استثناء از نوع <code>PlatformNotSupportedException</code> ایجاد می‌کند.</p>
-<p>در بخش <strong>“File and Directory Operations”</strong> در صفحه ۷۲۳ توضیح دادیم که چگونه می‌توانید از <code>File.Encrypt</code> برای درخواست رمزنگاری شفاف (transparent) فایل توسط سیستم‌عامل استفاده کنید:</p>
-<pre class="hljs"><code>File.WriteAllText (<span class="hljs-string">&quot;myfile.txt&quot;</span>, <span class="hljs-string">&quot;&quot;</span>);
+</code></pre> <hr><h3>مروری کلی</h3><p>جدول <strong>۲۰-۱</strong> خلاصه‌ای از گزینه‌های <strong>Cryptography</strong> در .NET را نشان می‌دهد. در بخش‌های بعدی، هر یک از این موارد را به تفصیل بررسی خواهیم کرد.</p><div align="center"> <p><img src="../../../assets/image/20/Table-20-1.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <h3>پشتیبانی‌های ویژه‌تر در .NET</h3><p>.NET همچنین پشتیبانی‌های تخصصی‌تری برای <strong>ایجاد و اعتبارسنجی امضاهای مبتنی بر XML</strong> در <code>System.Security.Cryptography.Xml</code> و همچنین <strong>انواع (Types) مرتبط با کار با گواهی‌های دیجیتال</strong> در <code>System.Security.Cryptography.X509Certificates</code> ارائه می‌دهد.</p><hr> <h3>Windows Data Protection</h3><p>ویژگی <strong>Windows Data Protection</strong> فقط روی ویندوز در دسترس است و در سیستم‌عامل‌های دیگر یک استثناء از نوع <code>PlatformNotSupportedException</code> ایجاد می‌کند.</p><p>در بخش <strong>“File and Directory Operations”</strong> در صفحه ۷۲۳ توضیح دادیم که چگونه می‌توانید از <code>File.Encrypt</code> برای درخواست رمزنگاری شفاف (transparent) فایل توسط سیستم‌عامل استفاده کنید:</p><pre class="hljs"><code>File.WriteAllText (<span class="hljs-string">&quot;myfile.txt&quot;</span>, <span class="hljs-string">&quot;&quot;</span>);
 File.Encrypt (<span class="hljs-string">&quot;myfile.txt&quot;</span>);
 File.AppendAllText (<span class="hljs-string">&quot;myfile.txt&quot;</span>, <span class="hljs-string">&quot;sensitive data&quot;</span>);
-</code></pre>
-<p>🔑 در این حالت، رمزنگاری از کلیدی استفاده می‌کند که از <strong>رمز عبور کاربر لاگین‌شده</strong> استخراج شده است. شما می‌توانید همین کلید استخراج‌شده ضمنی را برای رمزنگاری یک <strong>آرایه‌ی بایت</strong> با استفاده از <strong>Windows Data Protection API (DPAPI)</strong> به‌کار بگیرید.</p>
-<p>DPAPI از طریق کلاس <code>ProtectedData</code> در دسترس قرار گرفته است؛ کلاسی ساده با دو متد <strong>static</strong>:</p>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-built_in">byte</span>[] <span class="hljs-title">Protect</span>
+</code></pre> <p>در این حالت، رمزنگاری از کلیدی استفاده می‌کند که از <strong>رمز عبور کاربر لاگین‌شده</strong> استخراج شده است. شما می‌توانید همین کلید استخراج‌شده ضمنی را برای رمزنگاری یک <strong>آرایه‌ی بایت</strong> با استفاده از <strong>Windows Data Protection API (DPAPI)</strong> به‌کار بگیرید.</p><p>DPAPI از طریق کلاس <code>ProtectedData</code> در دسترس قرار گرفته است؛ کلاسی ساده با دو متد <strong>static</strong>:</p><pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-built_in">byte</span>[] <span class="hljs-title">Protect</span>
  (<span class="hljs-params"><span class="hljs-built_in">byte</span>[] userData, <span class="hljs-built_in">byte</span>[] optionalEntropy, DataProtectionScope scope</span>)</span>;
 
 <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-built_in">byte</span>[] <span class="hljs-title">Unprotect</span>
  (<span class="hljs-params"><span class="hljs-built_in">byte</span>[] encryptedData, <span class="hljs-built_in">byte</span>[] optionalEntropy, DataProtectionScope scope</span>)</span>;
-</code></pre>
-<p>🔒 هر چیزی که در <code>optionalEntropy</code> قرار دهید به کلید اضافه می‌شود و امنیت آن را افزایش می‌دهد.<br>
-پارامتر <code>DataProtectionScope</code> دو گزینه دارد:</p>
-<ul>
-<li><strong>CurrentUser</strong> → کلید از اطلاعات کاربری (credentials) کاربر فعلی استخراج می‌شود.</li>
-<li><strong>LocalMachine</strong> → یک کلید در سطح کل سیستم (machine-wide) استفاده می‌شود که بین همه کاربران مشترک است.</li>
-</ul>
-<p>➡️ این یعنی اگر <strong>CurrentUser</strong> انتخاب شود، داده‌های رمزنگاری‌شده توسط یک کاربر قابل رمزگشایی توسط کاربر دیگر نخواهند بود. در حالی‌که کلید <strong>LocalMachine</strong> امنیت کمتری دارد، اما برای سرویس‌های ویندوز یا برنامه‌هایی که باید تحت حساب‌های مختلف کار کنند، مناسب است.</p>
-<hr>
-<h3>نمونه‌ای ساده از رمزنگاری و رمزگشایی 🧩</h3>
-<pre class="hljs"><code><span class="hljs-built_in">byte</span>[] original = {<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>};
+</code></pre> <p>هر چیزی که در <code>optionalEntropy</code> قرار دهید به کلید اضافه می‌شود و امنیت آن را افزایش می‌دهد.<br> پارامتر <code>DataProtectionScope</code> دو گزینه دارد:</p><ul> <li><strong>CurrentUser</strong> → کلید از اطلاعات کاربری (credentials) کاربر فعلی استخراج می‌شود.</li><li><strong>LocalMachine</strong> → یک کلید در سطح کل سیستم (machine-wide) استفاده می‌شود که بین همه کاربران مشترک است.</li></ul> <p>این یعنی اگر <strong>CurrentUser</strong> انتخاب شود، داده‌های رمزنگاری‌شده توسط یک کاربر قابل رمزگشایی توسط کاربر دیگر نخواهند بود. در حالی‌که کلید <strong>LocalMachine</strong> امنیت کمتری دارد، اما برای سرویس‌های ویندوز یا برنامه‌هایی که باید تحت حساب‌های مختلف کار کنند، مناسب است.</p><hr> <h3>نمونه‌ای ساده از رمزنگاری و رمزگشایی</h3><pre class="hljs"><code><span class="hljs-built_in">byte</span>[] original = {<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>};
 DataProtectionScope scope = DataProtectionScope.CurrentUser;
 <span class="hljs-built_in">byte</span>[] encrypted = ProtectedData.Protect (original, <span class="hljs-literal">null</span>, scope);
 <span class="hljs-built_in">byte</span>[] decrypted = ProtectedData.Unprotect (encrypted, <span class="hljs-literal">null</span>, scope);
 <span class="hljs-comment">// decrypted is now {1, 2, 3, 4, 5}</span>
-</code></pre>
-<p>🛡 Windows Data Protection امنیت متوسطی در برابر مهاجمی که دسترسی کامل به رایانه دارد فراهم می‌کند؛ این موضوع بستگی به قدرت رمز عبور کاربر دارد.<br>
-با <strong>LocalMachine</strong>، این روش فقط در برابر کسانی که دسترسی فیزیکی یا الکترونیکی محدود دارند مؤثر است.</p>
-<hr>
-<h3>Hashing 🔑📊</h3>
-<p>یک <strong>الگوریتم Hashing</strong> حجم بزرگی از داده‌ها را به یک <strong>کد ثابت و کوچک (hashcode)</strong> تبدیل می‌کند.<br>
-این الگوریتم‌ها طوری طراحی شده‌اند که حتی اگر تنها یک بیت در داده‌ی اصلی تغییر کند، نتیجه‌ی <strong>hashcode</strong> کاملاً متفاوت خواهد بود.</p>
-<p>📂 این ویژگی باعث می‌شود که hashing برای <strong>مقایسه فایل‌ها</strong> یا <strong>تشخیص خرابی‌های تصادفی (یا مخرب) در فایل یا جریان داده (data stream)</strong> بسیار مناسب باشد.</p>
-<p>علاوه بر این، <strong>Hashing نوعی رمزنگاری یک‌طرفه</strong> محسوب می‌شود، زیرا بازگرداندن hashcode به داده اصلی تقریباً غیرممکن است.<br>
-به همین دلیل، ذخیره‌سازی رمز عبور در پایگاه داده به‌صورت hash یک روش ایمن است.<br>
-🔐 اگر پایگاه داده شما به خطر بیفتد، مهاجم به رمز عبورهای متنی ساده (plain-text) دسترسی پیدا نخواهد کرد.<br>
-برای احراز هویت، کافی است ورودی کاربر را hash کرده و با مقدار ذخیره‌شده در پایگاه داده مقایسه کنید.</p>
-<hr>
-<h3>استفاده از ComputeHash 🖥</h3>
-<p>برای تولید hash، متد <code>ComputeHash</code> از یکی از زیرکلاس‌های <code>HashAlgorithm</code> (مثل <code>SHA1</code> یا <code>SHA256</code>) فراخوانی می‌شود:</p>
-<pre class="hljs"><code><span class="hljs-built_in">byte</span>[] hash;
+</code></pre> <p>Windows Data Protection امنیت متوسطی در برابر مهاجمی که دسترسی کامل به رایانه دارد فراهم می‌کند؛ این موضوع بستگی به قدرت رمز عبور کاربر دارد.<br> با <strong>LocalMachine</strong>، این روش فقط در برابر کسانی که دسترسی فیزیکی یا الکترونیکی محدود دارند مؤثر است.</p><hr> <h3>Hashing</h3><p>یک <strong>الگوریتم Hashing</strong> حجم بزرگی از داده‌ها را به یک <strong>کد ثابت و کوچک (hashcode)</strong> تبدیل می‌کند.<br> این الگوریتم‌ها طوری طراحی شده‌اند که حتی اگر تنها یک بیت در داده‌ی اصلی تغییر کند، نتیجه‌ی <strong>hashcode</strong> کاملاً متفاوت خواهد بود.</p><p>این ویژگی باعث می‌شود که hashing برای <strong>مقایسه فایل‌ها</strong> یا <strong>تشخیص خرابی‌های تصادفی (یا مخرب) در فایل یا جریان داده (data stream)</strong> بسیار مناسب باشد.</p><p>علاوه بر این، <strong>Hashing نوعی رمزنگاری یک‌طرفه</strong> محسوب می‌شود، زیرا بازگرداندن hashcode به داده اصلی تقریباً غیرممکن است.<br> به همین دلیل، ذخیره‌سازی رمز عبور در پایگاه داده به‌صورت hash یک روش ایمن است.<br> اگر پایگاه داده شما به خطر بیفتد، مهاجم به رمز عبورهای متنی ساده (plain-text) دسترسی پیدا نخواهد کرد.<br> برای احراز هویت، کافی است ورودی کاربر را hash کرده و با مقدار ذخیره‌شده در پایگاه داده مقایسه کنید.</p><hr> <h3>استفاده از ComputeHash</h3><p>برای تولید hash، متد <code>ComputeHash</code> از یکی از زیرکلاس‌های <code>HashAlgorithm</code> (مثل <code>SHA1</code> یا <code>SHA256</code>) فراخوانی می‌شود:</p><pre class="hljs"><code><span class="hljs-built_in">byte</span>[] hash;
 <span class="hljs-keyword">using</span> (Stream fs = File.OpenRead (<span class="hljs-string">&quot;checkme.doc&quot;</span>))
   hash = SHA1.Create().ComputeHash (fs);   <span class="hljs-comment">// SHA1 hash is 20 bytes long</span>
-</code></pre>
-<p>متد <code>ComputeHash</code> همچنین یک <strong>آرایه‌ی بایت</strong> را می‌پذیرد که برای hash کردن رمزهای عبور بسیار کاربردی است (روش امن‌تر در بخش <strong>“Hashing Passwords”</strong> در صفحه ۸۷۸ توضیح داده شده است):</p>
-<pre class="hljs"><code><span class="hljs-built_in">byte</span>[] data = System.Text.Encoding.UTF8.GetBytes (<span class="hljs-string">&quot;stRhong%pword&quot;</span>);
+</code></pre> <p>متد <code>ComputeHash</code> همچنین یک <strong>آرایه‌ی بایت</strong> را می‌پذیرد که برای hash کردن رمزهای عبور بسیار کاربردی است (روش امن‌تر در بخش <strong>“Hashing Passwords”</strong> در بخش‌های مرتبط توضیح داده شده است):</p><pre class="hljs"><code><span class="hljs-built_in">byte</span>[] data = System.Text.Encoding.UTF8.GetBytes (<span class="hljs-string">&quot;stRhong%pword&quot;</span>);
 <span class="hljs-built_in">byte</span>[] hash = SHA256.Create().ComputeHash (data);
-</code></pre>
-<p>📌 متد <code>GetBytes</code> در یک شیء از نوع <code>Encoding</code>، یک رشته (string) را به آرایه‌ی بایت تبدیل می‌کند؛ متد <code>GetString</code> آن را برعکس برمی‌گرداند.<br>
-اما یک شیء <code>Encoding</code> نمی‌تواند یک آرایه‌ی بایت رمزنگاری‌شده یا hash شده را به رشته برگرداند، چون داده‌ی scramble شده معمولاً قوانین encoding متنی را نقض می‌کند.</p>
-<p>به جای آن باید از متدهای زیر استفاده کنید:</p>
-<ul>
-<li><code>Convert.ToBase64String</code></li>
-<li><code>Convert.FromBase64String</code></li>
-</ul>
-<p>این‌ها تبدیل بین هر <strong>آرایه‌ی بایت</strong> و یک رشته معتبر (و سازگار با XML یا JSON) را انجام می‌دهند.</p>
-<hr>
-<h3>الگوریتم‌های Hash در .NET 🧮</h3>
-<p><code>SHA1</code> و <code>SHA256</code> دو نمونه از زیرنوع‌های <code>HashAlgorithm</code> هستند که توسط .NET ارائه شده‌اند.<br>
-مهم‌ترین الگوریتم‌ها، به ترتیب <strong>افزایش امنیت</strong> عبارت‌اند از: …</p>
- <div align="center">
-<p><img src="../../../assets/image/20/Table-20-2.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<h3>الگوریتم‌های Hash در .NET 🧮</h3>
-<p>تمامی پنج الگوریتم در پیاده‌سازی‌های فعلی تقریباً با سرعت مشابهی اجرا می‌شوند، به جز <strong>SHA256</strong> که حدود ۲ تا ۳ برابر سریع‌تر است (این موضوع می‌تواند بسته به سخت‌افزار و سیستم‌عامل متفاوت باشد).</p>
-<p>📊 به‌طور تقریبی می‌توانید انتظار سرعت حداقل <strong>۵۰۰ مگابایت در ثانیه</strong> را روی یک دسکتاپ یا سرور سال ۲۰۲۴ از تمامی این الگوریتم‌ها داشته باشید.</p>
-<p>🔐 هرچه طول hash بیشتر باشد، احتمال <strong>collision</strong> (یعنی تولید یک hash مشابه از دو فایل متفاوت) کاهش می‌یابد. بنابراین:</p>
-<ul>
-<li>هنگام <strong>hash کردن رمز عبورها</strong> یا داده‌های حساس امنیتی، حداقل از <strong>SHA256</strong> استفاده کنید.</li>
-<li>الگوریتم‌های <strong>MD5</strong> و <strong>SHA1</strong> از نظر امنیتی ضعیف محسوب می‌شوند و تنها برای محافظت در برابر خرابی‌های تصادفی مناسب‌اند، نه دستکاری‌های عمدی.</li>
-</ul>
-<p>در .NET 8 و بالاتر، پشتیبانی از آخرین استاندارد <strong>SHA-3</strong> نیز اضافه شده است؛ شامل کلاس‌های:</p>
-<ul>
-<li><code>SHA3_256</code></li>
-<li><code>SHA3_384</code></li>
-<li><code>SHA3_512</code></li>
-</ul>
-<p>الگوریتم‌های SHA-3 از الگوریتم‌های قبلی <strong>امن‌تر (و البته کندتر)</strong> هستند، اما به <strong>Windows Build 25324+</strong> یا <strong>Linux با OpenSSL 1.1.1+</strong> نیاز دارند.<br>
-می‌توانید پشتیبانی سیستم‌عامل را از طریق ویژگی <strong>static</strong> به نام <code>IsSupported</code> در این کلاس‌ها بررسی کنید.</p>
-<hr>
-<h3>Hashing Passwords 🔑🧂</h3>
-<p>الگوریتم‌های SHA با طول بیشتر برای hash کردن رمز عبورها مناسب‌اند، به شرطی که یک <strong>سیاست رمز عبور قوی</strong> اعمال کنید تا از حمله‌ی <strong>dictionary attack</strong> جلوگیری شود.<br>
-📖 در این نوع حمله، مهاجم جدولی از رمزها ایجاد می‌کند که شامل hash تمام کلمات موجود در یک فرهنگ لغت است.</p>
-<p>✅ یک تکنیک استاندارد هنگام hash کردن رمزها، استفاده از <strong>salt</strong> است:<br>
-یک دنباله‌ی طولانی از بایت‌ها که ابتدا با یک <strong>تولیدکننده اعداد تصادفی</strong> به دست می‌آید و سپس پیش از hash شدن، با رمز عبور ترکیب می‌شود.</p>
-<p>این کار دو مزیت مهم دارد:</p>
-<ul>
-<li>مهاجم باید از بایت‌های salt هم اطلاع داشته باشد.</li>
-<li>استفاده از <strong>rainbow tables</strong> (پایگاه‌های داده‌ی از پیش محاسبه‌شده‌ی رمزها و hash آن‌ها) بی‌اثر می‌شود؛ هرچند حمله‌ی dictionary همچنان با قدرت محاسباتی کافی ممکن است.</li>
-</ul>
-<hr>
-<h3>Password Stretching ⏳</h3>
-<p>می‌توانید امنیت را با تکنیک <strong>stretching</strong> تقویت کنید؛ یعنی با <strong>تکرار چندباره hash کردن</strong>، فرآیند تولید hash را محاسباتی‌تر کنید.</p>
-<p>به‌عنوان مثال:<br>
-اگر ۱۰۰ بار rehash کنید، حمله‌ی dictionary که شاید یک ماه طول بکشد، اکنون حدود <strong>۸ سال</strong> زمان خواهد برد.</p>
-<p>کلاس‌های زیر دقیقاً همین نوع stretching را پیاده‌سازی می‌کنند و همچنین امکان استفاده آسان از salting را فراهم می‌آورند:</p>
-<ul>
-<li><code>KeyDerivation</code></li>
-<li><code>Rfc2898DeriveBytes</code></li>
-<li><code>PasswordDeriveBytes</code></li>
-</ul>
-<p>از میان آن‌ها، بهترین انتخاب:<br>
-<strong><code>KeyDerivation.Pbkdf2</code></strong> ✅</p>
-<p>مثال:</p>
-<pre class="hljs"><code><span class="hljs-built_in">byte</span>[] encrypted = KeyDerivation.Pbkdf2 (
+</code></pre> <p>متد <code>GetBytes</code> در یک شیء از نوع <code>Encoding</code>، یک رشته (string) را به آرایه‌ی بایت تبدیل می‌کند؛ متد <code>GetString</code> آن را برعکس برمی‌گرداند.<br> اما یک شیء <code>Encoding</code> نمی‌تواند یک آرایه‌ی بایت رمزنگاری‌شده یا hash شده را به رشته برگرداند، چون داده‌ی scramble شده معمولاً قوانین encoding متنی را نقض می‌کند.</p><p>به جای آن باید از متدهای زیر استفاده کنید:</p><ul> <li><code>Convert.ToBase64String</code></li><li><code>Convert.FromBase64String</code></li></ul> <p>این‌ها تبدیل بین هر <strong>آرایه‌ی بایت</strong> و یک رشته معتبر (و سازگار با XML یا JSON) را انجام می‌دهند.</p><hr> <h3>الگوریتم‌های Hash در .NET</h3><p><code>SHA1</code> و <code>SHA256</code> دو نمونه از زیرنوع‌های <code>HashAlgorithm</code> هستند که توسط .NET ارائه شده‌اند.<br> مهم‌ترین الگوریتم‌ها، به ترتیب <strong>افزایش امنیت</strong> عبارت‌اند از: …</p><div align="center"> <p><img src="../../../assets/image/20/Table-20-2.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <h3>الگوریتم‌های Hash در .NET</h3><p>تمامی پنج الگوریتم در پیاده‌سازی‌های فعلی تقریباً با سرعت مشابهی اجرا می‌شوند، به جز <strong>SHA256</strong> که حدود ۲ تا ۳ برابر سریع‌تر است (این موضوع می‌تواند بسته به سخت‌افزار و سیستم‌عامل متفاوت باشد).</p><p>به‌طور تقریبی می‌توانید انتظار سرعت حداقل <strong>۵۰۰ مگابایت در ثانیه</strong> را روی یک دسکتاپ یا سرور سال ۲۰۲۴ از تمامی این الگوریتم‌ها داشته باشید.</p><p>هرچه طول hash بیشتر باشد، احتمال <strong>collision</strong> (یعنی تولید یک hash مشابه از دو فایل متفاوت) کاهش می‌یابد. بنابراین:</p><ul> <li>هنگام <strong>hash کردن رمز عبورها</strong> یا داده‌های حساس امنیتی، حداقل از <strong>SHA256</strong> استفاده کنید.</li><li>الگوریتم‌های <strong>MD5</strong> و <strong>SHA1</strong> از نظر امنیتی ضعیف محسوب می‌شوند و تنها برای محافظت در برابر خرابی‌های تصادفی مناسب‌اند، نه دستکاری‌های عمدی.</li></ul> <p>در .NET 8 و بالاتر، پشتیبانی از آخرین استاندارد <strong>SHA-3</strong> نیز اضافه شده است؛ شامل کلاس‌های:</p><ul> <li><code>SHA3_256</code></li><li><code>SHA3_384</code></li><li><code>SHA3_512</code></li></ul> <p>الگوریتم‌های SHA-3 از الگوریتم‌های قبلی <strong>امن‌تر (و البته کندتر)</strong> هستند، اما به <strong>Windows Build 25324+</strong> یا <strong>Linux با OpenSSL 1.1.1+</strong> نیاز دارند.<br> می‌توانید پشتیبانی سیستم‌عامل را از طریق ویژگی <strong>static</strong> به نام <code>IsSupported</code> در این کلاس‌ها بررسی کنید.</p><hr> <h3>Hashing Passwords</h3><p>الگوریتم‌های SHA با طول بیشتر برای hash کردن رمز عبورها مناسب‌اند، به شرطی که یک <strong>سیاست رمز عبور قوی</strong> اعمال کنید تا از حمله‌ی <strong>dictionary attack</strong> جلوگیری شود.<br> در این نوع حمله، مهاجم جدولی از رمزها ایجاد می‌کند که شامل hash تمام کلمات موجود در یک فرهنگ لغت است.</p><p>یک تکنیک استاندارد هنگام hash کردن رمزها، استفاده از <strong>salt</strong> است:<br> یک دنباله‌ی طولانی از بایت‌ها که ابتدا با یک <strong>تولیدکننده اعداد تصادفی</strong> به دست می‌آید و سپس پیش از hash شدن، با رمز عبور ترکیب می‌شود.</p><p>این کار دو مزیت مهم دارد:</p><ul> <li>مهاجم باید از بایت‌های salt هم اطلاع داشته باشد.</li><li>استفاده از <strong>rainbow tables</strong> (پایگاه‌های داده‌ی از پیش محاسبه‌شده‌ی رمزها و hash آن‌ها) بی‌اثر می‌شود؛ هرچند حمله‌ی dictionary همچنان با قدرت محاسباتی کافی ممکن است.</li></ul> <hr><h3>Password Stretching ⏳</h3><p>می‌توانید امنیت را با تکنیک <strong>stretching</strong> تقویت کنید؛ یعنی با <strong>تکرار چندباره hash کردن</strong>، فرآیند تولید hash را محاسباتی‌تر کنید.</p><p>به‌عنوان مثال:<br> اگر ۱۰۰ بار rehash کنید، حمله‌ی dictionary که شاید یک ماه طول بکشد، اکنون حدود <strong>۸ سال</strong> زمان خواهد برد.</p><p>کلاس‌های زیر دقیقاً همین نوع stretching را پیاده‌سازی می‌کنند و همچنین امکان استفاده آسان از salting را فراهم می‌آورند:</p><ul> <li><code>KeyDerivation</code></li><li><code>Rfc2898DeriveBytes</code></li><li><code>PasswordDeriveBytes</code></li></ul> <p>از میان آن‌ها، بهترین انتخاب:<br><strong><code>KeyDerivation.Pbkdf2</code></strong></p><p>مثال:</p><pre class="hljs"><code><span class="hljs-built_in">byte</span>[] encrypted = KeyDerivation.Pbkdf2 (
    password: <span class="hljs-string">&quot;stRhong%pword&quot;</span>,
    salt: Encoding.UTF8.GetBytes (<span class="hljs-string">&quot;j78Y#p)/saREN!y3@&quot;</span>),
    prf: KeyDerivationPrf.HMACSHA512,
    iterationCount: <span class="hljs-number">100</span>,
    numBytesRequested: <span class="hljs-number">64</span>);
-</code></pre>
-<p>📦 <code>KeyDerivation.Pbkdf2</code> نیازمند نصب بسته‌ی NuGet به نام:<br>
-<code>Microsoft.AspNetCore.Cryptography.KeyDerivation</code> است.<br>
-اگرچه این کلاس در <strong>namespace</strong> مربوط به <a href="http://ASP.NET">ASP.NET</a> Core قرار دارد، اما هر برنامه‌ی .NET می‌تواند از آن استفاده کند.</p>
-<hr>
-<h3>Symmetric Encryption 🔒⚖️</h3>
-<p>در <strong>رمزنگاری متقارن (Symmetric Encryption)</strong>، یک کلید یکسان برای <strong>رمزنگاری (encryption)</strong> و <strong>رمزگشایی (decryption)</strong> استفاده می‌شود.</p>
-<p>کتابخانه پایه‌ی .NET (BCL) چهار الگوریتم متقارن ارائه می‌دهد که در میان آن‌ها، <strong>Rijndael</strong> (تلفظ: &quot;راین‌دال&quot; یا &quot;رین‌دال&quot;) بهترین گزینه است؛ دیگر الگوریتم‌ها عمدتاً برای سازگاری با برنامه‌های قدیمی استفاده می‌شوند.</p>
-<p>✨ <strong>Rijndael</strong> سریع و امن است و در دو پیاده‌سازی ارائه می‌شود:</p>
-<ul>
-<li><code>Rijndael</code></li>
-<li><code>Aes</code></li>
-</ul>
-<p>این دو تقریباً مشابه‌اند؛ با این تفاوت که <code>Aes</code> اجازه نمی‌دهد اندازه‌ی بلوک (block size) را تغییر دهید و رمزنگاری را ضعیف کنید.<br>
-🔐 تیم امنیت CLR استفاده از <strong>Aes</strong> را توصیه می‌کند.</p>
-<p>هر دو الگوریتم کلیدهای متقارن با طول <strong>۱۶، ۲۴ یا ۳۲ بایت</strong> را پشتیبانی می‌کنند که همگی در حال حاضر ایمن محسوب می‌شوند.</p>
-<hr>
-<h3>نمونه رمزنگاری 📝</h3>
-<p>رمزنگاری یک آرایه‌ی بایت هنگام نوشتن در فایل با کلید ۱۶ بایتی:</p>
-<pre class="hljs"><code><span class="hljs-built_in">byte</span>[] key = {<span class="hljs-number">145</span>,<span class="hljs-number">12</span>,<span class="hljs-number">32</span>,<span class="hljs-number">245</span>,<span class="hljs-number">98</span>,<span class="hljs-number">132</span>,<span class="hljs-number">98</span>,<span class="hljs-number">214</span>,<span class="hljs-number">6</span>,<span class="hljs-number">77</span>,<span class="hljs-number">131</span>,<span class="hljs-number">44</span>,<span class="hljs-number">221</span>,<span class="hljs-number">3</span>,<span class="hljs-number">9</span>,<span class="hljs-number">50</span>};
+</code></pre> <p><code>KeyDerivation.Pbkdf2</code> نیازمند نصب بسته‌ی NuGet به نام:<br><code>Microsoft.AspNetCore.Cryptography.KeyDerivation</code> است.<br> اگرچه این کلاس در <strong>namespace</strong> مربوط به <a href="http://ASP.NET">ASP.NET</a> Core قرار دارد، اما هر برنامه‌ی .NET می‌تواند از آن استفاده کند.</p><hr> <h3>Symmetric Encryption</h3><p>در <strong>رمزنگاری متقارن (Symmetric Encryption)</strong>، یک کلید یکسان برای <strong>رمزنگاری (encryption)</strong> و <strong>رمزگشایی (decryption)</strong> استفاده می‌شود.</p><p>کتابخانه پایه‌ی .NET (BCL) چهار الگوریتم متقارن ارائه می‌دهد که در میان آن‌ها، <strong>Rijndael</strong> (تلفظ: &quot;راین‌دال&quot; یا &quot;رین‌دال&quot;) بهترین گزینه است؛ دیگر الگوریتم‌ها عمدتاً برای سازگاری با برنامه‌های قدیمی استفاده می‌شوند.</p><p><strong>Rijndael</strong> سریع و امن است و در دو پیاده‌سازی ارائه می‌شود:</p><ul> <li><code>Rijndael</code></li><li><code>Aes</code></li></ul> <p>این دو تقریباً مشابه‌اند؛ با این تفاوت که <code>Aes</code> اجازه نمی‌دهد اندازه‌ی بلوک (block size) را تغییر دهید و رمزنگاری را ضعیف کنید.<br> تیم امنیت CLR استفاده از <strong>Aes</strong> را توصیه می‌کند.</p><p>هر دو الگوریتم کلیدهای متقارن با طول <strong>۱۶، ۲۴ یا ۳۲ بایت</strong> را پشتیبانی می‌کنند که همگی در حال حاضر ایمن محسوب می‌شوند.</p><hr> <h3>نمونه رمزنگاری</h3><p>رمزنگاری یک آرایه‌ی بایت هنگام نوشتن در فایل با کلید ۱۶ بایتی:</p><pre class="hljs"><code><span class="hljs-built_in">byte</span>[] key = {<span class="hljs-number">145</span>,<span class="hljs-number">12</span>,<span class="hljs-number">32</span>,<span class="hljs-number">245</span>,<span class="hljs-number">98</span>,<span class="hljs-number">132</span>,<span class="hljs-number">98</span>,<span class="hljs-number">214</span>,<span class="hljs-number">6</span>,<span class="hljs-number">77</span>,<span class="hljs-number">131</span>,<span class="hljs-number">44</span>,<span class="hljs-number">221</span>,<span class="hljs-number">3</span>,<span class="hljs-number">9</span>,<span class="hljs-number">50</span>};
 <span class="hljs-built_in">byte</span>[] iv  = {<span class="hljs-number">15</span>,<span class="hljs-number">122</span>,<span class="hljs-number">132</span>,<span class="hljs-number">5</span>,<span class="hljs-number">93</span>,<span class="hljs-number">198</span>,<span class="hljs-number">44</span>,<span class="hljs-number">31</span>,<span class="hljs-number">9</span>,<span class="hljs-number">39</span>,<span class="hljs-number">241</span>,<span class="hljs-number">49</span>,<span class="hljs-number">250</span>,<span class="hljs-number">188</span>,<span class="hljs-number">80</span>,<span class="hljs-number">7</span>};
 <span class="hljs-built_in">byte</span>[] data = { <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span> };   <span class="hljs-comment">// داده‌ای که رمزنگاری می‌کنیم.</span>
 <span class="hljs-keyword">using</span> (SymmetricAlgorithm algorithm = Aes.Create())
@@ -231,10 +46,7 @@ DataProtectionScope scope = DataProtectionScope.CurrentUser;
 <span class="hljs-keyword">using</span> (Stream f = File.Create (<span class="hljs-string">&quot;encrypted.bin&quot;</span>))
 <span class="hljs-keyword">using</span> (Stream c = <span class="hljs-keyword">new</span> CryptoStream (f, encryptor, CryptoStreamMode.Write))
  c.Write (data, <span class="hljs-number">0</span>, data.Length);
-</code></pre>
-<hr>
-<h3>نمونه رمزگشایی 🔓</h3>
-<pre class="hljs"><code><span class="hljs-built_in">byte</span>[] key = {<span class="hljs-number">145</span>,<span class="hljs-number">12</span>,<span class="hljs-number">32</span>,<span class="hljs-number">245</span>,<span class="hljs-number">98</span>,<span class="hljs-number">132</span>,<span class="hljs-number">98</span>,<span class="hljs-number">214</span>,<span class="hljs-number">6</span>,<span class="hljs-number">77</span>,<span class="hljs-number">131</span>,<span class="hljs-number">44</span>,<span class="hljs-number">221</span>,<span class="hljs-number">3</span>,<span class="hljs-number">9</span>,<span class="hljs-number">50</span>};
+</code></pre> <hr><h3>نمونه رمزگشایی</h3><pre class="hljs"><code><span class="hljs-built_in">byte</span>[] key = {<span class="hljs-number">145</span>,<span class="hljs-number">12</span>,<span class="hljs-number">32</span>,<span class="hljs-number">245</span>,<span class="hljs-number">98</span>,<span class="hljs-number">132</span>,<span class="hljs-number">98</span>,<span class="hljs-number">214</span>,<span class="hljs-number">6</span>,<span class="hljs-number">77</span>,<span class="hljs-number">131</span>,<span class="hljs-number">44</span>,<span class="hljs-number">221</span>,<span class="hljs-number">3</span>,<span class="hljs-number">9</span>,<span class="hljs-number">50</span>};
 <span class="hljs-built_in">byte</span>[] iv  = {<span class="hljs-number">15</span>,<span class="hljs-number">122</span>,<span class="hljs-number">132</span>,<span class="hljs-number">5</span>,<span class="hljs-number">93</span>,<span class="hljs-number">198</span>,<span class="hljs-number">44</span>,<span class="hljs-number">31</span>,<span class="hljs-number">9</span>,<span class="hljs-number">39</span>,<span class="hljs-number">241</span>,<span class="hljs-number">49</span>,<span class="hljs-number">250</span>,<span class="hljs-number">188</span>,<span class="hljs-number">80</span>,<span class="hljs-number">7</span>};
 <span class="hljs-built_in">byte</span>[] decrypted = <span class="hljs-keyword">new</span> <span class="hljs-built_in">byte</span>[<span class="hljs-number">5</span>];
 <span class="hljs-keyword">using</span> (SymmetricAlgorithm algorithm = Aes.Create())
@@ -243,53 +55,14 @@ DataProtectionScope scope = DataProtectionScope.CurrentUser;
 <span class="hljs-keyword">using</span> (Stream c = <span class="hljs-keyword">new</span> CryptoStream (f, decryptor, CryptoStreamMode.Read))
  <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> b; (b = c.ReadByte()) &gt; <span class="hljs-number">-1</span>;)
    Console.Write (b + <span class="hljs-string">&quot; &quot;</span>);   <span class="hljs-comment">// خروجی: 1 2 3 4 5</span>
-</code></pre>
-<p>➡️ در این مثال، یک کلید ۱۶ بایتی به‌طور تصادفی ساخته شده است. اگر کلید اشتباه برای رمزگشایی استفاده شود، <code>CryptoStream</code> یک استثناء از نوع <code>CryptographicException</code> ایجاد می‌کند. گرفتن این استثناء تنها راه برای بررسی درستی کلید است.</p>
-<hr>
-<h3>نقش IV (Initialization Vector) 🎲</h3>
-<p>علاوه بر کلید، ما یک <strong>IV (Initialization Vector)</strong> هم ایجاد کردیم.<br>
-این دنباله‌ی ۱۶ بایتی بخشی از الگوریتم رمزنگاری است؛ شبیه به کلید، اما محرمانه محسوب نمی‌شود.</p>
-<p>📩 اگر پیامی رمزنگاری‌شده را منتقل کنید، معمولاً IV را به‌صورت <strong>plain text</strong> (مثلاً در هدر پیام) ارسال کرده و در هر پیام آن را تغییر می‌دهید.<br>
-این کار باعث می‌شود هر پیام رمزنگاری‌شده با پیام‌های قبلی غیرقابل تشخیص باشد—even اگر نسخه‌ی متنی (unencrypted) آن‌ها مشابه یا یکسان باشند.</p>
-<ul>
-<li>اگر نمی‌خواهید از IV استفاده کنید، می‌توانید یک مقدار ۱۶ بایتی یکسان را هم به‌عنوان کلید و هم به‌عنوان IV به کار ببرید.<br>
-⚠️ اما استفاده از یک IV ثابت در چند پیام، رمزنگاری را ضعیف کرده و ممکن است آن را قابل نفوذ کند.</li>
-</ul>
-<hr>
-<h3>نقش کلاس‌ها 👨‍🔧👨‍🏫</h3>
-<ul>
-<li><strong>Aes</strong> → ریاضی‌دان است؛ الگوریتم رمزنگاری و عملیات Encryptor/Decryptor را اعمال می‌کند.</li>
-<li><strong>CryptoStream</strong> → لوله‌کش است؛ مدیریت جریان داده (stream plumbing) را بر عهده دارد.</li>
-</ul>
-<p>شما می‌توانید <strong>Aes</strong> را با یک الگوریتم متقارن دیگر جایگزین کنید، اما همچنان از <strong>CryptoStream</strong> استفاده کنید.</p>
-<p>🔄 <code>CryptoStream</code> دوطرفه است؛ بسته به انتخاب شما (<code>CryptoStreamMode.Read</code> یا <code>CryptoStreamMode.Write</code>) می‌تواند برای خواندن یا نوشتن استفاده شود.<br>
-هر دو Encryptor و Decryptor توانایی خواندن و نوشتن دارند و چهار ترکیب ممکن ایجاد می‌کنند—این می‌تواند گاهی موجب گیج شدن شما شود!</p>
-<p>📌 اگر مطمئن نیستید:</p>
-<ul>
-<li>برای رمزنگاری از <strong>Write</strong> شروع کنید.</li>
-<li>برای رمزگشایی از <strong>Read</strong> شروع کنید.</li>
-</ul>
-<p>این حالت معمولاً طبیعی‌ترین انتخاب است.</p>
-<hr>
-<h3>تولید کلید و IV تصادفی 🎲</h3>
-<p>برای تولید یک کلید یا IV تصادفی، از <code>RandomNumberGenerator</code> در <code>System.Cryptography</code> استفاده کنید.<br>
-اعدادی که این کلاس تولید می‌کند واقعاً غیرقابل پیش‌بینی و <strong>cryptographically strong</strong> هستند (برخلاف <code>System.Random</code>).</p>
-<p>مثال:</p>
-<pre class="hljs"><code><span class="hljs-built_in">byte</span>[] key = <span class="hljs-keyword">new</span> <span class="hljs-built_in">byte</span> [<span class="hljs-number">16</span>];
+</code></pre> <p>در این مثال، یک کلید ۱۶ بایتی به‌طور تصادفی ساخته شده است. اگر کلید اشتباه برای رمزگشایی استفاده شود، <code>CryptoStream</code> یک استثناء از نوع <code>CryptographicException</code> ایجاد می‌کند. گرفتن این استثناء تنها راه برای بررسی درستی کلید است.</p><hr> <h3>نقش IV (Initialization Vector)</h3><p>علاوه بر کلید، ما یک <strong>IV (Initialization Vector)</strong> هم ایجاد کردیم.<br> این دنباله‌ی ۱۶ بایتی بخشی از الگوریتم رمزنگاری است؛ شبیه به کلید، اما محرمانه محسوب نمی‌شود.</p><p>اگر پیامی رمزنگاری‌شده را منتقل کنید، معمولاً IV را به‌صورت <strong>plain text</strong> (مثلاً در هدر پیام) ارسال کرده و در هر پیام آن را تغییر می‌دهید.<br> این کار باعث می‌شود هر پیام رمزنگاری‌شده با پیام‌های قبلی غیرقابل تشخیص باشد—even اگر نسخه‌ی متنی (unencrypted) آن‌ها مشابه یا یکسان باشند.</p><ul> <li>اگر نمی‌خواهید از IV استفاده کنید، می‌توانید یک مقدار ۱۶ بایتی یکسان را هم به‌عنوان کلید و هم به‌عنوان IV به کار ببرید.<br> اما استفاده از یک IV ثابت در چند پیام، رمزنگاری را ضعیف کرده و ممکن است آن را قابل نفوذ کند.</li></ul> <hr><h3>نقش کلاس‌ها ‍‍</h3><ul> <li><strong>Aes</strong> → ریاضی‌دان است؛ الگوریتم رمزنگاری و عملیات Encryptor/Decryptor را اعمال می‌کند.</li><li><strong>CryptoStream</strong> → لوله‌کش است؛ مدیریت جریان داده (stream plumbing) را بر عهده دارد.</li></ul> <p>شما می‌توانید <strong>Aes</strong> را با یک الگوریتم متقارن دیگر جایگزین کنید، اما همچنان از <strong>CryptoStream</strong> استفاده کنید.</p><p><code>CryptoStream</code> دوطرفه است؛ بسته به انتخاب شما (<code>CryptoStreamMode.Read</code> یا <code>CryptoStreamMode.Write</code>) می‌تواند برای خواندن یا نوشتن استفاده شود.<br> هر دو Encryptor و Decryptor توانایی خواندن و نوشتن دارند و چهار ترکیب ممکن ایجاد می‌کنند—این می‌تواند گاهی موجب گیج شدن شما شود!</p><p>اگر مطمئن نیستید:</p><ul> <li>برای رمزنگاری از <strong>Write</strong> شروع کنید.</li><li>برای رمزگشایی از <strong>Read</strong> شروع کنید.</li></ul> <p>این حالت معمولاً طبیعی‌ترین انتخاب است.</p><hr> <h3>تولید کلید و IV تصادفی</h3><p>برای تولید یک کلید یا IV تصادفی، از <code>RandomNumberGenerator</code> در <code>System.Cryptography</code> استفاده کنید.<br> اعدادی که این کلاس تولید می‌کند واقعاً غیرقابل پیش‌بینی و <strong>cryptographically strong</strong> هستند (برخلاف <code>System.Random</code>).</p><p>مثال:</p><pre class="hljs"><code><span class="hljs-built_in">byte</span>[] key = <span class="hljs-keyword">new</span> <span class="hljs-built_in">byte</span> [<span class="hljs-number">16</span>];
 <span class="hljs-built_in">byte</span>[] iv  = <span class="hljs-keyword">new</span> <span class="hljs-built_in">byte</span> [<span class="hljs-number">16</span>];
 RandomNumberGenerator rand = RandomNumberGenerator.Create();
 rand.GetBytes (key);
 rand.GetBytes (iv);
-</code></pre>
-<p>از .NET 6 به بعد:</p>
-<pre class="hljs"><code><span class="hljs-built_in">byte</span>[] key = RandomNumberGenerator.GetBytes (<span class="hljs-number">16</span>);
+</code></pre> <p>از .NET 6 به بعد:</p><pre class="hljs"><code><span class="hljs-built_in">byte</span>[] key = RandomNumberGenerator.GetBytes (<span class="hljs-number">16</span>);
 <span class="hljs-built_in">byte</span>[] iv = RandomNumberGenerator.GetBytes (<span class="hljs-number">16</span>);
-</code></pre>
-<p>اگر کلید و IV مشخص نکنید، مقادیر تصادفی قوی به‌طور خودکار تولید می‌شوند.<br>
-می‌توانید این مقادیر را از طریق ویژگی‌های <code>Key</code> و <code>IV</code> در شیء <code>Aes</code> دریافت کنید.</p>
-<h3>🔐 رمزنگاری در حافظه</h3>
-<p>از <strong>.NET 6</strong> به بعد، می‌توانید برای ساده‌سازی فرآیند رمزنگاری و رمزگشایی آرایه‌های بایت از متدهای <strong>EncryptCbc</strong> و <strong>DecryptCbc</strong> استفاده کنید:</p>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-built_in">byte</span>[] <span class="hljs-title">Encrypt</span> (<span class="hljs-params"><span class="hljs-built_in">byte</span>[] data, <span class="hljs-built_in">byte</span>[] key, <span class="hljs-built_in">byte</span>[] iv</span>)</span>
+</code></pre> <p>اگر کلید و IV مشخص نکنید، مقادیر تصادفی قوی به‌طور خودکار تولید می‌شوند.<br> می‌توانید این مقادیر را از طریق ویژگی‌های <code>Key</code> و <code>IV</code> در شیء <code>Aes</code> دریافت کنید.</p><h3>رمزنگاری در حافظه</h3><p>از <strong>.NET 6</strong> به بعد، می‌توانید برای ساده‌سازی فرآیند رمزنگاری و رمزگشایی آرایه‌های بایت از متدهای <strong>EncryptCbc</strong> و <strong>DecryptCbc</strong> استفاده کنید:</p><pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-built_in">byte</span>[] <span class="hljs-title">Encrypt</span> (<span class="hljs-params"><span class="hljs-built_in">byte</span>[] data, <span class="hljs-built_in">byte</span>[] key, <span class="hljs-built_in">byte</span>[] iv</span>)</span>
 {
     <span class="hljs-keyword">using</span> Aes algorithm = Aes.Create();
     algorithm.Key = key;
@@ -302,11 +75,7 @@ rand.GetBytes (iv);
     algorithm.Key = key;
     <span class="hljs-keyword">return</span> algorithm.DecryptCbc(data, iv);
 }
-</code></pre>
-<hr>
-<h3>⚙️ معادل سازگار با همه نسخه‌های .NET</h3>
-<p>در نسخه‌های قدیمی‌تر، باید از <strong>ICryptoTransform</strong> و <strong>CryptoStream</strong> استفاده کنیم:</p>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-built_in">byte</span>[] <span class="hljs-title">Encrypt</span> (<span class="hljs-params"><span class="hljs-built_in">byte</span>[] data, <span class="hljs-built_in">byte</span>[] key, <span class="hljs-built_in">byte</span>[] iv</span>)</span>
+</code></pre> <hr><h3>معادل سازگار با همه نسخه‌های .NET</h3><p>در نسخه‌های قدیمی‌تر، باید از <strong>ICryptoTransform</strong> و <strong>CryptoStream</strong> استفاده کنیم:</p><pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-built_in">byte</span>[] <span class="hljs-title">Encrypt</span> (<span class="hljs-params"><span class="hljs-built_in">byte</span>[] data, <span class="hljs-built_in">byte</span>[] key, <span class="hljs-built_in">byte</span>[] iv</span>)</span>
 {
     <span class="hljs-keyword">using</span> (Aes algorithm = Aes.Create())
     <span class="hljs-keyword">using</span> (ICryptoTransform encryptor = algorithm.CreateEncryptor(key, iv))
@@ -327,13 +96,7 @@ rand.GetBytes (iv);
         c.Write(data, <span class="hljs-number">0</span>, data.Length);
     <span class="hljs-keyword">return</span> m.ToArray();
 }
-</code></pre>
-<blockquote>
-<p>🔎 توجه: حالت <strong>CryptoStreamMode.Write</strong> هم برای رمزنگاری و هم برای رمزگشایی مناسب است، زیرا در هر دو حالت داده‌ها را به داخل یک <strong>MemoryStream</strong> تازه &quot;پوش&quot; می‌کنیم.</p>
-</blockquote>
-<hr>
-<h3>📝 نسخه مخصوص رشته‌ها (String)</h3>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-built_in">string</span> <span class="hljs-title">Encrypt</span> (<span class="hljs-params"><span class="hljs-built_in">string</span> data, <span class="hljs-built_in">byte</span>[] key, <span class="hljs-built_in">byte</span>[] iv</span>)</span>
+</code></pre> <blockquote><p>توجه: حالت <strong>CryptoStreamMode.Write</strong> هم برای رمزنگاری و هم برای رمزگشایی مناسب است، زیرا در هر دو حالت داده‌ها را به داخل یک <strong>MemoryStream</strong> تازه &quot;پوش&quot; می‌کنیم.</p></blockquote> <hr><h3>نسخه مخصوص رشته‌ها (String)</h3><pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-built_in">string</span> <span class="hljs-title">Encrypt</span> (<span class="hljs-params"><span class="hljs-built_in">string</span> data, <span class="hljs-built_in">byte</span>[] key, <span class="hljs-built_in">byte</span>[] iv</span>)</span>
 {
     <span class="hljs-keyword">return</span> Convert.ToBase64String(
         Encrypt(Encoding.UTF8.GetBytes(data), key, iv));
@@ -344,9 +107,7 @@ rand.GetBytes (iv);
     <span class="hljs-keyword">return</span> Encoding.UTF8.GetString(
         Decrypt(Convert.FromBase64String(data), key, iv));
 }
-</code></pre>
-<p><strong>نمونه استفاده:</strong></p>
-<pre class="hljs"><code><span class="hljs-built_in">byte</span>[] key = <span class="hljs-keyword">new</span> <span class="hljs-built_in">byte</span>[<span class="hljs-number">16</span>];
+</code></pre> <p><strong>نمونه استفاده:</strong></p><pre class="hljs"><code><span class="hljs-built_in">byte</span>[] key = <span class="hljs-keyword">new</span> <span class="hljs-built_in">byte</span>[<span class="hljs-number">16</span>];
 <span class="hljs-built_in">byte</span>[] iv = <span class="hljs-keyword">new</span> <span class="hljs-built_in">byte</span>[<span class="hljs-number">16</span>];
 <span class="hljs-keyword">var</span> cryptoRng = RandomNumberGenerator.Create();
 cryptoRng.GetBytes(key);
@@ -356,11 +117,7 @@ cryptoRng.GetBytes(iv);
 Console.WriteLine(encrypted);   <span class="hljs-comment">// R1/5gYvcxyR2vzPjnT7yaQ==</span>
 <span class="hljs-built_in">string</span> decrypted = Decrypt(encrypted, key, iv);
 Console.WriteLine(decrypted);   <span class="hljs-comment">// Yeah!</span>
-</code></pre>
-<hr>
-<h3>⛓️ زنجیره‌سازی استریم‌ها (Chaining Streams)</h3>
-<p>از آن‌جایی که <strong>CryptoStream یک دکوریتور</strong> است، می‌توانید آن را با سایر استریم‌ها زنجیره کنید. در مثال زیر، یک متن فشرده و رمزنگاری‌شده را در فایل ذخیره کرده و سپس بازیابی می‌کنیم:</p>
-<pre class="hljs"><code><span class="hljs-built_in">byte</span>[] key = <span class="hljs-keyword">new</span> <span class="hljs-built_in">byte</span>[<span class="hljs-number">16</span>];
+</code></pre> <hr><h3>زنجیره‌سازی استریم‌ها (Chaining Streams)</h3><p>از آن‌جایی که <strong>CryptoStream یک دکوریتور</strong> است، می‌توانید آن را با سایر استریم‌ها زنجیره کنید. در مثال زیر، یک متن فشرده و رمزنگاری‌شده را در فایل ذخیره کرده و سپس بازیابی می‌کنیم:</p><pre class="hljs"><code><span class="hljs-built_in">byte</span>[] key = <span class="hljs-keyword">new</span> <span class="hljs-built_in">byte</span>[<span class="hljs-number">16</span>];
 <span class="hljs-built_in">byte</span>[] iv = <span class="hljs-keyword">new</span> <span class="hljs-built_in">byte</span>[<span class="hljs-number">16</span>];
 <span class="hljs-keyword">var</span> cryptoRng = RandomNumberGenerator.Create();
 cryptoRng.GetBytes(key);
@@ -382,122 +139,19 @@ cryptoRng.GetBytes(iv);
     <span class="hljs-keyword">using</span> (StreamReader r = <span class="hljs-keyword">new</span> StreamReader(d))
         Console.WriteLine(<span class="hljs-keyword">await</span> r.ReadLineAsync());   <span class="hljs-comment">// Small and secure!</span>
 }
-</code></pre>
-<p>📌 در این مثال، همه متغیرهای یک‌حرفی بخشی از زنجیره هستند. اجزای اصلی مثل <strong>algorithm</strong>، <strong>encryptor</strong> و <strong>decryptor</strong> در واقع به <strong>CryptoStream</strong> کمک می‌کنند تا عملیات رمزنگاری و رمزگشایی انجام شود.</p>
-<hr>
-<p>⚡ نکته مهم: زنجیره‌سازی استریم‌ها به این شکل، باعث می‌شود که صرف‌نظر از اندازه فایل یا داده، مصرف حافظه بسیار کم باقی بماند.</p>
- <div align="center">
-<p><img src="../../../assets/image/20/Table-20-3.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<h3>🧹 پاک‌سازی اشیای رمزنگاری (Disposing Encryption Objects)</h3>
-<p>وقتی یک <strong>CryptoStream</strong> را Dispose می‌کنید، کش داخلی آن به استریم زیرین منتقل (Flush) می‌شود. این کش داخلی برای الگوریتم‌های رمزنگاری لازم است، چون آن‌ها داده‌ها را به صورت <strong>بلوک‌های داده</strong> پردازش می‌کنند، نه بایت به بایت.</p>
-<p>🔎 نکته:</p>
-<ul>
-<li>متد <strong>Flush</strong> در CryptoStream هیچ کاری انجام نمی‌دهد.</li>
-<li>برای <em>فلاش کردن بدون Dispose کردن</em> باید از <strong>FlushFinalBlock</strong> استفاده کنید. این متد فقط یک بار قابل فراخوانی است و بعد از آن دیگر نمی‌توانید داده‌ای بنویسید.</li>
-</ul>
-<p>ما همچنین اشیای <strong>Aes</strong> و <strong>ICryptoTransform</strong> (یعنی <code>algorithm</code>, <code>encryptor</code>, <code>decryptor</code>) را Dispose می‌کنیم. وقتی این Transformها Dispose شوند، کلید متقارن و داده‌های مرتبط از حافظه پاک می‌شوند. این کار جلوی کشف کلید توسط نرم‌افزارهای مخرب را می‌گیرد.<br>
-به <strong>Garbage Collector</strong> نمی‌توان اعتماد کرد، چون آن فقط حافظه را <em>آزاد</em> می‌کند، نه اینکه بایت‌ها را صفر کند.</p>
-<p>👉 ساده‌ترین راه برای Dispose کردن یک شیء <strong>Aes</strong> خارج از <code>using</code>، فراخوانی متد <strong>Clear</strong> است.<br>
-متد <strong>Dispose</strong> آن به صورت explicit پیاده‌سازی شده تا نشان دهد این Dispose غیرمعمول است (پاک کردن حافظه به‌جای آزادسازی منابع unmanaged).</p>
-<h4>🔒 نکات امنیتی برای جلوگیری از نشت داده‌های حساس</h4>
-<ul>
-<li>❌ از <strong>رشته‌ها (string)</strong> برای اطلاعات امنیتی استفاده نکنید (رشته‌ها تغییرناپذیرند و مقدارشان هرگز قابل پاک کردن نیست).</li>
-<li>✅ بلافاصله بعد از بی‌استفاده شدن، بافرها را بازنویسی کنید (مثلاً با <code>Array.Clear</code>).</li>
-</ul>
-<hr>
-<h3>🔑 مدیریت کلید (Key Management)</h3>
-<p>مدیریت کلید بخش حیاتی امنیت است: اگر کلیدها لو بروند، داده‌ها هم در خطر خواهند بود.</p>
-<ul>
-<li>باید مشخص کنید چه کسانی به کلیدها دسترسی داشته باشند.</li>
-<li>کلیدها را در برابر دسترسی غیرمجاز محافظت کنید.</li>
-<li>نسخه‌های پشتیبان داشته باشید (برای مواقع خرابی سخت‌افزار).</li>
-</ul>
-<p>🚫 توصیه نمی‌شود کلیدها را <strong>سخت‌کد (hardcode)</strong> کنید، چون ابزارهای ساده‌ای برای دیکامپایل اسمبلی‌ها وجود دارد.<br>
-✅ راه بهتر در ویندوز: تولید کلید تصادفی برای هر نصب و ذخیره آن با استفاده از <strong>Windows Data Protection</strong>.</p>
-<p>در <strong>ابر (Cloud)</strong>، سرویس‌هایی مثل <strong>Azure</strong> و <strong>AWS</strong> سیستم‌های مدیریت کلید (KMS) ارائه می‌دهند که قابلیت‌هایی مثل ثبت لاگ دسترسی‌ها (audit trails) دارند.</p>
-<hr>
-<h3>🔐 رمزنگاری کلید عمومی (Public-Key Encryption and Signing)</h3>
-<p>رمزنگاری کلید عمومی <strong>نامتقارن (asymmetric)</strong> است؛ یعنی برای رمزنگاری و رمزگشایی از <strong>کلیدهای متفاوت</strong> استفاده می‌شود:</p>
-<ul>
-<li>🔑 کلید عمومی (<strong>public key</strong>) → برای رمزنگاری</li>
-<li>🔒 کلید خصوصی (<strong>private key</strong>) → برای رمزگشایی</li>
-</ul>
-<p>ویژگی مهم:</p>
-<ul>
-<li>از روی کلید عمومی نمی‌توان کلید خصوصی را محاسبه کرد.</li>
-<li>اگر کلید خصوصی گم شود، داده‌های رمزنگاری‌شده بازیابی نمی‌شوند.</li>
-<li>اگر کلید خصوصی لو برود، کل سیستم رمزنگاری بی‌فایده می‌شود.</li>
-</ul>
-<hr>
-<h3>📡 مثال: ارتباط امن دو کامپیوتر از طریق کلید عمومی</h3>
-<p>فرض کنید <strong>Origin</strong> می‌خواهد به <strong>Target</strong> پیام محرمانه بفرستد:</p>
-<ol>
-<li><strong>Target</strong> یک جفت کلید عمومی/خصوصی می‌سازد و کلید عمومی را برای Origin می‌فرستد.</li>
-<li><strong>Origin</strong> پیام محرمانه را با کلید عمومی Target رمزنگاری کرده و ارسال می‌کند.</li>
-<li><strong>Target</strong> پیام را با کلید خصوصی خودش رمزگشایی می‌کند.</li>
-</ol>
-<p>👀 شنودکننده (eavesdropper) فقط این‌ها را می‌بیند:</p>
-<ul>
-<li>کلید عمومی Target</li>
-<li>پیام رمزنگاری‌شده با آن کلید</li>
-</ul>
-<p>اما بدون کلید خصوصی Target، نمی‌تواند پیام را رمزگشایی کند.</p>
-<hr>
-<h3>⚠️ نکته امنیتی: حمله مرد میانی (MITM)</h3>
-<p>Origin مطمئن نیست که Target واقعی است یا فرد مخرب!<br>
-راه‌حل:</p>
-<ul>
-<li>از قبل کلید عمومی Target را بشناسد.</li>
-<li>یا کلید عمومی را از طریق یک <strong>گواهی دیجیتال (digital certificate)</strong> معتبر تأیید کند.</li>
-</ul>
-<hr>
-<h3>🚀 ترکیب کلید عمومی و متقارن</h3>
-<p>رمزنگاری کلید عمومی کند است و اندازه پیام محدود دارد.<br>
-به همین دلیل معمولاً پیام اولیه فقط شامل یک کلید متقارن تازه است.</p>
-<p>📌 روند:</p>
-<ul>
-<li>Origin → کلید متقارن را با کلید عمومی Target رمز می‌کند و می‌فرستد.</li>
-<li>Target → کلید متقارن را با کلید خصوصی‌اش رمزگشایی می‌کند.</li>
-<li>بقیه پیام‌ها → با الگوریتم متقارن (سریع‌تر) رمز می‌شوند.</li>
-</ul>
-<p>اگر برای هر جلسه یک جفت کلید عمومی/خصوصی تازه ساخته شود، امنیت بالاتر می‌رود چون دیگر نیازی به ذخیره‌سازی کلیدها در هیچ‌کدام از کامپیوترها نیست.</p>
-<hr>
-<h3>🛑 محدودیت کلید عمومی</h3>
-<p>الگوریتم‌های کلید عمومی فقط پیام‌هایی را رمز می‌کنند که از خود کلید <strong>کوچک‌تر باشند</strong>.<br>
-بنابراین برای پیام‌های بزرگ (بیشتر از نصف اندازه کلید)، استثنا (Exception) پرتاب می‌شود.</p>
-<h3>🔑 کلاس RSA در .NET</h3>
-<p>در .NET چندین الگوریتم نامتقارن وجود دارد که <strong>RSA</strong> محبوب‌ترین آن‌هاست.</p>
-<h4>🔒 رمزنگاری و رمزگشایی با RSA</h4>
-<pre class="hljs"><code><span class="hljs-built_in">byte</span>[] data = { <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span> };   <span class="hljs-comment">// داده‌ای که می‌خواهیم رمز کنیم</span>
+</code></pre> <p>در این مثال، همه متغیرهای یک‌حرفی بخشی از زنجیره هستند. اجزای اصلی مثل <strong>algorithm</strong>، <strong>encryptor</strong> و <strong>decryptor</strong> در واقع به <strong>CryptoStream</strong> کمک می‌کنند تا عملیات رمزنگاری و رمزگشایی انجام شود.</p><hr> <p>نکته مهم: زنجیره‌سازی استریم‌ها به این شکل، باعث می‌شود که صرف‌نظر از اندازه فایل یا داده، مصرف حافظه بسیار کم باقی بماند.</p><div align="center"> <p><img src="../../../assets/image/20/Table-20-3.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <h3>پاک‌سازی اشیای رمزنگاری (Disposing Encryption Objects)</h3><p>وقتی یک <strong>CryptoStream</strong> را Dispose می‌کنید، کش داخلی آن به استریم زیرین منتقل (Flush) می‌شود. این کش داخلی برای الگوریتم‌های رمزنگاری لازم است، چون آن‌ها داده‌ها را به صورت <strong>بلوک‌های داده</strong> پردازش می‌کنند، نه بایت به بایت.</p><blockquote> <p><strong>نکته:</strong></p></blockquote> <ul><li>متد <strong>Flush</strong> در CryptoStream هیچ کاری انجام نمی‌دهد.</li><li>برای <em>فلاش کردن بدون Dispose کردن</em> باید از <strong>FlushFinalBlock</strong> استفاده کنید. این متد فقط یک بار قابل فراخوانی است و بعد از آن دیگر نمی‌توانید داده‌ای بنویسید.</li></ul> <p>ما همچنین اشیای <strong>Aes</strong> و <strong>ICryptoTransform</strong> (یعنی <code>algorithm</code>, <code>encryptor</code>, <code>decryptor</code>) را Dispose می‌کنیم. وقتی این Transformها Dispose شوند، کلید متقارن و داده‌های مرتبط از حافظه پاک می‌شوند. این کار جلوی کشف کلید توسط نرم‌افزارهای مخرب را می‌گیرد.<br> به <strong>Garbage Collector</strong> نمی‌توان اعتماد کرد، چون آن فقط حافظه را <em>آزاد</em> می‌کند، نه اینکه بایت‌ها را صفر کند.</p><p>ساده‌ترین راه برای Dispose کردن یک شیء <strong>Aes</strong> خارج از <code>using</code>، فراخوانی متد <strong>Clear</strong> است.<br> متد <strong>Dispose</strong> آن به صورت explicit پیاده‌سازی شده تا نشان دهد این Dispose غیرمعمول است (پاک کردن حافظه به‌جای آزادسازی منابع unmanaged).</p><h4>نکات امنیتی برای جلوگیری از نشت داده‌های حساس</h4><ul> <li>از <strong>رشته‌ها (string)</strong> برای اطلاعات امنیتی استفاده نکنید (رشته‌ها تغییرناپذیرند و مقدارشان هرگز قابل پاک کردن نیست).</li><li>بلافاصله بعد از بی‌استفاده شدن، بافرها را بازنویسی کنید (مثلاً با <code>Array.Clear</code>).</li></ul> <hr><h3>مدیریت کلید (Key Management)</h3><p>مدیریت کلید بخش حیاتی امنیت است: اگر کلیدها لو بروند، داده‌ها هم در خطر خواهند بود.</p><ul> <li>باید مشخص کنید چه کسانی به کلیدها دسترسی داشته باشند.</li><li>کلیدها را در برابر دسترسی غیرمجاز محافظت کنید.</li><li>نسخه‌های پشتیبان داشته باشید (برای مواقع خرابی سخت‌افزار).</li></ul> <p>توصیه نمی‌شود کلیدها را <strong>سخت‌کد (hardcode)</strong> کنید، چون ابزارهای ساده‌ای برای دیکامپایل اسمبلی‌ها وجود دارد.<br> راه بهتر در ویندوز: تولید کلید تصادفی برای هر نصب و ذخیره آن با استفاده از <strong>Windows Data Protection</strong>.</p><p>در <strong>ابر (Cloud)</strong>، سرویس‌هایی مثل <strong>Azure</strong> و <strong>AWS</strong> سیستم‌های مدیریت کلید (KMS) ارائه می‌دهند که قابلیت‌هایی مثل ثبت لاگ دسترسی‌ها (audit trails) دارند.</p><hr> <h3>رمزنگاری کلید عمومی (Public-Key Encryption and Signing)</h3><p>رمزنگاری کلید عمومی <strong>نامتقارن (asymmetric)</strong> است؛ یعنی برای رمزنگاری و رمزگشایی از <strong>کلیدهای متفاوت</strong> استفاده می‌شود:</p><ul> <li>کلید عمومی (<strong>public key</strong>) → برای رمزنگاری</li><li>کلید خصوصی (<strong>private key</strong>) → برای رمزگشایی</li></ul> <p>ویژگی مهم:</p><ul> <li>از روی کلید عمومی نمی‌توان کلید خصوصی را محاسبه کرد.</li><li>اگر کلید خصوصی گم شود، داده‌های رمزنگاری‌شده بازیابی نمی‌شوند.</li><li>اگر کلید خصوصی لو برود، کل سیستم رمزنگاری بی‌فایده می‌شود.</li></ul> <hr><h3>مثال: ارتباط امن دو کامپیوتر از طریق کلید عمومی</h3><p>فرض کنید <strong>Origin</strong> می‌خواهد به <strong>Target</strong> پیام محرمانه بفرستد:</p><ol> <li><strong>Target</strong> یک جفت کلید عمومی/خصوصی می‌سازد و کلید عمومی را برای Origin می‌فرستد.</li><li><strong>Origin</strong> پیام محرمانه را با کلید عمومی Target رمزنگاری کرده و ارسال می‌کند.</li><li><strong>Target</strong> پیام را با کلید خصوصی خودش رمزگشایی می‌کند.</li></ol> <p>شنودکننده (eavesdropper) فقط این‌ها را می‌بیند:</p><ul> <li>کلید عمومی Target</li><li>پیام رمزنگاری‌شده با آن کلید</li></ul> <p>اما بدون کلید خصوصی Target، نمی‌تواند پیام را رمزگشایی کند.</p><hr> <h3>نکته امنیتی: حمله مرد میانی (MITM)</h3><p>Origin مطمئن نیست که Target واقعی است یا فرد مخرب!<br> راه‌حل:</p><ul> <li>از قبل کلید عمومی Target را بشناسد.</li><li>یا کلید عمومی را از طریق یک <strong>گواهی دیجیتال (digital certificate)</strong> معتبر تأیید کند.</li></ul> <hr><h3>ترکیب کلید عمومی و متقارن</h3><p>رمزنگاری کلید عمومی کند است و اندازه پیام محدود دارد.<br> به همین دلیل معمولاً پیام اولیه فقط شامل یک کلید متقارن تازه است.</p><p>روند:</p><ul> <li>Origin → کلید متقارن را با کلید عمومی Target رمز می‌کند و می‌فرستد.</li><li>Target → کلید متقارن را با کلید خصوصی‌اش رمزگشایی می‌کند.</li><li>بقیه پیام‌ها → با الگوریتم متقارن (سریع‌تر) رمز می‌شوند.</li></ul> <p>اگر برای هر جلسه یک جفت کلید عمومی/خصوصی تازه ساخته شود، امنیت بالاتر می‌رود چون دیگر نیازی به ذخیره‌سازی کلیدها در هیچ‌کدام از کامپیوترها نیست.</p><hr> <h3>محدودیت کلید عمومی</h3><p>الگوریتم‌های کلید عمومی فقط پیام‌هایی را رمز می‌کنند که از خود کلید <strong>کوچک‌تر باشند</strong>.<br> بنابراین برای پیام‌های بزرگ (بیشتر از نصف اندازه کلید)، استثنا (Exception) پرتاب می‌شود.</p><h3>کلاس RSA در .NET</h3><p>در .NET چندین الگوریتم نامتقارن وجود دارد که <strong>RSA</strong> محبوب‌ترین آن‌هاست.</p><h4>رمزنگاری و رمزگشایی با RSA</h4><pre class="hljs"><code><span class="hljs-built_in">byte</span>[] data = { <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span> };   <span class="hljs-comment">// داده‌ای که می‌خواهیم رمز کنیم</span>
 <span class="hljs-keyword">using</span> (<span class="hljs-keyword">var</span> rsa = <span class="hljs-keyword">new</span> RSACryptoServiceProvider())
 {
     <span class="hljs-built_in">byte</span>[] encrypted = rsa.Encrypt(data, <span class="hljs-literal">true</span>);
     <span class="hljs-built_in">byte</span>[] decrypted = rsa.Decrypt(encrypted, <span class="hljs-literal">true</span>);
 }
-</code></pre>
-<p>چون هیچ کلید عمومی یا خصوصی‌ای مشخص نکردیم، فراهم‌کننده رمزنگاری به‌طور خودکار یک جفت کلید (Key Pair) با طول پیش‌فرض <strong>١٠٢٤ بیت</strong> ساخت.<br>
-می‌توانید کلیدهای بلندتر (در مضارب ٨ بایت) بخواهید. برای برنامه‌های امنیتی حساس، استفاده از <strong>٢٠٤٨ بیت</strong> توصیه می‌شود:</p>
-<pre class="hljs"><code><span class="hljs-keyword">var</span> rsa = <span class="hljs-keyword">new</span> RSACryptoServiceProvider(<span class="hljs-number">2048</span>);
-</code></pre>
-<p>ساخت کلید محاسباتی سنگین است (حدود <strong>١٠ میلی‌ثانیه</strong> طول می‌کشد). به همین دلیل، پیاده‌سازی RSA تولید کلید را تا زمانی که واقعاً لازم باشد (مثلاً هنگام فراخوانی <code>Encrypt</code>) به تأخیر می‌اندازد. این فرصت را می‌دهد که اگر کلید موجودی دارید، آن را بارگذاری کنید.</p>
-<hr>
-<h3>💾 ذخیره‌سازی و بارگذاری کلیدها</h3>
-<ul>
-<li>متدهای <strong>ImportCspBlob</strong> و <strong>ExportCspBlob</strong>: بارگذاری/ذخیره کلید در قالب آرایه بایت.</li>
-<li>متدهای <strong>FromXmlString</strong> و <strong>ToXmlString</strong>: همین کار را در قالب رشته (XML) انجام می‌دهند.</li>
-</ul>
-<p>پارامتر بولی تعیین می‌کند که کلید خصوصی هم ذخیره شود یا نه.</p>
-<p>مثال: ساخت یک جفت کلید و ذخیره آن روی دیسک:</p>
-<pre class="hljs"><code><span class="hljs-keyword">using</span> (<span class="hljs-keyword">var</span> rsa = <span class="hljs-keyword">new</span> RSACryptoServiceProvider())
+</code></pre> <p>چون هیچ کلید عمومی یا خصوصی‌ای مشخص نکردیم، فراهم‌کننده رمزنگاری به‌طور خودکار یک جفت کلید (Key Pair) با طول پیش‌فرض <strong>١٠٢٤ بیت</strong> ساخت.<br> می‌توانید کلیدهای بلندتر (در مضارب ٨ بایت) بخواهید. برای برنامه‌های امنیتی حساس، استفاده از <strong>٢٠٤٨ بیت</strong> توصیه می‌شود:</p><pre class="hljs"><code><span class="hljs-keyword">var</span> rsa = <span class="hljs-keyword">new</span> RSACryptoServiceProvider(<span class="hljs-number">2048</span>);
+</code></pre> <p>ساخت کلید محاسباتی سنگین است (حدود <strong>١٠ میلی‌ثانیه</strong> طول می‌کشد). به همین دلیل، پیاده‌سازی RSA تولید کلید را تا زمانی که واقعاً لازم باشد (مثلاً هنگام فراخوانی <code>Encrypt</code>) به تأخیر می‌اندازد. این فرصت را می‌دهد که اگر کلید موجودی دارید، آن را بارگذاری کنید.</p><hr> <h3>ذخیره‌سازی و بارگذاری کلیدها</h3><ul> <li>متدهای <strong>ImportCspBlob</strong> و <strong>ExportCspBlob</strong>: بارگذاری/ذخیره کلید در قالب آرایه بایت.</li><li>متدهای <strong>FromXmlString</strong> و <strong>ToXmlString</strong>: همین کار را در قالب رشته (XML) انجام می‌دهند.</li></ul> <p>پارامتر بولی تعیین می‌کند که کلید خصوصی هم ذخیره شود یا نه.</p><p>مثال: ساخت یک جفت کلید و ذخیره آن روی دیسک:</p><pre class="hljs"><code><span class="hljs-keyword">using</span> (<span class="hljs-keyword">var</span> rsa = <span class="hljs-keyword">new</span> RSACryptoServiceProvider())
 {
     File.WriteAllText(<span class="hljs-string">&quot;PublicKeyOnly.xml&quot;</span>, rsa.ToXmlString(<span class="hljs-literal">false</span>));
     File.WriteAllText(<span class="hljs-string">&quot;PublicPrivate.xml&quot;</span>, rsa.ToXmlString(<span class="hljs-literal">true</span>));
 }
-</code></pre>
-<p>چون کلیدی نداشتیم، اولین بار <code>ToXmlString</code> مجبور شد یک جفت کلید تازه بسازد.</p>
-<p>بارگذاری مجدد و استفاده از آن‌ها:</p>
-<pre class="hljs"><code><span class="hljs-built_in">byte</span>[] data = Encoding.UTF8.GetBytes(<span class="hljs-string">&quot;Message to encrypt&quot;</span>);
+</code></pre> <p>چون کلیدی نداشتیم، اولین بار <code>ToXmlString</code> مجبور شد یک جفت کلید تازه بسازد.</p><p>بارگذاری مجدد و استفاده از آن‌ها:</p><pre class="hljs"><code><span class="hljs-built_in">byte</span>[] data = Encoding.UTF8.GetBytes(<span class="hljs-string">&quot;Message to encrypt&quot;</span>);
 <span class="hljs-built_in">string</span> publicKeyOnly = File.ReadAllText(<span class="hljs-string">&quot;PublicKeyOnly.xml&quot;</span>);
 <span class="hljs-built_in">string</span> publicPrivate = File.ReadAllText(<span class="hljs-string">&quot;PublicPrivate.xml&quot;</span>);
 <span class="hljs-built_in">byte</span>[] encrypted, decrypted;
@@ -516,13 +170,7 @@ cryptoRng.GetBytes(iv);
     rsaPublicPrivate.FromXmlString(publicPrivate);
     decrypted = rsaPublicPrivate.Decrypt(encrypted, <span class="hljs-literal">true</span>); <span class="hljs-comment">// موفقیت‌آمیز</span>
 }
-</code></pre>
-<hr>
-<h3>🖊️ امضای دیجیتال (Digital Signing)</h3>
-<p>الگوریتم‌های کلید عمومی برای <strong>امضای دیجیتال</strong> هم استفاده می‌شوند.<br>
-امضا مثل Hash است، با این تفاوت که تولید آن به کلید خصوصی نیاز دارد و جعل‌پذیر نیست. کلید عمومی برای تأیید امضا استفاده می‌شود.</p>
-<p>مثال:</p>
-<pre class="hljs"><code><span class="hljs-built_in">byte</span>[] data = Encoding.UTF8.GetBytes(<span class="hljs-string">&quot;Message to sign&quot;</span>);
+</code></pre> <hr><h3>امضای دیجیتال (Digital Signing)</h3><p>الگوریتم‌های کلید عمومی برای <strong>امضای دیجیتال</strong> هم استفاده می‌شوند.<br> امضا مثل Hash است، با این تفاوت که تولید آن به کلید خصوصی نیاز دارد و جعل‌پذیر نیست. کلید عمومی برای تأیید امضا استفاده می‌شود.</p><p>مثال:</p><pre class="hljs"><code><span class="hljs-built_in">byte</span>[] data = Encoding.UTF8.GetBytes(<span class="hljs-string">&quot;Message to sign&quot;</span>);
 <span class="hljs-built_in">byte</span>[] publicKey;
 <span class="hljs-built_in">byte</span>[] signature;
 <span class="hljs-built_in">object</span> hasher = SHA1.Create(); <span class="hljs-comment">// الگوریتم هش انتخابی ما</span>
@@ -547,145 +195,221 @@ cryptoRng.GetBytes(iv);
     <span class="hljs-comment">// خطا: چون کلید خصوصی نداریم نمی‌توانیم امضا تولید کنیم:</span>
     signature = publicOnly.SignData(data, hasher);
 }
-</code></pre>
-<hr>
-<h3>⚙️ جزئیات عملکرد امضا</h3>
-<p>امضا با این مراحل انجام می‌شود:</p>
-<ol>
-<li>داده ابتدا <strong>هش</strong> می‌شود.</li>
-<li>الگوریتم نامتقارن (RSA) روی هش اعمال می‌شود.</li>
-</ol>
-<p>از آنجا که هش اندازه کوچکی دارد، امضای اسناد بزرگ سریع انجام می‌شود (چون RSA به‌تنهایی پرهزینه‌تر است).</p>
-<p>می‌توانید هش را خودتان محاسبه کنید و سپس از <strong>SignHash</strong> به‌جای <code>SignData</code> استفاده کنید:</p>
-<pre class="hljs"><code><span class="hljs-keyword">using</span> (<span class="hljs-keyword">var</span> rsa = <span class="hljs-keyword">new</span> RSACryptoServiceProvider())
+</code></pre> <hr><h3>جزئیات عملکرد امضا</h3><p>امضا با این مراحل انجام می‌شود:</p><ol> <li>داده ابتدا <strong>هش</strong> می‌شود.</li><li>الگوریتم نامتقارن (RSA) روی هش اعمال می‌شود.</li></ol> <p>از آنجا که هش اندازه کوچکی دارد، امضای اسناد بزرگ سریع انجام می‌شود (چون RSA به‌تنهایی پرهزینه‌تر است).</p><p>می‌توانید هش را خودتان محاسبه کنید و سپس از <strong>SignHash</strong> به‌جای <code>SignData</code> استفاده کنید:</p><pre class="hljs"><code><span class="hljs-keyword">using</span> (<span class="hljs-keyword">var</span> rsa = <span class="hljs-keyword">new</span> RSACryptoServiceProvider())
 {
     <span class="hljs-built_in">byte</span>[] hash = SHA1.Create().ComputeHash(data);
     signature = rsa.SignHash(hash, CryptoConfig.MapNameToOID(<span class="hljs-string">&quot;SHA1&quot;</span>));
 }
-</code></pre>
-<p><code>SignHash</code> باید بداند از چه الگوریتمی برای هش استفاده کرده‌اید. متد <code>CryptoConfig.MapNameToOID</code> این اطلاعات را از یک نام ساده مثل <code>&quot;SHA1&quot;</code> فراهم می‌کند.</p>
-<p>📏 اندازه امضا: خروجی امضا با اندازه کلید برابر است. در حال حاضر الگوریتمی که امضای امنی کوچکتر از <strong>١٢٨ بایت</strong> تولید کند (برای مثال کد فعال‌سازی محصول) وجود ندارد.</p>
-<hr>
-<h3>📜 اعتماد به کلید عمومی</h3>
-<p>برای اینکه امضا معتبر باشد، گیرنده باید کلید عمومی فرستنده را بشناسد و به آن اعتماد کند. این می‌تواند از راه‌های زیر انجام شود:</p>
-<ul>
-<li>ارتباط قبلی</li>
-<li>پیکربندی از پیش</li>
-<li>یا استفاده از <strong>گواهی دیجیتال (site certificate)</strong></li>
-</ul>
-<p>🔐 یک گواهی دیجیتال رکورد الکترونیکی کلید عمومی و نام فرستنده است که خودش توسط یک مرجع معتبر مستقل امضا شده است.</p>
-<p>📦 فضای نام <code>System.Security.Cryptography.X509Certificates</code> انواع لازم برای کار با گواهی‌ها را فراهم می‌کند.</p>
-
-  </main>
-
-  <!-- فوتر مشترک -->
-  <footer class="footer">
-    <div class="container">
-      <p>
-        <img src="/Gitab/icone/copyright.svg" alt="کپی‌رایت" width="14" height="14"
-             style="vertical-align:middle;margin-inline:4px">
-        <span id="y"></span> Gitab — تمامی حقوق محفوظ است.
-      </p>
-    </div>
-  </footer>
-
-  <!-- سال و اسکریپت تغییر تم -->
-  <script>
+</code></pre> <p><code>SignHash</code> باید بداند از چه الگوریتمی برای هش استفاده کرده‌اید. متد <code>CryptoConfig.MapNameToOID</code> این اطلاعات را از یک نام ساده مثل <code>&quot;SHA1&quot;</code> فراهم می‌کند.</p><p>اندازه امضا: خروجی امضا با اندازه کلید برابر است. در حال حاضر الگوریتمی که امضای امنی کوچکتر از <strong>١٢٨ بایت</strong> تولید کند (برای مثال کد فعال‌سازی محصول) وجود ندارد.</p><hr> <h3>اعتماد به کلید عمومی</h3><p>برای اینکه امضا معتبر باشد، گیرنده باید کلید عمومی فرستنده را بشناسد و به آن اعتماد کند. این می‌تواند از راه‌های زیر انجام شود:</p><ul> <li>ارتباط قبلی</li><li>پیکربندی از پیش</li><li>یا استفاده از <strong>گواهی دیجیتال (site certificate)</strong></li></ul> <p>یک گواهی دیجیتال رکورد الکترونیکی کلید عمومی و نام فرستنده است که خودش توسط یک مرجع معتبر مستقل امضا شده است.</p><p>فضای نام <code>System.Security.Cryptography.X509Certificates</code> انواع لازم برای کار با گواهی‌ها را فراهم می‌کند.</p></article> <nav class="chapter-single-next-nav"><a href="/Gitab/books/book1/Book/21/Advanced-Threading/" class="btn-next-chapter-action" id="nextChapterBtn" data-hub="/Gitab/books/book1/"> <span class="next-btn-text">فصل بعدی: رشته‌بندی پیشرفته Advanced Threading</span> <span class="next-btn-arrow">←</span> </a> </nav></div> <button class="fab-back-to-top" id="backToTopBtn" type="button" aria-label="رفتن به بالای صفحه" title="رفتن به بالا"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"> <polyline points="18 15 12 9 6 15"></polyline> </svg> </button></main> <footer class="footer-minimal"><div class="footer-container"> <div class="footer-top-row"><div class="footer-brand-side"> <a href="/Gitab/" class="footer-brand-anchor"> <img src="/Gitab/icone/logo.svg" alt="Gitab" width="28" height="28" loading="lazy" decoding="async"> <span class="footer-brand-title">گیتاب (Gitab)</span> </a> <p class="footer-tagline"> پلتفرم آزاد و مستقل برای ترجمهٔ دقیق و روان کتاب‌های مرجع مهندسی نرم‌افزار. </p></div> <div class="footer-nav-cols"><div class="footer-nav-col"> <span class="footer-nav-heading">موضوعات</span><ul class="footer-nav-list"> <li><a href="/Gitab/books/list-books/?cat=csharp">سی‌شارپ و دات‌نت</a></li><li><a href="/Gitab/books/list-books/?cat=clean-code">کد تمیز و بازآفرینی</a></li><li><a href="/Gitab/books/list-books/?cat=architecture">معماری و طراحی دامنه</a></li><li><a href="/Gitab/books/list-books/?cat=system">لینوکس و خط فرمان</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">بخش‌های سایت</span><ul class="footer-nav-list"> <li><a href="/Gitab/">صفحه اصلی</a></li><li><a href="/Gitab/books/list-books/">کتابخانه کامل</a></li><li><a href="/Gitab/courses/">دوره‌های آموزشی</a></li><li><a href="/Gitab/translator.html">تالار مترجمین</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">مشارکت و جامعه</span><ul class="footer-nav-list"> <li><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer">راهنمای همکاری در ترجمه</a></li><li><a href="https://github.com/hheydarian/Gitab/issues" target="_blank" rel="noopener noreferrer">پیشنهاد کتاب یا گزارش خطا</a></li></ul> </div></div> </div><div class="footer-bottom-line"> <span>© <span id="y">2026</span> Gitab — توسعه‌یافته برای جامعهٔ مهندسان نرم‌افزار ایرانی</span></div> </div></footer> <script>
   (() => {
     const root = document.documentElement;
     const btn = document.getElementById('themeToggle');
+    const sunIcon = btn ? btn.querySelector('.icon-sun') : null;
+    const moonIcon = btn ? btn.querySelector('.icon-moon') : null;
     const KEY = 'gitab-theme';
 
-    function updateTheme(s) {
-      root.setAttribute('data-theme', s);
-      const mode = s;  // فقط `dark` یا `light` خواهد بود
+    function updateTheme(mode) {
+      root.setAttribute('data-theme', mode);
       root.dataset.colorMode = mode;
-      btn.dataset.icon = mode === 'dark' ? 'moon' : 'sun';
+      if (sunIcon && moonIcon) {
+        if (mode === 'dark') {
+          sunIcon.style.display = 'inline-block';
+          moonIcon.style.display = 'none';
+        } else {
+          sunIcon.style.display = 'none';
+          moonIcon.style.display = 'inline-block';
+        }
+      }
     }
 
-    // وضعیت تم ذخیره شده از localStorage
-    let saved = localStorage.getItem(KEY) || 'light'; // پیش‌فرض روشن
+    let saved = 'dark';
+    try { saved = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
     updateTheme(saved);
 
-    // تنظیم مجدد تم هنگام تغییر وضعیت دکمه
-    btn.addEventListener('click', () => {
-      const current = localStorage.getItem(KEY) || 'light';
-      const next = current === 'dark' ? 'light' : 'dark';  // فقط دو حالت: تاریک و روشن
-      localStorage.setItem(KEY, next);
-      updateTheme(next);
-    });
+    if (btn) {
+      btn.addEventListener('click', () => {
+        let current = 'dark';
+        try { current = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+        const next = current === 'dark' ? 'light' : 'dark';
+        try { localStorage.setItem(KEY, next); } catch (e) {}
+        updateTheme(next);
+      });
+    }
 
-    // هنگام بارگذاری صفحه
     document.addEventListener('DOMContentLoaded', () => {
-      updateTheme(localStorage.getItem(KEY) || 'light');
+      let mode = 'dark';
+      try { mode = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+      updateTheme(mode);
+      const yearSpan = document.getElementById('y');
+      if (yearSpan) yearSpan.textContent = new Date().getFullYear();
     });
+
+    const mobBtn = document.getElementById('mobileMenuBtn');
+    const mobDrawer = document.getElementById('mobileDrawer');
+    if (mobBtn && mobDrawer) {
+      const setDrawerOpen = (open) => {
+        mobDrawer.classList.toggle('open', open);
+        mobBtn.classList.toggle('is-open', open);
+        mobBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        mobBtn.setAttribute('aria-label', open ? 'بستن منو' : 'باز کردن منو');
+        mobDrawer.setAttribute('aria-hidden', open ? 'false' : 'true');
+      };
+
+      mobBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        setDrawerOpen(!mobDrawer.classList.contains('open'));
+      });
+
+      mobDrawer.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => setDrawerOpen(false));
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && mobDrawer.classList.contains('open')) {
+          setDrawerOpen(false);
+        }
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!mobDrawer.contains(e.target) && !mobBtn.contains(e.target)) {
+          setDrawerOpen(false);
+        }
+      });
+    }
+
+    if ('serviceWorker' in navigator) {
+      const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+      if (isLocalhost) {
+        navigator.serviceWorker.getRegistrations().then(regs => {
+          for (const reg of regs) reg.unregister();
+        });
+        if ('caches' in window) {
+          caches.keys().then(names => {
+            for (const name of names) caches.delete(name);
+          });
+        }
+      } else {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/Gitab/sw.js').catch(() => {});
+        });
+      }
+    }
   })();
-</script>
-
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-  <script>hljs.highlightAll();</script>
-
-  <script>
+  </script> <script>
   document.querySelectorAll('pre code').forEach(block => {
+    const pre = block.parentNode;
+    if (!pre || pre.querySelector('.copy-btn')) return;
+
+    const copySvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
+    const okSvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+
     const btn = document.createElement('button');
     btn.className = 'copy-btn';
-
-    const icon = document.createElement('img');
-    icon.src = "/Gitab/icone/copy.svg";
-    icon.alt = 'Copy';
-    btn.appendChild(icon);
-
-    block.parentNode.insertBefore(btn, block);
+    btn.setAttribute('aria-label', 'کپی کد');
+    btn.setAttribute('title', 'کپی کد');
+    btn.setAttribute('type', 'button');
+    btn.innerHTML = copySvg;
+    pre.appendChild(btn);
 
     btn.addEventListener('click', async () => {
-      await navigator.clipboard.writeText(block.textContent);
-      btn.classList.add('copied');
-      setTimeout(() => btn.classList.remove('copied'), 1500);
-    });
-  });
-  </script>
-
-  <script>
-  document.body.dataset.page = window.location.pathname;
-
-  const menuBtn = document.querySelector(".menu-toggle");
-  const nav = document.querySelector(".nav");
-
-  if (menuBtn && nav) {
-    menuBtn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      nav.classList.toggle("show");
-    });
-
-    document.addEventListener("click", (e) => {
-      const clickedInsideNav = nav.contains(e.target);
-      const clickedMenuButton = menuBtn.contains(e.target);
-      if (!clickedInsideNav && !clickedMenuButton) {
-        nav.classList.remove("show");
+      try {
+        await navigator.clipboard.writeText(block.textContent);
+        btn.classList.add('copied');
+        btn.innerHTML = okSvg;
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          btn.innerHTML = copySvg;
+        }, 1800);
+      } catch (err) {
+        console.error('Copy failed:', err);
       }
     });
-  }
-  </script>
-
-  <script>
-    document.getElementById('y').textContent = new Date().getFullYear();
-  </script>
-  <script>
-document.getElementById("openDonate").addEventListener("click", () => {
-  document.getElementById("donateModal").style.display = "block";
-});
-document.getElementById("closeDonate").addEventListener("click", () => {
-  document.getElementById("donateModal").style.display = "none";
-});
-document.querySelectorAll(".copy-btn").forEach(btn => {
-  btn.addEventListener("click", () => {
-    navigator.clipboard.writeText(btn.dataset.copy);
-  
-    setTimeout(() => (btn.textContent = "کپی"), 2000);
   });
-});
-</script>
+  </script> <script>
+  (() => {
+    const article = document.getElementById('chapterArticle');
+    if (!article) return;
 
-</body>
-</html>
+    const progressBar = document.getElementById('readingProgressBar');
+    if (progressBar) {
+      window.addEventListener('scroll', () => {
+        const docElem = document.documentElement;
+        const totalHeight = docElem.scrollHeight - docElem.clientHeight;
+        if (totalHeight > 0) {
+          const progress = (window.pageYOffset / totalHeight) * 100;
+          progressBar.style.width = Math.min(100, Math.max(0, progress)) + '%';
+        }
+      }, { passive: true });
+    }
+
+    const btt = document.getElementById('backToTopBtn');
+    if (btt) {
+      window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 250) {
+          btt.classList.add('visible');
+        } else {
+          btt.classList.remove('visible');
+        }
+      }, { passive: true });
+
+      btt.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+
+    article.querySelectorAll('img').forEach(img => {
+      if (!img.hasAttribute('loading')) img.loading = 'lazy';
+      if (!img.hasAttribute('decoding')) img.decoding = 'async';
+      const parent = img.parentElement;
+      if (parent && parent.tagName === 'P') {
+        parent.style.textAlign = 'center';
+      }
+
+      img.addEventListener('error', function() {
+        const src = this.getAttribute('src');
+        if (src && src.includes('assets/image/')) {
+          const parts = src.split('assets/image/');
+          const corrected = '/Gitab/books/book1/assets/image/' + parts[1];
+          if (this.src !== corrected) {
+            this.src = corrected;
+          }
+        }
+      });
+    });
+
+    article.querySelectorAll('p').forEach(p => {
+      const trimmed = p.innerText.trim();
+      if (trimmed.startsWith('💡') || trimmed.startsWith('نکته:')) {
+        p.classList.add('react-callout', 'callout-tip');
+      } else if (trimmed.startsWith('⚠️') || trimmed.startsWith('هشدار:')) {
+        p.classList.add('react-callout', 'callout-warning');
+      } else if (trimmed.startsWith('📌') || trimmed.startsWith('مهم:')) {
+        p.classList.add('react-callout', 'callout-important');
+      } else if (trimmed.startsWith('🔹') || trimmed.startsWith('🔸')) {
+        p.classList.add('react-callout', 'callout-note');
+      }
+    });
+  })();
+  </script> <script type="speculationrules">{"prefetch":[{"where":{"and":[{"href_matches":"/Gitab/*"},{"not":{"href_matches":"/Gitab/downloads/*"}},{"not":{"selector_matches":"[download], [target='_blank']"}}]},"eagerness":"moderate"}]}</script> <script>
+  (() => {
+    if (window.HTMLScriptElement && HTMLScriptElement.supports && HTMLScriptElement.supports('speculationrules')) return;
+    const seen = new Set([window.location.href]);
+    let count = 0;
+    const prefetchLink = (e) => {
+      if (count >= 12) return;
+      const a = e.target && e.target.closest ? e.target.closest('header a, .chapter-single-next-nav a, .syllabus-chapter-item a, .btn-hero-read, .btn-card-read') : null;
+      if (!a || !a.href || a.hasAttribute('download') || a.target === '_blank') return;
+      if (a.origin !== window.location.origin || a.pathname.includes('/downloads/')) return;
+      const clean = a.href.split('#')[0];
+      if (!clean || seen.has(clean)) return;
+      seen.add(clean);
+      count++;
+      const l = document.createElement('link');
+      l.rel = 'prefetch';
+      l.href = clean;
+      document.head.appendChild(l);
+    };
+    document.addEventListener('pointerenter', prefetchLink, { capture: true, passive: true });
+    document.addEventListener('touchstart', prefetchLink, { capture: true, passive: true });
+  })();
+  </script></body></html>

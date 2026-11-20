@@ -1,436 +1,27 @@
-
-
-<!doctype html>
-<html lang="fa" dir="rtl">
-<head>
-  <meta charset="utf-8">
-  <link rel="icon" type="image/png" href="/Gitab/favicon.png">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>استفاده از ابزارها برای بهبود کیفیت کد</title>
-  <meta name="description" content="ترجمه‌های فارسی کتاب‌های فنی — سریع، مینیمال و قابل اتکا.">
-
-  <!-- استایل‌ها -->
-  <link rel="stylesheet" href="/Gitab/styles/main.css">
-  <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
-
-  <style>
-  @font-face {
-    font-family: 'Vazir';
-    src: url('/Gitab/fonts/Vazir-FD-WOL.ttf') format('truetype');
-    font-display: swap;
-  }
-  @font-face {
-    font-family: "Lalezar";
-    src: url('fonts/Lalezar.ttf') format('truetype');
-    font-display: swap;
-}
-  body {
-    font-family: 'Vazir', sans-serif;
-  }
-  </style>
-</head>
-
-<body>
-  <!-- هدر مشترک -->
-  <header class="header">
-    <div class="container nav-wrap">
-      <a href="/Gitab/" class="brand">
-        <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="26" height="26">
-        <span>Gitab</span>
-      </a>
-
-       <nav class="nav">
-         <a href="/Gitab/" >خانه</a>
-         <a href="/Gitab/books/list-books" >کتاب‌ها</a>
-         <a href="/Gitab/giter.html" >دوره ها</a>
-          <!-- 
-         <a href="/Gitab/translator.html" >مترجمین</a>
-           -->
-       </nav>
-
-      <div class="nav-actions">
-        <button id="themeToggle" class="icon-btn theme-btn" data-icon="moon" aria-label="تغییر تم">
-          <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن">
-          <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک">
-        </button>
-
-        <a class="icon-btn" href="https://github.com/hheydarian/Gitab" target="_blank" title="GitHub">
-          <img src="/Gitab/icone/github.svg" alt="GitHub">
-        </a>
-
-        <!-- دکمه منو برای موبایل -->
-        <button class="menu-toggle" aria-label="منو">
-          <img src="/Gitab/icone/menu.svg" alt="menu">
-        </button>
-      </div>
-    </div>
-  </header>
-
-  
-  <main class="site-main book-page">
-    <h1>فصل دوازدهم: <strong>استفاده از ابزارها برای بهبود کیفیت کد</strong> 🛠️</h1>
-<p>به عنوان یک برنامه‌نویس، ارتقای کیفیت کد یکی از مهم‌ترین دغدغه‌های شماست. بهبود کیفیت کد نیازمند استفاده از ابزارهای مختلف است. ابزارهایی که برای بهبود کد و همچنین سرعت بخشیدن به توسعه طراحی شده‌اند، شامل <strong>code metrics</strong>، <strong>quick actions</strong>، پروفایلر <strong>JetBrains dotTrace</strong>، <strong>JetBrains ReSharper</strong> و <strong>Telerik JustDecompile</strong> هستند.</p>
-<p>در این فصل، ما عمدتاً روی موارد زیر تمرکز خواهیم کرد:</p>
-<ul>
-<li>تعریف کد با کیفیت بالا</li>
-<li>انجام پاک‌سازی کد و محاسبه <strong>code metrics</strong></li>
-<li>انجام تحلیل کد</li>
-<li>استفاده از <strong>quick actions</strong></li>
-<li>استفاده از پروفایلر <strong>JetBrains dotTrace</strong></li>
-<li>استفاده از <strong>JetBrains ReSharper</strong></li>
-<li>استفاده از <strong>Telerik JustDecompile</strong></li>
-</ul>
-<p>در پایان این فصل، شما مهارت‌های زیر را کسب خواهید کرد:</p>
-<ul>
-<li>استفاده از <strong>code metrics</strong> برای اندازه‌گیری پیچیدگی و نگهداری‌پذیری نرم‌افزار</li>
-<li>استفاده از <strong>quick actions</strong> برای اعمال تغییرات با یک دستور</li>
-<li>پروفایلینگ کد و تحلیل گلوگاه‌های عملکرد با <strong>JetBrains dotTrace</strong></li>
-<li>بازسازی (<strong>Refactoring</strong>) کد با استفاده از <strong>JetBrains ReSharper</strong></li>
-<li>دی‌کامپایل کردن کد و تولید یک راه‌حل (<strong>solution</strong>) با استفاده از <strong>Telerik JustDecompile</strong></li>
-</ul>
-<hr>
-<h3>نیازمندی‌های فنی 💻</h3>
-<ul>
-<li>کد منبع این کتاب: <a href="https://github.com/PacktPublishing/Clean-Code-in-C-">GitHub</a></li>
-<li><strong>Visual Studio 2019 Community Edition</strong> یا بالاتر: <a href="https://visualstudio.microsoft.com/downloads/">دانلود</a></li>
-<li><strong>Telerik JustDecompile</strong>: <a href="https://www.telerik.com/products/decompiler.aspx">سایت رسمی</a></li>
-<li><strong>JetBrains ReSharper Ultimate</strong>: <a href="https://www.jetbrains.com/resharper/download/#section=resharper-installer">دانلود</a></li>
-</ul>
-<hr>
-<h3>تعریف کد با کیفیت بالا ✅</h3>
-<p>کیفیت بالای کد یک ویژگی اساسی نرم‌افزار است. کد با کیفیت پایین می‌تواند منجر به <strong>ضرر مالی، اتلاف وقت و تلاش، و حتی خطرات جانی</strong> شود. کد با استاندارد بالا باید ویژگی‌های زیر را داشته باشد: <strong>Performance, Availability, Security, Scalability, Maintainability, Accessibility, Deployability, Extensibility (PASSMADE)</strong></p>
-<ul>
-<li>
-<p><strong>Performance (عملکرد):</strong> کد پرسرعت، کوچک، و تنها کاری که لازم است انجام می‌دهد. چنین کدی سیستم را متوقف نمی‌کند. عواملی که سیستم را متوقف می‌کنند شامل عملیات ورودی/خروجی (<strong>I/O</strong>)، مصرف حافظه، و استفاده از پردازنده (<strong>CPU</strong>) هستند. کد با عملکرد پایین نیاز به <strong>Refactoring</strong> دارد.</p>
-</li>
-<li>
-<p><strong>Availability (دسترس‌پذیری):</strong> نرم‌افزار باید همواره در سطح عملکرد مورد نیاز در دسترس باشد. دسترس‌پذیری نسبت زمانی که نرم‌افزار عملکرد دارد (<strong>tsf</strong>) به زمان کل مورد انتظار برای عملکرد (<strong>ttef</strong>) است. مثال: tsf = 700; ttef = 744 → 700 / 744 = 0.9409 = 94.09٪ دسترس‌پذیری</p>
-</li>
-<li>
-<p><strong>Security (امنیت):</strong> کد امن ورودی‌ها را به درستی اعتبارسنجی می‌کند تا از فرمت‌های داده‌ای نامعتبر، محدوده‌های داده‌ای نامعتبر، و حملات مخرب جلوگیری شود و کاربران را به طور کامل <strong>احراز هویت و مجوزدهی</strong> کند. کد امن همچنین <strong>Fault-tolerant</strong> است؛ برای مثال اگر انتقال پول نیمه‌تمام مانده و سیستم خراب شود، داده‌ها باید سالم باقی بمانند و پولی از حساب کم نشود.</p>
-</li>
-<li>
-<p><strong>Scalability (قابلیت مقیاس‌پذیری):</strong> کد باید بتواند رشد نمایی تعداد کاربران را بدون کاهش عملکرد یا توقف سیستم مدیریت کند. چه نرم‌افزار یک درخواست در ساعت پردازش کند یا یک میلیون درخواست، عملکرد نباید کاهش یابد و <strong>Downtime</strong> ایجاد نشود.</p>
-</li>
-<li>
-<p><strong>Maintainability (نگهداری‌پذیری):</strong> آسان بودن رفع باگ‌ها و اضافه کردن ویژگی‌های جدید. کد قابل نگهداری باید منظم، خوانا، با <strong>low coupling</strong> و <strong>high cohesion</strong> باشد تا به راحتی قابل نگهداری و توسعه باشد.</p>
-</li>
-<li>
-<p><strong>Accessibility (قابلیت دسترسی):</strong> کد باید برای افراد با توانایی محدود نیز آسان برای استفاده و تغییر باشد. مثال: رابط‌های کاربری با کنتراست بالا، <strong>Narrator</strong> برای افراد دیسلکسیک یا نابینا و غیره.</p>
-</li>
-<li>
-<p><strong>Deployability (قابلیت پیاده‌سازی):</strong> نرم‌افزار باید برای انواع کاربران—چه <strong>Standalone، Remote Access، یا Local Network</strong>—به راحتی قابل پیاده‌سازی باشد.</p>
-</li>
-<li>
-<p><strong>Extensibility (قابلیت توسعه‌پذیری):</strong> آسان بودن افزودن ویژگی‌های جدید. کدهای <strong>Spaghetti</strong> و کدهای با <strong>Coupling بالا و Cohesion پایین</strong> باعث دشواری و احتمال خطای زیاد می‌شوند. کد extensible باید خوانا، قابل نگهداری و آسان برای افزودن ویژگی‌های جدید باشد.</p>
-</li>
-</ul>
-<p>از ویژگی‌های <strong>PASSMADE</strong> می‌توان مشکلات احتمالی ناشی از عدم رعایت این استانداردها را پیش‌بینی کرد:</p>
-<ul>
-<li>کد کند و ناامیدکننده</li>
-<li>افزایش <strong>Downtime</strong> برای کاربران</li>
-<li>سوءاستفاده هکرها از آسیب‌پذیری‌ها</li>
-<li>کاهش عملکرد نرم‌افزار با افزایش کاربران</li>
-<li>سخت بودن رفع باگ یا توسعه کد</li>
-<li>کاربران با توانایی محدود نمی‌توانند نرم‌افزار را متناسب با نیاز خود تغییر دهند</li>
-<li>پیاده‌سازی نرم‌افزار تبدیل به یک کابوس پیکربندی می‌شود</li>
-</ul>
-<hr>
-<h3><strong>Code Metrics</strong> به کمک می‌آید 📏</h3>
-<p><strong>Code metrics</strong> به توسعه‌دهندگان امکان می‌دهد <strong>پیچیدگی و نگهداری‌پذیری کد</strong> را اندازه‌گیری کنند و کدهایی که نیاز به <strong>Refactoring</strong> دارند را شناسایی کنند.</p>
-<ul>
-<li><strong>Quick Actions:</strong> با یک دستور می‌توانید کد C# را <strong>Refactor</strong> کنید، مثلاً استخراج کد به متد جداگانه.</li>
-<li><strong>JetBrains dotTrace:</strong> کد شما را پروفایل می‌کند و <strong>Bottleneck</strong>های عملکرد را پیدا می‌کند.</li>
-<li><strong>JetBrains ReSharper:</strong> افزونه‌ای برای Visual Studio که کیفیت کد را تحلیل، <strong>Code Smells</strong> را شناسایی، استانداردهای برنامه‌نویسی را اعمال و کد را <strong>Refactor</strong> می‌کند.</li>
-<li><strong>Telerik JustDecompile:</strong> به شما امکان <strong>Decompile</strong> کردن کد موجود برای رفع مشکل یا ایجاد پروژه‌های IL، C# و <a href="http://VB.NET">VB.NET</a> را می‌دهد. این ابزار مخصوصاً زمانی مفید است که <strong>Source Code</strong> در دسترس نباشد و نیاز به نگهداری یا توسعه کد کامپایل‌شده داشته باشید. حتی می‌توانید <strong>Debug Symbols</strong> برای کد کامپایل‌شده تولید کنید.</li>
-</ul>
-<p>در ادامه، به بررسی دقیق‌تر ابزارها خواهیم پرداخت، ابتدا با <strong>Code Metrics</strong> شروع می‌کنیم. ✅</p>
-<h3>انجام پاک‌سازی کد و محاسبه <strong>Code Metrics</strong> 🧹📏</h3>
-<p>قبل از آنکه ببینیم چگونه <strong>code metrics</strong> را جمع‌آوری کنیم، ابتدا باید بدانیم که این معیارها چه هستند و چرا برای ما مفیدند. <strong>Code metrics</strong> عمدتاً به <strong>پیچیدگی نرم‌افزار</strong> و <strong>نگهداری‌پذیری</strong> آن مربوط می‌شوند. این معیارها به ما کمک می‌کنند ببینیم چگونه می‌توانیم <strong>نگهداری کد منبع</strong> را بهبود بخشیم و <strong>پیچیدگی کد</strong> را کاهش دهیم.</p>
-<hr>
-<h3>معیارهای کد که Visual Studio 2019 محاسبه می‌کند، شامل موارد زیر است</h3>
-<p><strong>۱. Maintainability Index (شاخص نگهداری‌پذیری)</strong><br>
-نگهداری کد یک بخش ضروری از <strong>Application Lifecycle Management (ALM)</strong> است. تا زمانی که نرم‌افزار به پایان عمر خود نرسد، باید نگهداری شود. هر چه نگهداری کد دشوارتر باشد، طول عمر کد منبع قبل از نیاز به جایگزینی کامل کوتاه‌تر است.</p>
-<p>نوشتن نرم‌افزار جدید برای جایگزینی یک سیستم مشکل و هزینه‌بر، بسیار بیشتر از نگهداری یک سیستم موجود است. شاخصی که برای اندازه‌گیری نگهداری‌پذیری کد استفاده می‌شود، <strong>Maintainability Index</strong> نام دارد. این مقدار یک عدد صحیح بین ۰ تا ۱۰۰ است.</p>
-<p><strong>رده‌بندی Maintainability Index، رنگ‌ها و معانی آن‌ها:</strong></p>
-<ul>
-<li>هر مقداری از <strong>۲۰ و بالاتر</strong>: رنگ <strong>سبز</strong>، یعنی نگهداری آسان ✅</li>
-<li>کد با <strong>نگهداری متوسط</strong>: بین ۱۰ تا ۱۹، رنگ <strong>زرد</strong> ⚠️</li>
-<li>هر مقداری <strong>کمتر از ۱۰</strong>: رنگ <strong>قرمز</strong> 🔴، یعنی نگهداری دشوار</li>
-</ul>
-<hr>
-<p><strong>۲. Cyclomatic Complexity (پیچیدگی سیکلوما‌تیک)</strong><br>
-پیچیدگی کد، که به آن <strong>Cyclomatic Complexity</strong> نیز گفته می‌شود، به تعداد مسیرهای مختلف کد در نرم‌افزار اشاره دارد. هر چه مسیرها بیشتر باشند، نرم‌افزار پیچیده‌تر است. هر چه نرم‌افزار پیچیده‌تر باشد، تست و نگهداری آن دشوارتر می‌شود.</p>
-<p>کد پیچیده می‌تواند باعث <strong>افزایش خطاها</strong> در نسخه‌های نرم‌افزار و سخت شدن نگهداری و توسعه شود. بنابراین، توصیه می‌شود پیچیدگی کد <strong>حداقل نگه داشته شود</strong>.</p>
-<hr>
-<p><strong>۳. Depth of Inheritance (عمق ارث‌بری)</strong><br>
-معیار <strong>Depth of Inheritance</strong> و <strong>Class Coupling</strong> تحت تأثیر <strong>Object-Oriented Programming (OOP)</strong> قرار دارند. در OOP، کلاس‌ها می‌توانند از کلاس‌های دیگر <strong>ارث‌بری</strong> کنند.</p>
-<ul>
-<li><strong>Base Class (کلاس پایه):</strong> کلاسی که از آن ارث‌بری می‌شود</li>
-<li><strong>Subclass (زیرکلاس):</strong> کلاس‌هایی که از کلاس پایه ارث می‌برند</li>
-</ul>
-<p>عمق ارث‌بری، تعداد کلاس‌هایی است که از یکدیگر ارث می‌برند. هر چه عمق ارث‌بری بیشتر باشد، احتمال <strong>خطا در کلاس‌های مشتق‌شده</strong> هنگام تغییر در کلاس‌های پایه بیشتر است. <strong>عمق ارث‌بری ایده‌آل = ۱</strong></p>
-<hr>
-<p><strong>۴. Class Coupling (وابستگی کلاس‌ها)</strong><br>
-OOP امکان <strong>Coupling کلاس‌ها</strong> را فراهم می‌کند. وابستگی کلاس زمانی رخ می‌دهد که یک کلاس مستقیماً توسط پارامتر، متغیر محلی، نوع بازگشتی، فراخوانی متد، نمونه‌سازی Generic یا Template، کلاس‌های پایه، پیاده‌سازی Interface، فیلدهای تعریف‌شده روی نوع‌های اضافی و <strong>Attribute Decoration</strong> ارجاع داده شود.</p>
-<p>معیار <strong>Class Coupling</strong> سطح وابستگی بین کلاس‌ها را تعیین می‌کند. برای نگهداری و توسعه آسان‌تر کد، <strong>Class Coupling باید حداقل باشد</strong>.<br>
-در OOP، یک راه برای دستیابی به این هدف <strong>استفاده از Interface-based Programming</strong> است. این روش امکان تعویض کلاس‌ها را فراهم می‌کند، به شرطی که همان Interface را پیاده‌سازی کنند.</p>
-<ul>
-<li>کد با کیفیت پایین: <strong>Coupling بالا و Cohesion پایین</strong></li>
-<li>کد با کیفیت بالا: <strong>Coupling پایین و Cohesion بالا</strong> ✅</li>
-</ul>
-<p><strong>نکته:</strong> نرم‌افزار باید <strong>Cohesion بالا و Coupling پایین</strong> داشته باشد، چون تست، نگهداری و توسعه آن را آسان‌تر می‌کند.</p>
-<hr>
-<p><strong>۵. Lines of Source Code (تعداد خطوط کد منبع)</strong><br>
-تعداد کل خطوط کد منبع شما، شامل خطوط خالی، با این معیار اندازه‌گیری می‌شود.</p>
-<p><strong>۶. Lines of Executable Code (تعداد خطوط کد اجرایی)</strong><br>
-تعداد عملیات در کد اجرایی با این معیار سنجیده می‌شود.</p>
-<hr>
-<h3>شروع استفاده از Code Metrics در Visual Studio 2019 🖥️</h3>
-<p>حالا که با <strong>Code Metrics</strong> و معیارهای موجود در <strong>Visual Studio 2019 نسخه 16.4 به بعد</strong> آشنا شدید، وقت آن است که آنها را عملی ببینیم:</p>
-<p>1️⃣ هر پروژه‌ای که می‌خواهید در Visual Studio باز کنید<br>
-2️⃣ روی پروژه <strong>راست‌کلیک</strong> کنید<br>
-3️⃣ گزینه <strong>Analyze and Code Cleanup | Run Code Cleanup (Profile 1)</strong> را انتخاب کنید، همان‌طور که در تصویر زیر نشان داده شده است</p>
-<div align="center">
-<p><img src="../../../assets/image/12/Table%2012-1.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<p>4️⃣ اکنون گزینه <strong>Calculate Code Metrics</strong> را انتخاب کنید.</p>
-<p>5️⃣ باید پنجره <strong>Code Metrics Results</strong> ظاهر شود، همان‌طور که در تصویر زیر نشان داده شده است. ✅</p>
-<div align="center">
-<p><img src="../../../assets/image/12/Table%2012-2.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<p>همان‌طور که در تصویر مشاهده می‌کنید، تمام <strong>کلاس‌ها، اینترفیس‌ها و متدها</strong> با <strong>شاخص سبز</strong> علامت‌گذاری شده‌اند. این بدان معناست که پروژه انتخاب‌شده <strong>قابل نگهداری</strong> است. اگر هر یک از این خطوط با رنگ <strong>زرد یا قرمز</strong> مشخص شده بودند، باید آن‌ها را بررسی کرده و <strong>Refactor</strong> کنید تا به رنگ سبز درآیند.</p>
-<p>خب، حالا که با <strong>Code Metrics</strong> آشنا شدیم، طبیعتاً به سراغ <strong>Code Analysis</strong> می‌رویم. 🔍</p>
-<hr>
-<h3>انجام تحلیل کد (Performing Code Analysis) 🛠️</h3>
-<p>برای کمک به توسعه‌دهندگان در شناسایی مشکلات بالقوه در <strong>کد منبع</strong>، شرکت <strong>Microsoft</strong> ابزار <strong>Code Analysis</strong> را به عنوان بخشی از Visual Studio ارائه کرده است.</p>
-<p><strong>Code Analysis</strong> یک تحلیل <strong>Static</strong> روی کد منبع انجام می‌دهد و می‌تواند موارد زیر را شناسایی کند:</p>
-<ul>
-<li>مشکلات طراحی (<strong>Design Flaws</strong>)</li>
-<li>مشکلات مربوط به <strong>Globalization</strong></li>
-<li>مشکلات امنیتی (<strong>Security Problems</strong>)</li>
-<li>مسائل مربوط به عملکرد (<strong>Performance Issues</strong>)</li>
-<li>مشکلات <strong>Interoperability</strong></li>
-</ul>
-<hr>
-<p>برای استفاده از این ابزار:</p>
-<p>1️⃣ <strong>راه‌حل کتاب را باز کنید</strong> و پروژه <strong>CH11_AddressingCrossCuttingConcerns</strong> را انتخاب کنید<br>
-2️⃣ از منوی <strong>Project</strong> مسیر زیر را انتخاب کنید:<br>
-<strong>Project | CH11_AddressingCrossCuttingConcerns | Properties</strong><br>
-3️⃣ در صفحه <strong>Properties</strong> پروژه، گزینه <strong>Code Analysis</strong> را انتخاب کنید، همان‌طور که در تصویر زیر نشان داده شده است ✅</p>
-<div align="center">
-<p><img src="../../../assets/image/12/Table%2012-3.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<p>همان‌طور که در تصویر قبلی مشاهده می‌کنید، اگر ببینید که <strong>پکیج Analyzer پیشنهادی نصب نشده است</strong>، روی <strong>Install</strong> کلیک کنید تا نصب شود.</p>
-<p>پس از نصب، شماره نسخه در <strong>Installed Version Box</strong> نمایش داده می‌شود. برای من، نسخه <strong>2.9.6</strong> است.</p>
-<p>به طور پیش‌فرض، <strong>Active Rules</strong> روی <strong>Microsoft Managed Recommended Rules</strong> تنظیم شده است.<br>
-محل این <strong>Ruleset</strong>، همان‌طور که در توضیحات نشان داده شده، به صورت زیر است:</p>
-<pre class="hljs"><code>C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\Team Tools\Static Analysis Tools\Rule Sets\MinimumRecommendedRules.ruleset
-</code></pre>
-<p>فایل را باز کنید. این فایل به صورت یک <strong>پنجره ابزار در Visual Studio</strong> باز خواهد شد، همان‌طور که در تصویر زیر مشاهده می‌کنید. ✅</p>
-<div align="center">
-<p><img src="../../../assets/image/12/Table%2012-4.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<p>همان‌طور که در تصویر قبلی مشاهده می‌کنید، می‌توانید <strong>قوانین (Rules) را انتخاب یا لغو انتخاب کنید</strong>. وقتی پنجره را بستید، از شما خواسته می‌شود تغییرات را <strong>ذخیره کنید</strong>.</p>
-<p>برای اجرای <strong>Code Analysis</strong>، مسیر زیر را دنبال کنید:<br>
-<strong>Analyze and Code Cleanup | Code Analysis</strong></p>
-<p>برای مشاهده نتایج، باید <strong>پنجره Error List</strong> باز باشد. می‌توانید آن را از منوی <strong>View</strong> باز کنید.</p>
-<p>پس از اجرای تحلیل کد، <strong>لیستی از خطاها، هشدارها و پیام‌ها</strong> مشاهده خواهید کرد. می‌توانید هر یک از آن‌ها را بررسی و اصلاح کنید تا <strong>کیفیت کلی نرم‌افزار</strong> خود را بهبود دهید.</p>
-<p>نمونه‌ای از این نتایج را می‌توان در تصویر زیر مشاهده کرد ✅</p>
-<div align="center">
-<p><img src="../../../assets/image/12/Table%2012-5.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<p>همان‌طور که در تصویر قبلی مشاهده می‌کنید، پروژه <strong>CH10_AddressingCrossCuttingConcerns</strong> دارای <strong>۳۲ هشدار و ۱۳ پیام</strong> است. اگر روی این هشدارها و پیام‌ها کار کنیم، می‌توانیم تعداد آن‌ها را به <strong>۰ هشدار و ۰ پیام</strong> کاهش دهیم.</p>
-<p>حالا که دیدید چگونه با استفاده از <strong>Code Metrics</strong> می‌توان میزان <strong>نگهداری‌پذیری</strong> نرم‌افزار را سنجید و با تحلیل کد، نقاط قابل بهبود را پیدا کرد، وقت آن است که به <strong>Quick Actions</strong> نگاهی بیندازیم. ⚡</p>
-<hr>
-<h3>استفاده از Quick Actions 🛠️💡</h3>
-<p>یکی دیگر از ابزارهای مفیدی که من دوست دارم استفاده کنم، ابزار <strong>Quick Action</strong> است. این ابزار معمولاً به صورت <strong>پیچ‌گوشتی 🪛، لامپ 💡 یا لامپ خطا 💡⚠️</strong> در کنار یک خط کد ظاهر می‌شود.</p>
-<p>با <strong>Quick Actions</strong> می‌توانید با یک دستور:</p>
-<ul>
-<li>کد تولید کنید</li>
-<li>کد را <strong>Refactor</strong> کنید</li>
-<li>هشدارها را <strong>Suppress</strong> کنید</li>
-<li>اصلاحات کد (<strong>Code Fix</strong>) انجام دهید</li>
-<li>و <strong>using statements</strong> اضافه کنید</li>
-</ul>
-<p>از آنجا که پروژه <strong>CH10_AddressingCrossCuttingConcerns</strong> دارای ۳۲ هشدار و ۱۳ پیام بود، می‌توانیم از این پروژه برای مشاهده عملکرد <strong>Quick Actions</strong> استفاده کنیم.</p>
-<p>به تصویر زیر نگاه کنید تا عملکرد Quick Actions را ببینید ✅</p>
-<div align="center">
-<p><img src="../../../assets/image/12/Table%2012-6.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<p>با نگاه به تصویر قبلی، می‌بینیم <strong>لامپ 💡</strong> روی خط <strong>۱۰</strong> ظاهر شده است.</p>
-<p>اگر روی <strong>لامپ</strong> کلیک کنیم، منوی زیر ظاهر می‌شود ✅</p>
-<div align="center">
-<p><img src="../../../assets/image/12/Table%2012-7.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<p>اگر روی گزینه <strong>Add readonly modifier</strong> کلیک کنیم، <strong>Access Modifier</strong> مربوط به <code>readonly</code> بعد از <strong>private</strong> قرار می‌گیرد.</p>
-<p>خودتان با استفاده از <strong>Quick Actions</strong> کد را تغییر دهید. وقتی با آن کار کنید، روند کار نسبتاً ساده است. پس از تمرین با <strong>Quick Actions</strong>، به سراغ ابزار <strong>JetBrains dotTrace Profiler</strong> می‌رویم. ⚡</p>
-<hr>
-<h3>استفاده از پروفایلر JetBrains dotTrace 🖥️📊</h3>
-<p>پروفایلر <strong>JetBrains dotTrace</strong> بخشی از <strong>JetBrains ReSharper Ultimate</strong> است. از آنجا که در این فصل به هر دو ابزار نگاه می‌کنیم، توصیه می‌کنم قبل از ادامه، <strong>JetBrains ReSharper Ultimate</strong> را دانلود و نصب کنید.</p>
-<p>JetBrains نسخه <strong>Trial</strong> هم ارائه می‌دهد، در صورتی که نسخه اصلی را ندارید. نسخه‌هایی برای <strong>Windows، macOS و Linux</strong> موجود است.</p>
-<p>پروفایلر <strong>dotTrace</strong> با <strong>Mono، .NET Framework و .NET Core</strong> کار می‌کند. تمام انواع برنامه‌ها توسط این پروفایلر پشتیبانی می‌شوند و می‌توانید از آن برای تحلیل و یافتن مشکلات <strong>Performance</strong> در کد استفاده کنید. این ابزار به شما کمک می‌کند مشکلاتی مانند:</p>
-<ul>
-<li>مصرف ۱۰۰٪ CPU</li>
-<li>استفاده کامل از I/O دیسک</li>
-<li>پر شدن حافظه</li>
-<li>بروز <strong>Overflow Exception</strong><br>
-و بسیاری مشکلات دیگر را شناسایی کنید.</li>
-</ul>
-<p>بسیاری از برنامه‌ها درخواست‌های <strong>HTTP</strong> ارسال می‌کنند. پروفایلر تحلیل می‌کند که چگونه برنامه این درخواست‌ها را پردازش می‌کند، و همین کار را برای <strong>SQL Queries</strong> روی پایگاه داده نیز انجام می‌دهد. همچنین می‌توانید <strong>Static Methods</strong> و <strong>Unit Tests</strong> را پروفایل کنید و نتایج را داخل <strong>Visual Studio</strong> مشاهده کنید. نسخه‌ای <strong>Standalone</strong> نیز موجود است.</p>
-<hr>
-<h3>چهار گزینه اصلی پروفایلینگ 📈</h3>
-<ol>
-<li><strong>Sampling:</strong> اندازه‌گیری دقیق زمان فراخوانی متدها، مناسب برای شروع</li>
-<li><strong>Tracing:</strong> جزئیات بیشتر پروفایلینگ، با overhead بالاتر (CPU و حافظه)</li>
-<li><strong>Line-by-Line:</strong> تحلیل دقیق خط به خط، با overhead بیشتر</li>
-<li><strong>Timeline:</strong> مشابه Sampling، اما <strong>Events برنامه</strong> را در طول زمان جمع‌آوری می‌کند</li>
-</ol>
-<p>بین این چهار گزینه، هیچ مشکلی وجود ندارد که قابل شناسایی و رفع نباشد.</p>
-<p><strong>گزینه‌های پیشرفته پروفایلینگ شامل:</strong></p>
-<ul>
-<li>Real-time Performance Counters: اندازه‌گیری زمان بین ورود و خروج متد</li>
-<li>Thread Time: زمان اجرای <strong>Thread</strong></li>
-<li>Real-time CPU Instructions: زمان دقیق ورود و خروج متد بر اساس <strong>CPU register</strong></li>
-<li>Thread Cycle Time: زمان چرخه <strong>Thread</strong></li>
-</ul>
-<hr>
-<h3>پروفایل کردن برنامه‌ها</h3>
-<p>پروفایلر می‌تواند به برنامه‌ها و پردازه‌های در حال اجرای <strong>.NET Framework 4.0 یا بالاتر</strong> و <strong>.NET Core 3.0 یا بالاتر</strong> متصل شود، برنامه‌های محلی و راه دور را پروفایل کند.<br>
-این شامل موارد زیر است:</p>
-<ul>
-<li>برنامه‌های <strong>Standalone</strong></li>
-<li>برنامه‌های <strong>.NET Core</strong></li>
-<li>وب اپلیکیشن‌های میزبان <strong>IIS</strong> و <strong>IIS Express</strong></li>
-<li>سرویس‌های <strong>.NET Windows Services</strong> و <strong>WCF</strong></li>
-<li>برنامه‌های <strong>Windows Store</strong> و <strong>UWP</strong></li>
-<li>هر پردازه <strong>.NET</strong> که پس از شروع جلسه پروفایلینگ اجرا شود</li>
-<li>برنامه‌های <strong>Desktop</strong> یا <strong>Console</strong> بر پایه <strong>Mono</strong></li>
-<li><strong>Unity Editor</strong> یا برنامه‌های مستقل <strong>Unity</strong></li>
-</ul>
-<hr>
-<h3>دسترسی به پروفایلر در Visual Studio 2019</h3>
-<p>از منوی <strong>Extensions | ReSharper | Profile | Show Performance Profiler</strong> استفاده کنید.</p>
-<p>در تصویر زیر می‌بینید که هنوز هیچ پروفایلی اجرا نشده است. پروژه انتخاب‌شده <strong>Basic CH3</strong> است و نوع پروفایلینگ روی <strong>Timeline</strong> تنظیم شده است.</p>
-<p>برای پروفایل کردن پروژه <strong>CH3</strong> با <strong>Sampling</strong>، <strong>Timeline Dropdown</strong> را باز کرده و <strong>Sampling</strong> را انتخاب کنید، همان‌طور که در تصویر بعدی نشان داده شده است ✅</p>
-<div align="center">
-<p><img src="../../../assets/image/12/Table%2012-8.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<p>اگر بخواهید پروژه دیگری را پروفایل کنید، کافی است <strong>Drop-down لیست Project</strong> را باز کرده و پروژه موردنظر خود را انتخاب کنید.</p>
-<p>پروژه ساخته (<strong>Build</strong>) می‌شود و پروفایلر شروع به کار می‌کند. سپس پروژه شما اجرا شده و خاموش می‌شود.</p>
-<p>نتایج در <strong>dotTrace Profiling Application</strong> نمایش داده می‌شوند، همان‌طور که در تصویر زیر مشاهده می‌کنید ✅</p>
-<div align="center">
-<p><img src="../../../assets/image/12/Table%2012-9.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<p>همان‌طور که در تصویر قبلی مشاهده می‌کنید، <strong>اولین از چهار Thread</strong> نمایش داده شده است. این Thread مربوط به <strong>برنامه ما</strong> است. سایر Thread‌ها برای <strong>فرآیندهای پشتیبان</strong> هستند که اجرای برنامه را ممکن می‌کنند، همراه با <strong>Finalizer Thread</strong> که مسئول خروج از برنامه و پاک‌سازی منابع سیستم است.</p>
-<p>موارد منوی <strong>All Calls</strong> در سمت چپ شامل موارد زیر است:</p>
-<ul>
-<li><strong>Thread Tree</strong></li>
-<li><strong>Call Tree</strong></li>
-<li><strong>Plain List</strong></li>
-<li><strong>Hot Spots</strong></li>
-</ul>
-<p>در حال حاضر، گزینه <strong>Thread Tree</strong> انتخاب شده است.<br>
-حال نگاهی به <strong>Call Tree</strong> گسترش یافته در تصویر بعدی می‌اندازیم ✅</p>
-<div align="center">
-<p><img src="../../../assets/image/12/Table%2012-10.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<p>پروفایلر <strong>Call Tree کامل</strong> کد شما را نشان می‌دهد، که شامل <strong>کد سیستم</strong> و <strong>کد خودتان</strong> است.<br>
-شما می‌توانید <strong>درصد زمان صرف‌شده برای هر فراخوانی</strong> را مشاهده کنید. این امکان به شما می‌دهد تا <strong>متدهای طولانی</strong> را شناسایی کرده و آن‌ها را بهبود دهید.</p>
-<p>حال، به <strong>Plain List</strong> نگاه می‌کنیم. همان‌طور که در تصویر بعدی مشاهده می‌کنید، در <strong>Plain List View</strong> می‌توانیم داده‌ها را بر اساس معیارهای زیر <strong>گروه‌بندی کنیم</strong>:</p>
-<ul>
-<li>None</li>
-<li>Class</li>
-<li>Namespace</li>
-<li>Assembly</li>
-</ul>
-<p>معیارهای فوق را می‌توانید در تصویر زیر مشاهده کنید ✅</p>
-<div align="center">
-<p><img src="../../../assets/image/12/Table%2012-11.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<p>وقتی روی یک مورد در لیست کلیک می‌کنید، می‌توانید <strong>کد منبع کلاس</strong>ی که متد در آن قرار دارد را مشاهده کنید.</p>
-<p>این ویژگی مفید است، زیرا می‌توانید ببینید <strong>مشکل در کجا قرار دارد</strong> و چه کاری باید انجام شود.</p>
-<p>آخرین صفحه پروفایلینگ با <strong>Sampling</strong> که بررسی می‌کنیم، <strong>Hot Spots View</strong> است، همان‌طور که در تصویر زیر نشان داده شده است ✅</p>
-<div align="center">
-<p><img src="../../../assets/image/12/Table%2012-12.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<p>پروفایلر نشان می‌دهد که <strong>Main Thread</strong>، که نقطه شروع کد ما است، تنها <strong>۴.۵۹٪</strong> از زمان پردازش را به خود اختصاص می‌دهد.</p>
-<p>اگر روی <strong>Root</strong> کلیک کنید، مشاهده می‌کنید که <strong>۱۸٪ کد مربوط به کد کاربر</strong> است و <strong>۷۲٪ کد مربوط به کد سیستم</strong> می‌باشد، همان‌طور که در تصویر زیر نشان داده شده است ✅</p>
-<div align="center">
-<p><img src="../../../assets/image/12/Table%2012-13.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<p>ما تاکنون تنها <strong>سطحی از امکانات این ابزار پروفایلینگ</strong> را بررسی کرده‌ایم. هنوز قابلیت‌های بیشتری وجود دارد و توصیه می‌کنم خودتان آن را امتحان کنید. هدف اصلی این فصل، <strong>معرفی ابزارهای موجود</strong> برای بهبود کد شماست.</p>
-<p>برای اطلاعات بیشتر درباره <strong>نحوه استفاده از JetBrains dotTrace</strong>، می‌توانید به منابع آموزشی آنلاین آن‌ها مراجعه کنید:<br>
-<a href="https://www.jetbrains.com/profiler/documentation/documentation.html">JetBrains dotTrace Documentation</a> 📚</p>
-<hr>
-<h3>استفاده از JetBrains ReSharper 🛠️✨</h3>
-<p>در این بخش، می‌بینیم که چگونه <strong>JetBrains ReSharper</strong> می‌تواند به بهبود کد شما کمک کند.</p>
-<p><strong>ReSharper</strong> یک ابزار گسترده است و همانند پروفایلر که بخشی از نسخه <strong>Ultimate</strong> آن است، ما تنها به <strong>بررسی ابتدایی امکانات آن</strong> می‌پردازیم. هدف این است که با قابلیت‌های ابزار آشنا شوید و بدانید چگونه می‌تواند تجربه کدنویسی شما در <strong>Visual Studio</strong> را بهبود دهد.</p>
-<hr>
-<h3>چند مزیت استفاده از ReSharper</h3>
-<ul>
-<li>با ReSharper می‌توانید <strong>کیفیت کد خود را تحلیل کنید</strong> ✅</li>
-<li>گزینه‌هایی برای <strong>بهبود کد، حذف Code Smells و رفع مشکلات کدنویسی</strong> ارائه می‌دهد</li>
-<li>با <strong>سیستم ناوبری (Navigation System)</strong> می‌توانید کل پروژه را پیمایش کرده و به هر موردی که نیاز دارید، بروید. امکانات جانبی شامل <strong>IntelliSense پیشرفته، بازآرایی کد و موارد دیگر</strong> است</li>
-<li>قابلیت <strong>Refactoring</strong> با ReSharper می‌تواند <strong>محلی یا در سطح کل راه‌حل (Solution-wide)</strong> باشد</li>
-<li>می‌توانید <strong>کد منبع تولید کنید</strong>، مانند کلاس‌های پایه و فوق‌کلاس‌ها و متدهای Inline</li>
-<li>کد می‌تواند مطابق با <strong>سیاست‌های کدنویسی شرکت</strong> پاک‌سازی شود، برای مثال حذف <strong>Imports غیرضروری</strong> و دیگر کدهای بلااستفاده</li>
-</ul>
-<hr>
-<p>برای دسترسی به منوی <strong>ReSharper</strong>، از منوی <strong>Extensions</strong> در <strong>Visual Studio 2019</strong> استفاده کنید.<br>
-وقتی در <strong>Code Editor</strong> هستید، با <strong>راست‌کلیک روی کد</strong>، منوی Context باز می‌شود و آیتم‌های مرتبط نمایش داده می‌شوند.<br>
-آیتم منوی ReSharper در Context Menu، <strong>Refactor This…</strong> است، همان‌طور که در تصویر زیر نشان داده شده ✅</p>
-<div align="center">
-<p><img src="../../../assets/image/12/Table%2012-14.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<p>حالا، از منوی <strong>Visual Studio 2019</strong> مسیر زیر را اجرا کنید:<br>
-<strong>Extensions | ReSharper | Inspect | Code Issues in Solution</strong></p>
-<p>ReSharper پروژه را پردازش کرده و سپس <strong>پنجره Inspection Results</strong> را نمایش می‌دهد، همان‌طور که در تصویر زیر مشاهده می‌کنید ✅</p>
-<div align="center">
-<p><img src="../../../assets/image/12/Table%2012-15.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<p>همان‌طور که در تصویر قبلی مشاهده می‌کنید، <strong>ReSharper</strong> تعداد <strong>۵۲۷ مشکل</strong> را در کد ما پیدا کرده است، که <strong>۴۳۶ مورد از آن‌ها نمایش داده شده‌اند</strong>. این مشکلات شامل موارد زیر می‌شوند:</p>
-<ul>
-<li><strong>تمرین‌های معمول و بهبود کد</strong></li>
-<li><strong>هشدارهای کامپایلر</strong></li>
-<li><strong>نقض محدودیت‌ها</strong></li>
-<li>فرصت‌های استفاده بهتر از زبان</li>
-<li>مشکلات احتمالی کیفیت کد</li>
-<li>تکرارهای غیرضروری در کد</li>
-<li>تکرار در اعلان نمادها (Symbol Declarations)</li>
-<li>مشکلات املایی</li>
-<li>و <strong>سبک سینتکس (Syntax Style)</strong></li>
-</ul>
-<hr>
-<p>اگر بخش <strong>Compiler Warnings</strong> را باز کنیم، سه مشکل مشاهده می‌کنیم:</p>
-<ol>
-<li>فیلد <code>_name</code> هیچ‌گاه مقداردهی نمی‌شود.</li>
-<li>متغیر محلی <code>nre</code> هرگز استفاده نمی‌شود.</li>
-<li>این متد <strong>async</strong> فاقد <strong>await</strong> است و به صورت <strong>هم‌زمان (Synchronous)</strong> اجرا می‌شود. از <strong>await</strong> برای فراخوانی‌های غیرمسدودکننده API یا <code>await TaskEx.Run(...)</code> برای کارهای CPU-bound در Thread پس‌زمینه استفاده کنید.</li>
-</ol>
-<p>این مشکلات شامل <strong>اعلان متغیرهایی است که مقداردهی یا استفاده نمی‌شوند</strong> و همچنین <strong>متد async که فاقد await است و به صورت هم‌زمان اجرا می‌شود</strong>.</p>
-<hr>
-<p>اگر روی اولین هشدار کلیک کنید، به خط کدی می‌روید که مقداردهی نشده است. با نگاه به کلاس، می‌بینیم که رشته (<code>string</code>) اعلان شده و استفاده می‌شود، اما هرگز مقداردهی نشده است. از آنجا که بررسی می‌کنیم آیا رشته <strong><code>string.Empty</code></strong> است، می‌توانیم آن را مقداردهی کنیم:</p>
-<pre class="hljs"><code><span class="hljs-keyword">private</span> <span class="hljs-built_in">string</span> _name = <span class="hljs-built_in">string</span>.Empty;
-</code></pre>
-<hr>
-<p>چون متغیر <code>_name</code> هنوز هایلایت است، می‌توانیم <strong>ماوس را روی آن ببریم</strong> و ببینیم مشکل چیست. <strong>Quick Action</strong> به ما می‌گوید که می‌توان <code>_name</code> را <strong>readonly</strong> کرد. پس آن را اضافه می‌کنیم:</p>
-<pre class="hljs"><code><span class="hljs-keyword">private</span> <span class="hljs-keyword">readonly</span> <span class="hljs-built_in">string</span> _name = <span class="hljs-built_in">string</span>.Empty;
-</code></pre>
-<p>اگر روی دکمه <strong>Refresh</strong> کلیک کنیم، می‌بینیم که تعداد مشکلات یافت‌شده اکنون <strong>۵۲۶</strong> است. اما ما دو مشکل را رفع کردیم. پس چرا تعداد ۵۲۵ نیست؟ دلیل این است که دومین مشکلی که رفع شد، توسط ReSharper شناسایی نشده بود، بلکه یک <strong>بهبود</strong> بود که توسط <strong>Visual Studio Quick Actions</strong> پیشنهاد شد. بنابراین ReSharper تعداد صحیح مشکلات شناسایی‌شده را نشان می‌دهد. ✅</p>
-<hr>
-<p>حالا به <strong>مسئله احتمالی کیفیت کد (Potential Code Quality Issue)</strong> برای کلاس <strong>LooseCouplingB</strong> نگاه می‌کنیم. ReSharper گزارش می‌دهد که امکان بروز <strong>System.NullReferenceException</strong> در این متد وجود دارد:</p>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">LooseCouplingB</span>()</span>
+<!doctype html><html lang="fa" dir="rtl"> <head><script>
+    if (window.location.pathname.startsWith('/gitab/')) {
+      window.location.replace(window.location.pathname.replace(/^\/gitab\//i, '/Gitab/') + window.location.search + window.location.hash);
+    }
+    (() => {
+      try {
+        const t = localStorage.getItem('gitab-theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', t);
+        document.documentElement.dataset.colorMode = t;
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        document.documentElement.dataset.colorMode = 'dark';
+      }
+    })();
+  </script> <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5"> <title>استفاده از ابزارها برای بهبود کیفیت کد</title><meta name="description" content="استفاده از ابزارها برای بهبود کیفیت کد — مطالعه آنلاین و رایگان از کتاب «کدنویسی تمیز در سی‌شارپ» (Clean Code in C#) اثر Jason Alls با ترجمه حامد حیدریان در گیتاب."> <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"><meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"> <meta name="theme-color" content="#090d16"><meta name="referrer" content="strict-origin-when-cross-origin"> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https:; frame-src https://www.youtube.com https://www.youtube-nocookie.com https://maps.google.com https://www.google.com; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self';"><link rel="icon" type="image/png" href="/Gitab/favicon.png"> <link rel="canonical" href="https://hheydarian.github.io/Gitab/books/book2/Book/12/Using-Tools-to-Improve-Code-Quality/"><link rel="alternate" hreflang="fa" href="https://hheydarian.github.io/Gitab/books/book2/Book/12/Using-Tools-to-Improve-Code-Quality/"> <link rel="alternate" hreflang="x-default" href="https://hheydarian.github.io/Gitab/books/book2/Book/12/Using-Tools-to-Improve-Code-Quality/"><link rel="alternate" type="text/plain" title="LLMs.txt" href="/Gitab/llms.txt"> <link rel="sitemap" type="application/xml" title="Sitemap" href="/Gitab/sitemap.xml"><meta property="og:locale" content="fa_IR"> <meta property="og:type" content="article"><meta property="og:site_name" content="گیتاب | Gitab"> <meta property="og:title" content="استفاده از ابزارها برای بهبود کیفیت کد"><meta property="og:description" content="استفاده از ابزارها برای بهبود کیفیت کد — مطالعه آنلاین و رایگان از کتاب «کدنویسی تمیز در سی‌شارپ» (Clean Code in C#) اثر Jason Alls با ترجمه حامد حیدریان در گیتاب."> <meta property="og:url" content="https://hheydarian.github.io/Gitab/books/book2/Book/12/Using-Tools-to-Improve-Code-Quality/"><meta property="og:image" content="https://hheydarian.github.io/Gitab/images/clean-code-csharp/Cover.jpg"> <meta property="og:image:alt" content="استفاده از ابزارها برای بهبود کیفیت کد"><meta name="twitter:card" content="summary_large_image"> <meta name="twitter:title" content="استفاده از ابزارها برای بهبود کیفیت کد"><meta name="twitter:description" content="استفاده از ابزارها برای بهبود کیفیت کد — مطالعه آنلاین و رایگان از کتاب «کدنویسی تمیز در سی‌شارپ» (Clean Code in C#) اثر Jason Alls با ترجمه حامد حیدریان در گیتاب."> <meta name="twitter:image" content="https://hheydarian.github.io/Gitab/images/clean-code-csharp/Cover.jpg"><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://hheydarian.github.io/Gitab/#organization","name":"گیتاب | Gitab","alternateName":"Gitab","url":"https://hheydarian.github.io/Gitab/","logo":{"@type":"ImageObject","url":"https://hheydarian.github.io/Gitab/favicon.png"},"sameAs":["https://github.com/hheydarian/Gitab"]},{"@type":"WebSite","@id":"https://hheydarian.github.io/Gitab/#website","url":"https://hheydarian.github.io/Gitab/","name":"گیتاب | Gitab","inLanguage":"fa-IR","publisher":{"@id":"https://hheydarian.github.io/Gitab/#organization"},"potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://hheydarian.github.io/Gitab/books/list-books/?q={search_term_string}"},"query-input":"required name=search_term_string"}},{"@type":"WebPage","@id":"https://hheydarian.github.io/Gitab/books/book2/Book/12/Using-Tools-to-Improve-Code-Quality/#webpage","url":"https://hheydarian.github.io/Gitab/books/book2/Book/12/Using-Tools-to-Improve-Code-Quality/","name":"استفاده از ابزارها برای بهبود کیفیت کد","description":"استفاده از ابزارها برای بهبود کیفیت کد — مطالعه آنلاین و رایگان از کتاب «کدنویسی تمیز در سی‌شارپ» (Clean Code in C#) اثر Jason Alls با ترجمه حامد حیدریان در گیتاب.","inLanguage":"fa-IR","isPartOf":{"@id":"https://hheydarian.github.io/Gitab/#website"}},{"@type":"TechArticle","headline":"استفاده از ابزارها برای بهبود کیفیت کد","description":"استفاده از ابزارها برای بهبود کیفیت کد — مطالعه آنلاین و رایگان از کتاب «کدنویسی تمیز در سی‌شارپ» (Clean Code in C#) اثر Jason Alls با ترجمه حامد حیدریان در گیتاب.","url":"https://hheydarian.github.io/Gitab/books/book2/Book/12/Using-Tools-to-Improve-Code-Quality/","inLanguage":"fa-IR","isAccessibleForFree":true,"author":{"@type":"Person","name":"Jason Alls"},"translator":{"@type":"Person","name":"حامد حیدریان"},"isPartOf":{"@type":"Book","name":"کدنویسی تمیز در سی‌شارپ","alternateName":"Clean Code in C#","url":"https://hheydarian.github.io/Gitab/books/book2/"}}]}</script> <link rel="preload" href="/Gitab/fonts/Vazirmatn.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/Gitab/styles/main.css?v=2.4" as="style"> <link rel="preload" href="/Gitab/styles/gitab-modern.css?v=2.5" as="style"><style>@font-face{font-family:'Lalezar';src:url('/Gitab/fonts/Lalezar.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}@font-face{font-family:'Vazirmatn';src:url('/Gitab/fonts/Vazirmatn.woff2') format('woff2');font-weight:100 900;font-style:normal;font-display:swap}html,body,button,input,optgroup,select,textarea,.filter-pill{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}input::placeholder,textarea::placeholder{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}</style> <link rel="stylesheet" href="/Gitab/styles/main.css?v=2.4"><link rel="stylesheet" href="/Gitab/styles/gitab-modern.css?v=2.5"> <link rel="stylesheet" href="/Gitab/styles/vendor/github-dark.min.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="/Gitab/styles/vendor/github-dark.min.css"></noscript></head> <body><header class="header"> <div class="container nav-wrap"><a href="/Gitab/" class="brand" aria-label="صفحه اصلی گیتاب"> <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="30" height="30" decoding="async"> <span class="brand-text">Gitab</span> </a> <nav class="nav" id="mainNav"><a href="/Gitab/" >خانه</a> <a href="/Gitab/books/list-books" aria-current="page">کتاب‌ها</a> <a href="/Gitab/courses/" >دوره‌ها</a> <a href="/Gitab/translator.html" >مترجمین</a></nav> <div class="nav-actions"><button id="themeToggle" class="theme-toggle-btn" aria-label="تغییر تم" title="تغییر تم"> <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن" width="18" height="18" decoding="async" style="display:none"> <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک" width="18" height="18" decoding="async"> </button> <a class="btn-github-pill" href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" title="مشاهده سورس گیتاب در گیت‌هاب"> <img src="/Gitab/icone/github.svg" alt="GitHub" width="16" height="16" decoding="async"> <span>گیت‌هاب</span> </a> <button class="mobile-menu-btn" id="mobileMenuBtn" type="button" aria-label="باز کردن منو" aria-expanded="false"> <svg class="mob-icon-open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="4" y1="7" x2="20" y2="7"></line> <line x1="4" y1="12" x2="20" y2="12"></line> <line x1="4" y1="17" x2="14" y2="17"></line> </svg> <svg class="mob-icon-close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="18" y1="6" x2="6" y2="18"></line> <line x1="6" y1="6" x2="18" y2="18"></line> </svg> </button></div> </div><div class="mobile-drawer" id="mobileDrawer" aria-hidden="true"> <div class="mobile-drawer-inner"><div class="mobile-drawer-section-label">ناوبری سریع</div><nav class="mobile-drawer-links" aria-label="منوی موبایل"> <a href="/Gitab/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M3 10.5 12 3l9 7.5"></path> <path d="M5 9.5V20a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V9.5"></path> </svg> </span> <span class="mob-nav-text">صفحه نخست</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/books/list-books" class="mobile-drawer-link active" aria-current="page"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path> </svg> </span> <span class="mob-nav-text">کتابخانه و فهرست کتاب‌ها</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/courses/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path> <path d="M6 12v5c3 3 9 3 12 0v-5"></path> </svg> </span> <span class="mob-nav-text">دوره‌های آموزشی</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/translator.html" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path> <circle cx="9" cy="7" r="4"></circle> <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path> <path d="M16 3.13a4 4 0 0 1 0 7.75"></path> </svg> </span> <span class="mob-nav-text">مترجمین و همکاران</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> </nav><div class="mobile-drawer-divider"></div><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" class="mobile-drawer-link mobile-drawer-gh"> <span class="mob-nav-icon" aria-hidden="true"> <img src="/Gitab/icone/github.svg" alt="" width="17" height="17" loading="lazy" decoding="async"> </span> <span class="mob-nav-text">مخزن گیت‌هاب پروژه</span> <span class="mob-nav-ext" aria-hidden="true">↗</span> </a> </div></div> </header><div class="reading-progress-track"> <div class="reading-progress-fill" id="readingProgressBar"></div></div> <main class="site-main chapter-reading-page"><div class="chapter-page-wrapper"> <nav class="chapter-clean-breadcrumb" aria-label="مسیر راهنما" dir="rtl"><a href="/Gitab/">خانه</a> <span class="bc-sep" aria-hidden="true">/</span> <a href="/Gitab/books/list-books/">کتاب‌ها</a> <span class="bc-sep" aria-hidden="true">/</span> <a href="/Gitab/books/book2/"><bdi>کدنویسی تمیز در سی‌شارپ</bdi></a> <span class="bc-sep" aria-hidden="true">/</span> <span class="bc-current-leaf"><bdi>استفاده از ابزارها برای بهبود کیفیت کد</bdi></span></nav> <article class="chapter-prose-container markdown-body" id="chapterArticle" dir="rtl"><h1>فصل دوازدهم: <strong>استفاده از ابزارها برای بهبود کیفیت کد</strong></h1><p>به عنوان یک برنامه‌نویس، ارتقای کیفیت کد یکی از مهم‌ترین دغدغه‌های شماست. بهبود کیفیت کد نیازمند استفاده از ابزارهای مختلف است. ابزارهایی که برای بهبود کد و همچنین سرعت بخشیدن به توسعه طراحی شده‌اند، شامل <strong>code metrics</strong>، <strong>quick actions</strong>، پروفایلر <strong>JetBrains dotTrace</strong>، <strong>JetBrains ReSharper</strong> و <strong>Telerik JustDecompile</strong> هستند.</p><p>در این فصل، ما عمدتاً روی موارد زیر تمرکز خواهیم کرد:</p><ul> <li>تعریف کد با کیفیت بالا</li><li>انجام پاک‌سازی کد و محاسبه <strong>code metrics</strong></li><li>انجام تحلیل کد</li><li>استفاده از <strong>quick actions</strong></li><li>استفاده از پروفایلر <strong>JetBrains dotTrace</strong></li><li>استفاده از <strong>JetBrains ReSharper</strong></li><li>استفاده از <strong>Telerik JustDecompile</strong></li></ul> <p>در پایان این فصل، شما مهارت‌های زیر را کسب خواهید کرد:</p><ul> <li>استفاده از <strong>code metrics</strong> برای اندازه‌گیری پیچیدگی و نگهداری‌پذیری نرم‌افزار</li><li>استفاده از <strong>quick actions</strong> برای اعمال تغییرات با یک دستور</li><li>پروفایلینگ کد و تحلیل گلوگاه‌های عملکرد با <strong>JetBrains dotTrace</strong></li><li>بازسازی (<strong>Refactoring</strong>) کد با استفاده از <strong>JetBrains ReSharper</strong></li><li>دی‌کامپایل کردن کد و تولید یک راه‌حل (<strong>solution</strong>) با استفاده از <strong>Telerik JustDecompile</strong></li></ul> <hr><h3>نیازمندی‌های فنی</h3><ul> <li>کد منبع این کتاب: <a href="https://github.com/PacktPublishing/Clean-Code-in-C-">GitHub</a></li><li><strong>Visual Studio 2019 Community Edition</strong> یا بالاتر: <a href="https://visualstudio.microsoft.com/downloads/">دانلود</a></li><li><strong>Telerik JustDecompile</strong>: <a href="https://www.telerik.com/products/decompiler.aspx">سایت رسمی</a></li><li><strong>JetBrains ReSharper Ultimate</strong>: <a href="https://www.jetbrains.com/resharper/download/#section=resharper-installer">دانلود</a></li></ul> <hr><h3>تعریف کد با کیفیت بالا</h3><p>کیفیت بالای کد یک ویژگی اساسی نرم‌افزار است. کد با کیفیت پایین می‌تواند منجر به <strong>ضرر مالی، اتلاف وقت و تلاش، و حتی خطرات جانی</strong> شود. کد با استاندارد بالا باید ویژگی‌های زیر را داشته باشد: <strong>Performance, Availability, Security, Scalability, Maintainability, Accessibility, Deployability, Extensibility (PASSMADE)</strong></p><ul> <li><p><strong>Performance (عملکرد):</strong> کد پرسرعت، کوچک، و تنها کاری که لازم است انجام می‌دهد. چنین کدی سیستم را متوقف نمی‌کند. عواملی که سیستم را متوقف می‌کنند شامل عملیات ورودی/خروجی (<strong>I/O</strong>)، مصرف حافظه، و استفاده از پردازنده (<strong>CPU</strong>) هستند. کد با عملکرد پایین نیاز به <strong>Refactoring</strong> دارد.</p></li> <li><p><strong>Availability (دسترس‌پذیری):</strong> نرم‌افزار باید همواره در سطح عملکرد مورد نیاز در دسترس باشد. دسترس‌پذیری نسبت زمانی که نرم‌افزار عملکرد دارد (<strong>tsf</strong>) به زمان کل مورد انتظار برای عملکرد (<strong>ttef</strong>) است. مثال: tsf = 700; ttef = 744 → 700 / 744 = 0.9409 = 94.09٪ دسترس‌پذیری</p></li> <li><p><strong>Security (امنیت):</strong> کد امن ورودی‌ها را به درستی اعتبارسنجی می‌کند تا از فرمت‌های داده‌ای نامعتبر، محدوده‌های داده‌ای نامعتبر، و حملات مخرب جلوگیری شود و کاربران را به طور کامل <strong>احراز هویت و مجوزدهی</strong> کند. کد امن همچنین <strong>Fault-tolerant</strong> است؛ برای مثال اگر انتقال پول نیمه‌تمام مانده و سیستم خراب شود، داده‌ها باید سالم باقی بمانند و پولی از حساب کم نشود.</p></li> <li><p><strong>Scalability (قابلیت مقیاس‌پذیری):</strong> کد باید بتواند رشد نمایی تعداد کاربران را بدون کاهش عملکرد یا توقف سیستم مدیریت کند. چه نرم‌افزار یک درخواست در ساعت پردازش کند یا یک میلیون درخواست، عملکرد نباید کاهش یابد و <strong>Downtime</strong> ایجاد نشود.</p></li> <li><p><strong>Maintainability (نگهداری‌پذیری):</strong> آسان بودن رفع باگ‌ها و اضافه کردن ویژگی‌های جدید. کد قابل نگهداری باید منظم، خوانا، با <strong>low coupling</strong> و <strong>high cohesion</strong> باشد تا به راحتی قابل نگهداری و توسعه باشد.</p></li> <li><p><strong>Accessibility (قابلیت دسترسی):</strong> کد باید برای افراد با توانایی محدود نیز آسان برای استفاده و تغییر باشد. مثال: رابط‌های کاربری با کنتراست بالا، <strong>Narrator</strong> برای افراد دیسلکسیک یا نابینا و غیره.</p></li> <li><p><strong>Deployability (قابلیت پیاده‌سازی):</strong> نرم‌افزار باید برای انواع کاربران—چه <strong>Standalone، Remote Access، یا Local Network</strong>—به راحتی قابل پیاده‌سازی باشد.</p></li> <li><p><strong>Extensibility (قابلیت توسعه‌پذیری):</strong> آسان بودن افزودن ویژگی‌های جدید. کدهای <strong>Spaghetti</strong> و کدهای با <strong>Coupling بالا و Cohesion پایین</strong> باعث دشواری و احتمال خطای زیاد می‌شوند. کد extensible باید خوانا، قابل نگهداری و آسان برای افزودن ویژگی‌های جدید باشد.</p></li> </ul><p>از ویژگی‌های <strong>PASSMADE</strong> می‌توان مشکلات احتمالی ناشی از عدم رعایت این استانداردها را پیش‌بینی کرد:</p><ul> <li>کد کند و ناامیدکننده</li><li>افزایش <strong>Downtime</strong> برای کاربران</li><li>سوءاستفاده هکرها از آسیب‌پذیری‌ها</li><li>کاهش عملکرد نرم‌افزار با افزایش کاربران</li><li>سخت بودن رفع باگ یا توسعه کد</li><li>کاربران با توانایی محدود نمی‌توانند نرم‌افزار را متناسب با نیاز خود تغییر دهند</li><li>پیاده‌سازی نرم‌افزار تبدیل به یک کابوس پیکربندی می‌شود</li></ul> <hr><h3><strong>Code Metrics</strong> به کمک می‌آید</h3><p><strong>Code metrics</strong> به توسعه‌دهندگان امکان می‌دهد <strong>پیچیدگی و نگهداری‌پذیری کد</strong> را اندازه‌گیری کنند و کدهایی که نیاز به <strong>Refactoring</strong> دارند را شناسایی کنند.</p><ul> <li><strong>Quick Actions:</strong> با یک دستور می‌توانید کد C# را <strong>Refactor</strong> کنید، مثلاً استخراج کد به متد جداگانه.</li><li><strong>JetBrains dotTrace:</strong> کد شما را پروفایل می‌کند و <strong>Bottleneck</strong>های عملکرد را پیدا می‌کند.</li><li><strong>JetBrains ReSharper:</strong> افزونه‌ای برای Visual Studio که کیفیت کد را تحلیل، <strong>Code Smells</strong> را شناسایی، استانداردهای برنامه‌نویسی را اعمال و کد را <strong>Refactor</strong> می‌کند.</li><li><strong>Telerik JustDecompile:</strong> به شما امکان <strong>Decompile</strong> کردن کد موجود برای رفع مشکل یا ایجاد پروژه‌های IL، C# و <a href="http://VB.NET">VB.NET</a> را می‌دهد. این ابزار مخصوصاً زمانی مفید است که <strong>Source Code</strong> در دسترس نباشد و نیاز به نگهداری یا توسعه کد کامپایل‌شده داشته باشید. حتی می‌توانید <strong>Debug Symbols</strong> برای کد کامپایل‌شده تولید کنید.</li></ul> <p>در ادامه، به بررسی دقیق‌تر ابزارها خواهیم پرداخت، ابتدا با <strong>Code Metrics</strong> شروع می‌کنیم.</p><h3>انجام پاک‌سازی کد و محاسبه <strong>Code Metrics</strong></h3><p>قبل از آنکه ببینیم چگونه <strong>code metrics</strong> را جمع‌آوری کنیم، ابتدا باید بدانیم که این معیارها چه هستند و چرا برای ما مفیدند. <strong>Code metrics</strong> عمدتاً به <strong>پیچیدگی نرم‌افزار</strong> و <strong>نگهداری‌پذیری</strong> آن مربوط می‌شوند. این معیارها به ما کمک می‌کنند ببینیم چگونه می‌توانیم <strong>نگهداری کد منبع</strong> را بهبود بخشیم و <strong>پیچیدگی کد</strong> را کاهش دهیم.</p><hr> <h3>معیارهای کد که Visual Studio 2019 محاسبه می‌کند، شامل موارد زیر است</h3><p><strong>۱. Maintainability Index (شاخص نگهداری‌پذیری)</strong><br> نگهداری کد یک بخش ضروری از <strong>Application Lifecycle Management (ALM)</strong> است. تا زمانی که نرم‌افزار به پایان عمر خود نرسد، باید نگهداری شود. هر چه نگهداری کد دشوارتر باشد، طول عمر کد منبع قبل از نیاز به جایگزینی کامل کوتاه‌تر است.</p><p>نوشتن نرم‌افزار جدید برای جایگزینی یک سیستم مشکل و هزینه‌بر، بسیار بیشتر از نگهداری یک سیستم موجود است. شاخصی که برای اندازه‌گیری نگهداری‌پذیری کد استفاده می‌شود، <strong>Maintainability Index</strong> نام دارد. این مقدار یک عدد صحیح بین ۰ تا ۱۰۰ است.</p><p><strong>رده‌بندی Maintainability Index، رنگ‌ها و معانی آن‌ها:</strong></p><ul> <li>هر مقداری از <strong>۲۰ و بالاتر</strong>: رنگ <strong>سبز</strong>، یعنی نگهداری آسان</li><li>کد با <strong>نگهداری متوسط</strong>: بین ۱۰ تا ۱۹، رنگ <strong>زرد</strong></li><li>هر مقداری <strong>کمتر از ۱۰</strong>: رنگ <strong>قرمز</strong> ، یعنی نگهداری دشوار</li></ul> <hr><p><strong>۲. Cyclomatic Complexity (پیچیدگی سیکلوما‌تیک)</strong><br> پیچیدگی کد، که به آن <strong>Cyclomatic Complexity</strong> نیز گفته می‌شود، به تعداد مسیرهای مختلف کد در نرم‌افزار اشاره دارد. هر چه مسیرها بیشتر باشند، نرم‌افزار پیچیده‌تر است. هر چه نرم‌افزار پیچیده‌تر باشد، تست و نگهداری آن دشوارتر می‌شود.</p><p>کد پیچیده می‌تواند باعث <strong>افزایش خطاها</strong> در نسخه‌های نرم‌افزار و سخت شدن نگهداری و توسعه شود. بنابراین، توصیه می‌شود پیچیدگی کد <strong>حداقل نگه داشته شود</strong>.</p><hr> <p><strong>۳. Depth of Inheritance (عمق ارث‌بری)</strong><br> معیار <strong>Depth of Inheritance</strong> و <strong>Class Coupling</strong> تحت تأثیر <strong>Object-Oriented Programming (OOP)</strong> قرار دارند. در OOP، کلاس‌ها می‌توانند از کلاس‌های دیگر <strong>ارث‌بری</strong> کنند.</p><ul> <li><strong>Base Class (کلاس پایه):</strong> کلاسی که از آن ارث‌بری می‌شود</li><li><strong>Subclass (زیرکلاس):</strong> کلاس‌هایی که از کلاس پایه ارث می‌برند</li></ul> <p>عمق ارث‌بری، تعداد کلاس‌هایی است که از یکدیگر ارث می‌برند. هر چه عمق ارث‌بری بیشتر باشد، احتمال <strong>خطا در کلاس‌های مشتق‌شده</strong> هنگام تغییر در کلاس‌های پایه بیشتر است. <strong>عمق ارث‌بری ایده‌آل = ۱</strong></p><hr> <p><strong>۴. Class Coupling (وابستگی کلاس‌ها)</strong><br> OOP امکان <strong>Coupling کلاس‌ها</strong> را فراهم می‌کند. وابستگی کلاس زمانی رخ می‌دهد که یک کلاس مستقیماً توسط پارامتر، متغیر محلی، نوع بازگشتی، فراخوانی متد، نمونه‌سازی Generic یا Template، کلاس‌های پایه، پیاده‌سازی Interface، فیلدهای تعریف‌شده روی نوع‌های اضافی و <strong>Attribute Decoration</strong> ارجاع داده شود.</p><p>معیار <strong>Class Coupling</strong> سطح وابستگی بین کلاس‌ها را تعیین می‌کند. برای نگهداری و توسعه آسان‌تر کد، <strong>Class Coupling باید حداقل باشد</strong>.<br> در OOP، یک راه برای دستیابی به این هدف <strong>استفاده از Interface-based Programming</strong> است. این روش امکان تعویض کلاس‌ها را فراهم می‌کند، به شرطی که همان Interface را پیاده‌سازی کنند.</p><ul> <li>کد با کیفیت پایین: <strong>Coupling بالا و Cohesion پایین</strong></li><li>کد با کیفیت بالا: <strong>Coupling پایین و Cohesion بالا</strong></li></ul> <p><strong>نکته:</strong> نرم‌افزار باید <strong>Cohesion بالا و Coupling پایین</strong> داشته باشد، چون تست، نگهداری و توسعه آن را آسان‌تر می‌کند.</p><hr> <p><strong>۵. Lines of Source Code (تعداد خطوط کد منبع)</strong><br> تعداد کل خطوط کد منبع شما، شامل خطوط خالی، با این معیار اندازه‌گیری می‌شود.</p><p><strong>۶. Lines of Executable Code (تعداد خطوط کد اجرایی)</strong><br> تعداد عملیات در کد اجرایی با این معیار سنجیده می‌شود.</p><hr> <h3>شروع استفاده از Code Metrics در Visual Studio 2019</h3><p>حالا که با <strong>Code Metrics</strong> و معیارهای موجود در <strong>Visual Studio 2019 نسخه 16.4 به بعد</strong> آشنا شدید، وقت آن است که آنها را عملی ببینیم:</p><p>1⃣ هر پروژه‌ای که می‌خواهید در Visual Studio باز کنید<br> 2⃣ روی پروژه <strong>راست‌کلیک</strong> کنید<br> 3⃣ گزینه <strong>Analyze and Code Cleanup | Run Code Cleanup (Profile 1)</strong> را انتخاب کنید، همان‌طور که در تصویر زیر نشان داده شده است</p><div align="center"> <p><img src="../../../assets/image/12/Table%2012-1.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <p>4⃣ اکنون گزینه <strong>Calculate Code Metrics</strong> را انتخاب کنید.</p><p>5⃣ باید پنجره <strong>Code Metrics Results</strong> ظاهر شود، همان‌طور که در تصویر زیر نشان داده شده است.</p><div align="center"> <p><img src="../../../assets/image/12/Table%2012-2.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <p>همان‌طور که در تصویر مشاهده می‌کنید، تمام <strong>کلاس‌ها، اینترفیس‌ها و متدها</strong> با <strong>شاخص سبز</strong> علامت‌گذاری شده‌اند. این بدان معناست که پروژه انتخاب‌شده <strong>قابل نگهداری</strong> است. اگر هر یک از این خطوط با رنگ <strong>زرد یا قرمز</strong> مشخص شده بودند، باید آن‌ها را بررسی کرده و <strong>Refactor</strong> کنید تا به رنگ سبز درآیند.</p><p>خب، حالا که با <strong>Code Metrics</strong> آشنا شدیم، طبیعتاً به سراغ <strong>Code Analysis</strong> می‌رویم.</p><hr> <h3>انجام تحلیل کد (Performing Code Analysis)</h3><p>برای کمک به توسعه‌دهندگان در شناسایی مشکلات بالقوه در <strong>کد منبع</strong>، شرکت <strong>Microsoft</strong> ابزار <strong>Code Analysis</strong> را به عنوان بخشی از Visual Studio ارائه کرده است.</p><p><strong>Code Analysis</strong> یک تحلیل <strong>Static</strong> روی کد منبع انجام می‌دهد و می‌تواند موارد زیر را شناسایی کند:</p><ul> <li>مشکلات طراحی (<strong>Design Flaws</strong>)</li><li>مشکلات مربوط به <strong>Globalization</strong></li><li>مشکلات امنیتی (<strong>Security Problems</strong>)</li><li>مسائل مربوط به عملکرد (<strong>Performance Issues</strong>)</li><li>مشکلات <strong>Interoperability</strong></li></ul> <hr><p>برای استفاده از این ابزار:</p><p>1⃣ <strong>راه‌حل کتاب را باز کنید</strong> و پروژه <strong>CH11_AddressingCrossCuttingConcerns</strong> را انتخاب کنید<br> 2⃣ از منوی <strong>Project</strong> مسیر زیر را انتخاب کنید:<br><strong>Project | CH11_AddressingCrossCuttingConcerns | Properties</strong><br> 3⃣ در صفحه <strong>Properties</strong> پروژه، گزینه <strong>Code Analysis</strong> را انتخاب کنید، همان‌طور که در تصویر زیر نشان داده شده است</p><div align="center"> <p><img src="../../../assets/image/12/Table%2012-3.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <p>همان‌طور که در تصویر قبلی مشاهده می‌کنید، اگر ببینید که <strong>پکیج Analyzer پیشنهادی نصب نشده است</strong>، روی <strong>Install</strong> کلیک کنید تا نصب شود.</p><p>پس از نصب، شماره نسخه در <strong>Installed Version Box</strong> نمایش داده می‌شود. برای من، نسخه <strong>2.9.6</strong> است.</p><p>به طور پیش‌فرض، <strong>Active Rules</strong> روی <strong>Microsoft Managed Recommended Rules</strong> تنظیم شده است.<br> محل این <strong>Ruleset</strong>، همان‌طور که در توضیحات نشان داده شده، به صورت زیر است:</p><pre class="hljs"><code>C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\Team Tools\Static Analysis Tools\Rule Sets\MinimumRecommendedRules.ruleset
+</code></pre> <p>فایل را باز کنید. این فایل به صورت یک <strong>پنجره ابزار در Visual Studio</strong> باز خواهد شد، همان‌طور که در تصویر زیر مشاهده می‌کنید.</p><div align="center"> <p><img src="../../../assets/image/12/Table%2012-4.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <p>همان‌طور که در تصویر قبلی مشاهده می‌کنید، می‌توانید <strong>قوانین (Rules) را انتخاب یا لغو انتخاب کنید</strong>. وقتی پنجره را بستید، از شما خواسته می‌شود تغییرات را <strong>ذخیره کنید</strong>.</p><p>برای اجرای <strong>Code Analysis</strong>، مسیر زیر را دنبال کنید:<br><strong>Analyze and Code Cleanup | Code Analysis</strong></p><p>برای مشاهده نتایج، باید <strong>پنجره Error List</strong> باز باشد. می‌توانید آن را از منوی <strong>View</strong> باز کنید.</p><p>پس از اجرای تحلیل کد، <strong>لیستی از خطاها، هشدارها و پیام‌ها</strong> مشاهده خواهید کرد. می‌توانید هر یک از آن‌ها را بررسی و اصلاح کنید تا <strong>کیفیت کلی نرم‌افزار</strong> خود را بهبود دهید.</p><p>نمونه‌ای از این نتایج را می‌توان در تصویر زیر مشاهده کرد</p><div align="center"> <p><img src="../../../assets/image/12/Table%2012-5.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <p>همان‌طور که در تصویر قبلی مشاهده می‌کنید، پروژه <strong>CH10_AddressingCrossCuttingConcerns</strong> دارای <strong>۳۲ هشدار و ۱۳ پیام</strong> است. اگر روی این هشدارها و پیام‌ها کار کنیم، می‌توانیم تعداد آن‌ها را به <strong>۰ هشدار و ۰ پیام</strong> کاهش دهیم.</p><p>حالا که دیدید چگونه با استفاده از <strong>Code Metrics</strong> می‌توان میزان <strong>نگهداری‌پذیری</strong> نرم‌افزار را سنجید و با تحلیل کد، نقاط قابل بهبود را پیدا کرد، وقت آن است که به <strong>Quick Actions</strong> نگاهی بیندازیم.</p><hr> <h3>استفاده از Quick Actions</h3><p>یکی دیگر از ابزارهای مفیدی که من دوست دارم استفاده کنم، ابزار <strong>Quick Action</strong> است. این ابزار معمولاً به صورت **پیچ‌گوشتی ، لامپ یا لامپ خطا ** در کنار یک خط کد ظاهر می‌شود.</p><p>با <strong>Quick Actions</strong> می‌توانید با یک دستور:</p><ul> <li>کد تولید کنید</li><li>کد را <strong>Refactor</strong> کنید</li><li>هشدارها را <strong>Suppress</strong> کنید</li><li>اصلاحات کد (<strong>Code Fix</strong>) انجام دهید</li><li>و <strong>using statements</strong> اضافه کنید</li></ul> <p>از آنجا که پروژه <strong>CH10_AddressingCrossCuttingConcerns</strong> دارای ۳۲ هشدار و ۱۳ پیام بود، می‌توانیم از این پروژه برای مشاهده عملکرد <strong>Quick Actions</strong> استفاده کنیم.</p><p>به تصویر زیر نگاه کنید تا عملکرد Quick Actions را ببینید</p><div align="center"> <p><img src="../../../assets/image/12/Table%2012-6.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <p>با نگاه به تصویر قبلی، می‌بینیم **لامپ ** روی خط <strong>۱۰</strong> ظاهر شده است.</p><p>اگر روی <strong>لامپ</strong> کلیک کنیم، منوی زیر ظاهر می‌شود</p><div align="center"> <p><img src="../../../assets/image/12/Table%2012-7.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <p>اگر روی گزینه <strong>Add readonly modifier</strong> کلیک کنیم، <strong>Access Modifier</strong> مربوط به <code>readonly</code> بعد از <strong>private</strong> قرار می‌گیرد.</p><p>خودتان با استفاده از <strong>Quick Actions</strong> کد را تغییر دهید. وقتی با آن کار کنید، روند کار نسبتاً ساده است. پس از تمرین با <strong>Quick Actions</strong>، به سراغ ابزار <strong>JetBrains dotTrace Profiler</strong> می‌رویم.</p><hr> <h3>استفاده از پروفایلر JetBrains dotTrace</h3><p>پروفایلر <strong>JetBrains dotTrace</strong> بخشی از <strong>JetBrains ReSharper Ultimate</strong> است. از آنجا که در این فصل به هر دو ابزار نگاه می‌کنیم، توصیه می‌کنم قبل از ادامه، <strong>JetBrains ReSharper Ultimate</strong> را دانلود و نصب کنید.</p><p>JetBrains نسخه <strong>Trial</strong> هم ارائه می‌دهد، در صورتی که نسخه اصلی را ندارید. نسخه‌هایی برای <strong>Windows، macOS و Linux</strong> موجود است.</p><p>پروفایلر <strong>dotTrace</strong> با <strong>Mono، .NET Framework و .NET Core</strong> کار می‌کند. تمام انواع برنامه‌ها توسط این پروفایلر پشتیبانی می‌شوند و می‌توانید از آن برای تحلیل و یافتن مشکلات <strong>Performance</strong> در کد استفاده کنید. این ابزار به شما کمک می‌کند مشکلاتی مانند:</p><ul> <li>مصرف ۱۰۰٪ CPU</li><li>استفاده کامل از I/O دیسک</li><li>پر شدن حافظه</li><li>بروز <strong>Overflow Exception</strong><br> و بسیاری مشکلات دیگر را شناسایی کنید.</li></ul> <p>بسیاری از برنامه‌ها درخواست‌های <strong>HTTP</strong> ارسال می‌کنند. پروفایلر تحلیل می‌کند که چگونه برنامه این درخواست‌ها را پردازش می‌کند، و همین کار را برای <strong>SQL Queries</strong> روی پایگاه داده نیز انجام می‌دهد. همچنین می‌توانید <strong>Static Methods</strong> و <strong>Unit Tests</strong> را پروفایل کنید و نتایج را داخل <strong>Visual Studio</strong> مشاهده کنید. نسخه‌ای <strong>Standalone</strong> نیز موجود است.</p><hr> <h3>چهار گزینه اصلی پروفایلینگ</h3><ol> <li><strong>Sampling:</strong> اندازه‌گیری دقیق زمان فراخوانی متدها، مناسب برای شروع</li><li><strong>Tracing:</strong> جزئیات بیشتر پروفایلینگ، با overhead بالاتر (CPU و حافظه)</li><li><strong>Line-by-Line:</strong> تحلیل دقیق خط به خط، با overhead بیشتر</li><li><strong>Timeline:</strong> مشابه Sampling، اما <strong>Events برنامه</strong> را در طول زمان جمع‌آوری می‌کند</li></ol> <p>بین این چهار گزینه، هیچ مشکلی وجود ندارد که قابل شناسایی و رفع نباشد.</p><p><strong>گزینه‌های پیشرفته پروفایلینگ شامل:</strong></p><ul> <li>Real-time Performance Counters: اندازه‌گیری زمان بین ورود و خروج متد</li><li>Thread Time: زمان اجرای <strong>Thread</strong></li><li>Real-time CPU Instructions: زمان دقیق ورود و خروج متد بر اساس <strong>CPU register</strong></li><li>Thread Cycle Time: زمان چرخه <strong>Thread</strong></li></ul> <hr><h3>پروفایل کردن برنامه‌ها</h3><p>پروفایلر می‌تواند به برنامه‌ها و پردازه‌های در حال اجرای <strong>.NET Framework 4.0 یا بالاتر</strong> و <strong>.NET Core 3.0 یا بالاتر</strong> متصل شود، برنامه‌های محلی و راه دور را پروفایل کند.<br> این شامل موارد زیر است:</p><ul> <li>برنامه‌های <strong>Standalone</strong></li><li>برنامه‌های <strong>.NET Core</strong></li><li>وب اپلیکیشن‌های میزبان <strong>IIS</strong> و <strong>IIS Express</strong></li><li>سرویس‌های <strong>.NET Windows Services</strong> و <strong>WCF</strong></li><li>برنامه‌های <strong>Windows Store</strong> و <strong>UWP</strong></li><li>هر پردازه <strong>.NET</strong> که پس از شروع جلسه پروفایلینگ اجرا شود</li><li>برنامه‌های <strong>Desktop</strong> یا <strong>Console</strong> بر پایه <strong>Mono</strong></li><li><strong>Unity Editor</strong> یا برنامه‌های مستقل <strong>Unity</strong></li></ul> <hr><h3>دسترسی به پروفایلر در Visual Studio 2019</h3><p>از منوی <strong>Extensions | ReSharper | Profile | Show Performance Profiler</strong> استفاده کنید.</p><p>در تصویر زیر می‌بینید که هنوز هیچ پروفایلی اجرا نشده است. پروژه انتخاب‌شده <strong>Basic CH3</strong> است و نوع پروفایلینگ روی <strong>Timeline</strong> تنظیم شده است.</p><p>برای پروفایل کردن پروژه <strong>CH3</strong> با <strong>Sampling</strong>، <strong>Timeline Dropdown</strong> را باز کرده و <strong>Sampling</strong> را انتخاب کنید، همان‌طور که در تصویر بعدی نشان داده شده است</p><div align="center"> <p><img src="../../../assets/image/12/Table%2012-8.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <p>اگر بخواهید پروژه دیگری را پروفایل کنید، کافی است <strong>Drop-down لیست Project</strong> را باز کرده و پروژه موردنظر خود را انتخاب کنید.</p><p>پروژه ساخته (<strong>Build</strong>) می‌شود و پروفایلر شروع به کار می‌کند. سپس پروژه شما اجرا شده و خاموش می‌شود.</p><p>نتایج در <strong>dotTrace Profiling Application</strong> نمایش داده می‌شوند، همان‌طور که در تصویر زیر مشاهده می‌کنید</p><div align="center"> <p><img src="../../../assets/image/12/Table%2012-9.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <p>همان‌طور که در تصویر قبلی مشاهده می‌کنید، <strong>اولین از چهار Thread</strong> نمایش داده شده است. این Thread مربوط به <strong>برنامه ما</strong> است. سایر Thread‌ها برای <strong>فرآیندهای پشتیبان</strong> هستند که اجرای برنامه را ممکن می‌کنند، همراه با <strong>Finalizer Thread</strong> که مسئول خروج از برنامه و پاک‌سازی منابع سیستم است.</p><p>موارد منوی <strong>All Calls</strong> در سمت چپ شامل موارد زیر است:</p><ul> <li><strong>Thread Tree</strong></li><li><strong>Call Tree</strong></li><li><strong>Plain List</strong></li><li><strong>Hot Spots</strong></li></ul> <p>در حال حاضر، گزینه <strong>Thread Tree</strong> انتخاب شده است.<br> حال نگاهی به <strong>Call Tree</strong> گسترش یافته در تصویر بعدی می‌اندازیم</p><div align="center"> <p><img src="../../../assets/image/12/Table%2012-10.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <p>پروفایلر <strong>Call Tree کامل</strong> کد شما را نشان می‌دهد، که شامل <strong>کد سیستم</strong> و <strong>کد خودتان</strong> است.<br> شما می‌توانید <strong>درصد زمان صرف‌شده برای هر فراخوانی</strong> را مشاهده کنید. این امکان به شما می‌دهد تا <strong>متدهای طولانی</strong> را شناسایی کرده و آن‌ها را بهبود دهید.</p><p>حال، به <strong>Plain List</strong> نگاه می‌کنیم. همان‌طور که در تصویر بعدی مشاهده می‌کنید، در <strong>Plain List View</strong> می‌توانیم داده‌ها را بر اساس معیارهای زیر <strong>گروه‌بندی کنیم</strong>:</p><ul> <li>None</li><li>Class</li><li>Namespace</li><li>Assembly</li></ul> <p>معیارهای فوق را می‌توانید در تصویر زیر مشاهده کنید</p><div align="center"> <p><img src="../../../assets/image/12/Table%2012-11.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <p>وقتی روی یک مورد در لیست کلیک می‌کنید، می‌توانید <strong>کد منبع کلاس</strong>ی که متد در آن قرار دارد را مشاهده کنید.</p><p>این ویژگی مفید است، زیرا می‌توانید ببینید <strong>مشکل در کجا قرار دارد</strong> و چه کاری باید انجام شود.</p><p>آخرین صفحه پروفایلینگ با <strong>Sampling</strong> که بررسی می‌کنیم، <strong>Hot Spots View</strong> است، همان‌طور که در تصویر زیر نشان داده شده است</p><div align="center"> <p><img src="../../../assets/image/12/Table%2012-12.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <p>پروفایلر نشان می‌دهد که <strong>Main Thread</strong>، که نقطه شروع کد ما است، تنها <strong>۴.۵۹٪</strong> از زمان پردازش را به خود اختصاص می‌دهد.</p><p>اگر روی <strong>Root</strong> کلیک کنید، مشاهده می‌کنید که <strong>۱۸٪ کد مربوط به کد کاربر</strong> است و <strong>۷۲٪ کد مربوط به کد سیستم</strong> می‌باشد، همان‌طور که در تصویر زیر نشان داده شده است</p><div align="center"> <p><img src="../../../assets/image/12/Table%2012-13.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <p>ما تاکنون تنها <strong>سطحی از امکانات این ابزار پروفایلینگ</strong> را بررسی کرده‌ایم. هنوز قابلیت‌های بیشتری وجود دارد و توصیه می‌کنم خودتان آن را امتحان کنید. هدف اصلی این فصل، <strong>معرفی ابزارهای موجود</strong> برای بهبود کد شماست.</p><p>برای اطلاعات بیشتر درباره <strong>نحوه استفاده از JetBrains dotTrace</strong>، می‌توانید به منابع آموزشی آنلاین آن‌ها مراجعه کنید:<br><a href="https://www.jetbrains.com/profiler/documentation/documentation.html">JetBrains dotTrace Documentation</a></p><hr> <h3>استفاده از JetBrains ReSharper</h3><p>در این بخش، می‌بینیم که چگونه <strong>JetBrains ReSharper</strong> می‌تواند به بهبود کد شما کمک کند.</p><p><strong>ReSharper</strong> یک ابزار گسترده است و همانند پروفایلر که بخشی از نسخه <strong>Ultimate</strong> آن است، ما تنها به <strong>بررسی ابتدایی امکانات آن</strong> می‌پردازیم. هدف این است که با قابلیت‌های ابزار آشنا شوید و بدانید چگونه می‌تواند تجربه کدنویسی شما در <strong>Visual Studio</strong> را بهبود دهد.</p><hr> <h3>چند مزیت استفاده از ReSharper</h3><ul> <li>با ReSharper می‌توانید <strong>کیفیت کد خود را تحلیل کنید</strong></li><li>گزینه‌هایی برای <strong>بهبود کد، حذف Code Smells و رفع مشکلات کدنویسی</strong> ارائه می‌دهد</li><li>با <strong>سیستم ناوبری (Navigation System)</strong> می‌توانید کل پروژه را پیمایش کرده و به هر موردی که نیاز دارید، بروید. امکانات جانبی شامل <strong>IntelliSense پیشرفته، بازآرایی کد و موارد دیگر</strong> است</li><li>قابلیت <strong>Refactoring</strong> با ReSharper می‌تواند <strong>محلی یا در سطح کل راه‌حل (Solution-wide)</strong> باشد</li><li>می‌توانید <strong>کد منبع تولید کنید</strong>، مانند کلاس‌های پایه و فوق‌کلاس‌ها و متدهای Inline</li><li>کد می‌تواند مطابق با <strong>سیاست‌های کدنویسی شرکت</strong> پاک‌سازی شود، برای مثال حذف <strong>Imports غیرضروری</strong> و دیگر کدهای بلااستفاده</li></ul> <hr><p>برای دسترسی به منوی <strong>ReSharper</strong>، از منوی <strong>Extensions</strong> در <strong>Visual Studio 2019</strong> استفاده کنید.<br> وقتی در <strong>Code Editor</strong> هستید، با <strong>راست‌کلیک روی کد</strong>، منوی Context باز می‌شود و آیتم‌های مرتبط نمایش داده می‌شوند.<br> آیتم منوی ReSharper در Context Menu، <strong>Refactor This…</strong> است، همان‌طور که در تصویر زیر نشان داده شده</p><div align="center"> <p><img src="../../../assets/image/12/Table%2012-14.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <p>حالا، از منوی <strong>Visual Studio 2019</strong> مسیر زیر را اجرا کنید:<br><strong>Extensions | ReSharper | Inspect | Code Issues in Solution</strong></p><p>ReSharper پروژه را پردازش کرده و سپس <strong>پنجره Inspection Results</strong> را نمایش می‌دهد، همان‌طور که در تصویر زیر مشاهده می‌کنید</p><div align="center"> <p><img src="../../../assets/image/12/Table%2012-15.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <p>همان‌طور که در تصویر قبلی مشاهده می‌کنید، <strong>ReSharper</strong> تعداد <strong>۵۲۷ مشکل</strong> را در کد ما پیدا کرده است، که <strong>۴۳۶ مورد از آن‌ها نمایش داده شده‌اند</strong>. این مشکلات شامل موارد زیر می‌شوند:</p><ul> <li><strong>تمرین‌های معمول و بهبود کد</strong></li><li><strong>هشدارهای کامپایلر</strong></li><li><strong>نقض محدودیت‌ها</strong></li><li>فرصت‌های استفاده بهتر از زبان</li><li>مشکلات احتمالی کیفیت کد</li><li>تکرارهای غیرضروری در کد</li><li>تکرار در اعلان نمادها (Symbol Declarations)</li><li>مشکلات املایی</li><li>و <strong>سبک سینتکس (Syntax Style)</strong></li></ul> <hr><p>اگر بخش <strong>Compiler Warnings</strong> را باز کنیم، سه مشکل مشاهده می‌کنیم:</p><ol> <li>فیلد <code>_name</code> هیچ‌گاه مقداردهی نمی‌شود.</li><li>متغیر محلی <code>nre</code> هرگز استفاده نمی‌شود.</li><li>این متد <strong>async</strong> فاقد <strong>await</strong> است و به صورت <strong>هم‌زمان (Synchronous)</strong> اجرا می‌شود. از <strong>await</strong> برای فراخوانی‌های غیرمسدودکننده API یا <code>await TaskEx.Run(...)</code> برای کارهای CPU-bound در Thread پس‌زمینه استفاده کنید.</li></ol> <p>این مشکلات شامل <strong>اعلان متغیرهایی است که مقداردهی یا استفاده نمی‌شوند</strong> و همچنین <strong>متد async که فاقد await است و به صورت هم‌زمان اجرا می‌شود</strong>.</p><hr> <p>اگر روی اولین هشدار کلیک کنید، به خط کدی می‌روید که مقداردهی نشده است. با نگاه به کلاس، می‌بینیم که رشته (<code>string</code>) اعلان شده و استفاده می‌شود، اما هرگز مقداردهی نشده است. از آنجا که بررسی می‌کنیم آیا رشته <strong><code>string.Empty</code></strong> است، می‌توانیم آن را مقداردهی کنیم:</p><pre class="hljs"><code><span class="hljs-keyword">private</span> <span class="hljs-built_in">string</span> _name = <span class="hljs-built_in">string</span>.Empty;
+</code></pre> <hr><p>چون متغیر <code>_name</code> هنوز هایلایت است، می‌توانیم <strong>ماوس را روی آن ببریم</strong> و ببینیم مشکل چیست. <strong>Quick Action</strong> به ما می‌گوید که می‌توان <code>_name</code> را <strong>readonly</strong> کرد. پس آن را اضافه می‌کنیم:</p><pre class="hljs"><code><span class="hljs-keyword">private</span> <span class="hljs-keyword">readonly</span> <span class="hljs-built_in">string</span> _name = <span class="hljs-built_in">string</span>.Empty;
+</code></pre> <p>اگر روی دکمه <strong>Refresh</strong> کلیک کنیم، می‌بینیم که تعداد مشکلات یافت‌شده اکنون <strong>۵۲۶</strong> است. اما ما دو مشکل را رفع کردیم. پس چرا تعداد ۵۲۵ نیست؟ دلیل این است که دومین مشکلی که رفع شد، توسط ReSharper شناسایی نشده بود، بلکه یک <strong>بهبود</strong> بود که توسط <strong>Visual Studio Quick Actions</strong> پیشنهاد شد. بنابراین ReSharper تعداد صحیح مشکلات شناسایی‌شده را نشان می‌دهد.</p><hr> <p>حالا به <strong>مسئله احتمالی کیفیت کد (Potential Code Quality Issue)</strong> برای کلاس <strong>LooseCouplingB</strong> نگاه می‌کنیم. ReSharper گزارش می‌دهد که امکان بروز <strong>System.NullReferenceException</strong> در این متد وجود دارد:</p><pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">LooseCouplingB</span>()</span>
 {
     LooseCouplingA lca = <span class="hljs-keyword">new</span> LooseCouplingA();
     lca = <span class="hljs-literal">null</span>;
     Debug.WriteLine(<span class="hljs-string">$&quot;Name is <span class="hljs-subst">{lca.Name}</span>&quot;</span>);
 }
-</code></pre>
-<p>همان‌طور که می‌بینیم، <strong>System.NullReferenceException</strong> در کد قابل مشاهده است.</p>
-<p>برای بررسی کلاس <strong>LooseCouplingA</strong> و تعیین اینکه کدام اعضا باید مقداردهی شوند، می‌بینیم عضو <code>_name</code> باید مقداردهی شود:</p>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-built_in">string</span> Name
+</code></pre> <p>همان‌طور که می‌بینیم، <strong>System.NullReferenceException</strong> در کد قابل مشاهده است.</p><p>برای بررسی کلاس <strong>LooseCouplingA</strong> و تعیین اینکه کدام اعضا باید مقداردهی شوند، می‌بینیم عضو <code>_name</code> باید مقداردهی شود:</p><pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-built_in">string</span> Name
 {
     <span class="hljs-keyword">get</span> =&gt; _name.Equals(<span class="hljs-built_in">string</span>.Empty) ? StringIsEmpty : _name;
     <span class="hljs-keyword">set</span>
@@ -439,9 +30,7 @@ OOP امکان <strong>Coupling کلاس‌ها</strong> را فراهم می‌
             Debug.WriteLine(<span class="hljs-string">&quot;Exception: String length must be greater than zero.&quot;</span>);
     }
 }
-</code></pre>
-<p>با توجه به اینکه <code>_name</code> برای خالی بودن بررسی می‌شود، در واقع باید <code>_name</code> به <strong><code>string.Empty</code></strong> مقداردهی شود. پس کانستراکتور اصلاح‌شده <strong>LooseCouplingB</strong> به صورت زیر می‌شود:</p>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">LooseCouplingB</span>()</span>
+</code></pre> <p>با توجه به اینکه <code>_name</code> برای خالی بودن بررسی می‌شود، در واقع باید <code>_name</code> به <strong><code>string.Empty</code></strong> مقداردهی شود. پس کانستراکتور اصلاح‌شده <strong>LooseCouplingB</strong> به صورت زیر می‌شود:</p><pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">LooseCouplingB</span>()</span>
 {
     <span class="hljs-keyword">var</span> lca = <span class="hljs-keyword">new</span> LooseCouplingA
     {
@@ -449,85 +38,7 @@ OOP امکان <strong>Coupling کلاس‌ها</strong> را فراهم می‌
     };
     Debug.WriteLine(<span class="hljs-string">$&quot;Name is <span class="hljs-subst">{lca.Name}</span>&quot;</span>);
 }
-</code></pre>
-<p>اگر پنجره <strong>Inspection Results</strong> را <strong>Refresh</strong> کنیم، می‌بینیم تعداد مشکلات <strong>۵ کاهش یافته است</strong>، زیرا علاوه بر مقداردهی صحیح Property، از <strong>فرصت استفاده از زبان برای ساده‌سازی Instantiation و Initialization</strong> نیز استفاده کردیم که توسط ReSharper شناسایی شد.</p>
-<hr>
-<p><strong>ReSharper</strong> همچنین می‌تواند <strong>Dependency Diagram</strong> تولید کند. برای تولید نمودار وابستگی پروژه، مسیر زیر را انتخاب کنید:<br>
-<strong>Extensions | ReSharper | Architecture | Show Project Dependency Diagram</strong></p>
-<p>این نمودار وابستگی پروژه را نمایش می‌دهد.</p>
-<ul>
-<li><strong>کادر مشکی به نام CH06:</strong> Namespace</li>
-<li><strong>کادرهای خاکستری/آبی با پیشوند CH06_ :</strong> پروژه‌ها</li>
-</ul>
-<p>همان‌طور که در تصویر زیر نشان داده شده است ✅</p>
-<div align="center">
-<p><img src="../../../assets/image/12/Table%2012-16.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<p>همان‌طور که در <strong>Project Dependency Diagram</strong> مربوط به Namespace <strong>CH06</strong> مشاهده می‌کنید، یک وابستگی پروژه بین <strong>CH06_SpecFlow</strong> و <strong>CH06_SpecFlow.Implementation</strong> وجود دارد.</p>
-<p>به همین ترتیب، می‌توانید با استفاده از <strong>ReSharper</strong>، <strong>Type Dependency Diagrams</strong> نیز تولید کنید. مسیر زیر را انتخاب کنید:<br>
-<strong>Extensions | ReSharper | Architecture | Type Dependencies Diagram</strong></p>
-<p>اگر نمودار را برای <strong>ConcreteClass</strong> در پروژه <strong>CH10_AddressingCrossCuttingConcerns</strong> تولید کنیم، نمودار ساخته می‌شود، اما در ابتدا تنها <strong>کلاس ConcreteComponent</strong> نمایش داده خواهد شد.</p>
-<p>روی کادر <strong>ConcreteComponent</strong> در نمودار راست‌کلیک کرده و <strong>Add All Referenced Types</strong> را انتخاب کنید.<br>
-با این کار، کلاس <strong>ExceptionAttribute</strong> و اینترفیس <strong>IComponent</strong> اضافه می‌شوند.</p>
-<p>سپس روی کلاس <strong>ExceptionAttribute</strong> راست‌کلیک کرده و دوباره <strong>Add All Referenced Types</strong> را انتخاب کنید تا به نتیجه نهایی برسید، همان‌طور که در تصویر زیر نشان داده شده است ✅</p>
-<div align="center">
-<p><img src="../../../assets/image/12/Table%2012-17.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<p>نکته‌ی واقعاً فوق‌العاده در مورد این ابزار این است که می‌توانید <strong>عناصر نمودار را بر اساس Namespace مرتب کنید</strong>.</p>
-<p>این قابلیت برای <strong>راه‌حل‌های بزرگ با چندین پروژه حجیم و Namespace‌های تو در تو</strong> بسیار مفید است.</p>
-<p>اگرچه امکان راست‌کلیک روی کد و رفتن به <strong>Item Declaration</strong> خوب است، اما هیچ چیزی جای <strong>مشاهده بصری ساختار پروژه</strong> را نمی‌گیرد. همین ویژگی باعث می‌شود این ابزار واقعاً کاربردی باشد.</p>
-<p>در تصویر زیر، نمونه‌ای از <strong>Typed Dependencies Diagram</strong> را می‌بینید که <strong>بر اساس Namespace‌ها سازماندهی شده است</strong> ✅</p>
-<div align="center">
-<p><img src="../../../assets/image/12/Table%2012-18.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<p>بارها برای من پیش آمده که واقعاً به چنین نموداری در کار روزمره نیاز داشتم.</p>
-<p>این نمودار، <strong>مستندسازی فنی</strong> است که به توسعه‌دهندگان کمک می‌کند در یک <strong>راه‌حل پیچیده</strong> مسیر خود را پیدا کنند. آن‌ها می‌توانند ببینند کدام <strong>Namespace‌ها</strong> در دسترس هستند و همه چیز چگونه به هم متصل شده است.</p>
-<p>این اطلاعات به توسعه‌دهندگان <strong>دانش درست</strong> می‌دهد تا بدانند هنگام توسعه، کلاس‌ها، Enum‌ها و Interface‌های جدید را کجا قرار دهند، و همچنین بدانند هنگام نگهداری کد، اشیاء را از کجا پیدا کنند.</p>
-<p>این نمودار همچنین برای یافتن <strong>Namespace‌ها، Interface‌ها و نام‌های اشیاء تکراری</strong> نیز مفید است. ✅</p>
-<hr>
-<h3>نگاهی به <strong>Coverage</strong> 🔍</h3>
-<p>مراحل زیر را دنبال کنید:</p>
-<ol>
-<li>از منوی <strong>Extensions | ReSharper | Cover | Cover Application</strong> استفاده کنید.</li>
-<li><strong>Dialog Configuration Coverage</strong> نمایش داده می‌شود و گزینه پیش‌فرض <strong>Standalone</strong> انتخاب شده است.</li>
-<li>فایل اجرایی (Executable) خود را انتخاب کنید.</li>
-<li>می‌توانید یک برنامه <strong>.NET</strong> از پوشه <strong>bin</strong> انتخاب کنید.</li>
-<li>تصویر زیر <strong>Coverage Configuration Dialog</strong> را نشان می‌دهد ✅</li>
-</ol>
-<div align="center">
-<p><img src="../../../assets/image/12/Table%2012-19.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<p>۶. روی دکمه <strong>Run</strong> کلیک کنید تا برنامه اجرا شود و داده‌های پروفایلینگ جمع‌آوری شوند.<br>
-پس از آن، <strong>ReSharper</strong> دیالوگ زیر را نمایش خواهد داد:</p>
-<div align="center">
-<p><img src="../../../assets/image/12/Table%2012-20.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<p>برنامه اجرا خواهد شد. در حین اجرای برنامه، <strong>پروفایلر پوشش کد</strong> در حال جمع‌آوری داده‌ها خواهد بود.<br>
-فایلی که انتخاب کرده‌ایم یک <strong>برنامه کنسولی</strong> است که داده‌های زیر را نمایش می‌دهد:</p>
-<div align="center">
-<p><img src="../../../assets/image/12/Table%2012-21.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<p>۷. روی پنجره کنسول کلیک کنید و سپس هر کلیدی را فشار دهید تا از برنامه خارج شوید.<br>
-پنجره پوشش (Coverage) بسته خواهد شد و فرآیند ذخیره‌سازی داده‌ها آغاز می‌شود.<br>
-در نهایت، <strong>پنجره Coverage Results Browser</strong> نمایش داده خواهد شد، همان‌طور که در این تصویر می‌بینید:</p>
-<div align="center">
-<p><img src="../../../assets/image/12/Table%2012-22.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<p>این پنجره شامل اطلاعات بسیار مفیدی است. این ابزار با نشانگرهای رنگی به شما کمک می‌کند:</p>
-<ul>
-<li><strong>کدهایی که اجرا نشده‌اند</strong> با رنگ قرمز مشخص می‌شوند.</li>
-<li><strong>کدهای اجرا شده</strong> با رنگ سبز نمایش داده می‌شوند.</li>
-</ul>
-<p>با استفاده از این اطلاعات می‌توانید تشخیص دهید که کد قرمز شده ممکن است:</p>
-<ul>
-<li>کد مرده (Dead Code) باشد و بتوان آن را حذف کرد،</li>
-<li>به دلیل مسیر اجرای برنامه فراخوانی نشده باشد اما همچنان مورد نیاز باشد،</li>
-<li>برای اهداف تست موقتاً کامنت شده باشد،</li>
-<li>یا به دلیل اشتباه برنامه‌نویس یا شرط اشتباه، اصلاً فراخوانی نشده باشد.</li>
-</ul>
-<p>برای رفتن به آیتم موردنظر کافی است <strong>دو بار روی آن کلیک کنید</strong> تا مستقیماً به همان قطعه کد منتقل شوید.</p>
-<p>در مثال ما، کلاس <strong>Program</strong> تنها 33٪ پوشش کد داشته است. با دوبار کلیک روی <strong>Program</strong>، خروجی زیر را مشاهده می‌کنیم:</p>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Main</span>(<span class="hljs-params"><span class="hljs-built_in">string</span>[] <span class="hljs-keyword">args</span></span>)</span>
+</code></pre> <p>اگر پنجره <strong>Inspection Results</strong> را <strong>Refresh</strong> کنیم، می‌بینیم تعداد مشکلات <strong>۵ کاهش یافته است</strong>، زیرا علاوه بر مقداردهی صحیح Property، از <strong>فرصت استفاده از زبان برای ساده‌سازی Instantiation و Initialization</strong> نیز استفاده کردیم که توسط ReSharper شناسایی شد.</p><hr> <p><strong>ReSharper</strong> همچنین می‌تواند <strong>Dependency Diagram</strong> تولید کند. برای تولید نمودار وابستگی پروژه، مسیر زیر را انتخاب کنید:<br><strong>Extensions | ReSharper | Architecture | Show Project Dependency Diagram</strong></p><p>این نمودار وابستگی پروژه را نمایش می‌دهد.</p><ul> <li><strong>کادر مشکی به نام CH06:</strong> Namespace</li><li><strong>کادرهای خاکستری/آبی با پیشوند CH06_ :</strong> پروژه‌ها</li></ul> <p>همان‌طور که در تصویر زیر نشان داده شده است</p><div align="center"> <p><img src="../../../assets/image/12/Table%2012-16.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <p>همان‌طور که در <strong>Project Dependency Diagram</strong> مربوط به Namespace <strong>CH06</strong> مشاهده می‌کنید، یک وابستگی پروژه بین <strong>CH06_SpecFlow</strong> و <strong>CH06_SpecFlow.Implementation</strong> وجود دارد.</p><p>به همین ترتیب، می‌توانید با استفاده از <strong>ReSharper</strong>، <strong>Type Dependency Diagrams</strong> نیز تولید کنید. مسیر زیر را انتخاب کنید:<br><strong>Extensions | ReSharper | Architecture | Type Dependencies Diagram</strong></p><p>اگر نمودار را برای <strong>ConcreteClass</strong> در پروژه <strong>CH10_AddressingCrossCuttingConcerns</strong> تولید کنیم، نمودار ساخته می‌شود، اما در ابتدا تنها <strong>کلاس ConcreteComponent</strong> نمایش داده خواهد شد.</p><p>روی کادر <strong>ConcreteComponent</strong> در نمودار راست‌کلیک کرده و <strong>Add All Referenced Types</strong> را انتخاب کنید.<br> با این کار، کلاس <strong>ExceptionAttribute</strong> و اینترفیس <strong>IComponent</strong> اضافه می‌شوند.</p><p>سپس روی کلاس <strong>ExceptionAttribute</strong> راست‌کلیک کرده و دوباره <strong>Add All Referenced Types</strong> را انتخاب کنید تا به نتیجه نهایی برسید، همان‌طور که در تصویر زیر نشان داده شده است</p><div align="center"> <p><img src="../../../assets/image/12/Table%2012-17.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <p>نکته‌ی واقعاً فوق‌العاده در مورد این ابزار این است که می‌توانید <strong>عناصر نمودار را بر اساس Namespace مرتب کنید</strong>.</p><p>این قابلیت برای <strong>راه‌حل‌های بزرگ با چندین پروژه حجیم و Namespace‌های تو در تو</strong> بسیار مفید است.</p><p>اگرچه امکان راست‌کلیک روی کد و رفتن به <strong>Item Declaration</strong> خوب است، اما هیچ چیزی جای <strong>مشاهده بصری ساختار پروژه</strong> را نمی‌گیرد. همین ویژگی باعث می‌شود این ابزار واقعاً کاربردی باشد.</p><p>در تصویر زیر، نمونه‌ای از <strong>Typed Dependencies Diagram</strong> را می‌بینید که <strong>بر اساس Namespace‌ها سازماندهی شده است</strong></p><div align="center"> <p><img src="../../../assets/image/12/Table%2012-18.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <p>بارها برای من پیش آمده که واقعاً به چنین نموداری در کار روزمره نیاز داشتم.</p><p>این نمودار، <strong>مستندسازی فنی</strong> است که به توسعه‌دهندگان کمک می‌کند در یک <strong>راه‌حل پیچیده</strong> مسیر خود را پیدا کنند. آن‌ها می‌توانند ببینند کدام <strong>Namespace‌ها</strong> در دسترس هستند و همه چیز چگونه به هم متصل شده است.</p><p>این اطلاعات به توسعه‌دهندگان <strong>دانش درست</strong> می‌دهد تا بدانند هنگام توسعه، کلاس‌ها، Enum‌ها و Interface‌های جدید را کجا قرار دهند، و همچنین بدانند هنگام نگهداری کد، اشیاء را از کجا پیدا کنند.</p><p>این نمودار همچنین برای یافتن <strong>Namespace‌ها، Interface‌ها و نام‌های اشیاء تکراری</strong> نیز مفید است.</p><hr> <h3>نگاهی به <strong>Coverage</strong></h3><p>مراحل زیر را دنبال کنید:</p><ol> <li>از منوی <strong>Extensions | ReSharper | Cover | Cover Application</strong> استفاده کنید.</li><li><strong>Dialog Configuration Coverage</strong> نمایش داده می‌شود و گزینه پیش‌فرض <strong>Standalone</strong> انتخاب شده است.</li><li>فایل اجرایی (Executable) خود را انتخاب کنید.</li><li>می‌توانید یک برنامه <strong>.NET</strong> از پوشه <strong>bin</strong> انتخاب کنید.</li><li>تصویر زیر <strong>Coverage Configuration Dialog</strong> را نشان می‌دهد</li></ol> <div align="center"><p><img src="../../../assets/image/12/Table%2012-19.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <p>۶. روی دکمه <strong>Run</strong> کلیک کنید تا برنامه اجرا شود و داده‌های پروفایلینگ جمع‌آوری شوند.<br> پس از آن، <strong>ReSharper</strong> دیالوگ زیر را نمایش خواهد داد:</p><div align="center"> <p><img src="../../../assets/image/12/Table%2012-20.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <p>برنامه اجرا خواهد شد. در حین اجرای برنامه، <strong>پروفایلر پوشش کد</strong> در حال جمع‌آوری داده‌ها خواهد بود.<br> فایلی که انتخاب کرده‌ایم یک <strong>برنامه کنسولی</strong> است که داده‌های زیر را نمایش می‌دهد:</p><div align="center"> <p><img src="../../../assets/image/12/Table%2012-21.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <p>۷. روی پنجره کنسول کلیک کنید و سپس هر کلیدی را فشار دهید تا از برنامه خارج شوید.<br> پنجره پوشش (Coverage) بسته خواهد شد و فرآیند ذخیره‌سازی داده‌ها آغاز می‌شود.<br> در نهایت، <strong>پنجره Coverage Results Browser</strong> نمایش داده خواهد شد، همان‌طور که در این تصویر می‌بینید:</p><div align="center"> <p><img src="../../../assets/image/12/Table%2012-22.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <p>این پنجره شامل اطلاعات بسیار مفیدی است. این ابزار با نشانگرهای رنگی به شما کمک می‌کند:</p><ul> <li><strong>کدهایی که اجرا نشده‌اند</strong> با رنگ قرمز مشخص می‌شوند.</li><li><strong>کدهای اجرا شده</strong> با رنگ سبز نمایش داده می‌شوند.</li></ul> <p>با استفاده از این اطلاعات می‌توانید تشخیص دهید که کد قرمز شده ممکن است:</p><ul> <li>کد مرده (Dead Code) باشد و بتوان آن را حذف کرد،</li><li>به دلیل مسیر اجرای برنامه فراخوانی نشده باشد اما همچنان مورد نیاز باشد،</li><li>برای اهداف تست موقتاً کامنت شده باشد،</li><li>یا به دلیل اشتباه برنامه‌نویس یا شرط اشتباه، اصلاً فراخوانی نشده باشد.</li></ul> <p>برای رفتن به آیتم موردنظر کافی است <strong>دو بار روی آن کلیک کنید</strong> تا مستقیماً به همان قطعه کد منتقل شوید.</p><p>در مثال ما، کلاس <strong>Program</strong> تنها 33٪ پوشش کد داشته است. با دوبار کلیک روی <strong>Program</strong>، خروجی زیر را مشاهده می‌کنیم:</p><pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Main</span>(<span class="hljs-params"><span class="hljs-built_in">string</span>[] <span class="hljs-keyword">args</span></span>)</span>
 {
     LoggingServices.DefaultBackend = <span class="hljs-keyword">new</span> ConsoleLoggingBackend();
     AuditServices.RecordPublished += AuditServices_RecordPublished;
@@ -539,210 +50,216 @@ OOP امکان <strong>Coupling کلاس‌ها</strong> را فراهم می‌
     <span class="hljs-comment">//FailedMethod();</span>
     Console.ReadKey();
 }
-</code></pre>
-<p>همان‌طور که می‌بینید، دلیل پوشش پایین این است که چندین فراخوانی کد برای تست موقتاً کامنت شده‌اند. در این حالت می‌توانیم:</p>
-<ul>
-<li>کد را به همین صورت باقی بگذاریم (که ما در این مثال همین کار را می‌کنیم)،</li>
-<li>یا کدهای مرده را حذف کنیم،</li>
-<li>یا با برداشتن کامنت‌ها آنها را دوباره فعال کنیم.</li>
-</ul>
-<hr>
-<p>حال که با <strong>ReSharper</strong> و ابزارهای کمک‌کننده برای نوشتن کدهای تمیز و باکیفیت در #C آشنا شدید، نوبت به ابزار بعدی می‌رسد: <strong>Telerik JustDecompile</strong>.</p>
-<p>من بارها از این ابزار استفاده کرده‌ام، برای مثال:</p>
-<ul>
-<li>رفع باگ در کتابخانه‌های شخص ثالث،</li>
-<li>بازیابی سورس‌کدهای مهم پروژه‌های از دست‌رفته،</li>
-<li>بررسی قدرت Obfuscation اسمبلی‌ها،</li>
-<li>و حتی برای یادگیری و تحلیل کدهای موجود.</li>
-</ul>
-<p>این ابزار را به شدت توصیه می‌کنم، چون در طول سال‌ها ارزش خود را بارها ثابت کرده است.</p>
-<p>موتور <strong>Decompile</strong> این ابزار <strong>متن‌باز</strong> است و می‌توانید سورس‌کد آن را از این آدرس دریافت کنید:<br>
-<a href="https://github.com/telerik/justdecompileengine">https://github.com/telerik/justdecompileengine</a></p>
-<p>همچنین نصب‌کننده ویندوز را می‌توانید از وب‌سایت Telerik دریافت کنید:<br>
-<a href="https://www.telerik.com/products/decompiler.aspx">https://www.telerik.com/products/decompiler.aspx</a></p>
-<p>این ابزار هم به صورت <strong>برنامه مستقل</strong> و هم به صورت <strong>افزونه Visual Studio</strong> موجود است.<br>
-با آن می‌توانید:</p>
-<ul>
-<li>پروژه‌های <a href="http://VB.NET">VB.NET</a> یا #C را از اسمبلی‌ها ایجاد کنید،</li>
-<li>منابع (Resources) را از اسمبلی‌های Decompile شده استخراج و ذخیره کنید.</li>
-</ul>
-<hr>
-<p><strong>مراحل نصب و اجرا:</strong></p>
-<ol>
-<li><strong>Telerik JustDecompile</strong> را دانلود و نصب کنید.</li>
-<li>در حین نصب ممکن است ابزارهای اضافی پیشنهاد شوند، که در صورت تمایل می‌توانید آنها را غیرفعال کنید.</li>
-<li>برنامه مستقل <strong>JustDecompile</strong> را اجرا کنید.</li>
-<li>یک اسمبلی .NET پیدا کرده و آن را به <strong>پنل سمت چپ</strong> برنامه بکشید.</li>
-<li>برنامه کد را <strong>Decompile</strong> کرده و ساختار درختی کد را در سمت چپ نمایش می‌دهد.</li>
-<li>با انتخاب هر آیتم در سمت چپ، کد آن در سمت راست نمایش داده می‌شود، همان‌طور که در تصویر زیر می‌بینید:</li>
-</ol>
-<div align="center">
-<p><img src="../../../assets/image/12/Table%2012-23.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<p>حالا، همان‌طور که می‌بینید، فرآیند دیکامپایل (decompilation) سریع است و در بیشتر موارد، نتیجه‌ی خوبی برای دیکامپایل اسمبلی ما ارائه می‌دهد. البته این فرآیند بی‌نقص نیست، اما معمولاً کار راه می‌اندازد. مراحل زیر را انجام دهید:</p>
-<ol>
-<li>در منوی کشویی سمت راست گزینه‌ی <strong>Plugins</strong>، گزینه‌ی <strong>C#</strong> را انتخاب کنید.</li>
-<li>سپس روی <strong>Tools | Create Project</strong> کلیک کنید.</li>
-<li>گاهی از شما خواسته می‌شود نسخه‌ی .NET هدف را انتخاب کنید؛ اما همیشه این درخواست نمایش داده نمی‌شود.</li>
-<li>بعد از آن، از شما پرسیده می‌شود پروژه را کجا ذخیره کنید.</li>
-<li>پروژه در همان مسیر ذخیره خواهد شد.</li>
-</ol>
-<p>بعد از این کار، شما می‌توانید پروژه را در <strong>Visual Studio</strong> باز کرده و روی آن کار کنید. اگر با مشکلی مواجه شدید، <strong>Telerik</strong> خطاهای موجود در کد را ثبت کرده و یک ایمیل در اختیارتان می‌گذارد. شما می‌توانید هر مشکلی را که با آن روبه‌رو شدید از طریق ایمیل برای آن‌ها ارسال کنید. تیم پشتیبانی آن‌ها معمولاً در پاسخ‌دهی و رفع مشکلات خوب عمل می‌کند.</p>
-<p>خب، حالا مرور این فصل به پایان رسید. بیایید به طور خلاصه مرور کنیم که چه آموختیم:</p>
-<ul>
-<li>
-<p>در این فصل دیدید که <strong>شاخص‌های کیفی کد (Code Metrics)</strong> چه اطلاعات مفیدی ارائه می‌دهند و تولید آن‌ها چقدر آسان است. این شاخص‌ها شامل تعداد خطوط (حتی خطوط خالی) در مقابل خطوط اجرایی، پیچیدگی حلقه‌ها (<strong>Cyclomatic Complexity</strong>)، سطح انسجام (<strong>Cohesion</strong>) و کوپلینگ (<strong>Coupling</strong>)، و میزان <strong>قابلیت نگهداری کد</strong> است. رنگ‌های مربوط به نیاز به بازآرایی کد به این صورت هستند: سبز (خوب)، زرد (نیاز به بازآرایی در حالت ایدئال)، قرمز (حتماً نیاز به بازآرایی دارد).</p>
-</li>
-<li>
-<p>سپس یاد گرفتید که چطور به‌راحتی می‌توانید <strong>تحلیل ایستای کد</strong> انجام دهید و نتایج را ببینید. همچنین مشاهده و تغییر <strong>RuleSetها</strong> که مشخص می‌کنند چه مواردی تحلیل شوند یا نشوند، آموزش داده شد.</p>
-</li>
-<li>
-<p>سپس <strong>Quick Actions</strong> را دیدیم که چطور می‌توانند رفع اشکال، افزودن <strong>using statements</strong> و بازآرایی کد را تنها با یک دستور انجام دهند.</p>
-</li>
-<li>
-<p>بعد به سراغ ابزار <strong>JetBrains dotTrace profiler</strong> رفتیم تا عملکرد برنامه را اندازه‌گیری کنیم، گلوگاه‌ها را شناسایی کرده و متدهای پرمصرف را پیدا کنیم.</p>
-</li>
-<li>
-<p>ابزار بعدی، <strong>JetBrains ReSharper</strong> بود که به ما امکان داد کد را از نظر مشکلات و بهبودهای احتمالی بررسی کنیم. چند مورد را شناسایی کردیم، تغییرات لازم را اعمال کردیم و دیدیم چطور به‌راحتی می‌توان با این ابزار کیفیت کد را بهبود داد.</p>
-</li>
-<li>
-<p>سپس به ایجاد <strong>نمودارهای معماری</strong> برای وابستگی‌ها و وابستگی‌های نوع پرداختیم.</p>
-</li>
-<li>
-<p>در نهایت، ابزار <strong>Telerik JustDecompile</strong> را بررسی کردیم؛ ابزاری بسیار کاربردی که می‌تواند اسمبلی‌ها را دیکامپایل کرده و پروژه‌های C# یا <a href="http://VB.NET">VB.NET</a> تولید کند. این ابزار زمانی مفید است که باگ پیدا می‌کنید یا برنامه نیاز به توسعه دارد ولی دیگر به کد منبع دسترسی ندارید.</p>
-</li>
-</ul>
-<p>در فصل‌های بعدی، بیشتر روی کد و بازآرایی آن تمرکز خواهیم کرد. اما فعلاً، دانش خود را با پرسش‌های زیر بیازمایید و از لینک‌های بخش <strong>مطالعه بیشتر</strong> استفاده کنید:</p>
-<p><strong>سوالات</strong></p>
-<ol>
-<li><strong>Code Metrics</strong> چیست و چرا باید از آن استفاده کنیم؟</li>
-<li>شش مورد از شاخص‌های اندازه‌گیری Code Metrics را نام ببرید.</li>
-<li><strong>تحلیل کد (Code Analysis)</strong> چیست و چرا مفید است؟</li>
-<li><strong>Quick Actions</strong> چیستند؟</li>
-<li>ابزار <strong>JetBrains dotTrace</strong> برای چه استفاده می‌شود؟</li>
-<li>ابزار <strong>JetBrains ReSharper</strong> برای چه استفاده می‌شود؟</li>
-<li>چرا از <strong>Telerik JustDecompile</strong> برای دیکامپایل اسمبلی‌ها استفاده کنیم؟</li>
-</ol>
-<p><strong>مطالعه بیشتر</strong></p>
-<ul>
-<li>مستندات رسمی مایکروسافت درباره‌ی Code Metrics:<br>
-<a href="https://docs.microsoft.com/en-us/visualstudio/code-quality/code-metrics-values?view=vs-2019">https://docs.microsoft.com/en-us/visualstudio/code-quality/code-metrics-values?view=vs-2019</a></li>
-<li>مستندات رسمی مایکروسافت درباره‌ی Quick Actions:<br>
-<a href="https://docs.microsoft.com/en-us/visualstudio/ide/quick-actions?view=vs-2019">https://docs.microsoft.com/en-us/visualstudio/ide/quick-actions?view=vs-2019</a></li>
-<li>ابزار JetBrains dotTrace profiler:<br>
-<a href="https://www.jetbrains.com/profiler/">https://www.jetbrains.com/profiler/</a></li>
-</ul>
-
-  </main>
-
-  <!-- فوتر مشترک -->
-  <footer class="footer">
-    <div class="container">
-      <p>
-        <img src="/Gitab/icone/copyright.svg" alt="کپی‌رایت" width="14" height="14"
-             style="vertical-align:middle;margin-inline:4px">
-        <span id="y"></span> Gitab — تمامی حقوق محفوظ است.
-      </p>
-    </div>
-  </footer>
-
-  <!-- سال و اسکریپت تغییر تم -->
-  <script>
+</code></pre> <p>همان‌طور که می‌بینید، دلیل پوشش پایین این است که چندین فراخوانی کد برای تست موقتاً کامنت شده‌اند. در این حالت می‌توانیم:</p><ul> <li>کد را به همین صورت باقی بگذاریم (که ما در این مثال همین کار را می‌کنیم)،</li><li>یا کدهای مرده را حذف کنیم،</li><li>یا با برداشتن کامنت‌ها آنها را دوباره فعال کنیم.</li></ul> <hr><p>حال که با <strong>ReSharper</strong> و ابزارهای کمک‌کننده برای نوشتن کدهای تمیز و باکیفیت در #C آشنا شدید، نوبت به ابزار بعدی می‌رسد: <strong>Telerik JustDecompile</strong>.</p><p>من بارها از این ابزار استفاده کرده‌ام، برای مثال:</p><ul> <li>رفع باگ در کتابخانه‌های شخص ثالث،</li><li>بازیابی سورس‌کدهای مهم پروژه‌های از دست‌رفته،</li><li>بررسی قدرت Obfuscation اسمبلی‌ها،</li><li>و حتی برای یادگیری و تحلیل کدهای موجود.</li></ul> <p>این ابزار را به شدت توصیه می‌کنم، چون در طول سال‌ها ارزش خود را بارها ثابت کرده است.</p><p>موتور <strong>Decompile</strong> این ابزار <strong>متن‌باز</strong> است و می‌توانید سورس‌کد آن را از این آدرس دریافت کنید:<br><a href="https://github.com/telerik/justdecompileengine">https://github.com/telerik/justdecompileengine</a></p><p>همچنین نصب‌کننده ویندوز را می‌توانید از وب‌سایت Telerik دریافت کنید:<br><a href="https://www.telerik.com/products/decompiler.aspx">https://www.telerik.com/products/decompiler.aspx</a></p><p>این ابزار هم به صورت <strong>برنامه مستقل</strong> و هم به صورت <strong>افزونه Visual Studio</strong> موجود است.<br> با آن می‌توانید:</p><ul> <li>پروژه‌های <a href="http://VB.NET">VB.NET</a> یا #C را از اسمبلی‌ها ایجاد کنید،</li><li>منابع (Resources) را از اسمبلی‌های Decompile شده استخراج و ذخیره کنید.</li></ul> <hr><p><strong>مراحل نصب و اجرا:</strong></p><ol> <li><strong>Telerik JustDecompile</strong> را دانلود و نصب کنید.</li><li>در حین نصب ممکن است ابزارهای اضافی پیشنهاد شوند، که در صورت تمایل می‌توانید آنها را غیرفعال کنید.</li><li>برنامه مستقل <strong>JustDecompile</strong> را اجرا کنید.</li><li>یک اسمبلی .NET پیدا کرده و آن را به <strong>پنل سمت چپ</strong> برنامه بکشید.</li><li>برنامه کد را <strong>Decompile</strong> کرده و ساختار درختی کد را در سمت چپ نمایش می‌دهد.</li><li>با انتخاب هر آیتم در سمت چپ، کد آن در سمت راست نمایش داده می‌شود، همان‌طور که در تصویر زیر می‌بینید:</li></ol> <div align="center"><p><img src="../../../assets/image/12/Table%2012-23.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <p>حالا، همان‌طور که می‌بینید، فرآیند دیکامپایل (decompilation) سریع است و در بیشتر موارد، نتیجه‌ی خوبی برای دیکامپایل اسمبلی ما ارائه می‌دهد. البته این فرآیند بی‌نقص نیست، اما معمولاً کار راه می‌اندازد. مراحل زیر را انجام دهید:</p><ol> <li>در منوی کشویی سمت راست گزینه‌ی <strong>Plugins</strong>، گزینه‌ی <strong>C#</strong> را انتخاب کنید.</li><li>سپس روی <strong>Tools | Create Project</strong> کلیک کنید.</li><li>گاهی از شما خواسته می‌شود نسخه‌ی .NET هدف را انتخاب کنید؛ اما همیشه این درخواست نمایش داده نمی‌شود.</li><li>بعد از آن، از شما پرسیده می‌شود پروژه را کجا ذخیره کنید.</li><li>پروژه در همان مسیر ذخیره خواهد شد.</li></ol> <p>بعد از این کار، شما می‌توانید پروژه را در <strong>Visual Studio</strong> باز کرده و روی آن کار کنید. اگر با مشکلی مواجه شدید، <strong>Telerik</strong> خطاهای موجود در کد را ثبت کرده و یک ایمیل در اختیارتان می‌گذارد. شما می‌توانید هر مشکلی را که با آن روبه‌رو شدید از طریق ایمیل برای آن‌ها ارسال کنید. تیم پشتیبانی آن‌ها معمولاً در پاسخ‌دهی و رفع مشکلات خوب عمل می‌کند.</p><p>خب، حالا مرور این فصل به پایان رسید. بیایید به طور خلاصه مرور کنیم که چه آموختیم:</p><ul> <li><p>در این فصل دیدید که <strong>شاخص‌های کیفی کد (Code Metrics)</strong> چه اطلاعات مفیدی ارائه می‌دهند و تولید آن‌ها چقدر آسان است. این شاخص‌ها شامل تعداد خطوط (حتی خطوط خالی) در مقابل خطوط اجرایی، پیچیدگی حلقه‌ها (<strong>Cyclomatic Complexity</strong>)، سطح انسجام (<strong>Cohesion</strong>) و کوپلینگ (<strong>Coupling</strong>)، و میزان <strong>قابلیت نگهداری کد</strong> است. رنگ‌های مربوط به نیاز به بازآرایی کد به این صورت هستند: سبز (خوب)، زرد (نیاز به بازآرایی در حالت ایدئال)، قرمز (حتماً نیاز به بازآرایی دارد).</p></li> <li><p>سپس یاد گرفتید که چطور به‌راحتی می‌توانید <strong>تحلیل ایستای کد</strong> انجام دهید و نتایج را ببینید. همچنین مشاهده و تغییر <strong>RuleSetها</strong> که مشخص می‌کنند چه مواردی تحلیل شوند یا نشوند، آموزش داده شد.</p></li> <li><p>سپس <strong>Quick Actions</strong> را دیدیم که چطور می‌توانند رفع اشکال، افزودن <strong>using statements</strong> و بازآرایی کد را تنها با یک دستور انجام دهند.</p></li> <li><p>بعد به سراغ ابزار <strong>JetBrains dotTrace profiler</strong> رفتیم تا عملکرد برنامه را اندازه‌گیری کنیم، گلوگاه‌ها را شناسایی کرده و متدهای پرمصرف را پیدا کنیم.</p></li> <li><p>ابزار بعدی، <strong>JetBrains ReSharper</strong> بود که به ما امکان داد کد را از نظر مشکلات و بهبودهای احتمالی بررسی کنیم. چند مورد را شناسایی کردیم، تغییرات لازم را اعمال کردیم و دیدیم چطور به‌راحتی می‌توان با این ابزار کیفیت کد را بهبود داد.</p></li> <li><p>سپس به ایجاد <strong>نمودارهای معماری</strong> برای وابستگی‌ها و وابستگی‌های نوع پرداختیم.</p></li> <li><p>در نهایت، ابزار <strong>Telerik JustDecompile</strong> را بررسی کردیم؛ ابزاری بسیار کاربردی که می‌تواند اسمبلی‌ها را دیکامپایل کرده و پروژه‌های C# یا <a href="http://VB.NET">VB.NET</a> تولید کند. این ابزار زمانی مفید است که باگ پیدا می‌کنید یا برنامه نیاز به توسعه دارد ولی دیگر به کد منبع دسترسی ندارید.</p></li> </ul><p>در فصل‌های بعدی، بیشتر روی کد و بازآرایی آن تمرکز خواهیم کرد. اما فعلاً، دانش خود را با پرسش‌های زیر بیازمایید و از لینک‌های بخش <strong>مطالعه بیشتر</strong> استفاده کنید:</p><p><strong>سوالات</strong></p><ol> <li><strong>Code Metrics</strong> چیست و چرا باید از آن استفاده کنیم؟</li><li>شش مورد از شاخص‌های اندازه‌گیری Code Metrics را نام ببرید.</li><li><strong>تحلیل کد (Code Analysis)</strong> چیست و چرا مفید است؟</li><li><strong>Quick Actions</strong> چیستند؟</li><li>ابزار <strong>JetBrains dotTrace</strong> برای چه استفاده می‌شود؟</li><li>ابزار <strong>JetBrains ReSharper</strong> برای چه استفاده می‌شود؟</li><li>چرا از <strong>Telerik JustDecompile</strong> برای دیکامپایل اسمبلی‌ها استفاده کنیم؟</li></ol> <p><strong>مطالعه بیشتر</strong></p><ul> <li>مستندات رسمی مایکروسافت درباره‌ی Code Metrics:<br><a href="https://docs.microsoft.com/en-us/visualstudio/code-quality/code-metrics-values?view=vs-2019">https://docs.microsoft.com/en-us/visualstudio/code-quality/code-metrics-values?view=vs-2019</a></li><li>مستندات رسمی مایکروسافت درباره‌ی Quick Actions:<br><a href="https://docs.microsoft.com/en-us/visualstudio/ide/quick-actions?view=vs-2019">https://docs.microsoft.com/en-us/visualstudio/ide/quick-actions?view=vs-2019</a></li><li>ابزار JetBrains dotTrace profiler:<br><a href="https://www.jetbrains.com/profiler/">https://www.jetbrains.com/profiler/</a></li></ul> </article><nav class="chapter-single-next-nav"> <a href="/Gitab/books/book2/Book/13/Refactoring-CSharp-Code-Identifying-Code-Smells/" class="btn-next-chapter-action" id="nextChapterBtn" data-hub="/Gitab/books/book2/"> <span class="next-btn-text">فصل بعدی: ریفکتورینگ کدهای سی‌شارپ — تشخیص Code Smellها</span> <span class="next-btn-arrow">←</span> </a> </nav></div> <button class="fab-back-to-top" id="backToTopBtn" type="button" aria-label="رفتن به بالای صفحه" title="رفتن به بالا"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"> <polyline points="18 15 12 9 6 15"></polyline> </svg> </button></main> <footer class="footer-minimal"><div class="footer-container"> <div class="footer-top-row"><div class="footer-brand-side"> <a href="/Gitab/" class="footer-brand-anchor"> <img src="/Gitab/icone/logo.svg" alt="Gitab" width="28" height="28" loading="lazy" decoding="async"> <span class="footer-brand-title">گیتاب (Gitab)</span> </a> <p class="footer-tagline"> پلتفرم آزاد و مستقل برای ترجمهٔ دقیق و روان کتاب‌های مرجع مهندسی نرم‌افزار. </p></div> <div class="footer-nav-cols"><div class="footer-nav-col"> <span class="footer-nav-heading">موضوعات</span><ul class="footer-nav-list"> <li><a href="/Gitab/books/list-books/?cat=csharp">سی‌شارپ و دات‌نت</a></li><li><a href="/Gitab/books/list-books/?cat=clean-code">کد تمیز و بازآفرینی</a></li><li><a href="/Gitab/books/list-books/?cat=architecture">معماری و طراحی دامنه</a></li><li><a href="/Gitab/books/list-books/?cat=system">لینوکس و خط فرمان</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">بخش‌های سایت</span><ul class="footer-nav-list"> <li><a href="/Gitab/">صفحه اصلی</a></li><li><a href="/Gitab/books/list-books/">کتابخانه کامل</a></li><li><a href="/Gitab/courses/">دوره‌های آموزشی</a></li><li><a href="/Gitab/translator.html">تالار مترجمین</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">مشارکت و جامعه</span><ul class="footer-nav-list"> <li><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer">راهنمای همکاری در ترجمه</a></li><li><a href="https://github.com/hheydarian/Gitab/issues" target="_blank" rel="noopener noreferrer">پیشنهاد کتاب یا گزارش خطا</a></li></ul> </div></div> </div><div class="footer-bottom-line"> <span>© <span id="y">2026</span> Gitab — توسعه‌یافته برای جامعهٔ مهندسان نرم‌افزار ایرانی</span></div> </div></footer> <script>
   (() => {
     const root = document.documentElement;
     const btn = document.getElementById('themeToggle');
+    const sunIcon = btn ? btn.querySelector('.icon-sun') : null;
+    const moonIcon = btn ? btn.querySelector('.icon-moon') : null;
     const KEY = 'gitab-theme';
 
-    function updateTheme(s) {
-      root.setAttribute('data-theme', s);
-      const mode = s;  // فقط `dark` یا `light` خواهد بود
+    function updateTheme(mode) {
+      root.setAttribute('data-theme', mode);
       root.dataset.colorMode = mode;
-      btn.dataset.icon = mode === 'dark' ? 'moon' : 'sun';
+      if (sunIcon && moonIcon) {
+        if (mode === 'dark') {
+          sunIcon.style.display = 'inline-block';
+          moonIcon.style.display = 'none';
+        } else {
+          sunIcon.style.display = 'none';
+          moonIcon.style.display = 'inline-block';
+        }
+      }
     }
 
-    // وضعیت تم ذخیره شده از localStorage
-    let saved = localStorage.getItem(KEY) || 'light'; // پیش‌فرض روشن
+    let saved = 'dark';
+    try { saved = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
     updateTheme(saved);
 
-    // تنظیم مجدد تم هنگام تغییر وضعیت دکمه
-    btn.addEventListener('click', () => {
-      const current = localStorage.getItem(KEY) || 'light';
-      const next = current === 'dark' ? 'light' : 'dark';  // فقط دو حالت: تاریک و روشن
-      localStorage.setItem(KEY, next);
-      updateTheme(next);
-    });
+    if (btn) {
+      btn.addEventListener('click', () => {
+        let current = 'dark';
+        try { current = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+        const next = current === 'dark' ? 'light' : 'dark';
+        try { localStorage.setItem(KEY, next); } catch (e) {}
+        updateTheme(next);
+      });
+    }
 
-    // هنگام بارگذاری صفحه
     document.addEventListener('DOMContentLoaded', () => {
-      updateTheme(localStorage.getItem(KEY) || 'light');
+      let mode = 'dark';
+      try { mode = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+      updateTheme(mode);
+      const yearSpan = document.getElementById('y');
+      if (yearSpan) yearSpan.textContent = new Date().getFullYear();
     });
+
+    const mobBtn = document.getElementById('mobileMenuBtn');
+    const mobDrawer = document.getElementById('mobileDrawer');
+    if (mobBtn && mobDrawer) {
+      const setDrawerOpen = (open) => {
+        mobDrawer.classList.toggle('open', open);
+        mobBtn.classList.toggle('is-open', open);
+        mobBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        mobBtn.setAttribute('aria-label', open ? 'بستن منو' : 'باز کردن منو');
+        mobDrawer.setAttribute('aria-hidden', open ? 'false' : 'true');
+      };
+
+      mobBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        setDrawerOpen(!mobDrawer.classList.contains('open'));
+      });
+
+      mobDrawer.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => setDrawerOpen(false));
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && mobDrawer.classList.contains('open')) {
+          setDrawerOpen(false);
+        }
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!mobDrawer.contains(e.target) && !mobBtn.contains(e.target)) {
+          setDrawerOpen(false);
+        }
+      });
+    }
+
+    if ('serviceWorker' in navigator) {
+      const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+      if (isLocalhost) {
+        navigator.serviceWorker.getRegistrations().then(regs => {
+          for (const reg of regs) reg.unregister();
+        });
+        if ('caches' in window) {
+          caches.keys().then(names => {
+            for (const name of names) caches.delete(name);
+          });
+        }
+      } else {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/Gitab/sw.js').catch(() => {});
+        });
+      }
+    }
   })();
-</script>
-
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-  <script>hljs.highlightAll();</script>
-
-  <script>
+  </script> <script>
   document.querySelectorAll('pre code').forEach(block => {
+    const pre = block.parentNode;
+    if (!pre || pre.querySelector('.copy-btn')) return;
+
+    const copySvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
+    const okSvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+
     const btn = document.createElement('button');
     btn.className = 'copy-btn';
-
-    const icon = document.createElement('img');
-    icon.src = "/Gitab/icone/copy.svg";
-    icon.alt = 'Copy';
-    btn.appendChild(icon);
-
-    block.parentNode.insertBefore(btn, block);
+    btn.setAttribute('aria-label', 'کپی کد');
+    btn.setAttribute('title', 'کپی کد');
+    btn.setAttribute('type', 'button');
+    btn.innerHTML = copySvg;
+    pre.appendChild(btn);
 
     btn.addEventListener('click', async () => {
-      await navigator.clipboard.writeText(block.textContent);
-      btn.classList.add('copied');
-      setTimeout(() => btn.classList.remove('copied'), 1500);
-    });
-  });
-  </script>
-
-  <script>
-  document.body.dataset.page = window.location.pathname;
-
-  const menuBtn = document.querySelector(".menu-toggle");
-  const nav = document.querySelector(".nav");
-
-  if (menuBtn && nav) {
-    menuBtn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      nav.classList.toggle("show");
-    });
-
-    document.addEventListener("click", (e) => {
-      const clickedInsideNav = nav.contains(e.target);
-      const clickedMenuButton = menuBtn.contains(e.target);
-      if (!clickedInsideNav && !clickedMenuButton) {
-        nav.classList.remove("show");
+      try {
+        await navigator.clipboard.writeText(block.textContent);
+        btn.classList.add('copied');
+        btn.innerHTML = okSvg;
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          btn.innerHTML = copySvg;
+        }, 1800);
+      } catch (err) {
+        console.error('Copy failed:', err);
       }
     });
-  }
-  </script>
-
-  <script>
-    document.getElementById('y').textContent = new Date().getFullYear();
-  </script>
-  <script>
-document.getElementById("openDonate").addEventListener("click", () => {
-  document.getElementById("donateModal").style.display = "block";
-});
-document.getElementById("closeDonate").addEventListener("click", () => {
-  document.getElementById("donateModal").style.display = "none";
-});
-document.querySelectorAll(".copy-btn").forEach(btn => {
-  btn.addEventListener("click", () => {
-    navigator.clipboard.writeText(btn.dataset.copy);
-  
-    setTimeout(() => (btn.textContent = "کپی"), 2000);
   });
-});
-</script>
+  </script> <script>
+  (() => {
+    const article = document.getElementById('chapterArticle');
+    if (!article) return;
 
-</body>
-</html>
+    const progressBar = document.getElementById('readingProgressBar');
+    if (progressBar) {
+      window.addEventListener('scroll', () => {
+        const docElem = document.documentElement;
+        const totalHeight = docElem.scrollHeight - docElem.clientHeight;
+        if (totalHeight > 0) {
+          const progress = (window.pageYOffset / totalHeight) * 100;
+          progressBar.style.width = Math.min(100, Math.max(0, progress)) + '%';
+        }
+      }, { passive: true });
+    }
+
+    const btt = document.getElementById('backToTopBtn');
+    if (btt) {
+      window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 250) {
+          btt.classList.add('visible');
+        } else {
+          btt.classList.remove('visible');
+        }
+      }, { passive: true });
+
+      btt.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+
+    article.querySelectorAll('img').forEach(img => {
+      if (!img.hasAttribute('loading')) img.loading = 'lazy';
+      if (!img.hasAttribute('decoding')) img.decoding = 'async';
+      const parent = img.parentElement;
+      if (parent && parent.tagName === 'P') {
+        parent.style.textAlign = 'center';
+      }
+
+      img.addEventListener('error', function() {
+        const src = this.getAttribute('src');
+        if (src && src.includes('assets/image/')) {
+          const parts = src.split('assets/image/');
+          const corrected = '/Gitab/books/book2/assets/image/' + parts[1];
+          if (this.src !== corrected) {
+            this.src = corrected;
+          }
+        }
+      });
+    });
+
+    article.querySelectorAll('p').forEach(p => {
+      const trimmed = p.innerText.trim();
+      if (trimmed.startsWith('💡') || trimmed.startsWith('نکته:')) {
+        p.classList.add('react-callout', 'callout-tip');
+      } else if (trimmed.startsWith('⚠️') || trimmed.startsWith('هشدار:')) {
+        p.classList.add('react-callout', 'callout-warning');
+      } else if (trimmed.startsWith('📌') || trimmed.startsWith('مهم:')) {
+        p.classList.add('react-callout', 'callout-important');
+      } else if (trimmed.startsWith('🔹') || trimmed.startsWith('🔸')) {
+        p.classList.add('react-callout', 'callout-note');
+      }
+    });
+  })();
+  </script> <script type="speculationrules">{"prefetch":[{"where":{"and":[{"href_matches":"/Gitab/*"},{"not":{"href_matches":"/Gitab/downloads/*"}},{"not":{"selector_matches":"[download], [target='_blank']"}}]},"eagerness":"moderate"}]}</script> <script>
+  (() => {
+    if (window.HTMLScriptElement && HTMLScriptElement.supports && HTMLScriptElement.supports('speculationrules')) return;
+    const seen = new Set([window.location.href]);
+    let count = 0;
+    const prefetchLink = (e) => {
+      if (count >= 12) return;
+      const a = e.target && e.target.closest ? e.target.closest('header a, .chapter-single-next-nav a, .syllabus-chapter-item a, .btn-hero-read, .btn-card-read') : null;
+      if (!a || !a.href || a.hasAttribute('download') || a.target === '_blank') return;
+      if (a.origin !== window.location.origin || a.pathname.includes('/downloads/')) return;
+      const clean = a.href.split('#')[0];
+      if (!clean || seen.has(clean)) return;
+      seen.add(clean);
+      count++;
+      const l = document.createElement('link');
+      l.rel = 'prefetch';
+      l.href = clean;
+      document.head.appendChild(l);
+    };
+    document.addEventListener('pointerenter', prefetchLink, { capture: true, passive: true });
+    document.addEventListener('touchstart', prefetchLink, { capture: true, passive: true });
+  })();
+  </script></body></html>

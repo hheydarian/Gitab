@@ -1,461 +1,112 @@
-
-
-<!doctype html>
-<html lang="fa" dir="rtl">
-<head>
-  <meta charset="utf-8">
-  <link rel="icon" type="image/png" href="/Gitab/favicon.png">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Regular Expressions</title>
-  <meta name="description" content="ترجمه‌های فارسی کتاب‌های فنی — سریع، مینیمال و قابل اتکا.">
-
-  <!-- استایل‌ها -->
-  <link rel="stylesheet" href="/Gitab/styles/main.css">
-  <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
-
-  <style>
-  @font-face {
-    font-family: 'Vazir';
-    src: url('/Gitab/fonts/Vazir-FD-WOL.ttf') format('truetype');
-    font-display: swap;
-  }
-  @font-face {
-    font-family: "Lalezar";
-    src: url('fonts/Lalezar.ttf') format('truetype');
-    font-display: swap;
-}
-  body {
-    font-family: 'Vazir', sans-serif;
-  }
-  </style>
-</head>
-
-<body>
-  <!-- هدر مشترک -->
-  <header class="header">
-    <div class="container nav-wrap">
-      <a href="/Gitab/" class="brand">
-        <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="26" height="26">
-        <span>Gitab</span>
-      </a>
-
-       <nav class="nav">
-         <a href="/Gitab/" >خانه</a>
-         <a href="/Gitab/books/list-books" >کتاب‌ها</a>
-         <a href="/Gitab/giter.html" >دوره ها</a>
-          <!-- 
-         <a href="/Gitab/translator.html" >مترجمین</a>
-           -->
-       </nav>
-
-      <div class="nav-actions">
-        <button id="themeToggle" class="icon-btn theme-btn" data-icon="moon" aria-label="تغییر تم">
-          <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن">
-          <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک">
-        </button>
-
-        <a class="icon-btn" href="https://github.com/hheydarian/Gitab" target="_blank" title="GitHub">
-          <img src="/Gitab/icone/github.svg" alt="GitHub">
-        </a>
-
-        <!-- دکمه منو برای موبایل -->
-        <button class="menu-toggle" aria-label="منو">
-          <img src="/Gitab/icone/menu.svg" alt="menu">
-        </button>
-      </div>
-    </div>
-  </header>
-
-  
-  <main class="site-main book-page">
-    <h1>فصل بیست و پنجم: Regular Expressions</h1>
-<p>زبان <strong>Regular Expressions</strong> الگوهای کاراکتری را شناسایی می‌کند. تایپ‌های .NET که از Regular Expressions پشتیبانی می‌کنند، بر اساس <strong>Perl 5 Regular Expressions</strong> ساخته شده‌اند و هم قابلیت جستجو (<strong>search</strong>) و هم جستجو/جایگزینی (<strong>search/replace</strong>) را پشتیبانی می‌کنند.</p>
-<p>Regular Expressions برای کارهایی مثل موارد زیر استفاده می‌شوند:</p>
-<ul>
-<li>✅ اعتبارسنجی ورودی متنی مثل رمز عبور یا شماره تلفن</li>
-<li>✅ تجزیه داده‌های متنی به فرم‌های ساختارمندتر (مثلاً یک رشته نسخه NuGet)</li>
-<li>✅ جایگزینی الگوهای متنی در یک سند (برای مثال فقط کلمات کامل)</li>
-</ul>
-<p>این فصل به دو بخش تقسیم شده است:</p>
-<ol>
-<li>بخش‌های مفهومی برای آموزش مبانی Regular Expressions در .NET.</li>
-<li>بخش‌های مرجع که زبان Regular Expressions را توضیح می‌دهد.</li>
-</ol>
-<p>تمام تایپ‌های Regular Expression در فضای نام <strong>System.Text.RegularExpressions</strong> تعریف شده‌اند.</p>
-<p>📌 نمونه‌های این فصل از قبل در <strong>LINQPad</strong> بارگذاری شده‌اند. این ابزار همچنین یک ابزار تعاملی برای Regular Expressions دارد (کلیدهای <code>Ctrl+Shift+F1</code>). یک ابزار آنلاین هم در دسترس است: 🌐 <a href="http://regexstorm.net/tester">http://regexstorm.net/tester</a>.</p>
-<hr>
-<h2>🧩 مبانی Regular Expression</h2>
-<p>یکی از رایج‌ترین عملگرهای Regular Expression چیزی است به نام <strong>Quantifier</strong> (تکرارگر).<br>
-علامت <code>?</code> یک Quantifier است که آیتم قبلی را <strong>۰ یا ۱ بار</strong> تطبیق می‌دهد. به عبارت دیگر <code>?</code> به معنای «اختیاری بودن» است.</p>
-<p>🔹 یک آیتم می‌تواند یک کاراکتر ساده یا یک ساختار پیچیده از کاراکترها داخل کروشه‌ها <code>[]</code> باشد.</p>
-<p>مثال: عبارت <code>&quot;colou?r&quot;</code> می‌تواند <strong>color</strong> و <strong>colour</strong> را تطبیق دهد، اما <strong>colouur</strong> را نه:</p>
-<pre class="hljs"><code>Console.WriteLine (Regex.Match (<span class="hljs-string">&quot;color&quot;</span>,   <span class="hljs-string">@&quot;colou?r&quot;</span>).Success);  <span class="hljs-comment">// True</span>
+<!doctype html><html lang="fa" dir="rtl"> <head><script>
+    if (window.location.pathname.startsWith('/gitab/')) {
+      window.location.replace(window.location.pathname.replace(/^\/gitab\//i, '/Gitab/') + window.location.search + window.location.hash);
+    }
+    (() => {
+      try {
+        const t = localStorage.getItem('gitab-theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', t);
+        document.documentElement.dataset.colorMode = t;
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        document.documentElement.dataset.colorMode = 'dark';
+      }
+    })();
+  </script> <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5"> <title>Regular Expressions</title><meta name="description" content="Regular Expressions — مطالعه آنلاین و رایگان از کتاب «سی‌شارپ ۱۲ در یک نگاه» (C# 12 in a Nutshell) اثر Joseph Albahari با ترجمه حامد حیدریان در گیتاب."> <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"><meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"> <meta name="theme-color" content="#090d16"><meta name="referrer" content="strict-origin-when-cross-origin"> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https:; frame-src https://www.youtube.com https://www.youtube-nocookie.com https://maps.google.com https://www.google.com; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self';"><link rel="icon" type="image/png" href="/Gitab/favicon.png"> <link rel="canonical" href="https://hheydarian.github.io/Gitab/books/book1/Book/25/Regular-Expressions/"><link rel="alternate" hreflang="fa" href="https://hheydarian.github.io/Gitab/books/book1/Book/25/Regular-Expressions/"> <link rel="alternate" hreflang="x-default" href="https://hheydarian.github.io/Gitab/books/book1/Book/25/Regular-Expressions/"><link rel="alternate" type="text/plain" title="LLMs.txt" href="/Gitab/llms.txt"> <link rel="sitemap" type="application/xml" title="Sitemap" href="/Gitab/sitemap.xml"><meta property="og:locale" content="fa_IR"> <meta property="og:type" content="article"><meta property="og:site_name" content="گیتاب | Gitab"> <meta property="og:title" content="Regular Expressions"><meta property="og:description" content="Regular Expressions — مطالعه آنلاین و رایگان از کتاب «سی‌شارپ ۱۲ در یک نگاه» (C# 12 in a Nutshell) اثر Joseph Albahari با ترجمه حامد حیدریان در گیتاب."> <meta property="og:url" content="https://hheydarian.github.io/Gitab/books/book1/Book/25/Regular-Expressions/"><meta property="og:image" content="https://hheydarian.github.io/Gitab/images/csharp-12/Cover.jpg"> <meta property="og:image:alt" content="Regular Expressions"><meta name="twitter:card" content="summary_large_image"> <meta name="twitter:title" content="Regular Expressions"><meta name="twitter:description" content="Regular Expressions — مطالعه آنلاین و رایگان از کتاب «سی‌شارپ ۱۲ در یک نگاه» (C# 12 in a Nutshell) اثر Joseph Albahari با ترجمه حامد حیدریان در گیتاب."> <meta name="twitter:image" content="https://hheydarian.github.io/Gitab/images/csharp-12/Cover.jpg"><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://hheydarian.github.io/Gitab/#organization","name":"گیتاب | Gitab","alternateName":"Gitab","url":"https://hheydarian.github.io/Gitab/","logo":{"@type":"ImageObject","url":"https://hheydarian.github.io/Gitab/favicon.png"},"sameAs":["https://github.com/hheydarian/Gitab"]},{"@type":"WebSite","@id":"https://hheydarian.github.io/Gitab/#website","url":"https://hheydarian.github.io/Gitab/","name":"گیتاب | Gitab","inLanguage":"fa-IR","publisher":{"@id":"https://hheydarian.github.io/Gitab/#organization"},"potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://hheydarian.github.io/Gitab/books/list-books/?q={search_term_string}"},"query-input":"required name=search_term_string"}},{"@type":"WebPage","@id":"https://hheydarian.github.io/Gitab/books/book1/Book/25/Regular-Expressions/#webpage","url":"https://hheydarian.github.io/Gitab/books/book1/Book/25/Regular-Expressions/","name":"Regular Expressions","description":"Regular Expressions — مطالعه آنلاین و رایگان از کتاب «سی‌شارپ ۱۲ در یک نگاه» (C# 12 in a Nutshell) اثر Joseph Albahari با ترجمه حامد حیدریان در گیتاب.","inLanguage":"fa-IR","isPartOf":{"@id":"https://hheydarian.github.io/Gitab/#website"}},{"@type":"TechArticle","headline":"Regular Expressions","description":"Regular Expressions — مطالعه آنلاین و رایگان از کتاب «سی‌شارپ ۱۲ در یک نگاه» (C# 12 in a Nutshell) اثر Joseph Albahari با ترجمه حامد حیدریان در گیتاب.","url":"https://hheydarian.github.io/Gitab/books/book1/Book/25/Regular-Expressions/","inLanguage":"fa-IR","isAccessibleForFree":true,"author":{"@type":"Person","name":"Joseph Albahari"},"translator":{"@type":"Person","name":"حامد حیدریان"},"isPartOf":{"@type":"Book","name":"سی‌شارپ ۱۲ در یک نگاه","alternateName":"C# 12 in a Nutshell","url":"https://hheydarian.github.io/Gitab/books/book1/"}}]}</script> <link rel="preload" href="/Gitab/fonts/Vazirmatn.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/Gitab/styles/main.css?v=2.4" as="style"> <link rel="preload" href="/Gitab/styles/gitab-modern.css?v=2.5" as="style"><style>@font-face{font-family:'Lalezar';src:url('/Gitab/fonts/Lalezar.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}@font-face{font-family:'Vazirmatn';src:url('/Gitab/fonts/Vazirmatn.woff2') format('woff2');font-weight:100 900;font-style:normal;font-display:swap}html,body,button,input,optgroup,select,textarea,.filter-pill{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}input::placeholder,textarea::placeholder{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}</style> <link rel="stylesheet" href="/Gitab/styles/main.css?v=2.4"><link rel="stylesheet" href="/Gitab/styles/gitab-modern.css?v=2.5"> <link rel="stylesheet" href="/Gitab/styles/vendor/github-dark.min.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="/Gitab/styles/vendor/github-dark.min.css"></noscript></head> <body><header class="header"> <div class="container nav-wrap"><a href="/Gitab/" class="brand" aria-label="صفحه اصلی گیتاب"> <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="30" height="30" decoding="async"> <span class="brand-text">Gitab</span> </a> <nav class="nav" id="mainNav"><a href="/Gitab/" >خانه</a> <a href="/Gitab/books/list-books" aria-current="page">کتاب‌ها</a> <a href="/Gitab/courses/" >دوره‌ها</a> <a href="/Gitab/translator.html" >مترجمین</a></nav> <div class="nav-actions"><button id="themeToggle" class="theme-toggle-btn" aria-label="تغییر تم" title="تغییر تم"> <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن" width="18" height="18" decoding="async" style="display:none"> <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک" width="18" height="18" decoding="async"> </button> <a class="btn-github-pill" href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" title="مشاهده سورس گیتاب در گیت‌هاب"> <img src="/Gitab/icone/github.svg" alt="GitHub" width="16" height="16" decoding="async"> <span>گیت‌هاب</span> </a> <button class="mobile-menu-btn" id="mobileMenuBtn" type="button" aria-label="باز کردن منو" aria-expanded="false"> <svg class="mob-icon-open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="4" y1="7" x2="20" y2="7"></line> <line x1="4" y1="12" x2="20" y2="12"></line> <line x1="4" y1="17" x2="14" y2="17"></line> </svg> <svg class="mob-icon-close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="18" y1="6" x2="6" y2="18"></line> <line x1="6" y1="6" x2="18" y2="18"></line> </svg> </button></div> </div><div class="mobile-drawer" id="mobileDrawer" aria-hidden="true"> <div class="mobile-drawer-inner"><div class="mobile-drawer-section-label">ناوبری سریع</div><nav class="mobile-drawer-links" aria-label="منوی موبایل"> <a href="/Gitab/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M3 10.5 12 3l9 7.5"></path> <path d="M5 9.5V20a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V9.5"></path> </svg> </span> <span class="mob-nav-text">صفحه نخست</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/books/list-books" class="mobile-drawer-link active" aria-current="page"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path> </svg> </span> <span class="mob-nav-text">کتابخانه و فهرست کتاب‌ها</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/courses/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path> <path d="M6 12v5c3 3 9 3 12 0v-5"></path> </svg> </span> <span class="mob-nav-text">دوره‌های آموزشی</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/translator.html" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path> <circle cx="9" cy="7" r="4"></circle> <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path> <path d="M16 3.13a4 4 0 0 1 0 7.75"></path> </svg> </span> <span class="mob-nav-text">مترجمین و همکاران</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> </nav><div class="mobile-drawer-divider"></div><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" class="mobile-drawer-link mobile-drawer-gh"> <span class="mob-nav-icon" aria-hidden="true"> <img src="/Gitab/icone/github.svg" alt="" width="17" height="17" loading="lazy" decoding="async"> </span> <span class="mob-nav-text">مخزن گیت‌هاب پروژه</span> <span class="mob-nav-ext" aria-hidden="true">↗</span> </a> </div></div> </header><div class="reading-progress-track"> <div class="reading-progress-fill" id="readingProgressBar"></div></div> <main class="site-main chapter-reading-page"><div class="chapter-page-wrapper"> <nav class="chapter-clean-breadcrumb" aria-label="مسیر راهنما" dir="rtl"><a href="/Gitab/">خانه</a> <span class="bc-sep" aria-hidden="true">/</span> <a href="/Gitab/books/list-books/">کتاب‌ها</a> <span class="bc-sep" aria-hidden="true">/</span> <a href="/Gitab/books/book1/"><bdi>سی‌شارپ ۱۲ در یک نگاه</bdi></a> <span class="bc-sep" aria-hidden="true">/</span> <span class="bc-current-leaf"><bdi>Regular Expressions</bdi></span></nav> <article class="chapter-prose-container markdown-body" id="chapterArticle" dir="rtl"><h1>فصل بیست و پنجم: Regular Expressions</h1><p>زبان <strong>Regular Expressions</strong> الگوهای کاراکتری را شناسایی می‌کند. تایپ‌های .NET که از Regular Expressions پشتیبانی می‌کنند، بر اساس <strong>Perl 5 Regular Expressions</strong> ساخته شده‌اند و هم قابلیت جستجو (<strong>search</strong>) و هم جستجو/جایگزینی (<strong>search/replace</strong>) را پشتیبانی می‌کنند.</p><p>Regular Expressions برای کارهایی مثل موارد زیر استفاده می‌شوند:</p><ul> <li>اعتبارسنجی ورودی متنی مثل رمز عبور یا شماره تلفن</li><li>تجزیه داده‌های متنی به فرم‌های ساختارمندتر (مثلاً یک رشته نسخه NuGet)</li><li>جایگزینی الگوهای متنی در یک سند (برای مثال فقط کلمات کامل)</li></ul> <p>این فصل به دو بخش تقسیم شده است:</p><ol> <li>بخش‌های مفهومی برای آموزش مبانی Regular Expressions در .NET.</li><li>بخش‌های مرجع که زبان Regular Expressions را توضیح می‌دهد.</li></ol> <p>تمام تایپ‌های Regular Expression در فضای نام <strong>System.Text.RegularExpressions</strong> تعریف شده‌اند.</p><p>نمونه‌های این فصل از قبل در <strong>LINQPad</strong> بارگذاری شده‌اند. این ابزار همچنین یک ابزار تعاملی برای Regular Expressions دارد (کلیدهای <code>Ctrl+Shift+F1</code>). یک ابزار آنلاین هم در دسترس است: <a href="http://regexstorm.net/tester">http://regexstorm.net/tester</a>.</p><hr> <h2>مبانی Regular Expression</h2><p>یکی از رایج‌ترین عملگرهای Regular Expression چیزی است به نام <strong>Quantifier</strong> (تکرارگر).<br> علامت <code>?</code> یک Quantifier است که آیتم قبلی را <strong>۰ یا ۱ بار</strong> تطبیق می‌دهد. به عبارت دیگر <code>?</code> به معنای «اختیاری بودن» است.</p><p>یک آیتم می‌تواند یک کاراکتر ساده یا یک ساختار پیچیده از کاراکترها داخل کروشه‌ها <code>[]</code> باشد.</p><p>مثال: عبارت <code>&quot;colou?r&quot;</code> می‌تواند <strong>color</strong> و <strong>colour</strong> را تطبیق دهد، اما <strong>colouur</strong> را نه:</p><pre class="hljs"><code>Console.WriteLine (Regex.Match (<span class="hljs-string">&quot;color&quot;</span>,   <span class="hljs-string">@&quot;colou?r&quot;</span>).Success);  <span class="hljs-comment">// True</span>
 Console.WriteLine (Regex.Match (<span class="hljs-string">&quot;colour&quot;</span>,  <span class="hljs-string">@&quot;colou?r&quot;</span>).Success);  <span class="hljs-comment">// True</span>
 Console.WriteLine (Regex.Match (<span class="hljs-string">&quot;colouur&quot;</span>, <span class="hljs-string">@&quot;colou?r&quot;</span>).Success);  <span class="hljs-comment">// False</span>
-</code></pre>
-<p>متد <strong>Regex.Match</strong> در یک رشته بزرگ‌تر جستجو می‌کند. شیء برگردانده‌شده ویژگی‌هایی مثل <strong>Index</strong> (مکان شروع تطبیق)، <strong>Length</strong> (طول تطبیق)، و <strong>Value</strong> (رشته واقعی تطبیق داده‌شده) دارد:</p>
-<pre class="hljs"><code>Match m = Regex.Match (<span class="hljs-string">&quot;any colour you like&quot;</span>, <span class="hljs-string">@&quot;colou?r&quot;</span>);
+</code></pre> <p>متد <strong>Regex.Match</strong> در یک رشته بزرگ‌تر جستجو می‌کند. شیء برگردانده‌شده ویژگی‌هایی مثل <strong>Index</strong> (مکان شروع تطبیق)، <strong>Length</strong> (طول تطبیق)، و <strong>Value</strong> (رشته واقعی تطبیق داده‌شده) دارد:</p><pre class="hljs"><code>Match m = Regex.Match (<span class="hljs-string">&quot;any colour you like&quot;</span>, <span class="hljs-string">@&quot;colou?r&quot;</span>);
 Console.WriteLine (m.Success);     <span class="hljs-comment">// True</span>
 Console.WriteLine (m.Index);       <span class="hljs-comment">// 4</span>
 Console.WriteLine (m.Length);      <span class="hljs-comment">// 6</span>
 Console.WriteLine (m.Value);       <span class="hljs-comment">// colour</span>
 Console.WriteLine (m.ToString());  <span class="hljs-comment">// colour</span>
-</code></pre>
-<p>می‌توانید به <strong>Regex.Match</strong> مثل نسخه قوی‌تر متد <strong>IndexOf</strong> در رشته نگاه کنید. تفاوت این است که <strong>Regex.Match</strong> به‌جای رشته‌ی ثابت، یک <strong>الگو</strong> را جستجو می‌کند.</p>
-<p>متد <strong>IsMatch</strong> یک میانبر است برای صدا زدن Match و سپس بررسی ویژگی Success.</p>
-<p>🔸 موتور Regular Expressions به صورت پیش‌فرض از <strong>چپ به راست</strong> کار می‌کند، بنابراین فقط اولین تطبیق بازگردانده می‌شود.<br>
-با متد <strong>NextMatch</strong> می‌توان تطبیق‌های بعدی را گرفت:</p>
-<pre class="hljs"><code>Match m1 = Regex.Match (<span class="hljs-string">&quot;One color? There are two colours in my head!&quot;</span>,
+</code></pre> <p>می‌توانید به <strong>Regex.Match</strong> مثل نسخه قوی‌تر متد <strong>IndexOf</strong> در رشته نگاه کنید. تفاوت این است که <strong>Regex.Match</strong> به‌جای رشته‌ی ثابت، یک <strong>الگو</strong> را جستجو می‌کند.</p><p>متد <strong>IsMatch</strong> یک میانبر است برای صدا زدن Match و سپس بررسی ویژگی Success.</p><p>موتور Regular Expressions به صورت پیش‌فرض از <strong>چپ به راست</strong> کار می‌کند، بنابراین فقط اولین تطبیق بازگردانده می‌شود.<br> با متد <strong>NextMatch</strong> می‌توان تطبیق‌های بعدی را گرفت:</p><pre class="hljs"><code>Match m1 = Regex.Match (<span class="hljs-string">&quot;One color? There are two colours in my head!&quot;</span>,
                         <span class="hljs-string">@&quot;colou?rs?&quot;</span>);
 Match m2 = m1.NextMatch();
 Console.WriteLine (m1);         <span class="hljs-comment">// color</span>
 Console.WriteLine (m2);         <span class="hljs-comment">// colours</span>
-</code></pre>
-<p>متد <strong>Matches</strong> همه تطبیق‌ها را در یک آرایه برمی‌گرداند. پس می‌توان مثال قبلی را به شکل زیر بازنویسی کرد:</p>
-<pre class="hljs"><code><span class="hljs-keyword">foreach</span> (Match m <span class="hljs-keyword">in</span> Regex.Matches
+</code></pre> <p>متد <strong>Matches</strong> همه تطبیق‌ها را در یک آرایه برمی‌گرداند. پس می‌توان مثال قبلی را به شکل زیر بازنویسی کرد:</p><pre class="hljs"><code><span class="hljs-keyword">foreach</span> (Match m <span class="hljs-keyword">in</span> Regex.Matches
           (<span class="hljs-string">&quot;One color? There are two colours in my head!&quot;</span>, <span class="hljs-string">@&quot;colou?rs?&quot;</span>))
   Console.WriteLine (m);
-</code></pre>
-<hr>
-<h2>🔀 عملگر Alternator</h2>
-<p>یکی دیگر از عملگرهای متداول در Regular Expressions چیزی است به نام <strong>Alternator</strong> که با خط عمودی <code>|</code> نمایش داده می‌شود. این عملگر نشان‌دهنده <strong>گزینه‌های جایگزین</strong> است.</p>
-<p>مثال: الگوی زیر <strong>Jen</strong>، <strong>Jenny</strong> و <strong>Jennifer</strong> را تطبیق می‌دهد:</p>
-<pre class="hljs"><code>Console.WriteLine (Regex.IsMatch (<span class="hljs-string">&quot;Jenny&quot;</span>, <span class="hljs-string">&quot;Jen(ny|nifer)?&quot;</span>));  <span class="hljs-comment">// True</span>
-</code></pre>
-<p>🔹 پرانتزها در اطراف Alternator باعث می‌شوند این گزینه‌ها از بقیه عبارت جدا شوند.</p>
-<hr>
-<h2>⏳ Timeout در Regular Expressions</h2>
-<p>شما می‌توانید هنگام تطبیق Regular Expressions یک <strong>Timeout</strong> تعیین کنید.</p>
-<p>اگر یک عملیات تطبیق بیشتر از <strong>TimeSpan</strong> مشخص‌شده طول بکشد، یک استثنای <strong>RegexMatchTimeoutException</strong> رخ می‌دهد.</p>
-<p>این ویژگی مخصوصاً زمانی مفید است که برنامه شما Regular Expressions را از کاربر دریافت می‌کند، چون از اجرای بی‌پایان الگوهای خراب یا مخرب جلوگیری می‌کند.</p>
-<hr>
-<h1>⚡ Compiled Regular Expressions</h1>
-<p>در بعضی از مثال‌های قبلی، بارها یک متد استاتیک <strong>Regex</strong> را با همان الگو صدا زدیم. یک روش جایگزین این است که یک شیء <strong>Regex</strong> با الگو و گزینه <strong>RegexOptions.Compiled</strong> ایجاد کرده و سپس متدهای نمونه را صدا بزنیم:</p>
-<pre class="hljs"><code>Regex r = <span class="hljs-keyword">new</span> Regex (<span class="hljs-string">@&quot;sausages?&quot;</span>, RegexOptions.Compiled);
+</code></pre> <hr><h2>عملگر Alternator</h2><p>یکی دیگر از عملگرهای متداول در Regular Expressions چیزی است به نام <strong>Alternator</strong> که با خط عمودی <code>|</code> نمایش داده می‌شود. این عملگر نشان‌دهنده <strong>گزینه‌های جایگزین</strong> است.</p><p>مثال: الگوی زیر <strong>Jen</strong>، <strong>Jenny</strong> و <strong>Jennifer</strong> را تطبیق می‌دهد:</p><pre class="hljs"><code>Console.WriteLine (Regex.IsMatch (<span class="hljs-string">&quot;Jenny&quot;</span>, <span class="hljs-string">&quot;Jen(ny|nifer)?&quot;</span>));  <span class="hljs-comment">// True</span>
+</code></pre> <p>پرانتزها در اطراف Alternator باعث می‌شوند این گزینه‌ها از بقیه عبارت جدا شوند.</p><hr> <h2>⏳ Timeout در Regular Expressions</h2><p>شما می‌توانید هنگام تطبیق Regular Expressions یک <strong>Timeout</strong> تعیین کنید.</p><p>اگر یک عملیات تطبیق بیشتر از <strong>TimeSpan</strong> مشخص‌شده طول بکشد، یک استثنای <strong>RegexMatchTimeoutException</strong> رخ می‌دهد.</p><p>این ویژگی مخصوصاً زمانی مفید است که برنامه شما Regular Expressions را از کاربر دریافت می‌کند، چون از اجرای بی‌پایان الگوهای خراب یا مخرب جلوگیری می‌کند.</p><hr> <h1>Compiled Regular Expressions</h1><p>در بعضی از مثال‌های قبلی، بارها یک متد استاتیک <strong>Regex</strong> را با همان الگو صدا زدیم. یک روش جایگزین این است که یک شیء <strong>Regex</strong> با الگو و گزینه <strong>RegexOptions.Compiled</strong> ایجاد کرده و سپس متدهای نمونه را صدا بزنیم:</p><pre class="hljs"><code>Regex r = <span class="hljs-keyword">new</span> Regex (<span class="hljs-string">@&quot;sausages?&quot;</span>, RegexOptions.Compiled);
 Console.WriteLine (r.Match (<span class="hljs-string">&quot;sausage&quot;</span>));   <span class="hljs-comment">// sausage</span>
 Console.WriteLine (r.Match (<span class="hljs-string">&quot;sausages&quot;</span>));  <span class="hljs-comment">// sausages</span>
-</code></pre>
-<p>گزینه <strong>RegexOptions.Compiled</strong> به نمونه Regex می‌گوید از <strong>تولید کد سبک‌وزن</strong> (با استفاده از DynamicMethod در Reflection.Emit) برای ساخت و کامپایل پویا کدی که مخصوص همان Regular Expression است استفاده کند.</p>
-<p>🔹 نتیجه این کار: تطبیق سریع‌تر، اما با هزینه اولیه‌ی کامپایل.</p>
-<p>همچنین می‌توانید یک شیء Regex بدون استفاده از <strong>RegexOptions.Compiled</strong> بسازید. شیء Regex <strong>تغییرناپذیر (Immutable)</strong> است.</p>
-<hr>
-<h1>⚙️ RegexOptions</h1>
-<p>موتور Regular Expressions سریع است. حتی بدون کامپایل، یک تطبیق ساده معمولاً کمتر از یک میکروثانیه طول می‌کشد.</p>
-<p>🔸 <strong>RegexOptions</strong> یک enum از نوع flags است که به شما امکان می‌دهد رفتار تطبیق را تنظیم کنید.</p>
-<p>یکی از استفاده‌های رایج آن انجام جستجوی <strong>Case-Insensitive</strong> (غیرحساس به بزرگی/کوچکی حروف) است:</p>
-<pre class="hljs"><code>Console.WriteLine (Regex.Match (<span class="hljs-string">&quot;a&quot;</span>, <span class="hljs-string">&quot;A&quot;</span>, RegexOptions.IgnoreCase)); <span class="hljs-comment">// a</span>
-</code></pre>
-<p>این کار قوانین فرهنگ (Culture) فعلی را برای معادل‌سازی حروف اعمال می‌کند. اگر بخواهید از <strong>Invariant Culture</strong> استفاده کنید، می‌توانید از گزینه <strong>CultureInvariant</strong> کمک بگیرید:</p>
-<pre class="hljs"><code>Console.WriteLine (Regex.Match (<span class="hljs-string">&quot;a&quot;</span>, <span class="hljs-string">&quot;A&quot;</span>, RegexOptions.IgnoreCase
+</code></pre> <p>گزینه <strong>RegexOptions.Compiled</strong> به نمونه Regex می‌گوید از <strong>تولید کد سبک‌وزن</strong> (با استفاده از DynamicMethod در Reflection.Emit) برای ساخت و کامپایل پویا کدی که مخصوص همان Regular Expression است استفاده کند.</p><p>نتیجه این کار: تطبیق سریع‌تر، اما با هزینه اولیه‌ی کامپایل.</p><p>همچنین می‌توانید یک شیء Regex بدون استفاده از <strong>RegexOptions.Compiled</strong> بسازید. شیء Regex <strong>تغییرناپذیر (Immutable)</strong> است.</p><hr> <h1>RegexOptions</h1><p>موتور Regular Expressions سریع است. حتی بدون کامپایل، یک تطبیق ساده معمولاً کمتر از یک میکروثانیه طول می‌کشد.</p><p><strong>RegexOptions</strong> یک enum از نوع flags است که به شما امکان می‌دهد رفتار تطبیق را تنظیم کنید.</p><p>یکی از استفاده‌های رایج آن انجام جستجوی <strong>Case-Insensitive</strong> (غیرحساس به بزرگی/کوچکی حروف) است:</p><pre class="hljs"><code>Console.WriteLine (Regex.Match (<span class="hljs-string">&quot;a&quot;</span>, <span class="hljs-string">&quot;A&quot;</span>, RegexOptions.IgnoreCase)); <span class="hljs-comment">// a</span>
+</code></pre> <p>این کار قوانین فرهنگ (Culture) فعلی را برای معادل‌سازی حروف اعمال می‌کند. اگر بخواهید از <strong>Invariant Culture</strong> استفاده کنید، می‌توانید از گزینه <strong>CultureInvariant</strong> کمک بگیرید:</p><pre class="hljs"><code>Console.WriteLine (Regex.Match (<span class="hljs-string">&quot;a&quot;</span>, <span class="hljs-string">&quot;A&quot;</span>, RegexOptions.IgnoreCase
                                         | RegexOptions.CultureInvariant));
-</code></pre>
-<p>🔹 بیشتر گزینه‌های RegexOptions را می‌توان داخل خود عبارت Regular Expression با کد تک‌حرفی فعال کرد:</p>
-<pre class="hljs"><code>Console.WriteLine (Regex.Match (<span class="hljs-string">&quot;a&quot;</span>, <span class="hljs-string">@&quot;(?i)A&quot;</span>));                     <span class="hljs-comment">// a</span>
-</code></pre>
-<p>می‌توانید گزینه‌ها را در طول یک عبارت روشن و خاموش کنید:</p>
-<pre class="hljs"><code>Console.WriteLine (Regex.Match (<span class="hljs-string">&quot;AAAa&quot;</span>, <span class="hljs-string">@&quot;(?i)a(?-i)a&quot;</span>));            <span class="hljs-comment">// Aa</span>
-</code></pre>
-<p>یک گزینه مفید دیگر <strong>IgnorePatternWhitespace</strong> یا <code>(?x)</code> است. این گزینه به شما اجازه می‌دهد برای خوانایی بهتر، فاصله (Whitespace) داخل عبارت قرار دهید—بدون اینکه آن فاصله به‌عنوان بخشی از الگو در نظر گرفته شود.</p>
-<p>🔸 گزینه <strong>NonBacktracking</strong> (از .NET 7) به موتور Regex می‌گوید فقط از الگوریتم تطبیق رو‌به‌جلو استفاده کند. این کار معمولاً سرعت را کمتر می‌کند و بعضی قابلیت‌های پیشرفته مثل Lookahead یا Lookbehind را غیرفعال می‌کند. اما از اجرای تقریباً بی‌نهایت الگوهای خراب یا مخرب جلوگیری کرده و جلوی حمله‌های <strong>ReDOS</strong> (Regular Expression Denial of Service) را می‌گیرد. در این شرایط تعیین Timeout هم بسیار مفید است.</p>
-<p>📊 جدول <strong>25-1</strong> تمام مقادیر <strong>RegexOptions</strong> را همراه با کد تک‌حرفی آن‌ها فهرست می‌کند.</p>
- <div align="center">
-<p><img src="../../../assets/image/25/Table-25-1.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<h2>🔤 Character Escapes</h2>
-<p>در <strong>Regular Expressions</strong> تعدادی <strong>متاکاراکتر (Metacharacter)</strong> وجود دارند که معنای ویژه‌ای دارند و به صورت <strong>لیترال (literal)</strong> تفسیر نمی‌شوند:</p>
-<pre class="hljs"><code>\   *   +   ?   |   {   [   (   )   ^   $   .   #
-</code></pre>
-<p>برای اینکه یک متاکاراکتر را به صورت <strong>لیترال</strong> (یعنی دقیقاً همان کاراکتر) استفاده کنیم، باید قبل از آن یک <strong>بک‌اسلش</strong> (<code>\</code>) قرار دهیم (اصطلاحاً Escape کنیم).</p>
-<p>مثال: در کد زیر، علامت <code>?</code> را Escape می‌کنیم تا بتوانیم دقیقاً رشته <code>&quot;what?&quot;</code> را تطبیق دهیم:</p>
-<pre class="hljs"><code>Console.WriteLine (Regex.Match (<span class="hljs-string">&quot;what?&quot;</span>, <span class="hljs-string">@&quot;what\?&quot;</span>)); <span class="hljs-comment">// what? (درست)</span>
+</code></pre> <p>بیشتر گزینه‌های RegexOptions را می‌توان داخل خود عبارت Regular Expression با کد تک‌حرفی فعال کرد:</p><pre class="hljs"><code>Console.WriteLine (Regex.Match (<span class="hljs-string">&quot;a&quot;</span>, <span class="hljs-string">@&quot;(?i)A&quot;</span>));                     <span class="hljs-comment">// a</span>
+</code></pre> <p>می‌توانید گزینه‌ها را در طول یک عبارت روشن و خاموش کنید:</p><pre class="hljs"><code>Console.WriteLine (Regex.Match (<span class="hljs-string">&quot;AAAa&quot;</span>, <span class="hljs-string">@&quot;(?i)a(?-i)a&quot;</span>));            <span class="hljs-comment">// Aa</span>
+</code></pre> <p>یک گزینه مفید دیگر <strong>IgnorePatternWhitespace</strong> یا <code>(?x)</code> است. این گزینه به شما اجازه می‌دهد برای خوانایی بهتر، فاصله (Whitespace) داخل عبارت قرار دهید—بدون اینکه آن فاصله به‌عنوان بخشی از الگو در نظر گرفته شود.</p><p>گزینه <strong>NonBacktracking</strong> (از .NET 7) به موتور Regex می‌گوید فقط از الگوریتم تطبیق رو‌به‌جلو استفاده کند. این کار معمولاً سرعت را کمتر می‌کند و بعضی قابلیت‌های پیشرفته مثل Lookahead یا Lookbehind را غیرفعال می‌کند. اما از اجرای تقریباً بی‌نهایت الگوهای خراب یا مخرب جلوگیری کرده و جلوی حمله‌های <strong>ReDOS</strong> (Regular Expression Denial of Service) را می‌گیرد. در این شرایط تعیین Timeout هم بسیار مفید است.</p><p>جدول <strong>25-1</strong> تمام مقادیر <strong>RegexOptions</strong> را همراه با کد تک‌حرفی آن‌ها فهرست می‌کند.</p><div align="center"> <p><img src="../../../assets/image/25/Table-25-1.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <h2>Character Escapes</h2><p>در <strong>Regular Expressions</strong> تعدادی <strong>متاکاراکتر (Metacharacter)</strong> وجود دارند که معنای ویژه‌ای دارند و به صورت <strong>لیترال (literal)</strong> تفسیر نمی‌شوند:</p><pre class="hljs"><code>\   *   +   ?   |   {   [   (   )   ^   $   .   #
+</code></pre> <p>برای اینکه یک متاکاراکتر را به صورت <strong>لیترال</strong> (یعنی دقیقاً همان کاراکتر) استفاده کنیم، باید قبل از آن یک <strong>بک‌اسلش</strong> (<code>\</code>) قرار دهیم (اصطلاحاً Escape کنیم).</p><p>مثال: در کد زیر، علامت <code>?</code> را Escape می‌کنیم تا بتوانیم دقیقاً رشته <code>&quot;what?&quot;</code> را تطبیق دهیم:</p><pre class="hljs"><code>Console.WriteLine (Regex.Match (<span class="hljs-string">&quot;what?&quot;</span>, <span class="hljs-string">@&quot;what\?&quot;</span>)); <span class="hljs-comment">// what? (درست)</span>
 Console.WriteLine (Regex.Match (<span class="hljs-string">&quot;what?&quot;</span>, <span class="hljs-string">@&quot;what?&quot;</span>));  <span class="hljs-comment">// what  (نادرست)</span>
-</code></pre>
-<p>📌 نکته: اگر کاراکتر داخل یک <strong>مجموعه (Set)</strong> باشد (یعنی داخل براکت‌های <code>[]</code> نوشته شده باشد)، این قانون اعمال نمی‌شود و متاکاراکترها همان‌طور که هستند به صورت <strong>لیترال</strong> در نظر گرفته می‌شوند. (مجموعه‌ها را در بخش بعدی بررسی می‌کنیم).</p>
-<hr>
-<h2>🛠️ متدهای Escape و Unescape در Regex</h2>
-<p>کلاس <strong>Regex</strong> دو متد مهم دارد:</p>
-<ul>
-<li><strong>Escape</strong> → رشته‌ای را که شامل متاکاراکترهای Regular Expression است، گرفته و آن‌ها را به معادل Escape‌شده تبدیل می‌کند.</li>
-<li><strong>Unescape</strong> → دقیقاً برعکس کار بالا را انجام می‌دهد (Escapeها را حذف می‌کند).</li>
-</ul>
-<p>مثال:</p>
-<pre class="hljs"><code>Console.WriteLine (Regex.Escape   (<span class="hljs-string">@&quot;?&quot;</span>));     <span class="hljs-comment">// \?</span>
+</code></pre> <blockquote><p><strong>نکته:</strong> اگر کاراکتر داخل یک <strong>مجموعه (Set)</strong> باشد (یعنی داخل براکت‌های <code>[]</code> نوشته شده باشد)، این قانون اعمال نمی‌شود و متاکاراکترها همان‌طور که هستند به صورت <strong>لیترال</strong> در نظر گرفته می‌شوند. (مجموعه‌ها را در بخش بعدی بررسی می‌کنیم).</p></blockquote> <hr><h2>متدهای Escape و Unescape در Regex</h2><p>کلاس <strong>Regex</strong> دو متد مهم دارد:</p><ul> <li><strong>Escape</strong> → رشته‌ای را که شامل متاکاراکترهای Regular Expression است، گرفته و آن‌ها را به معادل Escape‌شده تبدیل می‌کند.</li><li><strong>Unescape</strong> → دقیقاً برعکس کار بالا را انجام می‌دهد (Escapeها را حذف می‌کند).</li></ul> <p>مثال:</p><pre class="hljs"><code>Console.WriteLine (Regex.Escape   (<span class="hljs-string">@&quot;?&quot;</span>));     <span class="hljs-comment">// \?</span>
 Console.WriteLine (Regex.Unescape (<span class="hljs-string">@&quot;\?&quot;</span>));    <span class="hljs-comment">// ?&gt;</span>
-</code></pre>
-<hr>
-<h2>💡 نکته درباره @ در رشته‌های C</h2>
-<p>تمام رشته‌های Regular Expression در این فصل با پیشوند <strong>@</strong> در C# نوشته شده‌اند. دلیلش این است که مکانیزم Escape خود زبان C# هم از <strong>بک‌اسلش</strong> استفاده می‌کند.</p>
-<p>اگر <code>@</code> استفاده نشود، برای نمایش یک بک‌اسلش ساده باید چهار تا بک‌اسلش بنویسید! 😅</p>
-<p>مثال:</p>
-<pre class="hljs"><code>Console.WriteLine (Regex.Match (<span class="hljs-string">&quot;\\&quot;</span>, <span class="hljs-string">&quot;\\\\&quot;</span>));    <span class="hljs-comment">// \</span>
-</code></pre>
-<hr>
-<h2>⚠️ فاصله‌ها در Regular Expressions</h2>
-<p>مگر اینکه گزینه <code>(?x)</code> فعال باشد، فاصله‌ها (Space) در Regular Expressions <strong>به صورت لیترال</strong> در نظر گرفته می‌شوند.</p>
-<p>مثال:</p>
-<pre class="hljs"><code>Console.Write (Regex.IsMatch (<span class="hljs-string">&quot;hello world&quot;</span>, <span class="hljs-string">@&quot;hello world&quot;</span>));  <span class="hljs-comment">// True</span>
-</code></pre>
-<hr>
-<h2>🎭 Character Sets</h2>
-<p><strong>Character Sets</strong> (مجموعه کاراکترها) مثل <strong>Wildcards</strong> عمل می‌کنند، با این تفاوت که فقط برای یک مجموعه خاص از کاراکترها استفاده می‌شوند.</p>
- <div align="center">
-<p><img src="../../../assets/image/25/Table-25-2.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<h2>🎭 Character Sets (مجموعه کاراکترها)</h2>
-<p>برای تطبیق دقیقاً یکی از کاراکترهای یک مجموعه، باید آن مجموعه را داخل براکت‌های مربعی <code>[]</code> قرار دهید:</p>
-<pre class="hljs"><code>Console.Write (Regex.Matches (<span class="hljs-string">&quot;That is that.&quot;</span>, <span class="hljs-string">&quot;[Tt]hat&quot;</span>).Count);   <span class="hljs-comment">// 2</span>
-</code></pre>
-<p>🔹 در مثال بالا، الگو <code>[Tt]hat</code> هم کلمه <strong>That</strong> (با T بزرگ) و هم <strong>that</strong> (با t کوچک) را پیدا می‌کند. نتیجه برابر <strong>۲</strong> خواهد بود.</p>
-<hr>
-<h3>❌ مجموعه‌های منفی</h3>
-<p>برای تطبیق هر کاراکتری به‌جز آن‌هایی که در یک مجموعه هستند، کافیست علامت <code>^</code> را در ابتدای مجموعه قرار دهید:</p>
-<pre class="hljs"><code>Console.Write (Regex.Match (<span class="hljs-string">&quot;quiz qwerty&quot;</span>, <span class="hljs-string">&quot;q[^aeiou]&quot;</span>).Index);    <span class="hljs-comment">// 5</span>
-</code></pre>
-<p>🔹 در اینجا الگو <code>q[^aeiou]</code> به دنبال یک حرف <code>q</code> است که بعد از آن <strong>هیچ‌کدام از حروف صدادار a, e, i, o, u</strong> نیاید. نتیجه این است که تطبیق از ایندکس ۵ پیدا می‌شود.</p>
-<hr>
-<h3>🔡 محدوده کاراکترها</h3>
-<p>شما می‌توانید یک محدوده از کاراکترها را با استفاده از <strong>خط فاصله (hyphen)</strong> مشخص کنید. مثال زیر یک حرکت شطرنج را تطبیق می‌دهد:</p>
-<pre class="hljs"><code>Console.Write (Regex.Match (<span class="hljs-string">&quot;b1-c4&quot;</span>, <span class="hljs-string">@&quot;[a-h]\d-[a-h]\d&quot;</span>).Success);  <span class="hljs-comment">// True</span>
-</code></pre>
-<p>🔹 در اینجا <code>[a-h]</code> یعنی هر حرفی بین <strong>a تا h</strong>، و <code>\d</code> یعنی یک عدد (رقم). بنابراین عبارت کل حرکت شطرنج <strong>b1-c4</strong> را شناسایی می‌کند ✅.</p>
-<hr>
-<h2>🔢 شورتکات‌های پرکاربرد در Regular Expressions</h2>
-<ul>
-<li>
-<p><code>\d</code> → نشان‌دهنده یک کاراکتر <strong>رقم (Digit)</strong> است.<br>
-🔹 پس <code>\d</code> هر عددی را تطبیق می‌دهد.</p>
-</li>
-<li>
-<p><code>\D</code> → نشان‌دهنده هر کاراکتری است که <strong>عدد نباشد</strong>.</p>
-</li>
-</ul>
-<hr>
-<ul>
-<li>
-<p><code>\w</code> → نشان‌دهنده یک کاراکتر <strong>کلمه‌ای (Word character)</strong> است، یعنی:<br>
-<strong>حروف (Letters)</strong> + <strong>اعداد (Numbers)</strong> + <strong>زیرخط (_) یا Underscore</strong>.</p>
-</li>
-<li>
-<p><code>\W</code> → نشان‌دهنده هر کاراکتری است که <strong>کلمه‌ای نباشد</strong>.</p>
-</li>
-</ul>
-<p>📌 این‌ها برای حروف غیرانگلیسی (مثل الفبای سیریلیک) هم همان‌طور که انتظار می‌رود عمل می‌کنند.</p>
-<hr>
-<ul>
-<li><code>.</code> → هر کاراکتری به جز <code>\n</code> (خط جدید) را تطبیق می‌دهد.<br>
-🔹 البته <code>\r</code> (Carriage return) را مجاز می‌داند.</li>
-</ul>
-<hr>
-<ul>
-<li><code>\p{Category}</code> → یک کاراکتر را بر اساس <strong>دسته‌بندی (Category)</strong> مشخص‌شده تطبیق می‌دهد.</li>
-</ul>
-<p>مثلاً:</p>
-<ul>
-<li><code>{Lu}</code> = حرف بزرگ (Uppercase letter)</li>
-<li><code>{P}</code> = علائم نگارشی (Punctuation)</li>
-</ul>
-<pre class="hljs"><code>Console.Write (Regex.IsMatch (<span class="hljs-string">&quot;Yes, please&quot;</span>, <span class="hljs-string">@&quot;\p{P}&quot;</span>));   <span class="hljs-comment">// True</span>
-</code></pre>
-<p>🔹 در اینجا چون رشته <code>&quot;Yes, please&quot;</code> شامل علامت ویرگول (,) است، نتیجه <code>True</code> خواهد بود.</p>
-<hr>
-<p>💡 ما در ادامه، وقتی این موارد (<code>\d</code>, <code>\w</code>, <code>.</code>) را با <strong>Quantifiers</strong> (تکرارگرها) ترکیب کنیم، استفاده‌های بیشتری از آن‌ها خواهیم دید.</p>
-<hr>
-<h2>🔁 Quantifiers (تکرارگرها)</h2>
-<p><strong>Quantifiers</strong> مشخص می‌کنند که یک آیتم چند بار باید تطبیق داده شود.</p>
- <div align="center">
-<p><img src="../../../assets/image/25/Table-25-3.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<h2>🔢 Quantifiers (تکرارگرها)</h2>
-<p>تکرارگر <code>*</code> کاراکتر یا گروه قبلی را <strong>صفر بار یا بیشتر</strong> تطبیق می‌دهد. مثال زیر <code>cv.docx</code> را تطبیق می‌دهد، همراه با هر نسخه‌ی شماره‌گذاری‌شده‌ی همان فایل (مثلاً <code>cv2.docx</code>، <code>cv15.docx</code>):</p>
-<pre class="hljs"><code>Console.Write (Regex.Match (<span class="hljs-string">&quot;cv15.docx&quot;</span>, <span class="hljs-string">@&quot;cv\d*\.docx&quot;</span>).Success);  <span class="hljs-comment">// True</span>
-</code></pre>
-<p>توجه کنید که باید نقطه را در پسوند فایل با <code>\</code> فرار (escape) بدهیم.</p>
-<p>مثال زیر هر چیزی بین <code>cv</code> و <code>.docx</code> را مجاز می‌داند و معادل دستور زیر است:<br>
-<code>dir cv*.docx</code></p>
-<pre class="hljs"><code>Console.Write (Regex.Match (<span class="hljs-string">&quot;cvjoint.docx&quot;</span>, <span class="hljs-string">@&quot;cv.*\.docx&quot;</span>).Success); <span class="hljs-comment">// True</span>
-</code></pre>
-<p>تکرارگر <code>+</code> کاراکتر یا گروه قبلی را <strong>یک بار یا بیشتر</strong> تطبیق می‌دهد. برای نمونه:</p>
-<pre class="hljs"><code>Console.Write (Regex.Matches (<span class="hljs-string">&quot;slow! yeah slooow!&quot;</span>, <span class="hljs-string">&quot;slo+w&quot;</span>).Count);  <span class="hljs-comment">// 2</span>
-</code></pre>
-<hr>
-<p>تکرارگر <code>{}</code> یک <strong>تعداد مشخص (یا بازه‌ای)</strong> از تکرارها را تطبیق می‌دهد. مثال زیر یک فشار خون را تطبیق می‌دهد:</p>
-<pre class="hljs"><code>Regex bp = <span class="hljs-keyword">new</span> Regex (<span class="hljs-string">@&quot;\d{2,3}/\d{2,3}&quot;</span>);
+</code></pre> <hr><h2>نکته درباره @ در رشته‌های C</h2><p>تمام رشته‌های Regular Expression در این فصل با پیشوند <strong>@</strong> در C# نوشته شده‌اند. دلیلش این است که مکانیزم Escape خود زبان C# هم از <strong>بک‌اسلش</strong> استفاده می‌کند.</p><p>اگر <code>@</code> استفاده نشود، برای نمایش یک بک‌اسلش ساده باید چهار تا بک‌اسلش بنویسید!</p><p>مثال:</p><pre class="hljs"><code>Console.WriteLine (Regex.Match (<span class="hljs-string">&quot;\\&quot;</span>, <span class="hljs-string">&quot;\\\\&quot;</span>));    <span class="hljs-comment">// \</span>
+</code></pre> <hr><h2>فاصله‌ها در Regular Expressions</h2><p>مگر اینکه گزینه <code>(?x)</code> فعال باشد، فاصله‌ها (Space) در Regular Expressions <strong>به صورت لیترال</strong> در نظر گرفته می‌شوند.</p><p>مثال:</p><pre class="hljs"><code>Console.Write (Regex.IsMatch (<span class="hljs-string">&quot;hello world&quot;</span>, <span class="hljs-string">@&quot;hello world&quot;</span>));  <span class="hljs-comment">// True</span>
+</code></pre> <hr><h2>Character Sets</h2><p><strong>Character Sets</strong> (مجموعه کاراکترها) مثل <strong>Wildcards</strong> عمل می‌کنند، با این تفاوت که فقط برای یک مجموعه خاص از کاراکترها استفاده می‌شوند.</p><div align="center"> <p><img src="../../../assets/image/25/Table-25-2.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <h2>Character Sets (مجموعه کاراکترها)</h2><p>برای تطبیق دقیقاً یکی از کاراکترهای یک مجموعه، باید آن مجموعه را داخل براکت‌های مربعی <code>[]</code> قرار دهید:</p><pre class="hljs"><code>Console.Write (Regex.Matches (<span class="hljs-string">&quot;That is that.&quot;</span>, <span class="hljs-string">&quot;[Tt]hat&quot;</span>).Count);   <span class="hljs-comment">// 2</span>
+</code></pre> <p>در مثال بالا، الگو <code>[Tt]hat</code> هم کلمه <strong>That</strong> (با T بزرگ) و هم <strong>that</strong> (با t کوچک) را پیدا می‌کند. نتیجه برابر <strong>۲</strong> خواهد بود.</p><hr> <h3>مجموعه‌های منفی</h3><p>برای تطبیق هر کاراکتری به‌جز آن‌هایی که در یک مجموعه هستند، کافیست علامت <code>^</code> را در ابتدای مجموعه قرار دهید:</p><pre class="hljs"><code>Console.Write (Regex.Match (<span class="hljs-string">&quot;quiz qwerty&quot;</span>, <span class="hljs-string">&quot;q[^aeiou]&quot;</span>).Index);    <span class="hljs-comment">// 5</span>
+</code></pre> <p>در اینجا الگو <code>q[^aeiou]</code> به دنبال یک حرف <code>q</code> است که بعد از آن <strong>هیچ‌کدام از حروف صدادار a, e, i, o, u</strong> نیاید. نتیجه این است که تطبیق از ایندکس ۵ پیدا می‌شود.</p><hr> <h3>محدوده کاراکترها</h3><p>شما می‌توانید یک محدوده از کاراکترها را با استفاده از <strong>خط فاصله (hyphen)</strong> مشخص کنید. مثال زیر یک حرکت شطرنج را تطبیق می‌دهد:</p><pre class="hljs"><code>Console.Write (Regex.Match (<span class="hljs-string">&quot;b1-c4&quot;</span>, <span class="hljs-string">@&quot;[a-h]\d-[a-h]\d&quot;</span>).Success);  <span class="hljs-comment">// True</span>
+</code></pre> <p>در اینجا <code>[a-h]</code> یعنی هر حرفی بین <strong>a تا h</strong>، و <code>\d</code> یعنی یک عدد (رقم). بنابراین عبارت کل حرکت شطرنج <strong>b1-c4</strong> را شناسایی می‌کند .</p><hr> <h2>شورتکات‌های پرکاربرد در Regular Expressions</h2><ul> <li><p><code>\d</code> → نشان‌دهنده یک کاراکتر <strong>رقم (Digit)</strong> است.<br> پس <code>\d</code> هر عددی را تطبیق می‌دهد.</p></li> <li><p><code>\D</code> → نشان‌دهنده هر کاراکتری است که <strong>عدد نباشد</strong>.</p></li> </ul><hr> <ul><li> <p><code>\w</code> → نشان‌دهنده یک کاراکتر <strong>کلمه‌ای (Word character)</strong> است، یعنی:<br><strong>حروف (Letters)</strong> + <strong>اعداد (Numbers)</strong> + <strong>زیرخط (_) یا Underscore</strong>.</p></li> <li><p><code>\W</code> → نشان‌دهنده هر کاراکتری است که <strong>کلمه‌ای نباشد</strong>.</p></li> </ul><p>این‌ها برای حروف غیرانگلیسی (مثل الفبای سیریلیک) هم همان‌طور که انتظار می‌رود عمل می‌کنند.</p><hr> <ul><li><code>.</code> → هر کاراکتری به جز <code>\n</code> (خط جدید) را تطبیق می‌دهد.<br> البته <code>\r</code> (Carriage return) را مجاز می‌داند.</li></ul> <hr><ul> <li><code>\p{Category}</code> → یک کاراکتر را بر اساس <strong>دسته‌بندی (Category)</strong> مشخص‌شده تطبیق می‌دهد.</li></ul> <p>مثلاً:</p><ul> <li><code>{Lu}</code> = حرف بزرگ (Uppercase letter)</li><li><code>{P}</code> = علائم نگارشی (Punctuation)</li></ul> <pre class="hljs"><code>Console.Write (Regex.IsMatch (<span class="hljs-string">&quot;Yes, please&quot;</span>, <span class="hljs-string">@&quot;\p{P}&quot;</span>));   <span class="hljs-comment">// True</span>
+</code></pre> <p>در اینجا چون رشته <code>&quot;Yes, please&quot;</code> شامل علامت ویرگول (,) است، نتیجه <code>True</code> خواهد بود.</p><hr> <p>ما در ادامه، وقتی این موارد (<code>\d</code>, <code>\w</code>, <code>.</code>) را با <strong>Quantifiers</strong> (تکرارگرها) ترکیب کنیم، استفاده‌های بیشتری از آن‌ها خواهیم دید.</p><hr> <h2>Quantifiers (تکرارگرها)</h2><p><strong>Quantifiers</strong> مشخص می‌کنند که یک آیتم چند بار باید تطبیق داده شود.</p><div align="center"> <p><img src="../../../assets/image/25/Table-25-3.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <h2>Quantifiers (تکرارگرها)</h2><p>تکرارگر <code>*</code> کاراکتر یا گروه قبلی را <strong>صفر بار یا بیشتر</strong> تطبیق می‌دهد. مثال زیر <code>cv.docx</code> را تطبیق می‌دهد، همراه با هر نسخه‌ی شماره‌گذاری‌شده‌ی همان فایل (مثلاً <code>cv2.docx</code>، <code>cv15.docx</code>):</p><pre class="hljs"><code>Console.Write (Regex.Match (<span class="hljs-string">&quot;cv15.docx&quot;</span>, <span class="hljs-string">@&quot;cv\d*\.docx&quot;</span>).Success);  <span class="hljs-comment">// True</span>
+</code></pre> <p>توجه کنید که باید نقطه را در پسوند فایل با <code>\</code> فرار (escape) بدهیم.</p><p>مثال زیر هر چیزی بین <code>cv</code> و <code>.docx</code> را مجاز می‌داند و معادل دستور زیر است:<br><code>dir cv*.docx</code></p><pre class="hljs"><code>Console.Write (Regex.Match (<span class="hljs-string">&quot;cvjoint.docx&quot;</span>, <span class="hljs-string">@&quot;cv.*\.docx&quot;</span>).Success); <span class="hljs-comment">// True</span>
+</code></pre> <p>تکرارگر <code>+</code> کاراکتر یا گروه قبلی را <strong>یک بار یا بیشتر</strong> تطبیق می‌دهد. برای نمونه:</p><pre class="hljs"><code>Console.Write (Regex.Matches (<span class="hljs-string">&quot;slow! yeah slooow!&quot;</span>, <span class="hljs-string">&quot;slo+w&quot;</span>).Count);  <span class="hljs-comment">// 2</span>
+</code></pre> <hr><p>تکرارگر <code>{}</code> یک <strong>تعداد مشخص (یا بازه‌ای)</strong> از تکرارها را تطبیق می‌دهد. مثال زیر یک فشار خون را تطبیق می‌دهد:</p><pre class="hljs"><code>Regex bp = <span class="hljs-keyword">new</span> Regex (<span class="hljs-string">@&quot;\d{2,3}/\d{2,3}&quot;</span>);
 Console.WriteLine (bp.Match (<span class="hljs-string">&quot;It used to be 160/110&quot;</span>));  <span class="hljs-comment">// 160/110</span>
 Console.WriteLine (bp.Match (<span class="hljs-string">&quot;Now it&#x27;s only 115/75&quot;</span>));   <span class="hljs-comment">// 115/75</span>
-</code></pre>
-<hr>
-<h2>⚖️ Greedy در مقابل Lazy Quantifiers</h2>
-<p>به‌طور پیش‌فرض، تکرارگرها <strong>Greedy (حریص)</strong> هستند، نه <strong>Lazy (تنبل)</strong>.</p>
-<ul>
-<li>یک <strong>Greedy quantifier</strong> تا جایی که می‌تواند تکرار می‌شود قبل از اینکه جلو برود.</li>
-<li>یک <strong>Lazy quantifier</strong> تا حداقل تعداد ممکن تکرار می‌شود قبل از اینکه جلو برود.</li>
-</ul>
-<p>شما می‌توانید هر تکرارگری را با اضافه کردن نماد <code>?</code> به حالت Lazy تبدیل کنید.</p>
-<p>برای نشان دادن تفاوت، این قطعه‌ی HTML را در نظر بگیرید:</p>
-<pre class="hljs"><code><span class="hljs-built_in">string</span> html = <span class="hljs-string">&quot;&lt;i&gt;By default&lt;/i&gt; quantifiers are &lt;i&gt;greedy&lt;/i&gt; creatures&quot;</span>;
-</code></pre>
-<p>فرض کنید می‌خواهیم دو عبارت ایتالیک را استخراج کنیم. اگر کد زیر را اجرا کنیم:</p>
-<pre class="hljs"><code><span class="hljs-keyword">foreach</span> (Match m <span class="hljs-keyword">in</span> Regex.Matches (html, <span class="hljs-string">@&quot;&lt;i&gt;.*&lt;/i&gt;&quot;</span>))
+</code></pre> <hr><h2>Greedy در مقابل Lazy Quantifiers</h2><p>به‌طور پیش‌فرض، تکرارگرها <strong>Greedy (حریص)</strong> هستند، نه <strong>Lazy (تنبل)</strong>.</p><ul> <li>یک <strong>Greedy quantifier</strong> تا جایی که می‌تواند تکرار می‌شود قبل از اینکه جلو برود.</li><li>یک <strong>Lazy quantifier</strong> تا حداقل تعداد ممکن تکرار می‌شود قبل از اینکه جلو برود.</li></ul> <p>شما می‌توانید هر تکرارگری را با اضافه کردن نماد <code>?</code> به حالت Lazy تبدیل کنید.</p><p>برای نشان دادن تفاوت، این قطعه‌ی HTML را در نظر بگیرید:</p><pre class="hljs"><code><span class="hljs-built_in">string</span> html = <span class="hljs-string">&quot;&lt;i&gt;By default&lt;/i&gt; quantifiers are &lt;i&gt;greedy&lt;/i&gt; creatures&quot;</span>;
+</code></pre> <p>فرض کنید می‌خواهیم دو عبارت ایتالیک را استخراج کنیم. اگر کد زیر را اجرا کنیم:</p><pre class="hljs"><code><span class="hljs-keyword">foreach</span> (Match m <span class="hljs-keyword">in</span> Regex.Matches (html, <span class="hljs-string">@&quot;&lt;i&gt;.*&lt;/i&gt;&quot;</span>))
   Console.WriteLine (m);
-</code></pre>
-<p>نتیجه دو تطبیق نیست، بلکه <strong>یک تطبیق</strong> است:</p>
-<pre class="hljs"><code>&lt;i&gt;By default&lt;/i&gt; quantifiers are &lt;i&gt;greedy&lt;/i&gt;
-</code></pre>
-<p>مشکل اینجاست که <code>*</code> به‌صورت greedy تا جایی که می‌تواند تکرار می‌شود قبل از اینکه به <code>&lt;/i&gt;</code> برسد. بنابراین از اولین <code>&lt;/i&gt;</code> عبور می‌کند و فقط در آخرین <code>&lt;/i&gt;</code> متوقف می‌شود.</p>
-<p>اگر تکرارگر را Lazy کنیم، <code>*</code> در همان اولین جایی که بقیه‌ی عبارت می‌تواند تطبیق پیدا کند متوقف می‌شود:</p>
-<pre class="hljs"><code><span class="hljs-keyword">foreach</span> (Match m <span class="hljs-keyword">in</span> Regex.Matches (html, <span class="hljs-string">@&quot;&lt;i&gt;.*?&lt;/i&gt;&quot;</span>))
+</code></pre> <p>نتیجه دو تطبیق نیست، بلکه <strong>یک تطبیق</strong> است:</p><pre class="hljs"><code>&lt;i&gt;By default&lt;/i&gt; quantifiers are &lt;i&gt;greedy&lt;/i&gt;
+</code></pre> <p>مشکل اینجاست که <code>*</code> به‌صورت greedy تا جایی که می‌تواند تکرار می‌شود قبل از اینکه به <code>&lt;/i&gt;</code> برسد. بنابراین از اولین <code>&lt;/i&gt;</code> عبور می‌کند و فقط در آخرین <code>&lt;/i&gt;</code> متوقف می‌شود.</p><p>اگر تکرارگر را Lazy کنیم، <code>*</code> در همان اولین جایی که بقیه‌ی عبارت می‌تواند تطبیق پیدا کند متوقف می‌شود:</p><pre class="hljs"><code><span class="hljs-keyword">foreach</span> (Match m <span class="hljs-keyword">in</span> Regex.Matches (html, <span class="hljs-string">@&quot;&lt;i&gt;.*?&lt;/i&gt;&quot;</span>))
   Console.WriteLine (m);
-</code></pre>
-<p>نتیجه:</p>
-<pre class="hljs"><code>&lt;i&gt;By default&lt;/i&gt;
+</code></pre> <p>نتیجه:</p><pre class="hljs"><code>&lt;i&gt;By default&lt;/i&gt;
 &lt;i&gt;greedy&lt;/i&gt;
-</code></pre>
-<hr>
-<h2>🪝 Zero-Width Assertions</h2>
-<p>زبان Regular Expressions اجازه می‌دهد شرط‌هایی روی آنچه قبل یا بعد از یک تطبیق رخ می‌دهد اعمال کنیم، از طریق <strong>lookbehind</strong>، <strong>lookahead</strong>، <strong>anchors</strong> و <strong>word boundaries</strong>.<br>
-به این‌ها <strong>zero-width assertions</strong> گفته می‌شود، چون طول (یا اندازه) تطبیق را افزایش نمی‌دهند.</p>
-<hr>
-<h3>🔮 Lookahead و Lookbehind</h3>
-<p>ساختار <code>(?=expr)</code> بررسی می‌کند که آیا متن بعدی با <code>expr</code> مطابقت دارد، بدون اینکه <code>expr</code> را در نتیجه برگرداند. این را <strong>positive lookahead</strong> می‌نامند.</p>
-<p>در مثال زیر، به دنبال عددی هستیم که بعد از آن کلمه‌ی <code>&quot;miles&quot;</code> بیاید:</p>
-<pre class="hljs"><code>Console.WriteLine (Regex.Match (<span class="hljs-string">&quot;say 25 miles more&quot;</span>, <span class="hljs-string">@&quot;\d+\s(?=miles)&quot;</span>));
-</code></pre>
-<p>📤 خروجی:</p>
-<pre class="hljs"><code>25
-</code></pre>
-<p>دقت کنید که کلمه‌ی <code>&quot;miles&quot;</code> در نتیجه برگردانده نشد، حتی اگر برای تطبیق لازم بود.</p>
-<p>پس از یک lookahead موفق، تطبیق ادامه پیدا می‌کند، انگار که این پیش‌نمایش اصلاً اتفاق نیفتاده است. پس اگر عبارت را این‌طور بنویسیم:</p>
-<pre class="hljs"><code>Console.WriteLine (Regex.Match (<span class="hljs-string">&quot;say 25 miles more&quot;</span>, <span class="hljs-string">@&quot;\d+\s(?=miles).*&quot;</span>));
-</code></pre>
-<p>📤 خروجی:</p>
-<pre class="hljs"><code>25 miles more
-</code></pre>
-<hr>
-<p>✅ Lookahead می‌تواند برای اعمال قوانین روی پسوردهای قوی مفید باشد. فرض کنید پسورد باید حداقل ۶ کاراکتر باشد و حداقل یک عدد داشته باشد. با یک lookahead می‌توانیم این شرط را برقرار کنیم:</p>
-<pre class="hljs"><code><span class="hljs-built_in">string</span> password = <span class="hljs-string">&quot;...&quot;</span>;
+</code></pre> <hr><h2>Zero-Width Assertions</h2><p>زبان Regular Expressions اجازه می‌دهد شرط‌هایی روی آنچه قبل یا بعد از یک تطبیق رخ می‌دهد اعمال کنیم، از طریق <strong>lookbehind</strong>، <strong>lookahead</strong>، <strong>anchors</strong> و <strong>word boundaries</strong>.<br> به این‌ها <strong>zero-width assertions</strong> گفته می‌شود، چون طول (یا اندازه) تطبیق را افزایش نمی‌دهند.</p><hr> <h3>Lookahead و Lookbehind</h3><p>ساختار <code>(?=expr)</code> بررسی می‌کند که آیا متن بعدی با <code>expr</code> مطابقت دارد، بدون اینکه <code>expr</code> را در نتیجه برگرداند. این را <strong>positive lookahead</strong> می‌نامند.</p><p>در مثال زیر، به دنبال عددی هستیم که بعد از آن کلمه‌ی <code>&quot;miles&quot;</code> بیاید:</p><pre class="hljs"><code>Console.WriteLine (Regex.Match (<span class="hljs-string">&quot;say 25 miles more&quot;</span>, <span class="hljs-string">@&quot;\d+\s(?=miles)&quot;</span>));
+</code></pre> <p>خروجی:</p><pre class="hljs"><code>25
+</code></pre> <p>دقت کنید که کلمه‌ی <code>&quot;miles&quot;</code> در نتیجه برگردانده نشد، حتی اگر برای تطبیق لازم بود.</p><p>پس از یک lookahead موفق، تطبیق ادامه پیدا می‌کند، انگار که این پیش‌نمایش اصلاً اتفاق نیفتاده است. پس اگر عبارت را این‌طور بنویسیم:</p><pre class="hljs"><code>Console.WriteLine (Regex.Match (<span class="hljs-string">&quot;say 25 miles more&quot;</span>, <span class="hljs-string">@&quot;\d+\s(?=miles).*&quot;</span>));
+</code></pre> <p>خروجی:</p><pre class="hljs"><code>25 miles more
+</code></pre> <hr><p>Lookahead می‌تواند برای اعمال قوانین روی پسوردهای قوی مفید باشد. فرض کنید پسورد باید حداقل ۶ کاراکتر باشد و حداقل یک عدد داشته باشد. با یک lookahead می‌توانیم این شرط را برقرار کنیم:</p><pre class="hljs"><code><span class="hljs-built_in">string</span> password = <span class="hljs-string">&quot;...&quot;</span>;
 <span class="hljs-built_in">bool</span> ok = Regex.IsMatch (password, <span class="hljs-string">@&quot;(?=.*\d).{6,}&quot;</span>);
-</code></pre>
-<p>این ابتدا یک lookahead انجام می‌دهد تا مطمئن شود که حداقل یک رقم در رشته وجود دارد. اگر برقرار بود، به جای قبلی خود برمی‌گردد و سپس حداقل ۶ کاراکتر را تطبیق می‌دهد.</p>
-<hr>
-<p>ساختار مخالف آن، <strong>negative lookahead</strong> یعنی <code>(?!expr)</code> است. این می‌گوید تطبیق نباید با <code>expr</code> دنبال شود.</p>
-<p>عبارت زیر <code>&quot;good&quot;</code> را تطبیق می‌دهد—مگر اینکه <code>&quot;however&quot;</code> یا <code>&quot;but&quot;</code> بعداً در رشته بیاید:</p>
-<pre class="hljs"><code><span class="hljs-built_in">string</span> regex = <span class="hljs-string">&quot;(?i)good(?!.*(however|but))&quot;</span>;
+</code></pre> <p>این ابتدا یک lookahead انجام می‌دهد تا مطمئن شود که حداقل یک رقم در رشته وجود دارد. اگر برقرار بود، به جای قبلی خود برمی‌گردد و سپس حداقل ۶ کاراکتر را تطبیق می‌دهد.</p><hr> <p>ساختار مخالف آن، <strong>negative lookahead</strong> یعنی <code>(?!expr)</code> است. این می‌گوید تطبیق نباید با <code>expr</code> دنبال شود.</p><p>عبارت زیر <code>&quot;good&quot;</code> را تطبیق می‌دهد—مگر اینکه <code>&quot;however&quot;</code> یا <code>&quot;but&quot;</code> بعداً در رشته بیاید:</p><pre class="hljs"><code><span class="hljs-built_in">string</span> regex = <span class="hljs-string">&quot;(?i)good(?!.*(however|but))&quot;</span>;
 Console.WriteLine (Regex.IsMatch (<span class="hljs-string">&quot;Good work! But...&quot;</span>,  regex));  <span class="hljs-comment">// False</span>
 Console.WriteLine (Regex.IsMatch (<span class="hljs-string">&quot;Good work! Thanks!&quot;</span>, regex));  <span class="hljs-comment">// True</span>
-</code></pre>
-<hr>
-<p>ساختار <code>(?&lt;=expr)</code> به معنای <strong>positive lookbehind</strong> است و نیاز دارد که تطبیق با یک عبارت خاص <strong>قبل از آن</strong> باشد.<br>
-ساختار مخالفش، <code>(?&lt;!expr)</code>، یعنی <strong>negative lookbehind</strong> است و نیاز دارد که تطبیق قبل از یک عبارت مشخص <strong>نباشد</strong>.</p>
-<p>برای مثال، عبارت زیر <code>&quot;good&quot;</code> را تطبیق می‌دهد—مگر اینکه <code>&quot;however&quot;</code> قبل از آن آمده باشد:</p>
-<pre class="hljs"><code><span class="hljs-built_in">string</span> regex = <span class="hljs-string">&quot;(?i)(?&lt;!however.*)good&quot;</span>;
+</code></pre> <hr><p>ساختار <code>(?&lt;=expr)</code> به معنای <strong>positive lookbehind</strong> است و نیاز دارد که تطبیق با یک عبارت خاص <strong>قبل از آن</strong> باشد.<br> ساختار مخالفش، <code>(?&lt;!expr)</code>، یعنی <strong>negative lookbehind</strong> است و نیاز دارد که تطبیق قبل از یک عبارت مشخص <strong>نباشد</strong>.</p><p>برای مثال، عبارت زیر <code>&quot;good&quot;</code> را تطبیق می‌دهد—مگر اینکه <code>&quot;however&quot;</code> قبل از آن آمده باشد:</p><pre class="hljs"><code><span class="hljs-built_in">string</span> regex = <span class="hljs-string">&quot;(?i)(?&lt;!however.*)good&quot;</span>;
 Console.WriteLine (Regex.IsMatch (<span class="hljs-string">&quot;However good, we...&quot;</span>, regex)); <span class="hljs-comment">// False</span>
 Console.WriteLine (Regex.IsMatch (<span class="hljs-string">&quot;Very good, thanks!&quot;</span>, regex));  <span class="hljs-comment">// True</span>
-</code></pre>
-<hr>
-<p>🔖 ما می‌توانیم این مثال‌ها را با اضافه کردن <strong>word boundary assertions</strong> (که به‌زودی معرفی می‌کنیم) بهبود دهیم.</p>
-<h2>⚓ Anchors (لنگرها)</h2>
-<p>لنگرهای <code>^</code> و <code>$</code> یک موقعیت خاص را تطبیق می‌دهند. به‌طور پیش‌فرض:</p>
-<ul>
-<li><code>^</code> تطبیق ابتدای رشته</li>
-<li><code>$</code> تطبیق انتهای رشته</li>
-</ul>
-<p>برای نمونه:</p>
-<pre class="hljs"><code>Console.WriteLine (Regex.Match (<span class="hljs-string">&quot;Not now&quot;</span>, <span class="hljs-string">&quot;^[Nn]o&quot;</span>));   <span class="hljs-comment">// No</span>
+</code></pre> <hr><p>ما می‌توانیم این مثال‌ها را با اضافه کردن <strong>word boundary assertions</strong> (که به‌زودی معرفی می‌کنیم) بهبود دهیم.</p><h2>Anchors (لنگرها)</h2><p>لنگرهای <code>^</code> و <code>$</code> یک موقعیت خاص را تطبیق می‌دهند. به‌طور پیش‌فرض:</p><ul> <li><code>^</code> تطبیق ابتدای رشته</li><li><code>$</code> تطبیق انتهای رشته</li></ul> <p>برای نمونه:</p><pre class="hljs"><code>Console.WriteLine (Regex.Match (<span class="hljs-string">&quot;Not now&quot;</span>, <span class="hljs-string">&quot;^[Nn]o&quot;</span>));   <span class="hljs-comment">// No</span>
 Console.WriteLine (Regex.Match (<span class="hljs-string">&quot;f = 0.2F&quot;</span>, <span class="hljs-string">&quot;[Ff]$&quot;</span>));   <span class="hljs-comment">// F</span>
-</code></pre>
-<p>🔹 <code>^</code> دو معنای وابسته به متن دارد: <strong>یک لنگر</strong> و <strong>علامت نفی در کلاس کاراکتر</strong>.<br>
-🔹 <code>$</code> هم دو معنای وابسته به متن دارد: <strong>یک لنگر</strong> و <strong>نشانه‌ی گروه جایگزین (replacement group denoter)</strong>.</p>
-<hr>
-<p>وقتی <code>RegexOptions.Multiline</code> را مشخص کنید یا <code>(?m)</code> را در عبارت بیاورید:</p>
-<ul>
-<li><code>^</code> ابتدای رشته یا ابتدای خط (بلافاصله بعد از <code>\n</code>) را تطبیق می‌دهد.</li>
-<li><code>$</code> انتهای رشته یا انتهای خط (بلافاصله قبل از <code>\n</code>) را تطبیق می‌دهد.</li>
-</ul>
-<p>اما یک نکته وجود دارد ⚠️: در ویندوز، پایان خط معمولاً با <code>\r\n</code> مشخص می‌شود نه فقط <code>\n</code>. بنابراین برای اینکه <code>$</code> در حالت چندخطی مفید باشد، باید معمولاً <code>\r</code> را هم با یک <strong>positive lookahead</strong> تطبیق دهید:</p>
-<pre class="hljs"><code>(?=\r?$)
-</code></pre>
-<p>این <strong>positive lookahead</strong> تضمین می‌کند که <code>\r</code> جزئی از نتیجه نشود.</p>
-<p>مثال زیر خطوطی را که به &quot;.txt&quot; ختم می‌شوند، تطبیق می‌دهد:</p>
-<pre class="hljs"><code><span class="hljs-built_in">string</span> fileNames = <span class="hljs-string">&quot;a.txt&quot;</span> + <span class="hljs-string">&quot;\r\n&quot;</span> + <span class="hljs-string">&quot;b.docx&quot;</span> + <span class="hljs-string">&quot;\r\n&quot;</span> + <span class="hljs-string">&quot;c.txt&quot;</span>;
+</code></pre> <p><code>^</code> دو معنای وابسته به متن دارد: <strong>یک لنگر</strong> و <strong>علامت نفی در کلاس کاراکتر</strong>.<br><code>$</code> هم دو معنای وابسته به متن دارد: <strong>یک لنگر</strong> و <strong>نشانه‌ی گروه جایگزین (replacement group denoter)</strong>.</p><hr> <p>وقتی <code>RegexOptions.Multiline</code> را مشخص کنید یا <code>(?m)</code> را در عبارت بیاورید:</p><ul> <li><code>^</code> ابتدای رشته یا ابتدای خط (بلافاصله بعد از <code>\n</code>) را تطبیق می‌دهد.</li><li><code>$</code> انتهای رشته یا انتهای خط (بلافاصله قبل از <code>\n</code>) را تطبیق می‌دهد.</li></ul> <p>اما یک نکته وجود دارد : در ویندوز، پایان خط معمولاً با <code>\r\n</code> مشخص می‌شود نه فقط <code>\n</code>. بنابراین برای اینکه <code>$</code> در حالت چندخطی مفید باشد، باید معمولاً <code>\r</code> را هم با یک <strong>positive lookahead</strong> تطبیق دهید:</p><pre class="hljs"><code>(?=\r?$)
+</code></pre> <p>این <strong>positive lookahead</strong> تضمین می‌کند که <code>\r</code> جزئی از نتیجه نشود.</p><p>مثال زیر خطوطی را که به &quot;.txt&quot; ختم می‌شوند، تطبیق می‌دهد:</p><pre class="hljs"><code><span class="hljs-built_in">string</span> fileNames = <span class="hljs-string">&quot;a.txt&quot;</span> + <span class="hljs-string">&quot;\r\n&quot;</span> + <span class="hljs-string">&quot;b.docx&quot;</span> + <span class="hljs-string">&quot;\r\n&quot;</span> + <span class="hljs-string">&quot;c.txt&quot;</span>;
 <span class="hljs-built_in">string</span> r = <span class="hljs-string">@&quot;.+\.txt(?=\r?$)&quot;</span>;
 <span class="hljs-keyword">foreach</span> (Match m <span class="hljs-keyword">in</span> Regex.Matches (fileNames, r, RegexOptions.Multiline))
   Console.Write (m + <span class="hljs-string">&quot; &quot;</span>);
-</code></pre>
-<p>📤 خروجی:</p>
-<pre class="hljs"><code>a.txt c.txt
-</code></pre>
-<hr>
-<p>مثال بعدی همه‌ی خطوط خالی را در رشته‌ی <code>s</code> پیدا می‌کند:</p>
-<pre class="hljs"><code>MatchCollection emptyLines = Regex.Matches (s, <span class="hljs-string">&quot;^(?=\r?$)&quot;</span>,
+</code></pre> <p>خروجی:</p><pre class="hljs"><code>a.txt c.txt
+</code></pre> <hr><p>مثال بعدی همه‌ی خطوط خالی را در رشته‌ی <code>s</code> پیدا می‌کند:</p><pre class="hljs"><code>MatchCollection emptyLines = Regex.Matches (s, <span class="hljs-string">&quot;^(?=\r?$)&quot;</span>,
                                             RegexOptions.Multiline);
-</code></pre>
-<p>و این یکی همه‌ی خطوطی را که خالی هستند یا فقط شامل فاصله یا tab می‌باشند:</p>
-<pre class="hljs"><code>MatchCollection blankLines = Regex.Matches (s, <span class="hljs-string">&quot;^[ \t]*(?=\r?$)&quot;</span>,
+</code></pre> <p>و این یکی همه‌ی خطوطی را که خالی هستند یا فقط شامل فاصله یا tab می‌باشند:</p><pre class="hljs"><code>MatchCollection blankLines = Regex.Matches (s, <span class="hljs-string">&quot;^[ \t]*(?=\r?$)&quot;</span>,
                                             RegexOptions.Multiline);
-</code></pre>
-<p>از آنجا که یک anchor یک <strong>موقعیت</strong> را تطبیق می‌دهد و نه یک کاراکتر، مشخص کردن یک anchor به‌تنهایی باعث تطبیق با یک رشته‌ی خالی می‌شود:</p>
-<pre class="hljs"><code>Console.WriteLine (Regex.Match (<span class="hljs-string">&quot;x&quot;</span>, <span class="hljs-string">&quot;$&quot;</span>).Length);   <span class="hljs-comment">// 0</span>
-</code></pre>
-<hr>
-<h2>🔠 Word Boundaries (مرزهای کلمه)</h2>
-<p>عبارت <code>\b</code> جایی را تطبیق می‌دهد که کاراکترهای کلمه (<code>\w</code>) در کنار یکی از این موارد باشند:</p>
-<ul>
-<li>کاراکترهای غیرکلمه (<code>\W</code>)</li>
-<li>ابتدای یا انتهای رشته (<code>^</code> و <code>$</code>)</li>
-</ul>
-<p><code>\b</code> اغلب برای تطبیق کل کلمات استفاده می‌شود:</p>
-<pre class="hljs"><code><span class="hljs-keyword">foreach</span> (Match m <span class="hljs-keyword">in</span> Regex.Matches (<span class="hljs-string">&quot;Wedding in Sarajevo&quot;</span>, <span class="hljs-string">@&quot;\b\w+\b&quot;</span>))
+</code></pre> <p>از آنجا که یک anchor یک <strong>موقعیت</strong> را تطبیق می‌دهد و نه یک کاراکتر، مشخص کردن یک anchor به‌تنهایی باعث تطبیق با یک رشته‌ی خالی می‌شود:</p><pre class="hljs"><code>Console.WriteLine (Regex.Match (<span class="hljs-string">&quot;x&quot;</span>, <span class="hljs-string">&quot;$&quot;</span>).Length);   <span class="hljs-comment">// 0</span>
+</code></pre> <hr><h2>Word Boundaries (مرزهای کلمه)</h2><p>عبارت <code>\b</code> جایی را تطبیق می‌دهد که کاراکترهای کلمه (<code>\w</code>) در کنار یکی از این موارد باشند:</p><ul> <li>کاراکترهای غیرکلمه (<code>\W</code>)</li><li>ابتدای یا انتهای رشته (<code>^</code> و <code>$</code>)</li></ul> <p><code>\b</code> اغلب برای تطبیق کل کلمات استفاده می‌شود:</p><pre class="hljs"><code><span class="hljs-keyword">foreach</span> (Match m <span class="hljs-keyword">in</span> Regex.Matches (<span class="hljs-string">&quot;Wedding in Sarajevo&quot;</span>, <span class="hljs-string">@&quot;\b\w+\b&quot;</span>))
   Console.WriteLine (m);
-</code></pre>
-<p>📤 خروجی:</p>
-<pre class="hljs"><code>Wedding
+</code></pre> <p>خروجی:</p><pre class="hljs"><code>Wedding
 in
 Sarajevo
-</code></pre>
-<hr>
-<p>این دستورات اثر <code>\b</code> را روشن‌تر می‌کنند:</p>
-<pre class="hljs"><code><span class="hljs-built_in">int</span> one = Regex.Matches (<span class="hljs-string">&quot;Wedding in Sarajevo&quot;</span>, <span class="hljs-string">@&quot;\bin\b&quot;</span>).Count; <span class="hljs-comment">// 1</span>
+</code></pre> <hr><p>این دستورات اثر <code>\b</code> را روشن‌تر می‌کنند:</p><pre class="hljs"><code><span class="hljs-built_in">int</span> one = Regex.Matches (<span class="hljs-string">&quot;Wedding in Sarajevo&quot;</span>, <span class="hljs-string">@&quot;\bin\b&quot;</span>).Count; <span class="hljs-comment">// 1</span>
 <span class="hljs-built_in">int</span> two = Regex.Matches (<span class="hljs-string">&quot;Wedding in Sarajevo&quot;</span>, <span class="hljs-string">@&quot;in&quot;</span>).Count;     <span class="hljs-comment">// 2</span>
-</code></pre>
-<hr>
-<p>در این مثال، یک <strong>positive lookahead</strong> استفاده شده تا کلماتی را برگرداند که بعد از آن‌ها &quot;(sic)&quot; آمده است:</p>
-<pre class="hljs"><code><span class="hljs-built_in">string</span> text = <span class="hljs-string">&quot;Don&#x27;t loose (sic) your cool&quot;</span>;
+</code></pre> <hr><p>در این مثال، یک <strong>positive lookahead</strong> استفاده شده تا کلماتی را برگرداند که بعد از آن‌ها &quot;(sic)&quot; آمده است:</p><pre class="hljs"><code><span class="hljs-built_in">string</span> text = <span class="hljs-string">&quot;Don&#x27;t loose (sic) your cool&quot;</span>;
 Console.Write (Regex.Match (text, <span class="hljs-string">@&quot;\b\w+\b\s(?=\(sic\))&quot;</span>));  <span class="hljs-comment">// loose</span>
-</code></pre>
-<hr>
-<h2>🧩 Groups (گروه‌ها)</h2>
-<p>گاهی مفید است که یک عبارت باقاعده را به مجموعه‌ای از زیربخش‌ها یا <strong>گروه‌ها</strong> تقسیم کنیم.</p>
-<p>برای مثال، این عبارت یک شماره تلفن در آمریکا مانند <code>206-465-1918</code> را نشان می‌دهد:</p>
-<pre class="hljs"><code>\d{3}-\d{3}-\d{4}
-</code></pre>
-<p>فرض کنید می‌خواهیم آن را به دو گروه تقسیم کنیم: <strong>کد منطقه</strong> و <strong>شماره محلی</strong>.<br>
-می‌توانیم با استفاده از پرانتزها این کار را انجام دهیم:</p>
-<pre class="hljs"><code>(\d{3})-(\d{3}-\d{4})
-</code></pre>
-<p>سپس گروه‌ها را به‌صورت برنامه‌نویسی بازیابی می‌کنیم:</p>
-<pre class="hljs"><code>Match m = Regex.Match (<span class="hljs-string">&quot;206-465-1918&quot;</span>, <span class="hljs-string">@&quot;(\d{3})-(\d{3}-\d{4})&quot;</span>);
+</code></pre> <hr><h2>Groups (گروه‌ها)</h2><p>گاهی مفید است که یک عبارت باقاعده را به مجموعه‌ای از زیربخش‌ها یا <strong>گروه‌ها</strong> تقسیم کنیم.</p><p>برای مثال، این عبارت یک شماره تلفن در آمریکا مانند <code>206-465-1918</code> را نشان می‌دهد:</p><pre class="hljs"><code>\d{3}-\d{3}-\d{4}
+</code></pre> <p>فرض کنید می‌خواهیم آن را به دو گروه تقسیم کنیم: <strong>کد منطقه</strong> و <strong>شماره محلی</strong>.<br> می‌توانیم با استفاده از پرانتزها این کار را انجام دهیم:</p><pre class="hljs"><code>(\d{3})-(\d{3}-\d{4})
+</code></pre> <p>سپس گروه‌ها را به‌صورت برنامه‌نویسی بازیابی می‌کنیم:</p><pre class="hljs"><code>Match m = Regex.Match (<span class="hljs-string">&quot;206-465-1918&quot;</span>, <span class="hljs-string">@&quot;(\d{3})-(\d{3}-\d{4})&quot;</span>);
 Console.WriteLine (m.Groups[<span class="hljs-number">1</span>]);   <span class="hljs-comment">// 206</span>
 Console.WriteLine (m.Groups[<span class="hljs-number">2</span>]);   <span class="hljs-comment">// 465-1918</span>
-</code></pre>
-<p>🔹 گروه صفر، کل تطبیق را نمایش می‌دهد. یعنی همان مقداری که در <code>Value</code> وجود دارد:</p>
-<pre class="hljs"><code>Console.WriteLine (m.Groups[<span class="hljs-number">0</span>]);   <span class="hljs-comment">// 206-465-1918</span>
+</code></pre> <p>گروه صفر، کل تطبیق را نمایش می‌دهد. یعنی همان مقداری که در <code>Value</code> وجود دارد:</p><pre class="hljs"><code>Console.WriteLine (m.Groups[<span class="hljs-number">0</span>]);   <span class="hljs-comment">// 206-465-1918</span>
 Console.WriteLine (m);             <span class="hljs-comment">// 206-465-1918</span>
-</code></pre>
-<hr>
-<p>گروه‌ها بخشی از خود زبان Regular Expressions هستند. این یعنی می‌توانید به یک گروه در داخل یک عبارت اشاره کنید.</p>
-<p>سینتکس <code>\n</code> اجازه می‌دهد یک گروه را با شماره‌ی آن در داخل عبارت فراخوانی کنید.</p>
-<p>برای نمونه، عبارت <code>(\w)ee\1</code> کلمات <code>deed</code> و <code>peep</code> را تطبیق می‌دهد.</p>
-<p>مثال زیر همه‌ی کلماتی را پیدا می‌کند که با همان حرف شروع و تمام می‌شوند:</p>
-<pre class="hljs"><code><span class="hljs-keyword">foreach</span> (Match m <span class="hljs-keyword">in</span> Regex.Matches (<span class="hljs-string">&quot;pop pope peep&quot;</span>, <span class="hljs-string">@&quot;\b(\w)\w+\1\b&quot;</span>))
+</code></pre> <hr><p>گروه‌ها بخشی از خود زبان Regular Expressions هستند. این یعنی می‌توانید به یک گروه در داخل یک عبارت اشاره کنید.</p><p>سینتکس <code>\n</code> اجازه می‌دهد یک گروه را با شماره‌ی آن در داخل عبارت فراخوانی کنید.</p><p>برای نمونه، عبارت <code>(\w)ee\1</code> کلمات <code>deed</code> و <code>peep</code> را تطبیق می‌دهد.</p><p>مثال زیر همه‌ی کلماتی را پیدا می‌کند که با همان حرف شروع و تمام می‌شوند:</p><pre class="hljs"><code><span class="hljs-keyword">foreach</span> (Match m <span class="hljs-keyword">in</span> Regex.Matches (<span class="hljs-string">&quot;pop pope peep&quot;</span>, <span class="hljs-string">@&quot;\b(\w)\w+\1\b&quot;</span>))
   Console.Write (m + <span class="hljs-string">&quot; &quot;</span>);  <span class="hljs-comment">// pop peep</span>
-</code></pre>
-<p>🔎 پرانتزهای اطراف <code>\w</code> به موتور Regular Expressions می‌گویند که این زیربخش (در اینجا یک حرف) را در یک گروه ذخیره کند تا بعداً استفاده شود.<br>
-ما بعداً با <code>\1</code> به آن گروه اشاره می‌کنیم، یعنی گروه اول در عبارت.</p>
-<h2>🏷 Named Groups (گروه‌های نام‌گذاری‌شده)</h2>
-<p>در یک عبارت طولانی یا پیچیده، کار با گروه‌ها با <strong>نام</strong> به جای اندیس می‌تواند راحت‌تر باشد.<br>
-در مثال زیر، نسخه‌ی قبلی با یک گروه به نام <code>'letter'</code> بازنویسی شده است:</p>
-<pre class="hljs"><code><span class="hljs-built_in">string</span> regEx =
+</code></pre> <p>پرانتزهای اطراف <code>\w</code> به موتور Regular Expressions می‌گویند که این زیربخش (در اینجا یک حرف) را در یک گروه ذخیره کند تا بعداً استفاده شود.<br> ما بعداً با <code>\1</code> به آن گروه اشاره می‌کنیم، یعنی گروه اول در عبارت.</p><h2>Named Groups (گروه‌های نام‌گذاری‌شده)</h2><p>در یک عبارت طولانی یا پیچیده، کار با گروه‌ها با <strong>نام</strong> به جای اندیس می‌تواند راحت‌تر باشد.<br> در مثال زیر، نسخه‌ی قبلی با یک گروه به نام <code>'letter'</code> بازنویسی شده است:</p><pre class="hljs"><code><span class="hljs-built_in">string</span> regEx =
  <span class="hljs-string">@&quot;\b&quot;</span>             +  <span class="hljs-comment">// word boundary</span>
  <span class="hljs-string">@&quot;(?&#x27;letter&#x27;\w)&quot;</span>  +  <span class="hljs-comment">// تطبیق اولین حرف و نامگذاری آن به &#x27;letter&#x27;</span>
  <span class="hljs-string">@&quot;\w+&quot;</span>            +  <span class="hljs-comment">// تطبیق حروف میانی</span>
@@ -464,16 +115,9 @@ Console.WriteLine (m);             <span class="hljs-comment">// 206-465-1918</s
 
 <span class="hljs-keyword">foreach</span> (Match m <span class="hljs-keyword">in</span> Regex.Matches (<span class="hljs-string">&quot;bob pope peep&quot;</span>, regEx))
   Console.Write (m + <span class="hljs-string">&quot; &quot;</span>);  <span class="hljs-comment">// bob peep</span>
-</code></pre>
-<h3>چگونگی نامگذاری گروه‌ها</h3>
-<pre class="hljs"><code>(?'group-name'group-expr)  یا  (?&lt;group-name&gt;group-expr)
-</code></pre>
-<h3>چگونگی ارجاع به یک گروه</h3>
-<pre class="hljs"><code>\k'group-name'  یا  \k&lt;group-name&gt;
-</code></pre>
-<hr>
-<p>مثال بعدی، تطبیق یک عنصر ساده‌ی XML/HTML (غیرتو درتو) با جستجوی تگ آغاز و پایان با نام مشابه است:</p>
-<pre class="hljs"><code><span class="hljs-built_in">string</span> regFind =
+</code></pre> <h3>چگونگی نامگذاری گروه‌ها</h3><pre class="hljs"><code>(?'group-name'group-expr)  یا  (?&lt;group-name&gt;group-expr)
+</code></pre> <h3>چگونگی ارجاع به یک گروه</h3><pre class="hljs"><code>\k'group-name'  یا  \k&lt;group-name&gt;
+</code></pre> <hr><p>مثال بعدی، تطبیق یک عنصر ساده‌ی XML/HTML (غیرتو درتو) با جستجوی تگ آغاز و پایان با نام مشابه است:</p><pre class="hljs"><code><span class="hljs-built_in">string</span> regFind =
  <span class="hljs-string">@&quot;&lt;(?&#x27;tag&#x27;\w+?).*&gt;&quot;</span> +  <span class="hljs-comment">// تطبیق lazy اولین تگ و نامگذاری آن به &#x27;tag&#x27;</span>
  <span class="hljs-string">@&quot;(?&#x27;text&#x27;.*?)&quot;</span>     +  <span class="hljs-comment">// تطبیق lazy محتوای متن، نامگذاری به &#x27;text&#x27;</span>
  <span class="hljs-string">@&quot;&lt;/\k&#x27;tag&#x27;&gt;&quot;</span>;         <span class="hljs-comment">// تطبیق تگ پایانی مطابق با &#x27;tag&#x27;</span>
@@ -481,66 +125,29 @@ Console.WriteLine (m);             <span class="hljs-comment">// 206-465-1918</s
 Match m = Regex.Match (<span class="hljs-string">&quot;&lt;h1&gt;hello&lt;/h1&gt;&quot;</span>, regFind);
 Console.WriteLine (m.Groups [<span class="hljs-string">&quot;tag&quot;</span>]);          <span class="hljs-comment">// h1</span>
 Console.WriteLine (m.Groups [<span class="hljs-string">&quot;text&quot;</span>]);         <span class="hljs-comment">// hello</span>
-</code></pre>
-<p>📌 توجه: تطبیق تمام حالات ممکن در ساختار XML، مانند عناصر تو در تو، پیچیده‌تر است. موتور Regular Expressions در .NET از ویژگی پیشرفته‌ای به نام <strong>matched balanced constructs</strong> پشتیبانی می‌کند که می‌تواند در این موارد کمک کند.</p>
-<hr>
-<h2>🔄 Replacing and Splitting Text (جایگزینی و تقسیم متن)</h2>
-<h3>جایگزینی متن</h3>
-<p><code>RegEx.Replace</code> مشابه <code>string.Replace</code> عمل می‌کند، اما از <strong>عبارت منظم</strong> استفاده می‌کند.</p>
-<p>مثال زیر، <code>&quot;cat&quot;</code> را با <code>&quot;dog&quot;</code> جایگزین می‌کند. برخلاف <code>string.Replace</code>، <code>&quot;catapult&quot;</code> به <code>&quot;dogapult&quot;</code> تبدیل نمی‌شود، زیرا ما از <strong>word boundaries</strong> استفاده کرده‌ایم:</p>
-<pre class="hljs"><code><span class="hljs-built_in">string</span> find = <span class="hljs-string">@&quot;\bcat\b&quot;</span>;
+</code></pre> <p>توجه: تطبیق تمام حالات ممکن در ساختار XML، مانند عناصر تو در تو، پیچیده‌تر است. موتور Regular Expressions در .NET از ویژگی پیشرفته‌ای به نام <strong>matched balanced constructs</strong> پشتیبانی می‌کند که می‌تواند در این موارد کمک کند.</p><hr> <h2>Replacing and Splitting Text (جایگزینی و تقسیم متن)</h2><h3>جایگزینی متن</h3><p><code>RegEx.Replace</code> مشابه <code>string.Replace</code> عمل می‌کند، اما از <strong>عبارت منظم</strong> استفاده می‌کند.</p><p>مثال زیر، <code>&quot;cat&quot;</code> را با <code>&quot;dog&quot;</code> جایگزین می‌کند. برخلاف <code>string.Replace</code>، <code>&quot;catapult&quot;</code> به <code>&quot;dogapult&quot;</code> تبدیل نمی‌شود، زیرا ما از <strong>word boundaries</strong> استفاده کرده‌ایم:</p><pre class="hljs"><code><span class="hljs-built_in">string</span> find = <span class="hljs-string">@&quot;\bcat\b&quot;</span>;
 <span class="hljs-built_in">string</span> replace = <span class="hljs-string">&quot;dog&quot;</span>;
 Console.WriteLine (Regex.Replace (<span class="hljs-string">&quot;catapult the cat&quot;</span>, find, replace));
-</code></pre>
-<p>📤 خروجی:</p>
-<pre class="hljs"><code>catapult the dog
-</code></pre>
-<hr>
-<p>می‌توان از <code>$0</code> برای ارجاع به تطبیق اصلی استفاده کرد. مثال زیر اعداد داخل رشته را در <code>&lt; &gt;</code> قرار می‌دهد:</p>
-<pre class="hljs"><code><span class="hljs-built_in">string</span> text = <span class="hljs-string">&quot;10 plus 20 makes 30&quot;</span>;
+</code></pre> <p>خروجی:</p><pre class="hljs"><code>catapult the dog
+</code></pre> <hr><p>می‌توان از <code>$0</code> برای ارجاع به تطبیق اصلی استفاده کرد. مثال زیر اعداد داخل رشته را در <code>&lt; &gt;</code> قرار می‌دهد:</p><pre class="hljs"><code><span class="hljs-built_in">string</span> text = <span class="hljs-string">&quot;10 plus 20 makes 30&quot;</span>;
 Console.WriteLine (Regex.Replace (text, <span class="hljs-string">@&quot;\d+&quot;</span>, <span class="hljs-string">@&quot;&lt;$0&gt;&quot;</span>));
-</code></pre>
-<p>📤 خروجی:</p>
-<pre class="hljs"><code>&lt;10&gt; plus &lt;20&gt; makes &lt;30&gt;
-</code></pre>
-<p>🔹 می‌توان به گروه‌های گرفته‌شده با <code>$1, $2, $3</code> یا <code>${name}</code> برای گروه‌های نام‌گذاری‌شده دسترسی داشت.</p>
-<p>مثال قبل با XML ساده را می‌توان با جابه‌جایی گروه‌ها جایگزین کرد تا محتوای عنصر به یک <strong>attribute</strong> منتقل شود:</p>
-<pre class="hljs"><code><span class="hljs-built_in">string</span> regReplace =
+</code></pre> <p>خروجی:</p><pre class="hljs"><code>&lt;10&gt; plus &lt;20&gt; makes &lt;30&gt;
+</code></pre> <p>می‌توان به گروه‌های گرفته‌شده با <code>$1, $2, $3</code> یا <code>${name}</code> برای گروه‌های نام‌گذاری‌شده دسترسی داشت.</p><p>مثال قبل با XML ساده را می‌توان با جابه‌جایی گروه‌ها جایگزین کرد تا محتوای عنصر به یک <strong>attribute</strong> منتقل شود:</p><pre class="hljs"><code><span class="hljs-built_in">string</span> regReplace =
  <span class="hljs-string">@&quot;&lt;${tag}&quot;</span>         +  <span class="hljs-comment">// &lt;tag</span>
  <span class="hljs-string">@&quot;value=&quot;&quot;&quot;</span>        +  <span class="hljs-comment">// value=&quot;</span>
  <span class="hljs-string">@&quot;${text}&quot;</span>         +  <span class="hljs-comment">// محتوای متن</span>
  <span class="hljs-string">@&quot;&quot;&quot;/&gt;&quot;</span>;              <span class="hljs-comment">// &quot;/&gt;</span>
 
 Console.Write (Regex.Replace (<span class="hljs-string">&quot;&lt;msg&gt;hello&lt;/msg&gt;&quot;</span>, regFind, regReplace));
-</code></pre>
-<p>📤 خروجی:</p>
-<pre class="hljs"><code>&lt;msg value=&quot;hello&quot;/&gt;
-</code></pre>
-<hr>
-<h3>MatchEvaluator Delegate</h3>
-<p><code>Replace</code> یک overload دارد که یک <strong>delegate از نوع MatchEvaluator</strong> می‌گیرد و برای هر تطبیق فراخوانی می‌شود. این امکان را می‌دهد که محتوای رشته‌ی جایگزین توسط <strong>کد C#</strong> تعیین شود:</p>
-<pre class="hljs"><code>Console.WriteLine (Regex.Replace (<span class="hljs-string">&quot;5 is less than 10&quot;</span>, <span class="hljs-string">@&quot;\d+&quot;</span>,
+</code></pre> <p>خروجی:</p><pre class="hljs"><code>&lt;msg value=&quot;hello&quot;/&gt;
+</code></pre> <hr><h3>MatchEvaluator Delegate</h3><p><code>Replace</code> یک overload دارد که یک <strong>delegate از نوع MatchEvaluator</strong> می‌گیرد و برای هر تطبیق فراخوانی می‌شود. این امکان را می‌دهد که محتوای رشته‌ی جایگزین توسط <strong>کد C#</strong> تعیین شود:</p><pre class="hljs"><code>Console.WriteLine (Regex.Replace (<span class="hljs-string">&quot;5 is less than 10&quot;</span>, <span class="hljs-string">@&quot;\d+&quot;</span>,
                    m =&gt; (<span class="hljs-built_in">int</span>.Parse (m.Value) * <span class="hljs-number">10</span>).ToString()) );
-</code></pre>
-<p>📤 خروجی:</p>
-<pre class="hljs"><code>50 is less than 100
-</code></pre>
-<p>در کتاب <strong>Cookbook Regular Expressions</strong> صفحه 1023، نمونه‌ای از استفاده‌ی MatchEvaluator برای <strong>Escape کردن کاراکترهای Unicode مناسب HTML</strong> ارائه شده است.</p>
-<hr>
-<h3>تقسیم متن (Splitting Text)</h3>
-<p>متد <code>Regex.Split</code> نسخه‌ی قدرتمندتری از <code>string.Split</code> است که <strong>الگوی جداکننده</strong> توسط یک عبارت منظم تعیین می‌شود.</p>
-<p>مثال:</p>
-<pre class="hljs"><code><span class="hljs-keyword">foreach</span> (<span class="hljs-built_in">string</span> s <span class="hljs-keyword">in</span> Regex.Split (<span class="hljs-string">&quot;a5b7c&quot;</span>, <span class="hljs-string">@&quot;\d&quot;</span>))
+</code></pre> <p>خروجی:</p><pre class="hljs"><code>50 is less than 100
+</code></pre> <p>در کتاب <strong>Cookbook Regular Expressions</strong> صفحه 1023، نمونه‌ای از استفاده‌ی MatchEvaluator برای <strong>Escape کردن کاراکترهای Unicode مناسب HTML</strong> ارائه شده است.</p><hr> <h3>تقسیم متن (Splitting Text)</h3><p>متد <code>Regex.Split</code> نسخه‌ی قدرتمندتری از <code>string.Split</code> است که <strong>الگوی جداکننده</strong> توسط یک عبارت منظم تعیین می‌شود.</p><p>مثال:</p><pre class="hljs"><code><span class="hljs-keyword">foreach</span> (<span class="hljs-built_in">string</span> s <span class="hljs-keyword">in</span> Regex.Split (<span class="hljs-string">&quot;a5b7c&quot;</span>, <span class="hljs-string">@&quot;\d&quot;</span>))
   Console.Write (s + <span class="hljs-string">&quot; &quot;</span>);     <span class="hljs-comment">// a b c</span>
-</code></pre>
-<p>در اینجا جداکننده‌ها در خروجی نیستند. برای شامل کردن جداکننده‌ها، می‌توان از <strong>positive lookahead</strong> استفاده کرد:</p>
-<pre class="hljs"><code><span class="hljs-keyword">foreach</span> (<span class="hljs-built_in">string</span> s <span class="hljs-keyword">in</span> Regex.Split (<span class="hljs-string">&quot;oneTwoThree&quot;</span>, <span class="hljs-string">@&quot;(?=[A-Z])&quot;</span>))
+</code></pre> <p>در اینجا جداکننده‌ها در خروجی نیستند. برای شامل کردن جداکننده‌ها، می‌توان از <strong>positive lookahead</strong> استفاده کرد:</p><pre class="hljs"><code><span class="hljs-keyword">foreach</span> (<span class="hljs-built_in">string</span> s <span class="hljs-keyword">in</span> Regex.Split (<span class="hljs-string">&quot;oneTwoThree&quot;</span>, <span class="hljs-string">@&quot;(?=[A-Z])&quot;</span>))
   Console.Write (s + <span class="hljs-string">&quot; &quot;</span>);    <span class="hljs-comment">// one Two Three</span>
-</code></pre>
-<hr>
-<h2>📖 Cookbook Regular Expressions (دستورالعمل‌ها)</h2>
-<h3>تطبیق شماره SSN / شماره تلفن آمریکا</h3>
-<pre class="hljs"><code><span class="hljs-built_in">string</span> ssNum = <span class="hljs-string">@&quot;\d{3}-\d{2}-\d{4}&quot;</span>;
+</code></pre> <hr><h2>Cookbook Regular Expressions (دستورالعمل‌ها)</h2><h3>تطبیق شماره SSN / شماره تلفن آمریکا</h3><pre class="hljs"><code><span class="hljs-built_in">string</span> ssNum = <span class="hljs-string">@&quot;\d{3}-\d{2}-\d{4}&quot;</span>;
 Console.WriteLine (Regex.IsMatch (<span class="hljs-string">&quot;123-45-6789&quot;</span>, ssNum));      <span class="hljs-comment">// True</span>
 
 <span class="hljs-built_in">string</span> phone = <span class="hljs-string">@&quot;(?x)
@@ -550,10 +157,7 @@ Console.WriteLine (Regex.IsMatch (<span class="hljs-string">&quot;123-45-6789&qu
 
 Console.WriteLine (Regex.IsMatch (<span class="hljs-string">&quot;123-456-7890&quot;</span>,   phone));   <span class="hljs-comment">// True</span>
 Console.WriteLine (Regex.IsMatch (<span class="hljs-string">&quot;(123) 456-7890&quot;</span>, phone));   <span class="hljs-comment">// True</span>
-</code></pre>
-<h2>🔹 استخراج زوج‌های &quot;name = value&quot; (یک مورد در هر خط)</h2>
-<p>توجه داشته باشید که این مثال با <strong>multiline directive</strong> شروع می‌شود:</p>
-<pre class="hljs"><code><span class="hljs-built_in">string</span> r = <span class="hljs-string">@&quot;(?m)^\s*(?&#x27;name&#x27;\w+)\s*=\s*(?&#x27;value&#x27;.*)\s*(?=\r?$)&quot;</span>;
+</code></pre> <h2>استخراج زوج‌های &quot;name = value&quot; (یک مورد در هر خط)</h2><p>توجه داشته باشید که این مثال با <strong>multiline directive</strong> شروع می‌شود:</p><pre class="hljs"><code><span class="hljs-built_in">string</span> r = <span class="hljs-string">@&quot;(?m)^\s*(?&#x27;name&#x27;\w+)\s*=\s*(?&#x27;value&#x27;.*)\s*(?=\r?$)&quot;</span>;
 <span class="hljs-built_in">string</span> text =
  <span class="hljs-string">@&quot;id = 3
    secure = true
@@ -561,36 +165,19 @@ Console.WriteLine (Regex.IsMatch (<span class="hljs-string">&quot;(123) 456-7890
 
 <span class="hljs-keyword">foreach</span> (Match m <span class="hljs-keyword">in</span> Regex.Matches (text, r))
   Console.WriteLine (m.Groups[<span class="hljs-string">&quot;name&quot;</span>] + <span class="hljs-string">&quot; is &quot;</span> + m.Groups[<span class="hljs-string">&quot;value&quot;</span>]);
-</code></pre>
-<p>📤 خروجی:</p>
-<pre class="hljs"><code>id is 3
+</code></pre> <p>خروجی:</p><pre class="hljs"><code>id is 3
 secure is true
 timeout is 30
-</code></pre>
-<hr>
-<h2>🔐 اعتبارسنجی پسورد قوی</h2>
-<p>این مثال بررسی می‌کند که آیا یک پسورد حداقل <strong>شش کاراکتر</strong> دارد و حداقل یک <strong>عدد، نماد یا علامت نگارشی</strong> شامل می‌شود:</p>
-<pre class="hljs"><code><span class="hljs-built_in">string</span> r = <span class="hljs-string">@&quot;(?x)^(?=.*(\d|\p{P}|\p{S})).{6,}&quot;</span>;
+</code></pre> <hr><h2>اعتبارسنجی پسورد قوی</h2><p>این مثال بررسی می‌کند که آیا یک پسورد حداقل <strong>شش کاراکتر</strong> دارد و حداقل یک <strong>عدد، نماد یا علامت نگارشی</strong> شامل می‌شود:</p><pre class="hljs"><code><span class="hljs-built_in">string</span> r = <span class="hljs-string">@&quot;(?x)^(?=.*(\d|\p{P}|\p{S})).{6,}&quot;</span>;
 Console.WriteLine (Regex.IsMatch (<span class="hljs-string">&quot;abc12&quot;</span>, r));     <span class="hljs-comment">// False</span>
 Console.WriteLine (Regex.IsMatch (<span class="hljs-string">&quot;abcdef&quot;</span>, r));    <span class="hljs-comment">// False</span>
 Console.WriteLine (Regex.IsMatch (<span class="hljs-string">&quot;ab88yz&quot;</span>, r));    <span class="hljs-comment">// True</span>
-</code></pre>
-<hr>
-<h2>📏 خطوط حداقل ۸۰ کاراکتری</h2>
-<pre class="hljs"><code><span class="hljs-built_in">string</span> r = <span class="hljs-string">@&quot;(?m)^.{80,}(?=\r?$)&quot;</span>;
+</code></pre> <hr><h2>خطوط حداقل ۸۰ کاراکتری</h2><pre class="hljs"><code><span class="hljs-built_in">string</span> r = <span class="hljs-string">@&quot;(?m)^.{80,}(?=\r?$)&quot;</span>;
 <span class="hljs-built_in">string</span> fifty = <span class="hljs-keyword">new</span> <span class="hljs-built_in">string</span> (<span class="hljs-string">&#x27;x&#x27;</span>, <span class="hljs-number">50</span>);
 <span class="hljs-built_in">string</span> eighty = <span class="hljs-keyword">new</span> <span class="hljs-built_in">string</span> (<span class="hljs-string">&#x27;x&#x27;</span>, <span class="hljs-number">80</span>);
 <span class="hljs-built_in">string</span> text = eighty + <span class="hljs-string">&quot;\r\n&quot;</span> + fifty + <span class="hljs-string">&quot;\r\n&quot;</span> + eighty;
 Console.WriteLine (Regex.Matches (text, r).Count);   <span class="hljs-comment">// 2</span>
-</code></pre>
-<hr>
-<h2>📅 تجزیه تاریخ/زمان (N/N/N H:M:S AM/PM)</h2>
-<p>این عبارت از فرمت‌های مختلف عددی تاریخ پشتیبانی می‌کند و فرقی نمی‌کند که سال اول باشد یا آخر.</p>
-<ul>
-<li><code>(?x)</code> باعث خواناتر شدن عبارت می‌شود (فضای خالی نادیده گرفته می‌شود)</li>
-<li><code>(?i)</code> حساسیت به حروف را خاموش می‌کند (برای AM/PM اختیاری)</li>
-</ul>
-<pre class="hljs"><code><span class="hljs-built_in">string</span> r = <span class="hljs-string">@&quot;(?x)(?i)
+</code></pre> <hr><h2>تجزیه تاریخ/زمان (N/N/N H:M:S AM/PM)</h2><p>این عبارت از فرمت‌های مختلف عددی تاریخ پشتیبانی می‌کند و فرقی نمی‌کند که سال اول باشد یا آخر.</p><ul> <li><code>(?x)</code> باعث خواناتر شدن عبارت می‌شود (فضای خالی نادیده گرفته می‌شود)</li><li><code>(?i)</code> حساسیت به حروف را خاموش می‌کند (برای AM/PM اختیاری)</li></ul> <pre class="hljs"><code><span class="hljs-built_in">string</span> r = <span class="hljs-string">@&quot;(?x)(?i)
  (\d{1,4}) [./-]
  (\d{1,2}) [./-]
  (\d{1,4}) [\sT]
@@ -599,14 +186,8 @@ Console.WriteLine (Regex.Matches (text, r).Count);   <span class="hljs-comment">
 
 <span class="hljs-keyword">foreach</span> (Group g <span class="hljs-keyword">in</span> Regex.Match (text, r).Groups)
   Console.WriteLine (g.Value + <span class="hljs-string">&quot; &quot;</span>);
-</code></pre>
-<p>📤 خروجی:</p>
-<pre class="hljs"><code>01/02/2008 5:20:50 PM 01 02 2008 5 20 50 PM
-</code></pre>
-<p><em>(البته این بررسی نمی‌کند که تاریخ/زمان درست باشد)</em></p>
-<hr>
-<h2>🏛 تطبیق اعداد رومی</h2>
-<pre class="hljs"><code><span class="hljs-built_in">string</span> r =
+</code></pre> <p>خروجی:</p><pre class="hljs"><code>01/02/2008 5:20:50 PM 01 02 2008 5 20 50 PM
+</code></pre> <p><em>(البته این بررسی نمی‌کند که تاریخ/زمان درست باشد)</em></p><hr> <h2>تطبیق اعداد رومی</h2><pre class="hljs"><code><span class="hljs-built_in">string</span> r =
  <span class="hljs-string">@&quot;(?i)\bm*&quot;</span>         +
  <span class="hljs-string">@&quot;(d?c{0,3}|c[dm])&quot;</span> +
  <span class="hljs-string">@&quot;(l?x{0,3}|x[lc])&quot;</span> +
@@ -614,26 +195,14 @@ Console.WriteLine (Regex.Matches (text, r).Count);   <span class="hljs-comment">
  <span class="hljs-string">@&quot;\b&quot;</span>;
 
 Console.WriteLine (Regex.IsMatch (<span class="hljs-string">&quot;MCMLXXXIV&quot;</span>, r));   <span class="hljs-comment">// True</span>
-</code></pre>
-<hr>
-<h2>🔁 حذف کلمات تکراری</h2>
-<p>در این مثال، یک گروه نامگذاری‌شده به نام <code>dupe</code> گرفته می‌شود:</p>
-<pre class="hljs"><code><span class="hljs-built_in">string</span> r = <span class="hljs-string">@&quot;(?&#x27;dupe&#x27;\w+)\W\k&#x27;dupe&#x27;&quot;</span>;
+</code></pre> <hr><h2>حذف کلمات تکراری</h2><p>در این مثال، یک گروه نامگذاری‌شده به نام <code>dupe</code> گرفته می‌شود:</p><pre class="hljs"><code><span class="hljs-built_in">string</span> r = <span class="hljs-string">@&quot;(?&#x27;dupe&#x27;\w+)\W\k&#x27;dupe&#x27;&quot;</span>;
 <span class="hljs-built_in">string</span> text = <span class="hljs-string">&quot;In the the beginning...&quot;</span>;
 Console.WriteLine (Regex.Replace (text, r, <span class="hljs-string">&quot;${dupe}&quot;</span>));
-</code></pre>
-<p>📤 خروجی:</p>
-<pre class="hljs"><code>In the beginning
-</code></pre>
-<hr>
-<h2>🔢 شمارش کلمات</h2>
-<pre class="hljs"><code><span class="hljs-built_in">string</span> r = <span class="hljs-string">@&quot;\b(\w|[-&#x27;])+\b&quot;</span>;
+</code></pre> <p>خروجی:</p><pre class="hljs"><code>In the beginning
+</code></pre> <hr><h2>شمارش کلمات</h2><pre class="hljs"><code><span class="hljs-built_in">string</span> r = <span class="hljs-string">@&quot;\b(\w|[-&#x27;])+\b&quot;</span>;
 <span class="hljs-built_in">string</span> text = <span class="hljs-string">&quot;It&#x27;s all mumbo-jumbo to me&quot;</span>;
 Console.WriteLine (Regex.Matches (text, r).Count);   <span class="hljs-comment">// 5</span>
-</code></pre>
-<hr>
-<h2>🧩 تطبیق GUID</h2>
-<pre class="hljs"><code><span class="hljs-built_in">string</span> r =
+</code></pre> <hr><h2>تطبیق GUID</h2><pre class="hljs"><code><span class="hljs-built_in">string</span> r =
  <span class="hljs-string">@&quot;(?i)\b&quot;</span>           +
  <span class="hljs-string">@&quot;[0-9a-fA-F]{8}\-&quot;</span> +
  <span class="hljs-string">@&quot;[0-9a-fA-F]{4}\-&quot;</span> +
@@ -644,11 +213,7 @@ Console.WriteLine (Regex.Matches (text, r).Count);   <span class="hljs-comment">
 
 <span class="hljs-built_in">string</span> text = <span class="hljs-string">&quot;Its key is {3F2504E0-4F89-11D3-9A0C-0305E82C3301}.&quot;</span>;
 Console.WriteLine (Regex.Match (text, r).Index);                    <span class="hljs-comment">// 12</span>
-</code></pre>
-<hr>
-<h2>🏷 تجزیه تگ XML/HTML</h2>
-<p>عبارت منظم می‌تواند برای تجزیه <strong>HTML fragments</strong> مفید باشد، مخصوصاً وقتی سند ناقص باشد:</p>
-<pre class="hljs"><code><span class="hljs-built_in">string</span> r =
+</code></pre> <hr><h2>تجزیه تگ XML/HTML</h2><p>عبارت منظم می‌تواند برای تجزیه <strong>HTML fragments</strong> مفید باشد، مخصوصاً وقتی سند ناقص باشد:</p><pre class="hljs"><code><span class="hljs-built_in">string</span> r =
  <span class="hljs-string">@&quot;&lt;(?&#x27;tag&#x27;\w+?).*&gt;&quot;</span>  +  <span class="hljs-comment">// lazy-match اولین تگ، نامگذاری به &#x27;tag&#x27;</span>
  <span class="hljs-string">@&quot;(?&#x27;text&#x27;.*?)&quot;</span>      +  <span class="hljs-comment">// lazy-match محتوای متن، نامگذاری به &#x27;text&#x27;</span>
  <span class="hljs-string">@&quot;&lt;/\k&#x27;tag&#x27;&gt;&quot;</span>;          <span class="hljs-comment">// تطبیق تگ پایانی مطابق با &#x27;tag&#x27;</span>
@@ -657,34 +222,20 @@ Console.WriteLine (Regex.Match (text, r).Index);                    <span class=
 Match m = Regex.Match (text, r);
 Console.WriteLine (m.Groups [<span class="hljs-string">&quot;tag&quot;</span>]);       <span class="hljs-comment">// h1</span>
 Console.WriteLine (m.Groups [<span class="hljs-string">&quot;text&quot;</span>]);      <span class="hljs-comment">// hello</span>
-</code></pre>
-<hr>
-<h2>🐫 تقسیم کلمات CamelCase</h2>
-<p>برای شامل کردن جداکننده‌های بزرگ، نیاز به <strong>positive lookahead</strong> داریم:</p>
-<pre class="hljs"><code><span class="hljs-built_in">string</span> r = <span class="hljs-string">@&quot;(?=[A-Z])&quot;</span>;
+</code></pre> <hr><h2>تقسیم کلمات CamelCase</h2><p>برای شامل کردن جداکننده‌های بزرگ، نیاز به <strong>positive lookahead</strong> داریم:</p><pre class="hljs"><code><span class="hljs-built_in">string</span> r = <span class="hljs-string">@&quot;(?=[A-Z])&quot;</span>;
 <span class="hljs-keyword">foreach</span> (<span class="hljs-built_in">string</span> s <span class="hljs-keyword">in</span> Regex.Split (<span class="hljs-string">&quot;oneTwoThree&quot;</span>, r))
   Console.Write (s + <span class="hljs-string">&quot; &quot;</span>);    <span class="hljs-comment">// one Two Three</span>
-</code></pre>
-<hr>
-<h2>🗂 به‌دست آوردن نام فایل معتبر</h2>
-<pre class="hljs"><code><span class="hljs-built_in">string</span> input = <span class="hljs-string">&quot;My \&quot;good\&quot; &lt;recipes&gt;.txt&quot;</span>;
+</code></pre> <hr><h2>به‌دست آوردن نام فایل معتبر</h2><pre class="hljs"><code><span class="hljs-built_in">string</span> input = <span class="hljs-string">&quot;My \&quot;good\&quot; &lt;recipes&gt;.txt&quot;</span>;
 <span class="hljs-built_in">char</span>[] invalidChars = System.IO.Path.GetInvalidFileNameChars();
 <span class="hljs-built_in">string</span> invalidString = Regex.Escape (<span class="hljs-keyword">new</span> <span class="hljs-built_in">string</span> (invalidChars));
 <span class="hljs-built_in">string</span> valid = Regex.Replace (input, <span class="hljs-string">&quot;[&quot;</span> + invalidString + <span class="hljs-string">&quot;]&quot;</span>, <span class="hljs-string">&quot;&quot;</span>);
 Console.WriteLine (valid);
-</code></pre>
-<p>📤 خروجی:</p>
-<pre class="hljs"><code>My good recipes.txt
-</code></pre>
-<hr>
-<h2>🌐 Escape کردن کاراکترهای Unicode برای HTML</h2>
-<pre class="hljs"><code><span class="hljs-built_in">string</span> htmlFragment = <span class="hljs-string">&quot;© 2007&quot;</span>;
+</code></pre> <p>خروجی:</p><pre class="hljs"><code>My good recipes.txt
+</code></pre> <hr><h2>Escape کردن کاراکترهای Unicode برای HTML</h2><pre class="hljs"><code><span class="hljs-built_in">string</span> htmlFragment = <span class="hljs-string">&quot;© 2007&quot;</span>;
 <span class="hljs-built_in">string</span> result = Regex.Replace (htmlFragment, <span class="hljs-string">@&quot;[\u0080-\uFFFF]&quot;</span>,
                m =&gt; <span class="hljs-string">@&quot;&amp;#&quot;</span> + ((<span class="hljs-built_in">int</span>)m.Value[<span class="hljs-number">0</span>]).ToString() + <span class="hljs-string">&quot;;&quot;</span>);
 Console.WriteLine (result);        <span class="hljs-comment">// &amp;#169; 2007</span>
-</code></pre>
-<h2>🔓 تبدیل کاراکترهای Escape شده در یک <strong>HTTP query string</strong></h2>
-<pre class="hljs"><code><span class="hljs-built_in">string</span> sample = <span class="hljs-string">&quot;C%23 rocks&quot;</span>;
+</code></pre> <h2>تبدیل کاراکترهای Escape شده در یک <strong>HTTP query string</strong></h2><pre class="hljs"><code><span class="hljs-built_in">string</span> sample = <span class="hljs-string">&quot;C%23 rocks&quot;</span>;
 <span class="hljs-built_in">string</span> result = Regex.Replace (
    sample,
    <span class="hljs-string">@&quot;%[0-9a-f][0-9a-f]&quot;</span>, 
@@ -692,11 +243,7 @@ Console.WriteLine (result);        <span class="hljs-comment">// &amp;#169; 2007
    RegexOptions.IgnoreCase
 );
 Console.WriteLine (result);   <span class="hljs-comment">// C# rocks</span>
-</code></pre>
-<hr>
-<h2>🔍 استخراج عبارت‌های جستجوی Google از یک <strong>web stats log</strong></h2>
-<p>این مثال معمولاً همراه با نمونه‌ی قبلی استفاده می‌شود تا کاراکترهای Escape شده در <strong>query string</strong> بازگردانده شوند:</p>
-<pre class="hljs"><code><span class="hljs-built_in">string</span> sample = 
+</code></pre> <hr><h2>استخراج عبارت‌های جستجوی Google از یک <strong>web stats log</strong></h2><p>این مثال معمولاً همراه با نمونه‌ی قبلی استفاده می‌شود تا کاراکترهای Escape شده در <strong>query string</strong> بازگردانده شوند:</p><pre class="hljs"><code><span class="hljs-built_in">string</span> sample = 
  <span class="hljs-string">&quot;http://google.com/search?hl=en&amp;q=greedy+quantifiers+regex&amp;btnG=Search&quot;</span>;
 
 Match m = Regex.Match (sample, <span class="hljs-string">@&quot;(?&lt;=google\..+search\?.*q=).+?(?=(&amp;|$))&quot;</span>);
@@ -705,158 +252,216 @@ Match m = Regex.Match (sample, <span class="hljs-string">@&quot;(?&lt;=google\..
 
 <span class="hljs-keyword">foreach</span> (<span class="hljs-built_in">string</span> keyword <span class="hljs-keyword">in</span> keywords)
   Console.Write (keyword + <span class="hljs-string">&quot; &quot;</span>);       <span class="hljs-comment">// greedy quantifiers regex</span>
-</code></pre>
-<hr>
-<h2>📚 مرجع زبان <strong>Regular Expressions</strong></h2>
-<p>جداول <strong>25-2 تا 25-12</strong> دستور زبان و سینتکس <strong>regular expressions</strong> پشتیبانی شده در پیاده‌سازی <strong>.NET</strong> را خلاصه می‌کنند.</p>
- <div align="center">
-<p><img src="../../../assets/image/25/Table-25-4.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<p>💡 <strong>حالت ویژه</strong></p>
-<p>در یک <strong>regular expression</strong>، <code>\b</code> به معنای <strong>word boundary</strong> است، <strong>به جز زمانی که داخل یک مجموعه <code>[ ]</code> قرار گیرد</strong>، که در آن صورت <code>\b</code> به معنای <strong>کاراکتر backspace</strong> است.</p>
- <div align="center">
-<p><img src="../../../assets/image/25/Table-25-5.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
- <div align="center">
-<p><img src="../../../assets/image/25/Table-25-6.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
- <div align="center">
-<p><img src="../../../assets/image/25/Table-25-7.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<p>❓ پسوند <code>?</code> می‌تواند به هر یک از <strong>quantifierها</strong> اعمال شود تا آن‌ها را <strong>lazy</strong> کند، به جای اینکه <strong>greedy</strong> باشند.</p>
- <div align="center">
-<p><img src="../../../assets/image/25/Table-25-8.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<p>🔄 <strong>Substitutions</strong> تنها درون <strong>replacement pattern</strong> مشخص می‌شوند.</p>
- <div align="center">
-<p><img src="../../../assets/image/25/Table-25-9.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
- <div align="center">
-<p><img src="../../../assets/image/25/Table-25-10.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
- <div align="center">
-<p><img src="../../../assets/image/25/Table-25-11.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
- <div align="center">
-<p><img src="../../../assets/image/25/Table-25-12.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
- <div align="center">
-<p><img src="../../../assets/image/25/Table-25-13.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
- <div align="center">
-<p><img src="../../../assets/image/25/Table-25-14.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-
-  </main>
-
-  <!-- فوتر مشترک -->
-  <footer class="footer">
-    <div class="container">
-      <p>
-        <img src="/Gitab/icone/copyright.svg" alt="کپی‌رایت" width="14" height="14"
-             style="vertical-align:middle;margin-inline:4px">
-        <span id="y"></span> Gitab — تمامی حقوق محفوظ است.
-      </p>
-    </div>
-  </footer>
-
-  <!-- سال و اسکریپت تغییر تم -->
-  <script>
+</code></pre> <hr><h2>مرجع زبان <strong>Regular Expressions</strong></h2><p>جداول <strong>25-2 تا 25-12</strong> دستور زبان و سینتکس <strong>regular expressions</strong> پشتیبانی شده در پیاده‌سازی <strong>.NET</strong> را خلاصه می‌کنند.</p><div align="center"> <p><img src="../../../assets/image/25/Table-25-4.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <p><strong>حالت ویژه</strong></p><p>در یک <strong>regular expression</strong>، <code>\b</code> به معنای <strong>word boundary</strong> است، <strong>به جز زمانی که داخل یک مجموعه <code>[ ]</code> قرار گیرد</strong>، که در آن صورت <code>\b</code> به معنای <strong>کاراکتر backspace</strong> است.</p><div align="center"> <p><img src="../../../assets/image/25/Table-25-5.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <div align="center"><p><img src="../../../assets/image/25/Table-25-6.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <div align="center"><p><img src="../../../assets/image/25/Table-25-7.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <p>پسوند <code>?</code> می‌تواند به هر یک از <strong>quantifierها</strong> اعمال شود تا آن‌ها را <strong>lazy</strong> کند، به جای اینکه <strong>greedy</strong> باشند.</p><div align="center"> <p><img src="../../../assets/image/25/Table-25-8.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <p><strong>Substitutions</strong> تنها درون <strong>replacement pattern</strong> مشخص می‌شوند.</p><div align="center"> <p><img src="../../../assets/image/25/Table-25-9.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <div align="center"><p><img src="../../../assets/image/25/Table-25-10.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <div align="center"><p><img src="../../../assets/image/25/Table-25-11.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <div align="center"><p><img src="../../../assets/image/25/Table-25-12.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <div align="center"><p><img src="../../../assets/image/25/Table-25-13.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <div align="center"><p><img src="../../../assets/image/25/Table-25-14.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> </article><nav class="chapter-single-next-nav"> <a href="/Gitab/books/book1/" class="btn-next-chapter-action" id="nextChapterBtn" data-hub="/Gitab/books/book1/"> <span class="next-btn-text">پایان کتاب — بازگشت به فهرست سرفصل‌ها</span> <span class="next-btn-arrow">←</span> </a> </nav></div> <button class="fab-back-to-top" id="backToTopBtn" type="button" aria-label="رفتن به بالای صفحه" title="رفتن به بالا"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"> <polyline points="18 15 12 9 6 15"></polyline> </svg> </button></main> <footer class="footer-minimal"><div class="footer-container"> <div class="footer-top-row"><div class="footer-brand-side"> <a href="/Gitab/" class="footer-brand-anchor"> <img src="/Gitab/icone/logo.svg" alt="Gitab" width="28" height="28" loading="lazy" decoding="async"> <span class="footer-brand-title">گیتاب (Gitab)</span> </a> <p class="footer-tagline"> پلتفرم آزاد و مستقل برای ترجمهٔ دقیق و روان کتاب‌های مرجع مهندسی نرم‌افزار. </p></div> <div class="footer-nav-cols"><div class="footer-nav-col"> <span class="footer-nav-heading">موضوعات</span><ul class="footer-nav-list"> <li><a href="/Gitab/books/list-books/?cat=csharp">سی‌شارپ و دات‌نت</a></li><li><a href="/Gitab/books/list-books/?cat=clean-code">کد تمیز و بازآفرینی</a></li><li><a href="/Gitab/books/list-books/?cat=architecture">معماری و طراحی دامنه</a></li><li><a href="/Gitab/books/list-books/?cat=system">لینوکس و خط فرمان</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">بخش‌های سایت</span><ul class="footer-nav-list"> <li><a href="/Gitab/">صفحه اصلی</a></li><li><a href="/Gitab/books/list-books/">کتابخانه کامل</a></li><li><a href="/Gitab/courses/">دوره‌های آموزشی</a></li><li><a href="/Gitab/translator.html">تالار مترجمین</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">مشارکت و جامعه</span><ul class="footer-nav-list"> <li><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer">راهنمای همکاری در ترجمه</a></li><li><a href="https://github.com/hheydarian/Gitab/issues" target="_blank" rel="noopener noreferrer">پیشنهاد کتاب یا گزارش خطا</a></li></ul> </div></div> </div><div class="footer-bottom-line"> <span>© <span id="y">2026</span> Gitab — توسعه‌یافته برای جامعهٔ مهندسان نرم‌افزار ایرانی</span></div> </div></footer> <script>
   (() => {
     const root = document.documentElement;
     const btn = document.getElementById('themeToggle');
+    const sunIcon = btn ? btn.querySelector('.icon-sun') : null;
+    const moonIcon = btn ? btn.querySelector('.icon-moon') : null;
     const KEY = 'gitab-theme';
 
-    function updateTheme(s) {
-      root.setAttribute('data-theme', s);
-      const mode = s;  // فقط `dark` یا `light` خواهد بود
+    function updateTheme(mode) {
+      root.setAttribute('data-theme', mode);
       root.dataset.colorMode = mode;
-      btn.dataset.icon = mode === 'dark' ? 'moon' : 'sun';
+      if (sunIcon && moonIcon) {
+        if (mode === 'dark') {
+          sunIcon.style.display = 'inline-block';
+          moonIcon.style.display = 'none';
+        } else {
+          sunIcon.style.display = 'none';
+          moonIcon.style.display = 'inline-block';
+        }
+      }
     }
 
-    // وضعیت تم ذخیره شده از localStorage
-    let saved = localStorage.getItem(KEY) || 'light'; // پیش‌فرض روشن
+    let saved = 'dark';
+    try { saved = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
     updateTheme(saved);
 
-    // تنظیم مجدد تم هنگام تغییر وضعیت دکمه
-    btn.addEventListener('click', () => {
-      const current = localStorage.getItem(KEY) || 'light';
-      const next = current === 'dark' ? 'light' : 'dark';  // فقط دو حالت: تاریک و روشن
-      localStorage.setItem(KEY, next);
-      updateTheme(next);
-    });
+    if (btn) {
+      btn.addEventListener('click', () => {
+        let current = 'dark';
+        try { current = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+        const next = current === 'dark' ? 'light' : 'dark';
+        try { localStorage.setItem(KEY, next); } catch (e) {}
+        updateTheme(next);
+      });
+    }
 
-    // هنگام بارگذاری صفحه
     document.addEventListener('DOMContentLoaded', () => {
-      updateTheme(localStorage.getItem(KEY) || 'light');
+      let mode = 'dark';
+      try { mode = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+      updateTheme(mode);
+      const yearSpan = document.getElementById('y');
+      if (yearSpan) yearSpan.textContent = new Date().getFullYear();
     });
+
+    const mobBtn = document.getElementById('mobileMenuBtn');
+    const mobDrawer = document.getElementById('mobileDrawer');
+    if (mobBtn && mobDrawer) {
+      const setDrawerOpen = (open) => {
+        mobDrawer.classList.toggle('open', open);
+        mobBtn.classList.toggle('is-open', open);
+        mobBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        mobBtn.setAttribute('aria-label', open ? 'بستن منو' : 'باز کردن منو');
+        mobDrawer.setAttribute('aria-hidden', open ? 'false' : 'true');
+      };
+
+      mobBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        setDrawerOpen(!mobDrawer.classList.contains('open'));
+      });
+
+      mobDrawer.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => setDrawerOpen(false));
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && mobDrawer.classList.contains('open')) {
+          setDrawerOpen(false);
+        }
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!mobDrawer.contains(e.target) && !mobBtn.contains(e.target)) {
+          setDrawerOpen(false);
+        }
+      });
+    }
+
+    if ('serviceWorker' in navigator) {
+      const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+      if (isLocalhost) {
+        navigator.serviceWorker.getRegistrations().then(regs => {
+          for (const reg of regs) reg.unregister();
+        });
+        if ('caches' in window) {
+          caches.keys().then(names => {
+            for (const name of names) caches.delete(name);
+          });
+        }
+      } else {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/Gitab/sw.js').catch(() => {});
+        });
+      }
+    }
   })();
-</script>
-
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-  <script>hljs.highlightAll();</script>
-
-  <script>
+  </script> <script>
   document.querySelectorAll('pre code').forEach(block => {
+    const pre = block.parentNode;
+    if (!pre || pre.querySelector('.copy-btn')) return;
+
+    const copySvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
+    const okSvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+
     const btn = document.createElement('button');
     btn.className = 'copy-btn';
-
-    const icon = document.createElement('img');
-    icon.src = "/Gitab/icone/copy.svg";
-    icon.alt = 'Copy';
-    btn.appendChild(icon);
-
-    block.parentNode.insertBefore(btn, block);
+    btn.setAttribute('aria-label', 'کپی کد');
+    btn.setAttribute('title', 'کپی کد');
+    btn.setAttribute('type', 'button');
+    btn.innerHTML = copySvg;
+    pre.appendChild(btn);
 
     btn.addEventListener('click', async () => {
-      await navigator.clipboard.writeText(block.textContent);
-      btn.classList.add('copied');
-      setTimeout(() => btn.classList.remove('copied'), 1500);
-    });
-  });
-  </script>
-
-  <script>
-  document.body.dataset.page = window.location.pathname;
-
-  const menuBtn = document.querySelector(".menu-toggle");
-  const nav = document.querySelector(".nav");
-
-  if (menuBtn && nav) {
-    menuBtn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      nav.classList.toggle("show");
-    });
-
-    document.addEventListener("click", (e) => {
-      const clickedInsideNav = nav.contains(e.target);
-      const clickedMenuButton = menuBtn.contains(e.target);
-      if (!clickedInsideNav && !clickedMenuButton) {
-        nav.classList.remove("show");
+      try {
+        await navigator.clipboard.writeText(block.textContent);
+        btn.classList.add('copied');
+        btn.innerHTML = okSvg;
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          btn.innerHTML = copySvg;
+        }, 1800);
+      } catch (err) {
+        console.error('Copy failed:', err);
       }
     });
-  }
-  </script>
-
-  <script>
-    document.getElementById('y').textContent = new Date().getFullYear();
-  </script>
-  <script>
-document.getElementById("openDonate").addEventListener("click", () => {
-  document.getElementById("donateModal").style.display = "block";
-});
-document.getElementById("closeDonate").addEventListener("click", () => {
-  document.getElementById("donateModal").style.display = "none";
-});
-document.querySelectorAll(".copy-btn").forEach(btn => {
-  btn.addEventListener("click", () => {
-    navigator.clipboard.writeText(btn.dataset.copy);
-  
-    setTimeout(() => (btn.textContent = "کپی"), 2000);
   });
-});
-</script>
+  </script> <script>
+  (() => {
+    const article = document.getElementById('chapterArticle');
+    if (!article) return;
 
-</body>
-</html>
+    const progressBar = document.getElementById('readingProgressBar');
+    if (progressBar) {
+      window.addEventListener('scroll', () => {
+        const docElem = document.documentElement;
+        const totalHeight = docElem.scrollHeight - docElem.clientHeight;
+        if (totalHeight > 0) {
+          const progress = (window.pageYOffset / totalHeight) * 100;
+          progressBar.style.width = Math.min(100, Math.max(0, progress)) + '%';
+        }
+      }, { passive: true });
+    }
+
+    const btt = document.getElementById('backToTopBtn');
+    if (btt) {
+      window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 250) {
+          btt.classList.add('visible');
+        } else {
+          btt.classList.remove('visible');
+        }
+      }, { passive: true });
+
+      btt.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+
+    article.querySelectorAll('img').forEach(img => {
+      if (!img.hasAttribute('loading')) img.loading = 'lazy';
+      if (!img.hasAttribute('decoding')) img.decoding = 'async';
+      const parent = img.parentElement;
+      if (parent && parent.tagName === 'P') {
+        parent.style.textAlign = 'center';
+      }
+
+      img.addEventListener('error', function() {
+        const src = this.getAttribute('src');
+        if (src && src.includes('assets/image/')) {
+          const parts = src.split('assets/image/');
+          const corrected = '/Gitab/books/book1/assets/image/' + parts[1];
+          if (this.src !== corrected) {
+            this.src = corrected;
+          }
+        }
+      });
+    });
+
+    article.querySelectorAll('p').forEach(p => {
+      const trimmed = p.innerText.trim();
+      if (trimmed.startsWith('💡') || trimmed.startsWith('نکته:')) {
+        p.classList.add('react-callout', 'callout-tip');
+      } else if (trimmed.startsWith('⚠️') || trimmed.startsWith('هشدار:')) {
+        p.classList.add('react-callout', 'callout-warning');
+      } else if (trimmed.startsWith('📌') || trimmed.startsWith('مهم:')) {
+        p.classList.add('react-callout', 'callout-important');
+      } else if (trimmed.startsWith('🔹') || trimmed.startsWith('🔸')) {
+        p.classList.add('react-callout', 'callout-note');
+      }
+    });
+  })();
+  </script> <script type="speculationrules">{"prefetch":[{"where":{"and":[{"href_matches":"/Gitab/*"},{"not":{"href_matches":"/Gitab/downloads/*"}},{"not":{"selector_matches":"[download], [target='_blank']"}}]},"eagerness":"moderate"}]}</script> <script>
+  (() => {
+    if (window.HTMLScriptElement && HTMLScriptElement.supports && HTMLScriptElement.supports('speculationrules')) return;
+    const seen = new Set([window.location.href]);
+    let count = 0;
+    const prefetchLink = (e) => {
+      if (count >= 12) return;
+      const a = e.target && e.target.closest ? e.target.closest('header a, .chapter-single-next-nav a, .syllabus-chapter-item a, .btn-hero-read, .btn-card-read') : null;
+      if (!a || !a.href || a.hasAttribute('download') || a.target === '_blank') return;
+      if (a.origin !== window.location.origin || a.pathname.includes('/downloads/')) return;
+      const clean = a.href.split('#')[0];
+      if (!clean || seen.has(clean)) return;
+      seen.add(clean);
+      count++;
+      const l = document.createElement('link');
+      l.rel = 'prefetch';
+      l.href = clean;
+      document.head.appendChild(l);
+    };
+    document.addEventListener('pointerenter', prefetchLink, { capture: true, passive: true });
+    document.addEventListener('touchstart', prefetchLink, { capture: true, passive: true });
+  })();
+  </script></body></html>

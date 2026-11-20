@@ -384,7 +384,7 @@ Terminator.exit(99)
 
 **خروجی:**
 
-```text
+```csharp
 $ ruby event/observer.rb
 callback 1 sees 99
 callback 2 sees 99
@@ -536,7 +536,7 @@ find . -type f | xargs wc -l | sort -n | tail -5
 
 این را در دایرکتوری کتابمان اجرا کنیم و این را می‌گیریم:
 
-```text
+```csharp
   470 ./test_to_build.pml
   487 ./dbc.pml
   719 ./domain_languages.pml
@@ -550,7 +550,7 @@ find . -type f | xargs wc -l | sort -n | tail -5
 find . -type f | xargs wc -l | sort -n | tail -6 | head -5
 ```
 
-```text
+```csharp
   470 ./debug.pml
   470 ./test_to_build.pml
   487 ./dbc.pml
@@ -574,7 +574,7 @@ find . -type f | xargs wc -l | sort -n | tail -6 | head -5
 
 برای مثال، می‌خواهید وب‌سایتی برای دوستداران بازی‌های کلمه‌ای بسازید که تمام کلماتی را که می‌توان از مجموعه‌ای از حروف ساخت پیدا کند. ورودی شما در اینجا مجموعه‌ای از حروف است، و خروجی شما لیستی از کلمات سه حرفی، چهار حرفی و غیره است:
 
-```text
+```csharp
 "lvyin" is transformed to ->
 3 => ivy, lin, nil, yin
 4 => inly, liny, viny

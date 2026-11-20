@@ -1,0 +1,471 @@
+<!doctype html><html lang="fa" dir="rtl"> <head><script>
+    if (window.location.pathname.startsWith('/gitab/')) {
+      window.location.replace(window.location.pathname.replace(/^\/gitab\//i, '/Gitab/') + window.location.search + window.location.hash);
+    }
+    (() => {
+      try {
+        const t = localStorage.getItem('gitab-theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', t);
+        document.documentElement.dataset.colorMode = t;
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        document.documentElement.dataset.colorMode = 'dark';
+      }
+    })();
+  </script> <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5"> <title>۱۰۲.۲ نصب و پیکربندی لودر بوت (GRUB)</title><meta name="description" content="۱۰۲.۲ نصب و پیکربندی لودر بوت (GRUB) — مطالعه آنلاین و رایگان از کتاب «راهنمای آزمون LPIC-1 (ورژن ۵۰۰)» (LPIC-1 Study Guide (Version 500)) اثر جادی میرمیرانی با ترجمه جادی میرمیرانی در گیتاب."> <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"><meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"> <meta name="theme-color" content="#090d16"><meta name="referrer" content="strict-origin-when-cross-origin"> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https:; frame-src https://www.youtube.com https://www.youtube-nocookie.com https://maps.google.com https://www.google.com; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self';"><link rel="icon" type="image/png" href="/Gitab/favicon.png"> <link rel="canonical" href="https://hheydarian.github.io/Gitab/books/book13/Book/07/1022-install-a-boot-manager/"><link rel="alternate" hreflang="fa" href="https://hheydarian.github.io/Gitab/books/book13/Book/07/1022-install-a-boot-manager/"> <link rel="alternate" hreflang="x-default" href="https://hheydarian.github.io/Gitab/books/book13/Book/07/1022-install-a-boot-manager/"><link rel="alternate" type="text/plain" title="LLMs.txt" href="/Gitab/llms.txt"> <link rel="sitemap" type="application/xml" title="Sitemap" href="/Gitab/sitemap.xml"><meta property="og:locale" content="fa_IR"> <meta property="og:type" content="article"><meta property="og:site_name" content="گیتاب | Gitab"> <meta property="og:title" content="۱۰۲.۲ نصب و پیکربندی لودر بوت (GRUB)"><meta property="og:description" content="۱۰۲.۲ نصب و پیکربندی لودر بوت (GRUB) — مطالعه آنلاین و رایگان از کتاب «راهنمای آزمون LPIC-1 (ورژن ۵۰۰)» (LPIC-1 Study Guide (Version 500)) اثر جادی میرمیرانی با ترجمه جادی میرمیرانی در گیتاب."> <meta property="og:url" content="https://hheydarian.github.io/Gitab/books/book13/Book/07/1022-install-a-boot-manager/"><meta property="og:image" content="https://hheydarian.github.io/Gitab/images/lpic1book/Cover.jpg"> <meta property="og:image:alt" content="۱۰۲.۲ نصب و پیکربندی لودر بوت (GRUB)"><meta name="twitter:card" content="summary_large_image"> <meta name="twitter:title" content="۱۰۲.۲ نصب و پیکربندی لودر بوت (GRUB)"><meta name="twitter:description" content="۱۰۲.۲ نصب و پیکربندی لودر بوت (GRUB) — مطالعه آنلاین و رایگان از کتاب «راهنمای آزمون LPIC-1 (ورژن ۵۰۰)» (LPIC-1 Study Guide (Version 500)) اثر جادی میرمیرانی با ترجمه جادی میرمیرانی در گیتاب."> <meta name="twitter:image" content="https://hheydarian.github.io/Gitab/images/lpic1book/Cover.jpg"><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://hheydarian.github.io/Gitab/#organization","name":"گیتاب | Gitab","alternateName":"Gitab","url":"https://hheydarian.github.io/Gitab/","logo":{"@type":"ImageObject","url":"https://hheydarian.github.io/Gitab/favicon.png"},"sameAs":["https://github.com/hheydarian/Gitab"]},{"@type":"WebSite","@id":"https://hheydarian.github.io/Gitab/#website","url":"https://hheydarian.github.io/Gitab/","name":"گیتاب | Gitab","inLanguage":"fa-IR","publisher":{"@id":"https://hheydarian.github.io/Gitab/#organization"},"potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://hheydarian.github.io/Gitab/books/list-books/?q={search_term_string}"},"query-input":"required name=search_term_string"}},{"@type":"WebPage","@id":"https://hheydarian.github.io/Gitab/books/book13/Book/07/1022-install-a-boot-manager/#webpage","url":"https://hheydarian.github.io/Gitab/books/book13/Book/07/1022-install-a-boot-manager/","name":"۱۰۲.۲ نصب و پیکربندی لودر بوت (GRUB)","description":"۱۰۲.۲ نصب و پیکربندی لودر بوت (GRUB) — مطالعه آنلاین و رایگان از کتاب «راهنمای آزمون LPIC-1 (ورژن ۵۰۰)» (LPIC-1 Study Guide (Version 500)) اثر جادی میرمیرانی با ترجمه جادی میرمیرانی در گیتاب.","inLanguage":"fa-IR","isPartOf":{"@id":"https://hheydarian.github.io/Gitab/#website"}},{"@type":"TechArticle","headline":"۱۰۲.۲ نصب و پیکربندی لودر بوت (GRUB)","description":"۱۰۲.۲ نصب و پیکربندی لودر بوت (GRUB) — مطالعه آنلاین و رایگان از کتاب «راهنمای آزمون LPIC-1 (ورژن ۵۰۰)» (LPIC-1 Study Guide (Version 500)) اثر جادی میرمیرانی با ترجمه جادی میرمیرانی در گیتاب.","url":"https://hheydarian.github.io/Gitab/books/book13/Book/07/1022-install-a-boot-manager/","inLanguage":"fa-IR","isAccessibleForFree":true,"author":{"@type":"Person","name":"جادی میرمیرانی"},"translator":{"@type":"Person","name":"جادی میرمیرانی"},"isPartOf":{"@type":"Book","name":"راهنمای آزمون LPIC-1 (ورژن ۵۰۰)","alternateName":"LPIC-1 Study Guide (Version 500)","url":"https://hheydarian.github.io/Gitab/books/book13/"}}]}</script> <link rel="preload" href="/Gitab/fonts/Vazirmatn.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/Gitab/styles/main.css?v=2.4" as="style"> <link rel="preload" href="/Gitab/styles/gitab-modern.css?v=2.5" as="style"><style>@font-face{font-family:'Lalezar';src:url('/Gitab/fonts/Lalezar.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}@font-face{font-family:'Vazirmatn';src:url('/Gitab/fonts/Vazirmatn.woff2') format('woff2');font-weight:100 900;font-style:normal;font-display:swap}html,body,button,input,optgroup,select,textarea,.filter-pill{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}input::placeholder,textarea::placeholder{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}</style> <link rel="stylesheet" href="/Gitab/styles/main.css?v=2.4"><link rel="stylesheet" href="/Gitab/styles/gitab-modern.css?v=2.5"> <link rel="stylesheet" href="/Gitab/styles/vendor/github-dark.min.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="/Gitab/styles/vendor/github-dark.min.css"></noscript></head> <body><header class="header"> <div class="container nav-wrap"><a href="/Gitab/" class="brand" aria-label="صفحه اصلی گیتاب"> <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="30" height="30" decoding="async"> <span class="brand-text">Gitab</span> </a> <nav class="nav" id="mainNav"><a href="/Gitab/" >خانه</a> <a href="/Gitab/books/list-books" aria-current="page">کتاب‌ها</a> <a href="/Gitab/courses/" >دوره‌ها</a> <a href="/Gitab/translator.html" >مترجمین</a></nav> <div class="nav-actions"><button id="themeToggle" class="theme-toggle-btn" aria-label="تغییر تم" title="تغییر تم"> <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن" width="18" height="18" decoding="async" style="display:none"> <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک" width="18" height="18" decoding="async"> </button> <a class="btn-github-pill" href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" title="مشاهده سورس گیتاب در گیت‌هاب"> <img src="/Gitab/icone/github.svg" alt="GitHub" width="16" height="16" decoding="async"> <span>گیت‌هاب</span> </a> <button class="mobile-menu-btn" id="mobileMenuBtn" type="button" aria-label="باز کردن منو" aria-expanded="false"> <svg class="mob-icon-open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="4" y1="7" x2="20" y2="7"></line> <line x1="4" y1="12" x2="20" y2="12"></line> <line x1="4" y1="17" x2="14" y2="17"></line> </svg> <svg class="mob-icon-close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="18" y1="6" x2="6" y2="18"></line> <line x1="6" y1="6" x2="18" y2="18"></line> </svg> </button></div> </div><div class="mobile-drawer" id="mobileDrawer" aria-hidden="true"> <div class="mobile-drawer-inner"><div class="mobile-drawer-section-label">ناوبری سریع</div><nav class="mobile-drawer-links" aria-label="منوی موبایل"> <a href="/Gitab/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M3 10.5 12 3l9 7.5"></path> <path d="M5 9.5V20a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V9.5"></path> </svg> </span> <span class="mob-nav-text">صفحه نخست</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/books/list-books" class="mobile-drawer-link active" aria-current="page"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path> </svg> </span> <span class="mob-nav-text">کتابخانه و فهرست کتاب‌ها</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/courses/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path> <path d="M6 12v5c3 3 9 3 12 0v-5"></path> </svg> </span> <span class="mob-nav-text">دوره‌های آموزشی</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/translator.html" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path> <circle cx="9" cy="7" r="4"></circle> <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path> <path d="M16 3.13a4 4 0 0 1 0 7.75"></path> </svg> </span> <span class="mob-nav-text">مترجمین و همکاران</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> </nav><div class="mobile-drawer-divider"></div><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" class="mobile-drawer-link mobile-drawer-gh"> <span class="mob-nav-icon" aria-hidden="true"> <img src="/Gitab/icone/github.svg" alt="" width="17" height="17" loading="lazy" decoding="async"> </span> <span class="mob-nav-text">مخزن گیت‌هاب پروژه</span> <span class="mob-nav-ext" aria-hidden="true">↗</span> </a> </div></div> </header><div class="reading-progress-track"> <div class="reading-progress-fill" id="readingProgressBar"></div></div> <main class="site-main chapter-reading-page"><div class="chapter-page-wrapper"> <nav class="chapter-clean-breadcrumb" aria-label="مسیر راهنما" dir="rtl"><a href="/Gitab/">خانه</a> <span class="bc-sep" aria-hidden="true">/</span> <a href="/Gitab/books/list-books/">کتاب‌ها</a> <span class="bc-sep" aria-hidden="true">/</span> <a href="/Gitab/books/book13/"><bdi>راهنمای آزمون LPIC-1</bdi></a> <span class="bc-sep" aria-hidden="true">/</span> <span class="bc-current-leaf"><bdi>۱۰۲.۲ نصب و پیکربندی لودر بوت (GRUB)</bdi></span></nav> <article class="chapter-prose-container markdown-body" id="chapterArticle" dir="rtl"><h1>۱۰۲.۲ نصب و پیکربندی لودر بوت (GRUB)</h1><div class="callout callout-info" style="background: rgba(59, 130, 246, 0.08); border-right: 4px solid #3b82f6; padding: 16px 20px; border-radius: 8px; margin-bottom: 24px;"> <strong>خلاصه هدف آزمون:</strong> آشنایی با تنظیمات GRUB 2 در /etc/default/grub، به‌روزرسانی پیکربندی با update-grub و تعامل در صفحه بوت. </div><div class="video-container" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; border-radius: 12px; margin: 24px 0; border: 1px solid var(--g-border-dim);"> <iframe src="https://www.youtube.com/embed/G_FzcMZYDbg" title="ویدئوی آموزشی جادی برای این سرفصل" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen></iframe></div> <h2>🎯 اهداف و سرفصل‌های این بخش</h2><p>در این درسنامه موارد زیر را بررسی و مرور می‌کنیم:</p><ul> <li>مفاهیم کلیدی مورد پرسش در آزمون بین‌المللی LPIC-1</li><li>دستورات، فایل‌های پیکربندی و ابزارهای مرتبط در خط فرمان</li><li>نکات پرتکرار آزمون‌های ۱۰۱ و ۱۰۲ همراه با نمونه‌های کاربردی</li></ul> <hr><h2>📝 متن درسنامه و توضیحات تکمیلی</h2><p><strong>ضریب اهمیت در آزمون (Weight):</strong> ۲</p><p><strong>شرح هدف آزمون:</strong> داوطلبان باید بتوانند یک مدیر بوت (Boot Manager) را انتخاب، نصب و پیکربندی کنند.</p><h2>سرفصل‌های کلیدی دانش</h2><ul> <li>ارائه مسیرهای بوت جایگزین و گزینه‌های بوت پشتیبان</li><li>نصب و پیکربندی یک لودر بوت مانند GRUB Legacy</li><li>انجام تغییرات پایه پیکربندی در GRUB 2</li><li>تعامل با لودر بوت در زمان بالا آمدن سیستم</li></ul> <p>فهرست بخشی از فایل‌ها، اصطلاحات و ابزارهای کاربردی:</p><ul> <li>فایل‌های <code>menu.lst</code>، <code>grub.cfg</code> و <code>grub.conf</code></li><li>دستور <code>grub-install</code></li><li>دستور <code>grub-mkconfig</code></li><li>رکورد بوت اصلی (<code>MBR</code>)</li></ul> <h2>مروری بر فرآیند بوت</h2><p>بیشتر سیستم‌ها از <strong>BIOS</strong> یا <strong>UEFI</strong> استفاده می‌کنند. در سیستم‌های BIOS، دستگاه ابتدا یک آزمایش خودکار به نام <strong>POST</strong> (Power-On Self-Test) انجام می‌دهد و سپس فرآیند بوت را به اولین سکتور یعنی <strong>Master Boot Record (<code>MBR</code>)</strong> تحویل می‌دهد که در شیار (Cylinder) ۰، سر (Head) ۰ و سکتور ۱ از اولین دیسک قرار دارد.</p><p>فضای <code>MBR</code> فقط ۵۱۲ بایت است؛ بنابراین به یک <em>لودر بوت هوشمند</em> نیاز داریم تا بتواند مدیرهای بوت بزرگ‌تر و حتی چند سیستم‌عامل مختلف را مدیریت کند. برخی از این لودرهای بوت عبارت‌اند از: <code>LILO</code>، <code>GRUB</code> و <code>GRUB2</code>.</p><p>اگر سیستم از <strong>UEFI</strong> استفاده کند، سخت‌افزار مراحل UEFI را دنبال می‌کند. این مراحل با یک فاز امنیتی شروع شده و تا مرحله پایانی ادامه می‌یابد؛ جایی که UEFI به دنبال یک <strong>پارتیشن سیستمی EFI (<code>ESP</code>)</strong> می‌گردد که در واقع یک پارتیشن <code>FAT32</code> (معمولاً اولین پارتیشن، هرچند به پیاده‌سازی بستگی دارد) حاوی فایل‌های اجرایی PE است و آن‌ها را اجرا می‌کند.</p><p>در هر دو حالت، فایل اجرایی پیدا شده لودر بوت را استارت می‌زند. این می‌تواند یک بوت‌لودر کامل در مسیر <code>/boot/efi/</code> کامپیوتر شما باشد، یا یک لودر کوچک برای فراخوانی GRUB اصلی روی MBR، یا لودر ویندوز، یا حتی یک زنجیره بارگذاری (<strong>Chainloader</strong>).</p><blockquote> <p><strong>نکته:</strong> <strong>Chain Loading</strong> زمانی اتفاق می‌افتد که یک لودر بوت، لودر بوت دیگری را بارگذاری می‌کند. این روش معمولاً وقتی استفاده می‌شود که لودر بوت لینوکس بخواهد یک سیستم‌عامل ویندوز را بالا بیاورد.</p></blockquote> <h2>آشنایی با GRUB</h2><p>ابزار <strong>GRUB</strong> (<strong>GR</strong>and <strong>U</strong>nified <strong>B</strong>ootloader) جایگزین لودر قدیمی‌تر یعنی <code>LILO</code> شد. نسخه اول (۱) آن با نام <strong>GRUB Legacy</strong> در سال ۱۹۹۹ شروع شد و نسخه دوم (۲) آن در سال ۲۰۰۵ به عنوان یک بازنویسی کامل از نسخه ۱ آغاز به کار کرد.</p><p>گراب یک سیستم منومحور است که در آن می‌توانید انتخاب کنید کدام هسته (Kernel) یا زنجیره بوت (chainloader) اجرا شود. همچنین امکان ویرایش منوها به صورت لحظه‌ای یا دادن دستورات مستقیم از طریق خط فرمان گراب نیز وجود دارد.</p><h3>نسخه قدیمی (GRUB Legacy)</h3><p>معمولاً GRUB نسخه ۱ (در واقع نسخه ۰.۹) در مسیر <code>/boot/grub</code> نصب می‌شود. فایل پیکربندی اصلی آن <code>/boot/grub/menu.lst</code> است، اما برخی توزیع‌ها (از جمله توزیع‌های مبتنی بر RedHat) آن را به <code>/boot/grub/grub.conf</code> لینک می‌کنند.</p><p>یک نمونه فایل <code>menu.lst</code> / <code>grub.conf</code> برای GRUB Legacy شامل دو بخش است. بخش اول تنظیمات سراسری (Global) را در بر می‌گیرد و بخش دوم گزینه‌های مختلف هسته/<code>initramfs</code> یا chainloader را تعریف می‌کند.</p><p>تنظیمات سراسری عبارت‌اند از:</p><table> <thead><tr> <th style="text-align:left">تنظیم</th><th style="text-align:left">توضیحات</th></tr> </thead><tbody> <tr><td style="text-align:left"><code>#</code></td><td style="text-align:left">کامنت (توضیح؛ نادیده گرفته می‌شود)</td></tr> <tr><td style="text-align:left"><code>color</code></td><td style="text-align:left">رنگ متن و پس‌زمینه برای گزینه‌های عادی و فعال</td></tr> <tr><td style="text-align:left"><code>default</code></td><td style="text-align:left">تعیین گزینه پیش‌فرض در منوی بوت</td></tr> <tr><td style="text-align:left"><code>fallback</code></td><td style="text-align:left">در صورت شکست گزینه <code>default</code>، کدام گزینه اجرا شود</td></tr> <tr><td style="text-align:left"><code>hiddenmenu</code></td><td style="text-align:left">مخفی کردن نمایش منوی گزینه‌ها</td></tr> <tr><td style="text-align:left"><code>splashimage</code></td><td style="text-align:left">نمایش یک تصویر در پس‌زمینه منو</td></tr> <tr><td style="text-align:left"><code>timeout</code></td><td style="text-align:left">مدت زمان انتظار (به ثانیه) پیش از اجرای گزینه پیش‌فرض</td></tr> <tr><td style="text-align:left"><code>password</code></td><td style="text-align:left">امنیت مهم است! قبل از ویرایش یا بوت، این رمز عبور را می‌پرسد</td></tr> <tr><td style="text-align:left"><code>savedefault</code></td><td style="text-align:left">به خاطر سپردن آخرین گزینه‌ای که بوت شده است</td></tr> </tbody></table> <p>در بخش دوم فایل پیکربندی، این گزینه‌ها را داریم:</p><table> <thead><tr> <th style="text-align:left">تنظیم</th><th style="text-align:left">توضیحات</th></tr> </thead><tbody> <tr><td style="text-align:left"><code>title</code></td><td style="text-align:left">نام نمایشی هر گزینه در منو را تعریف می‌کند</td></tr> <tr><td style="text-align:left"><code>root</code></td><td style="text-align:left">دیسک و پارتیشنی که دایرکتوری <code>/boot</code> در آن قرار دارد؛ به فرم <code>(hddrive, partition)</code>، مثلاً <code>(hd0, 0)</code> یا <code>(hd0, msdos0)</code></td></tr> <tr><td style="text-align:left"><code>kernel</code></td><td style="text-align:left">نام فایل ایمیج هسته (Kernel) در <code>/boot</code> و پارامترهای آن</td></tr> <tr><td style="text-align:left"><code>initrd</code></td><td style="text-align:left">فایل <code>initramfs</code> در <code>/boot</code></td></tr> <tr><td style="text-align:left"><code>rootnoverify</code></td><td style="text-align:left">تعریف یک پارتیشن ریشه غیرلینوکسی (بدون تلاش گراب برای مانت کردن آن)</td></tr> <tr><td style="text-align:left"><code>chainloader</code></td><td style="text-align:left">ارجاع به فایل یا سکتوری که به عنوان لودر مرحله ۱ عمل کند (مثلاً برای بوت ویندوز)</td></tr> </tbody></table> <p>در ادامه یک نمونه واقعی از فایل پیکربندی GRUB Legacy را می‌بینید:</p><pre class="hljs"><code># grub.conf generated by anaconda
+#
+# Note that you do not have to rerun grub after making changes to this file
+# NOTICE:  You do not have a /boot partition.  This means that
+#          all kernel and initrd paths are relative to /, eg.
+#          root (hd0,5)
+#          kernel /boot/vmlinuz-version ro root=/dev/sda6
+#          initrd /boot/initrd-version.img
+#boot=/dev/sda6
+default=1
+timeout=10
+splashimage=(hd0,5)/boot/grub/splash.xpm.gz
+#hiddenmenu
+password --md5 $1$RW1VW/$4XGAklxB7/GJk0uO47Srx1
+title Upgrade to Fedora 11 (Leonidas)
+    kernel /boot/upgrade/vmlinuz preupgrade \
+      repo=hd::/var/cache/yum/preupgrade stage2=\
+      hd:UUID=8b4c62e7-2022-4288-8995-5eda92cd149b:/boot/upgrade/install.img \
+      ks=hd:UUID=8b4c62e7-2022-4288-8995-5eda92cd149b:/boot/upgrade/ks.cfg
+    initrd /boot/upgrade/initrd.img
+title Fedora (2.6.26.8-57.fc8)
+    root (hd0,5)
+    kernel /boot/vmlinuz-2.6.26.8-57.fc8 ro root=LABEL=FEDORA8 rhgb quiet
+    initrd /boot/initrd-2.6.26.8-57.fc8.img
+title Fedora (2.6.26.6-49.fc8)
+    root (hd0,5)
+    kernel /boot/vmlinuz-2.6.26.6-49.fc8 ro root=LABEL=FEDORA8 rhgb quiet
+    initrd /boot/initrd-2.6.26.6-49.fc8.img
+title GRUB Menu
+    rootnoverify (hd0,1)
+    chainloader +1
+title Windows
+    rootnoverify (hd0,0)
+    chainloader +1
+</code></pre> <h4>دستورات GRUB Legacy</h4><p>پس از ساختن تنظیمات، باید گراب را روی MBR یک دیسک نصب کنید. برای این کار می‌توانید از دو قالب مختلف استفاده نمایید:</p><pre class="hljs"><code><span class="hljs-comment"># grub-install /dev/fd0</span>
+<span class="hljs-comment"># grub-install &#x27;(fd0)&#x27;</span>
+</code></pre> <p>دقیقاً مثل هر مدیر بوت دیگری، می‌توانید گراب را روی CD، فلاپی، MBR (مثل <code>/dev/sda</code>، <code>/dev/sdb</code> و ...) یا روی یک پارتیشن خاص (مثل <code>/dev/sdb2</code>، <code>/dev/sda6</code> و ...) نصب کنید. اما اگر آن را جایی غیر از MBR نصب کنید، باید از یک <code>chainloader</code> استفاده کنید تا چرخه بوت را به سمت آن هدایت کند.</p><p>اگر در حین بالا آمدن سیستم نیاز داشتید چیزی را تغییر دهید یا مجدداً تنظیم کنید، کافی است روی گزینه مورد نظر کلید <code>e</code> را بزنید تا وارد محیط ویرایش تعاملی شوید. پس از اتمام ویرایش، کلید <strong>Enter</strong> را بزنید و برای بوت شدن کلید <code>b</code> را فشار دهید.</p><h4>تعامل با GRUB Legacy</h4><p>اگر در منوی گراب کلید <code>c</code> را بزنید، وارد <em>خط فرمان گراب</em> (<em>GRUB Command Line</em> یا <em>GRUB shell</em>) می‌شوید. در آنجا می‌توانید دستوراتی مثل <code>root</code>، <code>kernel</code> و <code>initrd</code> را تایپ کرده و سیستم را با دستور <code>boot</code> بالا بیاورید، یا با فشردن کلید <code>Esc</code> به منوی اصلی برگردید.</p><h3>نسخه مدرن (GRUB2)</h3><p>این پرکاربردترین لودر بوت در سیستم‌های امروزی است. در سیستم‌های BIOS در مسیر <code>/boot/grub/</code> یا <code>/boot/grub2/</code> نصب می‌شود و در سیستم‌های UEFI در مسیر <code>/boot/efi/EFI/distro-name/</code> (مثلاً <code>/boot/efi/EFI/fedora/</code>) قرار می‌گیرد. فایل پیکربندی GRUB2 نیز <code>grub.cfg</code> نام دارد.</p><p>در ادامه یک فایل <code>grub.cfg</code> ساده‌شده را می‌بینید:</p><pre class="hljs"><code>set default=&quot;0&quot;
+menuentry &quot;Fedora&quot; { 
+  set root=(hd0,1)
+  linux /boot/vmlinuz-5.10.0-9-arm64 ro quiet
+  initrd /boot/initrd.img-5.10.0-9-arm64
+}
+menuentry &quot;Windows&quot; {
+  chainloader (hd1,msdos2)+1
+}
+</code></pre> <p>همان‌طور که می‌بینید، GRUB2 برای پارتیشن‌ها از شماره‌گذاری به سبک لینوکس (شروع از ۱ به جای ۰ در نسخه Legacy) استفاده می‌کند؛ پس اولین پارتیشن روی اولین هارد دیسک به صورت <code>(hd0,1)</code>، یا برای پارتیشن‌های DOS به شکل <code>(hd0,msdos1)</code> و برای درایوهای GPT به شکل <code>(hd0,gpt1)</code> نمایش داده می‌شود.</p><p>در جدول زیر برخی از گزینه‌های مهم در <code>grub.cfg</code> آمده است:</p><table> <thead><tr> <th style="text-align:left">گزینه</th><th style="text-align:left">توضیحات</th></tr> </thead><tbody> <tr><td style="text-align:left"><code>menuentry</code></td><td style="text-align:left">یک گزینه جدید در منوی بوت تعریف می‌کند</td></tr> <tr><td style="text-align:left"><code>set root</code></td><td style="text-align:left">پارتیشن ریشه‌ای که دایرکتوری <code>/boot</code> در آن قرار دارد را مشخص می‌کند</td></tr> <tr><td style="text-align:left"><code>linux</code>, <code>linux16</code></td><td style="text-align:left">مسیر هسته لینوکس را در سیستم‌های BIOS مشخص می‌کند</td></tr> <tr><td style="text-align:left"><code>linuxefi</code></td><td style="text-align:left">مسیر هسته لینوکس را در سیستم‌های UEFI مشخص می‌کند</td></tr> <tr><td style="text-align:left"><code>initrd</code></td><td style="text-align:left">ایمیج <code>initramfs</code> را برای سیستم‌های BIOS مشخص می‌کند</td></tr> <tr><td style="text-align:left"><code>initrdefi</code></td><td style="text-align:left">ایمیج <code>initramfs</code> را برای سیستم‌های UEFI مشخص می‌کند</td></tr> </tbody></table> <p>و در ادامه یک نمونه واقعی از فایل <code>grub.cfg</code> را می‌بینید:</p><pre class="hljs"><code>#
+# DO NOT EDIT THIS FILE
+#
+# It is automatically generated by grub-mkconfig using templates
+# from /etc/grub.d and settings from /etc/default/grub
+#
+
+### BEGIN /etc/grub.d/00_header ###
+if [ -s $prefix/grubenv ]; then
+  set have_grubenv=true
+  load_env
+fi
+if [ &quot;${next_entry}&quot; ] ; then
+   set default=&quot;${next_entry}&quot;
+   set next_entry=
+   save_env next_entry
+   set boot_once=true
+else
+   set default=&quot;0&quot;
+fi
+
+if [ x&quot;${feature_menuentry_id}&quot; = xy ]; then
+  menuentry_id_option=&quot;--id&quot;
+else
+  menuentry_id_option=&quot;&quot;
+fi
+
+export menuentry_id_option
+
+if [ &quot;${prev_saved_entry}&quot; ]; then
+  set saved_entry=&quot;${prev_saved_entry}&quot;
+  save_env saved_entry
+  set prev_saved_entry=
+  save_env prev_saved_entry
+  set boot_once=true
+fi
+
+function savedefault {
+  if [ -z &quot;${boot_once}&quot; ]; then
+    saved_entry=&quot;${chosen}&quot;
+    save_env saved_entry
+  fi
+}
+function load_video {
+  if [ x$feature_all_video_module = xy ]; then
+    insmod all_video
+  else
+    insmod efi_gop
+    insmod efi_uga
+    insmod ieee1275_fb
+    insmod vbe
+    insmod vga
+    insmod video_bochs
+    insmod video_cirrus
+  fi
+}
+
+if [ x$feature_default_font_path = xy ] ; then
+   font=unicode
+else
+insmod part_gpt
+insmod ext2
+if [ x$feature_platform_search_hint = xy ]; then
+  search --no-floppy --fs-uuid --set=root  df2d9e14-f1e9-4b1b-95d4-0167caa2461e
+else
+  search --no-floppy --fs-uuid --set=root df2d9e14-f1e9-4b1b-95d4-0167caa2461e
+fi
+    font=&quot;/usr/share/grub/unicode.pf2&quot;
+fi
+
+if loadfont $font ; then
+  set gfxmode=auto
+  load_video
+  insmod gfxterm
+  set locale_dir=$prefix/locale
+  set lang=en_US
+  insmod gettext
+fi
+terminal_output gfxterm
+if [ &quot;${recordfail}&quot; = 1 ] ; then
+  set timeout=30
+else
+  if [ x$feature_timeout_style = xy ] ; then
+    set timeout_style=menu
+    set timeout=5
+  # Fallback normal timeout code in case the timeout_style feature is
+  # unavailable.
+  else
+    set timeout=5
+  fi
+fi
+### END /etc/grub.d/00_header ###
+
+### BEGIN /etc/grub.d/05_debian_theme ###
+insmod part_gpt
+insmod ext2
+if [ x$feature_platform_search_hint = xy ]; then
+  search --no-floppy --fs-uuid --set=root  df2d9e14-f1e9-4b1b-95d4-0167caa2461e
+else
+  search --no-floppy --fs-uuid --set=root df2d9e14-f1e9-4b1b-95d4-0167caa2461e
+fi
+insmod png
+if background_image /usr/share/desktop-base/homeworld-theme/grub/grub-4x3.png; then
+  set color_normal=white/black
+  set color_highlight=black/white
+else
+  set menu_color_normal=cyan/blue
+  set menu_color_highlight=white/blue
+fi
+### END /etc/grub.d/05_debian_theme ###
+
+### BEGIN /etc/grub.d/10_linux ###
+function gfxmode {
+	set gfxpayload=&quot;${1}&quot;
+}
+set linux_gfx_mode=
+export linux_gfx_mode
+menuentry &#x27;Debian GNU/Linux&#x27; --class debian --class gnu-linux --class gnu --class os $menuentry_id_option &#x27;gnulinux-simple-df2d9e14-f1e9-4b1b-95d4-0167caa2461e&#x27; {
+	load_video
+	insmod gzio
+	if [ x$grub_platform = xxen ]; then insmod xzio; insmod lzopio; fi
+	insmod part_gpt
+	insmod ext2
+	if [ x$feature_platform_search_hint = xy ]; then
+	  search --no-floppy --fs-uuid --set=root  df2d9e14-f1e9-4b1b-95d4-0167caa2461e
+	else
+	  search --no-floppy --fs-uuid --set=root df2d9e14-f1e9-4b1b-95d4-0167caa2461e
+	fi
+	echo	&#x27;Loading Linux 5.10.0-9-arm64 ...&#x27;
+	linux	/boot/vmlinuz-5.10.0-9-arm64 root=UUID=df2d9e14-f1e9-4b1b-95d4-0167caa2461e ro  quiet
+	echo	&#x27;Loading initial ramdisk ...&#x27;
+	initrd	/boot/initrd.img-5.10.0-9-arm64
+}
+submenu &#x27;Advanced options for Debian GNU/Linux&#x27; $menuentry_id_option &#x27;gnulinux-advanced-df2d9e14-f1e9-4b1b-95d4-0167caa2461e&#x27; {
+	menuentry &#x27;Debian GNU/Linux, with Linux 5.10.0-9-arm64&#x27; --class debian --class gnu-linux --class gnu --class os $menuentry_id_option &#x27;gnulinux-5.10.0-9-arm64-advanced-df2d9e14-f1e9-4b1b-95d4-0167caa2461e&#x27; {
+		load_video
+		insmod gzio
+		if [ x$grub_platform = xxen ]; then insmod xzio; insmod lzopio; fi
+		insmod part_gpt
+		insmod ext2
+		if [ x$feature_platform_search_hint = xy ]; then
+		  search --no-floppy --fs-uuid --set=root  df2d9e14-f1e9-4b1b-95d4-0167caa2461e
+		else
+		  search --no-floppy --fs-uuid --set=root df2d9e14-f1e9-4b1b-95d4-0167caa2461e
+		fi
+		echo	&#x27;Loading Linux 5.10.0-9-arm64 ...&#x27;
+		linux	/boot/vmlinuz-5.10.0-9-arm64 root=(hd0,1) ro  quiet
+		echo	&#x27;Loading initial ramdisk ...&#x27;
+		initrd	/boot/initrd.img-5.10.0-9-arm64
+	}
+	menuentry &#x27;Debian GNU/Linux, with Linux 5.10.0-8-arm64 (recovery mode)&#x27; --class debian --class gnu-linux --class gnu --class os $menuentry_id_option &#x27;gnulinux-5.10.0-8-arm64-recovery-df2d9e14-f1e9-4b1b-95d4-0167caa2461e&#x27; {
+		load_video
+		insmod gzio
+		if [ x$grub_platform = xxen ]; then insmod xzio; insmod lzopio; fi
+		insmod part_gpt
+		insmod ext2
+		if [ x$feature_platform_search_hint = xy ]; then
+		  search --no-floppy --fs-uuid --set=root  df2d9e14-f1e9-4b1b-95d4-0167caa2461e
+		else
+		  search --no-floppy --fs-uuid --set=root df2d9e14-f1e9-4b1b-95d4-0167caa2461e
+		fi
+		echo	&#x27;Loading Linux 5.10.0-8-arm64 ...&#x27;
+		linux	/boot/vmlinuz-5.10.0-8-arm64 root=UUID=df2d9e14-f1e9-4b1b-95d4-0167caa2461e ro single 
+		echo	&#x27;Loading initial ramdisk ...&#x27;
+		initrd	/boot/initrd.img-5.10.0-8-arm64
+	}
+}
+
+### END /etc/grub.d/10_linux ###
+
+### BEGIN /etc/grub.d/20_linux_xen ###
+
+### END /etc/grub.d/20_linux_xen ###
+
+### BEGIN /etc/grub.d/30_os-prober ###
+### END /etc/grub.d/30_os-prober ###
+
+### BEGIN /etc/grub.d/30_uefi-firmware ###
+menuentry &#x27;System setup&#x27; $menuentry_id_option &#x27;uefi-firmware&#x27; {
+	fwsetup
+}
+### END /etc/grub.d/30_uefi-firmware ###
+
+### BEGIN /etc/grub.d/40_custom ###
+# This file provides an easy way to add custom menu entries.  Simply type the
+# menu entries you want to add after this comment.  Be careful not to change
+# the &#x27;exec tail&#x27; line above.
+### END /etc/grub.d/40_custom ###
+
+### BEGIN /etc/grub.d/41_custom ###
+if [ -f  ${config_directory}/custom.cfg ]; then
+  source ${config_directory}/custom.cfg
+elif [ -z &quot;${config_directory}&quot; -a -f  $prefix/custom.cfg ]; then
+  source $prefix/custom.cfg;
+fi
+### END /etc/grub.d/41_custom ###
+</code></pre> <h4>دستورات GRUB2</h4><p>نصب گراب با دستور <code>grub-install /dev/sda</code> انجام می‌شود و بعد از تغییر فایل‌های پیکربندی، باید دستور <code>grub2-mkconfig</code> یا <code>grub-mkconfig</code> را اجرا کنید. این دستور فایل‌های تنظیمات را از <code>/etc/grub.d/</code> و <code>/etc/default/grub</code> می‌خواند و بر اساس آن‌ها فایل <code>grub.cfg</code> را تولید می‌کند. نحوه اجرای آن به این شکل است:</p><pre class="hljs"><code>grub2-mkconfig &gt; /boot/grub2/grub.cfg
+</code></pre> <p>یا:</p><pre class="hljs"><code>grub2-mkconfig -o /boot/grub2/grub.cfg
+</code></pre> <p>همچنین دستوری به نام <code>update-grub</code> وجود دارد که یک واسط ساده‌تر برای <code>grub-mkconfig</code> است و در واقع دستور <code>grub-mkconfig -o /boot/grub/grub.cfg</code> را اجرا می‌کند.</p><blockquote> <p><strong>نکته:</strong> توجه داشته باشید که در برخی توزیع‌های امروزی، به دلایل سازگاری هم دستورات <code>grub</code> و هم <code>grub2</code> موجود هستند و یکی به دیگری لینک شده است.</p></blockquote> <h4>تعامل با GRUB2</h4><p>اگر در منوی گراب کلید <code>c</code> را بزنید، وارد <em>خط فرمان گراب</em> (<em>GRUB Command Line</em> یا <em>GRUB shell</em>) می‌شوید. در آنجا می‌توانید دستوراتی مثل <code>root</code>، <code>kernel</code> (یا <code>linux</code>) و <code>initrd</code> را وارد کرده و سیستم را با <code>boot</code> بالا بیاورید، یا با کلید <code>Esc</code> به منوی بوت برگردید.</p><h3>پارامترهای بوت کرنل (Kernel Boot Parameters)</h3><p>در تنظیمات بالا دیدید که یک‌سری پارامترها را به این شکل به هسته ارسال کردیم:</p><pre class="hljs"><code>        linux   /boot/vmlinuz-5.10.0-9-arm64 root=/dev/sda1 ro  quiet
+</code></pre> <p>این خط به کرنل می‌گوید در حالت <strong>فقط‌خواندنی (<code>ro</code>)</strong> بالا بیاید و لاگ‌های زیادی را در حین بوت نمایش ندهد (<code>quiet</code>).</p><p>در جدول زیر برخی از پارامترهای پرکاربرد دیگری که می‌توانید استفاده کنید آمده است:</p><table> <thead><tr> <th style="text-align:left">پارامتر</th><th style="text-align:left">توضیحات</th></tr> </thead><tbody> <tr><td style="text-align:left"><code>console=</code></td><td style="text-align:left">تعیین کنسول خروجی سیستم</td></tr> <tr><td style="text-align:left"><code>debug</code></td><td style="text-align:left">راه‌اندازی سیستم در حالت دیباگ و نمایش جزئیات بیشتر</td></tr> <tr><td style="text-align:left"><code>init=</code></td><td style="text-align:left">اجرای یک برنامه مشخص به جای برنامه پیش‌فرض <code>init</code></td></tr> <tr><td style="text-align:left"><code>initrd=</code></td><td style="text-align:left">استفاده از این فایل <code>initrd</code> مشخص</td></tr> <tr><td style="text-align:left"><code>ro</code></td><td style="text-align:left">مانت کردن فایل‌سیستم ریشه به صورت فقط‌خواندنی (Read-only)</td></tr> <tr><td style="text-align:left"><code>rw</code></td><td style="text-align:left">مانت کردن فایل‌سیستم ریشه با دسترسی خواندن و نوشتن (Read-write)</td></tr> <tr><td style="text-align:left"><code>root=</code></td><td style="text-align:left">تعیین این مسیر یا دیسک به عنوان فایل‌سیستم ریشه</td></tr> <tr><td style="text-align:left"><code>selinux</code></td><td style="text-align:left">غیرفعال کردن <code>selinux</code> در زمان بوت</td></tr> <tr><td style="text-align:left"><code>single</code>, <code>S</code>, <code>1</code>, <code>Single</code></td><td style="text-align:left">بوت در حالت تک‌کاربره (Single-user) برای عیب‌یابی (مربوط به SysV)</td></tr> <tr><td style="text-align:left"><code>systemd.unit=</code></td><td style="text-align:left">بوت سیستم مستقیماً در این تارگت <code>systemd</code> مشخص</td></tr> </tbody></table> <hr><div class="callout callout-tip" style="background: rgba(147, 51, 234, 0.08); border-right: 4px solid #9333ea; padding: 16px 20px; border-radius: 8px; margin-top: 32px;"> <strong>🔗 نسخه اصلی به زبان انگلیسی:</strong> این درسنامه بر اساس منبع انگلیسی جادی در مخزن <a href="https://github.com/jadijadi/lpic1book/blob/master/content/1022_install_a_boot_manager.md" target="_blank" rel="noopener noreferrer">jadijadi/lpic1book</a> تدوین و سازماندهی شده است. </div></article> <nav class="chapter-single-next-nav"><a href="/Gitab/books/book13/Book/08/1023-manage-shared-libraries/" class="btn-next-chapter-action" id="nextChapterBtn" data-hub="/Gitab/books/book13/"> <span class="next-btn-text">فصل بعدی: ۱۰۲.۳ مدیریت کتابخانه‌های اشتراکی</span> <span class="next-btn-arrow">←</span> </a> </nav></div> <button class="fab-back-to-top" id="backToTopBtn" type="button" aria-label="رفتن به بالای صفحه" title="رفتن به بالا"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"> <polyline points="18 15 12 9 6 15"></polyline> </svg> </button></main> <footer class="footer-minimal"><div class="footer-container"> <div class="footer-top-row"><div class="footer-brand-side"> <a href="/Gitab/" class="footer-brand-anchor"> <img src="/Gitab/icone/logo.svg" alt="Gitab" width="28" height="28" loading="lazy" decoding="async"> <span class="footer-brand-title">گیتاب (Gitab)</span> </a> <p class="footer-tagline"> پلتفرم آزاد و مستقل برای ترجمهٔ دقیق و روان کتاب‌های مرجع مهندسی نرم‌افزار. </p></div> <div class="footer-nav-cols"><div class="footer-nav-col"> <span class="footer-nav-heading">موضوعات</span><ul class="footer-nav-list"> <li><a href="/Gitab/books/list-books/?cat=csharp">سی‌شارپ و دات‌نت</a></li><li><a href="/Gitab/books/list-books/?cat=clean-code">کد تمیز و بازآفرینی</a></li><li><a href="/Gitab/books/list-books/?cat=architecture">معماری و طراحی دامنه</a></li><li><a href="/Gitab/books/list-books/?cat=system">لینوکس و خط فرمان</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">بخش‌های سایت</span><ul class="footer-nav-list"> <li><a href="/Gitab/">صفحه اصلی</a></li><li><a href="/Gitab/books/list-books/">کتابخانه کامل</a></li><li><a href="/Gitab/courses/">دوره‌های آموزشی</a></li><li><a href="/Gitab/translator.html">تالار مترجمین</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">مشارکت و جامعه</span><ul class="footer-nav-list"> <li><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer">راهنمای همکاری در ترجمه</a></li><li><a href="https://github.com/hheydarian/Gitab/issues" target="_blank" rel="noopener noreferrer">پیشنهاد کتاب یا گزارش خطا</a></li></ul> </div></div> </div><div class="footer-bottom-line"> <span>© <span id="y">2026</span> Gitab — توسعه‌یافته برای جامعهٔ مهندسان نرم‌افزار ایرانی</span></div> </div></footer> <script>
+  (() => {
+    const root = document.documentElement;
+    const btn = document.getElementById('themeToggle');
+    const sunIcon = btn ? btn.querySelector('.icon-sun') : null;
+    const moonIcon = btn ? btn.querySelector('.icon-moon') : null;
+    const KEY = 'gitab-theme';
+
+    function updateTheme(mode) {
+      root.setAttribute('data-theme', mode);
+      root.dataset.colorMode = mode;
+      if (sunIcon && moonIcon) {
+        if (mode === 'dark') {
+          sunIcon.style.display = 'inline-block';
+          moonIcon.style.display = 'none';
+        } else {
+          sunIcon.style.display = 'none';
+          moonIcon.style.display = 'inline-block';
+        }
+      }
+    }
+
+    let saved = 'dark';
+    try { saved = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+    updateTheme(saved);
+
+    if (btn) {
+      btn.addEventListener('click', () => {
+        let current = 'dark';
+        try { current = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+        const next = current === 'dark' ? 'light' : 'dark';
+        try { localStorage.setItem(KEY, next); } catch (e) {}
+        updateTheme(next);
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      let mode = 'dark';
+      try { mode = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+      updateTheme(mode);
+      const yearSpan = document.getElementById('y');
+      if (yearSpan) yearSpan.textContent = new Date().getFullYear();
+    });
+
+    const mobBtn = document.getElementById('mobileMenuBtn');
+    const mobDrawer = document.getElementById('mobileDrawer');
+    if (mobBtn && mobDrawer) {
+      const setDrawerOpen = (open) => {
+        mobDrawer.classList.toggle('open', open);
+        mobBtn.classList.toggle('is-open', open);
+        mobBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        mobBtn.setAttribute('aria-label', open ? 'بستن منو' : 'باز کردن منو');
+        mobDrawer.setAttribute('aria-hidden', open ? 'false' : 'true');
+      };
+
+      mobBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        setDrawerOpen(!mobDrawer.classList.contains('open'));
+      });
+
+      mobDrawer.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => setDrawerOpen(false));
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && mobDrawer.classList.contains('open')) {
+          setDrawerOpen(false);
+        }
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!mobDrawer.contains(e.target) && !mobBtn.contains(e.target)) {
+          setDrawerOpen(false);
+        }
+      });
+    }
+
+    if ('serviceWorker' in navigator) {
+      const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+      if (isLocalhost) {
+        navigator.serviceWorker.getRegistrations().then(regs => {
+          for (const reg of regs) reg.unregister();
+        });
+        if ('caches' in window) {
+          caches.keys().then(names => {
+            for (const name of names) caches.delete(name);
+          });
+        }
+      } else {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/Gitab/sw.js').catch(() => {});
+        });
+      }
+    }
+  })();
+  </script> <script>
+  document.querySelectorAll('pre code').forEach(block => {
+    const pre = block.parentNode;
+    if (!pre || pre.querySelector('.copy-btn')) return;
+
+    const copySvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
+    const okSvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+
+    const btn = document.createElement('button');
+    btn.className = 'copy-btn';
+    btn.setAttribute('aria-label', 'کپی کد');
+    btn.setAttribute('title', 'کپی کد');
+    btn.setAttribute('type', 'button');
+    btn.innerHTML = copySvg;
+    pre.appendChild(btn);
+
+    btn.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(block.textContent);
+        btn.classList.add('copied');
+        btn.innerHTML = okSvg;
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          btn.innerHTML = copySvg;
+        }, 1800);
+      } catch (err) {
+        console.error('Copy failed:', err);
+      }
+    });
+  });
+  </script> <script>
+  (() => {
+    const article = document.getElementById('chapterArticle');
+    if (!article) return;
+
+    const progressBar = document.getElementById('readingProgressBar');
+    if (progressBar) {
+      window.addEventListener('scroll', () => {
+        const docElem = document.documentElement;
+        const totalHeight = docElem.scrollHeight - docElem.clientHeight;
+        if (totalHeight > 0) {
+          const progress = (window.pageYOffset / totalHeight) * 100;
+          progressBar.style.width = Math.min(100, Math.max(0, progress)) + '%';
+        }
+      }, { passive: true });
+    }
+
+    const btt = document.getElementById('backToTopBtn');
+    if (btt) {
+      window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 250) {
+          btt.classList.add('visible');
+        } else {
+          btt.classList.remove('visible');
+        }
+      }, { passive: true });
+
+      btt.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+
+    article.querySelectorAll('img').forEach(img => {
+      if (!img.hasAttribute('loading')) img.loading = 'lazy';
+      if (!img.hasAttribute('decoding')) img.decoding = 'async';
+      const parent = img.parentElement;
+      if (parent && parent.tagName === 'P') {
+        parent.style.textAlign = 'center';
+      }
+
+      img.addEventListener('error', function() {
+        const src = this.getAttribute('src');
+        if (src && src.includes('assets/image/')) {
+          const parts = src.split('assets/image/');
+          const corrected = '/Gitab/books/book13/assets/image/' + parts[1];
+          if (this.src !== corrected) {
+            this.src = corrected;
+          }
+        }
+      });
+    });
+
+    article.querySelectorAll('p').forEach(p => {
+      const trimmed = p.innerText.trim();
+      if (trimmed.startsWith('💡') || trimmed.startsWith('نکته:')) {
+        p.classList.add('react-callout', 'callout-tip');
+      } else if (trimmed.startsWith('⚠️') || trimmed.startsWith('هشدار:')) {
+        p.classList.add('react-callout', 'callout-warning');
+      } else if (trimmed.startsWith('📌') || trimmed.startsWith('مهم:')) {
+        p.classList.add('react-callout', 'callout-important');
+      } else if (trimmed.startsWith('🔹') || trimmed.startsWith('🔸')) {
+        p.classList.add('react-callout', 'callout-note');
+      }
+    });
+  })();
+  </script> <script type="speculationrules">{"prefetch":[{"where":{"and":[{"href_matches":"/Gitab/*"},{"not":{"href_matches":"/Gitab/downloads/*"}},{"not":{"selector_matches":"[download], [target='_blank']"}}]},"eagerness":"moderate"}]}</script> <script>
+  (() => {
+    if (window.HTMLScriptElement && HTMLScriptElement.supports && HTMLScriptElement.supports('speculationrules')) return;
+    const seen = new Set([window.location.href]);
+    let count = 0;
+    const prefetchLink = (e) => {
+      if (count >= 12) return;
+      const a = e.target && e.target.closest ? e.target.closest('header a, .chapter-single-next-nav a, .syllabus-chapter-item a, .btn-hero-read, .btn-card-read') : null;
+      if (!a || !a.href || a.hasAttribute('download') || a.target === '_blank') return;
+      if (a.origin !== window.location.origin || a.pathname.includes('/downloads/')) return;
+      const clean = a.href.split('#')[0];
+      if (!clean || seen.has(clean)) return;
+      seen.add(clean);
+      count++;
+      const l = document.createElement('link');
+      l.rel = 'prefetch';
+      l.href = clean;
+      document.head.appendChild(l);
+    };
+    document.addEventListener('pointerenter', prefetchLink, { capture: true, passive: true });
+    document.addEventListener('touchstart', prefetchLink, { capture: true, passive: true });
+  })();
+  </script></body></html>

@@ -1,0 +1,496 @@
+<!doctype html><html lang="fa" dir="rtl"> <head><script>
+    if (window.location.pathname.startsWith('/gitab/')) {
+      window.location.replace(window.location.pathname.replace(/^\/gitab\//i, '/Gitab/') + window.location.search + window.location.hash);
+    }
+    (() => {
+      try {
+        const t = localStorage.getItem('gitab-theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', t);
+        document.documentElement.dataset.colorMode = t;
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        document.documentElement.dataset.colorMode = 'dark';
+      }
+    })();
+  </script> <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5"> <title>۱۰۵.۳ مدیریت مقدماتی پایگاه داده SQL (سرفصل قدیمی)</title><meta name="description" content="۱۰۵.۳ مدیریت مقدماتی پایگاه داده SQL (سرفصل قدیمی) — مطالعه آنلاین و رایگان از کتاب «راهنمای آزمون LPIC-1 (ورژن ۵۰۰)» (LPIC-1 Study Guide (Version 500)) اثر جادی میرمیرانی با ترجمه جادی میرمیرانی در گیتاب."> <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"><meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"> <meta name="theme-color" content="#090d16"><meta name="referrer" content="strict-origin-when-cross-origin"> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https:; frame-src https://www.youtube.com https://www.youtube-nocookie.com https://maps.google.com https://www.google.com; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self';"><link rel="icon" type="image/png" href="/Gitab/favicon.png"> <link rel="canonical" href="https://hheydarian.github.io/Gitab/books/book13/Book/29/1053-sql-data-management/"><link rel="alternate" hreflang="fa" href="https://hheydarian.github.io/Gitab/books/book13/Book/29/1053-sql-data-management/"> <link rel="alternate" hreflang="x-default" href="https://hheydarian.github.io/Gitab/books/book13/Book/29/1053-sql-data-management/"><link rel="alternate" type="text/plain" title="LLMs.txt" href="/Gitab/llms.txt"> <link rel="sitemap" type="application/xml" title="Sitemap" href="/Gitab/sitemap.xml"><meta property="og:locale" content="fa_IR"> <meta property="og:type" content="article"><meta property="og:site_name" content="گیتاب | Gitab"> <meta property="og:title" content="۱۰۵.۳ مدیریت مقدماتی پایگاه داده SQL (سرفصل قدیمی)"><meta property="og:description" content="۱۰۵.۳ مدیریت مقدماتی پایگاه داده SQL (سرفصل قدیمی) — مطالعه آنلاین و رایگان از کتاب «راهنمای آزمون LPIC-1 (ورژن ۵۰۰)» (LPIC-1 Study Guide (Version 500)) اثر جادی میرمیرانی با ترجمه جادی میرمیرانی در گیتاب."> <meta property="og:url" content="https://hheydarian.github.io/Gitab/books/book13/Book/29/1053-sql-data-management/"><meta property="og:image" content="https://hheydarian.github.io/Gitab/images/lpic1book/Cover.jpg"> <meta property="og:image:alt" content="۱۰۵.۳ مدیریت مقدماتی پایگاه داده SQL (سرفصل قدیمی)"><meta name="twitter:card" content="summary_large_image"> <meta name="twitter:title" content="۱۰۵.۳ مدیریت مقدماتی پایگاه داده SQL (سرفصل قدیمی)"><meta name="twitter:description" content="۱۰۵.۳ مدیریت مقدماتی پایگاه داده SQL (سرفصل قدیمی) — مطالعه آنلاین و رایگان از کتاب «راهنمای آزمون LPIC-1 (ورژن ۵۰۰)» (LPIC-1 Study Guide (Version 500)) اثر جادی میرمیرانی با ترجمه جادی میرمیرانی در گیتاب."> <meta name="twitter:image" content="https://hheydarian.github.io/Gitab/images/lpic1book/Cover.jpg"><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://hheydarian.github.io/Gitab/#organization","name":"گیتاب | Gitab","alternateName":"Gitab","url":"https://hheydarian.github.io/Gitab/","logo":{"@type":"ImageObject","url":"https://hheydarian.github.io/Gitab/favicon.png"},"sameAs":["https://github.com/hheydarian/Gitab"]},{"@type":"WebSite","@id":"https://hheydarian.github.io/Gitab/#website","url":"https://hheydarian.github.io/Gitab/","name":"گیتاب | Gitab","inLanguage":"fa-IR","publisher":{"@id":"https://hheydarian.github.io/Gitab/#organization"},"potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://hheydarian.github.io/Gitab/books/list-books/?q={search_term_string}"},"query-input":"required name=search_term_string"}},{"@type":"WebPage","@id":"https://hheydarian.github.io/Gitab/books/book13/Book/29/1053-sql-data-management/#webpage","url":"https://hheydarian.github.io/Gitab/books/book13/Book/29/1053-sql-data-management/","name":"۱۰۵.۳ مدیریت مقدماتی پایگاه داده SQL (سرفصل قدیمی)","description":"۱۰۵.۳ مدیریت مقدماتی پایگاه داده SQL (سرفصل قدیمی) — مطالعه آنلاین و رایگان از کتاب «راهنمای آزمون LPIC-1 (ورژن ۵۰۰)» (LPIC-1 Study Guide (Version 500)) اثر جادی میرمیرانی با ترجمه جادی میرمیرانی در گیتاب.","inLanguage":"fa-IR","isPartOf":{"@id":"https://hheydarian.github.io/Gitab/#website"}},{"@type":"TechArticle","headline":"۱۰۵.۳ مدیریت مقدماتی پایگاه داده SQL (سرفصل قدیمی)","description":"۱۰۵.۳ مدیریت مقدماتی پایگاه داده SQL (سرفصل قدیمی) — مطالعه آنلاین و رایگان از کتاب «راهنمای آزمون LPIC-1 (ورژن ۵۰۰)» (LPIC-1 Study Guide (Version 500)) اثر جادی میرمیرانی با ترجمه جادی میرمیرانی در گیتاب.","url":"https://hheydarian.github.io/Gitab/books/book13/Book/29/1053-sql-data-management/","inLanguage":"fa-IR","isAccessibleForFree":true,"author":{"@type":"Person","name":"جادی میرمیرانی"},"translator":{"@type":"Person","name":"جادی میرمیرانی"},"isPartOf":{"@type":"Book","name":"راهنمای آزمون LPIC-1 (ورژن ۵۰۰)","alternateName":"LPIC-1 Study Guide (Version 500)","url":"https://hheydarian.github.io/Gitab/books/book13/"}}]}</script> <link rel="preload" href="/Gitab/fonts/Vazirmatn.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/Gitab/styles/main.css?v=2.4" as="style"> <link rel="preload" href="/Gitab/styles/gitab-modern.css?v=2.5" as="style"><style>@font-face{font-family:'Lalezar';src:url('/Gitab/fonts/Lalezar.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}@font-face{font-family:'Vazirmatn';src:url('/Gitab/fonts/Vazirmatn.woff2') format('woff2');font-weight:100 900;font-style:normal;font-display:swap}html,body,button,input,optgroup,select,textarea,.filter-pill{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}input::placeholder,textarea::placeholder{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}</style> <link rel="stylesheet" href="/Gitab/styles/main.css?v=2.4"><link rel="stylesheet" href="/Gitab/styles/gitab-modern.css?v=2.5"> <link rel="stylesheet" href="/Gitab/styles/vendor/github-dark.min.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="/Gitab/styles/vendor/github-dark.min.css"></noscript></head> <body><header class="header"> <div class="container nav-wrap"><a href="/Gitab/" class="brand" aria-label="صفحه اصلی گیتاب"> <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="30" height="30" decoding="async"> <span class="brand-text">Gitab</span> </a> <nav class="nav" id="mainNav"><a href="/Gitab/" >خانه</a> <a href="/Gitab/books/list-books" aria-current="page">کتاب‌ها</a> <a href="/Gitab/courses/" >دوره‌ها</a> <a href="/Gitab/translator.html" >مترجمین</a></nav> <div class="nav-actions"><button id="themeToggle" class="theme-toggle-btn" aria-label="تغییر تم" title="تغییر تم"> <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن" width="18" height="18" decoding="async" style="display:none"> <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک" width="18" height="18" decoding="async"> </button> <a class="btn-github-pill" href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" title="مشاهده سورس گیتاب در گیت‌هاب"> <img src="/Gitab/icone/github.svg" alt="GitHub" width="16" height="16" decoding="async"> <span>گیت‌هاب</span> </a> <button class="mobile-menu-btn" id="mobileMenuBtn" type="button" aria-label="باز کردن منو" aria-expanded="false"> <svg class="mob-icon-open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="4" y1="7" x2="20" y2="7"></line> <line x1="4" y1="12" x2="20" y2="12"></line> <line x1="4" y1="17" x2="14" y2="17"></line> </svg> <svg class="mob-icon-close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="18" y1="6" x2="6" y2="18"></line> <line x1="6" y1="6" x2="18" y2="18"></line> </svg> </button></div> </div><div class="mobile-drawer" id="mobileDrawer" aria-hidden="true"> <div class="mobile-drawer-inner"><div class="mobile-drawer-section-label">ناوبری سریع</div><nav class="mobile-drawer-links" aria-label="منوی موبایل"> <a href="/Gitab/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M3 10.5 12 3l9 7.5"></path> <path d="M5 9.5V20a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V9.5"></path> </svg> </span> <span class="mob-nav-text">صفحه نخست</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/books/list-books" class="mobile-drawer-link active" aria-current="page"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path> </svg> </span> <span class="mob-nav-text">کتابخانه و فهرست کتاب‌ها</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/courses/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path> <path d="M6 12v5c3 3 9 3 12 0v-5"></path> </svg> </span> <span class="mob-nav-text">دوره‌های آموزشی</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/translator.html" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path> <circle cx="9" cy="7" r="4"></circle> <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path> <path d="M16 3.13a4 4 0 0 1 0 7.75"></path> </svg> </span> <span class="mob-nav-text">مترجمین و همکاران</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> </nav><div class="mobile-drawer-divider"></div><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" class="mobile-drawer-link mobile-drawer-gh"> <span class="mob-nav-icon" aria-hidden="true"> <img src="/Gitab/icone/github.svg" alt="" width="17" height="17" loading="lazy" decoding="async"> </span> <span class="mob-nav-text">مخزن گیت‌هاب پروژه</span> <span class="mob-nav-ext" aria-hidden="true">↗</span> </a> </div></div> </header><div class="reading-progress-track"> <div class="reading-progress-fill" id="readingProgressBar"></div></div> <main class="site-main chapter-reading-page"><div class="chapter-page-wrapper"> <nav class="chapter-clean-breadcrumb" aria-label="مسیر راهنما" dir="rtl"><a href="/Gitab/">خانه</a> <span class="bc-sep" aria-hidden="true">/</span> <a href="/Gitab/books/list-books/">کتاب‌ها</a> <span class="bc-sep" aria-hidden="true">/</span> <a href="/Gitab/books/book13/"><bdi>راهنمای آزمون LPIC-1</bdi></a> <span class="bc-sep" aria-hidden="true">/</span> <span class="bc-current-leaf"><bdi>۱۰۵.۳ مدیریت مقدماتی پایگاه داده SQL (سرفصل قدیمی)</bdi></span></nav> <article class="chapter-prose-container markdown-body" id="chapterArticle" dir="rtl"><h1>۱۰۵.۳ مدیریت مقدماتی پایگاه داده SQL (سرفصل قدیمی)</h1><div class="callout callout-info" style="background: rgba(59, 130, 246, 0.08); border-right: 4px solid #3b82f6; padding: 16px 20px; border-radius: 8px; margin-bottom: 24px;"> <strong>خلاصه هدف آزمون:</strong> مرور پرس‌وجوهای ساده SELECT، INSERT و UPDATE در پایگاه‌های داده رابطه‌ای. </div><h2>🎯 اهداف و سرفصل‌های این بخش</h2><p>در این درسنامه موارد زیر را بررسی و مرور می‌کنیم:</p><ul> <li>مفاهیم کلیدی مورد پرسش در آزمون بین‌المللی LPIC-1</li><li>دستورات، فایل‌های پیکربندی و ابزارهای مرتبط در خط فرمان</li><li>نکات پرتکرار آزمون‌های ۱۰۱ و ۱۰۲ همراه با نمونه‌های کاربردی</li></ul> <hr><h2>📝 متن درسنامه و توضیحات تکمیلی</h2><p>چه شانسی! این بخش از آزمون حذف شده است. اما اگر اصرار دارید، متن قدیمی آن به این شکل بوده است:</p><h2>۱۰۵.۳ مدیریت داده‌ها با SQL</h2><div class="alert alert-danger" role="alert"> این فصل هنوز در حال تکمیل است (و از نسخه ۵۰۰ آزمون LPIC حذف شده است). برای آزمون LPIC نسخه ۵۰۰ به آن تکیه نکنید. </div><p><em>ضریب اهمیت (Weight): ۲</em></p><p>داوطلبان باید بتوانند با استفاده از دستورات پایه SQL از پایگاه‌های داده پرس‌وجو (Query) بگیرند و داده‌ها را دستکاری کنند. این هدف شامل اجرای پرس‌وجوهایی با پیوند زدن (Join) دو جدول و/یا زیرپرس‌وجوها (Subselects) نیز می‌شود.</p><h4>حوزه‌های دانش کلیدی</h4><ul> <li>استفاده از دستورات پایه SQL</li><li>انجام دستکاری‌های مقدماتی داده‌ها</li></ul> <h4>اصطلاحات و دستورات کلیدی</h4><div dir="ltr"> <ul><li><code>insert</code></li><li><code>update</code></li><li><code>select</code></li><li><code>delete</code></li><li><code>from</code></li><li><code>where</code></li><li><code>group by</code></li><li><code>order by</code></li><li><code>join</code></li></ul> </div><h3>پایگاه‌های داده (Databases)</h3><p>این بخش درباره زبان SQL است و MySQL یکی از پایگاه‌های داده متعدد SQL محسوب می‌شود. در این درس، یک پایگاه داده (Database) از تعدادی <strong>جدول (Table)</strong> تشکیل شده و هر جدول تعدادی <strong>ردیف (Row)</strong> و <strong>ستون/فیلد (Field)</strong> دارد. بیایید نگاهی بیندازیم. در این درس قرار نیست پایگاه داده <em>بسازیم</em> یا <em>طراحی</em> کنیم. فقط کافی است درک کلی از پایگاه‌های داده (پایگاه‌های داده SQL) داشته باشید و چند دستور را برای کار با آن‌ها (خواندن، پرس‌وجو گرفتن، به‌روزرسانی یا افزودن داده) بلد باشید. پایگاه داده‌ای که در این درس استفاده می‌کنم <code>lpic</code> نام دارد و دارای جدول‌هایی برای اطلاعات و دفترچه تلفن است.</p><h3>خط فرمان mysql</h3><p>همانطور که گفتم، قرار نیست خود <code>mysql</code> را اینجا یاد بگیریم؛ فقط لازم است روی <code>SQL</code> به عنوان یک زبان پرس‌وجو تمرکز کنیم. فقط همین قدر بدانید که <code>mysql</code> یک برنامه خط فرمانی است برای اتصال تعاملی به یک <code>mysql-server</code>. من به این شکل از آن استفاده می‌کنم:</p><pre class="hljs"><code>$ mysql -u root -p
+</code></pre> <p>که یعنی قرار است با کاربر (<code>u</code>) <code>root</code> وارد شوم و رمز عبور را هم وارد خواهم کرد. همچنین ممکن بود این‌طور بنویسم:</p><pre class="hljs"><code>$ mysql -u root -p mypass lpic
+</code></pre> <p>تا رمز عبور را در همان خط فرمان بدهم (که به دلایل امنیتی اصلاً ایده خوبی نیست!) و به برنامه <code>mysql</code> بگویم همان ابتدا به پایگاه داده <code>lpic</code> متصل شود.</p><h4>استفاده از یک پایگاه داده</h4><p>وقتی به سرور پایگاه داده وصل می‌شوید، باید با دستور <code>use</code> انتخاب کنید که قصد دارید دستوراتتان را روی کدام پایگاه داده اجرا کنید. معمولاً یک سرور پایگاه داده (مثلاً MySQL) می‌تواند صدها پایگاه داده مختلف داخل خودش داشته باشد که هر کدام برای یک کاربر یا برنامه است:</p><pre class="hljs"><code>jadi@funlife:~$ mysql -u root -p
+Enter password:
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 17
+Server version: 5.6.25-0ubuntu0.15.04.1 (Ubuntu)
+
+Copyright (c) 2000, 2015, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type &#x27;help;&#x27; or &#x27;\h&#x27; for help. Type &#x27;\c&#x27; to clear the current input statement.
+
+mysql&gt; SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| bad                |
+| good               |
+| lpic               |
+| mysql              |
+| performance_schema |
+| ugly               |
++--------------------+
+7 rows in set (0.00 sec)
+
+mysql&gt; USE LPIC;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql&gt; SHOW TABLES;
++----------------+
+| Tables_in_lpic |
++----------------+
+| info           |
+| phonebook      |
++----------------+
+2 rows in set (0.00 sec)
+</code></pre> <p>همانطور که می‌بینید <code>mysql</code> خیلی خوش‌برخورد است و جدول‌های دوست‌داشتنی نمایش می‌دهد! به او گفتم <code>use lpic</code> و بعد <code>show tables</code> و حالا می‌دانم که دو جدول دارم: <code>info</code> و <code>phonebook</code>.</p><blockquote> <p><strong>نکته:</strong> مرسوم است که دستورات کلیدی MySQL را با حروف بزرگ (CAPITAL LETTERS) و نام‌ها، مقادیر و بقیه چیزها را با حروف کوچک بنویسند.</p></blockquote> <h3>دستور SELECT</h3><p>کاربرد <code>SELECT</code> کاملاً واضح است! از یک جدول داده‌ها را انتخاب می‌کند. وقتی مطمئن نیستیم دنبال چه فیلدی هستیم، می‌توانیم <code>*</code> را انتخاب کنیم تا همه فیلدها را بگیریم:</p><pre class="hljs"><code>mysql&gt; SELECT * FROM phonebook;
++--------+------------------+----------------+
+| name   | email            | phone          |
++--------+------------------+----------------+
+| jadi   | jadi@jadi.net    | +9890something |
+| nasrin | nasrin@lpic.test | +9898989898    |
+| sina   | far@from.here    | +687randomnum  |
+| haale  |                  | 0935secret     |
++--------+------------------+----------------+
+4 rows in set (0.00 sec)
+</code></pre> <p>یا اینکه فقط یک فیلد مشخص را بخواهیم:</p><pre class="hljs"><code>mysql&gt; SELECT name FROM phonebook;
++--------+
+| name   |
++--------+
+| jadi   |
+| nasrin |
+| sina   |
+| haale  |
++--------+
+3 rows in set (0.00 sec)
+</code></pre> <h3>شرط WHERE</h3><p>با استفاده از <code>WHERE</code> می‌توانید به پرس‌وجوهای SQL خودتان <em>شرط</em> اضافه کنید. بیایید نگاهی به جدول دیگری که داریم بیندازیم:</p><pre class="hljs"><code>mysql&gt; SELECT * FROM info;
++--------+--------+--------+-------+
+| name   | height | weight | mood  |
++--------+--------+--------+-------+
+| jadi   |    180 |     74 | happy |
+| sina   |    175 |     81 | happy |
+| nasrin |    174 |     68 | happy |
+| mina   |    171 |     59 | sad   |
++--------+--------+--------+-------+
+4 rows in set (0.00 sec)
+</code></pre> <p>اگر بخواهیم فقط دوستان <em>خوشحال (happy)</em> خودمان را ببینیم چه؟</p><pre class="hljs"><code>mysql&gt; SELECT * FROM info WHERE mood = &#x27;happy&#x27;;
++--------+--------+--------+-------+
+| name   | height | weight | mood  |
++--------+--------+--------+-------+
+| jadi   |    180 |     74 | happy |
+| sina   |    175 |     81 | happy |
+| nasrin |    174 |     68 | happy |
++--------+--------+--------+-------+
+3 rows in set (0.00 sec)
+
+mysql&gt;
+</code></pre> <p>نگران <em>مینا</em> نباشید، بعداً او را هم خوشحال می‌کنیم؛ اما فعلاً لازم است دوستانی را ببینیم که هم خوشحالند و هم وزنشان بیشتر از ۸۰ کیلوگرم است:</p><pre class="hljs"><code>mysql&gt; SELECT * FROM info WHERE mood = &#x27;happy&#x27; AND weight &gt;= 80;
++------+--------+--------+-------+
+| name | height | weight | mood  |
++------+--------+--------+-------+
+| sina |    175 |     81 | happy |
++------+--------+--------+-------+
+3 rows in set (0.00 sec)
+</code></pre> <p>یا اگر فقط اسمش را لازم داشته باشم:</p><pre class="hljs"><code>mysql&gt; SELECT name FROM info WHERE mood = &#x27;happy&#x27; AND weight &gt;= 80;
++------+
+| name |
++------+
+| sina |
++------+
+1 row in set (0.00 sec)
+</code></pre> <h3>مرتب‌سازی با ORDER BY</h3><p>این دستور زمانی استفاده می‌شود که بخواهید داده‌ها را بر اساس یک فیلد <strong>مرتب (Sort)</strong> کنید. اینجا دارم دفترچه تلفنم را بر اساس نام افراد چک می‌کنم:</p><pre class="hljs"><code>mysql&gt; SELECT * FROM phonebook ORDER BY name;
++--------+------------------+----------------+
+| name   | email            | phone          |
++--------+------------------+----------------+
+| haale  |                  | 0935secret     |
+| jadi   | jadi@jadi.net    | +9890something |
+| nasrin | nasrin@lpic.test | +9898989898    |
+| sina   | far@from.here    | +687randomnum  |
++--------+------------------+----------------+
+4 rows in set (0.00 sec)
+</code></pre> <p>این مرتب‌سازی را می‌توان روی هر فیلدی انجام داد، از جمله اعداد:</p><pre class="hljs"><code>mysql&gt; SELECT * FROM info ORDER BY height;
++--------+--------+--------+-------+
+| name   | height | weight | mood  |
++--------+--------+--------+-------+
+| mina   |    171 |     59 | sad   |
+| nasrin |    174 |     68 | happy |
+| sina   |    175 |     81 | happy |
+| jadi   |    180 |     74 | happy |
++--------+--------+--------+-------+
+4 rows in set (0.00 sec)
+</code></pre> <h3>دسته‌بندی با GROUP BY</h3><p>این دستور خروجی را <em>گروه‌بندی (Group)</em> می‌کند. متاسفانه در نگاه اول خیلی روشن نیست. بیایید مثال اول را ببینیم:</p><pre class="hljs"><code>mysql&gt; SELECT * FROM info GROUP BY mood;
++------+--------+--------+-------+
+| name | height | weight | mood  |
++------+--------+--------+-------+
+| jadi |    180 |     74 | happy |
+| mina |    171 |     59 | sad   |
++------+--------+--------+-------+
+2 rows in set (0.00 sec)
+</code></pre> <p>دیدیم که در جدولمان فقط دو نوع <code>mood</code> داریم: <code>sad</code> و <code>happy</code>. وقتی همه فیلدها (یعنی <code>*</code>) را از این جدول با <code>GROUP BY mood</code> انتخاب می‌کنیم، SQL تمام حالت‌ها را بررسی کرده و از هر کدام فقط <strong>یکی</strong> را به ما نشان می‌دهد. از این روش می‌توان شبیه دستور <code>uniq</code> که در LPIC 101 یاد گرفتید استفاده کرد:</p><pre class="hljs"><code>mysql&gt; SELECT mood FROM info GROUP BY mood;
++-------+
+| mood  |
++-------+
+| happy |
+| sad   |
++-------+
+2 rows in set (0.00 sec)
+</code></pre> <p>که تمام <code>mood</code>های موجود در جدول را به شما می‌دهد. در دنیای واقعی این کار به تنهایی خیلی کاربردی نیست و بیشتر مواقع با <code>count</code> ترکیب می‌شود. نگاه کنید:</p><pre class="hljs"><code>mysql&gt; SELECT count(mood), mood FROM info GROUP BY mood;
++-------------+-------+
+| count(mood) | mood  |
++-------------+-------+
+|           3 | happy |
+|           1 | sad   |
++-------------+-------+
+2 rows in set (0.00 sec)
+</code></pre> <p>که می‌شمارد چند ردیف دارای آن <code>mood</code> مشخص هستند. پس من ۳ دوست خوشحال و ۱ دوست ناراحت دارم.</p><blockquote> <p><strong>نکته:</strong> دستور <code>count</code> جزو سرفصل آزمون LPIC 105.3 نیست.</p></blockquote> <h3>دستور INSERT</h3><p>یک دستور واضح دیگر. یک ردیف جدید به جدول اضافه می‌کند. فرض کنید می‌خواهم داده‌هایی به <code>phonebook</code> اضافه کنم:</p><pre class="hljs"><code>mysql&gt;  INSERT INTO phonebook (name, phone, email) VALUES (&#x27;ghasem&#x27;, &#x27;+982112345678&#x27;, &#x27;&#x27;);
+Query OK, 1 row affected (0.01 sec)
+
+mysql&gt; SELECT * FROM phonebook;
++--------+------------------+----------------+
+| name   | email            | phone          |
++--------+------------------+----------------+
+| jadi   | jadi@jadi.net    | +9890something |
+| nasrin | nasrin@lpic.test | +9898989898    |
+| sina   | far@from.here    | +687randomnum  |
+| haale  |                  | 0935secret     |
+| ghasem |                  | +982112345678  |
++--------+------------------+----------------+
+5 rows in set (0.00 sec)
+</code></pre> <h3>دستور DELETE</h3><p>خودتان می‌دانید! این دستور از یک جدول داده حذف (DELETE) می‌کند. اما خیلی مراقب باشید چه چیزی را پاک می‌کنید... اینجا <code>WHERE</code> دوست شماست:</p><pre class="hljs"><code>mysql&gt; DELETE FROM phonebook WHERE name = &#x27;ghasem&#x27;;
+Query OK, 1 row affected (0.01 sec)
+
+mysql&gt; SELECT * FROM phonebook;
++--------+------------------+----------------+
+| name   | email            | phone          |
++--------+------------------+----------------+
+| jadi   | jadi@jadi.net    | +9890something |
+| nasrin | nasrin@lpic.test | +9898989898    |
+| sina   | far@from.here    | +687randomnum  |
+| haale  |                  | 0935secret     |
++--------+------------------+----------------+
+4 rows in set (0.00 sec)
+</code></pre> <h3>دستور UPDATE</h3><p>آیا گفته بودم که SQL شبیه زبان انگلیسی ساده است؟ حق با من بود، چون الان خودتان می‌دانید <code>UPDATE</code> چه کار می‌کند! یک ردیف را به‌روزرسانی (تغییر) می‌دهد و باز هم <code>WHERE</code> دوست شماست:</p><pre class="hljs"><code>mysql&gt; SELECT * FROM phonebook;
++--------+------------------+----------------+
+| name   | email            | phone          |
++--------+------------------+----------------+
+| jadi   | jadi@jadi.net    | +9890something |
+| nasrin | nasrin@lpic.test | +9898989898    |
+| sina   | far@from.here    | +687randomnum  |
+| haale  |                  | 0935secret     |
++--------+------------------+----------------+
+4 rows in set (0.00 sec)
+
+mysql&gt; UPDATE phonebook SET  email=&#x27;haale@lpic.fake&#x27; WHERE name = &#x27;haale&#x27;;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql&gt; SELECT * FROM phonebook;
++--------+------------------+----------------+
+| name   | email            | phone          |
++--------+------------------+----------------+
+| jadi   | jadi@jadi.net    | +9890something |
+| nasrin | nasrin@lpic.test | +9898989898    |
+| sina   | far@from.here    | +687randomnum  |
+| haale  | haale@lpic.fake  | 0935secret     |
++--------+------------------+----------------+
+4 rows in set (0.00 sec)
+</code></pre> <h3>دستور JOIN</h3><p>دستور <code>JOIN</code> می‌تواند پیچیده باشد، اما خوشبختانه ما در آزمون LPIC1-Exam 102 هستیم و لازم نیست خیلی عمیق یادش بگیریم ;) <code>Join</code> دو جدول را به هم متصل/ترکیب می‌کند. فقط این را ببینید:</p><pre class="hljs"><code>mysql&gt;  SELECT * FROM phonebook JOIN info;
++--------+------------------+----------------+--------+--------+--------+-------+
+| name   | email            | phone          | name   | height | weight | mood  |
++--------+------------------+----------------+--------+--------+--------+-------+
+| jadi   | jadi@jadi.net    | +9890something | jadi   |    180 |     74 | happy |
+| nasrin | nasrin@lpic.test | +9898989898    | jadi   |    180 |     74 | happy |
+| sina   | far@from.here    | +687randomnum  | jadi   |    180 |     74 | happy |
+| haale  | haale@lpic.fake  | 0935secret     | jadi   |    180 |     74 | happy |
+| jadi   | jadi@jadi.net    | +9890something | sina   |    175 |     81 | happy |
+| nasrin | nasrin@lpic.test | +9898989898    | sina   |    175 |     81 | happy |
+| sina   | far@from.here    | +687randomnum  | sina   |    175 |     81 | happy |
+| haale  | haale@lpic.fake  | 0935secret     | sina   |    175 |     81 | happy |
+| jadi   | jadi@jadi.net    | +9890something | nasrin |    174 |     68 | happy |
+| nasrin | nasrin@lpic.test | +9898989898    | nasrin |    174 |     68 | happy |
+| sina   | far@from.here    | +687randomnum  | nasrin |    174 |     68 | happy |
+| haale  | haale@lpic.fake  | 0935secret     | nasrin |    174 |     68 | happy |
+| jadi   | jadi@jadi.net    | +9890something | mina   |    171 |     59 | sad   |
+| nasrin | nasrin@lpic.test | +9898989898    | mina   |    171 |     59 | sad   |
+| sina   | far@from.here    | +687randomnum  | mina   |    171 |     59 | sad   |
+| haale  | haale@lpic.fake  | 0935secret     | mina   |    171 |     59 | sad   |
++--------+------------------+----------------+--------+--------+--------+-------+
+16 rows in set (0.00 sec)
+</code></pre> <p>تک‌تک ردیف‌های جدول اول (<code>phonebook</code>) جلوی تمام ردیف‌های جدول دوم (<code>info</code>) کپی شده‌اند. <em>هنوز</em> خیلی کاربردی نیست. زمانی کاربردی می‌شود که یک <em>فیلد مشترک</em> معرفی کنید یا بگویید جدول‌ها را بر اساس یک شرط خاص به هم <code>JOIN</code> کند؛ اینجاست که جادو اتفاق می‌افتد:</p><pre class="hljs"><code>mysql&gt; SELECT * FROM phonebook JOIN info ON phonebook.name = info.name;
++--------+------------------+----------------+--------+--------+--------+-------+
+| name   | email            | phone          | name   | height | weight | mood  |
++--------+------------------+----------------+--------+--------+--------+-------+
+| jadi   | jadi@jadi.net    | +9890something | jadi   |    180 |     74 | happy |
+| sina   | far@from.here    | +687randomnum  | sina   |    175 |     81 | happy |
+| nasrin | nasrin@lpic.test | +9898989898    | nasrin |    174 |     68 | happy |
++--------+------------------+----------------+--------+--------+--------+-------+
+3 rows in set (0.00 sec)
+</code></pre> <p>عالی شد! حالا فهرست دوستانم، حال‌وهوایشان و شماره تلفن‌هایشان را با هم دارم! فرض کنید حوصله‌ام سر رفته و باید به یک دوست باحال زنگ بزنم:</p><pre class="hljs"><code>mysql&gt; SELECT phonebook.name, phone, mood FROM phonebook JOIN info ON phonebook.name = info.name WHERE mood = &#x27;happy&#x27;;
++--------+----------------+-------+
+| name   | phone          | mood  |
++--------+----------------+-------+
+| jadi   | +9890something | happy |
+| sina   | +687randomnum  | happy |
+| nasrin | +9898989898    | happy |
++--------+----------------+-------+
+3 rows in set (0.00 sec)
+</code></pre> <blockquote><p><strong>نکته:</strong> هر دو جدول یک فیلد به نام <code>name</code> دارند، بنابراین مجبور شدم از <code>phonebook.name</code> استفاده کنم تا به SQL بگویم کدام <code>name</code> را می‌خواهم نمایش دهد.</p></blockquote> <p>طبیعتاً می‌توانیم معیارهای بیشتری هم اضافه کنیم و مثلاً با کسی بیرون برویم که قدش کوتاه‌تر از ۱۷۵ سانتی‌متر است:</p><pre class="hljs"><code>mysql&gt; SELECT phonebook.name, phone, mood FROM phonebook JOIN info ON phonebook.name = info.name AND height &lt; 175;
++--------+-------------+-------+
+| name   | phone       | mood  |
++--------+-------------+-------+
+| nasrin | +9898989898 | happy |
++--------+-------------+-------+
+1 row in set (0.00 sec)
+</code></pre> <p>جالب بود، نه؟ ولی هنوز کارمان تمام نشده. من دوست ندارم دوستان ناراحت داشته باشم و الان یکی دارم؛ بیایید او را هم خوشحال کنیم!</p><pre class="hljs"><code>mysql&gt; SELECT * FROM info WHERE mood = &#x27;sad&#x27;;
++------+--------+--------+------+
+| name | height | weight | mood |
++------+--------+--------+------+
+| mina |    171 |     59 | sad  |
++------+--------+--------+------+
+1 row in set (0.01 sec)
+
+mysql&gt; UPDATE info SET mood = &#x27;happy&#x27; WHERE name = &#x27;mina&#x27;;
+Query OK, 0 rows affected (0.02 sec)
+Rows matched: 1  Changed: 0  Warnings: 0
+
+mysql&gt; SELECT * FROM info WHERE mood = &#x27;sad&#x27;;                                   
+Empty set (0.00 sec)
+
+mysql&gt; SELECT * FROM info;
++--------+--------+--------+-------+
+| name   | height | weight | mood  |
++--------+--------+--------+-------+
+| jadi   |    180 |     74 | happy |
+| sina   |    175 |     81 | happy |
+| nasrin |    174 |     68 | happy |
+| mina   |    171 |     59 | happy |
++--------+--------+--------+-------+
+4 rows in set (0.00 sec)
+</code></pre> <p>خیلی راحت بود. دستور آخر از این هم راحت‌تر است:</p><h3>دستور <code>quit</code></h3><pre class="hljs"><code>mysql&gt; quit
+Bye
+jadi@funlife:~$
+</code></pre> <hr><div class="callout callout-tip" style="background: rgba(147, 51, 234, 0.08); border-right: 4px solid #9333ea; padding: 16px 20px; border-radius: 8px; margin-top: 32px;"> <strong>🔗 نسخه اصلی به زبان انگلیسی:</strong> این درسنامه بر اساس منبع انگلیسی جادی در مخزن <a href="https://github.com/jadijadi/lpic1book/blob/master/content/1053_sql_data_management.md" target="_blank" rel="noopener noreferrer">jadijadi/lpic1book</a> تدوین و سازماندهی شده است. </div></article> <nav class="chapter-single-next-nav"><a href="/Gitab/books/book13/Book/30/1061-install-and-configure-x11/" class="btn-next-chapter-action" id="nextChapterBtn" data-hub="/Gitab/books/book13/"> <span class="next-btn-text">فصل بعدی: ۱۰۶.۱ نصب و پیکربندی سیستم پنجره‌ای X11</span> <span class="next-btn-arrow">←</span> </a> </nav></div> <button class="fab-back-to-top" id="backToTopBtn" type="button" aria-label="رفتن به بالای صفحه" title="رفتن به بالا"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"> <polyline points="18 15 12 9 6 15"></polyline> </svg> </button></main> <footer class="footer-minimal"><div class="footer-container"> <div class="footer-top-row"><div class="footer-brand-side"> <a href="/Gitab/" class="footer-brand-anchor"> <img src="/Gitab/icone/logo.svg" alt="Gitab" width="28" height="28" loading="lazy" decoding="async"> <span class="footer-brand-title">گیتاب (Gitab)</span> </a> <p class="footer-tagline"> پلتفرم آزاد و مستقل برای ترجمهٔ دقیق و روان کتاب‌های مرجع مهندسی نرم‌افزار. </p></div> <div class="footer-nav-cols"><div class="footer-nav-col"> <span class="footer-nav-heading">موضوعات</span><ul class="footer-nav-list"> <li><a href="/Gitab/books/list-books/?cat=csharp">سی‌شارپ و دات‌نت</a></li><li><a href="/Gitab/books/list-books/?cat=clean-code">کد تمیز و بازآفرینی</a></li><li><a href="/Gitab/books/list-books/?cat=architecture">معماری و طراحی دامنه</a></li><li><a href="/Gitab/books/list-books/?cat=system">لینوکس و خط فرمان</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">بخش‌های سایت</span><ul class="footer-nav-list"> <li><a href="/Gitab/">صفحه اصلی</a></li><li><a href="/Gitab/books/list-books/">کتابخانه کامل</a></li><li><a href="/Gitab/courses/">دوره‌های آموزشی</a></li><li><a href="/Gitab/translator.html">تالار مترجمین</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">مشارکت و جامعه</span><ul class="footer-nav-list"> <li><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer">راهنمای همکاری در ترجمه</a></li><li><a href="https://github.com/hheydarian/Gitab/issues" target="_blank" rel="noopener noreferrer">پیشنهاد کتاب یا گزارش خطا</a></li></ul> </div></div> </div><div class="footer-bottom-line"> <span>© <span id="y">2026</span> Gitab — توسعه‌یافته برای جامعهٔ مهندسان نرم‌افزار ایرانی</span></div> </div></footer> <script>
+  (() => {
+    const root = document.documentElement;
+    const btn = document.getElementById('themeToggle');
+    const sunIcon = btn ? btn.querySelector('.icon-sun') : null;
+    const moonIcon = btn ? btn.querySelector('.icon-moon') : null;
+    const KEY = 'gitab-theme';
+
+    function updateTheme(mode) {
+      root.setAttribute('data-theme', mode);
+      root.dataset.colorMode = mode;
+      if (sunIcon && moonIcon) {
+        if (mode === 'dark') {
+          sunIcon.style.display = 'inline-block';
+          moonIcon.style.display = 'none';
+        } else {
+          sunIcon.style.display = 'none';
+          moonIcon.style.display = 'inline-block';
+        }
+      }
+    }
+
+    let saved = 'dark';
+    try { saved = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+    updateTheme(saved);
+
+    if (btn) {
+      btn.addEventListener('click', () => {
+        let current = 'dark';
+        try { current = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+        const next = current === 'dark' ? 'light' : 'dark';
+        try { localStorage.setItem(KEY, next); } catch (e) {}
+        updateTheme(next);
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      let mode = 'dark';
+      try { mode = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+      updateTheme(mode);
+      const yearSpan = document.getElementById('y');
+      if (yearSpan) yearSpan.textContent = new Date().getFullYear();
+    });
+
+    const mobBtn = document.getElementById('mobileMenuBtn');
+    const mobDrawer = document.getElementById('mobileDrawer');
+    if (mobBtn && mobDrawer) {
+      const setDrawerOpen = (open) => {
+        mobDrawer.classList.toggle('open', open);
+        mobBtn.classList.toggle('is-open', open);
+        mobBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        mobBtn.setAttribute('aria-label', open ? 'بستن منو' : 'باز کردن منو');
+        mobDrawer.setAttribute('aria-hidden', open ? 'false' : 'true');
+      };
+
+      mobBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        setDrawerOpen(!mobDrawer.classList.contains('open'));
+      });
+
+      mobDrawer.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => setDrawerOpen(false));
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && mobDrawer.classList.contains('open')) {
+          setDrawerOpen(false);
+        }
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!mobDrawer.contains(e.target) && !mobBtn.contains(e.target)) {
+          setDrawerOpen(false);
+        }
+      });
+    }
+
+    if ('serviceWorker' in navigator) {
+      const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+      if (isLocalhost) {
+        navigator.serviceWorker.getRegistrations().then(regs => {
+          for (const reg of regs) reg.unregister();
+        });
+        if ('caches' in window) {
+          caches.keys().then(names => {
+            for (const name of names) caches.delete(name);
+          });
+        }
+      } else {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/Gitab/sw.js').catch(() => {});
+        });
+      }
+    }
+  })();
+  </script> <script>
+  document.querySelectorAll('pre code').forEach(block => {
+    const pre = block.parentNode;
+    if (!pre || pre.querySelector('.copy-btn')) return;
+
+    const copySvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
+    const okSvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+
+    const btn = document.createElement('button');
+    btn.className = 'copy-btn';
+    btn.setAttribute('aria-label', 'کپی کد');
+    btn.setAttribute('title', 'کپی کد');
+    btn.setAttribute('type', 'button');
+    btn.innerHTML = copySvg;
+    pre.appendChild(btn);
+
+    btn.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(block.textContent);
+        btn.classList.add('copied');
+        btn.innerHTML = okSvg;
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          btn.innerHTML = copySvg;
+        }, 1800);
+      } catch (err) {
+        console.error('Copy failed:', err);
+      }
+    });
+  });
+  </script> <script>
+  (() => {
+    const article = document.getElementById('chapterArticle');
+    if (!article) return;
+
+    const progressBar = document.getElementById('readingProgressBar');
+    if (progressBar) {
+      window.addEventListener('scroll', () => {
+        const docElem = document.documentElement;
+        const totalHeight = docElem.scrollHeight - docElem.clientHeight;
+        if (totalHeight > 0) {
+          const progress = (window.pageYOffset / totalHeight) * 100;
+          progressBar.style.width = Math.min(100, Math.max(0, progress)) + '%';
+        }
+      }, { passive: true });
+    }
+
+    const btt = document.getElementById('backToTopBtn');
+    if (btt) {
+      window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 250) {
+          btt.classList.add('visible');
+        } else {
+          btt.classList.remove('visible');
+        }
+      }, { passive: true });
+
+      btt.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+
+    article.querySelectorAll('img').forEach(img => {
+      if (!img.hasAttribute('loading')) img.loading = 'lazy';
+      if (!img.hasAttribute('decoding')) img.decoding = 'async';
+      const parent = img.parentElement;
+      if (parent && parent.tagName === 'P') {
+        parent.style.textAlign = 'center';
+      }
+
+      img.addEventListener('error', function() {
+        const src = this.getAttribute('src');
+        if (src && src.includes('assets/image/')) {
+          const parts = src.split('assets/image/');
+          const corrected = '/Gitab/books/book13/assets/image/' + parts[1];
+          if (this.src !== corrected) {
+            this.src = corrected;
+          }
+        }
+      });
+    });
+
+    article.querySelectorAll('p').forEach(p => {
+      const trimmed = p.innerText.trim();
+      if (trimmed.startsWith('💡') || trimmed.startsWith('نکته:')) {
+        p.classList.add('react-callout', 'callout-tip');
+      } else if (trimmed.startsWith('⚠️') || trimmed.startsWith('هشدار:')) {
+        p.classList.add('react-callout', 'callout-warning');
+      } else if (trimmed.startsWith('📌') || trimmed.startsWith('مهم:')) {
+        p.classList.add('react-callout', 'callout-important');
+      } else if (trimmed.startsWith('🔹') || trimmed.startsWith('🔸')) {
+        p.classList.add('react-callout', 'callout-note');
+      }
+    });
+  })();
+  </script> <script type="speculationrules">{"prefetch":[{"where":{"and":[{"href_matches":"/Gitab/*"},{"not":{"href_matches":"/Gitab/downloads/*"}},{"not":{"selector_matches":"[download], [target='_blank']"}}]},"eagerness":"moderate"}]}</script> <script>
+  (() => {
+    if (window.HTMLScriptElement && HTMLScriptElement.supports && HTMLScriptElement.supports('speculationrules')) return;
+    const seen = new Set([window.location.href]);
+    let count = 0;
+    const prefetchLink = (e) => {
+      if (count >= 12) return;
+      const a = e.target && e.target.closest ? e.target.closest('header a, .chapter-single-next-nav a, .syllabus-chapter-item a, .btn-hero-read, .btn-card-read') : null;
+      if (!a || !a.href || a.hasAttribute('download') || a.target === '_blank') return;
+      if (a.origin !== window.location.origin || a.pathname.includes('/downloads/')) return;
+      const clean = a.href.split('#')[0];
+      if (!clean || seen.has(clean)) return;
+      seen.add(clean);
+      count++;
+      const l = document.createElement('link');
+      l.rel = 'prefetch';
+      l.href = clean;
+      document.head.appendChild(l);
+    };
+    document.addEventListener('pointerenter', prefetchLink, { capture: true, passive: true });
+    document.addEventListener('touchstart', prefetchLink, { capture: true, passive: true });
+  })();
+  </script></body></html>

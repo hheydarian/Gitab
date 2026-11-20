@@ -1,263 +1,62 @@
-
-
-<!doctype html>
-<html lang="fa" dir="rtl">
-<head>
-  <meta charset="utf-8">
-  <link rel="icon" type="image/png" href="/Gitab/favicon.png">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>بازنگری کد C# – پیاده‌سازی الگوهای طراحی</title>
-  <meta name="description" content="ترجمه‌های فارسی کتاب‌های فنی — سریع، مینیمال و قابل اتکا.">
-
-  <!-- استایل‌ها -->
-  <link rel="stylesheet" href="/Gitab/styles/main.css">
-  <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
-
-  <style>
-  @font-face {
-    font-family: 'Vazir';
-    src: url('/Gitab/fonts/Vazir-FD-WOL.ttf') format('truetype');
-    font-display: swap;
-  }
-  @font-face {
-    font-family: "Lalezar";
-    src: url('fonts/Lalezar.ttf') format('truetype');
-    font-display: swap;
-}
-  body {
-    font-family: 'Vazir', sans-serif;
-  }
-  </style>
-</head>
-
-<body>
-  <!-- هدر مشترک -->
-  <header class="header">
-    <div class="container nav-wrap">
-      <a href="/Gitab/" class="brand">
-        <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="26" height="26">
-        <span>Gitab</span>
-      </a>
-
-       <nav class="nav">
-         <a href="/Gitab/" >خانه</a>
-         <a href="/Gitab/books/list-books" >کتاب‌ها</a>
-         <a href="/Gitab/giter.html" >دوره ها</a>
-          <!-- 
-         <a href="/Gitab/translator.html" >مترجمین</a>
-           -->
-       </nav>
-
-      <div class="nav-actions">
-        <button id="themeToggle" class="icon-btn theme-btn" data-icon="moon" aria-label="تغییر تم">
-          <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن">
-          <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک">
-        </button>
-
-        <a class="icon-btn" href="https://github.com/hheydarian/Gitab" target="_blank" title="GitHub">
-          <img src="/Gitab/icone/github.svg" alt="GitHub">
-        </a>
-
-        <!-- دکمه منو برای موبایل -->
-        <button class="menu-toggle" aria-label="منو">
-          <img src="/Gitab/icone/menu.svg" alt="menu">
-        </button>
-      </div>
-    </div>
-  </header>
-
-  
-  <main class="site-main book-page">
-    <h1>فصل چهاردهم:  بازنگری کد C# – پیاده‌سازی الگوهای طراحی 🛠️</h1>
-<p>نیمی از نبرد در برنامه‌نویسی <strong>کد تمیز</strong> در پیاده‌سازی و استفاده صحیح از <strong>الگوهای طراحی</strong> نهفته است. خود <strong>الگوهای طراحی</strong> نیز می‌توانند به <strong>Code Smell</strong> تبدیل شوند. یک <strong>الگوی طراحی</strong> زمانی به <strong>Code Smell</strong> تبدیل می‌شود که برای چیزی که به‌سادگی قابل پیاده‌سازی است، بیش از حد مهندسی شود.</p>
-<p>شما پیش‌تر استفاده از <strong>الگوهای طراحی</strong> را در نوشتن کد تمیز و بازنگری <strong>Code Smell</strong>ها در فصل‌های قبلی این کتاب مشاهده کرده‌اید. به‌طور مشخص، ما <strong>الگوی Adapter</strong>، <strong>Decorator</strong> و <strong>Proxy</strong> را پیاده‌سازی کردیم. این الگوها به روشی درست پیاده‌سازی شدند تا وظیفه موردنظر را انجام دهند. آن‌ها ساده نگه داشته شدند و مطمئناً کد را پیچیده نکردند. بنابراین، وقتی برای هدف مناسب خود استفاده شوند، <strong>الگوهای طراحی</strong> واقعاً در حذف <strong>Code Smell</strong>ها مفید هستند و کد شما را تمیز، شفاف و قابل نگهداری می‌کنند. ✨</p>
-<p>در این فصل، به <strong>الگوهای طراحی Gang of Four (GoF)</strong> در سه دسته <strong>Creational (ایجادشی)</strong>، <strong>Structural (ساختاری)</strong> و <strong>Behavioral (رفتاری)</strong> می‌پردازیم. <strong>الگوهای طراحی</strong> قوانین سخت و ثابتی ندارند و لازم نیست پیاده‌سازی آن‌ها را بیش از حد سختگیرانه دنبال کنید. اما داشتن نمونه‌های کد می‌تواند به شما کمک کند تا از <strong>دانش نظری</strong> به <strong>مهارت عملی لازم برای پیاده‌سازی و استفاده صحیح از الگوها</strong> برسید. 🧩</p>
-<p>در این فصل، مباحث زیر را پوشش خواهیم داد:</p>
-<ol>
-<li>پیاده‌سازی <strong>الگوهای طراحی Creational</strong></li>
-<li>پیاده‌سازی <strong>الگوهای طراحی Structural</strong></li>
-<li>مرور کلی <strong>الگوهای طراحی Behavioral</strong></li>
-</ol>
-<hr>
-<h4>مهارت‌هایی که در پایان این فصل کسب خواهید کرد</h4>
-<ul>
-<li>توانایی <strong>درک، توصیف و برنامه‌نویسی</strong> انواع <strong>الگوهای طراحی Creational</strong></li>
-<li>توانایی <strong>درک، توصیف و برنامه‌نویسی</strong> انواع <strong>الگوهای طراحی Structural</strong></li>
-<li>درک کلی از <strong>الگوهای طراحی Behavioral</strong></li>
-</ul>
-<p>ما مرور خود بر <strong>الگوهای طراحی GoF</strong> را با بررسی <strong>الگوهای Creational</strong> آغاز می‌کنیم. 🚀</p>
-<hr>
-<h3>پیش‌نیازهای فنی 💻</h3>
-<ul>
-<li><strong>Visual Studio 2019</strong></li>
-<li>یک پروژه <strong>Console Application با .NET Framework در Visual Studio 2019</strong></li>
-<li>سورس کامل این فصل: <a href="https://github.com/PacktPublishing/Clean-Code-in-C-/tree/master/CH14/CH14_DesignPatterns">GitHub CH14_DesignPatterns</a></li>
-</ul>
-<hr>
-<h3>پیاده‌سازی الگوهای Creational 🏗️</h3>
-<p>از دید برنامه‌نویس، وقتی <strong>ایجاد اشیاء (Object Creation)</strong> انجام می‌دهیم، از <strong>الگوهای طراحی Creational</strong> استفاده می‌کنیم. انتخاب الگو بستگی به <strong>وظیفه موردنظر</strong> دارد. پنج <strong>الگوی طراحی Creational</strong> وجود دارد:</p>
-<ol>
-<li><strong>Singleton</strong>: این الگو تضمین می‌کند که تنها <strong>یک نمونه (Instance)</strong> از یک کلاس در سطح برنامه وجود داشته باشد.</li>
-<li><strong>Factory Method</strong>: از این الگو برای ایجاد اشیاء بدون استفاده مستقیم از کلاس آن‌ها استفاده می‌شود.</li>
-<li><strong>Abstract Factory</strong>: بدون مشخص کردن کلاس‌های مشخص، گروه‌هایی از اشیاء مرتبط یا وابسته توسط <strong>Abstract Factory</strong> ایجاد می‌شوند.</li>
-<li><strong>Prototype</strong>: نوع نمونه اولیه (Prototype) را مشخص کرده و سپس کپی‌هایی از آن ایجاد می‌کند.</li>
-<li><strong>Builder</strong>: ساخت شیء را از نمایش آن جدا می‌کند.</li>
-</ol>
-<p>حال، پیاده‌سازی هر یک از این الگوها را آغاز می‌کنیم، ابتدا با <strong>الگوی Singleton</strong>. 🟢</p>
-<hr>
-<h3>پیاده‌سازی الگوی Singleton 🔑</h3>
-<p><strong>الگوی Singleton</strong> تنها اجازه می‌دهد که <strong>یک نمونه از کلاس</strong> وجود داشته باشد و دسترسی <strong>سراسری</strong> به آن امکان‌پذیر باشد. این الگو زمانی استفاده می‌شود که تمام عملیات در یک سیستم باید توسط <strong>دقیقاً یک شیء</strong> هماهنگ شوند:</p>
-<div align="center">
-<p><img src="../../../assets/image/14/Table%2014-1.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<p>شرکت‌کننده در این الگو <strong>Singleton</strong> است — کلاسی که مسئول مدیریت <strong>نمونه (Instance)</strong> خودش است و تضمین می‌کند که تنها یک نمونه از آن در کل سیستم اجرا شود.</p>
-<p>حال قصد داریم <strong>الگوی Singleton</strong> را پیاده‌سازی کنیم:</p>
-<hr>
-<ol>
-<li>یک پوشه با نام <strong>Singleton</strong> در پوشه <strong>CreationalDesignPatterns</strong> ایجاد کنید.</li>
-<li>سپس یک کلاس با نام <strong>Singleton</strong> اضافه کنید:</li>
-</ol>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Singleton</span> {
+<!doctype html><html lang="fa" dir="rtl"> <head><script>
+    if (window.location.pathname.startsWith('/gitab/')) {
+      window.location.replace(window.location.pathname.replace(/^\/gitab\//i, '/Gitab/') + window.location.search + window.location.hash);
+    }
+    (() => {
+      try {
+        const t = localStorage.getItem('gitab-theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', t);
+        document.documentElement.dataset.colorMode = t;
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        document.documentElement.dataset.colorMode = 'dark';
+      }
+    })();
+  </script> <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5"> <title>بازنگری کد C# – پیاده‌سازی الگوهای طراحی</title><meta name="description" content="بازنگری کد C# – پیاده‌سازی الگوهای طراحی — مطالعه آنلاین و رایگان از کتاب «کدنویسی تمیز در سی‌شارپ» (Clean Code in C#) اثر Jason Alls با ترجمه حامد حیدریان در گیتاب."> <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"><meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"> <meta name="theme-color" content="#090d16"><meta name="referrer" content="strict-origin-when-cross-origin"> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https:; frame-src https://www.youtube.com https://www.youtube-nocookie.com https://maps.google.com https://www.google.com; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self';"><link rel="icon" type="image/png" href="/Gitab/favicon.png"> <link rel="canonical" href="https://hheydarian.github.io/Gitab/books/book2/Book/14/Refactoring-CSharp-Code-Implementing-Design-Patterns/"><link rel="alternate" hreflang="fa" href="https://hheydarian.github.io/Gitab/books/book2/Book/14/Refactoring-CSharp-Code-Implementing-Design-Patterns/"> <link rel="alternate" hreflang="x-default" href="https://hheydarian.github.io/Gitab/books/book2/Book/14/Refactoring-CSharp-Code-Implementing-Design-Patterns/"><link rel="alternate" type="text/plain" title="LLMs.txt" href="/Gitab/llms.txt"> <link rel="sitemap" type="application/xml" title="Sitemap" href="/Gitab/sitemap.xml"><meta property="og:locale" content="fa_IR"> <meta property="og:type" content="article"><meta property="og:site_name" content="گیتاب | Gitab"> <meta property="og:title" content="بازنگری کد C# – پیاده‌سازی الگوهای طراحی"><meta property="og:description" content="بازنگری کد C# – پیاده‌سازی الگوهای طراحی — مطالعه آنلاین و رایگان از کتاب «کدنویسی تمیز در سی‌شارپ» (Clean Code in C#) اثر Jason Alls با ترجمه حامد حیدریان در گیتاب."> <meta property="og:url" content="https://hheydarian.github.io/Gitab/books/book2/Book/14/Refactoring-CSharp-Code-Implementing-Design-Patterns/"><meta property="og:image" content="https://hheydarian.github.io/Gitab/images/clean-code-csharp/Cover.jpg"> <meta property="og:image:alt" content="بازنگری کد C# – پیاده‌سازی الگوهای طراحی"><meta name="twitter:card" content="summary_large_image"> <meta name="twitter:title" content="بازنگری کد C# – پیاده‌سازی الگوهای طراحی"><meta name="twitter:description" content="بازنگری کد C# – پیاده‌سازی الگوهای طراحی — مطالعه آنلاین و رایگان از کتاب «کدنویسی تمیز در سی‌شارپ» (Clean Code in C#) اثر Jason Alls با ترجمه حامد حیدریان در گیتاب."> <meta name="twitter:image" content="https://hheydarian.github.io/Gitab/images/clean-code-csharp/Cover.jpg"><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://hheydarian.github.io/Gitab/#organization","name":"گیتاب | Gitab","alternateName":"Gitab","url":"https://hheydarian.github.io/Gitab/","logo":{"@type":"ImageObject","url":"https://hheydarian.github.io/Gitab/favicon.png"},"sameAs":["https://github.com/hheydarian/Gitab"]},{"@type":"WebSite","@id":"https://hheydarian.github.io/Gitab/#website","url":"https://hheydarian.github.io/Gitab/","name":"گیتاب | Gitab","inLanguage":"fa-IR","publisher":{"@id":"https://hheydarian.github.io/Gitab/#organization"},"potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://hheydarian.github.io/Gitab/books/list-books/?q={search_term_string}"},"query-input":"required name=search_term_string"}},{"@type":"WebPage","@id":"https://hheydarian.github.io/Gitab/books/book2/Book/14/Refactoring-CSharp-Code-Implementing-Design-Patterns/#webpage","url":"https://hheydarian.github.io/Gitab/books/book2/Book/14/Refactoring-CSharp-Code-Implementing-Design-Patterns/","name":"بازنگری کد C# – پیاده‌سازی الگوهای طراحی","description":"بازنگری کد C# – پیاده‌سازی الگوهای طراحی — مطالعه آنلاین و رایگان از کتاب «کدنویسی تمیز در سی‌شارپ» (Clean Code in C#) اثر Jason Alls با ترجمه حامد حیدریان در گیتاب.","inLanguage":"fa-IR","isPartOf":{"@id":"https://hheydarian.github.io/Gitab/#website"}},{"@type":"TechArticle","headline":"بازنگری کد C# – پیاده‌سازی الگوهای طراحی","description":"بازنگری کد C# – پیاده‌سازی الگوهای طراحی — مطالعه آنلاین و رایگان از کتاب «کدنویسی تمیز در سی‌شارپ» (Clean Code in C#) اثر Jason Alls با ترجمه حامد حیدریان در گیتاب.","url":"https://hheydarian.github.io/Gitab/books/book2/Book/14/Refactoring-CSharp-Code-Implementing-Design-Patterns/","inLanguage":"fa-IR","isAccessibleForFree":true,"author":{"@type":"Person","name":"Jason Alls"},"translator":{"@type":"Person","name":"حامد حیدریان"},"isPartOf":{"@type":"Book","name":"کدنویسی تمیز در سی‌شارپ","alternateName":"Clean Code in C#","url":"https://hheydarian.github.io/Gitab/books/book2/"}}]}</script> <link rel="preload" href="/Gitab/fonts/Vazirmatn.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/Gitab/styles/main.css?v=2.4" as="style"> <link rel="preload" href="/Gitab/styles/gitab-modern.css?v=2.5" as="style"><style>@font-face{font-family:'Lalezar';src:url('/Gitab/fonts/Lalezar.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}@font-face{font-family:'Vazirmatn';src:url('/Gitab/fonts/Vazirmatn.woff2') format('woff2');font-weight:100 900;font-style:normal;font-display:swap}html,body,button,input,optgroup,select,textarea,.filter-pill{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}input::placeholder,textarea::placeholder{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}</style> <link rel="stylesheet" href="/Gitab/styles/main.css?v=2.4"><link rel="stylesheet" href="/Gitab/styles/gitab-modern.css?v=2.5"> <link rel="stylesheet" href="/Gitab/styles/vendor/github-dark.min.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="/Gitab/styles/vendor/github-dark.min.css"></noscript></head> <body><header class="header"> <div class="container nav-wrap"><a href="/Gitab/" class="brand" aria-label="صفحه اصلی گیتاب"> <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="30" height="30" decoding="async"> <span class="brand-text">Gitab</span> </a> <nav class="nav" id="mainNav"><a href="/Gitab/" >خانه</a> <a href="/Gitab/books/list-books" aria-current="page">کتاب‌ها</a> <a href="/Gitab/courses/" >دوره‌ها</a> <a href="/Gitab/translator.html" >مترجمین</a></nav> <div class="nav-actions"><button id="themeToggle" class="theme-toggle-btn" aria-label="تغییر تم" title="تغییر تم"> <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن" width="18" height="18" decoding="async" style="display:none"> <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک" width="18" height="18" decoding="async"> </button> <a class="btn-github-pill" href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" title="مشاهده سورس گیتاب در گیت‌هاب"> <img src="/Gitab/icone/github.svg" alt="GitHub" width="16" height="16" decoding="async"> <span>گیت‌هاب</span> </a> <button class="mobile-menu-btn" id="mobileMenuBtn" type="button" aria-label="باز کردن منو" aria-expanded="false"> <svg class="mob-icon-open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="4" y1="7" x2="20" y2="7"></line> <line x1="4" y1="12" x2="20" y2="12"></line> <line x1="4" y1="17" x2="14" y2="17"></line> </svg> <svg class="mob-icon-close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="18" y1="6" x2="6" y2="18"></line> <line x1="6" y1="6" x2="18" y2="18"></line> </svg> </button></div> </div><div class="mobile-drawer" id="mobileDrawer" aria-hidden="true"> <div class="mobile-drawer-inner"><div class="mobile-drawer-section-label">ناوبری سریع</div><nav class="mobile-drawer-links" aria-label="منوی موبایل"> <a href="/Gitab/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M3 10.5 12 3l9 7.5"></path> <path d="M5 9.5V20a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V9.5"></path> </svg> </span> <span class="mob-nav-text">صفحه نخست</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/books/list-books" class="mobile-drawer-link active" aria-current="page"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path> </svg> </span> <span class="mob-nav-text">کتابخانه و فهرست کتاب‌ها</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/courses/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path> <path d="M6 12v5c3 3 9 3 12 0v-5"></path> </svg> </span> <span class="mob-nav-text">دوره‌های آموزشی</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/translator.html" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path> <circle cx="9" cy="7" r="4"></circle> <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path> <path d="M16 3.13a4 4 0 0 1 0 7.75"></path> </svg> </span> <span class="mob-nav-text">مترجمین و همکاران</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> </nav><div class="mobile-drawer-divider"></div><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" class="mobile-drawer-link mobile-drawer-gh"> <span class="mob-nav-icon" aria-hidden="true"> <img src="/Gitab/icone/github.svg" alt="" width="17" height="17" loading="lazy" decoding="async"> </span> <span class="mob-nav-text">مخزن گیت‌هاب پروژه</span> <span class="mob-nav-ext" aria-hidden="true">↗</span> </a> </div></div> </header><div class="reading-progress-track"> <div class="reading-progress-fill" id="readingProgressBar"></div></div> <main class="site-main chapter-reading-page"><div class="chapter-page-wrapper"> <nav class="chapter-clean-breadcrumb" aria-label="مسیر راهنما" dir="rtl"><a href="/Gitab/">خانه</a> <span class="bc-sep" aria-hidden="true">/</span> <a href="/Gitab/books/list-books/">کتاب‌ها</a> <span class="bc-sep" aria-hidden="true">/</span> <a href="/Gitab/books/book2/"><bdi>کدنویسی تمیز در سی‌شارپ</bdi></a> <span class="bc-sep" aria-hidden="true">/</span> <span class="bc-current-leaf"><bdi>بازنگری کد C# – پیاده‌سازی الگوهای طراحی</bdi></span></nav> <article class="chapter-prose-container markdown-body" id="chapterArticle" dir="rtl"><h1>فصل چهاردهم: بازنگری کد C# – پیاده‌سازی الگوهای طراحی</h1><p>نیمی از نبرد در برنامه‌نویسی <strong>کد تمیز</strong> در پیاده‌سازی و استفاده صحیح از <strong>الگوهای طراحی</strong> نهفته است. خود <strong>الگوهای طراحی</strong> نیز می‌توانند به <strong>Code Smell</strong> تبدیل شوند. یک <strong>الگوی طراحی</strong> زمانی به <strong>Code Smell</strong> تبدیل می‌شود که برای چیزی که به‌سادگی قابل پیاده‌سازی است، بیش از حد مهندسی شود.</p><p>شما پیش‌تر استفاده از <strong>الگوهای طراحی</strong> را در نوشتن کد تمیز و بازنگری <strong>Code Smell</strong>ها در فصل‌های قبلی این کتاب مشاهده کرده‌اید. به‌طور مشخص، ما <strong>الگوی Adapter</strong>، <strong>Decorator</strong> و <strong>Proxy</strong> را پیاده‌سازی کردیم. این الگوها به روشی درست پیاده‌سازی شدند تا وظیفه موردنظر را انجام دهند. آن‌ها ساده نگه داشته شدند و مطمئناً کد را پیچیده نکردند. بنابراین، وقتی برای هدف مناسب خود استفاده شوند، <strong>الگوهای طراحی</strong> واقعاً در حذف <strong>Code Smell</strong>ها مفید هستند و کد شما را تمیز، شفاف و قابل نگهداری می‌کنند.</p><p>در این فصل، به <strong>الگوهای طراحی Gang of Four (GoF)</strong> در سه دسته <strong>Creational (ایجادشی)</strong>، <strong>Structural (ساختاری)</strong> و <strong>Behavioral (رفتاری)</strong> می‌پردازیم. <strong>الگوهای طراحی</strong> قوانین سخت و ثابتی ندارند و لازم نیست پیاده‌سازی آن‌ها را بیش از حد سختگیرانه دنبال کنید. اما داشتن نمونه‌های کد می‌تواند به شما کمک کند تا از <strong>دانش نظری</strong> به <strong>مهارت عملی لازم برای پیاده‌سازی و استفاده صحیح از الگوها</strong> برسید.</p><p>در این فصل، مباحث زیر را پوشش خواهیم داد:</p><ol> <li>پیاده‌سازی <strong>الگوهای طراحی Creational</strong></li><li>پیاده‌سازی <strong>الگوهای طراحی Structural</strong></li><li>مرور کلی <strong>الگوهای طراحی Behavioral</strong></li></ol> <hr><h4>مهارت‌هایی که در پایان این فصل کسب خواهید کرد</h4><ul> <li>توانایی <strong>درک، توصیف و برنامه‌نویسی</strong> انواع <strong>الگوهای طراحی Creational</strong></li><li>توانایی <strong>درک، توصیف و برنامه‌نویسی</strong> انواع <strong>الگوهای طراحی Structural</strong></li><li>درک کلی از <strong>الگوهای طراحی Behavioral</strong></li></ul> <p>ما مرور خود بر <strong>الگوهای طراحی GoF</strong> را با بررسی <strong>الگوهای Creational</strong> آغاز می‌کنیم.</p><hr> <h3>پیش‌نیازهای فنی</h3><ul> <li><strong>Visual Studio 2019</strong></li><li>یک پروژه <strong>Console Application با .NET Framework در Visual Studio 2019</strong></li><li>سورس کامل این فصل: <a href="https://github.com/PacktPublishing/Clean-Code-in-C-/tree/master/CH14/CH14_DesignPatterns">GitHub CH14_DesignPatterns</a></li></ul> <hr><h3>پیاده‌سازی الگوهای Creational</h3><p>از دید برنامه‌نویس، وقتی <strong>ایجاد اشیاء (Object Creation)</strong> انجام می‌دهیم، از <strong>الگوهای طراحی Creational</strong> استفاده می‌کنیم. انتخاب الگو بستگی به <strong>وظیفه موردنظر</strong> دارد. پنج <strong>الگوی طراحی Creational</strong> وجود دارد:</p><ol> <li><strong>Singleton</strong>: این الگو تضمین می‌کند که تنها <strong>یک نمونه (Instance)</strong> از یک کلاس در سطح برنامه وجود داشته باشد.</li><li><strong>Factory Method</strong>: از این الگو برای ایجاد اشیاء بدون استفاده مستقیم از کلاس آن‌ها استفاده می‌شود.</li><li><strong>Abstract Factory</strong>: بدون مشخص کردن کلاس‌های مشخص، گروه‌هایی از اشیاء مرتبط یا وابسته توسط <strong>Abstract Factory</strong> ایجاد می‌شوند.</li><li><strong>Prototype</strong>: نوع نمونه اولیه (Prototype) را مشخص کرده و سپس کپی‌هایی از آن ایجاد می‌کند.</li><li><strong>Builder</strong>: ساخت شیء را از نمایش آن جدا می‌کند.</li></ol> <p>حال، پیاده‌سازی هر یک از این الگوها را آغاز می‌کنیم، ابتدا با <strong>الگوی Singleton</strong>.</p><hr> <h3>پیاده‌سازی الگوی Singleton</h3><p><strong>الگوی Singleton</strong> تنها اجازه می‌دهد که <strong>یک نمونه از کلاس</strong> وجود داشته باشد و دسترسی <strong>سراسری</strong> به آن امکان‌پذیر باشد. این الگو زمانی استفاده می‌شود که تمام عملیات در یک سیستم باید توسط <strong>دقیقاً یک شیء</strong> هماهنگ شوند:</p><div align="center"> <p><img src="../../../assets/image/14/Table%2014-1.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <p>شرکت‌کننده در این الگو <strong>Singleton</strong> است — کلاسی که مسئول مدیریت <strong>نمونه (Instance)</strong> خودش است و تضمین می‌کند که تنها یک نمونه از آن در کل سیستم اجرا شود.</p><p>حال قصد داریم <strong>الگوی Singleton</strong> را پیاده‌سازی کنیم:</p><hr> <ol><li>یک پوشه با نام <strong>Singleton</strong> در پوشه <strong>CreationalDesignPatterns</strong> ایجاد کنید.</li><li>سپس یک کلاس با نام <strong>Singleton</strong> اضافه کنید:</li></ol> <pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Singleton</span> {
     <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> Singleton _instance;
     <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-title">Singleton</span>()</span> { }
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Singleton <span class="hljs-title">Instance</span>()</span> {
         <span class="hljs-keyword">return</span> _instance ?? (_instance = <span class="hljs-keyword">new</span> Singleton());
     }
 }
-</code></pre>
-<p>کلاس <strong>Singleton</strong> یک نسخه <strong>استاتیک</strong> از نمونه خودش را نگه می‌دارد. شما نمی‌توانید این کلاس را مستقیماً نمونه‌سازی کنید، زیرا <strong>سازنده (Constructor)</strong> آن به‌صورت <strong>protected</strong> تعریف شده است.</p>
-<p>متد <strong>Instance()</strong> استاتیک است و بررسی می‌کند که آیا یک نمونه از کلاس <strong>Singleton</strong> وجود دارد یا خیر.</p>
-<ul>
-<li>اگر وجود داشت، همان نمونه برگردانده می‌شود.</li>
-<li>اگر وجود نداشت، نمونه ایجاد شده و سپس بازگردانده می‌شود.</li>
-</ul>
-<p>حالا کدی برای فراخوانی آن اضافه می‌کنیم:</p>
-<pre class="hljs"><code><span class="hljs-keyword">var</span> instance1 = Singleton.Instance();
+</code></pre> <p>کلاس <strong>Singleton</strong> یک نسخه <strong>استاتیک</strong> از نمونه خودش را نگه می‌دارد. شما نمی‌توانید این کلاس را مستقیماً نمونه‌سازی کنید، زیرا <strong>سازنده (Constructor)</strong> آن به‌صورت <strong>protected</strong> تعریف شده است.</p><p>متد <strong>Instance()</strong> استاتیک است و بررسی می‌کند که آیا یک نمونه از کلاس <strong>Singleton</strong> وجود دارد یا خیر.</p><ul> <li>اگر وجود داشت، همان نمونه برگردانده می‌شود.</li><li>اگر وجود نداشت، نمونه ایجاد شده و سپس بازگردانده می‌شود.</li></ul> <p>حالا کدی برای فراخوانی آن اضافه می‌کنیم:</p><pre class="hljs"><code><span class="hljs-keyword">var</span> instance1 = Singleton.Instance();
 <span class="hljs-keyword">var</span> instance2 = Singleton.Instance();
 <span class="hljs-keyword">if</span> (instance1.Equals(instance2))
     Console.WriteLine(<span class="hljs-string">&quot;Instance 1 and instance 2 are the same instance of Singleton.&quot;</span>);
-</code></pre>
-<hr>
-<ol start="3">
-<li>ما دو نمونه از کلاس <strong>Singleton</strong> اعلام کرده‌ایم و سپس آن‌ها را مقایسه می‌کنیم تا ببینیم آیا همان نمونه هستند یا خیر. خروجی آن را می‌توانید در تصویر زیر مشاهده کنید: ✅</li>
-</ol>
-<div align="center">
-<p><img src="../../../assets/image/14/Table%2014-2.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<p>همان‌طور که مشاهده می‌کنید، ما یک کلاس عملیاتی داریم که <strong>الگوی Singleton</strong> را پیاده‌سازی می‌کند. ✅</p>
-<p>گام بعدی، پیاده‌سازی <strong>الگوی Factory Method</strong> است.</p>
-<hr>
-<h3>پیاده‌سازی الگوی Factory Method 🏭</h3>
-<p>الگوی <strong>Factory Method</strong> اشیایی ایجاد می‌کند که به زیرکلاس‌های خود اجازه می‌دهد منطق ایجاد اشیای مخصوص به خودشان را پیاده‌سازی کنند.</p>
-<p>از این الگو استفاده کنید وقتی که می‌خواهید <strong>ایجاد اشیاء در یک مکان متمرکز</strong> انجام شود و نیاز دارید <strong>گروهی مشخص از اشیای مرتبط</strong> را تولید کنید.</p>
-<div align="center">
-<p><img src="../../../assets/image/14/Table%2014-3.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<p>شرکت‌کنندگان در این پروژه به شرح زیر هستند:</p>
-<ul>
-<li><strong>Product</strong>: محصول انتزاعی که توسط <strong>Factory Method</strong> ایجاد می‌شود</li>
-<li><strong>ConcreteProduct</strong>: محصولی که از <strong>Product</strong> ارث‌بری می‌کند</li>
-<li><strong>Creator</strong>: کلاس انتزاعی با یک <strong>Factory Method</strong> انتزاعی</li>
-<li><strong>ConcreteCreator</strong>: از <strong>Creator</strong> ارث‌بری می‌کند و <strong>Factory Method</strong> را پیاده‌سازی می‌کند</li>
-</ul>
-<hr>
-<h3>پیاده‌سازی الگوی Factory Method 🏭</h3>
-<p>1️⃣ ابتدا یک پوشه به نام <strong>FactoryMethod</strong> به پوشه <strong>CreationalDesignPatterns</strong> اضافه کنید.</p>
-<p>2️⃣ کلاس <strong>Product</strong> را اضافه کنید:</p>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Product</span> {}
-</code></pre>
-<p>این کلاس محصولات ایجاد شده توسط <strong>Factory Method</strong> را تعریف می‌کند.</p>
-<p>3️⃣ کلاس <strong>ConcreteProduct</strong> را اضافه کنید:</p>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">ConcreteProduct</span> : <span class="hljs-title">Product</span> {}
-</code></pre>
-<p>این کلاس از <strong>Product</strong> ارث‌بری می‌کند.</p>
-<p>4️⃣ کلاس <strong>Creator</strong> را اضافه کنید:</p>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Creator</span> {
+</code></pre> <hr><ol start="3"> <li>ما دو نمونه از کلاس <strong>Singleton</strong> اعلام کرده‌ایم و سپس آن‌ها را مقایسه می‌کنیم تا ببینیم آیا همان نمونه هستند یا خیر. خروجی آن را می‌توانید در تصویر زیر مشاهده کنید:</li></ol> <div align="center"><p><img src="../../../assets/image/14/Table%2014-2.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <p>همان‌طور که مشاهده می‌کنید، ما یک کلاس عملیاتی داریم که <strong>الگوی Singleton</strong> را پیاده‌سازی می‌کند.</p><p>گام بعدی، پیاده‌سازی <strong>الگوی Factory Method</strong> است.</p><hr> <h3>پیاده‌سازی الگوی Factory Method</h3><p>الگوی <strong>Factory Method</strong> اشیایی ایجاد می‌کند که به زیرکلاس‌های خود اجازه می‌دهد منطق ایجاد اشیای مخصوص به خودشان را پیاده‌سازی کنند.</p><p>از این الگو استفاده کنید وقتی که می‌خواهید <strong>ایجاد اشیاء در یک مکان متمرکز</strong> انجام شود و نیاز دارید <strong>گروهی مشخص از اشیای مرتبط</strong> را تولید کنید.</p><div align="center"> <p><img src="../../../assets/image/14/Table%2014-3.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <p>شرکت‌کنندگان در این پروژه به شرح زیر هستند:</p><ul> <li><strong>Product</strong>: محصول انتزاعی که توسط <strong>Factory Method</strong> ایجاد می‌شود</li><li><strong>ConcreteProduct</strong>: محصولی که از <strong>Product</strong> ارث‌بری می‌کند</li><li><strong>Creator</strong>: کلاس انتزاعی با یک <strong>Factory Method</strong> انتزاعی</li><li><strong>ConcreteCreator</strong>: از <strong>Creator</strong> ارث‌بری می‌کند و <strong>Factory Method</strong> را پیاده‌سازی می‌کند</li></ul> <hr><h3>پیاده‌سازی الگوی Factory Method</h3><p>1⃣ ابتدا یک پوشه به نام <strong>FactoryMethod</strong> به پوشه <strong>CreationalDesignPatterns</strong> اضافه کنید.</p><p>2⃣ کلاس <strong>Product</strong> را اضافه کنید:</p><pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Product</span> {}
+</code></pre> <p>این کلاس محصولات ایجاد شده توسط <strong>Factory Method</strong> را تعریف می‌کند.</p><p>3⃣ کلاس <strong>ConcreteProduct</strong> را اضافه کنید:</p><pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">ConcreteProduct</span> : <span class="hljs-title">Product</span> {}
+</code></pre> <p>این کلاس از <strong>Product</strong> ارث‌بری می‌کند.</p><p>4⃣ کلاس <strong>Creator</strong> را اضافه کنید:</p><pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Creator</span> {
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> Product <span class="hljs-title">FactoryMethod</span>()</span>;
 }
-</code></pre>
-<p>کلاس <strong>Creator</strong> توسط کلاس <strong>ConcreteCreator</strong> ارث‌بری خواهد شد تا متد <strong>FactoryMethod()</strong> را پیاده‌سازی کند.</p>
-<p>5️⃣ کلاس <strong>ConcreteCreator</strong> را اضافه کنید:</p>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">ConcreteCreator</span> : <span class="hljs-title">Creator</span> {
+</code></pre> <p>کلاس <strong>Creator</strong> توسط کلاس <strong>ConcreteCreator</strong> ارث‌بری خواهد شد تا متد <strong>FactoryMethod()</strong> را پیاده‌سازی کند.</p><p>5⃣ کلاس <strong>ConcreteCreator</strong> را اضافه کنید:</p><pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">ConcreteCreator</span> : <span class="hljs-title">Creator</span> {
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> Product <span class="hljs-title">FactoryMethod</span>()</span> {
         <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> ConcreteProduct();
     }
 }
-</code></pre>
-<p>کلاس <strong>ConcreteCreator</strong> از <strong>Creator</strong> ارث‌بری می‌کند و <strong>FactoryMethod()</strong> را بازنویسی می‌کند. این متد یک نمونه جدید از <strong>ConcreteProduct</strong> ایجاد و بازمی‌گرداند.</p>
-<hr>
-<h3>استفاده از Factory Method</h3>
-<pre class="hljs"><code><span class="hljs-keyword">var</span> creator = <span class="hljs-keyword">new</span> ConcreteCreator();
+</code></pre> <p>کلاس <strong>ConcreteCreator</strong> از <strong>Creator</strong> ارث‌بری می‌کند و <strong>FactoryMethod()</strong> را بازنویسی می‌کند. این متد یک نمونه جدید از <strong>ConcreteProduct</strong> ایجاد و بازمی‌گرداند.</p><hr> <h3>استفاده از Factory Method</h3><pre class="hljs"><code><span class="hljs-keyword">var</span> creator = <span class="hljs-keyword">new</span> ConcreteCreator();
 <span class="hljs-keyword">var</span> product = creator.FactoryMethod();
 Console.WriteLine(<span class="hljs-string">$&quot;Product Type: <span class="hljs-subst">{product.GetType().Name}</span>&quot;</span>);
-</code></pre>
-<p>در این مثال:</p>
-<ul>
-<li>یک نمونه از <strong>ConcreteCreator</strong> ایجاد کردیم</li>
-<li>سپس متد <strong>FactoryMethod()</strong> را فراخوانی کردیم تا محصول جدیدی بسازیم</li>
-<li>نام محصول ایجاد شده توسط <strong>Factory Method</strong> در <strong>Console</strong> نمایش داده شد ✅</li>
-</ul>
-<div align="center">
-<p><img src="../../../assets/image/14/Table%2014-4.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<p>حال که با نحوه پیاده‌سازی <strong>Factory Method</strong> آشنا شدیم، به سراغ پیاده‌سازی <strong>Abstract Factory</strong> می‌رویم.</p>
-<hr>
-<h3>پیاده‌سازی الگوی Abstract Factory 🏭✨</h3>
-<p>الگوی <strong>Abstract Factory</strong> برای ایجاد گروهی از اشیاء مرتبط یا وابسته (که به آن‌ها <strong>خانواده‌ها</strong> گفته می‌شود) بدون مشخص کردن کلاس‌های مشخص آن‌ها استفاده می‌شود.</p>
-<p>این الگو به شما امکان می‌دهد تا گروه‌های مختلفی از اشیاء را با هم مدیریت کنید، بدون آنکه وابسته به جزئیات کلاس‌های مشخص باشید.</p>
-<p>ادامه خواهیم داد تا نحوه تعریف و پیاده‌سازی این الگو در C# را مرحله به مرحله توضیح دهیم.</p>
-<div align="center">
-<p><img src="../../../assets/image/14/Table%2014-5.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<p>شرکت‌کنندگان در این الگو به شرح زیر هستند:</p>
-<ul>
-<li><strong>AbstractFactory</strong>: کارخانه انتزاعی که توسط <strong>ConcreteFactory</strong> پیاده‌سازی می‌شود</li>
-<li><strong>ConcreteFactory</strong>: کارخانه مشخص که محصولات مشخص را ایجاد می‌کند</li>
-<li><strong>AbstractProduct</strong>: محصول انتزاعی که محصولات مشخص از آن ارث‌بری می‌کنند</li>
-<li><strong>Product</strong>: محصولی که از <strong>AbstractProduct</strong> ارث می‌برد و توسط کارخانه مشخص ایجاد می‌شود</li>
-</ul>
-<hr>
-<h3>پیاده‌سازی الگوی Abstract Factory 🏭✨</h3>
-<p>۱. یک پوشه به نام <strong>CreationalDesignPatterns</strong> به پروژه اضافه کنید.<br>
-۲. داخل پوشه <strong>CreationalDesignPatterns</strong>، پوشه‌ای به نام <strong>AbstractFactory</strong> بسازید.<br>
-۳. در پوشه <strong>AbstractFactory</strong>، کلاس <strong>AbstractFactory</strong> را اضافه کنید:</p>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">class</span> <span class="hljs-title">AbstractFactory</span> {
+</code></pre> <p>در این مثال:</p><ul> <li>یک نمونه از <strong>ConcreteCreator</strong> ایجاد کردیم</li><li>سپس متد <strong>FactoryMethod()</strong> را فراخوانی کردیم تا محصول جدیدی بسازیم</li><li>نام محصول ایجاد شده توسط <strong>Factory Method</strong> در <strong>Console</strong> نمایش داده شد</li></ul> <div align="center"><p><img src="../../../assets/image/14/Table%2014-4.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <p>حال که با نحوه پیاده‌سازی <strong>Factory Method</strong> آشنا شدیم، به سراغ پیاده‌سازی <strong>Abstract Factory</strong> می‌رویم.</p><hr> <h3>پیاده‌سازی الگوی Abstract Factory</h3><p>الگوی <strong>Abstract Factory</strong> برای ایجاد گروهی از اشیاء مرتبط یا وابسته (که به آن‌ها <strong>خانواده‌ها</strong> گفته می‌شود) بدون مشخص کردن کلاس‌های مشخص آن‌ها استفاده می‌شود.</p><p>این الگو به شما امکان می‌دهد تا گروه‌های مختلفی از اشیاء را با هم مدیریت کنید، بدون آنکه وابسته به جزئیات کلاس‌های مشخص باشید.</p><p>ادامه خواهیم داد تا نحوه تعریف و پیاده‌سازی این الگو در C# را مرحله به مرحله توضیح دهیم.</p><div align="center"> <p><img src="../../../assets/image/14/Table%2014-5.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <p>شرکت‌کنندگان در این الگو به شرح زیر هستند:</p><ul> <li><strong>AbstractFactory</strong>: کارخانه انتزاعی که توسط <strong>ConcreteFactory</strong> پیاده‌سازی می‌شود</li><li><strong>ConcreteFactory</strong>: کارخانه مشخص که محصولات مشخص را ایجاد می‌کند</li><li><strong>AbstractProduct</strong>: محصول انتزاعی که محصولات مشخص از آن ارث‌بری می‌کنند</li><li><strong>Product</strong>: محصولی که از <strong>AbstractProduct</strong> ارث می‌برد و توسط کارخانه مشخص ایجاد می‌شود</li></ul> <hr><h3>پیاده‌سازی الگوی Abstract Factory</h3><p>۱. یک پوشه به نام <strong>CreationalDesignPatterns</strong> به پروژه اضافه کنید.<br> ۲. داخل پوشه <strong>CreationalDesignPatterns</strong>، پوشه‌ای به نام <strong>AbstractFactory</strong> بسازید.<br> ۳. در پوشه <strong>AbstractFactory</strong>، کلاس <strong>AbstractFactory</strong> را اضافه کنید:</p><pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">class</span> <span class="hljs-title">AbstractFactory</span> {
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> AbstractProductA <span class="hljs-title">CreateProductA</span>()</span>;
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> AbstractProductB <span class="hljs-title">CreateProductB</span>()</span>;
 }
-</code></pre>
-<p>کلاس <strong>AbstractFactory</strong> شامل دو متد انتزاعی برای ایجاد محصولات انتزاعی است.</p>
-<p>۴. کلاس <strong>AbstractProductA</strong> را اضافه کنید:</p>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">class</span> <span class="hljs-title">AbstractProductA</span> {
+</code></pre> <p>کلاس <strong>AbstractFactory</strong> شامل دو متد انتزاعی برای ایجاد محصولات انتزاعی است.</p><p>۴. کلاس <strong>AbstractProductA</strong> را اضافه کنید:</p><pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">class</span> <span class="hljs-title">AbstractProductA</span> {
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Operation</span>(<span class="hljs-params">AbstractProductB productB</span>)</span>;
 }
-</code></pre>
-<p>کلاس <strong>AbstractProductA</strong> یک متد انتزاعی دارد که عملیات روی <strong>AbstractProductB</strong> انجام می‌دهد.</p>
-<p>۵. کلاس <strong>AbstractProductB</strong> را اضافه کنید:</p>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">class</span> <span class="hljs-title">AbstractProductB</span> {
+</code></pre> <p>کلاس <strong>AbstractProductA</strong> یک متد انتزاعی دارد که عملیات روی <strong>AbstractProductB</strong> انجام می‌دهد.</p><p>۵. کلاس <strong>AbstractProductB</strong> را اضافه کنید:</p><pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">class</span> <span class="hljs-title">AbstractProductB</span> {
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Operation</span>(<span class="hljs-params">AbstractProductA productA</span>)</span>;
 }
-</code></pre>
-<p>کلاس <strong>AbstractProductB</strong> نیز یک متد انتزاعی دارد که عملیات روی <strong>AbstractProductA</strong> انجام می‌دهد.</p>
-<p>۶. کلاس <strong>ProductA</strong> را اضافه کنید:</p>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">ProductA</span> : <span class="hljs-title">AbstractProductA</span> {
+</code></pre> <p>کلاس <strong>AbstractProductB</strong> نیز یک متد انتزاعی دارد که عملیات روی <strong>AbstractProductA</strong> انجام می‌دهد.</p><p>۶. کلاس <strong>ProductA</strong> را اضافه کنید:</p><pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">ProductA</span> : <span class="hljs-title">AbstractProductA</span> {
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Operation</span>(<span class="hljs-params">AbstractProductB productB</span>)</span> {
         Console.WriteLine(<span class="hljs-string">&quot;ProductA.Operation(ProductB)&quot;</span>);
     }
 }
-</code></pre>
-<p><strong>ProductA</strong> از <strong>AbstractProductA</strong> ارث‌بری می‌کند و متد <strong>Operation()</strong> را بازنویسی می‌کند تا با <strong>AbstractProductB</strong> تعامل داشته باشد. در این مثال، متد پیام خود را در کنسول چاپ می‌کند.</p>
-<p>۷. به همان صورت، کلاس <strong>ProductB</strong> را اضافه کنید:</p>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">ProductB</span> : <span class="hljs-title">AbstractProductB</span> {
+</code></pre> <p><strong>ProductA</strong> از <strong>AbstractProductA</strong> ارث‌بری می‌کند و متد <strong>Operation()</strong> را بازنویسی می‌کند تا با <strong>AbstractProductB</strong> تعامل داشته باشد. در این مثال، متد پیام خود را در کنسول چاپ می‌کند.</p><p>۷. به همان صورت، کلاس <strong>ProductB</strong> را اضافه کنید:</p><pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">ProductB</span> : <span class="hljs-title">AbstractProductB</span> {
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Operation</span>(<span class="hljs-params">AbstractProductA productA</span>)</span> {
         Console.WriteLine(<span class="hljs-string">&quot;ProductB.Operation(ProductA)&quot;</span>);
     }
 }
-</code></pre>
-<p><strong>ProductB</strong> از <strong>AbstractProductB</strong> ارث‌بری می‌کند و متد <strong>Operation()</strong> را بازنویسی می‌کند تا با <strong>AbstractProductA</strong> تعامل داشته باشد.</p>
-<p>۸. کلاس <strong>ConcreteFactory</strong> را اضافه کنید:</p>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">ConcreteProduct</span> : <span class="hljs-title">AbstractFactory</span> {
+</code></pre> <p><strong>ProductB</strong> از <strong>AbstractProductB</strong> ارث‌بری می‌کند و متد <strong>Operation()</strong> را بازنویسی می‌کند تا با <strong>AbstractProductA</strong> تعامل داشته باشد.</p><p>۸. کلاس <strong>ConcreteFactory</strong> را اضافه کنید:</p><pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">ConcreteProduct</span> : <span class="hljs-title">AbstractFactory</span> {
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> AbstractProductA <span class="hljs-title">CreateProductA</span>()</span> {
         <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> ProductA();
     }
@@ -265,10 +64,7 @@ Console.WriteLine(<span class="hljs-string">$&quot;Product Type: <span class="hl
         <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> ProductB();
     }
 }
-</code></pre>
-<p><strong>ConcreteFactory</strong> از <strong>AbstractFactory</strong> ارث‌بری می‌کند و دو متد ایجاد محصول را بازنویسی می‌کند. هر متد، یک کلاس مشخص را بازمی‌گرداند.</p>
-<p>۹. کلاس <strong>Client</strong> را اضافه کنید:</p>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Client</span>
+</code></pre> <p><strong>ConcreteFactory</strong> از <strong>AbstractFactory</strong> ارث‌بری می‌کند و دو متد ایجاد محصول را بازنویسی می‌کند. هر متد، یک کلاس مشخص را بازمی‌گرداند.</p><p>۹. کلاس <strong>Client</strong> را اضافه کنید:</p><pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Client</span>
 {
     <span class="hljs-keyword">private</span> <span class="hljs-keyword">readonly</span> AbstractProductA _abstractProductA;
     <span class="hljs-keyword">private</span> <span class="hljs-keyword">readonly</span> AbstractProductB _abstractProductB;
@@ -283,90 +79,26 @@ Console.WriteLine(<span class="hljs-string">$&quot;Product Type: <span class="hl
         _abstractProductB.Operation(_abstractProductA);
     }
 }
-</code></pre>
-<p>کلاس <strong>Client</strong> دو محصول انتزاعی را اعلام می‌کند. سازنده آن، یک شیء <strong>AbstractFactory</strong> می‌گیرد و محصولات انتزاعی را با محصولات مشخصی که توسط کارخانه ساخته می‌شوند، مقداردهی می‌کند.<br>
-متد <strong>Run()</strong> عملیات <strong>Operation()</strong> را روی هر دو محصول اجرا می‌کند.</p>
-<p>۱۰. اجرای نمونه کد:</p>
-<pre class="hljs"><code>AbstractFactory factory = <span class="hljs-keyword">new</span> ConcreteProduct();
+</code></pre> <p>کلاس <strong>Client</strong> دو محصول انتزاعی را اعلام می‌کند. سازنده آن، یک شیء <strong>AbstractFactory</strong> می‌گیرد و محصولات انتزاعی را با محصولات مشخصی که توسط کارخانه ساخته می‌شوند، مقداردهی می‌کند.<br> متد <strong>Run()</strong> عملیات <strong>Operation()</strong> را روی هر دو محصول اجرا می‌کند.</p><p>۱۰. اجرای نمونه کد:</p><pre class="hljs"><code>AbstractFactory factory = <span class="hljs-keyword">new</span> ConcreteProduct();
 Client client = <span class="hljs-keyword">new</span> Client(factory);
 client.Run();
-</code></pre>
-<p>با اجرای کد، خروجی مشابه زیر در کنسول نمایش داده خواهد شد.</p>
-<div align="center">
-<p><img src="../../../assets/image/14/Table%2014-6.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<p>یک پیاده‌سازی مرجع خوب از <strong>Abstract Factory</strong>، کلاس انتزاعی <strong>DbProviderFactory</strong> در <strong><a href="http://ADO.NET">ADO.NET</a> 2.0</strong> است. مقاله‌ای با عنوان <strong>Abstract Factory Design Pattern in <a href="http://ADO.NET">ADO.NET</a> 2.0</strong> نوشته <strong>Moses Soliman</strong> در وب‌سایت <strong>C# Corner</strong> توضیح خوبی درباره پیاده‌سازی <strong>DbProviderFactory</strong> و الگوی طراحی <strong>Abstract Factory</strong> ارائه می‌دهد. لینک مقاله:<br>
-<a href="https://www.c-sharpcorner.com/article/abstract-factory-design-pattern-in-ado-net-2-0/">https://www.c-sharpcorner.com/article/abstract-factory-design-pattern-in-ado-net-2-0/</a></p>
-<p>ما اکنون با موفقیت الگوی طراحی <strong>Abstract Factory</strong> را پیاده‌سازی کردیم. حالا به سراغ پیاده‌سازی <strong>Prototype Pattern</strong> می‌رویم.</p>
-<hr>
-<h3>پیاده‌سازی الگوی Prototype 🧩✨</h3>
-<p>الگوی طراحی <strong>Prototype</strong> برای ایجاد یک نمونه از پروتوتایپ و سپس تولید اشیاء جدید با کلون کردن آن پروتوتایپ استفاده می‌شود.<br>
-از این الگو زمانی استفاده کنید که هزینه ایجاد اشیاء به صورت مستقیم بالا باشد. با استفاده از این الگو، می‌توانید شیء را کش (Cache) کنید و در صورت نیاز، یک کلون از آن برگردانید.</p>
-<div align="center">
-<p><img src="../../../assets/image/14/Table%2014-7.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<p>شرکت‌کنندگان در <strong>الگوی طراحی Prototype</strong> به شرح زیر هستند:</p>
-<ul>
-<li><strong>Prototype</strong>: یک کلاس انتزاعی که متدی برای کلون کردن خود ارائه می‌دهد</li>
-<li><strong>ConcretePrototype</strong>: از <strong>Prototype</strong> ارث‌بری می‌کند و متد <strong>Clone()</strong> را بازنویسی می‌کند تا یک کپی سطحی (Memberwise Clone) از پروتوتایپ ایجاد شود</li>
-<li><strong>Client</strong>: درخواست کلون‌های جدید از پروتوتایپ را می‌دهد</li>
-</ul>
-<hr>
-<h3>پیاده‌سازی الگوی Prototype 🧩</h3>
-<ol>
-<li>یک پوشه با نام <strong>Prototype</strong> به پوشه <strong>CreationalDesignPatterns</strong> اضافه کنید و سپس کلاس <strong>Prototype</strong> را اضافه کنید:</li>
-</ol>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Prototype</span> {
+</code></pre> <p>با اجرای کد، خروجی مشابه زیر در کنسول نمایش داده خواهد شد.</p><div align="center"> <p><img src="../../../assets/image/14/Table%2014-6.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <p>یک پیاده‌سازی مرجع خوب از <strong>Abstract Factory</strong>، کلاس انتزاعی <strong>DbProviderFactory</strong> در <strong><a href="http://ADO.NET">ADO.NET</a> 2.0</strong> است. مقاله‌ای با عنوان <strong>Abstract Factory Design Pattern in <a href="http://ADO.NET">ADO.NET</a> 2.0</strong> نوشته <strong>Moses Soliman</strong> در وب‌سایت <strong>C# Corner</strong> توضیح خوبی درباره پیاده‌سازی <strong>DbProviderFactory</strong> و الگوی طراحی <strong>Abstract Factory</strong> ارائه می‌دهد. لینک مقاله:<br><a href="https://www.c-sharpcorner.com/article/abstract-factory-design-pattern-in-ado-net-2-0/">https://www.c-sharpcorner.com/article/abstract-factory-design-pattern-in-ado-net-2-0/</a></p><p>ما اکنون با موفقیت الگوی طراحی <strong>Abstract Factory</strong> را پیاده‌سازی کردیم. حالا به سراغ پیاده‌سازی <strong>Prototype Pattern</strong> می‌رویم.</p><hr> <h3>پیاده‌سازی الگوی Prototype</h3><p>الگوی طراحی <strong>Prototype</strong> برای ایجاد یک نمونه از پروتوتایپ و سپس تولید اشیاء جدید با کلون کردن آن پروتوتایپ استفاده می‌شود.<br> از این الگو زمانی استفاده کنید که هزینه ایجاد اشیاء به صورت مستقیم بالا باشد. با استفاده از این الگو، می‌توانید شیء را کش (Cache) کنید و در صورت نیاز، یک کلون از آن برگردانید.</p><div align="center"> <p><img src="../../../assets/image/14/Table%2014-7.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <p>شرکت‌کنندگان در <strong>الگوی طراحی Prototype</strong> به شرح زیر هستند:</p><ul> <li><strong>Prototype</strong>: یک کلاس انتزاعی که متدی برای کلون کردن خود ارائه می‌دهد</li><li><strong>ConcretePrototype</strong>: از <strong>Prototype</strong> ارث‌بری می‌کند و متد <strong>Clone()</strong> را بازنویسی می‌کند تا یک کپی سطحی (Memberwise Clone) از پروتوتایپ ایجاد شود</li><li><strong>Client</strong>: درخواست کلون‌های جدید از پروتوتایپ را می‌دهد</li></ul> <hr><h3>پیاده‌سازی الگوی Prototype</h3><ol> <li>یک پوشه با نام <strong>Prototype</strong> به پوشه <strong>CreationalDesignPatterns</strong> اضافه کنید و سپس کلاس <strong>Prototype</strong> را اضافه کنید:</li></ol> <pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Prototype</span> {
     <span class="hljs-keyword">public</span> <span class="hljs-built_in">string</span> Id { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">private</span> <span class="hljs-keyword">set</span>; }
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Prototype</span>(<span class="hljs-params"><span class="hljs-built_in">string</span> id</span>)</span> {
         Id = id;
     }
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> Prototype <span class="hljs-title">Clone</span>()</span>;
 }
-</code></pre>
-<p>کلاس <strong>Prototype</strong> باید ارث‌بری شود. سازنده‌ی آن یک رشته شناسایی‌کننده می‌گیرد که در سطح کلاس ذخیره می‌شود. متد <strong>Clone()</strong> ارائه شده که توسط کلاس‌های فرزند بازنویسی خواهد شد.</p>
-<ol start="2">
-<li>حالا کلاس <strong>ConcretePrototype</strong> را اضافه کنید:</li>
-</ol>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">ConcretePrototype</span> : <span class="hljs-title">Prototype</span> {
+</code></pre> <p>کلاس <strong>Prototype</strong> باید ارث‌بری شود. سازنده‌ی آن یک رشته شناسایی‌کننده می‌گیرد که در سطح کلاس ذخیره می‌شود. متد <strong>Clone()</strong> ارائه شده که توسط کلاس‌های فرزند بازنویسی خواهد شد.</p><ol start="2"> <li>حالا کلاس <strong>ConcretePrototype</strong> را اضافه کنید:</li></ol> <pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">ConcretePrototype</span> : <span class="hljs-title">Prototype</span> {
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">ConcretePrototype</span>(<span class="hljs-params"><span class="hljs-built_in">string</span> id</span>) : <span class="hljs-title">base</span>(<span class="hljs-params">id</span>)</span> { }
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> Prototype <span class="hljs-title">Clone</span>()</span> {
         <span class="hljs-keyword">return</span> (Prototype) <span class="hljs-keyword">this</span>.MemberwiseClone();
     }
 }
-</code></pre>
-<p>کلاس <strong>ConcretePrototype</strong> از <strong>Prototype</strong> ارث‌بری می‌کند. سازنده‌ی آن یک رشته شناسایی‌کننده می‌گیرد و آن را به سازنده‌ی کلاس پایه ارسال می‌کند. سپس متد <strong>Clone()</strong> را بازنویسی می‌کند تا یک کپی سطحی از شیء فعلی ایجاد کرده و کلون را به نوع <strong>Prototype</strong> تبدیل و برگرداند.</p>
-<ol start="3">
-<li>نمونه‌ کدی که نشان‌دهنده‌ی استفاده از الگوی <strong>Prototype</strong> است:</li>
-</ol>
-<pre class="hljs"><code><span class="hljs-keyword">var</span> prototype = <span class="hljs-keyword">new</span> ConcretePrototype(<span class="hljs-string">&quot;Clone 1&quot;</span>);
+</code></pre> <p>کلاس <strong>ConcretePrototype</strong> از <strong>Prototype</strong> ارث‌بری می‌کند. سازنده‌ی آن یک رشته شناسایی‌کننده می‌گیرد و آن را به سازنده‌ی کلاس پایه ارسال می‌کند. سپس متد <strong>Clone()</strong> را بازنویسی می‌کند تا یک کپی سطحی از شیء فعلی ایجاد کرده و کلون را به نوع <strong>Prototype</strong> تبدیل و برگرداند.</p><ol start="3"> <li>نمونه‌ کدی که نشان‌دهنده‌ی استفاده از الگوی <strong>Prototype</strong> است:</li></ol> <pre class="hljs"><code><span class="hljs-keyword">var</span> prototype = <span class="hljs-keyword">new</span> ConcretePrototype(<span class="hljs-string">&quot;Clone 1&quot;</span>);
 <span class="hljs-keyword">var</span> clone = (ConcretePrototype)prototype.Clone();
 Console.WriteLine(<span class="hljs-string">$&quot;Clone Id: <span class="hljs-subst">{clone.Id}</span>&quot;</span>);
-</code></pre>
-<p>کد ما یک نمونه جدید از <strong>ConcretePrototype</strong> با شناسه <code>&quot;Clone 1&quot;</code> ایجاد می‌کند، سپس پروتوتایپ را کلون کرده و آن را به نوع <strong>ConcretePrototype</strong> تبدیل می‌کند. در نهایت، شناسه‌ی کلون را در کنسول چاپ می‌کنیم. ✅</p>
-<div align="center">
-<p><img src="../../../assets/image/14/Table%2014-8.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<p>همان‌طور که می‌بینیم، کلون دارای همان شناسه‌ای است که پروتوتایپ از آن کلون گرفته شده است. ✅</p>
-<p>برای مطالعه‌ی یک مثال واقعی و جامع، می‌توانید به مقاله‌ای با عنوان <strong>Prototype Design Pattern with Real-World Scenario</strong> نوشته‌ی Akshay Patel در سایت <strong>C# Corner</strong> مراجعه کنید. لینک مقاله:<br>
-https://www.c-sharpcorner.com/UploadFile/db2972/prototype-design-pattern-with-real-worldscenario624/</p>
-<hr>
-<h3>پیاده‌سازی الگوی Builder 🏗️</h3>
-<p>الگوی <strong>Builder</strong> ساخت شیء را از نمایش آن جدا می‌کند. به این ترتیب، می‌توانید از یک روش ساخت برای ایجاد نمایش‌های مختلف از همان شیء استفاده کنید.</p>
-<p>از این الگو زمانی استفاده کنید که یک <strong>شیء پیچیده</strong> دارید که باید به صورت مرحله‌ای ساخته و به هم متصل شود:</p>
-<div align="center">
-<p><img src="../../../assets/image/14/Table%2014-9.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<p>شرکت‌کنندگان در الگوی <strong>Builder</strong> به شرح زیر هستند: 🏗️</p>
-<ul>
-<li><strong>Director</strong>: کلاسی که یک Builder را از طریق سازنده‌اش دریافت می‌کند و سپس هر یک از متدهای ساخت را روی شیء Builder فراخوانی می‌کند.</li>
-<li><strong>Builder</strong>: یک کلاس انتزاعی که متدهای انتزاعی ساخت و یک متد انتزاعی برای بازگرداندن شیء ساخته‌شده را ارائه می‌دهد.</li>
-<li><strong>ConcreteBuilder</strong>: یک کلاس واقعی که از کلاس Builder ارث‌بری می‌کند، متدهای ساخت را بازنویسی می‌کند تا شیء را واقعاً بسازد و متد نتیجه را بازنویسی می‌کند تا شیء کاملاً ساخته‌شده را بازگرداند.</li>
-</ul>
-<hr>
-<h3>پیاده‌سازی الگوی Builder 🛠️</h3>
-<p>1️⃣ ابتدا یک پوشه با نام <strong>Builder</strong> به پوشه‌ی <strong>CreationalDesignPatterns</strong> اضافه کنید. سپس کلاس <strong>Product</strong> را ایجاد کنید:</p>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Product</span> {
+</code></pre> <p>کد ما یک نمونه جدید از <strong>ConcretePrototype</strong> با شناسه <code>&quot;Clone 1&quot;</code> ایجاد می‌کند، سپس پروتوتایپ را کلون کرده و آن را به نوع <strong>ConcretePrototype</strong> تبدیل می‌کند. در نهایت، شناسه‌ی کلون را در کنسول چاپ می‌کنیم.</p><div align="center"> <p><img src="../../../assets/image/14/Table%2014-8.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <p>همان‌طور که می‌بینیم، کلون دارای همان شناسه‌ای است که پروتوتایپ از آن کلون گرفته شده است.</p><p>برای مطالعه‌ی یک مثال واقعی و جامع، می‌توانید به مقاله‌ای با عنوان <strong>Prototype Design Pattern with Real-World Scenario</strong> نوشته‌ی Akshay Patel در سایت <strong>C# Corner</strong> مراجعه کنید. لینک مقاله:<br> https://www.c-sharpcorner.com/UploadFile/db2972/prototype-design-pattern-with-real-worldscenario624/</p><hr> <h3>پیاده‌سازی الگوی Builder</h3><p>الگوی <strong>Builder</strong> ساخت شیء را از نمایش آن جدا می‌کند. به این ترتیب، می‌توانید از یک روش ساخت برای ایجاد نمایش‌های مختلف از همان شیء استفاده کنید.</p><p>از این الگو زمانی استفاده کنید که یک <strong>شیء پیچیده</strong> دارید که باید به صورت مرحله‌ای ساخته و به هم متصل شود:</p><div align="center"> <p><img src="../../../assets/image/14/Table%2014-9.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <p>شرکت‌کنندگان در الگوی <strong>Builder</strong> به شرح زیر هستند:</p><ul> <li><strong>Director</strong>: کلاسی که یک Builder را از طریق سازنده‌اش دریافت می‌کند و سپس هر یک از متدهای ساخت را روی شیء Builder فراخوانی می‌کند.</li><li><strong>Builder</strong>: یک کلاس انتزاعی که متدهای انتزاعی ساخت و یک متد انتزاعی برای بازگرداندن شیء ساخته‌شده را ارائه می‌دهد.</li><li><strong>ConcreteBuilder</strong>: یک کلاس واقعی که از کلاس Builder ارث‌بری می‌کند، متدهای ساخت را بازنویسی می‌کند تا شیء را واقعاً بسازد و متد نتیجه را بازنویسی می‌کند تا شیء کاملاً ساخته‌شده را بازگرداند.</li></ul> <hr><h3>پیاده‌سازی الگوی Builder</h3><p>1⃣ ابتدا یک پوشه با نام <strong>Builder</strong> به پوشه‌ی <strong>CreationalDesignPatterns</strong> اضافه کنید. سپس کلاس <strong>Product</strong> را ایجاد کنید:</p><pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Product</span> {
     <span class="hljs-keyword">private</span> List&lt;<span class="hljs-built_in">string</span>&gt; _parts;
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Product</span>()</span> {
         _parts = <span class="hljs-keyword">new</span> List&lt;<span class="hljs-built_in">string</span>&gt;();
@@ -382,21 +114,13 @@ https://www.c-sharpcorner.com/UploadFile/db2972/prototype-design-pattern-with-re
         Console.WriteLine(sb.ToString());
     }
 }
-</code></pre>
-<p>کلاس <strong>Product</strong> یک لیست از اجزاء نگهداری می‌کند. این اجزاء رشته هستند. لیست در سازنده مقداردهی اولیه می‌شود. اجزاء توسط متد <code>Add()</code> اضافه می‌شوند و وقتی شیء کاملاً ساخته شد، متد <code>PrintPartsList()</code> لیست اجزاء را در کنسول چاپ می‌کند.</p>
-<hr>
-<p>2️⃣ سپس کلاس <strong>Builder</strong> را اضافه کنید:</p>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Builder</span>
+</code></pre> <p>کلاس <strong>Product</strong> یک لیست از اجزاء نگهداری می‌کند. این اجزاء رشته هستند. لیست در سازنده مقداردهی اولیه می‌شود. اجزاء توسط متد <code>Add()</code> اضافه می‌شوند و وقتی شیء کاملاً ساخته شد، متد <code>PrintPartsList()</code> لیست اجزاء را در کنسول چاپ می‌کند.</p><hr> <p>2⃣ سپس کلاس <strong>Builder</strong> را اضافه کنید:</p><pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Builder</span>
 {
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">void</span> <span class="hljs-title">BuildSection1</span>()</span>;
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">void</span> <span class="hljs-title">BuildSection2</span>()</span>;
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> Product <span class="hljs-title">GetProduct</span>()</span>;
 }
-</code></pre>
-<p>کلاس <strong>Builder</strong> توسط کلاس‌های Concrete ارث‌بری می‌شود و متدهای انتزاعی آن بازنویسی می‌شوند تا شیء ساخته شده و بازگردانده شود.</p>
-<hr>
-<p>3️⃣ حالا کلاس <strong>ConcreteBuilder</strong> را اضافه کنید:</p>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">ConcreteBuilder</span> : <span class="hljs-title">Builder</span> {
+</code></pre> <p>کلاس <strong>Builder</strong> توسط کلاس‌های Concrete ارث‌بری می‌شود و متدهای انتزاعی آن بازنویسی می‌شوند تا شیء ساخته شده و بازگردانده شود.</p><hr> <p>3⃣ حالا کلاس <strong>ConcreteBuilder</strong> را اضافه کنید:</p><pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">ConcreteBuilder</span> : <span class="hljs-title">Builder</span> {
     <span class="hljs-keyword">private</span> Product _product;
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">ConcreteBuilder</span>()</span> {
         _product = <span class="hljs-keyword">new</span> Product();
@@ -411,11 +135,7 @@ https://www.c-sharpcorner.com/UploadFile/db2972/prototype-design-pattern-with-re
         <span class="hljs-keyword">return</span> _product;
     }
 }
-</code></pre>
-<p>کلاس <strong>ConcreteBuilder</strong> از <strong>Builder</strong> ارث‌بری می‌کند. این کلاس نمونه‌ی شیء در حال ساخت را ذخیره می‌کند. متدهای ساخت بازنویسی شده و اجزاء به محصول اضافه می‌شوند. محصول از طریق <code>GetProduct()</code> به کلاینت بازگردانده می‌شود.</p>
-<hr>
-<p>4️⃣ سپس کلاس <strong>Director</strong> را اضافه کنید:</p>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Director</span>
+</code></pre> <p>کلاس <strong>ConcreteBuilder</strong> از <strong>Builder</strong> ارث‌بری می‌کند. این کلاس نمونه‌ی شیء در حال ساخت را ذخیره می‌کند. متدهای ساخت بازنویسی شده و اجزاء به محصول اضافه می‌شوند. محصول از طریق <code>GetProduct()</code> به کلاینت بازگردانده می‌شود.</p><hr> <p>4⃣ سپس کلاس <strong>Director</strong> را اضافه کنید:</p><pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Director</span>
 {
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Build</span>(<span class="hljs-params">Builder builder</span>)</span>
     {
@@ -423,36 +143,15 @@ https://www.c-sharpcorner.com/UploadFile/db2972/prototype-design-pattern-with-re
         builder.BuildSection2();
     }
 }
-</code></pre>
-<p>کلاس <strong>Director</strong> یک کلاس واقعی است که شیء Builder را از طریق متد <code>Build()</code> دریافت می‌کند و متدهای ساخت را روی آن فراخوانی می‌کند.</p>
-<hr>
-<p>5️⃣ حالا کد نهایی برای نمایش اجرای الگوی Builder:</p>
-<pre class="hljs"><code><span class="hljs-keyword">var</span> director = <span class="hljs-keyword">new</span> Director();
+</code></pre> <p>کلاس <strong>Director</strong> یک کلاس واقعی است که شیء Builder را از طریق متد <code>Build()</code> دریافت می‌کند و متدهای ساخت را روی آن فراخوانی می‌کند.</p><hr> <p>5⃣ حالا کد نهایی برای نمایش اجرای الگوی Builder:</p><pre class="hljs"><code><span class="hljs-keyword">var</span> director = <span class="hljs-keyword">new</span> Director();
 <span class="hljs-keyword">var</span> builder = <span class="hljs-keyword">new</span> ConcreteBuilder();
 director.Build(builder);
 <span class="hljs-keyword">var</span> product = builder.GetProduct();
 product.PrintPartsList();
-</code></pre>
-<p>ابتدا یک <strong>Director</strong> و یک <strong>Builder</strong> ایجاد می‌کنیم. سپس <strong>Director</strong> محصول را می‌سازد. محصول به متغیر <code>product</code> اختصاص داده می‌شود و لیست اجزاء آن در کنسول چاپ می‌شود. ✅</p>
-<div align="center">
-<p><img src="../../../assets/image/14/Table%2014-10.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<p>همه چیز طبق انتظار کار می‌کند. ✅</p>
-<p>در <strong>.NET Framework</strong>، کلاس <strong>System.Text.StringBuilder</strong> یک مثال واقعی از <strong>الگوی طراحی Builder</strong> در دنیای واقعی است. استفاده از الحاق رشته با عملگر جمع (+) وقتی که پنج خط یا بیشتر رشته بخواهید الحاق کنید، کندتر از استفاده از کلاس <strong>StringBuilder</strong> است. اگر کمتر از پنج خط رشته داشته باشید، عملگر + سریع‌تر است، اما وقتی بیش از پنج خط وجود دارد، <strong>StringBuilder</strong> عملکرد بهتری دارد.</p>
-<p>علت این است که هر بار که با عملگر + یک رشته می‌سازید، رشته‌ی جدیدی ایجاد می‌شود زیرا رشته‌ها در حافظه (heap) <strong>immutable</strong> هستند. اما <strong>StringBuilder</strong> فضای بافر در حافظه تخصیص می‌دهد و سپس کاراکترها به آن نوشته می‌شوند. برای تعداد کمی خط، عملگر + سریع‌تر است به دلیل سربار ایجاد بافر هنگام استفاده از StringBuilder. اما وقتی بیش از پنج خط دارید، تفاوت عملکرد با StringBuilder محسوس است.</p>
-<p>در پروژه‌های داده‌محور بزرگ که ممکن است صدها هزار یا میلیون‌ها الحاق رشته رخ دهد، استراتژی انتخابی شما برای الحاق رشته می‌تواند بسیار سریع یا کند عمل کند.</p>
-<p>بیایید یک مثال ساده بسازیم. یک کلاس به نام <strong>StringConcatenation</strong> ایجاد کنید و کد زیر را اضافه کنید:</p>
-<pre class="hljs"><code><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> DateTime _startTime;
+</code></pre> <p>ابتدا یک <strong>Director</strong> و یک <strong>Builder</strong> ایجاد می‌کنیم. سپس <strong>Director</strong> محصول را می‌سازد. محصول به متغیر <code>product</code> اختصاص داده می‌شود و لیست اجزاء آن در کنسول چاپ می‌شود.</p><div align="center"> <p><img src="../../../assets/image/14/Table%2014-10.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <p>همه چیز طبق انتظار کار می‌کند.</p><p>در <strong>.NET Framework</strong>، کلاس <strong>System.Text.StringBuilder</strong> یک مثال واقعی از <strong>الگوی طراحی Builder</strong> در دنیای واقعی است. استفاده از الحاق رشته با عملگر جمع (+) وقتی که پنج خط یا بیشتر رشته بخواهید الحاق کنید، کندتر از استفاده از کلاس <strong>StringBuilder</strong> است. اگر کمتر از پنج خط رشته داشته باشید، عملگر + سریع‌تر است، اما وقتی بیش از پنج خط وجود دارد، <strong>StringBuilder</strong> عملکرد بهتری دارد.</p><p>علت این است که هر بار که با عملگر + یک رشته می‌سازید، رشته‌ی جدیدی ایجاد می‌شود زیرا رشته‌ها در حافظه (heap) <strong>immutable</strong> هستند. اما <strong>StringBuilder</strong> فضای بافر در حافظه تخصیص می‌دهد و سپس کاراکترها به آن نوشته می‌شوند. برای تعداد کمی خط، عملگر + سریع‌تر است به دلیل سربار ایجاد بافر هنگام استفاده از StringBuilder. اما وقتی بیش از پنج خط دارید، تفاوت عملکرد با StringBuilder محسوس است.</p><p>در پروژه‌های داده‌محور بزرگ که ممکن است صدها هزار یا میلیون‌ها الحاق رشته رخ دهد، استراتژی انتخابی شما برای الحاق رشته می‌تواند بسیار سریع یا کند عمل کند.</p><p>بیایید یک مثال ساده بسازیم. یک کلاس به نام <strong>StringConcatenation</strong> ایجاد کنید و کد زیر را اضافه کنید:</p><pre class="hljs"><code><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> DateTime _startTime;
 <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-built_in">long</span> _durationPlus;
 <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-built_in">long</span> _durationSb;
-</code></pre>
-<ul>
-<li><code>_startTime</code> زمان شروع اجرای متد را نگه می‌دارد.</li>
-<li><code>_durationPlus</code> مدت زمان اجرای متد با عملگر + را بر حسب تعداد <strong>ticks</strong> ذخیره می‌کند.</li>
-<li><code>_durationSb</code> مدت زمان عملیات الحاق با <strong>StringBuilder</strong> را بر حسب ticks نگه می‌دارد.</li>
-</ul>
-<p>سپس متد <code>UsingThePlusOperator()</code> را اضافه کنید:</p>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">UsingThePlusOperator</span>()</span>
+</code></pre> <ul><li><code>_startTime</code> زمان شروع اجرای متد را نگه می‌دارد.</li><li><code>_durationPlus</code> مدت زمان اجرای متد با عملگر + را بر حسب تعداد <strong>ticks</strong> ذخیره می‌کند.</li><li><code>_durationSb</code> مدت زمان عملیات الحاق با <strong>StringBuilder</strong> را بر حسب ticks نگه می‌دارد.</li></ul> <p>سپس متد <code>UsingThePlusOperator()</code> را اضافه کنید:</p><pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">UsingThePlusOperator</span>()</span>
 {
     _startTime = DateTime.Now;
     <span class="hljs-keyword">var</span> text = <span class="hljs-built_in">string</span>.Empty;
@@ -463,10 +162,7 @@ product.PrintPartsList();
     _durationPlus = (DateTime.Now - _startTime).Ticks;
     Console.WriteLine(<span class="hljs-string">$&quot;Duration (Ticks) Using Plus Operator: <span class="hljs-subst">{_durationPlus}</span>&quot;</span>);
 }
-</code></pre>
-<p>این متد زمان لازم برای الحاق ۱۰،۰۰۰ رشته با عملگر + را محاسبه می‌کند و تعداد <strong>ticks</strong> مصرف‌شده را ذخیره می‌کند.</p>
-<p>حالا متد <code>UsingTheStringBuilder()</code> را اضافه کنید:</p>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">UsingTheStringBuilder</span>()</span>
+</code></pre> <p>این متد زمان لازم برای الحاق ۱۰،۰۰۰ رشته با عملگر + را محاسبه می‌کند و تعداد <strong>ticks</strong> مصرف‌شده را ذخیره می‌کند.</p><p>حالا متد <code>UsingTheStringBuilder()</code> را اضافه کنید:</p><pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">UsingTheStringBuilder</span>()</span>
 {
     _startTime = DateTime.Now;
     <span class="hljs-keyword">var</span> sb = <span class="hljs-keyword">new</span> StringBuilder();
@@ -477,94 +173,25 @@ product.PrintPartsList();
     _durationSb = (DateTime.Now - _startTime).Ticks;
     Console.WriteLine(<span class="hljs-string">$&quot;Duration (Ticks) Using StringBuilder: <span class="hljs-subst">{_durationSb}</span>&quot;</span>);
 }
-</code></pre>
-<p>این متد همان متد قبلی است، با این تفاوت که الحاق رشته با کلاس <strong>StringBuilder</strong> انجام می‌شود.</p>
-<hr>
-<p>حالا متد <code>PrintTimeDifference()</code> را اضافه کنید:</p>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">PrintTimeDifference</span>()</span>
+</code></pre> <p>این متد همان متد قبلی است، با این تفاوت که الحاق رشته با کلاس <strong>StringBuilder</strong> انجام می‌شود.</p><hr> <p>حالا متد <code>PrintTimeDifference()</code> را اضافه کنید:</p><pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">PrintTimeDifference</span>()</span>
 {
     <span class="hljs-keyword">var</span> difference = _durationPlus - _durationSb;
     Console.WriteLine(<span class="hljs-string">$&quot;That&#x27;s a time difference of <span class="hljs-subst">{difference}</span> ticks.&quot;</span>);
     Console.WriteLine(<span class="hljs-string">$&quot;<span class="hljs-subst">{difference}</span> ticks = <span class="hljs-subst">{TimeSpan.FromTicks(difference)}</span> seconds.\n\n&quot;</span>);
 }
-</code></pre>
-<p>این متد تفاوت زمان را با کم کردن تعداد ticks <strong>StringBuilder</strong> از تعداد ticks عملگر + محاسبه می‌کند و ابتدا تعداد ticks و سپس معادل آن بر حسب ثانیه را در کنسول چاپ می‌کند.</p>
-<hr>
-<p>برای آزمایش کد و مشاهده تفاوت زمان، دستورات زیر را اجرا کنید:</p>
-<pre class="hljs"><code>StringConcatenation.UsingThePlusOperator();
+</code></pre> <p>این متد تفاوت زمان را با کم کردن تعداد ticks <strong>StringBuilder</strong> از تعداد ticks عملگر + محاسبه می‌کند و ابتدا تعداد ticks و سپس معادل آن بر حسب ثانیه را در کنسول چاپ می‌کند.</p><hr> <p>برای آزمایش کد و مشاهده تفاوت زمان، دستورات زیر را اجرا کنید:</p><pre class="hljs"><code>StringConcatenation.UsingThePlusOperator();
 StringConcatenation.UsingTheStringBuilder();
 StringConcatenation.PrintTimeDifference();
-</code></pre>
-<p>پس از اجرای کد، زمان‌ها و تفاوت زمانی بین دو روش الحاق رشته در <strong>کنسول</strong> نمایش داده خواهد شد. 📊</p>
-<div align="center">
-<p><img src="../../../assets/image/14/Table%2014-11.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<p>همان‌طور که در تصویر مشاهده می‌کنید، <strong>StringBuilder</strong> بسیار سریع‌تر است. ⚡️ وقتی داده‌ها کم باشند، تفاوت چندانی از نظر چشم غیرمسلح مشاهده نمی‌شود، اما وقتی تعداد خطوط داده‌ای که پردازش می‌شوند به‌طور قابل توجهی افزایش یابد، تفاوت به وضوح مشخص خواهد بود.</p>
-<p>یک مثال دیگر برای استفاده از <strong>الگوی Builder</strong>، ساخت گزارش‌ها است. اگر به گزارش‌های دسته‌بندی شده (banded reports) فکر کنید، این دسته‌ها در واقع بخش‌هایی هستند که باید از منابع مختلف ساخته شوند. بنابراین می‌توانید بخش اصلی گزارش و هر زیربخش (subreport) را به‌عنوان یک بخش مجزا در نظر بگیرید. گزارش نهایی ترکیبی از این بخش‌ها خواهد بود. بنابراین می‌توانید کدی شبیه به زیر برای ساخت گزارش داشته باشید:</p>
-<pre class="hljs"><code><span class="hljs-keyword">var</span> report = <span class="hljs-keyword">new</span> Report();
+</code></pre> <p>پس از اجرای کد، زمان‌ها و تفاوت زمانی بین دو روش الحاق رشته در <strong>کنسول</strong> نمایش داده خواهد شد.</p><div align="center"> <p><img src="../../../assets/image/14/Table%2014-11.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <p>همان‌طور که در تصویر مشاهده می‌کنید، <strong>StringBuilder</strong> بسیار سریع‌تر است. وقتی داده‌ها کم باشند، تفاوت چندانی از نظر چشم غیرمسلح مشاهده نمی‌شود، اما وقتی تعداد خطوط داده‌ای که پردازش می‌شوند به‌طور قابل توجهی افزایش یابد، تفاوت به وضوح مشخص خواهد بود.</p><p>یک مثال دیگر برای استفاده از <strong>الگوی Builder</strong>، ساخت گزارش‌ها است. اگر به گزارش‌های دسته‌بندی شده (banded reports) فکر کنید، این دسته‌ها در واقع بخش‌هایی هستند که باید از منابع مختلف ساخته شوند. بنابراین می‌توانید بخش اصلی گزارش و هر زیربخش (subreport) را به‌عنوان یک بخش مجزا در نظر بگیرید. گزارش نهایی ترکیبی از این بخش‌ها خواهد بود. بنابراین می‌توانید کدی شبیه به زیر برای ساخت گزارش داشته باشید:</p><pre class="hljs"><code><span class="hljs-keyword">var</span> report = <span class="hljs-keyword">new</span> Report();
 report.AddHeader();
 report.AddLastYearsSalesTotalsForAllRegions();
 report.AddLastYearsSalesTotalsByRegion();
 report.AddFooter();
 report.GenerateOutput();
-</code></pre>
-<p>در این مثال، ابتدا یک گزارش جدید ایجاد می‌کنیم. سپس با افزودن <strong>Header</strong> شروع می‌کنیم، بعد مجموع فروش سال گذشته برای همه مناطق را اضافه می‌کنیم، سپس مجموع فروش سال گذشته به تفکیک مناطق و در نهایت <strong>Footer</strong> را اضافه کرده و با تولید خروجی، فرآیند تکمیل می‌شود. 📄</p>
-<hr>
-<p>پس تا اینجا، شما:</p>
-<ol>
-<li><strong>پیاده‌سازی پیش‌فرض الگوی Builder</strong> را از طریق <strong>نمودار UML</strong> مشاهده کردید.</li>
-<li>سپس <strong>الحاق رشته‌ها با StringBuilder</strong> را اجرا کردید تا ساخت رشته‌ها به‌صورت کارآمد انجام شود.</li>
-<li>در نهایت یاد گرفتید که <strong>الگوی Builder</strong> چگونه می‌تواند برای ساخت بخش‌های یک گزارش و تولید خروجی آن مفید باشد. ✅</li>
-</ol>
-<hr>
-<p>تا اینجا، پیاده‌سازی <strong>الگوهای طراحی Creational</strong> به پایان رسید. حالا به سراغ <strong>پیاده‌سازی برخی از الگوهای طراحی Structural</strong> می‌رویم.</p>
-<h3>پیاده‌سازی الگوهای طراحی Structural 🏗️</h3>
-<p>به‌عنوان برنامه‌نویس، ما از <strong>الگوهای ساختاری (Structural)</strong> برای بهبود ساختار کلی کد استفاده می‌کنیم. وقتی با کدی مواجه می‌شویم که ساختار ندارد و تمیز نیست، می‌توانیم از الگوهای زیر برای بازسازی و تمیز کردن کد استفاده کنیم. هفت الگوی ساختاری وجود دارد:</p>
-<ol>
-<li><strong>Adapter:</strong> این الگو برای هماهنگ کردن کلاس‌هایی با <strong>interface ناسازگار</strong> استفاده می‌شود تا بتوانند به‌صورت تمیز با هم کار کنند.</li>
-<li><strong>Bridge:</strong> برای <strong>شل کردن وابستگی‌ها</strong> با جدا کردن abstraction از implementation استفاده می‌شود.</li>
-<li><strong>Composite:</strong> برای <strong>تجمیع اشیاء</strong> و ارائه روشی یکنواخت برای کار با اشیاء منفرد و ترکیبی استفاده می‌شود.</li>
-<li><strong>Decorator:</strong> این الگو امکان افزودن <strong>دینامیک قابلیت جدید</strong> به یک شیء را در حالی که interface حفظ شود، فراهم می‌کند.</li>
-<li><strong>Façade:</strong> برای ساده‌سازی <strong>interfaceهای بزرگ و پیچیده</strong> استفاده می‌شود.</li>
-<li><strong>Flyweight:</strong> برای <strong>صرفه‌جویی در حافظه</strong> و اشتراک داده‌های مشابه بین اشیاء استفاده می‌شود.</li>
-<li><strong>Proxy:</strong> این الگو بین <strong>کلاینت و API</strong> قرار می‌گیرد تا تماس‌ها را میان کلاینت و API رهگیری کند.</li>
-</ol>
-<hr>
-<p>ما پیش‌تر با الگوهای <strong>Adapter</strong>، <strong>Decorator</strong> و <strong>Proxy</strong> در فصل‌های قبلی آشنا شدیم، بنابراین در این فصل دوباره بررسی نمی‌شوند. حالا پیاده‌سازی <strong>الگوهای ساختاری</strong> را آغاز می‌کنیم و با <strong>Bridge Pattern</strong> شروع خواهیم کرد.</p>
-<h3>پیاده‌سازی الگوی Bridge 🌉</h3>
-<p>الگوی Bridge برای <strong>جدا کردن abstraction از implementation</strong> استفاده می‌شود تا در زمان کامپایل به هم وابسته نباشند. این کار به شما اجازه می‌دهد که <strong>abstraction و implementation</strong> به‌طور مستقل تغییر کنند بدون آن که بر کلاینت تأثیر بگذارد.</p>
-<p>از الگوی Bridge استفاده کنید اگر:</p>
-<ul>
-<li>نیاز به <strong>runtime binding</strong> برای implementation دارید،</li>
-<li>یا می‌خواهید یک implementation بین چند شیء به اشتراک گذاشته شود،</li>
-<li>اگر تعدادی کلاس وجود دارند که به دلیل coupling با interface و پیاده‌سازی‌های مختلف ایجاد شده‌اند،</li>
-<li>یا نیاز به <strong>map کردن سلسله‌مراتب کلاس‌های ارتوگونال</strong> وجود دارد.</li>
-</ul>
-<div align="center">
-<p><img src="../../../assets/image/14/Table%2014-12.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<p>شرکت‌کنندگان در <strong>الگوی طراحی Bridge</strong> به شرح زیر هستند:</p>
-<ul>
-<li><strong>Abstraction:</strong> یک کلاس انتزاعی که شامل عملیات‌های انتزاعی (abstract operations) است.</li>
-<li><strong>RefinedAbstraction:</strong> از کلاس Abstraction ارث‌بری می‌کند و متد <strong>Operation()</strong> را بازنویسی می‌کند.</li>
-<li><strong>Implementor:</strong> یک کلاس انتزاعی با متد انتزاعی <strong>Operation()</strong></li>
-<li><strong>ConcreteImplementor:</strong> از کلاس Implementor ارث‌بری می‌کند و متد <strong>Operation()</strong> را بازنویسی می‌کند.</li>
-</ul>
-<hr>
-<h3>پیاده‌سازی الگوی Bridge 🌉</h3>
-<ol>
-<li>ابتدا یک پوشه به نام <strong>StructuralDesignPatterns</strong> به پروژه اضافه کنید، سپس در آن پوشه یک پوشه دیگر به نام <strong>Bridge</strong> بسازید.</li>
-<li>کلاس <strong>Implementor</strong> را اضافه کنید:</li>
-</ol>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Implementor</span> {
+</code></pre> <p>در این مثال، ابتدا یک گزارش جدید ایجاد می‌کنیم. سپس با افزودن <strong>Header</strong> شروع می‌کنیم، بعد مجموع فروش سال گذشته برای همه مناطق را اضافه می‌کنیم، سپس مجموع فروش سال گذشته به تفکیک مناطق و در نهایت <strong>Footer</strong> را اضافه کرده و با تولید خروجی، فرآیند تکمیل می‌شود.</p><hr> <p>پس تا اینجا، شما:</p><ol> <li><strong>پیاده‌سازی پیش‌فرض الگوی Builder</strong> را از طریق <strong>نمودار UML</strong> مشاهده کردید.</li><li>سپس <strong>الحاق رشته‌ها با StringBuilder</strong> را اجرا کردید تا ساخت رشته‌ها به‌صورت کارآمد انجام شود.</li><li>در نهایت یاد گرفتید که <strong>الگوی Builder</strong> چگونه می‌تواند برای ساخت بخش‌های یک گزارش و تولید خروجی آن مفید باشد.</li></ol> <hr><p>تا اینجا، پیاده‌سازی <strong>الگوهای طراحی Creational</strong> به پایان رسید. حالا به سراغ <strong>پیاده‌سازی برخی از الگوهای طراحی Structural</strong> می‌رویم.</p><h3>پیاده‌سازی الگوهای طراحی Structural</h3><p>به‌عنوان برنامه‌نویس، ما از <strong>الگوهای ساختاری (Structural)</strong> برای بهبود ساختار کلی کد استفاده می‌کنیم. وقتی با کدی مواجه می‌شویم که ساختار ندارد و تمیز نیست، می‌توانیم از الگوهای زیر برای بازسازی و تمیز کردن کد استفاده کنیم. هفت الگوی ساختاری وجود دارد:</p><ol> <li><strong>Adapter:</strong> این الگو برای هماهنگ کردن کلاس‌هایی با <strong>interface ناسازگار</strong> استفاده می‌شود تا بتوانند به‌صورت تمیز با هم کار کنند.</li><li><strong>Bridge:</strong> برای <strong>شل کردن وابستگی‌ها</strong> با جدا کردن abstraction از implementation استفاده می‌شود.</li><li><strong>Composite:</strong> برای <strong>تجمیع اشیاء</strong> و ارائه روشی یکنواخت برای کار با اشیاء منفرد و ترکیبی استفاده می‌شود.</li><li><strong>Decorator:</strong> این الگو امکان افزودن <strong>دینامیک قابلیت جدید</strong> به یک شیء را در حالی که interface حفظ شود، فراهم می‌کند.</li><li><strong>Façade:</strong> برای ساده‌سازی <strong>interfaceهای بزرگ و پیچیده</strong> استفاده می‌شود.</li><li><strong>Flyweight:</strong> برای <strong>صرفه‌جویی در حافظه</strong> و اشتراک داده‌های مشابه بین اشیاء استفاده می‌شود.</li><li><strong>Proxy:</strong> این الگو بین <strong>کلاینت و API</strong> قرار می‌گیرد تا تماس‌ها را میان کلاینت و API رهگیری کند.</li></ol> <hr><p>ما پیش‌تر با الگوهای <strong>Adapter</strong>، <strong>Decorator</strong> و <strong>Proxy</strong> در فصل‌های قبلی آشنا شدیم، بنابراین در این فصل دوباره بررسی نمی‌شوند. حالا پیاده‌سازی <strong>الگوهای ساختاری</strong> را آغاز می‌کنیم و با <strong>Bridge Pattern</strong> شروع خواهیم کرد.</p><h3>پیاده‌سازی الگوی Bridge</h3><p>الگوی Bridge برای <strong>جدا کردن abstraction از implementation</strong> استفاده می‌شود تا در زمان کامپایل به هم وابسته نباشند. این کار به شما اجازه می‌دهد که <strong>abstraction و implementation</strong> به‌طور مستقل تغییر کنند بدون آن که بر کلاینت تأثیر بگذارد.</p><p>از الگوی Bridge استفاده کنید اگر:</p><ul> <li>نیاز به <strong>runtime binding</strong> برای implementation دارید،</li><li>یا می‌خواهید یک implementation بین چند شیء به اشتراک گذاشته شود،</li><li>اگر تعدادی کلاس وجود دارند که به دلیل coupling با interface و پیاده‌سازی‌های مختلف ایجاد شده‌اند،</li><li>یا نیاز به <strong>map کردن سلسله‌مراتب کلاس‌های ارتوگونال</strong> وجود دارد.</li></ul> <div align="center"><p><img src="../../../assets/image/14/Table%2014-12.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <p>شرکت‌کنندگان در <strong>الگوی طراحی Bridge</strong> به شرح زیر هستند:</p><ul> <li><strong>Abstraction:</strong> یک کلاس انتزاعی که شامل عملیات‌های انتزاعی (abstract operations) است.</li><li><strong>RefinedAbstraction:</strong> از کلاس Abstraction ارث‌بری می‌کند و متد <strong>Operation()</strong> را بازنویسی می‌کند.</li><li><strong>Implementor:</strong> یک کلاس انتزاعی با متد انتزاعی <strong>Operation()</strong></li><li><strong>ConcreteImplementor:</strong> از کلاس Implementor ارث‌بری می‌کند و متد <strong>Operation()</strong> را بازنویسی می‌کند.</li></ul> <hr><h3>پیاده‌سازی الگوی Bridge</h3><ol> <li>ابتدا یک پوشه به نام <strong>StructuralDesignPatterns</strong> به پروژه اضافه کنید، سپس در آن پوشه یک پوشه دیگر به نام <strong>Bridge</strong> بسازید.</li><li>کلاس <strong>Implementor</strong> را اضافه کنید:</li></ol> <pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Implementor</span> {
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Operation</span>()</span>;
 }
-</code></pre>
-<p>کلاس Implementor فقط یک متد انتزاعی به نام <strong>Operation()</strong> دارد.</p>
-<ol start="3">
-<li>کلاس <strong>Abstraction</strong> را اضافه کنید:</li>
-</ol>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Abstraction</span> {
+</code></pre> <p>کلاس Implementor فقط یک متد انتزاعی به نام <strong>Operation()</strong> دارد.</p><ol start="3"> <li>کلاس <strong>Abstraction</strong> را اضافه کنید:</li></ol> <pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Abstraction</span> {
     <span class="hljs-keyword">protected</span> Implementor implementor;
     <span class="hljs-keyword">public</span> Implementor Implementor {
         <span class="hljs-keyword">set</span> =&gt; implementor = <span class="hljs-keyword">value</span>;
@@ -573,74 +200,24 @@ report.GenerateOutput();
         implementor.Operation();
     }
 }
-</code></pre>
-<p>کلاس Abstraction یک فیلد <strong>protected</strong> دارد که شیء Implementor را نگه می‌دارد و از طریق property آن تنظیم می‌شود. متد مجازی <strong>Operation()</strong>، متد <strong>Operation()</strong> شیء implementor را فراخوانی می‌کند.</p>
-<ol start="4">
-<li>کلاس <strong>RefinedAbstraction</strong> را اضافه کنید:</li>
-</ol>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">RefinedAbstraction</span> : <span class="hljs-title">Abstraction</span> {
+</code></pre> <p>کلاس Abstraction یک فیلد <strong>protected</strong> دارد که شیء Implementor را نگه می‌دارد و از طریق property آن تنظیم می‌شود. متد مجازی <strong>Operation()</strong>، متد <strong>Operation()</strong> شیء implementor را فراخوانی می‌کند.</p><ol start="4"> <li>کلاس <strong>RefinedAbstraction</strong> را اضافه کنید:</li></ol> <pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">RefinedAbstraction</span> : <span class="hljs-title">Abstraction</span> {
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Operation</span>()</span> {
         implementor.Operation();
     }
 }
-</code></pre>
-<p>کلاس RefinedAbstraction از Abstraction ارث‌بری می‌کند و متد <strong>Operation()</strong> را بازنویسی کرده تا متد <strong>Operation()</strong> روی implementor اجرا شود.</p>
-<ol start="5">
-<li>حالا کلاس <strong>ConcreteImplementor</strong> را اضافه کنید:</li>
-</ol>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">ConcreteImplementor</span> : <span class="hljs-title">Implementor</span> {
+</code></pre> <p>کلاس RefinedAbstraction از Abstraction ارث‌بری می‌کند و متد <strong>Operation()</strong> را بازنویسی کرده تا متد <strong>Operation()</strong> روی implementor اجرا شود.</p><ol start="5"> <li>حالا کلاس <strong>ConcreteImplementor</strong> را اضافه کنید:</li></ol> <pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">ConcreteImplementor</span> : <span class="hljs-title">Implementor</span> {
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Operation</span>()</span> {
         Console.WriteLine(<span class="hljs-string">&quot;Concrete operation executed.&quot;</span>);
     }
 }
-</code></pre>
-<p>کلاس ConcreteImplementor از Implementor ارث‌بری می‌کند و متد <strong>Operation()</strong> را بازنویسی می‌کند تا یک پیام در کنسول چاپ شود.</p>
-<hr>
-<h3>اجرای مثال الگوی Bridge</h3>
-<pre class="hljs"><code><span class="hljs-keyword">var</span> abstraction = <span class="hljs-keyword">new</span> RefinedAbstraction();
+</code></pre> <p>کلاس ConcreteImplementor از Implementor ارث‌بری می‌کند و متد <strong>Operation()</strong> را بازنویسی می‌کند تا یک پیام در کنسول چاپ شود.</p><hr> <h3>اجرای مثال الگوی Bridge</h3><pre class="hljs"><code><span class="hljs-keyword">var</span> abstraction = <span class="hljs-keyword">new</span> RefinedAbstraction();
 abstraction.Implementor = <span class="hljs-keyword">new</span> ConcreteImplementor();
 abstraction.Operation();
-</code></pre>
-<p>ابتدا یک نمونه از <strong>RefinedAbstraction</strong> ایجاد می‌کنیم، سپس implementor آن را به یک نمونه از <strong>ConcreteImplementor</strong> اختصاص می‌دهیم. در نهایت <strong>Operation()</strong> فراخوانی می‌شود.</p>
-<p>📄 خروجی مثال پیاده‌سازی Bridge به شکل زیر خواهد بود:</p>
-<pre class="hljs"><code>Concrete operation executed.
-</code></pre>
-<div align="center">
-<p><img src="../../../assets/image/14/Table%2014-13.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<p>همان‌طور که مشاهده می‌کنید، ما موفق شدیم عملیات <strong>Concrete</strong> را در کلاس <strong>ConcreteImplementor</strong> اجرا کنیم ✅.</p>
-<p>الگوی بعدی که بررسی می‌کنیم، <strong>الگوی طراحی Composite</strong> است.</p>
-<hr>
-<h3>پیاده‌سازی الگوی Composite 🌳</h3>
-<p>با <strong>الگوی طراحی Composite</strong>، اشیاء به صورت ساختار درختی ترکیب می‌شوند تا سلسله‌مراتب جزء-کل (part-whole hierarchies) را نمایش دهند. این الگو به شما امکان می‌دهد تا اشیاء منفرد و ترکیب‌های آن‌ها را به‌طور یکنواخت مدیریت کنید.</p>
-<p>از این الگو زمانی استفاده کنید که:<br>
-1️⃣ نیاز دارید تفاوت بین اشیاء منفرد و ترکیب‌های اشیاء را نادیده بگیرید.<br>
-2️⃣ به ساختارهای درختی برای نمایش سلسله‌مراتب نیاز دارید.<br>
-3️⃣ ساختار سلسله‌مراتبی به عملکردهای عمومی (generic functionality) در سراسر ساختار نیاز دارد.</p>
-<hr>
-<p>ادامه پیاده‌سازی شامل تعریف شرکت‌کنندگان، کلاس‌های <strong>Component</strong>، <strong>Leaf</strong> و <strong>Composite</strong> خواهد بود که به شما امکان می‌دهد سلسله‌مراتب اشیاء را به‌صورت یکنواخت مدیریت کنید.</p>
-<p>اگر بخواهید، می‌توانم همین حالا ادامه ترجمه و پیاده‌سازی کد <strong>Composite</strong> را هم به شما ارائه کنم. آیا ادامه دهم؟</p>
-<div align="center">
-<p><img src="../../../assets/image/14/Table%2014-14.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<p>شرکت‌کنندگان در <strong>الگوی طراحی Composite</strong> به شرح زیر هستند:</p>
-<ul>
-<li><strong>Component</strong>: رابط (interface) اشیاء ترکیبی</li>
-<li><strong>Leaf</strong>: یک برگ در ترکیب که هیچ فرزندی ندارد</li>
-<li><strong>Composite</strong>: اجزای فرزند را ذخیره می‌کند و عملیات‌ها را انجام می‌دهد</li>
-<li><strong>Client</strong>: از طریق رابط Component با ترکیب‌ها و برگ‌ها کار می‌کند</li>
-</ul>
-<hr>
-<h3>پیاده‌سازی الگوی Composite 🌳</h3>
-<p>1️⃣ یک پوشه جدید به نام <strong>Composite</strong> به پوشه <strong>StructuralDesignPatterns</strong> اضافه کنید.<br>
-سپس، رابط <strong>IComponent</strong> را اضافه کنید:</p>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title">IComponent</span> {
+</code></pre> <p>ابتدا یک نمونه از <strong>RefinedAbstraction</strong> ایجاد می‌کنیم، سپس implementor آن را به یک نمونه از <strong>ConcreteImplementor</strong> اختصاص می‌دهیم. در نهایت <strong>Operation()</strong> فراخوانی می‌شود.</p><p>خروجی مثال پیاده‌سازی Bridge به شکل زیر خواهد بود:</p><pre class="hljs"><code>Concrete operation executed.
+</code></pre> <div align="center"><p><img src="../../../assets/image/14/Table%2014-13.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <p>همان‌طور که مشاهده می‌کنید، ما موفق شدیم عملیات <strong>Concrete</strong> را در کلاس <strong>ConcreteImplementor</strong> اجرا کنیم .</p><p>الگوی بعدی که بررسی می‌کنیم، <strong>الگوی طراحی Composite</strong> است.</p><hr> <h3>پیاده‌سازی الگوی Composite</h3><p>با <strong>الگوی طراحی Composite</strong>، اشیاء به صورت ساختار درختی ترکیب می‌شوند تا سلسله‌مراتب جزء-کل (part-whole hierarchies) را نمایش دهند. این الگو به شما امکان می‌دهد تا اشیاء منفرد و ترکیب‌های آن‌ها را به‌طور یکنواخت مدیریت کنید.</p><p>از این الگو زمانی استفاده کنید که:<br> 1⃣ نیاز دارید تفاوت بین اشیاء منفرد و ترکیب‌های اشیاء را نادیده بگیرید.<br> 2⃣ به ساختارهای درختی برای نمایش سلسله‌مراتب نیاز دارید.<br> 3⃣ ساختار سلسله‌مراتبی به عملکردهای عمومی (generic functionality) در سراسر ساختار نیاز دارد.</p><hr> <p>ادامه پیاده‌سازی شامل تعریف شرکت‌کنندگان، کلاس‌های <strong>Component</strong>، <strong>Leaf</strong> و <strong>Composite</strong> خواهد بود که به شما امکان می‌دهد سلسله‌مراتب اشیاء را به‌صورت یکنواخت مدیریت کنید.</p><p>اگر بخواهید، می‌توانم همین حالا ادامه ترجمه و پیاده‌سازی کد <strong>Composite</strong> را هم به شما ارائه کنم. آیا ادامه دهم؟</p><div align="center"> <p><img src="../../../assets/image/14/Table%2014-14.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <p>شرکت‌کنندگان در <strong>الگوی طراحی Composite</strong> به شرح زیر هستند:</p><ul> <li><strong>Component</strong>: رابط (interface) اشیاء ترکیبی</li><li><strong>Leaf</strong>: یک برگ در ترکیب که هیچ فرزندی ندارد</li><li><strong>Composite</strong>: اجزای فرزند را ذخیره می‌کند و عملیات‌ها را انجام می‌دهد</li><li><strong>Client</strong>: از طریق رابط Component با ترکیب‌ها و برگ‌ها کار می‌کند</li></ul> <hr><h3>پیاده‌سازی الگوی Composite</h3><p>1⃣ یک پوشه جدید به نام <strong>Composite</strong> به پوشه <strong>StructuralDesignPatterns</strong> اضافه کنید.<br> سپس، رابط <strong>IComponent</strong> را اضافه کنید:</p><pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title">IComponent</span> {
     <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">PrintName</span>()</span>;
 }
-</code></pre>
-<p>رابط <strong>IComponent</strong> تنها یک متد دارد که هم برگ‌ها و هم ترکیب‌ها آن را پیاده‌سازی می‌کنند.</p>
-<p>2️⃣ کلاس <strong>Leaf</strong> را اضافه کنید:</p>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Leaf</span> : <span class="hljs-title">IComponent</span> {
+</code></pre> <p>رابط <strong>IComponent</strong> تنها یک متد دارد که هم برگ‌ها و هم ترکیب‌ها آن را پیاده‌سازی می‌کنند.</p><p>2⃣ کلاس <strong>Leaf</strong> را اضافه کنید:</p><pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Leaf</span> : <span class="hljs-title">IComponent</span> {
     <span class="hljs-keyword">private</span> <span class="hljs-keyword">readonly</span> <span class="hljs-built_in">string</span> _name;
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Leaf</span>(<span class="hljs-params"><span class="hljs-built_in">string</span> name</span>)</span> {
         _name = name;
@@ -649,10 +226,7 @@ abstraction.Operation();
         Console.WriteLine(<span class="hljs-string">$&quot;Leaf Name: <span class="hljs-subst">{_name}</span>&quot;</span>);
     }
 }
-</code></pre>
-<p>کلاس <strong>Leaf</strong> رابط <strong>IComponent</strong> را پیاده‌سازی می‌کند. سازنده آن یک نام می‌گیرد و ذخیره می‌کند و متد <strong>PrintName()</strong> نام برگ را در کنسول چاپ می‌کند.</p>
-<p>3️⃣ کلاس <strong>Composite</strong> را اضافه کنید:</p>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Composite</span> : <span class="hljs-title">IComponent</span> {
+</code></pre> <p>کلاس <strong>Leaf</strong> رابط <strong>IComponent</strong> را پیاده‌سازی می‌کند. سازنده آن یک نام می‌گیرد و ذخیره می‌کند و متد <strong>PrintName()</strong> نام برگ را در کنسول چاپ می‌کند.</p><p>3⃣ کلاس <strong>Composite</strong> را اضافه کنید:</p><pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Composite</span> : <span class="hljs-title">IComponent</span> {
     <span class="hljs-keyword">private</span> <span class="hljs-keyword">readonly</span> <span class="hljs-built_in">string</span> _name;
     <span class="hljs-keyword">private</span> <span class="hljs-keyword">readonly</span> List&lt;IComponent&gt; _components;
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Composite</span>(<span class="hljs-params"><span class="hljs-built_in">string</span> name</span>)</span> {
@@ -669,11 +243,7 @@ abstraction.Operation();
         }
     }
 }
-</code></pre>
-<p>کلاس <strong>Composite</strong> نیز <strong>IComponent</strong> را پیاده‌سازی می‌کند، مشابه کلاس برگ. علاوه بر این، <strong>Composite</strong> لیستی از اجزا دارد که با متد <strong>Add()</strong> اضافه می‌شوند. متد <strong>PrintName()</strong> ابتدا نام خود را چاپ می‌کند و سپس نام تمام اجزای موجود در لیست را چاپ می‌کند.</p>
-<hr>
-<h3>تست پیاده‌سازی Composite</h3>
-<pre class="hljs"><code><span class="hljs-keyword">var</span> root = <span class="hljs-keyword">new</span> Composite(<span class="hljs-string">&quot;Classification of Animals&quot;</span>);
+</code></pre> <p>کلاس <strong>Composite</strong> نیز <strong>IComponent</strong> را پیاده‌سازی می‌کند، مشابه کلاس برگ. علاوه بر این، <strong>Composite</strong> لیستی از اجزا دارد که با متد <strong>Add()</strong> اضافه می‌شوند. متد <strong>PrintName()</strong> ابتدا نام خود را چاپ می‌کند و سپس نام تمام اجزای موجود در لیست را چاپ می‌کند.</p><hr> <h3>تست پیاده‌سازی Composite</h3><pre class="hljs"><code><span class="hljs-keyword">var</span> root = <span class="hljs-keyword">new</span> Composite(<span class="hljs-string">&quot;Classification of Animals&quot;</span>);
 <span class="hljs-keyword">var</span> invertebrates = <span class="hljs-keyword">new</span> Composite(<span class="hljs-string">&quot;+ Invertebrates&quot;</span>);
 <span class="hljs-keyword">var</span> vertebrates = <span class="hljs-keyword">new</span> Composite(<span class="hljs-string">&quot;+ Vertebrates&quot;</span>);
 <span class="hljs-keyword">var</span> warmBlooded = <span class="hljs-keyword">new</span> Leaf(<span class="hljs-string">&quot;-- Warm-Blooded&quot;</span>);
@@ -689,41 +259,7 @@ root.Add(invertebrates);
 root.Add(vertebrates);
 
 root.PrintName();
-</code></pre>
-<p>همان‌طور که مشاهده می‌کنید:<br>
-✅ ابتدا ترکیب‌ها (<strong>Composite</strong>) ایجاد می‌شوند، سپس برگ‌ها (<strong>Leaf</strong>) ساخته می‌شوند.<br>
-✅ برگ‌ها به ترکیب‌های مناسب اضافه می‌شوند.<br>
-✅ سپس ترکیب‌ها به ریشه (<strong>root composite</strong>) اضافه می‌شوند.<br>
-✅ در نهایت، با فراخوانی <strong>PrintName()</strong> روی ریشه، نام ریشه و تمام اجزا و برگ‌های سلسله‌مراتبی چاپ می‌شوند.</p>
-<p>خروجی برنامه مشابه ساختار سلسله‌مراتبی درختی خواهد بود.</p>
-<div align="center">
-<p><img src="../../../assets/image/14/Table%2014-15.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<p>پیاده‌سازی ما از الگوی <strong>Composite</strong> همان‌طور که انتظار داشتیم به درستی کار می‌کند ✅.<br>
-الگوی بعدی که پیاده‌سازی خواهیم کرد، <strong>الگوی Façade</strong> است.</p>
-<hr>
-<h3>پیاده‌سازی الگوی Façade 🏛️</h3>
-<p>الگوی <strong>Façade</strong> به منظور ساده‌تر کردن استفاده از زیرسیستم‌های API طراحی شده است.<br>
-از این الگو استفاده کنید تا یک سیستم بزرگ و پیچیده را پشت یک رابط ساده‌تر برای مشتریان خود مخفی کنید.</p>
-<p>دلایل اصلی استفاده برنامه‌نویسان از این الگو عبارت‌اند از:</p>
-<ul>
-<li>سیستمی که باید استفاده یا روی آن کار شود، بسیار پیچیده است و فهم آن دشوار است.</li>
-<li>اگر تعداد زیادی کلاس به یکدیگر وابسته باشند.</li>
-<li>یا در مواقعی که برنامه‌نویسان به کد منبع دسترسی ندارند.</li>
-</ul>
-<p>این الگو باعث می‌شود تعامل با سیستم ساده‌تر شود و پیچیدگی‌ها از دید کاربر مخفی بماند.</p>
-<div align="center">
-<p><img src="../../../assets/image/14/Table%2014-16.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<p>شرکت‌کنندگان در الگوی <strong>Façade</strong> به شرح زیر هستند:</p>
-<ul>
-<li><strong>Facade</strong>: رابط ساده‌ای که به‌عنوان واسطه بین مشتری و یک سیستم پیچیده از زیرسیستم‌ها عمل می‌کند.</li>
-<li><strong>Subsystem Classes</strong>: کلاس‌های زیرسیستم که دسترسی مستقیم مشتری به آن‌ها حذف شده و تنها توسط Facade قابل دسترسی هستند.</li>
-</ul>
-<hr>
-<p>حالا می‌خواهیم الگوی <strong>Façade</strong> را پیاده‌سازی کنیم:</p>
-<p>1️⃣ یک پوشه به نام <strong>Facade</strong> داخل <strong>StructuralDesignPatterns</strong> اضافه کنید. سپس کلاس‌های <strong>SubsystemOne</strong> و <strong>SubsystemTwo</strong> را اضافه کنید:</p>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">SubsystemOne</span> {
+</code></pre> <p>همان‌طور که مشاهده می‌کنید:<br> ابتدا ترکیب‌ها (<strong>Composite</strong>) ایجاد می‌شوند، سپس برگ‌ها (<strong>Leaf</strong>) ساخته می‌شوند.<br> برگ‌ها به ترکیب‌های مناسب اضافه می‌شوند.<br> سپس ترکیب‌ها به ریشه (<strong>root composite</strong>) اضافه می‌شوند.<br> در نهایت، با فراخوانی <strong>PrintName()</strong> روی ریشه، نام ریشه و تمام اجزا و برگ‌های سلسله‌مراتبی چاپ می‌شوند.</p><p>خروجی برنامه مشابه ساختار سلسله‌مراتبی درختی خواهد بود.</p><div align="center"> <p><img src="../../../assets/image/14/Table%2014-15.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <p>پیاده‌سازی ما از الگوی <strong>Composite</strong> همان‌طور که انتظار داشتیم به درستی کار می‌کند .<br> الگوی بعدی که پیاده‌سازی خواهیم کرد، <strong>الگوی Façade</strong> است.</p><hr> <h3>پیاده‌سازی الگوی Façade</h3><p>الگوی <strong>Façade</strong> به منظور ساده‌تر کردن استفاده از زیرسیستم‌های API طراحی شده است.<br> از این الگو استفاده کنید تا یک سیستم بزرگ و پیچیده را پشت یک رابط ساده‌تر برای مشتریان خود مخفی کنید.</p><p>دلایل اصلی استفاده برنامه‌نویسان از این الگو عبارت‌اند از:</p><ul> <li>سیستمی که باید استفاده یا روی آن کار شود، بسیار پیچیده است و فهم آن دشوار است.</li><li>اگر تعداد زیادی کلاس به یکدیگر وابسته باشند.</li><li>یا در مواقعی که برنامه‌نویسان به کد منبع دسترسی ندارند.</li></ul> <p>این الگو باعث می‌شود تعامل با سیستم ساده‌تر شود و پیچیدگی‌ها از دید کاربر مخفی بماند.</p><div align="center"> <p><img src="../../../assets/image/14/Table%2014-16.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <p>شرکت‌کنندگان در الگوی <strong>Façade</strong> به شرح زیر هستند:</p><ul> <li><strong>Facade</strong>: رابط ساده‌ای که به‌عنوان واسطه بین مشتری و یک سیستم پیچیده از زیرسیستم‌ها عمل می‌کند.</li><li><strong>Subsystem Classes</strong>: کلاس‌های زیرسیستم که دسترسی مستقیم مشتری به آن‌ها حذف شده و تنها توسط Facade قابل دسترسی هستند.</li></ul> <hr><p>حالا می‌خواهیم الگوی <strong>Façade</strong> را پیاده‌سازی کنیم:</p><p>1⃣ یک پوشه به نام <strong>Facade</strong> داخل <strong>StructuralDesignPatterns</strong> اضافه کنید. سپس کلاس‌های <strong>SubsystemOne</strong> و <strong>SubsystemTwo</strong> را اضافه کنید:</p><pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">SubsystemOne</span> {
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">PrintName</span>()</span> {
         Console.WriteLine(<span class="hljs-string">&quot;SubsystemOne.PrintName()&quot;</span>);
     }
@@ -734,10 +270,7 @@ root.PrintName();
         Console.WriteLine(<span class="hljs-string">&quot;SubsystemTwo.PrintName()&quot;</span>);
     }
 }
-</code></pre>
-<p>این کلاس‌ها یک متد دارند که نام کلاس و نام متد را در کنسول چاپ می‌کند.</p>
-<p>2️⃣ حالا کلاس <strong>Facade</strong> را اضافه کنید:</p>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Facade</span> {
+</code></pre> <p>این کلاس‌ها یک متد دارند که نام کلاس و نام متد را در کنسول چاپ می‌کند.</p><p>2⃣ حالا کلاس <strong>Facade</strong> را اضافه کنید:</p><pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Facade</span> {
     <span class="hljs-keyword">private</span> SubsystemOne _subsystemOne = <span class="hljs-keyword">new</span> SubsystemOne();
     <span class="hljs-keyword">private</span> SubsystemTwo _subsystemTwo = <span class="hljs-keyword">new</span> SubsystemTwo();
 
@@ -749,68 +282,20 @@ root.PrintName();
         _subsystemTwo.PrintName();
     }
 }
-</code></pre>
-<p>کلاس <strong>Facade</strong> متغیرهای عضوی برای هر سیستم که از آن آگاهی دارد ایجاد می‌کند و سپس مجموعه‌ای از متدها را فراهم می‌کند تا بخش‌های مختلف هر زیرسیستم را هنگام درخواست اجرا کند.</p>
-<p>3️⃣ برای آزمایش پیاده‌سازی، کد زیر را اضافه کنید:</p>
-<pre class="hljs"><code><span class="hljs-keyword">var</span> facade = <span class="hljs-keyword">new</span> Facade();
+</code></pre> <p>کلاس <strong>Facade</strong> متغیرهای عضوی برای هر سیستم که از آن آگاهی دارد ایجاد می‌کند و سپس مجموعه‌ای از متدها را فراهم می‌کند تا بخش‌های مختلف هر زیرسیستم را هنگام درخواست اجرا کند.</p><p>3⃣ برای آزمایش پیاده‌سازی، کد زیر را اضافه کنید:</p><pre class="hljs"><code><span class="hljs-keyword">var</span> facade = <span class="hljs-keyword">new</span> Facade();
 facade.SubsystemOneDoWork();
 facade.SubsystemTwoDoWork();
-</code></pre>
-<p>تنها کافی است یک متغیر <strong>Facade</strong> ایجاد کنید و سپس متدهایی که فراخوانی متدهای زیرسیستم‌ها را انجام می‌دهند، اجرا کنید.<br>
-نتیجه خروجی مشابه زیر خواهد بود:</p>
-<div align="center">
-<p><img src="../../../assets/image/14/Table%2014-17.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<p>وقت آن رسیده که به آخرین الگوی ساختاری خود یعنی <strong>Flyweight</strong> نگاهی بیندازیم. 🪶</p>
-<hr>
-<h3>پیاده‌سازی الگوی <strong>Flyweight</strong></h3>
-<p>الگوی <strong>Flyweight</strong> برای پردازش بهینه تعداد زیادی شیء ریز و جزئی استفاده می‌شود، به‌طوری که تعداد کل اشیاء کاهش پیدا کند.<br>
-از این الگو استفاده کنید تا <strong>کارایی سیستم افزایش یابد</strong> و <strong>حجم حافظه مصرفی کاهش پیدا کند</strong>، زیرا تعداد اشیائی که ایجاد می‌کنید کاهش می‌یابد.</p>
-<hr>
-<p>اگر آماده باشید، می‌توانیم شرکت‌کنندگان این الگو و مراحل پیاده‌سازی آن را مرور کنیم.</p>
-<div align="center">
-<p><img src="../../../assets/image/14/Table%2014-18.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<p>شرکت‌کنندگان در الگوی طراحی <strong>Flyweight</strong> به شرح زیر هستند: 🪶</p>
-<ul>
-<li><strong>Flyweight</strong>: یک رابط (Interface) برای Flyweightها فراهم می‌کند تا بتوانند یک <strong>Extrinsic State</strong> دریافت کرده و بر اساس آن عمل کنند.</li>
-<li><strong>ConcreteFlyweight</strong>: یک شیء قابل اشتراک که فضای ذخیره‌سازی برای <strong>Intrinsic State</strong> را اضافه می‌کند.</li>
-<li><strong>UnsharedConcreteFlyweight</strong>: زمانی استفاده می‌شود که Flyweightها نیازی به اشتراک‌گذاری ندارند.</li>
-<li><strong>FlyweightFactory</strong>: اشیاء Flyweight را به‌درستی مدیریت کرده و آن‌ها را به‌صورت اشتراکی فراهم می‌کند.</li>
-<li><strong>Client</strong>: مراجع Flyweight را نگه‌داری کرده و <strong>Extrinsic State</strong> آن‌ها را محاسبه یا ذخیره می‌کند.</li>
-</ul>
-<p><strong>توضیح حالات:</strong></p>
-<ul>
-<li><strong>Extrinsic State</strong> یعنی بخشی از ماهیت اصلی شیء نیست و از خارج شیء تأمین می‌شود.</li>
-<li><strong>Intrinsic State</strong> یعنی بخشی از وضعیت درونی شیء است و برای شیء ضروری است.</li>
-</ul>
-<hr>
-<h3>پیاده‌سازی الگوی <strong>Flyweight</strong></h3>
-<ol>
-<li>ابتدا پوشه‌ای به نام <strong>Flyweight</strong> داخل پوشه <strong>StructuralDesignPatterns</strong> اضافه کنید.</li>
-<li>کلاس <strong>Flyweight</strong> را اضافه کنید:</li>
-</ol>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Flyweight</span> {
+</code></pre> <p>تنها کافی است یک متغیر <strong>Facade</strong> ایجاد کنید و سپس متدهایی که فراخوانی متدهای زیرسیستم‌ها را انجام می‌دهند، اجرا کنید.<br> نتیجه خروجی مشابه زیر خواهد بود:</p><div align="center"> <p><img src="../../../assets/image/14/Table%2014-17.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <p>وقت آن رسیده که به آخرین الگوی ساختاری خود یعنی <strong>Flyweight</strong> نگاهی بیندازیم.</p><hr> <h3>پیاده‌سازی الگوی <strong>Flyweight</strong></h3><p>الگوی <strong>Flyweight</strong> برای پردازش بهینه تعداد زیادی شیء ریز و جزئی استفاده می‌شود، به‌طوری که تعداد کل اشیاء کاهش پیدا کند.<br> از این الگو استفاده کنید تا <strong>کارایی سیستم افزایش یابد</strong> و <strong>حجم حافظه مصرفی کاهش پیدا کند</strong>، زیرا تعداد اشیائی که ایجاد می‌کنید کاهش می‌یابد.</p><hr> <p>اگر آماده باشید، می‌توانیم شرکت‌کنندگان این الگو و مراحل پیاده‌سازی آن را مرور کنیم.</p><div align="center"> <p><img src="../../../assets/image/14/Table%2014-18.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <p>شرکت‌کنندگان در الگوی طراحی <strong>Flyweight</strong> به شرح زیر هستند:</p><ul> <li><strong>Flyweight</strong>: یک رابط (Interface) برای Flyweightها فراهم می‌کند تا بتوانند یک <strong>Extrinsic State</strong> دریافت کرده و بر اساس آن عمل کنند.</li><li><strong>ConcreteFlyweight</strong>: یک شیء قابل اشتراک که فضای ذخیره‌سازی برای <strong>Intrinsic State</strong> را اضافه می‌کند.</li><li><strong>UnsharedConcreteFlyweight</strong>: زمانی استفاده می‌شود که Flyweightها نیازی به اشتراک‌گذاری ندارند.</li><li><strong>FlyweightFactory</strong>: اشیاء Flyweight را به‌درستی مدیریت کرده و آن‌ها را به‌صورت اشتراکی فراهم می‌کند.</li><li><strong>Client</strong>: مراجع Flyweight را نگه‌داری کرده و <strong>Extrinsic State</strong> آن‌ها را محاسبه یا ذخیره می‌کند.</li></ul> <p><strong>توضیح حالات:</strong></p><ul> <li><strong>Extrinsic State</strong> یعنی بخشی از ماهیت اصلی شیء نیست و از خارج شیء تأمین می‌شود.</li><li><strong>Intrinsic State</strong> یعنی بخشی از وضعیت درونی شیء است و برای شیء ضروری است.</li></ul> <hr><h3>پیاده‌سازی الگوی <strong>Flyweight</strong></h3><ol> <li>ابتدا پوشه‌ای به نام <strong>Flyweight</strong> داخل پوشه <strong>StructuralDesignPatterns</strong> اضافه کنید.</li><li>کلاس <strong>Flyweight</strong> را اضافه کنید:</li></ol> <pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Flyweight</span> {
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Operation</span>(<span class="hljs-params"><span class="hljs-built_in">string</span> extrinsicState</span>)</span>;
 }
-</code></pre>
-<p>این کلاس انتزاعی است و شامل متدی انتزاعی به نام <strong>Operation()</strong> است که <strong>Extrinsic State</strong> به آن ارسال می‌شود.</p>
-<ol start="3">
-<li>کلاس <strong>ConcreteFlyweight</strong>:</li>
-</ol>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">ConcreteFlyweight</span> : <span class="hljs-title">Flyweight</span>
+</code></pre> <p>این کلاس انتزاعی است و شامل متدی انتزاعی به نام <strong>Operation()</strong> است که <strong>Extrinsic State</strong> به آن ارسال می‌شود.</p><ol start="3"> <li>کلاس <strong>ConcreteFlyweight</strong>:</li></ol> <pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">ConcreteFlyweight</span> : <span class="hljs-title">Flyweight</span>
 {
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Operation</span>(<span class="hljs-params"><span class="hljs-built_in">string</span> extrinsicState</span>)</span>
     {
         Console.WriteLine(<span class="hljs-string">$&quot;ConcreteFlyweight: <span class="hljs-subst">{extrinsicState}</span>&quot;</span>);
     }
 }
-</code></pre>
-<p>این کلاس از <strong>Flyweight</strong> ارث‌بری کرده و متد <strong>Operation()</strong> را بازنویسی می‌کند. این متد نام کلاس و <strong>Extrinsic State</strong> را چاپ می‌کند.</p>
-<ol start="4">
-<li>کلاس <strong>FlyweightFactory</strong>:</li>
-</ol>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">FlyweightFactory</span> {
+</code></pre> <p>این کلاس از <strong>Flyweight</strong> ارث‌بری کرده و متد <strong>Operation()</strong> را بازنویسی می‌کند. این متد نام کلاس و <strong>Extrinsic State</strong> را چاپ می‌کند.</p><ol start="4"> <li>کلاس <strong>FlyweightFactory</strong>:</li></ol> <pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">FlyweightFactory</span> {
     <span class="hljs-keyword">private</span> <span class="hljs-keyword">readonly</span> Hashtable _flyweights = <span class="hljs-keyword">new</span> Hashtable();
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">FlyweightFactory</span>()</span>
     {
@@ -822,12 +307,7 @@ facade.SubsystemTwoDoWork();
         <span class="hljs-keyword">return</span> ((Flyweight)_flyweights[key]);
     }
 }
-</code></pre>
-<p>در مثال ما، اشیاء Flyweight در یک <strong>Hashtable</strong> ذخیره می‌شوند. سه Flyweight در سازنده ایجاد شده‌اند و متد <strong>GetFlyweight()</strong>، شیء Flyweight مربوط به کلید مشخص شده را برمی‌گرداند.</p>
-<ol start="5">
-<li>کلاس <strong>Client</strong>:</li>
-</ol>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Client</span>
+</code></pre> <p>در مثال ما، اشیاء Flyweight در یک <strong>Hashtable</strong> ذخیره می‌شوند. سه Flyweight در سازنده ایجاد شده‌اند و متد <strong>GetFlyweight()</strong>، شیء Flyweight مربوط به کلید مشخص شده را برمی‌گرداند.</p><ol start="5"> <li>کلاس <strong>Client</strong>:</li></ol> <pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Client</span>
 {
     <span class="hljs-keyword">private</span> <span class="hljs-keyword">const</span> <span class="hljs-built_in">string</span> ExtrinsicState = <span class="hljs-string">&quot;Arbitary state can be anything you require!&quot;</span>;
     <span class="hljs-keyword">private</span> <span class="hljs-keyword">readonly</span> FlyweightFactory _flyweightFactory = <span class="hljs-keyword">new</span> FlyweightFactory();
@@ -843,233 +323,218 @@ facade.SubsystemTwoDoWork();
         flyweightThree.Operation(ExtrinsicState);
     }
 }
-</code></pre>
-<p><strong>Extrinsic State</strong> می‌تواند هر چیزی باشد. در مثال ما، یک رشته استفاده شده است.</p>
-<ol start="6">
-<li>اجرای نمونه و تست Flyweight:</li>
-</ol>
-<pre class="hljs"><code><span class="hljs-keyword">var</span> flyweightClient = <span class="hljs-keyword">new</span> StructuralDesignPatterns.Flyweight.Client();
+</code></pre> <p><strong>Extrinsic State</strong> می‌تواند هر چیزی باشد. در مثال ما، یک رشته استفاده شده است.</p><ol start="6"> <li>اجرای نمونه و تست Flyweight:</li></ol> <pre class="hljs"><code><span class="hljs-keyword">var</span> flyweightClient = <span class="hljs-keyword">new</span> StructuralDesignPatterns.Flyweight.Client();
 flyweightClient.ProcessFlyweights();
-</code></pre>
-<p>کد یک نمونه از <strong>Client</strong> ایجاد کرده و متد <strong>ProcessFlyweights()</strong> را فراخوانی می‌کند. خروجی مشابه زیر خواهد بود:</p>
-<hr>
-<p>این پیاده‌سازی نشان می‌دهد که چگونه می‌توان با <strong>Flyweight</strong> تعداد اشیاء ایجاد شده را کاهش داد و حافظه و کارایی را بهینه کرد. 🪶💻</p>
-<div align="center">
-<p><img src="../../../assets/image/14/Table%2014-19.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<p>خوب، این بخش پایانی فصل ۱۴ کتاب است و به جمع‌بندی الگوهای طراحی و نکات مهم کدنویسی تمیز می‌پردازد. 📝</p>
-<hr>
-<h3><strong>مروری بر الگوهای رفتاری (Behavioral Design Patterns)</strong></h3>
-<p>الگوهای رفتاری مشخص می‌کنند که اشیاء چگونه با هم تعامل دارند و رفتار خود را نشان می‌دهند. مهم‌ترین الگوهای رفتاری عبارتند از:</p>
-<ul>
-<li><strong>Chain of Responsibility</strong>: پردازش درخواست‌ها به صورت یک خط لوله متوالی از اشیاء.</li>
-<li><strong>Command</strong>: بسته‌بندی اطلاعات لازم برای اجرای متد در آینده.</li>
-<li><strong>Interpreter</strong>: تفسیر یک دستور زبان مشخص.</li>
-<li><strong>Iterator</strong>: دسترسی ترتیبی به عناصر یک مجموعه بدون افشای ساختار داخلی.</li>
-<li><strong>Mediator</strong>: ارتباط بین اشیاء از طریق یک واسطه.</li>
-<li><strong>Memento</strong>: ذخیره و بازگرداندن وضعیت یک شیء.</li>
-<li><strong>Observer</strong>: مشاهده و دریافت اعلان تغییرات وضعیت یک شیء.</li>
-<li><strong>State</strong>: تغییر رفتار یک شیء با تغییر وضعیت آن.</li>
-<li><strong>Strategy</strong>: مجموعه‌ای از الگوریتم‌های قابل تعویض.</li>
-<li><strong>Template Method</strong>: تعریف الگوریتم و مراحل قابل بازنویسی در زیرکلاس‌ها.</li>
-<li><strong>Visitor</strong>: افزودن عملیات جدید به اشیاء بدون تغییر آن‌ها.</li>
-</ul>
-<p>📚 برای یادگیری کامل این الگوها، کتاب‌های زیر توصیه می‌شوند:</p>
-<ol>
-<li><em>Design Patterns in C#: A Hands-on Guide with Real-World Examples</em> – Vaskaring Sarcar</li>
-<li><em>Design Patterns in .NET</em> – Dmitri Nesteruk</li>
-<li><em>Hands-On Design Patterns with C# and .NET Core</em> – Gaurav Aroraa و Jeffrey Chilberto</li>
-</ol>
-<hr>
-<h3><strong>نکات پایانی درباره Clean Code و Refactoring</strong></h3>
-<ul>
-<li>
-<p><strong>Brownfield vs Greenfield</strong>:</p>
-<ul>
-<li><em>Brownfield</em>: نگهداری و گسترش نرم‌افزار موجود.</li>
-<li><em>Greenfield</em>: توسعه نرم‌افزار جدید از ابتدا، فرصت نوشتن کد تمیز از همان ابتدا.</li>
-</ul>
-</li>
-<li>
-<p>قبل از شروع پروژه، برنامه‌ریزی صحیح داشته باشید و ابزارهای لازم برای نوشتن کد تمیز را به کار ببرید.</p>
-</li>
-<li>
-<p><strong>Refactoring</strong>: اگر با کد غیر تمیز مواجه شدید، آن را فوراً بازسازی کنید یا در صورت پیچیدگی زیاد، آن را به عنوان بدهی فنی ثبت کنید.</p>
-</li>
-<li>
-<p><strong>کدنویسی تمیز</strong>:</p>
-<ul>
-<li>عمق ارث‌بری ≤ 1</li>
-<li>کاهش حلقه‌ها و استفاده از LINQ</li>
-<li>کاهش پیچیدگی مسیرهای برنامه</li>
-<li>کلاس‌ها کوچک و تک‌مسئولیتی</li>
-<li>متدها ≤ 10 خط و تک‌مسئولیتی</li>
-<li>استفاده از DRY (Don't Repeat Yourself)</li>
-<li>مستندسازی کد عمومی، کامنت مختصر و معنادار برای کد مخفی</li>
-</ul>
-</li>
-<li>
-<p><strong>تمرین و توسعه مهارت‌ها</strong>:</p>
-<ul>
-<li>چالش‌های برنامه‌نویسی بدون کپی/پیست</li>
-<li>پروفایلینگ و بهینه‌سازی کد</li>
-<li>پیاده‌سازی TDD و BDD</li>
-<li>پیروی از اصول KISS، SOLID، YAGNI و DRY</li>
-</ul>
-</li>
-<li>
-<p>همیشه سعی کنید کد ساده، قابل خواندن و قابل درک بنویسید. اگر بعد از مدتی دوباره به پروژه برگردید، باید بتوانید کد را سریع درک کنید.</p>
-</li>
-<li>
-<p><strong>هدف نهایی</strong>: کد تمیز و بهینه که نگهداری، توسعه و خواندن آن آسان باشد و مهارت واقعی شما را نشان دهد. 💻✨</p>
-</li>
-</ul>
-<hr>
-<h3><strong>جمع‌بندی فصل ۱۴</strong></h3>
-<ol>
-<li>بررسی و پیاده‌سازی <strong>Creational Patterns</strong> برای حل مسائل واقعی و بهینه‌سازی کد.</li>
-<li>استفاده از <strong>Structural Patterns</strong> برای بهبود ساختار و روابط بین اشیاء.</li>
-<li>آشنایی با <strong>Behavioral Patterns</strong> برای بهبود تعامل و ارتباط اشیاء و حفظ عدم وابستگی آن‌ها.</li>
-<li>آموزش Refactoring برای کدهای موجود و نوشتن <strong>کد تمیز از ابتدا</strong>.</li>
-</ol>
-<hr>
-<h3><strong>پرسش‌های پیشنهادی برای تمرین</strong></h3>
-<ol>
-<li>GoF Patterns چیست و چرا از آن‌ها استفاده می‌کنیم؟</li>
-<li>Creational Patterns چه کاربردی دارند و نام ببرید.</li>
-<li>Structural Patterns چه کاربردی دارند و نام ببرید.</li>
-<li>Behavioral Patterns چه کاربردی دارند و نام ببرید.</li>
-<li>آیا امکان استفاده بیش از حد از الگوها وجود دارد؟</li>
-<li>Singleton چیست و چه زمانی استفاده می‌کنیم؟</li>
-<li>چرا از Factory Methods استفاده می‌کنیم؟</li>
-<li>چه الگویی برای پنهان‌کردن پیچیدگی سیستم بزرگ کاربرد دارد؟</li>
-<li>چگونه می‌توان حافظه را بهینه و داده‌های مشترک بین اشیاء را مدیریت کرد؟</li>
-<li>چه الگویی برای جداکردن Abstraction از Implementation مناسب است؟</li>
-<li>چگونه می‌توان چند نمایش مختلف از یک شیء پیچیده ایجاد کرد؟</li>
-<li>اگر یک شیء نیازمند چند مرحله پردازش برای رسیدن به وضعیت مورد نظر باشد، چه الگویی مناسب است و چرا؟</li>
-</ol>
-<hr>
-<h3><strong>مطالعه بیشتر</strong></h3>
-<p>کتاب‌های توصیه شده برای تمرین بیشتر و ارتقاء مهارت‌ها:</p>
-<ul>
-<li><em>Refactoring</em> – Martin Fowler</li>
-<li><em>Refactoring at Scale</em> – Maude Lemaire</li>
-<li><em>Working Effectively with Legacy Code</em> – Michael Feathers</li>
-<li><em>Patterns of Enterprise Application Architecture</em> – Martin Fowler</li>
-<li><em>C#7 and .NET Core 2.0 High Performance</em> – Ovais Mehboob Ahmed Khan</li>
-<li>و دیگر منابع ذکر شده در متن</li>
-</ul>
-
-  </main>
-
-  <!-- فوتر مشترک -->
-  <footer class="footer">
-    <div class="container">
-      <p>
-        <img src="/Gitab/icone/copyright.svg" alt="کپی‌رایت" width="14" height="14"
-             style="vertical-align:middle;margin-inline:4px">
-        <span id="y"></span> Gitab — تمامی حقوق محفوظ است.
-      </p>
-    </div>
-  </footer>
-
-  <!-- سال و اسکریپت تغییر تم -->
-  <script>
+</code></pre> <p>کد یک نمونه از <strong>Client</strong> ایجاد کرده و متد <strong>ProcessFlyweights()</strong> را فراخوانی می‌کند. خروجی مشابه زیر خواهد بود:</p><hr> <p>این پیاده‌سازی نشان می‌دهد که چگونه می‌توان با <strong>Flyweight</strong> تعداد اشیاء ایجاد شده را کاهش داد و حافظه و کارایی را بهینه کرد.</p><div align="center"> <p><img src="../../../assets/image/14/Table%2014-19.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <p>خوب، این بخش پایانی فصل ۱۴ کتاب است و به جمع‌بندی الگوهای طراحی و نکات مهم کدنویسی تمیز می‌پردازد.</p><hr> <h3><strong>مروری بر الگوهای رفتاری (Behavioral Design Patterns)</strong></h3><p>الگوهای رفتاری مشخص می‌کنند که اشیاء چگونه با هم تعامل دارند و رفتار خود را نشان می‌دهند. مهم‌ترین الگوهای رفتاری عبارتند از:</p><ul> <li><strong>Chain of Responsibility</strong>: پردازش درخواست‌ها به صورت یک خط لوله متوالی از اشیاء.</li><li><strong>Command</strong>: بسته‌بندی اطلاعات لازم برای اجرای متد در آینده.</li><li><strong>Interpreter</strong>: تفسیر یک دستور زبان مشخص.</li><li><strong>Iterator</strong>: دسترسی ترتیبی به عناصر یک مجموعه بدون افشای ساختار داخلی.</li><li><strong>Mediator</strong>: ارتباط بین اشیاء از طریق یک واسطه.</li><li><strong>Memento</strong>: ذخیره و بازگرداندن وضعیت یک شیء.</li><li><strong>Observer</strong>: مشاهده و دریافت اعلان تغییرات وضعیت یک شیء.</li><li><strong>State</strong>: تغییر رفتار یک شیء با تغییر وضعیت آن.</li><li><strong>Strategy</strong>: مجموعه‌ای از الگوریتم‌های قابل تعویض.</li><li><strong>Template Method</strong>: تعریف الگوریتم و مراحل قابل بازنویسی در زیرکلاس‌ها.</li><li><strong>Visitor</strong>: افزودن عملیات جدید به اشیاء بدون تغییر آن‌ها.</li></ul> <p>برای یادگیری کامل این الگوها، کتاب‌های زیر توصیه می‌شوند:</p><ol> <li><em>Design Patterns in C#: A Hands-on Guide with Real-World Examples</em> – Vaskaring Sarcar</li><li><em>Design Patterns in .NET</em> – Dmitri Nesteruk</li><li><em>Hands-On Design Patterns with C# and .NET Core</em> – Gaurav Aroraa و Jeffrey Chilberto</li></ol> <hr><h3><strong>نکات پایانی درباره Clean Code و Refactoring</strong></h3><ul> <li><p><strong>Brownfield vs Greenfield</strong>:</p><ul> <li><em>Brownfield</em>: نگهداری و گسترش نرم‌افزار موجود.</li><li><em>Greenfield</em>: توسعه نرم‌افزار جدید از ابتدا، فرصت نوشتن کد تمیز از همان ابتدا.</li></ul> </li><li> <p>قبل از شروع پروژه، برنامه‌ریزی صحیح داشته باشید و ابزارهای لازم برای نوشتن کد تمیز را به کار ببرید.</p></li> <li><p><strong>Refactoring</strong>: اگر با کد غیر تمیز مواجه شدید، آن را فوراً بازسازی کنید یا در صورت پیچیدگی زیاد، آن را به عنوان بدهی فنی ثبت کنید.</p></li> <li><p><strong>کدنویسی تمیز</strong>:</p><ul> <li>عمق ارث‌بری ≤ 1</li><li>کاهش حلقه‌ها و استفاده از LINQ</li><li>کاهش پیچیدگی مسیرهای برنامه</li><li>کلاس‌ها کوچک و تک‌مسئولیتی</li><li>متدها ≤ 10 خط و تک‌مسئولیتی</li><li>استفاده از DRY (Don't Repeat Yourself)</li><li>مستندسازی کد عمومی، کامنت مختصر و معنادار برای کد مخفی</li></ul> </li><li> <p><strong>تمرین و توسعه مهارت‌ها</strong>:</p><ul> <li>چالش‌های برنامه‌نویسی بدون کپی/پیست</li><li>پروفایلینگ و بهینه‌سازی کد</li><li>پیاده‌سازی TDD و BDD</li><li>پیروی از اصول KISS، SOLID، YAGNI و DRY</li></ul> </li><li> <p>همیشه سعی کنید کد ساده، قابل خواندن و قابل درک بنویسید. اگر بعد از مدتی دوباره به پروژه برگردید، باید بتوانید کد را سریع درک کنید.</p></li> <li><p><strong>هدف نهایی</strong>: کد تمیز و بهینه که نگهداری، توسعه و خواندن آن آسان باشد و مهارت واقعی شما را نشان دهد.</p></li> </ul><hr> <h3><strong>جمع‌بندی فصل ۱۴</strong></h3><ol> <li>بررسی و پیاده‌سازی <strong>Creational Patterns</strong> برای حل مسائل واقعی و بهینه‌سازی کد.</li><li>استفاده از <strong>Structural Patterns</strong> برای بهبود ساختار و روابط بین اشیاء.</li><li>آشنایی با <strong>Behavioral Patterns</strong> برای بهبود تعامل و ارتباط اشیاء و حفظ عدم وابستگی آن‌ها.</li><li>آموزش Refactoring برای کدهای موجود و نوشتن <strong>کد تمیز از ابتدا</strong>.</li></ol> <hr><h3><strong>پرسش‌های پیشنهادی برای تمرین</strong></h3><ol> <li>GoF Patterns چیست و چرا از آن‌ها استفاده می‌کنیم؟</li><li>Creational Patterns چه کاربردی دارند و نام ببرید.</li><li>Structural Patterns چه کاربردی دارند و نام ببرید.</li><li>Behavioral Patterns چه کاربردی دارند و نام ببرید.</li><li>آیا امکان استفاده بیش از حد از الگوها وجود دارد؟</li><li>Singleton چیست و چه زمانی استفاده می‌کنیم؟</li><li>چرا از Factory Methods استفاده می‌کنیم؟</li><li>چه الگویی برای پنهان‌کردن پیچیدگی سیستم بزرگ کاربرد دارد؟</li><li>چگونه می‌توان حافظه را بهینه و داده‌های مشترک بین اشیاء را مدیریت کرد؟</li><li>چه الگویی برای جداکردن Abstraction از Implementation مناسب است؟</li><li>چگونه می‌توان چند نمایش مختلف از یک شیء پیچیده ایجاد کرد؟</li><li>اگر یک شیء نیازمند چند مرحله پردازش برای رسیدن به وضعیت مورد نظر باشد، چه الگویی مناسب است و چرا؟</li></ol> <hr><h3><strong>مطالعه بیشتر</strong></h3><p>کتاب‌های توصیه شده برای تمرین بیشتر و ارتقاء مهارت‌ها:</p><ul> <li><em>Refactoring</em> – Martin Fowler</li><li><em>Refactoring at Scale</em> – Maude Lemaire</li><li><em>Working Effectively with Legacy Code</em> – Michael Feathers</li><li><em>Patterns of Enterprise Application Architecture</em> – Martin Fowler</li><li><em>C#7 and .NET Core 2.0 High Performance</em> – Ovais Mehboob Ahmed Khan</li><li>و دیگر منابع ذکر شده در متن</li></ul> </article><nav class="chapter-single-next-nav"> <a href="/Gitab/books/book2/Book/Assessments/Assessment/" class="btn-next-chapter-action" id="nextChapterBtn" data-hub="/Gitab/books/book2/"> <span class="next-btn-text">فصل بعدی: ارزیابی‌ها و پرسش‌های نهایی</span> <span class="next-btn-arrow">←</span> </a> </nav></div> <button class="fab-back-to-top" id="backToTopBtn" type="button" aria-label="رفتن به بالای صفحه" title="رفتن به بالا"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"> <polyline points="18 15 12 9 6 15"></polyline> </svg> </button></main> <footer class="footer-minimal"><div class="footer-container"> <div class="footer-top-row"><div class="footer-brand-side"> <a href="/Gitab/" class="footer-brand-anchor"> <img src="/Gitab/icone/logo.svg" alt="Gitab" width="28" height="28" loading="lazy" decoding="async"> <span class="footer-brand-title">گیتاب (Gitab)</span> </a> <p class="footer-tagline"> پلتفرم آزاد و مستقل برای ترجمهٔ دقیق و روان کتاب‌های مرجع مهندسی نرم‌افزار. </p></div> <div class="footer-nav-cols"><div class="footer-nav-col"> <span class="footer-nav-heading">موضوعات</span><ul class="footer-nav-list"> <li><a href="/Gitab/books/list-books/?cat=csharp">سی‌شارپ و دات‌نت</a></li><li><a href="/Gitab/books/list-books/?cat=clean-code">کد تمیز و بازآفرینی</a></li><li><a href="/Gitab/books/list-books/?cat=architecture">معماری و طراحی دامنه</a></li><li><a href="/Gitab/books/list-books/?cat=system">لینوکس و خط فرمان</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">بخش‌های سایت</span><ul class="footer-nav-list"> <li><a href="/Gitab/">صفحه اصلی</a></li><li><a href="/Gitab/books/list-books/">کتابخانه کامل</a></li><li><a href="/Gitab/courses/">دوره‌های آموزشی</a></li><li><a href="/Gitab/translator.html">تالار مترجمین</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">مشارکت و جامعه</span><ul class="footer-nav-list"> <li><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer">راهنمای همکاری در ترجمه</a></li><li><a href="https://github.com/hheydarian/Gitab/issues" target="_blank" rel="noopener noreferrer">پیشنهاد کتاب یا گزارش خطا</a></li></ul> </div></div> </div><div class="footer-bottom-line"> <span>© <span id="y">2026</span> Gitab — توسعه‌یافته برای جامعهٔ مهندسان نرم‌افزار ایرانی</span></div> </div></footer> <script>
   (() => {
     const root = document.documentElement;
     const btn = document.getElementById('themeToggle');
+    const sunIcon = btn ? btn.querySelector('.icon-sun') : null;
+    const moonIcon = btn ? btn.querySelector('.icon-moon') : null;
     const KEY = 'gitab-theme';
 
-    function updateTheme(s) {
-      root.setAttribute('data-theme', s);
-      const mode = s;  // فقط `dark` یا `light` خواهد بود
+    function updateTheme(mode) {
+      root.setAttribute('data-theme', mode);
       root.dataset.colorMode = mode;
-      btn.dataset.icon = mode === 'dark' ? 'moon' : 'sun';
+      if (sunIcon && moonIcon) {
+        if (mode === 'dark') {
+          sunIcon.style.display = 'inline-block';
+          moonIcon.style.display = 'none';
+        } else {
+          sunIcon.style.display = 'none';
+          moonIcon.style.display = 'inline-block';
+        }
+      }
     }
 
-    // وضعیت تم ذخیره شده از localStorage
-    let saved = localStorage.getItem(KEY) || 'light'; // پیش‌فرض روشن
+    let saved = 'dark';
+    try { saved = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
     updateTheme(saved);
 
-    // تنظیم مجدد تم هنگام تغییر وضعیت دکمه
-    btn.addEventListener('click', () => {
-      const current = localStorage.getItem(KEY) || 'light';
-      const next = current === 'dark' ? 'light' : 'dark';  // فقط دو حالت: تاریک و روشن
-      localStorage.setItem(KEY, next);
-      updateTheme(next);
-    });
+    if (btn) {
+      btn.addEventListener('click', () => {
+        let current = 'dark';
+        try { current = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+        const next = current === 'dark' ? 'light' : 'dark';
+        try { localStorage.setItem(KEY, next); } catch (e) {}
+        updateTheme(next);
+      });
+    }
 
-    // هنگام بارگذاری صفحه
     document.addEventListener('DOMContentLoaded', () => {
-      updateTheme(localStorage.getItem(KEY) || 'light');
+      let mode = 'dark';
+      try { mode = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+      updateTheme(mode);
+      const yearSpan = document.getElementById('y');
+      if (yearSpan) yearSpan.textContent = new Date().getFullYear();
     });
+
+    const mobBtn = document.getElementById('mobileMenuBtn');
+    const mobDrawer = document.getElementById('mobileDrawer');
+    if (mobBtn && mobDrawer) {
+      const setDrawerOpen = (open) => {
+        mobDrawer.classList.toggle('open', open);
+        mobBtn.classList.toggle('is-open', open);
+        mobBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        mobBtn.setAttribute('aria-label', open ? 'بستن منو' : 'باز کردن منو');
+        mobDrawer.setAttribute('aria-hidden', open ? 'false' : 'true');
+      };
+
+      mobBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        setDrawerOpen(!mobDrawer.classList.contains('open'));
+      });
+
+      mobDrawer.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => setDrawerOpen(false));
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && mobDrawer.classList.contains('open')) {
+          setDrawerOpen(false);
+        }
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!mobDrawer.contains(e.target) && !mobBtn.contains(e.target)) {
+          setDrawerOpen(false);
+        }
+      });
+    }
+
+    if ('serviceWorker' in navigator) {
+      const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+      if (isLocalhost) {
+        navigator.serviceWorker.getRegistrations().then(regs => {
+          for (const reg of regs) reg.unregister();
+        });
+        if ('caches' in window) {
+          caches.keys().then(names => {
+            for (const name of names) caches.delete(name);
+          });
+        }
+      } else {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/Gitab/sw.js').catch(() => {});
+        });
+      }
+    }
   })();
-</script>
-
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-  <script>hljs.highlightAll();</script>
-
-  <script>
+  </script> <script>
   document.querySelectorAll('pre code').forEach(block => {
+    const pre = block.parentNode;
+    if (!pre || pre.querySelector('.copy-btn')) return;
+
+    const copySvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
+    const okSvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+
     const btn = document.createElement('button');
     btn.className = 'copy-btn';
-
-    const icon = document.createElement('img');
-    icon.src = "/Gitab/icone/copy.svg";
-    icon.alt = 'Copy';
-    btn.appendChild(icon);
-
-    block.parentNode.insertBefore(btn, block);
+    btn.setAttribute('aria-label', 'کپی کد');
+    btn.setAttribute('title', 'کپی کد');
+    btn.setAttribute('type', 'button');
+    btn.innerHTML = copySvg;
+    pre.appendChild(btn);
 
     btn.addEventListener('click', async () => {
-      await navigator.clipboard.writeText(block.textContent);
-      btn.classList.add('copied');
-      setTimeout(() => btn.classList.remove('copied'), 1500);
-    });
-  });
-  </script>
-
-  <script>
-  document.body.dataset.page = window.location.pathname;
-
-  const menuBtn = document.querySelector(".menu-toggle");
-  const nav = document.querySelector(".nav");
-
-  if (menuBtn && nav) {
-    menuBtn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      nav.classList.toggle("show");
-    });
-
-    document.addEventListener("click", (e) => {
-      const clickedInsideNav = nav.contains(e.target);
-      const clickedMenuButton = menuBtn.contains(e.target);
-      if (!clickedInsideNav && !clickedMenuButton) {
-        nav.classList.remove("show");
+      try {
+        await navigator.clipboard.writeText(block.textContent);
+        btn.classList.add('copied');
+        btn.innerHTML = okSvg;
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          btn.innerHTML = copySvg;
+        }, 1800);
+      } catch (err) {
+        console.error('Copy failed:', err);
       }
     });
-  }
-  </script>
-
-  <script>
-    document.getElementById('y').textContent = new Date().getFullYear();
-  </script>
-  <script>
-document.getElementById("openDonate").addEventListener("click", () => {
-  document.getElementById("donateModal").style.display = "block";
-});
-document.getElementById("closeDonate").addEventListener("click", () => {
-  document.getElementById("donateModal").style.display = "none";
-});
-document.querySelectorAll(".copy-btn").forEach(btn => {
-  btn.addEventListener("click", () => {
-    navigator.clipboard.writeText(btn.dataset.copy);
-  
-    setTimeout(() => (btn.textContent = "کپی"), 2000);
   });
-});
-</script>
+  </script> <script>
+  (() => {
+    const article = document.getElementById('chapterArticle');
+    if (!article) return;
 
-</body>
-</html>
+    const progressBar = document.getElementById('readingProgressBar');
+    if (progressBar) {
+      window.addEventListener('scroll', () => {
+        const docElem = document.documentElement;
+        const totalHeight = docElem.scrollHeight - docElem.clientHeight;
+        if (totalHeight > 0) {
+          const progress = (window.pageYOffset / totalHeight) * 100;
+          progressBar.style.width = Math.min(100, Math.max(0, progress)) + '%';
+        }
+      }, { passive: true });
+    }
+
+    const btt = document.getElementById('backToTopBtn');
+    if (btt) {
+      window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 250) {
+          btt.classList.add('visible');
+        } else {
+          btt.classList.remove('visible');
+        }
+      }, { passive: true });
+
+      btt.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+
+    article.querySelectorAll('img').forEach(img => {
+      if (!img.hasAttribute('loading')) img.loading = 'lazy';
+      if (!img.hasAttribute('decoding')) img.decoding = 'async';
+      const parent = img.parentElement;
+      if (parent && parent.tagName === 'P') {
+        parent.style.textAlign = 'center';
+      }
+
+      img.addEventListener('error', function() {
+        const src = this.getAttribute('src');
+        if (src && src.includes('assets/image/')) {
+          const parts = src.split('assets/image/');
+          const corrected = '/Gitab/books/book2/assets/image/' + parts[1];
+          if (this.src !== corrected) {
+            this.src = corrected;
+          }
+        }
+      });
+    });
+
+    article.querySelectorAll('p').forEach(p => {
+      const trimmed = p.innerText.trim();
+      if (trimmed.startsWith('💡') || trimmed.startsWith('نکته:')) {
+        p.classList.add('react-callout', 'callout-tip');
+      } else if (trimmed.startsWith('⚠️') || trimmed.startsWith('هشدار:')) {
+        p.classList.add('react-callout', 'callout-warning');
+      } else if (trimmed.startsWith('📌') || trimmed.startsWith('مهم:')) {
+        p.classList.add('react-callout', 'callout-important');
+      } else if (trimmed.startsWith('🔹') || trimmed.startsWith('🔸')) {
+        p.classList.add('react-callout', 'callout-note');
+      }
+    });
+  })();
+  </script> <script type="speculationrules">{"prefetch":[{"where":{"and":[{"href_matches":"/Gitab/*"},{"not":{"href_matches":"/Gitab/downloads/*"}},{"not":{"selector_matches":"[download], [target='_blank']"}}]},"eagerness":"moderate"}]}</script> <script>
+  (() => {
+    if (window.HTMLScriptElement && HTMLScriptElement.supports && HTMLScriptElement.supports('speculationrules')) return;
+    const seen = new Set([window.location.href]);
+    let count = 0;
+    const prefetchLink = (e) => {
+      if (count >= 12) return;
+      const a = e.target && e.target.closest ? e.target.closest('header a, .chapter-single-next-nav a, .syllabus-chapter-item a, .btn-hero-read, .btn-card-read') : null;
+      if (!a || !a.href || a.hasAttribute('download') || a.target === '_blank') return;
+      if (a.origin !== window.location.origin || a.pathname.includes('/downloads/')) return;
+      const clean = a.href.split('#')[0];
+      if (!clean || seen.has(clean)) return;
+      seen.add(clean);
+      count++;
+      const l = document.createElement('link');
+      l.rel = 'prefetch';
+      l.href = clean;
+      document.head.appendChild(l);
+    };
+    document.addEventListener('pointerenter', prefetchLink, { capture: true, passive: true });
+    document.addEventListener('touchstart', prefetchLink, { capture: true, passive: true });
+  })();
+  </script></body></html>

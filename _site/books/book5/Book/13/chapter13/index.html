@@ -1,660 +1,248 @@
-
-
-<!doctype html>
-<html lang="fa" dir="rtl">
-<head>
-  <meta charset="utf-8">
-  <link rel="icon" type="image/png" href="/Gitab/favicon.png">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>سفارشی‌سازی اعلان</title>
-  <meta name="description" content="ترجمه‌های فارسی کتاب‌های فنی — سریع، مینیمال و قابل اتکا.">
-
-  <!-- استایل‌ها -->
-  <link rel="stylesheet" href="/Gitab/styles/main.css">
-  <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
-
-  <style>
-  @font-face {
-    font-family: 'Vazir';
-    src: url('/Gitab/fonts/Vazir-FD-WOL.ttf') format('truetype');
-    font-display: swap;
-  }
-  @font-face {
-    font-family: "Lalezar";
-    src: url('fonts/Lalezar.ttf') format('truetype');
-    font-display: swap;
-}
-  body {
-    font-family: 'Vazir', sans-serif;
-  }
-  </style>
-</head>
-
-<body>
-  <!-- هدر مشترک -->
-  <header class="header">
-    <div class="container nav-wrap">
-      <a href="/Gitab/" class="brand">
-        <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="26" height="26">
-        <span>Gitab</span>
-      </a>
-
-       <nav class="nav">
-         <a href="/Gitab/" >خانه</a>
-         <a href="/Gitab/books/list-books" >کتاب‌ها</a>
-         <a href="/Gitab/giter.html" >دوره ها</a>
-          <!-- 
-         <a href="/Gitab/translator.html" >مترجمین</a>
-           -->
-       </nav>
-
-      <div class="nav-actions">
-        <button id="themeToggle" class="icon-btn theme-btn" data-icon="moon" aria-label="تغییر تم">
-          <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن">
-          <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک">
-        </button>
-
-        <a class="icon-btn" href="https://github.com/hheydarian/Gitab" target="_blank" title="GitHub">
-          <img src="/Gitab/icone/github.svg" alt="GitHub">
-        </a>
-
-        <!-- دکمه منو برای موبایل -->
-        <button class="menu-toggle" aria-label="منو">
-          <img src="/Gitab/icone/menu.svg" alt="menu">
-        </button>
-      </div>
-    </div>
-  </header>
-
-  
-  <main class="site-main book-page">
-    <h1>۱۳ – سفارشی‌سازی اعلان (Prompt)</h1>
-<p>در این فصل به یک جزئیات ظاهراً پیش‌پاافتاده می‌پردازیم — یعنی اعلان پوسته (Shell Prompt).<br>
-اما همین موضوع ساده، ما را با بخشی از سازوکار درونی پوسته و برنامه‌ی شبیه‌ساز ترمینال آشنا می‌کند.</p>
-<p>مثل بسیاری از چیزها در لینوکس، اعلان پوسته به‌شدت قابل پیکربندی است. شاید تا به حال چندان به آن توجه نکرده باشیم، اما وقتی یاد بگیریم چگونه کنترلش کنیم، متوجه می‌شویم ابزار بسیار مفیدی است.</p>
-<h3>ساختار یک اعلان</h3>
-<p>اعلان پیش‌فرض ما معمولاً چیزی شبیه به این است:</p>
-<pre class="hljs"><code>[me@linuxbox ~]$
-</code></pre>
-<p>توجه کنید که شامل نام کاربر، نام میزبان (hostname) و مسیر کاری فعلی است.<br>
-اما این قالب از کجا آمده؟<br>
-خیلی ساده: این قالب توسط یک متغیر محیطی به نام <strong>PS1</strong> (مخفف <em>Prompt String 1</em>) تعریف می‌شود.</p>
-<p>برای دیدن مقدار آن می‌توانیم از دستور زیر استفاده کنیم:</p>
-<pre class="hljs"><code>[me@linuxbox ~]$ echo $PS1
+<!doctype html><html lang="fa" dir="rtl"> <head><script>
+    if (window.location.pathname.startsWith('/gitab/')) {
+      window.location.replace(window.location.pathname.replace(/^\/gitab\//i, '/Gitab/') + window.location.search + window.location.hash);
+    }
+    (() => {
+      try {
+        const t = localStorage.getItem('gitab-theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', t);
+        document.documentElement.dataset.colorMode = t;
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        document.documentElement.dataset.colorMode = 'dark';
+      }
+    })();
+  </script> <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5"> <title>سفارشی‌سازی اعلان</title><meta name="description" content="سفارشی‌سازی اعلان — مطالعه آنلاین و رایگان از کتاب «خط فرمان لینوکس (TLCL)» (The Linux Command Line) اثر William Shotts با ترجمه هیمن صادقی در گیتاب."> <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"><meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"> <meta name="theme-color" content="#090d16"><meta name="referrer" content="strict-origin-when-cross-origin"> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https:; frame-src https://www.youtube.com https://www.youtube-nocookie.com https://maps.google.com https://www.google.com; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self';"><link rel="icon" type="image/png" href="/Gitab/favicon.png"> <link rel="canonical" href="https://hheydarian.github.io/Gitab/books/book5/Book/13/chapter13/"><link rel="alternate" hreflang="fa" href="https://hheydarian.github.io/Gitab/books/book5/Book/13/chapter13/"> <link rel="alternate" hreflang="x-default" href="https://hheydarian.github.io/Gitab/books/book5/Book/13/chapter13/"><link rel="alternate" type="text/plain" title="LLMs.txt" href="/Gitab/llms.txt"> <link rel="sitemap" type="application/xml" title="Sitemap" href="/Gitab/sitemap.xml"><meta property="og:locale" content="fa_IR"> <meta property="og:type" content="article"><meta property="og:site_name" content="گیتاب | Gitab"> <meta property="og:title" content="سفارشی‌سازی اعلان"><meta property="og:description" content="سفارشی‌سازی اعلان — مطالعه آنلاین و رایگان از کتاب «خط فرمان لینوکس (TLCL)» (The Linux Command Line) اثر William Shotts با ترجمه هیمن صادقی در گیتاب."> <meta property="og:url" content="https://hheydarian.github.io/Gitab/books/book5/Book/13/chapter13/"><meta property="og:image" content="https://hheydarian.github.io/Gitab/images/the-linux-command-line/Cover.jpg"> <meta property="og:image:alt" content="سفارشی‌سازی اعلان"><meta name="twitter:card" content="summary_large_image"> <meta name="twitter:title" content="سفارشی‌سازی اعلان"><meta name="twitter:description" content="سفارشی‌سازی اعلان — مطالعه آنلاین و رایگان از کتاب «خط فرمان لینوکس (TLCL)» (The Linux Command Line) اثر William Shotts با ترجمه هیمن صادقی در گیتاب."> <meta name="twitter:image" content="https://hheydarian.github.io/Gitab/images/the-linux-command-line/Cover.jpg"><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://hheydarian.github.io/Gitab/#organization","name":"گیتاب | Gitab","alternateName":"Gitab","url":"https://hheydarian.github.io/Gitab/","logo":{"@type":"ImageObject","url":"https://hheydarian.github.io/Gitab/favicon.png"},"sameAs":["https://github.com/hheydarian/Gitab"]},{"@type":"WebSite","@id":"https://hheydarian.github.io/Gitab/#website","url":"https://hheydarian.github.io/Gitab/","name":"گیتاب | Gitab","inLanguage":"fa-IR","publisher":{"@id":"https://hheydarian.github.io/Gitab/#organization"},"potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://hheydarian.github.io/Gitab/books/list-books/?q={search_term_string}"},"query-input":"required name=search_term_string"}},{"@type":"WebPage","@id":"https://hheydarian.github.io/Gitab/books/book5/Book/13/chapter13/#webpage","url":"https://hheydarian.github.io/Gitab/books/book5/Book/13/chapter13/","name":"سفارشی‌سازی اعلان","description":"سفارشی‌سازی اعلان — مطالعه آنلاین و رایگان از کتاب «خط فرمان لینوکس (TLCL)» (The Linux Command Line) اثر William Shotts با ترجمه هیمن صادقی در گیتاب.","inLanguage":"fa-IR","isPartOf":{"@id":"https://hheydarian.github.io/Gitab/#website"}},{"@type":"TechArticle","headline":"سفارشی‌سازی اعلان","description":"سفارشی‌سازی اعلان — مطالعه آنلاین و رایگان از کتاب «خط فرمان لینوکس (TLCL)» (The Linux Command Line) اثر William Shotts با ترجمه هیمن صادقی در گیتاب.","url":"https://hheydarian.github.io/Gitab/books/book5/Book/13/chapter13/","inLanguage":"fa-IR","isAccessibleForFree":true,"author":{"@type":"Person","name":"William Shotts"},"translator":{"@type":"Person","name":"هیمن صادقی"},"isPartOf":{"@type":"Book","name":"خط فرمان لینوکس (TLCL)","alternateName":"The Linux Command Line","url":"https://hheydarian.github.io/Gitab/books/book5/"}}]}</script> <link rel="preload" href="/Gitab/fonts/Vazirmatn.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/Gitab/styles/main.css?v=2.4" as="style"> <link rel="preload" href="/Gitab/styles/gitab-modern.css?v=2.5" as="style"><style>@font-face{font-family:'Lalezar';src:url('/Gitab/fonts/Lalezar.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}@font-face{font-family:'Vazirmatn';src:url('/Gitab/fonts/Vazirmatn.woff2') format('woff2');font-weight:100 900;font-style:normal;font-display:swap}html,body,button,input,optgroup,select,textarea,.filter-pill{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}input::placeholder,textarea::placeholder{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}</style> <link rel="stylesheet" href="/Gitab/styles/main.css?v=2.4"><link rel="stylesheet" href="/Gitab/styles/gitab-modern.css?v=2.5"> <link rel="stylesheet" href="/Gitab/styles/vendor/github-dark.min.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="/Gitab/styles/vendor/github-dark.min.css"></noscript></head> <body><header class="header"> <div class="container nav-wrap"><a href="/Gitab/" class="brand" aria-label="صفحه اصلی گیتاب"> <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="30" height="30" decoding="async"> <span class="brand-text">Gitab</span> </a> <nav class="nav" id="mainNav"><a href="/Gitab/" >خانه</a> <a href="/Gitab/books/list-books" aria-current="page">کتاب‌ها</a> <a href="/Gitab/courses/" >دوره‌ها</a> <a href="/Gitab/translator.html" >مترجمین</a></nav> <div class="nav-actions"><button id="themeToggle" class="theme-toggle-btn" aria-label="تغییر تم" title="تغییر تم"> <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن" width="18" height="18" decoding="async" style="display:none"> <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک" width="18" height="18" decoding="async"> </button> <a class="btn-github-pill" href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" title="مشاهده سورس گیتاب در گیت‌هاب"> <img src="/Gitab/icone/github.svg" alt="GitHub" width="16" height="16" decoding="async"> <span>گیت‌هاب</span> </a> <button class="mobile-menu-btn" id="mobileMenuBtn" type="button" aria-label="باز کردن منو" aria-expanded="false"> <svg class="mob-icon-open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="4" y1="7" x2="20" y2="7"></line> <line x1="4" y1="12" x2="20" y2="12"></line> <line x1="4" y1="17" x2="14" y2="17"></line> </svg> <svg class="mob-icon-close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="18" y1="6" x2="6" y2="18"></line> <line x1="6" y1="6" x2="18" y2="18"></line> </svg> </button></div> </div><div class="mobile-drawer" id="mobileDrawer" aria-hidden="true"> <div class="mobile-drawer-inner"><div class="mobile-drawer-section-label">ناوبری سریع</div><nav class="mobile-drawer-links" aria-label="منوی موبایل"> <a href="/Gitab/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M3 10.5 12 3l9 7.5"></path> <path d="M5 9.5V20a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V9.5"></path> </svg> </span> <span class="mob-nav-text">صفحه نخست</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/books/list-books" class="mobile-drawer-link active" aria-current="page"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path> </svg> </span> <span class="mob-nav-text">کتابخانه و فهرست کتاب‌ها</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/courses/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path> <path d="M6 12v5c3 3 9 3 12 0v-5"></path> </svg> </span> <span class="mob-nav-text">دوره‌های آموزشی</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/translator.html" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path> <circle cx="9" cy="7" r="4"></circle> <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path> <path d="M16 3.13a4 4 0 0 1 0 7.75"></path> </svg> </span> <span class="mob-nav-text">مترجمین و همکاران</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> </nav><div class="mobile-drawer-divider"></div><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" class="mobile-drawer-link mobile-drawer-gh"> <span class="mob-nav-icon" aria-hidden="true"> <img src="/Gitab/icone/github.svg" alt="" width="17" height="17" loading="lazy" decoding="async"> </span> <span class="mob-nav-text">مخزن گیت‌هاب پروژه</span> <span class="mob-nav-ext" aria-hidden="true">↗</span> </a> </div></div> </header><div class="reading-progress-track"> <div class="reading-progress-fill" id="readingProgressBar"></div></div> <main class="site-main chapter-reading-page"><div class="chapter-page-wrapper"> <nav class="chapter-clean-breadcrumb" aria-label="مسیر راهنما" dir="rtl"><a href="/Gitab/">خانه</a> <span class="bc-sep" aria-hidden="true">/</span> <a href="/Gitab/books/list-books/">کتاب‌ها</a> <span class="bc-sep" aria-hidden="true">/</span> <a href="/Gitab/books/book5/"><bdi>خط فرمان لینوکس</bdi></a> <span class="bc-sep" aria-hidden="true">/</span> <span class="bc-current-leaf"><bdi>سفارشی‌سازی اعلان</bdi></span></nav> <article class="chapter-prose-container markdown-body" id="chapterArticle" dir="rtl"><h1>۱۳ – سفارشی‌سازی اعلان (Prompt)</h1><p>در این فصل به یک جزئیات ظاهراً پیش‌پاافتاده می‌پردازیم — یعنی اعلان پوسته (Shell Prompt).<br> اما همین موضوع ساده، ما را با بخشی از سازوکار درونی پوسته و برنامه‌ی شبیه‌ساز ترمینال آشنا می‌کند.</p><p>مثل بسیاری از چیزها در لینوکس، اعلان پوسته به‌شدت قابل پیکربندی است. شاید تا به حال چندان به آن توجه نکرده باشیم، اما وقتی یاد بگیریم چگونه کنترلش کنیم، متوجه می‌شویم ابزار بسیار مفیدی است.</p><h3>ساختار یک اعلان</h3><p>اعلان پیش‌فرض ما معمولاً چیزی شبیه به این است:</p><pre class="hljs"><code>[me@linuxbox ~]$
+</code></pre> <p>توجه کنید که شامل نام کاربر، نام میزبان (hostname) و مسیر کاری فعلی است.<br> اما این قالب از کجا آمده؟<br> خیلی ساده: این قالب توسط یک متغیر محیطی به نام <strong>PS1</strong> (مخفف <em>Prompt String 1</em>) تعریف می‌شود.</p><p>برای دیدن مقدار آن می‌توانیم از دستور زیر استفاده کنیم:</p><pre class="hljs"><code>[me@linuxbox ~]$ echo $PS1
 [\u@\h \W]\$
-</code></pre>
-<blockquote>
-<p>نکته: نگران نباشید اگر خروجی شما دقیقاً مثل مثال بالا نبود.<br>
-هر توزیع لینوکسی قالب اعلان را کمی متفاوت تعریف می‌کند — بعضی حتی به شکل‌های خاص و عجیب.</p>
-</blockquote>
-<p>از نتیجه مشخص است که PS1 شامل چند کاراکتر معمول مثل براکت‌ها، علامت @ و علامت دلار است،<br>
-اما بقیه‌ی آن مبهم به نظر می‌رسد.<br>
-اگر دقت کرده باشید، این‌ها کاراکترهای خاصی هستند که با بک‌اسلش (<code>\</code>) شروع می‌شوند —<br>
-شبیه همان مواردی که در فصل ۷ دیدیم.</p>
-<p>در جدول زیر فهرستی از این کاراکترهای خاص آورده شده که پوسته در رشته‌ی اعلان به شکل ویژه تفسیر می‌کند:</p>
-<hr>
-<h4>جدول 13-1: کدهای escape مورد استفاده در اعلان پوسته</h4>
-<table>
-<thead>
-<tr>
-<th>توالی</th>
-<th>مقدار نمایشی</th>
-<th>توضیح</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>\a</code></td>
-<td>زنگ ASCII</td>
-<td>باعث بوق زدن سیستم می‌شود.</td>
-</tr>
-<tr>
-<td><code>\d</code></td>
-<td>تاریخ فعلی در قالب &quot;روز، ماه، عدد روز&quot; (مثل: <code>Mon May 26</code>)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>\h</code></td>
-<td>نام میزبان سیستم (بدون بخش دامنه)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>\H</code></td>
-<td>نام کامل میزبان</td>
-<td></td>
-</tr>
-<tr>
-<td><code>\j</code></td>
-<td>تعداد jobهای در حال اجرا در نشست فعلی پوسته</td>
-<td></td>
-</tr>
-<tr>
-<td><code>\l</code></td>
-<td>نام دستگاه ترمینال فعلی</td>
-<td></td>
-</tr>
-<tr>
-<td><code>\n</code></td>
-<td>نویسه‌ی خط جدید (newline)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>\r</code></td>
-<td>بازگشت به ابتدای خط (carriage return)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>\s</code></td>
-<td>نام برنامه‌ی پوسته</td>
-<td></td>
-</tr>
-<tr>
-<td><code>\t</code></td>
-<td>زمان فعلی در قالب ۲۴ ساعته (ساعت:دقیقه:ثانیه)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>\T</code></td>
-<td>زمان فعلی در قالب ۱۲ ساعته</td>
-<td></td>
-</tr>
-<tr>
-<td><code>\@</code></td>
-<td>زمان فعلی در قالب ۱۲ ساعته همراه با AM/PM</td>
-<td></td>
-</tr>
-<tr>
-<td><code>\A</code></td>
-<td>زمان فعلی در قالب ۲۴ ساعته (ساعت:دقیقه)</td>
-<td></td>
-</tr>
-<tr>
-<td><code>\u</code></td>
-<td>نام کاربر فعلی</td>
-<td></td>
-</tr>
-<tr>
-<td><code>\v</code></td>
-<td>شماره نسخه‌ی پوسته</td>
-<td></td>
-</tr>
-<tr>
-<td><code>\V</code></td>
-<td>شماره نسخه و انتشار پوسته</td>
-<td></td>
-</tr>
-<tr>
-<td><code>\w</code></td>
-<td>مسیر کامل پوشه‌ی کاری فعلی</td>
-<td></td>
-</tr>
-<tr>
-<td><code>\W</code></td>
-<td>فقط نام آخرین پوشه از مسیر کاری فعلی</td>
-<td></td>
-</tr>
-<tr>
-<td><code>\!</code></td>
-<td>شماره‌ی تاریخی (History number) فرمان فعلی</td>
-<td></td>
-</tr>
-<tr>
-<td><code>\#</code></td>
-<td>تعداد کل فرمان‌هایی که در این نشست وارد شده</td>
-<td></td>
-</tr>
-<tr>
-<td><code>\$</code></td>
-<td>اگر کاربر معمولی باشید «$»، و اگر superuser باشید «#» نمایش می‌دهد.</td>
-<td></td>
-</tr>
-<tr>
-<td><code>\[</code></td>
-<td>شروع رشته‌ای از نویسه‌های غیرقابل‌چاپ؛ برای درج کدهای کنترلی مثل تغییر رنگ یا جابه‌جایی مکان‌نما استفاده می‌شود.</td>
-<td></td>
-</tr>
-<tr>
-<td><code>\]</code></td>
-<td>پایان رشته‌ی نویسه‌های غیرقابل‌چاپ</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<hr>
-<p><strong>آزمایش طراحی‌های مختلف برای اعلان (Prompt)</strong></p>
-<p>با استفاده از فهرست کاراکترهای خاصی که در بخش قبل دیدیم، می‌توانیم اعلان را تغییر دهیم تا تأثیر هرکدام را ببینیم.<br>
-اول از همه بهتر است نسخه‌ی فعلی اعلان را پشتیبان بگیریم تا هر زمان خواستیم، بتوانیم به حالت اولیه برگردیم.</p>
-<pre class="hljs"><code>[me@linuxbox ~]$ ps1_old=&quot;$PS1&quot;
-</code></pre>
-<p>در اینجا یک متغیر جدید به نام <code>ps1_old</code> ساختیم و مقدار متغیر <code>PS1</code> را در آن کپی کردیم.<br>
-می‌توانیم با دستور زیر بررسی کنیم که مقدار به‌درستی ذخیره شده است:</p>
-<pre class="hljs"><code>[me@linuxbox ~]$ echo $ps1_old
+</code></pre> <blockquote><p>نکته: نگران نباشید اگر خروجی شما دقیقاً مثل مثال بالا نبود.<br> هر توزیع لینوکسی قالب اعلان را کمی متفاوت تعریف می‌کند — بعضی حتی به شکل‌های خاص و عجیب.</p></blockquote> <p>از نتیجه مشخص است که PS1 شامل چند کاراکتر معمول مثل براکت‌ها، علامت @ و علامت دلار است،<br> اما بقیه‌ی آن مبهم به نظر می‌رسد.<br> اگر دقت کرده باشید، این‌ها کاراکترهای خاصی هستند که با بک‌اسلش (<code>\</code>) شروع می‌شوند —<br> شبیه همان مواردی که در فصل ۷ دیدیم.</p><p>در جدول زیر فهرستی از این کاراکترهای خاص آورده شده که پوسته در رشته‌ی اعلان به شکل ویژه تفسیر می‌کند:</p><hr> <h4>جدول 13-1: کدهای escape مورد استفاده در اعلان پوسته</h4><table> <thead><tr> <th>توالی</th><th>مقدار نمایشی</th><th>توضیح</th></tr> </thead><tbody> <tr><td><code>\a</code></td><td>زنگ ASCII</td><td>باعث بوق زدن سیستم می‌شود.</td></tr> <tr><td><code>\d</code></td><td>تاریخ فعلی در قالب &quot;روز، ماه، عدد روز&quot; (مثل: <code>Mon May 26</code>)</td><td></td></tr> <tr><td><code>\h</code></td><td>نام میزبان سیستم (بدون بخش دامنه)</td><td></td></tr> <tr><td><code>\H</code></td><td>نام کامل میزبان</td><td></td></tr> <tr><td><code>\j</code></td><td>تعداد jobهای در حال اجرا در نشست فعلی پوسته</td><td></td></tr> <tr><td><code>\l</code></td><td>نام دستگاه ترمینال فعلی</td><td></td></tr> <tr><td><code>\n</code></td><td>نویسه‌ی خط جدید (newline)</td><td></td></tr> <tr><td><code>\r</code></td><td>بازگشت به ابتدای خط (carriage return)</td><td></td></tr> <tr><td><code>\s</code></td><td>نام برنامه‌ی پوسته</td><td></td></tr> <tr><td><code>\t</code></td><td>زمان فعلی در قالب ۲۴ ساعته (ساعت:دقیقه:ثانیه)</td><td></td></tr> <tr><td><code>\T</code></td><td>زمان فعلی در قالب ۱۲ ساعته</td><td></td></tr> <tr><td><code>\@</code></td><td>زمان فعلی در قالب ۱۲ ساعته همراه با AM/PM</td><td></td></tr> <tr><td><code>\A</code></td><td>زمان فعلی در قالب ۲۴ ساعته (ساعت:دقیقه)</td><td></td></tr> <tr><td><code>\u</code></td><td>نام کاربر فعلی</td><td></td></tr> <tr><td><code>\v</code></td><td>شماره نسخه‌ی پوسته</td><td></td></tr> <tr><td><code>\V</code></td><td>شماره نسخه و انتشار پوسته</td><td></td></tr> <tr><td><code>\w</code></td><td>مسیر کامل پوشه‌ی کاری فعلی</td><td></td></tr> <tr><td><code>\W</code></td><td>فقط نام آخرین پوشه از مسیر کاری فعلی</td><td></td></tr> <tr><td><code>\!</code></td><td>شماره‌ی تاریخی (History number) فرمان فعلی</td><td></td></tr> <tr><td><code>\#</code></td><td>تعداد کل فرمان‌هایی که در این نشست وارد شده</td><td></td></tr> <tr><td><code>\$</code></td><td>اگر کاربر معمولی باشید «$»، و اگر superuser باشید «#» نمایش می‌دهد.</td><td></td></tr> <tr><td><code>\[</code></td><td>شروع رشته‌ای از نویسه‌های غیرقابل‌چاپ؛ برای درج کدهای کنترلی مثل تغییر رنگ یا جابه‌جایی مکان‌نما استفاده می‌شود.</td><td></td></tr> <tr><td><code>\]</code></td><td>پایان رشته‌ی نویسه‌های غیرقابل‌چاپ</td><td></td></tr> </tbody></table> <hr><p><strong>آزمایش طراحی‌های مختلف برای اعلان (Prompt)</strong></p><p>با استفاده از فهرست کاراکترهای خاصی که در بخش قبل دیدیم، می‌توانیم اعلان را تغییر دهیم تا تأثیر هرکدام را ببینیم.<br> اول از همه بهتر است نسخه‌ی فعلی اعلان را پشتیبان بگیریم تا هر زمان خواستیم، بتوانیم به حالت اولیه برگردیم.</p><pre class="hljs"><code>[me@linuxbox ~]$ ps1_old=&quot;$PS1&quot;
+</code></pre> <p>در اینجا یک متغیر جدید به نام <code>ps1_old</code> ساختیم و مقدار متغیر <code>PS1</code> را در آن کپی کردیم.<br> می‌توانیم با دستور زیر بررسی کنیم که مقدار به‌درستی ذخیره شده است:</p><pre class="hljs"><code>[me@linuxbox ~]$ echo $ps1_old
 [\u@\h \W]\$
-</code></pre>
-<p>حالا در هر زمان از نشست فعلی ترمینال، برای بازگرداندن اعلان اصلی کافی است این دستور را بزنیم:</p>
-<pre class="hljs"><code>[me@linuxbox ~]$ PS1=&quot;$ps1_old&quot;
-</code></pre>
-<hr>
-<h3>حذف کامل اعلان</h3>
-<p>اگر رشته‌ی اعلان را خالی بگذاریم:</p>
-<pre class="hljs"><code>[me@linuxbox ~]$ PS1=
-</code></pre>
-<p>در این صورت هیچ اعلان متنی نمایش داده نمی‌شود. اعلان هنوز وجود دارد، اما چیزی چاپ نمی‌کند — همان‌طور که خواستیم.<br>
-از آن‌جا که این وضعیت کمی گیج‌کننده است، بهتر است یک اعلان ساده‌تر بسازیم:</p>
-<pre class="hljs"><code>PS1=&quot;\$ &quot;
-</code></pre>
-<p>بهتر شد — حالا حداقل می‌توانیم محل ورود فرمان را ببینیم.<br>
-توجه کنید که درون کوتیشن‌ها یک فاصله بعد از <code>$</code> وجود دارد تا بین نشان دلار و مکان‌نما فاصله بیفتد.</p>
-<hr>
-<h3>افزودن صدا (Bell) به اعلان</h3>
-<pre class="hljs"><code>PS1=&quot;\[\a\]\$ &quot;
-</code></pre>
-<p>اکنون هر بار که اعلان نمایش داده می‌شود، صدای بوق می‌شنویم.<br>
-ممکن است آزاردهنده باشد، ولی می‌تواند مفید باشد اگر بخواهیم مثلاً پس از اجرای یک دستور طولانی، متوجه اتمام آن شویم.<br>
-چون کد بوق (<code>\a</code>) چیزی چاپ نمی‌کند و مکان‌نما را جابجا نمی‌کند، باید با <code>\[ ... \]</code> مشخص کنیم که این بخش از نوع &quot;غیرچاپی&quot; است تا Bash بتواند طول دقیق اعلان را درست محاسبه کند.</p>
-<hr>
-<h3>افزودن نام میزبان و زمان</h3>
-<pre class="hljs"><code>$ PS1=&quot;\A \h \$ &quot;
+</code></pre> <p>حالا در هر زمان از نشست فعلی ترمینال، برای بازگرداندن اعلان اصلی کافی است این دستور را بزنیم:</p><pre class="hljs"><code>[me@linuxbox ~]$ PS1=&quot;$ps1_old&quot;
+</code></pre> <hr><h3>حذف کامل اعلان</h3><p>اگر رشته‌ی اعلان را خالی بگذاریم:</p><pre class="hljs"><code>[me@linuxbox ~]$ PS1=
+</code></pre> <p>در این صورت هیچ اعلان متنی نمایش داده نمی‌شود. اعلان هنوز وجود دارد، اما چیزی چاپ نمی‌کند — همان‌طور که خواستیم.<br> از آن‌جا که این وضعیت کمی گیج‌کننده است، بهتر است یک اعلان ساده‌تر بسازیم:</p><pre class="hljs"><code>PS1=&quot;\$ &quot;
+</code></pre> <p>بهتر شد — حالا حداقل می‌توانیم محل ورود فرمان را ببینیم.<br> توجه کنید که درون کوتیشن‌ها یک فاصله بعد از <code>$</code> وجود دارد تا بین نشان دلار و مکان‌نما فاصله بیفتد.</p><hr> <h3>افزودن صدا (Bell) به اعلان</h3><pre class="hljs"><code>PS1=&quot;\[\a\]\$ &quot;
+</code></pre> <p>اکنون هر بار که اعلان نمایش داده می‌شود، صدای بوق می‌شنویم.<br> ممکن است آزاردهنده باشد، ولی می‌تواند مفید باشد اگر بخواهیم مثلاً پس از اجرای یک دستور طولانی، متوجه اتمام آن شویم.<br> چون کد بوق (<code>\a</code>) چیزی چاپ نمی‌کند و مکان‌نما را جابجا نمی‌کند، باید با <code>\[ ... \]</code> مشخص کنیم که این بخش از نوع &quot;غیرچاپی&quot; است تا Bash بتواند طول دقیق اعلان را درست محاسبه کند.</p><hr> <h3>افزودن نام میزبان و زمان</h3><pre class="hljs"><code>$ PS1=&quot;\A \h \$ &quot;
 17:33 linuxbox $
-</code></pre>
-<p>حالا اعلان شامل ساعت و نام میزبان است؛ مفید برای زمانی که می‌خواهیم زمان اجرای فرمان‌ها را بدانیم.</p>
-<hr>
-<h3>ساختن یک اعلان شبیه نسخه‌ی اصلی</h3>
-<pre class="hljs"><code>17:37 linuxbox $ PS1=&quot;&lt;\u@\h \W&gt;\$ &quot;
+</code></pre> <p>حالا اعلان شامل ساعت و نام میزبان است؛ مفید برای زمانی که می‌خواهیم زمان اجرای فرمان‌ها را بدانیم.</p><hr> <h3>ساختن یک اعلان شبیه نسخه‌ی اصلی</h3><pre class="hljs"><code>17:37 linuxbox $ PS1=&quot;&lt;\u@\h \W&gt;\$ &quot;
 &lt;me@linuxbox ~&gt;$
-</code></pre>
-<p>حالا اعلان ما ظاهر اصلی خودش را دارد اما در قالب دلخواه ما.<br>
-با سایر توالی‌های escape در جدول قبلی بازی کنید و سعی کنید یک اعلان خلاقانه و کاربردی بسازید.</p>
-<hr>
-<h2>افزودن رنگ به اعلان</h2>
-<p>اکثر برنامه‌های ترمینال به توالی‌هایی از کاراکترهای غیرچاپی پاسخ می‌دهند که ظاهر متن را کنترل می‌کنند — مثلاً رنگ، بولد بودن یا حتی چشمک‌زن بودن متن.<br>
-در ادامه به رنگ‌ها می‌پردازیم.</p>
-<hr>
-<h3>یادداشتی درباره‌ی «سردرگمی ترمینال‌ها»</h3>
-<p>در گذشته، وقتی ترمینال‌ها به‌صورت فیزیکی به کامپیوترهای راه‌دور متصل می‌شدند، هر برند دستورهای مخصوص خودش را برای کنترل نمایش داشت.<br>
-برای مدیریت این هرج‌ومرج، یونیکس دو سیستم پیچیده به نام‌های <strong>termcap</strong> و <strong>terminfo</strong> را توسعه داد.<br>
-بعدها استانداردی به‌نام <strong>ANSI</strong> معرفی شد تا زبان مشترکی برای کنترل نمایش بین ترمینال‌ها ایجاد شود (همان که کاربران DOS قدیمی با فایل <code>ANSI.SYS</code> می‌شناختند).</p>
-<hr>
-<h3>کنترل رنگ‌ها با کدهای ANSI</h3>
-<p>رنگ متن از طریق ارسال «کد Escape» به ترمینال کنترل می‌شود.<br>
-این کد چاپ نمی‌شود، بلکه ترمینال آن را به‌عنوان دستور تفسیر می‌کند.</p>
-<p>هر کد Escape با <code>\033</code> (کد هشت‌هشتی کلید Escape) شروع می‌شود، سپس تنظیمات (attribute) و دستور موردنظر می‌آید.</p>
-<p>برای مثال، این کد رنگ متن را به مشکی معمولی تنظیم می‌کند:</p>
-<pre class="hljs"><code>\033[0;30m
-</code></pre>
-<p>در جدول زیر رنگ‌های متنی موجود فهرست شده‌اند:</p>
-<hr>
-<h4>جدول 14-2: توالی‌های escape برای تنظیم رنگ متن</h4>
-<table>
-<thead>
-<tr>
-<th>توالی</th>
-<th>رنگ متن</th>
-<th>توالی</th>
-<th>رنگ متن</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>\033[0;30m</code></td>
-<td>سیاه</td>
-<td><code>\033[1;30m</code></td>
-<td>خاکستری تیره</td>
-</tr>
-<tr>
-<td><code>\033[0;31m</code></td>
-<td>قرمز</td>
-<td><code>\033[1;31m</code></td>
-<td>قرمز روشن</td>
-</tr>
-<tr>
-<td><code>\033[0;32m</code></td>
-<td>سبز</td>
-<td><code>\033[1;32m</code></td>
-<td>سبز روشن</td>
-</tr>
-<tr>
-<td><code>\033[0;33m</code></td>
-<td>قهوه‌ای</td>
-<td><code>\033[1;33m</code></td>
-<td>زرد</td>
-</tr>
-<tr>
-<td><code>\033[0;34m</code></td>
-<td>آبی</td>
-<td><code>\033[1;34m</code></td>
-<td>آبی روشن</td>
-</tr>
-<tr>
-<td><code>\033[0;35m</code></td>
-<td>بنفش</td>
-<td><code>\033[1;35m</code></td>
-<td>بنفش روشن</td>
-</tr>
-<tr>
-<td><code>\033[0;36m</code></td>
-<td>فیروزه‌ای</td>
-<td><code>\033[1;36m</code></td>
-<td>فیروزه‌ای روشن</td>
-</tr>
-<tr>
-<td><code>\033[0;37m</code></td>
-<td>خاکستری روشن</td>
-<td><code>\033[1;37m</code></td>
-<td>سفید</td>
-</tr>
-</tbody>
-</table>
-<hr>
-<h3>ساخت اعلان قرمز</h3>
-<pre class="hljs"><code>&lt;me@linuxbox ~&gt;$ PS1=&quot;\[\033[0;31m\]&lt;\u@\h \W&gt;\$ &quot;
-</code></pre>
-<p>اما در این حالت همه‌ی متن بعد از اعلان هم قرمز می‌شود.<br>
-برای بازگرداندن رنگ به حالت عادی، باید در انتهای اعلان کد ریست رنگ (<code>\033[0m</code>) را اضافه کنیم:</p>
-<pre class="hljs"><code>&lt;me@linuxbox ~&gt;$ PS1=&quot;\[\033[0;31m\]&lt;\u@\h \W&gt;\$\[\033[0m\] &quot;
-</code></pre>
-<p>حالا همه چیز درست کار می‌کند.</p>
-<hr>
-<h3>رنگ پس‌زمینه</h3>
-<p>کدهای زیر برای تنظیم رنگ پس‌زمینه استفاده می‌شوند (ویژگی بولد در پس‌زمینه کاربرد ندارد):</p>
-<table>
-<thead>
-<tr>
-<th>توالی</th>
-<th>رنگ پس‌زمینه</th>
-<th>توالی</th>
-<th>رنگ پس‌زمینه</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>\033[0;40m</code></td>
-<td>مشکی</td>
-<td><code>\033[0;44m</code></td>
-<td>آبی</td>
-</tr>
-<tr>
-<td><code>\033[0;41m</code></td>
-<td>قرمز</td>
-<td><code>\033[0;45m</code></td>
-<td>بنفش</td>
-</tr>
-<tr>
-<td><code>\033[0;42m</code></td>
-<td>سبز</td>
-<td><code>\033[0;46m</code></td>
-<td>فیروزه‌ای</td>
-</tr>
-<tr>
-<td><code>\033[0;43m</code></td>
-<td>قهوه‌ای</td>
-<td><code>\033[0;47m</code></td>
-<td>خاکستری روشن</td>
-</tr>
-</tbody>
-</table>
-<p>برای مثال، ساخت اعلان با پس‌زمینه‌ی قرمز:</p>
-<pre class="hljs"><code>&lt;me@linuxbox ~&gt;$ PS1=&quot;\[\033[0;41m\]&lt;\u@\h \W&gt;\$\[\033[0m\] &quot;
-</code></pre>
-<hr>
-<h3>نکته</h3>
-<p>علاوه بر حالت‌های عادی (۰) و بولد (۱)، می‌توان ویژگی‌های زیر را نیز اعمال کرد:</p>
-<ul>
-<li>زیرخط (۴)</li>
-<li>چشمک‌زن (۵)</li>
-<li>معکوس (۷)</li>
-</ul>
-<p>البته بیشتر ترمینال‌ها از حالت چشمک‌زن پشتیبانی نمی‌کنند، چون واقعاً آزاردهنده است.</p>
-<p><strong>جابجا کردن مکان‌نما (Cursor)</strong></p>
-<p>کدهای Escape می‌توانند برای <strong>تعیین موقعیت مکان‌نما</strong> روی صفحه استفاده شوند.<br>
-این ویژگی معمولاً برای نمایش ساعتی کوچک یا اطلاعات دیگر در گوشه‌ی بالایی ترمینال (مثلاً کنار اعلان) به کار می‌رود.</p>
-<p>در جدول زیر فهرست کدهایی آمده که برای جابجایی مکان‌نما استفاده می‌شوند:</p>
-<hr>
-<h3>جدول 13-4: توالی‌های Escape برای حرکت مکان‌نما</h3>
-<table>
-<thead>
-<tr>
-<th>کد Escape</th>
-<th>عملکرد</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>\033[l;cH</code></td>
-<td>مکان‌نما را به خط <strong>l</strong> و ستون <strong>c</strong> منتقل می‌کند.</td>
-</tr>
-<tr>
-<td><code>\033[nA</code></td>
-<td>مکان‌نما را <strong>n خط به بالا</strong> می‌برد.</td>
-</tr>
-<tr>
-<td><code>\033[nB</code></td>
-<td>مکان‌نما را <strong>n خط به پایین</strong> می‌برد.</td>
-</tr>
-<tr>
-<td><code>\033[nC</code></td>
-<td>مکان‌نما را <strong>n کاراکتر به جلو</strong> می‌برد.</td>
-</tr>
-<tr>
-<td><code>\033[nD</code></td>
-<td>مکان‌نما را <strong>n کاراکتر به عقب</strong> می‌برد.</td>
-</tr>
-<tr>
-<td><code>\033[2J</code></td>
-<td>کل صفحه را پاک کرده و مکان‌نما را به گوشه‌ی بالا-چپ (خط ۰، ستون ۰) می‌برد.</td>
-</tr>
-<tr>
-<td><code>\033[K</code></td>
-<td>از موقعیت فعلی مکان‌نما تا انتهای خط را پاک می‌کند.</td>
-</tr>
-<tr>
-<td><code>\033[s</code></td>
-<td>موقعیت فعلی مکان‌نما را <strong>ذخیره</strong> می‌کند.</td>
-</tr>
-<tr>
-<td><code>\033[u</code></td>
-<td>موقعیت ذخیره‌شده‌ی مکان‌نما را <strong>بازیابی</strong> می‌کند.</td>
-</tr>
-</tbody>
-</table>
-<hr>
-<p>اکنون با استفاده از این کدها یک اعلان می‌سازیم که <strong>در بالای صفحه یک نوار قرمز</strong> نمایش دهد و <strong>ساعت فعلی</strong> را (با متن زرد رنگ) درون آن بنویسد.<br>
-هر بار که اعلان ظاهر شود، این نوار و ساعت نیز مجدداً ترسیم می‌شوند.</p>
-<pre class="hljs"><code>PS1=&quot;\[\033[s\033[0;0H\033[0;41m\033[K\033[1;33m\t\033[0m\033[u\] &lt;\u@\h \W&gt;\$ &quot;
-</code></pre>
-<hr>
-<h3>تجزیه و توضیح هر بخش از رشته‌ی بالا</h3>
-<table>
-<thead>
-<tr>
-<th>توالی</th>
-<th>عملکرد</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>\[</code></td>
-<td>آغاز بخش غیرچاپی. برای اینکه Bash بتواند طول واقعی اعلان را درست محاسبه کند.</td>
-</tr>
-<tr>
-<td><code>\033[s</code></td>
-<td>موقعیت فعلی مکان‌نما را ذخیره می‌کند (برای بازگشت به محل اعلان بعد از رسم نوار). توجه کنید که برخی ترمینال‌ها از این کد پشتیبانی نمی‌کنند.</td>
-</tr>
-<tr>
-<td><code>\033[0;0H</code></td>
-<td>مکان‌نما را به <strong>گوشه‌ی بالا-چپ</strong> صفحه می‌برد (خط ۰، ستون ۰).</td>
-</tr>
-<tr>
-<td><code>\033[0;41m</code></td>
-<td>رنگ پس‌زمینه را قرمز می‌کند.</td>
-</tr>
-<tr>
-<td><code>\033[K</code></td>
-<td>از محل فعلی مکان‌نما تا انتهای خط را پاک می‌کند (و چون رنگ پس‌زمینه قرمز است، خط قرمز می‌شود).</td>
-</tr>
-<tr>
-<td><code>\033[1;33m</code></td>
-<td>رنگ متن را زرد می‌کند.</td>
-</tr>
-<tr>
-<td><code>\t</code></td>
-<td>ساعت فعلی را نمایش می‌دهد. (درون بخش غیرچاپی آمده تا Bash اندازه‌ی ساعت را در طول اعلان حساب نکند.)</td>
-</tr>
-<tr>
-<td><code>\033[0m</code></td>
-<td>بازگرداندن تنظیمات رنگ به حالت عادی.</td>
-</tr>
-<tr>
-<td><code>\033[u</code></td>
-<td>بازگرداندن مکان‌نما به محل ذخیره‌شده‌ی قبلی.</td>
-</tr>
-<tr>
-<td><code>\]</code></td>
-<td>پایان بخش غیرچاپی.</td>
-</tr>
-<tr>
-<td><code>&lt;\u@\h \W&gt;\$</code></td>
-<td>متن اعلان واقعی (کاربر، میزبان و مسیر کاری فعلی).</td>
-</tr>
-</tbody>
-</table>
-<hr>
-<h3>ذخیره‌سازی اعلان</h3>
-<p>بدیهی است که هیچ‌کس نمی‌خواهد هر بار این رشته‌ی طولانی را تایپ کند.<br>
-برای دائمی کردن آن، کافی است خطوط زیر را به فایل <strong><code>~/.bashrc</code></strong> خود اضافه کنید:</p>
-<pre class="hljs"><code>PS1=<span class="hljs-string">&quot;\[\033[s\033[0;0H\033[0;41m\033[K\033[1;33m\t\033[0m\033[u\] &lt;\u@\h \W&gt;\$ &quot;</span>
+</code></pre> <p>حالا اعلان ما ظاهر اصلی خودش را دارد اما در قالب دلخواه ما.<br> با سایر توالی‌های escape در جدول قبلی بازی کنید و سعی کنید یک اعلان خلاقانه و کاربردی بسازید.</p><hr> <h2>افزودن رنگ به اعلان</h2><p>اکثر برنامه‌های ترمینال به توالی‌هایی از کاراکترهای غیرچاپی پاسخ می‌دهند که ظاهر متن را کنترل می‌کنند — مثلاً رنگ، بولد بودن یا حتی چشمک‌زن بودن متن.<br> در ادامه به رنگ‌ها می‌پردازیم.</p><hr> <h3>یادداشتی درباره‌ی «سردرگمی ترمینال‌ها»</h3><p>در گذشته، وقتی ترمینال‌ها به‌صورت فیزیکی به کامپیوترهای راه‌دور متصل می‌شدند، هر برند دستورهای مخصوص خودش را برای کنترل نمایش داشت.<br> برای مدیریت این هرج‌ومرج، یونیکس دو سیستم پیچیده به نام‌های <strong>termcap</strong> و <strong>terminfo</strong> را توسعه داد.<br> بعدها استانداردی به‌نام <strong>ANSI</strong> معرفی شد تا زبان مشترکی برای کنترل نمایش بین ترمینال‌ها ایجاد شود (همان که کاربران DOS قدیمی با فایل <code>ANSI.SYS</code> می‌شناختند).</p><hr> <h3>کنترل رنگ‌ها با کدهای ANSI</h3><p>رنگ متن از طریق ارسال «کد Escape» به ترمینال کنترل می‌شود.<br> این کد چاپ نمی‌شود، بلکه ترمینال آن را به‌عنوان دستور تفسیر می‌کند.</p><p>هر کد Escape با <code>\033</code> (کد هشت‌هشتی کلید Escape) شروع می‌شود، سپس تنظیمات (attribute) و دستور موردنظر می‌آید.</p><p>برای مثال، این کد رنگ متن را به مشکی معمولی تنظیم می‌کند:</p><pre class="hljs"><code>\033[0;30m
+</code></pre> <p>در جدول زیر رنگ‌های متنی موجود فهرست شده‌اند:</p><hr> <h4>جدول 14-2: توالی‌های escape برای تنظیم رنگ متن</h4><table> <thead><tr> <th>توالی</th><th>رنگ متن</th><th>توالی</th><th>رنگ متن</th></tr> </thead><tbody> <tr><td><code>\033[0;30m</code></td><td>سیاه</td><td><code>\033[1;30m</code></td><td>خاکستری تیره</td></tr> <tr><td><code>\033[0;31m</code></td><td>قرمز</td><td><code>\033[1;31m</code></td><td>قرمز روشن</td></tr> <tr><td><code>\033[0;32m</code></td><td>سبز</td><td><code>\033[1;32m</code></td><td>سبز روشن</td></tr> <tr><td><code>\033[0;33m</code></td><td>قهوه‌ای</td><td><code>\033[1;33m</code></td><td>زرد</td></tr> <tr><td><code>\033[0;34m</code></td><td>آبی</td><td><code>\033[1;34m</code></td><td>آبی روشن</td></tr> <tr><td><code>\033[0;35m</code></td><td>بنفش</td><td><code>\033[1;35m</code></td><td>بنفش روشن</td></tr> <tr><td><code>\033[0;36m</code></td><td>فیروزه‌ای</td><td><code>\033[1;36m</code></td><td>فیروزه‌ای روشن</td></tr> <tr><td><code>\033[0;37m</code></td><td>خاکستری روشن</td><td><code>\033[1;37m</code></td><td>سفید</td></tr> </tbody></table> <hr><h3>ساخت اعلان قرمز</h3><pre class="hljs"><code>&lt;me@linuxbox ~&gt;$ PS1=&quot;\[\033[0;31m\]&lt;\u@\h \W&gt;\$ &quot;
+</code></pre> <p>اما در این حالت همه‌ی متن بعد از اعلان هم قرمز می‌شود.<br> برای بازگرداندن رنگ به حالت عادی، باید در انتهای اعلان کد ریست رنگ (<code>\033[0m</code>) را اضافه کنیم:</p><pre class="hljs"><code>&lt;me@linuxbox ~&gt;$ PS1=&quot;\[\033[0;31m\]&lt;\u@\h \W&gt;\$\[\033[0m\] &quot;
+</code></pre> <p>حالا همه چیز درست کار می‌کند.</p><hr> <h3>رنگ پس‌زمینه</h3><p>کدهای زیر برای تنظیم رنگ پس‌زمینه استفاده می‌شوند (ویژگی بولد در پس‌زمینه کاربرد ندارد):</p><table> <thead><tr> <th>توالی</th><th>رنگ پس‌زمینه</th><th>توالی</th><th>رنگ پس‌زمینه</th></tr> </thead><tbody> <tr><td><code>\033[0;40m</code></td><td>مشکی</td><td><code>\033[0;44m</code></td><td>آبی</td></tr> <tr><td><code>\033[0;41m</code></td><td>قرمز</td><td><code>\033[0;45m</code></td><td>بنفش</td></tr> <tr><td><code>\033[0;42m</code></td><td>سبز</td><td><code>\033[0;46m</code></td><td>فیروزه‌ای</td></tr> <tr><td><code>\033[0;43m</code></td><td>قهوه‌ای</td><td><code>\033[0;47m</code></td><td>خاکستری روشن</td></tr> </tbody></table> <p>برای مثال، ساخت اعلان با پس‌زمینه‌ی قرمز:</p><pre class="hljs"><code>&lt;me@linuxbox ~&gt;$ PS1=&quot;\[\033[0;41m\]&lt;\u@\h \W&gt;\$\[\033[0m\] &quot;
+</code></pre> <hr><h3>نکته</h3><p>علاوه بر حالت‌های عادی (۰) و بولد (۱)، می‌توان ویژگی‌های زیر را نیز اعمال کرد:</p><ul> <li>زیرخط (۴)</li><li>چشمک‌زن (۵)</li><li>معکوس (۷)</li></ul> <p>البته بیشتر ترمینال‌ها از حالت چشمک‌زن پشتیبانی نمی‌کنند، چون واقعاً آزاردهنده است.</p><p><strong>جابجا کردن مکان‌نما (Cursor)</strong></p><p>کدهای Escape می‌توانند برای <strong>تعیین موقعیت مکان‌نما</strong> روی صفحه استفاده شوند.<br> این ویژگی معمولاً برای نمایش ساعتی کوچک یا اطلاعات دیگر در گوشه‌ی بالایی ترمینال (مثلاً کنار اعلان) به کار می‌رود.</p><p>در جدول زیر فهرست کدهایی آمده که برای جابجایی مکان‌نما استفاده می‌شوند:</p><hr> <h3>جدول 13-4: توالی‌های Escape برای حرکت مکان‌نما</h3><table> <thead><tr> <th>کد Escape</th><th>عملکرد</th></tr> </thead><tbody> <tr><td><code>\033[l;cH</code></td><td>مکان‌نما را به خط <strong>l</strong> و ستون <strong>c</strong> منتقل می‌کند.</td></tr> <tr><td><code>\033[nA</code></td><td>مکان‌نما را <strong>n خط به بالا</strong> می‌برد.</td></tr> <tr><td><code>\033[nB</code></td><td>مکان‌نما را <strong>n خط به پایین</strong> می‌برد.</td></tr> <tr><td><code>\033[nC</code></td><td>مکان‌نما را <strong>n کاراکتر به جلو</strong> می‌برد.</td></tr> <tr><td><code>\033[nD</code></td><td>مکان‌نما را <strong>n کاراکتر به عقب</strong> می‌برد.</td></tr> <tr><td><code>\033[2J</code></td><td>کل صفحه را پاک کرده و مکان‌نما را به گوشه‌ی بالا-چپ (خط ۰، ستون ۰) می‌برد.</td></tr> <tr><td><code>\033[K</code></td><td>از موقعیت فعلی مکان‌نما تا انتهای خط را پاک می‌کند.</td></tr> <tr><td><code>\033[s</code></td><td>موقعیت فعلی مکان‌نما را <strong>ذخیره</strong> می‌کند.</td></tr> <tr><td><code>\033[u</code></td><td>موقعیت ذخیره‌شده‌ی مکان‌نما را <strong>بازیابی</strong> می‌کند.</td></tr> </tbody></table> <hr><p>اکنون با استفاده از این کدها یک اعلان می‌سازیم که <strong>در بالای صفحه یک نوار قرمز</strong> نمایش دهد و <strong>ساعت فعلی</strong> را (با متن زرد رنگ) درون آن بنویسد.<br> هر بار که اعلان ظاهر شود، این نوار و ساعت نیز مجدداً ترسیم می‌شوند.</p><pre class="hljs"><code>PS1=&quot;\[\033[s\033[0;0H\033[0;41m\033[K\033[1;33m\t\033[0m\033[u\] &lt;\u@\h \W&gt;\$ &quot;
+</code></pre> <hr><h3>تجزیه و توضیح هر بخش از رشته‌ی بالا</h3><table> <thead><tr> <th>توالی</th><th>عملکرد</th></tr> </thead><tbody> <tr><td><code>\[</code></td><td>آغاز بخش غیرچاپی. برای اینکه Bash بتواند طول واقعی اعلان را درست محاسبه کند.</td></tr> <tr><td><code>\033[s</code></td><td>موقعیت فعلی مکان‌نما را ذخیره می‌کند (برای بازگشت به محل اعلان بعد از رسم نوار). توجه کنید که برخی ترمینال‌ها از این کد پشتیبانی نمی‌کنند.</td></tr> <tr><td><code>\033[0;0H</code></td><td>مکان‌نما را به <strong>گوشه‌ی بالا-چپ</strong> صفحه می‌برد (خط ۰، ستون ۰).</td></tr> <tr><td><code>\033[0;41m</code></td><td>رنگ پس‌زمینه را قرمز می‌کند.</td></tr> <tr><td><code>\033[K</code></td><td>از محل فعلی مکان‌نما تا انتهای خط را پاک می‌کند (و چون رنگ پس‌زمینه قرمز است، خط قرمز می‌شود).</td></tr> <tr><td><code>\033[1;33m</code></td><td>رنگ متن را زرد می‌کند.</td></tr> <tr><td><code>\t</code></td><td>ساعت فعلی را نمایش می‌دهد. (درون بخش غیرچاپی آمده تا Bash اندازه‌ی ساعت را در طول اعلان حساب نکند.)</td></tr> <tr><td><code>\033[0m</code></td><td>بازگرداندن تنظیمات رنگ به حالت عادی.</td></tr> <tr><td><code>\033[u</code></td><td>بازگرداندن مکان‌نما به محل ذخیره‌شده‌ی قبلی.</td></tr> <tr><td><code>\]</code></td><td>پایان بخش غیرچاپی.</td></tr> <tr><td><code>&lt;\u@\h \W&gt;\$</code></td><td>متن اعلان واقعی (کاربر، میزبان و مسیر کاری فعلی).</td></tr> </tbody></table> <hr><h3>ذخیره‌سازی اعلان</h3><p>بدیهی است که هیچ‌کس نمی‌خواهد هر بار این رشته‌ی طولانی را تایپ کند.<br> برای دائمی کردن آن، کافی است خطوط زیر را به فایل <strong><code>~/.bashrc</code></strong> خود اضافه کنید:</p><pre class="hljs"><code>PS1=<span class="hljs-string">&quot;\[\033[s\033[0;0H\033[0;41m\033[K\033[1;33m\t\033[0m\033[u\] &lt;\u@\h \W&gt;\$ &quot;</span>
 <span class="hljs-built_in">export</span> PS1
-</code></pre>
-<hr>
-<h3>جمع‌بندی</h3>
-<p>باور کنید یا نه، هنوز امکانات بسیار بیشتری برای شخصی‌سازی اعلان وجود دارد — از استفاده‌ی توابع و اسکریپت‌ها گرفته تا ساخت اعلان‌های پویا.<br>
-اما آنچه تا اینجا یاد گرفتید، پایه‌ای قدرتمند برای شروع است.<br>
-بسیاری از کاربران همان اعلان پیش‌فرض را کافی می‌دانند،<br>
-اما برای کسانی که دوست دارند دست‌کاری کنند، دنیای Bash پر از ساعت‌ها سرگرمی و خلاقیت بی‌پایان است.</p>
-<hr>
-<h3>منابع بیشتر</h3>
-<ul>
-<li>
-<p><strong>Bash Prompt HOWTO</strong> از <em>Linux Documentation Project</em> — راهنمای کامل و رسمی درباره‌ی طراحی اعلان در Bash:<br>
-🔗 <a href="http://tldp.org/HOWTO/Bash-Prompt-HOWTO/">http://tldp.org/HOWTO/Bash-Prompt-HOWTO/</a></p>
-</li>
-<li>
-<p>مقاله‌ی ویکی‌پدیا درباره‌ی <strong>کدهای Escape ANSI</strong> (برای درک عمیق‌تر ساختار رنگ‌ها و کنترل نمایش):<br>
-🔗 <a href="http://en.wikipedia.org/wiki/ANSI_escape_code">http://en.wikipedia.org/wiki/ANSI_escape_code</a></p>
-</li>
-</ul>
-
-  </main>
-
-  <!-- فوتر مشترک -->
-  <footer class="footer">
-    <div class="container">
-      <p>
-        <img src="/Gitab/icone/copyright.svg" alt="کپی‌رایت" width="14" height="14"
-             style="vertical-align:middle;margin-inline:4px">
-        <span id="y"></span> Gitab — تمامی حقوق محفوظ است.
-      </p>
-    </div>
-  </footer>
-
-  <!-- سال و اسکریپت تغییر تم -->
-  <script>
+</code></pre> <hr><h3>جمع‌بندی</h3><p>باور کنید یا نه، هنوز امکانات بسیار بیشتری برای شخصی‌سازی اعلان وجود دارد — از استفاده‌ی توابع و اسکریپت‌ها گرفته تا ساخت اعلان‌های پویا.<br> اما آنچه تا اینجا یاد گرفتید، پایه‌ای قدرتمند برای شروع است.<br> بسیاری از کاربران همان اعلان پیش‌فرض را کافی می‌دانند،<br> اما برای کسانی که دوست دارند دست‌کاری کنند، دنیای Bash پر از ساعت‌ها سرگرمی و خلاقیت بی‌پایان است.</p><hr> <h3>منابع بیشتر</h3><ul> <li><p><strong>Bash Prompt HOWTO</strong> از <em>Linux Documentation Project</em> — راهنمای کامل و رسمی درباره‌ی طراحی اعلان در Bash:<br><a href="http://tldp.org/HOWTO/Bash-Prompt-HOWTO/">http://tldp.org/HOWTO/Bash-Prompt-HOWTO/</a></p></li> <li><p>مقاله‌ی ویکی‌پدیا درباره‌ی <strong>کدهای Escape ANSI</strong> (برای درک عمیق‌تر ساختار رنگ‌ها و کنترل نمایش):<br><a href="http://en.wikipedia.org/wiki/ANSI_escape_code">http://en.wikipedia.org/wiki/ANSI_escape_code</a></p></li> </ul></article> <nav class="chapter-single-next-nav"><a href="/Gitab/books/book5/Book/14/chapter14/" class="btn-next-chapter-action" id="nextChapterBtn" data-hub="/Gitab/books/book5/"> <span class="next-btn-text">فصل بعدی: مدیریت بسته‌ها (Package Management)</span> <span class="next-btn-arrow">←</span> </a> </nav></div> <button class="fab-back-to-top" id="backToTopBtn" type="button" aria-label="رفتن به بالای صفحه" title="رفتن به بالا"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"> <polyline points="18 15 12 9 6 15"></polyline> </svg> </button></main> <footer class="footer-minimal"><div class="footer-container"> <div class="footer-top-row"><div class="footer-brand-side"> <a href="/Gitab/" class="footer-brand-anchor"> <img src="/Gitab/icone/logo.svg" alt="Gitab" width="28" height="28" loading="lazy" decoding="async"> <span class="footer-brand-title">گیتاب (Gitab)</span> </a> <p class="footer-tagline"> پلتفرم آزاد و مستقل برای ترجمهٔ دقیق و روان کتاب‌های مرجع مهندسی نرم‌افزار. </p></div> <div class="footer-nav-cols"><div class="footer-nav-col"> <span class="footer-nav-heading">موضوعات</span><ul class="footer-nav-list"> <li><a href="/Gitab/books/list-books/?cat=csharp">سی‌شارپ و دات‌نت</a></li><li><a href="/Gitab/books/list-books/?cat=clean-code">کد تمیز و بازآفرینی</a></li><li><a href="/Gitab/books/list-books/?cat=architecture">معماری و طراحی دامنه</a></li><li><a href="/Gitab/books/list-books/?cat=system">لینوکس و خط فرمان</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">بخش‌های سایت</span><ul class="footer-nav-list"> <li><a href="/Gitab/">صفحه اصلی</a></li><li><a href="/Gitab/books/list-books/">کتابخانه کامل</a></li><li><a href="/Gitab/courses/">دوره‌های آموزشی</a></li><li><a href="/Gitab/translator.html">تالار مترجمین</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">مشارکت و جامعه</span><ul class="footer-nav-list"> <li><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer">راهنمای همکاری در ترجمه</a></li><li><a href="https://github.com/hheydarian/Gitab/issues" target="_blank" rel="noopener noreferrer">پیشنهاد کتاب یا گزارش خطا</a></li></ul> </div></div> </div><div class="footer-bottom-line"> <span>© <span id="y">2026</span> Gitab — توسعه‌یافته برای جامعهٔ مهندسان نرم‌افزار ایرانی</span></div> </div></footer> <script>
   (() => {
     const root = document.documentElement;
     const btn = document.getElementById('themeToggle');
+    const sunIcon = btn ? btn.querySelector('.icon-sun') : null;
+    const moonIcon = btn ? btn.querySelector('.icon-moon') : null;
     const KEY = 'gitab-theme';
 
-    function updateTheme(s) {
-      root.setAttribute('data-theme', s);
-      const mode = s;  // فقط `dark` یا `light` خواهد بود
+    function updateTheme(mode) {
+      root.setAttribute('data-theme', mode);
       root.dataset.colorMode = mode;
-      btn.dataset.icon = mode === 'dark' ? 'moon' : 'sun';
+      if (sunIcon && moonIcon) {
+        if (mode === 'dark') {
+          sunIcon.style.display = 'inline-block';
+          moonIcon.style.display = 'none';
+        } else {
+          sunIcon.style.display = 'none';
+          moonIcon.style.display = 'inline-block';
+        }
+      }
     }
 
-    // وضعیت تم ذخیره شده از localStorage
-    let saved = localStorage.getItem(KEY) || 'light'; // پیش‌فرض روشن
+    let saved = 'dark';
+    try { saved = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
     updateTheme(saved);
 
-    // تنظیم مجدد تم هنگام تغییر وضعیت دکمه
-    btn.addEventListener('click', () => {
-      const current = localStorage.getItem(KEY) || 'light';
-      const next = current === 'dark' ? 'light' : 'dark';  // فقط دو حالت: تاریک و روشن
-      localStorage.setItem(KEY, next);
-      updateTheme(next);
-    });
+    if (btn) {
+      btn.addEventListener('click', () => {
+        let current = 'dark';
+        try { current = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+        const next = current === 'dark' ? 'light' : 'dark';
+        try { localStorage.setItem(KEY, next); } catch (e) {}
+        updateTheme(next);
+      });
+    }
 
-    // هنگام بارگذاری صفحه
     document.addEventListener('DOMContentLoaded', () => {
-      updateTheme(localStorage.getItem(KEY) || 'light');
+      let mode = 'dark';
+      try { mode = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+      updateTheme(mode);
+      const yearSpan = document.getElementById('y');
+      if (yearSpan) yearSpan.textContent = new Date().getFullYear();
     });
+
+    const mobBtn = document.getElementById('mobileMenuBtn');
+    const mobDrawer = document.getElementById('mobileDrawer');
+    if (mobBtn && mobDrawer) {
+      const setDrawerOpen = (open) => {
+        mobDrawer.classList.toggle('open', open);
+        mobBtn.classList.toggle('is-open', open);
+        mobBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        mobBtn.setAttribute('aria-label', open ? 'بستن منو' : 'باز کردن منو');
+        mobDrawer.setAttribute('aria-hidden', open ? 'false' : 'true');
+      };
+
+      mobBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        setDrawerOpen(!mobDrawer.classList.contains('open'));
+      });
+
+      mobDrawer.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => setDrawerOpen(false));
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && mobDrawer.classList.contains('open')) {
+          setDrawerOpen(false);
+        }
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!mobDrawer.contains(e.target) && !mobBtn.contains(e.target)) {
+          setDrawerOpen(false);
+        }
+      });
+    }
+
+    if ('serviceWorker' in navigator) {
+      const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+      if (isLocalhost) {
+        navigator.serviceWorker.getRegistrations().then(regs => {
+          for (const reg of regs) reg.unregister();
+        });
+        if ('caches' in window) {
+          caches.keys().then(names => {
+            for (const name of names) caches.delete(name);
+          });
+        }
+      } else {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/Gitab/sw.js').catch(() => {});
+        });
+      }
+    }
   })();
-</script>
-
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-  <script>hljs.highlightAll();</script>
-
-  <script>
+  </script> <script>
   document.querySelectorAll('pre code').forEach(block => {
+    const pre = block.parentNode;
+    if (!pre || pre.querySelector('.copy-btn')) return;
+
+    const copySvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
+    const okSvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+
     const btn = document.createElement('button');
     btn.className = 'copy-btn';
-
-    const icon = document.createElement('img');
-    icon.src = "/Gitab/icone/copy.svg";
-    icon.alt = 'Copy';
-    btn.appendChild(icon);
-
-    block.parentNode.insertBefore(btn, block);
+    btn.setAttribute('aria-label', 'کپی کد');
+    btn.setAttribute('title', 'کپی کد');
+    btn.setAttribute('type', 'button');
+    btn.innerHTML = copySvg;
+    pre.appendChild(btn);
 
     btn.addEventListener('click', async () => {
-      await navigator.clipboard.writeText(block.textContent);
-      btn.classList.add('copied');
-      setTimeout(() => btn.classList.remove('copied'), 1500);
-    });
-  });
-  </script>
-
-  <script>
-  document.body.dataset.page = window.location.pathname;
-
-  const menuBtn = document.querySelector(".menu-toggle");
-  const nav = document.querySelector(".nav");
-
-  if (menuBtn && nav) {
-    menuBtn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      nav.classList.toggle("show");
-    });
-
-    document.addEventListener("click", (e) => {
-      const clickedInsideNav = nav.contains(e.target);
-      const clickedMenuButton = menuBtn.contains(e.target);
-      if (!clickedInsideNav && !clickedMenuButton) {
-        nav.classList.remove("show");
+      try {
+        await navigator.clipboard.writeText(block.textContent);
+        btn.classList.add('copied');
+        btn.innerHTML = okSvg;
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          btn.innerHTML = copySvg;
+        }, 1800);
+      } catch (err) {
+        console.error('Copy failed:', err);
       }
     });
-  }
-  </script>
-
-  <script>
-    document.getElementById('y').textContent = new Date().getFullYear();
-  </script>
-  <script>
-document.getElementById("openDonate").addEventListener("click", () => {
-  document.getElementById("donateModal").style.display = "block";
-});
-document.getElementById("closeDonate").addEventListener("click", () => {
-  document.getElementById("donateModal").style.display = "none";
-});
-document.querySelectorAll(".copy-btn").forEach(btn => {
-  btn.addEventListener("click", () => {
-    navigator.clipboard.writeText(btn.dataset.copy);
-  
-    setTimeout(() => (btn.textContent = "کپی"), 2000);
   });
-});
-</script>
+  </script> <script>
+  (() => {
+    const article = document.getElementById('chapterArticle');
+    if (!article) return;
 
-</body>
-</html>
+    const progressBar = document.getElementById('readingProgressBar');
+    if (progressBar) {
+      window.addEventListener('scroll', () => {
+        const docElem = document.documentElement;
+        const totalHeight = docElem.scrollHeight - docElem.clientHeight;
+        if (totalHeight > 0) {
+          const progress = (window.pageYOffset / totalHeight) * 100;
+          progressBar.style.width = Math.min(100, Math.max(0, progress)) + '%';
+        }
+      }, { passive: true });
+    }
+
+    const btt = document.getElementById('backToTopBtn');
+    if (btt) {
+      window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 250) {
+          btt.classList.add('visible');
+        } else {
+          btt.classList.remove('visible');
+        }
+      }, { passive: true });
+
+      btt.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+
+    article.querySelectorAll('img').forEach(img => {
+      if (!img.hasAttribute('loading')) img.loading = 'lazy';
+      if (!img.hasAttribute('decoding')) img.decoding = 'async';
+      const parent = img.parentElement;
+      if (parent && parent.tagName === 'P') {
+        parent.style.textAlign = 'center';
+      }
+
+      img.addEventListener('error', function() {
+        const src = this.getAttribute('src');
+        if (src && src.includes('assets/image/')) {
+          const parts = src.split('assets/image/');
+          const corrected = '/Gitab/books/book5/assets/image/' + parts[1];
+          if (this.src !== corrected) {
+            this.src = corrected;
+          }
+        }
+      });
+    });
+
+    article.querySelectorAll('p').forEach(p => {
+      const trimmed = p.innerText.trim();
+      if (trimmed.startsWith('💡') || trimmed.startsWith('نکته:')) {
+        p.classList.add('react-callout', 'callout-tip');
+      } else if (trimmed.startsWith('⚠️') || trimmed.startsWith('هشدار:')) {
+        p.classList.add('react-callout', 'callout-warning');
+      } else if (trimmed.startsWith('📌') || trimmed.startsWith('مهم:')) {
+        p.classList.add('react-callout', 'callout-important');
+      } else if (trimmed.startsWith('🔹') || trimmed.startsWith('🔸')) {
+        p.classList.add('react-callout', 'callout-note');
+      }
+    });
+  })();
+  </script> <script type="speculationrules">{"prefetch":[{"where":{"and":[{"href_matches":"/Gitab/*"},{"not":{"href_matches":"/Gitab/downloads/*"}},{"not":{"selector_matches":"[download], [target='_blank']"}}]},"eagerness":"moderate"}]}</script> <script>
+  (() => {
+    if (window.HTMLScriptElement && HTMLScriptElement.supports && HTMLScriptElement.supports('speculationrules')) return;
+    const seen = new Set([window.location.href]);
+    let count = 0;
+    const prefetchLink = (e) => {
+      if (count >= 12) return;
+      const a = e.target && e.target.closest ? e.target.closest('header a, .chapter-single-next-nav a, .syllabus-chapter-item a, .btn-hero-read, .btn-card-read') : null;
+      if (!a || !a.href || a.hasAttribute('download') || a.target === '_blank') return;
+      if (a.origin !== window.location.origin || a.pathname.includes('/downloads/')) return;
+      const clean = a.href.split('#')[0];
+      if (!clean || seen.has(clean)) return;
+      seen.add(clean);
+      count++;
+      const l = document.createElement('link');
+      l.rel = 'prefetch';
+      l.href = clean;
+      document.head.appendChild(l);
+    };
+    document.addEventListener('pointerenter', prefetchLink, { capture: true, passive: true });
+    document.addEventListener('touchstart', prefetchLink, { capture: true, passive: true });
+  })();
+  </script></body></html>

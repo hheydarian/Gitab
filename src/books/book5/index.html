@@ -1,405 +1,754 @@
 ---
 layout: layout.njk
-title: The Linux Command Line
+title: The Linux Command Line | Gitab — کتابخانه مراجع تخصصی
+description: آموزش کامل از ترمینال پایه تا نوشتن اسکریپت‌های پیشرفته Bash؛ مرجع استاندارد برای هر مهندس لینوکس و دواپس.
+keywords: Linux, CommandLine, Bash, ShellScripting, DevOps, لینوکس, بش, خط فرمان
 permalink: /books/book5/index.html
 ---
-<section class="book-header">
-    <div class="book-cover">
-        <img src="{{ '/images/the-linux-command-line/Cover.jpg' | url }}" alt="The Linux Command Line" />
+
+<div class="book-detail-wrapper" style="--book-glow: rgba(245, 158, 11, 0.28);">
+  <meta itemprop="keywords" content="Linux, CommandLine, Bash, ShellScripting, DevOps">
+
+  <!-- ۱. هیرو بنتو با کاور سه‌بعدی و اکشن‌های مدرن ۲۰۲۶ -->
+  <section class="book-detail-hero">
+    <div class="book-hero-ambient-glow"></div>
+
+    <div class="book-hero-content">
+      <h1 class="book-hero-title">
+        <bdi class="en-title" dir="ltr">The Linux Command Line</bdi>
+      </h1>
+
+      <div class="book-hero-fa-title">خط فرمان لینوکس (TLCL)</div>
+
+      <p class="book-hero-subtitle">
+        آموزش کامل خط فرمان لینوکس، اسکریپت‌نویسی شل و خودکارسازی وظایف سیستمی.
+      </p>
+
+      <!-- نوار دکمه‌های اکشن کاملاً منظم، متقارن و لوکس ۲۰۲۶ -->
+      <div class="book-hero-actions-v2">
+        <div class="hero-actions-primary-row">
+          <a class="btn-hero-read" href="{{ '/books/book5/Book/00/chapter00/' | url }}">
+            <span>مطالعه آنلاین کتاب</span>
+            <span>←</span>
+          </a>
+          <a class="btn-hero-epub" href="{{ '/downloads/the-linux-command-line-persian.epub' | url }}" download="The Linux Command Line - Persian.epub"><span>دانلود نسخه EPUB</span></a>
+        </div>
+        <div class="hero-actions-sub-row">
+          <a class="btn-hero-pdf" href="{{ '/downloads/the-linux-command-line-persian.pdf' | url }}" download="The Linux Command Line - Persian.pdf">
+            <span>دانلود PDF فارسی</span>
+          </a>
+          <a class="btn-hero-orig" href="https://drive.google.com/uc?export=download&id=13frNd6GtMOdIbKr7lJshAvNcggWnr7V0" target="_blank" rel="noopener noreferrer">
+            <span>دریافت نسخه اصلی (انگلیسی)</span>
+          </a>
+        </div>
+        <div class="hero-actions-sub-row" style="grid-template-columns: 1fr;">
+          <a class="btn-hero-gh" href="https://github.com/hemansadeghi/TLCL-Persian" target="_blank" rel="noopener noreferrer" title="مشاهده مخزن ترجمه در گیت‌هاب">
+            <img src="{{ '/icone/github.svg' | url }}" alt="GitHub" width="16" height="16" decoding="async">
+            <span>مخزن گیت‌هاب</span>
+          </a>
+        </div>
+      </div>
     </div>
-    <div class="book-meta">
-        <h1> The Linux Command Line </h1>
-        <p class="subtitle">
-            راهنمای کامل خط فرمان لینوکس برای کاربران تازه‌کار و حرفه‌ای
-        </p>
-        <div class="book-tags">
-            <span>Linux#</span>
-            <span>CommandLine#</span>
-            <span>Bash#</span>
-            <span>Shell#</span>
-            <span>OpenSource#</span>
-        </div>
-        <div class="donate-buttons">
-            <button class="donate-btn" id="openDonate"> حمایت مالی از مترجم</button>
-            <div class="download-wrapper">
-                <button class="donate-btn download" id="mainDownload"
-                    data-link="https://drive.google.com/uc?export=download&id=13frNd6GtMOdIbKr7lJshAvNcggWnr7V0">
-                    فایل اصلی
-                </button>
-                <span class="tooltip-download" id="tooltipDownload">در حال آماده سازی...</span>
-            </div>
-            <div class="download-wrapper">
-                <button class="donate-btn downloadfa" id="faDownload" data-link="https://Gitab.ir.page">
-                    فایل فارسی
-                </button>
-            </div>
-        </div>
-        <div id="donateModal" class="donate-modal">
-            <div class="donate-overlay"></div>
-            <div class="donate-content">
-                <!-- کارت بانکی -->
-                <div class="donate-section">
-                    <div class="donate-row">
-                        <img src="{{ '/icone/card.svg' | url }}" alt="card" class="icon">
-                        <span class="label">کارت بانکی:</span>
-                        <span class="value">6219 8619 4472 0969</span>
-                        <button class="copy-btn donate-copy" data-copy="6219861944720969">کپی</button>
-                    </div>
-                </div>
 
-                <!-- کیف پول -->
-                <div class="donate-section">
-                    <div class="donate-row">
-                        <img src="{{ '/icone/money.svg' | url }}" alt="crypto" class="icon">
-                        <span class="label">آدرس کیف پول:</span>
-                        <span class="value wallet">UQDOulaN5nql7J...uXY6Jdri7Y6</span>
-                        <img src="{{ '/icone/ton.svg' | url }}" alt="TON" class="ton-icon">
-                        <button class="copy-btn donate-copy"
-                            data-copy="UQDOulaN5nql7JSfL0Q56j2d-yWlWAb2JFozmuXY6Jdri7Y6">کپی</button>
-                    </div>
-                </div>
-
-                <button class="close-btn" id="closeDonate">بستن</button>
-            </div>
+    <!-- استیج کاور سه‌بعدی شناور Stripe Press Style -->
+    <div class="book-hero-cover-col">
+      <div class="book-cover-3d-large">
+        <div class="cover-inner-large">
+          <img src="{{ '/images/the-linux-command-line/Cover.jpg' | url }}" alt="The Linux Command Line کاور" fetchpriority="high" decoding="async">
         </div>
+      </div>
     </div>
-</section>
+  </section>
 
-<section class="book-intro">
-    <p>
-        کتاب <strong>The Linux Command Line</strong> نوشتهٔ <em>William Shotts</em>
-        یکی از بهترین منابع برای یادگیری دستورات لینوکس و کار حرفه‌ای با خط فرمان است.
-        این پروژه با هدف ارائه ترجمه‌ای فارسی، روان و دقیق برای جامعه لینوکسی و برنامه‌نویسان فارسی‌زبان ایجاد شده
-        است.
+  <!-- ۲. شناسنامه مهندسی کتاب (Bento Specifications Grid) -->
+  <section class="book-specs-bento">
+    <div class="book-spec-card">
+      <span class="spec-label">✍️ نویسنده اثر</span>
+      <span class="spec-val"><bdi dir="ltr">William Shotts</bdi></span>
+    </div>
+
+    <div class="book-spec-card">
+      <span class="spec-label">💬 مترجم فارسی</span>
+      <span class="spec-val"><a href="{{ '/translator.html' | url }}">هیمن صادقی</a></span>
+    </div>
+
+    <div class="book-spec-card">
+      <span class="spec-label">🎯 سطح فنی مخاطبان</span>
+      <span class="spec-val">مقدماتی تا حرفه‌ای</span>
+    </div>
+
+    <div class="book-spec-card">
+      <span class="spec-label">📅 ویرایش و نگارش</span>
+      <span class="spec-val">TLCL ویرایش پنجم</span>
+    </div>
+
+    <div class="book-spec-card">
+      <span class="spec-label">📑 سرفصل‌های ترجمه‌شده</span>
+      <span class="spec-val">۳۷ فصل کامل</span>
+    </div>
+
+    <div class="book-spec-card">
+      <span class="spec-label">⚡ تمرکز کتاب</span>
+      <span class="spec-val">شل اسکریپتینگ، اتوماسیون و ابزارهای سیستم</span>
+    </div>
+  </section>
+
+  <!-- ۳. معرفی متنی و خلاصه کتاب -->
+  <section class="book-editorial-card">
+    <div class="editorial-header">
+      <span class="editorial-title">✨ درباره این اثر</span>
+    </div>
+    <p class="editorial-lead">
+      از ساده‌ترین دستورات پیمایش فایل تا اسکریپت‌های اتوماسیون و عمیق‌ترین ترفندهای سیستم؛ این کتاب شما را از یک کاربر عادی خط فرمان به متخصصی مسلط بر روح لینوکس تبدیل می‌کند. منبعی ضروری برای توسعه‌دهندگان بک‌اند، مهندسان دوآپس و شیفتگان دنیای متن‌باز.
     </p>
-    <div class="key-points">
-        <div><strong>✅ نسخه:</strong> 2013</div>
-        <div><strong>📚 سطح:</strong> مقدماتی تا متوسط</div>
-        <div><strong>🧩 تمرکز:</strong> آموزش عملی خط فرمان </div>
-        <div><strong>✍️ وضعیت ترجمه:</strong> در حال ترجمه</div>
-        <div><strong>📝 نویسنده:</strong> William Shotts </div>
-        <div><strong>💬 مترجم:</strong>
-            <a href="{{ '/translator.html' | url }}" target=" _blank">هیمن صادقی</a>
-        </div>
-    </div>
-</section>
+  </section>
 
-<section id="chapters" class="book-chapters">
-    <h2>فهرست سرفصل‌ها</h2>
+  <!-- ۴. فهرست تعاملی و هوشمند سرفصل‌ها (Smart Interactive Syllabus) -->
+  <section class="book-syllabus-wrapper" id="chapters">
+    <div class="syllabus-head-row">
+      <h2 class="syllabus-title">📚 فهرست سرفصل‌ها و مباحث کتاب</h2>
+      <button class="btn-syllabus-toggle" id="toggleAllChaptersBtn" type="button">
+        <span>🔄 باز کردن / بستن همه</span>
+      </button>
+    </div>
+
     <!-- بخش ۱ -->
-    <details open>
-        <summary>بخش ۱ — مفاهیم پایه و آشنایی</summary>
-        <ul>
-            <li>
-                <a href="{{ '/books/book5/Book/00/chapter00/' | url }}">
-                    <span class="chapter-box">0</span> مقدمه
-                </a>
-            </li>
-            <li>
-                <a href="{{ '/books/book5/Book/01/chapter01/' | url }}">
-                    <span class="chapter-box">1</span> شل چیست؟
-                </a>
-            </li>
-            <li>
-                <a href="{{ '/books/book5/Book/02/chapter02/' | url }}">
-                    <span class="chapter-box">2</span> مسیریابی
-                </a>
-            </li>
-            <li>
-                <a href="{{ '/books/book5/Book/03/chapter03/' | url }}">
-                    <span class="chapter-box">3</span> کاوش در سیستم
-                </a>
-            </li>
-        </ul>
+    <details class="syllabus-accordion-card" open>
+      <summary class="syllabus-summary-head">
+        <div class="syllabus-summary-right">
+          <span class="syllabus-sec-tag">بخش ۱</span>
+          <span class="syllabus-sec-title">مفاهیم پایه و آشنایی با محیط شل</span>
+        </div>
+        <div class="syllabus-summary-left">
+          <span class="syllabus-ch-count">۴ فصل</span>
+          <svg class="syllabus-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </div>
+      </summary>
+      <ul class="syllabus-chapters-list">
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book5/Book/00/chapter00/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">۰۰</span>
+              <span class="ch-name-text">مقدمه کتاب</span>
+            </div>
+            <div class="ch-action-side">
+              <span>مطالعه فصل</span>
+              <span>←</span>
+            </div>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book5/Book/01/chapter01/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">۰۱</span>
+              <span class="ch-name-text">شل چیست؟ (What Is The Shell?)</span>
+            </div>
+            <div class="ch-action-side">
+              <span>مطالعه فصل</span>
+              <span>←</span>
+            </div>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book5/Book/02/chapter02/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">۰۲</span>
+              <span class="ch-name-text">مسیریابی و حرکت در دایرکتوری‌ها</span>
+            </div>
+            <div class="ch-action-side">
+              <span>مطالعه فصل</span>
+              <span>←</span>
+            </div>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book5/Book/03/chapter03/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">۰۳</span>
+              <span class="ch-name-text">کاوش و پیمایش در سیستم</span>
+            </div>
+            <div class="ch-action-side">
+              <span>مطالعه فصل</span>
+              <span>←</span>
+            </div>
+          </a>
+        </li>
+      </ul>
     </details>
+
     <!-- بخش ۲ -->
-    <details>
-        <summary>بخش ۲ — دستورات</summary>
-        <ul>
-            <li>
-                <a href="{{ '/books/book5/Book/04/chapter04/' | url }}">
-                    <span class="chapter-box">4</span> کار با فایل‌ها
-                </a>
-            </li>
-            <li>
-                <a href="{{ '/books/book5/Book/05/chapter05/' | url }}">
-                    <span class="chapter-box">5</span> کار با دستورات
-                </a>
-            </li>
-            <li>
-                <a href="{{ '/books/book5/Book/06/chapter06/' | url }}">
-                    <span class="chapter-box">6</span> تغییر مسیر ورودی و خروجی
-                </a>
-            </li>
-            <li>
-                <a href="{{ '/books/book5/Book/07/chapter07/' | url }}">
-                    <span class="chapter-box">7</span> دیدن دنیا از نگاه شل
-                </a>
-            </li>
-        </ul>
+    <details class="syllabus-accordion-card">
+      <summary class="syllabus-summary-head">
+        <div class="syllabus-summary-right">
+          <span class="syllabus-sec-tag">بخش ۲</span>
+          <span class="syllabus-sec-title">کار با فایل‌ها و دستورات پایه</span>
+        </div>
+        <div class="syllabus-summary-left">
+          <span class="syllabus-ch-count">۴ فصل</span>
+          <svg class="syllabus-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </div>
+      </summary>
+      <ul class="syllabus-chapters-list">
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book5/Book/04/chapter04/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">۰۴</span>
+              <span class="ch-name-text">کار با فایل‌ها و دایرکتوری‌ها</span>
+            </div>
+            <div class="ch-action-side">
+              <span>مطالعه فصل</span>
+              <span>←</span>
+            </div>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book5/Book/05/chapter05/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">۰۵</span>
+              <span class="ch-name-text">شناخت و کار با دستورات</span>
+            </div>
+            <div class="ch-action-side">
+              <span>مطالعه فصل</span>
+              <span>←</span>
+            </div>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book5/Book/06/chapter06/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">۰۶</span>
+              <span class="ch-name-text">تغییر مسیر ورودی و خروجی (Redirection)</span>
+            </div>
+            <div class="ch-action-side">
+              <span>مطالعه فصل</span>
+              <span>←</span>
+            </div>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book5/Book/07/chapter07/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">۰۷</span>
+              <span class="ch-name-text">دیدن دنیا از نگاه شل (Expansion)</span>
+            </div>
+            <div class="ch-action-side">
+              <span>مطالعه فصل</span>
+              <span>←</span>
+            </div>
+          </a>
+        </li>
+      </ul>
     </details>
+
     <!-- بخش ۳ -->
-    <details>
-        <summary>بخش ۳ — پیشرفته</summary>
-        <ul>
-            <li>
-                <a href="{{ '/books/book5/Book/08/chapter08/' | url }}">
-                    <span class="chapter-box">8</span> ترفندهای پیشرفتهٔ صفحه‌کلید
-                </a>
-            </li>
-            <li>
-                <a href="{{ '/books/book5/Book/09/chapter09/' | url }}">
-                    <span class="chapter-box">9</span> مجوزها
-                </a>
-            </li>
-            <li>
-                <a href="{{ '/books/book5/Book/10/chapter10/' | url }}">
-                    <span class="chapter-box">10</span> فرایندها
-                </a>
-            </li>
-            <li>
-                <a href="{{ '/books/book5/Book/11/chapter11/' | url }}">
-                    <span class="chapter-box">11</span> محیط
-                </a>
-            </li>
-        </ul>
+    <details class="syllabus-accordion-card">
+      <summary class="syllabus-summary-head">
+        <div class="syllabus-summary-right">
+          <span class="syllabus-sec-tag">بخش ۳</span>
+          <span class="syllabus-sec-title">مجوزها، محیط و فرایندها</span>
+        </div>
+        <div class="syllabus-summary-left">
+          <span class="syllabus-ch-count">۴ فصل</span>
+          <svg class="syllabus-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </div>
+      </summary>
+      <ul class="syllabus-chapters-list">
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book5/Book/08/chapter08/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">۰۸</span>
+              <span class="ch-name-text">ترفندهای پیشرفتهٔ صفحه‌کلید</span>
+            </div>
+            <div class="ch-action-side">
+              <span>مطالعه فصل</span>
+              <span>←</span>
+            </div>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book5/Book/09/chapter09/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">۰۹</span>
+              <span class="ch-name-text">مجوزها و دسترسی‌ها (Permissions)</span>
+            </div>
+            <div class="ch-action-side">
+              <span>مطالعه فصل</span>
+              <span>←</span>
+            </div>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book5/Book/10/chapter10/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">۱۰</span>
+              <span class="ch-name-text">مدیریت فرایندها (Processes)</span>
+            </div>
+            <div class="ch-action-side">
+              <span>مطالعه فصل</span>
+              <span>←</span>
+            </div>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book5/Book/11/chapter11/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">۱۱</span>
+              <span class="ch-name-text">محیط کاری و متغیرها (Environment)</span>
+            </div>
+            <div class="ch-action-side">
+              <span>مطالعه فصل</span>
+              <span>←</span>
+            </div>
+          </a>
+        </li>
+      </ul>
     </details>
 
     <!-- بخش ۴ -->
-    <details>
-        <summary>بخش ۴ — ابزارها و اسکریپت‌ها</summary>
-        <ul>
-            <li>
-                <a href="{{ '/books/book5/Book/12/chapter12/' | url }}">
-                    <span class="chapter-box">12</span> مقدمه‌ای ملایم بر ویرایشگر
-                </a>
-            </li>
-            <li>
-                <a href="{{ '/books/book5/Book/13/chapter13/' | url }}">
-                    <span class="chapter-box">13</span> سفارشی‌سازی اعلان
-                </a>
-            </li>
-            <li>
-                <a href="{{ '/books/book5/Book/14/chapter14/' | url }}">
-                    <span class="chapter-box">14</span> مدیریت بسته‌ها
-                </a>
-            </li>
-            <li>
-                <a href="{{ '/books/book5/Book/15/chapter15/' | url }}">
-                    <span class="chapter-box">15</span> رسانه‌های ذخیره‌سازی
-                </a>
-            </li>
-        </ul>
+    <details class="syllabus-accordion-card">
+      <summary class="syllabus-summary-head">
+        <div class="syllabus-summary-right">
+          <span class="syllabus-sec-tag">بخش ۴</span>
+          <span class="syllabus-sec-title">ابزارهای سیستم و ذخیره‌سازی</span>
+        </div>
+        <div class="syllabus-summary-left">
+          <span class="syllabus-ch-count">۴ فصل</span>
+          <svg class="syllabus-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </div>
+      </summary>
+      <ul class="syllabus-chapters-list">
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book5/Book/12/chapter12/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">۱۲</span>
+              <span class="ch-name-text">مقدمه‌ای بر ویرایشگر متنی vi</span>
+            </div>
+            <div class="ch-action-side">
+              <span>مطالعه فصل</span>
+              <span>←</span>
+            </div>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book5/Book/13/chapter13/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">۱۳</span>
+              <span class="ch-name-text">سفارشی‌سازی پرامپت (Prompt)</span>
+            </div>
+            <div class="ch-action-side">
+              <span>مطالعه فصل</span>
+              <span>←</span>
+            </div>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book5/Book/14/chapter14/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">۱۴</span>
+              <span class="ch-name-text">مدیریت بسته‌ها (Package Management)</span>
+            </div>
+            <div class="ch-action-side">
+              <span>مطالعه فصل</span>
+              <span>←</span>
+            </div>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book5/Book/15/chapter15/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">۱۵</span>
+              <span class="ch-name-text">رسانه‌های ذخیره‌سازی و دیسک‌ها</span>
+            </div>
+            <div class="ch-action-side">
+              <span>مطالعه فصل</span>
+              <span>←</span>
+            </div>
+          </a>
+        </li>
+      </ul>
     </details>
 
     <!-- بخش ۵ -->
-    <details>
-        <summary>بخش ۵ — اسکریپت‌ها و برنامه‌های پیچیده</summary>
-        <ul>
-            <li>
-                <a href="{{ '/books/book5/Book/16/chapter16/' | url }}">
-                    <span class="chapter-box">16</span> شبکه
-                </a>
-            </li>
-            <li>
-                <a href="{{ '/books/book5/Book/17/chapter17/' | url }}">
-                    <span class="chapter-box">17</span> جست‌وجوی فایل‌ها
-                </a>
-            </li>
-            <li>
-                <a href="{{ '/books/book5/Book/18/chapter18/' | url }}">
-                    <span class="chapter-box">18</span> بایگانی و پشتیبان‌گیری
-                </a>
-            </li>
-            <li>
-                <a href="{{ '/books/book5/Book/19/chapter19/' | url }}">
-                    <span class="chapter-box">19</span> عبارات منظم
-                </a>
-            </li>
-        </ul>
+    <details class="syllabus-accordion-card">
+      <summary class="syllabus-summary-head">
+        <div class="syllabus-summary-right">
+          <span class="syllabus-sec-tag">بخش ۵</span>
+          <span class="syllabus-sec-title">شبکه، جست‌وجو و عبارات منظم</span>
+        </div>
+        <div class="syllabus-summary-left">
+          <span class="syllabus-ch-count">۴ فصل</span>
+          <svg class="syllabus-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </div>
+      </summary>
+      <ul class="syllabus-chapters-list">
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book5/Book/16/chapter16/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">۱۶</span>
+              <span class="ch-name-text">دستورات و ابزارهای شبکه</span>
+            </div>
+            <div class="ch-action-side">
+              <span>مطالعه فصل</span>
+              <span>←</span>
+            </div>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book5/Book/17/chapter17/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">۱۷</span>
+              <span class="ch-name-text">جست‌وجوی پیشرفته فایل‌ها</span>
+            </div>
+            <div class="ch-action-side">
+              <span>مطالعه فصل</span>
+              <span>←</span>
+            </div>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book5/Book/18/chapter18/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">۱۸</span>
+              <span class="ch-name-text">بایگانی و پشتیبان‌گیری (Archiving)</span>
+            </div>
+            <div class="ch-action-side">
+              <span>مطالعه فصل</span>
+              <span>←</span>
+            </div>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book5/Book/19/chapter19/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">۱۹</span>
+              <span class="ch-name-text">عبارات منظم (Regular Expressions)</span>
+            </div>
+            <div class="ch-action-side">
+              <span>مطالعه فصل</span>
+              <span>←</span>
+            </div>
+          </a>
+        </li>
+      </ul>
     </details>
 
     <!-- بخش ۶ -->
-    <details>
-        <summary>بخش ۶ — آزمون و خطا</summary>
-        <ul>
-            <li>
-                <a href="{{ '/books/book5/Book/20/chapter20/' | url }}">
-                    <span class="chapter-box">20</span> پردازش متن
-                </a>
-            </li>
-            <li>
-                <a href="{{ '/books/book5/Book/21/chapter21/' | url }}">
-                    <span class="chapter-box">21</span> قالب‌بندی خروجی
-                </a>
-            </li>
-        </ul>
+    <details class="syllabus-accordion-card">
+      <summary class="syllabus-summary-head">
+        <div class="syllabus-summary-right">
+          <span class="syllabus-sec-tag">بخش ۶</span>
+          <span class="syllabus-sec-title">پردازش و قالب‌بندی متون</span>
+        </div>
+        <div class="syllabus-summary-left">
+          <span class="syllabus-ch-count">۲ فصل</span>
+          <svg class="syllabus-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </div>
+      </summary>
+      <ul class="syllabus-chapters-list">
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book5/Book/20/chapter20/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">۲۰</span>
+              <span class="ch-name-text">ابزارهای قدرتمند پردازش متن</span>
+            </div>
+            <div class="ch-action-side">
+              <span>مطالعه فصل</span>
+              <span>←</span>
+            </div>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book5/Book/21/chapter21/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">۲۱</span>
+              <span class="ch-name-text">قالب‌بندی و تبدیل خروجی‌ها</span>
+            </div>
+            <div class="ch-action-side">
+              <span>مطالعه فصل</span>
+              <span>←</span>
+            </div>
+          </a>
+        </li>
+      </ul>
     </details>
 
     <!-- بخش ۷ -->
-    <details>
-        <summary>بخش ۷ — ضمیمه‌ها و منابع تکمیلی</summary>
-        <ul>
-            <li>
-                <a href="{{ '/books/book5/Book/22/chapter22/' | url }}">
-                    <span class="chapter-box">22</span> چاپ و تولید خروجی کاغذی
-                </a>
-            </li>
-            <li>
-                <a href="{{ '/books/book5/Book/23/chapter23/' | url }}">
-                    <span class="chapter-box">23</span> کامپایل برنامه‌ها
-                </a>
-            </li>
-            <li>
-                <a href="{{ '/books/book5/Book/24/chapter24/' | url }}">
-                    <span class="chapter-box">24</span> نوشتن شل‌اسکریپت
-                </a>
-            </li>
-        </ul>
+    <details class="syllabus-accordion-card">
+      <summary class="syllabus-summary-head">
+        <div class="syllabus-summary-right">
+          <span class="syllabus-sec-tag">بخش ۷</span>
+          <span class="syllabus-sec-title">کامپایل و نگارش نخستین شل‌اسکریپت</span>
+        </div>
+        <div class="syllabus-summary-left">
+          <span class="syllabus-ch-count">۳ فصل</span>
+          <svg class="syllabus-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </div>
+      </summary>
+      <ul class="syllabus-chapters-list">
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book5/Book/22/chapter22/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">۲۲</span>
+              <span class="ch-name-text">چاپ و تولید خروجی کاغذی</span>
+            </div>
+            <div class="ch-action-side">
+              <span>مطالعه فصل</span>
+              <span>←</span>
+            </div>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book5/Book/23/chapter23/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">۲۳</span>
+              <span class="ch-name-text">کامپایل برنامه‌ها از سورس‌کد</span>
+            </div>
+            <div class="ch-action-side">
+              <span>مطالعه فصل</span>
+              <span>←</span>
+            </div>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book5/Book/24/chapter24/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">۲۴</span>
+              <span class="ch-name-text">نوشتن نخستین شل‌اسکریپت (Shell Script)</span>
+            </div>
+            <div class="ch-action-side">
+              <span>مطالعه فصل</span>
+              <span>←</span>
+            </div>
+          </a>
+        </li>
+      </ul>
     </details>
+
     <!-- بخش ۸ -->
-    <details>
-        <summary>بخش ۸ — طراحی پروژه و شبیه‌سازی</summary>
-        <ul>
-            <li>
-                <a href="{{ '/books/book5/Book/25/chapter25/' | url }}">
-                    <span class="chapter-box">25</span> شروع یک پروژه
-                </a>
-            </li>
-            <li>
-                <a href="{{ '/books/book5/Book/26/chapter26/' | url }}">
-                    <span class="chapter-box">26</span> طراحی از بالا به پایین
-                </a>
-            </li>
-            <li>
-                <a href="{{ '/books/book5/Book/27/chapter27/' | url }}">
-                    <span class="chapter-box">27</span> کنترل جریان
-                </a>
-            </li>
-        </ul>
+    <details class="syllabus-accordion-card">
+      <summary class="syllabus-summary-head">
+        <div class="syllabus-summary-right">
+          <span class="syllabus-sec-tag">بخش ۸</span>
+          <span class="syllabus-sec-title">طراحی پروژه و کنترل جریان اسکریپت</span>
+        </div>
+        <div class="syllabus-summary-left">
+          <span class="syllabus-ch-count">۳ فصل</span>
+          <svg class="syllabus-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </div>
+      </summary>
+      <ul class="syllabus-chapters-list">
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book5/Book/25/chapter25/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">۲۵</span>
+              <span class="ch-name-text">شروع یک پروژه اسکریپتی</span>
+            </div>
+            <div class="ch-action-side">
+              <span>مطالعه فصل</span>
+              <span>←</span>
+            </div>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book5/Book/26/chapter26/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">۲۶</span>
+              <span class="ch-name-text">طراحی از بالا به پایین (Top-Down Design)</span>
+            </div>
+            <div class="ch-action-side">
+              <span>مطالعه فصل</span>
+              <span>←</span>
+            </div>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book5/Book/27/chapter27/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">۲۷</span>
+              <span class="ch-name-text">کنترل جریان: انشعاب با if</span>
+            </div>
+            <div class="ch-action-side">
+              <span>مطالعه فصل</span>
+              <span>←</span>
+            </div>
+          </a>
+        </li>
+      </ul>
     </details>
 
     <!-- بخش ۹ -->
-    <details>
-        <summary>بخش ۹ — روش‌های نوین توسعه</summary>
-        <ul>
-            <li>
-                <a href="{{ '/books/book5/Book/28/chapter28/' | url }}">
-                    <span class="chapter-box">28</span> خواندن ورودی از صفحه‌کلید
-                </a>
-            </li>
-            <li>
-                <a href="{{ '/books/book5/Book/29/chapter29/' | url }}">
-                    <span class="chapter-box">29</span> کنترل جریان
-                </a>
-            </li>
-            <li>
-                <a href="{{ '/books/book5/Book/30/chapter30/' | url }}">
-                    <span class="chapter-box">30</span> رفع اشکال
-                </a>
-            </li>
-        </ul>
+    <details class="syllabus-accordion-card">
+      <summary class="syllabus-summary-head">
+        <div class="syllabus-summary-right">
+          <span class="syllabus-sec-tag">بخش ۹</span>
+          <span class="syllabus-sec-title">تعامل با کاربر و دیباگ اسکریپت‌ها</span>
+        </div>
+        <div class="syllabus-summary-left">
+          <span class="syllabus-ch-count">۳ فصل</span>
+          <svg class="syllabus-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </div>
+      </summary>
+      <ul class="syllabus-chapters-list">
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book5/Book/28/chapter28/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">۲۸</span>
+              <span class="ch-name-text">خواندن ورودی از صفحه‌کلید (read)</span>
+            </div>
+            <div class="ch-action-side">
+              <span>مطالعه فصل</span>
+              <span>←</span>
+            </div>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book5/Book/29/chapter29/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">۲۹</span>
+              <span class="ch-name-text">کنترل جریان: حلقه‌های while و until</span>
+            </div>
+            <div class="ch-action-side">
+              <span>مطالعه فصل</span>
+              <span>←</span>
+            </div>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book5/Book/30/chapter30/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">۳۰</span>
+              <span class="ch-name-text">عیب‌یابی و رفع اشکال (Troubleshooting)</span>
+            </div>
+            <div class="ch-action-side">
+              <span>مطالعه فصل</span>
+              <span>←</span>
+            </div>
+          </a>
+        </li>
+      </ul>
     </details>
 
     <!-- بخش ۱۰ -->
-    <details>
-        <summary>بخش ۱۰ — پیاده‌سازی و استقرار</summary>
-        <ul>
-            <li>
-                <a href="{{ '/books/book5/Book/31/chapter31/' | url }}">
-                    <span class="chapter-box">31</span> مدیریت منابع و پیاده‌سازی
-                </a>
-            </li>
-            <li>
-                <a href="{{ '/books/book5/Book/32/chapter32/' | url }}">
-                    <span class="chapter-box">32</span> پارامترهای موضعی
-                </a>
-            </li>
-            <li>
-                <a href="{{ '/books/book5/Book/33/chapter33/' | url }}">
-                    <span class="chapter-box">33</span> حلقه‌زنی با for
-                </a>
-            </li>
-            <li>
-                <a href="{{ '/books/book5/Book/34/chapter34/' | url }}">
-                    <span class="chapter-box">34</span> رشته‌ها و اعداد
-                </a>
-            </li>
-            <li>
-                <a href="{{ '/books/book5/Book/35/chapter35/' | url }}">
-                    <span class="chapter-box">35</span> آرایه‌ها
-                </a>
-            </li>
-            <li>
-                <a href="{{ '/books/book5/Book/36/chapter36/' | url }}">
-                    <span class="chapter-box">36</span> موارد شگفت‌انگیز
-                </a>
-            </li>
-        </ul>
+    <details class="syllabus-accordion-card">
+      <summary class="syllabus-summary-head">
+        <div class="syllabus-summary-right">
+          <span class="syllabus-sec-tag">بخش ۱۰</span>
+          <span class="syllabus-sec-title">ساختارهای داده پیشرفته در بش</span>
+        </div>
+        <div class="syllabus-summary-left">
+          <span class="syllabus-ch-count">۶ فصل</span>
+          <svg class="syllabus-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </div>
+      </summary>
+      <ul class="syllabus-chapters-list">
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book5/Book/31/chapter31/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">۳۱</span>
+              <span class="ch-name-text">کنترل جریان: دستور case</span>
+            </div>
+            <div class="ch-action-side">
+              <span>مطالعه فصل</span>
+              <span>←</span>
+            </div>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book5/Book/32/chapter32/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">۳۲</span>
+              <span class="ch-name-text">پارامترهای موضعی (Positional Parameters)</span>
+            </div>
+            <div class="ch-action-side">
+              <span>مطالعه فصل</span>
+              <span>←</span>
+            </div>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book5/Book/33/chapter33/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">۳۳</span>
+              <span class="ch-name-text">کنترل جریان: حلقه‌زنی با for</span>
+            </div>
+            <div class="ch-action-side">
+              <span>مطالعه فصل</span>
+              <span>←</span>
+            </div>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book5/Book/34/chapter34/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">۳۴</span>
+              <span class="ch-name-text">رشته‌ها و محاسبات عددی</span>
+            </div>
+            <div class="ch-action-side">
+              <span>مطالعه فصل</span>
+              <span>←</span>
+            </div>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book5/Book/35/chapter35/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">۳۵</span>
+              <span class="ch-name-text">آرایه‌ها (Arrays)</span>
+            </div>
+            <div class="ch-action-side">
+              <span>مطالعه فصل</span>
+              <span>←</span>
+            </div>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book5/Book/36/chapter36/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">۳۶</span>
+              <span class="ch-name-text">موارد شگفت‌انگیز و نکات پایانی</span>
+            </div>
+            <div class="ch-action-side">
+              <span>مطالعه فصل</span>
+              <span>←</span>
+            </div>
+          </a>
+        </li>
+      </ul>
     </details>
-</section>
+  </section>
+</div>
 
 <script>
-    // باز/بستن مودال
-    const modal = document.getElementById('donateModal');
-    document.getElementById('openDonate').addEventListener('click', () => modal.style.display = 'block');
-    document.getElementById('closeDonate').addEventListener('click', () => modal.style.display = 'none');
-    modal.querySelector('.donate-overlay').addEventListener('click', () => modal.style.display = 'none');
-
-    // کپی با بازخورد
-    document.querySelectorAll('.copy-btn').forEach(btn =>
-    {
-        btn.addEventListener('click', async () =>
-        {
-            try
-            {
-                await navigator.clipboard.writeText(btn.dataset.copy || '');
-                const old = btn.textContent;
-                btn.textContent = 'کپی شد ✓';
-                btn.disabled = true;
-                setTimeout(() =>
-                {
-                    btn.textContent = old;
-                    btn.disabled = false;
-                }, 1600);
-            } catch (e)
-            {
-                alert('کپی نشد. دستی کپی کنید 🙏');
-            }
-        });
+(() => {
+  const toggleBtn = document.getElementById('toggleAllChaptersBtn');
+  if (!toggleBtn) return;
+  let allOpen = false;
+  toggleBtn.addEventListener('click', () => {
+    allOpen = !allOpen;
+    document.querySelectorAll('.syllabus-accordion-card').forEach(acc => {
+      acc.open = allOpen;
     });
-</script>
-<script>
-    // 🎯 تول‌تیپ برای فایل اصلی
-    const downloadBtn = document.getElementById("mainDownload");
-    const tooltip = document.getElementById("tooltipDownload");
-
-    downloadBtn.addEventListener("click", (e) =>
-    {
-        e.preventDefault();
-        const link = downloadBtn.dataset.link;
-
-        tooltip.classList.add("show");
-
-        setTimeout(() =>
-        {
-            tooltip.classList.remove("show");
-
-            // شروع دانلود
-            const a = document.createElement("a");
-            a.href = link;
-            a.download = "";
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-        }, 2000);
-    });
-
-    // 🎯 هدایت به صفحه پرداخت (فایل فارسی)
-    const faDownload = document.getElementById("faDownload");
-    faDownload.addEventListener("click", () =>
-    {
-        const link = faDownload.dataset.link;
-        window.open(link, "_blank"); // باز شدن در تب جدید
-    });
+    toggleBtn.innerHTML = allOpen ? '<span>🔺 بستن همه</span>' : '<span>🔻 باز کردن همه</span>';
+  });
+})();
 </script>

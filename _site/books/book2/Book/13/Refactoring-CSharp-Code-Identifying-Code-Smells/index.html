@@ -1,113 +1,18 @@
-
-
-<!doctype html>
-<html lang="fa" dir="rtl">
-<head>
-  <meta charset="utf-8">
-  <link rel="icon" type="image/png" href="/Gitab/favicon.png">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>بازآرایی کدهای C# – شناسایی Code Smellها</title>
-  <meta name="description" content="ترجمه‌های فارسی کتاب‌های فنی — سریع، مینیمال و قابل اتکا.">
-
-  <!-- استایل‌ها -->
-  <link rel="stylesheet" href="/Gitab/styles/main.css">
-  <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
-
-  <style>
-  @font-face {
-    font-family: 'Vazir';
-    src: url('/Gitab/fonts/Vazir-FD-WOL.ttf') format('truetype');
-    font-display: swap;
-  }
-  @font-face {
-    font-family: "Lalezar";
-    src: url('fonts/Lalezar.ttf') format('truetype');
-    font-display: swap;
-}
-  body {
-    font-family: 'Vazir', sans-serif;
-  }
-  </style>
-</head>
-
-<body>
-  <!-- هدر مشترک -->
-  <header class="header">
-    <div class="container nav-wrap">
-      <a href="/Gitab/" class="brand">
-        <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="26" height="26">
-        <span>Gitab</span>
-      </a>
-
-       <nav class="nav">
-         <a href="/Gitab/" >خانه</a>
-         <a href="/Gitab/books/list-books" >کتاب‌ها</a>
-         <a href="/Gitab/giter.html" >دوره ها</a>
-          <!-- 
-         <a href="/Gitab/translator.html" >مترجمین</a>
-           -->
-       </nav>
-
-      <div class="nav-actions">
-        <button id="themeToggle" class="icon-btn theme-btn" data-icon="moon" aria-label="تغییر تم">
-          <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن">
-          <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک">
-        </button>
-
-        <a class="icon-btn" href="https://github.com/hheydarian/Gitab" target="_blank" title="GitHub">
-          <img src="/Gitab/icone/github.svg" alt="GitHub">
-        </a>
-
-        <!-- دکمه منو برای موبایل -->
-        <button class="menu-toggle" aria-label="منو">
-          <img src="/Gitab/icone/menu.svg" alt="menu">
-        </button>
-      </div>
-    </div>
-  </header>
-
-  
-  <main class="site-main book-page">
-    <h1>فصل سیزدهم:  بازآرایی کدهای C# – شناسایی Code Smellها 🎯</h1>
-<h4>شناسایی Code Smellها</h4>
-<p>در این فصل، ما به بررسی کدهای مشکل‌دار و روش بازآرایی (Refactoring) آن‌ها می‌پردازیم. در صنعت نرم‌افزار، به چنین کدهایی اصطلاحاً <strong>Code Smell</strong> گفته می‌شود. این نوع کدها <strong>کامپایل می‌شوند، اجرا می‌شوند و همان کاری را انجام می‌دهند که قرار است انجام دهند</strong>، اما مشکل آن‌ها این است که به مرور زمان <strong>خوانایی خود را از دست می‌دهند، پیچیده می‌شوند و نگهداری و توسعه آن‌ها دشوار می‌گردد</strong>.</p>
-<p>چنین کدهایی باید در اولین فرصت بازآرایی شوند. در غیر این صورت، این مشکل به‌عنوان <strong>بدهی فنی (Technical Debt)</strong> باقی می‌ماند و در طولانی‌مدت می‌تواند پروژه را به نقطه شکست برساند، به‌طوری که مجبور شوید <strong>کل برنامه را از ابتدا طراحی و پیاده‌سازی کنید</strong> که هزینه‌بر خواهد بود.</p>
-<p><strong>بازآرایی (Refactoring)</strong> چیست؟<br>
-بازآرایی فرایند <strong>بازنویسی کد موجودی است که کار می‌کند</strong>، اما هدف این است که کد <strong>تمیزتر و بهتر</strong> شود. همان‌طور که پیش‌تر دیدید، <strong>کد تمیز (Clean Code)</strong> به‌راحتی <strong>خوانده می‌شود، نگهداری می‌شود و توسعه پیدا می‌کند</strong>.</p>
-<p>در این فصل به موارد زیر خواهیم پرداخت:</p>
-<ul>
-<li>شناسایی <strong>Code Smellهای سطح برنامه (Application-level)</strong> و روش‌های رفع آن‌ها</li>
-<li>شناسایی <strong>Code Smellهای سطح کلاس (Class-level)</strong> و روش‌های رفع آن‌ها</li>
-<li>شناسایی <strong>Code Smellهای سطح متد (Method-level)</strong> و روش‌های رفع آن‌ها</li>
-</ul>
-<p>پس از مطالعه این فصل، مهارت‌های زیر را به دست خواهید آورد:</p>
-<ul>
-<li>توانایی شناسایی انواع مختلف <strong>Code Smellها</strong></li>
-<li>درک این موضوع که چرا کد به‌عنوان Code Smell طبقه‌بندی شده است</li>
-<li>توانایی بازآرایی Code Smellها و تبدیل آن‌ها به <strong>کد تمیز</strong></li>
-</ul>
-<p>ما بررسی خود را با <strong>Code Smellهای سطح برنامه</strong> آغاز می‌کنیم.</p>
-<hr>
-<h3>الزامات فنی 🛠️</h3>
-<p>برای این فصل به ابزارها و پیش‌نیازهای زیر احتیاج دارید:</p>
-<ul>
-<li><strong>Visual Studio 2019</strong></li>
-<li><strong>PostSharp</strong></li>
-<li>کدهای این فصل از طریق این لینک در دسترس است:<br>
-<a href="https://github.com/PacktPublishing/Clean-Code-in-C-/tree/master/CH13">https://github.com/PacktPublishing/Clean-Code-in-C-/tree/master/CH13</a></li>
-</ul>
-<hr>
-<h3>Code Smellهای سطح برنامه</h3>
-<p><strong>Code Smellهای سطح برنامه</strong> کدهای مشکل‌داری هستند که در <strong>تمام بخش‌های برنامه پراکنده‌اند</strong> و بر <strong>تمام لایه‌ها</strong> تأثیر می‌گذارند. فرقی نمی‌کند در کدام لایه از نرم‌افزار باشید؛ این مشکلات را بارها و بارها خواهید دید.</p>
-<p>اگر این مشکلات را همین حالا برطرف نکنید، نرم‌افزار شما به مرور زمان <strong>دچار افت عملکرد شده و به سمت شکست پیش می‌رود</strong>.</p>
-<p>در این بخش، به <strong>Code Smellهای سطح برنامه</strong> و روش‌های رفع آن‌ها می‌پردازیم. با <strong>Boolean Blindness</strong> شروع می‌کنیم.</p>
-<hr>
-<h3>Boolean Blindness (کوری بولیانی) 👀</h3>
-<p><strong>کوری بولیانی</strong> به معنای <strong>از دست رفتن اطلاعات</strong> در متدها یا توابعی است که با مقادیر <strong>Boolean (true/false)</strong> کار می‌کنند.<br>
-استفاده از ساختارهای بهتر، <strong>رابط‌ها و کلاس‌هایی با وضوح بالاتر</strong> ایجاد می‌کند که داده‌ها را واضح‌تر نگه می‌دارند و تجربه کاری بهتری فراهم می‌کنند.</p>
-<p>بیایید این مشکل را با یک مثال بررسی کنیم:</p>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">BookConcert</span>(<span class="hljs-params"><span class="hljs-built_in">string</span> concert, <span class="hljs-built_in">bool</span> standing</span>)</span>
+<!doctype html><html lang="fa" dir="rtl"> <head><script>
+    if (window.location.pathname.startsWith('/gitab/')) {
+      window.location.replace(window.location.pathname.replace(/^\/gitab\//i, '/Gitab/') + window.location.search + window.location.hash);
+    }
+    (() => {
+      try {
+        const t = localStorage.getItem('gitab-theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', t);
+        document.documentElement.dataset.colorMode = t;
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        document.documentElement.dataset.colorMode = 'dark';
+      }
+    })();
+  </script> <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5"> <title>بازآرایی کدهای C# – شناسایی Code Smellها</title><meta name="description" content="بازآرایی کدهای C# – شناسایی Code Smellها — مطالعه آنلاین و رایگان از کتاب «کدنویسی تمیز در سی‌شارپ» (Clean Code in C#) اثر Jason Alls با ترجمه حامد حیدریان در گیتاب."> <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"><meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"> <meta name="theme-color" content="#090d16"><meta name="referrer" content="strict-origin-when-cross-origin"> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https:; frame-src https://www.youtube.com https://www.youtube-nocookie.com https://maps.google.com https://www.google.com; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self';"><link rel="icon" type="image/png" href="/Gitab/favicon.png"> <link rel="canonical" href="https://hheydarian.github.io/Gitab/books/book2/Book/13/Refactoring-CSharp-Code-Identifying-Code-Smells/"><link rel="alternate" hreflang="fa" href="https://hheydarian.github.io/Gitab/books/book2/Book/13/Refactoring-CSharp-Code-Identifying-Code-Smells/"> <link rel="alternate" hreflang="x-default" href="https://hheydarian.github.io/Gitab/books/book2/Book/13/Refactoring-CSharp-Code-Identifying-Code-Smells/"><link rel="alternate" type="text/plain" title="LLMs.txt" href="/Gitab/llms.txt"> <link rel="sitemap" type="application/xml" title="Sitemap" href="/Gitab/sitemap.xml"><meta property="og:locale" content="fa_IR"> <meta property="og:type" content="article"><meta property="og:site_name" content="گیتاب | Gitab"> <meta property="og:title" content="بازآرایی کدهای C# – شناسایی Code Smellها"><meta property="og:description" content="بازآرایی کدهای C# – شناسایی Code Smellها — مطالعه آنلاین و رایگان از کتاب «کدنویسی تمیز در سی‌شارپ» (Clean Code in C#) اثر Jason Alls با ترجمه حامد حیدریان در گیتاب."> <meta property="og:url" content="https://hheydarian.github.io/Gitab/books/book2/Book/13/Refactoring-CSharp-Code-Identifying-Code-Smells/"><meta property="og:image" content="https://hheydarian.github.io/Gitab/images/clean-code-csharp/Cover.jpg"> <meta property="og:image:alt" content="بازآرایی کدهای C# – شناسایی Code Smellها"><meta name="twitter:card" content="summary_large_image"> <meta name="twitter:title" content="بازآرایی کدهای C# – شناسایی Code Smellها"><meta name="twitter:description" content="بازآرایی کدهای C# – شناسایی Code Smellها — مطالعه آنلاین و رایگان از کتاب «کدنویسی تمیز در سی‌شارپ» (Clean Code in C#) اثر Jason Alls با ترجمه حامد حیدریان در گیتاب."> <meta name="twitter:image" content="https://hheydarian.github.io/Gitab/images/clean-code-csharp/Cover.jpg"><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://hheydarian.github.io/Gitab/#organization","name":"گیتاب | Gitab","alternateName":"Gitab","url":"https://hheydarian.github.io/Gitab/","logo":{"@type":"ImageObject","url":"https://hheydarian.github.io/Gitab/favicon.png"},"sameAs":["https://github.com/hheydarian/Gitab"]},{"@type":"WebSite","@id":"https://hheydarian.github.io/Gitab/#website","url":"https://hheydarian.github.io/Gitab/","name":"گیتاب | Gitab","inLanguage":"fa-IR","publisher":{"@id":"https://hheydarian.github.io/Gitab/#organization"},"potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://hheydarian.github.io/Gitab/books/list-books/?q={search_term_string}"},"query-input":"required name=search_term_string"}},{"@type":"WebPage","@id":"https://hheydarian.github.io/Gitab/books/book2/Book/13/Refactoring-CSharp-Code-Identifying-Code-Smells/#webpage","url":"https://hheydarian.github.io/Gitab/books/book2/Book/13/Refactoring-CSharp-Code-Identifying-Code-Smells/","name":"بازآرایی کدهای C# – شناسایی Code Smellها","description":"بازآرایی کدهای C# – شناسایی Code Smellها — مطالعه آنلاین و رایگان از کتاب «کدنویسی تمیز در سی‌شارپ» (Clean Code in C#) اثر Jason Alls با ترجمه حامد حیدریان در گیتاب.","inLanguage":"fa-IR","isPartOf":{"@id":"https://hheydarian.github.io/Gitab/#website"}},{"@type":"TechArticle","headline":"بازآرایی کدهای C# – شناسایی Code Smellها","description":"بازآرایی کدهای C# – شناسایی Code Smellها — مطالعه آنلاین و رایگان از کتاب «کدنویسی تمیز در سی‌شارپ» (Clean Code in C#) اثر Jason Alls با ترجمه حامد حیدریان در گیتاب.","url":"https://hheydarian.github.io/Gitab/books/book2/Book/13/Refactoring-CSharp-Code-Identifying-Code-Smells/","inLanguage":"fa-IR","isAccessibleForFree":true,"author":{"@type":"Person","name":"Jason Alls"},"translator":{"@type":"Person","name":"حامد حیدریان"},"isPartOf":{"@type":"Book","name":"کدنویسی تمیز در سی‌شارپ","alternateName":"Clean Code in C#","url":"https://hheydarian.github.io/Gitab/books/book2/"}}]}</script> <link rel="preload" href="/Gitab/fonts/Vazirmatn.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/Gitab/styles/main.css?v=2.4" as="style"> <link rel="preload" href="/Gitab/styles/gitab-modern.css?v=2.5" as="style"><style>@font-face{font-family:'Lalezar';src:url('/Gitab/fonts/Lalezar.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}@font-face{font-family:'Vazirmatn';src:url('/Gitab/fonts/Vazirmatn.woff2') format('woff2');font-weight:100 900;font-style:normal;font-display:swap}html,body,button,input,optgroup,select,textarea,.filter-pill{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}input::placeholder,textarea::placeholder{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}</style> <link rel="stylesheet" href="/Gitab/styles/main.css?v=2.4"><link rel="stylesheet" href="/Gitab/styles/gitab-modern.css?v=2.5"> <link rel="stylesheet" href="/Gitab/styles/vendor/github-dark.min.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="/Gitab/styles/vendor/github-dark.min.css"></noscript></head> <body><header class="header"> <div class="container nav-wrap"><a href="/Gitab/" class="brand" aria-label="صفحه اصلی گیتاب"> <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="30" height="30" decoding="async"> <span class="brand-text">Gitab</span> </a> <nav class="nav" id="mainNav"><a href="/Gitab/" >خانه</a> <a href="/Gitab/books/list-books" aria-current="page">کتاب‌ها</a> <a href="/Gitab/courses/" >دوره‌ها</a> <a href="/Gitab/translator.html" >مترجمین</a></nav> <div class="nav-actions"><button id="themeToggle" class="theme-toggle-btn" aria-label="تغییر تم" title="تغییر تم"> <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن" width="18" height="18" decoding="async" style="display:none"> <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک" width="18" height="18" decoding="async"> </button> <a class="btn-github-pill" href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" title="مشاهده سورس گیتاب در گیت‌هاب"> <img src="/Gitab/icone/github.svg" alt="GitHub" width="16" height="16" decoding="async"> <span>گیت‌هاب</span> </a> <button class="mobile-menu-btn" id="mobileMenuBtn" type="button" aria-label="باز کردن منو" aria-expanded="false"> <svg class="mob-icon-open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="4" y1="7" x2="20" y2="7"></line> <line x1="4" y1="12" x2="20" y2="12"></line> <line x1="4" y1="17" x2="14" y2="17"></line> </svg> <svg class="mob-icon-close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="18" y1="6" x2="6" y2="18"></line> <line x1="6" y1="6" x2="18" y2="18"></line> </svg> </button></div> </div><div class="mobile-drawer" id="mobileDrawer" aria-hidden="true"> <div class="mobile-drawer-inner"><div class="mobile-drawer-section-label">ناوبری سریع</div><nav class="mobile-drawer-links" aria-label="منوی موبایل"> <a href="/Gitab/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M3 10.5 12 3l9 7.5"></path> <path d="M5 9.5V20a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V9.5"></path> </svg> </span> <span class="mob-nav-text">صفحه نخست</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/books/list-books" class="mobile-drawer-link active" aria-current="page"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path> </svg> </span> <span class="mob-nav-text">کتابخانه و فهرست کتاب‌ها</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/courses/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path> <path d="M6 12v5c3 3 9 3 12 0v-5"></path> </svg> </span> <span class="mob-nav-text">دوره‌های آموزشی</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/translator.html" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path> <circle cx="9" cy="7" r="4"></circle> <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path> <path d="M16 3.13a4 4 0 0 1 0 7.75"></path> </svg> </span> <span class="mob-nav-text">مترجمین و همکاران</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> </nav><div class="mobile-drawer-divider"></div><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" class="mobile-drawer-link mobile-drawer-gh"> <span class="mob-nav-icon" aria-hidden="true"> <img src="/Gitab/icone/github.svg" alt="" width="17" height="17" loading="lazy" decoding="async"> </span> <span class="mob-nav-text">مخزن گیت‌هاب پروژه</span> <span class="mob-nav-ext" aria-hidden="true">↗</span> </a> </div></div> </header><div class="reading-progress-track"> <div class="reading-progress-fill" id="readingProgressBar"></div></div> <main class="site-main chapter-reading-page"><div class="chapter-page-wrapper"> <nav class="chapter-clean-breadcrumb" aria-label="مسیر راهنما" dir="rtl"><a href="/Gitab/">خانه</a> <span class="bc-sep" aria-hidden="true">/</span> <a href="/Gitab/books/list-books/">کتاب‌ها</a> <span class="bc-sep" aria-hidden="true">/</span> <a href="/Gitab/books/book2/"><bdi>کدنویسی تمیز در سی‌شارپ</bdi></a> <span class="bc-sep" aria-hidden="true">/</span> <span class="bc-current-leaf"><bdi>بازآرایی کدهای C# – شناسایی Code Smellها</bdi></span></nav> <article class="chapter-prose-container markdown-body" id="chapterArticle" dir="rtl"><h1>فصل سیزدهم: بازآرایی کدهای C# – شناسایی Code Smellها</h1><h4>شناسایی Code Smellها</h4><p>در این فصل، ما به بررسی کدهای مشکل‌دار و روش بازآرایی (Refactoring) آن‌ها می‌پردازیم. در صنعت نرم‌افزار، به چنین کدهایی اصطلاحاً <strong>Code Smell</strong> گفته می‌شود. این نوع کدها <strong>کامپایل می‌شوند، اجرا می‌شوند و همان کاری را انجام می‌دهند که قرار است انجام دهند</strong>، اما مشکل آن‌ها این است که به مرور زمان <strong>خوانایی خود را از دست می‌دهند، پیچیده می‌شوند و نگهداری و توسعه آن‌ها دشوار می‌گردد</strong>.</p><p>چنین کدهایی باید در اولین فرصت بازآرایی شوند. در غیر این صورت، این مشکل به‌عنوان <strong>بدهی فنی (Technical Debt)</strong> باقی می‌ماند و در طولانی‌مدت می‌تواند پروژه را به نقطه شکست برساند، به‌طوری که مجبور شوید <strong>کل برنامه را از ابتدا طراحی و پیاده‌سازی کنید</strong> که هزینه‌بر خواهد بود.</p><p><strong>بازآرایی (Refactoring)</strong> چیست؟<br> بازآرایی فرایند <strong>بازنویسی کد موجودی است که کار می‌کند</strong>، اما هدف این است که کد <strong>تمیزتر و بهتر</strong> شود. همان‌طور که پیش‌تر دیدید، <strong>کد تمیز (Clean Code)</strong> به‌راحتی <strong>خوانده می‌شود، نگهداری می‌شود و توسعه پیدا می‌کند</strong>.</p><p>در این فصل به موارد زیر خواهیم پرداخت:</p><ul> <li>شناسایی <strong>Code Smellهای سطح برنامه (Application-level)</strong> و روش‌های رفع آن‌ها</li><li>شناسایی <strong>Code Smellهای سطح کلاس (Class-level)</strong> و روش‌های رفع آن‌ها</li><li>شناسایی <strong>Code Smellهای سطح متد (Method-level)</strong> و روش‌های رفع آن‌ها</li></ul> <p>پس از مطالعه این فصل، مهارت‌های زیر را به دست خواهید آورد:</p><ul> <li>توانایی شناسایی انواع مختلف <strong>Code Smellها</strong></li><li>درک این موضوع که چرا کد به‌عنوان Code Smell طبقه‌بندی شده است</li><li>توانایی بازآرایی Code Smellها و تبدیل آن‌ها به <strong>کد تمیز</strong></li></ul> <p>ما بررسی خود را با <strong>Code Smellهای سطح برنامه</strong> آغاز می‌کنیم.</p><hr> <h3>الزامات فنی</h3><p>برای این فصل به ابزارها و پیش‌نیازهای زیر احتیاج دارید:</p><ul> <li><strong>Visual Studio 2019</strong></li><li><strong>PostSharp</strong></li><li>کدهای این فصل از طریق این لینک در دسترس است:<br><a href="https://github.com/PacktPublishing/Clean-Code-in-C-/tree/master/CH13">https://github.com/PacktPublishing/Clean-Code-in-C-/tree/master/CH13</a></li></ul> <hr><h3>Code Smellهای سطح برنامه</h3><p><strong>Code Smellهای سطح برنامه</strong> کدهای مشکل‌داری هستند که در <strong>تمام بخش‌های برنامه پراکنده‌اند</strong> و بر <strong>تمام لایه‌ها</strong> تأثیر می‌گذارند. فرقی نمی‌کند در کدام لایه از نرم‌افزار باشید؛ این مشکلات را بارها و بارها خواهید دید.</p><p>اگر این مشکلات را همین حالا برطرف نکنید، نرم‌افزار شما به مرور زمان <strong>دچار افت عملکرد شده و به سمت شکست پیش می‌رود</strong>.</p><p>در این بخش، به <strong>Code Smellهای سطح برنامه</strong> و روش‌های رفع آن‌ها می‌پردازیم. با <strong>Boolean Blindness</strong> شروع می‌کنیم.</p><hr> <h3>Boolean Blindness (کوری بولیانی)</h3><p><strong>کوری بولیانی</strong> به معنای <strong>از دست رفتن اطلاعات</strong> در متدها یا توابعی است که با مقادیر <strong>Boolean (true/false)</strong> کار می‌کنند.<br> استفاده از ساختارهای بهتر، <strong>رابط‌ها و کلاس‌هایی با وضوح بالاتر</strong> ایجاد می‌کند که داده‌ها را واضح‌تر نگه می‌دارند و تجربه کاری بهتری فراهم می‌کنند.</p><p>بیایید این مشکل را با یک مثال بررسی کنیم:</p><pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">BookConcert</span>(<span class="hljs-params"><span class="hljs-built_in">string</span> concert, <span class="hljs-built_in">bool</span> standing</span>)</span>
 {
     <span class="hljs-keyword">if</span> (standing)
     {
@@ -118,30 +23,18 @@
         <span class="hljs-comment">// Issue sitting ticket.</span>
     }
 }
-</code></pre>
-<p>این متد یک <strong>string</strong> برای نام کنسرت و یک <strong>Boolean</strong> برای مشخص کردن اینکه فرد <strong>ایستاده یا نشسته</strong> است، دریافت می‌کند. حالا این کد به این صورت فراخوانی می‌شود:</p>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">BooleanBlindnessConcertBooking</span>()</span>
+</code></pre> <p>این متد یک <strong>string</strong> برای نام کنسرت و یک <strong>Boolean</strong> برای مشخص کردن اینکه فرد <strong>ایستاده یا نشسته</strong> است، دریافت می‌کند. حالا این کد به این صورت فراخوانی می‌شود:</p><pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">BooleanBlindnessConcertBooking</span>()</span>
 {
     <span class="hljs-keyword">var</span> booking = <span class="hljs-keyword">new</span> ProblemCode.ConcertBooking();
     booking.BookConcert(<span class="hljs-string">&quot;Solitary Experiments&quot;</span>, <span class="hljs-literal">true</span>);
 }
-</code></pre>
-<p>اگر شخصی تازه‌وارد به این کد نگاه کند، آیا می‌تواند به‌صورت غریزی متوجه شود که <strong>true</strong> به چه معناست؟ مسلماً نه.<br>
-او برای فهمیدن موضوع مجبور است یا از <strong>IntelliSense</strong> استفاده کند یا <strong>به متد اصلی مراجعه کند</strong>.<br>
-این همان <strong>کوری بولیانی</strong> است.</p>
-<p>راه‌حل چیست؟<br>
-یک راه‌حل ساده این است که <strong>به جای Boolean از enum استفاده کنیم</strong>.</p>
-<p>ابتدا <strong>enum</strong> خود را ایجاد می‌کنیم:</p>
-<pre class="hljs"><code>[<span class="hljs-meta">Flags</span>]
+</code></pre> <p>اگر شخصی تازه‌وارد به این کد نگاه کند، آیا می‌تواند به‌صورت غریزی متوجه شود که <strong>true</strong> به چه معناست؟ مسلماً نه.<br> او برای فهمیدن موضوع مجبور است یا از <strong>IntelliSense</strong> استفاده کند یا <strong>به متد اصلی مراجعه کند</strong>.<br> این همان <strong>کوری بولیانی</strong> است.</p><p>راه‌حل چیست؟<br> یک راه‌حل ساده این است که <strong>به جای Boolean از enum استفاده کنیم</strong>.</p><p>ابتدا <strong>enum</strong> خود را ایجاد می‌کنیم:</p><pre class="hljs"><code>[<span class="hljs-meta">Flags</span>]
 <span class="hljs-keyword">internal</span> <span class="hljs-built_in">enum</span> TicketType
 {
     Seated,
     Standing
 }
-</code></pre>
-<p>این enum دو نوع بلیط را مشخص می‌کند: <strong>Seated (نشسته)</strong> و <strong>Standing (ایستاده)</strong>.</p>
-<p>حالا متد <strong>BookConcert()</strong> خود را بازآرایی می‌کنیم:</p>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">internal</span> <span class="hljs-keyword">void</span> <span class="hljs-title">BookConcert</span>(<span class="hljs-params"><span class="hljs-built_in">string</span> concert, TicketType ticketType</span>)</span>
+</code></pre> <p>این enum دو نوع بلیط را مشخص می‌کند: <strong>Seated (نشسته)</strong> و <strong>Standing (ایستاده)</strong>.</p><p>حالا متد <strong>BookConcert()</strong> خود را بازآرایی می‌کنیم:</p><pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">internal</span> <span class="hljs-keyword">void</span> <span class="hljs-title">BookConcert</span>(<span class="hljs-params"><span class="hljs-built_in">string</span> concert, TicketType ticketType</span>)</span>
 {
     <span class="hljs-keyword">if</span> (ticketType == TicketType.Seated)
     {
@@ -152,18 +45,12 @@
         <span class="hljs-comment">// Issue standing ticket.</span>
     }
 }
-</code></pre>
-<p>و حالا به این صورت فراخوانی می‌کنیم:</p>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ClearSightedConcertBooking</span>()</span>
+</code></pre> <p>و حالا به این صورت فراخوانی می‌کنیم:</p><pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ClearSightedConcertBooking</span>()</span>
 {
     <span class="hljs-keyword">var</span> booking = <span class="hljs-keyword">new</span> RefactoredCode.ConcertBooking();
     booking.BookConcert(<span class="hljs-string">&quot;Chrom&quot;</span>, TicketType.Seated);
 }
-</code></pre>
-<p>در این حالت، اگر شخص جدیدی به کد نگاه کند، فوراً متوجه می‌شود که <strong>در حال رزرو بلیط نشسته برای کنسرت گروه Chrom هستیم</strong>.</p>
-<h3>💥 انفجار ترکیبی (Combinatorial Explosion)</h3>
-<p>انفجار ترکیبی، نتیجه‌ی اجرای یک عمل مشابه توسط قسمت‌های مختلف کد، اما با ترکیب‌های متفاوتی از پارامترها است. بیایید به یک مثال که اعداد را جمع می‌کند نگاه کنیم:</p>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-built_in">int</span> <span class="hljs-title">Add</span>(<span class="hljs-params"><span class="hljs-built_in">int</span> x, <span class="hljs-built_in">int</span> y</span>)</span>
+</code></pre> <p>در این حالت، اگر شخص جدیدی به کد نگاه کند، فوراً متوجه می‌شود که <strong>در حال رزرو بلیط نشسته برای کنسرت گروه Chrom هستیم</strong>.</p><h3>انفجار ترکیبی (Combinatorial Explosion)</h3><p>انفجار ترکیبی، نتیجه‌ی اجرای یک عمل مشابه توسط قسمت‌های مختلف کد، اما با ترکیب‌های متفاوتی از پارامترها است. بیایید به یک مثال که اعداد را جمع می‌کند نگاه کنیم:</p><pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-built_in">int</span> <span class="hljs-title">Add</span>(<span class="hljs-params"><span class="hljs-built_in">int</span> x, <span class="hljs-built_in">int</span> y</span>)</span>
 {
     <span class="hljs-keyword">return</span> x + y;
 }
@@ -175,129 +62,17 @@
 {
     <span class="hljs-keyword">return</span> x + y;
 }
-</code></pre>
-<p>در اینجا، ما سه متد داریم که همگی عملیات جمع را انجام می‌دهند، اما <strong>نوع داده‌ی بازگشتی (return type)</strong> و <strong>پارامترها</strong> متفاوت هستند. آیا راه بهتری وجود دارد؟ بله ✅، با استفاده از <strong>Generics (جنریک‌ها)</strong>. با کمک جنریک‌ها، شما می‌توانید تنها <strong>یک متد</strong> داشته باشید که قادر به کار کردن با انواع داده‌های مختلف است. پس ما از جنریک‌ها برای حل مسئله جمع استفاده می‌کنیم. این کار به ما اجازه می‌دهد یک متد واحد داشته باشیم که <strong>عدد صحیح (int)</strong>، <strong>عدد اعشاری (double)</strong> یا <strong>عدد اعشاری با دقت کمتر (float)</strong> را بپذیرد. بیایید به متد جدید نگاه کنیم:</p>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">public</span> T <span class="hljs-title">Add</span>&lt;<span class="hljs-title">T</span>&gt;(<span class="hljs-params">T x, T y</span>)</span>
+</code></pre> <p>در اینجا، ما سه متد داریم که همگی عملیات جمع را انجام می‌دهند، اما <strong>نوع داده‌ی بازگشتی (return type)</strong> و <strong>پارامترها</strong> متفاوت هستند. آیا راه بهتری وجود دارد؟ بله ، با استفاده از <strong>Generics (جنریک‌ها)</strong>. با کمک جنریک‌ها، شما می‌توانید تنها <strong>یک متد</strong> داشته باشید که قادر به کار کردن با انواع داده‌های مختلف است. پس ما از جنریک‌ها برای حل مسئله جمع استفاده می‌کنیم. این کار به ما اجازه می‌دهد یک متد واحد داشته باشیم که <strong>عدد صحیح (int)</strong>، <strong>عدد اعشاری (double)</strong> یا <strong>عدد اعشاری با دقت کمتر (float)</strong> را بپذیرد. بیایید به متد جدید نگاه کنیم:</p><pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">public</span> T <span class="hljs-title">Add</span>&lt;<span class="hljs-title">T</span>&gt;(<span class="hljs-params">T x, T y</span>)</span>
 {
     <span class="hljs-built_in">dynamic</span> a = x;
     <span class="hljs-built_in">dynamic</span> b = y;
     <span class="hljs-keyword">return</span> a + b;
 }
-</code></pre>
-<p>این متد جنریک با یک نوع مشخص برای <strong>T</strong> فراخوانی می‌شود. عملیات جمع را انجام می‌دهد و نتیجه را بازمی‌گرداند. فقط <strong>یک نسخه از متد</strong> برای انواع مختلف داده‌های <strong>.NET</strong> که امکان جمع شدن دارند کافی است. برای فراخوانی این کد با مقادیر int، double و float، به این صورت عمل می‌کنیم:</p>
-<pre class="hljs"><code><span class="hljs-keyword">var</span> addition = <span class="hljs-keyword">new</span> RefactoredCode.Maths();
+</code></pre> <p>این متد جنریک با یک نوع مشخص برای <strong>T</strong> فراخوانی می‌شود. عملیات جمع را انجام می‌دهد و نتیجه را بازمی‌گرداند. فقط <strong>یک نسخه از متد</strong> برای انواع مختلف داده‌های <strong>.NET</strong> که امکان جمع شدن دارند کافی است. برای فراخوانی این کد با مقادیر int، double و float، به این صورت عمل می‌کنیم:</p><pre class="hljs"><code><span class="hljs-keyword">var</span> addition = <span class="hljs-keyword">new</span> RefactoredCode.Maths();
 addition.Add&lt;<span class="hljs-built_in">int</span>&gt;(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>);
 addition.Add&lt;<span class="hljs-built_in">double</span>&gt;(<span class="hljs-number">1.2</span>, <span class="hljs-number">3.4</span>);
 addition.Add&lt;<span class="hljs-built_in">float</span>&gt;(<span class="hljs-number">5.6f</span>, <span class="hljs-number">7.8f</span>);
-</code></pre>
-<p>ما به‌تازگی <strong>سه متد</strong> را حذف کرده و جایگزین آن‌ها را <strong>یک متد واحد</strong> کرده‌ایم که همان وظیفه را انجام می‌دهد. 🎯</p>
-<hr>
-<h3>🧩 پیچیدگی ساختگی (Contrived Complexity)</h3>
-<p>زمانی که می‌توانید کدی با <strong>معماری ساده</strong> پیاده‌سازی کنید، اما به‌جای آن یک معماری پیشرفته و نسبتاً پیچیده اجرا می‌کنید، به آن <strong>پیچیدگی ساختگی</strong> می‌گویند. متأسفانه، من شخصاً مجبور به کار روی چنین سیستم‌هایی بوده‌ام و باید بگویم <strong>این موضوع واقعاً دردسرساز و استرس‌آور است</strong>.</p>
-<p>در چنین سیستم‌هایی معمولاً اتفاقات زیر رخ می‌دهد:</p>
-<ul>
-<li><strong>نرخ جابجایی نیروها بالا است.</strong></li>
-<li><strong>مستندات کافی وجود ندارد.</strong></li>
-<li><strong>هیچ‌کس به‌طور کامل سیستم را نمی‌شناسد و کسی پاسخگوی سؤالات افراد جدید نیست.</strong></li>
-</ul>
-<p>👨‍💻 <strong>توصیه من به همه معماران نرم‌افزار فوق‌هوشمند این است:</strong><br>
-<strong>Keep It Simple, Stupid (KISS)</strong> – «ساده نگه‌دار، احمقانه».</p>
-<p>به خاطر داشته باشید که دوران استخدام‌های دائمی و شغل‌های مادام‌العمر دیگر کمتر شده است. امروزه بسیاری از برنامه‌نویسان به‌دنبال <strong>درآمد بیشتر</strong> هستند تا <strong>وفاداری طولانی‌مدت به کسب‌وکار</strong>. بنابراین، با توجه به اینکه <strong>درآمد شرکت به نرم‌افزار وابسته است</strong>، باید سیستمی داشته باشید که:</p>
-<ul>
-<li>به‌راحتی قابل درک باشد.</li>
-<li>نیروی جدید بتواند سریعاً وارد کار شود.</li>
-<li>نگهداری و توسعه‌ی آن آسان باشد.</li>
-</ul>
-<p>از خودتان بپرسید:</p>
-<ul>
-<li><strong>اگر شما و تیم‌تان ناگهان شرکت را ترک کنید، آیا تیم جدید می‌تواند به‌سرعت کار را ادامه دهد؟ یا کاملاً سردرگم خواهد شد؟</strong></li>
-<li><strong>اگر تنها فردی که سیستم را می‌شناسد فوت کند، مهاجرت کند یا بازنشسته شود، تکلیف تیم و کسب‌وکار چه می‌شود؟</strong></li>
-</ul>
-<p>من نمی‌توانم به اندازه کافی بر اهمیت <strong>KISS</strong> تأکید کنم. تنها دلیلی که برخی افراد سیستم‌های پیچیده و بدون مستندات می‌سازند، <strong>وابسته کردن کسب‌وکار به خودشان</strong> است. این کار اشتباه است. تجربه من نشان داده که <strong>هرچه سیستم پیچیده‌تر باشد، سریع‌تر شکست می‌خورد و نیاز به بازنویسی دارد</strong>. ❌</p>
-<hr>
-<h3>🛠 کاهش پیچیدگی و بهبود کیفیت کد</h3>
-<p>در <strong>فصل ۱۲ (Using Tools to Improve Code Quality)</strong> یاد گرفتید که چگونه از ابزارهای <strong>Visual Studio 2019</strong> برای کشف <strong>Cyclomatic Complexity</strong> و <strong>Depth of Inheritance</strong> استفاده کنید. همچنین یاد گرفتید چگونه <strong>نمودار وابستگی (Dependency Diagram)</strong> با استفاده از <strong>ReSharper</strong> تولید کنید.</p>
-<p>از این ابزارها برای پیدا کردن <strong>بخش‌های مشکل‌دار</strong> در کد استفاده کنید و روی آن‌ها تمرکز کنید:</p>
-<ul>
-<li><strong>پیچیدگی حلقوی را به ۱۰ یا کمتر کاهش دهید.</strong></li>
-<li><strong>عمق ارث‌بری تمام اشیا را به حداکثر ۱ برسانید.</strong></li>
-<li><strong>هر کلاس فقط وظایفی را انجام دهد که برای آن طراحی شده است.</strong></li>
-<li><strong>متدها را کوچک نگه دارید (به‌طور متوسط حدود ۱۰ خط کد).</strong></li>
-<li><strong>لیست‌های طولانی پارامترها را با اشیای پارامتر جایگزین کنید.</strong></li>
-<li><strong>اگر پارامترهای خروجی زیادی دارید، متد را طوری بازنویسی کنید که یک Tuple یا یک شیء برگرداند.</strong></li>
-<li><strong>در موارد چندنخی (Multithreading)، اطمینان حاصل کنید که کد Thread-safe باشد.</strong></li>
-<li><strong>از اشیای Immutable به جای Mutable استفاده کنید.</strong></li>
-</ul>
-<p>همچنین به <strong>آیکون‌های Quick Tips</strong> توجه کنید. این آیکون‌ها معمولاً پیشنهادهای <strong>Refactoring یک‌کلیکی</strong> برای خط کد موردنظر ارائه می‌دهند. توصیه می‌کنم از آن‌ها استفاده کنید.</p>
-<hr>
-<h3>📦 توده داده (Data Clump)</h3>
-<p><strong>توده داده</strong> زمانی رخ می‌دهد که <strong>فیلدهای مشابه</strong> را در کلاس‌های مختلف و لیست پارامترها می‌بینید که معمولاً الگوی نام‌گذاری مشابهی دارند. این معمولاً نشانه‌ی این است که <strong>یک کلاس در سیستم وجود ندارد</strong>. کاهش پیچیدگی سیستم با <strong>شناسایی کلاس گمشده و عمومی‌سازی آن</strong> به‌دست می‌آید.</p>
-<p>از کوچک بودن کلاس نترسید و هیچ‌وقت فکر نکنید که یک کلاس کوچک بی‌اهمیت است. اگر برای ساده‌سازی کد به یک کلاس نیاز دارید، <strong>آن را اضافه کنید.</strong> ✨</p>
-<h3><strong>کامنت‌های خوشبوکننده (Deodorant Comments)</strong> 📝</h3>
-<p>وقتی یک کامنت با جملات زیبا و مثبت سعی دارد کدی ضعیف یا بد را توجیه کند، به آن <strong>کامنت خوشبوکننده</strong> گفته می‌شود. ❌ اگر کد بد است، باید <strong>بازآرایی (Refactor)</strong> شود تا خوب شود و سپس کامنت حذف شود. اگر نمی‌دانید چگونه بازآرایی کنید، از دیگران کمک بگیرید. اگر کسی برای کمک در دسترس نیست، <strong>کد خود را در Stack Overflow</strong> قرار دهید. برنامه‌نویسان بسیار ماهری در آن سایت هستند که می‌توانند به شما کمک کنند، فقط قوانین انتشار را رعایت کنید!</p>
-<hr>
-<h3><strong>کد تکراری (Duplicate Code)</strong> 🔁</h3>
-<p>کد تکراری، کدی است که <strong>بیش از یک‌بار در پروژه ظاهر شده است</strong>. مشکلاتی که از تکرار کد به‌وجود می‌آیند:</p>
-<ul>
-<li>
-<p><strong>هزینه نگهداری بالا</strong>: هر بار که اشکالی در کد رفع می‌کنید، زمان و هزینه صرف می‌شود.</p>
-<ul>
-<li>یک باگ = هزینه × ۱</li>
-<li>همان باگ در ۱۰ جای دیگر = هزینه × ۱۰</li>
-</ul>
-</li>
-<li>
-<p><strong>خستگی و ملال برنامه‌نویس</strong> هنگام اصلاح یک مشکل در چند نقطه مختلف.</p>
-</li>
-<li>
-<p><strong>احتمال از قلم افتادن برخی از تکرارها</strong> در زمان رفع اشکال.</p>
-</li>
-</ul>
-<p>راه‌حل چیست؟ <strong>بازآرایی کد برای حذف تکرارها</strong>. ساده‌ترین روش، <strong>انتقال کد به یک کلاس جدید قابل‌استفاده مجدد</strong> در پروژه است.</p>
-<p>مزیت دیگر این است که می‌توانید <strong>کدهای قابل‌استفاده مجدد را در یک کتابخانه (Class Library)</strong> قرار دهید تا سایر پروژه‌ها هم از آن بهره ببرند.<br>
-امروزه <strong>بهترین انتخاب، استفاده از کتابخانه‌های .NET Standard</strong> است، چون این کتابخانه‌ها در تمامی پلتفرم‌ها در دسترس‌اند: <strong>Windows، Linux، macOS، iOS و Android</strong>.</p>
-<p>روش‌های دیگر برای کاهش کدهای تکراری:</p>
-<ul>
-<li><strong>برنامه‌نویسی جنبه‌گرا (Aspect-Oriented Programming – AOP)</strong>: در این روش، کدهای تکراری به یک <strong>Aspect</strong> منتقل می‌شوند و هنگام کامپایل به کد اصلی اضافه می‌گردند. در نتیجه، متد فقط شامل منطق تجاری است و کدهای جانبی پنهان می‌مانند.</li>
-<li><strong>الگوی دکوراتور (Decorator Pattern)</strong>: همان‌طور که در فصل قبل دیدید، این الگو می‌تواند عملیات یک کلاس را تزئین کند و امکان اضافه کردن رفتار جدید بدون تغییر در کد اصلی را فراهم می‌کند. مثال ساده: <strong>پیچیدن عملیات در یک بلوک try/catch</strong> که در فصل 11 توضیح داده شد.</li>
-</ul>
-<hr>
-<h3><strong>از دست رفتن هدف یا نیت (Lost Intent)</strong> ❓</h3>
-<p>وقتی نتوانید <strong>به‌راحتی هدف یا مقصود کد را درک کنید</strong>، یعنی نیت کد از بین رفته است.</p>
-<p>گام‌ها برای رفع این مشکل:</p>
-<ol>
-<li>
-<p><strong>بررسی فضای نام (Namespace) و نام کلاس</strong>: باید هدف کلاس را نشان دهد.</p>
-</li>
-<li>
-<p><strong>بررسی محتوای کلاس</strong>: به‌دنبال کدی باشید که در جای نامناسبی قرار دارد. آن‌ها را شناسایی و به جای درست منتقل کنید.</p>
-</li>
-<li>
-<p><strong>بررسی متدها</strong>:</p>
-<ul>
-<li>آیا هر متد فقط یک کار را به‌خوبی انجام می‌دهد یا چند کار را نه‌چندان خوب؟</li>
-<li>اگر پاسخ دوم است، بازآرایی کنید.</li>
-<li>در متدهای بزرگ، کدهای قابل‌استخراج را به متدهای کوچک‌تر منتقل کنید.</li>
-</ul>
-</li>
-</ol>
-<p><strong>هدف نهایی</strong>: کد کلاس باید <strong>مثل یک کتاب خوانا</strong> باشد. بازآرایی کنید تا نیت کد شفاف شود و هر کلاس فقط کاری را انجام دهد که برای آن طراحی شده است.</p>
-<p><strong>نکته:</strong> ابزارهای معرفی‌شده در <strong>فصل 12 (استفاده از ابزارها برای بهبود کیفیت کد)</strong> را فراموش نکنید.</p>
-<p>مبحث بعدی: <strong>بوی بد کد – تغییرات مکرر متغیرها (Mutation of Variables)</strong> خواهد بود.</p>
-<h3><strong>تغییرات مکرر متغیرها (The Mutation of Variables)</strong> 🔄</h3>
-<p>تغییرات مکرر متغیرها یعنی <strong>متغیرها به‌گونه‌ای هستند که فهمیدن و استدلال درباره‌ی آن‌ها دشوار است</strong>. این باعث می‌شود که بازآرایی (Refactor) آن‌ها سخت شود.</p>
-<p>یک <strong>متغیر قابل تغییر (Mutable Variable)</strong>، متغیری است که <strong>چندین بار توسط عملیات مختلف تغییر می‌کند</strong>. این مسئله استدلال درباره‌ی دلیل تغییر مقدار متغیر را دشوار می‌کند. علاوه بر این، چون متغیر توسط عملیات مختلف تغییر می‌کند، <strong>استخراج بخش‌هایی از کد به متدهای کوچک‌تر و خواناتر</strong> نیز سخت‌تر می‌شود. همچنین، متغیرهای قابل تغییر ممکن است نیازمند بررسی‌های بیشتری باشند که <strong>پیچیدگی کد</strong> را افزایش می‌دهد.</p>
-<h4>راهکارها</h4>
-<ul>
-<li>بخش‌های کوچک کد را <strong>به متدهای جداگانه استخراج کنید</strong>.</li>
-<li>اگر کد شامل <strong>انشعاب‌ها و حلقه‌های متعدد</strong> است، ببینید آیا راه ساده‌تری برای کاهش پیچیدگی وجود دارد یا خیر.</li>
-<li>اگر از چندین <strong>مقدار out</strong> استفاده می‌کنید، در نظر بگیرید که <strong>یک شیء یا Tuple</strong> برگردانید.</li>
-<li>هدف این است که <strong>قابلیت تغییر متغیر را کاهش دهید</strong> تا بتوان راحت‌تر درباره‌ی آن استدلال کرد، بدانید مقدار متغیر از کجا می‌آید و چرا آن مقدار را دارد.</li>
-<li>هرچه متد کوچک‌تر باشد، <strong>تشخیص محل و دلیل تنظیم متغیر آسان‌تر</strong> است.</li>
-</ul>
-<hr>
-<h4>مثال عملی</h4>
-<pre class="hljs"><code>[<span class="hljs-meta">InstrumentationAspect</span>]
+</code></pre> <p>ما به‌تازگی <strong>سه متد</strong> را حذف کرده و جایگزین آن‌ها را <strong>یک متد واحد</strong> کرده‌ایم که همان وظیفه را انجام می‌دهد.</p><hr> <h3>پیچیدگی ساختگی (Contrived Complexity)</h3><p>زمانی که می‌توانید کدی با <strong>معماری ساده</strong> پیاده‌سازی کنید، اما به‌جای آن یک معماری پیشرفته و نسبتاً پیچیده اجرا می‌کنید، به آن <strong>پیچیدگی ساختگی</strong> می‌گویند. متأسفانه، من شخصاً مجبور به کار روی چنین سیستم‌هایی بوده‌ام و باید بگویم <strong>این موضوع واقعاً دردسرساز و استرس‌آور است</strong>.</p><p>در چنین سیستم‌هایی معمولاً اتفاقات زیر رخ می‌دهد:</p><ul> <li><strong>نرخ جابجایی نیروها بالا است.</strong></li><li><strong>مستندات کافی وجود ندارد.</strong></li><li><strong>هیچ‌کس به‌طور کامل سیستم را نمی‌شناسد و کسی پاسخگوی سؤالات افراد جدید نیست.</strong></li></ul> <p>‍ <strong>توصیه من به همه معماران نرم‌افزار فوق‌هوشمند این است:</strong><br><strong>Keep It Simple, Stupid (KISS)</strong> – «ساده نگه‌دار، احمقانه».</p><p>به خاطر داشته باشید که دوران استخدام‌های دائمی و شغل‌های مادام‌العمر دیگر کمتر شده است. امروزه بسیاری از برنامه‌نویسان به‌دنبال <strong>درآمد بیشتر</strong> هستند تا <strong>وفاداری طولانی‌مدت به کسب‌وکار</strong>. بنابراین، با توجه به اینکه <strong>درآمد شرکت به نرم‌افزار وابسته است</strong>، باید سیستمی داشته باشید که:</p><ul> <li>به‌راحتی قابل درک باشد.</li><li>نیروی جدید بتواند سریعاً وارد کار شود.</li><li>نگهداری و توسعه‌ی آن آسان باشد.</li></ul> <p>از خودتان بپرسید:</p><ul> <li><strong>اگر شما و تیم‌تان ناگهان شرکت را ترک کنید، آیا تیم جدید می‌تواند به‌سرعت کار را ادامه دهد؟ یا کاملاً سردرگم خواهد شد؟</strong></li><li><strong>اگر تنها فردی که سیستم را می‌شناسد فوت کند، مهاجرت کند یا بازنشسته شود، تکلیف تیم و کسب‌وکار چه می‌شود؟</strong></li></ul> <p>من نمی‌توانم به اندازه کافی بر اهمیت <strong>KISS</strong> تأکید کنم. تنها دلیلی که برخی افراد سیستم‌های پیچیده و بدون مستندات می‌سازند، <strong>وابسته کردن کسب‌وکار به خودشان</strong> است. این کار اشتباه است. تجربه من نشان داده که <strong>هرچه سیستم پیچیده‌تر باشد، سریع‌تر شکست می‌خورد و نیاز به بازنویسی دارد</strong>.</p><hr> <h3>کاهش پیچیدگی و بهبود کیفیت کد</h3><p>در <strong>فصل ۱۲ (Using Tools to Improve Code Quality)</strong> یاد گرفتید که چگونه از ابزارهای <strong>Visual Studio 2019</strong> برای کشف <strong>Cyclomatic Complexity</strong> و <strong>Depth of Inheritance</strong> استفاده کنید. همچنین یاد گرفتید چگونه <strong>نمودار وابستگی (Dependency Diagram)</strong> با استفاده از <strong>ReSharper</strong> تولید کنید.</p><p>از این ابزارها برای پیدا کردن <strong>بخش‌های مشکل‌دار</strong> در کد استفاده کنید و روی آن‌ها تمرکز کنید:</p><ul> <li><strong>پیچیدگی حلقوی را به ۱۰ یا کمتر کاهش دهید.</strong></li><li><strong>عمق ارث‌بری تمام اشیا را به حداکثر ۱ برسانید.</strong></li><li><strong>هر کلاس فقط وظایفی را انجام دهد که برای آن طراحی شده است.</strong></li><li><strong>متدها را کوچک نگه دارید (به‌طور متوسط حدود ۱۰ خط کد).</strong></li><li><strong>لیست‌های طولانی پارامترها را با اشیای پارامتر جایگزین کنید.</strong></li><li><strong>اگر پارامترهای خروجی زیادی دارید، متد را طوری بازنویسی کنید که یک Tuple یا یک شیء برگرداند.</strong></li><li><strong>در موارد چندنخی (Multithreading)، اطمینان حاصل کنید که کد Thread-safe باشد.</strong></li><li><strong>از اشیای Immutable به جای Mutable استفاده کنید.</strong></li></ul> <p>همچنین به <strong>آیکون‌های Quick Tips</strong> توجه کنید. این آیکون‌ها معمولاً پیشنهادهای <strong>Refactoring یک‌کلیکی</strong> برای خط کد موردنظر ارائه می‌دهند. توصیه می‌کنم از آن‌ها استفاده کنید.</p><hr> <h3>توده داده (Data Clump)</h3><p><strong>توده داده</strong> زمانی رخ می‌دهد که <strong>فیلدهای مشابه</strong> را در کلاس‌های مختلف و لیست پارامترها می‌بینید که معمولاً الگوی نام‌گذاری مشابهی دارند. این معمولاً نشانه‌ی این است که <strong>یک کلاس در سیستم وجود ندارد</strong>. کاهش پیچیدگی سیستم با <strong>شناسایی کلاس گمشده و عمومی‌سازی آن</strong> به‌دست می‌آید.</p><p>از کوچک بودن کلاس نترسید و هیچ‌وقت فکر نکنید که یک کلاس کوچک بی‌اهمیت است. اگر برای ساده‌سازی کد به یک کلاس نیاز دارید، <strong>آن را اضافه کنید.</strong></p><h3><strong>کامنت‌های خوشبوکننده (Deodorant Comments)</strong></h3><p>وقتی یک کامنت با جملات زیبا و مثبت سعی دارد کدی ضعیف یا بد را توجیه کند، به آن <strong>کامنت خوشبوکننده</strong> گفته می‌شود. اگر کد بد است، باید <strong>بازآرایی (Refactor)</strong> شود تا خوب شود و سپس کامنت حذف شود. اگر نمی‌دانید چگونه بازآرایی کنید، از دیگران کمک بگیرید. اگر کسی برای کمک در دسترس نیست، <strong>کد خود را در Stack Overflow</strong> قرار دهید. برنامه‌نویسان بسیار ماهری در آن سایت هستند که می‌توانند به شما کمک کنند، فقط قوانین انتشار را رعایت کنید!</p><hr> <h3><strong>کد تکراری (Duplicate Code)</strong></h3><p>کد تکراری، کدی است که <strong>بیش از یک‌بار در پروژه ظاهر شده است</strong>. مشکلاتی که از تکرار کد به‌وجود می‌آیند:</p><ul> <li><p><strong>هزینه نگهداری بالا</strong>: هر بار که اشکالی در کد رفع می‌کنید، زمان و هزینه صرف می‌شود.</p><ul> <li>یک باگ = هزینه × ۱</li><li>همان باگ در ۱۰ جای دیگر = هزینه × ۱۰</li></ul> </li><li> <p><strong>خستگی و ملال برنامه‌نویس</strong> هنگام اصلاح یک مشکل در چند نقطه مختلف.</p></li> <li><p><strong>احتمال از قلم افتادن برخی از تکرارها</strong> در زمان رفع اشکال.</p></li> </ul><p>راه‌حل چیست؟ <strong>بازآرایی کد برای حذف تکرارها</strong>. ساده‌ترین روش، <strong>انتقال کد به یک کلاس جدید قابل‌استفاده مجدد</strong> در پروژه است.</p><p>مزیت دیگر این است که می‌توانید <strong>کدهای قابل‌استفاده مجدد را در یک کتابخانه (Class Library)</strong> قرار دهید تا سایر پروژه‌ها هم از آن بهره ببرند.<br> امروزه <strong>بهترین انتخاب، استفاده از کتابخانه‌های .NET Standard</strong> است، چون این کتابخانه‌ها در تمامی پلتفرم‌ها در دسترس‌اند: <strong>Windows، Linux، macOS، iOS و Android</strong>.</p><p>روش‌های دیگر برای کاهش کدهای تکراری:</p><ul> <li><strong>برنامه‌نویسی جنبه‌گرا (Aspect-Oriented Programming – AOP)</strong>: در این روش، کدهای تکراری به یک <strong>Aspect</strong> منتقل می‌شوند و هنگام کامپایل به کد اصلی اضافه می‌گردند. در نتیجه، متد فقط شامل منطق تجاری است و کدهای جانبی پنهان می‌مانند.</li><li><strong>الگوی دکوراتور (Decorator Pattern)</strong>: همان‌طور که در فصل قبل دیدید، این الگو می‌تواند عملیات یک کلاس را تزئین کند و امکان اضافه کردن رفتار جدید بدون تغییر در کد اصلی را فراهم می‌کند. مثال ساده: <strong>پیچیدن عملیات در یک بلوک try/catch</strong> که در فصل 11 توضیح داده شد.</li></ul> <hr><h3><strong>از دست رفتن هدف یا نیت (Lost Intent)</strong></h3><p>وقتی نتوانید <strong>به‌راحتی هدف یا مقصود کد را درک کنید</strong>، یعنی نیت کد از بین رفته است.</p><p>گام‌ها برای رفع این مشکل:</p><ol> <li><p><strong>بررسی فضای نام (Namespace) و نام کلاس</strong>: باید هدف کلاس را نشان دهد.</p></li> <li><p><strong>بررسی محتوای کلاس</strong>: به‌دنبال کدی باشید که در جای نامناسبی قرار دارد. آن‌ها را شناسایی و به جای درست منتقل کنید.</p></li> <li><p><strong>بررسی متدها</strong>:</p><ul> <li>آیا هر متد فقط یک کار را به‌خوبی انجام می‌دهد یا چند کار را نه‌چندان خوب؟</li><li>اگر پاسخ دوم است، بازآرایی کنید.</li><li>در متدهای بزرگ، کدهای قابل‌استخراج را به متدهای کوچک‌تر منتقل کنید.</li></ul> </li></ol> <p><strong>هدف نهایی</strong>: کد کلاس باید <strong>مثل یک کتاب خوانا</strong> باشد. بازآرایی کنید تا نیت کد شفاف شود و هر کلاس فقط کاری را انجام دهد که برای آن طراحی شده است.</p><p><strong>نکته:</strong> ابزارهای معرفی‌شده در <strong>فصل 12 (استفاده از ابزارها برای بهبود کیفیت کد)</strong> را فراموش نکنید.</p><p>مبحث بعدی: <strong>بوی بد کد – تغییرات مکرر متغیرها (Mutation of Variables)</strong> خواهد بود.</p><h3><strong>تغییرات مکرر متغیرها (The Mutation of Variables)</strong></h3><p>تغییرات مکرر متغیرها یعنی <strong>متغیرها به‌گونه‌ای هستند که فهمیدن و استدلال درباره‌ی آن‌ها دشوار است</strong>. این باعث می‌شود که بازآرایی (Refactor) آن‌ها سخت شود.</p><p>یک <strong>متغیر قابل تغییر (Mutable Variable)</strong>، متغیری است که <strong>چندین بار توسط عملیات مختلف تغییر می‌کند</strong>. این مسئله استدلال درباره‌ی دلیل تغییر مقدار متغیر را دشوار می‌کند. علاوه بر این، چون متغیر توسط عملیات مختلف تغییر می‌کند، <strong>استخراج بخش‌هایی از کد به متدهای کوچک‌تر و خواناتر</strong> نیز سخت‌تر می‌شود. همچنین، متغیرهای قابل تغییر ممکن است نیازمند بررسی‌های بیشتری باشند که <strong>پیچیدگی کد</strong> را افزایش می‌دهد.</p><h4>راهکارها</h4><ul> <li>بخش‌های کوچک کد را <strong>به متدهای جداگانه استخراج کنید</strong>.</li><li>اگر کد شامل <strong>انشعاب‌ها و حلقه‌های متعدد</strong> است، ببینید آیا راه ساده‌تری برای کاهش پیچیدگی وجود دارد یا خیر.</li><li>اگر از چندین <strong>مقدار out</strong> استفاده می‌کنید، در نظر بگیرید که <strong>یک شیء یا Tuple</strong> برگردانید.</li><li>هدف این است که <strong>قابلیت تغییر متغیر را کاهش دهید</strong> تا بتوان راحت‌تر درباره‌ی آن استدلال کرد، بدانید مقدار متغیر از کجا می‌آید و چرا آن مقدار را دارد.</li><li>هرچه متد کوچک‌تر باشد، <strong>تشخیص محل و دلیل تنظیم متغیر آسان‌تر</strong> است.</li></ul> <hr><h4>مثال عملی</h4><pre class="hljs"><code>[<span class="hljs-meta">InstrumentationAspect</span>]
 <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Mutant</span>
 {
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-built_in">int</span> <span class="hljs-title">IntegerSquaredSum</span>(<span class="hljs-params">List&lt;<span class="hljs-built_in">int</span>&gt; integers</span>)</span>
@@ -310,11 +85,7 @@ addition.Add&lt;<span class="hljs-built_in">float</span>&gt;(<span class="hljs-n
         <span class="hljs-keyword">return</span> squaredSum;
     }
 }
-</code></pre>
-<p>این متد، یک <strong>لیست از اعداد صحیح (integers)</strong> دریافت می‌کند، سپس روی هر عدد حلقه می‌زند، مربع آن را محاسبه و به متغیر <code>squaredSum</code> اضافه می‌کند. توجه کنید که <strong>در هر تکرار حلقه، مقدار متغیر محلی تغییر می‌کند</strong>.</p>
-<hr>
-<h4>نسخه بازآرایی شده و بهبود یافته با LINQ</h4>
-<pre class="hljs"><code>[<span class="hljs-meta">InstrumentationAspect</span>]
+</code></pre> <p>این متد، یک <strong>لیست از اعداد صحیح (integers)</strong> دریافت می‌کند، سپس روی هر عدد حلقه می‌زند، مربع آن را محاسبه و به متغیر <code>squaredSum</code> اضافه می‌کند. توجه کنید که <strong>در هر تکرار حلقه، مقدار متغیر محلی تغییر می‌کند</strong>.</p><hr> <h4>نسخه بازآرایی شده و بهبود یافته با LINQ</h4><pre class="hljs"><code>[<span class="hljs-meta">InstrumentationAspect</span>]
 <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Function</span>
 {
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-built_in">int</span> <span class="hljs-title">IntegerSquaredSum</span>(<span class="hljs-params">List&lt;<span class="hljs-built_in">int</span>&gt; integers</span>)</span>
@@ -322,57 +93,25 @@ addition.Add&lt;<span class="hljs-built_in">float</span>&gt;(<span class="hljs-n
         <span class="hljs-keyword">return</span> integers.Sum(integer =&gt; integer * integer);
     }
 }
-</code></pre>
-<p>در نسخه جدید، از <strong>LINQ</strong> استفاده شده است. همان‌طور که در فصل‌های قبل یاد گرفتید، LINQ از <strong>برنامه‌نویسی تابعی (Functional Programming)</strong> بهره می‌برد.<br>
-همان‌طور که می‌بینید:</p>
-<ul>
-<li><strong>هیچ حلقه‌ای وجود ندارد</strong></li>
-<li><strong>هیچ متغیر محلی در حال تغییر نیست</strong></li>
-</ul>
-<p>با کامپایل و اجرای برنامه، خروجی مشابه نسخه قبلی خواهد بود، اما <strong>کد ساده‌تر، خواناتر و بدون تغییر مکرر متغیر</strong> است.</p>
-<div align="center">
-<p><img src="../../../assets/image/13/Table%2013-1.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<p>هر دو نسخه کد خروجی یکسانی تولید می‌کنند. ✅</p>
-<p>شما متوجه خواهید شد که هر دو نسخه کد، <code>[InstrumentationAspect]</code> روی آن‌ها اعمال شده است. این Aspect را در فصل ۱۲، «پرداختن به مسائل Cross-Cutting» به کتابخانه قابل استفاده مجدد خود اضافه کردیم. وقتی کد را اجرا می‌کنید، یک پوشه <code>Logs</code> در پوشه <code>Debug</code> خواهید یافت. فایل <code>Profile.log</code> را در Notepad باز کنید و خروجی زیر را مشاهده خواهید کرد:</p>
-<pre class="hljs"><code>Method: IntegerSquaredSum, Start Time: 01/07/2020 11:41:43
+</code></pre> <p>در نسخه جدید، از <strong>LINQ</strong> استفاده شده است. همان‌طور که در فصل‌های قبل یاد گرفتید، LINQ از <strong>برنامه‌نویسی تابعی (Functional Programming)</strong> بهره می‌برد.<br> همان‌طور که می‌بینید:</p><ul> <li><strong>هیچ حلقه‌ای وجود ندارد</strong></li><li><strong>هیچ متغیر محلی در حال تغییر نیست</strong></li></ul> <p>با کامپایل و اجرای برنامه، خروجی مشابه نسخه قبلی خواهد بود، اما <strong>کد ساده‌تر، خواناتر و بدون تغییر مکرر متغیر</strong> است.</p><div align="center"> <p><img src="../../../assets/image/13/Table%2013-1.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <p>هر دو نسخه کد خروجی یکسانی تولید می‌کنند.</p><p>شما متوجه خواهید شد که هر دو نسخه کد، <code>[InstrumentationAspect]</code> روی آن‌ها اعمال شده است. این Aspect را در فصل ۱۲، «پرداختن به مسائل Cross-Cutting» به کتابخانه قابل استفاده مجدد خود اضافه کردیم. وقتی کد را اجرا می‌کنید، یک پوشه <code>Logs</code> در پوشه <code>Debug</code> خواهید یافت. فایل <code>Profile.log</code> را در Notepad باز کنید و خروجی زیر را مشاهده خواهید کرد:</p><pre class="hljs"><code>Method: IntegerSquaredSum, Start Time: 01/07/2020 11:41:43
 Method: IntegerSquaredSum, Stop Time: 01/07/2020 11:41:43, Duration: 00:00:00.0005489
 Method: IntegerSquaredSum, Start Time: 01/07/2020 11:41:43
 Method: IntegerSquaredSum, Stop Time: 01/07/2020 11:41:43, Duration: 00:00:00.0000027
-</code></pre>
-<p>خروجی نشان می‌دهد که متد <code>ProblemCode.IntegerSquaredSum()</code> کندترین نسخه بوده و اجرای آن ۵۴۸.۹ نانوثانیه طول کشیده است. در حالی که متد <code>RefactoredCode.IntegerSquaredSum()</code> بسیار سریع‌تر بوده و تنها ۲.۷ نانوثانیه زمان برده است. ⏱️</p>
-<p>با بازسازی حلقه و استفاده از LINQ، از تغییر متغیر محلی جلوگیری کردیم. همچنین زمان پردازش محاسبه را ۵۴۶.۲ نانوثانیه کاهش دادیم. چنین بهبودی بسیار کوچک است و با چشم انسان قابل تشخیص نیست. اما اگر چنین محاسباتی روی داده‌های بزرگ انجام شود، تفاوت قابل توجهی احساس خواهد شد.</p>
-<p>حالا به «راه‌حل عجیب» می‌پردازیم. 🌀</p>
-<h3>راه‌حل عجیب</h3>
-<p>وقتی یک مشکل در کد منبع به روش‌های متفاوتی حل شده باشد، به آن «راه‌حل عجیب» گفته می‌شود. این موضوع می‌تواند به دلیل سبک برنامه‌نویسی متفاوت برنامه‌نویسان مختلف و نبود استانداردهای مشخص رخ دهد. همچنین ممکن است به دلیل ناآگاهی از سیستم اتفاق بیفتد، به طوری که برنامه‌نویس متوجه نشود یک راه‌حل از قبل وجود دارد.</p>
-<p>یک روش برای بازسازی راه‌حل‌های عجیب این است که یک کلاس جدید بنویسید که رفتاری را که به روش‌های مختلف تکرار شده، در خود جای دهد. رفتار را به تمیزترین و کارآمدترین شکل ممکن به کلاس اضافه کنید. سپس، راه‌حل‌های عجیب را با رفتار بازسازی شده جدید جایگزین کنید.</p>
-<p>همچنین می‌توانید با استفاده از <strong>Adapter Pattern</strong>، رابط‌های مختلف سیستم را متحد کنید. 🔗</p>
-<div align="center">
-<p><img src="../../../assets/image/13/Table%2013-2.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<p>کلاس <strong>Target</strong> رابط دامنه‌محوری است که توسط <strong>Client</strong> استفاده می‌شود. یک رابط موجود که نیاز به تطبیق دارد، <strong>Adaptee</strong> نامیده می‌شود. کلاس <strong>Adapter</strong>، کلاس <strong>Adaptee</strong> را به کلاس <strong>Target</strong> تطبیق می‌دهد. و در نهایت، کلاس <strong>Client</strong> با اشیائی که مطابق با رابط <strong>Target</strong> هستند، ارتباط برقرار می‌کند. حالا بیایید <strong>Adapter Pattern</strong> را پیاده‌سازی کنیم.</p>
-<p>یک کلاس جدید به نام <strong>Adaptee</strong> اضافه کنید:</p>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Adaptee</span>
+</code></pre> <p>خروجی نشان می‌دهد که متد <code>ProblemCode.IntegerSquaredSum()</code> کندترین نسخه بوده و اجرای آن ۵۴۸.۹ نانوثانیه طول کشیده است. در حالی که متد <code>RefactoredCode.IntegerSquaredSum()</code> بسیار سریع‌تر بوده و تنها ۲.۷ نانوثانیه زمان برده است. ⏱</p><p>با بازسازی حلقه و استفاده از LINQ، از تغییر متغیر محلی جلوگیری کردیم. همچنین زمان پردازش محاسبه را ۵۴۶.۲ نانوثانیه کاهش دادیم. چنین بهبودی بسیار کوچک است و با چشم انسان قابل تشخیص نیست. اما اگر چنین محاسباتی روی داده‌های بزرگ انجام شود، تفاوت قابل توجهی احساس خواهد شد.</p><p>حالا به «راه‌حل عجیب» می‌پردازیم.</p><h3>راه‌حل عجیب</h3><p>وقتی یک مشکل در کد منبع به روش‌های متفاوتی حل شده باشد، به آن «راه‌حل عجیب» گفته می‌شود. این موضوع می‌تواند به دلیل سبک برنامه‌نویسی متفاوت برنامه‌نویسان مختلف و نبود استانداردهای مشخص رخ دهد. همچنین ممکن است به دلیل ناآگاهی از سیستم اتفاق بیفتد، به طوری که برنامه‌نویس متوجه نشود یک راه‌حل از قبل وجود دارد.</p><p>یک روش برای بازسازی راه‌حل‌های عجیب این است که یک کلاس جدید بنویسید که رفتاری را که به روش‌های مختلف تکرار شده، در خود جای دهد. رفتار را به تمیزترین و کارآمدترین شکل ممکن به کلاس اضافه کنید. سپس، راه‌حل‌های عجیب را با رفتار بازسازی شده جدید جایگزین کنید.</p><p>همچنین می‌توانید با استفاده از <strong>Adapter Pattern</strong>، رابط‌های مختلف سیستم را متحد کنید.</p><div align="center"> <p><img src="../../../assets/image/13/Table%2013-2.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <p>کلاس <strong>Target</strong> رابط دامنه‌محوری است که توسط <strong>Client</strong> استفاده می‌شود. یک رابط موجود که نیاز به تطبیق دارد، <strong>Adaptee</strong> نامیده می‌شود. کلاس <strong>Adapter</strong>، کلاس <strong>Adaptee</strong> را به کلاس <strong>Target</strong> تطبیق می‌دهد. و در نهایت، کلاس <strong>Client</strong> با اشیائی که مطابق با رابط <strong>Target</strong> هستند، ارتباط برقرار می‌کند. حالا بیایید <strong>Adapter Pattern</strong> را پیاده‌سازی کنیم.</p><p>یک کلاس جدید به نام <strong>Adaptee</strong> اضافه کنید:</p><pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Adaptee</span>
 {
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">AdapteeOperation</span>()</span>
     {
         Console.WriteLine(<span class="hljs-string">$&quot;AdapteeOperation() has just executed.&quot;</span>);
     }
 }
-</code></pre>
-<p>کلاس <strong>Adaptee</strong> بسیار ساده است. این کلاس شامل یک متد به نام <strong>AdapteeOperation()</strong> است که یک پیام را روی کنسول چاپ می‌کند.</p>
-<p>حالا کلاس <strong>Target</strong> را اضافه کنید:</p>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Target</span>
+</code></pre> <p>کلاس <strong>Adaptee</strong> بسیار ساده است. این کلاس شامل یک متد به نام <strong>AdapteeOperation()</strong> است که یک پیام را روی کنسول چاپ می‌کند.</p><p>حالا کلاس <strong>Target</strong> را اضافه کنید:</p><pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Target</span>
 {
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Operation</span>()</span>
     {
         Console.WriteLine(<span class="hljs-string">&quot;Target.Operation() has executed.&quot;</span>);
     }
 }
-</code></pre>
-<p>کلاس <strong>Target</strong> نیز بسیار ساده است و شامل یک متد مجازی به نام <strong>Operation()</strong> است که یک پیام روی کنسول چاپ می‌کند.</p>
-<p>اکنون کلاس <strong>Adapter</strong> را اضافه می‌کنیم که کلاس‌های <strong>Target</strong> و <strong>Adaptee</strong> را به هم متصل می‌کند:</p>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Adapter</span> : <span class="hljs-title">Target</span>
+</code></pre> <p>کلاس <strong>Target</strong> نیز بسیار ساده است و شامل یک متد مجازی به نام <strong>Operation()</strong> است که یک پیام روی کنسول چاپ می‌کند.</p><p>اکنون کلاس <strong>Adapter</strong> را اضافه می‌کنیم که کلاس‌های <strong>Target</strong> و <strong>Adaptee</strong> را به هم متصل می‌کند:</p><pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Adapter</span> : <span class="hljs-title">Target</span>
 {
     <span class="hljs-keyword">private</span> <span class="hljs-keyword">readonly</span> Adaptee _adaptee = <span class="hljs-keyword">new</span> Adaptee();
 
@@ -381,10 +120,7 @@ Method: IntegerSquaredSum, Stop Time: 01/07/2020 11:41:43, Duration: 00:00:00.00
         _adaptee.AdapteeOperation();
     }
 }
-</code></pre>
-<p>کلاس <strong>Adapter</strong> از کلاس <strong>Target</strong> ارث‌بری می‌کند. سپس یک متغیر عضو برای نگهداری شیء <strong>Adaptee</strong> ایجاد و مقداردهی اولیه می‌کنیم. سپس یک متد داریم که متد <strong>Operation()</strong> بازنویسی‌شده کلاس <strong>Target</strong> است.</p>
-<p>در نهایت، کلاس <strong>Client</strong> را اضافه می‌کنیم:</p>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Client</span>
+</code></pre> <p>کلاس <strong>Adapter</strong> از کلاس <strong>Target</strong> ارث‌بری می‌کند. سپس یک متغیر عضو برای نگهداری شیء <strong>Adaptee</strong> ایجاد و مقداردهی اولیه می‌کنیم. سپس یک متد داریم که متد <strong>Operation()</strong> بازنویسی‌شده کلاس <strong>Target</strong> است.</p><p>در نهایت، کلاس <strong>Client</strong> را اضافه می‌کنیم:</p><pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Client</span>
 {
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Operation</span>()</span>
     {
@@ -392,40 +128,18 @@ Method: IntegerSquaredSum, Stop Time: 01/07/2020 11:41:43, Duration: 00:00:00.00
         target.Operation();
     }
 }
-</code></pre>
-<p>کلاس <strong>Client</strong> شامل یک متد به نام <strong>Operation()</strong> است. این متد یک شیء <strong>Adapter</strong> جدید ایجاد کرده و آن را به یک متغیر از نوع <strong>Target</strong> اختصاص می‌دهد. سپس متد <strong>Operation()</strong> را روی متغیر <strong>Target</strong> فراخوانی می‌کند.</p>
-<p>اگر متد <code>new Client().Operation()</code> را فراخوانی کرده و کد را اجرا کنید، خروجی زیر را مشاهده خواهید کرد: 🎯</p>
-<div align="center">
-<p><img src="../../../assets/image/13/Table%2013-3.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<p>همان‌طور که در تصویر مشاهده می‌کنید، متدی که اجرا می‌شود <strong>Adaptee.AdapteeOperation()</strong> است. ✅</p>
-<p>حالا که با موفقیت یاد گرفتید چگونه <strong>Adapter Pattern</strong> را برای حل راه‌حل‌های عجیب پیاده‌سازی کنید، به سراغ موضوع <strong>Shotgun Surgery</strong> می‌رویم.</p>
-<hr>
-<h3>Shotgun Surgery 🔫</h3>
-<p>ایجاد یک تغییر واحد که نیاز به تغییر در چندین کلاس داشته باشد، <strong>Shotgun Surgery</strong> نامیده می‌شود. این مسئله گاهی به دلیل بازسازی بیش از حد کد و مواجهه با تغییرات متنوع رخ می‌دهد. این نوع <strong>Code Smell</strong> احتمال ایجاد باگ‌ها را افزایش می‌دهد، مانند باگ‌هایی که به دلیل از دست رفتن یک فرصت رخ می‌دهند. همچنین احتمال <strong>Merge Conflict</strong> افزایش می‌یابد، زیرا کد در بخش‌های زیادی نیاز به تغییر دارد و برنامه‌نویسان ممکن است روی تغییرات یکدیگر قدم بگذارند. کد آن‌قدر پیچیده است که باعث ایجاد <strong>Overload شناختی</strong> در برنامه‌نویسان می‌شود. برنامه‌نویسان جدید نیز به دلیل طبیعت نرم‌افزار، <strong>Curve یادگیری شیب‌دار</strong>ی دارند.</p>
-<p>تاریخچه کنترل نسخه، تاریخچه تغییرات ایجاد شده در نرم‌افزار را ارائه می‌دهد. این تاریخچه می‌تواند به شما کمک کند تا هر بار که یک قابلیت جدید اضافه می‌شود یا با یک باگ مواجه می‌شوید، تمام بخش‌هایی که تغییر کرده‌اند را شناسایی کنید. بعد از شناسایی این بخش‌ها، می‌توانید تغییرات را به یک منطقه <strong>محلی‌تر</strong> از کد منتقل کنید. این‌گونه، وقتی نیاز به تغییر دارید، تنها روی یک بخش تمرکز می‌کنید و نه چندین بخش. این کار نگهداری پروژه را بسیار آسان‌تر می‌کند.</p>
-<p>کدهای تکراری می‌توانند کاندید مناسبی برای بازسازی و قرارگیری در یک کلاس با نام مناسب و در <strong>Namespace</strong> صحیح باشند. همچنین به تمام لایه‌های مختلف برنامه نگاه کنید: آیا واقعاً همه آن‌ها لازم هستند؟ آیا می‌توان ساده‌سازی کرد؟ در یک برنامه مبتنی بر پایگاه داده، آیا واقعاً نیاز است که DTO، DAO، اشیاء دامنه و غیره داشته باشیم؟ آیا می‌توان دسترسی به پایگاه داده را ساده‌تر کرد؟ این‌ها تنها چند ایده برای کاهش اندازه کد و در نتیجه کاهش تعداد بخش‌هایی هستند که باید تغییر کنند.</p>
-<hr>
-<h3>Coupling و Cohesion 🔗</h3>
-<p>سطح <strong>Coupling</strong> و <strong>Cohesion</strong> را بررسی کنید. <strong>Coupling</strong> باید به حداقل مطلق برسد. یک روش برای رسیدن به این هدف، <strong>تزریق وابستگی‌ها</strong> از طریق <strong>Constructors، Properties، و Methods</strong> است. وابستگی‌های تزریق‌شده باید از نوع یک <strong>Interface</strong> مشخص باشند.</p>
-<p>یک مثال ساده را کدنویسی می‌کنیم. ابتدا یک Interface به نام <strong>IService</strong> اضافه کنید:</p>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title">IService</span>
+</code></pre> <p>کلاس <strong>Client</strong> شامل یک متد به نام <strong>Operation()</strong> است. این متد یک شیء <strong>Adapter</strong> جدید ایجاد کرده و آن را به یک متغیر از نوع <strong>Target</strong> اختصاص می‌دهد. سپس متد <strong>Operation()</strong> را روی متغیر <strong>Target</strong> فراخوانی می‌کند.</p><p>اگر متد <code>new Client().Operation()</code> را فراخوانی کرده و کد را اجرا کنید، خروجی زیر را مشاهده خواهید کرد:</p><div align="center"> <p><img src="../../../assets/image/13/Table%2013-3.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <p>همان‌طور که در تصویر مشاهده می‌کنید، متدی که اجرا می‌شود <strong>Adaptee.AdapteeOperation()</strong> است.</p><p>حالا که با موفقیت یاد گرفتید چگونه <strong>Adapter Pattern</strong> را برای حل راه‌حل‌های عجیب پیاده‌سازی کنید، به سراغ موضوع <strong>Shotgun Surgery</strong> می‌رویم.</p><hr> <h3>Shotgun Surgery</h3><p>ایجاد یک تغییر واحد که نیاز به تغییر در چندین کلاس داشته باشد، <strong>Shotgun Surgery</strong> نامیده می‌شود. این مسئله گاهی به دلیل بازسازی بیش از حد کد و مواجهه با تغییرات متنوع رخ می‌دهد. این نوع <strong>Code Smell</strong> احتمال ایجاد باگ‌ها را افزایش می‌دهد، مانند باگ‌هایی که به دلیل از دست رفتن یک فرصت رخ می‌دهند. همچنین احتمال <strong>Merge Conflict</strong> افزایش می‌یابد، زیرا کد در بخش‌های زیادی نیاز به تغییر دارد و برنامه‌نویسان ممکن است روی تغییرات یکدیگر قدم بگذارند. کد آن‌قدر پیچیده است که باعث ایجاد <strong>Overload شناختی</strong> در برنامه‌نویسان می‌شود. برنامه‌نویسان جدید نیز به دلیل طبیعت نرم‌افزار، <strong>Curve یادگیری شیب‌دار</strong>ی دارند.</p><p>تاریخچه کنترل نسخه، تاریخچه تغییرات ایجاد شده در نرم‌افزار را ارائه می‌دهد. این تاریخچه می‌تواند به شما کمک کند تا هر بار که یک قابلیت جدید اضافه می‌شود یا با یک باگ مواجه می‌شوید، تمام بخش‌هایی که تغییر کرده‌اند را شناسایی کنید. بعد از شناسایی این بخش‌ها، می‌توانید تغییرات را به یک منطقه <strong>محلی‌تر</strong> از کد منتقل کنید. این‌گونه، وقتی نیاز به تغییر دارید، تنها روی یک بخش تمرکز می‌کنید و نه چندین بخش. این کار نگهداری پروژه را بسیار آسان‌تر می‌کند.</p><p>کدهای تکراری می‌توانند کاندید مناسبی برای بازسازی و قرارگیری در یک کلاس با نام مناسب و در <strong>Namespace</strong> صحیح باشند. همچنین به تمام لایه‌های مختلف برنامه نگاه کنید: آیا واقعاً همه آن‌ها لازم هستند؟ آیا می‌توان ساده‌سازی کرد؟ در یک برنامه مبتنی بر پایگاه داده، آیا واقعاً نیاز است که DTO، DAO، اشیاء دامنه و غیره داشته باشیم؟ آیا می‌توان دسترسی به پایگاه داده را ساده‌تر کرد؟ این‌ها تنها چند ایده برای کاهش اندازه کد و در نتیجه کاهش تعداد بخش‌هایی هستند که باید تغییر کنند.</p><hr> <h3>Coupling و Cohesion</h3><p>سطح <strong>Coupling</strong> و <strong>Cohesion</strong> را بررسی کنید. <strong>Coupling</strong> باید به حداقل مطلق برسد. یک روش برای رسیدن به این هدف، <strong>تزریق وابستگی‌ها</strong> از طریق <strong>Constructors، Properties، و Methods</strong> است. وابستگی‌های تزریق‌شده باید از نوع یک <strong>Interface</strong> مشخص باشند.</p><p>یک مثال ساده را کدنویسی می‌کنیم. ابتدا یک Interface به نام <strong>IService</strong> اضافه کنید:</p><pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title">IService</span>
 {
     <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Operation</span>()</span>;
 }
-</code></pre>
-<p>این Interface شامل یک متد به نام <strong>Operation()</strong> است. حالا یک کلاس به نام <strong>Dependency</strong> اضافه کنید که <strong>IService</strong> را پیاده‌سازی می‌کند:</p>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Dependency</span> : <span class="hljs-title">IService</span>
+</code></pre> <p>این Interface شامل یک متد به نام <strong>Operation()</strong> است. حالا یک کلاس به نام <strong>Dependency</strong> اضافه کنید که <strong>IService</strong> را پیاده‌سازی می‌کند:</p><pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Dependency</span> : <span class="hljs-title">IService</span>
 {
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Operation</span>()</span>
     {
         Console.WriteLine(<span class="hljs-string">&quot;Dependency.Operation() has executed.&quot;</span>);
     }
 }
-</code></pre>
-<p>کلاس <strong>Dependency</strong> Interface <strong>IService</strong> را پیاده‌سازی می‌کند و در متد <strong>Operation()</strong> یک پیام روی کنسول چاپ می‌شود.</p>
-<p>سپس کلاس <strong>LooselyCoupled</strong> را اضافه کنید:</p>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">LooselyCoupled</span>
+</code></pre> <p>کلاس <strong>Dependency</strong> Interface <strong>IService</strong> را پیاده‌سازی می‌کند و در متد <strong>Operation()</strong> یک پیام روی کنسول چاپ می‌شود.</p><p>سپس کلاس <strong>LooselyCoupled</strong> را اضافه کنید:</p><pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">LooselyCoupled</span>
 {
     <span class="hljs-keyword">private</span> <span class="hljs-keyword">readonly</span> IService _service;
 
@@ -439,44 +153,7 @@ Method: IntegerSquaredSum, Stop Time: 01/07/2020 11:41:43, Duration: 00:00:00.00
         _service.Operation();
     }
 }
-</code></pre>
-<p>همان‌طور که مشاهده می‌کنید، <strong>Constructor</strong> یک نوع <strong>IService</strong> دریافت کرده و آن را در یک متغیر عضو ذخیره می‌کند. فراخوانی <strong>DoWork()</strong> متد <strong>Operation()</strong> داخل نوع <strong>IService</strong> را صدا می‌زند.</p>
-<p>کلاس <strong>LooselyCoupled</strong> واقعاً به‌صورت <strong>loosely coupled</strong> است و به راحتی تست می‌شود. ✅<br>
-کاهش <strong>Coupling</strong> باعث می‌شود کلاس‌ها راحت‌تر تست شوند. با حذف کدی که در کلاس قرار ندارد و قرار دادن آن در جای مناسب، <strong>خوانایی، نگهداری، و توسعه‌پذیری</strong> برنامه بهبود می‌یابد. همچنین <strong>Curve یادگیری</strong> برای افراد جدید کمتر می‌شود و احتمال ایجاد باگ در هنگام نگهداری یا توسعه جدید کاهش می‌یابد.</p>
-<hr>
-<h3>Solution Sprawl 🌱</h3>
-<p>پیاده‌سازی یک <strong>مسئولیت واحد</strong> در متدها، کلاس‌ها و حتی کتابخانه‌های مختلف باعث <strong>Solution Sprawl</strong> می‌شود. این موضوع باعث می‌شود کد <strong>خواندن و فهمیدن دشوار</strong> شود و نگهداری و توسعه آن مشکل شود.</p>
-<p>برای حل مشکل، پیاده‌سازی مسئولیت واحد را در همان کلاس قرار دهید. این‌گونه کد در یک مکان قرار دارد و وظیفه خود را انجام می‌دهد. نتیجه این است که کد <strong>خوانا، قابل فهم، قابل نگهداری و توسعه</strong> می‌شود.</p>
-<hr>
-<h3>Uncontrolled Side Effects ⚠️</h3>
-<p><strong>Uncontrolled Side Effects</strong> مسائلی هستند که در محیط تولید ظاهر می‌شوند، زیرا <strong>تست‌های کیفیت</strong> قادر به شناسایی آن‌ها نیستند. برای حل این مشکل، تنها گزینه این است که کد را بازسازی کنید تا کاملاً <strong>قابل تست</strong> باشد و بتوانید مقادیر متغیرها را هنگام <strong>Debug</strong> مشاهده کنید تا مطمئن شوید درست تنظیم شده‌اند.</p>
-<p>یک مثال، <strong>Passing by Reference</strong> است. تصور کنید دو Thread یک شیء Person را با مرجع به یک متد منتقل می‌کنند که آن را تغییر می‌دهد. یک <strong>Side Effect</strong> این است که مگر اینکه مکانیزم Lock صحیحی وجود داشته باشد، هر Thread می‌تواند شیء Person Thread دیگر را تغییر دهد و داده‌ها را نامعتبر کند. نمونه‌ای از <strong>Mutable Objects</strong> را در فصل ۸، <strong>Threading and Concurrency</strong> دیدید.</p>
-<hr>
-<p>این پایان بررسی <strong>Application-Level Code Smells</strong> بود. حالا به <strong>Class-Level Code Smells</strong> می‌پردازیم. 🏷️</p>
-<hr>
-<h3>Class-Level Code Smells 🏛️</h3>
-<p><strong>Class-Level Code Smells</strong> مشکلاتی هستند که به صورت <strong>محلی</strong> در یک کلاس رخ می‌دهند. مشکلات رایج شامل مواردی مانند:</p>
-<ul>
-<li><strong>Cyclomatic Complexity</strong> و عمق ارث‌بری</li>
-<li><strong>High Coupling</strong></li>
-<li><strong>Low Cohesion</strong></li>
-</ul>
-<p>هدف شما هنگام نوشتن یک کلاس این است که آن را <strong>کوچک و کاربردی</strong> نگه دارید. متدها باید واقعاً در کلاس باشند و <strong>کوچک</strong> باشند. فقط کاری را در کلاس انجام دهید که لازم است – نه بیشتر و نه کمتر.</p>
-<p>سعی کنید <strong>Dependency</strong> کلاس را حذف کنید و کلاس‌ها را <strong>قابل تست</strong> بسازید. کدهایی که باید در جای دیگری باشند، به مکان مناسب منتقل کنید. در این بخش، به <strong>Class-Level Code Smells</strong> و روش بازسازی آن‌ها می‌پردازیم، با شروع از <strong>Cyclomatic Complexity</strong>.</p>
-<hr>
-<h3>Cyclomatic Complexity 🔄</h3>
-<p>وقتی یک کلاس شامل تعداد زیادی <strong>Branch</strong> و <strong>Loop</strong> باشد، <strong>Cyclomatic Complexity</strong> آن افزایش می‌یابد.</p>
-<ul>
-<li>ایده‌آل: ۱ تا ۱۰ → کد ساده و بدون ریسک</li>
-<li>۱۱ تا ۲۰ → پیچیده ولی کم‌ریسک</li>
-<li>۲۱ تا ۵۰ → نیازمند توجه، پیچیدگی متوسط و ریسک متوسط</li>
-<li>بیش از ۵۰ → ریسک بالا و غیرقابل تست؛ <strong>باید فوراً بازسازی شود</strong></li>
-</ul>
-<p>هدف بازسازی کاهش <strong>Cyclomatic Complexity</strong> به بازه ۱-۱۰ است. ابتدا با جایگزینی <strong>Switch</strong> و <strong>If</strong> شروع کنید.</p>
-<h3>جایگزینی <strong>Switch Statement</strong> با <strong>Factory Pattern</strong> 🏭</h3>
-<p>در این بخش خواهید دید چگونه یک <strong>Switch Statement</strong> را با <strong>Factory Pattern</strong> جایگزین کنیم.</p>
-<p>ابتدا نیاز به یک <strong>Enum</strong> برای گزارش‌ها داریم:</p>
-<pre class="hljs"><code>[<span class="hljs-meta">Flags</span>]
+</code></pre> <p>همان‌طور که مشاهده می‌کنید، <strong>Constructor</strong> یک نوع <strong>IService</strong> دریافت کرده و آن را در یک متغیر عضو ذخیره می‌کند. فراخوانی <strong>DoWork()</strong> متد <strong>Operation()</strong> داخل نوع <strong>IService</strong> را صدا می‌زند.</p><p>کلاس <strong>LooselyCoupled</strong> واقعاً به‌صورت <strong>loosely coupled</strong> است و به راحتی تست می‌شود.<br> کاهش <strong>Coupling</strong> باعث می‌شود کلاس‌ها راحت‌تر تست شوند. با حذف کدی که در کلاس قرار ندارد و قرار دادن آن در جای مناسب، <strong>خوانایی، نگهداری، و توسعه‌پذیری</strong> برنامه بهبود می‌یابد. همچنین <strong>Curve یادگیری</strong> برای افراد جدید کمتر می‌شود و احتمال ایجاد باگ در هنگام نگهداری یا توسعه جدید کاهش می‌یابد.</p><hr> <h3>Solution Sprawl</h3><p>پیاده‌سازی یک <strong>مسئولیت واحد</strong> در متدها، کلاس‌ها و حتی کتابخانه‌های مختلف باعث <strong>Solution Sprawl</strong> می‌شود. این موضوع باعث می‌شود کد <strong>خواندن و فهمیدن دشوار</strong> شود و نگهداری و توسعه آن مشکل شود.</p><p>برای حل مشکل، پیاده‌سازی مسئولیت واحد را در همان کلاس قرار دهید. این‌گونه کد در یک مکان قرار دارد و وظیفه خود را انجام می‌دهد. نتیجه این است که کد <strong>خوانا، قابل فهم، قابل نگهداری و توسعه</strong> می‌شود.</p><hr> <h3>Uncontrolled Side Effects</h3><p><strong>Uncontrolled Side Effects</strong> مسائلی هستند که در محیط تولید ظاهر می‌شوند، زیرا <strong>تست‌های کیفیت</strong> قادر به شناسایی آن‌ها نیستند. برای حل این مشکل، تنها گزینه این است که کد را بازسازی کنید تا کاملاً <strong>قابل تست</strong> باشد و بتوانید مقادیر متغیرها را هنگام <strong>Debug</strong> مشاهده کنید تا مطمئن شوید درست تنظیم شده‌اند.</p><p>یک مثال، <strong>Passing by Reference</strong> است. تصور کنید دو Thread یک شیء Person را با مرجع به یک متد منتقل می‌کنند که آن را تغییر می‌دهد. یک <strong>Side Effect</strong> این است که مگر اینکه مکانیزم Lock صحیحی وجود داشته باشد، هر Thread می‌تواند شیء Person Thread دیگر را تغییر دهد و داده‌ها را نامعتبر کند. نمونه‌ای از <strong>Mutable Objects</strong> را در فصل ۸، <strong>Threading and Concurrency</strong> دیدید.</p><hr> <p>این پایان بررسی <strong>Application-Level Code Smells</strong> بود. حالا به <strong>Class-Level Code Smells</strong> می‌پردازیم.</p><hr> <h3>Class-Level Code Smells</h3><p><strong>Class-Level Code Smells</strong> مشکلاتی هستند که به صورت <strong>محلی</strong> در یک کلاس رخ می‌دهند. مشکلات رایج شامل مواردی مانند:</p><ul> <li><strong>Cyclomatic Complexity</strong> و عمق ارث‌بری</li><li><strong>High Coupling</strong></li><li><strong>Low Cohesion</strong></li></ul> <p>هدف شما هنگام نوشتن یک کلاس این است که آن را <strong>کوچک و کاربردی</strong> نگه دارید. متدها باید واقعاً در کلاس باشند و <strong>کوچک</strong> باشند. فقط کاری را در کلاس انجام دهید که لازم است – نه بیشتر و نه کمتر.</p><p>سعی کنید <strong>Dependency</strong> کلاس را حذف کنید و کلاس‌ها را <strong>قابل تست</strong> بسازید. کدهایی که باید در جای دیگری باشند، به مکان مناسب منتقل کنید. در این بخش، به <strong>Class-Level Code Smells</strong> و روش بازسازی آن‌ها می‌پردازیم، با شروع از <strong>Cyclomatic Complexity</strong>.</p><hr> <h3>Cyclomatic Complexity</h3><p>وقتی یک کلاس شامل تعداد زیادی <strong>Branch</strong> و <strong>Loop</strong> باشد، <strong>Cyclomatic Complexity</strong> آن افزایش می‌یابد.</p><ul> <li>ایده‌آل: ۱ تا ۱۰ → کد ساده و بدون ریسک</li><li>۱۱ تا ۲۰ → پیچیده ولی کم‌ریسک</li><li>۲۱ تا ۵۰ → نیازمند توجه، پیچیدگی متوسط و ریسک متوسط</li><li>بیش از ۵۰ → ریسک بالا و غیرقابل تست؛ <strong>باید فوراً بازسازی شود</strong></li></ul> <p>هدف بازسازی کاهش <strong>Cyclomatic Complexity</strong> به بازه ۱-۱۰ است. ابتدا با جایگزینی <strong>Switch</strong> و <strong>If</strong> شروع کنید.</p><h3>جایگزینی <strong>Switch Statement</strong> با <strong>Factory Pattern</strong></h3><p>در این بخش خواهید دید چگونه یک <strong>Switch Statement</strong> را با <strong>Factory Pattern</strong> جایگزین کنیم.</p><p>ابتدا نیاز به یک <strong>Enum</strong> برای گزارش‌ها داریم:</p><pre class="hljs"><code>[<span class="hljs-meta">Flags</span>]
 <span class="hljs-keyword">public</span> <span class="hljs-built_in">enum</span> Report
 {
     StaffShiftPattern,
@@ -486,10 +163,7 @@ Method: IntegerSquaredSum, Stop Time: 01/07/2020 11:41:43, Duration: 00:00:00.00
     EndofMonthSalesFigures,
     YearToDateSalesFigures
 }
-</code></pre>
-<p>ویژگی <code>[Flags]</code> به ما امکان می‌دهد نام <strong>Enum</strong> را استخراج کنیم. Enum <strong>Report</strong> فهرستی از گزارش‌ها را ارائه می‌دهد.</p>
-<p>حالا <strong>Switch Statement</strong> خود را اضافه می‌کنیم:</p>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">RunReport</span>(<span class="hljs-params">Report report</span>)</span>
+</code></pre> <p>ویژگی <code>[Flags]</code> به ما امکان می‌دهد نام <strong>Enum</strong> را استخراج کنیم. Enum <strong>Report</strong> فهرستی از گزارش‌ها را ارائه می‌دهد.</p><p>حالا <strong>Switch Statement</strong> خود را اضافه می‌کنیم:</p><pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">RunReport</span>(<span class="hljs-params">Report report</span>)</span>
 {
     <span class="hljs-keyword">switch</span> (report)
     {
@@ -516,31 +190,18 @@ Method: IntegerSquaredSum, Stop Time: 01/07/2020 11:41:43, Duration: 00:00:00.00
             <span class="hljs-keyword">break</span>;
     }
 }
-</code></pre>
-<p>متد ما یک <strong>Report</strong> می‌گیرد و سپس تصمیم می‌گیرد کدام گزارش اجرا شود.</p>
-<p>وقتی من در سال ۱۹۹۹ به عنوان یک برنامه‌نویس <strong>VB6</strong> تازه‌کار شروع کردم، مسئول ایجاد یک <strong>Report Generator</strong> از صفر برای شرکت‌هایی مانند <strong>Thomas Cook، ANZ، BNZ، Vodafone</strong> و چند شرکت بزرگ دیگر بودم.<br>
-گزارش‌های زیادی وجود داشت و من مسئول نوشتن یک <strong>Case Statement</strong> عظیم بودم که حتی از این نمونه بزرگ‌تر بود. اما سیستم من به خوبی کار می‌کرد. با این حال، با استانداردهای امروزی، روش‌های بهتری برای اجرای همین کد وجود دارد و من کارها را به شکل متفاوتی انجام می‌دادم. ⚡</p>
-<hr>
-<p>حالا بیایید از <strong>Factory Method</strong> استفاده کنیم تا گزارش‌ها را بدون <strong>Switch Statement</strong> اجرا کنیم.</p>
-<p>ابتدا یک فایل به نام <strong>IReportFactory</strong> اضافه کنید:</p>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title">IReportFactory</span>
+</code></pre> <p>متد ما یک <strong>Report</strong> می‌گیرد و سپس تصمیم می‌گیرد کدام گزارش اجرا شود.</p><p>وقتی من در سال ۱۹۹۹ به عنوان یک برنامه‌نویس <strong>VB6</strong> تازه‌کار شروع کردم، مسئول ایجاد یک <strong>Report Generator</strong> از صفر برای شرکت‌هایی مانند <strong>Thomas Cook، ANZ، BNZ، Vodafone</strong> و چند شرکت بزرگ دیگر بودم.<br> گزارش‌های زیادی وجود داشت و من مسئول نوشتن یک <strong>Case Statement</strong> عظیم بودم که حتی از این نمونه بزرگ‌تر بود. اما سیستم من به خوبی کار می‌کرد. با این حال، با استانداردهای امروزی، روش‌های بهتری برای اجرای همین کد وجود دارد و من کارها را به شکل متفاوتی انجام می‌دادم.</p><hr> <p>حالا بیایید از <strong>Factory Method</strong> استفاده کنیم تا گزارش‌ها را بدون <strong>Switch Statement</strong> اجرا کنیم.</p><p>ابتدا یک فایل به نام <strong>IReportFactory</strong> اضافه کنید:</p><pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title">IReportFactory</span>
 {
     <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Run</span>()</span>;
 }
-</code></pre>
-<p>این Interface تنها یک متد به نام <strong>Run()</strong> دارد. این متد توسط کلاس‌های پیاده‌ساز برای اجرای گزارش‌ها استفاده می‌شود.</p>
-<p>یک کلاس گزارش اضافه می‌کنیم به نام <strong>StaffShiftPatternReport</strong> که <strong>IReportFactory</strong> را پیاده‌سازی می‌کند:</p>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">StaffShiftPatternReport</span> : <span class="hljs-title">IReportFactory</span>
+</code></pre> <p>این Interface تنها یک متد به نام <strong>Run()</strong> دارد. این متد توسط کلاس‌های پیاده‌ساز برای اجرای گزارش‌ها استفاده می‌شود.</p><p>یک کلاس گزارش اضافه می‌کنیم به نام <strong>StaffShiftPatternReport</strong> که <strong>IReportFactory</strong> را پیاده‌سازی می‌کند:</p><pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">StaffShiftPatternReport</span> : <span class="hljs-title">IReportFactory</span>
 {
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Run</span>()</span>
     {
         Console.WriteLine(<span class="hljs-string">&quot;Running Staff Shift Pattern Report.&quot;</span>);
     }
 }
-</code></pre>
-<p>کلاس <strong>StaffShiftPatternReport</strong> Interface <strong>IReportFactory</strong> را پیاده‌سازی کرده و متد <strong>Run()</strong> پیام را روی صفحه چاپ می‌کند.</p>
-<p>سپس یک کلاس <strong>ReportRunner</strong> اضافه می‌کنیم:</p>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">ReportRunner</span>
+</code></pre> <p>کلاس <strong>StaffShiftPatternReport</strong> Interface <strong>IReportFactory</strong> را پیاده‌سازی کرده و متد <strong>Run()</strong> پیام را روی صفحه چاپ می‌کند.</p><p>سپس یک کلاس <strong>ReportRunner</strong> اضافه می‌کنیم:</p><pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">ReportRunner</span>
 {
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">RunReport</span>(<span class="hljs-params">Report report</span>)</span>
     {
@@ -552,14 +213,7 @@ Method: IntegerSquaredSum, Stop Time: 01/07/2020 11:41:43, Duration: 00:00:00.00
         factory?.Run();
     }
 }
-</code></pre>
-<p>کلاس <strong>ReportRunner</strong> شامل متدی به نام <strong>RunReport</strong> است که یک پارامتر از نوع <strong>Report</strong> می‌گیرد.<br>
-با توجه به اینکه <strong>Report</strong> یک <strong>Enum</strong> با ویژگی <code>[Flags]</code> است، می‌توانیم نام گزارش را بدست آوریم و از آن برای ساخت نام کلاس گزارش استفاده کنیم. سپس با استفاده از کلاس <strong>Activator</strong>، یک نمونه از کلاس گزارش ایجاد می‌کنیم. اگر <strong>reportName</strong> هنگام گرفتن نوع null باشد، یک <strong>InvalidOperationException</strong> پرتاب می‌شود. سپس <strong>Factory</strong> به نوع <strong>IReportFactory</strong> تبدیل می‌شود و متد <strong>Run()</strong> روی آن فراخوانی می‌شود تا گزارش تولید شود.</p>
-<p>این کد قطعاً بسیار بهتر از یک <strong>Switch Statement</strong> طولانی است. ✅<br>
-در ادامه، یاد خواهیم گرفت چگونه <strong>خوانایی بررسی‌های شرطی</strong> داخل یک <strong>If Statement</strong> را بهبود دهیم.</p>
-<h3>بهبود خوانایی بررسی‌های شرطی در <strong>If Statement</strong> ✅</h3>
-<p>استفاده از <strong>If Statement</strong> می‌تواند اصول <strong>Single Responsibility Principle (SRP)</strong> و <strong>Open/Closed Principle (OCP)</strong> را نقض کند. به مثال زیر توجه کنید:</p>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-built_in">string</span> <span class="hljs-title">GetHrReport</span>(<span class="hljs-params"><span class="hljs-built_in">string</span> reportName</span>)</span>
+</code></pre> <p>کلاس <strong>ReportRunner</strong> شامل متدی به نام <strong>RunReport</strong> است که یک پارامتر از نوع <strong>Report</strong> می‌گیرد.<br> با توجه به اینکه <strong>Report</strong> یک <strong>Enum</strong> با ویژگی <code>[Flags]</code> است، می‌توانیم نام گزارش را بدست آوریم و از آن برای ساخت نام کلاس گزارش استفاده کنیم. سپس با استفاده از کلاس <strong>Activator</strong>، یک نمونه از کلاس گزارش ایجاد می‌کنیم. اگر <strong>reportName</strong> هنگام گرفتن نوع null باشد، یک <strong>InvalidOperationException</strong> پرتاب می‌شود. سپس <strong>Factory</strong> به نوع <strong>IReportFactory</strong> تبدیل می‌شود و متد <strong>Run()</strong> روی آن فراخوانی می‌شود تا گزارش تولید شود.</p><p>این کد قطعاً بسیار بهتر از یک <strong>Switch Statement</strong> طولانی است.<br> در ادامه، یاد خواهیم گرفت چگونه <strong>خوانایی بررسی‌های شرطی</strong> داخل یک <strong>If Statement</strong> را بهبود دهیم.</p><h3>بهبود خوانایی بررسی‌های شرطی در <strong>If Statement</strong></h3><p>استفاده از <strong>If Statement</strong> می‌تواند اصول <strong>Single Responsibility Principle (SRP)</strong> و <strong>Open/Closed Principle (OCP)</strong> را نقض کند. به مثال زیر توجه کنید:</p><pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-built_in">string</span> <span class="hljs-title">GetHrReport</span>(<span class="hljs-params"><span class="hljs-built_in">string</span> reportName</span>)</span>
 {
     <span class="hljs-keyword">if</span> (reportName.Equals(<span class="hljs-string">&quot;Staff Joiners Report&quot;</span>))
         <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Staff Joiners Report&quot;</span>;
@@ -568,63 +222,30 @@ Method: IntegerSquaredSum, Stop Time: 01/07/2020 11:41:43, Duration: 00:00:00.00
     <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (reportName.Equals(<span class="hljs-string">&quot;Balance Sheet Report&quot;</span>))
         <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Balance Sheet Report&quot;</span>;
 }
-</code></pre>
-<p>متد <code>GetHrReport()</code> سه مسئولیت دارد: گزارش <strong>Staff Joiners</strong>، <strong>Staff Leavers</strong> و <strong>Balance Sheet</strong>. این باعث نقض <strong>SRP</strong> می‌شود، زیرا متد باید تنها با گزارش‌های HR سروکار داشته باشد و در عین حال، گزارش‌های HR و Finance را بازمی‌گرداند. همچنین طبق <strong>OCP</strong>، هر بار که یک گزارش جدید نیاز باشد، باید این متد را گسترش دهیم.</p>
-<p>برای حل این مشکل، متد را بازسازی می‌کنیم تا دیگر نیازی به <strong>If Statement</strong> نباشد. ابتدا یک کلاس جدید به نام <strong>ReportBase</strong> ایجاد کنید:</p>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">class</span> <span class="hljs-title">ReportBase</span>
+</code></pre> <p>متد <code>GetHrReport()</code> سه مسئولیت دارد: گزارش <strong>Staff Joiners</strong>، <strong>Staff Leavers</strong> و <strong>Balance Sheet</strong>. این باعث نقض <strong>SRP</strong> می‌شود، زیرا متد باید تنها با گزارش‌های HR سروکار داشته باشد و در عین حال، گزارش‌های HR و Finance را بازمی‌گرداند. همچنین طبق <strong>OCP</strong>، هر بار که یک گزارش جدید نیاز باشد، باید این متد را گسترش دهیم.</p><p>برای حل این مشکل، متد را بازسازی می‌کنیم تا دیگر نیازی به <strong>If Statement</strong> نباشد. ابتدا یک کلاس جدید به نام <strong>ReportBase</strong> ایجاد کنید:</p><pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">class</span> <span class="hljs-title">ReportBase</span>
 {
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Print</span>()</span>;
 }
-</code></pre>
-<p>کلاس <strong>ReportBase</strong> یک کلاس انتزاعی با متد انتزاعی <strong>Print()</strong> است. سپس کلاس <strong>NewStartersReport</strong> را اضافه می‌کنیم که از <strong>ReportBase</strong> ارث می‌برد:</p>
-<pre class="hljs"><code><span class="hljs-keyword">internal</span> <span class="hljs-keyword">class</span> <span class="hljs-title">NewStartersReport</span> : <span class="hljs-title">ReportBase</span>
+</code></pre> <p>کلاس <strong>ReportBase</strong> یک کلاس انتزاعی با متد انتزاعی <strong>Print()</strong> است. سپس کلاس <strong>NewStartersReport</strong> را اضافه می‌کنیم که از <strong>ReportBase</strong> ارث می‌برد:</p><pre class="hljs"><code><span class="hljs-keyword">internal</span> <span class="hljs-keyword">class</span> <span class="hljs-title">NewStartersReport</span> : <span class="hljs-title">ReportBase</span>
 {
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Print</span>()</span>
     {
         Console.WriteLine(<span class="hljs-string">&quot;Printing New Starters Report.&quot;</span>);
     }
 }
-</code></pre>
-<p>کلاس <strong>NewStartersReport</strong> متد <strong>Print()</strong> را override می‌کند و پیام را روی صفحه چاپ می‌کند.</p>
-<p>حالا کلاس <strong>LeaversReport</strong> را اضافه کنید:</p>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">LeaversReport</span> : <span class="hljs-title">ReportBase</span>
+</code></pre> <p>کلاس <strong>NewStartersReport</strong> متد <strong>Print()</strong> را override می‌کند و پیام را روی صفحه چاپ می‌کند.</p><p>حالا کلاس <strong>LeaversReport</strong> را اضافه کنید:</p><pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">LeaversReport</span> : <span class="hljs-title">ReportBase</span>
 {
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Print</span>()</span>
     {
         Console.WriteLine(<span class="hljs-string">&quot;Printing Leavers Report.&quot;</span>);
     }
 }
-</code></pre>
-<p>همانند کلاس قبلی، این کلاس <strong>Print()</strong> را override می‌کند.</p>
-<p>برای استفاده:</p>
-<pre class="hljs"><code>ReportBase newStarters = <span class="hljs-keyword">new</span> NewStartersReport();
+</code></pre> <p>همانند کلاس قبلی، این کلاس <strong>Print()</strong> را override می‌کند.</p><p>برای استفاده:</p><pre class="hljs"><code>ReportBase newStarters = <span class="hljs-keyword">new</span> NewStartersReport();
 newStarters.Print();
 
 ReportBase leavers = <span class="hljs-keyword">new</span> LeaversReport();
 leavers.Print();
-</code></pre>
-<p>هر دو گزارش از <strong>ReportBase</strong> ارث می‌برند، بنابراین می‌توان آن‌ها را به متغیر <strong>ReportBase</strong> اختصاص داد و متد <strong>Print()</strong> فراخوانی شد. این کد اکنون مطابق با <strong>SRP</strong> و <strong>OCP</strong> است. ✅</p>
-<hr>
-<h3>Divergent Change 🔄</h3>
-<p>وقتی نیاز دارید یک تغییر در یک مکان ایجاد کنید و متوجه شوید که باید چند متد نامرتبط را تغییر دهید، این <strong>Divergent Change</strong> نامیده می‌شود. این تغییرات معمولاً در یک کلاس رخ می‌دهند و ناشی از ساختار ضعیف کلاس هستند. کپی و پیست کردن کد نیز از دلایل ایجاد این مشکل است.</p>
-<p>راه حل: کد مشکل‌ساز را به کلاس جداگانه منتقل کنید. اگر رفتار و وضعیت بین کلاس‌ها مشترک است، از <strong>Inheritance</strong> با <strong>Base Classes</strong> و <strong>Subclasses</strong> استفاده کنید.</p>
-<p>مزایای اصلاح مشکلات مرتبط با Divergent Change:</p>
-<ul>
-<li>نگهداری آسان‌تر، زیرا تغییرات در یک مکان واحد قرار دارند</li>
-<li>حذف کدهای تکراری</li>
-</ul>
-<hr>
-<h3>Downcasting ⬇️</h3>
-<p>وقتی یک کلاس پایه به یکی از کلاس‌های فرزند خود <strong>cast</strong> می‌شود، به آن <strong>Downcasting</strong> گفته می‌شود. این یک <strong>Code Smell</strong> است، زیرا کلاس پایه نباید درباره کلاس‌های فرزند خود بداند.</p>
-<p>مثال: کلاس پایه <strong>Animal</strong>. هر نوع حیوان می‌تواند از کلاس پایه ارث ببرد. اما یک حیوان فقط می‌تواند یک نوع باشد. برای مثال، <strong>Felines</strong> گربه‌سان‌ها هستند و <strong>Canines</strong> سگ‌سان‌ها. غیرمنطقی است که یک Feline را به Canine تبدیل کنیم و برعکس.</p>
-<p>در نتیجه، هیچ‌گاه نباید Downcasting انجام داد. اما <strong>Upcasting</strong> انواع حیوانات مانند <strong>Monkeys</strong> و <strong>Camels</strong> به نوع <strong>Animal</strong> صحیح است، زیرا همه آن‌ها نوعی حیوان هستند.</p>
-<hr>
-<h3>Excessive Literal Use 💬</h3>
-<p>استفاده بیش از حد از <strong>Literals</strong> می‌تواند باعث خطاهای برنامه‌نویسی شود، مثلاً اشتباه نوشتن یک رشته. بهتر است Literals را به متغیرهای <strong>Constant</strong> اختصاص دهید. رشته‌ها نیز باید در <strong>Resource Files</strong> برای <strong>Localization</strong> قرار بگیرند، به‌ویژه اگر نرم‌افزار در مکان‌های مختلف جهان مستقر شود.</p>
-<hr>
-<h3>Feature Envy 👀</h3>
-<p>وقتی یک متد زمان زیادی را صرف پردازش کد در کلاس‌های دیگر می‌کند، این <strong>Feature Envy</strong> نامیده می‌شود. مثال بعدی در کلاس <strong>Authorization</strong> خواهد بود، اما ابتدا کلاس <strong>Authentication</strong> را ببینیم:</p>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Authentication</span>
+</code></pre> <p>هر دو گزارش از <strong>ReportBase</strong> ارث می‌برند، بنابراین می‌توان آن‌ها را به متغیر <strong>ReportBase</strong> اختصاص داد و متد <strong>Print()</strong> فراخوانی شد. این کد اکنون مطابق با <strong>SRP</strong> و <strong>OCP</strong> است.</p><hr> <h3>Divergent Change</h3><p>وقتی نیاز دارید یک تغییر در یک مکان ایجاد کنید و متوجه شوید که باید چند متد نامرتبط را تغییر دهید، این <strong>Divergent Change</strong> نامیده می‌شود. این تغییرات معمولاً در یک کلاس رخ می‌دهند و ناشی از ساختار ضعیف کلاس هستند. کپی و پیست کردن کد نیز از دلایل ایجاد این مشکل است.</p><p>راه حل: کد مشکل‌ساز را به کلاس جداگانه منتقل کنید. اگر رفتار و وضعیت بین کلاس‌ها مشترک است، از <strong>Inheritance</strong> با <strong>Base Classes</strong> و <strong>Subclasses</strong> استفاده کنید.</p><p>مزایای اصلاح مشکلات مرتبط با Divergent Change:</p><ul> <li>نگهداری آسان‌تر، زیرا تغییرات در یک مکان واحد قرار دارند</li><li>حذف کدهای تکراری</li></ul> <hr><h3>Downcasting ⬇</h3><p>وقتی یک کلاس پایه به یکی از کلاس‌های فرزند خود <strong>cast</strong> می‌شود، به آن <strong>Downcasting</strong> گفته می‌شود. این یک <strong>Code Smell</strong> است، زیرا کلاس پایه نباید درباره کلاس‌های فرزند خود بداند.</p><p>مثال: کلاس پایه <strong>Animal</strong>. هر نوع حیوان می‌تواند از کلاس پایه ارث ببرد. اما یک حیوان فقط می‌تواند یک نوع باشد. برای مثال، <strong>Felines</strong> گربه‌سان‌ها هستند و <strong>Canines</strong> سگ‌سان‌ها. غیرمنطقی است که یک Feline را به Canine تبدیل کنیم و برعکس.</p><p>در نتیجه، هیچ‌گاه نباید Downcasting انجام داد. اما <strong>Upcasting</strong> انواع حیوانات مانند <strong>Monkeys</strong> و <strong>Camels</strong> به نوع <strong>Animal</strong> صحیح است، زیرا همه آن‌ها نوعی حیوان هستند.</p><hr> <h3>Excessive Literal Use</h3><p>استفاده بیش از حد از <strong>Literals</strong> می‌تواند باعث خطاهای برنامه‌نویسی شود، مثلاً اشتباه نوشتن یک رشته. بهتر است Literals را به متغیرهای <strong>Constant</strong> اختصاص دهید. رشته‌ها نیز باید در <strong>Resource Files</strong> برای <strong>Localization</strong> قرار بگیرند، به‌ویژه اگر نرم‌افزار در مکان‌های مختلف جهان مستقر شود.</p><hr> <h3>Feature Envy</h3><p>وقتی یک متد زمان زیادی را صرف پردازش کد در کلاس‌های دیگر می‌کند، این <strong>Feature Envy</strong> نامیده می‌شود. مثال بعدی در کلاس <strong>Authorization</strong> خواهد بود، اما ابتدا کلاس <strong>Authentication</strong> را ببینیم:</p><pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Authentication</span>
 {
     <span class="hljs-keyword">private</span> <span class="hljs-built_in">bool</span> _isAuthenticated = <span class="hljs-literal">false</span>;
 
@@ -643,10 +264,7 @@ leavers.Print();
         <span class="hljs-keyword">return</span> _isAuthenticated;
     }
 }
-</code></pre>
-<p>کلاس <strong>Authentication</strong> مسئول ورود و خروج کاربران و تعیین وضعیت احراز هویت است.</p>
-<p>سپس کلاس <strong>Authorization</strong> را اضافه می‌کنیم:</p>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Authorization</span>
+</code></pre> <p>کلاس <strong>Authentication</strong> مسئول ورود و خروج کاربران و تعیین وضعیت احراز هویت است.</p><p>سپس کلاس <strong>Authorization</strong> را اضافه می‌کنیم:</p><pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Authorization</span>
 {
     <span class="hljs-keyword">private</span> Authentication _authentication;
 
@@ -675,10 +293,7 @@ leavers.Print();
         <span class="hljs-keyword">return</span> IsAuthenticated() &amp;&amp; role.Contains(<span class="hljs-string">&quot;Administrator&quot;</span>);
     }
 }
-</code></pre>
-<p>همان‌طور که مشاهده می‌کنید، کلاس <strong>Authorization</strong> بیش از حد کار انجام می‌دهد. برخی متدها فقط متدهای همان کلاس <strong>Authentication</strong> را فراخوانی می‌کنند که نمونه‌ای از <strong>Feature Envy</strong> است.</p>
-<p>نسخه اصلاح‌شده کلاس <strong>Authorization</strong>:</p>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Authorization</span>
+</code></pre> <p>همان‌طور که مشاهده می‌کنید، کلاس <strong>Authorization</strong> بیش از حد کار انجام می‌دهد. برخی متدها فقط متدهای همان کلاس <strong>Authentication</strong> را فراخوانی می‌کنند که نمونه‌ای از <strong>Feature Envy</strong> است.</p><p>نسخه اصلاح‌شده کلاس <strong>Authorization</strong>:</p><pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Authorization</span>
 {
     <span class="hljs-keyword">private</span> ProblemCode.Authentication _authentication;
 
@@ -692,465 +307,216 @@ leavers.Print();
         <span class="hljs-keyword">return</span> _authentication.IsAuthenticated() &amp;&amp; role.Contains(<span class="hljs-string">&quot;Administrator&quot;</span>);
     }
 }
-</code></pre>
-<p>اکنون کلاس <strong>Authorization</strong> کوچک‌تر است و تنها کار لازم را انجام می‌دهد. دیگر <strong>Feature Envy</strong> وجود ندارد. ✅</p>
-<hr>
-<p>در مرحله بعد، به <strong>Inappropriate Intimacy</strong> می‌پردازیم. 💡</p>
-<h3>Inappropriate Intimacy 🤝</h3>
-<p>یک کلاس زمانی دچار <strong>Inappropriate Intimacy</strong> می‌شود که بیش از حد به جزئیات پیاده‌سازی کلاس دیگری وابسته باشد.</p>
-<ul>
-<li>آیا این کلاس واقعاً نیاز به وجود دارد؟</li>
-<li>آیا می‌توان آن را با کلاسی که به آن وابسته است ادغام کرد؟</li>
-<li>یا آیا عملکرد مشترکی وجود دارد که بهتر است به کلاس جداگانه‌ای منتقل شود؟</li>
-</ul>
-<p>کلاس‌ها نباید به یکدیگر وابسته باشند، زیرا این باعث <strong>Coupling</strong> می‌شود و می‌تواند <strong>Cohesion</strong> را کاهش دهد. یک کلاس باید تا حد امکان <strong>Self-contained</strong> باشد و از دیگر کلاس‌ها کمترین اطلاعات را داشته باشد.</p>
-<hr>
-<h3>Indecent Exposure ⚠️</h3>
-<p>زمانی که یک کلاس جزئیات داخلی خود را آشکار می‌کند، این <strong>Indecent Exposure</strong> نامیده می‌شود. این موضوع اصل <strong>Encapsulation</strong> در <strong>OOP</strong> را نقض می‌کند.</p>
-<ul>
-<li>تنها مواردی که باید <strong>Public</strong> باشند، عمومی شوند.</li>
-<li>همه پیاده‌سازی‌های دیگر که نیازی به عمومی بودن ندارند، با استفاده از <strong>Access Modifiers</strong> مناسب مخفی شوند.</li>
-</ul>
-<p>مقادیر داده‌ای نباید <strong>Public</strong> باشند. آن‌ها باید <strong>Private</strong> باشند و تنها از طریق <strong>Constructors</strong>، <strong>Methods</strong> و <strong>Properties</strong> قابل تغییر و از طریق <strong>Properties</strong> قابل دسترسی باشند.</p>
-<hr>
-<h3>The Large Class (God Object) 🏰</h3>
-<p>کلاس بزرگ، یا همان <strong>God Object</strong>، همه‌چیز برای همه بخش‌های سیستم است. این یک کلاس حجیم و غیرقابل مدیریت است که بیش از حد کار انجام می‌دهد.</p>
-<ul>
-<li>حتی اگر نام کلاس و فضای نام آن واضح باشد، هنگام مطالعه کد، هدف کلاس ممکن است گم شود.</li>
-</ul>
-<p>ویژگی‌های یک کلاس خوب:</p>
-<ul>
-<li>نام کلاس نشان‌دهنده هدف آن باشد و در <strong>Namespace</strong> مناسب قرار گیرد.</li>
-<li>محتوای کلاس مطابق استانداردهای کدنویسی شرکت باشد.</li>
-<li>متدها تا حد امکان کوچک باشند و پارامترهای متد حداقل باشد.</li>
-<li>تنها متدهایی که متعلق به کلاس هستند، در آن قرار گیرند.</li>
-<li>متغیرها، Propertyها و متدهایی که متعلق به کلاس نیستند، حذف و در فایل و فضای نام مناسب قرار گیرند.</li>
-</ul>
-<p>برای کوچک و متمرکز نگه داشتن کلاس‌ها:</p>
-<ul>
-<li>اگر نیازی به <strong>Inheritance</strong> نیست، از آن استفاده نکنید.</li>
-<li>اگر کلاس پنج متد دارد و تنها یک متد استفاده می‌شود، آن متد را به کلاس <strong>Reusable</strong> منتقل کنید.</li>
-<li><strong>Single Responsibility Principle</strong> را رعایت کنید: یک کلاس تنها یک مسئولیت داشته باشد.</li>
-</ul>
-<hr>
-<h3>The Lazy Class (Freeloader / Lazy Object) 🛋️</h3>
-<p>یک کلاس <strong>Freeloading</strong>، کلاس‌هایی هستند که تقریباً هیچ کاری مفید انجام نمی‌دهند.</p>
-<ul>
-<li>هنگام مواجهه با چنین کلاس‌هایی، می‌توانید محتویات آن‌ها را با کلاس‌های دیگر که هدف مشابهی دارند، ادغام کنید.</li>
-<li>همچنین می‌توانید سلسله‌مراتب ارث‌بری را کاهش دهید. عمق ایده‌آل ارث‌بری ۱ است.</li>
-<li>برای کلاس‌های خیلی کوچک، <strong>Inline Class</strong> را در نظر بگیرید.</li>
-</ul>
-<hr>
-<h3>The Middleman Class 🧑‍💼</h3>
-<p>یک کلاس <strong>Middleman</strong> تنها عملکرد را به اشیای دیگر واگذار می‌کند.</p>
-<ul>
-<li>در چنین مواردی می‌توان <strong>Middleman</strong> را حذف کرد و مستقیماً با اشیایی که مسئولیت را انجام می‌دهند، کار کرد.</li>
-<li>اگر نمی‌توان کلاس را حذف کرد، آن را با کلاس‌های موجود ادغام کنید و طراحی کلی را بررسی کنید تا تعداد کلاس‌ها و کد کاهش یابد.</li>
-</ul>
-<hr>
-<h3>The Orphan Class of Variables and Constants 📦</h3>
-<p>داشتن یک کلاس تنها برای نگهداری <strong>Variables</strong> و <strong>Constants</strong> در بخش‌های مختلف برنامه، کار مناسبی نیست.</p>
-<ul>
-<li>چنین کلاس‌هایی باعث می‌شوند متغیرها معنای واقعی خود را از دست بدهند.</li>
-<li>بهتر است <strong>Constants</strong> و <strong>Variables</strong> به بخش‌هایی منتقل شوند که استفاده می‌شوند.</li>
-<li>اگر توسط چند کلاس استفاده می‌شوند، در فایل مربوط به <strong>Root Namespace</strong> قرار گیرند.</li>
-</ul>
-<hr>
-<h3>Primitive Obsession 🧩</h3>
-<p>کدی که از مقادیر <strong>Primitive</strong> به جای اشیا برای مقاصدی مانند <strong>Range Values</strong> و رشته‌های قالب‌بندی شده (مثلاً کارت اعتباری، کد پستی، شماره تلفن) استفاده می‌کند، دچار <strong>Primitive Obsession</strong> است.</p>
-<ul>
-<li>نشانه دیگر: استفاده از <strong>Constants</strong> برای نام فیلدها یا ذخیره نامناسب اطلاعات در <strong>Constants</strong>.</li>
-</ul>
-<hr>
-<h3>Refused Bequest ❌</h3>
-<p>زمانی که یک کلاس از کلاس دیگری ارث می‌برد اما از همه متدهای آن استفاده نمی‌کند، این <strong>Refused Bequest</strong> نامیده می‌شود.</p>
-<ul>
-<li>دلیل رایج: زیرکلاس کاملاً متفاوت از کلاس پایه است.</li>
-<li>مثال: کلاس پایه <strong>Building</strong> توسط انواع مختلف ساختمان استفاده می‌شود، اما یک شی <strong>Car</strong> از <strong>Building</strong> ارث می‌برد. واضح است که این اشتباه است.</li>
-<li>راه حل: بررسی کنید که آیا کلاس پایه واقعاً لازم است یا خیر. اگر لازم است، آن را ایجاد و ارث‌بری کنید؛ در غیر این صورت، عملکرد مورد نظر را به کلاس مناسب اضافه کنید.</li>
-</ul>
-<hr>
-<h3>Speculative Generality 🔮</h3>
-<p>کلاسی که با عملکردی برنامه‌نویسی شده که اکنون نیاز نیست اما ممکن است در آینده نیاز شود، دچار <strong>Speculative Generality</strong> است.</p>
-<ul>
-<li>این کد در واقع <strong>Dead Code</strong> است و باعث افزایش بار نگهداری و کدهای اضافی می‌شود.</li>
-<li>بهتر است چنین کلاس‌هایی حذف شوند.</li>
-</ul>
-<hr>
-<h3>Tell, Don’t Ask 🗣️</h3>
-<p>اصل <strong>Tell, Don’t Ask</strong> به ما می‌گوید که داده‌ها باید با متدهایی که روی آن داده‌ها عمل می‌کنند، <strong>Bundle</strong> شوند.</p>
-<ul>
-<li>اشیاء نباید داده بخواهند و سپس عملیات انجام دهند.</li>
-<li>آن‌ها باید منطق شیء را برای انجام کار روی داده‌های خودش <strong>Tell</strong> کنند.</li>
-</ul>
-<p>اگر اشیائی وجود دارند که منطق دارند و از اشیاء دیگر داده می‌گیرند، منطق و داده‌ها را در یک کلاس ترکیب کنید.</p>
-<h3>Temporary Fields ⏳</h3>
-<p><strong>Temporary Fields</strong> متغیرهای عضوی هستند که برای کل طول عمر یک شیء نیاز نیستند.</p>
-<ul>
-<li>می‌توان با بازسازی کد، این متغیرهای موقت و متدهایی که روی آن‌ها عمل می‌کنند را به کلاس جداگانه منتقل کرد.</li>
-<li>نتیجه، کدی واضح‌تر و سازمان‌یافته‌تر خواهد بود.</li>
-</ul>
-<hr>
-<h3>Method-level Smells 🛠️</h3>
-<p><strong>Method-level code smells</strong> مشکلاتی هستند که در خود متد وجود دارند. متدها نیرو محرکه نرم‌افزار هستند و می‌توانند عملکرد آن را خوب یا ضعیف کنند.</p>
-<ul>
-<li>متدها باید سازمان‌دهی‌شده باشند و فقط کاری را انجام دهند که انتظار می‌رود—نه بیشتر و نه کمتر.</li>
-<li>مهم است که انواع مشکلات ناشی از متدهای ضعیف را بشناسیم و بدانیم چگونه آن‌ها را اصلاح کنیم.</li>
-</ul>
-<hr>
-<h3>The Black Sheep Method 🐑</h3>
-<p>یک متد <strong>Black Sheep</strong> در میان متدهای یک کلاس، به طور قابل توجهی متفاوت است.</p>
-<ul>
-<li>
-<p>هنگام مواجهه با چنین متدی، باید آن را عینی بررسی کنید:</p>
-<ul>
-<li>نام متد چیست؟</li>
-<li>هدف متد چیست؟</li>
-</ul>
-</li>
-<li>
-<p>سپس تصمیم بگیرید که متد را حذف و آن را در جایی که واقعاً متعلق است، قرار دهید.</p>
-</li>
-</ul>
-<hr>
-<h3>Cyclomatic Complexity 🔄</h3>
-<p>زمانی که یک متد تعداد زیادی حلقه و شاخه دارد، به آن <strong>Cyclomatic Complexity</strong> گفته می‌شود.</p>
-<ul>
-<li>این مشکل همچنین یک <strong>Class-level code smell</strong> است.</li>
-<li>برای کاهش مشکلات شاخه‌ها می‌توان <strong>Switch</strong> و <strong>If Statements</strong> را بازسازی کرد.</li>
-<li>حلقه‌ها را می‌توان با <strong>LINQ</strong> جایگزین کرد که علاوه بر خوانایی، ویژگی <strong>Functional</strong> بودن نیز دارد.</li>
-</ul>
-<hr>
-<h3>Contrived Complexity 🤯</h3>
-<p>اگر یک متد به‌طور غیرضروری پیچیده باشد و قابلیت ساده‌سازی داشته باشد، این پیچیدگی <strong>Contrived Complexity</strong> نامیده می‌شود.</p>
-<ul>
-<li>متد را ساده کنید تا محتوای آن برای انسان خوانا و قابل فهم باشد.</li>
-<li>سپس متد را بازسازی و اندازه آن را به حداقل خطوط عملیاتی کاهش دهید.</li>
-</ul>
-<hr>
-<h3>Dead Code ⚰️</h3>
-<p>متدی که وجود دارد اما استفاده نمی‌شود، <strong>Dead Code</strong> است.</p>
-<ul>
-<li>این شامل <strong>Constructors</strong>، <strong>Properties</strong>، <strong>Parameters</strong> و <strong>Variables</strong> نیز می‌شود.</li>
-<li>باید شناسایی و حذف شوند.</li>
-</ul>
-<hr>
-<h3>Excessive Data Return 📦</h3>
-<p>زمانی که یک متد بیش از حد داده برمی‌گرداند، به گونه‌ای که تمام کلاینت‌ها به آن نیاز ندارند، این مشکل <strong>Excessive Data Return</strong> نامیده می‌شود.</p>
-<ul>
-<li>تنها داده‌های مورد نیاز باید برگردانده شوند.</li>
-<li>اگر گروه‌های مختلفی با نیازهای متفاوت وجود دارند، بهتر است متدهای جداگانه بنویسید که تنها داده‌های مورد نیاز هر گروه را برگردانند.</li>
-</ul>
-<hr>
-<h3>Feature Envy 👀</h3>
-<p>متدی که زمان زیادی را صرف دسترسی به داده‌ها در اشیاء دیگر می‌کند، دارای <strong>Feature Envy</strong> است.</p>
-<ul>
-<li>متد باید کوچک باشد و عملکرد اصلی آن در همان متد متمرکز باشد.</li>
-<li>اگر کار بیشتری در متدهای دیگر انجام می‌دهد، باید بخشی از کد به متد جداگانه منتقل شود.</li>
-</ul>
-<hr>
-<h3>Identifier Size 🏷️</h3>
-<p><strong>Identifiers</strong> می‌توانند بسیار کوتاه یا طولانی باشند.</p>
-<ul>
-<li>
-<p>باید توصیفی و مختصر باشند.</p>
-</li>
-<li>
-<p>هنگام نامگذاری متغیرها، <strong>Context</strong> و مکان آن را در نظر بگیرید:</p>
-<ul>
-<li>در یک حلقه محلی، یک حرف ممکن است کافی باشد.</li>
-<li>در سطح کلاس، نام قابل فهم انسانی لازم است.</li>
-</ul>
-</li>
-<li>
-<p>از نام‌های مبهم یا فاقد Context خودداری کنید.</p>
-</li>
-</ul>
-<hr>
-<h3>Inappropriate Intimacy 🤝</h3>
-<p>متدهایی که بیش از حد به جزئیات پیاده‌سازی در متدها یا کلاس‌های دیگر وابسته هستند، دچار <strong>Inappropriate Intimacy</strong> هستند.</p>
-<ul>
-<li>این متدها باید بازسازی شوند و در صورت نیاز حذف شوند.</li>
-<li>متدها و فیلدها را به جایی منتقل کنید که واقعاً نیاز به استفاده دارند یا به کلاس جداگانه‌ای استخراج کنید.</li>
-<li><strong>Inheritance</strong> می‌تواند جایگزین <strong>Delegation</strong> شود زمانی که زیرکلاس به کلاس پایه وابسته است.</li>
-</ul>
-<hr>
-<h3>Long Lines (God Lines) 📏</h3>
-<p>خطوط طولانی کد خواندن و درک را سخت می‌کنند.</p>
-<ul>
-<li>این باعث سختی دیباگ و بازسازی کد می‌شود.</li>
-<li>در صورت امکان، خطوط را به گونه‌ای فرمت کنید که هر <strong>Period</strong> یا کد بعد از <strong>Comma</strong> در خط جدید قرار گیرد.</li>
-<li>همچنین باید کد را بازسازی کنید تا کوتاه‌تر و خواناتر شود.</li>
-</ul>
-<hr>
-<h3>Lazy Methods 💤</h3>
-<p>یک متد <strong>Lazy</strong> کار بسیار کمی انجام می‌دهد.</p>
-<ul>
-<li>ممکن است کار خود را به متدهای دیگر واگذار کند یا تنها متدی در کلاس دیگری را فراخوانی کند.</li>
-<li>در چنین مواردی، ممکن است بهتر باشد متد حذف و کد مورد نیاز در جای مناسب قرار گیرد.</li>
-<li>می‌توان از <strong>Inline Function</strong> مانند <strong>Lambda</strong> نیز استفاده کرد.</li>
-</ul>
-<hr>
-<h3>Long Methods (God Methods) 📚</h3>
-<p>یک متد <strong>Long</strong> از حد خود فراتر رفته است.</p>
-<ul>
-<li>این متدها ممکن است هدف خود را از دست بدهند و کارهای بیشتری از انتظار انجام دهند.</li>
-<li>با IDE می‌توان بخش‌هایی از متد را انتخاب و با <strong>Extract Method</strong> یا <strong>Extract Class</strong> به متد یا کلاس جداگانه منتقل کرد.</li>
-<li>یک متد باید تنها مسئول انجام یک وظیفه باشد.</li>
-</ul>
-<h3>Long Parameter Lists (Too Many Parameters) 📋</h3>
-<ul>
-<li>سه پارامتر یا بیشتر به عنوان <strong>Long Parameter List</strong> شناخته می‌شوند.</li>
-<li>برای رفع این مشکل می‌توان پارامترها را با یک <strong>Method Call</strong> جایگزین کرد یا از یک <strong>Parameter Object</strong> استفاده کرد.</li>
-</ul>
-<hr>
-<h3>Message Chains 🔗</h3>
-<ul>
-<li><strong>Message Chain</strong> زمانی رخ می‌دهد که یک متد، شیئی را فراخوانی می‌کند که آن هم شیء دیگری را فراخوانی می‌کند و این زنجیره ادامه می‌یابد.</li>
-<li>این زنجیره‌ها قانون <strong>Law of Demeter</strong> را می‌شکنند: یک کلاس باید تنها با همسایه نزدیک خود ارتباط برقرار کند.</li>
-<li>برای رفع مشکل، وضعیت و رفتار مورد نیاز را به نزدیک‌ترین محل استفاده منتقل کنید.</li>
-</ul>
-<hr>
-<h3>Middleman Method 🧩</h3>
-<ul>
-<li>وقتی متدی تنها کار را به متدهای دیگر واگذار می‌کند، به آن <strong>Middleman Method</strong> گفته می‌شود.</li>
-<li>چنین متدی می‌تواند بازسازی و حذف شود.</li>
-<li>اگر بخشی از عملکرد ضروری است، آن را با جایی که استفاده می‌شود ادغام کنید.</li>
-</ul>
-<hr>
-<h3>Oddball Solutions 🎯</h3>
-<ul>
-<li>وقتی چند متد یک کار را انجام می‌دهند اما هر کدام روش متفاوتی دارند، <strong>Oddball Solution</strong> رخ داده است.</li>
-<li>بهترین متد را انتخاب کنید و فراخوانی‌های متدهای دیگر را با آن جایگزین کنید، سپس متدهای اضافی را حذف کنید.</li>
-<li>در نهایت، تنها یک متد برای انجام کار باقی می‌ماند که قابل استفاده مجدد است.</li>
-</ul>
-<hr>
-<h3>Speculative Generality 🔮</h3>
-<ul>
-<li>متدی که در هیچ‌جا استفاده نمی‌شود، <strong>Speculative Generality</strong> دارد.</li>
-<li>اساساً این کد <strong>Dead Code</strong> است و باید از سیستم حذف شود.</li>
-<li>این نوع کد باعث افزایش هزینه نگهداری و افزایش حجم کد می‌شود.</li>
-</ul>
-<hr>
-<h3>Summary 📚</h3>
-<p>در این فصل با انواع <strong>Code Smells</strong> آشنا شدیم و روش‌های رفع آن‌ها از طریق <strong>Refactoring</strong> را بررسی کردیم.</p>
-<p><strong>سه دسته اصلی Code Smells:</strong></p>
-<ol>
-<li><strong>Application-level code smells</strong>: بر تمام لایه‌های برنامه تأثیر دارند.</li>
-<li><strong>Class-level code smells</strong>: در سطح کلاس مشکل ایجاد می‌کنند.</li>
-<li><strong>Method-level code smells</strong>: تنها متدها را تحت تأثیر قرار می‌دهند.</li>
-</ol>
-<p><strong>Application-level code smells</strong> شامل:</p>
-<ul>
-<li>Boolean Blindness</li>
-<li>Combinatorial Explosion</li>
-<li>Contrived Complexity</li>
-<li>Data Clump</li>
-<li>Deodorant Comments</li>
-<li>Duplicate Code</li>
-<li>Lost Intent</li>
-<li>Mutation of Variables</li>
-<li>Oddball Solutions</li>
-<li>Shotgun Surgery</li>
-<li>Solution Sprawl</li>
-<li>Uncontrolled Side Effects</li>
-</ul>
-<p><strong>Class-level code smells</strong> شامل:</p>
-<ul>
-<li>Cyclomatic Complexity</li>
-<li>Divergent Change</li>
-<li>Downcasting</li>
-<li>Excessive Literal Use</li>
-<li>Feature Envy</li>
-<li>Inappropriate Intimacy</li>
-<li>Indecent Exposure</li>
-<li>Large Object (God Object)</li>
-<li>Lazy Class / Freeloader / Lazy Object</li>
-<li>Middleman</li>
-<li>Orphan Class of Variables and Constants</li>
-<li>Primitive Obsession</li>
-<li>Refused Bequest</li>
-<li>Speculative Generality</li>
-<li>Tell, Don’t Ask</li>
-<li>Temporary Fields</li>
-</ul>
-<p><strong>Method-level code smells</strong> شامل:</p>
-<ul>
-<li>Black Sheep</li>
-<li>Cyclomatic Complexity</li>
-<li>Contrived Complexity</li>
-<li>Dead Code</li>
-<li>Feature Envy</li>
-<li>Identifier Size</li>
-<li>Inappropriate Intimacy</li>
-<li>Long Lines (God Lines)</li>
-<li>Lazy Method</li>
-<li>Long Method (God Method)</li>
-<li>Long Parameter List (Too Many Parameters)</li>
-<li>Message Chains</li>
-<li>Middleman</li>
-<li>Oddball Solutions</li>
-<li>Speculative Generality</li>
-</ul>
-<p>در فصل بعد، بررسی <strong>Refactoring</strong> کد را با استفاده از <strong>ReSharper</strong> ادامه خواهیم داد.</p>
-<hr>
-<h3>Questions ❓</h3>
-<ol>
-<li>سه دسته اصلی <strong>Code Smell</strong> کدامند؟</li>
-<li>انواع <strong>Application-level Code Smells</strong> را نام ببرید.</li>
-<li>انواع <strong>Class-level Code Smells</strong> را نام ببرید.</li>
-<li>انواع <strong>Method-level Code Smells</strong> را نام ببرید.</li>
-<li>چه نوع بازسازی‌هایی می‌توان برای رفع Code Smells انجام داد؟</li>
-<li><strong>Cyclomatic Complexity</strong> چیست؟</li>
-<li>چگونه می‌توان <strong>Cyclomatic Complexity</strong> را کاهش داد؟</li>
-<li><strong>Contrived Complexity</strong> چیست؟</li>
-<li>چگونه می‌توان <strong>Contrived Complexity</strong> را رفع کرد؟</li>
-<li><strong>Combinatorial Explosion</strong> چیست؟</li>
-<li>چگونه می‌توان <strong>Combinatorial Explosion</strong> را رفع کرد؟</li>
-<li>هنگام مواجهه با <strong>Deodorant Comments</strong> چه باید کرد؟</li>
-<li>اگر کد بد دارید و نمی‌دانید چگونه آن را اصلاح کنید، چه باید کرد؟</li>
-<li>بهترین مکان برای پرسش و پاسخ درباره مسائل برنامه‌نویسی کجاست؟</li>
-<li>چگونه می‌توان <strong>Long Parameter List</strong> را کاهش داد؟</li>
-<li>چگونه می‌توان یک <strong>Large Method</strong> را بازسازی کرد؟</li>
-<li>حداکثر طول یک متد تمیز چقدر است؟</li>
-<li><strong>Cyclomatic Complexity</strong> برنامه باید در چه بازه‌ای باشد؟</li>
-<li>مقدار ایده‌آل برای <strong>Depth of Inheritance</strong> چقدر است؟</li>
-<li><strong>Speculative Generality</strong> چیست و چه باید کرد؟</li>
-<li>هنگام مواجهه با <strong>Oddball Solution</strong> چه اقدامی باید انجام داد؟</li>
-<li>هنگام مواجهه با <strong>Temporary Field</strong> چه بازسازی‌هایی انجام می‌دهید؟</li>
-<li><strong>Data Clump</strong> چیست و چه باید کرد؟</li>
-<li>کد بد <strong>Refused Bequest</strong> را توضیح دهید.</li>
-<li><strong>Message Chains</strong> چه قانونی را نقض می‌کنند؟</li>
-<li>چگونه باید <strong>Message Chains</strong> را بازسازی کرد؟</li>
-<li><strong>Feature Envy</strong> چیست؟</li>
-<li>چگونه می‌توان <strong>Feature Envy</strong> را حذف کرد؟</li>
-<li>از چه الگویی می‌توان برای جایگزینی <strong>Switch Statements</strong> که اشیاء برمی‌گردانند، استفاده کرد؟</li>
-<li>چگونه می‌توان <strong>If Statements</strong> که اشیاء برمی‌گردانند را بازسازی کرد؟</li>
-<li><strong>Solution Sprawl</strong> چیست و چگونه باید رفع شود؟</li>
-<li>اصل <strong>Tell, Don’t Ask!</strong> را توضیح دهید.</li>
-<li>اصل <strong>Tell, Don’t Ask!</strong> چگونه نقض می‌شود؟</li>
-<li>علائم <strong>Shotgun Surgery</strong> چیست و چگونه باید رفع شود؟</li>
-<li><strong>Lost Intent</strong> چیست و چه باید کرد؟</li>
-<li>چگونه حلقه‌ها را بازسازی کنیم و چه فوایدی دارد؟</li>
-<li><strong>Divergent Change</strong> چیست و چگونه بازسازی می‌شود؟</li>
-</ol>
-<p><strong>مطالعه بیشتر 📖:</strong></p>
-<ul>
-<li><em>Refactoring - Improving the Design of Existing Code</em> by Martin Fowler &amp; Kent Beck</li>
-<li><a href="https://refactoring.guru/refactoring">refactoring.guru</a> – سایت خوب برای <strong>Design Patterns</strong> و <strong>Code Smells</strong></li>
-<li><a href="https://www.dofactory.com/net/design-patterns">dofactory.com</a> – سایت عالی برای <strong>C# Design Patterns</strong></li>
-</ul>
-
-  </main>
-
-  <!-- فوتر مشترک -->
-  <footer class="footer">
-    <div class="container">
-      <p>
-        <img src="/Gitab/icone/copyright.svg" alt="کپی‌رایت" width="14" height="14"
-             style="vertical-align:middle;margin-inline:4px">
-        <span id="y"></span> Gitab — تمامی حقوق محفوظ است.
-      </p>
-    </div>
-  </footer>
-
-  <!-- سال و اسکریپت تغییر تم -->
-  <script>
+</code></pre> <p>اکنون کلاس <strong>Authorization</strong> کوچک‌تر است و تنها کار لازم را انجام می‌دهد. دیگر <strong>Feature Envy</strong> وجود ندارد.</p><hr> <p>در مرحله بعد، به <strong>Inappropriate Intimacy</strong> می‌پردازیم.</p><h3>Inappropriate Intimacy</h3><p>یک کلاس زمانی دچار <strong>Inappropriate Intimacy</strong> می‌شود که بیش از حد به جزئیات پیاده‌سازی کلاس دیگری وابسته باشد.</p><ul> <li>آیا این کلاس واقعاً نیاز به وجود دارد؟</li><li>آیا می‌توان آن را با کلاسی که به آن وابسته است ادغام کرد؟</li><li>یا آیا عملکرد مشترکی وجود دارد که بهتر است به کلاس جداگانه‌ای منتقل شود؟</li></ul> <p>کلاس‌ها نباید به یکدیگر وابسته باشند، زیرا این باعث <strong>Coupling</strong> می‌شود و می‌تواند <strong>Cohesion</strong> را کاهش دهد. یک کلاس باید تا حد امکان <strong>Self-contained</strong> باشد و از دیگر کلاس‌ها کمترین اطلاعات را داشته باشد.</p><hr> <h3>Indecent Exposure</h3><p>زمانی که یک کلاس جزئیات داخلی خود را آشکار می‌کند، این <strong>Indecent Exposure</strong> نامیده می‌شود. این موضوع اصل <strong>Encapsulation</strong> در <strong>OOP</strong> را نقض می‌کند.</p><ul> <li>تنها مواردی که باید <strong>Public</strong> باشند، عمومی شوند.</li><li>همه پیاده‌سازی‌های دیگر که نیازی به عمومی بودن ندارند، با استفاده از <strong>Access Modifiers</strong> مناسب مخفی شوند.</li></ul> <p>مقادیر داده‌ای نباید <strong>Public</strong> باشند. آن‌ها باید <strong>Private</strong> باشند و تنها از طریق <strong>Constructors</strong>، <strong>Methods</strong> و <strong>Properties</strong> قابل تغییر و از طریق <strong>Properties</strong> قابل دسترسی باشند.</p><hr> <h3>The Large Class (God Object)</h3><p>کلاس بزرگ، یا همان <strong>God Object</strong>، همه‌چیز برای همه بخش‌های سیستم است. این یک کلاس حجیم و غیرقابل مدیریت است که بیش از حد کار انجام می‌دهد.</p><ul> <li>حتی اگر نام کلاس و فضای نام آن واضح باشد، هنگام مطالعه کد، هدف کلاس ممکن است گم شود.</li></ul> <p>ویژگی‌های یک کلاس خوب:</p><ul> <li>نام کلاس نشان‌دهنده هدف آن باشد و در <strong>Namespace</strong> مناسب قرار گیرد.</li><li>محتوای کلاس مطابق استانداردهای کدنویسی شرکت باشد.</li><li>متدها تا حد امکان کوچک باشند و پارامترهای متد حداقل باشد.</li><li>تنها متدهایی که متعلق به کلاس هستند، در آن قرار گیرند.</li><li>متغیرها، Propertyها و متدهایی که متعلق به کلاس نیستند، حذف و در فایل و فضای نام مناسب قرار گیرند.</li></ul> <p>برای کوچک و متمرکز نگه داشتن کلاس‌ها:</p><ul> <li>اگر نیازی به <strong>Inheritance</strong> نیست، از آن استفاده نکنید.</li><li>اگر کلاس پنج متد دارد و تنها یک متد استفاده می‌شود، آن متد را به کلاس <strong>Reusable</strong> منتقل کنید.</li><li><strong>Single Responsibility Principle</strong> را رعایت کنید: یک کلاس تنها یک مسئولیت داشته باشد.</li></ul> <hr><h3>The Lazy Class (Freeloader / Lazy Object)</h3><p>یک کلاس <strong>Freeloading</strong>، کلاس‌هایی هستند که تقریباً هیچ کاری مفید انجام نمی‌دهند.</p><ul> <li>هنگام مواجهه با چنین کلاس‌هایی، می‌توانید محتویات آن‌ها را با کلاس‌های دیگر که هدف مشابهی دارند، ادغام کنید.</li><li>همچنین می‌توانید سلسله‌مراتب ارث‌بری را کاهش دهید. عمق ایده‌آل ارث‌بری ۱ است.</li><li>برای کلاس‌های خیلی کوچک، <strong>Inline Class</strong> را در نظر بگیرید.</li></ul> <hr><h3>The Middleman Class ‍</h3><p>یک کلاس <strong>Middleman</strong> تنها عملکرد را به اشیای دیگر واگذار می‌کند.</p><ul> <li>در چنین مواردی می‌توان <strong>Middleman</strong> را حذف کرد و مستقیماً با اشیایی که مسئولیت را انجام می‌دهند، کار کرد.</li><li>اگر نمی‌توان کلاس را حذف کرد، آن را با کلاس‌های موجود ادغام کنید و طراحی کلی را بررسی کنید تا تعداد کلاس‌ها و کد کاهش یابد.</li></ul> <hr><h3>The Orphan Class of Variables and Constants</h3><p>داشتن یک کلاس تنها برای نگهداری <strong>Variables</strong> و <strong>Constants</strong> در بخش‌های مختلف برنامه، کار مناسبی نیست.</p><ul> <li>چنین کلاس‌هایی باعث می‌شوند متغیرها معنای واقعی خود را از دست بدهند.</li><li>بهتر است <strong>Constants</strong> و <strong>Variables</strong> به بخش‌هایی منتقل شوند که استفاده می‌شوند.</li><li>اگر توسط چند کلاس استفاده می‌شوند، در فایل مربوط به <strong>Root Namespace</strong> قرار گیرند.</li></ul> <hr><h3>Primitive Obsession</h3><p>کدی که از مقادیر <strong>Primitive</strong> به جای اشیا برای مقاصدی مانند <strong>Range Values</strong> و رشته‌های قالب‌بندی شده (مثلاً کارت اعتباری، کد پستی، شماره تلفن) استفاده می‌کند، دچار <strong>Primitive Obsession</strong> است.</p><ul> <li>نشانه دیگر: استفاده از <strong>Constants</strong> برای نام فیلدها یا ذخیره نامناسب اطلاعات در <strong>Constants</strong>.</li></ul> <hr><h3>Refused Bequest</h3><p>زمانی که یک کلاس از کلاس دیگری ارث می‌برد اما از همه متدهای آن استفاده نمی‌کند، این <strong>Refused Bequest</strong> نامیده می‌شود.</p><ul> <li>دلیل رایج: زیرکلاس کاملاً متفاوت از کلاس پایه است.</li><li>مثال: کلاس پایه <strong>Building</strong> توسط انواع مختلف ساختمان استفاده می‌شود، اما یک شی <strong>Car</strong> از <strong>Building</strong> ارث می‌برد. واضح است که این اشتباه است.</li><li>راه حل: بررسی کنید که آیا کلاس پایه واقعاً لازم است یا خیر. اگر لازم است، آن را ایجاد و ارث‌بری کنید؛ در غیر این صورت، عملکرد مورد نظر را به کلاس مناسب اضافه کنید.</li></ul> <hr><h3>Speculative Generality</h3><p>کلاسی که با عملکردی برنامه‌نویسی شده که اکنون نیاز نیست اما ممکن است در آینده نیاز شود، دچار <strong>Speculative Generality</strong> است.</p><ul> <li>این کد در واقع <strong>Dead Code</strong> است و باعث افزایش بار نگهداری و کدهای اضافی می‌شود.</li><li>بهتر است چنین کلاس‌هایی حذف شوند.</li></ul> <hr><h3>Tell, Don’t Ask</h3><p>اصل <strong>Tell, Don’t Ask</strong> به ما می‌گوید که داده‌ها باید با متدهایی که روی آن داده‌ها عمل می‌کنند، <strong>Bundle</strong> شوند.</p><ul> <li>اشیاء نباید داده بخواهند و سپس عملیات انجام دهند.</li><li>آن‌ها باید منطق شیء را برای انجام کار روی داده‌های خودش <strong>Tell</strong> کنند.</li></ul> <p>اگر اشیائی وجود دارند که منطق دارند و از اشیاء دیگر داده می‌گیرند، منطق و داده‌ها را در یک کلاس ترکیب کنید.</p><h3>Temporary Fields ⏳</h3><p><strong>Temporary Fields</strong> متغیرهای عضوی هستند که برای کل طول عمر یک شیء نیاز نیستند.</p><ul> <li>می‌توان با بازسازی کد، این متغیرهای موقت و متدهایی که روی آن‌ها عمل می‌کنند را به کلاس جداگانه منتقل کرد.</li><li>نتیجه، کدی واضح‌تر و سازمان‌یافته‌تر خواهد بود.</li></ul> <hr><h3>Method-level Smells</h3><p><strong>Method-level code smells</strong> مشکلاتی هستند که در خود متد وجود دارند. متدها نیرو محرکه نرم‌افزار هستند و می‌توانند عملکرد آن را خوب یا ضعیف کنند.</p><ul> <li>متدها باید سازمان‌دهی‌شده باشند و فقط کاری را انجام دهند که انتظار می‌رود—نه بیشتر و نه کمتر.</li><li>مهم است که انواع مشکلات ناشی از متدهای ضعیف را بشناسیم و بدانیم چگونه آن‌ها را اصلاح کنیم.</li></ul> <hr><h3>The Black Sheep Method</h3><p>یک متد <strong>Black Sheep</strong> در میان متدهای یک کلاس، به طور قابل توجهی متفاوت است.</p><ul> <li><p>هنگام مواجهه با چنین متدی، باید آن را عینی بررسی کنید:</p><ul> <li>نام متد چیست؟</li><li>هدف متد چیست؟</li></ul> </li><li> <p>سپس تصمیم بگیرید که متد را حذف و آن را در جایی که واقعاً متعلق است، قرار دهید.</p></li> </ul><hr> <h3>Cyclomatic Complexity</h3><p>زمانی که یک متد تعداد زیادی حلقه و شاخه دارد، به آن <strong>Cyclomatic Complexity</strong> گفته می‌شود.</p><ul> <li>این مشکل همچنین یک <strong>Class-level code smell</strong> است.</li><li>برای کاهش مشکلات شاخه‌ها می‌توان <strong>Switch</strong> و <strong>If Statements</strong> را بازسازی کرد.</li><li>حلقه‌ها را می‌توان با <strong>LINQ</strong> جایگزین کرد که علاوه بر خوانایی، ویژگی <strong>Functional</strong> بودن نیز دارد.</li></ul> <hr><h3>Contrived Complexity</h3><p>اگر یک متد به‌طور غیرضروری پیچیده باشد و قابلیت ساده‌سازی داشته باشد، این پیچیدگی <strong>Contrived Complexity</strong> نامیده می‌شود.</p><ul> <li>متد را ساده کنید تا محتوای آن برای انسان خوانا و قابل فهم باشد.</li><li>سپس متد را بازسازی و اندازه آن را به حداقل خطوط عملیاتی کاهش دهید.</li></ul> <hr><h3>Dead Code</h3><p>متدی که وجود دارد اما استفاده نمی‌شود، <strong>Dead Code</strong> است.</p><ul> <li>این شامل <strong>Constructors</strong>، <strong>Properties</strong>، <strong>Parameters</strong> و <strong>Variables</strong> نیز می‌شود.</li><li>باید شناسایی و حذف شوند.</li></ul> <hr><h3>Excessive Data Return</h3><p>زمانی که یک متد بیش از حد داده برمی‌گرداند، به گونه‌ای که تمام کلاینت‌ها به آن نیاز ندارند، این مشکل <strong>Excessive Data Return</strong> نامیده می‌شود.</p><ul> <li>تنها داده‌های مورد نیاز باید برگردانده شوند.</li><li>اگر گروه‌های مختلفی با نیازهای متفاوت وجود دارند، بهتر است متدهای جداگانه بنویسید که تنها داده‌های مورد نیاز هر گروه را برگردانند.</li></ul> <hr><h3>Feature Envy</h3><p>متدی که زمان زیادی را صرف دسترسی به داده‌ها در اشیاء دیگر می‌کند، دارای <strong>Feature Envy</strong> است.</p><ul> <li>متد باید کوچک باشد و عملکرد اصلی آن در همان متد متمرکز باشد.</li><li>اگر کار بیشتری در متدهای دیگر انجام می‌دهد، باید بخشی از کد به متد جداگانه منتقل شود.</li></ul> <hr><h3>Identifier Size</h3><p><strong>Identifiers</strong> می‌توانند بسیار کوتاه یا طولانی باشند.</p><ul> <li><p>باید توصیفی و مختصر باشند.</p></li> <li><p>هنگام نامگذاری متغیرها، <strong>Context</strong> و مکان آن را در نظر بگیرید:</p><ul> <li>در یک حلقه محلی، یک حرف ممکن است کافی باشد.</li><li>در سطح کلاس، نام قابل فهم انسانی لازم است.</li></ul> </li><li> <p>از نام‌های مبهم یا فاقد Context خودداری کنید.</p></li> </ul><hr> <h3>Inappropriate Intimacy</h3><p>متدهایی که بیش از حد به جزئیات پیاده‌سازی در متدها یا کلاس‌های دیگر وابسته هستند، دچار <strong>Inappropriate Intimacy</strong> هستند.</p><ul> <li>این متدها باید بازسازی شوند و در صورت نیاز حذف شوند.</li><li>متدها و فیلدها را به جایی منتقل کنید که واقعاً نیاز به استفاده دارند یا به کلاس جداگانه‌ای استخراج کنید.</li><li><strong>Inheritance</strong> می‌تواند جایگزین <strong>Delegation</strong> شود زمانی که زیرکلاس به کلاس پایه وابسته است.</li></ul> <hr><h3>Long Lines (God Lines)</h3><p>خطوط طولانی کد خواندن و درک را سخت می‌کنند.</p><ul> <li>این باعث سختی دیباگ و بازسازی کد می‌شود.</li><li>در صورت امکان، خطوط را به گونه‌ای فرمت کنید که هر <strong>Period</strong> یا کد بعد از <strong>Comma</strong> در خط جدید قرار گیرد.</li><li>همچنین باید کد را بازسازی کنید تا کوتاه‌تر و خواناتر شود.</li></ul> <hr><h3>Lazy Methods</h3><p>یک متد <strong>Lazy</strong> کار بسیار کمی انجام می‌دهد.</p><ul> <li>ممکن است کار خود را به متدهای دیگر واگذار کند یا تنها متدی در کلاس دیگری را فراخوانی کند.</li><li>در چنین مواردی، ممکن است بهتر باشد متد حذف و کد مورد نیاز در جای مناسب قرار گیرد.</li><li>می‌توان از <strong>Inline Function</strong> مانند <strong>Lambda</strong> نیز استفاده کرد.</li></ul> <hr><h3>Long Methods (God Methods)</h3><p>یک متد <strong>Long</strong> از حد خود فراتر رفته است.</p><ul> <li>این متدها ممکن است هدف خود را از دست بدهند و کارهای بیشتری از انتظار انجام دهند.</li><li>با IDE می‌توان بخش‌هایی از متد را انتخاب و با <strong>Extract Method</strong> یا <strong>Extract Class</strong> به متد یا کلاس جداگانه منتقل کرد.</li><li>یک متد باید تنها مسئول انجام یک وظیفه باشد.</li></ul> <h3>Long Parameter Lists (Too Many Parameters)</h3><ul> <li>سه پارامتر یا بیشتر به عنوان <strong>Long Parameter List</strong> شناخته می‌شوند.</li><li>برای رفع این مشکل می‌توان پارامترها را با یک <strong>Method Call</strong> جایگزین کرد یا از یک <strong>Parameter Object</strong> استفاده کرد.</li></ul> <hr><h3>Message Chains</h3><ul> <li><strong>Message Chain</strong> زمانی رخ می‌دهد که یک متد، شیئی را فراخوانی می‌کند که آن هم شیء دیگری را فراخوانی می‌کند و این زنجیره ادامه می‌یابد.</li><li>این زنجیره‌ها قانون <strong>Law of Demeter</strong> را می‌شکنند: یک کلاس باید تنها با همسایه نزدیک خود ارتباط برقرار کند.</li><li>برای رفع مشکل، وضعیت و رفتار مورد نیاز را به نزدیک‌ترین محل استفاده منتقل کنید.</li></ul> <hr><h3>Middleman Method</h3><ul> <li>وقتی متدی تنها کار را به متدهای دیگر واگذار می‌کند، به آن <strong>Middleman Method</strong> گفته می‌شود.</li><li>چنین متدی می‌تواند بازسازی و حذف شود.</li><li>اگر بخشی از عملکرد ضروری است، آن را با جایی که استفاده می‌شود ادغام کنید.</li></ul> <hr><h3>Oddball Solutions</h3><ul> <li>وقتی چند متد یک کار را انجام می‌دهند اما هر کدام روش متفاوتی دارند، <strong>Oddball Solution</strong> رخ داده است.</li><li>بهترین متد را انتخاب کنید و فراخوانی‌های متدهای دیگر را با آن جایگزین کنید، سپس متدهای اضافی را حذف کنید.</li><li>در نهایت، تنها یک متد برای انجام کار باقی می‌ماند که قابل استفاده مجدد است.</li></ul> <hr><h3>Speculative Generality</h3><ul> <li>متدی که در هیچ‌جا استفاده نمی‌شود، <strong>Speculative Generality</strong> دارد.</li><li>اساساً این کد <strong>Dead Code</strong> است و باید از سیستم حذف شود.</li><li>این نوع کد باعث افزایش هزینه نگهداری و افزایش حجم کد می‌شود.</li></ul> <hr><h3>Summary</h3><p>در این فصل با انواع <strong>Code Smells</strong> آشنا شدیم و روش‌های رفع آن‌ها از طریق <strong>Refactoring</strong> را بررسی کردیم.</p><p><strong>سه دسته اصلی Code Smells:</strong></p><ol> <li><strong>Application-level code smells</strong>: بر تمام لایه‌های برنامه تأثیر دارند.</li><li><strong>Class-level code smells</strong>: در سطح کلاس مشکل ایجاد می‌کنند.</li><li><strong>Method-level code smells</strong>: تنها متدها را تحت تأثیر قرار می‌دهند.</li></ol> <p><strong>Application-level code smells</strong> شامل:</p><ul> <li>Boolean Blindness</li><li>Combinatorial Explosion</li><li>Contrived Complexity</li><li>Data Clump</li><li>Deodorant Comments</li><li>Duplicate Code</li><li>Lost Intent</li><li>Mutation of Variables</li><li>Oddball Solutions</li><li>Shotgun Surgery</li><li>Solution Sprawl</li><li>Uncontrolled Side Effects</li></ul> <p><strong>Class-level code smells</strong> شامل:</p><ul> <li>Cyclomatic Complexity</li><li>Divergent Change</li><li>Downcasting</li><li>Excessive Literal Use</li><li>Feature Envy</li><li>Inappropriate Intimacy</li><li>Indecent Exposure</li><li>Large Object (God Object)</li><li>Lazy Class / Freeloader / Lazy Object</li><li>Middleman</li><li>Orphan Class of Variables and Constants</li><li>Primitive Obsession</li><li>Refused Bequest</li><li>Speculative Generality</li><li>Tell, Don’t Ask</li><li>Temporary Fields</li></ul> <p><strong>Method-level code smells</strong> شامل:</p><ul> <li>Black Sheep</li><li>Cyclomatic Complexity</li><li>Contrived Complexity</li><li>Dead Code</li><li>Feature Envy</li><li>Identifier Size</li><li>Inappropriate Intimacy</li><li>Long Lines (God Lines)</li><li>Lazy Method</li><li>Long Method (God Method)</li><li>Long Parameter List (Too Many Parameters)</li><li>Message Chains</li><li>Middleman</li><li>Oddball Solutions</li><li>Speculative Generality</li></ul> <p>در فصل بعد، بررسی <strong>Refactoring</strong> کد را با استفاده از <strong>ReSharper</strong> ادامه خواهیم داد.</p><hr> <h3>Questions</h3><ol> <li>سه دسته اصلی <strong>Code Smell</strong> کدامند؟</li><li>انواع <strong>Application-level Code Smells</strong> را نام ببرید.</li><li>انواع <strong>Class-level Code Smells</strong> را نام ببرید.</li><li>انواع <strong>Method-level Code Smells</strong> را نام ببرید.</li><li>چه نوع بازسازی‌هایی می‌توان برای رفع Code Smells انجام داد؟</li><li><strong>Cyclomatic Complexity</strong> چیست؟</li><li>چگونه می‌توان <strong>Cyclomatic Complexity</strong> را کاهش داد؟</li><li><strong>Contrived Complexity</strong> چیست؟</li><li>چگونه می‌توان <strong>Contrived Complexity</strong> را رفع کرد؟</li><li><strong>Combinatorial Explosion</strong> چیست؟</li><li>چگونه می‌توان <strong>Combinatorial Explosion</strong> را رفع کرد؟</li><li>هنگام مواجهه با <strong>Deodorant Comments</strong> چه باید کرد؟</li><li>اگر کد بد دارید و نمی‌دانید چگونه آن را اصلاح کنید، چه باید کرد؟</li><li>بهترین مکان برای پرسش و پاسخ درباره مسائل برنامه‌نویسی کجاست؟</li><li>چگونه می‌توان <strong>Long Parameter List</strong> را کاهش داد؟</li><li>چگونه می‌توان یک <strong>Large Method</strong> را بازسازی کرد؟</li><li>حداکثر طول یک متد تمیز چقدر است؟</li><li><strong>Cyclomatic Complexity</strong> برنامه باید در چه بازه‌ای باشد؟</li><li>مقدار ایده‌آل برای <strong>Depth of Inheritance</strong> چقدر است؟</li><li><strong>Speculative Generality</strong> چیست و چه باید کرد؟</li><li>هنگام مواجهه با <strong>Oddball Solution</strong> چه اقدامی باید انجام داد؟</li><li>هنگام مواجهه با <strong>Temporary Field</strong> چه بازسازی‌هایی انجام می‌دهید؟</li><li><strong>Data Clump</strong> چیست و چه باید کرد؟</li><li>کد بد <strong>Refused Bequest</strong> را توضیح دهید.</li><li><strong>Message Chains</strong> چه قانونی را نقض می‌کنند؟</li><li>چگونه باید <strong>Message Chains</strong> را بازسازی کرد؟</li><li><strong>Feature Envy</strong> چیست؟</li><li>چگونه می‌توان <strong>Feature Envy</strong> را حذف کرد؟</li><li>از چه الگویی می‌توان برای جایگزینی <strong>Switch Statements</strong> که اشیاء برمی‌گردانند، استفاده کرد؟</li><li>چگونه می‌توان <strong>If Statements</strong> که اشیاء برمی‌گردانند را بازسازی کرد؟</li><li><strong>Solution Sprawl</strong> چیست و چگونه باید رفع شود؟</li><li>اصل <strong>Tell, Don’t Ask!</strong> را توضیح دهید.</li><li>اصل <strong>Tell, Don’t Ask!</strong> چگونه نقض می‌شود؟</li><li>علائم <strong>Shotgun Surgery</strong> چیست و چگونه باید رفع شود؟</li><li><strong>Lost Intent</strong> چیست و چه باید کرد؟</li><li>چگونه حلقه‌ها را بازسازی کنیم و چه فوایدی دارد؟</li><li><strong>Divergent Change</strong> چیست و چگونه بازسازی می‌شود؟</li></ol> <p><strong>مطالعه بیشتر :</strong></p><ul> <li><em>Refactoring - Improving the Design of Existing Code</em> by Martin Fowler &amp; Kent Beck</li><li><a href="https://refactoring.guru/refactoring">refactoring.guru</a> – سایت خوب برای <strong>Design Patterns</strong> و <strong>Code Smells</strong></li><li><a href="https://www.dofactory.com/net/design-patterns">dofactory.com</a> – سایت عالی برای <strong>C# Design Patterns</strong></li></ul> </article><nav class="chapter-single-next-nav"> <a href="/Gitab/books/book2/Book/14/Refactoring-CSharp-Code-Implementing-Design-Patterns/" class="btn-next-chapter-action" id="nextChapterBtn" data-hub="/Gitab/books/book2/"> <span class="next-btn-text">فصل بعدی: ریفکتورینگ کدهای سی‌شارپ — پیاده‌سازی الگوهای طراحی</span> <span class="next-btn-arrow">←</span> </a> </nav></div> <button class="fab-back-to-top" id="backToTopBtn" type="button" aria-label="رفتن به بالای صفحه" title="رفتن به بالا"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"> <polyline points="18 15 12 9 6 15"></polyline> </svg> </button></main> <footer class="footer-minimal"><div class="footer-container"> <div class="footer-top-row"><div class="footer-brand-side"> <a href="/Gitab/" class="footer-brand-anchor"> <img src="/Gitab/icone/logo.svg" alt="Gitab" width="28" height="28" loading="lazy" decoding="async"> <span class="footer-brand-title">گیتاب (Gitab)</span> </a> <p class="footer-tagline"> پلتفرم آزاد و مستقل برای ترجمهٔ دقیق و روان کتاب‌های مرجع مهندسی نرم‌افزار. </p></div> <div class="footer-nav-cols"><div class="footer-nav-col"> <span class="footer-nav-heading">موضوعات</span><ul class="footer-nav-list"> <li><a href="/Gitab/books/list-books/?cat=csharp">سی‌شارپ و دات‌نت</a></li><li><a href="/Gitab/books/list-books/?cat=clean-code">کد تمیز و بازآفرینی</a></li><li><a href="/Gitab/books/list-books/?cat=architecture">معماری و طراحی دامنه</a></li><li><a href="/Gitab/books/list-books/?cat=system">لینوکس و خط فرمان</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">بخش‌های سایت</span><ul class="footer-nav-list"> <li><a href="/Gitab/">صفحه اصلی</a></li><li><a href="/Gitab/books/list-books/">کتابخانه کامل</a></li><li><a href="/Gitab/courses/">دوره‌های آموزشی</a></li><li><a href="/Gitab/translator.html">تالار مترجمین</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">مشارکت و جامعه</span><ul class="footer-nav-list"> <li><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer">راهنمای همکاری در ترجمه</a></li><li><a href="https://github.com/hheydarian/Gitab/issues" target="_blank" rel="noopener noreferrer">پیشنهاد کتاب یا گزارش خطا</a></li></ul> </div></div> </div><div class="footer-bottom-line"> <span>© <span id="y">2026</span> Gitab — توسعه‌یافته برای جامعهٔ مهندسان نرم‌افزار ایرانی</span></div> </div></footer> <script>
   (() => {
     const root = document.documentElement;
     const btn = document.getElementById('themeToggle');
+    const sunIcon = btn ? btn.querySelector('.icon-sun') : null;
+    const moonIcon = btn ? btn.querySelector('.icon-moon') : null;
     const KEY = 'gitab-theme';
 
-    function updateTheme(s) {
-      root.setAttribute('data-theme', s);
-      const mode = s;  // فقط `dark` یا `light` خواهد بود
+    function updateTheme(mode) {
+      root.setAttribute('data-theme', mode);
       root.dataset.colorMode = mode;
-      btn.dataset.icon = mode === 'dark' ? 'moon' : 'sun';
+      if (sunIcon && moonIcon) {
+        if (mode === 'dark') {
+          sunIcon.style.display = 'inline-block';
+          moonIcon.style.display = 'none';
+        } else {
+          sunIcon.style.display = 'none';
+          moonIcon.style.display = 'inline-block';
+        }
+      }
     }
 
-    // وضعیت تم ذخیره شده از localStorage
-    let saved = localStorage.getItem(KEY) || 'light'; // پیش‌فرض روشن
+    let saved = 'dark';
+    try { saved = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
     updateTheme(saved);
 
-    // تنظیم مجدد تم هنگام تغییر وضعیت دکمه
-    btn.addEventListener('click', () => {
-      const current = localStorage.getItem(KEY) || 'light';
-      const next = current === 'dark' ? 'light' : 'dark';  // فقط دو حالت: تاریک و روشن
-      localStorage.setItem(KEY, next);
-      updateTheme(next);
-    });
+    if (btn) {
+      btn.addEventListener('click', () => {
+        let current = 'dark';
+        try { current = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+        const next = current === 'dark' ? 'light' : 'dark';
+        try { localStorage.setItem(KEY, next); } catch (e) {}
+        updateTheme(next);
+      });
+    }
 
-    // هنگام بارگذاری صفحه
     document.addEventListener('DOMContentLoaded', () => {
-      updateTheme(localStorage.getItem(KEY) || 'light');
+      let mode = 'dark';
+      try { mode = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+      updateTheme(mode);
+      const yearSpan = document.getElementById('y');
+      if (yearSpan) yearSpan.textContent = new Date().getFullYear();
     });
+
+    const mobBtn = document.getElementById('mobileMenuBtn');
+    const mobDrawer = document.getElementById('mobileDrawer');
+    if (mobBtn && mobDrawer) {
+      const setDrawerOpen = (open) => {
+        mobDrawer.classList.toggle('open', open);
+        mobBtn.classList.toggle('is-open', open);
+        mobBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        mobBtn.setAttribute('aria-label', open ? 'بستن منو' : 'باز کردن منو');
+        mobDrawer.setAttribute('aria-hidden', open ? 'false' : 'true');
+      };
+
+      mobBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        setDrawerOpen(!mobDrawer.classList.contains('open'));
+      });
+
+      mobDrawer.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => setDrawerOpen(false));
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && mobDrawer.classList.contains('open')) {
+          setDrawerOpen(false);
+        }
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!mobDrawer.contains(e.target) && !mobBtn.contains(e.target)) {
+          setDrawerOpen(false);
+        }
+      });
+    }
+
+    if ('serviceWorker' in navigator) {
+      const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+      if (isLocalhost) {
+        navigator.serviceWorker.getRegistrations().then(regs => {
+          for (const reg of regs) reg.unregister();
+        });
+        if ('caches' in window) {
+          caches.keys().then(names => {
+            for (const name of names) caches.delete(name);
+          });
+        }
+      } else {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/Gitab/sw.js').catch(() => {});
+        });
+      }
+    }
   })();
-</script>
-
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-  <script>hljs.highlightAll();</script>
-
-  <script>
+  </script> <script>
   document.querySelectorAll('pre code').forEach(block => {
+    const pre = block.parentNode;
+    if (!pre || pre.querySelector('.copy-btn')) return;
+
+    const copySvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
+    const okSvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+
     const btn = document.createElement('button');
     btn.className = 'copy-btn';
-
-    const icon = document.createElement('img');
-    icon.src = "/Gitab/icone/copy.svg";
-    icon.alt = 'Copy';
-    btn.appendChild(icon);
-
-    block.parentNode.insertBefore(btn, block);
+    btn.setAttribute('aria-label', 'کپی کد');
+    btn.setAttribute('title', 'کپی کد');
+    btn.setAttribute('type', 'button');
+    btn.innerHTML = copySvg;
+    pre.appendChild(btn);
 
     btn.addEventListener('click', async () => {
-      await navigator.clipboard.writeText(block.textContent);
-      btn.classList.add('copied');
-      setTimeout(() => btn.classList.remove('copied'), 1500);
-    });
-  });
-  </script>
-
-  <script>
-  document.body.dataset.page = window.location.pathname;
-
-  const menuBtn = document.querySelector(".menu-toggle");
-  const nav = document.querySelector(".nav");
-
-  if (menuBtn && nav) {
-    menuBtn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      nav.classList.toggle("show");
-    });
-
-    document.addEventListener("click", (e) => {
-      const clickedInsideNav = nav.contains(e.target);
-      const clickedMenuButton = menuBtn.contains(e.target);
-      if (!clickedInsideNav && !clickedMenuButton) {
-        nav.classList.remove("show");
+      try {
+        await navigator.clipboard.writeText(block.textContent);
+        btn.classList.add('copied');
+        btn.innerHTML = okSvg;
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          btn.innerHTML = copySvg;
+        }, 1800);
+      } catch (err) {
+        console.error('Copy failed:', err);
       }
     });
-  }
-  </script>
-
-  <script>
-    document.getElementById('y').textContent = new Date().getFullYear();
-  </script>
-  <script>
-document.getElementById("openDonate").addEventListener("click", () => {
-  document.getElementById("donateModal").style.display = "block";
-});
-document.getElementById("closeDonate").addEventListener("click", () => {
-  document.getElementById("donateModal").style.display = "none";
-});
-document.querySelectorAll(".copy-btn").forEach(btn => {
-  btn.addEventListener("click", () => {
-    navigator.clipboard.writeText(btn.dataset.copy);
-  
-    setTimeout(() => (btn.textContent = "کپی"), 2000);
   });
-});
-</script>
+  </script> <script>
+  (() => {
+    const article = document.getElementById('chapterArticle');
+    if (!article) return;
 
-</body>
-</html>
+    const progressBar = document.getElementById('readingProgressBar');
+    if (progressBar) {
+      window.addEventListener('scroll', () => {
+        const docElem = document.documentElement;
+        const totalHeight = docElem.scrollHeight - docElem.clientHeight;
+        if (totalHeight > 0) {
+          const progress = (window.pageYOffset / totalHeight) * 100;
+          progressBar.style.width = Math.min(100, Math.max(0, progress)) + '%';
+        }
+      }, { passive: true });
+    }
+
+    const btt = document.getElementById('backToTopBtn');
+    if (btt) {
+      window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 250) {
+          btt.classList.add('visible');
+        } else {
+          btt.classList.remove('visible');
+        }
+      }, { passive: true });
+
+      btt.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+
+    article.querySelectorAll('img').forEach(img => {
+      if (!img.hasAttribute('loading')) img.loading = 'lazy';
+      if (!img.hasAttribute('decoding')) img.decoding = 'async';
+      const parent = img.parentElement;
+      if (parent && parent.tagName === 'P') {
+        parent.style.textAlign = 'center';
+      }
+
+      img.addEventListener('error', function() {
+        const src = this.getAttribute('src');
+        if (src && src.includes('assets/image/')) {
+          const parts = src.split('assets/image/');
+          const corrected = '/Gitab/books/book2/assets/image/' + parts[1];
+          if (this.src !== corrected) {
+            this.src = corrected;
+          }
+        }
+      });
+    });
+
+    article.querySelectorAll('p').forEach(p => {
+      const trimmed = p.innerText.trim();
+      if (trimmed.startsWith('💡') || trimmed.startsWith('نکته:')) {
+        p.classList.add('react-callout', 'callout-tip');
+      } else if (trimmed.startsWith('⚠️') || trimmed.startsWith('هشدار:')) {
+        p.classList.add('react-callout', 'callout-warning');
+      } else if (trimmed.startsWith('📌') || trimmed.startsWith('مهم:')) {
+        p.classList.add('react-callout', 'callout-important');
+      } else if (trimmed.startsWith('🔹') || trimmed.startsWith('🔸')) {
+        p.classList.add('react-callout', 'callout-note');
+      }
+    });
+  })();
+  </script> <script type="speculationrules">{"prefetch":[{"where":{"and":[{"href_matches":"/Gitab/*"},{"not":{"href_matches":"/Gitab/downloads/*"}},{"not":{"selector_matches":"[download], [target='_blank']"}}]},"eagerness":"moderate"}]}</script> <script>
+  (() => {
+    if (window.HTMLScriptElement && HTMLScriptElement.supports && HTMLScriptElement.supports('speculationrules')) return;
+    const seen = new Set([window.location.href]);
+    let count = 0;
+    const prefetchLink = (e) => {
+      if (count >= 12) return;
+      const a = e.target && e.target.closest ? e.target.closest('header a, .chapter-single-next-nav a, .syllabus-chapter-item a, .btn-hero-read, .btn-card-read') : null;
+      if (!a || !a.href || a.hasAttribute('download') || a.target === '_blank') return;
+      if (a.origin !== window.location.origin || a.pathname.includes('/downloads/')) return;
+      const clean = a.href.split('#')[0];
+      if (!clean || seen.has(clean)) return;
+      seen.add(clean);
+      count++;
+      const l = document.createElement('link');
+      l.rel = 'prefetch';
+      l.href = clean;
+      document.head.appendChild(l);
+    };
+    document.addEventListener('pointerenter', prefetchLink, { capture: true, passive: true });
+    document.addEventListener('touchstart', prefetchLink, { capture: true, passive: true });
+  })();
+  </script></body></html>

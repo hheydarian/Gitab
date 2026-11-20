@@ -1,106 +1,19 @@
-
-
-<!doctype html>
-<html lang="fa" dir="rtl">
-<head>
-  <meta charset="utf-8">
-  <link rel="icon" type="image/png" href="/Gitab/favicon.png">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>محیط</title>
-  <meta name="description" content="ترجمه‌های فارسی کتاب‌های فنی — سریع، مینیمال و قابل اتکا.">
-
-  <!-- استایل‌ها -->
-  <link rel="stylesheet" href="/Gitab/styles/main.css">
-  <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
-
-  <style>
-  @font-face {
-    font-family: 'Vazir';
-    src: url('/Gitab/fonts/Vazir-FD-WOL.ttf') format('truetype');
-    font-display: swap;
-  }
-  @font-face {
-    font-family: "Lalezar";
-    src: url('fonts/Lalezar.ttf') format('truetype');
-    font-display: swap;
-}
-  body {
-    font-family: 'Vazir', sans-serif;
-  }
-  </style>
-</head>
-
-<body>
-  <!-- هدر مشترک -->
-  <header class="header">
-    <div class="container nav-wrap">
-      <a href="/Gitab/" class="brand">
-        <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="26" height="26">
-        <span>Gitab</span>
-      </a>
-
-       <nav class="nav">
-         <a href="/Gitab/" >خانه</a>
-         <a href="/Gitab/books/list-books" >کتاب‌ها</a>
-         <a href="/Gitab/giter.html" >دوره ها</a>
-          <!-- 
-         <a href="/Gitab/translator.html" >مترجمین</a>
-           -->
-       </nav>
-
-      <div class="nav-actions">
-        <button id="themeToggle" class="icon-btn theme-btn" data-icon="moon" aria-label="تغییر تم">
-          <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن">
-          <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک">
-        </button>
-
-        <a class="icon-btn" href="https://github.com/hheydarian/Gitab" target="_blank" title="GitHub">
-          <img src="/Gitab/icone/github.svg" alt="GitHub">
-        </a>
-
-        <!-- دکمه منو برای موبایل -->
-        <button class="menu-toggle" aria-label="منو">
-          <img src="/Gitab/icone/menu.svg" alt="menu">
-        </button>
-      </div>
-    </div>
-  </header>
-
-  
-  <main class="site-main book-page">
-    <h1>۱۱ – محیط (Environment)</h1>
-<p>همان‌طور که پیش‌تر گفتیم، شِل در طول یک نشست (Session) مجموعه‌ای از اطلاعات را نگه می‌دارد که به آن «محیط» یا Environment گفته می‌شود. داده‌هایی که در این محیط ذخیره می‌شوند، توسط برنامه‌ها برای تشخیص جزئیاتی از پیکربندی سیستم استفاده می‌شوند.<br>
-در حالی که بیشتر برنامه‌ها تنظیمات خود را در فایل‌های پیکربندی (configuration files) ذخیره می‌کنند، برخی برنامه‌ها برای تنظیم رفتارشان از مقادیر ذخیره‌شده در محیط نیز استفاده می‌کنند. دانستن این موضوع به ما اجازه می‌دهد تجربهٔ کار با شِل را مطابق سلیقهٔ خود سفارشی کنیم.</p>
-<p>در این فصل با دستورات زیر کار خواهیم کرد:</p>
-<ul>
-<li><strong>printenv</strong> – نمایش تمام یا بخشی از محیط</li>
-<li><strong>set</strong> – تنظیم گزینه‌های شِل</li>
-<li><strong>export</strong> – صادر کردن متغیرهای محیطی برای استفاده در برنامه‌های بعدی</li>
-<li><strong>alias</strong> – ایجاد نام مستعار برای یک دستور</li>
-</ul>
-<hr>
-<h3>چه چیزهایی در محیط ذخیره می‌شوند؟</h3>
-<p>شِل دو نوع دادهٔ اصلی را در محیط ذخیره می‌کند، هرچند در bash تفاوت میان آن‌ها تقریباً از بین رفته است:</p>
-<ul>
-<li><strong>متغیرهای محیطی (Environment Variables)</strong></li>
-<li><strong>متغیرهای شِل (Shell Variables)</strong></li>
-</ul>
-<p>متغیرهای شِل داده‌هایی هستند که خود bash آن‌ها را می‌سازد، در حالی که متغیرهای محیطی شامل سایر مقادیر هستند.<br>
-علاوه بر این متغیرها، شِل داده‌های برنامه‌نویسی دیگری مانند <strong>aliasها</strong> و <strong>توابع شِل (Shell Functions)</strong> را نیز نگه می‌دارد.<br>
-در فصل ۵ دربارهٔ alias صحبت کردیم و توابع شِل را در بخش چهارم کتاب بررسی خواهیم کرد.</p>
-<hr>
-<h3>بررسی محیط</h3>
-<p>برای مشاهدهٔ محتویات محیط می‌توان از دستور داخلی <strong>set</strong> در bash یا برنامهٔ <strong>printenv</strong> استفاده کرد.</p>
-<ul>
-<li>دستور <code>set</code> هم متغیرهای شِل و هم متغیرهای محیطی را نشان می‌دهد.</li>
-<li>دستور <code>printenv</code> فقط متغیرهای محیطی را نمایش می‌دهد.</li>
-</ul>
-<p>از آن‌جا که فهرست این متغیرها طولانی است، بهتر است خروجی را به دستور <strong>less</strong> ارسال کنیم:</p>
-<pre class="hljs"><code>[me@linuxbox ~]$ <span class="hljs-built_in">printenv</span> | less
-</code></pre>
-<p>با اجرای این دستور، خروجی چیزی شبیه زیر خواهد بود:</p>
-<pre class="hljs"><code>KDE_MULTIHEAD=<span class="hljs-literal">false</span>
+<!doctype html><html lang="fa" dir="rtl"> <head><script>
+    if (window.location.pathname.startsWith('/gitab/')) {
+      window.location.replace(window.location.pathname.replace(/^\/gitab\//i, '/Gitab/') + window.location.search + window.location.hash);
+    }
+    (() => {
+      try {
+        const t = localStorage.getItem('gitab-theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', t);
+        document.documentElement.dataset.colorMode = t;
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        document.documentElement.dataset.colorMode = 'dark';
+      }
+    })();
+  </script> <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5"> <title>محیط</title><meta name="description" content="محیط — مطالعه آنلاین و رایگان از کتاب «خط فرمان لینوکس (TLCL)» (The Linux Command Line) اثر William Shotts با ترجمه هیمن صادقی در گیتاب."> <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"><meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"> <meta name="theme-color" content="#090d16"><meta name="referrer" content="strict-origin-when-cross-origin"> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https:; frame-src https://www.youtube.com https://www.youtube-nocookie.com https://maps.google.com https://www.google.com; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self';"><link rel="icon" type="image/png" href="/Gitab/favicon.png"> <link rel="canonical" href="https://hheydarian.github.io/Gitab/books/book5/Book/11/chapter11/"><link rel="alternate" hreflang="fa" href="https://hheydarian.github.io/Gitab/books/book5/Book/11/chapter11/"> <link rel="alternate" hreflang="x-default" href="https://hheydarian.github.io/Gitab/books/book5/Book/11/chapter11/"><link rel="alternate" type="text/plain" title="LLMs.txt" href="/Gitab/llms.txt"> <link rel="sitemap" type="application/xml" title="Sitemap" href="/Gitab/sitemap.xml"><meta property="og:locale" content="fa_IR"> <meta property="og:type" content="article"><meta property="og:site_name" content="گیتاب | Gitab"> <meta property="og:title" content="محیط"><meta property="og:description" content="محیط — مطالعه آنلاین و رایگان از کتاب «خط فرمان لینوکس (TLCL)» (The Linux Command Line) اثر William Shotts با ترجمه هیمن صادقی در گیتاب."> <meta property="og:url" content="https://hheydarian.github.io/Gitab/books/book5/Book/11/chapter11/"><meta property="og:image" content="https://hheydarian.github.io/Gitab/images/the-linux-command-line/Cover.jpg"> <meta property="og:image:alt" content="محیط"><meta name="twitter:card" content="summary_large_image"> <meta name="twitter:title" content="محیط"><meta name="twitter:description" content="محیط — مطالعه آنلاین و رایگان از کتاب «خط فرمان لینوکس (TLCL)» (The Linux Command Line) اثر William Shotts با ترجمه هیمن صادقی در گیتاب."> <meta name="twitter:image" content="https://hheydarian.github.io/Gitab/images/the-linux-command-line/Cover.jpg"><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://hheydarian.github.io/Gitab/#organization","name":"گیتاب | Gitab","alternateName":"Gitab","url":"https://hheydarian.github.io/Gitab/","logo":{"@type":"ImageObject","url":"https://hheydarian.github.io/Gitab/favicon.png"},"sameAs":["https://github.com/hheydarian/Gitab"]},{"@type":"WebSite","@id":"https://hheydarian.github.io/Gitab/#website","url":"https://hheydarian.github.io/Gitab/","name":"گیتاب | Gitab","inLanguage":"fa-IR","publisher":{"@id":"https://hheydarian.github.io/Gitab/#organization"},"potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://hheydarian.github.io/Gitab/books/list-books/?q={search_term_string}"},"query-input":"required name=search_term_string"}},{"@type":"WebPage","@id":"https://hheydarian.github.io/Gitab/books/book5/Book/11/chapter11/#webpage","url":"https://hheydarian.github.io/Gitab/books/book5/Book/11/chapter11/","name":"محیط","description":"محیط — مطالعه آنلاین و رایگان از کتاب «خط فرمان لینوکس (TLCL)» (The Linux Command Line) اثر William Shotts با ترجمه هیمن صادقی در گیتاب.","inLanguage":"fa-IR","isPartOf":{"@id":"https://hheydarian.github.io/Gitab/#website"}},{"@type":"TechArticle","headline":"محیط","description":"محیط — مطالعه آنلاین و رایگان از کتاب «خط فرمان لینوکس (TLCL)» (The Linux Command Line) اثر William Shotts با ترجمه هیمن صادقی در گیتاب.","url":"https://hheydarian.github.io/Gitab/books/book5/Book/11/chapter11/","inLanguage":"fa-IR","isAccessibleForFree":true,"author":{"@type":"Person","name":"William Shotts"},"translator":{"@type":"Person","name":"هیمن صادقی"},"isPartOf":{"@type":"Book","name":"خط فرمان لینوکس (TLCL)","alternateName":"The Linux Command Line","url":"https://hheydarian.github.io/Gitab/books/book5/"}}]}</script> <link rel="preload" href="/Gitab/fonts/Vazirmatn.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/Gitab/styles/main.css?v=2.4" as="style"> <link rel="preload" href="/Gitab/styles/gitab-modern.css?v=2.5" as="style"><style>@font-face{font-family:'Lalezar';src:url('/Gitab/fonts/Lalezar.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}@font-face{font-family:'Vazirmatn';src:url('/Gitab/fonts/Vazirmatn.woff2') format('woff2');font-weight:100 900;font-style:normal;font-display:swap}html,body,button,input,optgroup,select,textarea,.filter-pill{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}input::placeholder,textarea::placeholder{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}</style> <link rel="stylesheet" href="/Gitab/styles/main.css?v=2.4"><link rel="stylesheet" href="/Gitab/styles/gitab-modern.css?v=2.5"> <link rel="stylesheet" href="/Gitab/styles/vendor/github-dark.min.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="/Gitab/styles/vendor/github-dark.min.css"></noscript></head> <body><header class="header"> <div class="container nav-wrap"><a href="/Gitab/" class="brand" aria-label="صفحه اصلی گیتاب"> <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="30" height="30" decoding="async"> <span class="brand-text">Gitab</span> </a> <nav class="nav" id="mainNav"><a href="/Gitab/" >خانه</a> <a href="/Gitab/books/list-books" aria-current="page">کتاب‌ها</a> <a href="/Gitab/courses/" >دوره‌ها</a> <a href="/Gitab/translator.html" >مترجمین</a></nav> <div class="nav-actions"><button id="themeToggle" class="theme-toggle-btn" aria-label="تغییر تم" title="تغییر تم"> <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن" width="18" height="18" decoding="async" style="display:none"> <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک" width="18" height="18" decoding="async"> </button> <a class="btn-github-pill" href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" title="مشاهده سورس گیتاب در گیت‌هاب"> <img src="/Gitab/icone/github.svg" alt="GitHub" width="16" height="16" decoding="async"> <span>گیت‌هاب</span> </a> <button class="mobile-menu-btn" id="mobileMenuBtn" type="button" aria-label="باز کردن منو" aria-expanded="false"> <svg class="mob-icon-open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="4" y1="7" x2="20" y2="7"></line> <line x1="4" y1="12" x2="20" y2="12"></line> <line x1="4" y1="17" x2="14" y2="17"></line> </svg> <svg class="mob-icon-close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="18" y1="6" x2="6" y2="18"></line> <line x1="6" y1="6" x2="18" y2="18"></line> </svg> </button></div> </div><div class="mobile-drawer" id="mobileDrawer" aria-hidden="true"> <div class="mobile-drawer-inner"><div class="mobile-drawer-section-label">ناوبری سریع</div><nav class="mobile-drawer-links" aria-label="منوی موبایل"> <a href="/Gitab/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M3 10.5 12 3l9 7.5"></path> <path d="M5 9.5V20a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V9.5"></path> </svg> </span> <span class="mob-nav-text">صفحه نخست</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/books/list-books" class="mobile-drawer-link active" aria-current="page"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path> </svg> </span> <span class="mob-nav-text">کتابخانه و فهرست کتاب‌ها</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/courses/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path> <path d="M6 12v5c3 3 9 3 12 0v-5"></path> </svg> </span> <span class="mob-nav-text">دوره‌های آموزشی</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/translator.html" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path> <circle cx="9" cy="7" r="4"></circle> <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path> <path d="M16 3.13a4 4 0 0 1 0 7.75"></path> </svg> </span> <span class="mob-nav-text">مترجمین و همکاران</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> </nav><div class="mobile-drawer-divider"></div><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" class="mobile-drawer-link mobile-drawer-gh"> <span class="mob-nav-icon" aria-hidden="true"> <img src="/Gitab/icone/github.svg" alt="" width="17" height="17" loading="lazy" decoding="async"> </span> <span class="mob-nav-text">مخزن گیت‌هاب پروژه</span> <span class="mob-nav-ext" aria-hidden="true">↗</span> </a> </div></div> </header><div class="reading-progress-track"> <div class="reading-progress-fill" id="readingProgressBar"></div></div> <main class="site-main chapter-reading-page"><div class="chapter-page-wrapper"> <nav class="chapter-clean-breadcrumb" aria-label="مسیر راهنما" dir="rtl"><a href="/Gitab/">خانه</a> <span class="bc-sep" aria-hidden="true">/</span> <a href="/Gitab/books/list-books/">کتاب‌ها</a> <span class="bc-sep" aria-hidden="true">/</span> <a href="/Gitab/books/book5/"><bdi>خط فرمان لینوکس</bdi></a> <span class="bc-sep" aria-hidden="true">/</span> <span class="bc-current-leaf"><bdi>محیط</bdi></span></nav> <article class="chapter-prose-container markdown-body" id="chapterArticle" dir="rtl"><h1>۱۱ – محیط (Environment)</h1><p>همان‌طور که پیش‌تر گفتیم، شِل در طول یک نشست (Session) مجموعه‌ای از اطلاعات را نگه می‌دارد که به آن «محیط» یا Environment گفته می‌شود. داده‌هایی که در این محیط ذخیره می‌شوند، توسط برنامه‌ها برای تشخیص جزئیاتی از پیکربندی سیستم استفاده می‌شوند.<br> در حالی که بیشتر برنامه‌ها تنظیمات خود را در فایل‌های پیکربندی (configuration files) ذخیره می‌کنند، برخی برنامه‌ها برای تنظیم رفتارشان از مقادیر ذخیره‌شده در محیط نیز استفاده می‌کنند. دانستن این موضوع به ما اجازه می‌دهد تجربهٔ کار با شِل را مطابق سلیقهٔ خود سفارشی کنیم.</p><p>در این فصل با دستورات زیر کار خواهیم کرد:</p><ul> <li><strong>printenv</strong> – نمایش تمام یا بخشی از محیط</li><li><strong>set</strong> – تنظیم گزینه‌های شِل</li><li><strong>export</strong> – صادر کردن متغیرهای محیطی برای استفاده در برنامه‌های بعدی</li><li><strong>alias</strong> – ایجاد نام مستعار برای یک دستور</li></ul> <hr><h3>چه چیزهایی در محیط ذخیره می‌شوند؟</h3><p>شِل دو نوع دادهٔ اصلی را در محیط ذخیره می‌کند، هرچند در bash تفاوت میان آن‌ها تقریباً از بین رفته است:</p><ul> <li><strong>متغیرهای محیطی (Environment Variables)</strong></li><li><strong>متغیرهای شِل (Shell Variables)</strong></li></ul> <p>متغیرهای شِل داده‌هایی هستند که خود bash آن‌ها را می‌سازد، در حالی که متغیرهای محیطی شامل سایر مقادیر هستند.<br> علاوه بر این متغیرها، شِل داده‌های برنامه‌نویسی دیگری مانند <strong>aliasها</strong> و <strong>توابع شِل (Shell Functions)</strong> را نیز نگه می‌دارد.<br> در فصل ۵ دربارهٔ alias صحبت کردیم و توابع شِل را در بخش چهارم کتاب بررسی خواهیم کرد.</p><hr> <h3>بررسی محیط</h3><p>برای مشاهدهٔ محتویات محیط می‌توان از دستور داخلی <strong>set</strong> در bash یا برنامهٔ <strong>printenv</strong> استفاده کرد.</p><ul> <li>دستور <code>set</code> هم متغیرهای شِل و هم متغیرهای محیطی را نشان می‌دهد.</li><li>دستور <code>printenv</code> فقط متغیرهای محیطی را نمایش می‌دهد.</li></ul> <p>از آن‌جا که فهرست این متغیرها طولانی است، بهتر است خروجی را به دستور <strong>less</strong> ارسال کنیم:</p><pre class="hljs"><code>[me@linuxbox ~]$ <span class="hljs-built_in">printenv</span> | less
+</code></pre> <p>با اجرای این دستور، خروجی چیزی شبیه زیر خواهد بود:</p><pre class="hljs"><code>KDE_MULTIHEAD=<span class="hljs-literal">false</span>
 SSH_AGENT_PID=6666
 HOSTNAME=linuxbox
 GPG_AGENT_INFO=/tmp/gpg-PdOt7g/S.gpg-agent:6689:1
@@ -108,168 +21,19 @@ SHELL=/bin/bash
 TERM=xterm
 ...
 USER=me
-</code></pre>
-<p>در اینجا مجموعه‌ای از متغیرهای محیطی و مقادیرشان را می‌بینیم.<br>
-برای مثال، متغیر <strong>USER</strong> دارای مقدار <code>&quot;me&quot;</code> است.<br>
-می‌توانیم مقدار یک متغیر خاص را نیز با دستور زیر ببینیم:</p>
-<pre class="hljs"><code>[me@linuxbox ~]$ <span class="hljs-built_in">printenv</span> USER
+</code></pre> <p>در اینجا مجموعه‌ای از متغیرهای محیطی و مقادیرشان را می‌بینیم.<br> برای مثال، متغیر <strong>USER</strong> دارای مقدار <code>&quot;me&quot;</code> است.<br> می‌توانیم مقدار یک متغیر خاص را نیز با دستور زیر ببینیم:</p><pre class="hljs"><code>[me@linuxbox ~]$ <span class="hljs-built_in">printenv</span> USER
 me
-</code></pre>
-<p>اگر دستور <strong>set</strong> را بدون گزینه یا آرگومان اجرا کنیم، هم متغیرهای محیطی و شِل و هم توابع تعریف‌شده را نمایش می‌دهد.<br>
-برخلاف printenv، خروجی آن به‌صورت <strong>مرتب‌شده بر اساس حروف الفبا</strong> است:</p>
-<pre class="hljs"><code>[me@linuxbox ~]$ <span class="hljs-built_in">set</span> | less
-</code></pre>
-<p>همچنین می‌توان مقدار یک متغیر را با استفاده از <strong>echo</strong> مشاهده کرد:</p>
-<pre class="hljs"><code>[me@linuxbox ~]$ <span class="hljs-built_in">echo</span> <span class="hljs-variable">$HOME</span>
+</code></pre> <p>اگر دستور <strong>set</strong> را بدون گزینه یا آرگومان اجرا کنیم، هم متغیرهای محیطی و شِل و هم توابع تعریف‌شده را نمایش می‌دهد.<br> برخلاف printenv، خروجی آن به‌صورت <strong>مرتب‌شده بر اساس حروف الفبا</strong> است:</p><pre class="hljs"><code>[me@linuxbox ~]$ <span class="hljs-built_in">set</span> | less
+</code></pre> <p>همچنین می‌توان مقدار یک متغیر را با استفاده از <strong>echo</strong> مشاهده کرد:</p><pre class="hljs"><code>[me@linuxbox ~]$ <span class="hljs-built_in">echo</span> <span class="hljs-variable">$HOME</span>
 /home/me
-</code></pre>
-<p>یکی از اجزای محیط که نه <strong>set</strong> و نه <strong>printenv</strong> آن را نمایش نمی‌دهند، <strong>alias‌ها</strong> هستند.<br>
-برای دیدن آن‌ها، کافی است دستور <strong>alias</strong> را بدون هیچ آرگومانی اجرا کنید:</p>
-<pre class="hljs"><code>[me@linuxbox ~]$ <span class="hljs-built_in">alias</span>
+</code></pre> <p>یکی از اجزای محیط که نه <strong>set</strong> و نه <strong>printenv</strong> آن را نمایش نمی‌دهند، <strong>alias‌ها</strong> هستند.<br> برای دیدن آن‌ها، کافی است دستور <strong>alias</strong> را بدون هیچ آرگومانی اجرا کنید:</p><pre class="hljs"><code>[me@linuxbox ~]$ <span class="hljs-built_in">alias</span>
 <span class="hljs-built_in">alias</span> l.=<span class="hljs-string">&#x27;ls -d .* --color=tty&#x27;</span>
 <span class="hljs-built_in">alias</span> ll=<span class="hljs-string">&#x27;ls -l --color=tty&#x27;</span>
 <span class="hljs-built_in">alias</span> <span class="hljs-built_in">ls</span>=<span class="hljs-string">&#x27;ls --color=tty&#x27;</span>
 <span class="hljs-built_in">alias</span> vi=<span class="hljs-string">&#x27;vim&#x27;</span>
 <span class="hljs-built_in">alias</span> <span class="hljs-built_in">which</span>=<span class="hljs-string">&#x27;alias | /usr/bin/which --tty-only --read-alias --show-dot --show-tilde&#x27;</span>
-</code></pre>
-<hr>
-<h3>چند متغیر جالب</h3>
-<p>محیط شامل تعداد زیادی متغیر است. ممکن است محیط سیستم شما با این مثال تفاوت‌هایی داشته باشد،<br>
-اما معمولاً متغیرهای زیر را در بیشتر سیستم‌ها خواهید دید:</p>
-<table>
-<thead>
-<tr>
-<th>متغیر</th>
-<th>توضیح</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>DISPLAY</strong></td>
-<td>نام نمایشگر (Display) شما زمانی که در محیط گرافیکی کار می‌کنید. معمولاً مقدار آن <code>:0</code> است، یعنی اولین نمایشگر ایجادشده توسط X Server.</td>
-</tr>
-<tr>
-<td><strong>EDITOR</strong></td>
-<td>نام برنامه‌ای که برای ویرایش متن‌ها استفاده می‌شود.</td>
-</tr>
-<tr>
-<td><strong>SHELL</strong></td>
-<td>مسیر برنامهٔ شِل مورد استفاده (مثلاً <code>/bin/bash</code>).</td>
-</tr>
-<tr>
-<td><strong>HOME</strong></td>
-<td>مسیر پوشهٔ خانگی (home directory) شما.</td>
-</tr>
-<tr>
-<td><strong>LANG</strong></td>
-<td>زبان سیستم و ترتیب مرتب‌سازی (Collation Order) را مشخص می‌کند.</td>
-</tr>
-<tr>
-<td><strong>OLD_PWD</strong></td>
-<td>مسیر دایرکتوری کاری قبلی.</td>
-</tr>
-<tr>
-<td><strong>PAGER</strong></td>
-<td>برنامه‌ای که برای نمایش صفحه‌به‌صفحهٔ خروجی استفاده می‌شود (معمولاً <code>/usr/bin/less</code>).</td>
-</tr>
-<tr>
-<td><strong>PATH</strong></td>
-<td>فهرستی از مسیرهای جداشده با دونقطه <code>:</code> که هنگام اجرای یک دستور، سیستم در آن‌ها به دنبال فایل اجرایی می‌گردد.</td>
-</tr>
-<tr>
-<td><strong>PS1</strong></td>
-<td>رشتهٔ نمایش خط فرمان (Prompt String 1). می‌توان آن را کاملاً شخصی‌سازی کرد.</td>
-</tr>
-<tr>
-<td><strong>PWD</strong></td>
-<td>مسیر دایرکتوری کاری فعلی.</td>
-</tr>
-<tr>
-<td><strong>TERM</strong></td>
-<td>نوع ترمینال مورد استفاده. سیستم‌های شبه یونیکس از پروتکل‌های مختلفی پشتیبانی می‌کنند؛ این متغیر مشخص می‌کند کدام پروتکل برای شبیه‌ساز ترمینال شما استفاده شود.</td>
-</tr>
-<tr>
-<td><strong>TZ</strong></td>
-<td>منطقهٔ زمانی (Time Zone) شما را مشخص می‌کند. سیستم معمولاً ساعت داخلی را با زمان UTC نگه می‌دارد و زمان محلی را با توجه به این متغیر محاسبه می‌کند.</td>
-</tr>
-<tr>
-<td><strong>USER</strong></td>
-<td>نام کاربری فعلی شما.</td>
-</tr>
-</tbody>
-</table>
-<p>نگران نباشید اگر بعضی از این متغیرها در محیط شما وجود ندارند؛ مقدار آن‌ها بسته به توزیع لینوکس فرق می‌کند.</p>
-<hr>
-<h3>چگونه محیط ساخته می‌شود؟</h3>
-<p>وقتی وارد سیستم می‌شویم، برنامهٔ <strong>bash</strong> اجرا شده و مجموعه‌ای از اسکریپت‌های پیکربندی به نام <strong>startup files</strong> را می‌خواند.<br>
-این فایل‌ها محیط پیش‌فرض را تعریف می‌کنند که بین همهٔ کاربران مشترک است.<br>
-سپس فایل‌های آغازین مخصوص کاربر (در مسیر home) خوانده می‌شوند که محیط شخصی هر کاربر را تنظیم می‌کنند.</p>
-<p>دنبالهٔ دقیق خواندن این فایل‌ها بستگی به نوع نشست شِل دارد.<br>
-دو نوع نشست وجود دارد:</p>
-<ul>
-<li><strong>Login Shell Session</strong> (نشست ورود): زمانی که نام کاربری و رمز عبور درخواست می‌شود (مثلاً در کنسول مجازی).</li>
-<li><strong>Non-Login Shell Session</strong> (نشست غیرورود): زمانی که یک ترمینال در محیط گرافیکی باز می‌کنیم.</li>
-</ul>
-<hr>
-<h3>فایل‌های راه‌انداز در نشست‌های ورود (Login)</h3>
-<table>
-<thead>
-<tr>
-<th>فایل</th>
-<th>توضیح</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>/etc/profile</code></td>
-<td>اسکریپت پیکربندی عمومی برای همهٔ کاربران.</td>
-</tr>
-<tr>
-<td><code>~/.bash_profile</code></td>
-<td>فایل شخصی کاربر. می‌تواند تنظیمات عمومی را گسترش دهد یا بازنویسی کند.</td>
-</tr>
-<tr>
-<td><code>~/.bash_login</code></td>
-<td>اگر <code>~/.bash_profile</code> وجود نداشته باشد، bash این فایل را می‌خواند.</td>
-</tr>
-<tr>
-<td><code>~/.profile</code></td>
-<td>اگر هیچ‌کدام از دو فایل قبلی نباشند، bash این فایل را می‌خواند (در توزیع‌های مبتنی بر Debian مثل Ubuntu پیش‌فرض است).</td>
-</tr>
-</tbody>
-</table>
-<hr>
-<h3>فایل‌های راه‌انداز در نشست‌های غیرورود (Non-Login)</h3>
-<table>
-<thead>
-<tr>
-<th>فایل</th>
-<th>توضیح</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>/etc/bash.bashrc</code></td>
-<td>اسکریپت پیکربندی عمومی برای همهٔ کاربران.</td>
-</tr>
-<tr>
-<td><code>~/.bashrc</code></td>
-<td>فایل شخصی کاربر برای تنظیمات شِل. می‌تواند تنظیمات عمومی را بازنویسی کند.</td>
-</tr>
-</tbody>
-</table>
-<hr>
-<p>نشست‌های غیرورود علاوه بر خواندن این فایل‌ها، <strong>محیط را از فرآیند والد خود (معمولاً شِل ورود)</strong> به ارث می‌برند.</p>
-<p>می‌توانید در سیستم خود بررسی کنید کدام‌یک از این فایل‌ها وجود دارند.<br>
-از آن‌جا که بیشترشان با نقطه (<code>.</code>) شروع می‌شوند، یعنی فایل‌های <strong>مخفی</strong> هستند، باید هنگام مشاهده از گزینهٔ <code>-a</code> در دستور <code>ls</code> استفاده کنید:</p>
-<pre class="hljs"><code><span class="hljs-built_in">ls</span> -a ~
-</code></pre>
-<p>در میان این فایل‌ها، معمولاً <strong><code>~/.bashrc</code></strong> مهم‌ترین است،<br>
-زیرا تقریباً همیشه اجرا می‌شود — نشست‌های غیرورود آن را مستقیماً می‌خوانند<br>
-و بیشتر فایل‌های آغازین نشست‌های ورود هم طوری نوشته شده‌اند که این فایل را فراخوانی کنند.</p>
-<h3>داخل یک فایل راه‌انداز (Startup File) چه می‌گذرد؟</h3>
-<p>اگر به درون یک فایل معمولی <strong><code>.bash_profile</code></strong> (برای مثال در سیستم CentOS 4) نگاه کنیم، معمولاً چیزی شبیه این می‌بینیم:</p>
-<pre class="hljs"><code><span class="hljs-comment"># .bash_profile</span>
+</code></pre> <hr><h3>چند متغیر جالب</h3><p>محیط شامل تعداد زیادی متغیر است. ممکن است محیط سیستم شما با این مثال تفاوت‌هایی داشته باشد،<br> اما معمولاً متغیرهای زیر را در بیشتر سیستم‌ها خواهید دید:</p><table> <thead><tr> <th>متغیر</th><th>توضیح</th></tr> </thead><tbody> <tr><td><strong>DISPLAY</strong></td><td>نام نمایشگر (Display) شما زمانی که در محیط گرافیکی کار می‌کنید. معمولاً مقدار آن <code>:0</code> است، یعنی اولین نمایشگر ایجادشده توسط X Server.</td></tr> <tr><td><strong>EDITOR</strong></td><td>نام برنامه‌ای که برای ویرایش متن‌ها استفاده می‌شود.</td></tr> <tr><td><strong>SHELL</strong></td><td>مسیر برنامهٔ شِل مورد استفاده (مثلاً <code>/bin/bash</code>).</td></tr> <tr><td><strong>HOME</strong></td><td>مسیر پوشهٔ خانگی (home directory) شما.</td></tr> <tr><td><strong>LANG</strong></td><td>زبان سیستم و ترتیب مرتب‌سازی (Collation Order) را مشخص می‌کند.</td></tr> <tr><td><strong>OLD_PWD</strong></td><td>مسیر دایرکتوری کاری قبلی.</td></tr> <tr><td><strong>PAGER</strong></td><td>برنامه‌ای که برای نمایش صفحه‌به‌صفحهٔ خروجی استفاده می‌شود (معمولاً <code>/usr/bin/less</code>).</td></tr> <tr><td><strong>PATH</strong></td><td>فهرستی از مسیرهای جداشده با دونقطه <code>:</code> که هنگام اجرای یک دستور، سیستم در آن‌ها به دنبال فایل اجرایی می‌گردد.</td></tr> <tr><td><strong>PS1</strong></td><td>رشتهٔ نمایش خط فرمان (Prompt String 1). می‌توان آن را کاملاً شخصی‌سازی کرد.</td></tr> <tr><td><strong>PWD</strong></td><td>مسیر دایرکتوری کاری فعلی.</td></tr> <tr><td><strong>TERM</strong></td><td>نوع ترمینال مورد استفاده. سیستم‌های شبه یونیکس از پروتکل‌های مختلفی پشتیبانی می‌کنند؛ این متغیر مشخص می‌کند کدام پروتکل برای شبیه‌ساز ترمینال شما استفاده شود.</td></tr> <tr><td><strong>TZ</strong></td><td>منطقهٔ زمانی (Time Zone) شما را مشخص می‌کند. سیستم معمولاً ساعت داخلی را با زمان UTC نگه می‌دارد و زمان محلی را با توجه به این متغیر محاسبه می‌کند.</td></tr> <tr><td><strong>USER</strong></td><td>نام کاربری فعلی شما.</td></tr> </tbody></table> <p>نگران نباشید اگر بعضی از این متغیرها در محیط شما وجود ندارند؛ مقدار آن‌ها بسته به توزیع لینوکس فرق می‌کند.</p><hr> <h3>چگونه محیط ساخته می‌شود؟</h3><p>وقتی وارد سیستم می‌شویم، برنامهٔ <strong>bash</strong> اجرا شده و مجموعه‌ای از اسکریپت‌های پیکربندی به نام <strong>startup files</strong> را می‌خواند.<br> این فایل‌ها محیط پیش‌فرض را تعریف می‌کنند که بین همهٔ کاربران مشترک است.<br> سپس فایل‌های آغازین مخصوص کاربر (در مسیر home) خوانده می‌شوند که محیط شخصی هر کاربر را تنظیم می‌کنند.</p><p>دنبالهٔ دقیق خواندن این فایل‌ها بستگی به نوع نشست شِل دارد.<br> دو نوع نشست وجود دارد:</p><ul> <li><strong>Login Shell Session</strong> (نشست ورود): زمانی که نام کاربری و رمز عبور درخواست می‌شود (مثلاً در کنسول مجازی).</li><li><strong>Non-Login Shell Session</strong> (نشست غیرورود): زمانی که یک ترمینال در محیط گرافیکی باز می‌کنیم.</li></ul> <hr><h3>فایل‌های راه‌انداز در نشست‌های ورود (Login)</h3><table> <thead><tr> <th>فایل</th><th>توضیح</th></tr> </thead><tbody> <tr><td><code>/etc/profile</code></td><td>اسکریپت پیکربندی عمومی برای همهٔ کاربران.</td></tr> <tr><td><code>~/.bash_profile</code></td><td>فایل شخصی کاربر. می‌تواند تنظیمات عمومی را گسترش دهد یا بازنویسی کند.</td></tr> <tr><td><code>~/.bash_login</code></td><td>اگر <code>~/.bash_profile</code> وجود نداشته باشد، bash این فایل را می‌خواند.</td></tr> <tr><td><code>~/.profile</code></td><td>اگر هیچ‌کدام از دو فایل قبلی نباشند، bash این فایل را می‌خواند (در توزیع‌های مبتنی بر Debian مثل Ubuntu پیش‌فرض است).</td></tr> </tbody></table> <hr><h3>فایل‌های راه‌انداز در نشست‌های غیرورود (Non-Login)</h3><table> <thead><tr> <th>فایل</th><th>توضیح</th></tr> </thead><tbody> <tr><td><code>/etc/bash.bashrc</code></td><td>اسکریپت پیکربندی عمومی برای همهٔ کاربران.</td></tr> <tr><td><code>~/.bashrc</code></td><td>فایل شخصی کاربر برای تنظیمات شِل. می‌تواند تنظیمات عمومی را بازنویسی کند.</td></tr> </tbody></table> <hr><p>نشست‌های غیرورود علاوه بر خواندن این فایل‌ها، <strong>محیط را از فرآیند والد خود (معمولاً شِل ورود)</strong> به ارث می‌برند.</p><p>می‌توانید در سیستم خود بررسی کنید کدام‌یک از این فایل‌ها وجود دارند.<br> از آن‌جا که بیشترشان با نقطه (<code>.</code>) شروع می‌شوند، یعنی فایل‌های <strong>مخفی</strong> هستند، باید هنگام مشاهده از گزینهٔ <code>-a</code> در دستور <code>ls</code> استفاده کنید:</p><pre class="hljs"><code><span class="hljs-built_in">ls</span> -a ~
+</code></pre> <p>در میان این فایل‌ها، معمولاً <strong><code>~/.bashrc</code></strong> مهم‌ترین است،<br> زیرا تقریباً همیشه اجرا می‌شود — نشست‌های غیرورود آن را مستقیماً می‌خوانند<br> و بیشتر فایل‌های آغازین نشست‌های ورود هم طوری نوشته شده‌اند که این فایل را فراخوانی کنند.</p><h3>داخل یک فایل راه‌انداز (Startup File) چه می‌گذرد؟</h3><p>اگر به درون یک فایل معمولی <strong><code>.bash_profile</code></strong> (برای مثال در سیستم CentOS 4) نگاه کنیم، معمولاً چیزی شبیه این می‌بینیم:</p><pre class="hljs"><code><span class="hljs-comment"># .bash_profile</span>
 
 <span class="hljs-comment"># Get the aliases and functions</span>
 <span class="hljs-keyword">if</span> [ -f ~/.bashrc ]; <span class="hljs-keyword">then</span>
@@ -279,136 +43,22 @@ me
 <span class="hljs-comment"># User specific environment and startup programs</span>
 PATH=<span class="hljs-variable">$PATH</span>:<span class="hljs-variable">$HOME</span>/bin
 <span class="hljs-built_in">export</span> PATH
-</code></pre>
-<hr>
-<h3>توضیح خطوط و ساختار فایل</h3>
-<p>خط‌هایی که با <code>#</code> شروع می‌شوند <strong>توضیح (comment)</strong> هستند و توسط شِل اجرا نمی‌شوند؛ فقط برای خوانایی انسان قرار داده شده‌اند.</p>
-<p>اما بخش اصلی از خط چهارم آغاز می‌شود:</p>
-<pre class="hljs"><code><span class="hljs-keyword">if</span> [ -f ~/.bashrc ]; <span class="hljs-keyword">then</span>
+</code></pre> <hr><h3>توضیح خطوط و ساختار فایل</h3><p>خط‌هایی که با <code>#</code> شروع می‌شوند <strong>توضیح (comment)</strong> هستند و توسط شِل اجرا نمی‌شوند؛ فقط برای خوانایی انسان قرار داده شده‌اند.</p><p>اما بخش اصلی از خط چهارم آغاز می‌شود:</p><pre class="hljs"><code><span class="hljs-keyword">if</span> [ -f ~/.bashrc ]; <span class="hljs-keyword">then</span>
     . ~/.bashrc
 <span class="hljs-keyword">fi</span>
-</code></pre>
-<p>این یک <strong>دستور ترکیبی if</strong> است.<br>
-در ساده‌ترین ترجمه می‌گوید:</p>
-<blockquote>
-<p>اگر فایل <code>~/.bashrc</code> وجود دارد، آن را بخوان.</p>
-</blockquote>
-<p>در واقع این همان بخشی است که باعث می‌شود <strong>شِل ورود (login shell)</strong> فایل <code>~/.bashrc</code> را نیز بارگذاری کند.<br>
-بنابراین تنظیمات تعریف‌شده در <code>.bashrc</code> برای هر نشست ورود نیز فعال می‌شوند.</p>
-<hr>
-<h3>نقش متغیر PATH</h3>
-<p>در ادامه فایل، بخش مربوط به متغیر <strong>PATH</strong> را می‌بینیم.<br>
-حتماً تا به حال از خود پرسیده‌اید شِل چگونه مسیر اجرای دستوراتی مانند <code>ls</code> را پیدا می‌کند؟<br>
-وقتی شما <code>ls</code> را در ترمینال می‌نویسید، bash کل سیستم را جستجو نمی‌کند تا <code>/bin/ls</code> را بیابد؛ بلکه فقط در مسیرهایی که در متغیر <strong>PATH</strong> تعریف شده‌اند جستجو می‌کند.</p>
-<p>در این فایل، PATH معمولاً (اما نه همیشه) در <code>/etc/profile</code> مقداردهی اولیه می‌شود،<br>
-و سپس با دستور زیر گسترش می‌یابد:</p>
-<pre class="hljs"><code>PATH=<span class="hljs-variable">$PATH</span>:<span class="hljs-variable">$HOME</span>/bin
-</code></pre>
-<p>این خط <strong>مقدار موجود در PATH را گرفته و مسیر <code>$HOME/bin</code> را به انتهای آن اضافه می‌کند.</strong></p>
-<p>این عمل نمونه‌ای از <strong>گسترش پارامتر (Parameter Expansion)</strong> است.</p>
-<p>برای درک بهتر، به مثال زیر توجه کنید:</p>
-<pre class="hljs"><code>[me@linuxbox ~]$ foo=<span class="hljs-string">&quot;This is some &quot;</span>
+</code></pre> <p>این یک <strong>دستور ترکیبی if</strong> است.<br> در ساده‌ترین ترجمه می‌گوید:</p><blockquote> <p>اگر فایل <code>~/.bashrc</code> وجود دارد، آن را بخوان.</p></blockquote> <p>در واقع این همان بخشی است که باعث می‌شود <strong>شِل ورود (login shell)</strong> فایل <code>~/.bashrc</code> را نیز بارگذاری کند.<br> بنابراین تنظیمات تعریف‌شده در <code>.bashrc</code> برای هر نشست ورود نیز فعال می‌شوند.</p><hr> <h3>نقش متغیر PATH</h3><p>در ادامه فایل، بخش مربوط به متغیر <strong>PATH</strong> را می‌بینیم.<br> حتماً تا به حال از خود پرسیده‌اید شِل چگونه مسیر اجرای دستوراتی مانند <code>ls</code> را پیدا می‌کند؟<br> وقتی شما <code>ls</code> را در ترمینال می‌نویسید، bash کل سیستم را جستجو نمی‌کند تا <code>/bin/ls</code> را بیابد؛ بلکه فقط در مسیرهایی که در متغیر <strong>PATH</strong> تعریف شده‌اند جستجو می‌کند.</p><p>در این فایل، PATH معمولاً (اما نه همیشه) در <code>/etc/profile</code> مقداردهی اولیه می‌شود،<br> و سپس با دستور زیر گسترش می‌یابد:</p><pre class="hljs"><code>PATH=<span class="hljs-variable">$PATH</span>:<span class="hljs-variable">$HOME</span>/bin
+</code></pre> <p>این خط <strong>مقدار موجود در PATH را گرفته و مسیر <code>$HOME/bin</code> را به انتهای آن اضافه می‌کند.</strong></p><p>این عمل نمونه‌ای از <strong>گسترش پارامتر (Parameter Expansion)</strong> است.</p><p>برای درک بهتر، به مثال زیر توجه کنید:</p><pre class="hljs"><code>[me@linuxbox ~]$ foo=<span class="hljs-string">&quot;This is some &quot;</span>
 [me@linuxbox ~]$ <span class="hljs-built_in">echo</span> <span class="hljs-variable">$foo</span>
 This is some
 [me@linuxbox ~]$ foo=<span class="hljs-variable">$foo</span><span class="hljs-string">&quot;text.&quot;</span>
 [me@linuxbox ~]$ <span class="hljs-built_in">echo</span> <span class="hljs-variable">$foo</span>
 This is some text.
-</code></pre>
-<p>همان‌طور که می‌بینید، با این روش می‌توانیم به انتهای محتوای یک متغیر، متن جدیدی اضافه کنیم.<br>
-در مورد PATH هم دقیقاً همین اتفاق می‌افتد: مسیر <code>$HOME/bin</code> به انتهای فهرست مسیرهای موجود افزوده می‌شود.</p>
-<hr>
-<h3>کاربرد عملی</h3>
-<p>با این کار، اگر بخواهیم برنامه‌های شخصی خود را در مسیر خانگی‌مان ذخیره کنیم،<br>
-کافی است پوشه‌ای به نام <strong><code>bin</code></strong> در مسیر خانگی بسازیم، چون شِل به طور خودکار هنگام اجرای دستورها آن را بررسی خواهد کرد:</p>
-<pre class="hljs"><code><span class="hljs-built_in">mkdir</span> ~/bin
-</code></pre>
-<p>در بسیاری از توزیع‌ها (از جمله بعضی نسخه‌های Debian و Ubuntu)، این رفتار به‌صورت خودکار انجام می‌شود؛<br>
-سیستم در هنگام ورود بررسی می‌کند اگر پوشه‌ی <code>~/bin</code> وجود داشت، آن را به PATH اضافه کند.</p>
-<hr>
-<h3>دستور export</h3>
-<p>در انتهای فایل می‌بینیم:</p>
-<pre class="hljs"><code><span class="hljs-built_in">export</span> PATH
-</code></pre>
-<p>دستور <strong>export</strong> به شِل می‌گوید که مقدار متغیر PATH را <strong>به فرایندهای فرزند (child processes)</strong> نیز انتقال دهد.<br>
-به عبارت دیگر، هر برنامه یا شِل جدیدی که از این شِل فعلی اجرا شود، همان PATH را به ارث خواهد برد.</p>
-<h3>تغییر محیط (Modifying the Environment)</h3>
-<p>حالا که می‌دانیم فایل‌های راه‌انداز (startup files) کجا هستند و چه کار می‌کنند،<br>
-می‌توانیم آن‌ها را <strong>ویرایش کنیم تا محیط خود را شخصی‌سازی کنیم.</strong></p>
-<hr>
-<h3>کدام فایل‌ها را باید تغییر دهیم؟</h3>
-<p>به‌صورت کلی:</p>
-<ul>
-<li>اگر می‌خواهید <strong>دایرکتوری‌هایی به متغیر PATH اضافه کنید</strong><br>
-یا <strong>متغیرهای محیطی جدید تعریف کنید،</strong><br>
-این تغییرات را در فایل <strong><code>.bash_profile</code></strong> (یا فایل معادل آن در توزیع‌تان، مثلاً <code>.profile</code> در Ubuntu) بنویسید.</li>
-<li>برای سایر تنظیمات (مثل aliasها، گزینه‌های شِل، رنگ خروجی، prompt و …) از <strong><code>.bashrc</code></strong> استفاده کنید.</li>
-</ul>
-<p>تا زمانی که مدیر سیستم نیستید و قصد ندارید تنظیمات پیش‌فرض همهٔ کاربران را تغییر دهید،<br>
-فقط فایل‌های <strong>پوشهٔ خانگی خودتان</strong> را ویرایش کنید.<br>
-درست است که فایل‌های <code>/etc</code> مثل <code>profile</code> هم قابل تغییرند،<br>
-اما بهتر است فعلاً سمت آن‌ها نروید — <strong>ایمن‌تر است که فقط تنظیمات شخصی خودتان را تغییر دهید.</strong></p>
-<hr>
-<h3>ویرایشگرهای متنی (Text Editors)</h3>
-<p>برای ویرایش فایل‌های پیکربندی شِل (و به‌طور کلی، بیشتر فایل‌های تنظیمات در لینوکس)،<br>
-از <strong>برنامه‌ای به نام ویرایشگر متن (Text Editor)</strong> استفاده می‌کنیم.</p>
-<p>ویرایشگر متن تا حدی شبیه واژه‌پردازهاست (مثل Word) اما فقط از <strong>متن ساده (Plain Text)</strong> پشتیبانی می‌کند<br>
-و هیچ قالب‌بندی (فونت، اندازه، رنگ و...) ندارد.<br>
-همچنین معمولاً ابزارهایی مخصوص برنامه‌نویسی دارند.</p>
-<p>ویرایشگرهای متن یکی از <strong>ابزارهای اصلی برنامه‌نویسان و مدیران سیستم</strong> هستند؛<br>
-برنامه‌نویسان برای نوشتن کد و مدیران برای پیکربندی سیستم از آن‌ها استفاده می‌کنند.</p>
-<p>در لینوکس تعداد زیادی ویرایشگر وجود دارد — چون هر برنامه‌نویسی معمولاً دوست دارد ویرایشگر دلخواه خودش را بسازد 😄<br>
-و به همین خاطر هر محیط گرافیکی چند نمونهٔ محبوب خودش را دارد.</p>
-<hr>
-<h3>دسته‌بندی کلی ویرایشگرها</h3>
-<p>ویرایشگرها به دو نوع اصلی تقسیم می‌شوند:</p>
-<ol>
-<li>
-<p><strong>گرافیکی (Graphical Editors):</strong></p>
-<ul>
-<li>در محیط GNOME معمولاً برنامه‌ای به نام <strong>gedit</strong> (با عنوان “Text Editor”) وجود دارد.</li>
-<li>در KDE معمولاً سه گزینه دیده می‌شود:<br>
-<strong>kedit</strong>, <strong>kwrite</strong> و <strong>kate</strong> (به ترتیب از ساده به پیشرفته).</li>
-</ul>
-</li>
-<li>
-<p><strong>متنی (Text-based Editors):</strong></p>
-<ul>
-<li>معروف‌ترین‌ها: <strong>nano</strong>, <strong>vi/vim</strong>, و <strong>emacs</strong></li>
-<li><strong>nano</strong> ساده‌ترین و کاربرپسندترین گزینه است، جایگزینی برای ویرایشگر قدیمی pico.</li>
-<li><strong>vi</strong> یا نسخهٔ پیشرفته‌ترش <strong>vim</strong> (مخفف Vi IMproved) ویرایشگر سنتی سیستم‌های شبه‌یونیکس است.</li>
-<li><strong>emacs</strong> (نوشتهٔ Richard Stallman) محیطی بسیار بزرگ و همه‌کاره است که تقریباً هر کاری می‌تواند انجام دهد،<br>
-ولی به‌صورت پیش‌فرض در بسیاری از توزیع‌ها نصب نیست.</li>
-</ul>
-</li>
-</ol>
-<hr>
-<h3>اجرای ویرایشگر از خط فرمان</h3>
-<p>تمام ویرایشگرها را می‌توان از <strong>Command Line</strong> اجرا کرد:<br>
-کافی است نام ویرایشگر را بنویسید و نام فایلی را که می‌خواهید ویرایش کنید، به آن بدهید.</p>
-<p>مثلاً:</p>
-<pre class="hljs"><code>[me@linuxbox ~]$ gedit some_file
-</code></pre>
-<p>اگر فایل <code>some_file</code> وجود داشته باشد، باز می‌شود؛<br>
-در غیر این صورت، برنامه فرض می‌کند می‌خواهید فایل جدیدی بسازید.</p>
-<hr>
-<h3>ویرایش امن فایل‌های پیکربندی</h3>
-<p>قبل از اینکه فایل‌های مهمی مثل <code>.bashrc</code> را ویرایش کنید، <strong>همیشه یک نسخهٔ پشتیبان (Backup)</strong> تهیه کنید.<br>
-این کار جلوی دردسرهای احتمالی را می‌گیرد اگر وسط کار چیزی را خراب کنید.</p>
-<p>مثلاً:</p>
-<pre class="hljs"><code>[me@linuxbox ~]$ <span class="hljs-built_in">cp</span> .bashrc .bashrc.bak
-</code></pre>
-<p>فرقی نمی‌کند فایل پشتیبان را چه بنامید،<br>
-ولی پسوندهایی مثل <code>.bak</code>, <code>.sav</code>, <code>.old</code>, یا <code>.orig</code> رایج هستند.<br>
-فقط حواستان باشد که دستور <code>cp</code> بدون هشدار، فایل همنام را <strong>بازنویسی می‌کند.</strong></p>
-<hr>
-<h3>باز کردن فایل برای ویرایش با nano</h3>
-<p>حالا که نسخهٔ پشتیبان داریم، می‌توانیم فایل را ویرایش کنیم:</p>
-<pre class="hljs"><code>[me@linuxbox ~]$ nano .bashrc
-</code></pre>
-<p>این دستور ویرایشگر متنی <strong>nano</strong> را باز می‌کند و فایل <code>.bashrc</code> را بارگذاری می‌کند.<br>
-از اینجا می‌توانید aliasها، تنظیمات رنگ، یا متغیرهای دلخواه خود را اضافه کنید.</p>
-<p>وقتی ویرایشگر <strong>nano</strong> را اجرا می‌کنیم، صفحه‌ای شبیه زیر نمایش داده می‌شود:</p>
-<pre class="hljs"><code>GNU nano 2.0.3           File: .bashrc
+</code></pre> <p>همان‌طور که می‌بینید، با این روش می‌توانیم به انتهای محتوای یک متغیر، متن جدیدی اضافه کنیم.<br> در مورد PATH هم دقیقاً همین اتفاق می‌افتد: مسیر <code>$HOME/bin</code> به انتهای فهرست مسیرهای موجود افزوده می‌شود.</p><hr> <h3>کاربرد عملی</h3><p>با این کار، اگر بخواهیم برنامه‌های شخصی خود را در مسیر خانگی‌مان ذخیره کنیم،<br> کافی است پوشه‌ای به نام <strong><code>bin</code></strong> در مسیر خانگی بسازیم، چون شِل به طور خودکار هنگام اجرای دستورها آن را بررسی خواهد کرد:</p><pre class="hljs"><code><span class="hljs-built_in">mkdir</span> ~/bin
+</code></pre> <p>در بسیاری از توزیع‌ها (از جمله بعضی نسخه‌های Debian و Ubuntu)، این رفتار به‌صورت خودکار انجام می‌شود؛<br> سیستم در هنگام ورود بررسی می‌کند اگر پوشه‌ی <code>~/bin</code> وجود داشت، آن را به PATH اضافه کند.</p><hr> <h3>دستور export</h3><p>در انتهای فایل می‌بینیم:</p><pre class="hljs"><code><span class="hljs-built_in">export</span> PATH
+</code></pre> <p>دستور <strong>export</strong> به شِل می‌گوید که مقدار متغیر PATH را <strong>به فرایندهای فرزند (child processes)</strong> نیز انتقال دهد.<br> به عبارت دیگر، هر برنامه یا شِل جدیدی که از این شِل فعلی اجرا شود، همان PATH را به ارث خواهد برد.</p><h3>تغییر محیط (Modifying the Environment)</h3><p>حالا که می‌دانیم فایل‌های راه‌انداز (startup files) کجا هستند و چه کار می‌کنند،<br> می‌توانیم آن‌ها را <strong>ویرایش کنیم تا محیط خود را شخصی‌سازی کنیم.</strong></p><hr> <h3>کدام فایل‌ها را باید تغییر دهیم؟</h3><p>به‌صورت کلی:</p><ul> <li>اگر می‌خواهید <strong>دایرکتوری‌هایی به متغیر PATH اضافه کنید</strong><br> یا <strong>متغیرهای محیطی جدید تعریف کنید،</strong><br> این تغییرات را در فایل <strong><code>.bash_profile</code></strong> (یا فایل معادل آن در توزیع‌تان، مثلاً <code>.profile</code> در Ubuntu) بنویسید.</li><li>برای سایر تنظیمات (مثل aliasها، گزینه‌های شِل، رنگ خروجی، prompt و …) از <strong><code>.bashrc</code></strong> استفاده کنید.</li></ul> <p>تا زمانی که مدیر سیستم نیستید و قصد ندارید تنظیمات پیش‌فرض همهٔ کاربران را تغییر دهید،<br> فقط فایل‌های <strong>پوشهٔ خانگی خودتان</strong> را ویرایش کنید.<br> درست است که فایل‌های <code>/etc</code> مثل <code>profile</code> هم قابل تغییرند،<br> اما بهتر است فعلاً سمت آن‌ها نروید — <strong>ایمن‌تر است که فقط تنظیمات شخصی خودتان را تغییر دهید.</strong></p><hr> <h3>ویرایشگرهای متنی (Text Editors)</h3><p>برای ویرایش فایل‌های پیکربندی شِل (و به‌طور کلی، بیشتر فایل‌های تنظیمات در لینوکس)،<br> از <strong>برنامه‌ای به نام ویرایشگر متن (Text Editor)</strong> استفاده می‌کنیم.</p><p>ویرایشگر متن تا حدی شبیه واژه‌پردازهاست (مثل Word) اما فقط از <strong>متن ساده (Plain Text)</strong> پشتیبانی می‌کند<br> و هیچ قالب‌بندی (فونت، اندازه، رنگ و...) ندارد.<br> همچنین معمولاً ابزارهایی مخصوص برنامه‌نویسی دارند.</p><p>ویرایشگرهای متن یکی از <strong>ابزارهای اصلی برنامه‌نویسان و مدیران سیستم</strong> هستند؛<br> برنامه‌نویسان برای نوشتن کد و مدیران برای پیکربندی سیستم از آن‌ها استفاده می‌کنند.</p><p>در لینوکس تعداد زیادی ویرایشگر وجود دارد — چون هر برنامه‌نویسی معمولاً دوست دارد ویرایشگر دلخواه خودش را بسازد<br> و به همین خاطر هر محیط گرافیکی چند نمونهٔ محبوب خودش را دارد.</p><hr> <h3>دسته‌بندی کلی ویرایشگرها</h3><p>ویرایشگرها به دو نوع اصلی تقسیم می‌شوند:</p><ol> <li><p><strong>گرافیکی (Graphical Editors):</strong></p><ul> <li>در محیط GNOME معمولاً برنامه‌ای به نام <strong>gedit</strong> (با عنوان “Text Editor”) وجود دارد.</li><li>در KDE معمولاً سه گزینه دیده می‌شود:<br><strong>kedit</strong>, <strong>kwrite</strong> و <strong>kate</strong> (به ترتیب از ساده به پیشرفته).</li></ul> </li><li> <p><strong>متنی (Text-based Editors):</strong></p><ul> <li>معروف‌ترین‌ها: <strong>nano</strong>, <strong>vi/vim</strong>, و <strong>emacs</strong></li><li><strong>nano</strong> ساده‌ترین و کاربرپسندترین گزینه است، جایگزینی برای ویرایشگر قدیمی pico.</li><li><strong>vi</strong> یا نسخهٔ پیشرفته‌ترش <strong>vim</strong> (مخفف Vi IMproved) ویرایشگر سنتی سیستم‌های شبه‌یونیکس است.</li><li><strong>emacs</strong> (نوشتهٔ Richard Stallman) محیطی بسیار بزرگ و همه‌کاره است که تقریباً هر کاری می‌تواند انجام دهد،<br> ولی به‌صورت پیش‌فرض در بسیاری از توزیع‌ها نصب نیست.</li></ul> </li></ol> <hr><h3>اجرای ویرایشگر از خط فرمان</h3><p>تمام ویرایشگرها را می‌توان از <strong>Command Line</strong> اجرا کرد:<br> کافی است نام ویرایشگر را بنویسید و نام فایلی را که می‌خواهید ویرایش کنید، به آن بدهید.</p><p>مثلاً:</p><pre class="hljs"><code>[me@linuxbox ~]$ gedit some_file
+</code></pre> <p>اگر فایل <code>some_file</code> وجود داشته باشد، باز می‌شود؛<br> در غیر این صورت، برنامه فرض می‌کند می‌خواهید فایل جدیدی بسازید.</p><hr> <h3>ویرایش امن فایل‌های پیکربندی</h3><p>قبل از اینکه فایل‌های مهمی مثل <code>.bashrc</code> را ویرایش کنید، <strong>همیشه یک نسخهٔ پشتیبان (Backup)</strong> تهیه کنید.<br> این کار جلوی دردسرهای احتمالی را می‌گیرد اگر وسط کار چیزی را خراب کنید.</p><p>مثلاً:</p><pre class="hljs"><code>[me@linuxbox ~]$ <span class="hljs-built_in">cp</span> .bashrc .bashrc.bak
+</code></pre> <p>فرقی نمی‌کند فایل پشتیبان را چه بنامید،<br> ولی پسوندهایی مثل <code>.bak</code>, <code>.sav</code>, <code>.old</code>, یا <code>.orig</code> رایج هستند.<br> فقط حواستان باشد که دستور <code>cp</code> بدون هشدار، فایل همنام را <strong>بازنویسی می‌کند.</strong></p><hr> <h3>باز کردن فایل برای ویرایش با nano</h3><p>حالا که نسخهٔ پشتیبان داریم، می‌توانیم فایل را ویرایش کنیم:</p><pre class="hljs"><code>[me@linuxbox ~]$ nano .bashrc
+</code></pre> <p>این دستور ویرایشگر متنی <strong>nano</strong> را باز می‌کند و فایل <code>.bashrc</code> را بارگذاری می‌کند.<br> از اینجا می‌توانید aliasها، تنظیمات رنگ، یا متغیرهای دلخواه خود را اضافه کنید.</p><p>وقتی ویرایشگر <strong>nano</strong> را اجرا می‌کنیم، صفحه‌ای شبیه زیر نمایش داده می‌شود:</p><pre class="hljs"><code>GNU nano 2.0.3           File: .bashrc
 <span class="hljs-comment"># .bashrc</span>
 <span class="hljs-comment"># Source global definitions</span>
 <span class="hljs-keyword">if</span> [ -f /etc/bashrc ]; <span class="hljs-keyword">then</span>
@@ -418,76 +68,12 @@ This is some text.
                          [ Read 8 lines ]
 ^G Get Help ^O WriteOut ^R Read File ^Y Prev Page ^K Cut Text ^C Cur Pos
 ^X Exit     ^J Justify  ^W Where Is  ^V Next Page ^U UnCut Text ^T To Spell
-</code></pre>
-<hr>
-<h3>ساختار صفحه‌ی nano</h3>
-<p>صفحه شامل سه بخش است:</p>
-<ol>
-<li><strong>سربرگ (Header)</strong> در بالای صفحه (نمایش نام فایل و نسخهٔ برنامه)،</li>
-<li><strong>متن فایل</strong> در وسط،</li>
-<li><strong>منوی دستورات کلیدی</strong> در پایین (دستورات اصلی با کلیدهای ترکیبی).</li>
-</ol>
-<p>نکته: اگر سیستم شما <strong>nano</strong> ندارد، می‌توانید از یکی از ویرایشگرهای گرافیکی مثل <strong>gedit</strong> یا <strong>kate</strong> استفاده کنید.</p>
-<hr>
-<h3>آشنایی با کلیدهای اصلی nano</h3>
-<p>از آن‌جایی که nano برای جایگزینی ویرایشگر سادهٔ ایمیل طراحی شده، امکاناتش کم ولی کاربردی است.</p>
-<p>اولین دستوری که باید در هر ویرایشگر یاد بگیرید:<br>
-✅ <strong>خروج (Exit)</strong> → ترکیب <strong>Ctrl + X</strong><br>
-در منوی پایین، عبارت “^X” به معنی همین ترکیب است. علامت <code>^</code> نشان‌دهنده‌ی کلید <strong>Ctrl</strong> است.<br>
-(مثلاً ^O یعنی Ctrl+O، و ^W یعنی Ctrl+W)</p>
-<p>دومین دستور مهم:<br>
-✅ <strong>ذخیره تغییرات (Save)</strong> → <strong>Ctrl + O</strong></p>
-<p>با این دو دستور می‌توانید با خیال راحت ویرایش را شروع کنید.</p>
-<hr>
-<h3>افزودن تنظیمات جدید به <code>.bashrc</code></h3>
-<p>با استفاده از کلیدهای <strong>↓</strong> (پیکان پایین) یا <strong>PageDown</strong> به انتهای فایل بروید،<br>
-سپس خطوط زیر را به فایل اضافه کنید:</p>
-<pre class="hljs"><code><span class="hljs-built_in">umask</span> 0002
+</code></pre> <hr><h3>ساختار صفحه‌ی nano</h3><p>صفحه شامل سه بخش است:</p><ol> <li><strong>سربرگ (Header)</strong> در بالای صفحه (نمایش نام فایل و نسخهٔ برنامه)،</li><li><strong>متن فایل</strong> در وسط،</li><li><strong>منوی دستورات کلیدی</strong> در پایین (دستورات اصلی با کلیدهای ترکیبی).</li></ol> <blockquote><p><strong>نکته:</strong> اگر سیستم شما <strong>nano</strong> ندارد، می‌توانید از یکی از ویرایشگرهای گرافیکی مثل <strong>gedit</strong> یا <strong>kate</strong> استفاده کنید.</p></blockquote> <hr><h3>آشنایی با کلیدهای اصلی nano</h3><p>از آن‌جایی که nano برای جایگزینی ویرایشگر سادهٔ ایمیل طراحی شده، امکاناتش کم ولی کاربردی است.</p><p>اولین دستوری که باید در هر ویرایشگر یاد بگیرید:<br><strong>خروج (Exit)</strong> → ترکیب <strong>Ctrl + X</strong><br> در منوی پایین، عبارت “^X” به معنی همین ترکیب است. علامت <code>^</code> نشان‌دهنده‌ی کلید <strong>Ctrl</strong> است.<br> (مثلاً ^O یعنی Ctrl+O، و ^W یعنی Ctrl+W)</p><p>دومین دستور مهم:<br><strong>ذخیره تغییرات (Save)</strong> → <strong>Ctrl + O</strong></p><p>با این دو دستور می‌توانید با خیال راحت ویرایش را شروع کنید.</p><hr> <h3>افزودن تنظیمات جدید به <code>.bashrc</code></h3><p>با استفاده از کلیدهای <strong>↓</strong> (پیکان پایین) یا <strong>PageDown</strong> به انتهای فایل بروید،<br> سپس خطوط زیر را به فایل اضافه کنید:</p><pre class="hljs"><code><span class="hljs-built_in">umask</span> 0002
 <span class="hljs-built_in">export</span> HISTCONTROL=ignoredups
 <span class="hljs-built_in">export</span> HISTSIZE=1000
 <span class="hljs-built_in">alias</span> l.=<span class="hljs-string">&#x27;ls -d .* --color=auto&#x27;</span>
 <span class="hljs-built_in">alias</span> ll=<span class="hljs-string">&#x27;ls -l --color=auto&#x27;</span>
-</code></pre>
-<blockquote>
-<p>🔸 نکته: ممکن است برخی از این خطوط از قبل در فایل وجود داشته باشند — وجود تکراری‌ها مشکلی ایجاد نمی‌کند.</p>
-</blockquote>
-<hr>
-<h3>توضیح خطوط جدید</h3>
-<table>
-<thead>
-<tr>
-<th>خط دستور</th>
-<th>توضیح و کاربرد</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>umask 0002</strong></td>
-<td>تنظیم umask برای رفع مشکل مجوزها در دایرکتوری‌های اشتراکی (اشاره‌شده در فصل ۹).</td>
-</tr>
-<tr>
-<td><strong>export HISTCONTROL=ignoredups</strong></td>
-<td>باعث می‌شود شِل دستوری را در تاریخچه ذخیره نکند اگر دقیقاً همان دستور قبلاً ثبت شده باشد.</td>
-</tr>
-<tr>
-<td><strong>export HISTSIZE=1000</strong></td>
-<td>اندازهٔ تاریخچهٔ دستورات (history) را از مقدار پیش‌فرض ۵۰۰ به ۱۰۰۰ خط افزایش می‌دهد.</td>
-</tr>
-<tr>
-<td><em><em>alias l.='ls -d .</em> --color=auto'</em>*</td>
-<td>دستور جدیدی به نام <code>l.</code> ایجاد می‌کند که تمام فایل‌ها و پوشه‌هایی را که با نقطه شروع می‌شوند (فایل‌های مخفی) نمایش می‌دهد.</td>
-</tr>
-<tr>
-<td><strong>alias ll='ls -l --color=auto'</strong></td>
-<td>دستور جدیدی به نام <code>ll</code> می‌سازد که فهرست فایل‌ها را با جزئیات (long format) و رنگ‌بندی نشان می‌دهد.</td>
-</tr>
-</tbody>
-</table>
-<hr>
-<h3>افزودن توضیحات (Comments)</h3>
-<p>همان‌طور که دیدیم، بعضی از خطوط ممکن است در نگاه اول برای کاربر نامفهوم باشند.<br>
-به همین دلیل توصیه می‌شود برای <strong>خوانایی انسانی</strong>، بالای هر بخش توضیح کوتاهی بنویسید:</p>
-<pre class="hljs"><code><span class="hljs-comment"># Set default permissions for new files</span>
+</code></pre> <blockquote><p>نکته: ممکن است برخی از این خطوط از قبل در فایل وجود داشته باشند — وجود تکراری‌ها مشکلی ایجاد نمی‌کند.</p></blockquote> <hr><h3>توضیح خطوط جدید</h3><table> <thead><tr> <th>خط دستور</th><th>توضیح و کاربرد</th></tr> </thead><tbody> <tr><td><strong>umask 0002</strong></td><td>تنظیم umask برای رفع مشکل مجوزها در دایرکتوری‌های اشتراکی (اشاره‌شده در فصل ۹).</td></tr> <tr><td><strong>export HISTCONTROL=ignoredups</strong></td><td>باعث می‌شود شِل دستوری را در تاریخچه ذخیره نکند اگر دقیقاً همان دستور قبلاً ثبت شده باشد.</td></tr> <tr><td><strong>export HISTSIZE=1000</strong></td><td>اندازهٔ تاریخچهٔ دستورات (history) را از مقدار پیش‌فرض ۵۰۰ به ۱۰۰۰ خط افزایش می‌دهد.</td></tr> <tr><td><em><em>alias l.='ls -d .</em> --color=auto'</em>*</td><td>دستور جدیدی به نام <code>l.</code> ایجاد می‌کند که تمام فایل‌ها و پوشه‌هایی را که با نقطه شروع می‌شوند (فایل‌های مخفی) نمایش می‌دهد.</td></tr> <tr><td><strong>alias ll='ls -l --color=auto'</strong></td><td>دستور جدیدی به نام <code>ll</code> می‌سازد که فهرست فایل‌ها را با جزئیات (long format) و رنگ‌بندی نشان می‌دهد.</td></tr> </tbody></table> <hr><h3>افزودن توضیحات (Comments)</h3><p>همان‌طور که دیدیم، بعضی از خطوط ممکن است در نگاه اول برای کاربر نامفهوم باشند.<br> به همین دلیل توصیه می‌شود برای <strong>خوانایی انسانی</strong>، بالای هر بخش توضیح کوتاهی بنویسید:</p><pre class="hljs"><code><span class="hljs-comment"># Set default permissions for new files</span>
 <span class="hljs-built_in">umask</span> 0002
 
 <span class="hljs-comment"># Avoid duplicate commands in history</span>
@@ -499,10 +85,7 @@ This is some text.
 <span class="hljs-comment"># Aliases for easier directory listings</span>
 <span class="hljs-built_in">alias</span> l.=<span class="hljs-string">&#x27;ls -d .* --color=auto&#x27;</span>
 <span class="hljs-built_in">alias</span> ll=<span class="hljs-string">&#x27;ls -l --color=auto&#x27;</span>
-</code></pre>
-<p>این کار نه‌تنها فایل را خواناتر می‌کند، بلکه در آینده هنگام اشکال‌زدایی یا پیکربندی مجدد، کار را برای خودتان یا سایر کاربران بسیار ساده‌تر می‌کند.</p>
-<p>با استفاده از ویرایشگر (nano یا هر ویرایشگر دلخواه دیگر)، حالا می‌خواهیم تغییراتی که قبلاً در <code>.bashrc</code> اضافه کردیم را مرتب و خواناتر کنیم. ساختار نهایی باید به این شکل باشد:</p>
-<pre class="hljs"><code><span class="hljs-comment"># Change umask to make directory sharing easier</span>
+</code></pre> <p>این کار نه‌تنها فایل را خواناتر می‌کند، بلکه در آینده هنگام اشکال‌زدایی یا پیکربندی مجدد، کار را برای خودتان یا سایر کاربران بسیار ساده‌تر می‌کند.</p><p>با استفاده از ویرایشگر (nano یا هر ویرایشگر دلخواه دیگر)، حالا می‌خواهیم تغییراتی که قبلاً در <code>.bashrc</code> اضافه کردیم را مرتب و خواناتر کنیم. ساختار نهایی باید به این شکل باشد:</p><pre class="hljs"><code><span class="hljs-comment"># Change umask to make directory sharing easier</span>
 <span class="hljs-built_in">umask</span> 0002
 
 <span class="hljs-comment"># Ignore duplicates in command history and increase</span>
@@ -513,175 +96,222 @@ This is some text.
 <span class="hljs-comment"># Add some helpful aliases</span>
 <span class="hljs-built_in">alias</span> l.=<span class="hljs-string">&#x27;ls -d .* --color=auto&#x27;</span>
 <span class="hljs-built_in">alias</span> ll=<span class="hljs-string">&#x27;ls -l --color=auto&#x27;</span>
-</code></pre>
-<p>وقتی ویرایش تمام شد:</p>
-<ul>
-<li>با <strong>Ctrl + O</strong> فایل را ذخیره کنید.</li>
-<li>سپس با <strong>Ctrl + X</strong> از nano خارج شوید.</li>
-</ul>
-<hr>
-<h3>چرا نوشتن کامنت‌ها مهم است؟</h3>
-<p>وقتی فایل‌های تنظیمات (configuration files) را تغییر می‌دهید، <strong>حتماً کامنت بگذارید</strong> تا مشخص شود چه کاری انجام داده‌اید و چرا.<br>
-ممکن است امروز دقیقاً به خاطر داشته باشید چه کردید، اما شش ماه بعد احتمالاً فراموش می‌کنید.</p>
-<p>بنابراین:</p>
-<ul>
-<li>بالای هر بخش، توضیح کوتاهی دربارهٔ هدف آن بنویسید.</li>
-<li>یک <strong>دفترچه یا فایل لاگ</strong> از تغییرات خود نگه دارید تا در آینده راحت‌تر بفهمید چه چیزی را و چرا تغییر داده‌اید.</li>
-</ul>
-<p>در شِل و اسکریپت‌های bash، برای نوشتن توضیح از علامت <code>#</code> استفاده می‌شود.<br>
-در دیگر فایل‌های پیکربندی ممکن است علامت‌های متفاوتی به کار برود (مثل <code>;</code> یا <code>//</code> در برخی برنامه‌ها).<br>
-تقریباً در تمام فایل‌های سیستمی، مثال‌ها و توضیحاتی به شکل کامنت وجود دارد — از آن‌ها یاد بگیرید.</p>
-<hr>
-<h3>خطوط کامنت‌شده و فعال‌سازی آن‌ها</h3>
-<p>گاهی می‌بینید خطوطی در فایل‌های تنظیمات با <code>#</code> شروع شده‌اند.<br>
-این یعنی آن خط <strong>غیرفعال</strong> است، ولی برای یادآوری یا مثال در فایل نگه داشته شده.</p>
-<p>برای نمونه، در فایل <code>.bashrc</code> نسخهٔ Ubuntu 8.04 چنین بخش‌هایی وجود دارد:</p>
-<pre class="hljs"><code><span class="hljs-comment"># some more ls aliases</span>
+</code></pre> <p>وقتی ویرایش تمام شد:</p><ul> <li>با <strong>Ctrl + O</strong> فایل را ذخیره کنید.</li><li>سپس با <strong>Ctrl + X</strong> از nano خارج شوید.</li></ul> <hr><h3>چرا نوشتن کامنت‌ها مهم است؟</h3><p>وقتی فایل‌های تنظیمات (configuration files) را تغییر می‌دهید، <strong>حتماً کامنت بگذارید</strong> تا مشخص شود چه کاری انجام داده‌اید و چرا.<br> ممکن است امروز دقیقاً به خاطر داشته باشید چه کردید، اما شش ماه بعد احتمالاً فراموش می‌کنید.</p><p>بنابراین:</p><ul> <li>بالای هر بخش، توضیح کوتاهی دربارهٔ هدف آن بنویسید.</li><li>یک <strong>دفترچه یا فایل لاگ</strong> از تغییرات خود نگه دارید تا در آینده راحت‌تر بفهمید چه چیزی را و چرا تغییر داده‌اید.</li></ul> <p>در شِل و اسکریپت‌های bash، برای نوشتن توضیح از علامت <code>#</code> استفاده می‌شود.<br> در دیگر فایل‌های پیکربندی ممکن است علامت‌های متفاوتی به کار برود (مثل <code>;</code> یا <code>//</code> در برخی برنامه‌ها).<br> تقریباً در تمام فایل‌های سیستمی، مثال‌ها و توضیحاتی به شکل کامنت وجود دارد — از آن‌ها یاد بگیرید.</p><hr> <h3>خطوط کامنت‌شده و فعال‌سازی آن‌ها</h3><p>گاهی می‌بینید خطوطی در فایل‌های تنظیمات با <code>#</code> شروع شده‌اند.<br> این یعنی آن خط <strong>غیرفعال</strong> است، ولی برای یادآوری یا مثال در فایل نگه داشته شده.</p><p>برای نمونه، در فایل <code>.bashrc</code> نسخهٔ Ubuntu 8.04 چنین بخش‌هایی وجود دارد:</p><pre class="hljs"><code><span class="hljs-comment"># some more ls aliases</span>
 <span class="hljs-comment">#alias ll=&#x27;ls -l&#x27;</span>
 <span class="hljs-comment">#alias la=&#x27;ls -A&#x27;</span>
 <span class="hljs-comment">#alias l=&#x27;ls -CF&#x27;</span>
-</code></pre>
-<p>سه خط آخر <strong>دستورهای واقعی alias</strong> هستند، اما به دلیل وجود <code>#</code> در ابتدای‌شان، فعلاً فعال نیستند.<br>
-اگر علامت <code>#</code> را حذف کنید (عملی به نام <strong>uncommenting</strong>)، آن‌ها فعال می‌شوند.<br>
-برعکس، اگر بخواهید خطی را موقتاً غیرفعال کنید، کافی است در ابتدای آن <code>#</code> بگذارید.</p>
-<p>این کار باعث می‌شود تنظیمات را <strong>غیرفعال کنید بدون اینکه اطلاعات‌شان را از دست بدهید.</strong></p>
-<hr>
-<h3>فعال‌سازی تغییرات جدید</h3>
-<p>تغییراتی که در <code>.bashrc</code> ایجاد کردیم تا زمانی که <strong>جلسهٔ فعلی ترمینال بسته و دوباره باز نشود،</strong> فعال نمی‌شوند،<br>
-چون bash فقط در ابتدای هر نشست (session) این فایل را می‌خواند.</p>
-<p>اما می‌توانیم بدون بستن ترمینال، bash را وادار کنیم همین حالا فایل را دوباره بخواند:</p>
-<pre class="hljs"><code>[me@linuxbox ~]$ <span class="hljs-built_in">source</span> .bashrc
-</code></pre>
-<p>بعد از اجرای این دستور، تغییرات بلافاصله اعمال می‌شوند.</p>
-<p>برای تست، یکی از alias‌های جدید را امتحان کنید:</p>
-<pre class="hljs"><code>[me@linuxbox ~]$ ll
-</code></pre>
-<p>اگر لیست فایل‌ها با رنگ و قالب‌بندی بلند (long format) نمایش داده شد، یعنی همه چیز درست کار می‌کند ✅</p>
-<hr>
-<h3>جمع‌بندی</h3>
-<p>در این فصل یاد گرفتیم چطور فایل‌های پیکربندی را با ویرایشگر متنی ویرایش کنیم —<br>
-مهارتی حیاتی برای هر کاربر لینوکس.</p>
-<p>از این پس، هنگام خواندن <strong>man page</strong>ها، به بخش متغیرهای محیطی (environment variables) توجه کنید؛<br>
-بسیاری از دستورات تنظیماتی دارند که از طریق همین متغیرها قابل کنترل‌اند.</p>
-<p>در فصل‌های بعدی یاد می‌گیریم چگونه با <strong>توابع شِل (shell functions)</strong> کار کنیم،<br>
-تا بتوانیم دستورات سفارشی خودمان را به bash اضافه کنیم و محیط کاری‌مان را کاملاً شخصی‌سازی نماییم.</p>
-<hr>
-<h3>منابع بیشتر برای مطالعه</h3>
-<ul>
-<li>بخش <strong>INVOCATION</strong> در صفحهٔ راهنمای (man page) دستور <code>bash</code>،<br>
-تمام جزئیات مربوط به فایل‌های راه‌انداز شِل را با دقت کامل توضیح می‌دهد.</li>
-</ul>
-
-  </main>
-
-  <!-- فوتر مشترک -->
-  <footer class="footer">
-    <div class="container">
-      <p>
-        <img src="/Gitab/icone/copyright.svg" alt="کپی‌رایت" width="14" height="14"
-             style="vertical-align:middle;margin-inline:4px">
-        <span id="y"></span> Gitab — تمامی حقوق محفوظ است.
-      </p>
-    </div>
-  </footer>
-
-  <!-- سال و اسکریپت تغییر تم -->
-  <script>
+</code></pre> <p>سه خط آخر <strong>دستورهای واقعی alias</strong> هستند، اما به دلیل وجود <code>#</code> در ابتدای‌شان، فعلاً فعال نیستند.<br> اگر علامت <code>#</code> را حذف کنید (عملی به نام <strong>uncommenting</strong>)، آن‌ها فعال می‌شوند.<br> برعکس، اگر بخواهید خطی را موقتاً غیرفعال کنید، کافی است در ابتدای آن <code>#</code> بگذارید.</p><p>این کار باعث می‌شود تنظیمات را <strong>غیرفعال کنید بدون اینکه اطلاعات‌شان را از دست بدهید.</strong></p><hr> <h3>فعال‌سازی تغییرات جدید</h3><p>تغییراتی که در <code>.bashrc</code> ایجاد کردیم تا زمانی که <strong>جلسهٔ فعلی ترمینال بسته و دوباره باز نشود،</strong> فعال نمی‌شوند،<br> چون bash فقط در ابتدای هر نشست (session) این فایل را می‌خواند.</p><p>اما می‌توانیم بدون بستن ترمینال، bash را وادار کنیم همین حالا فایل را دوباره بخواند:</p><pre class="hljs"><code>[me@linuxbox ~]$ <span class="hljs-built_in">source</span> .bashrc
+</code></pre> <p>بعد از اجرای این دستور، تغییرات بلافاصله اعمال می‌شوند.</p><p>برای تست، یکی از alias‌های جدید را امتحان کنید:</p><pre class="hljs"><code>[me@linuxbox ~]$ ll
+</code></pre> <p>اگر لیست فایل‌ها با رنگ و قالب‌بندی بلند (long format) نمایش داده شد، یعنی همه چیز درست کار می‌کند</p><hr> <h3>جمع‌بندی</h3><p>در این فصل یاد گرفتیم چطور فایل‌های پیکربندی را با ویرایشگر متنی ویرایش کنیم —<br> مهارتی حیاتی برای هر کاربر لینوکس.</p><p>از این پس، هنگام خواندن <strong>man page</strong>ها، به بخش متغیرهای محیطی (environment variables) توجه کنید؛<br> بسیاری از دستورات تنظیماتی دارند که از طریق همین متغیرها قابل کنترل‌اند.</p><p>در فصل‌های بعدی یاد می‌گیریم چگونه با <strong>توابع شِل (shell functions)</strong> کار کنیم،<br> تا بتوانیم دستورات سفارشی خودمان را به bash اضافه کنیم و محیط کاری‌مان را کاملاً شخصی‌سازی نماییم.</p><hr> <h3>منابع بیشتر برای مطالعه</h3><ul> <li>بخش <strong>INVOCATION</strong> در صفحهٔ راهنمای (man page) دستور <code>bash</code>،<br> تمام جزئیات مربوط به فایل‌های راه‌انداز شِل را با دقت کامل توضیح می‌دهد.</li></ul> </article><nav class="chapter-single-next-nav"> <a href="/Gitab/books/book5/Book/12/chapter12/" class="btn-next-chapter-action" id="nextChapterBtn" data-hub="/Gitab/books/book5/"> <span class="next-btn-text">فصل بعدی: مقدمه‌ای بر ویرایشگر متنی vi</span> <span class="next-btn-arrow">←</span> </a> </nav></div> <button class="fab-back-to-top" id="backToTopBtn" type="button" aria-label="رفتن به بالای صفحه" title="رفتن به بالا"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"> <polyline points="18 15 12 9 6 15"></polyline> </svg> </button></main> <footer class="footer-minimal"><div class="footer-container"> <div class="footer-top-row"><div class="footer-brand-side"> <a href="/Gitab/" class="footer-brand-anchor"> <img src="/Gitab/icone/logo.svg" alt="Gitab" width="28" height="28" loading="lazy" decoding="async"> <span class="footer-brand-title">گیتاب (Gitab)</span> </a> <p class="footer-tagline"> پلتفرم آزاد و مستقل برای ترجمهٔ دقیق و روان کتاب‌های مرجع مهندسی نرم‌افزار. </p></div> <div class="footer-nav-cols"><div class="footer-nav-col"> <span class="footer-nav-heading">موضوعات</span><ul class="footer-nav-list"> <li><a href="/Gitab/books/list-books/?cat=csharp">سی‌شارپ و دات‌نت</a></li><li><a href="/Gitab/books/list-books/?cat=clean-code">کد تمیز و بازآفرینی</a></li><li><a href="/Gitab/books/list-books/?cat=architecture">معماری و طراحی دامنه</a></li><li><a href="/Gitab/books/list-books/?cat=system">لینوکس و خط فرمان</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">بخش‌های سایت</span><ul class="footer-nav-list"> <li><a href="/Gitab/">صفحه اصلی</a></li><li><a href="/Gitab/books/list-books/">کتابخانه کامل</a></li><li><a href="/Gitab/courses/">دوره‌های آموزشی</a></li><li><a href="/Gitab/translator.html">تالار مترجمین</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">مشارکت و جامعه</span><ul class="footer-nav-list"> <li><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer">راهنمای همکاری در ترجمه</a></li><li><a href="https://github.com/hheydarian/Gitab/issues" target="_blank" rel="noopener noreferrer">پیشنهاد کتاب یا گزارش خطا</a></li></ul> </div></div> </div><div class="footer-bottom-line"> <span>© <span id="y">2026</span> Gitab — توسعه‌یافته برای جامعهٔ مهندسان نرم‌افزار ایرانی</span></div> </div></footer> <script>
   (() => {
     const root = document.documentElement;
     const btn = document.getElementById('themeToggle');
+    const sunIcon = btn ? btn.querySelector('.icon-sun') : null;
+    const moonIcon = btn ? btn.querySelector('.icon-moon') : null;
     const KEY = 'gitab-theme';
 
-    function updateTheme(s) {
-      root.setAttribute('data-theme', s);
-      const mode = s;  // فقط `dark` یا `light` خواهد بود
+    function updateTheme(mode) {
+      root.setAttribute('data-theme', mode);
       root.dataset.colorMode = mode;
-      btn.dataset.icon = mode === 'dark' ? 'moon' : 'sun';
+      if (sunIcon && moonIcon) {
+        if (mode === 'dark') {
+          sunIcon.style.display = 'inline-block';
+          moonIcon.style.display = 'none';
+        } else {
+          sunIcon.style.display = 'none';
+          moonIcon.style.display = 'inline-block';
+        }
+      }
     }
 
-    // وضعیت تم ذخیره شده از localStorage
-    let saved = localStorage.getItem(KEY) || 'light'; // پیش‌فرض روشن
+    let saved = 'dark';
+    try { saved = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
     updateTheme(saved);
 
-    // تنظیم مجدد تم هنگام تغییر وضعیت دکمه
-    btn.addEventListener('click', () => {
-      const current = localStorage.getItem(KEY) || 'light';
-      const next = current === 'dark' ? 'light' : 'dark';  // فقط دو حالت: تاریک و روشن
-      localStorage.setItem(KEY, next);
-      updateTheme(next);
-    });
+    if (btn) {
+      btn.addEventListener('click', () => {
+        let current = 'dark';
+        try { current = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+        const next = current === 'dark' ? 'light' : 'dark';
+        try { localStorage.setItem(KEY, next); } catch (e) {}
+        updateTheme(next);
+      });
+    }
 
-    // هنگام بارگذاری صفحه
     document.addEventListener('DOMContentLoaded', () => {
-      updateTheme(localStorage.getItem(KEY) || 'light');
+      let mode = 'dark';
+      try { mode = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+      updateTheme(mode);
+      const yearSpan = document.getElementById('y');
+      if (yearSpan) yearSpan.textContent = new Date().getFullYear();
     });
+
+    const mobBtn = document.getElementById('mobileMenuBtn');
+    const mobDrawer = document.getElementById('mobileDrawer');
+    if (mobBtn && mobDrawer) {
+      const setDrawerOpen = (open) => {
+        mobDrawer.classList.toggle('open', open);
+        mobBtn.classList.toggle('is-open', open);
+        mobBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        mobBtn.setAttribute('aria-label', open ? 'بستن منو' : 'باز کردن منو');
+        mobDrawer.setAttribute('aria-hidden', open ? 'false' : 'true');
+      };
+
+      mobBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        setDrawerOpen(!mobDrawer.classList.contains('open'));
+      });
+
+      mobDrawer.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => setDrawerOpen(false));
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && mobDrawer.classList.contains('open')) {
+          setDrawerOpen(false);
+        }
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!mobDrawer.contains(e.target) && !mobBtn.contains(e.target)) {
+          setDrawerOpen(false);
+        }
+      });
+    }
+
+    if ('serviceWorker' in navigator) {
+      const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+      if (isLocalhost) {
+        navigator.serviceWorker.getRegistrations().then(regs => {
+          for (const reg of regs) reg.unregister();
+        });
+        if ('caches' in window) {
+          caches.keys().then(names => {
+            for (const name of names) caches.delete(name);
+          });
+        }
+      } else {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/Gitab/sw.js').catch(() => {});
+        });
+      }
+    }
   })();
-</script>
-
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-  <script>hljs.highlightAll();</script>
-
-  <script>
+  </script> <script>
   document.querySelectorAll('pre code').forEach(block => {
+    const pre = block.parentNode;
+    if (!pre || pre.querySelector('.copy-btn')) return;
+
+    const copySvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
+    const okSvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+
     const btn = document.createElement('button');
     btn.className = 'copy-btn';
-
-    const icon = document.createElement('img');
-    icon.src = "/Gitab/icone/copy.svg";
-    icon.alt = 'Copy';
-    btn.appendChild(icon);
-
-    block.parentNode.insertBefore(btn, block);
+    btn.setAttribute('aria-label', 'کپی کد');
+    btn.setAttribute('title', 'کپی کد');
+    btn.setAttribute('type', 'button');
+    btn.innerHTML = copySvg;
+    pre.appendChild(btn);
 
     btn.addEventListener('click', async () => {
-      await navigator.clipboard.writeText(block.textContent);
-      btn.classList.add('copied');
-      setTimeout(() => btn.classList.remove('copied'), 1500);
-    });
-  });
-  </script>
-
-  <script>
-  document.body.dataset.page = window.location.pathname;
-
-  const menuBtn = document.querySelector(".menu-toggle");
-  const nav = document.querySelector(".nav");
-
-  if (menuBtn && nav) {
-    menuBtn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      nav.classList.toggle("show");
-    });
-
-    document.addEventListener("click", (e) => {
-      const clickedInsideNav = nav.contains(e.target);
-      const clickedMenuButton = menuBtn.contains(e.target);
-      if (!clickedInsideNav && !clickedMenuButton) {
-        nav.classList.remove("show");
+      try {
+        await navigator.clipboard.writeText(block.textContent);
+        btn.classList.add('copied');
+        btn.innerHTML = okSvg;
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          btn.innerHTML = copySvg;
+        }, 1800);
+      } catch (err) {
+        console.error('Copy failed:', err);
       }
     });
-  }
-  </script>
-
-  <script>
-    document.getElementById('y').textContent = new Date().getFullYear();
-  </script>
-  <script>
-document.getElementById("openDonate").addEventListener("click", () => {
-  document.getElementById("donateModal").style.display = "block";
-});
-document.getElementById("closeDonate").addEventListener("click", () => {
-  document.getElementById("donateModal").style.display = "none";
-});
-document.querySelectorAll(".copy-btn").forEach(btn => {
-  btn.addEventListener("click", () => {
-    navigator.clipboard.writeText(btn.dataset.copy);
-  
-    setTimeout(() => (btn.textContent = "کپی"), 2000);
   });
-});
-</script>
+  </script> <script>
+  (() => {
+    const article = document.getElementById('chapterArticle');
+    if (!article) return;
 
-</body>
-</html>
+    const progressBar = document.getElementById('readingProgressBar');
+    if (progressBar) {
+      window.addEventListener('scroll', () => {
+        const docElem = document.documentElement;
+        const totalHeight = docElem.scrollHeight - docElem.clientHeight;
+        if (totalHeight > 0) {
+          const progress = (window.pageYOffset / totalHeight) * 100;
+          progressBar.style.width = Math.min(100, Math.max(0, progress)) + '%';
+        }
+      }, { passive: true });
+    }
+
+    const btt = document.getElementById('backToTopBtn');
+    if (btt) {
+      window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 250) {
+          btt.classList.add('visible');
+        } else {
+          btt.classList.remove('visible');
+        }
+      }, { passive: true });
+
+      btt.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+
+    article.querySelectorAll('img').forEach(img => {
+      if (!img.hasAttribute('loading')) img.loading = 'lazy';
+      if (!img.hasAttribute('decoding')) img.decoding = 'async';
+      const parent = img.parentElement;
+      if (parent && parent.tagName === 'P') {
+        parent.style.textAlign = 'center';
+      }
+
+      img.addEventListener('error', function() {
+        const src = this.getAttribute('src');
+        if (src && src.includes('assets/image/')) {
+          const parts = src.split('assets/image/');
+          const corrected = '/Gitab/books/book5/assets/image/' + parts[1];
+          if (this.src !== corrected) {
+            this.src = corrected;
+          }
+        }
+      });
+    });
+
+    article.querySelectorAll('p').forEach(p => {
+      const trimmed = p.innerText.trim();
+      if (trimmed.startsWith('💡') || trimmed.startsWith('نکته:')) {
+        p.classList.add('react-callout', 'callout-tip');
+      } else if (trimmed.startsWith('⚠️') || trimmed.startsWith('هشدار:')) {
+        p.classList.add('react-callout', 'callout-warning');
+      } else if (trimmed.startsWith('📌') || trimmed.startsWith('مهم:')) {
+        p.classList.add('react-callout', 'callout-important');
+      } else if (trimmed.startsWith('🔹') || trimmed.startsWith('🔸')) {
+        p.classList.add('react-callout', 'callout-note');
+      }
+    });
+  })();
+  </script> <script type="speculationrules">{"prefetch":[{"where":{"and":[{"href_matches":"/Gitab/*"},{"not":{"href_matches":"/Gitab/downloads/*"}},{"not":{"selector_matches":"[download], [target='_blank']"}}]},"eagerness":"moderate"}]}</script> <script>
+  (() => {
+    if (window.HTMLScriptElement && HTMLScriptElement.supports && HTMLScriptElement.supports('speculationrules')) return;
+    const seen = new Set([window.location.href]);
+    let count = 0;
+    const prefetchLink = (e) => {
+      if (count >= 12) return;
+      const a = e.target && e.target.closest ? e.target.closest('header a, .chapter-single-next-nav a, .syllabus-chapter-item a, .btn-hero-read, .btn-card-read') : null;
+      if (!a || !a.href || a.hasAttribute('download') || a.target === '_blank') return;
+      if (a.origin !== window.location.origin || a.pathname.includes('/downloads/')) return;
+      const clean = a.href.split('#')[0];
+      if (!clean || seen.has(clean)) return;
+      seen.add(clean);
+      count++;
+      const l = document.createElement('link');
+      l.rel = 'prefetch';
+      l.href = clean;
+      document.head.appendChild(l);
+    };
+    document.addEventListener('pointerenter', prefetchLink, { capture: true, passive: true });
+    document.addEventListener('touchstart', prefetchLink, { capture: true, passive: true });
+  })();
+  </script></body></html>

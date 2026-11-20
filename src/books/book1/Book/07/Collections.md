@@ -2,7 +2,7 @@
 layout: layout.njk
 title: مجموعه‌ها (Collections)
 ---
-# فصل هفتم: **مجموعه‌ها (Collections) 📚**
+# فصل هفتم: **مجموعه‌ها (Collections) **
 
 .NET یک مجموعه استاندارد از نوع‌ها را برای ذخیره‌سازی و مدیریت مجموعه‌ای از اشیاء ارائه می‌دهد. این نوع‌ها شامل لیست‌های قابل تغییر اندازه (resizable lists)، لیست‌های پیوندی (linked lists)، دیکشنری‌های مرتب و نامرتب (sorted و unsorted dictionaries) و همچنین آرایه‌ها (arrays) هستند. از بین این‌ها، تنها آرایه‌ها بخشی از زبان C# را تشکیل می‌دهند؛ بقیه مجموعه‌ها فقط کلاس‌هایی هستند که می‌توانید مانند هر کلاس دیگری نمونه‌سازی (instantiate) کنید.
 
@@ -23,7 +23,7 @@ title: مجموعه‌ها (Collections)
 ![Conventions-UsedThis-Book](../../../assets/image/07/Table-7-1.jpeg)
 </div>
 
-**شماره‌گذاری (Enumeration) 🔢**
+**شماره‌گذاری (Enumeration) **
 
 در علوم کامپیوتر، مجموعه‌های مختلفی وجود دارند که از ساختارهای داده ساده مانند آرایه‌ها (arrays) یا لیست‌های پیوندی (linked lists)، تا ساختارهای پیچیده‌تر مانند درخت‌های قرمز/سیاه (red/black trees) و هشت‌جدول‌ها (hashtables) را شامل می‌شوند.
 
@@ -36,7 +36,7 @@ title: مجموعه‌ها (Collections)
 ![Conventions-UsedThis-Book](../../../assets/image/07/Table-7-2.jpeg)
 </div>
 
-**IEnumerable و IEnumerator 🔄**
+**IEnumerable و IEnumerator **
 
 اینترفیس `IEnumerator` پروتکل پایه و سطح پایین را تعریف می‌کند که با آن عناصر یک مجموعه به‌صورت پیش‌رونده (forward-only) پیمایش یا شماره‌گذاری (enumerate) می‌شوند. تعریف آن به صورت زیر است:
 
@@ -86,7 +86,7 @@ foreach (char c in s)
 
 ---
 
-### `IEnumerable<T>` و `IEnumerator<T>` 🧩
+### `IEnumerable<T>` و `IEnumerator<T>`
 
 `IEnumerator` و `IEnumerable` تقریباً همیشه همراه با نسخه‌های Generic خود پیاده‌سازی می‌شوند:
 
@@ -121,7 +121,7 @@ var rator = ((IEnumerable<int>)data).GetEnumerator();
 
 خوشبختانه به لطف دستور `foreach`، به ندرت نیاز است چنین کدی نوشته شود.
 
-**IEnumerable<T> و IDisposable ♻️**
+**IEnumerable<T> و IDisposable **
 
 `IEnumerator<T>` از `IDisposable` ارث‌بری می‌کند. این امکان را به enumerator می‌دهد که به منابعی مانند اتصال به پایگاه داده (database connections) دسترسی داشته باشد و اطمینان حاصل کند که این منابع پس از اتمام یا قطع پیمایش آزاد می‌شوند. دستور `foreach` این نکته را تشخیص می‌دهد و عبارت زیر را:
 
@@ -144,7 +144,7 @@ using (var rator = somethingEnumerable.GetEnumerator())
 
 ---
 
-### استفاده از اینترفیس‌های غیر Generic ❓
+### استفاده از اینترفیس‌های غیر Generic
 
 با توجه به ایمنی نوع اضافی که اینترفیس‌های مجموعه Generic مانند `IEnumerable<T>` ارائه می‌دهند، این سؤال مطرح می‌شود: آیا واقعاً نیاز به استفاده از `IEnumerable` غیر Generic (یا `ICollection` یا `IList`) وجود دارد؟
 
@@ -152,7 +152,7 @@ using (var rator = somethingEnumerable.GetEnumerator())
 
 ---
 
-### به‌عنوان مصرف‌کننده 🔍
+### به‌عنوان مصرف‌کننده
 
 در اکثر موارد، می‌توانید به‌طور کامل با اینترفیس‌های Generic کار کنید. با این حال، اینترفیس‌های غیر Generic هنوز گاهی مفید هستند، زیرا توانایی ارائه **یکپارچگی نوع** برای مجموعه‌ها با همه نوع عناصر را دارند.
 
@@ -176,11 +176,11 @@ public static int Count(IEnumerable e)
 
 چون C# با اینترفیس‌های Generic امکان **covariance** را ارائه می‌دهد، ممکن است فکر کنید می‌توانستیم به جای آن `IEnumerable<object>` دریافت کنیم. اما این روش با عناصر نوع مقدار (value-type) و مجموعه‌های قدیمی که `IEnumerable<T>` را پیاده‌سازی نکرده‌اند، شکست می‌خورد — مثالی از این نوع، `ControlCollection` در Windows Forms است.
 
-> ⚠️ نکته: در مثال بالا، ارجاعات چرخه‌ای (cyclic references) می‌توانند باعث بازگشت نامتناهی و کرش شدن برنامه شوند. ساده‌ترین راه حل، استفاده از `HashSet` است (به بخش "HashSet<T> و SortedSet<T>" در صفحه ۳۹۲ مراجعه کنید).
+>  نکته: در مثال بالا، ارجاعات چرخه‌ای (cyclic references) می‌توانند باعث بازگشت نامتناهی و کرش شدن برنامه شوند. ساده‌ترین راه حل، استفاده از `HashSet` است (به بخش "HashSet<T> و SortedSet<T>" در صفحه ۳۹۲ مراجعه کنید).
 
 ---
 
-### پیاده‌سازی اینترفیس‌های Enumeration 🛠️
+### پیاده‌سازی اینترفیس‌های Enumeration
 
 ممکن است بخواهید `IEnumerable` یا `IEnumerable<T>` را به یکی یا چند دلیل زیر پیاده‌سازی کنید:
 
@@ -197,7 +197,7 @@ public static int Count(IEnumerable e)
 
 ---
 
-### نمونه استفاده از iterator با `yield return` ✨
+### نمونه استفاده از iterator با `yield return`
 
 ```csharp
 public class MyCollection : IEnumerable
@@ -217,7 +217,7 @@ public class MyCollection : IEnumerable
 
 ---
 
-### پیاده‌سازی نسخه Generic 🧩
+### پیاده‌سازی نسخه Generic
 
 ```csharp
 public class MyGenCollection : IEnumerable<int>
@@ -238,7 +238,7 @@ public class MyGenCollection : IEnumerable<int>
 
 ---
 
-### پیاده‌سازی مستقیم IEnumerator 🔧
+### پیاده‌سازی مستقیم IEnumerator
 
 در برخی موارد، می‌توانید یک کلاس بنویسید که مستقیماً `IEnumerator` را پیاده‌سازی کند. مثال زیر یک مجموعه ثابت با اعداد 1، 2 و 3 را نشان می‌دهد:
 
@@ -282,7 +282,7 @@ public class MyIntList : IEnumerable
 
 ---
 
-### پیاده‌سازی Generic مستقیم ✅
+### پیاده‌سازی Generic مستقیم
 
 ```csharp
 class MyIntList : IEnumerable<int>
@@ -313,7 +313,7 @@ class MyIntList : IEnumerable<int>
 
 نسخه Generic سریع‌تر است زیرا `IEnumerator<int>.Current` نیاز به **casting** از `int` به `object` ندارد و سربار **boxing** را حذف می‌کند.
 
-**اینترفیس‌های ICollection و IList 🗂️**
+**اینترفیس‌های ICollection و IList **
 
 اگرچه اینترفیس‌های Enumeration یک پروتکل برای پیمایش **فقط به جلو** (forward-only) در مجموعه‌ها فراهم می‌کنند، اما مکانیزمی برای تعیین اندازه مجموعه، دسترسی به عضو از طریق اندیس، یا تغییر محتویات مجموعه ارائه نمی‌دهند. برای چنین قابلیت‌هایی، دات‌نت اینترفیس‌های `ICollection`، `IList` و `IDictionary` را تعریف کرده است. هرکدام از این اینترفیس‌ها نسخه‌های **Generic** و **Non-Generic** دارند؛ با این حال، نسخه‌های غیر Generic عمدتاً برای پشتیبانی از کدهای قدیمی وجود دارند.
 
@@ -342,7 +342,7 @@ class MyIntList : IEnumerable<int>
 
 ---
 
-### این بخش شامل چه مواردی است 📖
+### این بخش شامل چه مواردی است
 
 این بخش به `ICollection<T>` و `IList<T>` و نسخه‌های غیر Generic آن‌ها می‌پردازد؛ **دیکشنری‌ها** در صفحه ۳۹۴ تحت پوشش قرار دارند.
 
@@ -351,7 +351,7 @@ class MyIntList : IEnumerable<int>
 
 ---
 
-### ICollection<T> و ICollection 📦
+### ICollection<T> و ICollection
 
 `ICollection<T>` اینترفیس استاندارد برای مجموعه‌های شمارش‌پذیر است. این اینترفیس امکان:
 
@@ -393,7 +393,7 @@ public interface ICollection : IEnumerable
 هر دو اینترفیس نسبتاً ساده برای پیاده‌سازی هستند. اگر بخواهید یک `ICollection<T>` فقط خواندنی پیاده‌سازی کنید، متدهای `Add`، `Remove` و `Clear` باید `NotSupportedException` پرتاب کنند.
 
 معمولاً این اینترفیس‌ها همراه با `IList` یا `IDictionary` پیاده‌سازی می‌شوند.
-**اینترفیس‌های IList<T> و IList 📋**
+**اینترفیس‌های IList<T> و IList **
 
 `IList<T>` اینترفیس استاندارد برای مجموعه‌هایی است که می‌توان به عناصر آن‌ها با **موقعیت (اندیس)** دسترسی داشت. علاوه بر قابلیت‌هایی که از `ICollection<T>` و `IEnumerable<T>` به ارث برده، این اینترفیس امکان **خواندن و نوشتن عنصر با استفاده از اندیس** و **درج/حذف عنصر بر اساس موقعیت** را نیز فراهم می‌کند:
 
@@ -431,7 +431,7 @@ public interface IList : ICollection, IEnumerable
 
 کلاس عمومی `List<T>` نمونه بارز پیاده‌سازی هر دو اینترفیس `IList<T>` و `IList` است. آرایه‌های C# نیز هر دو نسخه Generic و Non-Generic `IList` را پیاده‌سازی می‌کنند، اگرچه متدهایی که برای اضافه یا حذف عناصر هستند، از طریق پیاده‌سازی صریح اینترفیس پنهان شده‌اند و در صورت فراخوانی، `NotSupportedException` پرتاب می‌کنند.
 
-> ⚠️ اگر تلاش کنید به یک **آرایه چندبعدی** از طریق ایندکسر `IList` دسترسی پیدا کنید، یک `ArgumentException` پرتاب خواهد شد. این نکته ممکن است هنگام نوشتن متدهایی مانند زیر مشکل‌ساز شود:
+>  اگر تلاش کنید به یک **آرایه چندبعدی** از طریق ایندکسر `IList` دسترسی پیدا کنید، یک `ArgumentException` پرتاب خواهد شد. این نکته ممکن است هنگام نوشتن متدهایی مانند زیر مشکل‌ساز شود:
 
 ```csharp
 public object FirstOrNull(IList list)
@@ -449,7 +449,7 @@ list.GetType().IsArray && list.GetType().GetArrayRank() > 1
 
 ---
 
-### IReadOnlyCollection<T> و IReadOnlyList<T> 🔒
+### IReadOnlyCollection<T> و IReadOnlyList<T>
 
 .NET اینترفیس‌های **مجموعه و لیست فقط خواندنی** نیز دارد که فقط اعضای لازم برای عملیات **فقط خواندنی** را ارائه می‌دهند:
 
@@ -478,7 +478,7 @@ public interface IReadOnlyList<out T> : IReadOnlyCollection<T>,
 
 ---
 
-### کلاس Array 🗃️
+### کلاس Array
 
 کلاس `Array` کلاس پایه **ضمنی (implicit)** برای تمام آرایه‌های تک‌بعدی و چندبعدی است و یکی از **اساسی‌ترین نوع‌ها** است که اینترفیس‌های استاندارد مجموعه را پیاده‌سازی می‌کند.
 
@@ -561,7 +561,7 @@ StringBuilder[] shallowClone = (StringBuilder[]) builders.Clone();
 
 ---
 
-### ایجاد و ایندکس‌گذاری آرایه‌ها 🗂️
+### ایجاد و ایندکس‌گذاری آرایه‌ها
 
 ساده‌ترین راه برای ایجاد و ایندکس کردن آرایه‌ها، استفاده از ساختارهای زبانی C# است:
 
@@ -640,7 +640,7 @@ public static void Clear(Array array, int index, int length);
 
 ---
 
-### پیمایش آرایه‌ها 🔄
+### پیمایش آرایه‌ها
 
 آرایه‌ها به‌راحتی با **foreach** پیمایش می‌شوند:
 
@@ -669,7 +669,7 @@ Array.ForEach(new[] { 1, 2, 3 }, Console.WriteLine);
 Array.ForEach([1, 2, 3], Console.WriteLine);
 ```
 
-### طول و بعد آرایه 📏
+### طول و بعد آرایه
 
 کلاس `Array` متدها و ویژگی‌های زیر را برای **پرس‌وجو درباره طول و بعد** آرایه ارائه می‌دهد:
 
@@ -690,7 +690,7 @@ public int Rank { get; }    // تعداد بعدهای آرایه را باز م
 
 ---
 
-### جستجو در آرایه 🔍
+### جستجو در آرایه
 
 کلاس `Array` مجموعه‌ای از متدها را برای پیدا کردن عناصر در **آرایه‌های تک‌بعدی** ارائه می‌دهد:
 
@@ -743,7 +743,7 @@ string match = Array.Find(names, n => n.Contains("a")); // Jack
 
 * `TrueForAll` باز می‌گرداند `true` اگر **همه عناصر** معیار Predicate را برآورده کنند، مشابه `All` در `System.Linq.Enumerable`.
 
-### مرتب‌سازی آرایه 🗂️
+### مرتب‌سازی آرایه
 
 کلاس `Array` چندین متد **مرتب‌سازی داخلی** دارد:
 
@@ -781,7 +781,7 @@ Array.Sort(numbers, words);
 // words   → { "one", "two", "three" }
 ```
 
-> ⚠️ نکته: `Array.Sort` نیاز دارد که عناصر آرایه `IComparable` را پیاده‌سازی کنند. اگر عناصر قابل مقایسه ذاتی نباشند یا بخواهید ترتیب پیش‌فرض را تغییر دهید، باید **Comparison سفارشی** یا شیء `IComparer<T>` ارائه دهید.
+>  نکته: `Array.Sort` نیاز دارد که عناصر آرایه `IComparable` را پیاده‌سازی کنند. اگر عناصر قابل مقایسه ذاتی نباشند یا بخواهید ترتیب پیش‌فرض را تغییر دهید، باید **Comparison سفارشی** یا شیء `IComparer<T>` ارائه دهید.
 
 مثال با **Comparison Delegate**:
 
@@ -806,7 +806,7 @@ Array.Sort(numbers, (x, y) => x % 2 == y % 2 ? 0 : x % 2 == 1 ? -1 : 1);
 
 ---
 
-### معکوس کردن عناصر 🔄
+### معکوس کردن عناصر
 
 کلاس `Array` متدهایی برای معکوس کردن تمام یا بخشی از آرایه ارائه می‌دهد:
 
@@ -817,7 +817,7 @@ public static void Reverse(Array array, int index, int length);
 
 ---
 
-### کپی کردن آرایه 📋
+### کپی کردن آرایه
 
 کلاس `Array` چهار روش برای **کپی سطحی** دارد: `Clone`، `CopyTo`، `Copy` و `ConstrainedCopy`
 
@@ -837,7 +837,7 @@ public static void Reverse(Array array, int index, int length);
 
 * `AsReadOnly` → **Wrapper** بازمی‌گرداند که از تغییر عناصر جلوگیری می‌کند
 
-### تبدیل و تغییر اندازه آرایه 🔄📏
+### تبدیل و تغییر اندازه آرایه
 
 کلاس `Array` متدهایی برای **تبدیل عناصر آرایه** و **تغییر اندازه آرایه** ارائه می‌دهد:
 
@@ -857,13 +857,13 @@ int[] wholes = Array.ConvertAll(reals, r => Convert.ToInt32(r));
 ```
 
 * `Array.Resize` → با ایجاد آرایه جدید و کپی عناصر، آرایه را تغییر اندازه می‌دهد و نتیجه را از طریق پارامتر مرجع بازمی‌گرداند.
-  ⚠️ توجه: سایر مراجع به آرایه اصلی **تغییری نمی‌کنند**.
+   توجه: سایر مراجع به آرایه اصلی **تغییری نمی‌کنند**.
 
 > فضای نام `System.Linq` هم تعداد زیادی **Extension Method** برای تبدیل آرایه ارائه می‌دهد که خروجی آن `IEnumerable<T>` است و می‌توان دوباره با `ToArray` به آرایه تبدیل کرد.
 
 ---
 
-### لیست‌ها، صف‌ها، پشته‌ها و مجموعه‌ها 📚🛒
+### لیست‌ها، صف‌ها، پشته‌ها و مجموعه‌ها
 
 .NET مجموعه‌ای از کلاس‌های **مجموعه‌ای آماده** ارائه می‌دهد که رابط‌های معرفی‌شده در این فصل را پیاده‌سازی می‌کنند.
 این بخش روی **مجموعه‌های شبیه لیست** تمرکز دارد و نه مجموعه‌های دیکشنری، که بعداً در فصل «Dictionaries» بررسی می‌کنیم.
@@ -874,7 +874,7 @@ int[] wholes = Array.ConvertAll(reals, r => Convert.ToInt32(r));
 
 ---
 
-### کلاس‌های List<T> و ArrayList 📝
+### کلاس‌های List<T> و ArrayList
 
 * کلاس Generic `List<T>` و Non-Generic `ArrayList` آرایه‌ای **پویا** از اشیاء فراهم می‌کنند.
 * `ArrayList` → پیاده‌سازی `IList`
@@ -894,7 +894,7 @@ int[] wholes = Array.ConvertAll(reals, r => Convert.ToInt32(r));
 
 ---
 
-### سازنده‌ها و متدهای مهم `List<T>` ⚙️
+### سازنده‌ها و متدهای مهم `List<T>`
 
 ```csharp
 public class List<T> : IList<T>, IReadOnlyList<T>
@@ -940,7 +940,7 @@ public class List<T> : IList<T>, IReadOnlyList<T>
 
 ---
 
-### مثال عملی با List<T> 🎯
+### مثال عملی با List<T>
 
 ```csharp
 var words = new List<string>();          // لیست رشته‌ای
@@ -968,7 +968,7 @@ List<int> lengths = words.ConvertAll(s => s.Length);
 
 ---
 
-### تفاوت با ArrayList ⚠️
+### تفاوت با ArrayList
 
 ```csharp
 ArrayList al = new ArrayList();
@@ -996,7 +996,7 @@ List<int> list = al.Cast<int>().ToList();
 
 * `Cast` و `ToList` متدهای **Extension** در `System.Linq.Enumerable` هستند.
 
-### LinkedList<T> 🔗
+### LinkedList<T>
 
 `LinkedList<T>` یک **لیست پیوندی دوطرفه (doubly linked list)** جنریک است.
 
@@ -1030,7 +1030,7 @@ null <- [Node1] <-> [Node2] <-> [Node3] -> null
 ![Conventions-UsedThis-Book](../../../assets/image/07/Table-7-5.jpeg)
 </div>
 
-### LinkedList<T> 🔗 – ادامه
+### LinkedList<T>  – ادامه
 
 `LinkedList<T>` پیاده‌سازی می‌شود از **IEnumerable<T> و ICollection<T>** (و نسخه‌های غیرجنریک آن‌ها) اما **IList<T> پیاده‌سازی نمی‌شود**، چون **دسترسی بر اساس ایندکس پشتیبانی نمی‌شود**.
 
@@ -1125,7 +1125,7 @@ foreach (string s in tune)
 
 > این مثال نشان می‌دهد چگونه می‌توان عناصر را اضافه، حذف و جستجو کرد و از پیمایش foreach برای چاپ استفاده کرد.
 >
-### Queue<T> و Stack<T> ⏳📚
+### Queue<T> و Stack<T> ⏳
 
 #### Queue<T> – صف (FIFO)
 
@@ -1184,7 +1184,7 @@ Console.WriteLine(s.Pop());     // Exception
 
 ---
 
-#### BitArray – آرایه بیت 🟢⚫
+#### BitArray – آرایه بیت
 
 `BitArray` یک **مجموعه دینامیک از مقادیر bool** است که **هر عنصر فقط یک بیت حافظه اشغال می‌کند** و نسبت به آرایه معمولی bool یا List<bool> بسیار حافظه‌کارآمد است.
 
@@ -1204,7 +1204,7 @@ Console.WriteLine(bits[1]);   // False
 
 > BitArray برای ذخیره و پردازش مجموعه‌های بزرگ بیتی بسیار مناسب است.
 
-### HashSet<T> و SortedSet<T> 🔹🔸
+### HashSet<T> و SortedSet<T>
 
 #### ویژگی‌های مشترک
 
@@ -1387,7 +1387,7 @@ if (!d.TryGetValue("onE", out val))
 * استفاده از **StringComparer.OrdinalIgnoreCase** برای کلیدهای رشته‌ای می‌تواند برابری بدون حساسیت به حروف ایجاد کند.
 * مشخص کردن ظرفیت اولیه دیکشنری می‌تواند از resize داخلی جلوگیری کند و عملکرد را بهتر کند.
 
-### 🗂️ OrderedDictionary
+### OrderedDictionary
 
 یک **OrderedDictionary** یک دیکشنری غیرجنریک است که عناصر را در همان ترتیبی که اضافه شده‌اند نگه می‌دارد. با استفاده از **OrderedDictionary** می‌توانید به عناصر هم از طریق **اندیس (index)** و هم از طریق **کلید (key)** دسترسی داشته باشید.
 یک **OrderedDictionary**، دیکشنری مرتب (sorted) نیست.
@@ -1396,7 +1396,7 @@ if (!d.TryGetValue("onE", out val))
 
 ---
 
-### 📋 ListDictionary و HybridDictionary
+### ListDictionary و HybridDictionary
 
 **ListDictionary** از یک **لیست پیوندی تک‌جهته (singly linked list)** برای ذخیره داده‌ها استفاده می‌کند. این دیکشنری **مرتب‌سازی** انجام نمی‌دهد، اما ترتیب ورودی اصلی عناصر را حفظ می‌کند.
 **ListDictionary** با لیست‌های بزرگ بسیار کند است و تنها مزیت واقعی آن، کارایی بالا با لیست‌های بسیار کوچک (کمتر از ۱۰ عنصر) است.
@@ -1406,7 +1406,7 @@ if (!d.TryGetValue("onE", out val))
 
 ---
 
-### 📈 Sorted Dictionaries
+### Sorted Dictionaries
 
 **BCL** دات‌نت دو کلاس دیکشنری ارائه می‌دهد که به صورت داخلی همیشه بر اساس **کلید** مرتب هستند:
 
@@ -1426,7 +1426,7 @@ if (!d.TryGetValue("onE", out val))
 
 ---
 
-### 🔍 مثال استفاده از SortedList
+### مثال استفاده از SortedList
 
 مثال زیر با استفاده از **reflection**، تمام متدهای تعریف‌شده در `System.Object` را در یک **SortedList** با کلید نام متد بارگذاری می‌کند و سپس کلیدها و مقادیر آن‌ها را شمارش می‌کند:
 
@@ -1484,13 +1484,13 @@ Console.WriteLine(sorted.Keys[sorted.Count - 1]);           // ToString
 Console.WriteLine(sorted.Values[sorted.Count - 1].IsVirtual); // True
 ```
 
-### 🛠️ Collections قابل سفارشی‌سازی و پراکسی‌ها
+### Collections قابل سفارشی‌سازی و پراکسی‌ها
 
 کلاس‌های مجموعه‌ای که در بخش‌های قبلی بررسی شد، راحت هستند چون می‌توانید مستقیماً نمونه‌سازی (instantiate) کنید، اما **امکان کنترل رفتار هنگام افزودن یا حذف یک آیتم** را به شما نمی‌دهند. در برنامه‌هایی با مجموعه‌های قوی‌تایپ (strongly typed)، گاهی به این کنترل نیاز دارید؛ برای مثال:
 
-* 🔹 اجرای یک **رویداد (event)** هنگام افزودن یا حذف آیتم
-* 🔹 به‌روزرسانی **ویژگی‌ها (properties)** به خاطر آیتم اضافه یا حذف‌شده
-* 🔹 تشخیص یک **عملیات غیرمجاز افزودن/حذف** و پرتاب استثنا (exception) (مثلاً اگر عملیات قوانین تجاری را نقض کند)
+*  اجرای یک **رویداد (event)** هنگام افزودن یا حذف آیتم
+*  به‌روزرسانی **ویژگی‌ها (properties)** به خاطر آیتم اضافه یا حذف‌شده
+*  تشخیص یک **عملیات غیرمجاز افزودن/حذف** و پرتاب استثنا (exception) (مثلاً اگر عملیات قوانین تجاری را نقض کند)
 
 **.NET BCL** کلاس‌هایی برای این منظور ارائه می‌دهد که در فضای نام `System.Collections.ObjectModel` قرار دارند. این‌ها در اصل **پراکسی‌ها یا wrapperها** هستند که `IList<T>` یا `IDictionary<,>` را پیاده‌سازی می‌کنند و متدها را به یک مجموعه زیرین هدایت می‌کنند. هر عملیات **Add**، **Remove** یا **Clear** از طریق یک متد مجازی (virtual) هدایت می‌شود که هنگام override شدن به عنوان یک “درگاه” عمل می‌کند.
 
@@ -1498,7 +1498,7 @@ Console.WriteLine(sorted.Values[sorted.Count - 1].IsVirtual); // True
 
 ---
 
-### 📦 Collection<T> و CollectionBase
+### Collection<T> و CollectionBase
 
 کلاس **Collection<T>** یک **wrapper قابل سفارشی‌سازی** برای `List<T>` است.
 علاوه بر پیاده‌سازی `IList<T>` و `IList`، چهار متد مجازی و یک ویژگی محافظت‌شده (protected) اضافه ارائه می‌دهد:
@@ -1552,7 +1552,7 @@ public class Zoo
 
 ---
 
-### 🔄 افزودن ویژگی Zoo به حیوانات و override متدهای مجازی
+### افزودن ویژگی Zoo به حیوانات و override متدهای مجازی
 
 اکنون می‌خواهیم به کلاس `Animal` ویژگی `Zoo` اضافه کنیم تا مرجع به باغ‌وحش خود را داشته باشد و همه متدهای مجازی `Collection<Animal>` را override کنیم تا این ویژگی به‌صورت خودکار مدیریت شود:
 
@@ -1609,7 +1609,7 @@ public class Zoo
 
 ---
 
-### ⚙️ CollectionBase
+### CollectionBase
 
 **CollectionBase** نسخه غیرجنریک `Collection<T>` است. این کلاس بیشتر قابلیت‌های مشابه `Collection<T>` را ارائه می‌دهد اما استفاده از آن **دست‌وپاگیرتر** است.
 به جای متدهای قالبی **InsertItem**، **RemoveItem**، **SetItem** و **ClearItems**، **CollectionBase** دارای متدهای “hook” است که تعداد متدها را دو برابر می‌کند:
@@ -1621,7 +1621,7 @@ public class Zoo
 
 چون **CollectionBase** غیرجنریک است، هنگام subclass کردن باید متدهای تایپ‌شده نیز پیاده‌سازی کنید؛ حداقل یک **اندیسری تایپ‌شده (typed indexer)** و متد **Add**.
 
-### 🗝️ KeyedCollection\<TKey,TItem> و DictionaryBase
+### KeyedCollection\<TKey,TItem> و DictionaryBase
 
 کلاس **KeyedCollection\<TKey,TItem>** از `Collection<TItem>` مشتق شده و هم **ویژگی‌هایی اضافه می‌کند** و هم **ویژگی‌هایی را حذف می‌کند**.
 
@@ -1654,7 +1654,7 @@ public abstract class KeyedCollection<TKey, TItem> : Collection<TItem>
 
 ---
 
-### 🐾 مثال: استفاده از KeyedCollection برای Zoo
+### مثال: استفاده از KeyedCollection برای Zoo
 
 متداول‌ترین کاربرد `KeyedCollection<,>` فراهم کردن **مجموعه‌ای از آیتم‌ها با دسترسی هم از طریق اندیس و هم از طریق نام** است.
 
@@ -1717,7 +1717,7 @@ Console.WriteLine(zoo.Animals["Mr Roo"].Popularity);        // 10
 
 ---
 
-### 🏛️ DictionaryBase
+### DictionaryBase
 
 نسخه غیرجنریک `KeyedCollection`، کلاس **DictionaryBase** است. این کلاس قدیمی **رویکرد متفاوتی** دارد:
 
@@ -1730,7 +1730,7 @@ Console.WriteLine(zoo.Animals["Mr Roo"].Popularity);        // 10
 مدل بهبود یافته در **KeyedCollection** احتمالاً به این دلیل است که چند سال بعد نوشته شده و از تجربیات گذشته بهره‌مند بوده است.
 **DictionaryBase** بیشتر برای **سازگاری با نسخه‌های قدیمی (backward compatibility)** مفید است.
 
-### 🔒 ReadOnlyCollection<T>
+### ReadOnlyCollection<T>
 
 کلاس **ReadOnlyCollection<T>** یک **wrapper** یا **proxy** است که یک **نمای فقط-خواندنی** از یک مجموعه را فراهم می‌کند. این ویژگی به شما اجازه می‌دهد تا یک کلاس **دسترسی عمومی فقط-خواندنی** به یک مجموعه را ارائه دهد، در حالی که خود کلاس هنوز می‌تواند مجموعه را به‌صورت داخلی به‌روزرسانی کند.
 
@@ -1775,7 +1775,7 @@ t.Names.Add("test");                    // خطای کامپایل
 
 ---
 
-### 🛡️ Immutable Collections
+### Immutable Collections
 
 قبلاً توضیح دادیم که چگونه **ReadOnlyCollection<T>** یک نمای فقط-خواندنی ایجاد می‌کند. محدود کردن توانایی نوشتن (mutate) یک مجموعه یا هر شیء دیگر، **ساده‌سازی نرم‌افزار و کاهش باگ‌ها** را به دنبال دارد.
 
@@ -1783,13 +1783,13 @@ t.Names.Add("test");                    // خطای کامپایل
 
 ---
 
-#### ⚡ مزایای Immutable Collections
+#### مزایای Immutable Collections
 
 * **از بین بردن تعداد زیادی از باگ‌ها** که با تغییر وضعیت ایجاد می‌شوند.
 * **ساده‌سازی موازی‌سازی و چندنخی** (multithreading) با اجتناب از بیشتر مشکلات thread-safety که در فصل‌های 14، 22 و 23 توضیح داده می‌شوند.
 * **ساده‌تر کردن منطق و تحلیل کد**.
 
-#### ❌ معایب
+#### معایب
 
 * هرگاه نیاز به تغییر باشد، باید **کل شیء جدیدی ساخته شود** که ممکن است **هزینه عملکردی** به همراه داشته باشد. با این حال، **استراتژی‌هایی برای کاهش این هزینه** وجود دارد، از جمله قابلیت **استفاده مجدد از بخش‌هایی از ساختار اولیه**.
 
@@ -1797,7 +1797,7 @@ t.Names.Add("test");                    // خطای کامپایل
 
 مجموعه‌های immutable بخشی از **.NET** هستند (در .NET Framework، از طریق پکیج NuGet به نام `System.Collections.Immutable` قابل دسترسی‌اند). همه مجموعه‌ها در namespace زیر تعریف شده‌اند:
 
-```text
+```csharp
 System.Collections.Immutable
 ```
 
@@ -1806,7 +1806,7 @@ System.Collections.Immutable
 ![Conventions-UsedThis-Book](../../../assets/image/07/Table-7-7.jpeg)
 </div>
 
-### 🧱 ImmutableArray<T> و ImmutableList<T>
+### ImmutableArray<T> و ImmutableList<T>
 
 انواع **ImmutableArray<T>** و **ImmutableList<T>** هر دو نسخه‌های **immutable** از **List<T>** هستند. هر دو کار مشابهی انجام می‌دهند، اما **ویژگی‌های عملکردی متفاوتی** دارند که در بخش «Immutable Collections and Performance» در صفحه 409 بررسی شده است.
 
@@ -1816,7 +1816,7 @@ System.Collections.Immutable
 
 ---
 
-### 🏗️ ایجاد Immutable Collections
+### ایجاد Immutable Collections
 
 هر نوع مجموعه immutable یک متد **Create<T>()** ارائه می‌دهد که **مقادیر اولیه اختیاری** را می‌پذیرد و **یک مجموعه immutable مقداردهی‌شده** برمی‌گرداند:
 
@@ -1834,7 +1834,7 @@ var list = new[] { 1, 2, 3 }.ToImmutableList();
 
 ---
 
-### 🔄 دستکاری Immutable Collections
+### دستکاری Immutable Collections
 
 متد **Add** یک **مجموعه جدید** شامل **عناصر موجود به‌علاوه عنصر جدید** برمی‌گرداند:
 
@@ -1859,7 +1859,7 @@ var anotherList = oldList.AddRange(new[] { 4, 5, 6 });
 
 ---
 
-### 🏗️ Builders
+### Builders
 
 برای نیازهای مقداردهی پیچیده‌تر، هر کلاس مجموعه immutable دارای **Builder** متناظر است.
 Builders به لحاظ عملکرد مشابه یک **مجموعه mutable** هستند. پس از مقداردهی، با فراخوانی `.ToImmutable()` روی Builder، یک مجموعه immutable جدید دریافت می‌کنید:
@@ -1886,7 +1886,7 @@ ImmutableArray<int> myImmutable2 = builder2.ToImmutable(); // مجموعه جد�
 
 ---
 
-### ⚡ Immutable Collections و عملکرد
+### Immutable Collections و عملکرد
 
 بیشتر مجموعه‌های immutable از **درخت AVL** داخلی استفاده می‌کنند، که اجازه می‌دهد عملیات **add/remove** از بخش‌هایی از ساختار داخلی قبلی استفاده کنند و **کل مجموعه دوباره ساخته نشود**. این باعث می‌شود **هزینه عملیات add/remove از بزرگ (در مجموعه‌های بزرگ) به متوسط کاهش یابد**؛ اما خواندن داده‌ها کمی کندتر خواهد شد.
 نتیجه نهایی این است که بیشتر مجموعه‌های immutable **برای خواندن و نوشتن کندتر** از نسخه‌های mutable هستند.
@@ -1900,7 +1900,7 @@ ImmutableArray<int> myImmutable2 = builder2.ToImmutable(); // مجموعه جد�
 ![Conventions-UsedThis-Book](../../../assets/image/07/Table-7-8.jpeg)
 </div>
 
-### ❌ هزینه حذف در ImmutableArray
+### هزینه حذف در ImmutableArray
 
 فراخوانی **Remove** روی **ImmutableArray** گران‌تر از فراخوانی همان متد روی **List<T>** است — حتی در **بدترین حالت** که اولین عنصر حذف شود — زیرا **ایجاد مجموعه جدید فشار اضافی روی Garbage Collector وارد می‌کند**.
 
@@ -1910,7 +1910,7 @@ ImmutableArray<int> myImmutable2 = builder2.ToImmutable(); // مجموعه جد�
 
 ---
 
-### ⚡ کاهش هزینه‌ها در Immutable Collections
+### کاهش هزینه‌ها در Immutable Collections
 
 عوامل زیر به کاهش هزینه‌ها کمک می‌کنند:
 
@@ -1922,7 +1922,7 @@ ImmutableArray<int> myImmutable2 = builder2.ToImmutable(); // مجموعه جد�
 
 ---
 
-### ❄️ Frozen Collections
+### Frozen Collections
 
 از **.NET 8**، فضای نام **System.Collections.Frozen** شامل دو کلاس **مجموعه فقط‌خواندنی** است:
 
@@ -1962,7 +1962,7 @@ class Disassembler
 
 ---
 
-### ⚙️ Plugging in Equality and Order
+### Plugging in Equality and Order
 
 در بخش‌های **“Equality Comparison”** (صفحه 226) و **“Order Comparison”** (صفحه 355) پروتکل‌های استاندارد .NET توضیح داده شد که یک نوع را **قابل مقایسه، قابل هش و equatable** می‌کنند.
 
@@ -1999,7 +1999,7 @@ class Disassembler
 
 ---
 
-### ⚖️ IEqualityComparer و EqualityComparer
+### IEqualityComparer و EqualityComparer
 
 یک **equality comparer** این امکان را فراهم می‌کند که رفتار **برابری و هشینگ غیرپیش‌فرض** جایگزین شود، عمدتاً برای کلاس‌های **Dictionary** و **Hashtable**.
 
@@ -2044,7 +2044,7 @@ public abstract class EqualityComparer<T> : IEqualityComparer, IEqualityComparer
 
 ---
 
-### 🧾 مثال: Customer و EqualityComparer سفارشی
+### مثال: Customer و EqualityComparer سفارشی
 
 مثلاً یک کلاس **Customer** با دو فیلد داریم و یک equality comparer می‌نویسیم که هر دو **نام و نام خانوادگی** را مقایسه کند:
 
@@ -2100,11 +2100,11 @@ d[c1] = "Joe";
 Console.WriteLine(d.ContainsKey(c2));  // True
 ```
 
-⚠️ نکته: هنگام استفاده از Dictionary با یک **comparer سفارشی**، باید مراقب باشید که **FirstName یا LastName مشتری تغییر نکند**، چون تغییر HashCode باعث شکستن Dictionary می‌شود.
+> **نکته:** هنگام استفاده از Dictionary با یک **comparer سفارشی**، باید مراقب باشید که **FirstName یا LastName مشتری تغییر نکند**، چون تغییر HashCode باعث شکستن Dictionary می‌شود.
 
 ---
 
-### ✅ EqualityComparer<T>.Default
+### EqualityComparer<T>.Default
 
 فراخوانی `EqualityComparer<T>.Default` یک **equality comparer عمومی** برمی‌گرداند که می‌توان آن را به جای **object.Equals** استفاده کرد.
 مزیت آن این است که ابتدا بررسی می‌کند آیا **T IEquatable<T>** پیاده‌سازی کرده است یا خیر، و اگر کرده باشد، آن پیاده‌سازی را فراخوانی می‌کند و از **boxing overhead** جلوگیری می‌کند.
@@ -2121,12 +2121,12 @@ static bool Foo<T>(T x, T y)
 
 ---
 
-### 🧩 ReferenceEqualityComparer.Instance (.NET 5+)
+### ReferenceEqualityComparer.Instance (.NET 5+)
 
 از **.NET 5**، `ReferenceEqualityComparer.Instance` یک **equality comparer** برمی‌گرداند که همیشه **referential equality** را اعمال می‌کند.
 در مورد **value types**، متد **Equals** آن همیشه **false** برمی‌گرداند.
 
-### 🏷️ IComparer و Comparer
+### IComparer و Comparer
 
 **Comparers** برای جایگزینی منطق **مرتب‌سازی سفارشی** در **dictionaries و collectionهای مرتب** استفاده می‌شوند.
 
@@ -2186,7 +2186,7 @@ class PriorityComparer : Comparer<Wish>
 }
 ```
 
-✅ نکته: بررسی `object.Equals` اطمینان می‌دهد که هیچ‌گاه با روش `Equals` تناقض پیدا نکنیم. استفاده از متد **static object.Equals** بهتر از `x.Equals` است چون حتی وقتی `x` برابر null است، کار می‌کند.
+> **نکته:** بررسی `object.Equals` اطمینان می‌دهد که هیچ‌گاه با روش `Equals` تناقض پیدا نکنیم. استفاده از متد **static object.Equals** بهتر از `x.Equals` است چون حتی وقتی `x` برابر null است، کار می‌کند.
 
 مرتب‌سازی یک لیست با استفاده از **PriorityComparer**:
 
@@ -2236,7 +2236,7 @@ foreach (string s in dic.Values)
 
 ---
 
-### 🔤 StringComparer
+### StringComparer
 
 `StringComparer` یک کلاس plug-in پیش‌فرض برای **برابری و مقایسه رشته‌ها** است که امکان تعیین **زبان و حساسیت به حروف بزرگ/کوچک** را می‌دهد.
 این کلاس هم **IEqualityComparer** و هم **IComparer** (نسخه‌های generic و nongeneric) را پیاده‌سازی می‌کند، بنابراین می‌توان از آن با هر نوع dictionary یا collection مرتب استفاده کرد.
@@ -2295,7 +2295,7 @@ class SurnameComparer : Comparer<string>
 
 ---
 
-### ⚙️ IStructuralEquatable و IStructuralComparable
+### IStructuralEquatable و IStructuralComparable
 
 همان‌طور که در فصل ۶ گفتیم، **structها به طور پیش‌فرض** مقایسه ساختاری دارند: دو struct برابر هستند اگر تمام فیلدهایشان برابر باشند.
 گاهی اوقات، **برابری و مرتب‌سازی ساختاری** برای انواع دیگر مانند آرایه‌ها نیز مفید است.

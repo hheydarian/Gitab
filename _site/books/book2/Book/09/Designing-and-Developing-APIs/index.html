@@ -1,509 +1,64 @@
-
-
-<!doctype html>
-<html lang="fa" dir="rtl">
-<head>
-  <meta charset="utf-8">
-  <link rel="icon" type="image/png" href="/Gitab/favicon.png">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>طراحی و توسعه API ها</title>
-  <meta name="description" content="ترجمه‌های فارسی کتاب‌های فنی — سریع، مینیمال و قابل اتکا.">
-
-  <!-- استایل‌ها -->
-  <link rel="stylesheet" href="/Gitab/styles/main.css">
-  <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
-
-  <style>
-  @font-face {
-    font-family: 'Vazir';
-    src: url('/Gitab/fonts/Vazir-FD-WOL.ttf') format('truetype');
-    font-display: swap;
-  }
-  @font-face {
-    font-family: "Lalezar";
-    src: url('fonts/Lalezar.ttf') format('truetype');
-    font-display: swap;
-}
-  body {
-    font-family: 'Vazir', sans-serif;
-  }
-  </style>
-</head>
-
-<body>
-  <!-- هدر مشترک -->
-  <header class="header">
-    <div class="container nav-wrap">
-      <a href="/Gitab/" class="brand">
-        <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="26" height="26">
-        <span>Gitab</span>
-      </a>
-
-       <nav class="nav">
-         <a href="/Gitab/" >خانه</a>
-         <a href="/Gitab/books/list-books" >کتاب‌ها</a>
-         <a href="/Gitab/giter.html" >دوره ها</a>
-          <!-- 
-         <a href="/Gitab/translator.html" >مترجمین</a>
-           -->
-       </nav>
-
-      <div class="nav-actions">
-        <button id="themeToggle" class="icon-btn theme-btn" data-icon="moon" aria-label="تغییر تم">
-          <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن">
-          <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک">
-        </button>
-
-        <a class="icon-btn" href="https://github.com/hheydarian/Gitab" target="_blank" title="GitHub">
-          <img src="/Gitab/icone/github.svg" alt="GitHub">
-        </a>
-
-        <!-- دکمه منو برای موبایل -->
-        <button class="menu-toggle" aria-label="منو">
-          <img src="/Gitab/icone/menu.svg" alt="menu">
-        </button>
-      </div>
-    </div>
-  </header>
-
-  
-  <main class="site-main book-page">
-    <h1>فصل نهم: طراحی و توسعه API ها 🚀</h1>
-<p><strong>واسط‌های برنامه‌نویسی کاربردی (Application Programming Interfaces یا APIها)</strong> در این روزها به‌شدت مهم و حیاتی‌تر از هر زمان دیگری هستند. APIها برای اتصال دولت‌ها و مؤسسات به‌منظور <strong>اشتراک‌گذاری داده‌ها و همکاری در مسائل تجاری و دولتی</strong> استفاده می‌شوند. آن‌ها بین <strong>کلینیک‌های پزشکی و بیمارستان‌ها</strong> برای <strong>اشتراک لحظه‌ای اطلاعات بیماران</strong> به‌کار می‌روند.</p>
-<p>شما هر روز بدون اینکه متوجه شوید از APIها استفاده می‌کنید؛ برای مثال، هنگام اتصال به <strong>ایمیل‌ها</strong> یا زمانی که با <strong>همکاران و مشتریان خود</strong> در پلتفرم‌هایی مثل <strong>Microsoft Teams، Microsoft Azure، Amazon Web Services و Google Cloud Platform</strong> همکاری می‌کنید، در حال استفاده از API هستید.</p>
-<p>هر بار که با کسی <strong>چت</strong> یا <strong>تماس ویدیویی</strong> برقرار می‌کنید، چه با <strong>کامپیوتر</strong> چه با <strong>تلفن همراه</strong>، در حال استفاده از API هستید. هنگام <strong>پخش زنده کنفرانس‌های ویدیویی</strong>، ورود به <strong>چت پشتیبانی فنی وب‌سایت‌ها</strong> یا <strong>استریم موسیقی و ویدیوهای مورد علاقه‌تان</strong>، همگی نمونه‌هایی از استفاده از API هستند.</p>
-<p>بنابراین، به‌عنوان یک <strong>برنامه‌نویس</strong>، ضروری است که به‌خوبی با <strong>مفهوم APIها</strong>، <strong>طراحی، توسعه، امنیت و استقرار آن‌ها</strong> آشنا باشید.</p>
-<p>در این فصل، درباره اینکه <strong>API چیست، چه مزایایی دارد و چرا لازم است درباره آن یاد بگیریم</strong> صحبت خواهیم کرد. همچنین موضوعات زیر را بررسی می‌کنیم:</p>
-<ul>
-<li><strong>API proxies</strong></li>
-<li><strong>راهنماهای طراحی و توسعه API</strong></li>
-<li><strong>طراحی API با استفاده از RAML</strong></li>
-<li><strong>مستندسازی API با Swagger</strong></li>
-</ul>
-<hr>
-<h3>موضوعات پوشش داده شده در این فصل: 📚</h3>
-<ul>
-<li><strong>API چیست؟</strong></li>
-<li><strong>API proxies</strong></li>
-<li><strong>راهنماهای طراحی API</strong></li>
-<li><strong>طراحی API با RAML</strong></li>
-<li><strong>توسعه و مستندسازی API با Swagger</strong></li>
-</ul>
-<hr>
-<h3>مهارت‌هایی که در این فصل به‌دست خواهید آورد: 🛠</h3>
-<ul>
-<li>درک مفهوم API و اهمیت یادگیری آن</li>
-<li>شناخت API proxies و دلایل استفاده از آن‌ها</li>
-<li>آشنایی با اصول طراحی در زمان ساخت APIهای خود</li>
-<li>طراحی API با استفاده از RAML</li>
-<li>مستندسازی API با Swagger</li>
-</ul>
-<p>در پایان این فصل، شما با <strong>مبانی طراحی خوب API</strong> آشنا خواهید شد و <strong>دانش لازم برای ارتقاء مهارت‌های API</strong> خود را به‌دست می‌آورید. مهم است که ابتدا <strong>درک کنیم API چیست</strong>، بنابراین از همین‌جا شروع می‌کنیم. اما پیش از آن، اطمینان حاصل کنید که <strong>پیش‌نیازهای فنی زیر</strong> را برای بهره‌برداری کامل از این فصل پیاده‌سازی کرده‌اید.</p>
-<hr>
-<h3>پیش‌نیازهای فنی: 💻</h3>
-<p>برای ایجاد یک API در این فصل، از فناوری‌های زیر استفاده خواهیم کرد:</p>
-<ul>
-<li><strong>Visual Studio 2019 Community Edition یا نسخه‌های بالاتر</strong></li>
-<li><strong>Swashbuckle.AspNetCore 5 یا بالاتر</strong></li>
-<li><strong>Swagger (<a href="https://swagger.io">https://swagger.io</a>)</strong></li>
-<li><strong>Atom (<a href="http://atom.io">http://atom.io</a>)</strong></li>
-<li><strong>API Workbench by MuleSoft</strong></li>
-</ul>
-<hr>
-<h3>API چیست؟ 🤔</h3>
-<p>APIها <strong>کتابخانه‌های قابل استفاده مجدد</strong> هستند که می‌توانند <strong>بین برنامه‌های مختلف به اشتراک گذاشته شوند</strong> و از طریق <strong>سرویس‌های REST</strong> در دسترس باشند (در این حالت به آن‌ها <strong>RESTful APIs</strong> گفته می‌شود).</p>
-<p><strong>REST (Representational State Transfer)</strong> روشی معماری است که توسط <strong>Roy Fielding</strong> در سال <strong>۲۰۰۰</strong> معرفی شد. REST از <strong>محدودیت‌هایی</strong> تشکیل شده که هنگام ایجاد سرویس‌های REST باید در نظر گرفته شوند. این محدودیت‌ها شامل شش بخش زیر هستند:</p>
-<ol>
-<li>
-<p><strong>Uniform Interface (رابط یکنواخت):</strong><br>
-برای <strong>شناسایی منابع</strong> و <strong>مدیریت آن‌ها از طریق نمایش</strong> استفاده می‌شود. پیام‌ها <strong>خود توصیف‌گر</strong> هستند و از <strong>Hypermedia</strong> بهره می‌برند. <strong>HATEOAS (Hypermedia as the Engine of Application State)</strong> برای <strong>اطلاعات مربوط به عملیات بعدی قابل انجام توسط کلاینت</strong> به‌کار می‌رود.</p>
-</li>
-<li>
-<p><strong>Client-Server (کلاینت-سرور):</strong><br>
-این محدودیت از طریق <strong>پنهان‌سازی اطلاعات (Encapsulation)</strong> عمل می‌کند. فقط <strong>APIهایی که باید توسط کلاینت استفاده شوند قابل مشاهده‌اند</strong> و سایر APIها مخفی می‌مانند. یک <strong>RESTful API</strong> باید <strong>مستقل از بخش‌های دیگر سیستم</strong> باشد و اتصال سست (loosely coupled) داشته باشد.</p>
-</li>
-<li>
-<p><strong>Stateless (بی‌حالت):</strong><br>
-APIهای RESTful <strong>هیچ وضعیت یا سابقه‌ای ذخیره نمی‌کنند</strong>. اگر کلاینت به سابقه نیاز داشته باشد، باید <strong>تمام اطلاعات لازم را در هر درخواست ارسال کند</strong>.</p>
-</li>
-<li>
-<p><strong>Cacheable (قابل کش شدن):</strong><br>
-منابع باید <strong>قابلیت ذخیره‌سازی موقت (Cache)</strong> داشته باشند. این باعث می‌شود <strong>دسترسی سریع‌تر</strong> و <strong>بار روی سرور کمتر</strong> شود و در نتیجه <strong>سرعت API</strong> بالاتر می‌رود.</p>
-</li>
-<li>
-<p><strong>Layered System (سیستم لایه‌ای):</strong><br>
-هر <strong>لایه</strong> باید فقط <strong>یک وظیفه مشخص</strong> داشته باشد. هر مؤلفه تنها باید <strong>از بخش‌هایی که نیاز دارد آگاهی داشته باشد</strong> و نباید از بخش‌های دیگر سیستم مطلع باشد.</p>
-</li>
-<li>
-<p><strong>Optional Executable Code (کد اجرایی اختیاری):</strong><br>
-این محدودیت <strong>اختیاری</strong> است و به سرورها اجازه می‌دهد <strong>به‌طور موقت کد اجرایی به کلاینت منتقل کنند</strong> تا قابلیت‌های جدید اضافه یا سفارشی‌سازی شوند.</p>
-</li>
-</ol>
-<hr>
-<p>بنابراین هنگام طراحی یک API، باید فرض کنید <strong>کاربر نهایی می‌تواند هر سطحی از تجربه برنامه‌نویسی داشته باشد</strong>. او باید بتواند به‌راحتی <strong>API را دریافت کرده، مستندات آن را مطالعه کند و بلافاصله از آن استفاده کند</strong>.</p>
-<p>نگران ایجاد <strong>API کاملاً بی‌نقص</strong> نباشید؛ چراکه APIها به‌مرور <strong>تکامل پیدا می‌کنند</strong>. اگر با APIهای مایکروسافت کار کرده باشید، می‌دانید که آن‌ها <strong>مرتباً به‌روزرسانی می‌شوند</strong>. APIهایی که قرار است در آینده حذف شوند، معمولاً با <strong>Annotation (یادداشت)</strong> مشخص می‌شوند تا به کاربر هشدار دهند <strong>از ویژگی یا متدی خاص استفاده نکند</strong>. در نهایت، وقتی ویژگی‌ها منسوخ شدند، با برچسب <strong>Obsolete</strong> علامت‌گذاری و سپس حذف می‌شوند. این روند به کاربران فرصت می‌دهد <strong>برنامه‌های خود را به‌روز کنند</strong>.</p>
-<hr>
-<h3>چرا از سرویس‌های REST برای دسترسی به API استفاده کنیم؟ 💡</h3>
-<p>بسیاری از شرکت‌ها از طریق <strong>ارائه APIهای آنلاین و پولی یا رایگان</strong> سودهای کلانی کسب می‌کنند. <strong>RESTful APIها</strong> می‌توانند یک <strong>دارایی ارزشمند</strong> باشند.</p>
-<p>وب‌سایت <strong>Rapid API (<a href="https://rapidapi.com/">https://rapidapi.com/</a>)</strong> مجموعه‌ای از <strong>APIهای رایگان و پولی</strong> را ارائه می‌دهد. APIهای شما می‌توانند به‌صورت <strong>دائمی و مقیاس‌پذیر روی فضای ابری</strong> در دسترس باشند و <strong>یا رایگان یا اشتراکی ارائه شوند</strong>.</p>
-<p>مزیت دیگر این است که شما می‌توانید <strong>پیچیدگی‌ها را در پشت‌صحنه پنهان کرده و یک رابط ساده به کاربران ارائه دهید</strong>. همچنین چون <strong>APIها کوچک و قابل کش شدن هستند، بسیار سریع خواهند بود</strong>.</p>
-<p>حالا بیایید ببینیم <strong>API Proxy چیست و چرا باید از آن استفاده کنیم</strong>.</p>
-<h3>API Proxies 🛡</h3>
-<p><strong>API Proxy</strong> یک <strong>کلاس</strong> است که <strong>بین کلاینت و API شما</strong> قرار می‌گیرد. در اصل، <strong>API Proxy</strong> نقش یک <strong>قرارداد (Contract)</strong> بین شما و <strong>توسعه‌دهندگانی که از API شما استفاده می‌کنند</strong> را دارد.</p>
-<p>به جای اینکه <strong>دسترسی مستقیم به سرویس‌های پشتیبان (Backend)</strong> API خود بدهید، که ممکن است با <strong>تغییرات و بازطراحی‌های آینده</strong> دچار مشکل شوند، شما به <strong>مصرف‌کنندگان API</strong> اطمینان می‌دهید که <strong>قرارداد API همواره پایدار و معتبر باقی خواهد ماند</strong>، حتی زمانی که سرویس‌های پشتیبان تغییر کنند یا گسترش یابند.</p>
-<p>نمودار زیر <strong>ارتباط بین کلاینت، API Proxy، API اصلی و ارتباط API با منبع داده</strong> را نشان می‌دهد:</p>
-<div align="center">
-<p><img src="../../../assets/image/09/Table%209-1.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<h3>یک برنامه کنسولی برای پیاده‌سازی الگوی Proxy 🎯</h3>
-<p>در این بخش یک <strong>برنامه کنسولی</strong> طراحی می‌کنیم تا ببینید پیاده‌سازی <strong>الگوی Proxy</strong> چقدر ساده است. مثال ما شامل یک <strong>interface</strong> خواهد بود که توسط <strong>API</strong> و <strong>Proxy</strong> پیاده‌سازی می‌شود.</p>
-<p><strong>API</strong> پیام واقعی را برمی‌گرداند و <strong>Proxy</strong> پیام را از API دریافت کرده و به کلاینت منتقل می‌کند. البته Proxyها می‌توانند بسیار فراتر از این عمل کنند؛ آن‌ها می‌توانند وظایفی مانند <strong>احراز هویت (Authentication)</strong>، <strong>مجوزدهی (Authorization)</strong>، <strong>مسیر‌دهی بر اساس اعتبارنامه‌ها (Routing)</strong> و بسیاری موارد دیگر را انجام دهند.</p>
-<p>اما در این مثال، ما آن را تا حد ممکن ساده نگه می‌داریم تا <strong>سادگی الگوی Proxy</strong> را ببینید.</p>
-<hr>
-<h3>مراحل پیاده‌سازی: 💻</h3>
-<p>۱. یک <strong>برنامه کنسولی .NET Framework جدید</strong> ایجاد کنید.<br>
-۲. پوشه‌های <strong>Apis</strong>، <strong>Interfaces</strong> و <strong>Proxies</strong> را اضافه کنید.<br>
-۳. <strong>اینترفیس HelloWorldInterface</strong> را در پوشه <strong>Interfaces</strong> قرار دهید:</p>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title">HelloWorldInterface</span>
+<!doctype html><html lang="fa" dir="rtl"> <head><script>
+    if (window.location.pathname.startsWith('/gitab/')) {
+      window.location.replace(window.location.pathname.replace(/^\/gitab\//i, '/Gitab/') + window.location.search + window.location.hash);
+    }
+    (() => {
+      try {
+        const t = localStorage.getItem('gitab-theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', t);
+        document.documentElement.dataset.colorMode = t;
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        document.documentElement.dataset.colorMode = 'dark';
+      }
+    })();
+  </script> <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5"> <title>طراحی و توسعه API ها</title><meta name="description" content="طراحی و توسعه API ها — مطالعه آنلاین و رایگان از کتاب «کدنویسی تمیز در سی‌شارپ» (Clean Code in C#) اثر Jason Alls با ترجمه حامد حیدریان در گیتاب."> <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"><meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"> <meta name="theme-color" content="#090d16"><meta name="referrer" content="strict-origin-when-cross-origin"> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https:; frame-src https://www.youtube.com https://www.youtube-nocookie.com https://maps.google.com https://www.google.com; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self';"><link rel="icon" type="image/png" href="/Gitab/favicon.png"> <link rel="canonical" href="https://hheydarian.github.io/Gitab/books/book2/Book/09/Designing-and-Developing-APIs/"><link rel="alternate" hreflang="fa" href="https://hheydarian.github.io/Gitab/books/book2/Book/09/Designing-and-Developing-APIs/"> <link rel="alternate" hreflang="x-default" href="https://hheydarian.github.io/Gitab/books/book2/Book/09/Designing-and-Developing-APIs/"><link rel="alternate" type="text/plain" title="LLMs.txt" href="/Gitab/llms.txt"> <link rel="sitemap" type="application/xml" title="Sitemap" href="/Gitab/sitemap.xml"><meta property="og:locale" content="fa_IR"> <meta property="og:type" content="article"><meta property="og:site_name" content="گیتاب | Gitab"> <meta property="og:title" content="طراحی و توسعه API ها"><meta property="og:description" content="طراحی و توسعه API ها — مطالعه آنلاین و رایگان از کتاب «کدنویسی تمیز در سی‌شارپ» (Clean Code in C#) اثر Jason Alls با ترجمه حامد حیدریان در گیتاب."> <meta property="og:url" content="https://hheydarian.github.io/Gitab/books/book2/Book/09/Designing-and-Developing-APIs/"><meta property="og:image" content="https://hheydarian.github.io/Gitab/images/clean-code-csharp/Cover.jpg"> <meta property="og:image:alt" content="طراحی و توسعه API ها"><meta name="twitter:card" content="summary_large_image"> <meta name="twitter:title" content="طراحی و توسعه API ها"><meta name="twitter:description" content="طراحی و توسعه API ها — مطالعه آنلاین و رایگان از کتاب «کدنویسی تمیز در سی‌شارپ» (Clean Code in C#) اثر Jason Alls با ترجمه حامد حیدریان در گیتاب."> <meta name="twitter:image" content="https://hheydarian.github.io/Gitab/images/clean-code-csharp/Cover.jpg"><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://hheydarian.github.io/Gitab/#organization","name":"گیتاب | Gitab","alternateName":"Gitab","url":"https://hheydarian.github.io/Gitab/","logo":{"@type":"ImageObject","url":"https://hheydarian.github.io/Gitab/favicon.png"},"sameAs":["https://github.com/hheydarian/Gitab"]},{"@type":"WebSite","@id":"https://hheydarian.github.io/Gitab/#website","url":"https://hheydarian.github.io/Gitab/","name":"گیتاب | Gitab","inLanguage":"fa-IR","publisher":{"@id":"https://hheydarian.github.io/Gitab/#organization"},"potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://hheydarian.github.io/Gitab/books/list-books/?q={search_term_string}"},"query-input":"required name=search_term_string"}},{"@type":"WebPage","@id":"https://hheydarian.github.io/Gitab/books/book2/Book/09/Designing-and-Developing-APIs/#webpage","url":"https://hheydarian.github.io/Gitab/books/book2/Book/09/Designing-and-Developing-APIs/","name":"طراحی و توسعه API ها","description":"طراحی و توسعه API ها — مطالعه آنلاین و رایگان از کتاب «کدنویسی تمیز در سی‌شارپ» (Clean Code in C#) اثر Jason Alls با ترجمه حامد حیدریان در گیتاب.","inLanguage":"fa-IR","isPartOf":{"@id":"https://hheydarian.github.io/Gitab/#website"}},{"@type":"TechArticle","headline":"طراحی و توسعه API ها","description":"طراحی و توسعه API ها — مطالعه آنلاین و رایگان از کتاب «کدنویسی تمیز در سی‌شارپ» (Clean Code in C#) اثر Jason Alls با ترجمه حامد حیدریان در گیتاب.","url":"https://hheydarian.github.io/Gitab/books/book2/Book/09/Designing-and-Developing-APIs/","inLanguage":"fa-IR","isAccessibleForFree":true,"author":{"@type":"Person","name":"Jason Alls"},"translator":{"@type":"Person","name":"حامد حیدریان"},"isPartOf":{"@type":"Book","name":"کدنویسی تمیز در سی‌شارپ","alternateName":"Clean Code in C#","url":"https://hheydarian.github.io/Gitab/books/book2/"}}]}</script> <link rel="preload" href="/Gitab/fonts/Vazirmatn.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/Gitab/styles/main.css?v=2.4" as="style"> <link rel="preload" href="/Gitab/styles/gitab-modern.css?v=2.5" as="style"><style>@font-face{font-family:'Lalezar';src:url('/Gitab/fonts/Lalezar.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}@font-face{font-family:'Vazirmatn';src:url('/Gitab/fonts/Vazirmatn.woff2') format('woff2');font-weight:100 900;font-style:normal;font-display:swap}html,body,button,input,optgroup,select,textarea,.filter-pill{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}input::placeholder,textarea::placeholder{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}</style> <link rel="stylesheet" href="/Gitab/styles/main.css?v=2.4"><link rel="stylesheet" href="/Gitab/styles/gitab-modern.css?v=2.5"> <link rel="stylesheet" href="/Gitab/styles/vendor/github-dark.min.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="/Gitab/styles/vendor/github-dark.min.css"></noscript></head> <body><header class="header"> <div class="container nav-wrap"><a href="/Gitab/" class="brand" aria-label="صفحه اصلی گیتاب"> <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="30" height="30" decoding="async"> <span class="brand-text">Gitab</span> </a> <nav class="nav" id="mainNav"><a href="/Gitab/" >خانه</a> <a href="/Gitab/books/list-books" aria-current="page">کتاب‌ها</a> <a href="/Gitab/courses/" >دوره‌ها</a> <a href="/Gitab/translator.html" >مترجمین</a></nav> <div class="nav-actions"><button id="themeToggle" class="theme-toggle-btn" aria-label="تغییر تم" title="تغییر تم"> <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن" width="18" height="18" decoding="async" style="display:none"> <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک" width="18" height="18" decoding="async"> </button> <a class="btn-github-pill" href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" title="مشاهده سورس گیتاب در گیت‌هاب"> <img src="/Gitab/icone/github.svg" alt="GitHub" width="16" height="16" decoding="async"> <span>گیت‌هاب</span> </a> <button class="mobile-menu-btn" id="mobileMenuBtn" type="button" aria-label="باز کردن منو" aria-expanded="false"> <svg class="mob-icon-open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="4" y1="7" x2="20" y2="7"></line> <line x1="4" y1="12" x2="20" y2="12"></line> <line x1="4" y1="17" x2="14" y2="17"></line> </svg> <svg class="mob-icon-close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="18" y1="6" x2="6" y2="18"></line> <line x1="6" y1="6" x2="18" y2="18"></line> </svg> </button></div> </div><div class="mobile-drawer" id="mobileDrawer" aria-hidden="true"> <div class="mobile-drawer-inner"><div class="mobile-drawer-section-label">ناوبری سریع</div><nav class="mobile-drawer-links" aria-label="منوی موبایل"> <a href="/Gitab/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M3 10.5 12 3l9 7.5"></path> <path d="M5 9.5V20a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V9.5"></path> </svg> </span> <span class="mob-nav-text">صفحه نخست</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/books/list-books" class="mobile-drawer-link active" aria-current="page"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path> </svg> </span> <span class="mob-nav-text">کتابخانه و فهرست کتاب‌ها</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/courses/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path> <path d="M6 12v5c3 3 9 3 12 0v-5"></path> </svg> </span> <span class="mob-nav-text">دوره‌های آموزشی</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/translator.html" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path> <circle cx="9" cy="7" r="4"></circle> <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path> <path d="M16 3.13a4 4 0 0 1 0 7.75"></path> </svg> </span> <span class="mob-nav-text">مترجمین و همکاران</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> </nav><div class="mobile-drawer-divider"></div><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" class="mobile-drawer-link mobile-drawer-gh"> <span class="mob-nav-icon" aria-hidden="true"> <img src="/Gitab/icone/github.svg" alt="" width="17" height="17" loading="lazy" decoding="async"> </span> <span class="mob-nav-text">مخزن گیت‌هاب پروژه</span> <span class="mob-nav-ext" aria-hidden="true">↗</span> </a> </div></div> </header><div class="reading-progress-track"> <div class="reading-progress-fill" id="readingProgressBar"></div></div> <main class="site-main chapter-reading-page"><div class="chapter-page-wrapper"> <nav class="chapter-clean-breadcrumb" aria-label="مسیر راهنما" dir="rtl"><a href="/Gitab/">خانه</a> <span class="bc-sep" aria-hidden="true">/</span> <a href="/Gitab/books/list-books/">کتاب‌ها</a> <span class="bc-sep" aria-hidden="true">/</span> <a href="/Gitab/books/book2/"><bdi>کدنویسی تمیز در سی‌شارپ</bdi></a> <span class="bc-sep" aria-hidden="true">/</span> <span class="bc-current-leaf"><bdi>طراحی و توسعه API ها</bdi></span></nav> <article class="chapter-prose-container markdown-body" id="chapterArticle" dir="rtl"><h1>فصل نهم: طراحی و توسعه API ها</h1><p><strong>واسط‌های برنامه‌نویسی کاربردی (Application Programming Interfaces یا APIها)</strong> در این روزها به‌شدت مهم و حیاتی‌تر از هر زمان دیگری هستند. APIها برای اتصال دولت‌ها و مؤسسات به‌منظور <strong>اشتراک‌گذاری داده‌ها و همکاری در مسائل تجاری و دولتی</strong> استفاده می‌شوند. آن‌ها بین <strong>کلینیک‌های پزشکی و بیمارستان‌ها</strong> برای <strong>اشتراک لحظه‌ای اطلاعات بیماران</strong> به‌کار می‌روند.</p><p>شما هر روز بدون اینکه متوجه شوید از APIها استفاده می‌کنید؛ برای مثال، هنگام اتصال به <strong>ایمیل‌ها</strong> یا زمانی که با <strong>همکاران و مشتریان خود</strong> در پلتفرم‌هایی مثل <strong>Microsoft Teams، Microsoft Azure، Amazon Web Services و Google Cloud Platform</strong> همکاری می‌کنید، در حال استفاده از API هستید.</p><p>هر بار که با کسی <strong>چت</strong> یا <strong>تماس ویدیویی</strong> برقرار می‌کنید، چه با <strong>کامپیوتر</strong> چه با <strong>تلفن همراه</strong>، در حال استفاده از API هستید. هنگام <strong>پخش زنده کنفرانس‌های ویدیویی</strong>، ورود به <strong>چت پشتیبانی فنی وب‌سایت‌ها</strong> یا <strong>استریم موسیقی و ویدیوهای مورد علاقه‌تان</strong>، همگی نمونه‌هایی از استفاده از API هستند.</p><p>بنابراین، به‌عنوان یک <strong>برنامه‌نویس</strong>، ضروری است که به‌خوبی با <strong>مفهوم APIها</strong>، <strong>طراحی، توسعه، امنیت و استقرار آن‌ها</strong> آشنا باشید.</p><p>در این فصل، درباره اینکه <strong>API چیست، چه مزایایی دارد و چرا لازم است درباره آن یاد بگیریم</strong> صحبت خواهیم کرد. همچنین موضوعات زیر را بررسی می‌کنیم:</p><ul> <li><strong>API proxies</strong></li><li><strong>راهنماهای طراحی و توسعه API</strong></li><li><strong>طراحی API با استفاده از RAML</strong></li><li><strong>مستندسازی API با Swagger</strong></li></ul> <hr><h3>موضوعات پوشش داده شده در این فصل:</h3><ul> <li><strong>API چیست؟</strong></li><li><strong>API proxies</strong></li><li><strong>راهنماهای طراحی API</strong></li><li><strong>طراحی API با RAML</strong></li><li><strong>توسعه و مستندسازی API با Swagger</strong></li></ul> <hr><h3>مهارت‌هایی که در این فصل به‌دست خواهید آورد:</h3><ul> <li>درک مفهوم API و اهمیت یادگیری آن</li><li>شناخت API proxies و دلایل استفاده از آن‌ها</li><li>آشنایی با اصول طراحی در زمان ساخت APIهای خود</li><li>طراحی API با استفاده از RAML</li><li>مستندسازی API با Swagger</li></ul> <p>در پایان این فصل، شما با <strong>مبانی طراحی خوب API</strong> آشنا خواهید شد و <strong>دانش لازم برای ارتقاء مهارت‌های API</strong> خود را به‌دست می‌آورید. مهم است که ابتدا <strong>درک کنیم API چیست</strong>، بنابراین از همین‌جا شروع می‌کنیم. اما پیش از آن، اطمینان حاصل کنید که <strong>پیش‌نیازهای فنی زیر</strong> را برای بهره‌برداری کامل از این فصل پیاده‌سازی کرده‌اید.</p><hr> <h3>پیش‌نیازهای فنی:</h3><p>برای ایجاد یک API در این فصل، از فناوری‌های زیر استفاده خواهیم کرد:</p><ul> <li><strong>Visual Studio 2019 Community Edition یا نسخه‌های بالاتر</strong></li><li><strong>Swashbuckle.AspNetCore 5 یا بالاتر</strong></li><li><strong>Swagger (<a href="https://swagger.io">https://swagger.io</a>)</strong></li><li><strong>Atom (<a href="http://atom.io">http://atom.io</a>)</strong></li><li><strong>API Workbench by MuleSoft</strong></li></ul> <hr><h3>API چیست؟</h3><p>APIها <strong>کتابخانه‌های قابل استفاده مجدد</strong> هستند که می‌توانند <strong>بین برنامه‌های مختلف به اشتراک گذاشته شوند</strong> و از طریق <strong>سرویس‌های REST</strong> در دسترس باشند (در این حالت به آن‌ها <strong>RESTful APIs</strong> گفته می‌شود).</p><p><strong>REST (Representational State Transfer)</strong> روشی معماری است که توسط <strong>Roy Fielding</strong> در سال <strong>۲۰۰۰</strong> معرفی شد. REST از <strong>محدودیت‌هایی</strong> تشکیل شده که هنگام ایجاد سرویس‌های REST باید در نظر گرفته شوند. این محدودیت‌ها شامل شش بخش زیر هستند:</p><ol> <li><p><strong>Uniform Interface (رابط یکنواخت):</strong><br> برای <strong>شناسایی منابع</strong> و <strong>مدیریت آن‌ها از طریق نمایش</strong> استفاده می‌شود. پیام‌ها <strong>خود توصیف‌گر</strong> هستند و از <strong>Hypermedia</strong> بهره می‌برند. <strong>HATEOAS (Hypermedia as the Engine of Application State)</strong> برای <strong>اطلاعات مربوط به عملیات بعدی قابل انجام توسط کلاینت</strong> به‌کار می‌رود.</p></li> <li><p><strong>Client-Server (کلاینت-سرور):</strong><br> این محدودیت از طریق <strong>پنهان‌سازی اطلاعات (Encapsulation)</strong> عمل می‌کند. فقط <strong>APIهایی که باید توسط کلاینت استفاده شوند قابل مشاهده‌اند</strong> و سایر APIها مخفی می‌مانند. یک <strong>RESTful API</strong> باید <strong>مستقل از بخش‌های دیگر سیستم</strong> باشد و اتصال سست (loosely coupled) داشته باشد.</p></li> <li><p><strong>Stateless (بی‌حالت):</strong><br> APIهای RESTful <strong>هیچ وضعیت یا سابقه‌ای ذخیره نمی‌کنند</strong>. اگر کلاینت به سابقه نیاز داشته باشد، باید <strong>تمام اطلاعات لازم را در هر درخواست ارسال کند</strong>.</p></li> <li><p><strong>Cacheable (قابل کش شدن):</strong><br> منابع باید <strong>قابلیت ذخیره‌سازی موقت (Cache)</strong> داشته باشند. این باعث می‌شود <strong>دسترسی سریع‌تر</strong> و <strong>بار روی سرور کمتر</strong> شود و در نتیجه <strong>سرعت API</strong> بالاتر می‌رود.</p></li> <li><p><strong>Layered System (سیستم لایه‌ای):</strong><br> هر <strong>لایه</strong> باید فقط <strong>یک وظیفه مشخص</strong> داشته باشد. هر مؤلفه تنها باید <strong>از بخش‌هایی که نیاز دارد آگاهی داشته باشد</strong> و نباید از بخش‌های دیگر سیستم مطلع باشد.</p></li> <li><p><strong>Optional Executable Code (کد اجرایی اختیاری):</strong><br> این محدودیت <strong>اختیاری</strong> است و به سرورها اجازه می‌دهد <strong>به‌طور موقت کد اجرایی به کلاینت منتقل کنند</strong> تا قابلیت‌های جدید اضافه یا سفارشی‌سازی شوند.</p></li> </ol><hr> <p>بنابراین هنگام طراحی یک API، باید فرض کنید <strong>کاربر نهایی می‌تواند هر سطحی از تجربه برنامه‌نویسی داشته باشد</strong>. او باید بتواند به‌راحتی <strong>API را دریافت کرده، مستندات آن را مطالعه کند و بلافاصله از آن استفاده کند</strong>.</p><p>نگران ایجاد <strong>API کاملاً بی‌نقص</strong> نباشید؛ چراکه APIها به‌مرور <strong>تکامل پیدا می‌کنند</strong>. اگر با APIهای مایکروسافت کار کرده باشید، می‌دانید که آن‌ها <strong>مرتباً به‌روزرسانی می‌شوند</strong>. APIهایی که قرار است در آینده حذف شوند، معمولاً با <strong>Annotation (یادداشت)</strong> مشخص می‌شوند تا به کاربر هشدار دهند <strong>از ویژگی یا متدی خاص استفاده نکند</strong>. در نهایت، وقتی ویژگی‌ها منسوخ شدند، با برچسب <strong>Obsolete</strong> علامت‌گذاری و سپس حذف می‌شوند. این روند به کاربران فرصت می‌دهد <strong>برنامه‌های خود را به‌روز کنند</strong>.</p><hr> <h3>چرا از سرویس‌های REST برای دسترسی به API استفاده کنیم؟</h3><p>بسیاری از شرکت‌ها از طریق <strong>ارائه APIهای آنلاین و پولی یا رایگان</strong> سودهای کلانی کسب می‌کنند. <strong>RESTful APIها</strong> می‌توانند یک <strong>دارایی ارزشمند</strong> باشند.</p><p>وب‌سایت <strong>Rapid API (<a href="https://rapidapi.com/">https://rapidapi.com/</a>)</strong> مجموعه‌ای از <strong>APIهای رایگان و پولی</strong> را ارائه می‌دهد. APIهای شما می‌توانند به‌صورت <strong>دائمی و مقیاس‌پذیر روی فضای ابری</strong> در دسترس باشند و <strong>یا رایگان یا اشتراکی ارائه شوند</strong>.</p><p>مزیت دیگر این است که شما می‌توانید <strong>پیچیدگی‌ها را در پشت‌صحنه پنهان کرده و یک رابط ساده به کاربران ارائه دهید</strong>. همچنین چون <strong>APIها کوچک و قابل کش شدن هستند، بسیار سریع خواهند بود</strong>.</p><p>حالا بیایید ببینیم <strong>API Proxy چیست و چرا باید از آن استفاده کنیم</strong>.</p><h3>API Proxies</h3><p><strong>API Proxy</strong> یک <strong>کلاس</strong> است که <strong>بین کلاینت و API شما</strong> قرار می‌گیرد. در اصل، <strong>API Proxy</strong> نقش یک <strong>قرارداد (Contract)</strong> بین شما و <strong>توسعه‌دهندگانی که از API شما استفاده می‌کنند</strong> را دارد.</p><p>به جای اینکه <strong>دسترسی مستقیم به سرویس‌های پشتیبان (Backend)</strong> API خود بدهید، که ممکن است با <strong>تغییرات و بازطراحی‌های آینده</strong> دچار مشکل شوند، شما به <strong>مصرف‌کنندگان API</strong> اطمینان می‌دهید که <strong>قرارداد API همواره پایدار و معتبر باقی خواهد ماند</strong>، حتی زمانی که سرویس‌های پشتیبان تغییر کنند یا گسترش یابند.</p><p>نمودار زیر <strong>ارتباط بین کلاینت، API Proxy، API اصلی و ارتباط API با منبع داده</strong> را نشان می‌دهد:</p><div align="center"> <p><img src="../../../assets/image/09/Table%209-1.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <h3>یک برنامه کنسولی برای پیاده‌سازی الگوی Proxy</h3><p>در این بخش یک <strong>برنامه کنسولی</strong> طراحی می‌کنیم تا ببینید پیاده‌سازی <strong>الگوی Proxy</strong> چقدر ساده است. مثال ما شامل یک <strong>interface</strong> خواهد بود که توسط <strong>API</strong> و <strong>Proxy</strong> پیاده‌سازی می‌شود.</p><p><strong>API</strong> پیام واقعی را برمی‌گرداند و <strong>Proxy</strong> پیام را از API دریافت کرده و به کلاینت منتقل می‌کند. البته Proxyها می‌توانند بسیار فراتر از این عمل کنند؛ آن‌ها می‌توانند وظایفی مانند <strong>احراز هویت (Authentication)</strong>، <strong>مجوزدهی (Authorization)</strong>، <strong>مسیر‌دهی بر اساس اعتبارنامه‌ها (Routing)</strong> و بسیاری موارد دیگر را انجام دهند.</p><p>اما در این مثال، ما آن را تا حد ممکن ساده نگه می‌داریم تا <strong>سادگی الگوی Proxy</strong> را ببینید.</p><hr> <h3>مراحل پیاده‌سازی:</h3><p>۱. یک <strong>برنامه کنسولی .NET Framework جدید</strong> ایجاد کنید.<br> ۲. پوشه‌های <strong>Apis</strong>، <strong>Interfaces</strong> و <strong>Proxies</strong> را اضافه کنید.<br> ۳. <strong>اینترفیس HelloWorldInterface</strong> را در پوشه <strong>Interfaces</strong> قرار دهید:</p><pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title">HelloWorldInterface</span>
 {
     <span class="hljs-function"><span class="hljs-built_in">string</span> <span class="hljs-title">GetMessage</span>()</span>;
 }
-</code></pre>
-<p>متد <code>GetMessage()</code> یک <strong>پیام را به‌صورت رشته (string)</strong> برمی‌گرداند. <strong>کلاس API</strong> و <strong>کلاس Proxy</strong> هر دو این اینترفیس را پیاده‌سازی خواهند کرد.</p>
-<hr>
-<h3>ایجاد کلاس API</h3>
-<p>کلاس <code>HelloWorldApi</code> اینترفیس <code>HelloWorldInterface</code> را پیاده‌سازی می‌کند. آن را در پوشه <strong>Apis</strong> اضافه کنید:</p>
-<pre class="hljs"><code><span class="hljs-keyword">internal</span> <span class="hljs-keyword">class</span> <span class="hljs-title">HelloWorldApi</span> : <span class="hljs-title">HelloWorldInterface</span>
+</code></pre> <p>متد <code>GetMessage()</code> یک <strong>پیام را به‌صورت رشته (string)</strong> برمی‌گرداند. <strong>کلاس API</strong> و <strong>کلاس Proxy</strong> هر دو این اینترفیس را پیاده‌سازی خواهند کرد.</p><hr> <h3>ایجاد کلاس API</h3><p>کلاس <code>HelloWorldApi</code> اینترفیس <code>HelloWorldInterface</code> را پیاده‌سازی می‌کند. آن را در پوشه <strong>Apis</strong> اضافه کنید:</p><pre class="hljs"><code><span class="hljs-keyword">internal</span> <span class="hljs-keyword">class</span> <span class="hljs-title">HelloWorldApi</span> : <span class="hljs-title">HelloWorldInterface</span>
 {
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-built_in">string</span> <span class="hljs-title">GetMessage</span>()</span>
     {
         <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Hello World!&quot;</span>;
     }
 }
-</code></pre>
-<p>همان‌طور که می‌بینید، کلاس API اینترفیس را پیاده‌سازی کرده و پیام <strong>&quot;Hello World!&quot;</strong> را بازمی‌گرداند. همچنین این کلاس به‌صورت <code>internal</code> تعریف شده است تا <strong>مستقیماً برای فراخوانی‌کنندگان خارجی در دسترس نباشد</strong>.</p>
-<hr>
-<h3>ایجاد کلاس Proxy</h3>
-<p>کلاس <code>HelloWorldProxy</code> را به پوشه <strong>Proxies</strong> اضافه کنید:</p>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">HelloWorldProxy</span> : <span class="hljs-title">HelloWorldInterface</span>
+</code></pre> <p>همان‌طور که می‌بینید، کلاس API اینترفیس را پیاده‌سازی کرده و پیام <strong>&quot;Hello World!&quot;</strong> را بازمی‌گرداند. همچنین این کلاس به‌صورت <code>internal</code> تعریف شده است تا <strong>مستقیماً برای فراخوانی‌کنندگان خارجی در دسترس نباشد</strong>.</p><hr> <h3>ایجاد کلاس Proxy</h3><p>کلاس <code>HelloWorldProxy</code> را به پوشه <strong>Proxies</strong> اضافه کنید:</p><pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">HelloWorldProxy</span> : <span class="hljs-title">HelloWorldInterface</span>
 {
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-built_in">string</span> <span class="hljs-title">GetMessage</span>()</span>
     {
         <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> HelloWorldApi().GetMessage();
     }
 }
-</code></pre>
-<p>کلاس Proxy به‌صورت <code>public</code> تعریف شده است، چون توسط <strong>کلاینت‌ها فراخوانی می‌شود</strong>. این کلاس <strong>متد GetMessage()</strong> را در کلاس API فراخوانی کرده و نتیجه را به <strong>فراخوانی‌کننده</strong> برمی‌گرداند.</p>
-<hr>
-<h3>تغییر متد Main()</h3>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Main</span>(<span class="hljs-params"><span class="hljs-built_in">string</span>[] <span class="hljs-keyword">args</span></span>)</span>
+</code></pre> <p>کلاس Proxy به‌صورت <code>public</code> تعریف شده است، چون توسط <strong>کلاینت‌ها فراخوانی می‌شود</strong>. این کلاس <strong>متد GetMessage()</strong> را در کلاس API فراخوانی کرده و نتیجه را به <strong>فراخوانی‌کننده</strong> برمی‌گرداند.</p><hr> <h3>تغییر متد Main()</h3><pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Main</span>(<span class="hljs-params"><span class="hljs-built_in">string</span>[] <span class="hljs-keyword">args</span></span>)</span>
 {
     Console.WriteLine(<span class="hljs-keyword">new</span> HelloWorldProxy().GetMessage());
     Console.ReadKey();
 }
-</code></pre>
-<p>کلاس Main متد <code>GetMessage()</code> از <strong>کلاس Proxy</strong> را فراخوانی می‌کند. Proxy هم کلاس API را فراخوانی کرده و نتیجه در <strong>کنسول چاپ می‌شود</strong>. سپس کنسول منتظر فشار یک کلید می‌ماند تا بسته شود.</p>
-<p>کد را اجرا کنید و خروجی را ببینید؛ شما با موفقیت یک <strong>کلاس Proxy برای API</strong> پیاده‌سازی کرده‌اید.</p>
-<hr>
-<h3>نکته مهم</h3>
-<p>Proxyها می‌توانند بسیار ساده یا پیچیده باشند. اما آنچه در اینجا انجام دادید <strong>پایه موفقیت در استفاده از الگوی Proxy</strong> است.</p>
-<p>در این فصل قرار است یک <strong>API واقعی</strong> بسازیم. پس بیایید ببینیم قرار است چه چیزی ایجاد کنیم و سپس کار را شروع کنیم. پس از تکمیل پروژه، شما یک <strong>API کاربردی</strong> خواهید داشت که یک <strong>تقویم پرداخت سود ماهانه (Dividend Payment Calendar)</strong> را به‌صورت <strong>JSON</strong> تولید می‌کند.</p>
-<hr>
-<h2>راهنمای طراحی API 📝</h2>
-<p>برای نوشتن یک API مؤثر، برخی دستورالعمل‌های پایه وجود دارند:</p>
-<ul>
-<li>
-<p><strong>منابع (Resources)</strong> باید <strong>اسم‌های جمع</strong> باشند.</p>
-<ul>
-<li>
-<p>مثال:</p>
-<pre class="hljs"><code>http://wholesale-website.com/api/customers/1
+</code></pre> <p>کلاس Main متد <code>GetMessage()</code> از <strong>کلاس Proxy</strong> را فراخوانی می‌کند. Proxy هم کلاس API را فراخوانی کرده و نتیجه در <strong>کنسول چاپ می‌شود</strong>. سپس کنسول منتظر فشار یک کلید می‌ماند تا بسته شود.</p><p>کد را اجرا کنید و خروجی را ببینید؛ شما با موفقیت یک <strong>کلاس Proxy برای API</strong> پیاده‌سازی کرده‌اید.</p><hr> <h3>نکته مهم</h3><p>Proxyها می‌توانند بسیار ساده یا پیچیده باشند. اما آنچه در اینجا انجام دادید <strong>پایه موفقیت در استفاده از الگوی Proxy</strong> است.</p><p>در این فصل قرار است یک <strong>API واقعی</strong> بسازیم. پس بیایید ببینیم قرار است چه چیزی ایجاد کنیم و سپس کار را شروع کنیم. پس از تکمیل پروژه، شما یک <strong>API کاربردی</strong> خواهید داشت که یک <strong>تقویم پرداخت سود ماهانه (Dividend Payment Calendar)</strong> را به‌صورت <strong>JSON</strong> تولید می‌کند.</p><hr> <h2>راهنمای طراحی API</h2><p>برای نوشتن یک API مؤثر، برخی دستورالعمل‌های پایه وجود دارند:</p><ul> <li><p><strong>منابع (Resources)</strong> باید <strong>اسم‌های جمع</strong> باشند.</p><ul> <li><p>مثال:</p><pre class="hljs"><code>http://wholesale-website.com/api/customers/1
 http://wholesale-website.com/api/products/20
-</code></pre>
-</li>
-<li>
-<p>این URLها مسیرهای <strong>api/controller/id</strong> را دنبال می‌کنند.</p>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>روابط در دامنه تجاری</strong> نیز باید در URLها منعکس شوند:</p>
-<pre class="hljs"><code>http://wholesale-website.com/api/categories/12/products
-</code></pre>
-<p>این فراخوانی <strong>لیست محصولات دسته ۱۲</strong> را برمی‌گرداند.</p>
-</li>
-<li>
-<p><strong>استفاده از افعال در منابع:</strong></p>
-<ul>
-<li>
-<p>هنگام ارسال درخواست HTTP:</p>
-<ul>
-<li><code>GET</code> برای <strong>دریافت آیتم‌ها</strong></li>
-<li><code>HEAD</code> برای <strong>فقط دریافت هدرها</strong></li>
-<li><code>POST</code> برای <strong>افزودن یا ذخیره منبع جدید</strong></li>
-<li><code>PUT</code> برای <strong>جایگزینی منبع</strong></li>
-<li><code>DELETE</code> برای <strong>حذف منبع</strong></li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p>منابع را <strong>سبک نگه دارید</strong> و از <strong>Query Parameters</strong> استفاده کنید.</p>
-</li>
-<li>
-<p>برای <strong>صفحه‌بندی (Pagination)</strong> نتایج، مجموعه‌ای از <strong>لینک‌های آماده</strong> در اختیار کلاینت قرار دهید.</p>
-<ul>
-<li>
-<p><strong>RFC 5988</strong> هدرهای لینک را معرفی کرده است:</p>
-<pre class="hljs"><code>&lt;https://wholesale-website.com/api/products?page=10&amp;per_page=100&gt;; rel=&quot;next&quot;
+</code></pre></li><li> <p>این URLها مسیرهای <strong>api/controller/id</strong> را دنبال می‌کنند.</p></li> </ul></li> <li><p><strong>روابط در دامنه تجاری</strong> نیز باید در URLها منعکس شوند:</p><pre class="hljs"><code>http://wholesale-website.com/api/categories/12/products
+</code></pre> <p>این فراخوانی <strong>لیست محصولات دسته ۱۲</strong> را برمی‌گرداند.</p></li> <li><p><strong>استفاده از افعال در منابع:</strong></p><ul> <li><p>هنگام ارسال درخواست HTTP:</p><ul> <li><code>GET</code> برای <strong>دریافت آیتم‌ها</strong></li><li><code>HEAD</code> برای <strong>فقط دریافت هدرها</strong></li><li><code>POST</code> برای <strong>افزودن یا ذخیره منبع جدید</strong></li><li><code>PUT</code> برای <strong>جایگزینی منبع</strong></li><li><code>DELETE</code> برای <strong>حذف منبع</strong></li></ul> </li></ul> </li><li> <p>منابع را <strong>سبک نگه دارید</strong> و از <strong>Query Parameters</strong> استفاده کنید.</p></li> <li><p>برای <strong>صفحه‌بندی (Pagination)</strong> نتایج، مجموعه‌ای از <strong>لینک‌های آماده</strong> در اختیار کلاینت قرار دهید.</p><ul> <li><p><strong>RFC 5988</strong> هدرهای لینک را معرفی کرده است:</p><pre class="hljs"><code>&lt;https://wholesale-website.com/api/products?page=10&amp;per_page=100&gt;; rel=&quot;next&quot;
 &lt;https://wholesale-website.com/api/products?page=11&amp;per_page=100&gt;; rel=&quot;last&quot;
-</code></pre>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>نسخه‌بندی API:</strong></p>
-<pre class="hljs"><code>https://wholesale-website.com/api/v1/cart
+</code></pre></li></ul> </li><li> <p><strong>نسخه‌بندی API:</strong></p><pre class="hljs"><code>https://wholesale-website.com/api/v1/cart
 https://wholesale-website.com/api/v2/cart
-</code></pre>
-<p>این روش ساده است و یافتن نسخه درست API را آسان می‌کند.</p>
-</li>
-<li>
-<p><strong>JSON</strong> بهترین قالب نمایش داده‌هاست: <strong>خواناتر</strong> و <strong>کم‌حجم‌تر از XML</strong>.</p>
-<ul>
-<li>در متدهای <code>POST</code>، <code>PUT</code> و <code>PATCH</code>، هدر <code>content-type</code> را روی <code>application/json</code> قرار دهید، در غیر این صورت <strong>کد ۴۱۵ (Unsupported Media Type)</strong> برگردانید.</li>
-<li>از <strong>Gzip</strong> به‌صورت پیش‌فرض استفاده کنید تا <strong>مصرف پهنای باند کاهش یابد</strong>.</li>
-</ul>
-</li>
-<li>
-<p>همیشه از <strong>HTTPS (TLS)</strong> استفاده کنید.</p>
-<ul>
-<li><strong>احراز هویت و مجوزدهی</strong> در هدر انجام شود.</li>
-<li>در مثال‌های قبل، از هدر <code>x-api-key</code> استفاده کردیم.</li>
-<li>دسترسی‌های غیرمجاز باید <strong>کد ۴۰۳ (Forbidden)</strong> برگردانند.</li>
-</ul>
-</li>
-<li>
-<p><strong>کدهای وضعیت HTTP</strong> را به‌درستی استفاده کنید:</p>
-<ul>
-<li><code>200</code> موفقیت</li>
-<li><code>404</code> یافت نشد</li>
-<li>لیست کامل: <a href="https://httpstatuses.com">https://httpstatuses.com</a></li>
-</ul>
-</li>
-<li>
-<p><strong>OAuth 2.0</strong> استاندارد صنعت برای مجوزدهی است:<br>
-<a href="https://oauth.net/2/">https://oauth.net/2/</a></p>
-</li>
-<li>
-<p>API باید <strong>مستندات کامل و به‌روز با مثال‌های واضح</strong> داشته باشد.</p>
-<ul>
-<li>ظاهر مستندات باید <strong>جذاب و خوانا</strong> باشد.</li>
-<li>در این فصل با <strong>Swagger</strong> برای ایجاد مستندات آشنا می‌شویم.</li>
-</ul>
-</li>
-<li>
-<p><strong>مقیاس‌پذیری</strong> را از همان ابتدا در نظر بگیرید.</p>
-<ul>
-<li>در پروژه <strong>Dividend Calendar API</strong> در فصل بعد، خواهید دید چگونه <strong>محدودیت تعداد درخواست‌ها (Throttling)</strong> را اعمال می‌کنیم.</li>
-</ul>
-</li>
-<li>
-<p><strong>امنیت و عملکرد:</strong></p>
-<ul>
-<li><strong>API Proxy</strong> می‌تواند کلاینت را از دسترسی مستقیم به API منع کند.</li>
-<li>Proxy می‌تواند در همان پروژه یا روی یک API خارجی باشد.</li>
-<li>Proxy از <strong>افشای ساختار دیتابیس</strong> جلوگیری می‌کند.</li>
-</ul>
-</li>
-<li>
-<p><strong>پاسخ‌های ارسالی به کلاینت هرگز نباید با ساختار دیتابیس مطابقت داشته باشند.</strong></p>
-<ul>
-<li>این کار امنیت را کاهش می‌دهد و ممکن است به مهاجمان سرنخ دهد.</li>
-<li><strong>شناسه‌ها</strong> را پنهان کنید.</li>
-</ul>
-</li>
-<li>
-<p><strong>منابع (Resources)</strong> هر چیزی هستند که می‌توان روی آن‌ها عملی انجام داد:</p>
-<ul>
-<li>داده‌های دانش‌آموزان، فایل‌های ویدئویی یا صوتی، تصاویر، قالب‌های گزارش و ...</li>
-</ul>
-</li>
-<li>
-<p>منابع معمولاً به‌صورت <strong>مجموعه‌ای (Collection)</strong> هستند.</p>
-<ul>
-<li>مثال: <code>Students</code> مجموعه‌ای از نوع <code>Student</code>.</li>
-</ul>
-</li>
-<li>
-<p><strong>URLs = Endpoints</strong> هستند.</p>
-<ul>
-<li>Endpoints آدرس منابع را مشخص می‌کنند.</li>
-<li>باید شامل <strong>اسم‌های جمع</strong> باشند و از افعال پرهیز شود.</li>
-<li>برای مجموعه‌های بزرگ، <strong>صفحه‌بندی</strong> لازم است.</li>
-<li>در درخواست‌های خیلی طولانی، <strong>پارامترها در بدنه POST</strong> قرار بگیرند.</li>
-</ul>
-</li>
-<li>
-<p><strong>افعال HTTP:</strong></p>
-<ul>
-<li><code>POST</code> → اضافه کردن</li>
-<li><code>GET</code> → دریافت</li>
-<li><code>PUT</code> → جایگزینی</li>
-<li><code>PATCH</code> → بروزرسانی جزئی</li>
-<li><code>DELETE</code> → حذف</li>
-</ul>
-</li>
-<li>
-<p><strong>نام‌گذاری فیلدها، متدها و پراپرتی‌ها:</strong></p>
-<ul>
-<li>از هر <strong>قرارداد نام‌گذاری</strong> که دوست دارید استفاده کنید، اما <strong>سازگار و یکپارچه</strong> باشد.</li>
-<li>در JSON معمولاً از <strong>camelCase</strong> استفاده می‌شود.</li>
-<li>در C# از <strong>قراردادهای استاندارد C#</strong> پیروی کنید.</li>
-</ul>
-</li>
-<li>
-<p><strong>نسخه‌بندی (Versioning):</strong></p>
-<ul>
-<li>بسیار مهم برای <strong>سازگاری با نسخه‌های قدیمی</strong> است.</li>
-<li>بهترین روش: قرار دادن نسخه در URL، مثل <code>v1</code> یا <code>v2</code>.</li>
-</ul>
-</li>
-<li>
-<p><strong>کلیدهای API را محرمانه نگه دارید:</strong></p>
-<ul>
-<li>از <strong>Azure Key Vault</strong> یا ابزارهای مشابه برای ذخیره امن استفاده کنید.</li>
-<li>برای امنیت بیشتر، خود API را نیز با <strong>کلید یا روش‌های مناسب</strong> محافظت کنید.</li>
-</ul>
-</li>
-</ul>
-<h3>مرزهای نرم‌افزاری مشخص (Well-defined software boundaries)</h3>
-<p>هیچ‌کس در شرایط عادی کدهای درهم‌وبرهم (spaghetti code) را دوست ندارد. این نوع کدها خواندن، نگهداری و گسترش آن‌ها را بسیار سخت می‌کند. بنابراین هنگام طراحی یک <strong>API</strong>، می‌توان با ایجاد <strong>مرزهای نرم‌افزاری مشخص</strong> از این مشکل جلوگیری کرد. در <strong>طراحی مبتنی بر دامنه (Domain-Driven Design یا DDD)</strong>، این مرزهای مشخص را <strong>کانتکست محدود (Bounded Context)</strong> می‌نامند.</p>
-<p>از نظر تجاری، یک <strong>کانتکست محدود</strong> به‌معنای یک واحد عملیاتی کسب‌وکار است، مانند: منابع انسانی (HR)، مالی، خدمات مشتری، زیرساخت و غیره. این واحدهای عملیاتی کسب‌وکار <strong>دامنه (Domain)</strong> نامیده می‌شوند و هر دامنه می‌تواند به زیردامنه‌های کوچک‌تر تقسیم شود. این زیردامنه‌ها نیز در صورت نیاز به بخش‌های کوچک‌تر تقسیم می‌شوند.</p>
-<p>با تقسیم یک کسب‌وکار به واحدهای عملیاتی، می‌توان <strong>کارشناسان دامنه</strong> را در هر بخش به‌کار گرفت. در ابتدای پروژه، یک <strong>زبان مشترک (Ubiquitous Language)</strong> تعریف می‌شود تا کسب‌وکار با اصطلاحات فنی آشنا شود و تیم‌های IT هم اصطلاحات تجاری را بفهمند. وقتی زبان مشترک بین کسب‌وکار و تیم فنی وجود داشته باشد، <strong>احتمال بروز خطا به‌دلیل سوءتفاهم کاهش پیدا می‌کند</strong>.</p>
-<p>تقسیم یک پروژه بزرگ به زیردامنه‌ها باعث می‌شود تیم‌های کوچک‌تر بتوانند به‌صورت مستقل روی بخش‌های مختلف کار کنند. بنابراین تیم‌های توسعه بزرگ می‌توانند به گروه‌های کوچک‌تر تقسیم شوند و به‌طور هم‌زمان روی پروژه‌های گوناگون فعالیت کنند.</p>
-<blockquote>
-<p><strong>نکته:</strong> موضوع <strong>DDD</strong> بسیار گسترده است و در این بخش به‌طور کامل پوشش داده نمی‌شود. برای اطلاعات بیشتر می‌توانید به بخش <strong>مطالعه بیشتر (Further Reading)</strong> در انتهای این فصل مراجعه کنید.</p>
-</blockquote>
-<hr>
-<h3>پنهان‌سازی بخش‌های غیرضروری</h3>
-<p>در <strong>APIها</strong>، تنها چیزهایی که باید در دسترس قرار بگیرند، <strong>اینترفیس‌ها (Interfaces)</strong> و <strong>نقاط پایانی (Endpoints)</strong> هستند که نقش قرارداد را دارند. سایر بخش‌ها باید از دید مشترک یا مصرف‌کننده مخفی بمانند.</p>
-<p>حتی <strong>پایگاه‌داده‌های بزرگ</strong> را می‌توان به‌گونه‌ای تقسیم کرد که هر API پایگاه‌داده مختص به خود داشته باشد. با توجه به پیچیدگی بالای وب‌سایت‌ها امروزه، می‌توان <strong>مایکروسرویس‌ها (Microservices)</strong>، <strong>مایکرو‌دیتابیس‌ها (Micro-databases)</strong> و <strong>مایکروفِرِنت‌اندها (Micro-frontends)</strong> داشت.</p>
-<hr>
-<h3>مایکروفِرنت‌اند چیست؟</h3>
-<p><strong>مایکروفِرنت‌اند (Micro-frontend)</strong> بخشی کوچک از یک صفحه وب است که به‌صورت پویا بر اساس تعاملات کاربر بارگذاری و تغییر داده می‌شود. این بخش با یک API ارتباط برقرار کرده و API نیز به یک مایکرو‌دیتابیس متصل می‌شود.</p>
-<p>این روش به‌ویژه برای <strong>برنامه‌های تک‌صفحه‌ای (Single-Page Applications یا SPAs)</strong> بسیار ایده‌آل است.</p>
-<hr>
-<h3>SPA چیست و چگونه کار می‌کند؟</h3>
-<p><strong>SPA</strong>ها وب‌سایت‌هایی هستند که تنها از یک صفحه تشکیل شده‌اند. هر زمان که کاربر عملی انجام دهد، فقط بخش مورد نیاز از صفحه به‌روزرسانی می‌شود و باقی صفحه بدون تغییر باقی می‌ماند.</p>
-<p>برای مثال فرض کنید صفحه وب شما یک <strong>بخش کناری (Aside)</strong> دارد که تبلیغات نمایش می‌دهد. این تبلیغات به‌صورت <strong>قطعات HTML</strong> در پایگاه‌داده ذخیره شده‌اند. این بخش کناری طوری تنظیم شده است که هر ۵ ثانیه یک‌بار به‌روزرسانی شود. وقتی زمان به‌روزرسانی برسد:</p>
-<ol>
-<li><strong>Aside</strong> درخواستی به API می‌فرستد.</li>
-<li>API با الگوریتم مناسب، یک تبلیغ جدید از پایگاه‌داده انتخاب می‌کند.</li>
-<li>سند HTML به‌روزرسانی شده و تبلیغ جدید نمایش داده می‌شود.</li>
-</ol>
-<p>این روند همان چیزی است که <strong>چرخه‌ی حیات SPA</strong> نام دارد.</p>
-<div align="center">
-<p><img src="../../../assets/image/09/Table%209-2.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<p>این بخش کناری (<strong>Aside</strong>) خودش یک <strong>مرز نرم‌افزاری مشخص</strong> محسوب می‌شود. این بخش هیچ نیازی ندارد که چیزی درباره سایر قسمت‌های صفحه‌ای که در آن قرار دارد بداند. تنها وظیفه‌اش این است که <strong>هر ۵ ثانیه یک تبلیغ جدید نمایش دهد</strong>. ⏱️🖼️</p>
-<div align="center">
-<p><img src="../../../assets/image/09/Table%209-3.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<p><strong>نمایشگر قبلی</strong> یک <strong>SPA</strong> را نشان می‌دهد که از طریق یک <strong>API Proxy</strong> با یک <strong>RESTful API</strong> ارتباط برقرار می‌کند و آن <strong>API</strong> قادر است به اسناد و پایگاه‌های داده دسترسی داشته باشد.<br>
-[۲۶۰]<br>
-طراحی و توسعه APIها<br>
-فصل ۹</p>
-<p><strong>تنها اجزای تشکیل‌دهنده یک Aside</strong> عبارت‌اند از یک <strong>قطعه سند HTML</strong>، یک <strong>Microservice</strong> و یک <strong>Database</strong>. یک تیم کوچک می‌تواند روی این اجزا با هر فناوری که ترجیح می‌دهد و با آن راحت‌تر است کار کند. <strong>یک SPA کامل</strong> می‌تواند شامل صدها <strong>Micro-document</strong>، <strong>Micro-service</strong> و <strong>Micro-database</strong> باشد. نکته کلیدی اینجاست که این سرویس‌ها می‌توانند با هر فناوری ساخته شوند و هر تیمی بتواند به‌طور مستقل روی آن‌ها کار کند. همچنین چندین پروژه می‌توانند به‌صورت همزمان توسعه یابند.</p>
-<p>در <strong>محدوده مرزی (Bounded Context)</strong> خود می‌توانیم از <strong>روش‌شناسی‌های نرم‌افزاری زیر</strong> برای بهبود کیفیت کد استفاده کنیم:</p>
-<ul>
-<li><strong>اصول SOLID</strong> (شامل <strong>Single Responsibility</strong>، <strong>Open/Closed</strong>، <strong>Liskov</strong>، <strong>Interface Segregation</strong> و <strong>Dependency Inversion</strong>)</li>
-<li><strong>Don't Repeat Yourself (DRY)</strong></li>
-<li><strong>You Ain't Gonna Need It (YAGNI)</strong></li>
-<li><strong>Keep It Simple, Stupid (KISS)</strong></li>
-</ul>
-<p>این روش‌ها با هم به خوبی کار می‌کنند تا <strong>کدهای تکراری را حذف کنند</strong>، از <strong>نوشتن کدهای غیرضروری جلوگیری کنند</strong> و <strong>اشیا و متدها را کوچک و ساده نگه دارند</strong>. دلیل اینکه ما <strong>کلاس‌ها و متدها را توسعه می‌دهیم</strong> این است که هرکدام <strong>باید فقط یک کار انجام دهند و آن را به‌خوبی انجام دهند</strong>.</p>
-<p><strong>Namespaces</strong> برای ایجاد <strong>گروه‌بندی منطقی</strong> استفاده می‌شوند. ما می‌توانیم از Namespaces برای <strong>تعریف مرزهای نرم‌افزاری</strong> استفاده کنیم. هر چه Namespace <strong>خاص‌تر</strong> باشد، برای برنامه‌نویس <strong>معنادارتر</strong> خواهد بود. <strong>Namespaces معنادار</strong> به برنامه‌نویسان کمک می‌کنند تا <strong>کد را بخش‌بندی کنند</strong> و <strong>به‌راحتی آنچه را که نیاز دارند پیدا کنند</strong>. از Namespaces برای <strong>گروه‌بندی منطقی Interfaceها، Classها، Structها و Enumها</strong> استفاده کنید.</p>
-<hr>
-<h3>در بخش بعدی 📚</h3>
-<p>یاد می‌گیرید که چگونه یک API را با استفاده از <strong>RAML</strong> طراحی کنید. سپس از <strong>RAML File</strong> یک <strong>C# API</strong> تولید خواهید کرد.</p>
-<hr>
-<h2>اهمیت <strong>مستندسازی با کیفیت بالا برای APIها</strong> 📝</h2>
-<p>هنگام کار روی یک پروژه، لازم است تمام APIهایی که در حال حاضر استفاده می‌شوند را بشناسید. دلیل این موضوع این است که <strong>ممکن است به‌طور ناخواسته کدی بنویسید که قبلاً وجود داشته است</strong>، و این منجر به <strong>هدر رفت تلاش</strong> می‌شود. علاوه بر این، اگر نسخه جدیدی از کدی که از قبل وجود دارد بنویسید، اکنون <strong>دو نسخه از کد دارید که یک کار انجام می‌دهند</strong>. این باعث <strong>پیچیدگی نرم‌افزار</strong> می‌شود و <strong>هزینه نگهداری</strong> را افزایش می‌دهد، زیرا هر دو نسخه باید پشتیبانی شوند. همچنین احتمال بروز <strong>Bug</strong> نیز افزایش پیدا می‌کند.</p>
-<p>در <strong>پروژه‌های بزرگ</strong> که در چندین فناوری و مخزن (Repository) پخش شده‌اند و تیم‌هایی با <strong>نرخ جابجایی بالای نیروها</strong> دارند، به‌ویژه جایی که <strong>مستندات وجود ندارد</strong>، <strong>تکرار کد</strong> به یک مشکل واقعی تبدیل می‌شود. گاهی اوقات تنها یک یا دو <strong>متخصص حوزه (Domain Expert)</strong> وجود دارند و اکثر اعضای تیم اصلاً سیستم را نمی‌شناسند. من روی پروژه‌هایی از این نوع کار کرده‌ام و <strong>نگهداری و توسعه آن‌ها واقعاً آزاردهنده است</strong>.</p>
-<p>به همین دلیل است که <strong>مستندسازی API برای هر پروژه، صرف‌نظر از اندازه آن، حیاتی است</strong>. در دنیای توسعه نرم‌افزار، رفت‌وآمد نیروها امری اجتناب‌ناپذیر است، به‌ویژه زمانی که فرصت‌های کاری بهتری ارائه شود. اگر <strong>فردی که پروژه را ترک می‌کند متخصص اصلی حوزه باشد</strong>، دانش خود را با خود می‌برد. اگر مستندات وجود نداشته باشد، <strong>توسعه‌دهندگان جدید با یک منحنی یادگیری تند روبه‌رو خواهند شد</strong> و مجبور می‌شوند با <strong>خواندن کدها پروژه را بفهمند</strong>. اگر کدها <strong>نامرتب و پیچیده</strong> باشند، این روند می‌تواند برای <strong>نیروی تازه‌وارد بسیار دردسرساز باشد</strong>.</p>
-<p>در نتیجه، به دلیل <strong>کمبود دانش سیستم</strong>، برنامه‌نویسان <strong>تمایل پیدا می‌کنند که تقریباً همه‌چیز را از صفر بنویسند</strong> تا کار را به‌موقع تحویل دهند. این موضوع معمولاً باعث <strong>تکرار کد</strong> می‌شود و <strong>استفاده مجدد از کدها</strong> اتفاق نمی‌افتد. نتیجه این است که <strong>نرم‌افزار پیچیده، خطاپذیر و سخت برای توسعه و نگهداری می‌شود</strong>.</p>
-<p>اکنون شما می‌دانید که چرا <strong>APIها باید مستندسازی شوند</strong>. <strong>یک API با مستندسازی کامل</strong> باعث <strong>درک بهتر برنامه‌نویسان</strong> می‌شود و <strong>تمایل به استفاده مجدد از آن را افزایش می‌دهد</strong>، در نتیجه <strong>احتمال تکرار کد کاهش یافته</strong> و از <strong>تولید نرم‌افزار پیچیده و سخت‌نگهداری</strong> جلوگیری می‌شود.</p>
-<p>همچنین باید مراقب هر <strong>کدی باشید که به‌عنوان Deprecated یا Obsolete علامت‌گذاری شده باشد</strong>. کدهای Deprecated در <strong>نسخه‌های بعدی حذف می‌شوند</strong> و کدهای Obsolete دیگر استفاده نمی‌شوند. اگر شما از <strong>APIهایی استفاده می‌کنید که Deprecated یا Obsolete هستند</strong>، باید <strong>در اولویت قرار دهید تا آن‌ها را رفع یا جایگزین کنید</strong>.</p>
-<hr>
-<p>حالا که اهمیت <strong>مستندسازی با کیفیت API</strong> را فهمیدید، به سراغ <strong>ابزاری به نام Swagger</strong> می‌رویم. Swagger یک ابزار <strong>ساده و کارآمد</strong> برای تولید <strong>مستندسازی زیبا و با کیفیت برای APIها</strong> است.</p>
-<hr>
-<h2>توسعه API با <strong>Swagger</strong> 🚀</h2>
-<p>Swagger یک <strong>مجموعه قدرتمند از ابزارها</strong> فراهم می‌کند که <strong>بر توسعه API متمرکز هستند</strong>. با Swagger می‌توانید کارهای زیر را انجام دهید:</p>
-<ul>
-<li><strong>طراحی (Design):</strong> طراحی API و مدل‌سازی آن براساس استانداردهای مشخصات.</li>
-<li><strong>ساخت (Build):</strong> ساخت یک API پایدار و قابل استفاده مجدد در C#.</li>
-<li><strong>مستندسازی (Document):</strong> ارائه مستنداتی تعاملی برای توسعه‌دهندگان.</li>
-<li><strong>آزمایش (Test):</strong> آزمایش ساده API.</li>
-<li><strong>استانداردسازی (Standardize):</strong> اعمال محدودیت‌ها و راهنماهای سازمانی بر معماری API.</li>
-</ul>
-<p>ما قصد داریم <strong>Swagger را در پروژه <a href="http://ASP.NET">ASP.NET</a> Core 3.0+</strong> خود راه‌اندازی کنیم. بنابراین، ابتدا پروژه را در <strong>Visual Studio 2019</strong> ایجاد کنید. <strong>Web API</strong> را انتخاب کنید و تنظیمات <strong>No Authentication</strong> را فعال کنید.</p>
-<p>پیش از ادامه، توجه داشته باشید که <strong>Swagger به‌صورت خودکار مستندات زیبا و کاربردی تولید می‌کند</strong> و برای راه‌اندازی آن به <strong>کد بسیار کمی نیاز است</strong>؛ به همین دلیل بسیاری از <strong>APIهای مدرن از Swagger استفاده می‌کنند</strong>.</p>
-<p>پیش از اینکه بتوانیم از Swagger استفاده کنیم، ابتدا باید <strong>پشتیبانی آن را در پروژه نصب کنیم</strong>. برای نصب Swagger باید <strong>نسخه ۵ یا بالاتر از بسته Swashbuckle.AspNetCore</strong> را نصب کنید. در زمان نگارش این متن، <strong>نسخه موجود در NuGet، ۵.۳.۳ است</strong>. پس از نصب، باید <strong>خدمات Swagger را به مجموعه سرویس‌های خود اضافه کنیم</strong>. در اینجا، ما فقط از Swagger برای <strong>مستندسازی API</strong> خود استفاده می‌کنیم. در کلاس <strong>Startup.cs</strong>، خط زیر را به متد <strong>ConfigureServices()</strong> اضافه کنید:</p>
-<pre class="hljs"><code>services.AddSwaggerGen(swagger =&gt;
+</code></pre> <p>این روش ساده است و یافتن نسخه درست API را آسان می‌کند.</p></li> <li><p><strong>JSON</strong> بهترین قالب نمایش داده‌هاست: <strong>خواناتر</strong> و <strong>کم‌حجم‌تر از XML</strong>.</p><ul> <li>در متدهای <code>POST</code>، <code>PUT</code> و <code>PATCH</code>، هدر <code>content-type</code> را روی <code>application/json</code> قرار دهید، در غیر این صورت <strong>کد ۴۱۵ (Unsupported Media Type)</strong> برگردانید.</li><li>از <strong>Gzip</strong> به‌صورت پیش‌فرض استفاده کنید تا <strong>مصرف پهنای باند کاهش یابد</strong>.</li></ul> </li><li> <p>همیشه از <strong>HTTPS (TLS)</strong> استفاده کنید.</p><ul> <li><strong>احراز هویت و مجوزدهی</strong> در هدر انجام شود.</li><li>در مثال‌های قبل، از هدر <code>x-api-key</code> استفاده کردیم.</li><li>دسترسی‌های غیرمجاز باید <strong>کد ۴۰۳ (Forbidden)</strong> برگردانند.</li></ul> </li><li> <p><strong>کدهای وضعیت HTTP</strong> را به‌درستی استفاده کنید:</p><ul> <li><code>200</code> موفقیت</li><li><code>404</code> یافت نشد</li><li>لیست کامل: <a href="https://httpstatuses.com">https://httpstatuses.com</a></li></ul> </li><li> <p><strong>OAuth 2.0</strong> استاندارد صنعت برای مجوزدهی است:<br><a href="https://oauth.net/2/">https://oauth.net/2/</a></p></li> <li><p>API باید <strong>مستندات کامل و به‌روز با مثال‌های واضح</strong> داشته باشد.</p><ul> <li>ظاهر مستندات باید <strong>جذاب و خوانا</strong> باشد.</li><li>در این فصل با <strong>Swagger</strong> برای ایجاد مستندات آشنا می‌شویم.</li></ul> </li><li> <p><strong>مقیاس‌پذیری</strong> را از همان ابتدا در نظر بگیرید.</p><ul> <li>در پروژه <strong>Dividend Calendar API</strong> در فصل بعد، خواهید دید چگونه <strong>محدودیت تعداد درخواست‌ها (Throttling)</strong> را اعمال می‌کنیم.</li></ul> </li><li> <p><strong>امنیت و عملکرد:</strong></p><ul> <li><strong>API Proxy</strong> می‌تواند کلاینت را از دسترسی مستقیم به API منع کند.</li><li>Proxy می‌تواند در همان پروژه یا روی یک API خارجی باشد.</li><li>Proxy از <strong>افشای ساختار دیتابیس</strong> جلوگیری می‌کند.</li></ul> </li><li> <p><strong>پاسخ‌های ارسالی به کلاینت هرگز نباید با ساختار دیتابیس مطابقت داشته باشند.</strong></p><ul> <li>این کار امنیت را کاهش می‌دهد و ممکن است به مهاجمان سرنخ دهد.</li><li><strong>شناسه‌ها</strong> را پنهان کنید.</li></ul> </li><li> <p><strong>منابع (Resources)</strong> هر چیزی هستند که می‌توان روی آن‌ها عملی انجام داد:</p><ul> <li>داده‌های دانش‌آموزان، فایل‌های ویدئویی یا صوتی، تصاویر، قالب‌های گزارش و ...</li></ul> </li><li> <p>منابع معمولاً به‌صورت <strong>مجموعه‌ای (Collection)</strong> هستند.</p><ul> <li>مثال: <code>Students</code> مجموعه‌ای از نوع <code>Student</code>.</li></ul> </li><li> <p><strong>URLs = Endpoints</strong> هستند.</p><ul> <li>Endpoints آدرس منابع را مشخص می‌کنند.</li><li>باید شامل <strong>اسم‌های جمع</strong> باشند و از افعال پرهیز شود.</li><li>برای مجموعه‌های بزرگ، <strong>صفحه‌بندی</strong> لازم است.</li><li>در درخواست‌های خیلی طولانی، <strong>پارامترها در بدنه POST</strong> قرار بگیرند.</li></ul> </li><li> <p><strong>افعال HTTP:</strong></p><ul> <li><code>POST</code> → اضافه کردن</li><li><code>GET</code> → دریافت</li><li><code>PUT</code> → جایگزینی</li><li><code>PATCH</code> → بروزرسانی جزئی</li><li><code>DELETE</code> → حذف</li></ul> </li><li> <p><strong>نام‌گذاری فیلدها، متدها و پراپرتی‌ها:</strong></p><ul> <li>از هر <strong>قرارداد نام‌گذاری</strong> که دوست دارید استفاده کنید، اما <strong>سازگار و یکپارچه</strong> باشد.</li><li>در JSON معمولاً از <strong>camelCase</strong> استفاده می‌شود.</li><li>در C# از <strong>قراردادهای استاندارد C#</strong> پیروی کنید.</li></ul> </li><li> <p><strong>نسخه‌بندی (Versioning):</strong></p><ul> <li>بسیار مهم برای <strong>سازگاری با نسخه‌های قدیمی</strong> است.</li><li>بهترین روش: قرار دادن نسخه در URL، مثل <code>v1</code> یا <code>v2</code>.</li></ul> </li><li> <p><strong>کلیدهای API را محرمانه نگه دارید:</strong></p><ul> <li>از <strong>Azure Key Vault</strong> یا ابزارهای مشابه برای ذخیره امن استفاده کنید.</li><li>برای امنیت بیشتر، خود API را نیز با <strong>کلید یا روش‌های مناسب</strong> محافظت کنید.</li></ul> </li></ul> <h3>مرزهای نرم‌افزاری مشخص (Well-defined software boundaries)</h3><p>هیچ‌کس در شرایط عادی کدهای درهم‌وبرهم (spaghetti code) را دوست ندارد. این نوع کدها خواندن، نگهداری و گسترش آن‌ها را بسیار سخت می‌کند. بنابراین هنگام طراحی یک <strong>API</strong>، می‌توان با ایجاد <strong>مرزهای نرم‌افزاری مشخص</strong> از این مشکل جلوگیری کرد. در <strong>طراحی مبتنی بر دامنه (Domain-Driven Design یا DDD)</strong>، این مرزهای مشخص را <strong>کانتکست محدود (Bounded Context)</strong> می‌نامند.</p><p>از نظر تجاری، یک <strong>کانتکست محدود</strong> به‌معنای یک واحد عملیاتی کسب‌وکار است، مانند: منابع انسانی (HR)، مالی، خدمات مشتری، زیرساخت و غیره. این واحدهای عملیاتی کسب‌وکار <strong>دامنه (Domain)</strong> نامیده می‌شوند و هر دامنه می‌تواند به زیردامنه‌های کوچک‌تر تقسیم شود. این زیردامنه‌ها نیز در صورت نیاز به بخش‌های کوچک‌تر تقسیم می‌شوند.</p><p>با تقسیم یک کسب‌وکار به واحدهای عملیاتی، می‌توان <strong>کارشناسان دامنه</strong> را در هر بخش به‌کار گرفت. در ابتدای پروژه، یک <strong>زبان مشترک (Ubiquitous Language)</strong> تعریف می‌شود تا کسب‌وکار با اصطلاحات فنی آشنا شود و تیم‌های IT هم اصطلاحات تجاری را بفهمند. وقتی زبان مشترک بین کسب‌وکار و تیم فنی وجود داشته باشد، <strong>احتمال بروز خطا به‌دلیل سوءتفاهم کاهش پیدا می‌کند</strong>.</p><p>تقسیم یک پروژه بزرگ به زیردامنه‌ها باعث می‌شود تیم‌های کوچک‌تر بتوانند به‌صورت مستقل روی بخش‌های مختلف کار کنند. بنابراین تیم‌های توسعه بزرگ می‌توانند به گروه‌های کوچک‌تر تقسیم شوند و به‌طور هم‌زمان روی پروژه‌های گوناگون فعالیت کنند.</p><blockquote> <p><strong>نکته:</strong> موضوع <strong>DDD</strong> بسیار گسترده است و در این بخش به‌طور کامل پوشش داده نمی‌شود. برای اطلاعات بیشتر می‌توانید به بخش <strong>مطالعه بیشتر (Further Reading)</strong> در انتهای این فصل مراجعه کنید.</p></blockquote> <hr><h3>پنهان‌سازی بخش‌های غیرضروری</h3><p>در <strong>APIها</strong>، تنها چیزهایی که باید در دسترس قرار بگیرند، <strong>اینترفیس‌ها (Interfaces)</strong> و <strong>نقاط پایانی (Endpoints)</strong> هستند که نقش قرارداد را دارند. سایر بخش‌ها باید از دید مشترک یا مصرف‌کننده مخفی بمانند.</p><p>حتی <strong>پایگاه‌داده‌های بزرگ</strong> را می‌توان به‌گونه‌ای تقسیم کرد که هر API پایگاه‌داده مختص به خود داشته باشد. با توجه به پیچیدگی بالای وب‌سایت‌ها امروزه، می‌توان <strong>مایکروسرویس‌ها (Microservices)</strong>، <strong>مایکرو‌دیتابیس‌ها (Micro-databases)</strong> و <strong>مایکروفِرِنت‌اندها (Micro-frontends)</strong> داشت.</p><hr> <h3>مایکروفِرنت‌اند چیست؟</h3><p><strong>مایکروفِرنت‌اند (Micro-frontend)</strong> بخشی کوچک از یک صفحه وب است که به‌صورت پویا بر اساس تعاملات کاربر بارگذاری و تغییر داده می‌شود. این بخش با یک API ارتباط برقرار کرده و API نیز به یک مایکرو‌دیتابیس متصل می‌شود.</p><p>این روش به‌ویژه برای <strong>برنامه‌های تک‌صفحه‌ای (Single-Page Applications یا SPAs)</strong> بسیار ایده‌آل است.</p><hr> <h3>SPA چیست و چگونه کار می‌کند؟</h3><p><strong>SPA</strong>ها وب‌سایت‌هایی هستند که تنها از یک صفحه تشکیل شده‌اند. هر زمان که کاربر عملی انجام دهد، فقط بخش مورد نیاز از صفحه به‌روزرسانی می‌شود و باقی صفحه بدون تغییر باقی می‌ماند.</p><p>برای مثال فرض کنید صفحه وب شما یک <strong>بخش کناری (Aside)</strong> دارد که تبلیغات نمایش می‌دهد. این تبلیغات به‌صورت <strong>قطعات HTML</strong> در پایگاه‌داده ذخیره شده‌اند. این بخش کناری طوری تنظیم شده است که هر ۵ ثانیه یک‌بار به‌روزرسانی شود. وقتی زمان به‌روزرسانی برسد:</p><ol> <li><strong>Aside</strong> درخواستی به API می‌فرستد.</li><li>API با الگوریتم مناسب، یک تبلیغ جدید از پایگاه‌داده انتخاب می‌کند.</li><li>سند HTML به‌روزرسانی شده و تبلیغ جدید نمایش داده می‌شود.</li></ol> <p>این روند همان چیزی است که <strong>چرخه‌ی حیات SPA</strong> نام دارد.</p><div align="center"> <p><img src="../../../assets/image/09/Table%209-2.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <p>این بخش کناری (<strong>Aside</strong>) خودش یک <strong>مرز نرم‌افزاری مشخص</strong> محسوب می‌شود. این بخش هیچ نیازی ندارد که چیزی درباره سایر قسمت‌های صفحه‌ای که در آن قرار دارد بداند. تنها وظیفه‌اش این است که <strong>هر ۵ ثانیه یک تبلیغ جدید نمایش دهد</strong>. ⏱</p><div align="center"> <p><img src="../../../assets/image/09/Table%209-3.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <p><strong>نمایشگر قبلی</strong> یک <strong>SPA</strong> را نشان می‌دهد که از طریق یک <strong>API Proxy</strong> با یک <strong>RESTful API</strong> ارتباط برقرار می‌کند و آن <strong>API</strong> قادر است به اسناد و پایگاه‌های داده دسترسی داشته باشد.<br> [۲۶۰]<br> طراحی و توسعه APIها<br> فصل ۹</p><p><strong>تنها اجزای تشکیل‌دهنده یک Aside</strong> عبارت‌اند از یک <strong>قطعه سند HTML</strong>، یک <strong>Microservice</strong> و یک <strong>Database</strong>. یک تیم کوچک می‌تواند روی این اجزا با هر فناوری که ترجیح می‌دهد و با آن راحت‌تر است کار کند. <strong>یک SPA کامل</strong> می‌تواند شامل صدها <strong>Micro-document</strong>، <strong>Micro-service</strong> و <strong>Micro-database</strong> باشد. نکته کلیدی اینجاست که این سرویس‌ها می‌توانند با هر فناوری ساخته شوند و هر تیمی بتواند به‌طور مستقل روی آن‌ها کار کند. همچنین چندین پروژه می‌توانند به‌صورت همزمان توسعه یابند.</p><p>در <strong>محدوده مرزی (Bounded Context)</strong> خود می‌توانیم از <strong>روش‌شناسی‌های نرم‌افزاری زیر</strong> برای بهبود کیفیت کد استفاده کنیم:</p><ul> <li><strong>اصول SOLID</strong> (شامل <strong>Single Responsibility</strong>، <strong>Open/Closed</strong>، <strong>Liskov</strong>، <strong>Interface Segregation</strong> و <strong>Dependency Inversion</strong>)</li><li><strong>Don't Repeat Yourself (DRY)</strong></li><li><strong>You Ain't Gonna Need It (YAGNI)</strong></li><li><strong>Keep It Simple, Stupid (KISS)</strong></li></ul> <p>این روش‌ها با هم به خوبی کار می‌کنند تا <strong>کدهای تکراری را حذف کنند</strong>، از <strong>نوشتن کدهای غیرضروری جلوگیری کنند</strong> و <strong>اشیا و متدها را کوچک و ساده نگه دارند</strong>. دلیل اینکه ما <strong>کلاس‌ها و متدها را توسعه می‌دهیم</strong> این است که هرکدام <strong>باید فقط یک کار انجام دهند و آن را به‌خوبی انجام دهند</strong>.</p><p><strong>Namespaces</strong> برای ایجاد <strong>گروه‌بندی منطقی</strong> استفاده می‌شوند. ما می‌توانیم از Namespaces برای <strong>تعریف مرزهای نرم‌افزاری</strong> استفاده کنیم. هر چه Namespace <strong>خاص‌تر</strong> باشد، برای برنامه‌نویس <strong>معنادارتر</strong> خواهد بود. <strong>Namespaces معنادار</strong> به برنامه‌نویسان کمک می‌کنند تا <strong>کد را بخش‌بندی کنند</strong> و <strong>به‌راحتی آنچه را که نیاز دارند پیدا کنند</strong>. از Namespaces برای <strong>گروه‌بندی منطقی Interfaceها، Classها، Structها و Enumها</strong> استفاده کنید.</p><hr> <h3>در بخش بعدی</h3><p>یاد می‌گیرید که چگونه یک API را با استفاده از <strong>RAML</strong> طراحی کنید. سپس از <strong>RAML File</strong> یک <strong>C# API</strong> تولید خواهید کرد.</p><hr> <h2>اهمیت <strong>مستندسازی با کیفیت بالا برای APIها</strong></h2><p>هنگام کار روی یک پروژه، لازم است تمام APIهایی که در حال حاضر استفاده می‌شوند را بشناسید. دلیل این موضوع این است که <strong>ممکن است به‌طور ناخواسته کدی بنویسید که قبلاً وجود داشته است</strong>، و این منجر به <strong>هدر رفت تلاش</strong> می‌شود. علاوه بر این، اگر نسخه جدیدی از کدی که از قبل وجود دارد بنویسید، اکنون <strong>دو نسخه از کد دارید که یک کار انجام می‌دهند</strong>. این باعث <strong>پیچیدگی نرم‌افزار</strong> می‌شود و <strong>هزینه نگهداری</strong> را افزایش می‌دهد، زیرا هر دو نسخه باید پشتیبانی شوند. همچنین احتمال بروز <strong>Bug</strong> نیز افزایش پیدا می‌کند.</p><p>در <strong>پروژه‌های بزرگ</strong> که در چندین فناوری و مخزن (Repository) پخش شده‌اند و تیم‌هایی با <strong>نرخ جابجایی بالای نیروها</strong> دارند، به‌ویژه جایی که <strong>مستندات وجود ندارد</strong>، <strong>تکرار کد</strong> به یک مشکل واقعی تبدیل می‌شود. گاهی اوقات تنها یک یا دو <strong>متخصص حوزه (Domain Expert)</strong> وجود دارند و اکثر اعضای تیم اصلاً سیستم را نمی‌شناسند. من روی پروژه‌هایی از این نوع کار کرده‌ام و <strong>نگهداری و توسعه آن‌ها واقعاً آزاردهنده است</strong>.</p><p>به همین دلیل است که <strong>مستندسازی API برای هر پروژه، صرف‌نظر از اندازه آن، حیاتی است</strong>. در دنیای توسعه نرم‌افزار، رفت‌وآمد نیروها امری اجتناب‌ناپذیر است، به‌ویژه زمانی که فرصت‌های کاری بهتری ارائه شود. اگر <strong>فردی که پروژه را ترک می‌کند متخصص اصلی حوزه باشد</strong>، دانش خود را با خود می‌برد. اگر مستندات وجود نداشته باشد، <strong>توسعه‌دهندگان جدید با یک منحنی یادگیری تند روبه‌رو خواهند شد</strong> و مجبور می‌شوند با <strong>خواندن کدها پروژه را بفهمند</strong>. اگر کدها <strong>نامرتب و پیچیده</strong> باشند، این روند می‌تواند برای <strong>نیروی تازه‌وارد بسیار دردسرساز باشد</strong>.</p><p>در نتیجه، به دلیل <strong>کمبود دانش سیستم</strong>، برنامه‌نویسان <strong>تمایل پیدا می‌کنند که تقریباً همه‌چیز را از صفر بنویسند</strong> تا کار را به‌موقع تحویل دهند. این موضوع معمولاً باعث <strong>تکرار کد</strong> می‌شود و <strong>استفاده مجدد از کدها</strong> اتفاق نمی‌افتد. نتیجه این است که <strong>نرم‌افزار پیچیده، خطاپذیر و سخت برای توسعه و نگهداری می‌شود</strong>.</p><p>اکنون شما می‌دانید که چرا <strong>APIها باید مستندسازی شوند</strong>. <strong>یک API با مستندسازی کامل</strong> باعث <strong>درک بهتر برنامه‌نویسان</strong> می‌شود و <strong>تمایل به استفاده مجدد از آن را افزایش می‌دهد</strong>، در نتیجه <strong>احتمال تکرار کد کاهش یافته</strong> و از <strong>تولید نرم‌افزار پیچیده و سخت‌نگهداری</strong> جلوگیری می‌شود.</p><p>همچنین باید مراقب هر <strong>کدی باشید که به‌عنوان Deprecated یا Obsolete علامت‌گذاری شده باشد</strong>. کدهای Deprecated در <strong>نسخه‌های بعدی حذف می‌شوند</strong> و کدهای Obsolete دیگر استفاده نمی‌شوند. اگر شما از <strong>APIهایی استفاده می‌کنید که Deprecated یا Obsolete هستند</strong>، باید <strong>در اولویت قرار دهید تا آن‌ها را رفع یا جایگزین کنید</strong>.</p><hr> <p>حالا که اهمیت <strong>مستندسازی با کیفیت API</strong> را فهمیدید، به سراغ <strong>ابزاری به نام Swagger</strong> می‌رویم. Swagger یک ابزار <strong>ساده و کارآمد</strong> برای تولید <strong>مستندسازی زیبا و با کیفیت برای APIها</strong> است.</p><hr> <h2>توسعه API با <strong>Swagger</strong></h2><p>Swagger یک <strong>مجموعه قدرتمند از ابزارها</strong> فراهم می‌کند که <strong>بر توسعه API متمرکز هستند</strong>. با Swagger می‌توانید کارهای زیر را انجام دهید:</p><ul> <li><strong>طراحی (Design):</strong> طراحی API و مدل‌سازی آن براساس استانداردهای مشخصات.</li><li><strong>ساخت (Build):</strong> ساخت یک API پایدار و قابل استفاده مجدد در C#.</li><li><strong>مستندسازی (Document):</strong> ارائه مستنداتی تعاملی برای توسعه‌دهندگان.</li><li><strong>آزمایش (Test):</strong> آزمایش ساده API.</li><li><strong>استانداردسازی (Standardize):</strong> اعمال محدودیت‌ها و راهنماهای سازمانی بر معماری API.</li></ul> <p>ما قصد داریم <strong>Swagger را در پروژه <a href="http://ASP.NET">ASP.NET</a> Core 3.0+</strong> خود راه‌اندازی کنیم. بنابراین، ابتدا پروژه را در <strong>Visual Studio 2019</strong> ایجاد کنید. <strong>Web API</strong> را انتخاب کنید و تنظیمات <strong>No Authentication</strong> را فعال کنید.</p><p>پیش از ادامه، توجه داشته باشید که <strong>Swagger به‌صورت خودکار مستندات زیبا و کاربردی تولید می‌کند</strong> و برای راه‌اندازی آن به <strong>کد بسیار کمی نیاز است</strong>؛ به همین دلیل بسیاری از <strong>APIهای مدرن از Swagger استفاده می‌کنند</strong>.</p><p>پیش از اینکه بتوانیم از Swagger استفاده کنیم، ابتدا باید <strong>پشتیبانی آن را در پروژه نصب کنیم</strong>. برای نصب Swagger باید <strong>نسخه ۵ یا بالاتر از بسته Swashbuckle.AspNetCore</strong> را نصب کنید. در زمان نگارش این متن، <strong>نسخه موجود در NuGet، ۵.۳.۳ است</strong>. پس از نصب، باید <strong>خدمات Swagger را به مجموعه سرویس‌های خود اضافه کنیم</strong>. در اینجا، ما فقط از Swagger برای <strong>مستندسازی API</strong> خود استفاده می‌کنیم. در کلاس <strong>Startup.cs</strong>، خط زیر را به متد <strong>ConfigureServices()</strong> اضافه کنید:</p><pre class="hljs"><code>services.AddSwaggerGen(swagger =&gt;
 {
     swagger.SwaggerDoc(<span class="hljs-string">&quot;v1&quot;</span>, <span class="hljs-keyword">new</span> OpenApiInfo { Title = <span class="hljs-string">&quot;Weather Forecast API&quot;</span> });
 });
-</code></pre>
-<p>در کدی که اضافه کردیم، <strong>سرویس مستندسازی Swagger به مجموعه سرویس‌ها اضافه شده است</strong>. <strong>نسخه API ما v1</strong> و عنوان آن <strong>Weather Forecast API</strong> است.</p>
-<p>اکنون باید <strong>متد Configure()</strong> را به‌روزرسانی کنیم تا <strong>Middleware مربوط به Swagger</strong> را اضافه کنیم، به این صورت، بلافاصله پس از <strong>if statement</strong>:</p>
-<pre class="hljs"><code>app.UseSwagger();
+</code></pre> <p>در کدی که اضافه کردیم، <strong>سرویس مستندسازی Swagger به مجموعه سرویس‌ها اضافه شده است</strong>. <strong>نسخه API ما v1</strong> و عنوان آن <strong>Weather Forecast API</strong> است.</p><p>اکنون باید <strong>متد Configure()</strong> را به‌روزرسانی کنیم تا <strong>Middleware مربوط به Swagger</strong> را اضافه کنیم، به این صورت، بلافاصله پس از <strong>if statement</strong>:</p><pre class="hljs"><code>app.UseSwagger();
 app.UseSwaggerUI(c =&gt;
 {
     c.SwaggerEndpoint(<span class="hljs-string">&quot;/swagger/v1/swagger.json&quot;</span>, <span class="hljs-string">&quot;Weather Forecast API&quot;</span>);
 });
-</code></pre>
-<p>در متد <strong>Configure()</strong> به برنامه خود می‌گوییم که <strong>از Swagger و Swagger UI استفاده کند</strong> و <strong>مسیر Swagger Endpoint برای Weather Forecast API</strong> را مشخص می‌کنیم.</p>
-<p>سپس باید <strong>بسته Swashbuckle.AspNetCore.Newtonsoft</strong> را از NuGet نصب کنید (<strong>نسخه ۵.۳.۳ در زمان نگارش</strong>). بعد از آن، خط زیر را به متد <strong>ConfigureServices()</strong> خود اضافه کنید:</p>
-<pre class="hljs"><code>services.AddSwaggerGenNewtonsoftSupport();
-</code></pre>
-<p>ما پشتیبانی از <strong>Newtonsoft</strong> را برای تولید مستندات <strong>Swagger</strong> اضافه کردیم. همین و بس! 🎯<br>
-با این کار، <strong>Swagger</strong> آماده‌ی اجرا است. حالا پروژه‌ی خود را اجرا کنید و به این آدرس بروید:</p>
-<pre class="hljs"><code>https://localhost:PORT_NUMBER/swagger/index.html
-</code></pre>
-<p>باید صفحه‌ی وب زیر را ببینید: 🌐</p>
-<div align="center">
-<p><img src="../../../assets/image/09/Table%209-4.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<p>حالا بیایید بررسی کنیم که چرا باید <strong>immutable struct</strong>‌ها را به جای <strong>mutable object</strong>‌ها پاس بدهیم.</p>
-<hr>
-<h2>عبور دادن <strong>immutable struct</strong>‌ها به جای <strong>mutable object</strong>‌ها 🧩</h2>
-<p>در این بخش، یک برنامه‌ی کامپیوتری خواهیم نوشت که <strong>۱ میلیون شیء</strong> و <strong>۱ میلیون immutable struct</strong> را پردازش می‌کند. خواهید دید که <strong>struct</strong>ها از نظر <strong>عملکرد (performance)</strong> بسیار سریع‌تر از <strong>object</strong>ها هستند.<br>
-ما کدی می‌نویسیم که <strong>۱ میلیون object</strong> را در <strong>۱۴۴۰ میلی‌ثانیه</strong> پردازش می‌کند و <strong>۱ میلیون struct</strong> را در <strong>۸۴۱ میلی‌ثانیه</strong>. این یعنی <strong>۵۹۹ میلی‌ثانیه</strong> اختلاف. شاید این زمان خیلی به نظر نرسد، اما زمانی که با <strong>مجموعه‌داده‌های عظیم</strong> کار می‌کنید، استفاده از <strong>immutable struct</strong>‌ها نسبت به <strong>mutable object</strong>ها بهبودهای بزرگی در عملکرد ایجاد می‌کند. 🚀</p>
-<hr>
-<h3>مشکل <strong>mutable object</strong>ها در برنامه‌های چندنخی (Multi-threading)</h3>
-<p>مقادیر در <strong>mutable object</strong>‌ها می‌توانند <strong>بین رشته‌ها (threads)</strong> تغییر کنند که می‌تواند <strong>فاجعه‌بار</strong> باشد. تصور کنید در حساب بانکی‌تان <strong>۱۵٬۰۰۰ پوند</strong> دارید و به صاحب‌خانه‌تان <strong>۴۳۵ پوند</strong> اجاره پرداخت می‌کنید. حساب شما دارای <strong>سقف برداشت (overdraft limit)</strong> است. حالا هم‌زمان، شخص دیگری در حال پرداخت <strong>۲۳٬۰۰۰ پوند</strong> به یک شرکت خودرو برای خرید ماشین است. مقدار حساب شما توسط <strong>thread</strong> خریدار ماشین تغییر می‌کند و شما به جای <strong>۴۳۵ پوند، ۲۳٬۰۰۰ پوند</strong> به صاحب‌خانه پرداخت می‌کنید و حساب شما <strong>۸٬۰۰۰ پوند بدهکار</strong> می‌شود!</p>
-<p>نیازی نیست کدی برای مثال تغییر داده‌ی <strong>mutable</strong> بین <strong>threads</strong> بنویسیم، زیرا این موضوع در <strong>فصل ۸ – Threading and Concurrency</strong> پوشش داده شده است.</p>
-<hr>
-<h3>نکات کلیدی این بخش 📝</h3>
-<ul>
-<li><strong>Struct</strong>ها سریع‌تر از <strong>object</strong>ها هستند.</li>
-<li><strong>Immutable struct</strong>ها <strong>thread-safe</strong> هستند.</li>
-</ul>
-<p>هنگام ایجاد و پاس دادن داده‌ها، <strong>struct</strong>‌ها نسبت به <strong>object</strong>‌ها عملکرد بهتری دارند. همچنین می‌توان <strong>struct</strong>ها را <strong>immutable</strong> کرد تا <strong>thread-safe</strong> باشند. در اینجا یک برنامه‌ی کوچک خواهیم نوشت.</p>
-<hr>
-<h3>ایجاد پروژه</h3>
-<p>یک برنامه‌ی کنسول جدید در <strong>.NET Framework</strong> به نام <strong>CH11_WellDefinedBoundaries</strong> اضافه کنید و کلاس زیر را ایجاد نمایید:</p>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">PersonObject</span>
+</code></pre> <p>در متد <strong>Configure()</strong> به برنامه خود می‌گوییم که <strong>از Swagger و Swagger UI استفاده کند</strong> و <strong>مسیر Swagger Endpoint برای Weather Forecast API</strong> را مشخص می‌کنیم.</p><p>سپس باید <strong>بسته Swashbuckle.AspNetCore.Newtonsoft</strong> را از NuGet نصب کنید (<strong>نسخه ۵.۳.۳ در زمان نگارش</strong>). بعد از آن، خط زیر را به متد <strong>ConfigureServices()</strong> خود اضافه کنید:</p><pre class="hljs"><code>services.AddSwaggerGenNewtonsoftSupport();
+</code></pre> <p>ما پشتیبانی از <strong>Newtonsoft</strong> را برای تولید مستندات <strong>Swagger</strong> اضافه کردیم. همین و بس!<br> با این کار، <strong>Swagger</strong> آماده‌ی اجرا است. حالا پروژه‌ی خود را اجرا کنید و به این آدرس بروید:</p><pre class="hljs"><code>https://localhost:PORT_NUMBER/swagger/index.html
+</code></pre> <p>باید صفحه‌ی وب زیر را ببینید:</p><div align="center"> <p><img src="../../../assets/image/09/Table%209-4.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <p>حالا بیایید بررسی کنیم که چرا باید <strong>immutable struct</strong>‌ها را به جای <strong>mutable object</strong>‌ها پاس بدهیم.</p><hr> <h2>عبور دادن <strong>immutable struct</strong>‌ها به جای <strong>mutable object</strong>‌ها</h2><p>در این بخش، یک برنامه‌ی کامپیوتری خواهیم نوشت که <strong>۱ میلیون شیء</strong> و <strong>۱ میلیون immutable struct</strong> را پردازش می‌کند. خواهید دید که <strong>struct</strong>ها از نظر <strong>عملکرد (performance)</strong> بسیار سریع‌تر از <strong>object</strong>ها هستند.<br> ما کدی می‌نویسیم که <strong>۱ میلیون object</strong> را در <strong>۱۴۴۰ میلی‌ثانیه</strong> پردازش می‌کند و <strong>۱ میلیون struct</strong> را در <strong>۸۴۱ میلی‌ثانیه</strong>. این یعنی <strong>۵۹۹ میلی‌ثانیه</strong> اختلاف. شاید این زمان خیلی به نظر نرسد، اما زمانی که با <strong>مجموعه‌داده‌های عظیم</strong> کار می‌کنید، استفاده از <strong>immutable struct</strong>‌ها نسبت به <strong>mutable object</strong>ها بهبودهای بزرگی در عملکرد ایجاد می‌کند.</p><hr> <h3>مشکل <strong>mutable object</strong>ها در برنامه‌های چندنخی (Multi-threading)</h3><p>مقادیر در <strong>mutable object</strong>‌ها می‌توانند <strong>بین رشته‌ها (threads)</strong> تغییر کنند که می‌تواند <strong>فاجعه‌بار</strong> باشد. تصور کنید در حساب بانکی‌تان <strong>۱۵٬۰۰۰ پوند</strong> دارید و به صاحب‌خانه‌تان <strong>۴۳۵ پوند</strong> اجاره پرداخت می‌کنید. حساب شما دارای <strong>سقف برداشت (overdraft limit)</strong> است. حالا هم‌زمان، شخص دیگری در حال پرداخت <strong>۲۳٬۰۰۰ پوند</strong> به یک شرکت خودرو برای خرید ماشین است. مقدار حساب شما توسط <strong>thread</strong> خریدار ماشین تغییر می‌کند و شما به جای <strong>۴۳۵ پوند، ۲۳٬۰۰۰ پوند</strong> به صاحب‌خانه پرداخت می‌کنید و حساب شما <strong>۸٬۰۰۰ پوند بدهکار</strong> می‌شود!</p><p>نیازی نیست کدی برای مثال تغییر داده‌ی <strong>mutable</strong> بین <strong>threads</strong> بنویسیم، زیرا این موضوع در <strong>فصل ۸ – Threading and Concurrency</strong> پوشش داده شده است.</p><hr> <h3>نکات کلیدی این بخش</h3><ul> <li><strong>Struct</strong>ها سریع‌تر از <strong>object</strong>ها هستند.</li><li><strong>Immutable struct</strong>ها <strong>thread-safe</strong> هستند.</li></ul> <p>هنگام ایجاد و پاس دادن داده‌ها، <strong>struct</strong>‌ها نسبت به <strong>object</strong>‌ها عملکرد بهتری دارند. همچنین می‌توان <strong>struct</strong>ها را <strong>immutable</strong> کرد تا <strong>thread-safe</strong> باشند. در اینجا یک برنامه‌ی کوچک خواهیم نوشت.</p><hr> <h3>ایجاد پروژه</h3><p>یک برنامه‌ی کنسول جدید در <strong>.NET Framework</strong> به نام <strong>CH11_WellDefinedBoundaries</strong> اضافه کنید و کلاس زیر را ایجاد نمایید:</p><pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">PersonObject</span>
 {
     <span class="hljs-keyword">public</span> <span class="hljs-built_in">string</span> FirstName { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">set</span>; }
     <span class="hljs-keyword">public</span> <span class="hljs-built_in">string</span> LastName { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">set</span>; }
 }
-</code></pre>
-<p>این کلاس برای ایجاد <strong>۱ میلیون شیء person</strong> استفاده خواهد شد.</p>
-<p>حالا <strong>struct</strong> زیر را اضافه کنید:</p>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">struct</span> PersonStruct
+</code></pre> <p>این کلاس برای ایجاد <strong>۱ میلیون شیء person</strong> استفاده خواهد شد.</p><p>حالا <strong>struct</strong> زیر را اضافه کنید:</p><pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">struct</span> PersonStruct
 {
     <span class="hljs-keyword">private</span> <span class="hljs-keyword">readonly</span> <span class="hljs-built_in">string</span> _firstName;
     <span class="hljs-keyword">private</span> <span class="hljs-keyword">readonly</span> <span class="hljs-built_in">string</span> _lastName;
@@ -517,13 +72,7 @@ app.UseSwaggerUI(c =&gt;
     <span class="hljs-keyword">public</span> <span class="hljs-built_in">string</span> FirstName =&gt; _firstName;
     <span class="hljs-keyword">public</span> <span class="hljs-built_in">string</span> LastName =&gt; _lastName;
 }
-</code></pre>
-<p>این <strong>struct</strong> غیرقابل‌تغییر (<strong>immutable</strong>) است. مقادیر فقط از طریق <strong>constructor</strong> مقداردهی می‌شوند و سپس برای ایجاد <strong>۱ میلیون struct</strong> استفاده خواهند شد.</p>
-<hr>
-<h3>مقایسه‌ی عملکرد با متدهای CreateObjects و CreateStructs</h3>
-<p>حالا برنامه را برای نمایش تفاوت عملکرد بین <strong>object</strong> و <strong>struct</strong> تغییر می‌دهیم.</p>
-<p>متد <strong>CreateObjects</strong> را اضافه کنید:</p>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">CreateObjects</span>()</span>
+</code></pre> <p>این <strong>struct</strong> غیرقابل‌تغییر (<strong>immutable</strong>) است. مقادیر فقط از طریق <strong>constructor</strong> مقداردهی می‌شوند و سپس برای ایجاد <strong>۱ میلیون struct</strong> استفاده خواهند شد.</p><hr> <h3>مقایسه‌ی عملکرد با متدهای CreateObjects و CreateStructs</h3><p>حالا برنامه را برای نمایش تفاوت عملکرد بین <strong>object</strong> و <strong>struct</strong> تغییر می‌دهیم.</p><p>متد <strong>CreateObjects</strong> را اضافه کنید:</p><pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">CreateObjects</span>()</span>
 {
     Stopwatch stopwatch = <span class="hljs-keyword">new</span> Stopwatch();
     stopwatch.Start();
@@ -542,10 +91,7 @@ app.UseSwaggerUI(c =&gt;
     Console.WriteLine(<span class="hljs-string">$&quot;Object: <span class="hljs-subst">{stopwatch.ElapsedMilliseconds}</span>, Object Count: <span class="hljs-subst">{people.Count}</span>&quot;</span>);
     GC.Collect();
 }
-</code></pre>
-<p>همان‌طور که می‌بینید، <strong>stopwatch</strong> را شروع می‌کنیم، یک لیست جدید ایجاد می‌کنیم و <strong>۱ میلیون شیء person</strong> به آن اضافه می‌کنیم. سپس <strong>stopwatch</strong> را متوقف کرده، نتیجه را در پنجره چاپ می‌کنیم و <strong>garbage collector</strong> را برای پاک‌سازی منابع فراخوانی می‌کنیم.</p>
-<p>متد <strong>CreateStructs</strong> را اضافه کنید:</p>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">CreateStructs</span>()</span>
+</code></pre> <p>همان‌طور که می‌بینید، <strong>stopwatch</strong> را شروع می‌کنیم، یک لیست جدید ایجاد می‌کنیم و <strong>۱ میلیون شیء person</strong> به آن اضافه می‌کنیم. سپس <strong>stopwatch</strong> را متوقف کرده، نتیجه را در پنجره چاپ می‌کنیم و <strong>garbage collector</strong> را برای پاک‌سازی منابع فراخوانی می‌کنیم.</p><p>متد <strong>CreateStructs</strong> را اضافه کنید:</p><pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">CreateStructs</span>()</span>
 {
     Stopwatch stopwatch = <span class="hljs-keyword">new</span> Stopwatch();
     stopwatch.Start();
@@ -560,117 +106,14 @@ app.UseSwaggerUI(c =&gt;
     Console.WriteLine(<span class="hljs-string">$&quot;Struct: <span class="hljs-subst">{stopwatch.ElapsedMilliseconds}</span>, Struct Count: <span class="hljs-subst">{people.Count}</span>&quot;</span>);
     GC.Collect();
 }
-</code></pre>
-<p>این متد همان کار را انجام می‌دهد، اما به‌جای <strong>object</strong>‌ها، <strong>struct</strong>‌ها را ایجاد و به لیست اضافه می‌کند.</p>
-<hr>
-<h3>متد Main</h3>
-<p>در نهایت متد <strong>Main</strong> را به شکل زیر تغییر دهید:</p>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Main</span>(<span class="hljs-params"><span class="hljs-built_in">string</span>[] <span class="hljs-keyword">args</span></span>)</span>
+</code></pre> <p>این متد همان کار را انجام می‌دهد، اما به‌جای <strong>object</strong>‌ها، <strong>struct</strong>‌ها را ایجاد و به لیست اضافه می‌کند.</p><hr> <h3>متد Main</h3><p>در نهایت متد <strong>Main</strong> را به شکل زیر تغییر دهید:</p><pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Main</span>(<span class="hljs-params"><span class="hljs-built_in">string</span>[] <span class="hljs-keyword">args</span></span>)</span>
 {
     CreateObjects();
     CreateStructs();
     Console.WriteLine(<span class="hljs-string">&quot;Press any key to exit.&quot;</span>);
     Console.ReadKey();
 }
-</code></pre>
-<p>در این متد، هر دو متد را فراخوانی می‌کنیم و سپس منتظر می‌مانیم تا کاربر کلیدی فشار دهد و برنامه خاتمه یابد.</p>
-<p>پروژه را اجرا کنید و باید خروجی زیر را ببینید: 👇</p>
-<div align="center">
-<p><img src="../../../assets/image/09/Table%209-5.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<p>همان‌طور که در اسکرین‌شات قبلی دیدید، ایجاد یک میلیون شیء و افزودن آن‌ها به یک لیست از اشیاء <strong>۱,۴۴۰ میلی‌ثانیه</strong> زمان برد، در حالی که ایجاد یک میلیون ساختار (Struct) و افزودن آن‌ها به یک لیست از ساختارها تنها <strong>۸۴۱ میلی‌ثانیه</strong> طول کشید.</p>
-<p>بنابراین، نه‌تنها می‌توانید <strong>Structها</strong> را <strong>Immutable</strong> و <strong>Thread-safe</strong> کنید (چون بین رشته‌ها قابل تغییر نیستند)، بلکه از نظر <strong>عملکردی بسیار سریع‌تر از اشیاء</strong> هستند. پس اگر با حجم زیادی از داده سروکار دارید، استفاده از Structها می‌تواند مقدار زیادی از زمان پردازش شما را ذخیره کند.</p>
-<p>علاوه بر این، اگر از <strong>سرویس‌های ابری</strong> استفاده می‌کنید که به ازای هر چرخه‌ی زمانی پردازش هزینه دریافت می‌کنند، استفاده از Structها به جای اشیاء می‌تواند منجر به <strong>صرفه‌جویی مالی</strong> شود. 💰</p>
-<p>حالا بیایید نگاهی به <strong>نوشتن تست برای APIهای شخص ثالث</strong> (Third-Party APIs) بیندازیم که قرار است از آن‌ها استفاده کنید.</p>
-<p>شاید بپرسید: <strong>«چرا باید APIهای شخص ثالث را تست کنیم؟»</strong> سؤال خوبی است. دلیلش این است که همانند کدهای خودتان، کدهای شخص ثالث هم ممکن است دچار <strong>خطاهای برنامه‌نویسی</strong> باشند.</p>
-<p>به عنوان مثال، من زمانی در حال توسعه‌ی یک وب‌سایت پردازش اسناد برای یک شرکت حقوقی بودم و با مشکل جدی مواجه شدم. بعد از بررسی زیاد، متوجه شدم مشکل از <strong>جاوااسکریپت معیوبی بود که در API مایکروسافت تعبیه شده بود</strong>.</p>
-<p>تصویر زیر صفحه <strong>Issues در GitHub برای Microsoft Cognitive Toolkit</strong> را نشان می‌دهد که <strong>۷۳۸ مشکل باز (Outstanding Issues)</strong> دارد:</p>
-<div align="center">
-<p><img src="../../../assets/image/09/Table%209-6.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<p>همان‌طور که از <strong>Microsoft Cognitive Toolkit</strong> مشاهده می‌کنید، APIهای شخص ثالث هم مشکلاتی دارند. ⚠️<br>
-این یعنی <strong>مسئولیت اطمینان از عملکرد صحیح APIهای شخص ثالثی که استفاده می‌کنید، بر عهده‌ی شماست</strong>. اگر با باگ یا خطایی مواجه شدید، عمل درست این است که <strong>به شخص ثالث اطلاع دهید</strong>. اگر API <strong>Open Source</strong> باشد و شما به کد منبع دسترسی داشته باشید، حتی می‌توانید کد را بررسی کرده و <strong>اصلاحات خود را ارائه دهید</strong>.</p>
-<p>هرگاه با باگ‌هایی در کد شخص ثالث مواجه شدید که در زمان لازم برای رسیدن به <strong>مهلت تحویل پروژه</strong> رفع نمی‌شوند، یکی از گزینه‌ها این است که یک <strong>Wrapper Class</strong> بنویسید که <strong>تمامی Constructorها، Methodها و Propertyها</strong> را داشته باشد و آن‌ها را به همان Constructorها، Methodها و Propertyهای کلاس شخص ثالث ارجاع دهد؛ با این تفاوت که شما نسخه‌ی <strong>بدون باگ</strong> خود را برای Property یا Method دارای باگ می‌نویسید. 📦<br>
-فصل ۱۱، <strong>Addressing Cross-Cutting Concerns</strong>، بخش‌هایی درباره‌ی <strong>Proxy Pattern</strong> و <strong>Decorator Pattern</strong> دارد که در نوشتن <strong>Wrapper Class</strong> به شما کمک می‌کند.</p>
-<hr>
-<h2>تست کردن APIهای خودتان 🧪</h2>
-<p>در فصل ۶ (<strong>Unit Testing</strong>) و فصل ۷ (<strong>End-to-End System Testing</strong>) با مثال‌های کدنویسی، نحوه‌ی <strong>تست کد خودتان</strong> را مشاهده کردید.<br>
-شما همیشه باید <strong>APIهای خودتان را تست کنید</strong> تا از کیفیت آن‌ها اطمینان کامل داشته باشید. بنابراین، به عنوان یک برنامه‌نویس، <strong>قبل از اینکه کد را به تیم کیفیت بسپارید، باید Unit Test انجام دهید</strong>. سپس تیم <strong>Quality Assurance</strong> باید <strong>Integration</strong> و <strong>Regression Testing</strong> انجام دهد تا مطمئن شود API <strong>سطح کیفیت توافق‌شده شرکت</strong> را رعایت می‌کند. ✅</p>
-<p>API شما ممکن است <strong>دقیقا همان چیزی را انجام دهد که کسب‌وکار خواسته و بدون باگ باشد</strong>؛ اما وقتی با سیستم یکپارچه می‌شود، آیا در شرایط خاص <strong>رفتارهای غیرمنتظره</strong> رخ می‌دهد که شما نتوانسته‌اید تست کنید؟<br>
-بارها با شرایطی مواجه شده‌ام که کد روی <strong>کامپیوتر یک نفر درست کار می‌کند اما روی دیگران نه</strong>. اغلب دلیل منطقی برای این اتفاق وجود ندارد و پیدا کردن آن می‌تواند بسیار <strong>خسته‌کننده و وقت‌گیر</strong> باشد. اما شما می‌خواهید این مشکلات <strong>قبل از تحویل کد به QA و قطعاً قبل از انتشار در محیط Production</strong> حل شده باشند. 🛠️</p>
-<hr>
-<h3>تست برنامه‌ها باید شامل موارد زیر باشد</h3>
-<ul>
-<li>وقتی <strong>مقدار ورودی صحیح</strong> داده می‌شود، <strong>متد تحت تست نتیجه‌ی درست</strong> را خروجی دهد.</li>
-<li>وقتی <strong>مقدار ورودی نادرست</strong> داده می‌شود، متد <strong>پاسخ مناسب</strong> را بدهد و <strong>Crash نکند</strong>. ⚡</li>
-</ul>
-<hr>
-<p>به یاد داشته باشید که API شما باید <strong>فقط آنچه کسب‌وکار خواسته را شامل شود</strong> و جزئیات داخلی را در اختیار کلاینت قرار ندهد.<br>
-در اینجا است که <strong>Product Backlog</strong>، که بخشی از <strong>Scrum Project Management</strong> است، مفید واقع می‌شود.</p>
-<p><strong>Product Backlog</strong> فهرستی از <strong>ویژگی‌های جدید و Technical Debt</strong> است که شما و تیم‌تان روی آن‌ها کار خواهید کرد. هر آیتم در Product Backlog دارای <strong>توضیح و Acceptance Criteria</strong> است، همان‌طور که در اسکرین‌شات زیر نشان داده شده: 📋</p>
-<div align="center">
-<p><img src="../../../assets/image/09/Table%209-7.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<p>شما <strong>Unit Testها</strong> را بر اساس <strong>Acceptance Criteria</strong> می‌نویسید. ✅<br>
-تست‌های شما شامل <strong>مسیرهای عادی اجرای کد</strong> و <strong>مسیرهای غیرعادی اجرای کد</strong> خواهند بود.</p>
-<p>با استفاده از این اسکرین‌شات به عنوان مثال، دو <strong>Acceptance Criteria</strong> داریم:</p>
-<ol>
-<li>داده‌ها به‌طور موفقیت‌آمیز از <strong>APIهای شخص ثالث</strong> دریافت می‌شوند.</li>
-<li>داده‌ها به‌طور موفقیت‌آمیز در <strong>Cosmos DB</strong> ذخیره می‌شوند.</li>
-</ol>
-<p>در این دو معیار، می‌دانیم که ما <strong>APIهایی برای دریافت داده‌ها</strong> فراخوانی خواهیم کرد. این داده‌ها از <strong>سرویس‌های شخص ثالث</strong> به دست می‌آیند و سپس در پایگاه داده ذخیره می‌شوند. در نگاه اول، این مشخصات <strong>کمی مبهم به نظر می‌رسند</strong>. در دنیای واقعی، اغلب این‌گونه است.</p>
-<p>با توجه به <strong>ابهام مشخصات</strong>، ما فرض می‌کنیم که این مشخصات <strong>عمومی و قابل اعمال برای APIهای مختلف</strong> هستند و داده‌های بازگشتی <strong>JSON</strong> خواهند بود. همچنین فرض می‌کنیم که <strong>داده‌های JSON بازگشتی به صورت خام در پایگاه داده Cosmos DB ذخیره می‌شوند</strong>. 🌐</p>
-<hr>
-<h3>چه تست‌هایی می‌توانیم برای اولین Acceptance Criteria بنویسیم؟</h3>
-<ol>
-<li>وقتی <strong>URL با پارامترها</strong> داده می‌شود، اطمینان حاصل کنید که <strong>وضعیت ۲۰۰</strong> و <strong>JSON بازگشتی</strong> برای درخواست <strong>GET</strong> وقتی تمام اطلاعات صحیح ارائه شده است، دریافت می‌شود.</li>
-<li>اطمینان حاصل کنید که <strong>وضعیت ۴۰۱</strong> دریافت می‌شود وقتی <strong>GET Request غیرمجاز</strong> انجام شده است.</li>
-<li>اطمینان حاصل کنید که <strong>وضعیت ۴۰۳</strong> دریافت می‌شود وقتی <strong>کاربر احراز هویت شده اجازه دسترسی ندارد</strong>.</li>
-<li>اطمینان حاصل کنید که <strong>وضعیت ۵۰۰</strong> دریافت می‌شود وقتی <strong>سرور از کار افتاده است</strong>.</li>
-</ol>
-<hr>
-<h3>چه تست‌هایی می‌توانیم برای دومین Acceptance Criteria بنویسیم؟</h3>
-<ol>
-<li>اطمینان حاصل کنید که <strong>دسترسی غیرمجاز به پایگاه داده</strong> رد شود.</li>
-<li>اطمینان حاصل کنید که <strong>API در مواقعی که پایگاه داده در دسترس نیست، با آرامش عمل می‌کند</strong>.</li>
-<li>اطمینان حاصل کنید که <strong>دسترسی مجاز به پایگاه داده</strong> داده می‌شود.</li>
-<li>اطمینان حاصل کنید که <strong>JSON در پایگاه داده با موفقیت درج می‌شود</strong>.</li>
-</ol>
-<p>بنابراین، حتی از چنین مشخصات مبهمی، ما توانستیم <strong>هشت Test Case</strong> بدست آوریم.<br>
-تمام این موارد <strong>مسیر رفت و برگشت موفق به سرور شخص ثالث و سپس به پایگاه داده</strong> را تست می‌کنند و همچنین <strong>نقاط مختلفی که فرایند می‌تواند شکست بخورد</strong> را بررسی می‌کنند. اگر تمام این تست‌ها موفق باشند، ما <strong>اعتماد کامل به کد خود</strong> خواهیم داشت و اطمینان داریم که <strong>کد از کنترل کیفیت عبور خواهد کرد</strong>. ✅</p>
-<hr>
-<h2>طراحی API با استفاده از RAML 🛠️</h2>
-<p>در این بخش، <strong>طراحی API با RAML</strong> را بررسی خواهیم کرد.<br>
-می‌توانید اطلاعات کامل درباره‌ی <strong>تمام جنبه‌های RAML</strong> را از وب‌سایت رسمی RAML به دست آورید:<br>
-<a href="https://raml.org/developers/design-your-api">https://raml.org/developers/design-your-api</a></p>
-<p>ما اصول اولیه RAML را با طراحی یک <strong>API بسیار ساده</strong> با استفاده از <strong>API Workbench در Atom</strong> یاد خواهیم گرفت.<br>
-شروع می‌کنیم با <strong>نصب ابزارها</strong>.</p>
-<h3>نصب Atom و API Workbench توسط MuleSoft</h3>
-<p>مراحل به این صورت است:</p>
-<ol>
-<li>ابتدا Atom را از <a href="http://atom.io">http://atom.io</a> نصب کنید.</li>
-<li>سپس روی <strong>Install a Package</strong> کلیک کنید. ⚙️</li>
-</ol>
-<div align="center">
-<p><img src="../../../assets/image/09/Table%209-8.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<p>۳. سپس در کادر جستجو عبارت <strong>api-workbench by MuleSoft</strong> را جستجو کرده و آن را نصب کنید. ✅</p>
-<p>پس از این مرحله، <strong>Atom</strong> و <strong>API Workbench</strong> شما آماده خواهند بود تا شروع به طراحی و تولید API با استفاده از RAML کنید. 🛠️</p>
-<div align="center">
-<p><img src="../../../assets/image/09/Table%209-9.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<p>۴. اکنون که <strong>پکیج‌ها نصب شدند</strong>، بیایید به مرحله‌ی <strong>ایجاد پروژه</strong> برویم. 🖥️</p>
-<h3>ایجاد پروژه</h3>
-<p>مراحل به این صورت است:</p>
-<ol>
-<li>از منوی <strong>File</strong> گزینه <strong>Add Project Folder</strong> را انتخاب کنید.</li>
-<li>یک پوشه‌ی جدید ایجاد کنید یا یک پوشه‌ی موجود را انتخاب کنید. من یک پوشه‌ی جدید با مسیر <strong>C:\Development\RAML</strong> ایجاد کرده و آن را باز می‌کنم.</li>
-<li>یک فایل جدید به پوشه‌ی پروژه اضافه کنید و آن را <strong>Shop.raml</strong> نام‌گذاری کنید.</li>
-<li>روی فایل راست‌کلیک کرده و <strong>Add New | Create New API</strong> را انتخاب کنید.</li>
-<li>به آن هر نامی که می‌خواهید بدهید و سپس روی <strong>Ok</strong> کلیک کنید. حالا شما <strong>اولین طراحی API خود</strong> را ایجاد کرده‌اید. ✅</li>
-</ol>
-<p>اگر به فایل RAML نگاه کنید، می‌بینید که محتویات آن <strong>قابل خواندن برای انسان</strong> هستند. API که ایجاد کرده‌ایم، شامل یک دستور ساده <strong>GET</strong> است که یک رشته شامل کلمات <strong>&quot;Hello World&quot;</strong> را بازمی‌گرداند:</p>
-<pre class="hljs"><code>#%RAML 1.0
+</code></pre> <p>در این متد، هر دو متد را فراخوانی می‌کنیم و سپس منتظر می‌مانیم تا کاربر کلیدی فشار دهد و برنامه خاتمه یابد.</p><p>پروژه را اجرا کنید و باید خروجی زیر را ببینید:</p><div align="center"> <p><img src="../../../assets/image/09/Table%209-5.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <p>همان‌طور که در اسکرین‌شات قبلی دیدید، ایجاد یک میلیون شیء و افزودن آن‌ها به یک لیست از اشیاء <strong>۱,۴۴۰ میلی‌ثانیه</strong> زمان برد، در حالی که ایجاد یک میلیون ساختار (Struct) و افزودن آن‌ها به یک لیست از ساختارها تنها <strong>۸۴۱ میلی‌ثانیه</strong> طول کشید.</p><p>بنابراین، نه‌تنها می‌توانید <strong>Structها</strong> را <strong>Immutable</strong> و <strong>Thread-safe</strong> کنید (چون بین رشته‌ها قابل تغییر نیستند)، بلکه از نظر <strong>عملکردی بسیار سریع‌تر از اشیاء</strong> هستند. پس اگر با حجم زیادی از داده سروکار دارید، استفاده از Structها می‌تواند مقدار زیادی از زمان پردازش شما را ذخیره کند.</p><p>علاوه بر این، اگر از <strong>سرویس‌های ابری</strong> استفاده می‌کنید که به ازای هر چرخه‌ی زمانی پردازش هزینه دریافت می‌کنند، استفاده از Structها به جای اشیاء می‌تواند منجر به <strong>صرفه‌جویی مالی</strong> شود.</p><p>حالا بیایید نگاهی به <strong>نوشتن تست برای APIهای شخص ثالث</strong> (Third-Party APIs) بیندازیم که قرار است از آن‌ها استفاده کنید.</p><p>شاید بپرسید: <strong>«چرا باید APIهای شخص ثالث را تست کنیم؟»</strong> سؤال خوبی است. دلیلش این است که همانند کدهای خودتان، کدهای شخص ثالث هم ممکن است دچار <strong>خطاهای برنامه‌نویسی</strong> باشند.</p><p>به عنوان مثال، من زمانی در حال توسعه‌ی یک وب‌سایت پردازش اسناد برای یک شرکت حقوقی بودم و با مشکل جدی مواجه شدم. بعد از بررسی زیاد، متوجه شدم مشکل از <strong>جاوااسکریپت معیوبی بود که در API مایکروسافت تعبیه شده بود</strong>.</p><p>تصویر زیر صفحه <strong>Issues در GitHub برای Microsoft Cognitive Toolkit</strong> را نشان می‌دهد که <strong>۷۳۸ مشکل باز (Outstanding Issues)</strong> دارد:</p><div align="center"> <p><img src="../../../assets/image/09/Table%209-6.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <p>همان‌طور که از <strong>Microsoft Cognitive Toolkit</strong> مشاهده می‌کنید، APIهای شخص ثالث هم مشکلاتی دارند.<br> این یعنی <strong>مسئولیت اطمینان از عملکرد صحیح APIهای شخص ثالثی که استفاده می‌کنید، بر عهده‌ی شماست</strong>. اگر با باگ یا خطایی مواجه شدید، عمل درست این است که <strong>به شخص ثالث اطلاع دهید</strong>. اگر API <strong>Open Source</strong> باشد و شما به کد منبع دسترسی داشته باشید، حتی می‌توانید کد را بررسی کرده و <strong>اصلاحات خود را ارائه دهید</strong>.</p><p>هرگاه با باگ‌هایی در کد شخص ثالث مواجه شدید که در زمان لازم برای رسیدن به <strong>مهلت تحویل پروژه</strong> رفع نمی‌شوند، یکی از گزینه‌ها این است که یک <strong>Wrapper Class</strong> بنویسید که <strong>تمامی Constructorها، Methodها و Propertyها</strong> را داشته باشد و آن‌ها را به همان Constructorها، Methodها و Propertyهای کلاس شخص ثالث ارجاع دهد؛ با این تفاوت که شما نسخه‌ی <strong>بدون باگ</strong> خود را برای Property یا Method دارای باگ می‌نویسید.<br> فصل ۱۱، <strong>Addressing Cross-Cutting Concerns</strong>، بخش‌هایی درباره‌ی <strong>Proxy Pattern</strong> و <strong>Decorator Pattern</strong> دارد که در نوشتن <strong>Wrapper Class</strong> به شما کمک می‌کند.</p><hr> <h2>تست کردن APIهای خودتان</h2><p>در فصل ۶ (<strong>Unit Testing</strong>) و فصل ۷ (<strong>End-to-End System Testing</strong>) با مثال‌های کدنویسی، نحوه‌ی <strong>تست کد خودتان</strong> را مشاهده کردید.<br> شما همیشه باید <strong>APIهای خودتان را تست کنید</strong> تا از کیفیت آن‌ها اطمینان کامل داشته باشید. بنابراین، به عنوان یک برنامه‌نویس، <strong>قبل از اینکه کد را به تیم کیفیت بسپارید، باید Unit Test انجام دهید</strong>. سپس تیم <strong>Quality Assurance</strong> باید <strong>Integration</strong> و <strong>Regression Testing</strong> انجام دهد تا مطمئن شود API <strong>سطح کیفیت توافق‌شده شرکت</strong> را رعایت می‌کند.</p><p>API شما ممکن است <strong>دقیقا همان چیزی را انجام دهد که کسب‌وکار خواسته و بدون باگ باشد</strong>؛ اما وقتی با سیستم یکپارچه می‌شود، آیا در شرایط خاص <strong>رفتارهای غیرمنتظره</strong> رخ می‌دهد که شما نتوانسته‌اید تست کنید؟<br> بارها با شرایطی مواجه شده‌ام که کد روی <strong>کامپیوتر یک نفر درست کار می‌کند اما روی دیگران نه</strong>. اغلب دلیل منطقی برای این اتفاق وجود ندارد و پیدا کردن آن می‌تواند بسیار <strong>خسته‌کننده و وقت‌گیر</strong> باشد. اما شما می‌خواهید این مشکلات <strong>قبل از تحویل کد به QA و قطعاً قبل از انتشار در محیط Production</strong> حل شده باشند.</p><hr> <h3>تست برنامه‌ها باید شامل موارد زیر باشد</h3><ul> <li>وقتی <strong>مقدار ورودی صحیح</strong> داده می‌شود، <strong>متد تحت تست نتیجه‌ی درست</strong> را خروجی دهد.</li><li>وقتی <strong>مقدار ورودی نادرست</strong> داده می‌شود، متد <strong>پاسخ مناسب</strong> را بدهد و <strong>Crash نکند</strong>.</li></ul> <hr><p>به یاد داشته باشید که API شما باید <strong>فقط آنچه کسب‌وکار خواسته را شامل شود</strong> و جزئیات داخلی را در اختیار کلاینت قرار ندهد.<br> در اینجا است که <strong>Product Backlog</strong>، که بخشی از <strong>Scrum Project Management</strong> است، مفید واقع می‌شود.</p><p><strong>Product Backlog</strong> فهرستی از <strong>ویژگی‌های جدید و Technical Debt</strong> است که شما و تیم‌تان روی آن‌ها کار خواهید کرد. هر آیتم در Product Backlog دارای <strong>توضیح و Acceptance Criteria</strong> است، همان‌طور که در اسکرین‌شات زیر نشان داده شده:</p><div align="center"> <p><img src="../../../assets/image/09/Table%209-7.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <p>شما <strong>Unit Testها</strong> را بر اساس <strong>Acceptance Criteria</strong> می‌نویسید.<br> تست‌های شما شامل <strong>مسیرهای عادی اجرای کد</strong> و <strong>مسیرهای غیرعادی اجرای کد</strong> خواهند بود.</p><p>با استفاده از این اسکرین‌شات به عنوان مثال، دو <strong>Acceptance Criteria</strong> داریم:</p><ol> <li>داده‌ها به‌طور موفقیت‌آمیز از <strong>APIهای شخص ثالث</strong> دریافت می‌شوند.</li><li>داده‌ها به‌طور موفقیت‌آمیز در <strong>Cosmos DB</strong> ذخیره می‌شوند.</li></ol> <p>در این دو معیار، می‌دانیم که ما <strong>APIهایی برای دریافت داده‌ها</strong> فراخوانی خواهیم کرد. این داده‌ها از <strong>سرویس‌های شخص ثالث</strong> به دست می‌آیند و سپس در پایگاه داده ذخیره می‌شوند. در نگاه اول، این مشخصات <strong>کمی مبهم به نظر می‌رسند</strong>. در دنیای واقعی، اغلب این‌گونه است.</p><p>با توجه به <strong>ابهام مشخصات</strong>، ما فرض می‌کنیم که این مشخصات <strong>عمومی و قابل اعمال برای APIهای مختلف</strong> هستند و داده‌های بازگشتی <strong>JSON</strong> خواهند بود. همچنین فرض می‌کنیم که <strong>داده‌های JSON بازگشتی به صورت خام در پایگاه داده Cosmos DB ذخیره می‌شوند</strong>.</p><hr> <h3>چه تست‌هایی می‌توانیم برای اولین Acceptance Criteria بنویسیم؟</h3><ol> <li>وقتی <strong>URL با پارامترها</strong> داده می‌شود، اطمینان حاصل کنید که <strong>وضعیت ۲۰۰</strong> و <strong>JSON بازگشتی</strong> برای درخواست <strong>GET</strong> وقتی تمام اطلاعات صحیح ارائه شده است، دریافت می‌شود.</li><li>اطمینان حاصل کنید که <strong>وضعیت ۴۰۱</strong> دریافت می‌شود وقتی <strong>GET Request غیرمجاز</strong> انجام شده است.</li><li>اطمینان حاصل کنید که <strong>وضعیت ۴۰۳</strong> دریافت می‌شود وقتی <strong>کاربر احراز هویت شده اجازه دسترسی ندارد</strong>.</li><li>اطمینان حاصل کنید که <strong>وضعیت ۵۰۰</strong> دریافت می‌شود وقتی <strong>سرور از کار افتاده است</strong>.</li></ol> <hr><h3>چه تست‌هایی می‌توانیم برای دومین Acceptance Criteria بنویسیم؟</h3><ol> <li>اطمینان حاصل کنید که <strong>دسترسی غیرمجاز به پایگاه داده</strong> رد شود.</li><li>اطمینان حاصل کنید که <strong>API در مواقعی که پایگاه داده در دسترس نیست، با آرامش عمل می‌کند</strong>.</li><li>اطمینان حاصل کنید که <strong>دسترسی مجاز به پایگاه داده</strong> داده می‌شود.</li><li>اطمینان حاصل کنید که <strong>JSON در پایگاه داده با موفقیت درج می‌شود</strong>.</li></ol> <p>بنابراین، حتی از چنین مشخصات مبهمی، ما توانستیم <strong>هشت Test Case</strong> بدست آوریم.<br> تمام این موارد <strong>مسیر رفت و برگشت موفق به سرور شخص ثالث و سپس به پایگاه داده</strong> را تست می‌کنند و همچنین <strong>نقاط مختلفی که فرایند می‌تواند شکست بخورد</strong> را بررسی می‌کنند. اگر تمام این تست‌ها موفق باشند، ما <strong>اعتماد کامل به کد خود</strong> خواهیم داشت و اطمینان داریم که <strong>کد از کنترل کیفیت عبور خواهد کرد</strong>.</p><hr> <h2>طراحی API با استفاده از RAML</h2><p>در این بخش، <strong>طراحی API با RAML</strong> را بررسی خواهیم کرد.<br> می‌توانید اطلاعات کامل درباره‌ی <strong>تمام جنبه‌های RAML</strong> را از وب‌سایت رسمی RAML به دست آورید:<br><a href="https://raml.org/developers/design-your-api">https://raml.org/developers/design-your-api</a></p><p>ما اصول اولیه RAML را با طراحی یک <strong>API بسیار ساده</strong> با استفاده از <strong>API Workbench در Atom</strong> یاد خواهیم گرفت.<br> شروع می‌کنیم با <strong>نصب ابزارها</strong>.</p><h3>نصب Atom و API Workbench توسط MuleSoft</h3><p>مراحل به این صورت است:</p><ol> <li>ابتدا Atom را از <a href="http://atom.io">http://atom.io</a> نصب کنید.</li><li>سپس روی <strong>Install a Package</strong> کلیک کنید.</li></ol> <div align="center"><p><img src="../../../assets/image/09/Table%209-8.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <p>۳. سپس در کادر جستجو عبارت <strong>api-workbench by MuleSoft</strong> را جستجو کرده و آن را نصب کنید.</p><p>پس از این مرحله، <strong>Atom</strong> و <strong>API Workbench</strong> شما آماده خواهند بود تا شروع به طراحی و تولید API با استفاده از RAML کنید.</p><div align="center"> <p><img src="../../../assets/image/09/Table%209-9.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <p>۴. اکنون که <strong>پکیج‌ها نصب شدند</strong>، بیایید به مرحله‌ی <strong>ایجاد پروژه</strong> برویم.</p><h3>ایجاد پروژه</h3><p>مراحل به این صورت است:</p><ol> <li>از منوی <strong>File</strong> گزینه <strong>Add Project Folder</strong> را انتخاب کنید.</li><li>یک پوشه‌ی جدید ایجاد کنید یا یک پوشه‌ی موجود را انتخاب کنید. من یک پوشه‌ی جدید با مسیر <strong>C:\Development\RAML</strong> ایجاد کرده و آن را باز می‌کنم.</li><li>یک فایل جدید به پوشه‌ی پروژه اضافه کنید و آن را <strong>Shop.raml</strong> نام‌گذاری کنید.</li><li>روی فایل راست‌کلیک کرده و <strong>Add New | Create New API</strong> را انتخاب کنید.</li><li>به آن هر نامی که می‌خواهید بدهید و سپس روی <strong>Ok</strong> کلیک کنید. حالا شما <strong>اولین طراحی API خود</strong> را ایجاد کرده‌اید.</li></ol> <p>اگر به فایل RAML نگاه کنید، می‌بینید که محتویات آن <strong>قابل خواندن برای انسان</strong> هستند. API که ایجاد کرده‌ایم، شامل یک دستور ساده <strong>GET</strong> است که یک رشته شامل کلمات <strong>&quot;Hello World&quot;</strong> را بازمی‌گرداند:</p><pre class="hljs"><code>#%RAML 1.0
 title: Pet Shop
 types:
   TestType:
@@ -692,15 +135,7 @@ types:
               {
                 &quot;message&quot; : &quot;Hello World&quot;
               }
-</code></pre>
-<p>این کد RAML است. مشاهده می‌کنید که <strong>بسیار شبیه JSON</strong> است، با کدی ساده، قابل خواندن و با <strong>تورفتگی مناسب</strong>.</p>
-<p>فایل را حذف کنید. سپس از منوی <strong>Packages</strong> گزینه <strong>API Workbench | Create RAML Project</strong> را انتخاب کنید.<br>
-در پنجره‌ی <strong>Create RAML Project</strong> اطلاعات لازم را پر کنید، همان‌طور که در اسکرین‌شات بعدی نشان داده شده است.</p>
-<div align="center">
-<p><img src="../../../assets/image/09/Table%209-10.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<p>تنظیمات در این پنجره باعث تولید کد RAML زیر می‌شوند:</p>
-<pre class="hljs"><code>#%RAML 1.0
+</code></pre> <p>این کد RAML است. مشاهده می‌کنید که <strong>بسیار شبیه JSON</strong> است، با کدی ساده، قابل خواندن و با <strong>تورفتگی مناسب</strong>.</p><p>فایل را حذف کنید. سپس از منوی <strong>Packages</strong> گزینه <strong>API Workbench | Create RAML Project</strong> را انتخاب کنید.<br> در پنجره‌ی <strong>Create RAML Project</strong> اطلاعات لازم را پر کنید، همان‌طور که در اسکرین‌شات بعدی نشان داده شده است.</p><div align="center"> <p><img src="../../../assets/image/09/Table%209-10.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <p>تنظیمات در این پنجره باعث تولید کد RAML زیر می‌شوند:</p><pre class="hljs"><code>#%RAML 1.0
 title: Pet Shop
 version: v1
 baseUri: /petshop
@@ -724,38 +159,8 @@ types:
               {
                 &quot;message&quot; : &quot;Hello World&quot;
               }
-</code></pre>
-<p>🔹 <strong>تفاوت اصلی</strong> بین فایل RAML قبلی و این فایل، <strong>اضافه شدن خصوصیات <code>version</code> و <code>baseUri</code></strong> است.<br>
-این تنظیمات همچنین <strong>محتویات پوشه‌ی پروژه</strong> شما را به‌روزرسانی می‌کنند، همان‌طور که در ادامه مشاهده خواهید کرد.</p>
-<div align="center">
-<p><img src="../../../assets/image/09/Table%209-11.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<p>برای یک آموزش بسیار جامع در این موضوع، به آدرس زیر مراجعه کنید:<br>
-<a href="http://apiworkbench.com/docs/">http://apiworkbench.com/docs/</a><br>
-این وب‌سایت همچنین جزئیات زیادی درباره‌ی <strong>اضافه کردن منابع و متدها، پر کردن بدنه‌ی متدها و پاسخ‌ها، اضافه کردن زیرمنابع، افزودن مثال‌ها و نوع‌ها، ایجاد و استخراج نوع‌های منابع، اضافه کردن پارامترهای نوع منبع و متد، استفاده‌ی مجدد از Traits، نوع‌های منابع و کتابخانه‌ها، اضافه کردن انواع و منابع بیشتر، استخراج کتابخانه‌ها و موارد بسیار دیگر</strong> که در این فصل نمی‌توانیم پوشش دهیم، ارائه می‌دهد.</p>
-<p>حالا که یک طراحی <strong>بی‌طرف از نظر زبان پیاده‌سازی</strong> داریم، چگونه می‌توانیم API خود را در <strong>C#</strong> تولید کنیم؟</p>
-<hr>
-<h3>تولید API در C# از طراحی RAML بی‌طرف</h3>
-<p>برای این کار حداقل باید <strong>Visual Studio 2019 Community edition</strong> را نصب داشته باشید.<br>
-سپس مطمئن شوید که Visual Studio بسته است و ابزار <strong>MuleSoftInc.RAMLToolsforNET</strong> را دانلود و نصب کنید.<br>
-با نصب این ابزارها، مراحل لازم برای تولید <strong>چارچوب اسکلت (skeleton framework)</strong> API که قبلاً مشخص کردیم، به شرح زیر انجام می‌شود:</p>
-<p>1️⃣ در <strong>Visual Studio 2019</strong>، یک پروژه‌ی جدید از نوع <strong>.NET Framework console application</strong> ایجاد کنید.<br>
-2️⃣ روی پروژه راست‌کلیک کرده و گزینه <strong>Add RAML/OAS Contract</strong> را انتخاب کنید. این کار پنجره‌ی زیر را باز می‌کند:</p>
-<div align="center">
-<p><img src="../../../assets/image/09/Table%209-12.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<p>3️⃣ روی <strong>Upload</strong> کلیک کنید و سپس فایل <strong>RAML</strong> خود را انتخاب کنید.<br>
-پنجره‌ی <strong>Import RAML/OAS</strong> نمایش داده خواهد شد.<br>
-این پنجره را مطابق تصویر پر کنید و سپس روی <strong>Import</strong> کلیک کنید:</p>
-<div align="center">
-<p><img src="../../../assets/image/09/Table%209-13.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<p>پروژه‌ی شما اکنون با وابستگی‌های لازم به‌روز خواهد شد و پوشه‌ها و فایل‌های جدیدی به برنامه‌ی کنسول شما اضافه خواهند شد. شما سه پوشه‌ی اصلی خواهید دید: <strong>Contracts</strong>، <strong>Controllers</strong> و <strong>Models</strong>.</p>
-<p>در پوشه‌ی <strong>Contracts</strong>، فایل <strong>RAML</strong> و اینترفیس <strong>IV1HelloWorldController</strong> قرار دارد. این اینترفیس شامل یک متد است:</p>
-<pre class="hljs"><code><span class="hljs-function">Task&lt;IHttpActionResult&gt; <span class="hljs-title">Get</span>()
-</span></code></pre>
-<p>کلاس <strong>v1HelloWorldController</strong> این اینترفیس را پیاده‌سازی می‌کند. حالا بیایید نگاهی به متد <strong>Get()</strong> پیاده‌سازی‌شده در کلاس کنترلر بیندازیم:</p>
-<pre class="hljs"><code><span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;summary&gt;</span></span>
+</code></pre> <p><strong>تفاوت اصلی</strong> بین فایل RAML قبلی و این فایل، <strong>اضافه شدن خصوصیات <code>version</code> و <code>baseUri</code></strong> است.<br> این تنظیمات همچنین <strong>محتویات پوشه‌ی پروژه</strong> شما را به‌روزرسانی می‌کنند، همان‌طور که در ادامه مشاهده خواهید کرد.</p><div align="center"> <p><img src="../../../assets/image/09/Table%209-11.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <p>برای یک آموزش بسیار جامع در این موضوع، به آدرس زیر مراجعه کنید:<br><a href="http://apiworkbench.com/docs/">http://apiworkbench.com/docs/</a><br> این وب‌سایت همچنین جزئیات زیادی درباره‌ی <strong>اضافه کردن منابع و متدها، پر کردن بدنه‌ی متدها و پاسخ‌ها، اضافه کردن زیرمنابع، افزودن مثال‌ها و نوع‌ها، ایجاد و استخراج نوع‌های منابع، اضافه کردن پارامترهای نوع منبع و متد، استفاده‌ی مجدد از Traits، نوع‌های منابع و کتابخانه‌ها، اضافه کردن انواع و منابع بیشتر، استخراج کتابخانه‌ها و موارد بسیار دیگر</strong> که در این فصل نمی‌توانیم پوشش دهیم، ارائه می‌دهد.</p><p>حالا که یک طراحی <strong>بی‌طرف از نظر زبان پیاده‌سازی</strong> داریم، چگونه می‌توانیم API خود را در <strong>C#</strong> تولید کنیم؟</p><hr> <h3>تولید API در C# از طراحی RAML بی‌طرف</h3><p>برای این کار حداقل باید <strong>Visual Studio 2019 Community edition</strong> را نصب داشته باشید.<br> سپس مطمئن شوید که Visual Studio بسته است و ابزار <strong>MuleSoftInc.RAMLToolsforNET</strong> را دانلود و نصب کنید.<br> با نصب این ابزارها، مراحل لازم برای تولید <strong>چارچوب اسکلت (skeleton framework)</strong> API که قبلاً مشخص کردیم، به شرح زیر انجام می‌شود:</p><p>1⃣ در <strong>Visual Studio 2019</strong>، یک پروژه‌ی جدید از نوع <strong>.NET Framework console application</strong> ایجاد کنید.<br> 2⃣ روی پروژه راست‌کلیک کرده و گزینه <strong>Add RAML/OAS Contract</strong> را انتخاب کنید. این کار پنجره‌ی زیر را باز می‌کند:</p><div align="center"> <p><img src="../../../assets/image/09/Table%209-12.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <p>3⃣ روی <strong>Upload</strong> کلیک کنید و سپس فایل <strong>RAML</strong> خود را انتخاب کنید.<br> پنجره‌ی <strong>Import RAML/OAS</strong> نمایش داده خواهد شد.<br> این پنجره را مطابق تصویر پر کنید و سپس روی <strong>Import</strong> کلیک کنید:</p><div align="center"> <p><img src="../../../assets/image/09/Table%209-13.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <p>پروژه‌ی شما اکنون با وابستگی‌های لازم به‌روز خواهد شد و پوشه‌ها و فایل‌های جدیدی به برنامه‌ی کنسول شما اضافه خواهند شد. شما سه پوشه‌ی اصلی خواهید دید: <strong>Contracts</strong>، <strong>Controllers</strong> و <strong>Models</strong>.</p><p>در پوشه‌ی <strong>Contracts</strong>، فایل <strong>RAML</strong> و اینترفیس <strong>IV1HelloWorldController</strong> قرار دارد. این اینترفیس شامل یک متد است:</p><pre class="hljs"><code><span class="hljs-function">Task&lt;IHttpActionResult&gt; <span class="hljs-title">Get</span>()
+</span></code></pre> <p>کلاس <strong>v1HelloWorldController</strong> این اینترفیس را پیاده‌سازی می‌کند. حالا بیایید نگاهی به متد <strong>Get()</strong> پیاده‌سازی‌شده در کلاس کنترلر بیندازیم:</p><pre class="hljs"><code><span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;summary&gt;</span></span>
 <span class="hljs-comment"><span class="hljs-doctag">///</span> /helloWorld</span>
 <span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;/summary&gt;</span></span>
 <span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;returns&gt;</span>HelloWorldGet200<span class="hljs-doctag">&lt;/returns&gt;</span></span>
@@ -766,12 +171,8 @@ types:
     <span class="hljs-comment">// return Ok(result);</span>
     <span class="hljs-keyword">return</span> Ok();
 }
-</code></pre>
-<p>در کد بالا، نمونه‌سازی کلاس <strong>HelloWorldGet200</strong> و مقدار برگشتی کامنت شده است. کلاس <strong>HelloWorldGet200</strong> مدل ما است. می‌توانیم مدل خود را با هر داده‌ای که می‌خواهیم به‌روزرسانی کنیم. در مثال ساده‌ی ما، زیاد وارد جزئیات نمی‌شویم و فقط رشته‌ی <code>&quot;Hello World!&quot;</code> را بازمی‌گردانیم. خط بازشده را به شکل زیر تغییر دهید:</p>
-<pre class="hljs"><code><span class="hljs-keyword">return</span> Ok(<span class="hljs-string">&quot;Hello World!&quot;</span>);
-</code></pre>
-<p>متد <strong>Ok()</strong> نوع <strong>OkNegotiatedContentResult<T></strong> را برمی‌گرداند. ما این متد <strong>Get()</strong> را از متد <strong>Main()</strong> در کلاس <strong>Program</strong> فراخوانی خواهیم کرد. متد <strong>Main()</strong> را به شکل زیر به‌روزرسانی کنید:</p>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Main</span>(<span class="hljs-params"><span class="hljs-built_in">string</span>[] <span class="hljs-keyword">args</span></span>)</span>
+</code></pre> <p>در کد بالا، نمونه‌سازی کلاس <strong>HelloWorldGet200</strong> و مقدار برگشتی کامنت شده است. کلاس <strong>HelloWorldGet200</strong> مدل ما است. می‌توانیم مدل خود را با هر داده‌ای که می‌خواهیم به‌روزرسانی کنیم. در مثال ساده‌ی ما، زیاد وارد جزئیات نمی‌شویم و فقط رشته‌ی <code>&quot;Hello World!&quot;</code> را بازمی‌گردانیم. خط بازشده را به شکل زیر تغییر دهید:</p><pre class="hljs"><code><span class="hljs-keyword">return</span> Ok(<span class="hljs-string">&quot;Hello World!&quot;</span>);
+</code></pre> <p>متد <strong>Ok()</strong> نوع <strong>OkNegotiatedContentResult<T></strong> را برمی‌گرداند. ما این متد <strong>Get()</strong> را از متد <strong>Main()</strong> در کلاس <strong>Program</strong> فراخوانی خواهیم کرد. متد <strong>Main()</strong> را به شکل زیر به‌روزرسانی کنید:</p><pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Main</span>(<span class="hljs-params"><span class="hljs-built_in">string</span>[] <span class="hljs-keyword">args</span></span>)</span>
 {
     Task.Run(<span class="hljs-keyword">async</span> () =&gt;
     {
@@ -785,169 +186,217 @@ types:
     }).GetAwaiter().GetResult();
     Console.ReadKey();
 }
-</code></pre>
-<p>از آنجا که کد غیرهمزمان را در یک متد استاتیک اجرا می‌کنیم، باید کار را به صف <strong>thread pool</strong> اضافه کنیم. سپس کد را اجرا می‌کنیم و منتظر نتیجه می‌مانیم. وقتی کد بازگشت، فقط منتظر فشار یک کلید می‌مانیم و سپس برنامه خارج می‌شود. ⌨️🖥️</p>
-<hr>
-<p>ما یک <strong>MVC API</strong> درون برنامه‌ی کنسول ایجاد کرده‌ایم و فراخوانی‌های API را بر اساس فایل <strong>RAML</strong> که وارد کردیم اجرا کرده‌ایم. این فرآیند برای وب‌سایت‌های <strong><a href="http://ASP.NET">ASP.NET</a></strong> و <strong><a href="http://ASP.NET">ASP.NET</a> Core</strong> نیز به همان شکل کار می‌کند.</p>
-<p>حالا می‌خواهیم <strong>RAML</strong> را از یک API موجود استخراج کنیم. پروژه‌ی <strong>dividend calendar API</strong> که قبلاً در این فصل ایجاد کردیم را بارگذاری کنید. سپس روی پروژه راست‌کلیک کرده و گزینه‌ی <strong>Extract RAML</strong> را انتخاب کنید. پس از پایان استخراج، پروژه را اجرا کنید و URL را به شکل زیر تغییر دهید:</p>
-<pre class="hljs"><code>https://localhost:44325/raml
-</code></pre>
-<p>هنگامی که RAML استخراج می‌شود، فرآیند تولید کد یک کلاس <strong>RamlController</strong> به پروژه اضافه می‌کند و یک <strong>RAML view</strong> ایجاد می‌کند. اکنون API شما مستندسازی شده است و می‌توانید آن را در <strong>RAML view</strong> مشاهده کنید. 📄🔗</p>
-<div align="center">
-<p><img src="../../../assets/image/09/Table%209-14.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<p>با استفاده از <strong>RAML</strong>، می‌توانید یک API طراحی کنید و سپس ساختار آن را تولید کنید و حتی یک API را به صورت معکوس تحلیل کنید. مشخصات RAML به شما کمک می‌کند تا API خود را طراحی کرده و تغییرات لازم را با اصلاح کد RAML اعمال کنید. اگر می‌خواهید اطلاعات بیشتری کسب کنید، می‌توانید به وب‌سایت <a href="http://raml.org">RAML</a> مراجعه کنید تا بیشترین بهره را از مشخصات RAML ببرید.</p>
-<p>حال، نگاهی به <strong>Swagger</strong> و نحوه‌ی استفاده از آن در پروژه‌های <strong><a href="http://ASP.NET">ASP.NET</a> Core 3+</strong> خواهیم داشت. 🚀</p>
-<hr>
-<h3>جمع‌بندی 📝</h3>
-<p>در این فصل، درباره‌ی <strong>API</strong> صحبت کردیم و سپس بررسی کردیم که چگونه می‌توان از <strong>API proxy</strong> به عنوان قرارداد بین خودمان و مصرف‌کنندگان API استفاده کرد. این کار باعث می‌شود API ما از دسترسی مستقیم افراد ثالث محافظت شود.</p>
-<p>سپس به چند <strong>راهنمای طراحی</strong> برای بهبود کیفیت API پرداختیم. بعد، با <strong>Swagger</strong> آشنا شدیم و دیدیم چگونه می‌توان <strong>Weather API</strong> را مستندسازی کرد. همچنین به موضوع <strong>تست APIها</strong> پرداختیم و توضیح دادیم چرا تست کد خودمان و کدهای ثالث که در پروژه استفاده می‌کنیم اهمیت دارد.</p>
-<p>در نهایت، طراحی یک API <strong>مستقل از زبان برنامه‌نویسی</strong> با استفاده از <strong>RAML</strong> را دیدیم و آن را به پروژه‌ای عملی در <strong>C#</strong> تبدیل کردیم.</p>
-<p>در فصل بعد، پروژه‌ای خواهیم نوشت تا نحوه‌ی <strong>امن‌سازی کلیدها با Azure Key Vault</strong> و همچنین <strong>محافظت از API خود با API Key</strong> را نشان دهیم. اما قبل از آن، بیایید مغزتان را به کار بیندازیم تا ببینیم چه چیزهایی یاد گرفته‌اید. 🧠</p>
-<hr>
-<h3>سوالات ❓</h3>
-<ol>
-<li>API مخفف چیست؟</li>
-<li>REST مخفف چیست؟</li>
-<li>شش محدودیت REST چیست؟</li>
-<li>HATEOAS مخفف چیست؟</li>
-<li>RAML چیست؟</li>
-<li>Swagger چیست؟</li>
-<li>منظور از <strong>well-defined software boundary</strong> چیست؟</li>
-<li>چرا باید APIهایی که استفاده می‌کنید را بفهمید؟</li>
-<li>چه چیزی بهتر عمل می‌کند—<strong>struct</strong> یا <strong>object</strong>؟</li>
-<li>چرا باید APIهای ثالث را تست کنید؟</li>
-<li>چرا باید APIهای خود را تست کنید؟</li>
-<li>چگونه می‌توانید تعیین کنید چه تست‌هایی برای کدتان بنویسید؟</li>
-<li>سه روش برای سازماندهی کد در <strong>well-defined software boundaries</strong> را نام ببرید.</li>
-</ol>
-<hr>
-<h3>منابع برای مطالعه‌ی بیشتر 📚</h3>
-<ul>
-<li><a href="https://weblogs.asp.net/sukumarraju/asp-net-web-api-testing-using-nunit-framework">NUnit برای تست Web API در ASP.NET</a></li>
-<li><a href="https://raml.org/developers/design-your-api">طراحی API با RAML</a></li>
-<li><a href="http://apiworkbench.com/docs/">استفاده از RAML در Atom</a></li>
-<li><a href="https://dotnetcoretutorials.com/2017/10/19/using-swagger-asp-net-core/">مقدمه‌ای بر استفاده از Swagger در ASP.NET Core</a></li>
-<li><a href="https://swagger.io/about/">صفحه‌ی About در Swagger</a></li>
-<li><a href="https://httpstatuses.com/">لیست کدهای وضعیت HTTP</a></li>
-<li><a href="https://www.greenbytes.de/tech/webdav/rfc5988.html">مشخصات لینک‌دهی وب RFC 5988</a></li>
-<li><a href="https://oauth.net/2/">صفحه‌ی اصلی OAuth 2.0</a></li>
-<li><a href="https://en.wikipedia.org/wiki/Domain-driven_design">Wikipedia: Domain-driven design</a></li>
-<li><a href="https://www.packtpub.com/gb/application-development/hands-domain-driven-design-net-core">Hands-On Domain-Driven Design with .NET Core</a></li>
-<li><a href="https://www.packtpub.com/gb/application-development/test-driven-development-c-and-net-core-mvc-video">Test-Driven Development با C# و .NET Core و MVC</a></li>
-</ul>
-<p>✅ این فصل به پایان رسید و شما اکنون با مفاهیم <strong>API، Swagger، RAML، تست API و ایجاد API مستقل از زبان</strong> آشنا شده‌اید.</p>
-
-  </main>
-
-  <!-- فوتر مشترک -->
-  <footer class="footer">
-    <div class="container">
-      <p>
-        <img src="/Gitab/icone/copyright.svg" alt="کپی‌رایت" width="14" height="14"
-             style="vertical-align:middle;margin-inline:4px">
-        <span id="y"></span> Gitab — تمامی حقوق محفوظ است.
-      </p>
-    </div>
-  </footer>
-
-  <!-- سال و اسکریپت تغییر تم -->
-  <script>
+</code></pre> <p>از آنجا که کد غیرهمزمان را در یک متد استاتیک اجرا می‌کنیم، باید کار را به صف <strong>thread pool</strong> اضافه کنیم. سپس کد را اجرا می‌کنیم و منتظر نتیجه می‌مانیم. وقتی کد بازگشت، فقط منتظر فشار یک کلید می‌مانیم و سپس برنامه خارج می‌شود. ⌨</p><hr> <p>ما یک <strong>MVC API</strong> درون برنامه‌ی کنسول ایجاد کرده‌ایم و فراخوانی‌های API را بر اساس فایل <strong>RAML</strong> که وارد کردیم اجرا کرده‌ایم. این فرآیند برای وب‌سایت‌های <strong><a href="http://ASP.NET">ASP.NET</a></strong> و <strong><a href="http://ASP.NET">ASP.NET</a> Core</strong> نیز به همان شکل کار می‌کند.</p><p>حالا می‌خواهیم <strong>RAML</strong> را از یک API موجود استخراج کنیم. پروژه‌ی <strong>dividend calendar API</strong> که قبلاً در این فصل ایجاد کردیم را بارگذاری کنید. سپس روی پروژه راست‌کلیک کرده و گزینه‌ی <strong>Extract RAML</strong> را انتخاب کنید. پس از پایان استخراج، پروژه را اجرا کنید و URL را به شکل زیر تغییر دهید:</p><pre class="hljs"><code>https://localhost:44325/raml
+</code></pre> <p>هنگامی که RAML استخراج می‌شود، فرآیند تولید کد یک کلاس <strong>RamlController</strong> به پروژه اضافه می‌کند و یک <strong>RAML view</strong> ایجاد می‌کند. اکنون API شما مستندسازی شده است و می‌توانید آن را در <strong>RAML view</strong> مشاهده کنید.</p><div align="center"> <p><img src="../../../assets/image/09/Table%209-14.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <p>با استفاده از <strong>RAML</strong>، می‌توانید یک API طراحی کنید و سپس ساختار آن را تولید کنید و حتی یک API را به صورت معکوس تحلیل کنید. مشخصات RAML به شما کمک می‌کند تا API خود را طراحی کرده و تغییرات لازم را با اصلاح کد RAML اعمال کنید. اگر می‌خواهید اطلاعات بیشتری کسب کنید، می‌توانید به وب‌سایت <a href="http://raml.org">RAML</a> مراجعه کنید تا بیشترین بهره را از مشخصات RAML ببرید.</p><p>حال، نگاهی به <strong>Swagger</strong> و نحوه‌ی استفاده از آن در پروژه‌های <strong><a href="http://ASP.NET">ASP.NET</a> Core 3+</strong> خواهیم داشت.</p><hr> <h3>جمع‌بندی</h3><p>در این فصل، درباره‌ی <strong>API</strong> صحبت کردیم و سپس بررسی کردیم که چگونه می‌توان از <strong>API proxy</strong> به عنوان قرارداد بین خودمان و مصرف‌کنندگان API استفاده کرد. این کار باعث می‌شود API ما از دسترسی مستقیم افراد ثالث محافظت شود.</p><p>سپس به چند <strong>راهنمای طراحی</strong> برای بهبود کیفیت API پرداختیم. بعد، با <strong>Swagger</strong> آشنا شدیم و دیدیم چگونه می‌توان <strong>Weather API</strong> را مستندسازی کرد. همچنین به موضوع <strong>تست APIها</strong> پرداختیم و توضیح دادیم چرا تست کد خودمان و کدهای ثالث که در پروژه استفاده می‌کنیم اهمیت دارد.</p><p>در نهایت، طراحی یک API <strong>مستقل از زبان برنامه‌نویسی</strong> با استفاده از <strong>RAML</strong> را دیدیم و آن را به پروژه‌ای عملی در <strong>C#</strong> تبدیل کردیم.</p><p>در فصل بعد، پروژه‌ای خواهیم نوشت تا نحوه‌ی <strong>امن‌سازی کلیدها با Azure Key Vault</strong> و همچنین <strong>محافظت از API خود با API Key</strong> را نشان دهیم. اما قبل از آن، بیایید مغزتان را به کار بیندازیم تا ببینیم چه چیزهایی یاد گرفته‌اید.</p><hr> <h3>سوالات</h3><ol> <li>API مخفف چیست؟</li><li>REST مخفف چیست؟</li><li>شش محدودیت REST چیست؟</li><li>HATEOAS مخفف چیست؟</li><li>RAML چیست؟</li><li>Swagger چیست؟</li><li>منظور از <strong>well-defined software boundary</strong> چیست؟</li><li>چرا باید APIهایی که استفاده می‌کنید را بفهمید؟</li><li>چه چیزی بهتر عمل می‌کند—<strong>struct</strong> یا <strong>object</strong>؟</li><li>چرا باید APIهای ثالث را تست کنید؟</li><li>چرا باید APIهای خود را تست کنید؟</li><li>چگونه می‌توانید تعیین کنید چه تست‌هایی برای کدتان بنویسید؟</li><li>سه روش برای سازماندهی کد در <strong>well-defined software boundaries</strong> را نام ببرید.</li></ol> <hr><h3>منابع برای مطالعه‌ی بیشتر</h3><ul> <li><a href="https://weblogs.asp.net/sukumarraju/asp-net-web-api-testing-using-nunit-framework">NUnit برای تست Web API در ASP.NET</a></li><li><a href="https://raml.org/developers/design-your-api">طراحی API با RAML</a></li><li><a href="http://apiworkbench.com/docs/">استفاده از RAML در Atom</a></li><li><a href="https://dotnetcoretutorials.com/2017/10/19/using-swagger-asp-net-core/">مقدمه‌ای بر استفاده از Swagger در ASP.NET Core</a></li><li><a href="https://swagger.io/about/">صفحه‌ی About در Swagger</a></li><li><a href="https://httpstatuses.com/">لیست کدهای وضعیت HTTP</a></li><li><a href="https://www.greenbytes.de/tech/webdav/rfc5988.html">مشخصات لینک‌دهی وب RFC 5988</a></li><li><a href="https://oauth.net/2/">صفحه‌ی اصلی OAuth 2.0</a></li><li><a href="https://en.wikipedia.org/wiki/Domain-driven_design">Wikipedia: Domain-driven design</a></li><li><a href="https://www.packtpub.com/gb/application-development/hands-domain-driven-design-net-core">Hands-On Domain-Driven Design with .NET Core</a></li><li><a href="https://www.packtpub.com/gb/application-development/test-driven-development-c-and-net-core-mvc-video">Test-Driven Development با C# و .NET Core و MVC</a></li></ul> <p>این فصل به پایان رسید و شما اکنون با مفاهیم <strong>API، Swagger، RAML، تست API و ایجاد API مستقل از زبان</strong> آشنا شده‌اید.</p></article> <nav class="chapter-single-next-nav"><a href="/Gitab/books/book2/Book/10/Securing-APIs-with-API-Keys-and-Azure-Key-Vault/" class="btn-next-chapter-action" id="nextChapterBtn" data-hub="/Gitab/books/book2/"> <span class="next-btn-text">فصل بعدی: ایمن‌سازی APIها با API Keys و Azure Key Vault</span> <span class="next-btn-arrow">←</span> </a> </nav></div> <button class="fab-back-to-top" id="backToTopBtn" type="button" aria-label="رفتن به بالای صفحه" title="رفتن به بالا"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"> <polyline points="18 15 12 9 6 15"></polyline> </svg> </button></main> <footer class="footer-minimal"><div class="footer-container"> <div class="footer-top-row"><div class="footer-brand-side"> <a href="/Gitab/" class="footer-brand-anchor"> <img src="/Gitab/icone/logo.svg" alt="Gitab" width="28" height="28" loading="lazy" decoding="async"> <span class="footer-brand-title">گیتاب (Gitab)</span> </a> <p class="footer-tagline"> پلتفرم آزاد و مستقل برای ترجمهٔ دقیق و روان کتاب‌های مرجع مهندسی نرم‌افزار. </p></div> <div class="footer-nav-cols"><div class="footer-nav-col"> <span class="footer-nav-heading">موضوعات</span><ul class="footer-nav-list"> <li><a href="/Gitab/books/list-books/?cat=csharp">سی‌شارپ و دات‌نت</a></li><li><a href="/Gitab/books/list-books/?cat=clean-code">کد تمیز و بازآفرینی</a></li><li><a href="/Gitab/books/list-books/?cat=architecture">معماری و طراحی دامنه</a></li><li><a href="/Gitab/books/list-books/?cat=system">لینوکس و خط فرمان</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">بخش‌های سایت</span><ul class="footer-nav-list"> <li><a href="/Gitab/">صفحه اصلی</a></li><li><a href="/Gitab/books/list-books/">کتابخانه کامل</a></li><li><a href="/Gitab/courses/">دوره‌های آموزشی</a></li><li><a href="/Gitab/translator.html">تالار مترجمین</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">مشارکت و جامعه</span><ul class="footer-nav-list"> <li><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer">راهنمای همکاری در ترجمه</a></li><li><a href="https://github.com/hheydarian/Gitab/issues" target="_blank" rel="noopener noreferrer">پیشنهاد کتاب یا گزارش خطا</a></li></ul> </div></div> </div><div class="footer-bottom-line"> <span>© <span id="y">2026</span> Gitab — توسعه‌یافته برای جامعهٔ مهندسان نرم‌افزار ایرانی</span></div> </div></footer> <script>
   (() => {
     const root = document.documentElement;
     const btn = document.getElementById('themeToggle');
+    const sunIcon = btn ? btn.querySelector('.icon-sun') : null;
+    const moonIcon = btn ? btn.querySelector('.icon-moon') : null;
     const KEY = 'gitab-theme';
 
-    function updateTheme(s) {
-      root.setAttribute('data-theme', s);
-      const mode = s;  // فقط `dark` یا `light` خواهد بود
+    function updateTheme(mode) {
+      root.setAttribute('data-theme', mode);
       root.dataset.colorMode = mode;
-      btn.dataset.icon = mode === 'dark' ? 'moon' : 'sun';
+      if (sunIcon && moonIcon) {
+        if (mode === 'dark') {
+          sunIcon.style.display = 'inline-block';
+          moonIcon.style.display = 'none';
+        } else {
+          sunIcon.style.display = 'none';
+          moonIcon.style.display = 'inline-block';
+        }
+      }
     }
 
-    // وضعیت تم ذخیره شده از localStorage
-    let saved = localStorage.getItem(KEY) || 'light'; // پیش‌فرض روشن
+    let saved = 'dark';
+    try { saved = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
     updateTheme(saved);
 
-    // تنظیم مجدد تم هنگام تغییر وضعیت دکمه
-    btn.addEventListener('click', () => {
-      const current = localStorage.getItem(KEY) || 'light';
-      const next = current === 'dark' ? 'light' : 'dark';  // فقط دو حالت: تاریک و روشن
-      localStorage.setItem(KEY, next);
-      updateTheme(next);
-    });
+    if (btn) {
+      btn.addEventListener('click', () => {
+        let current = 'dark';
+        try { current = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+        const next = current === 'dark' ? 'light' : 'dark';
+        try { localStorage.setItem(KEY, next); } catch (e) {}
+        updateTheme(next);
+      });
+    }
 
-    // هنگام بارگذاری صفحه
     document.addEventListener('DOMContentLoaded', () => {
-      updateTheme(localStorage.getItem(KEY) || 'light');
+      let mode = 'dark';
+      try { mode = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+      updateTheme(mode);
+      const yearSpan = document.getElementById('y');
+      if (yearSpan) yearSpan.textContent = new Date().getFullYear();
     });
+
+    const mobBtn = document.getElementById('mobileMenuBtn');
+    const mobDrawer = document.getElementById('mobileDrawer');
+    if (mobBtn && mobDrawer) {
+      const setDrawerOpen = (open) => {
+        mobDrawer.classList.toggle('open', open);
+        mobBtn.classList.toggle('is-open', open);
+        mobBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        mobBtn.setAttribute('aria-label', open ? 'بستن منو' : 'باز کردن منو');
+        mobDrawer.setAttribute('aria-hidden', open ? 'false' : 'true');
+      };
+
+      mobBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        setDrawerOpen(!mobDrawer.classList.contains('open'));
+      });
+
+      mobDrawer.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => setDrawerOpen(false));
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && mobDrawer.classList.contains('open')) {
+          setDrawerOpen(false);
+        }
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!mobDrawer.contains(e.target) && !mobBtn.contains(e.target)) {
+          setDrawerOpen(false);
+        }
+      });
+    }
+
+    if ('serviceWorker' in navigator) {
+      const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+      if (isLocalhost) {
+        navigator.serviceWorker.getRegistrations().then(regs => {
+          for (const reg of regs) reg.unregister();
+        });
+        if ('caches' in window) {
+          caches.keys().then(names => {
+            for (const name of names) caches.delete(name);
+          });
+        }
+      } else {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/Gitab/sw.js').catch(() => {});
+        });
+      }
+    }
   })();
-</script>
-
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-  <script>hljs.highlightAll();</script>
-
-  <script>
+  </script> <script>
   document.querySelectorAll('pre code').forEach(block => {
+    const pre = block.parentNode;
+    if (!pre || pre.querySelector('.copy-btn')) return;
+
+    const copySvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
+    const okSvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+
     const btn = document.createElement('button');
     btn.className = 'copy-btn';
-
-    const icon = document.createElement('img');
-    icon.src = "/Gitab/icone/copy.svg";
-    icon.alt = 'Copy';
-    btn.appendChild(icon);
-
-    block.parentNode.insertBefore(btn, block);
+    btn.setAttribute('aria-label', 'کپی کد');
+    btn.setAttribute('title', 'کپی کد');
+    btn.setAttribute('type', 'button');
+    btn.innerHTML = copySvg;
+    pre.appendChild(btn);
 
     btn.addEventListener('click', async () => {
-      await navigator.clipboard.writeText(block.textContent);
-      btn.classList.add('copied');
-      setTimeout(() => btn.classList.remove('copied'), 1500);
-    });
-  });
-  </script>
-
-  <script>
-  document.body.dataset.page = window.location.pathname;
-
-  const menuBtn = document.querySelector(".menu-toggle");
-  const nav = document.querySelector(".nav");
-
-  if (menuBtn && nav) {
-    menuBtn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      nav.classList.toggle("show");
-    });
-
-    document.addEventListener("click", (e) => {
-      const clickedInsideNav = nav.contains(e.target);
-      const clickedMenuButton = menuBtn.contains(e.target);
-      if (!clickedInsideNav && !clickedMenuButton) {
-        nav.classList.remove("show");
+      try {
+        await navigator.clipboard.writeText(block.textContent);
+        btn.classList.add('copied');
+        btn.innerHTML = okSvg;
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          btn.innerHTML = copySvg;
+        }, 1800);
+      } catch (err) {
+        console.error('Copy failed:', err);
       }
     });
-  }
-  </script>
-
-  <script>
-    document.getElementById('y').textContent = new Date().getFullYear();
-  </script>
-  <script>
-document.getElementById("openDonate").addEventListener("click", () => {
-  document.getElementById("donateModal").style.display = "block";
-});
-document.getElementById("closeDonate").addEventListener("click", () => {
-  document.getElementById("donateModal").style.display = "none";
-});
-document.querySelectorAll(".copy-btn").forEach(btn => {
-  btn.addEventListener("click", () => {
-    navigator.clipboard.writeText(btn.dataset.copy);
-  
-    setTimeout(() => (btn.textContent = "کپی"), 2000);
   });
-});
-</script>
+  </script> <script>
+  (() => {
+    const article = document.getElementById('chapterArticle');
+    if (!article) return;
 
-</body>
-</html>
+    const progressBar = document.getElementById('readingProgressBar');
+    if (progressBar) {
+      window.addEventListener('scroll', () => {
+        const docElem = document.documentElement;
+        const totalHeight = docElem.scrollHeight - docElem.clientHeight;
+        if (totalHeight > 0) {
+          const progress = (window.pageYOffset / totalHeight) * 100;
+          progressBar.style.width = Math.min(100, Math.max(0, progress)) + '%';
+        }
+      }, { passive: true });
+    }
+
+    const btt = document.getElementById('backToTopBtn');
+    if (btt) {
+      window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 250) {
+          btt.classList.add('visible');
+        } else {
+          btt.classList.remove('visible');
+        }
+      }, { passive: true });
+
+      btt.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+
+    article.querySelectorAll('img').forEach(img => {
+      if (!img.hasAttribute('loading')) img.loading = 'lazy';
+      if (!img.hasAttribute('decoding')) img.decoding = 'async';
+      const parent = img.parentElement;
+      if (parent && parent.tagName === 'P') {
+        parent.style.textAlign = 'center';
+      }
+
+      img.addEventListener('error', function() {
+        const src = this.getAttribute('src');
+        if (src && src.includes('assets/image/')) {
+          const parts = src.split('assets/image/');
+          const corrected = '/Gitab/books/book2/assets/image/' + parts[1];
+          if (this.src !== corrected) {
+            this.src = corrected;
+          }
+        }
+      });
+    });
+
+    article.querySelectorAll('p').forEach(p => {
+      const trimmed = p.innerText.trim();
+      if (trimmed.startsWith('💡') || trimmed.startsWith('نکته:')) {
+        p.classList.add('react-callout', 'callout-tip');
+      } else if (trimmed.startsWith('⚠️') || trimmed.startsWith('هشدار:')) {
+        p.classList.add('react-callout', 'callout-warning');
+      } else if (trimmed.startsWith('📌') || trimmed.startsWith('مهم:')) {
+        p.classList.add('react-callout', 'callout-important');
+      } else if (trimmed.startsWith('🔹') || trimmed.startsWith('🔸')) {
+        p.classList.add('react-callout', 'callout-note');
+      }
+    });
+  })();
+  </script> <script type="speculationrules">{"prefetch":[{"where":{"and":[{"href_matches":"/Gitab/*"},{"not":{"href_matches":"/Gitab/downloads/*"}},{"not":{"selector_matches":"[download], [target='_blank']"}}]},"eagerness":"moderate"}]}</script> <script>
+  (() => {
+    if (window.HTMLScriptElement && HTMLScriptElement.supports && HTMLScriptElement.supports('speculationrules')) return;
+    const seen = new Set([window.location.href]);
+    let count = 0;
+    const prefetchLink = (e) => {
+      if (count >= 12) return;
+      const a = e.target && e.target.closest ? e.target.closest('header a, .chapter-single-next-nav a, .syllabus-chapter-item a, .btn-hero-read, .btn-card-read') : null;
+      if (!a || !a.href || a.hasAttribute('download') || a.target === '_blank') return;
+      if (a.origin !== window.location.origin || a.pathname.includes('/downloads/')) return;
+      const clean = a.href.split('#')[0];
+      if (!clean || seen.has(clean)) return;
+      seen.add(clean);
+      count++;
+      const l = document.createElement('link');
+      l.rel = 'prefetch';
+      l.href = clean;
+      document.head.appendChild(l);
+    };
+    document.addEventListener('pointerenter', prefetchLink, { capture: true, passive: true });
+    document.addEventListener('touchstart', prefetchLink, { capture: true, passive: true });
+  })();
+  </script></body></html>

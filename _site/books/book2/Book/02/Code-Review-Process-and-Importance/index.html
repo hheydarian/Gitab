@@ -1,590 +1,197 @@
-
-
-<!doctype html>
-<html lang="fa" dir="rtl">
-<head>
-  <meta charset="utf-8">
-  <link rel="icon" type="image/png" href="/Gitab/favicon.png">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>بازبینی کد – فرآیند و اهمیت</title>
-  <meta name="description" content="ترجمه‌های فارسی کتاب‌های فنی — سریع، مینیمال و قابل اتکا.">
-
-  <!-- استایل‌ها -->
-  <link rel="stylesheet" href="/Gitab/styles/main.css">
-  <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
-
-  <style>
-  @font-face {
-    font-family: 'Vazir';
-    src: url('/Gitab/fonts/Vazir-FD-WOL.ttf') format('truetype');
-    font-display: swap;
-  }
-  @font-face {
-    font-family: "Lalezar";
-    src: url('fonts/Lalezar.ttf') format('truetype');
-    font-display: swap;
-}
-  body {
-    font-family: 'Vazir', sans-serif;
-  }
-  </style>
-</head>
-
-<body>
-  <!-- هدر مشترک -->
-  <header class="header">
-    <div class="container nav-wrap">
-      <a href="/Gitab/" class="brand">
-        <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="26" height="26">
-        <span>Gitab</span>
-      </a>
-
-       <nav class="nav">
-         <a href="/Gitab/" >خانه</a>
-         <a href="/Gitab/books/list-books" >کتاب‌ها</a>
-         <a href="/Gitab/giter.html" >دوره ها</a>
-          <!-- 
-         <a href="/Gitab/translator.html" >مترجمین</a>
-           -->
-       </nav>
-
-      <div class="nav-actions">
-        <button id="themeToggle" class="icon-btn theme-btn" data-icon="moon" aria-label="تغییر تم">
-          <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن">
-          <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک">
-        </button>
-
-        <a class="icon-btn" href="https://github.com/hheydarian/Gitab" target="_blank" title="GitHub">
-          <img src="/Gitab/icone/github.svg" alt="GitHub">
-        </a>
-
-        <!-- دکمه منو برای موبایل -->
-        <button class="menu-toggle" aria-label="منو">
-          <img src="/Gitab/icone/menu.svg" alt="menu">
-        </button>
-      </div>
-    </div>
-  </header>
-
-  
-  <main class="site-main book-page">
-    <h1>فصل دوم: بازبینی کد – فرآیند و اهمیت 🖥️</h1>
-<p><strong>هدف اصلی بازبینی کد</strong>، بهبود کیفیت کلی کد است. کیفیت کد به ویژه در پروژه‌های تیمی یا پروژه‌هایی که توسط دیگران (مثل توسعه‌دهندگان متن‌باز یا مشتریان از طریق قراردادهای escrow) قابل دسترسی است، اهمیت زیادی دارد.</p>
-<p>اگر هر توسعه‌دهنده آزاد باشد به سبک دلخواه خود کدنویسی کند، کد به صورت مجموعه‌ای از سبک‌های متفاوت و در نهایت یک <strong>کد نامنظم و پیچیده</strong> تبدیل می‌شود. به همین دلیل داشتن <strong>سیاست استانداردهای کدنویسی</strong> و <strong>فرآیند بازبینی کد</strong> ضروری است.</p>
-<p>در بازبینی کد، همکاران کد یکدیگر را بررسی می‌کنند و به موارد زیر توجه دارند:</p>
-<ul>
-<li>اشتباهات انسانی طبیعی هستند و باید بررسی شوند</li>
-<li>کدهایی که با <strong>استانداردهای کدنویسی شرکت</strong> مغایرت دارند</li>
-<li>کدهایی که از نظر <strong>خوانایی، نگهداری یا عملکرد</strong> قابل بهبود هستند</li>
-</ul>
-<hr>
-<h3>موضوعات این فصل</h3>
-<ol>
-<li>آماده‌سازی کد برای بازبینی</li>
-<li>رهبری یک بازبینی کد</li>
-<li>دانستن اینکه چه چیزی باید بررسی شود</li>
-<li>دانستن زمان مناسب برای ارسال کد به بازبینی</li>
-<li>ارائه و پاسخ‌دهی به بازخوردهای بازبینی</li>
-</ol>
-<blockquote>
-<p>توجه:</p>
-</blockquote>
-<ul>
-<li>بخش‌های <strong>آماده‌سازی کد برای بازبینی</strong> و <strong>دانستن زمان مناسب برای ارسال کد</strong> از دیدگاه برنامه‌نویس بررسی می‌شوند.</li>
-<li>بخش‌های <strong>رهبری بازبینی کد</strong> و <strong>دانستن چه چیزی را باید بازبینی کرد</strong> از دیدگاه بازبین کد توضیح داده می‌شوند.</li>
-<li>بخش <strong>ارائه و پاسخ‌دهی به بازخورد</strong> هر دو دیدگاه برنامه‌نویس و بازبین را شامل می‌شود.</li>
-</ul>
-<hr>
-<h3>اهداف یادگیری</h3>
-<ul>
-<li>درک بازبینی کد و فواید آن</li>
-<li>شرکت در بازبینی کد</li>
-<li>ارائه انتقاد سازنده</li>
-<li>پاسخ مثبت به انتقاد سازنده</li>
-</ul>
-<hr>
-<h3>فرآیند بازبینی کد</h3>
-<p>۱. مطمئن شوید که کد <strong>کامپایل می‌شود</strong> و <strong>نیازمندی‌ها را برآورده می‌کند</strong>.<br>
-۲. اطمینان حاصل کنید که تمام <strong>Unit Test و End-to-End Test</strong> ها با موفقیت اجرا می‌شوند.<br>
-۳. کد را در <strong>شاخه کاری فعلی</strong> (working branch) چک این کنید.<br>
-4. یک <strong>Pull Request</strong> صادر کنید.<br>
-5. <strong>Peer Reviewer</strong> کد شما را بررسی و بازخورد ارائه می‌دهد.<br>
-6. اگر کد تایید شد، می‌توانید شاخه کاری خود را به <strong>شاخه اصلی</strong> (main trunk) ادغام کنید.<br>
-7. اگر بازبینی رد شد، باید مشکلات گزارش شده را برطرف کنید و دوباره بررسی را درخواست دهید.</p>
-<blockquote>
-<p>نمودار فرآیند بازبینی کد توسط همتایان (Peer Code Review) این روند را به صورت تصویری نشان می‌دهد.</p>
-</blockquote>
-<hr>
-<div align="center">
-<p><img src="../../../assets/image/02/Table%202-1.png" alt="Conventions-UsedThis-Book"></p>
-</div>
-<h3>آماده‌سازی کد برای بازبینی 🛠️</h3>
-<p>آماده‌سازی کد برای بازبینی ممکن است گاهی کار زمان‌بر و خسته‌کننده‌ای باشد، اما <strong>کیفیت کلی کد را بهبود می‌بخشد</strong> و آن را خوانا و قابل نگهداری می‌کند. این یک عمل ضروری است که تیم‌ها باید به عنوان <strong>روند استاندارد کدنویسی</strong> انجام دهند.</p>
-<p><strong>نکات مهم هنگام آماده‌سازی کد برای بازبینی:</strong></p>
-<ol>
-<li>
-<p><strong>همیشه بازبینی کد را در ذهن داشته باشید</strong>:<br>
-از ابتدای برنامه‌نویسی به بازبینی کد فکر کنید. کد خود را کوچک نگه دارید و اگر ممکن است، محدود به یک ویژگی (feature) باشید.</p>
-</li>
-<li>
-<p><strong>اطمینان از گذراندن تمام تست‌ها حتی اگر کد کامپایل شود</strong>:<br>
-اگر کد شما کامپایل می‌شود اما تست‌ها رد شده‌اند، فوراً دلیل آن را برطرف کنید. تمام <strong>Unit Test</strong> و <strong>End-to-End Test</strong> باید موفقیت‌آمیز باشند تا از مشکلات بعدی در محیط تولید جلوگیری شود.</p>
-</li>
-<li>
-<p><strong>به YAGNI توجه کنید</strong>:<br>
-تنها کدی را اضافه کنید که برای برآورده کردن نیازمندی یا ویژگی مورد نظر ضروری است. اگر نیاز نیست، کدنویسی نکنید.</p>
-</li>
-<li>
-<p><strong>بررسی کدهای تکراری</strong>:<br>
-اگر کد شما باید شیءگرا، DRY و SOLID باشد، کد خود را بررسی کنید تا از وجود <strong>کد تکراری یا رویه‌ای</strong> مطمئن شوید. در صورت وجود، آن را بازسازی (refactor) کنید.</p>
-</li>
-<li>
-<p><strong>استفاده از ابزارهای تحلیل استاتیک</strong>:<br>
-این ابزارها با تنظیمات استانداردهای شرکت، کد شما را بررسی و مشکلات را مشخص می‌کنند. هشدارها را نادیده نگیرید، زیرا ممکن است بعداً مشکل‌ساز شوند.</p>
-</li>
-<li>
-<p><strong>اطمینان از رضایت از کد قبل از چک این</strong>:<br>
-فقط وقتی مطمئن شدید که کد:</p>
-<ul>
-<li>نیازمندی‌های تجاری را برآورده می‌کند</li>
-<li>استانداردهای کدنویسی رعایت شده‌اند</li>
-<li>تمام تست‌ها موفقیت‌آمیز هستند<br>
-چک این کنید.<br>
-اگر بخشی از <strong>Continuous Integration (CI)</strong> باشد و کد باعث شکست build شود، باید مشکلات را برطرف کنید و دوباره تلاش کنید.</li>
-</ul>
-</li>
-</ol>
-<hr>
-<h3>رهبری بازبینی کد 👨‍💻</h3>
-<p>هنگام رهبری یک بازبینی کد، حضور <strong>افراد مناسب</strong> اهمیت دارد. حضور برنامه‌نویسان مسئول ارسال کد ضروری است، مگر اینکه از راه دور کار کنند. در آن صورت، بازبین کد pull request را بررسی کرده و:</p>
-<ul>
-<li>قبول می‌کند</li>
-<li>رد می‌کند</li>
-<li>یا سوالاتی می‌پرسد تا قبل از ادامه پاسخ داده شود</li>
-</ul>
-<p><strong>مهارت‌ها و دانش مورد نیاز رهبر بازبینی کد:</strong></p>
-<ol>
-<li><strong>اقتدار فنی</strong>: رهبر باید با استانداردهای کدنویسی و متدولوژی‌های توسعه نرم‌افزار آشنا باشد و درک کلی از نرم‌افزار تحت بررسی داشته باشد.</li>
-<li><strong>مهارت‌های نرم</strong>: باید فردی گرم و تشویق‌کننده باشد و بتواند بازخورد سازنده ارائه دهد تا تعارضی ایجاد نشود.</li>
-<li><strong>عدم انتقاد بیش از حد</strong>: باید بتواند انتقادات خود را به شکل <strong>سازنده و روشن</strong> بیان کند و کد را به صورت عینی بررسی نماید.</li>
-</ol>
-<hr>
-<h3>فرآیند بازبینی کد با Pull Request</h3>
-<ol>
-<li>
-<p>برنامه‌نویس کد را در سیستم کنترل نسخه <strong>چک این</strong> می‌کند و <strong>Pull Request</strong> صادر می‌کند.</p>
-</li>
-<li>
-<p><strong>Peer Reviewer</strong> کد را بررسی و بازخورد ارائه می‌دهد:</p>
-<ul>
-<li>مشکلات را مشخص می‌کند</li>
-<li>در صورت نیاز، Pull Request را رد می‌کند</li>
-<li>بازخورد مثبت در صورت موفقیت ارائه می‌دهد و Pull Request را Merge می‌کند</li>
-</ul>
-</li>
-<li>
-<p>برنامه‌نویس باید <strong>تمام نظرات بازبین را اعمال کند</strong> و در صورت نیاز، کد را دوباره ارسال کند.</p>
-</li>
-</ol>
-<blockquote>
-<p>نکته: بازبینی‌های کوتاه و تعداد خطوط محدود، مؤثرتر و آسان‌تر برای مدیریت هستند.</p>
-</blockquote>
-<hr>
-<h3>صدور Pull Request در گیت‌هاب 🔄</h3>
-<p>وقتی کدنویسی شما کامل شد و از <strong>کیفیت کد و موفقیت‌آمیز بودن Build</strong> اطمینان پیدا کردید، می‌توانید تغییرات خود را در مخزن <strong>Source Control</strong> <strong>Push</strong> یا <strong>Check-in</strong> کنید، بسته به سیستم کنترل نسخه‌ای که استفاده می‌کنید.</p>
-<p>پس از ارسال کد، می‌توانید <strong>Pull Request</strong> صادر کنید. با ایجاد Pull Request:</p>
-<ul>
-<li>سایر افرادی که به کد علاقه‌مند هستند <strong>اطلاع‌رسانی</strong> می‌شوند</li>
-<li>تغییرات شما قابل <strong>بازبینی و بحث</strong> خواهند بود</li>
-<li>نظرات و پیشنهادات برای تغییرات احتمالی به شما ارائه می‌شود</li>
-</ul>
-<p>به عبارت دیگر، <strong>Push کردن کد و صدور Pull Request</strong> آغازگر فرآیند <strong>بازبینی کد همتا (Peer Code Review)</strong> است.</p>
-<hr>
-<h3>مراحل صدور Pull Request</h3>
-<ol>
-<li>پس از Check-in یا Push کد، به تب <strong>Pull Requests</strong> در مخزن خود بروید.</li>
-<li>روی دکمه <strong>New Pull Request</strong> کلیک کنید.</li>
-<li>Pull Request شما در <strong>صف انتظار</strong> قرار می‌گیرد تا بازبین‌های مربوطه آن را بررسی کنند.</li>
-</ol>
-<p>این کار، فرآیند رسمی بازبینی کد را شروع می‌کند و به تیم کمک می‌کند کد با کیفیت بالا و استاندارد را تحویل دهد.</p>
-<h3>فرآیند درخواست و انجام Pull Request در GitHub 📝</h3>
-<p>مراحل زیر نحوه ایجاد و ارسال یک <strong>Pull Request</strong> در GitHub را نشان می‌دهد:</p>
-<ol>
-<li><strong>رفتن به تب Pull Requests</strong><br>
-در صفحه پروژه GitHub خود، روی تب <strong>Pull Requests</strong> کلیک کنید.</li>
-</ol>
-<div align="center">
-<p><img src="../../../assets/image/02/Table%202-2.png" alt="Conventions-UsedThis-Book"></p>
-</div>
-<ol start="2">
-<li><strong>ایجاد Pull Request جدید</strong><br>
-روی دکمه <strong>New Pull Request</strong> کلیک کنید. این کار صفحه <strong>Comparing changes</strong> را نمایش می‌دهد تا تغییرات خود را مرور کنید.</li>
-</ol>
-<div align="center">
-<p><img src="../../../assets/image/02/Table%202-3.png" alt="Conventions-UsedThis-Book"></p>
-</div>
-<ol start="3">
-<li><strong>شروع Pull Request</strong><br>
-اگر از تغییرات راضی بودید، روی دکمه <strong>Create pull request</strong> کلیک کنید. این صفحه <strong>Open a pull request</strong> را نمایش می‌دهد.</li>
-</ol>
-<div align="center">
-<p><img src="../../../assets/image/02/Table%202-4.png" alt="Conventions-UsedThis-Book"></p>
-</div>
-<ol start="4">
-<li>
-<p><strong>افزودن توضیحات و جزئیات</strong></p>
-<ul>
-<li>در بخش توضیحات، کامنتی کوتاه و مفید بنویسید که تغییرات ایجاد شده را مشخص کند.</li>
-<li>در صورت نیاز، فیلدهای <strong>Reviewers، Assignees، Labels، Projects و Milestones</strong> را تنظیم کنید.</li>
-<li>وقتی آماده بودید، دوباره روی <strong>Create pull request</strong> کلیک کنید تا Pull Request ایجاد شود.</li>
-</ul>
-</li>
-</ol>
-<p>اکنون کد شما آماده بررسی توسط همتایان تیم است و فرآیند <strong>Peer Code Review</strong> آغاز می‌شود.</p>
-<h3>پاسخ به Pull Request در GitHub 🔄</h3>
-<p>هنگامی که شما به عنوان <strong>بررسی‌کننده</strong> (Reviewer) یک Pull Request را بررسی می‌کنید، مراحل زیر را دنبال کنید:</p>
-<ol>
-<li>
-<p><strong>کپی کردن کد برای بررسی</strong><br>
-ابتدا یک نسخه از کد تحت بررسی را <strong>Clone</strong> کنید تا بتوانید محلی تغییرات را بررسی کنید.</p>
-</li>
-<li>
-<p><strong>بررسی کامنت‌ها و تغییرات</strong><br>
-کامنت‌ها و تغییراتی که نویسنده Pull Request ایجاد کرده است را مرور کنید.</p>
-</li>
-<li>
-<p><strong>بررسی تداخل‌ها و وضعیت کد</strong></p>
-<ul>
-<li>مطمئن شوید که با شاخه پایه (Base branch) <strong>تداخلی</strong> وجود ندارد. اگر تداخل بود، Pull Request را رد کرده و توضیحات لازم را بدهید.</li>
-<li>کد را بررسی کنید تا بدون خطا <strong>Build</strong> شود و هیچ هشدار کامپایل نداشته باشد.</li>
-<li>مراقب <strong>Code Smells</strong> و باگ‌های احتمالی باشید.</li>
-<li>بررسی کنید که تمام تست‌ها اجرا می‌شوند، صحیح هستند و پوشش مناسبی برای ویژگی مورد نظر ارائه می‌دهند.</li>
-<li>اگر مشکلی بود، Pull Request را رد کنید و کامنت مناسب اضافه کنید.</li>
-</ul>
-</li>
-</ol>
-<div align="center">
-<p><img src="../../../assets/image/02/Table%202-5.png" alt="Conventions-UsedThis-Book"></p>
-</div>
-<ol start="4">
-<li>
-<p><strong>ادغام Pull Request</strong><br>
-وقتی از کیفیت کد رضایت داشتید:</p>
-<ul>
-<li>کامنت‌های لازم را اضافه کنید.</li>
-<li>روی دکمه <strong>Merge pull request</strong> کلیک کنید.</li>
-<li>سپس برای تأیید، روی <strong>Confirm merge</strong> کلیک کنید.</li>
-</ul>
-</li>
-</ol>
-<div align="center">
-<p><img src="../../../assets/image/02/Table%202-6.png" alt="Conventions-UsedThis-Book"></p>
-</div>
-<ol start="5">
-<li><strong>حذف شاخه پس از ادغام</strong><br>
-پس از ادغام و بسته شدن Pull Request، شاخه مربوطه را می‌توان با کلیک روی <strong>Delete branch</strong> حذف کرد.</li>
-</ol>
-<div align="center">
-<p><img src="../../../assets/image/02/Table%202-7.png" alt="Conventions-UsedThis-Book"></p>
-</div>
-<p>با انجام این مراحل، شما فرآیند <strong>بررسی و پاسخ به Pull Request</strong> را تکمیل کرده و مطمئن می‌شوید که کد با کیفیت مناسب وارد شاخه اصلی پروژه می‌شود.</p>
-<h3>تأثیر بازخورد بر دریافت‌کنندگان بازبینی 📝</h3>
-<p>هنگام انجام <strong>کد ریویو (Code Review)</strong> روی کد همکار خود، باید این نکته را نیز در نظر بگیرید که بازخورد می‌تواند <strong>مثبت</strong> یا <strong>منفی</strong> باشد.</p>
-<p>بازخورد منفی معمولاً جزئیات مشخصی از مشکل ارائه نمی‌دهد. در این حالت، <strong>مرورگر (Reviewer)</strong> روی شخص دریافت‌کننده بازخورد (<strong>Reviewee</strong>) تمرکز می‌کند نه روی مشکل. پیشنهادهایی برای بهبود کد به دریافت‌کننده ارائه نمی‌شود و هدف بازخورد مرورگر، آسیب رساندن به دریافت‌کننده است. ⚠️</p>
-<p>بازخورد منفی که توسط دریافت‌کننده دریافت می‌شود، باعث <strong>رنجش و ناراحتی</strong> او می‌شود. این امر تأثیر منفی دارد و ممکن است باعث شود فرد شروع به <strong>شک و تردید در توانایی‌های خود</strong> کند. در نتیجه، <strong>انگیزه در دریافت‌کننده کاهش می‌یابد</strong> و این می‌تواند تیم را نیز تحت تأثیر منفی قرار دهد، زیرا کارها به موقع انجام نمی‌شوند یا کیفیت لازم را ندارند.</p>
-<p>احساسات منفی بین مرورگر و دریافت‌کننده، توسط تیم نیز حس می‌شود و ممکن است <strong>جو خفقان‌آور و منفی</strong> بر کل تیم حاکم شود. این وضعیت می‌تواند باعث شود سایر همکاران نیز <strong>بی‌انگیزه</strong> شوند و در نهایت پروژه <strong>زمانی و مالی آسیب ببیند</strong>. ⏳💸</p>
-<p>در نهایت، ممکن است دریافت‌کننده به جایی برسد که <strong>از وضعیت خسته شود و برای فرار از آن، محل کار جدیدی پیدا کند</strong>. در این صورت، پروژه دچار <strong>کاهش بهره‌وری و هزینه‌های اضافی</strong> خواهد شد، زیرا زمان و پول باید برای پیدا کردن جایگزین صرف شود.</p>
-<p>هر فردی که برای جایگزینی انتخاب شود، باید <strong>با سیستم، رویه‌ها و دستورالعمل‌های کاری آموزش داده شود</strong>.</p>
-<p>📉 نمودار زیر نشان‌دهنده <strong>بازخورد منفی مرورگر نسبت به دریافت‌کننده</strong> است:</p>
-<div align="center">
-<p><img src="../../../assets/image/02/Table%202-8.png" alt="Conventions-UsedThis-Book"></p>
-</div>
-<h3>برعکس، بازخورد مثبت مرورگر به دریافت‌کننده بازخورد تأثیر معکوس دارد 🌟</h3>
-<p>وقتی مرورگر <strong>بازخورد مثبت</strong> ارائه می‌دهد، تمرکز او روی <strong>مشکل</strong> است و نه روی <strong>شخص</strong>. در این حالت، مرورگر توضیح می‌دهد که چرا کدی که ارسال شده خوب نیست و مشکلات احتمالی آن چه هستند. سپس، <strong>راهکارهایی برای بهبود کد</strong> به دریافت‌کننده پیشنهاد می‌دهد. هدف بازخورد مرورگر، <strong>فقط بهبود کیفیت کد ارسال شده توسط دریافت‌کننده</strong> است. ✅</p>
-<p>هنگامی که دریافت‌کننده بازخورد مثبت (سازنده) را دریافت می‌کند، <strong>به شکل مثبت پاسخ می‌دهد</strong>. او نظرات مرورگر را بررسی کرده و به شکل مناسب واکنش نشان می‌دهد: پاسخ به سوالات، پرسیدن سوالات مرتبط، و سپس <strong>به‌روزرسانی کد بر اساس بازخورد مرورگر</strong>. کد اصلاح‌شده دوباره برای بررسی و پذیرش ارسال می‌شود.</p>
-<p>این فرآیند تأثیر <strong>مثبت بر تیم</strong> دارد، زیرا جو کلی تیم مثبت باقی می‌ماند و کارها به موقع و با کیفیت مورد انتظار انجام می‌شوند.</p>
-<p>📈 نمودار زیر نشان‌دهنده <strong>نتایج بازخورد مثبت مرورگر بر دریافت‌کننده</strong> است:</p>
-<div align="center">
-<p><img src="../../../assets/image/02/Table%202-9.png" alt="Conventions-UsedThis-Book"></p>
-</div>
-<h3>نکته‌ای که باید به خاطر بسپارید: بازخورد شما می‌تواند <strong>سازنده یا مخرب</strong> باشد ⚖️</h3>
-<p>هدف شما به‌عنوان مرورگر، <strong>سازنده بودن بازخورد</strong> است و نه مخرب. یک تیم خوشحال، تیمی <strong>پربازده</strong> است؛ در حالی که یک تیم <strong>بی‌انگیزه</strong>، بهره‌وری ندارد و می‌تواند پروژه را به خطر بیندازد. بنابراین، همیشه سعی کنید با بازخورد مثبت <strong>تیم را خوشحال و انگیزه‌مند نگه دارید</strong>. 🌟</p>
-<p>یک تکنیک برای ارائه <strong>انتقاد سازنده</strong>، روش <strong>ساندویچ بازخورد</strong> است. در این روش ابتدا <strong>نقاط مثبت را تحسین</strong> می‌کنید، سپس <strong>انتقاد سازنده</strong> ارائه می‌دهید و در پایان <strong>باز هم نقاط مثبت را برجسته می‌کنید</strong>. این روش مخصوصاً زمانی مفید است که اعضای تیم <strong>به هر نوع انتقاد واکنش منفی دارند</strong>. مهارت‌های نرم شما در تعامل با افراد به اندازه مهارت‌های نرم‌افزاری شما در ارائه کد باکیفیت اهمیت دارند. یادتان نرود! 💡</p>
-<p>حال به بخش بعدی می‌رویم: <strong>چه چیزی را باید مرور کنیم؟</strong> 🔍</p>
-<hr>
-<h3>دانستن اینکه چه چیزی را باید مرور کنیم 📝</h3>
-<p>هنگام مرور کد، جنبه‌های مختلفی باید مورد توجه قرار گیرد. مهم‌ترین نکته این است که <strong>تنها کدی که توسط برنامه‌نویس تغییر داده شده و برای بازبینی ارسال شده</strong>، مورد بررسی قرار گیرد. به همین دلیل، توصیه می‌شود که <strong>ارسال‌های کوچک و مکرر داشته باشید</strong>. مقادیر کم کد، بسیار راحت‌تر برای بررسی و ارائه نظر هستند.</p>
-<p>بیایید جنبه‌های مختلفی که یک مرورگر کد باید برای یک بررسی کامل و دقیق ارزیابی کند را مرور کنیم:</p>
-<hr>
-<h4>دستورالعمل‌های کدنویسی شرکت و نیازمندی‌های کسب‌وکار 🏢</h4>
-<p>تمام کدی که مرور می‌شود باید <strong>با دستورالعمل‌های کدنویسی شرکت و نیازمندی‌های کسب‌وکار</strong> تطبیق داده شود. هر کد جدید باید با آخرین <strong>استانداردهای کدنویسی و بهترین شیوه‌های شرکت</strong> مطابقت داشته باشد.</p>
-<p>انواع مختلفی از نیازمندی‌های کسب‌وکار وجود دارد، از جمله نیازهای <strong>کسب‌وکار و کاربر/ذینفع</strong> و نیازمندی‌های <strong>عملکردی و پیاده‌سازی</strong>. فرقی نمی‌کند که کد کدام نیازمندی را پوشش می‌دهد، <strong>باید به طور کامل بررسی شود تا از صحت آن اطمینان حاصل شود</strong>.</p>
-<p>به‌عنوان مثال، اگر نیازمندی کاربر/ذینفع بیان می‌کند که «به‌عنوان کاربر، می‌خواهم یک حساب مشتری جدید اضافه کنم»، آیا <strong>کد تحت بررسی تمام شرایط این نیازمندی را برآورده می‌کند</strong>؟ اگر دستورالعمل‌های شرکت بیان می‌کند که تمام کدها باید <strong>تست واحد</strong> داشته باشند که جریان عادی و موارد استثنایی را آزمایش کند، آیا همه تست‌های لازم پیاده‌سازی شده‌اند؟ اگر پاسخ به هر یک از این سوالات <strong>نه</strong> باشد، کد باید <strong>با نظر مرورگر اصلاح شود، بازخورد داده شود و دوباره ارسال گردد</strong>.</p>
-<hr>
-<h4>قواعد نامگذاری ✍️</h4>
-<p>باید بررسی شود که <strong>قواعد نامگذاری برای سازه‌های مختلف کد</strong> مانند کلاس‌ها، اینترفیس‌ها، متغیرهای عضو، متغیرهای محلی، شمارنده‌ها و متدها رعایت شده باشد. هیچ کس نام‌های <strong>رمزگونه و سخت‌فهم</strong> را دوست ندارد، مخصوصاً وقتی <strong>پایگاه کد بزرگ</strong> باشد.</p>
-<p>چند سوال که مرورگر باید از خود بپرسد:<br>
-1️⃣ آیا نام‌ها <strong>به اندازه کافی طولانی</strong> هستند تا <strong>قابل خواندن و فهمیدن توسط انسان</strong> باشند؟<br>
-2️⃣ آیا نام‌ها <strong>معنادار و مرتبط با هدف کد</strong> هستند، اما به اندازه کافی کوتاه هستند که <strong>بر برنامه‌نویسان دیگر آزاردهنده نباشند</strong>؟</p>
-<p>به‌عنوان مرورگر، باید قادر باشید <strong>کد را بخوانید و درک کنید</strong>. اگر کد <strong>سخت خوانده و درک شود</strong>، باید <strong>قبل از ادغام، بازسازی و بازنویسی شود</strong>.</p>
-<h3>قالب‌بندی کد 🖋️</h3>
-<p>قالب‌بندی کد نقش بسیار مهمی در <strong>خوانا و قابل فهم کردن کد</strong> دارد. باید از <strong>namespaceها، آکولادها، و تورفتگی‌ها</strong> مطابق دستورالعمل‌ها استفاده شود و <strong>ابتدا و انتهای بلوک‌های کد</strong> به‌راحتی قابل تشخیص باشند.</p>
-<p>در اینجا مجموعه‌ای از سوالاتی که مرورگر باید هنگام بازبینی مطرح کند آورده شده است:</p>
-<p>1️⃣ آیا کد باید با استفاده از <strong>فاصله (Spaces)</strong> یا <strong>تب (Tabs)</strong> تورفتگی داشته باشد؟<br>
-2️⃣ آیا مقدار <strong>فضای خالی (White Space)</strong> به‌درستی استفاده شده است؟<br>
-3️⃣ آیا خطوطی از کد وجود دارند که <strong>خیلی طولانی هستند</strong> و باید به چند خط تقسیم شوند؟<br>
-4️⃣ وضعیت <strong>شکست خطوط (Line Breaks)</strong> چگونه است؟<br>
-5️⃣ مطابق با دستورالعمل سبک، آیا <strong>هر خط شامل تنها یک عبارت</strong> است؟ آیا <strong>هر خط تنها یک اعلان (Declaration)</strong> دارد؟<br>
-6️⃣ آیا خطوط ادامه به‌درستی با <strong>یک Tab Stop</strong> تورفتگی داده شده‌اند؟<br>
-7️⃣ آیا <strong>متدها با یک خط جدا شده‌اند</strong>؟<br>
-8️⃣ آیا چندین عبارت که یک <strong>Expression</strong> را تشکیل می‌دهند، با <strong>پرانتز</strong> از هم جدا شده‌اند؟<br>
-9️⃣ آیا کلاس‌ها و متدها <strong>پاک، کوچک، و فقط کار خود را انجام می‌دهند</strong>؟</p>
-<hr>
-<h3>تست‌کردن کد ✅</h3>
-<p>تست‌ها باید <strong>قابل فهم باشند</strong> و <strong>بخش مناسبی از حالات استفاده (Use Cases)</strong> را پوشش دهند. آن‌ها باید مسیرهای <strong>عادی اجرای کد</strong> و <strong>موارد استثنایی</strong> را شامل شوند. هنگام بررسی تست‌ها، مرورگر باید موارد زیر را بررسی کند:</p>
-<p>1️⃣ آیا برنامه‌نویس <strong>تست برای تمام بخش‌های کد</strong> ارائه کرده است؟<br>
-2️⃣ آیا بخشی از کد وجود دارد که <strong>تست نشده باشد</strong>؟<br>
-3️⃣ آیا <strong>تمام تست‌ها کار می‌کنند</strong>؟<br>
-4️⃣ آیا <strong>هیچ یک از تست‌ها شکست می‌خورند</strong>؟<br>
-5️⃣ آیا <strong>مستندسازی کافی</strong> برای کد وجود دارد، از جمله <strong>کامنت‌ها، Documentation Comments، تست‌ها، و مستندات محصول</strong>؟<br>
-6️⃣ آیا چیزی در کد دیده می‌شود که <strong>با وجود اینکه کامپایل می‌شود و در حالت جداگانه کار می‌کند، می‌تواند هنگام ادغام باعث بروز خطا شود</strong>؟<br>
-7️⃣ آیا کد به‌خوبی مستندسازی شده تا <strong>نگهداری و پشتیبانی</strong> را آسان کند؟</p>
-<p>بیایید ببینیم فرآیند چگونه پیش می‌رود: 🔄</p>
-<div align="center">
-<p><img src="../../../assets/image/02/Table%202-10.png" alt="Conventions-UsedThis-Book"></p>
-</div>
-<h3>کدهای تست‌نشده و مستندسازی 🧪📄</h3>
-<p>کدهایی که <strong>تست نشده‌اند</strong> ممکن است در حین تست یا حتی در محیط تولید، باعث <strong>بروز استثناهای غیرمنتظره</strong> شوند. اما به همان اندازه، <strong>تست‌های نادرست</strong> نیز می‌توانند خطرناک باشند. این موضوع می‌تواند باعث <strong>بروز باگ‌هایی شود که تشخیص آن‌ها دشوار است</strong>، مشتری را ناراحت کند و در آینده برای شما کار اضافی ایجاد کند.</p>
-<p>باگ‌ها نوعی <strong>بدهی فنی (Technical Debt)</strong> محسوب می‌شوند و از دید کسب‌وکار، امری منفی تلقی می‌شوند. علاوه بر این، ممکن است شما کد را نوشته باشید، اما دیگران مجبور شوند آن را بخوانند و برای <strong>نگهداری و گسترش پروژه</strong> از آن استفاده کنند. بنابراین همیشه ایده خوبی است که <strong>مستنداتی برای همکارانتان</strong> ارائه دهید.</p>
-<p>در مورد مشتری هم، چگونه می‌توانند بفهمند <strong>ویژگی‌های شما کجا هستند و چگونه از آن‌ها استفاده کنند؟</strong> مستندات خوب و <strong>کاربرپسند</strong> ایده بسیار مناسبی است. به یاد داشته باشید که همه کاربران ممکن است از نظر فنی حرفه‌ای نباشند؛ بنابراین باید به <strong>کاربران کم‌تجربه</strong> نیز توجه کنید، بدون اینکه رفتار <strong>مستبدانه یا تحقیرآمیز</strong> داشته باشید.</p>
-<p>اگر شما به‌عنوان <strong>مرجع فنی (Technical Authority)</strong> کد را بررسی می‌کنید، آیا <strong>Code Smell</strong> یا مشکلات بالقوه‌ای را شناسایی می‌کنید؟ در این صورت باید آن‌ها را <strong>علامت‌گذاری، کامنت‌گذاری و درخواست بازنگری (Pull Request) را رد کنید</strong> و از برنامه‌نویس بخواهید کد خود را دوباره ارسال کند.</p>
-<hr>
-<h3>بررسی استثناها و مدیریت خطا ⚠️</h3>
-<p>به‌عنوان مرورگر، باید اطمینان حاصل کنید که <strong>استثناها برای کنترل جریان برنامه استفاده نمی‌شوند</strong> و پیام‌های خطا <strong>معنادار و مفید برای توسعه‌دهندگان و مشتریان</strong> هستند.</p>
-<hr>
-<h3>دستورالعمل‌های معماری و الگوهای طراحی 🏗️</h3>
-<p>کد جدید باید بررسی شود تا <strong>با دستورالعمل‌های معماری پروژه مطابقت داشته باشد</strong>. کد باید از <strong>الگوهای برنامه‌نویسی مورد استفاده شرکت</strong> پیروی کند، مانند: <strong>SOLID, DRY, YAGNI, OOP</strong>. همچنین در صورت امکان، باید <strong>الگوهای طراحی (Design Patterns)</strong> مناسب را استفاده کند.</p>
-<p>در اینجا <strong>الگوهای Gang-of-Four (GoF)</strong> مطرح می‌شوند. GoF شامل چهار نویسنده کتاب <strong>Design Patterns: Elements of Reusable Object-Oriented Software</strong> است: <strong>Erich Gamma, Richard Helm, Ralph Johnson, و John Vlissides</strong>.</p>
-<p>امروزه این الگوهای طراحی در <strong>اکثر زبان‌های برنامه‌نویسی شیءگرا</strong> به‌طور گسترده استفاده می‌شوند. منبع بسیار خوب برای مطالعه: <a href="https://www.dofactory.com/net/design-patterns">DoFactory .NET Design Patterns</a> که هر الگوی GoF را با <strong>تعریف، نمودار کلاس UML، شرکت‌کنندگان، کد ساختاری و مثال واقعی</strong> توضیح داده است.</p>
-<p><strong>انواع الگوهای GoF:</strong></p>
-<ul>
-<li><strong>Creational:</strong> Abstract Factory, Builder, Factory Method, Prototype, Singleton</li>
-<li><strong>Structural:</strong> Adapter, Bridge, Composite, Decorator, Façade, Flyweight, Proxy</li>
-<li><strong>Behavioral:</strong> Chain of Responsibility, Command, Interpreter, Iterator, Mediator, Memento, Observer, State, Strategy, Template Method, Visitor</li>
-</ul>
-<p>کد باید <strong>به‌درستی سازمان‌دهی شده</strong> و در <strong>Namespace و Module مناسب</strong> قرار گیرد. همچنین بررسی شود که کد <strong>خیلی ساده یا بیش از حد پیچیده (Over-Engineered)</strong> نباشد.</p>
-<hr>
-<h3>عملکرد و امنیت ⚡🔒</h3>
-<p>موارد دیگری که باید در نظر گرفته شوند شامل <strong>عملکرد و امنیت</strong> است:</p>
-<p>1️⃣ عملکرد کد چقدر خوب است؟<br>
-2️⃣ آیا <strong>گلوگاه‌ها (Bottlenecks)</strong> وجود دارد که باید رفع شوند؟<br>
-3️⃣ آیا کد به‌گونه‌ای نوشته شده که از <strong>حملات SQL Injection و Denial-of-Service</strong> محافظت کند؟<br>
-4️⃣ آیا داده‌ها <strong>اعتبارسنجی شده</strong> و فقط داده‌های معتبر در پایگاه ذخیره می‌شوند؟<br>
-5️⃣ آیا <strong>رابط کاربری، مستندات و پیام‌های خطا</strong> از نظر املایی بررسی شده‌اند؟<br>
-6️⃣ آیا <strong>اعداد جادویی (Magic Numbers) یا مقادیر Hard-Coded</strong> وجود دارد؟<br>
-7️⃣ آیا داده‌های <strong>پیکربندی درست هستند</strong>؟<br>
-8️⃣ آیا <strong>اطلاعات محرمانه (Secrets)</strong> به‌طور تصادفی چک شده‌اند؟</p>
-<p>یک بررسی کامل کد باید <strong>تمام جنبه‌های ذکر شده و پارامترهای مرتبط با آن‌ها</strong> را شامل شود. اما قبل از آن، باید بدانیم <strong>چه زمانی مناسب است که یک بررسی کد انجام شود</strong>.</p>
-<h3>زمان مناسب برای ارسال کد جهت بازبینی ⏱️💻</h3>
-<p>بازبینی کد باید زمانی انجام شود که <strong>توسعه کد کامل شده باشد</strong> و قبل از آنکه برنامه‌نویس کد را به بخش <strong>QA</strong> تحویل دهد. قبل از اینکه هر کدی در <strong>Version Control</strong> چک شود، باید اطمینان حاصل شود که <strong>کد بدون خطا، هشدار یا پیام اطلاعاتی اجرا می‌شود</strong>. برای این کار می‌توانید اقدامات زیر را انجام دهید:</p>
-<p>1️⃣ اجرای <strong>تحلیل استاتیک کد (Static Code Analysis)</strong> برای شناسایی مشکلات احتمالی. اگر خطا، هشدار یا پیام اطلاعاتی دریافت کردید، <strong>هر مورد را بررسی و اصلاح کنید</strong>. از آن‌ها چشم‌پوشی نکنید، زیرا ممکن است در آینده مشکلاتی ایجاد کنند. می‌توانید به <strong>صفحه Code Analysis در Properties پروژه Visual Studio 2019</strong> دسترسی داشته باشید: روی پروژه راست‌کلیک کنید و مسیر <strong>Properties | Code Analysis</strong> را انتخاب کنید.</p>
-<p>2️⃣ اطمینان از اینکه <strong>تمام تست‌ها با موفقیت اجرا می‌شوند</strong> و <strong>کد جدید شما به طور کامل توسط تست‌های مسیرهای عادی و استثنایی پوشش داده شده است</strong> تا صحت کد نسبت به مشخصات پروژه بررسی شود.</p>
-<p>3️⃣ اگر در محل کار خود از <strong>فرآیند توسعه پیوسته (Continuous Development)</strong> استفاده می‌کنید که کد شما را در یک سیستم بزرگ‌تر ادغام می‌کند، باید اطمینان حاصل کنید که <strong>ادغام سیستم با موفقیت انجام شده و تمام تست‌ها بدون خطا اجرا می‌شوند</strong>. اگر خطایی مشاهده شد، باید قبل از ادامه کار آن را رفع کنید.</p>
-<p>وقتی کد شما <strong>کامل، مستندسازی شده و تست‌ها با موفقیت اجرا شدند</strong> و <strong>ادغام سیستم بدون مشکل انجام شد</strong>، بهترین زمان برای <strong>انجام بازبینی کد توسط همتایان (Peer Code Review)</strong> است.</p>
-<p>پس از تایید بازبینی کد همتا، کد شما می‌تواند به <strong>بخش QA</strong> منتقل شود.</p>
-<p>📊 نمودار زیر <strong>چرخه حیات توسعه نرم‌افزار (SDLC)</strong> را از مرحله توسعه کد تا پایان عمر کد نشان می‌دهد:</p>
-<div align="center">
-<p><img src="../../../assets/image/02/Table%202-11.png" alt="Conventions-UsedThis-Book"></p>
-</div>
-<h3>فرآیند توسعه و بازبینی کد 🛠️📋</h3>
-<p>برنامه‌نویس <strong>نرم‌افزار را طبق مشخصات توسعه می‌دهد</strong>. سپس <strong>کد منبع را در مخزن Version Control ثبت کرده و یک Pull Request صادر می‌کند</strong>. این درخواست بررسی می‌شود:</p>
-<ul>
-<li>اگر بازبینی <strong>رد شود</strong>، درخواست همراه با نظرات بازگردانده می‌شود.</li>
-<li>اگر بازبینی کد <strong>تایید شود</strong>، کد به تیم <strong>QA</strong> منتقل می‌شود تا <strong>تست‌های داخلی خودشان</strong> را انجام دهند. هر باگی که پیدا شود برای <strong>توسعه‌دهندگان</strong> گزارش می‌شود تا اصلاح کنند.</li>
-</ul>
-<p>اگر تست داخلی <strong>QA</strong> موفقیت‌آمیز باشد، کد وارد <strong>User Acceptance Testing (UAT)</strong> می‌شود:</p>
-<ul>
-<li>اگر <strong>UAT شکست بخورد</strong>، باگ‌ها به تیم <strong>DevOps</strong> گزارش می‌شوند که می‌تواند شامل توسعه‌دهندگان یا تیم زیرساخت باشد.</li>
-<li>اگر <strong>UAT موفقیت‌آمیز باشد</strong>، کد به <strong>Staging</strong> منتقل می‌شود. تیم <strong>Staging</strong> مسئول <strong>استقرار محصول در محیط تولید (Production)</strong> است.</li>
-</ul>
-<p>هنگامی که نرم‌افزار در دست مشتری قرار می‌گیرد، اگر باگی مشاهده شود، <strong>گزارش باگ توسط مشتری</strong> ثبت می‌شود. توسعه‌دهندگان سپس <strong>رفع باگ‌های مشتری</strong> را انجام می‌دهند و فرآیند از نو آغاز می‌شود. زمانی که محصول <strong>به پایان عمر خود برسد</strong>، از سرویس خارج می‌شود.</p>
-<hr>
-<h3>ارائه و پاسخ به بازخورد بازبینی 🔄💬</h3>
-<p>باید به خاطر داشت که <strong>بازبینی کد با هدف بهبود کیفیت کلی کد و مطابق با دستورالعمل‌های شرکت انجام می‌شود</strong>. بنابراین، <strong>بازخورد باید سازنده باشد</strong> و نباید بهانه‌ای برای <strong>تحقیر یا شرمنده کردن همکار</strong> باشد. به همین ترتیب، <strong>بازخورد بازبین نباید شخصی گرفته شود</strong> و پاسخ‌ها باید <strong>متمرکز بر اقدامات مناسب و توضیحات فنی</strong> باشد.</p>
-<p>📊 نمودار زیر <strong>فرآیند صدور Pull Request (PR)، انجام بازبینی کد، و پذیرش یا رد PR</strong> را نشان می‌دهد:</p>
-<div align="center">
-<p><img src="../../../assets/image/02/Table%202-12.png" alt="Conventions-UsedThis-Book"></p>
-</div>
-<h3>ارائه بازخورد به‌عنوان بازبین 👩‍💻📝</h3>
-<p>قلدری و آزار در محیط‌های کاری می‌تواند مشکل‌ساز باشد و محیط‌های برنامه‌نویسی نیز از آن مستثنی نیستند. هیچ‌کس برنامه‌نویس مغروری را دوست ندارد که فکر می‌کند همه‌چیز را می‌داند. بنابراین، <strong>بازبین باید مهارت‌های نرم (Soft Skills) خوبی داشته باشد و دیپلماتیک باشد</strong>. به خاطر داشته باشید که برخی افراد به‌راحتی آزرده می‌شوند و ممکن است نظرات را اشتباه برداشت کنند. بنابراین، بدانید که با چه کسی سر و کار دارید و احتمال واکنش او چگونه است؛ این به شما کمک می‌کند تا <strong>روش و کلمات خود را با دقت انتخاب کنید</strong>.</p>
-<p>به‌عنوان <strong>بازبین کد همتایان (Peer Code Reviewer)</strong>، مسئول هستید که <strong>نیازمندی‌ها را درک کرده و اطمینان حاصل کنید که کد مطابق با آن نیازمندی‌هاست</strong>. بنابراین، به دنبال پاسخ به این سوالات باشید:</p>
-<ul>
-<li>آیا قادر به خواندن و درک کد هستید؟</li>
-<li>آیا باگ‌های احتمالی قابل مشاهده است؟</li>
-<li>آیا هرگونه Trade-off انجام شده است؟</li>
-<li>اگر بله، دلیل انجام Trade-off چیست؟</li>
-<li>آیا این Trade-off ها <strong>Technical Debt</strong> ایجاد می‌کنند که در ادامه پروژه باید مدنظر قرار گیرد؟</li>
-</ul>
-<p>پس از اتمام بازبینی، سه نوع بازخورد برای انتخاب وجود دارد: <strong>مثبت، اختیاری و انتقادی</strong>:</p>
-<ul>
-<li><strong>بازخورد مثبت</strong> 🎉: شامل تقدیر از کارهای بسیار خوب برنامه‌نویس است و روحیه تیم را بالا می‌برد.</li>
-<li><strong>بازخورد اختیاری</strong> 💡: به برنامه‌نویس کمک می‌کند تا مهارت‌های خود را مطابق با دستورالعمل‌های شرکت تقویت کند و کیفیت کلی نرم‌افزار را بهبود دهد.</li>
-<li><strong>بازخورد انتقادی</strong> ⚠️: برای مشکلات شناسایی‌شده است که باید قبل از پذیرش کد و ارسال به تیم QA رفع شوند. در این نوع بازخورد، باید کلمات خود را با دقت انتخاب کنید و نظرات انتقادی را همراه با دلایل معتبر ارائه دهید.</li>
-</ul>
-<hr>
-<h3>پاسخ به بازخورد به‌عنوان بازبین شده 👨‍💻🔄</h3>
-<p>به‌عنوان برنامه‌نویس <strong>Reviewee</strong>، باید <strong>زمینه کد خود را به‌صورت مؤثر به بازبین توضیح دهید</strong>. با ایجاد <strong>Commit‌های کوچک</strong> می‌توانید به بازبین کمک کنید، زیرا حجم کوچک کد راحت‌تر بررسی و تحلیل می‌شود. هرچه کد بیشتر باشد، احتمال اینکه مشکلات دیده نشوند افزایش می‌یابد. در زمان انتظار برای بازبینی کد، <strong>نباید تغییرات بیشتری روی کد انجام دهید</strong>.</p>
-<p>بازخورد دریافتی می‌تواند <strong>مثبت، اختیاری یا انتقادی</strong> باشد:</p>
-<ul>
-<li><strong>بازخورد مثبت</strong> 💪: اعتماد به نفس و روحیه شما را افزایش می‌دهد، آن را تقویت کنید و به کارهای خوب خود ادامه دهید.</li>
-<li><strong>بازخورد اختیاری</strong> 🛠️: می‌توانید به آن عمل کنید یا نکنید، اما گفتگو با بازبین همیشه مفید است.</li>
-<li><strong>بازخورد انتقادی</strong> ⚠️: باید جدی گرفته شود و فوراً روی آن اقدام شود، زیرا برای موفقیت پروژه حیاتی است. بازخورد انتقادی را <strong>با ادب و حرفه‌ایگری</strong> مدیریت کنید و <strong>هیچ‌گاه شخصی نگیرید</strong>، به ویژه برای برنامه‌نویسان تازه‌کار یا کسانی که اعتماد به نفس کمتری دارند.</li>
-</ul>
-<p>به محض دریافت بازخورد بازبین، <strong>اقدام کنید و در صورت نیاز با او بحث و تبادل نظر داشته باشید</strong>.</p>
-<hr>
-<h3>خلاصه 📚</h3>
-<p>در این فصل به <strong>اهمیت انجام بازبینی کد، آماده‌سازی کد برای بازبینی، پاسخ به نظرات بازبین، رهبری بازبینی کد و مواردی که باید هنگام بازبینی بررسی کرد</strong> پرداختیم. مشخص شد که در <strong>بازبینی کد همتا دو نقش وجود دارد</strong>:</p>
-<ol>
-<li><strong>بازبین (Reviewer)</strong>: کسی که بازبینی کد را انجام می‌دهد.</li>
-<li><strong>برنامه‌نویس مورد بازبینی (Reviewee)</strong>: کسی که کد او بررسی می‌شود.</li>
-</ol>
-<p>همچنین دیدید که:</p>
-<ul>
-<li>چگونه بازبین می‌تواند <strong>بازخورد خود را دسته‌بندی کند</strong> و اهمیت مهارت‌های نرم در ارائه بازخورد.</li>
-<li>به‌عنوان Reviewee، اهمیت استفاده از <strong>بازخورد مثبت و اختیاری</strong> و <strong>اقدام به بازخورد انتقادی</strong> را مشاهده کردید.</li>
-</ul>
-<p>بازبینی کد همتایان ممکن است زمان‌بر و ناراحت‌کننده باشد، اما در بلندمدت به <strong>محصولی با کیفیت بالا، قابل نگهداری و گسترش آسان</strong> منجر می‌شود و <strong>استفاده مجدد از کد</strong> را افزایش می‌دهد.</p>
-<p>در فصل بعدی، با <strong>نوشتن کلاس‌ها، اشیاء و ساختار داده‌های تمیز</strong> آشنا می‌شوید. خواهید دید چگونه می‌توان کلاس‌ها را سازماندهی کرد، مسئولیت‌ها را تک‌وظیفه‌ای نگه داشت، و کامنت‌گذاری برای <strong>تولید مستندات</strong> را انجام داد. سپس به <strong>Cohesion و Coupling، طراحی برای تغییر و قانون دمتر (Law of Demeter)</strong> پرداخته می‌شود، و در نهایت با <strong>اشیاء و ساختار داده‌های Immutable، پنهان‌سازی داده و ارائه متدها در اشیاء</strong> آشنا خواهید شد.</p>
-<hr>
-<h3>پرسش‌ها ❓</h3>
-<ol>
-<li>دو نقش در بازبینی کد همتا چیست؟</li>
-<li>چه کسی افراد شرکت‌کننده در بازبینی کد همتا را مشخص می‌کند؟</li>
-<li>چگونه می‌توان قبل از درخواست بازبینی کد، زمان و انرژی بازبین را صرفه‌جویی کرد؟</li>
-<li>هنگام بازبینی کد باید به چه مواردی توجه کنید؟</li>
-<li>سه دسته بازخورد کدام‌اند؟</li>
-</ol>
-<hr>
-<h3>منابع بیشتر 📖</h3>
-<ul>
-<li><a href="https://docs.microsoft.com/en-us/visualstudio/code-quality/?view=vs2019">Microsoft Visual Studio Code Quality</a></li>
-<li><a href="https://en.wikipedia.org/wiki/Code_review">Wikipedia – Code Review</a></li>
-<li><a href="https://springframework.guru/gang-of-four-design-patterns/">Gang-of-Four Design Patterns</a></li>
-<li><a href="https://www.packtpub.com/application-development/net-design-patterns">.NET Design Patterns – Packt</a></li>
-<li><a href="https://help.github.com/en">GitHub Help</a></li>
-</ul>
-
-  </main>
-
-  <!-- فوتر مشترک -->
-  <footer class="footer">
-    <div class="container">
-      <p>
-        <img src="/Gitab/icone/copyright.svg" alt="کپی‌رایت" width="14" height="14"
-             style="vertical-align:middle;margin-inline:4px">
-        <span id="y"></span> Gitab — تمامی حقوق محفوظ است.
-      </p>
-    </div>
-  </footer>
-
-  <!-- سال و اسکریپت تغییر تم -->
-  <script>
+<!doctype html><html lang="fa" dir="rtl"> <head><script>
+    if (window.location.pathname.startsWith('/gitab/')) {
+      window.location.replace(window.location.pathname.replace(/^\/gitab\//i, '/Gitab/') + window.location.search + window.location.hash);
+    }
+    (() => {
+      try {
+        const t = localStorage.getItem('gitab-theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', t);
+        document.documentElement.dataset.colorMode = t;
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        document.documentElement.dataset.colorMode = 'dark';
+      }
+    })();
+  </script> <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5"> <title>بازبینی کد – فرآیند و اهمیت</title><meta name="description" content="بازبینی کد – فرآیند و اهمیت — مطالعه آنلاین و رایگان از کتاب «کدنویسی تمیز در سی‌شارپ» (Clean Code in C#) اثر Jason Alls با ترجمه حامد حیدریان در گیتاب."> <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"><meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"> <meta name="theme-color" content="#090d16"><meta name="referrer" content="strict-origin-when-cross-origin"> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https:; frame-src https://www.youtube.com https://www.youtube-nocookie.com https://maps.google.com https://www.google.com; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self';"><link rel="icon" type="image/png" href="/Gitab/favicon.png"> <link rel="canonical" href="https://hheydarian.github.io/Gitab/books/book2/Book/02/Code-Review-Process-and-Importance/"><link rel="alternate" hreflang="fa" href="https://hheydarian.github.io/Gitab/books/book2/Book/02/Code-Review-Process-and-Importance/"> <link rel="alternate" hreflang="x-default" href="https://hheydarian.github.io/Gitab/books/book2/Book/02/Code-Review-Process-and-Importance/"><link rel="alternate" type="text/plain" title="LLMs.txt" href="/Gitab/llms.txt"> <link rel="sitemap" type="application/xml" title="Sitemap" href="/Gitab/sitemap.xml"><meta property="og:locale" content="fa_IR"> <meta property="og:type" content="article"><meta property="og:site_name" content="گیتاب | Gitab"> <meta property="og:title" content="بازبینی کد – فرآیند و اهمیت"><meta property="og:description" content="بازبینی کد – فرآیند و اهمیت — مطالعه آنلاین و رایگان از کتاب «کدنویسی تمیز در سی‌شارپ» (Clean Code in C#) اثر Jason Alls با ترجمه حامد حیدریان در گیتاب."> <meta property="og:url" content="https://hheydarian.github.io/Gitab/books/book2/Book/02/Code-Review-Process-and-Importance/"><meta property="og:image" content="https://hheydarian.github.io/Gitab/images/clean-code-csharp/Cover.jpg"> <meta property="og:image:alt" content="بازبینی کد – فرآیند و اهمیت"><meta name="twitter:card" content="summary_large_image"> <meta name="twitter:title" content="بازبینی کد – فرآیند و اهمیت"><meta name="twitter:description" content="بازبینی کد – فرآیند و اهمیت — مطالعه آنلاین و رایگان از کتاب «کدنویسی تمیز در سی‌شارپ» (Clean Code in C#) اثر Jason Alls با ترجمه حامد حیدریان در گیتاب."> <meta name="twitter:image" content="https://hheydarian.github.io/Gitab/images/clean-code-csharp/Cover.jpg"><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://hheydarian.github.io/Gitab/#organization","name":"گیتاب | Gitab","alternateName":"Gitab","url":"https://hheydarian.github.io/Gitab/","logo":{"@type":"ImageObject","url":"https://hheydarian.github.io/Gitab/favicon.png"},"sameAs":["https://github.com/hheydarian/Gitab"]},{"@type":"WebSite","@id":"https://hheydarian.github.io/Gitab/#website","url":"https://hheydarian.github.io/Gitab/","name":"گیتاب | Gitab","inLanguage":"fa-IR","publisher":{"@id":"https://hheydarian.github.io/Gitab/#organization"},"potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://hheydarian.github.io/Gitab/books/list-books/?q={search_term_string}"},"query-input":"required name=search_term_string"}},{"@type":"WebPage","@id":"https://hheydarian.github.io/Gitab/books/book2/Book/02/Code-Review-Process-and-Importance/#webpage","url":"https://hheydarian.github.io/Gitab/books/book2/Book/02/Code-Review-Process-and-Importance/","name":"بازبینی کد – فرآیند و اهمیت","description":"بازبینی کد – فرآیند و اهمیت — مطالعه آنلاین و رایگان از کتاب «کدنویسی تمیز در سی‌شارپ» (Clean Code in C#) اثر Jason Alls با ترجمه حامد حیدریان در گیتاب.","inLanguage":"fa-IR","isPartOf":{"@id":"https://hheydarian.github.io/Gitab/#website"}},{"@type":"TechArticle","headline":"بازبینی کد – فرآیند و اهمیت","description":"بازبینی کد – فرآیند و اهمیت — مطالعه آنلاین و رایگان از کتاب «کدنویسی تمیز در سی‌شارپ» (Clean Code in C#) اثر Jason Alls با ترجمه حامد حیدریان در گیتاب.","url":"https://hheydarian.github.io/Gitab/books/book2/Book/02/Code-Review-Process-and-Importance/","inLanguage":"fa-IR","isAccessibleForFree":true,"author":{"@type":"Person","name":"Jason Alls"},"translator":{"@type":"Person","name":"حامد حیدریان"},"isPartOf":{"@type":"Book","name":"کدنویسی تمیز در سی‌شارپ","alternateName":"Clean Code in C#","url":"https://hheydarian.github.io/Gitab/books/book2/"}}]}</script> <link rel="preload" href="/Gitab/fonts/Vazirmatn.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/Gitab/styles/main.css?v=2.4" as="style"> <link rel="preload" href="/Gitab/styles/gitab-modern.css?v=2.5" as="style"><style>@font-face{font-family:'Lalezar';src:url('/Gitab/fonts/Lalezar.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}@font-face{font-family:'Vazirmatn';src:url('/Gitab/fonts/Vazirmatn.woff2') format('woff2');font-weight:100 900;font-style:normal;font-display:swap}html,body,button,input,optgroup,select,textarea,.filter-pill{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}input::placeholder,textarea::placeholder{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}</style> <link rel="stylesheet" href="/Gitab/styles/main.css?v=2.4"><link rel="stylesheet" href="/Gitab/styles/gitab-modern.css?v=2.5"> </head><body> <header class="header"><div class="container nav-wrap"> <a href="/Gitab/" class="brand" aria-label="صفحه اصلی گیتاب"> <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="30" height="30" decoding="async"> <span class="brand-text">Gitab</span> </a> <nav class="nav" id="mainNav"><a href="/Gitab/" >خانه</a> <a href="/Gitab/books/list-books" aria-current="page">کتاب‌ها</a> <a href="/Gitab/courses/" >دوره‌ها</a> <a href="/Gitab/translator.html" >مترجمین</a></nav> <div class="nav-actions"><button id="themeToggle" class="theme-toggle-btn" aria-label="تغییر تم" title="تغییر تم"> <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن" width="18" height="18" decoding="async" style="display:none"> <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک" width="18" height="18" decoding="async"> </button> <a class="btn-github-pill" href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" title="مشاهده سورس گیتاب در گیت‌هاب"> <img src="/Gitab/icone/github.svg" alt="GitHub" width="16" height="16" decoding="async"> <span>گیت‌هاب</span> </a> <button class="mobile-menu-btn" id="mobileMenuBtn" type="button" aria-label="باز کردن منو" aria-expanded="false"> <svg class="mob-icon-open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="4" y1="7" x2="20" y2="7"></line> <line x1="4" y1="12" x2="20" y2="12"></line> <line x1="4" y1="17" x2="14" y2="17"></line> </svg> <svg class="mob-icon-close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="18" y1="6" x2="6" y2="18"></line> <line x1="6" y1="6" x2="18" y2="18"></line> </svg> </button></div> </div><div class="mobile-drawer" id="mobileDrawer" aria-hidden="true"> <div class="mobile-drawer-inner"><div class="mobile-drawer-section-label">ناوبری سریع</div><nav class="mobile-drawer-links" aria-label="منوی موبایل"> <a href="/Gitab/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M3 10.5 12 3l9 7.5"></path> <path d="M5 9.5V20a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V9.5"></path> </svg> </span> <span class="mob-nav-text">صفحه نخست</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/books/list-books" class="mobile-drawer-link active" aria-current="page"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path> </svg> </span> <span class="mob-nav-text">کتابخانه و فهرست کتاب‌ها</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/courses/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path> <path d="M6 12v5c3 3 9 3 12 0v-5"></path> </svg> </span> <span class="mob-nav-text">دوره‌های آموزشی</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/translator.html" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path> <circle cx="9" cy="7" r="4"></circle> <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path> <path d="M16 3.13a4 4 0 0 1 0 7.75"></path> </svg> </span> <span class="mob-nav-text">مترجمین و همکاران</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> </nav><div class="mobile-drawer-divider"></div><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" class="mobile-drawer-link mobile-drawer-gh"> <span class="mob-nav-icon" aria-hidden="true"> <img src="/Gitab/icone/github.svg" alt="" width="17" height="17" loading="lazy" decoding="async"> </span> <span class="mob-nav-text">مخزن گیت‌هاب پروژه</span> <span class="mob-nav-ext" aria-hidden="true">↗</span> </a> </div></div> </header><div class="reading-progress-track"> <div class="reading-progress-fill" id="readingProgressBar"></div></div> <main class="site-main chapter-reading-page"><div class="chapter-page-wrapper"> <nav class="chapter-clean-breadcrumb" aria-label="مسیر راهنما" dir="rtl"><a href="/Gitab/">خانه</a> <span class="bc-sep" aria-hidden="true">/</span> <a href="/Gitab/books/list-books/">کتاب‌ها</a> <span class="bc-sep" aria-hidden="true">/</span> <a href="/Gitab/books/book2/"><bdi>کدنویسی تمیز در سی‌شارپ</bdi></a> <span class="bc-sep" aria-hidden="true">/</span> <span class="bc-current-leaf"><bdi>بازبینی کد – فرآیند و اهمیت</bdi></span></nav> <article class="chapter-prose-container markdown-body" id="chapterArticle" dir="rtl"><h1>فصل دوم: بازبینی کد – فرآیند و اهمیت</h1><p><strong>هدف اصلی بازبینی کد</strong>، بهبود کیفیت کلی کد است. کیفیت کد به ویژه در پروژه‌های تیمی یا پروژه‌هایی که توسط دیگران (مثل توسعه‌دهندگان متن‌باز یا مشتریان از طریق قراردادهای escrow) قابل دسترسی است، اهمیت زیادی دارد.</p><p>اگر هر توسعه‌دهنده آزاد باشد به سبک دلخواه خود کدنویسی کند، کد به صورت مجموعه‌ای از سبک‌های متفاوت و در نهایت یک <strong>کد نامنظم و پیچیده</strong> تبدیل می‌شود. به همین دلیل داشتن <strong>سیاست استانداردهای کدنویسی</strong> و <strong>فرآیند بازبینی کد</strong> ضروری است.</p><p>در بازبینی کد، همکاران کد یکدیگر را بررسی می‌کنند و به موارد زیر توجه دارند:</p><ul> <li>اشتباهات انسانی طبیعی هستند و باید بررسی شوند</li><li>کدهایی که با <strong>استانداردهای کدنویسی شرکت</strong> مغایرت دارند</li><li>کدهایی که از نظر <strong>خوانایی، نگهداری یا عملکرد</strong> قابل بهبود هستند</li></ul> <hr><h3>موضوعات این فصل</h3><ol> <li>آماده‌سازی کد برای بازبینی</li><li>رهبری یک بازبینی کد</li><li>دانستن اینکه چه چیزی باید بررسی شود</li><li>دانستن زمان مناسب برای ارسال کد به بازبینی</li><li>ارائه و پاسخ‌دهی به بازخوردهای بازبینی</li></ol> <blockquote><p>توجه:</p></blockquote> <ul><li>بخش‌های <strong>آماده‌سازی کد برای بازبینی</strong> و <strong>دانستن زمان مناسب برای ارسال کد</strong> از دیدگاه برنامه‌نویس بررسی می‌شوند.</li><li>بخش‌های <strong>رهبری بازبینی کد</strong> و <strong>دانستن چه چیزی را باید بازبینی کرد</strong> از دیدگاه بازبین کد توضیح داده می‌شوند.</li><li>بخش <strong>ارائه و پاسخ‌دهی به بازخورد</strong> هر دو دیدگاه برنامه‌نویس و بازبین را شامل می‌شود.</li></ul> <hr><h3>اهداف یادگیری</h3><ul> <li>درک بازبینی کد و فواید آن</li><li>شرکت در بازبینی کد</li><li>ارائه انتقاد سازنده</li><li>پاسخ مثبت به انتقاد سازنده</li></ul> <hr><h3>فرآیند بازبینی کد</h3><p>۱. مطمئن شوید که کد <strong>کامپایل می‌شود</strong> و <strong>نیازمندی‌ها را برآورده می‌کند</strong>.<br> ۲. اطمینان حاصل کنید که تمام <strong>Unit Test و End-to-End Test</strong> ها با موفقیت اجرا می‌شوند.<br> ۳. کد را در <strong>شاخه کاری فعلی</strong> (working branch) چک این کنید.<br> 4. یک <strong>Pull Request</strong> صادر کنید.<br> 5. <strong>Peer Reviewer</strong> کد شما را بررسی و بازخورد ارائه می‌دهد.<br> 6. اگر کد تایید شد، می‌توانید شاخه کاری خود را به <strong>شاخه اصلی</strong> (main trunk) ادغام کنید.<br> 7. اگر بازبینی رد شد، باید مشکلات گزارش شده را برطرف کنید و دوباره بررسی را درخواست دهید.</p><blockquote> <p>نمودار فرآیند بازبینی کد توسط همتایان (Peer Code Review) این روند را به صورت تصویری نشان می‌دهد.</p></blockquote> <hr><div align="center"> <p><img src="../../../assets/image/02/Table%202-1.png" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <h3>آماده‌سازی کد برای بازبینی</h3><p>آماده‌سازی کد برای بازبینی ممکن است گاهی کار زمان‌بر و خسته‌کننده‌ای باشد، اما <strong>کیفیت کلی کد را بهبود می‌بخشد</strong> و آن را خوانا و قابل نگهداری می‌کند. این یک عمل ضروری است که تیم‌ها باید به عنوان <strong>روند استاندارد کدنویسی</strong> انجام دهند.</p><p><strong>نکات مهم هنگام آماده‌سازی کد برای بازبینی:</strong></p><ol> <li><p><strong>همیشه بازبینی کد را در ذهن داشته باشید</strong>:<br> از ابتدای برنامه‌نویسی به بازبینی کد فکر کنید. کد خود را کوچک نگه دارید و اگر ممکن است، محدود به یک ویژگی (feature) باشید.</p></li> <li><p><strong>اطمینان از گذراندن تمام تست‌ها حتی اگر کد کامپایل شود</strong>:<br> اگر کد شما کامپایل می‌شود اما تست‌ها رد شده‌اند، فوراً دلیل آن را برطرف کنید. تمام <strong>Unit Test</strong> و <strong>End-to-End Test</strong> باید موفقیت‌آمیز باشند تا از مشکلات بعدی در محیط تولید جلوگیری شود.</p></li> <li><p><strong>به YAGNI توجه کنید</strong>:<br> تنها کدی را اضافه کنید که برای برآورده کردن نیازمندی یا ویژگی مورد نظر ضروری است. اگر نیاز نیست، کدنویسی نکنید.</p></li> <li><p><strong>بررسی کدهای تکراری</strong>:<br> اگر کد شما باید شیءگرا، DRY و SOLID باشد، کد خود را بررسی کنید تا از وجود <strong>کد تکراری یا رویه‌ای</strong> مطمئن شوید. در صورت وجود، آن را بازسازی (refactor) کنید.</p></li> <li><p><strong>استفاده از ابزارهای تحلیل استاتیک</strong>:<br> این ابزارها با تنظیمات استانداردهای شرکت، کد شما را بررسی و مشکلات را مشخص می‌کنند. هشدارها را نادیده نگیرید، زیرا ممکن است بعداً مشکل‌ساز شوند.</p></li> <li><p><strong>اطمینان از رضایت از کد قبل از چک این</strong>:<br> فقط وقتی مطمئن شدید که کد:</p><ul> <li>نیازمندی‌های تجاری را برآورده می‌کند</li><li>استانداردهای کدنویسی رعایت شده‌اند</li><li>تمام تست‌ها موفقیت‌آمیز هستند<br> چک این کنید.<br> اگر بخشی از <strong>Continuous Integration (CI)</strong> باشد و کد باعث شکست build شود، باید مشکلات را برطرف کنید و دوباره تلاش کنید.</li></ul> </li></ol> <hr><h3>رهبری بازبینی کد ‍</h3><p>هنگام رهبری یک بازبینی کد، حضور <strong>افراد مناسب</strong> اهمیت دارد. حضور برنامه‌نویسان مسئول ارسال کد ضروری است، مگر اینکه از راه دور کار کنند. در آن صورت، بازبین کد pull request را بررسی کرده و:</p><ul> <li>قبول می‌کند</li><li>رد می‌کند</li><li>یا سوالاتی می‌پرسد تا قبل از ادامه پاسخ داده شود</li></ul> <p><strong>مهارت‌ها و دانش مورد نیاز رهبر بازبینی کد:</strong></p><ol> <li><strong>اقتدار فنی</strong>: رهبر باید با استانداردهای کدنویسی و متدولوژی‌های توسعه نرم‌افزار آشنا باشد و درک کلی از نرم‌افزار تحت بررسی داشته باشد.</li><li><strong>مهارت‌های نرم</strong>: باید فردی گرم و تشویق‌کننده باشد و بتواند بازخورد سازنده ارائه دهد تا تعارضی ایجاد نشود.</li><li><strong>عدم انتقاد بیش از حد</strong>: باید بتواند انتقادات خود را به شکل <strong>سازنده و روشن</strong> بیان کند و کد را به صورت عینی بررسی نماید.</li></ol> <hr><h3>فرآیند بازبینی کد با Pull Request</h3><ol> <li><p>برنامه‌نویس کد را در سیستم کنترل نسخه <strong>چک این</strong> می‌کند و <strong>Pull Request</strong> صادر می‌کند.</p></li> <li><p><strong>Peer Reviewer</strong> کد را بررسی و بازخورد ارائه می‌دهد:</p><ul> <li>مشکلات را مشخص می‌کند</li><li>در صورت نیاز، Pull Request را رد می‌کند</li><li>بازخورد مثبت در صورت موفقیت ارائه می‌دهد و Pull Request را Merge می‌کند</li></ul> </li><li> <p>برنامه‌نویس باید <strong>تمام نظرات بازبین را اعمال کند</strong> و در صورت نیاز، کد را دوباره ارسال کند.</p></li> </ol><blockquote> <p>نکته: بازبینی‌های کوتاه و تعداد خطوط محدود، مؤثرتر و آسان‌تر برای مدیریت هستند.</p></blockquote> <hr><h3>صدور Pull Request در گیت‌هاب</h3><p>وقتی کدنویسی شما کامل شد و از <strong>کیفیت کد و موفقیت‌آمیز بودن Build</strong> اطمینان پیدا کردید، می‌توانید تغییرات خود را در مخزن <strong>Source Control</strong> <strong>Push</strong> یا <strong>Check-in</strong> کنید، بسته به سیستم کنترل نسخه‌ای که استفاده می‌کنید.</p><p>پس از ارسال کد، می‌توانید <strong>Pull Request</strong> صادر کنید. با ایجاد Pull Request:</p><ul> <li>سایر افرادی که به کد علاقه‌مند هستند <strong>اطلاع‌رسانی</strong> می‌شوند</li><li>تغییرات شما قابل <strong>بازبینی و بحث</strong> خواهند بود</li><li>نظرات و پیشنهادات برای تغییرات احتمالی به شما ارائه می‌شود</li></ul> <p>به عبارت دیگر، <strong>Push کردن کد و صدور Pull Request</strong> آغازگر فرآیند <strong>بازبینی کد همتا (Peer Code Review)</strong> است.</p><hr> <h3>مراحل صدور Pull Request</h3><ol> <li>پس از Check-in یا Push کد، به تب <strong>Pull Requests</strong> در مخزن خود بروید.</li><li>روی دکمه <strong>New Pull Request</strong> کلیک کنید.</li><li>Pull Request شما در <strong>صف انتظار</strong> قرار می‌گیرد تا بازبین‌های مربوطه آن را بررسی کنند.</li></ol> <p>این کار، فرآیند رسمی بازبینی کد را شروع می‌کند و به تیم کمک می‌کند کد با کیفیت بالا و استاندارد را تحویل دهد.</p><h3>فرآیند درخواست و انجام Pull Request در GitHub</h3><p>مراحل زیر نحوه ایجاد و ارسال یک <strong>Pull Request</strong> در GitHub را نشان می‌دهد:</p><ol> <li><strong>رفتن به تب Pull Requests</strong><br> در صفحه پروژه GitHub خود، روی تب <strong>Pull Requests</strong> کلیک کنید.</li></ol> <div align="center"><p><img src="../../../assets/image/02/Table%202-2.png" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <ol start="2"><li><strong>ایجاد Pull Request جدید</strong><br> روی دکمه <strong>New Pull Request</strong> کلیک کنید. این کار صفحه <strong>Comparing changes</strong> را نمایش می‌دهد تا تغییرات خود را مرور کنید.</li></ol> <div align="center"><p><img src="../../../assets/image/02/Table%202-3.png" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <ol start="3"><li><strong>شروع Pull Request</strong><br> اگر از تغییرات راضی بودید، روی دکمه <strong>Create pull request</strong> کلیک کنید. این صفحه <strong>Open a pull request</strong> را نمایش می‌دهد.</li></ol> <div align="center"><p><img src="../../../assets/image/02/Table%202-4.png" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <ol start="4"><li> <p><strong>افزودن توضیحات و جزئیات</strong></p><ul> <li>در بخش توضیحات، کامنتی کوتاه و مفید بنویسید که تغییرات ایجاد شده را مشخص کند.</li><li>در صورت نیاز، فیلدهای <strong>Reviewers، Assignees، Labels، Projects و Milestones</strong> را تنظیم کنید.</li><li>وقتی آماده بودید، دوباره روی <strong>Create pull request</strong> کلیک کنید تا Pull Request ایجاد شود.</li></ul> </li></ol> <p>اکنون کد شما آماده بررسی توسط همتایان تیم است و فرآیند <strong>Peer Code Review</strong> آغاز می‌شود.</p><h3>پاسخ به Pull Request در GitHub</h3><p>هنگامی که شما به عنوان <strong>بررسی‌کننده</strong> (Reviewer) یک Pull Request را بررسی می‌کنید، مراحل زیر را دنبال کنید:</p><ol> <li><p><strong>کپی کردن کد برای بررسی</strong><br> ابتدا یک نسخه از کد تحت بررسی را <strong>Clone</strong> کنید تا بتوانید محلی تغییرات را بررسی کنید.</p></li> <li><p><strong>بررسی کامنت‌ها و تغییرات</strong><br> کامنت‌ها و تغییراتی که نویسنده Pull Request ایجاد کرده است را مرور کنید.</p></li> <li><p><strong>بررسی تداخل‌ها و وضعیت کد</strong></p><ul> <li>مطمئن شوید که با شاخه پایه (Base branch) <strong>تداخلی</strong> وجود ندارد. اگر تداخل بود، Pull Request را رد کرده و توضیحات لازم را بدهید.</li><li>کد را بررسی کنید تا بدون خطا <strong>Build</strong> شود و هیچ هشدار کامپایل نداشته باشد.</li><li>مراقب <strong>Code Smells</strong> و باگ‌های احتمالی باشید.</li><li>بررسی کنید که تمام تست‌ها اجرا می‌شوند، صحیح هستند و پوشش مناسبی برای ویژگی مورد نظر ارائه می‌دهند.</li><li>اگر مشکلی بود، Pull Request را رد کنید و کامنت مناسب اضافه کنید.</li></ul> </li></ol> <div align="center"><p><img src="../../../assets/image/02/Table%202-5.png" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <ol start="4"><li> <p><strong>ادغام Pull Request</strong><br> وقتی از کیفیت کد رضایت داشتید:</p><ul> <li>کامنت‌های لازم را اضافه کنید.</li><li>روی دکمه <strong>Merge pull request</strong> کلیک کنید.</li><li>سپس برای تأیید، روی <strong>Confirm merge</strong> کلیک کنید.</li></ul> </li></ol> <div align="center"><p><img src="../../../assets/image/02/Table%202-6.png" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <ol start="5"><li><strong>حذف شاخه پس از ادغام</strong><br> پس از ادغام و بسته شدن Pull Request، شاخه مربوطه را می‌توان با کلیک روی <strong>Delete branch</strong> حذف کرد.</li></ol> <div align="center"><p><img src="../../../assets/image/02/Table%202-7.png" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <p>با انجام این مراحل، شما فرآیند <strong>بررسی و پاسخ به Pull Request</strong> را تکمیل کرده و مطمئن می‌شوید که کد با کیفیت مناسب وارد شاخه اصلی پروژه می‌شود.</p><h3>تأثیر بازخورد بر دریافت‌کنندگان بازبینی</h3><p>هنگام انجام <strong>کد ریویو (Code Review)</strong> روی کد همکار خود، باید این نکته را نیز در نظر بگیرید که بازخورد می‌تواند <strong>مثبت</strong> یا <strong>منفی</strong> باشد.</p><p>بازخورد منفی معمولاً جزئیات مشخصی از مشکل ارائه نمی‌دهد. در این حالت، <strong>مرورگر (Reviewer)</strong> روی شخص دریافت‌کننده بازخورد (<strong>Reviewee</strong>) تمرکز می‌کند نه روی مشکل. پیشنهادهایی برای بهبود کد به دریافت‌کننده ارائه نمی‌شود و هدف بازخورد مرورگر، آسیب رساندن به دریافت‌کننده است.</p><p>بازخورد منفی که توسط دریافت‌کننده دریافت می‌شود، باعث <strong>رنجش و ناراحتی</strong> او می‌شود. این امر تأثیر منفی دارد و ممکن است باعث شود فرد شروع به <strong>شک و تردید در توانایی‌های خود</strong> کند. در نتیجه، <strong>انگیزه در دریافت‌کننده کاهش می‌یابد</strong> و این می‌تواند تیم را نیز تحت تأثیر منفی قرار دهد، زیرا کارها به موقع انجام نمی‌شوند یا کیفیت لازم را ندارند.</p><p>احساسات منفی بین مرورگر و دریافت‌کننده، توسط تیم نیز حس می‌شود و ممکن است <strong>جو خفقان‌آور و منفی</strong> بر کل تیم حاکم شود. این وضعیت می‌تواند باعث شود سایر همکاران نیز <strong>بی‌انگیزه</strong> شوند و در نهایت پروژه <strong>زمانی و مالی آسیب ببیند</strong>. ⏳</p><p>در نهایت، ممکن است دریافت‌کننده به جایی برسد که <strong>از وضعیت خسته شود و برای فرار از آن، محل کار جدیدی پیدا کند</strong>. در این صورت، پروژه دچار <strong>کاهش بهره‌وری و هزینه‌های اضافی</strong> خواهد شد، زیرا زمان و پول باید برای پیدا کردن جایگزین صرف شود.</p><p>هر فردی که برای جایگزینی انتخاب شود، باید <strong>با سیستم، رویه‌ها و دستورالعمل‌های کاری آموزش داده شود</strong>.</p><p>نمودار زیر نشان‌دهنده <strong>بازخورد منفی مرورگر نسبت به دریافت‌کننده</strong> است:</p><div align="center"> <p><img src="../../../assets/image/02/Table%202-8.png" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <h3>برعکس، بازخورد مثبت مرورگر به دریافت‌کننده بازخورد تأثیر معکوس دارد</h3><p>وقتی مرورگر <strong>بازخورد مثبت</strong> ارائه می‌دهد، تمرکز او روی <strong>مشکل</strong> است و نه روی <strong>شخص</strong>. در این حالت، مرورگر توضیح می‌دهد که چرا کدی که ارسال شده خوب نیست و مشکلات احتمالی آن چه هستند. سپس، <strong>راهکارهایی برای بهبود کد</strong> به دریافت‌کننده پیشنهاد می‌دهد. هدف بازخورد مرورگر، <strong>فقط بهبود کیفیت کد ارسال شده توسط دریافت‌کننده</strong> است.</p><p>هنگامی که دریافت‌کننده بازخورد مثبت (سازنده) را دریافت می‌کند، <strong>به شکل مثبت پاسخ می‌دهد</strong>. او نظرات مرورگر را بررسی کرده و به شکل مناسب واکنش نشان می‌دهد: پاسخ به سوالات، پرسیدن سوالات مرتبط، و سپس <strong>به‌روزرسانی کد بر اساس بازخورد مرورگر</strong>. کد اصلاح‌شده دوباره برای بررسی و پذیرش ارسال می‌شود.</p><p>این فرآیند تأثیر <strong>مثبت بر تیم</strong> دارد، زیرا جو کلی تیم مثبت باقی می‌ماند و کارها به موقع و با کیفیت مورد انتظار انجام می‌شوند.</p><p>نمودار زیر نشان‌دهنده <strong>نتایج بازخورد مثبت مرورگر بر دریافت‌کننده</strong> است:</p><div align="center"> <p><img src="../../../assets/image/02/Table%202-9.png" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <h3>نکته‌ای که باید به خاطر بسپارید: بازخورد شما می‌تواند <strong>سازنده یا مخرب</strong> باشد</h3><p>هدف شما به‌عنوان مرورگر، <strong>سازنده بودن بازخورد</strong> است و نه مخرب. یک تیم خوشحال، تیمی <strong>پربازده</strong> است؛ در حالی که یک تیم <strong>بی‌انگیزه</strong>، بهره‌وری ندارد و می‌تواند پروژه را به خطر بیندازد. بنابراین، همیشه سعی کنید با بازخورد مثبت <strong>تیم را خوشحال و انگیزه‌مند نگه دارید</strong>.</p><p>یک تکنیک برای ارائه <strong>انتقاد سازنده</strong>، روش <strong>ساندویچ بازخورد</strong> است. در این روش ابتدا <strong>نقاط مثبت را تحسین</strong> می‌کنید، سپس <strong>انتقاد سازنده</strong> ارائه می‌دهید و در پایان <strong>باز هم نقاط مثبت را برجسته می‌کنید</strong>. این روش مخصوصاً زمانی مفید است که اعضای تیم <strong>به هر نوع انتقاد واکنش منفی دارند</strong>. مهارت‌های نرم شما در تعامل با افراد به اندازه مهارت‌های نرم‌افزاری شما در ارائه کد باکیفیت اهمیت دارند. یادتان نرود!</p><p>حال به بخش بعدی می‌رویم: <strong>چه چیزی را باید مرور کنیم؟</strong></p><hr> <h3>دانستن اینکه چه چیزی را باید مرور کنیم</h3><p>هنگام مرور کد، جنبه‌های مختلفی باید مورد توجه قرار گیرد. مهم‌ترین نکته این است که <strong>تنها کدی که توسط برنامه‌نویس تغییر داده شده و برای بازبینی ارسال شده</strong>، مورد بررسی قرار گیرد. به همین دلیل، توصیه می‌شود که <strong>ارسال‌های کوچک و مکرر داشته باشید</strong>. مقادیر کم کد، بسیار راحت‌تر برای بررسی و ارائه نظر هستند.</p><p>بیایید جنبه‌های مختلفی که یک مرورگر کد باید برای یک بررسی کامل و دقیق ارزیابی کند را مرور کنیم:</p><hr> <h4>دستورالعمل‌های کدنویسی شرکت و نیازمندی‌های کسب‌وکار</h4><p>تمام کدی که مرور می‌شود باید <strong>با دستورالعمل‌های کدنویسی شرکت و نیازمندی‌های کسب‌وکار</strong> تطبیق داده شود. هر کد جدید باید با آخرین <strong>استانداردهای کدنویسی و بهترین شیوه‌های شرکت</strong> مطابقت داشته باشد.</p><p>انواع مختلفی از نیازمندی‌های کسب‌وکار وجود دارد، از جمله نیازهای <strong>کسب‌وکار و کاربر/ذینفع</strong> و نیازمندی‌های <strong>عملکردی و پیاده‌سازی</strong>. فرقی نمی‌کند که کد کدام نیازمندی را پوشش می‌دهد، <strong>باید به طور کامل بررسی شود تا از صحت آن اطمینان حاصل شود</strong>.</p><p>به‌عنوان مثال، اگر نیازمندی کاربر/ذینفع بیان می‌کند که «به‌عنوان کاربر، می‌خواهم یک حساب مشتری جدید اضافه کنم»، آیا <strong>کد تحت بررسی تمام شرایط این نیازمندی را برآورده می‌کند</strong>؟ اگر دستورالعمل‌های شرکت بیان می‌کند که تمام کدها باید <strong>تست واحد</strong> داشته باشند که جریان عادی و موارد استثنایی را آزمایش کند، آیا همه تست‌های لازم پیاده‌سازی شده‌اند؟ اگر پاسخ به هر یک از این سوالات <strong>نه</strong> باشد، کد باید <strong>با نظر مرورگر اصلاح شود، بازخورد داده شود و دوباره ارسال گردد</strong>.</p><hr> <h4>قواعد نامگذاری</h4><p>باید بررسی شود که <strong>قواعد نامگذاری برای سازه‌های مختلف کد</strong> مانند کلاس‌ها، اینترفیس‌ها، متغیرهای عضو، متغیرهای محلی، شمارنده‌ها و متدها رعایت شده باشد. هیچ کس نام‌های <strong>رمزگونه و سخت‌فهم</strong> را دوست ندارد، مخصوصاً وقتی <strong>پایگاه کد بزرگ</strong> باشد.</p><p>چند سوال که مرورگر باید از خود بپرسد:<br> 1⃣ آیا نام‌ها <strong>به اندازه کافی طولانی</strong> هستند تا <strong>قابل خواندن و فهمیدن توسط انسان</strong> باشند؟<br> 2⃣ آیا نام‌ها <strong>معنادار و مرتبط با هدف کد</strong> هستند، اما به اندازه کافی کوتاه هستند که <strong>بر برنامه‌نویسان دیگر آزاردهنده نباشند</strong>؟</p><p>به‌عنوان مرورگر، باید قادر باشید <strong>کد را بخوانید و درک کنید</strong>. اگر کد <strong>سخت خوانده و درک شود</strong>، باید <strong>قبل از ادغام، بازسازی و بازنویسی شود</strong>.</p><h3>قالب‌بندی کد</h3><p>قالب‌بندی کد نقش بسیار مهمی در <strong>خوانا و قابل فهم کردن کد</strong> دارد. باید از <strong>namespaceها، آکولادها، و تورفتگی‌ها</strong> مطابق دستورالعمل‌ها استفاده شود و <strong>ابتدا و انتهای بلوک‌های کد</strong> به‌راحتی قابل تشخیص باشند.</p><p>در اینجا مجموعه‌ای از سوالاتی که مرورگر باید هنگام بازبینی مطرح کند آورده شده است:</p><p>1⃣ آیا کد باید با استفاده از <strong>فاصله (Spaces)</strong> یا <strong>تب (Tabs)</strong> تورفتگی داشته باشد؟<br> 2⃣ آیا مقدار <strong>فضای خالی (White Space)</strong> به‌درستی استفاده شده است؟<br> 3⃣ آیا خطوطی از کد وجود دارند که <strong>خیلی طولانی هستند</strong> و باید به چند خط تقسیم شوند؟<br> 4⃣ وضعیت <strong>شکست خطوط (Line Breaks)</strong> چگونه است؟<br> 5⃣ مطابق با دستورالعمل سبک، آیا <strong>هر خط شامل تنها یک عبارت</strong> است؟ آیا <strong>هر خط تنها یک اعلان (Declaration)</strong> دارد؟<br> 6⃣ آیا خطوط ادامه به‌درستی با <strong>یک Tab Stop</strong> تورفتگی داده شده‌اند؟<br> 7⃣ آیا <strong>متدها با یک خط جدا شده‌اند</strong>؟<br> 8⃣ آیا چندین عبارت که یک <strong>Expression</strong> را تشکیل می‌دهند، با <strong>پرانتز</strong> از هم جدا شده‌اند؟<br> 9⃣ آیا کلاس‌ها و متدها <strong>پاک، کوچک، و فقط کار خود را انجام می‌دهند</strong>؟</p><hr> <h3>تست‌کردن کد</h3><p>تست‌ها باید <strong>قابل فهم باشند</strong> و <strong>بخش مناسبی از حالات استفاده (Use Cases)</strong> را پوشش دهند. آن‌ها باید مسیرهای <strong>عادی اجرای کد</strong> و <strong>موارد استثنایی</strong> را شامل شوند. هنگام بررسی تست‌ها، مرورگر باید موارد زیر را بررسی کند:</p><p>1⃣ آیا برنامه‌نویس <strong>تست برای تمام بخش‌های کد</strong> ارائه کرده است؟<br> 2⃣ آیا بخشی از کد وجود دارد که <strong>تست نشده باشد</strong>؟<br> 3⃣ آیا <strong>تمام تست‌ها کار می‌کنند</strong>؟<br> 4⃣ آیا <strong>هیچ یک از تست‌ها شکست می‌خورند</strong>؟<br> 5⃣ آیا <strong>مستندسازی کافی</strong> برای کد وجود دارد، از جمله <strong>کامنت‌ها، Documentation Comments، تست‌ها، و مستندات محصول</strong>؟<br> 6⃣ آیا چیزی در کد دیده می‌شود که <strong>با وجود اینکه کامپایل می‌شود و در حالت جداگانه کار می‌کند، می‌تواند هنگام ادغام باعث بروز خطا شود</strong>؟<br> 7⃣ آیا کد به‌خوبی مستندسازی شده تا <strong>نگهداری و پشتیبانی</strong> را آسان کند؟</p><p>بیایید ببینیم فرآیند چگونه پیش می‌رود:</p><div align="center"> <p><img src="../../../assets/image/02/Table%202-10.png" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <h3>کدهای تست‌نشده و مستندسازی</h3><p>کدهایی که <strong>تست نشده‌اند</strong> ممکن است در حین تست یا حتی در محیط تولید، باعث <strong>بروز استثناهای غیرمنتظره</strong> شوند. اما به همان اندازه، <strong>تست‌های نادرست</strong> نیز می‌توانند خطرناک باشند. این موضوع می‌تواند باعث <strong>بروز باگ‌هایی شود که تشخیص آن‌ها دشوار است</strong>، مشتری را ناراحت کند و در آینده برای شما کار اضافی ایجاد کند.</p><p>باگ‌ها نوعی <strong>بدهی فنی (Technical Debt)</strong> محسوب می‌شوند و از دید کسب‌وکار، امری منفی تلقی می‌شوند. علاوه بر این، ممکن است شما کد را نوشته باشید، اما دیگران مجبور شوند آن را بخوانند و برای <strong>نگهداری و گسترش پروژه</strong> از آن استفاده کنند. بنابراین همیشه ایده خوبی است که <strong>مستنداتی برای همکارانتان</strong> ارائه دهید.</p><p>در مورد مشتری هم، چگونه می‌توانند بفهمند <strong>ویژگی‌های شما کجا هستند و چگونه از آن‌ها استفاده کنند؟</strong> مستندات خوب و <strong>کاربرپسند</strong> ایده بسیار مناسبی است. به یاد داشته باشید که همه کاربران ممکن است از نظر فنی حرفه‌ای نباشند؛ بنابراین باید به <strong>کاربران کم‌تجربه</strong> نیز توجه کنید، بدون اینکه رفتار <strong>مستبدانه یا تحقیرآمیز</strong> داشته باشید.</p><p>اگر شما به‌عنوان <strong>مرجع فنی (Technical Authority)</strong> کد را بررسی می‌کنید، آیا <strong>Code Smell</strong> یا مشکلات بالقوه‌ای را شناسایی می‌کنید؟ در این صورت باید آن‌ها را <strong>علامت‌گذاری، کامنت‌گذاری و درخواست بازنگری (Pull Request) را رد کنید</strong> و از برنامه‌نویس بخواهید کد خود را دوباره ارسال کند.</p><hr> <h3>بررسی استثناها و مدیریت خطا</h3><p>به‌عنوان مرورگر، باید اطمینان حاصل کنید که <strong>استثناها برای کنترل جریان برنامه استفاده نمی‌شوند</strong> و پیام‌های خطا <strong>معنادار و مفید برای توسعه‌دهندگان و مشتریان</strong> هستند.</p><hr> <h3>دستورالعمل‌های معماری و الگوهای طراحی</h3><p>کد جدید باید بررسی شود تا <strong>با دستورالعمل‌های معماری پروژه مطابقت داشته باشد</strong>. کد باید از <strong>الگوهای برنامه‌نویسی مورد استفاده شرکت</strong> پیروی کند، مانند: <strong>SOLID, DRY, YAGNI, OOP</strong>. همچنین در صورت امکان، باید <strong>الگوهای طراحی (Design Patterns)</strong> مناسب را استفاده کند.</p><p>در اینجا <strong>الگوهای Gang-of-Four (GoF)</strong> مطرح می‌شوند. GoF شامل چهار نویسنده کتاب <strong>Design Patterns: Elements of Reusable Object-Oriented Software</strong> است: <strong>Erich Gamma, Richard Helm, Ralph Johnson, و John Vlissides</strong>.</p><p>امروزه این الگوهای طراحی در <strong>اکثر زبان‌های برنامه‌نویسی شیءگرا</strong> به‌طور گسترده استفاده می‌شوند. منبع بسیار خوب برای مطالعه: <a href="https://www.dofactory.com/net/design-patterns">DoFactory .NET Design Patterns</a> که هر الگوی GoF را با <strong>تعریف، نمودار کلاس UML، شرکت‌کنندگان، کد ساختاری و مثال واقعی</strong> توضیح داده است.</p><p><strong>انواع الگوهای GoF:</strong></p><ul> <li><strong>Creational:</strong> Abstract Factory, Builder, Factory Method, Prototype, Singleton</li><li><strong>Structural:</strong> Adapter, Bridge, Composite, Decorator, Façade, Flyweight, Proxy</li><li><strong>Behavioral:</strong> Chain of Responsibility, Command, Interpreter, Iterator, Mediator, Memento, Observer, State, Strategy, Template Method, Visitor</li></ul> <p>کد باید <strong>به‌درستی سازمان‌دهی شده</strong> و در <strong>Namespace و Module مناسب</strong> قرار گیرد. همچنین بررسی شود که کد <strong>خیلی ساده یا بیش از حد پیچیده (Over-Engineered)</strong> نباشد.</p><hr> <h3>عملکرد و امنیت</h3><p>موارد دیگری که باید در نظر گرفته شوند شامل <strong>عملکرد و امنیت</strong> است:</p><p>1⃣ عملکرد کد چقدر خوب است؟<br> 2⃣ آیا <strong>گلوگاه‌ها (Bottlenecks)</strong> وجود دارد که باید رفع شوند؟<br> 3⃣ آیا کد به‌گونه‌ای نوشته شده که از <strong>حملات SQL Injection و Denial-of-Service</strong> محافظت کند؟<br> 4⃣ آیا داده‌ها <strong>اعتبارسنجی شده</strong> و فقط داده‌های معتبر در پایگاه ذخیره می‌شوند؟<br> 5⃣ آیا <strong>رابط کاربری، مستندات و پیام‌های خطا</strong> از نظر املایی بررسی شده‌اند؟<br> 6⃣ آیا <strong>اعداد جادویی (Magic Numbers) یا مقادیر Hard-Coded</strong> وجود دارد؟<br> 7⃣ آیا داده‌های <strong>پیکربندی درست هستند</strong>؟<br> 8⃣ آیا <strong>اطلاعات محرمانه (Secrets)</strong> به‌طور تصادفی چک شده‌اند؟</p><p>یک بررسی کامل کد باید <strong>تمام جنبه‌های ذکر شده و پارامترهای مرتبط با آن‌ها</strong> را شامل شود. اما قبل از آن، باید بدانیم <strong>چه زمانی مناسب است که یک بررسی کد انجام شود</strong>.</p><h3>زمان مناسب برای ارسال کد جهت بازبینی ⏱</h3><p>بازبینی کد باید زمانی انجام شود که <strong>توسعه کد کامل شده باشد</strong> و قبل از آنکه برنامه‌نویس کد را به بخش <strong>QA</strong> تحویل دهد. قبل از اینکه هر کدی در <strong>Version Control</strong> چک شود، باید اطمینان حاصل شود که <strong>کد بدون خطا، هشدار یا پیام اطلاعاتی اجرا می‌شود</strong>. برای این کار می‌توانید اقدامات زیر را انجام دهید:</p><p>1⃣ اجرای <strong>تحلیل استاتیک کد (Static Code Analysis)</strong> برای شناسایی مشکلات احتمالی. اگر خطا، هشدار یا پیام اطلاعاتی دریافت کردید، <strong>هر مورد را بررسی و اصلاح کنید</strong>. از آن‌ها چشم‌پوشی نکنید، زیرا ممکن است در آینده مشکلاتی ایجاد کنند. می‌توانید به <strong>صفحه Code Analysis در Properties پروژه Visual Studio 2019</strong> دسترسی داشته باشید: روی پروژه راست‌کلیک کنید و مسیر <strong>Properties | Code Analysis</strong> را انتخاب کنید.</p><p>2⃣ اطمینان از اینکه <strong>تمام تست‌ها با موفقیت اجرا می‌شوند</strong> و <strong>کد جدید شما به طور کامل توسط تست‌های مسیرهای عادی و استثنایی پوشش داده شده است</strong> تا صحت کد نسبت به مشخصات پروژه بررسی شود.</p><p>3⃣ اگر در محل کار خود از <strong>فرآیند توسعه پیوسته (Continuous Development)</strong> استفاده می‌کنید که کد شما را در یک سیستم بزرگ‌تر ادغام می‌کند، باید اطمینان حاصل کنید که <strong>ادغام سیستم با موفقیت انجام شده و تمام تست‌ها بدون خطا اجرا می‌شوند</strong>. اگر خطایی مشاهده شد، باید قبل از ادامه کار آن را رفع کنید.</p><p>وقتی کد شما <strong>کامل، مستندسازی شده و تست‌ها با موفقیت اجرا شدند</strong> و <strong>ادغام سیستم بدون مشکل انجام شد</strong>، بهترین زمان برای <strong>انجام بازبینی کد توسط همتایان (Peer Code Review)</strong> است.</p><p>پس از تایید بازبینی کد همتا، کد شما می‌تواند به <strong>بخش QA</strong> منتقل شود.</p><p>نمودار زیر <strong>چرخه حیات توسعه نرم‌افزار (SDLC)</strong> را از مرحله توسعه کد تا پایان عمر کد نشان می‌دهد:</p><div align="center"> <p><img src="../../../assets/image/02/Table%202-11.png" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <h3>فرآیند توسعه و بازبینی کد</h3><p>برنامه‌نویس <strong>نرم‌افزار را طبق مشخصات توسعه می‌دهد</strong>. سپس <strong>کد منبع را در مخزن Version Control ثبت کرده و یک Pull Request صادر می‌کند</strong>. این درخواست بررسی می‌شود:</p><ul> <li>اگر بازبینی <strong>رد شود</strong>، درخواست همراه با نظرات بازگردانده می‌شود.</li><li>اگر بازبینی کد <strong>تایید شود</strong>، کد به تیم <strong>QA</strong> منتقل می‌شود تا <strong>تست‌های داخلی خودشان</strong> را انجام دهند. هر باگی که پیدا شود برای <strong>توسعه‌دهندگان</strong> گزارش می‌شود تا اصلاح کنند.</li></ul> <p>اگر تست داخلی <strong>QA</strong> موفقیت‌آمیز باشد، کد وارد <strong>User Acceptance Testing (UAT)</strong> می‌شود:</p><ul> <li>اگر <strong>UAT شکست بخورد</strong>، باگ‌ها به تیم <strong>DevOps</strong> گزارش می‌شوند که می‌تواند شامل توسعه‌دهندگان یا تیم زیرساخت باشد.</li><li>اگر <strong>UAT موفقیت‌آمیز باشد</strong>، کد به <strong>Staging</strong> منتقل می‌شود. تیم <strong>Staging</strong> مسئول <strong>استقرار محصول در محیط تولید (Production)</strong> است.</li></ul> <p>هنگامی که نرم‌افزار در دست مشتری قرار می‌گیرد، اگر باگی مشاهده شود، <strong>گزارش باگ توسط مشتری</strong> ثبت می‌شود. توسعه‌دهندگان سپس <strong>رفع باگ‌های مشتری</strong> را انجام می‌دهند و فرآیند از نو آغاز می‌شود. زمانی که محصول <strong>به پایان عمر خود برسد</strong>، از سرویس خارج می‌شود.</p><hr> <h3>ارائه و پاسخ به بازخورد بازبینی</h3><p>باید به خاطر داشت که <strong>بازبینی کد با هدف بهبود کیفیت کلی کد و مطابق با دستورالعمل‌های شرکت انجام می‌شود</strong>. بنابراین، <strong>بازخورد باید سازنده باشد</strong> و نباید بهانه‌ای برای <strong>تحقیر یا شرمنده کردن همکار</strong> باشد. به همین ترتیب، <strong>بازخورد بازبین نباید شخصی گرفته شود</strong> و پاسخ‌ها باید <strong>متمرکز بر اقدامات مناسب و توضیحات فنی</strong> باشد.</p><p>نمودار زیر <strong>فرآیند صدور Pull Request (PR)، انجام بازبینی کد، و پذیرش یا رد PR</strong> را نشان می‌دهد:</p><div align="center"> <p><img src="../../../assets/image/02/Table%202-12.png" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <h3>ارائه بازخورد به‌عنوان بازبین ‍</h3><p>قلدری و آزار در محیط‌های کاری می‌تواند مشکل‌ساز باشد و محیط‌های برنامه‌نویسی نیز از آن مستثنی نیستند. هیچ‌کس برنامه‌نویس مغروری را دوست ندارد که فکر می‌کند همه‌چیز را می‌داند. بنابراین، <strong>بازبین باید مهارت‌های نرم (Soft Skills) خوبی داشته باشد و دیپلماتیک باشد</strong>. به خاطر داشته باشید که برخی افراد به‌راحتی آزرده می‌شوند و ممکن است نظرات را اشتباه برداشت کنند. بنابراین، بدانید که با چه کسی سر و کار دارید و احتمال واکنش او چگونه است؛ این به شما کمک می‌کند تا <strong>روش و کلمات خود را با دقت انتخاب کنید</strong>.</p><p>به‌عنوان <strong>بازبین کد همتایان (Peer Code Reviewer)</strong>، مسئول هستید که <strong>نیازمندی‌ها را درک کرده و اطمینان حاصل کنید که کد مطابق با آن نیازمندی‌هاست</strong>. بنابراین، به دنبال پاسخ به این سوالات باشید:</p><ul> <li>آیا قادر به خواندن و درک کد هستید؟</li><li>آیا باگ‌های احتمالی قابل مشاهده است؟</li><li>آیا هرگونه Trade-off انجام شده است؟</li><li>اگر بله، دلیل انجام Trade-off چیست؟</li><li>آیا این Trade-off ها <strong>Technical Debt</strong> ایجاد می‌کنند که در ادامه پروژه باید مدنظر قرار گیرد؟</li></ul> <p>پس از اتمام بازبینی، سه نوع بازخورد برای انتخاب وجود دارد: <strong>مثبت، اختیاری و انتقادی</strong>:</p><ul> <li><strong>بازخورد مثبت</strong> : شامل تقدیر از کارهای بسیار خوب برنامه‌نویس است و روحیه تیم را بالا می‌برد.</li><li><strong>بازخورد اختیاری</strong> : به برنامه‌نویس کمک می‌کند تا مهارت‌های خود را مطابق با دستورالعمل‌های شرکت تقویت کند و کیفیت کلی نرم‌افزار را بهبود دهد.</li><li><strong>بازخورد انتقادی</strong> : برای مشکلات شناسایی‌شده است که باید قبل از پذیرش کد و ارسال به تیم QA رفع شوند. در این نوع بازخورد، باید کلمات خود را با دقت انتخاب کنید و نظرات انتقادی را همراه با دلایل معتبر ارائه دهید.</li></ul> <hr><h3>پاسخ به بازخورد به‌عنوان بازبین شده ‍</h3><p>به‌عنوان برنامه‌نویس <strong>Reviewee</strong>، باید <strong>زمینه کد خود را به‌صورت مؤثر به بازبین توضیح دهید</strong>. با ایجاد <strong>Commit‌های کوچک</strong> می‌توانید به بازبین کمک کنید، زیرا حجم کوچک کد راحت‌تر بررسی و تحلیل می‌شود. هرچه کد بیشتر باشد، احتمال اینکه مشکلات دیده نشوند افزایش می‌یابد. در زمان انتظار برای بازبینی کد، <strong>نباید تغییرات بیشتری روی کد انجام دهید</strong>.</p><p>بازخورد دریافتی می‌تواند <strong>مثبت، اختیاری یا انتقادی</strong> باشد:</p><ul> <li><strong>بازخورد مثبت</strong> : اعتماد به نفس و روحیه شما را افزایش می‌دهد، آن را تقویت کنید و به کارهای خوب خود ادامه دهید.</li><li><strong>بازخورد اختیاری</strong> : می‌توانید به آن عمل کنید یا نکنید، اما گفتگو با بازبین همیشه مفید است.</li><li><strong>بازخورد انتقادی</strong> : باید جدی گرفته شود و فوراً روی آن اقدام شود، زیرا برای موفقیت پروژه حیاتی است. بازخورد انتقادی را <strong>با ادب و حرفه‌ایگری</strong> مدیریت کنید و <strong>هیچ‌گاه شخصی نگیرید</strong>، به ویژه برای برنامه‌نویسان تازه‌کار یا کسانی که اعتماد به نفس کمتری دارند.</li></ul> <p>به محض دریافت بازخورد بازبین، <strong>اقدام کنید و در صورت نیاز با او بحث و تبادل نظر داشته باشید</strong>.</p><hr> <h3>خلاصه</h3><p>در این فصل به <strong>اهمیت انجام بازبینی کد، آماده‌سازی کد برای بازبینی، پاسخ به نظرات بازبین، رهبری بازبینی کد و مواردی که باید هنگام بازبینی بررسی کرد</strong> پرداختیم. مشخص شد که در <strong>بازبینی کد همتا دو نقش وجود دارد</strong>:</p><ol> <li><strong>بازبین (Reviewer)</strong>: کسی که بازبینی کد را انجام می‌دهد.</li><li><strong>برنامه‌نویس مورد بازبینی (Reviewee)</strong>: کسی که کد او بررسی می‌شود.</li></ol> <p>همچنین دیدید که:</p><ul> <li>چگونه بازبین می‌تواند <strong>بازخورد خود را دسته‌بندی کند</strong> و اهمیت مهارت‌های نرم در ارائه بازخورد.</li><li>به‌عنوان Reviewee، اهمیت استفاده از <strong>بازخورد مثبت و اختیاری</strong> و <strong>اقدام به بازخورد انتقادی</strong> را مشاهده کردید.</li></ul> <p>بازبینی کد همتایان ممکن است زمان‌بر و ناراحت‌کننده باشد، اما در بلندمدت به <strong>محصولی با کیفیت بالا، قابل نگهداری و گسترش آسان</strong> منجر می‌شود و <strong>استفاده مجدد از کد</strong> را افزایش می‌دهد.</p><p>در فصل بعدی، با <strong>نوشتن کلاس‌ها، اشیاء و ساختار داده‌های تمیز</strong> آشنا می‌شوید. خواهید دید چگونه می‌توان کلاس‌ها را سازماندهی کرد، مسئولیت‌ها را تک‌وظیفه‌ای نگه داشت، و کامنت‌گذاری برای <strong>تولید مستندات</strong> را انجام داد. سپس به <strong>Cohesion و Coupling، طراحی برای تغییر و قانون دمتر (Law of Demeter)</strong> پرداخته می‌شود، و در نهایت با <strong>اشیاء و ساختار داده‌های Immutable، پنهان‌سازی داده و ارائه متدها در اشیاء</strong> آشنا خواهید شد.</p><hr> <h3>پرسش‌ها</h3><ol> <li>دو نقش در بازبینی کد همتا چیست؟</li><li>چه کسی افراد شرکت‌کننده در بازبینی کد همتا را مشخص می‌کند؟</li><li>چگونه می‌توان قبل از درخواست بازبینی کد، زمان و انرژی بازبین را صرفه‌جویی کرد؟</li><li>هنگام بازبینی کد باید به چه مواردی توجه کنید؟</li><li>سه دسته بازخورد کدام‌اند؟</li></ol> <hr><h3>منابع بیشتر</h3><ul> <li><a href="https://docs.microsoft.com/en-us/visualstudio/code-quality/?view=vs2019">Microsoft Visual Studio Code Quality</a></li><li><a href="https://en.wikipedia.org/wiki/Code_review">Wikipedia – Code Review</a></li><li><a href="https://springframework.guru/gang-of-four-design-patterns/">Gang-of-Four Design Patterns</a></li><li><a href="https://www.packtpub.com/application-development/net-design-patterns">.NET Design Patterns – Packt</a></li><li><a href="https://help.github.com/en">GitHub Help</a></li></ul> </article><nav class="chapter-single-next-nav"> <a href="/Gitab/books/book2/Book/03/Classes-Objects-and-Data/" class="btn-next-chapter-action" id="nextChapterBtn" data-hub="/Gitab/books/book2/"> <span class="next-btn-text">فصل بعدی: کلاس‌ها، اشیاء و ساختار داده</span> <span class="next-btn-arrow">←</span> </a> </nav></div> <button class="fab-back-to-top" id="backToTopBtn" type="button" aria-label="رفتن به بالای صفحه" title="رفتن به بالا"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"> <polyline points="18 15 12 9 6 15"></polyline> </svg> </button></main> <footer class="footer-minimal"><div class="footer-container"> <div class="footer-top-row"><div class="footer-brand-side"> <a href="/Gitab/" class="footer-brand-anchor"> <img src="/Gitab/icone/logo.svg" alt="Gitab" width="28" height="28" loading="lazy" decoding="async"> <span class="footer-brand-title">گیتاب (Gitab)</span> </a> <p class="footer-tagline"> پلتفرم آزاد و مستقل برای ترجمهٔ دقیق و روان کتاب‌های مرجع مهندسی نرم‌افزار. </p></div> <div class="footer-nav-cols"><div class="footer-nav-col"> <span class="footer-nav-heading">موضوعات</span><ul class="footer-nav-list"> <li><a href="/Gitab/books/list-books/?cat=csharp">سی‌شارپ و دات‌نت</a></li><li><a href="/Gitab/books/list-books/?cat=clean-code">کد تمیز و بازآفرینی</a></li><li><a href="/Gitab/books/list-books/?cat=architecture">معماری و طراحی دامنه</a></li><li><a href="/Gitab/books/list-books/?cat=system">لینوکس و خط فرمان</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">بخش‌های سایت</span><ul class="footer-nav-list"> <li><a href="/Gitab/">صفحه اصلی</a></li><li><a href="/Gitab/books/list-books/">کتابخانه کامل</a></li><li><a href="/Gitab/courses/">دوره‌های آموزشی</a></li><li><a href="/Gitab/translator.html">تالار مترجمین</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">مشارکت و جامعه</span><ul class="footer-nav-list"> <li><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer">راهنمای همکاری در ترجمه</a></li><li><a href="https://github.com/hheydarian/Gitab/issues" target="_blank" rel="noopener noreferrer">پیشنهاد کتاب یا گزارش خطا</a></li></ul> </div></div> </div><div class="footer-bottom-line"> <span>© <span id="y">2026</span> Gitab — توسعه‌یافته برای جامعهٔ مهندسان نرم‌افزار ایرانی</span></div> </div></footer> <script>
   (() => {
     const root = document.documentElement;
     const btn = document.getElementById('themeToggle');
+    const sunIcon = btn ? btn.querySelector('.icon-sun') : null;
+    const moonIcon = btn ? btn.querySelector('.icon-moon') : null;
     const KEY = 'gitab-theme';
 
-    function updateTheme(s) {
-      root.setAttribute('data-theme', s);
-      const mode = s;  // فقط `dark` یا `light` خواهد بود
+    function updateTheme(mode) {
+      root.setAttribute('data-theme', mode);
       root.dataset.colorMode = mode;
-      btn.dataset.icon = mode === 'dark' ? 'moon' : 'sun';
+      if (sunIcon && moonIcon) {
+        if (mode === 'dark') {
+          sunIcon.style.display = 'inline-block';
+          moonIcon.style.display = 'none';
+        } else {
+          sunIcon.style.display = 'none';
+          moonIcon.style.display = 'inline-block';
+        }
+      }
     }
 
-    // وضعیت تم ذخیره شده از localStorage
-    let saved = localStorage.getItem(KEY) || 'light'; // پیش‌فرض روشن
+    let saved = 'dark';
+    try { saved = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
     updateTheme(saved);
 
-    // تنظیم مجدد تم هنگام تغییر وضعیت دکمه
-    btn.addEventListener('click', () => {
-      const current = localStorage.getItem(KEY) || 'light';
-      const next = current === 'dark' ? 'light' : 'dark';  // فقط دو حالت: تاریک و روشن
-      localStorage.setItem(KEY, next);
-      updateTheme(next);
-    });
+    if (btn) {
+      btn.addEventListener('click', () => {
+        let current = 'dark';
+        try { current = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+        const next = current === 'dark' ? 'light' : 'dark';
+        try { localStorage.setItem(KEY, next); } catch (e) {}
+        updateTheme(next);
+      });
+    }
 
-    // هنگام بارگذاری صفحه
     document.addEventListener('DOMContentLoaded', () => {
-      updateTheme(localStorage.getItem(KEY) || 'light');
+      let mode = 'dark';
+      try { mode = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+      updateTheme(mode);
+      const yearSpan = document.getElementById('y');
+      if (yearSpan) yearSpan.textContent = new Date().getFullYear();
     });
+
+    const mobBtn = document.getElementById('mobileMenuBtn');
+    const mobDrawer = document.getElementById('mobileDrawer');
+    if (mobBtn && mobDrawer) {
+      const setDrawerOpen = (open) => {
+        mobDrawer.classList.toggle('open', open);
+        mobBtn.classList.toggle('is-open', open);
+        mobBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        mobBtn.setAttribute('aria-label', open ? 'بستن منو' : 'باز کردن منو');
+        mobDrawer.setAttribute('aria-hidden', open ? 'false' : 'true');
+      };
+
+      mobBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        setDrawerOpen(!mobDrawer.classList.contains('open'));
+      });
+
+      mobDrawer.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => setDrawerOpen(false));
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && mobDrawer.classList.contains('open')) {
+          setDrawerOpen(false);
+        }
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!mobDrawer.contains(e.target) && !mobBtn.contains(e.target)) {
+          setDrawerOpen(false);
+        }
+      });
+    }
+
+    if ('serviceWorker' in navigator) {
+      const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+      if (isLocalhost) {
+        navigator.serviceWorker.getRegistrations().then(regs => {
+          for (const reg of regs) reg.unregister();
+        });
+        if ('caches' in window) {
+          caches.keys().then(names => {
+            for (const name of names) caches.delete(name);
+          });
+        }
+      } else {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/Gitab/sw.js').catch(() => {});
+        });
+      }
+    }
   })();
-</script>
+  </script> <script>
+  (() => {
+    const article = document.getElementById('chapterArticle');
+    if (!article) return;
 
+    const progressBar = document.getElementById('readingProgressBar');
+    if (progressBar) {
+      window.addEventListener('scroll', () => {
+        const docElem = document.documentElement;
+        const totalHeight = docElem.scrollHeight - docElem.clientHeight;
+        if (totalHeight > 0) {
+          const progress = (window.pageYOffset / totalHeight) * 100;
+          progressBar.style.width = Math.min(100, Math.max(0, progress)) + '%';
+        }
+      }, { passive: true });
+    }
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-  <script>hljs.highlightAll();</script>
+    const btt = document.getElementById('backToTopBtn');
+    if (btt) {
+      window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 250) {
+          btt.classList.add('visible');
+        } else {
+          btt.classList.remove('visible');
+        }
+      }, { passive: true });
 
-  <script>
-  document.querySelectorAll('pre code').forEach(block => {
-    const btn = document.createElement('button');
-    btn.className = 'copy-btn';
+      btt.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
 
-    const icon = document.createElement('img');
-    icon.src = "/Gitab/icone/copy.svg";
-    icon.alt = 'Copy';
-    btn.appendChild(icon);
+    article.querySelectorAll('img').forEach(img => {
+      if (!img.hasAttribute('loading')) img.loading = 'lazy';
+      if (!img.hasAttribute('decoding')) img.decoding = 'async';
+      const parent = img.parentElement;
+      if (parent && parent.tagName === 'P') {
+        parent.style.textAlign = 'center';
+      }
 
-    block.parentNode.insertBefore(btn, block);
-
-    btn.addEventListener('click', async () => {
-      await navigator.clipboard.writeText(block.textContent);
-      btn.classList.add('copied');
-      setTimeout(() => btn.classList.remove('copied'), 1500);
+      img.addEventListener('error', function() {
+        const src = this.getAttribute('src');
+        if (src && src.includes('assets/image/')) {
+          const parts = src.split('assets/image/');
+          const corrected = '/Gitab/books/book2/assets/image/' + parts[1];
+          if (this.src !== corrected) {
+            this.src = corrected;
+          }
+        }
+      });
     });
-  });
-  </script>
 
-  <script>
-  document.body.dataset.page = window.location.pathname;
-
-  const menuBtn = document.querySelector(".menu-toggle");
-  const nav = document.querySelector(".nav");
-
-  if (menuBtn && nav) {
-    menuBtn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      nav.classList.toggle("show");
-    });
-
-    document.addEventListener("click", (e) => {
-      const clickedInsideNav = nav.contains(e.target);
-      const clickedMenuButton = menuBtn.contains(e.target);
-      if (!clickedInsideNav && !clickedMenuButton) {
-        nav.classList.remove("show");
+    article.querySelectorAll('p').forEach(p => {
+      const trimmed = p.innerText.trim();
+      if (trimmed.startsWith('💡') || trimmed.startsWith('نکته:')) {
+        p.classList.add('react-callout', 'callout-tip');
+      } else if (trimmed.startsWith('⚠️') || trimmed.startsWith('هشدار:')) {
+        p.classList.add('react-callout', 'callout-warning');
+      } else if (trimmed.startsWith('📌') || trimmed.startsWith('مهم:')) {
+        p.classList.add('react-callout', 'callout-important');
+      } else if (trimmed.startsWith('🔹') || trimmed.startsWith('🔸')) {
+        p.classList.add('react-callout', 'callout-note');
       }
     });
-  }
-  </script>
-
-  <script>
-    document.getElementById('y').textContent = new Date().getFullYear();
-  </script>
-  <script>
-document.getElementById("openDonate").addEventListener("click", () => {
-  document.getElementById("donateModal").style.display = "block";
-});
-document.getElementById("closeDonate").addEventListener("click", () => {
-  document.getElementById("donateModal").style.display = "none";
-});
-document.querySelectorAll(".copy-btn").forEach(btn => {
-  btn.addEventListener("click", () => {
-    navigator.clipboard.writeText(btn.dataset.copy);
-  
-    setTimeout(() => (btn.textContent = "کپی"), 2000);
-  });
-});
-</script>
-
-</body>
-</html>
+  })();
+  </script> <script type="speculationrules">{"prefetch":[{"where":{"and":[{"href_matches":"/Gitab/*"},{"not":{"href_matches":"/Gitab/downloads/*"}},{"not":{"selector_matches":"[download], [target='_blank']"}}]},"eagerness":"moderate"}]}</script> <script>
+  (() => {
+    if (window.HTMLScriptElement && HTMLScriptElement.supports && HTMLScriptElement.supports('speculationrules')) return;
+    const seen = new Set([window.location.href]);
+    let count = 0;
+    const prefetchLink = (e) => {
+      if (count >= 12) return;
+      const a = e.target && e.target.closest ? e.target.closest('header a, .chapter-single-next-nav a, .syllabus-chapter-item a, .btn-hero-read, .btn-card-read') : null;
+      if (!a || !a.href || a.hasAttribute('download') || a.target === '_blank') return;
+      if (a.origin !== window.location.origin || a.pathname.includes('/downloads/')) return;
+      const clean = a.href.split('#')[0];
+      if (!clean || seen.has(clean)) return;
+      seen.add(clean);
+      count++;
+      const l = document.createElement('link');
+      l.rel = 'prefetch';
+      l.href = clean;
+      document.head.appendChild(l);
+    };
+    document.addEventListener('pointerenter', prefetchLink, { capture: true, passive: true });
+    document.addEventListener('touchstart', prefetchLink, { capture: true, passive: true });
+  })();
+  </script></body></html>

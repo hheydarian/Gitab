@@ -1,0 +1,774 @@
+<!doctype html><html lang="fa" dir="rtl"> <head><script>
+    if (window.location.pathname.startsWith('/gitab/')) {
+      window.location.replace(window.location.pathname.replace(/^\/gitab\//i, '/Gitab/') + window.location.search + window.location.hash);
+    }
+    (() => {
+      try {
+        const t = localStorage.getItem('gitab-theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', t);
+        document.documentElement.dataset.colorMode = t;
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        document.documentElement.dataset.colorMode = 'dark';
+      }
+    })();
+  </script> <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5"> <title>۱۰۸.۴ مدیریت چاپگرها و صف چاپ (CUPS)</title><meta name="description" content="۱۰۸.۴ مدیریت چاپگرها و صف چاپ (CUPS) — مطالعه آنلاین و رایگان از کتاب «راهنمای آزمون LPIC-1 (ورژن ۵۰۰)» (LPIC-1 Study Guide (Version 500)) اثر جادی میرمیرانی با ترجمه جادی میرمیرانی در گیتاب."> <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"><meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"> <meta name="theme-color" content="#090d16"><meta name="referrer" content="strict-origin-when-cross-origin"> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https:; frame-src https://www.youtube.com https://www.youtube-nocookie.com https://maps.google.com https://www.google.com; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self';"><link rel="icon" type="image/png" href="/Gitab/favicon.png"> <link rel="canonical" href="https://hheydarian.github.io/Gitab/books/book13/Book/39/1084-manage-printers-and-printing/"><link rel="alternate" hreflang="fa" href="https://hheydarian.github.io/Gitab/books/book13/Book/39/1084-manage-printers-and-printing/"> <link rel="alternate" hreflang="x-default" href="https://hheydarian.github.io/Gitab/books/book13/Book/39/1084-manage-printers-and-printing/"><link rel="alternate" type="text/plain" title="LLMs.txt" href="/Gitab/llms.txt"> <link rel="sitemap" type="application/xml" title="Sitemap" href="/Gitab/sitemap.xml"><meta property="og:locale" content="fa_IR"> <meta property="og:type" content="article"><meta property="og:site_name" content="گیتاب | Gitab"> <meta property="og:title" content="۱۰۸.۴ مدیریت چاپگرها و صف چاپ (CUPS)"><meta property="og:description" content="۱۰۸.۴ مدیریت چاپگرها و صف چاپ (CUPS) — مطالعه آنلاین و رایگان از کتاب «راهنمای آزمون LPIC-1 (ورژن ۵۰۰)» (LPIC-1 Study Guide (Version 500)) اثر جادی میرمیرانی با ترجمه جادی میرمیرانی در گیتاب."> <meta property="og:url" content="https://hheydarian.github.io/Gitab/books/book13/Book/39/1084-manage-printers-and-printing/"><meta property="og:image" content="https://hheydarian.github.io/Gitab/images/lpic1book/Cover.jpg"> <meta property="og:image:alt" content="۱۰۸.۴ مدیریت چاپگرها و صف چاپ (CUPS)"><meta name="twitter:card" content="summary_large_image"> <meta name="twitter:title" content="۱۰۸.۴ مدیریت چاپگرها و صف چاپ (CUPS)"><meta name="twitter:description" content="۱۰۸.۴ مدیریت چاپگرها و صف چاپ (CUPS) — مطالعه آنلاین و رایگان از کتاب «راهنمای آزمون LPIC-1 (ورژن ۵۰۰)» (LPIC-1 Study Guide (Version 500)) اثر جادی میرمیرانی با ترجمه جادی میرمیرانی در گیتاب."> <meta name="twitter:image" content="https://hheydarian.github.io/Gitab/images/lpic1book/Cover.jpg"><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://hheydarian.github.io/Gitab/#organization","name":"گیتاب | Gitab","alternateName":"Gitab","url":"https://hheydarian.github.io/Gitab/","logo":{"@type":"ImageObject","url":"https://hheydarian.github.io/Gitab/favicon.png"},"sameAs":["https://github.com/hheydarian/Gitab"]},{"@type":"WebSite","@id":"https://hheydarian.github.io/Gitab/#website","url":"https://hheydarian.github.io/Gitab/","name":"گیتاب | Gitab","inLanguage":"fa-IR","publisher":{"@id":"https://hheydarian.github.io/Gitab/#organization"},"potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://hheydarian.github.io/Gitab/books/list-books/?q={search_term_string}"},"query-input":"required name=search_term_string"}},{"@type":"WebPage","@id":"https://hheydarian.github.io/Gitab/books/book13/Book/39/1084-manage-printers-and-printing/#webpage","url":"https://hheydarian.github.io/Gitab/books/book13/Book/39/1084-manage-printers-and-printing/","name":"۱۰۸.۴ مدیریت چاپگرها و صف چاپ (CUPS)","description":"۱۰۸.۴ مدیریت چاپگرها و صف چاپ (CUPS) — مطالعه آنلاین و رایگان از کتاب «راهنمای آزمون LPIC-1 (ورژن ۵۰۰)» (LPIC-1 Study Guide (Version 500)) اثر جادی میرمیرانی با ترجمه جادی میرمیرانی در گیتاب.","inLanguage":"fa-IR","isPartOf":{"@id":"https://hheydarian.github.io/Gitab/#website"}},{"@type":"TechArticle","headline":"۱۰۸.۴ مدیریت چاپگرها و صف چاپ (CUPS)","description":"۱۰۸.۴ مدیریت چاپگرها و صف چاپ (CUPS) — مطالعه آنلاین و رایگان از کتاب «راهنمای آزمون LPIC-1 (ورژن ۵۰۰)» (LPIC-1 Study Guide (Version 500)) اثر جادی میرمیرانی با ترجمه جادی میرمیرانی در گیتاب.","url":"https://hheydarian.github.io/Gitab/books/book13/Book/39/1084-manage-printers-and-printing/","inLanguage":"fa-IR","isAccessibleForFree":true,"author":{"@type":"Person","name":"جادی میرمیرانی"},"translator":{"@type":"Person","name":"جادی میرمیرانی"},"isPartOf":{"@type":"Book","name":"راهنمای آزمون LPIC-1 (ورژن ۵۰۰)","alternateName":"LPIC-1 Study Guide (Version 500)","url":"https://hheydarian.github.io/Gitab/books/book13/"}}]}</script> <link rel="preload" href="/Gitab/fonts/Vazirmatn.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/Gitab/styles/main.css?v=2.4" as="style"> <link rel="preload" href="/Gitab/styles/gitab-modern.css?v=2.5" as="style"><style>@font-face{font-family:'Lalezar';src:url('/Gitab/fonts/Lalezar.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}@font-face{font-family:'Vazirmatn';src:url('/Gitab/fonts/Vazirmatn.woff2') format('woff2');font-weight:100 900;font-style:normal;font-display:swap}html,body,button,input,optgroup,select,textarea,.filter-pill{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}input::placeholder,textarea::placeholder{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}</style> <link rel="stylesheet" href="/Gitab/styles/main.css?v=2.4"><link rel="stylesheet" href="/Gitab/styles/gitab-modern.css?v=2.5"> <link rel="stylesheet" href="/Gitab/styles/vendor/github-dark.min.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="/Gitab/styles/vendor/github-dark.min.css"></noscript></head> <body><header class="header"> <div class="container nav-wrap"><a href="/Gitab/" class="brand" aria-label="صفحه اصلی گیتاب"> <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="30" height="30" decoding="async"> <span class="brand-text">Gitab</span> </a> <nav class="nav" id="mainNav"><a href="/Gitab/" >خانه</a> <a href="/Gitab/books/list-books" aria-current="page">کتاب‌ها</a> <a href="/Gitab/courses/" >دوره‌ها</a> <a href="/Gitab/translator.html" >مترجمین</a></nav> <div class="nav-actions"><button id="themeToggle" class="theme-toggle-btn" aria-label="تغییر تم" title="تغییر تم"> <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن" width="18" height="18" decoding="async" style="display:none"> <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک" width="18" height="18" decoding="async"> </button> <a class="btn-github-pill" href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" title="مشاهده سورس گیتاب در گیت‌هاب"> <img src="/Gitab/icone/github.svg" alt="GitHub" width="16" height="16" decoding="async"> <span>گیت‌هاب</span> </a> <button class="mobile-menu-btn" id="mobileMenuBtn" type="button" aria-label="باز کردن منو" aria-expanded="false"> <svg class="mob-icon-open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="4" y1="7" x2="20" y2="7"></line> <line x1="4" y1="12" x2="20" y2="12"></line> <line x1="4" y1="17" x2="14" y2="17"></line> </svg> <svg class="mob-icon-close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="18" y1="6" x2="6" y2="18"></line> <line x1="6" y1="6" x2="18" y2="18"></line> </svg> </button></div> </div><div class="mobile-drawer" id="mobileDrawer" aria-hidden="true"> <div class="mobile-drawer-inner"><div class="mobile-drawer-section-label">ناوبری سریع</div><nav class="mobile-drawer-links" aria-label="منوی موبایل"> <a href="/Gitab/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M3 10.5 12 3l9 7.5"></path> <path d="M5 9.5V20a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V9.5"></path> </svg> </span> <span class="mob-nav-text">صفحه نخست</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/books/list-books" class="mobile-drawer-link active" aria-current="page"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path> </svg> </span> <span class="mob-nav-text">کتابخانه و فهرست کتاب‌ها</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/courses/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path> <path d="M6 12v5c3 3 9 3 12 0v-5"></path> </svg> </span> <span class="mob-nav-text">دوره‌های آموزشی</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/translator.html" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path> <circle cx="9" cy="7" r="4"></circle> <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path> <path d="M16 3.13a4 4 0 0 1 0 7.75"></path> </svg> </span> <span class="mob-nav-text">مترجمین و همکاران</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> </nav><div class="mobile-drawer-divider"></div><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" class="mobile-drawer-link mobile-drawer-gh"> <span class="mob-nav-icon" aria-hidden="true"> <img src="/Gitab/icone/github.svg" alt="" width="17" height="17" loading="lazy" decoding="async"> </span> <span class="mob-nav-text">مخزن گیت‌هاب پروژه</span> <span class="mob-nav-ext" aria-hidden="true">↗</span> </a> </div></div> </header><div class="reading-progress-track"> <div class="reading-progress-fill" id="readingProgressBar"></div></div> <main class="site-main chapter-reading-page"><div class="chapter-page-wrapper"> <nav class="chapter-clean-breadcrumb" aria-label="مسیر راهنما" dir="rtl"><a href="/Gitab/">خانه</a> <span class="bc-sep" aria-hidden="true">/</span> <a href="/Gitab/books/list-books/">کتاب‌ها</a> <span class="bc-sep" aria-hidden="true">/</span> <a href="/Gitab/books/book13/"><bdi>راهنمای آزمون LPIC-1</bdi></a> <span class="bc-sep" aria-hidden="true">/</span> <span class="bc-current-leaf"><bdi>۱۰۸.۴ مدیریت چاپگرها و صف چاپ (CUPS)</bdi></span></nav> <article class="chapter-prose-container markdown-body" id="chapterArticle" dir="rtl"><h1>۱۰۸.۴ مدیریت چاپگرها و صف چاپ (CUPS)</h1><div class="callout callout-info" style="background: rgba(59, 130, 246, 0.08); border-right: 4px solid #3b82f6; padding: 16px 20px; border-radius: 8px; margin-bottom: 24px;"> <strong>خلاصه هدف آزمون:</strong> سرویس چاپ CUPS، پورت وب ۶۳۱، دستورات lp، lpr، lpq، lprm و فایل‌های PPD. </div><div class="video-container" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; border-radius: 12px; margin: 24px 0; border: 1px solid var(--g-border-dim);"> <iframe src="https://www.youtube.com/embed/8I9J0gsLe-U" title="ویدئوی آموزشی جادی برای این سرفصل" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen></iframe></div> <h2>🎯 اهداف و سرفصل‌های این بخش</h2><p>در این درسنامه موارد زیر را بررسی و مرور می‌کنیم:</p><ul> <li>مفاهیم کلیدی مورد پرسش در آزمون بین‌المللی LPIC-1</li><li>دستورات، فایل‌های پیکربندی و ابزارهای مرتبط در خط فرمان</li><li>نکات پرتکرار آزمون‌های ۱۰۱ و ۱۰۲ همراه با نمونه‌های کاربردی</li></ul> <hr><h2>📝 متن درسنامه و توضیحات تکمیلی</h2><p><em>ضریب اهمیت در آزمون (Weight): ۲</em></p><p>داوطلبان باید بتوانند صف‌های چاپ (Print Queues) و کارهای چاپ کاربران (Print Jobs) را با استفاده از CUPS و رابط سازگاری LPD مدیریت کنند.</p><h3>حوزه‌های کلیدی دانش</h3><ul> <li>پیکربندی پایه CUPS (برای چاپگرهای محلی و تحت شبکه)</li><li>مدیریت صف‌های چاپ کاربران</li><li>عیب‌یابی مشکلات عمومی چاپ</li><li>افزودن و حذف کارهای چاپ در صف‌های چاپگرهای پیکربندی‌شده</li></ul> <h3>اصطلاحات و ابزارها</h3><ul> <li>فایل‌های پیکربندی، ابزارها و برنامه‌های جانبی CUPS</li><li><code>/etc/cups/</code></li><li>رابط سنتی LPD (<code>lpr</code>، <code>lprm</code>، <code>lpq</code>)</li></ul> <h2>سیستم چاپ CUPS</h2><p>بیشتر توزیع‌های لینوکس برای چاپ از بسته <code>CUPS</code> استفاده می‌کنند. ممکن است لازم باشد آن را از طریق مدیر بسته خودتان نصب کرده و سرویسش را با استفاده از <code>systemd</code> یا سیستم <code>init</code> رایج در توزیع خود راه‌اندازی کنید:</p><pre class="hljs"><code>$ <span class="hljs-built_in">sudo</span> apt install cups
+[<span class="hljs-built_in">sudo</span>] password <span class="hljs-keyword">for</span> jadi:
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following additional packages will be installed:
+  acl avahi-daemon colord colord-data cups-browsed cups-client cups-common cups-core-drivers
+  cups-daemon cups-filters cups-filters-core-drivers cups-ipp-utils cups-ppdc
+  cups-server-common fonts-droid-fallback fonts-noto-mono fonts-urw-base35 ghostscript
+  ipp-usb libavahi-core7 libavahi-glib1 libcolorhug2 libcupsfilters1 libdaemon0 libexif12
+  libfontembed1 libgphoto2-6 libgphoto2-l10n libgphoto2-port12 libgs-common libgs10
+  libgs10-common libgusb2 libidn12 libieee1284-3 libijs-0.35 libjbig2dec0 libjson-glib-1.0-0
+  libjson-glib-1.0-common liblouis-data liblouis20 liblouisutdml-bin liblouisutdml-data
+  liblouisutdml9 libltdl7 libnss-mdns libpaper-utils libpaper1 libpoppler-cpp0v5
+  libpoppler-glib8 libpoppler126 libqpdf29 libsane-common libsane1 libsnmp-base libsnmp40
+  lynx lynx-common mailcap poppler-data poppler-utils sane-airscan sane-utils update-inetd
+  usb.ids
+Suggested packages:
+  avahi-autoipd colord-sensor-argyll cups-bsd cups-pdf foomatic-db-compressed-ppds
+  | foomatic-db smbclient antiword docx2txt imagemagick fonts-noto fonts-freefont-otf
+  | fonts-freefont-ttf fonts-texgyre gphoto2 ooo2dbk rtf2xml avahi-autoipd | zeroconf hplip
+  snmp-mibs-downloader fonts-japanese-mincho | fonts-ipafont-mincho fonts-arphic-ukai
+  fonts-arphic-uming fonts-nanum unpaper
+The following NEW packages will be installed:
+  acl avahi-daemon colord colord-data cups cups-browsed cups-client cups-common
+  cups-core-drivers cups-daemon cups-filters cups-filters-core-drivers cups-ipp-utils
+  cups-ppdc cups-server-common fonts-droid-fallback fonts-noto-mono fonts-urw-base35
+  ghostscript ipp-usb libavahi-core7 libavahi-glib1 libcolorhug2 libcupsfilters1 libdaemon0
+  libexif12 libfontembed1 libgphoto2-6 libgphoto2-l10n libgphoto2-port12 libgs-common
+  libgs10 libgs10-common libgusb2 libidn12 libieee1284-3 libijs-0.35 libjbig2dec0
+  libjson-glib-1.0-0 libjson-glib-1.0-common liblouis-data liblouis20 liblouisutdml-bin
+  liblouisutdml-data liblouisutdml9 libltdl7 libnss-mdns libpaper-utils libpaper1
+  libpoppler-cpp0v5 libpoppler-glib8 libpoppler126 libqpdf29 libsane-common libsane1
+  libsnmp-base libsnmp40 lynx lynx-common mailcap poppler-data poppler-utils sane-airscan
+  sane-utils update-inetd usb.ids
+0 upgraded, 66 newly installed, 0 to remove and 7 not upgraded.
+Need to get 40.7 MB of archives.
+After this operation, 163 MB of additional disk space will be used.
+Do you want to <span class="hljs-built_in">continue</span>? [Y/n]
+...
+...
+</code></pre> <p>عبارت <code>CUPS</code> مخفف <strong>Common Unix Printing System</strong> است و همانطور که می‌بینید، کلی بسته مرتبط هم همراهش نصب می‌شود و تعدادی دیگر را هم پیشنهاد می‌دهد. دلیلش این است که CUPS به اطلاعات زیادی درباره چاپگرهای مختلف نیاز دارد و از ابزارهای متعددی برای چاپ استفاده می‌کند. پس از نصب، باید سرویس آن را استارت کنید:</p><pre class="hljs"><code>$ <span class="hljs-built_in">sudo</span> systemctl start cups.service
+$ <span class="hljs-built_in">sudo</span> systemctl status cups.service
+● cups.service - CUPS Scheduler
+     Loaded: loaded (/lib/systemd/system/cups.service; enabled; preset: enabled)
+     Active: active (running) since Sun 2023-07-16 13:50:20 EDT; 27s ago
+TriggeredBy: ● cups.path
+             ● cups.socket
+       Docs: man:cupsd(8)
+   Main PID: 2366 (cupsd)
+     Status: <span class="hljs-string">&quot;Scheduler is running...&quot;</span>
+      Tasks: 1 (<span class="hljs-built_in">limit</span>: 4583)
+     Memory: 2.8M
+        CPU: 400ms
+     CGroup: /system.slice/cups.service
+             └─2366 /usr/sbin/cupsd -l
+
+Jul 16 13:50:20 debian systemd[1]: Starting cups.service - CUPS Scheduler...
+Jul 16 13:50:20 debian systemd[1]: Started cups.service - CUPS Scheduler.
+</code></pre> <p>برای دسترسی به سرویس‌های CUPS راه‌های مختلفی وجود دارد؛ از جمله یک رابط مبتنی بر وب، برنامه‌های گرافیکی (GUI) در محیط دسکتاپ و همین‌طور ابزارهای خط فرمان. CUPS طوری طراحی شده که ساده باشد و بتواند از چاپگرهای مختلف ساخت شرکت‌های گوناگون پشتیبانی کند.</p><h3>فایل‌های پیکربندی</h3><p>مانند بیشتر برنامه‌های دیگر لینوکس، CUPS فایل‌های پیکربندی خود را در دایرکتوری <code>/etc</code> ذخیره می‌کند:</p><pre class="hljs"><code><span class="hljs-comment"># ls /etc/cups/</span>
+cups-browsed.conf  cups-files.conf  ppd		   raw.convs  snmp.conf  subscriptions.conf
+cupsd.conf	   interfaces	    printers.conf  raw.types  ssl	 subscriptions.conf.O
+</code></pre> <p>فایل پیکربندی اصلی <code>cupsd.conf</code> است. نگاهی به آن بیندازید؛ درکش بسیار ساده است. برای مثال خط <code>Listen localhost:631</code> به CUPS می‌گوید روی پورت <code>631</code> از <code>localhost</code> گوش بدهد. این هم یک نمونه از آن:</p><pre class="hljs"><code>$ cat /etc/cups/cupsd.conf
+#
+# Configuration file for the CUPS scheduler.  See &quot;man cupsd.conf&quot; for a
+# complete description of this file.
+#
+
+# Log general information in error_log - change &quot;warn&quot; to &quot;debug&quot;
+# for troubleshooting...
+LogLevel warn
+PageLogFormat
+
+# Specifies the maximum size of the log files before they are rotated.  The value &quot;0&quot; disables log rotation.
+MaxLogSize 0
+
+# Default error policy for printers
+ErrorPolicy retry-job
+
+# Only listen for connections from the local machine.
+Listen localhost:631
+Listen /run/cups/cups.sock
+
+# Show shared printers on the local network.
+Browsing Yes
+BrowseLocalProtocols dnssd
+
+# Default authentication type, when authentication is required...
+DefaultAuthType Basic
+
+# Web interface setting...
+WebInterface Yes
+
+# Timeout after cupsd exits if idle (applied only if cupsd runs on-demand - with -l)
+IdleExitTimeout 60
+
+# Restrict access to the server...
+&lt;Location /&gt;
+  Order allow,deny
+&lt;/Location&gt;
+
+# Restrict access to the admin pages...
+&lt;Location /admin&gt;
+  Order allow,deny
+&lt;/Location&gt;
+
+# Restrict access to configuration files...
+&lt;Location /admin/conf&gt;
+  AuthType Default
+  Require user @SYSTEM
+  Order allow,deny
+&lt;/Location&gt;
+
+# Restrict access to log files...
+&lt;Location /admin/log&gt;
+  AuthType Default
+  Require user @SYSTEM
+  Order allow,deny
+&lt;/Location&gt;
+
+# Set the default printer/job policies...
+&lt;Policy default&gt;
+  # Job/subscription privacy...
+  JobPrivateAccess default
+  JobPrivateValues default
+  SubscriptionPrivateAccess default
+  SubscriptionPrivateValues default
+
+  # Job-related operations must be done by the owner or an administrator...
+  &lt;Limit Create-Job Print-Job Print-URI Validate-Job&gt;
+    Order deny,allow
+  &lt;/Limit&gt;
+
+  &lt;Limit Send-Document Send-URI Hold-Job Release-Job Restart-Job Purge-Jobs Set-Job-Attributes Create-Job-Subscription Renew-Subscription Cancel-Subscription Get-Notifications Reprocess-Job Cancel-Current-Job Suspend-Current-Job Resume-Job Cancel-My-Jobs Close-Job CUPS-Move-Job CUPS-Get-Document&gt;
+    Require user @OWNER @SYSTEM
+    Order deny,allow
+  &lt;/Limit&gt;
+
+  # All administration operations require an administrator to authenticate...
+  &lt;Limit CUPS-Add-Modify-Printer CUPS-Delete-Printer CUPS-Add-Modify-Class CUPS-Delete-Class CUPS-Set-Default CUPS-Get-Devices&gt;
+    AuthType Default
+    Require user @SYSTEM
+    Order deny,allow
+  &lt;/Limit&gt;
+
+  # All printer operations require a printer operator to authenticate...
+  &lt;Limit Pause-Printer Resume-Printer Enable-Printer Disable-Printer Pause-Printer-After-Current-Job Hold-New-Jobs Release-Held-New-Jobs Deactivate-Printer Activate-Printer Restart-Printer Shutdown-Printer Startup-Printer Promote-Job Schedule-Job-After Cancel-Jobs CUPS-Accept-Jobs CUPS-Reject-Jobs&gt;
+    AuthType Default
+    Require user @SYSTEM
+    Order deny,allow
+  &lt;/Limit&gt;
+
+  # Only the owner or an administrator can cancel or authenticate a job...
+  &lt;Limit Cancel-Job CUPS-Authenticate-Job&gt;
+    Require user @OWNER @SYSTEM
+    Order deny,allow
+  &lt;/Limit&gt;
+
+  &lt;Limit All&gt;
+    Order deny,allow
+  &lt;/Limit&gt;
+&lt;/Policy&gt;
+
+# Set the authenticated printer/job policies...
+&lt;Policy authenticated&gt;
+  # Job/subscription privacy...
+  JobPrivateAccess default
+  JobPrivateValues default
+  SubscriptionPrivateAccess default
+  SubscriptionPrivateValues default
+
+  # Job-related operations must be done by the owner or an administrator...
+  &lt;Limit Create-Job Print-Job Print-URI Validate-Job&gt;
+    AuthType Default
+    Order deny,allow
+  &lt;/Limit&gt;
+
+  &lt;Limit Send-Document Send-URI Hold-Job Release-Job Restart-Job Purge-Jobs Set-Job-Attributes Create-Job-Subscription Renew-Subscription Cancel-Subscription Get-Notifications Reprocess-Job Cancel-Current-Job Suspend-Current-Job Resume-Job Cancel-My-Jobs Close-Job CUPS-Move-Job CUPS-Get-Document&gt;
+    AuthType Default
+    Require user @OWNER @SYSTEM
+    Order deny,allow
+  &lt;/Limit&gt;
+
+  # All administration operations require an administrator to authenticate...
+  &lt;Limit CUPS-Add-Modify-Printer CUPS-Delete-Printer CUPS-Add-Modify-Class CUPS-Delete-Class CUPS-Set-Default&gt;
+    AuthType Default
+    Require user @SYSTEM
+    Order deny,allow
+  &lt;/Limit&gt;
+
+  # All printer operations require a printer operator to authenticate...
+  &lt;Limit Pause-Printer Resume-Printer Enable-Printer Disable-Printer Pause-Printer-After-Current-Job Hold-New-Jobs Release-Held-New-Jobs Deactivate-Printer Activate-Printer Restart-Printer Shutdown-Printer Startup-Printer Promote-Job Schedule-Job-After Cancel-Jobs CUPS-Accept-Jobs CUPS-Reject-Jobs&gt;
+    AuthType Default
+    Require user @SYSTEM
+    Order deny,allow
+  &lt;/Limit&gt;
+
+  # Only the owner or an administrator can cancel or authenticate a job...
+  &lt;Limit Cancel-Job CUPS-Authenticate-Job&gt;
+    AuthType Default
+    Require user @OWNER @SYSTEM
+    Order deny,allow
+  &lt;/Limit&gt;
+
+  &lt;Limit All&gt;
+    Order deny,allow
+  &lt;/Limit&gt;
+&lt;/Policy&gt;
+
+# Set the kerberized printer/job policies...
+&lt;Policy kerberos&gt;
+  # Job/subscription privacy...
+  JobPrivateAccess default
+  JobPrivateValues default
+  SubscriptionPrivateAccess default
+  SubscriptionPrivateValues default
+
+  # Job-related operations must be done by the owner or an administrator...
+  &lt;Limit Create-Job Print-Job Print-URI Validate-Job&gt;
+    AuthType Negotiate
+    Order deny,allow
+  &lt;/Limit&gt;
+
+  &lt;Limit Send-Document Send-URI Hold-Job Release-Job Restart-Job Purge-Jobs Set-Job-Attributes Create-Job-Subscription Renew-Subscription Cancel-Subscription Get-Notifications Reprocess-Job Cancel-Current-Job Suspend-Current-Job Resume-Job Cancel-My-Jobs Close-Job CUPS-Move-Job CUPS-Get-Document&gt;
+    AuthType Negotiate
+    Require user @OWNER @SYSTEM
+    Order deny,allow
+  &lt;/Limit&gt;
+
+  # All administration operations require an administrator to authenticate...
+  &lt;Limit CUPS-Add-Modify-Printer CUPS-Delete-Printer CUPS-Add-Modify-Class CUPS-Delete-Class CUPS-Set-Default&gt;
+    AuthType Default
+    Require user @SYSTEM
+    Order deny,allow
+  &lt;/Limit&gt;
+
+  # All printer operations require a printer operator to authenticate...
+  &lt;Limit Pause-Printer Resume-Printer Enable-Printer Disable-Printer Pause-Printer-After-Current-Job Hold-New-Jobs Release-Held-New-Jobs Deactivate-Printer Activate-Printer Restart-Printer Shutdown-Printer Startup-Printer Promote-Job Schedule-Job-After Cancel-Jobs CUPS-Accept-Jobs CUPS-Reject-Jobs&gt;
+    AuthType Default
+    Require user @SYSTEM
+    Order deny,allow
+  &lt;/Limit&gt;
+
+  # Only the owner or an administrator can cancel or authenticate a job...
+  &lt;Limit Cancel-Job CUPS-Authenticate-Job&gt;
+    AuthType Negotiate
+    Require user @OWNER @SYSTEM
+    Order deny,allow
+  &lt;/Limit&gt;
+
+  &lt;Limit All&gt;
+    Order deny,allow
+  &lt;/Limit&gt;
+&lt;/Policy&gt;
+jadi@debian:~$
+Broadcast message from root@debian on pts/3 (Sun 2023-07-16 20:54:04 EDT):
+
+The system will power off now!
+
+Connection to 192.168.64.7 closed by remote host.
+Connection to 192.168.64.7 closed.
+➜  lpic1book ssh jadi@192.168.64.7
+jadi@192.168.64.7&#x27;s password:
+Linux debian 6.1.0-9-arm64 #1 SMP Debian 6.1.27-1 (2023-05-08) aarch64
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+You have no mail.
+Last login: Mon Jul 17 08:13:13 2023
+jadi@debian:~$ sudo su -
+[sudo] password for jadi:
+root@debian:~# cd /etc/cups/
+root@debian:/etc/cups# ls
+cups-browsed.conf  cups-files.conf  ppd		   raw.convs  snmp.conf  subscriptions.conf
+cupsd.conf	   interfaces	    printers.conf  raw.types  ssl	 subscriptions.conf.O
+root@debian:/etc/cups# cd
+root@debian:~# ls /etc/cups/
+cups-browsed.conf  cups-files.conf  ppd		   raw.convs  snmp.conf  subscriptions.conf
+cupsd.conf	   interfaces	    printers.conf  raw.types  ssl	 subscriptions.conf.O
+root@debian:~# cat /etc/cups/cupsd.conf
+#
+# Configuration file for the CUPS scheduler.  See &quot;man cupsd.conf&quot; for a
+# complete description of this file.
+#
+
+# Log general information in error_log - change &quot;warn&quot; to &quot;debug&quot;
+# for troubleshooting...
+LogLevel warn
+PageLogFormat
+
+# Specifies the maximum size of the log files before they are rotated.  The value &quot;0&quot; disables log rotation.
+MaxLogSize 0
+
+# Default error policy for printers
+ErrorPolicy retry-job
+
+# Only listen for connections from the local machine.
+Listen localhost:631
+Listen /run/cups/cups.sock
+
+# Show shared printers on the local network.
+Browsing Yes
+BrowseLocalProtocols dnssd
+
+# Default authentication type, when authentication is required...
+DefaultAuthType Basic
+
+# Web interface setting...
+WebInterface Yes
+
+# Timeout after cupsd exits if idle (applied only if cupsd runs on-demand - with -l)
+IdleExitTimeout 60
+
+# Restrict access to the server...
+&lt;Location /&gt;
+  Order allow,deny
+&lt;/Location&gt;
+
+# Restrict access to the admin pages...
+&lt;Location /admin&gt;
+  Order allow,deny
+&lt;/Location&gt;
+
+# Restrict access to configuration files...
+&lt;Location /admin/conf&gt;
+  AuthType Default
+  Require user @SYSTEM
+  Order allow,deny
+&lt;/Location&gt;
+
+# Restrict access to log files...
+&lt;Location /admin/log&gt;
+  AuthType Default
+  Require user @SYSTEM
+  Order allow,deny
+&lt;/Location&gt;
+
+# Set the default printer/job policies...
+&lt;Policy default&gt;
+  # Job/subscription privacy...
+  JobPrivateAccess default
+  JobPrivateValues default
+  SubscriptionPrivateAccess default
+  SubscriptionPrivateValues default
+
+  # Job-related operations must be done by the owner or an administrator...
+  &lt;Limit Create-Job Print-Job Print-URI Validate-Job&gt;
+    Order deny,allow
+  &lt;/Limit&gt;
+
+  &lt;Limit Send-Document Send-URI Hold-Job Release-Job Restart-Job Purge-Jobs Set-Job-Attributes Create-Job-Subscription Renew-Subscription Cancel-Subscription Get-Notifications Reprocess-Job Cancel-Current-Job Suspend-Current-Job Resume-Job Cancel-My-Jobs Close-Job CUPS-Move-Job CUPS-Get-Document&gt;
+    Require user @OWNER @SYSTEM
+    Order deny,allow
+  &lt;/Limit&gt;
+
+  # All administration operations require an administrator to authenticate...
+  &lt;Limit CUPS-Add-Modify-Printer CUPS-Delete-Printer CUPS-Add-Modify-Class CUPS-Delete-Class CUPS-Set-Default CUPS-Get-Devices&gt;
+    AuthType Default
+    Require user @SYSTEM
+    Order deny,allow
+  &lt;/Limit&gt;
+
+  # All printer operations require a printer operator to authenticate...
+  &lt;Limit Pause-Printer Resume-Printer Enable-Printer Disable-Printer Pause-Printer-After-Current-Job Hold-New-Jobs Release-Held-New-Jobs Deactivate-Printer Activate-Printer Restart-Printer Shutdown-Printer Startup-Printer Promote-Job Schedule-Job-After Cancel-Jobs CUPS-Accept-Jobs CUPS-Reject-Jobs&gt;
+    AuthType Default
+    Require user @SYSTEM
+    Order deny,allow
+  &lt;/Limit&gt;
+
+  # Only the owner or an administrator can cancel or authenticate a job...
+  &lt;Limit Cancel-Job CUPS-Authenticate-Job&gt;
+    Require user @OWNER @SYSTEM
+    Order deny,allow
+  &lt;/Limit&gt;
+
+  &lt;Limit All&gt;
+    Order deny,allow
+  &lt;/Limit&gt;
+&lt;/Policy&gt;
+
+# Set the authenticated printer/job policies...
+&lt;Policy authenticated&gt;
+  # Job/subscription privacy...
+  JobPrivateAccess default
+  JobPrivateValues default
+  SubscriptionPrivateAccess default
+  SubscriptionPrivateValues default
+
+  # Job-related operations must be done by the owner or an administrator...
+  &lt;Limit Create-Job Print-Job Print-URI Validate-Job&gt;
+    AuthType Default
+    Order deny,allow
+  &lt;/Limit&gt;
+
+  &lt;Limit Send-Document Send-URI Hold-Job Release-Job Restart-Job Purge-Jobs Set-Job-Attributes Create-Job-Subscription Renew-Subscription Cancel-Subscription Get-Notifications Reprocess-Job Cancel-Current-Job Suspend-Current-Job Resume-Job Cancel-My-Jobs Close-Job CUPS-Move-Job CUPS-Get-Document&gt;
+    AuthType Default
+    Require user @OWNER @SYSTEM
+    Order deny,allow
+  &lt;/Limit&gt;
+
+  # All administration operations require an administrator to authenticate...
+  &lt;Limit CUPS-Add-Modify-Printer CUPS-Delete-Printer CUPS-Add-Modify-Class CUPS-Delete-Class CUPS-Set-Default&gt;
+    AuthType Default
+    Require user @SYSTEM
+    Order deny,allow
+  &lt;/Limit&gt;
+
+  # All printer operations require a printer operator to authenticate...
+  &lt;Limit Pause-Printer Resume-Printer Enable-Printer Disable-Printer Pause-Printer-After-Current-Job Hold-New-Jobs Release-Held-New-Jobs Deactivate-Printer Activate-Printer Restart-Printer Shutdown-Printer Startup-Printer Promote-Job Schedule-Job-After Cancel-Jobs CUPS-Accept-Jobs CUPS-Reject-Jobs&gt;
+    AuthType Default
+    Require user @SYSTEM
+    Order deny,allow
+  &lt;/Limit&gt;
+
+  # Only the owner or an administrator can cancel or authenticate a job...
+  &lt;Limit Cancel-Job CUPS-Authenticate-Job&gt;
+    AuthType Default
+    Require user @OWNER @SYSTEM
+    Order deny,allow
+  &lt;/Limit&gt;
+
+  &lt;Limit All&gt;
+    Order deny,allow
+  &lt;/Limit&gt;
+&lt;/Policy&gt;
+
+# Set the kerberized printer/job policies...
+&lt;Policy kerberos&gt;
+  # Job/subscription privacy...
+  JobPrivateAccess default
+  JobPrivateValues default
+  SubscriptionPrivateAccess default
+  SubscriptionPrivateValues default
+
+  # Job-related operations must be done by the owner or an administrator...
+  &lt;Limit Create-Job Print-Job Print-URI Validate-Job&gt;
+    AuthType Negotiate
+    Order deny,allow
+  &lt;/Limit&gt;
+
+  &lt;Limit Send-Document Send-URI Hold-Job Release-Job Restart-Job Purge-Jobs Set-Job-Attributes Create-Job-Subscription Renew-Subscription Cancel-Subscription Get-Notifications Reprocess-Job Cancel-Current-Job Suspend-Current-Job Resume-Job Cancel-My-Jobs Close-Job CUPS-Move-Job CUPS-Get-Document&gt;
+    AuthType Negotiate
+    Require user @OWNER @SYSTEM
+    Order deny,allow
+  &lt;/Limit&gt;
+
+  # All administration operations require an administrator to authenticate...
+  &lt;Limit CUPS-Add-Modify-Printer CUPS-Delete-Printer CUPS-Add-Modify-Class CUPS-Delete-Class CUPS-Set-Default&gt;
+    AuthType Default
+    Require user @SYSTEM
+    Order deny,allow
+  &lt;/Limit&gt;
+
+  # All printer operations require a printer operator to authenticate...
+  &lt;Limit Pause-Printer Resume-Printer Enable-Printer Disable-Printer Pause-Printer-After-Current-Job Hold-New-Jobs Release-Held-New-Jobs Deactivate-Printer Activate-Printer Restart-Printer Shutdown-Printer Startup-Printer Promote-Job Schedule-Job-After Cancel-Jobs CUPS-Accept-Jobs CUPS-Reject-Jobs&gt;
+    AuthType Default
+    Require user @SYSTEM
+    Order deny,allow
+  &lt;/Limit&gt;
+
+  # Only the owner or an administrator can cancel or authenticate a job...
+  &lt;Limit Cancel-Job CUPS-Authenticate-Job&gt;
+    AuthType Negotiate
+    Require user @OWNER @SYSTEM
+    Order deny,allow
+  &lt;/Limit&gt;
+
+  &lt;Limit All&gt;
+    Order deny,allow
+  &lt;/Limit&gt;
+&lt;/Policy&gt;
+</code></pre> <p>تمام اطلاعات چاپگرها در فایل <code>/etc/cups/printers.conf</code> ذخیره می‌شود. رابط وب یا هر برنامه گرافیکی دیگری در واقع در حال ویرایش همین فایل است:</p><pre class="hljs"><code># cat /etc/cups/printers.conf
+# Printer configuration file for CUPS v2.4.2
+# Written by cupsd
+# DO NOT EDIT THIS FILE WHEN CUPSD IS RUNNING
+NextPrinterId 2
+&lt;Printer MyPrinter&gt;
+PrinterId 1
+UUID urn:uuid:cea56d60-93a0-31bf-443b-5a7288e2cd51
+Info My Printer
+Location other room
+MakeModel HP DesignJet 600 pcl, 1.0
+DeviceURI http://thatprinter:631/ipp/
+State Idle
+StateTime 1689596391
+ConfigTime 1689596367
+Type 8450116
+Accepting Yes
+Shared Yes
+JobSheets none none
+QuotaPeriod 0
+PageLimit 0
+KLimit 0
+OpPolicy default
+ErrorPolicy retry-job
+&lt;/Printer&gt;
+</code></pre> <p>یکی دیگر از دایرکتوری‌های مهم پیکربندی، <code>/etc/cups/ppd/</code> است. این دایرکتوری شامل فایل‌های <strong>PostScript Printer Description (PPD)</strong> است که به چاپگرهای استفاده‌کننده از آن‌ها کمک می‌کند به‌درستی کار کنند.</p><p>برای پیدا کردن لاگ‌های CUPS هم به دایرکتوری <code>/var/log</code> سر بزنید:</p><pre class="hljs"><code><span class="hljs-comment"># ls /var/log/cups/</span>
+access_log  error_log
+</code></pre> <h3>رابط وب CUPS</h3><p>برای فعال کردن رابط وب CUPS، باید تنظیم زیر را در فایل <code>/etc/cups/cupsd.conf</code> فعال کنید:</p><pre class="hljs"><code>WebInterface Yes
+</code></pre> <p>سپس از طریق پورت <strong>631</strong> به رابط گرافیکی تحت وب دسترسی خواهید داشت. بنابراین کافی است از مرورگر خود آدرس <code>localhost:631</code> یا <code>127.0.0.1:631</code> (یا آدرس IP سرور روی پورت <code>631</code>) را باز کنید.</p><div class="book-img-frame" style="text-align: center; margin: 24px 0;"><img src="/Gitab/books/book13/assets/cups_we_interface.png" alt="CUPS web interface on port 631" style="max-width: 100%; border-radius: 8px; border: 1px solid var(--g-border-dim);" loading="lazy"></div><p>در صفحه بالا چند بخش مهم وجود دارد:</p><table> <thead><tr> <th>بخش</th><th>کاربرد</th></tr> </thead><tbody> <tr><td><code>Administration</code></td><td>افزودن چاپگرها، مدیریت کارهای چاپ و پیکربندی سرور CUPS</td></tr> <tr><td><code>Jobs</code></td><td>بررسی کارهای چاپ فعال، در انتظار و تکمیل‌شده</td></tr> <tr><td><code>Printers</code></td><td>فهرست کردن یا جستجو در چاپگرهای نصب‌شده</td></tr> </tbody></table> <p>به صورت پیش‌فرض، کاربران سیستم می‌توانند چاپگرها و کارهای در صف را ببینند، اما انجام تغییرات (مثل افزودن چاپگر جدید) به سطح دسترسی بیشتری نیاز دارد. این دسترسی‌ها در بخش پایانی فایل <code>cupsd.conf</code> تنظیم می‌شوند. برای مثال، پیکربندی زیر دسترسی <code>CUPS-Add-Modify-Printer CUPS-Delete-Printer CUPS-Set-Default</code> را به تمام اعضای گروه <code>@printer_admin</code> می‌دهد:</p><pre class="hljs"><code>  &lt;Limit CUPS-Add-Modify-Printer CUPS-Delete-Printer CUPS-Set-Default&gt;
+    AuthType Default
+    Require user @printer_admin
+    Order deny,allow
+  &lt;/Limit&gt;
+</code></pre> <blockquote><p><strong>نکته:</strong> CUPS بیشتر درایورهای متداول چاپگرها را از پیش نصب‌شده دارد. برای افزودن یک چاپگر، کافی است مدل آن را از منوی کشویی انتخاب کنید.</p></blockquote> <h3>ابزارهای سنتی (Legacy Tools)</h3><p>درست مانند برنامه‌های <a href="/Gitab/books/book13/Book/38/1083-mail-transfer-agent-mta-basics/">MTA</a>، سیستم چاپ CUPS هم از تمام دستورات خط فرمان قدیمی پشتیبانی می‌کند. این‌ها در اصل دستورات چاپ در دنیای BSD بودند، بنابراین ممکن است لازم باشد بسته <code>cups-bsd</code> را نصب کنید تا در محیط CUPS شما کار کنند. جدول زیر دستورات سازگاری چاپ BSD را فهرست می‌کند:</p><table> <thead><tr> <th style="text-align:left">دستور</th><th style="text-align:left">کاربرد</th></tr> </thead><tbody> <tr><td style="text-align:left"><code>lpr</code></td><td style="text-align:left">چاپ یک فایل</td></tr> <tr><td style="text-align:left"><code>lpq</code></td><td style="text-align:left">نمایش صف چاپ / کارهای چاپ</td></tr> <tr><td style="text-align:left"><code>lprm</code></td><td style="text-align:left">حذف یک فایل از صف چاپگر (<code>rm</code> به معنی حذف)</td></tr> <tr><td style="text-align:left"><code>lpc</code></td><td style="text-align:left">برنامه کنترل و عیب‌یابی چاپگر</td></tr> </tbody></table> <h4>دستور <code>lpq</code></h4><p>حرف <strong>q</strong> مخفف <strong>queue</strong> (صف) است. بنابراین <code>lpq</code> صف چاپگر را نشان می‌دهد و زمانی استفاده می‌شود که می‌خواهید کارهای در حال چاپ یا در انتظار را ببینید. اگر از سوئیچ <code>-a</code> استفاده کنید، <code>lpq</code> کارهای <strong>همه</strong> چاپگرها را فهرست می‌کند. همچنین می‌توانید از سوئیچ <code>-P</code> برای نمایش کارهای یک چاپگر خاص استفاده نمایید. پس دستور زیر کارهای چاپگری به نام <code>Apple-Dot-Matrix</code> را نشان می‌دهد:</p><pre class="hljs"><code><span class="hljs-comment"># lpq -PApple-Dot-Matrix</span>
+Apple-Dot-Matrix is ready and printing
+Rank    Owner   Job     File(s)                         Total Size
+active  unknown 1       unknown                         7168 bytes
+1st     unknown 2       unknown                         2048 bytes
+</code></pre> <blockquote><p><strong>نکته:</strong> بین <code>-P</code> و نام چاپگر نباید فاصله‌ای باشد؛ عجیب است؟ بله :D</p></blockquote> <h4>دستور <code>lpr</code></h4><p>این دستور یک کار چاپ را به چاپگر می‌فرستد. نام چاپگر با سوئیچ <code>-P</code> مشخص می‌شود:</p><pre class="hljs"><code>$ lpr -PApple-Dot-Matrix for_print.txt
+$ lpq
+Apple-Dot-Matrix is ready and printing
+Rank    Owner   Job     File(s)                         Total Size
+active  jadi    1       Untitled Document 1             7168 bytes
+1st     jadi    2       Untitled1                       2048 bytes
+2nd     jadi    3       for_print.txt                   1024 bytes
+</code></pre> <blockquote><p><strong>نکته:</strong> اگر هیچ چاپگری مشخص نشود، از چاپگر پیش‌فرض استفاده خواهد شد.</p></blockquote> <h4>دستور <code>lprm</code></h4><p>عبارت <strong>rm</strong> مخفف <strong>remove</strong> (حذف) است. بنابراین دستور <code>lprm</code> کارهای چاپ را از صف حذف می‌کند. طبیعتاً باید <strong>شناسه کار (Job ID)</strong> را به آن بدهید:</p><pre class="hljs"><code>$ lpq
+Apple-Dot-Matrix is ready and printing
+Rank    Owner   Job     File(s)                         Total Size
+active  jadi    1       Untitled Document 1             7168 bytes
+1st     jadi    2       Untitled1                       2048 bytes
+2nd     jadi    3       for_print.txt                   1024 bytes
+jadi@funlife:/tmp$ lprm 2
+jadi@funlife:/tmp$ lpq
+Apple-Dot-Matrix is ready and printing
+Rank    Owner   Job     File(s)                         Total Size
+active  jadi    1       Untitled Document 1             7168 bytes
+1st     jadi    3       for_print.txt                   1024 bytes
+</code></pre> <blockquote><p><strong>نکته:</strong> فقط کاربر <code>root</code> می‌تواند کارهای چاپِ سایر کاربران را حذف کند.</p></blockquote> <p>اگر لازم شد <strong>همه</strong> کارهای یک چاپگر خاص را حذف کنید، می‌توانید از <code>-Pprinter_name -</code> استفاده کنید. بله! فقط یک خط تیره (<code>-</code>) بعد از نام چاپگر؛ دقیقاً به همین خاطر است که به آن دستور قدیمی (Legacy) می‌گویند.</p><blockquote> <p><strong>نکته:</strong> دستور <code>lprm -</code> همه کارهای چاپ را حذف می‌کند.</p></blockquote> <h4>دستور <code>lpc</code></h4><p>حرف <strong>c</strong> مخفف <strong>control</strong> (کنترل) است. بنابراین <code>lpc</code> به شما اجازه می‌دهد چاپگرهایتان را کنترل کنید، وضعیتشان را بررسی کنید (از طریق <code>lpc status</code>) و عیب‌یابی نمایید:</p><pre class="hljs"><code>$ lpc status
+Apple-Dot-Matrix:
+    printer is on device <span class="hljs-string">&#x27;ipp&#x27;</span> speed -1
+    queuing is enabled
+    printing is enabled
+    2 entries
+    daemon present
+</code></pre> <p>در خروجی بالا:</p><ul> <li><strong><code>queuing is enabled</code></strong> به ما می‌گوید که صف می‌تواند کارهای چاپ جدید را بپذیرد. اگر صف غیرفعال باشد، حتی نمی‌توانید کار جدیدی به چاپگر بفرستید.</li><li><strong><code>printing is enabled</code></strong> به این معنی است که چاپگر عملاً قادر به چاپ روی کاغذ است. اگر چاپگر جوهر یا کاغذ تمام کرده باشد یا کاغذ در آن گیر کرده باشد، این وضعیت می‌تواند غیرفعال شود.</li></ul> <p>اگر با چاپگر خود مشکل دارید یا می‌خواهید جلوی پذیرش کارهای جدید را بگیرید، یا اجازه دهید کارها در صف جمع شوند اما عملاً چاپ نشوند، این چهار دستور به کارتان می‌آیند:</p><table> <thead><tr> <th style="text-align:left">دستور</th><th style="text-align:left">کاربرد</th></tr> </thead><tbody> <tr><td style="text-align:left"><code>cupsaccept</code></td><td style="text-align:left">به صف چاپگر می‌گوید کارهای جدید را بپذیرد</td></tr> <tr><td style="text-align:left"><code>cupsreject</code></td><td style="text-align:left">به چاپگر می‌گوید هر کار جدیدی را رد کند</td></tr> <tr><td style="text-align:left"><code>cupsenable</code></td><td style="text-align:left">چاپ واقعی / فیزیکی کارها را فعال می‌کند</td></tr> <tr><td style="text-align:left"><code>cupsdisable</code></td><td style="text-align:left">چاپ فیزیکی کارها را غیرفعال می‌کند</td></tr> </tbody></table> <blockquote><p><strong>نکته:</strong> در همه این موارد باید نام چاپگر را وارد کنید. همچنین می‌توانید با سوئیچ <code>-r</code> دلیل آن را هم بنویسید.</p></blockquote> <pre class="hljs"><code>$ cupsdisable Apple-Dot-Matrix -r <span class="hljs-string">&quot;need more paper&quot;</span>
+$ lpc status
+Apple-Dot-Matrix:
+    printer is on device <span class="hljs-string">&#x27;ipp&#x27;</span> speed -1
+    queuing is enabled
+    printing is disabled
+    2 entries
+    daemon present
+</code></pre> <hr><div class="callout callout-tip" style="background: rgba(147, 51, 234, 0.08); border-right: 4px solid #9333ea; padding: 16px 20px; border-radius: 8px; margin-top: 32px;"> <strong>🔗 نسخه اصلی به زبان انگلیسی:</strong> این درسنامه بر اساس منبع انگلیسی جادی در مخزن <a href="https://github.com/jadijadi/lpic1book/blob/master/content/1084_manage_printers_and_printing.md" target="_blank" rel="noopener noreferrer">jadijadi/lpic1book</a> تدوین و سازماندهی شده است. </div></article> <nav class="chapter-single-next-nav"><a href="/Gitab/books/book13/Book/40/1091-fundamentals-of-internet-protocols/" class="btn-next-chapter-action" id="nextChapterBtn" data-hub="/Gitab/books/book13/"> <span class="next-btn-text">فصل بعدی: ۱۰۹.۱ مبانی پروتکل‌های اینترنت و شبکه</span> <span class="next-btn-arrow">←</span> </a> </nav></div> <button class="fab-back-to-top" id="backToTopBtn" type="button" aria-label="رفتن به بالای صفحه" title="رفتن به بالا"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"> <polyline points="18 15 12 9 6 15"></polyline> </svg> </button></main> <footer class="footer-minimal"><div class="footer-container"> <div class="footer-top-row"><div class="footer-brand-side"> <a href="/Gitab/" class="footer-brand-anchor"> <img src="/Gitab/icone/logo.svg" alt="Gitab" width="28" height="28" loading="lazy" decoding="async"> <span class="footer-brand-title">گیتاب (Gitab)</span> </a> <p class="footer-tagline"> پلتفرم آزاد و مستقل برای ترجمهٔ دقیق و روان کتاب‌های مرجع مهندسی نرم‌افزار. </p></div> <div class="footer-nav-cols"><div class="footer-nav-col"> <span class="footer-nav-heading">موضوعات</span><ul class="footer-nav-list"> <li><a href="/Gitab/books/list-books/?cat=csharp">سی‌شارپ و دات‌نت</a></li><li><a href="/Gitab/books/list-books/?cat=clean-code">کد تمیز و بازآفرینی</a></li><li><a href="/Gitab/books/list-books/?cat=architecture">معماری و طراحی دامنه</a></li><li><a href="/Gitab/books/list-books/?cat=system">لینوکس و خط فرمان</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">بخش‌های سایت</span><ul class="footer-nav-list"> <li><a href="/Gitab/">صفحه اصلی</a></li><li><a href="/Gitab/books/list-books/">کتابخانه کامل</a></li><li><a href="/Gitab/courses/">دوره‌های آموزشی</a></li><li><a href="/Gitab/translator.html">تالار مترجمین</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">مشارکت و جامعه</span><ul class="footer-nav-list"> <li><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer">راهنمای همکاری در ترجمه</a></li><li><a href="https://github.com/hheydarian/Gitab/issues" target="_blank" rel="noopener noreferrer">پیشنهاد کتاب یا گزارش خطا</a></li></ul> </div></div> </div><div class="footer-bottom-line"> <span>© <span id="y">2026</span> Gitab — توسعه‌یافته برای جامعهٔ مهندسان نرم‌افزار ایرانی</span></div> </div></footer> <script>
+  (() => {
+    const root = document.documentElement;
+    const btn = document.getElementById('themeToggle');
+    const sunIcon = btn ? btn.querySelector('.icon-sun') : null;
+    const moonIcon = btn ? btn.querySelector('.icon-moon') : null;
+    const KEY = 'gitab-theme';
+
+    function updateTheme(mode) {
+      root.setAttribute('data-theme', mode);
+      root.dataset.colorMode = mode;
+      if (sunIcon && moonIcon) {
+        if (mode === 'dark') {
+          sunIcon.style.display = 'inline-block';
+          moonIcon.style.display = 'none';
+        } else {
+          sunIcon.style.display = 'none';
+          moonIcon.style.display = 'inline-block';
+        }
+      }
+    }
+
+    let saved = 'dark';
+    try { saved = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+    updateTheme(saved);
+
+    if (btn) {
+      btn.addEventListener('click', () => {
+        let current = 'dark';
+        try { current = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+        const next = current === 'dark' ? 'light' : 'dark';
+        try { localStorage.setItem(KEY, next); } catch (e) {}
+        updateTheme(next);
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      let mode = 'dark';
+      try { mode = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+      updateTheme(mode);
+      const yearSpan = document.getElementById('y');
+      if (yearSpan) yearSpan.textContent = new Date().getFullYear();
+    });
+
+    const mobBtn = document.getElementById('mobileMenuBtn');
+    const mobDrawer = document.getElementById('mobileDrawer');
+    if (mobBtn && mobDrawer) {
+      const setDrawerOpen = (open) => {
+        mobDrawer.classList.toggle('open', open);
+        mobBtn.classList.toggle('is-open', open);
+        mobBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        mobBtn.setAttribute('aria-label', open ? 'بستن منو' : 'باز کردن منو');
+        mobDrawer.setAttribute('aria-hidden', open ? 'false' : 'true');
+      };
+
+      mobBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        setDrawerOpen(!mobDrawer.classList.contains('open'));
+      });
+
+      mobDrawer.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => setDrawerOpen(false));
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && mobDrawer.classList.contains('open')) {
+          setDrawerOpen(false);
+        }
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!mobDrawer.contains(e.target) && !mobBtn.contains(e.target)) {
+          setDrawerOpen(false);
+        }
+      });
+    }
+
+    if ('serviceWorker' in navigator) {
+      const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+      if (isLocalhost) {
+        navigator.serviceWorker.getRegistrations().then(regs => {
+          for (const reg of regs) reg.unregister();
+        });
+        if ('caches' in window) {
+          caches.keys().then(names => {
+            for (const name of names) caches.delete(name);
+          });
+        }
+      } else {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/Gitab/sw.js').catch(() => {});
+        });
+      }
+    }
+  })();
+  </script> <script>
+  document.querySelectorAll('pre code').forEach(block => {
+    const pre = block.parentNode;
+    if (!pre || pre.querySelector('.copy-btn')) return;
+
+    const copySvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
+    const okSvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+
+    const btn = document.createElement('button');
+    btn.className = 'copy-btn';
+    btn.setAttribute('aria-label', 'کپی کد');
+    btn.setAttribute('title', 'کپی کد');
+    btn.setAttribute('type', 'button');
+    btn.innerHTML = copySvg;
+    pre.appendChild(btn);
+
+    btn.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(block.textContent);
+        btn.classList.add('copied');
+        btn.innerHTML = okSvg;
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          btn.innerHTML = copySvg;
+        }, 1800);
+      } catch (err) {
+        console.error('Copy failed:', err);
+      }
+    });
+  });
+  </script> <script>
+  (() => {
+    const article = document.getElementById('chapterArticle');
+    if (!article) return;
+
+    const progressBar = document.getElementById('readingProgressBar');
+    if (progressBar) {
+      window.addEventListener('scroll', () => {
+        const docElem = document.documentElement;
+        const totalHeight = docElem.scrollHeight - docElem.clientHeight;
+        if (totalHeight > 0) {
+          const progress = (window.pageYOffset / totalHeight) * 100;
+          progressBar.style.width = Math.min(100, Math.max(0, progress)) + '%';
+        }
+      }, { passive: true });
+    }
+
+    const btt = document.getElementById('backToTopBtn');
+    if (btt) {
+      window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 250) {
+          btt.classList.add('visible');
+        } else {
+          btt.classList.remove('visible');
+        }
+      }, { passive: true });
+
+      btt.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+
+    article.querySelectorAll('img').forEach(img => {
+      if (!img.hasAttribute('loading')) img.loading = 'lazy';
+      if (!img.hasAttribute('decoding')) img.decoding = 'async';
+      const parent = img.parentElement;
+      if (parent && parent.tagName === 'P') {
+        parent.style.textAlign = 'center';
+      }
+
+      img.addEventListener('error', function() {
+        const src = this.getAttribute('src');
+        if (src && src.includes('assets/image/')) {
+          const parts = src.split('assets/image/');
+          const corrected = '/Gitab/books/book13/assets/image/' + parts[1];
+          if (this.src !== corrected) {
+            this.src = corrected;
+          }
+        }
+      });
+    });
+
+    article.querySelectorAll('p').forEach(p => {
+      const trimmed = p.innerText.trim();
+      if (trimmed.startsWith('💡') || trimmed.startsWith('نکته:')) {
+        p.classList.add('react-callout', 'callout-tip');
+      } else if (trimmed.startsWith('⚠️') || trimmed.startsWith('هشدار:')) {
+        p.classList.add('react-callout', 'callout-warning');
+      } else if (trimmed.startsWith('📌') || trimmed.startsWith('مهم:')) {
+        p.classList.add('react-callout', 'callout-important');
+      } else if (trimmed.startsWith('🔹') || trimmed.startsWith('🔸')) {
+        p.classList.add('react-callout', 'callout-note');
+      }
+    });
+  })();
+  </script> <script type="speculationrules">{"prefetch":[{"where":{"and":[{"href_matches":"/Gitab/*"},{"not":{"href_matches":"/Gitab/downloads/*"}},{"not":{"selector_matches":"[download], [target='_blank']"}}]},"eagerness":"moderate"}]}</script> <script>
+  (() => {
+    if (window.HTMLScriptElement && HTMLScriptElement.supports && HTMLScriptElement.supports('speculationrules')) return;
+    const seen = new Set([window.location.href]);
+    let count = 0;
+    const prefetchLink = (e) => {
+      if (count >= 12) return;
+      const a = e.target && e.target.closest ? e.target.closest('header a, .chapter-single-next-nav a, .syllabus-chapter-item a, .btn-hero-read, .btn-card-read') : null;
+      if (!a || !a.href || a.hasAttribute('download') || a.target === '_blank') return;
+      if (a.origin !== window.location.origin || a.pathname.includes('/downloads/')) return;
+      const clean = a.href.split('#')[0];
+      if (!clean || seen.has(clean)) return;
+      seen.add(clean);
+      count++;
+      const l = document.createElement('link');
+      l.rel = 'prefetch';
+      l.href = clean;
+      document.head.appendChild(l);
+    };
+    document.addEventListener('pointerenter', prefetchLink, { capture: true, passive: true });
+    document.addEventListener('touchstart', prefetchLink, { capture: true, passive: true });
+  })();
+  </script></body></html>

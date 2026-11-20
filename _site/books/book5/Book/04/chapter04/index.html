@@ -1,1049 +1,301 @@
-
-
-<!doctype html>
-<html lang="fa" dir="rtl">
-<head>
-  <meta charset="utf-8">
-  <link rel="icon" type="image/png" href="/Gitab/favicon.png">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>دستکاری فایل‌ها و پوشه‌ها</title>
-  <meta name="description" content="ترجمه‌های فارسی کتاب‌های فنی — سریع، مینیمال و قابل اتکا.">
-
-  <!-- استایل‌ها -->
-  <link rel="stylesheet" href="/Gitab/styles/main.css">
-  <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
-
-  <style>
-  @font-face {
-    font-family: 'Vazir';
-    src: url('/Gitab/fonts/Vazir-FD-WOL.ttf') format('truetype');
-    font-display: swap;
-  }
-  @font-face {
-    font-family: "Lalezar";
-    src: url('fonts/Lalezar.ttf') format('truetype');
-    font-display: swap;
-}
-  body {
-    font-family: 'Vazir', sans-serif;
-  }
-  </style>
-</head>
-
-<body>
-  <!-- هدر مشترک -->
-  <header class="header">
-    <div class="container nav-wrap">
-      <a href="/Gitab/" class="brand">
-        <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="26" height="26">
-        <span>Gitab</span>
-      </a>
-
-       <nav class="nav">
-         <a href="/Gitab/" >خانه</a>
-         <a href="/Gitab/books/list-books" >کتاب‌ها</a>
-         <a href="/Gitab/giter.html" >دوره ها</a>
-          <!-- 
-         <a href="/Gitab/translator.html" >مترجمین</a>
-           -->
-       </nav>
-
-      <div class="nav-actions">
-        <button id="themeToggle" class="icon-btn theme-btn" data-icon="moon" aria-label="تغییر تم">
-          <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن">
-          <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک">
-        </button>
-
-        <a class="icon-btn" href="https://github.com/hheydarian/Gitab" target="_blank" title="GitHub">
-          <img src="/Gitab/icone/github.svg" alt="GitHub">
-        </a>
-
-        <!-- دکمه منو برای موبایل -->
-        <button class="menu-toggle" aria-label="منو">
-          <img src="/Gitab/icone/menu.svg" alt="menu">
-        </button>
-      </div>
-    </div>
-  </header>
-
-  
-  <main class="site-main book-page">
-    <h1>فصل ۴ – دستکاری فایل‌ها و پوشه‌ها (Manipulating Files and Directories)</h1>
-<hr>
-<h2>مقدمه</h2>
-<p>اکنون آماده‌ی انجام کار واقعی هستیم!<br>
-این فصل دستورات زیر را معرفی می‌کند:</p>
-<ul>
-<li><strong>cp</strong> – کپی کردن فایل‌ها و پوشه‌ها</li>
-<li><strong>mv</strong> – جابه‌جا کردن یا تغییر نام فایل‌ها و پوشه‌ها</li>
-<li><strong>mkdir</strong> – ایجاد پوشه‌ها</li>
-<li><strong>rm</strong> – حذف فایل‌ها و پوشه‌ها</li>
-<li><strong>ln</strong> – ایجاد لینک‌های سخت (Hard Link) و نمادین (Symbolic Link)</li>
-</ul>
-<p>این پنج دستور از پرکاربردترین دستورات لینوکس هستند.<br>
-آن‌ها برای دستکاری فایل‌ها و دایرکتوری‌ها مورد استفاده قرار می‌گیرند.</p>
-<hr>
-<h2>چرا به‌جای فایل‌منیجر از خط فرمان استفاده کنیم؟</h2>
-<p>صادقانه بگوییم، برخی از کارهایی که این دستورات انجام می‌دهند، با استفاده از یک <strong>مدیر فایل گرافیکی (File Manager)</strong> راحت‌تر انجام می‌شوند.<br>
-برای مثال، در یک مدیر فایل می‌توانیم:</p>
-<ul>
-<li>فایل را از یک پوشه به پوشه‌ی دیگر بکشیم و رها کنیم (Drag &amp; Drop)</li>
-<li>فایل‌ها را <strong>برش (Cut)</strong> و <strong>جای‌گذاری (Paste)</strong> کنیم</li>
-<li>فایل‌ها را حذف کنیم و غیره</li>
-</ul>
-<p>پس چرا باید از این برنامه‌های قدیمی خط فرمان استفاده کنیم؟</p>
-<p>پاسخ در دو واژه خلاصه می‌شود: <strong>قدرت (Power)</strong> و <strong>انعطاف‌پذیری (Flexibility)</strong>.<br>
-در حالی که انجام کارهای ساده با مدیر فایل آسان است،<br>
-کارهای پیچیده‌تر با خط فرمان <strong>سریع‌تر و دقیق‌تر</strong> انجام می‌شوند.</p>
-<p>برای مثال:<br>
-فرض کنید می‌خواهیم تمام فایل‌های HTML را از یک پوشه به پوشه‌ی دیگر کپی کنیم،<br>
-اما فقط فایل‌هایی را کپی کنیم که در مقصد وجود ندارند یا نسخه‌ی موجود در مقصد قدیمی‌تر است.<br>
-این کار با یک فایل‌منیجر تقریباً غیرممکن است،<br>
-اما در خط فرمان خیلی راحت انجام می‌شود:</p>
-<pre class="hljs"><code><span class="hljs-built_in">cp</span> -u *.html destination
-</code></pre>
-<hr>
-<h2>Wildcards (کاراکترهای عام یا جایگزین)</h2>
-<p>پیش از آنکه استفاده از این دستورات را آغاز کنیم، باید درباره‌ی قابلیتی از <strong>شل (Shell)</strong> صحبت کنیم که باعث می‌شود این دستورات بسیار قدرتمند باشند.<br>
-از آن‌جا که شل به‌طور گسترده‌ای با نام فایل‌ها سروکار دارد،<br>
-کاراکترهای ویژه‌ای را برای مشخص کردن سریع گروهی از فایل‌ها فراهم می‌کند.</p>
-<p>به این کاراکترهای ویژه <strong>Wildcards (وایلدکارت)</strong> گفته می‌شود.<br>
-استفاده از وایلدکارت‌ها – که به آن <strong>Globbing (گلابینگ)</strong> نیز می‌گویند – به ما اجازه می‌دهد فایل‌ها را بر اساس <strong>الگوهای متنی</strong> انتخاب کنیم.</p>
-<hr>
-<h3>جدول ۴-۱: Wildcards</h3>
-<table>
-<thead>
-<tr>
-<th>وایلدکارت</th>
-<th>معنی</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>*</code></td>
-<td>با هر تعداد از کاراکترها مطابقت دارد.</td>
-</tr>
-<tr>
-<td><code>?</code></td>
-<td>با هر کاراکتر تکی مطابقت دارد.</td>
-</tr>
-<tr>
-<td><code>[characters]</code></td>
-<td>با هر کاراکتری که عضوی از مجموعه‌ی مشخص‌شده باشد مطابقت دارد.</td>
-</tr>
-<tr>
-<td><code>[!characters]</code> یا <code>[^characters]</code></td>
-<td>با هر کاراکتری که عضوی از مجموعه‌ی مشخص‌شده <strong>نباشد</strong> مطابقت دارد.</td>
-</tr>
-<tr>
-<td><code>[[:class:]]</code></td>
-<td>با هر کاراکتری که عضوی از <strong>کلاس مشخص‌شده (Character Class)</strong> باشد مطابقت دارد.</td>
-</tr>
-</tbody>
-</table>
-<hr>
-<h3>جدول ۴-۲: کلاس‌های کاراکتری رایج (Commonly Used Character Classes)</h3>
-<table>
-<thead>
-<tr>
-<th>کلاس کاراکتری</th>
-<th>توضیح</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>[:alnum:]</code></td>
-<td>با هر کاراکتر <strong>حرف یا عددی (الفبایی–عددی)</strong> مطابقت دارد.</td>
-</tr>
-<tr>
-<td><code>[:alpha:]</code></td>
-<td>با هر <strong>حرف الفبایی</strong> مطابقت دارد.</td>
-</tr>
-<tr>
-<td><code>[:digit:]</code></td>
-<td>با هر <strong>عدد</strong> مطابقت دارد.</td>
-</tr>
-<tr>
-<td><code>[:lower:]</code></td>
-<td>با هر <strong>حرف کوچک</strong> مطابقت دارد.</td>
-</tr>
-<tr>
-<td><code>[:upper:]</code></td>
-<td>با هر <strong>حرف بزرگ</strong> مطابقت دارد.</td>
-</tr>
-</tbody>
-</table>
-<hr>
-<p>استفاده از وایلدکارت‌ها این امکان را به ما می‌دهد تا <strong>الگوهای پیچیده و پیشرفته‌ای برای انتخاب نام فایل‌ها</strong> بسازیم.<br>
-در جدول زیر، چند نمونه از این الگوها و فایل‌هایی که با آن‌ها مطابقت دارند آمده است:</p>
-<hr>
-<h3>جدول ۴-۳: مثال‌هایی از Wildcard</h3>
-<table>
-<thead>
-<tr>
-<th>الگو (Pattern)</th>
-<th>فایل‌هایی که مطابقت دارند</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>*</code></td>
-<td>تمام فایل‌ها</td>
-</tr>
-<tr>
-<td><code>g*</code></td>
-<td>هر فایلی که با حرف <strong>g</strong> آغاز شود</td>
-</tr>
-<tr>
-<td><code>b*.txt</code></td>
-<td>هر فایلی که با <strong>b</strong> آغاز شود، سپس هر تعدادی کاراکتر داشته باشد، و در نهایت با <code>.txt</code> تمام شود</td>
-</tr>
-<tr>
-<td><code>Data???</code></td>
-<td>هر فایلی که با <strong>Data</strong> آغاز شود و دقیقاً سه کاراکتر پس از آن بیاید</td>
-</tr>
-<tr>
-<td><code>[abc]*</code></td>
-<td>هر فایلی که با یکی از حروف <strong>a، b یا c</strong> آغاز شود</td>
-</tr>
-<tr>
-<td><code>BACKUP.[0-9][0-9][0-9]</code></td>
-<td>هر فایلی که با <strong>BACKUP.</strong> آغاز شود و پس از آن دقیقاً سه رقم بیاید</td>
-</tr>
-<tr>
-<td><code>[[:upper:]]*</code></td>
-<td>هر فایلی که با یک <strong>حرف بزرگ</strong> آغاز شود</td>
-</tr>
-<tr>
-<td><code>[![:digit:]]*</code></td>
-<td>هر فایلی که با <strong>عدد آغاز نمی‌شود</strong></td>
-</tr>
-<tr>
-<td><code>*[[:lower:]123]</code></td>
-<td>هر فایلی که با یک <strong>حرف کوچک</strong> یا یکی از اعداد <strong>۱، ۲ یا ۳</strong> پایان یابد</td>
-</tr>
-</tbody>
-</table>
-<hr>
-<p>وایلدکارت‌ها را می‌توان با هر دستوری که از نام فایل‌ها به‌عنوان آرگومان استفاده می‌کند به کار برد.<br>
-در فصل ۷ با این موضوع بیشتر آشنا خواهیم شد:<br>
-<strong>«دیدن دنیا از دیدگاه شل (Seeing the World as the Shell Sees It)».</strong></p>
-<h1>محدوده‌های کاراکتری (Character Ranges)</h1>
-<p>اگر پیش‌تر با سیستم‌های مشابه یونیکس (Unix-like) کار کرده باشید<br>
-یا کتاب‌های دیگری درباره‌ی این موضوع خوانده باشید،<br>
-ممکن است با نمادهای <code>[A-Z]</code> و <code>[a-z]</code> برای نمایش محدوده‌ی کاراکترها برخورد کرده باشید.</p>
-<p>این نمادها در گذشته، در نسخه‌های قدیمی یونیکس و لینوکس،<br>
-روش استاندارد برای مشخص کردن محدوده‌ای از حروف بودند.<br>
-برای مثال، <code>[A-Z]</code> نشان‌دهنده‌ی تمام حروف بزرگ انگلیسی و <code>[a-z]</code> نشان‌دهنده‌ی تمام حروف کوچک بود.</p>
-<p>اما باید توجه داشته باشید که در نسخه‌های جدید لینوکس،<br>
-این یادداشت‌ها ممکن است نتیجه‌ی مورد انتظار را تولید نکنند،<br>
-مگر آن‌که سیستم به‌درستی پیکربندی شده باشد (به‌ویژه از نظر <strong>Locale</strong> و زبان).</p>
-<p>بنابراین، بهتر است از آن‌ها استفاده نکنید و به جای آن از <strong>کلاس‌های کاراکتری (Character Classes)</strong><br>
-که در جدول قبل معرفی شد (<code>[:upper:]</code>, <code>[:lower:]</code>, <code>[:alpha:]</code> و غیره) بهره ببرید.<br>
-این کلاس‌ها قابل اطمینان‌تر و سازگار با محیط‌های مختلف هستند.</p>
-<hr>
-<h2>فایل‌های نقطه‌ای (Dot Files)</h2>
-<p>اگر با دستور <code>ls</code> و گزینه‌ی <code>-a</code> به پوشه‌ی خانگی خود نگاه کنیم،<br>
-تعداد زیادی فایل و پوشه را مشاهده خواهیم کرد که نام آن‌ها با یک نقطه (<code>.</code>) آغاز می‌شود.</p>
-<p>همان‌طور که پیش‌تر آموختیم،<br>
-این فایل‌ها <strong>پنهان (Hidden Files)</strong> هستند.<br>
-پنهان بودن، یک ویژگی خاص فایل نیست،<br>
-بلکه فقط به این معناست که نام فایل با یک نقطه شروع می‌شود<br>
-و در نتیجه، در خروجی <code>ls</code> نمایش داده نمی‌شود مگر آن‌که از گزینه‌های <code>-a</code> یا <code>-A</code> استفاده کنیم.</p>
-<p>این ویژگی در مورد <strong>وایلدکارت‌ها</strong> نیز صدق می‌کند.<br>
-یعنی فایل‌های پنهان در نتایج الگوهای وایلدکارت ظاهر نمی‌شوند،<br>
-مگر آن‌که صراحتاً الگویی مانند <code>.*</code> را بنویسیم.</p>
-<p>اما اگر این کار را انجام دهیم،<br>
-نتیجه شامل دو مدخل خاص نیز خواهد بود:</p>
-<ul>
-<li><code>.</code> → اشاره به پوشه‌ی فعلی (<strong>Current Directory</strong>)</li>
-<li><code>..</code> → اشاره به پوشه‌ی والد (<strong>Parent Directory</strong>)</li>
-</ul>
-<p>برای جلوگیری از نمایش این دو مورد،<br>
-می‌توان از الگوهای زیر استفاده کرد:</p>
-<pre class="hljs"><code>.[!.]*
-</code></pre>
-<p>یا</p>
-<pre class="hljs"><code>.??*
-</code></pre>
-<p>هر دوی این الگوها فایل‌های پنهان واقعی را فهرست می‌کنند<br>
-اما <code>.</code> و <code>..</code> را حذف می‌کنند.</p>
-<hr>
-<p>✅ <strong>نکته:</strong><br>
-در لینوکس و یونیکس، فایل‌های پنهان معمولاً برای ذخیره‌ی <strong>تنظیمات برنامه‌ها و کاربر</strong> استفاده می‌شوند.<br>
-برای مثال:</p>
-<ul>
-<li><code>.bashrc</code> → تنظیمات پوسته‌ی Bash</li>
-<li><code>.profile</code> → تنظیمات ورود کاربر</li>
-<li><code>.gitconfig</code> → پیکربندی Git</li>
-</ul>
-<p>بنابراین، در اغلب موارد نیازی به تغییر یا حذف فایل‌های نقطه‌ای نیست مگر آن‌که دقیقاً بدانید چه می‌کنید.</p>
-<hr>
-<h3>🟢 پایان بخش دوم</h3>
-<p>در بخش بعدی، سراغ قسمت بعدی فصل می‌رویم:<br>
-<strong>Wildcards در محیط گرافیکی (GUI)</strong> و دستور <strong><code>mkdir</code></strong> برای ایجاد دایرکتوری‌ها.</p>
-<h1>وایلدکارت‌ها در محیط گرافیکی (Wildcards Work in the GUI Too)</h1>
-<p>وایلدکارت‌ها فقط در خط فرمان کاربرد ندارند؛<br>
-بلکه در برخی از <strong>مدیران فایل گرافیکی (Graphical File Managers)</strong> نیز پشتیبانی می‌شوند.<br>
-این موضوع آن‌ها را حتی ارزشمندتر می‌کند، زیرا می‌توان از همان الگوهای قدرتمند در محیط‌های تصویری نیز استفاده کرد.</p>
-<hr>
-<h2>نمونه‌ها</h2>
-<h3>در Nautilus (مدیر فایل در محیط GNOME)</h3>
-<p>می‌توانید کلیدهای ترکیبی <code>Ctrl + S</code> را فشار دهید<br>
-و یک الگوی انتخاب فایل با استفاده از وایلدکارت وارد کنید.<br>
-در این حالت، تمام فایل‌هایی که با الگوی شما مطابقت دارند، در پوشه‌ی فعلی انتخاب می‌شوند.</p>
-<h3>در Dolphin و Konqueror (مدیران فایل در محیط KDE)</h3>
-<p>می‌توانید مستقیماً در نوار مسیر (<strong>Location Bar</strong>) از وایلدکارت استفاده کنید.<br>
-برای مثال، اگر بخواهید تمام فایل‌هایی را که در مسیر <code>/usr/bin</code> با حرف کوچک <strong>u</strong> شروع می‌شوند ببینید، کافی است عبارت زیر را در نوار مسیر وارد کنید:</p>
-<pre class="hljs"><code>/usr/bin/u*
-</code></pre>
-<p>و مدیر فایل به‌طور خودکار فقط فایل‌های مطابق با این الگو را نمایش می‌دهد.</p>
-<hr>
-<p>📌 <strong>نکته:</strong><br>
-بسیاری از ایده‌هایی که در ابتدا در <strong>رابط خط فرمان (Command Line Interface)</strong> وجود داشتند، بعدها به رابط‌های گرافیکی نیز راه پیدا کرده‌اند.<br>
-این یکی از دلایلی است که باعث می‌شود <strong>محیط دسکتاپ لینوکس</strong> تا این اندازه قدرتمند و منعطف باشد.</p>
-<hr>
-<h2>دستور <code>mkdir</code> – ایجاد دایرکتوری‌ها (Create Directories)</h2>
-<p>دستور <strong><code>mkdir</code></strong> برای ایجاد پوشه‌ها (دایرکتوری‌ها) استفاده می‌شود.<br>
-شکل کلی استفاده از آن به‌صورت زیر است:</p>
-<pre class="hljs"><code><span class="hljs-built_in">mkdir</span> directory...
-</code></pre>
-<p>علامت سه‌نقطه (<code>...</code>) در مستندات لینوکس به این معناست که آرگومان می‌تواند <strong>تکرار شود</strong>.<br>
-به بیان دیگر، می‌توانید چندین پوشه را در یک دستور بسازید.</p>
-<hr>
-<h3>مثال‌ها</h3>
-<p>ایجاد یک پوشه به نام <code>dir1</code>:</p>
-<pre class="hljs"><code><span class="hljs-built_in">mkdir</span> dir1
-</code></pre>
-<p>ایجاد سه پوشه هم‌زمان:</p>
-<pre class="hljs"><code><span class="hljs-built_in">mkdir</span> dir1 dir2 dir3
-</code></pre>
-<p>در این حالت، سه پوشه به نام‌های <code>dir1</code>، <code>dir2</code> و <code>dir3</code> ساخته می‌شوند.</p>
-<hr>
-<p>📘 <strong>نکته:</strong><br>
-اگر در مسیر موردنظر مجوز (<strong>Permission</strong>) لازم برای نوشتن نداشته باشید،<br>
-دستور <code>mkdir</code> با خطای «Permission denied» مواجه می‌شود.<br>
-در چنین حالتی، باید از <code>sudo</code> برای اجرای دستور با سطح دسترسی مدیر استفاده کنید:</p>
-<pre class="hljs"><code><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">mkdir</span> /opt/newfolder
-</code></pre>
-<hr>
-<h3>🟢 پایان بخش سوم</h3>
-<p>در بخش بعدی، سراغ دستورات کاربردی‌تر خواهیم رفت:<br>
-<strong><code>cp</code> (کپی کردن فایل‌ها و دایرکتوری‌ها)</strong> همراه با جدول کامل گزینه‌ها و مثال‌های واقعی.</p>
-<h1>دستور cp – کپی کردن فایل‌ها و دایرکتوری‌ها (Copy Files and Directories)</h1>
-<p>دستور <strong><code>cp</code></strong> برای کپی کردن فایل‌ها یا دایرکتوری‌ها استفاده می‌شود.<br>
-این دستور دو شیوه‌ی اصلی برای استفاده دارد:</p>
-<hr>
-<h3>۱. کپی یک فایل یا دایرکتوری به مقصد جدید</h3>
-<pre class="hljs"><code><span class="hljs-built_in">cp</span> item1 item2
-</code></pre>
-<p>در این حالت، فایل یا پوشه‌ی <code>item1</code> در مسیر یا نام جدیدی با عنوان <code>item2</code> کپی می‌شود.<br>
-اگر مقصد موجود باشد، محتوای آن <strong>بازنویسی (overwrite)</strong> می‌شود.</p>
-<hr>
-<h3>۲. کپی چند فایل یا پوشه درون یک دایرکتوری</h3>
-<pre class="hljs"><code><span class="hljs-built_in">cp</span> item... directory
-</code></pre>
-<p>در این حالت، چندین فایل یا پوشه (که با فاصله از هم جدا شده‌اند)<br>
-درون دایرکتوری مشخص‌شده کپی می‌شوند.</p>
-<p>برای مثال:</p>
-<pre class="hljs"><code><span class="hljs-built_in">cp</span> file1 file2 dir1
-</code></pre>
-<p>فایل‌های <code>file1</code> و <code>file2</code> درون دایرکتوری <code>dir1</code> کپی می‌شوند.<br>
-دایرکتوری مقصد (<code>dir1</code>) باید از قبل وجود داشته باشد.</p>
-<hr>
-<h2>گزینه‌های مفید cp (Useful Options)</h2>
-<p>جدول زیر برخی از گزینه‌های پرکاربرد دستور <code>cp</code> را نشان می‌دهد.</p>
-<h3>جدول ۴-۴: گزینه‌های cp</h3>
-<table>
-<thead>
-<tr>
-<th>گزینه</th>
-<th>گزینه‌ی بلند</th>
-<th>توضیح</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>-a</code></td>
-<td><code>--archive</code></td>
-<td>فایل‌ها و دایرکتوری‌ها را همراه با تمام ویژگی‌هایشان (مالکیت، مجوزها و غیره) کپی می‌کند. به‌طور معمول، فایل‌های کپی‌شده خصوصیات کاربر فعلی را می‌گیرند، اما با این گزینه همه‌چیز حفظ می‌شود.</td>
-</tr>
-<tr>
-<td><code>-i</code></td>
-<td><code>--interactive</code></td>
-<td>پیش از بازنویسی یک فایل موجود، از کاربر تأیید می‌گیرد. در حالت عادی، <code>cp</code> بدون هشدار فایل‌ها را بازنویسی می‌کند.</td>
-</tr>
-<tr>
-<td><code>-r</code></td>
-<td><code>--recursive</code></td>
-<td>دایرکتوری‌ها و محتوای درونشان را به‌صورت بازگشتی کپی می‌کند. برای کپی دایرکتوری‌ها، باید این گزینه یا <code>-a</code> را استفاده کنید.</td>
-</tr>
-<tr>
-<td><code>-u</code></td>
-<td><code>--update</code></td>
-<td>فقط فایل‌هایی را کپی می‌کند که در مقصد وجود ندارند یا نسخه‌ی جدیدتری نسبت به فایل مقصد دارند. این گزینه در انتقال حجم زیاد فایل‌ها بسیار مفید است، زیرا از کپی فایل‌های تکراری جلوگیری می‌کند.</td>
-</tr>
-<tr>
-<td><code>-v</code></td>
-<td><code>--verbose</code></td>
-<td>هنگام اجرای دستور، پیام‌های توضیحی درباره‌ی عملیات انجام‌شده نمایش می‌دهد.</td>
-</tr>
-</tbody>
-</table>
-<hr>
-<h2>مثال‌های کاربردی cp</h2>
-<p>در جدول زیر چند نمونه از کاربرد دستور <code>cp</code> را می‌بینید.</p>
-<h3>جدول ۴-۵: مثال‌های cp</h3>
-<table>
-<thead>
-<tr>
-<th>دستور</th>
-<th>نتیجه</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>cp file1 file2</code></td>
-<td>فایل <code>file1</code> را به <code>file2</code> کپی می‌کند. اگر <code>file2</code> وجود داشته باشد، محتوای آن بازنویسی می‌شود؛ در غیر این صورت فایل جدیدی ایجاد می‌شود.</td>
-</tr>
-<tr>
-<td><code>cp -i file1 file2</code></td>
-<td>مانند دستور قبل، اما قبل از بازنویسی <code>file2</code> از کاربر تأیید می‌گیرد.</td>
-</tr>
-<tr>
-<td><code>cp file1 file2 dir1</code></td>
-<td>فایل‌های <code>file1</code> و <code>file2</code> را درون دایرکتوری <code>dir1</code> کپی می‌کند (دایرکتوری باید موجود باشد).</td>
-</tr>
-<tr>
-<td><code>cp dir1/* dir2</code></td>
-<td>با استفاده از وایلدکارت، همه‌ی فایل‌های موجود در <code>dir1</code> را درون <code>dir2</code> کپی می‌کند (دایرکتوری مقصد باید وجود داشته باشد).</td>
-</tr>
-<tr>
-<td><code>cp -r dir1 dir2</code></td>
-<td>کل محتوای دایرکتوری <code>dir1</code> را به دایرکتوری <code>dir2</code> کپی می‌کند. اگر <code>dir2</code> وجود نداشته باشد، ایجاد می‌شود و پس از کپی، حاوی همان محتویات <code>dir1</code> خواهد بود. اگر <code>dir2</code> از قبل وجود داشته باشد، آنگاه <code>dir1</code> (و محتویاتش) درون <code>dir2</code> کپی می‌شود.</td>
-</tr>
-</tbody>
-</table>
-<hr>
-<p>📘 <strong>نکته آموزشی:</strong><br>
-در صورت نیاز به پشتیبان‌گیری از ساختار کامل یک پوشه،<br>
-بهترین ترکیب استفاده از دستور زیر است:</p>
-<pre class="hljs"><code><span class="hljs-built_in">cp</span> -av <span class="hljs-built_in">source</span> destination
-</code></pre>
-<p>گزینه‌ی <code>-a</code> تمام ویژگی‌ها را حفظ می‌کند و <code>-v</code> گزارش عملیات را نمایش می‌دهد.</p>
-<hr>
-<h3>🟢 پایان بخش چهارم</h3>
-<p>در بخش بعدی، سراغ دستور بعدی می‌رویم:<br>
-<strong><code>mv</code> – جابه‌جایی و تغییر نام فایل‌ها و دایرکتوری‌ها (Move and Rename Files and Directories)</strong></p>
-<h1>دستور mv – جابه‌جا کردن و تغییر نام فایل‌ها (Move and Rename Files)</h1>
-<p>دستور <strong><code>mv</code></strong> برای <strong>جابه‌جا کردن (Move)</strong> و <strong>تغییر نام (Rename)</strong> فایل‌ها و دایرکتوری‌ها استفاده می‌شود.<br>
-این دستور از نظر نحو (Syntax) بسیار شبیه به دستور <code>cp</code> است،<br>
-اما تفاوت مهم آن در این است که پس از اجرای عمل جابه‌جایی یا تغییر نام،<br>
-فایل اصلی دیگر وجود ندارد — یعنی عملیات انتقال، برخلاف کپی، فایل را حذف می‌کند.</p>
-<hr>
-<h3>۱. تغییر نام یا جابه‌جایی یک فایل/دایرکتوری</h3>
-<pre class="hljs"><code><span class="hljs-built_in">mv</span> item1 item2
-</code></pre>
-<p>در این حالت، فایل یا دایرکتوری با نام <code>item1</code><br>
-به نام یا مسیر جدیدی با عنوان <code>item2</code> منتقل یا تغییر نام داده می‌شود.</p>
-<hr>
-<h3>۲. جابه‌جایی چند فایل یا دایرکتوری به داخل یک پوشه</h3>
-<pre class="hljs"><code><span class="hljs-built_in">mv</span> item... directory
-</code></pre>
-<p>در این حالت، چند فایل یا پوشه (جداشده با فاصله)<br>
-به دایرکتوری مشخص‌شده منتقل می‌شوند.</p>
-<hr>
-<h2>گزینه‌های مفید mv (Useful Options)</h2>
-<p>دستور <code>mv</code> بسیاری از گزینه‌های خود را با <code>cp</code> مشترک دارد.<br>
-در جدول زیر مهم‌ترین گزینه‌ها آورده شده است:</p>
-<h3>جدول ۴-۶: گزینه‌های mv</h3>
-<table>
-<thead>
-<tr>
-<th>گزینه</th>
-<th>گزینه‌ی بلند</th>
-<th>توضیح</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>-i</code></td>
-<td><code>--interactive</code></td>
-<td>پیش از بازنویسی فایل موجود در مقصد، از کاربر تأیید می‌گیرد. در حالت عادی <code>mv</code> بدون هشدار فایل را جایگزین می‌کند.</td>
-</tr>
-<tr>
-<td><code>-u</code></td>
-<td><code>--update</code></td>
-<td>فقط فایل‌هایی را منتقل می‌کند که در مقصد وجود ندارند یا جدیدتر از نسخه‌ی موجود هستند.</td>
-</tr>
-<tr>
-<td><code>-v</code></td>
-<td><code>--verbose</code></td>
-<td>در هنگام اجرا، پیام‌های توضیحی درباره‌ی هر عمل انتقال نمایش می‌دهد.</td>
-</tr>
-</tbody>
-</table>
-<hr>
-<h2>مثال‌های کاربردی mv</h2>
-<p>در جدول زیر نمونه‌هایی از کاربردهای رایج دستور <code>mv</code> را می‌بینیم.</p>
-<h3>جدول ۴-۷: مثال‌های mv</h3>
-<table>
-<thead>
-<tr>
-<th>دستور</th>
-<th>نتیجه</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>mv file1 file2</code></td>
-<td>فایل <code>file1</code> را به <code>file2</code> تغییر نام می‌دهد. اگر <code>file2</code> وجود داشته باشد، بازنویسی می‌شود؛ اگر وجود نداشته باشد، ایجاد می‌شود. پس از آن، <code>file1</code> دیگر وجود نخواهد داشت.</td>
-</tr>
-<tr>
-<td><code>mv -i file1 file2</code></td>
-<td>مانند دستور قبل، اما پیش از بازنویسی <code>file2</code> از کاربر تأیید می‌گیرد.</td>
-</tr>
-<tr>
-<td><code>mv file1 file2 dir1</code></td>
-<td>فایل‌های <code>file1</code> و <code>file2</code> را به داخل دایرکتوری <code>dir1</code> منتقل می‌کند (دایرکتوری باید از قبل موجود باشد).</td>
-</tr>
-<tr>
-<td><code>mv dir1 dir2</code></td>
-<td>اگر دایرکتوری <code>dir2</code> وجود نداشته باشد، <code>dir1</code> را به نام <code>dir2</code> تغییر می‌دهد. اگر <code>dir2</code> وجود داشته باشد، <code>dir1</code> (و محتویات آن) را درون <code>dir2</code> منتقل می‌کند.</td>
-</tr>
-</tbody>
-</table>
-<hr>
-<p>📘 <strong>نکات کاربردی:</strong></p>
-<ul>
-<li>از <code>mv</code> می‌توان برای <strong>تغییر نام سریع</strong> فایل‌ها و پوشه‌ها استفاده کرد:</li>
-</ul>
-<pre class="hljs"><code><span class="hljs-built_in">mv</span> oldname newname
-</code></pre>
-<ul>
-<li>در صورت اشتباه در مسیر مقصد، فایل ممکن است به مکانی غیرمنتظره منتقل شود.<br>
-برای جلوگیری از خطاهای ناخواسته، از گزینه‌ی <code>-i</code> استفاده کنید.</li>
-</ul>
-<hr>
-<h3>🟢 پایان بخش پنجم</h3>
-<p>در بخش بعدی، سراغ دستور بعدی می‌رویم:<br>
-<strong><code>rm</code> – حذف فایل‌ها و دایرکتوری‌ها (Remove Files and Directories)</strong><br>
-به‌همراه گزینه‌های پرکاربرد، مثال‌ها و هشدارهای مهم.</p>
-<h1>دستور rm – حذف فایل‌ها و دایرکتوری‌ها (Remove Files and Directories)</h1>
-<p>دستور <strong><code>rm</code></strong> برای حذف (<strong>Delete</strong>) فایل‌ها و دایرکتوری‌ها استفاده می‌شود.<br>
-شکل کلی استفاده از آن به این صورت است:</p>
-<pre class="hljs"><code><span class="hljs-built_in">rm</span> item...
-</code></pre>
-<p>در اینجا، <code>item</code> می‌تواند یک یا چند فایل یا پوشه باشد که با فاصله از هم جدا شده‌اند.</p>
-<hr>
-<h2>گزینه‌های مفید rm (Useful Options)</h2>
-<p>در جدول زیر مهم‌ترین گزینه‌های دستور <code>rm</code> آورده شده است:</p>
-<h3>جدول ۴-۸: گزینه‌های rm</h3>
-<table>
-<thead>
-<tr>
-<th>گزینه</th>
-<th>گزینه‌ی بلند</th>
-<th>توضیح</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>-i</code></td>
-<td><code>--interactive</code></td>
-<td>پیش از حذف هر فایل، از کاربر تأیید می‌گیرد. اگر این گزینه استفاده نشود، فایل‌ها بدون هشدار حذف می‌شوند.</td>
-</tr>
-<tr>
-<td><code>-r</code></td>
-<td><code>--recursive</code></td>
-<td>به‌صورت بازگشتی دایرکتوری‌ها و تمام زیرشاخه‌های آن‌ها را حذف می‌کند. برای حذف پوشه‌ها، این گزینه الزامی است.</td>
-</tr>
-<tr>
-<td><code>-f</code></td>
-<td><code>--force</code></td>
-<td>فایل‌های غیرموجود را نادیده می‌گیرد و هیچ پیامی برای تأیید نمایش نمی‌دهد (گزینه‌ی <code>-i</code> را نیز بی‌اثر می‌کند).</td>
-</tr>
-<tr>
-<td><code>-v</code></td>
-<td><code>--verbose</code></td>
-<td>در هنگام اجرا، پیام‌های توضیحی درباره‌ی فایل‌ها و دایرکتوری‌های در حال حذف نمایش می‌دهد.</td>
-</tr>
-</tbody>
-</table>
-<hr>
-<h2>مثال‌های کاربردی rm</h2>
-<p>در جدول زیر چند مثال از استفاده‌ی دستور <code>rm</code> آمده است:</p>
-<h3>جدول ۴-۹: مثال‌های rm</h3>
-<table>
-<thead>
-<tr>
-<th>دستور</th>
-<th>نتیجه</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>rm file1</code></td>
-<td>فایل <code>file1</code> را بدون هشدار حذف می‌کند.</td>
-</tr>
-<tr>
-<td><code>rm -i file1</code></td>
-<td>همانند مثال قبل، اما پیش از حذف از کاربر تأیید می‌گیرد.</td>
-</tr>
-<tr>
-<td><code>rm -r file1 dir1</code></td>
-<td>فایل <code>file1</code> و دایرکتوری <code>dir1</code> (به‌همراه تمام محتویاتش) را به‌صورت بازگشتی حذف می‌کند.</td>
-</tr>
-<tr>
-<td><code>rm -rf file1 dir1</code></td>
-<td>همانند مثال قبل، اما اگر فایل یا دایرکتوری‌ای وجود نداشته باشد، بدون هیچ خطا یا پیام ادامه می‌دهد.</td>
-</tr>
-</tbody>
-</table>
-<hr>
-<p>⚠️ <strong>هشدار بسیار مهم: با rm محتاط باشید!</strong></p>
-<p>سیستم‌های شبیه یونیکس مانند لینوکس دستور <strong>بازگردانی حذف (undelete)</strong> ندارند.<br>
-به‌عبارت دیگر، زمانی که چیزی را با <code>rm</code> حذف می‌کنید، آن فایل برای همیشه از بین می‌رود.<br>
-سیستم فرض می‌کند که شما می‌دانید چه می‌کنید.</p>
-<p>بنابراین هنگام استفاده از <code>rm</code> باید <strong>بسیار دقت و احتیاط</strong> داشته باشید، به‌ویژه در زمان استفاده از <strong>وایلدکارت‌ها (wildcards)</strong>.</p>
-<hr>
-<h3>مثال خطرناک کلاسیک</h3>
-<p>فرض کنید می‌خواهید همه‌ی فایل‌های HTML را در یک پوشه حذف کنید:</p>
-<pre class="hljs"><code><span class="hljs-built_in">rm</span> *.html
-</code></pre>
-<p>این دستور کاملاً درست است.<br>
-اما اگر به‌اشتباه بین <code>*</code> و <code>.html</code> فاصله بگذارید، یعنی:</p>
-<pre class="hljs"><code><span class="hljs-built_in">rm</span> * .html
-</code></pre>
-<p>دستور بالا ابتدا <strong>تمام فایل‌های موجود در پوشه را حذف می‌کند</strong><br>
-و سپس سعی می‌کند فایلی به نام <code>.html</code> پیدا کند — که معمولاً وجود ندارد —<br>
-و خطا می‌دهد. در نتیجه، <strong>تمام داده‌های پوشه از بین خواهند رفت!</strong></p>
-<hr>
-<p>🔹 <strong>نکته ایمنی:</strong></p>
-<p>هرگاه از <code>rm</code> به‌همراه وایلدکارت‌ها استفاده می‌کنید،<br>
-پیش از اجرای آن، بهتر است ابتدا همان الگو را با دستور <code>ls</code> آزمایش کنید تا ببینید کدام فایل‌ها انتخاب می‌شوند:</p>
-<pre class="hljs"><code><span class="hljs-built_in">ls</span> *.html
-</code></pre>
-<p>اگر نتیجه صحیح بود،<br>
-با فشردن کلید جهت‌نمای بالا (↑) دستور را بازگردانید و فقط <code>ls</code> را به <code>rm</code> تغییر دهید:</p>
-<pre class="hljs"><code><span class="hljs-built_in">rm</span> *.html
-</code></pre>
-<p>به این ترتیب از حذف اشتباهی جلوگیری می‌کنید.</p>
-<hr>
-<p>📘 <strong>نکته حرفه‌ای:</strong><br>
-برای حذف ایمن‌تر فایل‌ها، ابزارهایی مانند <strong><code>trash-cli</code></strong> یا <strong><code>gio trash</code></strong> وجود دارند<br>
-که فایل‌ها را به <strong>زباله‌دان (Trash)</strong> منتقل می‌کنند تا در صورت نیاز قابل بازگردانی باشند.<br>
-اما دستور <code>rm</code> همیشه <strong>حذف دائمی</strong> انجام می‌دهد.</p>
-<hr>
-<h3>🟢 پایان بخش ششم</h3>
-<p>در بخش بعدی، سراغ دستور بعدی می‌رویم:<br>
-<strong><code>ln</code> – ایجاد لینک‌های سخت و نمادین (Create Hard and Symbolic Links)</strong>،<br>
-که یکی از مفاهیم مهم و گاهی گیج‌کننده در لینوکس است.</p>
-<h1>دستور ln – ایجاد لینک‌ها (Create Links)</h1>
-<p>دستور <strong><code>ln</code></strong> برای ایجاد لینک‌ها بین فایل‌ها و دایرکتوری‌ها به کار می‌رود.<br>
-این دستور می‌تواند دو نوع لینک بسازد:</p>
-<ul>
-<li><strong>لینک سخت (Hard Link)</strong></li>
-<li><strong>لینک نمادین یا سمبولیک (Symbolic Link / Symlink)</strong></li>
-</ul>
-<hr>
-<h2>شکل کلی استفاده از دستور ln</h2>
-<h3>ایجاد یک لینک سخت (Hard Link)</h3>
-<pre class="hljs"><code><span class="hljs-built_in">ln</span> file <span class="hljs-built_in">link</span>
-</code></pre>
-<h3>ایجاد یک لینک نمادین (Symbolic Link)</h3>
-<pre class="hljs"><code><span class="hljs-built_in">ln</span> -s item <span class="hljs-built_in">link</span>
-</code></pre>
-<p>در این حالت، گزینه‌ی <code>-s</code> باعث می‌شود که لینک از نوع <strong>نمادین (symbolic)</strong> باشد.<br>
-آرگومان <code>item</code> می‌تواند فایل یا دایرکتوری باشد.</p>
-<hr>
-<h2>لینک‌های سخت (Hard Links)</h2>
-<p><strong>لینک‌های سخت</strong>، روش اصلی و سنتی سیستم‌عامل یونیکس برای ایجاد لینک‌ها هستند.<br>
-در واقع، هر فایل در لینوکس حداقل یک لینک سخت دارد — یعنی همان نام اصلی فایل در سیستم فایل.</p>
-<p>زمانی که یک لینک سخت جدید ایجاد می‌کنیم، در واقع <strong>یک نام اضافی برای همان فایل</strong> می‌سازیم.<br>
-تمام لینک‌های سخت یک فایل به یک نقطه‌ی داده (<strong>inode</strong>) در دیسک اشاره می‌کنند،<br>
-به همین دلیل از نظر سیستم، فایل اصلی و لینک سخت آن <strong>هیچ تفاوتی با هم ندارند</strong>.</p>
-<hr>
-<h3>محدودیت‌های لینک سخت</h3>
-<ol>
-<li>یک لینک سخت نمی‌تواند به فایلی در یک <strong>سیستم فایل دیگر (پارتیشن دیگر)</strong> اشاره کند.<br>
-یعنی لینک و فایل هدف باید روی یک دیسک یا پارتیشن مشترک باشند.</li>
-<li>لینک سخت نمی‌تواند به یک <strong>دایرکتوری</strong> اشاره کند — تنها برای فایل‌ها قابل استفاده است.</li>
-</ol>
-<hr>
-<h3>ویژگی‌های لینک سخت</h3>
-<ul>
-<li>در خروجی <code>ls -l</code> هیچ نشانه‌ی خاصی برای لینک سخت وجود ندارد.</li>
-<li>اگر یکی از لینک‌ها حذف شود، فایل واقعی باقی می‌ماند تا زمانی که آخرین لینک آن حذف شود.</li>
-<li>هر لینک سخت در واقع یک مسیر مستقل به همان داده‌ی اصلی است.</li>
-</ul>
-<p>📘 <strong>نکته مهم:</strong><br>
-در عمل، هنگام حذف یکی از لینک‌ها، تنها «نام» آن حذف می‌شود، نه داده‌ی فایل.<br>
-تا زمانی که حداقل یک لینک به فایل وجود داشته باشد، محتوای فایل در سیستم باقی می‌ماند.</p>
-<hr>
-<h2>لینک‌های نمادین (Symbolic Links)</h2>
-<p><strong>لینک‌های نمادین</strong> برای رفع محدودیت‌های لینک‌های سخت معرفی شدند.<br>
-آن‌ها یک فایل خاص ایجاد می‌کنند که <strong>حاوی آدرس (Path)</strong> فایل یا پوشه‌ی هدف است.</p>
-<p>به زبان ساده، یک <strong>Symbolic Link (یا Symlink)</strong> درست مانند <strong>میانبر (Shortcut)</strong> در ویندوز عمل می‌کند.</p>
-<hr>
-<h3>ویژگی‌های لینک نمادین</h3>
-<ul>
-<li>اگر به فایل اصلی چیزی بنویسیم، از طریق لینک نمادین هم همان تغییر اعمال می‌شود.</li>
-<li>اگر فایل اصلی حذف شود، لینک نمادین به فایل غیرموجود اشاره می‌کند و اصطلاحاً <strong>شکسته (Broken Link)</strong> می‌شود.</li>
-<li>در خروجی <code>ls -l</code>، لینک‌های نمادین با حرف <strong><code>l</code></strong> در ابتدای خط مشخص می‌شوند و با پیکان <strong><code>→</code></strong> مسیر هدف را نشان می‌دهند.</li>
-<li>در بسیاری از محیط‌های لینوکسی، لینک‌های شکسته با رنگ قرمز نمایش داده می‌شوند.</li>
-</ul>
-<hr>
-<h3>مثال</h3>
-<pre class="hljs"><code><span class="hljs-built_in">ln</span> -s /home/user/file.txt link1
-</code></pre>
-<p>در این مثال، <code>link1</code> یک لینک نمادین به فایل <code>file.txt</code> است.<br>
-اگر فایل اصلی حذف شود، <code>link1</code> باقی می‌ماند اما دیگر به چیزی اشاره نمی‌کند.</p>
-<hr>
-<h2>تفاوت لینک سخت و لینک نمادین</h2>
-<table>
-<thead>
-<tr>
-<th>ویژگی</th>
-<th>لینک سخت (Hard Link)</th>
-<th>لینک نمادین (Symbolic Link)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>ارتباط با فایل اصلی</strong></td>
-<td>مستقیماً به داده (<strong>inode</strong>) فایل اشاره می‌کند.</td>
-<td>فقط مسیر فایل را ذخیره می‌کند.</td>
-</tr>
-<tr>
-<td><strong>قابل اعمال روی دایرکتوری‌ها</strong></td>
-<td>❌ خیر</td>
-<td>✅ بله</td>
-</tr>
-<tr>
-<td><strong>قابل استفاده بین پارتیشن‌ها</strong></td>
-<td>❌ خیر</td>
-<td>✅ بله</td>
-</tr>
-<tr>
-<td><strong>نمایش در <code>ls -l</code></strong></td>
-<td>شبیه فایل عادی است.</td>
-<td>با حرف <code>l</code> و پیکان (<code>→</code>) نمایش داده می‌شود.</td>
-</tr>
-<tr>
-<td><strong>رفتار هنگام حذف فایل اصلی</strong></td>
-<td>فایل همچنان وجود دارد تا آخرین لینک حذف شود.</td>
-<td>لینک شکسته می‌شود (<strong>Broken Link</strong>).</td>
-</tr>
-<tr>
-<td><strong>ایجاد با دستور</strong></td>
-<td><code>ln file link</code></td>
-<td><code>ln -s item link</code></td>
-</tr>
-</tbody>
-</table>
-<hr>
-<p>📘 <strong>نکته حرفه‌ای:</strong><br>
-در سیستم‌های مدرن لینوکس تقریباً همیشه از <strong>Symbolic Links</strong> استفاده می‌شود،<br>
-زیرا انعطاف‌پذیرتر و قابل استفاده برای فایل‌ها، دایرکتوری‌ها و حتی در پارتیشن‌های مختلف هستند.</p>
-<hr>
-<h3>🟢 پایان بخش هفتم</h3>
-<p>در بخش بعدی (و آخر فصل)، وارد بخش تمرین عملی <strong>Playground</strong> می‌شویم،<br>
-جایی که با استفاده از دستورات <code>mkdir</code>, <code>cp</code>, <code>mv</code>, <code>ln</code>, و <code>rm</code><br>
-به‌صورت گام‌به‌گام تمرین خواهیم کرد تا مفاهیم کاملاً جا بیفتد.</p>
-<h1>بیایید یک محیط تمرینی بسازیم (Let's Build a Playground)</h1>
-<p>از آن‌جا که در این فصل قرار است واقعاً با فایل‌ها و پوشه‌ها کار کنیم،<br>
-بهتر است یک محیط امن برای تمرین بسازیم تا بدون ترس از خراب کردن سیستم،<br>
-بتوانیم همه‌ی دستورات را امتحان کنیم.</p>
-<hr>
-<h2>ایجاد دایرکتوری‌ها (Creating Directories)</h2>
-<p>ابتدا مطمئن می‌شویم که در دایرکتوری خانگی خود هستیم و سپس پوشه‌ی <strong>playground</strong> را می‌سازیم:</p>
-<pre class="hljs"><code>[me@linuxbox ~]$ <span class="hljs-built_in">cd</span>
+<!doctype html><html lang="fa" dir="rtl"> <head><script>
+    if (window.location.pathname.startsWith('/gitab/')) {
+      window.location.replace(window.location.pathname.replace(/^\/gitab\//i, '/Gitab/') + window.location.search + window.location.hash);
+    }
+    (() => {
+      try {
+        const t = localStorage.getItem('gitab-theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', t);
+        document.documentElement.dataset.colorMode = t;
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        document.documentElement.dataset.colorMode = 'dark';
+      }
+    })();
+  </script> <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5"> <title>دستکاری فایل‌ها و پوشه‌ها</title><meta name="description" content="دستکاری فایل‌ها و پوشه‌ها — مطالعه آنلاین و رایگان از کتاب «خط فرمان لینوکس (TLCL)» (The Linux Command Line) اثر William Shotts با ترجمه هیمن صادقی در گیتاب."> <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"><meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"> <meta name="theme-color" content="#090d16"><meta name="referrer" content="strict-origin-when-cross-origin"> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https:; frame-src https://www.youtube.com https://www.youtube-nocookie.com https://maps.google.com https://www.google.com; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self';"><link rel="icon" type="image/png" href="/Gitab/favicon.png"> <link rel="canonical" href="https://hheydarian.github.io/Gitab/books/book5/Book/04/chapter04/"><link rel="alternate" hreflang="fa" href="https://hheydarian.github.io/Gitab/books/book5/Book/04/chapter04/"> <link rel="alternate" hreflang="x-default" href="https://hheydarian.github.io/Gitab/books/book5/Book/04/chapter04/"><link rel="alternate" type="text/plain" title="LLMs.txt" href="/Gitab/llms.txt"> <link rel="sitemap" type="application/xml" title="Sitemap" href="/Gitab/sitemap.xml"><meta property="og:locale" content="fa_IR"> <meta property="og:type" content="article"><meta property="og:site_name" content="گیتاب | Gitab"> <meta property="og:title" content="دستکاری فایل‌ها و پوشه‌ها"><meta property="og:description" content="دستکاری فایل‌ها و پوشه‌ها — مطالعه آنلاین و رایگان از کتاب «خط فرمان لینوکس (TLCL)» (The Linux Command Line) اثر William Shotts با ترجمه هیمن صادقی در گیتاب."> <meta property="og:url" content="https://hheydarian.github.io/Gitab/books/book5/Book/04/chapter04/"><meta property="og:image" content="https://hheydarian.github.io/Gitab/images/the-linux-command-line/Cover.jpg"> <meta property="og:image:alt" content="دستکاری فایل‌ها و پوشه‌ها"><meta name="twitter:card" content="summary_large_image"> <meta name="twitter:title" content="دستکاری فایل‌ها و پوشه‌ها"><meta name="twitter:description" content="دستکاری فایل‌ها و پوشه‌ها — مطالعه آنلاین و رایگان از کتاب «خط فرمان لینوکس (TLCL)» (The Linux Command Line) اثر William Shotts با ترجمه هیمن صادقی در گیتاب."> <meta name="twitter:image" content="https://hheydarian.github.io/Gitab/images/the-linux-command-line/Cover.jpg"><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://hheydarian.github.io/Gitab/#organization","name":"گیتاب | Gitab","alternateName":"Gitab","url":"https://hheydarian.github.io/Gitab/","logo":{"@type":"ImageObject","url":"https://hheydarian.github.io/Gitab/favicon.png"},"sameAs":["https://github.com/hheydarian/Gitab"]},{"@type":"WebSite","@id":"https://hheydarian.github.io/Gitab/#website","url":"https://hheydarian.github.io/Gitab/","name":"گیتاب | Gitab","inLanguage":"fa-IR","publisher":{"@id":"https://hheydarian.github.io/Gitab/#organization"},"potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://hheydarian.github.io/Gitab/books/list-books/?q={search_term_string}"},"query-input":"required name=search_term_string"}},{"@type":"WebPage","@id":"https://hheydarian.github.io/Gitab/books/book5/Book/04/chapter04/#webpage","url":"https://hheydarian.github.io/Gitab/books/book5/Book/04/chapter04/","name":"دستکاری فایل‌ها و پوشه‌ها","description":"دستکاری فایل‌ها و پوشه‌ها — مطالعه آنلاین و رایگان از کتاب «خط فرمان لینوکس (TLCL)» (The Linux Command Line) اثر William Shotts با ترجمه هیمن صادقی در گیتاب.","inLanguage":"fa-IR","isPartOf":{"@id":"https://hheydarian.github.io/Gitab/#website"}},{"@type":"TechArticle","headline":"دستکاری فایل‌ها و پوشه‌ها","description":"دستکاری فایل‌ها و پوشه‌ها — مطالعه آنلاین و رایگان از کتاب «خط فرمان لینوکس (TLCL)» (The Linux Command Line) اثر William Shotts با ترجمه هیمن صادقی در گیتاب.","url":"https://hheydarian.github.io/Gitab/books/book5/Book/04/chapter04/","inLanguage":"fa-IR","isAccessibleForFree":true,"author":{"@type":"Person","name":"William Shotts"},"translator":{"@type":"Person","name":"هیمن صادقی"},"isPartOf":{"@type":"Book","name":"خط فرمان لینوکس (TLCL)","alternateName":"The Linux Command Line","url":"https://hheydarian.github.io/Gitab/books/book5/"}}]}</script> <link rel="preload" href="/Gitab/fonts/Vazirmatn.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/Gitab/styles/main.css?v=2.4" as="style"> <link rel="preload" href="/Gitab/styles/gitab-modern.css?v=2.5" as="style"><style>@font-face{font-family:'Lalezar';src:url('/Gitab/fonts/Lalezar.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}@font-face{font-family:'Vazirmatn';src:url('/Gitab/fonts/Vazirmatn.woff2') format('woff2');font-weight:100 900;font-style:normal;font-display:swap}html,body,button,input,optgroup,select,textarea,.filter-pill{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}input::placeholder,textarea::placeholder{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}</style> <link rel="stylesheet" href="/Gitab/styles/main.css?v=2.4"><link rel="stylesheet" href="/Gitab/styles/gitab-modern.css?v=2.5"> <link rel="stylesheet" href="/Gitab/styles/vendor/github-dark.min.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="/Gitab/styles/vendor/github-dark.min.css"></noscript></head> <body><header class="header"> <div class="container nav-wrap"><a href="/Gitab/" class="brand" aria-label="صفحه اصلی گیتاب"> <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="30" height="30" decoding="async"> <span class="brand-text">Gitab</span> </a> <nav class="nav" id="mainNav"><a href="/Gitab/" >خانه</a> <a href="/Gitab/books/list-books" aria-current="page">کتاب‌ها</a> <a href="/Gitab/courses/" >دوره‌ها</a> <a href="/Gitab/translator.html" >مترجمین</a></nav> <div class="nav-actions"><button id="themeToggle" class="theme-toggle-btn" aria-label="تغییر تم" title="تغییر تم"> <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن" width="18" height="18" decoding="async" style="display:none"> <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک" width="18" height="18" decoding="async"> </button> <a class="btn-github-pill" href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" title="مشاهده سورس گیتاب در گیت‌هاب"> <img src="/Gitab/icone/github.svg" alt="GitHub" width="16" height="16" decoding="async"> <span>گیت‌هاب</span> </a> <button class="mobile-menu-btn" id="mobileMenuBtn" type="button" aria-label="باز کردن منو" aria-expanded="false"> <svg class="mob-icon-open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="4" y1="7" x2="20" y2="7"></line> <line x1="4" y1="12" x2="20" y2="12"></line> <line x1="4" y1="17" x2="14" y2="17"></line> </svg> <svg class="mob-icon-close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="18" y1="6" x2="6" y2="18"></line> <line x1="6" y1="6" x2="18" y2="18"></line> </svg> </button></div> </div><div class="mobile-drawer" id="mobileDrawer" aria-hidden="true"> <div class="mobile-drawer-inner"><div class="mobile-drawer-section-label">ناوبری سریع</div><nav class="mobile-drawer-links" aria-label="منوی موبایل"> <a href="/Gitab/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M3 10.5 12 3l9 7.5"></path> <path d="M5 9.5V20a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V9.5"></path> </svg> </span> <span class="mob-nav-text">صفحه نخست</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/books/list-books" class="mobile-drawer-link active" aria-current="page"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path> </svg> </span> <span class="mob-nav-text">کتابخانه و فهرست کتاب‌ها</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/courses/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path> <path d="M6 12v5c3 3 9 3 12 0v-5"></path> </svg> </span> <span class="mob-nav-text">دوره‌های آموزشی</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/translator.html" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path> <circle cx="9" cy="7" r="4"></circle> <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path> <path d="M16 3.13a4 4 0 0 1 0 7.75"></path> </svg> </span> <span class="mob-nav-text">مترجمین و همکاران</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> </nav><div class="mobile-drawer-divider"></div><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" class="mobile-drawer-link mobile-drawer-gh"> <span class="mob-nav-icon" aria-hidden="true"> <img src="/Gitab/icone/github.svg" alt="" width="17" height="17" loading="lazy" decoding="async"> </span> <span class="mob-nav-text">مخزن گیت‌هاب پروژه</span> <span class="mob-nav-ext" aria-hidden="true">↗</span> </a> </div></div> </header><div class="reading-progress-track"> <div class="reading-progress-fill" id="readingProgressBar"></div></div> <main class="site-main chapter-reading-page"><div class="chapter-page-wrapper"> <nav class="chapter-clean-breadcrumb" aria-label="مسیر راهنما" dir="rtl"><a href="/Gitab/">خانه</a> <span class="bc-sep" aria-hidden="true">/</span> <a href="/Gitab/books/list-books/">کتاب‌ها</a> <span class="bc-sep" aria-hidden="true">/</span> <a href="/Gitab/books/book5/"><bdi>خط فرمان لینوکس</bdi></a> <span class="bc-sep" aria-hidden="true">/</span> <span class="bc-current-leaf"><bdi>دستکاری فایل‌ها و پوشه‌ها</bdi></span></nav> <article class="chapter-prose-container markdown-body" id="chapterArticle" dir="rtl"><h1>فصل ۴ – دستکاری فایل‌ها و پوشه‌ها (Manipulating Files and Directories)</h1><hr> <h2>مقدمه</h2><p>اکنون آماده‌ی انجام کار واقعی هستیم!<br> این فصل دستورات زیر را معرفی می‌کند:</p><ul> <li><strong>cp</strong> – کپی کردن فایل‌ها و پوشه‌ها</li><li><strong>mv</strong> – جابه‌جا کردن یا تغییر نام فایل‌ها و پوشه‌ها</li><li><strong>mkdir</strong> – ایجاد پوشه‌ها</li><li><strong>rm</strong> – حذف فایل‌ها و پوشه‌ها</li><li><strong>ln</strong> – ایجاد لینک‌های سخت (Hard Link) و نمادین (Symbolic Link)</li></ul> <p>این پنج دستور از پرکاربردترین دستورات لینوکس هستند.<br> آن‌ها برای دستکاری فایل‌ها و دایرکتوری‌ها مورد استفاده قرار می‌گیرند.</p><hr> <h2>چرا به‌جای فایل‌منیجر از خط فرمان استفاده کنیم؟</h2><p>صادقانه بگوییم، برخی از کارهایی که این دستورات انجام می‌دهند، با استفاده از یک <strong>مدیر فایل گرافیکی (File Manager)</strong> راحت‌تر انجام می‌شوند.<br> برای مثال، در یک مدیر فایل می‌توانیم:</p><ul> <li>فایل را از یک پوشه به پوشه‌ی دیگر بکشیم و رها کنیم (Drag &amp; Drop)</li><li>فایل‌ها را <strong>برش (Cut)</strong> و <strong>جای‌گذاری (Paste)</strong> کنیم</li><li>فایل‌ها را حذف کنیم و غیره</li></ul> <p>پس چرا باید از این برنامه‌های قدیمی خط فرمان استفاده کنیم؟</p><p>پاسخ در دو واژه خلاصه می‌شود: <strong>قدرت (Power)</strong> و <strong>انعطاف‌پذیری (Flexibility)</strong>.<br> در حالی که انجام کارهای ساده با مدیر فایل آسان است،<br> کارهای پیچیده‌تر با خط فرمان <strong>سریع‌تر و دقیق‌تر</strong> انجام می‌شوند.</p><p>برای مثال:<br> فرض کنید می‌خواهیم تمام فایل‌های HTML را از یک پوشه به پوشه‌ی دیگر کپی کنیم،<br> اما فقط فایل‌هایی را کپی کنیم که در مقصد وجود ندارند یا نسخه‌ی موجود در مقصد قدیمی‌تر است.<br> این کار با یک فایل‌منیجر تقریباً غیرممکن است،<br> اما در خط فرمان خیلی راحت انجام می‌شود:</p><pre class="hljs"><code><span class="hljs-built_in">cp</span> -u *.html destination
+</code></pre> <hr><h2>Wildcards (کاراکترهای عام یا جایگزین)</h2><p>پیش از آنکه استفاده از این دستورات را آغاز کنیم، باید درباره‌ی قابلیتی از <strong>شل (Shell)</strong> صحبت کنیم که باعث می‌شود این دستورات بسیار قدرتمند باشند.<br> از آن‌جا که شل به‌طور گسترده‌ای با نام فایل‌ها سروکار دارد،<br> کاراکترهای ویژه‌ای را برای مشخص کردن سریع گروهی از فایل‌ها فراهم می‌کند.</p><p>به این کاراکترهای ویژه <strong>Wildcards (وایلدکارت)</strong> گفته می‌شود.<br> استفاده از وایلدکارت‌ها – که به آن <strong>Globbing (گلابینگ)</strong> نیز می‌گویند – به ما اجازه می‌دهد فایل‌ها را بر اساس <strong>الگوهای متنی</strong> انتخاب کنیم.</p><hr> <h3>جدول ۴-۱: Wildcards</h3><table> <thead><tr> <th>وایلدکارت</th><th>معنی</th></tr> </thead><tbody> <tr><td><code>*</code></td><td>با هر تعداد از کاراکترها مطابقت دارد.</td></tr> <tr><td><code>?</code></td><td>با هر کاراکتر تکی مطابقت دارد.</td></tr> <tr><td><code>[characters]</code></td><td>با هر کاراکتری که عضوی از مجموعه‌ی مشخص‌شده باشد مطابقت دارد.</td></tr> <tr><td><code>[!characters]</code> یا <code>[^characters]</code></td><td>با هر کاراکتری که عضوی از مجموعه‌ی مشخص‌شده <strong>نباشد</strong> مطابقت دارد.</td></tr> <tr><td><code>[[:class:]]</code></td><td>با هر کاراکتری که عضوی از <strong>کلاس مشخص‌شده (Character Class)</strong> باشد مطابقت دارد.</td></tr> </tbody></table> <hr><h3>جدول ۴-۲: کلاس‌های کاراکتری رایج (Commonly Used Character Classes)</h3><table> <thead><tr> <th>کلاس کاراکتری</th><th>توضیح</th></tr> </thead><tbody> <tr><td><code>[:alnum:]</code></td><td>با هر کاراکتر <strong>حرف یا عددی (الفبایی–عددی)</strong> مطابقت دارد.</td></tr> <tr><td><code>[:alpha:]</code></td><td>با هر <strong>حرف الفبایی</strong> مطابقت دارد.</td></tr> <tr><td><code>[:digit:]</code></td><td>با هر <strong>عدد</strong> مطابقت دارد.</td></tr> <tr><td><code>[:lower:]</code></td><td>با هر <strong>حرف کوچک</strong> مطابقت دارد.</td></tr> <tr><td><code>[:upper:]</code></td><td>با هر <strong>حرف بزرگ</strong> مطابقت دارد.</td></tr> </tbody></table> <hr><p>استفاده از وایلدکارت‌ها این امکان را به ما می‌دهد تا <strong>الگوهای پیچیده و پیشرفته‌ای برای انتخاب نام فایل‌ها</strong> بسازیم.<br> در جدول زیر، چند نمونه از این الگوها و فایل‌هایی که با آن‌ها مطابقت دارند آمده است:</p><hr> <h3>جدول ۴-۳: مثال‌هایی از Wildcard</h3><table> <thead><tr> <th>الگو (Pattern)</th><th>فایل‌هایی که مطابقت دارند</th></tr> </thead><tbody> <tr><td><code>*</code></td><td>تمام فایل‌ها</td></tr> <tr><td><code>g*</code></td><td>هر فایلی که با حرف <strong>g</strong> آغاز شود</td></tr> <tr><td><code>b*.txt</code></td><td>هر فایلی که با <strong>b</strong> آغاز شود، سپس هر تعدادی کاراکتر داشته باشد، و در نهایت با <code>.txt</code> تمام شود</td></tr> <tr><td><code>Data???</code></td><td>هر فایلی که با <strong>Data</strong> آغاز شود و دقیقاً سه کاراکتر پس از آن بیاید</td></tr> <tr><td><code>[abc]*</code></td><td>هر فایلی که با یکی از حروف <strong>a، b یا c</strong> آغاز شود</td></tr> <tr><td><code>BACKUP.[0-9][0-9][0-9]</code></td><td>هر فایلی که با <strong>BACKUP.</strong> آغاز شود و پس از آن دقیقاً سه رقم بیاید</td></tr> <tr><td><code>[[:upper:]]*</code></td><td>هر فایلی که با یک <strong>حرف بزرگ</strong> آغاز شود</td></tr> <tr><td><code>[![:digit:]]*</code></td><td>هر فایلی که با <strong>عدد آغاز نمی‌شود</strong></td></tr> <tr><td><code>*[[:lower:]123]</code></td><td>هر فایلی که با یک <strong>حرف کوچک</strong> یا یکی از اعداد <strong>۱، ۲ یا ۳</strong> پایان یابد</td></tr> </tbody></table> <hr><p>وایلدکارت‌ها را می‌توان با هر دستوری که از نام فایل‌ها به‌عنوان آرگومان استفاده می‌کند به کار برد.<br> در فصل ۷ با این موضوع بیشتر آشنا خواهیم شد:<br><strong>«دیدن دنیا از دیدگاه شل (Seeing the World as the Shell Sees It)».</strong></p><h1>محدوده‌های کاراکتری (Character Ranges)</h1><p>اگر پیش‌تر با سیستم‌های مشابه یونیکس (Unix-like) کار کرده باشید<br> یا کتاب‌های دیگری درباره‌ی این موضوع خوانده باشید،<br> ممکن است با نمادهای <code>[A-Z]</code> و <code>[a-z]</code> برای نمایش محدوده‌ی کاراکترها برخورد کرده باشید.</p><p>این نمادها در گذشته، در نسخه‌های قدیمی یونیکس و لینوکس،<br> روش استاندارد برای مشخص کردن محدوده‌ای از حروف بودند.<br> برای مثال، <code>[A-Z]</code> نشان‌دهنده‌ی تمام حروف بزرگ انگلیسی و <code>[a-z]</code> نشان‌دهنده‌ی تمام حروف کوچک بود.</p><p>اما باید توجه داشته باشید که در نسخه‌های جدید لینوکس،<br> این یادداشت‌ها ممکن است نتیجه‌ی مورد انتظار را تولید نکنند،<br> مگر آن‌که سیستم به‌درستی پیکربندی شده باشد (به‌ویژه از نظر <strong>Locale</strong> و زبان).</p><p>بنابراین، بهتر است از آن‌ها استفاده نکنید و به جای آن از <strong>کلاس‌های کاراکتری (Character Classes)</strong><br> که در جدول قبل معرفی شد (<code>[:upper:]</code>, <code>[:lower:]</code>, <code>[:alpha:]</code> و غیره) بهره ببرید.<br> این کلاس‌ها قابل اطمینان‌تر و سازگار با محیط‌های مختلف هستند.</p><hr> <h2>فایل‌های نقطه‌ای (Dot Files)</h2><p>اگر با دستور <code>ls</code> و گزینه‌ی <code>-a</code> به پوشه‌ی خانگی خود نگاه کنیم،<br> تعداد زیادی فایل و پوشه را مشاهده خواهیم کرد که نام آن‌ها با یک نقطه (<code>.</code>) آغاز می‌شود.</p><p>همان‌طور که پیش‌تر آموختیم،<br> این فایل‌ها <strong>پنهان (Hidden Files)</strong> هستند.<br> پنهان بودن، یک ویژگی خاص فایل نیست،<br> بلکه فقط به این معناست که نام فایل با یک نقطه شروع می‌شود<br> و در نتیجه، در خروجی <code>ls</code> نمایش داده نمی‌شود مگر آن‌که از گزینه‌های <code>-a</code> یا <code>-A</code> استفاده کنیم.</p><p>این ویژگی در مورد <strong>وایلدکارت‌ها</strong> نیز صدق می‌کند.<br> یعنی فایل‌های پنهان در نتایج الگوهای وایلدکارت ظاهر نمی‌شوند،<br> مگر آن‌که صراحتاً الگویی مانند <code>.*</code> را بنویسیم.</p><p>اما اگر این کار را انجام دهیم،<br> نتیجه شامل دو مدخل خاص نیز خواهد بود:</p><ul> <li><code>.</code> → اشاره به پوشه‌ی فعلی (<strong>Current Directory</strong>)</li><li><code>..</code> → اشاره به پوشه‌ی والد (<strong>Parent Directory</strong>)</li></ul> <p>برای جلوگیری از نمایش این دو مورد،<br> می‌توان از الگوهای زیر استفاده کرد:</p><pre class="hljs"><code>.[!.]*
+</code></pre> <p>یا</p><pre class="hljs"><code>.??*
+</code></pre> <p>هر دوی این الگوها فایل‌های پنهان واقعی را فهرست می‌کنند<br> اما <code>.</code> و <code>..</code> را حذف می‌کنند.</p><hr> <p><strong>نکته:</strong><br> در لینوکس و یونیکس، فایل‌های پنهان معمولاً برای ذخیره‌ی <strong>تنظیمات برنامه‌ها و کاربر</strong> استفاده می‌شوند.<br> برای مثال:</p><ul> <li><code>.bashrc</code> → تنظیمات پوسته‌ی Bash</li><li><code>.profile</code> → تنظیمات ورود کاربر</li><li><code>.gitconfig</code> → پیکربندی Git</li></ul> <p>بنابراین، در اغلب موارد نیازی به تغییر یا حذف فایل‌های نقطه‌ای نیست مگر آن‌که دقیقاً بدانید چه می‌کنید.</p><hr> <h3>پایان بخش دوم</h3><p>در بخش بعدی، سراغ قسمت بعدی فصل می‌رویم:<br><strong>Wildcards در محیط گرافیکی (GUI)</strong> و دستور <strong><code>mkdir</code></strong> برای ایجاد دایرکتوری‌ها.</p><h1>وایلدکارت‌ها در محیط گرافیکی (Wildcards Work in the GUI Too)</h1><p>وایلدکارت‌ها فقط در خط فرمان کاربرد ندارند؛<br> بلکه در برخی از <strong>مدیران فایل گرافیکی (Graphical File Managers)</strong> نیز پشتیبانی می‌شوند.<br> این موضوع آن‌ها را حتی ارزشمندتر می‌کند، زیرا می‌توان از همان الگوهای قدرتمند در محیط‌های تصویری نیز استفاده کرد.</p><hr> <h2>نمونه‌ها</h2><h3>در Nautilus (مدیر فایل در محیط GNOME)</h3><p>می‌توانید کلیدهای ترکیبی <code>Ctrl + S</code> را فشار دهید<br> و یک الگوی انتخاب فایل با استفاده از وایلدکارت وارد کنید.<br> در این حالت، تمام فایل‌هایی که با الگوی شما مطابقت دارند، در پوشه‌ی فعلی انتخاب می‌شوند.</p><h3>در Dolphin و Konqueror (مدیران فایل در محیط KDE)</h3><p>می‌توانید مستقیماً در نوار مسیر (<strong>Location Bar</strong>) از وایلدکارت استفاده کنید.<br> برای مثال، اگر بخواهید تمام فایل‌هایی را که در مسیر <code>/usr/bin</code> با حرف کوچک <strong>u</strong> شروع می‌شوند ببینید، کافی است عبارت زیر را در نوار مسیر وارد کنید:</p><pre class="hljs"><code>/usr/bin/u*
+</code></pre> <p>و مدیر فایل به‌طور خودکار فقط فایل‌های مطابق با این الگو را نمایش می‌دهد.</p><hr> <p><strong>نکته:</strong><br> بسیاری از ایده‌هایی که در ابتدا در <strong>رابط خط فرمان (Command Line Interface)</strong> وجود داشتند، بعدها به رابط‌های گرافیکی نیز راه پیدا کرده‌اند.<br> این یکی از دلایلی است که باعث می‌شود <strong>محیط دسکتاپ لینوکس</strong> تا این اندازه قدرتمند و منعطف باشد.</p><hr> <h2>دستور <code>mkdir</code> – ایجاد دایرکتوری‌ها (Create Directories)</h2><p>دستور <strong><code>mkdir</code></strong> برای ایجاد پوشه‌ها (دایرکتوری‌ها) استفاده می‌شود.<br> شکل کلی استفاده از آن به‌صورت زیر است:</p><pre class="hljs"><code><span class="hljs-built_in">mkdir</span> directory...
+</code></pre> <p>علامت سه‌نقطه (<code>...</code>) در مستندات لینوکس به این معناست که آرگومان می‌تواند <strong>تکرار شود</strong>.<br> به بیان دیگر، می‌توانید چندین پوشه را در یک دستور بسازید.</p><hr> <h3>مثال‌ها</h3><p>ایجاد یک پوشه به نام <code>dir1</code>:</p><pre class="hljs"><code><span class="hljs-built_in">mkdir</span> dir1
+</code></pre> <p>ایجاد سه پوشه هم‌زمان:</p><pre class="hljs"><code><span class="hljs-built_in">mkdir</span> dir1 dir2 dir3
+</code></pre> <p>در این حالت، سه پوشه به نام‌های <code>dir1</code>، <code>dir2</code> و <code>dir3</code> ساخته می‌شوند.</p><hr> <p><strong>نکته:</strong><br> اگر در مسیر موردنظر مجوز (<strong>Permission</strong>) لازم برای نوشتن نداشته باشید،<br> دستور <code>mkdir</code> با خطای «Permission denied» مواجه می‌شود.<br> در چنین حالتی، باید از <code>sudo</code> برای اجرای دستور با سطح دسترسی مدیر استفاده کنید:</p><pre class="hljs"><code><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">mkdir</span> /opt/newfolder
+</code></pre> <hr><h3>پایان بخش سوم</h3><p>در بخش بعدی، سراغ دستورات کاربردی‌تر خواهیم رفت:<br><strong><code>cp</code> (کپی کردن فایل‌ها و دایرکتوری‌ها)</strong> همراه با جدول کامل گزینه‌ها و مثال‌های واقعی.</p><h1>دستور cp – کپی کردن فایل‌ها و دایرکتوری‌ها (Copy Files and Directories)</h1><p>دستور <strong><code>cp</code></strong> برای کپی کردن فایل‌ها یا دایرکتوری‌ها استفاده می‌شود.<br> این دستور دو شیوه‌ی اصلی برای استفاده دارد:</p><hr> <h3>۱. کپی یک فایل یا دایرکتوری به مقصد جدید</h3><pre class="hljs"><code><span class="hljs-built_in">cp</span> item1 item2
+</code></pre> <p>در این حالت، فایل یا پوشه‌ی <code>item1</code> در مسیر یا نام جدیدی با عنوان <code>item2</code> کپی می‌شود.<br> اگر مقصد موجود باشد، محتوای آن <strong>بازنویسی (overwrite)</strong> می‌شود.</p><hr> <h3>۲. کپی چند فایل یا پوشه درون یک دایرکتوری</h3><pre class="hljs"><code><span class="hljs-built_in">cp</span> item... directory
+</code></pre> <p>در این حالت، چندین فایل یا پوشه (که با فاصله از هم جدا شده‌اند)<br> درون دایرکتوری مشخص‌شده کپی می‌شوند.</p><p>برای مثال:</p><pre class="hljs"><code><span class="hljs-built_in">cp</span> file1 file2 dir1
+</code></pre> <p>فایل‌های <code>file1</code> و <code>file2</code> درون دایرکتوری <code>dir1</code> کپی می‌شوند.<br> دایرکتوری مقصد (<code>dir1</code>) باید از قبل وجود داشته باشد.</p><hr> <h2>گزینه‌های مفید cp (Useful Options)</h2><p>جدول زیر برخی از گزینه‌های پرکاربرد دستور <code>cp</code> را نشان می‌دهد.</p><h3>جدول ۴-۴: گزینه‌های cp</h3><table> <thead><tr> <th>گزینه</th><th>گزینه‌ی بلند</th><th>توضیح</th></tr> </thead><tbody> <tr><td><code>-a</code></td><td><code>--archive</code></td><td>فایل‌ها و دایرکتوری‌ها را همراه با تمام ویژگی‌هایشان (مالکیت، مجوزها و غیره) کپی می‌کند. به‌طور معمول، فایل‌های کپی‌شده خصوصیات کاربر فعلی را می‌گیرند، اما با این گزینه همه‌چیز حفظ می‌شود.</td></tr> <tr><td><code>-i</code></td><td><code>--interactive</code></td><td>پیش از بازنویسی یک فایل موجود، از کاربر تأیید می‌گیرد. در حالت عادی، <code>cp</code> بدون هشدار فایل‌ها را بازنویسی می‌کند.</td></tr> <tr><td><code>-r</code></td><td><code>--recursive</code></td><td>دایرکتوری‌ها و محتوای درونشان را به‌صورت بازگشتی کپی می‌کند. برای کپی دایرکتوری‌ها، باید این گزینه یا <code>-a</code> را استفاده کنید.</td></tr> <tr><td><code>-u</code></td><td><code>--update</code></td><td>فقط فایل‌هایی را کپی می‌کند که در مقصد وجود ندارند یا نسخه‌ی جدیدتری نسبت به فایل مقصد دارند. این گزینه در انتقال حجم زیاد فایل‌ها بسیار مفید است، زیرا از کپی فایل‌های تکراری جلوگیری می‌کند.</td></tr> <tr><td><code>-v</code></td><td><code>--verbose</code></td><td>هنگام اجرای دستور، پیام‌های توضیحی درباره‌ی عملیات انجام‌شده نمایش می‌دهد.</td></tr> </tbody></table> <hr><h2>مثال‌های کاربردی cp</h2><p>در جدول زیر چند نمونه از کاربرد دستور <code>cp</code> را می‌بینید.</p><h3>جدول ۴-۵: مثال‌های cp</h3><table> <thead><tr> <th>دستور</th><th>نتیجه</th></tr> </thead><tbody> <tr><td><code>cp file1 file2</code></td><td>فایل <code>file1</code> را به <code>file2</code> کپی می‌کند. اگر <code>file2</code> وجود داشته باشد، محتوای آن بازنویسی می‌شود؛ در غیر این صورت فایل جدیدی ایجاد می‌شود.</td></tr> <tr><td><code>cp -i file1 file2</code></td><td>مانند دستور قبل، اما قبل از بازنویسی <code>file2</code> از کاربر تأیید می‌گیرد.</td></tr> <tr><td><code>cp file1 file2 dir1</code></td><td>فایل‌های <code>file1</code> و <code>file2</code> را درون دایرکتوری <code>dir1</code> کپی می‌کند (دایرکتوری باید موجود باشد).</td></tr> <tr><td><code>cp dir1/* dir2</code></td><td>با استفاده از وایلدکارت، همه‌ی فایل‌های موجود در <code>dir1</code> را درون <code>dir2</code> کپی می‌کند (دایرکتوری مقصد باید وجود داشته باشد).</td></tr> <tr><td><code>cp -r dir1 dir2</code></td><td>کل محتوای دایرکتوری <code>dir1</code> را به دایرکتوری <code>dir2</code> کپی می‌کند. اگر <code>dir2</code> وجود نداشته باشد، ایجاد می‌شود و پس از کپی، حاوی همان محتویات <code>dir1</code> خواهد بود. اگر <code>dir2</code> از قبل وجود داشته باشد، آنگاه <code>dir1</code> (و محتویاتش) درون <code>dir2</code> کپی می‌شود.</td></tr> </tbody></table> <hr><p><strong>نکته آموزشی:</strong><br> در صورت نیاز به پشتیبان‌گیری از ساختار کامل یک پوشه،<br> بهترین ترکیب استفاده از دستور زیر است:</p><pre class="hljs"><code><span class="hljs-built_in">cp</span> -av <span class="hljs-built_in">source</span> destination
+</code></pre> <p>گزینه‌ی <code>-a</code> تمام ویژگی‌ها را حفظ می‌کند و <code>-v</code> گزارش عملیات را نمایش می‌دهد.</p><hr> <h3>پایان بخش چهارم</h3><p>در بخش بعدی، سراغ دستور بعدی می‌رویم:<br><strong><code>mv</code> – جابه‌جایی و تغییر نام فایل‌ها و دایرکتوری‌ها (Move and Rename Files and Directories)</strong></p><h1>دستور mv – جابه‌جا کردن و تغییر نام فایل‌ها (Move and Rename Files)</h1><p>دستور <strong><code>mv</code></strong> برای <strong>جابه‌جا کردن (Move)</strong> و <strong>تغییر نام (Rename)</strong> فایل‌ها و دایرکتوری‌ها استفاده می‌شود.<br> این دستور از نظر نحو (Syntax) بسیار شبیه به دستور <code>cp</code> است،<br> اما تفاوت مهم آن در این است که پس از اجرای عمل جابه‌جایی یا تغییر نام،<br> فایل اصلی دیگر وجود ندارد — یعنی عملیات انتقال، برخلاف کپی، فایل را حذف می‌کند.</p><hr> <h3>۱. تغییر نام یا جابه‌جایی یک فایل/دایرکتوری</h3><pre class="hljs"><code><span class="hljs-built_in">mv</span> item1 item2
+</code></pre> <p>در این حالت، فایل یا دایرکتوری با نام <code>item1</code><br> به نام یا مسیر جدیدی با عنوان <code>item2</code> منتقل یا تغییر نام داده می‌شود.</p><hr> <h3>۲. جابه‌جایی چند فایل یا دایرکتوری به داخل یک پوشه</h3><pre class="hljs"><code><span class="hljs-built_in">mv</span> item... directory
+</code></pre> <p>در این حالت، چند فایل یا پوشه (جداشده با فاصله)<br> به دایرکتوری مشخص‌شده منتقل می‌شوند.</p><hr> <h2>گزینه‌های مفید mv (Useful Options)</h2><p>دستور <code>mv</code> بسیاری از گزینه‌های خود را با <code>cp</code> مشترک دارد.<br> در جدول زیر مهم‌ترین گزینه‌ها آورده شده است:</p><h3>جدول ۴-۶: گزینه‌های mv</h3><table> <thead><tr> <th>گزینه</th><th>گزینه‌ی بلند</th><th>توضیح</th></tr> </thead><tbody> <tr><td><code>-i</code></td><td><code>--interactive</code></td><td>پیش از بازنویسی فایل موجود در مقصد، از کاربر تأیید می‌گیرد. در حالت عادی <code>mv</code> بدون هشدار فایل را جایگزین می‌کند.</td></tr> <tr><td><code>-u</code></td><td><code>--update</code></td><td>فقط فایل‌هایی را منتقل می‌کند که در مقصد وجود ندارند یا جدیدتر از نسخه‌ی موجود هستند.</td></tr> <tr><td><code>-v</code></td><td><code>--verbose</code></td><td>در هنگام اجرا، پیام‌های توضیحی درباره‌ی هر عمل انتقال نمایش می‌دهد.</td></tr> </tbody></table> <hr><h2>مثال‌های کاربردی mv</h2><p>در جدول زیر نمونه‌هایی از کاربردهای رایج دستور <code>mv</code> را می‌بینیم.</p><h3>جدول ۴-۷: مثال‌های mv</h3><table> <thead><tr> <th>دستور</th><th>نتیجه</th></tr> </thead><tbody> <tr><td><code>mv file1 file2</code></td><td>فایل <code>file1</code> را به <code>file2</code> تغییر نام می‌دهد. اگر <code>file2</code> وجود داشته باشد، بازنویسی می‌شود؛ اگر وجود نداشته باشد، ایجاد می‌شود. پس از آن، <code>file1</code> دیگر وجود نخواهد داشت.</td></tr> <tr><td><code>mv -i file1 file2</code></td><td>مانند دستور قبل، اما پیش از بازنویسی <code>file2</code> از کاربر تأیید می‌گیرد.</td></tr> <tr><td><code>mv file1 file2 dir1</code></td><td>فایل‌های <code>file1</code> و <code>file2</code> را به داخل دایرکتوری <code>dir1</code> منتقل می‌کند (دایرکتوری باید از قبل موجود باشد).</td></tr> <tr><td><code>mv dir1 dir2</code></td><td>اگر دایرکتوری <code>dir2</code> وجود نداشته باشد، <code>dir1</code> را به نام <code>dir2</code> تغییر می‌دهد. اگر <code>dir2</code> وجود داشته باشد، <code>dir1</code> (و محتویات آن) را درون <code>dir2</code> منتقل می‌کند.</td></tr> </tbody></table> <hr><p><strong>نکات کاربردی:</strong></p><ul> <li>از <code>mv</code> می‌توان برای <strong>تغییر نام سریع</strong> فایل‌ها و پوشه‌ها استفاده کرد:</li></ul> <pre class="hljs"><code><span class="hljs-built_in">mv</span> oldname newname
+</code></pre> <ul><li>در صورت اشتباه در مسیر مقصد، فایل ممکن است به مکانی غیرمنتظره منتقل شود.<br> برای جلوگیری از خطاهای ناخواسته، از گزینه‌ی <code>-i</code> استفاده کنید.</li></ul> <hr><h3>پایان بخش پنجم</h3><p>در بخش بعدی، سراغ دستور بعدی می‌رویم:<br><strong><code>rm</code> – حذف فایل‌ها و دایرکتوری‌ها (Remove Files and Directories)</strong><br> به‌همراه گزینه‌های پرکاربرد، مثال‌ها و هشدارهای مهم.</p><h1>دستور rm – حذف فایل‌ها و دایرکتوری‌ها (Remove Files and Directories)</h1><p>دستور <strong><code>rm</code></strong> برای حذف (<strong>Delete</strong>) فایل‌ها و دایرکتوری‌ها استفاده می‌شود.<br> شکل کلی استفاده از آن به این صورت است:</p><pre class="hljs"><code><span class="hljs-built_in">rm</span> item...
+</code></pre> <p>در اینجا، <code>item</code> می‌تواند یک یا چند فایل یا پوشه باشد که با فاصله از هم جدا شده‌اند.</p><hr> <h2>گزینه‌های مفید rm (Useful Options)</h2><p>در جدول زیر مهم‌ترین گزینه‌های دستور <code>rm</code> آورده شده است:</p><h3>جدول ۴-۸: گزینه‌های rm</h3><table> <thead><tr> <th>گزینه</th><th>گزینه‌ی بلند</th><th>توضیح</th></tr> </thead><tbody> <tr><td><code>-i</code></td><td><code>--interactive</code></td><td>پیش از حذف هر فایل، از کاربر تأیید می‌گیرد. اگر این گزینه استفاده نشود، فایل‌ها بدون هشدار حذف می‌شوند.</td></tr> <tr><td><code>-r</code></td><td><code>--recursive</code></td><td>به‌صورت بازگشتی دایرکتوری‌ها و تمام زیرشاخه‌های آن‌ها را حذف می‌کند. برای حذف پوشه‌ها، این گزینه الزامی است.</td></tr> <tr><td><code>-f</code></td><td><code>--force</code></td><td>فایل‌های غیرموجود را نادیده می‌گیرد و هیچ پیامی برای تأیید نمایش نمی‌دهد (گزینه‌ی <code>-i</code> را نیز بی‌اثر می‌کند).</td></tr> <tr><td><code>-v</code></td><td><code>--verbose</code></td><td>در هنگام اجرا، پیام‌های توضیحی درباره‌ی فایل‌ها و دایرکتوری‌های در حال حذف نمایش می‌دهد.</td></tr> </tbody></table> <hr><h2>مثال‌های کاربردی rm</h2><p>در جدول زیر چند مثال از استفاده‌ی دستور <code>rm</code> آمده است:</p><h3>جدول ۴-۹: مثال‌های rm</h3><table> <thead><tr> <th>دستور</th><th>نتیجه</th></tr> </thead><tbody> <tr><td><code>rm file1</code></td><td>فایل <code>file1</code> را بدون هشدار حذف می‌کند.</td></tr> <tr><td><code>rm -i file1</code></td><td>همانند مثال قبل، اما پیش از حذف از کاربر تأیید می‌گیرد.</td></tr> <tr><td><code>rm -r file1 dir1</code></td><td>فایل <code>file1</code> و دایرکتوری <code>dir1</code> (به‌همراه تمام محتویاتش) را به‌صورت بازگشتی حذف می‌کند.</td></tr> <tr><td><code>rm -rf file1 dir1</code></td><td>همانند مثال قبل، اما اگر فایل یا دایرکتوری‌ای وجود نداشته باشد، بدون هیچ خطا یا پیام ادامه می‌دهد.</td></tr> </tbody></table> <hr><p><strong>هشدار بسیار مهم: با rm محتاط باشید!</strong></p><p>سیستم‌های شبیه یونیکس مانند لینوکس دستور <strong>بازگردانی حذف (undelete)</strong> ندارند.<br> به‌عبارت دیگر، زمانی که چیزی را با <code>rm</code> حذف می‌کنید، آن فایل برای همیشه از بین می‌رود.<br> سیستم فرض می‌کند که شما می‌دانید چه می‌کنید.</p><p>بنابراین هنگام استفاده از <code>rm</code> باید <strong>بسیار دقت و احتیاط</strong> داشته باشید، به‌ویژه در زمان استفاده از <strong>وایلدکارت‌ها (wildcards)</strong>.</p><hr> <h3>مثال خطرناک کلاسیک</h3><p>فرض کنید می‌خواهید همه‌ی فایل‌های HTML را در یک پوشه حذف کنید:</p><pre class="hljs"><code><span class="hljs-built_in">rm</span> *.html
+</code></pre> <p>این دستور کاملاً درست است.<br> اما اگر به‌اشتباه بین <code>*</code> و <code>.html</code> فاصله بگذارید، یعنی:</p><pre class="hljs"><code><span class="hljs-built_in">rm</span> * .html
+</code></pre> <p>دستور بالا ابتدا <strong>تمام فایل‌های موجود در پوشه را حذف می‌کند</strong><br> و سپس سعی می‌کند فایلی به نام <code>.html</code> پیدا کند — که معمولاً وجود ندارد —<br> و خطا می‌دهد. در نتیجه، <strong>تمام داده‌های پوشه از بین خواهند رفت!</strong></p><hr> <p><strong>نکته ایمنی:</strong></p><p>هرگاه از <code>rm</code> به‌همراه وایلدکارت‌ها استفاده می‌کنید،<br> پیش از اجرای آن، بهتر است ابتدا همان الگو را با دستور <code>ls</code> آزمایش کنید تا ببینید کدام فایل‌ها انتخاب می‌شوند:</p><pre class="hljs"><code><span class="hljs-built_in">ls</span> *.html
+</code></pre> <p>اگر نتیجه صحیح بود،<br> با فشردن کلید جهت‌نمای بالا (↑) دستور را بازگردانید و فقط <code>ls</code> را به <code>rm</code> تغییر دهید:</p><pre class="hljs"><code><span class="hljs-built_in">rm</span> *.html
+</code></pre> <p>به این ترتیب از حذف اشتباهی جلوگیری می‌کنید.</p><hr> <p><strong>نکته حرفه‌ای:</strong><br> برای حذف ایمن‌تر فایل‌ها، ابزارهایی مانند <strong><code>trash-cli</code></strong> یا <strong><code>gio trash</code></strong> وجود دارند<br> که فایل‌ها را به <strong>زباله‌دان (Trash)</strong> منتقل می‌کنند تا در صورت نیاز قابل بازگردانی باشند.<br> اما دستور <code>rm</code> همیشه <strong>حذف دائمی</strong> انجام می‌دهد.</p><hr> <h3>پایان بخش ششم</h3><p>در بخش بعدی، سراغ دستور بعدی می‌رویم:<br><strong><code>ln</code> – ایجاد لینک‌های سخت و نمادین (Create Hard and Symbolic Links)</strong>،<br> که یکی از مفاهیم مهم و گاهی گیج‌کننده در لینوکس است.</p><h1>دستور ln – ایجاد لینک‌ها (Create Links)</h1><p>دستور <strong><code>ln</code></strong> برای ایجاد لینک‌ها بین فایل‌ها و دایرکتوری‌ها به کار می‌رود.<br> این دستور می‌تواند دو نوع لینک بسازد:</p><ul> <li><strong>لینک سخت (Hard Link)</strong></li><li><strong>لینک نمادین یا سمبولیک (Symbolic Link / Symlink)</strong></li></ul> <hr><h2>شکل کلی استفاده از دستور ln</h2><h3>ایجاد یک لینک سخت (Hard Link)</h3><pre class="hljs"><code><span class="hljs-built_in">ln</span> file <span class="hljs-built_in">link</span>
+</code></pre> <h3>ایجاد یک لینک نمادین (Symbolic Link)</h3><pre class="hljs"><code><span class="hljs-built_in">ln</span> -s item <span class="hljs-built_in">link</span>
+</code></pre> <p>در این حالت، گزینه‌ی <code>-s</code> باعث می‌شود که لینک از نوع <strong>نمادین (symbolic)</strong> باشد.<br> آرگومان <code>item</code> می‌تواند فایل یا دایرکتوری باشد.</p><hr> <h2>لینک‌های سخت (Hard Links)</h2><p><strong>لینک‌های سخت</strong>، روش اصلی و سنتی سیستم‌عامل یونیکس برای ایجاد لینک‌ها هستند.<br> در واقع، هر فایل در لینوکس حداقل یک لینک سخت دارد — یعنی همان نام اصلی فایل در سیستم فایل.</p><p>زمانی که یک لینک سخت جدید ایجاد می‌کنیم، در واقع <strong>یک نام اضافی برای همان فایل</strong> می‌سازیم.<br> تمام لینک‌های سخت یک فایل به یک نقطه‌ی داده (<strong>inode</strong>) در دیسک اشاره می‌کنند،<br> به همین دلیل از نظر سیستم، فایل اصلی و لینک سخت آن <strong>هیچ تفاوتی با هم ندارند</strong>.</p><hr> <h3>محدودیت‌های لینک سخت</h3><ol> <li>یک لینک سخت نمی‌تواند به فایلی در یک <strong>سیستم فایل دیگر (پارتیشن دیگر)</strong> اشاره کند.<br> یعنی لینک و فایل هدف باید روی یک دیسک یا پارتیشن مشترک باشند.</li><li>لینک سخت نمی‌تواند به یک <strong>دایرکتوری</strong> اشاره کند — تنها برای فایل‌ها قابل استفاده است.</li></ol> <hr><h3>ویژگی‌های لینک سخت</h3><ul> <li>در خروجی <code>ls -l</code> هیچ نشانه‌ی خاصی برای لینک سخت وجود ندارد.</li><li>اگر یکی از لینک‌ها حذف شود، فایل واقعی باقی می‌ماند تا زمانی که آخرین لینک آن حذف شود.</li><li>هر لینک سخت در واقع یک مسیر مستقل به همان داده‌ی اصلی است.</li></ul> <p><strong>نکته مهم:</strong><br> در عمل، هنگام حذف یکی از لینک‌ها، تنها «نام» آن حذف می‌شود، نه داده‌ی فایل.<br> تا زمانی که حداقل یک لینک به فایل وجود داشته باشد، محتوای فایل در سیستم باقی می‌ماند.</p><hr> <h2>لینک‌های نمادین (Symbolic Links)</h2><p><strong>لینک‌های نمادین</strong> برای رفع محدودیت‌های لینک‌های سخت معرفی شدند.<br> آن‌ها یک فایل خاص ایجاد می‌کنند که <strong>حاوی آدرس (Path)</strong> فایل یا پوشه‌ی هدف است.</p><p>به زبان ساده، یک <strong>Symbolic Link (یا Symlink)</strong> درست مانند <strong>میانبر (Shortcut)</strong> در ویندوز عمل می‌کند.</p><hr> <h3>ویژگی‌های لینک نمادین</h3><ul> <li>اگر به فایل اصلی چیزی بنویسیم، از طریق لینک نمادین هم همان تغییر اعمال می‌شود.</li><li>اگر فایل اصلی حذف شود، لینک نمادین به فایل غیرموجود اشاره می‌کند و اصطلاحاً <strong>شکسته (Broken Link)</strong> می‌شود.</li><li>در خروجی <code>ls -l</code>، لینک‌های نمادین با حرف <strong><code>l</code></strong> در ابتدای خط مشخص می‌شوند و با پیکان <strong><code>→</code></strong> مسیر هدف را نشان می‌دهند.</li><li>در بسیاری از محیط‌های لینوکسی، لینک‌های شکسته با رنگ قرمز نمایش داده می‌شوند.</li></ul> <hr><h3>مثال</h3><pre class="hljs"><code><span class="hljs-built_in">ln</span> -s /home/user/file.txt link1
+</code></pre> <p>در این مثال، <code>link1</code> یک لینک نمادین به فایل <code>file.txt</code> است.<br> اگر فایل اصلی حذف شود، <code>link1</code> باقی می‌ماند اما دیگر به چیزی اشاره نمی‌کند.</p><hr> <h2>تفاوت لینک سخت و لینک نمادین</h2><table> <thead><tr> <th>ویژگی</th><th>لینک سخت (Hard Link)</th><th>لینک نمادین (Symbolic Link)</th></tr> </thead><tbody> <tr><td><strong>ارتباط با فایل اصلی</strong></td><td>مستقیماً به داده (<strong>inode</strong>) فایل اشاره می‌کند.</td><td>فقط مسیر فایل را ذخیره می‌کند.</td></tr> <tr><td><strong>قابل اعمال روی دایرکتوری‌ها</strong></td><td>خیر</td><td>بله</td></tr> <tr><td><strong>قابل استفاده بین پارتیشن‌ها</strong></td><td>خیر</td><td>بله</td></tr> <tr><td><strong>نمایش در <code>ls -l</code></strong></td><td>شبیه فایل عادی است.</td><td>با حرف <code>l</code> و پیکان (<code>→</code>) نمایش داده می‌شود.</td></tr> <tr><td><strong>رفتار هنگام حذف فایل اصلی</strong></td><td>فایل همچنان وجود دارد تا آخرین لینک حذف شود.</td><td>لینک شکسته می‌شود (<strong>Broken Link</strong>).</td></tr> <tr><td><strong>ایجاد با دستور</strong></td><td><code>ln file link</code></td><td><code>ln -s item link</code></td></tr> </tbody></table> <hr><p><strong>نکته حرفه‌ای:</strong><br> در سیستم‌های مدرن لینوکس تقریباً همیشه از <strong>Symbolic Links</strong> استفاده می‌شود،<br> زیرا انعطاف‌پذیرتر و قابل استفاده برای فایل‌ها، دایرکتوری‌ها و حتی در پارتیشن‌های مختلف هستند.</p><hr> <h3>پایان بخش هفتم</h3><p>در بخش بعدی (و آخر فصل)، وارد بخش تمرین عملی <strong>Playground</strong> می‌شویم،<br> جایی که با استفاده از دستورات <code>mkdir</code>, <code>cp</code>, <code>mv</code>, <code>ln</code>, و <code>rm</code><br> به‌صورت گام‌به‌گام تمرین خواهیم کرد تا مفاهیم کاملاً جا بیفتد.</p><h1>بیایید یک محیط تمرینی بسازیم (Let's Build a Playground)</h1><p>از آن‌جا که در این فصل قرار است واقعاً با فایل‌ها و پوشه‌ها کار کنیم،<br> بهتر است یک محیط امن برای تمرین بسازیم تا بدون ترس از خراب کردن سیستم،<br> بتوانیم همه‌ی دستورات را امتحان کنیم.</p><hr> <h2>ایجاد دایرکتوری‌ها (Creating Directories)</h2><p>ابتدا مطمئن می‌شویم که در دایرکتوری خانگی خود هستیم و سپس پوشه‌ی <strong>playground</strong> را می‌سازیم:</p><pre class="hljs"><code>[me@linuxbox ~]$ <span class="hljs-built_in">cd</span>
 [me@linuxbox ~]$ <span class="hljs-built_in">mkdir</span> playground
-</code></pre>
-<p>حالا برای جذاب‌تر شدن تمرین، دو پوشه‌ی دیگر به نام‌های <strong>dir1</strong> و <strong>dir2</strong> درون آن ایجاد می‌کنیم.<br>
-برای این کار، ابتدا وارد <strong>playground</strong> می‌شویم و سپس هر دو پوشه را با یک دستور می‌سازیم:</p>
-<pre class="hljs"><code>[me@linuxbox ~]$ <span class="hljs-built_in">cd</span> playground
+</code></pre> <p>حالا برای جذاب‌تر شدن تمرین، دو پوشه‌ی دیگر به نام‌های <strong>dir1</strong> و <strong>dir2</strong> درون آن ایجاد می‌کنیم.<br> برای این کار، ابتدا وارد <strong>playground</strong> می‌شویم و سپس هر دو پوشه را با یک دستور می‌سازیم:</p><pre class="hljs"><code>[me@linuxbox ~]$ <span class="hljs-built_in">cd</span> playground
 [me@linuxbox playground]$ <span class="hljs-built_in">mkdir</span> dir1 dir2
-</code></pre>
-<p>✅ <strong>نکته:</strong> دستور <code>mkdir</code> می‌تواند چند آرگومان بپذیرد و در نتیجه با یک دستور چند پوشه را هم‌زمان بسازد.</p>
-<hr>
-<h2>کپی کردن فایل‌ها (Copying Files)</h2>
-<p>اکنون باید کمی داده در محیط تمرینی خود داشته باشیم.<br>
-برای این منظور، از دستور <code>cp</code> استفاده می‌کنیم تا یک فایل سیستمی را کپی کنیم.</p>
-<p>به‌عنوان مثال، فایل <code>/etc/passwd</code> را از مسیر اصلی سیستم به دایرکتوری فعلی کپی می‌کنیم:</p>
-<pre class="hljs"><code>[me@linuxbox playground]$ <span class="hljs-built_in">cp</span> /etc/passwd .
-</code></pre>
-<p>در اینجا از <code>.</code> به‌عنوان میان‌بر دایرکتوری فعلی (<strong>current directory</strong>) استفاده کرده‌ایم.<br>
-اگر اکنون دستور زیر را اجرا کنیم، فایل جدید را خواهیم دید:</p>
-<pre class="hljs"><code>[me@linuxbox playground]$ <span class="hljs-built_in">ls</span> -l
-</code></pre>
-<p>خروجی:</p>
-<pre class="hljs"><code>total 12
+</code></pre> <p><strong>نکته:</strong> دستور <code>mkdir</code> می‌تواند چند آرگومان بپذیرد و در نتیجه با یک دستور چند پوشه را هم‌زمان بسازد.</p><hr> <h2>کپی کردن فایل‌ها (Copying Files)</h2><p>اکنون باید کمی داده در محیط تمرینی خود داشته باشیم.<br> برای این منظور، از دستور <code>cp</code> استفاده می‌کنیم تا یک فایل سیستمی را کپی کنیم.</p><p>به‌عنوان مثال، فایل <code>/etc/passwd</code> را از مسیر اصلی سیستم به دایرکتوری فعلی کپی می‌کنیم:</p><pre class="hljs"><code>[me@linuxbox playground]$ <span class="hljs-built_in">cp</span> /etc/passwd .
+</code></pre> <p>در اینجا از <code>.</code> به‌عنوان میان‌بر دایرکتوری فعلی (<strong>current directory</strong>) استفاده کرده‌ایم.<br> اگر اکنون دستور زیر را اجرا کنیم، فایل جدید را خواهیم دید:</p><pre class="hljs"><code>[me@linuxbox playground]$ <span class="hljs-built_in">ls</span> -l
+</code></pre> <p>خروجی:</p><pre class="hljs"><code>total 12
 drwxrwxr-x 2 me me 4096 2025-01-10 16:40 dir1
 drwxrwxr-x 2 me me 4096 2025-01-10 16:40 dir2
 -rw-r--r-- 1 me me 1650 2025-01-10 16:07 passwd
-</code></pre>
-<hr>
-<h3>استفاده از گزینه <code>-v</code> برای مشاهده‌ی عملیات</h3>
-<p>بیایید همان کپی را این بار با گزینه‌ی <strong><code>-v</code> (verbose)</strong> انجام دهیم تا پیام توضیحی ببینیم:</p>
-<pre class="hljs"><code>[me@linuxbox playground]$ <span class="hljs-built_in">cp</span> -v /etc/passwd .
+</code></pre> <hr><h3>استفاده از گزینه <code>-v</code> برای مشاهده‌ی عملیات</h3><p>بیایید همان کپی را این بار با گزینه‌ی <strong><code>-v</code> (verbose)</strong> انجام دهیم تا پیام توضیحی ببینیم:</p><pre class="hljs"><code>[me@linuxbox playground]$ <span class="hljs-built_in">cp</span> -v /etc/passwd .
 ‘/etc/passwd’ -&gt; ‘./passwd’
-</code></pre>
-<p>در این حالت، <code>cp</code> همان عملیات کپی را انجام می‌دهد ولی یک پیام کوتاه نشان می‌دهد که چه کاری در حال انجام است.<br>
-توجه کنید که <code>cp</code> نسخه‌ی قبلی فایل را بدون هیچ هشداری بازنویسی کرده است.<br>
-برای دریافت هشدار پیش از بازنویسی، از گزینه‌ی <code>-i</code> استفاده می‌کنیم:</p>
-<pre class="hljs"><code>[me@linuxbox playground]$ <span class="hljs-built_in">cp</span> -i /etc/passwd .
+</code></pre> <p>در این حالت، <code>cp</code> همان عملیات کپی را انجام می‌دهد ولی یک پیام کوتاه نشان می‌دهد که چه کاری در حال انجام است.<br> توجه کنید که <code>cp</code> نسخه‌ی قبلی فایل را بدون هیچ هشداری بازنویسی کرده است.<br> برای دریافت هشدار پیش از بازنویسی، از گزینه‌ی <code>-i</code> استفاده می‌کنیم:</p><pre class="hljs"><code>[me@linuxbox playground]$ <span class="hljs-built_in">cp</span> -i /etc/passwd .
 <span class="hljs-built_in">cp</span>: overwrite ‘./passwd’?
-</code></pre>
-<p>اگر در پاسخ <code>y</code> وارد کنیم، فایل بازنویسی می‌شود؛<br>
-در غیر این صورت (مثلاً با <code>n</code>) فایل بدون تغییر باقی می‌ماند.</p>
-<hr>
-<h2>جابه‌جایی و تغییر نام فایل‌ها (Moving and Renaming Files)</h2>
-<p>اکنون فایل <strong>passwd</strong> را به نامی بامزه‌تر تغییر می‌دهیم تا تمرین ادامه پیدا کند:</p>
-<pre class="hljs"><code>[me@linuxbox playground]$ <span class="hljs-built_in">mv</span> passwd fun
-</code></pre>
-<p>سپس فایل <strong>fun</strong> را بین پوشه‌ها جابه‌جا می‌کنیم:</p>
-<pre class="hljs"><code>[me@linuxbox playground]$ <span class="hljs-built_in">mv</span> fun dir1
+</code></pre> <p>اگر در پاسخ <code>y</code> وارد کنیم، فایل بازنویسی می‌شود؛<br> در غیر این صورت (مثلاً با <code>n</code>) فایل بدون تغییر باقی می‌ماند.</p><hr> <h2>جابه‌جایی و تغییر نام فایل‌ها (Moving and Renaming Files)</h2><p>اکنون فایل <strong>passwd</strong> را به نامی بامزه‌تر تغییر می‌دهیم تا تمرین ادامه پیدا کند:</p><pre class="hljs"><code>[me@linuxbox playground]$ <span class="hljs-built_in">mv</span> passwd fun
+</code></pre> <p>سپس فایل <strong>fun</strong> را بین پوشه‌ها جابه‌جا می‌کنیم:</p><pre class="hljs"><code>[me@linuxbox playground]$ <span class="hljs-built_in">mv</span> fun dir1
 [me@linuxbox playground]$ <span class="hljs-built_in">mv</span> dir1/fun dir2
 [me@linuxbox playground]$ <span class="hljs-built_in">mv</span> dir2/fun .
-</code></pre>
-<p>اکنون فایل دوباره به محل اصلی بازگشته است.</p>
-<hr>
-<h3>جابه‌جایی پوشه‌ها</h3>
-<p>بیایید ببینیم <code>mv</code> روی دایرکتوری‌ها چه اثری دارد.</p>
-<p>ابتدا فایل fun را دوباره به dir1 منتقل می‌کنیم:</p>
-<pre class="hljs"><code>[me@linuxbox playground]$ <span class="hljs-built_in">mv</span> fun dir1
-</code></pre>
-<p>سپس پوشه‌ی dir1 را به درون dir2 منتقل می‌کنیم:</p>
-<pre class="hljs"><code>[me@linuxbox playground]$ <span class="hljs-built_in">mv</span> dir1 dir2
-</code></pre>
-<p>و حالا با <code>ls</code> بررسی می‌کنیم:</p>
-<pre class="hljs"><code>[me@linuxbox playground]$ <span class="hljs-built_in">ls</span> -l dir2
+</code></pre> <p>اکنون فایل دوباره به محل اصلی بازگشته است.</p><hr> <h3>جابه‌جایی پوشه‌ها</h3><p>بیایید ببینیم <code>mv</code> روی دایرکتوری‌ها چه اثری دارد.</p><p>ابتدا فایل fun را دوباره به dir1 منتقل می‌کنیم:</p><pre class="hljs"><code>[me@linuxbox playground]$ <span class="hljs-built_in">mv</span> fun dir1
+</code></pre> <p>سپس پوشه‌ی dir1 را به درون dir2 منتقل می‌کنیم:</p><pre class="hljs"><code>[me@linuxbox playground]$ <span class="hljs-built_in">mv</span> dir1 dir2
+</code></pre> <p>و حالا با <code>ls</code> بررسی می‌کنیم:</p><pre class="hljs"><code>[me@linuxbox playground]$ <span class="hljs-built_in">ls</span> -l dir2
 total 4
 drwxrwxr-x 2 me me 4096 2025-01-11 06:06 dir1
-</code></pre>
-<p>درون آن را نیز ببینیم:</p>
-<pre class="hljs"><code>[me@linuxbox playground]$ <span class="hljs-built_in">ls</span> -l dir2/dir1
+</code></pre> <p>درون آن را نیز ببینیم:</p><pre class="hljs"><code>[me@linuxbox playground]$ <span class="hljs-built_in">ls</span> -l dir2/dir1
 total 4
 -rw-r--r-- 1 me me 1650 2025-01-10 16:33 fun
-</code></pre>
-<p>چون dir2 وجود داشت، mv پوشه‌ی dir1 را به داخل آن منتقل کرد.<br>
-اگر dir2 وجود نداشت، نام dir1 به dir2 تغییر می‌کرد.</p>
-<p>در نهایت، همه‌چیز را به حالت اولیه بازمی‌گردانیم:</p>
-<pre class="hljs"><code>[me@linuxbox playground]$ <span class="hljs-built_in">mv</span> dir2/dir1 .
+</code></pre> <p>چون dir2 وجود داشت، mv پوشه‌ی dir1 را به داخل آن منتقل کرد.<br> اگر dir2 وجود نداشت، نام dir1 به dir2 تغییر می‌کرد.</p><p>در نهایت، همه‌چیز را به حالت اولیه بازمی‌گردانیم:</p><pre class="hljs"><code>[me@linuxbox playground]$ <span class="hljs-built_in">mv</span> dir2/dir1 .
 [me@linuxbox playground]$ <span class="hljs-built_in">mv</span> dir1/fun .
-</code></pre>
-<hr>
-<h2>ایجاد لینک‌های سخت (Creating Hard Links)</h2>
-<p>چند لینک سخت به فایل fun ایجاد می‌کنیم:</p>
-<pre class="hljs"><code>[me@linuxbox playground]$ <span class="hljs-built_in">ln</span> fun fun-hard
+</code></pre> <hr><h2>ایجاد لینک‌های سخت (Creating Hard Links)</h2><p>چند لینک سخت به فایل fun ایجاد می‌کنیم:</p><pre class="hljs"><code>[me@linuxbox playground]$ <span class="hljs-built_in">ln</span> fun fun-hard
 [me@linuxbox playground]$ <span class="hljs-built_in">ln</span> fun dir1/fun-hard
 [me@linuxbox playground]$ <span class="hljs-built_in">ln</span> fun dir2/fun-hard
-</code></pre>
-<p>اکنون چهار نسخه از فایل fun داریم.<br>
-با <code>ls -l</code> وضعیت را بررسی می‌کنیم:</p>
-<pre class="hljs"><code>total 16
+</code></pre> <p>اکنون چهار نسخه از فایل fun داریم.<br> با <code>ls -l</code> وضعیت را بررسی می‌کنیم:</p><pre class="hljs"><code>total 16
 drwxrwxr-x 2 me me 4096 2025-01-14 16:17 dir1
 drwxrwxr-x 2 me me 4096 2025-01-14 16:17 dir2
 -rw-r--r-- 4 me me 1650 2025-01-10 16:33 fun
 -rw-r--r-- 4 me me 1650 2025-01-10 16:33 fun-hard
-</code></pre>
-<p>عدد ۴ در ستون دوم نشان‌دهنده‌ی تعداد لینک‌های سخت است.</p>
-<hr>
-<h3>مشاهده‌ی شماره inode فایل‌ها</h3>
-<p>برای اطمینان از اینکه دو فایل واقعاً یکی هستند، از گزینه‌ی <code>-i</code> در دستور <code>ls</code> استفاده می‌کنیم:</p>
-<pre class="hljs"><code>[me@linuxbox playground]$ <span class="hljs-built_in">ls</span> -li
-</code></pre>
-<p>خروجی نمونه:</p>
-<pre class="hljs"><code>12353538 -rw-r--r-- 4 me me 1650 2025-01-10 16:33 fun
+</code></pre> <p>عدد ۴ در ستون دوم نشان‌دهنده‌ی تعداد لینک‌های سخت است.</p><hr> <h3>مشاهده‌ی شماره inode فایل‌ها</h3><p>برای اطمینان از اینکه دو فایل واقعاً یکی هستند، از گزینه‌ی <code>-i</code> در دستور <code>ls</code> استفاده می‌کنیم:</p><pre class="hljs"><code>[me@linuxbox playground]$ <span class="hljs-built_in">ls</span> -li
+</code></pre> <p>خروجی نمونه:</p><pre class="hljs"><code>12353538 -rw-r--r-- 4 me me 1650 2025-01-10 16:33 fun
 12353538 -rw-r--r-- 4 me me 1650 2025-01-10 16:33 fun-hard
-</code></pre>
-<p>هر دو فایل شماره‌ی inode یکسان دارند (12353538)، که ثابت می‌کند هر دو اشاره به یک فایل واحد هستند.</p>
-<hr>
-<h2>ایجاد لینک‌های نمادین (Creating Symbolic Links)</h2>
-<pre class="hljs"><code>[me@linuxbox playground]$ <span class="hljs-built_in">ln</span> -s fun fun-sym
+</code></pre> <p>هر دو فایل شماره‌ی inode یکسان دارند (12353538)، که ثابت می‌کند هر دو اشاره به یک فایل واحد هستند.</p><hr> <h2>ایجاد لینک‌های نمادین (Creating Symbolic Links)</h2><pre class="hljs"><code>[me@linuxbox playground]$ <span class="hljs-built_in">ln</span> -s fun fun-sym
 [me@linuxbox playground]$ <span class="hljs-built_in">ln</span> -s ../fun dir1/fun-sym
 [me@linuxbox playground]$ <span class="hljs-built_in">ln</span> -s ../fun dir2/fun-sym
-</code></pre>
-<p>در این مثال:</p>
-<ul>
-<li><code>fun-sym</code> در دایرکتوری فعلی به فایل fun اشاره دارد.</li>
-<li>لینک‌های داخل dir1 و dir2 مسیر نسبی (<strong>../fun</strong>) دارند.</li>
-</ul>
-<p>خروجی:</p>
-<pre class="hljs"><code>-rw-r--r-- 4 me me 1650 2025-01-10 16:33 fun-hard
+</code></pre> <p>در این مثال:</p><ul> <li><code>fun-sym</code> در دایرکتوری فعلی به فایل fun اشاره دارد.</li><li>لینک‌های داخل dir1 و dir2 مسیر نسبی (<strong>../fun</strong>) دارند.</li></ul> <p>خروجی:</p><pre class="hljs"><code>-rw-r--r-- 4 me me 1650 2025-01-10 16:33 fun-hard
 lrwxrwxrwx 1 me me 6 2025-01-15 15:17 fun-sym -&gt; ../fun
-</code></pre>
-<p>حرف <code>l</code> در ابتدای خط نشان می‌دهد که <code>fun-sym</code> یک لینک نمادین است<br>
-و پیکان (<code>-&gt;</code>) مسیر هدف را نشان می‌دهد.</p>
-<hr>
-<h2>حذف فایل‌ها و لینک‌ها (Removing Files and Links)</h2>
-<p>ابتدا یکی از لینک‌های سخت را حذف می‌کنیم:</p>
-<pre class="hljs"><code>[me@linuxbox playground]$ <span class="hljs-built_in">rm</span> fun-hard
-</code></pre>
-<p>سپس بررسی می‌کنیم:</p>
-<pre class="hljs"><code>[me@linuxbox playground]$ <span class="hljs-built_in">ls</span> -l
-</code></pre>
-<p>می‌بینیم که <code>fun-hard</code> حذف شده و شمار لینک‌های فایل <code>fun</code> از ۴ به ۳ کاهش یافته است.</p>
-<p>اکنون فایل اصلی را با گزینه‌ی <code>-i</code> حذف می‌کنیم:</p>
-<pre class="hljs"><code>[me@linuxbox playground]$ <span class="hljs-built_in">rm</span> -i fun
+</code></pre> <p>حرف <code>l</code> در ابتدای خط نشان می‌دهد که <code>fun-sym</code> یک لینک نمادین است<br> و پیکان (<code>-&gt;</code>) مسیر هدف را نشان می‌دهد.</p><hr> <h2>حذف فایل‌ها و لینک‌ها (Removing Files and Links)</h2><p>ابتدا یکی از لینک‌های سخت را حذف می‌کنیم:</p><pre class="hljs"><code>[me@linuxbox playground]$ <span class="hljs-built_in">rm</span> fun-hard
+</code></pre> <p>سپس بررسی می‌کنیم:</p><pre class="hljs"><code>[me@linuxbox playground]$ <span class="hljs-built_in">ls</span> -l
+</code></pre> <p>می‌بینیم که <code>fun-hard</code> حذف شده و شمار لینک‌های فایل <code>fun</code> از ۴ به ۳ کاهش یافته است.</p><p>اکنون فایل اصلی را با گزینه‌ی <code>-i</code> حذف می‌کنیم:</p><pre class="hljs"><code>[me@linuxbox playground]$ <span class="hljs-built_in">rm</span> -i fun
 <span class="hljs-built_in">rm</span>: remove regular file ‘fun’?
-</code></pre>
-<p>با وارد کردن <code>y</code> فایل حذف می‌شود.<br>
-حال اگر دوباره <code>ls -l</code> را ببینیم، لینک <code>fun-sym</code> اکنون شکسته (broken) است.</p>
-<hr>
-<h3>حذف لینک‌های نمادین</h3>
-<pre class="hljs"><code>[me@linuxbox playground]$ <span class="hljs-built_in">rm</span> fun-sym dir1-sym
-</code></pre>
-<p>و در پایان فقط دو پوشه‌ی خالی باقی می‌ماند.</p>
-<hr>
-<h2>حذف کامل محیط تمرینی (Cleaning Up)</h2>
-<p>برای حذف کل محیط تمرینی:</p>
-<pre class="hljs"><code>[me@linuxbox playground]$ <span class="hljs-built_in">cd</span>
+</code></pre> <p>با وارد کردن <code>y</code> فایل حذف می‌شود.<br> حال اگر دوباره <code>ls -l</code> را ببینیم، لینک <code>fun-sym</code> اکنون شکسته (broken) است.</p><hr> <h3>حذف لینک‌های نمادین</h3><pre class="hljs"><code>[me@linuxbox playground]$ <span class="hljs-built_in">rm</span> fun-sym dir1-sym
+</code></pre> <p>و در پایان فقط دو پوشه‌ی خالی باقی می‌ماند.</p><hr> <h2>حذف کامل محیط تمرینی (Cleaning Up)</h2><p>برای حذف کل محیط تمرینی:</p><pre class="hljs"><code>[me@linuxbox playground]$ <span class="hljs-built_in">cd</span>
 [me@linuxbox ~]$ <span class="hljs-built_in">rm</span> -r playground
-</code></pre>
-<hr>
-<h2>ایجاد لینک‌ها در محیط گرافیکی (Creating Symlinks With the GUI)</h2>
-<p>در محیط‌های گرافیکی لینوکس نیز می‌توان لینک‌ها را به‌سادگی ساخت:</p>
-<ul>
-<li>در <strong>GNOME (Nautilus):</strong> هنگام کشیدن یک فایل، کلیدهای <code>Ctrl + Shift</code> را نگه دارید.<br>
-به‌جای کپی یا انتقال، یک لینک نمادین ساخته می‌شود.</li>
-<li>در <strong>KDE (Dolphin / Konqueror):</strong> هنگام رها کردن فایل، منویی ظاهر می‌شود که گزینه‌های <strong>Copy</strong>, <strong>Move</strong> و <strong>Link</strong> را ارائه می‌دهد.</li>
-</ul>
-<hr>
-<h2>جمع‌بندی (Summing Up)</h2>
-<p>در این فصل آموختیم چگونه فایل‌ها و دایرکتوری‌ها را در لینوکس مدیریت کنیم.<br>
-برای تسلط کامل، تمرین‌های <strong>playground</strong> را چندین بار تکرار کنید تا تمام مفاهیم جا بیفتد.</p>
-<h3>دستورات کلیدی</h3>
-<ul>
-<li><code>cp</code> → برای کپی کردن فایل‌ها</li>
-<li><code>mv</code> → برای جابه‌جا کردن و تغییر نام</li>
-<li><code>rm</code> → برای حذف</li>
-<li><code>mkdir</code> → برای ساخت دایرکتوری</li>
-<li><code>ln</code> → برای ایجاد لینک‌ها</li>
-</ul>
-<p>همچنین یاد گرفتیم چگونه از <strong>wildcards</strong> برای انتخاب گروهی از فایل‌ها استفاده کنیم.<br>
-مفهوم لینک‌ها (به‌ویژه لینک‌های نمادین) در ابتدا کمی گیج‌کننده است،<br>
-اما درک درست آن‌ها یکی از مهارت‌های کلیدی در کار با لینوکس است.</p>
-<hr>
-<h2>منابع پیشنهادی (Further Reading)</h2>
-<ul>
-<li>🔗 <a href="https://en.wikipedia.org/wiki/Symbolic_link">Symbolic link – Wikipedia</a></li>
-<li>📘 <em>The Linux Command Line – William Shotts</em></li>
-</ul>
-
-  </main>
-
-  <!-- فوتر مشترک -->
-  <footer class="footer">
-    <div class="container">
-      <p>
-        <img src="/Gitab/icone/copyright.svg" alt="کپی‌رایت" width="14" height="14"
-             style="vertical-align:middle;margin-inline:4px">
-        <span id="y"></span> Gitab — تمامی حقوق محفوظ است.
-      </p>
-    </div>
-  </footer>
-
-  <!-- سال و اسکریپت تغییر تم -->
-  <script>
+</code></pre> <hr><h2>ایجاد لینک‌ها در محیط گرافیکی (Creating Symlinks With the GUI)</h2><p>در محیط‌های گرافیکی لینوکس نیز می‌توان لینک‌ها را به‌سادگی ساخت:</p><ul> <li>در <strong>GNOME (Nautilus):</strong> هنگام کشیدن یک فایل، کلیدهای <code>Ctrl + Shift</code> را نگه دارید.<br> به‌جای کپی یا انتقال، یک لینک نمادین ساخته می‌شود.</li><li>در <strong>KDE (Dolphin / Konqueror):</strong> هنگام رها کردن فایل، منویی ظاهر می‌شود که گزینه‌های <strong>Copy</strong>, <strong>Move</strong> و <strong>Link</strong> را ارائه می‌دهد.</li></ul> <hr><h2>جمع‌بندی (Summing Up)</h2><p>در این فصل آموختیم چگونه فایل‌ها و دایرکتوری‌ها را در لینوکس مدیریت کنیم.<br> برای تسلط کامل، تمرین‌های <strong>playground</strong> را چندین بار تکرار کنید تا تمام مفاهیم جا بیفتد.</p><h3>دستورات کلیدی</h3><ul> <li><code>cp</code> → برای کپی کردن فایل‌ها</li><li><code>mv</code> → برای جابه‌جا کردن و تغییر نام</li><li><code>rm</code> → برای حذف</li><li><code>mkdir</code> → برای ساخت دایرکتوری</li><li><code>ln</code> → برای ایجاد لینک‌ها</li></ul> <p>همچنین یاد گرفتیم چگونه از <strong>wildcards</strong> برای انتخاب گروهی از فایل‌ها استفاده کنیم.<br> مفهوم لینک‌ها (به‌ویژه لینک‌های نمادین) در ابتدا کمی گیج‌کننده است،<br> اما درک درست آن‌ها یکی از مهارت‌های کلیدی در کار با لینوکس است.</p><hr> <h2>منابع پیشنهادی (Further Reading)</h2><ul> <li><a href="https://en.wikipedia.org/wiki/Symbolic_link">Symbolic link – Wikipedia</a></li><li><em>The Linux Command Line – William Shotts</em></li></ul> </article><nav class="chapter-single-next-nav"> <a href="/Gitab/books/book5/Book/05/chapter05/" class="btn-next-chapter-action" id="nextChapterBtn" data-hub="/Gitab/books/book5/"> <span class="next-btn-text">فصل بعدی: شناخت و کار با دستورات</span> <span class="next-btn-arrow">←</span> </a> </nav></div> <button class="fab-back-to-top" id="backToTopBtn" type="button" aria-label="رفتن به بالای صفحه" title="رفتن به بالا"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"> <polyline points="18 15 12 9 6 15"></polyline> </svg> </button></main> <footer class="footer-minimal"><div class="footer-container"> <div class="footer-top-row"><div class="footer-brand-side"> <a href="/Gitab/" class="footer-brand-anchor"> <img src="/Gitab/icone/logo.svg" alt="Gitab" width="28" height="28" loading="lazy" decoding="async"> <span class="footer-brand-title">گیتاب (Gitab)</span> </a> <p class="footer-tagline"> پلتفرم آزاد و مستقل برای ترجمهٔ دقیق و روان کتاب‌های مرجع مهندسی نرم‌افزار. </p></div> <div class="footer-nav-cols"><div class="footer-nav-col"> <span class="footer-nav-heading">موضوعات</span><ul class="footer-nav-list"> <li><a href="/Gitab/books/list-books/?cat=csharp">سی‌شارپ و دات‌نت</a></li><li><a href="/Gitab/books/list-books/?cat=clean-code">کد تمیز و بازآفرینی</a></li><li><a href="/Gitab/books/list-books/?cat=architecture">معماری و طراحی دامنه</a></li><li><a href="/Gitab/books/list-books/?cat=system">لینوکس و خط فرمان</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">بخش‌های سایت</span><ul class="footer-nav-list"> <li><a href="/Gitab/">صفحه اصلی</a></li><li><a href="/Gitab/books/list-books/">کتابخانه کامل</a></li><li><a href="/Gitab/courses/">دوره‌های آموزشی</a></li><li><a href="/Gitab/translator.html">تالار مترجمین</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">مشارکت و جامعه</span><ul class="footer-nav-list"> <li><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer">راهنمای همکاری در ترجمه</a></li><li><a href="https://github.com/hheydarian/Gitab/issues" target="_blank" rel="noopener noreferrer">پیشنهاد کتاب یا گزارش خطا</a></li></ul> </div></div> </div><div class="footer-bottom-line"> <span>© <span id="y">2026</span> Gitab — توسعه‌یافته برای جامعهٔ مهندسان نرم‌افزار ایرانی</span></div> </div></footer> <script>
   (() => {
     const root = document.documentElement;
     const btn = document.getElementById('themeToggle');
+    const sunIcon = btn ? btn.querySelector('.icon-sun') : null;
+    const moonIcon = btn ? btn.querySelector('.icon-moon') : null;
     const KEY = 'gitab-theme';
 
-    function updateTheme(s) {
-      root.setAttribute('data-theme', s);
-      const mode = s;  // فقط `dark` یا `light` خواهد بود
+    function updateTheme(mode) {
+      root.setAttribute('data-theme', mode);
       root.dataset.colorMode = mode;
-      btn.dataset.icon = mode === 'dark' ? 'moon' : 'sun';
+      if (sunIcon && moonIcon) {
+        if (mode === 'dark') {
+          sunIcon.style.display = 'inline-block';
+          moonIcon.style.display = 'none';
+        } else {
+          sunIcon.style.display = 'none';
+          moonIcon.style.display = 'inline-block';
+        }
+      }
     }
 
-    // وضعیت تم ذخیره شده از localStorage
-    let saved = localStorage.getItem(KEY) || 'light'; // پیش‌فرض روشن
+    let saved = 'dark';
+    try { saved = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
     updateTheme(saved);
 
-    // تنظیم مجدد تم هنگام تغییر وضعیت دکمه
-    btn.addEventListener('click', () => {
-      const current = localStorage.getItem(KEY) || 'light';
-      const next = current === 'dark' ? 'light' : 'dark';  // فقط دو حالت: تاریک و روشن
-      localStorage.setItem(KEY, next);
-      updateTheme(next);
-    });
+    if (btn) {
+      btn.addEventListener('click', () => {
+        let current = 'dark';
+        try { current = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+        const next = current === 'dark' ? 'light' : 'dark';
+        try { localStorage.setItem(KEY, next); } catch (e) {}
+        updateTheme(next);
+      });
+    }
 
-    // هنگام بارگذاری صفحه
     document.addEventListener('DOMContentLoaded', () => {
-      updateTheme(localStorage.getItem(KEY) || 'light');
+      let mode = 'dark';
+      try { mode = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+      updateTheme(mode);
+      const yearSpan = document.getElementById('y');
+      if (yearSpan) yearSpan.textContent = new Date().getFullYear();
     });
+
+    const mobBtn = document.getElementById('mobileMenuBtn');
+    const mobDrawer = document.getElementById('mobileDrawer');
+    if (mobBtn && mobDrawer) {
+      const setDrawerOpen = (open) => {
+        mobDrawer.classList.toggle('open', open);
+        mobBtn.classList.toggle('is-open', open);
+        mobBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        mobBtn.setAttribute('aria-label', open ? 'بستن منو' : 'باز کردن منو');
+        mobDrawer.setAttribute('aria-hidden', open ? 'false' : 'true');
+      };
+
+      mobBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        setDrawerOpen(!mobDrawer.classList.contains('open'));
+      });
+
+      mobDrawer.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => setDrawerOpen(false));
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && mobDrawer.classList.contains('open')) {
+          setDrawerOpen(false);
+        }
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!mobDrawer.contains(e.target) && !mobBtn.contains(e.target)) {
+          setDrawerOpen(false);
+        }
+      });
+    }
+
+    if ('serviceWorker' in navigator) {
+      const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+      if (isLocalhost) {
+        navigator.serviceWorker.getRegistrations().then(regs => {
+          for (const reg of regs) reg.unregister();
+        });
+        if ('caches' in window) {
+          caches.keys().then(names => {
+            for (const name of names) caches.delete(name);
+          });
+        }
+      } else {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/Gitab/sw.js').catch(() => {});
+        });
+      }
+    }
   })();
-</script>
-
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-  <script>hljs.highlightAll();</script>
-
-  <script>
+  </script> <script>
   document.querySelectorAll('pre code').forEach(block => {
+    const pre = block.parentNode;
+    if (!pre || pre.querySelector('.copy-btn')) return;
+
+    const copySvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
+    const okSvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+
     const btn = document.createElement('button');
     btn.className = 'copy-btn';
-
-    const icon = document.createElement('img');
-    icon.src = "/Gitab/icone/copy.svg";
-    icon.alt = 'Copy';
-    btn.appendChild(icon);
-
-    block.parentNode.insertBefore(btn, block);
+    btn.setAttribute('aria-label', 'کپی کد');
+    btn.setAttribute('title', 'کپی کد');
+    btn.setAttribute('type', 'button');
+    btn.innerHTML = copySvg;
+    pre.appendChild(btn);
 
     btn.addEventListener('click', async () => {
-      await navigator.clipboard.writeText(block.textContent);
-      btn.classList.add('copied');
-      setTimeout(() => btn.classList.remove('copied'), 1500);
-    });
-  });
-  </script>
-
-  <script>
-  document.body.dataset.page = window.location.pathname;
-
-  const menuBtn = document.querySelector(".menu-toggle");
-  const nav = document.querySelector(".nav");
-
-  if (menuBtn && nav) {
-    menuBtn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      nav.classList.toggle("show");
-    });
-
-    document.addEventListener("click", (e) => {
-      const clickedInsideNav = nav.contains(e.target);
-      const clickedMenuButton = menuBtn.contains(e.target);
-      if (!clickedInsideNav && !clickedMenuButton) {
-        nav.classList.remove("show");
+      try {
+        await navigator.clipboard.writeText(block.textContent);
+        btn.classList.add('copied');
+        btn.innerHTML = okSvg;
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          btn.innerHTML = copySvg;
+        }, 1800);
+      } catch (err) {
+        console.error('Copy failed:', err);
       }
     });
-  }
-  </script>
-
-  <script>
-    document.getElementById('y').textContent = new Date().getFullYear();
-  </script>
-  <script>
-document.getElementById("openDonate").addEventListener("click", () => {
-  document.getElementById("donateModal").style.display = "block";
-});
-document.getElementById("closeDonate").addEventListener("click", () => {
-  document.getElementById("donateModal").style.display = "none";
-});
-document.querySelectorAll(".copy-btn").forEach(btn => {
-  btn.addEventListener("click", () => {
-    navigator.clipboard.writeText(btn.dataset.copy);
-  
-    setTimeout(() => (btn.textContent = "کپی"), 2000);
   });
-});
-</script>
+  </script> <script>
+  (() => {
+    const article = document.getElementById('chapterArticle');
+    if (!article) return;
 
-</body>
-</html>
+    const progressBar = document.getElementById('readingProgressBar');
+    if (progressBar) {
+      window.addEventListener('scroll', () => {
+        const docElem = document.documentElement;
+        const totalHeight = docElem.scrollHeight - docElem.clientHeight;
+        if (totalHeight > 0) {
+          const progress = (window.pageYOffset / totalHeight) * 100;
+          progressBar.style.width = Math.min(100, Math.max(0, progress)) + '%';
+        }
+      }, { passive: true });
+    }
+
+    const btt = document.getElementById('backToTopBtn');
+    if (btt) {
+      window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 250) {
+          btt.classList.add('visible');
+        } else {
+          btt.classList.remove('visible');
+        }
+      }, { passive: true });
+
+      btt.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+
+    article.querySelectorAll('img').forEach(img => {
+      if (!img.hasAttribute('loading')) img.loading = 'lazy';
+      if (!img.hasAttribute('decoding')) img.decoding = 'async';
+      const parent = img.parentElement;
+      if (parent && parent.tagName === 'P') {
+        parent.style.textAlign = 'center';
+      }
+
+      img.addEventListener('error', function() {
+        const src = this.getAttribute('src');
+        if (src && src.includes('assets/image/')) {
+          const parts = src.split('assets/image/');
+          const corrected = '/Gitab/books/book5/assets/image/' + parts[1];
+          if (this.src !== corrected) {
+            this.src = corrected;
+          }
+        }
+      });
+    });
+
+    article.querySelectorAll('p').forEach(p => {
+      const trimmed = p.innerText.trim();
+      if (trimmed.startsWith('💡') || trimmed.startsWith('نکته:')) {
+        p.classList.add('react-callout', 'callout-tip');
+      } else if (trimmed.startsWith('⚠️') || trimmed.startsWith('هشدار:')) {
+        p.classList.add('react-callout', 'callout-warning');
+      } else if (trimmed.startsWith('📌') || trimmed.startsWith('مهم:')) {
+        p.classList.add('react-callout', 'callout-important');
+      } else if (trimmed.startsWith('🔹') || trimmed.startsWith('🔸')) {
+        p.classList.add('react-callout', 'callout-note');
+      }
+    });
+  })();
+  </script> <script type="speculationrules">{"prefetch":[{"where":{"and":[{"href_matches":"/Gitab/*"},{"not":{"href_matches":"/Gitab/downloads/*"}},{"not":{"selector_matches":"[download], [target='_blank']"}}]},"eagerness":"moderate"}]}</script> <script>
+  (() => {
+    if (window.HTMLScriptElement && HTMLScriptElement.supports && HTMLScriptElement.supports('speculationrules')) return;
+    const seen = new Set([window.location.href]);
+    let count = 0;
+    const prefetchLink = (e) => {
+      if (count >= 12) return;
+      const a = e.target && e.target.closest ? e.target.closest('header a, .chapter-single-next-nav a, .syllabus-chapter-item a, .btn-hero-read, .btn-card-read') : null;
+      if (!a || !a.href || a.hasAttribute('download') || a.target === '_blank') return;
+      if (a.origin !== window.location.origin || a.pathname.includes('/downloads/')) return;
+      const clean = a.href.split('#')[0];
+      if (!clean || seen.has(clean)) return;
+      seen.add(clean);
+      count++;
+      const l = document.createElement('link');
+      l.rel = 'prefetch';
+      l.href = clean;
+      document.head.appendChild(l);
+    };
+    document.addEventListener('pointerenter', prefetchLink, { capture: true, passive: true });
+    document.addEventListener('touchstart', prefetchLink, { capture: true, passive: true });
+  })();
+  </script></body></html>

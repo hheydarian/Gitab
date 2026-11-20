@@ -10,7 +10,7 @@
   </p>
 
   <p align="center">
-    <a href="https://hheydarian.github.io/Gitab/" target="_blank">
+    <a href="https://hheydarian.github.io/Gitab/" target="_blank" rel="noopener noreferrer">
       <img src="https://img.shields.io/badge/🌐_ورود_به_سایت_گیتاب-Live_Website-7c3aed?style=for-the-badge&logoColor=white" alt="Live Website" />
     </a>
   </p>

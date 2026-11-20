@@ -1,0 +1,443 @@
+<!doctype html><html lang="fa" dir="rtl"> <head><script>
+    if (window.location.pathname.startsWith('/gitab/')) {
+      window.location.replace(window.location.pathname.replace(/^\/gitab\//i, '/Gitab/') + window.location.search + window.location.hash);
+    }
+    (() => {
+      try {
+        const t = localStorage.getItem('gitab-theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', t);
+        document.documentElement.dataset.colorMode = t;
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        document.documentElement.dataset.colorMode = 'dark';
+      }
+    })();
+  </script> <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5"> <title>۱۱۰.۳ امن‌سازی و حفاظت از داده‌ها با رمزنگاری</title><meta name="description" content="۱۱۰.۳ امن‌سازی و حفاظت از داده‌ها با رمزنگاری — مطالعه آنلاین و رایگان از کتاب «راهنمای آزمون LPIC-1 (ورژن ۵۰۰)» (LPIC-1 Study Guide (Version 500)) اثر جادی میرمیرانی با ترجمه جادی میرمیرانی در گیتاب."> <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"><meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"> <meta name="theme-color" content="#090d16"><meta name="referrer" content="strict-origin-when-cross-origin"> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https:; frame-src https://www.youtube.com https://www.youtube-nocookie.com https://maps.google.com https://www.google.com; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self';"><link rel="icon" type="image/png" href="/Gitab/favicon.png"> <link rel="canonical" href="https://hheydarian.github.io/Gitab/books/book13/Book/46/1103-securing-data-with-encryption/"><link rel="alternate" hreflang="fa" href="https://hheydarian.github.io/Gitab/books/book13/Book/46/1103-securing-data-with-encryption/"> <link rel="alternate" hreflang="x-default" href="https://hheydarian.github.io/Gitab/books/book13/Book/46/1103-securing-data-with-encryption/"><link rel="alternate" type="text/plain" title="LLMs.txt" href="/Gitab/llms.txt"> <link rel="sitemap" type="application/xml" title="Sitemap" href="/Gitab/sitemap.xml"><meta property="og:locale" content="fa_IR"> <meta property="og:type" content="article"><meta property="og:site_name" content="گیتاب | Gitab"> <meta property="og:title" content="۱۱۰.۳ امن‌سازی و حفاظت از داده‌ها با رمزنگاری"><meta property="og:description" content="۱۱۰.۳ امن‌سازی و حفاظت از داده‌ها با رمزنگاری — مطالعه آنلاین و رایگان از کتاب «راهنمای آزمون LPIC-1 (ورژن ۵۰۰)» (LPIC-1 Study Guide (Version 500)) اثر جادی میرمیرانی با ترجمه جادی میرمیرانی در گیتاب."> <meta property="og:url" content="https://hheydarian.github.io/Gitab/books/book13/Book/46/1103-securing-data-with-encryption/"><meta property="og:image" content="https://hheydarian.github.io/Gitab/images/lpic1book/Cover.jpg"> <meta property="og:image:alt" content="۱۱۰.۳ امن‌سازی و حفاظت از داده‌ها با رمزنگاری"><meta name="twitter:card" content="summary_large_image"> <meta name="twitter:title" content="۱۱۰.۳ امن‌سازی و حفاظت از داده‌ها با رمزنگاری"><meta name="twitter:description" content="۱۱۰.۳ امن‌سازی و حفاظت از داده‌ها با رمزنگاری — مطالعه آنلاین و رایگان از کتاب «راهنمای آزمون LPIC-1 (ورژن ۵۰۰)» (LPIC-1 Study Guide (Version 500)) اثر جادی میرمیرانی با ترجمه جادی میرمیرانی در گیتاب."> <meta name="twitter:image" content="https://hheydarian.github.io/Gitab/images/lpic1book/Cover.jpg"><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://hheydarian.github.io/Gitab/#organization","name":"گیتاب | Gitab","alternateName":"Gitab","url":"https://hheydarian.github.io/Gitab/","logo":{"@type":"ImageObject","url":"https://hheydarian.github.io/Gitab/favicon.png"},"sameAs":["https://github.com/hheydarian/Gitab"]},{"@type":"WebSite","@id":"https://hheydarian.github.io/Gitab/#website","url":"https://hheydarian.github.io/Gitab/","name":"گیتاب | Gitab","inLanguage":"fa-IR","publisher":{"@id":"https://hheydarian.github.io/Gitab/#organization"},"potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://hheydarian.github.io/Gitab/books/list-books/?q={search_term_string}"},"query-input":"required name=search_term_string"}},{"@type":"WebPage","@id":"https://hheydarian.github.io/Gitab/books/book13/Book/46/1103-securing-data-with-encryption/#webpage","url":"https://hheydarian.github.io/Gitab/books/book13/Book/46/1103-securing-data-with-encryption/","name":"۱۱۰.۳ امن‌سازی و حفاظت از داده‌ها با رمزنگاری","description":"۱۱۰.۳ امن‌سازی و حفاظت از داده‌ها با رمزنگاری — مطالعه آنلاین و رایگان از کتاب «راهنمای آزمون LPIC-1 (ورژن ۵۰۰)» (LPIC-1 Study Guide (Version 500)) اثر جادی میرمیرانی با ترجمه جادی میرمیرانی در گیتاب.","inLanguage":"fa-IR","isPartOf":{"@id":"https://hheydarian.github.io/Gitab/#website"}},{"@type":"TechArticle","headline":"۱۱۰.۳ امن‌سازی و حفاظت از داده‌ها با رمزنگاری","description":"۱۱۰.۳ امن‌سازی و حفاظت از داده‌ها با رمزنگاری — مطالعه آنلاین و رایگان از کتاب «راهنمای آزمون LPIC-1 (ورژن ۵۰۰)» (LPIC-1 Study Guide (Version 500)) اثر جادی میرمیرانی با ترجمه جادی میرمیرانی در گیتاب.","url":"https://hheydarian.github.io/Gitab/books/book13/Book/46/1103-securing-data-with-encryption/","inLanguage":"fa-IR","isAccessibleForFree":true,"author":{"@type":"Person","name":"جادی میرمیرانی"},"translator":{"@type":"Person","name":"جادی میرمیرانی"},"isPartOf":{"@type":"Book","name":"راهنمای آزمون LPIC-1 (ورژن ۵۰۰)","alternateName":"LPIC-1 Study Guide (Version 500)","url":"https://hheydarian.github.io/Gitab/books/book13/"}}]}</script> <link rel="preload" href="/Gitab/fonts/Vazirmatn.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/Gitab/styles/main.css?v=2.4" as="style"> <link rel="preload" href="/Gitab/styles/gitab-modern.css?v=2.5" as="style"><style>@font-face{font-family:'Lalezar';src:url('/Gitab/fonts/Lalezar.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}@font-face{font-family:'Vazirmatn';src:url('/Gitab/fonts/Vazirmatn.woff2') format('woff2');font-weight:100 900;font-style:normal;font-display:swap}html,body,button,input,optgroup,select,textarea,.filter-pill{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}input::placeholder,textarea::placeholder{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}</style> <link rel="stylesheet" href="/Gitab/styles/main.css?v=2.4"><link rel="stylesheet" href="/Gitab/styles/gitab-modern.css?v=2.5"> <link rel="stylesheet" href="/Gitab/styles/vendor/github-dark.min.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="/Gitab/styles/vendor/github-dark.min.css"></noscript></head> <body><header class="header"> <div class="container nav-wrap"><a href="/Gitab/" class="brand" aria-label="صفحه اصلی گیتاب"> <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="30" height="30" decoding="async"> <span class="brand-text">Gitab</span> </a> <nav class="nav" id="mainNav"><a href="/Gitab/" >خانه</a> <a href="/Gitab/books/list-books" aria-current="page">کتاب‌ها</a> <a href="/Gitab/courses/" >دوره‌ها</a> <a href="/Gitab/translator.html" >مترجمین</a></nav> <div class="nav-actions"><button id="themeToggle" class="theme-toggle-btn" aria-label="تغییر تم" title="تغییر تم"> <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن" width="18" height="18" decoding="async" style="display:none"> <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک" width="18" height="18" decoding="async"> </button> <a class="btn-github-pill" href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" title="مشاهده سورس گیتاب در گیت‌هاب"> <img src="/Gitab/icone/github.svg" alt="GitHub" width="16" height="16" decoding="async"> <span>گیت‌هاب</span> </a> <button class="mobile-menu-btn" id="mobileMenuBtn" type="button" aria-label="باز کردن منو" aria-expanded="false"> <svg class="mob-icon-open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="4" y1="7" x2="20" y2="7"></line> <line x1="4" y1="12" x2="20" y2="12"></line> <line x1="4" y1="17" x2="14" y2="17"></line> </svg> <svg class="mob-icon-close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="18" y1="6" x2="6" y2="18"></line> <line x1="6" y1="6" x2="18" y2="18"></line> </svg> </button></div> </div><div class="mobile-drawer" id="mobileDrawer" aria-hidden="true"> <div class="mobile-drawer-inner"><div class="mobile-drawer-section-label">ناوبری سریع</div><nav class="mobile-drawer-links" aria-label="منوی موبایل"> <a href="/Gitab/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M3 10.5 12 3l9 7.5"></path> <path d="M5 9.5V20a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V9.5"></path> </svg> </span> <span class="mob-nav-text">صفحه نخست</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/books/list-books" class="mobile-drawer-link active" aria-current="page"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path> </svg> </span> <span class="mob-nav-text">کتابخانه و فهرست کتاب‌ها</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/courses/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path> <path d="M6 12v5c3 3 9 3 12 0v-5"></path> </svg> </span> <span class="mob-nav-text">دوره‌های آموزشی</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/translator.html" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path> <circle cx="9" cy="7" r="4"></circle> <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path> <path d="M16 3.13a4 4 0 0 1 0 7.75"></path> </svg> </span> <span class="mob-nav-text">مترجمین و همکاران</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> </nav><div class="mobile-drawer-divider"></div><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" class="mobile-drawer-link mobile-drawer-gh"> <span class="mob-nav-icon" aria-hidden="true"> <img src="/Gitab/icone/github.svg" alt="" width="17" height="17" loading="lazy" decoding="async"> </span> <span class="mob-nav-text">مخزن گیت‌هاب پروژه</span> <span class="mob-nav-ext" aria-hidden="true">↗</span> </a> </div></div> </header><div class="reading-progress-track"> <div class="reading-progress-fill" id="readingProgressBar"></div></div> <main class="site-main chapter-reading-page"><div class="chapter-page-wrapper"> <nav class="chapter-clean-breadcrumb" aria-label="مسیر راهنما" dir="rtl"><a href="/Gitab/">خانه</a> <span class="bc-sep" aria-hidden="true">/</span> <a href="/Gitab/books/list-books/">کتاب‌ها</a> <span class="bc-sep" aria-hidden="true">/</span> <a href="/Gitab/books/book13/"><bdi>راهنمای آزمون LPIC-1</bdi></a> <span class="bc-sep" aria-hidden="true">/</span> <span class="bc-current-leaf"><bdi>۱۱۰.۳ امن‌سازی و حفاظت از داده‌ها با رمزنگاری</bdi></span></nav> <article class="chapter-prose-container markdown-body" id="chapterArticle" dir="rtl"><h1>۱۱۰.۳ امن‌سازی و حفاظت از داده‌ها با رمزنگاری</h1><div class="callout callout-info" style="background: rgba(59, 130, 246, 0.08); border-right: 4px solid #3b82f6; padding: 16px 20px; border-radius: 8px; margin-bottom: 24px;"> <strong>خلاصه هدف آزمون:</strong> رمزنگاری متقارن و نامتقارن، تولید کلیدهای SSH با ssh-keygen، انتقال کلید با ssh-copy-id و امضا و رمزنگاری فایل‌ها با GnuPG. </div><div class="video-container" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; border-radius: 12px; margin: 24px 0; border: 1px solid var(--g-border-dim);"> <iframe src="https://www.youtube.com/embed/ElbC0EtZc4c?si=PemOqHr6s7V53wwS" title="ویدئوی آموزشی جادی برای این سرفصل" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen></iframe></div> <h2>🎯 اهداف و سرفصل‌های این بخش</h2><p>در این درسنامه موارد زیر را بررسی و مرور می‌کنیم:</p><ul> <li>مفاهیم کلیدی مورد پرسش در آزمون بین‌المللی LPIC-1</li><li>دستورات، فایل‌های پیکربندی و ابزارهای مرتبط در خط فرمان</li><li>نکات پرتکرار آزمون‌های ۱۰۱ و ۱۰۲ همراه با نمونه‌های کاربردی</li></ul> <hr><h2>📝 متن درسنامه و توضیحات تکمیلی</h2><p><em>ضریب اهمیت در آزمون (Weight): ۴</em></p><p>داوطلب باید بتواند از تکنیک‌های کلید عمومی (Public Key) برای امن‌سازی داده‌ها و ارتباطات استفاده کند.</p><h3>حوزه‌های دانش کلیدی</h3><ul> <li>انجام پیکربندی پایه و استفاده از کلاینت OpenSSH 2.</li><li>درک نقش کلیدهای میزبان (Host Keys) در سرور OpenSSH 2.</li><li>انجام پیکربندی پایه، استفاده و ابطال کلیدها (Revocation) در GnuPG.</li><li>استفاده از GPG برای رمزنگاری، رمزگشایی، امضا و اعتبارسنجی فایل‌ها.</li><li>درک تونل‌های پورت SSH (شامل تونل‌های X11).</li></ul> <h3>اصطلاحات و ابزارها</h3><ul> <li><code>ssh</code></li><li><code>ssh-keygen</code></li><li><code>ssh-agent</code></li><li><code>ssh-add</code></li><li><code>~/.ssh/id_rsa</code> و <code>id_rsa.pub</code></li><li><code>~/.ssh/id_dsa</code> و <code>id_dsa.pub</code></li><li><code>~/.ssh/id_ecdsa</code> و <code>id_ecdsa.pub</code></li><li><code>~/.ssh/id_ed25519</code> و <code>id_ed25519.pub</code></li><li><code>/etc/ssh/ssh_host_rsa_key</code> و <code>ssh_host_rsa_key.pub</code></li><li><code>/etc/ssh/ssh_host_dsa_key</code> و <code>ssh_host_dsa_key.pub</code></li></ul> <div dir="ltr"><ul> <li><code>/etc/ssh/ssh_host_ecdsa_key</code> و <code>ssh_host_ecdsa_key.pub</code></li><li><code>/etc/ssh/ssh_host_ed25519_key</code> و <code>ssh_host_ed25519_key.pub</code></li><li><code>~/.ssh/authorized_keys</code></li><li><code>ssh_known_hosts</code></li><li><code>gpg</code></li><li><code>gpg-agent</code></li><li><code>~/.gnupg/</code></li></ul> </div><h2>جفت‌کلیدها (Key Pairs)</h2><p>در رمزنگاری سنتی از کلیدهای متقارن (Symmetric Keys) استفاده می‌شد: هر دو طرف یک رمز مشترک داشتند. داده‌ها با آن رمز، رمزنگاری می‌شدند و سپس با همان رمز، رمزگشایی می‌شدند. اما در سال ۱۹۷۶ ایده جدیدی مطرح شد: چه می‌شود اگر ۲ کلید بسازیم (بگذارید اسمش را بگذاریم <strong>کلید خصوصی (Private Key)</strong> و <strong>کلید عمومی (Public Key)</strong>) طوری که فقط کسانی که کلید عمومی را دارند بتوانند چیزی را باز کنند که با کلید خصوصی رمز شده (یا برعکس، هر کس با کلید عمومی پیام را رمز کند فقط دارنده کلید خصوصی بتواند آن را باز کند)؟ دانشمندان این ایده را به واقعیت تبدیل کردند و امروزه بیشتر رمزنگاری‌های ما از طریق همین <strong>جفت‌کلیدها</strong> انجام می‌شود. هنگام ساخت یک جفت‌کلید، با استفاده از یک الگوریتم کامپیوتری دو کلید تولید می‌کنیم طوری که هر پیامی با یکی از آن‌ها رمزنگاری شود، فقط با دیگری باز می‌شود. به این‌ها کلید عمومی و کلید خصوصی می‌گویند. شما کلید عمومی را برای دوستانتان می‌فرستید یا حتی به‌صورت عمومی روی اینترنت منتشر می‌کنید و اگر کسی بخواهد برایتان یک پیام رمزنگاری‌شده بفرستد، آن را با کلید عمومی شما رمز کرده و به هر شکلی برایتان می‌فرستد (یا پیام کدشده را روی اینترنت منتشر می‌کند) و فقط و فقط شما می‌توانید آن را باز کنید، چون فقط شما کلید خصوصی را دارید!</p><blockquote> <p><strong>نکته:</strong> ویژگی فوق‌العاده کلید عمومی/خصوصی این است که داده‌ها بدون ترس از هکرها یا دولت‌ها می‌توانند روی اینترنت منتقل شوند. شما کلید خودتان را برای کل دنیا منتشر می‌کنید، یک نفر آن را برمی‌دارد و از آن برای رمز کردن داده‌ها استفاده کرده و نتیجه را برایتان می‌فرستد. بقیه می‌توانند ببینند که شما «یک سری داده» دریافت می‌کنید، اما نمی‌توانند آن را بخوانند چون کلید خصوصیِ لازم برای رمزگشایی را ندارند.</p></blockquote> <h3>کلیدهای SSH</h3><p>همین فناوری (رمزنگاری کلید عمومی یا رمزنگاری نامتقارن) در بیشتر ارتباطات شبکه هم قابل استفاده است. در واقع خودِ <code>ssh</code> بر اساس همین مفهوم کار می‌کند و برای احراز هویت میزبان‌ها و امن‌سازی ترافیک به کار می‌رود:</p><pre class="hljs"><code>➜  ~ ssh 192.168.70.2
+The authenticity of host &#x27;192.168.70.2 (192.168.70.2)&#x27; can&#x27;t be established.
+ED25519 key fingerprint is SHA256:4Wp2zz6sgPAhnbqhkNjOd6QDpNQ4jvjX7qAzslPX09U.
+This key is not known by any other names
+Are you sure you want to continue connecting (yes/no/[fingerprint])? y
+Please type &#x27;yes&#x27;, &#x27;no&#x27; or the fingerprint: yes
+Warning: Permanently added &#x27;192.168.70.2&#x27; (ED25519) to the list of known hosts.
+jadi@192.168.70.2&#x27;s password:
+Linux debian 6.4.0-2-arm64 #1 SMP Debian 6.4.4-3 (2023-08-08) aarch64
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+You have no mail.
+Last login: Sun Sep 17 04:43:18 2023 from 192.168.70.1
+jadi@debian:~$
+</code></pre> <p>در بالا، سرور اثر انگشت (Fingerprint) کلید ED25519 خود را به ما نشان می‌دهد و از ما می‌خواهد آن را تأیید کنیم. از این به بعد، سیستم ما برای همین کلید روی همین سرور دیگر به ما هشدار نمی‌دهد. <strong>اما</strong> اگر اثر انگشت (و در نتیجه کلید) همان سرور تغییر کند، این موضوع به‌عنوان یک مسئله جدی در نظر گرفته می‌شود:</p><pre class="hljs"><code>➜  ~ ssh 192.168.70.2
+Host key verification failed.
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@    WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!     @
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+IT IS POSSIBLE THAT SOMEONE IS DOING SOMETHING NASTY!
+Someone could be eavesdropping on you right now (man-in-the-middle attack)!
+It is also possible that a host key has just been changed.
+The fingerprint for the ED25519 key sent by the remote host is
+SHA256:4Wp2zz6sgPAhnbqhkNjOd6QDpNQ4jvjX7qAzslPX09U.
+Please contact your system administrator.
+Add correct host key in /Users/jadi/.ssh/known_hosts to get rid of this message.
+Offending RSA key in /Users/jadi/.ssh/known_hosts:548
+Host key for 192.168.70.2 has changed and you have requested strict checking.
+</code></pre> <p>اگر بخواهید این مشکل را حل کنید — پس از اینکه مطمئن شدید حمله‌ای در کار نیست — باید اطلاعات مربوط به <code>192.168.70.2</code> را از فایل <code>.ssh/known_hosts</code> پاک کنید. خوشبختانه لازم نیست فایل را مستقیماً ویرایش کنید؛ کافی است از دستور <code>ssh-keygen</code> استفاده کنید:</p><pre class="hljs"><code>➜  ~ ssh-keygen -R 192.168.70.2
+# Host 192.168.70.2 found: line 547
+# Host 192.168.70.2 found: line 548
+# Host 192.168.70.2 found: line 549
+/Users/jadi/.ssh/known_hosts updated.
+Original contents retained as /Users/jadi/.ssh/known_hosts.old
+</code></pre> <h4>ساخت جفت‌کلیدهای اختصاصی خودتان</h4><p>به راحتی می‌توانید هر تعداد جفت‌کلید که می‌خواهید بسازید؛ حتی با الگوریتم‌های مختلف (که با سوئیچ <code>-t</code> مشخص می‌شوند و شامل <code>dsa</code>، <code>ecdsa</code>، <code>ecdsa-sk</code>، <code>ed25519</code>، <code>ed25519-sk</code> و <code>rsa</code> هستند). انتخاب‌های رایج عبارت‌اند از <em>rsa</em> که پیش‌فرض است و <em>ecdsa</em> که در بیت‌کوین هم استفاده می‌شود!</p><p>بیایید یک جفت‌کلید <code>ecdsa</code> روی ماشین خودمان بسازیم. می‌توانیم از آن برای ورود به سرورها بدون وارد کردن رمز عبور یا برای امضا و رمزنگاری پیام‌ها استفاده کنیم:</p><pre class="hljs"><code>jadi@debian:~$ ssh-keygen -t ecdsa
+Generating public/private ecdsa key pair.
+Enter file in which to save the key (/home/jadi/.ssh/id_ecdsa):
+/home/jadi/.ssh/id_ecdsa already exists.
+Overwrite (y/n)? y
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+Your identification has been saved in /home/jadi/.ssh/id_ecdsa
+Your public key has been saved in /home/jadi/.ssh/id_ecdsa.pub
+The key fingerprint is:
+SHA256:WvJu5D7ns0a2z0sB6l8ZrCXnAgxSmb2kSwgo/lK0QYA jadi@debian
+The key&#x27;s randomart image is:
++---[ECDSA 256]---+
+|.oo.  .+         |
+|E .o .o o        |
+|o ..+..o ..      |
+| . o..oo.. o     |
+|  o  ...S . *    |
+| . .  .*..o* +   |
+|  .   .oooo.=    |
+|       .+.==     |
+|       oo=+++.   |
++----[SHA256]-----+
+</code></pre> <p>و چون رایگان است، بیایید یک کلید <code>rsa</code> هم بسازیم:</p><pre class="hljs"><code>jadi@debian:~$ ssh-keygen
+Generating public/private rsa key pair.
+Enter file in which to save the key (/home/jadi/.ssh/id_rsa):
+/home/jadi/.ssh/id_rsa already exists.
+Overwrite (y/n)? y
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+Your identification has been saved in /home/jadi/.ssh/id_rsa
+Your public key has been saved in /home/jadi/.ssh/id_rsa.pub
+The key fingerprint is:
+SHA256:Q67Ob1DOfmF3gG449OfNLHXxE5QEH4B/UzHR8ycAHao jadi@debian
+The key&#x27;s randomart image is:
++---[RSA 3072]----+
+|          .oo++*=|
+|           oo .+=|
+|        . ......+|
+|       oo.. ...=o|
+|       =E+   ...*|
+|      ..=.* o o.o|
+|      .o + = * ..|
+|     o  o . o +  |
+|      oo..   .   |
++----[SHA256]-----+
+</code></pre> <p>آن <em>تصویرِ</em> بامزه چیزی است که می‌توانید به دوستانتان نشان دهید تا مطمئن شوند از کلید درستی استفاده می‌کنند.</p><blockquote> <p><strong>نکته:</strong> در بالا برای کلیدها رمز عبور (Passphrase) نگذاشتم. اگر می‌گذاشتم، هر بار که می‌خواستم از آن کلید استفاده کنم باید آن رمز را وارد می‌کردم.</p></blockquote> <p>این کلیدها در پوشه <code>~/.ssh</code> کاربران ذخیره می‌شوند. همان‌طور که می‌توانید حدس بزنید، کلیدهای سراسری سیستم که برای سرور SSH استفاده می‌شوند در مسیر <code>/etc/ssh</code> قرار دارند.</p><h3>ورود مبتنی بر کلید / بدون رمز عبور</h3><p>سرور SSH می‌تواند طوری پیکربندی شود که هویت شما را با استفاده از کلیدهایتان بررسی کند. کافی است کلید عمومی (Public Key) خود را در حساب کاربری روی سرور ذخیره کنید و به سرور بگویید ورودهای مبتنی بر کلید را هم بررسی کند. در این حالت، کلاینت SSH شما کلید خصوصی‌تان را به‌عنوان مدرک اثبات هویت به سرور SSH ارائه می‌دهد و شما می‌توانید بدون وارد کردن رمز عبور وارد حساب کاربری شوید.</p><p>ابتدا کلید <em>عمومی</em> خود را کپی کرده و وارد سرور شوید. فایل <code>~/.ssh/authorized_keys</code> را باز کنید و کلید خود را به آن اضافه نمایید. همچنین مطمئن شوید که فایل <code>/etc/ssh/sshd_config</code> شامل گزینه <code>PubkeyAuthentication yes</code> باشد. حالا خارج شوید و در ورود بعدی باید بتوانید بدون رمز عبور وارد شوید! این قابلیت زمانی که سرورهای زیادی را مدیریت می‌کنید یا می‌خواهید کپی کردن با <code>scp</code> و کارهای دیگر را خودکار کنید، فوق‌العاده مفید است. از دیدگاه مدیر سیستم هم امن‌تر است، چون اگر بخواهم به یک کاربر جدید اجازه ورود به سیستمم را بدهم، نیازی نیست رمز عبوری را به اشتراک بگذارم یا از طریق کانالی ارسال کنم؛ کافی است <strong>کلید عمومی</strong> آن شخص را بگیرم و به فایل <code>.ssh/authorized_keys</code> کاربر اضافه کنم.</p><p>آه! و نیازی هم نیست <em>کپی کردن کلید</em> را به‌صورت دستی انجام دهید؛ کافی است از دستور <code>ssh-copy-id</code> استفاده کنید:</p><pre class="hljs"><code>➜  ~ ssh-copy-id 192.168.70.2
+/usr/bin/ssh-copy-id: INFO: Source of key(s) to be installed: &quot;/Users/jadi/.ssh/id_dsa.pub&quot;
+/usr/bin/ssh-copy-id: INFO: attempting to log in with the new key(s), to filter out any that are already installed
+/usr/bin/ssh-copy-id: INFO: 1 key(s) remain to be installed -- if you are prompted now it is to install the new keys
+jadi@192.168.70.2&#x27;s password:
+
+Number of key(s) added:        1
+
+Now try logging into the machine, with:   &quot;ssh &#x27;192.168.70.2&#x27;&quot;
+and check to make sure that only the key(s) you wanted were added.
+</code></pre> <h4>ابزار <code>ssh-agent</code></h4><p>دستور <code>ssh-agent</code> مثل یک مدیر رمز عبور برای کلیدهای SSH شما عمل می‌کند. این ابزار کلیدهای خصوصی شما را در حافظه نگه می‌دارد و هر وقت لازم باشد آن‌ها را ارائه می‌دهد. برای مثال، اگر روی کلیدتان رمز عبور گذاشته باشید، هر بار که بخواهید از آن کلید استفاده کنید مجبورید رمز را تایپ کنید. برای راحت‌تر کردن این کار با <code>ssh-agent</code>، کافی است یک شل را با <code>ssh-agent</code> اجرا کنید و همه کلیدهایتان را به این ایجنت اضافه کنید:</p><pre class="hljs"><code>jadi@debian:~$ ssh-agent /bin/bash
+jadi@debian:~$ ssh-add
+Identity added: /home/jadi/.ssh/id_rsa (jadi@debian)
+Identity added: /home/jadi/.ssh/id_ecdsa (jadi@debian)
+Identity added: /home/jadi/.ssh/id_dsa (/home/jadi/.ssh/id_dsa)
+</code></pre> <p>حالا ایجنت کلیدهای شما را می‌شناسد و دیگر از شما رمز نمی‌پرسد.</p><p>همچنین <code>ssh-agent</code> می‌تواند کلیدهای شما را به‌صورت امن در حافظه به سرورهای دیگر <em>منتقل</em> کند (Agent Forwarding). فرض کنید باید به سرور A با SSH وصل شوید و در حالی که روی سرور A هستید، از کلیدتان برای SSH زدن به سرور B (یا انجام یک <code>git pull</code> با کلیدهای خصوصی‌تان) استفاده کنید. کلیدها روی سیستم شما هستند و اصلاً امن نیست که آن‌ها را به‌صورت واقعی و فیزیکی روی سرور A کپی کنید. در این حالت می‌توانید <code>ssh-agent</code> را اجرا کنید و کلیدهایتان را حتی وقتی روی سرور میانی هستید در اختیار داشته باشید.</p><h4>تونل‌های SSH (<code>ssh tunnels</code>)</h4><p>از <code>ssh</code> می‌توان برای <em>تونل زدن (Tunnelling)</em> هم استفاده کرد. این یک مفهوم بسیار جذاب و یک ابزار فوق‌العاده کاربردی در دستان یک نینجای شبکه است! راستش ما همه‌اش برای حل مشکلات پیچیده از آن استفاده می‌کنیم.</p><p>همان‌طور که از اسمش پیداست، تونل زدن SSH داده‌ها را بین ماشین‌ها از داخل یک تونل عبور می‌دهد. به این مثال نگاه کنید:</p><pre class="hljs"><code>ssh -L 9000:hckrnews.com:80 root@5.161.197.79
+</code></pre> <p>اینجا به کامپیوترم می‌گویم با کاربر <code>root</code> (که ایده چندان خوبی نیست) به سرور <code>5.161.197.79</code> وصل شود؛ <strong>و</strong> یک <strong>تونل محلی (Local Tunnel)</strong> با <code>-L</code> از روی دستگاه من به سمت پورت <code>80</code> سایت <code>hckrnews.com</code> از طریق آن سرور بسازد. حالا اگر <strong>روی دستگاه خودم</strong> به <code>localhost:9000</code> وصل شوم، درخواست از طریق سرور <code>5.161.197.79</code> به پورت ۸۰ سایت <code>hckrnews.com</code> تونل زده می‌شود. می‌توانید با <code>curl localhost:9000</code> امتحانش کنید.</p><p>چرا این قابلیت مفید است؟ فرض کنید برنامه‌ای روی سرورتان دارید که فقط به درخواست‌های محلی پاسخ می‌دهد (و نه به اینترنت). با استفاده از Local Forwarding می‌توانید یک پورت روی کامپیوتر خودتان را به پورتی که آن برنامه رویش کار می‌کند هدایت کنید و از آن برنامه روی دستگاه خودتان استفاده کنید!</p><p>همچنین مفهوم <strong>هدایت راه‌دور (Remote Forwarding)</strong> هم وجود دارد. در این حالت، یک پورت از یک سرور راه‌دور را به سرور دیگری (معمولاً کامپیوتر خودتان) متصل می‌کنید. با استفاده از این روش می‌توانید یک وب‌سرور از روی کامپیوتر خودتان را روی اینترنت در دسترس قرار دهید:</p><pre class="hljs"><code>$ ssh -R 8000:localhost:80 root@5.161.197.79
+</code></pre> <p>در مثال بالا به SSH می‌گویم یک تونل <strong>راه‌دور (Remote)</strong> بسازد. پس از این، هر درخواستی که روی پورت ۸۰۰۰ سرور <code>5.161.197.79</code> بیاید به پورت ۸۰ روی <code>localhost</code> (دستگاه من) خواهد رسید!</p><p>حتی می‌توانید از ماشین راه‌دور بخواهید روی یک پورت مشخص روی تمام رابط‌های شبکه‌اش گوش بدهد (یعنی به روی شبکه باز شود و نه فقط <code>localhost</code>):</p><pre class="hljs"><code>ssh -R 0.0.0.0:8000:localhost:7777 192.168.70.2
+</code></pre> <p>در بالا به ماشین <code>192.168.70.2</code> می‌گویم پورت ۸۰۰۰ را روی <strong>همه</strong> رابط‌های شبکه باز کند و هر چه دریافت کرد به پورت ۷۷۷۷ دستگاه من هدایت کند.</p><blockquote> <p><strong>نکته:</strong> برای اینکه به کلاینت‌ها اجازه دهید پورت‌های شنونده را به آدرسی غیر از <code>localhost</code> متصل (Bind) کنند، باید تنظیم <code>GatewayPorts clientspecified</code> در فایل پیکربندی سرور SSH قرار داده شده باشد.</p></blockquote> <p>کاربردهای بیشتری هم وجود دارد. برای مثال از سوئیچ <code>-D</code> برای یک هدایت پورتِ <em>پویا</em> (<code>dynamic</code>) در سطح برنامه استفاده می‌کنید. این قابلیت مثل یک پروکسی یا ضدسانسور کار می‌کند. اگر من این دستور را بزنم:</p><pre class="hljs"><code>ssh -D 1080 192.168.70.2
+</code></pre> <p>پورت ۱۰۸۰ مثل یک پروکسی <strong>SOCKS</strong> روی دستگاه من کار می‌کند و هر درخواستی که به آن برسد را به ماشین <code>192.168.70.2</code> می‌فرستد و پاسخ‌ها را برمی‌گرداند. حالا می‌توانم برنامه‌هایم را طوری تنظیم کنم که از <code>localhost:1080</code> به‌عنوان پروکسی SOCKS خودشان استفاده کنند و ماشین <code>192.168.70.2</code> اینجا نقش پروکسی را بازی خواهد کرد. این روش وقتی روی سیستم محلی خودتان اینترنت ندارید ولی <code>192.168.70.2</code> دارد، بسیار کاربردی است.</p><h5>هدایت گرافیکی X (<code>X Forwarding</code>)</h5><p>آخرین مفهومی که در بخش Forwarding می‌خواهم درباره‌اش صحبت کنم، X Forwarding است. همان‌طور که از <a href="/Gitab/books/book13/Book/30/1061-install-and-configure-x11/">ماژول ۱۰۶</a> می‌دانید، برنامه‌های گرافیکی لینوکس از X به‌عنوان میزبان گرافیکی خود استفاده می‌کنند. این X هم مثل هر ارتباط شبکه‌ای دیگری می‌تواند روی شبکه هدایت (Forward) شود و حتی سوئیچ مخصوص خودش را در برنامه <code>ssh</code> دارد. برای هدایت X کافی است یک <code>-X</code> به دستور <code>ssh</code> خودتان اضافه کنید. دقت کنید که تنظیم <code>X11Forwarding yes</code> باید در فایل <code>sshd_config</code> سرور وجود داشته باشد.</p><p>برای فعال کردن X11 Forwarding در یک نشست SSH، کافی است <code>-X</code> را به <code>ssh</code> اضافه کنید:</p><pre class="hljs"><code>ssh -X 192.168.70.2
+</code></pre> <p>و بعد می‌توانید برنامه‌های گرافیکی (مثلاً برای سرگرمی <code>xeyes</code>) را روی ماشین راه‌دور اجرا کنید و خروجی گرافیکی آن را روی سرور X خودتان ببینید!</p><blockquote> <p><strong>نکته:</strong> اگر روی یک ماشین گنو/لینوکس با سرور X11 نیستید، باید آن را نصب کنید (مثلاً XQuartz روی مک).</p></blockquote> <p>این قابلیت وقتی می‌خواهید برنامه‌ای را روی یک سرور پرقدرت اجرا کنید یا از خانه کار کنید در حالی که برنامه‌های گرافیکی‌تان در دفتر کار هستند، بسیار مفید است ;)</p><h2>رمزنگاری و امضا با استفاده از <code>gpg</code></h2><p>همان‌طور که در بخش قبل توضیح داده شد، می‌توان از یک جفت‌کلید عمومی و خصوصی برای رمزنگاری یا امضای پیام‌ها استفاده کرد. پیاده‌سازی این روش در ابزار <code>gpg</code> انجام شده که روی لینوکس (و سیستم‌های دیگر) برای انجام این کارها قابل استفاده است. ابتدا باید یک کلید بسازید:</p><pre class="hljs"><code>jadi@debian:~$ gpg --gen-key
+gpg (GnuPG) 2.2.40; Copyright (C) 2022 g10 Code GmbH
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+
+gpg: directory &#x27;/home/jadi/.gnupg&#x27; created
+gpg: keybox &#x27;/home/jadi/.gnupg/pubring.kbx&#x27; created
+Note: Use &quot;gpg --full-generate-key&quot; for a full featured key generation dialog.
+
+GnuPG needs to construct a user ID to identify your key.
+
+Real name: Jadi
+Name must be at least 5 characters long
+Real name: Jadi M
+Email address: jadijadi@gmail.com
+You selected this USER-ID:
+    &quot;Jadi M &lt;jadijadi@gmail.com&gt;&quot;
+
+Change (N)ame, (E)mail, or (O)kay/(Q)uit?
+Change (N)ame, (E)mail, or (O)kay/(Q)uit? O
+We need to generate a lot of random bytes. It is a good idea to perform
+some other action (type on the keyboard, move the mouse, utilize the
+disks) during the prime generation; this gives the random number
+generator a better chance to gain enough entropy.
+We need to generate a lot of random bytes. It is a good idea to perform
+some other action (type on the keyboard, move the mouse, utilize the
+disks) during the prime generation; this gives the random number
+generator a better chance to gain enough entropy.
+gpg: /home/jadi/.gnupg/trustdb.gpg: trustdb created
+gpg: directory &#x27;/home/jadi/.gnupg/openpgp-revocs.d&#x27; created
+
+
+gpg: revocation certificate stored as &#x27;/home/jadi/.gnupg/openpgp-revocs.d/E279681DC09318AB5B23D359C9063DD26365986A.rev&#x27;
+public and secret key created and signed.
+
+pub   rsa3072 2023-09-17 [SC] [expires: 2025-09-16]
+      E279681DC09318AB5B23D359C9063DD26365986A
+uid                      Jadi M &lt;jadijadi@gmail.com&gt;
+sub   rsa3072 2023-09-17 [E] [expires: 2025-09-16]
+</code></pre> <p>حالا کلید در مسیر <code>~/.gnupg</code> ساخته شده و می‌توانیم کلید عمومی خودمان را با دیگران به اشتراک بگذاریم:</p><pre class="hljs"><code>jadi@debian:~$ gpg --list-keys
+/home/jadi/.gnupg/pubring.kbx
+-----------------------------
+pub   rsa3072 2023-09-17 [SC] [expires: 2025-09-16]
+      E279681DC09318AB5B23D359C9063DD26365986A
+uid           [ultimate] Jadi M &lt;jadijadi@gmail.com&gt;
+sub   rsa3072 2023-09-17 [E] [expires: 2025-09-16]
+
+jadi@debian:~$ gpg --export jadi &gt; jadi.pub.key
+jadi@debian:~$ file jadi.pub.key
+jadi.pub.key: OpenPGP Public Key Version 4, Created Sun Sep 17 12:39:19 2023, RSA (Encrypt or Sign, 3072 bits); User ID; Signature; OpenPGP Certificate
+</code></pre> <blockquote><p><strong>نکته:</strong> کلید خروجی گرفته‌شده در فرمت باینری است؛ سوئیچ <code>-a</code> را اضافه کنید تا به فرمت متنی ASCII (یا Armor) درآید.</p></blockquote> <p>حالا باید این کلید را بین دیگران توزیع کنید. می‌توانید آن را جایی آپلود کنید، ایمیل بزنید، در وب‌سایت خود بگذارید یا از مخازن عمومی کلید (Key Servers) برای اشتراک‌گذاری با دیگران استفاده کنید. اگر کسی آن را دریافت کرد، می‌تواند با دستور زیر آن را به مخزن کلیدهای خودش اضافه (Import) کند:</p><pre class="hljs"><code>gpg --import jadi.pub.key
+</code></pre> <p>اوه! و چه می‌شود اگر احساس کنید کلیدتان لو رفته یا به خطر افتاده است؟! در این حالت باید یک فایل <strong>ابطال (Revoke)</strong> بسازید و با دیگران به اشتراک بگذارید تا به آن‌ها بگویید کلید شما دیگر معتبر نیست:</p><pre class="hljs"><code>gpg --output jadi.revoke.asc --gen-revoke jadijadi@gmail.com
+</code></pre> <p>این دستور به <code>gpg</code> می‌گوید یک فایل ابطال به نام <code>jadi.revoke.asc</code> برای هویت <code>jadijadi@gmail.com</code> بسازد. اگر <code>jadijadi@gmail.com</code> لازم شد کلید عمومی‌اش را باطل کند، باید این فایل را در اینترنت یا سرورهای کلید منتشر کند تا بقیه بفهمند کلید عمومی قبلی دیگر معتبر نیست.</p><h3>رمزنگاری و رمزگشایی فایل‌ها</h3><p>در این مرحله، من یک کلید دارم و دوستانم هم کلید عمومی مرا روی دستگاه خودشان Import کرده‌اند. اگر هر یک از آن‌ها بخواهد یک پیام رمزنگاری‌شده برایم بفرستد، می‌تواند این کار را انجام دهد:</p><pre class="hljs"><code><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;I Loved your course! I&#x27;ll tell all my friends about it.&quot;</span> &gt; file.txt
+gpg --out file.txt.encrypted --recipient jadijadi@gmail.com --encrypt file.txt
+</code></pre> <p>حالا کافی است این فایل را برایم بفرستند؛ حتی از طریق کانال‌های ناامن، چون با ابزارهای درجه‌یک رمزنگاری شده است. همه می‌توانند این فایل را دانلود کنند، اما <strong>فقط من</strong> می‌توانم آن را رمزگشایی کنم؛ چون فقط من <strong>کلید خصوصی</strong>ِ <code>jadijadi@gmail.com</code> را دارم:</p><pre class="hljs"><code>gpg --out out.txt --decrypt file.txt.encrypted
+</code></pre> <blockquote><p><strong>نکته:</strong> اگر این دوره را دوست داشتید، نیازی به رمزنگاری پیام نیست؛ فقط کافی است سایت <a href="https://linux1st.com">linux1st.com</a> را در اینترنت به اشتراک بگذارید!</p></blockquote> <h4>امضا و اعتبارسنجی فایل‌ها</h4><p>در بخش قبل، از <code>gpg</code> برای رمزنگاری داده‌ها استفاده کردیم. از کلید عمومی یک نفر برای رمزنگاری و سپس از کلید خصوصی خودمان برای رمزگشایی استفاده می‌کردیم. اما چه می‌شود اگر من در سمت خودم از کلید خصوصی‌ام استفاده کنم و بگذارم دیگران با کلید عمومی من داده را <em>باز</em> کنند؟ به این کار <strong>امضا کردن (Signing)</strong> می‌گویند.</p><p>به یاد داشته باشید که فقط من به کلید خصوصی خودم دسترسی دارم. بنابراین اگر آن را روی یک فایل اعمال کنم، همه:</p><p>۱. می‌توانند فایل را با استفاده از کلید عمومی من باز کنند.<br> ۲. مطمئن خواهند بود که <strong>من</strong> این فایل را امضا کرده‌ام، چون فقط <strong>من</strong> به کلید خصوصیِ متناظر با آن کلید عمومی که برای باز کردن فایل استفاده کرده‌اند دسترسی دارم.</p><p>بیایید یک پیام را امضا کنیم:</p><pre class="hljs"><code>$ <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;I&#x27;m Jadi and I&#x27;m glad that you reached to the end of your LPIC study&quot;</span> &gt; message-jadi.txt
+$ gpg --output message-jadi.sig --sign message-jadi.txt
+</code></pre> <p>حالا کافی است فایل <code>message-jadi.sig</code> را روی اینترنت منتشر کنم یا برای کسی بفرستم. اگر بخواهند مطمئن شوند که واقعاً از طرف من آمده است، کافی است امضای مرا بررسی کنند (البته بعد از Import کردن کلید عمومی من):</p><pre class="hljs"><code>jadi@debian:~$ gpg --verify message-jadi.sig
+gpg: Signature made Sun 17 Sep 2023 09:26:15 AM EDT
+gpg:                using RSA key E279681DC09318AB5B23D359C9063DD26365986A
+gpg: Good signature from &quot;Jadi M &lt;jadijadi@gmail.com&gt;&quot; [ultimate]
+</code></pre> <p>این دستور فقط امضا را بررسی کرد؛ اگر بخواهند پیام را هم رمزگشایی (استخراج) کنند، باید این‌طور عمل کنند:</p><pre class="hljs"><code>jadi@debian:~$ gpg --output message.jadi --decrypt message-jadi.sig
+gpg: Signature made Sun 17 Sep 2023 09:26:15 AM EDT
+gpg:                using RSA key E279681DC09318AB5B23D359C9063DD26365986A
+gpg: Good signature from &quot;Jadi M &lt;jadijadi@gmail.com&gt;&quot; [ultimate]
+jadi@debian:~$ cat message.jadi
+I&#x27;m Jadi and I&#x27;m glad that you reached to the end of your LPIC study
+</code></pre> <p>همچنین به گزینه <code>--clearsign</code> توجه کنید. این گزینه فایلی با پسوند <code>.asc</code> می‌سازد که شامل پیام اصلی و رمزنگاری‌نشده (متن واضح یا Clear Text) در کنار امضا است. به این ترتیب افراد غیرفنی هم می‌توانند پیام را بخوانند و فقط اگر کسی خواست، می‌تواند امضا را با <code>--verify</code> اعتبارسنجی کند:</p><pre class="hljs"><code>jadi@debian:~$ cat message-jadi.txt
+I&#x27;m Jadi and I&#x27;m glad that you reached to the end of your LPIC study
+jadi@debian:~$ gpg --clearsign message-jadi.txt
+jadi@debian:~$ ls -ltrh
+total 16M
+drwxr-xr-x 27 jadi jadi 4.0K Jun 15 09:00 rust-for-linux
+drwxr-xr-x  2 jadi jadi 4.0K Jun 15 09:09 Downloads
+drwx------  2 jadi jadi 4.0K Jul 17 10:53 BRF
+-rw-r--r--  1 jadi jadi    6 Jul 17 10:57 myfile
+drwxr-xr-x  5 jadi jadi 4.0K Jul 25 13:34 nltk_data
+drwxr-xr-x  4 jadi jadi 4.0K Aug 13 07:29 w
+-rw-r--r--  1 jadi jadi  16M Aug 24 01:15 nvim-linux64.tar.gz
+drwxr-xr-x  6 jadi jadi 4.0K Aug 24 05:38 nvim-linux64
+-rw-r--r--  1 jadi jadi 3.8K Aug 27 15:49 report.xml
+-rw-r--r--  1 jadi jadi 1.8K Sep 17 08:50 jadi.pub.key
+-rw-r--r--  1 jadi jadi   69 Sep 17 09:26 message-jadi.txt
+-rw-r--r--  1 jadi jadi  549 Sep 17 09:26 message-jadi.sig
+-rw-r--r--  1 jadi jadi   69 Sep 17 09:27 message.jadi
+-rw-r--r--  1 jadi jadi  777 Sep 17 09:28 message-jadi.txt.asc
+jadi@debian:~$ cat message-jadi.txt.asc
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA512
+
+I&#x27;m Jadi and I&#x27;m glad that you reached to the end of your LPIC study
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAEBCgAdFiEE4nloHcCTGKtbI9NZyQY90mNlmGoFAmUG/xYACgkQyQY90mNl
+mGqpXQv/QNv0NlCR+S7HJhxiOZcKXE3RB1sx4jRVrOtMd6ZoXYLb28Zz4xN/Lzh2
+sipohDbNttr1ovNZvMMu83bbuSeViY9L7nvjNjKsY50u5V1KnrMJPHRaGV8g/0p2
+t5zFJuzSFWXQczIjjXMpoLVH8jK3mJuBOmVFwLuBqUoW8827tCLIdr1DNyHXBW47
+fcLK5/bO/ljdwGnAX46d+Prg0TIfMLjPpb7uFXVkRBo+zMtCEVDGObaVHQ3J8t6w
+8i2YgMrmA3h9h4Gy/yM9Agb2kPeKl6iToeCfQ0EwTcnPF1TN0KZ1PS8Pr3Jp3LcS
+A+p32zj7YTzTeE1uBAb7/BorBqaArX8HtLe15yFkNKhPluXya9GG4/Nsxk33Qpd3
+c1KiLK9YhTFy7u+Q6tbTKG+uuGj71wANhkqRP30iMjLcBQ7aAO3ehVSYZFyZ7dbL
+SJollwyG1sf4zH0g5SQZOxpjyz874IrlFc7GldDCr5jXZw6H+4NuY2yiVWKAcOcU
+Qv23xWL2
+=q81y
+-----END PGP SIGNATURE-----
+jadi@debian:~$ gpg --verify message-jadi.txt.asc
+gpg: Signature made Sun 17 Sep 2023 09:28:54 AM EDT
+gpg:                using RSA key E279681DC09318AB5B23D359C9063DD26365986A
+gpg: Good signature from &quot;Jadi M &lt;jadijadi@gmail.com&gt;&quot; [ultimate]
+gpg: WARNING: not a detached signature; file &#x27;message-jadi.txt&#x27; was NOT verified!
+</code></pre> <blockquote><p><strong>نکته:</strong> در اینجا <code>--clearsign</code> به <code>gpg</code> می‌گوید پیام متن واضح را هم در فایل خروجی قرار دهد. نام فایل خروجی <code>originalfile.asc</code> خواهد بود.</p></blockquote> <p>و دستور دیگری برای اعتبارسنجی اینکه یک سند به‌درستی امضا شده است یا نه:</p><pre class="hljs"><code>gpg --verify recievedfile
+</code></pre> <h4>ابزار <code>gpg-agent</code></h4><p>دقیقاً مثل <code>ssh-agent</code>، ابزار <code>gpg-agent</code> هم برنامه‌ای است که مثل یک مدیر رمز عبور برای کلیدهای GPG شما عمل می‌کند. این ابزار کلیدها را در حافظه نگه می‌دارد تا مجبور نباشید در هر بار استفاده، رمز عبور را وارد کنید.</p><hr> <div class="callout callout-tip" style="background: rgba(147, 51, 234, 0.08); border-right: 4px solid #9333ea; padding: 16px 20px; border-radius: 8px; margin-top: 32px;"><strong>🔗 نسخه اصلی به زبان انگلیسی:</strong> این درسنامه بر اساس منبع انگلیسی جادی در مخزن <a href="https://github.com/jadijadi/lpic1book/blob/master/content/1103_securing_data_with_encryption.md" target="_blank" rel="noopener noreferrer">jadijadi/lpic1book</a> تدوین و سازماندهی شده است. </div></article> <nav class="chapter-single-next-nav"><a href="/Gitab/books/book13/" class="btn-next-chapter-action" id="nextChapterBtn" data-hub="/Gitab/books/book13/"> <span class="next-btn-text">پایان کتاب — بازگشت به فهرست سرفصل‌ها</span> <span class="next-btn-arrow">←</span> </a> </nav></div> <button class="fab-back-to-top" id="backToTopBtn" type="button" aria-label="رفتن به بالای صفحه" title="رفتن به بالا"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"> <polyline points="18 15 12 9 6 15"></polyline> </svg> </button></main> <footer class="footer-minimal"><div class="footer-container"> <div class="footer-top-row"><div class="footer-brand-side"> <a href="/Gitab/" class="footer-brand-anchor"> <img src="/Gitab/icone/logo.svg" alt="Gitab" width="28" height="28" loading="lazy" decoding="async"> <span class="footer-brand-title">گیتاب (Gitab)</span> </a> <p class="footer-tagline"> پلتفرم آزاد و مستقل برای ترجمهٔ دقیق و روان کتاب‌های مرجع مهندسی نرم‌افزار. </p></div> <div class="footer-nav-cols"><div class="footer-nav-col"> <span class="footer-nav-heading">موضوعات</span><ul class="footer-nav-list"> <li><a href="/Gitab/books/list-books/?cat=csharp">سی‌شارپ و دات‌نت</a></li><li><a href="/Gitab/books/list-books/?cat=clean-code">کد تمیز و بازآفرینی</a></li><li><a href="/Gitab/books/list-books/?cat=architecture">معماری و طراحی دامنه</a></li><li><a href="/Gitab/books/list-books/?cat=system">لینوکس و خط فرمان</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">بخش‌های سایت</span><ul class="footer-nav-list"> <li><a href="/Gitab/">صفحه اصلی</a></li><li><a href="/Gitab/books/list-books/">کتابخانه کامل</a></li><li><a href="/Gitab/courses/">دوره‌های آموزشی</a></li><li><a href="/Gitab/translator.html">تالار مترجمین</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">مشارکت و جامعه</span><ul class="footer-nav-list"> <li><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer">راهنمای همکاری در ترجمه</a></li><li><a href="https://github.com/hheydarian/Gitab/issues" target="_blank" rel="noopener noreferrer">پیشنهاد کتاب یا گزارش خطا</a></li></ul> </div></div> </div><div class="footer-bottom-line"> <span>© <span id="y">2026</span> Gitab — توسعه‌یافته برای جامعهٔ مهندسان نرم‌افزار ایرانی</span></div> </div></footer> <script>
+  (() => {
+    const root = document.documentElement;
+    const btn = document.getElementById('themeToggle');
+    const sunIcon = btn ? btn.querySelector('.icon-sun') : null;
+    const moonIcon = btn ? btn.querySelector('.icon-moon') : null;
+    const KEY = 'gitab-theme';
+
+    function updateTheme(mode) {
+      root.setAttribute('data-theme', mode);
+      root.dataset.colorMode = mode;
+      if (sunIcon && moonIcon) {
+        if (mode === 'dark') {
+          sunIcon.style.display = 'inline-block';
+          moonIcon.style.display = 'none';
+        } else {
+          sunIcon.style.display = 'none';
+          moonIcon.style.display = 'inline-block';
+        }
+      }
+    }
+
+    let saved = 'dark';
+    try { saved = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+    updateTheme(saved);
+
+    if (btn) {
+      btn.addEventListener('click', () => {
+        let current = 'dark';
+        try { current = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+        const next = current === 'dark' ? 'light' : 'dark';
+        try { localStorage.setItem(KEY, next); } catch (e) {}
+        updateTheme(next);
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      let mode = 'dark';
+      try { mode = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+      updateTheme(mode);
+      const yearSpan = document.getElementById('y');
+      if (yearSpan) yearSpan.textContent = new Date().getFullYear();
+    });
+
+    const mobBtn = document.getElementById('mobileMenuBtn');
+    const mobDrawer = document.getElementById('mobileDrawer');
+    if (mobBtn && mobDrawer) {
+      const setDrawerOpen = (open) => {
+        mobDrawer.classList.toggle('open', open);
+        mobBtn.classList.toggle('is-open', open);
+        mobBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        mobBtn.setAttribute('aria-label', open ? 'بستن منو' : 'باز کردن منو');
+        mobDrawer.setAttribute('aria-hidden', open ? 'false' : 'true');
+      };
+
+      mobBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        setDrawerOpen(!mobDrawer.classList.contains('open'));
+      });
+
+      mobDrawer.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => setDrawerOpen(false));
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && mobDrawer.classList.contains('open')) {
+          setDrawerOpen(false);
+        }
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!mobDrawer.contains(e.target) && !mobBtn.contains(e.target)) {
+          setDrawerOpen(false);
+        }
+      });
+    }
+
+    if ('serviceWorker' in navigator) {
+      const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+      if (isLocalhost) {
+        navigator.serviceWorker.getRegistrations().then(regs => {
+          for (const reg of regs) reg.unregister();
+        });
+        if ('caches' in window) {
+          caches.keys().then(names => {
+            for (const name of names) caches.delete(name);
+          });
+        }
+      } else {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/Gitab/sw.js').catch(() => {});
+        });
+      }
+    }
+  })();
+  </script> <script>
+  document.querySelectorAll('pre code').forEach(block => {
+    const pre = block.parentNode;
+    if (!pre || pre.querySelector('.copy-btn')) return;
+
+    const copySvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
+    const okSvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+
+    const btn = document.createElement('button');
+    btn.className = 'copy-btn';
+    btn.setAttribute('aria-label', 'کپی کد');
+    btn.setAttribute('title', 'کپی کد');
+    btn.setAttribute('type', 'button');
+    btn.innerHTML = copySvg;
+    pre.appendChild(btn);
+
+    btn.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(block.textContent);
+        btn.classList.add('copied');
+        btn.innerHTML = okSvg;
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          btn.innerHTML = copySvg;
+        }, 1800);
+      } catch (err) {
+        console.error('Copy failed:', err);
+      }
+    });
+  });
+  </script> <script>
+  (() => {
+    const article = document.getElementById('chapterArticle');
+    if (!article) return;
+
+    const progressBar = document.getElementById('readingProgressBar');
+    if (progressBar) {
+      window.addEventListener('scroll', () => {
+        const docElem = document.documentElement;
+        const totalHeight = docElem.scrollHeight - docElem.clientHeight;
+        if (totalHeight > 0) {
+          const progress = (window.pageYOffset / totalHeight) * 100;
+          progressBar.style.width = Math.min(100, Math.max(0, progress)) + '%';
+        }
+      }, { passive: true });
+    }
+
+    const btt = document.getElementById('backToTopBtn');
+    if (btt) {
+      window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 250) {
+          btt.classList.add('visible');
+        } else {
+          btt.classList.remove('visible');
+        }
+      }, { passive: true });
+
+      btt.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+
+    article.querySelectorAll('img').forEach(img => {
+      if (!img.hasAttribute('loading')) img.loading = 'lazy';
+      if (!img.hasAttribute('decoding')) img.decoding = 'async';
+      const parent = img.parentElement;
+      if (parent && parent.tagName === 'P') {
+        parent.style.textAlign = 'center';
+      }
+
+      img.addEventListener('error', function() {
+        const src = this.getAttribute('src');
+        if (src && src.includes('assets/image/')) {
+          const parts = src.split('assets/image/');
+          const corrected = '/Gitab/books/book13/assets/image/' + parts[1];
+          if (this.src !== corrected) {
+            this.src = corrected;
+          }
+        }
+      });
+    });
+
+    article.querySelectorAll('p').forEach(p => {
+      const trimmed = p.innerText.trim();
+      if (trimmed.startsWith('💡') || trimmed.startsWith('نکته:')) {
+        p.classList.add('react-callout', 'callout-tip');
+      } else if (trimmed.startsWith('⚠️') || trimmed.startsWith('هشدار:')) {
+        p.classList.add('react-callout', 'callout-warning');
+      } else if (trimmed.startsWith('📌') || trimmed.startsWith('مهم:')) {
+        p.classList.add('react-callout', 'callout-important');
+      } else if (trimmed.startsWith('🔹') || trimmed.startsWith('🔸')) {
+        p.classList.add('react-callout', 'callout-note');
+      }
+    });
+  })();
+  </script> <script type="speculationrules">{"prefetch":[{"where":{"and":[{"href_matches":"/Gitab/*"},{"not":{"href_matches":"/Gitab/downloads/*"}},{"not":{"selector_matches":"[download], [target='_blank']"}}]},"eagerness":"moderate"}]}</script> <script>
+  (() => {
+    if (window.HTMLScriptElement && HTMLScriptElement.supports && HTMLScriptElement.supports('speculationrules')) return;
+    const seen = new Set([window.location.href]);
+    let count = 0;
+    const prefetchLink = (e) => {
+      if (count >= 12) return;
+      const a = e.target && e.target.closest ? e.target.closest('header a, .chapter-single-next-nav a, .syllabus-chapter-item a, .btn-hero-read, .btn-card-read') : null;
+      if (!a || !a.href || a.hasAttribute('download') || a.target === '_blank') return;
+      if (a.origin !== window.location.origin || a.pathname.includes('/downloads/')) return;
+      const clean = a.href.split('#')[0];
+      if (!clean || seen.has(clean)) return;
+      seen.add(clean);
+      count++;
+      const l = document.createElement('link');
+      l.rel = 'prefetch';
+      l.href = clean;
+      document.head.appendChild(l);
+    };
+    document.addEventListener('pointerenter', prefetchLink, { capture: true, passive: true });
+    document.addEventListener('touchstart', prefetchLink, { capture: true, passive: true });
+  })();
+  </script></body></html>

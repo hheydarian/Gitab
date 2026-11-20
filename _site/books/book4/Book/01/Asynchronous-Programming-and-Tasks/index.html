@@ -1,490 +1,233 @@
-
-
-<!doctype html>
-<html lang="fa" dir="rtl">
-<head>
-  <meta charset="utf-8">
-  <link rel="icon" type="image/png" href="/Gitab/favicon.png">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>برنامه‌نویسی ناهمگام و تسک‌ها</title>
-  <meta name="description" content="ترجمه‌های فارسی کتاب‌های فنی — سریع، مینیمال و قابل اتکا.">
-
-  <!-- استایل‌ها -->
-  <link rel="stylesheet" href="/Gitab/styles/main.css">
-  <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
-
-  <style>
-  @font-face {
-    font-family: 'Vazir';
-    src: url('/Gitab/fonts/Vazir-FD-WOL.ttf') format('truetype');
-    font-display: swap;
-  }
-  @font-face {
-    font-family: "Lalezar";
-    src: url('fonts/Lalezar.ttf') format('truetype');
-    font-display: swap;
-}
-  body {
-    font-family: 'Vazir', sans-serif;
-  }
-  </style>
-</head>
-
-<body>
-  <!-- هدر مشترک -->
-  <header class="header">
-    <div class="container nav-wrap">
-      <a href="/Gitab/" class="brand">
-        <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="26" height="26">
-        <span>Gitab</span>
-      </a>
-
-       <nav class="nav">
-         <a href="/Gitab/" >خانه</a>
-         <a href="/Gitab/books/list-books" >کتاب‌ها</a>
-         <a href="/Gitab/giter.html" >دوره ها</a>
-          <!-- 
-         <a href="/Gitab/translator.html" >مترجمین</a>
-           -->
-       </nav>
-
-      <div class="nav-actions">
-        <button id="themeToggle" class="icon-btn theme-btn" data-icon="moon" aria-label="تغییر تم">
-          <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن">
-          <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک">
-        </button>
-
-        <a class="icon-btn" href="https://github.com/hheydarian/Gitab" target="_blank" title="GitHub">
-          <img src="/Gitab/icone/github.svg" alt="GitHub">
-        </a>
-
-        <!-- دکمه منو برای موبایل -->
-        <button class="menu-toggle" aria-label="منو">
-          <img src="/Gitab/icone/menu.svg" alt="menu">
-        </button>
-      </div>
-    </div>
-  </header>
-
-  
-  <main class="site-main book-page">
-    <h1>فصل اول: برنامه‌نویسی ناهمگام و تسک‌ها ⏳🔄</h1>
-<p>در این فصل، ابتدا با مقدمه‌ای بر برنامه‌نویسی ناهمگام آشنا می‌شوید و سپس تسک‌ها (Tasks) و اهمیت آن‌ها بررسی می‌شوند.</p>
-<h2>درک عملیات ناهمگام 🧠➡️💻</h2>
-<p>روانشناسان معمولاً انجام یک کار در یک زمان را توصیه می‌کنند، زیرا این کار باعث تمرکز بهتر می‌شود. اما زندگی مدرن پر از مشغله است و پیروی از این توصیه همیشه آسان نیست.</p>
-<p>مثالی ساده: مادران شاغل را در نظر بگیرید. آن‌ها صبح‌ها باید چندین کار را قبل از رفتن به محل کار انجام دهند:</p>
-<ul>
-<li>
-<p>آماده کردن صبحانه 🍳</p>
-</li>
-<li>
-<p>آماده کردن بچه‌ها برای مدرسه 🎒</p>
-</li>
-<li>
-<p>آماده شدن برای محل کار 👩‍💼</p>
-</li>
-</ul>
-<p>این مادران کارها را شروع می‌کنند اما منتظر اتمام یک کار نمی‌مانند؛ بلکه به کار بعدی می‌پردازند و سپس برمی‌گردند تا کار قبلی را بررسی کنند. این روند تا اتمام همه کارها ادامه دارد.</p>
-<p>این دقیقاً همان چیزی است که در برنامه‌نویسی ناهمگام اتفاق می‌افتد؛ کارها هم‌زمان یا موازی آغاز می‌شوند و هر کدام در زمان مناسب تکمیل می‌گردند.</p>
-<h2>این روش چه کمکی می‌کند؟ 🤔⚡</h2>
-<p>حتی اگر این شیوه را دوست نداشته باشید، مواقعی وجود دارد که اجتناب از آن ممکن نیست.<br>
-مثال ساده: اگر صبح دیر بیدار شوید اما نمی‌خواهید برای مدرسه یا محل کار دیر کنید، تنها گزینه این است که چند کار را هم‌زمان انجام دهید (ناهمگام).</p>
-<p>حالا بیایید درباره برنامه‌نویسی صحبت کنیم. فرض کنید در حال توسعه برنامه‌ای هستید که همه کارها، حتی کارهای طولانی‌مدت (مثلاً دانلود یک فایل حجیم از اینترنت)، روی رشته اصلی برنامه (Main Thread) اجرا می‌شوند.</p>
-<ul>
-<li>
-<p>در این حالت، تا زمانی که رشته اصلی مشغول است، کاربر نمی‌تواند ورودی جدید بدهد.</p>
-</li>
-<li>
-<p>نتیجه؟ برنامه قفل یا فریز شده به نظر می‌رسد، و این تجربه‌ای آزاردهنده برای کاربر است.</p>
-</li>
-</ul>
-<p>راه‌حل چیست؟</p>
-<ul>
-<li>
-<p>وظیفه طولانی‌مدت را به یک رشته پس‌زمینه منتقل کنید و رشته اصلی را آزاد بگذارید.</p>
-</li>
-<li>
-<p>در این حالت، رشته اصلی می‌تواند به ورودی‌های جدید کاربر پاسخ دهد یا ادامه کارهای قبلی خود را انجام دهد.</p>
-</li>
-</ul>
-<p>نتیجه:</p>
-<ul>
-<li>
-<p>برنامه سریع‌تر، روان‌تر و کاربرپسندتر می‌شود.</p>
-</li>
-<li>
-<p>همچنین، رایانه‌های امروزی دارای چندین هسته پردازشی هستند. با استفاده از برنامه‌نویسی ناهمگام، می‌توانید از تمام ظرفیت سخت‌افزار استفاده کنید و برنامه‌ای کارآمد و بهینه بسازید.</p>
-</li>
-</ul>
-<h2>سناریوهای مناسب استفاده از برنامه‌نویسی ناهمگام 🎯</h2>
-<p>البته همه موقعیت‌ها مناسب کار ناهمگام نیستند.</p>
-<ul>
-<li>
-<p>اگر بچه‌ها خیلی شیطون باشند، شاید مادر مجبور باشد اول یک کار را کامل کند (مثلاً تکالیف بچه‌ها) و بعد سراغ کار دیگر (مثل آشپزی) برود.</p>
-</li>
-<li>
-<p>یا اگر مادر بخواهد فشار کار را کم کند، ممکن است یک معلم خصوصی برای بچه‌ها یا آشپز برای غذا استخدام کند، ولی این کار هزینه اضافه دارد.</p>
-</li>
-<li>
-<p>اگر بودجه محدود باشد، باید همه کارها را خودش و به‌صورت ترتیبی (همگام) انجام دهد.</p>
-</li>
-</ul>
-<p>پس نتیجه می‌گیریم که:<br>
-<strong>هر موقعیتی مناسب کار ناهمگام یا موازی نیست.</strong></p>
-<p>اما سؤال مهم: چه زمانی باید از برنامه‌نویسی ناهمگام استفاده کنیم؟</p>
-<p>موارد رایج:</p>
-<ul>
-<li>
-<p>کارهای وابسته به I/O مثل دسترسی به پایگاه‌داده، خواندن یا نوشتن فایل‌های بزرگ، و درخواست داده از اینترنت 🌐</p>
-</li>
-<li>
-<p>کارهای وابسته به CPU مثل انجام محاسبات پیچیده و زمان‌بر 🖥️</p>
-</li>
-</ul>
-<h2>پرسش و پاسخ ❓💬</h2>
-<p><strong>سؤال 1.1: به نظر می‌رسد برنامه‌نویسی ناهمگام باعث افزایش پیچیدگی کد می‌شود. آیا این مشکل نیست؟ 🤔</strong></p>
-<p>بله، درست است که ممکن است پیچیدگی کد افزایش یابد.<br>
-اما تصور کنید برای ایجاد یک رابط کاربری (UI) پاسخگوتر، یک عملیات طولانی را به رشته پس‌زمینه منتقل می‌کنید.</p>
-<ul>
-<li>
-<p>در این حالت، رشته اصلی UI مسدود نمی‌شود و کاربر تجربه ناخوشایند قفل شدن برنامه را ندارد.</p>
-</li>
-<li>
-<p>در نهایت، کاربران راضی‌تر خواهند بود و این ارزشمند است.</p>
-</li>
-</ul>
-<p><strong>سؤال 1.2: آیا برنامه‌نویسی ناهمگام و برنامه‌نویسی موازی یکی هستند؟ ⚡👥</strong></p>
-<p>بیایید چند مثال واقعی بررسی کنیم:</p>
-<ul>
-<li>
-<p>برنامه‌نویسی ناهمگام:<br>
-فرض کنید برای شام در حال پختن برنج هستید. بعد از شستن برنج و اضافه کردن آب، آن را روی شعله می‌گذارید تا آرام بپزد. در این فاصله، تصمیم می‌گیرید به بچه‌ها تکالیفشان را بسپارید.</p>
-</li>
-<li>
-<p>شما بین آشپزخانه و بچه‌ها رفت‌وآمد دارید تا هر دو کار انجام شود.</p>
-</li>
-<li>
-<p>این شبیه برنامه‌نویسی ناهمگام است، چون یک کار در حال انجام است و شما می‌توانید در زمان انتظار، کارهای دیگر را پیش ببرید.</p>
-</li>
-<li>
-<p>برنامه‌نویسی موازی:<br>
-حالا فرض کنید یک آشپز استخدام کرده‌اید تا شام را آماده کند، و شما در همان زمان روی تکالیف بچه‌ها تمرکز می‌کنید.</p>
-</li>
-<li>
-<p>در اینجا، دو نفر هم‌زمان دو کار متفاوت را انجام می‌دهند.</p>
-</li>
-<li>
-<p>این دقیقاً شبیه برنامه‌نویسی موازی است (مثل داشتن یک رایانه دو هسته‌ای).</p>
-</li>
-<li>
-<p>ترکیب مدل‌ها:<br>
-می‌توانید چند نفر را در آشپزخانه داشته باشید (آشپز و کمک‌آشپز) و چند نفر برای تدریس بچه‌ها.</p>
-</li>
-<li>
-<p>این همان ترکیب ناهمگام و موازی است که در برنامه‌نویسی هم انجام می‌دهیم.</p>
-</li>
-</ul>
-<p><strong>تعریف رسمی:</strong></p>
-<p>مجله Visual Studio این موضوع را این‌گونه خلاصه کرده است:</p>
-<p><strong>برنامه‌نویسی ناهمگام روشی از برنامه‌نویسی موازی است که در آن یک واحد کاری به‌صورت جداگانه از رشته اصلی برنامه اجرا می‌شود و پس از اتمام، شکست یا پیشرفت کار، رشته فراخوان را مطلع می‌کند.</strong></p>
-<h2>الگوهای برنامه‌نویسی 🧩💡</h2>
-<p>بدون شک، برنامه‌نویسی ناهمگام سخت است، اما در گذشته بسیار سخت‌تر بود. در آن زمان، توسعه‌دهندگان گزینه‌های زیر را داشتند:</p>
-<ul>
-<li>
-<p>استفاده مستقیم از Thread ها 🧵</p>
-</li>
-<li>
-<p>استفاده مستقیم از کلاس ThreadPool 🔄</p>
-</li>
-<li>
-<p>استفاده از متدهای Callback 📞</p>
-</li>
-<li>
-<p>استفاده از مدل رویدادمحور (Event-based Asynchrony) 🔔</p>
-</li>
-<li>
-<p>استفاده از الگوی AsyncResult 📦</p>
-</li>
-</ul>
-<p>اما این روش‌ها برای توسعه‌های جدید توصیه نمی‌شوند.</p>
-<h2>الگوی پیشنهادی ✨✅</h2>
-<p>پس، الگوی پیشنهادی چیست؟<br>
-به لینک رسمی مایکروسافت مراجعه کنید:<br>
-<a href="https://learn.microsoft.com/en-us/dotnet/standard/asynchronous-programming-patterns/task-based-asynchronous-pattern-tap">https://learn.microsoft.com/en-us/dotnet/standard/asynchronous-programming-patterns/task-based-asynchronous-pattern-tap</a></p>
-<p>مایکروسافت چنین توضیح می‌دهد:</p>
-<blockquote>
-<p>در .NET، الگوی ناهمگام مبتنی بر Task (TAP)، الگوی توصیه‌شده برای توسعه‌های جدید است.<br>
-این الگو بر اساس Task و Task<TResult> در فضای نام System.Threading.Tasks است که برای نمایش عملیات ناهمگام استفاده می‌شوند.</p>
-</blockquote>
-<p><strong>توجه:</strong></p>
-<p>این کتاب به‌صورت عمیق وارد TAP نمی‌شود، زیرا اکثر پیاده‌سازی‌های TAP شامل کلیدواژه‌های async و await هستند که در کتابچه دیگری از این مجموعه بررسی خواهند شد.</p>
-<p>این کتاب صرفاً روی برنامه‌نویسی با Task بدون استفاده از async و await تمرکز دارد.</p>
-<ul>
-<li>یادگیری این مطالب، به شما کمک بزرگی خواهد کرد وقتی وارد برنامه‌نویسی ناهمگام پیشرفته می‌شوید و از async و await در پروژه‌های خود بهره می‌برید. 🚀</li>
-</ul>
-<h2>کتابخانه موازی‌سازی وظایف (Task Parallel Library - TPL) ⚡🧵</h2>
-<p>در برنامه‌نویسی با Task، زیاد با اصطلاح Task Parallel Library (TPL) مواجه می‌شوید. اجازه بدهید یک مرور سریع داشته باشیم:</p>
-<p>TPL مجموعه‌ای از نوع‌ها (Types) و APIهای عمومی را ارائه می‌دهد که در فضاهای نام زیر قرار دارند:</p>
-<ul>
-<li>
-<p>System.Threading 🔄</p>
-</li>
-<li>
-<p>System.Threading.Tasks 🧩</p>
-</li>
-</ul>
-<p>جالب است بدانید فضای نام System.Threading.Tasks در .NET 4 معرفی شد و مایکروسافت بیان کرده است:</p>
-<p>&quot;TPL، API ترجیحی برای نوشتن کدهای چندریسمانی (Multi-threaded)، ناهمگام (Asynchronous) و موازی (Parallel) در .NET است.&quot;</p>
-<p><a href="https://learn.microsoft.com/en-us/dotnet/standard/parallel-programming/task-parallel-library-tpl">https://learn.microsoft.com/en-us/dotnet/standard/parallel-programming/task-parallel-library-tpl</a></p>
-<p>به همین دلیل، این کتاب بحث را با Taskها شروع می‌کند، چون آنها پایه و اساس TPL هستند.</p>
-<p><strong>پشت‌صحنه TPL 🔍</strong></p>
-<p>جالب است بدانید در پشت‌صحنه، Taskها در صف ThreadPool قرار می‌گیرند. این ThreadPool تعداد رشته‌ها را تعیین و تنظیم می‌کند و با استفاده از الگوریتم‌های مخصوص، بار کاری را متعادل می‌سازد تا بیشترین بازدهی حاصل شود.</p>
-<h2>TPL چگونه کمک می‌کند؟ 🤔</h2>
-<p>TPL در سناریوهای متنوعی مفید است. به عنوان مثال، می‌توانید از آن برای کنترل هر یک از موارد زیر استفاده کنید:</p>
-<ul>
-<li>
-<p>مدیریت بهینه یک محیط چندریسمانی 🛠</p>
-</li>
-<li>
-<p>افزایش سطح هم‌زمانی (Concurrency) 📈</p>
-</li>
-<li>
-<p>پشتیبانی از لغو وظایف (Task Cancellation) ⏹</p>
-</li>
-<li>
-<p>مدیریت وضعیت (State Management) 🗂</p>
-</li>
-<li>
-<p>تقسیم‌بندی کارها (Partitioning) 📦</p>
-</li>
-</ul>
-<p>فعلاً همین اندازه کافی است که بدانید:<br>
-TPL فرآیندهای چندریسمانی را ساده‌تر می‌کند و به شما کمک می‌کند کدهای پرفورمنس بالا بنویسید بدون اینکه درگیر جزئیات پیچیده Threading و بخش‌های سطح پایین شوید.</p>
-<p>مایکروسافت این موضوع را به‌خوبی خلاصه کرده است:</p>
-<blockquote>
-<p>هدف TPL این است که با ساده‌سازی اضافه کردن موازی‌سازی و هم‌زمانی به برنامه‌ها، بهره‌وری توسعه‌دهندگان را افزایش دهد.</p>
-</blockquote>
-<p><a href="https://learn.microsoft.com/en-us/dotnet/standard/parallel-programming/task-parallel-library-tpl">https://learn.microsoft.com/en-us/dotnet/standard/parallel-programming/task-parallel-library-tpl</a></p>
-<h2>معرفی Task ها در TPL 🔹</h2>
-<p>همان‌طور که دیدید، TPL بر اساس مفهوم Task ساخته شده است. حال سؤال این است:<br>
-<strong>Task چیست؟</strong></p>
-<p>می‌توانید Task را مانند یک بلاک کد که یک واحد کار (Unit of Work) را نشان می‌دهد در نظر بگیرید. شما می‌توانید به زمان‌بند (Scheduler) اطلاع دهید که این بلاک کد می‌تواند روی یک رشته‌ی جداگانه (Separate Thread) اجرا شود، در حالی که رشته‌ی اصلی (Main Thread) به کار خود ادامه می‌دهد.</p>
-<p>به عنوان مثال، قطعه کد زیر را ببینید:</p>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">PrintNumbersTask</span>()</span>
+<!doctype html><html lang="fa" dir="rtl"> <head><script>
+    if (window.location.pathname.startsWith('/gitab/')) {
+      window.location.replace(window.location.pathname.replace(/^\/gitab\//i, '/Gitab/') + window.location.search + window.location.hash);
+    }
+    (() => {
+      try {
+        const t = localStorage.getItem('gitab-theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', t);
+        document.documentElement.dataset.colorMode = t;
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        document.documentElement.dataset.colorMode = 'dark';
+      }
+    })();
+  </script> <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5"> <title>برنامه‌نویسی ناهمگام و تسک‌ها</title><meta name="description" content="برنامه‌نویسی ناهمگام و تسک‌ها — مطالعه آنلاین و رایگان از کتاب «برنامه‌نویسی تسک و ناهمگام در سی‌شارپ» (Task Programming in C#) اثر Vaskaran Sarcar با ترجمه حامد حیدریان در گیتاب."> <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"><meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"> <meta name="theme-color" content="#090d16"><meta name="referrer" content="strict-origin-when-cross-origin"> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https:; frame-src https://www.youtube.com https://www.youtube-nocookie.com https://maps.google.com https://www.google.com; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self';"><link rel="icon" type="image/png" href="/Gitab/favicon.png"> <link rel="canonical" href="https://hheydarian.github.io/Gitab/books/book4/Book/01/Asynchronous-Programming-and-Tasks/"><link rel="alternate" hreflang="fa" href="https://hheydarian.github.io/Gitab/books/book4/Book/01/Asynchronous-Programming-and-Tasks/"> <link rel="alternate" hreflang="x-default" href="https://hheydarian.github.io/Gitab/books/book4/Book/01/Asynchronous-Programming-and-Tasks/"><link rel="alternate" type="text/plain" title="LLMs.txt" href="/Gitab/llms.txt"> <link rel="sitemap" type="application/xml" title="Sitemap" href="/Gitab/sitemap.xml"><meta property="og:locale" content="fa_IR"> <meta property="og:type" content="article"><meta property="og:site_name" content="گیتاب | Gitab"> <meta property="og:title" content="برنامه‌نویسی ناهمگام و تسک‌ها"><meta property="og:description" content="برنامه‌نویسی ناهمگام و تسک‌ها — مطالعه آنلاین و رایگان از کتاب «برنامه‌نویسی تسک و ناهمگام در سی‌شارپ» (Task Programming in C#) اثر Vaskaran Sarcar با ترجمه حامد حیدریان در گیتاب."> <meta property="og:url" content="https://hheydarian.github.io/Gitab/books/book4/Book/01/Asynchronous-Programming-and-Tasks/"><meta property="og:image" content="https://hheydarian.github.io/Gitab/images/task-programming/Cover.jpg"> <meta property="og:image:alt" content="برنامه‌نویسی ناهمگام و تسک‌ها"><meta name="twitter:card" content="summary_large_image"> <meta name="twitter:title" content="برنامه‌نویسی ناهمگام و تسک‌ها"><meta name="twitter:description" content="برنامه‌نویسی ناهمگام و تسک‌ها — مطالعه آنلاین و رایگان از کتاب «برنامه‌نویسی تسک و ناهمگام در سی‌شارپ» (Task Programming in C#) اثر Vaskaran Sarcar با ترجمه حامد حیدریان در گیتاب."> <meta name="twitter:image" content="https://hheydarian.github.io/Gitab/images/task-programming/Cover.jpg"><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://hheydarian.github.io/Gitab/#organization","name":"گیتاب | Gitab","alternateName":"Gitab","url":"https://hheydarian.github.io/Gitab/","logo":{"@type":"ImageObject","url":"https://hheydarian.github.io/Gitab/favicon.png"},"sameAs":["https://github.com/hheydarian/Gitab"]},{"@type":"WebSite","@id":"https://hheydarian.github.io/Gitab/#website","url":"https://hheydarian.github.io/Gitab/","name":"گیتاب | Gitab","inLanguage":"fa-IR","publisher":{"@id":"https://hheydarian.github.io/Gitab/#organization"},"potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://hheydarian.github.io/Gitab/books/list-books/?q={search_term_string}"},"query-input":"required name=search_term_string"}},{"@type":"WebPage","@id":"https://hheydarian.github.io/Gitab/books/book4/Book/01/Asynchronous-Programming-and-Tasks/#webpage","url":"https://hheydarian.github.io/Gitab/books/book4/Book/01/Asynchronous-Programming-and-Tasks/","name":"برنامه‌نویسی ناهمگام و تسک‌ها","description":"برنامه‌نویسی ناهمگام و تسک‌ها — مطالعه آنلاین و رایگان از کتاب «برنامه‌نویسی تسک و ناهمگام در سی‌شارپ» (Task Programming in C#) اثر Vaskaran Sarcar با ترجمه حامد حیدریان در گیتاب.","inLanguage":"fa-IR","isPartOf":{"@id":"https://hheydarian.github.io/Gitab/#website"}},{"@type":"TechArticle","headline":"برنامه‌نویسی ناهمگام و تسک‌ها","description":"برنامه‌نویسی ناهمگام و تسک‌ها — مطالعه آنلاین و رایگان از کتاب «برنامه‌نویسی تسک و ناهمگام در سی‌شارپ» (Task Programming in C#) اثر Vaskaran Sarcar با ترجمه حامد حیدریان در گیتاب.","url":"https://hheydarian.github.io/Gitab/books/book4/Book/01/Asynchronous-Programming-and-Tasks/","inLanguage":"fa-IR","isAccessibleForFree":true,"author":{"@type":"Person","name":"Vaskaran Sarcar"},"translator":{"@type":"Person","name":"حامد حیدریان"},"isPartOf":{"@type":"Book","name":"برنامه‌نویسی تسک و ناهمگام در سی‌شارپ","alternateName":"Task Programming in C#","url":"https://hheydarian.github.io/Gitab/books/book4/"}}]}</script> <link rel="preload" href="/Gitab/fonts/Vazirmatn.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/Gitab/styles/main.css?v=2.4" as="style"> <link rel="preload" href="/Gitab/styles/gitab-modern.css?v=2.5" as="style"><style>@font-face{font-family:'Lalezar';src:url('/Gitab/fonts/Lalezar.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}@font-face{font-family:'Vazirmatn';src:url('/Gitab/fonts/Vazirmatn.woff2') format('woff2');font-weight:100 900;font-style:normal;font-display:swap}html,body,button,input,optgroup,select,textarea,.filter-pill{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}input::placeholder,textarea::placeholder{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}</style> <link rel="stylesheet" href="/Gitab/styles/main.css?v=2.4"><link rel="stylesheet" href="/Gitab/styles/gitab-modern.css?v=2.5"> <link rel="stylesheet" href="/Gitab/styles/vendor/github-dark.min.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="/Gitab/styles/vendor/github-dark.min.css"></noscript></head> <body><header class="header"> <div class="container nav-wrap"><a href="/Gitab/" class="brand" aria-label="صفحه اصلی گیتاب"> <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="30" height="30" decoding="async"> <span class="brand-text">Gitab</span> </a> <nav class="nav" id="mainNav"><a href="/Gitab/" >خانه</a> <a href="/Gitab/books/list-books" aria-current="page">کتاب‌ها</a> <a href="/Gitab/courses/" >دوره‌ها</a> <a href="/Gitab/translator.html" >مترجمین</a></nav> <div class="nav-actions"><button id="themeToggle" class="theme-toggle-btn" aria-label="تغییر تم" title="تغییر تم"> <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن" width="18" height="18" decoding="async" style="display:none"> <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک" width="18" height="18" decoding="async"> </button> <a class="btn-github-pill" href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" title="مشاهده سورس گیتاب در گیت‌هاب"> <img src="/Gitab/icone/github.svg" alt="GitHub" width="16" height="16" decoding="async"> <span>گیت‌هاب</span> </a> <button class="mobile-menu-btn" id="mobileMenuBtn" type="button" aria-label="باز کردن منو" aria-expanded="false"> <svg class="mob-icon-open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="4" y1="7" x2="20" y2="7"></line> <line x1="4" y1="12" x2="20" y2="12"></line> <line x1="4" y1="17" x2="14" y2="17"></line> </svg> <svg class="mob-icon-close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="18" y1="6" x2="6" y2="18"></line> <line x1="6" y1="6" x2="18" y2="18"></line> </svg> </button></div> </div><div class="mobile-drawer" id="mobileDrawer" aria-hidden="true"> <div class="mobile-drawer-inner"><div class="mobile-drawer-section-label">ناوبری سریع</div><nav class="mobile-drawer-links" aria-label="منوی موبایل"> <a href="/Gitab/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M3 10.5 12 3l9 7.5"></path> <path d="M5 9.5V20a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V9.5"></path> </svg> </span> <span class="mob-nav-text">صفحه نخست</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/books/list-books" class="mobile-drawer-link active" aria-current="page"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path> </svg> </span> <span class="mob-nav-text">کتابخانه و فهرست کتاب‌ها</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/courses/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path> <path d="M6 12v5c3 3 9 3 12 0v-5"></path> </svg> </span> <span class="mob-nav-text">دوره‌های آموزشی</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/translator.html" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path> <circle cx="9" cy="7" r="4"></circle> <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path> <path d="M16 3.13a4 4 0 0 1 0 7.75"></path> </svg> </span> <span class="mob-nav-text">مترجمین و همکاران</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> </nav><div class="mobile-drawer-divider"></div><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" class="mobile-drawer-link mobile-drawer-gh"> <span class="mob-nav-icon" aria-hidden="true"> <img src="/Gitab/icone/github.svg" alt="" width="17" height="17" loading="lazy" decoding="async"> </span> <span class="mob-nav-text">مخزن گیت‌هاب پروژه</span> <span class="mob-nav-ext" aria-hidden="true">↗</span> </a> </div></div> </header><div class="reading-progress-track"> <div class="reading-progress-fill" id="readingProgressBar"></div></div> <main class="site-main chapter-reading-page"><div class="chapter-page-wrapper"> <nav class="chapter-clean-breadcrumb" aria-label="مسیر راهنما" dir="rtl"><a href="/Gitab/">خانه</a> <span class="bc-sep" aria-hidden="true">/</span> <a href="/Gitab/books/list-books/">کتاب‌ها</a> <span class="bc-sep" aria-hidden="true">/</span> <a href="/Gitab/books/book4/"><bdi>برنامه‌نویسی تسک در سی‌شارپ</bdi></a> <span class="bc-sep" aria-hidden="true">/</span> <span class="bc-current-leaf"><bdi>برنامه‌نویسی ناهمگام و تسک‌ها</bdi></span></nav> <article class="chapter-prose-container markdown-body" id="chapterArticle" dir="rtl"><h1>فصل اول: برنامه‌نویسی ناهمگام و تسک‌ها ⏳</h1><p>در این فصل، ابتدا با مقدمه‌ای بر برنامه‌نویسی ناهمگام آشنا می‌شوید و سپس تسک‌ها (Tasks) و اهمیت آن‌ها بررسی می‌شوند.</p><h2>درک عملیات ناهمگام</h2><p>روانشناسان معمولاً انجام یک کار در یک زمان را توصیه می‌کنند، زیرا این کار باعث تمرکز بهتر می‌شود. اما زندگی مدرن پر از مشغله است و پیروی از این توصیه همیشه آسان نیست.</p><p>مثالی ساده: مادران شاغل را در نظر بگیرید. آن‌ها صبح‌ها باید چندین کار را قبل از رفتن به محل کار انجام دهند:</p><ul> <li><p>آماده کردن صبحانه</p></li> <li><p>آماده کردن بچه‌ها برای مدرسه</p></li> <li><p>آماده شدن برای محل کار ‍</p></li> </ul><p>این مادران کارها را شروع می‌کنند اما منتظر اتمام یک کار نمی‌مانند؛ بلکه به کار بعدی می‌پردازند و سپس برمی‌گردند تا کار قبلی را بررسی کنند. این روند تا اتمام همه کارها ادامه دارد.</p><p>این دقیقاً همان چیزی است که در برنامه‌نویسی ناهمگام اتفاق می‌افتد؛ کارها هم‌زمان یا موازی آغاز می‌شوند و هر کدام در زمان مناسب تکمیل می‌گردند.</p><h2>این روش چه کمکی می‌کند؟</h2><p>حتی اگر این شیوه را دوست نداشته باشید، مواقعی وجود دارد که اجتناب از آن ممکن نیست.<br> مثال ساده: اگر صبح دیر بیدار شوید اما نمی‌خواهید برای مدرسه یا محل کار دیر کنید، تنها گزینه این است که چند کار را هم‌زمان انجام دهید (ناهمگام).</p><p>حالا بیایید درباره برنامه‌نویسی صحبت کنیم. فرض کنید در حال توسعه برنامه‌ای هستید که همه کارها، حتی کارهای طولانی‌مدت (مثلاً دانلود یک فایل حجیم از اینترنت)، روی رشته اصلی برنامه (Main Thread) اجرا می‌شوند.</p><ul> <li><p>در این حالت، تا زمانی که رشته اصلی مشغول است، کاربر نمی‌تواند ورودی جدید بدهد.</p></li> <li><p>نتیجه؟ برنامه قفل یا فریز شده به نظر می‌رسد، و این تجربه‌ای آزاردهنده برای کاربر است.</p></li> </ul><p>راه‌حل چیست؟</p><ul> <li><p>وظیفه طولانی‌مدت را به یک رشته پس‌زمینه منتقل کنید و رشته اصلی را آزاد بگذارید.</p></li> <li><p>در این حالت، رشته اصلی می‌تواند به ورودی‌های جدید کاربر پاسخ دهد یا ادامه کارهای قبلی خود را انجام دهد.</p></li> </ul><p>نتیجه:</p><ul> <li><p>برنامه سریع‌تر، روان‌تر و کاربرپسندتر می‌شود.</p></li> <li><p>همچنین، رایانه‌های امروزی دارای چندین هسته پردازشی هستند. با استفاده از برنامه‌نویسی ناهمگام، می‌توانید از تمام ظرفیت سخت‌افزار استفاده کنید و برنامه‌ای کارآمد و بهینه بسازید.</p></li> </ul><h2>سناریوهای مناسب استفاده از برنامه‌نویسی ناهمگام</h2><p>البته همه موقعیت‌ها مناسب کار ناهمگام نیستند.</p><ul> <li><p>اگر بچه‌ها خیلی شیطون باشند، شاید مادر مجبور باشد اول یک کار را کامل کند (مثلاً تکالیف بچه‌ها) و بعد سراغ کار دیگر (مثل آشپزی) برود.</p></li> <li><p>یا اگر مادر بخواهد فشار کار را کم کند، ممکن است یک معلم خصوصی برای بچه‌ها یا آشپز برای غذا استخدام کند، ولی این کار هزینه اضافه دارد.</p></li> <li><p>اگر بودجه محدود باشد، باید همه کارها را خودش و به‌صورت ترتیبی (همگام) انجام دهد.</p></li> </ul><p>پس نتیجه می‌گیریم که:<br><strong>هر موقعیتی مناسب کار ناهمگام یا موازی نیست.</strong></p><p>اما سؤال مهم: چه زمانی باید از برنامه‌نویسی ناهمگام استفاده کنیم؟</p><p>موارد رایج:</p><ul> <li><p>کارهای وابسته به I/O مثل دسترسی به پایگاه‌داده، خواندن یا نوشتن فایل‌های بزرگ، و درخواست داده از اینترنت</p></li> <li><p>کارهای وابسته به CPU مثل انجام محاسبات پیچیده و زمان‌بر</p></li> </ul><h2>پرسش و پاسخ</h2><p>**سؤال 1.1: به نظر می‌رسد برنامه‌نویسی ناهمگام باعث افزایش پیچیدگی کد می‌شود. آیا این مشکل نیست؟ **</p><p>بله، درست است که ممکن است پیچیدگی کد افزایش یابد.<br> اما تصور کنید برای ایجاد یک رابط کاربری (UI) پاسخگوتر، یک عملیات طولانی را به رشته پس‌زمینه منتقل می‌کنید.</p><ul> <li><p>در این حالت، رشته اصلی UI مسدود نمی‌شود و کاربر تجربه ناخوشایند قفل شدن برنامه را ندارد.</p></li> <li><p>در نهایت، کاربران راضی‌تر خواهند بود و این ارزشمند است.</p></li> </ul><p>**سؤال 1.2: آیا برنامه‌نویسی ناهمگام و برنامه‌نویسی موازی یکی هستند؟ **</p><p>بیایید چند مثال واقعی بررسی کنیم:</p><ul> <li><p>برنامه‌نویسی ناهمگام:<br> فرض کنید برای شام در حال پختن برنج هستید. بعد از شستن برنج و اضافه کردن آب، آن را روی شعله می‌گذارید تا آرام بپزد. در این فاصله، تصمیم می‌گیرید به بچه‌ها تکالیفشان را بسپارید.</p></li> <li><p>شما بین آشپزخانه و بچه‌ها رفت‌وآمد دارید تا هر دو کار انجام شود.</p></li> <li><p>این شبیه برنامه‌نویسی ناهمگام است، چون یک کار در حال انجام است و شما می‌توانید در زمان انتظار، کارهای دیگر را پیش ببرید.</p></li> <li><p>برنامه‌نویسی موازی:<br> حالا فرض کنید یک آشپز استخدام کرده‌اید تا شام را آماده کند، و شما در همان زمان روی تکالیف بچه‌ها تمرکز می‌کنید.</p></li> <li><p>در اینجا، دو نفر هم‌زمان دو کار متفاوت را انجام می‌دهند.</p></li> <li><p>این دقیقاً شبیه برنامه‌نویسی موازی است (مثل داشتن یک رایانه دو هسته‌ای).</p></li> <li><p>ترکیب مدل‌ها:<br> می‌توانید چند نفر را در آشپزخانه داشته باشید (آشپز و کمک‌آشپز) و چند نفر برای تدریس بچه‌ها.</p></li> <li><p>این همان ترکیب ناهمگام و موازی است که در برنامه‌نویسی هم انجام می‌دهیم.</p></li> </ul><p><strong>تعریف رسمی:</strong></p><p>مجله Visual Studio این موضوع را این‌گونه خلاصه کرده است:</p><p><strong>برنامه‌نویسی ناهمگام روشی از برنامه‌نویسی موازی است که در آن یک واحد کاری به‌صورت جداگانه از رشته اصلی برنامه اجرا می‌شود و پس از اتمام، شکست یا پیشرفت کار، رشته فراخوان را مطلع می‌کند.</strong></p><h2>الگوهای برنامه‌نویسی</h2><p>بدون شک، برنامه‌نویسی ناهمگام سخت است، اما در گذشته بسیار سخت‌تر بود. در آن زمان، توسعه‌دهندگان گزینه‌های زیر را داشتند:</p><ul> <li><p>استفاده مستقیم از Thread ها</p></li> <li><p>استفاده مستقیم از کلاس ThreadPool</p></li> <li><p>استفاده از متدهای Callback</p></li> <li><p>استفاده از مدل رویدادمحور (Event-based Asynchrony)</p></li> <li><p>استفاده از الگوی AsyncResult</p></li> </ul><p>اما این روش‌ها برای توسعه‌های جدید توصیه نمی‌شوند.</p><h2>الگوی پیشنهادی</h2><p>پس، الگوی پیشنهادی چیست؟<br> به لینک رسمی مایکروسافت مراجعه کنید:<br><a href="https://learn.microsoft.com/en-us/dotnet/standard/asynchronous-programming-patterns/task-based-asynchronous-pattern-tap">https://learn.microsoft.com/en-us/dotnet/standard/asynchronous-programming-patterns/task-based-asynchronous-pattern-tap</a></p><p>مایکروسافت چنین توضیح می‌دهد:</p><blockquote> <p>در .NET، الگوی ناهمگام مبتنی بر Task (TAP)، الگوی توصیه‌شده برای توسعه‌های جدید است.<br> این الگو بر اساس Task و Task<TResult> در فضای نام System.Threading.Tasks است که برای نمایش عملیات ناهمگام استفاده می‌شوند.</p></blockquote> <p><strong>توجه:</strong></p><p>این کتاب به‌صورت عمیق وارد TAP نمی‌شود، زیرا اکثر پیاده‌سازی‌های TAP شامل کلیدواژه‌های async و await هستند که در کتابچه دیگری از این مجموعه بررسی خواهند شد.</p><p>این کتاب صرفاً روی برنامه‌نویسی با Task بدون استفاده از async و await تمرکز دارد.</p><ul> <li>یادگیری این مطالب، به شما کمک بزرگی خواهد کرد وقتی وارد برنامه‌نویسی ناهمگام پیشرفته می‌شوید و از async و await در پروژه‌های خود بهره می‌برید.</li></ul> <h2>کتابخانه موازی‌سازی وظایف (Task Parallel Library - TPL)</h2><p>در برنامه‌نویسی با Task، زیاد با اصطلاح Task Parallel Library (TPL) مواجه می‌شوید. اجازه بدهید یک مرور سریع داشته باشیم:</p><p>TPL مجموعه‌ای از نوع‌ها (Types) و APIهای عمومی را ارائه می‌دهد که در فضاهای نام زیر قرار دارند:</p><ul> <li><p>System.Threading</p></li> <li><p>System.Threading.Tasks</p></li> </ul><p>جالب است بدانید فضای نام System.Threading.Tasks در .NET 4 معرفی شد و مایکروسافت بیان کرده است:</p><p>&quot;TPL، API ترجیحی برای نوشتن کدهای چندریسمانی (Multi-threaded)، ناهمگام (Asynchronous) و موازی (Parallel) در .NET است.&quot;</p><p><a href="https://learn.microsoft.com/en-us/dotnet/standard/parallel-programming/task-parallel-library-tpl">https://learn.microsoft.com/en-us/dotnet/standard/parallel-programming/task-parallel-library-tpl</a></p><p>به همین دلیل، این کتاب بحث را با Taskها شروع می‌کند، چون آنها پایه و اساس TPL هستند.</p><p>**پشت‌صحنه TPL **</p><p>جالب است بدانید در پشت‌صحنه، Taskها در صف ThreadPool قرار می‌گیرند. این ThreadPool تعداد رشته‌ها را تعیین و تنظیم می‌کند و با استفاده از الگوریتم‌های مخصوص، بار کاری را متعادل می‌سازد تا بیشترین بازدهی حاصل شود.</p><h2>TPL چگونه کمک می‌کند؟</h2><p>TPL در سناریوهای متنوعی مفید است. به عنوان مثال، می‌توانید از آن برای کنترل هر یک از موارد زیر استفاده کنید:</p><ul> <li><p>مدیریت بهینه یک محیط چندریسمانی</p></li> <li><p>افزایش سطح هم‌زمانی (Concurrency)</p></li> <li><p>پشتیبانی از لغو وظایف (Task Cancellation) ⏹</p></li> <li><p>مدیریت وضعیت (State Management)</p></li> <li><p>تقسیم‌بندی کارها (Partitioning)</p></li> </ul><p>فعلاً همین اندازه کافی است که بدانید:<br> TPL فرآیندهای چندریسمانی را ساده‌تر می‌کند و به شما کمک می‌کند کدهای پرفورمنس بالا بنویسید بدون اینکه درگیر جزئیات پیچیده Threading و بخش‌های سطح پایین شوید.</p><p>مایکروسافت این موضوع را به‌خوبی خلاصه کرده است:</p><blockquote> <p>هدف TPL این است که با ساده‌سازی اضافه کردن موازی‌سازی و هم‌زمانی به برنامه‌ها، بهره‌وری توسعه‌دهندگان را افزایش دهد.</p></blockquote> <p><a href="https://learn.microsoft.com/en-us/dotnet/standard/parallel-programming/task-parallel-library-tpl">https://learn.microsoft.com/en-us/dotnet/standard/parallel-programming/task-parallel-library-tpl</a></p><h2>معرفی Task ها در TPL</h2><p>همان‌طور که دیدید، TPL بر اساس مفهوم Task ساخته شده است. حال سؤال این است:<br><strong>Task چیست؟</strong></p><p>می‌توانید Task را مانند یک بلاک کد که یک واحد کار (Unit of Work) را نشان می‌دهد در نظر بگیرید. شما می‌توانید به زمان‌بند (Scheduler) اطلاع دهید که این بلاک کد می‌تواند روی یک رشته‌ی جداگانه (Separate Thread) اجرا شود، در حالی که رشته‌ی اصلی (Main Thread) به کار خود ادامه می‌دهد.</p><p>به عنوان مثال، قطعه کد زیر را ببینید:</p><pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">PrintNumbersTask</span>()</span>
 {
     WriteLine(<span class="hljs-string">&quot;Starts printing the numbers.&quot;</span>);
     <span class="hljs-comment">// Continues the work</span>
     WriteLine(<span class="hljs-string">&quot;The task is completed.&quot;</span>);
 }
-</code></pre>
-<p>این متد یک واحد کاری است که می‌تواند روی یک رشته‌ی جداگانه اجرا شود.</p>
-<h3>سناریوهای مفید استفاده از Taskها 💡</h3>
-<p>برخی از سناریوهای رایج استفاده از Task شامل موارد زیر است:</p>
-<ul>
-<li>
-<p>انجام یک محاسبه و نمایش نتیجه 🔢</p>
-</li>
-<li>
-<p>محاسبه یک مقدار با یا بدون دریافت ورودی ⚙️</p>
-</li>
-<li>
-<p>درخواست یک منبع شبکه‌ای 🌐</p>
-</li>
-<li>
-<p>بررسی سلامت یک وب‌سایت (برای مثال Ping کردن یک سایت) 📡</p>
-</li>
-</ul>
-<h2>پرسش و پاسخ ❓💬</h2>
-<p><strong>سؤال 1.3: مزایای استفاده از Task نسبت به Thread چیست؟ ⚡🧵</strong></p>
-<p>مزایای رایج استفاده از Task شامل موارد زیر است:</p>
-<ul>
-<li>
-<p>Taskها سبک‌تر هستند و به شما کمک می‌کنند موازی‌سازی دقیق‌تر (Fine-grained Parallelism) داشته باشید.</p>
-</li>
-<li>
-<p>با استفاده از API داخلی Taskها، می‌توانید به راحتی عملیات مفیدی مثل انتظار (Waiting)، لغو (Cancellation)، ادامه کار (Continuation)، زمان‌بندی سفارشی (Custom Scheduling) و مدیریت استثناها (Exception Handling) را انجام دهید.</p>
-</li>
-<li>
-<p>بنابراین، وقتی از Task به جای Thread استفاده می‌کنید، کنترل برنامه‌نویسی بیشتری خواهید داشت. ✅</p>
-</li>
-</ul>
-<p><strong>سؤال 1.4: پیشرفت‌های اساسی Task نسبت به مدل‌های برنامه‌نویسی قبلی چه بود؟ 🚀</strong></p>
-<p>مزایای زیادی وجود دارد. پس از اتمام این کتاب، این مزایا برایتان واضح خواهد شد.</p>
-<p>فعلاً می‌توان گفت:</p>
-<ul>
-<li>
-<p>وقتی از Task استفاده می‌کنید، بعد از شروع عملیات می‌توانید به راحتی تولیدکننده Task و مصرف‌کننده(های) Task را با ارائه ادامه کار (Continuation of Work) به هم متصل کنید.</p>
-</li>
-<li>
-<p>به عبارت دیگر، نیازی نیست ادامه کار را به متدی که عملیات را فراخوانی می‌کند بدهید.</p>
-</li>
-<li>
-<p>این یکی از مزایای اصلی Task نسبت به مدل‌های برنامه‌نویسی قبلی است. 🌟</p>
-</li>
-</ul>
-<h2>خلاصه فصل ۱ 📚</h2>
-<p>این فصل با بحث برنامه‌نویسی ناهمگام و کاربردهای آن در دنیای امروزی آغاز شد. سپس TPL و نقش Taskها در برنامه‌نویسی ناهمگام معرفی شد.</p>
-<p>به طور خلاصه، این فصل به سوالات زیر پاسخ داد:</p>
-<ul>
-<li>
-<p>برنامه‌نویسی ناهمگام چیست و چرا مهم است؟ 🤔</p>
-</li>
-<li>
-<p>سناریوهای مناسب برای برنامه‌نویسی ناهمگام کدامند؟ ⚡</p>
-</li>
-<li>
-<p>TPL چیست؟ 🧵</p>
-</li>
-<li>
-<p>Task چیست و چرا نسبت به Thread مفید است؟ ✅</p>
-<h2>تمرین‌ها 📝💡</h2>
-</li>
-</ul>
-<p>برای سنجش درک خود، تمرین‌های زیر را انجام دهید:</p>
-<p><strong>E1.1 درست/نادرست (True/False):</strong></p>
-<p>i) در .NET، الگوی ناهمگام مبتنی بر Task، الگوی توصیه‌شده فعلی برای برنامه‌نویسی ناهمگام است. ✅</p>
-<p>ii) اجرای ناهمگام همیشه سریع‌تر از اجرای همزمان (Synchronous) مربوطه است. ❌</p>
-<p>iii) انجام یک محاسبه زمان‌بر نمونه‌ای از عملیات CPU-bound است که می‌تواند از برنامه‌نویسی ناهمگام بهره ببرد. ✅</p>
-<p>iv) دانلود یک فایل بزرگ از اینترنت نمونه‌ای رایج از عملیات I/O-bound است که می‌تواند از برنامه‌نویسی ناهمگام بهره ببرد. ✅</p>
-<p><strong>E1.2 حداقل دو مزیت اصلی برنامه‌نویسی ناهمگام را بیان کنید:</strong></p>
-<ul>
-<li>
-<p>می‌توانید کارهای طولانی را به رشته‌های پس‌زمینه منتقل کنید و در نتیجه رابط کاربری پاسخگوتر بسازید. 🌟</p>
-</li>
-<li>
-<p>با استفاده از برنامه‌نویسی ناهمگام، می‌توانید از سخت‌افزار مدرن به‌طور کامل استفاده کنید و سرعت برنامه خود را افزایش دهید. ⚡</p>
-</li>
-</ul>
-<h2>راه‌حل تمرین‌ها ✅💡</h2>
-<p>در اینجا نمونه‌ای از پاسخ‌های تمرین‌های فصل ۱ ارائه شده است:</p>
-<p><strong>E1.1</strong></p>
-<p>پاسخ‌ها به صورت Bold مشخص شده‌اند:</p>
-<p>i) در .NET، الگوی ناهمگام مبتنی بر Task، الگوی توصیه‌شده فعلی برای برنامه‌نویسی ناهمگام است. [True ✅]</p>
-<p>ii) اجرای ناهمگام همیشه سریع‌تر از اجرای همزمان (Synchronous) مربوطه است. [False ❌]</p>
-<p>iii) انجام یک محاسبه زمان‌بر نمونه‌ای از عملیات CPU-bound است که می‌تواند از برنامه‌نویسی ناهمگام بهره ببرد. [True ✅]</p>
-<p>iv) دانلود یک فایل بزرگ از اینترنت نمونه‌ای رایج از عملیات I/O-bound است که می‌تواند از برنامه‌نویسی ناهمگام بهره ببرد. [True ✅]</p>
-<p><strong>E1.2</strong></p>
-<p>دو مزیت اصلی استفاده از برنامه‌نویسی ناهمگام عبارتند از:</p>
-<ul>
-<li>
-<p>می‌توانید کارهای طولانی را به رشته‌های پس‌زمینه منتقل کنید و در نتیجه رابط کاربری پاسخگوتر بسازید. 🌟</p>
-</li>
-<li>
-<p>با استفاده از برنامه‌نویسی ناهمگام، می‌توانید از سخت‌افزار مدرن به‌طور کامل استفاده کنید و سرعت برنامه خود را افزایش دهید. ⚡</p>
-</li>
-</ul>
-
-  </main>
-
-  <!-- فوتر مشترک -->
-  <footer class="footer">
-    <div class="container">
-      <p>
-        <img src="/Gitab/icone/copyright.svg" alt="کپی‌رایت" width="14" height="14"
-             style="vertical-align:middle;margin-inline:4px">
-        <span id="y"></span> Gitab — تمامی حقوق محفوظ است.
-      </p>
-    </div>
-  </footer>
-
-  <!-- سال و اسکریپت تغییر تم -->
-  <script>
+</code></pre> <p>این متد یک واحد کاری است که می‌تواند روی یک رشته‌ی جداگانه اجرا شود.</p><h3>سناریوهای مفید استفاده از Taskها</h3><p>برخی از سناریوهای رایج استفاده از Task شامل موارد زیر است:</p><ul> <li><p>انجام یک محاسبه و نمایش نتیجه</p></li> <li><p>محاسبه یک مقدار با یا بدون دریافت ورودی</p></li> <li><p>درخواست یک منبع شبکه‌ای</p></li> <li><p>بررسی سلامت یک وب‌سایت (برای مثال Ping کردن یک سایت)</p></li> </ul><h2>پرسش و پاسخ</h2><p>**سؤال 1.3: مزایای استفاده از Task نسبت به Thread چیست؟ **</p><p>مزایای رایج استفاده از Task شامل موارد زیر است:</p><ul> <li><p>Taskها سبک‌تر هستند و به شما کمک می‌کنند موازی‌سازی دقیق‌تر (Fine-grained Parallelism) داشته باشید.</p></li> <li><p>با استفاده از API داخلی Taskها، می‌توانید به راحتی عملیات مفیدی مثل انتظار (Waiting)، لغو (Cancellation)، ادامه کار (Continuation)، زمان‌بندی سفارشی (Custom Scheduling) و مدیریت استثناها (Exception Handling) را انجام دهید.</p></li> <li><p>بنابراین، وقتی از Task به جای Thread استفاده می‌کنید، کنترل برنامه‌نویسی بیشتری خواهید داشت.</p></li> </ul><p>**سؤال 1.4: پیشرفت‌های اساسی Task نسبت به مدل‌های برنامه‌نویسی قبلی چه بود؟ **</p><p>مزایای زیادی وجود دارد. پس از اتمام این کتاب، این مزایا برایتان واضح خواهد شد.</p><p>فعلاً می‌توان گفت:</p><ul> <li><p>وقتی از Task استفاده می‌کنید، بعد از شروع عملیات می‌توانید به راحتی تولیدکننده Task و مصرف‌کننده(های) Task را با ارائه ادامه کار (Continuation of Work) به هم متصل کنید.</p></li> <li><p>به عبارت دیگر، نیازی نیست ادامه کار را به متدی که عملیات را فراخوانی می‌کند بدهید.</p></li> <li><p>این یکی از مزایای اصلی Task نسبت به مدل‌های برنامه‌نویسی قبلی است.</p></li> </ul><h2>خلاصه فصل ۱</h2><p>این فصل با بحث برنامه‌نویسی ناهمگام و کاربردهای آن در دنیای امروزی آغاز شد. سپس TPL و نقش Taskها در برنامه‌نویسی ناهمگام معرفی شد.</p><p>به طور خلاصه، این فصل به سوالات زیر پاسخ داد:</p><ul> <li><p>برنامه‌نویسی ناهمگام چیست و چرا مهم است؟</p></li> <li><p>سناریوهای مناسب برای برنامه‌نویسی ناهمگام کدامند؟</p></li> <li><p>TPL چیست؟</p></li> <li><p>Task چیست و چرا نسبت به Thread مفید است؟</p><h2>تمرین‌ها</h2></li> </ul><p>برای سنجش درک خود، تمرین‌های زیر را انجام دهید:</p><p><strong>E1.1 درست/نادرست (True/False):</strong></p><p>i) در .NET، الگوی ناهمگام مبتنی بر Task، الگوی توصیه‌شده فعلی برای برنامه‌نویسی ناهمگام است.</p><p>ii) اجرای ناهمگام همیشه سریع‌تر از اجرای همزمان (Synchronous) مربوطه است.</p><p>iii) انجام یک محاسبه زمان‌بر نمونه‌ای از عملیات CPU-bound است که می‌تواند از برنامه‌نویسی ناهمگام بهره ببرد.</p><p>iv) دانلود یک فایل بزرگ از اینترنت نمونه‌ای رایج از عملیات I/O-bound است که می‌تواند از برنامه‌نویسی ناهمگام بهره ببرد.</p><p><strong>E1.2 حداقل دو مزیت اصلی برنامه‌نویسی ناهمگام را بیان کنید:</strong></p><ul> <li><p>می‌توانید کارهای طولانی را به رشته‌های پس‌زمینه منتقل کنید و در نتیجه رابط کاربری پاسخگوتر بسازید.</p></li> <li><p>با استفاده از برنامه‌نویسی ناهمگام، می‌توانید از سخت‌افزار مدرن به‌طور کامل استفاده کنید و سرعت برنامه خود را افزایش دهید.</p></li> </ul><h2>راه‌حل تمرین‌ها</h2><p>در اینجا نمونه‌ای از پاسخ‌های تمرین‌های فصل ۱ ارائه شده است:</p><p><strong>E1.1</strong></p><p>پاسخ‌ها به صورت Bold مشخص شده‌اند:</p><p>i) در .NET، الگوی ناهمگام مبتنی بر Task، الگوی توصیه‌شده فعلی برای برنامه‌نویسی ناهمگام است. [True ]</p><p>ii) اجرای ناهمگام همیشه سریع‌تر از اجرای همزمان (Synchronous) مربوطه است. [False ]</p><p>iii) انجام یک محاسبه زمان‌بر نمونه‌ای از عملیات CPU-bound است که می‌تواند از برنامه‌نویسی ناهمگام بهره ببرد. [True ]</p><p>iv) دانلود یک فایل بزرگ از اینترنت نمونه‌ای رایج از عملیات I/O-bound است که می‌تواند از برنامه‌نویسی ناهمگام بهره ببرد. [True ]</p><p><strong>E1.2</strong></p><p>دو مزیت اصلی استفاده از برنامه‌نویسی ناهمگام عبارتند از:</p><ul> <li><p>می‌توانید کارهای طولانی را به رشته‌های پس‌زمینه منتقل کنید و در نتیجه رابط کاربری پاسخگوتر بسازید.</p></li> <li><p>با استفاده از برنامه‌نویسی ناهمگام، می‌توانید از سخت‌افزار مدرن به‌طور کامل استفاده کنید و سرعت برنامه خود را افزایش دهید.</p></li> </ul></article> <nav class="chapter-single-next-nav"><a href="/Gitab/books/book4/Book/02/Task-Creation-and-Execution/" class="btn-next-chapter-action" id="nextChapterBtn" data-hub="/Gitab/books/book4/"> <span class="next-btn-text">فصل بعدی: ایجاد و اجرای Taskها</span> <span class="next-btn-arrow">←</span> </a> </nav></div> <button class="fab-back-to-top" id="backToTopBtn" type="button" aria-label="رفتن به بالای صفحه" title="رفتن به بالا"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"> <polyline points="18 15 12 9 6 15"></polyline> </svg> </button></main> <footer class="footer-minimal"><div class="footer-container"> <div class="footer-top-row"><div class="footer-brand-side"> <a href="/Gitab/" class="footer-brand-anchor"> <img src="/Gitab/icone/logo.svg" alt="Gitab" width="28" height="28" loading="lazy" decoding="async"> <span class="footer-brand-title">گیتاب (Gitab)</span> </a> <p class="footer-tagline"> پلتفرم آزاد و مستقل برای ترجمهٔ دقیق و روان کتاب‌های مرجع مهندسی نرم‌افزار. </p></div> <div class="footer-nav-cols"><div class="footer-nav-col"> <span class="footer-nav-heading">موضوعات</span><ul class="footer-nav-list"> <li><a href="/Gitab/books/list-books/?cat=csharp">سی‌شارپ و دات‌نت</a></li><li><a href="/Gitab/books/list-books/?cat=clean-code">کد تمیز و بازآفرینی</a></li><li><a href="/Gitab/books/list-books/?cat=architecture">معماری و طراحی دامنه</a></li><li><a href="/Gitab/books/list-books/?cat=system">لینوکس و خط فرمان</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">بخش‌های سایت</span><ul class="footer-nav-list"> <li><a href="/Gitab/">صفحه اصلی</a></li><li><a href="/Gitab/books/list-books/">کتابخانه کامل</a></li><li><a href="/Gitab/courses/">دوره‌های آموزشی</a></li><li><a href="/Gitab/translator.html">تالار مترجمین</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">مشارکت و جامعه</span><ul class="footer-nav-list"> <li><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer">راهنمای همکاری در ترجمه</a></li><li><a href="https://github.com/hheydarian/Gitab/issues" target="_blank" rel="noopener noreferrer">پیشنهاد کتاب یا گزارش خطا</a></li></ul> </div></div> </div><div class="footer-bottom-line"> <span>© <span id="y">2026</span> Gitab — توسعه‌یافته برای جامعهٔ مهندسان نرم‌افزار ایرانی</span></div> </div></footer> <script>
   (() => {
     const root = document.documentElement;
     const btn = document.getElementById('themeToggle');
+    const sunIcon = btn ? btn.querySelector('.icon-sun') : null;
+    const moonIcon = btn ? btn.querySelector('.icon-moon') : null;
     const KEY = 'gitab-theme';
 
-    function updateTheme(s) {
-      root.setAttribute('data-theme', s);
-      const mode = s;  // فقط `dark` یا `light` خواهد بود
+    function updateTheme(mode) {
+      root.setAttribute('data-theme', mode);
       root.dataset.colorMode = mode;
-      btn.dataset.icon = mode === 'dark' ? 'moon' : 'sun';
+      if (sunIcon && moonIcon) {
+        if (mode === 'dark') {
+          sunIcon.style.display = 'inline-block';
+          moonIcon.style.display = 'none';
+        } else {
+          sunIcon.style.display = 'none';
+          moonIcon.style.display = 'inline-block';
+        }
+      }
     }
 
-    // وضعیت تم ذخیره شده از localStorage
-    let saved = localStorage.getItem(KEY) || 'light'; // پیش‌فرض روشن
+    let saved = 'dark';
+    try { saved = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
     updateTheme(saved);
 
-    // تنظیم مجدد تم هنگام تغییر وضعیت دکمه
-    btn.addEventListener('click', () => {
-      const current = localStorage.getItem(KEY) || 'light';
-      const next = current === 'dark' ? 'light' : 'dark';  // فقط دو حالت: تاریک و روشن
-      localStorage.setItem(KEY, next);
-      updateTheme(next);
-    });
+    if (btn) {
+      btn.addEventListener('click', () => {
+        let current = 'dark';
+        try { current = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+        const next = current === 'dark' ? 'light' : 'dark';
+        try { localStorage.setItem(KEY, next); } catch (e) {}
+        updateTheme(next);
+      });
+    }
 
-    // هنگام بارگذاری صفحه
     document.addEventListener('DOMContentLoaded', () => {
-      updateTheme(localStorage.getItem(KEY) || 'light');
+      let mode = 'dark';
+      try { mode = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+      updateTheme(mode);
+      const yearSpan = document.getElementById('y');
+      if (yearSpan) yearSpan.textContent = new Date().getFullYear();
     });
+
+    const mobBtn = document.getElementById('mobileMenuBtn');
+    const mobDrawer = document.getElementById('mobileDrawer');
+    if (mobBtn && mobDrawer) {
+      const setDrawerOpen = (open) => {
+        mobDrawer.classList.toggle('open', open);
+        mobBtn.classList.toggle('is-open', open);
+        mobBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        mobBtn.setAttribute('aria-label', open ? 'بستن منو' : 'باز کردن منو');
+        mobDrawer.setAttribute('aria-hidden', open ? 'false' : 'true');
+      };
+
+      mobBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        setDrawerOpen(!mobDrawer.classList.contains('open'));
+      });
+
+      mobDrawer.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => setDrawerOpen(false));
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && mobDrawer.classList.contains('open')) {
+          setDrawerOpen(false);
+        }
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!mobDrawer.contains(e.target) && !mobBtn.contains(e.target)) {
+          setDrawerOpen(false);
+        }
+      });
+    }
+
+    if ('serviceWorker' in navigator) {
+      const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+      if (isLocalhost) {
+        navigator.serviceWorker.getRegistrations().then(regs => {
+          for (const reg of regs) reg.unregister();
+        });
+        if ('caches' in window) {
+          caches.keys().then(names => {
+            for (const name of names) caches.delete(name);
+          });
+        }
+      } else {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/Gitab/sw.js').catch(() => {});
+        });
+      }
+    }
   })();
-</script>
-
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-  <script>hljs.highlightAll();</script>
-
-  <script>
+  </script> <script>
   document.querySelectorAll('pre code').forEach(block => {
+    const pre = block.parentNode;
+    if (!pre || pre.querySelector('.copy-btn')) return;
+
+    const copySvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
+    const okSvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+
     const btn = document.createElement('button');
     btn.className = 'copy-btn';
-
-    const icon = document.createElement('img');
-    icon.src = "/Gitab/icone/copy.svg";
-    icon.alt = 'Copy';
-    btn.appendChild(icon);
-
-    block.parentNode.insertBefore(btn, block);
+    btn.setAttribute('aria-label', 'کپی کد');
+    btn.setAttribute('title', 'کپی کد');
+    btn.setAttribute('type', 'button');
+    btn.innerHTML = copySvg;
+    pre.appendChild(btn);
 
     btn.addEventListener('click', async () => {
-      await navigator.clipboard.writeText(block.textContent);
-      btn.classList.add('copied');
-      setTimeout(() => btn.classList.remove('copied'), 1500);
-    });
-  });
-  </script>
-
-  <script>
-  document.body.dataset.page = window.location.pathname;
-
-  const menuBtn = document.querySelector(".menu-toggle");
-  const nav = document.querySelector(".nav");
-
-  if (menuBtn && nav) {
-    menuBtn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      nav.classList.toggle("show");
-    });
-
-    document.addEventListener("click", (e) => {
-      const clickedInsideNav = nav.contains(e.target);
-      const clickedMenuButton = menuBtn.contains(e.target);
-      if (!clickedInsideNav && !clickedMenuButton) {
-        nav.classList.remove("show");
+      try {
+        await navigator.clipboard.writeText(block.textContent);
+        btn.classList.add('copied');
+        btn.innerHTML = okSvg;
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          btn.innerHTML = copySvg;
+        }, 1800);
+      } catch (err) {
+        console.error('Copy failed:', err);
       }
     });
-  }
-  </script>
-
-  <script>
-    document.getElementById('y').textContent = new Date().getFullYear();
-  </script>
-  <script>
-document.getElementById("openDonate").addEventListener("click", () => {
-  document.getElementById("donateModal").style.display = "block";
-});
-document.getElementById("closeDonate").addEventListener("click", () => {
-  document.getElementById("donateModal").style.display = "none";
-});
-document.querySelectorAll(".copy-btn").forEach(btn => {
-  btn.addEventListener("click", () => {
-    navigator.clipboard.writeText(btn.dataset.copy);
-  
-    setTimeout(() => (btn.textContent = "کپی"), 2000);
   });
-});
-</script>
+  </script> <script>
+  (() => {
+    const article = document.getElementById('chapterArticle');
+    if (!article) return;
 
-</body>
-</html>
+    const progressBar = document.getElementById('readingProgressBar');
+    if (progressBar) {
+      window.addEventListener('scroll', () => {
+        const docElem = document.documentElement;
+        const totalHeight = docElem.scrollHeight - docElem.clientHeight;
+        if (totalHeight > 0) {
+          const progress = (window.pageYOffset / totalHeight) * 100;
+          progressBar.style.width = Math.min(100, Math.max(0, progress)) + '%';
+        }
+      }, { passive: true });
+    }
+
+    const btt = document.getElementById('backToTopBtn');
+    if (btt) {
+      window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 250) {
+          btt.classList.add('visible');
+        } else {
+          btt.classList.remove('visible');
+        }
+      }, { passive: true });
+
+      btt.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+
+    article.querySelectorAll('img').forEach(img => {
+      if (!img.hasAttribute('loading')) img.loading = 'lazy';
+      if (!img.hasAttribute('decoding')) img.decoding = 'async';
+      const parent = img.parentElement;
+      if (parent && parent.tagName === 'P') {
+        parent.style.textAlign = 'center';
+      }
+
+      img.addEventListener('error', function() {
+        const src = this.getAttribute('src');
+        if (src && src.includes('assets/image/')) {
+          const parts = src.split('assets/image/');
+          const corrected = '/Gitab/books/book4/assets/image/' + parts[1];
+          if (this.src !== corrected) {
+            this.src = corrected;
+          }
+        }
+      });
+    });
+
+    article.querySelectorAll('p').forEach(p => {
+      const trimmed = p.innerText.trim();
+      if (trimmed.startsWith('💡') || trimmed.startsWith('نکته:')) {
+        p.classList.add('react-callout', 'callout-tip');
+      } else if (trimmed.startsWith('⚠️') || trimmed.startsWith('هشدار:')) {
+        p.classList.add('react-callout', 'callout-warning');
+      } else if (trimmed.startsWith('📌') || trimmed.startsWith('مهم:')) {
+        p.classList.add('react-callout', 'callout-important');
+      } else if (trimmed.startsWith('🔹') || trimmed.startsWith('🔸')) {
+        p.classList.add('react-callout', 'callout-note');
+      }
+    });
+  })();
+  </script> <script type="speculationrules">{"prefetch":[{"where":{"and":[{"href_matches":"/Gitab/*"},{"not":{"href_matches":"/Gitab/downloads/*"}},{"not":{"selector_matches":"[download], [target='_blank']"}}]},"eagerness":"moderate"}]}</script> <script>
+  (() => {
+    if (window.HTMLScriptElement && HTMLScriptElement.supports && HTMLScriptElement.supports('speculationrules')) return;
+    const seen = new Set([window.location.href]);
+    let count = 0;
+    const prefetchLink = (e) => {
+      if (count >= 12) return;
+      const a = e.target && e.target.closest ? e.target.closest('header a, .chapter-single-next-nav a, .syllabus-chapter-item a, .btn-hero-read, .btn-card-read') : null;
+      if (!a || !a.href || a.hasAttribute('download') || a.target === '_blank') return;
+      if (a.origin !== window.location.origin || a.pathname.includes('/downloads/')) return;
+      const clean = a.href.split('#')[0];
+      if (!clean || seen.has(clean)) return;
+      seen.add(clean);
+      count++;
+      const l = document.createElement('link');
+      l.rel = 'prefetch';
+      l.href = clean;
+      document.head.appendChild(l);
+    };
+    document.addEventListener('pointerenter', prefetchLink, { capture: true, passive: true });
+    document.addEventListener('touchstart', prefetchLink, { capture: true, passive: true });
+  })();
+  </script></body></html>

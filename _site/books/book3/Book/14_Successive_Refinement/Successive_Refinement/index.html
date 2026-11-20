@@ -1,84 +1,18 @@
-
-
-<!doctype html>
-<html lang="fa" dir="rtl">
-<head>
-  <meta charset="utf-8">
-  <link rel="icon" type="image/png" href="/Gitab/favicon.png">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>بهبود تدریجی</title>
-  <meta name="description" content="ترجمه‌های فارسی کتاب‌های فنی — سریع، مینیمال و قابل اتکا.">
-
-  <!-- استایل‌ها -->
-  <link rel="stylesheet" href="/Gitab/styles/main.css">
-  <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
-
-  <style>
-  @font-face {
-    font-family: 'Vazir';
-    src: url('/Gitab/fonts/Vazir-FD-WOL.ttf') format('truetype');
-    font-display: swap;
-  }
-  @font-face {
-    font-family: "Lalezar";
-    src: url('fonts/Lalezar.ttf') format('truetype');
-    font-display: swap;
-}
-  body {
-    font-family: 'Vazir', sans-serif;
-  }
-  </style>
-</head>
-
-<body>
-  <!-- هدر مشترک -->
-  <header class="header">
-    <div class="container nav-wrap">
-      <a href="/Gitab/" class="brand">
-        <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="26" height="26">
-        <span>Gitab</span>
-      </a>
-
-       <nav class="nav">
-         <a href="/Gitab/" >خانه</a>
-         <a href="/Gitab/books/list-books" >کتاب‌ها</a>
-         <a href="/Gitab/giter.html" >دوره ها</a>
-          <!-- 
-         <a href="/Gitab/translator.html" >مترجمین</a>
-           -->
-       </nav>
-
-      <div class="nav-actions">
-        <button id="themeToggle" class="icon-btn theme-btn" data-icon="moon" aria-label="تغییر تم">
-          <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن">
-          <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک">
-        </button>
-
-        <a class="icon-btn" href="https://github.com/hheydarian/Gitab" target="_blank" title="GitHub">
-          <img src="/Gitab/icone/github.svg" alt="GitHub">
-        </a>
-
-        <!-- دکمه منو برای موبایل -->
-        <button class="menu-toggle" aria-label="منو">
-          <img src="/Gitab/icone/menu.svg" alt="menu">
-        </button>
-      </div>
-    </div>
-  </header>
-
-  
-  <main class="site-main book-page">
-    <h1>بهبود تدریجی</h1>
-<p>Case Study of a Command-Line Argument Parser</p>
-<p><img src="../../../assets/image/14/img-14.1.png" alt="image"></p>
-<div dir="rtl">
-<p>این فصل یک مطالعهٔ موردی در زمینهٔ بهبود تدریجی است. در ابتدا ماژولی را می‌بینید که شروع خوبی داشت، اما به خوبی مقیاس‌پذیر نبود. سپس خواهید دید که این ماژول چگونه  refactor و تمیز شد.</p>
-<p>بیشتر ما گاهی مجبور شده‌ایم که آرگومان‌های خط فرمان (command-line arguments) را پردازش کنیم. اگر ابزار مناسبی در دسترس نداشته باشیم، معمولاً آرایه‌ای از رشته‌ها را که به تابع <code>main</code> پاس داده می‌شود، پیمایش می‌کنیم. ابزارهای خوبی از منابع مختلف برای این کار وجود دارد، اما هیچ‌کدام دقیقاً آن کاری را نمی‌کنند که من می‌خواهم. بنابراین، تصمیم گرفتم ابزار خودم را بنویسم. اسمش را گذاشتم: <code>Args</code>.</p>
-<p>استفاده از <code>Args</code> بسیار ساده است. کافی است شیئی از کلاس <code>Args</code> را با آرگومان‌های ورودی و یک رشتهٔ قالب (format string) بسازید و سپس از طریق آن شیء، مقادیر آرگومان‌ها را استخراج کنید. به مثال سادهٔ زیر توجه کنید:</p>
-</div>
-<p>Listing 14-1</p>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span> <span class="hljs-params">(String[] args)</span>
+<!doctype html><html lang="fa" dir="rtl"> <head><script>
+    if (window.location.pathname.startsWith('/gitab/')) {
+      window.location.replace(window.location.pathname.replace(/^\/gitab\//i, '/Gitab/') + window.location.search + window.location.hash);
+    }
+    (() => {
+      try {
+        const t = localStorage.getItem('gitab-theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', t);
+        document.documentElement.dataset.colorMode = t;
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        document.documentElement.dataset.colorMode = 'dark';
+      }
+    })();
+  </script> <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5"> <title>بهبود تدریجی</title><meta name="description" content="بهبود تدریجی — مطالعه آنلاین و رایگان از کتاب «کد تمیز (عمو باب)» (Clean Code) اثر Robert C. Martin با ترجمه مجتبی افراز در گیتاب."> <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"><meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"> <meta name="theme-color" content="#090d16"><meta name="referrer" content="strict-origin-when-cross-origin"> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https:; frame-src https://www.youtube.com https://www.youtube-nocookie.com https://maps.google.com https://www.google.com; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self';"><link rel="icon" type="image/png" href="/Gitab/favicon.png"> <link rel="canonical" href="https://hheydarian.github.io/Gitab/books/book3/Book/14_Successive_Refinement/Successive_Refinement/"><link rel="alternate" hreflang="fa" href="https://hheydarian.github.io/Gitab/books/book3/Book/14_Successive_Refinement/Successive_Refinement/"> <link rel="alternate" hreflang="x-default" href="https://hheydarian.github.io/Gitab/books/book3/Book/14_Successive_Refinement/Successive_Refinement/"><link rel="alternate" type="text/plain" title="LLMs.txt" href="/Gitab/llms.txt"> <link rel="sitemap" type="application/xml" title="Sitemap" href="/Gitab/sitemap.xml"><meta property="og:locale" content="fa_IR"> <meta property="og:type" content="article"><meta property="og:site_name" content="گیتاب | Gitab"> <meta property="og:title" content="بهبود تدریجی"><meta property="og:description" content="بهبود تدریجی — مطالعه آنلاین و رایگان از کتاب «کد تمیز (عمو باب)» (Clean Code) اثر Robert C. Martin با ترجمه مجتبی افراز در گیتاب."> <meta property="og:url" content="https://hheydarian.github.io/Gitab/books/book3/Book/14_Successive_Refinement/Successive_Refinement/"><meta property="og:image" content="https://hheydarian.github.io/Gitab/images/clean-code/Cover.webp"> <meta property="og:image:alt" content="بهبود تدریجی"><meta name="twitter:card" content="summary_large_image"> <meta name="twitter:title" content="بهبود تدریجی"><meta name="twitter:description" content="بهبود تدریجی — مطالعه آنلاین و رایگان از کتاب «کد تمیز (عمو باب)» (Clean Code) اثر Robert C. Martin با ترجمه مجتبی افراز در گیتاب."> <meta name="twitter:image" content="https://hheydarian.github.io/Gitab/images/clean-code/Cover.webp"><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://hheydarian.github.io/Gitab/#organization","name":"گیتاب | Gitab","alternateName":"Gitab","url":"https://hheydarian.github.io/Gitab/","logo":{"@type":"ImageObject","url":"https://hheydarian.github.io/Gitab/favicon.png"},"sameAs":["https://github.com/hheydarian/Gitab"]},{"@type":"WebSite","@id":"https://hheydarian.github.io/Gitab/#website","url":"https://hheydarian.github.io/Gitab/","name":"گیتاب | Gitab","inLanguage":"fa-IR","publisher":{"@id":"https://hheydarian.github.io/Gitab/#organization"},"potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://hheydarian.github.io/Gitab/books/list-books/?q={search_term_string}"},"query-input":"required name=search_term_string"}},{"@type":"WebPage","@id":"https://hheydarian.github.io/Gitab/books/book3/Book/14_Successive_Refinement/Successive_Refinement/#webpage","url":"https://hheydarian.github.io/Gitab/books/book3/Book/14_Successive_Refinement/Successive_Refinement/","name":"بهبود تدریجی","description":"بهبود تدریجی — مطالعه آنلاین و رایگان از کتاب «کد تمیز (عمو باب)» (Clean Code) اثر Robert C. Martin با ترجمه مجتبی افراز در گیتاب.","inLanguage":"fa-IR","isPartOf":{"@id":"https://hheydarian.github.io/Gitab/#website"}},{"@type":"TechArticle","headline":"بهبود تدریجی","description":"بهبود تدریجی — مطالعه آنلاین و رایگان از کتاب «کد تمیز (عمو باب)» (Clean Code) اثر Robert C. Martin با ترجمه مجتبی افراز در گیتاب.","url":"https://hheydarian.github.io/Gitab/books/book3/Book/14_Successive_Refinement/Successive_Refinement/","inLanguage":"fa-IR","isAccessibleForFree":true,"author":{"@type":"Person","name":"Robert C. Martin"},"translator":{"@type":"Person","name":"مجتبی افراز"},"isPartOf":{"@type":"Book","name":"کد تمیز (عمو باب)","alternateName":"Clean Code","url":"https://hheydarian.github.io/Gitab/books/book3/"}}]}</script> <link rel="preload" href="/Gitab/fonts/Vazirmatn.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/Gitab/styles/main.css?v=2.4" as="style"> <link rel="preload" href="/Gitab/styles/gitab-modern.css?v=2.5" as="style"><style>@font-face{font-family:'Lalezar';src:url('/Gitab/fonts/Lalezar.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}@font-face{font-family:'Vazirmatn';src:url('/Gitab/fonts/Vazirmatn.woff2') format('woff2');font-weight:100 900;font-style:normal;font-display:swap}html,body,button,input,optgroup,select,textarea,.filter-pill{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}input::placeholder,textarea::placeholder{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}</style> <link rel="stylesheet" href="/Gitab/styles/main.css?v=2.4"><link rel="stylesheet" href="/Gitab/styles/gitab-modern.css?v=2.5"> <link rel="stylesheet" href="/Gitab/styles/vendor/github-dark.min.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="/Gitab/styles/vendor/github-dark.min.css"></noscript></head> <body><header class="header"> <div class="container nav-wrap"><a href="/Gitab/" class="brand" aria-label="صفحه اصلی گیتاب"> <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="30" height="30" decoding="async"> <span class="brand-text">Gitab</span> </a> <nav class="nav" id="mainNav"><a href="/Gitab/" >خانه</a> <a href="/Gitab/books/list-books" aria-current="page">کتاب‌ها</a> <a href="/Gitab/courses/" >دوره‌ها</a> <a href="/Gitab/translator.html" >مترجمین</a></nav> <div class="nav-actions"><button id="themeToggle" class="theme-toggle-btn" aria-label="تغییر تم" title="تغییر تم"> <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن" width="18" height="18" decoding="async" style="display:none"> <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک" width="18" height="18" decoding="async"> </button> <a class="btn-github-pill" href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" title="مشاهده سورس گیتاب در گیت‌هاب"> <img src="/Gitab/icone/github.svg" alt="GitHub" width="16" height="16" decoding="async"> <span>گیت‌هاب</span> </a> <button class="mobile-menu-btn" id="mobileMenuBtn" type="button" aria-label="باز کردن منو" aria-expanded="false"> <svg class="mob-icon-open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="4" y1="7" x2="20" y2="7"></line> <line x1="4" y1="12" x2="20" y2="12"></line> <line x1="4" y1="17" x2="14" y2="17"></line> </svg> <svg class="mob-icon-close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="18" y1="6" x2="6" y2="18"></line> <line x1="6" y1="6" x2="18" y2="18"></line> </svg> </button></div> </div><div class="mobile-drawer" id="mobileDrawer" aria-hidden="true"> <div class="mobile-drawer-inner"><div class="mobile-drawer-section-label">ناوبری سریع</div><nav class="mobile-drawer-links" aria-label="منوی موبایل"> <a href="/Gitab/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M3 10.5 12 3l9 7.5"></path> <path d="M5 9.5V20a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V9.5"></path> </svg> </span> <span class="mob-nav-text">صفحه نخست</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/books/list-books" class="mobile-drawer-link active" aria-current="page"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path> </svg> </span> <span class="mob-nav-text">کتابخانه و فهرست کتاب‌ها</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/courses/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path> <path d="M6 12v5c3 3 9 3 12 0v-5"></path> </svg> </span> <span class="mob-nav-text">دوره‌های آموزشی</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/translator.html" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path> <circle cx="9" cy="7" r="4"></circle> <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path> <path d="M16 3.13a4 4 0 0 1 0 7.75"></path> </svg> </span> <span class="mob-nav-text">مترجمین و همکاران</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> </nav><div class="mobile-drawer-divider"></div><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" class="mobile-drawer-link mobile-drawer-gh"> <span class="mob-nav-icon" aria-hidden="true"> <img src="/Gitab/icone/github.svg" alt="" width="17" height="17" loading="lazy" decoding="async"> </span> <span class="mob-nav-text">مخزن گیت‌هاب پروژه</span> <span class="mob-nav-ext" aria-hidden="true">↗</span> </a> </div></div> </header><div class="reading-progress-track"> <div class="reading-progress-fill" id="readingProgressBar"></div></div> <main class="site-main chapter-reading-page"><div class="chapter-page-wrapper"> <nav class="chapter-clean-breadcrumb" aria-label="مسیر راهنما" dir="rtl"><a href="/Gitab/">خانه</a> <span class="bc-sep" aria-hidden="true">/</span> <a href="/Gitab/books/list-books/">کتاب‌ها</a> <span class="bc-sep" aria-hidden="true">/</span> <a href="/Gitab/books/book3/"><bdi>کد تمیز</bdi></a> <span class="bc-sep" aria-hidden="true">/</span> <span class="bc-current-leaf"><bdi>بهبود تدریجی</bdi></span></nav> <article class="chapter-prose-container markdown-body" id="chapterArticle" dir="rtl"><h1>بهبود تدریجی</h1><p>Case Study of a Command-Line Argument Parser</p><p><img src="../../../assets/image/14/img-14.1.png" alt="image" loading="lazy" decoding="async"></p><div dir="rtl"> <p>این فصل یک مطالعهٔ موردی در زمینهٔ بهبود تدریجی است. در ابتدا ماژولی را می‌بینید که شروع خوبی داشت، اما به خوبی مقیاس‌پذیر نبود. سپس خواهید دید که این ماژول چگونه refactor و تمیز شد.</p><p>بیشتر ما گاهی مجبور شده‌ایم که آرگومان‌های خط فرمان (command-line arguments) را پردازش کنیم. اگر ابزار مناسبی در دسترس نداشته باشیم، معمولاً آرایه‌ای از رشته‌ها را که به تابع <code>main</code> پاس داده می‌شود، پیمایش می‌کنیم. ابزارهای خوبی از منابع مختلف برای این کار وجود دارد، اما هیچ‌کدام دقیقاً آن کاری را نمی‌کنند که من می‌خواهم. بنابراین، تصمیم گرفتم ابزار خودم را بنویسم. اسمش را گذاشتم: <code>Args</code>.</p><p>استفاده از <code>Args</code> بسیار ساده است. کافی است شیئی از کلاس <code>Args</code> را با آرگومان‌های ورودی و یک رشتهٔ قالب (format string) بسازید و سپس از طریق آن شیء، مقادیر آرگومان‌ها را استخراج کنید. به مثال سادهٔ زیر توجه کنید:</p></div> <p>Listing 14-1</p><pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span> <span class="hljs-params">(String[] args)</span>
 {
     <span class="hljs-keyword">try</span>
         {
@@ -93,17 +27,7 @@
             System.out.printf (<span class="hljs-string">&quot;Argument error: %s\n&quot;</span>, e.errorMessage ());
         }
 }
-</code></pre>
-<div dir="rtl">
-<p>می‌بینید که استفاده از این ابزار چقدر ساده است. فقط کافی است یک نمونه از کلاس <code>Args</code> با دو پارامتر ایجاد کنیم. پارامتر اول، یک رشتهٔ قالب (یا شِما – schema) است: <code>&quot;l,p#,d*&quot;</code> که سه آرگومان خط فرمان را تعریف می‌کند. اولین آرگومان -l یک آرگومان بولی (<code>boolean</code>) است. دومی -p یک آرگومان عددی (<code>integer</code>) است. سومی -d یک آرگومان رشته‌ای (<code>string</code>) است.</p>
-<p>پارامتر دوم سازندهٔ <code>Args</code> همان آرایه‌ای از آرگومان‌های خط فرمان است که به تابع <code>main</code> پاس داده شده.</p>
-<p>اگر سازنده بدون پرتاب (<code>throw</code>) کردن یک استثنای <code>ArgsException</code> اجرا شود، یعنی ورودی خط فرمان به‌درستی تجزیه شده و شیء Args آمادهٔ پرس‌وجو است. متدهایی مثل <code>getBoolean،</code> <code>getInteger</code> و <code>getString</code> به ما امکان می‌دهند مقدار آرگومان‌ها را بر اساس نامشان دریافت کنیم.</p>
-<p>اگر مشکلی در رشتهٔ قالب یا خود آرگومان‌های خط فرمان وجود داشته باشد، یک استثنای (exception) از نوع <code>ArgsException</code> پرتاب می‌شود. با استفاده از متد errorMessage در این استثنا، می‌توان توضیح دقیقی از خطا دریافت کرد.</p>
-<h2>پیاده‌سازی <code>Args</code></h2>
-<p>Listing 14-2 پیاده‌سازی کلاس <code>Args</code> را نشان می‌دهد. لطفاً آن را با دقت مطالعه کنید. من برای سبک و ساختار آن تلاش زیادی کرده‌ام و امیدوارم ارزش الگوبرداری داشته باشد.</p>
-</div>
-<p>Listing 14-2</p>
-<pre class="hljs"><code><span class="hljs-keyword">package</span> com.objectmentor.utilities.args;
+</code></pre> <div dir="rtl"><p>می‌بینید که استفاده از این ابزار چقدر ساده است. فقط کافی است یک نمونه از کلاس <code>Args</code> با دو پارامتر ایجاد کنیم. پارامتر اول، یک رشتهٔ قالب (یا شِما – schema) است: <code>&quot;l,p#,d*&quot;</code> که سه آرگومان خط فرمان را تعریف می‌کند. اولین آرگومان -l یک آرگومان بولی (<code>boolean</code>) است. دومی -p یک آرگومان عددی (<code>integer</code>) است. سومی -d یک آرگومان رشته‌ای (<code>string</code>) است.</p><p>پارامتر دوم سازندهٔ <code>Args</code> همان آرایه‌ای از آرگومان‌های خط فرمان است که به تابع <code>main</code> پاس داده شده.</p><p>اگر سازنده بدون پرتاب (<code>throw</code>) کردن یک استثنای <code>ArgsException</code> اجرا شود، یعنی ورودی خط فرمان به‌درستی تجزیه شده و شیء Args آمادهٔ پرس‌وجو است. متدهایی مثل <code>getBoolean،</code> <code>getInteger</code> و <code>getString</code> به ما امکان می‌دهند مقدار آرگومان‌ها را بر اساس نامشان دریافت کنیم.</p><p>اگر مشکلی در رشتهٔ قالب یا خود آرگومان‌های خط فرمان وجود داشته باشد، یک استثنای (exception) از نوع <code>ArgsException</code> پرتاب می‌شود. با استفاده از متد errorMessage در این استثنا، می‌توان توضیح دقیقی از خطا دریافت کرد.</p><h2>پیاده‌سازی <code>Args</code></h2><p>Listing 14-2 پیاده‌سازی کلاس <code>Args</code> را نشان می‌دهد. لطفاً آن را با دقت مطالعه کنید. من برای سبک و ساختار آن تلاش زیادی کرده‌ام و امیدوارم ارزش الگوبرداری داشته باشد.</p></div> <p>Listing 14-2</p><pre class="hljs"><code><span class="hljs-keyword">package</span> com.objectmentor.utilities.args;
 <span class="hljs-keyword">import</span> <span class="hljs-keyword">static</span> com.objectmentor.utilities.args.ArgsException.ErrorCode.*;
 
 <span class="hljs-keyword">import</span> java.util.*;
@@ -234,19 +158,11 @@
         <span class="hljs-keyword">return</span> StringArrayArgumentMarshaler.getValue (marshalers.get (arg));
     }
 }
-</code></pre>
-<div dir="rtl">
-<p>توجه کنید که می‌توانید این کد را از بالا به پایین بخوانید، بدون اینکه مجبور شوید زیاد بین بخش‌های مختلف جابه‌جا شوید یا به جلو بپرید. تنها چیزی که شاید نیاز داشته باشید جلوتر ببینید، تعریف <code>ArgumentMarshaler</code> است که عمداً آن را حذف کرده‌ام. اگر این کد را با دقت خوانده باشید، باید متوجه شده باشید که رابط (interface) <code>ArgumentMarshaler</code> چیست و پیاده‌سازی‌های مختلف آن چه کاری انجام می‌دهند.</p>
-<p>الان چند نمونه از آن‌ها را به شما نشان می‌دهم.</p>
-</div>
-<p>Listing 14-3 - ArgumentMarshaler.java</p>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">ArgumentMarshaler</span>
+</code></pre> <div dir="rtl"><p>توجه کنید که می‌توانید این کد را از بالا به پایین بخوانید، بدون اینکه مجبور شوید زیاد بین بخش‌های مختلف جابه‌جا شوید یا به جلو بپرید. تنها چیزی که شاید نیاز داشته باشید جلوتر ببینید، تعریف <code>ArgumentMarshaler</code> است که عمداً آن را حذف کرده‌ام. اگر این کد را با دقت خوانده باشید، باید متوجه شده باشید که رابط (interface) <code>ArgumentMarshaler</code> چیست و پیاده‌سازی‌های مختلف آن چه کاری انجام می‌دهند.</p><p>الان چند نمونه از آن‌ها را به شما نشان می‌دهم.</p></div> <p>Listing 14-3 - ArgumentMarshaler.java</p><pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">ArgumentMarshaler</span>
 {
     <span class="hljs-keyword">void</span> <span class="hljs-title function_">set</span> <span class="hljs-params">(Iterator&lt;String&gt; currentArgument)</span> <span class="hljs-keyword">throws</span> ArgsException;
 }
-</code></pre>
-<p>Listing 14-4 - BooleanArgumentMarshaler.java</p>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">BooleanArgumentMarshaler</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">ArgumentMarshaler</span>
+</code></pre> <p>Listing 14-4 - BooleanArgumentMarshaler.java</p><pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">BooleanArgumentMarshaler</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">ArgumentMarshaler</span>
 {
     <span class="hljs-keyword">private</span> <span class="hljs-type">boolean</span> <span class="hljs-variable">booleanValue</span> <span class="hljs-operator">=</span> <span class="hljs-literal">false</span>;
     <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span>
@@ -263,9 +179,7 @@
             <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
     }
 }
-</code></pre>
-<p>Listing 14-5 - StringArgumentMarshaler.java</p>
-<pre class="hljs"><code><span class="hljs-keyword">import</span> <span class="hljs-keyword">static</span> com.objectmentor.utilities.args.ArgsException.ErrorCode.*;
+</code></pre> <p>Listing 14-5 - StringArgumentMarshaler.java</p><pre class="hljs"><code><span class="hljs-keyword">import</span> <span class="hljs-keyword">static</span> com.objectmentor.utilities.args.ArgsException.ErrorCode.*;
 <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">StringArgumentMarshaler</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">ArgumentMarshaler</span>
 {
     <span class="hljs-keyword">private</span> <span class="hljs-type">String</span> <span class="hljs-variable">stringValue</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;&quot;</span>;
@@ -290,9 +204,7 @@
             <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;&quot;</span>;
     }
 }
-</code></pre>
-<p>Listing 14-6 - IntegerArgumentMarshaler.java</p>
-<pre class="hljs"><code><span class="hljs-keyword">import</span> <span class="hljs-keyword">static</span> com.objectmentor.utilities.args.ArgsException.ErrorCode.*;
+</code></pre> <p>Listing 14-6 - IntegerArgumentMarshaler.java</p><pre class="hljs"><code><span class="hljs-keyword">import</span> <span class="hljs-keyword">static</span> com.objectmentor.utilities.args.ArgsException.ErrorCode.*;
 <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">IntegerArgumentMarshaler</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">ArgumentMarshaler</span>
 {
     <span class="hljs-keyword">private</span> <span class="hljs-type">int</span> <span class="hljs-variable">intValue</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
@@ -323,13 +235,7 @@
             <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
     }
 }
-</code></pre>
-<div dir="rtl">
-<p>سایر مشتق‌های <code>ArgumentMarshaler</code> هم به همین سبک برای <code>double</code> ‌ها و آرایه‌های رشته‌ای <code>(String[])</code> پیاده‌سازی شده‌اند و فقط باعث شلوغی این فصل می‌شوند. آن‌ها را به‌عنوان تمرین به شما واگذار می‌کنم.</p>
-<p>ممکن است یک نکتهٔ دیگر ذهن شما را مشغول کرده باشد: تعریف ثابت‌های مربوط به کد خطا (error code constants). این موارد در کلاس <code>ArgsException</code> تعریف شده‌اند (Listing 14-7).</p>
-</div>
-<p>Listing 14-7 - ArgsException.java</p>
-<pre class="hljs"><code><span class="hljs-keyword">import</span> <span class="hljs-keyword">static</span> com.objectmentor.utilities.args.ArgsException.ErrorCode.*;
+</code></pre> <div dir="rtl"><p>سایر مشتق‌های <code>ArgumentMarshaler</code> هم به همین سبک برای <code>double</code> ‌ها و آرایه‌های رشته‌ای <code>(String[])</code> پیاده‌سازی شده‌اند و فقط باعث شلوغی این فصل می‌شوند. آن‌ها را به‌عنوان تمرین به شما واگذار می‌کنم.</p><p>ممکن است یک نکتهٔ دیگر ذهن شما را مشغول کرده باشد: تعریف ثابت‌های مربوط به کد خطا (error code constants). این موارد در کلاس <code>ArgsException</code> تعریف شده‌اند (Listing 14-7).</p></div> <p>Listing 14-7 - ArgsException.java</p><pre class="hljs"><code><span class="hljs-keyword">import</span> <span class="hljs-keyword">static</span> com.objectmentor.utilities.args.ArgsException.ErrorCode.*;
 <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ArgsException</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Exception</span>
 {
     <span class="hljs-keyword">private</span> <span class="hljs-type">char</span> <span class="hljs-variable">errorArgumentId</span> <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;\0&#x27;</span>;
@@ -432,28 +338,7 @@
         INVALID_DOUBLE
     }
 }
-</code></pre>
-<div dir="rtl">
-<p>جالبه که ببینیم برای پیاده‌سازی جزئیات چنین مفهوم ساده‌ای، این‌همه کد لازم شده. یکی از دلایلش اینه که ما از زبانی استفاده می‌کنیم که به‌طور خاص پرحرفه! جاوا، به‌عنوان یک زبان ایستا از نظر نوع‌دهی (statically typed)، مجبورمون می‌کنه که برای راضی کردن سیستم نوع‌دهی، کد زیادی بنویسیم. در زبان‌هایی مثل <code>Ruby،</code> <code>Python</code> یا <code>Smalltalk،</code> این برنامه بسیار جمع‌وجورتر می‌شد.</p>
-<p>لطفاً یک بار دیگه این کد رو با دقت بخونید. به نام‌گذاری‌ها، اندازهٔ توابع، و قالب‌بندی کد توجه ویژه‌ای داشته باشید. اگر یک برنامه‌نویس با تجربه باشید، ممکنه به بعضی از سبک‌ها یا ساختارهای استفاده‌شده انتقادهایی داشته باشید. اما در کل، امیدوارم به این نتیجه برسید که این برنامه به‌خوبی نوشته شده و ساختار تمیزی دارد.</p>
-<p>برای مثال، باید کاملاً مشخص باشه که چطور می‌تونید یک نوع آرگومان جدید، مثل تاریخ (Date) یا عدد مختلط (Complex Number) اضافه کنید و این کار چقدر ساده خواهد بود. در واقع، برای این کار فقط باید:</p>
-<p>یک زیرکلاس جدید از <code>ArgumentMarshaler</code> تعریف کنید،</p>
-<p>یک تابع <code>getXXX</code> جدید بنویسید،</p>
-<p>و یک case جدید به تابع <code>parseSchemaElement</code> اضافه کنید.<br>
-احتمالاً باید یک <code>ArgsException</code>.<code>ErrorCode</code> جدید هم اضافه بشه و یک پیام خطای جدید هم برایش تعریف بشه.</p>
-<h2>چطور این کار رو انجام دادم؟</h2>
-<p>بذارید خیالتون رو راحت کنم: من این برنامه رو به‌صورت یکجا، از اول تا آخر، توی همین فرم نهایی ننوشتم. مهم‌تر از اون، انتظار ندارم که شما هم بتونید برنامه‌های تمیز و شسته‌رفته‌ای رو در یک‌بار نوشتن تولید کنید.<br>
-اگر از چند دهه گذشته چیزی یاد گرفته باشیم، اینه که برنامه‌نویسی بیشتر یک مهارته تا یک علم. برای نوشتن کد تمیز، باید اول کد کثیف بنویسید و بعد اون رو تمیز کنید.</p>
-<p>این نباید براتون تعجب‌آور باشه. ما این حقیقت رو توی مدرسه یاد گرفتیم، وقتی معلم‌هامون (معمولاً بی‌نتیجه!) سعی می‌کردن ما رو قانع کنن که پیش‌نویس‌های اولیه بنویسیم.<br>
-فرآیندش، همون‌طور که می‌گفتن، این بود که باید یک پیش‌نویس بنویسیم، بعد نسخهٔ دوم، و بعد چند نسخهٔ بعدی، تا برسیم به نسخهٔ نهایی.<br>
-اون‌ها سعی داشتن بهمون بگن که نوشتن یک متن تمیز، فرایندی از پالایش گام‌به‌گام (successive refinement) است.</p>
-<p>بیشتر برنامه‌نویس‌های تازه‌کار (مثل بیشتر دانش‌آموزها) خیلی خوب این توصیه رو رعایت نمی‌کنن. اون‌ها فکر می‌کنن هدف اصلی اینه که برنامه &quot;کار کنه&quot;. وقتی برنامه &quot;کار کرد&quot;، می‌رن سراغ کار بعدی و برنامه رو همون‌جوری که بالاخره به کار افتاده، رها می‌کنن.<br>
-اما بیشتر برنامه‌نویس‌های باتجربه می‌دونن که این کار، خودکشی حرفه‌ایه.</p>
-<h2>Args: پیش‌نویس اولیه</h2>
-<p>Listing 14-8 نسخه‌ای اولیه از کلاس <code>Args</code> رو نشون می‌ده. این نسخه &quot;کار می‌کنه&quot;، ولی به‌هم‌ریخته است.</p>
-</div>
-<p>Listing 14-8 - Args.java (first draft)</p>
-<pre class="hljs"><code><span class="hljs-keyword">import</span> java.text.ParseException;
+</code></pre> <div dir="rtl"><p>جالبه که ببینیم برای پیاده‌سازی جزئیات چنین مفهوم ساده‌ای، این‌همه کد لازم شده. یکی از دلایلش اینه که ما از زبانی استفاده می‌کنیم که به‌طور خاص پرحرفه! جاوا، به‌عنوان یک زبان ایستا از نظر نوع‌دهی (statically typed)، مجبورمون می‌کنه که برای راضی کردن سیستم نوع‌دهی، کد زیادی بنویسیم. در زبان‌هایی مثل <code>Ruby،</code> <code>Python</code> یا <code>Smalltalk،</code> این برنامه بسیار جمع‌وجورتر می‌شد.</p><p>لطفاً یک بار دیگه این کد رو با دقت بخونید. به نام‌گذاری‌ها، اندازهٔ توابع، و قالب‌بندی کد توجه ویژه‌ای داشته باشید. اگر یک برنامه‌نویس با تجربه باشید، ممکنه به بعضی از سبک‌ها یا ساختارهای استفاده‌شده انتقادهایی داشته باشید. اما در کل، امیدوارم به این نتیجه برسید که این برنامه به‌خوبی نوشته شده و ساختار تمیزی دارد.</p><p>برای مثال، باید کاملاً مشخص باشه که چطور می‌تونید یک نوع آرگومان جدید، مثل تاریخ (Date) یا عدد مختلط (Complex Number) اضافه کنید و این کار چقدر ساده خواهد بود. در واقع، برای این کار فقط باید:</p><p>یک زیرکلاس جدید از <code>ArgumentMarshaler</code> تعریف کنید،</p><p>یک تابع <code>getXXX</code> جدید بنویسید،</p><p>و یک case جدید به تابع <code>parseSchemaElement</code> اضافه کنید.<br> احتمالاً باید یک <code>ArgsException</code>.<code>ErrorCode</code> جدید هم اضافه بشه و یک پیام خطای جدید هم برایش تعریف بشه.</p><h2>چطور این کار رو انجام دادم؟</h2><p>بذارید خیالتون رو راحت کنم: من این برنامه رو به‌صورت یکجا، از اول تا آخر، توی همین فرم نهایی ننوشتم. مهم‌تر از اون، انتظار ندارم که شما هم بتونید برنامه‌های تمیز و شسته‌رفته‌ای رو در یک‌بار نوشتن تولید کنید.<br> اگر از چند دهه گذشته چیزی یاد گرفته باشیم، اینه که برنامه‌نویسی بیشتر یک مهارته تا یک علم. برای نوشتن کد تمیز، باید اول کد کثیف بنویسید و بعد اون رو تمیز کنید.</p><p>این نباید براتون تعجب‌آور باشه. ما این حقیقت رو توی مدرسه یاد گرفتیم، وقتی معلم‌هامون (معمولاً بی‌نتیجه!) سعی می‌کردن ما رو قانع کنن که پیش‌نویس‌های اولیه بنویسیم.<br> فرآیندش، همون‌طور که می‌گفتن، این بود که باید یک پیش‌نویس بنویسیم، بعد نسخهٔ دوم، و بعد چند نسخهٔ بعدی، تا برسیم به نسخهٔ نهایی.<br> اون‌ها سعی داشتن بهمون بگن که نوشتن یک متن تمیز، فرایندی از پالایش گام‌به‌گام (successive refinement) است.</p><p>بیشتر برنامه‌نویس‌های تازه‌کار (مثل بیشتر دانش‌آموزها) خیلی خوب این توصیه رو رعایت نمی‌کنن. اون‌ها فکر می‌کنن هدف اصلی اینه که برنامه &quot;کار کنه&quot;. وقتی برنامه &quot;کار کرد&quot;، می‌رن سراغ کار بعدی و برنامه رو همون‌جوری که بالاخره به کار افتاده، رها می‌کنن.<br> اما بیشتر برنامه‌نویس‌های باتجربه می‌دونن که این کار، خودکشی حرفه‌ایه.</p><h2>Args: پیش‌نویس اولیه</h2><p>Listing 14-8 نسخه‌ای اولیه از کلاس <code>Args</code> رو نشون می‌ده. این نسخه &quot;کار می‌کنه&quot;، ولی به‌هم‌ریخته است.</p></div> <p>Listing 14-8 - Args.java (first draft)</p><pre class="hljs"><code><span class="hljs-keyword">import</span> java.text.ParseException;
 <span class="hljs-keyword">import</span> java.util.*;
 <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Args</span>
 {
@@ -778,15 +663,7 @@
     {
     }
 }
-</code></pre>
-<div dir="rtl">
-<p>امیدوارم واکنش اولیه شما به این حجم کد این باشه که &quot;خوشحالم که اون رو به همین شکل رها نکرده!&quot;. اگر این احساس رو دارید، پس به یاد داشته باشید که دیگران هم همین‌طور در مورد کدی که شما به‌صورت پیش‌نویس رها می‌کنید، احساس خواهند کرد.</p>
-<p>در واقع، شاید <code>first draft</code> شاید مهربانانه‌ترین چیزی باشه که می‌تونید در مورد این کد بگید. این کد قطعاً در حال پیشرفت است. تعداد زیاد متغیرهای نمونه (instance variables) نگران‌کننده است. رشته‌های عجیب مثل <code>TILT</code>، <strong>HashSet</strong>‌ ها و <strong>TreeSet</strong>‌ ها، و بلاک‌های try-catch-catch همه با هم جمع شده‌اند و تبدیل به یک پشتهٔ عفونت‌زای (festering pile) شده‌اند.</p>
-<p>من قصد نداشتم که یک پشتهٔ عفونت‌زا بنویسم. در واقع، تلاش می‌کردم که همه چیز رو به‌طور نسبتاً سازمان‌دهی‌شده نگه دارم. احتمالاً می‌توانید این رو از انتخاب نام توابع و متغیرها و این حقیقت که برنامه ساختار نسبتاً خامی دارد، متوجه بشید. اما، واضح است که من اجازه دادم مشکل از کنترل من خارج بشه.</p>
-<p>این بهم‌ریختگی به‌تدریج ساخته شد. نسخه‌های قبلی اصلاً به این اندازه بد نبودند. برای مثال، Listing 14-9 نسخه‌ای از کد رو نشون می‌ده که تنها آرگومان‌های بولی کار می‌کردند.</p>
-</div>
-<p>Listing 14-9 - Args.java (Boolean only)</p>
-<pre class="hljs"><code><span class="hljs-keyword">package</span> com.objectmentor.utilities.getopts;
+</code></pre> <div dir="rtl"><p>امیدوارم واکنش اولیه شما به این حجم کد این باشه که &quot;خوشحالم که اون رو به همین شکل رها نکرده!&quot;. اگر این احساس رو دارید، پس به یاد داشته باشید که دیگران هم همین‌طور در مورد کدی که شما به‌صورت پیش‌نویس رها می‌کنید، احساس خواهند کرد.</p><p>در واقع، شاید <code>first draft</code> شاید مهربانانه‌ترین چیزی باشه که می‌تونید در مورد این کد بگید. این کد قطعاً در حال پیشرفت است. تعداد زیاد متغیرهای نمونه (instance variables) نگران‌کننده است. رشته‌های عجیب مثل <code>TILT</code>، <strong>HashSet</strong>‌ ها و <strong>TreeSet</strong>‌ ها، و بلاک‌های try-catch-catch همه با هم جمع شده‌اند و تبدیل به یک پشتهٔ عفونت‌زای (festering pile) شده‌اند.</p><p>من قصد نداشتم که یک پشتهٔ عفونت‌زا بنویسم. در واقع، تلاش می‌کردم که همه چیز رو به‌طور نسبتاً سازمان‌دهی‌شده نگه دارم. احتمالاً می‌توانید این رو از انتخاب نام توابع و متغیرها و این حقیقت که برنامه ساختار نسبتاً خامی دارد، متوجه بشید. اما، واضح است که من اجازه دادم مشکل از کنترل من خارج بشه.</p><p>این بهم‌ریختگی به‌تدریج ساخته شد. نسخه‌های قبلی اصلاً به این اندازه بد نبودند. برای مثال، Listing 14-9 نسخه‌ای از کد رو نشون می‌ده که تنها آرگومان‌های بولی کار می‌کردند.</p></div> <p>Listing 14-9 - Args.java (Boolean only)</p><pre class="hljs"><code><span class="hljs-keyword">package</span> com.objectmentor.utilities.getopts;
 <span class="hljs-keyword">import</span> java.util.*;
 <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Args</span>
 {
@@ -923,14 +800,7 @@
         <span class="hljs-keyword">return</span> booleanArgs.get (arg);
     }
 }
-</code></pre>
-<div dir="rtl">
-<p>با اینکه می‌توانید ایرادات زیادی در این کد پیدا کنید، اما واقعاً آنقدرها هم بد نیست. کد فشرده و ساده است و فهمیدنش راحت. با این حال، در دل این کد، به‌راحتی می‌توان بذرهای پشتهٔ عفونت‌زای بعدی را مشاهده کرد. خیلی واضح است که چطور این کد به آن بهم‌ریختگی تبدیل شد.</p>
-<p>توجه کنید که آن بهم‌ریختگی تنها دو نوع آرگومان بیشتر از این کد دارد: رشته (<code>String</code>) و عدد (<code>integer</code>). اضافه کردن تنها دو نوع آرگومان دیگر تاثیر منفی عظیمی روی کد داشت. این تغییر کد را از چیزی که می‌توانست به‌طور نسبتاً قابل نگهداری باشد، به چیزی تبدیل کرد که من انتظار دارم به زودی پر از باگ و مشکلات مختلف بشود.</p>
-<p>من این دو نوع آرگومان را به‌طور تدریجی اضافه کردم. اول، آرگومان رشته را اضافه کردم که این نتیجه را داد:</p>
-</div>
-<p>Listing 14-10 - Args.java (Boolean and String)</p>
-<pre class="hljs"><code><span class="hljs-keyword">package</span> com.objectmentor.utilities.getopts;
+</code></pre> <div dir="rtl"><p>با اینکه می‌توانید ایرادات زیادی در این کد پیدا کنید، اما واقعاً آنقدرها هم بد نیست. کد فشرده و ساده است و فهمیدنش راحت. با این حال، در دل این کد، به‌راحتی می‌توان بذرهای پشتهٔ عفونت‌زای بعدی را مشاهده کرد. خیلی واضح است که چطور این کد به آن بهم‌ریختگی تبدیل شد.</p><p>توجه کنید که آن بهم‌ریختگی تنها دو نوع آرگومان بیشتر از این کد دارد: رشته (<code>String</code>) و عدد (<code>integer</code>). اضافه کردن تنها دو نوع آرگومان دیگر تاثیر منفی عظیمی روی کد داشت. این تغییر کد را از چیزی که می‌توانست به‌طور نسبتاً قابل نگهداری باشد، به چیزی تبدیل کرد که من انتظار دارم به زودی پر از باگ و مشکلات مختلف بشود.</p><p>من این دو نوع آرگومان را به‌طور تدریجی اضافه کردم. اول، آرگومان رشته را اضافه کردم که این نتیجه را داد:</p></div> <p>Listing 14-10 - Args.java (Boolean and String)</p><pre class="hljs"><code><span class="hljs-keyword">package</span> com.objectmentor.utilities.getopts;
 <span class="hljs-keyword">import</span> java.text.ParseException;
 <span class="hljs-keyword">import</span> java.util.*;
 <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Args</span>
@@ -1171,26 +1041,7 @@
         <span class="hljs-keyword">return</span> valid;
     }
 }
-</code></pre>
-<div dir="rtl">
-<p>می‌بینید که اوضاع کم‌کم داره از کنترل خارج می‌شه. هنوز فاجعه‌بار نیست، اما بهم‌ریختگی داره کم‌کم رشد می‌کنه. فعلاً فقط یه توده‌ است، اما هنوز عفونت‌زده و فاسد نشده. اضافه شدن نوع آرگومان عددی بود که این توده رو واقعاً وارد مرحلهٔ تخمیر و فساد کرد.</p>
-<h2>پس متوقف شدم</h2>
-<p>حداقل دو نوع آرگومان دیگه هم داشتم که می‌خواستم اضافه کنم، اما مشخص بود که اوضاع رو خیلی بدتر خواهند کرد. اگر بی‌مهابا جلو می‌رفتم، احتمالاً می‌تونستم کاری کنم که درست کار کنن، اما پشت سرم یه آشوب بزرگی باقی می‌ذاشتم که دیگه قابل اصلاح نبود. اگر قرار بود ساختار این کد واقعاً قابل نگهداری بمونه، الان وقت اصلاحش بود.</p>
-<p>پس افزودن قابلیت‌ها رو متوقف کردم و شروع به بازآرایی (Refactoring) کردم. چون تازه آرگومان‌های رشته‌ای و عددی رو اضافه کرده بودم، خوب می‌دونستم که هر نوع آرگومان جدید به کدهای تازه‌ای در سه نقطهٔ اصلی نیاز داره:</p>
-<p>ابتدا باید یه راهی برای تحلیل عنصر اسکیمای اون آرگومان تعریف می‌شد تا بتونم <code>HashMap</code> مخصوص اون نوع رو انتخاب کنم.</p>
-<p>بعد، اون نوع آرگومان باید در آرگومان‌های خط فرمان تجزیه (parse) می‌شد و به نوع واقعی خودش تبدیل می‌شد.</p>
-<p>در نهایت، یه متد <code>getXXX</code> مخصوص لازم بود که مقدار اون آرگومان رو به عنوان نوع واقعی خودش به کاربر برگردونه.</p>
-<p>چندین نوع مختلف که همشون متدهایی مشابه دارن — این یعنی وقتشه که یه کلاس جدید تعریف کنیم. و این‌طوری بود که مفهوم <code>ArgumentMarshaler</code> شکل گرفت.</p>
-<p>دربارهٔ رویکرد تدریجی (Incrementalism)<br>
-یکی از بدترین کارهایی که می‌تونید با یه برنامه بکنید اینه که در نام اصلاح و بهبود، تغییرات عظیم ساختاری در اون ایجاد کنید. بعضی برنامه‌ها هیچ‌وقت از این «بهبودها» جان سالم به در نمی‌برن. مشکل اینجاست که خیلی سخته برنامه‌ای رو که قبل از این تغییرات به‌درستی کار می‌کرد، دوباره دقیقاً به همون وضعیت عملکردی برسونید.</p>
-<p>برای جلوگیری از این موضوع، من از روش توسعه مبتنی بر آزمون (<code>TDD</code>) استفاده می‌کنم. یکی از اصول اصلی در این روش اینه که سیستم همیشه باید کار کنه. به‌عبارت دیگه، در <code>TDD</code> من اجازه ندارم تغییری در سیستم بدم که باعث خراب شدنش بشه. هر تغییری که اعمال می‌کنم باید سیستم رو در همون وضعیت قبلی نگه داره.</p>
-<p>برای رسیدن به این هدف، باید یه مجموعه تست خودکار داشته باشم که هر لحظه بتونم اجراش کنم تا مطمئن شم که رفتار سیستم تغییر نکرده. برای کلاس <code>Args،</code> من همزمان با ساختن همون پشتهٔ عفونت‌زا، یه مجموعه تست واحد (unit test) و تست پذیرش (acceptance test) ایجاد کرده بودم. تست‌های واحد رو با استفاده از JUnit در جاوا نوشته بودم. تست‌های پذیرش هم به صورت صفحات ویکی در <code>FitNesse</code> نوشته شده بودن.</p>
-<p>هر زمان که می‌خواستم، می‌تونستم این تست‌ها رو اجرا کنم و اگر همه‌شون پاس می‌شدن، با اطمینان می‌گفتم که سیستم همون‌طوری که انتظار دارم کار می‌کنه.</p>
-<p>پس من جلو رفتم و تعداد زیادی تغییر خیلی کوچک اعمال کردم. هر تغییر، ساختار سیستم رو به سمت مفهوم <code>ArgumentMarshaler</code> هدایت می‌کرد. و در عین حال، هر تغییر سیستم رو سالم نگه می‌داشت.</p>
-<p>اولین کاری که کردم، اضافه کردن اسکلت اولیهٔ کلاس <code>ArgumentMarshaler</code> به انتهای همون پشتهٔ عفونت‌زا بود.</p>
-</div>
-<p>Listing 14-11 - ArgumentMarshaller appended to Args.java</p>
-<pre class="hljs"><code><span class="hljs-keyword">private</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ArgumentMarshaler</span>
+</code></pre> <div dir="rtl"><p>می‌بینید که اوضاع کم‌کم داره از کنترل خارج می‌شه. هنوز فاجعه‌بار نیست، اما بهم‌ریختگی داره کم‌کم رشد می‌کنه. فعلاً فقط یه توده‌ است، اما هنوز عفونت‌زده و فاسد نشده. اضافه شدن نوع آرگومان عددی بود که این توده رو واقعاً وارد مرحلهٔ تخمیر و فساد کرد.</p><h2>پس متوقف شدم</h2><p>حداقل دو نوع آرگومان دیگه هم داشتم که می‌خواستم اضافه کنم، اما مشخص بود که اوضاع رو خیلی بدتر خواهند کرد. اگر بی‌مهابا جلو می‌رفتم، احتمالاً می‌تونستم کاری کنم که درست کار کنن، اما پشت سرم یه آشوب بزرگی باقی می‌ذاشتم که دیگه قابل اصلاح نبود. اگر قرار بود ساختار این کد واقعاً قابل نگهداری بمونه، الان وقت اصلاحش بود.</p><p>پس افزودن قابلیت‌ها رو متوقف کردم و شروع به بازآرایی (Refactoring) کردم. چون تازه آرگومان‌های رشته‌ای و عددی رو اضافه کرده بودم، خوب می‌دونستم که هر نوع آرگومان جدید به کدهای تازه‌ای در سه نقطهٔ اصلی نیاز داره:</p><p>ابتدا باید یه راهی برای تحلیل عنصر اسکیمای اون آرگومان تعریف می‌شد تا بتونم <code>HashMap</code> مخصوص اون نوع رو انتخاب کنم.</p><p>بعد، اون نوع آرگومان باید در آرگومان‌های خط فرمان تجزیه (parse) می‌شد و به نوع واقعی خودش تبدیل می‌شد.</p><p>در نهایت، یه متد <code>getXXX</code> مخصوص لازم بود که مقدار اون آرگومان رو به عنوان نوع واقعی خودش به کاربر برگردونه.</p><p>چندین نوع مختلف که همشون متدهایی مشابه دارن — این یعنی وقتشه که یه کلاس جدید تعریف کنیم. و این‌طوری بود که مفهوم <code>ArgumentMarshaler</code> شکل گرفت.</p><p>دربارهٔ رویکرد تدریجی (Incrementalism)<br> یکی از بدترین کارهایی که می‌تونید با یه برنامه بکنید اینه که در نام اصلاح و بهبود، تغییرات عظیم ساختاری در اون ایجاد کنید. بعضی برنامه‌ها هیچ‌وقت از این «بهبودها» جان سالم به در نمی‌برن. مشکل اینجاست که خیلی سخته برنامه‌ای رو که قبل از این تغییرات به‌درستی کار می‌کرد، دوباره دقیقاً به همون وضعیت عملکردی برسونید.</p><p>برای جلوگیری از این موضوع، من از روش توسعه مبتنی بر آزمون (<code>TDD</code>) استفاده می‌کنم. یکی از اصول اصلی در این روش اینه که سیستم همیشه باید کار کنه. به‌عبارت دیگه، در <code>TDD</code> من اجازه ندارم تغییری در سیستم بدم که باعث خراب شدنش بشه. هر تغییری که اعمال می‌کنم باید سیستم رو در همون وضعیت قبلی نگه داره.</p><p>برای رسیدن به این هدف، باید یه مجموعه تست خودکار داشته باشم که هر لحظه بتونم اجراش کنم تا مطمئن شم که رفتار سیستم تغییر نکرده. برای کلاس <code>Args،</code> من همزمان با ساختن همون پشتهٔ عفونت‌زا، یه مجموعه تست واحد (unit test) و تست پذیرش (acceptance test) ایجاد کرده بودم. تست‌های واحد رو با استفاده از JUnit در جاوا نوشته بودم. تست‌های پذیرش هم به صورت صفحات ویکی در <code>FitNesse</code> نوشته شده بودن.</p><p>هر زمان که می‌خواستم، می‌تونستم این تست‌ها رو اجرا کنم و اگر همه‌شون پاس می‌شدن، با اطمینان می‌گفتم که سیستم همون‌طوری که انتظار دارم کار می‌کنه.</p><p>پس من جلو رفتم و تعداد زیادی تغییر خیلی کوچک اعمال کردم. هر تغییر، ساختار سیستم رو به سمت مفهوم <code>ArgumentMarshaler</code> هدایت می‌کرد. و در عین حال، هر تغییر سیستم رو سالم نگه می‌داشت.</p><p>اولین کاری که کردم، اضافه کردن اسکلت اولیهٔ کلاس <code>ArgumentMarshaler</code> به انتهای همون پشتهٔ عفونت‌زا بود.</p></div> <p>Listing 14-11 - ArgumentMarshaller appended to Args.java</p><pre class="hljs"><code><span class="hljs-keyword">private</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ArgumentMarshaler</span>
 {
     <span class="hljs-keyword">private</span> <span class="hljs-type">boolean</span> <span class="hljs-variable">booleanValue</span> <span class="hljs-operator">=</span> <span class="hljs-literal">false</span>;
     <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">setBoolean</span><span class="hljs-params">(<span class="hljs-type">boolean</span> value)</span> { booleanValue = value; }
@@ -1203,17 +1054,9 @@
 <span class="hljs-keyword">private</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">IntegerArgumentMarshaler</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">ArgumentMarshaler</span>
 {}
 }
-</code></pre>
-<div dir="rtl">
-<p>بدیهیه که این تغییر قرار نبود چیزی رو خراب کنه. پس قدم بعدی رو برداشتم و ساده‌ترین تغییری رو اعمال کردم که می‌تونستم، طوری که کمترین آسیب ممکن رو وارد کنه. من <code>HashMap</code> مربوط به آرگومان‌های بولی (<code>Boolean</code>) رو تغییر دادم تا به جای نگهداری مقدار نهایی، یک <code>ArgumentMarshaler</code> نگه‌داری کنه.</p>
-</div>
-<pre class="hljs"><code><span class="hljs-keyword">private</span> Map&lt;Character, ArgumentMarshaler&gt; booleanArgs = 
+</code></pre> <div dir="rtl"><p>بدیهیه که این تغییر قرار نبود چیزی رو خراب کنه. پس قدم بعدی رو برداشتم و ساده‌ترین تغییری رو اعمال کردم که می‌تونستم، طوری که کمترین آسیب ممکن رو وارد کنه. من <code>HashMap</code> مربوط به آرگومان‌های بولی (<code>Boolean</code>) رو تغییر دادم تا به جای نگهداری مقدار نهایی، یک <code>ArgumentMarshaler</code> نگه‌داری کنه.</p></div> <pre class="hljs"><code><span class="hljs-keyword">private</span> Map&lt;Character, ArgumentMarshaler&gt; booleanArgs = 
     <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;Character, ArgumentMarshaler&gt;();
-</code></pre>
-<div dir="rtl">
-<p>این تغییر چند خط از کد رو خراب کرد، که من سریعاً اصلاحشون کردم.</p>
-</div>
-<pre class="hljs"><code>...
+</code></pre> <div dir="rtl"><p>این تغییر چند خط از کد رو خراب کرد، که من سریعاً اصلاحشون کردم.</p></div> <pre class="hljs"><code>...
 <span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">parseBooleanSchemaElement</span><span class="hljs-params">(<span class="hljs-type">char</span> elementId)</span> 
 {
    booleanArgs.put(elementId, <span class="hljs-keyword">new</span> <span class="hljs-title class_">BooleanArgumentMarshaler</span>());
@@ -1228,50 +1071,21 @@
 <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">getBoolean</span><span class="hljs-params">(<span class="hljs-type">char</span> arg)</span> {
    <span class="hljs-keyword">return</span> falseIfNull(booleanArgs.get(arg).getBoolean());
 }
-</code></pre>
-<div dir="rtl">
-<p>دقت کنید که این تغییرات دقیقاً در همون بخش‌هایی اعمال شدن که قبلاً هم بهشون اشاره کردم: تحلیل (<code>parse</code>)، تنظیم (<code>set</code>) و دریافت (<code>get</code>) مقدار برای نوع آرگومان.<br>
-با وجود اینکه این تغییر خیلی کوچک بود، ولی متأسفانه باعث شد بعضی از تست‌ها fail بشن.</p>
-<p>اگر به متد <code>getBoolean</code> دقت کنید، می‌بینید که اگه این تابع رو با آرگومانی مثل 'y' صدا بزنید، ولی هیچ آرگومان 'y'ای وجود نداشته باشه، اون‌وقت <code>booleanArgs.get('y')</code> مقدار <code>null</code> برمی‌گردونه و این باعث می‌شه که تابع، یه استثنای <code>NullPointerException</code> بندازه.<br>
-قبلاً برای جلوگیری از این اتفاق از تابعی به نام <code>falseIfNull</code> استفاده می‌کردم، ولی با تغییری که دادم، دیگه این تابع کارایی نداشت.</p>
-<p>رویکرد تدریجی (Incrementalism) ایجاب می‌کرد که اول همین مشکل رو برطرف کنم، قبل از اینکه تغییرات دیگه‌ای اعمال کنم.<br>
-خوشبختانه رفع این مشکل خیلی سخت نبود. فقط کافی بود بررسی null بودن رو جابه‌جا کنم — دیگه لازم نبود بررسی کنم که مقدار بولی null هست یا نه؛ باید بررسی می‌کردم که آیا <code>ArgumentMarshaler</code> موجود هست یا نه.</p>
-<p>اول از همه، فراخوانی تابع <code>falseIfNull</code> در <code>getBoolean</code> رو حذف کردم چون دیگه بی‌فایده بود، و بعد خود تابع <code>falseIfNull</code> رو هم کاملاً پاک کردم.<br>
-تست‌ها هنوز هم به همون شکل fail می‌شدن، و این یعنی با اطمینان می‌تونستم بگم که اشکال جدیدی ایجاد نکردم.</p>
-</div>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">getBoolean</span><span class="hljs-params">(<span class="hljs-type">char</span> arg)</span> 
+</code></pre> <div dir="rtl"><p>دقت کنید که این تغییرات دقیقاً در همون بخش‌هایی اعمال شدن که قبلاً هم بهشون اشاره کردم: تحلیل (<code>parse</code>)، تنظیم (<code>set</code>) و دریافت (<code>get</code>) مقدار برای نوع آرگومان.<br> با وجود اینکه این تغییر خیلی کوچک بود، ولی متأسفانه باعث شد بعضی از تست‌ها fail بشن.</p><p>اگر به متد <code>getBoolean</code> دقت کنید، می‌بینید که اگه این تابع رو با آرگومانی مثل 'y' صدا بزنید، ولی هیچ آرگومان 'y'ای وجود نداشته باشه، اون‌وقت <code>booleanArgs.get('y')</code> مقدار <code>null</code> برمی‌گردونه و این باعث می‌شه که تابع، یه استثنای <code>NullPointerException</code> بندازه.<br> قبلاً برای جلوگیری از این اتفاق از تابعی به نام <code>falseIfNull</code> استفاده می‌کردم، ولی با تغییری که دادم، دیگه این تابع کارایی نداشت.</p><p>رویکرد تدریجی (Incrementalism) ایجاب می‌کرد که اول همین مشکل رو برطرف کنم، قبل از اینکه تغییرات دیگه‌ای اعمال کنم.<br> خوشبختانه رفع این مشکل خیلی سخت نبود. فقط کافی بود بررسی null بودن رو جابه‌جا کنم — دیگه لازم نبود بررسی کنم که مقدار بولی null هست یا نه؛ باید بررسی می‌کردم که آیا <code>ArgumentMarshaler</code> موجود هست یا نه.</p><p>اول از همه، فراخوانی تابع <code>falseIfNull</code> در <code>getBoolean</code> رو حذف کردم چون دیگه بی‌فایده بود، و بعد خود تابع <code>falseIfNull</code> رو هم کاملاً پاک کردم.<br> تست‌ها هنوز هم به همون شکل fail می‌شدن، و این یعنی با اطمینان می‌تونستم بگم که اشکال جدیدی ایجاد نکردم.</p></div> <pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">getBoolean</span><span class="hljs-params">(<span class="hljs-type">char</span> arg)</span> 
 {
     <span class="hljs-keyword">return</span> booleanArgs.get(arg).getBoolean();
 }
-</code></pre>
-<div dir="rtl">
-<p>در مرحلهٔ بعد، تابع رو به دو خط تقسیم کردم و نمونهٔ <code>ArgumentMarshaler</code> رو داخل یک متغیر جداگانه به نام <code>argumentMarshaller</code> قرار دادم.<br>
-از اسم طولانی این متغیر خوشم نیومد؛ خیلی تکراری و شلوغ‌کننده بود و باعث می‌شد تابع ظاهر نامرتبی داشته باشه.<br>
-پس اسمش رو کوتاه کردم و گذاشتم <code>am</code> [یادداشت N5].</p>
-</div>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">getBoolean</span><span class="hljs-params">(<span class="hljs-type">char</span> arg)</span>
+</code></pre> <div dir="rtl"><p>در مرحلهٔ بعد، تابع رو به دو خط تقسیم کردم و نمونهٔ <code>ArgumentMarshaler</code> رو داخل یک متغیر جداگانه به نام <code>argumentMarshaller</code> قرار دادم.<br> از اسم طولانی این متغیر خوشم نیومد؛ خیلی تکراری و شلوغ‌کننده بود و باعث می‌شد تابع ظاهر نامرتبی داشته باشه.<br> پس اسمش رو کوتاه کردم و گذاشتم <code>am</code> [یادداشت N5].</p></div> <pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">getBoolean</span><span class="hljs-params">(<span class="hljs-type">char</span> arg)</span>
 {
    Args.<span class="hljs-type">ArgumentMarshaler</span> <span class="hljs-variable">am</span> <span class="hljs-operator">=</span> booleanArgs.get(arg);
    <span class="hljs-keyword">return</span> am.getBoolean();
 }
-</code></pre>
-<div dir="rtl">
-<p>و بعدش منطق تشخیص مقدار <code>null</code> رو اضافه کردم.</p>
-</div>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">getBoolean</span><span class="hljs-params">(<span class="hljs-type">char</span> arg)</span> 
+</code></pre> <div dir="rtl"><p>و بعدش منطق تشخیص مقدار <code>null</code> رو اضافه کردم.</p></div> <pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">getBoolean</span><span class="hljs-params">(<span class="hljs-type">char</span> arg)</span> 
 {
    Args.<span class="hljs-type">ArgumentMarshaler</span> <span class="hljs-variable">am</span> <span class="hljs-operator">=</span> booleanArgs.get(arg);
    <span class="hljs-keyword">return</span> am != <span class="hljs-literal">null</span> &amp;&amp; am.getBoolean();
 }
-</code></pre>
-<div dir="rtl">
-<h2>آرگومان‌های رشته‌ای (String Arguments)</h2>
-<p>اضافه کردن آرگومان‌های <code>String</code> خیلی شبیه به اضافه کردن آرگومان‌های <code>boolean</code> بود.<br>
-باید <code>HashMap</code> مربوطه رو تغییر می‌دادم و مطمئن می‌شدم که توابع <code>parse،</code> <code>set</code> و <code>get</code> به‌درستی کار می‌کنن.</p>
-<p>نباید چیز شگفت‌انگیزی در ادامه وجود داشته باشه، مگر اینکه متوجه بشید که من بخش زیادی از پیاده‌سازی <code>marshalling</code> رو در کلاس پایهٔ <code>ArgumentMarshaller</code> قرار دادم،<br>
-به‌جای اینکه این منطق رو بین کلاس‌های مشتق‌شده پخش کنم.</p>
-</div>
-<pre class="hljs"><code><span class="hljs-keyword">private</span> Map&lt;Character, ArgumentMarshaler&gt; stringArgs
+</code></pre> <div dir="rtl"><h2>آرگومان‌های رشته‌ای (String Arguments)</h2><p>اضافه کردن آرگومان‌های <code>String</code> خیلی شبیه به اضافه کردن آرگومان‌های <code>boolean</code> بود.<br> باید <code>HashMap</code> مربوطه رو تغییر می‌دادم و مطمئن می‌شدم که توابع <code>parse،</code> <code>set</code> و <code>get</code> به‌درستی کار می‌کنن.</p><p>نباید چیز شگفت‌انگیزی در ادامه وجود داشته باشه، مگر اینکه متوجه بشید که من بخش زیادی از پیاده‌سازی <code>marshalling</code> رو در کلاس پایهٔ <code>ArgumentMarshaller</code> قرار دادم،<br> به‌جای اینکه این منطق رو بین کلاس‌های مشتق‌شده پخش کنم.</p></div> <pre class="hljs"><code><span class="hljs-keyword">private</span> Map&lt;Character, ArgumentMarshaler&gt; stringArgs
     = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;Character, ArgumentMarshaler&gt; ();
 ... 
 
@@ -1327,18 +1141,7 @@
         <span class="hljs-keyword">return</span> stringValue == <span class="hljs-literal">null</span> ? <span class="hljs-string">&quot;&quot;</span> : stringValue;
     }
 }
-</code></pre>
-<div dir="rtl">
-<p>باز هم، این تغییرات یکی‌یکی و به‌صورت تدریجی انجام شدن، به‌طوری که تست‌ها همچنان قابل اجرا بودن—حتی اگر همه‌شون پاس نمی‌کردن.<br>
-هر وقت یکی از تست‌ها <code>fail</code> می‌شد، اول اونو اصلاح می‌کردم و دوباره به حالت پاس‌شده درمی‌آوردم، بعد سراغ تغییر بعدی می‌رفتم.</p>
-<p>تا اینجا احتمالاً متوجه هدف کلی من شده‌اید:<br>
-می‌خواستم تمام رفتارهای فعلی <code>marshalling</code> رو وارد کلاس پایه‌ی <code>ArgumentMarshaler</code> کنم،<br>
-و بعدش به‌تدریج این رفتارها رو به کلاس‌های مشتق‌شده انتقال بدم.<br>
-این کار باعث می‌شه برنامه در طول فرایند تغییر ساختار، همچنان کار کنه و نشکنه.</p>
-<p>گام بعدی هم مشخص بود: باید قابلیت پردازش آرگومان‌های عدد صحیح (<code>int</code>) رو به <code>ArgumentMarshaler</code> منتقل می‌کردم.<br>
-و باز هم، مثل قبل، هیچ شگفتی خاصی در این مرحله وجود نداشت.</p>
-</div>
-<pre class="hljs"><code><span class="hljs-keyword">private</span> Map&lt;Character, ArgumentMarshaler&gt; intArgs
+</code></pre> <div dir="rtl"><p>باز هم، این تغییرات یکی‌یکی و به‌صورت تدریجی انجام شدن، به‌طوری که تست‌ها همچنان قابل اجرا بودن—حتی اگر همه‌شون پاس نمی‌کردن.<br> هر وقت یکی از تست‌ها <code>fail</code> می‌شد، اول اونو اصلاح می‌کردم و دوباره به حالت پاس‌شده درمی‌آوردم، بعد سراغ تغییر بعدی می‌رفتم.</p><p>تا اینجا احتمالاً متوجه هدف کلی من شده‌اید:<br> می‌خواستم تمام رفتارهای فعلی <code>marshalling</code> رو وارد کلاس پایه‌ی <code>ArgumentMarshaler</code> کنم،<br> و بعدش به‌تدریج این رفتارها رو به کلاس‌های مشتق‌شده انتقال بدم.<br> این کار باعث می‌شه برنامه در طول فرایند تغییر ساختار، همچنان کار کنه و نشکنه.</p><p>گام بعدی هم مشخص بود: باید قابلیت پردازش آرگومان‌های عدد صحیح (<code>int</code>) رو به <code>ArgumentMarshaler</code> منتقل می‌کردم.<br> و باز هم، مثل قبل، هیچ شگفتی خاصی در این مرحله وجود نداشت.</p></div> <pre class="hljs"><code><span class="hljs-keyword">private</span> Map&lt;Character, ArgumentMarshaler&gt; intArgs
     = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;Character, ArgumentMarshaler&gt; ();
 
 <span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">parseIntegerSchemaElement</span> <span class="hljs-params">(<span class="hljs-type">char</span> elementId)</span>
@@ -1411,14 +1214,7 @@
         <span class="hljs-keyword">return</span> integerValue;
     }
 }
-</code></pre>
-<div dir="rtl">
-<p>وقتی که تمام منطق <code>marshalling</code> به کلاس پایه‌ی <code>ArgumentMarshaler</code> منتقل شد، شروع کردم به انتقال عملکردها به کلاس‌های مشتق‌شده.<br>
-اولین قدم، منتقل کردن تابع <code>setBoolean</code> به کلاس <code>BooleanArgumentMarshaller</code> بود و مطمئن شدم که این تابع به‌درستی فراخوانی می‌شه.<br>
-برای این کار، یک متد انتزاعی (<code>abstract</code>) به نام <code>set</code> ایجاد کردم.</p>
-<p>این کار پایه‌ای بود برای اینکه هر کلاس مشتق‌شده، رفتار مخصوص به خودش رو در متد <code>set</code> پیاده‌سازی کنه.</p>
-</div>
-<pre class="hljs"><code><span class="hljs-keyword">private</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ArgumentMarshaler</span> {
+</code></pre> <div dir="rtl"><p>وقتی که تمام منطق <code>marshalling</code> به کلاس پایه‌ی <code>ArgumentMarshaler</code> منتقل شد، شروع کردم به انتقال عملکردها به کلاس‌های مشتق‌شده.<br> اولین قدم، منتقل کردن تابع <code>setBoolean</code> به کلاس <code>BooleanArgumentMarshaller</code> بود و مطمئن شدم که این تابع به‌درستی فراخوانی می‌شه.<br> برای این کار، یک متد انتزاعی (<code>abstract</code>) به نام <code>set</code> ایجاد کردم.</p><p>این کار پایه‌ای بود برای اینکه هر کلاس مشتق‌شده، رفتار مخصوص به خودش رو در متد <code>set</code> پیاده‌سازی کنه.</p></div> <pre class="hljs"><code><span class="hljs-keyword">private</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ArgumentMarshaler</span> {
     <span class="hljs-keyword">protected</span> <span class="hljs-type">boolean</span> <span class="hljs-variable">booleanValue</span> <span class="hljs-operator">=</span> <span class="hljs-literal">false</span>;
     <span class="hljs-keyword">private</span> String stringValue;
     <span class="hljs-keyword">private</span> <span class="hljs-type">int</span> integerValue;
@@ -1442,52 +1238,25 @@
     }
     <span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">set</span><span class="hljs-params">(String s)</span>;
 }
-</code></pre>
-<div dir="rtl">
-<p>سپس متد <code>set</code> رو در کلاس <code>BooleanArgumentMarshaller</code> پیاده‌سازی کردم:</p>
-</div>
-<pre class="hljs"><code><span class="hljs-keyword">private</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">BooleanArgumentMarshaler</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">ArgumentMarshaler</span> {
+</code></pre> <div dir="rtl"><p>سپس متد <code>set</code> رو در کلاس <code>BooleanArgumentMarshaller</code> پیاده‌سازی کردم:</p></div> <pre class="hljs"><code><span class="hljs-keyword">private</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">BooleanArgumentMarshaler</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">ArgumentMarshaler</span> {
     <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">set</span><span class="hljs-params">(String s)</span> {
         booleanValue = <span class="hljs-literal">true</span>;
     }
 }
-</code></pre>
-<div dir="rtl">
-<p>و در نهایت، فراخوانی تابع <code>setBoolean</code> رو با فراخوانی <code>set</code> جایگزین کردم:</p>
-</div>
-<pre class="hljs"><code><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">setBooleanArg</span><span class="hljs-params">(<span class="hljs-type">char</span> argChar, <span class="hljs-type">boolean</span> value)</span> {
+</code></pre> <div dir="rtl"><p>و در نهایت، فراخوانی تابع <code>setBoolean</code> رو با فراخوانی <code>set</code> جایگزین کردم:</p></div> <pre class="hljs"><code><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">setBooleanArg</span><span class="hljs-params">(<span class="hljs-type">char</span> argChar, <span class="hljs-type">boolean</span> value)</span> {
     booleanArgs.get(argChar).set(<span class="hljs-string">&quot;true&quot;</span>);
 }
-</code></pre>
-<div dir="rtl">
-<p>تمام تست‌ها همچنان پاس می‌شدن، و چون این تغییر باعث شد که متد set حالا در <code>BooleanArgumentMarshaller</code> پیاده‌سازی شده باشه، متد <code>setBoolean</code> رو از کلاس پایه‌ی <code>ArgumentMarshaler</code> حذف کردم.</p>
-<p>به این نکته دقت کن که متد انتزاعی <code>set</code> یک آرگومان از نوع <code>String</code> دریافت می‌کنه،<br>
-اما پیاده‌سازی اون در <code>BooleanArgumentMarshaller</code> اصلاً از این آرگومان استفاده نمی‌کنه.<br>
-من این آرگومان رو عمداً اضافه کردم، چون می‌دونستم که کلاس‌های <code>StringArgumentMarshaller</code> و <code>IntegerArgumentMarshaller</code> به اون نیاز خواهند داشت.</p>
-<p>در ادامه، تصمیم گرفتم تابع <code>get</code> رو هم به <code>BooleanArgumentMarshaler</code> منتقل کنم.<br>
-انتقال توابع <code>get</code> معمولاً کمی ناخوشایند هست، چون باید مقدار بازگشتی از نوع <code>Object</code> باشه<br>
-و در این مورد، باید به <code>Boolean</code> تبدیل (<code>cast</code>) بشه:</p>
-</div>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">getBoolean</span><span class="hljs-params">(<span class="hljs-type">char</span> arg)</span> {
+</code></pre> <div dir="rtl"><p>تمام تست‌ها همچنان پاس می‌شدن، و چون این تغییر باعث شد که متد set حالا در <code>BooleanArgumentMarshaller</code> پیاده‌سازی شده باشه، متد <code>setBoolean</code> رو از کلاس پایه‌ی <code>ArgumentMarshaler</code> حذف کردم.</p><p>به این نکته دقت کن که متد انتزاعی <code>set</code> یک آرگومان از نوع <code>String</code> دریافت می‌کنه،<br> اما پیاده‌سازی اون در <code>BooleanArgumentMarshaller</code> اصلاً از این آرگومان استفاده نمی‌کنه.<br> من این آرگومان رو عمداً اضافه کردم، چون می‌دونستم که کلاس‌های <code>StringArgumentMarshaller</code> و <code>IntegerArgumentMarshaller</code> به اون نیاز خواهند داشت.</p><p>در ادامه، تصمیم گرفتم تابع <code>get</code> رو هم به <code>BooleanArgumentMarshaler</code> منتقل کنم.<br> انتقال توابع <code>get</code> معمولاً کمی ناخوشایند هست، چون باید مقدار بازگشتی از نوع <code>Object</code> باشه<br> و در این مورد، باید به <code>Boolean</code> تبدیل (<code>cast</code>) بشه:</p></div> <pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">getBoolean</span><span class="hljs-params">(<span class="hljs-type">char</span> arg)</span> {
     Args.<span class="hljs-type">ArgumentMarshaler</span> <span class="hljs-variable">am</span> <span class="hljs-operator">=</span> booleanArgs.get(arg);
     <span class="hljs-keyword">return</span> am != <span class="hljs-literal">null</span> &amp;&amp; (Boolean) am.get();
 }
-</code></pre>
-<div dir="rtl">
-<p>برای اینکه کد کامپایل بشه، ابتدا متد <code>get</code> رو به صورت پیش‌فرض در <code>ArgumentMarshaler</code> اضافه کردم:</p>
-</div>
-<pre class="hljs"><code><span class="hljs-keyword">private</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ArgumentMarshaler</span> {
+</code></pre> <div dir="rtl"><p>برای اینکه کد کامپایل بشه، ابتدا متد <code>get</code> رو به صورت پیش‌فرض در <code>ArgumentMarshaler</code> اضافه کردم:</p></div> <pre class="hljs"><code><span class="hljs-keyword">private</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ArgumentMarshaler</span> {
     ...
     <span class="hljs-keyword">public</span> Object <span class="hljs-title function_">get</span><span class="hljs-params">()</span> {
         <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;
     }
 }
-</code></pre>
-<div dir="rtl">
-<p>کد کامپایل شد اما تست‌ها شکست خوردن. برای درست کردن تست‌ها،<br>
-متد <code>get</code> رو <code>abstract</code> کردم و در <code>BooleanArgumentMarshaler</code> پیاده‌سازی‌اش کردم:</p>
-</div>
-<pre class="hljs"><code><span class="hljs-keyword">private</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ArgumentMarshaler</span> {
+</code></pre> <div dir="rtl"><p>کد کامپایل شد اما تست‌ها شکست خوردن. برای درست کردن تست‌ها،<br> متد <code>get</code> رو <code>abstract</code> کردم و در <code>BooleanArgumentMarshaler</code> پیاده‌سازی‌اش کردم:</p></div> <pre class="hljs"><code><span class="hljs-keyword">private</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ArgumentMarshaler</span> {
     ...
     <span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> Object <span class="hljs-title function_">get</span><span class="hljs-params">()</span>;
 }
@@ -1504,17 +1273,7 @@
     }
 }
 
-</code></pre>
-<div dir="rtl">
-<p>و حالا دوباره همه‌ی تست‌ها پاس می‌شن.<br>
-با این کار، متدهای <code>set</code> و <code>get</code> به‌طور کامل به کلاس <code>BooleanArgumentMarshaler</code> منتقل شدن.<br>
-این اجازه رو بهم داد که:</p>
-<p>متد قدیمی <code>getBoolean</code> رو از <code>ArgumentMarshaler</code> حذف کنم</p>
-<p>متغیر <code>booleanValue</code> رو از کلاس پایه حذف و در <code>BooleanArgumentMarshaler</code> به صورت <code>private</code> منتقل کنم</p>
-<p>بعد از این، دقیقاً همین الگو رو برای آرگومان‌های <code>String</code> هم پیاده‌سازی کردم:<br>
-تابع‌های <code>set</code> و <code>get</code> رو منتقل کردم، تابع‌های بلااستفاده رو حذف کردم، و متغیرها رو جابجا کردم.</p>
-</div>
-<pre class="hljs"><code><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">setStringArg</span><span class="hljs-params">(<span class="hljs-type">char</span> argChar)</span> <span class="hljs-keyword">throws</span> ArgsException {
+</code></pre> <div dir="rtl"><p>و حالا دوباره همه‌ی تست‌ها پاس می‌شن.<br> با این کار، متدهای <code>set</code> و <code>get</code> به‌طور کامل به کلاس <code>BooleanArgumentMarshaler</code> منتقل شدن.<br> این اجازه رو بهم داد که:</p><p>متد قدیمی <code>getBoolean</code> رو از <code>ArgumentMarshaler</code> حذف کنم</p><p>متغیر <code>booleanValue</code> رو از کلاس پایه حذف و در <code>BooleanArgumentMarshaler</code> به صورت <code>private</code> منتقل کنم</p><p>بعد از این، دقیقاً همین الگو رو برای آرگومان‌های <code>String</code> هم پیاده‌سازی کردم:<br> تابع‌های <code>set</code> و <code>get</code> رو منتقل کردم، تابع‌های بلااستفاده رو حذف کردم، و متغیرها رو جابجا کردم.</p></div> <pre class="hljs"><code><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">setStringArg</span><span class="hljs-params">(<span class="hljs-type">char</span> argChar)</span> <span class="hljs-keyword">throws</span> ArgsException {
     currentArgument++;
     <span class="hljs-keyword">try</span> {
         stringArgs.get(argChar).set(args[currentArgument]);
@@ -1566,11 +1325,7 @@
         <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;
     }
 }
-</code></pre>
-<div dir="rtl">
-<p>در نهایت، من همین فرایند را برای اعداد صحیح (<code>integers</code>) تکرار کردم. این کار کمی پیچیده‌تر بود زیرا اعداد صحیح نیاز به تجزیه (<code>parsing</code>) داشتند و عملیات تجزیه می‌تواند استثنا (<code>exception</code>) ایجاد کند. اما نتیجه بهتر شد زیرا کل مفهوم <code>NumberFormatException</code> در داخل کلاس <code>IntegerArgumentMarshaler</code> پنهان شد.</p>
-</div>
-<pre class="hljs"><code><span class="hljs-keyword">private</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">isIntArg</span><span class="hljs-params">(<span class="hljs-type">char</span> argChar)</span> {
+</code></pre> <div dir="rtl"><p>در نهایت، من همین فرایند را برای اعداد صحیح (<code>integers</code>) تکرار کردم. این کار کمی پیچیده‌تر بود زیرا اعداد صحیح نیاز به تجزیه (<code>parsing</code>) داشتند و عملیات تجزیه می‌تواند استثنا (<code>exception</code>) ایجاد کند. اما نتیجه بهتر شد زیرا کل مفهوم <code>NumberFormatException</code> در داخل کلاس <code>IntegerArgumentMarshaler</code> پنهان شد.</p></div> <pre class="hljs"><code><span class="hljs-keyword">private</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">isIntArg</span><span class="hljs-params">(<span class="hljs-type">char</span> argChar)</span> {
     <span class="hljs-keyword">return</span> intArgs.containsKey(argChar);
 }
 <span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">setIntArg</span><span class="hljs-params">(<span class="hljs-type">char</span> argChar)</span> <span class="hljs-keyword">throws</span> ArgsException {
@@ -1619,11 +1374,7 @@
         <span class="hljs-keyword">return</span> intValue;
     }
 }
-</code></pre>
-<div dir="rtl">
-<p>مطمئناً، تست‌ها همچنان موفق بودند. سپس، من سه نقشه مختلف (<code>Map</code>) که در ابتدای الگوریتم وجود داشتند را حذف کردم. این کار سیستم را به طور کلی جنریک‌تر کرد. اما نمی‌توانستم آن‌ها را فقط با حذف کردن از سیستم پاک کنم زیرا این کار باعث خراب شدن سیستم می‌شد. در عوض، من یک نقشه جدید برای <code>ArgumentMarshaler</code> اضافه کردم و سپس به طور تدریجی، هر یک از متدها را تغییر دادم تا از این نقشه جدید به جای سه نقشه اصلی استفاده کنند.</p>
-</div>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Args</span> {
+</code></pre> <div dir="rtl"><p>مطمئناً، تست‌ها همچنان موفق بودند. سپس، من سه نقشه مختلف (<code>Map</code>) که در ابتدای الگوریتم وجود داشتند را حذف کردم. این کار سیستم را به طور کلی جنریک‌تر کرد. اما نمی‌توانستم آن‌ها را فقط با حذف کردن از سیستم پاک کنم زیرا این کار باعث خراب شدن سیستم می‌شد. در عوض، من یک نقشه جدید برای <code>ArgumentMarshaler</code> اضافه کردم و سپس به طور تدریجی، هر یک از متدها را تغییر دادم تا از این نقشه جدید به جای سه نقشه اصلی استفاده کنند.</p></div> <pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Args</span> {
     ... <span class="hljs-keyword">private</span> Map&lt;Character, ArgumentMarshaler&gt; booleanArgs =
         <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;Character, ArgumentMarshaler&gt;();
     <span class="hljs-keyword">private</span> Map&lt;Character, ArgumentMarshaler&gt; stringArgs =
@@ -1648,26 +1399,14 @@
         marshalers.put(elementId, m);
     }
 }
-</code></pre>
-<div dir="rtl">
-<p>مطمئناً، تمام تست‌ها همچنان موفق بودند. سپس، من متد <code>isBooleanArg</code> را از این حالت تغییر دادم:</p>
-</div>
-<pre class="hljs"><code><span class="hljs-keyword">private</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">isBooleanArg</span><span class="hljs-params">(<span class="hljs-type">char</span> argChar)</span> {
+</code></pre> <div dir="rtl"><p>مطمئناً، تمام تست‌ها همچنان موفق بودند. سپس، من متد <code>isBooleanArg</code> را از این حالت تغییر دادم:</p></div> <pre class="hljs"><code><span class="hljs-keyword">private</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">isBooleanArg</span><span class="hljs-params">(<span class="hljs-type">char</span> argChar)</span> {
    <span class="hljs-keyword">return</span> booleanArgs.containsKey(argChar);
 }
-</code></pre>
-<div dir="rtl">
-به این :
-</div>
-<pre class="hljs"><code><span class="hljs-keyword">private</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">isBooleanArg</span><span class="hljs-params">(<span class="hljs-type">char</span> argChar)</span> {
+</code></pre> <div dir="rtl"> به این : </div><pre class="hljs"><code><span class="hljs-keyword">private</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">isBooleanArg</span><span class="hljs-params">(<span class="hljs-type">char</span> argChar)</span> {
     <span class="hljs-type">ArgumentMarshaler</span> <span class="hljs-variable">m</span> <span class="hljs-operator">=</span> marshalers.get(argChar);
     <span class="hljs-keyword">return</span> m <span class="hljs-keyword">instanceof</span> BooleanArgumentMarshaler;
 }
-</code></pre>
-<div dir="rtl">
-<p>تست‌ها همچنان موفق بودند. بنابراین، من همین تغییر را برای متدهای <code>isIntArg</code> و <code>isStringArg</code> نیز اعمال کردم.</p>
-</div>
-<pre class="hljs"><code><span class="hljs-keyword">private</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">isIntArg</span><span class="hljs-params">(<span class="hljs-type">char</span> argChar)</span> {
+</code></pre> <div dir="rtl"><p>تست‌ها همچنان موفق بودند. بنابراین، من همین تغییر را برای متدهای <code>isIntArg</code> و <code>isStringArg</code> نیز اعمال کردم.</p></div> <pre class="hljs"><code><span class="hljs-keyword">private</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">isIntArg</span><span class="hljs-params">(<span class="hljs-type">char</span> argChar)</span> {
     <span class="hljs-type">ArgumentMarshaler</span> <span class="hljs-variable">m</span> <span class="hljs-operator">=</span> marshalers.get(argChar);
     <span class="hljs-keyword">return</span> m <span class="hljs-keyword">instanceof</span> IntegerArgumentMarshaler;
 }
@@ -1675,11 +1414,7 @@
     <span class="hljs-type">ArgumentMarshaler</span> <span class="hljs-variable">m</span> <span class="hljs-operator">=</span> marshalers.get(argChar);
     <span class="hljs-keyword">return</span> m <span class="hljs-keyword">instanceof</span> StringArgumentMarshaler;
 }
-</code></pre>
-<div dir="rtl">
-<p>تست‌ها همچنان موفق بودند. بنابراین، من تمام تماس‌های تکراری به <code>marshalers.get</code> را به شکل زیر حذف کردم:</p>
-</div>
-<pre class="hljs"><code><span class="hljs-keyword">private</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">setArgument</span><span class="hljs-params">(<span class="hljs-type">char</span> argChar)</span> <span class="hljs-keyword">throws</span> ArgsException {
+</code></pre> <div dir="rtl"><p>تست‌ها همچنان موفق بودند. بنابراین، من تمام تماس‌های تکراری به <code>marshalers.get</code> را به شکل زیر حذف کردم:</p></div> <pre class="hljs"><code><span class="hljs-keyword">private</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">setArgument</span><span class="hljs-params">(<span class="hljs-type">char</span> argChar)</span> <span class="hljs-keyword">throws</span> ArgsException {
     <span class="hljs-type">ArgumentMarshaler</span> <span class="hljs-variable">m</span> <span class="hljs-operator">=</span> marshalers.get(argChar);
     <span class="hljs-keyword">if</span> (isBooleanArg(m))
         setBooleanArg(argChar);
@@ -1700,11 +1435,7 @@
 <span class="hljs-keyword">private</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">isBooleanArg</span><span class="hljs-params">(ArgumentMarshaler m)</span> {
     <span class="hljs-keyword">return</span> m <span class="hljs-keyword">instanceof</span> BooleanArgumentMarshaler;
 }
-</code></pre>
-<div dir="rtl">
-<p>این کار هیچ دلیلی برای وجود متدهای سه‌گانه <code>isxxxArg</code> باقی نگذاشت. بنابراین، من آن‌ها را به صورت درون‌خطی (inline) تغییر دادم:</p>
-</div>
-<pre class="hljs"><code><span class="hljs-keyword">private</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">setArgument</span><span class="hljs-params">(<span class="hljs-type">char</span> argChar)</span> <span class="hljs-keyword">throws</span> ArgsException {
+</code></pre> <div dir="rtl"><p>این کار هیچ دلیلی برای وجود متدهای سه‌گانه <code>isxxxArg</code> باقی نگذاشت. بنابراین، من آن‌ها را به صورت درون‌خطی (inline) تغییر دادم:</p></div> <pre class="hljs"><code><span class="hljs-keyword">private</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">setArgument</span><span class="hljs-params">(<span class="hljs-type">char</span> argChar)</span> <span class="hljs-keyword">throws</span> ArgsException {
     <span class="hljs-type">ArgumentMarshaler</span> <span class="hljs-variable">m</span> <span class="hljs-operator">=</span> marshalers.get(argChar);
     <span class="hljs-keyword">if</span> (m <span class="hljs-keyword">instanceof</span> BooleanArgumentMarshaler)
         setBooleanArg(argChar);
@@ -1716,11 +1447,7 @@
         <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
     <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
 }
-</code></pre>
-<div dir="rtl">
-<p>سپس، من شروع به استفاده از نقشه <code>marshalers</code> در توابع set کردم و استفاده از سه نقشه دیگر را متوقف کردم. من ابتدا با مقادیر بولی (<code>boolean</code>) شروع کردم.</p>
-</div>
-<pre class="hljs"><code><span class="hljs-keyword">private</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">setArgument</span><span class="hljs-params">(<span class="hljs-type">char</span> argChar)</span> <span class="hljs-keyword">throws</span> ArgsException {
+</code></pre> <div dir="rtl"><p>سپس، من شروع به استفاده از نقشه <code>marshalers</code> در توابع set کردم و استفاده از سه نقشه دیگر را متوقف کردم. من ابتدا با مقادیر بولی (<code>boolean</code>) شروع کردم.</p></div> <pre class="hljs"><code><span class="hljs-keyword">private</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">setArgument</span><span class="hljs-params">(<span class="hljs-type">char</span> argChar)</span> <span class="hljs-keyword">throws</span> ArgsException {
     <span class="hljs-type">ArgumentMarshaler</span> <span class="hljs-variable">m</span> <span class="hljs-operator">=</span> marshalers.get(argChar);
     <span class="hljs-keyword">if</span> (m <span class="hljs-keyword">instanceof</span> BooleanArgumentMarshaler)
         setBooleanArg(m);
@@ -1739,11 +1466,7 @@
     } 
     <span class="hljs-keyword">catch</span> (ArgsException e) {}
 }
-</code></pre>
-<div dir="rtl">
-<p>تست‌ها همچنان موفق بودند، بنابراین همین کار را برای رشته‌ها (<code>Strings</code>) و اعداد صحیح (<code>Integers</code>) انجام دادم. این کار به من اجازه داد تا برخی از کدهای پیچیده مدیریت استثناها را درون تابع <code>setArgument</code> ادغام کنم.</p>
-</div>
-<pre class="hljs"><code><span class="hljs-keyword">private</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">setArgument</span><span class="hljs-params">(<span class="hljs-type">char</span> argChar)</span> <span class="hljs-keyword">throws</span> ArgsException {
+</code></pre> <div dir="rtl"><p>تست‌ها همچنان موفق بودند، بنابراین همین کار را برای رشته‌ها (<code>Strings</code>) و اعداد صحیح (<code>Integers</code>) انجام دادم. این کار به من اجازه داد تا برخی از کدهای پیچیده مدیریت استثناها را درون تابع <code>setArgument</code> ادغام کنم.</p></div> <pre class="hljs"><code><span class="hljs-keyword">private</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">setArgument</span><span class="hljs-params">(<span class="hljs-type">char</span> argChar)</span> <span class="hljs-keyword">throws</span> ArgsException {
     <span class="hljs-type">ArgumentMarshaler</span> <span class="hljs-variable">m</span> <span class="hljs-operator">=</span> marshalers.get(argChar);
     <span class="hljs-keyword">try</span> {
         <span class="hljs-keyword">if</span> (m <span class="hljs-keyword">instanceof</span> BooleanArgumentMarshaler)
@@ -1785,19 +1508,11 @@
         <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArgsException</span>();
     }
 }
-</code></pre>
-<div dir="rtl">
-<p>من نزدیک بودم که بتوانم سه نقشه قدیمی را حذف کنم. اولین کاری که باید می‌کردم این بود که تابع <code>getBoolean</code> را از این حالت تغییر دهم:</p>
-</div>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">getBoolean</span><span class="hljs-params">(<span class="hljs-type">char</span> arg)</span> {
+</code></pre> <div dir="rtl"><p>من نزدیک بودم که بتوانم سه نقشه قدیمی را حذف کنم. اولین کاری که باید می‌کردم این بود که تابع <code>getBoolean</code> را از این حالت تغییر دهم:</p></div> <pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">getBoolean</span><span class="hljs-params">(<span class="hljs-type">char</span> arg)</span> {
     Args.<span class="hljs-type">ArgumentMarshaler</span> <span class="hljs-variable">am</span> <span class="hljs-operator">=</span> booleanArgs.get(arg);
     <span class="hljs-keyword">return</span> am != <span class="hljs-literal">null</span> &amp;&amp; (Boolean) am.get();
 }
-</code></pre>
-<div dir="rtl">
-به این :
-</div>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">getBoolean</span><span class="hljs-params">(<span class="hljs-type">char</span> arg)</span> {
+</code></pre> <div dir="rtl"> به این : </div><pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">getBoolean</span><span class="hljs-params">(<span class="hljs-type">char</span> arg)</span> {
     Args.<span class="hljs-type">ArgumentMarshaler</span> <span class="hljs-variable">am</span> <span class="hljs-operator">=</span> marshalers.get(arg);
     <span class="hljs-type">boolean</span> <span class="hljs-variable">b</span> <span class="hljs-operator">=</span> <span class="hljs-literal">false</span>;
     <span class="hljs-keyword">try</span> {
@@ -1807,21 +1522,12 @@
     }
     <span class="hljs-keyword">return</span> b;
 }
-</code></pre>
-<div dir="rtl">
-<p>این تغییر آخر ممکن است شگفت‌انگیز به نظر برسد. چرا ناگهان تصمیم گرفتم که با <code>ClassCastException</code> برخورد کنم؟ دلیل این است که من یک مجموعه از تست‌های واحد و یک مجموعه جداگانه از تست‌های پذیرش که در <code>FitNesse</code> نوشته شده‌اند، دارم. مشخص شد که تست‌های <code>FitNesse</code> تضمین می‌کنند که اگر از <code>getBoolean</code> برای یک آرگومان غیر بولی استفاده کنید، مقدار <code>false</code> دریافت خواهید کرد، اما تست‌های واحد این کار را انجام نمی‌دهند. تا به این نقطه، من تنها تست‌های واحد را اجرا کرده بودم.</p>
-<p>این تغییر آخر به من این امکان را داد که استفاده دیگری از نقشه بولی را حذف کنم:</p>
-</div>
-<pre class="hljs"><code><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">parseBooleanSchemaElement</span><span class="hljs-params">(<span class="hljs-type">char</span> elementId)</span> {
+</code></pre> <div dir="rtl"><p>این تغییر آخر ممکن است شگفت‌انگیز به نظر برسد. چرا ناگهان تصمیم گرفتم که با <code>ClassCastException</code> برخورد کنم؟ دلیل این است که من یک مجموعه از تست‌های واحد و یک مجموعه جداگانه از تست‌های پذیرش که در <code>FitNesse</code> نوشته شده‌اند، دارم. مشخص شد که تست‌های <code>FitNesse</code> تضمین می‌کنند که اگر از <code>getBoolean</code> برای یک آرگومان غیر بولی استفاده کنید، مقدار <code>false</code> دریافت خواهید کرد، اما تست‌های واحد این کار را انجام نمی‌دهند. تا به این نقطه، من تنها تست‌های واحد را اجرا کرده بودم.</p><p>این تغییر آخر به من این امکان را داد که استفاده دیگری از نقشه بولی را حذف کنم:</p></div> <pre class="hljs"><code><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">parseBooleanSchemaElement</span><span class="hljs-params">(<span class="hljs-type">char</span> elementId)</span> {
     <span class="hljs-type">ArgumentMarshaler</span> <span class="hljs-variable">m</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">BooleanArgumentMarshaler</span>();
     <span class="hljs-comment">//booleanArgs.put(elementId, m);</span>
     marshalers.put(elementId, m);
 }
-</code></pre>
-<div dir="rtl">
-<p>و حالا می‌توانیم نقشه‌ی <code>Boolean</code> را حذف کنیم.</p>
-</div>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Args</span> {
+</code></pre> <div dir="rtl"><p>و حالا می‌توانیم نقشه‌ی <code>Boolean</code> را حذف کنیم.</p></div> <pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Args</span> {
     ...
     <span class="hljs-comment">//private Map&lt;Character, ArgumentMarshaler&gt; booleanArgs =</span>
         <span class="hljs-comment">//new HashMap&lt;Character, ArgumentMarshaler&gt;();</span>
@@ -1832,11 +1538,7 @@
     <span class="hljs-keyword">private</span> Map&lt;Character, ArgumentMarshaler&gt; marshalers =
         <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;Character, ArgumentMarshaler&gt;();
     ...
-</code></pre>
-<div dir="rtl">
-<p>سپس آرگومان‌های رشته‌ای و عدد صحیح را به همان شیوه منتقل کردم و کمی پاک‌سازی در بخش <code>boolean</code> ها انجام دادم.</p>
-</div>
-<pre class="hljs"><code><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">parseBooleanSchemaElement</span><span class="hljs-params">(<span class="hljs-type">char</span> elementId)</span> {
+</code></pre> <div dir="rtl"><p>سپس آرگومان‌های رشته‌ای و عدد صحیح را به همان شیوه منتقل کردم و کمی پاک‌سازی در بخش <code>boolean</code> ها انجام دادم.</p></div> <pre class="hljs"><code><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">parseBooleanSchemaElement</span><span class="hljs-params">(<span class="hljs-type">char</span> elementId)</span> {
     marshalers.put(elementId, <span class="hljs-keyword">new</span> <span class="hljs-title class_">BooleanArgumentMarshaler</span>());
 }
 <span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">parseIntegerSchemaElement</span><span class="hljs-params">(<span class="hljs-type">char</span> elementId)</span> {
@@ -1873,11 +1575,7 @@
         <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;Character, ArgumentMarshaler&gt;();
     ...
 }
-</code></pre>
-<div dir="rtl">
-<p>سپس سه متد <code>parse</code> را درون‌خطی (inline) کردم چون دیگر کار خاصی انجام نمی‌دادند.</p>
-</div>
-<pre class="hljs"><code><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">parseSchemaElement</span><span class="hljs-params">(String element)</span> <span class="hljs-keyword">throws</span> ParseException {
+</code></pre> <div dir="rtl"><p>سپس سه متد <code>parse</code> را درون‌خطی (inline) کردم چون دیگر کار خاصی انجام نمی‌دادند.</p></div> <pre class="hljs"><code><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">parseSchemaElement</span><span class="hljs-params">(String element)</span> <span class="hljs-keyword">throws</span> ParseException {
     <span class="hljs-type">char</span> <span class="hljs-variable">elementId</span> <span class="hljs-operator">=</span> element.charAt(<span class="hljs-number">0</span>);
     <span class="hljs-type">String</span> <span class="hljs-variable">elementTail</span> <span class="hljs-operator">=</span> element.substring(<span class="hljs-number">1</span>);
     validateSchemaElementId(elementId);
@@ -1894,12 +1592,7 @@
             <span class="hljs-number">0</span>);
     }
 }
-</code></pre>
-<div dir="rtl">
-<p>خُب، حالا بیایید دوباره به تصویر کلی نگاه کنیم. Listing 14-12 نسخه‌ی فعلی کلاس <code>Args</code> را نشان می‌دهد.</p>
-</div>
-<p>Listing 14-12 - Args.java (After first refactoring)</p>
-<pre class="hljs"><code><span class="hljs-keyword">package</span> com.objectmentor.utilities.getopts;
+</code></pre> <div dir="rtl"><p>خُب، حالا بیایید دوباره به تصویر کلی نگاه کنیم. Listing 14-12 نسخه‌ی فعلی کلاس <code>Args</code> را نشان می‌دهد.</p></div> <p>Listing 14-12 - Args.java (After first refactoring)</p><pre class="hljs"><code><span class="hljs-keyword">package</span> com.objectmentor.utilities.getopts;
 <span class="hljs-keyword">import</span> java.text.ParseException;
 <span class="hljs-keyword">import</span> java.util.*;
 <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Args</span> {
@@ -2155,14 +1848,7 @@
         }
     }
 }
-</code></pre>
-<div dir="rtl">
-<p>بعد از تمام این کارها، نتیجه کمی ناامیدکننده است. ساختار کمی بهتر شده، اما هنوز تمام آن متغیرها در بالای کلاس هستند؛ هنوز یک بررسی نوع وحشتناک در <code>setArgument</code> داریم؛ و تمام آن توابع <code>set</code> واقعاً زشت هستند. تازه به پردازش خطاها هم اشاره‌ای نکرده‌ایم. هنوز کار زیادی پیش رو داریم.</p>
-<p>واقعاً دوست دارم از شر آن بررسی نوع در <code>setArgument</code> خلاص شوم <code>[G23]</code>. چیزی که می‌خواهم، یک فراخوانی واحد به <code>ArgumentMarshaler.set</code> است. این یعنی باید توابع <code>setIntArg،</code> <code>setStringArg</code> و <code>setBooleanArg</code> را به کلاس‌های مشتق‌شده‌ی <code>ArgumentMarshaler</code> منتقل کنم. اما یک مشکل وجود دارد.</p>
-<p>اگر دقیق‌تر به <code>setIntArg</code> نگاه کنید، متوجه می‌شوید که از دو متغیر نمونه‌ای استفاده می‌کند: <code>args</code> و <code>currentArg</code>. برای اینکه بتوانم <code>setIntArg</code> را به داخل <code>IntegerArgumentMarshaler</code> منتقل کنم، باید هر دو را به‌عنوان آرگومان به تابع پاس بدهم. این کار ناپسند است <code>[F1]</code>. ترجیح می‌دهم فقط یک آرگومان پاس بدهم نه دو تا. خوشبختانه، یک راه‌حل ساده وجود دارد. می‌توانیم آرایه‌ی <code>args</code> را به یک لیست تبدیل کنیم و یک <code>Iterator</code> را به توابع <code>set</code> پاس بدهیم.</p>
-<p>کاری که انجام دادم طی ده مرحله بود و پس از هر مرحله تمام تست‌ها را پاس می‌کردم. اما من فقط نتیجه را به شما نشان می‌دهم. شما باید بتوانید بیشتر مراحل کوچک را خودتان حدس بزنید.</p>
-</div>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Args</span> {
+</code></pre> <div dir="rtl"><p>بعد از تمام این کارها، نتیجه کمی ناامیدکننده است. ساختار کمی بهتر شده، اما هنوز تمام آن متغیرها در بالای کلاس هستند؛ هنوز یک بررسی نوع وحشتناک در <code>setArgument</code> داریم؛ و تمام آن توابع <code>set</code> واقعاً زشت هستند. تازه به پردازش خطاها هم اشاره‌ای نکرده‌ایم. هنوز کار زیادی پیش رو داریم.</p><p>واقعاً دوست دارم از شر آن بررسی نوع در <code>setArgument</code> خلاص شوم <code>[G23]</code>. چیزی که می‌خواهم، یک فراخوانی واحد به <code>ArgumentMarshaler.set</code> است. این یعنی باید توابع <code>setIntArg،</code> <code>setStringArg</code> و <code>setBooleanArg</code> را به کلاس‌های مشتق‌شده‌ی <code>ArgumentMarshaler</code> منتقل کنم. اما یک مشکل وجود دارد.</p><p>اگر دقیق‌تر به <code>setIntArg</code> نگاه کنید، متوجه می‌شوید که از دو متغیر نمونه‌ای استفاده می‌کند: <code>args</code> و <code>currentArg</code>. برای اینکه بتوانم <code>setIntArg</code> را به داخل <code>IntegerArgumentMarshaler</code> منتقل کنم، باید هر دو را به‌عنوان آرگومان به تابع پاس بدهم. این کار ناپسند است <code>[F1]</code>. ترجیح می‌دهم فقط یک آرگومان پاس بدهم نه دو تا. خوشبختانه، یک راه‌حل ساده وجود دارد. می‌توانیم آرایه‌ی <code>args</code> را به یک لیست تبدیل کنیم و یک <code>Iterator</code> را به توابع <code>set</code> پاس بدهیم.</p><p>کاری که انجام دادم طی ده مرحله بود و پس از هر مرحله تمام تست‌ها را پاس می‌کردم. اما من فقط نتیجه را به شما نشان می‌دهم. شما باید بتوانید بیشتر مراحل کوچک را خودتان حدس بزنید.</p></div> <pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Args</span> {
     <span class="hljs-keyword">private</span> String schema;
     <span class="hljs-comment">//private String[] args;</span>
     <span class="hljs-keyword">private</span> <span class="hljs-type">boolean</span> <span class="hljs-variable">valid</span> <span class="hljs-operator">=</span> <span class="hljs-literal">true</span>;
@@ -2228,11 +1914,7 @@
         }
     }
 }
-</code></pre>
-<div dir="rtl">
-<p>این‌ها تغییرات ساده‌ای بودند که باعث شدند تمام تست‌ها همچنان پاس شوند. حالا می‌توانیم شروع به انتقال توابع <code>set</code> به کلاس‌های مشتق‌شده‌ی مناسب کنیم. ابتدا باید تغییر زیر را در تابع <code>setArgument</code> اعمال کنم:</p>
-</div>
-<pre class="hljs"><code><span class="hljs-keyword">private</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">setArgument</span><span class="hljs-params">(<span class="hljs-type">char</span> argChar)</span> <span class="hljs-keyword">throws</span> ArgsException {
+</code></pre> <div dir="rtl"><p>این‌ها تغییرات ساده‌ای بودند که باعث شدند تمام تست‌ها همچنان پاس شوند. حالا می‌توانیم شروع به انتقال توابع <code>set</code> به کلاس‌های مشتق‌شده‌ی مناسب کنیم. ابتدا باید تغییر زیر را در تابع <code>setArgument</code> اعمال کنم:</p></div> <pre class="hljs"><code><span class="hljs-keyword">private</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">setArgument</span><span class="hljs-params">(<span class="hljs-type">char</span> argChar)</span> <span class="hljs-keyword">throws</span> ArgsException {
     <span class="hljs-type">ArgumentMarshaler</span> <span class="hljs-variable">m</span> <span class="hljs-operator">=</span> marshalers.get(argChar);
     <span class="hljs-keyword">if</span> (m == <span class="hljs-literal">null</span>)
         <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
@@ -2252,12 +1934,7 @@
     }
     <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
 }
-</code></pre>
-<div dir="rtl">
-<p>این تغییر مهم است چون می‌خواهیم زنجیره <code>if-else</code> را به‌طور کامل حذف کنیم. بنابراین، لازم بود شرط خطا را از آن خارج کنیم.<br>
-حالا می‌توانیم شروع به انتقال توابع set کنیم. تابع <code>setBooleanArg</code> ساده است، پس ابتدا آن را آماده می‌کنیم. هدف ما این است که تابع <code>setBooleanArg</code> را به‌گونه‌ای تغییر دهیم که فقط عملیات را به کلاس <code>BooleanArgumentMarshaler</code> واگذار کند.</p>
-</div>
-<pre class="hljs"><code><span class="hljs-keyword">private</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">setArgument</span><span class="hljs-params">(<span class="hljs-type">char</span> argChar)</span> <span class="hljs-keyword">throws</span> ArgsException {
+</code></pre> <div dir="rtl"><p>این تغییر مهم است چون می‌خواهیم زنجیره <code>if-else</code> را به‌طور کامل حذف کنیم. بنابراین، لازم بود شرط خطا را از آن خارج کنیم.<br> حالا می‌توانیم شروع به انتقال توابع set کنیم. تابع <code>setBooleanArg</code> ساده است، پس ابتدا آن را آماده می‌کنیم. هدف ما این است که تابع <code>setBooleanArg</code> را به‌گونه‌ای تغییر دهیم که فقط عملیات را به کلاس <code>BooleanArgumentMarshaler</code> واگذار کند.</p></div> <pre class="hljs"><code><span class="hljs-keyword">private</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">setArgument</span><span class="hljs-params">(<span class="hljs-type">char</span> argChar)</span> <span class="hljs-keyword">throws</span> ArgsException {
     <span class="hljs-type">ArgumentMarshaler</span> <span class="hljs-variable">m</span> <span class="hljs-operator">=</span> marshalers.get(argChar);
     <span class="hljs-keyword">if</span> (m == <span class="hljs-literal">null</span>)
         <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
@@ -2283,23 +1960,13 @@
     <span class="hljs-comment">//    catch (ArgsException e) {</span>
     <span class="hljs-comment">//    }</span>
     }
-</code></pre>
-<div dir="rtl">
-<p>مگر همین پردازش استثنا را تازه اضافه نکرده بودیم؟ اضافه کردن چیزهایی برای اینکه بعداً آن‌ها را حذف کنیم، در فرایند بازآرایی (Refactoring) بسیار رایج است. کوچکی گام‌ها و نیاز به حفظ عملکرد صحیح برنامه باعث می‌شود که چیزها را زیاد جابه‌جا کنید. بازآرایی خیلی شبیه حل کردن مکعب روبیک است. برای رسیدن به یک هدف بزرگ، گام‌های کوچکی زیادی لازم است. هر گام، امکان اجرای گام بعدی را فراهم می‌کند.</p>
-<p>چرا آن <code>iterator</code> را ارسال کردیم وقتی که <code>setBooleanArg</code> قطعاً به آن نیازی ندارد؟ چون <code>setIntArg</code> و <code>setStringArg</code> نیاز خواهند داشت! و از آنجایی که می‌خواهم هر سه تابع را از طریق یک متد انتزاعی در <code>ArgumentMarshaller</code> پیاده‌سازی کنم، باید آن را به <code>setBooleanArg</code> نیز ارسال کنم.</p>
-<p>پس حالا تابع <code>setBooleanArg</code> بی‌استفاده شده است. اگر تابعی به نام <code>set</code> در کلاس <code>ArgumentMarshaler</code> وجود داشت، می‌توانستیم مستقیماً آن را فراخوانی کنیم. بنابراین، زمان آن رسیده که این تابع را اضافه کنیم! اولین گام این است که یک متد انتزاعی (<code>abstract</code>) جدید به کلاس <code>ArgumentMarshaler</code> اضافه کنیم.</p>
-</div>
-<pre class="hljs"><code><span class="hljs-keyword">private</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ArgumentMarshaler</span> {
+</code></pre> <div dir="rtl"><p>مگر همین پردازش استثنا را تازه اضافه نکرده بودیم؟ اضافه کردن چیزهایی برای اینکه بعداً آن‌ها را حذف کنیم، در فرایند بازآرایی (Refactoring) بسیار رایج است. کوچکی گام‌ها و نیاز به حفظ عملکرد صحیح برنامه باعث می‌شود که چیزها را زیاد جابه‌جا کنید. بازآرایی خیلی شبیه حل کردن مکعب روبیک است. برای رسیدن به یک هدف بزرگ، گام‌های کوچکی زیادی لازم است. هر گام، امکان اجرای گام بعدی را فراهم می‌کند.</p><p>چرا آن <code>iterator</code> را ارسال کردیم وقتی که <code>setBooleanArg</code> قطعاً به آن نیازی ندارد؟ چون <code>setIntArg</code> و <code>setStringArg</code> نیاز خواهند داشت! و از آنجایی که می‌خواهم هر سه تابع را از طریق یک متد انتزاعی در <code>ArgumentMarshaller</code> پیاده‌سازی کنم، باید آن را به <code>setBooleanArg</code> نیز ارسال کنم.</p><p>پس حالا تابع <code>setBooleanArg</code> بی‌استفاده شده است. اگر تابعی به نام <code>set</code> در کلاس <code>ArgumentMarshaler</code> وجود داشت، می‌توانستیم مستقیماً آن را فراخوانی کنیم. بنابراین، زمان آن رسیده که این تابع را اضافه کنیم! اولین گام این است که یک متد انتزاعی (<code>abstract</code>) جدید به کلاس <code>ArgumentMarshaler</code> اضافه کنیم.</p></div> <pre class="hljs"><code><span class="hljs-keyword">private</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ArgumentMarshaler</span> {
     <span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">set</span><span class="hljs-params">(Iterator&lt;String&gt; currentArgument)</span>
         <span class="hljs-keyword">throws</span> ArgsException;
     <span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">set</span><span class="hljs-params">(String s)</span> <span class="hljs-keyword">throws</span> ArgsException;
     <span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> Object <span class="hljs-title function_">get</span><span class="hljs-params">()</span>;
 }
-</code></pre>
-<div dir="rtl">
-<p>مطمئناً این تغییر باعث شکست در همه مشتقات (<code>derivatives</code>) می‌شود. پس بیایید متد جدید را در هر کدام پیاده‌سازی کنیم.</p>
-</div>
-<pre class="hljs"><code><span class="hljs-keyword">private</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">BooleanArgumentMarshaler</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">ArgumentMarshaler</span> {
+</code></pre> <div dir="rtl"><p>مطمئناً این تغییر باعث شکست در همه مشتقات (<code>derivatives</code>) می‌شود. پس بیایید متد جدید را در هر کدام پیاده‌سازی کنیم.</p></div> <pre class="hljs"><code><span class="hljs-keyword">private</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">BooleanArgumentMarshaler</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">ArgumentMarshaler</span> {
     <span class="hljs-keyword">private</span> <span class="hljs-type">boolean</span> <span class="hljs-variable">booleanValue</span> <span class="hljs-operator">=</span> <span class="hljs-literal">false</span>;
     <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">set</span><span class="hljs-params">(Iterator&lt;String&gt; currentArgument)</span> <span class="hljs-keyword">throws</span> ArgsException {
         <span class="hljs-comment">// booleanValue = true;</span>
@@ -2335,11 +2002,7 @@
         <span class="hljs-keyword">return</span> intValue;
     }
 }
-</code></pre>
-<div dir="rtl">
-<p>و حالا می‌توانیم <code>setBooleanArg</code> را حذف کنیم!</p>
-</div>
-<pre class="hljs"><code><span class="hljs-keyword">private</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">setArgument</span><span class="hljs-params">(<span class="hljs-type">char</span> argChar)</span> <span class="hljs-keyword">throws</span> ArgsException {
+</code></pre> <div dir="rtl"><p>و حالا می‌توانیم <code>setBooleanArg</code> را حذف کنیم!</p></div> <pre class="hljs"><code><span class="hljs-keyword">private</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">setArgument</span><span class="hljs-params">(<span class="hljs-type">char</span> argChar)</span> <span class="hljs-keyword">throws</span> ArgsException {
     <span class="hljs-type">ArgumentMarshaler</span> <span class="hljs-variable">m</span> <span class="hljs-operator">=</span> marshalers.get(argChar);
     <span class="hljs-keyword">if</span> (m == <span class="hljs-literal">null</span>)
         <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
@@ -2357,11 +2020,7 @@
     }
     <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
 }
-</code></pre>
-<div dir="rtl">
-<p>تمام تست‌ها پاس شدند و تابع <code>set</code> به درستی به <code>BooleanArgumentMarshaler</code> منتقل شد! حالا می‌توانیم همین کار را برای رشته‌ها و اعداد صحیح انجام دهیم.</p>
-</div>
-<pre class="hljs"><code><span class="hljs-keyword">private</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">setArgument</span><span class="hljs-params">(<span class="hljs-type">char</span> argChar)</span> <span class="hljs-keyword">throws</span> ArgsException {
+</code></pre> <div dir="rtl"><p>تمام تست‌ها پاس شدند و تابع <code>set</code> به درستی به <code>BooleanArgumentMarshaler</code> منتقل شد! حالا می‌توانیم همین کار را برای رشته‌ها و اعداد صحیح انجام دهیم.</p></div> <pre class="hljs"><code><span class="hljs-keyword">private</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">setArgument</span><span class="hljs-params">(<span class="hljs-type">char</span> argChar)</span> <span class="hljs-keyword">throws</span> ArgsException {
     <span class="hljs-type">ArgumentMarshaler</span> <span class="hljs-variable">m</span> <span class="hljs-operator">=</span> marshalers.get(argChar);
     <span class="hljs-keyword">if</span> (m == <span class="hljs-literal">null</span>)
         <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
@@ -2422,11 +2081,7 @@
         <span class="hljs-keyword">return</span> intValue;
     }
 }
-</code></pre>
-<div dir="rtl">
-و حالا ضربه نهایی: می‌توانیم نوع‌سازی را حذف کنیم! تبریک!
-</div>
-<pre class="hljs"><code><span class="hljs-keyword">private</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">setArgument</span><span class="hljs-params">(<span class="hljs-type">char</span> argChar)</span> <span class="hljs-keyword">throws</span> ArgsException {
+</code></pre> <div dir="rtl"> و حالا ضربه نهایی: می‌توانیم نوع‌سازی را حذف کنیم! تبریک! </div><pre class="hljs"><code><span class="hljs-keyword">private</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">setArgument</span><span class="hljs-params">(<span class="hljs-type">char</span> argChar)</span> <span class="hljs-keyword">throws</span> ArgsException {
     <span class="hljs-type">ArgumentMarshaler</span> <span class="hljs-variable">m</span> <span class="hljs-operator">=</span> marshalers.get(argChar);
     <span class="hljs-keyword">if</span> (m == <span class="hljs-literal">null</span>)
         <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
@@ -2439,11 +2094,7 @@
         <span class="hljs-keyword">throw</span> e;
     }
 }
-</code></pre>
-<div dir="rtl">
-<p>حالا می‌توانیم برخی از توابع اضافی در <code>IntegerArgumentMarshaler</code> را حذف کرده و کمی آن را تمیز کنیم.</p>
-</div>
-<pre class="hljs"><code><span class="hljs-keyword">private</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">IntegerArgumentMarshaler</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">ArgumentMarshaler</span> {
+</code></pre> <div dir="rtl"><p>حالا می‌توانیم برخی از توابع اضافی در <code>IntegerArgumentMarshaler</code> را حذف کرده و کمی آن را تمیز کنیم.</p></div> <pre class="hljs"><code><span class="hljs-keyword">private</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">IntegerArgumentMarshaler</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">ArgumentMarshaler</span> {
     <span class="hljs-keyword">private</span> <span class="hljs-type">int</span> <span class="hljs-variable">intValue</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span> <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">set</span><span class="hljs-params">(Iterator&lt;String&gt; currentArgument)</span>
         <span class="hljs-keyword">throws</span> ArgsException {
         <span class="hljs-type">String</span> <span class="hljs-variable">parameter</span> <span class="hljs-operator">=</span> <span class="hljs-literal">null</span>;
@@ -2463,30 +2114,18 @@
         <span class="hljs-keyword">return</span> intValue;
     }
 }
-</code></pre>
-<div dir="rtl">
-<p>ما همچنین می‌توانیم <code>ArgumentMarshaler</code> را به یک اینترفیس تبدیل کنیم.</p>
-</div>
-<pre class="hljs"><code><span class="hljs-keyword">private</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">ArgumentMarshaler</span> {
+</code></pre> <div dir="rtl"><p>ما همچنین می‌توانیم <code>ArgumentMarshaler</code> را به یک اینترفیس تبدیل کنیم.</p></div> <pre class="hljs"><code><span class="hljs-keyword">private</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">ArgumentMarshaler</span> {
     <span class="hljs-keyword">void</span> <span class="hljs-title function_">set</span><span class="hljs-params">(Iterator&lt;String&gt; currentArgument)</span> <span class="hljs-keyword">throws</span> ArgsException;
     Object <span class="hljs-title function_">get</span><span class="hljs-params">()</span>;
 }
-</code></pre>
-<div dir="rtl">
-<p>حال ببینیم اضافه کردن یک نوع آرگومان جدید به ساختارمان چقدر آسان است. این کار باید تغییرات بسیار کمی را نیاز داشته باشد و این تغییرات باید مجزا باشند. ابتدا با افزودن یک تست جدید شروع می‌کنیم تا بررسی کنیم که آرگومان نوع <code>double</code> به درستی کار می‌کند.</p>
-</div>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">testSimpleDoublePresent</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> Exception {
+</code></pre> <div dir="rtl"><p>حال ببینیم اضافه کردن یک نوع آرگومان جدید به ساختارمان چقدر آسان است. این کار باید تغییرات بسیار کمی را نیاز داشته باشد و این تغییرات باید مجزا باشند. ابتدا با افزودن یک تست جدید شروع می‌کنیم تا بررسی کنیم که آرگومان نوع <code>double</code> به درستی کار می‌کند.</p></div> <pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">testSimpleDoublePresent</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> Exception {
     <span class="hljs-type">Args</span> <span class="hljs-variable">args</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Args</span>(<span class="hljs-string">&quot;x##&quot;</span>, <span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>[] {<span class="hljs-string">&quot;-x&quot;</span>,<span class="hljs-string">&quot;42.3&quot;</span>});
     assertTrue(args.isValid());
     assertEquals(<span class="hljs-number">1</span>, args.cardinality());
     assertTrue(args.has(<span class="hljs-string">&#x27;x&#x27;</span>));
     assertEquals(<span class="hljs-number">42.3</span>, args.getDouble(<span class="hljs-string">&#x27;x&#x27;</span>), <span class="hljs-number">.001</span>);
 }
-</code></pre>
-<div dir="rtl">
-<p>حالا کد تجزیه اسکیمای خود را تمیز می‌کنیم و تشخیص <code>##</code> برای نوع آرگومان <code>double</code> را اضافه می‌کنیم.</p>
-</div>
-<pre class="hljs"><code><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">parseSchemaElement</span><span class="hljs-params">(String element)</span> <span class="hljs-keyword">throws</span> ParseException {
+</code></pre> <div dir="rtl"><p>حالا کد تجزیه اسکیمای خود را تمیز می‌کنیم و تشخیص <code>##</code> برای نوع آرگومان <code>double</code> را اضافه می‌کنیم.</p></div> <pre class="hljs"><code><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">parseSchemaElement</span><span class="hljs-params">(String element)</span> <span class="hljs-keyword">throws</span> ParseException {
     <span class="hljs-type">char</span> <span class="hljs-variable">elementId</span> <span class="hljs-operator">=</span> element.charAt(<span class="hljs-number">0</span>);
     <span class="hljs-type">String</span> <span class="hljs-variable">elementTail</span> <span class="hljs-operator">=</span> element.substring(<span class="hljs-number">1</span>);
     validateSchemaElementId(elementId);
@@ -2504,11 +2143,7 @@
                 <span class="hljs-string">&quot;Argument: %c has invalid format: %s.&quot;</span>, elementId, elementTail),
             <span class="hljs-number">0</span>);
 }
-</code></pre>
-<div dir="rtl">
-<p>سپس کلاس <code>DoubleArgumentMarshaler</code> را مینویسیم.</p>
-</div>
-<pre class="hljs"><code><span class="hljs-keyword">private</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">DoubleArgumentMarshaler</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">ArgumentMarshaler</span> {
+</code></pre> <div dir="rtl"><p>سپس کلاس <code>DoubleArgumentMarshaler</code> را مینویسیم.</p></div> <pre class="hljs"><code><span class="hljs-keyword">private</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">DoubleArgumentMarshaler</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">ArgumentMarshaler</span> {
     <span class="hljs-keyword">private</span> <span class="hljs-type">double</span> <span class="hljs-variable">doubleValue</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
     <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">set</span><span class="hljs-params">(Iterator&lt;String&gt; currentArgument)</span> <span class="hljs-keyword">throws</span> ArgsException {
         <span class="hljs-type">String</span> <span class="hljs-variable">parameter</span> <span class="hljs-operator">=</span> <span class="hljs-literal">null</span>;
@@ -2528,11 +2163,7 @@
         <span class="hljs-keyword">return</span> doubleValue;
     }
 }
-</code></pre>
-<div dir="rtl">
-<p>این ما را مجبور می‌کند تا یک <code>ErrorCode</code> جدید اضافه کنیم.</p>
-</div>
-<pre class="hljs"><code><span class="hljs-keyword">private</span> <span class="hljs-keyword">enum</span> <span class="hljs-title class_">ErrorCode</span> {
+</code></pre> <div dir="rtl"><p>این ما را مجبور می‌کند تا یک <code>ErrorCode</code> جدید اضافه کنیم.</p></div> <pre class="hljs"><code><span class="hljs-keyword">private</span> <span class="hljs-keyword">enum</span> <span class="hljs-title class_">ErrorCode</span> {
     OK,
     MISSING_STRING,
     MISSING_INTEGER,
@@ -2542,11 +2173,7 @@
     MISSING_DOUBLE,
     INVALID_DOUBLE
 }
-</code></pre>
-<div dir="rtl">
-<p>و ما نیاز به متد <code>getDouble</code> داریم.</p>
-</div>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-type">double</span> <span class="hljs-title function_">getDouble</span><span class="hljs-params">(<span class="hljs-type">char</span> arg)</span> {
+</code></pre> <div dir="rtl"><p>و ما نیاز به متد <code>getDouble</code> داریم.</p></div> <pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-type">double</span> <span class="hljs-title function_">getDouble</span><span class="hljs-params">(<span class="hljs-type">char</span> arg)</span> {
     Args.<span class="hljs-type">ArgumentMarshaler</span> <span class="hljs-variable">am</span> <span class="hljs-operator">=</span> marshalers.get(arg);
     <span class="hljs-keyword">try</span> {
         <span class="hljs-keyword">return</span> am == <span class="hljs-literal">null</span> ? <span class="hljs-number">0</span> : (Double) am.get();
@@ -2554,11 +2181,7 @@
         <span class="hljs-keyword">return</span> <span class="hljs-number">0.0</span>;
     }
 }
-</code></pre>
-<div dir="rtl">
-<p>و همه تست‌ها موفقیت‌آمیز بودند! این کار نسبتاً بی‌دردسر بود. حالا بیایید مطمئن شویم که پردازش خطا به درستی کار می‌کند. تست بعدی بررسی می‌کند که آیا در صورتی که یک رشته غیرقابل تجزیه به یک آرگومان <code>##</code> داده شود، خطا اعلام می‌شود یا خیر.</p>
-</div>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">testInvalidDouble</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> Exception {
+</code></pre> <div dir="rtl"><p>و همه تست‌ها موفقیت‌آمیز بودند! این کار نسبتاً بی‌دردسر بود. حالا بیایید مطمئن شویم که پردازش خطا به درستی کار می‌کند. تست بعدی بررسی می‌کند که آیا در صورتی که یک رشته غیرقابل تجزیه به یک آرگومان <code>##</code> داده شود، خطا اعلام می‌شود یا خیر.</p></div> <pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">testInvalidDouble</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> Exception {
     <span class="hljs-type">Args</span> <span class="hljs-variable">args</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Args</span>(<span class="hljs-string">&quot;x##&quot;</span>, <span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>[] {<span class="hljs-string">&quot;-x&quot;</span>, <span class="hljs-string">&quot;Forty two&quot;</span>});
     assertFalse(args.isValid());
     assertEquals(<span class="hljs-number">0</span>, args.cardinality());
@@ -2592,11 +2215,7 @@
     }
     <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;&quot;</span>;
 }
-</code></pre>
-<div dir="rtl">
-<p>و تست‌ها موفقیت‌آمیز بودند. تست بعدی بررسی می‌کند که آیا آرگومان <code>double</code> گم‌شده به‌درستی تشخیص داده می‌شود</p>
-</div>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">testMissingDouble</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> Exception {
+</code></pre> <div dir="rtl"><p>و تست‌ها موفقیت‌آمیز بودند. تست بعدی بررسی می‌کند که آیا آرگومان <code>double</code> گم‌شده به‌درستی تشخیص داده می‌شود</p></div> <pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">testMissingDouble</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> Exception {
     <span class="hljs-type">Args</span> <span class="hljs-variable">args</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Args</span>(<span class="hljs-string">&quot;x##&quot;</span>, <span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>[] {<span class="hljs-string">&quot;-x&quot;</span>});
     assertFalse(args.isValid());
     assertEquals(<span class="hljs-number">0</span>, args.cardinality());
@@ -2605,12 +2224,7 @@
     assertEquals(
         <span class="hljs-string">&quot;Could not find double parameter for -x.&quot;</span>, args.errorMessage());
 }
-</code></pre>
-<div dir="rtl">
-<p>این تست همان‌طور که انتظار داشتیم موفقیت‌آمیز بود. ما آن را صرفاً برای تکمیل کار نوشتیم.<br>
-کد مربوط به استثنا کمی نامرتب است و واقعاً در کلاس <code>Args</code> جایگاهی ندارد. همچنین ما <code>ParseException</code> را پرتاب می‌کنیم، در حالی که این استثنا به ما تعلق ندارد. بنابراین، بیایید تمام استثناها را در یک کلاس واحد به نام <code>ArgsException</code> ترکیب کنیم و آن را به یک ماژول اختصاصی منتقل کنیم.</p>
-</div>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ArgsException</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Exception</span> {
+</code></pre> <div dir="rtl"><p>این تست همان‌طور که انتظار داشتیم موفقیت‌آمیز بود. ما آن را صرفاً برای تکمیل کار نوشتیم.<br> کد مربوط به استثنا کمی نامرتب است و واقعاً در کلاس <code>Args</code> جایگاهی ندارد. همچنین ما <code>ParseException</code> را پرتاب می‌کنیم، در حالی که این استثنا به ما تعلق ندارد. بنابراین، بیایید تمام استثناها را در یک کلاس واحد به نام <code>ArgsException</code> ترکیب کنیم و آن را به یک ماژول اختصاصی منتقل کنیم.</p></div> <pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ArgsException</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Exception</span> {
     <span class="hljs-keyword">private</span> <span class="hljs-type">char</span> <span class="hljs-variable">errorArgumentId</span> <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;\0&#x27;</span>;
     <span class="hljs-keyword">private</span> <span class="hljs-type">String</span> <span class="hljs-variable">errorParameter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;TILT&quot;</span>;
     <span class="hljs-keyword">private</span> <span class="hljs-type">ErrorCode</span> <span class="hljs-variable">errorCode</span> <span class="hljs-operator">=</span> ErrorCode.OK;
@@ -2725,14 +2339,7 @@
         }
     }
 }
-</code></pre>
-<div dir="rtl">
-<p>این عالی است! اکنون تنها استثنایی که توسط <code>Args</code> پرتاب می‌شود، <code>ArgsException</code> است. انتقال <code>ArgsException</code> به یک ماژول اختصاصی به ما این امکان را می‌دهد که بسیاری از کدهای پراکنده مربوط به مدیریت خطا را در آن ماژول جای دهیم و <code>Args</code> را از این موارد جدا کنیم.<br>
-این کار نه‌تنها مکانی طبیعی و مناسب برای نگهداری این کدها فراهم می‌کند، بلکه باعث مرتب‌تر شدن ماژول <code>Args</code> در آینده می‌شود.<br>
-اکنون ما به‌طور کامل کدهای مربوط به مدیریت خطا و استثنا را از ماژول <code>Args</code> تفکیک کرده‌ایم. (به فهرست 14-13 تا 14-16 مراجعه کنید.) این تغییرات طی حدود 30 گام کوچک انجام شده‌اند، در حالی که تمامی تست‌ها در هر مرحله موفقیت‌آمیز باقی مانده‌اند.</p>
-</div>
-<p>Listing 14-13 - ArgsTest.java</p>
-<pre class="hljs"><code><span class="hljs-keyword">package</span> com.objectmentor.utilities.args;
+</code></pre> <div dir="rtl"><p>این عالی است! اکنون تنها استثنایی که توسط <code>Args</code> پرتاب می‌شود، <code>ArgsException</code> است. انتقال <code>ArgsException</code> به یک ماژول اختصاصی به ما این امکان را می‌دهد که بسیاری از کدهای پراکنده مربوط به مدیریت خطا را در آن ماژول جای دهیم و <code>Args</code> را از این موارد جدا کنیم.<br> این کار نه‌تنها مکانی طبیعی و مناسب برای نگهداری این کدها فراهم می‌کند، بلکه باعث مرتب‌تر شدن ماژول <code>Args</code> در آینده می‌شود.<br> اکنون ما به‌طور کامل کدهای مربوط به مدیریت خطا و استثنا را از ماژول <code>Args</code> تفکیک کرده‌ایم. (به فهرست 14-13 تا 14-16 مراجعه کنید.) این تغییرات طی حدود 30 گام کوچک انجام شده‌اند، در حالی که تمامی تست‌ها در هر مرحله موفقیت‌آمیز باقی مانده‌اند.</p></div> <p>Listing 14-13 - ArgsTest.java</p><pre class="hljs"><code><span class="hljs-keyword">package</span> com.objectmentor.utilities.args;
 <span class="hljs-keyword">import</span> junit.framework.TestCase;
 <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ArgsTest</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">TestCase</span> {
     <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">testCreateWithNoSchemaOrArguments</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> Exception {
@@ -2861,9 +2468,7 @@
         }
     }
 }
-</code></pre>
-<p>Listing 14-14 - ArgsExceptionTest.java</p>
-<pre class="hljs"><code>
+</code></pre> <p>Listing 14-14 - ArgsExceptionTest.java</p><pre class="hljs"><code>
 <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ArgsExceptionTest</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">TestCase</span> {
     <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">testUnexpectedMessage</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> Exception {
         <span class="hljs-type">ArgsException</span> <span class="hljs-variable">e</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArgsException</span>(
@@ -2902,9 +2507,7 @@
     }
 }
 
-</code></pre>
-<p>Listing 14-15 - ArgsException.java</p>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ArgsException</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Exception</span> {
+</code></pre> <p>Listing 14-15 - ArgsException.java</p><pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ArgsException</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Exception</span> {
     <span class="hljs-keyword">private</span> <span class="hljs-type">char</span> <span class="hljs-variable">errorArgumentId</span> <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;\0&#x27;</span>;
     <span class="hljs-keyword">private</span> <span class="hljs-type">String</span> <span class="hljs-variable">errorParameter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;TILT&quot;</span>;
     <span class="hljs-keyword">private</span> <span class="hljs-type">ErrorCode</span> <span class="hljs-variable">errorCode</span> <span class="hljs-operator">=</span> ErrorCode.OK;
@@ -2983,9 +2586,7 @@
         INVALID_DOUBLE
     }
 }
-</code></pre>
-<p>Listing 14-16 - Args.java</p>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Args</span> {
+</code></pre> <p>Listing 14-16 - Args.java</p><pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Args</span> {
     <span class="hljs-keyword">private</span> String schema;
     <span class="hljs-keyword">private</span> Map&lt;Character, ArgumentMarshaler&gt; marshalers =
         <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;Character, ArgumentMarshaler&gt;();
@@ -3112,128 +2713,216 @@
         <span class="hljs-keyword">return</span> argsFound.contains(arg);
     }
 }
-</code></pre>
-<div dir="rtl">
-<p>کلاس <code>Args</code> بیشتر تغییراتش مربوط به حذف بخش‌هایی از کد بود. بخش زیادی از کد فقط از داخل <code>Args</code> منتقل شد و به <code>ArgsException</code> اضافه گردید. عالی است! همچنین تمام <code>ArgumentMarshallerها</code> به فایل‌های جداگانه منتقل شدند. خیلی بهتر!</p>
-<p>بخش زیادی از طراحی خوب نرم‌افزار، در واقع در مورد بخش‌بندی است—ایجاد مکان‌های مناسب برای قرار دادن انواع مختلف کد. این تفکیک مسئولیت‌ها باعث می‌شود کد بسیار ساده‌تر قابل فهم و نگهداری باشد.</p>
-<p>نکته جالب توجه، متد <code>errorMessage</code> در <code>ArgsException</code> است. به وضوح، قرار دادن کد فرمت کردن پیام خطا در داخل <code>Args</code> نقض اصل <code>SRP</code> بود. <code>Args</code> باید در مورد پردازش آرگومان‌ها باشد، نه فرمت پیام‌های خطا. اما آیا واقعاً منطقی است که کد فرمت پیام خطا را در داخل <code>ArgsException</code> قرار دهیم؟ به طور صریح، این یک مصالحه است. کاربرانی که از پیام‌های خطا که توسط <code>ArgsException</code> فراهم شده است راضی نیستند، باید پیام‌های خطای خودشان را بنویسند. اما راحتی در داشتن پیام‌های خطای آماده، بی‌اهمیت نیست.</p>
-<p>تا به حال باید واضح شده باشد که ما تقریباً به راه‌حل نهایی که در ابتدای این فصل آورده شده، نزدیک شده‌ایم. من باقی‌مانده تغییرات را به شما می‌سپارم تا به عنوان تمرین انجام دهید.</p>
-<h2>نتیجه‌گیری</h2>
-<p>کافی نیست که کد کار کند. کد کارا اغلب به شدت خراب است. برنامه‌نویس‌هایی که فقط به کارکردن کد اکتفا می‌کنند، به طور غیرحرفه‌ای عمل می‌کنند. آن‌ها ممکن است بترسند که وقت کافی برای بهبود ساختار و طراحی کد خود نداشته باشند، اما من با این نظر مخالفم. هیچ چیز به اندازه کد بد تأثیر مخرب و بلندمدتی بر روی یک پروژه توسعه نمی‌گذارد. برنامه‌نویسی که فقط به کد کارا اکتفا کند، در نهایت به یک کد خراب تبدیل می‌شود که بر پروژه تسلط پیدا می‌کند.</p>
-<p>البته که کد بد قابل تمیز کردن است، اما این کار بسیار پرهزینه است. وقتی کد خراب می‌شود، ماژول‌ها به هم می‌پیوندند و وابستگی‌های پنهان و درهم‌تنیده‌ای ایجاد می‌کنند. پیدا کردن و شکستن این وابستگی‌های قدیمی کار زمان‌بر و سختی است. از طرف دیگر، نگهداری کد تمیز نسبتاً راحت است. اگر صبح یک ماژول را خراب کردید، می‌توانید بعدازظهر آن را تمیز کنید. بهتر از آن، اگر پنج دقیقه پیش یک ماژول را خراب کرده‌اید، بسیار آسان است که همین الان آن را تمیز کنید.</p>
-<p>بنابراین راه‌حل این است که کد خود را به طور مداوم تمیز و ساده نگه دارید. هرگز اجازه ندهید که فساد کد آغاز شود.</p>
-</div>
-
-  </main>
-
-  <!-- فوتر مشترک -->
-  <footer class="footer">
-    <div class="container">
-      <p>
-        <img src="/Gitab/icone/copyright.svg" alt="کپی‌رایت" width="14" height="14"
-             style="vertical-align:middle;margin-inline:4px">
-        <span id="y"></span> Gitab — تمامی حقوق محفوظ است.
-      </p>
-    </div>
-  </footer>
-
-  <!-- سال و اسکریپت تغییر تم -->
-  <script>
+</code></pre> <div dir="rtl"><p>کلاس <code>Args</code> بیشتر تغییراتش مربوط به حذف بخش‌هایی از کد بود. بخش زیادی از کد فقط از داخل <code>Args</code> منتقل شد و به <code>ArgsException</code> اضافه گردید. عالی است! همچنین تمام <code>ArgumentMarshallerها</code> به فایل‌های جداگانه منتقل شدند. خیلی بهتر!</p><p>بخش زیادی از طراحی خوب نرم‌افزار، در واقع در مورد بخش‌بندی است—ایجاد مکان‌های مناسب برای قرار دادن انواع مختلف کد. این تفکیک مسئولیت‌ها باعث می‌شود کد بسیار ساده‌تر قابل فهم و نگهداری باشد.</p><p>نکته جالب توجه، متد <code>errorMessage</code> در <code>ArgsException</code> است. به وضوح، قرار دادن کد فرمت کردن پیام خطا در داخل <code>Args</code> نقض اصل <code>SRP</code> بود. <code>Args</code> باید در مورد پردازش آرگومان‌ها باشد، نه فرمت پیام‌های خطا. اما آیا واقعاً منطقی است که کد فرمت پیام خطا را در داخل <code>ArgsException</code> قرار دهیم؟ به طور صریح، این یک مصالحه است. کاربرانی که از پیام‌های خطا که توسط <code>ArgsException</code> فراهم شده است راضی نیستند، باید پیام‌های خطای خودشان را بنویسند. اما راحتی در داشتن پیام‌های خطای آماده، بی‌اهمیت نیست.</p><p>تا به حال باید واضح شده باشد که ما تقریباً به راه‌حل نهایی که در ابتدای این فصل آورده شده، نزدیک شده‌ایم. من باقی‌مانده تغییرات را به شما می‌سپارم تا به عنوان تمرین انجام دهید.</p><h2>نتیجه‌گیری</h2><p>کافی نیست که کد کار کند. کد کارا اغلب به شدت خراب است. برنامه‌نویس‌هایی که فقط به کارکردن کد اکتفا می‌کنند، به طور غیرحرفه‌ای عمل می‌کنند. آن‌ها ممکن است بترسند که وقت کافی برای بهبود ساختار و طراحی کد خود نداشته باشند، اما من با این نظر مخالفم. هیچ چیز به اندازه کد بد تأثیر مخرب و بلندمدتی بر روی یک پروژه توسعه نمی‌گذارد. برنامه‌نویسی که فقط به کد کارا اکتفا کند، در نهایت به یک کد خراب تبدیل می‌شود که بر پروژه تسلط پیدا می‌کند.</p><p>البته که کد بد قابل تمیز کردن است، اما این کار بسیار پرهزینه است. وقتی کد خراب می‌شود، ماژول‌ها به هم می‌پیوندند و وابستگی‌های پنهان و درهم‌تنیده‌ای ایجاد می‌کنند. پیدا کردن و شکستن این وابستگی‌های قدیمی کار زمان‌بر و سختی است. از طرف دیگر، نگهداری کد تمیز نسبتاً راحت است. اگر صبح یک ماژول را خراب کردید، می‌توانید بعدازظهر آن را تمیز کنید. بهتر از آن، اگر پنج دقیقه پیش یک ماژول را خراب کرده‌اید، بسیار آسان است که همین الان آن را تمیز کنید.</p><p>بنابراین راه‌حل این است که کد خود را به طور مداوم تمیز و ساده نگه دارید. هرگز اجازه ندهید که فساد کد آغاز شود.</p></div> </article><nav class="chapter-single-next-nav"> <a href="/Gitab/books/book3/Book/15_JUnit_Internals/JUnit_Internals/" class="btn-next-chapter-action" id="nextChapterBtn" data-hub="/Gitab/books/book3/"> <span class="next-btn-text">فصل بعدی: کالبدشکافی JUnit</span> <span class="next-btn-arrow">←</span> </a> </nav></div> <button class="fab-back-to-top" id="backToTopBtn" type="button" aria-label="رفتن به بالای صفحه" title="رفتن به بالا"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"> <polyline points="18 15 12 9 6 15"></polyline> </svg> </button></main> <footer class="footer-minimal"><div class="footer-container"> <div class="footer-top-row"><div class="footer-brand-side"> <a href="/Gitab/" class="footer-brand-anchor"> <img src="/Gitab/icone/logo.svg" alt="Gitab" width="28" height="28" loading="lazy" decoding="async"> <span class="footer-brand-title">گیتاب (Gitab)</span> </a> <p class="footer-tagline"> پلتفرم آزاد و مستقل برای ترجمهٔ دقیق و روان کتاب‌های مرجع مهندسی نرم‌افزار. </p></div> <div class="footer-nav-cols"><div class="footer-nav-col"> <span class="footer-nav-heading">موضوعات</span><ul class="footer-nav-list"> <li><a href="/Gitab/books/list-books/?cat=csharp">سی‌شارپ و دات‌نت</a></li><li><a href="/Gitab/books/list-books/?cat=clean-code">کد تمیز و بازآفرینی</a></li><li><a href="/Gitab/books/list-books/?cat=architecture">معماری و طراحی دامنه</a></li><li><a href="/Gitab/books/list-books/?cat=system">لینوکس و خط فرمان</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">بخش‌های سایت</span><ul class="footer-nav-list"> <li><a href="/Gitab/">صفحه اصلی</a></li><li><a href="/Gitab/books/list-books/">کتابخانه کامل</a></li><li><a href="/Gitab/courses/">دوره‌های آموزشی</a></li><li><a href="/Gitab/translator.html">تالار مترجمین</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">مشارکت و جامعه</span><ul class="footer-nav-list"> <li><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer">راهنمای همکاری در ترجمه</a></li><li><a href="https://github.com/hheydarian/Gitab/issues" target="_blank" rel="noopener noreferrer">پیشنهاد کتاب یا گزارش خطا</a></li></ul> </div></div> </div><div class="footer-bottom-line"> <span>© <span id="y">2026</span> Gitab — توسعه‌یافته برای جامعهٔ مهندسان نرم‌افزار ایرانی</span></div> </div></footer> <script>
   (() => {
     const root = document.documentElement;
     const btn = document.getElementById('themeToggle');
+    const sunIcon = btn ? btn.querySelector('.icon-sun') : null;
+    const moonIcon = btn ? btn.querySelector('.icon-moon') : null;
     const KEY = 'gitab-theme';
 
-    function updateTheme(s) {
-      root.setAttribute('data-theme', s);
-      const mode = s;  // فقط `dark` یا `light` خواهد بود
+    function updateTheme(mode) {
+      root.setAttribute('data-theme', mode);
       root.dataset.colorMode = mode;
-      btn.dataset.icon = mode === 'dark' ? 'moon' : 'sun';
+      if (sunIcon && moonIcon) {
+        if (mode === 'dark') {
+          sunIcon.style.display = 'inline-block';
+          moonIcon.style.display = 'none';
+        } else {
+          sunIcon.style.display = 'none';
+          moonIcon.style.display = 'inline-block';
+        }
+      }
     }
 
-    // وضعیت تم ذخیره شده از localStorage
-    let saved = localStorage.getItem(KEY) || 'light'; // پیش‌فرض روشن
+    let saved = 'dark';
+    try { saved = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
     updateTheme(saved);
 
-    // تنظیم مجدد تم هنگام تغییر وضعیت دکمه
-    btn.addEventListener('click', () => {
-      const current = localStorage.getItem(KEY) || 'light';
-      const next = current === 'dark' ? 'light' : 'dark';  // فقط دو حالت: تاریک و روشن
-      localStorage.setItem(KEY, next);
-      updateTheme(next);
-    });
+    if (btn) {
+      btn.addEventListener('click', () => {
+        let current = 'dark';
+        try { current = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+        const next = current === 'dark' ? 'light' : 'dark';
+        try { localStorage.setItem(KEY, next); } catch (e) {}
+        updateTheme(next);
+      });
+    }
 
-    // هنگام بارگذاری صفحه
     document.addEventListener('DOMContentLoaded', () => {
-      updateTheme(localStorage.getItem(KEY) || 'light');
+      let mode = 'dark';
+      try { mode = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+      updateTheme(mode);
+      const yearSpan = document.getElementById('y');
+      if (yearSpan) yearSpan.textContent = new Date().getFullYear();
     });
+
+    const mobBtn = document.getElementById('mobileMenuBtn');
+    const mobDrawer = document.getElementById('mobileDrawer');
+    if (mobBtn && mobDrawer) {
+      const setDrawerOpen = (open) => {
+        mobDrawer.classList.toggle('open', open);
+        mobBtn.classList.toggle('is-open', open);
+        mobBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        mobBtn.setAttribute('aria-label', open ? 'بستن منو' : 'باز کردن منو');
+        mobDrawer.setAttribute('aria-hidden', open ? 'false' : 'true');
+      };
+
+      mobBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        setDrawerOpen(!mobDrawer.classList.contains('open'));
+      });
+
+      mobDrawer.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => setDrawerOpen(false));
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && mobDrawer.classList.contains('open')) {
+          setDrawerOpen(false);
+        }
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!mobDrawer.contains(e.target) && !mobBtn.contains(e.target)) {
+          setDrawerOpen(false);
+        }
+      });
+    }
+
+    if ('serviceWorker' in navigator) {
+      const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+      if (isLocalhost) {
+        navigator.serviceWorker.getRegistrations().then(regs => {
+          for (const reg of regs) reg.unregister();
+        });
+        if ('caches' in window) {
+          caches.keys().then(names => {
+            for (const name of names) caches.delete(name);
+          });
+        }
+      } else {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/Gitab/sw.js').catch(() => {});
+        });
+      }
+    }
   })();
-</script>
-
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-  <script>hljs.highlightAll();</script>
-
-  <script>
+  </script> <script>
   document.querySelectorAll('pre code').forEach(block => {
+    const pre = block.parentNode;
+    if (!pre || pre.querySelector('.copy-btn')) return;
+
+    const copySvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
+    const okSvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+
     const btn = document.createElement('button');
     btn.className = 'copy-btn';
-
-    const icon = document.createElement('img');
-    icon.src = "/Gitab/icone/copy.svg";
-    icon.alt = 'Copy';
-    btn.appendChild(icon);
-
-    block.parentNode.insertBefore(btn, block);
+    btn.setAttribute('aria-label', 'کپی کد');
+    btn.setAttribute('title', 'کپی کد');
+    btn.setAttribute('type', 'button');
+    btn.innerHTML = copySvg;
+    pre.appendChild(btn);
 
     btn.addEventListener('click', async () => {
-      await navigator.clipboard.writeText(block.textContent);
-      btn.classList.add('copied');
-      setTimeout(() => btn.classList.remove('copied'), 1500);
-    });
-  });
-  </script>
-
-  <script>
-  document.body.dataset.page = window.location.pathname;
-
-  const menuBtn = document.querySelector(".menu-toggle");
-  const nav = document.querySelector(".nav");
-
-  if (menuBtn && nav) {
-    menuBtn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      nav.classList.toggle("show");
-    });
-
-    document.addEventListener("click", (e) => {
-      const clickedInsideNav = nav.contains(e.target);
-      const clickedMenuButton = menuBtn.contains(e.target);
-      if (!clickedInsideNav && !clickedMenuButton) {
-        nav.classList.remove("show");
+      try {
+        await navigator.clipboard.writeText(block.textContent);
+        btn.classList.add('copied');
+        btn.innerHTML = okSvg;
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          btn.innerHTML = copySvg;
+        }, 1800);
+      } catch (err) {
+        console.error('Copy failed:', err);
       }
     });
-  }
-  </script>
-
-  <script>
-    document.getElementById('y').textContent = new Date().getFullYear();
-  </script>
-  <script>
-document.getElementById("openDonate").addEventListener("click", () => {
-  document.getElementById("donateModal").style.display = "block";
-});
-document.getElementById("closeDonate").addEventListener("click", () => {
-  document.getElementById("donateModal").style.display = "none";
-});
-document.querySelectorAll(".copy-btn").forEach(btn => {
-  btn.addEventListener("click", () => {
-    navigator.clipboard.writeText(btn.dataset.copy);
-  
-    setTimeout(() => (btn.textContent = "کپی"), 2000);
   });
-});
-</script>
+  </script> <script>
+  (() => {
+    const article = document.getElementById('chapterArticle');
+    if (!article) return;
 
-</body>
-</html>
+    const progressBar = document.getElementById('readingProgressBar');
+    if (progressBar) {
+      window.addEventListener('scroll', () => {
+        const docElem = document.documentElement;
+        const totalHeight = docElem.scrollHeight - docElem.clientHeight;
+        if (totalHeight > 0) {
+          const progress = (window.pageYOffset / totalHeight) * 100;
+          progressBar.style.width = Math.min(100, Math.max(0, progress)) + '%';
+        }
+      }, { passive: true });
+    }
+
+    const btt = document.getElementById('backToTopBtn');
+    if (btt) {
+      window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 250) {
+          btt.classList.add('visible');
+        } else {
+          btt.classList.remove('visible');
+        }
+      }, { passive: true });
+
+      btt.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+
+    article.querySelectorAll('img').forEach(img => {
+      if (!img.hasAttribute('loading')) img.loading = 'lazy';
+      if (!img.hasAttribute('decoding')) img.decoding = 'async';
+      const parent = img.parentElement;
+      if (parent && parent.tagName === 'P') {
+        parent.style.textAlign = 'center';
+      }
+
+      img.addEventListener('error', function() {
+        const src = this.getAttribute('src');
+        if (src && src.includes('assets/image/')) {
+          const parts = src.split('assets/image/');
+          const corrected = '/Gitab/books/book3/assets/image/' + parts[1];
+          if (this.src !== corrected) {
+            this.src = corrected;
+          }
+        }
+      });
+    });
+
+    article.querySelectorAll('p').forEach(p => {
+      const trimmed = p.innerText.trim();
+      if (trimmed.startsWith('💡') || trimmed.startsWith('نکته:')) {
+        p.classList.add('react-callout', 'callout-tip');
+      } else if (trimmed.startsWith('⚠️') || trimmed.startsWith('هشدار:')) {
+        p.classList.add('react-callout', 'callout-warning');
+      } else if (trimmed.startsWith('📌') || trimmed.startsWith('مهم:')) {
+        p.classList.add('react-callout', 'callout-important');
+      } else if (trimmed.startsWith('🔹') || trimmed.startsWith('🔸')) {
+        p.classList.add('react-callout', 'callout-note');
+      }
+    });
+  })();
+  </script> <script type="speculationrules">{"prefetch":[{"where":{"and":[{"href_matches":"/Gitab/*"},{"not":{"href_matches":"/Gitab/downloads/*"}},{"not":{"selector_matches":"[download], [target='_blank']"}}]},"eagerness":"moderate"}]}</script> <script>
+  (() => {
+    if (window.HTMLScriptElement && HTMLScriptElement.supports && HTMLScriptElement.supports('speculationrules')) return;
+    const seen = new Set([window.location.href]);
+    let count = 0;
+    const prefetchLink = (e) => {
+      if (count >= 12) return;
+      const a = e.target && e.target.closest ? e.target.closest('header a, .chapter-single-next-nav a, .syllabus-chapter-item a, .btn-hero-read, .btn-card-read') : null;
+      if (!a || !a.href || a.hasAttribute('download') || a.target === '_blank') return;
+      if (a.origin !== window.location.origin || a.pathname.includes('/downloads/')) return;
+      const clean = a.href.split('#')[0];
+      if (!clean || seen.has(clean)) return;
+      seen.add(clean);
+      count++;
+      const l = document.createElement('link');
+      l.rel = 'prefetch';
+      l.href = clean;
+      document.head.appendChild(l);
+    };
+    document.addEventListener('pointerenter', prefetchLink, { capture: true, passive: true });
+    document.addEventListener('touchstart', prefetchLink, { capture: true, passive: true });
+  })();
+  </script></body></html>

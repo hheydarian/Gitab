@@ -1,0 +1,388 @@
+<!doctype html><html lang="fa" dir="rtl"> <head><script>
+    if (window.location.pathname.startsWith('/gitab/')) {
+      window.location.replace(window.location.pathname.replace(/^\/gitab\//i, '/Gitab/') + window.location.search + window.location.hash);
+    }
+    (() => {
+      try {
+        const t = localStorage.getItem('gitab-theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', t);
+        document.documentElement.dataset.colorMode = t;
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        document.documentElement.dataset.colorMode = 'dark';
+      }
+    })();
+  </script> <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5"> <title>۱۰۷.۲ خودکارسازی وظایف با زمان‌بندی (cron و at)</title><meta name="description" content="۱۰۷.۲ خودکارسازی وظایف با زمان‌بندی (cron و at) — مطالعه آنلاین و رایگان از کتاب «راهنمای آزمون LPIC-1 (ورژن ۵۰۰)» (LPIC-1 Study Guide (Version 500)) اثر جادی میرمیرانی با ترجمه جادی میرمیرانی در گیتاب."> <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"><meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"> <meta name="theme-color" content="#090d16"><meta name="referrer" content="strict-origin-when-cross-origin"> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https:; frame-src https://www.youtube.com https://www.youtube-nocookie.com https://maps.google.com https://www.google.com; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self';"><link rel="icon" type="image/png" href="/Gitab/favicon.png"> <link rel="canonical" href="https://hheydarian.github.io/Gitab/books/book13/Book/34/1072-automate-system-administration-tasks-by-scheduling-jobs/"><link rel="alternate" hreflang="fa" href="https://hheydarian.github.io/Gitab/books/book13/Book/34/1072-automate-system-administration-tasks-by-scheduling-jobs/"> <link rel="alternate" hreflang="x-default" href="https://hheydarian.github.io/Gitab/books/book13/Book/34/1072-automate-system-administration-tasks-by-scheduling-jobs/"><link rel="alternate" type="text/plain" title="LLMs.txt" href="/Gitab/llms.txt"> <link rel="sitemap" type="application/xml" title="Sitemap" href="/Gitab/sitemap.xml"><meta property="og:locale" content="fa_IR"> <meta property="og:type" content="article"><meta property="og:site_name" content="گیتاب | Gitab"> <meta property="og:title" content="۱۰۷.۲ خودکارسازی وظایف با زمان‌بندی (cron و at)"><meta property="og:description" content="۱۰۷.۲ خودکارسازی وظایف با زمان‌بندی (cron و at) — مطالعه آنلاین و رایگان از کتاب «راهنمای آزمون LPIC-1 (ورژن ۵۰۰)» (LPIC-1 Study Guide (Version 500)) اثر جادی میرمیرانی با ترجمه جادی میرمیرانی در گیتاب."> <meta property="og:url" content="https://hheydarian.github.io/Gitab/books/book13/Book/34/1072-automate-system-administration-tasks-by-scheduling-jobs/"><meta property="og:image" content="https://hheydarian.github.io/Gitab/images/lpic1book/Cover.jpg"> <meta property="og:image:alt" content="۱۰۷.۲ خودکارسازی وظایف با زمان‌بندی (cron و at)"><meta name="twitter:card" content="summary_large_image"> <meta name="twitter:title" content="۱۰۷.۲ خودکارسازی وظایف با زمان‌بندی (cron و at)"><meta name="twitter:description" content="۱۰۷.۲ خودکارسازی وظایف با زمان‌بندی (cron و at) — مطالعه آنلاین و رایگان از کتاب «راهنمای آزمون LPIC-1 (ورژن ۵۰۰)» (LPIC-1 Study Guide (Version 500)) اثر جادی میرمیرانی با ترجمه جادی میرمیرانی در گیتاب."> <meta name="twitter:image" content="https://hheydarian.github.io/Gitab/images/lpic1book/Cover.jpg"><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://hheydarian.github.io/Gitab/#organization","name":"گیتاب | Gitab","alternateName":"Gitab","url":"https://hheydarian.github.io/Gitab/","logo":{"@type":"ImageObject","url":"https://hheydarian.github.io/Gitab/favicon.png"},"sameAs":["https://github.com/hheydarian/Gitab"]},{"@type":"WebSite","@id":"https://hheydarian.github.io/Gitab/#website","url":"https://hheydarian.github.io/Gitab/","name":"گیتاب | Gitab","inLanguage":"fa-IR","publisher":{"@id":"https://hheydarian.github.io/Gitab/#organization"},"potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://hheydarian.github.io/Gitab/books/list-books/?q={search_term_string}"},"query-input":"required name=search_term_string"}},{"@type":"WebPage","@id":"https://hheydarian.github.io/Gitab/books/book13/Book/34/1072-automate-system-administration-tasks-by-scheduling-jobs/#webpage","url":"https://hheydarian.github.io/Gitab/books/book13/Book/34/1072-automate-system-administration-tasks-by-scheduling-jobs/","name":"۱۰۷.۲ خودکارسازی وظایف با زمان‌بندی (cron و at)","description":"۱۰۷.۲ خودکارسازی وظایف با زمان‌بندی (cron و at) — مطالعه آنلاین و رایگان از کتاب «راهنمای آزمون LPIC-1 (ورژن ۵۰۰)» (LPIC-1 Study Guide (Version 500)) اثر جادی میرمیرانی با ترجمه جادی میرمیرانی در گیتاب.","inLanguage":"fa-IR","isPartOf":{"@id":"https://hheydarian.github.io/Gitab/#website"}},{"@type":"TechArticle","headline":"۱۰۷.۲ خودکارسازی وظایف با زمان‌بندی (cron و at)","description":"۱۰۷.۲ خودکارسازی وظایف با زمان‌بندی (cron و at) — مطالعه آنلاین و رایگان از کتاب «راهنمای آزمون LPIC-1 (ورژن ۵۰۰)» (LPIC-1 Study Guide (Version 500)) اثر جادی میرمیرانی با ترجمه جادی میرمیرانی در گیتاب.","url":"https://hheydarian.github.io/Gitab/books/book13/Book/34/1072-automate-system-administration-tasks-by-scheduling-jobs/","inLanguage":"fa-IR","isAccessibleForFree":true,"author":{"@type":"Person","name":"جادی میرمیرانی"},"translator":{"@type":"Person","name":"جادی میرمیرانی"},"isPartOf":{"@type":"Book","name":"راهنمای آزمون LPIC-1 (ورژن ۵۰۰)","alternateName":"LPIC-1 Study Guide (Version 500)","url":"https://hheydarian.github.io/Gitab/books/book13/"}}]}</script> <link rel="preload" href="/Gitab/fonts/Vazirmatn.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/Gitab/styles/main.css?v=2.4" as="style"> <link rel="preload" href="/Gitab/styles/gitab-modern.css?v=2.5" as="style"><style>@font-face{font-family:'Lalezar';src:url('/Gitab/fonts/Lalezar.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}@font-face{font-family:'Vazirmatn';src:url('/Gitab/fonts/Vazirmatn.woff2') format('woff2');font-weight:100 900;font-style:normal;font-display:swap}html,body,button,input,optgroup,select,textarea,.filter-pill{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}input::placeholder,textarea::placeholder{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}</style> <link rel="stylesheet" href="/Gitab/styles/main.css?v=2.4"><link rel="stylesheet" href="/Gitab/styles/gitab-modern.css?v=2.5"> <link rel="stylesheet" href="/Gitab/styles/vendor/github-dark.min.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="/Gitab/styles/vendor/github-dark.min.css"></noscript></head> <body><header class="header"> <div class="container nav-wrap"><a href="/Gitab/" class="brand" aria-label="صفحه اصلی گیتاب"> <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="30" height="30" decoding="async"> <span class="brand-text">Gitab</span> </a> <nav class="nav" id="mainNav"><a href="/Gitab/" >خانه</a> <a href="/Gitab/books/list-books" aria-current="page">کتاب‌ها</a> <a href="/Gitab/courses/" >دوره‌ها</a> <a href="/Gitab/translator.html" >مترجمین</a></nav> <div class="nav-actions"><button id="themeToggle" class="theme-toggle-btn" aria-label="تغییر تم" title="تغییر تم"> <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن" width="18" height="18" decoding="async" style="display:none"> <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک" width="18" height="18" decoding="async"> </button> <a class="btn-github-pill" href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" title="مشاهده سورس گیتاب در گیت‌هاب"> <img src="/Gitab/icone/github.svg" alt="GitHub" width="16" height="16" decoding="async"> <span>گیت‌هاب</span> </a> <button class="mobile-menu-btn" id="mobileMenuBtn" type="button" aria-label="باز کردن منو" aria-expanded="false"> <svg class="mob-icon-open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="4" y1="7" x2="20" y2="7"></line> <line x1="4" y1="12" x2="20" y2="12"></line> <line x1="4" y1="17" x2="14" y2="17"></line> </svg> <svg class="mob-icon-close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="18" y1="6" x2="6" y2="18"></line> <line x1="6" y1="6" x2="18" y2="18"></line> </svg> </button></div> </div><div class="mobile-drawer" id="mobileDrawer" aria-hidden="true"> <div class="mobile-drawer-inner"><div class="mobile-drawer-section-label">ناوبری سریع</div><nav class="mobile-drawer-links" aria-label="منوی موبایل"> <a href="/Gitab/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M3 10.5 12 3l9 7.5"></path> <path d="M5 9.5V20a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V9.5"></path> </svg> </span> <span class="mob-nav-text">صفحه نخست</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/books/list-books" class="mobile-drawer-link active" aria-current="page"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path> </svg> </span> <span class="mob-nav-text">کتابخانه و فهرست کتاب‌ها</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/courses/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path> <path d="M6 12v5c3 3 9 3 12 0v-5"></path> </svg> </span> <span class="mob-nav-text">دوره‌های آموزشی</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/translator.html" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path> <circle cx="9" cy="7" r="4"></circle> <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path> <path d="M16 3.13a4 4 0 0 1 0 7.75"></path> </svg> </span> <span class="mob-nav-text">مترجمین و همکاران</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> </nav><div class="mobile-drawer-divider"></div><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" class="mobile-drawer-link mobile-drawer-gh"> <span class="mob-nav-icon" aria-hidden="true"> <img src="/Gitab/icone/github.svg" alt="" width="17" height="17" loading="lazy" decoding="async"> </span> <span class="mob-nav-text">مخزن گیت‌هاب پروژه</span> <span class="mob-nav-ext" aria-hidden="true">↗</span> </a> </div></div> </header><div class="reading-progress-track"> <div class="reading-progress-fill" id="readingProgressBar"></div></div> <main class="site-main chapter-reading-page"><div class="chapter-page-wrapper"> <nav class="chapter-clean-breadcrumb" aria-label="مسیر راهنما" dir="rtl"><a href="/Gitab/">خانه</a> <span class="bc-sep" aria-hidden="true">/</span> <a href="/Gitab/books/list-books/">کتاب‌ها</a> <span class="bc-sep" aria-hidden="true">/</span> <a href="/Gitab/books/book13/"><bdi>راهنمای آزمون LPIC-1</bdi></a> <span class="bc-sep" aria-hidden="true">/</span> <span class="bc-current-leaf"><bdi>۱۰۷.۲ خودکارسازی وظایف با زمان‌بندی (cron و at)</bdi></span></nav> <article class="chapter-prose-container markdown-body" id="chapterArticle" dir="rtl"><h1>۱۰۷.۲ خودکارسازی وظایف با زمان‌بندی (cron و at)</h1><div class="callout callout-info" style="background: rgba(59, 130, 246, 0.08); border-right: 4px solid #3b82f6; padding: 16px 20px; border-radius: 8px; margin-bottom: 24px;"> <strong>خلاصه هدف آزمون:</strong> قالب پنج ستاره crontab، فایل‌های /etc/cron.*، دستور at برای کارهای یکباره و زمان‌بند systemd timers. </div><div class="video-container" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; border-radius: 12px; margin: 24px 0; border: 1px solid var(--g-border-dim);"> <iframe src="https://www.youtube.com/embed/jIgJ-l_HMgE" title="ویدئوی آموزشی جادی برای این سرفصل" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen></iframe></div> <h2>🎯 اهداف و سرفصل‌های این بخش</h2><p>در این درسنامه موارد زیر را بررسی و مرور می‌کنیم:</p><ul> <li>مفاهیم کلیدی مورد پرسش در آزمون بین‌المللی LPIC-1</li><li>دستورات، فایل‌های پیکربندی و ابزارهای مرتبط در خط فرمان</li><li>نکات پرتکرار آزمون‌های ۱۰۱ و ۱۰۲ همراه با نمونه‌های کاربردی</li></ul> <hr><h2>📝 متن درسنامه و توضیحات تکمیلی</h2><p><em>ضریب اهمیت (Weight): ۴</em></p><p>داوطلبان باید بتوانند از <code>cron</code> و تایمرهای <code>systemd</code> برای اجرای کارها در بازه‌های زمانی منظم و از دستور <code>at</code> برای اجرای کارها در یک زمان مشخص استفاده کنند.</p><h3>حوزه‌های دانش کلیدی</h3><ul> <li>مدیریت کارهای <code>cron</code> و <code>at</code></li><li>پیکربندی دسترسی کاربران به سرویس‌های <code>cron</code> و <code>at</code></li><li>درک واحدهای تایمر <code>systemd</code> (Timer units)</li></ul> <h3>اصطلاحات و ابزارها</h3><div dir="ltr"> <ul><li><code>/etc/cron.{d,daily,hourly,monthly,weekly}/</code></li><li><code>/etc/at.deny</code></li><li><code>/etc/at.allow</code></li><li><code>/etc/crontab</code></li><li><code>/etc/cron.allow</code></li><li><code>/etc/cron.deny</code></li><li><code>/var/spool/cron/</code></li><li><code>crontab</code></li><li><code>at</code></li><li><code>atq</code></li><li><code>atrm</code></li><li><code>systemctl</code></li><li><code>systemd-run</code></li></ul> </div><p>موقعیت‌های زیادی پیش می‌آید که لازم است دستوراتی را در زمان‌ها یا بازه‌های مشخصی اجرا کنیم. مثلاً شاید بخواهید فرآیند بکاپ‌گیری هر روز صبح ساعت <code>03:00</code> اجرا شود، یا لیست فایل‌های ایندکس وب‌تان هر ساعت به‌روزرسانی شود.</p><p>در دنیای لینوکس روش‌های مختلفی برای این کار وجود دارد. رایج‌ترین آن‌ها <code>crontab</code> برای اجرای وظایف در بازه‌های زمانی منظم، <code>at</code> برای اجرای یک دستور در یک زمان مشخص (یک‌باره)، و همچنین ابزارهای ارائه‌شده توسط <code>systemd</code> هستند.</p><h3>قالب Crontab</h3><p>ابزار <code>crontab</code> با یک فایل پیکربندی کار می‌کند که به آن می‌گوید چه زمانی یک دستور را اجرا کند. مثلاً می‌توانید بگویید «وقتی ساعت <code>03</code> و دقیقه <code>00</code> است دستورات من را اجرا کن» یا «وقتی شنبه، ساعت <code>10</code> و دقیقه <code>00</code> است دستوری را اجرا کن» یا «هر وقت دقیقه <code>00</code> شد اجرا کن».</p><p>هر خط پیکربندی در <code>crontab</code> شامل ۶ فیلد است. ۵ فیلد اول یک زمان‌بندی مشخص را تعریف می‌کنند و هر چه بعد از آن می‌آید به عنوان «دستور» اجرا می‌شود:</p><pre class="hljs"><code>A    B    C    D    E    command and arguments
+</code></pre> <table><thead> <tr><th style="text-align:center">فیلد</th><th style="text-align:left">معنی</th><th style="text-align:left">مقادیر مجاز</th></tr> </thead><tbody> <tr><td style="text-align:center"><code>A</code></td><td style="text-align:left">دقیقه (minute)</td><td style="text-align:left"><code>0-59</code></td></tr> <tr><td style="text-align:center"><code>B</code></td><td style="text-align:left">ساعت (hour)</td><td style="text-align:left"><code>0-23</code></td></tr> <tr><td style="text-align:center"><code>C</code></td><td style="text-align:left">روز ماه (day of month)</td><td style="text-align:left"><code>1-31</code></td></tr> <tr><td style="text-align:center"><code>D</code></td><td style="text-align:left">ماه (month)</td><td style="text-align:left"><code>1-12</code> (یا نام ماه‌ها، پایین را ببینید)</td></tr> <tr><td style="text-align:center"><code>E</code></td><td style="text-align:left">روز هفته (day of week)</td><td style="text-align:left"><code>0-7</code> (<code>0</code> یا <code>7</code> یعنی یکشنبه، یا از نام روزها استفاده کنید)</td></tr> </tbody></table> <p>اگر یک فیلد را با <code>*</code> جایگزین کنید، یعنی «هر مقداری» یا «همه». همچنین اگر به جای ۵ فیلد زمان از کلماتی مثل <code>@reboot</code> یا <code>@daily</code> استفاده کنید، دستور یک بار بعد از ریبوت یا به صورت روزانه اجرا می‌شود. بیایید چند مثال ببینیم:</p><pre class="hljs"><code>5 0 * * *       $HOME/bin/daily.job &gt;&gt; $HOME/tmp/out 2&gt;&amp;1
+
+# run at 2:15pm on the first of every month -- output mailed to paul
+15 14 1 * *     $HOME/bin/monthly
+
+# run at 10 pm on weekdays, annoy Joe
+0 22 * * 1-5    mail -s &quot;It&#x27;s 10pm&quot; joe%Joe,%%Where are your kids?%
+
+23 0-23/2 * * * echo &quot;run 23 minutes after midn, 2am, 4am ..., everyday&quot;
+5 4 * * sun     echo &quot;run at 5 after 4 every sunday&quot;
+
+*/5 * * * *    echo &quot;each 5 mintues&quot;
+
+42 8,18 * * 1-5    echo &quot;8:42 and 18:42 and only on weekdays (monday till friday)&quot;
+
+@reboot        echo &quot;runs after the reboot&quot;
+</code></pre> <p>همان‌طور که در مثال‌های بالا می‌بینید، می‌توان از <code>/</code> برای تقسیم کردن بازه زمانی استفاده کرد (پس <code>*/5</code> در ستون دقیقه یعنی هر پنج دقیقه یک بار) یا از <code>,</code> برای مشخص کردن بیش از یک عدد بهره برد (پس <code>8,18</code> یعنی ساعت ۸ و ۱۸).</p><blockquote> <p>وقتی در فیلد اول از <code>*</code> استفاده می‌کنید، یعنی دستورتان را <strong>هر دقیقه</strong> اجرا می‌کنید.</p></blockquote> <blockquote><p>چیزی مثل <code>42 8 1 1 0</code> <strong>فقط</strong> زمانی اجرا می‌شود که اول ژانویه یکشنبه باشد! (یا در برخی پیاده‌سازی‌ها بین روز ماه و روز هفته OR برقرار است، اما نکته این ترکیب شرطی بودن است — در کران استاندارد اگر هم روز ماه و هم روز هفته هر دو غیر از <code>*</code> باشند، معمولاً هر کدام برقرار شود اجرا می‌شود، پس در امتحان دقت کنید).</p></blockquote> <p>وقتی یک <code>cron</code> اجرا می‌شود، خروجی آن برای صاحب آن cron ایمیل می‌شود.</p><h3>کران‌های مخصوص هر کاربر</h3><p>کران یک سرویس لینوکسی است. برای دیدن کران‌های خودتان می‌توانید از <code>crontab -l</code> (لیست) و برای ویرایش آن‌ها از <code>crontab -e</code> (ادیت) استفاده کنید که فایل کران را با یک ویرایشگر مخصوص باز می‌کند و بعد از اتمام کار، آن را اعتبارسنجی کرده و بارگذاری می‌کند.</p><p>این فایل‌ها در مسیر <code>/var/spool/cron/tabs/</code> یا <code>/var/spool/crontabs/</code> ذخیره می‌شوند:</p><pre class="hljs"><code># cat /var/spool/cron/tabs/jadi
+# DO NOT EDIT THIS FILE - edit the master and reinstall.
+# (/tmp/crontab.khObLu installed on Thu Oct 29 22:04:43 2023)
+# (Cronie version 4.2)
+# Example of job definition:
+# .---------------- minute (0 - 59)
+# |  .------------- hour (0 - 23)
+# |  |  .---------- day of month (1 - 31)
+# |  |  |  .------- month (1 - 12) OR jan,feb,mar,apr ...
+# |  |  |  |  .---- day of week (0 - 6) (Sunday=0 or 7) OR sun,mon,tue,wed,thu,fri,sat
+# |  |  |  |  |
+# *  *  *  *  * command to be executed
+* * * * * date &gt;&gt; /tmp/date.cron.txt
+</code></pre> <blockquote><p>هیچ‌وقت این فایل‌ها را مستقیماً ویرایش نکنید؛ به جایش از <code>crontab -e</code> استفاده کنید.</p></blockquote> <h3>کران سراسری سیستم (System-wide cron)</h3><p>یک فایل به نام <code>/etc/crontab</code> وجود دارد. این فایل شبیه فایل کران عادی است که با <code>crontab -e</code> باز می‌شود، اما یک فیلد اضافه دارد:</p><pre class="hljs"><code>A    B    C    D    E    USER    command and arguments
+</code></pre> <p>این فایل را باید مستقیماً با یک ویرایشگر متن ادیت کرد و در آن می‌توانیم مشخص کنیم کدام کاربر (<code>USER</code>) این دستورات را اجرا کند:</p><pre class="hljs"><code># cat /etc/crontab
+SHELL=/bin/sh
+PATH=/usr/bin:/usr/sbin:/sbin:/bin:/usr/lib/news/bin
+MAILTO=root
+#
+# check scripts in cron.hourly, cron.daily, cron.weekly, and cron.monthly
+#
+-*/15 * * * *   root  test -x /usr/lib/cron/run-crons &amp;&amp; /usr/lib/cron/run-crons &gt;/dev/null 2&gt;&amp;1
+</code></pre> <blockquote><p><strong>نکته:</strong> به سه خط اول دقت کنید. این سه خط شلِ اجراکننده دستورات، متغیر <code>PATH</code> و همچنین کسی را که ایمیل خروجی‌ها برایش فرستاده می‌شود (<code>MAILTO</code>) تنظیم می‌کنند.</p></blockquote> <p>همان‌طور که می‌بینید، این <code>crontab</code> پیش‌فرض، کران‌های دیگری را اجرا می‌کند! یعنی کران‌های ساعتی، روزانه، هفتگی و ماهانه. بیایید در بخش بعدی نگاهی به آن‌ها بیندازیم.</p><h3>کران‌های ساعتی، روزانه، هفتگی و ماهانه سیستم</h3><p>ما چند فایل crontab در سطح سیستم داخل دایرکتوری <code>/etc/cron.d/</code> هم داریم. آن‌ها دقیقاً شبیه فایل‌های عمومی crontab هستند. برای مثال این فایلی است که برنامه <code>munin</code> می‌سازد:</p><pre class="hljs"><code>$ cat /etc/cron.d/munin
+#
+# cron-jobs for munin
+#
+
+MAILTO=root
+
+*/5 * * * *     munin if [ -x /usr/bin/munin-cron ]; then /usr/bin/munin-cron; fi
+14 10 * * *     munin if [ -x /usr/share/munin/munin-limits ]; then /usr/share/munin/munin-limits --force --contact nagios --contact old-nagios; fi
+19:12:37 jadi@ocean:~$ cat /etc/cron.weekly/man-db
+</code></pre> <p>اما دایرکتوری‌هایی به نام‌های <code>cron.hourly</code>، <code>cron.daily</code>، <code>cron.weekly</code> و <code>cron.monthly</code> هم وجود دارند. همان‌طور که از اسمشان پیداست، هر اسکریپت یا فایلی که داخلشان بگذارید، به ترتیب به صورت ساعتی، روزانه، هفتگی و ماهانه اجرا می‌شود. این کار وظایف عمومی مثل پاک‌سازی، بکاپ‌گیری و... را خیلی تمیزتر می‌کند. کافی است اسکریپت خودتان را داخل یکی از این دایرکتوری‌ها کپی کنید (و مجوز اجرا به آن بدهید) تا در این بازه‌ها اجرا شود.</p><pre class="hljs"><code>$ sudo tree /etc/cron*
+/etc/cron.d
+├── munin
+├── munin-node
+├── php5
+└── sendmail
+/etc/cron.daily
+├── apache2
+├── apport
+├── apt
+├── aptitude
+├── bsdmainutils
+├── dpkg
+├── logrotate
+├── man-db
+├── mlocate
+├── passwd
+├── popularity-contest
+├── sendmail
+├── update-notifier-common
+└── upstart
+/etc/cron.hourly
+/etc/cron.monthly
+/etc/crontab [error opening dir]
+/etc/cron.weekly
+├── apt-xapian-index
+├── fstrim
+├── man-db
+└── update-notifier-common
+</code></pre> <p>بیایید نگاهی به یکی از فایل‌های داخل این دایرکتوری‌ها بیندازیم:</p><pre class="hljs"><code>$ <span class="hljs-built_in">cat</span> /etc/cron.daily/mlocate
+<span class="hljs-comment">#! /bin/bash</span>
+
+<span class="hljs-built_in">set</span> -e
+
+[ -x /usr/bin/updatedb.mlocate ] || <span class="hljs-built_in">exit</span> 0
+
+<span class="hljs-keyword">if</span> <span class="hljs-built_in">which</span> on_ac_power &gt;/dev/null 2&gt;&amp;1; <span class="hljs-keyword">then</span>
+    ON_BATTERY=0
+    on_ac_power &gt;/dev/null 2&gt;&amp;1 || ON_BATTERY=$?
+    <span class="hljs-keyword">if</span> [ <span class="hljs-string">&quot;<span class="hljs-variable">$ON_BATTERY</span>&quot;</span> -eq 1 ]; <span class="hljs-keyword">then</span>
+	<span class="hljs-built_in">exit</span> 0
+    <span class="hljs-keyword">fi</span>
+<span class="hljs-keyword">fi</span>
+
+<span class="hljs-comment"># See ionice(1)</span>
+<span class="hljs-keyword">if</span> [ -x /usr/bin/ionice ] &amp;&amp;
+    /usr/bin/ionice -c3 <span class="hljs-literal">true</span> 2&gt;/dev/null; <span class="hljs-keyword">then</span>
+    IONICE=<span class="hljs-string">&quot;/usr/bin/ionice -c3&quot;</span>
+<span class="hljs-keyword">fi</span>
+
+flock --nonblock /run/mlocate.daily.lock <span class="hljs-variable">$IONICE</span> /usr/bin/updatedb.mlocate
+</code></pre> <h3>دستور <code>at</code></h3><p>گفتیم <code>crontab</code> دستورات را در بازه‌های زمانی منظم اجرا می‌کند، اما اگر لازم باشد یک دستور را <strong>فقط یک بار</strong> در زمان مشخصی اجرا کنید چه؟ اینجا <code>at</code> دوست شماست.</p><pre class="hljs"><code>$ at now + 1 min
+warning: commands will be executed using /bin/sh
+at&gt; touch /tmp/at
+at&gt; &lt;EOT&gt;
+job 3 at Thu Oct 29 22:12:00 2015
+</code></pre> <blockquote><p><strong>نکته:</strong> مثل همیشه، در پایان ورودی کلیدهای <code>Ctrl+D</code> را می‌زنیم تا تمام شود (<code>&lt;EOT&gt;</code>).</p></blockquote> <p>اگر بخواهید ببینید چه کارهایی در صف انتظار هستند می‌توانید از <code>atq</code> استفاده کنید و مثلاً با <code>atrm 4</code> کار شماره ۴ را حذف کنید:</p><pre class="hljs"><code>$ at teatime
+warning: commands will be executed using /bin/sh
+at&gt; echo &quot;tea time is 4pm&quot;
+at&gt; &lt;EOT&gt;
+job 4 at Fri Oct 30 16:00:00 2015
+jadi@funlife:~$ at tomorrow
+warning: commands will be executed using /bin/sh
+at&gt; echo &quot;tomorrow this time&quot;
+at&gt; &lt;EOT&gt;
+job 5 at Fri Oct 30 22:15:00 2015
+jadi@funlife:~$ at 17:30
+warning: commands will be executed using /bin/sh
+at&gt; echo &quot;this is the first 17:30&quot;
+at&gt; &lt;EOT&gt;
+job 6 at Fri Oct 30 17:30:00 2015
+jadi@funlife:~$ atq
+5    Fri Oct 30 22:15:00 2015 a jadi
+4    Fri Oct 30 16:00:00 2015 a jadi
+6    Fri Oct 30 17:30:00 2015 a jadi
+jadi@funlife:~$ atrm 4
+jadi@funlife:~$ atq
+5    Fri Oct 30 22:15:00 2015 a jadi
+6    Fri Oct 30 17:30:00 2015 a jadi
+</code></pre> <h3>مدیریت دسترسی به <code>cron</code> و <code>at</code></h3><p>برای کنترل دسترسی به سیستم کران و <code>at</code>، ۴ فایل داریم:</p><pre class="hljs"><code>/etc/cron.allow
+/etc/cron.deny
+
+/etc/at.allow
+/etc/at.deny
+</code></pre> <p>در اکثر سیستم‌ها هیچ‌کدام از این فایل‌ها از ابتدا وجود ندارند، اما اگر آن‌ها را بسازید، به شکل زیر عمل می‌کنند:</p><table> <thead><tr> <th style="text-align:left">پسوند فایل</th><th style="text-align:left">عملکرد</th></tr> </thead><tbody> <tr><td style="text-align:left"><code>.allow</code></td><td style="text-align:left"><strong>فقط</strong> کاربرانی که نامشان در این فایل ذکر شده اجازه استفاده از این سرویس را دارند. بقیه کاربران مسدود می‌شوند</td></tr> <tr><td style="text-align:left"><code>.deny</code></td><td style="text-align:left">همه می‌توانند از سرویس استفاده کنند، به جز کاربرانی که نامشان در این فایل آمده است</td></tr> </tbody></table> <h2>زمان‌بندهای <code>systemd</code> و دستور <code>systemd-run</code></h2><p>امروزه اکثر توزیع‌های گنو/لینوکس از <code>systemd</code> استفاده می‌کنند که <strong>تایمرهای (Timers)</strong> مخصوص به خودش را به عنوان جایگزینی برای cron جهت زمان‌بندی کارها دارد. فایل‌های واحد تایمر از پسوند <code>.timer</code> استفاده می‌کنند و برای هر کدام از آن‌ها باید یک فایل unit متناظر وجود داشته باشد که سرویسی را که قرار است هنگام فعال شدن تایمر اجرا شود توصیف کند. به طور پیش‌فرض، یک تایمر سرویسی را فعال می‌کند که هم‌نام خودش است (فقط پسوندش فرق دارد).</p><p>تایمرها یک بخش <code>[Timer]</code> دارند که مشخص می‌کند کارهای زمان‌بندی‌شده چه زمانی اجرا شوند. دو نوع تایمر داریم. یکی <strong>تایمر بلادرنگ (Real-time timer)</strong> است که با گزینه <code>OnCalendar=</code> کار می‌کند و خیلی شبیه زمان‌بندهای cron است (بر اساس عبارت‌های تقویمی). ساختار آن به این صورت است:</p><pre class="hljs"><code>OnCalendar=DayOfWeek Year-Month-Day Hour:Minute:Second
+</code></pre> <blockquote><p>بخش <code>DayOfWeek</code> اختیاری است و می‌توانید از مخفف ۳ حرفی انگلیسی آن (مثلاً <code>Mon</code>) استفاده کنید.</p></blockquote> <p>کاراکترهای <code>*</code>، <code>/</code> و <code>,</code> در <code>systemd</code> دقیقاً مثل <code>cron</code> کار می‌کنند، اما در <code>systemd</code> می‌توانید از <code>..</code> بین دو مقدار هم استفاده کنید تا یک بازه پیوسته را نشان دهید.</p><p>مثلاً برای اینکه سرویسی به نام <code>/etc/systemd/system/myservice.service</code> در ساعت <code>02:42</code> اولین شنبه هر ماه اجرا شود، باید این خطوط پیکربندی را به فایل <code>/etc/systemd/system/myservice.timer</code> اضافه کنیم:</p><pre class="hljs"><code><span class="hljs-section">[Unit]</span>
+<span class="hljs-attr">Description</span>=Run the blah blah service
+
+<span class="hljs-section">[Timer]</span>
+<span class="hljs-attr">OnCalendar</span>=Sat *-*-<span class="hljs-number">1</span>..<span class="hljs-number">7</span> <span class="hljs-number">02</span>:<span class="hljs-number">42</span>:<span class="hljs-number">00</span>
+<span class="hljs-attr">Persistent</span>=<span class="hljs-literal">true</span>
+
+<span class="hljs-section">[Install]</span>
+<span class="hljs-attr">WantedBy</span>=timers.target
+</code></pre> <p>همچنین می‌توانیم تایمرهای <strong>یکنواخت (Monotonic)</strong> تعریف کنیم. این تایمرها پس از گذشت مدت زمان مشخصی از یک نقطه شروع خاص (مثلاً از زمان بوت شدن ماشین یا فعال شدن خود تایمر) فعال می‌شوند. می‌توانید از میان گزینه‌های زیر انتخاب کنید:</p><table> <thead><tr> <th style="text-align:left">تنظیم</th><th style="text-align:left">معنی</th></tr> </thead><tbody> <tr><td style="text-align:left"><code>OnActiveSec</code></td><td style="text-align:left">زمان پس از فعال شدن خود unit</td></tr> <tr><td style="text-align:left"><code>OnBootSec</code></td><td style="text-align:left">زمان پس از بوت شدن سیستم</td></tr> <tr><td style="text-align:left"><code>OnStartupSec</code></td><td style="text-align:left">زمان پس از شروع به کار service manager. برای سرویس‌های سیستمی تقریباً معادل <code>OnActiveSec</code> است. برای سرویس‌های کاربری استفاده می‌شود که در آن service manager هنگام ورود کاربر استارت می‌خورد</td></tr> <tr><td style="text-align:left"><code>OnUnitActiveSec</code></td><td style="text-align:left">زمان پس از آخرین باری که سرویس متناظر فعال شده است</td></tr> <tr><td style="text-align:left"><code>OnUnitInactiveSec</code></td><td style="text-align:left">زمان پس از آخرین باری که سرویس متناظر غیرفعال شده است</td></tr> </tbody></table> <p>و در مقابل آن‌ها می‌توانید از واحدهای <code>usec</code>، <code>msec</code>، <code>seconds</code>، <code>minutes</code>، <code>hours</code>، <code>days</code>، <code>weeks</code>، <code>months</code> و <code>years</code> استفاده کنید. مثلاً عبارت زیر:</p><pre class="hljs"><code><span class="hljs-section">[Timer]</span>
+<span class="hljs-attr">OnUnitActiveSec</span>=<span class="hljs-number">5</span>minutes <span class="hljs-number">20</span>seconds
+</code></pre> <p>واحد متناظر را ۵ دقیقه و ۲۰ ثانیه پس از آخرین فعال شدن آن سرویس فعال می‌کند.</p><p>دقت کنید که بعد از اضافه کردن هر تایمر، باید آن را فعال (<code>enable</code>) و احتمالاً شروع (<code>start</code>) کنید:</p><pre class="hljs"><code><span class="hljs-comment"># systemctl enable myservice.timer</span>
+<span class="hljs-comment"># systemctl start myservice.timer</span>
+</code></pre> <p>و فراموش نکنید بعد از هر تغییری یک بار دستور <code>systemctl daemon-reload</code> را هم اجرا کنید.</p><p>برای بررسی تمام کارهای زمان‌بندی‌شده، دستور <code>systemctl list-timers</code> را بزنید. این دستور تمام تایمرهای فعال را نشان می‌دهد. برای دیدن همه آن‌ها (حتی غیرفعال‌ها) از سوییچ <code>--all</code> استفاده کنید.</p><p>چند میان‌بر (Shortcut) هم برای زمان‌ها وجود دارد که می‌توانید به جای قالب کران از آن‌ها برای تنظیم تایمرها استفاده کنید:</p><table> <thead><tr> <th style="text-align:left">میان‌بر</th><th style="text-align:left">زمان اجرا</th></tr> </thead><tbody> <tr><td style="text-align:left"><code>hourly</code></td><td style="text-align:left">ابتدای هر ساعت</td></tr> <tr><td style="text-align:left"><code>daily</code></td><td style="text-align:left">روزی یک بار در نیمه‌شب</td></tr> <tr><td style="text-align:left"><code>weekly</code></td><td style="text-align:left">نیمه‌شب دوشنبه‌ها</td></tr> <tr><td style="text-align:left"><code>monthly</code></td><td style="text-align:left">نیمه‌شب اول هر ماه</td></tr> <tr><td style="text-align:left"><code>yearly</code></td><td style="text-align:left">نیمه‌شب اول ژانویه</td></tr> </tbody></table> <p>این هم یک نمونه از تایمر روی یک نصب جدید فدورا:</p><pre class="hljs"><code><span class="hljs-comment"># cat system/timers.target.wants/plocate-updatedb.timer </span>
+<span class="hljs-section">[Unit]</span>
+<span class="hljs-attr">Description</span>=Update the plocate database daily
+
+<span class="hljs-section">[Timer]</span>
+<span class="hljs-attr">OnCalendar</span>=daily
+<span class="hljs-attr">RandomizedDelaySec</span>=<span class="hljs-number">12</span>h
+<span class="hljs-attr">AccuracySec</span>=<span class="hljs-number">20</span>min
+<span class="hljs-attr">Persistent</span>=<span class="hljs-literal">true</span>
+
+<span class="hljs-section">[Install]</span>
+<span class="hljs-attr">WantedBy</span>=timers.target
+</code></pre> <p>اگر بخواهید خروجی تایمرهایتان را چک کنید، می‌توانید از <code>journalctl</code> استفاده کنید.</p><blockquote> <p>مثل هر فعالیت دیگر در <code>systemd</code>، از سوییچ <code>--user</code> استفاده کنید تا تایمر در سطح کاربر خودتان اجرا شود و نه در سطح کل سیستم.</p></blockquote> <p>در پایان، باید با دستور <code>systemd-run</code> هم آشنا باشید. این دستور می‌تواند یک سرویس یا اسکوپ موقت (Transient) بسازد و دستورات خاصی را درون آن اجرا کند.</p><p>بنابراین دستوری مثل:</p><pre class="hljs"><code>systemd-run --on-active=<span class="hljs-string">&quot;2hours&quot;</span> --unit=<span class="hljs-string">&quot;helloworld.service&quot;</span>
+</code></pre> <p>سرویس <code>helloworld.service</code> را هر ۲ ساعت اجرا می‌کند، یا این دستور:</p><pre class="hljs"><code><span class="hljs-built_in">sudo</span> systemd-run --on-active=<span class="hljs-string">&quot;2hours&quot;</span> /usr/local/bin/helloworld.sh --language=en_US
+</code></pre> <p>اسکریپت مشخص‌شده را با پارامترهای داده‌شده هر ۲ ساعت اجرا خواهد کرد.</p><hr> <p>از آنجا که این مبحث جدیدتر است و منابع زیادی برایش نیست، برای یادگیری بیشتر به <a href="https://documentation.suse.com/smart/systems-management/html/systemd-working-with-timers/index.html">مستندات SUSE درباره تایمرهای systemd</a> سر بزنید.</p><hr> <div class="callout callout-tip" style="background: rgba(147, 51, 234, 0.08); border-right: 4px solid #9333ea; padding: 16px 20px; border-radius: 8px; margin-top: 32px;"><strong>🔗 نسخه اصلی به زبان انگلیسی:</strong> این درسنامه بر اساس منبع انگلیسی جادی در مخزن <a href="https://github.com/jadijadi/lpic1book/blob/master/content/1072_automate_system_administration_tasks_by_scheduling_jobs.md" target="_blank" rel="noopener noreferrer">jadijadi/lpic1book</a> تدوین و سازماندهی شده است. </div></article> <nav class="chapter-single-next-nav"><a href="/Gitab/books/book13/Book/35/1073-localisation-and-internationalisation/" class="btn-next-chapter-action" id="nextChapterBtn" data-hub="/Gitab/books/book13/"> <span class="next-btn-text">فصل بعدی: ۱۰۷.۳ بومی‌سازی و تنظیمات زبان و منطقه (Locale)</span> <span class="next-btn-arrow">←</span> </a> </nav></div> <button class="fab-back-to-top" id="backToTopBtn" type="button" aria-label="رفتن به بالای صفحه" title="رفتن به بالا"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"> <polyline points="18 15 12 9 6 15"></polyline> </svg> </button></main> <footer class="footer-minimal"><div class="footer-container"> <div class="footer-top-row"><div class="footer-brand-side"> <a href="/Gitab/" class="footer-brand-anchor"> <img src="/Gitab/icone/logo.svg" alt="Gitab" width="28" height="28" loading="lazy" decoding="async"> <span class="footer-brand-title">گیتاب (Gitab)</span> </a> <p class="footer-tagline"> پلتفرم آزاد و مستقل برای ترجمهٔ دقیق و روان کتاب‌های مرجع مهندسی نرم‌افزار. </p></div> <div class="footer-nav-cols"><div class="footer-nav-col"> <span class="footer-nav-heading">موضوعات</span><ul class="footer-nav-list"> <li><a href="/Gitab/books/list-books/?cat=csharp">سی‌شارپ و دات‌نت</a></li><li><a href="/Gitab/books/list-books/?cat=clean-code">کد تمیز و بازآفرینی</a></li><li><a href="/Gitab/books/list-books/?cat=architecture">معماری و طراحی دامنه</a></li><li><a href="/Gitab/books/list-books/?cat=system">لینوکس و خط فرمان</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">بخش‌های سایت</span><ul class="footer-nav-list"> <li><a href="/Gitab/">صفحه اصلی</a></li><li><a href="/Gitab/books/list-books/">کتابخانه کامل</a></li><li><a href="/Gitab/courses/">دوره‌های آموزشی</a></li><li><a href="/Gitab/translator.html">تالار مترجمین</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">مشارکت و جامعه</span><ul class="footer-nav-list"> <li><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer">راهنمای همکاری در ترجمه</a></li><li><a href="https://github.com/hheydarian/Gitab/issues" target="_blank" rel="noopener noreferrer">پیشنهاد کتاب یا گزارش خطا</a></li></ul> </div></div> </div><div class="footer-bottom-line"> <span>© <span id="y">2026</span> Gitab — توسعه‌یافته برای جامعهٔ مهندسان نرم‌افزار ایرانی</span></div> </div></footer> <script>
+  (() => {
+    const root = document.documentElement;
+    const btn = document.getElementById('themeToggle');
+    const sunIcon = btn ? btn.querySelector('.icon-sun') : null;
+    const moonIcon = btn ? btn.querySelector('.icon-moon') : null;
+    const KEY = 'gitab-theme';
+
+    function updateTheme(mode) {
+      root.setAttribute('data-theme', mode);
+      root.dataset.colorMode = mode;
+      if (sunIcon && moonIcon) {
+        if (mode === 'dark') {
+          sunIcon.style.display = 'inline-block';
+          moonIcon.style.display = 'none';
+        } else {
+          sunIcon.style.display = 'none';
+          moonIcon.style.display = 'inline-block';
+        }
+      }
+    }
+
+    let saved = 'dark';
+    try { saved = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+    updateTheme(saved);
+
+    if (btn) {
+      btn.addEventListener('click', () => {
+        let current = 'dark';
+        try { current = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+        const next = current === 'dark' ? 'light' : 'dark';
+        try { localStorage.setItem(KEY, next); } catch (e) {}
+        updateTheme(next);
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      let mode = 'dark';
+      try { mode = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+      updateTheme(mode);
+      const yearSpan = document.getElementById('y');
+      if (yearSpan) yearSpan.textContent = new Date().getFullYear();
+    });
+
+    const mobBtn = document.getElementById('mobileMenuBtn');
+    const mobDrawer = document.getElementById('mobileDrawer');
+    if (mobBtn && mobDrawer) {
+      const setDrawerOpen = (open) => {
+        mobDrawer.classList.toggle('open', open);
+        mobBtn.classList.toggle('is-open', open);
+        mobBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        mobBtn.setAttribute('aria-label', open ? 'بستن منو' : 'باز کردن منو');
+        mobDrawer.setAttribute('aria-hidden', open ? 'false' : 'true');
+      };
+
+      mobBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        setDrawerOpen(!mobDrawer.classList.contains('open'));
+      });
+
+      mobDrawer.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => setDrawerOpen(false));
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && mobDrawer.classList.contains('open')) {
+          setDrawerOpen(false);
+        }
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!mobDrawer.contains(e.target) && !mobBtn.contains(e.target)) {
+          setDrawerOpen(false);
+        }
+      });
+    }
+
+    if ('serviceWorker' in navigator) {
+      const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+      if (isLocalhost) {
+        navigator.serviceWorker.getRegistrations().then(regs => {
+          for (const reg of regs) reg.unregister();
+        });
+        if ('caches' in window) {
+          caches.keys().then(names => {
+            for (const name of names) caches.delete(name);
+          });
+        }
+      } else {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/Gitab/sw.js').catch(() => {});
+        });
+      }
+    }
+  })();
+  </script> <script>
+  document.querySelectorAll('pre code').forEach(block => {
+    const pre = block.parentNode;
+    if (!pre || pre.querySelector('.copy-btn')) return;
+
+    const copySvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
+    const okSvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+
+    const btn = document.createElement('button');
+    btn.className = 'copy-btn';
+    btn.setAttribute('aria-label', 'کپی کد');
+    btn.setAttribute('title', 'کپی کد');
+    btn.setAttribute('type', 'button');
+    btn.innerHTML = copySvg;
+    pre.appendChild(btn);
+
+    btn.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(block.textContent);
+        btn.classList.add('copied');
+        btn.innerHTML = okSvg;
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          btn.innerHTML = copySvg;
+        }, 1800);
+      } catch (err) {
+        console.error('Copy failed:', err);
+      }
+    });
+  });
+  </script> <script>
+  (() => {
+    const article = document.getElementById('chapterArticle');
+    if (!article) return;
+
+    const progressBar = document.getElementById('readingProgressBar');
+    if (progressBar) {
+      window.addEventListener('scroll', () => {
+        const docElem = document.documentElement;
+        const totalHeight = docElem.scrollHeight - docElem.clientHeight;
+        if (totalHeight > 0) {
+          const progress = (window.pageYOffset / totalHeight) * 100;
+          progressBar.style.width = Math.min(100, Math.max(0, progress)) + '%';
+        }
+      }, { passive: true });
+    }
+
+    const btt = document.getElementById('backToTopBtn');
+    if (btt) {
+      window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 250) {
+          btt.classList.add('visible');
+        } else {
+          btt.classList.remove('visible');
+        }
+      }, { passive: true });
+
+      btt.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+
+    article.querySelectorAll('img').forEach(img => {
+      if (!img.hasAttribute('loading')) img.loading = 'lazy';
+      if (!img.hasAttribute('decoding')) img.decoding = 'async';
+      const parent = img.parentElement;
+      if (parent && parent.tagName === 'P') {
+        parent.style.textAlign = 'center';
+      }
+
+      img.addEventListener('error', function() {
+        const src = this.getAttribute('src');
+        if (src && src.includes('assets/image/')) {
+          const parts = src.split('assets/image/');
+          const corrected = '/Gitab/books/book13/assets/image/' + parts[1];
+          if (this.src !== corrected) {
+            this.src = corrected;
+          }
+        }
+      });
+    });
+
+    article.querySelectorAll('p').forEach(p => {
+      const trimmed = p.innerText.trim();
+      if (trimmed.startsWith('💡') || trimmed.startsWith('نکته:')) {
+        p.classList.add('react-callout', 'callout-tip');
+      } else if (trimmed.startsWith('⚠️') || trimmed.startsWith('هشدار:')) {
+        p.classList.add('react-callout', 'callout-warning');
+      } else if (trimmed.startsWith('📌') || trimmed.startsWith('مهم:')) {
+        p.classList.add('react-callout', 'callout-important');
+      } else if (trimmed.startsWith('🔹') || trimmed.startsWith('🔸')) {
+        p.classList.add('react-callout', 'callout-note');
+      }
+    });
+  })();
+  </script> <script type="speculationrules">{"prefetch":[{"where":{"and":[{"href_matches":"/Gitab/*"},{"not":{"href_matches":"/Gitab/downloads/*"}},{"not":{"selector_matches":"[download], [target='_blank']"}}]},"eagerness":"moderate"}]}</script> <script>
+  (() => {
+    if (window.HTMLScriptElement && HTMLScriptElement.supports && HTMLScriptElement.supports('speculationrules')) return;
+    const seen = new Set([window.location.href]);
+    let count = 0;
+    const prefetchLink = (e) => {
+      if (count >= 12) return;
+      const a = e.target && e.target.closest ? e.target.closest('header a, .chapter-single-next-nav a, .syllabus-chapter-item a, .btn-hero-read, .btn-card-read') : null;
+      if (!a || !a.href || a.hasAttribute('download') || a.target === '_blank') return;
+      if (a.origin !== window.location.origin || a.pathname.includes('/downloads/')) return;
+      const clean = a.href.split('#')[0];
+      if (!clean || seen.has(clean)) return;
+      seen.add(clean);
+      count++;
+      const l = document.createElement('link');
+      l.rel = 'prefetch';
+      l.href = clean;
+      document.head.appendChild(l);
+    };
+    document.addEventListener('pointerenter', prefetchLink, { capture: true, passive: true });
+    document.addEventListener('touchstart', prefetchLink, { capture: true, passive: true });
+  })();
+  </script></body></html>

@@ -1,146 +1,33 @@
-
-
-<!doctype html>
-<html lang="fa" dir="rtl">
-<head>
-  <meta charset="utf-8">
-  <link rel="icon" type="image/png" href="/Gitab/favicon.png">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Operators</title>
-  <meta name="description" content="ترجمه‌های فارسی کتاب‌های فنی — سریع، مینیمال و قابل اتکا.">
-
-  <!-- استایل‌ها -->
-  <link rel="stylesheet" href="/Gitab/styles/main.css">
-  <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
-
-  <style>
-  @font-face {
-    font-family: 'Vazir';
-    src: url('/Gitab/fonts/Vazir-FD-WOL.ttf') format('truetype');
-    font-display: swap;
-  }
-  @font-face {
-    font-family: "Lalezar";
-    src: url('fonts/Lalezar.ttf') format('truetype');
-    font-display: swap;
-}
-  body {
-    font-family: 'Vazir', sans-serif;
-  }
-  </style>
-</head>
-
-<body>
-  <!-- هدر مشترک -->
-  <header class="header">
-    <div class="container nav-wrap">
-      <a href="/Gitab/" class="brand">
-        <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="26" height="26">
-        <span>Gitab</span>
-      </a>
-
-       <nav class="nav">
-         <a href="/Gitab/" >خانه</a>
-         <a href="/Gitab/books/list-books" >کتاب‌ها</a>
-         <a href="/Gitab/giter.html" >دوره ها</a>
-          <!-- 
-         <a href="/Gitab/translator.html" >مترجمین</a>
-           -->
-       </nav>
-
-      <div class="nav-actions">
-        <button id="themeToggle" class="icon-btn theme-btn" data-icon="moon" aria-label="تغییر تم">
-          <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن">
-          <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک">
-        </button>
-
-        <a class="icon-btn" href="https://github.com/hheydarian/Gitab" target="_blank" title="GitHub">
-          <img src="/Gitab/icone/github.svg" alt="GitHub">
-        </a>
-
-        <!-- دکمه منو برای موبایل -->
-        <button class="menu-toggle" aria-label="منو">
-          <img src="/Gitab/icone/menu.svg" alt="menu">
-        </button>
-      </div>
-    </div>
-  </header>
-
-  
-  <main class="site-main">
-    
-<div class="valuetypes-wrapper">
-
-    <h1 class="page-title">Operators</h1>
-    <p class="page-desc">
-        آموزش کامل عملگرها
-    </p>
-
-    <!-- ============================ TERNARY OPERATOR ============================ -->
-    <section id="ternary" class="topic-section">
-
-        <h2>Ternary Operator</h2>
-
-        <p>
-            <strong>Ternary Operator</strong> یا عملگر شرطی سه‌تایی،
-            یک راه <strong>کوتاه، خوانا و بسیار کاربردی</strong> برای نوشتن شرط‌های ساده است.
-            این عملگر جایگزین فشرده‌ای برای <code>if / else</code> محسوب می‌شود
-            و زمانی استفاده می‌شود که بخواهیم بر اساس یک شرط، یکی از دو مقدار را انتخاب کنیم.
-        </p>
-
-        <h3>ساختار کلی Ternary</h3>
-
-        <pre><code class="language-csharp">
+<!doctype html><html lang="fa" dir="rtl"> <head><script>
+    if (window.location.pathname.startsWith('/gitab/')) {
+      window.location.replace(window.location.pathname.replace(/^\/gitab\//i, '/Gitab/') + window.location.search + window.location.hash);
+    }
+    (() => {
+      try {
+        const t = localStorage.getItem('gitab-theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', t);
+        document.documentElement.dataset.colorMode = t;
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        document.documentElement.dataset.colorMode = 'dark';
+      }
+    })();
+  </script> <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5"> <title>Operators</title><meta name="description" content="گیتاب پلتفرم آزاد و رایگان مطالعه و ترجمه دقیق فارسی کتاب‌های مرجع مهندسی نرم‌افزار، کد تمیز، سی‌شارپ، لینوکس، طراحی دامنه و دوره‌های رسمی هوش مصنوعی مولد است."> <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"><meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"> <meta name="theme-color" content="#090d16"><meta name="referrer" content="strict-origin-when-cross-origin"> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https:; frame-src https://www.youtube.com https://www.youtube-nocookie.com https://maps.google.com https://www.google.com; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self';"><link rel="icon" type="image/png" href="/Gitab/favicon.png"> <link rel="canonical" href="https://hheydarian.github.io/Gitab/Giter/CSharp/syllabus/Operators/"><link rel="alternate" hreflang="fa" href="https://hheydarian.github.io/Gitab/Giter/CSharp/syllabus/Operators/"> <link rel="alternate" hreflang="x-default" href="https://hheydarian.github.io/Gitab/Giter/CSharp/syllabus/Operators/"><link rel="alternate" type="text/plain" title="LLMs.txt" href="/Gitab/llms.txt"> <link rel="sitemap" type="application/xml" title="Sitemap" href="/Gitab/sitemap.xml"><meta property="og:locale" content="fa_IR"> <meta property="og:type" content="website"><meta property="og:site_name" content="گیتاب | Gitab"> <meta property="og:title" content="Operators"><meta property="og:description" content="گیتاب پلتفرم آزاد و رایگان مطالعه و ترجمه دقیق فارسی کتاب‌های مرجع مهندسی نرم‌افزار، کد تمیز، سی‌شارپ، لینوکس، طراحی دامنه و دوره‌های رسمی هوش مصنوعی مولد است."> <meta property="og:url" content="https://hheydarian.github.io/Gitab/Giter/CSharp/syllabus/Operators/"><meta property="og:image" content="https://hheydarian.github.io/Gitab/images/csharp-12/Cover.jpg"> <meta property="og:image:alt" content="Operators"><meta name="twitter:card" content="summary_large_image"> <meta name="twitter:title" content="Operators"><meta name="twitter:description" content="گیتاب پلتفرم آزاد و رایگان مطالعه و ترجمه دقیق فارسی کتاب‌های مرجع مهندسی نرم‌افزار، کد تمیز، سی‌شارپ، لینوکس، طراحی دامنه و دوره‌های رسمی هوش مصنوعی مولد است."> <meta name="twitter:image" content="https://hheydarian.github.io/Gitab/images/csharp-12/Cover.jpg"><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://hheydarian.github.io/Gitab/#organization","name":"گیتاب | Gitab","alternateName":"Gitab","url":"https://hheydarian.github.io/Gitab/","logo":{"@type":"ImageObject","url":"https://hheydarian.github.io/Gitab/favicon.png"},"sameAs":["https://github.com/hheydarian/Gitab"]},{"@type":"WebSite","@id":"https://hheydarian.github.io/Gitab/#website","url":"https://hheydarian.github.io/Gitab/","name":"گیتاب | Gitab","inLanguage":"fa-IR","publisher":{"@id":"https://hheydarian.github.io/Gitab/#organization"},"potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://hheydarian.github.io/Gitab/books/list-books/?q={search_term_string}"},"query-input":"required name=search_term_string"}},{"@type":"WebPage","@id":"https://hheydarian.github.io/Gitab/Giter/CSharp/syllabus/Operators/#webpage","url":"https://hheydarian.github.io/Gitab/Giter/CSharp/syllabus/Operators/","name":"Operators","description":"گیتاب پلتفرم آزاد و رایگان مطالعه و ترجمه دقیق فارسی کتاب‌های مرجع مهندسی نرم‌افزار، کد تمیز، سی‌شارپ، لینوکس، طراحی دامنه و دوره‌های رسمی هوش مصنوعی مولد است.","inLanguage":"fa-IR","isPartOf":{"@id":"https://hheydarian.github.io/Gitab/#website"}}]}</script> <link rel="preload" href="/Gitab/fonts/Vazirmatn.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/Gitab/fonts/Lalezar.woff2" as="font" type="font/woff2" crossorigin> <link rel="preload" href="/Gitab/styles/main.css?v=2.4" as="style"><link rel="preload" href="/Gitab/styles/gitab-modern.css?v=2.5" as="style"> <style>@font-face{font-family:'Lalezar';src:url('/Gitab/fonts/Lalezar.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}@font-face{font-family:'Vazirmatn';src:url('/Gitab/fonts/Vazirmatn.woff2') format('woff2');font-weight:100 900;font-style:normal;font-display:swap}html,body,button,input,optgroup,select,textarea,.filter-pill{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}input::placeholder,textarea::placeholder{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}</style> <link rel="stylesheet" href="/Gitab/styles/main.css?v=2.4"><link rel="stylesheet" href="/Gitab/styles/gitab-modern.css?v=2.5"> <link rel="stylesheet" href="/Gitab/styles/vendor/github-dark.min.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="/Gitab/styles/vendor/github-dark.min.css"></noscript></head> <body><header class="header"> <div class="container nav-wrap"><a href="/Gitab/" class="brand" aria-label="صفحه اصلی گیتاب"> <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="30" height="30" decoding="async"> <span class="brand-text">Gitab</span> </a> <nav class="nav" id="mainNav"><a href="/Gitab/" >خانه</a> <a href="/Gitab/books/list-books" >کتاب‌ها</a> <a href="/Gitab/courses/" >دوره‌ها</a> <a href="/Gitab/translator.html" >مترجمین</a></nav> <div class="nav-actions"><button id="themeToggle" class="theme-toggle-btn" aria-label="تغییر تم" title="تغییر تم"> <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن" width="18" height="18" decoding="async" style="display:none"> <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک" width="18" height="18" decoding="async"> </button> <a class="btn-github-pill" href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" title="مشاهده سورس گیتاب در گیت‌هاب"> <img src="/Gitab/icone/github.svg" alt="GitHub" width="16" height="16" decoding="async"> <span>گیت‌هاب</span> </a> <button class="mobile-menu-btn" id="mobileMenuBtn" type="button" aria-label="باز کردن منو" aria-expanded="false"> <svg class="mob-icon-open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="4" y1="7" x2="20" y2="7"></line> <line x1="4" y1="12" x2="20" y2="12"></line> <line x1="4" y1="17" x2="14" y2="17"></line> </svg> <svg class="mob-icon-close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="18" y1="6" x2="6" y2="18"></line> <line x1="6" y1="6" x2="18" y2="18"></line> </svg> </button></div> </div><div class="mobile-drawer" id="mobileDrawer" aria-hidden="true"> <div class="mobile-drawer-inner"><div class="mobile-drawer-section-label">ناوبری سریع</div><nav class="mobile-drawer-links" aria-label="منوی موبایل"> <a href="/Gitab/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M3 10.5 12 3l9 7.5"></path> <path d="M5 9.5V20a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V9.5"></path> </svg> </span> <span class="mob-nav-text">صفحه نخست</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/books/list-books" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path> </svg> </span> <span class="mob-nav-text">کتابخانه و فهرست کتاب‌ها</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/courses/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path> <path d="M6 12v5c3 3 9 3 12 0v-5"></path> </svg> </span> <span class="mob-nav-text">دوره‌های آموزشی</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/translator.html" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path> <circle cx="9" cy="7" r="4"></circle> <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path> <path d="M16 3.13a4 4 0 0 1 0 7.75"></path> </svg> </span> <span class="mob-nav-text">مترجمین و همکاران</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> </nav><div class="mobile-drawer-divider"></div><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" class="mobile-drawer-link mobile-drawer-gh"> <span class="mob-nav-icon" aria-hidden="true"> <img src="/Gitab/icone/github.svg" alt="" width="17" height="17" loading="lazy" decoding="async"> </span> <span class="mob-nav-text">مخزن گیت‌هاب پروژه</span> <span class="mob-nav-ext" aria-hidden="true">↗</span> </a> </div></div> </header><main class="site-main"> <div class="valuetypes-wrapper"><h1 class="page-title">Operators</h1><p class="page-desc"> آموزش کامل عملگرها </p><section id="ternary" class="topic-section"> <h2>Ternary Operator</h2><p> <strong>Ternary Operator</strong> یا عملگر شرطی سه‌تایی، یک راه <strong>کوتاه، خوانا و بسیار کاربردی</strong> برای نوشتن شرط‌های ساده است. این عملگر جایگزین فشرده‌ای برای <code>if / else</code> محسوب می‌شود و زمانی استفاده می‌شود که بخواهیم بر اساس یک شرط، یکی از دو مقدار را انتخاب کنیم. </p><h3>ساختار کلی Ternary</h3><pre><code class="language-csharp">
 condition ? valueIfTrue : valueIfFalse;
-</code></pre>
-
-        <p>
-            یعنی:
-        </p>
-        <ul>
-            <li>اگر <code>condition</code> درست باشد → مقدار اول برمی‌گردد</li>
-            <li>اگر نادرست باشد → مقدار دوم</li>
-        </ul>
-
-        <h3>مثال ساده</h3>
-
-        <pre><code class="language-csharp">
+</code></pre> <p> یعنی: </p><ul> <li>اگر <code>condition</code> درست باشد → مقدار اول برمی‌گردد</li><li>اگر نادرست باشد → مقدار دوم</li></ul> <h3>مثال ساده</h3><pre><code class="language-csharp">
 int age = 20;
 
 string result = age >= 18 ? "Adult" : "Minor";
 
 Console.WriteLine(result);
-</code></pre>
-
-        <p>
-            این کد دقیقاً معادل کد زیر است:
-        </p>
-
-        <pre><code class="language-csharp">
+</code></pre> <p> این کد دقیقاً معادل کد زیر است: </p><pre><code class="language-csharp">
 string result;
 
 if (age >= 18)
     result = "Adult";
 else
     result = "Minor";
-</code></pre>
-
-        <h3>چرا Ternary مهم است؟</h3>
-        <p>
-            در پروژه‌های واقعی، بارها با شرط‌های ساده مواجه می‌شویم.
-            استفاده از Ternary باعث می‌شود:
-        </p>
-
-        <ul>
-            <li>کد کوتاه‌تر شود</li>
-            <li>خوانایی افزایش پیدا کند</li>
-            <li>از if/else های تودرتو جلوگیری شود</li>
-        </ul>
-
-        <h3>مثال واقعی پروژه‌ای — نمایش وضعیت کاربر</h3>
-
-        <pre><code class="language-csharp">
+</code></pre> <h3>چرا Ternary مهم است؟</h3><p> در پروژه‌های واقعی، بارها با شرط‌های ساده مواجه می‌شویم. استفاده از Ternary باعث می‌شود: </p><ul> <li>کد کوتاه‌تر شود</li><li>خوانایی افزایش پیدا کند</li><li>از if/else های تودرتو جلوگیری شود</li></ul> <h3>مثال واقعی پروژه‌ای — نمایش وضعیت کاربر</h3><pre><code class="language-csharp">
 bool isLoggedIn = true;
 
 string message = isLoggedIn
@@ -148,111 +35,24 @@ string message = isLoggedIn
     : "Please login first.";
 
 Console.WriteLine(message);
-</code></pre>
-
-        <h3>استفاده از Ternary در مقداردهی متغیرها</h3>
-
-        <pre><code class="language-csharp">
+</code></pre> <h3>استفاده از Ternary در مقداردهی متغیرها</h3><pre><code class="language-csharp">
 int stock = 0;
 
 string status = stock > 0 ? "Available" : "Out of stock";
-</code></pre>
-
-        <p>
-            این الگو در فروشگاه‌های اینترنتی، APIها و UI بسیار رایج است.
-        </p>
-
-        <h3>Nested Ternary (خطرناک برای تازه‌کارها)</h3>
-        <p>
-            می‌توان Ternary را تو در تو نوشت، اما <strong>به‌شدت توصیه نمی‌شود</strong>
-            چون خوانایی را نابود می‌کند:
-        </p>
-
-        <pre><code class="language-csharp">
+</code></pre> <p> این الگو در فروشگاه‌های اینترنتی، APIها و UI بسیار رایج است. </p><h3>Nested Ternary (خطرناک برای تازه‌کارها)</h3><p> می‌توان Ternary را تو در تو نوشت، اما <strong>به‌شدت توصیه نمی‌شود</strong> چون خوانایی را نابود می‌کند: </p><pre><code class="language-csharp">
 string level =
     score >= 90 ? "Excellent" :
     score >= 70 ? "Good" :
     score >= 50 ? "Average" :
     "Poor";
-</code></pre>
-
-        <p>
-            اگر شرط‌ها زیاد شدند، بهتر است از <code>if / else</code> یا <code>switch</code> استفاده شود.
-        </p>
-
-        <h3>اشتباهات رایج تازه‌کارها</h3>
-        <ul>
-            <li>نوشتن Ternaryهای طولانی و ناخوانا</li>
-            <li>استفاده از Ternary برای منطق پیچیده</li>
-            <li>استفاده در جایی که if/else خواناتر است</li>
-        </ul>
-
-        <h3>تمرین‌های پیشنهادی</h3>
-        <ol>
-            <li>
-                سن کاربر را بگیر و با Ternary مشخص کن:
-                <strong>Adult</strong> یا <strong>Minor</strong>.
-            </li>
-            <li>
-                نمره دانشجو را بگیر و وضعیت قبولی/ردی را با Ternary تعیین کن.
-            </li>
-            <li>
-                موجودی انبار را بررسی کن و متن مناسب برای UI فروشگاه تولید کن.
-            </li>
-        </ol>
-
-        <p class="ref">
-            مستندات رسمی:
-            <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/conditional-operator"
-                target="_blank">
-                Ternary Operator — Microsoft Docs
-            </a>
-        </p>
-
-    </section>
-
-    <!-- ============================ COMPARISON OPERATORS ============================ -->
-    <section id="comparison" class="topic-section">
-
-        <h2>Comparison Operators</h2>
-
-        <p>
-            <strong>Comparison Operators</strong> یا عملگرهای مقایسه‌ای،
-            برای بررسی رابطهٔ بین دو مقدار استفاده می‌شوند.
-            نتیجهٔ تمام این مقایسه‌ها همیشه یک مقدار <strong>bool</strong>
-            (یعنی <code>true</code> یا <code>false</code>) است.
-        </p>
-
-        <p>
-            تقریباً تمام شرط‌ها در برنامه‌نویسی—از if گرفته تا while و LINQ—
-            بر پایهٔ همین عملگرها ساخته می‌شوند.
-        </p>
-
-        <h3>لیست عملگرهای مقایسه‌ای</h3>
-
-        <ul>
-            <li><code>==</code> — برابر است؟</li>
-            <li><code>!=</code> — نابرابر است؟</li>
-            <li><code>&gt;</code> — بزرگ‌تر</li>
-            <li><code>&lt;</code> — کوچک‌تر</li>
-            <li><code>&gt;=</code> — بزرگ‌تر یا مساوی</li>
-            <li><code>&lt;=</code> — کوچک‌تر یا مساوی</li>
-        </ul>
-
-        <h3>مثال پایه</h3>
-
-        <pre><code class="language-csharp">
+</code></pre> <p> اگر شرط‌ها زیاد شدند، بهتر است از <code>if / else</code> یا <code>switch</code> استفاده شود. </p><h3>اشتباهات رایج تازه‌کارها</h3><ul> <li>نوشتن Ternaryهای طولانی و ناخوانا</li><li>استفاده از Ternary برای منطق پیچیده</li><li>استفاده در جایی که if/else خواناتر است</li></ul> <h3>تمرین‌های پیشنهادی</h3><ol> <li> سن کاربر را بگیر و با Ternary مشخص کن: <strong>Adult</strong> یا <strong>Minor</strong>. </li><li> نمره دانشجو را بگیر و وضعیت قبولی/ردی را با Ternary تعیین کن. </li><li> موجودی انبار را بررسی کن و متن مناسب برای UI فروشگاه تولید کن. </li></ol> <p class="ref"> مستندات رسمی: <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/conditional-operator" target="_blank" rel="noopener noreferrer"> Ternary Operator — Microsoft Docs </a></p> </section><section id="comparison" class="topic-section"> <h2>Comparison Operators</h2><p> <strong>Comparison Operators</strong> یا عملگرهای مقایسه‌ای، برای بررسی رابطهٔ بین دو مقدار استفاده می‌شوند. نتیجهٔ تمام این مقایسه‌ها همیشه یک مقدار <strong>bool</strong> (یعنی <code>true</code> یا <code>false</code>) است. </p><p> تقریباً تمام شرط‌ها در برنامه‌نویسی—از if گرفته تا while و LINQ— بر پایهٔ همین عملگرها ساخته می‌شوند. </p><h3>لیست عملگرهای مقایسه‌ای</h3><ul> <li><code>==</code> — برابر است؟</li><li><code>!=</code> — نابرابر است؟</li><li><code>&gt;</code> — بزرگ‌تر</li><li><code>&lt;</code> — کوچک‌تر</li><li><code>&gt;=</code> — بزرگ‌تر یا مساوی</li><li><code>&lt;=</code> — کوچک‌تر یا مساوی</li></ul> <h3>مثال پایه</h3><pre><code class="language-csharp">
 int a = 10;
 int b = 20;
 
 bool result1 = a == b;   // false
 bool result2 = a < b;    // true
 bool result3 = a != b;   // true
-</code></pre>
-
-        <h3>مقایسه در شرط‌ها</h3>
-
-        <pre><code class="language-csharp">
+</code></pre> <h3>مقایسه در شرط‌ها</h3><pre><code class="language-csharp">
 int age = 18;
 
 if (age >= 18)
@@ -263,15 +63,7 @@ else
 {
     Console.WriteLine("Access denied");
 }
-</code></pre>
-
-        <h3>اشتباه بسیار رایج تازه‌کارها ❌</h3>
-
-        <p>
-            اشتباه گرفتن <code>=</code> (انتساب) با <code>==</code> (مقایسه):
-        </p>
-
-        <pre><code class="language-csharp">
+</code></pre> <h3>اشتباه بسیار رایج تازه‌کارها ❌</h3><p> اشتباه گرفتن <code>=</code> (انتساب) با <code>==</code> (مقایسه): </p><pre><code class="language-csharp">
 // اشتباه
 if (age = 18)   // ❌ کامپایل نمی‌شود
 {
@@ -281,61 +73,20 @@ if (age = 18)   // ❌ کامپایل نمی‌شود
 if (age == 18)  // ✅
 {
 }
-</code></pre>
-
-        <p>
-            سی‌شارپ خوشبختانه این اشتباه را در زمان کامپایل می‌گیرد،
-            اما در بعضی زبان‌ها این باگ بسیار خطرناک است.
-        </p>
-
-        <h3>مقایسهٔ رشته‌ها (String Comparison)</h3>
-
-        <p>
-            مقایسهٔ رشته‌ها کمی حساس‌تر است، چون:
-        </p>
-
-        <ul>
-            <li>حروف بزرگ و کوچک مهم هستند</li>
-            <li>فرهنگ (Culture) می‌تواند اثر بگذارد</li>
-        </ul>
-
-        <pre><code class="language-csharp">
+</code></pre> <p> سی‌شارپ خوشبختانه این اشتباه را در زمان کامپایل می‌گیرد، اما در بعضی زبان‌ها این باگ بسیار خطرناک است. </p><h3>مقایسهٔ رشته‌ها (String Comparison)</h3><p> مقایسهٔ رشته‌ها کمی حساس‌تر است، چون: </p><ul> <li>حروف بزرگ و کوچک مهم هستند</li><li>فرهنگ (Culture) می‌تواند اثر بگذارد</li></ul> <pre><code class="language-csharp">
 string a = "Ali";
 string b = "ali";
 
 bool r1 = a == b;                 // false
 bool r2 = a.Equals(b);            // false
 bool r3 = a.Equals(b, StringComparison.OrdinalIgnoreCase); // true
-</code></pre>
-
-        <p>
-            در پروژه‌های واقعی، معمولاً از
-            <code>StringComparison.OrdinalIgnoreCase</code>
-            برای مقایسه امن استفاده می‌شود.
-        </p>
-
-        <h3>مقایسهٔ Reference Type ها (نکته مهم)</h3>
-
-        <p>
-            برای objectها و classها:
-        </p>
-
-        <ul>
-            <li><code>==</code> → ممکن است آدرس حافظه را مقایسه کند</li>
-            <li><code>Equals()</code> → محتوای منطقی را بررسی می‌کند (اگر override شده باشد)</li>
-        </ul>
-
-        <pre><code class="language-csharp">
+</code></pre> <p> در پروژه‌های واقعی، معمولاً از <code>StringComparison.OrdinalIgnoreCase</code> برای مقایسه امن استفاده می‌شود. </p><h3>مقایسهٔ Reference Type ها (نکته مهم)</h3><p> برای objectها و classها: </p><ul> <li><code>==</code> → ممکن است آدرس حافظه را مقایسه کند</li><li><code>Equals()</code> → محتوای منطقی را بررسی می‌کند (اگر override شده باشد)</li></ul> <pre><code class="language-csharp">
 var x = new StringBuilder("Test");
 var y = new StringBuilder("Test");
 
 bool r1 = x == y;        // false (Reference)
 bool r2 = x.Equals(y);   // false (مگر override شود)
-</code></pre>
-
-        <h3>مثال پروژه‌ای — بررسی وضعیت سفارش</h3>
-
-        <pre><code class="language-csharp">
+</code></pre> <h3>مثال پروژه‌ای — بررسی وضعیت سفارش</h3><pre><code class="language-csharp">
 int orderAmount = 150000;
 
 if (orderAmount >= 100000)
@@ -346,11 +97,7 @@ else
 {
     Console.WriteLine("Shipping cost applies");
 }
-</code></pre>
-
-        <h3>ترکیب Comparison با Logical Operators</h3>
-
-        <pre><code class="language-csharp">
+</code></pre> <h3>ترکیب Comparison با Logical Operators</h3><pre><code class="language-csharp">
 int age = 25;
 bool isVip = true;
 
@@ -358,136 +105,27 @@ if (age >= 18 && isVip)
 {
     Console.WriteLine("Premium access");
 }
-</code></pre>
-
-        <h3>اشتباهات رایج</h3>
-        <ul>
-            <li>مقایسهٔ رشته بدون توجه به حروف بزرگ/کوچک</li>
-            <li>مقایسهٔ object به جای مقدار داخلی آن</li>
-            <li>شرط‌های بیش‌ازحد پیچیده در یک if</li>
-        </ul>
-
-        <h3>تمرین‌های پیشنهادی</h3>
-        <ol>
-            <li>سن کاربر را بگیر و بررسی کن آیا بین 18 و 60 هست یا نه.</li>
-            <li>نام کاربری ورودی را با مقدار ذخیره‌شده مقایسه کن (بدون حساسیت به حروف).</li>
-            <li>مبلغ سفارش را بگیر و مشخص کن شامل ارسال رایگان می‌شود یا خیر.</li>
-        </ol>
-
-        <p class="ref">
-            مستندات رسمی:
-            <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/comparison-operators"
-                target="_blank">
-                Comparison Operators — Microsoft Docs
-            </a>
-        </p>
-
-    </section>
-
-    <!-- ============================ BITWISE OPERATORS ============================ -->
-    <section id="bitwise" class="topic-section">
-
-        <h2>Bitwise Operators</h2>
-
-        <p>
-            <strong>Bitwise Operators</strong> عملگرهایی هستند که مستقیماً روی <strong>بیت‌ها</strong>
-            (0 و 1) کار می‌کنند، نه روی مقدار عددی به شکل معمول.
-            این عملگرها بیشتر در سطح پایین سیستم، پردازش داده‌های فشرده،
-            شبکه، رمزنگاری، Performance Optimization و Flagها استفاده می‌شوند.
-        </p>
-
-        <h3>بیت یعنی چه؟ (خیلی ساده)</h3>
-        <p>
-            هر عدد صحیح در کامپیوتر به شکل دنباله‌ای از 0 و 1 ذخیره می‌شود.
-            مثلاً:
-        </p>
-
-        <pre><code class="language-csharp">
+</code></pre> <h3>اشتباهات رایج</h3><ul> <li>مقایسهٔ رشته بدون توجه به حروف بزرگ/کوچک</li><li>مقایسهٔ object به جای مقدار داخلی آن</li><li>شرط‌های بیش‌ازحد پیچیده در یک if</li></ul> <h3>تمرین‌های پیشنهادی</h3><ol> <li>سن کاربر را بگیر و بررسی کن آیا بین 18 و 60 هست یا نه.</li><li>نام کاربری ورودی را با مقدار ذخیره‌شده مقایسه کن (بدون حساسیت به حروف).</li><li>مبلغ سفارش را بگیر و مشخص کن شامل ارسال رایگان می‌شود یا خیر.</li></ol> <p class="ref"> مستندات رسمی: <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/comparison-operators" target="_blank" rel="noopener noreferrer"> Comparison Operators — Microsoft Docs </a></p> </section><section id="bitwise" class="topic-section"> <h2>Bitwise Operators</h2><p> <strong>Bitwise Operators</strong> عملگرهایی هستند که مستقیماً روی <strong>بیت‌ها</strong> (0 و 1) کار می‌کنند، نه روی مقدار عددی به شکل معمول. این عملگرها بیشتر در سطح پایین سیستم، پردازش داده‌های فشرده، شبکه، رمزنگاری، Performance Optimization و Flagها استفاده می‌شوند. </p><h3>بیت یعنی چه؟ (خیلی ساده)</h3><p> هر عدد صحیح در کامپیوتر به شکل دنباله‌ای از 0 و 1 ذخیره می‌شود. مثلاً: </p><pre><code class="language-csharp">
 5  = 0101
 3  = 0011
-</code></pre>
-
-        <p>
-            Bitwise Operators روی همین نمایش دودویی عملیات انجام می‌دهند.
-        </p>
-
-        <h3>لیست Bitwise Operators در C#</h3>
-
-        <ul>
-            <li><code>&amp;</code> — AND بیتی</li>
-            <li><code>|</code> — OR بیتی</li>
-            <li><code>^</code> — XOR بیتی</li>
-            <li><code>~</code> — NOT بیتی (معکوس)</li>
-            <li><code>&lt;&lt;</code> — Shift Left</li>
-            <li><code>&gt;&gt;</code> — Shift Right</li>
-        </ul>
-
-        <h3>Bitwise AND (&amp;)</h3>
-        <p>
-            اگر هر دو بیت 1 باشند، نتیجه 1 می‌شود.
-        </p>
-
-        <pre><code class="language-csharp">
+</code></pre> <p> Bitwise Operators روی همین نمایش دودویی عملیات انجام می‌دهند. </p><h3>لیست Bitwise Operators در C#</h3><ul> <li><code>&amp;</code> — AND بیتی</li><li><code>|</code> — OR بیتی</li><li><code>^</code> — XOR بیتی</li><li><code>~</code> — NOT بیتی (معکوس)</li><li><code>&lt;&lt;</code> — Shift Left</li><li><code>&gt;&gt;</code> — Shift Right</li></ul> <h3>Bitwise AND (&amp;)</h3><p> اگر هر دو بیت 1 باشند، نتیجه 1 می‌شود. </p><pre><code class="language-csharp">
 int a = 5;   // 0101
 int b = 3;   // 0011
 
 int result = a & b;  // 0001 = 1
-</code></pre>
-
-        <h3>Bitwise OR (|)</h3>
-        <p>
-            اگر حداقل یکی از بیت‌ها 1 باشد، نتیجه 1 می‌شود.
-        </p>
-
-        <pre><code class="language-csharp">
+</code></pre> <h3>Bitwise OR (|)</h3><p> اگر حداقل یکی از بیت‌ها 1 باشد، نتیجه 1 می‌شود. </p><pre><code class="language-csharp">
 int result = a | b;  // 0111 = 7
-</code></pre>
-
-        <h3>Bitwise XOR (^)</h3>
-        <p>
-            اگر بیت‌ها متفاوت باشند، نتیجه 1 می‌شود.
-        </p>
-
-        <pre><code class="language-csharp">
+</code></pre> <h3>Bitwise XOR (^)</h3><p> اگر بیت‌ها متفاوت باشند، نتیجه 1 می‌شود. </p><pre><code class="language-csharp">
 int result = a ^ b;  // 0110 = 6
-</code></pre>
-
-        <h3>Bitwise NOT (~)</h3>
-        <p>
-            تمام بیت‌ها را معکوس می‌کند (0 → 1 و 1 → 0).
-        </p>
-
-        <pre><code class="language-csharp">
+</code></pre> <h3>Bitwise NOT (~)</h3><p> تمام بیت‌ها را معکوس می‌کند (0 → 1 و 1 → 0). </p><pre><code class="language-csharp">
 int x = 5;      // 0000...0101
 int y = ~x;     // 1111...1010  (عدد منفی)
-</code></pre>
-
-        <p>
-            به همین دلیل ~ معمولاً برای Flagها و ماسک‌ها استفاده می‌شود.
-        </p>
-
-        <h3>Shift Left (&lt;&lt;) و Shift Right (&gt;&gt;)</h3>
-        <p>
-            شیفت دادن یعنی جابه‌جا کردن بیت‌ها به چپ یا راست.
-        </p>
-
-        <pre><code class="language-csharp">
+</code></pre> <p> به همین دلیل ~ معمولاً برای Flagها و ماسک‌ها استفاده می‌شود. </p><h3>Shift Left (&lt;&lt;) و Shift Right (&gt;&gt;)</h3><p> شیفت دادن یعنی جابه‌جا کردن بیت‌ها به چپ یا راست. </p><pre><code class="language-csharp">
 int x = 3;      // 0011
 
 int left = x << 1;   // 0110 = 6
 int right = x >> 1;  // 0001 = 1
-</code></pre>
-
-        <p>
-            Shift Left معمولاً معادل ضرب در 2 و Shift Right معادل تقسیم بر 2 است.
-        </p>
-
-        <h3>کاربرد واقعی — Flags و Enum</h3>
-        <p>
-            Bitwise Operators به‌شدت با <strong>Enum + Flags</strong> استفاده می‌شوند.
-        </p>
-
-        <pre><code class="language-csharp">
+</code></pre> <p> Shift Left معمولاً معادل ضرب در 2 و Shift Right معادل تقسیم بر 2 است. </p><h3>کاربرد واقعی — Flags و Enum</h3><p> Bitwise Operators به‌شدت با <strong>Enum + Flags</strong> استفاده می‌شوند. </p><pre><code class="language-csharp">
 [Flags]
 enum Permissions
 {
@@ -501,18 +139,7 @@ Permissions userPerms = Permissions.Read | Permissions.Write;
 
 // بررسی دسترسی
 bool canWrite = (userPerms & Permissions.Write) == Permissions.Write;
-</code></pre>
-
-        <h3>چرا این روش مهم است؟</h3>
-        <ul>
-            <li>مصرف حافظه بسیار کم</li>
-            <li>سرعت بسیار بالا</li>
-            <li>امکان ترکیب چند وضعیت در یک متغیر</li>
-        </ul>
-
-        <h3>مثال پروژه‌ای — تنظیمات کاربر</h3>
-
-        <pre><code class="language-csharp">
+</code></pre> <h3>چرا این روش مهم است؟</h3><ul> <li>مصرف حافظه بسیار کم</li><li>سرعت بسیار بالا</li><li>امکان ترکیب چند وضعیت در یک متغیر</li></ul> <h3>مثال پروژه‌ای — تنظیمات کاربر</h3><pre><code class="language-csharp">
 const int DarkMode   = 1; // 0001
 const int EmailNotif = 2; // 0010
 const int SmsNotif   = 4; // 0100
@@ -521,58 +148,7 @@ int settings = DarkMode | EmailNotif;
 
 // آیا SMS فعال است؟
 bool hasSms = (settings & SmsNotif) != 0;
-</code></pre>
-
-        <h3>اشتباهات رایج تازه‌کارها</h3>
-        <ul>
-            <li>استفاده از Bitwise به‌جای Logical ( &amp; به‌جای &amp;&amp; )</li>
-            <li>خواندن سخت کد بدون کامنت</li>
-            <li>استفاده در جاهایی که اصلاً نیاز نیست</li>
-        </ul>
-
-        <h3>تمرین‌های پیشنهادی</h3>
-        <ol>
-            <li>یک Enum با Flags برای دسترسی کاربران طراحی کن.</li>
-            <li>برنامه‌ای بنویس که با Bitwise مشخص کند عدد زوج است یا فرد.</li>
-            <li>با Shift Left و Right یک ماشین حساب توان‌های 2 بساز.</li>
-        </ol>
-
-        <p class="ref">
-            مستندات رسمی:
-            <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/bitwise-and-shift-operators"
-                target="_blank">
-                Bitwise Operators — Microsoft Docs
-            </a>
-        </p>
-
-    </section>
-
-    <!-- ============================ ARITHMETIC OPERATORS ============================ -->
-    <section id="arithmetic" class="topic-section">
-
-        <h2>Arithmetic Operators</h2>
-
-        <p>
-            <strong>Arithmetic Operators</strong> یا عملگرهای حسابی،
-            برای انجام محاسبات عددی پایه در سی‌شارپ استفاده می‌شوند.
-            تقریباً تمام برنامه‌ها—از ماشین‌حساب ساده تا سیستم‌های مالی و علمی—
-            به این عملگرها متکی هستند.
-        </p>
-
-        <h3>لیست عملگرهای حسابی</h3>
-        <ul>
-            <li><code>+</code> — جمع</li>
-            <li><code>-</code> — تفریق</li>
-            <li><code>*</code> — ضرب</li>
-            <li><code>/</code> — تقسیم</li>
-            <li><code>%</code> — باقیمانده (Modulus)</li>
-            <li><code>++</code> — افزایش یک‌واحدی</li>
-            <li><code>--</code> — کاهش یک‌واحدی</li>
-        </ul>
-
-        <h3>مثال‌های پایه</h3>
-
-        <pre><code class="language-csharp">
+</code></pre> <h3>اشتباهات رایج تازه‌کارها</h3><ul> <li>استفاده از Bitwise به‌جای Logical ( &amp; به‌جای &amp;&amp; )</li><li>خواندن سخت کد بدون کامنت</li><li>استفاده در جاهایی که اصلاً نیاز نیست</li></ul> <h3>تمرین‌های پیشنهادی</h3><ol> <li>یک Enum با Flags برای دسترسی کاربران طراحی کن.</li><li>برنامه‌ای بنویس که با Bitwise مشخص کند عدد زوج است یا فرد.</li><li>با Shift Left و Right یک ماشین حساب توان‌های 2 بساز.</li></ol> <p class="ref"> مستندات رسمی: <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/bitwise-and-shift-operators" target="_blank" rel="noopener noreferrer"> Bitwise Operators — Microsoft Docs </a></p> </section><section id="arithmetic" class="topic-section"> <h2>Arithmetic Operators</h2><p> <strong>Arithmetic Operators</strong> یا عملگرهای حسابی، برای انجام محاسبات عددی پایه در سی‌شارپ استفاده می‌شوند. تقریباً تمام برنامه‌ها—از ماشین‌حساب ساده تا سیستم‌های مالی و علمی— به این عملگرها متکی هستند. </p><h3>لیست عملگرهای حسابی</h3><ul> <li><code>+</code> — جمع</li><li><code>-</code> — تفریق</li><li><code>*</code> — ضرب</li><li><code>/</code> — تقسیم</li><li><code>%</code> — باقیمانده (Modulus)</li><li><code>++</code> — افزایش یک‌واحدی</li><li><code>--</code> — کاهش یک‌واحدی</li></ul> <h3>مثال‌های پایه</h3><pre><code class="language-csharp">
 int a = 10;
 int b = 3;
 
@@ -581,182 +157,51 @@ int sub = a - b;      // 7
 int mul = a * b;      // 30
 int div = a / b;      // 3
 int mod = a % b;      // 1
-</code></pre>
-
-        <p>
-            نکتهٔ مهم: اگر هر دو طرف تقسیم <code>int</code> باشند،
-            نتیجه نیز <code>int</code> می‌شود و قسمت اعشاری حذف خواهد شد.
-        </p>
-
-        <h3>تقسیم صحیح vs تقسیم اعشاری</h3>
-
-        <pre><code class="language-csharp">
+</code></pre> <p> نکتهٔ مهم: اگر هر دو طرف تقسیم <code>int</code> باشند، نتیجه نیز <code>int</code> می‌شود و قسمت اعشاری حذف خواهد شد. </p><h3>تقسیم صحیح vs تقسیم اعشاری</h3><pre><code class="language-csharp">
 int x = 5;
 int y = 2;
 
 int result1 = x / y;       // 2
 double result2 = x / 2.0;  // 2.5
-</code></pre>
-
-        <p>
-            برای جلوگیری از خطاهای محاسباتی، در محاسبات مالی و دقیق
-            از <code>decimal</code> استفاده کن.
-        </p>
-
-        <h3>عملگر باقیمانده (%)</h3>
-        <p>
-            این عملگر مقدار باقی‌ماندهٔ تقسیم را برمی‌گرداند و کاربردهای زیادی دارد:
-        </p>
-
-        <pre><code class="language-csharp">
+</code></pre> <p> برای جلوگیری از خطاهای محاسباتی، در محاسبات مالی و دقیق از <code>decimal</code> استفاده کن. </p><h3>عملگر باقیمانده (%)</h3><p> این عملگر مقدار باقی‌ماندهٔ تقسیم را برمی‌گرداند و کاربردهای زیادی دارد: </p><pre><code class="language-csharp">
 int number = 10;
 
 bool isEven = number % 2 == 0;   // true
-</code></pre>
-
-        <h3>Increment و Decrement (++ / --)</h3>
-
-        <p>
-            این عملگرها مقدار متغیر را یک واحد افزایش یا کاهش می‌دهند.
-            دو حالت دارند:
-        </p>
-
-        <ul>
-            <li><strong>Prefix</strong>: قبل از استفاده مقدار تغییر می‌کند</li>
-            <li><strong>Postfix</strong>: بعد از استفاده مقدار تغییر می‌کند</li>
-        </ul>
-
-        <pre><code class="language-csharp">
+</code></pre> <h3>Increment و Decrement (++ / --)</h3><p> این عملگرها مقدار متغیر را یک واحد افزایش یا کاهش می‌دهند. دو حالت دارند: </p><ul> <li><strong>Prefix</strong>: قبل از استفاده مقدار تغییر می‌کند</li><li><strong>Postfix</strong>: بعد از استفاده مقدار تغییر می‌کند</li></ul> <pre><code class="language-csharp">
 int i = 5;
 
 int a = ++i;  // i=6, a=6
 int b = i++;  // b=6, i=7
-</code></pre>
-
-        <h3>اشتباه بسیار رایج تازه‌کارها</h3>
-        <p>
-            استفادهٔ نادرست از ++ در شرط‌ها:
-        </p>
-
-        <pre><code class="language-csharp">
+</code></pre> <h3>اشتباه بسیار رایج تازه‌کارها</h3><p> استفادهٔ نادرست از ++ در شرط‌ها: </p><pre><code class="language-csharp">
 // خوانایی بد
 if (i++ > 10)
 {
 }
-</code></pre>
-
-        <p>
-            در پروژه‌های واقعی، بهتر است ++ را در خط جداگانه استفاده کنی.
-        </p>
-
-        <h3>Overflow چیست؟</h3>
-        <p>
-            اگر نتیجهٔ یک محاسبه از محدودهٔ نوع داده خارج شود،
-            <strong>Overflow</strong> رخ می‌دهد.
-        </p>
-
-        <pre><code class="language-csharp">
+</code></pre> <p> در پروژه‌های واقعی، بهتر است ++ را در خط جداگانه استفاده کنی. </p><h3>Overflow چیست؟</h3><p> اگر نتیجهٔ یک محاسبه از محدودهٔ نوع داده خارج شود، <strong>Overflow</strong> رخ می‌دهد. </p><pre><code class="language-csharp">
 int max = int.MaxValue;
 int result = max + 1;   // Overflow → عدد منفی
-</code></pre>
-
-        <h3>checked و unchecked</h3>
-        <p>
-            برای جلوگیری از Overflow مخفی، از <code>checked</code> استفاده می‌کنیم:
-        </p>
-
-        <pre><code class="language-csharp">
+</code></pre> <h3>checked و unchecked</h3><p> برای جلوگیری از Overflow مخفی، از <code>checked</code> استفاده می‌کنیم: </p><pre><code class="language-csharp">
 checked
 {
     int x = int.MaxValue;
     int y = x + 1;   // Exception
 }
-</code></pre>
-
-        <p>
-            در مقابل، <code>unchecked</code> اجازه می‌دهد Overflow رخ دهد:
-        </p>
-
-        <pre><code class="language-csharp">
+</code></pre> <p> در مقابل، <code>unchecked</code> اجازه می‌دهد Overflow رخ دهد: </p><pre><code class="language-csharp">
 unchecked
 {
     int x = int.MaxValue;
     int y = x + 1;   // Wrap-Around
 }
-</code></pre>
-
-        <h3>مثال پروژه‌ای — محاسبه قیمت نهایی</h3>
-
-        <pre><code class="language-csharp">
+</code></pre> <h3>مثال پروژه‌ای — محاسبه قیمت نهایی</h3><pre><code class="language-csharp">
 decimal price = 200_000m;
 decimal discount = price * 0.1m;   // 10%
 decimal tax = price * 0.09m;        // 9%
 
 decimal finalPrice = price - discount + tax;
-</code></pre>
-
-        <h3>ترتیب انجام عملیات (Operator Precedence)</h3>
-
-        <pre><code class="language-csharp">
+</code></pre> <h3>ترتیب انجام عملیات (Operator Precedence)</h3><pre><code class="language-csharp">
 int result = 10 + 2 * 3;      // 16
 int result2 = (10 + 2) * 3;   // 36
-</code></pre>
-
-        <p>
-            همیشه برای خوانایی بیشتر از پرانتز استفاده کن.
-        </p>
-
-        <h3>اشتباهات رایج</h3>
-        <ul>
-            <li>تقسیم int به int بدون توجه به حذف اعشار</li>
-            <li>نادیده گرفتن Overflow</li>
-            <li>استفادهٔ بیش از حد از ++ در یک خط</li>
-        </ul>
-
-        <h3>تمرین‌های پیشنهادی</h3>
-        <ol>
-            <li>برنامه‌ای بنویس که BMI را محاسبه کند.</li>
-            <li>ماشین‌حساب ساده با چهار عمل اصلی بساز.</li>
-            <li>بررسی کن یک عدد زوج است یا فرد.</li>
-            <li>مثالی بنویس که Overflow ایجاد کند و آن را با checked مدیریت کن.</li>
-        </ol>
-
-        <p class="ref">
-            مستندات رسمی:
-            <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/arithmetic-operators"
-                target="_blank">
-                Arithmetic Operators — Microsoft Docs
-            </a>
-        </p>
-
-    </section>
-
-    <!-- ============================ ARITHMETIC OPERATORS ============================ -->
-    <section id="arithmetic" class="topic-section">
-
-        <h2>Arithmetic Operators</h2>
-
-        <p>
-            <strong>Arithmetic Operators</strong> یا عملگرهای حسابی،
-            برای انجام محاسبات عددی پایه در سی‌شارپ استفاده می‌شوند.
-            تقریباً تمام برنامه‌ها—از ماشین‌حساب ساده تا سیستم‌های مالی و علمی—
-            به این عملگرها متکی هستند.
-        </p>
-
-        <h3>لیست عملگرهای حسابی</h3>
-        <ul>
-            <li><code>+</code> — جمع</li>
-            <li><code>-</code> — تفریق</li>
-            <li><code>*</code> — ضرب</li>
-            <li><code>/</code> — تقسیم</li>
-            <li><code>%</code> — باقیمانده (Modulus)</li>
-            <li><code>++</code> — افزایش یک‌واحدی</li>
-            <li><code>--</code> — کاهش یک‌واحدی</li>
-        </ul>
-
-        <h3>مثال‌های پایه</h3>
-
-        <pre><code class="language-csharp">
+</code></pre> <p> همیشه برای خوانایی بیشتر از پرانتز استفاده کن. </p><h3>اشتباهات رایج</h3><ul> <li>تقسیم int به int بدون توجه به حذف اعشار</li><li>نادیده گرفتن Overflow</li><li>استفادهٔ بیش از حد از ++ در یک خط</li></ul> <h3>تمرین‌های پیشنهادی</h3><ol> <li>برنامه‌ای بنویس که BMI را محاسبه کند.</li><li>ماشین‌حساب ساده با چهار عمل اصلی بساز.</li><li>بررسی کن یک عدد زوج است یا فرد.</li><li>مثالی بنویس که Overflow ایجاد کند و آن را با checked مدیریت کن.</li></ol> <p class="ref"> مستندات رسمی: <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/arithmetic-operators" target="_blank" rel="noopener noreferrer"> Arithmetic Operators — Microsoft Docs </a></p> </section><section id="arithmetic" class="topic-section"> <h2>Arithmetic Operators</h2><p> <strong>Arithmetic Operators</strong> یا عملگرهای حسابی، برای انجام محاسبات عددی پایه در سی‌شارپ استفاده می‌شوند. تقریباً تمام برنامه‌ها—از ماشین‌حساب ساده تا سیستم‌های مالی و علمی— به این عملگرها متکی هستند. </p><h3>لیست عملگرهای حسابی</h3><ul> <li><code>+</code> — جمع</li><li><code>-</code> — تفریق</li><li><code>*</code> — ضرب</li><li><code>/</code> — تقسیم</li><li><code>%</code> — باقیمانده (Modulus)</li><li><code>++</code> — افزایش یک‌واحدی</li><li><code>--</code> — کاهش یک‌واحدی</li></ul> <h3>مثال‌های پایه</h3><pre><code class="language-csharp">
 int a = 10;
 int b = 3;
 
@@ -765,415 +210,195 @@ int sub = a - b;      // 7
 int mul = a * b;      // 30
 int div = a / b;      // 3
 int mod = a % b;      // 1
-</code></pre>
-
-        <p>
-            نکتهٔ مهم: اگر هر دو طرف تقسیم <code>int</code> باشند،
-            نتیجه نیز <code>int</code> می‌شود و قسمت اعشاری حذف خواهد شد.
-        </p>
-
-        <h3>تقسیم صحیح vs تقسیم اعشاری</h3>
-
-        <pre><code class="language-csharp">
+</code></pre> <p> نکتهٔ مهم: اگر هر دو طرف تقسیم <code>int</code> باشند، نتیجه نیز <code>int</code> می‌شود و قسمت اعشاری حذف خواهد شد. </p><h3>تقسیم صحیح vs تقسیم اعشاری</h3><pre><code class="language-csharp">
 int x = 5;
 int y = 2;
 
 int result1 = x / y;       // 2
 double result2 = x / 2.0;  // 2.5
-</code></pre>
-
-        <p>
-            برای جلوگیری از خطاهای محاسباتی، در محاسبات مالی و دقیق
-            از <code>decimal</code> استفاده کن.
-        </p>
-
-        <h3>عملگر باقیمانده (%)</h3>
-        <p>
-            این عملگر مقدار باقی‌ماندهٔ تقسیم را برمی‌گرداند و کاربردهای زیادی دارد:
-        </p>
-
-        <pre><code class="language-csharp">
+</code></pre> <p> برای جلوگیری از خطاهای محاسباتی، در محاسبات مالی و دقیق از <code>decimal</code> استفاده کن. </p><h3>عملگر باقیمانده (%)</h3><p> این عملگر مقدار باقی‌ماندهٔ تقسیم را برمی‌گرداند و کاربردهای زیادی دارد: </p><pre><code class="language-csharp">
 int number = 10;
 
 bool isEven = number % 2 == 0;   // true
-</code></pre>
-
-        <h3>Increment و Decrement (++ / --)</h3>
-
-        <p>
-            این عملگرها مقدار متغیر را یک واحد افزایش یا کاهش می‌دهند.
-            دو حالت دارند:
-        </p>
-
-        <ul>
-            <li><strong>Prefix</strong>: قبل از استفاده مقدار تغییر می‌کند</li>
-            <li><strong>Postfix</strong>: بعد از استفاده مقدار تغییر می‌کند</li>
-        </ul>
-
-        <pre><code class="language-csharp">
+</code></pre> <h3>Increment و Decrement (++ / --)</h3><p> این عملگرها مقدار متغیر را یک واحد افزایش یا کاهش می‌دهند. دو حالت دارند: </p><ul> <li><strong>Prefix</strong>: قبل از استفاده مقدار تغییر می‌کند</li><li><strong>Postfix</strong>: بعد از استفاده مقدار تغییر می‌کند</li></ul> <pre><code class="language-csharp">
 int i = 5;
 
 int a = ++i;  // i=6, a=6
 int b = i++;  // b=6, i=7
-</code></pre>
-
-        <h3>اشتباه بسیار رایج تازه‌کارها</h3>
-        <p>
-            استفادهٔ نادرست از ++ در شرط‌ها:
-        </p>
-
-        <pre><code class="language-csharp">
+</code></pre> <h3>اشتباه بسیار رایج تازه‌کارها</h3><p> استفادهٔ نادرست از ++ در شرط‌ها: </p><pre><code class="language-csharp">
 // خوانایی بد
 if (i++ > 10)
 {
 }
-</code></pre>
-
-        <p>
-            در پروژه‌های واقعی، بهتر است ++ را در خط جداگانه استفاده کنی.
-        </p>
-
-        <h3>Overflow چیست؟</h3>
-        <p>
-            اگر نتیجهٔ یک محاسبه از محدودهٔ نوع داده خارج شود،
-            <strong>Overflow</strong> رخ می‌دهد.
-        </p>
-
-        <pre><code class="language-csharp">
+</code></pre> <p> در پروژه‌های واقعی، بهتر است ++ را در خط جداگانه استفاده کنی. </p><h3>Overflow چیست؟</h3><p> اگر نتیجهٔ یک محاسبه از محدودهٔ نوع داده خارج شود، <strong>Overflow</strong> رخ می‌دهد. </p><pre><code class="language-csharp">
 int max = int.MaxValue;
 int result = max + 1;   // Overflow → عدد منفی
-</code></pre>
-
-        <h3>checked و unchecked</h3>
-        <p>
-            برای جلوگیری از Overflow مخفی، از <code>checked</code> استفاده می‌کنیم:
-        </p>
-
-        <pre><code class="language-csharp">
+</code></pre> <h3>checked و unchecked</h3><p> برای جلوگیری از Overflow مخفی، از <code>checked</code> استفاده می‌کنیم: </p><pre><code class="language-csharp">
 checked
 {
     int x = int.MaxValue;
     int y = x + 1;   // Exception
 }
-</code></pre>
-
-        <p>
-            در مقابل، <code>unchecked</code> اجازه می‌دهد Overflow رخ دهد:
-        </p>
-
-        <pre><code class="language-csharp">
+</code></pre> <p> در مقابل، <code>unchecked</code> اجازه می‌دهد Overflow رخ دهد: </p><pre><code class="language-csharp">
 unchecked
 {
     int x = int.MaxValue;
     int y = x + 1;   // Wrap-Around
 }
-</code></pre>
-
-        <h3>مثال پروژه‌ای — محاسبه قیمت نهایی</h3>
-
-        <pre><code class="language-csharp">
+</code></pre> <h3>مثال پروژه‌ای — محاسبه قیمت نهایی</h3><pre><code class="language-csharp">
 decimal price = 200_000m;
 decimal discount = price * 0.1m;   // 10%
 decimal tax = price * 0.09m;        // 9%
 
 decimal finalPrice = price - discount + tax;
-</code></pre>
-
-        <h3>ترتیب انجام عملیات (Operator Precedence)</h3>
-
-        <pre><code class="language-csharp">
+</code></pre> <h3>ترتیب انجام عملیات (Operator Precedence)</h3><pre><code class="language-csharp">
 int result = 10 + 2 * 3;      // 16
 int result2 = (10 + 2) * 3;   // 36
-</code></pre>
-
-        <p>
-            همیشه برای خوانایی بیشتر از پرانتز استفاده کن.
-        </p>
-
-        <h3>اشتباهات رایج</h3>
-        <ul>
-            <li>تقسیم int به int بدون توجه به حذف اعشار</li>
-            <li>نادیده گرفتن Overflow</li>
-            <li>استفادهٔ بیش از حد از ++ در یک خط</li>
-        </ul>
-
-        <h3>تمرین‌های پیشنهادی</h3>
-        <ol>
-            <li>برنامه‌ای بنویس که BMI را محاسبه کند.</li>
-            <li>ماشین‌حساب ساده با چهار عمل اصلی بساز.</li>
-            <li>بررسی کن یک عدد زوج است یا فرد.</li>
-            <li>مثالی بنویس که Overflow ایجاد کند و آن را با checked مدیریت کن.</li>
-        </ol>
-
-        <p class="ref">
-            مستندات رسمی:
-            <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/arithmetic-operators"
-                target="_blank">
-                Arithmetic Operators — Microsoft Docs
-            </a>
-        </p>
-
-    </section>
-
-</div>
-
-
-<style>
-    .valuetypes-wrapper {
-        max-width: 960px;
-        margin: 0 auto;
-        padding: 10px 20px;
-        transition: max-width .3s ease;
-    }
-
-    @media (max-width: 768px) {
-        .valuetypes-wrapper {
-            max-width: 100%;
-            padding: 10px 18px;
-        }
-    }
-
-    @media (max-width: 480px) {
-        .valuetypes-wrapper {
-            padding: 10px 12px;
-        }
-    }
-
-    /* عنوان صفحه */
-    .page-title {
-        text-align: center;
-        font-size: 40px;
-        font-weight: bold;
-        color: #398ef7;
-        margin-bottom: 5px;
-    }
-
-    @media (max-width: 768px) {
-        .page-title {
-            font-size: 34px;
-        }
-    }
-
-    .page-desc {
-        text-align: center;
-        opacity: .8;
-        font-size: 30px;
-        margin-bottom: 40px;
-        font-family: "Lalezar", "VazirFD";
-    }
-
-    @media (max-width: 768px) {
-        .page-desc {
-            font-size: 18px;
-        }
-    }
-
-    /* سکشن‌ها */
-    .topic-section {
-        margin-bottom: 70px;
-        padding: 25px;
-        border-radius: 14px;
-        background: rgba(215, 215, 215, 0.03);
-        border-right: 4px solid #4e9fff;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-    }
-
-    html.light .topic-section {
-        background: #ffffff;
-        border-bottom-color: #e5e5e5;
-    }
-
-    .topic-section h2 {
-        text-align: left;
-        color: #4e9fff;
-        font-size: 28px;
-        margin-bottom: 15px;
-        position: relative;
-    }
-
-    .topic-section h2::after {
-        content: "";
-        width: 60px;
-        height: 3px;
-        background: #4e9fff;
-        position: absolute;
-        bottom: -6px;
-        left: 0;
-        border-radius: 3px;
-    }
-
-    .topic-section p {
-        line-height: 1.85;
-        margin-bottom: 14px;
-    }
-
-    .topic-section h3 {
-        margin-top: 25px;
-        font-size: 20px;
-        color: #4e9fff;
-    }
-
-    ul li,
-    ol li {
-        margin-bottom: 6px;
-    }
-
-    /* لینک‌ها */
-    .ref a {
-        color: #4ea3ff;
-        font-weight: 600;
-        transition: color .2s, text-shadow .2s;
-    }
-
-    .ref a:hover {
-        color: #82c5ff;
-        text-shadow: 0 0 8px rgba(78, 163, 255, 0.6);
-    }
-
-    /* کد بلاک */
-    pre {
-        background: #161616;
-        border: 1px solid #333;
-        padding: 16px;
-        border-radius: 10px;
-        overflow-x: auto;
-        margin-top: 15px;
-        font-family: "JetBrains Mono", Menlo, Consolas, monospace;
-        font-size: 15px;
-        line-height: 1.6;
-    }
-
-    html.light pre {
-        background: #f9f9f9;
-        border-color: #dfdfdf;
-        color: #222;
-    }
-
-    /* نکته ویژه - نقل‌قول */
-    .valuetypes-wrapper blockquote {
-        padding: 15px 20px;
-        border-right: 4px solid #4e9fff;
-        background: rgba(228, 228, 228, 0.04);
-        border-radius: 10px;
-        margin: 25px 0;
-        font-style: italic;
-        opacity: .95;
-    }
-
-    html.light .valuetypes-wrapper blockquote {
-        background: #fff8f0;
-    }
-</style>
-  </main>
-
-  <!-- فوتر مشترک -->
-  <footer class="footer">
-    <div class="container">
-      <p>
-        <img src="/Gitab/icone/copyright.svg" alt="کپی‌رایت" width="14" height="14"
-             style="vertical-align:middle;margin-inline:4px">
-        <span id="y"></span> Gitab — تمامی حقوق محفوظ است.
-      </p>
-    </div>
-  </footer>
-
-  <!-- سال و اسکریپت تغییر تم -->
-  <script>
+</code></pre> <p> همیشه برای خوانایی بیشتر از پرانتز استفاده کن. </p><h3>اشتباهات رایج</h3><ul> <li>تقسیم int به int بدون توجه به حذف اعشار</li><li>نادیده گرفتن Overflow</li><li>استفادهٔ بیش از حد از ++ در یک خط</li></ul> <h3>تمرین‌های پیشنهادی</h3><ol> <li>برنامه‌ای بنویس که BMI را محاسبه کند.</li><li>ماشین‌حساب ساده با چهار عمل اصلی بساز.</li><li>بررسی کن یک عدد زوج است یا فرد.</li><li>مثالی بنویس که Overflow ایجاد کند و آن را با checked مدیریت کن.</li></ol> <p class="ref"> مستندات رسمی: <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/arithmetic-operators" target="_blank" rel="noopener noreferrer"> Arithmetic Operators — Microsoft Docs </a></p> </section></div> <style>.valuetypes-wrapper{max-width:960px;margin:0 auto;padding:10px 20px;transition:max-width .3s ease}@media (max-width:768px){.valuetypes-wrapper{max-width:100%;padding:10px 18px}}@media (max-width:480px){.valuetypes-wrapper{padding:10px 12px}}.page-title{text-align:center;font-size:40px;font-weight:bold;color:#398ef7;margin-bottom:5px}@media (max-width:768px){.page-title{font-size:34px}}.page-desc{text-align:center;opacity:.8;font-size:30px;margin-bottom:40px;font-family:"Lalezar","VazirFD"}@media (max-width:768px){.page-desc{font-size:18px}}.topic-section{margin-bottom:70px;padding:25px;border-radius:14px;background:rgba(215,215,215,0.03);border-right:4px solid #4e9fff;border-bottom:1px solid rgba(255,255,255,0.06)}html.light .topic-section{background:#ffffff;border-bottom-color:#e5e5e5}.topic-section h2{text-align:left;color:#4e9fff;font-size:28px;margin-bottom:15px;position:relative}.topic-section h2::after{content:"";width:60px;height:3px;background:#4e9fff;position:absolute;bottom:-6px;left:0;border-radius:3px}.topic-section p{line-height:1.85;margin-bottom:14px}.topic-section h3{margin-top:25px;font-size:20px;color:#4e9fff}ul li,ol li{margin-bottom:6px}.ref a{color:#4ea3ff;font-weight:600;transition:color .2s,text-shadow .2s}.ref a:hover{color:#82c5ff;text-shadow:0 0 8px rgba(78,163,255,0.6)}pre{background:#161616;border:1px solid #333;padding:16px;border-radius:10px;overflow-x:auto;margin-top:15px;font-family:"JetBrains Mono",Menlo,Consolas,monospace;font-size:15px;line-height:1.6}html.light pre{background:#f9f9f9;border-color:#dfdfdf;color:#222}.valuetypes-wrapper blockquote{padding:15px 20px;border-right:4px solid #4e9fff;background:rgba(228,228,228,0.04);border-radius:10px;margin:25px 0;font-style:italic;opacity:.95}html.light .valuetypes-wrapper blockquote{background:#fff8f0}</style></main><footer class="footer-minimal"> <div class="footer-container"><div class="footer-top-row"> <div class="footer-brand-side"><a href="/Gitab/" class="footer-brand-anchor"> <img src="/Gitab/icone/logo.svg" alt="Gitab" width="28" height="28" loading="lazy" decoding="async"> <span class="footer-brand-title">گیتاب (Gitab)</span> </a> <p class="footer-tagline"> پلتفرم آزاد و مستقل برای ترجمهٔ دقیق و روان کتاب‌های مرجع مهندسی نرم‌افزار. </p></div> <div class="footer-nav-cols"><div class="footer-nav-col"> <span class="footer-nav-heading">موضوعات</span><ul class="footer-nav-list"> <li><a href="/Gitab/books/list-books/?cat=csharp">سی‌شارپ و دات‌نت</a></li><li><a href="/Gitab/books/list-books/?cat=clean-code">کد تمیز و بازآفرینی</a></li><li><a href="/Gitab/books/list-books/?cat=architecture">معماری و طراحی دامنه</a></li><li><a href="/Gitab/books/list-books/?cat=system">لینوکس و خط فرمان</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">بخش‌های سایت</span><ul class="footer-nav-list"> <li><a href="/Gitab/">صفحه اصلی</a></li><li><a href="/Gitab/books/list-books/">کتابخانه کامل</a></li><li><a href="/Gitab/courses/">دوره‌های آموزشی</a></li><li><a href="/Gitab/translator.html">تالار مترجمین</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">مشارکت و جامعه</span><ul class="footer-nav-list"> <li><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer">راهنمای همکاری در ترجمه</a></li><li><a href="https://github.com/hheydarian/Gitab/issues" target="_blank" rel="noopener noreferrer">پیشنهاد کتاب یا گزارش خطا</a></li></ul> </div></div> </div><div class="footer-bottom-line"> <span>© <span id="y">2026</span> Gitab — توسعه‌یافته برای جامعهٔ مهندسان نرم‌افزار ایرانی</span></div> </div></footer> <script>
   (() => {
     const root = document.documentElement;
     const btn = document.getElementById('themeToggle');
+    const sunIcon = btn ? btn.querySelector('.icon-sun') : null;
+    const moonIcon = btn ? btn.querySelector('.icon-moon') : null;
     const KEY = 'gitab-theme';
 
-    function updateTheme(s) {
-      root.setAttribute('data-theme', s);
-      const mode = s;  // فقط `dark` یا `light` خواهد بود
+    function updateTheme(mode) {
+      root.setAttribute('data-theme', mode);
       root.dataset.colorMode = mode;
-      btn.dataset.icon = mode === 'dark' ? 'moon' : 'sun';
+      if (sunIcon && moonIcon) {
+        if (mode === 'dark') {
+          sunIcon.style.display = 'inline-block';
+          moonIcon.style.display = 'none';
+        } else {
+          sunIcon.style.display = 'none';
+          moonIcon.style.display = 'inline-block';
+        }
+      }
     }
 
-    // وضعیت تم ذخیره شده از localStorage
-    let saved = localStorage.getItem(KEY) || 'light'; // پیش‌فرض روشن
+    let saved = 'dark';
+    try { saved = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
     updateTheme(saved);
 
-    // تنظیم مجدد تم هنگام تغییر وضعیت دکمه
-    btn.addEventListener('click', () => {
-      const current = localStorage.getItem(KEY) || 'light';
-      const next = current === 'dark' ? 'light' : 'dark';  // فقط دو حالت: تاریک و روشن
-      localStorage.setItem(KEY, next);
-      updateTheme(next);
-    });
+    if (btn) {
+      btn.addEventListener('click', () => {
+        let current = 'dark';
+        try { current = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+        const next = current === 'dark' ? 'light' : 'dark';
+        try { localStorage.setItem(KEY, next); } catch (e) {}
+        updateTheme(next);
+      });
+    }
 
-    // هنگام بارگذاری صفحه
     document.addEventListener('DOMContentLoaded', () => {
-      updateTheme(localStorage.getItem(KEY) || 'light');
+      let mode = 'dark';
+      try { mode = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+      updateTheme(mode);
+      const yearSpan = document.getElementById('y');
+      if (yearSpan) yearSpan.textContent = new Date().getFullYear();
     });
+
+    const mobBtn = document.getElementById('mobileMenuBtn');
+    const mobDrawer = document.getElementById('mobileDrawer');
+    if (mobBtn && mobDrawer) {
+      const setDrawerOpen = (open) => {
+        mobDrawer.classList.toggle('open', open);
+        mobBtn.classList.toggle('is-open', open);
+        mobBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        mobBtn.setAttribute('aria-label', open ? 'بستن منو' : 'باز کردن منو');
+        mobDrawer.setAttribute('aria-hidden', open ? 'false' : 'true');
+      };
+
+      mobBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        setDrawerOpen(!mobDrawer.classList.contains('open'));
+      });
+
+      mobDrawer.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => setDrawerOpen(false));
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && mobDrawer.classList.contains('open')) {
+          setDrawerOpen(false);
+        }
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!mobDrawer.contains(e.target) && !mobBtn.contains(e.target)) {
+          setDrawerOpen(false);
+        }
+      });
+    }
+
+    if ('serviceWorker' in navigator) {
+      const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+      if (isLocalhost) {
+        navigator.serviceWorker.getRegistrations().then(regs => {
+          for (const reg of regs) reg.unregister();
+        });
+        if ('caches' in window) {
+          caches.keys().then(names => {
+            for (const name of names) caches.delete(name);
+          });
+        }
+      } else {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/Gitab/sw.js').catch(() => {});
+        });
+      }
+    }
   })();
-</script>
-
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-  <script>hljs.highlightAll();</script>
-
-  <script>
+  </script> <script>
   document.querySelectorAll('pre code').forEach(block => {
+    const pre = block.parentNode;
+    if (!pre || pre.querySelector('.copy-btn')) return;
+
+    const copySvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
+    const okSvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+
     const btn = document.createElement('button');
     btn.className = 'copy-btn';
-
-    const icon = document.createElement('img');
-    icon.src = "/Gitab/icone/copy.svg";
-    icon.alt = 'Copy';
-    btn.appendChild(icon);
-
-    block.parentNode.insertBefore(btn, block);
+    btn.setAttribute('aria-label', 'کپی کد');
+    btn.setAttribute('title', 'کپی کد');
+    btn.setAttribute('type', 'button');
+    btn.innerHTML = copySvg;
+    pre.appendChild(btn);
 
     btn.addEventListener('click', async () => {
-      await navigator.clipboard.writeText(block.textContent);
-      btn.classList.add('copied');
-      setTimeout(() => btn.classList.remove('copied'), 1500);
-    });
-  });
-  </script>
-
-  <script>
-  document.body.dataset.page = window.location.pathname;
-
-  const menuBtn = document.querySelector(".menu-toggle");
-  const nav = document.querySelector(".nav");
-
-  if (menuBtn && nav) {
-    menuBtn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      nav.classList.toggle("show");
-    });
-
-    document.addEventListener("click", (e) => {
-      const clickedInsideNav = nav.contains(e.target);
-      const clickedMenuButton = menuBtn.contains(e.target);
-      if (!clickedInsideNav && !clickedMenuButton) {
-        nav.classList.remove("show");
+      try {
+        await navigator.clipboard.writeText(block.textContent);
+        btn.classList.add('copied');
+        btn.innerHTML = okSvg;
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          btn.innerHTML = copySvg;
+        }, 1800);
+      } catch (err) {
+        console.error('Copy failed:', err);
       }
     });
-  }
-  </script>
-
-  <script>
-    document.getElementById('y').textContent = new Date().getFullYear();
-  </script>
-  <script>
-document.getElementById("openDonate").addEventListener("click", () => {
-  document.getElementById("donateModal").style.display = "block";
-});
-document.getElementById("closeDonate").addEventListener("click", () => {
-  document.getElementById("donateModal").style.display = "none";
-});
-document.querySelectorAll(".copy-btn").forEach(btn => {
-  btn.addEventListener("click", () => {
-    navigator.clipboard.writeText(btn.dataset.copy);
-  
-    setTimeout(() => (btn.textContent = "کپی"), 2000);
   });
-});
-</script>
-
-</body>
-</html>
+  </script> <script type="speculationrules">{"prefetch":[{"where":{"and":[{"href_matches":"/Gitab/*"},{"not":{"href_matches":"/Gitab/downloads/*"}},{"not":{"selector_matches":"[download], [target='_blank']"}}]},"eagerness":"moderate"}]}</script> <script>
+  (() => {
+    if (window.HTMLScriptElement && HTMLScriptElement.supports && HTMLScriptElement.supports('speculationrules')) return;
+    const seen = new Set([window.location.href]);
+    let count = 0;
+    const prefetchLink = (e) => {
+      if (count >= 12) return;
+      const a = e.target && e.target.closest ? e.target.closest('header a, .chapter-single-next-nav a, .syllabus-chapter-item a, .btn-hero-read, .btn-card-read') : null;
+      if (!a || !a.href || a.hasAttribute('download') || a.target === '_blank') return;
+      if (a.origin !== window.location.origin || a.pathname.includes('/downloads/')) return;
+      const clean = a.href.split('#')[0];
+      if (!clean || seen.has(clean)) return;
+      seen.add(clean);
+      count++;
+      const l = document.createElement('link');
+      l.rel = 'prefetch';
+      l.href = clean;
+      document.head.appendChild(l);
+    };
+    document.addEventListener('pointerenter', prefetchLink, { capture: true, passive: true });
+    document.addEventListener('touchstart', prefetchLink, { capture: true, passive: true });
+  })();
+  </script></body></html>

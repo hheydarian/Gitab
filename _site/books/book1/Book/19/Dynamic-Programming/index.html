@@ -1,119 +1,22 @@
-
-
-<!doctype html>
-<html lang="fa" dir="rtl">
-<head>
-  <meta charset="utf-8">
-  <link rel="icon" type="image/png" href="/Gitab/favicon.png">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>برنامه‌نویسی پویا (Dynamic Programming)</title>
-  <meta name="description" content="ترجمه‌های فارسی کتاب‌های فنی — سریع، مینیمال و قابل اتکا.">
-
-  <!-- استایل‌ها -->
-  <link rel="stylesheet" href="/Gitab/styles/main.css">
-  <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
-
-  <style>
-  @font-face {
-    font-family: 'Vazir';
-    src: url('/Gitab/fonts/Vazir-FD-WOL.ttf') format('truetype');
-    font-display: swap;
-  }
-  @font-face {
-    font-family: "Lalezar";
-    src: url('fonts/Lalezar.ttf') format('truetype');
-    font-display: swap;
-}
-  body {
-    font-family: 'Vazir', sans-serif;
-  }
-  </style>
-</head>
-
-<body>
-  <!-- هدر مشترک -->
-  <header class="header">
-    <div class="container nav-wrap">
-      <a href="/Gitab/" class="brand">
-        <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="26" height="26">
-        <span>Gitab</span>
-      </a>
-
-       <nav class="nav">
-         <a href="/Gitab/" >خانه</a>
-         <a href="/Gitab/books/list-books" >کتاب‌ها</a>
-         <a href="/Gitab/giter.html" >دوره ها</a>
-          <!-- 
-         <a href="/Gitab/translator.html" >مترجمین</a>
-           -->
-       </nav>
-
-      <div class="nav-actions">
-        <button id="themeToggle" class="icon-btn theme-btn" data-icon="moon" aria-label="تغییر تم">
-          <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن">
-          <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک">
-        </button>
-
-        <a class="icon-btn" href="https://github.com/hheydarian/Gitab" target="_blank" title="GitHub">
-          <img src="/Gitab/icone/github.svg" alt="GitHub">
-        </a>
-
-        <!-- دکمه منو برای موبایل -->
-        <button class="menu-toggle" aria-label="منو">
-          <img src="/Gitab/icone/menu.svg" alt="menu">
-        </button>
-      </div>
-    </div>
-  </header>
-
-  
-  <main class="site-main book-page">
-    <h1>فصل نوزدهم:  برنامه‌نویسی پویا (Dynamic Programming)</h1>
-<p>فصل ۴ توضیح داد که <strong>dynamic binding</strong> در زبان C# چگونه کار می‌کند.<br>
-در این فصل، ابتدا به‌طور مختصر به <strong>Dynamic Language Runtime (DLR)</strong> می‌پردازیم و سپس الگوهای زیر در برنامه‌نویسی پویا را بررسی می‌کنیم:</p>
-<ul>
-<li><strong>Dynamic member overload resolution</strong></li>
-<li><strong>Custom binding (implementing dynamic objects)</strong></li>
-<li><strong>Dynamic language interoperability</strong></li>
-</ul>
-<p>در فصل ۲۴، توضیح می‌دهیم که <strong>dynamic</strong> چگونه می‌تواند <strong>COM interoperability</strong> را بهبود دهد.</p>
-<p>انواع (types) معرفی‌شده در این فصل، در <strong>System.Dynamic namespace</strong> قرار دارند، به‌جز <strong>CallSite&lt;&gt;</strong> که در <strong>System.Runtime.CompilerServices</strong> تعریف شده است.</p>
-<hr>
-<h3>🌀 Dynamic Language Runtime</h3>
-<p>زبان C# برای انجام <strong>dynamic binding</strong> به <strong>DLR</strong> متکی است.</p>
-<p>برخلاف نامش، <strong>DLR</strong> یک نسخه‌ی پویا از <strong>CLR</strong> نیست. بلکه یک <strong>کتابخانه (library)</strong> است که روی <strong>CLR</strong> قرار می‌گیرد—دقیقاً مانند هر کتابخانه‌ی دیگری مثل <strong>System.Xml.dll</strong>.</p>
-<p>وظیفه‌ی اصلی DLR ارائه‌ی سرویس‌های زمان اجرا (runtime services) برای یکپارچه‌سازی برنامه‌نویسی پویا—چه در زبان‌های <strong>statically typed</strong> و چه <strong>dynamically typed</strong>—است. بنابراین، زبان‌هایی مانند:</p>
-<ul>
-<li>C#</li>
-<li>Visual Basic</li>
-<li>IronPython</li>
-<li>IronRuby</li>
-</ul>
-<p>همگی از یک پروتکل یکسان برای <strong>dynamic function calls</strong> استفاده می‌کنند. این موضوع باعث می‌شود آن‌ها بتوانند کتابخانه‌ها را به اشتراک بگذارند و کدی را که به زبان دیگری نوشته شده اجرا کنند.</p>
-<p>DLR همچنین نوشتن زبان‌های پویا جدید در <strong>.NET</strong> را نسبتاً آسان می‌کند. به‌جای آنکه نویسندگان زبان مجبور باشند مستقیم <strong>Intermediate Language (IL)</strong> تولید کنند، می‌توانند در سطح <strong>expression trees</strong> کار کنند (همان <strong>expression trees</strong> موجود در <strong>System.Linq.Expressions</strong> که در فصل ۸ درباره‌شان صحبت کردیم).</p>
-<p>علاوه بر این، DLR تضمین می‌کند که همه‌ی مصرف‌کنندگان از مزیت <strong>call-site caching</strong> بهره‌مند شوند؛ یک بهینه‌سازی که از تکرار غیرضروری تصمیمات پرهزینه‌ی <strong>member resolution</strong> در طول dynamic binding جلوگیری می‌کند.</p>
-<hr>
-<h3>❓ Call Site چیست؟</h3>
-<p>وقتی کامپایلر با یک <strong>dynamic expression</strong> روبه‌رو می‌شود، نمی‌داند چه کسی آن عبارت را در زمان اجرا ارزیابی خواهد کرد.</p>
-<p>مثلاً متد زیر را در نظر بگیرید:</p>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-built_in">dynamic</span> <span class="hljs-title">Foo</span> (<span class="hljs-params"><span class="hljs-built_in">dynamic</span> x, <span class="hljs-built_in">dynamic</span> y</span>)</span>
+<!doctype html><html lang="fa" dir="rtl"> <head><script>
+    if (window.location.pathname.startsWith('/gitab/')) {
+      window.location.replace(window.location.pathname.replace(/^\/gitab\//i, '/Gitab/') + window.location.search + window.location.hash);
+    }
+    (() => {
+      try {
+        const t = localStorage.getItem('gitab-theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', t);
+        document.documentElement.dataset.colorMode = t;
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        document.documentElement.dataset.colorMode = 'dark';
+      }
+    })();
+  </script> <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5"> <title>برنامه‌نویسی پویا (Dynamic Programming)</title><meta name="description" content="برنامه‌نویسی پویا (Dynamic Programming) — مطالعه آنلاین و رایگان از کتاب «سی‌شارپ ۱۲ در یک نگاه» (C# 12 in a Nutshell) اثر Joseph Albahari با ترجمه حامد حیدریان در گیتاب."> <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"><meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"> <meta name="theme-color" content="#090d16"><meta name="referrer" content="strict-origin-when-cross-origin"> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https:; frame-src https://www.youtube.com https://www.youtube-nocookie.com https://maps.google.com https://www.google.com; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self';"><link rel="icon" type="image/png" href="/Gitab/favicon.png"> <link rel="canonical" href="https://hheydarian.github.io/Gitab/books/book1/Book/19/Dynamic-Programming/"><link rel="alternate" hreflang="fa" href="https://hheydarian.github.io/Gitab/books/book1/Book/19/Dynamic-Programming/"> <link rel="alternate" hreflang="x-default" href="https://hheydarian.github.io/Gitab/books/book1/Book/19/Dynamic-Programming/"><link rel="alternate" type="text/plain" title="LLMs.txt" href="/Gitab/llms.txt"> <link rel="sitemap" type="application/xml" title="Sitemap" href="/Gitab/sitemap.xml"><meta property="og:locale" content="fa_IR"> <meta property="og:type" content="article"><meta property="og:site_name" content="گیتاب | Gitab"> <meta property="og:title" content="برنامه‌نویسی پویا (Dynamic Programming)"><meta property="og:description" content="برنامه‌نویسی پویا (Dynamic Programming) — مطالعه آنلاین و رایگان از کتاب «سی‌شارپ ۱۲ در یک نگاه» (C# 12 in a Nutshell) اثر Joseph Albahari با ترجمه حامد حیدریان در گیتاب."> <meta property="og:url" content="https://hheydarian.github.io/Gitab/books/book1/Book/19/Dynamic-Programming/"><meta property="og:image" content="https://hheydarian.github.io/Gitab/images/csharp-12/Cover.jpg"> <meta property="og:image:alt" content="برنامه‌نویسی پویا (Dynamic Programming)"><meta name="twitter:card" content="summary_large_image"> <meta name="twitter:title" content="برنامه‌نویسی پویا (Dynamic Programming)"><meta name="twitter:description" content="برنامه‌نویسی پویا (Dynamic Programming) — مطالعه آنلاین و رایگان از کتاب «سی‌شارپ ۱۲ در یک نگاه» (C# 12 in a Nutshell) اثر Joseph Albahari با ترجمه حامد حیدریان در گیتاب."> <meta name="twitter:image" content="https://hheydarian.github.io/Gitab/images/csharp-12/Cover.jpg"><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://hheydarian.github.io/Gitab/#organization","name":"گیتاب | Gitab","alternateName":"Gitab","url":"https://hheydarian.github.io/Gitab/","logo":{"@type":"ImageObject","url":"https://hheydarian.github.io/Gitab/favicon.png"},"sameAs":["https://github.com/hheydarian/Gitab"]},{"@type":"WebSite","@id":"https://hheydarian.github.io/Gitab/#website","url":"https://hheydarian.github.io/Gitab/","name":"گیتاب | Gitab","inLanguage":"fa-IR","publisher":{"@id":"https://hheydarian.github.io/Gitab/#organization"},"potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://hheydarian.github.io/Gitab/books/list-books/?q={search_term_string}"},"query-input":"required name=search_term_string"}},{"@type":"WebPage","@id":"https://hheydarian.github.io/Gitab/books/book1/Book/19/Dynamic-Programming/#webpage","url":"https://hheydarian.github.io/Gitab/books/book1/Book/19/Dynamic-Programming/","name":"برنامه‌نویسی پویا (Dynamic Programming)","description":"برنامه‌نویسی پویا (Dynamic Programming) — مطالعه آنلاین و رایگان از کتاب «سی‌شارپ ۱۲ در یک نگاه» (C# 12 in a Nutshell) اثر Joseph Albahari با ترجمه حامد حیدریان در گیتاب.","inLanguage":"fa-IR","isPartOf":{"@id":"https://hheydarian.github.io/Gitab/#website"}},{"@type":"TechArticle","headline":"برنامه‌نویسی پویا (Dynamic Programming)","description":"برنامه‌نویسی پویا (Dynamic Programming) — مطالعه آنلاین و رایگان از کتاب «سی‌شارپ ۱۲ در یک نگاه» (C# 12 in a Nutshell) اثر Joseph Albahari با ترجمه حامد حیدریان در گیتاب.","url":"https://hheydarian.github.io/Gitab/books/book1/Book/19/Dynamic-Programming/","inLanguage":"fa-IR","isAccessibleForFree":true,"author":{"@type":"Person","name":"Joseph Albahari"},"translator":{"@type":"Person","name":"حامد حیدریان"},"isPartOf":{"@type":"Book","name":"سی‌شارپ ۱۲ در یک نگاه","alternateName":"C# 12 in a Nutshell","url":"https://hheydarian.github.io/Gitab/books/book1/"}}]}</script> <link rel="preload" href="/Gitab/fonts/Vazirmatn.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/Gitab/styles/main.css?v=2.4" as="style"> <link rel="preload" href="/Gitab/styles/gitab-modern.css?v=2.5" as="style"><style>@font-face{font-family:'Lalezar';src:url('/Gitab/fonts/Lalezar.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}@font-face{font-family:'Vazirmatn';src:url('/Gitab/fonts/Vazirmatn.woff2') format('woff2');font-weight:100 900;font-style:normal;font-display:swap}html,body,button,input,optgroup,select,textarea,.filter-pill{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}input::placeholder,textarea::placeholder{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}</style> <link rel="stylesheet" href="/Gitab/styles/main.css?v=2.4"><link rel="stylesheet" href="/Gitab/styles/gitab-modern.css?v=2.5"> <link rel="stylesheet" href="/Gitab/styles/vendor/github-dark.min.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="/Gitab/styles/vendor/github-dark.min.css"></noscript></head> <body><header class="header"> <div class="container nav-wrap"><a href="/Gitab/" class="brand" aria-label="صفحه اصلی گیتاب"> <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="30" height="30" decoding="async"> <span class="brand-text">Gitab</span> </a> <nav class="nav" id="mainNav"><a href="/Gitab/" >خانه</a> <a href="/Gitab/books/list-books" aria-current="page">کتاب‌ها</a> <a href="/Gitab/courses/" >دوره‌ها</a> <a href="/Gitab/translator.html" >مترجمین</a></nav> <div class="nav-actions"><button id="themeToggle" class="theme-toggle-btn" aria-label="تغییر تم" title="تغییر تم"> <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن" width="18" height="18" decoding="async" style="display:none"> <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک" width="18" height="18" decoding="async"> </button> <a class="btn-github-pill" href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" title="مشاهده سورس گیتاب در گیت‌هاب"> <img src="/Gitab/icone/github.svg" alt="GitHub" width="16" height="16" decoding="async"> <span>گیت‌هاب</span> </a> <button class="mobile-menu-btn" id="mobileMenuBtn" type="button" aria-label="باز کردن منو" aria-expanded="false"> <svg class="mob-icon-open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="4" y1="7" x2="20" y2="7"></line> <line x1="4" y1="12" x2="20" y2="12"></line> <line x1="4" y1="17" x2="14" y2="17"></line> </svg> <svg class="mob-icon-close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="18" y1="6" x2="6" y2="18"></line> <line x1="6" y1="6" x2="18" y2="18"></line> </svg> </button></div> </div><div class="mobile-drawer" id="mobileDrawer" aria-hidden="true"> <div class="mobile-drawer-inner"><div class="mobile-drawer-section-label">ناوبری سریع</div><nav class="mobile-drawer-links" aria-label="منوی موبایل"> <a href="/Gitab/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M3 10.5 12 3l9 7.5"></path> <path d="M5 9.5V20a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V9.5"></path> </svg> </span> <span class="mob-nav-text">صفحه نخست</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/books/list-books" class="mobile-drawer-link active" aria-current="page"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path> </svg> </span> <span class="mob-nav-text">کتابخانه و فهرست کتاب‌ها</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/courses/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path> <path d="M6 12v5c3 3 9 3 12 0v-5"></path> </svg> </span> <span class="mob-nav-text">دوره‌های آموزشی</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/translator.html" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path> <circle cx="9" cy="7" r="4"></circle> <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path> <path d="M16 3.13a4 4 0 0 1 0 7.75"></path> </svg> </span> <span class="mob-nav-text">مترجمین و همکاران</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> </nav><div class="mobile-drawer-divider"></div><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" class="mobile-drawer-link mobile-drawer-gh"> <span class="mob-nav-icon" aria-hidden="true"> <img src="/Gitab/icone/github.svg" alt="" width="17" height="17" loading="lazy" decoding="async"> </span> <span class="mob-nav-text">مخزن گیت‌هاب پروژه</span> <span class="mob-nav-ext" aria-hidden="true">↗</span> </a> </div></div> </header><div class="reading-progress-track"> <div class="reading-progress-fill" id="readingProgressBar"></div></div> <main class="site-main chapter-reading-page"><div class="chapter-page-wrapper"> <nav class="chapter-clean-breadcrumb" aria-label="مسیر راهنما" dir="rtl"><a href="/Gitab/">خانه</a> <span class="bc-sep" aria-hidden="true">/</span> <a href="/Gitab/books/list-books/">کتاب‌ها</a> <span class="bc-sep" aria-hidden="true">/</span> <a href="/Gitab/books/book1/"><bdi>سی‌شارپ ۱۲ در یک نگاه</bdi></a> <span class="bc-sep" aria-hidden="true">/</span> <span class="bc-current-leaf"><bdi>برنامه‌نویسی پویا (Dynamic Programming)</bdi></span></nav> <article class="chapter-prose-container markdown-body" id="chapterArticle" dir="rtl"><h1>فصل نوزدهم: برنامه‌نویسی پویا (Dynamic Programming)</h1><p>فصل ۴ توضیح داد که <strong>dynamic binding</strong> در زبان C# چگونه کار می‌کند.<br> در این فصل، ابتدا به‌طور مختصر به <strong>Dynamic Language Runtime (DLR)</strong> می‌پردازیم و سپس الگوهای زیر در برنامه‌نویسی پویا را بررسی می‌کنیم:</p><ul> <li><strong>Dynamic member overload resolution</strong></li><li><strong>Custom binding (implementing dynamic objects)</strong></li><li><strong>Dynamic language interoperability</strong></li></ul> <p>در فصل ۲۴، توضیح می‌دهیم که <strong>dynamic</strong> چگونه می‌تواند <strong>COM interoperability</strong> را بهبود دهد.</p><p>انواع (types) معرفی‌شده در این فصل، در <strong>System.Dynamic namespace</strong> قرار دارند، به‌جز <strong>CallSite&lt;&gt;</strong> که در <strong>System.Runtime.CompilerServices</strong> تعریف شده است.</p><hr> <h3>Dynamic Language Runtime</h3><p>زبان C# برای انجام <strong>dynamic binding</strong> به <strong>DLR</strong> متکی است.</p><p>برخلاف نامش، <strong>DLR</strong> یک نسخه‌ی پویا از <strong>CLR</strong> نیست. بلکه یک <strong>کتابخانه (library)</strong> است که روی <strong>CLR</strong> قرار می‌گیرد—دقیقاً مانند هر کتابخانه‌ی دیگری مثل <strong>System.Xml.dll</strong>.</p><p>وظیفه‌ی اصلی DLR ارائه‌ی سرویس‌های زمان اجرا (runtime services) برای یکپارچه‌سازی برنامه‌نویسی پویا—چه در زبان‌های <strong>statically typed</strong> و چه <strong>dynamically typed</strong>—است. بنابراین، زبان‌هایی مانند:</p><ul> <li>C#</li><li>Visual Basic</li><li>IronPython</li><li>IronRuby</li></ul> <p>همگی از یک پروتکل یکسان برای <strong>dynamic function calls</strong> استفاده می‌کنند. این موضوع باعث می‌شود آن‌ها بتوانند کتابخانه‌ها را به اشتراک بگذارند و کدی را که به زبان دیگری نوشته شده اجرا کنند.</p><p>DLR همچنین نوشتن زبان‌های پویا جدید در <strong>.NET</strong> را نسبتاً آسان می‌کند. به‌جای آنکه نویسندگان زبان مجبور باشند مستقیم <strong>Intermediate Language (IL)</strong> تولید کنند، می‌توانند در سطح <strong>expression trees</strong> کار کنند (همان <strong>expression trees</strong> موجود در <strong>System.Linq.Expressions</strong> که در فصل ۸ درباره‌شان صحبت کردیم).</p><p>علاوه بر این، DLR تضمین می‌کند که همه‌ی مصرف‌کنندگان از مزیت <strong>call-site caching</strong> بهره‌مند شوند؛ یک بهینه‌سازی که از تکرار غیرضروری تصمیمات پرهزینه‌ی <strong>member resolution</strong> در طول dynamic binding جلوگیری می‌کند.</p><hr> <h3>Call Site چیست؟</h3><p>وقتی کامپایلر با یک <strong>dynamic expression</strong> روبه‌رو می‌شود، نمی‌داند چه کسی آن عبارت را در زمان اجرا ارزیابی خواهد کرد.</p><p>مثلاً متد زیر را در نظر بگیرید:</p><pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-built_in">dynamic</span> <span class="hljs-title">Foo</span> (<span class="hljs-params"><span class="hljs-built_in">dynamic</span> x, <span class="hljs-built_in">dynamic</span> y</span>)</span>
 {
   <span class="hljs-keyword">return</span> x / y;   <span class="hljs-comment">// Dynamic expression</span>
 }
-</code></pre>
-<p>متغیرهای <code>x</code> و <code>y</code> می‌توانند هر چیزی باشند:</p>
-<ul>
-<li>یک شیء <strong>CLR</strong></li>
-<li>یک شیء <strong>COM</strong></li>
-<li>یا حتی یک شیء در یک زبان پویا</li>
-</ul>
-<p>به همین دلیل، کامپایلر نمی‌تواند از روش معمول استاتیک خود (یعنی صدا زدن یک متد مشخص از یک نوع مشخص) استفاده کند.<br>
-در عوض، کامپایلر کدی تولید می‌کند که در نهایت یک <strong>expression tree</strong> می‌سازد؛ این <strong>expression tree</strong> عملیاتی را توصیف می‌کند که توسط یک <strong>call site</strong> مدیریت می‌شود و <strong>DLR</strong> آن را در زمان اجرا bind می‌کند.<br>
-درواقع، <strong>call site</strong> مانند یک واسطه (intermediary) بین <strong>caller</strong> و <strong>callee</strong> عمل می‌کند.</p>
-<p>یک <strong>call site</strong> توسط کلاس <strong>CallSite&lt;&gt;</strong> در <strong>System.Core.dll</strong> نمایش داده می‌شود.<br>
-با <strong>disassemble</strong> کردن متد قبلی، نتیجه تقریباً به‌شکل زیر خواهد بود:</p>
-<pre class="hljs"><code><span class="hljs-keyword">static</span> CallSite&lt;Func&lt;CallSite,<span class="hljs-built_in">object</span>,<span class="hljs-built_in">object</span>,<span class="hljs-built_in">object</span>&gt;&gt; divideSite;
+</code></pre> <p>متغیرهای <code>x</code> و <code>y</code> می‌توانند هر چیزی باشند:</p><ul> <li>یک شیء <strong>CLR</strong></li><li>یک شیء <strong>COM</strong></li><li>یا حتی یک شیء در یک زبان پویا</li></ul> <p>به همین دلیل، کامپایلر نمی‌تواند از روش معمول استاتیک خود (یعنی صدا زدن یک متد مشخص از یک نوع مشخص) استفاده کند.<br> در عوض، کامپایلر کدی تولید می‌کند که در نهایت یک <strong>expression tree</strong> می‌سازد؛ این <strong>expression tree</strong> عملیاتی را توصیف می‌کند که توسط یک <strong>call site</strong> مدیریت می‌شود و <strong>DLR</strong> آن را در زمان اجرا bind می‌کند.<br> درواقع، <strong>call site</strong> مانند یک واسطه (intermediary) بین <strong>caller</strong> و <strong>callee</strong> عمل می‌کند.</p><p>یک <strong>call site</strong> توسط کلاس <strong>CallSite&lt;&gt;</strong> در <strong>System.Core.dll</strong> نمایش داده می‌شود.<br> با <strong>disassemble</strong> کردن متد قبلی، نتیجه تقریباً به‌شکل زیر خواهد بود:</p><pre class="hljs"><code><span class="hljs-keyword">static</span> CallSite&lt;Func&lt;CallSite,<span class="hljs-built_in">object</span>,<span class="hljs-built_in">object</span>,<span class="hljs-built_in">object</span>&gt;&gt; divideSite;
 
 [<span class="hljs-meta">return: Dynamic</span>]
 <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-built_in">object</span> <span class="hljs-title">Foo</span> (<span class="hljs-params">[Dynamic] <span class="hljs-built_in">object</span> x, [Dynamic] <span class="hljs-built_in">object</span> y</span>)</span>
@@ -128,28 +31,7 @@
 
   <span class="hljs-keyword">return</span> divideSite.Target (divideSite, x, y);
 }
-</code></pre>
-<p>همان‌طور که می‌بینید، <strong>call site</strong> در یک <strong>static field</strong> ذخیره می‌شود تا هزینه‌ی ساخت مجدد آن در هر بار فراخوانی اجتناب شود.<br>
-همچنین، DLR نتیجه‌ی <strong>binding phase</strong> و <strong>method targets</strong> واقعی را cache می‌کند. (ممکن است چندین target بسته به نوع‌های <code>x</code> و <code>y</code> وجود داشته باشد.)</p>
-<p>فراخوانی پویا (dynamic call) در عمل با صدا زدن <strong>Target</strong> (که یک <strong>delegate</strong> است) انجام می‌شود و عملوندهای <code>x</code> و <code>y</code> به آن پاس داده می‌شوند.</p>
-<p>نکته‌ی مهم: کلاس <strong>Binder</strong> مخصوص هر زبان است.<br>
-هر زبانی که از <strong>dynamic binding</strong> پشتیبانی می‌کند، یک <strong>language-specific binder</strong> دارد تا به DLR کمک کند عبارات را مطابق منطق آن زبان تفسیر کند و رفتار غیرمنتظره برای برنامه‌نویس ایجاد نشود.</p>
-<p>مثلاً اگر متد <code>Foo</code> را با مقادیر عددی <code>5</code> و <code>2</code> صدا بزنیم:</p>
-<ul>
-<li><strong>C# binder</strong> نتیجه‌ی <code>2</code> را برمی‌گرداند.</li>
-<li>اما <strong><a href="http://VB.NET">VB.NET</a> binder</strong> نتیجه‌ی <code>2.5</code> را خواهد داد.</li>
-</ul>
-<hr>
-<h3>⚡ Dynamic Member Overload Resolution</h3>
-<p>فراخوانی یک متد <strong>statically known</strong> با آرگومان‌های <strong>dynamically typed</strong> باعث می‌شود که <strong>member overload resolution</strong> از زمان کامپایل به زمان اجرا منتقل شود.</p>
-<p>این ویژگی برای ساده‌سازی برخی وظایف برنامه‌نویسی مفید است—مثل ساده‌تر کردن <strong>Visitor design pattern</strong>.<br>
-همچنین در دور زدن محدودیت‌های اعمال‌شده توسط <strong>static typing</strong> در C# بسیار کاربرد دارد.</p>
-<h3>🎯 ساده‌سازی الگوی Visitor</h3>
-<p>به‌طور خلاصه، <strong>Visitor pattern</strong> این امکان را می‌دهد که بدون تغییر در کلاس‌های موجود، یک متد به یک سلسله‌مراتب کلاسی (class hierarchy) “اضافه” کنید.</p>
-<p>اگرچه این الگو مفید است، اما نسخه‌ی <strong>استاتیک</strong> آن در مقایسه با بسیاری از الگوهای طراحی دیگر، ظریف و غیرمستقیم است. همچنین، این الگو نیاز دارد که کلاس‌هایی که قرار است بازدید شوند، “visitor-friendly” باشند؛ یعنی یک متد <strong>Accept</strong> را در اختیار قرار دهند. این موضوع زمانی غیرممکن است که کلاس‌ها تحت کنترل شما نباشند.</p>
-<p>با استفاده از <strong>dynamic binding</strong> می‌توانید به همان هدف دست پیدا کنید—اما بسیار ساده‌تر و بدون نیاز به تغییر کلاس‌های موجود.</p>
-<p>برای روشن شدن موضوع، به سلسله‌مراتب کلاس زیر دقت کنید:</p>
-<pre class="hljs"><code><span class="hljs-keyword">class</span> <span class="hljs-title">Person</span>
+</code></pre> <p>همان‌طور که می‌بینید، <strong>call site</strong> در یک <strong>static field</strong> ذخیره می‌شود تا هزینه‌ی ساخت مجدد آن در هر بار فراخوانی اجتناب شود.<br> همچنین، DLR نتیجه‌ی <strong>binding phase</strong> و <strong>method targets</strong> واقعی را cache می‌کند. (ممکن است چندین target بسته به نوع‌های <code>x</code> و <code>y</code> وجود داشته باشد.)</p><p>فراخوانی پویا (dynamic call) در عمل با صدا زدن <strong>Target</strong> (که یک <strong>delegate</strong> است) انجام می‌شود و عملوندهای <code>x</code> و <code>y</code> به آن پاس داده می‌شوند.</p><p>نکته‌ی مهم: کلاس <strong>Binder</strong> مخصوص هر زبان است.<br> هر زبانی که از <strong>dynamic binding</strong> پشتیبانی می‌کند، یک <strong>language-specific binder</strong> دارد تا به DLR کمک کند عبارات را مطابق منطق آن زبان تفسیر کند و رفتار غیرمنتظره برای برنامه‌نویس ایجاد نشود.</p><p>مثلاً اگر متد <code>Foo</code> را با مقادیر عددی <code>5</code> و <code>2</code> صدا بزنیم:</p><ul> <li><strong>C# binder</strong> نتیجه‌ی <code>2</code> را برمی‌گرداند.</li><li>اما <strong><a href="http://VB.NET">VB.NET</a> binder</strong> نتیجه‌ی <code>2.5</code> را خواهد داد.</li></ul> <hr><h3>Dynamic Member Overload Resolution</h3><p>فراخوانی یک متد <strong>statically known</strong> با آرگومان‌های <strong>dynamically typed</strong> باعث می‌شود که <strong>member overload resolution</strong> از زمان کامپایل به زمان اجرا منتقل شود.</p><p>این ویژگی برای ساده‌سازی برخی وظایف برنامه‌نویسی مفید است—مثل ساده‌تر کردن <strong>Visitor design pattern</strong>.<br> همچنین در دور زدن محدودیت‌های اعمال‌شده توسط <strong>static typing</strong> در C# بسیار کاربرد دارد.</p><h3>ساده‌سازی الگوی Visitor</h3><p>به‌طور خلاصه، <strong>Visitor pattern</strong> این امکان را می‌دهد که بدون تغییر در کلاس‌های موجود، یک متد به یک سلسله‌مراتب کلاسی (class hierarchy) “اضافه” کنید.</p><p>اگرچه این الگو مفید است، اما نسخه‌ی <strong>استاتیک</strong> آن در مقایسه با بسیاری از الگوهای طراحی دیگر، ظریف و غیرمستقیم است. همچنین، این الگو نیاز دارد که کلاس‌هایی که قرار است بازدید شوند، “visitor-friendly” باشند؛ یعنی یک متد <strong>Accept</strong> را در اختیار قرار دهند. این موضوع زمانی غیرممکن است که کلاس‌ها تحت کنترل شما نباشند.</p><p>با استفاده از <strong>dynamic binding</strong> می‌توانید به همان هدف دست پیدا کنید—اما بسیار ساده‌تر و بدون نیاز به تغییر کلاس‌های موجود.</p><p>برای روشن شدن موضوع، به سلسله‌مراتب کلاس زیر دقت کنید:</p><pre class="hljs"><code><span class="hljs-keyword">class</span> <span class="hljs-title">Person</span>
 {
   <span class="hljs-keyword">public</span> <span class="hljs-built_in">string</span> FirstName { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">set</span>; }
   <span class="hljs-keyword">public</span> <span class="hljs-built_in">string</span> LastName  { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">set</span>; }
@@ -160,17 +42,7 @@
 <span class="hljs-keyword">class</span> <span class="hljs-title">Customer</span> : <span class="hljs-title">Person</span> { <span class="hljs-keyword">public</span> <span class="hljs-built_in">decimal</span> CreditLimit { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">set</span>; } }
 
 <span class="hljs-keyword">class</span> <span class="hljs-title">Employee</span> : <span class="hljs-title">Person</span> { <span class="hljs-keyword">public</span> <span class="hljs-built_in">decimal</span> Salary { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">set</span>; } }
-</code></pre>
-<p>فرض کنید می‌خواهیم متدی بنویسیم که جزئیات یک <strong>Person</strong> را به‌صورت برنامه‌نویسی به یک <strong>XElement</strong> در XML صادر کند.<br>
-واضح‌ترین راه این است که در کلاس <strong>Person</strong> یک متد مجازی (virtual) به نام <strong>ToXElement()</strong> تعریف کنیم که یک <strong>XElement</strong> شامل propertyهای یک <strong>Person</strong> برگرداند.<br>
-سپس در کلاس‌های <strong>Customer</strong> و <strong>Employee</strong> آن را override کنیم تا <strong>XElement</strong> به ترتیب شامل <strong>CreditLimit</strong> و <strong>Salary</strong> هم باشد.</p>
-<p>اما این الگو می‌تواند از دو جهت مشکل‌ساز باشد:</p>
-<ol>
-<li>ممکن است مالک کلاس‌های <strong>Person</strong>، <strong>Customer</strong> و <strong>Employee</strong> نباشید و بنابراین نتوانید به آن‌ها متدی اضافه کنید. (و extension methodها هم رفتار polymorphic ارائه نمی‌دهند.)</li>
-<li>کلاس‌های <strong>Person</strong>، <strong>Customer</strong> و <strong>Employee</strong> ممکن است همین حالا هم خیلی بزرگ باشند. یک <strong>antipattern</strong> رایج، <strong>God Object</strong> است؛ جایی که یک کلاسی مثل <strong>Person</strong> آنقدر عملکردهای مختلف به خود می‌گیرد که نگهداری آن کابوس‌وار می‌شود. یک راه‌حل خوب این است که از افزودن توابعی به <strong>Person</strong> که نیازی به دسترسی به وضعیت خصوصی آن ندارند، پرهیز کنیم. متد <strong>ToXElement</strong> می‌تواند یک کاندید عالی برای بیرون کشیده شدن باشد.</li>
-</ol>
-<p>با استفاده از <strong>dynamic member overload resolution</strong> می‌توانیم قابلیت <strong>ToXElement</strong> را در یک کلاس جداگانه پیاده‌سازی کنیم، بدون آنکه مجبور شویم از switchهای زشت بر اساس نوع استفاده کنیم:</p>
-<pre class="hljs"><code><span class="hljs-keyword">class</span> <span class="hljs-title">ToXElementPersonVisitor</span>
+</code></pre> <p>فرض کنید می‌خواهیم متدی بنویسیم که جزئیات یک <strong>Person</strong> را به‌صورت برنامه‌نویسی به یک <strong>XElement</strong> در XML صادر کند.<br> واضح‌ترین راه این است که در کلاس <strong>Person</strong> یک متد مجازی (virtual) به نام <strong>ToXElement()</strong> تعریف کنیم که یک <strong>XElement</strong> شامل propertyهای یک <strong>Person</strong> برگرداند.<br> سپس در کلاس‌های <strong>Customer</strong> و <strong>Employee</strong> آن را override کنیم تا <strong>XElement</strong> به ترتیب شامل <strong>CreditLimit</strong> و <strong>Salary</strong> هم باشد.</p><p>اما این الگو می‌تواند از دو جهت مشکل‌ساز باشد:</p><ol> <li>ممکن است مالک کلاس‌های <strong>Person</strong>، <strong>Customer</strong> و <strong>Employee</strong> نباشید و بنابراین نتوانید به آن‌ها متدی اضافه کنید. (و extension methodها هم رفتار polymorphic ارائه نمی‌دهند.)</li><li>کلاس‌های <strong>Person</strong>، <strong>Customer</strong> و <strong>Employee</strong> ممکن است همین حالا هم خیلی بزرگ باشند. یک <strong>antipattern</strong> رایج، <strong>God Object</strong> است؛ جایی که یک کلاسی مثل <strong>Person</strong> آنقدر عملکردهای مختلف به خود می‌گیرد که نگهداری آن کابوس‌وار می‌شود. یک راه‌حل خوب این است که از افزودن توابعی به <strong>Person</strong> که نیازی به دسترسی به وضعیت خصوصی آن ندارند، پرهیز کنیم. متد <strong>ToXElement</strong> می‌تواند یک کاندید عالی برای بیرون کشیده شدن باشد.</li></ol> <p>با استفاده از <strong>dynamic member overload resolution</strong> می‌توانیم قابلیت <strong>ToXElement</strong> را در یک کلاس جداگانه پیاده‌سازی کنیم، بدون آنکه مجبور شویم از switchهای زشت بر اساس نوع استفاده کنیم:</p><pre class="hljs"><code><span class="hljs-keyword">class</span> <span class="hljs-title">ToXElementPersonVisitor</span>
 {
   <span class="hljs-function"><span class="hljs-keyword">public</span> XElement <span class="hljs-title">DynamicVisit</span> (<span class="hljs-params">Person p</span>)</span> =&gt; Visit ((<span class="hljs-built_in">dynamic</span>)p);
 
@@ -198,12 +70,7 @@
     <span class="hljs-keyword">return</span> xe;
   }
 }
-</code></pre>
-<p>متد <strong>DynamicVisit</strong> یک <strong>dynamic dispatch</strong> انجام می‌دهد—یعنی در زمان اجرا، دقیق‌ترین نسخه‌ی متد <strong>Visit</strong> را فراخوانی می‌کند.</p>
-<p>به خطی که در آن متد <strong>DynamicVisit</strong> روی هر <strong>Person</strong> در مجموعه‌ی <strong>Friends</strong> صدا زده می‌شود توجه کنید. این تضمین می‌کند که اگر یک دوست از نوع <strong>Customer</strong> یا <strong>Employee</strong> باشد، overload صحیح فراخوانی شود.</p>
-<hr>
-<h3>📌 مثال اجرا</h3>
-<pre class="hljs"><code><span class="hljs-keyword">var</span> cust = <span class="hljs-keyword">new</span> Customer
+</code></pre> <p>متد <strong>DynamicVisit</strong> یک <strong>dynamic dispatch</strong> انجام می‌دهد—یعنی در زمان اجرا، دقیق‌ترین نسخه‌ی متد <strong>Visit</strong> را فراخوانی می‌کند.</p><p>به خطی که در آن متد <strong>DynamicVisit</strong> روی هر <strong>Person</strong> در مجموعه‌ی <strong>Friends</strong> صدا زده می‌شود توجه کنید. این تضمین می‌کند که اگر یک دوست از نوع <strong>Customer</strong> یا <strong>Employee</strong> باشد، overload صحیح فراخوانی شود.</p><hr> <h3>مثال اجرا</h3><pre class="hljs"><code><span class="hljs-keyword">var</span> cust = <span class="hljs-keyword">new</span> Customer
 {
   FirstName = <span class="hljs-string">&quot;Joe&quot;</span>, LastName = <span class="hljs-string">&quot;Bloggs&quot;</span>, CreditLimit = <span class="hljs-number">123</span>
 };
@@ -213,10 +80,7 @@ cust.Friends.Add (
 );
 
 Console.WriteLine (<span class="hljs-keyword">new</span> ToXElementPersonVisitor().DynamicVisit (cust));
-</code></pre>
-<hr>
-<h3>📤 خروجی</h3>
-<pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">Person</span> <span class="hljs-attr">Type</span>=<span class="hljs-string">&quot;Customer&quot;</span>&gt;</span>
+</code></pre> <hr><h3>خروجی</h3><pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">Person</span> <span class="hljs-attr">Type</span>=<span class="hljs-string">&quot;Customer&quot;</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">FirstName</span>&gt;</span>Joe<span class="hljs-tag">&lt;/<span class="hljs-name">FirstName</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">LastName</span>&gt;</span>Bloggs<span class="hljs-tag">&lt;/<span class="hljs-name">LastName</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">Person</span> <span class="hljs-attr">Type</span>=<span class="hljs-string">&quot;Employee&quot;</span>&gt;</span>
@@ -226,10 +90,7 @@ Console.WriteLine (<span class="hljs-keyword">new</span> ToXElementPersonVisitor
   <span class="hljs-tag">&lt;/<span class="hljs-name">Person</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">CreditLimit</span>&gt;</span>123<span class="hljs-tag">&lt;/<span class="hljs-name">CreditLimit</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">Person</span>&gt;</span>
-</code></pre>
-<h3>🔀 گونه‌ها (Variations)</h3>
-<p>اگر قصد داشته باشید بیش از یک کلاس Visitor بنویسید، یک تغییر مفید این است که یک کلاس پایه‌ی انتزاعی (<strong>abstract base class</strong>) برای Visitorها تعریف کنید:</p>
-<pre class="hljs"><code><span class="hljs-keyword">abstract</span> <span class="hljs-keyword">class</span> <span class="hljs-title">PersonVisitor</span>&lt;<span class="hljs-title">T</span>&gt;
+</code></pre> <h3>گونه‌ها (Variations)</h3><p>اگر قصد داشته باشید بیش از یک کلاس Visitor بنویسید، یک تغییر مفید این است که یک کلاس پایه‌ی انتزاعی (<strong>abstract base class</strong>) برای Visitorها تعریف کنید:</p><pre class="hljs"><code><span class="hljs-keyword">abstract</span> <span class="hljs-keyword">class</span> <span class="hljs-title">PersonVisitor</span>&lt;<span class="hljs-title">T</span>&gt;
 {
   <span class="hljs-function"><span class="hljs-keyword">public</span> T <span class="hljs-title">DynamicVisit</span> (<span class="hljs-params">Person p</span>)</span> { <span class="hljs-keyword">return</span> Visit ((<span class="hljs-built_in">dynamic</span>)p); }
 
@@ -237,15 +98,7 @@ Console.WriteLine (<span class="hljs-keyword">new</span> ToXElementPersonVisitor
   <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">virtual</span> T <span class="hljs-title">Visit</span> (<span class="hljs-params">Customer c</span>)</span> { <span class="hljs-keyword">return</span> Visit ((Person) c); }
   <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">virtual</span> T <span class="hljs-title">Visit</span> (<span class="hljs-params">Employee e</span>)</span> { <span class="hljs-keyword">return</span> Visit ((Person) e); }
 }
-</code></pre>
-<p>در این حالت، کلاس‌های فرزند نیازی ندارند که متد <strong>DynamicVisit</strong> خودشان را تعریف کنند؛ تنها کاری که باید انجام دهند این است که نسخه‌های <strong>Visit</strong> را که می‌خواهند منطق اختصاصی برایشان بنویسند، override کنند.</p>
-<p>این روش دو مزیت دارد:</p>
-<ol>
-<li>متمرکز کردن متدهایی که سلسله‌مراتب <strong>Person</strong> را در بر می‌گیرند.</li>
-<li>اجازه دادن به پیاده‌سازان برای صدا زدن متدهای پایه (base methods) به شکلی طبیعی‌تر.</li>
-</ol>
-<p>نمونه:</p>
-<pre class="hljs"><code><span class="hljs-keyword">class</span> <span class="hljs-title">ToXElementPersonVisitor</span> : <span class="hljs-title">PersonVisitor</span>&lt;<span class="hljs-title">XElement</span>&gt;
+</code></pre> <p>در این حالت، کلاس‌های فرزند نیازی ندارند که متد <strong>DynamicVisit</strong> خودشان را تعریف کنند؛ تنها کاری که باید انجام دهند این است که نسخه‌های <strong>Visit</strong> را که می‌خواهند منطق اختصاصی برایشان بنویسند، override کنند.</p><p>این روش دو مزیت دارد:</p><ol> <li>متمرکز کردن متدهایی که سلسله‌مراتب <strong>Person</strong> را در بر می‌گیرند.</li><li>اجازه دادن به پیاده‌سازان برای صدا زدن متدهای پایه (base methods) به شکلی طبیعی‌تر.</li></ol> <p>نمونه:</p><pre class="hljs"><code><span class="hljs-keyword">class</span> <span class="hljs-title">ToXElementPersonVisitor</span> : <span class="hljs-title">PersonVisitor</span>&lt;<span class="hljs-title">XElement</span>&gt;
 {
   <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">override</span> XElement <span class="hljs-title">Visit</span> (<span class="hljs-params">Person p</span>)</span>
   {
@@ -271,77 +124,20 @@ Console.WriteLine (<span class="hljs-keyword">new</span> ToXElementPersonVisitor
     <span class="hljs-keyword">return</span> xe;
   }
 }
-</code></pre>
-<p>حتی می‌توانید از روی <strong>ToXElementPersonVisitor</strong> هم کلاس فرزند بسازید.</p>
-<hr>
-<h3>📌 صدا زدن ناشناس اعضای یک نوع Generic</h3>
-<p>سخت‌گیری <strong>static typing</strong> در C# یک شمشیر دو لبه است:</p>
-<ul>
-<li>از یک طرف در زمان کامپایل میزان مشخصی از صحت را تضمین می‌کند.</li>
-<li>از طرف دیگر، گاهی اوقات نوشتن برخی از انواع کد را دشوار یا غیرممکن می‌سازد، و در این مواقع باید از <strong>reflection</strong> استفاده کنید.</li>
-</ul>
-<p>در چنین شرایطی، <strong>dynamic binding</strong> یک جایگزین تمیزتر و سریع‌تر از reflection است.</p>
-<p>مثال: وقتی نیاز دارید با یک شیء از نوع <code>G&lt;T&gt;</code> کار کنید در حالی که نوع <code>T</code> ناشناخته است.</p>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Foo</span>&lt;<span class="hljs-title">T</span>&gt; { <span class="hljs-keyword">public</span> T Value; }
-</code></pre>
-<p>فرض کنید متدی به شکل زیر داریم:</p>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Write</span> (<span class="hljs-params"><span class="hljs-built_in">object</span> obj</span>)</span>
+</code></pre> <p>حتی می‌توانید از روی <strong>ToXElementPersonVisitor</strong> هم کلاس فرزند بسازید.</p><hr> <h3>صدا زدن ناشناس اعضای یک نوع Generic</h3><p>سخت‌گیری <strong>static typing</strong> در C# یک شمشیر دو لبه است:</p><ul> <li>از یک طرف در زمان کامپایل میزان مشخصی از صحت را تضمین می‌کند.</li><li>از طرف دیگر، گاهی اوقات نوشتن برخی از انواع کد را دشوار یا غیرممکن می‌سازد، و در این مواقع باید از <strong>reflection</strong> استفاده کنید.</li></ul> <p>در چنین شرایطی، <strong>dynamic binding</strong> یک جایگزین تمیزتر و سریع‌تر از reflection است.</p><p>مثال: وقتی نیاز دارید با یک شیء از نوع <code>G&lt;T&gt;</code> کار کنید در حالی که نوع <code>T</code> ناشناخته است.</p><pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Foo</span>&lt;<span class="hljs-title">T</span>&gt; { <span class="hljs-keyword">public</span> T Value; }
+</code></pre> <p>فرض کنید متدی به شکل زیر داریم:</p><pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Write</span> (<span class="hljs-params"><span class="hljs-built_in">object</span> obj</span>)</span>
 {
   <span class="hljs-keyword">if</span> (obj <span class="hljs-keyword">is</span> Foo&lt;&gt;)                           <span class="hljs-comment">// Illegal</span>
     Console.WriteLine ((Foo&lt;&gt;) obj).Value);   <span class="hljs-comment">// Illegal</span>
 }
-</code></pre>
-<p>این کد کامپایل نمی‌شود: چون نمی‌توانید اعضای یک نوع generic غیرمتحد (unbound) را فراخوانی کنید.</p>
-<hr>
-<h3>✨ راه‌حل با dynamic binding</h3>
-<p>راه اول این است که <strong>Value</strong> را به‌صورت پویا (dynamic) صدا بزنید:</p>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Write</span> (<span class="hljs-params"><span class="hljs-built_in">dynamic</span> obj</span>)</span>
+</code></pre> <p>این کد کامپایل نمی‌شود: چون نمی‌توانید اعضای یک نوع generic غیرمتحد (unbound) را فراخوانی کنید.</p><hr> <h3>راه‌حل با dynamic binding</h3><p>راه اول این است که <strong>Value</strong> را به‌صورت پویا (dynamic) صدا بزنید:</p><pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Write</span> (<span class="hljs-params"><span class="hljs-built_in">dynamic</span> obj</span>)</span>
 {
   <span class="hljs-keyword">try</span> { Console.WriteLine (obj.Value); }
   <span class="hljs-keyword">catch</span> (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException) {...}
 }
-</code></pre>
-<hr>
-<h3>🐾 Multiple Dispatch</h3>
-<p>زبان C# و CLR همیشه یک شکل محدود از پویایی را با <strong>virtual method calls</strong> پشتیبانی کرده‌اند.<br>
-تفاوت آن با <strong>dynamic binding</strong> در این است که در <strong>virtual calls</strong>، کامپایلر باید در زمان کامپایل متعهد شود که کدام عضو مجازی صدا زده خواهد شد (بر اساس نام و امضای متدی که فراخوانی شده است).</p>
-<p>به این معنی که:</p>
-<ul>
-<li>عبارت فراخوانی باید کاملاً توسط کامپایلر درک شود (مثلاً باید در زمان کامپایل مشخص شود که آیا یک عضو هدف یک <strong>field</strong> است یا یک <strong>property</strong>).</li>
-<li><strong>Overload resolution</strong> باید کاملاً توسط کامپایلر و بر اساس نوع‌های زمان کامپایل آرگومان‌ها انجام شود.</li>
-</ul>
-<p>مثال:</p>
-<pre class="hljs"><code>animal.Walk (owner);
-</code></pre>
-<p>نتیجه: توانایی انجام <strong>virtual calls</strong> به نام <strong>single dispatch</strong> شناخته می‌شود. چرا؟</p>
-<p>چون تصمیم زمان اجرا برای اینکه متد <strong>Walk</strong> سگ صدا زده شود یا متد <strong>Walk</strong> گربه، فقط به نوع دریافت‌کننده (<strong>receiver type</strong>)، یعنی <code>animal</code> بستگی دارد (به همین دلیل &quot;single&quot;).</p>
-<p>اگر چندین overload از <strong>Walk</strong> وجود داشته باشد که انواع مختلفی از <code>owner</code> را بپذیرند، انتخاب آن‌ها در زمان کامپایل و بدون توجه به نوع واقعی <code>owner</code> انجام می‌شود.</p>
-<hr>
-<h3>💡 Dynamic Multiple Dispatch</h3>
-<p>در مقابل، یک فراخوانی پویا (dynamic call) انتخاب overload را تا زمان اجرا به تأخیر می‌اندازد:</p>
-<pre class="hljs"><code>animal.Walk ((<span class="hljs-built_in">dynamic</span>) owner);
-</code></pre>
-<p>این بار انتخاب نهایی اینکه کدام متد <strong>Walk</strong> فراخوانی شود به نوع‌های هر دو یعنی <code>animal</code> و <code>owner</code> بستگی دارد.<br>
-به همین دلیل به آن <strong>multiple dispatch</strong> می‌گویند: چون نوع‌های زمان اجرا (<strong>runtime types</strong>) آرگومان‌ها علاوه بر <strong>receiver type</strong>، در تصمیم‌گیری دخالت دارند.</p>
-<hr>
-<h3>⚠️ مشکلات و راه‌حل بهتر</h3>
-<p>روش قبلی این مزیت را دارد که با هر شیئی که یک <strong>Value field</strong> یا <strong>Value property</strong> داشته باشد کار می‌کند.<br>
-اما مشکلاتی هم دارد:</p>
-<ol>
-<li>
-<p>گرفتن <strong>exception</strong> در این روش شلوغ و ناکارآمد است (و هیچ راهی نیست که از قبل از DLR بپرسیم &quot;آیا این عملیات موفق خواهد شد؟&quot;).</p>
-</li>
-<li>
-<p>اگر <strong>Foo</strong> یک <strong>interface</strong> مثل <code>IFoo&lt;T&gt;</code> باشد و یکی از شرایط زیر برقرار باشد، این روش کار نمی‌کند:</p>
-<ul>
-<li><strong>Value</strong> به‌صورت <strong>explicitly implemented</strong> تعریف شده باشد.</li>
-<li>نوعی که <strong>IFoo<T></strong> را پیاده‌سازی کرده، غیرقابل دسترسی باشد.</li>
-</ul>
-</li>
-</ol>
-<hr>
-<h3>✅ راه‌حل بهتر: متد کمکی overload شده</h3>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Write</span> (<span class="hljs-params"><span class="hljs-built_in">dynamic</span> obj</span>)</span>
+</code></pre> <hr><h3>Multiple Dispatch</h3><p>زبان C# و CLR همیشه یک شکل محدود از پویایی را با <strong>virtual method calls</strong> پشتیبانی کرده‌اند.<br> تفاوت آن با <strong>dynamic binding</strong> در این است که در <strong>virtual calls</strong>، کامپایلر باید در زمان کامپایل متعهد شود که کدام عضو مجازی صدا زده خواهد شد (بر اساس نام و امضای متدی که فراخوانی شده است).</p><p>به این معنی که:</p><ul> <li>عبارت فراخوانی باید کاملاً توسط کامپایلر درک شود (مثلاً باید در زمان کامپایل مشخص شود که آیا یک عضو هدف یک <strong>field</strong> است یا یک <strong>property</strong>).</li><li><strong>Overload resolution</strong> باید کاملاً توسط کامپایلر و بر اساس نوع‌های زمان کامپایل آرگومان‌ها انجام شود.</li></ul> <p>مثال:</p><pre class="hljs"><code>animal.Walk (owner);
+</code></pre> <p>نتیجه: توانایی انجام <strong>virtual calls</strong> به نام <strong>single dispatch</strong> شناخته می‌شود. چرا؟</p><p>چون تصمیم زمان اجرا برای اینکه متد <strong>Walk</strong> سگ صدا زده شود یا متد <strong>Walk</strong> گربه، فقط به نوع دریافت‌کننده (<strong>receiver type</strong>)، یعنی <code>animal</code> بستگی دارد (به همین دلیل &quot;single&quot;).</p><p>اگر چندین overload از <strong>Walk</strong> وجود داشته باشد که انواع مختلفی از <code>owner</code> را بپذیرند، انتخاب آن‌ها در زمان کامپایل و بدون توجه به نوع واقعی <code>owner</code> انجام می‌شود.</p><hr> <h3>Dynamic Multiple Dispatch</h3><p>در مقابل، یک فراخوانی پویا (dynamic call) انتخاب overload را تا زمان اجرا به تأخیر می‌اندازد:</p><pre class="hljs"><code>animal.Walk ((<span class="hljs-built_in">dynamic</span>) owner);
+</code></pre> <p>این بار انتخاب نهایی اینکه کدام متد <strong>Walk</strong> فراخوانی شود به نوع‌های هر دو یعنی <code>animal</code> و <code>owner</code> بستگی دارد.<br> به همین دلیل به آن <strong>multiple dispatch</strong> می‌گویند: چون نوع‌های زمان اجرا (<strong>runtime types</strong>) آرگومان‌ها علاوه بر <strong>receiver type</strong>، در تصمیم‌گیری دخالت دارند.</p><hr> <h3>مشکلات و راه‌حل بهتر</h3><p>روش قبلی این مزیت را دارد که با هر شیئی که یک <strong>Value field</strong> یا <strong>Value property</strong> داشته باشد کار می‌کند.<br> اما مشکلاتی هم دارد:</p><ol> <li><p>گرفتن <strong>exception</strong> در این روش شلوغ و ناکارآمد است (و هیچ راهی نیست که از قبل از DLR بپرسیم &quot;آیا این عملیات موفق خواهد شد؟&quot;).</p></li> <li><p>اگر <strong>Foo</strong> یک <strong>interface</strong> مثل <code>IFoo&lt;T&gt;</code> باشد و یکی از شرایط زیر برقرار باشد، این روش کار نمی‌کند:</p><ul> <li><strong>Value</strong> به‌صورت <strong>explicitly implemented</strong> تعریف شده باشد.</li><li>نوعی که <strong>IFoo<T></strong> را پیاده‌سازی کرده، غیرقابل دسترسی باشد.</li></ul> </li></ol> <hr><h3>راه‌حل بهتر: متد کمکی overload شده</h3><pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Write</span> (<span class="hljs-params"><span class="hljs-built_in">dynamic</span> obj</span>)</span>
 {
   <span class="hljs-built_in">object</span> result = GetFooValue (obj);
   <span class="hljs-keyword">if</span> (result != <span class="hljs-literal">null</span>) Console.WriteLine (result);
@@ -349,22 +145,7 @@ Console.WriteLine (<span class="hljs-keyword">new</span> ToXElementPersonVisitor
 
 <span class="hljs-function"><span class="hljs-keyword">static</span> T <span class="hljs-title">GetFooValue</span>&lt;<span class="hljs-title">T</span>&gt; (<span class="hljs-params">Foo&lt;T&gt; foo</span>)</span> =&gt; foo.Value;
 <span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-built_in">object</span> <span class="hljs-title">GetFooValue</span> (<span class="hljs-params"><span class="hljs-built_in">object</span> foo</span>)</span> =&gt; <span class="hljs-literal">null</span>;
-</code></pre>
-<p>اینجا ما متد <strong>GetFooValue</strong> را overload کردیم تا یک پارامتر از نوع <code>object</code> هم بگیرد، که نقش fallback را دارد.</p>
-<p>در زمان اجرا، <strong>C# dynamic binder</strong> بهترین overload را انتخاب می‌کند. اگر شیء داده‌شده از نوع <code>Foo&lt;T&gt;</code> نباشد، نسخه‌ی <strong>object-parameter</strong> انتخاب می‌شود و به‌جای پرتاب exception مقدار null برمی‌گرداند.</p>
-<hr>
-<h3>🆚 گزینه‌ی دیگر</h3>
-<p>فقط overload اول را بنویسیم و سپس <strong>RuntimeBinderException</strong> را catch کنیم.</p>
-<ul>
-<li><strong>مزیت</strong>: می‌توانیم تمایز قائل شویم بین زمانی که <code>foo.Value</code> واقعاً null است یا اصلاً وجود ندارد.</li>
-<li><strong>عیب</strong>: هزینه‌ی کارایی به‌خاطر پرتاب و گرفتن exception.</li>
-</ul>
-<hr>
-<h3>🔎 مثال: ToStringEx با dynamic binding</h3>
-<p>در فصل ۱۸، همین مشکل را برای یک interface با استفاده از reflection حل کردیم (که تلاش بیشتری نیاز داشت).<br>
-مثال ما طراحی نسخه‌ی قدرتمندتری از <strong>ToString()</strong> بود که می‌توانست اشیائی مانند <strong>IEnumerable</strong> و <strong>IGrouping&lt;,&gt;</strong> را درک کند.</p>
-<p>اینجا همان مثال با dynamic binding، اما زیباتر:</p>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-built_in">string</span> <span class="hljs-title">GetGroupKey</span>&lt;<span class="hljs-title">TKey</span>,<span class="hljs-title">TElement</span>&gt; (<span class="hljs-params">IGrouping&lt;TKey,TElement&gt; <span class="hljs-keyword">group</span></span>)</span>
+</code></pre> <p>اینجا ما متد <strong>GetFooValue</strong> را overload کردیم تا یک پارامتر از نوع <code>object</code> هم بگیرد، که نقش fallback را دارد.</p><p>در زمان اجرا، <strong>C# dynamic binder</strong> بهترین overload را انتخاب می‌کند. اگر شیء داده‌شده از نوع <code>Foo&lt;T&gt;</code> نباشد، نسخه‌ی <strong>object-parameter</strong> انتخاب می‌شود و به‌جای پرتاب exception مقدار null برمی‌گرداند.</p><hr> <h3>گزینه‌ی دیگر</h3><p>فقط overload اول را بنویسیم و سپس <strong>RuntimeBinderException</strong> را catch کنیم.</p><ul> <li><strong>مزیت</strong>: می‌توانیم تمایز قائل شویم بین زمانی که <code>foo.Value</code> واقعاً null است یا اصلاً وجود ندارد.</li><li><strong>عیب</strong>: هزینه‌ی کارایی به‌خاطر پرتاب و گرفتن exception.</li></ul> <hr><h3>مثال: ToStringEx با dynamic binding</h3><p>در فصل ۱۸، همین مشکل را برای یک interface با استفاده از reflection حل کردیم (که تلاش بیشتری نیاز داشت).<br> مثال ما طراحی نسخه‌ی قدرتمندتری از <strong>ToString()</strong> بود که می‌توانست اشیائی مانند <strong>IEnumerable</strong> و <strong>IGrouping&lt;,&gt;</strong> را درک کند.</p><p>اینجا همان مثال با dynamic binding، اما زیباتر:</p><pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-built_in">string</span> <span class="hljs-title">GetGroupKey</span>&lt;<span class="hljs-title">TKey</span>,<span class="hljs-title">TElement</span>&gt; (<span class="hljs-params">IGrouping&lt;TKey,TElement&gt; <span class="hljs-keyword">group</span></span>)</span>
   =&gt; <span class="hljs-string">&quot;Group with key=&quot;</span> + <span class="hljs-keyword">group</span>.Key + <span class="hljs-string">&quot;: &quot;</span>;
 
 <span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-built_in">string</span> <span class="hljs-title">GetGroupKey</span> (<span class="hljs-params"><span class="hljs-built_in">object</span> source</span>)</span> =&gt; <span class="hljs-literal">null</span>;
@@ -386,36 +167,19 @@ Console.WriteLine (<span class="hljs-keyword">new</span> ToXElementPersonVisitor
   <span class="hljs-keyword">if</span> (sb.Length == <span class="hljs-number">0</span>) sb.Append (<span class="hljs-keyword">value</span>.ToString());
   <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;\r\n&quot;</span> + sb.ToString();
 }
-</code></pre>
-<hr>
-<h3>▶️ اجرای کد</h3>
-<pre class="hljs"><code>Console.WriteLine (ToStringEx (<span class="hljs-string">&quot;xyyzzz&quot;</span>.GroupBy (c =&gt; c) ));
-</code></pre>
-<p>🔽 خروجی:</p>
-<pre class="hljs"><code>Group with key=x: x
+</code></pre> <hr><h3>▶ اجرای کد</h3><pre class="hljs"><code>Console.WriteLine (ToStringEx (<span class="hljs-string">&quot;xyyzzz&quot;</span>.GroupBy (c =&gt; c) ));
+</code></pre> <p>خروجی:</p><pre class="hljs"><code>Group with key=x: x
 Group with key=y: y y
 Group with key=z: z z z
-</code></pre>
-<hr>
-<p>در اینجا از <strong>dynamic member overload resolution</strong> برای حل مسئله استفاده کردیم.</p>
-<p>اگر به‌جای آن، چنین کاری می‌کردیم:</p>
-<pre class="hljs"><code><span class="hljs-built_in">dynamic</span> d = <span class="hljs-keyword">value</span>;
+</code></pre> <hr><p>در اینجا از <strong>dynamic member overload resolution</strong> برای حل مسئله استفاده کردیم.</p><p>اگر به‌جای آن، چنین کاری می‌کردیم:</p><pre class="hljs"><code><span class="hljs-built_in">dynamic</span> d = <span class="hljs-keyword">value</span>;
 <span class="hljs-keyword">try</span> { groupKey = d.Value; }
 <span class="hljs-keyword">catch</span> (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException) {...}
-</code></pre>
-<p>این روش شکست می‌خورد. چرا؟ چون عملگر <strong>GroupBy</strong> در LINQ یک نوعی را برمی‌گرداند که <strong>IGrouping&lt;,&gt;</strong> را پیاده‌سازی می‌کند و خودش <strong>internal</strong> است:</p>
-<pre class="hljs"><code><span class="hljs-keyword">internal</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Grouping</span> : <span class="hljs-title">IGrouping</span>&lt;<span class="hljs-title">TKey</span>,<span class="hljs-title">TElement</span>&gt;, ...
+</code></pre> <p>این روش شکست می‌خورد. چرا؟ چون عملگر <strong>GroupBy</strong> در LINQ یک نوعی را برمی‌گرداند که <strong>IGrouping&lt;,&gt;</strong> را پیاده‌سازی می‌کند و خودش <strong>internal</strong> است:</p><pre class="hljs"><code><span class="hljs-keyword">internal</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Grouping</span> : <span class="hljs-title">IGrouping</span>&lt;<span class="hljs-title">TKey</span>,<span class="hljs-title">TElement</span>&gt;, ...
 {
   <span class="hljs-keyword">public</span> TKey Key;
   ...
 }
-</code></pre>
-<p>حتی اگر property <strong>Key</strong> به‌صورت public تعریف شده باشد، کلاس حاوی آن <strong>internal</strong> است و بنابراین فقط از طریق <strong>IGrouping&lt;,&gt;</strong> قابل دسترسی است.<br>
-و همان‌طور که در فصل ۴ توضیح دادیم، هیچ راهی وجود ندارد که به DLR بگوییم هنگام صدا زدن dynamic member، به آن interface bind شود.</p>
-<h3>پیاده‌سازی اشیای پویا 🦆✨</h3>
-<p>یک شیء می‌تواند با پیاده‌سازی <strong>IDynamicMetaObjectProvider</strong> معناشناسی (binding semantics) خودش را فراهم کند—یا راحت‌تر از آن، با ارث‌بری از کلاس <strong>DynamicObject</strong>، که یک پیاده‌سازی پیش‌فرض از این اینترفیس ارائه می‌دهد.</p>
-<p>این موضوع به‌طور مختصر در فصل ۴ با مثال زیر نشان داده شده است:</p>
-<pre class="hljs"><code><span class="hljs-built_in">dynamic</span> d = <span class="hljs-keyword">new</span> Duck();
+</code></pre> <p>حتی اگر property <strong>Key</strong> به‌صورت public تعریف شده باشد، کلاس حاوی آن <strong>internal</strong> است و بنابراین فقط از طریق <strong>IGrouping&lt;,&gt;</strong> قابل دسترسی است.<br> و همان‌طور که در فصل ۴ توضیح دادیم، هیچ راهی وجود ندارد که به DLR بگوییم هنگام صدا زدن dynamic member، به آن interface bind شود.</p><h3>پیاده‌سازی اشیای پویا</h3><p>یک شیء می‌تواند با پیاده‌سازی <strong>IDynamicMetaObjectProvider</strong> معناشناسی (binding semantics) خودش را فراهم کند—یا راحت‌تر از آن، با ارث‌بری از کلاس <strong>DynamicObject</strong>، که یک پیاده‌سازی پیش‌فرض از این اینترفیس ارائه می‌دهد.</p><p>این موضوع به‌طور مختصر در فصل ۴ با مثال زیر نشان داده شده است:</p><pre class="hljs"><code><span class="hljs-built_in">dynamic</span> d = <span class="hljs-keyword">new</span> Duck();
 d.Quack();                  <span class="hljs-comment">// متد Quack فراخوانی شد</span>
 d.Waddle();                 <span class="hljs-comment">// متد Waddle فراخوانی شد</span>
 
@@ -429,20 +193,7 @@ d.Waddle();                 <span class="hljs-comment">// متد Waddle فراخ
     <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
   }
 }
-</code></pre>
-<hr>
-<h3>DynamicObject 🛠️</h3>
-<p>در مثال بالا، ما متد <strong>TryInvokeMember</strong> را بازنویسی (override) کردیم، که به مصرف‌کننده اجازه می‌دهد روی شیء پویا (dynamic object) یک متد فراخوانی کند—مثل <strong>Quack</strong> یا <strong>Waddle</strong>.</p>
-<p>کلاس <strong>DynamicObject</strong> متدهای مجازی (virtual methods) دیگری هم در اختیار قرار می‌دهد که به مصرف‌کننده اجازه می‌دهند از دیگر ساختارهای برنامه‌نویسی استفاده کند. موارد زیر متناظر با ساختارهایی هستند که در زبان C# نمایش دارند:</p>
-<div align="center">
-<p><img src="../../../assets/image/19/Table-19-1.jpeg" alt="Conventions-UsedThis-Book"></p>
-</div>
-<h3>متدهای پویا در DynamicObject ⚡</h3>
-<p>این متدها باید در صورت موفقیت، مقدار <strong>true</strong> برگردانند. اگر مقدار <strong>false</strong> برگردانده شود، <strong>DLR</strong> (Dynamic Language Runtime) به binder زبان برمی‌گردد تا به‌دنبال عضوی هم‌نام در خود شیء پویا (زیرکلاس DynamicObject) بگردد. اگر این کار هم شکست بخورد، یک استثنای <strong>RuntimeBinderException</strong> پرتاب خواهد شد. 🚨</p>
-<hr>
-<h3>نمونه با <code>TryGetMember</code> و <code>TrySetMember</code> 📝</h3>
-<p>در مثال زیر، کلاسی ساخته‌ایم که به ما امکان می‌دهد به‌صورت پویا به attributeها در یک <strong>XElement (System.Xml.Linq)</strong> دسترسی پیدا کنیم:</p>
-<pre class="hljs"><code><span class="hljs-keyword">static</span> <span class="hljs-keyword">class</span> <span class="hljs-title">XExtensions</span>
+</code></pre> <hr><h3>DynamicObject</h3><p>در مثال بالا، ما متد <strong>TryInvokeMember</strong> را بازنویسی (override) کردیم، که به مصرف‌کننده اجازه می‌دهد روی شیء پویا (dynamic object) یک متد فراخوانی کند—مثل <strong>Quack</strong> یا <strong>Waddle</strong>.</p><p>کلاس <strong>DynamicObject</strong> متدهای مجازی (virtual methods) دیگری هم در اختیار قرار می‌دهد که به مصرف‌کننده اجازه می‌دهند از دیگر ساختارهای برنامه‌نویسی استفاده کند. موارد زیر متناظر با ساختارهایی هستند که در زبان C# نمایش دارند:</p><div align="center"> <p><img src="../../../assets/image/19/Table-19-1.jpeg" alt="Conventions-UsedThis-Book" loading="lazy" decoding="async"></p></div> <h3>متدهای پویا در DynamicObject</h3><p>این متدها باید در صورت موفقیت، مقدار <strong>true</strong> برگردانند. اگر مقدار <strong>false</strong> برگردانده شود، <strong>DLR</strong> (Dynamic Language Runtime) به binder زبان برمی‌گردد تا به‌دنبال عضوی هم‌نام در خود شیء پویا (زیرکلاس DynamicObject) بگردد. اگر این کار هم شکست بخورد، یک استثنای <strong>RuntimeBinderException</strong> پرتاب خواهد شد.</p><hr> <h3>نمونه با <code>TryGetMember</code> و <code>TrySetMember</code></h3><p>در مثال زیر، کلاسی ساخته‌ایم که به ما امکان می‌دهد به‌صورت پویا به attributeها در یک <strong>XElement (System.Xml.Linq)</strong> دسترسی پیدا کنیم:</p><pre class="hljs"><code><span class="hljs-keyword">static</span> <span class="hljs-keyword">class</span> <span class="hljs-title">XExtensions</span>
 {
   <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-built_in">dynamic</span> <span class="hljs-title">DynamicAttributes</span> (<span class="hljs-params"><span class="hljs-keyword">this</span> XElement e</span>)</span>
     =&gt; <span class="hljs-keyword">new</span> XWrapper (e);
@@ -467,19 +218,13 @@ d.Waddle();                 <span class="hljs-comment">// متد Waddle فراخ
     }
   }
 }
-</code></pre>
-<p>📌 نحوه‌ی استفاده:</p>
-<pre class="hljs"><code>XElement x = XElement.Parse (<span class="hljs-string">@&quot;&lt;Label Text=&quot;&quot;Hello&quot;&quot; Id=&quot;&quot;5&quot;&quot;/&gt;&quot;</span>);
+</code></pre> <p>نحوه‌ی استفاده:</p><pre class="hljs"><code>XElement x = XElement.Parse (<span class="hljs-string">@&quot;&lt;Label Text=&quot;&quot;Hello&quot;&quot; Id=&quot;&quot;5&quot;&quot;/&gt;&quot;</span>);
 <span class="hljs-built_in">dynamic</span> da = x.DynamicAttributes();
 
 Console.WriteLine (da.Id);        <span class="hljs-comment">// 5</span>
 da.Text = <span class="hljs-string">&quot;Foo&quot;</span>;
 Console.WriteLine (x.ToString()); <span class="hljs-comment">// &lt;Label Text=&quot;Foo&quot; Id=&quot;5&quot; /&gt;</span>
-</code></pre>
-<hr>
-<h3>نمونه با <code>System.Data.IDataRecord</code> 📊</h3>
-<p>در مثال بعدی، برای ساده‌تر کردن کار با <strong>data reader</strong>‌ها، از DynamicObject استفاده شده است:</p>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">DynamicReader</span> : <span class="hljs-title">DynamicObject</span>
+</code></pre> <hr><h3>نمونه با <code>System.Data.IDataRecord</code></h3><p>در مثال بعدی، برای ساده‌تر کردن کار با <strong>data reader</strong>‌ها، از DynamicObject استفاده شده است:</p><pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">DynamicReader</span> : <span class="hljs-title">DynamicObject</span>
 {
   <span class="hljs-keyword">readonly</span> IDataRecord _dataRecord;
   <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">DynamicReader</span> (<span class="hljs-params">IDataRecord dr</span>)</span> { _dataRecord = dr; }
@@ -503,10 +248,7 @@ Console.WriteLine (x.ToString()); <span class="hljs-comment">// &lt;Label Text=&
     ...
   }
 }
-</code></pre>
-<hr>
-<h3>نمونه با <code>TryBinaryOperation</code> و <code>TryInvoke</code> ➕🔔</h3>
-<pre class="hljs"><code><span class="hljs-built_in">dynamic</span> d = <span class="hljs-keyword">new</span> Duck();
+</code></pre> <hr><h3>نمونه با <code>TryBinaryOperation</code> و <code>TryInvoke</code></h3><pre class="hljs"><code><span class="hljs-built_in">dynamic</span> d = <span class="hljs-keyword">new</span> Duck();
 Console.WriteLine (d + d);       <span class="hljs-comment">// foo</span>
 Console.WriteLine (d (<span class="hljs-number">78</span>, <span class="hljs-string">&#x27;x&#x27;</span>)); <span class="hljs-comment">// 123</span>
 
@@ -528,44 +270,19 @@ Console.WriteLine (d (<span class="hljs-number">78</span>, <span class="hljs-str
     <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
   }
 }
-</code></pre>
-<hr>
-<h3>متدهای تکمیلی برای زبان‌های پویا 🌐</h3>
-<p>کلاس <strong>DynamicObject</strong> همچنین چند متد مجازی دیگر را برای راحتی زبان‌های پویا فراهم می‌کند.</p>
-<p>🔹 به‌طور خاص، بازنویسی متد <strong>GetDynamicMemberNames</strong> این امکان را می‌دهد که لیستی از تمام نام اعضایی که شیء پویا ارائه می‌دهد، برگردانده شود.</p>
-<p>🔹 دلیل دیگر برای پیاده‌سازی <strong>GetDynamicMemberNames</strong> این است که <strong>دیباگر Visual Studio</strong> از این متد استفاده می‌کند تا نمایی از یک شیء پویا را نمایش دهد. 🖥️</p>
-<h3>ExpandoObject 🪄</h3>
-<p>یک کاربرد ساده دیگر از <strong>DynamicObject</strong> می‌تواند این باشد که یک کلاس پویا بنویسیم که اشیاء را در یک <strong>Dictionary</strong> ذخیره و بازیابی کند (کلیدها از نوع string). اما این قابلیت از قبل توسط کلاس <strong>ExpandoObject</strong> فراهم شده است:</p>
-<pre class="hljs"><code><span class="hljs-built_in">dynamic</span> x = <span class="hljs-keyword">new</span> ExpandoObject();
+</code></pre> <hr><h3>متدهای تکمیلی برای زبان‌های پویا</h3><p>کلاس <strong>DynamicObject</strong> همچنین چند متد مجازی دیگر را برای راحتی زبان‌های پویا فراهم می‌کند.</p><p>به‌طور خاص، بازنویسی متد <strong>GetDynamicMemberNames</strong> این امکان را می‌دهد که لیستی از تمام نام اعضایی که شیء پویا ارائه می‌دهد، برگردانده شود.</p><p>دلیل دیگر برای پیاده‌سازی <strong>GetDynamicMemberNames</strong> این است که <strong>دیباگر Visual Studio</strong> از این متد استفاده می‌کند تا نمایی از یک شیء پویا را نمایش دهد.</p><h3>ExpandoObject</h3><p>یک کاربرد ساده دیگر از <strong>DynamicObject</strong> می‌تواند این باشد که یک کلاس پویا بنویسیم که اشیاء را در یک <strong>Dictionary</strong> ذخیره و بازیابی کند (کلیدها از نوع string). اما این قابلیت از قبل توسط کلاس <strong>ExpandoObject</strong> فراهم شده است:</p><pre class="hljs"><code><span class="hljs-built_in">dynamic</span> x = <span class="hljs-keyword">new</span> ExpandoObject();
 x.FavoriteColor = ConsoleColor.Green;
 x.FavoriteNumber = <span class="hljs-number">7</span>;
 
 Console.WriteLine (x.FavoriteColor);   <span class="hljs-comment">// Green</span>
 Console.WriteLine (x.FavoriteNumber);  <span class="hljs-comment">// 7</span>
-</code></pre>
-<p>🔑 در واقع، <strong>ExpandoObject</strong> اینترفیس <strong>IDictionary&lt;string, object&gt;</strong> را پیاده‌سازی می‌کند. بنابراین می‌توانیم مثال بالا را این‌طور ادامه دهیم:</p>
-<pre class="hljs"><code><span class="hljs-keyword">var</span> dict = (IDictionary&lt;<span class="hljs-built_in">string</span>,<span class="hljs-built_in">object</span>&gt;) x;
+</code></pre> <p>در واقع، <strong>ExpandoObject</strong> اینترفیس <strong>IDictionary&lt;string, object&gt;</strong> را پیاده‌سازی می‌کند. بنابراین می‌توانیم مثال بالا را این‌طور ادامه دهیم:</p><pre class="hljs"><code><span class="hljs-keyword">var</span> dict = (IDictionary&lt;<span class="hljs-built_in">string</span>,<span class="hljs-built_in">object</span>&gt;) x;
 Console.WriteLine (dict[<span class="hljs-string">&quot;FavoriteColor&quot;</span>]);   <span class="hljs-comment">// Green</span>
 Console.WriteLine (dict[<span class="hljs-string">&quot;FavoriteNumber&quot;</span>]);  <span class="hljs-comment">// 7</span>
 Console.WriteLine (dict.Count);              <span class="hljs-comment">// 2</span>
-</code></pre>
-<hr>
-<h3>تعامل با زبان‌های پویا 🌍</h3>
-<p>اگرچه C# از طریق کلمه کلیدی <strong>dynamic</strong> از <strong>dynamic binding</strong> پشتیبانی می‌کند، اما اجازه نمی‌دهد یک عبارت ذخیره‌شده به شکل رشته (string) را در زمان اجرا مستقیماً اجرا کنید:</p>
-<pre class="hljs"><code><span class="hljs-built_in">string</span> expr = <span class="hljs-string">&quot;2 * 3&quot;</span>;
+</code></pre> <hr><h3>تعامل با زبان‌های پویا</h3><p>اگرچه C# از طریق کلمه کلیدی <strong>dynamic</strong> از <strong>dynamic binding</strong> پشتیبانی می‌کند، اما اجازه نمی‌دهد یک عبارت ذخیره‌شده به شکل رشته (string) را در زمان اجرا مستقیماً اجرا کنید:</p><pre class="hljs"><code><span class="hljs-built_in">string</span> expr = <span class="hljs-string">&quot;2 * 3&quot;</span>;
 <span class="hljs-comment">// نمی‌توانیم expr را اجرا کنیم</span>
-</code></pre>
-<p>علت این است که ترجمه‌ی یک رشته به یک <strong>expression tree</strong> نیازمند یک <strong>lexical parser</strong> و <strong>semantic parser</strong> است که در کامپایلر C# وجود دارند، اما به‌صورت سرویس در زمان اجرا در دسترس نیستند. در زمان اجرا، C# فقط یک <strong>binder</strong> فراهم می‌کند که به <strong>DLR</strong> می‌گوید چگونه یک expression tree از قبل ساخته‌شده را تفسیر کند.</p>
-<p>👨‍💻 در زبان‌های واقعاً پویا مثل <strong>IronPython</strong> و <strong>IronRuby</strong>، می‌توان رشته‌ها را به‌صورت مستقیم اجرا کرد. این موضوع برای کارهایی مثل <strong>اسکریپت‌نویسی</strong>، ساخت <strong>سیستم‌های پیکربندی پویا</strong>، و پیاده‌سازی <strong>rules engine</strong> بسیار مفید است. بنابراین، اگرچه می‌توانید بیشتر برنامه را در C# بنویسید، اما ممکن است برای برخی وظایف خاص، به استفاده از یک زبان پویا نیاز داشته باشید.</p>
-<p>همچنین گاهی ممکن است بخواهید از <strong>API</strong>ای استفاده کنید که در یک زبان پویا نوشته شده و معادل آن در <strong>.NET</strong> وجود ندارد.</p>
-<hr>
-<h3>اجرای کد C# به شکل رشته با Roslyn 🧩</h3>
-<p>پکیج <strong>Microsoft.CodeAnalysis.CSharp.Scripting</strong> (از مجموعه Roslyn) این قابلیت را فراهم می‌کند که یک رشته C# را اجرا کنید. البته این کار با <strong>کامپایل</strong> رشته به یک برنامه انجام می‌شود، بنابراین سربار عملکردی بیشتری نسبت به زبان‌هایی مثل Python دارد (مگر اینکه همان عبارت بارها تکراراً اجرا شود).</p>
-<hr>
-<h3>مثال با IronPython 🐍</h3>
-<p>در مثال زیر، از <strong>IronPython</strong> برای ارزیابی یک عبارت در زمان اجرا از درون C# استفاده می‌کنیم. می‌توان از این روش برای ساخت یک ماشین حساب ساده بهره برد.</p>
-<p>📌 برای اجرای این کد، باید پکیج‌های <strong>DynamicLanguageRuntime</strong> (توجه کنید با System.Dynamic.Runtime فرق دارد) و <strong>IronPython</strong> را نصب کنید.</p>
-<pre class="hljs"><code><span class="hljs-keyword">using</span> System;
+</code></pre> <p>علت این است که ترجمه‌ی یک رشته به یک <strong>expression tree</strong> نیازمند یک <strong>lexical parser</strong> و <strong>semantic parser</strong> است که در کامپایلر C# وجود دارند، اما به‌صورت سرویس در زمان اجرا در دسترس نیستند. در زمان اجرا، C# فقط یک <strong>binder</strong> فراهم می‌کند که به <strong>DLR</strong> می‌گوید چگونه یک expression tree از قبل ساخته‌شده را تفسیر کند.</p><p>‍ در زبان‌های واقعاً پویا مثل <strong>IronPython</strong> و <strong>IronRuby</strong>، می‌توان رشته‌ها را به‌صورت مستقیم اجرا کرد. این موضوع برای کارهایی مثل <strong>اسکریپت‌نویسی</strong>، ساخت <strong>سیستم‌های پیکربندی پویا</strong>، و پیاده‌سازی <strong>rules engine</strong> بسیار مفید است. بنابراین، اگرچه می‌توانید بیشتر برنامه را در C# بنویسید، اما ممکن است برای برخی وظایف خاص، به استفاده از یک زبان پویا نیاز داشته باشید.</p><p>همچنین گاهی ممکن است بخواهید از <strong>API</strong>ای استفاده کنید که در یک زبان پویا نوشته شده و معادل آن در <strong>.NET</strong> وجود ندارد.</p><hr> <h3>اجرای کد C# به شکل رشته با Roslyn</h3><p>پکیج <strong>Microsoft.CodeAnalysis.CSharp.Scripting</strong> (از مجموعه Roslyn) این قابلیت را فراهم می‌کند که یک رشته C# را اجرا کنید. البته این کار با <strong>کامپایل</strong> رشته به یک برنامه انجام می‌شود، بنابراین سربار عملکردی بیشتری نسبت به زبان‌هایی مثل Python دارد (مگر اینکه همان عبارت بارها تکراراً اجرا شود).</p><hr> <h3>مثال با IronPython</h3><p>در مثال زیر، از <strong>IronPython</strong> برای ارزیابی یک عبارت در زمان اجرا از درون C# استفاده می‌کنیم. می‌توان از این روش برای ساخت یک ماشین حساب ساده بهره برد.</p><p>برای اجرای این کد، باید پکیج‌های <strong>DynamicLanguageRuntime</strong> (توجه کنید با System.Dynamic.Runtime فرق دارد) و <strong>IronPython</strong> را نصب کنید.</p><pre class="hljs"><code><span class="hljs-keyword">using</span> System;
 <span class="hljs-keyword">using</span> IronPython.Hosting;
 <span class="hljs-keyword">using</span> Microsoft.Scripting;
 <span class="hljs-keyword">using</span> Microsoft.Scripting.Hosting;
@@ -578,16 +295,9 @@ Console.WriteLine (result);  <span class="hljs-comment">// 6</span>
   ScriptEngine engine = Python.CreateEngine();
   <span class="hljs-keyword">return</span> engine.Execute (expression);
 }
-</code></pre>
-<p>✅ توجه کنید: چون رشته به <strong>Python</strong> پاس داده می‌شود، عبارت بر اساس قوانین Python ارزیابی خواهد شد، نه C#.</p>
-<p>برای مثال، می‌توان از امکانات زبان Python مثل <strong>لیست‌ها</strong> استفاده کرد:</p>
-<pre class="hljs"><code><span class="hljs-keyword">var</span> list = (IEnumerable) Calculate (<span class="hljs-string">&quot;[1, 2, 3] + [4, 5]&quot;</span>);
+</code></pre> <p>توجه کنید: چون رشته به <strong>Python</strong> پاس داده می‌شود، عبارت بر اساس قوانین Python ارزیابی خواهد شد، نه C#.</p><p>برای مثال، می‌توان از امکانات زبان Python مثل <strong>لیست‌ها</strong> استفاده کرد:</p><pre class="hljs"><code><span class="hljs-keyword">var</span> list = (IEnumerable) Calculate (<span class="hljs-string">&quot;[1, 2, 3] + [4, 5]&quot;</span>);
 <span class="hljs-keyword">foreach</span> (<span class="hljs-built_in">int</span> n <span class="hljs-keyword">in</span> list) Console.Write (n);  <span class="hljs-comment">// 12345</span>
-</code></pre>
-<hr>
-<h3>عبور وضعیت بین C# و اسکریپت 🔄</h3>
-<p>برای انتقال متغیرها از C# به Python، مراحل بیشتری نیاز است. مثال زیر این موضوع را نشان می‌دهد و می‌تواند پایه‌ای برای یک <strong>rules engine</strong> باشد:</p>
-<pre class="hljs"><code><span class="hljs-comment">// این رشته می‌تواند از یک فایل یا دیتابیس بیاید:</span>
+</code></pre> <hr><h3>عبور وضعیت بین C# و اسکریپت</h3><p>برای انتقال متغیرها از C# به Python، مراحل بیشتری نیاز است. مثال زیر این موضوع را نشان می‌دهد و می‌تواند پایه‌ای برای یک <strong>rules engine</strong> باشد:</p><pre class="hljs"><code><span class="hljs-comment">// این رشته می‌تواند از یک فایل یا دیتابیس بیاید:</span>
 <span class="hljs-built_in">string</span> auditRule = <span class="hljs-string">&quot;taxPaidLastYear / taxPaidThisYear &gt; 2&quot;</span>;
 
 ScriptEngine engine = Python.CreateEngine();    
@@ -601,9 +311,7 @@ ScriptSource source = engine.CreateScriptSourceFromString (
 
 <span class="hljs-built_in">bool</span> auditRequired = (<span class="hljs-built_in">bool</span>) source.Execute (scope);
 Console.WriteLine (auditRequired);   <span class="hljs-comment">// True</span>
-</code></pre>
-<p>📥 همچنین می‌توانید متغیرها را از اسکریپت به C# برگردانید:</p>
-<pre class="hljs"><code><span class="hljs-built_in">string</span> code = <span class="hljs-string">&quot;result = input * 3&quot;</span>;
+</code></pre> <p>همچنین می‌توانید متغیرها را از اسکریپت به C# برگردانید:</p><pre class="hljs"><code><span class="hljs-built_in">string</span> code = <span class="hljs-string">&quot;result = input * 3&quot;</span>;
 
 ScriptEngine engine = Python.CreateEngine();
 ScriptScope scope = engine.CreateScope();
@@ -615,13 +323,7 @@ ScriptSource source = engine.CreateScriptSourceFromString (
 source.Execute (scope);
 
 Console.WriteLine (scope.GetVariable (<span class="hljs-string">&quot;result&quot;</span>));   <span class="hljs-comment">// 6</span>
-</code></pre>
-<p>در این مثال دوم، از <strong>SourceCodeKind.SingleStatement</strong> به‌جای <strong>Expression</strong> استفاده کردیم تا به موتور بگوییم قصد اجرای یک <strong>statement</strong> را داریم.</p>
-<hr>
-<h3>تبادل انواع بین C# و Python 🔗</h3>
-<p>🔹 نوع‌ها به‌طور خودکار بین دنیای <strong>.NET</strong> و <strong>Python</strong> منتقل (marshal) می‌شوند.<br>
-🔹 حتی می‌توانید اعضای یک شیء .NET را از سمت اسکریپت فراخوانی کنید:</p>
-<pre class="hljs"><code><span class="hljs-built_in">string</span> code = <span class="hljs-string">@&quot;sb.Append (&quot;&quot;World&quot;&quot;)&quot;</span>;
+</code></pre> <p>در این مثال دوم، از <strong>SourceCodeKind.SingleStatement</strong> به‌جای <strong>Expression</strong> استفاده کردیم تا به موتور بگوییم قصد اجرای یک <strong>statement</strong> را داریم.</p><hr> <h3>تبادل انواع بین C# و Python</h3><p>نوع‌ها به‌طور خودکار بین دنیای <strong>.NET</strong> و <strong>Python</strong> منتقل (marshal) می‌شوند.<br> حتی می‌توانید اعضای یک شیء .NET را از سمت اسکریپت فراخوانی کنید:</p><pre class="hljs"><code><span class="hljs-built_in">string</span> code = <span class="hljs-string">@&quot;sb.Append (&quot;&quot;World&quot;&quot;)&quot;</span>;
 
 ScriptEngine engine = Python.CreateEngine();
 ScriptScope scope = engine.CreateScope();
@@ -635,118 +337,216 @@ ScriptSource source = engine.CreateScriptSourceFromString (
 source.Execute (scope);
 
 Console.WriteLine (sb.ToString());   <span class="hljs-comment">// HelloWorld</span>
-</code></pre>
-
-  </main>
-
-  <!-- فوتر مشترک -->
-  <footer class="footer">
-    <div class="container">
-      <p>
-        <img src="/Gitab/icone/copyright.svg" alt="کپی‌رایت" width="14" height="14"
-             style="vertical-align:middle;margin-inline:4px">
-        <span id="y"></span> Gitab — تمامی حقوق محفوظ است.
-      </p>
-    </div>
-  </footer>
-
-  <!-- سال و اسکریپت تغییر تم -->
-  <script>
+</code></pre></article><nav class="chapter-single-next-nav"> <a href="/Gitab/books/book1/Book/20/Cryptography/" class="btn-next-chapter-action" id="nextChapterBtn" data-hub="/Gitab/books/book1/"> <span class="next-btn-text">فصل بعدی: رمزنگاری و امنیت</span> <span class="next-btn-arrow">←</span> </a> </nav></div> <button class="fab-back-to-top" id="backToTopBtn" type="button" aria-label="رفتن به بالای صفحه" title="رفتن به بالا"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"> <polyline points="18 15 12 9 6 15"></polyline> </svg> </button></main> <footer class="footer-minimal"><div class="footer-container"> <div class="footer-top-row"><div class="footer-brand-side"> <a href="/Gitab/" class="footer-brand-anchor"> <img src="/Gitab/icone/logo.svg" alt="Gitab" width="28" height="28" loading="lazy" decoding="async"> <span class="footer-brand-title">گیتاب (Gitab)</span> </a> <p class="footer-tagline"> پلتفرم آزاد و مستقل برای ترجمهٔ دقیق و روان کتاب‌های مرجع مهندسی نرم‌افزار. </p></div> <div class="footer-nav-cols"><div class="footer-nav-col"> <span class="footer-nav-heading">موضوعات</span><ul class="footer-nav-list"> <li><a href="/Gitab/books/list-books/?cat=csharp">سی‌شارپ و دات‌نت</a></li><li><a href="/Gitab/books/list-books/?cat=clean-code">کد تمیز و بازآفرینی</a></li><li><a href="/Gitab/books/list-books/?cat=architecture">معماری و طراحی دامنه</a></li><li><a href="/Gitab/books/list-books/?cat=system">لینوکس و خط فرمان</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">بخش‌های سایت</span><ul class="footer-nav-list"> <li><a href="/Gitab/">صفحه اصلی</a></li><li><a href="/Gitab/books/list-books/">کتابخانه کامل</a></li><li><a href="/Gitab/courses/">دوره‌های آموزشی</a></li><li><a href="/Gitab/translator.html">تالار مترجمین</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">مشارکت و جامعه</span><ul class="footer-nav-list"> <li><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer">راهنمای همکاری در ترجمه</a></li><li><a href="https://github.com/hheydarian/Gitab/issues" target="_blank" rel="noopener noreferrer">پیشنهاد کتاب یا گزارش خطا</a></li></ul> </div></div> </div><div class="footer-bottom-line"> <span>© <span id="y">2026</span> Gitab — توسعه‌یافته برای جامعهٔ مهندسان نرم‌افزار ایرانی</span></div> </div></footer> <script>
   (() => {
     const root = document.documentElement;
     const btn = document.getElementById('themeToggle');
+    const sunIcon = btn ? btn.querySelector('.icon-sun') : null;
+    const moonIcon = btn ? btn.querySelector('.icon-moon') : null;
     const KEY = 'gitab-theme';
 
-    function updateTheme(s) {
-      root.setAttribute('data-theme', s);
-      const mode = s;  // فقط `dark` یا `light` خواهد بود
+    function updateTheme(mode) {
+      root.setAttribute('data-theme', mode);
       root.dataset.colorMode = mode;
-      btn.dataset.icon = mode === 'dark' ? 'moon' : 'sun';
+      if (sunIcon && moonIcon) {
+        if (mode === 'dark') {
+          sunIcon.style.display = 'inline-block';
+          moonIcon.style.display = 'none';
+        } else {
+          sunIcon.style.display = 'none';
+          moonIcon.style.display = 'inline-block';
+        }
+      }
     }
 
-    // وضعیت تم ذخیره شده از localStorage
-    let saved = localStorage.getItem(KEY) || 'light'; // پیش‌فرض روشن
+    let saved = 'dark';
+    try { saved = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
     updateTheme(saved);
 
-    // تنظیم مجدد تم هنگام تغییر وضعیت دکمه
-    btn.addEventListener('click', () => {
-      const current = localStorage.getItem(KEY) || 'light';
-      const next = current === 'dark' ? 'light' : 'dark';  // فقط دو حالت: تاریک و روشن
-      localStorage.setItem(KEY, next);
-      updateTheme(next);
-    });
+    if (btn) {
+      btn.addEventListener('click', () => {
+        let current = 'dark';
+        try { current = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+        const next = current === 'dark' ? 'light' : 'dark';
+        try { localStorage.setItem(KEY, next); } catch (e) {}
+        updateTheme(next);
+      });
+    }
 
-    // هنگام بارگذاری صفحه
     document.addEventListener('DOMContentLoaded', () => {
-      updateTheme(localStorage.getItem(KEY) || 'light');
+      let mode = 'dark';
+      try { mode = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+      updateTheme(mode);
+      const yearSpan = document.getElementById('y');
+      if (yearSpan) yearSpan.textContent = new Date().getFullYear();
     });
+
+    const mobBtn = document.getElementById('mobileMenuBtn');
+    const mobDrawer = document.getElementById('mobileDrawer');
+    if (mobBtn && mobDrawer) {
+      const setDrawerOpen = (open) => {
+        mobDrawer.classList.toggle('open', open);
+        mobBtn.classList.toggle('is-open', open);
+        mobBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        mobBtn.setAttribute('aria-label', open ? 'بستن منو' : 'باز کردن منو');
+        mobDrawer.setAttribute('aria-hidden', open ? 'false' : 'true');
+      };
+
+      mobBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        setDrawerOpen(!mobDrawer.classList.contains('open'));
+      });
+
+      mobDrawer.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => setDrawerOpen(false));
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && mobDrawer.classList.contains('open')) {
+          setDrawerOpen(false);
+        }
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!mobDrawer.contains(e.target) && !mobBtn.contains(e.target)) {
+          setDrawerOpen(false);
+        }
+      });
+    }
+
+    if ('serviceWorker' in navigator) {
+      const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+      if (isLocalhost) {
+        navigator.serviceWorker.getRegistrations().then(regs => {
+          for (const reg of regs) reg.unregister();
+        });
+        if ('caches' in window) {
+          caches.keys().then(names => {
+            for (const name of names) caches.delete(name);
+          });
+        }
+      } else {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/Gitab/sw.js').catch(() => {});
+        });
+      }
+    }
   })();
-</script>
-
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-  <script>hljs.highlightAll();</script>
-
-  <script>
+  </script> <script>
   document.querySelectorAll('pre code').forEach(block => {
+    const pre = block.parentNode;
+    if (!pre || pre.querySelector('.copy-btn')) return;
+
+    const copySvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
+    const okSvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+
     const btn = document.createElement('button');
     btn.className = 'copy-btn';
-
-    const icon = document.createElement('img');
-    icon.src = "/Gitab/icone/copy.svg";
-    icon.alt = 'Copy';
-    btn.appendChild(icon);
-
-    block.parentNode.insertBefore(btn, block);
+    btn.setAttribute('aria-label', 'کپی کد');
+    btn.setAttribute('title', 'کپی کد');
+    btn.setAttribute('type', 'button');
+    btn.innerHTML = copySvg;
+    pre.appendChild(btn);
 
     btn.addEventListener('click', async () => {
-      await navigator.clipboard.writeText(block.textContent);
-      btn.classList.add('copied');
-      setTimeout(() => btn.classList.remove('copied'), 1500);
-    });
-  });
-  </script>
-
-  <script>
-  document.body.dataset.page = window.location.pathname;
-
-  const menuBtn = document.querySelector(".menu-toggle");
-  const nav = document.querySelector(".nav");
-
-  if (menuBtn && nav) {
-    menuBtn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      nav.classList.toggle("show");
-    });
-
-    document.addEventListener("click", (e) => {
-      const clickedInsideNav = nav.contains(e.target);
-      const clickedMenuButton = menuBtn.contains(e.target);
-      if (!clickedInsideNav && !clickedMenuButton) {
-        nav.classList.remove("show");
+      try {
+        await navigator.clipboard.writeText(block.textContent);
+        btn.classList.add('copied');
+        btn.innerHTML = okSvg;
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          btn.innerHTML = copySvg;
+        }, 1800);
+      } catch (err) {
+        console.error('Copy failed:', err);
       }
     });
-  }
-  </script>
-
-  <script>
-    document.getElementById('y').textContent = new Date().getFullYear();
-  </script>
-  <script>
-document.getElementById("openDonate").addEventListener("click", () => {
-  document.getElementById("donateModal").style.display = "block";
-});
-document.getElementById("closeDonate").addEventListener("click", () => {
-  document.getElementById("donateModal").style.display = "none";
-});
-document.querySelectorAll(".copy-btn").forEach(btn => {
-  btn.addEventListener("click", () => {
-    navigator.clipboard.writeText(btn.dataset.copy);
-  
-    setTimeout(() => (btn.textContent = "کپی"), 2000);
   });
-});
-</script>
+  </script> <script>
+  (() => {
+    const article = document.getElementById('chapterArticle');
+    if (!article) return;
 
-</body>
-</html>
+    const progressBar = document.getElementById('readingProgressBar');
+    if (progressBar) {
+      window.addEventListener('scroll', () => {
+        const docElem = document.documentElement;
+        const totalHeight = docElem.scrollHeight - docElem.clientHeight;
+        if (totalHeight > 0) {
+          const progress = (window.pageYOffset / totalHeight) * 100;
+          progressBar.style.width = Math.min(100, Math.max(0, progress)) + '%';
+        }
+      }, { passive: true });
+    }
+
+    const btt = document.getElementById('backToTopBtn');
+    if (btt) {
+      window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 250) {
+          btt.classList.add('visible');
+        } else {
+          btt.classList.remove('visible');
+        }
+      }, { passive: true });
+
+      btt.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+
+    article.querySelectorAll('img').forEach(img => {
+      if (!img.hasAttribute('loading')) img.loading = 'lazy';
+      if (!img.hasAttribute('decoding')) img.decoding = 'async';
+      const parent = img.parentElement;
+      if (parent && parent.tagName === 'P') {
+        parent.style.textAlign = 'center';
+      }
+
+      img.addEventListener('error', function() {
+        const src = this.getAttribute('src');
+        if (src && src.includes('assets/image/')) {
+          const parts = src.split('assets/image/');
+          const corrected = '/Gitab/books/book1/assets/image/' + parts[1];
+          if (this.src !== corrected) {
+            this.src = corrected;
+          }
+        }
+      });
+    });
+
+    article.querySelectorAll('p').forEach(p => {
+      const trimmed = p.innerText.trim();
+      if (trimmed.startsWith('💡') || trimmed.startsWith('نکته:')) {
+        p.classList.add('react-callout', 'callout-tip');
+      } else if (trimmed.startsWith('⚠️') || trimmed.startsWith('هشدار:')) {
+        p.classList.add('react-callout', 'callout-warning');
+      } else if (trimmed.startsWith('📌') || trimmed.startsWith('مهم:')) {
+        p.classList.add('react-callout', 'callout-important');
+      } else if (trimmed.startsWith('🔹') || trimmed.startsWith('🔸')) {
+        p.classList.add('react-callout', 'callout-note');
+      }
+    });
+  })();
+  </script> <script type="speculationrules">{"prefetch":[{"where":{"and":[{"href_matches":"/Gitab/*"},{"not":{"href_matches":"/Gitab/downloads/*"}},{"not":{"selector_matches":"[download], [target='_blank']"}}]},"eagerness":"moderate"}]}</script> <script>
+  (() => {
+    if (window.HTMLScriptElement && HTMLScriptElement.supports && HTMLScriptElement.supports('speculationrules')) return;
+    const seen = new Set([window.location.href]);
+    let count = 0;
+    const prefetchLink = (e) => {
+      if (count >= 12) return;
+      const a = e.target && e.target.closest ? e.target.closest('header a, .chapter-single-next-nav a, .syllabus-chapter-item a, .btn-hero-read, .btn-card-read') : null;
+      if (!a || !a.href || a.hasAttribute('download') || a.target === '_blank') return;
+      if (a.origin !== window.location.origin || a.pathname.includes('/downloads/')) return;
+      const clean = a.href.split('#')[0];
+      if (!clean || seen.has(clean)) return;
+      seen.add(clean);
+      count++;
+      const l = document.createElement('link');
+      l.rel = 'prefetch';
+      l.href = clean;
+      document.head.appendChild(l);
+    };
+    document.addEventListener('pointerenter', prefetchLink, { capture: true, passive: true });
+    document.addEventListener('touchstart', prefetchLink, { capture: true, passive: true });
+  })();
+  </script></body></html>

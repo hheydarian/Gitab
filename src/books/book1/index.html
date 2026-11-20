@@ -1,495 +1,550 @@
 ---
 layout: layout.njk
-title: #C 12 in a Nutshell
+title: C# 12 in a Nutshell | Gitab — کتابخانه مراجع تخصصی
+description: مرجع جامع، عمیق و به‌روز برای یادگیری زبان سی‌شارپ ۱۲ و فریم‌ورک دات‌نت ۸؛ از مبانی پایه تا همزمانی، ساختارهای مدرن حافظه و کارایی بالا.
+keywords: CSharp, DotNet, AsyncProgramming, CleanCode, LINQ, سی شارپ, دات نت, کتابخانه گیتاب
 permalink: /books/book1/index.html
 ---
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
+<div class="book-detail-wrapper" style="--book-glow: rgba(124, 58, 237, 0.28);">
+  <meta itemprop="keywords" content="CSharp, DotNet, AsyncProgramming, CleanCode, LINQ">
 
-<body>
-  <section class="book-header">
-    <div class="book-cover">
-      <img src="{{ '/images/csharp-12/Cover.jpg' | url }}" alt="C# 12 in a Nutshell" />
-    </div>
+  <!-- ۱. هیرو بنتو با کاور سه‌بعدی و اکشن‌های مدرن ۲۰۲۶ -->
+  <section class="book-detail-hero">
+    <div class="book-hero-ambient-glow"></div>
 
-    <div class="book-meta">
-      <h1> C# 12 in a Nutshell</h1>
-      <p class="subtitle">
-        مرجع جامع و به‌روز برای یادگیری زبان سی‌شارپ ۱۲ و چارچوب دات‌نت.
+    <div class="book-hero-content">
+      <h1 class="book-hero-title">
+        <bdi class="en-title" dir="ltr">C# 12 in a Nutshell</bdi>
+      </h1>
+
+      <div class="book-hero-fa-title">سی‌شارپ ۱۲ در یک نگاه</div>
+
+      <p class="book-hero-subtitle">
+        مرجع عمیق و کاربردی سی‌شارپ ۱۲ و دات‌نت ۸؛ از مفاهیم پایه تا ساختارهای نوین حافظه و همزمانی.
       </p>
 
-      <div class="book-tags">
-        <span>CSharp#</span>
-        <span>NET.#</span>
-        <span>AsyncProgramming#</span>
-        <span>CleanCode#</span>
-      </div>
-      <div class="donate-buttons">
-        <button class="donate-btn" id="openDonate"> حمایت مالی از مترجم</button>
-        <!-- فایل اصلی با تول‌تیپ -->
-        <div class="download-wrapper">
-          <button class="donate-btn download" id="mainDownload"
-            data-link="https://drive.google.com/uc?export=download&id=1XLbZ3ZBtykude7jQkphAjSPRnmrNUVBb">
-            فایل اصلی
-          </button>
-          <span class="tooltip-download" id="tooltipDownload">در حال آماده‌سازی...</span>
+      <!-- نوار دکمه‌های اکشن کاملاً منظم، متقارن و لوکس ۲۰۲۶ -->
+      <div class="book-hero-actions-v2">
+        <div class="hero-actions-primary-row">
+          <a class="btn-hero-read" href="{{ '/books/book1/Book/00/Preface/' | url }}">
+            <span>مطالعه آنلاین کتاب</span>
+            <span>←</span>
+          </a>
+          <a class="btn-hero-epub" href="{{ '/downloads/csharp-12-in-a-nutshell-persian.epub' | url }}" download="C# 12 in a Nutshell - Persian.epub"><span>دانلود نسخه EPUB</span></a>
         </div>
-        <div class="download-wrapper">
-          <!-- دکمه فایل فارسی: همین را جایگزین دکمه قبلیِ فایل فارسی کن -->
-          <button class="donate-btn downloadfa" id="faBuy">فایل فارسی</button>
-          <!-- مودال اصلی انتخاب روش پرداخت -->
-          <div id="payModal" class="sheet" aria-hidden="true">
-            <div class="sheet__overlay" data-close="payModal"></div>
-            <div class="sheet__panel">
-              <div class="sheet__header">
-                <h3>خرید نسخهٔ ترجمه‌شده</h3>
-                <button class="sheet__close" data-close="payModal" aria-label="بستن">✕</button>
-              </div>
-
-              <p class="sheet__lead">برای خرید نسخه ترجمه‌شده این کتاب می‌توانید از روش‌های زیر استفاده کنید:</p>
-
-              <div class="price-row">
-                <img src="{{ '/icone/money.svg' | url }}" alt="" class="i">
-                <span>قیمت:</span>
-                <strong id="faPrice">250,000</strong><span>تومان</span>
-              </div>
-
-              <div class="pay-grid">
-                <!-- روش ۱: کارت به کارت -->
-                <button class="pay-card" id="openCardPay">
-                  <img src="{{ '/icone/card.svg' | url }}" alt="" class="i">
-                  <div>
-                    <div class="t">پرداخت کارت‌به‌کارت</div>
-                  </div>
-                </button>
-
-                <!-- روش ۲: پرداخت به ارز -->
-                <button class="pay-card" id="openCryptoPay">
-                  <img src="{{ '/icone/ton.svg' | url }}" alt="" class="i">
-                  <div>
-                    <div class="t">پرداخت با ارز تون کوین</div>
-                  </div>
-                </button>
-              </div>
-
-              <div class="sheet__actions">
-                <button class="btn ghost" id="openPreview">
-                  <img src="{{ '/icone/printer.svg' | url }}" class="i" alt="">
-                  پیش‌نمایش
-                </button>
-                <button class="btn" data-close="payModal">بستن</button>
-              </div>
-            </div>
-          </div>
-
-          <!-- مودال تو در تو: جزئیات «کارت‌به‌کارت» -->
-          <div id="cardModal" class="sheet sheet--nested" aria-hidden="true">
-            <div class="sheet__overlay" data-close="cardModal"></div>
-            <div class="sheet__panel">
-              <div class="sheet__header">
-                <h3>پرداخت کارت‌ به‌ کارت</h3>
-                <button class="sheet__close" data-close="cardModal">✕</button>
-              </div>
-
-              <div class="notice">
-                بعد از ارسال هزینه، اسکرین‌شات و اطلاعات پرداخت را به یکی از راه‌های زیر ارسال کنید تا فایل برای شما
-                ارسال شود.
-              </div>
-
-              <div class="contact-list">
-                <a class="contact" href="https://t.me/Hamedheydarian" target="_blank" rel="noopener">
-                  <img src="{{ '/icone/telegram.svg' | url }}" class="i" alt="">
-                  <span>تلگرام: <b>@Hamedheydarian</b></span>
-                </a>
-                <a class="contact" href="mailto:hamdhydryan12@gmail.com">
-                  <img src="{{ '/icone/mail.svg' | url }}" class="i" alt="">
-                  <span>ایمیل: <b>hamdhydryan12@gmail.com</b></span>
-                </a>
-              </div>
-
-              <div class="bank-box">
-                <div class="row">
-                  <span>شماره کارت:</span>
-                  <code id="cardNumber">6219 8619 3657 5579</code>
-                  <button class="copy-btn" data-copy="6219861944720969">کپی</button>
-                </div>
-                <div class="row">
-                  <span>نام گیرنده:</span>
-                  <code>حامد حیدریان</code>
-                </div>
-              </div>
-
-              <div class="sheet__actions">
-                <button class="btn" data-close="cardModal">تمام</button>
-              </div>
-            </div>
-          </div>
-
-          <!-- مودال تو در تو: جزئیات «پرداخت به ارز (TON)» -->
-          <div id="cryptoModal" class="sheet sheet--nested" aria-hidden="true">
-            <div class="sheet__overlay" data-close="cryptoModal"></div>
-            <div class="sheet__panel">
-              <div class="sheet__header">
-                <h3>پرداخت با ارز تون کوین</h3>
-                <button class="sheet__close" data-close="cryptoModal">✕</button>
-              </div>
-
-              <div class="wallet-box">
-                <div class="row">
-                  <img src="{{ '/icone/ton.svg' | url }}" class="i" alt="">
-                  <span>TON Wallet:</span>
-                  <code class="ellipsis" id="tonAddr">UQCWRF4kFYSmkx4dSX1ozNHAlx77j7xKZj7Nzbky8grq5Ri7</code>
-                  <button class="copy-btn" data-copy="UQCWRF4kFYSmkx4dSX1ozNHAlx77j7xKZj7Nzbky8grq5Ri7">کپی</button>
-                </div>
-                <small class="muted">پس از پرداخت، رسید/TxID را در تلگرام یا ایمیل زیر بفرستید.</small>
-                <div class="contact-list" style="margin-top:10px;">
-                  <a class="contact" href="https://t.me/Hamedheydarian" target="_blank" rel="noopener">
-                    <img src="{{ '/icone/telegram.svg' | url }}" class="i" alt="">
-                    <span>تلگرام: <b>@Hamedheydarian</b></span>
-                  </a>
-                  <a class="contact" href="mailto:hamdhydryan12@gmail.com">
-                    <img src="{{ '/icone/mail.svg' | url }}" class="i" alt="">
-                    <span>ایمیل: <b>hamdhydryan12@gmail.com</b></span>
-                  </a>
-                </div>
-
-              </div>
-
-              <div class="sheet__actions">
-                <button class="btn" data-close="cryptoModal">تمام</button>
-              </div>
-            </div>
-          </div>
-
-          <!-- مودال بزرگ «پیش‌نمایش» -->
-          <div id="previewModal" class="sheet sheet--xl" aria-hidden="true">
-            <div class="sheet__overlay" data-close="previewModal"></div>
-            <div class="sheet__panel">
-              <div class="sheet__header">
-                <h3>پیش‌نمایش فایل</h3>
-                <div class="sheet__header-actions">
-                  <button class="btn ghost" id="printPreview">
-                    <img src="{{ '/icone/printer.svg' | url }}" class="i" alt=""> پرینت پیش‌نمایش
-                  </button>
-                  <button class="sheet__close" data-close="previewModal">✕</button>
-                </div>
-              </div>
-              <!-- نکته: FILE_ID را با شناسهٔ گوگل‌درایو نسخهٔ فارسی عوض کن -->
-              <iframe id="previewFrame" src="https://drive.google.com/file/d/15uL5atFVgfndC4g9b8xWDkg08Gh8avsb/preview"
-                loading="lazy" allow="autoplay; fullscreen; clipboard-write" referrerpolicy="no-referrer"
-                sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-modals"
-                class="preview-frame"></iframe>
-              <div class="sheet__actions">
-                <button class="btn" data-close="previewModal">بستن</button>
-              </div>
-            </div>
-          </div>
-
+        <div class="hero-actions-sub-row">
+          <a class="btn-hero-pdf" href="{{ '/downloads/csharp-12-in-a-nutshell-persian.pdf' | url }}" download="C# 12 in a Nutshell - Persian.pdf">
+            <span>دانلود PDF فارسی</span>
+          </a>
+          <a class="btn-hero-orig" href="https://drive.google.com/uc?export=download&id=1XLbZ3ZBtykude7jQkphAjSPRnmrNUVBb" target="_blank" rel="noopener noreferrer">
+            <span>دریافت نسخه اصلی (انگلیسی)</span>
+          </a>
+        </div>
+        <div class="hero-actions-sub-row" style="grid-template-columns: 1fr;">
+          <a class="btn-hero-gh" href="https://github.com/hheydarian/csharp-12-in-a-nutshell-persian" target="_blank" rel="noopener noreferrer" title="مشاهده مخزن ترجمه در گیت‌هاب">
+            <img src="{{ '/icone/github.svg' | url }}" alt="GitHub" width="16" height="16" decoding="async">
+            <span>مخزن گیت‌هاب</span>
+          </a>
         </div>
       </div>
-      <div id="donateModal" class="donate-modal">
-        <div class="donate-overlay"></div>
-        <div class="donate-content">
-          <!-- کارت بانکی -->
-          <div class="donate-section">
-            <div class="donate-row">
-              <img src="{{ '/icone/card.svg' | url }}" alt="card" class="icon">
-              <span class="label">کارت بانکی:</span>
-              <span class="value">6219 8619 3657 5579</span>
-              <span class="spacer"></span>
-              <button class="copy-btn donate-copy" data-copy="6219861936575579">کپی</button>
-            </div>
-          </div>
+    </div>
 
-          <!-- کیف پول -->
-          <div class="donate-section">
-            <div class="donate-row">
-              <img src="{{ '/icone/money.svg' | url }}" alt="crypto" class="icon">
-              <span class="label">آدرس کیف پول:</span>
-              <span class="value wallet">UQCWRF4kFYSmkx...bky8grq5Ri7</span>
-              <img src="{{ '/icone/ton.svg' | url }}" alt="TON" class="ton-icon">
-              <button class="copy-btn donate-copy"
-                data-copy="UQCWRF4kFYSmkx4dSX1ozNHAlx77j7xKZj7Nzbky8grq5Ri7">کپی</button>
-            </div>
-          </div>
-
-          <button class="close-btn" id="closeDonate">بستن</button>
+    <!-- استیج کاور سه‌بعدی شناور Stripe Press Style -->
+    <div class="book-hero-cover-col">
+      <div class="book-cover-3d-large">
+        <div class="cover-inner-large">
+          <img src="{{ '/images/csharp-12/Cover.jpg' | url }}" alt="C# 12 in a Nutshell کاور" fetchpriority="high" decoding="async">
         </div>
       </div>
     </div>
   </section>
 
-  <section class="book-intro">
-    <p>
-      کتاب <strong>C# 12 in a Nutshell</strong> نوشته‌ی <em>Joseph Albahari</em> یکی از جامع‌ترین منابع یادگیری
-      سی‌شارپ و NET. محسوب می‌شود. این کتاب از مفاهیم پایه تا ویژگی‌های پیشرفته مانند
-      async/await و طراحی ماژولار را با مثال‌های واقعی آموزش می‌دهد.
+  <!-- ۲. شناسنامه مهندسی کتاب (Bento Specifications Grid) -->
+  <section class="book-specs-bento">
+    <div class="book-spec-card">
+      <span class="spec-label">✍️ نویسنده اثر</span>
+      <span class="spec-val"><bdi dir="ltr">Joseph Albahari</bdi></span>
+    </div>
+
+    <div class="book-spec-card">
+      <span class="spec-label">💬 مترجم فارسی</span>
+      <span class="spec-val"><a href="{{ '/translator.html' | url }}">حامد حیدریان</a></span>
+    </div>
+
+    <div class="book-spec-card">
+      <span class="spec-label">🎯 سطح فنی مخاطبان</span>
+      <span class="spec-val">مقدماتی تا فوق‌پیشرفته</span>
+    </div>
+
+    <div class="book-spec-card">
+      <span class="spec-label">📅 سال و ویرایش</span>
+      <span class="spec-val">۲۰۲۴ (نسخه ۱۲)</span>
+    </div>
+
+    <div class="book-spec-card">
+      <span class="spec-label">📑 سرفصل‌های ترجمه‌شده</span>
+      <span class="spec-val">۲۶ فصل تخصصی کامل</span>
+    </div>
+
+    <div class="book-spec-card">
+      <span class="spec-label">⚡ تمرکز کتاب</span>
+      <span class="spec-val">توسعه امن، سریع و مدرن دات‌نت</span>
+    </div>
+  </section>
+
+  <!-- ۳. معرفی متنی و خلاصه کتاب -->
+  <section class="book-editorial-card">
+    <div class="editorial-header">
+      <span class="editorial-title">✨ درباره این اثر</span>
+    </div>
+    <p class="editorial-lead">
+      این اثر، مرجع بی‌چون‌وچرای سی‌شارپ است؛ کتابی سرراست، عمیق و کاربردی. اگر می‌خواهید مفاهیم دات‌نت را اصولی و عمیق بیاموزید—از سازوکارهای مدرن حافظه و <span dir="ltr"><code>Span&lt;T&gt;</code></span> تا برنامه‌نویسی ناهمگام و کوئری‌های قدرتمند <span dir="ltr"><code>LINQ</code></span>—این ترجمه همراه مطمئن شما در کدنویسی روزمره است.
     </p>
+  </section>
 
-    <div class="key-points">
-      <div><strong>✅ نسخه:</strong> ۲۰۲۴</div>
-      <div><strong>📚 سطح:</strong> از مقدماتی تا پیشرفته</div>
-      <div><strong>🧩 تمرکز:</strong> توسعه امن، سریع و مدرن </div>
-      <div><strong>✍️ وضعیت ترجمه:</strong> تکمیل شده </div>
-      <div><strong>📝 نویسنده:</strong> Joseph Albahari </div>
-      <div><strong>💬 مترجم:</strong>
-        <a href="{{ '/translator.html' | url }}">حامد حیدریان</a>
-      </div>
+  <!-- ۴. فهرست تعاملی و هوشمند سرفصل‌ها (Smart Interactive Syllabus) -->
+  <section class="book-syllabus-wrapper" id="chapters">
+    <div class="syllabus-head-row">
+      <h2 class="syllabus-title">📚 فهرست سرفصل‌ها و مباحث کتاب</h2>
+      <button class="btn-syllabus-toggle" id="toggleAllChaptersBtn" type="button">
+        <span>🔄 باز کردن / بستن همه</span>
+      </button>
     </div>
+
+    <!-- بخش ۱ -->
+    <details class="syllabus-accordion-card" open>
+      <summary class="syllabus-summary-head">
+        <div class="syllabus-summary-right">
+          <span class="syllabus-sec-tag">بخش ۱</span>
+          <span class="syllabus-sec-title">مقدمات و مفاهیم پایه</span>
+        </div>
+        <div class="syllabus-summary-left">
+          <span class="syllabus-ch-count">۳ فصل</span>
+          <svg class="syllabus-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </div>
+      </summary>
+      <ul class="syllabus-chapters-list">
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book1/Book/00/Preface/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">۰۰</span>
+              <span class="ch-name-text">مقدمه کتاب</span>
+            </div>
+            <div class="ch-action-side">
+              <span>مطالعه فصل</span>
+              <span>←</span>
+            </div>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book1/Book/01/Introducing-CSharp-and-.NET/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">۰۱</span>
+              <span class="ch-name-text">معرفی سی‌شارپ و دات‌نت</span>
+            </div>
+            <div class="ch-action-side">
+              <span>مطالعه فصل</span>
+              <span>←</span>
+            </div>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book1/Book/02/CSharp-Language-Basics/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">۰۲</span>
+              <span class="ch-name-text">مبانی زبان سی‌شارپ</span>
+            </div>
+            <div class="ch-action-side">
+              <span>مطالعه فصل</span>
+              <span>←</span>
+            </div>
+          </a>
+        </li>
+      </ul>
+    </details>
+
+    <!-- بخش ۲ -->
+    <details class="syllabus-accordion-card">
+      <summary class="syllabus-summary-head">
+        <div class="syllabus-summary-right">
+          <span class="syllabus-sec-tag">بخش ۲</span>
+          <span class="syllabus-sec-title">ساخت انواع و مباحث میانی</span>
+        </div>
+        <div class="syllabus-summary-left">
+          <span class="syllabus-ch-count">۳ فصل</span>
+          <svg class="syllabus-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </div>
+      </summary>
+      <ul class="syllabus-chapters-list">
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book1/Book/03/Creating-Types-in-CSharp/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">۰۳</span>
+              <span class="ch-name-text">ساخت انواع در سی‌شارپ</span>
+            </div>
+            <div class="ch-action-side">
+              <span>مطالعه فصل</span>
+              <span>←</span>
+            </div>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book1/Book/04/Advanced-CSharp/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">۰۴</span>
+              <span class="ch-name-text">سی‌شارپ پیشرفته</span>
+            </div>
+            <div class="ch-action-side">
+              <span>مطالعه فصل</span>
+              <span>←</span>
+            </div>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book1/Book/05/.NET-Overview/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">۰۵</span>
+              <span class="ch-name-text">نمای کلی فریم‌ورک دات‌نت</span>
+            </div>
+            <div class="ch-action-side">
+              <span>مطالعه فصل</span>
+              <span>←</span>
+            </div>
+          </a>
+        </li>
+      </ul>
+    </details>
+
+    <!-- بخش ۳ -->
+    <details class="syllabus-accordion-card">
+      <summary class="syllabus-summary-head">
+        <div class="syllabus-summary-right">
+          <span class="syllabus-sec-tag">بخش ۳</span>
+          <span class="syllabus-sec-title">مفاهیم داده و LINQ</span>
+        </div>
+        <div class="syllabus-summary-left">
+          <span class="syllabus-ch-count">۴ فصل</span>
+          <svg class="syllabus-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </div>
+      </summary>
+      <ul class="syllabus-chapters-list">
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book1/Book/06/.NET-Fundamentals/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">۰۶</span>
+              <span class="ch-name-text">مبانی دات‌نت</span>
+            </div>
+            <div class="ch-action-side">
+              <span>مطالعه فصل</span>
+              <span>←</span>
+            </div>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book1/Book/07/Collections/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">۰۷</span>
+              <span class="ch-name-text">مجموعه‌ها <span class="ch-en-sub" dir="ltr">Collections</span></span>
+            </div>
+            <div class="ch-action-side">
+              <span>مطالعه فصل</span>
+              <span>←</span>
+            </div>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book1/Book/08/LINQ-Queries/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">۰۸</span>
+              <span class="ch-name-text">کوئری‌های LINQ</span>
+            </div>
+            <div class="ch-action-side">
+              <span>مطالعه فصل</span>
+              <span>←</span>
+            </div>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book1/Book/09/LINQ-Operators/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">۰۹</span>
+              <span class="ch-name-text">عملگرهای LINQ</span>
+            </div>
+            <div class="ch-action-side">
+              <span>مطالعه فصل</span>
+              <span>←</span>
+            </div>
+          </a>
+        </li>
+      </ul>
+    </details>
+
+    <!-- بخش ۴ -->
+    <details class="syllabus-accordion-card">
+      <summary class="syllabus-summary-head">
+        <div class="syllabus-summary-right">
+          <span class="syllabus-sec-tag">بخش ۴</span>
+          <span class="syllabus-sec-title">مباحث پیشرفته و ویژه</span>
+        </div>
+        <div class="syllabus-summary-left">
+          <span class="syllabus-ch-count">۵ فصل</span>
+          <svg class="syllabus-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </div>
+      </summary>
+      <ul class="syllabus-chapters-list">
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book1/Book/10/LINQ-to-XML/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">۱۰</span>
+              <span class="ch-name-text">LINQ به XML</span>
+            </div>
+            <div class="ch-action-side">
+              <span>مطالعه فصل</span>
+              <span>←</span>
+            </div>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book1/Book/11/Other-XML-and-JSON/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">۱۱</span>
+              <span class="ch-name-text">دیگر فرمت‌های XML و JSON</span>
+            </div>
+            <div class="ch-action-side">
+              <span>مطالعه فصل</span>
+              <span>←</span>
+            </div>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book1/Book/12/Disposal-and-Garbage-Collection/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">۱۲</span>
+              <span class="ch-name-text">آزادسازی منابع و Garbage Collection</span>
+            </div>
+            <div class="ch-action-side">
+              <span>مطالعه فصل</span>
+              <span>←</span>
+            </div>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book1/Book/13/Diagnostics/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">۱۳</span>
+              <span class="ch-name-text">عیب‌یابی و Diagnostics</span>
+            </div>
+            <div class="ch-action-side">
+              <span>مطالعه فصل</span>
+              <span>←</span>
+            </div>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book1/Book/14/Concurrency-and-Asynchrony/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">۱۴</span>
+              <span class="ch-name-text">همزمانی و برنامه‌نویسی ناهمگام</span>
+            </div>
+            <div class="ch-action-side">
+              <span>مطالعه فصل</span>
+              <span>←</span>
+            </div>
+          </a>
+        </li>
+      </ul>
+    </details>
+
+    <!-- بخش ۵ -->
+    <details class="syllabus-accordion-card">
+      <summary class="syllabus-summary-head">
+        <div class="syllabus-summary-right">
+          <span class="syllabus-sec-tag">بخش ۵</span>
+          <span class="syllabus-sec-title">عمیق‌تر در مفاهیم متنوع</span>
+        </div>
+        <div class="syllabus-summary-left">
+          <span class="syllabus-ch-count">۴ فصل</span>
+          <svg class="syllabus-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </div>
+      </summary>
+      <ul class="syllabus-chapters-list">
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book1/Book/15/Streams-and-IO/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">۱۵</span>
+              <span class="ch-name-text">جریان‌ها و I/O</span>
+            </div>
+            <div class="ch-action-side">
+              <span>مطالعه فصل</span>
+              <span>←</span>
+            </div>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book1/Book/16/Networking/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">۱۶</span>
+              <span class="ch-name-text">شبکه‌سازی در دات‌نت</span>
+            </div>
+            <div class="ch-action-side">
+              <span>مطالعه فصل</span>
+              <span>←</span>
+            </div>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book1/Book/17/Assemblies/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">۱۷</span>
+              <span class="ch-name-text">اسمبلی‌ها و ماژول‌ها</span>
+            </div>
+            <div class="ch-action-side">
+              <span>مطالعه فصل</span>
+              <span>←</span>
+            </div>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book1/Book/18/Reflection-and-Metadata/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">۱۸</span>
+              <span class="ch-name-text">Reflection و متادیتا</span>
+            </div>
+            <div class="ch-action-side">
+              <span>مطالعه فصل</span>
+              <span>←</span>
+            </div>
+          </a>
+        </li>
+      </ul>
+    </details>
+
+    <!-- بخش ۶ -->
+    <details class="syllabus-accordion-card">
+      <summary class="syllabus-summary-head">
+        <div class="syllabus-summary-right">
+          <span class="syllabus-sec-tag">بخش ۶</span>
+          <span class="syllabus-sec-title">پیشرفته‌تر و تخصصی</span>
+        </div>
+        <div class="syllabus-summary-left">
+          <span class="syllabus-ch-count">۷ فصل</span>
+          <svg class="syllabus-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </div>
+      </summary>
+      <ul class="syllabus-chapters-list">
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book1/Book/19/Dynamic-Programming/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">۱۹</span>
+              <span class="ch-name-text">برنامه‌نویسی داینامیک</span>
+            </div>
+            <div class="ch-action-side">
+              <span>مطالعه فصل</span>
+              <span>←</span>
+            </div>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book1/Book/20/Cryptography/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">۲۰</span>
+              <span class="ch-name-text">رمزنگاری و امنیت</span>
+            </div>
+            <div class="ch-action-side">
+              <span>مطالعه فصل</span>
+              <span>←</span>
+            </div>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book1/Book/21/Advanced-Threading/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">۲۱</span>
+              <span class="ch-name-text">رشته‌بندی پیشرفته <span class="ch-en-sub" dir="ltr">Advanced Threading</span></span>
+            </div>
+            <div class="ch-action-side">
+              <span>مطالعه فصل</span>
+              <span>←</span>
+            </div>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book1/Book/22/Parallel-Programming/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">۲۲</span>
+              <span class="ch-name-text">برنامه‌نویسی موازی <span class="ch-en-sub" dir="ltr">Parallel Programming</span></span>
+            </div>
+            <div class="ch-action-side">
+              <span>مطالعه فصل</span>
+              <span>←</span>
+            </div>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book1/Book/23/SpanT-and-MemoryT/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">۲۳</span>
+              <span class="ch-name-text"><span class="ch-en-sub" dir="ltr">Span&lt;T&gt;</span> و <span class="ch-en-sub" dir="ltr">Memory&lt;T&gt;</span></span>
+            </div>
+            <div class="ch-action-side">
+              <span>مطالعه فصل</span>
+              <span>←</span>
+            </div>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book1/Book/24/Native-and-COM-Interoperability/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">۲۴</span>
+              <span class="ch-name-text">کد بومی و سازگاری با <span class="ch-en-sub" dir="ltr">COM</span></span>
+            </div>
+            <div class="ch-action-side">
+              <span>مطالعه فصل</span>
+              <span>←</span>
+            </div>
+          </a>
+        </li>
+        <li class="syllabus-chapter-item">
+          <a href="{{ '/books/book1/Book/25/Regular-Expressions/' | url }}">
+            <div class="ch-info-side">
+              <span class="ch-num-badge">۲۵</span>
+              <span class="ch-name-text">عبارات منظم <span class="ch-en-sub" dir="ltr">Regex</span></span>
+            </div>
+            <div class="ch-action-side">
+              <span>مطالعه فصل</span>
+              <span>←</span>
+            </div>
+          </a>
+        </li>
+      </ul>
+    </details>
   </section>
+</div>
 
-  <section id="chapters" class="book-chapters">
-    <h2> فهرست سرفصل‌ها</h2>
-
-    <details open>
-      <summary>بخش ۱ — مقدمات و مفاهیم پایه</summary>
-      <ul>
-        <li><a href="{{ '/books/book1/Book/00/Preface/' | url }}"><span class="chapter-box">0</span> مقدمه</a></li>
-        <li><a href="{{ '/books/book1/Book/01/Introducing-CSharp-and-.NET/' | url }}"><span class="chapter-box">1</span>
-            معرفی سی‌شارپ و دات‌نت</a></li>
-        <li><a href="{{ '/books/book1/Book/02/CSharp-Language-Basics/' | url }}"><span class="chapter-box">2</span>
-            مبانی
-            زبان سی‌شارپ</a></li>
-      </ul>
-    </details>
-
-    <details>
-      <summary>بخش ۲ — ساخت انواع و مباحث میانی</summary>
-      <ul>
-        <li><a href="{{ '/books/book1/Book/03/Creating-Types-in-CSharp/' | url }}"><span class="chapter-box">3</span>
-            ساخت
-            انواع در سی‌شارپ</a></li>
-        <li><a href="{{ '/books/book1/Book/04/Advanced-CSharp/' | url }}"><span class="chapter-box">4</span> سی‌شارپ
-            پیشرفته</a></li>
-        <li><a href="{{ '/books/book1/Book/05/.NET-Overview/' | url }}"><span class="chapter-box">5</span> نمای کلی
-            دات‌نت</a></li>
-      </ul>
-    </details>
-
-    <details>
-      <summary>بخش ۳ — مفاهیم داده و LINQ</summary>
-      <ul>
-        <li><a href="{{ '/books/book1/Book/06/.NET-Fundamentals/' | url }}"><span class="chapter-box">6</span> مبانی
-            دات‌نت</a></li>
-        <li><a href="{{ '/books/book1/Book/07/Collections/' | url }}"><span class="chapter-box">7</span> مجموعه‌ها</a>
-        </li>
-        <li><a href="{{ '/books/book1/Book/08/LINQ-Queries/' | url }}"><span class="chapter-box">8</span> کوئری‌های
-            LINQ</a></li>
-        <li><a href="{{ '/books/book1/Book/09/LINQ-Operators/' | url }}"><span class="chapter-box">9</span> عملگرهای
-            LINQ</a></li>
-      </ul>
-    </details>
-
-    <details>
-      <summary>بخش ۴ — مباحث پیشرفته و ویژه</summary>
-      <ul>
-        <li><a href="{{ '/books/book1/Book/10/LINQ-to-XML/' | url }}"><span class="chapter-box">10</span> LINQ به
-            XML</a>
-        </li>
-        <li><a href="{{ '/books/book1/Book/11/Other-XML-and-JSON/' | url }}"><span class="chapter-box">11</span> دیگر
-            XML
-            و JSON</a></li>
-        <li><a href="{{ '/books/book1/Book/12/Disposal-and-Garbage-Collection/' | url }}"><span
-              class="chapter-box">12</span> حذف منابع و جمع‌آوری زباله</a></li>
-        <li><a href="{{ '/books/book1/Book/13/Diagnostics/' | url }}"><span class="chapter-box">13</span> عیب‌یابی</a>
-        </li>
-        <li><a href="{{ '/books/book1/Book/14/Concurrency-and-Asynchrony/' | url }}"><span class="chapter-box">14</span>
-            همزمانی و ناهمگامی</a></li>
-      </ul>
-    </details>
-
-    <details>
-      <summary>بخش ۵ — عمیق‌تر در مفاهیم متنوع</summary>
-      <ul>
-        <li><a href="{{ '/books/book1/Book/15/Streams-and-IO/' | url }}"><span class="chapter-box">15</span> جریان‌ها و
-            I/O</a></li>
-        <li><a href="{{ '/books/book1/Book/16/Networking/' | url }}"><span class="chapter-box">16</span> شبکه‌سازی</a>
-        </li>
-        <li><a href="{{ '/books/book1/Book/17/Assemblies/' | url }}"><span class="chapter-box">17</span> اسمبلی‌ها</a>
-        </li>
-        <li><a href="{{ '/books/book1/Book/18/Reflection-and-Metadata/' | url }}"><span class="chapter-box">18</span>
-            بازتاب و متادیتا</a></li>
-      </ul>
-    </details>
-
-    <details>
-      <summary>بخش ۶ — پیشرفته‌تر و تخصصی</summary>
-      <ul>
-        <li><a href="{{ '/books/book1/Book/19/Dynamic-Programming/' | url }}"><span class="chapter-box">19</span>
-            برنامه‌نویسی داینامیک</a></li>
-        <li><a href="{{ '/books/book1/Book/20/Cryptography/' | url }}"><span class="chapter-box">20</span> رمزنگاری</a>
-        </li>
-        <li><a href="{{ '/books/book1/Book/21/Advanced-Threading/' | url }}"><span class="chapter-box">21</span>
-            رشته‌بندی
-            پیشرفته</a></li>
-        <li><a href="{{ '/books/book1/Book/22/Parallel-Programming/' | url }}"><span class="chapter-box">22</span>
-            برنامه‌نویسی موازی</a></li>
-        <li><a href="{{ '/books/book1/Book/23/SpanT-and-MemoryT/' | url }}"><span class="chapter-box">23</span>
-            Span&lt;T&gt; و Memory&lt;T&gt;</a></li>
-        <li><a href="{{ '/books/book1/Book/24/Native-and-COM/' | url }}"><span class="chapter-box">24</span> کد بومی و
-            COM</a></li>
-        <li><a href="{{ '/books/book1/Book/25/Regular-Expressions/' | url }}"><span class="chapter-box">25</span> عبارات
-            باقاعده</a></li>
-      </ul>
-    </details>
-  </section>
-
-  <script>
-    // باز/بستن مودال
-    const modal = document.getElementById('donateModal');
-    document.getElementById('openDonate').addEventListener('click', () => modal.style.display = 'block');
-    document.getElementById('closeDonate').addEventListener('click', () => modal.style.display = 'none');
-    modal.querySelector('.donate-overlay').addEventListener('click', () => modal.style.display = 'none');
-
-    // کپی با بازخورد
-    document.querySelectorAll('.copy-btn').forEach(btn =>
-    {
-      btn.addEventListener('click', async () =>
-      {
-        try
-        {
-          await navigator.clipboard.writeText(btn.dataset.copy || '');
-          const old = btn.textContent;
-          btn.textContent = 'کپی شد ✓';
-          btn.disabled = true;
-          setTimeout(() =>
-          {
-            btn.textContent = old;
-            btn.disabled = false;
-          }, 1600);
-        } catch (e)
-        {
-          alert('کپی نشد. دستی کپی کنید 🙏');
-        }
-      });
+<script>
+(() => {
+  const toggleBtn = document.getElementById('toggleAllChaptersBtn');
+  if (!toggleBtn) return;
+  let allOpen = false;
+  toggleBtn.addEventListener('click', () => {
+    allOpen = !allOpen;
+    document.querySelectorAll('.syllabus-accordion-card').forEach(acc => {
+      acc.open = allOpen;
     });
-  </script>
-  <script>
-    // 🎯 تول‌تیپ برای فایل اصلی
-    const downloadBtn = document.getElementById("mainDownload");
-    const tooltip = document.getElementById("tooltipDownload");
-
-    downloadBtn.addEventListener("click", (e) =>
-    {
-      e.preventDefault();
-      const link = downloadBtn.dataset.link;
-
-      tooltip.classList.add("show");
-
-      setTimeout(() =>
-      {
-        tooltip.classList.remove("show");
-
-        // شروع دانلود
-        const a = document.createElement("a");
-        a.href = link;
-        a.download = "";
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-      }, 2000);
-    });
-
-    // 🎯 هدایت به صفحه پرداخت (فایل فارسی)
-    const faDownload = document.getElementById("faDownload");
-    faDownload.addEventListener("click", () =>
-    {
-      const link = faDownload.dataset.link;
-      window.open(link, "_blank"); // باز شدن در تب جدید
-    });
-  </script>
-  <script>
-    (() =>
-    {
-      // قیمت — اگر خواستی عوض کنی فقط این را تغییر بده
-      const PRICE = 250000;
-
-      const byId = id => document.getElementById(id);
-      const setSheet = (id, open) => byId(id).setAttribute('aria-hidden', open ? 'false' : 'true');
-
-      // دکمه فایل فارسی -> مودال اصلی
-      const faBuy = byId('faBuy');
-      const payModal = byId('payModal');
-      if (faBuy) faBuy.addEventListener('click', () => setSheet('payModal', true));
-
-      // قیمت را به حروف فارسی با جداکننده تنظیم کن
-      const faPrice = byId('faPrice');
-      if (faPrice) faPrice.textContent = PRICE.toLocaleString('fa-IR');
-
-      // بازکردن مودال‌های تو در تو بدون بستن والد
-      byId('openCardPay')?.addEventListener('click', () => setSheet('cardModal', true));
-      byId('openCryptoPay')?.addEventListener('click', () => setSheet('cryptoModal', true));
-
-      // بستن با کلیک روی اوورلی یا دکمه ×
-      document.addEventListener('click', (e) =>
-      {
-        const btn = e.target.closest('[data-close]');
-        if (!btn) return;
-        const id = btn.getAttribute('data-close');
-        setSheet(id, false);
-      });
-
-      // کپی کلیپ‌بورد با بازخورد
-      document.querySelectorAll('.copy-btn').forEach(btn =>
-      {
-        btn.addEventListener('click', async () =>
-        {
-          try
-          {
-            await navigator.clipboard.writeText(btn.dataset.copy || '');
-            const old = btn.textContent;
-            btn.textContent = 'کپی شد ✓';
-            btn.disabled = true;
-            setTimeout(() => { btn.textContent = old; btn.disabled = false; }, 1400);
-          } catch { alert('کپی نشد؛ لطفاً دستی کپی کنید.'); }
-        });
-      });
-
-      // پیش‌نمایش (گوگل‌درایو)
-      const previewModal = byId('previewModal');
-      const previewFrame = byId('previewFrame');
-      byId('openPreview')?.addEventListener('click', () =>
-      {
-        // اگر لازم شد، اینجا می‌توانی FILE_ID را پویا ست کنی
-        setSheet('previewModal', true);
-      });
-
-      // پرینت محتوای iframe
-      byId('printPreview')?.addEventListener('click', () =>
-      {
-        const fileUrl = 'https://drive.google.com/file/d/15uL5atFVgfndC4g9b8xWDkg08Gh8avsb/view';
-        window.open(fileUrl, '_blank');
-      });
-
-      document.addEventListener('click', e =>
-      {
-        if (e.target.dataset.close === 'previewModal')
-        {
-          previewFrame.src = ''; // پاک‌کردن iframe هنگام بستن
-          setTimeout(() =>
-          {
-            previewFrame.src = 'https://drive.google.com/file/d/15uL5atFVgfndC4g9b8xWDkg08Gh8avsb/preview';
-          }, 300);
-        }
-      });
-
-      // ESC برای بستن نزدیک‌ترین شیت باز
-      document.addEventListener('keydown', e =>
-      {
-        if (e.key !== 'Escape') return;
-        // اولویت: پیش‌نمایش، بعد nested ها، بعد اصلی
-        if (previewModal.getAttribute('aria-hidden') === 'false') return setSheet('previewModal', false);
-        if (byId('cryptoModal').getAttribute('aria-hidden') === 'false') return setSheet('cryptoModal', false);
-        if (byId('cardModal').getAttribute('aria-hidden') === 'false') return setSheet('cardModal', false);
-        if (payModal.getAttribute('aria-hidden') === 'false') return setSheet('payModal', false);
-      });
-    })();
-  </script>
-</body>
-
-</html>
+    toggleBtn.innerHTML = allOpen ? '<span>🔺 بستن همه</span>' : '<span>🔻 باز کردن همه</span>';
+  });
+})();
+</script>

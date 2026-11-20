@@ -1,0 +1,373 @@
+<!doctype html><html lang="fa" dir="rtl"> <head><script>
+    if (window.location.pathname.startsWith('/gitab/')) {
+      window.location.replace(window.location.pathname.replace(/^\/gitab\//i, '/Gitab/') + window.location.search + window.location.hash);
+    }
+    (() => {
+      try {
+        const t = localStorage.getItem('gitab-theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', t);
+        document.documentElement.dataset.colorMode = t;
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        document.documentElement.dataset.colorMode = 'dark';
+      }
+    })();
+  </script> <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5"> <title>۱۰۲.۴ مدیریت بسته‌ها در دبیان و اوبونتو (APT و DPKG)</title><meta name="description" content="۱۰۲.۴ مدیریت بسته‌ها در دبیان و اوبونتو (APT و DPKG) — مطالعه آنلاین و رایگان از کتاب «راهنمای آزمون LPIC-1 (ورژن ۵۰۰)» (LPIC-1 Study Guide (Version 500)) اثر جادی میرمیرانی با ترجمه جادی میرمیرانی در گیتاب."> <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"><meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"> <meta name="theme-color" content="#090d16"><meta name="referrer" content="strict-origin-when-cross-origin"> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https:; frame-src https://www.youtube.com https://www.youtube-nocookie.com https://maps.google.com https://www.google.com; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self';"><link rel="icon" type="image/png" href="/Gitab/favicon.png"> <link rel="canonical" href="https://hheydarian.github.io/Gitab/books/book13/Book/09/1024-use-debian-package-management/"><link rel="alternate" hreflang="fa" href="https://hheydarian.github.io/Gitab/books/book13/Book/09/1024-use-debian-package-management/"> <link rel="alternate" hreflang="x-default" href="https://hheydarian.github.io/Gitab/books/book13/Book/09/1024-use-debian-package-management/"><link rel="alternate" type="text/plain" title="LLMs.txt" href="/Gitab/llms.txt"> <link rel="sitemap" type="application/xml" title="Sitemap" href="/Gitab/sitemap.xml"><meta property="og:locale" content="fa_IR"> <meta property="og:type" content="article"><meta property="og:site_name" content="گیتاب | Gitab"> <meta property="og:title" content="۱۰۲.۴ مدیریت بسته‌ها در دبیان و اوبونتو (APT و DPKG)"><meta property="og:description" content="۱۰۲.۴ مدیریت بسته‌ها در دبیان و اوبونتو (APT و DPKG) — مطالعه آنلاین و رایگان از کتاب «راهنمای آزمون LPIC-1 (ورژن ۵۰۰)» (LPIC-1 Study Guide (Version 500)) اثر جادی میرمیرانی با ترجمه جادی میرمیرانی در گیتاب."> <meta property="og:url" content="https://hheydarian.github.io/Gitab/books/book13/Book/09/1024-use-debian-package-management/"><meta property="og:image" content="https://hheydarian.github.io/Gitab/images/lpic1book/Cover.jpg"> <meta property="og:image:alt" content="۱۰۲.۴ مدیریت بسته‌ها در دبیان و اوبونتو (APT و DPKG)"><meta name="twitter:card" content="summary_large_image"> <meta name="twitter:title" content="۱۰۲.۴ مدیریت بسته‌ها در دبیان و اوبونتو (APT و DPKG)"><meta name="twitter:description" content="۱۰۲.۴ مدیریت بسته‌ها در دبیان و اوبونتو (APT و DPKG) — مطالعه آنلاین و رایگان از کتاب «راهنمای آزمون LPIC-1 (ورژن ۵۰۰)» (LPIC-1 Study Guide (Version 500)) اثر جادی میرمیرانی با ترجمه جادی میرمیرانی در گیتاب."> <meta name="twitter:image" content="https://hheydarian.github.io/Gitab/images/lpic1book/Cover.jpg"><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://hheydarian.github.io/Gitab/#organization","name":"گیتاب | Gitab","alternateName":"Gitab","url":"https://hheydarian.github.io/Gitab/","logo":{"@type":"ImageObject","url":"https://hheydarian.github.io/Gitab/favicon.png"},"sameAs":["https://github.com/hheydarian/Gitab"]},{"@type":"WebSite","@id":"https://hheydarian.github.io/Gitab/#website","url":"https://hheydarian.github.io/Gitab/","name":"گیتاب | Gitab","inLanguage":"fa-IR","publisher":{"@id":"https://hheydarian.github.io/Gitab/#organization"},"potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://hheydarian.github.io/Gitab/books/list-books/?q={search_term_string}"},"query-input":"required name=search_term_string"}},{"@type":"WebPage","@id":"https://hheydarian.github.io/Gitab/books/book13/Book/09/1024-use-debian-package-management/#webpage","url":"https://hheydarian.github.io/Gitab/books/book13/Book/09/1024-use-debian-package-management/","name":"۱۰۲.۴ مدیریت بسته‌ها در دبیان و اوبونتو (APT و DPKG)","description":"۱۰۲.۴ مدیریت بسته‌ها در دبیان و اوبونتو (APT و DPKG) — مطالعه آنلاین و رایگان از کتاب «راهنمای آزمون LPIC-1 (ورژن ۵۰۰)» (LPIC-1 Study Guide (Version 500)) اثر جادی میرمیرانی با ترجمه جادی میرمیرانی در گیتاب.","inLanguage":"fa-IR","isPartOf":{"@id":"https://hheydarian.github.io/Gitab/#website"}},{"@type":"TechArticle","headline":"۱۰۲.۴ مدیریت بسته‌ها در دبیان و اوبونتو (APT و DPKG)","description":"۱۰۲.۴ مدیریت بسته‌ها در دبیان و اوبونتو (APT و DPKG) — مطالعه آنلاین و رایگان از کتاب «راهنمای آزمون LPIC-1 (ورژن ۵۰۰)» (LPIC-1 Study Guide (Version 500)) اثر جادی میرمیرانی با ترجمه جادی میرمیرانی در گیتاب.","url":"https://hheydarian.github.io/Gitab/books/book13/Book/09/1024-use-debian-package-management/","inLanguage":"fa-IR","isAccessibleForFree":true,"author":{"@type":"Person","name":"جادی میرمیرانی"},"translator":{"@type":"Person","name":"جادی میرمیرانی"},"isPartOf":{"@type":"Book","name":"راهنمای آزمون LPIC-1 (ورژن ۵۰۰)","alternateName":"LPIC-1 Study Guide (Version 500)","url":"https://hheydarian.github.io/Gitab/books/book13/"}}]}</script> <link rel="preload" href="/Gitab/fonts/Vazirmatn.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/Gitab/styles/main.css?v=2.4" as="style"> <link rel="preload" href="/Gitab/styles/gitab-modern.css?v=2.5" as="style"><style>@font-face{font-family:'Lalezar';src:url('/Gitab/fonts/Lalezar.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}@font-face{font-family:'Vazirmatn';src:url('/Gitab/fonts/Vazirmatn.woff2') format('woff2');font-weight:100 900;font-style:normal;font-display:swap}html,body,button,input,optgroup,select,textarea,.filter-pill{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}input::placeholder,textarea::placeholder{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}</style> <link rel="stylesheet" href="/Gitab/styles/main.css?v=2.4"><link rel="stylesheet" href="/Gitab/styles/gitab-modern.css?v=2.5"> <link rel="stylesheet" href="/Gitab/styles/vendor/github-dark.min.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="/Gitab/styles/vendor/github-dark.min.css"></noscript></head> <body><header class="header"> <div class="container nav-wrap"><a href="/Gitab/" class="brand" aria-label="صفحه اصلی گیتاب"> <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="30" height="30" decoding="async"> <span class="brand-text">Gitab</span> </a> <nav class="nav" id="mainNav"><a href="/Gitab/" >خانه</a> <a href="/Gitab/books/list-books" aria-current="page">کتاب‌ها</a> <a href="/Gitab/courses/" >دوره‌ها</a> <a href="/Gitab/translator.html" >مترجمین</a></nav> <div class="nav-actions"><button id="themeToggle" class="theme-toggle-btn" aria-label="تغییر تم" title="تغییر تم"> <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن" width="18" height="18" decoding="async" style="display:none"> <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک" width="18" height="18" decoding="async"> </button> <a class="btn-github-pill" href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" title="مشاهده سورس گیتاب در گیت‌هاب"> <img src="/Gitab/icone/github.svg" alt="GitHub" width="16" height="16" decoding="async"> <span>گیت‌هاب</span> </a> <button class="mobile-menu-btn" id="mobileMenuBtn" type="button" aria-label="باز کردن منو" aria-expanded="false"> <svg class="mob-icon-open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="4" y1="7" x2="20" y2="7"></line> <line x1="4" y1="12" x2="20" y2="12"></line> <line x1="4" y1="17" x2="14" y2="17"></line> </svg> <svg class="mob-icon-close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="18" y1="6" x2="6" y2="18"></line> <line x1="6" y1="6" x2="18" y2="18"></line> </svg> </button></div> </div><div class="mobile-drawer" id="mobileDrawer" aria-hidden="true"> <div class="mobile-drawer-inner"><div class="mobile-drawer-section-label">ناوبری سریع</div><nav class="mobile-drawer-links" aria-label="منوی موبایل"> <a href="/Gitab/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M3 10.5 12 3l9 7.5"></path> <path d="M5 9.5V20a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V9.5"></path> </svg> </span> <span class="mob-nav-text">صفحه نخست</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/books/list-books" class="mobile-drawer-link active" aria-current="page"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path> </svg> </span> <span class="mob-nav-text">کتابخانه و فهرست کتاب‌ها</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/courses/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path> <path d="M6 12v5c3 3 9 3 12 0v-5"></path> </svg> </span> <span class="mob-nav-text">دوره‌های آموزشی</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/translator.html" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path> <circle cx="9" cy="7" r="4"></circle> <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path> <path d="M16 3.13a4 4 0 0 1 0 7.75"></path> </svg> </span> <span class="mob-nav-text">مترجمین و همکاران</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> </nav><div class="mobile-drawer-divider"></div><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" class="mobile-drawer-link mobile-drawer-gh"> <span class="mob-nav-icon" aria-hidden="true"> <img src="/Gitab/icone/github.svg" alt="" width="17" height="17" loading="lazy" decoding="async"> </span> <span class="mob-nav-text">مخزن گیت‌هاب پروژه</span> <span class="mob-nav-ext" aria-hidden="true">↗</span> </a> </div></div> </header><div class="reading-progress-track"> <div class="reading-progress-fill" id="readingProgressBar"></div></div> <main class="site-main chapter-reading-page"><div class="chapter-page-wrapper"> <nav class="chapter-clean-breadcrumb" aria-label="مسیر راهنما" dir="rtl"><a href="/Gitab/">خانه</a> <span class="bc-sep" aria-hidden="true">/</span> <a href="/Gitab/books/list-books/">کتاب‌ها</a> <span class="bc-sep" aria-hidden="true">/</span> <a href="/Gitab/books/book13/"><bdi>راهنمای آزمون LPIC-1</bdi></a> <span class="bc-sep" aria-hidden="true">/</span> <span class="bc-current-leaf"><bdi>۱۰۲.۴ مدیریت بسته‌ها در دبیان و اوبونتو (APT و DPKG)</bdi></span></nav> <article class="chapter-prose-container markdown-body" id="chapterArticle" dir="rtl"><h1>۱۰۲.۴ مدیریت بسته‌ها در دبیان و اوبونتو (APT و DPKG)</h1><div class="callout callout-info" style="background: rgba(59, 130, 246, 0.08); border-right: 4px solid #3b82f6; padding: 16px 20px; border-radius: 8px; margin-bottom: 24px;"> <strong>خلاصه هدف آزمون:</strong> دستورات dpkg، apt-get، apt-cache، تنظیم مخازن در sources.list و رفع مشکلات وابستگی. </div><div class="video-container" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; border-radius: 12px; margin: 24px 0; border: 1px solid var(--g-border-dim);"> <iframe src="https://www.youtube.com/embed/jtwbweigRxo" title="ویدئوی آموزشی جادی برای این سرفصل" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen></iframe></div> <h2>🎯 اهداف و سرفصل‌های این بخش</h2><p>در این درسنامه موارد زیر را بررسی و مرور می‌کنیم:</p><ul> <li>مفاهیم کلیدی مورد پرسش در آزمون بین‌المللی LPIC-1</li><li>دستورات، فایل‌های پیکربندی و ابزارهای مرتبط در خط فرمان</li><li>نکات پرتکرار آزمون‌های ۱۰۱ و ۱۰۲ همراه با نمونه‌های کاربردی</li></ul> <hr><h2>📝 متن درسنامه و توضیحات تکمیلی</h2><p><strong>ضریب اهمیت در آزمون (Weight):</strong> ۳</p><p><strong>شرح هدف آزمون:</strong> داوطلبان باید بتوانند مدیریت بسته‌ها را با استفاده از ابزارهای مدیریت بسته دبیان انجام دهند.</p><h2>سرفصل‌های کلیدی دانش</h2><ul> <li>نصب، ارتقا و حذف بسته‌های باینری دبیان</li><li>پیدا کردن بسته‌هایی که شامل فایل‌ها یا کتابخانه‌های خاصی هستند (چه نصب شده باشند و چه نباشند)</li><li>به‌دست‌آوردن اطلاعات بسته مثل نسخه، محتوا، وابستگی‌ها، یکپارچگی بسته و وضعیت نصب (صرف‌نظر از اینکه بسته نصب باشد یا نه)</li><li>آشنایی با دستور <code>apt</code></li></ul> <h2>اصطلاحات و ابزارها</h2><ul> <li>فایل <code>/etc/apt/sources.list</code></li><li>دستور <code>dpkg</code></li><li>دستور <code>dpkg-reconfigure</code></li><li>دستور <code>apt-get</code></li><li>دستور <code>apt-cache</code></li></ul> <h2>مفهوم سیستم مدیریت بسته (Package Management System)</h2><p>بعضی‌ها فکر می‌کنند در گنو/لینوکس مجبوریم تمام نرم‌افزارهای مورد نیازمان را خودمان کامپایل کنیم. این تصور در ۹۹ درصد مواقع درست نیست و در ۲۰ سال گذشته هم هرگز این‌طور نبوده است. در واقع گنو/لینوکس پیش‌درآمد چیزی است که امروزه به آن «اپ استور» (App Store) می‌گوییم. تمام توزیع‌های بزرگ آرشیوهای عظیمی از نرم‌افزارهای ازپیش‌کامپایل‌شده دارند که به آن‌ها <strong>مخازن (Repositories)</strong> می‌گویند، و نوعی نرم‌افزار به نام <strong>مدیر بسته (Package Manager)</strong> دارند که کارهایی مثل جستجو در این مخازن، نصب نرم‌افزار از آن‌ها، پیدا کردن وابستگی‌ها، نصب آن‌ها، حل تداخل‌ها و به‌روزرسانی سیستم و برنامه‌های نصب‌شده را بر عهده می‌گیرد. توزیع‌های مبتنی بر دبیان از فایل‌های <code>.deb</code> به عنوان «بسته» (Package) استفاده می‌کنند و ابزارهایی مانند <code>apt-get</code>، <code>dpkg</code>، <code>apt</code> و موارد مشابه را برای مدیریت آن‌ها به کار می‌برند.</p><p>بسته‌های دبیان نام‌هایی به شکل <code>NAME_VERSION-RELEASE_ARCHITECTURE.deb</code> دارند؛ مثلاً <code>tmux_3.2a-4build1_amd64.deb</code>.</p><h2>مخازن (Repositories)</h2><p>اما این بسته از کجا آمده است؟ سیستم‌عامل چطور می‌فهمد برای پیدا کردن این بسته <code>.deb</code> کجا را بگردد؟ پاسخ <strong>مخازن (Repositories)</strong> است. هر توزیع مخزن بسته‌های خودش را دارد. این مخزن می‌تواند روی یک دیسک، یک درایو شبکه، مجموعه‌ای از DVDها، یا در رایج‌ترین حالت، یک آدرس اینترنتی باشد.</p><p>در سیستم‌های مبتنی بر دبیان، مسیرهای اصلی تنظیم مخازن عبارت‌اند از:</p><div dir="ltr"> <ul><li><code>/etc/apt/sources.list</code></li><li><code>/etc/apt/sources.list.d/</code></li></ul> </div><pre class="hljs"><code>jadi@lpicjadi:~$ cat /etc/apt/sources.list
+#deb cdrom:[Ubuntu 22.04 LTS _Jammy Jellyfish_ - Beta amd64 (20220329.1)]/ jammy main restricted
+
+# See http://help.ubuntu.com/community/UpgradeNotes for how to upgrade to
+# newer versions of the distribution.
+deb http://us.archive.ubuntu.com/ubuntu/ jammy main restricted
+# deb-src http://us.archive.ubuntu.com/ubuntu/ jammy main restricted
+
+## Major bug fix updates produced after the final release of the
+## distribution.
+deb http://us.archive.ubuntu.com/ubuntu/ jammy-updates main restricted
+# deb-src http://us.archive.ubuntu.com/ubuntu/ jammy-updates main restricted
+
+## N.B. software from this repository is ENTIRELY UNSUPPORTED by the Ubuntu
+## team. Also, please note that software in the universe WILL NOT receive any
+## review or updates from the Ubuntu security team.
+deb http://us.archive.ubuntu.com/ubuntu/ jammy universe
+# deb-src http://us.archive.ubuntu.com/ubuntu/ jammy universe
+deb http://us.archive.ubuntu.com/ubuntu/ jammy-updates universe
+# deb-src http://us.archive.ubuntu.com/ubuntu/ jammy-updates universe
+
+## N.B. software from this repository is ENTIRELY UNSUPPORTED by the Ubuntu
+## team, and may not be under a free license. Please satisfy yourself as to
+## your rights to use the software. Also, please note that the software in
+## multiverse WILL NOT receive any review or updates from the Ubuntu
+## security team.
+deb http://us.archive.ubuntu.com/ubuntu/ jammy multiverse
+# deb-src http://us.archive.ubuntu.com/ubuntu/ jammy multiverse
+deb http://us.archive.ubuntu.com/ubuntu/ jammy-updates multiverse
+# deb-src http://us.archive.ubuntu.com/ubuntu/ jammy-updates multiverse
+
+## N.B. software from this repository may not have been tested as
+## extensively as that contained in the main release, although it includes
+## newer versions of some applications which may provide useful features.
+## Also, please note that software in backports WILL NOT receive any review
+## or updates from the Ubuntu security team.
+deb http://us.archive.ubuntu.com/ubuntu/ jammy-backports main restricted universe multiverse
+# deb-src http://us.archive.ubuntu.com/ubuntu/ jammy-backports main restricted universe multiverse
+
+deb http://security.ubuntu.com/ubuntu jammy-security main restricted
+# deb-src http://security.ubuntu.com/ubuntu jammy-security main restricted
+deb http://security.ubuntu.com/ubuntu jammy-security universe
+# deb-src http://security.ubuntu.com/ubuntu jammy-security universe
+deb http://security.ubuntu.com/ubuntu jammy-security multiverse
+# deb-src http://security.ubuntu.com/ubuntu jammy-security multiverse
+
+# This system was installed using small removable media
+# (e.g. netinst, live or single CD). The matching &quot;deb cdrom&quot;
+# entries were disabled at the end of the installation process.
+# For information about how to configure apt package sources,
+# see the sources.list(5) manual.
+</code></pre> <p>برای به‌روزرسانی اطلاعات مخازن از دستور زیر استفاده می‌کنیم:</p><pre class="hljs"><code>apt-get update
+</code></pre> <p>این دستور تمام مخازن موجود در فایل‌های پیکربندی را بررسی می‌کند و فهرست اطلاعات مربوط به آخرین نسخه‌های نرم‌افزاری موجود در آن‌ها را به‌روزرسانی می‌کند.</p><blockquote> <p><strong>نکته:</strong> این کار نرم‌افزارهای شما را <strong>ارتقا (Upgrade)</strong> نمی‌دهد! دستور <code>update</code> فقط <strong>اطلاعات مربوط به بسته‌ها (فهرست مخازن) را به‌روز می‌کند، نه خود بسته‌های نصب‌شده را.</strong></p></blockquote> <h2>نصب بسته‌ها</h2><p>فرض کنید درباره یک تسهیم‌کننده ترمینال فوق‌العاده به نام <code>tmux</code> شنیده‌اید و می‌خواهید آن را امتحان کنید:</p><pre class="hljs"><code>$ tmux
+The program &#x27;tmux&#x27; is currently not installed. You can install it by typing:
+sudo apt-get install tmux
+$ which tmux
+$ type tmux
+bash: type: tmux: not found
+</code></pre> <p>پس بیایید نصبش کنیم. اگر بسته مورد نظر در مخازن موجود باشد، کافی است به مدیر بسته بگویید آن را نصب کند:</p><pre class="hljs"><code>apt-get install tmux
+</code></pre> <p>توجه داشته باشید که:</p><ul> <li>دستور <code>apt-get install</code> از شما تاییدیه (<code>Y</code>) می‌خواهد.</li><li>ابزار <code>apt-get</code> به صورت خودکار <strong>وابستگی‌ها (Dependencies)</strong> را حل می‌کند؛ یعنی می‌داند برای نصب این بسته به چه پیش‌نیازهایی احتیاج است و آن‌ها را هم نصب می‌کند.</li><li>بسته‌های دبیان فایل‌هایی با پسوند <code>.deb</code> هستند.</li></ul> <p>اگر فقط می‌خواهید یک شبیه‌سازی / تستِ بدون اعمال تغییر (Dry-run) انجام دهید:</p><pre class="hljs"><code>apt-get install -s tmux
+</code></pre> <p>و دستور زیر فقط فایل‌های مورد نیاز را در کش دانلود می‌کند، بدون اینکه آن‌ها را نصب کند:</p><pre class="hljs"><code>apt-get install --download-only tmux
+</code></pre> <p>بسته‌های دانلودشده به عنوان کش در مسیر <code>/var/cache/apt/archives/</code> (یا <code>/var/cache/apt/archive/</code>) ذخیره می‌شوند.</p><p>اگر می‌خواهید فقط یک بسته مشخص را در دایرکتوری فعلی دانلود کنید، می‌توانید بنویسید:</p><pre class="hljs"><code>apt-get download tmux
+</code></pre> <h2>حذف بسته‌های دبیان</h2><p>برای حذف یک بسته:</p><pre class="hljs"><code>apt-get remove tmux
+</code></pre> <p>و اگر می‌خواهید وابستگی‌هایی را که به صورت خودکار نصب شده بودند هم حذف کنید:</p><pre class="hljs"><code>$ apt-get autoremove tmux
+</code></pre> <p>یا حتی به شکل کلی:</p><pre class="hljs"><code>$ apt-get autoremove
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+The following packages will be REMOVED:
+  linux-image-3.16.0-25-generic linux-image-extra-3.16.0-25-generic
+0 upgraded, 0 newly installed, 2 to remove, and 0 not upgraded.
+After this operation, 203 MB of disk space will be freed.
+Do you want to continue? [Y/n] y
+</code></pre> <p>تا هر بسته غیرضروری و بلااستفاده‌ای را به صورت خودکار پاک کند.</p><p><strong>نکات:</strong></p><ul> <li>حذف کردن یک بسته با <code>remove</code> به صورت خودکار وابستگی‌های آن را حذف نمی‌کند.</li><li>اگر بخواهید یک وابستگی را حذف کنید، سیستم درباره بسته‌های دیگری که همراه آن حذف خواهند شد به شما هشدار می‌دهد.</li></ul> <h2>جستجو برای بسته‌ها</h2><p>اگر از مجموعه ابزارهای <code>apt</code> استفاده می‌کنید، جستجو از طریق <code>apt-cache</code> انجام می‌شود یا می‌توانید از دستور جدیدتر و عمومی <code>apt</code> استفاده کنید:</p><pre class="hljs"><code>$ apt-cache search <span class="hljs-string">&quot;tiny window&quot;</span>
+$ apt search grub2
+</code></pre> <h2>ارتقای بسته‌ها (Upgrading)</h2><p>برای به‌روزرسانی یک بسته خاص:</p><pre class="hljs"><code>apt-get install tzdata
+</code></pre> <p>و برای ارتقای تمام بسته‌های نصب‌شده روی سیستم:</p><pre class="hljs"><code>apt-get upgrade
+</code></pre> <p>یا برای ارتقا به یک نسخه جدیدتر از توزیع (و حل تغییرات پیچیده وابستگی‌ها):</p><pre class="hljs"><code>apt-get dist-upgrade
+</code></pre> <blockquote><p><strong>نکته:</strong> مثل بیشتر ابزارهای دیگر لینوکس، می‌توانید تنظیمات پیش‌فرض <code>apt</code> را در مسیر <code>/etc/apt/apt.conf</code> پیکربندی کنید و برنامه‌ای به نام <code>apt-config</code> نیز برای همین منظور وجود دارد.</p></blockquote> <h2>پیکربندی مجدد بسته‌ها</h2><p>بسته‌های دبیان می‌توانند <em>اقدامات پیکربندی</em> داشته باشند که بلافاصله پس از نصب بسته اجرا می‌شوند. این کار توسط <code>debconf</code> انجام می‌شود. مثلاً بسته <code>tzdata</code> پس از نصب درباره تنظیمات منطقه زمانی از شما سوال می‌پرسد. اگر بخواهید بسته‌ای را که از قبل نصب شده <strong>دوباره پیکربندی</strong> کنید، می‌توانید از دستور <code>dpkg-reconfigure</code> استفاده نمایید:</p><pre class="hljs"><code>dpkg-reconfigure tzdata
+</code></pre> <h2>دریافت اطلاعات بسته با <code>dpkg</code></h2><p>ابزار زیربنایی برای کار مستقیم با فایل‌های <code>.deb</code> دستور <code>dpkg</code> است. هر زمان بخواهید کارهای دستی روی یک بسته <code>.deb</code> انجام دهید، باید سراغ آن بروید. ساختار کلی آن این‌طور است:</p><pre class="hljs"><code>dpkg [OPTIONS] ACTION PACKAGE
+</code></pre> <p>برخی از عملیات پرکاربرد (<code>ACTION</code>) عبارت‌اند از:</p><table> <thead><tr> <th style="text-align:left">سوئیچ</th><th style="text-align:left">توضیحات</th></tr> </thead><tbody> <tr><td style="text-align:left"><code>-c</code> یا <code>--contents</code></td><td style="text-align:left">نمایش محتویات درون یک فایل <code>.deb</code></td></tr> <tr><td style="text-align:left"><code>-C</code> یا <code>--audit</code></td><td style="text-align:left">جستجوی بسته‌های نصب‌شده خراب یا ناقص و پیشنهاد راه‌حل</td></tr> <tr><td style="text-align:left"><code>--configure</code></td><td style="text-align:left">پیکربندی یک بسته بازشده (یا پیکربندی مجدد)</td></tr> <tr><td style="text-align:left"><code>-i</code> یا <code>--install</code></td><td style="text-align:left">نصب یا ارتقای یک بسته <code>.deb</code> (وابستگی‌ها را حل و نصب نمی‌کند!)</td></tr> <tr><td style="text-align:left"><code>-I</code> یا <code>--info</code></td><td style="text-align:left">نمایش اطلاعات کلی درباره یک فایل بسته <code>.deb</code></td></tr> <tr><td style="text-align:left"><code>-l</code> یا <code>--list</code></td><td style="text-align:left">فهرست کردن تمام بسته‌های نصب‌شده روی سیستم</td></tr> <tr><td style="text-align:left"><code>-L</code> یا <code>--listfiles</code></td><td style="text-align:left">فهرست کردن تمام فایل‌هایی که مربوط به این بسته هستند</td></tr> <tr><td style="text-align:left"><code>-P</code> یا <code>--purge</code></td><td style="text-align:left">حذف کامل بسته به همراه فایل‌های پیکربندی آن</td></tr> <tr><td style="text-align:left"><code>-r</code> یا <code>--remove</code></td><td style="text-align:left">حذف بسته، با نگه داشتن فایل‌های پیکربندی</td></tr> <tr><td style="text-align:left"><code>-s</code> یا <code>--status</code></td><td style="text-align:left">نمایش وضعیت و جزئیات یک بسته نصب‌شده</td></tr> <tr><td style="text-align:left"><code>-S</code> یا <code>--search</code></td><td style="text-align:left">جستجو برای پیدا کردن اینکه یک فایل مشخص متعلق به کدام بسته است</td></tr> </tbody></table> <p>می‌توانید محتویات یک فایل <code>.deb</code> را این‌طور بررسی کنید:</p><pre class="hljs"><code>jadi@lpicjadi:/tmp$ dpkg --contents bzr_2.7.0+bzr6622+brz_all.deb
+drwxr-xr-x root/root         0 2019-09-19 18:25 ./
+drwxr-xr-x root/root         0 2019-09-19 18:25 ./usr/
+drwxr-xr-x root/root         0 2019-09-19 18:25 ./usr/share/
+drwxr-xr-x root/root         0 2019-09-19 18:25 ./usr/share/doc/
+drwxr-xr-x root/root         0 2019-09-19 18:25 ./usr/share/doc/bzr/
+-rw-r--r-- root/root       404 2019-09-19 18:25 ./usr/share/doc/bzr/NEWS.Debian.gz
+-rw-r--r-- root/root      1301 2019-09-19 18:25 ./usr/share/doc/bzr/changelog.gz
+-rw-r--r-- root/root      1769 2019-09-19 18:25 ./usr/share/doc/bzr/copyright
+</code></pre> <p>یا یک بسته <code>.deb</code> را نصب کنید (بدون وابستگی‌هایش) یا وضعیت آن را ببینید:</p><pre class="hljs"><code>$ dpkg -s bzr
+Package: bzr
+Status: deinstall ok config-files
+Priority: optional
+Section: vcs
+Installed-Size: 102
+Maintainer: Ubuntu Developers &lt;ubuntu-devel-discuss@lists.ubuntu.com&gt;
+Architecture: all
+Version: 2.6.0+bzr6595-1ubuntu1
+Config-Version: 2.6.0+bzr6595-1ubuntu1
+Depends: python-bzrlib (&lt;= 2.6.0+bzr6595-1ubuntu1.1~), python-bzrlib (&gt;= 2.6.0+bzr6595-1ubuntu1), python:any
+Recommends: python-gpgme
+Suggests: bzr-doc, bzrtools, python-bzrlib.tests
+Breaks: bzr-pqm (&lt;&lt; 1.4.0~bzr80), bzr-xmloutput (&lt;&lt; 0.8.8+bzr160), python-bzrlib (&lt;&lt; 2.4.0~beta3~)
+Conffiles:
+ /etc/bash_completion.d/bzr b8d9ca95521a7c5f14860e205a854da2
+Description: easy to use distributed version control system
+ Bazaar is a distributed version control system designed to be easy to
+ use and intuitive, able to adapt to many workflows, reliable, and
+ easily extendable.
+ .
+ Publishing of branches can be done over plain HTTP, that is, no special
+ software is needed on the server to host Bazaar branches. Branches can
+ be pushed to the server via sftp (which most SSH installations come
+ with), FTP, or over a custom and faster protocol if bzr is installed in
+ the remote end.
+ .
+ Merging in Bazaar is easy, as the implementation can avoid many
+ spurious conflicts deals well with repeated merges between branches,
+ and can handle modifications to renamed files correctly.
+ .
+ Bazaar is written in Python and has a flexible plugin interface that
+ can be used to extend its functionality. Many plugins exist, providing
+ useful commands (bzrtools), graphical interfaces (qbzr), or native
+ interaction with Subversion branches (bzr-svn).
+ .
+ Install python-paramiko if you are going to push branches to remote
+ hosts with sftp, and python-pycurl if you&#x27;d like SSL certificates
+ always to be verified.
+Homepage: http://bazaar-vcs.org
+Original-Maintainer: Debian Bazaar Maintainers &lt;pkg-bazaar-maint@lists.alioth.debian.org&gt;
+</code></pre> <p>یا حتی یک بسته نصب‌شده را به طور کامل پاکسازی (<strong>purge</strong>) کنید؛ یعنی حذف خود بسته به همراه تمام فایل‌های پیکربندی آن. برای این کار از سوئیچ <strong><code>-P</code></strong> یا <strong><code>--purge</code></strong> استفاده کنید.</p><p>همچنین سوئیچ <strong><code>-L</code></strong> فایل‌ها و دایرکتوری‌هایی را که یک بسته نصب کرده است نشان می‌دهد:</p><pre class="hljs"><code>$ dpkg -L bzr
+/.
+/usr
+/usr/bin
+/usr/bin/jcal
+/usr/share
+/usr/share/doc
+/usr/share/doc/jcal
+/usr/share/doc/jcal/README
+/usr/share/doc/jcal/copyright
+/usr/share/man
+/usr/share/man/man1
+/usr/share/man/man1/jcal.1.gz
+/usr/share/doc/jcal/changelog.Debian.gz
+</code></pre> <p>و سوئیچ <strong><code>-S</code></strong> نشان می‌دهد فایل داده شده توسط کدام بسته نصب شده است:</p><pre class="hljs"><code>$ dpkg -S /var/lib/mplayer/prefs/mirrors
+mplayer: /var/lib/mplayer/prefs/mirrors
+</code></pre> <h2>گزینه‌های رایج <code>apt-get</code></h2><table> <thead><tr> <th style="text-align:left">گزینه</th><th style="text-align:left">کاربرد</th></tr> </thead><tbody> <tr><td style="text-align:left"><code>autoclean</code></td><td style="text-align:left">فایل‌های بسته‌های بلااستفاده و قدیمی را از کش پاک می‌کند</td></tr> <tr><td style="text-align:left"><code>check</code></td><td style="text-align:left">پایگاه داده بسته‌ها را برای یافتن مشکلات وابستگی بررسی می‌کند</td></tr> <tr><td style="text-align:left"><code>clean</code></td><td style="text-align:left">کش بسته‌های دانلودشده را پاک می‌کند (با <code>clean</code> مخزن محلی فایل‌های <code>.deb</code> خالی می‌شود تا از نو شروع کنید)</td></tr> <tr><td style="text-align:left"><code>dist-upgrade</code></td><td style="text-align:left">نسخه‌های جدیدتر سیستم‌عامل و تغییرات بزرگ وابستگی را بررسی و ارتقا می‌دهد</td></tr> <tr><td style="text-align:left"><code>install</code></td><td style="text-align:left">بسته‌ها را نصب یا ارتقا می‌دهد</td></tr> <tr><td style="text-align:left"><code>remove</code></td><td style="text-align:left">یک بسته را حذف می‌کند</td></tr> <tr><td style="text-align:left"><code>source</code></td><td style="text-align:left">کد منبع (Source) یک بسته را دانلود می‌کند</td></tr> <tr><td style="text-align:left"><code>update</code></td><td style="text-align:left">اطلاعات مربوط به بسته‌ها را از مخازن به‌روزرسانی می‌کند</td></tr> <tr><td style="text-align:left"><code>upgrade</code></td><td style="text-align:left">تمام بسته‌های نصب‌شده را ارتقا می‌دهد</td></tr> </tbody></table> <blockquote><p><strong>نکته:</strong> گاهی یک بسته بدون داشتن وابستگی‌های لازم نصب می‌شود (مثلاً با استفاده از <code>dpkg -i</code>) یا فرآیند نصب به هر دلیلی نیمه‌کاره قطع می‌شود. در این مواقع دستور <code>apt-get install -f</code> بسیار راهگشاست؛ <code>-f</code> مخفف <code>fix broken</code> (تعمیر بسته‌های شکسته) است.</p></blockquote> <h2>گزینه‌های رایج <code>apt-cache</code></h2><table> <thead><tr> <th style="text-align:left">گزینه</th><th style="text-align:left">کاربرد</th></tr> </thead><tbody> <tr><td style="text-align:left"><code>depends</code></td><td style="text-align:left">نمایش وابستگی‌های یک بسته</td></tr> <tr><td style="text-align:left"><code>pkgnames</code></td><td style="text-align:left">نمایش نام تمام بسته‌های موجود در کش سیستم</td></tr> <tr><td style="text-align:left"><code>search</code></td><td style="text-align:left">جستجو در نام و توضیحات بسته‌ها</td></tr> <tr><td style="text-align:left"><code>showpkg</code></td><td style="text-align:left">نمایش اطلاعات عمومی درباره یک بسته</td></tr> <tr><td style="text-align:left"><code>stats</code></td><td style="text-align:left">نمایش آمار کلی درباره مخازن و بسته‌ها</td></tr> <tr><td style="text-align:left"><code>unmet</code></td><td style="text-align:left">نمایش وابستگی‌های برآورده‌نشده برای تمام بسته‌های نصب‌شده یا بسته مشخص‌شده</td></tr> </tbody></table> <h2>سایر ابزارها</h2><p>ابزارهای دیگری هم وجود دارند؛ از ابزارهای دارای رابط گرافیکی زیبا گرفته تا ابزارهای متنی و رابط کاربری ترمینالی مثل <code>aptitude</code>.</p><hr> <div class="callout callout-tip" style="background: rgba(147, 51, 234, 0.08); border-right: 4px solid #9333ea; padding: 16px 20px; border-radius: 8px; margin-top: 32px;"><strong>🔗 نسخه اصلی به زبان انگلیسی:</strong> این درسنامه بر اساس منبع انگلیسی جادی در مخزن <a href="https://github.com/jadijadi/lpic1book/blob/master/content/1024_use_debian_package_management.md" target="_blank" rel="noopener noreferrer">jadijadi/lpic1book</a> تدوین و سازماندهی شده است. </div></article> <nav class="chapter-single-next-nav"><a href="/Gitab/books/book13/Book/10/1025-use-rpm-and-yum-package-management/" class="btn-next-chapter-action" id="nextChapterBtn" data-hub="/Gitab/books/book13/"> <span class="next-btn-text">فصل بعدی: ۱۰۲.۵ مدیریت بسته‌ها در ردهت (RPM، YUM و DNF)</span> <span class="next-btn-arrow">←</span> </a> </nav></div> <button class="fab-back-to-top" id="backToTopBtn" type="button" aria-label="رفتن به بالای صفحه" title="رفتن به بالا"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"> <polyline points="18 15 12 9 6 15"></polyline> </svg> </button></main> <footer class="footer-minimal"><div class="footer-container"> <div class="footer-top-row"><div class="footer-brand-side"> <a href="/Gitab/" class="footer-brand-anchor"> <img src="/Gitab/icone/logo.svg" alt="Gitab" width="28" height="28" loading="lazy" decoding="async"> <span class="footer-brand-title">گیتاب (Gitab)</span> </a> <p class="footer-tagline"> پلتفرم آزاد و مستقل برای ترجمهٔ دقیق و روان کتاب‌های مرجع مهندسی نرم‌افزار. </p></div> <div class="footer-nav-cols"><div class="footer-nav-col"> <span class="footer-nav-heading">موضوعات</span><ul class="footer-nav-list"> <li><a href="/Gitab/books/list-books/?cat=csharp">سی‌شارپ و دات‌نت</a></li><li><a href="/Gitab/books/list-books/?cat=clean-code">کد تمیز و بازآفرینی</a></li><li><a href="/Gitab/books/list-books/?cat=architecture">معماری و طراحی دامنه</a></li><li><a href="/Gitab/books/list-books/?cat=system">لینوکس و خط فرمان</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">بخش‌های سایت</span><ul class="footer-nav-list"> <li><a href="/Gitab/">صفحه اصلی</a></li><li><a href="/Gitab/books/list-books/">کتابخانه کامل</a></li><li><a href="/Gitab/courses/">دوره‌های آموزشی</a></li><li><a href="/Gitab/translator.html">تالار مترجمین</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">مشارکت و جامعه</span><ul class="footer-nav-list"> <li><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer">راهنمای همکاری در ترجمه</a></li><li><a href="https://github.com/hheydarian/Gitab/issues" target="_blank" rel="noopener noreferrer">پیشنهاد کتاب یا گزارش خطا</a></li></ul> </div></div> </div><div class="footer-bottom-line"> <span>© <span id="y">2026</span> Gitab — توسعه‌یافته برای جامعهٔ مهندسان نرم‌افزار ایرانی</span></div> </div></footer> <script>
+  (() => {
+    const root = document.documentElement;
+    const btn = document.getElementById('themeToggle');
+    const sunIcon = btn ? btn.querySelector('.icon-sun') : null;
+    const moonIcon = btn ? btn.querySelector('.icon-moon') : null;
+    const KEY = 'gitab-theme';
+
+    function updateTheme(mode) {
+      root.setAttribute('data-theme', mode);
+      root.dataset.colorMode = mode;
+      if (sunIcon && moonIcon) {
+        if (mode === 'dark') {
+          sunIcon.style.display = 'inline-block';
+          moonIcon.style.display = 'none';
+        } else {
+          sunIcon.style.display = 'none';
+          moonIcon.style.display = 'inline-block';
+        }
+      }
+    }
+
+    let saved = 'dark';
+    try { saved = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+    updateTheme(saved);
+
+    if (btn) {
+      btn.addEventListener('click', () => {
+        let current = 'dark';
+        try { current = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+        const next = current === 'dark' ? 'light' : 'dark';
+        try { localStorage.setItem(KEY, next); } catch (e) {}
+        updateTheme(next);
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      let mode = 'dark';
+      try { mode = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+      updateTheme(mode);
+      const yearSpan = document.getElementById('y');
+      if (yearSpan) yearSpan.textContent = new Date().getFullYear();
+    });
+
+    const mobBtn = document.getElementById('mobileMenuBtn');
+    const mobDrawer = document.getElementById('mobileDrawer');
+    if (mobBtn && mobDrawer) {
+      const setDrawerOpen = (open) => {
+        mobDrawer.classList.toggle('open', open);
+        mobBtn.classList.toggle('is-open', open);
+        mobBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        mobBtn.setAttribute('aria-label', open ? 'بستن منو' : 'باز کردن منو');
+        mobDrawer.setAttribute('aria-hidden', open ? 'false' : 'true');
+      };
+
+      mobBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        setDrawerOpen(!mobDrawer.classList.contains('open'));
+      });
+
+      mobDrawer.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => setDrawerOpen(false));
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && mobDrawer.classList.contains('open')) {
+          setDrawerOpen(false);
+        }
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!mobDrawer.contains(e.target) && !mobBtn.contains(e.target)) {
+          setDrawerOpen(false);
+        }
+      });
+    }
+
+    if ('serviceWorker' in navigator) {
+      const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+      if (isLocalhost) {
+        navigator.serviceWorker.getRegistrations().then(regs => {
+          for (const reg of regs) reg.unregister();
+        });
+        if ('caches' in window) {
+          caches.keys().then(names => {
+            for (const name of names) caches.delete(name);
+          });
+        }
+      } else {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/Gitab/sw.js').catch(() => {});
+        });
+      }
+    }
+  })();
+  </script> <script>
+  document.querySelectorAll('pre code').forEach(block => {
+    const pre = block.parentNode;
+    if (!pre || pre.querySelector('.copy-btn')) return;
+
+    const copySvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
+    const okSvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+
+    const btn = document.createElement('button');
+    btn.className = 'copy-btn';
+    btn.setAttribute('aria-label', 'کپی کد');
+    btn.setAttribute('title', 'کپی کد');
+    btn.setAttribute('type', 'button');
+    btn.innerHTML = copySvg;
+    pre.appendChild(btn);
+
+    btn.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(block.textContent);
+        btn.classList.add('copied');
+        btn.innerHTML = okSvg;
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          btn.innerHTML = copySvg;
+        }, 1800);
+      } catch (err) {
+        console.error('Copy failed:', err);
+      }
+    });
+  });
+  </script> <script>
+  (() => {
+    const article = document.getElementById('chapterArticle');
+    if (!article) return;
+
+    const progressBar = document.getElementById('readingProgressBar');
+    if (progressBar) {
+      window.addEventListener('scroll', () => {
+        const docElem = document.documentElement;
+        const totalHeight = docElem.scrollHeight - docElem.clientHeight;
+        if (totalHeight > 0) {
+          const progress = (window.pageYOffset / totalHeight) * 100;
+          progressBar.style.width = Math.min(100, Math.max(0, progress)) + '%';
+        }
+      }, { passive: true });
+    }
+
+    const btt = document.getElementById('backToTopBtn');
+    if (btt) {
+      window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 250) {
+          btt.classList.add('visible');
+        } else {
+          btt.classList.remove('visible');
+        }
+      }, { passive: true });
+
+      btt.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+
+    article.querySelectorAll('img').forEach(img => {
+      if (!img.hasAttribute('loading')) img.loading = 'lazy';
+      if (!img.hasAttribute('decoding')) img.decoding = 'async';
+      const parent = img.parentElement;
+      if (parent && parent.tagName === 'P') {
+        parent.style.textAlign = 'center';
+      }
+
+      img.addEventListener('error', function() {
+        const src = this.getAttribute('src');
+        if (src && src.includes('assets/image/')) {
+          const parts = src.split('assets/image/');
+          const corrected = '/Gitab/books/book13/assets/image/' + parts[1];
+          if (this.src !== corrected) {
+            this.src = corrected;
+          }
+        }
+      });
+    });
+
+    article.querySelectorAll('p').forEach(p => {
+      const trimmed = p.innerText.trim();
+      if (trimmed.startsWith('💡') || trimmed.startsWith('نکته:')) {
+        p.classList.add('react-callout', 'callout-tip');
+      } else if (trimmed.startsWith('⚠️') || trimmed.startsWith('هشدار:')) {
+        p.classList.add('react-callout', 'callout-warning');
+      } else if (trimmed.startsWith('📌') || trimmed.startsWith('مهم:')) {
+        p.classList.add('react-callout', 'callout-important');
+      } else if (trimmed.startsWith('🔹') || trimmed.startsWith('🔸')) {
+        p.classList.add('react-callout', 'callout-note');
+      }
+    });
+  })();
+  </script> <script type="speculationrules">{"prefetch":[{"where":{"and":[{"href_matches":"/Gitab/*"},{"not":{"href_matches":"/Gitab/downloads/*"}},{"not":{"selector_matches":"[download], [target='_blank']"}}]},"eagerness":"moderate"}]}</script> <script>
+  (() => {
+    if (window.HTMLScriptElement && HTMLScriptElement.supports && HTMLScriptElement.supports('speculationrules')) return;
+    const seen = new Set([window.location.href]);
+    let count = 0;
+    const prefetchLink = (e) => {
+      if (count >= 12) return;
+      const a = e.target && e.target.closest ? e.target.closest('header a, .chapter-single-next-nav a, .syllabus-chapter-item a, .btn-hero-read, .btn-card-read') : null;
+      if (!a || !a.href || a.hasAttribute('download') || a.target === '_blank') return;
+      if (a.origin !== window.location.origin || a.pathname.includes('/downloads/')) return;
+      const clean = a.href.split('#')[0];
+      if (!clean || seen.has(clean)) return;
+      seen.add(clean);
+      count++;
+      const l = document.createElement('link');
+      l.rel = 'prefetch';
+      l.href = clean;
+      document.head.appendChild(l);
+    };
+    document.addEventListener('pointerenter', prefetchLink, { capture: true, passive: true });
+    document.addEventListener('touchstart', prefetchLink, { capture: true, passive: true });
+  })();
+  </script></body></html>

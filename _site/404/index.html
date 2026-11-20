@@ -1,26 +1,4 @@
-<!doctype html>
-<html lang="fa" dir="rtl">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>در حال هدایت…</title>
-    <style>
-        body {
-            background: #0a0b0e;
-            color: #e8ecf3;
-            font-family: sans-serif;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100vh
-        }
-    </style>
-</head>
-
-<body>
-    <p>در حال هدایت…</p>
-    <script>
+<!doctype html><html lang="fa" dir="rtl"> <head><meta charset="utf-8"> <meta name="viewport" content="width=device-width,initial-scale=1"><title>در حال هدایت…</title><style>body{background:#0a0b0e;color:#e8ecf3;font-family:sans-serif;display:flex;align-items:center;justify-content:center;height:100vh}</style></head><body> <p>در حال هدایت…</p><script>
         // ساب‌مسیر ریپوی تو
         const base = "/Gitab";
         const path = window.location.pathname;
@@ -30,15 +8,16 @@
         const insideProject = path.startsWith(base);
         if (insideProject)
         {
-            const rel = path.slice(base.length);
-            const target = rel.endsWith("/") ? rel + "index.html" : rel + "/index.html";
-            window.location.replace(base + target);
+            const rel = path.slice(base.length).replace(/\\/g, "/");
+            if (rel && !rel.startsWith("//") && !rel.includes("..") && !rel.endsWith("index.html")) {
+                const target = rel.endsWith("/") ? rel + "index.html" : rel + "/index.html";
+                window.location.replace(base + target);
+            } else {
+                window.location.replace(base + "/");
+            }
         } else
         {
             // اگر به هر دلیلی خارج از base بود، بفرست به صفحهٔ اصلی پروژه
             window.location.replace(base + "/");
         }
-    </script>
-</body>
-
-</html>
+    </script></body></html>

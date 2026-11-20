@@ -1,152 +1,18 @@
-
-
-<!doctype html>
-<html lang="fa" dir="rtl">
-<head>
-  <meta charset="utf-8">
-  <link rel="icon" type="image/png" href="/Gitab/favicon.png">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>رسانه‌های ذخیره‌سازی</title>
-  <meta name="description" content="ترجمه‌های فارسی کتاب‌های فنی — سریع، مینیمال و قابل اتکا.">
-
-  <!-- استایل‌ها -->
-  <link rel="stylesheet" href="/Gitab/styles/main.css">
-  <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
-
-  <style>
-  @font-face {
-    font-family: 'Vazir';
-    src: url('/Gitab/fonts/Vazir-FD-WOL.ttf') format('truetype');
-    font-display: swap;
-  }
-  @font-face {
-    font-family: "Lalezar";
-    src: url('fonts/Lalezar.ttf') format('truetype');
-    font-display: swap;
-}
-  body {
-    font-family: 'Vazir', sans-serif;
-  }
-  </style>
-</head>
-
-<body>
-  <!-- هدر مشترک -->
-  <header class="header">
-    <div class="container nav-wrap">
-      <a href="/Gitab/" class="brand">
-        <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="26" height="26">
-        <span>Gitab</span>
-      </a>
-
-       <nav class="nav">
-         <a href="/Gitab/" >خانه</a>
-         <a href="/Gitab/books/list-books" >کتاب‌ها</a>
-         <a href="/Gitab/giter.html" >دوره ها</a>
-          <!-- 
-         <a href="/Gitab/translator.html" >مترجمین</a>
-           -->
-       </nav>
-
-      <div class="nav-actions">
-        <button id="themeToggle" class="icon-btn theme-btn" data-icon="moon" aria-label="تغییر تم">
-          <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن">
-          <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک">
-        </button>
-
-        <a class="icon-btn" href="https://github.com/hheydarian/Gitab" target="_blank" title="GitHub">
-          <img src="/Gitab/icone/github.svg" alt="GitHub">
-        </a>
-
-        <!-- دکمه منو برای موبایل -->
-        <button class="menu-toggle" aria-label="منو">
-          <img src="/Gitab/icone/menu.svg" alt="menu">
-        </button>
-      </div>
-    </div>
-  </header>
-
-  
-  <main class="site-main book-page">
-    <h1>فصل ۱۵ – رسانه‌های ذخیره‌سازی (Storage Media)</h1>
-<p>در فصل‌های پیشین، داده‌ها را در سطح فایل بررسی کردیم. اما در این فصل، سراغ <strong>سطح دستگاه (device level)</strong> می‌رویم — جایی که لینوکس در مدیریت انواع رسانه‌های ذخیره‌سازی توان خارق‌العاده‌ای دارد: از دیسک‌های سخت فیزیکی گرفته تا ذخیره‌سازهای شبکه‌ای و دستگاه‌های مجازی مانند <strong>RAID</strong> (آرایه‌ی افزونه‌ی دیسک‌های مستقل) و <strong>LVM</strong> (مدیر حجم منطقی).</p>
-<p>البته هدف این کتاب آموزش مدیریت سیستم نیست، پس وارد جزئیات عمیق این حوزه نمی‌شویم. هدف، آشنایی با <strong>مفاهیم پایه</strong> و <strong>فرمان‌های کلیدی</strong> برای کار با دستگاه‌های ذخیره‌سازی است.</p>
-<p>برای تمرین‌های این فصل، از موارد زیر استفاده می‌شود:</p>
-<ul>
-<li>یک <strong>فلش USB</strong></li>
-<li>یک <strong>دیسک CD-RW</strong> (در صورت وجود CD-ROM Writer)</li>
-<li>و یک <strong>دیسک فلاپی</strong> (در صورت موجود بودن در سیستم).</li>
-</ul>
-<hr>
-<h3>فرمان‌هایی که در این فصل بررسی می‌شوند</h3>
-<table>
-<thead>
-<tr>
-<th>فرمان</th>
-<th>توضیح</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>mount</code></td>
-<td>سوار کردن (اتصال) یک فایل‌سیستم</td>
-</tr>
-<tr>
-<td><code>umount</code></td>
-<td>جدا کردن فایل‌سیستم</td>
-</tr>
-<tr>
-<td><code>fsck</code></td>
-<td>بررسی و تعمیر فایل‌سیستم</td>
-</tr>
-<tr>
-<td><code>fdisk</code></td>
-<td>ویرایش جدول پارتیشن‌ها</td>
-</tr>
-<tr>
-<td><code>mkfs</code></td>
-<td>ساخت فایل‌سیستم جدید</td>
-</tr>
-<tr>
-<td><code>fdformat</code></td>
-<td>فرمت کردن فلاپی دیسک</td>
-</tr>
-<tr>
-<td><code>dd</code></td>
-<td>نوشتن داده‌های بلوکی مستقیم روی دستگاه</td>
-</tr>
-<tr>
-<td><code>genisoimage</code> (یا <code>mkisofs</code>)</td>
-<td>ایجاد فایل ISO 9660</td>
-</tr>
-<tr>
-<td><code>wodim</code> (یا <code>cdrecord</code>)</td>
-<td>نوشتن داده روی رسانهٔ نوری</td>
-</tr>
-<tr>
-<td><code>md5sum</code></td>
-<td>محاسبهٔ چک‌سام MD5 برای اعتبارسنجی فایل‌ها</td>
-</tr>
-</tbody>
-</table>
-<hr>
-<h2>Mount و Unmount در لینوکس</h2>
-<p>در نسخه‌های جدید دسکتاپ لینوکس، مدیریت دستگاه‌های ذخیره‌سازی بسیار ساده‌تر از گذشته شده است. امروز کافی است دستگاه را وصل کنید تا <strong>خودکار شناسایی و آمادهٔ استفاده</strong> شود.<br>
-اما در گذشته (مثلاً حوالی سال ۲۰۰۴)، این کار باید به‌صورت دستی انجام می‌شد.</p>
-<p>در سیستم‌های غیر دسکتاپی مانند <strong>سرورها</strong>، هنوز هم این کار عمدتاً دستی انجام می‌شود، چون سرورها معمولاً نیازهای خاص و ساختارهای ذخیره‌سازی پیچیده‌ای دارند.</p>
-<hr>
-<h3>مفهوم Mount</h3>
-<p>اولین گام در مدیریت رسانهٔ ذخیره‌سازی، <strong>اتصال دستگاه به درخت فایل‌سیستم (filesystem tree)</strong> است.<br>
-به این فرایند <strong>mount کردن</strong> گفته می‌شود.<br>
-با انجام mount، دستگاه به بخشی از ساختار سیستم‌فایل لینوکس متصل می‌شود و سیستم‌عامل می‌تواند به آن دسترسی پیدا کند.</p>
-<p>همان‌طور که در فصل دوم دیدیم، لینوکس (مانند سایر سیستم‌های شبه‌یونیکس) یک <strong>درخت فایل‌سیستم واحد</strong> دارد که تمام دستگاه‌ها در شاخه‌های مختلف آن متصل می‌شوند.<br>
-این در تضاد با سیستم‌هایی مانند <strong>Windows</strong> است که برای هر دستگاه، درخت جداگانه‌ای با حروف درایو (C:\، D:\ و غیره) در نظر می‌گیرند.</p>
-<hr>
-<h3>فایل پیکربندی <code>/etc/fstab</code></h3>
-<p>فایلی به نام <code>/etc/fstab</code> فهرستی از دستگاه‌هایی را دارد که باید هنگام بوت شدن سیستم به‌طور خودکار <strong>mount</strong> شوند.<br>
-نمونه‌ای از محتوای این فایل در سیستم Fedora 7 به‌شکل زیر است:</p>
-<pre class="hljs"><code>LABEL=/12         /                       ext3    defaults        1 1
+<!doctype html><html lang="fa" dir="rtl"> <head><script>
+    if (window.location.pathname.startsWith('/gitab/')) {
+      window.location.replace(window.location.pathname.replace(/^\/gitab\//i, '/Gitab/') + window.location.search + window.location.hash);
+    }
+    (() => {
+      try {
+        const t = localStorage.getItem('gitab-theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', t);
+        document.documentElement.dataset.colorMode = t;
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        document.documentElement.dataset.colorMode = 'dark';
+      }
+    })();
+  </script> <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5"> <title>رسانه‌های ذخیره‌سازی</title><meta name="description" content="رسانه‌های ذخیره‌سازی — مطالعه آنلاین و رایگان از کتاب «خط فرمان لینوکس (TLCL)» (The Linux Command Line) اثر William Shotts با ترجمه هیمن صادقی در گیتاب."> <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"><meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"> <meta name="theme-color" content="#090d16"><meta name="referrer" content="strict-origin-when-cross-origin"> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https:; frame-src https://www.youtube.com https://www.youtube-nocookie.com https://maps.google.com https://www.google.com; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self';"><link rel="icon" type="image/png" href="/Gitab/favicon.png"> <link rel="canonical" href="https://hheydarian.github.io/Gitab/books/book5/Book/15/chapter15/"><link rel="alternate" hreflang="fa" href="https://hheydarian.github.io/Gitab/books/book5/Book/15/chapter15/"> <link rel="alternate" hreflang="x-default" href="https://hheydarian.github.io/Gitab/books/book5/Book/15/chapter15/"><link rel="alternate" type="text/plain" title="LLMs.txt" href="/Gitab/llms.txt"> <link rel="sitemap" type="application/xml" title="Sitemap" href="/Gitab/sitemap.xml"><meta property="og:locale" content="fa_IR"> <meta property="og:type" content="article"><meta property="og:site_name" content="گیتاب | Gitab"> <meta property="og:title" content="رسانه‌های ذخیره‌سازی"><meta property="og:description" content="رسانه‌های ذخیره‌سازی — مطالعه آنلاین و رایگان از کتاب «خط فرمان لینوکس (TLCL)» (The Linux Command Line) اثر William Shotts با ترجمه هیمن صادقی در گیتاب."> <meta property="og:url" content="https://hheydarian.github.io/Gitab/books/book5/Book/15/chapter15/"><meta property="og:image" content="https://hheydarian.github.io/Gitab/images/the-linux-command-line/Cover.jpg"> <meta property="og:image:alt" content="رسانه‌های ذخیره‌سازی"><meta name="twitter:card" content="summary_large_image"> <meta name="twitter:title" content="رسانه‌های ذخیره‌سازی"><meta name="twitter:description" content="رسانه‌های ذخیره‌سازی — مطالعه آنلاین و رایگان از کتاب «خط فرمان لینوکس (TLCL)» (The Linux Command Line) اثر William Shotts با ترجمه هیمن صادقی در گیتاب."> <meta name="twitter:image" content="https://hheydarian.github.io/Gitab/images/the-linux-command-line/Cover.jpg"><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://hheydarian.github.io/Gitab/#organization","name":"گیتاب | Gitab","alternateName":"Gitab","url":"https://hheydarian.github.io/Gitab/","logo":{"@type":"ImageObject","url":"https://hheydarian.github.io/Gitab/favicon.png"},"sameAs":["https://github.com/hheydarian/Gitab"]},{"@type":"WebSite","@id":"https://hheydarian.github.io/Gitab/#website","url":"https://hheydarian.github.io/Gitab/","name":"گیتاب | Gitab","inLanguage":"fa-IR","publisher":{"@id":"https://hheydarian.github.io/Gitab/#organization"},"potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://hheydarian.github.io/Gitab/books/list-books/?q={search_term_string}"},"query-input":"required name=search_term_string"}},{"@type":"WebPage","@id":"https://hheydarian.github.io/Gitab/books/book5/Book/15/chapter15/#webpage","url":"https://hheydarian.github.io/Gitab/books/book5/Book/15/chapter15/","name":"رسانه‌های ذخیره‌سازی","description":"رسانه‌های ذخیره‌سازی — مطالعه آنلاین و رایگان از کتاب «خط فرمان لینوکس (TLCL)» (The Linux Command Line) اثر William Shotts با ترجمه هیمن صادقی در گیتاب.","inLanguage":"fa-IR","isPartOf":{"@id":"https://hheydarian.github.io/Gitab/#website"}},{"@type":"TechArticle","headline":"رسانه‌های ذخیره‌سازی","description":"رسانه‌های ذخیره‌سازی — مطالعه آنلاین و رایگان از کتاب «خط فرمان لینوکس (TLCL)» (The Linux Command Line) اثر William Shotts با ترجمه هیمن صادقی در گیتاب.","url":"https://hheydarian.github.io/Gitab/books/book5/Book/15/chapter15/","inLanguage":"fa-IR","isAccessibleForFree":true,"author":{"@type":"Person","name":"William Shotts"},"translator":{"@type":"Person","name":"هیمن صادقی"},"isPartOf":{"@type":"Book","name":"خط فرمان لینوکس (TLCL)","alternateName":"The Linux Command Line","url":"https://hheydarian.github.io/Gitab/books/book5/"}}]}</script> <link rel="preload" href="/Gitab/fonts/Vazirmatn.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/Gitab/styles/main.css?v=2.4" as="style"> <link rel="preload" href="/Gitab/styles/gitab-modern.css?v=2.5" as="style"><style>@font-face{font-family:'Lalezar';src:url('/Gitab/fonts/Lalezar.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}@font-face{font-family:'Vazirmatn';src:url('/Gitab/fonts/Vazirmatn.woff2') format('woff2');font-weight:100 900;font-style:normal;font-display:swap}html,body,button,input,optgroup,select,textarea,.filter-pill{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}input::placeholder,textarea::placeholder{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}</style> <link rel="stylesheet" href="/Gitab/styles/main.css?v=2.4"><link rel="stylesheet" href="/Gitab/styles/gitab-modern.css?v=2.5"> <link rel="stylesheet" href="/Gitab/styles/vendor/github-dark.min.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="/Gitab/styles/vendor/github-dark.min.css"></noscript></head> <body><header class="header"> <div class="container nav-wrap"><a href="/Gitab/" class="brand" aria-label="صفحه اصلی گیتاب"> <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="30" height="30" decoding="async"> <span class="brand-text">Gitab</span> </a> <nav class="nav" id="mainNav"><a href="/Gitab/" >خانه</a> <a href="/Gitab/books/list-books" aria-current="page">کتاب‌ها</a> <a href="/Gitab/courses/" >دوره‌ها</a> <a href="/Gitab/translator.html" >مترجمین</a></nav> <div class="nav-actions"><button id="themeToggle" class="theme-toggle-btn" aria-label="تغییر تم" title="تغییر تم"> <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن" width="18" height="18" decoding="async" style="display:none"> <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک" width="18" height="18" decoding="async"> </button> <a class="btn-github-pill" href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" title="مشاهده سورس گیتاب در گیت‌هاب"> <img src="/Gitab/icone/github.svg" alt="GitHub" width="16" height="16" decoding="async"> <span>گیت‌هاب</span> </a> <button class="mobile-menu-btn" id="mobileMenuBtn" type="button" aria-label="باز کردن منو" aria-expanded="false"> <svg class="mob-icon-open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="4" y1="7" x2="20" y2="7"></line> <line x1="4" y1="12" x2="20" y2="12"></line> <line x1="4" y1="17" x2="14" y2="17"></line> </svg> <svg class="mob-icon-close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="18" y1="6" x2="6" y2="18"></line> <line x1="6" y1="6" x2="18" y2="18"></line> </svg> </button></div> </div><div class="mobile-drawer" id="mobileDrawer" aria-hidden="true"> <div class="mobile-drawer-inner"><div class="mobile-drawer-section-label">ناوبری سریع</div><nav class="mobile-drawer-links" aria-label="منوی موبایل"> <a href="/Gitab/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M3 10.5 12 3l9 7.5"></path> <path d="M5 9.5V20a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V9.5"></path> </svg> </span> <span class="mob-nav-text">صفحه نخست</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/books/list-books" class="mobile-drawer-link active" aria-current="page"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path> </svg> </span> <span class="mob-nav-text">کتابخانه و فهرست کتاب‌ها</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/courses/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path> <path d="M6 12v5c3 3 9 3 12 0v-5"></path> </svg> </span> <span class="mob-nav-text">دوره‌های آموزشی</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/translator.html" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path> <circle cx="9" cy="7" r="4"></circle> <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path> <path d="M16 3.13a4 4 0 0 1 0 7.75"></path> </svg> </span> <span class="mob-nav-text">مترجمین و همکاران</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> </nav><div class="mobile-drawer-divider"></div><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" class="mobile-drawer-link mobile-drawer-gh"> <span class="mob-nav-icon" aria-hidden="true"> <img src="/Gitab/icone/github.svg" alt="" width="17" height="17" loading="lazy" decoding="async"> </span> <span class="mob-nav-text">مخزن گیت‌هاب پروژه</span> <span class="mob-nav-ext" aria-hidden="true">↗</span> </a> </div></div> </header><div class="reading-progress-track"> <div class="reading-progress-fill" id="readingProgressBar"></div></div> <main class="site-main chapter-reading-page"><div class="chapter-page-wrapper"> <nav class="chapter-clean-breadcrumb" aria-label="مسیر راهنما" dir="rtl"><a href="/Gitab/">خانه</a> <span class="bc-sep" aria-hidden="true">/</span> <a href="/Gitab/books/list-books/">کتاب‌ها</a> <span class="bc-sep" aria-hidden="true">/</span> <a href="/Gitab/books/book5/"><bdi>خط فرمان لینوکس</bdi></a> <span class="bc-sep" aria-hidden="true">/</span> <span class="bc-current-leaf"><bdi>رسانه‌های ذخیره‌سازی</bdi></span></nav> <article class="chapter-prose-container markdown-body" id="chapterArticle" dir="rtl"><h1>فصل ۱۵ – رسانه‌های ذخیره‌سازی (Storage Media)</h1><p>در فصل‌های پیشین، داده‌ها را در سطح فایل بررسی کردیم. اما در این فصل، سراغ <strong>سطح دستگاه (device level)</strong> می‌رویم — جایی که لینوکس در مدیریت انواع رسانه‌های ذخیره‌سازی توان خارق‌العاده‌ای دارد: از دیسک‌های سخت فیزیکی گرفته تا ذخیره‌سازهای شبکه‌ای و دستگاه‌های مجازی مانند <strong>RAID</strong> (آرایه‌ی افزونه‌ی دیسک‌های مستقل) و <strong>LVM</strong> (مدیر حجم منطقی).</p><p>البته هدف این کتاب آموزش مدیریت سیستم نیست، پس وارد جزئیات عمیق این حوزه نمی‌شویم. هدف، آشنایی با <strong>مفاهیم پایه</strong> و <strong>فرمان‌های کلیدی</strong> برای کار با دستگاه‌های ذخیره‌سازی است.</p><p>برای تمرین‌های این فصل، از موارد زیر استفاده می‌شود:</p><ul> <li>یک <strong>فلش USB</strong></li><li>یک <strong>دیسک CD-RW</strong> (در صورت وجود CD-ROM Writer)</li><li>و یک <strong>دیسک فلاپی</strong> (در صورت موجود بودن در سیستم).</li></ul> <hr><h3>فرمان‌هایی که در این فصل بررسی می‌شوند</h3><table> <thead><tr> <th>فرمان</th><th>توضیح</th></tr> </thead><tbody> <tr><td><code>mount</code></td><td>سوار کردن (اتصال) یک فایل‌سیستم</td></tr> <tr><td><code>umount</code></td><td>جدا کردن فایل‌سیستم</td></tr> <tr><td><code>fsck</code></td><td>بررسی و تعمیر فایل‌سیستم</td></tr> <tr><td><code>fdisk</code></td><td>ویرایش جدول پارتیشن‌ها</td></tr> <tr><td><code>mkfs</code></td><td>ساخت فایل‌سیستم جدید</td></tr> <tr><td><code>fdformat</code></td><td>فرمت کردن فلاپی دیسک</td></tr> <tr><td><code>dd</code></td><td>نوشتن داده‌های بلوکی مستقیم روی دستگاه</td></tr> <tr><td><code>genisoimage</code> (یا <code>mkisofs</code>)</td><td>ایجاد فایل ISO 9660</td></tr> <tr><td><code>wodim</code> (یا <code>cdrecord</code>)</td><td>نوشتن داده روی رسانهٔ نوری</td></tr> <tr><td><code>md5sum</code></td><td>محاسبهٔ چک‌سام MD5 برای اعتبارسنجی فایل‌ها</td></tr> </tbody></table> <hr><h2>Mount و Unmount در لینوکس</h2><p>در نسخه‌های جدید دسکتاپ لینوکس، مدیریت دستگاه‌های ذخیره‌سازی بسیار ساده‌تر از گذشته شده است. امروز کافی است دستگاه را وصل کنید تا <strong>خودکار شناسایی و آمادهٔ استفاده</strong> شود.<br> اما در گذشته (مثلاً حوالی سال ۲۰۰۴)، این کار باید به‌صورت دستی انجام می‌شد.</p><p>در سیستم‌های غیر دسکتاپی مانند <strong>سرورها</strong>، هنوز هم این کار عمدتاً دستی انجام می‌شود، چون سرورها معمولاً نیازهای خاص و ساختارهای ذخیره‌سازی پیچیده‌ای دارند.</p><hr> <h3>مفهوم Mount</h3><p>اولین گام در مدیریت رسانهٔ ذخیره‌سازی، <strong>اتصال دستگاه به درخت فایل‌سیستم (filesystem tree)</strong> است.<br> به این فرایند <strong>mount کردن</strong> گفته می‌شود.<br> با انجام mount، دستگاه به بخشی از ساختار سیستم‌فایل لینوکس متصل می‌شود و سیستم‌عامل می‌تواند به آن دسترسی پیدا کند.</p><p>همان‌طور که در فصل دوم دیدیم، لینوکس (مانند سایر سیستم‌های شبه‌یونیکس) یک <strong>درخت فایل‌سیستم واحد</strong> دارد که تمام دستگاه‌ها در شاخه‌های مختلف آن متصل می‌شوند.<br> این در تضاد با سیستم‌هایی مانند <strong>Windows</strong> است که برای هر دستگاه، درخت جداگانه‌ای با حروف درایو (C:\، D:\ و غیره) در نظر می‌گیرند.</p><hr> <h3>فایل پیکربندی <code>/etc/fstab</code></h3><p>فایلی به نام <code>/etc/fstab</code> فهرستی از دستگاه‌هایی را دارد که باید هنگام بوت شدن سیستم به‌طور خودکار <strong>mount</strong> شوند.<br> نمونه‌ای از محتوای این فایل در سیستم Fedora 7 به‌شکل زیر است:</p><pre class="hljs"><code>LABEL=/12         /                       ext3    defaults        1 1
 LABEL=/home       /home                   ext3    defaults        1 2
 LABEL=/boot       /boot                   ext3    defaults        1 2
 tmpfs             /dev/shm                tmpfs   defaults        0 0
@@ -154,63 +20,10 @@ devpts            /dev/pts                devpts  gid=5,mode=620  0 0
 sysfs             /sys                    sysfs   defaults        0 0
 proc              /proc                   proc    defaults        0 0
 LABEL=SWAP-sda3   swap                    swap    defaults        0 0
-</code></pre>
-<p>بیشتر فایل‌سیستم‌های بالا <strong>مجازی</strong> هستند (مثل <code>/proc</code> و <code>/sys</code>) و برای بحث ما مهم نیستند.<br>
-اما سه خط نخست مربوط به <strong>پارتیشن‌های دیسک سخت</strong> هستند و ارزش بررسی دارند:</p>
-<pre class="hljs"><code>LABEL=/12         /                       ext3    defaults        1 1
+</code></pre> <p>بیشتر فایل‌سیستم‌های بالا <strong>مجازی</strong> هستند (مثل <code>/proc</code> و <code>/sys</code>) و برای بحث ما مهم نیستند.<br> اما سه خط نخست مربوط به <strong>پارتیشن‌های دیسک سخت</strong> هستند و ارزش بررسی دارند:</p><pre class="hljs"><code>LABEL=/12         /                       ext3    defaults        1 1
 LABEL=/home       /home                   ext3    defaults        1 2
 LABEL=/boot       /boot                   ext3    defaults        1 2
-</code></pre>
-<hr>
-<h3>ساختار خطوط در <code>/etc/fstab</code></h3>
-<p>هر خط از این فایل شش بخش دارد که در جدول زیر آمده است:</p>
-<h4>جدول ۱۵-۱: فیلدهای فایل <code>/etc/fstab</code></h4>
-<table>
-<thead>
-<tr>
-<th>شماره</th>
-<th>فیلد</th>
-<th>توضیح</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>۱</td>
-<td><strong>Device</strong> (دستگاه)</td>
-<td>در گذشته این قسمت شامل مسیر فایل دستگاه فیزیکی بود، مانند <code>/dev/hda1</code> (پارتیشن اول روی دیسک اصلی کانال IDE اول). اما در سیستم‌های امروزی با وجود دستگاه‌های <strong>Hot-Pluggable</strong> (مثل USB)، بیشتر توزیع‌ها از <strong>برچسب متنی (Label)</strong> استفاده می‌کنند. این برچسب هنگام فرمت‌کردن به رسانه اضافه می‌شود و هنگام اتصال، سیستم‌عامل آن را می‌خواند تا دستگاه را به‌درستی شناسایی کند — حتی اگر نام فایل دستگاه تغییر کند.</td>
-</tr>
-<tr>
-<td>۲</td>
-<td><strong>Mount Point</strong> (نقطهٔ اتصال)</td>
-<td>مسیر شاخه‌ای از درخت فایل‌سیستم که دستگاه در آن mount می‌شود.</td>
-</tr>
-<tr>
-<td>۳</td>
-<td><strong>File System Type</strong> (نوع فایل‌سیستم)</td>
-<td>لینوکس از انواع زیادی فایل‌سیستم پشتیبانی می‌کند. معمول‌ترین نوع بومی آن <strong>ext3</strong> است، اما سیستم‌های دیگری نیز پشتیبانی می‌شوند، مانند FAT16 (<code>msdos</code>)، FAT32 (<code>vfat</code>)، NTFS (<code>ntfs</code>)، و CD-ROM (<code>iso9660</code>).</td>
-</tr>
-<tr>
-<td>۴</td>
-<td><strong>Options</strong> (گزینه‌ها)</td>
-<td>گزینه‌های اضافی برای mount کردن. برای مثال می‌توان فایل‌سیستم را فقط‌خواندنی (read-only) یا بدون اجازهٔ اجرای برنامه‌ها mount کرد — قابلیتی مفید برای امنیت رسانه‌های قابل‌حمل.</td>
-</tr>
-<tr>
-<td>۵</td>
-<td><strong>Frequency</strong> (تناوب پشتیبان‌گیری)</td>
-<td>عددی که مشخص می‌کند آیا فایل‌سیستم باید توسط دستور <code>dump</code> پشتیبان‌گیری شود یا خیر.</td>
-</tr>
-<tr>
-<td>۶</td>
-<td><strong>Order</strong> (ترتیب بررسی)</td>
-<td>عددی که مشخص می‌کند فایل‌سیستم‌ها در چه ترتیبی باید توسط دستور <code>fsck</code> بررسی شوند.</td>
-</tr>
-</tbody>
-</table>
-<hr>
-<h3>مشاهده‌ی فهرست فایل‌سیستم‌های Mount‌شده (Viewing a List of Mounted File Systems)</h3>
-<p>دستور <code>mount</code> برای <strong>اتصال (mount کردن)</strong> فایل‌سیستم‌ها استفاده می‌شود.<br>
-اگر این دستور <strong>بدون هیچ آرگومانی</strong> اجرا شود، فهرست تمام فایل‌سیستم‌های در حال استفاده در سیستم را نمایش می‌دهد:</p>
-<pre class="hljs"><code>[me@linuxbox ~]$ mount
+</code></pre> <hr><h3>ساختار خطوط در <code>/etc/fstab</code></h3><p>هر خط از این فایل شش بخش دارد که در جدول زیر آمده است:</p><h4>جدول ۱۵-۱: فیلدهای فایل <code>/etc/fstab</code></h4><table> <thead><tr> <th>شماره</th><th>فیلد</th><th>توضیح</th></tr> </thead><tbody> <tr><td>۱</td><td><strong>Device</strong> (دستگاه)</td><td>در گذشته این قسمت شامل مسیر فایل دستگاه فیزیکی بود، مانند <code>/dev/hda1</code> (پارتیشن اول روی دیسک اصلی کانال IDE اول). اما در سیستم‌های امروزی با وجود دستگاه‌های <strong>Hot-Pluggable</strong> (مثل USB)، بیشتر توزیع‌ها از <strong>برچسب متنی (Label)</strong> استفاده می‌کنند. این برچسب هنگام فرمت‌کردن به رسانه اضافه می‌شود و هنگام اتصال، سیستم‌عامل آن را می‌خواند تا دستگاه را به‌درستی شناسایی کند — حتی اگر نام فایل دستگاه تغییر کند.</td></tr> <tr><td>۲</td><td><strong>Mount Point</strong> (نقطهٔ اتصال)</td><td>مسیر شاخه‌ای از درخت فایل‌سیستم که دستگاه در آن mount می‌شود.</td></tr> <tr><td>۳</td><td><strong>File System Type</strong> (نوع فایل‌سیستم)</td><td>لینوکس از انواع زیادی فایل‌سیستم پشتیبانی می‌کند. معمول‌ترین نوع بومی آن <strong>ext3</strong> است، اما سیستم‌های دیگری نیز پشتیبانی می‌شوند، مانند FAT16 (<code>msdos</code>)، FAT32 (<code>vfat</code>)، NTFS (<code>ntfs</code>)، و CD-ROM (<code>iso9660</code>).</td></tr> <tr><td>۴</td><td><strong>Options</strong> (گزینه‌ها)</td><td>گزینه‌های اضافی برای mount کردن. برای مثال می‌توان فایل‌سیستم را فقط‌خواندنی (read-only) یا بدون اجازهٔ اجرای برنامه‌ها mount کرد — قابلیتی مفید برای امنیت رسانه‌های قابل‌حمل.</td></tr> <tr><td>۵</td><td><strong>Frequency</strong> (تناوب پشتیبان‌گیری)</td><td>عددی که مشخص می‌کند آیا فایل‌سیستم باید توسط دستور <code>dump</code> پشتیبان‌گیری شود یا خیر.</td></tr> <tr><td>۶</td><td><strong>Order</strong> (ترتیب بررسی)</td><td>عددی که مشخص می‌کند فایل‌سیستم‌ها در چه ترتیبی باید توسط دستور <code>fsck</code> بررسی شوند.</td></tr> </tbody></table> <hr><h3>مشاهده‌ی فهرست فایل‌سیستم‌های Mount‌شده (Viewing a List of Mounted File Systems)</h3><p>دستور <code>mount</code> برای <strong>اتصال (mount کردن)</strong> فایل‌سیستم‌ها استفاده می‌شود.<br> اگر این دستور <strong>بدون هیچ آرگومانی</strong> اجرا شود، فهرست تمام فایل‌سیستم‌های در حال استفاده در سیستم را نمایش می‌دهد:</p><pre class="hljs"><code>[me@linuxbox ~]$ mount
 /dev/sda2 on / type ext3 (rw)
 proc on /proc type proc (rw)
 sysfs on /sys type sysfs (rw)
@@ -223,21 +36,8 @@ sunrpc on /var/lib/nfs/rpc_pipefs type rpc_pipefs (rw)
 fusectl on /sys/fs/fuse/connections type fusectl (rw)
 /dev/sdd1 on /media/disk type vfat (rw,nosuid,nodev,noatime,uhelper=hal,uid=500,utf8,shortname=lower)
 twin4:/musicbox on /misc/musicbox type nfs4 (rw,addr=192.168.1.4)
-</code></pre>
-<p>فرمت خروجی به شکل زیر است:</p>
-<pre class="hljs"><code>device on mount_point type file_system_type (options)
-</code></pre>
-<p>برای مثال:<br>
-خط اول نشان می‌دهد که دستگاه <code>/dev/sda2</code> به عنوان <strong>فایل‌سیستم ریشه (root)</strong> متصل شده، نوع آن <code>ext3</code> است و با گزینه‌ی <code>(rw)</code> قابل خواندن و نوشتن می‌باشد.</p>
-<p>در انتهای این فهرست، دو مورد جالب دیده می‌شود:</p>
-<ul>
-<li><code>/dev/sdd1</code> → یک کارت حافظهٔ SD دو گیگابایتی که روی <code>/media/disk</code> mount شده است.</li>
-<li><code>twin4:/musicbox</code> → یک درایو شبکه‌ای (Network File System) که روی <code>/misc/musicbox</code> متصل است.</li>
-</ul>
-<hr>
-<h3>آزمایش با یک CD-ROM</h3>
-<p>برای تمرین، ابتدا وضعیت سیستم را <strong>قبل از وارد کردن CD</strong> بررسی می‌کنیم:</p>
-<pre class="hljs"><code>[me@linuxbox ~]$ mount
+</code></pre> <p>فرمت خروجی به شکل زیر است:</p><pre class="hljs"><code>device on mount_point type file_system_type (options)
+</code></pre> <p>برای مثال:<br> خط اول نشان می‌دهد که دستگاه <code>/dev/sda2</code> به عنوان <strong>فایل‌سیستم ریشه (root)</strong> متصل شده، نوع آن <code>ext3</code> است و با گزینه‌ی <code>(rw)</code> قابل خواندن و نوشتن می‌باشد.</p><p>در انتهای این فهرست، دو مورد جالب دیده می‌شود:</p><ul> <li><code>/dev/sdd1</code> → یک کارت حافظهٔ SD دو گیگابایتی که روی <code>/media/disk</code> mount شده است.</li><li><code>twin4:/musicbox</code> → یک درایو شبکه‌ای (Network File System) که روی <code>/misc/musicbox</code> متصل است.</li></ul> <hr><h3>آزمایش با یک CD-ROM</h3><p>برای تمرین، ابتدا وضعیت سیستم را <strong>قبل از وارد کردن CD</strong> بررسی می‌کنیم:</p><pre class="hljs"><code>[me@linuxbox ~]$ mount
 /dev/mapper/VolGroup00-LogVol00 on / type ext3 (rw)
 proc on /proc type proc (rw)
 sysfs on /sys type sysfs (rw)
@@ -246,11 +46,7 @@ devpts on /dev/pts type devpts (rw,gid=5,mode=620)
 tmpfs on /dev/shm type tmpfs (rw)
 none on /proc/sys/fs/binfmt_misc type binfmt_misc (rw)
 sunrpc on /var/lib/nfs/rpc_pipefs type rpc_pipefs (rw)
-</code></pre>
-<p>این خروجی مربوط به سیستم <strong>CentOS 5</strong> است که از <strong>LVM (مدیر حجم منطقی)</strong> برای ساخت فایل‌سیستم ریشه استفاده می‌کند.<br>
-بسیاری از توزیع‌های امروزی مانند CentOS، پس از وارد کردن CD-ROM، به‌صورت خودکار آن را mount می‌کنند.</p>
-<p>پس از وارد کردن دیسک، خروجی دستور تغییر می‌کند:</p>
-<pre class="hljs"><code>[me@linuxbox ~]$ mount
+</code></pre> <p>این خروجی مربوط به سیستم <strong>CentOS 5</strong> است که از <strong>LVM (مدیر حجم منطقی)</strong> برای ساخت فایل‌سیستم ریشه استفاده می‌کند.<br> بسیاری از توزیع‌های امروزی مانند CentOS، پس از وارد کردن CD-ROM، به‌صورت خودکار آن را mount می‌کنند.</p><p>پس از وارد کردن دیسک، خروجی دستور تغییر می‌کند:</p><pre class="hljs"><code>[me@linuxbox ~]$ mount
 /dev/mapper/VolGroup00-LogVol00 on / type ext3 (rw)
 proc on /proc type proc (rw)
 sysfs on /sys type sysfs (rw)
@@ -260,210 +56,39 @@ tmpfs on /dev/shm type tmpfs (rw)
 none on /proc/sys/fs/binfmt_misc type binfmt_misc (rw)
 sunrpc on /var/lib/nfs/rpc_pipefs type rpc_pipefs (rw)
 /dev/hdc on /media/live-1.0.10-8 type iso9660 (ro,noexec,nosuid,nodev,uid=500)
-</code></pre>
-<p>تفاوت با حالت قبل فقط <strong>یک خط اضافه در انتها</strong> است:<br>
-دستگاه <code>/dev/hdc</code> (درایو CD-ROM) اکنون روی مسیر <code>/media/live-1.0.10-8</code> با نوع فایل‌سیستم <code>iso9660</code> (ویژهٔ CD-ROM) mount شده است.</p>
-<blockquote>
-<p>⚠️ <strong>هشدار مهم:</strong><br>
-در تمرین‌های عملی، باید با دقت نام واقعی دستگاه در سیستم خود را بررسی کنید.<br>
-از نام‌های موجود در مثال‌ها استفاده نکنید، چون ممکن است در سیستم شما متفاوت باشند.</p>
-</blockquote>
-<blockquote>
-<p>همچنین توجه کنید: <strong>CD صوتی (Audio CD)</strong> مانند CD-ROM نیست و <strong>فایل‌سیستم ندارد</strong>، بنابراین mount نمی‌شود.</p>
-</blockquote>
-<hr>
-<h3>Unmount و Mount دستی</h3>
-<p>حالا که نام دستگاه CD-ROM را می‌دانیم، آن را <strong>unmount</strong> کرده و دوباره در مسیر جدیدی <strong>mount</strong> می‌کنیم.<br>
-ابتدا باید با دستور <code>su</code> به کاربر ریشه (superuser) برویم:</p>
-<pre class="hljs"><code>[me@linuxbox ~]$ su
+</code></pre> <p>تفاوت با حالت قبل فقط <strong>یک خط اضافه در انتها</strong> است:<br> دستگاه <code>/dev/hdc</code> (درایو CD-ROM) اکنون روی مسیر <code>/media/live-1.0.10-8</code> با نوع فایل‌سیستم <code>iso9660</code> (ویژهٔ CD-ROM) mount شده است.</p><blockquote> <p><strong>هشدار مهم:</strong><br> در تمرین‌های عملی، باید با دقت نام واقعی دستگاه در سیستم خود را بررسی کنید.<br> از نام‌های موجود در مثال‌ها استفاده نکنید، چون ممکن است در سیستم شما متفاوت باشند.</p></blockquote> <blockquote><p>همچنین توجه کنید: <strong>CD صوتی (Audio CD)</strong> مانند CD-ROM نیست و <strong>فایل‌سیستم ندارد</strong>، بنابراین mount نمی‌شود.</p></blockquote> <hr><h3>Unmount و Mount دستی</h3><p>حالا که نام دستگاه CD-ROM را می‌دانیم، آن را <strong>unmount</strong> کرده و دوباره در مسیر جدیدی <strong>mount</strong> می‌کنیم.<br> ابتدا باید با دستور <code>su</code> به کاربر ریشه (superuser) برویم:</p><pre class="hljs"><code>[me@linuxbox ~]$ su
 Password:
 [root@linuxbox ~]# umount /dev/hdc
-</code></pre>
-<p>سپس یک مسیر جدید برای mount کردن می‌سازیم:</p>
-<pre class="hljs"><code>[root@linuxbox ~]# mkdir /mnt/cdrom
-</code></pre>
-<p>اکنون CD-ROM را در این مسیر جدید mount می‌کنیم.<br>
-گزینه‌ی <code>-t</code> نوع فایل‌سیستم را مشخص می‌کند:</p>
-<pre class="hljs"><code>[root@linuxbox ~]# mount -t iso9660 /dev/hdc /mnt/cdrom
-</code></pre>
-<p>حالا می‌توانیم محتویات CD را ببینیم:</p>
-<pre class="hljs"><code>[root@linuxbox ~]# cd /mnt/cdrom
+</code></pre> <p>سپس یک مسیر جدید برای mount کردن می‌سازیم:</p><pre class="hljs"><code>[root@linuxbox ~]# mkdir /mnt/cdrom
+</code></pre> <p>اکنون CD-ROM را در این مسیر جدید mount می‌کنیم.<br> گزینه‌ی <code>-t</code> نوع فایل‌سیستم را مشخص می‌کند:</p><pre class="hljs"><code>[root@linuxbox ~]# mount -t iso9660 /dev/hdc /mnt/cdrom
+</code></pre> <p>حالا می‌توانیم محتویات CD را ببینیم:</p><pre class="hljs"><code>[root@linuxbox ~]# cd /mnt/cdrom
 [root@linuxbox cdrom]# ls
-</code></pre>
-<hr>
-<h3>خطای &quot;Device is busy&quot; هنگام Unmount</h3>
-<p>اگر در همین حالت بخواهیم CD را unmount کنیم:</p>
-<pre class="hljs"><code>[root@linuxbox cdrom]# umount /dev/hdc
+</code></pre> <hr><h3>خطای &quot;Device is busy&quot; هنگام Unmount</h3><p>اگر در همین حالت بخواهیم CD را unmount کنیم:</p><pre class="hljs"><code>[root@linuxbox cdrom]# umount /dev/hdc
 umount: /mnt/cdrom: device is busy
-</code></pre>
-<p>خطا به این دلیل است که <strong>دستگاه در حال استفاده است</strong>.<br>
-در این مثال، دایرکتوری کاری ما (<code>pwd</code>) همان مسیر mount است، بنابراین سیستم نمی‌تواند آن را جدا کند.</p>
-<p>برای رفع این مشکل کافی است دایرکتوری کاری را تغییر دهیم:</p>
-<pre class="hljs"><code>[root@linuxbox cdrom]# cd
+</code></pre> <p>خطا به این دلیل است که <strong>دستگاه در حال استفاده است</strong>.<br> در این مثال، دایرکتوری کاری ما (<code>pwd</code>) همان مسیر mount است، بنابراین سیستم نمی‌تواند آن را جدا کند.</p><p>برای رفع این مشکل کافی است دایرکتوری کاری را تغییر دهیم:</p><pre class="hljs"><code>[root@linuxbox cdrom]# cd
 [root@linuxbox ~]# umount /dev/hdc
-</code></pre>
-<p>اکنون دستگاه <strong>با موفقیت unmount می‌شود.</strong></p>
-<hr>
-<h3>چرا Unmount کردن مهم است (Why Unmounting Is Important)</h3>
-<p>اگر خروجی دستور <code>free</code> را ببینید — که وضعیت استفاده از حافظه را نمایش می‌دهد — متوجه بخشی با عنوان <strong>buffers</strong> خواهید شد.<br>
-رایانه‌ها طوری طراحی شده‌اند که <strong>بیشترین سرعت ممکن</strong> را داشته باشند. یکی از عواملی که سرعت را کاهش می‌دهد، <strong>دستگاه‌های کندتر</strong> هستند.</p>
-<p>برای درک مفهوم، تصور کنید پرینترها چقدر کندتر از رایانه‌اند. اگر سیستم مجبور بود تا اتمام چاپ هر صفحه منتظر بماند، عملاً متوقف می‌شد. در روزگار قبل از چندوظیفه‌ای بودن (multi-tasking)، این واقعاً اتفاق می‌افتاد — هر بار که چاپ می‌کردید، سیستم تا پایان چاپ قفل می‌شد.</p>
-<p>راه‌حل این مشکل ایجاد <strong>Printer Buffer</strong> بود:<br>
-وسیله‌ای شامل RAM که بین کامپیوتر و چاپگر قرار می‌گرفت. کامپیوتر داده‌ها را سریع به این بافر می‌فرستاد و فوراً آزاد می‌شد تا به کار دیگر برسد، درحالی‌که بافر داده‌ها را با سرعت پایین‌تر به چاپگر می‌فرستاد.</p>
-<hr>
-<h3>مفهوم Buffering در سیستم‌عامل</h3>
-<p>همین ایده در کل سیستم‌های کامپیوتری پیاده‌سازی شده است تا سرعت را افزایش دهد.<br>
-سیستم‌عامل داده‌هایی را که باید خوانده یا نوشته شوند، <strong>برای مدتی در حافظه نگه می‌دارد</strong> تا تعامل با دستگاه‌های کند کمتر انجام شود.</p>
-<p>در لینوکس اگر مدتی از سیستم استفاده کنید، می‌بینید که میزان استفاده از حافظه زیاد می‌شود — اما این به معنای پر شدن حافظه نیست. لینوکس در واقع از حافظه‌ی آزاد برای <strong>بافر کردن داده‌ها</strong> استفاده می‌کند تا عملیات I/O سریع‌تر انجام شود.</p>
-<hr>
-<h3>چرا Unmount لازم است</h3>
-<p>این بافر باعث می‌شود عملیات نوشتن به دستگاه‌های ذخیره‌سازی بسیار سریع به نظر برسد، چون داده‌ها فوراً در حافظه نوشته می‌شوند و بعداً در زمان مناسب به دستگاه واقعی منتقل می‌گردند.</p>
-<p>وقتی یک دستگاه را <strong>Unmount</strong> می‌کنید، سیستم تمام داده‌های باقی‌مانده در بافر را به آن دستگاه منتقل می‌کند تا مطمئن شود همه چیز نوشته شده است.</p>
-<p>اگر دستگاه را بدون Unmount کردن جدا کنید:</p>
-<ul>
-<li>ممکن است بخشی از داده‌ها هنوز به دیسک منتقل نشده باشد.</li>
-<li>و در بدترین حالت، اطلاعات حیاتی مانند <strong>به‌روزرسانی‌های ساختار دایرکتوری</strong> از دست بروند.<br>
-نتیجه؟ <strong>خرابی فایل‌سیستم (File System Corruption)</strong> — یکی از مخرب‌ترین اتفاقات در یک کامپیوتر.</li>
-</ul>
-<hr>
-<h3>شناسایی نام دستگاه‌ها (Determining Device Names)</h3>
-<p>گاهی تشخیص نام دقیق یک دستگاه دشوار است. در گذشته (وقتی تغییر دیسک سخت نیاز به لیفتراک داشت!) این مشکل وجود نداشت، چون هر دستگاه جای ثابتی داشت.<br>
-اما در سیستم‌های مدرن با دستگاه‌های USB، SATA و Hot-Swap، پیکربندی سخت‌افزار بسیار پویا شده است و لینوکس برای هماهنگی با این وضعیت انعطاف‌پذیرتر شده است.</p>
-<p>در مثال‌های قبل، ما از قابلیت mount خودکار محیط دسکتاپ استفاده کردیم تا نام دستگاه را پس از اتصال متوجه شویم.<br>
-اما در سرورها یا محیط‌های غیردسکتاپی که mount خودکار انجام نمی‌شود، چطور باید نام دستگاه را پیدا کنیم؟</p>
-<hr>
-<h3>مشاهده‌ی دستگاه‌ها در دایرکتوری <code>/dev</code></h3>
-<p>تمام دستگاه‌های سیستم در مسیر <code>/dev</code> تعریف شده‌اند. با دستور زیر می‌توان فهرست آن‌ها را دید:</p>
-<pre class="hljs"><code>[me@linuxbox ~]$ ls /dev
-</code></pre>
-<p>نام‌ها در این فهرست از الگوهای مشخصی پیروی می‌کنند:</p>
-<h4>جدول ۱۵-۲: نام‌گذاری دستگاه‌های ذخیره‌سازی در لینوکس</h4>
-<table>
-<thead>
-<tr>
-<th>الگو</th>
-<th>نوع دستگاه</th>
-<th>توضیح</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>/dev/fd*</code></td>
-<td>فلاپی دیسک‌ها</td>
-<td>هر دیسک فلاپی یک شماره دارد.</td>
-</tr>
-<tr>
-<td><code>/dev/hd*</code></td>
-<td>دیسک‌های <strong>IDE (PATA)</strong> در سیستم‌های قدیمی</td>
-<td>هر کانال IDE دو دستگاه دارد (master و slave). مثال: <code>/dev/hda1</code> = پارتیشن اول دیسک اول.</td>
-</tr>
-<tr>
-<td><code>/dev/lp*</code></td>
-<td>چاپگرها</td>
-<td>پورت‌های موازی (parallel port printers).</td>
-</tr>
-<tr>
-<td><code>/dev/sd*</code></td>
-<td>دیسک‌های <strong>SCSI / SATA / USB</strong></td>
-<td>امروزه لینوکس تقریباً تمام دیسک‌ها (SATA، فلش USB، حافظه‌ی دوربین و...) را به این صورت نام‌گذاری می‌کند. <code>/dev/sda</code> دیسک اول، <code>/dev/sdb</code> دیسک دوم و رقم انتهایی شماره پارتیشن است (مثلاً <code>/dev/sdb1</code>).</td>
-</tr>
-<tr>
-<td><code>/dev/sr*</code></td>
-<td>درایوهای نوری (CD/DVD)</td>
-<td>شامل خواننده و نویسنده‌های دیسک نوری.</td>
-</tr>
-</tbody>
-</table>
-<p>علاوه بر این، لینک‌های نمادین مانند <code>/dev/cdrom</code>، <code>/dev/dvd</code> و <code>/dev/floppy</code> معمولاً برای راحتی ایجاد می‌شوند و به مسیر واقعی دستگاه اشاره می‌کنند.</p>
-<hr>
-<h3>روش تشخیص نام دستگاه متصل‌شده</h3>
-<p>اگر در سیستمی کار می‌کنید که <strong>دستگاه‌های قابل‌حمل به‌صورت خودکار mount نمی‌شوند</strong>، می‌توانید با مشاهده‌ی بلادرنگ فایل لاگ سیستم، نام دستگاه را هنگام اتصال تشخیص دهید.</p>
-<p>برای این کار دستور زیر را اجرا کنید (احتمالاً نیاز به دسترسی superuser دارید):</p>
-<pre class="hljs"><code>[me@linuxbox ~]$ sudo tail -f /var/log/messages
-</code></pre>
-<p>با اجرای این دستور، هنگام اتصال فلش یا دیسک جدید، پیام‌های سیستم در لحظه نمایش داده می‌شوند — از جمله نام دقیق دستگاهی که توسط کرنل شناسایی شده (مثلاً <code>/dev/sdb1</code>).</p>
-<hr>
-<h3>شناسایی دستگاه متصل‌شده (Detecting the Connected Device)</h3>
-<p>وقتی دستور زیر را اجرا می‌کنید:</p>
-<pre class="hljs"><code>sudo tail -f /var/log/messages
-</code></pre>
-<p>چند خط پایانی فایل لاگ نمایش داده می‌شود و سپس منتظر می‌ماند.<br>
-اکنون اگر دستگاهی مانند <strong>فلش مموری ۱۶ مگابایتی</strong> را وصل کنید، کرنل بلافاصله اتصال آن را تشخیص می‌دهد و اطلاعات زیر را ثبت می‌کند:</p>
-<pre class="hljs"><code>Jul 23 10:07:53 linuxbox kernel: usb 3-2: new full speed USB device using uhci_hcd and address 2
+</code></pre> <p>اکنون دستگاه <strong>با موفقیت unmount می‌شود.</strong></p><hr> <h3>چرا Unmount کردن مهم است (Why Unmounting Is Important)</h3><p>اگر خروجی دستور <code>free</code> را ببینید — که وضعیت استفاده از حافظه را نمایش می‌دهد — متوجه بخشی با عنوان <strong>buffers</strong> خواهید شد.<br> رایانه‌ها طوری طراحی شده‌اند که <strong>بیشترین سرعت ممکن</strong> را داشته باشند. یکی از عواملی که سرعت را کاهش می‌دهد، <strong>دستگاه‌های کندتر</strong> هستند.</p><p>برای درک مفهوم، تصور کنید پرینترها چقدر کندتر از رایانه‌اند. اگر سیستم مجبور بود تا اتمام چاپ هر صفحه منتظر بماند، عملاً متوقف می‌شد. در روزگار قبل از چندوظیفه‌ای بودن (multi-tasking)، این واقعاً اتفاق می‌افتاد — هر بار که چاپ می‌کردید، سیستم تا پایان چاپ قفل می‌شد.</p><p>راه‌حل این مشکل ایجاد <strong>Printer Buffer</strong> بود:<br> وسیله‌ای شامل RAM که بین کامپیوتر و چاپگر قرار می‌گرفت. کامپیوتر داده‌ها را سریع به این بافر می‌فرستاد و فوراً آزاد می‌شد تا به کار دیگر برسد، درحالی‌که بافر داده‌ها را با سرعت پایین‌تر به چاپگر می‌فرستاد.</p><hr> <h3>مفهوم Buffering در سیستم‌عامل</h3><p>همین ایده در کل سیستم‌های کامپیوتری پیاده‌سازی شده است تا سرعت را افزایش دهد.<br> سیستم‌عامل داده‌هایی را که باید خوانده یا نوشته شوند، <strong>برای مدتی در حافظه نگه می‌دارد</strong> تا تعامل با دستگاه‌های کند کمتر انجام شود.</p><p>در لینوکس اگر مدتی از سیستم استفاده کنید، می‌بینید که میزان استفاده از حافظه زیاد می‌شود — اما این به معنای پر شدن حافظه نیست. لینوکس در واقع از حافظه‌ی آزاد برای <strong>بافر کردن داده‌ها</strong> استفاده می‌کند تا عملیات I/O سریع‌تر انجام شود.</p><hr> <h3>چرا Unmount لازم است</h3><p>این بافر باعث می‌شود عملیات نوشتن به دستگاه‌های ذخیره‌سازی بسیار سریع به نظر برسد، چون داده‌ها فوراً در حافظه نوشته می‌شوند و بعداً در زمان مناسب به دستگاه واقعی منتقل می‌گردند.</p><p>وقتی یک دستگاه را <strong>Unmount</strong> می‌کنید، سیستم تمام داده‌های باقی‌مانده در بافر را به آن دستگاه منتقل می‌کند تا مطمئن شود همه چیز نوشته شده است.</p><p>اگر دستگاه را بدون Unmount کردن جدا کنید:</p><ul> <li>ممکن است بخشی از داده‌ها هنوز به دیسک منتقل نشده باشد.</li><li>و در بدترین حالت، اطلاعات حیاتی مانند <strong>به‌روزرسانی‌های ساختار دایرکتوری</strong> از دست بروند.<br> نتیجه؟ <strong>خرابی فایل‌سیستم (File System Corruption)</strong> — یکی از مخرب‌ترین اتفاقات در یک کامپیوتر.</li></ul> <hr><h3>شناسایی نام دستگاه‌ها (Determining Device Names)</h3><p>گاهی تشخیص نام دقیق یک دستگاه دشوار است. در گذشته (وقتی تغییر دیسک سخت نیاز به لیفتراک داشت!) این مشکل وجود نداشت، چون هر دستگاه جای ثابتی داشت.<br> اما در سیستم‌های مدرن با دستگاه‌های USB، SATA و Hot-Swap، پیکربندی سخت‌افزار بسیار پویا شده است و لینوکس برای هماهنگی با این وضعیت انعطاف‌پذیرتر شده است.</p><p>در مثال‌های قبل، ما از قابلیت mount خودکار محیط دسکتاپ استفاده کردیم تا نام دستگاه را پس از اتصال متوجه شویم.<br> اما در سرورها یا محیط‌های غیردسکتاپی که mount خودکار انجام نمی‌شود، چطور باید نام دستگاه را پیدا کنیم؟</p><hr> <h3>مشاهده‌ی دستگاه‌ها در دایرکتوری <code>/dev</code></h3><p>تمام دستگاه‌های سیستم در مسیر <code>/dev</code> تعریف شده‌اند. با دستور زیر می‌توان فهرست آن‌ها را دید:</p><pre class="hljs"><code>[me@linuxbox ~]$ ls /dev
+</code></pre> <p>نام‌ها در این فهرست از الگوهای مشخصی پیروی می‌کنند:</p><h4>جدول ۱۵-۲: نام‌گذاری دستگاه‌های ذخیره‌سازی در لینوکس</h4><table> <thead><tr> <th>الگو</th><th>نوع دستگاه</th><th>توضیح</th></tr> </thead><tbody> <tr><td><code>/dev/fd*</code></td><td>فلاپی دیسک‌ها</td><td>هر دیسک فلاپی یک شماره دارد.</td></tr> <tr><td><code>/dev/hd*</code></td><td>دیسک‌های <strong>IDE (PATA)</strong> در سیستم‌های قدیمی</td><td>هر کانال IDE دو دستگاه دارد (master و slave). مثال: <code>/dev/hda1</code> = پارتیشن اول دیسک اول.</td></tr> <tr><td><code>/dev/lp*</code></td><td>چاپگرها</td><td>پورت‌های موازی (parallel port printers).</td></tr> <tr><td><code>/dev/sd*</code></td><td>دیسک‌های <strong>SCSI / SATA / USB</strong></td><td>امروزه لینوکس تقریباً تمام دیسک‌ها (SATA، فلش USB، حافظه‌ی دوربین و...) را به این صورت نام‌گذاری می‌کند. <code>/dev/sda</code> دیسک اول، <code>/dev/sdb</code> دیسک دوم و رقم انتهایی شماره پارتیشن است (مثلاً <code>/dev/sdb1</code>).</td></tr> <tr><td><code>/dev/sr*</code></td><td>درایوهای نوری (CD/DVD)</td><td>شامل خواننده و نویسنده‌های دیسک نوری.</td></tr> </tbody></table> <p>علاوه بر این، لینک‌های نمادین مانند <code>/dev/cdrom</code>، <code>/dev/dvd</code> و <code>/dev/floppy</code> معمولاً برای راحتی ایجاد می‌شوند و به مسیر واقعی دستگاه اشاره می‌کنند.</p><hr> <h3>روش تشخیص نام دستگاه متصل‌شده</h3><p>اگر در سیستمی کار می‌کنید که <strong>دستگاه‌های قابل‌حمل به‌صورت خودکار mount نمی‌شوند</strong>، می‌توانید با مشاهده‌ی بلادرنگ فایل لاگ سیستم، نام دستگاه را هنگام اتصال تشخیص دهید.</p><p>برای این کار دستور زیر را اجرا کنید (احتمالاً نیاز به دسترسی superuser دارید):</p><pre class="hljs"><code>[me@linuxbox ~]$ sudo tail -f /var/log/messages
+</code></pre> <p>با اجرای این دستور، هنگام اتصال فلش یا دیسک جدید، پیام‌های سیستم در لحظه نمایش داده می‌شوند — از جمله نام دقیق دستگاهی که توسط کرنل شناسایی شده (مثلاً <code>/dev/sdb1</code>).</p><hr> <h3>شناسایی دستگاه متصل‌شده (Detecting the Connected Device)</h3><p>وقتی دستور زیر را اجرا می‌کنید:</p><pre class="hljs"><code>sudo tail -f /var/log/messages
+</code></pre> <p>چند خط پایانی فایل لاگ نمایش داده می‌شود و سپس منتظر می‌ماند.<br> اکنون اگر دستگاهی مانند <strong>فلش مموری ۱۶ مگابایتی</strong> را وصل کنید، کرنل بلافاصله اتصال آن را تشخیص می‌دهد و اطلاعات زیر را ثبت می‌کند:</p><pre class="hljs"><code>Jul 23 10:07:53 linuxbox kernel: usb 3-2: new full speed USB device using uhci_hcd and address 2
 Jul 23 10:07:53 linuxbox kernel: usb 3-2: configuration #1 chosen from 1 choice
 Jul 23 10:07:53 linuxbox kernel: scsi3 : SCSI emulation for USB Mass Storage devices
 Jul 23 10:07:59 linuxbox kernel: sd 3:0:0:0: [sdb] 31263 512-byte hardware sectors (16 MB)
 Jul 23 10:07:59 linuxbox kernel:  sdb: sdb1
 Jul 23 10:07:59 linuxbox kernel: sd 3:0:0:0: [sdb] Attached SCSI removable disk
-</code></pre>
-<p>در این پیام‌ها، چند نکته مهم وجود دارد:</p>
-<ul>
-<li>چندین بار نام <code>[sdb]</code> تکرار شده است، که نشان می‌دهد دستگاه ما به‌صورت <strong>دیسک SCSI مجازی</strong> شناخته شده است.</li>
-<li>خط <code>sdb: sdb1</code> بیان می‌کند که دستگاه <code>/dev/sdb</code> یک پارتیشن به نام <code>/dev/sdb1</code> دارد.</li>
-</ul>
-<p>بنابراین:</p>
-<ul>
-<li>کل دستگاه = <code>/dev/sdb</code></li>
-<li>اولین پارتیشن = <code>/dev/sdb1</code></li>
-</ul>
-<blockquote>
-<p>💡 <strong>نکته:</strong> استفاده از روش <code>tail -f /var/log/messages</code> راهی عالی برای دیدن رفتار سیستم در زمان واقعی است.</p>
-</blockquote>
-<hr>
-<h3>Mount کردن فلش درایو</h3>
-<p>اکنون که نام دستگاه را می‌دانیم، آن را mount می‌کنیم:</p>
-<pre class="hljs"><code>[me@linuxbox ~]$ sudo mkdir /mnt/flash
+</code></pre> <p>در این پیام‌ها، چند نکته مهم وجود دارد:</p><ul> <li>چندین بار نام <code>[sdb]</code> تکرار شده است، که نشان می‌دهد دستگاه ما به‌صورت <strong>دیسک SCSI مجازی</strong> شناخته شده است.</li><li>خط <code>sdb: sdb1</code> بیان می‌کند که دستگاه <code>/dev/sdb</code> یک پارتیشن به نام <code>/dev/sdb1</code> دارد.</li></ul> <p>بنابراین:</p><ul> <li>کل دستگاه = <code>/dev/sdb</code></li><li>اولین پارتیشن = <code>/dev/sdb1</code></li></ul> <blockquote><p><strong>نکته:</strong> استفاده از روش <code>tail -f /var/log/messages</code> راهی عالی برای دیدن رفتار سیستم در زمان واقعی است.</p></blockquote> <hr><h3>Mount کردن فلش درایو</h3><p>اکنون که نام دستگاه را می‌دانیم، آن را mount می‌کنیم:</p><pre class="hljs"><code>[me@linuxbox ~]$ sudo mkdir /mnt/flash
 [me@linuxbox ~]$ sudo mount /dev/sdb1 /mnt/flash
-</code></pre>
-<p>می‌توانیم با دستور <code>df</code> بررسی کنیم که mount با موفقیت انجام شده است:</p>
-<pre class="hljs"><code>[me@linuxbox ~]$ df
+</code></pre> <p>می‌توانیم با دستور <code>df</code> بررسی کنیم که mount با موفقیت انجام شده است:</p><pre class="hljs"><code>[me@linuxbox ~]$ df
 Filesystem           1K-blocks      Used Available Use% Mounted on
 /dev/sda2             15115452   5186944   9775164  35% /
 /dev/sda5             59631908  31777376  24776480  57% /home
 /dev/sda1               147764     17277    122858  13% /boot
 tmpfs                   776808         0    776808   0% /dev/shm
 /dev/sdb1                15560         0     15560   0% /mnt/flash
-</code></pre>
-<p>در اینجا <code>/dev/sdb1</code> روی مسیر <code>/mnt/flash</code> mount شده و آماده استفاده است.<br>
-نام دستگاه تا زمانی که فلش جدا نشود یا سیستم reboot نگردد، ثابت می‌ماند.</p>
-<hr>
-<h3>ساخت فایل‌سیستم جدید (Creating New File Systems)</h3>
-<p>فرض کنیم می‌خواهیم فلش مموری را به‌جای سیستم فایل FAT32، با یک فایل‌سیستم بومی لینوکس (مثل <code>ext3</code> یا <code>ext4</code>) فرمت کنیم.<br>
-برای این کار دو مرحله داریم:</p>
-<ol>
-<li><strong>(اختیاری)</strong> ایجاد جدول پارتیشن جدید (در صورتی که ساختار فعلی مدنظرمان نباشد)</li>
-<li><strong>ایجاد فایل‌سیستم خالی جدید روی درایو</strong></li>
-</ol>
-<blockquote>
-<p>⚠️ <strong>هشدار بسیار مهم:</strong><br>
-در این تمرین قرار است فلش مموری را <strong>فرمت</strong> کنیم.<br>
-حتماً از درایوی استفاده کنید که داده‌ی مهمی در آن نیست، چون تمام محتوا پاک می‌شود.<br>
-همچنین مطمئن شوید نام دستگاهی که وارد می‌کنید دقیقاً همان دستگاه موردنظر شماست.<br>
-اشتباه در این مرحله ممکن است منجر به <strong>پاک شدن کامل هارد اصلی سیستم</strong> شود.</p>
-</blockquote>
-<hr>
-<h3>کار با پارتیشن‌ها با استفاده از <strong>fdisk</strong> (Manipulating Partitions With fdisk)</h3>
-<p>برنامه‌ی <code>fdisk</code> این امکان را می‌دهد که به‌صورت مستقیم و در سطح بسیار پایین با دستگاه‌های ذخیره‌سازی مانند <strong>هارددیسک</strong> یا <strong>فلش مموری</strong> کار کنیم.<br>
-با استفاده از این ابزار می‌توانیم <strong>پارتیشن‌ها را مشاهده، ایجاد، حذف یا ویرایش</strong> کنیم.</p>
-<hr>
-<h3>اجرای fdisk برای ویرایش پارتیشن‌ها</h3>
-<p>برای کار با فلش‌درایو، ابتدا باید آن را <strong>Unmount</strong> کنیم (اگر mount شده است):</p>
-<pre class="hljs"><code>[me@linuxbox ~]$ sudo umount /dev/sdb1
-</code></pre>
-<p>سپس برنامه را روی کل دستگاه (نه فقط یک پارتیشن) اجرا می‌کنیم:</p>
-<pre class="hljs"><code>[me@linuxbox ~]$ sudo fdisk /dev/sdb
-</code></pre>
-<blockquote>
-<p>توجه:<br>
-باید دستگاه را به‌صورت کامل مشخص کنید (<code>/dev/sdb</code>) نه به‌صورت یک پارتیشن (<code>/dev/sdb1</code>).</p>
-</blockquote>
-<p>پس از اجرای برنامه، پرامپت زیر ظاهر می‌شود:</p>
-<pre class="hljs"><code>Command (m for help):
-</code></pre>
-<hr>
-<h3>نمایش منوی دستورات</h3>
-<p>اگر <code>m</code> را وارد کنیم، منوی راهنما ظاهر می‌شود:</p>
-<pre class="hljs"><code>Command action
+</code></pre> <p>در اینجا <code>/dev/sdb1</code> روی مسیر <code>/mnt/flash</code> mount شده و آماده استفاده است.<br> نام دستگاه تا زمانی که فلش جدا نشود یا سیستم reboot نگردد، ثابت می‌ماند.</p><hr> <h3>ساخت فایل‌سیستم جدید (Creating New File Systems)</h3><p>فرض کنیم می‌خواهیم فلش مموری را به‌جای سیستم فایل FAT32، با یک فایل‌سیستم بومی لینوکس (مثل <code>ext3</code> یا <code>ext4</code>) فرمت کنیم.<br> برای این کار دو مرحله داریم:</p><ol> <li><strong>(اختیاری)</strong> ایجاد جدول پارتیشن جدید (در صورتی که ساختار فعلی مدنظرمان نباشد)</li><li><strong>ایجاد فایل‌سیستم خالی جدید روی درایو</strong></li></ol> <blockquote><p><strong>هشدار بسیار مهم:</strong><br> در این تمرین قرار است فلش مموری را <strong>فرمت</strong> کنیم.<br> حتماً از درایوی استفاده کنید که داده‌ی مهمی در آن نیست، چون تمام محتوا پاک می‌شود.<br> همچنین مطمئن شوید نام دستگاهی که وارد می‌کنید دقیقاً همان دستگاه موردنظر شماست.<br> اشتباه در این مرحله ممکن است منجر به <strong>پاک شدن کامل هارد اصلی سیستم</strong> شود.</p></blockquote> <hr><h3>کار با پارتیشن‌ها با استفاده از <strong>fdisk</strong> (Manipulating Partitions With fdisk)</h3><p>برنامه‌ی <code>fdisk</code> این امکان را می‌دهد که به‌صورت مستقیم و در سطح بسیار پایین با دستگاه‌های ذخیره‌سازی مانند <strong>هارددیسک</strong> یا <strong>فلش مموری</strong> کار کنیم.<br> با استفاده از این ابزار می‌توانیم <strong>پارتیشن‌ها را مشاهده، ایجاد، حذف یا ویرایش</strong> کنیم.</p><hr> <h3>اجرای fdisk برای ویرایش پارتیشن‌ها</h3><p>برای کار با فلش‌درایو، ابتدا باید آن را <strong>Unmount</strong> کنیم (اگر mount شده است):</p><pre class="hljs"><code>[me@linuxbox ~]$ sudo umount /dev/sdb1
+</code></pre> <p>سپس برنامه را روی کل دستگاه (نه فقط یک پارتیشن) اجرا می‌کنیم:</p><pre class="hljs"><code>[me@linuxbox ~]$ sudo fdisk /dev/sdb
+</code></pre> <blockquote><p>توجه:<br> باید دستگاه را به‌صورت کامل مشخص کنید (<code>/dev/sdb</code>) نه به‌صورت یک پارتیشن (<code>/dev/sdb1</code>).</p></blockquote> <p>پس از اجرای برنامه، پرامپت زیر ظاهر می‌شود:</p><pre class="hljs"><code>Command (m for help):
+</code></pre> <hr><h3>نمایش منوی دستورات</h3><p>اگر <code>m</code> را وارد کنیم، منوی راهنما ظاهر می‌شود:</p><pre class="hljs"><code>Command action
    a   toggle a bootable flag 
    b   edit bsd disklabel 
    c   toggle the dos compatibility flag 
@@ -481,68 +106,27 @@ tmpfs                   776808         0    776808   0% /dev/shm
    w   write table to disk and exit 
    x   extra functionality (experts only)
 Command (m for help):
-</code></pre>
-<hr>
-<h3>مشاهده‌ی جدول پارتیشن فعلی</h3>
-<p>برای دیدن پارتیشن‌های موجود، <code>p</code> را وارد می‌کنیم:</p>
-<pre class="hljs"><code>Command (m for help): p
+</code></pre> <hr><h3>مشاهده‌ی جدول پارتیشن فعلی</h3><p>برای دیدن پارتیشن‌های موجود، <code>p</code> را وارد می‌کنیم:</p><pre class="hljs"><code>Command (m for help): p
 Disk /dev/sdb: 16 MB, 16006656 bytes
 1 heads, 31 sectors/track, 1008 cylinders
 Units = cylinders of 31 * 512 = 15872 bytes
 
    Device Boot      Start         End      Blocks   Id  System
 /dev/sdb1               2        1008       15608+   b  W95 FAT32
-</code></pre>
-<p>در این مثال، دستگاهی با ظرفیت ۱۶ مگابایت داریم که شامل یک پارتیشن (<code>/dev/sdb1</code>) است که تقریباً تمام فضای دیسک را پوشش می‌دهد.<br>
-سیستم فایل آن <strong>FAT32</strong> است (شناسه‌ی نوع پارتیشن = <code>b</code>).</p>
-<hr>
-<h3>تغییر نوع پارتیشن</h3>
-<p>می‌خواهیم نوع پارتیشن را از <code>FAT32</code> به <strong>Linux</strong> تغییر دهیم.<br>
-برای این کار ابتدا باید بدانیم شناسه‌ی نوع پارتیشن لینوکسی چیست.<br>
-در منو، گزینه‌ی <code>l</code> برای نمایش همه‌ی انواع پارتیشن‌ها وجود دارد:</p>
-<pre class="hljs"><code>Command (m for help): l
-</code></pre>
-<p>در لیست طولانی که نمایش داده می‌شود، می‌بینیم:</p>
-<ul>
-<li><code>b</code> = Windows 95 FAT32</li>
-<li><code>83</code> = Linux</li>
-</ul>
-<p>برای تغییر نوع پارتیشن، از گزینه‌ی <code>t</code> استفاده می‌کنیم:</p>
-<pre class="hljs"><code>Command (m for help): t
+</code></pre> <p>در این مثال، دستگاهی با ظرفیت ۱۶ مگابایت داریم که شامل یک پارتیشن (<code>/dev/sdb1</code>) است که تقریباً تمام فضای دیسک را پوشش می‌دهد.<br> سیستم فایل آن <strong>FAT32</strong> است (شناسه‌ی نوع پارتیشن = <code>b</code>).</p><hr> <h3>تغییر نوع پارتیشن</h3><p>می‌خواهیم نوع پارتیشن را از <code>FAT32</code> به <strong>Linux</strong> تغییر دهیم.<br> برای این کار ابتدا باید بدانیم شناسه‌ی نوع پارتیشن لینوکسی چیست.<br> در منو، گزینه‌ی <code>l</code> برای نمایش همه‌ی انواع پارتیشن‌ها وجود دارد:</p><pre class="hljs"><code>Command (m for help): l
+</code></pre> <p>در لیست طولانی که نمایش داده می‌شود، می‌بینیم:</p><ul> <li><code>b</code> = Windows 95 FAT32</li><li><code>83</code> = Linux</li></ul> <p>برای تغییر نوع پارتیشن، از گزینه‌ی <code>t</code> استفاده می‌کنیم:</p><pre class="hljs"><code>Command (m for help): t
 Selected partition 1
 Hex code (type L to list codes): 83
 Changed system type of partition 1 to 83 (Linux)
-</code></pre>
-<p>اکنون نوع پارتیشن شماره‌ی ۱ به Linux تغییر یافته است.</p>
-<hr>
-<h3>ذخیره‌ی تغییرات</h3>
-<p>تا این مرحله، تغییرات فقط در حافظه نگهداری می‌شوند و هنوز روی دستگاه اعمال نشده‌اند.<br>
-برای نوشتن آن‌ها روی دیسک و خروج از برنامه، <code>w</code> را وارد می‌کنیم:</p>
-<pre class="hljs"><code>Command (m for help): w
+</code></pre> <p>اکنون نوع پارتیشن شماره‌ی ۱ به Linux تغییر یافته است.</p><hr> <h3>ذخیره‌ی تغییرات</h3><p>تا این مرحله، تغییرات فقط در حافظه نگهداری می‌شوند و هنوز روی دستگاه اعمال نشده‌اند.<br> برای نوشتن آن‌ها روی دیسک و خروج از برنامه، <code>w</code> را وارد می‌کنیم:</p><pre class="hljs"><code>Command (m for help): w
 The partition table has been altered!
 Calling ioctl() to re-read partition table.
 WARNING: If you have created or modified any DOS 6.x partitions, 
 please see the fdisk manual page for additional information.
 Syncing disks.
 [me@linuxbox ~]$
-</code></pre>
-<p>پیغام بالا نشان می‌دهد که جدول پارتیشن با موفقیت تغییر کرده است.<br>
-هشدار مربوط به «DOS 6.x partitions» در اینجا بی‌اهمیت است و می‌توان آن را نادیده گرفت.</p>
-<blockquote>
-<p>💡 اگر نمی‌خواستیم تغییری اعمال شود، می‌توانستیم با وارد کردن <code>q</code> از برنامه خارج شویم تا هیچ تغییری روی دیسک نوشته نشود.</p>
-</blockquote>
-<hr>
-<h3>ساخت فایل‌سیستم جدید با <strong>mkfs</strong> (Creating a New File System With mkfs)</h3>
-<p>پس از انجام تغییرات پارتیشن‌بندی (هرچند جزئی)، حالا وقت آن است که روی فلش‌درایو خود <strong>یک فایل‌سیستم جدید</strong> بسازیم.<br>
-برای این کار از دستور <code>mkfs</code> استفاده می‌کنیم که کوتاه‌شده‌ی <strong>make file system</strong> است.<br>
-این ابزار می‌تواند انواع مختلفی از فایل‌سیستم‌ها را ایجاد کند.</p>
-<hr>
-<h3>ساخت فایل‌سیستم ext3</h3>
-<p>برای ساخت فایل‌سیستم نوع <strong>ext3</strong> روی پارتیشن فلش، از گزینه‌ی <code>-t</code> برای تعیین نوع سیستم‌فایل استفاده می‌کنیم:</p>
-<pre class="hljs"><code>[me@linuxbox ~]$ sudo mkfs -t ext3 /dev/sdb1
-</code></pre>
-<p>خروجی نمونهٔ برنامه به شکل زیر است:</p>
-<pre class="hljs"><code>mke2fs 1.40.2 (12-Jul-2007)
+</code></pre> <p>پیغام بالا نشان می‌دهد که جدول پارتیشن با موفقیت تغییر کرده است.<br> هشدار مربوط به «DOS 6.x partitions» در اینجا بی‌اهمیت است و می‌توان آن را نادیده گرفت.</p><blockquote> <p>اگر نمی‌خواستیم تغییری اعمال شود، می‌توانستیم با وارد کردن <code>q</code> از برنامه خارج شویم تا هیچ تغییری روی دیسک نوشته نشود.</p></blockquote> <hr><h3>ساخت فایل‌سیستم جدید با <strong>mkfs</strong> (Creating a New File System With mkfs)</h3><p>پس از انجام تغییرات پارتیشن‌بندی (هرچند جزئی)، حالا وقت آن است که روی فلش‌درایو خود <strong>یک فایل‌سیستم جدید</strong> بسازیم.<br> برای این کار از دستور <code>mkfs</code> استفاده می‌کنیم که کوتاه‌شده‌ی <strong>make file system</strong> است.<br> این ابزار می‌تواند انواع مختلفی از فایل‌سیستم‌ها را ایجاد کند.</p><hr> <h3>ساخت فایل‌سیستم ext3</h3><p>برای ساخت فایل‌سیستم نوع <strong>ext3</strong> روی پارتیشن فلش، از گزینه‌ی <code>-t</code> برای تعیین نوع سیستم‌فایل استفاده می‌کنیم:</p><pre class="hljs"><code>[me@linuxbox ~]$ sudo mkfs -t ext3 /dev/sdb1
+</code></pre> <p>خروجی نمونهٔ برنامه به شکل زیر است:</p><pre class="hljs"><code>mke2fs 1.40.2 (12-Jul-2007)
 Filesystem label=
 OS type: Linux
 Block size=1024 (log=0)
@@ -561,360 +145,242 @@ Creating journal (1024 blocks): done
 Writing superblocks and filesystem accounting information: done
 This filesystem will be automatically checked every 34 mounts or
 180 days, whichever comes first. Use tune2fs -c or -i to override.
-</code></pre>
-<p>این اطلاعات جزئیات ساختار فایل‌سیستم جدید را نشان می‌دهد:</p>
-<ul>
-<li>تعداد <strong>بلوک‌ها</strong> و <strong>inode‌ها</strong></li>
-<li>اندازه‌ی هر بلوک</li>
-<li>محل <strong>superblock</strong>‌های پشتیبان</li>
-<li>فعال شدن <strong>journal</strong> برای بازیابی سریع در ext3</li>
-</ul>
-<hr>
-<h3>بازگرداندن فایل‌سیستم به FAT32</h3>
-<p>اگر بخواهیم فلش‌درایو را به حالت اولیه‌اش (مثلاً <strong>FAT32</strong>) برگردانیم، کافی است نوع فایل‌سیستم را <code>vfat</code> مشخص کنیم:</p>
-<pre class="hljs"><code>[me@linuxbox ~]$ sudo mkfs -t vfat /dev/sdb1
-</code></pre>
-<p>این همان نوع سیستم‌فایلی است که بیشتر در دستگاه‌های قابل‌حمل (فلش مموری‌ها، دوربین‌ها، و کارت‌های حافظه) استفاده می‌شود.</p>
-<hr>
-<h3>کاربرد</h3>
-<p>فرایند پارتیشن‌بندی و فرمت (format) کردن را می‌توان برای هر نوع دستگاه ذخیره‌سازی جدید به‌کار برد:</p>
-<ul>
-<li>دیسک‌های داخلی (HDD / SSD)</li>
-<li>فلش‌درایوها</li>
-<li>هاردهای اکسترنال</li>
-</ul>
-<p>فرقی نمی‌کند که دستگاه کوچک باشد یا چند ترابایتی — فرایند پایه همیشه یکسان است.</p>
-<hr>
-<h2>تست و تعمیر فایل‌سیستم‌ها با <strong>fsck</strong></h2>
-<p>در فایل پیکربندی <code>/etc/fstab</code> اعدادی در انتهای هر خط دیدیم که به نظر رمزآلود بودند.<br>
-در واقع، این اعداد تعیین می‌کنند که <strong>برنامه‌ی <code>fsck</code> (File System Check)</strong> فایل‌سیستم‌ها را در چه ترتیبی بررسی کند.</p>
-<p>در زمان <strong>راه‌اندازی سیستم (boot)</strong>، لینوکس به‌صورت خودکار سلامت فایل‌سیستم‌ها را قبل از mount شدن بررسی می‌کند.<br>
-در مثال قبلی:</p>
-<ul>
-<li>سیستم‌فایل ریشه (/) ابتدا بررسی می‌شود،</li>
-<li>سپس <code>/home</code> و <code>/boot</code>.</li>
-<li>هر دستگاهی که عدد آخر آن <strong>۰</strong> باشد، بررسی نمی‌شود.</li>
-</ul>
-<hr>
-<h3>بررسی و تعمیر دستی</h3>
-<p>ابزار <code>fsck</code> نه‌تنها سلامت فایل‌سیستم را بررسی می‌کند، بلکه در صورت وجود خرابی، می‌تواند آن را <strong>تعمیر</strong> کند (بسته به شدت آسیب).<br>
-در فایل‌سیستم‌های لینوکسی، بخش‌های بازیابی‌شده از فایل‌ها در پوشه‌ای به نام <code>lost+found</code> ذخیره می‌شوند.</p>
-<p>برای بررسی فلش‌درایو (باید قبل از آن unmount شود):</p>
-<pre class="hljs"><code>[me@linuxbox ~]$ sudo fsck /dev/sdb1
+</code></pre> <p>این اطلاعات جزئیات ساختار فایل‌سیستم جدید را نشان می‌دهد:</p><ul> <li>تعداد <strong>بلوک‌ها</strong> و <strong>inode‌ها</strong></li><li>اندازه‌ی هر بلوک</li><li>محل <strong>superblock</strong>‌های پشتیبان</li><li>فعال شدن <strong>journal</strong> برای بازیابی سریع در ext3</li></ul> <hr><h3>بازگرداندن فایل‌سیستم به FAT32</h3><p>اگر بخواهیم فلش‌درایو را به حالت اولیه‌اش (مثلاً <strong>FAT32</strong>) برگردانیم، کافی است نوع فایل‌سیستم را <code>vfat</code> مشخص کنیم:</p><pre class="hljs"><code>[me@linuxbox ~]$ sudo mkfs -t vfat /dev/sdb1
+</code></pre> <p>این همان نوع سیستم‌فایلی است که بیشتر در دستگاه‌های قابل‌حمل (فلش مموری‌ها، دوربین‌ها، و کارت‌های حافظه) استفاده می‌شود.</p><hr> <h3>کاربرد</h3><p>فرایند پارتیشن‌بندی و فرمت (format) کردن را می‌توان برای هر نوع دستگاه ذخیره‌سازی جدید به‌کار برد:</p><ul> <li>دیسک‌های داخلی (HDD / SSD)</li><li>فلش‌درایوها</li><li>هاردهای اکسترنال</li></ul> <p>فرقی نمی‌کند که دستگاه کوچک باشد یا چند ترابایتی — فرایند پایه همیشه یکسان است.</p><hr> <h2>تست و تعمیر فایل‌سیستم‌ها با <strong>fsck</strong></h2><p>در فایل پیکربندی <code>/etc/fstab</code> اعدادی در انتهای هر خط دیدیم که به نظر رمزآلود بودند.<br> در واقع، این اعداد تعیین می‌کنند که <strong>برنامه‌ی <code>fsck</code> (File System Check)</strong> فایل‌سیستم‌ها را در چه ترتیبی بررسی کند.</p><p>در زمان <strong>راه‌اندازی سیستم (boot)</strong>، لینوکس به‌صورت خودکار سلامت فایل‌سیستم‌ها را قبل از mount شدن بررسی می‌کند.<br> در مثال قبلی:</p><ul> <li>سیستم‌فایل ریشه (/) ابتدا بررسی می‌شود،</li><li>سپس <code>/home</code> و <code>/boot</code>.</li><li>هر دستگاهی که عدد آخر آن <strong>۰</strong> باشد، بررسی نمی‌شود.</li></ul> <hr><h3>بررسی و تعمیر دستی</h3><p>ابزار <code>fsck</code> نه‌تنها سلامت فایل‌سیستم را بررسی می‌کند، بلکه در صورت وجود خرابی، می‌تواند آن را <strong>تعمیر</strong> کند (بسته به شدت آسیب).<br> در فایل‌سیستم‌های لینوکسی، بخش‌های بازیابی‌شده از فایل‌ها در پوشه‌ای به نام <code>lost+found</code> ذخیره می‌شوند.</p><p>برای بررسی فلش‌درایو (باید قبل از آن unmount شود):</p><pre class="hljs"><code>[me@linuxbox ~]$ sudo fsck /dev/sdb1
 fsck 1.40.8 (13-Mar-2008)
 e2fsck 1.40.8 (13-Mar-2008)
 /dev/sdb1: clean, 11/3904 files, 1661/15608 blocks
-</code></pre>
-<p>این خروجی نشان می‌دهد فایل‌سیستم سالم است.</p>
-<blockquote>
-<p>در تجربه‌ی عملی، خرابی فایل‌سیستم‌ها معمولاً نادر است مگر اینکه <strong>مشکل سخت‌افزاری</strong> وجود داشته باشد (مثل خرابی دیسک).<br>
-در صورت بروز خرابی در زمان بوت، سیستم معمولاً متوقف می‌شود و از شما می‌خواهد دستور <code>fsck</code> را اجرا کنید تا خطاها برطرف شوند.</p>
-</blockquote>
-<hr>
-<h3>What The fsck? 😅</h3>
-<p>در فرهنگ یونیکس، واژه‌ی <strong>fsck</strong> اغلب به شوخی جایگزین کلمه‌ای چهارحرفی معروف می‌شود که سه حرف اولش با آن یکی است!<br>
-و انصافاً هم بامعناست — چون معمولاً وقتی مجبور می‌شوید دستور <code>fsck</code> را اجرا کنید، احتمالاً همان کلمه را زیر لب خواهید گفت!</p>
-<hr>
-<h2>فرمت کردن فلاپی دیسک‌ها (Formatting Floppy Disks)</h2>
-<p>اگر هنوز از رایانه‌ای استفاده می‌کنید که دارای درایو فلاپی‌دیسک باشد (واقعاً قدیمی!)، می‌توانید آن را نیز با لینوکس مدیریت کنید.<br>
-آماده‌سازی یک فلاپی خالی شامل <strong>دو مرحله</strong> است:</p>
-<ol>
-<li><strong>فرمت سطح پایین (Low-level format)</strong></li>
-<li><strong>ایجاد فایل‌سیستم روی دیسک</strong></li>
-</ol>
-<p>ابتدا با دستور <code>fdformat</code>، دیسک را فرمت فیزیکی می‌کنیم:</p>
-<pre class="hljs"><code>[me@linuxbox ~]$ sudo fdformat /dev/fd0
+</code></pre> <p>این خروجی نشان می‌دهد فایل‌سیستم سالم است.</p><blockquote> <p>در تجربه‌ی عملی، خرابی فایل‌سیستم‌ها معمولاً نادر است مگر اینکه <strong>مشکل سخت‌افزاری</strong> وجود داشته باشد (مثل خرابی دیسک).<br> در صورت بروز خرابی در زمان بوت، سیستم معمولاً متوقف می‌شود و از شما می‌خواهد دستور <code>fsck</code> را اجرا کنید تا خطاها برطرف شوند.</p></blockquote> <hr><h3>What The fsck?</h3><p>در فرهنگ یونیکس، واژه‌ی <strong>fsck</strong> اغلب به شوخی جایگزین کلمه‌ای چهارحرفی معروف می‌شود که سه حرف اولش با آن یکی است!<br> و انصافاً هم بامعناست — چون معمولاً وقتی مجبور می‌شوید دستور <code>fsck</code> را اجرا کنید، احتمالاً همان کلمه را زیر لب خواهید گفت!</p><hr> <h2>فرمت کردن فلاپی دیسک‌ها (Formatting Floppy Disks)</h2><p>اگر هنوز از رایانه‌ای استفاده می‌کنید که دارای درایو فلاپی‌دیسک باشد (واقعاً قدیمی!)، می‌توانید آن را نیز با لینوکس مدیریت کنید.<br> آماده‌سازی یک فلاپی خالی شامل <strong>دو مرحله</strong> است:</p><ol> <li><strong>فرمت سطح پایین (Low-level format)</strong></li><li><strong>ایجاد فایل‌سیستم روی دیسک</strong></li></ol> <p>ابتدا با دستور <code>fdformat</code>، دیسک را فرمت فیزیکی می‌کنیم:</p><pre class="hljs"><code>[me@linuxbox ~]$ sudo fdformat /dev/fd0
 Double-sided, 80 tracks, 18 sec/track. Total capacity 1440 kB.
 Formatting ... done
 Verifying ... done
-</code></pre>
-<p>سپس روی آن یک فایل‌سیستم FAT قدیمی (سبک MS-DOS) ایجاد می‌کنیم:</p>
-<pre class="hljs"><code>[me@linuxbox ~]$ sudo mkfs -t msdos /dev/fd0
-</code></pre>
-<p>در اینجا از نوع <code>msdos</code> استفاده می‌کنیم تا جدول تخصیص فایل (FAT) قدیمی و کوچک‌تری ساخته شود.<br>
-پس از آماده‌سازی، فلاپی‌دیسک را می‌توان درست مانند سایر دستگاه‌ها mount کرد.</p>
-<hr>
-<h2>انتقال مستقیم داده به/از دستگاه‌ها (Moving Data Directly To/From Devices)</h2>
-<p>معمولاً داده‌ها را در قالب <strong>فایل‌ها و پوشه‌ها</strong> می‌بینیم،<br>
-اما می‌توان به داده‌ها به‌صورت <strong>خام (raw)</strong> نیز نگاه کرد.</p>
-<p>به‌عنوان مثال، اگر به یک دیسک نگاه کنیم، در واقع مجموعه‌ای از <strong>بلوک‌های داده (data blocks)</strong> است که سیستم‌عامل آن‌ها را به‌صورت فایل و پوشه تفسیر می‌کند.<br>
-اما اگر مستقیماً با این بلوک‌ها کار کنیم، می‌توانیم کارهای جالبی انجام دهیم — مثلاً <strong>کلون گرفتن از یک دیسک یا فلش‌درایو.</strong></p>
-<hr>
-<h3>دستور dd</h3>
-<p>ابزار <code>dd</code> دقیقاً برای همین کار طراحی شده است:<br>
-کپی‌کردن داده‌ها <strong>به‌صورت بلوکی</strong> از یک محل به محل دیگر.</p>
-<p>ساختار کلی دستور:</p>
-<pre class="hljs"><code>dd if=input_file of=output_file [bs=block_size [count=blocks]]
-</code></pre>
-<ul>
-<li><code>if=</code> : منبع داده (input file / device)</li>
-<li><code>of=</code> : مقصد داده (output file / device)</li>
-<li><code>bs=</code> : اندازه‌ی بلوک داده (block size)</li>
-<li><code>count=</code> : تعداد بلوک‌هایی که باید کپی شوند</li>
-</ul>
-<hr>
-<h3>مثال ۱: کلون کردن دو فلش مشابه</h3>
-<p>فرض کنید دو فلش USB با اندازه‌ی برابر دارید و می‌خواهید از اولی کپی دقیقی روی دومی بگیرید.<br>
-اگر دستگاه‌ها به‌ترتیب <code>/dev/sdb</code> و <code>/dev/sdc</code> باشند:</p>
-<pre class="hljs"><code>dd if=/dev/sdb of=/dev/sdc
-</code></pre>
-<p>این دستور <strong>کل محتویات فیزیکی</strong> درایو اول را روی دومی کپی می‌کند — بیت‌به‌بیت.</p>
-<hr>
-<h3>مثال ۲: ساخت ایمیج از فلش</h3>
-<p>اگر فقط فلش اول به سیستم متصل باشد، می‌توانید از آن یک فایل ایمیج بسازید تا بعداً بتوانید آن را بازیابی کنید:</p>
-<pre class="hljs"><code>dd if=/dev/sdb of=flash_drive.img
-</code></pre>
-<p>بعداً می‌توانید با دستور معکوس (برعکس if و of) آن ایمیج را دوباره روی فلش برگردانید.</p>
-<hr>
-<blockquote>
-<p>⚠️ <strong>هشدار بسیار جدی:</strong><br>
-دستور <code>dd</code> فوق‌العاده قدرتمند است — و به همان اندازه خطرناک.<br>
-نام آن از “Data Definition” گرفته شده،<br>
-اما بین کاربران به شوخی <strong>&quot;Destroy Disk&quot;</strong> هم گفته می‌شود.<br>
-چون اگر ورودی (<code>if</code>) و خروجی (<code>of</code>) را اشتباه تایپ کنید، ممکن است کل دیسک خود را <strong>پاک کنید!</strong><br>
-همیشه قبل از فشردن Enter، مسیرها را دو بار بررسی کنید.</p>
-</blockquote>
-<hr>
-<h3>ساخت ایمیج CD-ROM (Creating CD-ROM Images)</h3>
-<p>نوشتن یک CD قابل‌ضبط (چه از نوع <strong>CD-R</strong> و چه <strong>CD-RW</strong>) شامل <strong>دو مرحله اصلی</strong> است:</p>
-<ol>
-<li>ساخت یک فایل ایمیج ISO که در واقع تصویر کامل فایل‌سیستم CD است،</li>
-<li>نوشتن (burn کردن) آن ایمیج روی دیسک واقعی.</li>
-</ol>
-<hr>
-<h2>ساخت کپی ایمیج از یک CD-ROM (Creating an Image Copy of a CD-ROM)</h2>
-<p>اگر بخواهیم از یک CD موجود (مثلاً دیسک نصب Ubuntu) یک فایل ISO بسازیم، می‌توانیم از دستور <code>dd</code> استفاده کنیم تا تمام بلوک‌های داده از روی CD خوانده و در یک فایل ذخیره شوند:</p>
-<pre class="hljs"><code>dd if=/dev/cdrom of=ubuntu.iso
-</code></pre>
-<p>در اینجا:</p>
-<ul>
-<li><code>if</code> ورودی است (دستگاه CD)،</li>
-<li><code>of</code> خروجی است (فایل ایمیج).</li>
-</ul>
-<blockquote>
-<p>این روش برای DVDهای داده (Data DVD) نیز کاربرد دارد،<br>
-اما برای <strong>CDهای صوتی (Audio CD)</strong> کار نمی‌کند چون آن‌ها از فایل‌سیستم استفاده نمی‌کنند.<br>
-برای آن نوع CD باید از دستور <code>cdrdao</code> استفاده کرد.</p>
-</blockquote>
-<hr>
-<h2>ساخت ایمیج از یک مجموعه فایل‌ها (Creating an Image From a Collection of Files)</h2>
-<p>اگر بخواهیم محتوای یک پوشه را به‌صورت یک فایل ISO درآوریم، از ابزار <code>genisoimage</code> استفاده می‌کنیم.</p>
-<ol>
-<li>ابتدا پوشه‌ای شامل فایل‌های موردنظر می‌سازیم (مثلاً <code>~/cd-rom-files</code>).</li>
-<li>سپس با دستور زیر ایمیج ISO می‌سازیم:</li>
-</ol>
-<pre class="hljs"><code>genisoimage -o cd-rom.iso -R -J ~/cd-rom-files
-</code></pre>
-<p>در این دستور:</p>
-<ul>
-<li>گزینه‌ی <code>-o</code> نام فایل خروجی را مشخص می‌کند.</li>
-<li>گزینه‌ی <code>-R</code> متادیتای <strong>Rock Ridge</strong> را اضافه می‌کند تا فایل‌سیستم از نام‌های بلند و مجوزهای POSIX پشتیبانی کند.</li>
-<li>گزینه‌ی <code>-J</code> افزونه‌های <strong>Joliet</strong> را فعال می‌کند تا نام‌های بلند در ویندوز نیز قابل‌استفاده باشند.</li>
-</ul>
-<hr>
-<h2>درباره‌ی نام برنامه‌ها (A Program By Any Other Name...)</h2>
-<p>اگر در آموزش‌های آنلاین جستجو کنید، معمولاً دو برنامه‌ی معروف برای ساخت و رایت دیسک‌های نوری می‌بینید:<br>
-<code>mkisofs</code> و <code>cdrecord</code>.</p>
-<p>این دو برنامه بخشی از مجموعه‌ای به نام <strong>cdrtools</strong> بودند که توسط <strong>Jörg Schilling</strong> نوشته شد.<br>
-اما در تابستان ۲۰۰۶، او بخشی از لایسنس این پکیج را تغییر داد که از نظر بسیاری از توسعه‌دهندگان لینوکس،<br>
-با <strong>مجوز GNU GPL</strong> ناسازگار شد.</p>
-<p>در نتیجه، جامعه‌ی لینوکس پروژه‌ای جدید (fork) ایجاد کرد و جایگزین‌هایی معرفی شدند:</p>
-<ul>
-<li><code>wodim</code> به‌جای <code>cdrecord</code></li>
-<li><code>genisoimage</code> به‌جای <code>mkisofs</code></li>
-</ul>
-<hr>
-<h2>نوشتن ایمیج CD-ROM روی دیسک (Writing CD-ROM Images)</h2>
-<p>بعد از ساخت فایل ایمیج، می‌توانیم آن را روی رسانه‌ی نوری بنویسیم (burn کنیم).<br>
-فرمان‌های مربوطه را می‌توان برای <strong>CD</strong> و <strong>DVD</strong> هر دو استفاده کرد.</p>
-<hr>
-<h2>Mount کردن مستقیم فایل ISO (Mounting an ISO Image Directly)</h2>
-<p>ترفند جالبی در لینوکس وجود دارد:<br>
-می‌توان فایل ISO را <strong>مستقیماً روی سیستم mount کرد</strong> بدون نیاز به رایت روی CD یا DVD.</p>
-<p>برای این کار از گزینه‌ی <code>-o loop</code> در دستور <code>mount</code> استفاده می‌کنیم تا فایل ISO به‌عنوان یک دستگاه مجازی شناسایی شود:</p>
-<pre class="hljs"><code>mkdir /mnt/iso_image
+</code></pre> <p>سپس روی آن یک فایل‌سیستم FAT قدیمی (سبک MS-DOS) ایجاد می‌کنیم:</p><pre class="hljs"><code>[me@linuxbox ~]$ sudo mkfs -t msdos /dev/fd0
+</code></pre> <p>در اینجا از نوع <code>msdos</code> استفاده می‌کنیم تا جدول تخصیص فایل (FAT) قدیمی و کوچک‌تری ساخته شود.<br> پس از آماده‌سازی، فلاپی‌دیسک را می‌توان درست مانند سایر دستگاه‌ها mount کرد.</p><hr> <h2>انتقال مستقیم داده به/از دستگاه‌ها (Moving Data Directly To/From Devices)</h2><p>معمولاً داده‌ها را در قالب <strong>فایل‌ها و پوشه‌ها</strong> می‌بینیم،<br> اما می‌توان به داده‌ها به‌صورت <strong>خام (raw)</strong> نیز نگاه کرد.</p><p>به‌عنوان مثال، اگر به یک دیسک نگاه کنیم، در واقع مجموعه‌ای از <strong>بلوک‌های داده (data blocks)</strong> است که سیستم‌عامل آن‌ها را به‌صورت فایل و پوشه تفسیر می‌کند.<br> اما اگر مستقیماً با این بلوک‌ها کار کنیم، می‌توانیم کارهای جالبی انجام دهیم — مثلاً <strong>کلون گرفتن از یک دیسک یا فلش‌درایو.</strong></p><hr> <h3>دستور dd</h3><p>ابزار <code>dd</code> دقیقاً برای همین کار طراحی شده است:<br> کپی‌کردن داده‌ها <strong>به‌صورت بلوکی</strong> از یک محل به محل دیگر.</p><p>ساختار کلی دستور:</p><pre class="hljs"><code>dd if=input_file of=output_file [bs=block_size [count=blocks]]
+</code></pre> <ul><li><code>if=</code> : منبع داده (input file / device)</li><li><code>of=</code> : مقصد داده (output file / device)</li><li><code>bs=</code> : اندازه‌ی بلوک داده (block size)</li><li><code>count=</code> : تعداد بلوک‌هایی که باید کپی شوند</li></ul> <hr><h3>مثال ۱: کلون کردن دو فلش مشابه</h3><p>فرض کنید دو فلش USB با اندازه‌ی برابر دارید و می‌خواهید از اولی کپی دقیقی روی دومی بگیرید.<br> اگر دستگاه‌ها به‌ترتیب <code>/dev/sdb</code> و <code>/dev/sdc</code> باشند:</p><pre class="hljs"><code>dd if=/dev/sdb of=/dev/sdc
+</code></pre> <p>این دستور <strong>کل محتویات فیزیکی</strong> درایو اول را روی دومی کپی می‌کند — بیت‌به‌بیت.</p><hr> <h3>مثال ۲: ساخت ایمیج از فلش</h3><p>اگر فقط فلش اول به سیستم متصل باشد، می‌توانید از آن یک فایل ایمیج بسازید تا بعداً بتوانید آن را بازیابی کنید:</p><pre class="hljs"><code>dd if=/dev/sdb of=flash_drive.img
+</code></pre> <p>بعداً می‌توانید با دستور معکوس (برعکس if و of) آن ایمیج را دوباره روی فلش برگردانید.</p><hr> <blockquote><p><strong>هشدار بسیار جدی:</strong><br> دستور <code>dd</code> فوق‌العاده قدرتمند است — و به همان اندازه خطرناک.<br> نام آن از “Data Definition” گرفته شده،<br> اما بین کاربران به شوخی <strong>&quot;Destroy Disk&quot;</strong> هم گفته می‌شود.<br> چون اگر ورودی (<code>if</code>) و خروجی (<code>of</code>) را اشتباه تایپ کنید، ممکن است کل دیسک خود را <strong>پاک کنید!</strong><br> همیشه قبل از فشردن Enter، مسیرها را دو بار بررسی کنید.</p></blockquote> <hr><h3>ساخت ایمیج CD-ROM (Creating CD-ROM Images)</h3><p>نوشتن یک CD قابل‌ضبط (چه از نوع <strong>CD-R</strong> و چه <strong>CD-RW</strong>) شامل <strong>دو مرحله اصلی</strong> است:</p><ol> <li>ساخت یک فایل ایمیج ISO که در واقع تصویر کامل فایل‌سیستم CD است،</li><li>نوشتن (burn کردن) آن ایمیج روی دیسک واقعی.</li></ol> <hr><h2>ساخت کپی ایمیج از یک CD-ROM (Creating an Image Copy of a CD-ROM)</h2><p>اگر بخواهیم از یک CD موجود (مثلاً دیسک نصب Ubuntu) یک فایل ISO بسازیم، می‌توانیم از دستور <code>dd</code> استفاده کنیم تا تمام بلوک‌های داده از روی CD خوانده و در یک فایل ذخیره شوند:</p><pre class="hljs"><code>dd if=/dev/cdrom of=ubuntu.iso
+</code></pre> <p>در اینجا:</p><ul> <li><code>if</code> ورودی است (دستگاه CD)،</li><li><code>of</code> خروجی است (فایل ایمیج).</li></ul> <blockquote><p>این روش برای DVDهای داده (Data DVD) نیز کاربرد دارد،<br> اما برای <strong>CDهای صوتی (Audio CD)</strong> کار نمی‌کند چون آن‌ها از فایل‌سیستم استفاده نمی‌کنند.<br> برای آن نوع CD باید از دستور <code>cdrdao</code> استفاده کرد.</p></blockquote> <hr><h2>ساخت ایمیج از یک مجموعه فایل‌ها (Creating an Image From a Collection of Files)</h2><p>اگر بخواهیم محتوای یک پوشه را به‌صورت یک فایل ISO درآوریم، از ابزار <code>genisoimage</code> استفاده می‌کنیم.</p><ol> <li>ابتدا پوشه‌ای شامل فایل‌های موردنظر می‌سازیم (مثلاً <code>~/cd-rom-files</code>).</li><li>سپس با دستور زیر ایمیج ISO می‌سازیم:</li></ol> <pre class="hljs"><code>genisoimage -o cd-rom.iso -R -J ~/cd-rom-files
+</code></pre> <p>در این دستور:</p><ul> <li>گزینه‌ی <code>-o</code> نام فایل خروجی را مشخص می‌کند.</li><li>گزینه‌ی <code>-R</code> متادیتای <strong>Rock Ridge</strong> را اضافه می‌کند تا فایل‌سیستم از نام‌های بلند و مجوزهای POSIX پشتیبانی کند.</li><li>گزینه‌ی <code>-J</code> افزونه‌های <strong>Joliet</strong> را فعال می‌کند تا نام‌های بلند در ویندوز نیز قابل‌استفاده باشند.</li></ul> <hr><h2>درباره‌ی نام برنامه‌ها (A Program By Any Other Name...)</h2><p>اگر در آموزش‌های آنلاین جستجو کنید، معمولاً دو برنامه‌ی معروف برای ساخت و رایت دیسک‌های نوری می‌بینید:<br><code>mkisofs</code> و <code>cdrecord</code>.</p><p>این دو برنامه بخشی از مجموعه‌ای به نام <strong>cdrtools</strong> بودند که توسط <strong>Jörg Schilling</strong> نوشته شد.<br> اما در تابستان ۲۰۰۶، او بخشی از لایسنس این پکیج را تغییر داد که از نظر بسیاری از توسعه‌دهندگان لینوکس،<br> با <strong>مجوز GNU GPL</strong> ناسازگار شد.</p><p>در نتیجه، جامعه‌ی لینوکس پروژه‌ای جدید (fork) ایجاد کرد و جایگزین‌هایی معرفی شدند:</p><ul> <li><code>wodim</code> به‌جای <code>cdrecord</code></li><li><code>genisoimage</code> به‌جای <code>mkisofs</code></li></ul> <hr><h2>نوشتن ایمیج CD-ROM روی دیسک (Writing CD-ROM Images)</h2><p>بعد از ساخت فایل ایمیج، می‌توانیم آن را روی رسانه‌ی نوری بنویسیم (burn کنیم).<br> فرمان‌های مربوطه را می‌توان برای <strong>CD</strong> و <strong>DVD</strong> هر دو استفاده کرد.</p><hr> <h2>Mount کردن مستقیم فایل ISO (Mounting an ISO Image Directly)</h2><p>ترفند جالبی در لینوکس وجود دارد:<br> می‌توان فایل ISO را <strong>مستقیماً روی سیستم mount کرد</strong> بدون نیاز به رایت روی CD یا DVD.</p><p>برای این کار از گزینه‌ی <code>-o loop</code> در دستور <code>mount</code> استفاده می‌کنیم تا فایل ISO به‌عنوان یک دستگاه مجازی شناسایی شود:</p><pre class="hljs"><code>mkdir /mnt/iso_image
 mount -t iso9660 -o loop image.iso /mnt/iso_image
-</code></pre>
-<p>در این مثال:</p>
-<ul>
-<li>مسیر <code>/mnt/iso_image</code> به‌عنوان نقطه‌ی اتصال (mount point) ساخته می‌شود.</li>
-<li>فایل <code>image.iso</code> در آن mount می‌گردد و درست مثل یک CD واقعی قابل مرور است.</li>
-</ul>
-<blockquote>
-<p>فراموش نکنید که پس از اتمام کار، حتماً فایل ISO را <strong>Unmount</strong> کنید:</p>
-<pre class="hljs"><code>umount /mnt/iso_image
-</code></pre>
-</blockquote>
-<hr>
-<h3>پاک کردن CD قابل‌نویس مجدد (Blanking A Re-Writable CD-ROM)</h3>
-<p>دیسک‌های <strong>قابل‌نویس مجدد (CD-RW)</strong> باید پیش از استفاده‌ی دوباره <strong>پاک (erase)</strong> شوند.<br>
-برای این کار از دستور <code>wodim</code> استفاده می‌کنیم و نام دستگاه (درایو CD Writer) و نوع عملیات پاک‌سازی را مشخص می‌کنیم.</p>
-<p>مثلاً برای پاک‌سازی سریع:</p>
-<pre class="hljs"><code>wodim dev=/dev/cdrw blank=fast
-</code></pre>
-<p>دستور <code>wodim</code> چند حالت مختلف برای پاک‌سازی ارائه می‌دهد، اما گزینه‌ی <strong>fast</strong> کمترین و سریع‌ترین نوع آن است.</p>
-<hr>
-<h3>نوشتن ایمیج روی دیسک (Writing An Image)</h3>
-<p>برای رایت فایل ایمیج ISO روی CD یا DVD نیز از همان دستور <code>wodim</code> استفاده می‌کنیم و فقط نام فایل ایمیج و دستگاه را مشخص می‌نماییم:</p>
-<pre class="hljs"><code>wodim dev=/dev/cdrw image.iso
-</code></pre>
-<p><code>wodim</code> گزینه‌های زیادی دارد، اما دو مورد پرکاربرد عبارت‌اند از:</p>
-<ul>
-<li><code>-v</code> → فعال‌کردن خروجی جزئیات (verbose)</li>
-<li><code>-dao</code> → فعال‌کردن حالت <strong>disc-at-once</strong>، که کل دیسک را در یک مرحله می‌نویسد</li>
-</ul>
-<blockquote>
-<p>حالت <strong>disc-at-once (DAO)</strong> برای ساخت دیسک‌های تجاری یا نسخه‌برداری دقیق توصیه می‌شود.<br>
-حالت پیش‌فرض <code>wodim</code>، یعنی <strong>track-at-once (TAO)</strong>، برای ضبط موسیقی یا تراک‌های جداگانه مناسب‌تر است.</p>
-</blockquote>
-<hr>
-<h3>جمع‌بندی (Summing Up)</h3>
-<p>در این فصل با مفاهیم و ابزارهای اصلی مدیریت رسانه‌های ذخیره‌سازی آشنا شدیم — از mount و fdisk گرفته تا mkfs، dd، و wodim.<br>
-البته امکانات لینوکس در این زمینه بسیار فراتر است؛ از پشتیبانی از ده‌ها نوع فایل‌سیستم و سخت‌افزار ذخیره‌سازی گرفته تا ابزارهای حرفه‌ای برای هماهنگی با سایر سیستم‌عامل‌ها.</p>
-<hr>
-<h3>مطالعه‌ی بیشتر (Further Reading)</h3>
-<p>برای یادگیری عمیق‌تر، صفحه‌های راهنمای دستورات (man pages) را مطالعه کنید.<br>
-بسیاری از آن‌ها گزینه‌ها و قابلیت‌های فراوانی دارند.<br>
-همچنین می‌توانید در اینترنت آموزش‌های مفیدی درباره‌ی <strong>افزودن هارددیسک جدید به لینوکس</strong> یا <strong>کار با رسانه‌های نوری</strong> پیدا کنید.</p>
-<hr>
-<h2>امتیاز اضافه: بررسی صحت فایل‌های ISO (Extra Credit – Verifying ISO Integrity)</h2>
-<p>اغلب توزیع‌های لینوکسی هنگام ارائه‌ی فایل‌های ISO، یک فایل <strong>Checksum</strong> نیز منتشر می‌کنند.<br>
-این فایل نتیجه‌ی یک محاسبه‌ی ریاضی است که عددی یکتا برای محتوای فایل تولید می‌کند.<br>
-اگر حتی <strong>یک بیت</strong> از فایل تغییر کند، مقدار checksum کاملاً متفاوت می‌شود.</p>
-<p>رایج‌ترین روش بررسی، استفاده از برنامه‌ی <code>md5sum</code> است:</p>
-<pre class="hljs"><code>md5sum image.iso
+</code></pre> <p>در این مثال:</p><ul> <li>مسیر <code>/mnt/iso_image</code> به‌عنوان نقطه‌ی اتصال (mount point) ساخته می‌شود.</li><li>فایل <code>image.iso</code> در آن mount می‌گردد و درست مثل یک CD واقعی قابل مرور است.</li></ul> <blockquote><p>فراموش نکنید که پس از اتمام کار، حتماً فایل ISO را <strong>Unmount</strong> کنید:</p><pre class="hljs"><code>umount /mnt/iso_image
+</code></pre></blockquote><hr> <h3>پاک کردن CD قابل‌نویس مجدد (Blanking A Re-Writable CD-ROM)</h3><p>دیسک‌های <strong>قابل‌نویس مجدد (CD-RW)</strong> باید پیش از استفاده‌ی دوباره <strong>پاک (erase)</strong> شوند.<br> برای این کار از دستور <code>wodim</code> استفاده می‌کنیم و نام دستگاه (درایو CD Writer) و نوع عملیات پاک‌سازی را مشخص می‌کنیم.</p><p>مثلاً برای پاک‌سازی سریع:</p><pre class="hljs"><code>wodim dev=/dev/cdrw blank=fast
+</code></pre> <p>دستور <code>wodim</code> چند حالت مختلف برای پاک‌سازی ارائه می‌دهد، اما گزینه‌ی <strong>fast</strong> کمترین و سریع‌ترین نوع آن است.</p><hr> <h3>نوشتن ایمیج روی دیسک (Writing An Image)</h3><p>برای رایت فایل ایمیج ISO روی CD یا DVD نیز از همان دستور <code>wodim</code> استفاده می‌کنیم و فقط نام فایل ایمیج و دستگاه را مشخص می‌نماییم:</p><pre class="hljs"><code>wodim dev=/dev/cdrw image.iso
+</code></pre> <p><code>wodim</code> گزینه‌های زیادی دارد، اما دو مورد پرکاربرد عبارت‌اند از:</p><ul> <li><code>-v</code> → فعال‌کردن خروجی جزئیات (verbose)</li><li><code>-dao</code> → فعال‌کردن حالت <strong>disc-at-once</strong>، که کل دیسک را در یک مرحله می‌نویسد</li></ul> <blockquote><p>حالت <strong>disc-at-once (DAO)</strong> برای ساخت دیسک‌های تجاری یا نسخه‌برداری دقیق توصیه می‌شود.<br> حالت پیش‌فرض <code>wodim</code>، یعنی <strong>track-at-once (TAO)</strong>، برای ضبط موسیقی یا تراک‌های جداگانه مناسب‌تر است.</p></blockquote> <hr><h3>جمع‌بندی (Summing Up)</h3><p>در این فصل با مفاهیم و ابزارهای اصلی مدیریت رسانه‌های ذخیره‌سازی آشنا شدیم — از mount و fdisk گرفته تا mkfs، dd، و wodim.<br> البته امکانات لینوکس در این زمینه بسیار فراتر است؛ از پشتیبانی از ده‌ها نوع فایل‌سیستم و سخت‌افزار ذخیره‌سازی گرفته تا ابزارهای حرفه‌ای برای هماهنگی با سایر سیستم‌عامل‌ها.</p><hr> <h3>مطالعه‌ی بیشتر (Further Reading)</h3><p>برای یادگیری عمیق‌تر، صفحه‌های راهنمای دستورات (man pages) را مطالعه کنید.<br> بسیاری از آن‌ها گزینه‌ها و قابلیت‌های فراوانی دارند.<br> همچنین می‌توانید در اینترنت آموزش‌های مفیدی درباره‌ی <strong>افزودن هارددیسک جدید به لینوکس</strong> یا <strong>کار با رسانه‌های نوری</strong> پیدا کنید.</p><hr> <h2>امتیاز اضافه: بررسی صحت فایل‌های ISO (Extra Credit – Verifying ISO Integrity)</h2><p>اغلب توزیع‌های لینوکسی هنگام ارائه‌ی فایل‌های ISO، یک فایل <strong>Checksum</strong> نیز منتشر می‌کنند.<br> این فایل نتیجه‌ی یک محاسبه‌ی ریاضی است که عددی یکتا برای محتوای فایل تولید می‌کند.<br> اگر حتی <strong>یک بیت</strong> از فایل تغییر کند، مقدار checksum کاملاً متفاوت می‌شود.</p><p>رایج‌ترین روش بررسی، استفاده از برنامه‌ی <code>md5sum</code> است:</p><pre class="hljs"><code>md5sum image.iso
 34e354760f9bb7fbf85c96f6a3f94ece  image.iso
-</code></pre>
-<p>پس از دانلود فایل ISO، مقدار تولیدشده را با مقدار رسمی منتشرشده توسط سایت مقایسه کنید.</p>
-<hr>
-<h3>بررسی دیسک رایت‌شده با md5sum</h3>
-<p>می‌توانیم علاوه بر بررسی فایل، <strong>درستی دیسک رایت‌شده</strong> را نیز بسنجیم.<br>
-روش کار:</p>
-<ol>
-<li>ابتدا checksum فایل ایمیج را محاسبه کنید.</li>
-<li>سپس checksum همان داده را از روی دیسک واقعی محاسبه کنید.</li>
-</ol>
-<p>برای CDهایی که در حالت DAO نوشته شده‌اند، می‌توان این کار را مستقیم انجام داد:</p>
-<pre class="hljs"><code>md5sum /dev/cdrom
+</code></pre> <p>پس از دانلود فایل ISO، مقدار تولیدشده را با مقدار رسمی منتشرشده توسط سایت مقایسه کنید.</p><hr> <h3>بررسی دیسک رایت‌شده با md5sum</h3><p>می‌توانیم علاوه بر بررسی فایل، <strong>درستی دیسک رایت‌شده</strong> را نیز بسنجیم.<br> روش کار:</p><ol> <li>ابتدا checksum فایل ایمیج را محاسبه کنید.</li><li>سپس checksum همان داده را از روی دیسک واقعی محاسبه کنید.</li></ol> <p>برای CDهایی که در حالت DAO نوشته شده‌اند، می‌توان این کار را مستقیم انجام داد:</p><pre class="hljs"><code>md5sum /dev/cdrom
 34e354760f9bb7fbf85c96f6a3f94ece  /dev/cdrom
-</code></pre>
-<p>اما برای DVD یا رسانه‌هایی که نیاز به دقت بیشتری دارند، باید تعداد بلوک‌های دقیق داده‌شده را بخوانیم.<br>
-در مثال زیر، integrity فایل <code>dvd-image.iso</code> و دیسک داخل <code>/dev/dvd</code> بررسی می‌شود:</p>
-<pre class="hljs"><code>md5sum dvd-image.iso
+</code></pre> <p>اما برای DVD یا رسانه‌هایی که نیاز به دقت بیشتری دارند، باید تعداد بلوک‌های دقیق داده‌شده را بخوانیم.<br> در مثال زیر، integrity فایل <code>dvd-image.iso</code> و دیسک داخل <code>/dev/dvd</code> بررسی می‌شود:</p><pre class="hljs"><code>md5sum dvd-image.iso
 dd if=/dev/dvd bs=2048 count=$(( $(stat -c &quot;%s&quot; dvd-image.iso) / 2048 )) | md5sum
-</code></pre>
-<p>این روش تضمین می‌کند که محتوای دیسک <strong>دقیقاً برابر با ایمیج اصلی</strong> است.</p>
-
-  </main>
-
-  <!-- فوتر مشترک -->
-  <footer class="footer">
-    <div class="container">
-      <p>
-        <img src="/Gitab/icone/copyright.svg" alt="کپی‌رایت" width="14" height="14"
-             style="vertical-align:middle;margin-inline:4px">
-        <span id="y"></span> Gitab — تمامی حقوق محفوظ است.
-      </p>
-    </div>
-  </footer>
-
-  <!-- سال و اسکریپت تغییر تم -->
-  <script>
+</code></pre> <p>این روش تضمین می‌کند که محتوای دیسک <strong>دقیقاً برابر با ایمیج اصلی</strong> است.</p></article> <nav class="chapter-single-next-nav"><a href="/Gitab/books/book5/Book/16/chapter16/" class="btn-next-chapter-action" id="nextChapterBtn" data-hub="/Gitab/books/book5/"> <span class="next-btn-text">فصل بعدی: دستورات و ابزارهای شبکه</span> <span class="next-btn-arrow">←</span> </a> </nav></div> <button class="fab-back-to-top" id="backToTopBtn" type="button" aria-label="رفتن به بالای صفحه" title="رفتن به بالا"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"> <polyline points="18 15 12 9 6 15"></polyline> </svg> </button></main> <footer class="footer-minimal"><div class="footer-container"> <div class="footer-top-row"><div class="footer-brand-side"> <a href="/Gitab/" class="footer-brand-anchor"> <img src="/Gitab/icone/logo.svg" alt="Gitab" width="28" height="28" loading="lazy" decoding="async"> <span class="footer-brand-title">گیتاب (Gitab)</span> </a> <p class="footer-tagline"> پلتفرم آزاد و مستقل برای ترجمهٔ دقیق و روان کتاب‌های مرجع مهندسی نرم‌افزار. </p></div> <div class="footer-nav-cols"><div class="footer-nav-col"> <span class="footer-nav-heading">موضوعات</span><ul class="footer-nav-list"> <li><a href="/Gitab/books/list-books/?cat=csharp">سی‌شارپ و دات‌نت</a></li><li><a href="/Gitab/books/list-books/?cat=clean-code">کد تمیز و بازآفرینی</a></li><li><a href="/Gitab/books/list-books/?cat=architecture">معماری و طراحی دامنه</a></li><li><a href="/Gitab/books/list-books/?cat=system">لینوکس و خط فرمان</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">بخش‌های سایت</span><ul class="footer-nav-list"> <li><a href="/Gitab/">صفحه اصلی</a></li><li><a href="/Gitab/books/list-books/">کتابخانه کامل</a></li><li><a href="/Gitab/courses/">دوره‌های آموزشی</a></li><li><a href="/Gitab/translator.html">تالار مترجمین</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">مشارکت و جامعه</span><ul class="footer-nav-list"> <li><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer">راهنمای همکاری در ترجمه</a></li><li><a href="https://github.com/hheydarian/Gitab/issues" target="_blank" rel="noopener noreferrer">پیشنهاد کتاب یا گزارش خطا</a></li></ul> </div></div> </div><div class="footer-bottom-line"> <span>© <span id="y">2026</span> Gitab — توسعه‌یافته برای جامعهٔ مهندسان نرم‌افزار ایرانی</span></div> </div></footer> <script>
   (() => {
     const root = document.documentElement;
     const btn = document.getElementById('themeToggle');
+    const sunIcon = btn ? btn.querySelector('.icon-sun') : null;
+    const moonIcon = btn ? btn.querySelector('.icon-moon') : null;
     const KEY = 'gitab-theme';
 
-    function updateTheme(s) {
-      root.setAttribute('data-theme', s);
-      const mode = s;  // فقط `dark` یا `light` خواهد بود
+    function updateTheme(mode) {
+      root.setAttribute('data-theme', mode);
       root.dataset.colorMode = mode;
-      btn.dataset.icon = mode === 'dark' ? 'moon' : 'sun';
+      if (sunIcon && moonIcon) {
+        if (mode === 'dark') {
+          sunIcon.style.display = 'inline-block';
+          moonIcon.style.display = 'none';
+        } else {
+          sunIcon.style.display = 'none';
+          moonIcon.style.display = 'inline-block';
+        }
+      }
     }
 
-    // وضعیت تم ذخیره شده از localStorage
-    let saved = localStorage.getItem(KEY) || 'light'; // پیش‌فرض روشن
+    let saved = 'dark';
+    try { saved = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
     updateTheme(saved);
 
-    // تنظیم مجدد تم هنگام تغییر وضعیت دکمه
-    btn.addEventListener('click', () => {
-      const current = localStorage.getItem(KEY) || 'light';
-      const next = current === 'dark' ? 'light' : 'dark';  // فقط دو حالت: تاریک و روشن
-      localStorage.setItem(KEY, next);
-      updateTheme(next);
-    });
+    if (btn) {
+      btn.addEventListener('click', () => {
+        let current = 'dark';
+        try { current = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+        const next = current === 'dark' ? 'light' : 'dark';
+        try { localStorage.setItem(KEY, next); } catch (e) {}
+        updateTheme(next);
+      });
+    }
 
-    // هنگام بارگذاری صفحه
     document.addEventListener('DOMContentLoaded', () => {
-      updateTheme(localStorage.getItem(KEY) || 'light');
+      let mode = 'dark';
+      try { mode = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+      updateTheme(mode);
+      const yearSpan = document.getElementById('y');
+      if (yearSpan) yearSpan.textContent = new Date().getFullYear();
     });
+
+    const mobBtn = document.getElementById('mobileMenuBtn');
+    const mobDrawer = document.getElementById('mobileDrawer');
+    if (mobBtn && mobDrawer) {
+      const setDrawerOpen = (open) => {
+        mobDrawer.classList.toggle('open', open);
+        mobBtn.classList.toggle('is-open', open);
+        mobBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        mobBtn.setAttribute('aria-label', open ? 'بستن منو' : 'باز کردن منو');
+        mobDrawer.setAttribute('aria-hidden', open ? 'false' : 'true');
+      };
+
+      mobBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        setDrawerOpen(!mobDrawer.classList.contains('open'));
+      });
+
+      mobDrawer.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => setDrawerOpen(false));
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && mobDrawer.classList.contains('open')) {
+          setDrawerOpen(false);
+        }
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!mobDrawer.contains(e.target) && !mobBtn.contains(e.target)) {
+          setDrawerOpen(false);
+        }
+      });
+    }
+
+    if ('serviceWorker' in navigator) {
+      const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+      if (isLocalhost) {
+        navigator.serviceWorker.getRegistrations().then(regs => {
+          for (const reg of regs) reg.unregister();
+        });
+        if ('caches' in window) {
+          caches.keys().then(names => {
+            for (const name of names) caches.delete(name);
+          });
+        }
+      } else {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/Gitab/sw.js').catch(() => {});
+        });
+      }
+    }
   })();
-</script>
-
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-  <script>hljs.highlightAll();</script>
-
-  <script>
+  </script> <script>
   document.querySelectorAll('pre code').forEach(block => {
+    const pre = block.parentNode;
+    if (!pre || pre.querySelector('.copy-btn')) return;
+
+    const copySvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
+    const okSvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+
     const btn = document.createElement('button');
     btn.className = 'copy-btn';
-
-    const icon = document.createElement('img');
-    icon.src = "/Gitab/icone/copy.svg";
-    icon.alt = 'Copy';
-    btn.appendChild(icon);
-
-    block.parentNode.insertBefore(btn, block);
+    btn.setAttribute('aria-label', 'کپی کد');
+    btn.setAttribute('title', 'کپی کد');
+    btn.setAttribute('type', 'button');
+    btn.innerHTML = copySvg;
+    pre.appendChild(btn);
 
     btn.addEventListener('click', async () => {
-      await navigator.clipboard.writeText(block.textContent);
-      btn.classList.add('copied');
-      setTimeout(() => btn.classList.remove('copied'), 1500);
-    });
-  });
-  </script>
-
-  <script>
-  document.body.dataset.page = window.location.pathname;
-
-  const menuBtn = document.querySelector(".menu-toggle");
-  const nav = document.querySelector(".nav");
-
-  if (menuBtn && nav) {
-    menuBtn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      nav.classList.toggle("show");
-    });
-
-    document.addEventListener("click", (e) => {
-      const clickedInsideNav = nav.contains(e.target);
-      const clickedMenuButton = menuBtn.contains(e.target);
-      if (!clickedInsideNav && !clickedMenuButton) {
-        nav.classList.remove("show");
+      try {
+        await navigator.clipboard.writeText(block.textContent);
+        btn.classList.add('copied');
+        btn.innerHTML = okSvg;
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          btn.innerHTML = copySvg;
+        }, 1800);
+      } catch (err) {
+        console.error('Copy failed:', err);
       }
     });
-  }
-  </script>
-
-  <script>
-    document.getElementById('y').textContent = new Date().getFullYear();
-  </script>
-  <script>
-document.getElementById("openDonate").addEventListener("click", () => {
-  document.getElementById("donateModal").style.display = "block";
-});
-document.getElementById("closeDonate").addEventListener("click", () => {
-  document.getElementById("donateModal").style.display = "none";
-});
-document.querySelectorAll(".copy-btn").forEach(btn => {
-  btn.addEventListener("click", () => {
-    navigator.clipboard.writeText(btn.dataset.copy);
-  
-    setTimeout(() => (btn.textContent = "کپی"), 2000);
   });
-});
-</script>
+  </script> <script>
+  (() => {
+    const article = document.getElementById('chapterArticle');
+    if (!article) return;
 
-</body>
-</html>
+    const progressBar = document.getElementById('readingProgressBar');
+    if (progressBar) {
+      window.addEventListener('scroll', () => {
+        const docElem = document.documentElement;
+        const totalHeight = docElem.scrollHeight - docElem.clientHeight;
+        if (totalHeight > 0) {
+          const progress = (window.pageYOffset / totalHeight) * 100;
+          progressBar.style.width = Math.min(100, Math.max(0, progress)) + '%';
+        }
+      }, { passive: true });
+    }
+
+    const btt = document.getElementById('backToTopBtn');
+    if (btt) {
+      window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 250) {
+          btt.classList.add('visible');
+        } else {
+          btt.classList.remove('visible');
+        }
+      }, { passive: true });
+
+      btt.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+
+    article.querySelectorAll('img').forEach(img => {
+      if (!img.hasAttribute('loading')) img.loading = 'lazy';
+      if (!img.hasAttribute('decoding')) img.decoding = 'async';
+      const parent = img.parentElement;
+      if (parent && parent.tagName === 'P') {
+        parent.style.textAlign = 'center';
+      }
+
+      img.addEventListener('error', function() {
+        const src = this.getAttribute('src');
+        if (src && src.includes('assets/image/')) {
+          const parts = src.split('assets/image/');
+          const corrected = '/Gitab/books/book5/assets/image/' + parts[1];
+          if (this.src !== corrected) {
+            this.src = corrected;
+          }
+        }
+      });
+    });
+
+    article.querySelectorAll('p').forEach(p => {
+      const trimmed = p.innerText.trim();
+      if (trimmed.startsWith('💡') || trimmed.startsWith('نکته:')) {
+        p.classList.add('react-callout', 'callout-tip');
+      } else if (trimmed.startsWith('⚠️') || trimmed.startsWith('هشدار:')) {
+        p.classList.add('react-callout', 'callout-warning');
+      } else if (trimmed.startsWith('📌') || trimmed.startsWith('مهم:')) {
+        p.classList.add('react-callout', 'callout-important');
+      } else if (trimmed.startsWith('🔹') || trimmed.startsWith('🔸')) {
+        p.classList.add('react-callout', 'callout-note');
+      }
+    });
+  })();
+  </script> <script type="speculationrules">{"prefetch":[{"where":{"and":[{"href_matches":"/Gitab/*"},{"not":{"href_matches":"/Gitab/downloads/*"}},{"not":{"selector_matches":"[download], [target='_blank']"}}]},"eagerness":"moderate"}]}</script> <script>
+  (() => {
+    if (window.HTMLScriptElement && HTMLScriptElement.supports && HTMLScriptElement.supports('speculationrules')) return;
+    const seen = new Set([window.location.href]);
+    let count = 0;
+    const prefetchLink = (e) => {
+      if (count >= 12) return;
+      const a = e.target && e.target.closest ? e.target.closest('header a, .chapter-single-next-nav a, .syllabus-chapter-item a, .btn-hero-read, .btn-card-read') : null;
+      if (!a || !a.href || a.hasAttribute('download') || a.target === '_blank') return;
+      if (a.origin !== window.location.origin || a.pathname.includes('/downloads/')) return;
+      const clean = a.href.split('#')[0];
+      if (!clean || seen.has(clean)) return;
+      seen.add(clean);
+      count++;
+      const l = document.createElement('link');
+      l.rel = 'prefetch';
+      l.href = clean;
+      document.head.appendChild(l);
+    };
+    document.addEventListener('pointerenter', prefetchLink, { capture: true, passive: true });
+    document.addEventListener('touchstart', prefetchLink, { capture: true, passive: true });
+  })();
+  </script></body></html>

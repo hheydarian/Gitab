@@ -1,2004 +1,274 @@
+<!doctype html><html lang="fa" dir="rtl"> <head><script>
+    if (window.location.pathname.startsWith('/gitab/')) {
+      window.location.replace(window.location.pathname.replace(/^\/gitab\//i, '/Gitab/') + window.location.search + window.location.hash);
+    }
+    (() => {
+      try {
+        const t = localStorage.getItem('gitab-theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', t);
+        document.documentElement.dataset.colorMode = t;
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        document.documentElement.dataset.colorMode = 'dark';
+      }
+    })();
+  </script> <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5"> <title>معرفی سی‌شارپ و دات‌نت</title><meta name="description" content="معرفی سی‌شارپ و دات‌نت — مطالعه آنلاین و رایگان از کتاب «سی‌شارپ ۱۲ در یک نگاه» (C# 12 in a Nutshell) اثر Joseph Albahari با ترجمه حامد حیدریان در گیتاب."> <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"><meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"> <meta name="theme-color" content="#090d16"><meta name="referrer" content="strict-origin-when-cross-origin"> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https:; frame-src https://www.youtube.com https://www.youtube-nocookie.com https://maps.google.com https://www.google.com; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self';"><link rel="icon" type="image/png" href="/Gitab/favicon.png"> <link rel="canonical" href="https://hheydarian.github.io/Gitab/books/book1/Book/01/Introducing-CSharp-and-.NET/"><link rel="alternate" hreflang="fa" href="https://hheydarian.github.io/Gitab/books/book1/Book/01/Introducing-CSharp-and-.NET/"> <link rel="alternate" hreflang="x-default" href="https://hheydarian.github.io/Gitab/books/book1/Book/01/Introducing-CSharp-and-.NET/"><link rel="alternate" type="text/plain" title="LLMs.txt" href="/Gitab/llms.txt"> <link rel="sitemap" type="application/xml" title="Sitemap" href="/Gitab/sitemap.xml"><meta property="og:locale" content="fa_IR"> <meta property="og:type" content="article"><meta property="og:site_name" content="گیتاب | Gitab"> <meta property="og:title" content="معرفی سی‌شارپ و دات‌نت"><meta property="og:description" content="معرفی سی‌شارپ و دات‌نت — مطالعه آنلاین و رایگان از کتاب «سی‌شارپ ۱۲ در یک نگاه» (C# 12 in a Nutshell) اثر Joseph Albahari با ترجمه حامد حیدریان در گیتاب."> <meta property="og:url" content="https://hheydarian.github.io/Gitab/books/book1/Book/01/Introducing-CSharp-and-.NET/"><meta property="og:image" content="https://hheydarian.github.io/Gitab/images/csharp-12/Cover.jpg"> <meta property="og:image:alt" content="معرفی سی‌شارپ و دات‌نت"><meta name="twitter:card" content="summary_large_image"> <meta name="twitter:title" content="معرفی سی‌شارپ و دات‌نت"><meta name="twitter:description" content="معرفی سی‌شارپ و دات‌نت — مطالعه آنلاین و رایگان از کتاب «سی‌شارپ ۱۲ در یک نگاه» (C# 12 in a Nutshell) اثر Joseph Albahari با ترجمه حامد حیدریان در گیتاب."> <meta name="twitter:image" content="https://hheydarian.github.io/Gitab/images/csharp-12/Cover.jpg"><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://hheydarian.github.io/Gitab/#organization","name":"گیتاب | Gitab","alternateName":"Gitab","url":"https://hheydarian.github.io/Gitab/","logo":{"@type":"ImageObject","url":"https://hheydarian.github.io/Gitab/favicon.png"},"sameAs":["https://github.com/hheydarian/Gitab"]},{"@type":"WebSite","@id":"https://hheydarian.github.io/Gitab/#website","url":"https://hheydarian.github.io/Gitab/","name":"گیتاب | Gitab","inLanguage":"fa-IR","publisher":{"@id":"https://hheydarian.github.io/Gitab/#organization"},"potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://hheydarian.github.io/Gitab/books/list-books/?q={search_term_string}"},"query-input":"required name=search_term_string"}},{"@type":"WebPage","@id":"https://hheydarian.github.io/Gitab/books/book1/Book/01/Introducing-CSharp-and-.NET/#webpage","url":"https://hheydarian.github.io/Gitab/books/book1/Book/01/Introducing-CSharp-and-.NET/","name":"معرفی سی‌شارپ و دات‌نت","description":"معرفی سی‌شارپ و دات‌نت — مطالعه آنلاین و رایگان از کتاب «سی‌شارپ ۱۲ در یک نگاه» (C# 12 in a Nutshell) اثر Joseph Albahari با ترجمه حامد حیدریان در گیتاب.","inLanguage":"fa-IR","isPartOf":{"@id":"https://hheydarian.github.io/Gitab/#website"}},{"@type":"TechArticle","headline":"معرفی سی‌شارپ و دات‌نت","description":"معرفی سی‌شارپ و دات‌نت — مطالعه آنلاین و رایگان از کتاب «سی‌شارپ ۱۲ در یک نگاه» (C# 12 in a Nutshell) اثر Joseph Albahari با ترجمه حامد حیدریان در گیتاب.","url":"https://hheydarian.github.io/Gitab/books/book1/Book/01/Introducing-CSharp-and-.NET/","inLanguage":"fa-IR","isAccessibleForFree":true,"author":{"@type":"Person","name":"Joseph Albahari"},"translator":{"@type":"Person","name":"حامد حیدریان"},"isPartOf":{"@type":"Book","name":"سی‌شارپ ۱۲ در یک نگاه","alternateName":"C# 12 in a Nutshell","url":"https://hheydarian.github.io/Gitab/books/book1/"}}]}</script> <link rel="preload" href="/Gitab/fonts/Vazirmatn.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/Gitab/styles/main.css?v=2.4" as="style"> <link rel="preload" href="/Gitab/styles/gitab-modern.css?v=2.5" as="style"><style>@font-face{font-family:'Lalezar';src:url('/Gitab/fonts/Lalezar.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}@font-face{font-family:'Vazirmatn';src:url('/Gitab/fonts/Vazirmatn.woff2') format('woff2');font-weight:100 900;font-style:normal;font-display:swap}html,body,button,input,optgroup,select,textarea,.filter-pill{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}input::placeholder,textarea::placeholder{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}</style> <link rel="stylesheet" href="/Gitab/styles/main.css?v=2.4"><link rel="stylesheet" href="/Gitab/styles/gitab-modern.css?v=2.5"> <link rel="stylesheet" href="/Gitab/styles/vendor/github-dark.min.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="/Gitab/styles/vendor/github-dark.min.css"></noscript></head> <body><header class="header"> <div class="container nav-wrap"><a href="/Gitab/" class="brand" aria-label="صفحه اصلی گیتاب"> <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="30" height="30" decoding="async"> <span class="brand-text">Gitab</span> </a> <nav class="nav" id="mainNav"><a href="/Gitab/" >خانه</a> <a href="/Gitab/books/list-books" aria-current="page">کتاب‌ها</a> <a href="/Gitab/courses/" >دوره‌ها</a> <a href="/Gitab/translator.html" >مترجمین</a></nav> <div class="nav-actions"><button id="themeToggle" class="theme-toggle-btn" aria-label="تغییر تم" title="تغییر تم"> <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن" width="18" height="18" decoding="async" style="display:none"> <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک" width="18" height="18" decoding="async"> </button> <a class="btn-github-pill" href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" title="مشاهده سورس گیتاب در گیت‌هاب"> <img src="/Gitab/icone/github.svg" alt="GitHub" width="16" height="16" decoding="async"> <span>گیت‌هاب</span> </a> <button class="mobile-menu-btn" id="mobileMenuBtn" type="button" aria-label="باز کردن منو" aria-expanded="false"> <svg class="mob-icon-open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="4" y1="7" x2="20" y2="7"></line> <line x1="4" y1="12" x2="20" y2="12"></line> <line x1="4" y1="17" x2="14" y2="17"></line> </svg> <svg class="mob-icon-close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="18" y1="6" x2="6" y2="18"></line> <line x1="6" y1="6" x2="18" y2="18"></line> </svg> </button></div> </div><div class="mobile-drawer" id="mobileDrawer" aria-hidden="true"> <div class="mobile-drawer-inner"><div class="mobile-drawer-section-label">ناوبری سریع</div><nav class="mobile-drawer-links" aria-label="منوی موبایل"> <a href="/Gitab/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M3 10.5 12 3l9 7.5"></path> <path d="M5 9.5V20a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V9.5"></path> </svg> </span> <span class="mob-nav-text">صفحه نخست</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/books/list-books" class="mobile-drawer-link active" aria-current="page"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path> </svg> </span> <span class="mob-nav-text">کتابخانه و فهرست کتاب‌ها</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/courses/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path> <path d="M6 12v5c3 3 9 3 12 0v-5"></path> </svg> </span> <span class="mob-nav-text">دوره‌های آموزشی</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/translator.html" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path> <circle cx="9" cy="7" r="4"></circle> <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path> <path d="M16 3.13a4 4 0 0 1 0 7.75"></path> </svg> </span> <span class="mob-nav-text">مترجمین و همکاران</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> </nav><div class="mobile-drawer-divider"></div><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" class="mobile-drawer-link mobile-drawer-gh"> <span class="mob-nav-icon" aria-hidden="true"> <img src="/Gitab/icone/github.svg" alt="" width="17" height="17" loading="lazy" decoding="async"> </span> <span class="mob-nav-text">مخزن گیت‌هاب پروژه</span> <span class="mob-nav-ext" aria-hidden="true">↗</span> </a> </div></div> </header><div class="reading-progress-track"> <div class="reading-progress-fill" id="readingProgressBar"></div></div> <main class="site-main chapter-reading-page"><div class="chapter-page-wrapper"> <nav class="chapter-clean-breadcrumb" aria-label="مسیر راهنما" dir="rtl"><a href="/Gitab/">خانه</a> <span class="bc-sep" aria-hidden="true">/</span> <a href="/Gitab/books/list-books/">کتاب‌ها</a> <span class="bc-sep" aria-hidden="true">/</span> <a href="/Gitab/books/book1/"><bdi>سی‌شارپ ۱۲ در یک نگاه</bdi></a> <span class="bc-sep" aria-hidden="true">/</span> <span class="bc-current-leaf"><bdi>معرفی سی‌شارپ و دات‌نت</bdi></span></nav> <article class="chapter-prose-container markdown-body" id="chapterArticle" dir="rtl"><h1>فصل اول: معرفی سی‌شارپ و دات‌نت</h1><p>سی‌شارپ (<code>#C</code>) یک زبان برنامه‌نویسی همه‌منظوره، مدرن، شی‌گرا و امن از نظر نوع داده (<code>type-safe</code>) است. هدف بنیادین این زبان از همان ابتدا، بالا بردن بهره‌وری برنامه‌نویسان بوده است؛ به همین خاطر سی‌شارپ همواره تعادلی هوشمندانه میان سادگی در کدنویسی، قدرت بیان و کارایی بالای زمان اجرا برقرار می‌کند.</p><p>معمار ارشد سی‌شارپ از اولین نسخه تا کنون، <strong>آندرس هایلسبرگ</strong> (<code>Anders Hejlsberg</code>) بوده است؛ طراح نام‌آشنایی که پیش از این زبان‌های محبوبی مانند Turbo Pascal و Delphi را خلق کرده بود. زبان سی‌شارپ کاملاً مستقل از سخت‌افزار و سیستم‌عامل (<code>platform-neutral</code>) طراحی شده و می‌تواند روی گسترهٔ وسیعی از ران‌تایم‌های مختلف اجرا شود.</p><hr> <h2>شی‌ءگرایی (Object Orientation)</h2><p>سی‌شارپ پیاده‌سازی بسیار غنی و استانداردی از الگوی برنامه‌نویسی شی‌گرا (<code>Object-Oriented Programming</code>) را ارائه می‌دهد که بر سه اصل بنیادی کپسوله‌سازی (<code>encapsulation</code>)، ارث‌بری (<code>inheritance</code>) و چندریختی (<code>polymorphism</code>) استوار است.</p><p>کپسوله‌سازی به معنای ایجاد یک مرز محافظت‌شده پیرامون هر شیء است تا رفتار خارجی (عمومی یا <code>public</code>) آن از جزئیات پیاده‌سازی داخلی (خصوصی یا <code>private</code>) جدا شود. مهم‌ترین ویژگی‌های متمایزکننده سی‌شارپ در حوزه شی‌گرایی عبارتند از:</p><h3>سیستم یکپارچه انواع (Unified Type System)</h3><p>واحد سازندهٔ اساسی در سی‌شارپ، یک واحد کپسوله‌شده از داده‌ها و توابع است که به آن «نوع داده» یا <strong>تایپ</strong> (<code>Type</code>) می‌گوییم. سی‌شارپ دارای یک سیستم نوع یکپارچه است که در آن تمام تایپ‌ها در نهایت از یک کلاس پایهٔ مشترک ارث‌بری می‌کنند.</p><p>این یعنی چه با یک شیء بیزینسی پیچیده کار کنید و چه با یک عدد ساده مثل <code>int</code>، همهٔ آن‌ها در یک سری قابلیت‌های پایه‌ای مشترک هستند. به عنوان مثال، روی نمونهٔ هر نوع داده‌ای در سی‌شارپ می‌توانید متد <code>ToString()</code> را فراخوانی کرده و نمایش متنی آن را دریافت کنید.</p><h3>کلاس‌ها و اینترفیس‌ها (Classes and Interfaces)</h3><p>در مدل‌های سنتی شی‌گرایی، تنها ساختار موجود برای تعریف انواع داده، کلاس (<code>class</code>) بود. اما در سی‌شارپ انواع دیگری هم تعریف شده‌اند که برجسته‌ترین آن‌ها <strong>اینترفیس</strong> (<code>interface</code>) است.</p><p>یک اینترفیس شبیه کلاسی است که داده‌ای را درون خود ذخیره نمی‌کند؛ یعنی فقط رفتارها (متدها و امضاها) را تعریف می‌کند و نه وضعیت را. این تفکیک دو مزیت بزرگ دارد:</p><ol> <li>امکان پیاده‌سازی ارث‌بری چندگانه را برای رفتارها فراهم می‌سازد.</li><li>قرارداد و مشخصات (<code>specification</code>) را کاملاً از نحوهٔ پیاده‌سازی (<code>implementation</code>) تفکیک می‌کند.</li></ol> <h3>پروپرتی‌ها، متدها و رویدادها (Properties, Methods, and Events)</h3><p>در پارادایم شی‌گرایی کلاسیک، تمام توابع صرفاً به شکل متد (<code>method</code>) هستند. اما در سی‌شارپ، متدها فقط یکی از اعضای تابعی به شمار می‌روند؛ در کنار آن‌ها، <strong>پروپرتی‌ها</strong> (<code>properties</code>) و <strong>رویدادها</strong> (<code>events</code>) نیز حضور دارند:</p><ul> <li><strong>پروپرتی‌ها:</strong> اعضایی هستند که وضعیت یک شیء را کپسوله می‌کنند (مانند رنگ یک دکمه یا متن یک برچسب).</li><li><strong>رویدادها:</strong> اعضایی هستند که واکنش نشان دادن به تغییرات وضعیت اشیاء را بسیار ساده و تمیز می‌کنند.</li></ul> <h3>تأثیرپذیری از برنامه‌نویسی تابعی (Functional Programming)</h3><p>با اینکه سی‌شارپ در اصل یک زبان شی‌گراست، اما از الگوهای مدرن برنامه‌نویسی تابعی نیز الهام گرفته است:</p><ul> <li><strong>رفتار با توابع به عنوان مقدار (<code>Functions as Values</code>):</strong> با استفاده از دلیگیت‌ها (<code>Delegates</code>) در سی‌شارپ، می‌توانید متدها را درست مانند متغیرها به عنوان آرگومان به سایر توابع ارسال کنید یا از آن‌ها خروجی بگیرید.</li><li><strong>پشتیبانی از الگوهای خلوص تابعی (<code>Patterns for Purity</code>):</strong> هستهٔ اصلی برنامه‌نویسی تابعی، پرهیز از تغییر مقادیر متغیرها و تکیه بر الگوهای اعلانی است. سی‌شارپ امکانات گسترده‌ای برای این سبک تدارک دیده است: <ul><li><strong>عبارات لامبدا (<code>Lambda expressions</code>):</strong> توابع بی‌نامی که در همان لحظه نیاز تعریف می‌شوند و می‌توانند متغیرهای محیط اطراف را ثبت (<code>capture</code>) کنند.</li><li><strong>عبارات پرس‌وجو (<code>Query expressions</code>):</strong> برای پردازش داده‌ها به صورت لیستی و شبیه به زبان SQL.</li><li><strong>رکوردها (<code>Records</code>):</strong> برای تعریف سریع انواع داده‌های تغییرناپذیر (<code>immutable</code>) و فقط‌خواندنی.</li></ul> </li></ul> <hr><h2>ایمنی نوع داده (Type Safety)</h2><p>سی‌شارپ زبانی ایمن از نظر نوع داده (<code>type-safe</code>) است؛ بدین معنا که نمونه‌های هر تایپ تنها از طریق قوانینی که خودِ آن تایپ تعریف کرده با یکدیگر تعامل دارند. این رویکرد یکپارچگی و سلامت داخلی هر نوع را تضمین می‌کند. برای نمونه، کامپایلر سی‌شارپ به شما اجازه نمی‌دهد با یک متغیر متنی (<code>string</code>) مانند یک عدد صحیح (<code>int</code>) رفتار کنید.</p><h3>تایپ ایستا (Static Typing)</h3><p>سی‌شارپ بر پایهٔ سیستم <strong>تایپ ایستا</strong> کار می‌کند؛ یعنی علاوه بر بررسی در زمان اجرا، صحت نوع داده‌ها در زمان کامپایل (<code>compile time</code>) بررسی و تضمین می‌شود.</p><p>بررسی ایستا بخش بزرگی از خطاهای نرم‌افزاری را قبل از اینکه برنامه اصلاً اجرا شود کشف و حذف می‌کند. این قابلیت بار سنگین پیدا کردن خطاهای تایپی را از روی دوش تست‌های زمان اجرا برداشته و به کامپایلر می‌سپارد. در پروژه‌های بزرگ سازمانی، این ویژگی سبب پایداری و نگهداری بسیار راحت‌تر کدها می‌شود. همچنین قابلیت‌هایی نظیر <code>IntelliSense</code> در Visual Studio و ابزارهای تغییر ساختار کد (<code>Refactoring</code>) با تکیه بر تایپ ایستا با دقت ۱۰۰٪ کار می‌کنند.</p><p><strong>نکته:</strong> سی‌شارپ از طریق کلمه کلیدی <code>dynamic</code> اجازه می‌دهد بخش‌هایی از کد به صورت پویا (داینامیک) تایپ‌گذاری شوند، با این حال هستهٔ اصلی سی‌شارپ همواره ایستا و امن باقی می‌ماند.</p><h3>تایپ قوی (Strongly Typed)</h3><p>سی‌شارپ یک زبان «قویاً نوع‌دار» محسوب می‌شود، زیرا قوانین نوع داده در آن به سختی اعمال می‌گردند. برای مثال، نمی‌توانید متدی را که یک عدد صحیح می‌پذیرد با یک عدد اعشاری صدا بزنید، مگر آنکه ابتدا صریحاً آن را تبدیل (کست) کنید.</p><hr> <h2>مدیریت حافظه (Memory Management)</h2><p>سی‌شارپ مدیریت حافظه را به صورت کاملاً خودکار بر عهدهٔ ران‌تایم می‌گذارد. محیط زمان اجرای زبان مشترک (<code>CLR</code>) دارای یک زباله‌روب یا بازیافت‌کنندهٔ حافظه به نام <strong>Garbage Collector (GC)</strong> است که به عنوان بخشی از برنامه شما اجرا شده و حافظهٔ اشیائی را که دیگر در دسترس نیستند آزاد می‌کند. این مکانیزم برنامه‌نویس را از درگیری با تخصیص و آزادسازی دستی حافظه بی‌نیاز ساخته و خطاهای معروفی چون حافظهٔ رهاشده یا پوینترهای نامعتبر در زبان‌هایی مثل ++C را از بین می‌برد.</p><p>البته پوینترها در سی‌شارپ حذف نشده‌اند، بلکه برای اکثر کارهای برنامه‌نویسی غیرضروری گشته‌اند. در بخش‌های حساسی که به حداکثر کارایی نیاز است، می‌توان با استفاده از بلاک‌های نشانه‌گذاری‌شده با کلمه کلیدی <code>unsafe</code> مستقیماً از اشاره‌گرها و تخصیص مستقیم حافظه استفاده کرد.</p><hr> <h2>پشتیبانی از پلتفرم‌ها (Platform Support)</h2><p>سی‌شارپ دارای ران‌تایم‌هایی است که پلتفرم‌های زیر را پوشش می‌دهند:</p><ul> <li><strong>ویندوز (Windows Desktop):</strong> ساخت اپلیکیشن‌های دسکتاپ، وب، سرور و خط فرمان.</li><li><strong>مک (macOS):</strong> ساخت وب‌اپلیکیشن‌ها، ابزارهای خط فرمان و برنامه‌های دسکتاپ (از طریق Mac Catalyst).</li><li><strong>لینوکس (Linux):</strong> ساخت نرم‌افزارهای سرور، سرویس‌های بک‌اند و خط فرمان.</li><li><strong>اندروید و iOS:</strong> ساخت اپلیکیشن‌های موبایل از طریق .NET MAUI.</li><li><strong>دیوایس‌های ویندوز ۱۰/۱۱:</strong> کنسول‌های Xbox، سرفیس هاب و هولولنز (از طریق UWP).</li><li><strong>مرورگر وب (WebAssembly):</strong> اجرای مستقیم کدهای سی‌شارپ در مرورگر با فناوری Blazor WebAssembly.</li></ul> <hr><h2>ران‌تایم‌ها، CLR و BCL</h2><p>پشتیبانی اجرایی از برنامه‌های سی‌شارپ از دو جزء اصلی تشکیل می‌شود: یک <strong>محیط زمان اجرای زبان مشترک</strong> (<code>CLR</code>) و یک <strong>کتابخانه کلاس پایه</strong> (<code>BCL</code>). یک ران‌تایم می‌تواند شامل لایه‌های بالاتری از کتابخانه‌ها برای تولید برنامه‌های وب، موبایل یا دسکتاپ نیز باشد (شکل ۱-۱).</p><p><img src="../../../assets/image/01/Runtime-architecture.png" alt="معماری ران‌تایم در دات‌نت" loading="lazy" decoding="async"></p><h3>محیط زمان اجرای زبان مشترک (CLR)</h3><p>محیط <code>CLR</code> سرویس‌های اساسی زمان اجرا نظیر مدیریت خودکار حافظه و مدیریت خطاها (<code>exceptions</code>) را مدیریت می‌کند. کلمه «مشترک» (Common) به این حقیقت اشاره دارد که این ران‌تایم توسط زبان‌های دیگری مانند #F و Visual Basic نیز به اشتراک گذاشته می‌شود.</p><p>سی‌شارپ یک زبان «مدیریت‌شده» (<code>managed language</code>) است؛ زیرا کد منبع شما ابتدا به یک زبان میانی به نام <strong>Intermediate Language (IL)</strong> کامپایل می‌شود. سپس <code>CLR</code> درست در لحظه اجرای برنامه، این کد IL را به کد ماشین مخصوص همان سخت‌افزار (مانند x64 یا ARM) ترجمه می‌کند؛ فرآیندی که به <strong>Just-In-Time (JIT) Compilation</strong> معروف است. همچنین برای دستگاه‌هایی با منابع محدود یا سیستم‌هایی با لود سریع، امکان کامپایل زودهنگام (<code>Ahead-Of-Time</code> یا <code>AOT</code>) نیز وجود دارد.</p><p>ظرف حاوی کدهای IL و اطلاعات تایپ‌ها را <strong>اسمبلی</strong> (<code>Assembly</code>) می‌نامیم که معمولاً فایل‌های <code>dll.</code> یا <code>exe.</code> هستند. اطلاعات ساختاری تایپ‌ها که در اسمبلی ذخیره می‌شوند <strong>متادیتا</strong> (<code>Metadata</code>) نام دارند. با تکیه بر متادیتا، یک اسمبلی می‌تواند بدون نیاز به فایل‌های سربرگ (Header) مجزا، تایپ‌های درون اسمبلی‌های دیگر را شناسایی و مصرف کند.</p><p><strong>ابزارهای مهندسی معکوس:</strong> با ابزارهایی مثل <code>ildasm</code> مایکروسافت می‌توانید کدهای IL یک اسمبلی را بررسی کنید. ابزارهای پیشرفته‌تری مثل <code>ILSpy</code> یا <code>dotPeek</code> حتی می‌توانند کد IL را مستقیماً به کد اولیهٔ سی‌شارپ بازگردانند (Decompile کنند).</p><h3>کتابخانه کلاس‌های پایه (BCL)</h3><p>هر <code>CLR</code> همیشه به همراه مجموعه‌ای از اسمبلی‌های اساسی عرضه می‌شود که به آن <strong>Base Class Library (BCL)</strong> می‌گوییم. این کتابخانه‌ها امکانات کلیدی برنامه‌نویسی نظیر مجموعه‌ها (<code>Collections</code>)، ورودی/خروجی فایل (<code>I/O</code>)، پردازش متن، کار با JSON و XML، شبکه، رمزنگاری و همزمانی را در اختیار برنامه‌نویس قرار می‌دهند.</p><h3>ران‌تایم‌های مختلف در دات‌نت</h3><p>ران‌تایم در واقع بسته‌ای است که دانلود و نصب می‌کنید و شامل CLR، کتابخانه‌های BCL و کتابخانه‌های تخصصی نوع پروژه است:</p><table> <thead><tr> <th style="text-align:left">نوع لایه اپلیکیشن</th><th style="text-align:center">هسته CLR / BCL</th><th style="text-align:center">خروجی برنامه</th><th style="text-align:left">پلتفرم‌های مقصد</th></tr> </thead><tbody> <tr><td style="text-align:left"><strong><a href="http://ASP.NET">ASP.NET</a> Core</strong></td><td style="text-align:center">.NET 8</td><td style="text-align:center">وب، API و میکروسرویس</td><td style="text-align:left">ویندوز، لینوکس، مک</td></tr> <tr><td style="text-align:left"><strong>Windows Desktop</strong></td><td style="text-align:center">.NET 8</td><td style="text-align:center">نرم‌افزارهای دسکتاپ (WPF / WinForms)</td><td style="text-align:left">ویندوز ۱۰ و ۱۱</td></tr> <tr><td style="text-align:left"><strong>WinUI 3</strong></td><td style="text-align:center">.NET 8</td><td style="text-align:center">اپلیکیشن‌های مدرن ویندوز</td><td style="text-align:left">ویندوز ۱۰ و ۱۱</td></tr> <tr><td style="text-align:left"><strong>.NET MAUI</strong></td><td style="text-align:center">.NET 8</td><td style="text-align:center">اپلیکیشن‌های چندسکویی موبایل و دسکتاپ</td><td style="text-align:left">iOS، اندروید، مک، ویندوز</td></tr> <tr><td style="text-align:left"><strong>.NET Framework</strong></td><td style="text-align:center">.NET Framework 4.8</td><td style="text-align:center">اپلیکیشن‌های کلاسیک ویندوز و وب</td><td style="text-align:left">ویندوز ۷ به بعد</td></tr> </tbody></table> <p><img src="../../../assets/image/01/Introduction-02.png" alt="ران‌تایم‌های مختلف در سی‌شارپ" loading="lazy" decoding="async"></p><h4>دات‌نت ۸ (.NET 8)</h4><p>دات‌نت ۸ ران‌تایم مدرن، سریع و متن‌باز پرچمدار مایکروسافت است که این کتاب منحصراً بر پایهٔ آن تدوین شده است. تاریخچه نسخه‌های این پلتفرم به این ترتیب بوده است:<br> $$\text{.NET Core 1.x} \rightarrow \text{2.x} \rightarrow \text{3.x} \rightarrow \text{.NET 5} \rightarrow \text{.NET 6} \rightarrow \text{.NET 7} \rightarrow \text{.NET 8}$$</p><p>شرکت مایکروسافت پس از نسخه ۳ واژه «Core» را حذف کرد و از نسخه ۴ نیز عبور نمود تا تداخلی با .NET Framework 4.x قدیمی ایجاد نشود. این یعنی اسمبلی‌های کامپایل‌شده روی .NET Core تا .NET 7 معمولاً بدون هیچ تغییری روی .NET 8 نیز اجرا می‌شوند.</p><h4>ران‌تایم‌های خاص (Niche Runtimes)</h4><ul> <li><strong>موتور بازی‌سازی Unity:</strong> از زبان سی‌شارپ به عنوان زبان اسکریپت‌نویسی گیم‌پلی استفاده می‌کند.</li><li><strong>فریم‌ورک UWP:</strong> برای ساخت برنامه‌های ایمن در Windows Store روی Xbox و HoloLens به کار می‌رود.</li><li><strong>ادغام با SQL Server:</strong> با استفاده از SQL Server CLR می‌توانید توابع محاسباتی، استورد پروسیجرها و توابع تجمیعی را با سی‌شارپ نوشته و مستقیماً درون پایگاه‌داده فراخوانی کنید.</li></ul> <hr><h2>سیر تکاملی و تاریخچهٔ نسخه‌های سی‌شارپ</h2><p>در ادامه، امکانات جدیدی که در هر نسخه به زبان سی‌شارپ افزوده شده‌اند را به صورت معکوس (از جدیدترین نسخه به قدیم) مرور می‌کنیم:</p><hr> <h3>ویژگی‌های جدید در سی‌شارپ ۱۲ (C# 12)</h3><p>سی‌شارپ ۱۲ همزمان با انتشار .NET 8 و Visual Studio 2022 عرضه شد.</p><h4>۱. عبارت‌های مجموعه‌ای (Collection Expressions)</h4><p>به جای تعریف سنتی آرایه‌ها، اکنون می‌توانید از براکت‌های کروشه (<code>[]</code>) برای مقداردهی استفاده کنید:</p><pre class="hljs"><code><span class="hljs-comment">// روش قبلی</span>
+<span class="hljs-built_in">char</span>[] vowels = {<span class="hljs-string">&#x27;a&#x27;</span>, <span class="hljs-string">&#x27;e&#x27;</span>, <span class="hljs-string">&#x27;i&#x27;</span>, <span class="hljs-string">&#x27;o&#x27;</span>, <span class="hljs-string">&#x27;u&#x27;</span>};
 
-
-<!doctype html>
-<html lang="fa" dir="rtl">
-<head>
-  <meta charset="utf-8">
-  <link rel="icon" type="image/png" href="/Gitab/favicon.png">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>معرفی سی‌شارپ و دات‌نت</title>
-  <meta name="description" content="ترجمه‌های فارسی کتاب‌های فنی — سریع، مینیمال و قابل اتکا.">
-
-  <!-- استایل‌ها -->
-  <link rel="stylesheet" href="/Gitab/styles/main.css">
-  <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
-
-  <style>
-  @font-face {
-    font-family: 'Vazir';
-    src: url('/Gitab/fonts/Vazir-FD-WOL.ttf') format('truetype');
-    font-display: swap;
-  }
-  @font-face {
-    font-family: "Lalezar";
-    src: url('fonts/Lalezar.ttf') format('truetype');
-    font-display: swap;
-}
-  body {
-    font-family: 'Vazir', sans-serif;
-  }
-  </style>
-</head>
-
-<body>
-  <!-- هدر مشترک -->
-  <header class="header">
-    <div class="container nav-wrap">
-      <a href="/Gitab/" class="brand">
-        <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="26" height="26">
-        <span>Gitab</span>
-      </a>
-
-       <nav class="nav">
-         <a href="/Gitab/" >خانه</a>
-         <a href="/Gitab/books/list-books" >کتاب‌ها</a>
-         <a href="/Gitab/giter.html" >دوره ها</a>
-          <!-- 
-         <a href="/Gitab/translator.html" >مترجمین</a>
-           -->
-       </nav>
-
-      <div class="nav-actions">
-        <button id="themeToggle" class="icon-btn theme-btn" data-icon="moon" aria-label="تغییر تم">
-          <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن">
-          <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک">
-        </button>
-
-        <a class="icon-btn" href="https://github.com/hheydarian/Gitab" target="_blank" title="GitHub">
-          <img src="/Gitab/icone/github.svg" alt="GitHub">
-        </a>
-
-        <!-- دکمه منو برای موبایل -->
-        <button class="menu-toggle" aria-label="منو">
-          <img src="/Gitab/icone/menu.svg" alt="menu">
-        </button>
-      </div>
-    </div>
-  </header>
-
-  
-  <main class="site-main book-page">
-    <h1>فصل اول: آشنایی با سی‌شارپ و دات‌نت</h1>
-<p>سی شارپ یک زبان برنامه‌نویسی همه‌منظوره (general-purpose)، ایمن از نظر نوع داده (type-safe)، و شی‌گرا (object-oriented) است.</p>
-<p>هدف اصلی این زبان، افزایش بهره‌وری برنامه‌نویس است.<br>
-برای رسیدن به این هدف، #C تلاش می‌کند میان سادگی، قدرت بیان (expressiveness)، و کارایی (performance) تعادل برقرار کند.</p>
-<p>طراح اصلی زبان #C از همان نسخه اول، آندرس هایلسبرگ (Anders Hejlsberg) بوده؛ کسی که قبلاً Turbo Pascal را خلق کرده و معمار زبان Delphi نیز بوده است.</p>
-<p>زبان #C به‌گونه‌ای طراحی شده که وابسته به هیچ پلتفرم خاصی نیست (platform-neutral) و می‌تواند با اجراکننده‌های خاص پلتفرم‌های مختلف (platform-specific runtimes) کار کند.</p>
-<h2>شی‌ءگرایی</h2>
-<p>زبان #C یک پیاده‌سازی قدرتمند از الگوی برنامه‌نویسی شی‌گرا (Object-Oriented Programming) است.<br>
-این الگو شامل سه اصل اصلی است:</p>
-<ul>
-<li>
-<p>کپسوله‌سازی (Encapsulation)</p>
-</li>
-<li>
-<p>ارث‌بری (Inheritance)</p>
-</li>
-<li>
-<p>چندریختی (Polymorphism)</p>
-</li>
-</ul>
-<p>🔹 کپسوله‌سازی یعنی اینکه برای هر شی (Object) یک مرز مشخص تعریف کنیم تا رفتار خارجی (عمومی) آن را از جزئیات پیاده‌سازی داخلی (خصوصی) جدا کنیم.</p>
-<h4>ویژگی‌های منحصربه‌فرد #C در شی‌گرایی</h4>
-<p>🔸 سیستم نوع یکپارچه (Unified Type System)<br>
-در #C، واحد اصلی ساخت برنامه، نوع (Type) است — یعنی یک واحد کپسوله‌شده از داده و توابع.</p>
-<p>در این زبان، همه نوع‌ها در نهایت زیرمجموعه‌ای از یک نوع پایه مشترک هستند.<br>
-این یعنی فرقی نمی‌کند با یک شی تجاری (Business Object) کار می‌کنید یا با یک عدد ساده، همه این نوع‌ها از یک سری قابلیت‌های پایه برخوردارند.</p>
-<p>برای مثال:</p>
-<p>می‌تونید روی هر شیئی در #C متد ToString را صدا بزنید و نسخه متنی (رشته‌ای) از آن دریافت کنید — چون همه نوع‌ها این متد را دارند.</p>
-<p>🔸 کلاس‌ها و اینترفیس‌ها (Classes and Interfaces)<br>
-در مدل سنتی شی‌گرایی، تنها نوع موجود کلاس (Class) است. اما در #C انواع دیگری هم وجود دارد، از جمله:</p>
-<p>اینترفیس (Interface)<br>
-اینترفیس‌ها شبیه کلاس‌ها هستند با این تفاوت که نمی‌توانند داده نگه دارند. یعنی فقط رفتار تعریف می‌کنند، نه وضعیت.</p>
-<p>این ویژگی چند مزیت دارد:</p>
-<ul>
-<li>
-<p>پشتیبانی از ارث‌بری چندگانه (Multiple Inheritance)</p>
-</li>
-<li>
-<p>جدا کردن تعریف (specification) از پیاده‌سازی (implementation)</p>
-</li>
-</ul>
-<p>🔸 ویژگی‌ها، متدها، و رویدادها<br>
-(Properties, Methods, and Events)</p>
-<p>در الگوی شی‌گرایی ناب، همه توابع به شکل متد (Method) هستند. اما در #C، متدها تنها یک نوع از اعضای تابعی (Function Members) محسوب می‌شوند.<br>
-نوع‌های دیگر شامل:</p>
-<ul>
-<li>ویژگی‌ها (Properties):</li>
-<li></li>
-</ul>
-<p>اعضایی که بخشی از وضعیت یک شی را کپسوله می‌کنند، مثل رنگ یک دکمه یا متن یک برچسب.</p>
-<ul>
-<li>رویدادها (Events):</li>
-<li></li>
-</ul>
-<p>اعضایی که برای ساده‌تر کردن واکنش به تغییرات وضعیت شی‌ها طراحی شده‌اند.</p>
-<p>تأثیرات برنامه‌نویسی تابعی در #C</p>
-<p>با اینکه #C به‌طور عمده یک زبان شی‌گراست، اما از الگوهای برنامه‌نویسی تابعی (Functional Programming) هم الهام گرفته. برخی از این ویژگی‌ها عبارت‌اند از:</p>
-<p>🔹 توابع به‌عنوان مقدار (Functions as Values)<br>
-با استفاده از نماینده‌ها (Delegates) در #C، می‌توانید توابع را مانند داده، به دیگر توابع ارسال یا از آن‌ها بازگردانید.</p>
-<p>🔹 پشتیبانی از الگوهای برنامه‌نویسی تابعی<br>
-در برنامه‌نویسی تابعی، ترجیح داده می‌شود که مقدار متغیرها تغییر نکند، و به‌جای آن از الگوهای اعلانی (Declarative Patterns) استفاده شود.</p>
-<p>زبان #C ابزارهایی برای این سبک برنامه‌نویسی فراهم کرده، از جمله:</p>
-<ul>
-<li>توابع بی‌نام (Lambda Expressions):</li>
-<li></li>
-</ul>
-<p>می‌توان توابعی را در لحظه تعریف کرد که به متغیرهای اطرافشان دسترسی دارند (یعنی آن‌ها را &quot;capture&quot; می‌کنند).</p>
-<ul>
-<li>عبارات پرس‌وجو (Query Expressions):</li>
-<li></li>
-</ul>
-<p>برای برنامه‌نویسی لیستی یا واکنشی (Reactive Programming) به‌کار می‌روند.</p>
-<ul>
-<li>رکوردها (Records):</li>
-<li></li>
-</ul>
-<p>نوع‌هایی هستند که به‌سادگی می‌توان با آن‌ها اشیایی فقط‌خواندنی و تغییرناپذیر (Immutable) ساخت.</p>
-<h2>ایمنی نوع در #C</h2>
-<p>(Type Safety)</p>
-<p>زبان #C در اصل یک زبان ایمن از نظر نوع (Type-Safe) است. این یعنی اشیای مختلف (یعنی نمونه‌هایی از انواع مختلف داده‌ها) فقط از طریق سازوکارهایی که خود نوع آن‌ها تعریف کرده، می‌توانند با هم تعامل داشته باشند.</p>
-<p>این کار باعث می‌شود که انسجام داخلی هر نوع (Type) حفظ شود.</p>
-<p>برای مثال:</p>
-<p>در #C نمی‌توانید با یک مقدار از نوع رشته (string) طوری رفتار کنید که انگار یک عدد صحیح (int) است — زبان جلوی این کار را می‌گیرد.</p>
-<p><strong>تایپ ایستا (Static Typing)</strong></p>
-<p>زبان #C از تایپ ایستا پشتیبانی می‌کند.<br>
-یعنی بررسی نوع داده‌ها نه فقط در زمان اجرا، بلکه در زمان کامپایل (ساخت برنامه) هم انجام می‌شود.</p>
-<p>🔹 این یعنی بسیاری از خطاهای احتمالی قبل از اجرای برنامه شناسایی می‌شوند.<br>
-🔹 به‌جای اینکه فقط با نوشتن تست‌های واحد (Unit Tests) در زمان اجرا به دنبال خطاها باشید، کامپایلر خودش بررسی می‌کند که همه نوع‌ها در برنامه درست به‌کار رفته‌اند یا نه.</p>
-<p>این ویژگی چند مزیت مهم داره:</p>
-<ul>
-<li>
-<p>برنامه‌های بزرگ راحت‌تر قابل مدیریت هستند</p>
-</li>
-<li>
-<p>کدها قابل پیش‌بینی‌تر و مطمئن‌تر (Robust) می‌شن</p>
-</li>
-<li>
-<p>ابزارهایی مثل IntelliSense در ویژوال استودیو می‌تونن کمک کنن کدها رو سریع‌تر و بهتر بنویسید، چون دقیقاً می‌دونن که هر متغیر از چه نوعیه و چه متدهایی می‌تونید روش اجرا کنید</p>
-</li>
-<li>
-<p>همچنین این ابزارها می‌تونن بررسی کنن که یک متغیر یا متد یا نوع، در کجای برنامه استفاده شده — که این موضوع برای بازسازی و تغییر ساختار کد (Refactoring) بسیار مهمه</p>
-</li>
-</ul>
-<p><strong>تایپ پویا با dynamic</strong></p>
-<p>در عین حال که #C عمدتاً یک زبان با تایپ ایستاست، اجازه می‌ده که بخش‌هایی از کد را به‌صورت پویا تایپ کنید.<br>
-برای این کار می‌تونید از کلیدواژه‌ی dynamic استفاده کنید.</p>
-<p>اما با این وجود، #C در ذات خود همچنان یک زبان با تایپ ایستا باقی می‌مونه.</p>
-<p><strong>تایپ قوی (Strong Typing)</strong></p>
-<p>زبان #C همچنین به عنوان یک زبان با تایپ قوی (Strongly Typed) شناخته می‌شود.<br>
-یعنی قوانین مربوط به نوع‌ها به‌شدت رعایت می‌شن — چه در زمان کامپایل و چه در زمان اجرا.</p>
-<p>مثلاً:<br>
-شما نمی‌تونید تابعی که انتظار داره یک عدد صحیح (int) دریافت کنه، با یک عدد اعشاری (float) صدا بزنید — مگر اینکه صراحتاً عدد اعشاری رو به عدد صحیح تبدیل (Cast) کرده باشید.</p>
-<p>این موضوع کمک می‌کنه تا از بروز خطاهای رایج و پنهان جلوگیری بشه.</p>
-<p>✅ این ویژگی‌ها باعث می‌شن زبان #C هم قدرتمند باشه و هم امن و قابل اعتماد — مخصوصاً برای ساخت برنامه‌های بزرگ و پیچیده.</p>
-<h2>مدیریت حافظه</h2>
-<p>(Memory Management)</p>
-<p>در زبان #C، مدیریت حافظه به‌صورت خودکار توسط زمان اجرای مشترک (Common Language Runtime یا CLR) انجام می‌شود.</p>
-<p>به عبارت ساده‌تر:<br>
-در هنگام اجرای برنامه، یک زباله‌روب (Garbage Collector) وجود دارد که به‌طور خودکار حافظه اشیایی را که دیگر استفاده نمی‌شوند آزاد می‌کند.</p>
-<p>✅ این یعنی برنامه‌نویس دیگر نیازی ندارد خودش به‌صورت دستی حافظه اشیاء را آزاد کند — چیزی که در زبان‌هایی مثل ++C ضروری بود.</p>
-<p>❌ در ++C اگر فراموش می‌کردید حافظه‌ای را آزاد کنید، یا اشتباه آن را دوباره آزاد می‌کردید، برنامه‌تان با خطاهای خطرناک مثل اشاره‌گرهای نامعتبر (Dangling Pointers) روبه‌رو می‌شد.<br>
-اما در #C این مشکل به‌طور کامل از بین رفته.</p>
-<p>آیا در #C اصلاً اشاره‌گر (Pointer) وجود ندارد؟<br>
-❌ خیر، زبان #C اشاره‌گرها را کاملاً حذف نکرده؛ فقط استفاده از آن‌ها را برای اکثر کارها غیرضروری کرده است.</p>
-<p>در برخی موارد خاص که:</p>
-<ul>
-<li>
-<p>عملکرد (Performance) خیلی حیاتی باشد</p>
-</li>
-<li>
-<p>یا نیاز به تعامل با کدهای Native یا کتابخانه‌های سطح پایین باشد</p>
-</li>
-</ul>
-<p>می‌توانید از اشاره‌گرها و مدیریت حافظه دستی استفاده کنید — اما فقط در بخش‌هایی از کد که با کلیدواژه unsafe علامت‌گذاری شده‌اند.</p>
-<p>✅ بنابراین:</p>
-<ul>
-<li>
-<p>در استفاده روزمره، شما بدون اشاره‌گر هم می‌توانید همه کارها را به‌سادگی انجام دهید.</p>
-</li>
-<li>
-<p>اما اگر لازم باشد، #C امکان نوشتن کدهای سطح پایین و بهینه را هم در اختیار شما قرار می‌دهد — با آگاهی کامل و در محیطی ایزوله.</p>
-</li>
-</ul>
-<h2>پشتیبانی از پلتفرم‌ها</h2>
-<p>(Platform Support)</p>
-<p>زبان #C اجراکننده‌هایی (Runtimes) دارد که از پلتفرم‌های زیر پشتیبانی می‌کنند:</p>
-<ul>
-<li>
-<p>ویندوز 7 به بعد (Windows 7+)<br>
-برای ساخت اپلیکیشن‌های:</p>
-<ul>
-<li>
-<p>دسکتاپ با رابط گرافیکی (Rich Client)</p>
-</li>
-<li>
-<p>تحت وب (Web)</p>
-</li>
-<li>
-<p>سمت سرور (Server)</p>
-</li>
-<li>
-<p>خط فرمان (Command-Line)</p>
-</li>
-</ul>
-</li>
-<li>
-<p>سیستم‌عامل macOS<br>
-برای ساخت:</p>
-<ul>
-<li>
-<p>برنامه‌های تحت وب و خط فرمان</p>
-</li>
-<li>
-<p>همچنین برنامه‌های گرافیکی از طریق فناوری Mac Catalyst</p>
-</li>
-</ul>
-</li>
-<li>
-<p>لینوکس (Linux)<br>
-برای اپلیکیشن‌های:</p>
-<ul>
-<li>
-<p>تحت وب</p>
-</li>
-<li>
-<p>خط فرمان</p>
-</li>
-</ul>
-</li>
-<li>
-<p>اندروید و iOS<br>
-برای توسعه برنامه‌های موبایل</p>
-</li>
-<li>
-<p>دستگاه‌های ویندوز 10<br>
-مثل:</p>
-<ul>
-<li>
-<p>Xbox</p>
-</li>
-<li>
-<p>Surface Hub</p>
-</li>
-<li>
-<p>HoloLens<br>
-(از طریق فناوری UWP یا Universal Windows Platform)</p>
-</li>
-</ul>
-</li>
-</ul>
-<p>علاوه بر این، فناوری‌ای به نام Blazor وجود دارد که می‌تواند کدهای #C را به WebAssembly تبدیل کند تا مستقیماً در مرورگر اجرا شوند.</p>
-<p>✅ این یعنی می‌توانید با استفاده از #C حتی برنامه‌های تحت وب مدرن و بدون نیاز به جاوااسکریپت بنویسید — و کدتان در مرورگر اجرا شود!</p>
-<h2>محیط‌های زمان اجرا (CLRs)، کتابخانه‌های کلاس پایه (BCLs) و رانتایم‌ها</h2>
-<p>برای اجرای برنامه‌های نوشته‌شده با زبان #C، به دو بخش اصلی نیاز داریم:</p>
-<ol>
-<li>
-<p>یک زمان اجرای مشترک (Common Language Runtime یا CLR)</p>
-</li>
-<li>
-<p>یک کتابخانه کلاس پایه (Base Class Library یا BCL)</p>
-</li>
-</ol>
-<p>علاوه بر این‌ها، یک زمان اجرا (Runtime) ممکنه شامل لایه‌های سطح بالاتر هم باشه؛<br>
-مثلاً کتابخانه‌هایی برای توسعه:</p>
-<ul>
-<li>
-<p>برنامه‌های دسکتاپ با رابط گرافیکی (Rich-Client)</p>
-</li>
-<li>
-<p>برنامه‌های موبایل</p>
-</li>
-<li>
-<p>یا برنامه‌های تحت وب</p>
-</li>
-</ul>
-<p>📊 این ساختار معمولاً در قالب نموداری مثل شکل 1-1 نمایش داده می‌شه (که در ادامه کتاب میاد).</p>
-<p><strong>چرا چند نوع Runtime وجود داره؟</strong><br>
-💡 دلیلش اینه که:</p>
-<ul>
-<li>
-<p>انواع مختلفی از اپلیکیشن‌ها وجود دارن (وب، موبایل، دسکتاپ، بازی و...)</p>
-</li>
-<li>
-<p>و این اپلیکیشن‌ها باید روی پلتفرم‌های مختلف (مثل ویندوز، لینوکس، اندروید و...) اجرا بشن</p>
-</li>
-</ul>
-<p>بنابراین برای پشتیبانی از این تنوع، نسخه‌های مختلفی از Runtimes وجود دارن —<br>
-ولی همه‌ی اون‌ها بر پایه مفاهیم CLR و BCL ساخته شده‌اند.</p>
-<div align="center">
-<p><img src="../../../assets/image/01/Runtime-architecture.png" alt="Conventions-UsedThis-Book"></p>
-</div>
-## زمان اجرای مشترک (CLR)
-<p>(Common Language Runtime)</p>
-<p>این CLR یا زمان اجرای مشترک، بخشی از زیرساخت #C است که خدمات حیاتی زمان اجرا را فراهم می‌کند — از جمله:</p>
-<ul>
-<li>
-<p>مدیریت خودکار حافظه (Garbage Collection)</p>
-</li>
-<li>
-<p>مدیریت خطاها یا استثناها (Exception Handling)</p>
-</li>
-</ul>
-<p>🔹 واژه‌ی &quot;مشترک&quot; در نام CLR به این نکته اشاره دارد که زبان‌های مختلفی از یک Runtime یکسان استفاده می‌کنند.<br>
-برای مثال، زبان‌هایی مثل:</p>
-<ul>
-<li>
-<p>F#</p>
-</li>
-<li>
-<p>Visual Basic</p>
-</li>
-<li>
-<p>Managed C++</p>
-</li>
-</ul>
-<p>همه از همین CLR استفاده می‌کنند و با آن سازگار هستند.</p>
-<p><strong>کد مدیریت‌شده (Managed Code) و زبان میانی (IL)</strong></p>
-<p>زبان #C به‌عنوان یک زبان مدیریت‌شده (Managed Language) شناخته می‌شود، چون کد منبع آن ابتدا به کد مدیریت‌شده کامپایل می‌شود.</p>
-<p>این کد مدیریت‌شده به‌صورت زبان میانی (Intermediate Language یا IL) ذخیره می‌شود.</p>
-<p>سپس CLR این کد IL را به کد ماشین (مثلاً X64 یا X86) تبدیل می‌کند تا توسط سیستم اجرا شود.<br>
-این فرآیند تبدیل درست قبل از اجرای برنامه انجام می‌شود و به آن کامپایل در لحظه (Just-In-Time یا JIT) گفته می‌شود.</p>
-<p>🔸 در برخی موارد (مثل برنامه‌های حجیم یا دستگاه‌های ضعیف‌تر)، می‌توان پیش از زمان اجرا کل برنامه را کامپایل کرد — که به آن کامپایل پیش‌زمانی (Ahead-of-Time) گفته می‌شود.<br>
-برای مثال، در اپلیکیشن‌های iOS، این روش اجباری است تا با قوانین اپ‌استور سازگار باشد.</p>
-<p><strong>اسمبلی چیست؟</strong><br>
-(Assembly)</p>
-<p>کد مدیریت‌شده درون یک واحد به نام اسمبلی (Assembly) قرار می‌گیرد.</p>
-<p>یک اسمبلی شامل موارد زیر است:</p>
-<ul>
-<li>
-<p>کد IL</p>
-</li>
-<li>
-<p>و اطلاعات نوع (Type Metadata)</p>
-</li>
-</ul>
-<p>وجود متادیتا باعث می‌شود که اسمبلی‌ها بتوانند به نوع‌های موجود در اسمبلی‌های دیگر ارجاع دهند — بدون اینکه نیازی به فایل‌های اضافی باشد.</p>
-<p><strong>ابزارهای بررسی و بازگردانی کد</strong></p>
-<p>برای مشاهده و تحلیل محتوای یک اسمبلی، می‌توانید از ابزارهایی استفاده کنید:</p>
-<ul>
-<li>ildasm از مایکروسافت<br>
-(برای بررسی ساختار اسمبلی و IL)</li>
-</ul>
-<p>ابزارهایی مثل:</p>
-<ul>
-<li>
-<p>ILSpy</p>
-</li>
-<li>
-<p>dotPeek از JetBrains</p>
-</li>
-</ul>
-<p>این ابزارها می‌توانند حتی IL را به کد #C بازگردانند (Decompile).<br>
-چرا؟ چون IL نسبت به کد ماشین سطح بالاتری دارد، و بنابراین بازسازی کد #C از روی آن کار شدنی و مؤثری است.</p>
-<p><strong>بازتاب (Reflection) و تولید کد در زمان اجرا</strong></p>
-<p>برنامه‌های نوشته‌شده با #C می‌توانند:</p>
-<ul>
-<li>
-<p>متادیتای خود را در زمان اجرا بررسی کنند — این قابلیت را Reflection می‌نامند.</p>
-</li>
-<li>
-<p>حتی می‌توانند در زمان اجرا کد جدید تولید کنند — با استفاده از reflection.emit</p>
-</li>
-</ul>
-<p>✅ این ویژگی‌ها قدرت بسیار زیادی به برنامه‌نویسان می‌دهند تا برنامه‌هایی انعطاف‌پذیر، پویا، و قابل تحلیل بنویسند.</p>
-<h2>کتابخانه کلاس پایه</h2>
-<p>(Base Class Library)</p>
-<p>هر CLR (زمان اجرای مشترک) همیشه همراه با مجموعه‌ای از اسمبلی‌ها عرضه می‌شود که به آن‌ها کتابخانه کلاس پایه (Base Class Library یا BCL) گفته می‌شود.</p>
-<p>🔹 این کتابخانه، امکانات پایه و ضروری را برای برنامه‌نویسان فراهم می‌کند؛ از جمله:</p>
-<ul>
-<li>
-<p>کالکشن‌ها (Collections) مثل لیست‌ها و دیکشنری‌ها</p>
-</li>
-<li>
-<p>ورودی/خروجی (I/O) مثل خواندن و نوشتن فایل</p>
-</li>
-<li>
-<p>پردازش متن</p>
-</li>
-<li>
-<p>کار با XML و JSON</p>
-</li>
-<li>
-<p>شبکه (Networking)</p>
-</li>
-<li>
-<p>رمزنگاری (Encryption)</p>
-</li>
-<li>
-<p>برقراری ارتباط با کدهای Native (Interop)</p>
-</li>
-<li>
-<p>برنامه‌نویسی هم‌زمان (Concurrency) و پردازش موازی (Parallel Programming)</p>
-</li>
-</ul>
-<p><strong>پشتیبانی از ویژگی‌های خود زبان #C</strong></p>
-<p>کتابخانه BCL فقط امکانات عمومی نیست — بلکه نوع‌هایی را هم پیاده‌سازی می‌کند که خود زبان #C برای عملکرد درست به آن‌ها نیاز دارد؛ مثلاً:</p>
-<ul>
-<li>
-<p>شمردن (Enumeration)</p>
-</li>
-<li>
-<p>پرس‌وجو (Querying)</p>
-</li>
-<li>
-<p>برنامه‌نویسی ناهمگام (Asynchrony)</p>
-</li>
-</ul>
-<p>همچنین BCL این امکان را به شما می‌دهد که:</p>
-<p>به‌صورت مستقیم به قابلیت‌های CLR دسترسی داشته باشید، مثل:</p>
-<ul>
-<li>
-<p>بازتاب (Reflection)</p>
-</li>
-<li>
-<p>مدیریت حافظه (Memory Management)</p>
-</li>
-</ul>
-<p>✅ به زبان ساده‌تر:</p>
-<p>BCL جعبه‌ابزار اصلی شما در برنامه‌نویسی با #C و دات‌نت است؛ تمام چیزهایی که برای ساخت برنامه‌های واقعی نیاز دارید در همین کتابخانه پایه وجود دارد.</p>
-<h2>زمان اجرا (Runtime) چیست؟</h2>
-<p>(Runtimes)</p>
-<p>Runtime — که گاهی به آن فریم‌ورک (Framework) هم گفته می‌شود — یک بسته قابل نصب است که شما آن را دانلود و نصب می‌کنید.</p>
-<p>هر Runtime شامل دو بخش اصلی است:</p>
-<ol>
-<li>
-<p>یک CLR (زمان اجرای مشترک)</p>
-</li>
-<li>
-<p>یک کتابخانه کلاس پایه (BCL)</p>
-</li>
-</ol>
-<p>و در صورت نیاز، ممکنه شامل یک لایه‌ی مخصوص برای نوع خاصی از اپلیکیشن هم باشد، مثل:</p>
-<ul>
-<li>
-<p>برنامه‌های وب</p>
-</li>
-<li>
-<p>اپلیکیشن‌های موبایل</p>
-</li>
-<li>
-<p>برنامه‌های دسکتاپ با رابط گرافیکی (Rich Client)</p>
-</li>
-</ul>
-<p>🔹 اگر دارید یک برنامه خط فرمان (Command-Line) یا یک کتابخانه بدون واسط کاربری (Non-UI Library) می‌نویسید،<br>
-نیازی به این لایه‌های اضافه نخواهید داشت.</p>
-<p><strong>وقتی برنامه‌ای می‌نویسید، چه Runtimeی را هدف قرار می‌دهید؟</strong></p>
-<p>وقتی برنامه‌ای می‌نویسید، مشخص می‌کنید که کدام Runtime هدف برنامه‌ی شماست.<br>
-این یعنی:</p>
-<ul>
-<li>
-<p>برنامه‌ی شما از امکاناتی استفاده می‌کند که آن Runtime در اختیارش می‌گذارد</p>
-</li>
-<li>
-<p>برنامه‌تان به همان Runtime وابسته است</p>
-</li>
-</ul>
-<p>همچنین، نوع Runtimeی که انتخاب می‌کنید تعیین می‌کند برنامه‌تان روی چه پلتفرم‌هایی قابل اجراست.</p>
-<p>✅ مثلاً:</p>
-<p>اگر از .NET MAUI استفاده کنید، می‌تونید برنامه‌تان را برای اندروید، iOS، ویندوز و مک بسازید.<br>
-ولی اگر از <a href="http://ASP.NET">ASP.NET</a> Core استفاده کنید، برنامه‌ی شما برای تحت‌وب بودن طراحی می‌شه.</p>
-<p>جدول زیر گزینه‌های اصلی محیط‌های اجرایی را فهرست می‌کند:</p>
-<div align="center">
-<p><img src="../../../assets/image/01/Introduction-02.png" alt="Conventions-UsedThis-Book"></p>
-</div>
-<p>تصویر ۱-۲ این اطلاعات را به صورت گرافیکی نمایش می‌دهد و همچنین به عنوان راهنمایی برای مطالبی که در کتاب پوشش داده شده‌اند، عمل می‌کند.</p>
-<div align="center">
-<p><img src="../../../assets/image/01/Introduction-03.png" alt="Conventions-UsedThis-Book"></p>
-</div>
-<h2>.NET 8 چیست؟</h2>
-<p>(.NET 8)</p>
-<p>.NET 8 زمان اجرای اصلی و متن‌باز مایکروسافت محسوب می‌شود.</p>
-<p>با استفاده از .NET 8 می‌توانید انواع مختلفی از برنامه‌ها بنویسید، از جمله:</p>
-<ul>
-<li>
-<p>برنامه‌های وب و خط فرمان (Console)<br>
-که روی سیستم‌عامل‌های:</p>
-<ul>
-<li>
-<p>ویندوز</p>
-</li>
-<li>
-<p>لینوکس</p>
-</li>
-<li>
-<p>macOS<br>
-قابل اجرا هستند.</p>
-</li>
-</ul>
-</li>
-<li>
-<p>برنامه‌های دسکتاپ با رابط کاربری غنی (Rich-Client Applications)<br>
-که روی:</p>
-<ul>
-<li>
-<p>ویندوز 10 و نسخه‌های جدیدتر</p>
-</li>
-<li>
-<p>macOS<br>
-اجرا می‌شوند.</p>
-</li>
-</ul>
-</li>
-<li>
-<p>برنامه‌های موبایل<br>
-که روی:</p>
-<ul>
-<li>
-<p>iOS</p>
-</li>
-<li>
-<p>Android<br>
-اجرا می‌شوند.</p>
-</li>
-</ul>
-</li>
-</ul>
-<p>📘 این کتاب تمرکز اصلی‌اش بر روی CLR و BCL در .NET 8 است.</p>
-<p><strong>تفاوت با .NET Framework</strong></p>
-<p>برخلاف .NET Framework که به‌صورت پیش‌فرض روی ویندوز نصب بود،<br>
-.NET 8 به‌صورت پیش‌فرض روی ویندوز نصب نیست.</p>
-<p>❗ بنابراین، اگر برنامه‌ای با .NET 8 بنویسید و بخواهید روی سیستمی اجرا کنید که .NET 8 نصب ندارد، پیامی نمایش داده می‌شود که از شما می‌خواهد Runtime را از یک صفحه وب دانلود کنید.</p>
-<p>✅ برای جلوگیری از این مشکل، می‌توانید برنامه را به‌صورت Self-Contained Deployment منتشر کنید؛<br>
-یعنی تمام اجزای موردنیاز از Runtime داخل فایل برنامه گنجانده می‌شوند.</p>
-<p>تاریخچه نسخه‌های .NET<br>
-تاریخچه انتشار نسخه‌های اصلی به این صورت است:</p>
-<pre class="hljs"><code>.NET Core 1.x  
-→ .NET Core 2.x  
-→ .NET Core 3.x  
-→ .NET 5  
-→ .NET 6  
-→ .NET 7  
-→ .NET 8
-</code></pre>
-<p>🔹 بعد از .NET Core 3، مایکروسافت واژه‌ی &quot;Core&quot; را از نام نسخه‌ها حذف کرد.<br>
-🔹 همچنین نسخه‌ی 4 را کاملاً رد کرد تا با .NET Framework 4.x که نسخه‌ای کاملاً متفاوت و قدیمی‌تر است اشتباه گرفته نشود.</p>
-<p><strong>سازگاری نسخه‌ها</strong></p>
-<ul>
-<li>
-<p>اسمبلی‌هایی که با .NET Core 1 تا .NET 7 ساخته شده‌اند، در بیشتر موارد بدون تغییر روی .NET 8 اجرا می‌شوند.</p>
-</li>
-<li>
-<p>اما اسمبلی‌هایی که با .NET Framework (هر نسخه‌ای) ساخته شده‌اند، معمولاً با .NET 8 ناسازگار هستند.</p>
-</li>
-</ul>
-<h2>برنامه‌های دسکتاپ ویندوز و WinUI 3</h2>
-<p>(Windows Desktop and WinUI 3)</p>
-<p>برای نوشتن برنامه‌های دسکتاپ با رابط کاربری غنی که روی ویندوز 10 و نسخه‌های جدیدتر اجرا شوند، می‌توانید از بین دو گزینه انتخاب کنید:</p>
-<ul>
-<li>
-<p>رابط‌های برنامه‌نویسی کلاسیک دسکتاپ ویندوز (Windows Desktop APIs)<br>
-مانند:</p>
-<ul>
-<li>
-<p>Windows Forms</p>
-</li>
-<li>
-<p>WPF (Windows Presentation Foundation)</p>
-</li>
-<li>
-<p>WinUI 3</p>
-</li>
-</ul>
-</li>
-</ul>
-<p><strong>تفاوت‌ها و نکات مهم</strong></p>
-<ul>
-<li>
-<p>Windows Desktop APIs جزئی از Runtime دسکتاپ دات‌نت (.NET Desktop Runtime) هستند.</p>
-</li>
-<li>
-<p>اما WinUI 3 بخشی از Windows App SDK است که باید به‌صورت جداگانه دانلود و نصب شود.</p>
-</li>
-</ul>
-<p><strong>تاریخچه و پشتیبانی</strong></p>
-<ul>
-<li>
-<p>رابط‌های کلاسیک دسکتاپ ویندوز از سال ۲۰۰۶ وجود دارند و از نظر کتابخانه‌های شخص ثالث بسیار قوی هستند.</p>
-</li>
-<li>
-<p>همچنین سوالات و پاسخ‌های زیادی درباره‌ی آن‌ها در سایت‌هایی مثل StackOverflow وجود دارد که یادگیری و رفع اشکال را آسان می‌کند.</p>
-</li>
-<li>
-<p>WinUI 3 در سال ۲۰۲۲ منتشر شده و هدف آن نوشتن برنامه‌های مدرن و جذاب است که از آخرین کنترل‌ها و امکانات ویندوز ۱۰ و بالاتر بهره می‌برند.</p>
-</li>
-<li>
-<p>این فناوری جانشین Universal Windows Platform (UWP) به‌شمار می‌رود.</p>
-</li>
-</ul>
-<p>✅ اگر می‌خواهید برنامه‌های دسکتاپی با ظاهر و قابلیت‌های به‌روز بسازید، WinUI 3 انتخاب مناسبی است، ولی اگر دنبال راه‌حلی پایدار و با پشتیبانی گسترده هستید، می‌توانید از Windows Forms یا WPF استفاده کنید.</p>
-<h2>MAUI</h2>
-<p>(Multi-platform App UI)</p>
-<p>MAUI بیشتر برای ساخت برنامه‌های موبایل روی iOS و اندروید طراحی شده است، اما می‌توان از آن برای ساخت برنامه‌های دسکتاپ روی macOS و ویندوز نیز استفاده کرد،<br>
-که این کار از طریق فناوری‌هایی مانند Mac Catalyst و WinUI 3 انجام می‌شود.</p>
-<p>MAUI ادامه و تکامل پروژه Xamarin است و به شما اجازه می‌دهد که با یک پروژه، برنامه‌تان را برای چند پلتفرم مختلف بسازید.</p>
-<p><strong>Avalonia</strong></p>
-<p>برای ساخت برنامه‌های دسکتاپ چندسکویی (Cross-platform)،<br>
-کتابخانه‌ی شخص ثالثی به نام Avalonia وجود دارد که جایگزینی برای MAUI به شمار می‌رود.</p>
-<p>ویژگی‌های Avalonia:</p>
-<ul>
-<li>
-<p>روی لینوکس نیز اجرا می‌شود</p>
-</li>
-<li>
-<p>معماری ساده‌تری نسبت به MAUI دارد (چون از لایه‌های میانی مانند Catalyst یا WinUI استفاده نمی‌کند)</p>
-</li>
-<li>
-<p>API آن شبیه به WPF است</p>
-</li>
-<li>
-<p>یک افزونه تجاری به نام XPF دارد که تقریباً سازگاری کامل با WPF را فراهم می‌کند.</p>
-</li>
-</ul>
-<p><strong>.NET Framework</strong></p>
-<p>.NET Framework نسخه‌ی اولیه و قدیمی‌تر مایکروسافت است که فقط برای برنامه‌های تحت ویندوز طراحی شده:</p>
-<ul>
-<li>
-<p>برنامه‌های وب</p>
-</li>
-<li>
-<p>برنامه‌های دسکتاپ و سرور ویندوز</p>
-</li>
-</ul>
-<p>مایکروسافت برنامه‌ای برای انتشار نسخه‌های جدید این فریم‌ورک ندارد، ولی همچنان نسخه‌ی 4.8 را پشتیبانی و نگهداری می‌کند،<br>
-چون تعداد زیادی برنامه قدیمی بر اساس آن ساخته شده‌اند.</p>
-<p><strong>تفاوت‌های مهم درباره .NET Framework و .NET 8</strong></p>
-<ul>
-<li>
-<p>در .NET Framework، CLR و BCL با لایه‌ی اپلیکیشن کاملاً یکپارچه هستند.</p>
-</li>
-<li>
-<p>برنامه‌هایی که با .NET Framework نوشته شده‌اند، می‌توانند تحت .NET 8 مجدداً کامپایل شوند،<br>
-ولی معمولاً به تغییراتی نیاز دارند.</p>
-</li>
-<li>
-<p>برخی قابلیت‌های .NET Framework در .NET 8 وجود ندارند، و بالعکس.</p>
-</li>
-</ul>
-<p><strong>نصب و نسخه‌های C#</strong></p>
-<ul>
-<li>
-<p>.NET Framework به‌صورت پیش‌فرض روی ویندوز نصب است و از طریق Windows Update به‌روزرسانی می‌شود.</p>
-</li>
-<li>
-<p>اگر برنامه‌تان را روی .NET Framework 4.8 هدف قرار دهید، می‌توانید از ویژگی‌های زبان C# 7.3 و نسخه‌های قبل استفاده کنید.</p>
-</li>
-<li>
-<p>البته می‌توانید نسخه‌ی زبان جدیدتر را در فایل پروژه تنظیم کنید تا برخی قابلیت‌های جدید فعال شود (البته به جز ویژگی‌هایی که به Runtime جدید نیاز دارند).</p>
-</li>
-</ul>
-<p><strong>توضیح اصطلاحات “.NET”</strong></p>
-<p>واژه‌ی “.NET” همیشه به عنوان اصطلاح کلی برای همه‌ی فناوری‌هایی که این کلمه را در نامشان دارند استفاده شده، مثل:</p>
-<ul>
-<li>
-<p>.NET Framework</p>
-</li>
-<li>
-<p>.NET Core</p>
-</li>
-<li>
-<p>.NET Standard</p>
-</li>
-<li>
-<p>و غیره</p>
-</li>
-</ul>
-<p>این باعث شده که نامگذاری جدید مایکروسافت (که .NET Core را به صرفه .NET تغییر داده) گاهی اوقات گیج‌کننده باشد.</p>
-<p>📌 در این کتاب:</p>
-<ul>
-<li>
-<p>وقتی به نسخه‌های جدید اشاره می‌کنیم، از عبارت “.NET 5+” استفاده می‌کنیم.</p>
-</li>
-<li>
-<p>و برای اشاره به کل دنباله‌ی .NET Core و نسخه‌های جدیدتر، می‌گوییم “.NET Core و .NET 5+”.</p>
-</li>
-</ul>
-<p>همچنین، اگرچه .NET (5+) یک فریم‌ورک است،<br>
-اما با .NET Framework قدیمی کاملاً متفاوت است،<br>
-پس تا جایی که ممکن است در این کتاب از اصطلاح runtime به جای framework استفاده می‌کنیم تا ابهام کمتر شود.</p>
-<h2>محیط‌های اجرایی خاص Niche Runtimes</h2>
-<p>علاوه بر Runtimeهای اصلی، چند Runtime خاص و تخصصی نیز وجود دارد:</p>
-<p><strong>Unity</strong></p>
-<p>Unity یک پلتفرم توسعه بازی است که به شما امکان می‌دهد منطق بازی را با زبان #C بنویسید.</p>
-<p><strong>Universal Windows Platform (UWP)</strong></p>
-<p>UWP برای نوشتن برنامه‌هایی طراحی شده که اولویت‌شان صفحه‌نمایش لمسی (Touch-First) است و روی ویندوز ۱۰ به بالا اجرا می‌شوند،<br>
-از جمله دستگاه‌هایی مثل:</p>
-<ul>
-<li>
-<p>Xbox</p>
-</li>
-<li>
-<p>Surface Hub</p>
-</li>
-<li>
-<p>HoloLens</p>
-</li>
-</ul>
-<p>برنامه‌های UWP در محیطی ایزوله (Sandbox) اجرا می‌شوند و معمولاً از طریق Windows Store منتشر می‌شوند.</p>
-<p>UWP از نسخه‌ای از CLR/BCL دات‌نت کور 2.2 استفاده می‌کند،<br>
-و به‌احتمال زیاد این نسخه به‌روزرسانی نخواهد شد.<br>
-مایکروسافت به کاربران توصیه کرده به جای UWP از جایگزین مدرن آن، یعنی WinUI 3 استفاده کنند.</p>
-<p>اما چون WinUI 3 فقط از برنامه‌های دسکتاپ ویندوز پشتیبانی می‌کند،<br>
-UWP هنوز برای هدف‌گذاری روی Xbox، Surface Hub و HoloLens کاربرد خاص خود را دارد.</p>
-<p><strong>.NET Micro Framework</strong></p>
-<p>.NET Micro Framework برای اجرای کد دات‌نت روی دستگاه‌های بسیار محدود از نظر منابع طراحی شده است،<br>
-مثلاً دستگاه‌هایی که کمتر از یک مگابایت حافظه دارند.</p>
-<p><strong>اجرای کد مدیریت شده داخل SQL Server</strong></p>
-<p>امکان اجرای کدهای مدیریت شده (#C) داخل SQL Server هم وجود دارد.<br>
-با استفاده از قابلیت SQL Server CLR integration، می‌توانید:</p>
-<ul>
-<li>
-<p>توابع سفارشی</p>
-</li>
-<li>
-<p>روال‌های ذخیره شده (Stored Procedures)</p>
-</li>
-<li>
-<p>و عملگرهای جمعی (Aggregations)</p>
-</li>
-</ul>
-<p>را با زبان #C بنویسید و سپس در کوئری‌های SQL خود فراخوانی کنید.</p>
-<p>این ویژگی با .NET Framework و یک CLR ویژه که در محیطی ایزوله (Sandbox) اجرا می‌شود کار می‌کند،<br>
-تا از صحت و امنیت پردازش‌های SQL Server محافظت کند.</p>
-<h2>تاریخچه‌ای کوتاه از سی‌شارپ</h2>
-<p>در ادامه، ویژگی‌های جدید هر نسخه از زبان #C به ترتیب زمانی معکوس فهرست شده‌اند،<br>
-تا برای خوانندگانی که با نسخه‌های قدیمی‌تر زبان آشنا هستند، مفید باشد.</p>
-<h2>ویژگی‌های جدید در #C 12</h2>
-<p>نسخه‌ی ۱۲ زبان #C همراه با Visual Studio 2022 عرضه شده است و زمانی استفاده می‌شود که هدف برنامه،<br>
-نسخه‌ی .NET 8 باشد.</p>
-<h2>عبارات مجموعه‌ای (Collection Expressions)</h2>
-<p>قبلاً برای مقداردهی اولیه یک آرایه، مثلاً آرایه‌ای از حروف صدادار، از این شکل استفاده می‌کردید:</p>
-<pre class="hljs"><code><span class="hljs-built_in">char</span>[ ] vowels = {<span class="hljs-string">&#x27;a&#x27;</span>,<span class="hljs-string">&#x27;e&#x27;</span>,<span class="hljs-string">&#x27;i&#x27;</span>,<span class="hljs-string">&#x27;o&#x27;</span>,<span class="hljs-string">&#x27;u&#x27;</span>};
-</code></pre>
-<p>اما حالا می‌توانید از براکت‌های مربعی (علامت []) به این صورت استفاده کنید:</p>
-<pre class="hljs"><code><span class="hljs-built_in">char</span>[ ] vowels = [<span class="hljs-string">&#x27;a&#x27;</span>,<span class="hljs-string">&#x27;e&#x27;</span>,<span class="hljs-string">&#x27;i&#x27;</span>,<span class="hljs-string">&#x27;o&#x27;</span>,<span class="hljs-string">&#x27;u&#x27;</span>];
-</code></pre>
-<p><strong>مزایای عبارات مجموعه‌ای</strong></p>
-<p>عبارات مجموعه‌ای دو مزیت بزرگ دارند:</p>
-<ol>
-<li>قابلیت استفاده در انواع دیگر مجموعه‌ها</li>
-</ol>
-<p>همین نگارش می‌تواند برای انواع مختلف مجموعه‌ها استفاده شود، مثل لیست‌ها، مجموعه‌ها (Set) و حتی نوع‌های پایین‌رده مثل Span:</p>
-<pre class="hljs"><code>List&lt;<span class="hljs-built_in">char</span>&gt; list         = [<span class="hljs-string">&#x27;a&#x27;</span>,<span class="hljs-string">&#x27;e&#x27;</span>,<span class="hljs-string">&#x27;i&#x27;</span>,<span class="hljs-string">&#x27;o&#x27;</span>,<span class="hljs-string">&#x27;u&#x27;</span>];
-HashSet&lt;<span class="hljs-built_in">char</span>&gt; <span class="hljs-keyword">set</span>       = [<span class="hljs-string">&#x27;a&#x27;</span>,<span class="hljs-string">&#x27;e&#x27;</span>,<span class="hljs-string">&#x27;i&#x27;</span>,<span class="hljs-string">&#x27;o&#x27;</span>,<span class="hljs-string">&#x27;u&#x27;</span>];
-ReadOnlySpan&lt;<span class="hljs-built_in">char</span>&gt; span = [<span class="hljs-string">&#x27;a&#x27;</span>,<span class="hljs-string">&#x27;e&#x27;</span>,<span class="hljs-string">&#x27;i&#x27;</span>,<span class="hljs-string">&#x27;o&#x27;</span>,<span class="hljs-string">&#x27;u&#x27;</span>];
-</code></pre>
-<ol start="2">
-<li>هدف‌مند بودن نوع (Target-typed)</li>
-</ol>
-<p>یعنی کامپایلر می‌تواند نوع مجموعه را در بسیاری از موقعیت‌ها حدس بزند، و شما نیازی به نوشتن نوع ندارید، مثل وقتی که آرایه را به عنوان آرگومان به یک متد می‌دهید:</p>
-<pre class="hljs"><code>Foo([<span class="hljs-string">&#x27;a&#x27;</span>,<span class="hljs-string">&#x27;e&#x27;</span>,<span class="hljs-string">&#x27;i&#x27;</span>,<span class="hljs-string">&#x27;o&#x27;</span>,<span class="hljs-string">&#x27;u&#x27;</span>]);
-
-<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Foo</span>(<span class="hljs-params"><span class="hljs-built_in">char</span>[] letters</span>)</span> { ... }
-</code></pre>
-<p>برای جزئیات بیشتر، می‌توانید به بخش «Collection Initializers and Collection Expressions» در صفحه ۲۰۵ مراجعه کنید.</p>
-<h2>سازنده‌های اولیه در کلاس‌ها و استراکچرها  Primary constructors in classes and structs</h2>
-<p>(Primary Constructors in Classes and Structs)</p>
-<p>از نسخه #C 12 به بعد، می‌تونید لیست پارامترهای سازنده رو مستقیم بعد از تعریف کلاس یا استراکچر بنویسید.<br>
-برای مثال:</p>
-<pre class="hljs"><code><span class="hljs-keyword">class</span> <span class="hljs-title">Person</span> (<span class="hljs-title">string</span> <span class="hljs-title">firstName</span>, <span class="hljs-title">string</span> <span class="hljs-title">lastName</span>)
+<span class="hljs-comment">// روش جدید در سی‌شارپ ۱۲</span>
+<span class="hljs-built_in">char</span>[] vowels = [<span class="hljs-string">&#x27;a&#x27;</span>, <span class="hljs-string">&#x27;e&#x27;</span>, <span class="hljs-string">&#x27;i&#x27;</span>, <span class="hljs-string">&#x27;o&#x27;</span>, <span class="hljs-string">&#x27;u&#x27;</span>];
+</code></pre> <p>مزیت بزرگ این سینتکس، یکپارچگی آن برای سایر کالکشن‌ها مثل <code>List</code>، <code>HashSet</code> و حتی <code>Span</code> است:</p><pre class="hljs"><code>List&lt;<span class="hljs-built_in">char</span>&gt; list         = [<span class="hljs-string">&#x27;a&#x27;</span>, <span class="hljs-string">&#x27;e&#x27;</span>, <span class="hljs-string">&#x27;i&#x27;</span>, <span class="hljs-string">&#x27;o&#x27;</span>, <span class="hljs-string">&#x27;u&#x27;</span>];
+HashSet&lt;<span class="hljs-built_in">char</span>&gt; <span class="hljs-keyword">set</span>       = [<span class="hljs-string">&#x27;a&#x27;</span>, <span class="hljs-string">&#x27;e&#x27;</span>, <span class="hljs-string">&#x27;i&#x27;</span>, <span class="hljs-string">&#x27;o&#x27;</span>, <span class="hljs-string">&#x27;u&#x27;</span>];
+ReadOnlySpan&lt;<span class="hljs-built_in">char</span>&gt; span = [<span class="hljs-string">&#x27;a&#x27;</span>, <span class="hljs-string">&#x27;e&#x27;</span>, <span class="hljs-string">&#x27;i&#x27;</span>, <span class="hljs-string">&#x27;o&#x27;</span>, <span class="hljs-string">&#x27;u&#x27;</span>];
+</code></pre> <p>همچنین با عملگر اسپرد (<code>..</code>) می‌توانید عناصر یک کالکشن را درون کالکشن دیگر پخش کنید:</p><pre class="hljs"><code><span class="hljs-built_in">int</span>[] first = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>];
+<span class="hljs-built_in">int</span>[] combined = [..first, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>]; <span class="hljs-comment">// [1, 2, 3, 4, 5, 6]</span>
+</code></pre> <h4>۲. سازنده‌های اولیه در کلاس‌ها و استراکت‌ها (Primary Constructors)</h4><p>از سی‌شارپ ۱۲ می‌توانید پارامترهای سازنده را مستقیماً جلوی نام کلاس یا استراکت بنویسید:</p><pre class="hljs"><code><span class="hljs-keyword">class</span> <span class="hljs-title">Person</span>(<span class="hljs-title">string</span> <span class="hljs-title">firstName</span>, <span class="hljs-title">string</span> <span class="hljs-title">lastName</span>)
 {
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Print</span>()</span> =&gt; Console.WriteLine(firstName + <span class="hljs-string">&quot; &quot;</span> + lastName);
 }
-</code></pre>
-<p>در اینجا، کامپایلر به‌طور خودکار یک سازنده اولیه (Primary Constructor) برای کلاس Person می‌سازه.<br>
-بنابراین می‌تونید مثل زیر ازش استفاده کنید:</p>
-<pre class="hljs"><code>Person p = <span class="hljs-keyword">new</span> Person(<span class="hljs-string">&quot;Alice&quot;</span>, <span class="hljs-string">&quot;Jones&quot;</span>);
-p.Print();    <span class="hljs-comment">// خروجی: Alice Jones</span>
-</code></pre>
-<p><strong>تفاوت با Recordها</strong></p>
-<p>این قابلیت از #C 9 برای record‌ها وجود داشت،<br>
-اما در recordها، کامپایلر به‌صورت پیش‌فرض برای هر پارامتر یک property عمومی فقط‌خواندنی (init-only) هم می‌سازه.</p>
-<p>اما در کلاس‌ها و استراکچرها این اتفاق نمی‌افته.<br>
-اگر بخواهید پارامترهای سازنده اولیه را به صورت Property در اختیار داشته باشید، باید خودتان به‌طور صریح آن‌ها را تعریف کنید:</p>
-<pre class="hljs"><code><span class="hljs-keyword">class</span> <span class="hljs-title">Person</span> (<span class="hljs-title">string</span> <span class="hljs-title">firstName</span>, <span class="hljs-title">string</span> <span class="hljs-title">lastName</span>)
+
+<span class="hljs-comment">// استفاده</span>
+<span class="hljs-keyword">var</span> p = <span class="hljs-keyword">new</span> Person(<span class="hljs-string">&quot;Alice&quot;</span>, <span class="hljs-string">&quot;Jones&quot;</span>);
+p.Print(); <span class="hljs-comment">// Alice Jones</span>
+</code></pre> <h4>۳. مقادیر پیش‌فرض برای پارامترهای لامبدا (Default Lambda Parameters)</h4><p>مشابه متدهای عادی، در عبارات لامبدا نیز می‌توانید مقدار پیش‌فرض تعیین کنید:</p><pre class="hljs"><code><span class="hljs-keyword">var</span> print = (<span class="hljs-built_in">string</span> message = <span class="hljs-string">&quot;سلام دنیا&quot;</span>) =&gt; Console.WriteLine(message);
+
+print(<span class="hljs-string">&quot;درود&quot;</span>); <span class="hljs-comment">// درود</span>
+print();       <span class="hljs-comment">// سلام دنیا</span>
+</code></pre> <h4>۴. تعریف نام مستعار برای هر نوع دلخواهی (Alias Any Type)</h4><p>دستور <code>using</code> اکنون می‌تواند برای هر نوع داده‌ای، حتی تاپل‌ها و آرایه‌ها، یک نام مستعار تعریف کند:</p><pre class="hljs"><code><span class="hljs-keyword">using</span> Point = (<span class="hljs-built_in">int</span> X, <span class="hljs-built_in">int</span> Y);
+
+Point pt = (<span class="hljs-number">10</span>, <span class="hljs-number">20</span>);
+Console.WriteLine(pt.X); <span class="hljs-comment">// 10</span>
+</code></pre> <hr><h3>ویژگی‌های جدید در سی‌شارپ ۱۱ (C# 11)</h3><p>سی‌شارپ ۱۱ به همراه .NET 7 و Visual Studio 2022 معرفی شد.</p><h4>۱. رشته‌های خام چندخطی (Raw String Literals)</h4><p>با قرار دادن رشته درون حداقل سه کوتیشن (<code>&quot;&quot;&quot;</code>)، می‌توانید هر متنی را بدون نیاز به اسکیپ کردن کاراکترهایی مثل <code>\</code> یا <code>&quot;</code> بنویسید:</p><pre class="hljs"><code><span class="hljs-built_in">string</span> json = <span class="hljs-string">&quot;&quot;&quot;
 {
-    <span class="hljs-keyword">public</span> <span class="hljs-built_in">string</span> FirstName { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">set</span>; } = firstName;
-    <span class="hljs-keyword">public</span> <span class="hljs-built_in">string</span> LastName { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">set</span>; } = lastName;
+    &quot;name&quot;: &quot;Ali&quot;,
+    &quot;role&quot;: &quot;Developer&quot;
 }
-</code></pre>
-<p>✅ سازنده‌های اولیه برای سناریوهای ساده، بسیار مفید و تمیز هستند.<br>
-جزئیات بیشتر درباره تفاوت‌ها و محدودیت‌های آن‌ها در بخش<br>
-“Primary Constructors (C# 12)” در صفحه ۱۱۹ ارائه شده است.</p>
-<h2>پارامتر پیش‌فرض در لامبداها Default lambda parameters</h2>
-<p>در #C، مثل همیشه می‌تونید برای پارامترهای یک متد مقدار پیش‌فرض تعیین کنید:</p>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Print</span>(<span class="hljs-params"><span class="hljs-built_in">string</span> message = <span class="hljs-string">&quot;&quot;</span></span>)</span> =&gt; Console.WriteLine(message);
-</code></pre>
-<p>حالا در نسخه #C 12، همین امکان برای لامبداها (Lambda Expressions) هم فراهم شده:</p>
-<pre class="hljs"><code><span class="hljs-keyword">var</span> print = (<span class="hljs-built_in">string</span> message = <span class="hljs-string">&quot;&quot;</span>) =&gt; Console.WriteLine(message);
+&quot;&quot;&quot;</span>;
+</code></pre> <h4>۲. رشته‌های UTF-8 با پسوند <code>u8</code></h4><p>با افزودن پسوند <code>u8</code>، لیترال‌های متنی به جای UTF-16 مستقیماً به صورت بایت‌های UTF-8 ذخیره می‌شوند که برای بهینه‌سازی سرعت در کدهای حساس فوق‌العاده است:</p><pre class="hljs"><code>ReadOnlySpan&lt;<span class="hljs-built_in">byte</span>&gt; utf8 = <span class="hljs-string">&quot;Hello&quot;</span>u8;
+</code></pre> <h4>۳. الگوهای لیستی (List Patterns)</h4><p>امکان تطبیق الگو بر روی عناصر آرایه‌ها و لیست‌ها:</p><pre class="hljs"><code><span class="hljs-built_in">int</span>[] numbers = [<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>];
 
-print(<span class="hljs-string">&quot;Hello&quot;</span>);  <span class="hljs-comment">// خروجی: Hello  </span>
-print();         <span class="hljs-comment">// خروجی: (هیچ‌چیز)</span>
-</code></pre>
-<p>✅ این قابلیت خصوصاً در کتابخانه‌هایی مثل <a href="http://ASP.NET">ASP.NET</a> Minimal API بسیار مفید است،<br>
-چون اجازه می‌دهد تابع‌ها انعطاف‌پذیرتر باشند و پارامترهای اختیاری داشته باشند.</p>
-<h2>تعریف نام مستعار (Alias) برای هر نوع</h2>
-<p>قبلاً در #C فقط می‌تونستید با استفاده از دستور using برای نوع‌های ساده یا جنریک نام مستعار تعریف کنید.<br>
-برای مثال:</p>
-<pre class="hljs"><code><span class="hljs-keyword">using</span> ListOfInt = System.Collections.Generic.List&lt;<span class="hljs-built_in">int</span>&gt;;
-<span class="hljs-keyword">var</span> list = <span class="hljs-keyword">new</span> ListOfInt();
-</code></pre>
-<p>ولی حالا در #C 12، می‌تونید برای انواع دیگری مثل آرایه‌ها و Tupleها هم alias تعریف کنید:</p>
-<pre class="hljs"><code><span class="hljs-keyword">using</span> NumberList = <span class="hljs-built_in">double</span>[];
-<span class="hljs-keyword">using</span> Point = (<span class="hljs-built_in">int</span> X, <span class="hljs-built_in">int</span> Y);
-
-NumberList numbers = { <span class="hljs-number">2.5</span>, <span class="hljs-number">3.5</span> };
-Point p = (<span class="hljs-number">3</span>, <span class="hljs-number">4</span>);
-</code></pre>
-<p>✅ این باعث می‌شه کد خواناتر و قابل نگهداری‌تر بشه — مخصوصاً وقتی از نوع‌های پیچیده به دفعات استفاده می‌کنید.</p>
-<h2>سایر ویژگی‌های جدید</h2>
-<p>سی‌شارپ ۱۲ همچنین از ویژگی جدیدی به نام آرایه‌های درون‌خطی (Inline Arrays) پشتیبانی می‌کند.<br>
-این ویژگی از طریق اتریبیوت:</p>
-<pre class="hljs"><code>[<span class="hljs-meta">System.Runtime.CompilerServices.InlineArray</span>]
-</code></pre>
-<p>قابل استفاده است.</p>
-<p>🔹 با استفاده از آن می‌توانید درون یک struct، آرایه‌هایی با اندازه ثابت بسازید — بدون اینکه نیاز به قرار دادن کد در بلاک unsafe داشته باشید.<br>
-🔹 این قابلیت بیشتر برای استفاده در APIهای سطح پایین و داخلیِ runtime طراحی شده است.</p>
-<h2>ویژگی‌های جدید در C# 11</h2>
-<p>(What’s New in C# 11)</p>
-<h1>C 11 همراه با Visual Studio 2022 منتشر شد،</h1>
-<p>و زمانی به‌صورت پیش‌فرض استفاده می‌شود که هدف پروژه، .NET 7 باشد.</p>
-<p><strong>رشته‌های خام (Raw String Literals)</strong></p>
-<p>در C# 11، اگر یک رشته را با سه علامت نقل قول یا بیشتر (مثل &quot;&quot;&quot;) بنویسید،<br>
-به آن رشته خام (Raw String Literal) گفته می‌شود.</p>
-<p>✅ این نوع رشته می‌تواند هر کاراکتری را شامل شود — بدون اینکه نیاز به Escape کردن یا تکرار نقل قول‌ها داشته باشید.</p>
-<p>برای مثال، تعریف یک رشته خام برای نمایش XML:</p>
-<pre class="hljs"><code><span class="hljs-built_in">string</span> raw = <span class="hljs-string">&quot;&quot;&quot;&lt;file path=&quot;c:\temp\test.txt&quot;&gt;&lt;/file&gt;&quot;&quot;&quot;</span>;
-</code></pre>
-<p>🟢 رشته‌های خام می‌توانند چندخطی باشند، و حتی می‌توانند از درج مقادیر (String Interpolation) با پیشوند $ پشتیبانی کنند:</p>
-<pre class="hljs"><code><span class="hljs-built_in">string</span> multiLineRaw = <span class="hljs-string">$&quot;&quot;</span><span class="hljs-string">&quot;
-  Line 1
-  Line 2
-  The date and time is {DateTime.Now}
-&quot;</span><span class="hljs-string">&quot;&quot;</span>;
-</code></pre>
-<p><strong>درج آکولاد داخل رشته‌های خام</strong></p>
-<p>اگر بخواهید آکولاد {} واقعی را داخل رشته نگه دارید، می‌توانید با استفاده از دو $ یا بیشتر در ابتدای رشته،<br>
-الگوی درج مقادیر را تغییر دهید (تا به جای {} از { {} } یا { { {} } } استفاده شود):</p>
-<pre class="hljs"><code>Console.WriteLine($<span class="hljs-string">$&quot;&quot;</span><span class="hljs-string">&quot;{ &quot;</span>TimeStamp<span class="hljs-string">&quot;: &quot;</span><span class="hljs-string">&quot; }&quot;</span><span class="hljs-string">&quot;&quot;</span>);
-</code></pre>
-<p>// خروجی: { &quot;TimeStamp&quot;: &quot;01/01/2024 12:13:25 PM&quot; }<br>
-📘 برای توضیح کامل‌تر این ویژگی، به بخش‌های:</p>
-<ul>
-<li>
-<p>«رشته‌های خام (Raw String Literals)» در صفحه ۵۹</p>
-</li>
-<li>
-<p>«درج مقادیر در رشته‌ها (String Interpolation)» در صفحه ۶۰<br>
-مراجعه کنید.</p>
-</li>
-</ul>
-<h3>رشته‌های UTF-8</h3>
-<p>(UTF-8 Strings)</p>
-<p>از نسخه #C 11، می‌توانید رشته‌هایی را با پسوند u8 تعریف کنید،<br>
-که به‌جای اینکه به‌صورت پیش‌فرض در قالب UTF-16 باشند، به‌صورت UTF-8 کدگذاری می‌شوند.</p>
-<p>🔹 این ویژگی برای سناریوهای پیشرفته طراحی شده،<br>
-مثلاً وقتی می‌خواهید متن JSON را با عملکرد بالا و مصرف کم حافظه پردازش کنید.</p>
-<p>مثال:</p>
-<pre class="hljs"><code>ReadOnlySpan&lt;<span class="hljs-built_in">byte</span>&gt; utf8 = <span class="hljs-string">&quot;ab→cd&quot;</span>u8;  <span class="hljs-comment">// → سه بایت مصرف می‌کند</span>
-Console.WriteLine(utf8.Length);      <span class="hljs-comment">// خروجی: 7</span>
-</code></pre>
-<p>نوع این مقدار، ReadOnlySpan<byte> است (توضیح آن در فصل ۲۳ آمده).<br>
-برای تبدیل آن به آرایه بایت می‌توانید از ToArray() استفاده کنید.</p>
-<h3>الگوهای لیستی (List Patterns)</h3>
-<p>الگوهای لیستی اجازه می‌دهند که ساختار و محتوای یک مجموعه را بررسی (Pattern Match) کنید.<br>
-این الگوها با براکت‌های مربعی [] تعریف می‌شن و روی هر مجموعه‌ای قابل استفاده‌اند که:</p>
-<ul>
-<li>
-<p>دارای تعداد عناصر (Count یا Length) باشد</p>
-</li>
-<li>
-<p>و از طریق ایندکس (Indexer) قابل دسترسی باشد (مثل آرایه‌ها یا لیست‌ها)</p>
-</li>
-</ul>
-<p>مثال:</p>
-<pre class="hljs"><code><span class="hljs-built_in">int</span>[] numbers = { <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span> };
-Console.WriteLine(numbers <span class="hljs-keyword">is</span> [<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>]);  <span class="hljs-comment">// خروجی: True</span>
-</code></pre>
-<p>🔸 علامت _ با هر مقدار دلخواه در یک موقعیت مطابقت دارد:</p>
-<pre class="hljs"><code>Console.WriteLine(numbers <span class="hljs-keyword">is</span> [_, <span class="hljs-number">1</span>, .., <span class="hljs-number">4</span>]);    <span class="hljs-comment">// خروجی: True</span>
-</code></pre>
-<p>🔸 دو نقطه .. نشان‌دهنده‌ی یک بُرش (Slice) است — یعنی صفر یا چند عنصر در وسط.</p>
-<p>📘 همچنین می‌توانید از var بعد از slice برای گرفتن بخش میانی استفاده کنید.<br>
-توضیحات کامل در بخش «List Patterns» در صفحه ۲۴۳ ارائه شده است.</p>
-<h3>اعضای اجباری (Required Members)</h3>
-<p>با استفاده از کلیدواژه‌ی required در تعریف یک فیلد یا Property،<br>
-کامپایلر مجبور می‌کنه که هر کسی این کلاس یا struct رو می‌سازه،<br>
-حتماً آن عضو را مقداردهی کند — مثلاً از طریق Object Initializer.</p>
-<p>مثال:</p>
-<pre class="hljs"><code><span class="hljs-keyword">class</span> <span class="hljs-title">Asset</span> { <span class="hljs-keyword">public</span> <span class="hljs-keyword">required</span> <span class="hljs-built_in">string</span> Name; }
-
-Asset a1 = <span class="hljs-keyword">new</span> Asset { Name = <span class="hljs-string">&quot;House&quot;</span> };  <span class="hljs-comment">// ✅ مجاز  </span>
-Asset a2 = <span class="hljs-keyword">new</span> Asset();                   <span class="hljs-comment">// ❌ خطا — مقداردهی نشده!</span>
-</code></pre>
-<p>✅ این ویژگی کمک می‌کنه نیازی به نوشتن سازنده‌هایی با پارامترهای زیاد نداشته باشید،<br>
-که این موضوع در کلاس‌های فرزند (Subclasses) ساده‌سازی بزرگی به‌حساب می‌آد.</p>
-<p>🔸 اگه خواستید هم سازنده (Constructor) بنویسید و هم از required استفاده کنید،<br>
-می‌تونید از اتریبیوت [SetsRequiredMembers] روی سازنده استفاده کنید تا از محدودیت عبور کنید.</p>
-<p>📘 توضیحات بیشتر در بخش «Required members (C# 11)» در صفحه ۱۳۶ موجوده.</p>
-<h3>اعضای استاتیک مجازی/انتزاعی در اینترفیس‌ها Static virtual/abstract interface members</h3>
-<p>از نسخه C# 11، امکان جدیدی اضافه شده که به شما اجازه می‌دهد درون یک Interface، متدهای استاتیک با نوع virtual یا abstract تعریف کنید.</p>
-<p>مثال:</p>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title">IParsable</span>&lt;<span class="hljs-title">TSelf</span>&gt;
+Console.WriteLine(numbers <span class="hljs-keyword">is</span> [<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, .., <span class="hljs-number">4</span>]); <span class="hljs-comment">// True (دو نقطه یعنی هر تعداد عنصر میانی)</span>
+Console.WriteLine(numbers <span class="hljs-keyword">is</span> [_, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>]); <span class="hljs-comment">// True (آندرلاین یعنی یک عنصر با هر مقداری)</span>
+</code></pre> <h4>۴. اعضای الزامی (Required Members)</h4><p>با استفاده از کلمه کلیدی <code>required</code>، مقداردهی پروپرتی‌ها هنگام ساخت شیء اجباری می‌شود:</p><pre class="hljs"><code><span class="hljs-keyword">class</span> <span class="hljs-title">Book</span>
 {
-    <span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">abstract</span> TSelf <span class="hljs-title">Parse</span>(<span class="hljs-params"><span class="hljs-built_in">string</span> s</span>)</span>;
-}
-</code></pre>
-<p>🔹 این یعنی کلاس یا structی که این اینترفیس را پیاده‌سازی می‌کند، باید یک تابع استاتیک با همین امضا ارائه دهد.</p>
-<p>📌 مزیت اصلی:<br>
-می‌توان این توابع را به‌صورت پلی‌مورفیک (چندریخت) فراخوانی کرد، با استفاده از یک پارامتر generic که محدود به آن Interface شده:</p>
-<pre class="hljs"><code><span class="hljs-function">T <span class="hljs-title">ParseAny</span>&lt;<span class="hljs-title">T</span>&gt;(<span class="hljs-params"><span class="hljs-built_in">string</span> s</span>) <span class="hljs-keyword">where</span> T : IParsable&lt;T&gt;</span> =&gt; T.Parse(s);
-</code></pre>
-<p>✅ حتی می‌توانید توابع عملگر (Operators) مثل +, -, *, / را هم به صورت static virtual یا static abstract در اینترفیس‌ها تعریف کنید.</p>
-<p>📘 برای اطلاعات بیشتر:</p>
-<ul>
-<li>
-<p>«Static virtual/abstract interface members» در صفحه ۱۵۳</p>
-</li>
-<li>
-<p>«Static Polymorphism» در صفحه ۲۶۰</p>
-</li>
-<li>
-<p>و همچنین نحوه‌ی فراخوانی این متدهای استاتیک از طریق Reflection در صفحه ۸۲۶</p>
-</li>
-</ul>
-<h3>ریاضی عمومی (Generic Math)</h3>
-<p>از نسخه .NET 7، اینترفیس جدیدی به نام:</p>
-<pre class="hljs"><code>System.Numerics.INumber&lt;TSelf&gt;
-</code></pre>
-<p>معرفی شده که امکان انجام عملیات ریاضی روی نوع‌های عددی به‌صورت Generic را فراهم می‌کند.</p>
-<p>مثلاً می‌توان یک متد جمع‌زن (Sum) نوشت که برای هر نوع عددی کار کند:</p>
-<pre class="hljs"><code><span class="hljs-function">T <span class="hljs-title">Sum</span>&lt;<span class="hljs-title">T</span>&gt;(<span class="hljs-params">T[] numbers</span>) <span class="hljs-keyword">where</span> T : INumber&lt;T&gt;</span>
-{
-    T total = T.Zero;
-    <span class="hljs-keyword">foreach</span> (T n <span class="hljs-keyword">in</span> numbers)
-        total += n;  <span class="hljs-comment">// عملگر + برای هر نوع عددی فراخوانی می‌شود</span>
-    <span class="hljs-keyword">return</span> total;
-}
-</code></pre>
-<p>و حالا می‌توانید این تابع را روی انواع مختلفی صدا بزنید:</p>
-<pre class="hljs"><code><span class="hljs-built_in">int</span> intSum = Sum(<span class="hljs-keyword">new</span>[] { <span class="hljs-number">3</span>, <span class="hljs-number">5</span>, <span class="hljs-number">7</span> });
-<span class="hljs-built_in">double</span> doubleSum = Sum(<span class="hljs-keyword">new</span>[] { <span class="hljs-number">3.2</span>, <span class="hljs-number">5.3</span>, <span class="hljs-number">7.1</span> });
-<span class="hljs-built_in">decimal</span> decimalSum = Sum(<span class="hljs-keyword">new</span>[] { <span class="hljs-number">3.2</span>m, <span class="hljs-number">5.3</span>m, <span class="hljs-number">7.1</span>m });
-</code></pre>
-<p>✅ رابط INumber<TSelf> توسط تمام انواع عددی حقیقی و صحیح در دات‌نت (و حتی char) پیاده‌سازی شده است.</p>
-<p>این رابط شامل تعاریف عملگرها به‌صورت static abstract هم هست، مثل:</p>
-<pre class="hljs"><code><span class="hljs-keyword">static</span> <span class="hljs-keyword">abstract</span> TResult <span class="hljs-keyword">operator</span> + (TSelf left, TOther right);
-</code></pre>
-<p>📘 این موضوعات در بخش‌های:</p>
-<ul>
-<li>
-<p>«Polymorphic Operators» در صفحه ۲۶۱</p>
-</li>
-<li>
-<p>و «Generic Math» در صفحه ۲۶۲<br>
-به‌طور کامل توضیح داده شده‌اند.</p>
-</li>
-</ul>
-<h3>سایر ویژگی‌های جدید در C# 11</h3>
-<p>(Other New Features in C# 11)</p>
-<p>🔸 دسترسی فایل (File Accessibility Modifier)</p>
-<p>از نسخه #C 11 می‌توانید با استفاده از کلمه کلیدی file، یک کلاس یا نوع را فقط در همان فایل منبع قابل دسترس کنید:</p>
-<pre class="hljs"><code><span class="hljs-keyword">file</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Foo</span> { ... }
-</code></pre>
-<p>✅ این ویژگی مخصوصاً برای source generator‌ها طراحی شده،<br>
-جایی که نیاز دارید نوع‌هایی بسازید که فقط در محدوده همان فایل قابل استفاده باشند و به بیرون درز نکنند.</p>
-<p><strong>🔸 عملگرهای بررسی‌شده (Checked Operators)</strong></p>
-<p>در C# 11 امکان تعریف عملگرهایی که داخل بلاک‌های checked فراخوانی می‌شوند فراهم شده است.<br>
-این قابلیت برای پیاده‌سازی کامل ریاضی generic ضروری بود.</p>
-<p>📘 برای اطلاعات بیشتر، به بخش &quot;Checked operators&quot; در صفحه ۲۵۸ مراجعه کنید.</p>
-<p><strong>🔸 تسهیل مقداردهی اولیه در سازنده Structها</strong></p>
-<p>در نسخه‌های قبلی، سازنده‌های Struct باید تمام فیلدها را مقداردهی می‌کردند.<br>
-در C# 11 این محدودیت سبک‌تر شده و اجباری نیست که همه فیلدها درون سازنده مقداردهی شوند.</p>
-<p>📘 توضیح کامل در &quot;Struct Construction Semantics&quot; در صفحه ۱۴۲ آمده است.</p>
-<p><strong>🔸 بهبود در نوع‌های عددی هم‌اندازه با معماری سیستم (nint و nuint)</strong></p>
-<p>در نسخه C# 9، دو نوع جدید معرفی شده بود:</p>
-<ul>
-<li>
-<p>nint (عدد صحیح native-size)</p>
-</li>
-<li>
-<p>nuint (عدد صحیح بدون علامت native-size)</p>
-</li>
-</ul>
-<p>این نوع‌ها بسته به سیستم عامل، به‌اندازه‌ی فضای آدرس‌دهی اجرا در زمان اجرا هستند:<br>
-مثلاً در سیستم‌های ۶۴ بیتی، این عددها ۶۴ بیتی‌اند و در سیستم‌های ۳۲ بیتی، ۳۲ بیتی.</p>
-<p>در C# 11 (در صورتی که هدف پروژه .NET 7 یا بالاتر باشد)، تفاوت در زمان کامپایل بین این نوع‌ها و نوع‌های پایه‌شان:</p>
-<ul>
-<li>
-<p>IntPtr</p>
-</li>
-<li>
-<p>UIntPtr</p>
-</li>
-</ul>
-<p>عملاً از بین رفته است، و رفتارشان یکپارچه‌تر شده.</p>
-<p>📘 برای توضیح کامل به بخش &quot;Native-Sized Integers&quot; در صفحه ۲۶۶ مراجعه کنید.</p>
-<h2>✨ چه چیزهایی در C# 10 جدید هستند؟</h2>
-<p>(What’s New in C# 10)</p>
-<h3>📁 فضای نام در سطح فایل (File-Scoped Namespaces)</h3>
-<p>در شرایطی که تمام کلاس‌ها یا نوع‌ها در یک فایل، داخل یک فضای نام (namespace) قرار دارند، C# 10 به شما اجازه می‌ده با یک اعلان کوتاه‌تر و ساده‌تر، از تورفتگی‌های اضافی جلوگیری کنید:</p>
-<pre class="hljs"><code><span class="hljs-keyword">namespace</span> <span class="hljs-title">MyNamespace</span>;  <span class="hljs-comment">// این فضای نام برای کل فایل اعمال می‌شود</span>
-
-<span class="hljs-keyword">class</span> <span class="hljs-title">Class1</span> {}         <span class="hljs-comment">// درون MyNamespace</span>
-<span class="hljs-keyword">class</span> <span class="hljs-title">Class2</span> {}         <span class="hljs-comment">// درون MyNamespace</span>
-</code></pre>
-<p>✅ این کار، کد شما رو مرتب‌تر، کوتاه‌تر و خواناتر می‌کنه.</p>
-<h3>🌍 دستور global using</h3>
-<p>با اضافه کردن کلیدواژه‌ی global قبل از دستور using،<br>
-می‌تونید اون namespace رو به تمام فایل‌های پروژه اعمال کنید:</p>
-<pre class="hljs"><code><span class="hljs-keyword">global</span> <span class="hljs-keyword">using</span> System;
-<span class="hljs-keyword">global</span> <span class="hljs-keyword">using</span> System.Collections.Generic;
-</code></pre>
-<p>✅ به این ترتیب، دیگه نیازی نیست توی هر فایل دوباره using بنویسید.</p>
-<p>🔹 حتی می‌تونید از global using static هم استفاده کنید.</p>
-<p>🛠 علاوه بر این، در پروژه‌های .NET 6، یک ویژگی جدید به نام Implicit Global Usings اضافه شده.<br>
-اگه در فایل پروژه (csproj) بنویسید:</p>
-<pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">ImplicitUsings</span>&gt;</span>true<span class="hljs-tag">&lt;/<span class="hljs-name">ImplicitUsings</span>&gt;</span>
-</code></pre>
-<p>تعدادی از namespaceهای پرکاربرد، به‌صورت خودکار وارد پروژه می‌شن (بسته به نوع پروژه‌تون).<br>
-📘 جزئیات بیشتر در صفحه ۹۶: «The global using Directive»</p>
-<h3>✍️ تغییر بدون تخریب روی نوع‌های ناشناس</h3>
-<p>(Nondestructive Mutation for Anonymous Types)</p>
-<p>در C# 9، با کلیدواژه‌ی with می‌تونستید مقادیر جدیدی به recordها بدید بدون اینکه شیء اصلی تغییر کنه.</p>
-<p>در C# 10، این قابلیت برای نوع‌های ناشناس (anonymous types) هم اضافه شده:</p>
-<pre class="hljs"><code><span class="hljs-keyword">var</span> a1 = <span class="hljs-keyword">new</span> { A = <span class="hljs-number">1</span>, B = <span class="hljs-number">2</span>, C = <span class="hljs-number">3</span>, D = <span class="hljs-number">4</span>, E = <span class="hljs-number">5</span> };
-<span class="hljs-keyword">var</span> a2 = a1 <span class="hljs-keyword">with</span> { E = <span class="hljs-number">10</span> };
-
-Console.WriteLine(a2);  <span class="hljs-comment">// خروجی: { A = 1, B = 2, C = 3, D = 4, E = 10 }</span>
-</code></pre>
-<p>✅ شیء a1 بدون تغییر باقی می‌مونه، و a2 نسخه‌ی جدیدی از همون با مقدار E = 10 هست.</p>
-<h3>🧮 سینتکس جدید برای Deconstruction</h3>
-<p>در C# 7، امکان بازکردن مقدارهای Tuple یا Struct به متغیرها (Deconstruct) اضافه شد.</p>
-<p>در C# 10، می‌تونید اعلان و مقداردهی را ترکیب کنید، یعنی همزمان یک متغیر جدید تعریف کنید و به یک متغیر قدیمی مقدار بدهید:</p>
-<pre class="hljs"><code><span class="hljs-keyword">var</span> point = (<span class="hljs-number">3</span>, <span class="hljs-number">4</span>);
-<span class="hljs-built_in">double</span> x = <span class="hljs-number">0</span>;
-
-(x, <span class="hljs-built_in">double</span> y) = point;
-</code></pre>
-<p>در این مثال:</p>
-<ul>
-<li>
-<p>متغیر x از قبل وجود داشته و مقدار جدیدی می‌گیره.</p>
-</li>
-<li>
-<p>متغیر y همون‌جا تعریف و مقداردهی می‌شه.</p>
-</li>
-<li></li>
-</ul>
-<h3>🧱 مقداردهی اولیه فیلدها و سازنده‌ی بدون پارامتر در Structها</h3>
-<p>(Field Initializers and Parameterless Constructors in Structs)</p>
-<p>از نسخه‌ی #C 10 به بعد، Structها هم می‌تونن:</p>
-<ul>
-<li>
-<p>فیلدهاشون رو همون موقع تعریف، مقداردهی اولیه کنن</p>
-</li>
-<li>
-<p>سازنده بدون پارامتر (parameterless constructor) داشته باشن</p>
-</li>
-</ul>
-<p>🟡 توجه: این سازنده فقط وقتی اجرا می‌شه که به‌صورت صریح فراخوانی بشه<br>
-(مثلاً با new MyStruct())، و نه وقتی از default استفاده می‌کنید.</p>
-<p>🎯 این قابلیت بیشتر برای پشتیبانی از record struct‌ها طراحی شده.</p>
-<p>📘 جزئیات بیشتر: «Structs» در صفحه ۱۴۲</p>
-<p><strong>🧾 Struct به عنوان Record</strong><br>
-(Record Structs)</p>
-<p>در نسخه C# 9، نوع جدیدی به نام record معرفی شد که نسخه‌ای ساده‌شده و بهینه‌شده از کلاس‌ها بود.</p>
-<p>در C# 10، حالا می‌تونید همون قابلیت رو برای structها هم داشته باشید:</p>
-<pre class="hljs"><code><span class="hljs-keyword">record</span> <span class="hljs-title">struct</span> <span class="hljs-title">Point</span>(<span class="hljs-title">int</span> <span class="hljs-title">X</span>, <span class="hljs-title">int</span> <span class="hljs-title">Y</span>);
-</code></pre>
-<p>📌 شباهت‌ها و تفاوت‌ها:</p>
-<ul>
-<li>
-<p>تقریباً همه ویژگی‌های record برای record struct هم وجود دارن</p>
-</li>
-<li>
-<p>تنها تفاوت اصلی:<br>
-در record structها، ویژگی‌های (property) ساخته‌شده توسط کامپایلر به صورت قابل‌تغییر (writable) هستن<br>
-مگر اینکه قبل از record از کلمه‌ی readonly استفاده کنید.</p>
-</li>
-</ul>
-<h3>🔁 بهبودهای مربوط به عبارت‌های Lambda</h3>
-<p>(Lambda Expression Enhancements)</p>
-<p>عبارت‌های lambda در C# 10 چند قابلیت جدید و کاربردی دریافت کردن:</p>
-<p>✅ ۱. پشتیبانی از تایپ ضمنی (var)<br>
-حالا می‌تونید از var برای تعریف lambda استفاده کنید:</p>
-<pre class="hljs"><code><span class="hljs-keyword">var</span> greeter = () =&gt; <span class="hljs-string">&quot;Hello, world&quot;</span>;  <span class="hljs-comment">// نوع: Func&lt;string&gt;</span>
-</code></pre>
-<p>در اینجا، greeter به‌طور خودکار به Func<string> تبدیل می‌شه.</p>
-<p>🔸 اگر پارامتر داشته باشید، باید نوع اون رو صراحتاً مشخص کنید:</p>
-<pre class="hljs"><code><span class="hljs-keyword">var</span> square = (<span class="hljs-built_in">int</span> x) =&gt; x * x;
-</code></pre>
-<p>📌 ۲. امکان تعیین نوع بازگشتی (explicit return type)<br>
-می‌تونید نوع بازگشتی یک lambda رو مشخص کنید:</p>
-<pre class="hljs"><code><span class="hljs-keyword">var</span> sqr = <span class="hljs-built_in">int</span> (<span class="hljs-built_in">int</span> x) =&gt; x;
-</code></pre>
-<p>✳️ این کار به ساده‌سازی فرآیند کامپایل در lambdaهای تو در تو کمک می‌کنه.</p>
-<p>📥 ۳. پذیرش lambda در متدهایی با نوع پارامتر عمومی<br>
-حالا می‌تونید lambda رو به‌عنوان آرگومان به متدهایی بدید که نوع پارامترشون object یا Delegate یا Expression هست:</p>
-<pre class="hljs"><code>M1(() =&gt; <span class="hljs-string">&quot;test&quot;</span>);   <span class="hljs-comment">// تبدیل به Func&lt;string&gt;</span>
-M2(() =&gt; <span class="hljs-string">&quot;test&quot;</span>);
-M3(() =&gt; <span class="hljs-string">&quot;test&quot;</span>);
-
-<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">M1</span>(<span class="hljs-params"><span class="hljs-built_in">object</span> x</span>)</span> {}
-<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">M2</span>(<span class="hljs-params">Delegate x</span>)</span> {}
-<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">M3</span>(<span class="hljs-params">Expression x</span>)</span> {}
-</code></pre>
-<p>🏷 ۴. افزودن Attribute به lambda<br>
-حالا می‌تونید به خود lambda، به پارامترهاش یا حتی به مقدار بازگشتی اون، attribute اضافه کنید:</p>
-<pre class="hljs"><code>Action a = [Description(<span class="hljs-string">&quot;test&quot;</span>)] () =&gt; { };
-</code></pre>
-<p>📘 جزئیات کامل در «Applying Attributes to Lambda Expressions» صفحه ۲۴۵</p>
-<h3>🧩 سایر ویژگی‌های جدید در C# 10</h3>
-<p>(Nested Property Patterns, Caller Argument Expressions, and More)</p>
-<h3>🧬 الگوی تطبیق در ویژگی‌های تو در تو (Nested Property Patterns)</h3>
-<p>در C# 10، برای بررسی ویژگی‌های تو در تو (nested properties) می‌تونید از سینتکس ساده‌تری استفاده کنید. مثلاً:</p>
-<pre class="hljs"><code><span class="hljs-keyword">var</span> obj = <span class="hljs-keyword">new</span> Uri(<span class="hljs-string">&quot;https://www.linqpad.net&quot;</span>);
-
-<span class="hljs-keyword">if</span> (obj <span class="hljs-keyword">is</span> Uri { Scheme.Length: <span class="hljs-number">5</span> })
-  Console.WriteLine(<span class="hljs-string">&quot;طول Scheme برابر ۵ است&quot;</span>);
-</code></pre>
-<p>⬅️ این معادل با کدی با ساختار پیچیده‌تر در نسخه‌های قبلی است:</p>
-<pre class="hljs"><code><span class="hljs-keyword">if</span> (obj <span class="hljs-keyword">is</span> Uri { Scheme: { Length: <span class="hljs-number">5</span> } })
-</code></pre>
-<p>🔹 این روش به نوشتن شرط‌ها با خوانایی بیشتر کمک می‌کنه.<br>
-📘 برای اطلاعات بیشتر: «Property Patterns» صفحه ۲۴۱</p>
-<h3>🧾 ویژگی CallerArgumentExpression</h3>
-<p>اگه بخواید عبارت اصلی‌ای که برای یک پارامتر متد استفاده شده رو بگیرید، می‌تونید از CallerArgumentExpression استفاده کنید:</p>
-<pre class="hljs"><code>Print(Math.PI * <span class="hljs-number">2</span>);
-
-<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Print</span>(<span class="hljs-params">
-    <span class="hljs-built_in">double</span> number,
-    [CallerArgumentExpression(<span class="hljs-string">&quot;number&quot;</span></span>)] <span class="hljs-built_in">string</span> expr</span> = <span class="hljs-literal">null</span>)
-    =&gt; Console.WriteLine(expr);
-</code></pre>
-<p>🟢 خروجی:</p>
-<pre class="hljs"><code><span class="hljs-title class_">Math</span>.<span class="hljs-property">PI</span> * <span class="hljs-number">2</span>
-</code></pre>
-<p>✅ این قابلیت بیشتر برای کتابخانه‌های اعتبارسنجی (validation) و assertion کاربرد داره.<br>
-📘 جزئیات: صفحه ۲۴۷، بخش «CallerArgumentExpression»</p>
-<h3>📌 سایر ویژگی‌های جدید</h3>
-<p>🧵 رشته‌های درون‌تابی (Interpolated Strings) می‌تونن ثابت (const) باشن<br>
-به شرطی که مقادیری که درون‌شون استفاده شده هم const باشه:</p>
-<pre class="hljs"><code><span class="hljs-keyword">const</span> <span class="hljs-built_in">string</span> name = <span class="hljs-string">&quot;Ali&quot;</span>;
-<span class="hljs-keyword">const</span> <span class="hljs-built_in">string</span> message = <span class="hljs-string">$&quot;Hello, <span class="hljs-subst">{name}</span>!&quot;</span>;
-</code></pre>
-<p><strong>📏 دستور #line پیشرفته‌تر شده</strong></p>
-<p>حالا می‌تونید شماره ستون و بازه (range) هم تعیین کنید — مخصوصاً برای ابزارهای آنالیز کد مفیده.</p>
-<p>📛 در Recordها می‌تونید متد ToString() رو ببندید (seal کنید)<br>
-یعنی نذارید کلاس‌های مشتق‌شده بتونن اون رو override کنن:</p>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">record</span> <span class="hljs-title">Person</span>
-{
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">sealed</span> <span class="hljs-keyword">override</span> <span class="hljs-built_in">string</span> <span class="hljs-title">ToString</span>()</span> =&gt; <span class="hljs-string">&quot;Hidden&quot;</span>;
-}
-</code></pre>
-<p><strong>🧠 تجزیه و تحلیل انتساب قطعی (Definite Assignment) بهبود پیدا کرده</strong></p>
-<p>در نسخه‌های قبلی C#، این کد باعث خطا می‌شد چون کامپایلر فکر می‌کرد متغیر number ممکنه مقدار نگرفته باشه:</p>
-<pre class="hljs"><code><span class="hljs-keyword">if</span> (foo?.TryParse(<span class="hljs-string">&quot;123&quot;</span>, <span class="hljs-keyword">out</span> <span class="hljs-keyword">var</span> number) ?? <span class="hljs-literal">false</span>)
-    Console.WriteLine(number);
-</code></pre>
-<p>اما از C# 10 به بعد، این کد کاملاً مجازه و کامپایل می‌شه.</p>
-<h2>🚀 چه چیزهایی در C# 9.0 جدید است؟</h2>
-<p>🔸 C# 9.0 همراه با Visual Studio 2019 عرضه شد و زمانی استفاده می‌شود که پروژه‌ی شما برای .NET 5 هدف‌گذاری شده باشد.</p>
-<p><strong>🧾 دستورات سطح بالا (Top-Level Statements)</strong></p>
-<p>با استفاده از Top-Level Statements، می‌تونی برنامه‌ای بنویسی بدون اینکه مجبور باشی کلاس Program و متد Main رو تعریف کنی:</p>
-<pre class="hljs"><code><span class="hljs-keyword">using</span> System;
-Console.WriteLine(<span class="hljs-string">&quot;Hello, world&quot;</span>);
-</code></pre>
-<p>✅ این ویژگی باعث می‌شه کدهای نمونه و آموزشی خیلی ساده‌تر و مختصرتر نوشته بشن.</p>
-<p>🔍 نکات تکمیلی:</p>
-<ul>
-<li>
-<p>می‌تونی در این بخش، متد هم تعریف کنی (مثل متد محلی یا local method).</p>
-</li>
-<li>
-<p>به متغیر جادویی args برای گرفتن آرگومان‌های خط فرمان دسترسی داری.</p>
-</li>
-<li>
-<p>می‌تونی مقداری رو به فراخوان (caller) برگردونی.</p>
-</li>
-<li>
-<p>بعد از دستورات سطح بالا، همچنان می‌تونی کلاس‌ها و فضای نام (namespace) تعریف کنی.</p>
-</li>
-</ul>
-<p>📘 جزئیات بیشتر در صفحه ۴۱: «Top-Level Statements»</p>
-<p><strong>🧷 ست‌کننده فقط-در-ابتدا (Init-Only Setters)</strong></p>
-<p>در C# 9.0، می‌تونی در تعریف ویژگی (property)، به جای set از init استفاده کنی:</p>
-<pre class="hljs"><code><span class="hljs-keyword">class</span> <span class="hljs-title">Foo</span>
-{
-    <span class="hljs-keyword">public</span> <span class="hljs-built_in">int</span> ID { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">init</span>; }
-}
-</code></pre>
-<p>این یعنی ویژگی فقط در زمان مقداردهی اولیه قابل تنظیم هست، و بعد از اون فقط خواندنیه.</p>
-<p>👨‍💻 استفاده از init بهت این امکان رو می‌ده که نوع‌هایی تغییرناپذیر (immutable) بسازی و با استفاده از initializer اون‌ها رو مقداردهی کنی، بدون نیاز به تعریف چندین سازنده (constructor):</p>
-<pre class="hljs"><code><span class="hljs-keyword">var</span> foo = <span class="hljs-keyword">new</span> Foo { ID = <span class="hljs-number">123</span> };
-</code></pre>
-<p>🔄 در کنار رکوردها (records)، این قابلیت باعث می‌شه بتونی تغییرات غیرویرانگر (non-destructive mutation) انجام بدی — یعنی به جای تغییر شیء فعلی، یه نمونه‌ی جدید بسازی با مقادیر تغییر یافته.</p>
-<p>📘 جزئیات بیشتر در صفحه ۱۱۶: «Init-only Setters»</p>
-<h3>🧾 رکوردها (Records)</h3>
-<p>🔹 یک record (بخش کامل در صفحه ۲۲۷: «Records») نوع خاصی از کلاس است که برای داده‌های تغییرناپذیر (immutable) طراحی شده است.</p>
-<p>✨ مهم‌ترین ویژگی آن، پشتیبانی از تغییر غیرویرانگر (nondestructive mutation) از طریق کلمه‌ی کلیدی جدید with است:</p>
-<pre class="hljs"><code>Point p1 = <span class="hljs-keyword">new</span> Point(<span class="hljs-number">2</span>, <span class="hljs-number">3</span>);
-Point p2 = p1 <span class="hljs-keyword">with</span> { Y = <span class="hljs-number">4</span> };   <span class="hljs-comment">// p2 کپی‌ای از p1 است با مقدار جدید Y</span>
-Console.WriteLine(p2);         <span class="hljs-comment">// خروجی: Point { X = 2, Y = 4 }</span>
-</code></pre>
-<p>🔸 تعریف کلاس رکورد ما می‌تونه به این شکل باشه:</p>
-<pre class="hljs"><code><span class="hljs-keyword">record</span> <span class="hljs-title">Point</span>
-{
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Point</span>(<span class="hljs-params"><span class="hljs-built_in">double</span> x, <span class="hljs-built_in">double</span> y</span>)</span> =&gt; (X, Y) = (x, y);
-    <span class="hljs-keyword">public</span> <span class="hljs-built_in">double</span> X { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">init</span>; }
-    <span class="hljs-keyword">public</span> <span class="hljs-built_in">double</span> Y { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">init</span>; }
-}
-</code></pre>
-<p>🔹 در موارد ساده، رکوردها می‌تونن ما رو از نوشتن کدهای تکراری (مثل تعریف ویژگی‌ها، سازنده و deconstructor) بی‌نیاز کنن. برای مثال، تعریف بالا رو می‌تونیم این‌طور خلاصه کنیم بدون از دست دادن قابلیت‌ها:</p>
-<pre class="hljs"><code><span class="hljs-keyword">record</span> <span class="hljs-title">Point</span>(<span class="hljs-title">double</span> <span class="hljs-title">X</span>, <span class="hljs-title">double</span> <span class="hljs-title">Y</span>);
-</code></pre>
-<p>📌 رکوردها مشابه تاپل‌ها (tuples)، به طور پیش‌فرض از برابری ساختاری (structural equality) استفاده می‌کنن، نه فقط مرجع (reference equality).</p>
-<ul>
-<li>
-<p>رکوردها می‌تونن از رکوردهای دیگه ارث‌بری کنن.</p>
-</li>
-<li>
-<p>می‌تونن شامل همه‌ی اجزایی باشن که کلاس‌ها می‌تونن داشته باشن.</p>
-</li>
-<li>
-<p>در زمان اجرا، توسط کامپایلر به کلاس تبدیل می‌شن.</p>
-</li>
-</ul>
-<p><strong>🧩 بهبودهای تطبیق الگو (Pattern Matching)</strong></p>
-<p><strong>🔸 الگوهای رابطه‌ای (Relational Patterns)</strong><br>
-از نسخه 9.0، می‌تونی عملگرهای &lt;، &gt;، &lt;= و &gt;= رو داخل الگوها استفاده کنی:</p>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-built_in">string</span> <span class="hljs-title">GetWeightCategory</span>(<span class="hljs-params"><span class="hljs-built_in">decimal</span> bmi</span>)</span> =&gt; bmi <span class="hljs-keyword">switch</span>
-{
-    &lt; <span class="hljs-number">18.5</span>m =&gt; <span class="hljs-string">&quot;underweight&quot;</span>,
-    &lt; <span class="hljs-number">25</span>m   =&gt; <span class="hljs-string">&quot;normal&quot;</span>,
-    &lt; <span class="hljs-number">30</span>m   =&gt; <span class="hljs-string">&quot;overweight&quot;</span>,
-    _       =&gt; <span class="hljs-string">&quot;obese&quot;</span>
-};
-</code></pre>
-<p><strong>🔸 ترکیب‌گرهای الگو (Pattern Combinators)</strong><br>
-حالا می‌تونی الگوها رو با استفاده از کلمات کلیدی and، or و not ترکیب کنی:</p>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-built_in">bool</span> <span class="hljs-title">IsVowel</span>(<span class="hljs-params"><span class="hljs-built_in">char</span> c</span>)</span> =&gt; c <span class="hljs-keyword">is</span> <span class="hljs-string">&#x27;a&#x27;</span> <span class="hljs-keyword">or</span> <span class="hljs-string">&#x27;e&#x27;</span> <span class="hljs-keyword">or</span> <span class="hljs-string">&#x27;i&#x27;</span> <span class="hljs-keyword">or</span> <span class="hljs-string">&#x27;o&#x27;</span> <span class="hljs-keyword">or</span> <span class="hljs-string">&#x27;u&#x27;</span>;
-
-<span class="hljs-function"><span class="hljs-built_in">bool</span> <span class="hljs-title">IsLetter</span>(<span class="hljs-params"><span class="hljs-built_in">char</span> c</span>)</span> =&gt;
-    c <span class="hljs-keyword">is</span> &gt;= <span class="hljs-string">&#x27;a&#x27;</span> <span class="hljs-keyword">and</span> &lt;= <span class="hljs-string">&#x27;z&#x27;</span>
-    <span class="hljs-keyword">or</span> &gt;= <span class="hljs-string">&#x27;A&#x27;</span> <span class="hljs-keyword">and</span> &lt;= <span class="hljs-string">&#x27;Z&#x27;</span>;
-</code></pre>
-<p>📌 درست مثل عملگرهای &amp;&amp; و ||:</p>
-<ul>
-<li>
-<p>and اولویت بالاتری از or دارد.</p>
-</li>
-<li>
-<p>می‌تونی با استفاده از پرانتزها اولویت رو تغییر بدی.</p>
-</li>
-</ul>
-<p>🔍 از not هم می‌تونی با الگوی نوع (type pattern) استفاده کنی، برای مثال بررسی اینکه یک شیء از نوع خاصی نیست:</p>
-<pre class="hljs"><code><span class="hljs-keyword">if</span> (obj <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-built_in">string</span>) ...
-</code></pre>
-<p>📘 برای جزئیات بیشتر، به صفحه ۲۳۸: «Patterns» مراجعه کن.</p>
-<p><strong>🆕 عبارات new با نوع هدف (Target-Typed new Expressions)</strong><br>
-در C# 9.0 می‌تونی در جایی که کامپایلر می‌تونه نوع رو حدس بزنه، اسم نوع رو در new حذف کنی:</p>
-<pre class="hljs"><code>System.Text.StringBuilder sb1 = <span class="hljs-keyword">new</span>();
-System.Text.StringBuilder sb2 = <span class="hljs-keyword">new</span>(<span class="hljs-string">&quot;Test&quot;</span>);
-</code></pre>
-<p>📌 این ویژگی وقتی خیلی مفیده که تعریف متغیر و مقداردهی اولیه در دو بخش متفاوت از کدت باشه:</p>
-<pre class="hljs"><code><span class="hljs-keyword">class</span> <span class="hljs-title">Foo</span>
-{
-    System.Text.StringBuilder sb;
-
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Foo</span>(<span class="hljs-params"><span class="hljs-built_in">string</span> initialValue</span>)</span> =&gt; sb = <span class="hljs-keyword">new</span>(initialValue);
-}
-</code></pre>
-<p>یا مثلاً وقتی می‌خوای مستقیماً به متد آرگومان بدی:</p>
-<pre class="hljs"><code>MyMethod(<span class="hljs-keyword">new</span>(<span class="hljs-string">&quot;test&quot;</span>));
-
-<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">MyMethod</span>(<span class="hljs-params">System.Text.StringBuilder sb</span>)</span> { ... }
-</code></pre>
-<p>📘 جزئیات بیشتر در صفحه ۷۷: «Target-Typed new Expressions»</p>
-<h3>بهبودهای بین‌زبانی (Interop)</h3>
-<p>C# 9 قابلیت اشاره‌گرهای تابع (function pointers) را معرفی می‌کند (رجوع شود به صفحات 268 و 991، «اشاره‌گرهای تابع» و «Callbackها با استفاده از اشاره‌گرهای تابع»). هدف اصلی آن‌ها این است که کدهای غیرمدیریت‌شده (unmanaged) بتوانند متدهای ایستا (static) در C# را بدون سربار ناشی از نمونه‌ی delegate فراخوانی کنند، و در صورتی که نوع آرگومان‌ها و مقادیر بازگشتی به صورت blittable باشند (یعنی در هر دو سمت به‌طور یکسان نمایش داده شوند)، بتوانند لایه‌ی P/Invoke را دور بزنند.</p>
-<p>C# 9 همچنین نوع‌های صحیح با اندازه‌ی بومی (nint و nuint) را معرفی می‌کند (رجوع شود به صفحه 266، «صحیح‌های بومی‌سایز»). این نوع‌ها در زمان اجرا به System.IntPtr و System.UIntPtr نگاشته می‌شوند. در زمان کامپایل، آن‌ها مانند نوع‌های عددی عمل می‌کنند و از عملیات‌های حسابی پشتیبانی می‌کنند.</p>
-<p><strong>سایر ویژگی‌های جدید</strong></p>
-<p>همچنین، C# 9 به شما اجازه می‌دهد:</p>
-<ul>
-<li>
-<p>بازنویسی یک متد یا ویژگی فقط-خواندنی را طوری انجام دهید که مقدار بازگشتی آن نوعی مشتق‌شده‌تر باشد<br>
-(رجوع شود به صفحه 131، «نوع‌های هم‌ریخت بازگشتی» / Covariant Return Types).</p>
-</li>
-<li>
-<p>اعمال ویژگی‌ها (attribute) را بر روی توابع محلی انجام دهید<br>
-(رجوع شود به صفحه 243، «Attributes»).</p>
-</li>
-<li>
-<p>از کلمه‌ی کلیدی static برای عبارت‌های لامبدا یا توابع محلی استفاده کنید تا از گرفتن تصادفی متغیرهای محلی یا نمونه‌ای جلوگیری شود<br>
-(رجوع شود به صفحه 192، «لامبداهای ایستا» / Static Lambdas).</p>
-</li>
-<li>
-<p>کاری کنید که هر نوعی با دستور foreach کار کند، با تعریف یک متد GetEnumerator به صورت extension method.</p>
-</li>
-<li>
-<p>یک متد initialization ماژول تعریف کنید که تنها یک‌بار و در هنگام بارگذاری اسمبلی اجرا می‌شود، با اعمال ویژگی [ModuleInitializer] به یک متد ایستا، بدون پارامتر و void.</p>
-</li>
-<li>
-<p>از نشانه‌ی دورریختنی (_) به عنوان آرگومان یک عبارت لامبدا استفاده کنید.</p>
-</li>
-<li>
-<p>متدهای partial توسعه‌یافته (extended partial methods) بنویسید که اجباری برای پیاده‌سازی دارند — این امکان سناریوهایی مانند تولیدکننده‌های جدید کد سورس در Roslyn را فراهم می‌کند<br>
-(رجوع شود به صفحه 125، «متدهای partial توسعه‌یافته»).</p>
-</li>
-<li>
-<p>یک attribute به متدها، نوع‌ها یا ماژول‌ها اعمال کنید تا از مقداردهی اولیه‌ی متغیرهای محلی توسط زمان اجرا جلوگیری شود<br>
-(رجوع شود به صفحه 269، ویژگی [SkipLocalsInit]).</p>
-</li>
-</ul>
-<h2>چه چیزهایی در C# 8.0 جدید هستند</h2>
-<p>C# 8.0 نخستین‌بار همراه با Visual Studio 2019 عرضه شد و هنوز هم در حال استفاده است، زمانی که شما هدف را بر روی .NET Core 3 یا .NET Standard 2.1 تنظیم می‌کنید.</p>
-<p><strong>اندیس‌ها و بازه‌ها (Indices and Ranges)</strong></p>
-<p>اندیس‌ها و بازه‌ها کار با عناصر یا بخش‌هایی از یک آرایه (یا نوع‌های سطح پایین‌تر مانند Span<T> و ReadOnlySpan<T>) را ساده می‌کنند.</p>
-<p>اندیس‌ها به شما اجازه می‌دهند به عناصری نسبت به انتهای یک آرایه اشاره کنید، با استفاده از عملگر ^.<br>
-^1 به عنصر آخر اشاره می‌کند، ^2 به دومی از انتها، و به همین ترتیب:</p>
-<pre class="hljs"><code><span class="hljs-built_in">char</span>[] vowels = <span class="hljs-keyword">new</span> <span class="hljs-built_in">char</span>[] {<span class="hljs-string">&#x27;a&#x27;</span>,<span class="hljs-string">&#x27;e&#x27;</span>,<span class="hljs-string">&#x27;i&#x27;</span>,<span class="hljs-string">&#x27;o&#x27;</span>,<span class="hljs-string">&#x27;u&#x27;</span>};
-<span class="hljs-built_in">char</span> lastElement  = vowels [^<span class="hljs-number">1</span>];   <span class="hljs-comment">// &#x27;u&#x27;</span>
-<span class="hljs-built_in">char</span> secondToLast = vowels [^<span class="hljs-number">2</span>];   <span class="hljs-comment">// &#x27;o&#x27;</span>
-</code></pre>
-<p>بازه‌ها (ranges) به شما اجازه می‌دهند یک آرایه را با استفاده از عملگر .. «برش» دهید:</p>
-<pre class="hljs"><code><span class="hljs-built_in">char</span>[] firstTwo   = vowels [.<span class="hljs-number">.2</span>];     <span class="hljs-comment">// &#x27;a&#x27;, &#x27;e&#x27;</span>
-<span class="hljs-built_in">char</span>[] lastThree  = vowels [<span class="hljs-number">2.</span>.];     <span class="hljs-comment">// &#x27;i&#x27;, &#x27;o&#x27;, &#x27;u&#x27;</span>
-<span class="hljs-built_in">char</span>[] middleOne  = vowels [<span class="hljs-number">2.</span><span class="hljs-number">.3</span>];    <span class="hljs-comment">// &#x27;i&#x27;</span>
-<span class="hljs-built_in">char</span>[] lastTwo    = vowels [^<span class="hljs-number">2.</span>.];    <span class="hljs-comment">// &#x27;o&#x27;, &#x27;u&#x27;</span>
-</code></pre>
-<p>C# اندیس‌ها و بازه‌ها را با کمک نوع‌های Index و Range پیاده‌سازی می‌کند:</p>
-<pre class="hljs"><code>Index last = ^<span class="hljs-number">1</span>;
-Range firstTwoRange = <span class="hljs-number">0.</span><span class="hljs-number">.2</span>;
-<span class="hljs-built_in">char</span>[] firstTwo = vowels [firstTwoRange];   <span class="hljs-comment">// &#x27;a&#x27;, &#x27;e&#x27;</span>
-</code></pre>
-<p>شما می‌توانید پشتیبانی از اندیس‌ها و بازه‌ها را در کلاس‌های خودتان نیز فراهم کنید،<br>
-با تعریف یک ایندکسر (indexer) که نوع پارامتر آن Index یا Range باشد:</p>
-<pre class="hljs"><code><span class="hljs-keyword">class</span> <span class="hljs-title">Sentence</span>
-{
-    <span class="hljs-built_in">string</span>[] words = <span class="hljs-string">&quot;The quick brown fox&quot;</span>.Split();
-    <span class="hljs-keyword">public</span> <span class="hljs-built_in">string</span>   <span class="hljs-keyword">this</span>[Index index] =&gt; words[index];
-    <span class="hljs-keyword">public</span> <span class="hljs-built_in">string</span>[] <span class="hljs-keyword">this</span>[Range range] =&gt; words[range];
-}
-</code></pre>
-<p>برای اطلاعات بیشتر، رجوع کنید به صفحه 63، «Indices and Ranges».</p>
-<h3>✅ عملگر نسبت‌دهی در صورت تهی بودن (Null-coalescing assignment)</h3>
-<p>عملگر ??= تنها زمانی به یک متغیر مقدار می‌دهد که مقدار فعلی آن null باشد. به‌جای نوشتن کد زیر:</p>
-<pre class="hljs"><code><span class="hljs-keyword">if</span> (s == <span class="hljs-literal">null</span>) s = <span class="hljs-string">&quot;Hello, world&quot;</span>;
-</code></pre>
-<p>اکنون می‌توان ساده‌تر نوشت:</p>
-<pre class="hljs"><code>s ??= <span class="hljs-string">&quot;Hello, world&quot;</span>;
-</code></pre>
-<p>این نوشتار کد را کوتاه‌تر و خواناتر می‌کند. 📏🧹</p>
-<h4>🧹 اعلان‌های using (Using declarations)</h4>
-<p>اگر پس از یک دستور using، از آکولاد و بلوک کدی استفاده نکنید، آن‌وقت به آن اعلان using گفته می‌شود. منبع (resource) مربوطه در این حالت، زمانی آزاد (dispose) می‌شود که اجرای برنامه از بلوک محاط‌کننده خارج شود:</p>
-<pre class="hljs"><code><span class="hljs-keyword">if</span> (File.Exists(<span class="hljs-string">&quot;file.txt&quot;</span>))
-{
-    <span class="hljs-keyword">using</span> <span class="hljs-keyword">var</span> reader = File.OpenText(<span class="hljs-string">&quot;file.txt&quot;</span>);
-    Console.WriteLine(reader.ReadLine());
-}
-</code></pre>
-<p>در این مثال، شیء reader هنگام خروج از بلوک if به‌طور خودکار از بین می‌رود. ♻️📄</p>
-<h4>🛡️ اعضای فقط‌خواندنی (Read-only members)</h4>
-<p>در C# 8 می‌توانید به توابع موجود در یک struct، ویژگی readonly بدهید. این کار تضمین می‌کند که تابع مذکور نتواند هیچ یک از فیلدها را تغییر دهد، وگرنه خطای زمان کامپایل رخ خواهد داد:</p>
-<pre class="hljs"><code><span class="hljs-keyword">struct</span> Point
-{
-    <span class="hljs-keyword">public</span> <span class="hljs-built_in">int</span> X, Y;
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">readonly</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ResetX</span>()</span> =&gt; X = <span class="hljs-number">0</span>;  <span class="hljs-comment">// Error!</span>
-}
-</code></pre>
-<p>اگر یک تابع readonly، تابعی غیرـ‌readonly را فراخوانی کند، کامپایلر یک هشدار می‌دهد و برای جلوگیری از تغییر احتمالی، ساختار را کپی می‌کند. 🚫✍️</p>
-<h4>🧩 توابع محلی ایستا (Static local methods)</h4>
-<p>اضافه کردن کلیدواژه static به یک تابع محلی، باعث می‌شود که این تابع نتواند به متغیرها و پارامترهای محلی تابع بالادست دسترسی داشته باشد. این ویژگی باعث کاهش وابستگی شده و به تابع اجازه می‌دهد متغیرهای خودش را بدون تداخل با سایر بخش‌ها تعریف کند. ⚙️📦</p>
-<h4>🧱 اعضای پیش‌فرض در واسط‌ها (Default interface members)</h4>
-<p>C# 8 امکان افزودن پیاده‌سازی پیش‌فرض به اعضای واسط‌ها (interfaces) را فراهم کرده است. این بدان معناست که پیاده‌سازی آن عضو، برای کلاس‌هایی که از آن واسط استفاده می‌کنند اختیاری است:</p>
-<pre class="hljs"><code><span class="hljs-keyword">interface</span> <span class="hljs-title">ILogger</span>
-{
-    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Log</span>(<span class="hljs-params"><span class="hljs-built_in">string</span> text</span>)</span> =&gt; Console.WriteLine(text);
-}
-</code></pre>
-<p>برای فراخوانی پیاده‌سازی پیش‌فرض، باید آن را به‌صورت صریح از طریق واسط صدا زد:</p>
-<pre class="hljs"><code>((ILogger)<span class="hljs-keyword">new</span> Logger()).Log(<span class="hljs-string">&quot;message&quot;</span>);
-</code></pre>
-<p>علاوه بر این، واسط‌ها می‌توانند اعضای ایستا مانند متدها و فیلدها را نیز تعریف کنند. این اعضا می‌توانند از درون پیاده‌سازی پیش‌فرض یا حتی از بیرون واسط استفاده شوند:</p>
-<pre class="hljs"><code><span class="hljs-keyword">interface</span> <span class="hljs-title">ILogger</span>
-{
-    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Log</span>(<span class="hljs-params"><span class="hljs-built_in">string</span> text</span>)</span> =&gt; Console.WriteLine(Prefix + text);
-    <span class="hljs-keyword">static</span> <span class="hljs-built_in">string</span> Prefix = <span class="hljs-string">&quot;&quot;</span>;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">required</span> <span class="hljs-built_in">string</span> Title { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">init</span>; }
 }
 
-<span class="hljs-comment">// استفاده از بیرون واسط:</span>
-ILogger.Prefix = <span class="hljs-string">&quot;File log: &quot;</span>;
-</code></pre>
-<p>⚠️ فیلدهای نمونه (instance fields) همچنان در واسط‌ها ممنوع هستند. برای جزئیات بیشتر، به بخش «اعضای پیش‌فرض واسط‌ها» در صفحه 151 مراجعه کنید. 📘📌</p>
-<h4>✨ عبارات سوییچ (Switch Expressions)</h4>
-<p>از نسخه C# 8 به بعد، می‌توانید از switch به‌عنوان یک عبارت (expression) استفاده کنید، نه صرفاً یک ساختار شرطی:</p>
-<pre class="hljs"><code><span class="hljs-built_in">string</span> cardName = cardNumber <span class="hljs-keyword">switch</span>
-{
-    <span class="hljs-number">13</span> =&gt; <span class="hljs-string">&quot;King&quot;</span>,
-    <span class="hljs-number">12</span> =&gt; <span class="hljs-string">&quot;Queen&quot;</span>,
-    <span class="hljs-number">11</span> =&gt; <span class="hljs-string">&quot;Jack&quot;</span>,
-    _ =&gt; <span class="hljs-string">&quot;Pip card&quot;</span> <span class="hljs-comment">// معادل default</span>
-};
-</code></pre>
-<p>🔄 این قابلیت، نگارش کدهای تصمیم‌گیری را ساده‌تر و خواناتر می‌کند. برای مثال‌های بیشتر به بخش «Switch expressions» در صفحه ۹۰ مراجعه کنید.</p>
-<h4>🧩 الگوهای Tuple، موقعیتی و ویژگی‌ها</h4>
-<p>از C# 8، سه الگوی جدید معرفی شده‌اند که بیشتر در عبارات و دستورات switch استفاده می‌شوند:</p>
-<p>🔹 الگوی Tuple (تاپل)<br>
-اجازه می‌دهد هم‌زمان بر اساس چند مقدار تصمیم‌گیری کنید:</p>
-<pre class="hljs"><code><span class="hljs-built_in">int</span> cardNumber = <span class="hljs-number">12</span>; 
-<span class="hljs-built_in">string</span> suite = <span class="hljs-string">&quot;spades&quot;</span>;
-
-<span class="hljs-built_in">string</span> cardName = (cardNumber, suite) <span class="hljs-keyword">switch</span>
-{
-    (<span class="hljs-number">13</span>, <span class="hljs-string">&quot;spades&quot;</span>) =&gt; <span class="hljs-string">&quot;King of spades&quot;</span>,
-    (<span class="hljs-number">13</span>, <span class="hljs-string">&quot;clubs&quot;</span>) =&gt; <span class="hljs-string">&quot;King of clubs&quot;</span>,
-    _ =&gt; <span class="hljs-string">&quot;Unknown card&quot;</span>
-};
-</code></pre>
-<p><strong>🔹 الگوهای موقعیتی (Positional Patterns)</strong></p>
-<p>اگر شیء شما یک deconstructor داشته باشد، می‌توانید با همین ساختار سوییچ کنید.</p>
-<p><strong>🔹 الگوی ویژگی‌ها (Property Patterns)</strong></p>
-<p>به شما امکان می‌دهد بر اساس ویژگی‌های داخلی یک شیء تصمیم بگیرید. برای مثال:</p>
-<pre class="hljs"><code><span class="hljs-keyword">if</span> (obj <span class="hljs-keyword">is</span> <span class="hljs-built_in">string</span> { Length: <span class="hljs-number">4</span> }) ...
-</code></pre>
-<p>👆 بررسی می‌کند آیا obj یک رشته با طول ۴ است یا نه.</p>
-<h4>❓ نوع‌های مرجع nullable (Nullable Reference Types)</h4>
-<p>همان‌طور که nullable بودن قبلاً فقط برای نوع‌های مقدار (value types) ممکن بود، اکنون در C# 8 به نوع‌های مرجع (reference types) نیز گسترش یافته است.</p>
-<p>🎯 هدف از این ویژگی، جلوگیری از بروز خطای معروف NullReferenceException است.</p>
-<p>📌 این ویژگی صرفاً توسط کامپایلر کنترل می‌شود و اگر احتمال دهد که دسترسی به مقدار null ممکن است، اخطار یا خطا صادر می‌کند.</p>
-<p><strong>فعال‌سازی</strong><br>
-می‌توان از طریق فایل پروژه (.csproj) یا با دستور #nullable در کد فعالش کرد:</p>
-<pre class="hljs"><code><span class="hljs-meta">#nullable enable</span>
-
-<span class="hljs-built_in">string</span> s1 = <span class="hljs-literal">null</span>;   <span class="hljs-comment">// ⚠️ اخطار! s1 به طور پیش‌فرض nullable نیست</span>
-<span class="hljs-built_in">string</span>? s2 = <span class="hljs-literal">null</span>;  <span class="hljs-comment">// ✅ مجاز است چون نوع nullable دارد</span>
-</code></pre>
-<p>اگر فیلدی را که nullable نیست مقداردهی اولیه نکنید، یا از یک مقدار nullable استفاده کنید بدون بررسی null بودن، کامپایلر هشدار می‌دهد:</p>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Foo</span>(<span class="hljs-params"><span class="hljs-built_in">string</span>? s</span>)</span> =&gt; Console.Write(s.Length);  <span class="hljs-comment">// ⚠️ هشدار</span>
-</code></pre>
-<p>برای رفع هشدار می‌توان از عملگر اطمینان از عدم null بودن (!) استفاده کرد:</p>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Foo</span>(<span class="hljs-params"><span class="hljs-built_in">string</span>? s</span>)</span> =&gt; Console.Write(s!.Length); <span class="hljs-comment">// ✅ بدون هشدار</span>
-</code></pre>
-<p>📖 برای اطلاعات کامل‌تر، به بخش «Nullable Reference Types» در صفحه ۲۱۵ مراجعه کنید.</p>
-<h4>🌀 جریان‌های ناهمزمان (Asynchronous Streams)</h4>
-<p>تا پیش از C# 8، می‌توانستید با استفاده از yield return یک ایتراتور (iterator) بنویسید یا با استفاده از await یک تابع ناهمزمان (asynchronous function). اما نمی‌توانستید هر دو را با هم ترکیب کنید — یعنی ایتراتوری بنویسید که درون آن await استفاده شود و مقدارها را به‌صورت ناهمزمان بازگرداند.</p>
-<p>🔥 در C# 8 این امکان با معرفی جریان‌های ناهمزمان (asynchronous streams) فراهم شده است:</p>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">async</span> IAsyncEnumerable&lt;<span class="hljs-built_in">int</span>&gt; <span class="hljs-title">RangeAsync</span>(<span class="hljs-params"><span class="hljs-built_in">int</span> start, <span class="hljs-built_in">int</span> count, <span class="hljs-built_in">int</span> delay</span>)</span>
-{
-    <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i = start; i &lt; start + count; i++)
-    {
-        <span class="hljs-keyword">await</span> Task.Delay(delay);
-        <span class="hljs-keyword">yield</span> <span class="hljs-keyword">return</span> i;
-    }
-}
-</code></pre>
-<p>⬅️ متد بالا، اعدادی را از start تا start + count به‌صورت ناهمزمان و با تأخیر مشخص بازمی‌گرداند.</p>
-<p>برای مصرف کردن یک جریان ناهمزمان از ساختار await foreach استفاده می‌کنیم:</p>
-<pre class="hljs"><code><span class="hljs-keyword">await</span> <span class="hljs-keyword">foreach</span> (<span class="hljs-function"><span class="hljs-keyword">var</span> number <span class="hljs-keyword">in</span> <span class="hljs-title">RangeAsync</span>(<span class="hljs-params"><span class="hljs-number">0</span>, <span class="hljs-number">10</span>, <span class="hljs-number">100</span></span>))
-    Console.<span class="hljs-title">WriteLine</span>(<span class="hljs-params">number</span>)</span>;
-</code></pre>
-<p>✅ این کد، ۱۰ عدد را با تأخیر ۱۰۰ میلی‌ثانیه‌ای چاپ می‌کند، و هر بار منتظر مقدار جدید می‌ماند.</p>
-<p>📖 برای اطلاعات بیشتر، به بخش «Asynchronous Streams» در صفحه ۶۷۲ مراجعه کنید.</p>
-<h3>🔹 چه چیزهایی در C# نسخه 7.x جدید است</h3>
-<p>C# 7.x نخستین بار همراه با Visual Studio 2017 منتشر شد. نسخه C# 7.3 همچنان در Visual Studio 2019 استفاده می‌شود، زمانی که هدف شما .NET Core 2، .NET Framework 4.6 تا 4.8 یا .NET Standard 2.0 باشد.</p>
-<p>🚀 C# 7.3<br>
-C# 7.3 بهبودهای کوچکی در ویژگی‌های موجود ایجاد کرد، مانند:</p>
-<p>+امکان استفاده از عملگرهای برابری با تاپل‌ها</p>
-<p>+بهبود در انتخاب نسخه مناسب متد (Overload Resolution)</p>
-<p>+قابلیت اعمال Attribute روی فیلد پشتیبان (Backing Field) در ویژگی‌های خودکار:</p>
-<pre class="hljs"><code>[<span class="hljs-meta">field:NonSerialized</span>]
-<span class="hljs-keyword">public</span> <span class="hljs-built_in">int</span> MyProperty { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">set</span>; }
-</code></pre>
-<p>همچنین این نسخه ویژگی‌های برنامه‌نویسی با تخصیص حافظه کم را که در C# 7.2 معرفی شده بود، گسترش داد:</p>
-<ul>
-<li>
-<p>توانایی تخصیص مجدد متغیرهای محلی با ref</p>
-</li>
-<li>
-<p>عدم نیاز به Pin کردن هنگام ایندکس‌گذاری روی فیلدهای ثابت (fixed fields)</p>
-</li>
-<li>
-<p>پشتیبانی از مقداردهی اولیه فیلدها با stackalloc:</p>
-</li>
-</ul>
-<pre class="hljs"><code><span class="hljs-built_in">int</span>* pointer  = <span class="hljs-keyword">stackalloc</span> <span class="hljs-built_in">int</span>[] { <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span> };
-Span&lt;<span class="hljs-built_in">int</span>&gt; arr = <span class="hljs-keyword">stackalloc</span>[] { <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span> };
-</code></pre>
-<p>📌 توجه: حافظه اختصاص‌یافته با stackalloc را می‌توان مستقیماً به یک Span<T> نسبت داد (توضیحات بیشتر در فصل 23).</p>
-<h4>🔐 C# 7.2</h4>
-<p>تغییرات مهم این نسخه:</p>
-<ul>
-<li>
-<p>اضافه شدن کلیدواژه private protected (ترکیبی از internal و protected)</p>
-</li>
-<li>
-<p>امکان استفاده از آرگومان‌های موقعیتی پس از آرگومان‌های نام‌گذاری‌شده هنگام فراخوانی متدها</p>
-</li>
-<li>
-<p>معرفی ساختارهای فقط‌خواندنی (readonly struct) که باعث می‌شود تمام فیلدها readonly باشند:</p>
-</li>
-</ul>
-<pre class="hljs"><code><span class="hljs-keyword">readonly</span> <span class="hljs-keyword">struct</span> Point
-{
-    <span class="hljs-keyword">public</span> <span class="hljs-keyword">readonly</span> <span class="hljs-built_in">int</span> X, Y; <span class="hljs-comment">// هر دو باید readonly باشند</span>
-}
-</code></pre>
-<p>این ویژگی باعث بیان واضح‌تر قصد برنامه‌نویس و فراهم شدن بهینه‌سازی بیشتر توسط کامپایلر می‌شود.</p>
-<p>همچنین امکاناتی برای ریزبهینه‌سازی (micro-optimization) و برنامه‌نویسی با تخصیص حافظه کم افزوده شد:</p>
-<ul>
-<li>
-<p>in modifier</p>
-</li>
-<li>
-<p>Ref Locals</p>
-</li>
-<li>
-<p>Ref Returns</p>
-</li>
-<li>
-<p>Ref Structs</p>
-</li>
-</ul>
-<h4>⚡ C# 7.1</h4>
-<p>از نسخه 7.1 به بعد:</p>
-<ul>
-<li>می‌توان نوع داده را هنگام استفاده از default حذف کرد، اگر قابل استنتاج باشد:</li>
-</ul>
-<pre class="hljs"><code><span class="hljs-built_in">decimal</span> number = <span class="hljs-literal">default</span>; <span class="hljs-comment">// نوع decimal است</span>
-</code></pre>
-<ul>
-<li>
-<p>قوانین switch ساده‌تر شدند (امکان الگوگیری از پارامترهای نوع عمومی)</p>
-</li>
-<li>
-<p>متد اصلی برنامه (Main) می‌تواند asynchronous باشد</p>
-</li>
-<li>
-<p>امکان استنتاج نام عناصر تاپل از نام متغیرها:</p>
-</li>
-</ul>
-<pre class="hljs"><code><span class="hljs-keyword">var</span> now = DateTime.Now;
-<span class="hljs-keyword">var</span> tuple = (now.Hour, now.Minute, now.Second);
-</code></pre>
-<h3>بهبودهای مربوط به اعداد (Numeric Literal Improvements) 🔢</h3>
-<p>در نسخه‌ی C# 7، می‌توانیم داخل عددها از کاراکتر زیرخط (_) استفاده کنیم تا خوانایی‌شان بهتر شود. به این‌ها جداکننده ارقام (digit separators) می‌گویند و کامپایلر این زیرخط‌ها را نادیده می‌گیرد:</p>
-<pre class="hljs"><code><span class="hljs-built_in">int</span> million = <span class="hljs-number">1</span>_000_000;
-</code></pre>
-<p>همچنین می‌توانیم اعداد باینری را با پیشوند 0b بنویسیم:</p>
-<pre class="hljs"><code><span class="hljs-keyword">var</span> b = <span class="hljs-number">0b1010</span>_1011_1100_1101_1110_1111;
-</code></pre>
-<h4>متغیرهای Out و Discardها 🎯</h4>
-<p>در C# 7 کار با متدهایی که پارامتر out دارند راحت‌تر شده است.<br>
-حالا می‌توانید متغیرهای out را در لحظه تعریف کنید (بخش «Out variables and discards» در صفحه 72 را ببینید):</p>
-<pre class="hljs"><code><span class="hljs-built_in">bool</span> successful = <span class="hljs-built_in">int</span>.TryParse(<span class="hljs-string">&quot;123&quot;</span>, <span class="hljs-keyword">out</span> <span class="hljs-built_in">int</span> result);
-Console.WriteLine(result);
-</code></pre>
-<p>اگر متدی چند پارامتر out داشته باشد و شما فقط به بعضی از آن‌ها نیاز داشته باشید، می‌توانید بقیه را با کاراکتر زیرخط (_) نادیده بگیرید:</p>
-<pre class="hljs"><code>SomeBigMethod(<span class="hljs-keyword">out</span> _, <span class="hljs-keyword">out</span> _, <span class="hljs-keyword">out</span> _, <span class="hljs-keyword">out</span> <span class="hljs-built_in">int</span> x, <span class="hljs-keyword">out</span> _, <span class="hljs-keyword">out</span> _, <span class="hljs-keyword">out</span> _);
-Console.WriteLine(x);
-</code></pre>
-<h4>الگوهای نوع و متغیرهای Pattern 🧩</h4>
-<p>می‌توانید با استفاده از عملگر is، متغیرهایی را در لحظه معرفی کنید. به این‌ها متغیرهای الگو (pattern variables) می‌گویند (بخش «Introducing a pattern variable» در صفحه 130 را ببینید):</p>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Foo</span>(<span class="hljs-params"><span class="hljs-built_in">object</span> x</span>)</span>
-{
-    <span class="hljs-keyword">if</span> (x <span class="hljs-keyword">is</span> <span class="hljs-built_in">string</span> s)
-        Console.WriteLine(s.Length);
-}
-</code></pre>
-<h4>دستور Switch با پشتیبانی از الگوهای نوع 🔀</h4>
-<p>دستور switch حالا می‌تواند علاوه بر ثابت‌ها، بر اساس نوع داده هم تصمیم‌گیری کند (بخش «Switching on types» در صفحه 89 را ببینید).<br>
-همچنین می‌توانید با استفاده از عبارت when شرط اضافه کنید و حتی روی مقدار null هم سوئیچ کنید:</p>
-<pre class="hljs"><code><span class="hljs-keyword">switch</span> (x)
-{
-    <span class="hljs-keyword">case</span> <span class="hljs-built_in">int</span> i:
-        Console.WriteLine(<span class="hljs-string">&quot;It&#x27;s an int!&quot;</span>);
-        <span class="hljs-keyword">break</span>;
-    <span class="hljs-keyword">case</span> <span class="hljs-built_in">string</span> s:
-        Console.WriteLine(s.Length); <span class="hljs-comment">// می‌توانیم از متغیر s استفاده کنیم</span>
-        <span class="hljs-keyword">break</span>;
-    <span class="hljs-keyword">case</span> <span class="hljs-built_in">bool</span> b <span class="hljs-keyword">when</span> b == <span class="hljs-literal">true</span>: <span class="hljs-comment">// فقط وقتی b برابر true باشد</span>
-        Console.WriteLine(<span class="hljs-string">&quot;True&quot;</span>);
-        <span class="hljs-keyword">break</span>;
-    <span class="hljs-keyword">case</span> <span class="hljs-literal">null</span>:
-        Console.WriteLine(<span class="hljs-string">&quot;Nothing&quot;</span>);
-        <span class="hljs-keyword">break</span>;
-}
-</code></pre>
-<h4>متدهای محلی 🛠️</h4>
-<p>متد محلی (Local Method) متدی است که داخل یک تابع دیگر تعریف می‌شود (نگاه کنید به بخش «متدهای محلی» در صفحه 106).</p>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">WriteCubes</span>()</span>
-{
-    Console.WriteLine(Cube(<span class="hljs-number">3</span>));
-    Console.WriteLine(Cube(<span class="hljs-number">4</span>));
-    Console.WriteLine(Cube(<span class="hljs-number">5</span>));
-
-    <span class="hljs-function"><span class="hljs-built_in">int</span> <span class="hljs-title">Cube</span>(<span class="hljs-params"><span class="hljs-built_in">int</span> <span class="hljs-keyword">value</span></span>)</span> =&gt; <span class="hljs-keyword">value</span> * <span class="hljs-keyword">value</span> * <span class="hljs-keyword">value</span>;
-}
-</code></pre>
-<p>🔹 متدهای محلی فقط برای همان تابعی که در آن تعریف شده‌اند قابل مشاهده هستند و می‌توانند متغیرهای محلی همان تابع را بگیرند و استفاده کنند، درست مثل عبارات لامبدا.</p>
-<h4>اعضای بدنه-بیان بیشتر ➡️</h4>
-<p>در C# 6، سینتکس expression-bodied یا همان «پیکان چاق» (=&gt;) برای متدها، پراپرتی‌های فقط-خواندنی، عملگرها و ایندکسرها معرفی شد.<br>
-در C# 7 این قابلیت گسترش یافت و شامل سازنده‌ها، پراپرتی‌های خواندنی/نوشتنی و فاینالایزرها هم شد:</p>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Person</span>
-{
-    <span class="hljs-built_in">string</span> name;
-
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Person</span>(<span class="hljs-params"><span class="hljs-built_in">string</span> name</span>)</span> =&gt; Name = name;
-
-    <span class="hljs-keyword">public</span> <span class="hljs-built_in">string</span> Name
-    {
-        <span class="hljs-keyword">get</span> =&gt; name;
-        <span class="hljs-keyword">set</span> =&gt; name = <span class="hljs-keyword">value</span> ?? <span class="hljs-string">&quot;&quot;</span>;
-    }
-
-    ~Person() =&gt; Console.WriteLine(<span class="hljs-string">&quot;finalize&quot;</span>);
-}
-</code></pre>
-<h4>دی‌کانستراکتورها 🔄</h4>
-<p>در C# 7، الگوی Deconstructor معرفی شد (بخش «دی‌کانستراکتورها» در صفحه 110).<br>
-🔹 برعکس سازنده (Constructor) که معمولاً یک سری مقادیر را به‌عنوان پارامتر گرفته و در فیلدها ذخیره می‌کند، یک دی‌کانستراکتور برعکس عمل می‌کند و مقدار فیلدها را به مجموعه‌ای از متغیرها برمی‌گرداند.</p>
-<p>برای مثال، می‌توانیم برای کلاس Person بالا یک دی‌کانستراکتور به این صورت بنویسیم:</p>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Deconstruct</span>(<span class="hljs-params"><span class="hljs-keyword">out</span> <span class="hljs-built_in">string</span> firstName, <span class="hljs-keyword">out</span> <span class="hljs-built_in">string</span> lastName</span>)</span>
-{
-    <span class="hljs-built_in">int</span> spacePos = name.IndexOf(<span class="hljs-string">&#x27; &#x27;</span>);
-    firstName = name.Substring(<span class="hljs-number">0</span>, spacePos);
-    lastName = name.Substring(spacePos + <span class="hljs-number">1</span>);
-}
-</code></pre>
-<p>📌 دی‌کانستراکتورها با سینتکس خاصی صدا زده می‌شوند:</p>
-<pre class="hljs"><code><span class="hljs-keyword">var</span> joe = <span class="hljs-keyword">new</span> Person(<span class="hljs-string">&quot;Joe Bloggs&quot;</span>);
-<span class="hljs-keyword">var</span> (first, last) = joe;   <span class="hljs-comment">// دی‌کانستراکشن</span>
-Console.WriteLine(first);  <span class="hljs-comment">// Joe</span>
-Console.WriteLine(last);   <span class="hljs-comment">// Bloggs</span>
-</code></pre>
-<h4>تاپل‌ها (Tuples) 🧩</h4>
-<p>شاید مهم‌ترین بهبود در C# 7، پشتیبانی مستقیم و واضح از تاپل‌ها باشد (نگاه کنید به بخش «Tuples» در صفحه 222 📖).<br>
-تاپل‌ها یک روش ساده برای ذخیره یک مجموعه از مقادیر مرتبط فراهم می‌کنند:</p>
-<pre class="hljs"><code><span class="hljs-keyword">var</span> bob = (<span class="hljs-string">&quot;Bob&quot;</span>, <span class="hljs-number">23</span>);
-Console.WriteLine(bob.Item1);   <span class="hljs-comment">// Bob</span>
-Console.WriteLine(bob.Item2);   <span class="hljs-comment">// 23</span>
-</code></pre>
-<p>تاپل‌های جدید در C# در واقع نوعی syntactic sugar (شیرینی语 نحوی 😄) برای استفاده از ساختارهای جنریک System.ValueTuple&lt;…&gt; هستند.<br>
-اما به لطف قابلیت‌های کامپایلر، می‌توان به عناصر تاپل نام هم داد:</p>
-<pre class="hljs"><code><span class="hljs-keyword">var</span> tuple = (name: <span class="hljs-string">&quot;Bob&quot;</span>, age: <span class="hljs-number">23</span>);
-Console.WriteLine(tuple.name);   <span class="hljs-comment">// Bob</span>
-Console.WriteLine(tuple.age);    <span class="hljs-comment">// 23</span>
-</code></pre>
-<p>با استفاده از تاپل‌ها، توابع می‌توانند چند مقدار را برگردانند، بدون اینکه مجبور باشیم از پارامترهای out یا انواع اضافه و پیچیده استفاده کنیم:</p>
-<pre class="hljs"><code><span class="hljs-keyword">static</span> (<span class="hljs-built_in">int</span> row, <span class="hljs-built_in">int</span> column) GetFilePosition() =&gt; (<span class="hljs-number">3</span>, <span class="hljs-number">10</span>);
-
-<span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Main</span>()</span>
-{
-    <span class="hljs-keyword">var</span> pos = GetFilePosition();
-    Console.WriteLine(pos.row);      <span class="hljs-comment">// 3</span>
-    Console.WriteLine(pos.column);   <span class="hljs-comment">// 10</span>
-}
-</code></pre>
-<p>تاپل‌ها به‌طور ضمنی از الگوی deconstruction پشتیبانی می‌کنند، بنابراین می‌توان آن‌ها را به‌راحتی به متغیرهای جداگانه تجزیه کرد:</p>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Main</span>()</span>
-{
-    (<span class="hljs-built_in">int</span> row, <span class="hljs-built_in">int</span> column) = GetFilePosition(); <span class="hljs-comment">// ایجاد دو متغیر محلی</span>
-    Console.WriteLine(row);      <span class="hljs-comment">// 3</span>
-    Console.WriteLine(column);   <span class="hljs-comment">// 10</span>
-}
-</code></pre>
-<h4>عبارت‌های throw 🚨</h4>
-<p>قبل از نسخه C# 7، دستور throw همیشه یک statement (دستور مستقل) بود.<br>
-اما اکنون می‌تواند به عنوان یک expression (عبارت) هم استفاده شود، مثلاً در توابع expression-bodied:</p>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-built_in">string</span> <span class="hljs-title">Foo</span>()</span> =&gt; <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> NotImplementedException();
-</code></pre>
-<p>همچنین می‌توان از throw در یک عبارت شرطی سه‌تایی (ternary conditional expression) استفاده کرد:</p>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-built_in">string</span> <span class="hljs-title">Capitalize</span>(<span class="hljs-params"><span class="hljs-built_in">string</span> <span class="hljs-keyword">value</span></span>)</span> =&gt;
-    <span class="hljs-keyword">value</span> == <span class="hljs-literal">null</span> ? <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> ArgumentException(<span class="hljs-string">&quot;value&quot;</span>) :
-    <span class="hljs-keyword">value</span> == <span class="hljs-string">&quot;&quot;</span> ? <span class="hljs-string">&quot;&quot;</span> :
-    <span class="hljs-built_in">char</span>.ToUpper(<span class="hljs-keyword">value</span>[<span class="hljs-number">0</span>]) + <span class="hljs-keyword">value</span>.Substring(<span class="hljs-number">1</span>);
-</code></pre>
-<p>💡 این ویژگی باعث می‌شود بتوانید پرتاب استثنا (Exception) را در جاهایی انجام دهید که قبلاً فقط می‌توانستید یک مقدار برگردانید یا عملیات انجام دهید، و این انعطاف‌پذیری کد را افزایش می‌دهد.</p>
-<h3>چه چیزهایی در ‎C# 6.0‎ جدید است</h3>
-<p>C# ‎6.0‎ که همراه با Visual Studio 2015 عرضه شد، یک کامپایلر نسل جدید دارد که به‌طور کامل با خود زبان C# نوشته شده است. این کامپایلر که با نام پروژه Roslyn شناخته می‌شود، کل فرایند کامپایل را از طریق کتابخانه‌ها در اختیار شما قرار می‌دهد و این امکان را فراهم می‌کند که روی هر کدی که بخواهید، آنالیز انجام دهید. خود کامپایلر متن‌باز (Open Source) است و کد منبع آن در این آدرس موجود است:<br>
-<a href="https://github.com/dotnet/roslyn">https://github.com/dotnet/roslyn</a></p>
-<p>علاوه بر این، C# ‎6.0‎ شامل چند بهبود کوچک اما مهم است که بیشتر برای کاهش شلوغی و طول کد طراحی شده‌اند:</p>
-<p><strong>1. عملگر شرطی تهی (Null-Conditional) یا «Elvis»</strong></p>
-<p>(بخش Null Operators در صفحه 82)<br>
-با این عملگر دیگر لازم نیست قبل از فراخوانی یک متد یا دسترسی به یک عضو، مقدار null را بررسی کنید. در مثال زیر، متغیر result به جای پرتاب کردن خطای NullReferenceException، برابر null می‌شود:</p>
-<pre class="hljs"><code>System.Text.StringBuilder sb = <span class="hljs-literal">null</span>;
-<span class="hljs-built_in">string</span> result = sb?.ToString(); <span class="hljs-comment">// result برابر null است</span>
-</code></pre>
-<p><strong>2. توابع بدنه‌-بیان (Expression-Bodied)</strong></p>
-<p>(بخش Methods در صفحه 106)<br>
-اجازه می‌دهد متدها، پراپرتی‌ها، عملگرها و ایندکسرهایی که فقط شامل یک عبارت هستند، کوتاه و شبیه به lambda expression نوشته شوند:</p>
-<pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-built_in">int</span> <span class="hljs-title">TimesTwo</span>(<span class="hljs-params"><span class="hljs-built_in">int</span> x</span>)</span> =&gt; x * <span class="hljs-number">2</span>;
-<span class="hljs-keyword">public</span> <span class="hljs-built_in">string</span> SomeProperty =&gt; <span class="hljs-string">&quot;Property value&quot;</span>;
-</code></pre>
-<p><strong>3. مقداردهی اولیه به پراپرتی‌ها (Property Initializers)</strong></p>
-<p>(فصل 3)<br>
-قابلیت مقداردهی اولیه به یک پراپرتی خودکار هنگام تعریف آن:</p>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> DateTime TimeCreated { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">set</span>; } = DateTime.Now;
-</code></pre>
-<p>حتی می‌توان پراپرتی‌های فقط‌خواندنی را مقداردهی کرد:</p>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> DateTime TimeCreated { <span class="hljs-keyword">get</span>; } = DateTime.Now;
-</code></pre>
-<p>این پراپرتی‌های فقط‌خواندنی همچنین می‌توانند در سازنده (Constructor) مقداردهی شوند، که ایجاد نوع‌های تغییرناپذیر (Immutable) را ساده‌تر می‌کند.</p>
-<p><strong>4. مقداردهی اولیه اندیس‌ها (Index Initializers)</strong></p>
-<p>(فصل 4)<br>
-اجازه می‌دهد هر نوعی که ایندکسر دارد را در یک مرحله مقداردهی کنید:</p>
-<pre class="hljs"><code><span class="hljs-keyword">var</span> dict = <span class="hljs-keyword">new</span> Dictionary&lt;<span class="hljs-built_in">int</span>, <span class="hljs-built_in">string</span>&gt;()
-{
-    [<span class="hljs-meta">3</span>] = <span class="hljs-string">&quot;three&quot;</span>,
-    [<span class="hljs-meta">10</span>] = <span class="hljs-string">&quot;ten&quot;</span>
-};
-</code></pre>
-<p><strong>5. درون‌گذاری رشته‌ای (String Interpolation)</strong></p>
-<p>(بخش String Type در صفحه 58)<br>
-جایگزینی خلاصه‌تر برای string.Format:</p>
-<pre class="hljs"><code><span class="hljs-built_in">string</span> s = <span class="hljs-string">$&quot;It is <span class="hljs-subst">{DateTime.Now.DayOfWeek}</span> today&quot;</span>;
-</code></pre>
-<p><strong>6. فیلترهای استثنا (Exception Filters)</strong></p>
-<p>(بخش try Statements and Exceptions در صفحه 195)<br>
-امکان تعیین شرط برای یک بلوک catch:</p>
-<pre class="hljs"><code><span class="hljs-built_in">string</span> html;
-<span class="hljs-keyword">try</span>
-{
-    html = <span class="hljs-keyword">await</span> <span class="hljs-keyword">new</span> HttpClient().GetStringAsync(<span class="hljs-string">&quot;http://asef&quot;</span>);
-}
-<span class="hljs-keyword">catch</span> (WebException ex) <span class="hljs-keyword">when</span> (ex.Status == WebExceptionStatus.Timeout)
-{
-    ...
-}
-</code></pre>
-<p><strong>7. دستور using static</strong></p>
-<p>(بخش Namespaces در صفحه 95)<br>
-تمام اعضای استاتیک یک نوع را وارد می‌کند تا بتوانید بدون نام‌گذاری کامل از آن‌ها استفاده کنید:</p>
-<pre class="hljs"><code><span class="hljs-keyword">using</span> <span class="hljs-keyword">static</span> System.Console;
-
-WriteLine(<span class="hljs-string">&quot;Hello, world&quot;</span>); <span class="hljs-comment">// به‌جای Console.WriteLine</span>
-</code></pre>
-<p><strong>8. عملگر nameof</strong></p>
-<p>(فصل 3)<br>
-نام یک متغیر، نوع، یا نماد دیگر را به‌صورت رشته برمی‌گرداند. این کار باعث می‌شود در هنگام تغییر نام نمادها در Visual Studio، کد خراب نشود:</p>
-<pre class="hljs"><code><span class="hljs-built_in">int</span> capacity = <span class="hljs-number">123</span>;
-<span class="hljs-built_in">string</span> x = <span class="hljs-keyword">nameof</span>(capacity);   <span class="hljs-comment">// &quot;capacity&quot;</span>
-<span class="hljs-built_in">string</span> y = <span class="hljs-keyword">nameof</span>(Uri.Host);   <span class="hljs-comment">// &quot;Host&quot;</span>
-</code></pre>
-<p><strong>9. امکان await داخل بلوک‌های catch و finally</strong></p>
-<p>اکنون مجاز هستید داخل catch و finally از await استفاده کنید.</p>
-<h3>چه چیزهای جدیدی در C# 5.0 وجود دارد</h3>
-<p>بزرگ‌ترین ویژگی جدید در C# 5.0، پشتیبانی از توابع ناهمگام (Asynchronous Functions) از طریق دو کلمه کلیدی جدید async و await بود.</p>
-<p>توابع ناهمگام این امکان را فراهم می‌کنند که ادامهٔ اجرای برنامه به صورت ناهمگام انجام شود، که این موضوع باعث می‌شود نوشتن برنامه‌های کلاینت قدرتمند، واکنش‌گرا و ایمن از نظر رشته‌ای (Thread-Safe) بسیار ساده‌تر شود.</p>
-<p>همچنین، این قابلیت کمک می‌کند تا بتوانید به راحتی برنامه‌های ورودی/خروجی (I/O) محور بنویسید که همزمانی (Concurrency) بالایی دارند و کارآمد هستند، بدون اینکه برای هر عملیات، یک رشته (Thread) جداگانه اشغال شود.</p>
-<p>در فصل ۱۴، این موضوع یعنی توابع ناهمگام را به طور کامل بررسی خواهیم کرد. 🚀</p>
-<h3>چه چیزهای جدیدی در C# 4.0 وجود دارد</h3>
-<p>در C# 4.0، چهار بهبود مهم معرفی شدند:</p>
-<ol>
-<li>
-<p>اتصال داینامیک (Dynamic Binding)<br>
-اتصال داینامیک باعث می‌شود که تعیین نوع و اعضای یک متغیر به جای زمان کامپایل، در زمان اجرا انجام شود. این قابلیت در مواقعی که باید از کدهای پیچیده ریفلکشن استفاده کنیم، بسیار کاربردی است. همچنین، برای تعامل با زبان‌های داینامیک و کامپوننت‌های COM بسیار مفید است. 🌀</p>
-</li>
-<li>
-<p>پارامترهای اختیاری و پارامترهای نام‌گذاری‌شده (Optional and Named Parameters)<br>
-پارامترهای اختیاری اجازه می‌دهند تا در تعریف تابع، برای پارامترها مقدار پیش‌فرض تعیین کنید و هنگام فراخوانی، نیازی به ارسال همه پارامترها نباشد. پارامترهای نام‌گذاری‌شده نیز به شما امکان می‌دهند که هنگام فراخوانی، آرگومان‌ها را بر اساس نامشان مشخص کنید، نه صرفاً موقعیتشان. 🎯</p>
-</li>
-<li>
-<p>قوانین واریانس نوع (Type Variance)<br>
-در C# 4.0، قوانین واریانس برای پارامترهای نوع در رابط‌های عمومی (Generic Interfaces) و نماینده‌های عمومی (Generic Delegates) شل‌تر شدند. به این معنی که می‌توان این پارامترها را به صورت کوواریانت (covariant) یا کانتر واریانت (contravariant) علامت‌گذاری کرد و این اجازه می‌دهد تبدیل‌های طبیعی‌تری بین انواع انجام شود. 🔄</p>
-</li>
-<li>
-<p>بهبود تعامل با COM<br>
-در سه جنبه:</p>
-</li>
-</ol>
-<ul>
-<li>
-<p>امکان ارسال آرگومان‌ها به صورت ارجاعی بدون نیاز به کلیدواژه ref (مخصوصاً هنگام استفاده از پارامترهای اختیاری).</p>
-</li>
-<li>
-<p>امکان لینک کردن اسمبلی‌های حاوی نوع‌های interop COM به جای ارجاع مستقیم، که باعث کاهش مشکلات نسخه‌بندی و استقرار می‌شود.</p>
-</li>
-<li>
-<p>توابعی که نوع Variant کامپوننت‌های COM را باز می‌گردانند، حالا به صورت dynamic نگاشت می‌شوند، نه object، که نیاز به تبدیل نوع (cast) را از بین می‌برد. ⚙️</p>
-</li>
-</ul>
-<p>این ویژگی‌ها به توسعه‌دهندگان کمک می‌کنند کدهای انعطاف‌پذیرتر و قابل استفاده‌تر بنویسند، به خصوص هنگام کار با محیط‌های ترکیبی و دینامیک.</p>
-<h3>چه چیزهای جدیدی در C# 3.0 وجود دارد 🎉</h3>
-<p>تمرکز اصلی ویژگی‌هایی که در C# 3.0 اضافه شدند، بر روی قابلیت‌های Language-Integrated Query (LINQ) بود. LINQ به شما اجازه می‌دهد تا بتوانید کوئری‌ها را مستقیماً درون برنامه‌ی C# بنویسید و در زمان کامپایل هم صحت آنها بررسی شود. این کوئری‌ها می‌توانند روی مجموعه‌های محلی مثل لیست‌ها یا اسناد XML، یا منابع داده‌ای راه دور مثل دیتابیس اجرا شوند. 🔍</p>
-<p>ویژگی‌های C# 3.0 که برای پشتیبانی از LINQ اضافه شدند عبارتند از:</p>
-<ul>
-<li>
-<p>متغیرهای محلی با نوع استنباط شده (Implicitly typed local variables)<br>
-با کلیدواژه var می‌توانید نوع متغیر را در هنگام تعریف ذکر نکنید و کامپایلر خودش نوع را حدس می‌زند. این کار باعث کاهش شلوغی کد می‌شود و همچنین امکان استفاده از انواع ناشناس را فراهم می‌کند که کلاس‌های ساده‌ای هستند که در لحظه ساخته می‌شوند و معمولاً در نتایج نهایی کوئری‌های LINQ استفاده می‌شوند.</p>
-</li>
-<li>
-<p>مقداردهی اولیه به اشیا (Object initializers)<br>
-این امکان به شما اجازه می‌دهد بعد از فراخوانی سازنده (constructor)، به‌صورت مستقیم خصوصیات (properties) یک شیء را مقداردهی کنید. این ویژگی هم برای انواع نام‌گذاری شده و هم برای انواع ناشناس کاربرد دارد.</p>
-</li>
-<li>
-<p>عبارات لامبدا (Lambda expressions)<br>
-این‌ها توابع کوچک و سرراستی هستند که کامپایلر در لحظه می‌سازد و در کوئری‌های LINQ به خصوص در حالت &quot;fluent&quot; خیلی کاربردی هستند.</p>
-</li>
-<li>
-<p>متدهای الحاقی (Extension methods)<br>
-به شما امکان می‌دهد که بدون تغییر تعریف اصلی یک نوع، متدهای جدیدی به آن اضافه کنید. متدهای الحاقی در واقع متدهای استاتیکی هستند که مثل متدهای نمونه‌ای به نظر می‌رسند. بسیاری از اپراتورهای کوئری LINQ به صورت متدهای الحاقی پیاده‌سازی شده‌اند.</p>
-</li>
-<li>
-<p>عبارات کوئری (Query expressions)<br>
-این‌ها نحو سطح بالاتری برای نوشتن کوئری‌های LINQ فراهم می‌کنند که وقتی با چند مجموعه یا متغیر دامنه کار می‌کنید، کد شما بسیار ساده‌تر و خواناتر می‌شود.</p>
-</li>
-<li>
-<p>درخت‌های عبارت (Expression trees)<br>
-این‌ها مدل‌های کوچکی از کد (Document Object Models یا DOM) هستند که عبارات لامبدا را توصیف می‌کنند. با استفاده از درخت‌های عبارت، امکان اجرای کوئری‌های LINQ در محیط‌های راه دور مثل سرور دیتابیس وجود دارد، چون می‌توان آنها را در زمان اجرا بررسی و به زبان‌های دیگری مثل SQL ترجمه کرد.</p>
-</li>
-</ul>
-<p>علاوه بر این‌ها، در C# 3.0 دو ویژگی مهم دیگر هم اضافه شدند:</p>
-<ul>
-<li>
-<p>ویژگی‌های خودکار (Automatic properties)<br>
-این ویژگی نوشتن خصوصیات ساده که فقط یک فیلد خصوصی را دریافت و تنظیم می‌کنند، بسیار آسان‌تر می‌کند، چون کامپایلر خودش این فیلد پشتیبان را می‌سازد.</p>
-</li>
-<li>
-<p>متدهای جزئی (Partial methods)<br>
-این متدها به کلاسی که به صورت خودکار تولید شده، امکان می‌دهند نقاط قابل تنظیمی برای کد دستی اضافه کنند که اگر استفاده نشوند، کاملاً حذف می‌شوند.</p>
-</li>
-</ul>
-<h3>چه چیزهای جدیدی در C# 2.0 وجود دارد 🎉</h3>
-<p>ویژگی‌های بزرگ و مهمی که در C# 2.0 اضافه شدند، شامل موارد زیر هستند:</p>
-<ul>
-<li>
-<p>جنریک‌ها (Generics)<br>
-این قابلیت به شما اجازه می‌دهد تا بتوانید کلاس‌ها، متدها و ساختارهایی بنویسید که نوع داده‌ای آنها به صورت پارامتریک تعریف می‌شود. یعنی می‌توانید یکبار کد بنویسید و با انواع مختلف آن را استفاده کنید، بدون نیاز به کپی کردن یا تبدیل نوع. این ویژگی به طور قابل توجهی باعث افزایش انعطاف‌پذیری و کارایی کد می‌شود.<br>
-نکته مهم: پشتیبانی از جنریک‌ها نیازمند یک نسخه جدید از CLR بود (نسخه 2.0) تا بتواند در زمان اجرا هم نوع داده را حفظ کند.</p>
-</li>
-<li>
-<p>نوع‌های nullable برای مقادیر (Nullable value types)<br>
-این امکان به شما می‌دهد تا نوع‌های مقداردهی‌شده مثل int یا bool بتوانند مقدار null هم داشته باشند. این ویژگی برای مواقعی که داده ممکن است مقدار نداشته باشد، خیلی کاربردی است.</p>
-</li>
-<li>
-<p>ایتراتورها (Iterators)<br>
-امکان نوشتن کدهای تکرارشونده به شکل ساده‌تر و خواناتر، با استفاده از کلیدواژه yield برای بازگرداندن عناصر به صورت یکی‌یکی.</p>
-</li>
-<li>
-<p>متدهای ناشناس (Anonymous methods)<br>
-این قابلیت پیش‌نیاز عبارات لامبدا بود و به شما اجازه می‌داد که توابع کوچک و بدون نام را به صورت مستقیم تعریف و استفاده کنید.</p>
-</li>
-</ul>
-<p>علاوه بر این‌ها، C# 2.0 ویژگی‌های دیگری مثل:</p>
-<ul>
-<li>
-<p>کلاس‌های جزئی (Partial classes)<br>
-که امکان تقسیم تعریف یک کلاس به چند فایل را می‌دهند.</p>
-</li>
-<li>
-<p>کلاس‌های استاتیک (Static classes)<br>
-که فقط شامل اعضای استاتیک هستند و نمی‌توان از آنها نمونه ساخت.</p>
-</li>
-<li>
-<p>و مجموعه‌ای از ویژگی‌های کوچک‌تر و متنوع مانند مخفف‌های فضای نام (namespace alias qualifier)، دوستان اسمبلی (friend assemblies)، و بافرهای با اندازه ثابت (fixed-size buffers)</p>
-</li>
-</ul>
-<p>را نیز اضافه کرد.</p>
-
-  </main>
-
-  <!-- فوتر مشترک -->
-  <footer class="footer">
-    <div class="container">
-      <p>
-        <img src="/Gitab/icone/copyright.svg" alt="کپی‌رایت" width="14" height="14"
-             style="vertical-align:middle;margin-inline:4px">
-        <span id="y"></span> Gitab — تمامی حقوق محفوظ است.
-      </p>
-    </div>
-  </footer>
-
-  <!-- سال و اسکریپت تغییر تم -->
-  <script>
+<span class="hljs-keyword">var</span> b1 = <span class="hljs-keyword">new</span> Book { Title = <span class="hljs-string">&quot;C# 12 in a Nutshell&quot;</span> }; <span class="hljs-comment">// صحیح</span>
+<span class="hljs-comment">// var b2 = new Book(); // خطای کامپایل: فیلد Title باید مقداردهی شود!</span>
+</code></pre> <h4>۵. اعضای استاتیک مجازی در اینترفیس‌ها و ریاضیات جنریک (Generic Math)</h4><p>امکان تعریف عملگرهای ریاضی استاتیک در اینترفیس‌ها فراهم شد که نوشتن الگوریتم‌های محاسباتی عمومی را به واقعیت بدل کرد:</p><pre class="hljs"><code><span class="hljs-function">T <span class="hljs-title">Add</span>&lt;<span class="hljs-title">T</span>&gt;(<span class="hljs-params">T a, T b</span>) <span class="hljs-keyword">where</span> T : INumber&lt;T&gt;</span> =&gt; a + b;
+</code></pre> <hr><h3>ویژگی‌های جدید در سی‌شارپ ۱۰ (C# 10)</h3><p>همراه با .NET 6 معرفی شد:</p><ul> <li><strong>نیم‌اسپیس‌های فایلی (<code>File-scoped namespaces</code>):</strong> حذف کروشه‌های باز و بسته برای کل فایل:<pre class="hljs"><code><span class="hljs-keyword">namespace</span> <span class="hljs-title">MyProject</span>; <span class="hljs-comment">// اعمال برای کل فایل بدون نیاز به دندانه اضافه</span>
+</code></pre></li><li><strong>یوزینگ‌های سراسری (<code>global using</code>):</strong> تعریف یوزینگ‌هایی که در تمام فایل‌های پروژه اعمال می‌شوند.</li><li><strong>استراکت‌های رکوردی (<code>Record structs</code>):</strong> افزودن قابلیت‌های رکورد (برابری ارزشی) به استراکت‌ها.</li><li><strong>سازنده‌های بدون پارامتر برای استراکت‌ها.</strong></li></ul> <hr><h3>ویژگی‌های کلیدی در نسخه‌های پیشین (C# 9 تا C# 2)</h3><h4>سی‌شارپ ۹ (C# 9.0)</h4><ul> <li><strong>رکوردها (<code>Records</code>):</strong> تعریف آسان کلاس‌های فقط‌خواندنی و غیرقابل تغییر همراه با عملگر <code>with</code>.</li><li><strong>دستورات سطح بالا (<code>Top-level statements</code>):</strong> نوشتن برنامه بدون نیاز به تعریف سنتی کلاس <code>Program</code> و متد <code>Main</code>:<pre class="hljs"><code>Console.WriteLine(<span class="hljs-string">&quot;Hello, World!&quot;</span>);
+</code></pre></li><li><strong>پروپرتی‌های <code>init-only</code>:</strong> پروپرتی‌هایی که فقط هنگام ساخت شیء قابل مقداردهی هستند.</li></ul> <h4>سی‌شارپ ۸ (C# 8.0)</h4><ul> <li><strong>نوع‌های ارجاعی نال‌پذیر (<code>Nullable Reference Types</code>):</strong> محافظت قدرتمند کامپایلر در برابر خطای کشندهٔ <code>NullReferenceException</code>.</li><li><strong>جریان‌های ناهمگام (<code>Async Streams</code>):</strong> پشتیبانی از <code>await foreach</code> با اینترفیس <code>IAsyncEnumerable&lt;T&gt;</code>.</li><li><strong>عبارت‌های سوئیچ مدرن (<code>Switch expressions</code>):</strong> ساختاری شبیه به تطبیق الگوی زبان‌های تابعی.</li><li><strong>بازه و اندیس‌ها (<code>Indices and Ranges</code>):</strong> کار با عناصر از انتهای آرایه با عملگر <code>^</code> و برش با <code>..</code>.</li></ul> <h4>سی‌شارپ ۷ (C# 7.x)</h4><ul> <li><strong>تاپل‌ها (<code>Tuples</code>):</strong> بازگرداندن چندین مقدار از یک متد با سینتکس فشرده <code>(int x, string y)</code>.</li><li><strong>توابع محلی (<code>Local Functions</code>):</strong> تعریف متد درون یک متد دیگر.</li><li><strong>تطبیق الگو (<code>Pattern Matching</code>):</strong> با استفاده از کلمات <code>is</code> و <code>switch</code>.</li></ul> <h4>سی‌شارپ ۶ (C# 6.0)</h4><ul> <li><strong>درون‌یابی رشته‌ها (<code>String Interpolation</code>):</strong> استفاده از علامت <code>$&quot;&quot;</code> به جای <code>string.Format</code>.</li><li><strong>عملگر شرطی نال (<code>?.</code>):</strong> پیشگیری آسان از خطای نال در فراخوانی متدها و اعضا.</li><li><strong>اعضای اکسپرشن‌بادی (<code>Expression-bodied members</code>):</strong> نوشتن متدها و پروپرتی‌های یک‌خطی با <code>=&gt;</code>.</li></ul> <h4>سی‌شارپ ۵ (C# 5.0)</h4><ul> <li><strong>انقلاب برنامه‌نویسی ناهمگام:</strong> معرفی کلمات کلیدی حیاتی <code>async</code> و <code>await</code> که شیوهٔ نوشتن کدهای غیرهمزمان در دنیای وب و نرم‌افزار را برای همیشه دگرگون ساخت.</li></ul> <h4>سی‌شارپ ۴ (C# 4.0)</h4><ul> <li><strong>انقیاد پویا (<code>Dynamic Binding</code>):</strong> کلمه کلیدی <code>dynamic</code> برای کار با اشیاء داینامیک و تبادل داده با زبان‌های تفسیری.</li><li><strong>پارامترهای اختیاری و نام‌دار (<code>Optional and Named Parameters</code>).</strong></li></ul> <h4>سی‌شارپ ۳ (C# 3.0)</h4><ul> <li><strong>معرفی زبان یکپارچه پرس‌وجو (<code>LINQ</code>):</strong> بزرگ‌ترین جهش معماری داده در تاریخ زبان سی‌شارپ.</li><li><strong>عبارات لامبدا (<code>Lambda Expressions</code>) و متدهای توسعه (<code>Extension Methods</code>).</strong></li><li><strong>کلمه کلیدی <code>var</code> و نوع‌های بی‌نام (<code>Anonymous Types</code>).</strong></li></ul> <h4>سی‌شارپ ۲ (C# 2.0)</h4><ul> <li><strong>پشتیبانی از جنریک‌ها (<code>Generics</code>):</strong> ایجاد کلاس‌ها و کالکشن‌های تایپ‌امن مانند <code>&lt;List&lt;T</code>.</li><li><strong>انواع مقداری نال‌پذیر (<code>Nullable Types</code>):</strong> نوشتن <code>?int</code> برای ذخیره مقدار <code>null</code> در تایپ‌های عددی.</li><li><strong>تکرارکننده‌ها با <code>yield return</code>.</strong></li></ul> <hr><h2>جمع‌بندی فصل</h2><p>در این فصل با نقشهٔ کلان اکوسیستم دات‌نت و زبان سی‌شارپ آشنا شدیم. اکنون که درک درستی از ماهیت این زبان چندمنظوره، ایمنی نوع، معماری ران‌تایم و قابلیت‌های کلیدی جدیدترین نسخه‌های آن پیدا کرده‌اید، آماده‌اید تا در فصول بعدی وارد عمق سینتکس، گرامر، متغیرها و سازوکارهای بنیادین سی‌شارپ ۱۲ شوید.</p></article> <nav class="chapter-single-next-nav"><a href="/Gitab/books/book1/Book/02/CSharp-Language-Basics/" class="btn-next-chapter-action" id="nextChapterBtn" data-hub="/Gitab/books/book1/"> <span class="next-btn-text">فصل بعدی: مبانی زبان سی‌شارپ</span> <span class="next-btn-arrow">←</span> </a> </nav></div> <button class="fab-back-to-top" id="backToTopBtn" type="button" aria-label="رفتن به بالای صفحه" title="رفتن به بالا"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"> <polyline points="18 15 12 9 6 15"></polyline> </svg> </button></main> <footer class="footer-minimal"><div class="footer-container"> <div class="footer-top-row"><div class="footer-brand-side"> <a href="/Gitab/" class="footer-brand-anchor"> <img src="/Gitab/icone/logo.svg" alt="Gitab" width="28" height="28" loading="lazy" decoding="async"> <span class="footer-brand-title">گیتاب (Gitab)</span> </a> <p class="footer-tagline"> پلتفرم آزاد و مستقل برای ترجمهٔ دقیق و روان کتاب‌های مرجع مهندسی نرم‌افزار. </p></div> <div class="footer-nav-cols"><div class="footer-nav-col"> <span class="footer-nav-heading">موضوعات</span><ul class="footer-nav-list"> <li><a href="/Gitab/books/list-books/?cat=csharp">سی‌شارپ و دات‌نت</a></li><li><a href="/Gitab/books/list-books/?cat=clean-code">کد تمیز و بازآفرینی</a></li><li><a href="/Gitab/books/list-books/?cat=architecture">معماری و طراحی دامنه</a></li><li><a href="/Gitab/books/list-books/?cat=system">لینوکس و خط فرمان</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">بخش‌های سایت</span><ul class="footer-nav-list"> <li><a href="/Gitab/">صفحه اصلی</a></li><li><a href="/Gitab/books/list-books/">کتابخانه کامل</a></li><li><a href="/Gitab/courses/">دوره‌های آموزشی</a></li><li><a href="/Gitab/translator.html">تالار مترجمین</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">مشارکت و جامعه</span><ul class="footer-nav-list"> <li><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer">راهنمای همکاری در ترجمه</a></li><li><a href="https://github.com/hheydarian/Gitab/issues" target="_blank" rel="noopener noreferrer">پیشنهاد کتاب یا گزارش خطا</a></li></ul> </div></div> </div><div class="footer-bottom-line"> <span>© <span id="y">2026</span> Gitab — توسعه‌یافته برای جامعهٔ مهندسان نرم‌افزار ایرانی</span></div> </div></footer> <script>
   (() => {
     const root = document.documentElement;
     const btn = document.getElementById('themeToggle');
+    const sunIcon = btn ? btn.querySelector('.icon-sun') : null;
+    const moonIcon = btn ? btn.querySelector('.icon-moon') : null;
     const KEY = 'gitab-theme';
 
-    function updateTheme(s) {
-      root.setAttribute('data-theme', s);
-      const mode = s;  // فقط `dark` یا `light` خواهد بود
+    function updateTheme(mode) {
+      root.setAttribute('data-theme', mode);
       root.dataset.colorMode = mode;
-      btn.dataset.icon = mode === 'dark' ? 'moon' : 'sun';
+      if (sunIcon && moonIcon) {
+        if (mode === 'dark') {
+          sunIcon.style.display = 'inline-block';
+          moonIcon.style.display = 'none';
+        } else {
+          sunIcon.style.display = 'none';
+          moonIcon.style.display = 'inline-block';
+        }
+      }
     }
 
-    // وضعیت تم ذخیره شده از localStorage
-    let saved = localStorage.getItem(KEY) || 'light'; // پیش‌فرض روشن
+    let saved = 'dark';
+    try { saved = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
     updateTheme(saved);
 
-    // تنظیم مجدد تم هنگام تغییر وضعیت دکمه
-    btn.addEventListener('click', () => {
-      const current = localStorage.getItem(KEY) || 'light';
-      const next = current === 'dark' ? 'light' : 'dark';  // فقط دو حالت: تاریک و روشن
-      localStorage.setItem(KEY, next);
-      updateTheme(next);
-    });
+    if (btn) {
+      btn.addEventListener('click', () => {
+        let current = 'dark';
+        try { current = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+        const next = current === 'dark' ? 'light' : 'dark';
+        try { localStorage.setItem(KEY, next); } catch (e) {}
+        updateTheme(next);
+      });
+    }
 
-    // هنگام بارگذاری صفحه
     document.addEventListener('DOMContentLoaded', () => {
-      updateTheme(localStorage.getItem(KEY) || 'light');
+      let mode = 'dark';
+      try { mode = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+      updateTheme(mode);
+      const yearSpan = document.getElementById('y');
+      if (yearSpan) yearSpan.textContent = new Date().getFullYear();
     });
+
+    const mobBtn = document.getElementById('mobileMenuBtn');
+    const mobDrawer = document.getElementById('mobileDrawer');
+    if (mobBtn && mobDrawer) {
+      const setDrawerOpen = (open) => {
+        mobDrawer.classList.toggle('open', open);
+        mobBtn.classList.toggle('is-open', open);
+        mobBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        mobBtn.setAttribute('aria-label', open ? 'بستن منو' : 'باز کردن منو');
+        mobDrawer.setAttribute('aria-hidden', open ? 'false' : 'true');
+      };
+
+      mobBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        setDrawerOpen(!mobDrawer.classList.contains('open'));
+      });
+
+      mobDrawer.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => setDrawerOpen(false));
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && mobDrawer.classList.contains('open')) {
+          setDrawerOpen(false);
+        }
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!mobDrawer.contains(e.target) && !mobBtn.contains(e.target)) {
+          setDrawerOpen(false);
+        }
+      });
+    }
+
+    if ('serviceWorker' in navigator) {
+      const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+      if (isLocalhost) {
+        navigator.serviceWorker.getRegistrations().then(regs => {
+          for (const reg of regs) reg.unregister();
+        });
+        if ('caches' in window) {
+          caches.keys().then(names => {
+            for (const name of names) caches.delete(name);
+          });
+        }
+      } else {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/Gitab/sw.js').catch(() => {});
+        });
+      }
+    }
   })();
-</script>
-
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-  <script>hljs.highlightAll();</script>
-
-  <script>
+  </script> <script>
   document.querySelectorAll('pre code').forEach(block => {
+    const pre = block.parentNode;
+    if (!pre || pre.querySelector('.copy-btn')) return;
+
+    const copySvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
+    const okSvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+
     const btn = document.createElement('button');
     btn.className = 'copy-btn';
-
-    const icon = document.createElement('img');
-    icon.src = "/Gitab/icone/copy.svg";
-    icon.alt = 'Copy';
-    btn.appendChild(icon);
-
-    block.parentNode.insertBefore(btn, block);
+    btn.setAttribute('aria-label', 'کپی کد');
+    btn.setAttribute('title', 'کپی کد');
+    btn.setAttribute('type', 'button');
+    btn.innerHTML = copySvg;
+    pre.appendChild(btn);
 
     btn.addEventListener('click', async () => {
-      await navigator.clipboard.writeText(block.textContent);
-      btn.classList.add('copied');
-      setTimeout(() => btn.classList.remove('copied'), 1500);
-    });
-  });
-  </script>
-
-  <script>
-  document.body.dataset.page = window.location.pathname;
-
-  const menuBtn = document.querySelector(".menu-toggle");
-  const nav = document.querySelector(".nav");
-
-  if (menuBtn && nav) {
-    menuBtn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      nav.classList.toggle("show");
-    });
-
-    document.addEventListener("click", (e) => {
-      const clickedInsideNav = nav.contains(e.target);
-      const clickedMenuButton = menuBtn.contains(e.target);
-      if (!clickedInsideNav && !clickedMenuButton) {
-        nav.classList.remove("show");
+      try {
+        await navigator.clipboard.writeText(block.textContent);
+        btn.classList.add('copied');
+        btn.innerHTML = okSvg;
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          btn.innerHTML = copySvg;
+        }, 1800);
+      } catch (err) {
+        console.error('Copy failed:', err);
       }
     });
-  }
-  </script>
-
-  <script>
-    document.getElementById('y').textContent = new Date().getFullYear();
-  </script>
-  <script>
-document.getElementById("openDonate").addEventListener("click", () => {
-  document.getElementById("donateModal").style.display = "block";
-});
-document.getElementById("closeDonate").addEventListener("click", () => {
-  document.getElementById("donateModal").style.display = "none";
-});
-document.querySelectorAll(".copy-btn").forEach(btn => {
-  btn.addEventListener("click", () => {
-    navigator.clipboard.writeText(btn.dataset.copy);
-  
-    setTimeout(() => (btn.textContent = "کپی"), 2000);
   });
-});
-</script>
+  </script> <script>
+  (() => {
+    const article = document.getElementById('chapterArticle');
+    if (!article) return;
 
-</body>
-</html>
+    const progressBar = document.getElementById('readingProgressBar');
+    if (progressBar) {
+      window.addEventListener('scroll', () => {
+        const docElem = document.documentElement;
+        const totalHeight = docElem.scrollHeight - docElem.clientHeight;
+        if (totalHeight > 0) {
+          const progress = (window.pageYOffset / totalHeight) * 100;
+          progressBar.style.width = Math.min(100, Math.max(0, progress)) + '%';
+        }
+      }, { passive: true });
+    }
+
+    const btt = document.getElementById('backToTopBtn');
+    if (btt) {
+      window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 250) {
+          btt.classList.add('visible');
+        } else {
+          btt.classList.remove('visible');
+        }
+      }, { passive: true });
+
+      btt.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+
+    article.querySelectorAll('img').forEach(img => {
+      if (!img.hasAttribute('loading')) img.loading = 'lazy';
+      if (!img.hasAttribute('decoding')) img.decoding = 'async';
+      const parent = img.parentElement;
+      if (parent && parent.tagName === 'P') {
+        parent.style.textAlign = 'center';
+      }
+
+      img.addEventListener('error', function() {
+        const src = this.getAttribute('src');
+        if (src && src.includes('assets/image/')) {
+          const parts = src.split('assets/image/');
+          const corrected = '/Gitab/books/book1/assets/image/' + parts[1];
+          if (this.src !== corrected) {
+            this.src = corrected;
+          }
+        }
+      });
+    });
+
+    article.querySelectorAll('p').forEach(p => {
+      const trimmed = p.innerText.trim();
+      if (trimmed.startsWith('💡') || trimmed.startsWith('نکته:')) {
+        p.classList.add('react-callout', 'callout-tip');
+      } else if (trimmed.startsWith('⚠️') || trimmed.startsWith('هشدار:')) {
+        p.classList.add('react-callout', 'callout-warning');
+      } else if (trimmed.startsWith('📌') || trimmed.startsWith('مهم:')) {
+        p.classList.add('react-callout', 'callout-important');
+      } else if (trimmed.startsWith('🔹') || trimmed.startsWith('🔸')) {
+        p.classList.add('react-callout', 'callout-note');
+      }
+    });
+  })();
+  </script> <script type="speculationrules">{"prefetch":[{"where":{"and":[{"href_matches":"/Gitab/*"},{"not":{"href_matches":"/Gitab/downloads/*"}},{"not":{"selector_matches":"[download], [target='_blank']"}}]},"eagerness":"moderate"}]}</script> <script>
+  (() => {
+    if (window.HTMLScriptElement && HTMLScriptElement.supports && HTMLScriptElement.supports('speculationrules')) return;
+    const seen = new Set([window.location.href]);
+    let count = 0;
+    const prefetchLink = (e) => {
+      if (count >= 12) return;
+      const a = e.target && e.target.closest ? e.target.closest('header a, .chapter-single-next-nav a, .syllabus-chapter-item a, .btn-hero-read, .btn-card-read') : null;
+      if (!a || !a.href || a.hasAttribute('download') || a.target === '_blank') return;
+      if (a.origin !== window.location.origin || a.pathname.includes('/downloads/')) return;
+      const clean = a.href.split('#')[0];
+      if (!clean || seen.has(clean)) return;
+      seen.add(clean);
+      count++;
+      const l = document.createElement('link');
+      l.rel = 'prefetch';
+      l.href = clean;
+      document.head.appendChild(l);
+    };
+    document.addEventListener('pointerenter', prefetchLink, { capture: true, passive: true });
+    document.addEventListener('touchstart', prefetchLink, { capture: true, passive: true });
+  })();
+  </script></body></html>

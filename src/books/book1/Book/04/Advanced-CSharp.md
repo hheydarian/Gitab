@@ -7,7 +7,7 @@ title:  سی‌شارپ پیشرفته
 در این فصل، به سراغ مباحث پیشرفته زبان C# می‌رویم که بر پایه مفاهیمی بنا شده‌اند که در فصل‌های 2 و 3 بررسی کردیم.
 چهار بخش اول را باید به صورت پیوسته و پشت سر هم مطالعه کنید؛ اما بخش‌های باقی‌مانده را می‌توانید به هر ترتیبی بخوانید.
 
-### Delegates (نمایندگان) 📨
+### Delegates (نمایندگان)
 
 یک delegate یک شیء است که می‌داند چگونه یک متد را فراخوانی کند.
 
@@ -15,39 +15,39 @@ title:  سی‌شارپ پیشرفته
 
 مثال: تعریف یک نوع delegate به نام Transformer:
 
-```c#
+```csharp
 delegate int Transformer(int x);
 ```
 
 این delegate با هر متدی که بازگشتی از نوع int داشته باشد و یک پارامتر int بگیرد سازگار است. مثل این:
 
-```c#
+```csharp
 int Square(int x) { return x * x; }
 ```
 
 یا به صورت کوتاه‌تر (expression-bodied):
 
-```c#
+```csharp
 int Square(int x) => x * x;
 ```
 
-**ساختن و استفاده از یک delegate 🛠️**
+**ساختن و استفاده از یک delegate **
 
 اختصاص یک متد به یک متغیر delegate، باعث ایجاد یک نمونه delegate می‌شود:
 
-```c#
+```csharp
 Transformer t = Square;
 ```
 
 فراخوانی یک نمونه delegate دقیقاً مثل فراخوانی یک متد است:
 
-```c#
+```csharp
 int answer = t(3);   // answer برابر با 9
 ```
 
 مثال کامل:
 
-```c#
+```csharp
 Transformer t = Square;   // ایجاد نمونه delegate
 int result = t(3);        // فراخوانی delegate
 Console.WriteLine(result); // خروجی: 9
@@ -57,14 +57,14 @@ int Square(int x) => x * x;
 delegate int Transformer(int x);  // تعریف نوع delegate
 ```
 
-**مفهوم اصلی delegate 🎯**
+**مفهوم اصلی delegate **
 
 یک نمونه delegate واقعاً به عنوان نماینده‌ی caller عمل می‌کند:
 caller (فراخواننده) delegate را فراخوانی می‌کند و سپس delegate، متد هدف را فراخوانی می‌کند.
 
 این واسطه‌گری (indirection) باعث می‌شود که caller از متد هدف جدا و مستقل باشد.
 
-**نکته‌های مهم ✅**
+**نکته‌های مهم **
 
 دستور:
 
@@ -74,7 +74,7 @@ Transformer t = Square;
 
 در واقع یک میان‌بُر (shorthand) برای این است:
 
-```c#
+```csharp
 Transformer t = new Transformer(Square);
 ```
 
@@ -93,18 +93,18 @@ t.Invoke(3)
 از نظر فنی، وقتی به Square بدون پرانتز و آرگومان اشاره می‌کنیم، در حال مشخص کردن یک method group هستیم.
 اگر متد overload شده باشد، کامپایلر C# بر اساس امضای delegate انتخاب می‌کند که کدام overload مناسب است.
 
-**Delegate شبیه به Callback 📞**
+**Delegate شبیه به Callback **
 
 یک delegate مشابه چیزی است که در اصطلاح عمومی callback نامیده می‌شود.
 این مفهوم سازه‌هایی مثل function pointers در زبان C را نیز در بر می‌گیرد.
 
-### نوشتن متدهای پلاگین با استفاده از Delegateها ✨
+### نوشتن متدهای پلاگین با استفاده از Delegateها
 
 یک متغیر از نوع delegate در زمان اجرا (runtime) به یک متد نسبت داده می‌شود. این ویژگی برای نوشتن متدهای پلاگین (plug-in methods) بسیار کاربردی است.
 
 در مثال زیر، ما یک متد کمکی (utility method) به نام Transform داریم که یک عمل transform را روی هر عضو از یک آرایه‌ی عددی (integer array) اعمال می‌کند. این متد Transform یک پارامتر از نوع delegate دارد که می‌توانید برای مشخص کردن پلاگین transform از آن استفاده کنید:
 
-```c#
+```csharp
 int[] values = { 1, 2, 3 };
 Transform (values, Square);      // اتصال متد Square به Transform
 foreach (int i in values)
@@ -122,17 +122,17 @@ int Cube (int x) => x * x * x;
 delegate int Transformer (int x);
 ```
 
-🔹 در اینجا اگر در خط دوم به‌جای Square از Cube استفاده کنیم، تبدیل روی اعداد به‌صورت مکعب (توان سوم) انجام می‌شود.
+ در اینجا اگر در خط دوم به‌جای Square از Cube استفاده کنیم، تبدیل روی اعداد به‌صورت مکعب (توان سوم) انجام می‌شود.
 
-🔹 متد Transform یک higher-order function است، چون یک تابع (delegate) را به‌عنوان آرگومان می‌گیرد. (هر متدی که یک delegate را برگرداند نیز یک higher-order function محسوب می‌شود.)
+ متد Transform یک higher-order function است، چون یک تابع (delegate) را به‌عنوان آرگومان می‌گیرد. (هر متدی که یک delegate را برگرداند نیز یک higher-order function محسوب می‌شود.)
 
-### اهداف متد در Delegateها: Instance و Static ⚡
+### اهداف متد در Delegateها: Instance و Static
 
 یک متد هدف (target method) برای یک delegate می‌تواند محلی (local)، ایستا (static) یا نمونه‌ای (instance) باشد.
 
 مثال یک متد static به‌عنوان هدف delegate:
 
-```c#
+```csharp
 Transformer t = Test.Square;
 Console.WriteLine (t(10));      // 100
 
@@ -146,7 +146,7 @@ delegate int Transformer (int x);
 
 مثال یک متد instance به‌عنوان هدف delegate:
 
-```c#
+```csharp
 Test test = new Test();
 Transformer t = test.Square;
 Console.WriteLine (t(10));      // 100
@@ -159,15 +159,15 @@ class Test
 delegate int Transformer (int x);
 ```
 
-🔑 زمانی که یک متد instance به یک delegate اختصاص داده می‌شود، آن delegate فقط به خود متد اشاره نمی‌کند، بلکه نمونه‌ای از کلاس که متد به آن تعلق دارد را هم نگه‌داری می‌کند.
+ زمانی که یک متد instance به یک delegate اختصاص داده می‌شود، آن delegate فقط به خود متد اشاره نمی‌کند، بلکه نمونه‌ای از کلاس که متد به آن تعلق دارد را هم نگه‌داری می‌کند.
 
-**خاصیت Target در کلاس System.Delegate 🎯**
+**خاصیت Target در کلاس System.Delegate **
 
 کلاس System.Delegate یک ویژگی به نام Target دارد که این نمونه (instance) را نشان می‌دهد (و اگر delegate به یک متد static اشاره کند، مقدارش null خواهد بود).
 
 مثال:
 
-```c#
+```csharp
 MyReporter r = new MyReporter();
 r.Prefix = "%Complete: ";
 
@@ -190,9 +190,9 @@ class MyReporter
 }
 ```
 
-✅ چون نمونه (instance) در خاصیت Target ذخیره می‌شود، طول عمر آن حداقل به اندازه طول عمر delegate گسترش می‌یابد.
+ چون نمونه (instance) در خاصیت Target ذخیره می‌شود، طول عمر آن حداقل به اندازه طول عمر delegate گسترش می‌یابد.
 
-🔖 جمع‌بندی:
+ جمع‌بندی:
 
 + Delegateها به ما اجازه می‌دهند که متدها را مثل متغیرها پاس بدهیم.
 
@@ -200,27 +200,27 @@ class MyReporter
 
 + خاصیت Target تضمین می‌کند که نمونه مربوط به متد instance تا وقتی delegate زنده است، باقی بماند.
 
-💡 این مفهوم پایه‌ای در طراحی پلاگین‌ها، کال‌بک‌ها و برنامه‌نویسی شیءگراست.
+ این مفهوم پایه‌ای در طراحی پلاگین‌ها، کال‌بک‌ها و برنامه‌نویسی شیءگراست.
 
-### نمایندگان چندپخشی (Multicast Delegates) 🎯
+### نمایندگان چندپخشی (Multicast Delegates)
 
 تمام نمونه‌های delegate در سی‌شارپ دارای قابلیت چندپخشی (multicast) هستند. این یعنی یک نمونه‌ی delegate می‌تواند نه فقط به یک متد، بلکه به یک لیست از متدها اشاره کند.
 
 عملگرهای + و += برای ترکیب کردن نمونه‌های delegate استفاده می‌شوند:
 
-```c#
+```csharp
 SomeDelegate d = SomeMethod1;
 d += SomeMethod2;
 ```
 
 خط آخر از نظر عملکرد دقیقاً معادل این است:
 
-```c#
+```csharp
 d = d + SomeMethod2;
 ```
 
 اکنون وقتی d فراخوانی شود، هم SomeMethod1 و هم SomeMethod2 اجرا می‌شوند.
-✅ توجه داشته باشید که متدها به ترتیبی که اضافه شده‌اند فراخوانی می‌شوند.
+ توجه داشته باشید که متدها به ترتیبی که اضافه شده‌اند فراخوانی می‌شوند.
 
 عملگرهای - و -= هم برای حذف یک متد از لیست متدهای یک delegate استفاده می‌شوند:
 
@@ -230,33 +230,33 @@ d -= SomeMethod1;
 
 اکنون فراخوانی d باعث می‌شود فقط SomeMethod2 اجرا شود.
 
-📌 نکته مهم:
+ نکته مهم:
 
 + وقتی روی یک متغیر delegate که مقدارش null است، عمل + یا += انجام دهید، باز هم کار می‌کند و معادل این است که به آن مقدار جدید بدهید:
 
-```c#
+```csharp
 SomeDelegate d = null;
 d += SomeMethod1;   // معادل با: d = SomeMethod1 وقتی d برابر null است
 ```
 
 + به طور مشابه، اگر روی یک delegate که فقط یک متد را نگه داشته باشد عمل -= کنید، نتیجه‌اش معادل اختصاص مقدار null به آن متغیر خواهد بود.
 
-⚡ یک نکته مهم دیگر:
+ یک نکته مهم دیگر:
 Delegates در سی‌شارپ immutable هستند. یعنی وقتی شما += یا -= را استفاده می‌کنید، در واقع یک نمونه‌ی جدید از delegate ساخته می‌شود و به متغیر موجود اختصاص داده می‌شود.
 
-📢 اگر یک delegate چندپخشی (multicast delegate) دارای نوع بازگشتی غیر از void باشد، مقدار بازگشتی که شما دریافت می‌کنید مربوط به آخرین متدی است که اجرا شده است. متدهای قبلی همچنان اجرا می‌شوند، اما مقدار بازگشتی آن‌ها نادیده گرفته می‌شود.
+ اگر یک delegate چندپخشی (multicast delegate) دارای نوع بازگشتی غیر از void باشد، مقدار بازگشتی که شما دریافت می‌کنید مربوط به آخرین متدی است که اجرا شده است. متدهای قبلی همچنان اجرا می‌شوند، اما مقدار بازگشتی آن‌ها نادیده گرفته می‌شود.
 (به همین دلیل، در بیشتر مواردی که از multicast delegate استفاده می‌شود، آن‌ها void برمی‌گردانند.)
 
-🧩 تمام انواع delegate به طور ضمنی از System.MulticastDelegate ارث‌بری می‌کنند که خودش از System.Delegate ارث‌بری می‌کند.
+ تمام انواع delegate به طور ضمنی از System.MulticastDelegate ارث‌بری می‌کنند که خودش از System.Delegate ارث‌بری می‌کند.
 کامپایلر سی‌شارپ تمام عملیات +، -، += و -= روی delegateها را به متدهای استاتیک Combine و Remove از کلاس System.Delegate تبدیل می‌کند.
 
-#### مثال Multicast Delegate 🛠️
+#### مثال Multicast Delegate
 
 فرض کنید یک متدی نوشته‌اید که اجرای آن زمان زیادی می‌برد. این متد می‌تواند به طور منظم میزان پیشرفت کار را به فراخواننده گزارش دهد؛ این کار با فراخوانی یک delegate انجام می‌شود.
 
 در مثال زیر، متد HardWork یک پارامتر از نوع delegate به نام ProgressReporter دریافت می‌کند و از آن برای نشان دادن پیشرفت استفاده می‌کند:
 
-```c#
+```csharp
 public delegate void ProgressReporter(int percentComplete);
 
 public class Util
@@ -274,7 +274,7 @@ public class Util
 
 برای مانیتور کردن میزان پیشرفت، می‌توانیم یک نمونه‌ی Multicast Delegate به نام p بسازیم تا پیشرفت هم‌زمان توسط دو متد مستقل بررسی شود:
 
-```c#
+```csharp
 ProgressReporter p = WriteProgressToConsole;
 p += WriteProgressToFile;
 
@@ -288,7 +288,7 @@ void WriteProgressToFile(int percentComplete)
                                     percentComplete.ToString());
 ```
 
-🔍 در اینجا چه اتفاقی می‌افتد؟
+ در اینجا چه اتفاقی می‌افتد؟
 
 1. ابتدا یک delegate از نوع ProgressReporter ساخته می‌شود و به متد WriteProgressToConsole اشاره می‌کند.
 
@@ -301,23 +301,23 @@ void WriteProgressToFile(int percentComplete)
 
 + WriteProgressToFile مقدار پیشرفت را در یک فایل progress.txt ذخیره می‌کند.
 
-📊 نتیجه نهایی:
+ نتیجه نهایی:
 
 + شما همزمان در کنسول می‌بینید که پیشرفت کار چند درصد است.
 
 + یک فایل متنی هم دارید که همان اطلاعات را ذخیره می‌کند.
 
-### انواع Delegate عمومی (Generic Delegate Types) ⚡
+### انواع Delegate عمومی (Generic Delegate Types)
 
 یک delegate می‌تواند شامل پارامترهای عمومی (Generic Type Parameters) باشد:
 
-```c#
+```csharp
 public delegate T Transformer<T>(T arg);
 ```
 
 با چنین تعریفی می‌توانیم یک متد ابزار عمومی (Utility Method) بنویسیم که روی هر نوع داده‌ای کار کند:
 
-```c#
+```csharp
 int[] values = { 1, 2, 3 };
 Util.Transform(values, Square);      // اتصال متد Square
 
@@ -336,13 +336,13 @@ public class Util
 }
 ```
 
-### Delegates آماده: Func و Action ✅
+### Delegates آماده: Func و Action
 
 با معرفی generic delegates، این امکان فراهم شد که مجموعه‌ای کوچک از delegateها طراحی شوند که آن‌قدر عمومی و انعطاف‌پذیر باشند که برای متدهایی با هر نوع خروجی و هر تعداد (معقول) آرگومان قابل استفاده باشند.
 
 این delegateها همان Func و Action هستند که در فضای نام System تعریف شده‌اند:
 
-```c#
+```csharp
 delegate TResult Func<out TResult>();                
 delegate TResult Func<in T, out TResult>(T arg);          
 delegate TResult Func<in T1, in T2, out TResult>(T1 arg1, T2 arg2);
@@ -354,13 +354,13 @@ delegate void Action<in T1, in T2>(T1 arg1, T2 arg2);
 // ... ادامه دارد تا 16 پارامتر
 ```
 
-📌 این‌ها بسیار عمومی و قدرتمند هستند.
+ این‌ها بسیار عمومی و قدرتمند هستند.
 
-**جایگزینی Transformer با Func 🔄**
+**جایگزینی Transformer با Func **
 
 در مثال قبلی، به جای تعریف delegate اختصاصی Transformer، می‌توانستیم از Func استفاده کنیم:
 
-```c#
+```csharp
 public static void Transform<T>(T[] values, Func<T, T> transformer)
 {
     for (int i = 0; i < values.Length; i++)
@@ -374,22 +374,22 @@ public static void Transform<T>(T[] values, Func<T, T> transformer)
 
 + دقیقاً همان چیزی است که قبلاً با Transformer<T> ساخته بودیم.
 
-**محدودیت‌ها 🚧**
+**محدودیت‌ها **
 
 تنها سناریوهای عملی که Func و Action پوشش نمی‌دهند، مواردی هستند که شامل پارامترهای ref/out یا pointer باشند.
 
-**نکته تاریخی 🕰️**
+**نکته تاریخی **
 
 زمانی که C# برای اولین بار معرفی شد، هنوز generics وجود نداشت. به همین دلیل، Func و Action هم وجود نداشتند.
 به همین خاطر، بخش زیادی از کتابخانه‌ی .NET از delegateهای سفارشی استفاده می‌کند، نه از Func و Action.
 
-### مقایسه Delegate‌ها و Interface‌ها ⚔️
+### مقایسه Delegate‌ها و Interface‌ها
 
 هر مسئله‌ای که با یک delegate حل می‌شود، می‌تواند با یک interface هم حل شود.
 
 به‌عنوان مثال، می‌توانیم نمونه‌ی اولیه‌مان را با استفاده از یک interface به نام ITransformer بازنویسی کنیم، به جای اینکه از delegate استفاده کنیم:
 
-```c#
+```csharp
 int[] values = { 1, 2, 3 };
 Util.TransformAll(values, new Squarer());
 
@@ -416,17 +416,17 @@ class Squarer : ITransformer
 }
 ```
 
-چه زمانی delegate انتخاب بهتری از interface است؟ ✅
+چه زمانی delegate انتخاب بهتری از interface است؟ 
 
 طراحی با delegate ممکن است انتخاب بهتری باشد اگر یک یا چند مورد زیر برقرار باشند:
 
-+ 🔹 interface فقط یک متد تعریف کرده باشد.
++  interface فقط یک متد تعریف کرده باشد.
 
-+ 🔹 نیاز به multicast (اتصال چند متد به یک delegate) داشته باشیم.
++  نیاز به multicast (اتصال چند متد به یک delegate) داشته باشیم.
 
-+ 🔹 یک subscriber مجبور باشد چند بار یک interface را پیاده‌سازی کند.
++  یک subscriber مجبور باشد چند بار یک interface را پیاده‌سازی کند.
 
-**بررسی مثال 🔍**
+**بررسی مثال **
 
 در مثال ITransformer:
 
@@ -440,7 +440,7 @@ class Squarer : ITransformer
 
 مثلاً:
 
-```c#
+```csharp
 int[] values = { 1, 2, 3 };
 Util.TransformAll(values, new Cuber());
 
@@ -458,21 +458,21 @@ class Cuber : ITransformer
 }
 ```
 
-📌 نتیجه:
+ نتیجه:
 
 + با delegateها، پیاده‌سازی ساده‌تر و منعطف‌تر است (می‌توانیم به‌راحتی متدهای مختلفی مثل مربع یا مکعب را پاس بدهیم).
 
 + با interfaceها، مجبوریم برای هر عملگر یک کلاس جدید بسازیم.
   
-### سازگاری Delegate ها ⚖️
+### سازگاری Delegate ها
 
-#### سازگاری نوع (Type Compatibility) 🏷️
+#### سازگاری نوع (Type Compatibility)
 
 تمام نوع‌های delegate با هم ناسازگار هستند، حتی اگر امضا (signature) آن‌ها یکی باشد:
 
-```c#
+```csharp
 D1 d1 = Method1;
-D2 d2 = d1;   // ❌ خطای زمان کامپایل
+D2 d2 = d1;   //  خطای زمان کامپایل
 
 void Method1() { }
 
@@ -480,17 +480,17 @@ delegate void D1();
 delegate void D2();
 ```
 
-🔹 اما این حالت مجاز است:
+ اما این حالت مجاز است:
 
 ```
-D2 d2 = new D2(d1);   // ✅ درست
+D2 d2 = new D2(d1);   //  درست
 ```
 
-**مقایسه‌ی برابری (Equality) ✅**
+**مقایسه‌ی برابری (Equality) **
 
 دو نمونه‌ی delegate وقتی برابر محسوب می‌شوند که به یک متد یکسان اشاره کنند:
 
-```c#
+```csharp
 D d1 = Method1;
 D d2 = Method1;
 
@@ -501,9 +501,9 @@ void Method1() { }
 delegate void D();
 ```
 
-🔹 در مورد multicast delegate‌ها هم، برابری وقتی برقرار است که به همان متدها و به همان ترتیب اشاره کنند.
+ در مورد multicast delegate‌ها هم، برابری وقتی برقرار است که به همان متدها و به همان ترتیب اشاره کنند.
 
-#### سازگاری پارامتر (Parameter Compatibility) 🔄
+#### سازگاری پارامتر (Parameter Compatibility)
 
 وقتی یک متد را فراخوانی می‌کنید، می‌توانید آرگومانی بدهید که از نوع خاص‌تر از پارامتر متد باشد. این رفتار معمولی polymorphism است.
 
@@ -511,7 +511,7 @@ delegate void D();
 
 مثال:
 
-```c#
+```csharp
 StringAction sa = new StringAction(ActOnObject);
 sa("hello");
 
@@ -520,11 +520,11 @@ void ActOnObject(object o) => Console.WriteLine(o);   // خروجی: hello
 delegate void StringAction(string s);
 ```
 
-🔹 در اینجا StringAction یک متد را با پارامتر string فراخوانی می‌کند.
-🔹 اما متدی که واقعا اجرا می‌شود (ActOnObject) پارامترش از نوع object است.
-🔹 در این حالت، آرگومان string به‌طور خودکار تبدیل به object (upcast) می‌شود.
+ در اینجا StringAction یک متد را با پارامتر string فراخوانی می‌کند.
+ اما متدی که واقعا اجرا می‌شود (ActOnObject) پارامترش از نوع object است.
+ در این حالت، آرگومان string به‌طور خودکار تبدیل به object (upcast) می‌شود.
 
-**3. ارتباط با الگوی استاندارد Event 🎯**
+**3. ارتباط با الگوی استاندارد Event **
 
 الگوی استاندارد event در C# طوری طراحی شده است که از contravariance استفاده کند.
 
@@ -532,13 +532,13 @@ delegate void StringAction(string s);
 
 + بنابراین می‌توانید یک متد داشته باشید که توسط دو delegate مختلف فراخوانی شود:
 
-  + یکی رویداد MouseEventArgs پاس بدهد 🖱️
+  + یکی رویداد MouseEventArgs پاس بدهد 
 
-  + دیگری KeyEventArgs پاس بدهد ⌨️
+  + دیگری KeyEventArgs پاس بدهد ⌨
 
 این کار انعطاف‌پذیری بالایی در مدیریت رویدادها به شما می‌دهد.
 
-📌 خلاصه:
+ خلاصه:
 
 + delegate type ها حتی با امضای یکسان هم ناسازگار هستند.
 
@@ -548,16 +548,16 @@ delegate void StringAction(string s);
 
 + event pattern از همین ویژگی برای پشتیبانی از انواع مختلف رویدادها استفاده می‌کند.
 
-#### سازگاری نوع بازگشتی در Delegateها (Return Type Compatibility) 🔄
+#### سازگاری نوع بازگشتی در Delegateها (Return Type Compatibility)
 
 همان‌طور که وقتی یک متد را فراخوانی می‌کنید ممکن است نوعی خاص‌تر از چیزی که انتظار داشتید برگردد (رفتار معمولی polymorphism)؛ در مورد delegate‌ها هم همین موضوع صادق است.
 
 یعنی متد هدف یک delegate می‌تواند نوع بازگشتی خاص‌تر از چیزی که delegate تعریف کرده داشته باشد.
 این ویژگی را covariance می‌نامند.
 
-مثال: Covariance در نوع بازگشتی 📝
+مثال: Covariance در نوع بازگشتی 
 
-```c#
+```csharp
 ObjectRetriever o = new ObjectRetriever(RetrieveString);
 object result = o();
 Console.WriteLine(result);   // hello
@@ -567,13 +567,13 @@ string RetrieveString() => "hello";
 delegate object ObjectRetriever();
 ```
 
-🔹 اینجا ObjectRetriever انتظار دارد متدی که به آن متصل است، یک object برگرداند.
-🔹 اما در واقعیت، متد RetrieveString یک string برمی‌گرداند.
-🔹 چون string زیرکلاس object است، این مجاز است ✅.
+ اینجا ObjectRetriever انتظار دارد متدی که به آن متصل است، یک object برگرداند.
+ اما در واقعیت، متد RetrieveString یک string برمی‌گرداند.
+ چون string زیرکلاس object است، این مجاز است .
 
-📌 پس: نوع بازگشتی delegate ها covariant است.
+ پس: نوع بازگشتی delegate ها covariant است.
 
-#### واریانس در Delegateهای جنریک ⚙️
+#### واریانس در Delegateهای جنریک
 
 در فصل ۳ گفتیم که اینترفیس‌های جنریک می‌توانند از covariant و contravariant استفاده کنند.
 این قابلیت برای delegate‌های جنریک هم وجود دارد.
@@ -584,49 +584,49 @@ delegate object ObjectRetriever();
 
 اگر پارامتر نوع فقط در ورودی استفاده می‌شود → با in (contravariant) علامت‌گذاری شود.
 
-**مثال ۱: Covariance در جنریک‌ها (با Func) 📤**
+**مثال ۱: Covariance در جنریک‌ها (با Func) **
 
 در فضای نام System داریم:
 
-```c#
+```csharp
 delegate TResult Func<out TResult>();
 ```
 
 این باعث می‌شود بتوانیم بنویسیم:
 
-```c#
+```csharp
 Func<string> x = () => "Hello!";
-Func<object> y = x;   // ✅ مجاز به خاطر covariance
+Func<object> y = x;   //  مجاز به خاطر covariance
 ```
 
-🔹 یعنی می‌توانیم Func<string> را به Func<object> تبدیل کنیم چون string زیرکلاس object است.
+ یعنی می‌توانیم Func<string> را به Func<object> تبدیل کنیم چون string زیرکلاس object است.
 
-**مثال ۲: Contravariance در جنریک‌ها (با Action) 📥**
+**مثال ۲: Contravariance در جنریک‌ها (با Action) **
 
 باز هم در فضای نام System:
 
-```c#
+```csharp
 delegate void Action<in T>(T arg);
 ```
 
 این باعث می‌شود:
 
-```c#
+```csharp
 Action<object> x = obj => Console.WriteLine(obj);
-Action<string> y = x;   // ✅ مجاز به خاطر contravariance
+Action<string> y = x;   //  مجاز به خاطر contravariance
 ```
 
-🔹 یعنی می‌توانیم Action<object> را به Action<string> تبدیل کنیم چون متدی که انتظار دریافت object دارد، می‌تواند string هم بگیرد.
+ یعنی می‌توانیم Action<object> را به Action<string> تبدیل کنیم چون متدی که انتظار دریافت object دارد، می‌تواند string هم بگیرد.
 
-📌 خلاصه:
+ خلاصه:
 
 + نوع بازگشتی delegate می‌تواند خاص‌تر از نوع تعریف‌شده باشد → این covariance است.
 
 + در delegate جنریک:
 
-  + نوع خروجی (out) → covariant 📤
+  + نوع خروجی (out) → covariant 
 
-  + نوع ورودی (in) → contravariant 📥
+  + نوع ورودی (in) → contravariant 
 
 این باعث می‌شود تبدیل‌ها بین delegateها به‌صورت طبیعی و بر اساس ارث‌بری انجام شوند.
 
@@ -637,7 +637,7 @@ Action<string> y = x;   // ✅ مجاز به خاطر contravariance
 + **Broadcaster** نوعی است که دارای یک فیلد delegate می‌باشد. این نوع تصمیم می‌گیرد که چه زمانی پیام را پخش کند، با **invoke** کردن delegate.
 + **Subscribers** دریافت‌کنندگان هدف متد هستند. یک subscriber تصمیم می‌گیرد چه زمانی شروع به گوش دادن کند و چه زمانی آن را متوقف کند، با استفاده از عملگرهای `+=` و `-=` روی delegate مربوط به broadcaster. یک subscriber درباره دیگر subscribers اطلاعی ندارد و در عملکرد آن‌ها دخالتی نمی‌کند.
 
-### رویدادها در C# پیشرفته ⚡
+### رویدادها در C# پیشرفته
 
 رویدادها یک ویژگی زبانی هستند که این الگو را رسمی می‌کنند. یک **event** یک ساختار است که تنها زیرمجموعه‌ای از قابلیت‌های delegate را که برای مدل **broadcaster/subscriber** لازم است، در معرض قرار می‌دهد. هدف اصلی رویدادها جلوگیری از دخالت subscribers در عملکرد یکدیگر است.
 
@@ -656,9 +656,9 @@ public class Broadcaster
 
 کدی که داخل نوع **Broadcaster** قرار دارد، دسترسی کامل به **PriceChanged** دارد و می‌تواند آن را مانند یک delegate معمولی مدیریت کند. کدهای خارج از **Broadcaster** تنها می‌توانند عملیات `+=` و `-=` را روی رویداد **PriceChanged** انجام دهند.
 
-✅ ادامه‌ی متن را ارسال کنید تا ترجمه بعدی را آماده کنم.
+ ادامه‌ی متن را ارسال کنید تا ترجمه بعدی را آماده کنم.
 
-### چگونه رویدادها در درون کار می‌کنند؟ 🔍
+### چگونه رویدادها در درون کار می‌کنند؟
 
 وقتی یک رویداد به شکل زیر تعریف می‌کنید:
 
@@ -671,7 +671,7 @@ public class Broadcaster
 
 سه اتفاق در پشت صحنه رخ می‌دهد:
 
-1️⃣ ابتدا، **کامپایلر** تعریف رویداد را به چیزی شبیه به کد زیر ترجمه می‌کند:
+1⃣ ابتدا، **کامپایلر** تعریف رویداد را به چیزی شبیه به کد زیر ترجمه می‌کند:
 
 ```csharp
 PriceChangedHandler priceChanged;   // delegate خصوصی
@@ -685,11 +685,11 @@ public event PriceChangedHandler PriceChanged
 
 کلیدواژه‌های **add** و **remove** نشان‌دهنده **accessorهای رویداد صریح** هستند—که عملکردی شبیه به **accessorهای property** دارند. بعداً درباره نحوه نوشتن این‌ها توضیح خواهیم داد.
 
-2️⃣ دوم، کامپایلر داخل کلاس **Broadcaster** به دنبال ارجاعات به **PriceChanged** می‌گردد که عملیات دیگری غیر از `+=` یا `-=` انجام می‌دهند و آن‌ها را به فیلد delegate زیرین یعنی **priceChanged** هدایت می‌کند.
+2⃣ دوم، کامپایلر داخل کلاس **Broadcaster** به دنبال ارجاعات به **PriceChanged** می‌گردد که عملیات دیگری غیر از `+=` یا `-=` انجام می‌دهند و آن‌ها را به فیلد delegate زیرین یعنی **priceChanged** هدایت می‌کند.
 
-3️⃣ سوم، کامپایلر عملیات `+=` و `-=` روی رویداد را به فراخوانی **add** و **remove** accessorهای رویداد ترجمه می‌کند. جالب است بدانید که این کار باعث می‌شود رفتار `+=` و `-=` وقتی روی رویدادها اعمال می‌شوند، منحصربه‌فرد باشد: برخلاف سایر سناریوها، این‌ها تنها یک میانبر برای `+` و `-` به همراه انتساب نیستند.
+3⃣ سوم، کامپایلر عملیات `+=` و `-=` روی رویداد را به فراخوانی **add** و **remove** accessorهای رویداد ترجمه می‌کند. جالب است بدانید که این کار باعث می‌شود رفتار `+=` و `-=` وقتی روی رویدادها اعمال می‌شوند، منحصربه‌فرد باشد: برخلاف سایر سناریوها، این‌ها تنها یک میانبر برای `+` و `-` به همراه انتساب نیستند.
 
-مثالی را در نظر بگیرید 📈
+مثالی را در نظر بگیرید 
 
 کلاس **Stock** رویداد **PriceChanged** خود را هر بار که قیمت سهام تغییر می‌کند، فعال می‌کند:
 
@@ -723,7 +723,7 @@ public class Stock
 + پاک کردن تمام subscribers با انتساب **PriceChanged** به `null`.
 + ارسال پیام به subscribers دیگر با invoke کردن delegate.
 
-### الگوی استاندارد رویدادها 🛠️
+### الگوی استاندارد رویدادها
 
 در تقریباً همه مواردی که رویدادها در کتابخانه‌های .NET تعریف می‌شوند، تعریف آن‌ها مطابق یک الگوی استاندارد است تا یکپارچگی بین کدهای کتابخانه و کاربر حفظ شود. در مرکز این الگو، کلاس **System.EventArgs** قرار دارد؛ یک کلاس از پیش تعریف‌شده در .NET که هیچ عضوی ندارد (به جز فیلد استاتیک **Empty**). **EventArgs** کلاس پایه‌ای برای انتقال اطلاعات مربوط به یک رویداد است.
 
@@ -745,13 +745,13 @@ public class PriceChangedEventArgs : System.EventArgs
 
 برای استفاده مجدد، subclass EventArgs معمولاً بر اساس اطلاعاتی که شامل می‌شود نامگذاری می‌شود، نه بر اساس رویدادی که برای آن استفاده می‌شود. داده‌ها معمولاً به صورت property یا فیلد فقط‌خواندنی ارائه می‌شوند.
 
-### انتخاب یا تعریف delegate برای رویداد 🎯
+### انتخاب یا تعریف delegate برای رویداد
 
 سه قاعده وجود دارد:
 
-1️⃣ نوع بازگشتی باید **void** باشد.
-2️⃣ دو آرگومان دریافت کند: آرگومان اول از نوع **object** و آرگومان دوم یک subclass از **EventArgs**. آرگومان اول نشان‌دهنده broadcaster و آرگومان دوم شامل اطلاعات اضافی برای انتقال است.
-3️⃣ نام delegate باید با **EventHandler** پایان یابد.
+1⃣ نوع بازگشتی باید **void** باشد.
+2⃣ دو آرگومان دریافت کند: آرگومان اول از نوع **object** و آرگومان دوم یک subclass از **EventArgs**. آرگومان اول نشان‌دهنده broadcaster و آرگومان دوم شامل اطلاعات اضافی برای انتقال است.
+3⃣ نام delegate باید با **EventHandler** پایان یابد.
 
 .NET یک delegate عمومی به نام **System.EventHandler<>** برای کمک به این کار تعریف کرده است:
 
@@ -767,7 +767,7 @@ public delegate void PriceChangedHandler(object sender, PriceChangedEventArgs e)
 
 به دلایل تاریخی، بیشتر رویدادها در کتابخانه‌های .NET از این روش استفاده می‌کنند.
 
-### تعریف رویداد با delegate انتخاب‌شده 🔧
+### تعریف رویداد با delegate انتخاب‌شده
 
 ```csharp
 public class Stock
@@ -809,7 +809,7 @@ PriceChanged?.Invoke(this, e);
 
 این روش هم **thread-safe** و هم مختصر است و بهترین روش عمومی برای فراخوانی رویدادها محسوب می‌شود.
 
-### مثال کامل 💻
+### مثال کامل
 
 ```csharp
 using System;
@@ -895,7 +895,7 @@ public class Stock
 }
 ```
 
-**Accessorهای رویدادها 🔑**
+**Accessorهای رویدادها **
 
 Accessorهای یک رویداد، پیاده‌سازی‌های عملگرهای `+=` و `-=` آن هستند. به طور پیش‌فرض، این accessors به صورت ضمنی توسط کامپایلر پیاده‌سازی می‌شوند. به مثال زیر توجه کنید:
 
@@ -923,9 +923,9 @@ public event EventHandler PriceChanged
 
 با استفاده از explicit event accessors، می‌توان استراتژی‌های پیچیده‌تری برای ذخیره و دسترسی به delegate زیرین اعمال کرد. سه سناریو که این کاربرد دارد:
 
-1️⃣ وقتی accessors تنها به عنوان واسطه برای کلاس دیگری هستند که رویداد را پخش می‌کند.
-2️⃣ وقتی کلاس تعداد زیادی رویداد دارد اما اغلب تنها تعداد کمی subscriber وجود دارد، مثل کنترل‌های ویندوز. در این موارد بهتر است delegateهای subscribers را در یک **dictionary** ذخیره کنیم، زیرا dictionary حافظه کمتری نسبت به ده‌ها فیلد delegate خالی مصرف می‌کند.
-3️⃣ هنگام پیاده‌سازی explicit یک interface که رویدادی را تعریف کرده است.
+1⃣ وقتی accessors تنها به عنوان واسطه برای کلاس دیگری هستند که رویداد را پخش می‌کند.
+2⃣ وقتی کلاس تعداد زیادی رویداد دارد اما اغلب تنها تعداد کمی subscriber وجود دارد، مثل کنترل‌های ویندوز. در این موارد بهتر است delegateهای subscribers را در یک **dictionary** ذخیره کنیم، زیرا dictionary حافظه کمتری نسبت به ده‌ها فیلد delegate خالی مصرف می‌کند.
+3⃣ هنگام پیاده‌سازی explicit یک interface که رویدادی را تعریف کرده است.
 
 نمونه‌ای برای مورد سوم:
 
@@ -947,7 +947,7 @@ class Foo : IFoo
 
 ---
 
-**Modifierهای رویدادها ⚡**
+**Modifierهای رویدادها **
 
 مثل متدها، رویدادها می‌توانند **virtual**، **overridden**، **abstract** یا **sealed** باشند. همچنین می‌توانند **static** باشند:
 
@@ -1031,7 +1031,7 @@ Func<string> greeter = () => "Hello, world";
 var greeter = () => "Hello, world";
 ```
 
-### مشخص کردن صریح نوع پارامتر و نوع بازگشتی Lambda 🔧
+### مشخص کردن صریح نوع پارامتر و نوع بازگشتی Lambda
 
 کامپایلر معمولاً می‌تواند نوع پارامترهای lambda را به صورت زمینه‌ای استنتاج کند. وقتی این امکان وجود نداشته باشد، باید نوع هر پارامتر را به صورت صریح مشخص کنید. به دو متد زیر توجه کنید:
 
@@ -1077,7 +1077,7 @@ var sqr = int (int x) => x;
 
 ---
 
-### پارامترهای پیش‌فرض Lambda (C# 12) 🎯
+### پارامترهای پیش‌فرض Lambda (C# 12)
 
 مانند متدهای معمولی که می‌توانند پارامتر اختیاری داشته باشند:
 
@@ -1097,7 +1097,7 @@ print();
 
 ---
 
-### دسترسی به متغیرهای خارجی (Outer Variables) 🌐
+### دسترسی به متغیرهای خارجی (Outer Variables)
 
 یک lambda می‌تواند به هر متغیری که در محل تعریفش قابل دسترسی است، ارجاع دهد. این متغیرها **outer variables** نامیده می‌شوند و می‌توانند شامل متغیرهای محلی، پارامترها و فیلدها باشند:
 
@@ -1165,7 +1165,7 @@ static void Main()
 
 ---
 
-### Lambdaهای استاتیک ⚡
+### Lambdaهای استاتیک
 
 زمانی که lambda متغیرهای محلی، پارامترها، فیلدهای instance یا **this** را capture می‌کند، کامپایلر ممکن است کلاس خصوصی ایجاد کند تا ارجاع به داده‌ها ذخیره شود. این باعث مصرف حافظه می‌شود.
 
@@ -1186,7 +1186,7 @@ lambda بدون capture، یک instance delegate کش شده را مجدداً �
 
 lambdaهای استاتیک هنوز می‌توانند به متغیرها و ثابت‌های static دسترسی داشته باشند. **static** تنها نقش بررسی دارد و تاثیری بر IL تولیدشده ندارد؛ بدون آن، کامپایلر در صورت نیاز closure تولید می‌کند، اما حتی آن زمان ترفندهایی برای کاهش هزینه دارد.
 
-### گرفتن متغیرهای تکرار (Capturing iteration variables) 🔄
+### گرفتن متغیرهای تکرار (Capturing iteration variables)
 
 وقتی در یک حلقه‌ی `for` متغیر تکرار (iteration variable) را **Capture** می‌کنید، زبان C# با آن طوری رفتار می‌کند که انگار **بیرون از حلقه تعریف شده باشد**. یعنی در هر تکرار، همان متغیر گرفته می‌شود. به همین دلیل برنامه‌ی زیر به‌جای نمایش `012`، مقدار `333` را چاپ می‌کند:
 
@@ -1224,13 +1224,13 @@ for (int i = 0; i < 3; i++)
 foreach (Action a in actions) a();     // 012
 ```
 
-چون در هر تکرار، یک متغیر جدید `loopScopedi` ساخته می‌شود، هر **closure** یک متغیر متفاوت را می‌گیرد. ✨
+چون در هر تکرار، یک متغیر جدید `loopScopedi` ساخته می‌شود، هر **closure** یک متغیر متفاوت را می‌گیرد. 
 
-> **نکته:** قبل از نسخه‌ی C# 5.0، حلقه‌های `foreach` هم همین رفتار را داشتند و باعث سردرگمی می‌شدند. چون متغیر در `foreach` تغییرناپذیر است، انتظار می‌رفت محلی باشد، ولی نبود. خوشبختانه این موضوع اصلاح شده و حالا می‌توانید متغیرهای `foreach` را بدون نگرانی Capture کنید. ✅
+> **نکته:** قبل از نسخه‌ی C# 5.0، حلقه‌های `foreach` هم همین رفتار را داشتند و باعث سردرگمی می‌شدند. چون متغیر در `foreach` تغییرناپذیر است، انتظار می‌رفت محلی باشد، ولی نبود. خوشبختانه این موضوع اصلاح شده و حالا می‌توانید متغیرهای `foreach` را بدون نگرانی Capture کنید. 
 
 ---
 
-### مقایسه‌ی **Lambda Expressions** و **Local Methods** 🆚
+### مقایسه‌ی **Lambda Expressions** و **Local Methods**
 
 عملکرد **local methods** (بخش «Local methods» در صفحه 106) شباهت زیادی به **lambda expressions** دارد، اما سه مزیت دارند:
 
@@ -1250,7 +1250,7 @@ public void Foo(Func<int, bool> predicate) { ... }
 
 ---
 
-### متدهای ناشناس (Anonymous Methods) 🕶️
+### متدهای ناشناس (Anonymous Methods)
 
 **Anonymous methods** قابلیتی در C# 2.0 بودند که تا حد زیادی با **lambda expressions** در C# 3.0 جایگزین شدند. متدهای ناشناس مثل lambda هستند، اما امکانات زیر را ندارند:
 
@@ -1291,7 +1291,7 @@ Clicked += delegate { Console.WriteLine("clicked"); };
 
 ---
 
-### دستورات try و مدیریت استثناها (try Statements and Exceptions) ⚠️
+### دستورات try و مدیریت استثناها (try Statements and Exceptions)
 
 یک دستور `try` یک بلوک کد را مشخص می‌کند که ممکن است خطا رخ دهد یا نیاز به پاکسازی داشته باشد. بلوک `try` باید حداقل با یک `catch` یا یک `finally` (یا هر دو) همراه باشد:
 
@@ -1364,7 +1364,7 @@ program completed
 
 ---
 
-### بخش catch (بخش گرفتن استثناها) 🛡️
+### بخش catch (بخش گرفتن استثناها)
 
 یک **catch clause** مشخص می‌کند که چه نوع استثنایی (**Exception**) باید گرفته شود. این نوع باید یا **System.Exception** باشد یا یک زیرکلاس از **System.Exception**.
 
@@ -1423,7 +1423,7 @@ catch { ... }
 
 ---
 
-### Exception filters (فیلترهای استثنا) 🔍
+### Exception filters (فیلترهای استثنا)
 
 می‌توانید در بخش **catch** یک فیلتر استثنا با استفاده از کلمه **when** مشخص کنید:
 
@@ -1449,7 +1449,7 @@ catch (WebException ex) when (ex.Status == WebExceptionStatus.SendFailure)
 
 ---
 
-### بخش finally (بخش پایانی) 🧹
+### بخش finally (بخش پایانی)
 
 بخش **finally** همیشه اجرا می‌شود—چه استثنا رخ دهد چه نه، و چه **try** به طور کامل اجرا شود یا خیر. معمولاً از **finally** برای کدهای پاک‌سازی استفاده می‌کنیم.
 
@@ -1488,7 +1488,7 @@ void ReadFile()
 
 ---
 
-### دستور `using` ♻️
+### دستور `using`
 
 بسیاری از کلاس‌ها منابع مدیریت‌نشده (Unmanaged Resources) مانند **دستگیره‌های فایل (File Handles)**، **دستگیره‌های گرافیکی (Graphics Handles)** یا **اتصالات پایگاه داده (Database Connections)** را در خود جای می‌دهند. این کلاس‌ها اینترفیس **`System.IDisposable`** را پیاده‌سازی می‌کنند که تنها یک متد بدون پارامتر به نام **`Dispose`** دارد و برای پاک‌سازی این منابع استفاده می‌شود.
 
@@ -1520,7 +1520,7 @@ finally
 
 ---
 
-### اعلان‌های `using` (Using Declarations) ✍️
+### اعلان‌های `using` (Using Declarations)
 
 اگر در **C# 8 و نسخه‌های بالاتر**، براکت‌ها و بلوک کد بعد از دستور **`using`** حذف شوند، این دستور تبدیل به **اعلان using** می‌شود. در این حالت، منبع زمانی آزاد می‌شود که اجرای برنامه از بلوک محصورکننده خارج گردد.
 
@@ -1539,7 +1539,7 @@ if (File.Exists("file.txt"))
 
 ---
 
-### پرتاب استثنا (Throwing Exceptions) 🚀
+### پرتاب استثنا (Throwing Exceptions)
 
 استثناها (Exceptions) می‌توانند هم توسط **زمان اجرا (Runtime)** و هم در **کدهای کاربر** پرتاب شوند. در مثال زیر، متد **`Display`** یک استثنای **`System.ArgumentNullException`** را پرتاب می‌کند:
 
@@ -1572,7 +1572,7 @@ void Display(string name)
 
 ---
 
-### عبارت‌های `throw` (Throw Expressions) 🎯
+### عبارت‌های `throw` (Throw Expressions)
 
 عبارت **`throw`** می‌تواند به‌عنوان یک **عبارت (Expression)** در متدهای **Expression-bodied** استفاده شود:
 
@@ -1591,7 +1591,7 @@ string ProperCase(string value) =>
 
 ---
 
-### پرتاب دوباره استثنا (Rethrowing an Exception) 🔄
+### پرتاب دوباره استثنا (Rethrowing an Exception)
 
 می‌توانید یک استثنا را گرفته و دوباره پرتاب کنید:
 
@@ -1635,7 +1635,7 @@ catch (FormatException ex)
 
 ---
 
-### ویژگی‌های کلیدی **System.Exception** ⚙️
+### ویژگی‌های کلیدی **System.Exception**
 
 مهم‌ترین ویژگی‌های **System.Exception** به شرح زیر هستند:
 
@@ -1652,7 +1652,7 @@ catch (FormatException ex)
 
 ---
 
-### انواع رایج استثناها 🚨
+### انواع رایج استثناها
 
 انواع زیر از استثناها به‌طور گسترده در سراسر **CLR** و کتابخانه‌های **.NET** استفاده می‌شوند. شما می‌توانید آن‌ها را خودتان پرتاب کنید یا از آن‌ها به‌عنوان کلاس پایه برای ساخت انواع سفارشی استثنا استفاده نمایید:
 
@@ -1685,7 +1685,7 @@ throw null;
 
 ---
 
-### الگوی متدهای **TryXXX** 🔄
+### الگوی متدهای **TryXXX**
 
 هنگام نوشتن یک متد، زمانی که مشکلی پیش می‌آید، دو انتخاب دارید: یا یک کد خطا برگردانید یا یک استثنا پرتاب کنید. به‌طور کلی، زمانی که خطا خارج از روند عادی برنامه باشد یا زمانی که انتظار ندارید فراخواننده بتواند با آن مقابله کند، استثنا پرتاب می‌کنید.
 
@@ -1712,7 +1712,7 @@ public return-type XXX(input-type input)
 
 ---
 
-### جایگزین‌های استثناها 🛠️
+### جایگزین‌های استثناها
 
 همانند **int.TryParse**، یک تابع می‌تواند با برگرداندن یک کد خطا از طریق مقدار بازگشتی یا پارامتر به تابع فراخواننده، شکست را اطلاع دهد. اگرچه این روش برای خطاهای ساده و قابل پیش‌بینی کارآمد است، اما هنگام مواجهه با خطاهای غیرمعمول یا غیرقابل پیش‌بینی دست‌وپاگیر می‌شود، امضای متدها را شلوغ می‌کند و پیچیدگی‌های غیرضروری ایجاد می‌نماید.
 
@@ -1720,7 +1720,7 @@ public return-type XXX(input-type input)
 
 ---
 
-### شمارش (Enumeration) و پیمایشگرها (Iterators) 🔄
+### شمارش (Enumeration) و پیمایشگرها (Iterators)
 
 #### شمارش (Enumeration)
 
@@ -1777,7 +1777,7 @@ using (var enumerator = "beer".GetEnumerator())
 
 ---
 
-#### مقداردهی اولیه مجموعه‌ها (Collection Initializers) و عبارات مجموعه‌ای (Collection Expressions) 📝
+#### مقداردهی اولیه مجموعه‌ها (Collection Initializers) و عبارات مجموعه‌ای (Collection Expressions)
 
 شما می‌توانید در یک مرحله، یک شیء شمارش‌پذیر را ایجاد و مقداردهی کنید:
 
@@ -1844,7 +1844,7 @@ var dict = new Dictionary<int, string>()
 
 ---
 
-#### پیمایشگرها (Iterators) ⚙️
+#### پیمایشگرها (Iterators)
 
 در حالی که عبارت `foreach` **مصرف‌کننده** یک شمارش‌گر است، **Iterator (پیمایشگر)** **تولیدکننده** یک شمارش‌گر است.
 مثال زیر یک پیمایشگر است که یک دنباله از اعداد فیبوناچی را تولید می‌کند (هر عدد حاصل جمع دو عدد قبلی است):
@@ -1884,7 +1884,7 @@ IEnumerable<int> Fibs(int fibCount)
 
 ---
 
-### معنای **Iterator** (تکرارکننده) 🔄
+### معنای **Iterator** (تکرارکننده)
 
 یک **Iterator** یا «تکرارکننده» متدی، ویژگی (Property) یا ایندکسری است که شامل یک یا چند دستور `yield` است. یک **Iterator** باید یکی از چهار رابط (Interface) زیر را برگرداند، در غیر این صورت کامپایلر خطا تولید می‌کند:
 
@@ -1937,7 +1937,7 @@ IEnumerable<string> Foo(bool breakEarly)
 
 ---
 
-### **Iteratorها** و بلوک‌های **try/catch/finally** ⚠️
+### **Iteratorها** و بلوک‌های **try/catch/finally**
 
 + استفاده از `yield return` در یک بلوک `try` که شامل بخش `catch` باشد، **مجاز نیست**:
 
@@ -1966,7 +1966,7 @@ IEnumerable<string> Foo()
 
 ---
 
-### احتیاط هنگام استفاده از **Enumeratorها** به‌صورت دستی 🔍
+### احتیاط هنگام استفاده از **Enumeratorها** به‌صورت دستی
 
 اگر شمارنده را به‌صورت دستی استفاده می‌کنید و قبل از پایان کار آن را رها کنید بدون اینکه Dispose کنید، بلوک `finally` اجرا نمی‌شود. برای جلوگیری از این مشکل، شمارنده‌ها را درون یک دستور `using` قرار دهید:
 
@@ -1980,7 +1980,7 @@ using (var enumerator = sequence.GetEnumerator())
 
 ---
 
-### ترکیب توالی‌ها (Composing Sequences) 🧩
+### ترکیب توالی‌ها (Composing Sequences)
 
 **Iteratorها** قابلیت ترکیب بالایی دارند. مثال زیر تنها اعداد **فیبوناچی زوج** را تولید می‌کند:
 
@@ -2017,13 +2017,13 @@ IEnumerable<int> EvenNumbersOnly(IEnumerable<int> sequence)
 ![Conventions-UsedThis-Book](../../../assets/image/04/Table-4-1.jpeg)
 </div>
 
-### ترکیب‌پذیری الگوی Iterator در LINQ و انواع مقدار تهی (Nullable Value Types) ✨
+### ترکیب‌پذیری الگوی Iterator در LINQ و انواع مقدار تهی (Nullable Value Types)
 
 ترکیب‌پذیری یا **Composability** در الگوی **Iterator** (تکرارکننده) بسیار مفید و کاربردی است، مخصوصاً در **LINQ**. ما این موضوع را دوباره در فصل ۸ به‌طور کامل بررسی خواهیم کرد.
 
 ---
 
-## انواع مقدار تهی (Nullable Value Types) 📝
+## انواع مقدار تهی (Nullable Value Types)
 
 در زبان C#، **Reference Types** (انواع مرجع) می‌توانند نشان‌دهنده یک مقدار موجود نباشند، یعنی مقدار آن‌ها می‌تواند `null` باشد:
 
@@ -2046,7 +2046,7 @@ Console.WriteLine(i == null);   // خروجی True
 
 ---
 
-## ساختار Nullable<T> 🛠
+## ساختار Nullable<T>
 
 در واقع `T?` معادل `System.Nullable<T>` است. این یک **Struct** سبک و تغییرناپذیر (**Immutable**) است که فقط شامل دو فیلد است:
 
@@ -2087,7 +2087,7 @@ Console.WriteLine(!i.HasValue);   // True
 
 ---
 
-## تبدیل‌های ضمنی و صریح (Implicit و Explicit Conversions) 🔄
+## تبدیل‌های ضمنی و صریح (Implicit و Explicit Conversions)
 
 تبدیل یک مقدار `T` به `T?` **ضمنی** است (احتیاجی به عمل خاصی ندارد).
 اما تبدیل از `T?` به `T` **صریح** است و نیاز به **Cast** دارد:
@@ -2102,7 +2102,7 @@ int y = (int)x;     // تبدیل صریح
 
 ---
 
-## Boxing و Unboxing در Nullable Types 🎁
+## Boxing و Unboxing در Nullable Types
 
 هنگامی که یک **T?** جعبه‌بندی (**Box**) می‌شود، مقدار ذخیره‌شده در **Heap** فقط **T** است، نه **T?**. این بهینه‌سازی ممکن است زیرا **Reference Types** می‌توانند به‌طور طبیعی `null` را نمایش دهند.
 
@@ -2114,7 +2114,7 @@ int? x = o as int?;
 Console.WriteLine(x.HasValue);   // False
 ```
 
-### عملگرهای ارتقا (Operator Lifting) 🛠️
+### عملگرهای ارتقا (Operator Lifting)
 
 ساختار **Nullable<T>** عملگرهایی مثل `<`، `>` یا حتی `==` را تعریف نمی‌کند. با این حال، کد زیر بدون هیچ مشکلی کامپایل و اجرا می‌شود:
 
@@ -2158,7 +2158,7 @@ Console.WriteLine (x + y);     // null (خط خالی چاپ می‌شود)
 
 ---
 
-### رفتار عملگرها با مقادیر `null` در Nullable 🧩
+### رفتار عملگرها با مقادیر `null` در Nullable
 
 کامپایلر بسته به نوع عملگر، منطق متفاوتی برای برخورد با مقادیر `null` در نظر می‌گیرد. در ادامه، قوانین مربوط به هر دسته از عملگرها توضیح داده شده است.
 
@@ -2208,7 +2208,7 @@ int? c = (x.HasValue && y.HasValue)
 
 ---
 
-### ترکیب انواع Nullable و Non-Nullable 🧮
+### ترکیب انواع Nullable و Non-Nullable
 
 شما می‌توانید انواع `nullable` و `non-nullable` را با هم ترکیب کنید، چون تبدیل ضمنی از `T` به `T?` وجود دارد:
 
@@ -2220,7 +2220,7 @@ int? c = a + b;   // c برابر null است - معادل a + (int?)b
 
 ---
 
-### نوع‌های Nullable و عملگرهای `&` و `|` برای `bool?` 🔹
+### نوع‌های Nullable و عملگرهای `&` و `|` برای `bool?`
 
 هنگامی که عملگرهای `&` و `|` برای عملوندهایی از نوع **bool?** استفاده می‌شوند، مقدار `null` به‌عنوان یک **مقدار ناشناخته** در نظر گرفته می‌شود. بنابراین:
 
@@ -2248,7 +2248,7 @@ Console.WriteLine (n & t);    // (null)
 
 ---
 
-### Nullable Value Types و عملگرهای کمکی (`??` و Null-Conditional) ⚡
+### Nullable Value Types و عملگرهای کمکی (`??` و Null-Conditional)
 
 نوع‌های **nullable** به‌خوبی با عملگر **Null Coalescing (`??`)** کار می‌کنند:
 
@@ -2277,7 +2277,7 @@ int length = sb?.ToString().Length ?? 0;  // اگر sb null باشد، نتیج�
 
 ---
 
-### سناریوهای استفاده از نوع‌های Nullable 💡
+### سناریوهای استفاده از نوع‌های Nullable
 
 یکی از رایج‌ترین کاربردها برای **nullable value types** نمایش مقادیر ناشناخته است. این حالت به‌ویژه در برنامه‌نویسی پایگاه داده رایج است، جایی که یک کلاس به جدول با ستون‌های nullable نگاشت می‌شود.
 
@@ -2311,7 +2311,7 @@ public class Row
 
 ---
 
-### جایگزین‌ها برای Nullable Value Types ⚖️
+### جایگزین‌ها برای Nullable Value Types
 
 قبل از اینکه nullable value types بخشی از زبان C# باشند (قبل از C# 2.0)، استراتژی‌های مختلفی برای مدیریت آن‌ها وجود داشت. یکی از این استراتژی‌ها این بود که یک مقدار خاص غیر-null را به‌عنوان **magic value** یا مقدار null فرض کنیم.
 
@@ -2336,7 +2336,7 @@ Console.WriteLine(Array.IndexOf(a, "c"));  // 0
 + فراموش کردن تست مقدار (مثل HasValue) باعث بروز خطا می‌شود، اما با nullable value types این خطا به‌صورت **InvalidOperationException** روی همان خط رخ می‌دهد.
 + قابلیت null بودن یک مقدار در نوع آن لحاظ نمی‌شود. نوع‌ها هدف برنامه را مشخص می‌کنند و به کامپایلر امکان بررسی صحت و رعایت قواعد یکنواخت را می‌دهند.
 
-### نوع‌های Nullable Reference Types 🟢
+### نوع‌های Nullable Reference Types
 
 در حالی که **nullable value types** امکان null بودن را به نوع‌های مقدار (value types) اضافه می‌کنند، **nullable reference types** (از C# 8 به بعد) برعکس عمل می‌کنند: آن‌ها مقداری از **non-nullability** را به نوع‌های مرجع (reference types) اضافه می‌کنند تا از بروز **NullReferenceException** جلوگیری کنند.
 
@@ -2344,7 +2344,7 @@ Console.WriteLine(Array.IndexOf(a, "c"));  // 0
 
 ---
 
-### فعال‌سازی Nullable Reference Types ⚙️
+### فعال‌سازی Nullable Reference Types
 
 برای فعال کردن nullable reference types، می‌توانید یکی از این روش‌ها را استفاده کنید:
 
@@ -2373,8 +2373,8 @@ Console.WriteLine(Array.IndexOf(a, "c"));  // 0
 ```csharp
 #nullable enable
 
-string s1 = null;   // هشدار کامپایلر! ❌
-string? s2 = null;  // صحیح ✅: s2 یک nullable reference type است
+string s1 = null;   // هشدار کامپایلر! 
+string? s2 = null;  // صحیح : s2 یک nullable reference type است
 ```
 
 توجه کنید که **string و string?** در زمان اجرا تفاوتی ندارند، بر خلاف **nullable value types** که چیزی واقعی به سیستم نوع اضافه می‌کنند (`Nullable<T>`).
@@ -2393,7 +2393,7 @@ class Foo { string x; }   // هشدار: x مقداردهی نشده
 
 ---
 
-### عملگر Null-Forgiving (`!`) ⚠️
+### عملگر Null-Forgiving (`!`)
 
 کامپایلر هنگام دسترسی به یک **nullable reference type** که احتمال NullReferenceException دارد، هشدار می‌دهد:
 
@@ -2407,7 +2407,7 @@ void Foo(string? s) => Console.Write(s.Length);  // هشدار
 void Foo(string? s) => Console.Write(s!.Length);
 ```
 
-⚠️ این روش خطرناک است و ممکن است همان **NullReferenceException** که می‌خواستیم جلوگیری کنیم را ایجاد کند. روش ایمن‌تر:
+ این روش خطرناک است و ممکن است همان **NullReferenceException** که می‌خواستیم جلوگیری کنیم را ایجاد کند. روش ایمن‌تر:
 
 ```csharp
 void Foo(string? s)
@@ -2432,7 +2432,7 @@ Console.WriteLine(strings[0].Length);  // هیچ هشداری تولید نمی�
 
 ---
 
-### تفکیک Annotation و Warning Contexts 🛠️
+### تفکیک Annotation و Warning Contexts
 
 فعال کردن nullable reference types با دستور `#nullable enable` یا `<Nullable>enable</Nullable>` دو کار انجام می‌دهد:
 
@@ -2458,7 +2458,7 @@ Console.WriteLine(strings[0].Length);  // هیچ هشداری تولید نمی�
 
 ---
 
-### تبدیل هشدارها به خطا ⚡
+### تبدیل هشدارها به خطا
 
 در پروژه‌های جدید، می‌توان nullable context را از ابتدا فعال کرد و حتی هشدارها را به خطا تبدیل نمود تا پروژه تا زمانی که تمام هشدارهای null رفع نشده‌اند، **قابل کامپایل نباشد**:
 
@@ -2469,7 +2469,7 @@ Console.WriteLine(strings[0].Length);  // هیچ هشداری تولید نمی�
 </PropertyGroup>
 ```
 
-### متدهای توسعه‌یافته (Extension Methods) ✨
+### متدهای توسعه‌یافته (Extension Methods)
 
 **متدهای توسعه‌یافته** امکان افزودن متدهای جدید به یک نوع موجود را بدون تغییر در تعریف اصلی آن نوع فراهم می‌کنند.
 
@@ -2594,11 +2594,11 @@ bool test1 = "Perth".IsCapitalized();  // فراخوانی StringHelper
 
 ---
 
-### نوع‌های ناشناس (Anonymous Types) و تاپل‌ها (Tuples) در C# 🟢
+### نوع‌های ناشناس (Anonymous Types) و تاپل‌ها (Tuples) در C#
 
 ---
 
-## ۱. نوع‌های ناشناس (Anonymous Types) ✨
+## ۱. نوع‌های ناشناس (Anonymous Types)
 
 یک **نوع ناشناس**، کلاس ساده‌ای است که **کامپایلر به صورت خودکار ایجاد می‌کند** تا مجموعه‌ای از مقادیر را ذخیره کند.
 
@@ -2625,7 +2625,7 @@ internal class AnonymousGeneratedTypeName
 }
 ```
 
-> ⚠️ باید همیشه از `var` برای ارجاع به نوع ناشناس استفاده کرد، چون **نام ندارد**.
+>  باید همیشه از `var` برای ارجاع به نوع ناشناس استفاده کرد، چون **نام ندارد**.
 
 ---
 
@@ -2683,7 +2683,7 @@ Console.WriteLine(a2);  // { A = 1, B = 2, C = 3, D = 4, E = 10 }
 
 ---
 
-## ۲. تاپل‌ها (Tuples) 🔹
+## ۲. تاپل‌ها (Tuples)
 
 **تاپل‌ها** مشابه نوع‌های ناشناس هستند، اما امکان بازگرداندن چند مقدار از یک متد را بدون پارامتر `out` می‌دهند.
 
@@ -2729,7 +2729,7 @@ IEnumerable<(int id, string name)>   // امکان نام‌گذاری الما�
 
 ---
 
-### نام‌گذاری المان‌های تاپل و نکات پیشرفته 🟢
+### نام‌گذاری المان‌های تاپل و نکات پیشرفته
 
 ---
 
@@ -2801,7 +2801,7 @@ Console.WriteLine(bob2.age);   // Bob
 Console.WriteLine(bob2.sex);   // 23
 ```
 
-> ⚠️ این می‌تواند منجر به نتایج گیج‌کننده شود.
+>  این می‌تواند منجر به نتایج گیج‌کننده شود.
 
 ---
 
@@ -2840,7 +2840,7 @@ ValueTuple<string,int> bob1 = ValueTuple.Create("Bob", 23);
 
 ---
 
-### تجزیه (Deconstructing) تاپل‌ها 🧩
+### تجزیه (Deconstructing) تاپل‌ها
 
 تاپل‌ها به‌صورت ضمنی از **الگوی تجزیه (deconstruction pattern)** پشتیبانی می‌کنند (رجوع کنید به بخش «Deconstructors» در صفحه ۱۱۰)، بنابراین می‌توانید به راحتی یک تاپل را به متغیرهای جداگانه تقسیم کنید. به مثال زیر توجه کنید:
 
@@ -2890,7 +2890,7 @@ class Point
 
 ---
 
-### مقایسه برابری (Equality Comparison) ⚖️
+### مقایسه برابری (Equality Comparison)
 
 مانند **anonymous types**، متد **Equals** در تاپل‌ها یک مقایسه ساختاری (structural equality) انجام می‌دهد؛ یعنی داده‌های داخلی مقایسه می‌شوند نه مراجع (references):
 
@@ -2912,7 +2912,7 @@ Console.WriteLine(t1 == t2);  // True (از C# 7.3 به بعد)
 
 ---
 
-### کلاس‌های System.Tuple 🗂️
+### کلاس‌های System.Tuple
 
 در فضای نام **System**، خانواده‌ای از نوع‌های generic به نام **Tuple** وجود دارد (نه ValueTuple). این‌ها از سال ۲۰۱۰ معرفی شدند و به‌صورت کلاس تعریف شده‌اند، در حالی که **ValueTuple** به‌صورت struct هستند.
 
@@ -2928,7 +2928,7 @@ Console.WriteLine(t.Item2);  // 23
 
 ---
 
-### رکوردها (Records) 📄
+### رکوردها (Records)
 
 رکورد یک نوع خاص از **کلاس یا struct** است که برای کار با داده‌های **غیرقابل تغییر (immutable/read-only)** طراحی شده است.
 
@@ -2938,7 +2938,7 @@ Console.WriteLine(t.Item2);  // 23
 
 ---
 
-### مقدمه 📝
+### مقدمه
 
 نوشتن **انواع غیرقابل تغییر (immutable types)** که در آن‌ها فیلدها پس از مقداردهی اولیه قابل تغییر نباشند، یک استراتژی رایج برای ساده‌تر کردن نرم‌افزار و کاهش باگ‌ها است. این موضوع همچنین بخش اصلی **برنامه‌نویسی تابعی (functional programming)** است، جایی که از حالت قابل تغییر اجتناب می‌شود و توابع به‌عنوان داده در نظر گرفته می‌شوند. LINQ نیز از این اصل الهام گرفته است.
 
@@ -2950,7 +2950,7 @@ Console.WriteLine(t.Item2);  // 23
 
 ---
 
-### تعریف رکورد 🏷️
+### تعریف رکورد
 
 تعریف یک رکورد شبیه تعریف **کلاس یا struct** است و می‌تواند شامل همان نوع اعضا باشد، از جمله فیلدها، propertyها، متدها و غیره. رکوردها می‌توانند **interfaceها** را پیاده‌سازی کنند و رکوردهای مبتنی بر کلاس می‌توانند از رکوردهای دیگر ارث‌بری کنند.
 
@@ -2993,7 +2993,7 @@ record Point
 
 ---
 
-### کارهای کامپایلر هنگام تعریف رکورد ⚙️
+### کارهای کامپایلر هنگام تعریف رکورد
 
 پس از کامپایل، C# تعریف رکورد را به کلاس (یا struct) تبدیل می‌کند و مراحل اضافی زیر را انجام می‌دهد:
 
@@ -3025,7 +3025,7 @@ class Point
 
 ---
 
-### لیست پارامترها 📝
+### لیست پارامترها
 
 هیچ چیزی مانع قرار دادن **پارامترهای اختیاری (optional)** در سازنده نمی‌شود، اما یک الگوی خوب (به‌ویژه در کتابخانه‌های عمومی) این است که آن‌ها را **از سازنده حذف کرده و صرفاً به‌صورت propertyهای init-only** ارائه دهید:
 
@@ -3046,7 +3046,7 @@ record Foo
 
 ---
 
-### کوتاه‌سازی تعریف رکورد با لیست پارامترها ⚡
+### کوتاه‌سازی تعریف رکورد با لیست پارامترها
 
 تعریف رکورد را می‌توان با **لیست پارامترها** کوتاه کرد:
 
@@ -3111,7 +3111,7 @@ class Point3D : Point
 
 لیست پارامترها یک **میانبر عالی** برای کلاس‌هایی هستند که صرفاً **چند مقدار را گروه‌بندی می‌کنند (product type در برنامه‌نویسی تابعی)** و برای **نمونه‌سازی سریع (prototyping)** مفید هستند. البته هنگام نیاز به **اضافه کردن منطق به accessors init** (مثلاً اعتبارسنجی پارامتر) چندان مناسب نیستند.
 
-### قابلیت تغییرپذیری در رکوردهای Struct 🔄
+### قابلیت تغییرپذیری در رکوردهای Struct
 
 وقتی که **لیست پارامتر** در یک **record struct** تعریف می‌کنید، کامپایلر به‌صورت پیش‌فرض **propertyهای قابل نوشتن (writable)** ایجاد می‌کند، نه propertyهای **init-only**، مگر اینکه تعریف رکورد را با کلمه کلیدی `readonly` پیش‌فرض کنید:
 
@@ -3149,7 +3149,7 @@ m.X++;
 
 از طرف دیگر، اگر `Field` یک فیلد قابل نوشتن و `Prop` یک property قابل نوشتن باشد، می‌توانیم به راحتی **محتویات آن‌ها را جایگزین کنیم**—صرف‌نظر از اینکه struct `Mutable` چگونه تعریف شده است.
 
-### تغییرات غیرمخرب (Nondestructive Mutation) 🔄✨
+### تغییرات غیرمخرب (Nondestructive Mutation)
 
 مهم‌ترین کاری که کامپایلر با **تمام رکوردها** انجام می‌دهد، ایجاد یک **کپی‌کننده (copy constructor)** و یک **متد پنهان Clone** است. این امکان را فراهم می‌کند که بتوانید با استفاده از **کلمه کلیدی `with`**، یک تغییر غیرمخرب روی رکورد انجام دهید:
 
@@ -3177,11 +3177,11 @@ record Test(int A, int B, int C, int D, int E, int F, int G, int H);
 Test { A = 10, B = 2, C = 30, D = 4, E = 5, F = 6, G = 7, H = 8 }
 ```
 
-### مراحل تغییر غیرمخرب 🛠️
+### مراحل تغییر غیرمخرب
 
-1️⃣ ابتدا، **کپی‌کننده** رکورد را clone می‌کند. به‌طور پیش‌فرض، هر یک از فیلدهای داخلی رکورد کپی می‌شوند، که یک **نسخه دقیق** ایجاد می‌کند و از اجرای منطق در accessorهای init جلوگیری می‌کند. تمام فیلدها شامل **عمومی، خصوصی و فیلدهای پنهان پشت propertyهای اتوماتیک** در کپی گنجانده می‌شوند.
+1⃣ ابتدا، **کپی‌کننده** رکورد را clone می‌کند. به‌طور پیش‌فرض، هر یک از فیلدهای داخلی رکورد کپی می‌شوند، که یک **نسخه دقیق** ایجاد می‌کند و از اجرای منطق در accessorهای init جلوگیری می‌کند. تمام فیلدها شامل **عمومی، خصوصی و فیلدهای پنهان پشت propertyهای اتوماتیک** در کپی گنجانده می‌شوند.
 
-2️⃣ سپس، هر property در **لیست مقداردهی اعضا (member initializer)** به‌روزرسانی می‌شود، این بار با استفاده از **init accessor**.
+2⃣ سپس، هر property در **لیست مقداردهی اعضا (member initializer)** به‌روزرسانی می‌شود، این بار با استفاده از **init accessor**.
 
 کامپایلر کد زیر را:
 
@@ -3197,9 +3197,9 @@ t2.A = 10;               // به‌روزرسانی property A
 t2.C = 30;               // به‌روزرسانی property C
 ```
 
-> ⚠️ همان‌طور که می‌بینید، نوشتن مستقیم این کد در حالت عادی **کامپایل نمی‌شود** چون A و C propertyهای **init-only** هستند. علاوه بر این، copy constructor **protected** است و C# برای دور زدن این محدودیت، آن را از طریق متد پنهان `<Clone>$` فراخوانی می‌کند.
+>  همان‌طور که می‌بینید، نوشتن مستقیم این کد در حالت عادی **کامپایل نمی‌شود** چون A و C propertyهای **init-only** هستند. علاوه بر این، copy constructor **protected** است و C# برای دور زدن این محدودیت، آن را از طریق متد پنهان `<Clone>$` فراخوانی می‌کند.
 
-### تعریف کپی‌کننده سفارشی ✍️
+### تعریف کپی‌کننده سفارشی
 
 اگر لازم باشد، می‌توانید **copy constructor خودتان** را تعریف کنید. کامپایلر از تعریف شما استفاده خواهد کرد:
 
@@ -3211,7 +3211,7 @@ protected Point(Point original)
 }
 ```
 
-نوشتن کپی‌کننده سفارشی مفید است اگر رکورد شما حاوی **زیر-اشیاء یا مجموعه‌های قابل تغییر** باشد که باید clone شوند، یا فیلدهای محاسبه‌شده‌ای داشته باشید که می‌خواهید پاک شوند. ⚠️ توجه کنید که تنها می‌توانید **جایگزین** کنید، نه **بهبود دهید**.
+نوشتن کپی‌کننده سفارشی مفید است اگر رکورد شما حاوی **زیر-اشیاء یا مجموعه‌های قابل تغییر** باشد که باید clone شوند، یا فیلدهای محاسبه‌شده‌ای داشته باشید که می‌خواهید پاک شوند.  توجه کنید که تنها می‌توانید **جایگزین** کنید، نه **بهبود دهید**.
 
 در **Subclass کردن رکورد دیگر**، copy constructor مسئول **کپی فقط فیلدهای خودش** است. برای کپی فیلدهای رکورد پایه، از **delegate به base** استفاده کنید:
 
@@ -3222,7 +3222,7 @@ protected Point(Point original) : base(original)
 }
 ```
 
-### اعتبارسنجی propertyها ✅
+### اعتبارسنجی propertyها
 
 با propertyهای **صریح**، می‌توانید منطق اعتبارسنجی را در **init accessor** بنویسید. به عنوان مثال، مطمئن می‌شویم X هیچ‌گاه **NaN** نباشد:
 
@@ -3264,7 +3264,7 @@ protected Point(Point original)
 
 کپی کردن `_x` از طریق **accessor** انجام نمی‌شود، ولی مشکلی ایجاد نمی‌کند چون مقدار قبلاً با **init accessor** به‌صورت امن مقداردهی شده است.
 
-### فیلدهای محاسبه‌شده و ارزیابی Lazy ⚡
+### فیلدهای محاسبه‌شده و ارزیابی Lazy
 
 یکی از الگوهای رایج در **برنامه‌نویسی تابعی (Functional)** که با رکوردهای غیرقابل تغییر خوب کار می‌کند، **lazy evaluation** است: مقدار تنها وقتی محاسبه می‌شود که لازم باشد و سپس برای استفاده بعدی **کش** می‌شود.
 
@@ -3289,7 +3289,7 @@ record Point
 }
 ```
 
-✅ در این حالت، `_distance` تنها **یک بار محاسبه** می‌شود و تغییر `X` یا `Y` باعث پاک شدن مقدار کش شده می‌شود.
+ در این حالت، `_distance` تنها **یک بار محاسبه** می‌شود و تغییر `X` یا `Y` باعث پاک شدن مقدار کش شده می‌شود.
 
 ```csharp
 Point p1 = new Point(2,3);
@@ -3304,7 +3304,7 @@ Console.WriteLine(p2.DistanceFromOrigin);   // 4.47213595499958
 
 ---
 
-### سازنده‌های اولیه (Primary Constructors) 🏗️✨
+### سازنده‌های اولیه (Primary Constructors)
 
 وقتی یک **رکورد** با **لیست پارامترها** تعریف می‌کنید، کامپایلر به‌طور خودکار **propertyها** را تعریف می‌کند و یک **سازنده اولیه (primary constructor)** و یک **deconstructor** ایجاد می‌کند. همان‌طور که دیدیم، این روش در موارد ساده خوب کار می‌کند و در موارد پیچیده‌تر می‌توانید لیست پارامترها را حذف کرده و propertyها و سازنده را به‌صورت دستی بنویسید.
 
@@ -3321,7 +3321,7 @@ record Student(string ID, string LastName, string GivenName)
 
 اگر هیچ‌وقت نیازی به تغییر غیرمخرب یک property ندارید، تعریف آن به صورت **read-only** اجازه می‌دهد داده‌های محاسبه‌شده را بدون نیاز به نوشتن مکانیسم تازه‌سازی ذخیره کنید.
 
-⚠️ دقت کنید که لازم بود **یک مقداردهی اولیه برای property** ارائه دهیم:
+ دقت کنید که لازم بود **یک مقداردهی اولیه برای property** ارائه دهیم:
 
 ```csharp
 public string ID { get; } = ID;
@@ -3331,7 +3331,7 @@ public string ID { get; } = ID;
 
 ---
 
-### رکوردهای struct و بازتعریف property به عنوان field 🧱
+### رکوردهای struct و بازتعریف property به عنوان field
 
 با **record struct**، قانونی است که property را به عنوان **field** بازتعریف کنید:
 
@@ -3354,11 +3354,11 @@ record Student(string ID, string LastName, string FirstName)
 
 در این مثال، `_enrollmentYear` از چهار رقم اول **ID** محاسبه شده است. چون property **ID read-only** است، می‌توان آن را امن در یک **field read-only** ذخیره کرد، بدون اینکه تغییر غیرمخرب مشکلی ایجاد کند.
 
-⚠️ اما در دنیای واقعی، بدون **سازنده صریح**، هیچ مکان مرکزی برای اعتبارسنجی ID و پرتاب **exception معنی‌دار** وجود ندارد.
+ اما در دنیای واقعی، بدون **سازنده صریح**، هیچ مکان مرکزی برای اعتبارسنجی ID و پرتاب **exception معنی‌دار** وجود ندارد.
 
 ---
 
-### اعتبارسنجی با init-only accessors ✅
+### اعتبارسنجی با init-only accessors
 
 برای انجام **اعتبارسنجی** روی propertyها، باید از **init-only accessor صریح** استفاده کنید:
 
@@ -3374,7 +3374,7 @@ record Person(string Name)
 }
 ```
 
-⚠️ چون **Name یک property اتوماتیک نیست**، نمی‌توان initializer تعریف کرد. بهترین کار این است که initializer را روی **field پشت property** قرار دهید، اما این باعث می‌شود که **check null نادیده گرفته شود**:
+ چون **Name یک property اتوماتیک نیست**، نمی‌توان initializer تعریف کرد. بهترین کار این است که initializer را روی **field پشت property** قرار دهید، اما این باعث می‌شود که **check null نادیده گرفته شود**:
 
 ```csharp
 var p = new Person(null);    // موفقیت‌آمیز! (check نادیده گرفته شد)
@@ -3393,7 +3393,7 @@ record Person
 
 ---
 
-### رکوردها و مقایسه برابری (Equality) ⚖️
+### رکوردها و مقایسه برابری (Equality)
 
 مانند **structها، anonymous types و tuples**، رکوردها **structural equality** را به صورت پیش‌فرض ارائه می‌کنند؛ یعنی دو رکورد **برابرند اگر فیلدها و propertyهای اتوماتیک آنها برابر باشند**:
 
@@ -3411,11 +3411,11 @@ record Point(double X, double Y);
 Console.WriteLine(p1 == p2);         // True
 ```
 
-⚠️ اجرای پیش‌فرض برابری برای رکوردها ممکن است آسیب‌پذیر باشد، به‌خصوص اگر رکورد حاوی **مقادیر lazy، transient، آرایه‌ها یا collectionها** باشد که نیاز به مدیریت ویژه برای مقایسه دارند. خوشبختانه، اصلاح آن نسبتاً ساده است و نیاز به کار زیادی ندارد.
+ اجرای پیش‌فرض برابری برای رکوردها ممکن است آسیب‌پذیر باشد، به‌خصوص اگر رکورد حاوی **مقادیر lazy، transient، آرایه‌ها یا collectionها** باشد که نیاز به مدیریت ویژه برای مقایسه دارند. خوشبختانه، اصلاح آن نسبتاً ساده است و نیاز به کار زیادی ندارد.
 
 ---
 
-### نوشتن Equals سفارشی 🖋️
+### نوشتن Equals سفارشی
 
 بر خلاف کلاس‌ها و structها، **نمی‌توانید object.Equals را override کنید**؛ در عوض باید یک متد **public Equals** با این **امضا** تعریف کنید:
 
@@ -3440,11 +3440,11 @@ record Point(double X, double Y)
 public virtual bool Equals(Point other) => base.Equals(other) && ...
 ```
 
-✅ نکته مهم: اگر منطق برابری را خودتان پیاده کنید، باید **GetHashCode** را نیز override کنید. خوشبختانه در رکوردها نیازی به overload کردن **!= یا ==** و پیاده‌سازی **IEquatable<T>** نیست؛ همه این‌ها به‌صورت خودکار انجام می‌شود.
+ نکته مهم: اگر منطق برابری را خودتان پیاده کنید، باید **GetHashCode** را نیز override کنید. خوشبختانه در رکوردها نیازی به overload کردن **!= یا ==** و پیاده‌سازی **IEquatable<T>** نیست؛ همه این‌ها به‌صورت خودکار انجام می‌شود.
 
 موضوع **مقایسه برابری رکوردها** به صورت کامل در بخش «Equality Comparison» صفحه 344 پوشش داده شده است.
 
-### الگوها (Patterns) 🧩✨
+### الگوها (Patterns)
 
 در فصل ۳، نشان دادیم که چگونه می‌توان از عملگر **is** برای بررسی موفقیت **تبدیل مرجع (reference conversion)** استفاده کرد:
 
@@ -3477,11 +3477,11 @@ if (obj is string { Length: 4 })
 
 برخی از الگوهای تخصصی‌تر عمدتاً برای استفاده در **switch statements/expressions** طراحی شده‌اند و نیاز به **when clauses** را کاهش می‌دهند و امکان استفاده از **switch** را در مواقعی فراهم می‌کنند که قبلاً امکان آن نبود.
 
-⚠️ به یاد داشته باشید که همیشه می‌توانید **switch expressionهای پیچیده** را با **if ساده** جایگزین کنید، یا در برخی موارد از **عملگر شرطی سه‌تایی (ternary operator)** استفاده کنید، معمولاً بدون نیاز به کد اضافی زیاد.
+ به یاد داشته باشید که همیشه می‌توانید **switch expressionهای پیچیده** را با **if ساده** جایگزین کنید، یا در برخی موارد از **عملگر شرطی سه‌تایی (ternary operator)** استفاده کنید، معمولاً بدون نیاز به کد اضافی زیاد.
 
 ---
 
-### الگوی ثابت (Constant Pattern) 🔢
+### الگوی ثابت (Constant Pattern)
 
 الگوی ثابت به شما امکان می‌دهد مستقیماً با یک **ثابت (constant)** مطابقت دهید و هنگام کار با نوع **object** مفید است:
 
@@ -3498,7 +3498,7 @@ void Foo(object obj)
 obj is int && (int)obj == 3
 ```
 
-⚠️ چون این یک عملگر **static** است، C# اجازه نمی‌دهد که مستقیماً با **==** یک object را با یک constant مقایسه کنید، زیرا کامپایلر باید نوع‌ها را از قبل بداند.
+ چون این یک عملگر **static** است، C# اجازه نمی‌دهد که مستقیماً با **==** یک object را با یک constant مقایسه کنید، زیرا کامپایلر باید نوع‌ها را از قبل بداند.
 
 به تنهایی، این الگو کاربرد محدودی دارد، زیرا جایگزین منطقی آن این است:
 
@@ -3510,7 +3510,7 @@ if (3.Equals(obj)) ...
 
 ---
 
-### الگوهای رابطه‌ای (Relational Patterns) 📏
+### الگوهای رابطه‌ای (Relational Patterns)
 
 از C# 9 به بعد، می‌توانید از عملگرهای `<`, `>`, `<=`, `>=` در الگوها استفاده کنید:
 
@@ -3530,7 +3530,7 @@ string GetWeightCategory(decimal bmi) => bmi switch
 };
 ```
 
-⚠️ الگوهای رابطه‌ای حتی زمانی که متغیر از نوع **object** باشد کار می‌کنند، اما باید در استفاده از **ثابت‌های عددی** بسیار دقت کنید:
+ الگوهای رابطه‌ای حتی زمانی که متغیر از نوع **object** باشد کار می‌کنند، اما باید در استفاده از **ثابت‌های عددی** بسیار دقت کنید:
 
 ```csharp
 object obj = 2m;                  // obj از نوع decimal است
@@ -3540,7 +3540,7 @@ Console.WriteLine(obj is < 3);    // False
 
 ---
 
-### ترکیب‌کننده‌های الگو (Pattern Combinators) 🔗
+### ترکیب‌کننده‌های الگو (Pattern Combinators)
 
 از C# 9 به بعد، می‌توانید از کلیدواژه‌های **and, or, not** برای ترکیب الگوها استفاده کنید:
 
@@ -3565,7 +3565,7 @@ if (obj is not string) ...
 if (!(obj is string)) ...
 ```
 
-### الگوی `var` 🟢
+### الگوی `var`
 
 الگوی **var** نوعی **type pattern** است که در آن به جای نام نوع، از کلمه کلیدی **var** استفاده می‌کنید. این تبدیل همیشه موفق است و هدف آن فقط **امکان استفاده مجدد از متغیری است که پس از آن می‌آید**:
 
@@ -3584,12 +3584,12 @@ bool IsJanetOrJohn(string name)
 }
 ```
 
-💡 توانایی **معرفی و استفاده مجدد یک متغیر میانی** (مثل `upper`) در یک متد با **expression-bodied** بسیار کاربردی است، به ویژه در **lambda expressions**.
-⚠️ متأسفانه، این الگو عمدتاً زمانی مفید است که متد مورد نظر **نوع بازگشتی bool** داشته باشد.
+ توانایی **معرفی و استفاده مجدد یک متغیر میانی** (مثل `upper`) در یک متد با **expression-bodied** بسیار کاربردی است، به ویژه در **lambda expressions**.
+ متأسفانه، این الگو عمدتاً زمانی مفید است که متد مورد نظر **نوع بازگشتی bool** داشته باشد.
 
 ---
 
-### الگوهای Tuple و Positional 🟦
+### الگوهای Tuple و Positional
 
 **Tuple pattern** (معرفی‌شده در C# 8) برای مطابقت با **tuples** استفاده می‌شود:
 
@@ -3618,7 +3618,7 @@ int AverageCelsiusTemperature(Season season, bool daytime) =>
 enum Season { Spring, Summer, Fall, Winter };
 ```
 
-⚡ **Tuple pattern** در واقع یک **حالت ویژه از positional pattern** است (C# 8+) که با هر نوعی که متد **Deconstruct** ارائه دهد، کار می‌کند.
+ **Tuple pattern** در واقع یک **حالت ویژه از positional pattern** است (C# 8+) که با هر نوعی که متد **Deconstruct** ارائه دهد، کار می‌کند.
 
 مثال با **record Point** و **deconstructor تولید شده توسط کامپایلر**:
 
@@ -3647,7 +3647,7 @@ string Print(object obj) => obj switch
 
 ---
 
-### الگوهای Property 🏷️
+### الگوهای Property
 
 **Property pattern** (C# 8+) بر اساس یک یا چند **مقدار property** یک object مطابقت می‌دهد.
 مثال ساده قبلاً با **is operator** داشتیم:
@@ -3656,7 +3656,7 @@ string Print(object obj) => obj switch
 if (obj is string { Length:4 }) ...
 ```
 
-⚠️ این تنها کمی از نوشتن کد زیر صرفه‌جویی می‌کند:
+ این تنها کمی از نوشتن کد زیر صرفه‌جویی می‌کند:
 
 ```csharp
 if (obj is string s && s.Length == 4) ...
@@ -3727,7 +3727,7 @@ bool ShouldAllow(Uri uri) => uri switch
 };
 ```
 
-⚠️ در بسیاری از موارد، صرفه‌جویی در تعداد کاراکترها زیاد نیست. جایگزین ساده‌تر می‌تواند این باشد:
+ در بسیاری از موارد، صرفه‌جویی در تعداد کاراکترها زیاد نیست. جایگزین ساده‌تر می‌تواند این باشد:
 
 ```csharp
 { Scheme: "http", Port: 80 } => uri.Host.Length < 1000,
@@ -3739,7 +3739,7 @@ bool ShouldAllow(Uri uri) => uri switch
 { Scheme: "http", Port: 80, Host: { Length: < 1000 } } => ...
 ```
 
-### الگوهای List 📋
+### الگوهای List
 
 **List patterns** (معرفی‌شده در C# 11) روی هر نوع collection قابل شمارش (**Count** یا **Length**) و با **indexer عددی** کار می‌کنند.
 
@@ -3774,11 +3774,11 @@ Console.Write(numbers is [0, .., 4]);    // True
 Console.Write(numbers is [0, .. var mid, 4] && mid.Contains(2)); // True
 ```
 
-⚠️ یک **list pattern** می‌تواند حداکثر یک slice داشته باشد.
+ یک **list pattern** می‌تواند حداکثر یک slice داشته باشد.
 
 ---
 
-### Attributes 🏷️
+### Attributes
 
 **Attributes** مکانیزمی **extensible** برای اضافه کردن اطلاعات **سفارشی** به عناصر کد هستند (assembly، نوع، member، return value، parameter و generic type parameters).
 
@@ -3790,7 +3790,7 @@ Console.Write(numbers is [0, .. var mid, 4] && mid.Contains(2)); // True
 public class Foo {...}
 ```
 
-⚡ به دلیل اینکه convention تمام attributeها با `Attribute` ختم می‌شوند، می‌توان suffix را حذف کرد:
+ به دلیل اینکه convention تمام attributeها با `Attribute` ختم می‌شوند، می‌توان suffix را حذف کرد:
 
 ```csharp
 [Obsolete]
@@ -3814,7 +3814,7 @@ public class CustomerEntity { ... }
 
 ---
 
-### اعمال Attributes به Assembly و Fieldها 🏗️
+### اعمال Attributes به Assembly و Fieldها
 
 + می‌توان یک attribute را به **assembly** متصل کرد:
 
@@ -3831,7 +3831,7 @@ public int MyProperty { get; set; }
 
 ---
 
-### Attributes روی Lambda Expressions ⚡
+### Attributes روی Lambda Expressions
 
 از C# 10 به بعد، می‌توان attributeها را به **method، پارامترها و return value** lambda اضافه کرد:
 
@@ -3850,10 +3850,10 @@ var paramAtt  = a.GetMethodInfo().GetParameters()[0].GetCustomAttributes();
 var returnAtt = a.GetMethodInfo().ReturnParameter.GetCustomAttributes();
 ```
 
-⚠️ برای جلوگیری از ابهام سینتکسی، **پارامتر lambda همیشه باید داخل پرانتز باشد**.
-❌ اعمال attribute روی **expression-tree lambdas** مجاز نیست.
+ برای جلوگیری از ابهام سینتکسی، **پارامتر lambda همیشه باید داخل پرانتز باشد**.
+ اعمال attribute روی **expression-tree lambdas** مجاز نیست.
 
-### مشخص کردن چند Attribute همزمان 🏷️
+### مشخص کردن چند Attribute همزمان
 
 می‌توان چند **attribute** را به یک عنصر کد نسبت داد. این کار را می‌توان به سه روش انجام داد:
 
@@ -3881,11 +3881,11 @@ public class Bar { ... }
 public class Bar { ... }
 ```
 
-همه مثال‌های بالا از نظر معنایی **یکسان** هستند. ✅
+همه مثال‌های بالا از نظر معنایی **یکسان** هستند. 
 
 ---
 
-### Caller Info Attributes 📞
+### Caller Info Attributes
 
 سه **attribute ویژه** وجود دارد که می‌توان پارامترهای اختیاری را با آن‌ها علامت زد تا کامپایلر اطلاعات **caller** را در مقدار پیش‌فرض پارامتر قرار دهد:
 
@@ -3915,7 +3915,7 @@ class Program
 }
 ```
 
-فرض کنید فایل در `c:\source\test\Program.cs` است، خروجی:
+فرض کنید فایل در `csharp:\source\test\Program.cs` است، خروجی:
 
 ```
 Main
@@ -3950,7 +3950,7 @@ public class Foo : INotifyPropertyChanged
 
 ---
 
-### CallerArgumentExpression (C# 10) ✍️
+### CallerArgumentExpression (C# 10)
 
 + `[CallerArgumentExpression]` ثبت **عبارت پارامتر** در محل فراخوانی را ممکن می‌کند.
 
@@ -3990,11 +3990,11 @@ void Assert(bool condition,
 ArgumentNullException.ThrowIfNull(message);
 ```
 
-⚠️ می‌توان `[CallerArgumentExpression]` را چند بار استفاده کرد تا چند عبارت پارامتر ثبت شود.
+ می‌توان `[CallerArgumentExpression]` را چند بار استفاده کرد تا چند عبارت پارامتر ثبت شود.
 
 ---
 
-### Dynamic Binding 🔄
+### Dynamic Binding
 
 + **Dynamic binding** زمان **resolve کردن type، member و operator** را به **runtime** موکول می‌کند.
 + مفید در interoperating با **dynamic languages** یا **COM** و همچنین زمانی که می‌خواهید از **reflection** استفاده کنید.
@@ -4006,13 +4006,13 @@ d.Quack();  // کامپایلر بررسی نمی‌کند، اجرا در زم�
 
 + در dynamic binding، کامپایلر **binding** را به runtime واگذار می‌کند، برخلاف **static binding** که در زمان کامپایل رخ می‌دهد.
 
-### **Static Binding در مقابل Dynamic Binding ⚡**
+### **Static Binding در مقابل Dynamic Binding **
 
 در C#، **binding** یعنی اتصال نام یک عضو (مانند متد) به پیاده‌سازی آن.
 
 ---
 
-#### **Static Binding (Binding ایستا) 🏗️**
+#### **Static Binding (Binding ایستا) **
 
 + اتصال در **زمان کامپایل** انجام می‌شود.
 + کامپایلر باید **نوع متغیرها را بداند** تا بتواند متدها یا عملگرها را پیدا کند.
@@ -4032,7 +4032,7 @@ d.Quack();  // خطای کامپایل
 
 ---
 
-#### **Dynamic Binding (Binding پویا) 🌀**
+#### **Dynamic Binding (Binding پویا) **
 
 + اتصال در **زمان اجرا (runtime)** انجام می‌شود.
 + نوع متغیر `dynamic` است و کامپایلر فرض می‌کند **ممکن است متد وجود داشته باشد**:
@@ -4053,7 +4053,7 @@ d.Hello();  // RuntimeBinderException
 
 #### **انواع Dynamic Binding**
 
-1. **Custom Binding** 🔧
+1. **Custom Binding** 
 
    + زمانی که شیء dynamic، اینترفیس `IDynamicMetaObjectProvider` را پیاده‌سازی کند.
    + برای کنترل رفتار متدها در زبان‌های داینامیک مثل IronPython یا IronRuby استفاده می‌شود.
@@ -4078,7 +4078,7 @@ public class Duck : DynamicObject
 }
 ```
 
-2. **Language Binding** 📚
+2. **Language Binding** 
 
    + زمانی که شیء dynamic، `IDynamicMetaObjectProvider` را پیاده‌سازی نکند.
    + مفید برای دور زدن محدودیت‌های سیستم نوع .NET و اجتناب از کپی کد برای هر نوع داده.
@@ -4090,7 +4090,7 @@ Console.WriteLine(Mean(x, y));
 dynamic Mean(dynamic a, dynamic b) => (a + b) / 2;
 ```
 
-⚠️ **نکته:** در dynamic binding، امنیت نوع **compile-time** از بین می‌رود، ولی امنیت نوع **runtime** حفظ می‌شود.
+ **نکته:** در dynamic binding، امنیت نوع **compile-time** از بین می‌رود، ولی امنیت نوع **runtime** حفظ می‌شود.
 
 ---
 
@@ -4129,7 +4129,7 @@ public class Test
 
 ---
 
-#### **تبدیل‌های Dynamic 🔄**
+#### **تبدیل‌های Dynamic **
 
 + dynamic قابلیت تبدیل ضمنی با همه نوع‌ها را دارد:
 
@@ -4166,7 +4166,7 @@ int z = y;        // Runtime error
 + `var` می‌گوید: "بگذار نوع توسط کامپایلر مشخص شود"
 + `dynamic` می‌گوید: "بگذار نوع توسط runtime مشخص شود"
 
-### **Dynamic Expressions در C# 🌀**
+### **Dynamic Expressions در C# **
 
 در C#، تقریبا همه اعضای یک شیء (fields, properties, methods, events, constructors, indexers, operators و conversions) را می‌توان **به صورت داینامیک** فراخوانی کرد.
 
@@ -4266,7 +4266,7 @@ class Program
 
 ---
 
-### **توابع غیرقابل فراخوانی Dynamically ❌**
+### **توابع غیرقابل فراخوانی Dynamically **
 
 + برخی توابع نمی‌توانند با dynamic فراخوانی شوند:
 
@@ -4293,7 +4293,7 @@ d.Test();  // Runtime exception
 
 ---
 
-#### **راهکار: کتابخانه Uncapsulator ⚡**
+#### **راهکار: کتابخانه Uncapsulator **
 
 + کتابخانه open-source برای **dynamic بهتر**، حل مشکل فراخوانی اعضای interface، base types و static members به صورت داینامیک.
 + مثال:
@@ -4310,7 +4310,7 @@ uf.Test();  // حالا کار می‌کند
   + فراخوانی static members به صورت داینامیک
   + دسترسی به اعضای غیر عمومی (nonpublic members)
 
-### بارگذاری مجدد عملگرها (Operator Overloading) ⚙️
+### بارگذاری مجدد عملگرها (Operator Overloading)
 
 شما می‌توانید عملگرها را بارگذاری مجدد کنید تا نحو (syntax) طبیعی‌تری برای نوع‌های سفارشی فراهم شود. بارگذاری مجدد عملگرها بیشتر برای پیاده‌سازی `struct`های سفارشی که نمایانگر نوع‌های داده‌ای نسبتاً ابتدایی هستند، مناسب است. به‌عنوان مثال، یک نوع عددی سفارشی گزینه‌ی بسیار مناسبی برای بارگذاری مجدد عملگرها است.
 
@@ -4334,7 +4334,7 @@ uf.Test();  // حالا کار می‌کند
 
 ---
 
-### توابع عملگر (Operator Functions) 🛠️
+### توابع عملگر (Operator Functions)
 
 برای بارگذاری یک عملگر، باید یک **تابع عملگر** تعریف کنید. قوانین توابع عملگر به شرح زیر است:
 
@@ -4381,7 +4381,7 @@ public static Note operator + (Note x, int semitones)
 
 ---
 
-### عملگرهای Checked ✔️
+### عملگرهای Checked
 
 از C# 11 به بعد، هنگام تعریف تابع عملگر، می‌توان نسخه‌ی `checked` آن را نیز تعریف کرد:
 
@@ -4402,7 +4402,7 @@ Note other = checked (B + int.MaxValue);  // پرتاب OverflowException
 
 ---
 
-### بارگذاری عملگرهای برابری و مقایسه ⚖️
+### بارگذاری عملگرهای برابری و مقایسه
 
 عملگرهای برابری و مقایسه گاهی هنگام نوشتن `struct`ها و در موارد نادر هنگام نوشتن کلاس‌ها بازنویسی می‌شوند. قوانین و الزامات خاصی برای بارگذاری این عملگرها وجود دارد که در فصل ۶ توضیح داده شده است. خلاصه این قوانین:
 
@@ -4417,7 +4417,7 @@ Note other = checked (B + int.MaxValue);  // پرتاب OverflowException
 
 ---
 
-### تبدیل‌های ضمنی و صریح سفارشی 🔄
+### تبدیل‌های ضمنی و صریح سفارشی
 
 تبدیل‌های ضمنی و صریح نیز عملگرهای قابل بارگذاری هستند. این تبدیل‌ها معمولاً برای ساده و طبیعی کردن تبدیل بین نوع‌های مرتبط (مثلاً نوع‌های عددی) استفاده می‌شوند.
 
@@ -4454,7 +4454,7 @@ Console.WriteLine(554.37 is Note);   // False
 Note n = 554.37 as Note;             // خطا
 ```
 
-### بارگذاری مجدد عملگرهای true و false ✅
+### بارگذاری مجدد عملگرهای true و false
 
 عملگرهای `true` و `false` به ندرت در نوع‌هایی بارگذاری می‌شوند که به لحاظ «روحی» بولی هستند ولی تبدیل به `bool` ندارند. نمونه‌ی آن نوعی است که منطق سه‌حالته (three-state logic) را پیاده‌سازی می‌کند. با بارگذاری این عملگرها، این نوع می‌تواند به‌طور یکپارچه با دستورات شرطی و عملگرها کار کند؛ مانند: `if`, `do`, `while`, `for`, `&&`, `||` و `?:`.
 
@@ -4504,7 +4504,7 @@ public struct SqlBoolean
 
 ---
 
-### چندریختی ایستا (Static Polymorphism) 🌀
+### چندریختی ایستا (Static Polymorphism)
 
 در بخش «Calling Static Virtual/Abstract Interface Members» صفحه ۸۲۶، ویژگی پیشرفته‌ای معرفی شد که در آن یک رابط (interface) می‌تواند اعضای `static virtual` یا `static abstract` تعریف کند که توسط کلاس‌ها و `struct`ها به‌صورت اعضای ایستا پیاده‌سازی می‌شوند.
 
@@ -4557,7 +4557,7 @@ Point[] testData = CreateTestData<Point>(50);  // ایجاد ۵۰ نقطه تص�
 
 ---
 
-### عملگرهای چندریختی (Polymorphic Operators) ⚡
+### عملگرهای چندریختی (Polymorphic Operators)
 
 از آنجا که عملگرها اساساً توابع ایستا هستند (صفحه ۲۵۶)، می‌توان آن‌ها را نیز به‌عنوان اعضای ایستا، مجازی یا رابط تعریف کرد:
 
@@ -4596,7 +4596,7 @@ T Sum<T>(params T[] values) where T : IAddable<T>
 
 البته، رابطی مانند `IAddable<T>` زمانی مفیدتر است که در runtime دات‌نت تعریف شود و همه نوع‌های عددی .NET آن را پیاده‌سازی کنند. خوشبختانه از .NET 7، فضای نام `System.Numerics` نسخه‌ای پیشرفته‌تر از `IAddable` را همراه با سایر رابط‌های ریاضی ارائه می‌دهد—که بیشتر آن‌ها تحت پوشش `INumber<TSelf>` هستند.
 
-### ریاضیات عمومی (Generic Math) ➕
+### ریاضیات عمومی (Generic Math)
 
 قبل از .NET 7، کدی که عملیات حسابی انجام می‌داد، باید برای یک نوع عددی مشخص نوشته می‌شد:
 
@@ -4662,7 +4662,7 @@ T RMS<T>(params T[] values) where T : INumber<T>, IRootFunctions<T>
 
 ---
 
-### کد ناایمن و اشاره‌گرها (Unsafe Code and Pointers) ⚠️
+### کد ناایمن و اشاره‌گرها (Unsafe Code and Pointers)
 
 C# امکان دسترسی مستقیم به حافظه را از طریق اشاره‌گرها در بلوک‌های کد `unsafe` فراهم می‌کند. نوع‌های اشاره‌گر برای تعامل با APIهای بومی (native)، دسترسی به حافظه خارج از heap مدیریت‌شده، و پیاده‌سازی بهینه‌سازی‌های کوچک در نقاط حساس عملکرد مفید هستند.
 
@@ -4678,13 +4678,13 @@ C# امکان دسترسی مستقیم به حافظه را از طریق اش�
 ![Conventions-UsedThis-Book](../../../assets/image/04/Table-4-2.jpeg)
 </div>
 
-### کد ناایمن و اشاره‌گرها (ادامه) ⚡
+### کد ناایمن و اشاره‌گرها (ادامه)
 
 همانند زبان C، اضافه کردن (یا کم کردن) یک آفست عدد صحیح به یک اشاره‌گر، یک اشاره‌گر دیگر تولید می‌کند. کم کردن یک اشاره‌گر از دیگری یک عدد صحیح ۶۴ بیتی تولید می‌کند (در هر دو پلتفرم ۳۲ و ۶۴ بیتی).
 
 ---
 
-### کد ناایمن (Unsafe Code) 🛡️
+### کد ناایمن (Unsafe Code)
 
 با علامت‌گذاری یک نوع، عضو نوع، یا بلوک دستوری با کلیدواژه `unsafe`، اجازه دارید از نوع‌های اشاره‌گر استفاده کنید و عملیات اشاره‌گر به سبک C روی حافظه انجام دهید. مثال زیر استفاده از اشاره‌گرها برای پردازش سریع یک بیت‌مپ را نشان می‌دهد:
 
@@ -4705,7 +4705,7 @@ unsafe void BlueFilter(int[,] bitmap)
 
 ---
 
-### دستور fixed 📌
+### دستور fixed
 
 دستور `fixed` برای **سنجاق کردن (pin)** یک شی مدیریت‌شده مانند بیت‌مپ استفاده می‌شود. در طول اجرای برنامه، بسیاری از اشیا از heap تخصیص و آزاد می‌شوند. برای جلوگیری از هدررفت یا تکه‌تکه شدن حافظه، جمع‌آورنده زباله (GC) اشیا را جابه‌جا می‌کند. اگر آدرس یک شی تغییر کند، اشاره به آن بی‌فایده است، بنابراین `fixed` به GC می‌گوید شی را جابه‌جا نکند. استفاده بیش از حد از بلوک‌های `fixed` می‌تواند روی کارایی زمان اجرا تاثیر بگذارد، بنابراین بهتر است از آن‌ها کوتاه استفاده کنید و از تخصیص حافظه درون بلوک `fixed` خودداری کنید.
 
@@ -4731,7 +4731,7 @@ class Test { public int X; }
 
 ---
 
-### عملگر اشاره‌گر به عضو (Pointer-to-Member Operator) 🔗
+### عملگر اشاره‌گر به عضو (Pointer-to-Member Operator)
 
 علاوه بر عملگرهای `&` و `*`، C# عملگر سبک C++ یعنی `->` را نیز ارائه می‌دهد که می‌توان از آن روی `struct`ها استفاده کرد:
 
@@ -4748,7 +4748,7 @@ struct Test { public int X; }
 
 ---
 
-### کلیدواژه stackalloc 📚
+### کلیدواژه stackalloc
 
 با استفاده از `stackalloc` می‌توانید حافظه‌ای را به‌طور مستقیم در **استک** اختصاص دهید. چون روی استک تخصیص می‌یابد، طول عمر آن محدود به اجرای متد است، همانند متغیرهای محلی دیگر که توسط lambda، iterator یا متد async افزایش طول عمر نیافته‌اند. بلوک می‌تواند از عملگر `[]` برای دسترسی به حافظه استفاده کند:
 
@@ -4768,7 +4768,7 @@ for (int i = 0; i < 10; ++i)
 
 ---
 
-### بافرهای با اندازه ثابت (Fixed-Size Buffers) 🧱
+### بافرهای با اندازه ثابت (Fixed-Size Buffers)
 
 کلیدواژه `fixed` کاربرد دیگری نیز دارد: ایجاد بافرهای با اندازه ثابت درون `struct`ها (مفید برای فراخوانی توابع unmanaged؛ فصل ۲۴).
 
@@ -4800,7 +4800,7 @@ new UnsafeClass("Christian Troy");
 + بافرهای با اندازه ثابت آرایه نیستند؛ اگر `Buffer` آرایه بود، شامل مرجعی به شیء روی heap مدیریت‌شده می‌شد، نه ۳۰ بایت داخل خود `struct`.
 + کلیدواژه `fixed` در این مثال همچنین شیء روی heap (نمونه `UnsafeClass`) را سنجاق می‌کند. بنابراین `fixed` دو معنا دارد: **ثابت در اندازه** و **ثابت در مکان**. اغلب با هم استفاده می‌شوند، زیرا یک بافر با اندازه ثابت باید در مکان ثابت باشد تا قابل استفاده باشد.
 
-### اشاره‌گر void (`void*`) 🔹
+### اشاره‌گر void (`void*`)
 
 یک **اشاره‌گر void** (`void*`) هیچ فرضی درباره نوع داده پایه ندارد و برای توابعی که با حافظه خام کار می‌کنند مفید است. تبدیل ضمنی از هر نوع اشاره‌گر به `void*` وجود دارد.
 
@@ -4835,7 +4835,7 @@ unsafe void Zap(void* memory, int byteCount)
 
 ---
 
-### اعداد با اندازه بومی (Native-Sized Integers) 🧮
+### اعداد با اندازه بومی (Native-Sized Integers)
 
 نوع‌های `nint` و `nuint` (معرفی شده در C# 9) اندازه‌ای مطابق فضای آدرس پردازش در زمان اجرا دارند (در عمل، ۳۲ یا ۶۴ بیت). این نوع‌ها مانند اعداد استاندارد رفتار می‌کنند و از عملیات حسابی و بررسی سرریز (overflow) پشتیبانی کامل دارند:
 
@@ -4865,7 +4865,7 @@ unsafe nint AddressDif(char* x, char* y) => (nint)x - (nint)y;
 
 ---
 
-### رفتار زمان اجرا در .NET 7+ ⚙️
+### رفتار زمان اجرا در .NET 7+
 
 در پروژه‌هایی که هدف آن‌ها .NET 7 یا بالاتر است، `nint` و `nuint` معادل `System.IntPtr` و `System.UIntPtr` عمل می‌کنند، مشابه اینکه `int` معادل `System.Int32` است.
 
@@ -4874,7 +4874,7 @@ unsafe nint AddressDif(char* x, char* y) => (nint)x - (nint)y;
 
 ---
 
-### رفتار زمان اجرا در .NET 6 یا پایین‌تر ⚡
+### رفتار زمان اجرا در .NET 6 یا پایین‌تر
 
 در پروژه‌هایی که هدف آن‌ها .NET 6 یا پایین‌تر است، `nint` و `nuint` هنوز از `IntPtr` و `UIntPtr` استفاده می‌کنند.
 
@@ -4891,7 +4891,7 @@ Console.WriteLine(y * y);   // خطای کامپایل: عملگر * پشتیب�
 
 ---
 
-### اشاره‌گرهای تابع (Function Pointers) 🔗
+### اشاره‌گرهای تابع (Function Pointers)
 
 یک **اشاره‌گر تابع** (معرفی در C# 9) مانند delegate است اما بدون واسطه نمونه delegate؛ مستقیماً به آدرس یک متد اشاره می‌کند.
 
@@ -4942,7 +4942,7 @@ var pointer2 = (delegate*<string, decimal>)(IntPtr)functionPointer;
 Console.WriteLine(pointer2("Hello, unsafe world"));
 ```
 
-### `[SkipLocalsInit]` ⚡
+### `[SkipLocalsInit]`
 
 وقتی C# یک متد را کامپایل می‌کند، یک flag تولید می‌کند که به runtime می‌گوید متغیرهای محلی متد را به مقادیر پیش‌فرضشان مقداردهی کند (با صفر کردن حافظه).
 
@@ -4991,7 +4991,7 @@ void Foo()
 
 ---
 
-### دستورات پیش‌پردازنده (Preprocessor Directives) 🛠️
+### دستورات پیش‌پردازنده (Preprocessor Directives)
 
 دستورات پیش‌پردازنده به کامپایلر اطلاعات اضافی درباره بخش‌های کد می‌دهند. رایج‌ترین آن‌ها **دستورات شرطی** هستند که راهی برای شامل یا حذف بخش‌هایی از کد در زمان کامپایل فراهم می‌کنند:
 
@@ -5033,7 +5033,7 @@ class MyClass
 
 ---
 
-### `#error` و `#warning` ⚠️
+### `#error` و `#warning`
 
 این دستورات از سوءاستفاده تصادفی از دستورات شرطی جلوگیری می‌کنند، با ایجاد **هشدار یا خطا توسط کامپایلر** در صورت مجموعه نامطلوبی از سمبل‌ها.
 
@@ -5043,7 +5043,7 @@ class MyClass
 ![Conventions-UsedThis-Book](../../../assets/image/04/Table-4-3.jpeg)
 </div>
 
-### Conditional Attributes 🎯
+### Conditional Attributes
 
 یک **attribute** که با `Conditional` تزئین شده باشد، تنها در صورتی کامپایل می‌شود که **سمبل پیش‌پردازنده مشخص شده** موجود باشد:
 
@@ -5070,7 +5070,7 @@ class Foo
 
 ---
 
-### Pragma Warning ⚠️
+### Pragma Warning
 
 کامپایلر وقتی چیزی در کد شما را غیرعمدی تشخیص دهد، یک **هشدار (warning)** ایجاد می‌کند. بر خلاف خطاها، هشدارها معمولاً مانع کامپایل شدن برنامه نمی‌شوند.
 
@@ -5094,7 +5094,7 @@ public class Foo
 
 ---
 
-### مستندسازی XML 📄
+### مستندسازی XML
 
 یک **کامنت مستندسازی (documentation comment)**، تکه‌ای از XML است که یک نوع یا عضو را مستند می‌کند. این کامنت درست قبل از تعریف نوع یا عضو قرار می‌گیرد و با سه اسلش `///` شروع می‌شود:
 
@@ -5136,7 +5136,7 @@ public void Cancel() { ... }
 
 ---
 
-### تگ‌های استاندارد XML برای مستندسازی 📑
+### تگ‌های استاندارد XML برای مستندسازی
 
 تگ‌های استاندارد XML که Visual Studio و ابزارهای تولید مستندات می‌شناسند:
 
@@ -5219,7 +5219,7 @@ public void Cancel() { ... }
   <include file='filename' path='tagpath[@name="id"]'>...</include>
   ```
 
-### User-Defined Tags 🏷️
+### User-Defined Tags
 
 چیزی به‌خصوص در مورد تگ‌های پیش‌فرض XML که توسط کامپایلر C# شناخته می‌شوند وجود ندارد و شما آزاد هستید **تگ‌های خودتان** را تعریف کنید.
 
@@ -5232,7 +5232,7 @@ public void Cancel() { ... }
 
 ---
 
-### Type or Member Cross-References 🔗
+### Type or Member Cross-References
 
 نام‌های نوع و ارجاعات متقابل به نوع یا عضو به **IDهایی یکتا** تبدیل می‌شوند که نوع یا عضو را مشخص می‌کنند.
 
@@ -5247,7 +5247,7 @@ public void Cancel() { ... }
 ![Conventions-UsedThis-Book](../../../assets/image/04/Table-4-4.jpeg)
 </div>
 
-### نمونه‌ای از Type و Member IDs 📝
+### نمونه‌ای از Type و Member IDs
 
 قواعدی که مشخص می‌کنند **امضاها (signatures)** چگونه تولید می‌شوند، مستند شده‌اند، اگرچه نسبتاً پیچیده هستند.
 

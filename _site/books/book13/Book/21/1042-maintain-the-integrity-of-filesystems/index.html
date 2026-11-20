@@ -1,0 +1,410 @@
+<!doctype html><html lang="fa" dir="rtl"> <head><script>
+    if (window.location.pathname.startsWith('/gitab/')) {
+      window.location.replace(window.location.pathname.replace(/^\/gitab\//i, '/Gitab/') + window.location.search + window.location.hash);
+    }
+    (() => {
+      try {
+        const t = localStorage.getItem('gitab-theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', t);
+        document.documentElement.dataset.colorMode = t;
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        document.documentElement.dataset.colorMode = 'dark';
+      }
+    })();
+  </script> <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5"> <title>۱۰۴.۲ نگهداری و بررسی یکپارچگی فایل‌سیستم‌ها</title><meta name="description" content="۱۰۴.۲ نگهداری و بررسی یکپارچگی فایل‌سیستم‌ها — مطالعه آنلاین و رایگان از کتاب «راهنمای آزمون LPIC-1 (ورژن ۵۰۰)» (LPIC-1 Study Guide (Version 500)) اثر جادی میرمیرانی با ترجمه جادی میرمیرانی در گیتاب."> <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"><meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"> <meta name="theme-color" content="#090d16"><meta name="referrer" content="strict-origin-when-cross-origin"> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https:; frame-src https://www.youtube.com https://www.youtube-nocookie.com https://maps.google.com https://www.google.com; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self';"><link rel="icon" type="image/png" href="/Gitab/favicon.png"> <link rel="canonical" href="https://hheydarian.github.io/Gitab/books/book13/Book/21/1042-maintain-the-integrity-of-filesystems/"><link rel="alternate" hreflang="fa" href="https://hheydarian.github.io/Gitab/books/book13/Book/21/1042-maintain-the-integrity-of-filesystems/"> <link rel="alternate" hreflang="x-default" href="https://hheydarian.github.io/Gitab/books/book13/Book/21/1042-maintain-the-integrity-of-filesystems/"><link rel="alternate" type="text/plain" title="LLMs.txt" href="/Gitab/llms.txt"> <link rel="sitemap" type="application/xml" title="Sitemap" href="/Gitab/sitemap.xml"><meta property="og:locale" content="fa_IR"> <meta property="og:type" content="article"><meta property="og:site_name" content="گیتاب | Gitab"> <meta property="og:title" content="۱۰۴.۲ نگهداری و بررسی یکپارچگی فایل‌سیستم‌ها"><meta property="og:description" content="۱۰۴.۲ نگهداری و بررسی یکپارچگی فایل‌سیستم‌ها — مطالعه آنلاین و رایگان از کتاب «راهنمای آزمون LPIC-1 (ورژن ۵۰۰)» (LPIC-1 Study Guide (Version 500)) اثر جادی میرمیرانی با ترجمه جادی میرمیرانی در گیتاب."> <meta property="og:url" content="https://hheydarian.github.io/Gitab/books/book13/Book/21/1042-maintain-the-integrity-of-filesystems/"><meta property="og:image" content="https://hheydarian.github.io/Gitab/images/lpic1book/Cover.jpg"> <meta property="og:image:alt" content="۱۰۴.۲ نگهداری و بررسی یکپارچگی فایل‌سیستم‌ها"><meta name="twitter:card" content="summary_large_image"> <meta name="twitter:title" content="۱۰۴.۲ نگهداری و بررسی یکپارچگی فایل‌سیستم‌ها"><meta name="twitter:description" content="۱۰۴.۲ نگهداری و بررسی یکپارچگی فایل‌سیستم‌ها — مطالعه آنلاین و رایگان از کتاب «راهنمای آزمون LPIC-1 (ورژن ۵۰۰)» (LPIC-1 Study Guide (Version 500)) اثر جادی میرمیرانی با ترجمه جادی میرمیرانی در گیتاب."> <meta name="twitter:image" content="https://hheydarian.github.io/Gitab/images/lpic1book/Cover.jpg"><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://hheydarian.github.io/Gitab/#organization","name":"گیتاب | Gitab","alternateName":"Gitab","url":"https://hheydarian.github.io/Gitab/","logo":{"@type":"ImageObject","url":"https://hheydarian.github.io/Gitab/favicon.png"},"sameAs":["https://github.com/hheydarian/Gitab"]},{"@type":"WebSite","@id":"https://hheydarian.github.io/Gitab/#website","url":"https://hheydarian.github.io/Gitab/","name":"گیتاب | Gitab","inLanguage":"fa-IR","publisher":{"@id":"https://hheydarian.github.io/Gitab/#organization"},"potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://hheydarian.github.io/Gitab/books/list-books/?q={search_term_string}"},"query-input":"required name=search_term_string"}},{"@type":"WebPage","@id":"https://hheydarian.github.io/Gitab/books/book13/Book/21/1042-maintain-the-integrity-of-filesystems/#webpage","url":"https://hheydarian.github.io/Gitab/books/book13/Book/21/1042-maintain-the-integrity-of-filesystems/","name":"۱۰۴.۲ نگهداری و بررسی یکپارچگی فایل‌سیستم‌ها","description":"۱۰۴.۲ نگهداری و بررسی یکپارچگی فایل‌سیستم‌ها — مطالعه آنلاین و رایگان از کتاب «راهنمای آزمون LPIC-1 (ورژن ۵۰۰)» (LPIC-1 Study Guide (Version 500)) اثر جادی میرمیرانی با ترجمه جادی میرمیرانی در گیتاب.","inLanguage":"fa-IR","isPartOf":{"@id":"https://hheydarian.github.io/Gitab/#website"}},{"@type":"TechArticle","headline":"۱۰۴.۲ نگهداری و بررسی یکپارچگی فایل‌سیستم‌ها","description":"۱۰۴.۲ نگهداری و بررسی یکپارچگی فایل‌سیستم‌ها — مطالعه آنلاین و رایگان از کتاب «راهنمای آزمون LPIC-1 (ورژن ۵۰۰)» (LPIC-1 Study Guide (Version 500)) اثر جادی میرمیرانی با ترجمه جادی میرمیرانی در گیتاب.","url":"https://hheydarian.github.io/Gitab/books/book13/Book/21/1042-maintain-the-integrity-of-filesystems/","inLanguage":"fa-IR","isAccessibleForFree":true,"author":{"@type":"Person","name":"جادی میرمیرانی"},"translator":{"@type":"Person","name":"جادی میرمیرانی"},"isPartOf":{"@type":"Book","name":"راهنمای آزمون LPIC-1 (ورژن ۵۰۰)","alternateName":"LPIC-1 Study Guide (Version 500)","url":"https://hheydarian.github.io/Gitab/books/book13/"}}]}</script> <link rel="preload" href="/Gitab/fonts/Vazirmatn.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/Gitab/styles/main.css?v=2.4" as="style"> <link rel="preload" href="/Gitab/styles/gitab-modern.css?v=2.5" as="style"><style>@font-face{font-family:'Lalezar';src:url('/Gitab/fonts/Lalezar.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}@font-face{font-family:'Vazirmatn';src:url('/Gitab/fonts/Vazirmatn.woff2') format('woff2');font-weight:100 900;font-style:normal;font-display:swap}html,body,button,input,optgroup,select,textarea,.filter-pill{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}input::placeholder,textarea::placeholder{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}</style> <link rel="stylesheet" href="/Gitab/styles/main.css?v=2.4"><link rel="stylesheet" href="/Gitab/styles/gitab-modern.css?v=2.5"> <link rel="stylesheet" href="/Gitab/styles/vendor/github-dark.min.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="/Gitab/styles/vendor/github-dark.min.css"></noscript></head> <body><header class="header"> <div class="container nav-wrap"><a href="/Gitab/" class="brand" aria-label="صفحه اصلی گیتاب"> <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="30" height="30" decoding="async"> <span class="brand-text">Gitab</span> </a> <nav class="nav" id="mainNav"><a href="/Gitab/" >خانه</a> <a href="/Gitab/books/list-books" aria-current="page">کتاب‌ها</a> <a href="/Gitab/courses/" >دوره‌ها</a> <a href="/Gitab/translator.html" >مترجمین</a></nav> <div class="nav-actions"><button id="themeToggle" class="theme-toggle-btn" aria-label="تغییر تم" title="تغییر تم"> <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن" width="18" height="18" decoding="async" style="display:none"> <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک" width="18" height="18" decoding="async"> </button> <a class="btn-github-pill" href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" title="مشاهده سورس گیتاب در گیت‌هاب"> <img src="/Gitab/icone/github.svg" alt="GitHub" width="16" height="16" decoding="async"> <span>گیت‌هاب</span> </a> <button class="mobile-menu-btn" id="mobileMenuBtn" type="button" aria-label="باز کردن منو" aria-expanded="false"> <svg class="mob-icon-open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="4" y1="7" x2="20" y2="7"></line> <line x1="4" y1="12" x2="20" y2="12"></line> <line x1="4" y1="17" x2="14" y2="17"></line> </svg> <svg class="mob-icon-close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="18" y1="6" x2="6" y2="18"></line> <line x1="6" y1="6" x2="18" y2="18"></line> </svg> </button></div> </div><div class="mobile-drawer" id="mobileDrawer" aria-hidden="true"> <div class="mobile-drawer-inner"><div class="mobile-drawer-section-label">ناوبری سریع</div><nav class="mobile-drawer-links" aria-label="منوی موبایل"> <a href="/Gitab/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M3 10.5 12 3l9 7.5"></path> <path d="M5 9.5V20a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V9.5"></path> </svg> </span> <span class="mob-nav-text">صفحه نخست</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/books/list-books" class="mobile-drawer-link active" aria-current="page"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path> </svg> </span> <span class="mob-nav-text">کتابخانه و فهرست کتاب‌ها</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/courses/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path> <path d="M6 12v5c3 3 9 3 12 0v-5"></path> </svg> </span> <span class="mob-nav-text">دوره‌های آموزشی</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/translator.html" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path> <circle cx="9" cy="7" r="4"></circle> <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path> <path d="M16 3.13a4 4 0 0 1 0 7.75"></path> </svg> </span> <span class="mob-nav-text">مترجمین و همکاران</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> </nav><div class="mobile-drawer-divider"></div><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" class="mobile-drawer-link mobile-drawer-gh"> <span class="mob-nav-icon" aria-hidden="true"> <img src="/Gitab/icone/github.svg" alt="" width="17" height="17" loading="lazy" decoding="async"> </span> <span class="mob-nav-text">مخزن گیت‌هاب پروژه</span> <span class="mob-nav-ext" aria-hidden="true">↗</span> </a> </div></div> </header><div class="reading-progress-track"> <div class="reading-progress-fill" id="readingProgressBar"></div></div> <main class="site-main chapter-reading-page"><div class="chapter-page-wrapper"> <nav class="chapter-clean-breadcrumb" aria-label="مسیر راهنما" dir="rtl"><a href="/Gitab/">خانه</a> <span class="bc-sep" aria-hidden="true">/</span> <a href="/Gitab/books/list-books/">کتاب‌ها</a> <span class="bc-sep" aria-hidden="true">/</span> <a href="/Gitab/books/book13/"><bdi>راهنمای آزمون LPIC-1</bdi></a> <span class="bc-sep" aria-hidden="true">/</span> <span class="bc-current-leaf"><bdi>۱۰۴.۲ نگهداری و بررسی یکپارچگی فایل‌سیستم‌ها</bdi></span></nav> <article class="chapter-prose-container markdown-body" id="chapterArticle" dir="rtl"><h1>۱۰۴.۲ نگهداری و بررسی یکپارچگی فایل‌سیستم‌ها</h1><div class="callout callout-info" style="background: rgba(59, 130, 246, 0.08); border-right: 4px solid #3b82f6; padding: 16px 20px; border-radius: 8px; margin-bottom: 24px;"> <strong>خلاصه هدف آزمون:</strong> بررسی سلامت دیسک با fsck، e2fsck، نظارت بر پارامترها با tune2fs و بررسی فضای مصرفی با df و du. </div><div class="video-container" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; border-radius: 12px; margin: 24px 0; border: 1px solid var(--g-border-dim);"> <iframe src="https://www.youtube.com/embed/qcAZ7vr6W9U" title="ویدئوی آموزشی جادی برای این سرفصل" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen></iframe></div> <h2>🎯 اهداف و سرفصل‌های این بخش</h2><p>در این درسنامه موارد زیر را بررسی و مرور می‌کنیم:</p><ul> <li>مفاهیم کلیدی مورد پرسش در آزمون بین‌المللی LPIC-1</li><li>دستورات، فایل‌های پیکربندی و ابزارهای مرتبط در خط فرمان</li><li>نکات پرتکرار آزمون‌های ۱۰۱ و ۱۰۲ همراه با نمونه‌های کاربردی</li></ul> <hr><h2>📝 متن درسنامه و توضیحات تکمیلی</h2><p><strong>ضریب اهمیت در آزمون (Weight):</strong> ۲</p><p>داوطلبان باید بتوانند یک فایل‌سیستم استاندارد و همچنین داده‌های اضافی مرتبط با فایل‌سیستم‌های ژورنال‌دار (Journaling) را نگهداری و مدیریت کنند.</p><h2>اهداف و ابزارهای کلیدی</h2><ul> <li>بررسی یکپارچگی و سلامت فایل‌سیستم‌ها</li><li>پایش فضای آزاد و تعداد inodeها</li><li>تعمیر مشکلات ساده فایل‌سیستم</li></ul> <p>فهرست دستورهای مرتبط:</p><div dir="ltr"> <ul><li><code>du</code></li><li><code>df</code></li><li><code>fsck</code></li><li><code>e2fsck</code></li><li><code>mke2fs</code></li><li><code>tune2fs</code></li><li><code>xfs_repair</code></li><li><code>xfs_fsr</code></li><li><code>xfs_db</code></li></ul> </div><h2>دستورهای du و df</h2><p>در بسیاری از مواقع می‌خواهید بفهمید چقدر فضای خالی روی دیسک باقی مانده، یک دایرکتوری خاص چقدر فضا اشغال کرده، یا چند عدد <code>inode</code> باقی مانده است.</p><blockquote> <p><strong>نکته:</strong> ساختار <code>inode</code> (یا index node) یک ساختار داده در فایل‌سیستم‌های شبه یونیکسی است که یک شیء فایل‌سیستمی مثل فایل یا دایرکتوری را توصیف می‌کند. هر <code>inode</code> ویژگی‌ها و موقعیت بلوک‌های داده آن شیء روی دیسک را ذخیره می‌کند. ویژگی‌های شیء می‌تواند شامل فراداده (زمان آخرین تغییر، دسترسی و ویرایش) و همچنین اطلاعات مالک و سطح دسترسی باشد. یک دایرکتوری در واقع فهرستی از inodeها به همراه نام‌های اختصاص‌داده‌شده به آن‌هاست که شامل ورودی برای خودش، والدش و هر یک از فرزندانش می‌شود. <small>(<a href="https://en.wikipedia.org/wiki/Inode">ویکی‌پدیا</a>)</small></p></blockquote> <h3>دستور df</h3><p>دستور <code>df</code> (مخفف <strong>d</strong>isk <strong>f</strong>ree) برای اطلاع از فضای آزاد و فضای مصرف‌شده روی فایل‌سیستم‌ها به کار می‌رود:</p><pre class="hljs"><code>jadi@funlife:~$ df -TH
+Filesystem        Type      Size  Used Avail Use% Mounted on
+/dev/sda2         ext4       23G   15G  7.7G  65% /
+none              tmpfs     4.0K     0  4.0K   0% /sys/fs/cgroup
+udev              devtmpfs  3.9G  4.0K  3.9G   1% /dev
+tmpfs             tmpfs     788M  1.4M  786M   1% /run
+none              tmpfs     5.0M  4.0K  5.0M   1% /run/lock
+none              tmpfs     3.9G   19M  3.9G   1% /run/shm
+none              tmpfs     100M   28K  100M   1% /run/user
+/dev/mapper/chome ext4      243G  229G   14G  95% /home/jadi
+/dev/sdb1         vfat      3.7G  7.8M  3.6G   1% /media/jadi/BA82-BECD
+</code></pre> <p>در اینجا سوییچ <code>-T</code> به <code>df</code> می‌گوید نوع فایل‌سیستم‌ها را هم نمایش دهد و <code>-H</code> اعداد را برای انسان خوانا می‌کند (در توان‌های ۱۰۰۰؛ برای توان‌های ۲ یعنی ۱۰۲۴ از <code>-h</code> استفاده کنید).</p><p>در برخی فایل‌سیستم‌ها (مانند <code>ext2</code> تا <code>ext4</code>) تعداد ثابتی <code>inode</code> داریم، بنابراین ممکن است لازم باشد تعداد inodeهای باقی‌مانده را هم چک کنید. برای این کار از سوییچ <code>-i</code> استفاده کنید:</p><pre class="hljs"><code>jadi@funlife:~$ df -i
+Filesystem          Inodes  IUsed    IFree IUse% Mounted on
+/dev/sda2          1531904 458616  1073288   30% /
+none               1007533      4  1007529    1% /sys/fs/cgroup
+udev               1003703    542  1003161    1% /dev
+tmpfs              1007533    644  1006889    1% /run
+none               1007533      3  1007530    1% /run/lock
+none               1007533    162  1007371    1% /run/shm
+none               1007533     33  1007500    1% /run/user
+/dev/mapper/chome 16171008 269293 15901715    2% /home/jadi
+/dev/sdb1                0      0        0     - /media/jadi/BA82-BECD
+</code></pre> <blockquote><p><strong>نکته:</strong> فرمت فایل <code>vfat</code> اصلاً <code>inode</code> ندارد؛ در فایل‌سیستم‌های <code>vfat</code> مفهومی به نام مالک فایل یا دسترسی‌های لینوکسی وجود ندارد.</p></blockquote> <h3>دستور du</h3><p>دستور <code>du</code> (مخفف <strong>d</strong>isk <strong>u</strong>sage) فضای مصرف‌شده توسط <strong>دایرکتوری‌ها و فایل‌ها</strong> را نمایش می‌دهد. سوییچ‌های پرکاربرد آن عبارت‌اند از:</p><table> <thead><tr> <th style="text-align:center">سوییچ</th><th style="text-align:left">کاربرد</th></tr> </thead><tbody> <tr><td style="text-align:center"><code>-h</code></td><td style="text-align:left">چاپ حجم‌ها در توان‌های ۱۰۲۴ (مثلاً <code>1023M</code>) به صورت خوانا برای انسان</td></tr> <tr><td style="text-align:center"><code>-c</code></td><td style="text-align:left">نمایش جمع کل (Grand total) در انتها</td></tr> <tr><td style="text-align:center"><code>--max-depth 2</code></td><td style="text-align:left">همه چیز را محاسبه می‌کند اما فقط تا عمق ۲ دایرکتوری نمایش می‌دهد</td></tr> <tr><td style="text-align:center"><code>-s</code></td><td style="text-align:left">فقط خلاصه جمع کل را نمایش می‌دهد و دایرکتوری‌ها را یکی‌یکی نشان نمی‌دهد</td></tr> </tbody></table> <pre class="hljs"><code>jadi@funlife:~/w/lpic$ du
+16    ./101
+701456    ./done
+701464    ./Logo/chert
+704588    ./Logo
+12    ./data
+12    ./100
+9432884    .
+jadi@funlife:~/w/lpic$ du -c
+16    ./101
+701456    ./done
+701464    ./Logo/chert
+704588    ./Logo
+12    ./data
+12    ./100
+9432884    .
+9432884    total
+jadi@funlife:~/w/lpic$ du -hs
+9.0G    .
+</code></pre> <blockquote><p><strong>نکته:</strong> در بسیاری از مواقع وقتی می‌خواهم ببینم چه چیزی فضای سرورم را پر کرده، دستوری شبیه به <code>sudo du /home -h --max-depth 1</code> را اجرا می‌کنم.</p></blockquote> <h2>بررسی سلامت فایل‌سیستم‌ها</h2><h3>دستور fsck</h3><p>اگر اتفاق بدی برای فایل‌سیستم شما بیفتد (مثلاً برق ناگهانی قطع شود)، با یک فایل‌سیستم خراب‌شده طرف خواهید بود. دستور عمومی برای تعمیر این وضعیت <code>fsck</code> است. از نظر فنی، این دستور یک پیش‌رابط (Front-end) برای چندین دستور دیگر است:</p><pre class="hljs"><code>jadi@funlife:~$ ls /sbin/*fsck*
+/sbin/dosfsck       /sbin/fsck.ext2     /sbin/fsck.fat     /sbin/fsck.vfat
+/sbin/e2fsck       /sbin/fsck.ext3     /sbin/fsck.minix
+/sbin/fsck       /sbin/fsck.ext4     /sbin/fsck.msdos
+/sbin/fsck.cramfs  /sbin/fsck.ext4dev  /sbin/fsck.nfs
+</code></pre> <blockquote><p><strong>نکته:</strong> برخی از این فایل‌ها در واقع فقط Hard linkهایی به دستور <code>e2fsck</code> هستند.</p></blockquote> <p>یک سوییچ رایج در زمان بوت، <code>-A</code> است که به <code>fsck</code> می‌گوید تمام فایل‌سیستم‌های موجود در <code>/etc/fstab</code> را به ترتیب مقدار <code>passno</code> (ستون ششم آن فایل) بررسی کند (فایل‌سیستم‌هایی که <code>passno</code> آن‌ها <code>0</code> باشد، هنگام بوت بررسی نمی‌شوند).</p><pre class="hljs"><code>root@funlife:~# fsck /dev/sdb
+fsck from util-linux 2.25.1
+e2fsck 1.42.10 (18-May-2014)
+/dev/sdb is in use.
+e2fsck: Cannot continue, aborting.
+
+
+root@funlife:~# umount /dev/sdb
+umount: /dev/sdb: not mounted
+root@funlife:~# umount /dev/sdb1
+root@funlife:~# fsck /dev/sdb
+fsck from util-linux 2.25.1
+e2fsck 1.42.10 (18-May-2014)
+ext2fs_open2: Bad magic number in super-block
+fsck.ext2: Superblock invalid, trying backup blocks...
+fsck.ext2: Bad magic number in super-block while trying to open /dev/sdb
+
+The superblock could not be read or does not describe a valid ext2/ext3/ext4
+filesystem.  If the device is valid and it really contains an ext2/ext3/ext4
+filesystem (and not swap or ufs or something else), then the superblock
+is corrupt, and you might try running e2fsck with an alternate superblock:
+    e2fsck -b 8193 &lt;device&gt;
+ or
+    e2fsck -b 32768 &lt;device&gt;
+</code></pre> <p>همچنین می‌توانید فایل‌سیستم‌ها را با UUID (که با دستور <code>blkid</code> پیدا می‌کنید) یا با برچسب (Label) بررسی کنید:</p><pre class="hljs"><code>root@funlife:~# fsck /dev/sdb
+fsck from util-linux 2.25.1
+e2fsck 1.42.10 (18-May-2014)
+ext2fs_open2: Bad magic number in super-block
+fsck.ext2: Superblock invalid, trying backup blocks...
+fsck.ext2: Bad magic number in super-block while trying to open /dev/sdb
+
+The superblock could not be read or does not describe a valid ext2/ext3/ext4
+filesystem.  If the device is valid and it really contains an ext2/ext3/ext4
+filesystem (and not swap or ufs or something else), then the superblock
+is corrupt, and you might try running e2fsck with an alternate superblock:
+    e2fsck -b 8193 &lt;device&gt;
+ or
+    e2fsck -b 32768 &lt;device&gt;
+
+root@funlife:~# blkid
+/dev/sda1: LABEL=&quot;movies&quot;
+/dev/sdb1: UUID=&quot;BA82-BECD&quot; TYPE=&quot;vfat&quot; PARTUUID=&quot;381add66-01&quot;
+root@funlife:~# fsck LABEL=movies
+fsck from util-linux 2.25.1
+root@funlife:~# fsck UUID=&quot;BA82-BECD&quot;
+fsck from util-linux 2.25.1
+fsck.fat 3.0.26 (2014-03-07)
+/dev/sdb1: 14 files, 1972/945094 clusters
+</code></pre> <p>از <code>-N</code> استفاده کنید تا بدون اجرای واقعی، ببینید چه دستور یا آزمونی قرار است اجرا شود:</p><pre class="hljs"><code>root@funlife:~# fsck -N UUID=&quot;BA82-BECD&quot;
+fsck from util-linux 2.25.1
+[/sbin/fsck.vfat (1) -- /dev/sdb1] fsck.vfat /dev/sdb1
+</code></pre> <blockquote><p><strong>نکته:</strong> برای بررسی یک فایل‌سیستم XFS (در نسخه‌های جدیدتر <code>xfs_repair -n</code> هم به کار می‌رود) در قدیم از دستور <code>xfs_check</code> استفاده می‌شد.</p></blockquote> <p>برخی نسخه‌ها سوییچ <code>-a</code> را برای تعمیر خودکار تمام مشکلات یافت‌شده دارند، اما استفاده از آن معمولاً توصیه نمی‌شود.</p><h3>دستور e2fsck</h3><p>دستور <code>e2fsck</code> برای بررسی فایل‌سیستم‌های خانواده <code>ext2</code>/<code>ext3</code>/<code>ext4</code> استفاده می‌شود. برای فایل‌سیستم‌های <code>ext3</code> و <code>ext4</code> که از <code>journal</code> استفاده می‌کنند، اگر سیستم به شکل غیرتمیز (Unclean) و بدون خطای سخت‌افزاری خاموش شده باشد، معمولاً پس از بازپخش تراکنش‌های ثبت‌شده در ژورنال، فایل‌سیستم به عنوان «تمیز» (Clean) علامت‌گذاری می‌شود. بنابراین، برای فایل‌سیستم‌های دارای <strong>journaling</strong>، دستور <code>e2fsck</code> به صورت عادی ژورنال را بازپخش کرده و خارج می‌شود، مگر اینکه سوپربلاک نشان دهد بررسی‌های بیشتری لازم است.</p><p>آرگومان <code>device</code> یک دستگاه بلوکی (مثلاً <code>/dev/sdc1</code>) یا فایلی شامل فایل‌سیستم است.</p><p>توجه داشته باشید که به طور کلی اجرای <code>e2fsck</code> روی فایل‌سیستم‌های <strong>مانت‌شده (Mounted)</strong> ایمن نیست. تنها استثنا زمانی است که گزینه <code>-n</code> مشخص شده باشد و گزینه‌های <code>-c</code>، <code>-l</code> یا <code>-L</code> داده نشده باشند. با این حال، حتی اگر اجرای آن در این حالت بی‌خطر باشد، نتایج چاپ‌شده توسط <code>e2fsck</code> در زمان مانت بودن فایل‌سیستم معتبر نیستند. اگر <code>e2fsck</code> پرسید که آیا باید یک فایل‌سیستم مانت‌شده را بررسی کند یا نه، تنها پاسخ درست <code>no</code> است؛ فقط متخصصانی که دقیقاً می‌دانند چه می‌کنند ممکن است پاسخ دیگری بدهند.</p><p>اگر <code>e2fsck</code> در حالت تعاملی اجرا شود (یعنی هیچ‌کدام از گزینه‌های <code>-y</code>، <code>-n</code> یا <code>-p</code> مشخص نشده باشند)، برنامه برای تعمیر هر مشکل یافت‌شده از کاربر سوال می‌پرسد: پاسخ <code>y</code> خطا را تعمیر می‌کند، <code>n</code> آن را دست‌نخورده می‌گذارد و <code>a</code> این مشکل و تمام مشکلات بعدی را خودکار حل می‌کند؛ زدن <code>Enter</code> پاسخ پیش‌فرض را انتخاب می‌کند که قبل از علامت سوال چاپ شده است. زدن <code>Control-C</code> نیز فوراً به <code>e2fsck</code> خاتمه می‌دهد.</p><h3>دستور mke2fs</h3><p>دستور <code>mke2fs</code> برای ساخت فایل‌سیستم‌های <code>ext2</code>، <code>ext3</code> یا <code>ext4</code> (معمولاً روی یک پارتیشن دیسک) به کار می‌رود. آرگومان <code>device</code> فایل ویژه متناظر با دستگاه است (مثلاً <code>/dev/hdXX</code> یا <code>/dev/sdXX</code>) و <code>blocks-count</code> تعداد بلوک‌های روی دستگاه را مشخص می‌کند که اگر وارد نشود، <code>mke2fs</code> به طور خودکار اندازه فایل‌سیستم را تشخیص می‌دهد. اگر این دستور با نام <code>mkfs.ext3</code> فراخوانی شود، مثل این است که گزینه <code>-j</code> داده شده باشد و یک ژورنال نیز ساخته می‌شود.</p><p>مقادیر پیش‌فرض پارامترهای فایل‌سیستم تازه ساخته‌شده، در صورتی که با گزینه‌های خط فرمان بازنویسی نشوند، توسط فایل پیکربندی <code>/etc/mke2fs.conf</code> کنترل می‌شوند. برای جزئیات بیشتر صفحه راهنمای <code>mke2fs.conf(5)</code> را ببینید.</p><h3>دستور tune2fs</h3><p>این دستور برای تنظیم و بهینه‌سازی فایل‌سیستم‌های خانواده <code>ext</code> است. می‌تواند اطلاعات را نمایش دهد و بسیاری از گزینه‌ها را تغییر دهد. گزینه <code>-l</code> پیکربندی‌های فعلی را لیست می‌کند:</p><pre class="hljs"><code>jadi@funlife:~$ sudo tune2fs -l /dev/sda2
+tune2fs 1.42.10 (18-May-2014)
+Filesystem volume name:   &lt;none&gt;
+Last mounted on:          /
+Filesystem UUID:          1651a94e-0b4e-47fb-aca0-f77e05714617
+Filesystem magic number:  0xEF53
+Filesystem revision #:    1 (dynamic)
+Filesystem features:      has_journal ext_attr resize_inode dir_index filetype needs_recovery extent flex_bg sparse_super large_file huge_file uninit_bg dir_nlink extra_isize
+Filesystem flags:         signed_directory_hash
+Default mount options:    user_xattr acl
+Filesystem state:         clean
+Errors behavior:          Continue
+Filesystem OS type:       Linux
+Inode count:              1531904
+Block count:              6123046
+Reserved block count:     306152
+Free blocks:              2302702
+Free inodes:              1073461
+First block:              0
+Block size:               4096
+Fragment size:            4096
+Reserved GDT blocks:      1022
+Blocks per group:         32768
+Fragments per group:      32768
+Inodes per group:         8192
+Inode blocks per group:   512
+Flex block group size:    16
+Filesystem created:       Mon Dec  1 10:21:42 2014
+Last mount time:          Sat Jan 31 17:21:51 2015
+Last write time:          Sat Jan 31 17:21:51 2015
+Mount count:              32
+Maximum mount count:      -1
+Last checked:             Mon Dec  1 10:21:42 2014
+Check interval:           0 (&lt;none&gt;)
+Lifetime writes:          103 GB
+Reserved blocks uid:      0 (user root)
+Reserved blocks gid:      0 (group root)
+First inode:              11
+Inode size:              256
+Required extra isize:     28
+Desired extra isize:      28
+Journal inode:            8
+First orphan inode:       786620
+Default directory hash:   half_md4
+Directory Hash Seed:      16c38a41-e709-4e04-b1c2-8a79d71ea7e8
+Journal backup:           inode blocks
+</code></pre> <h3>دستور debugfs</h3><p>این یک ابزار تعاملی برای دیباگ کردن فایل‌سیستم‌های <code>ext</code> است. به صورت پیش‌فرض فایل‌سیستم را در حالت فقط‌خواندنی (Read-only) باز می‌کند مگر اینکه با گزینه <code>-w</code> خلاف آن را بگوییم. با این ابزار حتی می‌توان فایل‌ها و دایرکتوری‌های پاک‌شده را بازیابی کرد:</p><pre class="hljs"><code>root@funlife:~# debugfs /dev/sda2
+debugfs 1.42.10 (18-May-2014)
+debugfs:  cd /etc/        &lt;-- cd
+debugfs:  pwd            &lt;-- show were am I
+[pwd]   INODE: 524289  PATH: /etc
+[root]  INODE:      2  PATH: /
+debugfs:  stat passwd        &lt;-- show data on one file
+Inode: 527187   Type: regular    Mode:  0644   Flags: 0x80000
+Generation: 1875144872    Version: 0x00000000:00000001
+User:     0   Group:     0   Size: 2145
+File ACL: 0    Directory ACL: 0
+Links: 1   Blockcount: 8
+Fragment:  Address: 0    Number: 0    Size: 0
+ ctime: 0x548d4241:a7b196fc -- Sun Dec 14 11:24:41 2014
+ atime: 0x54cc635b:6acfc148 -- Sat Jan 31 08:38:43 2015
+ mtime: 0x548d4241:a01076f8 -- Sun Dec 14 11:24:41 2014
+crtime: 0x548d4241:9f1c52f8 -- Sun Dec 14 11:24:41 2014
+Size of extra inode fields: 28
+EXTENTS:
+(0):2188172
+debugfs:  ncheck 527187        &lt;-- node check an inode
+Inode    Pathname        
+527187    /etc/passwd
+debugfs:  q            &lt;-- quit
+</code></pre> <h4>سوپربلاک (Superblock)</h4><p>سیستم‌های یونیکسی برای ذخیره <strong>فراداده فایل‌سیستم (Filesystem metadata)</strong> از سوپربلاک‌ها استفاده می‌کنند. در بیشتر مواقع این بلوک در ابتدای فایل‌سیستم قرار دارد و نسخه‌های پشتیبان آن در بخش‌های دیگر دیسک هم تکرار می‌شوند. سوییچ <code>-n</code> در <code>mke2fs</code> محل سوپربلاک‌ها را (بدون ساخت فایل‌سیستم واقعی) نمایش می‌دهد:</p><pre class="hljs"><code># mke2fs -n /dev/sda7
+mke2fs 1.41.9 (22-Aug-2009)
+Filesystem label=
+OS type: Linux
+Block size=4096 (log=2)
+Fragment size=4096 (log=2)
+7159808 inodes, 28637862 blocks
+1431893 blocks (5.00%) reserved for the super user
+First data block=0
+Maximum filesystem blocks=4294967296
+874 block groups
+32768 blocks per group, 32768 fragments per group
+8192 inodes per group
+Superblock backups stored on blocks:
+    32768, 98304, 163840, 229376, 294912, 819200, 884736, 1605632, 2654208,
+    4096000, 7962624, 11239424, 20480000, 23887872
+</code></pre> <h2>ابزارهای XFS</h2><blockquote> <p><strong>نکته:</strong> در برخی توزیع‌ها، ابزارهای <code>xfs</code> به صورت پیش‌فرض نصب نیستند و ممکن است لازم باشد بسته <code>xfsprogs</code> را نصب کنید.</p></blockquote> <p>این ابزارها برای فایل‌سیستم‌های XFS همان نقشی را دارند که <code>tune2fs</code> و خانواده آن برای ext دارند.</p><blockquote> <p><strong>نکته:</strong> دستور <code>xfs_info</code> باید روی فایل‌سیستم‌های مانت‌شده اجرا شود.</p></blockquote> <table><thead> <tr><th style="text-align:center">دستور</th><th style="text-align:left">کاربرد</th></tr> </thead><tbody> <tr><td style="text-align:center"><code>xfs_info</code></td><td style="text-align:left">نمایش اطلاعات فایل‌سیستم XFS</td></tr> <tr><td style="text-align:center"><code>xfs_growfs</code></td><td style="text-align:left">گسترش دادن (افزایش حجم) فایل‌سیستم XFS</td></tr> <tr><td style="text-align:center"><code>xfs_admin</code></td><td style="text-align:left">تغییر پارامترها روی فایل‌سیستم‌های XFS</td></tr> <tr><td style="text-align:center"><code>xfs_repair</code></td><td style="text-align:left">تعمیر مشکلات فایل‌سیستم XFS؛ توجه کنید که فایل‌سیستم تحت تعمیر باید آنمانت (Unmounted) باشد</td></tr> <tr><td style="text-align:center"><code>xfs_db</code></td><td style="text-align:left">بررسی و دیباگ فایل‌سیستم؛ برای بازرسی فایل‌سیستم XFS به کار می‌رود. در شرایط نادر می‌توان از آن برای تغییر یک فایل‌سیستم XFS نیز استفاده کرد، اما این کار معمولاً به <code>xfs_repair</code> یا اسکریپت‌هایی مثل <code>xfs_admin</code> (که در پس‌زمینه <code>xfs_db</code> را اجرا می‌کنند) سپرده می‌شود</td></tr> <tr><td style="text-align:center"><code>xfs_fsr</code></td><td style="text-align:left">بازسازمان‌دهنده (Defragmenter) فایل‌سیستم برای XFS؛ وقتی بدون آرگومان اجرا شود، تمام فایل‌های عادی در همه فایل‌سیستم‌های مانت‌شده را بازچینی می‌کند. در هر نوبت از روی <code>/etc/mtab</code> روی فایل‌سیستم‌های XFS عبور کرده و فایل‌هایی که بیشترین تعداد قطعه (Extents) را دارند انتخاب و ۱۰٪ بالایی آن‌ها را یکپارچه‌سازی می‌کند</td></tr> </tbody></table> <h3>تعمیر کردن (Repairing)</h3><p>ما از <code>fsck</code> برای نمایش وضعیت استفاده کردیم، اما هدف اصلی آن <strong>تعمیر</strong> فایل‌سیستم‌هاست. اگر بررسی زمان بوت مشکلی پیدا کند، سیستم شما را وارد خط فرمان اضطراری می‌کند تا مشکل را برطرف کنید.</p><p>در فایل‌سیستم‌های بدون ژورنال (<code>ext2</code>)، دستور <code>fsck</code> سوالات متعددی درباره تک‌تک بلوک‌ها می‌پرسد و اگر می‌خواهید تعمیر شوند باید <code>y</code> بزنید. در فایل‌سیستم‌های ژورنال‌دار (<code>ext3</code>، <code>ext4</code>، <code>xfs</code> و ...) کار <code>fsck</code> بسیار کمتر و سریع‌تر است.</p><blockquote> <p><strong>نکته:</strong> برای فایل‌سیستم‌های <code>xfs</code> از دستور <code>xfs_check</code> (یا <code>xfs_repair -n</code>) استفاده می‌شود.</p></blockquote> <p>یک سوییچ بسیار مهم <code>-n</code> است که باعث می‌شود این دستورها <strong>هیچ تغییری اعمال نکنند</strong> و فقط گزارش دهند که اگر اجرا می‌شدند قرار بود چه کاری انجام دهند.</p><h2>سایر ابزارها</h2><p>برای آزمون LPIC خوب است با این دستورها هم آشنا باشید:</p><table> <thead><tr> <th style="text-align:center">فایل‌سیستم</th><th style="text-align:center">دستور</th><th style="text-align:left">کاربرد</th></tr> </thead><tbody> <tr><td style="text-align:center"><code>ext</code></td><td style="text-align:center"><code>tune2fs</code></td><td style="text-align:left">نمایش یا تنظیم پارامترهای <code>ext2</code> و <code>ext3</code> و حتی تنظیم گزینه‌های ژورنالینگ</td></tr> <tr><td style="text-align:center"><code>ext</code></td><td style="text-align:center"><code>dumpe2fs</code></td><td style="text-align:left">چاپ اطلاعات سوپربلاک و توصیف‌گر گروه بلوک‌ها برای فایل‌سیستم‌های <code>ext2</code> یا <code>ext3</code></td></tr> <tr><td style="text-align:center"><code>ext</code></td><td style="text-align:center"><code>debugfs</code></td><td style="text-align:left">دیباگر تعاملی فایل‌سیستم برای بررسی یا تغییر وضعیت فایل‌سیستم <code>ext2</code> یا <code>ext3</code></td></tr> <tr><td style="text-align:center"><code>reiserfs</code></td><td style="text-align:center"><code>reiserfstune</code></td><td style="text-align:left">نمایش و تنظیم پارامترها در ReiserFS</td></tr> <tr><td style="text-align:center"><code>reiserfs</code></td><td style="text-align:center"><code>debugreiserfs</code></td><td style="text-align:left">چاپ اطلاعات سوپربلاک و ساختار فایل‌سیستم برای ReiserFS</td></tr> <tr><td style="text-align:center"><code>XFS</code></td><td style="text-align:center"><code>xfs_info</code></td><td style="text-align:left">نمایش اطلاعات فایل‌سیستم</td></tr> <tr><td style="text-align:center"><code>XFS</code></td><td style="text-align:center"><code>xfs_growfs</code></td><td style="text-align:left">افزایش فضای فایل‌سیستم</td></tr> <tr><td style="text-align:center"><code>XFS</code></td><td style="text-align:center"><code>xfs_admin</code></td><td style="text-align:left">تغییر پارامترهای فایل‌سیستم XFS</td></tr> <tr><td style="text-align:center"><code>XFS</code></td><td style="text-align:center"><code>xfs_repair</code></td><td style="text-align:left">تعمیر خطاها و مشکلات فایل‌سیستم</td></tr> <tr><td style="text-align:center"><code>XFS</code></td><td style="text-align:center"><code>xfs_db</code></td><td style="text-align:left">بررسی و دیباگ کردن فایل‌سیستم</td></tr> </tbody></table> <hr><div class="callout callout-tip" style="background: rgba(147, 51, 234, 0.08); border-right: 4px solid #9333ea; padding: 16px 20px; border-radius: 8px; margin-top: 32px;"> <strong>🔗 نسخه اصلی به زبان انگلیسی:</strong> این درسنامه بر اساس منبع انگلیسی جادی در مخزن <a href="https://github.com/jadijadi/lpic1book/blob/master/content/1042_maintain_the_integrity_of_filesystems.md" target="_blank" rel="noopener noreferrer">jadijadi/lpic1book</a> تدوین و سازماندهی شده است. </div></article> <nav class="chapter-single-next-nav"><a href="/Gitab/books/book13/Book/22/1043-control-mounting-and-unmounting-of-filesystems/" class="btn-next-chapter-action" id="nextChapterBtn" data-hub="/Gitab/books/book13/"> <span class="next-btn-text">فصل بعدی: ۱۰۴.۳ کنترل مانت و جداسازی دیسک‌ها (Mount)</span> <span class="next-btn-arrow">←</span> </a> </nav></div> <button class="fab-back-to-top" id="backToTopBtn" type="button" aria-label="رفتن به بالای صفحه" title="رفتن به بالا"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"> <polyline points="18 15 12 9 6 15"></polyline> </svg> </button></main> <footer class="footer-minimal"><div class="footer-container"> <div class="footer-top-row"><div class="footer-brand-side"> <a href="/Gitab/" class="footer-brand-anchor"> <img src="/Gitab/icone/logo.svg" alt="Gitab" width="28" height="28" loading="lazy" decoding="async"> <span class="footer-brand-title">گیتاب (Gitab)</span> </a> <p class="footer-tagline"> پلتفرم آزاد و مستقل برای ترجمهٔ دقیق و روان کتاب‌های مرجع مهندسی نرم‌افزار. </p></div> <div class="footer-nav-cols"><div class="footer-nav-col"> <span class="footer-nav-heading">موضوعات</span><ul class="footer-nav-list"> <li><a href="/Gitab/books/list-books/?cat=csharp">سی‌شارپ و دات‌نت</a></li><li><a href="/Gitab/books/list-books/?cat=clean-code">کد تمیز و بازآفرینی</a></li><li><a href="/Gitab/books/list-books/?cat=architecture">معماری و طراحی دامنه</a></li><li><a href="/Gitab/books/list-books/?cat=system">لینوکس و خط فرمان</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">بخش‌های سایت</span><ul class="footer-nav-list"> <li><a href="/Gitab/">صفحه اصلی</a></li><li><a href="/Gitab/books/list-books/">کتابخانه کامل</a></li><li><a href="/Gitab/courses/">دوره‌های آموزشی</a></li><li><a href="/Gitab/translator.html">تالار مترجمین</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">مشارکت و جامعه</span><ul class="footer-nav-list"> <li><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer">راهنمای همکاری در ترجمه</a></li><li><a href="https://github.com/hheydarian/Gitab/issues" target="_blank" rel="noopener noreferrer">پیشنهاد کتاب یا گزارش خطا</a></li></ul> </div></div> </div><div class="footer-bottom-line"> <span>© <span id="y">2026</span> Gitab — توسعه‌یافته برای جامعهٔ مهندسان نرم‌افزار ایرانی</span></div> </div></footer> <script>
+  (() => {
+    const root = document.documentElement;
+    const btn = document.getElementById('themeToggle');
+    const sunIcon = btn ? btn.querySelector('.icon-sun') : null;
+    const moonIcon = btn ? btn.querySelector('.icon-moon') : null;
+    const KEY = 'gitab-theme';
+
+    function updateTheme(mode) {
+      root.setAttribute('data-theme', mode);
+      root.dataset.colorMode = mode;
+      if (sunIcon && moonIcon) {
+        if (mode === 'dark') {
+          sunIcon.style.display = 'inline-block';
+          moonIcon.style.display = 'none';
+        } else {
+          sunIcon.style.display = 'none';
+          moonIcon.style.display = 'inline-block';
+        }
+      }
+    }
+
+    let saved = 'dark';
+    try { saved = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+    updateTheme(saved);
+
+    if (btn) {
+      btn.addEventListener('click', () => {
+        let current = 'dark';
+        try { current = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+        const next = current === 'dark' ? 'light' : 'dark';
+        try { localStorage.setItem(KEY, next); } catch (e) {}
+        updateTheme(next);
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      let mode = 'dark';
+      try { mode = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+      updateTheme(mode);
+      const yearSpan = document.getElementById('y');
+      if (yearSpan) yearSpan.textContent = new Date().getFullYear();
+    });
+
+    const mobBtn = document.getElementById('mobileMenuBtn');
+    const mobDrawer = document.getElementById('mobileDrawer');
+    if (mobBtn && mobDrawer) {
+      const setDrawerOpen = (open) => {
+        mobDrawer.classList.toggle('open', open);
+        mobBtn.classList.toggle('is-open', open);
+        mobBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        mobBtn.setAttribute('aria-label', open ? 'بستن منو' : 'باز کردن منو');
+        mobDrawer.setAttribute('aria-hidden', open ? 'false' : 'true');
+      };
+
+      mobBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        setDrawerOpen(!mobDrawer.classList.contains('open'));
+      });
+
+      mobDrawer.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => setDrawerOpen(false));
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && mobDrawer.classList.contains('open')) {
+          setDrawerOpen(false);
+        }
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!mobDrawer.contains(e.target) && !mobBtn.contains(e.target)) {
+          setDrawerOpen(false);
+        }
+      });
+    }
+
+    if ('serviceWorker' in navigator) {
+      const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+      if (isLocalhost) {
+        navigator.serviceWorker.getRegistrations().then(regs => {
+          for (const reg of regs) reg.unregister();
+        });
+        if ('caches' in window) {
+          caches.keys().then(names => {
+            for (const name of names) caches.delete(name);
+          });
+        }
+      } else {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/Gitab/sw.js').catch(() => {});
+        });
+      }
+    }
+  })();
+  </script> <script>
+  document.querySelectorAll('pre code').forEach(block => {
+    const pre = block.parentNode;
+    if (!pre || pre.querySelector('.copy-btn')) return;
+
+    const copySvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
+    const okSvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+
+    const btn = document.createElement('button');
+    btn.className = 'copy-btn';
+    btn.setAttribute('aria-label', 'کپی کد');
+    btn.setAttribute('title', 'کپی کد');
+    btn.setAttribute('type', 'button');
+    btn.innerHTML = copySvg;
+    pre.appendChild(btn);
+
+    btn.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(block.textContent);
+        btn.classList.add('copied');
+        btn.innerHTML = okSvg;
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          btn.innerHTML = copySvg;
+        }, 1800);
+      } catch (err) {
+        console.error('Copy failed:', err);
+      }
+    });
+  });
+  </script> <script>
+  (() => {
+    const article = document.getElementById('chapterArticle');
+    if (!article) return;
+
+    const progressBar = document.getElementById('readingProgressBar');
+    if (progressBar) {
+      window.addEventListener('scroll', () => {
+        const docElem = document.documentElement;
+        const totalHeight = docElem.scrollHeight - docElem.clientHeight;
+        if (totalHeight > 0) {
+          const progress = (window.pageYOffset / totalHeight) * 100;
+          progressBar.style.width = Math.min(100, Math.max(0, progress)) + '%';
+        }
+      }, { passive: true });
+    }
+
+    const btt = document.getElementById('backToTopBtn');
+    if (btt) {
+      window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 250) {
+          btt.classList.add('visible');
+        } else {
+          btt.classList.remove('visible');
+        }
+      }, { passive: true });
+
+      btt.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+
+    article.querySelectorAll('img').forEach(img => {
+      if (!img.hasAttribute('loading')) img.loading = 'lazy';
+      if (!img.hasAttribute('decoding')) img.decoding = 'async';
+      const parent = img.parentElement;
+      if (parent && parent.tagName === 'P') {
+        parent.style.textAlign = 'center';
+      }
+
+      img.addEventListener('error', function() {
+        const src = this.getAttribute('src');
+        if (src && src.includes('assets/image/')) {
+          const parts = src.split('assets/image/');
+          const corrected = '/Gitab/books/book13/assets/image/' + parts[1];
+          if (this.src !== corrected) {
+            this.src = corrected;
+          }
+        }
+      });
+    });
+
+    article.querySelectorAll('p').forEach(p => {
+      const trimmed = p.innerText.trim();
+      if (trimmed.startsWith('💡') || trimmed.startsWith('نکته:')) {
+        p.classList.add('react-callout', 'callout-tip');
+      } else if (trimmed.startsWith('⚠️') || trimmed.startsWith('هشدار:')) {
+        p.classList.add('react-callout', 'callout-warning');
+      } else if (trimmed.startsWith('📌') || trimmed.startsWith('مهم:')) {
+        p.classList.add('react-callout', 'callout-important');
+      } else if (trimmed.startsWith('🔹') || trimmed.startsWith('🔸')) {
+        p.classList.add('react-callout', 'callout-note');
+      }
+    });
+  })();
+  </script> <script type="speculationrules">{"prefetch":[{"where":{"and":[{"href_matches":"/Gitab/*"},{"not":{"href_matches":"/Gitab/downloads/*"}},{"not":{"selector_matches":"[download], [target='_blank']"}}]},"eagerness":"moderate"}]}</script> <script>
+  (() => {
+    if (window.HTMLScriptElement && HTMLScriptElement.supports && HTMLScriptElement.supports('speculationrules')) return;
+    const seen = new Set([window.location.href]);
+    let count = 0;
+    const prefetchLink = (e) => {
+      if (count >= 12) return;
+      const a = e.target && e.target.closest ? e.target.closest('header a, .chapter-single-next-nav a, .syllabus-chapter-item a, .btn-hero-read, .btn-card-read') : null;
+      if (!a || !a.href || a.hasAttribute('download') || a.target === '_blank') return;
+      if (a.origin !== window.location.origin || a.pathname.includes('/downloads/')) return;
+      const clean = a.href.split('#')[0];
+      if (!clean || seen.has(clean)) return;
+      seen.add(clean);
+      count++;
+      const l = document.createElement('link');
+      l.rel = 'prefetch';
+      l.href = clean;
+      document.head.appendChild(l);
+    };
+    document.addEventListener('pointerenter', prefetchLink, { capture: true, passive: true });
+    document.addEventListener('touchstart', prefetchLink, { capture: true, passive: true });
+  })();
+  </script></body></html>

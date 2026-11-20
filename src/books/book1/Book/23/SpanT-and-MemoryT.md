@@ -37,7 +37,7 @@ title: Span<T> و Memory<T>
 
 ---
 
-### ✂️ Spans و Slicing
+### Spans و Slicing
 
 بر خلاف آرایه، یک span می‌تواند به‌سادگی **slice** شود تا بخش‌های مختلف داده‌های زیرین را نمایش دهد، همان‌طور که در شکل 23-1 نشان داده شده است.
 
@@ -119,7 +119,7 @@ Console.WriteLine(Sum(span[^5..]));   // ۵ عنصر آخر
 
 ---
 
-### 📌 CopyTo و TryCopyTo
+### CopyTo و TryCopyTo
 
 متد `CopyTo` عناصر یک span (یا `Memory<T>`) را به span دیگری کپی می‌کند. در مثال زیر، همه عناصر `span x` را در `span y` کپی می‌کنیم:
 
@@ -145,7 +145,7 @@ x[..2].CopyTo(y[2..]);   // y اکنون [10, 20, 1, 2]
 
 ---
 
-### 🔍 جستجو در Spans
+### جستجو در Spans
 
 کلاس `MemoryExtensions` متدهای توسعه متعددی برای جستجوی مقادیر در spanها ارائه می‌دهد، مانند: `Contains`, `IndexOf`, `LastIndexOf`, `BinarySearch` و همچنین متدهایی که spanها را تغییر می‌دهند، مانند: `Fill`, `Replace`, `Reverse`.
 
@@ -163,7 +163,7 @@ Console.WriteLine(span.IndexOfAny(vowels));   // 2
 
 می‌توانید از این متدها هنگام کار با آرایه‌ها یا رشته‌ها نیز استفاده کنید، کافی است `AsSpan()` روی آرایه یا رشته فراخوانی شود.
 
-### ✍️ کار با متن (Working with Text)
+### کار با متن (Working with Text)
 
 `Span`ها طوری طراحی شده‌اند که با رشته‌ها به‌خوبی کار کنند، که به‌عنوان `ReadOnlySpan<char>` در نظر گرفته می‌شوند. متد زیر تعداد کاراکترهای فاصله (whitespace) را شمارش می‌کند:
 
@@ -223,7 +223,7 @@ Console.WriteLine(span.Trim().Length);        // 4
 
 ---
 
-### 💾 Memory<T>
+### Memory<T>
 
 `Span<T>` و `ReadOnlySpan<T>` به‌صورت **ref struct** تعریف شده‌اند تا بیشترین پتانسیل بهینه‌سازی را داشته باشند و بتوانند با حافظه تخصیص‌یافته روی stack به‌طور ایمن کار کنند (همان‌طور که در بخش بعدی خواهید دید). اما این محدودیت‌هایی را نیز ایجاد می‌کند:
 
@@ -380,7 +380,7 @@ foreach (var word in span.Split())
 
 ---
 
-### 💡 کار با حافظه stack و unmanaged
+### کار با حافظه stack و unmanaged
 
 یک تکنیک موثر دیگر برای **micro-optimization** کاهش فشار روی **garbage collector** با کمینه کردن تخصیص حافظه روی heap است. این یعنی استفاده بیشتر از حافظه **stack** یا حتی حافظه غیرمدیریت‌شده.
 

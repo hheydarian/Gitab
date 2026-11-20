@@ -1,207 +1,36 @@
-
-
-<!doctype html>
-<html lang="fa" dir="rtl">
-<head>
-  <meta charset="utf-8">
-  <link rel="icon" type="image/png" href="/Gitab/favicon.png">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Smells and Heuristics</title>
-  <meta name="description" content="ترجمه‌های فارسی کتاب‌های فنی — سریع، مینیمال و قابل اتکا.">
-
-  <!-- استایل‌ها -->
-  <link rel="stylesheet" href="/Gitab/styles/main.css">
-  <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
-
-  <style>
-  @font-face {
-    font-family: 'Vazir';
-    src: url('/Gitab/fonts/Vazir-FD-WOL.ttf') format('truetype');
-    font-display: swap;
-  }
-  @font-face {
-    font-family: "Lalezar";
-    src: url('fonts/Lalezar.ttf') format('truetype');
-    font-display: swap;
-}
-  body {
-    font-family: 'Vazir', sans-serif;
-  }
-  </style>
-</head>
-
-<body>
-  <!-- هدر مشترک -->
-  <header class="header">
-    <div class="container nav-wrap">
-      <a href="/Gitab/" class="brand">
-        <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="26" height="26">
-        <span>Gitab</span>
-      </a>
-
-       <nav class="nav">
-         <a href="/Gitab/" >خانه</a>
-         <a href="/Gitab/books/list-books" >کتاب‌ها</a>
-         <a href="/Gitab/giter.html" >دوره ها</a>
-          <!-- 
-         <a href="/Gitab/translator.html" >مترجمین</a>
-           -->
-       </nav>
-
-      <div class="nav-actions">
-        <button id="themeToggle" class="icon-btn theme-btn" data-icon="moon" aria-label="تغییر تم">
-          <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن">
-          <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک">
-        </button>
-
-        <a class="icon-btn" href="https://github.com/hheydarian/Gitab" target="_blank" title="GitHub">
-          <img src="/Gitab/icone/github.svg" alt="GitHub">
-        </a>
-
-        <!-- دکمه منو برای موبایل -->
-        <button class="menu-toggle" aria-label="منو">
-          <img src="/Gitab/icone/menu.svg" alt="menu">
-        </button>
-      </div>
-    </div>
-  </header>
-
-  
-  <main class="site-main book-page">
-    <h1>بوها و اصول (Smells and Heuristics)</h1>
-<p><img src="../../../assets/image/17/img-17.1.png" alt="image"></p>
-<div dir="rtl">
-<p>در کتاب فوق‌العاده‌اش به نام <code>Refactoring،</code> مارتین فاولر مجموعه‌ای از «بوی بد کد» (Code Smells) را معرفی کرده است. فهرستی که در ادامه آمده است، شامل بسیاری از بوهای بد معرفی‌شده توسط مارتین فاولر است و موارد دیگری را نیز که خودم در کارم از آن‌ها استفاده می‌کنم، به آن اضافه کرده‌ام. همچنین این فهرست شامل نکات و قواعد مفیدی است که من در عمل توسعه نرم‌افزار از آن‌ها بهره می‌برم.</p>
-<p>این فهرست را با مرور چند برنامه مختلف و بازآرایی (<code>Refactor</code>) آن‌ها جمع‌آوری کرده‌ام. با هر تغییری که ایجاد می‌کردم، از خودم می‌پرسیدم چرا این تغییر را اعمال کردم و دلیل آن را در اینجا می‌نوشتم. حاصل کار فهرستی نسبتاً بلند از چیزهایی است که وقتی کدی را می‌خوانم، به نظر من بدبو می‌آیند.</p>
-<p>این فهرست هم برای خواندن متوالی از بالا به پایین طراحی شده و هم به عنوان یک مرجع کاربرد دارد. در «ضمیمه C» در صفحه 409، برای هر قاعده‌ای ارجاعی وجود دارد که نشان می‌دهد آن قاعده در کجای متن اصلی مورد استفاده قرار گرفته است.</p>
-<h2>نظرات (<code>Comments</code>)</h2>
-<h3>C1: اطلاعات نامناسب</h3>
-<p>درج اطلاعاتی در نظرها که بهتر است در سیستم‌های دیگری مانند سیستم کنترل نسخه، سیستم پیگیری خطا یا هر سیستم ثبت اطلاعات دیگر قرار گیرد، نامناسب است. به عنوان مثال، تاریخچه تغییرات فقط فایل‌های منبع را با حجم زیادی از متن تاریخی و غیرضروری شلوغ می‌کند. به‌طور کلی، متادیتاهایی مانند نویسنده، تاریخ آخرین تغییر، شماره SPR و مانند آن نباید در نظرات قرار گیرند. نظرات باید صرفاً برای نکات فنی مربوط به کد و طراحی استفاده شوند.</p>
-<h3>C2: نظر منسوخ</h3>
-<p>نظری که قدیمی، بی‌ربط یا نادرست شده باشد، یک نظر منسوخ است. نظرات به سرعت منسوخ می‌شوند. بهتر است اصلاً نظری ننویسید که به‌زودی منسوخ شود. اگر نظری منسوخ را پیدا کردید، یا آن را به‌روزرسانی کنید یا هر چه سریع‌تر حذفش کنید. نظرات منسوخ معمولاً از کدی که زمانی شرحش می‌دادند، فاصله می‌گیرند و به جزایری شناور از بی‌ربطی و گمراهی تبدیل می‌شوند.</p>
-<h3>C3: نظر تکراری</h3>
-<p>نظری که چیزی را توصیف کند که خودش به اندازه کافی گویاست، یک نظر تکراری است. برای مثال:</p>
-</div>
-<pre class="hljs"><code>i++; <span class="hljs-comment">// increase i by 1</span>
-</code></pre>
-<div dir="rtl">
-<p>یا <code>Javadoc</code> هایی که چیزی بیش از امضای تابع نمی‌گویند:</p>
-</div>
-<pre class="hljs"><code><span class="hljs-comment">/**
+<!doctype html><html lang="fa" dir="rtl"> <head><script>
+    if (window.location.pathname.startsWith('/gitab/')) {
+      window.location.replace(window.location.pathname.replace(/^\/gitab\//i, '/Gitab/') + window.location.search + window.location.hash);
+    }
+    (() => {
+      try {
+        const t = localStorage.getItem('gitab-theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', t);
+        document.documentElement.dataset.colorMode = t;
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        document.documentElement.dataset.colorMode = 'dark';
+      }
+    })();
+  </script> <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5"> <title>Smells and Heuristics</title><meta name="description" content="Smells and Heuristics — مطالعه آنلاین و رایگان از کتاب «کد تمیز (عمو باب)» (Clean Code) اثر Robert C. Martin با ترجمه مجتبی افراز در گیتاب."> <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"><meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"> <meta name="theme-color" content="#090d16"><meta name="referrer" content="strict-origin-when-cross-origin"> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https:; frame-src https://www.youtube.com https://www.youtube-nocookie.com https://maps.google.com https://www.google.com; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self';"><link rel="icon" type="image/png" href="/Gitab/favicon.png"> <link rel="canonical" href="https://hheydarian.github.io/Gitab/books/book3/Book/17_Smells_And_Heuristics/Smells_And_Heuristics/"><link rel="alternate" hreflang="fa" href="https://hheydarian.github.io/Gitab/books/book3/Book/17_Smells_And_Heuristics/Smells_And_Heuristics/"> <link rel="alternate" hreflang="x-default" href="https://hheydarian.github.io/Gitab/books/book3/Book/17_Smells_And_Heuristics/Smells_And_Heuristics/"><link rel="alternate" type="text/plain" title="LLMs.txt" href="/Gitab/llms.txt"> <link rel="sitemap" type="application/xml" title="Sitemap" href="/Gitab/sitemap.xml"><meta property="og:locale" content="fa_IR"> <meta property="og:type" content="article"><meta property="og:site_name" content="گیتاب | Gitab"> <meta property="og:title" content="Smells and Heuristics"><meta property="og:description" content="Smells and Heuristics — مطالعه آنلاین و رایگان از کتاب «کد تمیز (عمو باب)» (Clean Code) اثر Robert C. Martin با ترجمه مجتبی افراز در گیتاب."> <meta property="og:url" content="https://hheydarian.github.io/Gitab/books/book3/Book/17_Smells_And_Heuristics/Smells_And_Heuristics/"><meta property="og:image" content="https://hheydarian.github.io/Gitab/images/clean-code/Cover.webp"> <meta property="og:image:alt" content="Smells and Heuristics"><meta name="twitter:card" content="summary_large_image"> <meta name="twitter:title" content="Smells and Heuristics"><meta name="twitter:description" content="Smells and Heuristics — مطالعه آنلاین و رایگان از کتاب «کد تمیز (عمو باب)» (Clean Code) اثر Robert C. Martin با ترجمه مجتبی افراز در گیتاب."> <meta name="twitter:image" content="https://hheydarian.github.io/Gitab/images/clean-code/Cover.webp"><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://hheydarian.github.io/Gitab/#organization","name":"گیتاب | Gitab","alternateName":"Gitab","url":"https://hheydarian.github.io/Gitab/","logo":{"@type":"ImageObject","url":"https://hheydarian.github.io/Gitab/favicon.png"},"sameAs":["https://github.com/hheydarian/Gitab"]},{"@type":"WebSite","@id":"https://hheydarian.github.io/Gitab/#website","url":"https://hheydarian.github.io/Gitab/","name":"گیتاب | Gitab","inLanguage":"fa-IR","publisher":{"@id":"https://hheydarian.github.io/Gitab/#organization"},"potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://hheydarian.github.io/Gitab/books/list-books/?q={search_term_string}"},"query-input":"required name=search_term_string"}},{"@type":"WebPage","@id":"https://hheydarian.github.io/Gitab/books/book3/Book/17_Smells_And_Heuristics/Smells_And_Heuristics/#webpage","url":"https://hheydarian.github.io/Gitab/books/book3/Book/17_Smells_And_Heuristics/Smells_And_Heuristics/","name":"Smells and Heuristics","description":"Smells and Heuristics — مطالعه آنلاین و رایگان از کتاب «کد تمیز (عمو باب)» (Clean Code) اثر Robert C. Martin با ترجمه مجتبی افراز در گیتاب.","inLanguage":"fa-IR","isPartOf":{"@id":"https://hheydarian.github.io/Gitab/#website"}},{"@type":"TechArticle","headline":"Smells and Heuristics","description":"Smells and Heuristics — مطالعه آنلاین و رایگان از کتاب «کد تمیز (عمو باب)» (Clean Code) اثر Robert C. Martin با ترجمه مجتبی افراز در گیتاب.","url":"https://hheydarian.github.io/Gitab/books/book3/Book/17_Smells_And_Heuristics/Smells_And_Heuristics/","inLanguage":"fa-IR","isAccessibleForFree":true,"author":{"@type":"Person","name":"Robert C. Martin"},"translator":{"@type":"Person","name":"مجتبی افراز"},"isPartOf":{"@type":"Book","name":"کد تمیز (عمو باب)","alternateName":"Clean Code","url":"https://hheydarian.github.io/Gitab/books/book3/"}}]}</script> <link rel="preload" href="/Gitab/fonts/Vazirmatn.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/Gitab/styles/main.css?v=2.4" as="style"> <link rel="preload" href="/Gitab/styles/gitab-modern.css?v=2.5" as="style"><style>@font-face{font-family:'Lalezar';src:url('/Gitab/fonts/Lalezar.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}@font-face{font-family:'Vazirmatn';src:url('/Gitab/fonts/Vazirmatn.woff2') format('woff2');font-weight:100 900;font-style:normal;font-display:swap}html,body,button,input,optgroup,select,textarea,.filter-pill{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}input::placeholder,textarea::placeholder{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}</style> <link rel="stylesheet" href="/Gitab/styles/main.css?v=2.4"><link rel="stylesheet" href="/Gitab/styles/gitab-modern.css?v=2.5"> <link rel="stylesheet" href="/Gitab/styles/vendor/github-dark.min.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="/Gitab/styles/vendor/github-dark.min.css"></noscript></head> <body><header class="header"> <div class="container nav-wrap"><a href="/Gitab/" class="brand" aria-label="صفحه اصلی گیتاب"> <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="30" height="30" decoding="async"> <span class="brand-text">Gitab</span> </a> <nav class="nav" id="mainNav"><a href="/Gitab/" >خانه</a> <a href="/Gitab/books/list-books" aria-current="page">کتاب‌ها</a> <a href="/Gitab/courses/" >دوره‌ها</a> <a href="/Gitab/translator.html" >مترجمین</a></nav> <div class="nav-actions"><button id="themeToggle" class="theme-toggle-btn" aria-label="تغییر تم" title="تغییر تم"> <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن" width="18" height="18" decoding="async" style="display:none"> <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک" width="18" height="18" decoding="async"> </button> <a class="btn-github-pill" href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" title="مشاهده سورس گیتاب در گیت‌هاب"> <img src="/Gitab/icone/github.svg" alt="GitHub" width="16" height="16" decoding="async"> <span>گیت‌هاب</span> </a> <button class="mobile-menu-btn" id="mobileMenuBtn" type="button" aria-label="باز کردن منو" aria-expanded="false"> <svg class="mob-icon-open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="4" y1="7" x2="20" y2="7"></line> <line x1="4" y1="12" x2="20" y2="12"></line> <line x1="4" y1="17" x2="14" y2="17"></line> </svg> <svg class="mob-icon-close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="18" y1="6" x2="6" y2="18"></line> <line x1="6" y1="6" x2="18" y2="18"></line> </svg> </button></div> </div><div class="mobile-drawer" id="mobileDrawer" aria-hidden="true"> <div class="mobile-drawer-inner"><div class="mobile-drawer-section-label">ناوبری سریع</div><nav class="mobile-drawer-links" aria-label="منوی موبایل"> <a href="/Gitab/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M3 10.5 12 3l9 7.5"></path> <path d="M5 9.5V20a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V9.5"></path> </svg> </span> <span class="mob-nav-text">صفحه نخست</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/books/list-books" class="mobile-drawer-link active" aria-current="page"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path> </svg> </span> <span class="mob-nav-text">کتابخانه و فهرست کتاب‌ها</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/courses/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path> <path d="M6 12v5c3 3 9 3 12 0v-5"></path> </svg> </span> <span class="mob-nav-text">دوره‌های آموزشی</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/translator.html" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path> <circle cx="9" cy="7" r="4"></circle> <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path> <path d="M16 3.13a4 4 0 0 1 0 7.75"></path> </svg> </span> <span class="mob-nav-text">مترجمین و همکاران</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> </nav><div class="mobile-drawer-divider"></div><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" class="mobile-drawer-link mobile-drawer-gh"> <span class="mob-nav-icon" aria-hidden="true"> <img src="/Gitab/icone/github.svg" alt="" width="17" height="17" loading="lazy" decoding="async"> </span> <span class="mob-nav-text">مخزن گیت‌هاب پروژه</span> <span class="mob-nav-ext" aria-hidden="true">↗</span> </a> </div></div> </header><div class="reading-progress-track"> <div class="reading-progress-fill" id="readingProgressBar"></div></div> <main class="site-main chapter-reading-page"><div class="chapter-page-wrapper"> <nav class="chapter-clean-breadcrumb" aria-label="مسیر راهنما" dir="rtl"><a href="/Gitab/">خانه</a> <span class="bc-sep" aria-hidden="true">/</span> <a href="/Gitab/books/list-books/">کتاب‌ها</a> <span class="bc-sep" aria-hidden="true">/</span> <a href="/Gitab/books/book3/"><bdi>کد تمیز</bdi></a> <span class="bc-sep" aria-hidden="true">/</span> <span class="bc-current-leaf"><bdi>Smells and Heuristics</bdi></span></nav> <article class="chapter-prose-container markdown-body" id="chapterArticle" dir="rtl"><h1>بوها و اصول (Smells and Heuristics)</h1><p><img src="../../../assets/image/17/img-17.1.png" alt="image" loading="lazy" decoding="async"></p><div dir="rtl"> <p>در کتاب فوق‌العاده‌اش به نام <code>Refactoring،</code> مارتین فاولر مجموعه‌ای از «بوی بد کد» (Code Smells) را معرفی کرده است. فهرستی که در ادامه آمده است، شامل بسیاری از بوهای بد معرفی‌شده توسط مارتین فاولر است و موارد دیگری را نیز که خودم در کارم از آن‌ها استفاده می‌کنم، به آن اضافه کرده‌ام. همچنین این فهرست شامل نکات و قواعد مفیدی است که من در عمل توسعه نرم‌افزار از آن‌ها بهره می‌برم.</p><p>این فهرست را با مرور چند برنامه مختلف و بازآرایی (<code>Refactor</code>) آن‌ها جمع‌آوری کرده‌ام. با هر تغییری که ایجاد می‌کردم، از خودم می‌پرسیدم چرا این تغییر را اعمال کردم و دلیل آن را در اینجا می‌نوشتم. حاصل کار فهرستی نسبتاً بلند از چیزهایی است که وقتی کدی را می‌خوانم، به نظر من بدبو می‌آیند.</p><p>این فهرست هم برای خواندن متوالی از بالا به پایین طراحی شده و هم به عنوان یک مرجع کاربرد دارد. در «ضمیمه C» در صفحه 409، برای هر قاعده‌ای ارجاعی وجود دارد که نشان می‌دهد آن قاعده در کجای متن اصلی مورد استفاده قرار گرفته است.</p><h2>نظرات (<code>Comments</code>)</h2><h3>C1: اطلاعات نامناسب</h3><p>درج اطلاعاتی در نظرها که بهتر است در سیستم‌های دیگری مانند سیستم کنترل نسخه، سیستم پیگیری خطا یا هر سیستم ثبت اطلاعات دیگر قرار گیرد، نامناسب است. به عنوان مثال، تاریخچه تغییرات فقط فایل‌های منبع را با حجم زیادی از متن تاریخی و غیرضروری شلوغ می‌کند. به‌طور کلی، متادیتاهایی مانند نویسنده، تاریخ آخرین تغییر، شماره SPR و مانند آن نباید در نظرات قرار گیرند. نظرات باید صرفاً برای نکات فنی مربوط به کد و طراحی استفاده شوند.</p><h3>C2: نظر منسوخ</h3><p>نظری که قدیمی، بی‌ربط یا نادرست شده باشد، یک نظر منسوخ است. نظرات به سرعت منسوخ می‌شوند. بهتر است اصلاً نظری ننویسید که به‌زودی منسوخ شود. اگر نظری منسوخ را پیدا کردید، یا آن را به‌روزرسانی کنید یا هر چه سریع‌تر حذفش کنید. نظرات منسوخ معمولاً از کدی که زمانی شرحش می‌دادند، فاصله می‌گیرند و به جزایری شناور از بی‌ربطی و گمراهی تبدیل می‌شوند.</p><h3>C3: نظر تکراری</h3><p>نظری که چیزی را توصیف کند که خودش به اندازه کافی گویاست، یک نظر تکراری است. برای مثال:</p></div> <pre class="hljs"><code>i++; <span class="hljs-comment">// increase i by 1</span>
+</code></pre> <div dir="rtl"><p>یا <code>Javadoc</code> هایی که چیزی بیش از امضای تابع نمی‌گویند:</p></div> <pre class="hljs"><code><span class="hljs-comment">/**
  * <span class="hljs-doctag">@param</span> sellRequest
  * <span class="hljs-doctag">@return</span>
  * <span class="hljs-doctag">@throws</span> ManagedComponentException
  */</span>
 <span class="hljs-keyword">public</span> SellResponse <span class="hljs-title function_">beginSellItem</span><span class="hljs-params">(SellRequest sellRequest)</span> <span class="hljs-keyword">throws</span> ManagedComponentException
-</code></pre>
-<div dir="rtl">
-<p>کامنت باید چیزهایی را بیان کند که کد به‌تنهایی نمی‌تواند.</p>
-<p>C4: کامنت بد نوشته‌شده<br>
-کامنتی که ارزش نوشتن دارد، ارزش خوب نوشتن هم دارد. اگر قرار است کامنتی بنویسید، وقت بگذارید تا آن را به بهترین شکل ممکن بنویسید. واژه‌ها را با دقت انتخاب کنید. دستور زبان و نگارش را رعایت کنید. از زیاده‌گویی و بدیهیات بپرهیزید. مختصر و مفید بنویسید.</p>
-<p>C5: کد کامنت‌شده<br>
-دیدن قطعاتی از کد که کامنت شده‌اند، من را دیوانه می‌کند. کسی نمی‌داند که چقدر قدیمی‌اند یا هنوز معنا دارند یا نه. ولی هیچ‌کس هم جرات حذفشان را ندارد چون فکر می‌کند شاید کس دیگری به آن نیاز دارد یا برنامه‌ای برایش دارد.</p>
-<p>این کدها در گذر زمان بیشتر و بیشتر از ارتباط خارج می‌شوند. توابعی را صدا می‌زنند که دیگر وجود ندارند، از متغیرهایی استفاده می‌کنند که نامشان عوض شده، و از قراردادهایی پیروی می‌کنند که منسوخ شده‌اند. این کدهای مرده ماژول‌ها را آلوده کرده و خواندن کد را سخت می‌کنند.</p>
-<p>وقتی کد کامنت‌شده دیدید، حذفش کنید! نگران نباشید، سیستم کنترل نسخه هنوز آن را به یاد دارد. اگر کسی واقعاً به آن نیاز داشته باشد، می‌تواند نسخه قبلی را بررسی کند. اجازه ندهید کد کامنت‌شده زنده بماند.</p>
-<p>محیط (Environment)<br>
-E1: ساخت (Build) بیش از یک مرحله لازم دارد<br>
-ساختن یک پروژه باید یک عملیات ساده و تک‌مرحله‌ای باشد. نباید نیاز به چک‌اوت کردن اجزای مختلف از سیستم کنترل نسخه باشد. نباید دستورات پیچیده یا اسکریپت‌های وابسته به محیط لازم باشد. همه‌چیز باید با یک دستور ساده قابل ساخت باشد:</p>
-</div>
-<pre class="hljs"><code>svn get mySystem  
+</code></pre> <div dir="rtl"><p>کامنت باید چیزهایی را بیان کند که کد به‌تنهایی نمی‌تواند.</p><p>C4: کامنت بد نوشته‌شده<br> کامنتی که ارزش نوشتن دارد، ارزش خوب نوشتن هم دارد. اگر قرار است کامنتی بنویسید، وقت بگذارید تا آن را به بهترین شکل ممکن بنویسید. واژه‌ها را با دقت انتخاب کنید. دستور زبان و نگارش را رعایت کنید. از زیاده‌گویی و بدیهیات بپرهیزید. مختصر و مفید بنویسید.</p><p>C5: کد کامنت‌شده<br> دیدن قطعاتی از کد که کامنت شده‌اند، من را دیوانه می‌کند. کسی نمی‌داند که چقدر قدیمی‌اند یا هنوز معنا دارند یا نه. ولی هیچ‌کس هم جرات حذفشان را ندارد چون فکر می‌کند شاید کس دیگری به آن نیاز دارد یا برنامه‌ای برایش دارد.</p><p>این کدها در گذر زمان بیشتر و بیشتر از ارتباط خارج می‌شوند. توابعی را صدا می‌زنند که دیگر وجود ندارند، از متغیرهایی استفاده می‌کنند که نامشان عوض شده، و از قراردادهایی پیروی می‌کنند که منسوخ شده‌اند. این کدهای مرده ماژول‌ها را آلوده کرده و خواندن کد را سخت می‌کنند.</p><p>وقتی کد کامنت‌شده دیدید، حذفش کنید! نگران نباشید، سیستم کنترل نسخه هنوز آن را به یاد دارد. اگر کسی واقعاً به آن نیاز داشته باشد، می‌تواند نسخه قبلی را بررسی کند. اجازه ندهید کد کامنت‌شده زنده بماند.</p><p>محیط (Environment)<br> E1: ساخت (Build) بیش از یک مرحله لازم دارد<br> ساختن یک پروژه باید یک عملیات ساده و تک‌مرحله‌ای باشد. نباید نیاز به چک‌اوت کردن اجزای مختلف از سیستم کنترل نسخه باشد. نباید دستورات پیچیده یا اسکریپت‌های وابسته به محیط لازم باشد. همه‌چیز باید با یک دستور ساده قابل ساخت باشد:</p></div> <pre class="hljs"><code>svn get mySystem  
 <span class="hljs-built_in">cd</span> mySystem  
 ant all
-</code></pre>
-<div dir="rtl">
-<h3>E2: تست‌ها بیش از یک مرحله لازم دارند</h3>
-<p>باید بتوانید تمام تست‌های واحد (unit test) را با یک دستور اجرا کنید. در بهترین حالت، با یک کلیک در IDE ؛ و در بدترین حالت با یک دستور ساده در ترمینال. اجرای تست‌ها باید سریع، آسان و بدیهی باشد.</p>
-<h2>توابع (Functions)</h2>
-<h3>F1: تعداد زیاد آرگومان‌ها</h3>
-<p>توابع باید تعداد کمی آرگومان داشته باشند. بهترین حالت بدون آرگومان است، بعد یک، دو و سه. بیش از سه بسیار مشکوک است و باید با احتیاط شدید از آن پرهیز کرد. (بخش «آرگومان‌های تابع» در صفحه 40 را ببینید.)</p>
-<h3>F2: آرگومان‌های خروجی</h3>
-<p>آرگومان‌های خروجی گمراه‌کننده هستند. خواننده‌ها انتظار دارند آرگومان‌ها ورودی باشند، نه خروجی. اگر تابعی باید حالتی را تغییر دهد، این تغییر باید روی شیئی که روی آن صدا زده شده اعمال شود.</p>
-<h3>F3: آرگومان‌های پرچمی (Flag Arguments)</h3>
-<p>آرگومان‌های بولی نشان‌دهنده این هستند که تابع بیش از یک کار انجام می‌دهد. آن‌ها گیج‌کننده‌اند و باید حذف شوند.</p>
-<h3>F4: توابع مرده</h3>
-<p>توابعی که هیچ‌وقت صدا زده نمی‌شوند، باید حذف شوند. نگه‌داشتن کد مرده بیهوده است. از حذف این توابع نترسید. سیستم کنترل نسخه آن‌ها را به یاد دارد.</p>
-<h2>عمومی (General)</h2>
-<h3>G1: چند زبان در یک فایل مبدا</h3>
-<p>محیط‌های برنامه‌نویسی مدرن امروزی این امکان را فراهم کرده‌اند که زبان‌های مختلفی را در یک فایل سورس قرار دهیم. برای مثال، یک فایل سورس <code>Java</code> ممکن است قطعاتی از <code>XML،</code> <code>HTML</code>، <code>YAML</code>، <code>JavaDoc</code>، انگلیسی، <code>JavaScript</code> و غیره را شامل شود. همچنین، یک فایل <code>JSP</code> در کنار <code>HTML</code> ممکن است شامل <code>Java</code>, نگارش تگ‌های کتابخانه‌ای، نظرات به زبان انگلیسی، <code>JavaDoc،</code> <code>XML،</code> <code>JavaScript</code> و غیره باشد. این کار در بهترین حالت گیج‌کننده و در بدترین حالت، کاملاً بی‌دقت و شلخته است.<br>
-ایده‌آل این است که یک فایل سورس فقط شامل یک زبان باشد. البته در عمل، ممکن است نیاز به استفاده از بیش از یک زبان داشته باشیم. اما باید تا حد امکان تعداد و میزان زبان‌های اضافی را در فایل‌های سورس خود کاهش دهیم.</p>
-<h3>G2: رفتار واضح پیاده‌سازی نشده است</h3>
-<p>بر اساس «اصل کمترین شگفتی»، هر تابع یا کلاسی باید رفتارهایی را پیاده‌سازی کند که یک برنامه‌نویس دیگر به‌طور منطقی از آن انتظار دارد. برای مثال، تابعی را در نظر بگیرید که نام یک روز را به یک <code>enum</code> معادل آن روز تبدیل می‌کند:</p>
-</div>
-<pre class="hljs"><code><span class="hljs-type">Day</span> <span class="hljs-variable">day</span> <span class="hljs-operator">=</span> DayDate.StringToDay(String dayName);
-</code></pre>
-<div dir="rtl">
-<p>انتظار می‌رود که رشته‌ی &quot;<code>Monday</code>&quot; به <code>Day.MONDAY</code> تبدیل شود. همچنین، انتظار داریم مخفف‌های رایج نیز پشتیبانی شوند و حساسیت به حروف بزرگ و کوچک نادیده گرفته شود.<br>
-اگر یک رفتار بدیهی پیاده‌سازی نشده باشد، خوانندگان و کاربران کد دیگر نمی‌توانند به شهود خود در مورد نام توابع اعتماد کنند. آن‌ها اعتماد خود را به نویسنده‌ی اصلی از دست می‌دهند و مجبور می‌شوند کد را خط‌به‌خط بخوانند تا عملکرد آن را بفهمند.</p>
-<h3>G3: رفتار نادرست در مرزها</h3>
-<p>واضح است که کد باید به‌درستی عمل کند، اما مشکل اینجاست که به‌ندرت درک می‌کنیم که عملکرد صحیح چقدر می‌تواند پیچیده باشد. توسعه‌دهندگان معمولاً توابعی می‌نویسند که فکر می‌کنند درست عمل می‌کند و بیشتر به شهود خود تکیه می‌کنند تا اینکه به خود زحمت دهند تا اثبات کنند کد در تمامی موارد مرزی و گوشه‌ای درست عمل می‌کند.<br>
-هیچ جایگزینی برای دقت و وسواس وجود ندارد. هر شرط مرزی، هر مورد گوشه‌ای، هر استثناء و نکته‌ی خاص می‌تواند یک الگوریتم زیبا و شهودی را دچار مشکل کند. به شهود خود اکتفا نکنید. به‌دنبال تمام شرایط مرزی بگردید و برای هرکدام تست بنویسید.</p>
-<h3>G4: غیرفعال کردن مکانیزم‌های ایمنی</h3>
-<p>چرنوبیل به این دلیل منفجر شد که مدیر نیروگاه یکی‌یکی مکانیزم‌های ایمنی را غیرفعال کرد. این ایمنی‌ها اجرای یک آزمایش را دشوار کرده بودند. نتیجه این شد که نه تنها آزمایش اجرا نشد، بلکه جهان شاهد نخستین فاجعه‌ی هسته‌ای غیرنظامی بود.<br>
-غیرفعال‌کردن ایمنی‌ها خطرناک است. کنترل دستی بر <code>serialVersionUID</code> ممکن است لازم باشد، اما همیشه همراه با ریسک است. خاموش کردن برخی (یا تمام) هشدارهای کامپایلر ممکن است باعث موفقیت ساخت پروژه شود، اما در عوض ممکن است به باگ‌هایی بی‌پایان منجر شود. غیرفعال کردن تست‌های شکست‌خورده و گفتن اینکه &quot;بعداً درستش می‌کنم&quot; مثل این است که با کارت اعتباری خرید کنید و وانمود کنید پولتان تمام نمی‌شود.</p>
-<h3>G5: تکرار</h3>
-<p>این یکی از مهم‌ترین قوانین این کتاب است و باید آن را بسیار جدی بگیرید. تقریباً تمام نویسندگانی که درباره طراحی نرم‌افزار می‌نویسند به این قانون اشاره کرده‌اند. دیو توماس و اندی هانت آن را اصل <code>DRY</code> (Don’t Repeat Yourself) نامیدند. کنت بک آن را به‌عنوان یکی از اصول اصلی Extreme Programming معرفی کرد: «یک‌بار، و فقط یک‌بار». ران جفری این قانون را در رتبه‌ی دوم قرار می‌دهد، درست بعد از اینکه همه‌ی تست‌ها باید پاس شوند.</p>
-<p>هر بار که در کد تکراری می‌بینید، به این معناست که فرصت انتزاع را از دست داده‌اید. آن تکرار می‌تواند به سابروتین یا شاید یک کلاس دیگر تبدیل شود. با تجمیع کدهای تکراری در یک انتزاع، واژگان زبان طراحی خود را گسترش می‌دهید. دیگر برنامه‌نویسان نیز می‌توانند از این امکانات انتزاعی بهره ببرند. کدنویسی سریع‌تر و کمتر خطاپذیر می‌شود، چون سطح انتزاع را بالا برده‌اید.</p>
-<p>واضح‌ترین نوع تکرار، تکه‌های مشابه کدی هستند که چندین بار در فایل کپی و پیست شده‌اند. این‌ها باید به متدهای ساده تبدیل شوند.</p>
-<p>نوع ظریف‌تر آن، بلوک‌های تکرارشونده‌ی <code>switch/case</code> یا <code>if/else</code> است که در ماژول‌های مختلف با همان شرایط دیده می‌شوند. این موارد باید با پلی‌مورفیسم جایگزین شوند.</p>
-<p>حتی الگوریتم‌های مشابهی که خطوط کد یکسانی ندارند، نوعی تکرار محسوب می‌شوند. برای رفع آن‌ها می‌توان از الگوهایی مانند <code>TEMPLATE METHOD</code> یا <code>STRATEGY</code> استفاده کرد.<br>
-در واقع بیشتر الگوهای طراحی که در ۱۵ سال گذشته معرفی شده‌اند، صرفاً روش‌هایی برای حذف تکرار هستند. نرمال‌سازی کد (Codd Normal Forms) نیز روشی برای حذف تکرار در طراحی پایگاه داده است. شی‌گرایی (<code>OO</code>) نیز راهی برای حذف تکرار است. برنامه‌نویسی ساخت‌یافته نیز همین‌طور.<br>
-فکر می‌کنم دیگر مطلب روشن شده است: هرجا تکرار دیدید، آن را حذف کنید.</p>
-<h3>G6: کد در سطح نادرست انتزاع</h3>
-<p>مهم است که مفاهیم سطح بالا و عمومی را از مفاهیم جزئی و سطح پایین جدا کنیم. گاهی این کار با استفاده از کلاس‌های پایه (<code>abstract</code>) برای مفاهیم عمومی و کلاس‌های مشتق برای مفاهیم جزئی انجام می‌شود.</p>
-<p>در چنین مواردی باید این جداسازی کامل باشد. تمامی مفاهیم سطح پایین باید در کلاس‌های مشتق باشند و مفاهیم سطح بالا فقط در کلاس پایه. مثلاً ثابت‌ها، متغیرها یا توابع کمکی که فقط به پیاده‌سازی جزئی مربوط می‌شوند نباید در کلاس پایه قرار گیرند. کلاس پایه نباید از آن‌ها اطلاعی داشته باشد.</p>
-<p>این قانون برای فایل‌های سورس، ماژول‌ها و کامپوننت‌ها هم صدق می‌کند. طراحی خوب نرم‌افزار ایجاب می‌کند مفاهیم را از نظر سطح انتزاع از هم جدا کرده و در ظرف‌های متفاوتی قرار دهیم. این ظرف‌ها می‌توانند کلاس پایه و مشتق، یا فایل سورس و ماژول و غیره باشند. مهم این است که مفاهیم با سطوح مختلف با هم ترکیب نشوند.<br>
-کد زیر را در نظر بگیرید:</p>
-</div>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">Stack</span> {
+</code></pre> <div dir="rtl"><h3>E2: تست‌ها بیش از یک مرحله لازم دارند</h3><p>باید بتوانید تمام تست‌های واحد (unit test) را با یک دستور اجرا کنید. در بهترین حالت، با یک کلیک در IDE ؛ و در بدترین حالت با یک دستور ساده در ترمینال. اجرای تست‌ها باید سریع، آسان و بدیهی باشد.</p><h2>توابع (Functions)</h2><h3>F1: تعداد زیاد آرگومان‌ها</h3><p>توابع باید تعداد کمی آرگومان داشته باشند. بهترین حالت بدون آرگومان است، بعد یک، دو و سه. بیش از سه بسیار مشکوک است و باید با احتیاط شدید از آن پرهیز کرد. (بخش «آرگومان‌های تابع» در صفحه 40 را ببینید.)</p><h3>F2: آرگومان‌های خروجی</h3><p>آرگومان‌های خروجی گمراه‌کننده هستند. خواننده‌ها انتظار دارند آرگومان‌ها ورودی باشند، نه خروجی. اگر تابعی باید حالتی را تغییر دهد، این تغییر باید روی شیئی که روی آن صدا زده شده اعمال شود.</p><h3>F3: آرگومان‌های پرچمی (Flag Arguments)</h3><p>آرگومان‌های بولی نشان‌دهنده این هستند که تابع بیش از یک کار انجام می‌دهد. آن‌ها گیج‌کننده‌اند و باید حذف شوند.</p><h3>F4: توابع مرده</h3><p>توابعی که هیچ‌وقت صدا زده نمی‌شوند، باید حذف شوند. نگه‌داشتن کد مرده بیهوده است. از حذف این توابع نترسید. سیستم کنترل نسخه آن‌ها را به یاد دارد.</p><h2>عمومی (General)</h2><h3>G1: چند زبان در یک فایل مبدا</h3><p>محیط‌های برنامه‌نویسی مدرن امروزی این امکان را فراهم کرده‌اند که زبان‌های مختلفی را در یک فایل سورس قرار دهیم. برای مثال، یک فایل سورس <code>Java</code> ممکن است قطعاتی از <code>XML،</code> <code>HTML</code>، <code>YAML</code>، <code>JavaDoc</code>، انگلیسی، <code>JavaScript</code> و غیره را شامل شود. همچنین، یک فایل <code>JSP</code> در کنار <code>HTML</code> ممکن است شامل <code>Java</code>, نگارش تگ‌های کتابخانه‌ای، نظرات به زبان انگلیسی، <code>JavaDoc،</code> <code>XML،</code> <code>JavaScript</code> و غیره باشد. این کار در بهترین حالت گیج‌کننده و در بدترین حالت، کاملاً بی‌دقت و شلخته است.<br> ایده‌آل این است که یک فایل سورس فقط شامل یک زبان باشد. البته در عمل، ممکن است نیاز به استفاده از بیش از یک زبان داشته باشیم. اما باید تا حد امکان تعداد و میزان زبان‌های اضافی را در فایل‌های سورس خود کاهش دهیم.</p><h3>G2: رفتار واضح پیاده‌سازی نشده است</h3><p>بر اساس «اصل کمترین شگفتی»، هر تابع یا کلاسی باید رفتارهایی را پیاده‌سازی کند که یک برنامه‌نویس دیگر به‌طور منطقی از آن انتظار دارد. برای مثال، تابعی را در نظر بگیرید که نام یک روز را به یک <code>enum</code> معادل آن روز تبدیل می‌کند:</p></div> <pre class="hljs"><code><span class="hljs-type">Day</span> <span class="hljs-variable">day</span> <span class="hljs-operator">=</span> DayDate.StringToDay(String dayName);
+</code></pre> <div dir="rtl"><p>انتظار می‌رود که رشته‌ی &quot;<code>Monday</code>&quot; به <code>Day.MONDAY</code> تبدیل شود. همچنین، انتظار داریم مخفف‌های رایج نیز پشتیبانی شوند و حساسیت به حروف بزرگ و کوچک نادیده گرفته شود.<br> اگر یک رفتار بدیهی پیاده‌سازی نشده باشد، خوانندگان و کاربران کد دیگر نمی‌توانند به شهود خود در مورد نام توابع اعتماد کنند. آن‌ها اعتماد خود را به نویسنده‌ی اصلی از دست می‌دهند و مجبور می‌شوند کد را خط‌به‌خط بخوانند تا عملکرد آن را بفهمند.</p><h3>G3: رفتار نادرست در مرزها</h3><p>واضح است که کد باید به‌درستی عمل کند، اما مشکل اینجاست که به‌ندرت درک می‌کنیم که عملکرد صحیح چقدر می‌تواند پیچیده باشد. توسعه‌دهندگان معمولاً توابعی می‌نویسند که فکر می‌کنند درست عمل می‌کند و بیشتر به شهود خود تکیه می‌کنند تا اینکه به خود زحمت دهند تا اثبات کنند کد در تمامی موارد مرزی و گوشه‌ای درست عمل می‌کند.<br> هیچ جایگزینی برای دقت و وسواس وجود ندارد. هر شرط مرزی، هر مورد گوشه‌ای، هر استثناء و نکته‌ی خاص می‌تواند یک الگوریتم زیبا و شهودی را دچار مشکل کند. به شهود خود اکتفا نکنید. به‌دنبال تمام شرایط مرزی بگردید و برای هرکدام تست بنویسید.</p><h3>G4: غیرفعال کردن مکانیزم‌های ایمنی</h3><p>چرنوبیل به این دلیل منفجر شد که مدیر نیروگاه یکی‌یکی مکانیزم‌های ایمنی را غیرفعال کرد. این ایمنی‌ها اجرای یک آزمایش را دشوار کرده بودند. نتیجه این شد که نه تنها آزمایش اجرا نشد، بلکه جهان شاهد نخستین فاجعه‌ی هسته‌ای غیرنظامی بود.<br> غیرفعال‌کردن ایمنی‌ها خطرناک است. کنترل دستی بر <code>serialVersionUID</code> ممکن است لازم باشد، اما همیشه همراه با ریسک است. خاموش کردن برخی (یا تمام) هشدارهای کامپایلر ممکن است باعث موفقیت ساخت پروژه شود، اما در عوض ممکن است به باگ‌هایی بی‌پایان منجر شود. غیرفعال کردن تست‌های شکست‌خورده و گفتن اینکه &quot;بعداً درستش می‌کنم&quot; مثل این است که با کارت اعتباری خرید کنید و وانمود کنید پولتان تمام نمی‌شود.</p><h3>G5: تکرار</h3><p>این یکی از مهم‌ترین قوانین این کتاب است و باید آن را بسیار جدی بگیرید. تقریباً تمام نویسندگانی که درباره طراحی نرم‌افزار می‌نویسند به این قانون اشاره کرده‌اند. دیو توماس و اندی هانت آن را اصل <code>DRY</code> (Don’t Repeat Yourself) نامیدند. کنت بک آن را به‌عنوان یکی از اصول اصلی Extreme Programming معرفی کرد: «یک‌بار، و فقط یک‌بار». ران جفری این قانون را در رتبه‌ی دوم قرار می‌دهد، درست بعد از اینکه همه‌ی تست‌ها باید پاس شوند.</p><p>هر بار که در کد تکراری می‌بینید، به این معناست که فرصت انتزاع را از دست داده‌اید. آن تکرار می‌تواند به سابروتین یا شاید یک کلاس دیگر تبدیل شود. با تجمیع کدهای تکراری در یک انتزاع، واژگان زبان طراحی خود را گسترش می‌دهید. دیگر برنامه‌نویسان نیز می‌توانند از این امکانات انتزاعی بهره ببرند. کدنویسی سریع‌تر و کمتر خطاپذیر می‌شود، چون سطح انتزاع را بالا برده‌اید.</p><p>واضح‌ترین نوع تکرار، تکه‌های مشابه کدی هستند که چندین بار در فایل کپی و پیست شده‌اند. این‌ها باید به متدهای ساده تبدیل شوند.</p><p>نوع ظریف‌تر آن، بلوک‌های تکرارشونده‌ی <code>switch/case</code> یا <code>if/else</code> است که در ماژول‌های مختلف با همان شرایط دیده می‌شوند. این موارد باید با پلی‌مورفیسم جایگزین شوند.</p><p>حتی الگوریتم‌های مشابهی که خطوط کد یکسانی ندارند، نوعی تکرار محسوب می‌شوند. برای رفع آن‌ها می‌توان از الگوهایی مانند <code>TEMPLATE METHOD</code> یا <code>STRATEGY</code> استفاده کرد.<br> در واقع بیشتر الگوهای طراحی که در ۱۵ سال گذشته معرفی شده‌اند، صرفاً روش‌هایی برای حذف تکرار هستند. نرمال‌سازی کد (Codd Normal Forms) نیز روشی برای حذف تکرار در طراحی پایگاه داده است. شی‌گرایی (<code>OO</code>) نیز راهی برای حذف تکرار است. برنامه‌نویسی ساخت‌یافته نیز همین‌طور.<br> فکر می‌کنم دیگر مطلب روشن شده است: هرجا تکرار دیدید، آن را حذف کنید.</p><h3>G6: کد در سطح نادرست انتزاع</h3><p>مهم است که مفاهیم سطح بالا و عمومی را از مفاهیم جزئی و سطح پایین جدا کنیم. گاهی این کار با استفاده از کلاس‌های پایه (<code>abstract</code>) برای مفاهیم عمومی و کلاس‌های مشتق برای مفاهیم جزئی انجام می‌شود.</p><p>در چنین مواردی باید این جداسازی کامل باشد. تمامی مفاهیم سطح پایین باید در کلاس‌های مشتق باشند و مفاهیم سطح بالا فقط در کلاس پایه. مثلاً ثابت‌ها، متغیرها یا توابع کمکی که فقط به پیاده‌سازی جزئی مربوط می‌شوند نباید در کلاس پایه قرار گیرند. کلاس پایه نباید از آن‌ها اطلاعی داشته باشد.</p><p>این قانون برای فایل‌های سورس، ماژول‌ها و کامپوننت‌ها هم صدق می‌کند. طراحی خوب نرم‌افزار ایجاب می‌کند مفاهیم را از نظر سطح انتزاع از هم جدا کرده و در ظرف‌های متفاوتی قرار دهیم. این ظرف‌ها می‌توانند کلاس پایه و مشتق، یا فایل سورس و ماژول و غیره باشند. مهم این است که مفاهیم با سطوح مختلف با هم ترکیب نشوند.<br> کد زیر را در نظر بگیرید:</p></div> <pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">Stack</span> {
  Object <span class="hljs-title function_">pop</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> EmptyException;
  <span class="hljs-keyword">void</span> <span class="hljs-title function_">push</span><span class="hljs-params">(Object o)</span> <span class="hljs-keyword">throws</span> FullException;
  <span class="hljs-type">double</span> <span class="hljs-title function_">percentFull</span><span class="hljs-params">()</span>;
  <span class="hljs-keyword">class</span> <span class="hljs-title class_">EmptyException</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Exception</span> {}
  <span class="hljs-keyword">class</span> <span class="hljs-title class_">FullException</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Exception</span> {}
 }
-</code></pre>
-<div dir="rtl">
-<p>تابع <code>percentFull</code> در سطح نادرست انتزاع قرار دارد. گرچه برای برخی پیاده‌سازی‌های Stack، این مفهوم معنادار است، اما برای برخی دیگر اصلاً نمی‌توان میزان پر بودن را اندازه‌گیری کرد. بنابراین این تابع بهتر است در یک واسط مشتق‌شده مانند <code>BoundedStack</code> قرار گیرد.</p>
-<p>شاید فکر کنید که می‌توان تابع را طوری پیاده‌سازی کرد که در صورت بی‌نهایت بودن پشته، صفر برگرداند. اما هیچ پشته‌ای واقعاً بی‌نهایت نیست. مثلاً نمی‌توان از وقوع <code>OutOfMemoryException</code> فقط با بررسی اینکه <code>stack.percentFull() &lt; 50.0</code> است، جلوگیری کرد.</p>
-<p>بازگرداندن عدد صفر در چنین حالتی، به نوعی دروغ گفتن است.<br>
-نکته این است که نمی‌توان با دروغ یا تظاهر از یک انتزاع اشتباه فرار کرد. جداسازی صحیح انتزاع‌ها یکی از سخت‌ترین وظایف برنامه‌نویسان است و راه‌حل سریع و ساده‌ای برای آن وجود ندارد.</p>
-<h3>G7: کلاس‌های پایه‌ای که به کلاس‌های مشتق خود وابسته‌اند</h3>
-<p>رایج‌ترین دلیل برای تفکیک مفاهیم به کلاس‌های پایه و مشتق این است که مفاهیم سطح بالای کلاس پایه مستقل از مفاهیم سطح پایین کلاس مشتق باشند. بنابراین، وقتی می‌بینیم یک کلاس پایه به نام کلاس مشتق اشاره می‌کند، باید به وجود مشکل شک کنیم.<br>
-به‌طور کلی، کلاس پایه نباید هیچ اطلاعی از کلاس‌های مشتق داشته باشد. البته استثنائاتی وجود دارد. مثلاً وقتی تعداد مشتق‌ها ثابت است و کلاس پایه بین آن‌ها انتخاب انجام می‌دهد—چیزی که در پیاده‌سازی ماشین‌های حالت (<code>FSM</code>) زیاد دیده می‌شود.<br>
-اما در چنین مواردی، مشتق و پایه به‌شدت به هم وابسته‌اند و همیشه با هم در یک فایل (مثلاً یک <code>jar</code>) منتشر می‌شوند.<br>
-در حالت کلی، می‌خواهیم کلاس‌های مشتق و پایه در فایل‌های جداگانه منتشر شوند. این کار باعث می‌شود سیستم به اجزای مستقل و قابل تغییر تقسیم شود. در نتیجه، تغییر در یکی از اجزا فقط روی همان جزء تأثیر می‌گذارد و نیازی به بازنشر اجزای دیگر نیست. این یعنی هزینه‌ی نگهداری سیستم به‌شدت کاهش می‌یابد.</p>
-<h3>G8: اطلاعات بیش از حد</h3>
-<p>ماژول‌های خوش‌تعریف، واسط‌هایی بسیار کوچک دارند که با آن‌ها می‌توان کارهای زیادی انجام داد. اما ماژول‌های بدتعریف واسط‌هایی گسترده دارند که مجبور می‌شوید برای انجام کارهای ساده، عملیات زیادی انجام دهید.<br>
-یک واسط خوب، توابع کمی برای استفاده در اختیار می‌گذارد، بنابراین کوپلینگ پایین است. اما یک واسط بد، توابع زیادی ارائه می‌دهد که باید از آن‌ها استفاده کنید، در نتیجه کوپلینگ بالا می‌رود.<br>
-برنامه‌نویسان خوب یاد می‌گیرند که آنچه در واسط کلاس‌ها و ماژول‌ها فاش می‌کنند را محدود کنند. هرچه توابع یک کلاس کمتر، بهتر. هرچه متغیرهایی که یک تابع می‌شناسد کمتر، بهتر. هرچه متغیرهای نمونه‌ی یک کلاس کمتر، بهتر.<br>
-اطلاعات خود را پنهان کنید. توابع کمکی، ثابت‌ها و متغیرهای موقتی خود را مخفی کنید. کلاس‌هایی با توابع زیاد یا متغیرهای نمونه‌ی فراوان ایجاد نکنید. متغیرها و توابع <code>protected</code> زیادی برای زیرکلاس‌ها تعریف نکنید.<br>
-تمرکز خود را روی واسط‌های کوچک و فشرده نگه دارید تا کوپلینگ پایین باقی بماند.</p>
-<h3>G9: کد مرده</h3>
-<p>کد مرده، کدی است که اجرا نمی‌شود. این نوع کد را می‌توان در بدنه‌ی یک شرط <code>if</code> یافت که شرطش هیچ‌گاه اتفاق نمی‌افتد. یا در بلوک <code>catch</code> از یک <code>try</code> که هیچ‌گاه استثنایی پرتاب نمی‌کند. یا در متدهای کمکی‌ای که هرگز فراخوانی نمی‌شوند، یا در مواردی از دستور <code>switch/case</code> که هیچ‌گاه رخ نمی‌دهند.</p>
-<p>مشکل کد مرده این است که به مرور زمان بوی بدی می‌گیرد. هرچه قدیمی‌تر باشد، بوی آن شدیدتر و زننده‌تر می‌شود. دلیل آن این است که هنگام تغییر طراحی، این کد به‌روزرسانی نمی‌شود. هنوز کامپایل می‌شود، اما با قوانین و الگوهای جدید هماهنگ نیست. این کد متعلق به زمانی است که سیستم به شکل دیگری طراحی شده بود.</p>
-<p>وقتی با کد مرده مواجه شدید، کار درست را انجام دهید: آن را دفن کنید. یعنی حذفش کنید.</p>
-<h3>G10: جداسازی عمودی</h3>
-<p>متغیرها و توابع باید نزدیک به محل استفاده‌شان تعریف شوند. متغیرهای محلی باید درست بالای اولین استفاده‌شان تعریف شوند و دامنه‌ی عمودی محدودی داشته باشند. نمی‌خواهیم متغیرهایی را داشته باشیم که صدها خط با محل استفاده‌شان فاصله دارند.</p>
-<p>توابع <code>private</code> باید درست زیر اولین محل استفاده‌شان تعریف شوند. اگرچه این توابع به کل کلاس تعلق دارند، اما همچنان باید فاصله‌ی عمودی بین فراخوانی و تعریف آن‌ها را محدود نگه داریم. یافتن یک تابع <code>private</code> باید فقط با یک نگاه به پایین از محل فراخوانی ممکن باشد.</p>
-<h3>G11: ناسازگاری</h3>
-<p>اگر کاری را به شیوه‌ای خاص انجام می‌دهید، تمام موارد مشابه را نیز به همان شکل انجام دهید. این اصل برمی‌گردد به «اصل کم‌ترین شگفتی». در انتخاب الگوها دقت کنید، و وقتی الگویی را انتخاب کردید، آن را در ادامه نیز دنبال کنید.<br>
-اگر در یک تابع از متغیری با نام <code>response</code> برای نگهداری <code>HttpServletResponse</code> استفاده کرده‌اید، در توابع دیگر نیز برای همین منظور از همان نام استفاده کنید. اگر نام تابعی را <code>processVerificationRequest</code> گذاشته‌اید، برای توابع مشابه بهتر است نام‌هایی مانند <code>processDeletionRequest</code> انتخاب کنید.</p>
-<p>چنین سازگاری ساده‌ای، وقتی به‌طور مداوم رعایت شود، باعث می‌شود کد به‌شکل قابل توجهی خواناتر و قابل نگهداری‌تر شود.</p>
-<h3>G12: شلوغی (Clutter)</h3>
-<p>سازنده‌ای (<code>constructor</code>) بدون هیچ پیاده‌سازی چه فایده‌ای دارد؟ تنها کاری که می‌کند، شلوغ کردن کد با چیزهای بی‌معناست. متغیرهایی که استفاده نمی‌شوند، توابعی که هرگز فراخوانی نمی‌شوند، کامنت‌هایی که اطلاعاتی اضافه نمی‌کنند و ... همگی شلوغی هستند و باید حذف شوند. فایل‌های سورس خود را تمیز، منظم و عاری از شلوغی نگه دارید.</p>
-<h3>G13: کوپلینگ مصنوعی</h3>
-<p>چیزهایی که به هم وابسته نیستند نباید به‌طور مصنوعی به هم مرتبط شوند. برای مثال، یک <code>enum</code> عمومی نباید داخل یک کلاس خاص قرار بگیرد، چون در این صورت کل برنامه مجبور به شناختن آن کلاس خاص می‌شود. همین موضوع درباره‌ی توابع <code>static</code> عمومی که در کلاس‌های خاص قرار دارند نیز صدق می‌کند.</p>
-<p>به‌طور کلی، کوپلینگ مصنوعی ارتباطی است بین دو ماژول که هدف مستقیمی ندارد. این مسئله نتیجه‌ی قرار دادن یک متغیر، ثابت یا تابع در مکانی موقتی ولی نامناسب است. این کار تنبلی و بی‌دقتی است.</p>
-<p>زمان صرف کنید تا مکان درست برای توابع، ثوابت و متغیرها را پیدا کنید. آن‌ها را در اولین جای راحتی که پیدا کردید نیندازید و رهایشان نکنید.</p>
-<h3>G14: حسادت به ویژگی (Feature Envy)</h3>
-<p>این مورد یکی از بوی‌های کد مطرح‌شده توسط مارتین فاولر است. متدهای یک کلاس باید بیشتر با متغیرها و توابع همان کلاس درگیر باشند، نه با اعضای سایر کلاس‌ها.<br>
-وقتی متدی از <code>getter</code> و <code>setter‌های</code> یک شیء دیگر استفاده می‌کند تا داده‌ی آن را دستکاری کند، درواقع به متغیرهای آن کلاس دیگر حسادت می‌ورزد. گویی آرزو دارد خودش داخل آن کلاس باشد.</p>
-<p>مثال:</p>
-</div>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">HourlyPayCalculator</span> {
+</code></pre> <div dir="rtl"><p>تابع <code>percentFull</code> در سطح نادرست انتزاع قرار دارد. گرچه برای برخی پیاده‌سازی‌های Stack، این مفهوم معنادار است، اما برای برخی دیگر اصلاً نمی‌توان میزان پر بودن را اندازه‌گیری کرد. بنابراین این تابع بهتر است در یک واسط مشتق‌شده مانند <code>BoundedStack</code> قرار گیرد.</p><p>شاید فکر کنید که می‌توان تابع را طوری پیاده‌سازی کرد که در صورت بی‌نهایت بودن پشته، صفر برگرداند. اما هیچ پشته‌ای واقعاً بی‌نهایت نیست. مثلاً نمی‌توان از وقوع <code>OutOfMemoryException</code> فقط با بررسی اینکه <code>stack.percentFull() &lt; 50.0</code> است، جلوگیری کرد.</p><p>بازگرداندن عدد صفر در چنین حالتی، به نوعی دروغ گفتن است.<br> نکته این است که نمی‌توان با دروغ یا تظاهر از یک انتزاع اشتباه فرار کرد. جداسازی صحیح انتزاع‌ها یکی از سخت‌ترین وظایف برنامه‌نویسان است و راه‌حل سریع و ساده‌ای برای آن وجود ندارد.</p><h3>G7: کلاس‌های پایه‌ای که به کلاس‌های مشتق خود وابسته‌اند</h3><p>رایج‌ترین دلیل برای تفکیک مفاهیم به کلاس‌های پایه و مشتق این است که مفاهیم سطح بالای کلاس پایه مستقل از مفاهیم سطح پایین کلاس مشتق باشند. بنابراین، وقتی می‌بینیم یک کلاس پایه به نام کلاس مشتق اشاره می‌کند، باید به وجود مشکل شک کنیم.<br> به‌طور کلی، کلاس پایه نباید هیچ اطلاعی از کلاس‌های مشتق داشته باشد. البته استثنائاتی وجود دارد. مثلاً وقتی تعداد مشتق‌ها ثابت است و کلاس پایه بین آن‌ها انتخاب انجام می‌دهد—چیزی که در پیاده‌سازی ماشین‌های حالت (<code>FSM</code>) زیاد دیده می‌شود.<br> اما در چنین مواردی، مشتق و پایه به‌شدت به هم وابسته‌اند و همیشه با هم در یک فایل (مثلاً یک <code>jar</code>) منتشر می‌شوند.<br> در حالت کلی، می‌خواهیم کلاس‌های مشتق و پایه در فایل‌های جداگانه منتشر شوند. این کار باعث می‌شود سیستم به اجزای مستقل و قابل تغییر تقسیم شود. در نتیجه، تغییر در یکی از اجزا فقط روی همان جزء تأثیر می‌گذارد و نیازی به بازنشر اجزای دیگر نیست. این یعنی هزینه‌ی نگهداری سیستم به‌شدت کاهش می‌یابد.</p><h3>G8: اطلاعات بیش از حد</h3><p>ماژول‌های خوش‌تعریف، واسط‌هایی بسیار کوچک دارند که با آن‌ها می‌توان کارهای زیادی انجام داد. اما ماژول‌های بدتعریف واسط‌هایی گسترده دارند که مجبور می‌شوید برای انجام کارهای ساده، عملیات زیادی انجام دهید.<br> یک واسط خوب، توابع کمی برای استفاده در اختیار می‌گذارد، بنابراین کوپلینگ پایین است. اما یک واسط بد، توابع زیادی ارائه می‌دهد که باید از آن‌ها استفاده کنید، در نتیجه کوپلینگ بالا می‌رود.<br> برنامه‌نویسان خوب یاد می‌گیرند که آنچه در واسط کلاس‌ها و ماژول‌ها فاش می‌کنند را محدود کنند. هرچه توابع یک کلاس کمتر، بهتر. هرچه متغیرهایی که یک تابع می‌شناسد کمتر، بهتر. هرچه متغیرهای نمونه‌ی یک کلاس کمتر، بهتر.<br> اطلاعات خود را پنهان کنید. توابع کمکی، ثابت‌ها و متغیرهای موقتی خود را مخفی کنید. کلاس‌هایی با توابع زیاد یا متغیرهای نمونه‌ی فراوان ایجاد نکنید. متغیرها و توابع <code>protected</code> زیادی برای زیرکلاس‌ها تعریف نکنید.<br> تمرکز خود را روی واسط‌های کوچک و فشرده نگه دارید تا کوپلینگ پایین باقی بماند.</p><h3>G9: کد مرده</h3><p>کد مرده، کدی است که اجرا نمی‌شود. این نوع کد را می‌توان در بدنه‌ی یک شرط <code>if</code> یافت که شرطش هیچ‌گاه اتفاق نمی‌افتد. یا در بلوک <code>catch</code> از یک <code>try</code> که هیچ‌گاه استثنایی پرتاب نمی‌کند. یا در متدهای کمکی‌ای که هرگز فراخوانی نمی‌شوند، یا در مواردی از دستور <code>switch/case</code> که هیچ‌گاه رخ نمی‌دهند.</p><p>مشکل کد مرده این است که به مرور زمان بوی بدی می‌گیرد. هرچه قدیمی‌تر باشد، بوی آن شدیدتر و زننده‌تر می‌شود. دلیل آن این است که هنگام تغییر طراحی، این کد به‌روزرسانی نمی‌شود. هنوز کامپایل می‌شود، اما با قوانین و الگوهای جدید هماهنگ نیست. این کد متعلق به زمانی است که سیستم به شکل دیگری طراحی شده بود.</p><p>وقتی با کد مرده مواجه شدید، کار درست را انجام دهید: آن را دفن کنید. یعنی حذفش کنید.</p><h3>G10: جداسازی عمودی</h3><p>متغیرها و توابع باید نزدیک به محل استفاده‌شان تعریف شوند. متغیرهای محلی باید درست بالای اولین استفاده‌شان تعریف شوند و دامنه‌ی عمودی محدودی داشته باشند. نمی‌خواهیم متغیرهایی را داشته باشیم که صدها خط با محل استفاده‌شان فاصله دارند.</p><p>توابع <code>private</code> باید درست زیر اولین محل استفاده‌شان تعریف شوند. اگرچه این توابع به کل کلاس تعلق دارند، اما همچنان باید فاصله‌ی عمودی بین فراخوانی و تعریف آن‌ها را محدود نگه داریم. یافتن یک تابع <code>private</code> باید فقط با یک نگاه به پایین از محل فراخوانی ممکن باشد.</p><h3>G11: ناسازگاری</h3><p>اگر کاری را به شیوه‌ای خاص انجام می‌دهید، تمام موارد مشابه را نیز به همان شکل انجام دهید. این اصل برمی‌گردد به «اصل کم‌ترین شگفتی». در انتخاب الگوها دقت کنید، و وقتی الگویی را انتخاب کردید، آن را در ادامه نیز دنبال کنید.<br> اگر در یک تابع از متغیری با نام <code>response</code> برای نگهداری <code>HttpServletResponse</code> استفاده کرده‌اید، در توابع دیگر نیز برای همین منظور از همان نام استفاده کنید. اگر نام تابعی را <code>processVerificationRequest</code> گذاشته‌اید، برای توابع مشابه بهتر است نام‌هایی مانند <code>processDeletionRequest</code> انتخاب کنید.</p><p>چنین سازگاری ساده‌ای، وقتی به‌طور مداوم رعایت شود، باعث می‌شود کد به‌شکل قابل توجهی خواناتر و قابل نگهداری‌تر شود.</p><h3>G12: شلوغی (Clutter)</h3><p>سازنده‌ای (<code>constructor</code>) بدون هیچ پیاده‌سازی چه فایده‌ای دارد؟ تنها کاری که می‌کند، شلوغ کردن کد با چیزهای بی‌معناست. متغیرهایی که استفاده نمی‌شوند، توابعی که هرگز فراخوانی نمی‌شوند، کامنت‌هایی که اطلاعاتی اضافه نمی‌کنند و ... همگی شلوغی هستند و باید حذف شوند. فایل‌های سورس خود را تمیز، منظم و عاری از شلوغی نگه دارید.</p><h3>G13: کوپلینگ مصنوعی</h3><p>چیزهایی که به هم وابسته نیستند نباید به‌طور مصنوعی به هم مرتبط شوند. برای مثال، یک <code>enum</code> عمومی نباید داخل یک کلاس خاص قرار بگیرد، چون در این صورت کل برنامه مجبور به شناختن آن کلاس خاص می‌شود. همین موضوع درباره‌ی توابع <code>static</code> عمومی که در کلاس‌های خاص قرار دارند نیز صدق می‌کند.</p><p>به‌طور کلی، کوپلینگ مصنوعی ارتباطی است بین دو ماژول که هدف مستقیمی ندارد. این مسئله نتیجه‌ی قرار دادن یک متغیر، ثابت یا تابع در مکانی موقتی ولی نامناسب است. این کار تنبلی و بی‌دقتی است.</p><p>زمان صرف کنید تا مکان درست برای توابع، ثوابت و متغیرها را پیدا کنید. آن‌ها را در اولین جای راحتی که پیدا کردید نیندازید و رهایشان نکنید.</p><h3>G14: حسادت به ویژگی (Feature Envy)</h3><p>این مورد یکی از بوی‌های کد مطرح‌شده توسط مارتین فاولر است. متدهای یک کلاس باید بیشتر با متغیرها و توابع همان کلاس درگیر باشند، نه با اعضای سایر کلاس‌ها.<br> وقتی متدی از <code>getter</code> و <code>setter‌های</code> یک شیء دیگر استفاده می‌کند تا داده‌ی آن را دستکاری کند، درواقع به متغیرهای آن کلاس دیگر حسادت می‌ورزد. گویی آرزو دارد خودش داخل آن کلاس باشد.</p><p>مثال:</p></div> <pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">HourlyPayCalculator</span> {
  <span class="hljs-keyword">public</span> Money <span class="hljs-title function_">calculateWeeklyPay</span><span class="hljs-params">(HourlyEmployee e)</span> {
    <span class="hljs-type">int</span> <span class="hljs-variable">tenthRate</span> <span class="hljs-operator">=</span> e.getTenthRate().getPennies();
    <span class="hljs-type">int</span> <span class="hljs-variable">tenthsWorked</span> <span class="hljs-operator">=</span> e.getTenthsWorked();
@@ -212,13 +41,7 @@ ant all
    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Money</span>(straightPay + overtimePay);
  }
 }
-</code></pre>
-<div dir="rtl">
-<p>متد <code>calculateWeeklyPay</code> به اطلاعات درون <code>HourlyEmployee</code> دست درازی می‌کند؛ یعنی به کلاس دیگری حسادت دارد.</p>
-<p>در حالت ایده‌آل باید از چنین وابستگی‌هایی اجتناب کنیم چون باعث افشای جزئیات درونی یک کلاس به کلاس دیگر می‌شود.<br>
-البته گاهی این حسادت اجتناب‌ناپذیر است. مثلاً:</p>
-</div>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">HourlyEmployeeReport</span> {
+</code></pre> <div dir="rtl"><p>متد <code>calculateWeeklyPay</code> به اطلاعات درون <code>HourlyEmployee</code> دست درازی می‌کند؛ یعنی به کلاس دیگری حسادت دارد.</p><p>در حالت ایده‌آل باید از چنین وابستگی‌هایی اجتناب کنیم چون باعث افشای جزئیات درونی یک کلاس به کلاس دیگر می‌شود.<br> البته گاهی این حسادت اجتناب‌ناپذیر است. مثلاً:</p></div> <pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">HourlyEmployeeReport</span> {
  <span class="hljs-keyword">private</span> HourlyEmployee employee;
  <span class="hljs-keyword">public</span> <span class="hljs-title function_">HourlyEmployeeReport</span><span class="hljs-params">(HourlyEmployee e)</span> {
    <span class="hljs-built_in">this</span>.employee = e;
@@ -231,24 +54,12 @@ ant all
      employee.getTenthsWorked()%<span class="hljs-number">10</span>);
  }
 }
-</code></pre>
-<div dir="rtl">
-<p>در اینجا متد <code>reportHours</code> نیز حسادت دارد، اما منطقی است. چون قرار نیست <code>HourlyEmployee</code> از فرمت گزارش چیزی بداند؛ این مسئولیت به آن مربوط نیست.</p>
-<h3>G15: آرگومان‌های انتخابی (Selector Arguments)</h3>
-<p>آرگومان‌هایی مانند <code>true/false</code> که در انتهای توابع قرار می‌گیرند اغلب آزاردهنده‌اند. چه چیزی را مشخص می‌کنند؟ اگر مقدارشان عوض شود چه تغییری رخ می‌دهد؟ این نوع آرگومان‌ها چندین رفتار را در یک تابع ادغام می‌کنند، که نشانه‌ی تنبلی در طراحی است.</p>
-<p>مثال بد:</p>
-</div>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">calculateWeeklyPay</span><span class="hljs-params">(<span class="hljs-type">boolean</span> overtime)</span> {
+</code></pre> <div dir="rtl"><p>در اینجا متد <code>reportHours</code> نیز حسادت دارد، اما منطقی است. چون قرار نیست <code>HourlyEmployee</code> از فرمت گزارش چیزی بداند؛ این مسئولیت به آن مربوط نیست.</p><h3>G15: آرگومان‌های انتخابی (Selector Arguments)</h3><p>آرگومان‌هایی مانند <code>true/false</code> که در انتهای توابع قرار می‌گیرند اغلب آزاردهنده‌اند. چه چیزی را مشخص می‌کنند؟ اگر مقدارشان عوض شود چه تغییری رخ می‌دهد؟ این نوع آرگومان‌ها چندین رفتار را در یک تابع ادغام می‌کنند، که نشانه‌ی تنبلی در طراحی است.</p><p>مثال بد:</p></div> <pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">calculateWeeklyPay</span><span class="hljs-params">(<span class="hljs-type">boolean</span> overtime)</span> {
  <span class="hljs-comment">// ...</span>
  <span class="hljs-type">double</span> <span class="hljs-variable">overtimeRate</span> <span class="hljs-operator">=</span> overtime ? <span class="hljs-number">1.5</span> : <span class="hljs-number">1.0</span> * tenthRate;
  <span class="hljs-comment">// ...</span>
 }
-</code></pre>
-<div dir="rtl">
-<p>شما باید به خاطر داشته باشید که <code>calculateWeeklyPay(false)</code> دقیقاً چه کاری انجام می‌دهد، که اصلاً خوشایند نیست.<br>
-روش بهتر:</p>
-</div>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">straightPay</span><span class="hljs-params">()</span> {
+</code></pre> <div dir="rtl"><p>شما باید به خاطر داشته باشید که <code>calculateWeeklyPay(false)</code> دقیقاً چه کاری انجام می‌دهد، که اصلاً خوشایند نیست.<br> روش بهتر:</p></div> <pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">straightPay</span><span class="hljs-params">()</span> {
  <span class="hljs-keyword">return</span> getTenthsWorked() * getTenthRate();
 }
 <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">overTimePay</span><span class="hljs-params">()</span> {
@@ -260,73 +71,19 @@ ant all
  <span class="hljs-type">double</span> <span class="hljs-variable">bonus</span> <span class="hljs-operator">=</span> <span class="hljs-number">0.5</span> * getTenthRate() * overTimeTenths;
  <span class="hljs-keyword">return</span> (<span class="hljs-type">int</span>) Math.round(bonus);
 }
-</code></pre>
-<div dir="rtl">
-<p>توجه: آرگومان‌های انتخابی فقط <code>boolean</code> نیستند؛ ممکن است <code>enum،</code> <code>int</code> یا هر نوع دیگری باشند. اما در اغلب موارد بهتر است رفتارهای مختلف را در توابع مختلف پیاده‌سازی کنیم.</p>
-<h3>G16: نیت مبهم (Obscured Intent)</h3>
-<p>کد باید تا جای ممکن واضح و گویا باشد. استفاده از عباراتی فشرده، نام‌گذاری ضعیف و اعداد جادویی (magic numbers) باعث ابهام در نیت نویسنده می‌شود.</p>
-<p>مثال مبهم:</p>
-</div>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">m_otCalc</span><span class="hljs-params">()</span> {
+</code></pre> <div dir="rtl"><p>توجه: آرگومان‌های انتخابی فقط <code>boolean</code> نیستند؛ ممکن است <code>enum،</code> <code>int</code> یا هر نوع دیگری باشند. اما در اغلب موارد بهتر است رفتارهای مختلف را در توابع مختلف پیاده‌سازی کنیم.</p><h3>G16: نیت مبهم (Obscured Intent)</h3><p>کد باید تا جای ممکن واضح و گویا باشد. استفاده از عباراتی فشرده، نام‌گذاری ضعیف و اعداد جادویی (magic numbers) باعث ابهام در نیت نویسنده می‌شود.</p><p>مثال مبهم:</p></div> <pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">m_otCalc</span><span class="hljs-params">()</span> {
  <span class="hljs-keyword">return</span> iThsWkd * iThsRte +
  (<span class="hljs-type">int</span>) Math.round(<span class="hljs-number">0.5</span> * iThsRte * Math.max(<span class="hljs-number">0</span>, iThsWkd - <span class="hljs-number">400</span>));
 }
-</code></pre>
-<div dir="rtl">
-<p>هرچند فشرده است، ولی فهم آن دشوار است. ارزش دارد که وقت بگذاریم تا نیت کد را برای خواننده روشن کنیم.</p>
-<h3>G17: مسئولیت‌های نابه‌جا (Misplaced Responsibility)</h3>
-<p>یکی از مهم‌ترین تصمیم‌ها در توسعه‌ی نرم‌افزار، تعیین مکان مناسب برای قرار دادن کد است.</p>
-<p>مثلاً ثابت <code>PI</code> باید کجا قرار بگیرد؟ در کلاس <code>Math</code> ؟ یا <code>Trigonometry</code> ؟ یا شاید <code>Circle</code> ؟<br>
-اصل «کم‌ترین شگفتی» اینجا هم مطرح است. کد باید جایی باشد که خواننده انتظار دارد آن را پیدا کند.</p>
-<p>مثال: اگر ماژول گزارش‌گیری تابعی به نام <code>getTotalHours</code> دارد، و ماژول دیگری تابعی به نام <code>saveTimeCard،</code> کدام یک مسئول جمع ساعات است؟ جواب باید واضح باشد.<br>
-در مواقعی ممکن است دلایل عملکردی باعث شوند تا کاری در مکانی خاص انجام شود، ولی نام تابع باید این موضوع را منعکس کند (مثلاً <code>computeRunningTotalOfHours</code>).</p>
-<h3>G18: استفاده‌ی نابه‌جا از static</h3>
-<p>تابع <code>Math.max(double a, double b)</code> یک مثال خوب برای متد <code>static</code> است؛ زیرا روی نمونه‌ی خاصی عمل نمی‌کند و همه‌ی اطلاعاتش را از آرگومان‌ها می‌گیرد. بعید است بخواهیم آن را به‌شکل چندریخت (<code>polymorphic</code>) پیاده‌سازی کنیم.</p>
-<p>اما گاهی متدهایی را <code>static</code> می‌نویسیم که نباید این‌طور باشند. برای مثال:</p>
-</div>
-<pre class="hljs"><code>HourlyPayCalculator.calculatePay(employee, overtimeRate);
-</code></pre>
-<div dir="rtl">
-<p>در نگاه اول منطقی به‌نظر می‌رسد، اما شاید بخواهیم چند الگوریتم مختلف برای محاسبه‌ی دستمزد پیاده کنیم (مثلاً <code>OvertimeHourlyPayCalculator،</code> <code>StraightTimeHourlyPayCalculator</code>)، و در این صورت نیاز به چندریختی داریم.<br>
-به‌طور کلی، بهتر است ترجیح بدهیم متدها <code>non-static</code> باشند. تنها وقتی مطمئن شدیم که متدی هرگز نیاز به رفتار چندریختی ندارد، آن را <code>static</code> تعریف کنیم.</p>
-<h3>G19: استفاده از متغیرهای توضیحی (Explanatory Variables)</h3>
-<p>یکی از مؤثرترین روش‌ها برای خوانایی کد، شکستن محاسبات به متغیرهای میانی با نام‌های گویاست.<br>
-مثال:</p>
-</div>
-<pre class="hljs"><code><span class="hljs-type">Matcher</span> <span class="hljs-variable">match</span> <span class="hljs-operator">=</span> headerPattern.matcher(line);
+</code></pre> <div dir="rtl"><p>هرچند فشرده است، ولی فهم آن دشوار است. ارزش دارد که وقت بگذاریم تا نیت کد را برای خواننده روشن کنیم.</p><h3>G17: مسئولیت‌های نابه‌جا (Misplaced Responsibility)</h3><p>یکی از مهم‌ترین تصمیم‌ها در توسعه‌ی نرم‌افزار، تعیین مکان مناسب برای قرار دادن کد است.</p><p>مثلاً ثابت <code>PI</code> باید کجا قرار بگیرد؟ در کلاس <code>Math</code> ؟ یا <code>Trigonometry</code> ؟ یا شاید <code>Circle</code> ؟<br> اصل «کم‌ترین شگفتی» اینجا هم مطرح است. کد باید جایی باشد که خواننده انتظار دارد آن را پیدا کند.</p><p>مثال: اگر ماژول گزارش‌گیری تابعی به نام <code>getTotalHours</code> دارد، و ماژول دیگری تابعی به نام <code>saveTimeCard،</code> کدام یک مسئول جمع ساعات است؟ جواب باید واضح باشد.<br> در مواقعی ممکن است دلایل عملکردی باعث شوند تا کاری در مکانی خاص انجام شود، ولی نام تابع باید این موضوع را منعکس کند (مثلاً <code>computeRunningTotalOfHours</code>).</p><h3>G18: استفاده‌ی نابه‌جا از static</h3><p>تابع <code>Math.max(double a, double b)</code> یک مثال خوب برای متد <code>static</code> است؛ زیرا روی نمونه‌ی خاصی عمل نمی‌کند و همه‌ی اطلاعاتش را از آرگومان‌ها می‌گیرد. بعید است بخواهیم آن را به‌شکل چندریخت (<code>polymorphic</code>) پیاده‌سازی کنیم.</p><p>اما گاهی متدهایی را <code>static</code> می‌نویسیم که نباید این‌طور باشند. برای مثال:</p></div> <pre class="hljs"><code>HourlyPayCalculator.calculatePay(employee, overtimeRate);
+</code></pre> <div dir="rtl"><p>در نگاه اول منطقی به‌نظر می‌رسد، اما شاید بخواهیم چند الگوریتم مختلف برای محاسبه‌ی دستمزد پیاده کنیم (مثلاً <code>OvertimeHourlyPayCalculator،</code> <code>StraightTimeHourlyPayCalculator</code>)، و در این صورت نیاز به چندریختی داریم.<br> به‌طور کلی، بهتر است ترجیح بدهیم متدها <code>non-static</code> باشند. تنها وقتی مطمئن شدیم که متدی هرگز نیاز به رفتار چندریختی ندارد، آن را <code>static</code> تعریف کنیم.</p><h3>G19: استفاده از متغیرهای توضیحی (Explanatory Variables)</h3><p>یکی از مؤثرترین روش‌ها برای خوانایی کد، شکستن محاسبات به متغیرهای میانی با نام‌های گویاست.<br> مثال:</p></div> <pre class="hljs"><code><span class="hljs-type">Matcher</span> <span class="hljs-variable">match</span> <span class="hljs-operator">=</span> headerPattern.matcher(line);
 <span class="hljs-keyword">if</span>(match.find()) {
  <span class="hljs-type">String</span> <span class="hljs-variable">key</span> <span class="hljs-operator">=</span> match.group(<span class="hljs-number">1</span>);
  <span class="hljs-type">String</span> <span class="hljs-variable">value</span> <span class="hljs-operator">=</span> match.group(<span class="hljs-number">2</span>);
  headers.put(key.toLowerCase(), value);
 }
-</code></pre>
-<div dir="rtl">
-<p>با همین چند متغیر، فوراً مشخص می‌شود که <code>group(1)</code> کلید است و <code>group(2)</code> مقدار.<br>
-بیشتر کردن متغیرهای توضیحی معمولاً از کمتر بودن آن‌ها بهتر است.</p>
-<h3>G20: نام توابع باید گویای عملکردشان باشد</h3>
-<p>به این کد نگاه کنید:</p>
-</div>
-<pre class="hljs"><code><span class="hljs-type">Date</span> <span class="hljs-variable">newDate</span> <span class="hljs-operator">=</span> date.add(<span class="hljs-number">5</span>);
-</code></pre>
-<div dir="rtl">
-<p>آیا این پنج روز به تاریخ اضافه می‌کند؟ یا پنج هفته؟ آیا خود <code>date</code> تغییر می‌کند یا <code>newDate</code> مستقل از آن است؟<br>
-از روی نام تابع نمی‌توان فهمید.</p>
-<p>اگر تابع پنج روز اضافه می‌کند و تاریخ اصلی را تغییر می‌دهد، نامش باید <code>addDaysTo</code> یا <code>increaseByDays</code> باشد.<br>
-اگر شیء جدیدی را بازمی‌گرداند، بهتر است نامی مانند <code>daysLater</code> یا <code>daysSince</code> داشته باشد.</p>
-<p>اگر برای فهم عملکرد تابع نیاز به بررسی پیاده‌سازی آن دارید، باید نام بهتری برای آن انتخاب کنید یا عملکردش را بازآرایی نمایید.</p>
-<h3>G21: الگوریتم را درک کنید</h3>
-<p>کدهای خنده‌دار زیادی نوشته می‌شوند فقط به این دلیل که برنامه‌نویس وقت کافی برای درک الگوریتم صرف نکرده است. او کدی می‌نویسد که «کار می‌کند» صرفاً با اضافه کردن تعدادی شرط (<code>if</code>) و فلگ‌های کنترلی، بدون آنکه واقعاً متوجه شود پشت صحنه چه می‌گذرد.</p>
-<p>برنامه‌نویسی اغلب نوعی اکتشاف است. ممکن است تصور کنید که الگوریتم درست را می‌دانید، اما بعد مجبور می‌شوید آن را اصلاح، امتحان و دست‌کاری کنید تا بالاخره «کار کند». چطور می‌فهمید که کار می‌کند؟ چون تست‌هایی که به ذهنتان رسیده را پاس می‌کند.</p>
-<p>این رویکرد فی‌نفسه مشکلی ندارد؛ در واقع، گاهی تنها راه برای رسیدن به عملکرد دلخواه همین است. اما کافی نیست که فقط به «کار کردن» اکتفا کنید—یعنی نباید فقط از دید آزمون‌ها به عملکرد درست بسنده کنید.</p>
-<p>قبل از آنکه تصور کنید کارتان با تابعی تمام شده، باید آن را واقعاً درک کرده باشید. اینکه همه‌ی تست‌ها پاس شوند کافی نیست. شما باید بدانید که راه‌حل درست است.</p>
-<p>اغلب بهترین راه برای رسیدن به این درک، بازآرایی (<code>Refactor</code>) کد به شکلی است که بسیار تمیز و گویا باشد—آن‌قدر که روش کارکرد آن، واضح و بدیهی شود.</p>
-<h3>G22: وابستگی‌های منطقی را به وابستگی‌های فیزیکی تبدیل کنید</h3>
-<p>اگر یک ماژول به ماژول دیگری وابسته است، این وابستگی باید فیزیکی باشد، نه صرفاً منطقی. ماژول وابسته نباید بر اساس فرضیات درباره‌ی ماژول دیگر کار کند (یعنی وابستگی منطقی نداشته باشد). بلکه باید صراحتاً تمام اطلاعاتی را که نیاز دارد از ماژول مورد نظر درخواست کند.</p>
-<p>برای مثال، تصور کنید تابعی می‌نویسید که گزارشی متنی از ساعات کاری کارکنان چاپ می‌کند. کلاسی به نام <code>HourlyReporter</code> تمام داده‌های مورد نیاز را جمع‌آوری می‌کند و سپس آن را به کلاس <code>HourlyReportFormatter</code> می‌دهد تا چاپ شود.</p>
-<p>Listing 17-1 را ببینید</p>
-</div>
-<p><strong>Listing 17-1 -- HourlyReporter.java</strong></p>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">HourlyReporter</span>
+</code></pre> <div dir="rtl"><p>با همین چند متغیر، فوراً مشخص می‌شود که <code>group(1)</code> کلید است و <code>group(2)</code> مقدار.<br> بیشتر کردن متغیرهای توضیحی معمولاً از کمتر بودن آن‌ها بهتر است.</p><h3>G20: نام توابع باید گویای عملکردشان باشد</h3><p>به این کد نگاه کنید:</p></div> <pre class="hljs"><code><span class="hljs-type">Date</span> <span class="hljs-variable">newDate</span> <span class="hljs-operator">=</span> date.add(<span class="hljs-number">5</span>);
+</code></pre> <div dir="rtl"><p>آیا این پنج روز به تاریخ اضافه می‌کند؟ یا پنج هفته؟ آیا خود <code>date</code> تغییر می‌کند یا <code>newDate</code> مستقل از آن است؟<br> از روی نام تابع نمی‌توان فهمید.</p><p>اگر تابع پنج روز اضافه می‌کند و تاریخ اصلی را تغییر می‌دهد، نامش باید <code>addDaysTo</code> یا <code>increaseByDays</code> باشد.<br> اگر شیء جدیدی را بازمی‌گرداند، بهتر است نامی مانند <code>daysLater</code> یا <code>daysSince</code> داشته باشد.</p><p>اگر برای فهم عملکرد تابع نیاز به بررسی پیاده‌سازی آن دارید، باید نام بهتری برای آن انتخاب کنید یا عملکردش را بازآرایی نمایید.</p><h3>G21: الگوریتم را درک کنید</h3><p>کدهای خنده‌دار زیادی نوشته می‌شوند فقط به این دلیل که برنامه‌نویس وقت کافی برای درک الگوریتم صرف نکرده است. او کدی می‌نویسد که «کار می‌کند» صرفاً با اضافه کردن تعدادی شرط (<code>if</code>) و فلگ‌های کنترلی، بدون آنکه واقعاً متوجه شود پشت صحنه چه می‌گذرد.</p><p>برنامه‌نویسی اغلب نوعی اکتشاف است. ممکن است تصور کنید که الگوریتم درست را می‌دانید، اما بعد مجبور می‌شوید آن را اصلاح، امتحان و دست‌کاری کنید تا بالاخره «کار کند». چطور می‌فهمید که کار می‌کند؟ چون تست‌هایی که به ذهنتان رسیده را پاس می‌کند.</p><p>این رویکرد فی‌نفسه مشکلی ندارد؛ در واقع، گاهی تنها راه برای رسیدن به عملکرد دلخواه همین است. اما کافی نیست که فقط به «کار کردن» اکتفا کنید—یعنی نباید فقط از دید آزمون‌ها به عملکرد درست بسنده کنید.</p><p>قبل از آنکه تصور کنید کارتان با تابعی تمام شده، باید آن را واقعاً درک کرده باشید. اینکه همه‌ی تست‌ها پاس شوند کافی نیست. شما باید بدانید که راه‌حل درست است.</p><p>اغلب بهترین راه برای رسیدن به این درک، بازآرایی (<code>Refactor</code>) کد به شکلی است که بسیار تمیز و گویا باشد—آن‌قدر که روش کارکرد آن، واضح و بدیهی شود.</p><h3>G22: وابستگی‌های منطقی را به وابستگی‌های فیزیکی تبدیل کنید</h3><p>اگر یک ماژول به ماژول دیگری وابسته است، این وابستگی باید فیزیکی باشد، نه صرفاً منطقی. ماژول وابسته نباید بر اساس فرضیات درباره‌ی ماژول دیگر کار کند (یعنی وابستگی منطقی نداشته باشد). بلکه باید صراحتاً تمام اطلاعاتی را که نیاز دارد از ماژول مورد نظر درخواست کند.</p><p>برای مثال، تصور کنید تابعی می‌نویسید که گزارشی متنی از ساعات کاری کارکنان چاپ می‌کند. کلاسی به نام <code>HourlyReporter</code> تمام داده‌های مورد نیاز را جمع‌آوری می‌کند و سپس آن را به کلاس <code>HourlyReportFormatter</code> می‌دهد تا چاپ شود.</p><p>Listing 17-1 را ببینید</p></div> <p><strong>Listing 17-1 -- HourlyReporter.java</strong></p><pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">HourlyReporter</span>
 {
     <span class="hljs-keyword">private</span> HourlyReportFormatter formatter;
     <span class="hljs-keyword">private</span> List&lt;LineItem&gt; page;
@@ -366,76 +123,21 @@ ant all
         <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> tenths;
     }
 }
-</code></pre>
-<div dir="rtl">
-<p>این کد دارای یک وابستگی منطقی است که به‌صورت فیزیکی پیاده‌سازی نشده است. می‌توانید آن را پیدا کنید؟ آن وابستگی، ثابت <code>PAGE_SIZE</code> است. چرا باید <code>HourlyReporter</code> از اندازه‌ی صفحه مطلع باشد؟ اندازه‌ی صفحه باید در حوزه‌ی مسئولیت کلاس <code>HourlyReportFormatter</code> باشد.</p>
-<p>واقعیت این است که <code>PAGE_SIZE</code> در کلاس <code>HourlyReporter</code> تعریف شده و این نشان‌دهنده‌ی یک مسئولیت نابه‌جا [G17] است که باعث می‌شود <code>HourlyReporter</code> فرض کند می‌داند اندازه‌ی صفحه باید چه باشد. چنین فرضی، یک وابستگی منطقی به حساب می‌آید. <code>HourlyReporter</code> به این وابسته است که <code>HourlyReportFormatter</code> قادر به پردازش صفحاتی با اندازه‌ی ۵۵ باشد. اگر پیاده‌سازی‌ای از <code>HourlyReportFormatter</code> وجود داشته باشد که نتواند با چنین اندازه‌ای کار کند، آنگاه یک خطا به وجود می‌آید.</p>
-<p>ما می‌توانیم این وابستگی را با ایجاد متدی جدید به نام <code>getMaxPageSize()</code> در کلاس <code>HourlyReportFormatter</code> فیزیکی کنیم. سپس <code>HourlyReporter</code> به جای استفاده از ثابت <code>PAGE_SIZE،</code> آن متد را فراخوانی خواهد کرد.</p>
-<h3>G23: ترجیح پلی‌مورفیسم به جای <code>if/else</code> یا <code>Switch/Case</code></h3>
-<p>شاید این پیشنهاد با توجه به موضوع فصل ششم عجیب به‌نظر برسد. به‌هرحال در آن فصل تأکید کردم که دستور <code>switch</code> احتمالاً برای بخش‌هایی از سیستم مناسب است که افزودن عملکردهای جدید در آن‌ها محتمل‌تر از افزودن نوع‌های جدید است.</p>
-<p>اول، اکثر افراد از <code>switch</code> استفاده می‌کنند چون راه‌حل واضح و سرراست (<code>brute-force</code>) به‌نظر می‌رسد، نه لزوماً راه‌حل درست برای مسئله. بنابراین این قاعده اینجاست تا به ما یادآوری کند پیش از استفاده از <code>switch،</code> به پلی‌مورفیسم فکر کنیم.</p>
-<p>دوم، مواردی که در آن‌ها توابع متغیرتر از نوع‌ها هستند، نسبتاً نادرند. بنابراین، هر دستور <code>switch</code> باید مشکوک باشد.</p>
-<p>من از قاعده‌ی “تنها یک <code>switch</code>” استفاده می‌کنم: نباید بیشتر از یک دستور <code>switch</code> برای نوع خاصی از انتخاب وجود داشته باشد. <code>case</code> های آن دستور باید آبجکت‌های پلی‌مورفیکی بسازند که جایگزین سایر <code>switch</code> ها در باقی سیستم می‌شوند.</p>
-<h3>G24: از قراردادهای استاندارد پیروی کنید</h3>
-<p>هر تیم باید از یک استاندارد کدنویسی تبعیت کند که بر مبنای عرف‌های رایج صنعت تعریف شده است. این استاندارد باید مواردی مانند مکان تعریف متغیرهای نمونه، نحوه‌ی نام‌گذاری کلاس‌ها، متدها و متغیرها، محل قرارگیری براکت‌ها و غیره را مشخص کند. تیم نباید برای توضیح این قراردادها به سندی نیاز داشته باشد، چراکه خود کد باید الگو و نمونه‌ی آن‌ها باشد.</p>
-<p>همه‌ی اعضای تیم باید از این قراردادها پیروی کنند. این یعنی هر عضو باید به اندازه‌ی کافی بالغ باشد که درک کند محل قرار دادن براکت‌ها اهمیتی ندارد، مادامی که همه بر سر یک روش توافق داشته باشند.</p>
-<p>اگر می‌خواهید بدانید من از چه قراردادهایی پیروی می‌کنم، آن‌ها را در کدهای بازآرایی‌شده در لیست‌های <code>B-7</code> تا <code>B-14</code> خواهید دید.</p>
-<h3>G25: جایگزینی اعداد جادویی با ثابت‌های نام‌گذاری‌شده</h3>
-<p>این احتمالاً یکی از قدیمی‌ترین قواعد در توسعه‌ی نرم‌افزار است. من آن را در اواخر دهه‌ی شصت در کتاب‌های مقدماتی <code>COBOL،</code> <code>FORTRAN</code> و <code>PL/1</code> خواندم. به‌طور کلی، استفاده از اعداد خام در کد ایده‌ی بدی است. شما باید آن‌ها را پشت ثابت‌هایی با نام مناسب پنهان کنید.</p>
-<p>برای مثال، عدد <code>86400</code> باید پشت ثابتی مثل <code>SECONDS_PER_DAY</code> قرار گیرد. اگر <code>۵۵</code> خط در هر صفحه چاپ می‌شود، آن عدد باید پشت ثابتی مثل <code>LINES_PER_PAGE</code> قرار گیرد.</p>
-<p>برخی از ثابت‌ها آن‌قدر شناخته‌شده هستند که نیازی نیست حتماً با ثابت‌های نام‌گذاری‌شده جایگزین شوند، به‌ویژه وقتی در کنار کدی کاملاً واضح استفاده می‌شوند. برای مثال:</p>
-</div>
-<pre class="hljs"><code><span class="hljs-type">double</span> <span class="hljs-variable">milesWalked</span> <span class="hljs-operator">=</span> feetWalked / <span class="hljs-number">5280.0</span>;
+</code></pre> <div dir="rtl"><p>این کد دارای یک وابستگی منطقی است که به‌صورت فیزیکی پیاده‌سازی نشده است. می‌توانید آن را پیدا کنید؟ آن وابستگی، ثابت <code>PAGE_SIZE</code> است. چرا باید <code>HourlyReporter</code> از اندازه‌ی صفحه مطلع باشد؟ اندازه‌ی صفحه باید در حوزه‌ی مسئولیت کلاس <code>HourlyReportFormatter</code> باشد.</p><p>واقعیت این است که <code>PAGE_SIZE</code> در کلاس <code>HourlyReporter</code> تعریف شده و این نشان‌دهنده‌ی یک مسئولیت نابه‌جا [G17] است که باعث می‌شود <code>HourlyReporter</code> فرض کند می‌داند اندازه‌ی صفحه باید چه باشد. چنین فرضی، یک وابستگی منطقی به حساب می‌آید. <code>HourlyReporter</code> به این وابسته است که <code>HourlyReportFormatter</code> قادر به پردازش صفحاتی با اندازه‌ی ۵۵ باشد. اگر پیاده‌سازی‌ای از <code>HourlyReportFormatter</code> وجود داشته باشد که نتواند با چنین اندازه‌ای کار کند، آنگاه یک خطا به وجود می‌آید.</p><p>ما می‌توانیم این وابستگی را با ایجاد متدی جدید به نام <code>getMaxPageSize()</code> در کلاس <code>HourlyReportFormatter</code> فیزیکی کنیم. سپس <code>HourlyReporter</code> به جای استفاده از ثابت <code>PAGE_SIZE،</code> آن متد را فراخوانی خواهد کرد.</p><h3>G23: ترجیح پلی‌مورفیسم به جای <code>if/else</code> یا <code>Switch/Case</code></h3><p>شاید این پیشنهاد با توجه به موضوع فصل ششم عجیب به‌نظر برسد. به‌هرحال در آن فصل تأکید کردم که دستور <code>switch</code> احتمالاً برای بخش‌هایی از سیستم مناسب است که افزودن عملکردهای جدید در آن‌ها محتمل‌تر از افزودن نوع‌های جدید است.</p><p>اول، اکثر افراد از <code>switch</code> استفاده می‌کنند چون راه‌حل واضح و سرراست (<code>brute-force</code>) به‌نظر می‌رسد، نه لزوماً راه‌حل درست برای مسئله. بنابراین این قاعده اینجاست تا به ما یادآوری کند پیش از استفاده از <code>switch،</code> به پلی‌مورفیسم فکر کنیم.</p><p>دوم، مواردی که در آن‌ها توابع متغیرتر از نوع‌ها هستند، نسبتاً نادرند. بنابراین، هر دستور <code>switch</code> باید مشکوک باشد.</p><p>من از قاعده‌ی “تنها یک <code>switch</code>” استفاده می‌کنم: نباید بیشتر از یک دستور <code>switch</code> برای نوع خاصی از انتخاب وجود داشته باشد. <code>case</code> های آن دستور باید آبجکت‌های پلی‌مورفیکی بسازند که جایگزین سایر <code>switch</code> ها در باقی سیستم می‌شوند.</p><h3>G24: از قراردادهای استاندارد پیروی کنید</h3><p>هر تیم باید از یک استاندارد کدنویسی تبعیت کند که بر مبنای عرف‌های رایج صنعت تعریف شده است. این استاندارد باید مواردی مانند مکان تعریف متغیرهای نمونه، نحوه‌ی نام‌گذاری کلاس‌ها، متدها و متغیرها، محل قرارگیری براکت‌ها و غیره را مشخص کند. تیم نباید برای توضیح این قراردادها به سندی نیاز داشته باشد، چراکه خود کد باید الگو و نمونه‌ی آن‌ها باشد.</p><p>همه‌ی اعضای تیم باید از این قراردادها پیروی کنند. این یعنی هر عضو باید به اندازه‌ی کافی بالغ باشد که درک کند محل قرار دادن براکت‌ها اهمیتی ندارد، مادامی که همه بر سر یک روش توافق داشته باشند.</p><p>اگر می‌خواهید بدانید من از چه قراردادهایی پیروی می‌کنم، آن‌ها را در کدهای بازآرایی‌شده در لیست‌های <code>B-7</code> تا <code>B-14</code> خواهید دید.</p><h3>G25: جایگزینی اعداد جادویی با ثابت‌های نام‌گذاری‌شده</h3><p>این احتمالاً یکی از قدیمی‌ترین قواعد در توسعه‌ی نرم‌افزار است. من آن را در اواخر دهه‌ی شصت در کتاب‌های مقدماتی <code>COBOL،</code> <code>FORTRAN</code> و <code>PL/1</code> خواندم. به‌طور کلی، استفاده از اعداد خام در کد ایده‌ی بدی است. شما باید آن‌ها را پشت ثابت‌هایی با نام مناسب پنهان کنید.</p><p>برای مثال، عدد <code>86400</code> باید پشت ثابتی مثل <code>SECONDS_PER_DAY</code> قرار گیرد. اگر <code>۵۵</code> خط در هر صفحه چاپ می‌شود، آن عدد باید پشت ثابتی مثل <code>LINES_PER_PAGE</code> قرار گیرد.</p><p>برخی از ثابت‌ها آن‌قدر شناخته‌شده هستند که نیازی نیست حتماً با ثابت‌های نام‌گذاری‌شده جایگزین شوند، به‌ویژه وقتی در کنار کدی کاملاً واضح استفاده می‌شوند. برای مثال:</p></div> <pre class="hljs"><code><span class="hljs-type">double</span> <span class="hljs-variable">milesWalked</span> <span class="hljs-operator">=</span> feetWalked / <span class="hljs-number">5280.0</span>;
 <span class="hljs-type">int</span> <span class="hljs-variable">dailyPay</span> <span class="hljs-operator">=</span> hourlyRate * <span class="hljs-number">8</span>;
 <span class="hljs-type">double</span> <span class="hljs-variable">circumference</span> <span class="hljs-operator">=</span> radius * Math.PI * <span class="hljs-number">2</span>;
-</code></pre>
-<div dir="rtl">
-<p>آیا واقعاً نیاز است <code>FEET_PER_MILE،</code> <code>WORK_HOURS_PER_DAY</code> و <code>TWO</code> به‌جای آن‌ها استفاده شود؟ به‌وضوح، مورد سوم (عدد ۲) کاملاً بی‌معنا است. برخی فرمول‌ها بهتر است اعداد را به‌صورت خام نگه دارند.</p>
-<p>ممکن است درباره‌ی <code>WORK_HOURS_PER_DAY</code> بحث شود، چراکه قوانین یا عرف‌ها ممکن است تغییر کنند. با این حال، آن فرمول با عدد ۸ خیلی روان خوانده می‌شود و افزودن ۱۷ کاراکتر اضافی برای یک نام ثابت ممکن است سربار بصری ایجاد کند.</p>
-<p>عدد 5280 آن‌قدر معروف است که حتی اگر وسط یک صفحه بدون هیچ متنی قرار گیرد، باز هم برای خواننده آشناست.</p>
-<p>با این حال، اعدادی مانند <code>3.141592653589793</code> آن‌قدر دقیق هستند که استفاده‌ی خام آن‌ها خطرناک است. وقتی کسی عدد <code>3.1415927535890793</code> را می‌بیند، تصور می‌کند عدد پی است و بنابراین آن را به دقت بررسی نمی‌کند. (آیا متوجه خطای تک‌رقمی شدید؟)</p>
-<p>ما همچنین نمی‌خواهیم افراد نسخه‌های مختلفی مثل <code>3.14</code>، <code>3.14159</code>، <code>3.142</code> و غیره استفاده کنند. بنابراین، این موضوع که <code>Math.PI</code> قبلاً برای ما تعریف شده، بسیار خوب است.</p>
-<p>اصطلاح «عدد جادویی» فقط مختص اعداد نیست. هر نشانه‌ای که معنای روشنی نداشته باشد در این دسته قرار می‌گیرد. برای مثال:</p>
-</div>
-<pre class="hljs"><code>assertEquals(<span class="hljs-number">7777</span>, Employee.find(<span class="hljs-string">&quot;John Doe&quot;</span>).employeeNumber());
-</code></pre>
-<div dir="rtl">
-<p>دو عدد جادویی در این تست وجود دارد: عدد ۷۷۷۷ و رشته‌ی &quot;John Doe&quot;. معنای هیچ‌کدام از آن‌ها مشخص نیست.</p>
-<p>در واقع، &quot;John Doe&quot; نام کارمند شماره ۷۷۷۷ در پایگاه داده‌ی تستی شناخته‌شده‌ی تیم ماست. همه‌ی اعضای تیم می‌دانند که این پایگاه داده شامل چند کارمند آماده با مقادیر شناخته‌شده است. &quot;John Doe&quot; تنها کارمند ساعتی (hourly) در این پایگاه داده است. بنابراین این تست باید به شکل زیر نوشته شود:</p>
-</div>
-<pre class="hljs"><code>assertEquals(
+</code></pre> <div dir="rtl"><p>آیا واقعاً نیاز است <code>FEET_PER_MILE،</code> <code>WORK_HOURS_PER_DAY</code> و <code>TWO</code> به‌جای آن‌ها استفاده شود؟ به‌وضوح، مورد سوم (عدد ۲) کاملاً بی‌معنا است. برخی فرمول‌ها بهتر است اعداد را به‌صورت خام نگه دارند.</p><p>ممکن است درباره‌ی <code>WORK_HOURS_PER_DAY</code> بحث شود، چراکه قوانین یا عرف‌ها ممکن است تغییر کنند. با این حال، آن فرمول با عدد ۸ خیلی روان خوانده می‌شود و افزودن ۱۷ کاراکتر اضافی برای یک نام ثابت ممکن است سربار بصری ایجاد کند.</p><p>عدد 5280 آن‌قدر معروف است که حتی اگر وسط یک صفحه بدون هیچ متنی قرار گیرد، باز هم برای خواننده آشناست.</p><p>با این حال، اعدادی مانند <code>3.141592653589793</code> آن‌قدر دقیق هستند که استفاده‌ی خام آن‌ها خطرناک است. وقتی کسی عدد <code>3.1415927535890793</code> را می‌بیند، تصور می‌کند عدد پی است و بنابراین آن را به دقت بررسی نمی‌کند. (آیا متوجه خطای تک‌رقمی شدید؟)</p><p>ما همچنین نمی‌خواهیم افراد نسخه‌های مختلفی مثل <code>3.14</code>، <code>3.14159</code>، <code>3.142</code> و غیره استفاده کنند. بنابراین، این موضوع که <code>Math.PI</code> قبلاً برای ما تعریف شده، بسیار خوب است.</p><p>اصطلاح «عدد جادویی» فقط مختص اعداد نیست. هر نشانه‌ای که معنای روشنی نداشته باشد در این دسته قرار می‌گیرد. برای مثال:</p></div> <pre class="hljs"><code>assertEquals(<span class="hljs-number">7777</span>, Employee.find(<span class="hljs-string">&quot;John Doe&quot;</span>).employeeNumber());
+</code></pre> <div dir="rtl"><p>دو عدد جادویی در این تست وجود دارد: عدد ۷۷۷۷ و رشته‌ی &quot;John Doe&quot;. معنای هیچ‌کدام از آن‌ها مشخص نیست.</p><p>در واقع، &quot;John Doe&quot; نام کارمند شماره ۷۷۷۷ در پایگاه داده‌ی تستی شناخته‌شده‌ی تیم ماست. همه‌ی اعضای تیم می‌دانند که این پایگاه داده شامل چند کارمند آماده با مقادیر شناخته‌شده است. &quot;John Doe&quot; تنها کارمند ساعتی (hourly) در این پایگاه داده است. بنابراین این تست باید به شکل زیر نوشته شود:</p></div> <pre class="hljs"><code>assertEquals(
   HOURLY_EMPLOYEE_ID,
   Employee.find(HOURLY_EMPLOYEE_NAME).employeeNumber());
-</code></pre>
-<div dir="rtl">
-<h3>G26: دقیق باشید</h3>
-<p>انتظار اینکه اولین نتیجه‌ی یک کوئری تنها نتیجه باشد، ساده‌لوحانه است. استفاده از اعداد اعشاری برای نمایش پول تقریباً جنایت‌کارانه است. پرهیز از قفل‌گذاری یا مدیریت تراکنش به‌خاطر فرض کم‌بودن احتمال به‌روزرسانی هم‌زمان، در بهترین حالت تنبلی است.</p>
-<p>تعریف یک متغیر به صورت <code>ArrayList</code> در حالی که <code>List</code> کافی بود، بیش‌ازحد محدودکننده است. از طرفی، تعریف همه‌ی متغیرها به‌صورت <code>protected</code> پیش‌فرض، کافی نیست.</p>
-<p>وقتی تصمیمی در کد می‌گیرید، آن را دقیق بگیرید. بدانید چرا آن تصمیم را گرفته‌اید و در صورت بروز استثنا، چگونه با آن برخورد خواهید کرد. در برخورد با دقت تصمیم‌گیری تنبلی نکنید.</p>
-<p>اگر متدی ممکن است <code>null</code> بازگرداند، برای آن بررسی انجام دهید. اگر فکر می‌کنید تنها یک رکورد از دیتابیس خوانده می‌شود، بررسی کنید که رکوردهای دیگری وجود نداشته باشد. اگر با ارز سر و کار دارید، از اعداد صحیح استفاده کنید و گرد کردن را به‌درستی مدیریت نمایید. اگر امکان به‌روزرسانی هم‌زمان وجود دارد، حتماً مکانیزم قفل‌گذاری پیاده‌سازی کنید.</p>
-<p>ابهام و عدم دقت در کد یا نتیجه‌ی اختلاف نظر است یا تنبلی — در هر دو حالت باید حذف شوند.</p>
-<h3>G34: توابع باید فقط یک سطح از انتزاع را پایین بیایند</h3>
-<p>دستورات داخل یک تابع باید همگی در یک سطح انتزاعی نوشته شوند؛ آن هم در سطحی پایین‌تر از عملیاتی که نام تابع توصیف می‌کند.<br>
-درک و اجرای این اصل احتمالاً یکی از سخت‌ترین موارد در میان این اصول است. با اینکه ایده‌ی کلی آن واضح است، اما انسان‌ها به طرز شگفت‌انگیزی در مخلوط کردن سطوح مختلف انتزاع مهارت دارند.</p>
-<p>مثلاً کد زیر از پروژهٔ <code>FitNesse</code> را در نظر بگیرید:</p>
-</div>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> String <span class="hljs-title function_">render</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> Exception {
+</code></pre> <div dir="rtl"><h3>G26: دقیق باشید</h3><p>انتظار اینکه اولین نتیجه‌ی یک کوئری تنها نتیجه باشد، ساده‌لوحانه است. استفاده از اعداد اعشاری برای نمایش پول تقریباً جنایت‌کارانه است. پرهیز از قفل‌گذاری یا مدیریت تراکنش به‌خاطر فرض کم‌بودن احتمال به‌روزرسانی هم‌زمان، در بهترین حالت تنبلی است.</p><p>تعریف یک متغیر به صورت <code>ArrayList</code> در حالی که <code>List</code> کافی بود، بیش‌ازحد محدودکننده است. از طرفی، تعریف همه‌ی متغیرها به‌صورت <code>protected</code> پیش‌فرض، کافی نیست.</p><p>وقتی تصمیمی در کد می‌گیرید، آن را دقیق بگیرید. بدانید چرا آن تصمیم را گرفته‌اید و در صورت بروز استثنا، چگونه با آن برخورد خواهید کرد. در برخورد با دقت تصمیم‌گیری تنبلی نکنید.</p><p>اگر متدی ممکن است <code>null</code> بازگرداند، برای آن بررسی انجام دهید. اگر فکر می‌کنید تنها یک رکورد از دیتابیس خوانده می‌شود، بررسی کنید که رکوردهای دیگری وجود نداشته باشد. اگر با ارز سر و کار دارید، از اعداد صحیح استفاده کنید و گرد کردن را به‌درستی مدیریت نمایید. اگر امکان به‌روزرسانی هم‌زمان وجود دارد، حتماً مکانیزم قفل‌گذاری پیاده‌سازی کنید.</p><p>ابهام و عدم دقت در کد یا نتیجه‌ی اختلاف نظر است یا تنبلی — در هر دو حالت باید حذف شوند.</p><h3>G34: توابع باید فقط یک سطح از انتزاع را پایین بیایند</h3><p>دستورات داخل یک تابع باید همگی در یک سطح انتزاعی نوشته شوند؛ آن هم در سطحی پایین‌تر از عملیاتی که نام تابع توصیف می‌کند.<br> درک و اجرای این اصل احتمالاً یکی از سخت‌ترین موارد در میان این اصول است. با اینکه ایده‌ی کلی آن واضح است، اما انسان‌ها به طرز شگفت‌انگیزی در مخلوط کردن سطوح مختلف انتزاع مهارت دارند.</p><p>مثلاً کد زیر از پروژهٔ <code>FitNesse</code> را در نظر بگیرید:</p></div> <pre class="hljs"><code><span class="hljs-keyword">public</span> String <span class="hljs-title function_">render</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> Exception {
     <span class="hljs-type">StringBuffer</span> <span class="hljs-variable">html</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">StringBuffer</span>(<span class="hljs-string">&quot;&lt;hr&quot;</span>);
     <span class="hljs-keyword">if</span>(size &gt; <span class="hljs-number">0</span>)
         html.append(<span class="hljs-string">&quot; size=\&quot;&quot;</span>).append(size + <span class="hljs-number">1</span>).append(<span class="hljs-string">&quot;\&quot;&quot;</span>);
     html.append(<span class="hljs-string">&quot;&gt;&quot;</span>);
     <span class="hljs-keyword">return</span> html.toString();
 }
-</code></pre>
-<div dir="rtl">
-<p>با یک نگاه کوتاه می‌توان فهمید این تابع تگ <code>HTML</code> مربوط به خط افقی (<code>&lt;hr&gt;</code>) را می‌سازد. ارتفاع این خط توسط متغیر <code>size</code> تعیین می‌شود.</p>
-<p>اما اگر دوباره نگاه کنید، می‌بینید که این متد حداقل دو سطح از انتزاع را با هم ترکیب کرده:</p>
-<p>مفهوم اینکه یک خط افقی (horizontal rule) اندازه دارد.</p>
-<p>نحو (syntax) مربوط به تگ <code>&lt;hr&gt;</code> در <code>HTML</code>.</p>
-<p>این کد متعلق به ماژول <code>HruleWidget</code> در <code>FitNesse</code> است. این ماژول یک ردیف شامل چهار یا بیشتر خط تیره (-) را تشخیص داده و آن را به تگ <code>HR</code> مناسب تبدیل می‌کند. هرچه تعداد خط تیره‌ها بیشتر باشد، اندازه تگ <code>HR</code> بزرگ‌تر خواهد بود.</p>
-<p>کد بالا را این‌گونه بازنویسی کرده‌ام. دقت کنید که نام فیلد <code>size</code> را هم تغییر داده‌ام تا هدف واقعی‌اش را بهتر نشان دهد. این فیلد در واقع تعداد خط تیره‌های اضافه را نگه می‌داشت:</p>
-</div>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> String <span class="hljs-title function_">render</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> Exception {
+</code></pre> <div dir="rtl"><p>با یک نگاه کوتاه می‌توان فهمید این تابع تگ <code>HTML</code> مربوط به خط افقی (<code>&lt;hr&gt;</code>) را می‌سازد. ارتفاع این خط توسط متغیر <code>size</code> تعیین می‌شود.</p><p>اما اگر دوباره نگاه کنید، می‌بینید که این متد حداقل دو سطح از انتزاع را با هم ترکیب کرده:</p><p>مفهوم اینکه یک خط افقی (horizontal rule) اندازه دارد.</p><p>نحو (syntax) مربوط به تگ <code>&lt;hr&gt;</code> در <code>HTML</code>.</p><p>این کد متعلق به ماژول <code>HruleWidget</code> در <code>FitNesse</code> است. این ماژول یک ردیف شامل چهار یا بیشتر خط تیره (-) را تشخیص داده و آن را به تگ <code>HR</code> مناسب تبدیل می‌کند. هرچه تعداد خط تیره‌ها بیشتر باشد، اندازه تگ <code>HR</code> بزرگ‌تر خواهد بود.</p><p>کد بالا را این‌گونه بازنویسی کرده‌ام. دقت کنید که نام فیلد <code>size</code> را هم تغییر داده‌ام تا هدف واقعی‌اش را بهتر نشان دهد. این فیلد در واقع تعداد خط تیره‌های اضافه را نگه می‌داشت:</p></div> <pre class="hljs"><code><span class="hljs-keyword">public</span> String <span class="hljs-title function_">render</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> Exception {
     <span class="hljs-type">HtmlTag</span> <span class="hljs-variable">hr</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">HtmlTag</span>(<span class="hljs-string">&quot;hr&quot;</span>);
     <span class="hljs-keyword">if</span> (extraDashes &gt; <span class="hljs-number">0</span>)
         hr.addAttribute(<span class="hljs-string">&quot;size&quot;</span>, hrSize(extraDashes));
@@ -446,75 +148,29 @@ ant all
     <span class="hljs-type">int</span> <span class="hljs-variable">hrSize</span> <span class="hljs-operator">=</span> height + <span class="hljs-number">1</span>;
     <span class="hljs-keyword">return</span> String.format(<span class="hljs-string">&quot;%d&quot;</span>, hrSize);
 }
-</code></pre>
-<div dir="rtl">
-<p>این تغییر، سطوح مختلف انتزاع را به‌خوبی جدا کرده است. تابع <code>render</code> تنها وظیفه‌ی ساخت تگ <code>HR</code> را دارد و هیچ اطلاعی از نحو <code>HTML</code> آن ندارد. ماژول <code>HtmlTag</code> تمام جزئیات نحوی را مدیریت می‌کند.</p>
-<p>در واقع، با این تغییر یک باگ ظریف هم کشف شد. کد اصلی تگ <code>HR</code> را بدون / بسته بود (یعنی <code>&lt;hr&gt;</code> به‌جای <code>&lt;hr/&gt;</code> طبق استاندارد <code>XHTML</code>). ماژول <code>HtmlTag</code> مدت‌ها پیش به <code>XHTML</code> تغییر یافته بود.</p>
-<p>جدا کردن سطوح انتزاع یکی از مهم‌ترین و سخت‌ترین بخش‌های <code>Refactoring</code> است. مثالی دیگر:</p>
-</div>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> String <span class="hljs-title function_">render</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> Exception {
+</code></pre> <div dir="rtl"><p>این تغییر، سطوح مختلف انتزاع را به‌خوبی جدا کرده است. تابع <code>render</code> تنها وظیفه‌ی ساخت تگ <code>HR</code> را دارد و هیچ اطلاعی از نحو <code>HTML</code> آن ندارد. ماژول <code>HtmlTag</code> تمام جزئیات نحوی را مدیریت می‌کند.</p><p>در واقع، با این تغییر یک باگ ظریف هم کشف شد. کد اصلی تگ <code>HR</code> را بدون / بسته بود (یعنی <code>&lt;hr&gt;</code> به‌جای <code>&lt;hr/&gt;</code> طبق استاندارد <code>XHTML</code>). ماژول <code>HtmlTag</code> مدت‌ها پیش به <code>XHTML</code> تغییر یافته بود.</p><p>جدا کردن سطوح انتزاع یکی از مهم‌ترین و سخت‌ترین بخش‌های <code>Refactoring</code> است. مثالی دیگر:</p></div> <pre class="hljs"><code><span class="hljs-keyword">public</span> String <span class="hljs-title function_">render</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> Exception {
     <span class="hljs-type">HtmlTag</span> <span class="hljs-variable">hr</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">HtmlTag</span>(<span class="hljs-string">&quot;hr&quot;</span>);
     <span class="hljs-keyword">if</span> (size &gt; <span class="hljs-number">0</span>) {
         hr.addAttribute(<span class="hljs-string">&quot;size&quot;</span>, <span class="hljs-string">&quot;&quot;</span> + (size + <span class="hljs-number">1</span>));
     }
     <span class="hljs-keyword">return</span> hr.html();
 }
-</code></pre>
-<div dir="rtl">
-<p>هدف اولیه من جدا کردن سطوح انتزاع و عبور از تست‌ها بود، که به‌راحتی انجام شد. اما همچنان این تابع شامل سطوح ترکیبی انتزاعی بود: ساخت تگ <code>HR</code> و تفسیر و قالب‌بندی مقدار <code>size</code>.</p>
-<p>وقتی تابعی را بر اساس سطوح انتزاع تقسیم می‌کنید، اغلب خطوط جدیدی از انتزاع آشکار می‌شوند که قبلاً پنهان بودند.</p>
-<h3>G35: داده‌های پیکربندی را در سطوح بالا نگه دارید</h3>
-<p>اگر داده‌ای مانند مقدار پیش‌فرض یا مقدار پیکربندی دارید که در سطوح بالا مورد انتظار و شناخته‌شده است، آن را در توابع سطح پایین پنهان نکنید. آن را به‌عنوان پارامتر از توابع سطح بالا عبور دهید.</p>
-<p>مثال زیر را از <code>FitNesse</code> ببینید:</p>
-</div>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> Exception {
+</code></pre> <div dir="rtl"><p>هدف اولیه من جدا کردن سطوح انتزاع و عبور از تست‌ها بود، که به‌راحتی انجام شد. اما همچنان این تابع شامل سطوح ترکیبی انتزاعی بود: ساخت تگ <code>HR</code> و تفسیر و قالب‌بندی مقدار <code>size</code>.</p><p>وقتی تابعی را بر اساس سطوح انتزاع تقسیم می‌کنید، اغلب خطوط جدیدی از انتزاع آشکار می‌شوند که قبلاً پنهان بودند.</p><h3>G35: داده‌های پیکربندی را در سطوح بالا نگه دارید</h3><p>اگر داده‌ای مانند مقدار پیش‌فرض یا مقدار پیکربندی دارید که در سطوح بالا مورد انتظار و شناخته‌شده است، آن را در توابع سطح پایین پنهان نکنید. آن را به‌عنوان پارامتر از توابع سطح بالا عبور دهید.</p><p>مثال زیر را از <code>FitNesse</code> ببینید:</p></div> <pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> Exception {
     <span class="hljs-type">Arguments</span> <span class="hljs-variable">arguments</span> <span class="hljs-operator">=</span> parseCommandLine(args);
     ...
 }
-</code></pre>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Arguments</span> {
+</code></pre> <pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Arguments</span> {
     <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">String</span> <span class="hljs-variable">DEFAULT_PATH</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;.&quot;</span>;
     <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">String</span> <span class="hljs-variable">DEFAULT_ROOT</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;FitNesseRoot&quot;</span>;
     <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">int</span> <span class="hljs-variable">DEFAULT_PORT</span> <span class="hljs-operator">=</span> <span class="hljs-number">80</span>;
     <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">int</span> <span class="hljs-variable">DEFAULT_VERSION_DAYS</span> <span class="hljs-operator">=</span> <span class="hljs-number">14</span>;
     ...
 }
-</code></pre>
-<div dir="rtl">
-<p>آرگومان‌های خط فرمان در اولین خط اجرایی <code>FitNesse</code> تحلیل می‌شوند. مقادیر پیش‌فرض آن‌ها در ابتدای کلاس <code>Arguments</code> قرار دارند. نیازی نیست در اعماق سیستم به دنبال چنین دستوراتی بگردید:</p>
-</div>
-<pre class="hljs"><code><span class="hljs-keyword">if</span> (arguments.port == <span class="hljs-number">0</span>) <span class="hljs-comment">// default =&gt; 80</span>
-</code></pre>
-<div dir="rtl">
-<p>ثوابت پیکربندی در سطوح بالا نگهداری می‌شوند و به‌راحتی قابل تغییرند. این مقادیر به سطوح پایین‌تر ارسال می‌شوند، اما آن سطوح مالک آن‌ها نیستند.</p>
-<h3>G36: از ناوبری گذرا (Transitive Navigation) اجتناب کنید</h3>
-<p>به‌طور کلی نمی‌خواهیم یک ماژول چیز زیادی دربارهٔ همکاران خود بداند. به‌خصوص اگر A با B کار می‌کند و B با C، نمی‌خواهیم ماژول‌های استفاده‌کننده از A، دربارهٔ C چیزی بدانند. مثلاً این بد است:</p>
-</div>
-<pre class="hljs"><code>a.getB().getC().doSomething();
-</code></pre>
-<div dir="rtl">
-<p>این قانون به <code>Law of Demeter</code> یا اصطلاحاً کد خجالتی (<code>Shy Code</code>) معروف است. ایده این است که هر ماژول تنها دربارهٔ همکاران مستقیم خود اطلاع داشته باشد و از نقشهٔ ناوبری کل سیستم بی‌خبر باشد.</p>
-<p>اگر در نقاط مختلف سیستم چنین عبارتی داشته باشید:</p>
-</div>
-<pre class="hljs"><code>a.getB().getC()
-</code></pre>
-<div dir="rtl">
-<p>تغییر معماری سیستم برای افزودن یک جزء جدید (مثلاً Q بین B و C) بسیار سخت خواهد شد، چون باید تمام موارد استفاده را پیدا و بازنویسی کنید.</p>
-<p>در عوض، باید همکاران مستقیم تمام خدمات موردنیاز را ارائه دهند تا نیازی به گردش در گراف شیء نباشد. مثلاً فقط بنویسیم:</p>
-</div>
-<pre class="hljs"><code>myCollaborator.doSomething();
-</code></pre>
-<div dir="rtl">
-<h3>J1: با استفاده از <code>Wildcard</code> لیست ایمپورت‌ها را کوتاه نگه دارید</h3>
-<p>اگر از دو یا چند کلاس از یک پکیج استفاده می‌کنید، کل پکیج را با <code>import package.*</code> ایمپورت کنید.</p>
-<p>لیست بلندبالای ایمپورت‌ها باعث آزار خواننده می‌شود. هدف ما یک بیان مختصر از وابستگی‌های ماژول است.</p>
-<p>ایمپورت مشخص (مثل <code>import a.b.ClassX</code>) یک وابستگی سخت است، در حالی که ایمپورت کلی (<code>wildcard</code>) فقط پکیج را به مسیر جستجو اضافه می‌کند و وابستگی مستقیم ایجاد نمی‌کند. پس ماژول‌ها را کم‌تر کوپل می‌کند.</p>
-<p>در برخی موارد (مثلاً کدهای قدیمی که می‌خواهیم برای آن‌ها <code>mock</code> یا <code>stub</code> بسازیم) ایمپورت‌های مشخص مفیدند، اما این موارد نادرند. بیشتر IDE ها هم می‌توانند با یک دستور، <code>wildcard</code> را به ایمپورت‌های مشخص تبدیل کنند.</p>
-<p>مشکل نادر <code>wildcard</code> این است که اگر دو کلاس با نام یکسان ولی در پکیج‌های متفاوت داشته باشید، باید آن‌ها را مشخصاً ایمپورت کنید.</p>
-<h3>J2: از ارث‌بری برای دستیابی به ثابت‌ها استفاده نکنید</h3>
-<p>گاهی برخی برنامه‌نویسان ثابت‌ها را در یک <code>interface</code> قرار می‌دهند و از طریق ارث‌بری به آن‌ها دسترسی پیدا می‌کنند:</p>
-</div>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">HourlyEmployee</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Employee</span> {
+</code></pre> <div dir="rtl"><p>آرگومان‌های خط فرمان در اولین خط اجرایی <code>FitNesse</code> تحلیل می‌شوند. مقادیر پیش‌فرض آن‌ها در ابتدای کلاس <code>Arguments</code> قرار دارند. نیازی نیست در اعماق سیستم به دنبال چنین دستوراتی بگردید:</p></div> <pre class="hljs"><code><span class="hljs-keyword">if</span> (arguments.port == <span class="hljs-number">0</span>) <span class="hljs-comment">// default =&gt; 80</span>
+</code></pre> <div dir="rtl"><p>ثوابت پیکربندی در سطوح بالا نگهداری می‌شوند و به‌راحتی قابل تغییرند. این مقادیر به سطوح پایین‌تر ارسال می‌شوند، اما آن سطوح مالک آن‌ها نیستند.</p><h3>G36: از ناوبری گذرا (Transitive Navigation) اجتناب کنید</h3><p>به‌طور کلی نمی‌خواهیم یک ماژول چیز زیادی دربارهٔ همکاران خود بداند. به‌خصوص اگر A با B کار می‌کند و B با C، نمی‌خواهیم ماژول‌های استفاده‌کننده از A، دربارهٔ C چیزی بدانند. مثلاً این بد است:</p></div> <pre class="hljs"><code>a.getB().getC().doSomething();
+</code></pre> <div dir="rtl"><p>این قانون به <code>Law of Demeter</code> یا اصطلاحاً کد خجالتی (<code>Shy Code</code>) معروف است. ایده این است که هر ماژول تنها دربارهٔ همکاران مستقیم خود اطلاع داشته باشد و از نقشهٔ ناوبری کل سیستم بی‌خبر باشد.</p><p>اگر در نقاط مختلف سیستم چنین عبارتی داشته باشید:</p></div> <pre class="hljs"><code>a.getB().getC()
+</code></pre> <div dir="rtl"><p>تغییر معماری سیستم برای افزودن یک جزء جدید (مثلاً Q بین B و C) بسیار سخت خواهد شد، چون باید تمام موارد استفاده را پیدا و بازنویسی کنید.</p><p>در عوض، باید همکاران مستقیم تمام خدمات موردنیاز را ارائه دهند تا نیازی به گردش در گراف شیء نباشد. مثلاً فقط بنویسیم:</p></div> <pre class="hljs"><code>myCollaborator.doSomething();
+</code></pre> <div dir="rtl"><h3>J1: با استفاده از <code>Wildcard</code> لیست ایمپورت‌ها را کوتاه نگه دارید</h3><p>اگر از دو یا چند کلاس از یک پکیج استفاده می‌کنید، کل پکیج را با <code>import package.*</code> ایمپورت کنید.</p><p>لیست بلندبالای ایمپورت‌ها باعث آزار خواننده می‌شود. هدف ما یک بیان مختصر از وابستگی‌های ماژول است.</p><p>ایمپورت مشخص (مثل <code>import a.b.ClassX</code>) یک وابستگی سخت است، در حالی که ایمپورت کلی (<code>wildcard</code>) فقط پکیج را به مسیر جستجو اضافه می‌کند و وابستگی مستقیم ایجاد نمی‌کند. پس ماژول‌ها را کم‌تر کوپل می‌کند.</p><p>در برخی موارد (مثلاً کدهای قدیمی که می‌خواهیم برای آن‌ها <code>mock</code> یا <code>stub</code> بسازیم) ایمپورت‌های مشخص مفیدند، اما این موارد نادرند. بیشتر IDE ها هم می‌توانند با یک دستور، <code>wildcard</code> را به ایمپورت‌های مشخص تبدیل کنند.</p><p>مشکل نادر <code>wildcard</code> این است که اگر دو کلاس با نام یکسان ولی در پکیج‌های متفاوت داشته باشید، باید آن‌ها را مشخصاً ایمپورت کنید.</p><h3>J2: از ارث‌بری برای دستیابی به ثابت‌ها استفاده نکنید</h3><p>گاهی برخی برنامه‌نویسان ثابت‌ها را در یک <code>interface</code> قرار می‌دهند و از طریق ارث‌بری به آن‌ها دسترسی پیدا می‌کنند:</p></div> <pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">HourlyEmployee</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Employee</span> {
     <span class="hljs-keyword">private</span> <span class="hljs-type">int</span> tenthsWorked;
     <span class="hljs-keyword">private</span> <span class="hljs-type">double</span> hourlyRate;
     <span class="hljs-keyword">public</span> Money <span class="hljs-title function_">calculatePay</span><span class="hljs-params">()</span> {
@@ -525,32 +181,16 @@ ant all
         );
     }
 }
-</code></pre>
-<div dir="rtl">
-<p>اما این ثابت‌ها از کجا آمده‌اند؟ ممکن است از کلاس <code>Employee</code> نیامده باشند، بلکه از یک <code>interface</code> مانند زیر:</p>
-</div>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">PayrollConstants</span> {
+</code></pre> <div dir="rtl"><p>اما این ثابت‌ها از کجا آمده‌اند؟ ممکن است از کلاس <code>Employee</code> نیامده باشند، بلکه از یک <code>interface</code> مانند زیر:</p></div> <pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">PayrollConstants</span> {
     <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">int</span> <span class="hljs-variable">TENTHS_PER_WEEK</span> <span class="hljs-operator">=</span> <span class="hljs-number">400</span>;
     <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">double</span> <span class="hljs-variable">OVERTIME_RATE</span> <span class="hljs-operator">=</span> <span class="hljs-number">1.5</span>;
 }
-</code></pre>
-<div dir="rtl">
-<p>این کار زشت و گمراه‌کننده است! ثابت‌ها در بالای سلسله‌مراتب ارث‌بری پنهان شده‌اند. از ارث‌بری برای دور زدن قوانین <code>Scope</code> زبان استفاده نکنید.</p>
-<p>به‌جای آن از <code>static import</code> استفاده کنید:</p>
-</div>
-<pre class="hljs"><code><span class="hljs-keyword">import</span> <span class="hljs-keyword">static</span> PayrollConstants.*;
+</code></pre> <div dir="rtl"><p>این کار زشت و گمراه‌کننده است! ثابت‌ها در بالای سلسله‌مراتب ارث‌بری پنهان شده‌اند. از ارث‌بری برای دور زدن قوانین <code>Scope</code> زبان استفاده نکنید.</p><p>به‌جای آن از <code>static import</code> استفاده کنید:</p></div> <pre class="hljs"><code><span class="hljs-keyword">import</span> <span class="hljs-keyword">static</span> PayrollConstants.*;
 
 <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">HourlyEmployee</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Employee</span> {
     ...
 }
-</code></pre>
-<div dir="rtl">
-<h3>J3: استفاده از Constant به‌جای Enum نکنید</h3>
-<p>از زمانی که <code>enum</code> ها به زبان <code>Java</code> افزوده شده‌اند (Java 5)، از آن‌ها استفاده کنید! نه از <code>public static final int</code>.</p>
-<p>مقدارهای عددی (<code>int</code>) معنا را گم می‌کنند، اما <code>enum</code> ها این مشکل را ندارند چون در یک دسته‌بندی معنادار قرار می‌گیرند.</p>
-<p>علاوه بر این، <code>enum</code> ها می‌توانند متد و فیلد داشته باشند و ابزارهایی قدرتمند برای بیان و انعطاف‌پذیری هستند. مثلاً:</p>
-</div>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">HourlyEmployee</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Employee</span> {
+</code></pre> <div dir="rtl"><h3>J3: استفاده از Constant به‌جای Enum نکنید</h3><p>از زمانی که <code>enum</code> ها به زبان <code>Java</code> افزوده شده‌اند (Java 5)، از آن‌ها استفاده کنید! نه از <code>public static final int</code>.</p><p>مقدارهای عددی (<code>int</code>) معنا را گم می‌کنند، اما <code>enum</code> ها این مشکل را ندارند چون در یک دسته‌بندی معنادار قرار می‌گیرند.</p><p>علاوه بر این، <code>enum</code> ها می‌توانند متد و فیلد داشته باشند و ابزارهایی قدرتمند برای بیان و انعطاف‌پذیری هستند. مثلاً:</p></div> <pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">HourlyEmployee</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Employee</span> {
     <span class="hljs-keyword">private</span> <span class="hljs-type">int</span> tenthsWorked;
     HourlyPayGrade grade;
 
@@ -579,15 +219,7 @@ ant all
 
     <span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-type">double</span> <span class="hljs-title function_">rate</span><span class="hljs-params">()</span>;
 }
-</code></pre>
-<div dir="rtl">
-<h2>نام‌گذاری‌ها</h2>
-<h3>N1: انتخاب نام‌های توصیفی</h3>
-<p>برای انتخاب نام عجله نکنید. مطمئن شوید که نام انتخاب‌شده توصیفی باشد. به یاد داشته باشید که با گذر زمان و تکامل نرم‌افزار، معنای نام‌ها نیز ممکن است تغییر کند؛ پس باید به‌طور منظم مناسب‌ بودن آن‌ها را ارزیابی کنید.</p>
-<p>این فقط یک توصیه‌ی «حسی» نیست. نام‌ها در نرم‌افزار، ۹۰ درصد قابل‌خواندن‌بودن کد را تعیین می‌کنند. باید برای انتخاب آن‌ها وقت بگذارید و دائماً آن‌ها را به‌روز نگه دارید. نام‌ها بسیار مهم‌تر از آن‌اند که با بی‌دقتی با آن‌ها رفتار شود.</p>
-<p>کدی مانند زیر را در نظر بگیرید. چه کاری انجام می‌دهد؟ اگر همان کد را با نام‌گذاری مناسب ببینید، کاملاً برایتان روشن خواهد بود. اما به‌صورت فعلی، چیزی جز مجموعه‌ای از نمادها و اعداد جادویی نیست:</p>
-</div>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">x</span><span class="hljs-params">()</span> {
+</code></pre> <div dir="rtl"><h2>نام‌گذاری‌ها</h2><h3>N1: انتخاب نام‌های توصیفی</h3><p>برای انتخاب نام عجله نکنید. مطمئن شوید که نام انتخاب‌شده توصیفی باشد. به یاد داشته باشید که با گذر زمان و تکامل نرم‌افزار، معنای نام‌ها نیز ممکن است تغییر کند؛ پس باید به‌طور منظم مناسب‌ بودن آن‌ها را ارزیابی کنید.</p><p>این فقط یک توصیه‌ی «حسی» نیست. نام‌ها در نرم‌افزار، ۹۰ درصد قابل‌خواندن‌بودن کد را تعیین می‌کنند. باید برای انتخاب آن‌ها وقت بگذارید و دائماً آن‌ها را به‌روز نگه دارید. نام‌ها بسیار مهم‌تر از آن‌اند که با بی‌دقتی با آن‌ها رفتار شود.</p><p>کدی مانند زیر را در نظر بگیرید. چه کاری انجام می‌دهد؟ اگر همان کد را با نام‌گذاری مناسب ببینید، کاملاً برایتان روشن خواهد بود. اما به‌صورت فعلی، چیزی جز مجموعه‌ای از نمادها و اعداد جادویی نیست:</p></div> <pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">x</span><span class="hljs-params">()</span> {
  <span class="hljs-type">int</span> <span class="hljs-variable">q</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
  <span class="hljs-type">int</span> <span class="hljs-variable">z</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
  <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">kk</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; kk &lt; <span class="hljs-number">10</span>; kk++) {
@@ -604,11 +236,7 @@ ant all
  }
  <span class="hljs-keyword">return</span> q;
 }
-</code></pre>
-<div dir="rtl">
-<p>اکنون همان منطق را با نام‌گذاری صحیح ببینید. این نسخه حتی کامل‌تر هم نیست، اما بلافاصله می‌توانید بفهمید که چه کاری انجام می‌دهد و احتمالاً می‌توانید توابع ناقص را خودتان بنویسید:</p>
-</div>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">score</span><span class="hljs-params">()</span> {
+</code></pre> <div dir="rtl"><p>اکنون همان منطق را با نام‌گذاری صحیح ببینید. این نسخه حتی کامل‌تر هم نیست، اما بلافاصله می‌توانید بفهمید که چه کاری انجام می‌دهد و احتمالاً می‌توانید توابع ناقص را خودتان بنویسید:</p></div> <pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">score</span><span class="hljs-params">()</span> {
  <span class="hljs-type">int</span> <span class="hljs-variable">score</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
  <span class="hljs-type">int</span> <span class="hljs-variable">frame</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
  <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">frameNumber</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; frameNumber &lt; <span class="hljs-number">10</span>; frameNumber++) {
@@ -625,51 +253,25 @@ ant all
  }
  <span class="hljs-keyword">return</span> score;
 }
-</code></pre>
-<div dir="rtl">
-<p>قدرت نام‌گذاری دقیق در این است که ساختار کد را با توصیف غنی می‌کند و انتظارات خواننده را از توابع دیگر شکل می‌دهد. برای مثال، وقتی تابع <code>isStrike</code> را ببینید، دقیقاً همان چیزی خواهد بود که انتظارش را داشتید:</p>
-</div>
-<pre class="hljs"><code><span class="hljs-keyword">private</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">isStrike</span><span class="hljs-params">(<span class="hljs-type">int</span> frame)</span> {
+</code></pre> <div dir="rtl"><p>قدرت نام‌گذاری دقیق در این است که ساختار کد را با توصیف غنی می‌کند و انتظارات خواننده را از توابع دیگر شکل می‌دهد. برای مثال، وقتی تابع <code>isStrike</code> را ببینید، دقیقاً همان چیزی خواهد بود که انتظارش را داشتید:</p></div> <pre class="hljs"><code><span class="hljs-keyword">private</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">isStrike</span><span class="hljs-params">(<span class="hljs-type">int</span> frame)</span> {
  <span class="hljs-keyword">return</span> rolls[frame] == <span class="hljs-number">10</span>;
 }
-</code></pre>
-<div dir="rtl">
-<h3>N2: انتخاب نام در سطح انتزاع مناسب</h3>
-<p>نام‌هایی انتخاب نکنید که جزئیات پیاده‌سازی را منتقل کنند؛ نام باید با سطح انتزاع کلاس یا تابع مطابقت داشته باشد. این کار آسان نیست. مردم معمولاً سطوح انتزاع مختلف را با هم قاطی می‌کنند. هر بار که کد را مرور می‌کنید، احتمالاً نام‌هایی می‌بینید که در سطح اشتباهی قرار دارند؛ آن‌ها را تغییر دهید.</p>
-<p>برای مثال، این اینترفیس را ببینید:</p>
-</div>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">Modem</span> {
+</code></pre> <div dir="rtl"><h3>N2: انتخاب نام در سطح انتزاع مناسب</h3><p>نام‌هایی انتخاب نکنید که جزئیات پیاده‌سازی را منتقل کنند؛ نام باید با سطح انتزاع کلاس یا تابع مطابقت داشته باشد. این کار آسان نیست. مردم معمولاً سطوح انتزاع مختلف را با هم قاطی می‌کنند. هر بار که کد را مرور می‌کنید، احتمالاً نام‌هایی می‌بینید که در سطح اشتباهی قرار دارند؛ آن‌ها را تغییر دهید.</p><p>برای مثال، این اینترفیس را ببینید:</p></div> <pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">Modem</span> {
  <span class="hljs-type">boolean</span> <span class="hljs-title function_">dial</span><span class="hljs-params">(String phoneNumber)</span>;
  <span class="hljs-type">boolean</span> <span class="hljs-title function_">disconnect</span><span class="hljs-params">()</span>;
  <span class="hljs-type">boolean</span> <span class="hljs-title function_">send</span><span class="hljs-params">(<span class="hljs-type">char</span> c)</span>;
  <span class="hljs-type">char</span> <span class="hljs-title function_">recv</span><span class="hljs-params">()</span>;
  String <span class="hljs-title function_">getConnectedPhoneNumber</span><span class="hljs-params">()</span>;
 }
-</code></pre>
-<div dir="rtl">
-<p>برای مودم‌های سنتی مناسب است، اما حالتی را در نظر بگیرید که مودم‌ها با سیم‌کشی مستقیم یا از طریق <code>USB</code> متصل می‌شوند. در این صورت «شماره‌تلفن» سطح انتزاع مناسبی نیست. نسخه‌ی بهتر:</p>
-</div>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">Modem</span> {
+</code></pre> <div dir="rtl"><p>برای مودم‌های سنتی مناسب است، اما حالتی را در نظر بگیرید که مودم‌ها با سیم‌کشی مستقیم یا از طریق <code>USB</code> متصل می‌شوند. در این صورت «شماره‌تلفن» سطح انتزاع مناسبی نیست. نسخه‌ی بهتر:</p></div> <pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">Modem</span> {
  <span class="hljs-type">boolean</span> <span class="hljs-title function_">connect</span><span class="hljs-params">(String connectionLocator)</span>;
  <span class="hljs-type">boolean</span> <span class="hljs-title function_">disconnect</span><span class="hljs-params">()</span>;
  <span class="hljs-type">boolean</span> <span class="hljs-title function_">send</span><span class="hljs-params">(<span class="hljs-type">char</span> c)</span>;
  <span class="hljs-type">char</span> <span class="hljs-title function_">recv</span><span class="hljs-params">()</span>;
  String <span class="hljs-title function_">getConnectedLocator</span><span class="hljs-params">()</span>;
 }
-</code></pre>
-<div dir="rtl">
-<h3>N3: استفاده از نام‌گذاری استاندارد در صورت امکان</h3>
-<p>درک نام‌هایی که مطابق با قراردادهای موجود هستند راحت‌تر است. مثلاً در الگوی <code>Decorator</code> بهتر است نام کلاس‌ها شامل کلمه‌ی <code>Decorator</code> باشد. مانند:</p>
-</div>
-<pre class="hljs"><code>AutoHangupModemDecorator
-</code></pre>
-<div dir="rtl">
-<p>همچنین در جاوا متدی که یک شیء را به رشته تبدیل می‌کند، معمولاً <code>toString</code> نام دارد. بهتر است از چنین قراردادهایی پیروی کنید تا نام خودساخته.</p>
-<p>در پروژه‌ها ممکن است تیم‌ها زبان خاصی ایجاد کنند که اریک ایوانز از آن با عنوان زبان فراگیر (<code>Ubiquitous Language</code>) یاد می‌کند. کد شما باید از همین زبان استفاده کند.</p>
-<h3>N4: نام‌های بدون ابهام</h3>
-<p>نامی انتخاب کنید که عملکرد متد یا متغیر را به روشنی بیان کند. مثلاً در مثال زیر:</p>
-</div>
-<pre class="hljs"><code><span class="hljs-keyword">private</span> String <span class="hljs-title function_">doRename</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> Exception {
+</code></pre> <div dir="rtl"><h3>N3: استفاده از نام‌گذاری استاندارد در صورت امکان</h3><p>درک نام‌هایی که مطابق با قراردادهای موجود هستند راحت‌تر است. مثلاً در الگوی <code>Decorator</code> بهتر است نام کلاس‌ها شامل کلمه‌ی <code>Decorator</code> باشد. مانند:</p></div> <pre class="hljs"><code>AutoHangupModemDecorator
+</code></pre> <div dir="rtl"><p>همچنین در جاوا متدی که یک شیء را به رشته تبدیل می‌کند، معمولاً <code>toString</code> نام دارد. بهتر است از چنین قراردادهایی پیروی کنید تا نام خودساخته.</p><p>در پروژه‌ها ممکن است تیم‌ها زبان خاصی ایجاد کنند که اریک ایوانز از آن با عنوان زبان فراگیر (<code>Ubiquitous Language</code>) یاد می‌کند. کد شما باید از همین زبان استفاده کند.</p><h3>N4: نام‌های بدون ابهام</h3><p>نامی انتخاب کنید که عملکرد متد یا متغیر را به روشنی بیان کند. مثلاً در مثال زیر:</p></div> <pre class="hljs"><code><span class="hljs-keyword">private</span> String <span class="hljs-title function_">doRename</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> Exception {
  <span class="hljs-keyword">if</span>(refactorReferences)
    renameReferences();
  renamePage();
@@ -677,176 +279,228 @@ ant all
  pathToRename.addNameToEnd(newName);
  <span class="hljs-keyword">return</span> PathParser.render(pathToRename);
 }
-</code></pre>
-<div dir="rtl">
-<p>نام <code>doRename</code> مشخص نمی‌کند این متد دقیقاً چه کاری انجام می‌دهد. بهتر است آن را به:</p>
-</div>
-<pre class="hljs"><code>renamePageAndOptionallyAllReferences
-</code></pre>
-<div dir="rtl">
-<p>تغییر دهید. اگرچه طولانی است، اما اگر فقط در یک مکان فراخوانی شود، ارزش توصیف بالا دارد.</p>
-<h3>N5: استفاده از نام‌های بلند برای حوزه‌های بلند</h3>
-<p>طول نام باید متناسب با طول حوزه‌ی استفاده باشد. نام‌های کوتاه مانند <code>i</code> یا <code>j</code> برای محدوده‌های کوچک (مثلاً پنج خط) قابل‌قبول‌اند:</p>
-</div>
-<pre class="hljs"><code><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">rollMany</span><span class="hljs-params">(<span class="hljs-type">int</span> n, <span class="hljs-type">int</span> pins)</span> {
+</code></pre> <div dir="rtl"><p>نام <code>doRename</code> مشخص نمی‌کند این متد دقیقاً چه کاری انجام می‌دهد. بهتر است آن را به:</p></div> <pre class="hljs"><code>renamePageAndOptionallyAllReferences
+</code></pre> <div dir="rtl"><p>تغییر دهید. اگرچه طولانی است، اما اگر فقط در یک مکان فراخوانی شود، ارزش توصیف بالا دارد.</p><h3>N5: استفاده از نام‌های بلند برای حوزه‌های بلند</h3><p>طول نام باید متناسب با طول حوزه‌ی استفاده باشد. نام‌های کوتاه مانند <code>i</code> یا <code>j</code> برای محدوده‌های کوچک (مثلاً پنج خط) قابل‌قبول‌اند:</p></div> <pre class="hljs"><code><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">rollMany</span><span class="hljs-params">(<span class="hljs-type">int</span> n, <span class="hljs-type">int</span> pins)</span> {
  <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>; i&lt;n; i++)
    g.roll(pins);
 }
-</code></pre>
-<div dir="rtl">
-<p>اما در حوزه‌های بزرگ، نام‌های کوتاه معنی خود را از دست می‌دهند. پس هرچه دامنه‌ی کاربرد نام طولانی‌تر باشد، نام نیز باید دقیق‌تر و طولانی‌تر باشد.</p>
-<h3>N6: پرهیز از رمزگذاری در نام‌ها</h3>
-<p>نباید نوع یا حوزه‌ی متغیر را در نام کدگذاری کنید. پیشوندهایی مانند <code>m_</code> یا <code>f</code> یا استفاده از نام زیرسیستم‌ها مانند <code>vis_</code> دیگر در محیط‌های مدرن بی‌معنی هستند. IDEها این اطلاعات را به‌طور خودکار نمایش می‌دهند. پس نام‌ها را تمیز نگه دارید و از &quot;آلودگی مجارستانی&quot; پرهیز کنید.</p>
-<h3>N7: نام باید نشان‌دهنده‌ی اثرات جانبی باشد</h3>
-<p>نام‌ها باید نشان دهند که یک تابع یا کلاس چه کاری انجام می‌دهد یا چه اثری دارد. اگر تابعی کاری بیش از آنچه در نامش آمده انجام می‌دهد، نام باید همه‌ی اثرات را پوشش دهد:</p>
-</div>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> ObjectOutputStream <span class="hljs-title function_">getOos</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> IOException {
+</code></pre> <div dir="rtl"><p>اما در حوزه‌های بزرگ، نام‌های کوتاه معنی خود را از دست می‌دهند. پس هرچه دامنه‌ی کاربرد نام طولانی‌تر باشد، نام نیز باید دقیق‌تر و طولانی‌تر باشد.</p><h3>N6: پرهیز از رمزگذاری در نام‌ها</h3><p>نباید نوع یا حوزه‌ی متغیر را در نام کدگذاری کنید. پیشوندهایی مانند <code>m_</code> یا <code>f</code> یا استفاده از نام زیرسیستم‌ها مانند <code>vis_</code> دیگر در محیط‌های مدرن بی‌معنی هستند. IDEها این اطلاعات را به‌طور خودکار نمایش می‌دهند. پس نام‌ها را تمیز نگه دارید و از &quot;آلودگی مجارستانی&quot; پرهیز کنید.</p><h3>N7: نام باید نشان‌دهنده‌ی اثرات جانبی باشد</h3><p>نام‌ها باید نشان دهند که یک تابع یا کلاس چه کاری انجام می‌دهد یا چه اثری دارد. اگر تابعی کاری بیش از آنچه در نامش آمده انجام می‌دهد، نام باید همه‌ی اثرات را پوشش دهد:</p></div> <pre class="hljs"><code><span class="hljs-keyword">public</span> ObjectOutputStream <span class="hljs-title function_">getOos</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> IOException {
  <span class="hljs-keyword">if</span> (m_oos == <span class="hljs-literal">null</span>) {
    m_oos = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ObjectOutputStream</span>(m_socket.getOutputStream());
  }
  <span class="hljs-keyword">return</span> m_oos;
 }
-</code></pre>
-<div dir="rtl">
-<p>این تابع فقط <code>get</code> نمی‌کند؛ بلکه ایجاد هم می‌کند. پس بهتر است نام آن باشد:</p>
-</div>
-<pre class="hljs"><code>createOrReturnOos
-</code></pre>
-<div dir="rtl">
-<h2>تست‌ها</h2>
-<h3>T1: تست‌های ناکافی</h3>
-<p>چند تست کافی است؟ بسیاری از برنامه‌نویسان می‌گویند: «به‌نظر کافی می‌رسد.» اما واقعاً باید همه‌ی چیزی که ممکن است خراب شود، تست شود.</p>
-<h3>T2: از ابزار پوشش تست استفاده کنید</h3>
-<p>ابزارهای پوشش (Coverage Tools) نشان می‌دهند کدام بخش‌ها تست نشده‌اند. اکثر IDEها کدهای تست‌شده را سبز و بخش‌های بدون تست را قرمز نمایش می‌دهند. این کمک می‌کند سریع شرط‌هایی که تست نشده‌اند را پیدا کنید.</p>
-<h3>T3: تست‌های ساده را نادیده نگیرید</h3>
-<p>نوشتن آن‌ها آسان است و ارزش مستندسازی‌شان بیشتر از هزینه‌ی نوشتن‌شان است.</p>
-<h3>T4: تست نادیده‌ گرفته‌شده یعنی ابهام در نیازمندی‌ها</h3>
-<p>گاهی دقیقاً نمی‌دانید باید چه رفتاری انتظار داشت. در این مواقع می‌توانید تست را موقتاً کامنت کنید یا از <code>@Ignore</code> استفاده کنید تا سؤال را به شکل تست مطرح کنید.</p>
-<h3>T5: شرایط مرزی را تست کنید</h3>
-<p>مرزها معمولاً منبع اشتباه هستند، حتی وقتی وسط الگوریتم درست عمل می‌کند.</p>
-<h3>T6: نزدیکی به باگ را کامل تست کنید</h3>
-<p>باگ‌ها تمایل به تجمع دارند. وقتی یک باگ پیدا کردید، احتمالاً باگ‌های بیشتری در همان ناحیه هستند.</p>
-<h3>T7: الگوهای شکست در تست‌ها گویا هستند</h3>
-<p>الگوهای خطا در تست‌ها می‌توانند شما را به کشف منبع مشکل برسانند. مثلاً اگر تمام تست‌هایی که ورودی‌شان بیشتر از ۵ حرف است، شکست می‌خورند؟ یا تست‌هایی با عدد منفی در آرگومان دوم؟ الگوی شکست‌ها می‌تواند باعث جرقه‌ی کشف مشکل شود.</p>
-<h3>T8: الگوی پوشش تست می‌تواند راه‌گشا باشد</h3>
-<p>بررسی اینکه چه کدی توسط تست‌های موفق اجرا شده و چه کدی نه، می‌تواند علت شکست تست‌های دیگر را نشان دهد.</p>
-<h3>T9: تست‌ها باید سریع باشند</h3>
-<p>تست کند، تستی است که اجرا نمی‌شود. وقتی زمان کم است، تست‌های کند کنار گذاشته می‌شوند. پس تست‌ها را سریع نگه دارید.</p>
-<h2>نتیجه‌گیری</h2>
-<p>این فهرست از نشانه‌ها و قواعد کامل نیست و شاید هیچ‌گاه کامل نشود. اما هدف آن هم کمال نبوده است، بلکه هدف، بیان یک سیستم ارزشی بوده است.</p>
-<p>در واقع، تمام کتاب درباره‌ی همین سیستم ارزشی بوده است. کد تمیز با پیروی کورکورانه از قواعد نوشته نمی‌شود. برنامه‌نویس حرفه‌ای با حفظ ارزش‌ها و پیروی از انضباط و هنر رشد می‌کند.</p>
-</div>
-
-  </main>
-
-  <!-- فوتر مشترک -->
-  <footer class="footer">
-    <div class="container">
-      <p>
-        <img src="/Gitab/icone/copyright.svg" alt="کپی‌رایت" width="14" height="14"
-             style="vertical-align:middle;margin-inline:4px">
-        <span id="y"></span> Gitab — تمامی حقوق محفوظ است.
-      </p>
-    </div>
-  </footer>
-
-  <!-- سال و اسکریپت تغییر تم -->
-  <script>
+</code></pre> <div dir="rtl"><p>این تابع فقط <code>get</code> نمی‌کند؛ بلکه ایجاد هم می‌کند. پس بهتر است نام آن باشد:</p></div> <pre class="hljs"><code>createOrReturnOos
+</code></pre> <div dir="rtl"><h2>تست‌ها</h2><h3>T1: تست‌های ناکافی</h3><p>چند تست کافی است؟ بسیاری از برنامه‌نویسان می‌گویند: «به‌نظر کافی می‌رسد.» اما واقعاً باید همه‌ی چیزی که ممکن است خراب شود، تست شود.</p><h3>T2: از ابزار پوشش تست استفاده کنید</h3><p>ابزارهای پوشش (Coverage Tools) نشان می‌دهند کدام بخش‌ها تست نشده‌اند. اکثر IDEها کدهای تست‌شده را سبز و بخش‌های بدون تست را قرمز نمایش می‌دهند. این کمک می‌کند سریع شرط‌هایی که تست نشده‌اند را پیدا کنید.</p><h3>T3: تست‌های ساده را نادیده نگیرید</h3><p>نوشتن آن‌ها آسان است و ارزش مستندسازی‌شان بیشتر از هزینه‌ی نوشتن‌شان است.</p><h3>T4: تست نادیده‌ گرفته‌شده یعنی ابهام در نیازمندی‌ها</h3><p>گاهی دقیقاً نمی‌دانید باید چه رفتاری انتظار داشت. در این مواقع می‌توانید تست را موقتاً کامنت کنید یا از <code>@Ignore</code> استفاده کنید تا سؤال را به شکل تست مطرح کنید.</p><h3>T5: شرایط مرزی را تست کنید</h3><p>مرزها معمولاً منبع اشتباه هستند، حتی وقتی وسط الگوریتم درست عمل می‌کند.</p><h3>T6: نزدیکی به باگ را کامل تست کنید</h3><p>باگ‌ها تمایل به تجمع دارند. وقتی یک باگ پیدا کردید، احتمالاً باگ‌های بیشتری در همان ناحیه هستند.</p><h3>T7: الگوهای شکست در تست‌ها گویا هستند</h3><p>الگوهای خطا در تست‌ها می‌توانند شما را به کشف منبع مشکل برسانند. مثلاً اگر تمام تست‌هایی که ورودی‌شان بیشتر از ۵ حرف است، شکست می‌خورند؟ یا تست‌هایی با عدد منفی در آرگومان دوم؟ الگوی شکست‌ها می‌تواند باعث جرقه‌ی کشف مشکل شود.</p><h3>T8: الگوی پوشش تست می‌تواند راه‌گشا باشد</h3><p>بررسی اینکه چه کدی توسط تست‌های موفق اجرا شده و چه کدی نه، می‌تواند علت شکست تست‌های دیگر را نشان دهد.</p><h3>T9: تست‌ها باید سریع باشند</h3><p>تست کند، تستی است که اجرا نمی‌شود. وقتی زمان کم است، تست‌های کند کنار گذاشته می‌شوند. پس تست‌ها را سریع نگه دارید.</p><h2>نتیجه‌گیری</h2><p>این فهرست از نشانه‌ها و قواعد کامل نیست و شاید هیچ‌گاه کامل نشود. اما هدف آن هم کمال نبوده است، بلکه هدف، بیان یک سیستم ارزشی بوده است.</p><p>در واقع، تمام کتاب درباره‌ی همین سیستم ارزشی بوده است. کد تمیز با پیروی کورکورانه از قواعد نوشته نمی‌شود. برنامه‌نویس حرفه‌ای با حفظ ارزش‌ها و پیروی از انضباط و هنر رشد می‌کند.</p></div> </article><nav class="chapter-single-next-nav"> <a href="/Gitab/books/book3/Book/Appendix_A/Concurrency_II/" class="btn-next-chapter-action" id="nextChapterBtn" data-hub="/Gitab/books/book3/"> <span class="next-btn-text">فصل بعدی: ضمیمه الف: همزمانی پیشرفته Concurrency II</span> <span class="next-btn-arrow">←</span> </a> </nav></div> <button class="fab-back-to-top" id="backToTopBtn" type="button" aria-label="رفتن به بالای صفحه" title="رفتن به بالا"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"> <polyline points="18 15 12 9 6 15"></polyline> </svg> </button></main> <footer class="footer-minimal"><div class="footer-container"> <div class="footer-top-row"><div class="footer-brand-side"> <a href="/Gitab/" class="footer-brand-anchor"> <img src="/Gitab/icone/logo.svg" alt="Gitab" width="28" height="28" loading="lazy" decoding="async"> <span class="footer-brand-title">گیتاب (Gitab)</span> </a> <p class="footer-tagline"> پلتفرم آزاد و مستقل برای ترجمهٔ دقیق و روان کتاب‌های مرجع مهندسی نرم‌افزار. </p></div> <div class="footer-nav-cols"><div class="footer-nav-col"> <span class="footer-nav-heading">موضوعات</span><ul class="footer-nav-list"> <li><a href="/Gitab/books/list-books/?cat=csharp">سی‌شارپ و دات‌نت</a></li><li><a href="/Gitab/books/list-books/?cat=clean-code">کد تمیز و بازآفرینی</a></li><li><a href="/Gitab/books/list-books/?cat=architecture">معماری و طراحی دامنه</a></li><li><a href="/Gitab/books/list-books/?cat=system">لینوکس و خط فرمان</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">بخش‌های سایت</span><ul class="footer-nav-list"> <li><a href="/Gitab/">صفحه اصلی</a></li><li><a href="/Gitab/books/list-books/">کتابخانه کامل</a></li><li><a href="/Gitab/courses/">دوره‌های آموزشی</a></li><li><a href="/Gitab/translator.html">تالار مترجمین</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">مشارکت و جامعه</span><ul class="footer-nav-list"> <li><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer">راهنمای همکاری در ترجمه</a></li><li><a href="https://github.com/hheydarian/Gitab/issues" target="_blank" rel="noopener noreferrer">پیشنهاد کتاب یا گزارش خطا</a></li></ul> </div></div> </div><div class="footer-bottom-line"> <span>© <span id="y">2026</span> Gitab — توسعه‌یافته برای جامعهٔ مهندسان نرم‌افزار ایرانی</span></div> </div></footer> <script>
   (() => {
     const root = document.documentElement;
     const btn = document.getElementById('themeToggle');
+    const sunIcon = btn ? btn.querySelector('.icon-sun') : null;
+    const moonIcon = btn ? btn.querySelector('.icon-moon') : null;
     const KEY = 'gitab-theme';
 
-    function updateTheme(s) {
-      root.setAttribute('data-theme', s);
-      const mode = s;  // فقط `dark` یا `light` خواهد بود
+    function updateTheme(mode) {
+      root.setAttribute('data-theme', mode);
       root.dataset.colorMode = mode;
-      btn.dataset.icon = mode === 'dark' ? 'moon' : 'sun';
+      if (sunIcon && moonIcon) {
+        if (mode === 'dark') {
+          sunIcon.style.display = 'inline-block';
+          moonIcon.style.display = 'none';
+        } else {
+          sunIcon.style.display = 'none';
+          moonIcon.style.display = 'inline-block';
+        }
+      }
     }
 
-    // وضعیت تم ذخیره شده از localStorage
-    let saved = localStorage.getItem(KEY) || 'light'; // پیش‌فرض روشن
+    let saved = 'dark';
+    try { saved = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
     updateTheme(saved);
 
-    // تنظیم مجدد تم هنگام تغییر وضعیت دکمه
-    btn.addEventListener('click', () => {
-      const current = localStorage.getItem(KEY) || 'light';
-      const next = current === 'dark' ? 'light' : 'dark';  // فقط دو حالت: تاریک و روشن
-      localStorage.setItem(KEY, next);
-      updateTheme(next);
-    });
+    if (btn) {
+      btn.addEventListener('click', () => {
+        let current = 'dark';
+        try { current = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+        const next = current === 'dark' ? 'light' : 'dark';
+        try { localStorage.setItem(KEY, next); } catch (e) {}
+        updateTheme(next);
+      });
+    }
 
-    // هنگام بارگذاری صفحه
     document.addEventListener('DOMContentLoaded', () => {
-      updateTheme(localStorage.getItem(KEY) || 'light');
+      let mode = 'dark';
+      try { mode = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+      updateTheme(mode);
+      const yearSpan = document.getElementById('y');
+      if (yearSpan) yearSpan.textContent = new Date().getFullYear();
     });
+
+    const mobBtn = document.getElementById('mobileMenuBtn');
+    const mobDrawer = document.getElementById('mobileDrawer');
+    if (mobBtn && mobDrawer) {
+      const setDrawerOpen = (open) => {
+        mobDrawer.classList.toggle('open', open);
+        mobBtn.classList.toggle('is-open', open);
+        mobBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        mobBtn.setAttribute('aria-label', open ? 'بستن منو' : 'باز کردن منو');
+        mobDrawer.setAttribute('aria-hidden', open ? 'false' : 'true');
+      };
+
+      mobBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        setDrawerOpen(!mobDrawer.classList.contains('open'));
+      });
+
+      mobDrawer.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => setDrawerOpen(false));
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && mobDrawer.classList.contains('open')) {
+          setDrawerOpen(false);
+        }
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!mobDrawer.contains(e.target) && !mobBtn.contains(e.target)) {
+          setDrawerOpen(false);
+        }
+      });
+    }
+
+    if ('serviceWorker' in navigator) {
+      const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+      if (isLocalhost) {
+        navigator.serviceWorker.getRegistrations().then(regs => {
+          for (const reg of regs) reg.unregister();
+        });
+        if ('caches' in window) {
+          caches.keys().then(names => {
+            for (const name of names) caches.delete(name);
+          });
+        }
+      } else {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/Gitab/sw.js').catch(() => {});
+        });
+      }
+    }
   })();
-</script>
-
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-  <script>hljs.highlightAll();</script>
-
-  <script>
+  </script> <script>
   document.querySelectorAll('pre code').forEach(block => {
+    const pre = block.parentNode;
+    if (!pre || pre.querySelector('.copy-btn')) return;
+
+    const copySvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
+    const okSvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+
     const btn = document.createElement('button');
     btn.className = 'copy-btn';
-
-    const icon = document.createElement('img');
-    icon.src = "/Gitab/icone/copy.svg";
-    icon.alt = 'Copy';
-    btn.appendChild(icon);
-
-    block.parentNode.insertBefore(btn, block);
+    btn.setAttribute('aria-label', 'کپی کد');
+    btn.setAttribute('title', 'کپی کد');
+    btn.setAttribute('type', 'button');
+    btn.innerHTML = copySvg;
+    pre.appendChild(btn);
 
     btn.addEventListener('click', async () => {
-      await navigator.clipboard.writeText(block.textContent);
-      btn.classList.add('copied');
-      setTimeout(() => btn.classList.remove('copied'), 1500);
-    });
-  });
-  </script>
-
-  <script>
-  document.body.dataset.page = window.location.pathname;
-
-  const menuBtn = document.querySelector(".menu-toggle");
-  const nav = document.querySelector(".nav");
-
-  if (menuBtn && nav) {
-    menuBtn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      nav.classList.toggle("show");
-    });
-
-    document.addEventListener("click", (e) => {
-      const clickedInsideNav = nav.contains(e.target);
-      const clickedMenuButton = menuBtn.contains(e.target);
-      if (!clickedInsideNav && !clickedMenuButton) {
-        nav.classList.remove("show");
+      try {
+        await navigator.clipboard.writeText(block.textContent);
+        btn.classList.add('copied');
+        btn.innerHTML = okSvg;
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          btn.innerHTML = copySvg;
+        }, 1800);
+      } catch (err) {
+        console.error('Copy failed:', err);
       }
     });
-  }
-  </script>
-
-  <script>
-    document.getElementById('y').textContent = new Date().getFullYear();
-  </script>
-  <script>
-document.getElementById("openDonate").addEventListener("click", () => {
-  document.getElementById("donateModal").style.display = "block";
-});
-document.getElementById("closeDonate").addEventListener("click", () => {
-  document.getElementById("donateModal").style.display = "none";
-});
-document.querySelectorAll(".copy-btn").forEach(btn => {
-  btn.addEventListener("click", () => {
-    navigator.clipboard.writeText(btn.dataset.copy);
-  
-    setTimeout(() => (btn.textContent = "کپی"), 2000);
   });
-});
-</script>
+  </script> <script>
+  (() => {
+    const article = document.getElementById('chapterArticle');
+    if (!article) return;
 
-</body>
-</html>
+    const progressBar = document.getElementById('readingProgressBar');
+    if (progressBar) {
+      window.addEventListener('scroll', () => {
+        const docElem = document.documentElement;
+        const totalHeight = docElem.scrollHeight - docElem.clientHeight;
+        if (totalHeight > 0) {
+          const progress = (window.pageYOffset / totalHeight) * 100;
+          progressBar.style.width = Math.min(100, Math.max(0, progress)) + '%';
+        }
+      }, { passive: true });
+    }
+
+    const btt = document.getElementById('backToTopBtn');
+    if (btt) {
+      window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 250) {
+          btt.classList.add('visible');
+        } else {
+          btt.classList.remove('visible');
+        }
+      }, { passive: true });
+
+      btt.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+
+    article.querySelectorAll('img').forEach(img => {
+      if (!img.hasAttribute('loading')) img.loading = 'lazy';
+      if (!img.hasAttribute('decoding')) img.decoding = 'async';
+      const parent = img.parentElement;
+      if (parent && parent.tagName === 'P') {
+        parent.style.textAlign = 'center';
+      }
+
+      img.addEventListener('error', function() {
+        const src = this.getAttribute('src');
+        if (src && src.includes('assets/image/')) {
+          const parts = src.split('assets/image/');
+          const corrected = '/Gitab/books/book3/assets/image/' + parts[1];
+          if (this.src !== corrected) {
+            this.src = corrected;
+          }
+        }
+      });
+    });
+
+    article.querySelectorAll('p').forEach(p => {
+      const trimmed = p.innerText.trim();
+      if (trimmed.startsWith('💡') || trimmed.startsWith('نکته:')) {
+        p.classList.add('react-callout', 'callout-tip');
+      } else if (trimmed.startsWith('⚠️') || trimmed.startsWith('هشدار:')) {
+        p.classList.add('react-callout', 'callout-warning');
+      } else if (trimmed.startsWith('📌') || trimmed.startsWith('مهم:')) {
+        p.classList.add('react-callout', 'callout-important');
+      } else if (trimmed.startsWith('🔹') || trimmed.startsWith('🔸')) {
+        p.classList.add('react-callout', 'callout-note');
+      }
+    });
+  })();
+  </script> <script type="speculationrules">{"prefetch":[{"where":{"and":[{"href_matches":"/Gitab/*"},{"not":{"href_matches":"/Gitab/downloads/*"}},{"not":{"selector_matches":"[download], [target='_blank']"}}]},"eagerness":"moderate"}]}</script> <script>
+  (() => {
+    if (window.HTMLScriptElement && HTMLScriptElement.supports && HTMLScriptElement.supports('speculationrules')) return;
+    const seen = new Set([window.location.href]);
+    let count = 0;
+    const prefetchLink = (e) => {
+      if (count >= 12) return;
+      const a = e.target && e.target.closest ? e.target.closest('header a, .chapter-single-next-nav a, .syllabus-chapter-item a, .btn-hero-read, .btn-card-read') : null;
+      if (!a || !a.href || a.hasAttribute('download') || a.target === '_blank') return;
+      if (a.origin !== window.location.origin || a.pathname.includes('/downloads/')) return;
+      const clean = a.href.split('#')[0];
+      if (!clean || seen.has(clean)) return;
+      seen.add(clean);
+      count++;
+      const l = document.createElement('link');
+      l.rel = 'prefetch';
+      l.href = clean;
+      document.head.appendChild(l);
+    };
+    document.addEventListener('pointerenter', prefetchLink, { capture: true, passive: true });
+    document.addEventListener('touchstart', prefetchLink, { capture: true, passive: true });
+  })();
+  </script></body></html>

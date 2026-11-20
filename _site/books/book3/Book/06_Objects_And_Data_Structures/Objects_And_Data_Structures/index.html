@@ -1,89 +1,22 @@
-
-
-<!doctype html>
-<html lang="fa" dir="rtl">
-<head>
-  <meta charset="utf-8">
-  <link rel="icon" type="image/png" href="/Gitab/favicon.png">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>اشیاء و ساختارهای داده</title>
-  <meta name="description" content="ترجمه‌های فارسی کتاب‌های فنی — سریع، مینیمال و قابل اتکا.">
-
-  <!-- استایل‌ها -->
-  <link rel="stylesheet" href="/Gitab/styles/main.css">
-  <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
-
-  <style>
-  @font-face {
-    font-family: 'Vazir';
-    src: url('/Gitab/fonts/Vazir-FD-WOL.ttf') format('truetype');
-    font-display: swap;
-  }
-  @font-face {
-    font-family: "Lalezar";
-    src: url('fonts/Lalezar.ttf') format('truetype');
-    font-display: swap;
-}
-  body {
-    font-family: 'Vazir', sans-serif;
-  }
-  </style>
-</head>
-
-<body>
-  <!-- هدر مشترک -->
-  <header class="header">
-    <div class="container nav-wrap">
-      <a href="/Gitab/" class="brand">
-        <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="26" height="26">
-        <span>Gitab</span>
-      </a>
-
-       <nav class="nav">
-         <a href="/Gitab/" >خانه</a>
-         <a href="/Gitab/books/list-books" >کتاب‌ها</a>
-         <a href="/Gitab/giter.html" >دوره ها</a>
-          <!-- 
-         <a href="/Gitab/translator.html" >مترجمین</a>
-           -->
-       </nav>
-
-      <div class="nav-actions">
-        <button id="themeToggle" class="icon-btn theme-btn" data-icon="moon" aria-label="تغییر تم">
-          <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن">
-          <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک">
-        </button>
-
-        <a class="icon-btn" href="https://github.com/hheydarian/Gitab" target="_blank" title="GitHub">
-          <img src="/Gitab/icone/github.svg" alt="GitHub">
-        </a>
-
-        <!-- دکمه منو برای موبایل -->
-        <button class="menu-toggle" aria-label="منو">
-          <img src="/Gitab/icone/menu.svg" alt="menu">
-        </button>
-      </div>
-    </div>
-  </header>
-
-  
-  <main class="site-main book-page">
-    <h1>اشیاء و ساختارهای داده</h1>
-<p><img src="../../../assets/image/06/img-6.1.png" alt=""></p>
-<div dir="rtl">
-دلیلی وجود دارد که ما متغیرهای خود را خصوصی نگه می‌داریم. نمی‌خواهیم هیچ‌کس دیگری به آن‌ها وابسته باشد. ما می‌خواهیم آزادی تغییر نوع یا پیاده‌سازی آن‌ها را به دلخواه و به طور ناگهانی حفظ کنیم. پس چرا این‌قدر برنامه‌نویس‌ها به‌طور خودکار getter و setter به اشیاء خود اضافه می‌کنند و متغیرهای خصوصی خود را مانند متغیرهای عمومی در معرض دید قرار می‌دهند؟
-<h2>انتزاع داده</h2>
-<p>به تفاوت بین لیست ۶-۱ و لیست ۶-۲ توجه کنید. هر دو نمایانگر داده‌های یک نقطه بر روی صفحه کارتیزین هستند. با این حال، یکی پیاده‌سازی خود را آشکار می‌کند و دیگری به‌طور کامل آن را پنهان می‌کند.</p>
-</div>
-<p>Listing 6-1 - Concrete Point</p>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Point</span> {
+<!doctype html><html lang="fa" dir="rtl"> <head><script>
+    if (window.location.pathname.startsWith('/gitab/')) {
+      window.location.replace(window.location.pathname.replace(/^\/gitab\//i, '/Gitab/') + window.location.search + window.location.hash);
+    }
+    (() => {
+      try {
+        const t = localStorage.getItem('gitab-theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', t);
+        document.documentElement.dataset.colorMode = t;
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        document.documentElement.dataset.colorMode = 'dark';
+      }
+    })();
+  </script> <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5"> <title>اشیاء و ساختارهای داده</title><meta name="description" content="اشیاء و ساختارهای داده — مطالعه آنلاین و رایگان از کتاب «کد تمیز (عمو باب)» (Clean Code) اثر Robert C. Martin با ترجمه مجتبی افراز در گیتاب."> <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"><meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"> <meta name="theme-color" content="#090d16"><meta name="referrer" content="strict-origin-when-cross-origin"> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https:; frame-src https://www.youtube.com https://www.youtube-nocookie.com https://maps.google.com https://www.google.com; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self';"><link rel="icon" type="image/png" href="/Gitab/favicon.png"> <link rel="canonical" href="https://hheydarian.github.io/Gitab/books/book3/Book/06_Objects_And_Data_Structures/Objects_And_Data_Structures/"><link rel="alternate" hreflang="fa" href="https://hheydarian.github.io/Gitab/books/book3/Book/06_Objects_And_Data_Structures/Objects_And_Data_Structures/"> <link rel="alternate" hreflang="x-default" href="https://hheydarian.github.io/Gitab/books/book3/Book/06_Objects_And_Data_Structures/Objects_And_Data_Structures/"><link rel="alternate" type="text/plain" title="LLMs.txt" href="/Gitab/llms.txt"> <link rel="sitemap" type="application/xml" title="Sitemap" href="/Gitab/sitemap.xml"><meta property="og:locale" content="fa_IR"> <meta property="og:type" content="article"><meta property="og:site_name" content="گیتاب | Gitab"> <meta property="og:title" content="اشیاء و ساختارهای داده"><meta property="og:description" content="اشیاء و ساختارهای داده — مطالعه آنلاین و رایگان از کتاب «کد تمیز (عمو باب)» (Clean Code) اثر Robert C. Martin با ترجمه مجتبی افراز در گیتاب."> <meta property="og:url" content="https://hheydarian.github.io/Gitab/books/book3/Book/06_Objects_And_Data_Structures/Objects_And_Data_Structures/"><meta property="og:image" content="https://hheydarian.github.io/Gitab/images/clean-code/Cover.webp"> <meta property="og:image:alt" content="اشیاء و ساختارهای داده"><meta name="twitter:card" content="summary_large_image"> <meta name="twitter:title" content="اشیاء و ساختارهای داده"><meta name="twitter:description" content="اشیاء و ساختارهای داده — مطالعه آنلاین و رایگان از کتاب «کد تمیز (عمو باب)» (Clean Code) اثر Robert C. Martin با ترجمه مجتبی افراز در گیتاب."> <meta name="twitter:image" content="https://hheydarian.github.io/Gitab/images/clean-code/Cover.webp"><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://hheydarian.github.io/Gitab/#organization","name":"گیتاب | Gitab","alternateName":"Gitab","url":"https://hheydarian.github.io/Gitab/","logo":{"@type":"ImageObject","url":"https://hheydarian.github.io/Gitab/favicon.png"},"sameAs":["https://github.com/hheydarian/Gitab"]},{"@type":"WebSite","@id":"https://hheydarian.github.io/Gitab/#website","url":"https://hheydarian.github.io/Gitab/","name":"گیتاب | Gitab","inLanguage":"fa-IR","publisher":{"@id":"https://hheydarian.github.io/Gitab/#organization"},"potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://hheydarian.github.io/Gitab/books/list-books/?q={search_term_string}"},"query-input":"required name=search_term_string"}},{"@type":"WebPage","@id":"https://hheydarian.github.io/Gitab/books/book3/Book/06_Objects_And_Data_Structures/Objects_And_Data_Structures/#webpage","url":"https://hheydarian.github.io/Gitab/books/book3/Book/06_Objects_And_Data_Structures/Objects_And_Data_Structures/","name":"اشیاء و ساختارهای داده","description":"اشیاء و ساختارهای داده — مطالعه آنلاین و رایگان از کتاب «کد تمیز (عمو باب)» (Clean Code) اثر Robert C. Martin با ترجمه مجتبی افراز در گیتاب.","inLanguage":"fa-IR","isPartOf":{"@id":"https://hheydarian.github.io/Gitab/#website"}},{"@type":"TechArticle","headline":"اشیاء و ساختارهای داده","description":"اشیاء و ساختارهای داده — مطالعه آنلاین و رایگان از کتاب «کد تمیز (عمو باب)» (Clean Code) اثر Robert C. Martin با ترجمه مجتبی افراز در گیتاب.","url":"https://hheydarian.github.io/Gitab/books/book3/Book/06_Objects_And_Data_Structures/Objects_And_Data_Structures/","inLanguage":"fa-IR","isAccessibleForFree":true,"author":{"@type":"Person","name":"Robert C. Martin"},"translator":{"@type":"Person","name":"مجتبی افراز"},"isPartOf":{"@type":"Book","name":"کد تمیز (عمو باب)","alternateName":"Clean Code","url":"https://hheydarian.github.io/Gitab/books/book3/"}}]}</script> <link rel="preload" href="/Gitab/fonts/Vazirmatn.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/Gitab/styles/main.css?v=2.4" as="style"> <link rel="preload" href="/Gitab/styles/gitab-modern.css?v=2.5" as="style"><style>@font-face{font-family:'Lalezar';src:url('/Gitab/fonts/Lalezar.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}@font-face{font-family:'Vazirmatn';src:url('/Gitab/fonts/Vazirmatn.woff2') format('woff2');font-weight:100 900;font-style:normal;font-display:swap}html,body,button,input,optgroup,select,textarea,.filter-pill{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}input::placeholder,textarea::placeholder{font-family:'Vazirmatn',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important}</style> <link rel="stylesheet" href="/Gitab/styles/main.css?v=2.4"><link rel="stylesheet" href="/Gitab/styles/gitab-modern.css?v=2.5"> <link rel="stylesheet" href="/Gitab/styles/vendor/github-dark.min.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="/Gitab/styles/vendor/github-dark.min.css"></noscript></head> <body><header class="header"> <div class="container nav-wrap"><a href="/Gitab/" class="brand" aria-label="صفحه اصلی گیتاب"> <img src="/Gitab/icone/logo.svg" alt="Gitab logo" width="30" height="30" decoding="async"> <span class="brand-text">Gitab</span> </a> <nav class="nav" id="mainNav"><a href="/Gitab/" >خانه</a> <a href="/Gitab/books/list-books" aria-current="page">کتاب‌ها</a> <a href="/Gitab/courses/" >دوره‌ها</a> <a href="/Gitab/translator.html" >مترجمین</a></nav> <div class="nav-actions"><button id="themeToggle" class="theme-toggle-btn" aria-label="تغییر تم" title="تغییر تم"> <img src="/Gitab/icone/sun.svg" class="icon-sun" alt="روشن" width="18" height="18" decoding="async" style="display:none"> <img src="/Gitab/icone/moon.svg" class="icon-moon" alt="تاریک" width="18" height="18" decoding="async"> </button> <a class="btn-github-pill" href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" title="مشاهده سورس گیتاب در گیت‌هاب"> <img src="/Gitab/icone/github.svg" alt="GitHub" width="16" height="16" decoding="async"> <span>گیت‌هاب</span> </a> <button class="mobile-menu-btn" id="mobileMenuBtn" type="button" aria-label="باز کردن منو" aria-expanded="false"> <svg class="mob-icon-open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="4" y1="7" x2="20" y2="7"></line> <line x1="4" y1="12" x2="20" y2="12"></line> <line x1="4" y1="17" x2="14" y2="17"></line> </svg> <svg class="mob-icon-close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <line x1="18" y1="6" x2="6" y2="18"></line> <line x1="6" y1="6" x2="18" y2="18"></line> </svg> </button></div> </div><div class="mobile-drawer" id="mobileDrawer" aria-hidden="true"> <div class="mobile-drawer-inner"><div class="mobile-drawer-section-label">ناوبری سریع</div><nav class="mobile-drawer-links" aria-label="منوی موبایل"> <a href="/Gitab/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M3 10.5 12 3l9 7.5"></path> <path d="M5 9.5V20a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V9.5"></path> </svg> </span> <span class="mob-nav-text">صفحه نخست</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/books/list-books" class="mobile-drawer-link active" aria-current="page"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path> </svg> </span> <span class="mob-nav-text">کتابخانه و فهرست کتاب‌ها</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/courses/" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path> <path d="M6 12v5c3 3 9 3 12 0v-5"></path> </svg> </span> <span class="mob-nav-text">دوره‌های آموزشی</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> <a href="/Gitab/translator.html" class="mobile-drawer-link"> <span class="mob-nav-icon" aria-hidden="true"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"> <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path> <circle cx="9" cy="7" r="4"></circle> <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path> <path d="M16 3.13a4 4 0 0 1 0 7.75"></path> </svg> </span> <span class="mob-nav-text">مترجمین و همکاران</span> <span class="mob-nav-arrow" aria-hidden="true">←</span> </a> </nav><div class="mobile-drawer-divider"></div><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer" class="mobile-drawer-link mobile-drawer-gh"> <span class="mob-nav-icon" aria-hidden="true"> <img src="/Gitab/icone/github.svg" alt="" width="17" height="17" loading="lazy" decoding="async"> </span> <span class="mob-nav-text">مخزن گیت‌هاب پروژه</span> <span class="mob-nav-ext" aria-hidden="true">↗</span> </a> </div></div> </header><div class="reading-progress-track"> <div class="reading-progress-fill" id="readingProgressBar"></div></div> <main class="site-main chapter-reading-page"><div class="chapter-page-wrapper"> <nav class="chapter-clean-breadcrumb" aria-label="مسیر راهنما" dir="rtl"><a href="/Gitab/">خانه</a> <span class="bc-sep" aria-hidden="true">/</span> <a href="/Gitab/books/list-books/">کتاب‌ها</a> <span class="bc-sep" aria-hidden="true">/</span> <a href="/Gitab/books/book3/"><bdi>کد تمیز</bdi></a> <span class="bc-sep" aria-hidden="true">/</span> <span class="bc-current-leaf"><bdi>اشیاء و ساختارهای داده</bdi></span></nav> <article class="chapter-prose-container markdown-body" id="chapterArticle" dir="rtl"><h1>اشیاء و ساختارهای داده</h1><p><img src="../../../assets/image/06/img-6.1.png" alt="" loading="lazy" decoding="async"></p><div dir="rtl"> دلیلی وجود دارد که ما متغیرهای خود را خصوصی نگه می‌داریم. نمی‌خواهیم هیچ‌کس دیگری به آن‌ها وابسته باشد. ما می‌خواهیم آزادی تغییر نوع یا پیاده‌سازی آن‌ها را به دلخواه و به طور ناگهانی حفظ کنیم. پس چرا این‌قدر برنامه‌نویس‌ها به‌طور خودکار getter و setter به اشیاء خود اضافه می‌کنند و متغیرهای خصوصی خود را مانند متغیرهای عمومی در معرض دید قرار می‌دهند؟ <h2>انتزاع داده</h2><p>به تفاوت بین لیست ۶-۱ و لیست ۶-۲ توجه کنید. هر دو نمایانگر داده‌های یک نقطه بر روی صفحه کارتیزین هستند. با این حال، یکی پیاده‌سازی خود را آشکار می‌کند و دیگری به‌طور کامل آن را پنهان می‌کند.</p></div> <p>Listing 6-1 - Concrete Point</p><pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Point</span> {
  <span class="hljs-keyword">public</span> <span class="hljs-type">double</span> x;
  <span class="hljs-keyword">public</span> <span class="hljs-type">double</span> y;
 }
-</code></pre>
-<p>Listing 6-2 - Abstract Point</p>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">Point</span> {
+</code></pre> <p>Listing 6-2 - Abstract Point</p><pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">Point</span> {
  <span class="hljs-type">double</span> <span class="hljs-title function_">getX</span><span class="hljs-params">()</span>;
  <span class="hljs-type">double</span> <span class="hljs-title function_">getY</span><span class="hljs-params">()</span>;
  <span class="hljs-keyword">void</span> <span class="hljs-title function_">setCartesian</span><span class="hljs-params">(<span class="hljs-type">double</span> x, <span class="hljs-type">double</span> y)</span>;
@@ -91,33 +24,14 @@
  <span class="hljs-type">double</span> <span class="hljs-title function_">getTheta</span><span class="hljs-params">()</span>;
  <span class="hljs-keyword">void</span> <span class="hljs-title function_">setPolar</span><span class="hljs-params">(<span class="hljs-type">double</span> r, <span class="hljs-type">double</span> theta)</span>;
 }
-</code></pre>
-<div dir="rtl">
-چیز زیبایی که در لیست ۶-۲ وجود دارد این است که هیچ راهی برای تشخیص اینکه پیاده‌سازی در مختصات مستطیلی یا قطبی است، وجود ندارد. ممکن است هیچ‌کدام نباشد! و با این حال، رابط به‌طور واضحی یک ساختار داده را نمایان می‌کند.
-<p>اما این رابط بیشتر از یک ساختار داده را نمایان می‌کند. متدها یک سیاست دسترسی را تحمیل می‌کنند. شما می‌توانید مختصات فردی را به‌صورت مستقل بخوانید، اما باید مختصات را به‌صورت یک عملیات اتمی تنظیم کنید.</p>
-<p>از سوی دیگر، لیست ۶-۱ به‌وضوح در مختصات مستطیلی پیاده‌سازی شده است و ما را مجبور می‌کند که آن مختصات را به‌طور مستقل دستکاری کنیم. این پیاده‌سازی را آشکار می‌کند. در واقع، حتی اگر متغیرها خصوصی بودند و ما از getter ها و setter های تک‌متغیره استفاده می‌کردیم، باز هم پیاده‌سازی را آشکار می‌کرد.</p>
-<p>پنهان‌سازی پیاده‌سازی تنها یک مسأله از قرار دادن یک لایه از توابع بین متغیرها نیست. پنهان‌سازی پیاده‌سازی مربوط به انتزاعات است! یک کلاس به‌سادگی متغیرهای خود را از طریق دریافت‌کننده‌ها و تنظیم‌کننده‌ها بیرون نمی‌آورد. بلکه رابط‌های انتزاعی را نمایان می‌کند که به کاربرانش اجازه می‌دهد جوهر داده‌ها را دستکاری کنند، بدون اینکه نیاز به دانستن پیاده‌سازی آن‌ها داشته باشند.</p>
-<p>به لیست ۶-۳ و لیست ۶-۴ توجه کنید. مورد اول از اصطلاحات عینی برای بیان سطح سوخت یک وسیله نقلیه استفاده می‌کند، در حالی که مورد دوم این کار را با انتزاع درصد انجام می‌دهد. در حالت عینی می‌توانید به‌طور تقریبی مطمئن باشید که این فقط دسترسی به متغیرها است. در حالت انتزاعی، هیچ ایده‌ای درباره‌ی شکل داده‌ها ندارید.</p>
-</div>
-<p>Listing 6-3 - Concrete Vehicle</p>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">Vehicle</span> {
+</code></pre> <div dir="rtl"> چیز زیبایی که در لیست ۶-۲ وجود دارد این است که هیچ راهی برای تشخیص اینکه پیاده‌سازی در مختصات مستطیلی یا قطبی است، وجود ندارد. ممکن است هیچ‌کدام نباشد! و با این حال، رابط به‌طور واضحی یک ساختار داده را نمایان می‌کند. <p>اما این رابط بیشتر از یک ساختار داده را نمایان می‌کند. متدها یک سیاست دسترسی را تحمیل می‌کنند. شما می‌توانید مختصات فردی را به‌صورت مستقل بخوانید، اما باید مختصات را به‌صورت یک عملیات اتمی تنظیم کنید.</p><p>از سوی دیگر، لیست ۶-۱ به‌وضوح در مختصات مستطیلی پیاده‌سازی شده است و ما را مجبور می‌کند که آن مختصات را به‌طور مستقل دستکاری کنیم. این پیاده‌سازی را آشکار می‌کند. در واقع، حتی اگر متغیرها خصوصی بودند و ما از getter ها و setter های تک‌متغیره استفاده می‌کردیم، باز هم پیاده‌سازی را آشکار می‌کرد.</p><p>پنهان‌سازی پیاده‌سازی تنها یک مسأله از قرار دادن یک لایه از توابع بین متغیرها نیست. پنهان‌سازی پیاده‌سازی مربوط به انتزاعات است! یک کلاس به‌سادگی متغیرهای خود را از طریق دریافت‌کننده‌ها و تنظیم‌کننده‌ها بیرون نمی‌آورد. بلکه رابط‌های انتزاعی را نمایان می‌کند که به کاربرانش اجازه می‌دهد جوهر داده‌ها را دستکاری کنند، بدون اینکه نیاز به دانستن پیاده‌سازی آن‌ها داشته باشند.</p><p>به لیست ۶-۳ و لیست ۶-۴ توجه کنید. مورد اول از اصطلاحات عینی برای بیان سطح سوخت یک وسیله نقلیه استفاده می‌کند، در حالی که مورد دوم این کار را با انتزاع درصد انجام می‌دهد. در حالت عینی می‌توانید به‌طور تقریبی مطمئن باشید که این فقط دسترسی به متغیرها است. در حالت انتزاعی، هیچ ایده‌ای درباره‌ی شکل داده‌ها ندارید.</p></div> <p>Listing 6-3 - Concrete Vehicle</p><pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">Vehicle</span> {
  <span class="hljs-type">double</span> <span class="hljs-title function_">getFuelTankCapacityInGallons</span><span class="hljs-params">()</span>;
  <span class="hljs-type">double</span> <span class="hljs-title function_">getGallonsOfGasoline</span><span class="hljs-params">()</span>;
 }
-</code></pre>
-<p>Listing 6-4 - Abstract Vehicle</p>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">Vehicle</span> {
+</code></pre> <p>Listing 6-4 - Abstract Vehicle</p><pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">Vehicle</span> {
  <span class="hljs-type">double</span> <span class="hljs-title function_">getPercentFuelRemaining</span><span class="hljs-params">()</span>;
 }
-</code></pre>
-<div dir="rtl">
-در هر دو مورد بالا، گزینه دوم ترجیح داده می‌شود. ما نمی‌خواهیم جزئیات داده‌های خود را آشکار کنیم. بلکه می‌خواهیم داده‌های خود را به زبان انتزاعی بیان کنیم. این تنها با استفاده از رابط‌ها و یا دریافت‌کننده‌ها و تنظیم‌کننده‌ها به‌دست نمی‌آید. باید به طور جدی به بهترین روش برای نمایندگی داده‌هایی که یک شیء دربر دارد فکر کنیم. بدترین گزینه این است که به سادگی دریافت‌کننده‌ها و تنظیم‌کننده‌ها را اضافه کنیم.
-<h2>داده/شئ نامتقارن</h2>
-<p>این دو مثال تفاوت بین اشیاء و ساختارهای داده را نشان می‌دهند. اشیاء داده‌های خود را پشت انتزاعات پنهان می‌کنند و توابعی را که بر روی آن داده‌ها عمل می‌کنند، آشکار می‌سازند. در مقابل، ساختارهای داده داده‌های خود را نمایان می‌کنند و هیچ تابع معنی‌داری ندارند. دوباره به آن برگردید و بخوانید. به ماهیت مکمل این دو تعریف توجه کنید. آن‌ها عملاً ضد یکدیگر هستند. این تفاوت ممکن است ناچیز به نظر برسد، اما پیامدهای گسترده‌ای دارد.</p>
-<p>به عنوان مثال، به مثال شکلی رویه‌ای در لیست ۶-۵ توجه کنید. کلاس Geometry بر روی سه کلاس شکل عمل می‌کند. کلاس‌های شکل (shape) ساختار داده های ساده‌ای هستند که هیچ رفتاری ندارند. تمام رفتار در کلاس Geometry وجود دارد.</p>
-</div>
-<p>Listing 6-5 - Procedural Shape</p>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Square</span> {
+</code></pre> <div dir="rtl"> در هر دو مورد بالا، گزینه دوم ترجیح داده می‌شود. ما نمی‌خواهیم جزئیات داده‌های خود را آشکار کنیم. بلکه می‌خواهیم داده‌های خود را به زبان انتزاعی بیان کنیم. این تنها با استفاده از رابط‌ها و یا دریافت‌کننده‌ها و تنظیم‌کننده‌ها به‌دست نمی‌آید. باید به طور جدی به بهترین روش برای نمایندگی داده‌هایی که یک شیء دربر دارد فکر کنیم. بدترین گزینه این است که به سادگی دریافت‌کننده‌ها و تنظیم‌کننده‌ها را اضافه کنیم. <h2>داده/شئ نامتقارن</h2><p>این دو مثال تفاوت بین اشیاء و ساختارهای داده را نشان می‌دهند. اشیاء داده‌های خود را پشت انتزاعات پنهان می‌کنند و توابعی را که بر روی آن داده‌ها عمل می‌کنند، آشکار می‌سازند. در مقابل، ساختارهای داده داده‌های خود را نمایان می‌کنند و هیچ تابع معنی‌داری ندارند. دوباره به آن برگردید و بخوانید. به ماهیت مکمل این دو تعریف توجه کنید. آن‌ها عملاً ضد یکدیگر هستند. این تفاوت ممکن است ناچیز به نظر برسد، اما پیامدهای گسترده‌ای دارد.</p><p>به عنوان مثال، به مثال شکلی رویه‌ای در لیست ۶-۵ توجه کنید. کلاس Geometry بر روی سه کلاس شکل عمل می‌کند. کلاس‌های شکل (shape) ساختار داده های ساده‌ای هستند که هیچ رفتاری ندارند. تمام رفتار در کلاس Geometry وجود دارد.</p></div> <p>Listing 6-5 - Procedural Shape</p><pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Square</span> {
   <span class="hljs-keyword">public</span> Point topLeft;
   <span class="hljs-keyword">public</span> <span class="hljs-type">double</span> side;
 }
@@ -146,13 +60,7 @@
     <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">NoSuchShapeException</span>();
   }
 }
-</code></pre>
-<div dir="rtl">
-برنامه‌نویسان شیء‌گرا ممکن است به این موضوع اعتراض کنند و بگویند که این رویه‌ای است—و آن‌ها حق دارند. اما این تحقیر ممکن است توجیه‌پذیر نباشد. تصور کنید اگر یک تابع perimeter() به کلاس Geometry اضافه شود. کلاس‌های شکل تحت تأثیر قرار نخواهند گرفت! هیچ کلاس دیگری که به اشکال وابسته باشد نیز تحت تأثیر قرار نخواهد گرفت! از سوی دیگر، اگر من یک شکل جدید اضافه کنم، باید تمام توابع در Geometry را برای مدیریت آن تغییر دهم. دوباره این را بخوانید. به این نکته توجه کنید که این دو وضعیت به‌طور کاملاً متضاد هستند.
-<p>حال به راه‌حل شیء‌گرا در لیست ۶-۶ توجه کنید. در اینجا، متد area() چندریختی (polymorphic) است. نیازی به کلاس Geometry نیست. بنابراین اگر من یک شکل جدید اضافه کنم، هیچ‌یک از توابع موجود تحت تأثیر قرار نمی‌گیرند، اما اگر یک تابع جدید اضافه کنم، تمام اشکال باید تغییر کنند!</p>
-</div>
-<p>Listing 6-6 - Polymorphic Shapes</p>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Square</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Shape</span> {
+</code></pre> <div dir="rtl"> برنامه‌نویسان شیء‌گرا ممکن است به این موضوع اعتراض کنند و بگویند که این رویه‌ای است—و آن‌ها حق دارند. اما این تحقیر ممکن است توجیه‌پذیر نباشد. تصور کنید اگر یک تابع perimeter() به کلاس Geometry اضافه شود. کلاس‌های شکل تحت تأثیر قرار نخواهند گرفت! هیچ کلاس دیگری که به اشکال وابسته باشد نیز تحت تأثیر قرار نخواهد گرفت! از سوی دیگر، اگر من یک شکل جدید اضافه کنم، باید تمام توابع در Geometry را برای مدیریت آن تغییر دهم. دوباره این را بخوانید. به این نکته توجه کنید که این دو وضعیت به‌طور کاملاً متضاد هستند. <p>حال به راه‌حل شیء‌گرا در لیست ۶-۶ توجه کنید. در اینجا، متد area() چندریختی (polymorphic) است. نیازی به کلاس Geometry نیست. بنابراین اگر من یک شکل جدید اضافه کنم، هیچ‌یک از توابع موجود تحت تأثیر قرار نمی‌گیرند، اما اگر یک تابع جدید اضافه کنم، تمام اشکال باید تغییر کنند!</p></div> <p>Listing 6-6 - Polymorphic Shapes</p><pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Square</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Shape</span> {
   <span class="hljs-keyword">private</span> Point topLeft;
   <span class="hljs-keyword">private</span> <span class="hljs-type">double</span> side;
   <span class="hljs-keyword">public</span> <span class="hljs-type">double</span> <span class="hljs-title function_">area</span><span class="hljs-params">()</span> {
@@ -175,92 +83,18 @@
     <span class="hljs-keyword">return</span> PI * radius * radius;
   }
 }
-</code></pre>
-<div dir="rtl">
-دوباره، ما به ماهیت مکمل این دو تعریف می‌رسیم؛ آن‌ها عملاً ضد یکدیگر هستند! این موضوع تضاد اساسی بین اشیاء و ساختارهای داده را آشکار می‌کند:
-<p><code>کد رویه‌ای (کدی که از ساختارهای داده استفاده می‌کند) افزودن توابع جدید بدون تغییر ساختارهای داده موجود را آسان می‌کند. از طرف دیگر، کد شیء‌گرا (OO) افزودن کلاس‌های جدید بدون تغییر توابع موجود را آسان می‌کند.</code></p>
-<p>این مکمل نیز صادق است:</p>
-<p><code>کد رویه‌ای افزودن ساختارهای داده جدید را دشوار می‌کند زیرا همه توابع باید تغییر کنند. کد شیء‌گرا (OO) افزودن توابع جدید را دشوار می‌کند زیرا همه کلاس‌ها باید تغییر کنند.</code></p>
-<p>بنابراین، چیزهایی که برای کد شیء‌گرا (OO) دشوار است برای رویه‌ای‌ها آسان است و چیزهایی که برای رویه‌ای‌ها دشوار است برای کد شیء‌گرا آسان است!<br>
-در هر سیستم پیچیده، زمان‌هایی وجود دارد که می‌خواهیم انواع داده جدیدی به جای توابع جدید اضافه کنیم. برای این موارد، اشیاء و شیء‌گرایی(OO) مناسب‌ترین هستند. از طرف دیگر، زمان‌هایی نیز وجود خواهد داشت که می‌خواهیم توابع جدیدی در مقابل انواع داده اضافه کنیم. در آن صورت، کد رویه‌ای و ساختارهای داده مناسب‌تر خواهند بود.</p>
-<p>برنامه‌نویسان با تجربه می‌دانند که ایده اینکه همه‌چیز یک شیء است یک افسانه است. گاهی اوقات واقعاً به ساختارهای داده ساده‌ای با رویه‌هایی که بر روی آن‌ها عمل می‌کنند نیاز داریم.</p>
-<h2>قانون دمر (Demeter)</h2>
-<p>یک قاعده معروف است که می‌گوید یک ماژول نباید از جزئیات داخلی اشیایی که با آن‌ها کار می‌کند، آگاه باشد. همان‌طور که در بخش قبل دیدیم، اشیاء داده‌های خود را پنهان می‌کنند و عملیات‌هایی را نمایان می‌سازند. این بدین معناست که یک شیء نباید ساختار داخلی خود را از طریق دسترسی‌دهنده‌ها (accessors) افشا کند، زیرا این کار به معنای افشای ساختار داخلی، به جای پنهان کردن آن است.<br>
-به‌طور دقیق‌تر، قانون دمر می‌گوید که یک متد  f از کلاس  C فقط باید متدهای این موارد را فراخوانی کند:</p>
-<ul>
-<li>
-<p>C</p>
-</li>
-<li>
-<p>یک شیء که توسط  f ایجاد شده است</p>
-</li>
-<li>
-<p>یک شیء که به‌عنوان آرگومان به  f منتقل شده است</p>
-</li>
-<li>
-<p>یک شیء که در یک متغیر نمونه از  c نگهداری می‌شود</p>
-</li>
-</ul>
-<p>این اصل به کاهش وابستگی‌های بین ماژول‌ها کمک می‌کند و طراحی نرم‌افزار را مدولارتر و قابل نگهداری‌تر می‌سازد. به‌عبارت دیگر، رعایت این قانون می‌تواند منجر به کدهای تمیزتر و با ثبات‌تر شود.<br>
-متد نباید متدهایی را روی اشیائی که توسط هر یک از توابع مجاز بازمی‌گردند، فراخوانی کند. به عبارت دیگر، باید با دوستان صحبت کنید، نه با غریبه‌ها.</p>
-<p>کد زیر به‌نظر می‌رسد که قانون دمر را نقض می‌کند (علاوه بر موارد دیگر) زیرا ابتدا تابع  getScratchDir() را بر روی نتیجه‌ی تابع  getOptions() فراخوانی می‌کند و سپس تابع  getAbsolutePath() را بر روی نتیجه‌ی getScratchDir() فراخوانی می‌کند:</p>
-</div>
-<pre class="hljs"><code><span class="hljs-keyword">final</span> <span class="hljs-type">String</span> <span class="hljs-variable">outputDir</span> <span class="hljs-operator">=</span> ctxt.getOptions().getScratchDir().getAbsolutePath();
-</code></pre>
-<div dir="rtl">
-<h2>قطار تصادفی</h2>
-<p>این نوع کد معمولاً به عنوان &quot;قطار تصادفی&quot; نامیده می‌شود زیرا به نظر می‌رسد که مجموعه‌ای از واگن‌های متصل به هم هستند. زنجیره‌های فراخوانی مانند این معمولاً به عنوان یک سبک شل و بی‌نظم در نظر گرفته می‌شوند و باید از آن‌ها پرهیز کرد. بهترین کار معمولاً این است که آن‌ها را به شکل زیر تقسیم کنید:</p>
-</div>
-<pre class="hljs"><code><span class="hljs-type">Options</span> <span class="hljs-variable">opts</span> <span class="hljs-operator">=</span> ctxt.getOptions();
+</code></pre> <div dir="rtl"> دوباره، ما به ماهیت مکمل این دو تعریف می‌رسیم؛ آن‌ها عملاً ضد یکدیگر هستند! این موضوع تضاد اساسی بین اشیاء و ساختارهای داده را آشکار می‌کند: <p><code>کد رویه‌ای (کدی که از ساختارهای داده استفاده می‌کند) افزودن توابع جدید بدون تغییر ساختارهای داده موجود را آسان می‌کند. از طرف دیگر، کد شیء‌گرا (OO) افزودن کلاس‌های جدید بدون تغییر توابع موجود را آسان می‌کند.</code></p><p>این مکمل نیز صادق است:</p><p><code>کد رویه‌ای افزودن ساختارهای داده جدید را دشوار می‌کند زیرا همه توابع باید تغییر کنند. کد شیء‌گرا (OO) افزودن توابع جدید را دشوار می‌کند زیرا همه کلاس‌ها باید تغییر کنند.</code></p><p>بنابراین، چیزهایی که برای کد شیء‌گرا (OO) دشوار است برای رویه‌ای‌ها آسان است و چیزهایی که برای رویه‌ای‌ها دشوار است برای کد شیء‌گرا آسان است!<br> در هر سیستم پیچیده، زمان‌هایی وجود دارد که می‌خواهیم انواع داده جدیدی به جای توابع جدید اضافه کنیم. برای این موارد، اشیاء و شیء‌گرایی(OO) مناسب‌ترین هستند. از طرف دیگر، زمان‌هایی نیز وجود خواهد داشت که می‌خواهیم توابع جدیدی در مقابل انواع داده اضافه کنیم. در آن صورت، کد رویه‌ای و ساختارهای داده مناسب‌تر خواهند بود.</p><p>برنامه‌نویسان با تجربه می‌دانند که ایده اینکه همه‌چیز یک شیء است یک افسانه است. گاهی اوقات واقعاً به ساختارهای داده ساده‌ای با رویه‌هایی که بر روی آن‌ها عمل می‌کنند نیاز داریم.</p><h2>قانون دمر (Demeter)</h2><p>یک قاعده معروف است که می‌گوید یک ماژول نباید از جزئیات داخلی اشیایی که با آن‌ها کار می‌کند، آگاه باشد. همان‌طور که در بخش قبل دیدیم، اشیاء داده‌های خود را پنهان می‌کنند و عملیات‌هایی را نمایان می‌سازند. این بدین معناست که یک شیء نباید ساختار داخلی خود را از طریق دسترسی‌دهنده‌ها (accessors) افشا کند، زیرا این کار به معنای افشای ساختار داخلی، به جای پنهان کردن آن است.<br> به‌طور دقیق‌تر، قانون دمر می‌گوید که یک متد f از کلاس C فقط باید متدهای این موارد را فراخوانی کند:</p><ul> <li><p>C</p></li> <li><p>یک شیء که توسط f ایجاد شده است</p></li> <li><p>یک شیء که به‌عنوان آرگومان به f منتقل شده است</p></li> <li><p>یک شیء که در یک متغیر نمونه از c نگهداری می‌شود</p></li> </ul><p>این اصل به کاهش وابستگی‌های بین ماژول‌ها کمک می‌کند و طراحی نرم‌افزار را مدولارتر و قابل نگهداری‌تر می‌سازد. به‌عبارت دیگر، رعایت این قانون می‌تواند منجر به کدهای تمیزتر و با ثبات‌تر شود.<br> متد نباید متدهایی را روی اشیائی که توسط هر یک از توابع مجاز بازمی‌گردند، فراخوانی کند. به عبارت دیگر، باید با دوستان صحبت کنید، نه با غریبه‌ها.</p><p>کد زیر به‌نظر می‌رسد که قانون دمر را نقض می‌کند (علاوه بر موارد دیگر) زیرا ابتدا تابع getScratchDir() را بر روی نتیجه‌ی تابع getOptions() فراخوانی می‌کند و سپس تابع getAbsolutePath() را بر روی نتیجه‌ی getScratchDir() فراخوانی می‌کند:</p></div> <pre class="hljs"><code><span class="hljs-keyword">final</span> <span class="hljs-type">String</span> <span class="hljs-variable">outputDir</span> <span class="hljs-operator">=</span> ctxt.getOptions().getScratchDir().getAbsolutePath();
+</code></pre> <div dir="rtl"><h2>قطار تصادفی</h2><p>این نوع کد معمولاً به عنوان &quot;قطار تصادفی&quot; نامیده می‌شود زیرا به نظر می‌رسد که مجموعه‌ای از واگن‌های متصل به هم هستند. زنجیره‌های فراخوانی مانند این معمولاً به عنوان یک سبک شل و بی‌نظم در نظر گرفته می‌شوند و باید از آن‌ها پرهیز کرد. بهترین کار معمولاً این است که آن‌ها را به شکل زیر تقسیم کنید:</p></div> <pre class="hljs"><code><span class="hljs-type">Options</span> <span class="hljs-variable">opts</span> <span class="hljs-operator">=</span> ctxt.getOptions();
 <span class="hljs-type">File</span> <span class="hljs-variable">scratchDir</span> <span class="hljs-operator">=</span> opts.getScratchDir();
 <span class="hljs-keyword">final</span> <span class="hljs-type">String</span> <span class="hljs-variable">outputDir</span> <span class="hljs-operator">=</span> scratchDir.getAbsolutePath();
-</code></pre>
-<p><img src="../../../assets/image/06/img-6.2.png" alt=""></p>
-<div dir="rtl">
-آیا این دو قطعه کد نقض قانون دمر هستند؟ قطعاً ماژول حاوی کد می‌داند که شیء ctxt شامل گزینه‌ها است، که شامل یک دایرکتوری موقت است، که دارای یک مسیر مطلق است. این اطلاعات زیادی برای یک تابع است که باید بداند. تابع فراخوانی‌کننده می‌داند که چگونه از میان بسیاری از اشیاء مختلف عبور کند.
-<p>اینکه آیا این نقض قانون دمر است یا نه، به این بستگی دارد که آیا ctxt، Options و ScratchDir اشیاء هستند یا ساختارهای داده. اگر آن‌ها اشیاء هستند، پس ساختار داخلی آن‌ها باید پنهان باشد نه اینکه افشا شود و بنابراین آگاهی از جزئیات داخلی آن‌ها نقض واضح قانون دمر است. از سوی دیگر، اگر ctxt، Options و ScratchDir تنها ساختارهای داده‌ای بدون رفتار باشند، پس به‌طور طبیعی ساختار داخلی خود را افشا می‌کنند و بنابراین قانون دمر اعمال نمی‌شود.</p>
-<p>استفاده از توابع دسترسی‌دهنده (accessor) موضوع را پیچیده می‌کند. اگر کد به صورت زیر نوشته شده بود، احتمالاً درباره‌ی نقض قانون دمر سوالی نمی‌کردیم:</p>
-</div>
-<pre class="hljs"><code><span class="hljs-keyword">final</span> <span class="hljs-type">String</span> <span class="hljs-variable">outputDir</span> <span class="hljs-operator">=</span> ctxt.options.scratchDir.absolutePath;
-</code></pre>
-<div dir="rtl">
-این مسئله بسیار کمتر گیج‌کننده خواهد بود اگر ساختارهای داده فقط متغیرهای عمومی داشته باشند و هیچ تابعی نداشته باشند، در حالی که اشیاء متغیرهای خصوصی و توابع عمومی داشته باشند. با این حال، چارچوب‌ها و استانداردهایی (مانند "beans") وجود دارند که حتی از ساختارهای داده ساده نیز می‌خواهند که دارای توابع دسترسی‌دهنده و تنظیم‌کننده باشند.
-<h2>هیبریدها</h2>
-<p>این سردرگمی گاهی منجر به ایجاد ساختارهای هیبریدی نامطلوبی می‌شود که نیمی شیء و نیمی ساختار داده هستند. این ساختارها توابعی دارند که کارهای مهمی انجام می‌دهند و همچنین دارای متغیرهای عمومی یا دسترسی‌دهنده‌ها و تنظیم‌کننده‌های عمومی هستند که در واقع متغیرهای خصوصی را عمومی می‌کنند و سایر توابع خارجی را وسوسه می‌کنند تا از این متغیرها به روشی استفاده کنند که یک برنامه رویه‌ای از یک ساختار داده استفاده می‌کند.</p>
-<p>این هیبریدها افزودن توابع جدید را دشوار می‌کنند و همچنین افزودن ساختارهای داده جدید را نیز مشکل می‌سازند. آن‌ها بدترین حالت از هر دو جهان هستند. از ایجاد آن‌ها پرهیز کنید. این ساختارها نشان‌دهنده طراحی سردرگمی هستند که نویسندگان آن مطمئن نیستند—یا بدتر، از آن بی‌اطلاع هستند—که آیا به محافظت در برابر توابع یا انواع نیاز دارند.</p>
-<h2>پنهان‌سازی ساختار</h2>
-<p>اگر ctxt، options و scratchDir اشیایی با رفتار واقعی باشند چه؟</p>
-<p>در این صورت، از آنجا که اشیاء باید ساختار داخلی خود را پنهان کنند، نباید بتوانیم از طریق آن‌ها عبور کنیم. در این صورت، چگونه می‌توانیم مسیر مطلق دایرکتوری موقت را به‌دست آوریم؟</p>
-</div>
-<pre class="hljs"><code>ctxt.getAbsolutePathOfScratchDirectoryOption();
-</code></pre>
-<div dir="rtl">
-یا
-</div>
-<pre class="hljs"><code>ctx.getScratchDirectoryOption().getAbsolutePath()
-</code></pre>
-<div dir="rtl">
-گزینه اول می‌تواند منجر به انفجار متدها در شیء ctxt شود. گزینه دوم فرض می‌کند که getScratchDirectoryOption() یک ساختار داده برمی‌گرداند، نه یک شیء. هیچ‌کدام از این گزینه‌ها احساس خوبی نمی‌دهد.
-<p>اگر ctxt یک شیء باشد، باید از آن بخواهیم که کاری انجام دهد؛ نباید از آن درباره‌ی جزئیات داخلی‌اش سوال کنیم. پس چرا ما به مسیر مطلق دایرکتوری موقت نیاز داشتیم؟ قرار بود با آن چه کنیم؟ به این کد از (چند خط پایین‌تر در) همان ماژول توجه کنید:</p>
-</div>
-<pre class="hljs"><code><span class="hljs-type">String</span> <span class="hljs-variable">outFile</span> <span class="hljs-operator">=</span> outputDir + <span class="hljs-string">&quot;/&quot;</span> + className.replace(<span class="hljs-string">&#x27;.&#x27;</span>, <span class="hljs-string">&#x27;/&#x27;</span>) + <span class="hljs-string">&quot;.class&quot;</span>;
+</code></pre> <p><img src="../../../assets/image/06/img-6.2.png" alt="" loading="lazy" decoding="async"></p><div dir="rtl"> آیا این دو قطعه کد نقض قانون دمر هستند؟ قطعاً ماژول حاوی کد می‌داند که شیء ctxt شامل گزینه‌ها است، که شامل یک دایرکتوری موقت است، که دارای یک مسیر مطلق است. این اطلاعات زیادی برای یک تابع است که باید بداند. تابع فراخوانی‌کننده می‌داند که چگونه از میان بسیاری از اشیاء مختلف عبور کند. <p>اینکه آیا این نقض قانون دمر است یا نه، به این بستگی دارد که آیا ctxt، Options و ScratchDir اشیاء هستند یا ساختارهای داده. اگر آن‌ها اشیاء هستند، پس ساختار داخلی آن‌ها باید پنهان باشد نه اینکه افشا شود و بنابراین آگاهی از جزئیات داخلی آن‌ها نقض واضح قانون دمر است. از سوی دیگر، اگر ctxt، Options و ScratchDir تنها ساختارهای داده‌ای بدون رفتار باشند، پس به‌طور طبیعی ساختار داخلی خود را افشا می‌کنند و بنابراین قانون دمر اعمال نمی‌شود.</p><p>استفاده از توابع دسترسی‌دهنده (accessor) موضوع را پیچیده می‌کند. اگر کد به صورت زیر نوشته شده بود، احتمالاً درباره‌ی نقض قانون دمر سوالی نمی‌کردیم:</p></div> <pre class="hljs"><code><span class="hljs-keyword">final</span> <span class="hljs-type">String</span> <span class="hljs-variable">outputDir</span> <span class="hljs-operator">=</span> ctxt.options.scratchDir.absolutePath;
+</code></pre> <div dir="rtl"> این مسئله بسیار کمتر گیج‌کننده خواهد بود اگر ساختارهای داده فقط متغیرهای عمومی داشته باشند و هیچ تابعی نداشته باشند، در حالی که اشیاء متغیرهای خصوصی و توابع عمومی داشته باشند. با این حال، چارچوب‌ها و استانداردهایی (مانند "beans") وجود دارند که حتی از ساختارهای داده ساده نیز می‌خواهند که دارای توابع دسترسی‌دهنده و تنظیم‌کننده باشند. <h2>هیبریدها</h2><p>این سردرگمی گاهی منجر به ایجاد ساختارهای هیبریدی نامطلوبی می‌شود که نیمی شیء و نیمی ساختار داده هستند. این ساختارها توابعی دارند که کارهای مهمی انجام می‌دهند و همچنین دارای متغیرهای عمومی یا دسترسی‌دهنده‌ها و تنظیم‌کننده‌های عمومی هستند که در واقع متغیرهای خصوصی را عمومی می‌کنند و سایر توابع خارجی را وسوسه می‌کنند تا از این متغیرها به روشی استفاده کنند که یک برنامه رویه‌ای از یک ساختار داده استفاده می‌کند.</p><p>این هیبریدها افزودن توابع جدید را دشوار می‌کنند و همچنین افزودن ساختارهای داده جدید را نیز مشکل می‌سازند. آن‌ها بدترین حالت از هر دو جهان هستند. از ایجاد آن‌ها پرهیز کنید. این ساختارها نشان‌دهنده طراحی سردرگمی هستند که نویسندگان آن مطمئن نیستند—یا بدتر، از آن بی‌اطلاع هستند—که آیا به محافظت در برابر توابع یا انواع نیاز دارند.</p><h2>پنهان‌سازی ساختار</h2><p>اگر ctxt، options و scratchDir اشیایی با رفتار واقعی باشند چه؟</p><p>در این صورت، از آنجا که اشیاء باید ساختار داخلی خود را پنهان کنند، نباید بتوانیم از طریق آن‌ها عبور کنیم. در این صورت، چگونه می‌توانیم مسیر مطلق دایرکتوری موقت را به‌دست آوریم؟</p></div> <pre class="hljs"><code>ctxt.getAbsolutePathOfScratchDirectoryOption();
+</code></pre> <div dir="rtl"> یا </div><pre class="hljs"><code>ctx.getScratchDirectoryOption().getAbsolutePath()
+</code></pre> <div dir="rtl"> گزینه اول می‌تواند منجر به انفجار متدها در شیء ctxt شود. گزینه دوم فرض می‌کند که getScratchDirectoryOption() یک ساختار داده برمی‌گرداند، نه یک شیء. هیچ‌کدام از این گزینه‌ها احساس خوبی نمی‌دهد. <p>اگر ctxt یک شیء باشد، باید از آن بخواهیم که کاری انجام دهد؛ نباید از آن درباره‌ی جزئیات داخلی‌اش سوال کنیم. پس چرا ما به مسیر مطلق دایرکتوری موقت نیاز داشتیم؟ قرار بود با آن چه کنیم؟ به این کد از (چند خط پایین‌تر در) همان ماژول توجه کنید:</p></div> <pre class="hljs"><code><span class="hljs-type">String</span> <span class="hljs-variable">outFile</span> <span class="hljs-operator">=</span> outputDir + <span class="hljs-string">&quot;/&quot;</span> + className.replace(<span class="hljs-string">&#x27;.&#x27;</span>, <span class="hljs-string">&#x27;/&#x27;</span>) + <span class="hljs-string">&quot;.class&quot;</span>;
 <span class="hljs-type">FileOutputStream</span> <span class="hljs-variable">fout</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">FileOutputStream</span>(outFile);
 <span class="hljs-type">BufferedOutputStream</span> <span class="hljs-variable">bos</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">BufferedOutputStream</span>(fout);
-</code></pre>
-<div dir="rtl">
-ترکیب سطوح مختلف جزئیات کمی نگران‌کننده است. نقطه‌ها، اسلش‌ها، پسوندهای فایل و اشیاء فایل نباید به‌طور بی‌پروا با هم ترکیب شوند و همچنین با کد احاطه‌کننده. با وجود این، می‌بینیم که هدف از به‌دست آوردن مسیر مطلق دایرکتوری موقت، ایجاد یک فایل موقت با نام مشخصی بود.
-پس، اگر به شیء ctxt بگوییم که این کار را انجام دهد؟
-</div>
-<pre class="hljs"><code><span class="hljs-type">BufferedOutputStream</span> <span class="hljs-variable">bos</span> <span class="hljs-operator">=</span> ctxt.createScratchFileStream(classFileName);
-</code></pre>
-<div dir="rtl">
-این به نظر می‌رسد که کار معقولی برای یک شیء باشد! این کار به ctxt اجازه می‌دهد تا جزئیات داخلی خود را پنهان کند و از نقض قانون دمر توسط تابع فعلی جلوگیری می‌کند، زیرا نیازی به عبور از اشیائی ندارد که نباید از آن‌ها آگاه باشد.
-<h2>اشیاء انتقال داده (Data Transfer Objects)</h2>
-<p>شکل اساسی یک ساختار داده، کلاسی با متغیرهای عمومی و بدون توابع است. این به‌گاه‌هایی به عنوان شیء انتقال داده یا DTO شناخته می‌شود. DTOها ساختارهای بسیار مفیدی هستند، به‌ویژه هنگام ارتباط با پایگاه‌های داده یا تجزیه پیام‌ها از سوکت‌ها و غیره. آن‌ها اغلب اولین مرحله در یک سری مراحل ترجمه هستند که داده‌های خام موجود در پایگاه داده را به اشیاء در کد برنامه تبدیل می‌کنند.<br>
-شکل رایج‌تر آن، فرم &quot;bean&quot; است که در لیست ۶-۷ نشان داده شده است. Beans دارای متغیرهای خصوصی هستند که توسط دسترسی‌دهنده‌ها و تنظیم‌کننده‌ها مدیریت می‌شوند. نیمه‌پنهان‌سازی beans به نظر می‌رسد که برخی از خالص‌گرایان شیءگرا را راحت‌تر کند، اما معمولاً هیچ سود دیگری ارائه نمی‌دهد.</p>
-</div>
-<p>Listing 6-7 - address.java</p>
-<pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Address</span> {
+</code></pre> <div dir="rtl"> ترکیب سطوح مختلف جزئیات کمی نگران‌کننده است. نقطه‌ها، اسلش‌ها، پسوندهای فایل و اشیاء فایل نباید به‌طور بی‌پروا با هم ترکیب شوند و همچنین با کد احاطه‌کننده. با وجود این، می‌بینیم که هدف از به‌دست آوردن مسیر مطلق دایرکتوری موقت، ایجاد یک فایل موقت با نام مشخصی بود. پس، اگر به شیء ctxt بگوییم که این کار را انجام دهد؟ </div><pre class="hljs"><code><span class="hljs-type">BufferedOutputStream</span> <span class="hljs-variable">bos</span> <span class="hljs-operator">=</span> ctxt.createScratchFileStream(classFileName);
+</code></pre> <div dir="rtl"> این به نظر می‌رسد که کار معقولی برای یک شیء باشد! این کار به ctxt اجازه می‌دهد تا جزئیات داخلی خود را پنهان کند و از نقض قانون دمر توسط تابع فعلی جلوگیری می‌کند، زیرا نیازی به عبور از اشیائی ندارد که نباید از آن‌ها آگاه باشد. <h2>اشیاء انتقال داده (Data Transfer Objects)</h2><p>شکل اساسی یک ساختار داده، کلاسی با متغیرهای عمومی و بدون توابع است. این به‌گاه‌هایی به عنوان شیء انتقال داده یا DTO شناخته می‌شود. DTOها ساختارهای بسیار مفیدی هستند، به‌ویژه هنگام ارتباط با پایگاه‌های داده یا تجزیه پیام‌ها از سوکت‌ها و غیره. آن‌ها اغلب اولین مرحله در یک سری مراحل ترجمه هستند که داده‌های خام موجود در پایگاه داده را به اشیاء در کد برنامه تبدیل می‌کنند.<br> شکل رایج‌تر آن، فرم &quot;bean&quot; است که در لیست ۶-۷ نشان داده شده است. Beans دارای متغیرهای خصوصی هستند که توسط دسترسی‌دهنده‌ها و تنظیم‌کننده‌ها مدیریت می‌شوند. نیمه‌پنهان‌سازی beans به نظر می‌رسد که برخی از خالص‌گرایان شیءگرا را راحت‌تر کند، اما معمولاً هیچ سود دیگری ارائه نمی‌دهد.</p></div> <p>Listing 6-7 - address.java</p><pre class="hljs"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Address</span> {
   <span class="hljs-keyword">private</span> String street;
   <span class="hljs-keyword">private</span> String streetExtra;
   <span class="hljs-keyword">private</span> String city;
@@ -290,128 +124,216 @@
     <span class="hljs-keyword">return</span> zip;
   }
 }
-</code></pre>
-<div dir="rtl">
-<h2>رکوردهای فعال (Active Record)</h2>
-<p>رکوردهای فعال فرم‌های خاصی از DTOها هستند. آن‌ها ساختارهای داده با متغیرهای عمومی (یا متغیرهای دسترسی‌دهنده) هستند؛ اما معمولاً دارای متدهای ناوبری مانند save و find نیز هستند. معمولاً این رکوردهای فعال ترجمه‌های مستقیم از جدول‌های پایگاه داده یا سایر منابع داده هستند.</p>
-<p>متأسفانه، اغلب می‌بینیم که توسعه‌دهندگان سعی می‌کنند این ساختارهای داده را به‌عنوان اشیاء در نظر بگیرند و متدهای قوانین کسب‌وکار را در آن‌ها قرار دهند. این کار ناخوشایند است زیرا یک هیبرید بین یک ساختار داده و یک شیء ایجاد می‌کند.<br>
-راه‌حل، البته، این است که رکورد فعال را به عنوان یک ساختار داده در نظر بگیریم و اشیاء جداگانه‌ای ایجاد کنیم که شامل قوانین کسب‌وکار باشند و داده‌های داخلی خود را پنهان کنند (که احتمالاً تنها نمونه‌هایی از رکورد فعال هستند).</p>
-<h2>نتیجه‌گیری</h2>
-<p>اشیاء رفتار را نمایان می‌کنند و داده‌ها را پنهان می‌سازند. این امر افزودن انواع جدید اشیاء بدون تغییر رفتارهای موجود را آسان می‌کند. همچنین، افزودن رفتارهای جدید به اشیاء موجود را دشوار می‌سازد. ساختارهای داده، داده‌ها را نمایان می‌کنند و هیچ رفتار قابل توجهی ندارند. این امر افزودن رفتارهای جدید به ساختارهای داده موجود را آسان می‌کند، اما افزودن ساختارهای داده جدید به توابع موجود را دشوار می‌سازد.</p>
-<p>در هر سیستم خاص، گاهی اوقات به انعطاف‌پذیری برای افزودن انواع داده جدید نیاز خواهیم داشت، و بنابراین برای آن بخش از سیستم، اشیاء را ترجیح می‌دهیم. در مواقع دیگر، به انعطاف‌پذیری برای افزودن رفتارهای جدید نیاز داریم و بنابراین در آن بخش از سیستم، انواع داده و رویه‌ها را ترجیح می‌دهیم.<br>
-توسعه‌دهندگان نرم‌افزار خوب این مسائل را بدون پیش‌داوری درک می‌کنند و رویکردی را انتخاب می‌کنند که برای کار در دست بهترین باشد.</p>
-</div>
-
-  </main>
-
-  <!-- فوتر مشترک -->
-  <footer class="footer">
-    <div class="container">
-      <p>
-        <img src="/Gitab/icone/copyright.svg" alt="کپی‌رایت" width="14" height="14"
-             style="vertical-align:middle;margin-inline:4px">
-        <span id="y"></span> Gitab — تمامی حقوق محفوظ است.
-      </p>
-    </div>
-  </footer>
-
-  <!-- سال و اسکریپت تغییر تم -->
-  <script>
+</code></pre> <div dir="rtl"><h2>رکوردهای فعال (Active Record)</h2><p>رکوردهای فعال فرم‌های خاصی از DTOها هستند. آن‌ها ساختارهای داده با متغیرهای عمومی (یا متغیرهای دسترسی‌دهنده) هستند؛ اما معمولاً دارای متدهای ناوبری مانند save و find نیز هستند. معمولاً این رکوردهای فعال ترجمه‌های مستقیم از جدول‌های پایگاه داده یا سایر منابع داده هستند.</p><p>متأسفانه، اغلب می‌بینیم که توسعه‌دهندگان سعی می‌کنند این ساختارهای داده را به‌عنوان اشیاء در نظر بگیرند و متدهای قوانین کسب‌وکار را در آن‌ها قرار دهند. این کار ناخوشایند است زیرا یک هیبرید بین یک ساختار داده و یک شیء ایجاد می‌کند.<br> راه‌حل، البته، این است که رکورد فعال را به عنوان یک ساختار داده در نظر بگیریم و اشیاء جداگانه‌ای ایجاد کنیم که شامل قوانین کسب‌وکار باشند و داده‌های داخلی خود را پنهان کنند (که احتمالاً تنها نمونه‌هایی از رکورد فعال هستند).</p><h2>نتیجه‌گیری</h2><p>اشیاء رفتار را نمایان می‌کنند و داده‌ها را پنهان می‌سازند. این امر افزودن انواع جدید اشیاء بدون تغییر رفتارهای موجود را آسان می‌کند. همچنین، افزودن رفتارهای جدید به اشیاء موجود را دشوار می‌سازد. ساختارهای داده، داده‌ها را نمایان می‌کنند و هیچ رفتار قابل توجهی ندارند. این امر افزودن رفتارهای جدید به ساختارهای داده موجود را آسان می‌کند، اما افزودن ساختارهای داده جدید به توابع موجود را دشوار می‌سازد.</p><p>در هر سیستم خاص، گاهی اوقات به انعطاف‌پذیری برای افزودن انواع داده جدید نیاز خواهیم داشت، و بنابراین برای آن بخش از سیستم، اشیاء را ترجیح می‌دهیم. در مواقع دیگر، به انعطاف‌پذیری برای افزودن رفتارهای جدید نیاز داریم و بنابراین در آن بخش از سیستم، انواع داده و رویه‌ها را ترجیح می‌دهیم.<br> توسعه‌دهندگان نرم‌افزار خوب این مسائل را بدون پیش‌داوری درک می‌کنند و رویکردی را انتخاب می‌کنند که برای کار در دست بهترین باشد.</p></div> </article><nav class="chapter-single-next-nav"> <a href="/Gitab/books/book3/Book/07_Error_Handling/Error_Handling/" class="btn-next-chapter-action" id="nextChapterBtn" data-hub="/Gitab/books/book3/"> <span class="next-btn-text">فصل بعدی: مدیریت صحیح خطاها</span> <span class="next-btn-arrow">←</span> </a> </nav></div> <button class="fab-back-to-top" id="backToTopBtn" type="button" aria-label="رفتن به بالای صفحه" title="رفتن به بالا"> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"> <polyline points="18 15 12 9 6 15"></polyline> </svg> </button></main> <footer class="footer-minimal"><div class="footer-container"> <div class="footer-top-row"><div class="footer-brand-side"> <a href="/Gitab/" class="footer-brand-anchor"> <img src="/Gitab/icone/logo.svg" alt="Gitab" width="28" height="28" loading="lazy" decoding="async"> <span class="footer-brand-title">گیتاب (Gitab)</span> </a> <p class="footer-tagline"> پلتفرم آزاد و مستقل برای ترجمهٔ دقیق و روان کتاب‌های مرجع مهندسی نرم‌افزار. </p></div> <div class="footer-nav-cols"><div class="footer-nav-col"> <span class="footer-nav-heading">موضوعات</span><ul class="footer-nav-list"> <li><a href="/Gitab/books/list-books/?cat=csharp">سی‌شارپ و دات‌نت</a></li><li><a href="/Gitab/books/list-books/?cat=clean-code">کد تمیز و بازآفرینی</a></li><li><a href="/Gitab/books/list-books/?cat=architecture">معماری و طراحی دامنه</a></li><li><a href="/Gitab/books/list-books/?cat=system">لینوکس و خط فرمان</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">بخش‌های سایت</span><ul class="footer-nav-list"> <li><a href="/Gitab/">صفحه اصلی</a></li><li><a href="/Gitab/books/list-books/">کتابخانه کامل</a></li><li><a href="/Gitab/courses/">دوره‌های آموزشی</a></li><li><a href="/Gitab/translator.html">تالار مترجمین</a></li></ul> </div><div class="footer-nav-col"> <span class="footer-nav-heading">مشارکت و جامعه</span><ul class="footer-nav-list"> <li><a href="https://github.com/hheydarian/Gitab" target="_blank" rel="noopener noreferrer">راهنمای همکاری در ترجمه</a></li><li><a href="https://github.com/hheydarian/Gitab/issues" target="_blank" rel="noopener noreferrer">پیشنهاد کتاب یا گزارش خطا</a></li></ul> </div></div> </div><div class="footer-bottom-line"> <span>© <span id="y">2026</span> Gitab — توسعه‌یافته برای جامعهٔ مهندسان نرم‌افزار ایرانی</span></div> </div></footer> <script>
   (() => {
     const root = document.documentElement;
     const btn = document.getElementById('themeToggle');
+    const sunIcon = btn ? btn.querySelector('.icon-sun') : null;
+    const moonIcon = btn ? btn.querySelector('.icon-moon') : null;
     const KEY = 'gitab-theme';
 
-    function updateTheme(s) {
-      root.setAttribute('data-theme', s);
-      const mode = s;  // فقط `dark` یا `light` خواهد بود
+    function updateTheme(mode) {
+      root.setAttribute('data-theme', mode);
       root.dataset.colorMode = mode;
-      btn.dataset.icon = mode === 'dark' ? 'moon' : 'sun';
+      if (sunIcon && moonIcon) {
+        if (mode === 'dark') {
+          sunIcon.style.display = 'inline-block';
+          moonIcon.style.display = 'none';
+        } else {
+          sunIcon.style.display = 'none';
+          moonIcon.style.display = 'inline-block';
+        }
+      }
     }
 
-    // وضعیت تم ذخیره شده از localStorage
-    let saved = localStorage.getItem(KEY) || 'light'; // پیش‌فرض روشن
+    let saved = 'dark';
+    try { saved = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
     updateTheme(saved);
 
-    // تنظیم مجدد تم هنگام تغییر وضعیت دکمه
-    btn.addEventListener('click', () => {
-      const current = localStorage.getItem(KEY) || 'light';
-      const next = current === 'dark' ? 'light' : 'dark';  // فقط دو حالت: تاریک و روشن
-      localStorage.setItem(KEY, next);
-      updateTheme(next);
-    });
+    if (btn) {
+      btn.addEventListener('click', () => {
+        let current = 'dark';
+        try { current = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+        const next = current === 'dark' ? 'light' : 'dark';
+        try { localStorage.setItem(KEY, next); } catch (e) {}
+        updateTheme(next);
+      });
+    }
 
-    // هنگام بارگذاری صفحه
     document.addEventListener('DOMContentLoaded', () => {
-      updateTheme(localStorage.getItem(KEY) || 'light');
+      let mode = 'dark';
+      try { mode = localStorage.getItem(KEY) || 'dark'; } catch (e) {}
+      updateTheme(mode);
+      const yearSpan = document.getElementById('y');
+      if (yearSpan) yearSpan.textContent = new Date().getFullYear();
     });
+
+    const mobBtn = document.getElementById('mobileMenuBtn');
+    const mobDrawer = document.getElementById('mobileDrawer');
+    if (mobBtn && mobDrawer) {
+      const setDrawerOpen = (open) => {
+        mobDrawer.classList.toggle('open', open);
+        mobBtn.classList.toggle('is-open', open);
+        mobBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        mobBtn.setAttribute('aria-label', open ? 'بستن منو' : 'باز کردن منو');
+        mobDrawer.setAttribute('aria-hidden', open ? 'false' : 'true');
+      };
+
+      mobBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        setDrawerOpen(!mobDrawer.classList.contains('open'));
+      });
+
+      mobDrawer.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => setDrawerOpen(false));
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && mobDrawer.classList.contains('open')) {
+          setDrawerOpen(false);
+        }
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!mobDrawer.contains(e.target) && !mobBtn.contains(e.target)) {
+          setDrawerOpen(false);
+        }
+      });
+    }
+
+    if ('serviceWorker' in navigator) {
+      const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+      if (isLocalhost) {
+        navigator.serviceWorker.getRegistrations().then(regs => {
+          for (const reg of regs) reg.unregister();
+        });
+        if ('caches' in window) {
+          caches.keys().then(names => {
+            for (const name of names) caches.delete(name);
+          });
+        }
+      } else {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/Gitab/sw.js').catch(() => {});
+        });
+      }
+    }
   })();
-</script>
-
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-  <script>hljs.highlightAll();</script>
-
-  <script>
+  </script> <script>
   document.querySelectorAll('pre code').forEach(block => {
+    const pre = block.parentNode;
+    if (!pre || pre.querySelector('.copy-btn')) return;
+
+    const copySvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
+    const okSvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+
     const btn = document.createElement('button');
     btn.className = 'copy-btn';
-
-    const icon = document.createElement('img');
-    icon.src = "/Gitab/icone/copy.svg";
-    icon.alt = 'Copy';
-    btn.appendChild(icon);
-
-    block.parentNode.insertBefore(btn, block);
+    btn.setAttribute('aria-label', 'کپی کد');
+    btn.setAttribute('title', 'کپی کد');
+    btn.setAttribute('type', 'button');
+    btn.innerHTML = copySvg;
+    pre.appendChild(btn);
 
     btn.addEventListener('click', async () => {
-      await navigator.clipboard.writeText(block.textContent);
-      btn.classList.add('copied');
-      setTimeout(() => btn.classList.remove('copied'), 1500);
-    });
-  });
-  </script>
-
-  <script>
-  document.body.dataset.page = window.location.pathname;
-
-  const menuBtn = document.querySelector(".menu-toggle");
-  const nav = document.querySelector(".nav");
-
-  if (menuBtn && nav) {
-    menuBtn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      nav.classList.toggle("show");
-    });
-
-    document.addEventListener("click", (e) => {
-      const clickedInsideNav = nav.contains(e.target);
-      const clickedMenuButton = menuBtn.contains(e.target);
-      if (!clickedInsideNav && !clickedMenuButton) {
-        nav.classList.remove("show");
+      try {
+        await navigator.clipboard.writeText(block.textContent);
+        btn.classList.add('copied');
+        btn.innerHTML = okSvg;
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          btn.innerHTML = copySvg;
+        }, 1800);
+      } catch (err) {
+        console.error('Copy failed:', err);
       }
     });
-  }
-  </script>
-
-  <script>
-    document.getElementById('y').textContent = new Date().getFullYear();
-  </script>
-  <script>
-document.getElementById("openDonate").addEventListener("click", () => {
-  document.getElementById("donateModal").style.display = "block";
-});
-document.getElementById("closeDonate").addEventListener("click", () => {
-  document.getElementById("donateModal").style.display = "none";
-});
-document.querySelectorAll(".copy-btn").forEach(btn => {
-  btn.addEventListener("click", () => {
-    navigator.clipboard.writeText(btn.dataset.copy);
-  
-    setTimeout(() => (btn.textContent = "کپی"), 2000);
   });
-});
-</script>
+  </script> <script>
+  (() => {
+    const article = document.getElementById('chapterArticle');
+    if (!article) return;
 
-</body>
-</html>
+    const progressBar = document.getElementById('readingProgressBar');
+    if (progressBar) {
+      window.addEventListener('scroll', () => {
+        const docElem = document.documentElement;
+        const totalHeight = docElem.scrollHeight - docElem.clientHeight;
+        if (totalHeight > 0) {
+          const progress = (window.pageYOffset / totalHeight) * 100;
+          progressBar.style.width = Math.min(100, Math.max(0, progress)) + '%';
+        }
+      }, { passive: true });
+    }
+
+    const btt = document.getElementById('backToTopBtn');
+    if (btt) {
+      window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 250) {
+          btt.classList.add('visible');
+        } else {
+          btt.classList.remove('visible');
+        }
+      }, { passive: true });
+
+      btt.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+
+    article.querySelectorAll('img').forEach(img => {
+      if (!img.hasAttribute('loading')) img.loading = 'lazy';
+      if (!img.hasAttribute('decoding')) img.decoding = 'async';
+      const parent = img.parentElement;
+      if (parent && parent.tagName === 'P') {
+        parent.style.textAlign = 'center';
+      }
+
+      img.addEventListener('error', function() {
+        const src = this.getAttribute('src');
+        if (src && src.includes('assets/image/')) {
+          const parts = src.split('assets/image/');
+          const corrected = '/Gitab/books/book3/assets/image/' + parts[1];
+          if (this.src !== corrected) {
+            this.src = corrected;
+          }
+        }
+      });
+    });
+
+    article.querySelectorAll('p').forEach(p => {
+      const trimmed = p.innerText.trim();
+      if (trimmed.startsWith('💡') || trimmed.startsWith('نکته:')) {
+        p.classList.add('react-callout', 'callout-tip');
+      } else if (trimmed.startsWith('⚠️') || trimmed.startsWith('هشدار:')) {
+        p.classList.add('react-callout', 'callout-warning');
+      } else if (trimmed.startsWith('📌') || trimmed.startsWith('مهم:')) {
+        p.classList.add('react-callout', 'callout-important');
+      } else if (trimmed.startsWith('🔹') || trimmed.startsWith('🔸')) {
+        p.classList.add('react-callout', 'callout-note');
+      }
+    });
+  })();
+  </script> <script type="speculationrules">{"prefetch":[{"where":{"and":[{"href_matches":"/Gitab/*"},{"not":{"href_matches":"/Gitab/downloads/*"}},{"not":{"selector_matches":"[download], [target='_blank']"}}]},"eagerness":"moderate"}]}</script> <script>
+  (() => {
+    if (window.HTMLScriptElement && HTMLScriptElement.supports && HTMLScriptElement.supports('speculationrules')) return;
+    const seen = new Set([window.location.href]);
+    let count = 0;
+    const prefetchLink = (e) => {
+      if (count >= 12) return;
+      const a = e.target && e.target.closest ? e.target.closest('header a, .chapter-single-next-nav a, .syllabus-chapter-item a, .btn-hero-read, .btn-card-read') : null;
+      if (!a || !a.href || a.hasAttribute('download') || a.target === '_blank') return;
+      if (a.origin !== window.location.origin || a.pathname.includes('/downloads/')) return;
+      const clean = a.href.split('#')[0];
+      if (!clean || seen.has(clean)) return;
+      seen.add(clean);
+      count++;
+      const l = document.createElement('link');
+      l.rel = 'prefetch';
+      l.href = clean;
+      document.head.appendChild(l);
+    };
+    document.addEventListener('pointerenter', prefetchLink, { capture: true, passive: true });
+    document.addEventListener('touchstart', prefetchLink, { capture: true, passive: true });
+  })();
+  </script></body></html>
