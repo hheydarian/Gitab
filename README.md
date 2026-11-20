@@ -1,107 +1,195 @@
-<div align="center">
+<div align="center" dir="rtl">
 
-  <img src="src/favicon.png" alt="لوگوی گیتاب" width="120" height="120" style="border-radius: 24px; margin-bottom: 16px;" />
+  <br />
 
-  # گیتاب (Gitab)
-  ### پلتفرم آزاد، متن‌باز و مدرن ترجمهٔ کتاب‌های مرجع مهندسی نرم‌افزار
+  <a href="https://hheydarian.github.io/Gitab/">
+    <img src="src/favicon.png" alt="Gitab Logo" width="96" height="96" />
+  </a>
 
-  <p align="center">
-    <strong>دسترسی آزاد، سریع و رایگان جامعه مهندسی و دانشجویان فارسی‌زبان به جدیدترین مراجع فنی جهان</strong>
+  <h1>گیتاب (Gitab)</h1>
+
+  <p>
+    <strong>پلتفرم آزاد، متن‌باز و مدرن ترجمهٔ کتاب‌ها و دوره‌های مرجع مهندسی نرم‌افزار</strong>
+    <br />
+    دسترسی رایگان، سریع و بدون مرز جامعه مهندسی فارسی‌زبان به برترین منابع فنی جهان
   </p>
 
-  <p align="center">
-    <a href="https://hheydarian.github.io/Gitab/" target="_blank" rel="noopener noreferrer">
-      <img src="https://img.shields.io/badge/🌐_ورود_به_سایت_گیتاب-Live_Website-7c3aed?style=for-the-badge&logoColor=white" alt="Live Website" />
-    </a>
-  </p>
-
-  <p align="center">
-    <a href="https://github.com/hheydarian/Gitab/blob/main/LICENSE"><img src="https://img.shields.io/badge/مجوز-MIT-blue.svg?style=flat-square" alt="MIT License" /></a>
-    <img src="https://img.shields.io/badge/وضعیت-۱۰۰٪_رایگان_و_آزاد-10b981.svg?style=flat-square" alt="Free" />
-    <img src="https://img.shields.io/badge/معماری-Eleventy_v3-ff3366.svg?style=flat-square&logo=eleventy" alt="Eleventy" />
-    <img src="https://img.shields.io/badge/مشارکت-PRs_Welcome-purple.svg?style=flat-square" alt="PRs Welcome" />
+  <p>
+    <a href="https://hheydarian.github.io/Gitab/"><strong>🌐 ورود به وب‌سایت گیتاب</strong></a>
+    &nbsp;&nbsp;•&nbsp;&nbsp;
+    <a href="https://hheydarian.github.io/Gitab/courses/"><strong>🎓 دوره‌های آموزشی</strong></a>
+    &nbsp;&nbsp;•&nbsp;&nbsp;
+    <a href="https://github.com/hheydarian/Gitab/issues"><strong>💡 پیشنهاد کتاب یا گزارش باگ</strong></a>
   </p>
 
 </div>
 
 ---
 
-## 🎯 دربارهٔ پروژه گیتاب
+<div dir="rtl">
 
-**گیتاب (Gitab)** یک ابتکار مستقل و داوطلبانه برای شکستن سد زبانی در یادگیری عمیق مهندسی نرم‌افزار است. ما بر این باوریم که دسترسی به منابع دست اول، استاندارد و جامع نباید وابسته به هزینه‌های سنگین ارزی یا ترجمه‌های تجاری غیردقیق باشد.
+## دربارهٔ گیتاب
 
-در گیتاب، ترجمه‌های تخصصی به‌صورت **ملی، روان، ساختاریافته و با حفظ اصطلاحات کلیدی فنی** آماده شده و در قالب یک وب‌سایت مدرن و پرسرعت در اختیار همگان قرار می‌گیرد.
+**گیتاب (Gitab)** یک ابتکار متن‌باز و داوطلبانه برای شکستن سد زبانی در یادگیری عمیق مهندسی نرم‌افزار است. در گیتاب، مراجع دست‌اول فنی با حفظ دقیق اصطلاحات مهندسی، تایپوگرافی استاندارد فارسی و بدون محدودیت در قالب یک وب‌اپلیکیشن مدرن و پرسرعت ارائه می‌شوند.
 
-### 🌟 ویژگی‌های کلیدی پلتفرم
-- 📖 **مطالعه آنلاین با تجربه کاربری مدرن:** طراحی مینیمال الهام‌گرفته از مستندات React.dev با تایپوگرافی استاندارد وزیرمتن.
-- 📥 **دانلود رایگان PDF:** امکان دریافت نسخهٔ یکپارچه PDF فارسی هر کتاب تنها با یک کلیک.
-- 💻 **بخش‌های کدخوان و خوانایی بهینه:** هایلایت رنگی کدهای برنامه‌نویسی و دکمهٔ سریع کپی.
-- 🧭 **مسیرهای راهنمای سرفصل‌ها:** فهرست بازشونده (Accordion) فصول با محاسبه هوشمند گام و فصل بعدی.
-- ⚡ **سرعت فوق‌العاده:** تولید ایستا (SSG) توسط Eleventy با لود آنی و بدون وابستگی به فریم‌ورک‌های سنگین.
-
----
-
-## 📚 کتابخانه کتاب‌های گیتاب
-
-هم‌اکنون ۸ اثر برجسته و معتبر بین‌المللی در اکوسیستم گیتاب دردسترس قرار دارد:
-
-| ردیف | نام کتاب | نویسنده(ها) | حوزه تخصصی | مخزن سورس ترجمه |
-|:---:|:---|:---|:---|:---:|
-| ۱ | **C# 12 in a Nutshell** | Joseph Albahari | سی‌شارپ ۱۲ و دات‌نت ۸ | [مشاهده در گیت‌هاب](https://github.com/hheydarian/csharp-12-in-a-nutshell-persian) |
-| ۲ | **Clean Code in C#** | Jason Alls | کد تمیز، اصول SOLID و ریفکتورینگ | [مشاهده در گیت‌هاب](https://github.com/hheydarian/clean-code-in-csharp-persian) |
-| ۳ | **Clean Code** | Robert C. Martin (عمو باب) | چابکی، ساختار و مهندسی نرم‌افزار | [مشاهده در گیت‌هاب](https://github.com/mojtaba-afraz/clean-code-persian) |
-| ۴ | **Task Programming in C# and .NET** | Rahul Rai & Perris Husney | همزمانی، Async/Await و Taskها | [مشاهده در گیت‌هاب](https://github.com/hheydarian/task-programming-in-csharp-dotnet-persian) |
-| ۵ | **The Linux Command Line (TLCL)** | William E. Shotts | لینوکس، شل بش و اسکریپت‌نویسی | [مشاهده در گیت‌هاب](https://github.com/hemansadeghi/TLCL-Persian) |
-| ۶ | **Apprenticeship Patterns** | Adewale Oshineye & Dave Hoover | الگوهای شاگردی و مسیر شغلی برنامه‌نویس | [مشاهده در گیت‌هاب](https://github.com/hheydarian/apprenticeship-patterns-persian) |
-| ۷ | **The Pragmatic Programmer** | David Thomas & Andrew Hunt | بینش و تفکر مهندس نرم‌افزار حرفه‌ای | [مشاهده در گیت‌هاب](https://github.com/hheydarian/the-pragmatic-programmer-persian) |
-| ۸ | **Understanding Domain-Driven Design** | مهدی کاظمی (گردآوری: حامد حیدریان) | معماری نرم‌افزار و طراحی دامنه‌محور | [مشاهده در گیت‌هاب](https://github.com/hheydarian/Understanding-Domain-Driven-Design) |
+### ویژگی‌های پلتفرم
+- **مطالعه آنلاین مدرن:** پشتیبانی کامل از تم تاریک (Dark) و تم روشن (Light) استاندارد با تایپوگرافی وزیرمتن.
+- **خروجی‌های PDF و EPUB 3:** دریافت رایگان نسخه یکپارچه PDF و فایل‌های راست‌چین EPUB ویژه موبایل و کتاب‌خوان‌ها.
+- **هاب دوره‌های آموزشی:** ارائه درسنامه‌های ترجمه‌شده، دیاگرام‌ها و کدهای عملی دوره‌های مرجع جهانی.
+- **دسترسی آفلاین (PWA):** مجهز به Service Worker و فونت‌های بهینه `woff2` برای لود آنی و مطالعه بدون اینترنت.
+- **استاندارد هوش مصنوعی و سئو:** پشتیبانی از پروتکل‌های `llms.txt` و `llms-full.txt` برای درک دقیق توسط مدل‌های زبانی.
 
 ---
 
-## 🤝 نحوهٔ مشارکت در گیتاب
+## کتابخانه جامع گیتاب (۱۶ اثر مرجع)
 
-گیتاب با انرژی و همیاری جامعه نرم‌افزاری به حیات خود ادامه می‌دهد. شما می‌توانید از راه‌های زیر به این جنبش علمی بپیوندید:
-
-1. **ترجمه فصول جدید:** مشارکت در ترجمه فصل‌های باقیمانده یا آغاز ترجمهٔ یک اثر مرجع جدید.
-2. **ویرایش و بازخوانی:** تصحیح غلط‌های املایی، بهبود معادل‌گزینی‌های فارسی و روان‌سازی جملات.
-3. **بهبود رابط کاربری و سایت:** ارسال PR برای بهینه‌سازی تم‌ها، استایل‌ها و امکانات کتابخوان.
-4. **گزارش باگ و پیشنهاد کتاب:** ایجاد [Issue](https://github.com/hheydarian/Gitab/issues) جدید برای معرفی کتاب‌هایی که جامعه نرم‌افزاری به آن‌ها نیاز دارد.
+<table dir="rtl" width="100%">
+  <thead>
+    <tr>
+      <th align="center">#</th>
+      <th align="right">نام کتاب</th>
+      <th align="right">نویسنده / مترجم</th>
+      <th align="center">مطالعه و دانلود</th>
+      <th align="center">مخزن سورس</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="center">۱</td>
+      <td align="right"><strong>C# 12 in a Nutshell</strong></td>
+      <td align="right">Joseph Albahari</td>
+      <td align="center"><a href="https://hheydarian.github.io/Gitab/books/csharp-12-in-a-nutshell/">مطالعه در گیتاب</a></td>
+      <td align="center"><a href="https://github.com/hheydarian/csharp-12-in-a-nutshell-persian">GitHub</a></td>
+    </tr>
+    <tr>
+      <td align="center">۲</td>
+      <td align="right"><strong>Clean Code in C#</strong></td>
+      <td align="right">Jason Alls</td>
+      <td align="center"><a href="https://hheydarian.github.io/Gitab/books/clean-code-in-csharp/">مطالعه در گیتاب</a></td>
+      <td align="center"><a href="https://github.com/hheydarian/clean-code-in-csharp-persian">GitHub</a></td>
+    </tr>
+    <tr>
+      <td align="center">۳</td>
+      <td align="right"><strong>Clean Code</strong></td>
+      <td align="right">Robert C. Martin</td>
+      <td align="center"><a href="https://hheydarian.github.io/Gitab/books/clean-code/">مطالعه در گیتاب</a></td>
+      <td align="center"><a href="https://github.com/mojtaba-afraz/clean-code-persian">GitHub</a></td>
+    </tr>
+    <tr>
+      <td align="center">۴</td>
+      <td align="right"><strong>Task Programming in C# &amp; .NET</strong></td>
+      <td align="right">Rahul Rai &amp; Perris Husney</td>
+      <td align="center"><a href="https://hheydarian.github.io/Gitab/books/task-programming/">مطالعه در گیتاب</a></td>
+      <td align="center"><a href="https://github.com/hheydarian/task-programming-in-csharp-dotnet-persian">GitHub</a></td>
+    </tr>
+    <tr>
+      <td align="center">۵</td>
+      <td align="right"><strong>The Linux Command Line</strong></td>
+      <td align="right">William E. Shotts</td>
+      <td align="center"><a href="https://hheydarian.github.io/Gitab/books/linux-command-line/">مطالعه در گیتاب</a></td>
+      <td align="center"><a href="https://github.com/hemansadeghi/TLCL-Persian">GitHub</a></td>
+    </tr>
+    <tr>
+      <td align="center">۶</td>
+      <td align="right"><strong>Apprenticeship Patterns</strong></td>
+      <td align="right">Adewale Oshineye &amp; Dave Hoover</td>
+      <td align="center"><a href="https://hheydarian.github.io/Gitab/books/apprenticeship-patterns/">مطالعه در گیتاب</a></td>
+      <td align="center"><a href="https://github.com/hheydarian/apprenticeship-patterns-persian">GitHub</a></td>
+    </tr>
+    <tr>
+      <td align="center">۷</td>
+      <td align="right"><strong>The Pragmatic Programmer</strong></td>
+      <td align="right">David Thomas &amp; Andrew Hunt</td>
+      <td align="center"><a href="https://hheydarian.github.io/Gitab/books/pragmatic-programmer/">مطالعه در گیتاب</a></td>
+      <td align="center"><a href="https://github.com/hheydarian/the-pragmatic-programmer-persian">GitHub</a></td>
+    </tr>
+    <tr>
+      <td align="center">۸</td>
+      <td align="right"><strong>Understanding DDD</strong></td>
+      <td align="right">مهدی کاظمی (گردآوری: حامد حیدریان)</td>
+      <td align="center"><a href="https://hheydarian.github.io/Gitab/books/understanding-ddd/">مطالعه در گیتاب</a></td>
+      <td align="center"><a href="https://github.com/hheydarian/Understanding-Domain-Driven-Design">GitHub</a></td>
+    </tr>
+    <tr>
+      <td align="center">۹</td>
+      <td align="right"><strong>The Passionate Programmer</strong></td>
+      <td align="right">Chad Fowler</td>
+      <td align="center"><a href="https://hheydarian.github.io/Gitab/books/the-passionate-programmer/">مطالعه در گیتاب</a></td>
+      <td align="center"><a href="https://github.com/hheydarian/the-passionate-programmer-persian">GitHub</a></td>
+    </tr>
+    <tr>
+      <td align="center">۱۰</td>
+      <td align="right"><strong>The Psychology of Money</strong></td>
+      <td align="right">Morgan Housel</td>
+      <td align="center"><a href="https://hheydarian.github.io/Gitab/books/the-psychology-of-money/">مطالعه در گیتاب</a></td>
+      <td align="center"><a href="https://github.com/hheydarian/the-psychology-of-money">GitHub</a></td>
+    </tr>
+    <tr>
+      <td align="center">۱۱</td>
+      <td align="right"><strong>Prompt Engineering for LLMs</strong></td>
+      <td align="right">J. Berryman &amp; A. Ziegler (مهدی سعادت‌زاده)</td>
+      <td align="center"><a href="https://hheydarian.github.io/Gitab/books/prompt-engineering-for-llms/">مطالعه در گیتاب</a></td>
+      <td align="center"><a href="https://github.com/hheydarian/Gitab">GitHub</a></td>
+    </tr>
+    <tr>
+      <td align="center">۱۲</td>
+      <td align="right"><strong>The Secret Bit</strong></td>
+      <td align="right">محمد شبانه</td>
+      <td align="center"><a href="https://hheydarian.github.io/Gitab/books/the-secret-bit/">مطالعه در گیتاب</a></td>
+      <td align="center"><a href="https://github.com/hheydarian/Gitab">GitHub</a></td>
+    </tr>
+    <tr>
+      <td align="center">۱۳</td>
+      <td align="right"><strong>Just for Fun</strong></td>
+      <td align="right">Linus Torvalds (ترجمه: جادی)</td>
+      <td align="center"><a href="https://hheydarian.github.io/Gitab/books/just-for-fun/">مطالعه در گیتاب</a></td>
+      <td align="center"><a href="https://github.com/hheydarian/Gitab">GitHub</a></td>
+    </tr>
+    <tr>
+      <td align="center">۱۴</td>
+      <td align="right"><strong>Linux and Life</strong></td>
+      <td align="right">جادی</td>
+      <td align="center"><a href="https://hheydarian.github.io/Gitab/books/linux-and-life/">مطالعه در گیتاب</a></td>
+      <td align="center"><a href="https://github.com/hheydarian/Gitab">GitHub</a></td>
+    </tr>
+    <tr>
+      <td align="center">۱۵</td>
+      <td align="right"><strong>LPIC-1 v5.0</strong></td>
+      <td align="right">جادی</td>
+      <td align="center"><a href="https://hheydarian.github.io/Gitab/books/lpic-1/">مطالعه در گیتاب</a></td>
+      <td align="center"><a href="https://github.com/hheydarian/Gitab">GitHub</a></td>
+    </tr>
+    <tr>
+      <td align="center">۱۶</td>
+      <td align="right"><strong>Bike Zen</strong></td>
+      <td align="right">جادی</td>
+      <td align="center"><a href="https://hheydarian.github.io/Gitab/books/bike-zen/">مطالعه در گیتاب</a></td>
+      <td align="center"><a href="https://github.com/hheydarian/Gitab">GitHub</a></td>
+    </tr>
+  </tbody>
+</table>
 
 ---
 
-## 💻 راهنمای راه‌اندازی و توسعه محلی
+## دوره‌های آموزشی
 
-پروژه به کمک ژنراتور سایت ایستای **Eleventy (11ty)** کامپایل می‌شود. برای اجرای پروژه بر روی سیستم خود:
+- **[Generative AI for Beginners (Microsoft)](https://hheydarian.github.io/Gitab/courses/):** دوره کامل ۲۱ جلسه‌ای هوش مصنوعی مولد به همراه درسنامه‌های فارسی، دیاگرام‌های معماری و مثال‌های عملی Python و TypeScript.
+
+---
+
+## مشارکت در توسعه و ترجمه
+
+- **افزودن یا ویرایش محتوا:** ارسال Pull Request روی مخزن کتاب مربوطه یا مخزن اصلی گیتاب.
+- **پیشنهاد کتاب و گزارش باگ:** ثبت یک [Issue جدید](https://github.com/hheydarian/Gitab/issues).
+
+---
+
+## راه‌اندازی محلی (Local Development)
+
+</div>
 
 ```bash
-# ۱. کلون کردن مخزن
-git clone https://github.com/hheydarian/Gitab.git
+git clone [https://github.com/hheydarian/Gitab.git](https://github.com/hheydarian/Gitab.git)
 cd Gitab
-
-# ۲. نصب وابستگی‌ها
 npm install
-
-# ۳. اجرای سرور توسعه محلی
 npm run dev
-```
-
-سپس مرورگر خود را باز کرده و به آدرس زیر بروید:
-```text
-http://localhost:8080/Gitab/
-```
-
-برای ساخت نسخهٔ نهایی جهت استقرار (Production Build):
-```bash
-npm run build
-```
-
----
-
-## 📄 لایسنس و حقوق نشر
-
-محتوای ترجمه‌ها و کدهای این پلتفرم تحت پروانهٔ آزاد **[MIT License](LICENSE)** منتشر شده‌اند. استفاده، بازنشر و گسترش آن برای اهداف آموزشی با ذکر منبع کاملاً آزاد و رایگان است.
-
-<div align="center">
-  <p>طراحی و توسعه با ❤️ برای جامعه برنامه‌نویسان و مهندسان نرم‌افزار ایران</p>
-  <p><strong>گیتاب ۲۰۲۶ — Gitab Platform</strong></p>
-</div>
